@@ -4,12 +4,11 @@ import { useEffect, useState } from "react";
 const ChatWithPDF = ({ uploadedFileName }: { uploadedFileName: string }) => {
   const [msgTxt, setMsgTxt] = useState<string>("");
   const [loading, setMsgLoading] = useState<boolean>(false); // msg loading
-  // const [aiResp, setAIResp] = useState<string>("");
 
   const [vectorStoreMade, setVectorStoreMade] = useState<boolean>(false);
   const [chain, setChain] = useState<any>(null);
 
-  const [mainLoading, setMainLoading] = useState<string>("chain");
+  const [mainLoading, setMainLoading] = useState<string>("");
   const [streamedData, setStreamedData] = useState("");
 
   const handleSendMsg = () => {
@@ -18,7 +17,7 @@ const ChatWithPDF = ({ uploadedFileName }: { uploadedFileName: string }) => {
       setMsgLoading(true);
       const formData = {
         question: msgTxt,
-        file: uploadedFileName,
+        chain,
       };
       fetch("/api/chatWithFile", {
         method: "POST",
@@ -37,9 +36,6 @@ const ChatWithPDF = ({ uploadedFileName }: { uploadedFileName: string }) => {
             setStreamedData((prev) => prev + text);
           }
           setMsgLoading(false);
-
-          // const res = await resp.json();
-          // setAIResp(res.result.output_text);
         })
         .catch((error) => {})
         .finally(() => {
@@ -48,24 +44,23 @@ const ChatWithPDF = ({ uploadedFileName }: { uploadedFileName: string }) => {
     }
   };
 
-  const configureChain = async () => {
-    if (!chain) {
-      setMainLoading("chain");
-      fetch("/api/createChain")
-        .then(async (resp: any) => {
-          const res = await resp.json();
-          console.log("RES: ", res);
-          if (res.success) {
-            // setVectorStoreMade(true);
-            // make chain
-          }
-        })
-        .catch((error) => {})
-        .finally(() => {
-          setMainLoading("");
-        });
-    }
-  };
+  // const configureChain = async () => {
+  //   if (!chain) {
+  //     setMainLoading("chain");
+  //     fetch("/api/createChain")
+  //       .then(async (resp: any) => {
+  //         const res = await resp.json();
+  //         if (res.success) {
+  //           // make chain
+  //           setChain(res.chain);
+  //         }
+  //       })
+  //       .catch((error) => {})
+  //       .finally(() => {
+  //         setMainLoading("");
+  //       });
+  //   }
+  // };
 
   const makeVectorStore = async () => {
     if (uploadedFileName && !vectorStoreMade) {
@@ -79,18 +74,18 @@ const ChatWithPDF = ({ uploadedFileName }: { uploadedFileName: string }) => {
           if (res.success) {
             setVectorStoreMade(true);
             // make chain
-            configureChain();
+            // configureChain();
           }
         })
         .catch((error) => {})
         .finally(() => {
-          setMainLoading("vector");
+          setMainLoading("");
         });
     }
   };
 
   useEffect(() => {
-    // makeVectorStore();
+    makeVectorStore();
   }, [uploadedFileName]);
 
   return (
@@ -106,10 +101,7 @@ const ChatWithPDF = ({ uploadedFileName }: { uploadedFileName: string }) => {
               <p className="text-lg">Making Vector Storage...</p>
             )}
             {mainLoading === "chain" && (
-              <p className="text-lg">
-                Making Conversational Chain...{" "}
-                <button onClick={(e) => configureChain()}>Create Chain</button>
-              </p>
+              <p className="text-lg">Making Conversational Chain... </p>
             )}
           </div>
         </div>

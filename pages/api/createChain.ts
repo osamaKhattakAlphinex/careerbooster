@@ -12,7 +12,7 @@ const handler: NextApiHandler = async (req, res) => {
   const apiKey = process.env.PINECONE_API_KEY;
   const environment = process.env.PINECONE_ENVIRONMENT;
   const index = process.env.PINECONE_INDEX;
-  if (req.body && apiKey && environment && index) {
+  if (apiKey && environment && index) {
     const client = new PineconeClient();
     await client.init({
       apiKey,
