@@ -36,6 +36,7 @@ const handler: NextApiHandler = async (req, res) => {
           },
         },
       ],
+      temperature: 0,
     });
 
     const chain3 = ConversationalRetrievalQAChain.fromLLM(

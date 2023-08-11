@@ -6,7 +6,9 @@ import ChatWithPDF from "@/components/ChatWithPDF";
 
 export default function Home() {
   const [activeStep, setActiveStep] = useState<number>(1);
-  const [uploadedFileName, setUploadedFileName] = useState<string>("");
+  const [uploadedFileName, setUploadedFileName] = useState<string>(
+    "1691752044062_Resume-M-Suleman-Ibrahim.pdf"
+  );
   const [resumeContent, setResumeContent] = useState<string>("");
 
   return (

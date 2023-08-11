@@ -16,23 +16,40 @@ const handler: NextApiHandler = async (req, res) => {
     // const docs = await loader.load();
 
     // Create the models and chain
-    // const embeddings = new OpenAIEmbeddings();
-    const model = new OpenAI({ temperature: 1 });
+    const embeddings = new OpenAIEmbeddings();
+    // const model = new OpenAI({ temperature: 1 });
+    const model = new OpenAI({
+      streaming: true,
+      callbacks: [
+        {
+          handleLLMNewToken(token) {
+            res.write(token);
+          },
+        },
+      ],
+      temperature: 1,
+    });
     const chain = loadQARefineChain(model);
 
-    // const docs = await loader.loadAndSplit();
-    // const store = await MemoryVectorStore.fromDocuments(docs, embeddings);
+    const docs = await loader.loadAndSplit();
+    const store = await MemoryVectorStore.fromDocuments(docs, embeddings);
 
     // Select the relevant documents
-    const relevantDocs = await mystore.similaritySearch(reqBody.question);
+    const relevantDocs = await store.similaritySearch(reqBody.question);
 
     // Call the chain
-    const result = await chain.call({
+    // const result = await chain.call({
+    //   input_documents: relevantDocs,
+    //   question: reqBody.question,
+    // });
+
+    // res.status(200).json({ success: true, result });
+
+    await chain.call({
       input_documents: relevantDocs,
       question: reqBody.question,
     });
-
-    res.status(200).json({ success: true, result });
+    res.end();
   }
   // try {
 

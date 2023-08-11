@@ -17,6 +17,7 @@ const ChatWithPDF = ({ uploadedFileName }: { uploadedFileName: string }) => {
       setMsgLoading(true);
       const formData = {
         question: msgTxt,
+        file: uploadedFileName,
         chain,
       };
       fetch("/api/chatWithFile", {
@@ -24,6 +25,8 @@ const ChatWithPDF = ({ uploadedFileName }: { uploadedFileName: string }) => {
         body: JSON.stringify(formData),
       })
         .then(async (resp: any) => {
+          // const res = await resp.json();
+          // setStreamedData(res.result.output_text);
           const reader = resp.body.getReader();
           while (true) {
             const { done, value } = await reader.read();
@@ -85,7 +88,7 @@ const ChatWithPDF = ({ uploadedFileName }: { uploadedFileName: string }) => {
   };
 
   useEffect(() => {
-    makeVectorStore();
+    // makeVectorStore();
   }, [uploadedFileName]);
 
   return (
