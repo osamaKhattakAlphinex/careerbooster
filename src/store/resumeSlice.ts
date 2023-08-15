@@ -3,26 +3,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ResumeSlice {
-  file: any;
+  uploadedFileName: string;
 }
 
 const initialState: ResumeSlice = {
-  file: {},
+  uploadedFileName: "",
 };
 
 const resumeSlice = createSlice({
   name: "resume",
   initialState,
   reducers: {
-    setFile(state, action) {
+    setUploadedFileName(state, action) {
       return {
         ...state,
-        file: action.payload.file,
+        uploadedFileName: action.payload,
       };
     },
   },
 });
 
-export const { setFile } = resumeSlice.actions; // Make sure to export these functions
+export const { setUploadedFileName } = resumeSlice.actions; // Make sure to export these functions
 
 export default resumeSlice.reducer;

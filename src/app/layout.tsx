@@ -1,3 +1,4 @@
+import Header from "@/components/layout/Header";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -17,7 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 h-[100vh] p-10 ">
+        <main className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 min-h-[100vh] h-[100%]  ">
+          <Header />
           {children}
         </main>
       </body>
