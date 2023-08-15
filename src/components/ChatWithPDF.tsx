@@ -25,22 +25,28 @@ const ChatWithPDF = ({ uploadedFileName }: { uploadedFileName: string }) => {
         body: JSON.stringify(formData),
       })
         .then(async (resp: any) => {
-          // const res = await resp.json();
-          // setStreamedData(res.result.output_text);
-          const reader = resp.body.getReader();
-          while (true) {
-            const { done, value } = await reader.read();
+          if (resp.ok) {
+            // const res = await resp.json();
+            // setStreamedData(res.result.output_text);
+            const reader = resp.body.getReader();
+            while (true) {
+              const { done, value } = await reader.read();
 
-            if (done) {
-              break;
+              if (done) {
+                break;
+              }
+
+              const text = new TextDecoder().decode(value);
+              setStreamedData((prev) => prev + text);
             }
-
-            const text = new TextDecoder().decode(value);
-            setStreamedData((prev) => prev + text);
+          } else {
+            setStreamedData("Error! Something went wrong");
           }
           setMsgLoading(false);
         })
-        .catch((error) => {})
+        .catch((error) => {
+          console.log("Error encountered");
+        })
         .finally(() => {
           setMsgLoading(false);
         });
