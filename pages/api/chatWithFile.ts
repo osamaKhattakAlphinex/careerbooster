@@ -13,10 +13,9 @@ import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { RetrievalQAChain, loadQAStuffChain } from "langchain/chains";
 
 const handler: NextApiHandler = async (req, res) => {
-  const apiKey = process.env.PINECONE_API_KEY;
-  const environment = process.env.PINECONE_ENVIRONMENT;
-  const index = process.env.PINECONE_INDEX;
-  if (req.body && apiKey && environment && index) {
+  // const apiKey = process.env.PINECONE_API_KEY;
+  // const index = process.env.PINECONE_INDEX;
+  if (req.body) {
     const reqBody = JSON.parse(req.body);
     const email = reqBody.email;
     // const client = new MongoClient(process.env.MONGODB_ATLAS_URI || "");

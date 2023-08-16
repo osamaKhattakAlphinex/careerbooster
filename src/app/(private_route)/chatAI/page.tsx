@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
 const ChatAI = () => {
-  const [msgTxt, setMsgTxt] = useState<string>("");
+  const [msgTxt, setMsgTxt] = useState<string>("what is my name?");
   const [loading, setMsgLoading] = useState<boolean>(false); // msg loading
 
   const [vectorStoreMade, setVectorStoreMade] = useState<boolean>(false);
@@ -101,13 +101,12 @@ const ChatAI = () => {
   // }, [uploadedFileName]);
 
   return (
-    <div className="m-10 w-full  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+    <div className="m-10 w-[95%]  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
       {mainLoading !== "" ? (
         <div className="w-full card">
           <div
             className="card-body scrapped-content"
-            style={{ overflow: "auto" }}
-          >
+            style={{ overflow: "auto" }}>
             <p className="text-2xl">AI Chat Bot is preparing to Launch...</p>
             {mainLoading === "vector" && (
               <p className="text-lg">Making Vector Storage...</p>
@@ -121,8 +120,7 @@ const ChatAI = () => {
         <div className="w-full card">
           <div
             className="card-body scrapped-content"
-            style={{ overflow: "auto" }}
-          >
+            style={{ overflow: "auto" }}>
             {/* <button
               type="button"
               disabled={!session?.user?.email}
@@ -137,13 +135,11 @@ const ChatAI = () => {
               value={msgTxt}
               rows={5}
               className="w-full border border-gray-600 p-2 font-sans rounded-lg"
-              onChange={(e) => setMsgTxt(e.target.value)}
-            ></textarea>
+              onChange={(e) => setMsgTxt(e.target.value)}></textarea>
             <button
               disabled={msgTxt === "" || loading || !session?.user?.email}
               onClick={handleSendMsg}
-              className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 disabled:bg-gray-300"
-            >
+              className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 disabled:bg-gray-300">
               {loading ? "Please wait.." : "Send"}
             </button>
             {streamedData && (
