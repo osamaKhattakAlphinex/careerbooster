@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
@@ -47,7 +46,7 @@ const TrainBotCard = () => {
   ) => {
     if (file && data?.user?.email) {
       axios
-        .post("/api/updateUser", {
+        .post("/api/users/updateUser", {
           newFile: file,
           email: data?.user?.email,
         })
