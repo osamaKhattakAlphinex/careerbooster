@@ -8,7 +8,7 @@ const ResumeCreator = () => {
   const [jobPosition, setJobPosition] = useState<string>("ReactJS Developer");
   const [streamedData, setStreamedData] = useState("");
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
-  const [basicInfo, setBasicInfo] = useState<any>({});
+  const [basicInfo, setBasicInfo] = useState<any>(null);
 
   const handleGenerate = () => {
     if (jobPosition !== "") {
@@ -28,6 +28,7 @@ const ResumeCreator = () => {
           .then(async (resp: any) => {
             const res = await resp.json();
             const myJSON = JSON.parse(res.data.text);
+            console.log(myJSON);
             setBasicInfo(myJSON);
           })
           .catch((error) => {
@@ -66,17 +67,36 @@ const ResumeCreator = () => {
                 disabled={jobPosition === "" || msgLoading}
                 onClick={handleGenerate}
                 className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300">
-                Generate Resume
+                <div className="flex flex-row gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className={`w-4 h-4 ${msgLoading ? "animate-spin" : ""}`}>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                    />
+                  </svg>
+                  <span>
+                    {msgLoading ? "Please wait..." : "Generate Resume"}
+                  </span>
+                </div>
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div className="m-10  w-[95%]  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-        <div className="w-full card">
-          <ResumeTemplate1 basicInfo={basicInfo} />
+      {basicInfo && (
+        <div className="m-10  w-[95%]  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+          <div className="w-full card">
+            <ResumeTemplate1 basicInfo={basicInfo} />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

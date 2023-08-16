@@ -51,6 +51,59 @@ const handler: NextApiHandler = async (req, res) => {
             email: z.string().describe("Email Address"),
             linkedIn: z.string().describe("LinkedInUrl"),
           }),
+          education: z.object({
+            year: z.string().describe("Year of completing Latest Education"),
+            degree: z
+              .string()
+              .describe("Latest Education degree or certificate name"),
+            school: z
+              .string()
+              .describe("school / college / university of latest education"),
+          }),
+          summary: z.string().describe(
+            "Rewrite a Strong summary for the targeted job position " +
+              jobPosition +
+              `
+          In the executive summary, I want you to provide a professional introduction explaining the present role and framing past job titles. 
+          Highlight successes and the services I can offer to potential clients. Mention achievements, and highlight some of the relevant keywords. The word count should not be more than 150 words`
+          ),
+          workExperience: z
+            .array(
+              z.object({
+                fields: z.object({
+                  title: z.string().describe("Designation"),
+                  company: z.string().describe("company name"),
+                  companyAddress: z
+                    .string()
+                    .describe("Country Name of the company"),
+                  from: z.string().describe("From date"),
+                  to: z.string().describe("To date"),
+                  achievements: z
+                    .array(z.string())
+                    .describe(
+                      "list of three to five accomplishments, achievements results of how the person added value to his/her company"
+                    ),
+                }),
+              })
+            )
+            .describe(
+              "List of companies I have worked with, each recording having desgination, from date, to date, name of company "
+            ),
+          primarySkills: z
+            .array(z.string())
+            .describe(
+              `list of 15 primary skills which will help me secure ${jobPosition} position`
+            ),
+          professionalSkills: z
+            .array(z.string())
+            .describe(
+              `list of 20 Professional related professional skills, Do not include any skill already mentioned in the primary skills`
+            ),
+          secondarySkills: z
+            .array(z.string())
+            .describe(
+              `List of 20 Secondary Supporting Skills do not include any skills which are already mentioned in the primary or professional skills`
+            ),
           //   sources: z
           //     .array(z.string())
           //     .describe(

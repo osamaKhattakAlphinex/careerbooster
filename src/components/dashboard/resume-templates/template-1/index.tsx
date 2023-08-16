@@ -14,10 +14,12 @@ const ResumeTemplate1 = ({ basicInfo }: any) => {
             {basicInfo?.jobTitle ? basicInfo?.jobTitle : "JOB TITLE"}
           </h3>
         </div>
-        <div className=" bg-gray-800 text-center p-10 rounded-full">
-          <span className="text-4xl text-white">
-            {basicInfo?.shortName ? basicInfo?.shortName : "CPH"}
-          </span>
+        <div>
+          <div className="w-32 h-32 bg-gray-800 text-center p-10 rounded-full">
+            <span className="text-4xl text-white">
+              {basicInfo?.shortName ? basicInfo?.shortName : "CPH"}
+            </span>
+          </div>
         </div>
       </div>
       <div className="flex">
@@ -53,33 +55,73 @@ const ResumeTemplate1 = ({ basicInfo }: any) => {
           </ul>
 
           {/* Skills */}
-          <span className="w-full h-0 border border-gray-500 my-4"></span>
-          <h3 className="uppercase text-xl font-semibold">Skills</h3>
-          <span className="w-full h-0 border border-gray-500 my-4"></span>
-          <ul className="flex flex-col gap-2 mb-4">
-            <li className="font-semibold uppercase">primary</li>
-            <li>Privacy Compliance</li>
-            <li>Privacy Compliance</li>
-            <li>Privacy Compliance</li>
-            <li>Privacy Compliance</li>
-            <li>Privacy Compliance</li>
-            <li>Privacy Compliance</li>
-          </ul>
+
+          {basicInfo?.primarySkills && basicInfo?.primarySkills.length > 0 && (
+            <>
+              <span className="w-full h-0 border border-gray-500 my-4"></span>
+              <h3 className="uppercase text-xl font-semibold">Skills</h3>
+              <span className="w-full h-0 border border-gray-500 my-4"></span>
+              <ul className="flex flex-col gap-2 mb-4">
+                <li className="font-semibold uppercase">primary</li>
+                {basicInfo?.primarySkills.map((skill: string, i: number) => (
+                  <li key={i}>{skill}</li>
+                ))}
+              </ul>
+            </>
+          )}
 
           {/* Education */}
-          <span className="w-full h-0 border border-gray-500 my-4"></span>
-          <h3 className="uppercase text-xl font-semibold">Education</h3>
-          <span className="w-full h-0 border border-gray-500 my-4"></span>
-          <ul className="flex flex-col  mb-4">
-            <li className="font-semibold uppercase">1994</li>
-            <li className="uppercase">JURIS DOCTORATE </li>
-            <li>New York University School of Law New York, NY</li>
-          </ul>
-          <ul className="flex flex-col  mb-4">
-            <li className="font-semibold uppercase">1994</li>
-            <li className="uppercase">JURIS DOCTORATE </li>
-            <li>New York University School of Law New York, NY</li>
-          </ul>
+          {basicInfo?.education && (
+            <>
+              <span className="w-full h-0 border border-gray-500 my-4"></span>
+              <h3 className="uppercase text-xl font-semibold">Education</h3>
+              <span className="w-full h-0 border border-gray-500 my-4"></span>
+              <ul className="flex flex-col  mb-4">
+                <li className="font-semibold uppercase">
+                  {basicInfo?.education?.year}
+                </li>
+                <li className="uppercase">{basicInfo?.education?.degree} </li>
+                <li>{basicInfo?.education?.school}</li>
+              </ul>
+            </>
+          )}
+
+          {/* Skills */}
+          {basicInfo?.professionalSkills &&
+            basicInfo?.professionalSkills.length > 0 && (
+              <>
+                <span className="w-full h-0 border border-gray-500 my-4"></span>
+                <h3 className="uppercase text-xl font-semibold">Skills</h3>
+                <span className="w-full h-0 border border-gray-500 my-4"></span>
+                <ul className="flex flex-col gap-2 mb-4">
+                  <li className="font-semibold uppercase">Professional</li>
+                  {basicInfo?.professionalSkills.map(
+                    (skill: string, i: number) => (
+                      <li key={i}>{skill}</li>
+                    )
+                  )}
+                </ul>
+              </>
+            )}
+
+          {/* Skills */}
+
+          {basicInfo?.secondarySkills &&
+            basicInfo?.secondarySkills.length > 0 && (
+              <>
+                <span className="w-full h-0 border border-gray-500 my-4"></span>
+                <h3 className="uppercase text-xl font-semibold">Skills</h3>
+                <span className="w-full h-0 border border-gray-500 my-4"></span>
+                <ul className="flex flex-col gap-2 mb-4">
+                  <li className="font-semibold uppercase">secondary</li>
+                  {basicInfo?.secondarySkills.map(
+                    (skill: string, i: number) => (
+                      <li key={i}>{skill}</li>
+                    )
+                  )}
+                </ul>
+              </>
+            )}
         </div>
         <div className="w-full flex flex-col px-8">
           {/* Executive Summary */}
@@ -87,75 +129,39 @@ const ResumeTemplate1 = ({ basicInfo }: any) => {
           <h3 className="uppercase text-xl font-semibold">EXECUTIVE SUMMARY</h3>
           <span className="w-full h-0 border border-gray-500 my-4"></span>
 
-          <p className="text-base">
-            Accomplished professional with over four decades of experience as an
-            Associate General Counsel, Chief Privacy Officer, and
-            cross-functional leader. Demonstrated ability in designing,
-            implementing, and enhancing strategic programs across legal,
-            corporate, and entrepreneurial sectors. Proficient in achieving risk
-            management, operational efficiency, and revenue goals. Recognized
-            for exceptional communication skills, extensive data protection
-            knowledge, and unwavering commitment to professional integrity.
-            Boasting a career encompassing Fortune 500 corporations, legal
-            consultancies, and entrepreneurial ventures, a unique blend of
-            skills and insights is offered. A comprehensive background in data
-            governance, privacy compliance, and commercial law positions for
-            consideration in the Chief Security Officer role.
-          </p>
+          <p className="text-base">{basicInfo?.summary}</p>
 
           {/* Work Experience */}
           <span className="w-full h-0 border border-gray-500 my-4"></span>
           <h3 className="uppercase text-xl font-semibold">WORK EXPERIENCE</h3>
           <span className="w-full h-0 border border-gray-500 my-4"></span>
-          <h2 className="text-2xl font-smibold">
-            Vice President, Chief Privacy Officer, Associate General Counsel
-          </h2>
-          <h2 className="text-xl font-smibold mb-2">
-            Jan 2016 – Present | BARNES & NOBLE EDUCATION, INC | Basking Ridge,
-            NJ
-          </h2>
-          <div className="p-4">
-            <ul className="flex flex-col gap-3">
-              <li className="list-disc">
-                Advised senior leadership and board on global privacy law
-                matters, including GDPR and CCPA, ensuring regulatory
-                compliance.
-              </li>
-              <li className="list-disc">
-                Designed and executed enterprise-wide data privacy program,
-                drafting policies and notices, enhancing data protection.
-              </li>
-              <li className="list-disc">
-                Designed and executed enterprise-wide data privacy program,
-                drafting policies and notices, enhancing data protection.
-              </li>
-            </ul>
-          </div>
-
-          <h2 className="text-2xl font-smibold">
-            Vice President, Chief Privacy Officer, Associate General Counsel
-          </h2>
-          <h2 className="text-xl font-smibold mb-2">
-            Jan 2016 – Present | BARNES & NOBLE EDUCATION, INC | Basking Ridge,
-            NJ
-          </h2>
-          <div className="p-4">
-            <ul className="flex flex-col gap-3">
-              <li className="list-disc">
-                Advised senior leadership and board on global privacy law
-                matters, including GDPR and CCPA, ensuring regulatory
-                compliance.
-              </li>
-              <li className="list-disc">
-                Designed and executed enterprise-wide data privacy program,
-                drafting policies and notices, enhancing data protection.
-              </li>
-              <li className="list-disc">
-                Designed and executed enterprise-wide data privacy program,
-                drafting policies and notices, enhancing data protection.
-              </li>
-            </ul>
-          </div>
+          {/* {basicInfo?.workExperience} */}
+          {basicInfo?.workExperience &&
+            basicInfo?.workExperience.map((record: any, i: number) => {
+              const { fields: rec } = record;
+              return (
+                <div key={i}>
+                  <h2 className="text-2xl font-smibold">{rec?.title}</h2>
+                  <h2 className="text-xl font-smibold mb-2">
+                    {rec?.from} - {rec?.to} | {rec?.company} |{" "}
+                    {rec?.companyAddress}
+                  </h2>
+                  <div className="p-4">
+                    {rec?.achievements && (
+                      <ul className="flex flex-col gap-3">
+                        {rec?.achievements.map(
+                          (achivement: any, ind: number) => (
+                            <li className="list-disc" key={ind}>
+                              {achivement}
+                            </li>
+                          )
+                        )}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>
