@@ -2,16 +2,22 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
-const ResumeTemplate1 = () => {
+const ResumeTemplate1 = ({ basicInfo }: any) => {
   return (
     <div className="w-full">
       <div className="flex">
         <div className="flex flex-col w-10/12 p-8">
-          <h2 className="text-4xl">JOYCE H. ROGINA</h2>
-          <h3 className="text-xl">CHIEF PRIVACY OFFICER</h3>
+          <h2 className="text-4xl">
+            {basicInfo?.name ? basicInfo?.name : "FULL NAME"}
+          </h2>
+          <h3 className="text-xl">
+            {basicInfo?.jobTitle ? basicInfo?.jobTitle : "JOB TITLE"}
+          </h3>
         </div>
         <div className=" bg-gray-800 text-center p-10 rounded-full">
-          <span className="text-4xl text-white">JR</span>
+          <span className="text-4xl text-white">
+            {basicInfo?.shortName ? basicInfo?.shortName : "CPH"}
+          </span>
         </div>
       </div>
       <div className="flex">
@@ -21,12 +27,27 @@ const ResumeTemplate1 = () => {
           <h3 className="uppercase text-xl font-semibold">Contacts</h3>
           <span className="w-full h-0 border border-gray-500 my-4"></span>
           <ul className="flex flex-col gap-3 mb-4">
-            <li>031236666098</li>
-            <li>m.sulemankhan@hotmail.com</li>
-            <li>anotheremail@email.com</li>
             <li>
-              <a href="#" className="text-blue-600">
-                http://localhost:3000/resume-creator
+              {basicInfo?.contact?.phone
+                ? basicInfo?.contact?.phone
+                : "+92 312 1231234"}
+            </li>
+            <li>
+              {basicInfo?.contact?.email
+                ? basicInfo?.contact?.email
+                : "your@email.com"}
+            </li>
+            <li>
+              <a
+                href={
+                  basicInfo?.contact?.linkedIn
+                    ? basicInfo?.contact?.linkedIn
+                    : "https://www.linkedin.com/"
+                }
+                className="text-blue-600">
+                {basicInfo?.contact?.linkedIn
+                  ? basicInfo?.contact?.linkedIn
+                  : "https://www.linkedin.com/"}
               </a>
             </li>
           </ul>
@@ -63,10 +84,9 @@ const ResumeTemplate1 = () => {
         <div className="w-full flex flex-col px-8">
           {/* Executive Summary */}
           <span className="w-full h-0 border border-gray-500 my-4"></span>
-          <h3 className="uppercase text-xl font-semibold">
-            <h3 className="uppercase">EXECUTIVE SUMMARY</h3>
-          </h3>
+          <h3 className="uppercase text-xl font-semibold">EXECUTIVE SUMMARY</h3>
           <span className="w-full h-0 border border-gray-500 my-4"></span>
+
           <p className="text-base">
             Accomplished professional with over four decades of experience as an
             Associate General Counsel, Chief Privacy Officer, and
@@ -85,9 +105,7 @@ const ResumeTemplate1 = () => {
 
           {/* Work Experience */}
           <span className="w-full h-0 border border-gray-500 my-4"></span>
-          <h3 className="uppercase text-xl font-semibold">
-            <h3 className="uppercase">WORK EXPERIENCE</h3>
-          </h3>
+          <h3 className="uppercase text-xl font-semibold">WORK EXPERIENCE</h3>
           <span className="w-full h-0 border border-gray-500 my-4"></span>
           <h2 className="text-2xl font-smibold">
             Vice President, Chief Privacy Officer, Associate General Counsel
