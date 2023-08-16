@@ -1,6 +1,78 @@
 "use client";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUploadedFileName } from "@/store/resumeSlice";
+import { useSession } from "next-auth/react";
+import axios from "axios";
+
 const TrainBotCard = () => {
+  // local states
+  const [fileUploading, setFileUploading] = useState<boolean>(false);
+  const [file, setFile] = useState<any>(null);
+  const [fileError, setFileError] = useState<string>("");
+  const [successMsg, setSuccessMsg] = useState<string>("");
+  const { data, status } = useSession();
+  // Redux
+  const dispatch = useDispatch();
+
+  const uploadFileToServer = async () => {
+    setFileError("");
+    if (file && data?.user?.email && !fileUploading) {
+      setFileUploading(true);
+      const body = new FormData();
+      body.append("file", file);
+      fetch(`/api/fileUpload?email=${data?.user?.email}&f=${file.name}`, {
+        method: "POST",
+        body,
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
+            updateUser(res.newFile);
+            dispatch(setUploadedFileName(res.newFile));
+
+            setSuccessMsg("File has been uploaded!");
+          } else {
+            setFileError("Something went wrong");
+          }
+        })
+        .catch((error) => {
+          setFileError("Something went wrong");
+        });
+    }
+  };
+  const updateUser = (
+    file: string = "/public/files/cujisuxa@mailinator.com/1692180707531_Resume-M-Suleman-Ibrahim.pdf"
+  ) => {
+    if (file && data?.user?.email) {
+      axios
+        .post("/api/updateUser", {
+          newFile: file,
+          email: data?.user?.email,
+        })
+        .then((resp: any) => {
+          // const res = resp.json();
+          if (resp?.data?.success) {
+            setFileUploading(false);
+          }
+        });
+    }
+  };
+
+  // check file is correct
+  useEffect(() => {
+    if (file && file.type === "application/pdf") {
+      //  file exists and is PDF
+      setFileError("");
+      // upload it to server
+      uploadFileToServer();
+    } else if (file) {
+      // if file exists but not PDf
+      setFileError("only PDF file is allowed");
+    }
+  }, [file]);
+
   return (
     <div className="w-full max-w-sm  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
       <h5 className="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
@@ -9,47 +81,73 @@ const TrainBotCard = () => {
       <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
         Upload Dcouments to Train your bot
       </p>
+      {fileError && (
+        <div
+          className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2"
+          role="alert"
+        >
+          <p>{fileError}</p>
+        </div>
+      )}
+      {successMsg && (
+        <div
+          className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 my-2"
+          role="alert"
+        >
+          <p>{successMsg}</p>
+        </div>
+      )}
       <ul className="my-4 space-y-3">
         <li>
-          <Link
-            href="/upload-pdf"
-            className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+          <label className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
-              className="w-6 h-6">
+              className="w-6 h-6"
+            >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15m0-3l-3-3m0 0l-3 3m3-3V15"
               />
             </svg>
+            <input
+              type="file"
+              className="hidden"
+              onChange={(e) => {
+                if (e.target.files) {
+                  setFile(e.target.files[0]);
+                }
+              }}
+            />
 
             <span className="flex-1 ml-3 whitespace-nowrap">
-              Upload PDF Resume
+              {fileUploading ? "Please wait..." : "Upload PDF Resume"}
             </span>
             <span className="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
               Popular
             </span>
-          </Link>
+          </label>
         </li>
         <li>
           <button
             onClick={() => alert("will be available soon")}
-            className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+            className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
-              className="w-6 h-6">
+              className="w-6 h-6"
+            >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15m0-3l-3-3m0 0l-3 3m3-3V15"
               />
             </svg>
@@ -62,13 +160,15 @@ const TrainBotCard = () => {
       <div>
         <a
           href="#"
-          className="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400">
+          className="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400"
+        >
           <svg
             className="w-3 h-3 mr-2"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
-            viewBox="0 0 20 20">
+            viewBox="0 0 20 20"
+          >
             <path
               stroke="currentColor"
               strokeLinecap="round"

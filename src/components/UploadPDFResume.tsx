@@ -64,7 +64,8 @@ const UploadPDFResume = () => {
         <label
           className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded cursor-pointer disabled:bg-blue-300 ${
             fileUploading && "!bg-blue-300"
-          }`}>
+          }`}
+        >
           Upload File
           <input
             type="file"
@@ -81,7 +82,8 @@ const UploadPDFResume = () => {
       {fileError && (
         <div
           className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2"
-          role="alert">
+          role="alert"
+        >
           <p className="font-bold">Error</p>
           <p>{fileError}</p>
         </div>
@@ -89,7 +91,8 @@ const UploadPDFResume = () => {
       {successMsg && (
         <div
           className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 my-2"
-          role="alert">
+          role="alert"
+        >
           <p className="font-bold">Success</p>
           <p>{successMsg}</p>
         </div>

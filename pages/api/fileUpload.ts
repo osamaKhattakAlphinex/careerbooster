@@ -3,6 +3,8 @@ import formidable from "formidable";
 import path from "path";
 import fs from "fs/promises";
 
+import User from "../../src/db/schemas/User";
+
 export const config = {
   api: {
     bodyParser: false,
@@ -24,21 +26,34 @@ const readFile = (
 
 const handler: NextApiHandler = async (req, res) => {
   try {
-    await fs.readdir(path.join(process.cwd() + "/public", "/files"));
+    await fs.readdir(
+      path.join(process.cwd() + "/public", "/files", `/${req?.query?.email}`)
+    );
   } catch (error) {
-    await fs.mkdir(path.join(process.cwd() + "/public", "/files"));
+    await fs.mkdir(
+      path.join(process.cwd() + "/public", "/files", `/${req?.query?.email}`)
+    );
   }
   const options: formidable.Options = {};
   const saveLocally = true;
   const fileName = Date.now().toString();
   if (saveLocally) {
-    options.uploadDir = path.join(process.cwd(), "/public/files");
+    options.uploadDir = path.join(
+      process.cwd(),
+      `/public/files/${req?.query?.email}`
+    );
     options.filename = (name, ext, path, form) => {
       return fileName + "_" + path.originalFilename;
     };
   }
   const test = await readFile(req, options);
-  res.json({ success: true, fileName: fileName });
+  const newFile = `/public/files/${req?.query?.email}/${fileName}_${req?.query?.f}`;
+
+  res.json({
+    success: true,
+    fileName: fileName,
+    newFile,
+  });
 };
 
 export default handler;

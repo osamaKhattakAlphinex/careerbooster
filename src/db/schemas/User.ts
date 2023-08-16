@@ -29,6 +29,7 @@ const UserSchema = new Schema(
       type: String,
       default: "user",
     },
+    files: [{ type: String }],
   },
 
   { timestamps: true }
