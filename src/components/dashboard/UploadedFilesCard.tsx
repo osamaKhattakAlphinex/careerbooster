@@ -5,6 +5,7 @@ import axios from "axios";
 import FileCard from "./FileCard";
 
 const UploadedFilesCard = () => {
+  // TODO!!! AUTO RELOAD ON FILE UPLOAD
   // local state
   const [files, setFiles] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
