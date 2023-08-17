@@ -1,12 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
-const JDGenerator = () => {
+interface Props {
+  setJobDesc: React.Dispatch<React.SetStateAction<string>>;
+}
+const JDGenerator = ({ setJobDesc }: Props) => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
+
+  useEffect(() => {
+    setJobDesc(streamedData);
+  }, [streamedData]);
 
   const handleGenerate = () => {
     setStreamedData("");

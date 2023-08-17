@@ -1,12 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
-const KeywordsGenerator = () => {
+interface Props {
+  setKeywords: React.Dispatch<React.SetStateAction<string>>;
+}
+const KeywordsGenerator = ({ setKeywords }: Props) => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
+
+  useEffect(() => {
+    setKeywords(streamedData);
+  }, [streamedData]);
 
   const handleGenerate = () => {
     setStreamedData("");

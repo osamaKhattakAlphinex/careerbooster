@@ -1,12 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
-const HeadlineGenerator = () => {
+interface Props {
+  setHeadline: React.Dispatch<React.SetStateAction<string>>;
+}
+const HeadlineGenerator = ({ setHeadline }: Props) => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
+
+  useEffect(() => {
+    setHeadline(streamedData);
+  }, [streamedData]);
 
   const handleGenerate = () => {
     setStreamedData("");

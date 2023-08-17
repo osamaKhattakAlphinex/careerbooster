@@ -46,8 +46,8 @@ const handler: NextApiHandler = async (req, res) => {
 
   const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
   await chain4.call({
-    query: `I want you to read read my resume data that you already have and 
-    Rewrite and improve every job experience Based on the following instruction:
+    query: `I want you to read read my resume data that you already have and get my job description
+    Rewrite every job experience Based on the following instruction:
 
     The "Experience" section is crucial once you have caught the attention of potential recruiters. Use this section to showcase successes and work experiences. Make this section comprehensive.
 

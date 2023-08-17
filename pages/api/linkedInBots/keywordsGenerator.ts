@@ -10,7 +10,7 @@ import { DirectoryLoader } from "langchain/document_loaders/fs/directory";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 
-import { RetrievalQAChain, loadQAStuffChain } from "langchain/chains";
+import { RetrievalQAChain } from "langchain/chains";
 
 const handler: NextApiHandler = async (req, res) => {
   const reqBody = JSON.parse(req.body);
@@ -47,7 +47,10 @@ const handler: NextApiHandler = async (req, res) => {
   const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
   await chain4.call({
     query: `I want you to read read my resume data that you already have and suggest the top 50 keywords that the job seeker could use in his/her Linkedin profile skills section, 
-      which will help him/her appear in the recruiter's search when a recruiter is looking for someone with the skillset of the job seeker`,
+      which will help him/her appear in the recruiter's search when a recruiter is looking for someone with the skillset of the job seeker
+
+      The answer must be in bullet points.
+      `,
   });
 
   res.end();
