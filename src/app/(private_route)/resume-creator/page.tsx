@@ -6,9 +6,7 @@ import DownloadDocx from "@/components/dashboard/resume-templates/template-1/Dow
 
 const ResumeCreator = () => {
   const { data: session, status } = useSession();
-  const [jobPosition, setJobPosition] = useState<string>(
-    "Chief Privacy Officer"
-  );
+  const [jobPosition, setJobPosition] = useState<string>("ReactJS Developer");
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const [basicInfo, setBasicInfo] = useState<any>(null);
 
@@ -30,7 +28,8 @@ const ResumeCreator = () => {
             const res = await resp.json();
             if (res.success) {
               if (res?.data?.text) {
-                const myJSON = JSON.parse(res?.data?.text);
+                const tSon = JSON.stringify(res?.data?.text);
+                const myJSON = JSON.parse(tSon);
                 console.log("RESPONSE1: ", myJSON);
                 setBasicInfo(myJSON);
               } else if (res?.data) {

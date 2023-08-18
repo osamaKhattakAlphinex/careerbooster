@@ -30,7 +30,7 @@ const handler: NextApiHandler = async (req, res) => {
     // CREATING LLM MODAL
     const model = new OpenAI({
       modelName: "gpt-3.5-turbo",
-      temperature: 0.5,
+      temperature: 1,
     });
 
     // TESTING WITH MEMORY VECTOR STORE
@@ -70,7 +70,7 @@ const handler: NextApiHandler = async (req, res) => {
               .describe("school / college / university of latest education"),
           }),
           summary: z.string().describe(
-            `Rewrite a Strong summary for the targeted job position '${jobPosition}' In the executive summary, I want you to provide a professional introduction explaining the present role and framing past job titles. 
+            `Rewrite a Strong summary for the targeted job position '${jobPosition}' In this executive summary, I want you to provide a professional introduction explaining the present role and framing past job titles. 
               Highlight successes and the services I can offer to potential clients. Mention achievements, and highlight some of the relevant keywords. The word count should not be more than 150 words`
           ),
           workExperience: z
@@ -84,16 +84,17 @@ const handler: NextApiHandler = async (req, res) => {
                     .describe("Country Name of the company"),
                   from: z.string().describe("From date"),
                   to: z.string().describe("To date"),
-                  achievements: z
-                    .array(z.string())
-                    .describe(
-                      "list of three to five accomplishments, achievements results of how the person added value to his/her company"
-                    ),
+                  achievements: z.array(z.string()).describe(
+                    `Rewrite it to make it more professional.
+                    this should be three to five bullet points that highlight key accomplishments. 
+                      Use this formula when writing about achievements for the role: success verb + noun + metric + outcome`
+                  ),
                 }),
               })
             )
+            // "list of three to five accomplishments, achievements results of how the person added value to this company"
             .describe(
-              "List of companies I have worked with, each recording having desgination, from date, to date, name of company "
+              "Rewrite the List of companies I have worked with, including desgination, from date, to date, name of company and job desciption"
             ),
           primarySkills: z
             .array(z.string())
