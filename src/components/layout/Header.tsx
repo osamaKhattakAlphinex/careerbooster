@@ -5,7 +5,7 @@ const Header = () => {
   const { data, status } = useSession();
   const isAuth = status === "authenticated";
   return (
-    <header>
+    <header className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100">
       <nav className="backdrop-blur-xl bg-white/70 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link href="/" className="flex items-center text-3xl font-bold">
