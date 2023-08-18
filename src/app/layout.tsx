@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <AuthProvider>
           <ReduxProvider>
-            <main className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 min-h-[100vh] h-[100%]  ">
+            <main className=" ">
               <Header />
               {children}
             </main>
