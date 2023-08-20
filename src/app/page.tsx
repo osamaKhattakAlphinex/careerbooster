@@ -1,4 +1,5 @@
 import UploadPDFResume from "@/components/UploadPDFResume";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -26,22 +27,22 @@ export default function Home() {
                   omnis beatae ipsum soluta!
                 </p>
                 <div className="mt-16 flex flex-wrap justify-center gap-y-4 gap-x-6">
-                  <a
-                    href="#"
+                  <Link
+                    href="/register"
                     className="bg-purple-600 text-white rounded-full relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
                   >
                     <span className="relative text-base font-semibold text-white">
-                      Get started
+                      Register
                     </span>
-                  </a>
-                  <a
-                    href="#"
+                  </Link>
+                  <Link
+                    href="/login"
                     className="bg-purple-100 text-white rounded-full relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
                   >
                     <span className="relative text-base font-semibold text-purple-600">
-                      Learn More
+                      Login
                     </span>
-                  </a>
+                  </Link>
                 </div>
                 <div className="hidden py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
                   <div className="text-left">
@@ -648,22 +649,22 @@ export default function Home() {
                   modern User Interfaces.
                 </p>
                 <div className="flex flex-wrap justify-center gap-6">
-                  <a
-                    href="#"
+                  <Link
+                    href="/register"
                     className="bg-purple-600 text-white rounded-full relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
                   >
                     <span className="relative text-base font-semibold text-white">
-                      Get started
+                      Register
                     </span>
-                  </a>
-                  <a
-                    href="#"
+                  </Link>
+                  <Link
+                    href="/login"
                     className="bg-purple-100 text-white rounded-full relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
                   >
                     <span className="relative text-base font-semibold text-purple-600">
-                      Learn More
+                      Login
                     </span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

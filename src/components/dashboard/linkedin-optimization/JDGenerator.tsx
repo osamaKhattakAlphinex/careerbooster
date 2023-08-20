@@ -8,32 +8,36 @@ I want you to read my resume data that you already have and
     rewrite each job experience Based on the following instructions:
 
     - Write a 2-3 sentences description for each role. 
-    - Add 3-5 bullets for each role and use this formula when writing bullets for each role: success verb + noun + metric + outcome.
+    - designation line should be bold
+    - company name line should be italic
+    - Add 3-5 bullet points for each role and use this formula when writing bullets for each role: success verb + noun + metric + outcome.
       ''''
       Here is the example format that I want you to follow for each role:
 
       Vice President, Chief Privacy Officer, Associate General Counsel
-      BARNES & NOBLE EDUCATION, INC., Basking Ridge, NJ Jan 2016 – Present
+      BARNES & NOBLE EDUCATION, INC., Basking Ridge, NJ Jan 2016 - Present
 
-      Barnes & Noble Education, spun off in 2015 as a publicly traded company from the neighborhood bookstore
+      
+      > Barnes & Noble Education, spun off in 2015 as a publicly traded company from the neighborhood bookstore
       chain, is one of the largest contract operators of institutional bookstores, managing over 1,200 stores
-      serving six million students delivering educational content, products, services and emblematic merchandise
+      serving six million students delivering educational content, products, services and emblematic merchandise.
 
-       Advise senior leadership, the board of directors and other internal clients on worldwide privacy law matters,
+      
+      > Advise senior leadership, the board of directors and other internal clients on worldwide privacy law matters,
       including GDPR and CCPA, as amended, related SEC and other regulatory matters, incident response, data
       retention, risk mitigation, marketing and advertising
-       Design, implement, iterate and improve an enterprise-wide data privacy compliance program, including drafting
+      > Design, implement, iterate and improve an enterprise-wide data privacy compliance program, including drafting
       internal policies and external notices, to help mitigate risk and ensure the protection of personal information and
       company confidential information from unauthorized access or processing
-       Draft, review and negotiate commercial agreements, including data processing agreements, purchase
+      > Draft, review and negotiate commercial agreements, including data processing agreements, purchase
       agreements (as seller and as buyer), strategic partnerships, master service agreements, licensing agreements,
-      SaaS and other technology transactions to help enable the company’s digital transformation
-       Partner with the CIO and the CISO, demonstrating increasing levels of responsibility and autonomy with three
+      SaaS and other technology transactions to help enable the company's digital transformation
+      > Partner with the CIO and the CISO, demonstrating increasing levels of responsibility and autonomy with three
       promotions in the first four years with the company, reporting directly to the CLO
 
 
       ----------
-      Also make sure the answer is formatted e.g company name shouldbe bold, lists should be <ul><li> etc the answer MUST be valid HTML.
+      The response MUST be valid HTML CODE e.g. use <b></b> around the line where you want it to be bold etc
     `;
 interface Props {
   setJobDesc: React.Dispatch<React.SetStateAction<string>>;
@@ -138,7 +142,10 @@ const JDGenerator = ({ setJobDesc }: Props) => {
               className="font-sans whitespace-pre-wrap break-words"
               // style={{ textW: "auto" }}
             >
-              <div dangerouslySetInnerHTML={{ __html: streamedData }}></div>
+              <div
+                className="list-disc"
+                dangerouslySetInnerHTML={{ __html: streamedData }}
+              ></div>
             </div>
           </div>
         )}

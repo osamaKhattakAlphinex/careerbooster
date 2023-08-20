@@ -33,6 +33,7 @@ const TrainBotCard = () => {
 
             setSuccessMsg("File has been uploaded!");
           } else {
+            console.log(res);
             setFileError("Something went wrong");
           }
         })
@@ -41,9 +42,7 @@ const TrainBotCard = () => {
         });
     }
   };
-  const updateUser = (
-    file: string = "/public/files/cujisuxa@mailinator.com/1692180707531_Resume-M-Suleman-Ibrahim.pdf"
-  ) => {
+  const updateUser = (file: string) => {
     if (file && data?.user?.email) {
       axios
         .post("/api/users/updateUser", {
