@@ -12,18 +12,21 @@ export default function Home() {
             <div className="blur-[106px] h-56 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
             <div className="blur-[106px] h-32 bg-gradient-to-r from-cyan-400 to-yellow-100 dark:to-indigo-600"></div>
           </div>
-          <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-6">
+          <div className="max-w-7xl mx-auto px-5 md:px-12 xl:px-6">
             <div className="relative pt-36 ml-auto">
               <div className="lg:w-2/3 text-center mx-auto">
-                <h1 className="text-gray-900 dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">
-                  Shaping a world with{" "}
-                  <span className="text-[#9333EA]">reimagination.</span>
+                <h1 className="text-gray-900 dark:text-white font-bold text-3xl md:text-6xl xl:text-7xl">
+                  Welcome to Resume Bot
+                  <span className="text-[#9333EA] block">
+                    Your Personal Resume Optimization Assistant!.
+                  </span>
                 </h1>
                 <p className="mt-8 text-gray-700 dark:text-gray-300">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-                  incidunt nam itaque sed eius modi error totam sit illum.
-                  Voluptas doloribus asperiores quaerat aperiam. Quidem harum
-                  omnis beatae ipsum soluta!
+                  Are you striving to land your dream job? Let our cutting-edge
+                  AI-powered resume bot help you stand out in the competitive
+                  job market. Craft a tailored resume that perfectly matches
+                  your desired job title, increasing your chances of getting
+                  noticed by potential employers.
                 </p>
                 <div className="mt-16 flex flex-wrap justify-center gap-y-4 gap-x-6">
                   <a
@@ -31,7 +34,7 @@ export default function Home() {
                     className="bg-purple-600 text-white rounded-full relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
                   >
                     <span className="relative text-base font-semibold text-white">
-                      Get started
+                      Optimize My Resume
                     </span>
                   </a>
                   <a
@@ -39,28 +42,51 @@ export default function Home() {
                     className="bg-purple-100 text-white rounded-full relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
                   >
                     <span className="relative text-base font-semibold text-purple-600">
-                      Learn More
+                      Explore Features
                     </span>
                   </a>
                 </div>
                 <div className="hidden py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
-                  <div className="text-left">
+                  <div className="text-justify px-5">
                     <h6 className="text-lg font-semibold text-gray-700 dark:text-white">
                       The lowest price
                     </h6>
-                    <p className="mt-2 text-gray-500">Some text here</p>
+                    <p className="mt-2 text-gray-500">
+                      We believe in making career-enhancing tools accessible to
+                      everyone. Our resume optimization service comes at an
+                      unbeatable price, ensuring that you receive top-notch
+                      assistance without breaking the bank. We're committed to
+                      helping you invest in your future without compromising
+                      your budget.
+                    </p>
                   </div>
-                  <div className="text-left">
+                  <div className="text-justify px-5 card">
                     <h6 className="text-lg font-semibold text-gray-700 dark:text-white">
                       The fastest on the market
                     </h6>
-                    <p className="mt-2 text-gray-500">Some text here</p>
+                    <p className="mt-2 text-gray-500">
+                      Time is of the essence when you're on the hunt for the
+                      perfect job. With AI Resume Bot, you won't have to wait
+                      long to see results. Our AI-powered resume optimization
+                      process is lightning-fast, providing you with optimized
+                      resumes that align with your chosen job title in mere
+                      minutes. Say goodbye to tedious manual editing and hello
+                      to efficiency and speed.
+                    </p>
                   </div>
-                  <div className="text-left">
+                  <div className="text-justify px-5">
                     <h6 className="text-lg font-semibold text-gray-700 dark:text-white">
                       The most loved
                     </h6>
-                    <p className="mt-2 text-gray-500">Some text here</p>
+                    <p className="mt-2 text-gray-500">
+                      Join a community of satisfied users who have experienced
+                      the transformative power of AI Resume Bot. Our AI resume
+                      optimization service has garnered praise and loyalty from
+                      job seekers worldwide. The love we receive from our users
+                      motivates us to continue delivering exceptional results
+                      and helping individuals like you achieve their career
+                      goals.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -168,11 +194,13 @@ export default function Home() {
 
                   <div className="space-y-2">
                     <h5 className="text-xl font-semibold text-gray-700 dark:text-white transition group-hover:text-secondary">
-                      First feature
+                      Tailored Resume Optimization
                     </h5>
                     <p className="text-gray-600 dark:text-gray-300">
-                      Neque Dolor, fugiat non cum doloribus aperiam voluptates
-                      nostrum.
+                      Upload your resume and specify the job title you're
+                      targeting. Our AI bot will analyze your resume and suggest
+                      optimizations to match your skills and experience with the
+                      requirements of the job.
                     </p>
                   </div>
                   <a
@@ -207,11 +235,12 @@ export default function Home() {
 
                   <div className="space-y-2">
                     <h5 className="text-xl font-semibold text-gray-700 dark:text-white transition group-hover:text-secondary">
-                      Second feature
+                      Keyword Enhancement
                     </h5>
                     <p className="text-gray-600 dark:text-gray-300">
-                      Neque Dolor, fugiat non cum doloribus aperiam voluptates
-                      nostrum.
+                      Our AI identifies essential keywords for your chosen job
+                      title and strategically integrates them into your resume,
+                      ensuring it aligns with what recruiters are looking for.
                     </p>
                   </div>
                   <a
@@ -246,11 +275,12 @@ export default function Home() {
 
                   <div className="space-y-2">
                     <h5 className="text-xl font-semibold text-gray-700 dark:text-white transition group-hover:text-secondary">
-                      Third feature
+                      Formatting Perfection
                     </h5>
                     <p className="text-gray-600 dark:text-gray-300">
-                      Neque Dolor, fugiat non cum doloribus aperiam voluptates
-                      nostrum.
+                      Presentation matters. Let our AI ensure your resume
+                      follows industry standards and has an appealing layout,
+                      improving readability and making a lasting impression.
                     </p>
                   </div>
                   <a
@@ -285,11 +315,12 @@ export default function Home() {
 
                   <div className="space-y-2">
                     <h5 className="text-xl font-semibold text-gray-700 dark:text-white transition group-hover:text-secondary">
-                      More features
+                      Real-time Preview
                     </h5>
                     <p className="text-gray-600 dark:text-gray-300">
-                      Neque Dolor, fugiat non cum doloribus aperiam voluptates
-                      nostrum.
+                      See your resume transform instantly as our AI works its
+                      magic. Preview the changes and decide which optimizations
+                      to apply.
                     </p>
                   </div>
                   <a
