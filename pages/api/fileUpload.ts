@@ -46,13 +46,11 @@ const handler: NextApiHandler = async (req, res) => {
       return fileName + "_" + path.originalFilename;
     };
   }
-  const test = await readFile(req, options);
-  const newFile = `/public/files/${req?.query?.email}/${fileName}_${req?.query?.f}`;
+  await readFile(req, options);
 
   res.json({
     success: true,
     fileName: fileName,
-    newFile,
   });
 };
 

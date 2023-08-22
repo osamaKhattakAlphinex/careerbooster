@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import FileCard from "./FileCard";
+import { useSelector } from "react-redux";
+import { getFilesForUser } from "@/helpers/getFilesForUser";
 
 const UploadedFilesCard = () => {
   // TODO!!! AUTO RELOAD ON FILE UPLOAD
@@ -10,24 +12,25 @@ const UploadedFilesCard = () => {
   const [files, setFiles] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // session
   const { data: session, status } = useSession();
+  // Redux
+  const uploadedFileName = useSelector(
+    (state: any) => state.resume.uploadedFileName
+  );
 
   const getFiles = async () => {
     if (session?.user?.email) {
       setIsLoading(true);
-      axios
-        .get(`/api/users/getOneByEmail?email=${session.user.email}`)
-        .then((resp: any) => {
-          if (resp?.data?.user?.files) {
-            setFiles(resp?.data?.user?.files);
-          }
-          setIsLoading(false);
-        });
+      const files = await getFilesForUser(session?.user?.email);
+      setFiles(files);
+      setIsLoading(false);
     }
   };
+
   useEffect(() => {
     getFiles();
-  }, [session?.user?.email]);
+  }, [session?.user?.email, uploadedFileName]);
 
   return (
     <div className="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">

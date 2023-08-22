@@ -28,8 +28,9 @@ const TrainBotCard = () => {
         .then(async (resp: any) => {
           const res = await resp.json();
           if (res.success) {
-            updateUser(res.newFile);
-            dispatch(setUploadedFileName(res.newFile));
+            const newFile = `/public/files/${res.fileName}_${file.name}`;
+            updateUser(newFile);
+            dispatch(setUploadedFileName(newFile));
 
             setSuccessMsg("File has been uploaded!");
           } else {
@@ -42,6 +43,7 @@ const TrainBotCard = () => {
         });
     }
   };
+
   const updateUser = (file: string) => {
     if (file && data?.user?.email) {
       axios

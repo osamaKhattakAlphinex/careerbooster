@@ -10,7 +10,7 @@ import { DirectoryLoader } from "langchain/document_loaders/fs/directory";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 
-import { RetrievalQAChain, loadQAStuffChain } from "langchain/chains";
+import { RetrievalQAChain } from "langchain/chains";
 
 const handler: NextApiHandler = async (req, res) => {
   // const apiKey = process.env.PINECONE_API_KEY;
@@ -46,7 +46,6 @@ const handler: NextApiHandler = async (req, res) => {
       temperature: 0.5,
     });
 
-    // TESTING WITH MEMORY VECTOR STORE
     const dir = path.join(process.cwd() + "/public", "/files", `/${email}`);
     const loader = new DirectoryLoader(dir, {
       ".pdf": (path) => new PDFLoader(path),
