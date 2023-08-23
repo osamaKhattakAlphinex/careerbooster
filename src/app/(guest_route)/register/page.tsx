@@ -54,6 +54,7 @@ const Register = () => {
           .then(async function (response) {
             if (values.file !== "") {
               await moveResumeToUserFolder(values.file, values.email);
+              await updateUser(values.file, values.email);
             }
             router.replace("/login");
           })
@@ -71,11 +72,22 @@ const Register = () => {
     },
   });
   const moveResumeToUserFolder = async (fileName: string, email: string) => {
-    const obj = {
-      fileName: fileName,
-      email: email,
-    };
-    return axios.post(`/api/users/moveResumeToUserFolder`, obj);
+    if (fileName && email) {
+      const obj = {
+        fileName: fileName,
+        email: email,
+      };
+      return axios.post(`/api/users/moveResumeToUserFolder`, obj);
+    }
+  };
+
+  const updateUser = (file: string, email: string) => {
+    if (file && email) {
+      return axios.post("/api/users/updateUser", {
+        newFile: file,
+        email: email,
+      });
+    }
   };
 
   useEffect(() => {

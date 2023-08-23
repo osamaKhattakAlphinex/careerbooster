@@ -1,7 +1,13 @@
 "use client";
 import Link from "next/link";
-const FileCard = ({ file }: { file: string }) => {
-  const url = file;
+const FileCard = ({
+  file,
+  email,
+}: {
+  file: string;
+  email?: string | null | undefined;
+}) => {
+  const url = `/files/${email}/${file}`;
   return (
     <div className="">
       <div className="w-full bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">

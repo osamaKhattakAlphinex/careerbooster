@@ -67,7 +67,7 @@ const UploadedFilesCard = () => {
       <div className="flex flex-col gap-4 pt-10">
         {files &&
           files.map((file: string, i: number) => (
-            <FileCard key={i} file={file} />
+            <FileCard key={i} file={file} email={session?.user?.email} />
           ))}
         {!isLoading && files.length === 0 && <p>There are no files</p>}
       </div>
