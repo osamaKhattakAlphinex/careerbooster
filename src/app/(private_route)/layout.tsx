@@ -10,6 +10,10 @@ interface Props {
 export default async function Privatelayout({ children }: Props) {
   const session = await getServerSession(authOptions);
 
+  const user = session?.user as { role: string } | undefined;
+  const isAdmin = user?.role === "admin";
+
+  if (isAdmin) redirect("/admin");
   if (!session?.user) redirect("/login");
 
   return <>{children}</>;

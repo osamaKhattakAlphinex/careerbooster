@@ -44,11 +44,13 @@ const Login = () => {
             </h1>
             <form
               className="space-y-4 md:space-y-6"
-              onSubmit={formik.handleSubmit}>
+              onSubmit={formik.handleSubmit}
+            >
               <div>
                 <label
                   htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
                   Your email
                 </label>
                 <input
@@ -70,7 +72,8 @@ const Login = () => {
               <div>
                 <label
                   htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
                   Password
                 </label>
                 <input
@@ -92,7 +95,8 @@ const Login = () => {
               {submittingError !== "" && (
                 <div
                   className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2"
-                  role="alert">
+                  role="alert"
+                >
                   <p>{submittingError}</p>
                 </div>
               )}
@@ -100,14 +104,16 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full  bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                className="w-full  bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              >
                 {submitting ? "Submitting..." : "Login"}
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don{"'"}t have an account?{" "}
                 <Link
                   href="/"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500">
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                >
                   Create new account
                 </Link>
               </p>

@@ -2,8 +2,9 @@
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 const Header = () => {
-  const { data, status } = useSession();
+  const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
+  const role = data?.user?.role;
   return (
     <header className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100">
       <nav className="backdrop-blur-xl bg-white/70 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
@@ -21,7 +22,7 @@ const Header = () => {
             {isAuth ? (
               <>
                 <Link
-                  href="/dashboard"
+                  href={role === "admin" ? "/admin" : "/dashboard"}
                   className="border rounded px-2 bg-white"
                 >
                   {data?.user?.email}
