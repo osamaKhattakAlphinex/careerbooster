@@ -1,13 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Register = () => {
   const router = useRouter();
+  const params = useSearchParams();
+
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [submittingError, setSubmittingError] = useState<string>("");
 
@@ -19,6 +21,7 @@ const Register = () => {
       password: "",
       confirmpassword: "",
       terms: false,
+      file: "",
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("First Name is Required"),
@@ -34,31 +37,64 @@ const Register = () => {
 
     onSubmit: async (values) => {
       setSubmittingError("");
-      setSubmitting(true);
 
-      const obj = {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        password: values.password,
-      };
-      axios
-        .post("/api/auth/users", obj)
-        .then(function (response) {
-          router.replace("/login");
-        })
-        .catch(function (error) {
-          if (error.response.data.error) {
-            setSubmittingError(error.response.data.error);
-          } else {
-            setSubmittingError("Something went wrong");
-          }
-        })
-        .finally(() => {
-          setSubmitting(false);
-        });
+      if (values.terms) {
+        setSubmitting(true);
+
+        const obj = {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          password: values.password,
+          file: values.file,
+        };
+
+        axios
+          .post("/api/auth/users", obj)
+          .then(async function (response) {
+            if (values.file !== "") {
+              await moveResumeToUserFolder(values.file, values.email);
+            }
+            router.replace("/login");
+          })
+          .catch(function (error) {
+            if (error.response.data.error) {
+              setSubmittingError(error.response.data.error);
+            } else {
+              setSubmittingError("Something went wrong");
+            }
+          })
+          .finally(() => {
+            setSubmitting(false);
+          });
+      }
     },
   });
+  const moveResumeToUserFolder = async (fileName: string, email: string) => {
+    const obj = {
+      fileName: fileName,
+      email: email,
+    };
+    return axios.post(`/api/users/moveResumeToUserFolder`, obj);
+  };
+
+  useEffect(() => {
+    const firstName = params?.get("firstName");
+    const lastName = params?.get("lastName");
+    const email = params?.get("email");
+    const file = params?.get("file");
+
+    if (firstName && lastName && email) {
+      formik.setFieldValue("firstName", removeDashesFromString(firstName));
+      formik.setFieldValue("lastName", removeDashesFromString(lastName));
+      formik.setFieldValue("email", removeDashesFromString(email));
+      formik.setFieldValue("file", file);
+    }
+  }, [params]);
+
+  const removeDashesFromString = (str: string) => {
+    return str.replace(/-/g, " ");
+  };
 
   return (
     <section className="">

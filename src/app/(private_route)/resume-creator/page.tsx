@@ -19,7 +19,6 @@ const ResumeCreator = () => {
           email: session?.user?.email,
           jobPosition,
         };
-        console.clear();
         fetch("/api/resumeBots/getBasicInfo", {
           method: "POST",
           body: JSON.stringify(formData),
@@ -30,11 +29,9 @@ const ResumeCreator = () => {
               if (res?.data?.text) {
                 const tSon = JSON.stringify(res?.data?.text);
                 const myJSON = JSON.parse(tSon);
-                console.log("RESPONSE1: ", myJSON);
                 setBasicInfo(myJSON);
               } else if (res?.data) {
                 const myJSON = JSON.parse(res.data);
-                console.log("RESPONSE2: ", myJSON);
                 setBasicInfo(myJSON);
               }
             }

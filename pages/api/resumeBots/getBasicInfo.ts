@@ -13,14 +13,6 @@ import { PromptTemplate } from "langchain/prompts";
 import { StructuredOutputParser } from "langchain/output_parsers";
 
 const handler: NextApiHandler = async (req, res) => {
-  // return res
-  //   .status(200)
-  //   .json({
-  //     success: true,
-  //     data: {
-  //       text: '{\n  "shortName": "SI",\n  "name": "M Suleman Ibrahim",\n  "jobTitle": "Chief Technology Officer",\n  "contact": {\n    "phone": "03123666098",\n    "email": "m.sulemankhan@hotmail.com",\n    "linkedIn": "linkedin.com/in/suleman-ibrahim"\n  },\n  "education": {\n    "year": "2021",\n    "degree": "Bachelor\'s degree, Computer Software Engineering",\n    "school": "University of Sindh"\n  },\n  "summary": "Full Stack Developer with Professional Skills in ReactJS, NextJs, Material-ui, NodeJS, Redux, PHP(Codeigniter), PHP(Laravel), PHP(Cakephp), Bootstrap, Wireframing, Project Leading, Project Management, Conversation with Clients etc.",\n  "workExperience": [\n    {\n      "fields": {\n        "title": "Chief Technology Officer",\n        "company": "Alphinex Solutions",\n        "companyAddress": "Unknown",\n        "from": "Jan 2018",\n        "to": "Nov 2021",\n        "achievements": []\n      }\n    },\n    {\n      "fields": {\n        "title": "Mern Stack Developer / Chief Technology Officer",\n        "company": "Nausal Technologies Private Limited",\n        "companyAddress": "Unknown",\n        "from": "Feb 2023",\n        "to": "Present",\n        "achievements": []\n      }\n    },\n    {\n      "fields": {\n        "title": "Senior Mern Stack Developer",\n        "company": "Shiny Proxima",\n        "companyAddress": "Unknown",\n        "from": "Sep 2022",\n        "to": "Jan 2023",\n        "achievements": []\n      }\n    },\n    {\n      "fields": {\n        "title": "Mern Stack Developer",\n        "company": "Upwork",\n        "companyAddress": "Unknown",\n        "from": "Mar 2017",\n        "to": "Jul 2022",\n        "achievements": []\n      }\n    }\n  ],\n  "primarySkills": [\n    "ReactJS",\n    "NextJs",\n    "Material-ui",\n    "NodeJS",\n    "Redux"\n  ],\n  "professionalSkills": [\n    "PHP(Codeigniter)",\n    "PHP(Laravel)",\n    "PHP(Cakephp)",\n    "Bootstrap",\n    "Wireframing",\n    "Project Leading",\n    "Project Management",\n    "Conversation with Clients"\n  ],\n  "secondarySkills": [\n    "ClickUp",\n    "Vue.js",\n    "PhpMyAdmin",\n    "Amazon Web Services (AWS)",\n    "MERN Stack"\n  ]\n}',
-  //     },
-  //   });
   if (req.body) {
     const reqBody = JSON.parse(req.body);
     const email = reqBody.email;

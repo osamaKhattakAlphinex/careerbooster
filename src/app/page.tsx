@@ -19,7 +19,7 @@ export default function Home() {
                 <h1 className="text-gray-900 dark:text-white font-bold text-3xl md:text-6xl xl:text-7xl">
                   Welcome to Resume Bot
                   <span className="text-[#9333EA] block">
-                    Your Personal Resume Optimization Assistant!.
+                    Your Personal Assistant!.
                   </span>
                 </h1>
                 <p className="mt-8 text-gray-700 dark:text-gray-300">
@@ -30,65 +30,23 @@ export default function Home() {
                   noticed by potential employers.
                 </p>
                 <div className="mt-16 flex flex-wrap justify-center gap-y-4 gap-x-6">
-                  <Link
+                  <UploadPDFResume />
+                  {/* <Link
                     href="/register"
                     className="bg-purple-600 text-white rounded-full relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
                   >
                     <span className="relative text-base font-semibold text-white">
-                      Register
+                      Upload Resume
                     </span>
-                  </Link>
-                  <Link
+                  </Link> */}
+                  {/* <Link
                     href="/login"
                     className="bg-purple-100 text-white rounded-full relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
                   >
                     <span className="relative text-base font-semibold text-purple-600">
                       Login
                     </span>
-                  </Link>
-                </div>
-                <div className="hidden py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
-                  <div className="text-justify px-5">
-                    <h6 className="text-lg font-semibold text-gray-700 dark:text-white">
-                      The lowest price
-                    </h6>
-                    <p className="mt-2 text-gray-500">
-                      We believe in making career-enhancing tools accessible to
-                      everyone. Our resume optimization service comes at an
-                      unbeatable price, ensuring that you receive top-notch
-                      assistance without breaking the bank. We're committed to
-                      helping you invest in your future without compromising
-                      your budget.
-                    </p>
-                  </div>
-                  <div className="text-justify px-5 card">
-                    <h6 className="text-lg font-semibold text-gray-700 dark:text-white">
-                      The fastest on the market
-                    </h6>
-                    <p className="mt-2 text-gray-500">
-                      Time is of the essence when you're on the hunt for the
-                      perfect job. With AI Resume Bot, you won't have to wait
-                      long to see results. Our AI-powered resume optimization
-                      process is lightning-fast, providing you with optimized
-                      resumes that align with your chosen job title in mere
-                      minutes. Say goodbye to tedious manual editing and hello
-                      to efficiency and speed.
-                    </p>
-                  </div>
-                  <div className="text-justify px-5">
-                    <h6 className="text-lg font-semibold text-gray-700 dark:text-white">
-                      The most loved
-                    </h6>
-                    <p className="mt-2 text-gray-500">
-                      Join a community of satisfied users who have experienced
-                      the transformative power of AI Resume Bot. Our AI resume
-                      optimization service has garnered praise and loyalty from
-                      job seekers worldwide. The love we receive from our users
-                      motivates us to continue delivering exceptional results
-                      and helping individuals like you achieve their career
-                      goals.
-                    </p>
-                  </div>
+                  </Link> */}
                 </div>
               </div>
               <div className="mt-12 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6">

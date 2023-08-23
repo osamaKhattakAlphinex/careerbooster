@@ -3,8 +3,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
+import { slugify } from "@/helpers/slugify";
+import { useRouter } from "next/navigation";
 
 const UploadPDFResume = () => {
+  const router = useRouter();
   // local states
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [file, setFile] = useState<any>(null);
@@ -29,16 +32,14 @@ const UploadPDFResume = () => {
           if (res.success) {
             const uploadedFileName = res.fileName + "_" + file.name;
             dispatch(setUploadedFileName(uploadedFileName));
-            setSuccessMsg("File has been uploaded!");
+            fetchRegistrationDataFromResume(uploadedFileName);
+            // setSuccessMsg("File has been uploaded!");
           } else {
             setFileError("Something went wrong");
           }
         })
         .catch((error) => {
           setFileError("Something went wrong");
-        })
-        .finally(() => {
-          setFileUploading(false);
         });
     }
   };
@@ -56,20 +57,57 @@ const UploadPDFResume = () => {
     }
   }, [file]);
 
+  const fetchRegistrationDataFromResume = (uploadedFileName: string) => {
+    if (uploadedFileName) {
+      const formData = {
+        type: "basicInfo",
+        file: uploadedFileName,
+      };
+
+      fetch("/api/homepage/fetchRegistrationData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+
+          if (res.success) {
+            if (res?.data?.text) {
+              const userData = JSON.parse(res?.data?.text);
+              router.replace(
+                `/register?firstName=${slugify(
+                  userData.firstName
+                )}&lastName=${slugify(userData.lastName)}&email=${
+                  userData.email
+                }&file=${uploadedFileName}`
+              );
+            }
+          }
+        })
+        .finally(() => {
+          setFileUploading(false);
+        });
+    }
+  };
+
   return (
     <>
-      <p className="mt-4">Upload your resume to get started</p>
-
-      <div className="flex items-center justify-center mt-4">
+      <div className="flex  items-center justify-center mt-4">
         <label
-          className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded cursor-pointer disabled:bg-blue-300 ${
-            fileUploading && "!bg-blue-300"
-          }`}
+          // className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded cursor-pointer disabled:bg-blue-300 ${
+          //   fileUploading && "!bg-blue-300"
+          // }`}
+
+          className={`bg-purple-600 text-white rounded-full relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max cursor-pointer ${
+            fileUploading && "!bg-purple-300"
+          }
+          `}
         >
-          Upload File
+          {fileUploading ? "Uploading..." : "Upload Resume (PDF)"}
           <input
             type="file"
             className="hidden"
+            disabled={fileUploading}
             onChange={(e) => {
               if (e.target.files) {
                 setFile(e.target.files[0]);
@@ -97,7 +135,6 @@ const UploadPDFResume = () => {
           <p>{successMsg}</p>
         </div>
       )}
-      {fileUploading && <p>Uploading...</p>}
       {/* Upload PDF Card */}
     </>
   );

@@ -3,8 +3,6 @@ import formidable from "formidable";
 import path from "path";
 import fs from "fs/promises";
 
-import User from "../../src/db/schemas/User";
-
 export const config = {
   api: {
     bodyParser: false,
@@ -25,23 +23,25 @@ const readFile = (
 };
 
 const handler: NextApiHandler = async (req, res) => {
+  let directory = "";
+  if (req?.query?.email) {
+    // for logged in users
+    directory = `/public/files/${req?.query?.email}`;
+  } else {
+    // for homepage
+    directory = "/public/files/temp";
+  }
+
   try {
-    await fs.readdir(
-      path.join(process.cwd() + "/public", "/files", `/${req?.query?.email}`)
-    );
+    await fs.readdir(path.join(process.cwd() + directory));
   } catch (error) {
-    await fs.mkdir(
-      path.join(process.cwd() + "/public", "/files", `/${req?.query?.email}`)
-    );
+    await fs.mkdir(path.join(process.cwd() + directory));
   }
   const options: formidable.Options = {};
   const saveLocally = true;
   const fileName = Date.now().toString();
   if (saveLocally) {
-    options.uploadDir = path.join(
-      process.cwd(),
-      `/public/files/${req?.query?.email}`
-    );
+    options.uploadDir = path.join(process.cwd(), directory);
     options.filename = (name, ext, path, form) => {
       return fileName + "_" + path.originalFilename;
     };
