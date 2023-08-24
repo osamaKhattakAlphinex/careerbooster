@@ -156,7 +156,7 @@ export default function Home() {
                       Tailored Resume Optimization
                     </h5>
                     <p className="text-gray-600 dark:text-gray-300">
-                      Upload your resume and specify the job title you're
+                      Upload your resume and specify the job title you{"'"}re
                       targeting. Our AI bot will analyze your resume and suggest
                       optimizations to match your skills and experience with the
                       requirements of the job.
