@@ -21,7 +21,6 @@ interface Props {
 }
 
 const DownloadDocx = ({ jobDesc, keywords, headline, about }: Props) => {
-  console.log({ jobDesc, keywords, headline, about });
   const generateDocument = () => {
     loadFile(
       "/profile-report-template-233se.docx",
@@ -48,7 +47,6 @@ const DownloadDocx = ({ jobDesc, keywords, headline, about }: Props) => {
                 return error.properties.explanation;
               })
               .join("\n");
-            console.log("errorMessages", errorMessages);
             // errorMessages is a humanly readable message looking like this :
             // 'The tag beginning with "foobar" is unopened'
           }
@@ -61,7 +59,6 @@ const DownloadDocx = ({ jobDesc, keywords, headline, about }: Props) => {
         });
         // Output the document using Data-URI
         saveAs(out, "output.docx");
-        console.log("aaa2");
       }
     );
   };

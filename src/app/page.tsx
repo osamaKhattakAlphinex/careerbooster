@@ -19,7 +19,7 @@ export default function Home() {
                 <h1 className="text-gray-900 dark:text-white font-bold text-3xl md:text-6xl xl:text-7xl">
                   Welcome to Resume Bot
                   <span className="text-[#9333EA] block">
-                    Your Personal Assistant!.
+                    Your Personal Assistant!
                   </span>
                 </h1>
                 <p className="mt-8 text-gray-700 dark:text-gray-300">

@@ -15,8 +15,8 @@ const ResumeCreator = () => {
     <>
       <div className="flex m-10 gap-4">
         <div className="w-full flex p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-          <h2 className="text-2xl">LinkedIn Optimization</h2>
-          <div className="float-right">
+          <h2 className="text-2xl mr-10">LinkedIn Optimization</h2>
+          <div className="">
             <DownloadDocx
               keywords={keywords}
               headline={headline}

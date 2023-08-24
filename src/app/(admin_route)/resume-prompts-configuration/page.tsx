@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PromptEditor from "@/components/admin/linkedin-prompts/PromptEditor";
-const LinkedInPromptsConfiguration = () => {
+const ResumePromptsConfiguration = () => {
   const [promptsLoading, setPromptsLoading] = useState<boolean>(true);
   const [prompts, setPrompts] = useState<any[]>([]);
   const [updating, setUpdating] = useState<string>("");
@@ -52,7 +52,7 @@ const LinkedInPromptsConfiguration = () => {
               </svg>
 
               <span className="text-semibold">
-                LinkedIn Prompts Configuration
+                Resume Prompts Configuration
               </span>
             </div>
           </h2>
@@ -111,4 +111,4 @@ const LinkedInPromptsConfiguration = () => {
   );
 };
 
-export default LinkedInPromptsConfiguration;
+export default ResumePromptsConfiguration;
