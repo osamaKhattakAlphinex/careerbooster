@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface ResumeSlice {
   uploadedFileName: string;
-  loadingState: string;
+  // loadingState: string;
   shortName: string;
   name: string;
   jobTitle: string;
@@ -40,7 +40,7 @@ interface ResumeSlice {
 
 const initialState: ResumeSlice = {
   uploadedFileName: "",
-  loadingState: "",
+  // loadingState: "",
   shortName: "",
   name: "",
   jobTitle: "",
@@ -124,12 +124,12 @@ const resumeSlice = createSlice({
         professionalSkills: action.payload.professionalSkills,
       };
     },
-    setLoadingState(state, action) {
-      return {
-        ...state,
-        loadingState: action.payload,
-      };
-    },
+    // setLoadingState(state, action) {
+    //   return {
+    //     ...state,
+    //     loadingState: action.payload,
+    //   };
+    // },
   },
 });
 
@@ -141,7 +141,7 @@ export const {
   setPrimarySkills,
   setSecondarySkills,
   setProfessionalSkills,
-  setLoadingState,
+  // setLoadingState,
 } = resumeSlice.actions;
 
 export default resumeSlice.reducer;

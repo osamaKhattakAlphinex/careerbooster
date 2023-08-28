@@ -13,7 +13,7 @@ import {
   setPrimarySkills,
   setSecondarySkills,
   setProfessionalSkills,
-  setLoadingState,
+  // setLoadingState,
 } from "@/store/resumeSlice";
 
 const ResumeCreator = () => {
@@ -286,7 +286,10 @@ const ResumeCreator = () => {
                               d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
                             />
                           </svg>
-                          <span>Download Resume in PDF</span>
+                          <span>Print / Download Resume in PDF</span>
+                          {/* <span>
+                            To download choose destination "save as PDF"
+                          </span> */}
                         </div>
                       </button>
                     )}
@@ -295,7 +298,7 @@ const ResumeCreator = () => {
                 </>
               )}
             </div>
-            {resumeData?.loadingState !== "" && (
+            {/* {resumeData?.loadingState !== "" && (
               <h3>
                 AI is Writing...
                 {resumeData?.loadingState === "basicInfo" && "Basic Info"}
@@ -309,7 +312,7 @@ const ResumeCreator = () => {
                 {resumeData?.loadingState === "secondarySkills" &&
                   "Secondary Skills"}
               </h3>
-            )}
+            )} */}
           </div>
         </div>
       </div>

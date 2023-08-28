@@ -10,7 +10,7 @@ const ResumePromptsConfiguration = () => {
   useEffect(() => {
     setPromptsLoading(true);
     // get all prompts
-    axios.get("/api/admin/prompts?type=linkedin").then((res) => {
+    axios.get("/api/admin/prompts?type=resume").then((res) => {
       setPromptsLoading(false);
       setPrompts(res.data.prompts);
     });
@@ -20,7 +20,7 @@ const ResumePromptsConfiguration = () => {
       setUpdating(name);
       axios
         .post("/api/admin/prompts", {
-          type: "linkedin",
+          type: "resume",
           name: name,
           value: val,
           active: true,
@@ -63,42 +63,62 @@ const ResumePromptsConfiguration = () => {
       ) : (
         <>
           <div className="flex m-10 gap-4">
-            {/* Keywords Genrator Card */}
+            {/* Summary Generator */}
             <PromptEditor
-              name="keyword"
-              type="linkedin"
+              name="summary"
+              type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}
               handleSave={handleSave}
               updating={updating}
             />
 
-            {/* Headline Generator Card */}
+            {/* WorkExperience General Description Generator */}
             <PromptEditor
-              name="headline"
-              type="linkedin"
+              name="workExperienceGeneralDescription"
+              type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}
               handleSave={handleSave}
               updating={updating}
             />
           </div>
-
           <div className="flex m-10 gap-4">
-            {/* About Generator */}
+            {/* WorkExperience Achivement Description Generator */}
             <PromptEditor
-              name="about"
-              type="linkedin"
+              name="workExperienceAchievementDescription"
+              type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}
               handleSave={handleSave}
               updating={updating}
             />
 
-            {/* Job Description Generator */}
+            {/* Primary Skills Generator */}
             <PromptEditor
-              name="jobDescription"
-              type="linkedin"
+              name="primarySkills"
+              type="resume"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+          </div>
+          <div className="flex m-10 gap-4">
+            {/* Professional Skills Generator */}
+            <PromptEditor
+              name="professionalSkills"
+              type="resume"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+
+            {/* Secondary Skills Generator */}
+            <PromptEditor
+              name="secondarySkills"
+              type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}
               handleSave={handleSave}

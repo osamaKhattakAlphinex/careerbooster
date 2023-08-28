@@ -11,6 +11,7 @@ import { RetrievalQAChain } from "langchain/chains";
 import { z } from "zod";
 import { PromptTemplate } from "langchain/prompts";
 import { StructuredOutputParser } from "langchain/output_parsers";
+import Prompt from "@/db/schemas/Prompt";
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
@@ -101,30 +102,16 @@ const handler: NextApiHandler = async (req, res) => {
         ],
         temperature: 1,
       });
-      // const parser = StructuredOutputParser.fromZodSchema(
-      //   z.object({
-      //     summary: z.string().describe(
-      //       `Rewrite a Strong summary for the targeted job position '${jobPosition}' In this executive summary, I want you to provide a professional introduction explaining the present role and framing past job titles.
-      //         Highlight successes and the services I can offer to potential clients. Mention achievements, and highlight some of the relevant keywords. The word count should not be more than 150 words`
-      //     ),
-      //   })
-      // );
-
-      // const formatInstructions = parser.getFormatInstructions();
-      // const prompt = new PromptTemplate({
-      //   template:
-      //     "Answer the users question as best as possible from the provided resume data that you already have about the person.\n{format_instructions}\n{additionalInfo}",
-      //   inputVariables: ["additionalInfo"],
-      //   partialVariables: { format_instructions: formatInstructions },
-      // });
-
-      // const input = await prompt.format({
-      //   additionalInfo: "Important: >> Answer should be a valid JSON <<",
-      // });
 
       try {
-        const promptSummary = `Write a Strong Executive summary for the targeted job position of '${jobPosition}'. In this executive summary, I want you to provide a professional introduction explaining the present role and framing past job titles. 
-               Highlight successes and the services I can offer to potential clients. Mention achievements, and highlight some of the relevant keywords. The word count should not be more than 150 words`;
+        const promptRec = await Prompt.findOne({
+          type: "resume",
+          name: "summary",
+          active: true,
+        });
+        const prompt = promptRec.value;
+
+        const promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
         const chain4 = RetrievalQAChain.fromLLM(model1, vectorStoreRetriever);
         await chain4.call({
           query: promptSummary,
@@ -141,6 +128,20 @@ const handler: NextApiHandler = async (req, res) => {
     }
 
     if (type === "workExperience") {
+      const promptRec = await Prompt.findOne({
+        type: "resume",
+        name: "workExperienceGeneralDescription",
+        active: true,
+      });
+      const workExperienceGeneralDescription = promptRec.value;
+
+      const promptRec1 = await Prompt.findOne({
+        type: "resume",
+        name: "workExperienceAchievementDescription",
+        active: true,
+      });
+      const workExperienceAchievementDescription = promptRec1.value;
+
       const parser = StructuredOutputParser.fromZodSchema(
         z.object({
           workExperience: z
@@ -154,18 +155,14 @@ const handler: NextApiHandler = async (req, res) => {
                     .describe("Country Name of the company"),
                   from: z.string().describe("From date"),
                   to: z.string().describe("To date"),
-                  achievements: z.array(z.string()).describe(
-                    `Rewrite it to make it more professional.
-                    this should be three to five bullet points that highlight key accomplishments. 
-                      Use this formula when writing about achievements for the role: success verb + noun + metric + outcome`
-                  ),
+                  achievements: z
+                    .array(z.string())
+                    .describe(workExperienceAchievementDescription),
                 }),
               })
             )
             // "list of three to five accomplishments, achievements results of how the person added value to this company"
-            .describe(
-              "Rewrite the List of companies I have worked with, including desgination, from date, to date, name of company and job desciption"
-            ),
+            .describe(workExperienceGeneralDescription),
         })
       );
 
@@ -194,13 +191,18 @@ const handler: NextApiHandler = async (req, res) => {
     }
 
     if (type === "primarySkills") {
+      const promptRec = await Prompt.findOne({
+        type: "resume",
+        name: "primarySkills",
+        active: true,
+      });
+      const promptDB = promptRec.value;
+
+      const promptRefined = promptDB.replace("{{jobPosition}}", jobPosition);
+
       const parser = StructuredOutputParser.fromZodSchema(
         z.object({
-          primarySkills: z
-            .array(z.string())
-            .describe(
-              `list of 15 primary skills for a job position of '${jobPosition}'`
-            ),
+          primarySkills: z.array(z.string()).describe(promptRefined),
         })
       );
 
@@ -229,13 +231,17 @@ const handler: NextApiHandler = async (req, res) => {
     }
 
     if (type === "professionalSkills") {
+      const promptRec = await Prompt.findOne({
+        type: "resume",
+        name: "professionalSkills",
+        active: true,
+      });
+      const promptDB = promptRec.value;
+
+      const promptRefined = promptDB.replace("{{jobPosition}}", jobPosition);
       const parser = StructuredOutputParser.fromZodSchema(
         z.object({
-          professionalSkills: z
-            .array(z.string())
-            .describe(
-              `list of 20 Professional skills, Do not include any skill already mentioned in the primary skills`
-            ),
+          professionalSkills: z.array(z.string()).describe(promptRefined),
         })
       );
 
@@ -264,13 +270,17 @@ const handler: NextApiHandler = async (req, res) => {
     }
 
     if (type === "secondarySkills") {
+      const promptRec = await Prompt.findOne({
+        type: "resume",
+        name: "secondarySkills",
+        active: true,
+      });
+      const promptDB = promptRec.value;
+
+      const promptRefined = promptDB.replace("{{jobPosition}}", jobPosition);
       const parser = StructuredOutputParser.fromZodSchema(
         z.object({
-          secondarySkills: z
-            .array(z.string())
-            .describe(
-              `List of 20 Secondary Supporting Skills do not include any skills which are already mentioned in the primary or professional skills`
-            ),
+          secondarySkills: z.array(z.string()).describe(promptRefined),
         })
       );
 
