@@ -19,7 +19,7 @@ import {
 const ResumeCreator = () => {
   const componentRef = useRef<any>(null);
   const { data: session, status } = useSession();
-  const [jobPosition, setJobPosition] = useState<string>("");
+  const [jobPosition, setJobPosition] = useState<string>("ReactJS Developer");
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
 
   // streamed data
@@ -33,18 +33,18 @@ const ResumeCreator = () => {
     if (jobPosition !== "") {
       if (jobPosition !== "" && session?.user?.email) {
         setMsgLoading(true);
-        await getBasicInfo(jobPosition);
-        await getSummary(jobPosition);
-        await getWorkExperience(jobPosition);
-        await getPrimarySkills(jobPosition);
-        await getProfessionalSkills(jobPosition);
-        await getSecondarySkills(jobPosition);
+        getBasicInfo(jobPosition);
+        getSummary(jobPosition);
+        getWorkExperience(jobPosition);
+        getPrimarySkills(jobPosition);
+        getProfessionalSkills(jobPosition);
+        getSecondarySkills(jobPosition);
       }
     }
   };
 
   const getBasicInfo = async (jobPosition: string) => {
-    dispatch(setLoadingState("basicInfo"));
+    // dispatch(setLoadingState("basicInfo"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
@@ -68,7 +68,7 @@ const ResumeCreator = () => {
   };
 
   const getSummary = async (jobPosition: string) => {
-    dispatch(setLoadingState("summary"));
+    // dispatch(setLoadingState("summary"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
@@ -97,7 +97,7 @@ const ResumeCreator = () => {
   };
 
   const getWorkExperience = async (jobPosition: string) => {
-    dispatch(setLoadingState("workExperience"));
+    // dispatch(setLoadingState("workExperience"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
@@ -121,7 +121,7 @@ const ResumeCreator = () => {
   };
 
   const getPrimarySkills = async (jobPosition: string) => {
-    dispatch(setLoadingState("primarySkills"));
+    // dispatch(setLoadingState("primarySkills"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
@@ -145,7 +145,7 @@ const ResumeCreator = () => {
   };
 
   const getProfessionalSkills = async (jobPosition: string) => {
-    dispatch(setLoadingState("professionalSkills"));
+    // dispatch(setLoadingState("professionalSkills"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
@@ -169,7 +169,7 @@ const ResumeCreator = () => {
   };
 
   const getSecondarySkills = async (jobPosition: string) => {
-    dispatch(setLoadingState("secondarySkills"));
+    // dispatch(setLoadingState("secondarySkills"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
@@ -193,7 +193,7 @@ const ResumeCreator = () => {
       })
       .finally(() => {
         setMsgLoading(false);
-        dispatch(setLoadingState(""));
+        // dispatch(setLoadingState(""));
       });
   };
 
