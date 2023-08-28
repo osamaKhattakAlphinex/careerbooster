@@ -62,8 +62,7 @@ const handler: NextApiHandler = async (req, res) => {
             })
           )
           .describe(
-            // "List of work experience of the person with different companies. Each work experience has the following fields: title, company, companyAddress, from, to"
-            "Rewrite the List of companies I have worked with, including desgination, from date, to date, name of company and job desciption"
+            "Generate a List in which you include all work experience of the person with different companies. Each work experience has the following fields: title, company, companyAddress, from, to"
           ),
       })
     );
