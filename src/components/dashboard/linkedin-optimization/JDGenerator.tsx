@@ -15,46 +15,113 @@ const JDGenerator = ({ setJobDesc }: Props) => {
     setJobDesc(streamedData);
   }, [streamedData]);
 
+  // const handleGenerate = () => {
+  //   setStreamedData("");
+  //   if (session?.user?.email) {
+  //     setMsgLoading(true);
+  //     const formData = {
+  //       email: session?.user?.email,
+  //     };
+  //     fetch("/api/linkedInBots/jdGenerator", {
+  //       method: "POST",
+  //       body: JSON.stringify(formData),
+  //     })
+  //       .then(async (resp: any) => {
+  //         if (resp.ok) {
+  //           // const res = await resp.json();
+  //           // setStreamedData(res.result.output_text);
+  //           const reader = resp.body.getReader();
+  //           while (true) {
+  //             const { done, value } = await reader.read();
+
+  //             if (done) {
+  //               break;
+  //             }
+
+  //             const text = new TextDecoder().decode(value);
+  //             setStreamedData((prev) => prev + text);
+  //           }
+  //         } else {
+  //           setStreamedData("Error! Something went wrong");
+  //         }
+  //         setMsgLoading(false);
+  //       })
+  //       .catch((error) => {
+  //         console.log("Error encountered");
+  //       })
+  //       .finally(() => {
+  //         setMsgLoading(false);
+  //       });
+  //   }
+  // };
+
   const handleGenerate = () => {
     setStreamedData("");
     if (session?.user?.email) {
       setMsgLoading(true);
-      const formData = {
-        email: session?.user?.email,
-      };
-      fetch("/api/linkedInBots/jdGenerator", {
+      fetch("/api/linkedInBots/jdGenerateList", {
         method: "POST",
-        body: JSON.stringify(formData),
-      })
-        .then(async (resp: any) => {
-          if (resp.ok) {
-            // const res = await resp.json();
-            // setStreamedData(res.result.output_text);
-            const reader = resp.body.getReader();
-            while (true) {
-              const { done, value } = await reader.read();
+        body: JSON.stringify({
+          email: session?.user?.email,
+        }),
+      }).then(async (resp: any) => {
+        const res = await resp.json();
+        if (res.success && res?.data) {
+          const myJSON = JSON.parse(res.data);
+          // await myJSON.workExperience.map(async (item: any, index: number) => {
+          //   const { title, company, companyAddress, from, to } = item.fields;
+          //   const formData = {
+          //     email: session?.user?.email,
+          //     title,
+          //     company,
+          //     companyAddress,
+          //     from,
+          //     to,
+          //   };
 
-              if (done) {
-                break;
-              }
+          //   const html = `<strong>${title}</strong>
+          //     <p>${company} - ${companyAddress}</p>
+          //     <p>${from} - ${to}</p><br />`;
+          //   setStreamedData((prev) => prev + html);
+          //   await individualFetch(formData);
+          // });
 
-              const text = new TextDecoder().decode(value);
-              setStreamedData((prev) => prev + text);
-            }
-          } else {
-            setStreamedData("Error! Something went wrong");
-          }
+          await Promise.all(
+            myJSON.workExperience.map(async (item: any, index: number) => {
+              const { title, company, companyAddress, from, to } = item.fields;
+              const formData = {
+                email: session?.user?.email,
+                title,
+                company,
+                companyAddress,
+                from,
+                to,
+              };
+
+              // Wait for the individualFetch function to complete
+              const test = await individualFetch(formData);
+            })
+          );
+
           setMsgLoading(false);
-        })
-        .catch((error) => {
-          console.log("Error encountered");
-        })
-        .finally(() => {
-          setMsgLoading(false);
-        });
+        }
+      });
     }
   };
 
+  const individualFetch = async (formData: any) => {
+    return fetch("/api/linkedInBots/individualDescription", {
+      method: "POST",
+      body: JSON.stringify(formData),
+    }).then(async (resp: any) => {
+      const res = await resp.json();
+      const { data } = res;
+      const html = `<br /><br /><strong>${formData.title}</strong>
+                <p>${formData.company} - ${formData.companyAddress}</p>
+                <p>${formData.from} - ${formData.to}</p><br />${data}`;
+      setStreamedData((prev) => prev + html);
+    });
+  };
   return (
     <div className="w-full card">
       <div className="space-y-4 md:space-y-6">
@@ -82,7 +149,9 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                     d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
                   />
                 </svg>
-                <span>{msgLoading ? "Please wait..." : "Generate About"}</span>
+                <span>
+                  {msgLoading ? "Please wait..." : "Generate Job Description"}
+                </span>
               </div>
             </button>
           </div>
