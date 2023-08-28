@@ -13,7 +13,7 @@ function loadFile(url: any, callback: any) {
   PizZipUtils.getBinaryContent(url, callback);
 }
 
-const DownloadDocx = ({ basicInfo }: any) => {
+const DownloadDocx = ({ basicInfo, disabled }: any) => {
   const generateDocument = () => {
     loadFile("/resume-template72dw.docx", function (error: any, content: any) {
       if (error) {
@@ -98,7 +98,7 @@ const DownloadDocx = ({ basicInfo }: any) => {
   return (
     <div>
       <button
-        disabled={!basicInfo}
+        disabled={disabled || !basicInfo?.name}
         onClick={handleDownloadDocx}
         className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300"
       >

@@ -1,9 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/dashboard/resume-templates/template-1";
 import DownloadDocx from "@/components/dashboard/resume-templates/template-1/DownloadDocx";
 import { useDispatch, useSelector } from "react-redux";
+import ReactToPrint from "react-to-print";
+
 import {
   setBasicInfo,
   setSummary,
@@ -15,6 +17,7 @@ import {
 } from "@/store/resumeSlice";
 
 const ResumeCreator = () => {
+  const componentRef = useRef<any>(null);
   const { data: session, status } = useSession();
   const [jobPosition, setJobPosition] = useState<string>("ReactJS Developer");
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
@@ -75,8 +78,6 @@ const ResumeCreator = () => {
       }),
     }).then(async (resp: any) => {
       if (resp.ok) {
-        // const res = await resp.json();
-        // setStreamedData(res.result.output_text);
         const reader = resp.body.getReader();
         while (true) {
           const { done, value } = await reader.read();
@@ -92,18 +93,6 @@ const ResumeCreator = () => {
       } else {
         setStreamedSummaryData("Error! Something went wrong");
       }
-      // const res = await resp.json();
-      // if (res.success) {
-
-      //   if (res?.data?.text) {
-      //     const tSon = JSON.stringify(res?.data?.text);
-      //     const myJSON = JSON.parse(tSon);
-      //     dispatch(setSummary(myJSON));
-      //   } else if (res?.data) {
-      //     const myJSON = JSON.parse(res.data);
-      //     dispatch(setSummary(myJSON));
-      //   }
-      // }
     });
   };
 
@@ -260,7 +249,51 @@ const ResumeCreator = () => {
                   </div>
                 </button>
               </div>
-              {resumeData && <DownloadDocx basicInfo={resumeData} />}
+
+              {resumeData && (
+                <DownloadDocx
+                  basicInfo={resumeData}
+                  disabled={
+                    jobPosition === "" || msgLoading || !session?.user?.email
+                  }
+                />
+              )}
+              {resumeData && (
+                <>
+                  <ReactToPrint
+                    trigger={() => (
+                      <button
+                        disabled={
+                          jobPosition === "" ||
+                          msgLoading ||
+                          !session?.user?.email ||
+                          !resumeData?.name
+                        }
+                        className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300"
+                      >
+                        <div className="flex flex-row gap-2">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="w-4 h-4"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+                            />
+                          </svg>
+                          <span>Download Resume in PDF</span>
+                        </div>
+                      </button>
+                    )}
+                    content={() => componentRef.current}
+                  />
+                </>
+              )}
             </div>
             {resumeData?.loadingState !== "" && (
               <h3>
@@ -286,7 +319,7 @@ const ResumeCreator = () => {
           resumeData?.contact?.email ||
           resumeData?.summary) && (
           <div className="m-10  w-[95%]  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-            <div className="w-full card">
+            <div className="w-full card" ref={componentRef}>
               <ResumeTemplate1 streamedSummaryData={streamedSummaryData} />
             </div>
           </div>
