@@ -1,23 +1,28 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 
-const ResumeTemplate1 = ({ basicInfo }: any) => {
+import { useSelector } from "react-redux";
+
+const ResumeTemplate1 = ({
+  streamedSummaryData,
+}: {
+  streamedSummaryData: string;
+}) => {
+  const resume = useSelector((state: any) => state.resume);
   return (
     <div className="w-full">
       <div className="flex">
         <div className="flex flex-col w-10/12 p-8">
           <h2 className="text-4xl">
-            {basicInfo?.name ? basicInfo?.name : "FULL NAME"}
+            {resume?.name ? resume?.name : "FULL NAME"}
           </h2>
           <h3 className="text-xl">
-            {basicInfo?.jobTitle ? basicInfo?.jobTitle : "JOB TITLE"}
+            {resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
           </h3>
         </div>
         <div>
           <div className="w-32 h-32 bg-gray-800 text-center p-10 rounded-full">
             <span className="text-4xl text-white">
-              {basicInfo?.shortName ? basicInfo?.shortName : "CPH"}
+              {resume?.shortName ? resume?.shortName : "CPH"}
             </span>
           </div>
         </div>
@@ -30,25 +35,26 @@ const ResumeTemplate1 = ({ basicInfo }: any) => {
           <span className="w-full h-0 border border-gray-500 my-4"></span>
           <ul className="flex flex-col gap-3 mb-4">
             <li>
-              {basicInfo?.contact?.phone
-                ? basicInfo?.contact?.phone
+              {resume?.contact?.phone
+                ? resume?.contact?.phone
                 : "+92 312 1231234"}
             </li>
             <li>
-              {basicInfo?.contact?.email
-                ? basicInfo?.contact?.email
+              {resume?.contact?.email
+                ? resume?.contact?.email
                 : "your@email.com"}
             </li>
             <li>
               <a
                 href={
-                  basicInfo?.contact?.linkedIn
-                    ? basicInfo?.contact?.linkedIn
+                  resume?.contact?.linkedIn
+                    ? resume?.contact?.linkedIn
                     : "https://www.linkedin.com/"
                 }
-                className="text-blue-600">
-                {basicInfo?.contact?.linkedIn
-                  ? basicInfo?.contact?.linkedIn
+                className="text-blue-600"
+              >
+                {resume?.contact?.linkedIn
+                  ? resume?.contact?.linkedIn
                   : "https://www.linkedin.com/"}
               </a>
             </li>
@@ -56,14 +62,14 @@ const ResumeTemplate1 = ({ basicInfo }: any) => {
 
           {/* Skills */}
 
-          {basicInfo?.primarySkills && basicInfo?.primarySkills.length > 0 && (
+          {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <span className="w-full h-0 border border-gray-500 my-4"></span>
               <h3 className="uppercase text-xl font-semibold">Skills</h3>
               <span className="w-full h-0 border border-gray-500 my-4"></span>
               <ul className="flex flex-col gap-2 mb-4">
                 <li className="font-semibold uppercase">primary</li>
-                {basicInfo?.primarySkills.map((skill: string, i: number) => (
+                {resume?.primarySkills.map((skill: string, i: number) => (
                   <li key={i}>{skill}</li>
                 ))}
               </ul>
@@ -71,31 +77,31 @@ const ResumeTemplate1 = ({ basicInfo }: any) => {
           )}
 
           {/* Education */}
-          {basicInfo?.education && (
+          {resume?.education && (
             <>
               <span className="w-full h-0 border border-gray-500 my-4"></span>
               <h3 className="uppercase text-xl font-semibold">Education</h3>
               <span className="w-full h-0 border border-gray-500 my-4"></span>
               <ul className="flex flex-col  mb-4">
                 <li className="font-semibold uppercase">
-                  {basicInfo?.education?.year}
+                  {resume?.education?.year}
                 </li>
-                <li className="uppercase">{basicInfo?.education?.degree} </li>
-                <li>{basicInfo?.education?.school}</li>
+                <li className="uppercase">{resume?.education?.degree} </li>
+                <li>{resume?.education?.school}</li>
               </ul>
             </>
           )}
 
           {/* Skills */}
-          {basicInfo?.professionalSkills &&
-            basicInfo?.professionalSkills.length > 0 && (
+          {resume?.professionalSkills &&
+            resume?.professionalSkills.length > 0 && (
               <>
                 <span className="w-full h-0 border border-gray-500 my-4"></span>
                 <h3 className="uppercase text-xl font-semibold">Skills</h3>
                 <span className="w-full h-0 border border-gray-500 my-4"></span>
                 <ul className="flex flex-col gap-2 mb-4">
                   <li className="font-semibold uppercase">Professional</li>
-                  {basicInfo?.professionalSkills.map(
+                  {resume?.professionalSkills.map(
                     (skill: string, i: number) => (
                       <li key={i}>{skill}</li>
                     )
@@ -106,22 +112,19 @@ const ResumeTemplate1 = ({ basicInfo }: any) => {
 
           {/* Skills */}
 
-          {basicInfo?.secondarySkills &&
-            basicInfo?.secondarySkills.length > 0 && (
-              <>
-                <span className="w-full h-0 border border-gray-500 my-4"></span>
-                <h3 className="uppercase text-xl font-semibold">Skills</h3>
-                <span className="w-full h-0 border border-gray-500 my-4"></span>
-                <ul className="flex flex-col gap-2 mb-4">
-                  <li className="font-semibold uppercase">secondary</li>
-                  {basicInfo?.secondarySkills.map(
-                    (skill: string, i: number) => (
-                      <li key={i}>{skill}</li>
-                    )
-                  )}
-                </ul>
-              </>
-            )}
+          {resume?.secondarySkills && resume?.secondarySkills.length > 0 && (
+            <>
+              <span className="w-full h-0 border border-gray-500 my-4"></span>
+              <h3 className="uppercase text-xl font-semibold">Skills</h3>
+              <span className="w-full h-0 border border-gray-500 my-4"></span>
+              <ul className="flex flex-col gap-2 mb-4">
+                <li className="font-semibold uppercase">secondary</li>
+                {resume?.secondarySkills.map((skill: string, i: number) => (
+                  <li key={i}>{skill}</li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
         <div className="w-full flex flex-col px-8">
           {/* Executive Summary */}
@@ -129,15 +132,16 @@ const ResumeTemplate1 = ({ basicInfo }: any) => {
           <h3 className="uppercase text-xl font-semibold">EXECUTIVE SUMMARY</h3>
           <span className="w-full h-0 border border-gray-500 my-4"></span>
 
-          <p className="text-base">{basicInfo?.summary}</p>
+          <p className="text-base">
+            {streamedSummaryData && streamedSummaryData}
+          </p>
 
           {/* Work Experience */}
           <span className="w-full h-0 border border-gray-500 my-4"></span>
           <h3 className="uppercase text-xl font-semibold">WORK EXPERIENCE</h3>
           <span className="w-full h-0 border border-gray-500 my-4"></span>
-          {/* {basicInfo?.workExperience} */}
-          {basicInfo?.workExperience &&
-            basicInfo?.workExperience.map((record: any, i: number) => {
+          {resume?.workExperience &&
+            resume?.workExperience.map((record: any, i: number) => {
               const { fields: rec } = record;
               return (
                 <div key={i}>

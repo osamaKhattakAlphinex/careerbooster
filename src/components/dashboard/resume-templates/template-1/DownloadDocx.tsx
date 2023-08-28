@@ -94,8 +94,6 @@ const DownloadDocx = ({ basicInfo }: any) => {
   const handleDownloadDocx = () => {
     generateDocument();
   };
-  console.clear();
-  console.log(basicInfo);
 
   return (
     <div>

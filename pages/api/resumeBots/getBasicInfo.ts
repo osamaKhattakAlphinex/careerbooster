@@ -61,10 +61,88 @@ const handler: NextApiHandler = async (req, res) => {
               .string()
               .describe("school / college / university of latest education"),
           }),
-          summary: z.string().describe(
-            `Rewrite a Strong summary for the targeted job position '${jobPosition}' In this executive summary, I want you to provide a professional introduction explaining the present role and framing past job titles. 
-              Highlight successes and the services I can offer to potential clients. Mention achievements, and highlight some of the relevant keywords. The word count should not be more than 150 words`
-          ),
+        })
+      );
+
+      const formatInstructions = parser.getFormatInstructions();
+      const prompt = new PromptTemplate({
+        template:
+          "Answer the users question as best as possible from the provided resume data that you already have about the person.\n{format_instructions}\n{additionalInfo}",
+        inputVariables: ["additionalInfo"],
+        partialVariables: { format_instructions: formatInstructions },
+      });
+
+      const input = await prompt.format({
+        additionalInfo: "Important: >> Answer should be a valid JSON <<",
+      });
+
+      try {
+        const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
+        const resp = await chain4.call({ query: input });
+        return res.status(200).json({
+          success: true,
+          data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+        });
+      } catch (error) {
+        return res.status(400).json({ success: false, error });
+      }
+    }
+
+    if (type === "summary") {
+      const model1 = new OpenAI({
+        streaming: true,
+        modelName: "gpt-3.5-turbo",
+        callbacks: [
+          {
+            handleLLMNewToken(token) {
+              res.write(token);
+            },
+          },
+        ],
+        temperature: 1,
+      });
+      // const parser = StructuredOutputParser.fromZodSchema(
+      //   z.object({
+      //     summary: z.string().describe(
+      //       `Rewrite a Strong summary for the targeted job position '${jobPosition}' In this executive summary, I want you to provide a professional introduction explaining the present role and framing past job titles.
+      //         Highlight successes and the services I can offer to potential clients. Mention achievements, and highlight some of the relevant keywords. The word count should not be more than 150 words`
+      //     ),
+      //   })
+      // );
+
+      // const formatInstructions = parser.getFormatInstructions();
+      // const prompt = new PromptTemplate({
+      //   template:
+      //     "Answer the users question as best as possible from the provided resume data that you already have about the person.\n{format_instructions}\n{additionalInfo}",
+      //   inputVariables: ["additionalInfo"],
+      //   partialVariables: { format_instructions: formatInstructions },
+      // });
+
+      // const input = await prompt.format({
+      //   additionalInfo: "Important: >> Answer should be a valid JSON <<",
+      // });
+
+      try {
+        const promptSummary = `Write a Strong Executive summary for the targeted job position of '${jobPosition}'. In this executive summary, I want you to provide a professional introduction explaining the present role and framing past job titles. 
+               Highlight successes and the services I can offer to potential clients. Mention achievements, and highlight some of the relevant keywords. The word count should not be more than 150 words`;
+        const chain4 = RetrievalQAChain.fromLLM(model1, vectorStoreRetriever);
+        await chain4.call({
+          query: promptSummary,
+        });
+
+        res.end();
+        // return res.status(200).json({
+        //   success: true,
+        //   data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+        // });
+      } catch (error) {
+        return res.status(400).json({ success: false, error });
+      }
+    }
+
+    if (type === "workExperience") {
+      const parser = StructuredOutputParser.fromZodSchema(
+        z.object({
           workExperience: z
             .array(
               z.object({
@@ -88,16 +166,106 @@ const handler: NextApiHandler = async (req, res) => {
             .describe(
               "Rewrite the List of companies I have worked with, including desgination, from date, to date, name of company and job desciption"
             ),
+        })
+      );
+
+      const formatInstructions = parser.getFormatInstructions();
+      const prompt = new PromptTemplate({
+        template:
+          "Answer the users question as best as possible from the provided resume data that you already have about the person.\n{format_instructions}\n{additionalInfo}",
+        inputVariables: ["additionalInfo"],
+        partialVariables: { format_instructions: formatInstructions },
+      });
+
+      const input = await prompt.format({
+        additionalInfo: "Important: >> Answer should be a valid JSON <<",
+      });
+
+      try {
+        const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
+        const resp = await chain4.call({ query: input });
+        return res.status(200).json({
+          success: true,
+          data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+        });
+      } catch (error) {
+        return res.status(400).json({ success: false, error });
+      }
+    }
+
+    if (type === "primarySkills") {
+      const parser = StructuredOutputParser.fromZodSchema(
+        z.object({
           primarySkills: z
             .array(z.string())
             .describe(
               `list of 15 primary skills for a job position of '${jobPosition}'`
             ),
+        })
+      );
+
+      const formatInstructions = parser.getFormatInstructions();
+      const prompt = new PromptTemplate({
+        template:
+          "Answer the users question as best as possible from the provided resume data that you already have about the person.\n{format_instructions}\n{additionalInfo}",
+        inputVariables: ["additionalInfo"],
+        partialVariables: { format_instructions: formatInstructions },
+      });
+
+      const input = await prompt.format({
+        additionalInfo: "Important: >> Answer should be a valid JSON <<",
+      });
+
+      try {
+        const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
+        const resp = await chain4.call({ query: input });
+        return res.status(200).json({
+          success: true,
+          data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+        });
+      } catch (error) {
+        return res.status(400).json({ success: false, error });
+      }
+    }
+
+    if (type === "professionalSkills") {
+      const parser = StructuredOutputParser.fromZodSchema(
+        z.object({
           professionalSkills: z
             .array(z.string())
             .describe(
               `list of 20 Professional skills, Do not include any skill already mentioned in the primary skills`
             ),
+        })
+      );
+
+      const formatInstructions = parser.getFormatInstructions();
+      const prompt = new PromptTemplate({
+        template:
+          "Answer the users question as best as possible from the provided resume data that you already have about the person.\n{format_instructions}\n{additionalInfo}",
+        inputVariables: ["additionalInfo"],
+        partialVariables: { format_instructions: formatInstructions },
+      });
+
+      const input = await prompt.format({
+        additionalInfo: "Important: >> Answer should be a valid JSON <<",
+      });
+
+      try {
+        const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
+        const resp = await chain4.call({ query: input });
+        return res.status(200).json({
+          success: true,
+          data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+        });
+      } catch (error) {
+        return res.status(400).json({ success: false, error });
+      }
+    }
+
+    if (type === "secondarySkills") {
+      const parser = StructuredOutputParser.fromZodSchema(
+        z.object({
           secondarySkills: z
             .array(z.string())
             .describe(
@@ -115,13 +283,16 @@ const handler: NextApiHandler = async (req, res) => {
       });
 
       const input = await prompt.format({
-        additionalInfo: "Answer should be a valid JSON",
+        additionalInfo: "Important: >> Answer should be a valid JSON <<",
       });
 
       try {
         const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
         const resp = await chain4.call({ query: input });
-        return res.status(200).json({ success: true, data: resp });
+        return res.status(200).json({
+          success: true,
+          data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+        });
       } catch (error) {
         return res.status(400).json({ success: false, error });
       }

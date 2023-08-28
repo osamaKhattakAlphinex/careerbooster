@@ -37,7 +37,7 @@ const handler: NextApiHandler = async (req, res) => {
           },
         },
       ],
-      temperature: 0.5,
+      temperature: 1,
     });
 
     // TESTING WITH MEMORY VECTOR STORE

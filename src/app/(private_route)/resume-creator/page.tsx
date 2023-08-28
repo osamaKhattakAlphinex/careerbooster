@@ -3,47 +3,209 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/dashboard/resume-templates/template-1";
 import DownloadDocx from "@/components/dashboard/resume-templates/template-1/DownloadDocx";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setBasicInfo,
+  setSummary,
+  setWorkExperience,
+  setPrimarySkills,
+  setSecondarySkills,
+  setProfessionalSkills,
+  setLoadingState,
+} from "@/store/resumeSlice";
 
 const ResumeCreator = () => {
   const { data: session, status } = useSession();
   const [jobPosition, setJobPosition] = useState<string>("ReactJS Developer");
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
-  const [basicInfo, setBasicInfo] = useState<any>(null);
 
-  const handleGenerate = () => {
+  // streamed data
+  const [streamedSummaryData, setStreamedSummaryData] = useState("");
+
+  // Redux
+  const dispatch = useDispatch();
+  const resumeData = useSelector((state: any) => state.resume);
+
+  const handleGenerate = async () => {
     if (jobPosition !== "") {
       if (jobPosition !== "" && session?.user?.email) {
         setMsgLoading(true);
-        const formData = {
-          type: "basicInfo",
-          email: session?.user?.email,
-          jobPosition,
-        };
-        fetch("/api/resumeBots/getBasicInfo", {
-          method: "POST",
-          body: JSON.stringify(formData),
-        })
-          .then(async (resp: any) => {
-            const res = await resp.json();
-            if (res.success) {
-              if (res?.data?.text) {
-                const tSon = JSON.stringify(res?.data?.text);
-                const myJSON = JSON.parse(tSon);
-                setBasicInfo(myJSON);
-              } else if (res?.data) {
-                const myJSON = JSON.parse(res.data);
-                setBasicInfo(myJSON);
-              }
-            }
-          })
-          .catch((error) => {
-            console.log("Error encountered");
-          })
-          .finally(() => {
-            setMsgLoading(false);
-          });
+        await getBasicInfo(jobPosition);
+        await getSummary(jobPosition);
+        await getWorkExperience(jobPosition);
+        await getPrimarySkills(jobPosition);
+        await getProfessionalSkills(jobPosition);
+        await getSecondarySkills(jobPosition);
       }
     }
+  };
+
+  const getBasicInfo = async (jobPosition: string) => {
+    dispatch(setLoadingState("basicInfo"));
+    return fetch("/api/resumeBots/getBasicInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        type: "basicInfo",
+        email: session?.user?.email,
+        jobPosition: jobPosition,
+      }),
+    }).then(async (resp: any) => {
+      const res = await resp.json();
+      if (res.success) {
+        if (res?.data?.text) {
+          const tSon = JSON.stringify(res?.data?.text);
+          const myJSON = JSON.parse(tSon);
+          dispatch(setBasicInfo(myJSON));
+        } else if (res?.data) {
+          const myJSON = JSON.parse(res.data);
+          dispatch(setBasicInfo(myJSON));
+        }
+      }
+    });
+  };
+
+  const getSummary = async (jobPosition: string) => {
+    dispatch(setLoadingState("summary"));
+    return fetch("/api/resumeBots/getBasicInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        type: "summary",
+        email: session?.user?.email,
+        jobPosition: jobPosition,
+      }),
+    }).then(async (resp: any) => {
+      if (resp.ok) {
+        // const res = await resp.json();
+        // setStreamedData(res.result.output_text);
+        const reader = resp.body.getReader();
+        while (true) {
+          const { done, value } = await reader.read();
+
+          if (done) {
+            break;
+          }
+
+          const text = new TextDecoder().decode(value);
+          setStreamedSummaryData((prev) => prev + text);
+        }
+        dispatch(setSummary(streamedSummaryData));
+      } else {
+        setStreamedSummaryData("Error! Something went wrong");
+      }
+      // const res = await resp.json();
+      // if (res.success) {
+
+      //   if (res?.data?.text) {
+      //     const tSon = JSON.stringify(res?.data?.text);
+      //     const myJSON = JSON.parse(tSon);
+      //     dispatch(setSummary(myJSON));
+      //   } else if (res?.data) {
+      //     const myJSON = JSON.parse(res.data);
+      //     dispatch(setSummary(myJSON));
+      //   }
+      // }
+    });
+  };
+
+  const getWorkExperience = async (jobPosition: string) => {
+    dispatch(setLoadingState("workExperience"));
+    return fetch("/api/resumeBots/getBasicInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        type: "workExperience",
+        email: session?.user?.email,
+        jobPosition: jobPosition,
+      }),
+    }).then(async (resp: any) => {
+      const res = await resp.json();
+      if (res.success) {
+        if (res?.data?.text) {
+          const tSon = JSON.stringify(res?.data?.text);
+          const myJSON = JSON.parse(tSon);
+          dispatch(setWorkExperience(myJSON));
+        } else if (res?.data) {
+          const myJSON = JSON.parse(res.data);
+          dispatch(setWorkExperience(myJSON));
+        }
+      }
+    });
+  };
+
+  const getPrimarySkills = async (jobPosition: string) => {
+    dispatch(setLoadingState("primarySkills"));
+    return fetch("/api/resumeBots/getBasicInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        type: "primarySkills",
+        email: session?.user?.email,
+        jobPosition: jobPosition,
+      }),
+    }).then(async (resp: any) => {
+      const res = await resp.json();
+      if (res.success) {
+        if (res?.data?.text) {
+          const tSon = JSON.stringify(res?.data?.text);
+          const myJSON = JSON.parse(tSon);
+          dispatch(setPrimarySkills(myJSON));
+        } else if (res?.data) {
+          const myJSON = JSON.parse(res.data);
+          dispatch(setPrimarySkills(myJSON));
+        }
+      }
+    });
+  };
+
+  const getProfessionalSkills = async (jobPosition: string) => {
+    dispatch(setLoadingState("professionalSkills"));
+    return fetch("/api/resumeBots/getBasicInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        type: "professionalSkills",
+        email: session?.user?.email,
+        jobPosition: jobPosition,
+      }),
+    }).then(async (resp: any) => {
+      const res = await resp.json();
+      if (res.success) {
+        if (res?.data?.text) {
+          const tSon = JSON.stringify(res?.data?.text);
+          const myJSON = JSON.parse(tSon);
+          dispatch(setProfessionalSkills(myJSON));
+        } else if (res?.data) {
+          const myJSON = JSON.parse(res.data);
+          dispatch(setProfessionalSkills(myJSON));
+        }
+      }
+    });
+  };
+
+  const getSecondarySkills = async (jobPosition: string) => {
+    dispatch(setLoadingState("secondarySkills"));
+    return fetch("/api/resumeBots/getBasicInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        type: "secondarySkills",
+        email: session?.user?.email,
+        jobPosition: jobPosition,
+      }),
+    })
+      .then(async (resp: any) => {
+        const res = await resp.json();
+        if (res.success) {
+          if (res?.data?.text) {
+            const tSon = JSON.stringify(res?.data?.text);
+            const myJSON = JSON.parse(tSon);
+            dispatch(setSecondarySkills(myJSON));
+          } else if (res?.data) {
+            const myJSON = JSON.parse(res.data);
+            dispatch(setSecondarySkills(myJSON));
+          }
+        }
+      })
+      .finally(() => {
+        setMsgLoading(false);
+        dispatch(setLoadingState(""));
+      });
   };
 
   return (
@@ -98,19 +260,34 @@ const ResumeCreator = () => {
                   </div>
                 </button>
               </div>
-              <DownloadDocx basicInfo={basicInfo} />
+              {resumeData && <DownloadDocx basicInfo={resumeData} />}
             </div>
+            {resumeData?.loadingState !== "" && (
+              <h3>
+                AI is Writing...
+                {resumeData?.loadingState === "basicInfo" && "Basic Info"}
+                {resumeData?.loadingState === "summary" && "Summary"}
+                {resumeData?.loadingState === "workExperience" &&
+                  "Work Experience"}
+                {resumeData?.loadingState === "primarySkills" &&
+                  "Primary Skills"}
+                {resumeData?.loadingState === "professionalSkills" &&
+                  "Professional Skills"}
+                {resumeData?.loadingState === "secondarySkills" &&
+                  "Secondary Skills"}
+              </h3>
+            )}
           </div>
         </div>
       </div>
 
-      {basicInfo &&
-        (basicInfo?.name ||
-          basicInfo?.contact?.email ||
-          basicInfo?.summary) && (
+      {resumeData &&
+        (resumeData?.name ||
+          resumeData?.contact?.email ||
+          resumeData?.summary) && (
           <div className="m-10  w-[95%]  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
             <div className="w-full card">
-              <ResumeTemplate1 basicInfo={basicInfo} />
+              <ResumeTemplate1 streamedSummaryData={streamedSummaryData} />
             </div>
           </div>
         )}
