@@ -19,7 +19,7 @@ import {
 const ResumeCreator = () => {
   const componentRef = useRef<any>(null);
   const { data: session, status } = useSession();
-  const [jobPosition, setJobPosition] = useState<string>("ReactJS Developer");
+  const [jobPosition, setJobPosition] = useState<string>("");
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
 
   // streamed data
