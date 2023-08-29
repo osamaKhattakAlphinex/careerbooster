@@ -33,7 +33,7 @@ const AddNewEducationCard = () => {
   const dispatch = useDispatch();
   const stepFour = useSelector((state: any) => state.register.stepFour);
   const { list, state } = stepFour;
-  //
+
   const formik = useFormik({
     initialValues: {
       educationLevel: "",
