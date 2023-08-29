@@ -12,7 +12,7 @@ import StepFour from "@/components/welcome/StepFour";
 import StepFive from "@/components/welcome/StepFive";
 import StepSix from "@/components/welcome/StepSix";
 import ProfileReview from "@/components/welcome/profileReview";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import { setActiveStep } from "@/store/registerSlice";
 
 const Welcome = () => {
@@ -36,6 +36,39 @@ const Welcome = () => {
       router.push(`/welcome?step=${reduxStep}`);
     }
   }, [reduxStep, urlStep]);
+
+  const isNextDisabled = () => {
+    if (register.activeStep === 1 && register.stepOne.isValid === false) {
+      return true;
+    } else if (
+      register.activeStep === 2 &&
+      register.stepTwo.isValid === false
+    ) {
+      return true;
+    } else if (
+      register.activeStep === 3 &&
+      register.stepThree.isValid === false
+    ) {
+      return true;
+    } else if (
+      register.activeStep === 4 &&
+      register.stepFour.isValid === false
+    ) {
+      return true;
+    } else if (
+      register.activeStep === 5 &&
+      register.stepFive.isValid === false
+    ) {
+      return true;
+    } else if (
+      register.activeStep === 6 &&
+      register.stepSix.isValid === false
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <section className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 py-4 !pb-60">
@@ -77,7 +110,8 @@ const Welcome = () => {
             {register.activeStep < 7 && (
               <button
                 type="button"
-                className="w-full flex flex-row justify-center items-center gap-2 bg-gray-900 text-white hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="w-full flex flex-row justify-center items-center gap-2 bg-gray-900 text-white hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                disabled={isNextDisabled()}
                 onClick={(e) => {
                   dispatch(setActiveStep(register.activeStep + 1));
                 }}

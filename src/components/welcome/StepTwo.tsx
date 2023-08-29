@@ -1,4 +1,33 @@
+import { useDispatch, useSelector } from "react-redux";
+import { setStepTwo } from "@/store/registerSlice";
+import { useEffect } from "react";
+
 const StepTwo = () => {
+  // Redux
+  const dispatch = useDispatch();
+  const stepTwo = useSelector((state: any) => state.register.stepTwo);
+
+  useEffect(() => {
+    if (stepTwo.Email) {
+      // check if email is valid or not
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailRegex.test(stepTwo.Email)) {
+        dispatch(setStepTwo({ emailInvalid: false }));
+      } else {
+        dispatch(setStepTwo({ emailInvalid: true }));
+      }
+    }
+    if (
+      stepTwo.phoneNumber &&
+      stepTwo.Email &&
+      stepTwo.emailInvalid === false
+    ) {
+      dispatch(setStepTwo({ isValid: true }));
+    } else {
+      dispatch(setStepTwo({ isValid: false }));
+    }
+  }, [stepTwo.phoneNumber, stepTwo.Email]);
+
   return (
     <>
       <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -17,6 +46,10 @@ const StepTwo = () => {
           name="phone"
           id="phone"
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          value={stepTwo.phoneNumber}
+          onChange={(e) => {
+            dispatch(setStepTwo({ phoneNumber: e.target.value }));
+          }}
         />
       </div>
 
@@ -32,8 +65,19 @@ const StepTwo = () => {
           type="text"
           name="Email"
           id="Email"
-          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          value={stepTwo.Email}
+          onChange={(e) => {
+            dispatch(setStepTwo({ Email: e.target.value }));
+          }}
+          className={`bg-gray-50 border ${
+            stepTwo.emailInvalid ? "border-red-500 outline-red-500" : ""
+          } border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
         />
+        {stepTwo.emailInvalid && (
+          <p className="text-red-500 text-sm">
+            Please enter a valid email address
+          </p>
+        )}
       </div>
       <p className="text-gray-600 ">
         <svg
