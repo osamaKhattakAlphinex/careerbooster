@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import resumeReducer from "./resumeSlice";
+import registerSlice from "./registerSlice";
 
 const store = configureStore({
   reducer: {
     resume: resumeReducer,
+    register: registerSlice,
   },
 });
 
