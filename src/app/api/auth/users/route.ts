@@ -1,12 +1,23 @@
 import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import User from "@/db/schemas/User";
+import { Education, WorkExperience } from "@/store/registerSlice";
 
 interface NewUserRequest {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+  phone: string;
+  contact?: {
+    country?: string;
+    street?: string;
+    cityState?: string;
+    postalCode?: string;
+  };
+  education?: Education[];
+  experience?: WorkExperience[];
+  skills?: string[];
 }
 interface NewUserResponse {
   id: string;
@@ -14,6 +25,16 @@ interface NewUserResponse {
   lastName: string;
   email: string;
   role: string;
+  // phone?: string;
+  // contact?: {
+  //   country?: string;
+  //   street?: string;
+  //   cityState?: string;
+  //   postalCode?: string;
+  // };
+  // education?: Education[];
+  // experience?: WorkExperience[];
+  // skills?: string[];
 }
 
 type NewResponse = NextResponse<{ user?: NewUserResponse; error?: string }>;

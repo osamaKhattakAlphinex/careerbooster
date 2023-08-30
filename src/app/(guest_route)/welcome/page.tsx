@@ -92,8 +92,16 @@ const Welcome = () => {
         email: register.stepTwo.Email,
         password: register.stepEight.password,
         file: resume.uploadedFileName,
-        phone: register.stepTwo.phone,
-        country: register.stepThree.country,
+        phone: register.stepTwo.phoneNumber,
+        contact: {
+          country: register.stepThree.country,
+          street: register.stepThree.street,
+          cityState: register.stepThree.cityState,
+          postalCode: register.stepThree.postalCode,
+        },
+        education: register.stepFour.list,
+        experience: register.stepFive.list,
+        skills: register.stepSix.list,
       };
 
       if (

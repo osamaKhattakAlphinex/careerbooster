@@ -30,10 +30,15 @@ const UserSchema = new Schema(
       unique: true,
       required: true,
     },
-    country: {
-      type: String,
-      required: true,
+    contact: {
+      country: String,
+      street: String,
+      cityState: String,
+      postalCode: String,
     },
+    education: [],
+    experience: [],
+    skills: [],
     role: {
       type: String,
       default: "user",
