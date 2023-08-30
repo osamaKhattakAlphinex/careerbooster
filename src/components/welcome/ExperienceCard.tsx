@@ -1,6 +1,6 @@
-import { Education } from "@/store/registerSlice";
+import { WorkExperience } from "@/store/registerSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setStepFour } from "@/store/registerSlice";
+import { setStepFive } from "@/store/registerSlice";
 
 const plusIcon = (
   <svg
@@ -18,16 +18,16 @@ const plusIcon = (
     />
   </svg>
 );
-const EducationCard = ({ rec }: { rec: Education }) => {
+const ExperienceCard = ({ rec }: { rec: WorkExperience }) => {
   const dispatch = useDispatch();
-  const stepFour = useSelector((state: any) => state.register.stepFour);
-  const { list, state } = stepFour;
+  const stepFive = useSelector((state: any) => state.register.stepFive);
+  const { list, state } = stepFive;
   const handleEdit = (id: string) => {
-    dispatch(setStepFour({ state: "edit", editId: id }));
+    dispatch(setStepFive({ state: "edit", editId: id }));
   };
   const handleDelete = (id: string) => {
-    const newList = list.filter((rec: Education) => rec.id !== id);
-    dispatch(setStepFour({ list: newList }));
+    const newList = list.filter((rec: WorkExperience) => rec.id !== id);
+    dispatch(setStepFive({ list: newList }));
   };
   return (
     <div
@@ -36,27 +36,27 @@ const EducationCard = ({ rec }: { rec: Education }) => {
     >
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-md font-semibold w-[80%]">
-          {rec.educationLevel ? (
-            rec.educationLevel
+          {rec.jobTitle ? (
+            rec.jobTitle
           ) : (
             <button
               onClick={(e) => handleEdit(rec.id)}
               className="flex flex-row gap-1 my-2 font-semibold text-blue-600  hover:text-blue-900"
             >
               {plusIcon}
-              Add Education Level
+              Add job title
             </button>
           )}
           {" in "}
-          {rec.fieldOfStudy ? (
-            rec.fieldOfStudy
+          {rec.company ? (
+            rec.company
           ) : (
             <button
               onClick={(e) => handleEdit(rec.id)}
               className="flex flex-row gap-1 my-2 font-semibold text-blue-600  hover:text-blue-900"
             >
               {plusIcon}
-              Add Field of study
+              Add company
             </button>
           )}
         </h2>
@@ -102,29 +102,29 @@ const EducationCard = ({ rec }: { rec: Education }) => {
         </div>
       </div>
       <p className="text-md">
-        {rec.schoolName ? (
-          rec.schoolName
+        {rec.country ? (
+          rec.country
         ) : (
           <button
             onClick={(e) => handleEdit(rec.id)}
             className="flex flex-row gap-1 my-2 font-semibold text-blue-600  hover:text-blue-900"
           >
             {plusIcon}
-            Add School Name
+            Add country
           </button>
         )}
       </p>
       {/* <h3 className="text-sm text-gray-600">Islamabad, Pakistan</h3> */}
       <h3 className="text-sm text-gray-600">
-        {rec.schoolLocation ? (
-          rec.schoolLocation
+        {rec.cityState ? (
+          rec.cityState
         ) : (
           <button
             onClick={(e) => handleEdit(rec.id)}
             className="flex flex-row gap-1 my-2 font-semibold text-blue-600  hover:text-blue-900"
           >
             {plusIcon}
-            Add Location
+            Add city, state
           </button>
         )}
       </h3>
@@ -181,7 +181,20 @@ const EducationCard = ({ rec }: { rec: Education }) => {
           </>
         )}
       </p>
+      <p className="text-md">
+        {rec.description ? (
+          rec.description
+        ) : (
+          <button
+            onClick={(e) => handleEdit(rec.id)}
+            className="flex flex-row gap-1 my-2 font-semibold text-blue-600  hover:text-blue-900"
+          >
+            {plusIcon}
+            Add Description
+          </button>
+        )}
+      </p>
     </div>
   );
 };
-export default EducationCard;
+export default ExperienceCard;

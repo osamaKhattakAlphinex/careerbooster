@@ -1,17 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setStepFive } from "@/store/registerSlice";
+import { WorkExperience, setStepFive } from "@/store/registerSlice";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { makeid } from "@/helpers/makeid";
+import { useEffect } from "react";
 import ExperienceForm from "./ExperienceForm";
 
-const AddNewExperienceCard = () => {
+const EditExperienceCard = () => {
   const dispatch = useDispatch();
   const stepFive = useSelector((state: any) => state.register.stepFive);
-  const { list } = stepFive;
+  const { list, state, editId } = stepFive;
 
   const formik = useFormik({
     initialValues: {
+      id: "",
       jobTitle: "",
       company: "",
       country: "",
@@ -27,17 +28,36 @@ const AddNewExperienceCard = () => {
       jobTitle: Yup.string().required("Job title is required"),
     }),
     onSubmit: async (values) => {
-      // generate random id
-      const obj = { id: makeid(), ...values };
-      dispatch(setStepFive({ list: [obj, ...list] }));
+      const listWithoutCurrent = list.filter(
+        (rec: WorkExperience) => rec.id !== editId
+      );
+      dispatch(setStepFive({ list: [values, ...listWithoutCurrent] }));
       dispatch(setStepFive({ state: "show" }));
     },
   });
 
+  useEffect(() => {
+    const foundRec = list.find((rec: WorkExperience) => rec.id === editId);
+
+    formik.setValues({
+      id: foundRec.id,
+      jobTitle: foundRec.jobTitle,
+      company: foundRec.company,
+      country: foundRec.country,
+      cityState: foundRec.cityState,
+      fromMonth: foundRec.fromMonth,
+      fromYear: foundRec.fromYear,
+      isContinue: foundRec.isContinue,
+      toMonth: foundRec.toMonth,
+      toYear: foundRec.toYear,
+      description: foundRec.description,
+    });
+  }, [list]);
+
   return (
     <div className="w-full max-w-md mx-auto p-6 border rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">
-        Add Experience
+        Update Experience
         <button
           type="button"
           onClick={(e) => dispatch(setStepFive({ state: "show" }))}
@@ -64,4 +84,4 @@ const AddNewExperienceCard = () => {
     </div>
   );
 };
-export default AddNewExperienceCard;
+export default EditExperienceCard;

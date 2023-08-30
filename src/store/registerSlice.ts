@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface Education {
+export interface Education {
+  id: string;
   educationLevel: string;
   fieldOfStudy?: string;
   schoolName?: string;
@@ -11,7 +12,8 @@ interface Education {
   toMonth?: string;
   toYear?: string;
 }
-interface WorkExperience {
+export interface WorkExperience {
+  id: string;
   jobTitle: string;
   company?: string;
   country?: string;
@@ -46,10 +48,13 @@ interface RegisterSlice {
   stepFour: {
     list?: Education[];
     isValid: boolean;
+    editId?: string;
     state: string;
   };
   stepFive: {
     list?: WorkExperience[];
+    editId?: string;
+    state: string;
     isValid: boolean;
   };
   stepSix: {
@@ -81,10 +86,13 @@ const initialState: RegisterSlice = {
   stepFour: {
     list: [],
     state: "show",
+    editId: "",
     isValid: true,
   },
   stepFive: {
     list: [],
+    state: "show",
+    editId: "",
     isValid: true,
   },
   stepSix: {

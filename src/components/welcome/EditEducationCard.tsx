@@ -1,17 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setStepFour } from "@/store/registerSlice";
+import { Education, setStepFour } from "@/store/registerSlice";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { makeid } from "@/helpers/makeid";
+
+import { useEffect } from "react";
 import EducationForm from "./EducationForm";
 
-const AddNewEducationCard = () => {
+const EditEducationCard = () => {
   const dispatch = useDispatch();
   const stepFour = useSelector((state: any) => state.register.stepFour);
-  const { list } = stepFour;
+  const { list, state, editId } = stepFour;
 
   const formik = useFormik({
     initialValues: {
+      id: "",
       educationLevel: "",
       fieldOfStudy: "",
       schoolName: "",
@@ -26,17 +28,35 @@ const AddNewEducationCard = () => {
       educationLevel: Yup.string().required("Education Level is Required"),
     }),
     onSubmit: async (values) => {
-      // generate random id
-      const obj = { id: makeid(), ...values };
-      dispatch(setStepFour({ list: [obj, ...list] }));
+      const listWithoutCurrent = list.filter(
+        (rec: Education) => rec.id !== editId
+      );
+      dispatch(setStepFour({ list: [values, ...listWithoutCurrent] }));
       dispatch(setStepFour({ state: "show" }));
     },
   });
 
+  useEffect(() => {
+    const foundRec = list.find((rec: Education) => rec.id === editId);
+
+    formik.setValues({
+      id: foundRec.id,
+      educationLevel: foundRec.educationLevel,
+      fieldOfStudy: foundRec.fieldOfStudy,
+      schoolName: foundRec.schoolName,
+      schoolLocation: foundRec.schoolLocation,
+      fromMonth: foundRec.fromMonth,
+      fromYear: foundRec.fromYear,
+      isContinue: foundRec.isContinue,
+      toMonth: foundRec.toMonth,
+      toYear: foundRec.toYear,
+    });
+  }, [list]);
+
   return (
     <div className="w-full max-w-md mx-auto p-6 border rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">
-        Add Education
+        Update Education
         <button
           type="button"
           onClick={(e) => dispatch(setStepFour({ state: "show" }))}
@@ -63,4 +83,4 @@ const AddNewEducationCard = () => {
     </div>
   );
 };
-export default AddNewEducationCard;
+export default EditEducationCard;
