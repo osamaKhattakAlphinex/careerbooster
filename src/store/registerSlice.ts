@@ -30,6 +30,12 @@ interface RegisterSlice {
   isSubmitting: boolean;
   error: string;
   terms: boolean;
+  scrapped: {
+    basic: boolean;
+    education: boolean;
+    workExperience: boolean;
+    skills: boolean;
+  };
   stepOne: {
     firstName?: string;
     lastName?: string;
@@ -76,6 +82,12 @@ const initialState: RegisterSlice = {
   isSubmitting: false,
   terms: false,
   error: "",
+  scrapped: {
+    basic: false,
+    education: false,
+    workExperience: false,
+    skills: false,
+  },
   stepOne: {
     firstName: "",
     lastName: "",
@@ -125,6 +137,15 @@ const registerSlice = createSlice({
       return {
         ...state,
         activeStep: action.payload,
+      };
+    },
+    setScrapped(state, action) {
+      return {
+        ...state,
+        scrapped: {
+          ...state.scrapped,
+          ...action.payload,
+        },
       };
     },
     setIsSubmitting(state, action) {
@@ -216,6 +237,7 @@ export const {
   setIsSubmitting,
   setError,
   setTerms,
+  setScrapped,
   setStepOne,
   setStepTwo,
   setStepThree,

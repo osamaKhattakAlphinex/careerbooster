@@ -15,10 +15,18 @@ import {
   setActiveStep,
   setError,
   setIsSubmitting,
+  setScrapped,
+  setStepFive,
+  setStepFour,
+  setStepOne,
+  setStepSix,
+  setStepThree,
+  setStepTwo,
 } from "@/store/registerSlice";
 import StepEight from "@/components/welcome/StepEight";
 import { checkIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
+import { makeid } from "@/helpers/makeid";
 
 const Welcome = () => {
   const router = useRouter();
@@ -31,7 +39,7 @@ const Welcome = () => {
   const reduxStep = state.register.activeStep;
 
   useEffect(() => {
-    dispatch(setError(""));
+    // dispatch(setError(""));
     // if step exists in url and activeStep from redux is 0 then set activeStep to step
     if (reduxStep === 0 && urlStep) {
       router.push(`/welcome?step=${urlStep}`);
@@ -41,6 +49,39 @@ const Welcome = () => {
       router.push(`/welcome?step=1`);
     } else if (reduxStep !== 0) {
       router.push(`/welcome?step=${reduxStep}`);
+    }
+
+    // data scraping from file
+    if (
+      (reduxStep === 1 || reduxStep === 2 || reduxStep === 3) &&
+      resume.uploadedFileName &&
+      resume.uploadedFileName !== ""
+    ) {
+      fetchBasicDataFromResume();
+    }
+
+    if (
+      reduxStep === 4 &&
+      resume.uploadedFileName &&
+      resume.uploadedFileName !== ""
+    ) {
+      fetchEducationDataFromResume();
+    }
+
+    if (
+      reduxStep === 5 &&
+      resume.uploadedFileName &&
+      resume.uploadedFileName !== ""
+    ) {
+      fetchExperienceDataFromResume();
+    }
+
+    if (
+      reduxStep === 6 &&
+      resume.uploadedFileName &&
+      resume.uploadedFileName !== ""
+    ) {
+      fetchSkillsDataFromResume();
     }
   }, [reduxStep, urlStep]);
 
@@ -82,10 +123,10 @@ const Welcome = () => {
     }
   };
 
+  // Registration functions
   const handleCreateAccount = () => {
     if (register.terms) {
       dispatch(setIsSubmitting(true));
-      dispatch(setError(""));
 
       const obj = {
         firstName: register.stepOne.firstName,
@@ -150,7 +191,6 @@ const Welcome = () => {
       }
     }
   };
-
   const moveResumeToUserFolder = async (fileName: string, email: string) => {
     if (fileName && email) {
       const obj = {
@@ -160,12 +200,154 @@ const Welcome = () => {
       return axios.post(`/api/users/moveResumeToUserFolder`, obj);
     }
   };
-
   const updateUser = (file: string, email: string) => {
     if (file && email) {
       return axios.post("/api/users/updateUser", {
         newFile: file,
         email: email,
+      });
+    }
+  };
+  // Registration Functions End
+
+  // file scrapping functions end
+  const fetchBasicDataFromResume = () => {
+    if (register.scrapped.basic === false && resume.uploadedFileName) {
+      const formData = {
+        type: "basicInfo",
+        file: resume.uploadedFileName,
+      };
+
+      fetch("/api/homepage/fetchRegistrationData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      }).then(async (resp: any) => {
+        const res = await resp.json();
+
+        if (res.success) {
+          if (res?.data?.text) {
+            const data = JSON.parse(res?.data?.text);
+            dispatch(
+              setStepOne({
+                firstName: data.firstName,
+                lastName: data.lastName,
+              })
+            );
+            dispatch(
+              setStepTwo({
+                phoneNumber: data.phone,
+                Email: data.email,
+              })
+            );
+            dispatch(
+              setStepThree({
+                country: data.country,
+                street: data.street,
+                cityState: data.cityState,
+                postalCode: data.postalCode,
+              })
+            );
+            dispatch(setScrapped({ basic: true }));
+          }
+        }
+      });
+    }
+  };
+
+  const fetchEducationDataFromResume = () => {
+    if (register.scrapped.education === false && resume.uploadedFileName) {
+      const formData = {
+        file: resume.uploadedFileName,
+      };
+
+      fetch("/api/homepage/fetchEducationData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      }).then(async (resp: any) => {
+        const res = await resp.json();
+
+        if (res.success) {
+          if (res?.data?.text) {
+            const data = JSON.parse(res?.data?.text);
+            const formattedArr = data?.education.map((item: any) => {
+              return {
+                id: makeid(),
+                educationLevel: item.fields.educationLevel,
+                fieldOfStudy: item.fields.fieldOfStudy,
+                schoolName: item.fields.schoolName,
+                schoolLocation: item.fields.schoolLocation,
+                fromMonth: item.fields.fromMonth,
+                fromYear: item.fields.fromYear,
+                isContinue: item.fields.isContinue,
+                toMonth: item.fields.toMonth,
+                toYear: item.fields.toYear,
+              };
+            });
+            dispatch(setStepFour({ list: formattedArr }));
+            dispatch(setScrapped({ education: true }));
+          }
+        }
+      });
+    }
+  };
+
+  const fetchExperienceDataFromResume = () => {
+    if (register.scrapped.workExperience === false && resume.uploadedFileName) {
+      const formData = {
+        file: resume.uploadedFileName,
+      };
+
+      fetch("/api/homepage/fetchExperienceData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      }).then(async (resp: any) => {
+        const res = await resp.json();
+
+        if (res.success) {
+          if (res?.data?.text) {
+            const data = JSON.parse(res?.data?.text);
+            const formattedArr = data?.education.map((item: any) => {
+              return {
+                id: makeid(),
+                jobTitle: item.fields.jobTitle,
+                company: item.fields.company,
+                country: item.fields.country,
+                cityState: item.fields.cityState,
+                fromMonth: item.fields.fromMonth,
+                fromYear: item.fields.fromYear,
+                isContinue: item.fields.isContinue,
+                toMonth: item.fields.toMonth,
+                toYear: item.fields.toYear,
+                description: item.fields.description,
+              };
+            });
+            dispatch(setStepFive({ list: formattedArr }));
+            dispatch(setScrapped({ workExperience: true }));
+          }
+        }
+      });
+    }
+  };
+
+  const fetchSkillsDataFromResume = () => {
+    if (register.scrapped.skills === false && resume.uploadedFileName) {
+      const formData = {
+        file: resume.uploadedFileName,
+      };
+
+      fetch("/api/homepage/fetchSkillsData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      }).then(async (resp: any) => {
+        const res = await resp.json();
+
+        if (res.success) {
+          if (res?.data?.text) {
+            const data = JSON.parse(res?.data?.text);
+            dispatch(setStepSix({ list: data.skills }));
+            dispatch(setScrapped({ skills: true }));
+          }
+        }
       });
     }
   };
@@ -213,7 +395,15 @@ const Welcome = () => {
                 className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2"
                 role="alert"
               >
-                <p>{register.error}</p>
+                <p>
+                  {register.error}
+                  <span
+                    onClick={() => dispatch(setError(""))}
+                    className="font-bold float-right m-2"
+                  >
+                    X
+                  </span>
+                </p>
               </div>
             )}
             {register.activeStep < 8 && (

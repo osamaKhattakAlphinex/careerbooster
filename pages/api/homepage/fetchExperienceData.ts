@@ -36,22 +36,49 @@ const handler: NextApiHandler = async (req, res) => {
       const vectorStoreRetriever = vectorStore.asRetriever();
 
       const parser = StructuredOutputParser.fromZodSchema(
-        z
-          .object({
-            firstName: z.string().describe("First Name"),
-            lastName: z.string().describe("Last Name"),
-            email: z.string().describe("Email Address"),
-            phone: z.string().describe("Phone / Mobile Number"),
-            country: z.string().describe("Country Name"),
-            street: z.string().describe("Street Address"),
-            cityState: z.string().describe("City and State Name"),
-            postalCode: z
-              .string()
-              .describe(
-                "Postal Code from the provided data or get from the name of the City"
-              ),
-          })
-          .describe("If value of a field not found leave it blank string")
+        z.object({
+          education: z
+            .array(
+              z.object({
+                fields: z.object({
+                  // id: z.string().describe("random non-repeated id"),
+                  jobTitle: z.string().describe("Job Title e.g. Software Dev"),
+                  company: z
+                    .string()
+                    .describe("Company Name e.g. Google, Facebook, etc"),
+                  country: z
+                    .string()
+                    .describe("Country Name e.g. Nigeria, United States, etc"),
+                  cityState: z
+                    .string()
+                    .describe(
+                      "City and State e.g. Lagos, Lagos State, New York, New York State, etc"
+                    ),
+                  fromMonth: z
+                    .string()
+                    .describe("From Month in full e.g May, January"),
+                  fromYear: z
+                    .string()
+                    .describe("From Year in full e.g 2023, 1997"),
+                  isContinue: z
+                    .boolean()
+                    .describe("Is Education continued? e.g true, false"),
+                  toMonth: z
+                    .string()
+                    .describe("To Month in full e.g May, January"),
+                  toYear: z.string().describe("To Year in full e.g 2023, 1997"),
+                  description: z
+                    .string()
+                    .describe(
+                      "Short Description About the Job e.g I did this and that"
+                    ),
+                }),
+              })
+            )
+            .describe(
+              "List of all Educations from the provided Data without Skipping any of the Education. Each education has the following fields: id, company, educationLevel, fieldOfStudy, schoolName, schoolLocation, fromMonth, fromYear, isContinue, toMonth, toYear"
+            ),
+        })
       );
 
       const formatInstructions = parser.getFormatInstructions();

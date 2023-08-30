@@ -36,22 +36,13 @@ const handler: NextApiHandler = async (req, res) => {
       const vectorStoreRetriever = vectorStore.asRetriever();
 
       const parser = StructuredOutputParser.fromZodSchema(
-        z
-          .object({
-            firstName: z.string().describe("First Name"),
-            lastName: z.string().describe("Last Name"),
-            email: z.string().describe("Email Address"),
-            phone: z.string().describe("Phone / Mobile Number"),
-            country: z.string().describe("Country Name"),
-            street: z.string().describe("Street Address"),
-            cityState: z.string().describe("City and State Name"),
-            postalCode: z
-              .string()
-              .describe(
-                "Postal Code from the provided data or get from the name of the City"
-              ),
-          })
-          .describe("If value of a field not found leave it blank string")
+        z.object({
+          skills: z
+            .array(z.string())
+            .describe(
+              "List of all Professional, primary, secondary, development, communicatione etc. Skills"
+            ),
+        })
       );
 
       const formatInstructions = parser.getFormatInstructions();

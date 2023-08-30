@@ -32,7 +32,8 @@ const UploadPDFResume = () => {
           if (res.success) {
             const uploadedFileName = res.fileName + "_" + file.name;
             dispatch(setUploadedFileName(uploadedFileName));
-            fetchRegistrationDataFromResume(uploadedFileName);
+            // fetchRegistrationDataFromResume(uploadedFileName);
+            router.replace("/welcome?step=1");
             // setSuccessMsg("File has been uploaded!");
           } else {
             setFileError("Something went wrong");
@@ -56,39 +57,6 @@ const UploadPDFResume = () => {
       setFileError("only PDF file is allowed");
     }
   }, [file]);
-
-  const fetchRegistrationDataFromResume = (uploadedFileName: string) => {
-    if (uploadedFileName) {
-      const formData = {
-        type: "basicInfo",
-        file: uploadedFileName,
-      };
-
-      fetch("/api/homepage/fetchRegistrationData", {
-        method: "POST",
-        body: JSON.stringify(formData),
-      })
-        .then(async (resp: any) => {
-          const res = await resp.json();
-
-          if (res.success) {
-            if (res?.data?.text) {
-              const userData = JSON.parse(res?.data?.text);
-              router.replace(
-                `/register?firstName=${slugify(
-                  userData.firstName
-                )}&lastName=${slugify(userData.lastName)}&email=${
-                  userData.email
-                }&file=${uploadedFileName}`
-              );
-            }
-          }
-        })
-        .finally(() => {
-          setFileUploading(false);
-        });
-    }
-  };
 
   return (
     <>
