@@ -24,7 +24,11 @@ import {
   setStepTwo,
 } from "@/store/registerSlice";
 import StepEight from "@/components/welcome/StepEight";
-import { checkIcon, refreshIconRotating } from "@/helpers/iconsProvider";
+import {
+  checkIcon,
+  refreshBigIconRotating,
+  refreshIconRotating,
+} from "@/helpers/iconsProvider";
 import axios from "axios";
 import { makeid } from "@/helpers/makeid";
 
@@ -212,6 +216,7 @@ const Welcome = () => {
 
   // file scrapping functions end
   const fetchBasicDataFromResume = () => {
+    console.log("fetchBasicDataFromResume");
     if (register.scrapped.basic === false && resume.uploadedFileName) {
       const formData = {
         type: "basicInfo",
@@ -227,6 +232,7 @@ const Welcome = () => {
         if (res.success) {
           if (res?.data?.text) {
             const data = JSON.parse(res?.data?.text);
+            dispatch(setScrapped({ basic: true }));
             dispatch(
               setStepOne({
                 firstName: data.firstName,
@@ -247,7 +253,6 @@ const Welcome = () => {
                 postalCode: data.postalCode,
               })
             );
-            dispatch(setScrapped({ basic: true }));
           }
         }
       });
@@ -255,6 +260,7 @@ const Welcome = () => {
   };
 
   const fetchEducationDataFromResume = () => {
+    console.log("fetchEducationDataFromResume");
     if (register.scrapped.education === false && resume.uploadedFileName) {
       const formData = {
         file: resume.uploadedFileName,
@@ -283,8 +289,8 @@ const Welcome = () => {
                 toYear: item.fields.toYear,
               };
             });
-            dispatch(setStepFour({ list: formattedArr }));
             dispatch(setScrapped({ education: true }));
+            dispatch(setStepFour({ list: formattedArr }));
           }
         }
       });
@@ -292,6 +298,7 @@ const Welcome = () => {
   };
 
   const fetchExperienceDataFromResume = () => {
+    console.log("fetchExperienceDataFromResume");
     if (register.scrapped.workExperience === false && resume.uploadedFileName) {
       const formData = {
         file: resume.uploadedFileName,
@@ -321,8 +328,8 @@ const Welcome = () => {
                 description: item.fields.description,
               };
             });
-            dispatch(setStepFive({ list: formattedArr }));
             dispatch(setScrapped({ workExperience: true }));
+            dispatch(setStepFive({ list: formattedArr }));
           }
         }
       });
@@ -330,6 +337,7 @@ const Welcome = () => {
   };
 
   const fetchSkillsDataFromResume = () => {
+    console.log("fetchSkillsDataFromResume");
     if (register.scrapped.skills === false && resume.uploadedFileName) {
       const formData = {
         file: resume.uploadedFileName,
@@ -344,8 +352,8 @@ const Welcome = () => {
         if (res.success) {
           if (res?.data?.text) {
             const data = JSON.parse(res?.data?.text);
-            dispatch(setStepSix({ list: data.skills }));
             dispatch(setScrapped({ skills: true }));
+            dispatch(setStepSix({ list: data.skills }));
           }
         }
       });
@@ -381,12 +389,69 @@ const Welcome = () => {
               </button>
             )}
 
-            {register.activeStep === 1 && <StepOne />}
-            {register.activeStep === 2 && <StepTwo />}
-            {register.activeStep === 3 && <StepThree />}
-            {register.activeStep === 4 && <StepFour />}
-            {register.activeStep === 5 && <StepFive />}
-            {register.activeStep === 6 && <StepSix />}
+            {(register.activeStep === 1 ||
+              register.activeStep === 2 ||
+              register.activeStep === 3) &&
+            resume.uploadedFileName !== "" &&
+            register.scrapped.basic === false ? (
+              <div className="flex flex-col items-center gap-4 justify-center p-10">
+                {refreshBigIconRotating}
+
+                <h1>
+                  Please wait while AI is fetching your basic information from
+                  the Resume
+                </h1>
+              </div>
+            ) : (
+              <>
+                {register.activeStep === 1 && <StepOne />}
+                {register.activeStep === 2 && <StepTwo />}
+                {register.activeStep === 3 && <StepThree />}
+              </>
+            )}
+            {register.activeStep === 4 &&
+            resume.uploadedFileName !== "" &&
+            register.scrapped.education === false ? (
+              <div className="flex flex-col items-center gap-4 justify-center p-10">
+                {refreshBigIconRotating}
+
+                <h1>
+                  Please wait while AI is fetching your education details from
+                  the Resume
+                </h1>
+              </div>
+            ) : (
+              <>{register.activeStep === 4 && <StepFour />}</>
+            )}
+            {register.activeStep === 5 &&
+            resume.uploadedFileName !== "" &&
+            register.scrapped.workExperience === false ? (
+              <div className="flex flex-col items-center gap-4 justify-center p-10">
+                {refreshBigIconRotating}
+
+                <h1>
+                  Please wait while AI is fetching your work experience from the
+                  Resume
+                </h1>
+              </div>
+            ) : (
+              <>{register.activeStep === 5 && <StepFive />}</>
+            )}
+
+            {register.activeStep === 6 &&
+            resume.uploadedFileName !== "" &&
+            register.scrapped.skills === false ? (
+              <div className="flex flex-col items-center gap-4 justify-center p-10">
+                {refreshBigIconRotating}
+
+                <h1>
+                  Please wait while AI is fetching your Skills from the Resume
+                </h1>
+              </div>
+            ) : (
+              <>{register.activeStep === 6 && <StepSix />}</>
+            )}
+
             {register.activeStep === 7 && <ProfileReview />}
             {register.activeStep === 8 && <StepEight />}
 
