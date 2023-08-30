@@ -26,21 +26,21 @@ const EducationCard = ({ rec }: { rec: Education }) => {
     dispatch(setStepFour({ state: "edit", editId: id }));
   };
   const handleDelete = (id: string) => {
-    const newList = list.filter((rec: Education) => rec.id !== id);
+    const newList = list.filter((rec: Education) => rec?.id !== id);
     dispatch(setStepFour({ list: newList }));
   };
   return (
     <div
       className="w-full bg-white rounded-lg shadow-md p-6 border"
-      key={rec.id}
+      key={rec?.id}
     >
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-md font-semibold w-[80%]">
-          {rec.educationLevel ? (
-            rec.educationLevel
+          {rec?.educationLevel ? (
+            rec?.educationLevel
           ) : (
             <button
-              onClick={(e) => handleEdit(rec.id)}
+              onClick={(e) => handleEdit(rec?.id)}
               className="flex flex-row gap-1 my-2 font-semibold text-blue-600  hover:text-blue-900"
             >
               {plusIcon}
@@ -48,11 +48,11 @@ const EducationCard = ({ rec }: { rec: Education }) => {
             </button>
           )}
           {" in "}
-          {rec.fieldOfStudy ? (
-            rec.fieldOfStudy
+          {rec?.fieldOfStudy ? (
+            rec?.fieldOfStudy
           ) : (
             <button
-              onClick={(e) => handleEdit(rec.id)}
+              onClick={(e) => handleEdit(rec?.id)}
               className="flex flex-row gap-1 my-2 font-semibold text-blue-600  hover:text-blue-900"
             >
               {plusIcon}
@@ -63,7 +63,7 @@ const EducationCard = ({ rec }: { rec: Education }) => {
         <div className="space-x-2">
           <button
             className="text-blue-500 hover:text-blue-700"
-            onClick={(e) => handleEdit(rec.id)}
+            onClick={(e) => handleEdit(rec?.id)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@ const EducationCard = ({ rec }: { rec: Education }) => {
           </button>
           <button
             className="text-red-500 hover:text-red-700"
-            onClick={(e) => handleDelete(rec.id)}
+            onClick={(e) => handleDelete(rec?.id)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -102,11 +102,11 @@ const EducationCard = ({ rec }: { rec: Education }) => {
         </div>
       </div>
       <p className="text-md">
-        {rec.schoolName ? (
-          rec.schoolName
+        {rec?.schoolName ? (
+          rec?.schoolName
         ) : (
           <button
-            onClick={(e) => handleEdit(rec.id)}
+            onClick={(e) => handleEdit(rec?.id)}
             className="flex flex-row gap-1 my-2 font-semibold text-blue-600  hover:text-blue-900"
           >
             {plusIcon}
@@ -116,11 +116,11 @@ const EducationCard = ({ rec }: { rec: Education }) => {
       </p>
       {/* <h3 className="text-sm text-gray-600">Islamabad, Pakistan</h3> */}
       <h3 className="text-sm text-gray-600">
-        {rec.schoolLocation ? (
-          rec.schoolLocation
+        {rec?.schoolLocation ? (
+          rec?.schoolLocation
         ) : (
           <button
-            onClick={(e) => handleEdit(rec.id)}
+            onClick={(e) => handleEdit(rec?.id)}
             className="flex flex-row gap-1 my-2 font-semibold text-blue-600  hover:text-blue-900"
           >
             {plusIcon}
@@ -129,22 +129,22 @@ const EducationCard = ({ rec }: { rec: Education }) => {
         )}
       </h3>
       <p className="text-sm text-gray-400">
-        {rec.fromMonth ? (
-          rec.fromMonth
+        {rec?.fromMonth ? (
+          rec?.fromMonth
         ) : (
           <button
-            onClick={(e) => handleEdit(rec.id)}
+            onClick={(e) => handleEdit(rec?.id)}
             className="flex flex-row gap-1 my-2 font-semibold text-blue-600  hover:text-blue-900"
           >
             {plusIcon}
             Add Month
           </button>
         )}{" "}
-        {rec.fromYear ? (
-          rec.fromYear
+        {rec?.fromYear ? (
+          rec?.fromYear
         ) : (
           <button
-            onClick={(e) => handleEdit(rec.id)}
+            onClick={(e) => handleEdit(rec?.id)}
             className="flex flex-row gap-1 my-2 font-semibold text-blue-600  hover:text-blue-900"
           >
             {plusIcon}
@@ -152,26 +152,26 @@ const EducationCard = ({ rec }: { rec: Education }) => {
           </button>
         )}{" "}
         to{" "}
-        {rec.isContinue ? (
+        {rec?.isContinue ? (
           "Present"
         ) : (
           <>
-            {rec.toMonth ? (
-              rec.toMonth
+            {rec?.toMonth ? (
+              rec?.toMonth
             ) : (
               <button
-                onClick={(e) => handleEdit(rec.id)}
+                onClick={(e) => handleEdit(rec?.id)}
                 className="flex flex-row gap-1 my-2 font-semibold text-blue-600  hover:text-blue-900"
               >
                 {plusIcon}
                 Add To Month
               </button>
             )}{" "}
-            {rec.toYear ? (
-              rec.toYear
+            {rec?.toYear ? (
+              rec?.toYear
             ) : (
               <button
-                onClick={(e) => handleEdit(rec.id)}
+                onClick={(e) => handleEdit(rec?.id)}
                 className="flex flex-row gap-1 my-2 font-semibold text-blue-600  hover:text-blue-900"
               >
                 {plusIcon}

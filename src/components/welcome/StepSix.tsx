@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 type Skill = string;
-const suggestedSkills = [
+const suggestedSkillsValues = [
   "Team Management",
   "Leadership",
   "Communication Skills",
@@ -49,6 +49,9 @@ const StepSix = () => {
   const stepSix = useSelector((state: any) => state.register.stepSix);
   const { list } = stepSix;
   const [newSkill, setNewSkill] = useState("");
+  const [suggestedSkills, setSuggestedSkills] = useState<Skill[]>(
+    suggestedSkillsValues
+  );
 
   const addSkill = () => {
     if (newSkill.trim() !== "") {
@@ -65,6 +68,12 @@ const StepSix = () => {
   };
 
   const addSuggestedSkill = (suggestedSkill: Skill) => {
+    // remove from suggested skills
+    const updatedSuggestedSkills = suggestedSkills.filter(
+      (skill) => skill !== suggestedSkill
+    );
+    setSuggestedSkills(updatedSuggestedSkills);
+
     dispatch(setStepSix({ list: [suggestedSkill, ...list] }));
   };
 
