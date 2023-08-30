@@ -10,6 +10,7 @@ import StepFive from "@/components/welcome/StepFive";
 import StepSix from "@/components/welcome/StepSix";
 import ProfileReview from "@/components/welcome/profileReview";
 import { useDispatch, useSelector } from "react-redux";
+import { signIn } from "next-auth/react";
 import {
   setActiveStep,
   setError,
@@ -120,9 +121,17 @@ const Welcome = () => {
               await moveResumeToUserFolder(obj.file, obj.email);
               await updateUser(obj.file, obj.email);
             }
-            // router.replace("/login");
+
+            const res = await signIn("credentials", {
+              email: obj.email,
+              password: obj.password,
+              redirect: false, // prevent default redirect
+            });
+            router.replace("/dashboard");
+            dispatch(setIsSubmitting(false));
           })
           .catch(function (error) {
+            dispatch(setIsSubmitting(false));
             if (error.response.data.error) {
               dispatch(setError(error.response.data.error));
             } else {
@@ -130,9 +139,6 @@ const Welcome = () => {
                 setError("Something went wrong while creating your account")
               );
             }
-          })
-          .finally(() => {
-            dispatch(setIsSubmitting(false));
           });
       } else {
         dispatch(
