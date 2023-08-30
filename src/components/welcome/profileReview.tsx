@@ -1,8 +1,25 @@
 import React from "react";
-import WorkExperienceCard from "./WorkExperienceCard";
 import EducationCard from "./EducationCard";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  EditIcon,
+  addressIcon,
+  deleteIcon,
+  plusSimpleIcon,
+} from "@/helpers/iconsProvider";
+import {
+  Education,
+  WorkExperience,
+  setActiveStep,
+  setStepFive,
+} from "@/store/registerSlice";
+import ExperienceCard from "./ExperienceCard";
 
 const ProfileReview = () => {
+  const dispatch = useDispatch();
+  const data = useSelector((state: any) => state.register);
+  // console.clear();
+  console.log(data);
   return (
     <div className="">
       <h1 className="text-2xl font-semibold mb-2">Review your Resume</h1>
@@ -12,23 +29,16 @@ const ProfileReview = () => {
       {/* Basic */}
       <section className="mb-8">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-medium">John Doe</h3>
+          <h3 className="text-lg font-medium">
+            {data.stepOne.firstName === "" && data.stepOne.lastName === "" ? (
+              "[Missing Name]"
+            ) : (
+              <>{data.stepOne.firstName + " " + data.stepOne.lastName}</>
+            )}
+          </h3>
           <div className="space-x-2">
             <button className="text-blue-500 hover:text-blue-700">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-4 h-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
-                />
-              </svg>
+              {EditIcon}
             </button>
           </div>
         </div>
@@ -49,7 +59,11 @@ const ProfileReview = () => {
                   d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
                 />
               </svg>
-              <span>+1 123-456-7890</span>
+              <span>
+                {data.stepOne.phoneNumber
+                  ? data.stepOne.phoneNumber
+                  : "[Missing Phone Number]"}
+              </span>
             </p>
             <p className="flex flex-row gap-2 items-center">
               <svg
@@ -66,47 +80,30 @@ const ProfileReview = () => {
                   d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
                 />
               </svg>
-              <span>johndoe@example.com</span>
+              <span>
+                {data.stepOne.Email ? data.stepOne.Email : "[Missing Email]"}
+              </span>
             </p>
+
             <p className="flex flex-row gap-2 items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-4 h-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                />
-              </svg>
-              <span>San Francisco, CA</span>
+              {addressIcon}
+              {data.stepThree.street === "" ? (
+                <span>[Address Missing]</span>
+              ) : (
+                <span>
+                  {data.stepThree?.country && data.stepThree?.country}{" "}
+                  {data.stepThree?.street && ", " + data.stepThree?.street}{" "}
+                  {data.stepThree?.cityState &&
+                    ", " + data.stepThree?.cityState}{" "}
+                  {data.stepThree?.postalCode &&
+                    ", " + data.stepThree?.postalCode}{" "}
+                </span>
+              )}
             </p>
           </div>
           <div className="space-x-2">
             <button className="text-blue-500 hover:text-blue-700">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-4 h-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
-                />
-              </svg>
+              {EditIcon}
             </button>
           </div>
         </div>
@@ -115,23 +112,13 @@ const ProfileReview = () => {
       {/* Summary */}
       <section className="mb-8 ">
         <h2 className="text-xl font-semibold mb-2 ">Summary</h2>
+        <p className="mb-2 text-sm text-gray-600 italic">
+          Written by AI According to your Resume
+        </p>
         <div className="border p-4 rounded-lg ">
-          <button className="text-blue-500 hover:text-blue-700 float-right">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-4 h-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
-              />
-            </svg>
-          </button>
+          {/* <button className="text-blue-500 hover:text-blue-700 float-right">
+            {EditIcon}
+          </button> */}
           <div className="flex justify-between items-center mb-4">
             <p>
               Experienced software engineer with a passion for creating
@@ -143,18 +130,51 @@ const ProfileReview = () => {
 
       {/* Work Experience */}
       <section className="mb-8 ">
-        <h2 className="text-xl font-semibold mb-2 ">Work Experience</h2>
+        <h2 className="text-xl font-semibold mb-2 ">
+          Work Experience
+          <button
+            type="button"
+            onClick={(e) => {
+              dispatch(setActiveStep(5));
+            }}
+            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+          >
+            {EditIcon}
+          </button>
+        </h2>
         <div className="flex flex-col gap-3">
-          <WorkExperienceCard />
-          <WorkExperienceCard />
+          {data.stepFive.list.map(
+            (workExperience: WorkExperience, index: number) => (
+              <ExperienceCard
+                key={index}
+                rec={workExperience}
+                isShowing={true}
+              />
+            )
+          )}
+          {data.stepFive.list.length === 0 && <p>No Experiences Found</p>}
         </div>
       </section>
 
       {/* Education */}
       <section className="mb-8 ">
-        <h2 className="text-xl font-semibold mb-2 ">Education</h2>
+        <h2 className="text-xl font-semibold mb-2 ">
+          Education
+          <button
+            type="button"
+            onClick={(e) => {
+              dispatch(setActiveStep(4));
+            }}
+            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+          >
+            {EditIcon}
+          </button>
+        </h2>
         <div className="flex flex-col gap-3">
-          <EducationCard />
+          {data.stepFour.list.map((education: Education, index: number) => (
+            <EducationCard key={index} rec={education} isShowing={true} />
+          ))}
+          {data.stepFour.list.length === 0 && <p>No Education Found</p>}
         </div>
       </section>
 
@@ -164,55 +184,26 @@ const ProfileReview = () => {
           Skills
           <button
             type="button"
-            className="text-xs float-right flex flex-row gap-1 items-center hover:bg-gray-50"
+            onClick={(e) => {
+              dispatch(setActiveStep(6));
+            }}
+            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-4 h-4 "
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 4.5v15m7.5-7.5h-15"
-              />
-            </svg>
-            Add New Skill
+            {EditIcon}
           </button>
         </h2>
         <div className="flex flex-col gap-3">
           <ul className="space-y-2">
-            {["React", "HTML", "CSS", "PHP"].map((skill, index) => (
+            {data.stepSix.list.map((skill: string, index: number) => (
               <li
                 key={index}
                 className="flex items-center justify-between bg-white rounded-md shadow-md border p-3"
               >
                 <span>{skill}</span>
-                <button
-                  onClick={console.log}
-                  className="text-red-500 hover:text-red-700"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                    />
-                  </svg>
-                </button>
               </li>
             ))}
           </ul>
+          {data.stepSix.list.length === 0 && <p>No Skills Found</p>}
         </div>
       </section>
     </div>
