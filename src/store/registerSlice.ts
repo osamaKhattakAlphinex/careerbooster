@@ -27,6 +27,9 @@ export interface WorkExperience {
 }
 interface RegisterSlice {
   activeStep: number;
+  isSubmitting: boolean;
+  error: string;
+  terms: boolean;
   stepOne: {
     firstName?: string;
     lastName?: string;
@@ -61,10 +64,18 @@ interface RegisterSlice {
     list: string[];
     isValid: boolean;
   };
+  stepEight: {
+    password: string;
+    cPassword: string;
+    isValid: boolean;
+  };
 }
 
 const initialState: RegisterSlice = {
   activeStep: 0,
+  isSubmitting: false,
+  terms: false,
+  error: "",
   stepOne: {
     firstName: "",
     lastName: "",
@@ -99,6 +110,11 @@ const initialState: RegisterSlice = {
     list: [],
     isValid: true,
   },
+  stepEight: {
+    password: "",
+    cPassword: "",
+    isValid: false,
+  },
 };
 
 const registerSlice = createSlice({
@@ -109,6 +125,24 @@ const registerSlice = createSlice({
       return {
         ...state,
         activeStep: action.payload,
+      };
+    },
+    setIsSubmitting(state, action) {
+      return {
+        ...state,
+        isSubmitting: action.payload,
+      };
+    },
+    setError(state, action) {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    },
+    setTerms(state, action) {
+      return {
+        ...state,
+        terms: action.payload,
       };
     },
     setStepOne(state, action) {
@@ -165,17 +199,30 @@ const registerSlice = createSlice({
         },
       };
     },
+    setStepEight(state, action) {
+      return {
+        ...state,
+        stepEight: {
+          ...state.stepEight,
+          ...action.payload,
+        },
+      };
+    },
   },
 });
 
 export const {
   setActiveStep,
+  setIsSubmitting,
+  setError,
+  setTerms,
   setStepOne,
   setStepTwo,
   setStepThree,
   setStepFour,
   setStepFive,
   setStepSix,
+  setStepEight,
 } = registerSlice.actions;
 
 export default registerSlice.reducer;

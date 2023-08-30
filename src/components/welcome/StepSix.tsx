@@ -38,7 +38,8 @@ const StepSix = () => {
     suggestedSkillsValues
   );
 
-  const addSkill = () => {
+  const addSkill = (e: any) => {
+    e.preventDefault();
     if (newSkill.trim() !== "") {
       dispatch(setStepSix({ list: [newSkill, ...list] }));
       setNewSkill("");
@@ -92,20 +93,23 @@ const StepSix = () => {
       </div>
       <div className="mb-4">
         <h3 className="text-lg font-medium mb-2">Add New Skill</h3>
-        <div className="flex space-x-2">
-          <input
-            type="text"
-            value={newSkill}
-            onChange={(e) => setNewSkill(e.target.value)}
-            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Enter a skill..."
-          />
-          <button
-            onClick={addSkill}
-            className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600"
-          >
-            Add
-          </button>
+        <div className="">
+          <form onSubmit={addSkill} className="flex space-x-2">
+            <input
+              type="text"
+              value={newSkill}
+              onChange={(e) => setNewSkill(e.target.value)}
+              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Enter a skill..."
+            />
+            <button
+              type="submit"
+              onClick={addSkill}
+              className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600"
+            >
+              Add
+            </button>
+          </form>
         </div>
       </div>
       <div>

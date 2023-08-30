@@ -25,7 +25,9 @@ export const POST = async (req: Request): Promise<NewResponse> => {
   const oldUser = await User.findOne({ email: body.email });
   if (oldUser) {
     return NextResponse.json(
-      { error: "Email already exist!" },
+      {
+        error: "An account with the same email already exist! ",
+      },
       { status: 500 }
     );
   }

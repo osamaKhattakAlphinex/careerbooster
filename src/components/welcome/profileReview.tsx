@@ -37,7 +37,10 @@ const ProfileReview = () => {
             )}
           </h3>
           <div className="space-x-2">
-            <button className="text-blue-500 hover:text-blue-700">
+            <button
+              className="text-blue-500 hover:text-blue-700"
+              onClick={() => dispatch(setActiveStep(1))}
+            >
               {EditIcon}
             </button>
           </div>
@@ -60,8 +63,8 @@ const ProfileReview = () => {
                 />
               </svg>
               <span>
-                {data.stepOne.phoneNumber
-                  ? data.stepOne.phoneNumber
+                {data.stepTwo.phoneNumber
+                  ? data.stepTwo.phoneNumber
                   : "[Missing Phone Number]"}
               </span>
             </p>
@@ -81,13 +84,27 @@ const ProfileReview = () => {
                 />
               </svg>
               <span>
-                {data.stepOne.Email ? data.stepOne.Email : "[Missing Email]"}
+                {data.stepTwo.Email ? data.stepTwo.Email : "[Missing Email]"}
               </span>
             </p>
-
+          </div>
+          <div className="space-x-2">
+            <button
+              className="text-blue-500 hover:text-blue-700"
+              onClick={() => dispatch(setActiveStep(2))}
+            >
+              {EditIcon}
+            </button>
+          </div>
+        </div>
+        <div className="flex justify-between items-center mb-4">
+          <div className="text-sm flex flex-col gap-1 text-gray-600">
             <p className="flex flex-row gap-2 items-center">
               {addressIcon}
-              {data.stepThree.street === "" ? (
+              {data.stepThree?.country === "" &&
+              data.stepThree?.street &&
+              data.stepThree?.cityState &&
+              data.stepThree?.postalCode ? (
                 <span>[Address Missing]</span>
               ) : (
                 <span>
@@ -102,7 +119,10 @@ const ProfileReview = () => {
             </p>
           </div>
           <div className="space-x-2">
-            <button className="text-blue-500 hover:text-blue-700">
+            <button
+              className="text-blue-500 hover:text-blue-700"
+              onClick={() => dispatch(setActiveStep(3))}
+            >
               {EditIcon}
             </button>
           </div>
@@ -110,15 +130,12 @@ const ProfileReview = () => {
       </section>
 
       {/* Summary */}
-      <section className="mb-8 ">
+      {/* <section className="mb-8 ">
         <h2 className="text-xl font-semibold mb-2 ">Summary</h2>
         <p className="mb-2 text-sm text-gray-600 italic">
           Written by AI According to your Resume
         </p>
         <div className="border p-4 rounded-lg ">
-          {/* <button className="text-blue-500 hover:text-blue-700 float-right">
-            {EditIcon}
-          </button> */}
           <div className="flex justify-between items-center mb-4">
             <p>
               Experienced software engineer with a passion for creating
@@ -126,7 +143,7 @@ const ProfileReview = () => {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Work Experience */}
       <section className="mb-8 ">

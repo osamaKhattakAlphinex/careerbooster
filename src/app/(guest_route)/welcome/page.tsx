@@ -1,9 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { signIn } from "next-auth/react";
+import { useEffect } from "react";
+
 import { useRouter, useSearchParams } from "next/navigation";
 import StepOne from "@/components/welcome/StepOne";
 import StepTwo from "@/components/welcome/StepTwo";
@@ -13,7 +10,14 @@ import StepFive from "@/components/welcome/StepFive";
 import StepSix from "@/components/welcome/StepSix";
 import ProfileReview from "@/components/welcome/profileReview";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveStep } from "@/store/registerSlice";
+import {
+  setActiveStep,
+  setError,
+  setIsSubmitting,
+} from "@/store/registerSlice";
+import StepEight from "@/components/welcome/StepEight";
+import { checkIcon, refreshIconRotating } from "@/helpers/iconsProvider";
+import axios from "axios";
 
 const Welcome = () => {
   const router = useRouter();
@@ -21,10 +25,12 @@ const Welcome = () => {
   const urlStep = params?.get("step");
   // Redux
   const dispatch = useDispatch();
-  const register = useSelector((state: any) => state.register);
-  const reduxStep = register.activeStep;
+  const state = useSelector((state: any) => state);
+  const { register, resume } = state;
+  const reduxStep = state.register.activeStep;
 
   useEffect(() => {
+    dispatch(setError(""));
     // if step exists in url and activeStep from redux is 0 then set activeStep to step
     if (reduxStep === 0 && urlStep) {
       router.push(`/welcome?step=${urlStep}`);
@@ -65,8 +71,88 @@ const Welcome = () => {
       register.stepSix.isValid === false
     ) {
       return true;
+    } else if (
+      register.activeStep === 8 &&
+      (register.stepEight.isValid === false || register.terms === false)
+    ) {
+      return true;
     } else {
       return false;
+    }
+  };
+
+  const handleCreateAccount = () => {
+    if (register.terms) {
+      dispatch(setIsSubmitting(true));
+      dispatch(setError(""));
+
+      const obj = {
+        firstName: register.stepOne.firstName,
+        lastName: register.stepOne.lastName,
+        email: register.stepTwo.Email,
+        password: register.stepEight.password,
+        file: resume.uploadedFileName,
+        phone: register.stepTwo.phone,
+        country: register.stepThree.country,
+      };
+
+      if (
+        obj.firstName ||
+        obj.lastName ||
+        obj.email ||
+        obj.password ||
+        obj.phone
+      ) {
+        console.log("SUCCESS: ", obj);
+
+        axios
+          .post("/api/auth/users", obj)
+          .then(async function (response) {
+            if (obj.file !== "") {
+              await moveResumeToUserFolder(obj.file, obj.email);
+              await updateUser(obj.file, obj.email);
+            }
+            // router.replace("/login");
+          })
+          .catch(function (error) {
+            if (error.response.data.error) {
+              dispatch(setError(error.response.data.error));
+            } else {
+              dispatch(
+                setError("Something went wrong while creating your account")
+              );
+            }
+          })
+          .finally(() => {
+            dispatch(setIsSubmitting(false));
+          });
+      } else {
+        dispatch(
+          setError(
+            `Please go back and make sure to provide all required fields`
+          )
+        );
+        dispatch(setIsSubmitting(false));
+      }
+    }
+  };
+
+  const moveResumeToUserFolder = async (fileName: string, email: string) => {
+    if (fileName && email) {
+      const obj = {
+        fileName: fileName,
+        email: email,
+      };
+      return axios.post(`/api/users/moveResumeToUserFolder`, obj);
+    }
+  };
+
+  const updateUser = (file: string, email: string) => {
+    if (file && email) {
+      return axios.post("/api/users/updateUser", {
+        newFile: file,
+        email: email,
+      });
     }
   };
 
@@ -106,8 +192,17 @@ const Welcome = () => {
             {register.activeStep === 5 && <StepFive />}
             {register.activeStep === 6 && <StepSix />}
             {register.activeStep === 7 && <ProfileReview />}
+            {register.activeStep === 8 && <StepEight />}
 
-            {register.activeStep < 7 && (
+            {register.error !== "" && (
+              <div
+                className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2"
+                role="alert"
+              >
+                <p>{register.error}</p>
+              </div>
+            )}
+            {register.activeStep < 8 && (
               <button
                 type="button"
                 className="w-full flex flex-row justify-center items-center gap-2 bg-gray-900 text-white hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
@@ -133,27 +228,17 @@ const Welcome = () => {
                 </svg>
               </button>
             )}
-            {register.activeStep === 7 && (
+            {register.activeStep === 8 && (
               <button
                 type="button"
-                className="w-full flex flex-row justify-center items-center gap-2 bg-gray-900 text-white hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                disabled={isNextDisabled() || register.isSubmitting}
+                onClick={handleCreateAccount}
+                className="w-full flex flex-row justify-center items-center gap-2 bg-gray-900 text-white hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
-                  />
-                </svg>
-
-                <span>Save Resume</span>
+                {register.isSubmitting ? refreshIconRotating : checkIcon}
+                <span>
+                  {register.isSubmitting ? "Please wait..." : "Create Account"}
+                </span>
               </button>
             )}
           </div>
