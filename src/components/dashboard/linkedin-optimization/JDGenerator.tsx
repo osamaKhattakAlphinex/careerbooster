@@ -2,19 +2,33 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  WorkExperience,
+  setField,
+  setIsLoading,
+  setUserData,
+} from "@/store/userDataSlice";
+import axios from "axios";
 
 interface Props {
   setJobDesc: React.Dispatch<React.SetStateAction<string>>;
 }
 const JDGenerator = ({ setJobDesc }: Props) => {
+  // local States
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
+
+  // Redux
+  const dispatch = useDispatch();
+  const userData = useSelector((state: any) => state.userData);
 
   useEffect(() => {
     setJobDesc(streamedData);
   }, [streamedData]);
 
+  // OLD HANDLE GENERATE
   // const handleGenerate = () => {
   //   setStreamedData("");
   //   if (session?.user?.email) {
@@ -55,73 +69,151 @@ const JDGenerator = ({ setJobDesc }: Props) => {
   //   }
   // };
 
-  const handleGenerate = () => {
+  // NEW HANDLE GENERATE FETCHING LIST
+  // const handleGenerate = () => {
+  //   setStreamedData("");
+  //   if (session?.user?.email) {
+  //     setMsgLoading(true);
+  //     fetch("/api/linkedInBots/jdGenerateList", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         email: session?.user?.email,
+  //       }),
+  //     }).then(async (resp: any) => {
+  //       const res = await resp.json();
+  //       if (res.success && res?.data) {
+  //         const myJSON = JSON.parse(res.data);
+  //         // await myJSON.workExperience.map(async (item: any, index: number) => {
+  //         //   const { title, company, companyAddress, from, to } = item.fields;
+  //         //   const formData = {
+  //         //     email: session?.user?.email,
+  //         //     title,
+  //         //     company,
+  //         //     companyAddress,
+  //         //     from,
+  //         //     to,
+  //         //   };
+
+  //         //   const html = `<strong>${title}</strong>
+  //         //     <p>${company} - ${companyAddress}</p>
+  //         //     <p>${from} - ${to}</p><br />`;
+  //         //   setStreamedData((prev) => prev + html);
+  //         //   await individualFetch(formData);
+  //         // });
+
+  //         await Promise.all(
+  //           myJSON.workExperience.map(async (item: any, index: number) => {
+  //             const { title, company, companyAddress, from, to } = item.fields;
+  //             const formData = {
+  //               email: session?.user?.email,
+  //               title,
+  //               company,
+  //               companyAddress,
+  //               from,
+  //               to,
+  //             };
+
+  //             // Wait for the individualFetch function to complete
+  //             const test = await individualFetch(formData);
+  //           })
+  //         );
+
+  //         setMsgLoading(false);
+  //       }
+  //     });
+  //   }
+  // };
+
+  // const individualFetch = async (formData: any) => {
+  //   return fetch("/api/linkedInBots/individualDescription", {
+  //     method: "POST",
+  //     body: JSON.stringify(formData),
+  //   }).then(async (resp: any) => {
+  //     const res = await resp.json();
+  //     const { data } = res;
+  //     const html = `<br /><br /><strong>${formData.title}</strong>
+  //               <p>${formData.company} - ${formData.companyAddress}</p>
+  //               <p>${formData.from} - ${formData.to}</p><br />${data}`;
+  //     setStreamedData((prev) => prev + html);
+  //   });
+  // };
+
+  const handleGenerate = async () => {
     setStreamedData("");
-    if (session?.user?.email) {
-      setMsgLoading(true);
-      fetch("/api/linkedInBots/jdGenerateList", {
-        method: "POST",
-        body: JSON.stringify({
-          email: session?.user?.email,
-        }),
-      }).then(async (resp: any) => {
-        const res = await resp.json();
-        if (res.success && res?.data) {
-          const myJSON = JSON.parse(res.data);
-          // await myJSON.workExperience.map(async (item: any, index: number) => {
-          //   const { title, company, companyAddress, from, to } = item.fields;
-          //   const formData = {
-          //     email: session?.user?.email,
-          //     title,
-          //     company,
-          //     companyAddress,
-          //     from,
-          //     to,
-          //   };
+    await getUserDataIfNotExists();
 
-          //   const html = `<strong>${title}</strong>
-          //     <p>${company} - ${companyAddress}</p>
-          //     <p>${from} - ${to}</p><br />`;
-          //   setStreamedData((prev) => prev + html);
-          //   await individualFetch(formData);
-          // });
-
-          await Promise.all(
-            myJSON.workExperience.map(async (item: any, index: number) => {
-              const { title, company, companyAddress, from, to } = item.fields;
-              const formData = {
-                email: session?.user?.email,
-                title,
-                company,
-                companyAddress,
-                from,
-                to,
-              };
-
-              // Wait for the individualFetch function to complete
-              const test = await individualFetch(formData);
-            })
-          );
-
-          setMsgLoading(false);
-        }
+    if (userData.isFetched) {
+      // remove ids from experiences
+      const experiences = userData.experience.map((item: any) => {
+        const { id, ...rest } = item;
+        return rest;
       });
+
+      for (const [index, experience] of experiences.entries()) {
+        let html = "";
+        html += `<h1><strong>${experience.jobTitle}</strong></h1>`;
+        html += `<h2>${experience.company} | ${experience?.cityState} ${experience?.country}</h2>`;
+        html += `<p style='color: #3d3d3d; margin-bottom: 10px'>${
+          experience.fromMonth
+        } ${experience.fromYear} to ${
+          experience.isContinue
+            ? "Present"
+            : experience.toMonth + " " + experience.toYear
+        }</p>`;
+        html += `<p>`;
+
+        setStreamedData((prev) => prev + html);
+        const res: any = await fetch("/api/linkedInBots/jdGeneratorSingle", {
+          method: "POST",
+          body: JSON.stringify({
+            experience: experience,
+          }),
+        });
+
+        if (res.ok) {
+          const reader = res.body.getReader();
+          while (true) {
+            const { done, value } = await reader.read();
+
+            if (done) {
+              break;
+            }
+
+            const text = new TextDecoder().decode(value);
+            setStreamedData((prev) => prev + text);
+          }
+        }
+
+        setStreamedData((prev) => prev + `</p> <br /> `);
+      }
     }
   };
 
-  const individualFetch = async (formData: any) => {
-    return fetch("/api/linkedInBots/individualDescription", {
-      method: "POST",
-      body: JSON.stringify(formData),
-    }).then(async (resp: any) => {
-      const res = await resp.json();
-      const { data } = res;
-      const html = `<br /><br /><strong>${formData.title}</strong>
-                <p>${formData.company} - ${formData.companyAddress}</p>
-                <p>${formData.from} - ${formData.to}</p><br />${data}`;
-      setStreamedData((prev) => prev + html);
-    });
+  const getUserDataIfNotExists = async () => {
+    if (!userData.isLoading && !userData.isFetched) {
+      dispatch(setIsLoading(true));
+      try {
+        // Fetch userdata if not exists in Redux
+        const res = await fetch(
+          `/api/users/getOneByEmail?email=${session?.user?.email}`
+        );
+        const { user } = await res.json();
+        dispatch(setUserData(user));
+        dispatch(setIsLoading(false));
+        dispatch(setField({ name: "isFetched", value: true }));
+      } catch (err) {
+        setStreamedData("Something went wrong!");
+      }
+    }
   };
+
+  // when page (session) loads, fetch user data if not exists
+  useEffect(() => {
+    if (session?.user?.email) {
+      getUserDataIfNotExists();
+    }
+  }, [session?.user?.email]);
+
   return (
     <div className="w-full card">
       <div className="space-y-4 md:space-y-6">

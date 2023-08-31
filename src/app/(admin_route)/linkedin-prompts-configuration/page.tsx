@@ -66,6 +66,7 @@ const LinkedInPromptsConfiguration = () => {
             {/* Keywords Genrator Card */}
             <PromptEditor
               name="keyword"
+              title="Keywords Generator"
               type="linkedin"
               prompts={prompts}
               promptsLoading={promptsLoading}
@@ -76,6 +77,7 @@ const LinkedInPromptsConfiguration = () => {
             {/* Headline Generator Card */}
             <PromptEditor
               name="headline"
+              title="Headline Generator"
               type="linkedin"
               prompts={prompts}
               promptsLoading={promptsLoading}
@@ -88,6 +90,7 @@ const LinkedInPromptsConfiguration = () => {
             {/* About Generator */}
             <PromptEditor
               name="about"
+              title="About Generator"
               type="linkedin"
               prompts={prompts}
               promptsLoading={promptsLoading}
@@ -98,6 +101,7 @@ const LinkedInPromptsConfiguration = () => {
             {/* Job Description Generator */}
             <PromptEditor
               name="jobDescription"
+              title="Job Description Generator (for individual job)"
               type="linkedin"
               prompts={prompts}
               promptsLoading={promptsLoading}

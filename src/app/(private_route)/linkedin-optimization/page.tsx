@@ -36,10 +36,10 @@ const ResumeCreator = () => {
       </div>
 
       <div className="flex m-10 gap-4">
-        <div className="w-1/2 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-1/2 xs:w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
           <AboutGenerator setAbout={setAbout} />
         </div>
-        <div className="w-1/2 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-1/2 xs:w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
           <JDGenerator setJobDesc={setJobDesc} />
         </div>
       </div>

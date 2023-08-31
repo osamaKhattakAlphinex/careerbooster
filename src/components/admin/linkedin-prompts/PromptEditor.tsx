@@ -9,6 +9,7 @@ interface Props {
   name: string;
   type: string;
   updating: string;
+  title?: string;
 }
 
 const PromptEditor = ({
@@ -18,6 +19,7 @@ const PromptEditor = ({
   name,
   type,
   updating,
+  title,
 }: Props) => {
   const [prompt, setPrompt] = useState<string>("");
 
@@ -36,7 +38,9 @@ const PromptEditor = ({
     <div className="w-1/2 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
       <div className="w-full card">
         <div className="space-y-4 md:space-y-6">
-          <h2 className="text-2xl">{name} Generator</h2>
+          <h2 className="text-2xl">
+            {title !== "" ? title : name + " Generator"}
+          </h2>
           <div className="flex flex-col gap-4">
             <textarea
               className="w-full p-4  rounded-lg  sm:p-6 outline-none border-none bg-gray-200"

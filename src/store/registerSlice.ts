@@ -1,30 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Education, WorkExperience } from "./userDataSlice";
 
-export interface Education {
-  id: string;
-  educationLevel: string;
-  fieldOfStudy?: string;
-  schoolName?: string;
-  schoolLocation?: string;
-  fromMonth?: string;
-  fromYear?: string;
-  isContinue?: boolean;
-  toMonth?: string;
-  toYear?: string;
-}
-export interface WorkExperience {
-  id: string;
-  jobTitle: string;
-  company?: string;
-  country?: string;
-  cityState?: string;
-  fromMonth?: string;
-  fromYear?: string;
-  isContinue?: boolean;
-  toMonth?: string;
-  toYear?: string;
-  description?: string;
-}
 interface RegisterSlice {
   activeStep: number;
   isSubmitting: boolean;
