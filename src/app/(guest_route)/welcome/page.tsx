@@ -167,7 +167,7 @@ const Welcome = () => {
               await updateUser(obj.file, obj.email);
             }
 
-            const res = await signIn("credentials", {
+            await signIn("credentials", {
               email: obj.email,
               password: obj.password,
               redirect: false, // prevent default redirect
