@@ -5,7 +5,12 @@ import ResumeTemplate1 from "@/components/dashboard/resume-templates/template-1"
 import DownloadDocx from "@/components/dashboard/resume-templates/template-1/DownloadDocx";
 import { useDispatch, useSelector } from "react-redux";
 import ReactToPrint from "react-to-print";
-
+import {
+  WorkExperience,
+  setField,
+  setIsLoading,
+  setUserData,
+} from "@/store/userDataSlice";
 import {
   setBasicInfo,
   setSummary,
@@ -19,27 +24,33 @@ import {
 const ResumeCreator = () => {
   const componentRef = useRef<any>(null);
   const { data: session, status } = useSession();
-  const [jobPosition, setJobPosition] = useState<string>("ReactJS Developer");
+  const [jobPosition, setJobPosition] = useState<string>(
+    "Chief Privacy Officer"
+  );
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
 
   // streamed data
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
+  const [streamedJDData, setStreamedJDData] = useState("");
 
   // Redux
   const dispatch = useDispatch();
+
   const resumeData = useSelector((state: any) => state.resume);
+  const userData = useSelector((state: any) => state.userData);
+
+  // console.log(userData);
 
   const handleGenerate = async () => {
-    if (jobPosition !== "") {
-      if (jobPosition !== "" && session?.user?.email) {
-        setMsgLoading(true);
-        getBasicInfo(jobPosition);
-        getSummary(jobPosition);
-        getWorkExperience(jobPosition);
-        getPrimarySkills(jobPosition);
-        getProfessionalSkills(jobPosition);
-        getSecondarySkills(jobPosition);
-      }
+    await getUserDataIfNotExists();
+    if (jobPosition !== "" && session?.user?.email) {
+      setMsgLoading(true);
+      getBasicInfo(jobPosition);
+      getSummary(jobPosition);
+      getWorkExperienceNew(jobPosition);
+      getPrimarySkills(jobPosition);
+      getProfessionalSkills(jobPosition);
+      getSecondarySkills(jobPosition);
     }
   };
 
@@ -49,31 +60,35 @@ const ResumeCreator = () => {
       method: "POST",
       body: JSON.stringify({
         type: "basicInfo",
-        email: session?.user?.email,
+        userData,
         jobPosition: jobPosition,
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
-      if (res.success) {
-        if (res?.data?.text) {
-          const tSon = JSON.stringify(res?.data?.text);
-          const myJSON = JSON.parse(tSon);
-          dispatch(setBasicInfo(myJSON));
-        } else if (res?.data) {
-          const myJSON = JSON.parse(res.data);
-          dispatch(setBasicInfo(myJSON));
-        }
+      if (res.success && res?.data) {
+        const myJSON = JSON.parse(res.data);
+        const basicObj = {
+          ...myJSON,
+          name: userData.firstName + " " + userData.lastName,
+          contact: {
+            ...myJSON.contact,
+            email: userData.email,
+            phone: userData.phone,
+          },
+          education: userData.education,
+        };
+        dispatch(setBasicInfo(basicObj));
       }
     });
   };
 
   const getSummary = async (jobPosition: string) => {
+    await getUserDataIfNotExists();
     // dispatch(setLoadingState("summary"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
         type: "summary",
-        email: session?.user?.email,
         jobPosition: jobPosition,
       }),
     }).then(async (resp: any) => {
@@ -96,37 +111,92 @@ const ResumeCreator = () => {
     });
   };
 
-  const getWorkExperience = async (jobPosition: string) => {
+  const getWorkExperienceNew = async (jobPosition: string) => {
     // dispatch(setLoadingState("workExperience"));
-    return fetch("/api/resumeBots/getBasicInfo", {
-      method: "POST",
-      body: JSON.stringify({
-        type: "workExperience",
-        email: session?.user?.email,
-        jobPosition: jobPosition,
-      }),
-    }).then(async (resp: any) => {
-      const res = await resp.json();
-      if (res.success) {
-        if (res?.data?.text) {
-          const tSon = JSON.stringify(res?.data?.text);
-          const myJSON = JSON.parse(tSon);
-          dispatch(setWorkExperience(myJSON));
-        } else if (res?.data) {
-          const myJSON = JSON.parse(res.data);
-          dispatch(setWorkExperience(myJSON));
+    await getUserDataIfNotExists();
+
+    if (userData.isFetched) {
+      // remove ids from experiences
+      const experiences = userData.experience.map((item: WorkExperience) => {
+        const { id, ...rest } = item;
+        return rest;
+      });
+      setStreamedJDData("");
+
+      for (const [index, experience] of experiences.entries()) {
+        let html = "";
+        html += `<h2 style="font-size: 1.5rem; line-height: 2rem; ">${experience.jobTitle}</h2>`;
+        html += `<h2 style="font-size: 1.1rem; line-height: 1.75rem; margin-bottom: 0.5rem">
+        ${experience.fromMonth} ${experience.fromYear} - ${
+          experience.isContinue
+            ? "Present"
+            : experience.toMonth + " " + experience.toYear
+        } | ${experience.company} | 
+        ${experience?.cityState} ${experience?.country}
+                  </h2>`;
+        html += `<p>`;
+
+        setStreamedJDData((prev) => prev + html);
+        const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
+          method: "POST",
+          body: JSON.stringify({
+            experience: experience,
+          }),
+        });
+
+        if (res.ok) {
+          const reader = res.body.getReader();
+          while (true) {
+            const { done, value } = await reader.read();
+
+            if (done) {
+              break;
+            }
+
+            const text = new TextDecoder().decode(value);
+            setStreamedJDData((prev) => prev + text);
+          }
         }
+
+        setStreamedJDData((prev) => prev + `</p> <br /> `);
       }
-    });
+    }
   };
+
+  // const getWorkExperience = async (jobPosition: string) => {
+  //   await getUserDataIfNotExists();
+  //   // dispatch(setLoadingState("workExperience"));
+  //   return fetch("/api/resumeBots/getBasicInfo", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       type: "workExperience",
+  //       jobPosition: jobPosition,
+  //     }),
+  //   }).then(async (resp: any) => {
+  //     const res = await resp.json();
+  //     if (res.success) {
+  //       console.clear();
+  //       if (res?.data?.text) {
+  //         const tSon = JSON.stringify(res?.data?.text);
+  //         const myJSON = JSON.parse(tSon);
+  //         console.log("myJSON1: ", myJSON);
+  //         dispatch(setWorkExperience(myJSON));
+  //       } else if (res?.data) {
+  //         const myJSON = JSON.parse(res.data);
+  //         console.log("myJSON2: ", myJSON);
+  //         dispatch(setWorkExperience(myJSON));
+  //       }
+  //     }
+  //   });
+  // };
 
   const getPrimarySkills = async (jobPosition: string) => {
     // dispatch(setLoadingState("primarySkills"));
+    await getUserDataIfNotExists();
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
         type: "primarySkills",
-        email: session?.user?.email,
         jobPosition: jobPosition,
       }),
     }).then(async (resp: any) => {
@@ -196,6 +266,28 @@ const ResumeCreator = () => {
         // dispatch(setLoadingState(""));
       });
   };
+
+  const getUserDataIfNotExists = async () => {
+    if (!userData.isLoading && !userData.isFetched) {
+      dispatch(setIsLoading(true));
+      // Fetch userdata if not exists in Redux
+      const res = await fetch(
+        `/api/users/getOneByEmail?email=${session?.user?.email}`
+      );
+
+      const { user } = await res.json();
+      dispatch(setUserData(user));
+      dispatch(setIsLoading(false));
+      dispatch(setField({ name: "isFetched", value: true }));
+    }
+  };
+
+  // when page (session) loads, fetch user data if not exists
+  useEffect(() => {
+    if (session?.user?.email) {
+      getUserDataIfNotExists();
+    }
+  }, [session?.user?.email]);
 
   return (
     <>
@@ -323,7 +415,10 @@ const ResumeCreator = () => {
           resumeData?.summary) && (
           <div className="m-10  w-[95%]  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
             <div className="w-full card" ref={componentRef}>
-              <ResumeTemplate1 streamedSummaryData={streamedSummaryData} />
+              <ResumeTemplate1
+                streamedSummaryData={streamedSummaryData}
+                streamedJDData={streamedJDData}
+              />
             </div>
           </div>
         )}

@@ -6,19 +6,11 @@ import {
 } from "langchain/prompts";
 import { LLMChain } from "langchain/chains";
 import { ChatOpenAI } from "langchain/chat_models/openai";
-import Prompt from "@/db/schemas/Prompt";
 
 const handler: NextApiHandler = async (req, res) => {
   try {
     const reqBody = JSON.parse(req.body);
     const experience = reqBody.experience;
-
-    const promptRec = await Prompt.findOne({
-      type: "linkedin",
-      name: "jobDescription",
-      active: true,
-    });
-    const prompt = promptRec.value;
 
     // CREATING MODAL
     const model = new ChatOpenAI({
@@ -66,7 +58,24 @@ const handler: NextApiHandler = async (req, res) => {
       description: experience.description,
       country: experience.country,
       cityState: experience.cityState,
-      prompt,
+      prompt: `I want you to Write a 2-3 sentences description and some bullet points based on the provided data for for the current role.
+      These are general Instructions
+      - I want the answer to be in HTML format. 
+      - The description should be in a <p> paragraph tag. 
+      - the paragarph should have some CSS (margin-bottom: 10px;)
+      - and the bullet points should be in <ul> tag and each bullet point should be in <li> tag
+      - when writing the <ul> add some css to it to make it look like a bullet point list with some padding on the left
+
+       Short Description should be generated  based on the following isntructions:
+        '''
+        the answer should not be longer than 60 words
+        Donot use the name of the person or the word "I" in the answer
+        The answer should be from the third person perspective
+        '''
+  
+        After you write the short description:
+        Add 3-5 bullet points for this role and use this formula when writing bullets, formula: success verb + noun + metric + outcome.
+        just give me the answer donot add any extra labels e.g. bullet points or short description`,
     });
 
     res.end();

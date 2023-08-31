@@ -1,7 +1,8 @@
 "use client";
-
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 
 interface Props {
   setHeadline: React.Dispatch<React.SetStateAction<string>>;
@@ -11,20 +12,23 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
 
+  // Redux
+  const dispatch = useDispatch();
+  const userData = useSelector((state: any) => state.userData);
+
   useEffect(() => {
     setHeadline(streamedData);
   }, [streamedData]);
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     setStreamedData("");
+    await getUserDataIfNotExists();
     if (session?.user?.email) {
       setMsgLoading(true);
-      const formData = {
-        email: session?.user?.email,
-      };
+
       fetch("/api/linkedInBots/headlineGenerator", {
         method: "POST",
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ userData }),
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -54,6 +58,31 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
         });
     }
   };
+
+  const getUserDataIfNotExists = async () => {
+    if (!userData.isLoading && !userData.isFetched) {
+      dispatch(setIsLoading(true));
+      try {
+        // Fetch userdata if not exists in Redux
+        const res = await fetch(
+          `/api/users/getOneByEmail?email=${session?.user?.email}`
+        );
+        const { user } = await res.json();
+        dispatch(setUserData(user));
+        dispatch(setIsLoading(false));
+        dispatch(setField({ name: "isFetched", value: true }));
+      } catch (err) {
+        setStreamedData("Something went wrong!");
+      }
+    }
+  };
+
+  // when page (session) loads, fetch user data if not exists
+  useEffect(() => {
+    if (session?.user?.email) {
+      getUserDataIfNotExists();
+    }
+  }, [session?.user?.email]);
 
   return (
     <div className="w-full card">

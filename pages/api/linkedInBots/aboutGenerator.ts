@@ -1,22 +1,17 @@
 import { NextApiHandler } from "next";
-// import { PineconeClient } from "@pinecone-database/pinecone";
-import { OpenAIEmbeddings } from "langchain/embeddings/openai";
-// import { PineconeStore } from "langchain/vectorstores/pinecone";
-import { OpenAI } from "langchain/llms/openai";
-// import { MongoDBAtlasVectorSearch } from "langchain/vectorstores/mongodb_atlas";
-// import { MongoClient } from "mongodb";
-import path from "path";
-import { DirectoryLoader } from "langchain/document_loaders/fs/directory";
-import { PDFLoader } from "langchain/document_loaders/fs/pdf";
-import { MemoryVectorStore } from "langchain/vectorstores/memory";
-
-import { RetrievalQAChain, loadQAStuffChain } from "langchain/chains";
+import {
+  ChatPromptTemplate,
+  HumanMessagePromptTemplate,
+  SystemMessagePromptTemplate,
+} from "langchain/prompts";
+import { LLMChain } from "langchain/chains";
+import { ChatOpenAI } from "langchain/chat_models/openai";
 import Prompt from "@/db/schemas/Prompt";
 
 const handler: NextApiHandler = async (req, res) => {
   try {
     const reqBody = JSON.parse(req.body);
-    const email = reqBody.email;
+    const userData = reqBody.userData;
 
     // fetch prompt from db
     const promptRec = await Prompt.findOne({
@@ -27,7 +22,7 @@ const handler: NextApiHandler = async (req, res) => {
     const prompt = promptRec.value;
 
     // CREATING LLM MODAL
-    const model = new OpenAI({
+    const model = new ChatOpenAI({
       streaming: true,
       modelName: "gpt-3.5-turbo",
       callbacks: [
@@ -40,23 +35,21 @@ const handler: NextApiHandler = async (req, res) => {
       temperature: 1,
     });
 
-    // TESTING WITH MEMORY VECTOR STORE
-    const dir = path.join(process.cwd() + "/public", "/files", `/${email}`);
-    const loader = new DirectoryLoader(dir, {
-      ".pdf": (path) => new PDFLoader(path),
+    const chatPrompt = ChatPromptTemplate.fromPromptMessages([
+      SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing About Section for the person LinkedIn Profile.
+        Following are the content of the resume (in JSON format): 
+        JSON user/resume data: {userData}
+        `),
+      HumanMessagePromptTemplate.fromTemplate("{prompt}"),
+    ]);
+    const chainB = new LLMChain({
+      prompt: chatPrompt,
+      llm: model,
     });
-    const docs = await loader.load();
-    const vectorStore = await MemoryVectorStore.fromDocuments(
-      docs,
-      new OpenAIEmbeddings()
-    );
 
-    // Initialize a retriever wrapper around the vector store
-    const vectorStoreRetriever = vectorStore.asRetriever();
-
-    const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
-    await chain4.call({
-      query: prompt,
+    await chainB.call({
+      userData: JSON.stringify(userData),
+      prompt,
     });
 
     res.end();

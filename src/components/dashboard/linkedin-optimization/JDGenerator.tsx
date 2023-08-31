@@ -9,7 +9,6 @@ import {
   setIsLoading,
   setUserData,
 } from "@/store/userDataSlice";
-import axios from "axios";
 
 interface Props {
   setJobDesc: React.Dispatch<React.SetStateAction<string>>;
@@ -28,123 +27,13 @@ const JDGenerator = ({ setJobDesc }: Props) => {
     setJobDesc(streamedData);
   }, [streamedData]);
 
-  // OLD HANDLE GENERATE
-  // const handleGenerate = () => {
-  //   setStreamedData("");
-  //   if (session?.user?.email) {
-  //     setMsgLoading(true);
-  //     const formData = {
-  //       email: session?.user?.email,
-  //     };
-  //     fetch("/api/linkedInBots/jdGenerator", {
-  //       method: "POST",
-  //       body: JSON.stringify(formData),
-  //     })
-  //       .then(async (resp: any) => {
-  //         if (resp.ok) {
-  //           // const res = await resp.json();
-  //           // setStreamedData(res.result.output_text);
-  //           const reader = resp.body.getReader();
-  //           while (true) {
-  //             const { done, value } = await reader.read();
-
-  //             if (done) {
-  //               break;
-  //             }
-
-  //             const text = new TextDecoder().decode(value);
-  //             setStreamedData((prev) => prev + text);
-  //           }
-  //         } else {
-  //           setStreamedData("Error! Something went wrong");
-  //         }
-  //         setMsgLoading(false);
-  //       })
-  //       .catch((error) => {
-  //         console.log("Error encountered");
-  //       })
-  //       .finally(() => {
-  //         setMsgLoading(false);
-  //       });
-  //   }
-  // };
-
-  // NEW HANDLE GENERATE FETCHING LIST
-  // const handleGenerate = () => {
-  //   setStreamedData("");
-  //   if (session?.user?.email) {
-  //     setMsgLoading(true);
-  //     fetch("/api/linkedInBots/jdGenerateList", {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         email: session?.user?.email,
-  //       }),
-  //     }).then(async (resp: any) => {
-  //       const res = await resp.json();
-  //       if (res.success && res?.data) {
-  //         const myJSON = JSON.parse(res.data);
-  //         // await myJSON.workExperience.map(async (item: any, index: number) => {
-  //         //   const { title, company, companyAddress, from, to } = item.fields;
-  //         //   const formData = {
-  //         //     email: session?.user?.email,
-  //         //     title,
-  //         //     company,
-  //         //     companyAddress,
-  //         //     from,
-  //         //     to,
-  //         //   };
-
-  //         //   const html = `<strong>${title}</strong>
-  //         //     <p>${company} - ${companyAddress}</p>
-  //         //     <p>${from} - ${to}</p><br />`;
-  //         //   setStreamedData((prev) => prev + html);
-  //         //   await individualFetch(formData);
-  //         // });
-
-  //         await Promise.all(
-  //           myJSON.workExperience.map(async (item: any, index: number) => {
-  //             const { title, company, companyAddress, from, to } = item.fields;
-  //             const formData = {
-  //               email: session?.user?.email,
-  //               title,
-  //               company,
-  //               companyAddress,
-  //               from,
-  //               to,
-  //             };
-
-  //             // Wait for the individualFetch function to complete
-  //             const test = await individualFetch(formData);
-  //           })
-  //         );
-
-  //         setMsgLoading(false);
-  //       }
-  //     });
-  //   }
-  // };
-
-  // const individualFetch = async (formData: any) => {
-  //   return fetch("/api/linkedInBots/individualDescription", {
-  //     method: "POST",
-  //     body: JSON.stringify(formData),
-  //   }).then(async (resp: any) => {
-  //     const res = await resp.json();
-  //     const { data } = res;
-  //     const html = `<br /><br /><strong>${formData.title}</strong>
-  //               <p>${formData.company} - ${formData.companyAddress}</p>
-  //               <p>${formData.from} - ${formData.to}</p><br />${data}`;
-  //     setStreamedData((prev) => prev + html);
-  //   });
-  // };
-
   const handleGenerate = async () => {
     setStreamedData("");
     await getUserDataIfNotExists();
 
     if (userData.isFetched) {
       // remove ids from experiences
-      const experiences = userData.experience.map((item: any) => {
+      const experiences = userData.experience.map((item: WorkExperience) => {
         const { id, ...rest } = item;
         return rest;
       });

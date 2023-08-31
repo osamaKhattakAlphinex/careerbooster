@@ -38,9 +38,9 @@ const Welcome = () => {
   const urlStep = params?.get("step");
   // Redux
   const dispatch = useDispatch();
-  const state = useSelector((state: any) => state);
-  const { register, resume } = state;
-  const reduxStep = state.register.activeStep;
+  const register = useSelector((state: any) => state.register);
+  const resume = useSelector((state: any) => state.resume);
+  const reduxStep = register.activeStep;
 
   useEffect(() => {
     // dispatch(setError(""));

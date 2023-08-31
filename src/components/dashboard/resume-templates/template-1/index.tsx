@@ -4,8 +4,10 @@ import { useSelector } from "react-redux";
 
 const ResumeTemplate1 = ({
   streamedSummaryData,
+  streamedJDData,
 }: {
   streamedSummaryData: string;
+  streamedJDData: string;
 }) => {
   const resume = useSelector((state: any) => state.resume);
   return (
@@ -140,7 +142,11 @@ const ResumeTemplate1 = ({
           <span className="w-full h-0 border border-gray-500 my-4"></span>
           <h3 className="uppercase text-xl font-semibold">WORK EXPERIENCE</h3>
           <span className="w-full h-0 border border-gray-500 my-4"></span>
-          {resume?.workExperience &&
+          <div
+            className="list-disc"
+            dangerouslySetInnerHTML={{ __html: streamedJDData }}
+          ></div>
+          {/* {resume?.workExperience &&
             resume?.workExperience.map((record: any, i: number) => {
               const { fields: rec } = record;
               return (
@@ -165,7 +171,7 @@ const ResumeTemplate1 = ({
                   </div>
                 </div>
               );
-            })}
+            })} */}
         </div>
       </div>
     </div>

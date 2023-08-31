@@ -66,6 +66,7 @@ const ResumePromptsConfiguration = () => {
             {/* Summary Generator */}
             <PromptEditor
               name="summary"
+              title="Summary"
               type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}
@@ -76,6 +77,7 @@ const ResumePromptsConfiguration = () => {
             {/* WorkExperience General Description Generator */}
             <PromptEditor
               name="workExperienceGeneralDescription"
+              title="Work Experience General Description"
               type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}
@@ -87,6 +89,7 @@ const ResumePromptsConfiguration = () => {
             {/* WorkExperience Achivement Description Generator */}
             <PromptEditor
               name="workExperienceAchievementDescription"
+              title="Work Experience Achievement Description"
               type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}
@@ -97,6 +100,7 @@ const ResumePromptsConfiguration = () => {
             {/* Primary Skills Generator */}
             <PromptEditor
               name="primarySkills"
+              title="Primary skills"
               type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}
@@ -108,6 +112,7 @@ const ResumePromptsConfiguration = () => {
             {/* Professional Skills Generator */}
             <PromptEditor
               name="professionalSkills"
+              title="Professional skills"
               type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}
@@ -118,6 +123,7 @@ const ResumePromptsConfiguration = () => {
             {/* Secondary Skills Generator */}
             <PromptEditor
               name="secondarySkills"
+              title="Secondary skills"
               type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}

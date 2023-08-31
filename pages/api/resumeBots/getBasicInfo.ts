@@ -13,73 +13,65 @@ import { PromptTemplate } from "langchain/prompts";
 import { StructuredOutputParser } from "langchain/output_parsers";
 import Prompt from "@/db/schemas/Prompt";
 
+import {
+  ChatPromptTemplate,
+  HumanMessagePromptTemplate,
+  SystemMessagePromptTemplate,
+} from "langchain/prompts";
+import { LLMChain } from "langchain/chains";
+import { ChatOpenAI } from "langchain/chat_models/openai";
+
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const reqBody = JSON.parse(req.body);
-    const email = reqBody.email;
+    // const email = reqBody.email;
     const type = reqBody.type;
     const jobPosition = reqBody.jobPosition;
+    const userData = reqBody.userData;
 
     // CREATING LLM MODAL
-    const model = new OpenAI({
+    const model = new ChatOpenAI({
       modelName: "gpt-3.5-turbo",
-      temperature: 1,
+      temperature: 0.5,
     });
 
-    // TESTING WITH MEMORY VECTOR STORE
-    const dir = path.join(process.cwd() + "/public", "/files", `/${email}`);
-    const loader = new DirectoryLoader(dir, {
-      ".pdf": (path) => new PDFLoader(path),
+    const chatPrompt = ChatPromptTemplate.fromPromptMessages([
+      SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing Keywords for the person LinkedIn Profile.
+        Following are the content of the resume (in JSON format): 
+        JSON user/resume data: {userData}
+
+        {format_instructions}
+        `),
+      HumanMessagePromptTemplate.fromTemplate("{prompt}"),
+    ]);
+
+    const chainB = new LLMChain({
+      prompt: chatPrompt,
+      llm: model,
     });
-    const docs = await loader.load();
-
-    const vectorStore = await MemoryVectorStore.fromDocuments(
-      docs,
-      new OpenAIEmbeddings()
-    );
-
-    const vectorStoreRetriever = vectorStore.asRetriever();
 
     if (type === "basicInfo") {
-      const parser = StructuredOutputParser.fromZodSchema(
-        z.object({
-          shortName: z
-            .string()
-            .describe("two letters from Name for short name"),
-          name: z.string().describe("Full Name"),
-          jobTitle: z.string().describe("jobTitle OR Desgination "),
-          contact: z.object({
-            phone: z.string().describe("Phone number"),
-            email: z.string().describe("Email Address"),
-            linkedIn: z.string().describe("LinkedInUrl"),
-          }),
-          education: z.object({
-            year: z.string().describe("Year of completing Latest Education"),
-            degree: z
-              .string()
-              .describe("Latest Education degree or certificate name"),
-            school: z
-              .string()
-              .describe("school / college / university of latest education"),
-          }),
-        })
-      );
-
-      const formatInstructions = parser.getFormatInstructions();
-      const prompt = new PromptTemplate({
-        template:
-          "Answer the users question as best as possible from the provided resume data that you already have about the person.\n{format_instructions}\n{additionalInfo}",
-        inputVariables: ["additionalInfo"],
-        partialVariables: { format_instructions: formatInstructions },
-      });
-
-      const input = await prompt.format({
-        additionalInfo: "Important: >> Answer should be a valid JSON <<",
-      });
-
       try {
-        const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
-        const resp = await chain4.call({ query: input });
+        // Parser Instructions
+        const parser = StructuredOutputParser.fromZodSchema(
+          z.object({
+            shortName: z
+              .string()
+              .describe("two letters from Name for short name"),
+            jobTitle: z.string().describe("jobTitle OR Desgination "),
+            contact: z.object({
+              linkedIn: z.string().describe("LinkedInUrl"),
+            }),
+          })
+        );
+        const formatInstructions = parser.getFormatInstructions();
+
+        const resp = await chainB.call({
+          userData: JSON.stringify(userData),
+          format_instructions: formatInstructions,
+          prompt: "Answer should be a valid JSON",
+        });
+
         return res.status(200).json({
           success: true,
           data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
@@ -90,20 +82,20 @@ const handler: NextApiHandler = async (req, res) => {
     }
 
     if (type === "summary") {
-      const model1 = new OpenAI({
-        streaming: true,
-        modelName: "gpt-3.5-turbo",
-        callbacks: [
-          {
-            handleLLMNewToken(token) {
-              res.write(token);
-            },
-          },
-        ],
-        temperature: 1,
-      });
-
       try {
+        // For summary we need to use another LLM model
+        const model1 = new ChatOpenAI({
+          streaming: true,
+          modelName: "gpt-3.5-turbo",
+          callbacks: [
+            {
+              handleLLMNewToken(token) {
+                res.write(token);
+              },
+            },
+          ],
+          temperature: 0.5,
+        });
         const promptRec = await Prompt.findOne({
           type: "resume",
           name: "summary",
@@ -111,17 +103,27 @@ const handler: NextApiHandler = async (req, res) => {
         });
         const prompt = promptRec.value;
 
+        const chatPrompt = ChatPromptTemplate.fromPromptMessages([
+          SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing Keywords for the person LinkedIn Profile.
+            Following are the content of the resume (in JSON format): 
+            JSON user/resume data: {userData}
+    
+            `),
+          HumanMessagePromptTemplate.fromTemplate("{prompt}"),
+        ]);
         const promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
-        const chain4 = RetrievalQAChain.fromLLM(model1, vectorStoreRetriever);
-        await chain4.call({
-          query: promptSummary,
+
+        const chainC = new LLMChain({
+          prompt: chatPrompt,
+          llm: model1,
+        });
+
+        await chainC.call({
+          userData: JSON.stringify(userData),
+          prompt: promptSummary,
         });
 
         res.end();
-        // return res.status(200).json({
-        //   success: true,
-        //   data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-        // });
       } catch (error) {
         return res.status(400).json({ success: false, error });
       }
@@ -167,20 +169,14 @@ const handler: NextApiHandler = async (req, res) => {
       );
 
       const formatInstructions = parser.getFormatInstructions();
-      const prompt = new PromptTemplate({
-        template:
-          "Answer the users question as best as possible from the provided resume data that you already have about the person.\n{format_instructions}\n{additionalInfo}",
-        inputVariables: ["additionalInfo"],
-        partialVariables: { format_instructions: formatInstructions },
-      });
-
-      const input = await prompt.format({
-        additionalInfo: "Important: >> Answer should be a valid JSON <<",
-      });
 
       try {
-        const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
-        const resp = await chain4.call({ query: input });
+        const resp = await chainB.call({
+          userData: JSON.stringify(userData),
+          format_instructions: formatInstructions,
+          prompt: "Answer should be a valid JSON",
+        });
+
         return res.status(200).json({
           success: true,
           data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
@@ -207,20 +203,14 @@ const handler: NextApiHandler = async (req, res) => {
       );
 
       const formatInstructions = parser.getFormatInstructions();
-      const prompt = new PromptTemplate({
-        template:
-          "Answer the users question as best as possible from the provided resume data that you already have about the person.\n{format_instructions}\n{additionalInfo}",
-        inputVariables: ["additionalInfo"],
-        partialVariables: { format_instructions: formatInstructions },
-      });
-
-      const input = await prompt.format({
-        additionalInfo: "Important: >> Answer should be a valid JSON <<",
-      });
 
       try {
-        const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
-        const resp = await chain4.call({ query: input });
+        const resp = await chainB.call({
+          userData: JSON.stringify(userData),
+          format_instructions: formatInstructions,
+          prompt: "Answer should be a valid JSON",
+        });
+
         return res.status(200).json({
           success: true,
           data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
@@ -246,20 +236,13 @@ const handler: NextApiHandler = async (req, res) => {
       );
 
       const formatInstructions = parser.getFormatInstructions();
-      const prompt = new PromptTemplate({
-        template:
-          "Answer the users question as best as possible from the provided resume data that you already have about the person.\n{format_instructions}\n{additionalInfo}",
-        inputVariables: ["additionalInfo"],
-        partialVariables: { format_instructions: formatInstructions },
-      });
-
-      const input = await prompt.format({
-        additionalInfo: "Important: >> Answer should be a valid JSON <<",
-      });
-
       try {
-        const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
-        const resp = await chain4.call({ query: input });
+        const resp = await chainB.call({
+          userData: JSON.stringify(userData),
+          format_instructions: formatInstructions,
+          prompt: "Answer should be a valid JSON",
+        });
+
         return res.status(200).json({
           success: true,
           data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
@@ -285,20 +268,13 @@ const handler: NextApiHandler = async (req, res) => {
       );
 
       const formatInstructions = parser.getFormatInstructions();
-      const prompt = new PromptTemplate({
-        template:
-          "Answer the users question as best as possible from the provided resume data that you already have about the person.\n{format_instructions}\n{additionalInfo}",
-        inputVariables: ["additionalInfo"],
-        partialVariables: { format_instructions: formatInstructions },
-      });
-
-      const input = await prompt.format({
-        additionalInfo: "Important: >> Answer should be a valid JSON <<",
-      });
-
       try {
-        const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
-        const resp = await chain4.call({ query: input });
+        const resp = await chainB.call({
+          userData: JSON.stringify(userData),
+          format_instructions: formatInstructions,
+          prompt: "Answer should be a valid JSON",
+        });
+
         return res.status(200).json({
           success: true,
           data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
