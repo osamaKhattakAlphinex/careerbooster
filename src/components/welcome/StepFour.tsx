@@ -2,7 +2,7 @@ import AddNewEducationCard from "./AddNewEducationCard";
 import EducationCard from "./EducationCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setStepFour } from "@/store/registerSlice";
-import { Education } from "@/store/registerSlice";
+import { Education } from "@/store/userDataSlice";
 import EditEducationCard from "./EditEducationCard";
 import { plusSimpleIcon } from "@/helpers/iconsProvider";
 // import { useEffect } from "react";

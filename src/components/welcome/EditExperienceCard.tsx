@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { WorkExperience, setStepFive } from "@/store/registerSlice";
+import { setStepFive } from "@/store/registerSlice";
+import { WorkExperience } from "@/store/userDataSlice";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useEffect } from "react";

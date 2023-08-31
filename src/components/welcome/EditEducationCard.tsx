@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Education, setStepFour } from "@/store/registerSlice";
+import { setStepFour } from "@/store/registerSlice";
+import { Education } from "@/store/userDataSlice";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import User from "@/db/schemas/User";
-import { Education, WorkExperience } from "@/store/registerSlice";
+import { Education, WorkExperience } from "@/store/userDataSlice";
 
 interface NewUserRequest {
   firstName: string;

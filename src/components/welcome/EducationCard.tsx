@@ -1,4 +1,4 @@
-import { Education } from "@/store/registerSlice";
+import { Education } from "@/store/userDataSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setStepFour } from "@/store/registerSlice";
 import { EditIcon, deleteIcon, plusSimpleIcon } from "@/helpers/iconsProvider";
@@ -13,10 +13,10 @@ const EducationCard = ({
   const dispatch = useDispatch();
   const stepFour = useSelector((state: any) => state.register.stepFour);
   const { list, state } = stepFour;
-  const handleEdit = (id: string) => {
+  const handleEdit = (id: any) => {
     dispatch(setStepFour({ state: "edit", editId: id }));
   };
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: any) => {
     const newList = list.filter((rec: Education) => rec?.id !== id);
     dispatch(setStepFour({ list: newList }));
   };

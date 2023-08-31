@@ -1,4 +1,4 @@
-import { WorkExperience } from "@/store/registerSlice";
+import { WorkExperience } from "@/store/userDataSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setStepFive } from "@/store/registerSlice";
 import { EditIcon, deleteIcon, plusSimpleIcon } from "@/helpers/iconsProvider";
@@ -13,10 +13,10 @@ const ExperienceCard = ({
   const dispatch = useDispatch();
   const stepFive = useSelector((state: any) => state.register.stepFive);
   const { list, state } = stepFive;
-  const handleEdit = (id: string) => {
+  const handleEdit = (id: any) => {
     dispatch(setStepFive({ state: "edit", editId: id }));
   };
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: any) => {
     const newList = list.filter((rec: WorkExperience) => rec.id !== id);
     dispatch(setStepFive({ list: newList }));
   };

@@ -2,7 +2,7 @@ import AddNewExperienceCard from "./AddNewExperienceCard";
 import ExperienceCard from "./ExperienceCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setStepFive } from "@/store/registerSlice";
-import { WorkExperience } from "@/store/registerSlice";
+import { WorkExperience } from "@/store/userDataSlice";
 import EditExperienceCard from "./EditExperienceCard";
 import { plusSimpleIcon } from "@/helpers/iconsProvider";
 // import { useEffect } from "react";

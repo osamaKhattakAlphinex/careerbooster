@@ -7,12 +7,8 @@ import {
   deleteIcon,
   plusSimpleIcon,
 } from "@/helpers/iconsProvider";
-import {
-  Education,
-  WorkExperience,
-  setActiveStep,
-  setStepFive,
-} from "@/store/registerSlice";
+import { setActiveStep, setStepFive } from "@/store/registerSlice";
+import { Education, WorkExperience } from "@/store/userDataSlice";
 import ExperienceCard from "./ExperienceCard";
 
 const ProfileReview = () => {
