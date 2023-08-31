@@ -157,8 +157,6 @@ const Welcome = () => {
         obj.password ||
         obj.phone
       ) {
-        console.log("SUCCESS: ", obj);
-
         axios
           .post("/api/auth/users", obj)
           .then(async function (response) {
@@ -216,7 +214,6 @@ const Welcome = () => {
 
   // file scrapping functions end
   const fetchBasicDataFromResume = () => {
-    console.log("fetchBasicDataFromResume");
     if (register.scrapped.basic === false && resume.uploadedFileName) {
       const formData = {
         type: "basicInfo",
@@ -260,7 +257,6 @@ const Welcome = () => {
   };
 
   const fetchEducationDataFromResume = () => {
-    console.log("fetchEducationDataFromResume");
     if (register.scrapped.education === false && resume.uploadedFileName) {
       const formData = {
         file: resume.uploadedFileName,
@@ -298,7 +294,6 @@ const Welcome = () => {
   };
 
   const fetchExperienceDataFromResume = () => {
-    console.log("fetchExperienceDataFromResume");
     if (register.scrapped.workExperience === false && resume.uploadedFileName) {
       const formData = {
         file: resume.uploadedFileName,
@@ -313,7 +308,7 @@ const Welcome = () => {
         if (res.success) {
           if (res?.data?.text) {
             const data = JSON.parse(res?.data?.text);
-            const formattedArr = data?.education.map((item: any) => {
+            const formattedArr = data?.experiences.map((item: any) => {
               return {
                 id: makeid(),
                 jobTitle: item.fields.jobTitle,
@@ -337,7 +332,6 @@ const Welcome = () => {
   };
 
   const fetchSkillsDataFromResume = () => {
-    console.log("fetchSkillsDataFromResume");
     if (register.scrapped.skills === false && resume.uploadedFileName) {
       const formData = {
         file: resume.uploadedFileName,

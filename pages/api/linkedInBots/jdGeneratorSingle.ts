@@ -1,5 +1,4 @@
 import { NextApiHandler } from "next";
-import { OpenAI } from "langchain/llms/openai";
 import {
   ChatPromptTemplate,
   HumanMessagePromptTemplate,
@@ -26,8 +25,6 @@ const handler: NextApiHandler = async (req, res) => {
     temperature: 0.5,
   });
 
-  // We can also construct an LLMChain from a ChatPromptTemplate and a chat model.
-  // const chat = new ChatOpenAI({ temperature: 0 });
   const chatPrompt = ChatPromptTemplate.fromPromptMessages([
     SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that helps Writing Individual Job Description for a person for his Resume.
       The Resume Data is as follows:
@@ -72,7 +69,6 @@ const handler: NextApiHandler = async (req, res) => {
       just give me the answer donot add any extra labels
       `,
   });
-  // return res.status(200).json({ test });
 
   res.end();
   try {

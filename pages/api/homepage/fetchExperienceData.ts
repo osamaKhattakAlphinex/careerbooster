@@ -37,7 +37,7 @@ const handler: NextApiHandler = async (req, res) => {
 
       const parser = StructuredOutputParser.fromZodSchema(
         z.object({
-          education: z
+          experiences: z
             .array(
               z.object({
                 fields: z.object({
@@ -56,22 +56,20 @@ const handler: NextApiHandler = async (req, res) => {
                     ),
                   fromMonth: z
                     .string()
-                    .describe("From Month in full e.g May, January"),
+                    .describe("Job Starting Month e.g May, January"),
                   fromYear: z
                     .string()
-                    .describe("From Year in full e.g 2023, 1997"),
+                    .describe("Job Starting Year e.g 2023, 1997"),
                   isContinue: z
                     .boolean()
-                    .describe("Is Education continued? e.g true, false"),
-                  toMonth: z
-                    .string()
-                    .describe("To Month in full e.g May, January"),
-                  toYear: z.string().describe("To Year in full e.g 2023, 1997"),
-                  description: z
-                    .string()
-                    .describe(
-                      "Short Description About the Job e.g I did this and that"
-                    ),
+                    .describe("Is Experience continued? e.g true, false"),
+                  toMonth: z.string().describe("Job Ending Month "),
+                  toYear: z.string().describe("Job Ending Year"),
+                  // description: z
+                  //   .string()
+                  //   .describe(
+                  //     "Short Description About the Job e.g I did this and that"
+                  //   ),
                 }),
               })
             )
