@@ -83,6 +83,7 @@ const EducationForm = ({ formik }: any) => {
               onChange={formik.handleChange}
               value={formik.values.fromMonth}
             >
+              <option value="">-- select --</option>
               {months.map((month: string) => (
                 <option key={month} value={month}>
                   {month}
@@ -99,6 +100,7 @@ const EducationForm = ({ formik }: any) => {
               onChange={formik.handleChange}
               value={formik.values.fromYear}
             >
+              <option value="">-- select --</option>
               {years.map((year: number) => (
                 <option key={year} value={year}>
                   {year}
@@ -118,6 +120,7 @@ const EducationForm = ({ formik }: any) => {
                 onChange={formik.handleChange}
                 value={formik.values.toMonth}
               >
+                <option value="">-- select --</option>
                 {months.map((month: string) => (
                   <option key={month} value={month}>
                     {month}
@@ -134,6 +137,7 @@ const EducationForm = ({ formik }: any) => {
                 onChange={formik.handleChange}
                 value={formik.values.toYear}
               >
+                <option value="">-- select --</option>
                 {years.map((year: number) => (
                   <option key={year} value={year}>
                     {year}

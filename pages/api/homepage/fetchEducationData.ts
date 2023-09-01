@@ -82,10 +82,10 @@ const handler: NextApiHandler = async (req, res) => {
       );
 
       const formatInstructions = parser.getFormatInstructions();
+      // Make sure the returned array of Education is sorted Oldest Education by From month, From year should be at the bottom of the array
+      //     and the newest Education should be on very top of the Array.
       const prompt = new PromptTemplate({
         template: `Answer the users question as best as possible from the provided resume data that you already have about the person.
-          Make sure the returned array of Education is sorted Oldest Education by month, year should be at the bottom of the array
-          and the newest Education should be on very top of the Array.
           Donot add any extra labels, if there is no data for a field leave it blank.
           \n{format_instructions}\n{additionalInfo}`,
         inputVariables: ["additionalInfo"],

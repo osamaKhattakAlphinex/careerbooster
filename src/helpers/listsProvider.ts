@@ -19,6 +19,7 @@ export const getYearsList = () => {
     { length: 101 },
     (_, index) => currentYear - 100 + index
   );
+  yearsRange.reverse();
 
   return yearsRange;
 };

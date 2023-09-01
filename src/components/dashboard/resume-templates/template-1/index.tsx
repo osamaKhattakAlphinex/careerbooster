@@ -38,7 +38,7 @@ const ResumeTemplate1 = ({
           <span className="w-full h-0 border border-gray-500 my-4"></span>
           <h3 className="uppercase text-xl font-semibold">Contacts</h3>
           <span className="w-full h-0 border border-gray-500 my-4"></span>
-          <ul className="flex flex-col gap-3 mb-4 text-sm">
+          <ul className="flex flex-col gap-3 mb-4 text-sm break-all">
             <li>
               {resume?.contact?.phone
                 ? resume?.contact?.phone

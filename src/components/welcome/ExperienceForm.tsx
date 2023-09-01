@@ -53,6 +53,7 @@ const ExperienceForm = ({ formik }: any) => {
           onChange={formik.handleChange}
           value={formik.values.country}
         >
+          <option value="">-- select --</option>
           {countriesList.map((countryName: string) => (
             <option key={countryName} value={countryName}>
               {countryName}
@@ -88,6 +89,7 @@ const ExperienceForm = ({ formik }: any) => {
               onChange={formik.handleChange}
               value={formik.values.fromMonth}
             >
+              <option value="">-- select --</option>
               {months.map((month: string) => (
                 <option key={month} value={month}>
                   {month}
@@ -97,6 +99,7 @@ const ExperienceForm = ({ formik }: any) => {
           </div>
           <div className="w-1/2">
             <label className="block text-xs text-gray-500">From Year</label>
+
             <select
               className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
               name="fromYear"
@@ -104,6 +107,7 @@ const ExperienceForm = ({ formik }: any) => {
               onChange={formik.handleChange}
               value={formik.values.fromYear}
             >
+              <option value="">-- select --</option>
               {years.map((year: number) => (
                 <option key={year} value={year}>
                   {year}
@@ -123,6 +127,7 @@ const ExperienceForm = ({ formik }: any) => {
                 onChange={formik.handleChange}
                 value={formik.values.toMonth}
               >
+                <option value="">-- select --</option>
                 {months.map((month: string) => (
                   <option key={month} value={month}>
                     {month}
@@ -139,6 +144,7 @@ const ExperienceForm = ({ formik }: any) => {
                 onChange={formik.handleChange}
                 value={formik.values.toYear}
               >
+                <option value="">-- select --</option>
                 {years.map((year: number) => (
                   <option key={year} value={year}>
                     {year}

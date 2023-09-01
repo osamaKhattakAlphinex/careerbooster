@@ -17,10 +17,10 @@ const AddNewExperienceCard = () => {
       country: "",
       cityState: "",
       fromMonth: "",
-      fromYear: new Date().getFullYear(),
+      fromYear: "",
       isContinue: false,
       toMonth: "",
-      toYear: new Date().getFullYear(),
+      toYear: "",
       description: "",
     },
     validationSchema: Yup.object({
@@ -29,7 +29,17 @@ const AddNewExperienceCard = () => {
     onSubmit: async (values) => {
       // generate random id
       const obj = { id: makeid(), ...values };
-      dispatch(setStepFive({ list: [obj, ...list] }));
+      const newList = [obj, ...list];
+      // Sort the array by fromYear and fromMonth
+      newList.sort((a: any, b: any) => {
+        const yearComparison = a.fromYear.localeCompare(b.fromYear);
+        if (yearComparison !== 0) {
+          return yearComparison;
+        }
+        return a.fromMonth.localeCompare(b.fromMonth);
+      });
+      newList.reverse();
+      dispatch(setStepFive({ list: newList }));
       dispatch(setStepFive({ state: "show" }));
     },
   });

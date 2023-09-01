@@ -20,19 +20,23 @@ const EditEducationCard = () => {
       schoolName: "",
       schoolLocation: "",
       fromMonth: "",
-      fromYear: new Date().getFullYear(),
+      fromYear: "",
       isContinue: false,
       toMonth: "",
-      toYear: new Date().getFullYear(),
+      toYear: "",
     },
     validationSchema: Yup.object({
       educationLevel: Yup.string().required("Education Level is Required"),
     }),
     onSubmit: async (values) => {
-      const listWithoutCurrent = list.filter(
-        (rec: Education) => rec.id !== editId
-      );
-      dispatch(setStepFour({ list: [values, ...listWithoutCurrent] }));
+      const updatedList = list.filter((rec: Education) => {
+        if (rec.id === editId) {
+          return values;
+        } else {
+          return rec;
+        }
+      });
+      dispatch(setStepFour({ list: updatedList }));
       dispatch(setStepFour({ state: "show" }));
     },
   });

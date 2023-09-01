@@ -17,10 +17,10 @@ const AddNewEducationCard = () => {
       schoolName: "",
       schoolLocation: "",
       fromMonth: "",
-      fromYear: new Date().getFullYear(),
+      fromYear: "",
       isContinue: false,
       toMonth: "",
-      toYear: new Date().getFullYear(),
+      toYear: "",
     },
     validationSchema: Yup.object({
       educationLevel: Yup.string().required("Education Level is Required"),
@@ -28,7 +28,17 @@ const AddNewEducationCard = () => {
     onSubmit: async (values) => {
       // generate random id
       const obj = { id: makeid(), ...values };
-      dispatch(setStepFour({ list: [obj, ...list] }));
+      const newList = [obj, ...list];
+      // Sort the array by fromYear and fromMonth
+      newList.sort((a: any, b: any) => {
+        const yearComparison = a.fromYear.localeCompare(b.fromYear);
+        if (yearComparison !== 0) {
+          return yearComparison;
+        }
+        return a.fromMonth.localeCompare(b.fromMonth);
+      });
+      newList.reverse();
+      dispatch(setStepFour({ list: newList }));
       dispatch(setStepFour({ state: "show" }));
     },
   });

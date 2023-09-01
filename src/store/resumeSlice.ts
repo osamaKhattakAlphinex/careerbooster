@@ -39,7 +39,7 @@ interface ResumeSlice {
 }
 
 const initialState: ResumeSlice = {
-  uploadedFileName: "",
+  uploadedFileName: "1693572813780_Resume-M-Suleman-Ibrahim.pdf",
   // loadingState: "",
   shortName: "",
   name: "",

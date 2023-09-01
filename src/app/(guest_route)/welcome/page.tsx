@@ -91,6 +91,22 @@ const Welcome = () => {
     }
   }, [reduxStep]);
 
+  useEffect(() => {
+    const confirmExit = (e: any) => {
+      // Display a confirmation message when leaving or refreshing the page
+      e.returnValue =
+        "You are leaving this page, your changes are not saved, you will lose your data.";
+    };
+
+    // Listen for the beforeunload event
+    window.addEventListener("beforeunload", confirmExit);
+
+    return () => {
+      // Remove the event listener when the component unmounts
+      window.removeEventListener("beforeunload", confirmExit);
+    };
+  }, []);
+
   const isNextDisabled = () => {
     if (register.activeStep === 1 && register.stepOne.isValid === false) {
       return true;
@@ -290,6 +306,17 @@ const Welcome = () => {
                 toYear: item.fields.toYear,
               };
             });
+
+            // Sort the array by fromYear and fromMonth
+            formattedArr.sort((a: any, b: any) => {
+              const yearComparison = a.fromYear.localeCompare(b.fromYear);
+              if (yearComparison !== 0) {
+                return yearComparison;
+              }
+              return a.fromMonth.localeCompare(b.fromMonth);
+            });
+            formattedArr.reverse();
+
             dispatch(setScrapped({ education: true }));
             dispatch(setStepFour({ list: formattedArr }));
           }
@@ -331,6 +358,16 @@ const Welcome = () => {
                 description: item.fields.description,
               };
             });
+            // Sort the array by fromYear and fromMonth
+            formattedArr.sort((a: any, b: any) => {
+              const yearComparison = a.fromYear.localeCompare(b.fromYear);
+              if (yearComparison !== 0) {
+                return yearComparison;
+              }
+              return a.fromMonth.localeCompare(b.fromMonth);
+            });
+            formattedArr.reverse();
+
             dispatch(setScrapped({ workExperience: true }));
             dispatch(setStepFive({ list: formattedArr }));
           }

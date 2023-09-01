@@ -19,20 +19,24 @@ const EditExperienceCard = () => {
       country: "",
       cityState: "",
       fromMonth: "",
-      fromYear: new Date().getFullYear(),
+      fromYear: "",
       isContinue: false,
       toMonth: "",
-      toYear: new Date().getFullYear(),
+      toYear: "",
       description: "",
     },
     validationSchema: Yup.object({
       jobTitle: Yup.string().required("Job title is required"),
     }),
     onSubmit: async (values) => {
-      const listWithoutCurrent = list.filter(
-        (rec: WorkExperience) => rec.id !== editId
-      );
-      dispatch(setStepFive({ list: [values, ...listWithoutCurrent] }));
+      const updatedList = list.map((rec: WorkExperience) => {
+        if (rec.id === editId) {
+          return values;
+        } else {
+          return rec;
+        }
+      });
+      dispatch(setStepFive({ list: updatedList }));
       dispatch(setStepFive({ state: "show" }));
     },
   });
