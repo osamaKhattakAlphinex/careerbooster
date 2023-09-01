@@ -54,7 +54,9 @@ const Welcome = () => {
     } else if (reduxStep !== 0) {
       router.push(`/welcome?step=${reduxStep}`);
     }
+  }, [reduxStep, urlStep]);
 
+  useEffect(() => {
     // data scraping from file
     if (
       (reduxStep === 1 || reduxStep === 2 || reduxStep === 3) &&
@@ -87,7 +89,7 @@ const Welcome = () => {
     ) {
       fetchSkillsDataFromResume();
     }
-  }, [reduxStep, urlStep]);
+  }, [reduxStep]);
 
   const isNextDisabled = () => {
     if (register.activeStep === 1 && register.stepOne.isValid === false) {
