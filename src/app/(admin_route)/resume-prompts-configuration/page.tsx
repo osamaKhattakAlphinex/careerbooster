@@ -74,29 +74,6 @@ const ResumePromptsConfiguration = () => {
               updating={updating}
             />
 
-            {/* WorkExperience General Description Generator */}
-            <PromptEditor
-              name="workExperienceGeneralDescription"
-              title="Work Experience General Description"
-              type="resume"
-              prompts={prompts}
-              promptsLoading={promptsLoading}
-              handleSave={handleSave}
-              updating={updating}
-            />
-          </div>
-          <div className="flex m-10 gap-4">
-            {/* WorkExperience Achivement Description Generator */}
-            <PromptEditor
-              name="workExperienceAchievementDescription"
-              title="Work Experience Achievement Description"
-              type="resume"
-              prompts={prompts}
-              promptsLoading={promptsLoading}
-              handleSave={handleSave}
-              updating={updating}
-            />
-
             {/* Primary Skills Generator */}
             <PromptEditor
               name="primarySkills"
@@ -108,6 +85,7 @@ const ResumePromptsConfiguration = () => {
               updating={updating}
             />
           </div>
+          <div className="flex m-10 gap-4"></div>
           <div className="flex m-10 gap-4">
             {/* Professional Skills Generator */}
             <PromptEditor
@@ -124,6 +102,18 @@ const ResumePromptsConfiguration = () => {
             <PromptEditor
               name="secondarySkills"
               title="Secondary skills"
+              type="resume"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+          </div>
+          <div className="flex m-10 gap-4">
+            {/* Professional Skills Generator */}
+            <PromptEditor
+              name="jdSingle"
+              title="Job Description Generator (for individual job)"
               type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}

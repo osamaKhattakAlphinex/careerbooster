@@ -82,6 +82,7 @@ const ResumeCreator = () => {
 
   const getSummary = async (jobPosition: string) => {
     await getUserDataIfNotExists();
+    setStreamedSummaryData("");
     // dispatch(setLoadingState("summary"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",

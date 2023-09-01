@@ -12,8 +12,7 @@ const ResumeTemplate1 = ({
   streamedJDData: string;
 }) => {
   const resume = useSelector((state: any) => state.resume);
-  console.clear();
-  console.log(resume.education);
+
   return (
     <div className="w-full p-4">
       <div className="flex">
@@ -95,7 +94,7 @@ const ResumeTemplate1 = ({
                       <li className="font-semibold uppercase">
                         {education?.educationLevel}
                       </li>
-                      <li className="uppercase">{education?.fieldOfStudy} </li>
+                      <li className="">{education?.fieldOfStudy} </li>
                       <li>{education?.schoolName}</li>
                       <li className="mb-4">
                         {education?.fromMonth + " " + education.fromYear} -{" "}

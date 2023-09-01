@@ -6,6 +6,7 @@ import {
 } from "langchain/prompts";
 import { LLMChain } from "langchain/chains";
 import { ChatOpenAI } from "langchain/chat_models/openai";
+import Prompt from "@/db/schemas/Prompt";
 
 const handler: NextApiHandler = async (req, res) => {
   try {
@@ -46,6 +47,13 @@ const handler: NextApiHandler = async (req, res) => {
       prompt: chatPrompt,
       llm: model,
     });
+
+    const promptRec = await Prompt.findOne({
+      type: "resume",
+      name: "jdSingle",
+      active: true,
+    });
+    const prompt = promptRec.value;
 
     await chainB.call({
       jobTitle: experience.jobTitle,
