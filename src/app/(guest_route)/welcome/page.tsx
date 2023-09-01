@@ -189,7 +189,7 @@ const Welcome = () => {
               redirect: false, // prevent default redirect
             });
             router.replace("/dashboard");
-            dispatch(setIsSubmitting(false));
+            // dispatch(setIsSubmitting(false));
           })
           .catch(function (error) {
             dispatch(setIsSubmitting(false));

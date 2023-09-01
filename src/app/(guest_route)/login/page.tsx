@@ -29,7 +29,7 @@ const Login = () => {
         password: values.password,
         redirect: false, // prevent default redirect
       });
-      setSubmitting(false);
+      // setSubmitting(false);
       if (res?.error) return setSubmittingError(res.error);
       router.replace("/dashboard");
     },
