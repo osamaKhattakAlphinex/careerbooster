@@ -1,5 +1,7 @@
 "use client";
 
+import { Education } from "@/store/userDataSlice";
+import React from "react";
 import { useSelector } from "react-redux";
 
 const ResumeTemplate1 = ({
@@ -10,6 +12,8 @@ const ResumeTemplate1 = ({
   streamedJDData: string;
 }) => {
   const resume = useSelector((state: any) => state.resume);
+  console.clear();
+  console.log(resume.education);
   return (
     <div className="w-full p-4">
       <div className="flex">
@@ -85,11 +89,23 @@ const ResumeTemplate1 = ({
               <h3 className="uppercase text-xl font-semibold">Education</h3>
               <span className="w-full h-0 border border-gray-500 my-4"></span>
               <ul className="flex flex-col  mb-4">
-                <li className="font-semibold uppercase">
-                  {resume?.education?.year}
-                </li>
-                <li className="uppercase">{resume?.education?.degree} </li>
-                <li>{resume?.education?.school}</li>
+                {resume?.education.map(
+                  (education: Education, index: number) => (
+                    <React.Fragment key={education?.id || index}>
+                      <li className="font-semibold uppercase">
+                        {education?.educationLevel}
+                      </li>
+                      <li className="uppercase">{education?.fieldOfStudy} </li>
+                      <li>{education?.schoolName}</li>
+                      <li className="mb-4">
+                        {education?.fromMonth + " " + education.fromYear} -{" "}
+                        {education?.isContinue
+                          ? "Present"
+                          : education?.toMonth + " " + education.toYear}
+                      </li>
+                    </React.Fragment>
+                  )
+                )}
               </ul>
             </>
           )}

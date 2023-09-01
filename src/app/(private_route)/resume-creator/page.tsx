@@ -39,15 +39,13 @@ const ResumeCreator = () => {
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
 
-  // console.log(userData);
-
   const handleGenerate = async () => {
     await getUserDataIfNotExists();
     if (jobPosition !== "" && session?.user?.email) {
-      setMsgLoading(true);
+      // setMsgLoading(true);
       getBasicInfo(jobPosition);
       getSummary(jobPosition);
-      getWorkExperienceNew(jobPosition);
+      // getWorkExperienceNew(jobPosition);
       getPrimarySkills(jobPosition);
       getProfessionalSkills(jobPosition);
       getSecondarySkills(jobPosition);
@@ -160,6 +158,7 @@ const ResumeCreator = () => {
 
         setStreamedJDData((prev) => prev + `</p> <br /> `);
       }
+      setMsgLoading(false);
     }
   };
 
@@ -247,24 +246,19 @@ const ResumeCreator = () => {
         email: session?.user?.email,
         jobPosition: jobPosition,
       }),
-    })
-      .then(async (resp: any) => {
-        const res = await resp.json();
-        if (res.success) {
-          if (res?.data?.text) {
-            const tSon = JSON.stringify(res?.data?.text);
-            const myJSON = JSON.parse(tSon);
-            dispatch(setSecondarySkills(myJSON));
-          } else if (res?.data) {
-            const myJSON = JSON.parse(res.data);
-            dispatch(setSecondarySkills(myJSON));
-          }
+    }).then(async (resp: any) => {
+      const res = await resp.json();
+      if (res.success) {
+        if (res?.data?.text) {
+          const tSon = JSON.stringify(res?.data?.text);
+          const myJSON = JSON.parse(tSon);
+          dispatch(setSecondarySkills(myJSON));
+        } else if (res?.data) {
+          const myJSON = JSON.parse(res.data);
+          dispatch(setSecondarySkills(myJSON));
         }
-      })
-      .finally(() => {
-        setMsgLoading(false);
-        // dispatch(setLoadingState(""));
-      });
+      }
+    });
   };
 
   const getUserDataIfNotExists = async () => {
