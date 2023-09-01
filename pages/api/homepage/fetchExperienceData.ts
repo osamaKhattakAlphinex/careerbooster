@@ -43,28 +43,28 @@ const handler: NextApiHandler = async (req, res) => {
                 fields: z.object({
                   // id: z.string().describe("random non-repeated id"),
                   jobTitle: z.string().describe("Job Title e.g. Software Dev"),
-                  company: z
-                    .string()
-                    .describe("Company Name e.g. Google, Facebook, etc"),
-                  country: z
-                    .string()
-                    .describe("Country Name e.g. Nigeria, United States, etc"),
-                  cityState: z
-                    .string()
-                    .describe(
-                      "City and State e.g. Lagos, Lagos State, New York, New York State, etc"
-                    ),
-                  fromMonth: z
-                    .string()
-                    .describe("Job Starting Month e.g May, January"),
-                  fromYear: z
-                    .string()
-                    .describe("Job Starting Year e.g 2023, 1997"),
-                  isContinue: z
-                    .boolean()
-                    .describe("Is Experience continued? e.g true, false"),
-                  toMonth: z.string().describe("Job Ending Month "),
-                  toYear: z.string().describe("Job Ending Year"),
+                  // company: z
+                  //   .string()
+                  //   .describe("Company Name e.g. Google, Facebook, etc"),
+                  // country: z
+                  //   .string()
+                  //   .describe("Country Name e.g. Nigeria, United States, etc"),
+                  // cityState: z
+                  //   .string()
+                  //   .describe(
+                  //     "City and State e.g. Lagos, Lagos State, New York, New York State, etc"
+                  //   ),
+                  // fromMonth: z
+                  //   .string()
+                  //   .describe("Job Starting Month e.g May, January"),
+                  // fromYear: z
+                  //   .string()
+                  //   .describe("Job Starting Year e.g 2023, 1997"),
+                  // isContinue: z
+                  //   .boolean()
+                  //   .describe("Is Experience continued? e.g true, false"),
+                  // toMonth: z.string().describe("Job Ending Month "),
+                  // toYear: z.string().describe("Job Ending Year"),
                   // description: z
                   //   .string()
                   //   .describe(
@@ -74,7 +74,7 @@ const handler: NextApiHandler = async (req, res) => {
               })
             )
             .describe(
-              "List of all Educations from the provided Data without Skipping any of the Education. Each education has the following fields: id, company, educationLevel, fieldOfStudy, schoolName, schoolLocation, fromMonth, fromYear, isContinue, toMonth, toYear"
+              "List of all Educations from the provided Data without Skipping any of the Education. Each education has the following fields: id, company, educationLevel, fieldOfStudy, schoolName, schoolLocation, fromMonth, fromYear, isContinue, toMonth, toYear. The Array you return must be sorted by year the latest one on top and oldest on the bottom"
             ),
         })
       );

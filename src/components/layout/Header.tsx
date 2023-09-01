@@ -15,7 +15,7 @@ const Header = () => {
             </span>{" "}
             Resume Bot{" "}
             <span className="text-sm border border-gray-400 rounded-full px-2 m-2">
-              v1.0 unstable
+              v2.0
             </span>
           </Link>
           <div className="flex items-center lg:order-2">

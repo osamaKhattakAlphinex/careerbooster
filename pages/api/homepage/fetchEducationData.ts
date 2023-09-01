@@ -76,7 +76,7 @@ const handler: NextApiHandler = async (req, res) => {
               })
             )
             .describe(
-              "List of all Educations from the provided Data without Skipping any of the Education. Each education has the following fields: id, company, educationLevel, fieldOfStudy, schoolName, schoolLocation, fromMonth, fromYear, isContinue, toMonth, toYear"
+              "List of all Educations from the provided Data without Skipping any of the Education. Each education has the following fields: id, company, educationLevel, fieldOfStudy, schoolName, schoolLocation, fromMonth, fromYear, isContinue, toMonth, toYear. The Array you return must be sorted by year the latest one on top and oldest on the bottom"
             ),
         })
       );

@@ -256,8 +256,11 @@ const Welcome = () => {
     }
   };
 
-  const fetchEducationDataFromResume = () => {
-    if (register.scrapped.education === false && resume.uploadedFileName) {
+  const fetchEducationDataFromResume = (refetch = false) => {
+    if (
+      (refetch || register.scrapped.education === false) &&
+      resume.uploadedFileName
+    ) {
       const formData = {
         file: resume.uploadedFileName,
       };
@@ -293,8 +296,11 @@ const Welcome = () => {
     }
   };
 
-  const fetchExperienceDataFromResume = () => {
-    if (register.scrapped.workExperience === false && resume.uploadedFileName) {
+  const fetchExperienceDataFromResume = (refetch = false) => {
+    if (
+      (refetch || register.scrapped.workExperience === false) &&
+      resume.uploadedFileName
+    ) {
       const formData = {
         file: resume.uploadedFileName,
       };
@@ -415,7 +421,13 @@ const Welcome = () => {
                 </h1>
               </div>
             ) : (
-              <>{register.activeStep === 4 && <StepFour />}</>
+              <>
+                {register.activeStep === 4 && (
+                  <StepFour
+                    fetchEducationDataFromResume={fetchEducationDataFromResume}
+                  />
+                )}
+              </>
             )}
             {register.activeStep === 5 &&
             resume.uploadedFileName !== "" &&
@@ -429,7 +441,15 @@ const Welcome = () => {
                 </h1>
               </div>
             ) : (
-              <>{register.activeStep === 5 && <StepFive />}</>
+              <>
+                {register.activeStep === 5 && (
+                  <StepFive
+                    fetchExperienceDataFromResume={
+                      fetchExperienceDataFromResume
+                    }
+                  />
+                )}
+              </>
             )}
 
             {register.activeStep === 6 &&
