@@ -20,13 +20,12 @@ import {
   setProfessionalSkills,
   // setLoadingState,
 } from "@/store/resumeSlice";
+import { exitFullScreenIcon, fullScreenIcon } from "@/helpers/iconsProvider";
 
 const ResumeCreator = () => {
   const componentRef = useRef<any>(null);
   const { data: session, status } = useSession();
-  const [jobPosition, setJobPosition] = useState<string>(
-    "Chief Privacy Officer"
-  );
+  const [jobPosition, setJobPosition] = useState<string>("");
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
 
   // streamed data
@@ -42,10 +41,10 @@ const ResumeCreator = () => {
   const handleGenerate = async () => {
     await getUserDataIfNotExists();
     if (jobPosition !== "" && session?.user?.email) {
-      // setMsgLoading(true);
+      setMsgLoading(true);
       getBasicInfo(jobPosition);
       getSummary(jobPosition);
-      // getWorkExperienceNew(jobPosition);
+      getWorkExperienceNew(jobPosition);
       getPrimarySkills(jobPosition);
       getProfessionalSkills(jobPosition);
       getSecondarySkills(jobPosition);
@@ -292,19 +291,27 @@ const ResumeCreator = () => {
             <div>
               <label
                 htmlFor="targetedJobPosition"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
               >
                 Targeted Job position
               </label>
+              <p className="text-sm mb-2">
+                Write The Job Position for which you are Recreating your Resume
+                so that we can create a Customized stunning Resume for you{" "}
+              </p>
               <input
                 type="targetedJobPosition"
                 name="targetedJobPosition"
                 id="targetedJobPosition"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="The Job position for which you are creating a new Resume e.g. ReactJS Developer, SEO specialist etc"
                 value={jobPosition}
                 onChange={(e) => setJobPosition(e.target.value)}
               />
+              <p className="text-xs my-2 text-gray-600">
+                Note: The Resume will be created according to your profile. If
+                you are not satisfied with the results try Editing your profile
+                and provide as much details as possible
+              </p>
             </div>
             <div className="flex flex-row gap-4">
               <div>
@@ -408,7 +415,7 @@ const ResumeCreator = () => {
         (resumeData?.name ||
           resumeData?.contact?.email ||
           resumeData?.summary) && (
-          <div className="m-10  w-[95%]  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+          <div className="m-10  w-[95%]  bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
             <div className="w-full card" ref={componentRef}>
               <ResumeTemplate1
                 streamedSummaryData={streamedSummaryData}

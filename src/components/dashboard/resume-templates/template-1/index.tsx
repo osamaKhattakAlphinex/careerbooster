@@ -14,7 +14,7 @@ const ResumeTemplate1 = ({
   const resume = useSelector((state: any) => state.resume);
 
   return (
-    <div className="w-full p-4">
+    <div className="w-full ">
       <div className="flex">
         <div className="flex flex-col w-10/12 p-8">
           <h2 className="text-4xl">
@@ -38,7 +38,7 @@ const ResumeTemplate1 = ({
           <span className="w-full h-0 border border-gray-500 my-4"></span>
           <h3 className="uppercase text-xl font-semibold">Contacts</h3>
           <span className="w-full h-0 border border-gray-500 my-4"></span>
-          <ul className="flex flex-col gap-3 mb-4">
+          <ul className="flex flex-col gap-3 mb-4 text-sm">
             <li>
               {resume?.contact?.phone
                 ? resume?.contact?.phone
