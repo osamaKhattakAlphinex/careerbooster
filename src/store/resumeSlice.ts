@@ -48,7 +48,7 @@ export interface Resume {
 
 const initialState: Resume = {
   state: {
-    jobPosition: "",
+    jobPosition: "Senior NodeJS Developer",
     resumeLoading: false,
     componentRef: null,
   },

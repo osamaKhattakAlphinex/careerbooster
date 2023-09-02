@@ -40,7 +40,7 @@ const handler: NextApiHandler = async (req, res) => {
       llm: model,
     });
 
-    if (type === "basicInfo") {
+    if (type === "basicDetails") {
       try {
         // Parser Instructions
         const parser = StructuredOutputParser.fromZodSchema(

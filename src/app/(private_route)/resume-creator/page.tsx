@@ -33,6 +33,7 @@ const ResumeCreator = () => {
   // streamed data
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [streamedJDData, setStreamedJDData] = useState("");
+  const [aiInputUserData, setAiInputUserData] = useState<any>();
 
   // Redux
   const dispatch = useDispatch();
@@ -42,14 +43,14 @@ const ResumeCreator = () => {
   const handleGenerate = async () => {
     await getUserDataIfNotExists();
     if (resumeData.state.jobPosition !== "" && session?.user?.email) {
-      // dispatch(setState({ name: "resumeLoading", value: true }));
-      // dispatch(setId(""));
+      dispatch(setState({ name: "resumeLoading", value: true }));
+      dispatch(setId(""));
       getBasicInfo();
-      // getSummary();
-      // getWorkExperienceNew();
-      // getPrimarySkills();
-      // getProfessionalSkills();
-      // getSecondarySkills();
+      getSummary();
+      getWorkExperienceNew();
+      getPrimarySkills();
+      getProfessionalSkills();
+      getSecondarySkills();
     }
   };
 
@@ -59,8 +60,8 @@ const ResumeCreator = () => {
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
-        type: "basicInfo",
-        userData,
+        type: "basicDetails",
+        userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
       }),
     }).then(async (resp: any) => {
@@ -207,6 +208,7 @@ const ResumeCreator = () => {
       method: "POST",
       body: JSON.stringify({
         type: "primarySkills",
+        userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
       }),
     }).then(async (resp: any) => {
@@ -231,6 +233,7 @@ const ResumeCreator = () => {
       body: JSON.stringify({
         type: "professionalSkills",
         email: session?.user?.email,
+        userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
       }),
     }).then(async (resp: any) => {
@@ -255,6 +258,7 @@ const ResumeCreator = () => {
       body: JSON.stringify({
         type: "secondarySkills",
         email: session?.user?.email,
+        userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
       }),
     }).then(async (resp: any) => {
@@ -287,19 +291,6 @@ const ResumeCreator = () => {
     }
   };
 
-  // when page (session) loads, fetch user data if not exists
-  useEffect(() => {
-    if (session?.user?.email) {
-      getUserDataIfNotExists();
-    }
-  }, [session?.user?.email]);
-
-  useEffect(() => {
-    if (!resumeData.state.resumeLoading && resumeData?.name) {
-      saveResumeToDB();
-    }
-  }, [resumeData.state.resumeLoading]);
-
   const saveResumeToDB = async () => {
     let obj = resumeData;
     if (!resumeData.id || resumeData.id === "") {
@@ -322,6 +313,35 @@ const ResumeCreator = () => {
         dispatch(setUserData(user));
       });
   };
+
+  // when page (session) loads, fetch user data if not exists
+  useEffect(() => {
+    console.log("email: ", session?.user?.email);
+    if (session?.user?.email) {
+      getUserDataIfNotExists();
+    }
+  }, [session?.user?.email]);
+
+  useEffect(() => {
+    if (!resumeData.state.resumeLoading && resumeData?.name) {
+      saveResumeToDB();
+    }
+  }, [resumeData.state.resumeLoading]);
+
+  useEffect(() => {
+    if (userData && userData?.email) {
+      setAiInputUserData({
+        contact: userData?.contact,
+        education: userData?.contact,
+        email: userData?.contact,
+        experience: userData?.contact,
+        firstName: userData?.firstName,
+        lastName: userData?.lastName,
+        phone: userData?.phone,
+        skills: userData?.skills,
+      });
+    }
+  }, [userData]);
 
   return (
     <>
