@@ -44,7 +44,6 @@ const UserSchema = new Schema(
       default: "user",
     },
     files: [{ type: String }],
-    resumes: [],
   },
 
   { timestamps: true }

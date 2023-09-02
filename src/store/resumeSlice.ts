@@ -3,6 +3,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ResumeSlice {
+  state: {
+    jobPosition: string;
+    resumeLoading: boolean;
+    componentRef: any;
+  };
+  id?: string;
   uploadedFileName: string;
   // loadingState: string;
   shortName: string;
@@ -39,6 +45,12 @@ interface ResumeSlice {
 }
 
 const initialState: ResumeSlice = {
+  state: {
+    jobPosition: "",
+    resumeLoading: false,
+    componentRef: null,
+  },
+  id: "",
   uploadedFileName: "",
   // loadingState: "",
   shortName: "",
@@ -78,6 +90,23 @@ const resumeSlice = createSlice({
   name: "resume",
   initialState,
   reducers: {
+    setState(state, action) {
+      return {
+        ...state,
+        state: {
+          ...state.state,
+          [action.payload.name]: action.payload.value,
+        },
+      };
+    },
+
+    setId(state, action) {
+      return {
+        ...state,
+        id: action.payload,
+      };
+    },
+
     setUploadedFileName(state, action) {
       return {
         ...state,
@@ -141,6 +170,8 @@ export const {
   setPrimarySkills,
   setSecondarySkills,
   setProfessionalSkills,
+  setId,
+  setState,
   // setLoadingState,
 } = resumeSlice.actions;
 

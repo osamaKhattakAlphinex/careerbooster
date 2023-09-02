@@ -2,9 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/dashboard/resume-templates/template-1";
-import DownloadDocx from "@/components/dashboard/resume-templates/template-1/DownloadDocx";
 import { useDispatch, useSelector } from "react-redux";
-import ReactToPrint from "react-to-print";
 import {
   WorkExperience,
   setField,
@@ -18,15 +16,19 @@ import {
   setPrimarySkills,
   setSecondarySkills,
   setProfessionalSkills,
+  setId,
+  setState,
   // setLoadingState,
 } from "@/store/resumeSlice";
-import { exitFullScreenIcon, fullScreenIcon } from "@/helpers/iconsProvider";
+// import { exitFullScreenIcon, fullScreenIcon } from "@/helpers/iconsProvider";
+import axios from "axios";
+import { makeid } from "@/helpers/makeid";
+import RecentResumeCard from "@/components/dashboard/resume-creator/RecenResumesCard";
+import GenerateNewResumeCard from "@/components/dashboard/resume-creator/GenerateNewResumeCard";
 
 const ResumeCreator = () => {
   const componentRef = useRef<any>(null);
-  const { data: session, status } = useSession();
-  const [jobPosition, setJobPosition] = useState<string>("");
-  const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
+  const { data: session } = useSession();
 
   // streamed data
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
@@ -34,31 +36,30 @@ const ResumeCreator = () => {
 
   // Redux
   const dispatch = useDispatch();
-
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
 
   const handleGenerate = async () => {
     await getUserDataIfNotExists();
-    if (jobPosition !== "" && session?.user?.email) {
-      setMsgLoading(true);
-      getBasicInfo(jobPosition);
-      getSummary(jobPosition);
-      getWorkExperienceNew(jobPosition);
-      getPrimarySkills(jobPosition);
-      getProfessionalSkills(jobPosition);
-      getSecondarySkills(jobPosition);
+    if (resumeData.state.jobPosition !== "" && session?.user?.email) {
+      dispatch(setState({ name: "resumeLoading", value: true }));
+      getBasicInfo();
+      getSummary();
+      getWorkExperienceNew();
+      getPrimarySkills();
+      getProfessionalSkills();
+      getSecondarySkills();
     }
   };
 
-  const getBasicInfo = async (jobPosition: string) => {
+  const getBasicInfo = async () => {
     // dispatch(setLoadingState("basicInfo"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
         type: "basicInfo",
         userData,
-        jobPosition: jobPosition,
+        jobPosition: resumeData.state.jobPosition,
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
@@ -79,7 +80,7 @@ const ResumeCreator = () => {
     });
   };
 
-  const getSummary = async (jobPosition: string) => {
+  const getSummary = async () => {
     await getUserDataIfNotExists();
     setStreamedSummaryData("");
     // dispatch(setLoadingState("summary"));
@@ -87,7 +88,7 @@ const ResumeCreator = () => {
       method: "POST",
       body: JSON.stringify({
         type: "summary",
-        jobPosition: jobPosition,
+        jobPosition: resumeData.state.jobPosition,
       }),
     }).then(async (resp: any) => {
       if (resp.ok) {
@@ -109,7 +110,7 @@ const ResumeCreator = () => {
     });
   };
 
-  const getWorkExperienceNew = async (jobPosition: string) => {
+  const getWorkExperienceNew = async () => {
     // dispatch(setLoadingState("workExperience"));
     await getUserDataIfNotExists();
 
@@ -158,18 +159,18 @@ const ResumeCreator = () => {
 
         setStreamedJDData((prev) => prev + `</p> <br /> `);
       }
-      setMsgLoading(false);
+      dispatch(setState({ name: "resumeLoading", value: false }));
     }
   };
 
-  // const getWorkExperience = async (jobPosition: string) => {
+  // const getWorkExperience = async () => {
   //   await getUserDataIfNotExists();
   //   // dispatch(setLoadingState("workExperience"));
   //   return fetch("/api/resumeBots/getBasicInfo", {
   //     method: "POST",
   //     body: JSON.stringify({
   //       type: "workExperience",
-  //       jobPosition: jobPosition,
+  //       jobPosition: resumeData.state.jobPosition,
   //     }),
   //   }).then(async (resp: any) => {
   //     const res = await resp.json();
@@ -189,14 +190,14 @@ const ResumeCreator = () => {
   //   });
   // };
 
-  const getPrimarySkills = async (jobPosition: string) => {
+  const getPrimarySkills = async () => {
     // dispatch(setLoadingState("primarySkills"));
     await getUserDataIfNotExists();
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
         type: "primarySkills",
-        jobPosition: jobPosition,
+        jobPosition: resumeData.state.jobPosition,
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
@@ -213,14 +214,14 @@ const ResumeCreator = () => {
     });
   };
 
-  const getProfessionalSkills = async (jobPosition: string) => {
+  const getProfessionalSkills = async () => {
     // dispatch(setLoadingState("professionalSkills"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
         type: "professionalSkills",
         email: session?.user?.email,
-        jobPosition: jobPosition,
+        jobPosition: resumeData.state.jobPosition,
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
@@ -237,14 +238,14 @@ const ResumeCreator = () => {
     });
   };
 
-  const getSecondarySkills = async (jobPosition: string) => {
+  const getSecondarySkills = async () => {
     // dispatch(setLoadingState("secondarySkills"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
         type: "secondarySkills",
         email: session?.user?.email,
-        jobPosition: jobPosition,
+        jobPosition: resumeData.state.jobPosition,
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
@@ -283,133 +284,36 @@ const ResumeCreator = () => {
     }
   }, [session?.user?.email]);
 
+  useEffect(() => {
+    if (!resumeData.state.resumeLoading && resumeData?.name) {
+      saveResumeToDB();
+    }
+  }, [resumeData.state.resumeLoading]);
+
+  const saveResumeToDB = async () => {
+    let obj = resumeData;
+    if (!resumeData.id) {
+      obj = { id: makeid(), ...resumeData };
+      dispatch(setId(obj.id));
+    }
+
+    axios
+      .post("/api/resumeBots/saveResumeToDB", {
+        email: session?.user?.email,
+        resumeData: obj,
+      })
+      .then((res) => {
+        console.log("res: ", res);
+      });
+  };
+
   return (
     <>
-      <div className="m-10 w-[95%]  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-        <div className="w-full card">
-          <div className="space-y-4 md:space-y-6">
-            <div>
-              <label
-                htmlFor="targetedJobPosition"
-                className="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
-              >
-                Targeted Job position
-              </label>
-              <p className="text-sm mb-2">
-                Write The Job Position for which you are Recreating your Resume
-                so that we can create a Customized stunning Resume for you{" "}
-              </p>
-              <input
-                type="targetedJobPosition"
-                name="targetedJobPosition"
-                id="targetedJobPosition"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={jobPosition}
-                onChange={(e) => setJobPosition(e.target.value)}
-              />
-              <p className="text-xs my-2 text-gray-600">
-                Note: The Resume will be created according to your profile. If
-                you are not satisfied with the results try Editing your profile
-                and provide as much details as possible
-              </p>
-            </div>
-            <div className="flex flex-row gap-4">
-              <div>
-                <button
-                  disabled={
-                    jobPosition === "" || msgLoading || !session?.user?.email
-                  }
-                  onClick={handleGenerate}
-                  className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300"
-                >
-                  <div className="flex flex-row gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className={`w-4 h-4 ${msgLoading ? "animate-spin" : ""}`}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                      />
-                    </svg>
-                    <span>
-                      {msgLoading ? "Please wait..." : "Generate Resume"}
-                    </span>
-                  </div>
-                </button>
-              </div>
-
-              {resumeData && (
-                <DownloadDocx
-                  basicInfo={resumeData}
-                  disabled={
-                    jobPosition === "" || msgLoading || !session?.user?.email
-                  }
-                />
-              )}
-              {resumeData && (
-                <>
-                  <ReactToPrint
-                    trigger={() => (
-                      <button
-                        disabled={
-                          jobPosition === "" ||
-                          msgLoading ||
-                          !session?.user?.email ||
-                          !resumeData?.name
-                        }
-                        className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300"
-                      >
-                        <div className="flex flex-row gap-2">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="w-4 h-4"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                            />
-                          </svg>
-                          <span>Print / Download Resume in PDF</span>
-                          {/* <span>
-                            To download choose destination "save as PDF"
-                          </span> */}
-                        </div>
-                      </button>
-                    )}
-                    content={() => componentRef.current}
-                  />
-                </>
-              )}
-            </div>
-            {/* {resumeData?.loadingState !== "" && (
-              <h3>
-                AI is Writing...
-                {resumeData?.loadingState === "basicInfo" && "Basic Info"}
-                {resumeData?.loadingState === "summary" && "Summary"}
-                {resumeData?.loadingState === "workExperience" &&
-                  "Work Experience"}
-                {resumeData?.loadingState === "primarySkills" &&
-                  "Primary Skills"}
-                {resumeData?.loadingState === "professionalSkills" &&
-                  "Professional Skills"}
-                {resumeData?.loadingState === "secondarySkills" &&
-                  "Secondary Skills"}
-              </h3>
-            )} */}
-          </div>
-        </div>
-      </div>
+      <RecentResumeCard />
+      <GenerateNewResumeCard
+        handleGenerate={handleGenerate}
+        saveResumeToDB={saveResumeToDB}
+      />
 
       {resumeData &&
         (resumeData?.name ||
