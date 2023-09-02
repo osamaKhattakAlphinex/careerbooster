@@ -56,8 +56,7 @@ const ResumeTemplate1 = ({
                     ? resume?.contact?.linkedIn
                     : "https://www.linkedin.com/"
                 }
-                className="text-blue-600"
-              >
+                className="text-blue-600">
                 {resume?.contact?.linkedIn
                   ? resume?.contact?.linkedIn
                   : "https://www.linkedin.com/"}
@@ -150,7 +149,9 @@ const ResumeTemplate1 = ({
           <span className="w-full h-0 border border-gray-500 my-4"></span>
 
           <p className="text-base">
-            {streamedSummaryData && streamedSummaryData}
+            {resume?.summary !== ""
+              ? resume?.summary
+              : streamedSummaryData && streamedSummaryData}
           </p>
 
           {/* Work Experience */}
@@ -159,8 +160,12 @@ const ResumeTemplate1 = ({
           <span className="w-full h-0 border border-gray-500 my-4"></span>
           <div
             className="list-disc"
-            dangerouslySetInnerHTML={{ __html: streamedJDData }}
-          ></div>
+            dangerouslySetInnerHTML={{
+              __html:
+                resume?.workExperience !== ""
+                  ? resume?.workExperience
+                  : streamedJDData,
+            }}></div>
           {/* {resume?.workExperience &&
             resume?.workExperience.map((record: any, i: number) => {
               const { fields: rec } = record;

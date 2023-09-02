@@ -2,12 +2,13 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
-interface ResumeSlice {
+export interface Resume {
   state: {
     jobPosition: string;
     resumeLoading: boolean;
     componentRef: any;
   };
+  dateTime?: string;
   id?: string;
   uploadedFileName: string;
   // loadingState: string;
@@ -27,29 +28,31 @@ interface ResumeSlice {
     }
   ];
   summary: string;
-  workExperience: [
-    {
-      fields: {
-        company: string;
-        title: string;
-        companyAddress: string;
-        from: string;
-        to: string;
-        achievements: string;
-      };
-    }
-  ];
+  // workExperience: [
+  //   {
+  //     fields: {
+  //       company: string;
+  //       title: string;
+  //       companyAddress: string;
+  //       from: string;
+  //       to: string;
+  //       achievements: string;
+  //     };
+  //   }
+  // ];
+  workExperience: "";
   primarySkills: [];
   professionalSkills: [];
   secondarySkills: [];
 }
 
-const initialState: ResumeSlice = {
+const initialState: Resume = {
   state: {
     jobPosition: "",
     resumeLoading: false,
     componentRef: null,
   },
+  dateTime: "",
   id: "",
   uploadedFileName: "",
   // loadingState: "",
@@ -69,18 +72,19 @@ const initialState: ResumeSlice = {
     },
   ],
   summary: "",
-  workExperience: [
-    {
-      fields: {
-        company: "",
-        title: "",
-        companyAddress: "",
-        from: "",
-        to: "",
-        achievements: "",
-      },
-    },
-  ],
+  // workExperience: [
+  //   {
+  //     fields: {
+  //       company: "",
+  //       title: "",
+  //       companyAddress: "",
+  //       from: "",
+  //       to: "",
+  //       achievements: "",
+  //     },
+  //   },
+  // ],
+  workExperience: "",
   primarySkills: [],
   professionalSkills: [],
   secondarySkills: [],
@@ -90,6 +94,11 @@ const resumeSlice = createSlice({
   name: "resume",
   initialState,
   reducers: {
+    setResume(state, action) {
+      return {
+        ...action.payload,
+      };
+    },
     setState(state, action) {
       return {
         ...state,
@@ -132,9 +141,15 @@ const resumeSlice = createSlice({
     setWorkExperience(state, action) {
       return {
         ...state,
-        workExperience: action.payload.workExperience,
+        workExperience: action.payload,
       };
     },
+    // setWorkExperience(state, action) {
+    //   return {
+    //     ...state,
+    //     workExperience: action.payload.workExperience,
+    //   };
+    // },
     setPrimarySkills(state, action) {
       return {
         ...state,
@@ -172,6 +187,7 @@ export const {
   setProfessionalSkills,
   setId,
   setState,
+  setResume,
   // setLoadingState,
 } = resumeSlice.actions;
 

@@ -42,18 +42,20 @@ const ResumeCreator = () => {
   const handleGenerate = async () => {
     await getUserDataIfNotExists();
     if (resumeData.state.jobPosition !== "" && session?.user?.email) {
-      dispatch(setState({ name: "resumeLoading", value: true }));
+      // dispatch(setState({ name: "resumeLoading", value: true }));
+      // dispatch(setId(""));
       getBasicInfo();
-      getSummary();
-      getWorkExperienceNew();
-      getPrimarySkills();
-      getProfessionalSkills();
-      getSecondarySkills();
+      // getSummary();
+      // getWorkExperienceNew();
+      // getPrimarySkills();
+      // getProfessionalSkills();
+      // getSecondarySkills();
     }
   };
 
   const getBasicInfo = async () => {
     // dispatch(setLoadingState("basicInfo"));
+
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
@@ -83,6 +85,7 @@ const ResumeCreator = () => {
   const getSummary = async () => {
     await getUserDataIfNotExists();
     setStreamedSummaryData("");
+    dispatch(setSummary(""));
     // dispatch(setLoadingState("summary"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
@@ -93,6 +96,7 @@ const ResumeCreator = () => {
     }).then(async (resp: any) => {
       if (resp.ok) {
         const reader = resp.body.getReader();
+        let summaryTemp = "";
         while (true) {
           const { done, value } = await reader.read();
 
@@ -102,8 +106,9 @@ const ResumeCreator = () => {
 
           const text = new TextDecoder().decode(value);
           setStreamedSummaryData((prev) => prev + text);
+          summaryTemp += text;
         }
-        dispatch(setSummary(streamedSummaryData));
+        dispatch(setSummary(summaryTemp));
       } else {
         setStreamedSummaryData("Error! Something went wrong");
       }
@@ -121,7 +126,8 @@ const ResumeCreator = () => {
         return rest;
       });
       setStreamedJDData("");
-
+      dispatch(setWorkExperience(""));
+      let temp = "";
       for (const [index, experience] of experiences.entries()) {
         let html = "";
         html += `<h2 style="font-size: 1.5rem; line-height: 2rem; ">${experience.jobTitle}</h2>`;
@@ -135,6 +141,7 @@ const ResumeCreator = () => {
                   </h2>`;
         html += `<p>`;
 
+        temp += html;
         setStreamedJDData((prev) => prev + html);
         const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
           method: "POST",
@@ -154,11 +161,14 @@ const ResumeCreator = () => {
 
             const text = new TextDecoder().decode(value);
             setStreamedJDData((prev) => prev + text);
+            temp += text;
           }
         }
 
         setStreamedJDData((prev) => prev + `</p> <br /> `);
+        temp += `</p> <br /> `;
       }
+      dispatch(setWorkExperience(temp));
       dispatch(setState({ name: "resumeLoading", value: false }));
     }
   };
@@ -292,9 +302,8 @@ const ResumeCreator = () => {
 
   const saveResumeToDB = async () => {
     let obj = resumeData;
-    if (!resumeData.id) {
-      obj = { id: makeid(), ...resumeData };
-      dispatch(setId(obj.id));
+    if (!resumeData.id || resumeData.id === "") {
+      obj = { ...resumeData, id: makeid(), dateTime: new Date() };
     }
 
     axios
@@ -302,8 +311,15 @@ const ResumeCreator = () => {
         email: session?.user?.email,
         resumeData: obj,
       })
-      .then((res) => {
-        console.log("res: ", res);
+      .then(async (resp) => {
+        dispatch(setId(obj.id));
+        // update user
+        const res = await fetch(
+          `/api/users/getOneByEmail?email=${session?.user?.email}`
+        );
+
+        const { user } = await res.json();
+        dispatch(setUserData(user));
       });
   };
 
