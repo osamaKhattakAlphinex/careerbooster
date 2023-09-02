@@ -34,7 +34,7 @@ const handler: NextApiHandler = async (req, res) => {
         user.resumes[existingResumeIndex] = resumeData;
       } else {
         // If no matching record found, add the new resume object to the array
-        user.resumes.push(resumeData);
+        user.resumes.unshift(resumeData);
       }
     }
 
