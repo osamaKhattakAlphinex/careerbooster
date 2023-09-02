@@ -17,16 +17,16 @@ const ResumeTemplate1 = ({
     <div className="w-full ">
       <div className="flex">
         <div className="flex flex-col w-10/12 p-8">
-          <h2 className="text-4xl">
+          <h2 className="text-4xl hover:shadow-md hover:bg-gray-100">
             {resume?.name ? resume?.name : "FULL NAME"}
           </h2>
-          <h3 className="text-xl">
+          <h3 className="text-xl hover:shadow-md hover:bg-gray-100">
             {resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
           </h3>
         </div>
         <div>
           <div className="w-32 h-32 bg-gray-800 text-center p-10 rounded-full">
-            <span className="text-4xl text-white">
+            <span className="text-4xl text-white hover:shadow-md hover:bg-gray-900">
               {resume?.shortName ? resume?.shortName : "CPH"}
             </span>
           </div>
@@ -39,17 +39,17 @@ const ResumeTemplate1 = ({
           <h3 className="uppercase text-xl font-semibold">Contacts</h3>
           <span className="w-full h-0 border border-gray-500 my-4"></span>
           <ul className="flex flex-col gap-3 mb-4 text-sm break-all">
-            <li>
+            <li className="hover:shadow-md hover:bg-gray-100">
               {resume?.contact?.phone
                 ? resume?.contact?.phone
                 : "+92 312 1231234"}
             </li>
-            <li>
+            <li className="hover:shadow-md hover:bg-gray-100">
               {resume?.contact?.email
                 ? resume?.contact?.email
                 : "your@email.com"}
             </li>
-            <li>
+            <li className="hover:shadow-md hover:bg-gray-100">
               <a
                 href={
                   resume?.contact?.linkedIn
@@ -74,7 +74,9 @@ const ResumeTemplate1 = ({
               <ul className="flex flex-col gap-2 mb-4">
                 <li className="font-semibold uppercase">primary</li>
                 {resume?.primarySkills.map((skill: string, i: number) => (
-                  <li key={i}>{skill}</li>
+                  <li className="hover:shadow-md hover:bg-gray-100" key={i}>
+                    {skill}
+                  </li>
                 ))}
               </ul>
             </>
@@ -90,12 +92,16 @@ const ResumeTemplate1 = ({
                 {resume?.education.map(
                   (education: Education, index: number) => (
                     <React.Fragment key={education?.id || index}>
-                      <li className="font-semibold uppercase">
+                      <li className="font-semibold uppercase hover:shadow-md hover:bg-gray-100">
                         {education?.educationLevel}
                       </li>
-                      <li className="">{education?.fieldOfStudy} </li>
-                      <li>{education?.schoolName}</li>
-                      <li className="mb-4">
+                      <li className="hover:shadow-md hover:bg-gray-100">
+                        {education?.fieldOfStudy}{" "}
+                      </li>
+                      <li className="hover:shadow-md hover:bg-gray-100">
+                        {education?.schoolName}
+                      </li>
+                      <li className="mb-4 hover:shadow-md hover:bg-gray-100">
                         {education?.fromMonth + " " + education.fromYear} -{" "}
                         {education?.isContinue
                           ? "Present"
@@ -116,10 +122,12 @@ const ResumeTemplate1 = ({
                 <h3 className="uppercase text-xl font-semibold">Skills</h3>
                 <span className="w-full h-0 border border-gray-500 my-4"></span>
                 <ul className="flex flex-col gap-2 mb-4">
-                  <li className="font-semibold uppercase">Professional</li>
+                  <li className="font-semibold uppercase ">Professional</li>
                   {resume?.professionalSkills.map(
                     (skill: string, i: number) => (
-                      <li key={i}>{skill}</li>
+                      <li key={i} className="hover:shadow-md hover:bg-gray-100">
+                        {skill}
+                      </li>
                     )
                   )}
                 </ul>
@@ -136,7 +144,9 @@ const ResumeTemplate1 = ({
               <ul className="flex flex-col gap-2 mb-4">
                 <li className="font-semibold uppercase">secondary</li>
                 {resume?.secondarySkills.map((skill: string, i: number) => (
-                  <li key={i}>{skill}</li>
+                  <li key={i} className="hover:shadow-md hover:bg-gray-100">
+                    {skill}
+                  </li>
                 ))}
               </ul>
             </>
@@ -148,7 +158,7 @@ const ResumeTemplate1 = ({
           <h3 className="uppercase text-xl font-semibold">EXECUTIVE SUMMARY</h3>
           <span className="w-full h-0 border border-gray-500 my-4"></span>
 
-          <p className="text-base">
+          <p className="text-base hover:shadow-md hover:bg-gray-100">
             {resume?.summary !== ""
               ? resume?.summary
               : streamedSummaryData && streamedSummaryData}
@@ -159,7 +169,7 @@ const ResumeTemplate1 = ({
           <h3 className="uppercase text-xl font-semibold">WORK EXPERIENCE</h3>
           <span className="w-full h-0 border border-gray-500 my-4"></span>
           <div
-            className="list-disc"
+            className="list-disc hover:shadow-md hover:bg-gray-100"
             dangerouslySetInnerHTML={{
               __html:
                 resume?.workExperience !== ""
