@@ -2,6 +2,14 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
+interface WorkExperience {
+  company: string;
+  position: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+}
+
 export interface Resume {
   state: {
     jobPosition: string;
@@ -28,18 +36,7 @@ export interface Resume {
     }
   ];
   summary: string;
-  // workExperience: [
-  //   {
-  //     fields: {
-  //       company: string;
-  //       title: string;
-  //       companyAddress: string;
-  //       from: string;
-  //       to: string;
-  //       achievements: string;
-  //     };
-  //   }
-  // ];
+  workExperienceArray: WorkExperience[];
   workExperience: "";
   primarySkills: [];
   professionalSkills: [];
@@ -48,7 +45,7 @@ export interface Resume {
 
 const initialState: Resume = {
   state: {
-    jobPosition: "Senior NodeJS Developer",
+    jobPosition: "Frontend Engineer",
     resumeLoading: false,
     componentRef: null,
   },
@@ -72,18 +69,7 @@ const initialState: Resume = {
     },
   ],
   summary: "",
-  // workExperience: [
-  //   {
-  //     fields: {
-  //       company: "",
-  //       title: "",
-  //       companyAddress: "",
-  //       from: "",
-  //       to: "",
-  //       achievements: "",
-  //     },
-  //   },
-  // ],
+  workExperienceArray: [],
   workExperience: "",
   primarySkills: [],
   professionalSkills: [],
@@ -151,12 +137,12 @@ const resumeSlice = createSlice({
         workExperience: action.payload,
       };
     },
-    // setWorkExperience(state, action) {
-    //   return {
-    //     ...state,
-    //     workExperience: action.payload.workExperience,
-    //   };
-    // },
+    setWorkExperienceArray(state, action) {
+      return {
+        ...state,
+        workExperienceArray: action.payload.workExperienceArray,
+      };
+    },
     setPrimarySkills(state, action) {
       return {
         ...state,
@@ -196,6 +182,7 @@ export const {
   setState,
   setResume,
   setField,
+  setWorkExperienceArray,
   // setLoadingState,
 } = resumeSlice.actions;
 

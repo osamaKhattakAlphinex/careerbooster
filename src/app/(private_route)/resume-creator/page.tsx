@@ -18,6 +18,7 @@ import {
   setProfessionalSkills,
   setId,
   setState,
+  setWorkExperienceArray,
   // setLoadingState,
 } from "@/store/resumeSlice";
 // import { exitFullScreenIcon, fullScreenIcon } from "@/helpers/iconsProvider";
@@ -42,6 +43,8 @@ const ResumeCreator = () => {
 
   const handleGenerate = async () => {
     await getUserDataIfNotExists();
+    // TODO!! RESET RESUME DATA
+
     if (resumeData.state.jobPosition !== "" && session?.user?.email) {
       dispatch(setState({ name: "resumeLoading", value: true }));
       dispatch(setId(""));
@@ -129,10 +132,15 @@ const ResumeCreator = () => {
       setStreamedJDData("");
       dispatch(setWorkExperience(""));
       let temp = "";
+      const workExpArr: any = [];
       for (const [index, experience] of experiences.entries()) {
+        let workExpArrObj: any = {};
         let html = "";
         html += `<h2 style="font-size: 1.5rem; line-height: 2rem; ">${experience.jobTitle}</h2>`;
-        html += `<h2 style="font-size: 1.1rem; line-height: 1.75rem; margin-bottom: 0.5rem">
+        workExpArrObj.title = experience.jobTitle;
+
+        html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
+        
         ${experience.fromMonth} ${experience.fromYear} - ${
           experience.isContinue
             ? "Present"
@@ -140,9 +148,18 @@ const ResumeCreator = () => {
         } | ${experience.company} | 
         ${experience?.cityState} ${experience?.country}
                   </h2>`;
-        html += `<p>`;
+        html += `<div>`;
+        workExpArrObj.cityState = experience.cityState;
+        workExpArrObj.country = experience.country;
+        workExpArrObj.company = experience.company;
+        workExpArrObj.fromMonth = experience.fromMonth;
+        workExpArrObj.fromYear = experience.fromYear;
+        workExpArrObj.isContinue = experience.isContinue;
+        workExpArrObj.toMonth = experience.toMonth;
+        workExpArrObj.toYear = experience.toYear;
 
         temp += html;
+        let achievementTemp = "";
         setStreamedJDData((prev) => prev + html);
         const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
           method: "POST",
@@ -163,15 +180,46 @@ const ResumeCreator = () => {
             const text = new TextDecoder().decode(value);
             setStreamedJDData((prev) => prev + text);
             temp += text;
+            achievementTemp += text;
           }
         }
 
-        setStreamedJDData((prev) => prev + `</p> <br /> `);
-        temp += `</p> <br /> `;
+        setStreamedJDData((prev) => prev + `</div> <br /> `);
+        temp += `</div> <br /> `;
+        const achivementsArray = fetchLIstOfStrings(achievementTemp);
+        workExpArrObj.achievements = achivementsArray;
+        workExpArr.push(workExpArrObj);
       }
+      dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
       dispatch(setWorkExperience(temp));
       dispatch(setState({ name: "resumeLoading", value: false }));
     }
+  };
+
+  const fetchLIstOfStrings = (text: string) => {
+    // Create a new DOMParser
+    const parser = new DOMParser();
+
+    // Parse the HTML string into a DOM document
+    const doc = parser.parseFromString(text, "text/html");
+
+    // Get the <ul> element
+    const ulElement = doc.querySelector("ul");
+    if (ulElement) {
+      // Get an array of <li> elements
+      const liElements = ulElement.querySelectorAll("li");
+
+      // Initialize an array to store the values of <li> elements
+      const valuesArray: any = [];
+
+      // Loop through the <li> elements and extract their text content
+      liElements.forEach((liElement: any) => {
+        valuesArray.push(liElement.textContent.trim());
+      });
+      return valuesArray;
+    }
+
+    return [];
   };
 
   // const getWorkExperience = async () => {
@@ -349,6 +397,7 @@ const ResumeCreator = () => {
       <GenerateNewResumeCard
         handleGenerate={handleGenerate}
         saveResumeToDB={saveResumeToDB}
+        componentRef={componentRef}
       />
 
       {resumeData &&

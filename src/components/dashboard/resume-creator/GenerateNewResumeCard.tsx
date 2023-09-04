@@ -7,8 +7,13 @@ import { setState } from "@/store/resumeSlice";
 interface Props {
   handleGenerate: () => Promise<void>;
   saveResumeToDB: any;
+  componentRef: any;
 }
-const GenerateNewResumeCard = ({ handleGenerate, saveResumeToDB }: Props) => {
+const GenerateNewResumeCard = ({
+  handleGenerate,
+  saveResumeToDB,
+  componentRef,
+}: Props) => {
   const { data: session } = useSession();
 
   // Redux
@@ -146,7 +151,7 @@ const GenerateNewResumeCard = ({ handleGenerate, saveResumeToDB }: Props) => {
                       </div>
                     </button>
                   )}
-                  content={() => resumeData.state.componentRef.current}
+                  content={() => componentRef.current}
                 />
               </>
             )}
