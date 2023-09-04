@@ -353,7 +353,7 @@ const ResumeCreator = () => {
       })
       .then(async (resp) => {
         dispatch(setId(obj.id));
-        // update user
+        // update user in redux
         const res = await fetch(
           `/api/users/getOneByEmail?email=${session?.user?.email}`
         );
