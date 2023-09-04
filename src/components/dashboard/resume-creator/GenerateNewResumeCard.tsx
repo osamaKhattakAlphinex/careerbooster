@@ -14,7 +14,9 @@ const GenerateNewResumeCard = ({ handleGenerate, saveResumeToDB }: Props) => {
   // Redux
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
-  const userData = useSelector((state: any) => state.userData);
+  // const userData = useSelector((state: any) => state.userData);
+  // console.clear();
+
   return (
     <div className="m-10 w-[95%]  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
       <div className="w-full card">
@@ -37,7 +39,7 @@ const GenerateNewResumeCard = ({ handleGenerate, saveResumeToDB }: Props) => {
                   name="targetedJobPosition"
                   id="targetedJobPosition"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  value={resumeData.state.jobPosition}
+                  value={resumeData?.state?.jobPosition}
                   onChange={(e) =>
                     dispatch(
                       setState({ name: "jobPosition", value: e.target.value })

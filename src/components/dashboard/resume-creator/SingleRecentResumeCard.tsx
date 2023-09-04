@@ -21,14 +21,16 @@ const SingleRecentResumeCard = ({ resume }: { resume: Resume }) => {
         <button
           type="button"
           onClick={handleOnView}
-          className="bg-white border hover:bg-gray-100 text-gray-700 text-xs  px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1">
+          className="bg-white border hover:bg-gray-100 text-gray-700 text-xs  px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1"
+        >
           <FontAwesomeIcon icon={faEye} />
           View
         </button>
         <button
           type="button"
           disabled={true}
-          className="bg-red-600 border hover:bg-red-400 text-white text-xs px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1">
+          className="bg-red-600 border hover:bg-red-400 text-white text-xs px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1"
+        >
           <FontAwesomeIcon icon={faTrash} />
           Delete
         </button>

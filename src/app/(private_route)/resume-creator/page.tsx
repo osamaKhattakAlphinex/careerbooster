@@ -316,7 +316,6 @@ const ResumeCreator = () => {
 
   // when page (session) loads, fetch user data if not exists
   useEffect(() => {
-    console.log("email: ", session?.user?.email);
     if (session?.user?.email) {
       getUserDataIfNotExists();
     }
@@ -326,7 +325,7 @@ const ResumeCreator = () => {
     if (!resumeData.state.resumeLoading && resumeData?.name) {
       saveResumeToDB();
     }
-  }, [resumeData.state.resumeLoading]);
+  }, [resumeData?.state?.resumeLoading]);
 
   useEffect(() => {
     if (userData && userData?.email) {
