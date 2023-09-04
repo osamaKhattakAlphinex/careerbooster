@@ -291,10 +291,11 @@ const ResumeCreator = () => {
     }
   };
 
-  const saveResumeToDB = async () => {
-    let obj = resumeData;
-    if (!resumeData.id || resumeData.id === "") {
-      obj = { ...resumeData, id: makeid(), dateTime: new Date() };
+  const saveResumeToDB = async (data: any = "") => {
+    const source = data === "" ? resumeData : data;
+    let obj = source;
+    if (!source.id || source.id === "") {
+      obj = { ...source, id: makeid(), dateTime: new Date() };
     }
 
     axios
@@ -359,6 +360,7 @@ const ResumeCreator = () => {
               <ResumeTemplate1
                 streamedSummaryData={streamedSummaryData}
                 streamedJDData={streamedJDData}
+                saveResumeToDB={saveResumeToDB}
               />
             </div>
           </div>

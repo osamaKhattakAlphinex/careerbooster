@@ -1,16 +1,52 @@
 "use client";
-
+import { useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setField } from "@/store/resumeSlice";
+
+const EditableField = ({
+  value,
+  onSave,
+}: {
+  value: string;
+  onSave: (value: string) => void;
+}) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedValue, setEditedValue] = useState(value);
+
+  const handleBlur = () => {
+    setIsEditing(false);
+    onSave(editedValue);
+  };
+
+  return (
+    <div onDoubleClick={() => setIsEditing(true)} onBlur={handleBlur}>
+      {isEditing ? (
+        <input
+          type="text"
+          value={editedValue}
+          onChange={(e: any) => setEditedValue(e.target.value)}
+          autoFocus
+          onBlur={handleBlur}
+        />
+      ) : (
+        <span>{value}</span>
+      )}
+    </div>
+  );
+};
 
 const ResumeTemplate1 = ({
   streamedSummaryData,
   streamedJDData,
+  saveResumeToDB,
 }: {
   streamedSummaryData: string;
   streamedJDData: string;
+  saveResumeToDB: (data?: any) => Promise<void>;
 }) => {
+  const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
 
   return (
@@ -18,16 +54,32 @@ const ResumeTemplate1 = ({
       <div className="flex">
         <div className="flex flex-col w-10/12 p-8">
           <h2 className="text-4xl hover:shadow-md hover:bg-gray-100">
-            {resume?.name ? resume?.name : "FULL NAME"}
+            <EditableField
+              value={resume?.name ? resume?.name : "FULL NAME"}
+              onSave={(value: string) => {
+                dispatch(setField({ name: "name", value: value }));
+                saveResumeToDB({ ...resume, name: value });
+              }}
+            />
           </h2>
           <h3 className="text-xl hover:shadow-md hover:bg-gray-100">
-            {resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
+            <EditableField
+              value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
+              onSave={(value: string) => {
+                dispatch(setField({ name: "name", value: value }));
+              }}
+            />
           </h3>
         </div>
         <div>
           <div className="w-32 h-32 bg-gray-800 text-center p-10 rounded-full">
             <span className="text-4xl text-white hover:shadow-md hover:bg-gray-900">
-              {resume?.shortName ? resume?.shortName : "CPH"}
+              <EditableField
+                value={resume?.shortName ? resume?.shortName : "CPH"}
+                onSave={(value: string) => {
+                  dispatch(setField({ name: "name", value: value }));
+                }}
+              />
             </span>
           </div>
         </div>
@@ -56,7 +108,8 @@ const ResumeTemplate1 = ({
                     ? resume?.contact?.linkedIn
                     : "https://www.linkedin.com/"
                 }
-                className="text-blue-600">
+                className="text-blue-600"
+              >
                 {resume?.contact?.linkedIn
                   ? resume?.contact?.linkedIn
                   : "https://www.linkedin.com/"}
@@ -175,7 +228,8 @@ const ResumeTemplate1 = ({
                 resume?.workExperience !== ""
                   ? resume?.workExperience
                   : streamedJDData,
-            }}></div>
+            }}
+          ></div>
           {/* {resume?.workExperience &&
             resume?.workExperience.map((record: any, i: number) => {
               const { fields: rec } = record;

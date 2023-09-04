@@ -99,6 +99,13 @@ const resumeSlice = createSlice({
         ...action.payload,
       };
     },
+    setField(state, action) {
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value,
+      };
+    },
+
     setState(state, action) {
       return {
         ...state,
@@ -188,6 +195,7 @@ export const {
   setId,
   setState,
   setResume,
+  setField,
   // setLoadingState,
 } = resumeSlice.actions;
 
