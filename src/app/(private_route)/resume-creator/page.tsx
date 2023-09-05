@@ -28,8 +28,29 @@ import { makeid } from "@/helpers/makeid";
 import RecentResumeCard from "@/components/dashboard/resume-creator/RecenResumesCard";
 import GenerateNewResumeCard from "@/components/dashboard/resume-creator/GenerateNewResumeCard";
 import { checkIconSmall } from "@/helpers/iconsProvider";
+import Confetti from "react-dom-confetti";
 
 const ResumeCreator = () => {
+  const [confettingRunning, setConfettiRunning] = useState(false);
+
+  const confettiConfig = {
+    angle: 90,
+    spread: 360,
+    startVelocity: 40,
+    elementCount: 200,
+    decay: 0.95,
+    duration: 8000,
+    width: "25px",
+    height: "25px",
+  };
+
+  const runConfetti = () => {
+    setConfettiRunning(true);
+    setTimeout(() => {
+      setConfettiRunning(false);
+    }, 3000); // Adjust the duration as needed
+  };
+
   const componentRef = useRef<any>(null);
   const { data: session } = useSession();
 
@@ -54,10 +75,11 @@ const ResumeCreator = () => {
       dispatch(setId(""));
       getBasicInfo();
       getSummary();
-      getWorkExperienceNew();
       getPrimarySkills();
       getProfessionalSkills();
       getSecondarySkills();
+      await getWorkExperienceNew();
+      runConfetti();
     }
   };
 
@@ -413,10 +435,15 @@ const ResumeCreator = () => {
         </div>
       )}
       <RecentResumeCard />
+
       <GenerateNewResumeCard
         handleGenerate={handleGenerate}
         componentRef={componentRef}
       />
+
+      <div className="flex justify-center items-center">
+        <Confetti active={confettingRunning} config={confettiConfig} />
+      </div>
 
       {resumeData &&
         (resumeData?.name ||

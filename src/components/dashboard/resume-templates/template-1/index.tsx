@@ -504,6 +504,7 @@ const ResumeTemplate1 = ({
                     >
                       <EditableField
                         value={rec?.title}
+                        style={{ width: "100%" }}
                         onSave={(value: string) => {
                           let updatedExp = resume?.workExperienceArray.map(
                             (exp: any, index: number) => {

@@ -4,12 +4,12 @@ import UploadedFilesCard from "@/components/dashboard/UploadedFilesCard";
 
 const Dashboard = () => {
   return (
-    <section className="flex flex-col gap-4 px-6 py-18">
-      <div className="flex flex-row   gap-4 lg:py-0 mt-10">
+    <section className="flex flex-col gap-4 px-6 py-18 mt-10">
+      <ToolsCard />
+      <div className="flex flex-row   gap-4 lg:py-0 ">
         <TrainBotCard />
         <UploadedFilesCard />
       </div>
-      <ToolsCard />
     </section>
   );
 };
