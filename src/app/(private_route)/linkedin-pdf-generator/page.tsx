@@ -269,18 +269,18 @@ const ResumeCreator = () => {
               </h1>
               <p>
                 After taking a look at your profile, I must say your profile
-                picture looks fantastic! It's professional and eye-catching.
+                picture looks fantastic! It{"'"}s professional and eye-catching.
                 There is no need to update it.{" "}
               </p>
               <h2 className="text-2xl font-semibold">Cover/Background:</h2>
               <p>
                 Great initiative on uploading your own cover photo to your
-                LinkedIn profile! It's clear that you understand the potential
-                of this premium space to make a strong impression.
+                LinkedIn profile! It{"'"}s clear that you understand the
+                potential of this premium space to make a strong impression.
               </p>
               <p>
-                I'd like to recommend considering a step further with a custom
-                cover design. This approach can set you apart from other
+                I{"'"}d like to recommend considering a step further with a
+                custom cover design. This approach can set you apart from other
                 professionals, leaving a memorable impact on profile visitors.
               </p>
               <p>
@@ -291,14 +291,14 @@ const ResumeCreator = () => {
                 professionals seeking collaborations.
               </p>
               <p>
-                If you're interested in this opportunity, could you please
+                If you{"'"}re interested in this opportunity, could you please
                 provide the following details?
               </p>
               <p>Your preferred color scheme</p>
               <p>Consent to include your email and contact number</p>
               <p>
                 An attention-grabbing headline or value proposition statement
-                you'd like to feature
+                you{"'"}d like to feature
               </p>
               <p>
                 This information will help us create a custom cover that truly
@@ -309,20 +309,20 @@ const ResumeCreator = () => {
                 Great job on your LinkedIn headline! I can see that you
                 understand the importance of this section and have made it stand
                 out by including related keywords. Your headline is not just a
-                job title; it's a fantastic representation of your professional
-                expertise and unique value proposition.
+                job title; it{"'"}s a fantastic representation of your
+                professional expertise and unique value proposition.
               </p>
               <p>
                 As you may know, your headline is the first thing that people
                 see on your profile, and recruiters often use it to filter
-                through search results. So, it's essential to make it
+                through search results. So, it{"'"}s essential to make it
                 informative and compelling to grab their attention. While your
                 current headline is almost perfect, you can use the following to
                 make it stand out even more:
               </p>
               <p className="bg-yellow-400 p-2">{headline && headline}</p>
               <p>
-                Keep up the excellent work, and I'm confident your enhanced
+                Keep up the excellent work, and I{"'"}m confident your enhanced
                 headline will make a strong impression on anyone who visits your
                 profile.
               </p>
@@ -362,10 +362,10 @@ const ResumeCreator = () => {
                 based on their relevance and importance.
               </p>
               <p className="bg-yellow-400 p-2">
-                It's important to note that only the top ten skills will be
-                displayed in the top part of the Skills section. Therefore, it's
-                crucial to ensure that the first ten skills you add are your top
-                skills and are relevant to your job search.
+                It{"'"}s important to note that only the top ten skills will be
+                displayed in the top part of the Skills section. Therefore, it
+                {"'"}s crucial to ensure that the first ten skills you add are
+                your top skills and are relevant to your job search.
               </p>
               <div
                 className="font-sans whitespace-pre-wrap break-words"
@@ -380,9 +380,9 @@ const ResumeCreator = () => {
                 I was impressed to see that you have several recommendations on
                 your profile. Many people overlook this section and miss out on
                 the opportunity to showcase their skills and expertise through
-                the words of others. You've clearly put in the effort to ask for
-                and receive these recommendations, and it shows that you value
-                building a strong professional network.
+                the words of others. You{"'"}ve clearly put in the effort to ask
+                for and receive these recommendations, and it shows that you
+                value building a strong professional network.
               </p>
               <p>
                 Having recommendations on your profile can help establish your
