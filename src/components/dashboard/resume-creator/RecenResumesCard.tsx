@@ -11,6 +11,7 @@ const RecentResumeCard = () => {
       <div className="w-full card">
         <div className="space-y-4 md:space-y-6">
           <h2 className="text-2xl font-semibold  ">Recent Resumes</h2>
+          {!resumes && <p>Loading Resumes...</p>}
           <div className="flex flex-wrap  gap-4 ">
             {resumes &&
               resumes.map((resume: Resume) => {

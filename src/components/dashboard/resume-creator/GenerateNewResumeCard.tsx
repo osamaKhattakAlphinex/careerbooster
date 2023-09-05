@@ -6,14 +6,9 @@ import { setState } from "@/store/resumeSlice";
 
 interface Props {
   handleGenerate: () => Promise<void>;
-  saveResumeToDB: any;
   componentRef: any;
 }
-const GenerateNewResumeCard = ({
-  handleGenerate,
-  saveResumeToDB,
-  componentRef,
-}: Props) => {
+const GenerateNewResumeCard = ({ handleGenerate, componentRef }: Props) => {
   const { data: session } = useSession();
 
   // Redux
@@ -37,7 +32,6 @@ const GenerateNewResumeCard = ({
                   className="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
                 >
                   Targeted Job position{" "}
-                  <button onClick={() => saveResumeToDB()}>Save</button>
                 </label>
                 <input
                   type="targetedJobPosition"

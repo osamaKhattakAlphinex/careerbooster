@@ -19,6 +19,7 @@ import {
   setId,
   setState,
   setWorkExperienceArray,
+  resetResume,
   // setLoadingState,
 } from "@/store/resumeSlice";
 // import { exitFullScreenIcon, fullScreenIcon } from "@/helpers/iconsProvider";
@@ -26,6 +27,7 @@ import axios from "axios";
 import { makeid } from "@/helpers/makeid";
 import RecentResumeCard from "@/components/dashboard/resume-creator/RecenResumesCard";
 import GenerateNewResumeCard from "@/components/dashboard/resume-creator/GenerateNewResumeCard";
+import { checkIconSmall } from "@/helpers/iconsProvider";
 
 const ResumeCreator = () => {
   const componentRef = useRef<any>(null);
@@ -35,6 +37,7 @@ const ResumeCreator = () => {
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [streamedJDData, setStreamedJDData] = useState("");
   const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   // Redux
   const dispatch = useDispatch();
@@ -43,7 +46,8 @@ const ResumeCreator = () => {
 
   const handleGenerate = async () => {
     await getUserDataIfNotExists();
-    // TODO!! RESET RESUME DATA
+    // reset resume
+    dispatch(resetResume(resumeData.state));
 
     if (resumeData.state.jobPosition !== "" && session?.user?.email) {
       dispatch(setState({ name: "resumeLoading", value: true }));
@@ -136,7 +140,7 @@ const ResumeCreator = () => {
       for (const [index, experience] of experiences.entries()) {
         let workExpArrObj: any = {};
         let html = "";
-        html += `<h2 style="font-size: 1.5rem; line-height: 2rem; ">${experience.jobTitle}</h2>`;
+        html += `<h2 style="font-size: 1.3rem; font-weight: bold; line-height: 2rem; ">${experience.jobTitle}</h2>`;
         workExpArrObj.title = experience.jobTitle;
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
@@ -360,6 +364,12 @@ const ResumeCreator = () => {
 
         const { user } = await res.json();
         dispatch(setUserData(user));
+
+        // show alert for 2 seconds using setTimeout
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+        }, 1000);
       });
   };
 
@@ -393,10 +403,18 @@ const ResumeCreator = () => {
 
   return (
     <>
+      {showAlert && (
+        <div
+          className="fixed bottom-10 right-10 flex flex-row gap-2 justify-center items-center bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white transition-opacity cursor-pointer"
+          onClick={() => setShowAlert(false)}
+        >
+          {checkIconSmall}
+          Auto saved
+        </div>
+      )}
       <RecentResumeCard />
       <GenerateNewResumeCard
         handleGenerate={handleGenerate}
-        saveResumeToDB={saveResumeToDB}
         componentRef={componentRef}
       />
 
@@ -404,8 +422,13 @@ const ResumeCreator = () => {
         (resumeData?.name ||
           resumeData?.contact?.email ||
           resumeData?.summary) && (
-          <div className="m-10  w-[95%]  bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-            <div className="w-full card" ref={componentRef}>
+          <div className="m-10  w-[95%] bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700 ">
+            <div
+              className={`w-full card ${
+                resumeData.state.resumeLoading ? "animate-pulse" : ""
+              }`}
+              ref={componentRef}
+            >
               <ResumeTemplate1
                 streamedSummaryData={streamedSummaryData}
                 streamedJDData={streamedJDData}

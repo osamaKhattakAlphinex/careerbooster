@@ -2,3 +2,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media print {
+  .page-break {
+    page-break-before: always;
+  }
+  body {
+    margin: 0;
+  }
+  @page {
+    size: A4;
+    margin-top: 1.2cm;
+    margin-bottom: 1.2cm;
+  }
+  /* Reset the top margin for the content of the first page */
+  .first-page {
+    margin-top: 0;
+  }
+}

@@ -45,7 +45,7 @@ export interface Resume {
 
 const initialState: Resume = {
   state: {
-    jobPosition: "Frontend Engineer",
+    jobPosition: "",
     resumeLoading: false,
     componentRef: null,
   },
@@ -80,6 +80,12 @@ const resumeSlice = createSlice({
   name: "resume",
   initialState,
   reducers: {
+    resetResume(state, action) {
+      return {
+        ...initialState,
+        state: action.payload,
+      };
+    },
     setResume(state, action) {
       return {
         ...action.payload,
@@ -183,6 +189,7 @@ export const {
   setResume,
   setField,
   setWorkExperienceArray,
+  resetResume,
   // setLoadingState,
 } = resumeSlice.actions;
 
