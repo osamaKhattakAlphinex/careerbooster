@@ -5,14 +5,26 @@ import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
+import { useRouter } from "next/navigation";
 
-const SingleRecentResumeCard = ({ resume }: { resume: Resume }) => {
+const SingleRecentResumeCard = ({
+  resume,
+  source,
+}: {
+  resume: Resume;
+  source?: string;
+}) => {
+  const router = useRouter();
+
   // redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const { email, resumes } = userData;
 
   const handleOnView = () => {
+    if (source != "") {
+      router.replace("/resume-creator");
+    }
     dispatch(setResume(resume));
   };
 
@@ -56,16 +68,14 @@ const SingleRecentResumeCard = ({ resume }: { resume: Resume }) => {
         <button
           type="button"
           onClick={handleOnView}
-          className="bg-white border hover:bg-gray-100 text-gray-700 text-xs  px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1"
-        >
+          className="bg-white border hover:bg-gray-100 text-gray-700 text-xs  px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1">
           <FontAwesomeIcon icon={faEye} />
           View
         </button>
         <button
           type="button"
           onClick={handleOnDelete}
-          className="bg-red-600 border hover:bg-red-400 text-white text-xs px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1"
-        >
+          className="bg-red-600 border hover:bg-red-400 text-white text-xs px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1">
           <FontAwesomeIcon icon={faTrash} />
           Delete
         </button>

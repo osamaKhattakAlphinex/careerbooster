@@ -33,15 +33,14 @@ const UploadedFilesCard = () => {
   }, [session?.user?.email, uploadedFileName]);
 
   return (
-    <div className="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-      <h5 className="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
-        Uploaded Files{" "}
+    <div className="w-[30%] p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+      <h5 className=" text-base font-semibold text-gray-900 md:text-xl dark:text-white">
+        Your initial Resume{" "}
         <button
           type="button"
           className={`float-right`}
           title="Reload the files"
-          onClick={() => getFiles()}
-        >
+          onClick={() => getFiles()}>
           <div className="flex flex-row gap-2">
             <span className="text-sm">Reload</span>
             <svg
@@ -50,8 +49,7 @@ const UploadedFilesCard = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className={`w-6 h-6 ${isLoading ? "animate-spin" : ""}`}
-            >
+              className={`w-6 h-6 ${isLoading ? "animate-spin" : ""}`}>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -61,10 +59,10 @@ const UploadedFilesCard = () => {
           </div>
         </button>
       </h5>
-      <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
+      {/* <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
         Recently uploaded Files
-      </p>
-      <div className="flex flex-col gap-4 pt-10">
+      </p> */}
+      <div className="flex flex-col gap-2 pt-10">
         {files &&
           files.map((file: string, i: number) => (
             <FileCard key={i} file={file} email={session?.user?.email} />

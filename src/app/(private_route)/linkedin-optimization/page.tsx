@@ -5,6 +5,8 @@ import HeadlineGenerator from "@/components/dashboard/linkedin-optimization/Head
 import JDGenerator from "@/components/dashboard/linkedin-optimization/JDGenerator";
 import KeywordsGenerator from "@/components/dashboard/linkedin-optimization/KeywordsGenerator";
 import DownloadDocx from "@/components/dashboard/linkedin-optimization/DownloadDocx";
+import Link from "next/link";
+import { leftArrowIcon } from "@/helpers/iconsProvider";
 
 const ResumeCreator = () => {
   const [keywords, setKeywords] = useState<string>("");
@@ -13,7 +15,15 @@ const ResumeCreator = () => {
   const [jobDesc, setJobDesc] = useState<string>("");
   return (
     <>
-      <div className="flex m-10 gap-4">
+      <div className="my-5 ml-10">
+        <Link
+          href="/dashboard"
+          className="flex flex-row gap-2 items-center hover:font-semibold transition-all">
+          {leftArrowIcon}
+          Dashboard
+        </Link>
+      </div>
+      <div className="flex m-10 mt-2 gap-4">
         <div className="w-full flex p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
           <h2 className="text-2xl mr-10">LinkedIn Optimization</h2>
           <div className="">
