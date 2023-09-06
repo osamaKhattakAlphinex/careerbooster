@@ -260,7 +260,11 @@ const ResumeCreator = () => {
         </div>
       </div>
       {show && (
-        <div className="w-[95%]  bg-white border border-gray-200 rounded-lg shadow  m-10">
+        <div
+          className={`w-[95%]  bg-white border border-gray-200 rounded-lg shadow  m-10 ${
+            msgLoading ? "animate-pulse" : ""
+          }`}
+        >
           <div className="p-12" ref={componentRef}>
             <div className="flex flex-col gap-4 ">
               <h1 className="text-4xl font-semibold">
