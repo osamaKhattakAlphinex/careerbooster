@@ -4,6 +4,7 @@ import {
   brushIcon,
   chatIcon,
   infoSmallIcon,
+  pencilIcon,
   shockIcon,
   starsIcon,
 } from "@/helpers/iconsProvider";
@@ -88,6 +89,26 @@ const ToolsCard = () => {
             <Link
               className="bg-gray-800 text-white rounded-lg px-6 py-2"
               href="/linkedin-optimization">
+              Launch
+            </Link>
+          </div>
+        </li>
+      </ul>
+      <ul className="flex flex-row gap-4">
+        <li>
+          <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            {pencilIcon}
+            <Link href="/biography-writer">
+              <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                Biography Writer
+              </h5>
+            </Link>
+            <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
+              AI will write a biography for you. According to your profile data
+            </p>
+            <Link
+              className="bg-gray-800 text-white rounded-lg px-6 py-2"
+              href="/biography-writer">
               Launch
             </Link>
           </div>
