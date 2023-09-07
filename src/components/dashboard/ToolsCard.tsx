@@ -196,7 +196,7 @@ const ToolsCard = () => {
               </svg>
 
               <span className="flex-1 ml-3 whitespace-nowrap">
-                LinkedIn Profile Optimization
+                LinkedIn Optimization
               </span>
               <span className="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                 New
