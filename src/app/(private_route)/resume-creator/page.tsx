@@ -27,8 +27,9 @@ import axios from "axios";
 import { makeid } from "@/helpers/makeid";
 import RecentResumeCard from "@/components/dashboard/resume-creator/RecenResumesCard";
 import GenerateNewResumeCard from "@/components/dashboard/resume-creator/GenerateNewResumeCard";
-import { checkIconSmall } from "@/helpers/iconsProvider";
+import { checkIconSmall, leftArrowIcon } from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
+import Link from "next/link";
 
 const ResumeCreator = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -425,16 +426,25 @@ const ResumeCreator = () => {
 
   return (
     <>
+      <div className="my-5 ml-10">
+        <Link
+          href="/dashboard"
+          className="flex flex-row gap-2 items-center hover:font-semibold transition-all">
+          {leftArrowIcon}
+          Dashboard
+        </Link>
+      </div>
       {showAlert && (
         <div
           className="fixed bottom-10 right-10 flex flex-row gap-2 justify-center items-center bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white transition-opacity cursor-pointer"
-          onClick={() => setShowAlert(false)}
-        >
+          onClick={() => setShowAlert(false)}>
           {checkIconSmall}
           Auto saved
         </div>
       )}
-      <RecentResumeCard />
+      <div className="m-10 mt-2 w-[95%]  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+        <RecentResumeCard />
+      </div>
 
       <GenerateNewResumeCard
         handleGenerate={handleGenerate}
@@ -454,8 +464,7 @@ const ResumeCreator = () => {
               className={`w-full card ${
                 resumeData.state.resumeLoading ? "animate-pulse" : ""
               }`}
-              ref={componentRef}
-            >
+              ref={componentRef}>
               <ResumeTemplate1
                 streamedSummaryData={streamedSummaryData}
                 streamedJDData={streamedJDData}

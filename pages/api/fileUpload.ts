@@ -27,6 +27,9 @@ const handler: NextApiHandler = async (req, res) => {
   if (req?.query?.email) {
     // for logged in users
     directory = `/public/files/${req?.query?.email}`;
+  } else if (req?.query?.type === "biography") {
+    // for Biography page
+    directory = "/public/files/bio";
   } else {
     // for homepage
     directory = "/public/files/temp";
