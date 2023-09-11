@@ -18,14 +18,14 @@ const Header = () => {
     >
       <div className="container">
         {/* <!-- Logo --> */}
-        <Link className="navbar-brand" href="/">
-          <img
-            src="/test-logo.png"
-            alt=""
-            style={{
-              width: "250px",
-            }}
-          />
+        <Link
+          className="navbar-brand"
+          href="/"
+          // style={{
+          //   width: "450px",
+          // }}
+        >
+          <img src="/assets/images/logo.png" alt="" />
         </Link>
 
         {/* <!-- Navbar toggler button --> */}

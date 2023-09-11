@@ -134,7 +134,7 @@ const ResumeTemplate1 = ({
           <span className="w-full h-0 border border-gray-500 my-3"></span>
           <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
             {contactIcon}
-            Contacts
+            Contact
           </h3>
           <span className="w-full h-0 border border-gray-500 my-3"></span>
           <ul className="flex flex-col gap-3 mb-4 text-sm break-all">

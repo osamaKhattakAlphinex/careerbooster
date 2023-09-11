@@ -65,18 +65,17 @@ const StepSix = () => {
 
   return (
     <div className="w-full max-w-md mx-auto ">
-      <h2 className="text-2xl font-semibold mb-4">Skills</h2>
+      <h2 className="text-2xl font-semibold mb-4">Your Skills</h2>
       <div className="mb-4">
         {list.length === 0 ? (
           <p className="text-xs mb-2">No Skills Found</p>
         ) : (
           <>
-            <h3 className="text-lg font-medium mb-2">Your Skills</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 pl-0">
               {list.map((skill: string, index: number) => (
                 <li
                   key={index}
-                  className="flex items-center justify-between bg-white rounded-md shadow-md border p-3"
+                  className="flex items-center justify-between  rounded-md shadow-md border p-3"
                 >
                   <span>{skill}</span>
                   <button
@@ -99,7 +98,7 @@ const StepSix = () => {
               type="text"
               value={newSkill}
               onChange={(e) => setNewSkill(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               placeholder="Enter a skill..."
             />
             <button
@@ -118,7 +117,7 @@ const StepSix = () => {
           Click on any of the suggested skills from below and add them to your
           profile
         </p>
-        <ul className="flex flex-wrap space-x-2">
+        <ul className="flex flex-wrap pl-0">
           {suggestedSkills.map((suggestedSkill, index) => (
             <li
               key={index}

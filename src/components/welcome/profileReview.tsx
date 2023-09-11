@@ -19,7 +19,7 @@ const ProfileReview = () => {
   return (
     <div className="">
       <h1 className="text-2xl font-semibold mb-2">Review your Resume</h1>
-      <p className="text-gray-500 mb-4">Review and make any changes below.</p>
+      <p className=" mb-4">Review and make any changes below.</p>
       <hr className="mb-4" />
 
       {/* Basic */}
@@ -42,7 +42,7 @@ const ProfileReview = () => {
           </div>
         </div>
         <div className="flex justify-between items-center mb-4">
-          <div className="text-sm flex flex-col gap-1 text-gray-600">
+          <div className="text-sm flex flex-col gap-1 ">
             <p className="flex flex-row gap-2 items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ const ProfileReview = () => {
           </div>
         </div>
         <div className="flex justify-between items-center mb-4">
-          <div className="text-sm flex flex-col gap-1 text-gray-600">
+          <div className="text-sm flex flex-col gap-1 ">
             <p className="flex flex-row gap-2 items-center">
               {addressIcon}
               {data.stepThree?.country === "" &&
@@ -128,7 +128,7 @@ const ProfileReview = () => {
       {/* Summary */}
       {/* <section className="mb-8 ">
         <h2 className="text-xl font-semibold mb-2 ">Summary</h2>
-        <p className="mb-2 text-sm text-gray-600 italic">
+        <p className="mb-2 text-sm  italic">
           Written by AI According to your Resume
         </p>
         <div className="border p-4 rounded-lg ">
@@ -206,11 +206,11 @@ const ProfileReview = () => {
           </button>
         </h2>
         <div className="flex flex-col gap-3">
-          <ul className="space-y-2">
+          <ul className="space-y-2 pl-0">
             {data.stepSix.list.map((skill: string, index: number) => (
               <li
                 key={index}
-                className="flex items-center justify-between bg-white rounded-md shadow-md border p-3"
+                className="flex items-center justify-between  rounded-md shadow-md border p-3"
               >
                 <span>{skill}</span>
               </li>

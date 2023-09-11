@@ -198,10 +198,10 @@ const Footer = () => {
             <div className="footer-widget text-center text-lg-start">
               <Link href="/">
                 <img
-                  src="assets/images/logo.svg"
+                  src="/assets/images/logo.png"
                   alt=""
                   className="img-fluid"
-                  width="135"
+                  width="335"
                 />
               </Link>
               <p className="fs-sm mb-0 mt-4">

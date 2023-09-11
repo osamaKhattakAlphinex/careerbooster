@@ -30,63 +30,87 @@ const StepTwo = () => {
 
   return (
     <>
-      <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-        Your Contact Details
-      </h1>
-      {/* Input */}
-      <div>
-        <label
-          htmlFor="phone"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Phone Number <span className="text-red-500">*</span>
+      <div className="">
+        <label htmlFor="name" className="form-label fs-lg fw-medium mb-4">
+          {" "}
+          Phone Number *{" "}
         </label>
-        <input
-          type="text"
-          name="phone"
-          id="phone"
-          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          value={stepTwo.phoneNumber}
-          onChange={(e) => {
-            dispatch(setStepTwo({ phoneNumber: e.target.value }));
-          }}
-        />
+        <div className="input-group with-icon">
+          <span className="icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <circle cx="12" cy="7" r="4" />
+              <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+            </svg>
+          </span>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            value={stepTwo.phoneNumber}
+            onChange={(e) => {
+              dispatch(setStepTwo({ phoneNumber: e.target.value }));
+            }}
+            className="form-control rounded-2"
+            placeholder="+1-212-456-7890"
+          />
+        </div>
       </div>
-
-      {/* Input */}
-      <div>
-        <label
-          htmlFor="Email"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Email <span className="text-red-500">*</span>
+      <div className="">
+        <label htmlFor="name" className="form-label fs-lg fw-medium mb-4">
+          {" "}
+          Email *{" "}
         </label>
-        <input
-          type="text"
-          name="Email"
-          id="Email"
-          value={stepTwo.Email}
-          onChange={(e) => {
-            dispatch(setStepTwo({ Email: e.target.value }));
-          }}
-          className={`bg-gray-50 border ${
-            stepTwo.emailInvalid ? "border-red-500 outline-red-500" : ""
-          } border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
-        />
+        <div className="input-group with-icon">
+          <span className="icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <circle cx="12" cy="7" r="4" />
+              <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+            </svg>
+          </span>
+          <input
+            type="text"
+            name="Email"
+            id="Email"
+            value={stepTwo.Email}
+            onChange={(e) => {
+              dispatch(setStepTwo({ Email: e.target.value }));
+            }}
+            className="form-control rounded-2"
+            placeholder="name@email.com"
+          />
+        </div>
         {stepTwo.emailInvalid && (
           <p className="text-red-500 text-sm">
             Please enter a valid email address
           </p>
         )}
       </div>
-      <p className="text-gray-600 ">
+      <p className="text-gray-500 ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="w-5 h-5  !mr-2  float-left"
+          className="w-6 h-6  !mr-2  float-left"
         >
           <path
             strokeLinecap="round"

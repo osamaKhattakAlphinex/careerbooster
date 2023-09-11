@@ -8,7 +8,7 @@ const ExperienceForm = ({ formik }: any) => {
   return (
     <form className="space-y-4" onSubmit={formik.handleSubmit}>
       <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium ">
           Job title <span className="text-red-500">*</span>
         </label>
         <input
@@ -21,7 +21,7 @@ const ExperienceForm = ({ formik }: any) => {
             formik.touched.jobTitle &&
             formik.errors.jobTitle &&
             "border-red-500 outline-red-500"
-          } rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500`}
+          } rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent`}
         />
         {formik.touched.jobTitle && formik.errors.jobTitle && (
           <p className="text-red-600">
@@ -30,24 +30,20 @@ const ExperienceForm = ({ formik }: any) => {
         )}
       </div>
       <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700">
-          Company
-        </label>
+        <label className="block text-sm font-medium ">Company</label>
         <input
           type="text"
           name="company"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.company}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
         />
       </div>
       <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700">
-          Country
-        </label>
+        <label className="block text-sm font-medium ">Country</label>
         <select
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
           name="country"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -63,27 +59,23 @@ const ExperienceForm = ({ formik }: any) => {
       </div>
 
       <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700">
-          City, State
-        </label>
+        <label className="block text-sm font-medium ">City, State</label>
         <input
           type="text"
           name="cityState"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.cityState}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
         />
       </div>
       <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700">
-          Time Period
-        </label>
+        <label className="block text-sm font-medium ">Time Period</label>
         <div className="flex space-x-4 mt-4">
           <div className="w-1/2">
             <label className="block text-xs text-gray-500">From Month</label>
             <select
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               name="fromMonth"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -101,7 +93,7 @@ const ExperienceForm = ({ formik }: any) => {
             <label className="block text-xs text-gray-500">From Year</label>
 
             <select
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               name="fromYear"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -121,7 +113,7 @@ const ExperienceForm = ({ formik }: any) => {
             <div className="w-1/2">
               <label className="block text-xs text-gray-500">To Month</label>
               <select
-                className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
                 name="toMonth"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -138,7 +130,7 @@ const ExperienceForm = ({ formik }: any) => {
             <div className="w-1/2">
               <label className="block text-xs text-gray-500">To Year</label>
               <select
-                className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
                 name="toYear"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -165,15 +157,13 @@ const ExperienceForm = ({ formik }: any) => {
             onChange={formik.handleChange}
             checked={formik.values.isContinue}
           />
-          <label htmlFor="currentlyWorking" className="text-sm text-gray-700">
+          <label htmlFor="currentlyWorking" className="text-sm ">
             I currently work here
           </label>
         </div>
       </div>
       <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700">
-          Description
-        </label>
+        <label className="block text-sm font-medium ">Description</label>
         <p className="block text-xs text-gray-500">
           Describe your position and any key accomplishments.
         </p>
@@ -183,7 +173,7 @@ const ExperienceForm = ({ formik }: any) => {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.description}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
         />
       </div>
       <div className="w-full">
