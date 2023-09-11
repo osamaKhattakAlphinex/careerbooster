@@ -338,7 +338,7 @@ const ResumeCreator = () => {
                 premium space on your profile and have made the effort to make a
                 great impression on those who visit it. Keep up the great work!
               </p>
-              <h2 className="text-green-600 font-bold">
+              <h2 className="text-red-600 font-bold">
                 LinkedIn Default Cover:
               </h2>
               <p>
