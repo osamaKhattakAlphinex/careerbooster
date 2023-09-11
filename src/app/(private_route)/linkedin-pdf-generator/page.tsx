@@ -198,7 +198,8 @@ const ResumeCreator = () => {
       <div className="my-5 ml-10">
         <Link
           href="/dashboard"
-          className="flex flex-row gap-2 items-center hover:font-semibold transition-all">
+          className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+        >
           {leftArrowIcon}
           Dashboard
         </Link>
@@ -214,7 +215,8 @@ const ResumeCreator = () => {
                   msgLoading || !session?.user?.email || !aiInputUserData
                 }
                 onClick={() => handleGenerate()}
-                className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300">
+                className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300"
+              >
                 <div className="flex flex-row gap-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -222,7 +224,8 @@ const ResumeCreator = () => {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className={`w-4 h-4 ${msgLoading ? "animate-spin" : ""}`}>
+                    className={`w-4 h-4 ${msgLoading ? "animate-spin" : ""}`}
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -237,7 +240,8 @@ const ResumeCreator = () => {
               trigger={() => (
                 <button
                   disabled={!show || msgLoading || !session?.user?.email}
-                  className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300">
+                  className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300"
+                >
                   <div className="flex flex-row gap-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -245,7 +249,8 @@ const ResumeCreator = () => {
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="currentColor"
-                      className="w-4 h-4">
+                      className="w-4 h-4"
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -269,19 +274,109 @@ const ResumeCreator = () => {
         <div
           className={`w-[95%]  bg-white border border-gray-200 rounded-lg shadow  m-10 ${
             msgLoading ? "animate-pulse" : ""
-          }`}>
+          }`}
+        >
           <div className="p-12" ref={componentRef}>
             <div className="flex flex-col gap-4 ">
               <h1 className="text-4xl font-semibold">
                 {userData?.firstName + " " + userData?.lastName} LinkedIn
                 Profile
               </h1>
+              <h2 className="text-green-600 font-bold">Fantastic Photo:</h2>
+              <p>
+                After taking a look at your profile, I found that your profile
+                picture is missing. Your profile picture is often the first
+                thing people see when they visit your profile, and it{"'"}s an
+                essential element in building a professional and trustworthy
+                online presence.
+              </p>
+              <h2 className="text-red-600 font-bold">Missing Photo:</h2>
               <p>
                 After taking a look at your profile, I must say your profile
                 picture looks fantastic! It{"'"}s professional and eye-catching.
                 There is no need to update it.{" "}
               </p>
-              <h2 className="text-2xl font-semibold">Cover/Background:</h2>
+              <p>
+                Not having a profile picture can give the impression that your
+                profile is incomplete or even fake. It can also make it
+                difficult for people to connect with you and recognize you in
+                real-life networking events or job interviews.
+              </p>
+
+              <h2 className="text-yellow-600 font-bold">
+                Poor Quality or Casual Photo:
+              </h2>
+              <p>
+                I noticed that you have uploaded a profile picture to your
+                LinkedIn profile, and while the picture is great, I wanted to
+                provide some constructive feedback. As you know, LinkedIn is a
+                professional networking site, and your profile picture plays an
+                important role in creating a professional and trustworthy image.
+              </p>
+              <p>
+                Currently, your profile picture doesn{"'"}t quite align with
+                this goal. I would like to suggest that you consider updating it
+                to a more suitable photo, such as a professional headshot. A
+                high-quality headshot can help you make a great first impression
+                on potential connections and employers, and showcase your
+                professionalism and attention to detail.
+              </p>
+              <p>
+                Please don{"'"}t take this feedback personally, I just want to
+                help you make the most of your LinkedIn profile and increase
+                your chances of success in your professional network. Let me
+                know if you need any help or guidance in selecting a new profile
+                picture
+              </p>
+              <h2 className="text-2xl font-semibold mt-10">
+                Cover/Background:
+              </h2>
+              <h2 className="text-green-600 font-bold">Customized Cover:</h2>
+              <p>
+                Your cover design looks great and really enhances your profile.
+                It{"'"}s clear that you understand the importance of this
+                premium space on your profile and have made the effort to make a
+                great impression on those who visit it. Keep up the great work!
+              </p>
+              <h2 className="text-green-600 font-bold">
+                LinkedIn Default Cover:
+              </h2>
+              <p>
+                I noticed that your cover photo is the default LinkedIn banner.
+                As you know, the cover photo is one of the most prominent parts
+                of your profile and can greatly impact how you come across to
+                potential employers and connections.
+              </p>
+              <p>
+                I would like to suggest that you consider replacing your cover
+                photo with a custom design. A custom LinkedIn cover design can
+                help you stand out and make a great impression on those who
+                visit your profile. It{"'"}s a premium space that you don{"'"}t
+                want to waste.
+              </p>
+              <p>
+                By updating your cover photo, you will be able to show off your
+                unique personality and skills, and increase your chances of
+                being noticed by recruiters and potential employers. This is a
+                small change that can make a big difference in the way people
+                perceive you and your profile
+              </p>
+              <p>
+                We have designed a custom LinkedIn cover for you that includes
+                your email and contact number. This approach safeguards your
+                contact information from robotic data gathering while still
+                making it convenient for potential recruiters and professionals
+                to reach out to you for opportunities. However, the choice to
+                use this customized cover, modify the headline, or remove your
+                contact details is entirely yours. We are here to accommodate
+                your preferences and ensure your LinkedIn profile aligns with
+                your goals
+              </p>
+              <p className="font-bold">
+                Your new cover can be found in the email you received.
+              </p>
+
+              <h2 className="text-yellow-600 font-bold">Need Improvement:</h2>
               <p>
                 Great initiative on uploading your own cover photo to your
                 LinkedIn profile! It{"'"}s clear that you understand the
@@ -313,7 +408,23 @@ const ResumeCreator = () => {
                 This information will help us create a custom cover that truly
                 resonates with your professional brand.
               </p>
-              <h2 className="text-2xl font-semibold">Headline:</h2>
+              <h2 className="text-2xl font-semibold mt-10">Headline:</h2>
+              <h2 className="text-green-600 font-bold">Great Headline:</h2>
+              <p>
+                Great job on your LinkedIn headline! I can see that you
+                understand the importance of this section and have made it stand
+                out by including related keywords. Your headline is not just a
+                job title, but a great representation of your professional
+                expertise and unique value proposition.
+              </p>
+              <p>
+                As you may know, your headline is the first thing that people
+                see on your profile, and recruiters often use it to filter
+                through search results. So, it{"'"}s essential to make it
+                informative and compelling to grab their attention. Keep up the
+                good work!
+              </p>
+              <h2 className="text-yellow-600 font-bold">Need Improvements:</h2>
               <p>
                 Great job on your LinkedIn headline! I can see that you
                 understand the importance of this section and have made it stand
@@ -329,20 +440,36 @@ const ResumeCreator = () => {
                 current headline is almost perfect, you can use the following to
                 make it stand out even more:
               </p>
+
               <p className="bg-yellow-400 p-2">{headline && headline}</p>
               <p>
                 Keep up the excellent work, and I{"'"}m confident your enhanced
                 headline will make a strong impression on anyone who visits your
                 profile.
               </p>
-              <h2 className="text-2xl font-semibold">About Section:</h2>
-              <div
-                className="font-sans whitespace-pre-wrap break-words"
-                // style={{ textW: "auto" }}
-              >
+              <h2 className="text-2xl font-semibold mt-10">About Section:</h2>
+              <h2 className="text-green-600 font-bold">Good About Section:</h2>
+              <p>
+                Great job on your profile summary! It effectively showcases your
+                expertise in a professional manner. The "About" section of your
+                profile is critical, as it sets the tone for the rest of your
+                profile. It{"'"}s important to make it detailed yet concise,
+                engaging, and use relevant industry jargon where appropriate.
+              </p>
+              <p>
+                Remember, your profile summary should position yourself as the
+                product you want to sell to potential employers. You{"'"}ve done
+                a great job of including relevant keywords and utilizing bullet
+                points to make it easy to read. Keep up the good work!
+              </p>
+              <hr />
+              <div className="font-sans whitespace-pre-wrap break-words">
                 <div dangerouslySetInnerHTML={{ __html: about }}></div>
               </div>
-              <h2 className="text-2xl font-semibold">Experience Section:</h2>
+              <hr />
+              <h2 className="text-2xl font-semibold mt-10">
+                Experience Section:
+              </h2>
               <p className="bg-yellow-400 p-2">
                 Please note that while the majority of the data in your
                 experience section accurately represents your professional
@@ -358,9 +485,10 @@ const ResumeCreator = () => {
               >
                 <div
                   className="list-disc"
-                  dangerouslySetInnerHTML={{ __html: jobDesc }}></div>
+                  dangerouslySetInnerHTML={{ __html: jobDesc }}
+                ></div>
               </div>
-              <h2 className="text-2xl font-semibold">Skills Section:</h2>
+              <h2 className="text-2xl font-semibold mt-10">Skills Section:</h2>
               <p className="bg-yellow-400 p-2">
                 To optimize this section, you should pin the top three skills
                 that are most important for your next job. Also, be mindful of
@@ -381,8 +509,11 @@ const ResumeCreator = () => {
               >
                 <div dangerouslySetInnerHTML={{ __html: keywords }}></div>
               </div>
-              <h2 className="text-2xl font-semibold">
+              <h2 className="text-2xl font-semibold mt-10">
                 Recommendations Section:
+              </h2>
+              <h2 className="text-green-600 font-bold">
+                5 or more than 5 Recommendations:
               </h2>
               <p>
                 I was impressed to see that you have several recommendations on
@@ -396,6 +527,53 @@ const ResumeCreator = () => {
                 Having recommendations on your profile can help establish your
                 credibility and increase your chances of being noticed by
                 recruiters and potential employers.
+              </p>
+
+              <h2 className="text-red-600 font-bold">No Recommendation:</h2>
+              <p>
+                I noticed that there are no recommendations on your profile,
+                which is a missed opportunity to showcase the great work you
+                {"'"}ve done and the impact you{"'"}ve had. Don{"'"}t be shy
+                about reaching out to your connections who you've collaborated
+                with or provided value to and politely ask for a recommendation.
+              </p>
+              <p>
+                Remember, it{"'"}s important to get relevant recommendations
+                from people who can genuinely speak to your skills and expertise
+                in a particular area. Consider reaching out to former managers,
+                colleagues, or clients who can provide a comprehensive and
+                authentic view of your professional abilities.
+              </p>
+              <p>
+                Having a few well-crafted recommendations on your profile can
+                make a big difference in how you{"'"}re perceived by recruiters
+                and potential employers. So, don{"'"}t hesitate to ask for them
+                and make sure to thank those who take the time to provide one
+                for you.
+              </p>
+
+              <h2 className="text-yellow-600 font-bold">
+                Less than 5 recommendations:
+              </h2>
+              <p>
+                It{"'"}s good to have recommendations on your profile as they
+                can provide valuable insight into your professional abilities
+                and work ethic. It{"'"}s also an excellent way to build
+                credibility and establish trust with potential employers and
+                connections.
+              </p>
+              <p>
+                One suggestion could be to try to get more recommendations from
+                people in different roles or industries to showcase your
+                versatility and skills across different areas. Additionally,
+                consider reaching out to more recent colleagues or supervisors
+                for recommendations to keep your profile up-to-date and
+                relevant.
+              </p>
+              <p>
+                Overall, having recommendations on your profile is a great
+                asset, and continuing to seek them out and showcase them can
+                help you stand out in a crowded job market.
               </p>
             </div>
           </div>
