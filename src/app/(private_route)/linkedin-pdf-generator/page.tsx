@@ -535,8 +535,9 @@ const ResumeCreator = () => {
                 I noticed that there are no recommendations on your profile,
                 which is a missed opportunity to showcase the great work you
                 {"'"}ve done and the impact you{"'"}ve had. Don{"'"}t be shy
-                about reaching out to your connections who you've collaborated
-                with or provided value to and politely ask for a recommendation.
+                about reaching out to your connections who you{"'"}ve
+                collaborated with or provided value to and politely ask for a
+                recommendation.
               </p>
               <p>
                 Remember, it{"'"}s important to get relevant recommendations
