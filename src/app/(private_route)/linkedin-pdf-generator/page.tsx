@@ -451,10 +451,11 @@ const ResumeCreator = () => {
               <h2 className="text-green-600 font-bold">Good About Section:</h2>
               <p>
                 Great job on your profile summary! It effectively showcases your
-                expertise in a professional manner. The "About" section of your
-                profile is critical, as it sets the tone for the rest of your
-                profile. It{"'"}s important to make it detailed yet concise,
-                engaging, and use relevant industry jargon where appropriate.
+                expertise in a professional manner. The {'"'}About{'"'} section
+                of your profile is critical, as it sets the tone for the rest of
+                your profile. It{"'"}s important to make it detailed yet
+                concise, engaging, and use relevant industry jargon where
+                appropriate.
               </p>
               <p>
                 Remember, your profile summary should position yourself as the
