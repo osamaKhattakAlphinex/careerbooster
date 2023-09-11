@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
@@ -7,6 +6,7 @@ import { useSession } from "next-auth/react";
 // import { slugify } from "@/helpers/slugify";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { refreshIconRotating } from "@/helpers/iconsProvider";
 
 const UploadPDFResume = () => {
   const router = useRouter();
@@ -66,73 +66,53 @@ const UploadPDFResume = () => {
 
   return (
     <>
-      <div className="flex  items-center justify-center">
-        {!isAuth && data === null && (
-          <label
-            className={`bg-purple-600 text-white rounded-full relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max cursor-pointer ${
-              fileUploading && "!bg-purple-300"
-            }
-          `}
-          >
-            {fileUploading && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6 mr-2 animate-spin"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                />
-              </svg>
-            )}
+      {!isAuth && data === null && (
+        <label
+          className="btn btn-lg btn-gradient-1"
+          data-aos="fade-up-sm"
+          data-aos-delay="200"
+        >
+          <input
+            type="file"
+            className="hidden"
+            disabled={fileUploading}
+            onChange={(e) => {
+              if (e.target.files) {
+                setFile(e.target.files[0]);
+              }
+            }}
+          />
+          {fileUploading ? refreshIconRotating : "Upload Resume - It's Free"}
+        </label>
+      )}
+      {isAuth && (
+        <Link
+          href="/dashboard"
+          className="btn btn-lg btn-gradient-1"
+          data-aos="fade-up-sm"
+          data-aos-delay="200"
+        >
+          Dashboard
+        </Link>
+      )}
 
-            {fileUploading ? "Uploading..." : "Upload Resume (PDF)"}
-            <input
-              type="file"
-              className="hidden"
-              disabled={fileUploading}
-              onChange={(e) => {
-                if (e.target.files) {
-                  setFile(e.target.files[0]);
-                }
-              }}
-            />
-          </label>
-        )}
-        {isAuth && (
-          <Link
-            href="/dashboard"
-            className={`bg-purple-600 text-white rounded-full relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max cursor-pointer`}
-          >
-            Dashbaord
-          </Link>
-        )}
-      </div>
+      {successMsg && (
+        <div
+          className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 my-2 !text-left w-[50%] m-auto"
+          role="alert"
+        >
+          <p className="m-0">{successMsg}</p>
+        </div>
+      )}
 
       {fileError && (
         <div
-          className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2"
+          className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2 !text-left w-[50%] m-auto"
           role="alert"
         >
-          <p className="font-bold">Error</p>
-          <p>{fileError}</p>
+          <p className="m-0">{fileError}</p>
         </div>
       )}
-      {successMsg && (
-        <div
-          className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 my-2"
-          role="alert"
-        >
-          <p className="font-bold">Success</p>
-          <p>{successMsg}</p>
-        </div>
-      )}
-      {/* Upload PDF Card */}
     </>
   );
 };

@@ -1,11 +1,15 @@
 "use client";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
+  const pathname = usePathname();
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
   const role = data?.user?.role;
+
+  // if (pathname === "/login" || pathname === "/register") return null;
 
   return (
     <nav
@@ -15,7 +19,13 @@ const Header = () => {
       <div className="container">
         {/* <!-- Logo --> */}
         <Link className="navbar-brand" href="/">
-          <img src="assets/images/logo.svg" alt="" width="165" />
+          <img
+            src="/test-logo.png"
+            alt=""
+            style={{
+              width: "250px",
+            }}
+          />
         </Link>
 
         {/* <!-- Navbar toggler button --> */}
@@ -38,7 +48,7 @@ const Header = () => {
         {/* <!-- Navbar content --> */}
         <div className="collapse navbar-collapse" id="navbarContent">
           <div className="navbar-content-inner ms-lg-auto d-flex flex-column flex-lg-row align-lg-center gap-4 gap-lg-10 p-2 p-lg-0">
-            <ul className="navbar-nav gap-lg-2 gap-xl-5">
+            <ul className="navbar-nav gap-lg-2 gap-xl-5 visible">
               <li className="nav-item dropdown">
                 <Link
                   className="nav-link active"
@@ -91,7 +101,7 @@ const Header = () => {
                 </li>
               )}
             </ul>
-            <div className="">
+            <div className="visible">
               {isAuth ? (
                 <Link
                   href={role === "admin" ? "/admin" : "/dashboard"}

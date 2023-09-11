@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
+
 const Footer = () => {
-  const { data, status }: { data: any; status: any } = useSession();
-  const isAuth = status === "authenticated";
-  const role = data?.user?.role;
+  const pathname = usePathname();
+  if (pathname === "/login" || pathname === "/register") return null;
+
   return (
     <footer className="footer bg-striped pt-10 pt-lg-15">
       <div className="container">
@@ -218,8 +219,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-      <script src="assets/js/plugins.js"></script>
-      <script src="assets/js/main.js"></script>
     </footer>
   );
 };

@@ -1,11 +1,13 @@
+import UploadPDFResume from "@/components/UploadPDFResume";
+
 const HeroArea = () => {
   return (
     <section
       className="hero-section style-1 overflow-hidden bg-dark py-10 py-lg-15"
       data-bs-theme="dark"
     >
-      <div className="container">
-        <div className="row justify-center">
+      <div className="container ">
+        <div className="row justify-center ">
           <div className="col-lg-9">
             <div className="text-center">
               <div className="position-relative z-1">
@@ -30,14 +32,7 @@ const HeroArea = () => {
                     Product Description
                   </span>
                 </h1>
-                <a
-                  href="login.html"
-                  className="btn btn-lg btn-gradient-1"
-                  data-aos="fade-up-sm"
-                  data-aos-delay="200"
-                >
-                  Upload Resume - It's Free
-                </a>
+                <UploadPDFResume />
               </div>
               <div data-aos="fade-up-sm" data-aos-delay="300">
                 <div className="image-with-shape">
