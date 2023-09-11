@@ -18,9 +18,9 @@ const ToolsCard = () => {
         {starsIcon}
         AI Tools
       </h5>
-      <ul className="flex flex-row  pl-0">
+      <ul className="flex flex-row gap-4  pl-0">
         <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full max-w-sm p-6  border border-gray-200 rounded-lg shadow  ">
+          <div className="h-[225px] min-h-full p-4   border border-gray-200 rounded-lg shadow  ">
             {chatIcon}
             <Link href="/chatAI" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight">
@@ -40,7 +40,7 @@ const ToolsCard = () => {
           </div>
         </li>
         <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full max-w-sm p-6  border border-gray-200 rounded-lg shadow  ">
+          <div className="h-[225px] min-h-full p-4   border border-gray-200 rounded-lg shadow  ">
             {shockIcon}
             <Link href="/resume-creator" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
@@ -59,7 +59,7 @@ const ToolsCard = () => {
           </div>
         </li>
         <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full max-w-sm p-6  border border-gray-200 rounded-lg shadow  ">
+          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {briefCaseIcon}
             <Link href="/linkedin-pdf-generator" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
@@ -79,9 +79,9 @@ const ToolsCard = () => {
           </div>
         </li>
       </ul>
-      <ul className="flex flex-row mt-8 pl-0">
+      <ul className="flex flex-row gap-4 mt-8 pl-0">
         <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full max-w-sm p-6  border border-gray-200 rounded-lg shadow  ">
+          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {brushIcon}
             <Link href="/linkedin-optimization" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
@@ -101,7 +101,7 @@ const ToolsCard = () => {
           </div>
         </li>
         <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full max-w-sm p-6  border border-gray-200 rounded-lg shadow  ">
+          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {pencilIcon}
             <Link href="/biography-writer" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
