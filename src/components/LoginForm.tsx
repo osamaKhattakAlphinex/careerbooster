@@ -24,6 +24,7 @@ const LoginForm = () => {
       password: Yup.string().required("Password is Required"),
     }),
     onSubmit: async (values) => {
+      setSubmittingError("");
       setSubmitting(true);
       const res = await signIn("credentials", {
         email: values.email,

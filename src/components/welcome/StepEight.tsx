@@ -20,15 +20,12 @@ const StepEight = () => {
 
   return (
     <>
-      <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl dark:text-white">
+      <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl ">
         Enter password to create your account
       </h1>
       {/* Input */}
       <div>
-        <label
-          htmlFor="password"
-          className="block mb-2 text-sm font-medium  dark:text-white"
-        >
+        <label htmlFor="password" className="block mb-2 text-sm font-medium  ">
           Password <span className="text-red-500">*</span>
         </label>
         <input
@@ -39,16 +36,13 @@ const StepEight = () => {
           onChange={(e) => {
             dispatch(setStepEight({ password: e.target.value }));
           }}
-          className="bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+          className="bg-transparent border border-gray-300  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
         />
       </div>
 
       {/* Input */}
       <div>
-        <label
-          htmlFor="cPassword"
-          className="block mb-2 text-sm font-medium  dark:text-white"
-        >
+        <label htmlFor="cPassword" className="block mb-2 text-sm font-medium  ">
           Confirm Password <span className="text-red-500">*</span>
         </label>
         <input
@@ -59,7 +53,7 @@ const StepEight = () => {
           onChange={(e) => {
             dispatch(setStepEight({ cPassword: e.target.value }));
           }}
-          className="bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+          className="bg-transparent border border-gray-300  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
         />
       </div>
       {!isValid && (
@@ -75,7 +69,7 @@ const StepEight = () => {
             type="checkbox"
             onChange={(e) => dispatch(setTerms(e.target.checked))}
             checked={terms}
-            className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
+            className="w-4 h-4 border border-gray-300 rounded bg-transparent focus:ring-3 focus:ring-primary-300 "
           />
         </div>
 

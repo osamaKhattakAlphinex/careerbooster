@@ -3,9 +3,9 @@ import Link from "next/link";
 const AdminDashboard = () => {
   return (
     <section className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100    mx-auto md:h-screen p-10">
-      <div className="w-full backdrop-blur-xl bg-white/70 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 mt-10">
+      <div className="w-full backdrop-blur-xl bg-white/70 rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0  mt-10">
         <div className="w-full flex flex-col gap-4 p-6 space-y-4 md:space-y-6 sm:p-8  ">
-          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white ">
+          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl  ">
             Welcome ADMIN!!
           </h1>
           <Link href="/linkedin-prompts-configuration">
@@ -17,7 +17,8 @@ const AdminDashboard = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="w-6 h-6">
+                  className="w-6 h-6"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -37,7 +38,8 @@ const AdminDashboard = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="w-6 h-6">
+                  className="w-6 h-6"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -57,7 +59,8 @@ const AdminDashboard = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="w-6 h-6">
+                  className="w-6 h-6"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

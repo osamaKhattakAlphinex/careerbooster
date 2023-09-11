@@ -58,24 +58,26 @@ const SingleRecentResumeCard = ({
   };
 
   return (
-    <div className="w-full bg-white border border-gray-200 rounded-lg shadow p-2 sm:p-4">
+    <div className="w-full  border border-gray-200 rounded-lg shadow p-2 sm:p-4">
       <h2 className=" text-lg  ">{resume?.state?.jobPosition}</h2>
-      <h2 className="text-sm  text-gray-600">{resume?.jobTitle}</h2>
-      <p className="text-xs mb-3 text-gray-600">
+      <h2 className="text-sm  ">{resume?.jobTitle}</h2>
+      <p className="text-xs mb-3 ">
         Generated on {getFormattedDate(resume?.dateTime)}
       </p>
       <div className="flex flex-row gap-2">
         <button
           type="button"
           onClick={handleOnView}
-          className="bg-white border hover:bg-gray-100 text-gray-700 text-xs  px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1">
+          className=" border hover:bg-gray-100  text-xs  px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1"
+        >
           <FontAwesomeIcon icon={faEye} />
           View
         </button>
         <button
           type="button"
           onClick={handleOnDelete}
-          className="bg-red-600 border hover:bg-red-400 text-white text-xs px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1">
+          className="bg-red-600 border hover:bg-red-400 text-white text-xs px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1"
+        >
           <FontAwesomeIcon icon={faTrash} />
           Delete
         </button>

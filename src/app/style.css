@@ -36042,7 +36042,7 @@ a {
 }
 
 .navbar-brand img {
-  max-width: 300px;
+  max-width: 165px;
 }
 
 .navbar-toggler {
@@ -36816,3 +36816,7 @@ article img {
   border-block-start: 0 #2e2f45;
 }
 /*# sourceMappingURL=style.css.map */
+
+.border-stylee {
+border-color: gray !important;
+}

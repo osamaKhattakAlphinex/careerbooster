@@ -429,7 +429,8 @@ const ResumeCreator = () => {
       <div className="my-5 ml-10">
         <Link
           href="/dashboard"
-          className="flex flex-row gap-2 items-center hover:font-semibold transition-all">
+          className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+        >
           {leftArrowIcon}
           Dashboard
         </Link>
@@ -437,12 +438,13 @@ const ResumeCreator = () => {
       {showAlert && (
         <div
           className="fixed bottom-10 right-10 flex flex-row gap-2 justify-center items-center bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white transition-opacity cursor-pointer"
-          onClick={() => setShowAlert(false)}>
+          onClick={() => setShowAlert(false)}
+        >
           {checkIconSmall}
           Auto saved
         </div>
       )}
-      <div className="m-10 mt-2 w-[95%]  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+      <div className="m-10 mt-2 w-[95%]  p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
         <RecentResumeCard />
       </div>
 
@@ -459,12 +461,13 @@ const ResumeCreator = () => {
         (resumeData?.name ||
           resumeData?.contact?.email ||
           resumeData?.summary) && (
-          <div className="m-10  w-[95%] bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700 ">
+          <div className="m-10  w-[95%] bg-white border border-gray-200 rounded-lg shadow sm:p-6 ">
             <div
-              className={`w-full card ${
+              className={`w-full  ${
                 resumeData.state.resumeLoading ? "animate-pulse" : ""
               }`}
-              ref={componentRef}>
+              ref={componentRef}
+            >
               <ResumeTemplate1
                 streamedSummaryData={streamedSummaryData}
                 streamedJDData={streamedJDData}
@@ -473,6 +476,7 @@ const ResumeCreator = () => {
             </div>
           </div>
         )}
+      <div className="block mb-40"></div>
     </>
   );
 };

@@ -23,7 +23,7 @@ const EducationCard = ({
   return (
     <div className="w-full  rounded-lg shadow-md p-6 border" key={rec?.id}>
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-md font-semibold w-[80%]">
+        <h2 className="text-base font-semibold w-[80%]">
           {rec?.educationLevel || isShowing ? (
             rec?.educationLevel
           ) : (

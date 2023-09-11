@@ -33,7 +33,7 @@ const LinkedInPromptsConfiguration = () => {
   return (
     <>
       <div className="flex m-10 gap-4">
-        <div className="w-full flex p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-full flex p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6  ">
           <h2 className="text-2xl">
             <div className="flex flex-row gap-2">
               <svg
