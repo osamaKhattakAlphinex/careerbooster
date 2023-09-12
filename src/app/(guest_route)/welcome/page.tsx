@@ -433,9 +433,9 @@ const Welcome = () => {
   //                       xmlns="http://www.w3.org/2000/svg"
   //                       fill="none"
   //                       stroke="currentColor"
-  //                       stroke-linecap="round"
-  //                       stroke-linejoin="round"
-  //                       stroke-width="1.5"
+  //                       strokeLinecap="round"
+  //                       strokeLinejoin="round"
+  //                       strokeWidth="1.5"
   //                       viewBox="0 0 24 24"
   //                     >
   //                       <path stroke="none" d="M0 0h24v24H0z" />
@@ -469,9 +469,9 @@ const Welcome = () => {
   //                     >
   //                       <g
   //                         stroke="currentColor"
-  //                         stroke-linecap="round"
-  //                         stroke-linejoin="round"
-  //                         stroke-width="1.2"
+  //                         strokeLinecap="round"
+  //                         strokeLinejoin="round"
+  //                         strokeWidth="1.2"
   //                       >
   //                         <path d="M2.25 5.25a1.5 1.5 0 0 1 1.5-1.5h10.5a1.5 1.5 0 0 1 1.5 1.5v7.5a1.5 1.5 0 0 1-1.5 1.5H3.75a1.5 1.5 0 0 1-1.5-1.5v-7.5Z" />
   //                         <path d="M2.25 5.25 9 9.75l6.75-4.5" />
@@ -501,9 +501,9 @@ const Welcome = () => {
   //                       xmlns="http://www.w3.org/2000/svg"
   //                       fill="none"
   //                       stroke="currentColor"
-  //                       stroke-linecap="round"
-  //                       stroke-linejoin="round"
-  //                       stroke-width="1.5"
+  //                       strokeLinecap="round"
+  //                       strokeLinejoin="round"
+  //                       strokeWidth="1.5"
   //                       viewBox="0 0 24 24"
   //                     >
   //                       <path stroke="none" d="M0 0h24v24H0z" />

@@ -8,11 +8,10 @@ import PricingSection from "@/components/new-layout/Homepage/PricingSection";
 import Reviews from "@/components/new-layout/Homepage/Reviews";
 import RewardsSection from "@/components/new-layout/Homepage/RewardsSection";
 import UseCases from "@/components/new-layout/Homepage/UseCases";
-import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex-grow-1">
+    <main className="flex-grow-1 mb-20">
       {/* <!-- Hero --> */}
       <HeroArea />
 
