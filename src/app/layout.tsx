@@ -12,10 +12,10 @@ import "./style.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "AI Resume Bot",
-  description: "AI Resume Bot | Developed by NausalTech",
-};
+// export const metadata: Metadata = {
+//   title: "AI Resume Bot",
+//   description: "AI Resume Bot | Developed by NausalTech",
+// };
 
 export default function RootLayout({
   children,
