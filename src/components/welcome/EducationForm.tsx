@@ -8,7 +8,7 @@ const EducationForm = ({ formik }: any) => {
   return (
     <form className="space-y-4" onSubmit={formik.handleSubmit}>
       <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium ">
           Level of education <span className="text-red-500">*</span>
         </label>
         <input
@@ -21,7 +21,7 @@ const EducationForm = ({ formik }: any) => {
             formik.touched.educationLevel &&
             formik.errors.educationLevel &&
             "border-red-500 outline-red-500"
-          } rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500`}
+          } rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent`}
         />
         {formik.touched.educationLevel && formik.errors.educationLevel && (
           <p className="text-red-600">
@@ -30,54 +30,46 @@ const EducationForm = ({ formik }: any) => {
         )}
       </div>
       <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700">
-          Field of study
-        </label>
+        <label className="block text-sm font-medium ">Field of study</label>
         <input
           type="text"
           name="fieldOfStudy"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.fieldOfStudy}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
         />
       </div>
       <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700">
-          School
-        </label>
+        <label className="block text-sm font-medium ">School</label>
         <input
           type="text"
           name="schoolName"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.schoolName}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
         />
       </div>
 
       <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700">
-          School Location
-        </label>
+        <label className="block text-sm font-medium ">School Location</label>
         <input
           type="text"
           name="schoolLocation"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.schoolLocation}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
         />
       </div>
       <div className="w-full">
-        <label className="block text-sm font-medium text-gray-700">
-          Time Period
-        </label>
+        <label className="block text-sm font-medium ">Time Period</label>
         <div className="flex space-x-4 mt-4">
           <div className="w-1/2">
-            <label className="block text-xs text-gray-500">From Month</label>
+            <label className="block text-xs ">From Month</label>
             <select
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               name="fromMonth"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -92,9 +84,9 @@ const EducationForm = ({ formik }: any) => {
             </select>
           </div>
           <div className="w-1/2">
-            <label className="block text-xs text-gray-500">From Year</label>
+            <label className="block text-xs ">From Year</label>
             <select
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               name="fromYear"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -112,9 +104,9 @@ const EducationForm = ({ formik }: any) => {
         {!formik.values.isContinue && (
           <div className="flex space-x-4 mt-4">
             <div className="w-1/2">
-              <label className="block text-xs text-gray-500">To Month</label>
+              <label className="block text-xs ">To Month</label>
               <select
-                className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
                 name="toMonth"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -129,9 +121,9 @@ const EducationForm = ({ formik }: any) => {
               </select>
             </div>
             <div className="w-1/2">
-              <label className="block text-xs text-gray-500">To Year</label>
+              <label className="block text-xs ">To Year</label>
               <select
-                className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
                 name="toYear"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -158,7 +150,7 @@ const EducationForm = ({ formik }: any) => {
             onChange={formik.handleChange}
             checked={formik.values.isContinue}
           />
-          <label htmlFor="currentlyEnrolled" className="text-sm text-gray-700">
+          <label htmlFor="currentlyEnrolled" className="text-sm ">
             Currently enrolled
           </label>
         </div>

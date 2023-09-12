@@ -205,7 +205,7 @@ const ResumeCreator = () => {
         </Link>
       </div>
       <div className="flex m-10 mt-2 gap-4">
-        <div className="w-full flex flex-col p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-full flex flex-col p-4  border border-gray-200 rounded-lg shadow sm:p-6  ">
           <h2 className="text-2xl mr-10 mb-6">LinkedIn PDF Generator</h2>
 
           <div className="flex flex-row gap-4">
@@ -272,7 +272,7 @@ const ResumeCreator = () => {
       </div>
       {show && (
         <div
-          className={`w-[95%]  bg-white border border-gray-200 rounded-lg shadow  m-10 ${
+          className={`w-[95%]  bg-white text-gray-800 border border-gray-200 rounded-lg shadow  m-10 ${
             msgLoading ? "animate-pulse" : ""
           }`}
         >

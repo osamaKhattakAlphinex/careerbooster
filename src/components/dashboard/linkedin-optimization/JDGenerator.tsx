@@ -40,11 +40,11 @@ const JDGenerator = ({ setJobDesc }: Props) => {
 
       for (const [index, experience] of experiences.entries()) {
         let html = "";
-        html += `<h1><strong>${experience.jobTitle}</strong></h1>`;
-        html += `<h2>${experience.company} | ${experience?.cityState} ${experience?.country}</h2>`;
-        html += `<p style='color: #3d3d3d; margin-bottom: 10px'>${
-          experience.fromMonth
-        } ${experience.fromYear} to ${
+        html += `<h4><strong>${experience.jobTitle}</strong></h4>`;
+        html += `<h5>${experience.company} | ${experience?.cityState} ${experience?.country}</h5>`;
+        html += `<p style=' margin-bottom: 10px'>${experience.fromMonth} ${
+          experience.fromYear
+        } to ${
           experience.isContinue
             ? "Present"
             : experience.toMonth + " " + experience.toYear
@@ -104,7 +104,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
   }, [session?.user?.email]);
 
   return (
-    <div className="w-full card">
+    <div className="w-full ">
       <div className="space-y-4 md:space-y-6">
         <h2 className="text-2xl">Job Description Generator</h2>
 
@@ -138,7 +138,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
           </div>
         </div>
         {streamedData && (
-          <div className="m-4 bg-gray-200 rounded border p-4">
+          <div className="m-4  rounded border p-4">
             <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
               <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
                 AI Response{" "}

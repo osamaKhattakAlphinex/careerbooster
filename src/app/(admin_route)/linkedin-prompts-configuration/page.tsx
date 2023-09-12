@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PromptEditor from "@/components/admin/linkedin-prompts/PromptEditor";
+import Link from "next/link";
+import { leftArrowIcon } from "@/helpers/iconsProvider";
 const LinkedInPromptsConfiguration = () => {
   const [promptsLoading, setPromptsLoading] = useState<boolean>(true);
   const [prompts, setPrompts] = useState<any[]>([]);
@@ -31,9 +33,18 @@ const LinkedInPromptsConfiguration = () => {
     }
   };
   return (
-    <>
+    <div className="mb-40">
+      <div className="my-5 ml-10">
+        <Link
+          href="/admin"
+          className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+        >
+          {leftArrowIcon}
+          Dashboard
+        </Link>
+      </div>
       <div className="flex m-10 gap-4">
-        <div className="w-full flex p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-full flex p-4  border border-gray-200 rounded-lg shadow sm:p-6  ">
           <h2 className="text-2xl">
             <div className="flex flex-row gap-2">
               <svg
@@ -62,7 +73,7 @@ const LinkedInPromptsConfiguration = () => {
         <h1 className="text-center text-2xl ">Loading...</h1>
       ) : (
         <>
-          <div className="flex m-10 gap-4">
+          <div className="flex m-10 gap-4 ">
             {/* Keywords Genrator Card */}
             <PromptEditor
               name="keyword"
@@ -111,7 +122,7 @@ const LinkedInPromptsConfiguration = () => {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 

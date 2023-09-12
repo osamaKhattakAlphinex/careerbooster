@@ -50,7 +50,7 @@ const AddNewEducationCard = () => {
         <button
           type="button"
           onClick={(e) => dispatch(setStepFour({ state: "show" }))}
-          className="text-xs float-right flex flex-row gap-1 items-center hover:bg-gray-50 mt-2"
+          className="text-xs float-right flex flex-row gap-1 items-center hover:font-extrabold mt-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

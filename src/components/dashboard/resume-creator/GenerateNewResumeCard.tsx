@@ -18,8 +18,8 @@ const GenerateNewResumeCard = ({ handleGenerate, componentRef }: Props) => {
   // console.clear();
 
   return (
-    <div className="m-10 w-[95%]  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-      <div className="w-full card">
+    <div className="ml-10 w-[95%]  p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
+      <div className="w-full ">
         <div className="space-y-4 md:space-y-6">
           <div>
             <div className="flex flex-row gap-4">
@@ -29,7 +29,7 @@ const GenerateNewResumeCard = ({ handleGenerate, componentRef }: Props) => {
                 </h2>
                 <label
                   htmlFor="targetedJobPosition"
-                  className="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-lg font-medium  "
                 >
                   Targeted Job position{" "}
                 </label>
@@ -37,7 +37,7 @@ const GenerateNewResumeCard = ({ handleGenerate, componentRef }: Props) => {
                   type="targetedJobPosition"
                   name="targetedJobPosition"
                   id="targetedJobPosition"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  text-white bg-transparent"
                   value={resumeData?.state?.jobPosition}
                   onChange={(e) =>
                     dispatch(
@@ -47,7 +47,7 @@ const GenerateNewResumeCard = ({ handleGenerate, componentRef }: Props) => {
                 />
               </div>
               <div className="w-1/2 p-2 pl-4">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                <h3 className="text-lg font-medium  dark:text-white mb-2">
                   Instructions
                 </h3>
                 <p className="text-sm mb-2">

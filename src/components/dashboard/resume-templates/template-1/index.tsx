@@ -52,7 +52,7 @@ const EditableField = ({
           {type === "textarea" ? (
             <textarea
               value={editedValue}
-              className="w-full text-black h-auto"
+              className="bg-transparent w-full  h-auto"
               rows={rows ? rows : 15}
               onChange={(e: any) => setEditedValue(e.target.value)}
               autoFocus
@@ -62,7 +62,7 @@ const EditableField = ({
             <input
               type="text"
               value={editedValue}
-              className=" text-black"
+              className=" bg-transparent "
               style={style ? style : {}}
               onChange={(e: any) => setEditedValue(e.target.value)}
               autoFocus
@@ -90,7 +90,7 @@ const ResumeTemplate1 = ({
   const resume = useSelector((state: any) => state.resume);
 
   return (
-    <div className="w-full first-page">
+    <div className="w-full first-page text-gray-900">
       <div className="flex">
         <div className="flex flex-col w-10/12 p-8">
           <h2 className="text-6xl hover:shadow-md hover:bg-gray-100">
@@ -114,8 +114,8 @@ const ResumeTemplate1 = ({
           </h3>
         </div>
         <div>
-          <div className="w-32 h-32 bg-gray-800 text-center p-10 rounded-full mr-8">
-            <span className="text-4xl text-white hover:shadow-md hover:bg-gray-900">
+          <div className="w-32 h-32 text-white bg-gray-800 text-center p-10 rounded-full mr-8">
+            <span className="text-4xl  hover:shadow-md hover:bg-gray-900">
               <EditableField
                 value={resume?.shortName ? resume?.shortName : "CPH"}
                 style={{ width: "60px" }}
@@ -131,13 +131,13 @@ const ResumeTemplate1 = ({
       <div className="flex">
         <div className="w-1/3 flex flex-col pl-8 pr-6 border-r-2">
           {/* contacts */}
-          <span className="w-full h-0 border border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
           <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
             {contactIcon}
-            Contacts
+            Contact
           </h3>
-          <span className="w-full h-0 border border-gray-500 my-3"></span>
-          <ul className="flex flex-col gap-3 mb-4 text-sm break-all">
+          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+          <ul className=" flex flex-col gap-3 mb-4 text-sm break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-100 text-xs flex flex-row gap-1  items-center">
               {phoneIcon}
               <EditableField
@@ -220,13 +220,13 @@ const ResumeTemplate1 = ({
 
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
-              <span className="w-full h-0 border border-gray-500 my-3"></span>
+              <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
               <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
                 {sparkleIcon}
                 Skills
               </h3>
-              <span className="w-full h-0 border border-gray-500 my-3"></span>
-              <ul className="flex flex-col gap-1 mb-4 text-sm">
+              <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+              <ul className="pl-0 flex flex-col gap-1 mb-4 text-sm">
                 <li className="font-semibold uppercase">primary</li>
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li className="hover:shadow-md hover:bg-gray-100" key={i}>
@@ -267,8 +267,8 @@ const ResumeTemplate1 = ({
                 {educationIcon}
                 Education
               </h3>
-              <span className="w-full h-0 border border-gray-500 my-3"></span>
-              <ul className="flex flex-col  ">
+              <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+              <ul className="pl-0 flex flex-col  ">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
                     <li className="font-semibold  uppercase hover:shadow-md hover:bg-gray-100 text-md">
@@ -376,13 +376,13 @@ const ResumeTemplate1 = ({
           {resume?.professionalSkills &&
             resume?.professionalSkills.length > 0 && (
               <>
-                <span className="w-full h-0 border border-gray-500 my-3"></span>
+                <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
                 <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
                   {sparkleIcon}
                   Skills
                 </h3>
-                <span className="w-full h-0 border border-gray-500 my-3"></span>
-                <ul className="flex flex-col gap-1 mb-4 text-sm">
+                <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+                <ul className="pl-0  flex flex-col gap-1 mb-4 text-sm">
                   <li className="font-semibold uppercase ">Professional</li>
                   {resume?.professionalSkills.map(
                     (skill: string, i: number) => (
@@ -422,13 +422,13 @@ const ResumeTemplate1 = ({
 
           {resume?.secondarySkills && resume?.secondarySkills.length > 0 && (
             <>
-              <span className="w-full h-0 border border-gray-500 my-3"></span>
+              <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
               <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
                 {sparkleIcon}
                 Skills
               </h3>
-              <span className="w-full h-0 border border-gray-500 my-3"></span>
-              <ul className="flex flex-col gap-1 mb-4 text-sm">
+              <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+              <ul className="pl-0 flex flex-col gap-1 mb-4 text-sm">
                 <li className="font-semibold uppercase">Secondary</li>
                 {resume?.secondarySkills.map((skill: string, i: number) => (
                   <li key={i} className="hover:shadow-md hover:bg-gray-100">
@@ -464,9 +464,9 @@ const ResumeTemplate1 = ({
         </div>
         <div className="w-full flex flex-col px-8">
           {/* Executive Summary */}
-          <span className="w-full h-0 border border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
           <h3 className="uppercase text-lg font-semibold">EXECUTIVE SUMMARY</h3>
-          <span className="w-full h-0 border border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
           <div className="text-sm hover:shadow-md hover:bg-gray-100">
             <EditableField
@@ -484,9 +484,9 @@ const ResumeTemplate1 = ({
           </div>
 
           {/* Work Experience */}
-          <span className="w-full h-0 border border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
           <h3 className="uppercase text-lg font-semibold">WORK EXPERIENCE</h3>
-          <span className="w-full h-0 border border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
           {resume?.workExperienceArray &&
           resume?.workExperienceArray.length > 0 ? (
@@ -625,7 +625,7 @@ const ResumeTemplate1 = ({
                     </h2>
                     <div className="p-4">
                       {rec?.achievements && (
-                        <ul className="flex flex-col gap-1 text-sm">
+                        <ul className="pl-0 flex flex-col gap-1 text-sm">
                           {rec?.achievements.map(
                             (achivement: any, ind: number) => (
                               <li
