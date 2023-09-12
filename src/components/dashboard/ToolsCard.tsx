@@ -3,24 +3,24 @@ import {
   briefCaseIcon,
   brushIcon,
   chatIcon,
-  infoSmallIcon,
   pencilIcon,
   shockIcon,
   starsIcon,
 } from "@/helpers/iconsProvider";
 import Link from "next/link";
+
 const ToolsCard = () => {
   return (
     <>
       {/* <div className="w-full  p-4  border border-gray-200 rounded-lg shadow sm:p-6   ">
     </div> */}
-      <h5 className="mb-3 text-4xl font-bold   md:text-4xl   ">
+      <h5 className="mb-3 text-4xl font-bold md:text-4xl">
         {starsIcon}
         AI Tools
       </h5>
-      <ul className="flex flex-row gap-4  pl-0">
+      <ul className="flex flex-row gap-4 mr-10  pl-0">
         <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full p-4   border border-gray-200 rounded-lg shadow  ">
+          <div className="h-[225px] min-h-full p-4 border border-gray-200 rounded-lg shadow">
             {chatIcon}
             <Link href="/chatAI" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight">
@@ -40,7 +40,7 @@ const ToolsCard = () => {
           </div>
         </li>
         <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full p-4   border border-gray-200 rounded-lg shadow  ">
+          <div className="h-[225px] min-h-full p-4 border border-gray-200 rounded-lg shadow">
             {shockIcon}
             <Link href="/resume-creator" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
@@ -58,7 +58,7 @@ const ToolsCard = () => {
             </Link>
           </div>
         </li>
-        <li className="w-1/3 ">
+        <li className="w-1/3">
           <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {briefCaseIcon}
             <Link href="/linkedin-pdf-generator" className="no-underline">
@@ -79,7 +79,7 @@ const ToolsCard = () => {
           </div>
         </li>
       </ul>
-      <ul className="flex flex-row gap-4 mt-8 pl-0">
+      <ul className="flex flex-row gap-4 mr-10 mt-8 pl-0">
         <li className="w-1/3 ">
           <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {brushIcon}

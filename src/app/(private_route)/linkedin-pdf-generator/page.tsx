@@ -198,13 +198,14 @@ const ResumeCreator = () => {
       <div className="my-5 ml-10">
         <Link
           href="/dashboard"
-          className="flex flex-row gap-2 items-center hover:font-semibold transition-all">
+          className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+        >
           {leftArrowIcon}
           Dashboard
         </Link>
       </div>
       <div className="flex m-10 mt-2 gap-4">
-        <div className="w-full flex flex-col p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-full flex flex-col p-4  border border-gray-200 rounded-lg shadow sm:p-6  ">
           <h2 className="text-2xl mr-10 mb-6">LinkedIn PDF Generator</h2>
 
           <div className="flex flex-row gap-4">
@@ -214,7 +215,8 @@ const ResumeCreator = () => {
                   msgLoading || !session?.user?.email || !aiInputUserData
                 }
                 onClick={() => handleGenerate()}
-                className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300">
+                className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300"
+              >
                 <div className="flex flex-row gap-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -222,7 +224,8 @@ const ResumeCreator = () => {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className={`w-4 h-4 ${msgLoading ? "animate-spin" : ""}`}>
+                    className={`w-4 h-4 ${msgLoading ? "animate-spin" : ""}`}
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -237,7 +240,8 @@ const ResumeCreator = () => {
               trigger={() => (
                 <button
                   disabled={!show || msgLoading || !session?.user?.email}
-                  className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300">
+                  className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300"
+                >
                   <div className="flex flex-row gap-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -245,7 +249,8 @@ const ResumeCreator = () => {
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="currentColor"
-                      className="w-4 h-4">
+                      className="w-4 h-4"
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -267,9 +272,10 @@ const ResumeCreator = () => {
       </div>
       {show && (
         <div
-          className={`w-[95%]  bg-white border border-gray-200 rounded-lg shadow  m-10 ${
+          className={`w-[95%]  bg-white text-gray-800 border border-gray-200 rounded-lg shadow  m-10 ${
             msgLoading ? "animate-pulse" : ""
-          }`}>
+          }`}
+        >
           <div className="p-12" ref={componentRef}>
             <div className="flex flex-col gap-4 ">
               <h1 className="text-4xl font-semibold">
@@ -358,7 +364,8 @@ const ResumeCreator = () => {
               >
                 <div
                   className="list-disc"
-                  dangerouslySetInnerHTML={{ __html: jobDesc }}></div>
+                  dangerouslySetInnerHTML={{ __html: jobDesc }}
+                ></div>
               </div>
               <h2 className="text-2xl font-semibold">Skills Section:</h2>
               <p className="bg-yellow-400 p-2">

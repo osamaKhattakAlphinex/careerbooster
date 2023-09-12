@@ -2,10 +2,10 @@ import Link from "next/link";
 
 const AdminDashboard = () => {
   return (
-    <section className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100    mx-auto md:h-screen p-10">
-      <div className="w-full backdrop-blur-xl bg-white/70 rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0  mt-10">
+    <section className="  mx-auto md:h-screen p-10 mb-40">
+      <div className="w-full  rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0  mt-10">
         <div className="w-full flex flex-col gap-4 p-6 space-y-4 md:space-y-6 sm:p-8  ">
-          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl  ">
+          <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl  ">
             Welcome ADMIN!!
           </h1>
           <Link href="/linkedin-prompts-configuration">

@@ -11,10 +11,26 @@ const AboutGenerator = ({ setAbout }: Props) => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
+  const [aiInputUserData, setAiInputUserData] = useState<any>();
 
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
+
+  useEffect(() => {
+    if (userData && userData?.email) {
+      setAiInputUserData({
+        contact: userData?.contact,
+        education: userData?.contact,
+        email: userData?.contact,
+        experience: userData?.contact,
+        firstName: userData?.firstName,
+        lastName: userData?.lastName,
+        phone: userData?.phone,
+        skills: userData?.skills,
+      });
+    }
+  }, [userData]);
 
   useEffect(() => {
     setAbout(streamedData);
@@ -27,12 +43,10 @@ const AboutGenerator = ({ setAbout }: Props) => {
       setMsgLoading(true);
       fetch("/api/linkedInBots/aboutGenerator", {
         method: "POST",
-        body: JSON.stringify({ userData }),
+        body: JSON.stringify({ userData: aiInputUserData }),
       })
         .then(async (resp: any) => {
           if (resp.ok) {
-            // const res = await resp.json();
-            // setStreamedData(res.result.output_text);
             const reader = resp.body.getReader();
             while (true) {
               const { done, value } = await reader.read();
@@ -84,7 +98,7 @@ const AboutGenerator = ({ setAbout }: Props) => {
   }, [session?.user?.email]);
 
   return (
-    <div className="w-full card">
+    <div className="w-full ">
       <div className="space-y-4 md:space-y-6">
         <h2 className="text-2xl">About Generator</h2>
         <div className="flex flex-row gap-4">
@@ -115,7 +129,7 @@ const AboutGenerator = ({ setAbout }: Props) => {
           </div>
         </div>
         {streamedData && (
-          <div className="m-4 bg-gray-200 rounded border p-4">
+          <div className="m-4  rounded border p-4">
             <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
               <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
                 AI Response{" "}
