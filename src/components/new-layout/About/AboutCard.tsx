@@ -18,7 +18,7 @@ const AboutCard = () => {
                 opening paragraph, and body for your blog.
               </p>
               <a href="login.html" className="btn btn-lg btn-gradient-1">
-                Start Writing - It's Free
+                Start Writing - It{"'"}s Free
               </a>
             </div>
           </div>

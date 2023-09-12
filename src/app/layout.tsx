@@ -36,10 +36,7 @@ export default function RootLayout({
         </div>
 
         <Script src="assets/js/plugins.js" />
-
         <Script src="assets/js/main.js" />
-
-        <script src=""></script>
       </body>
     </html>
   );

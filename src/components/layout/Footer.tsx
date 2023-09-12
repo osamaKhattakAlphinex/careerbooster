@@ -206,7 +206,7 @@ const Footer = () => {
               </Link>
               <p className="fs-sm mb-0 mt-4">
                 A Magical Tool to Optimize you content for the first know who
-                you're targeting. Identify your target audience.
+                you{"'"}re targeting. Identify your target audience.
               </p>
             </div>
           </div>

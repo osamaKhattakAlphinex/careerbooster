@@ -56,7 +56,7 @@ const handler: NextApiHandler = async (req, res) => {
     // PROMPT TEMPLATE
     // const chatPrompt = ChatPromptTemplate.fromPromptMessages([
     //   SystemMessagePromptTemplate.fromTemplate(
-    //     "The following is a friendly Conversation between a human and AI. The AI is talkative and provides lots of specific details from it's context. If the AI does not know the answer to a question, it truthfully says it does not know."
+    //     "The following is a friendly Conversation between a human and AI. The AI is talkative and provides lots of specific details from It{"'"}s context. If the AI does not know the answer to a question, it truthfully says it does not know."
     //   ),
     //   new MessagesPlaceholder("history"),
     //   HumanMessagePromptTemplate.fromTemplate("{input}"),
@@ -67,8 +67,8 @@ const handler: NextApiHandler = async (req, res) => {
     //   My Question is: {question}
     //   Your answer should follow the following format:
     //   \`\`\`
-    //   If you don't know the answer, just say that you don't know, don't try to make up an answer.
-    //   don't return the answer as it is from the data you have Rewrite it to make it more professional.
+    //   If you Don{"'"}t know the answer, just say that you Don{"'"}t know, Don{"'"}t try to make up an answer.
+    //   Don{"'"}t return the answer as it is from the data you have Rewrite it to make it more professional.
     //   ----------------
     //   Standalone question: <Rephrased question here>
     //   \`\`\`
@@ -109,7 +109,7 @@ const handler: NextApiHandler = async (req, res) => {
       query: reqBody.question,
     });
     // await chain4.call({
-    //   query: `Answer the following question with a short answer which is only for this question don't add extra information
+    //   query: `Answer the following question with a short answer which is only for this question Don{"'"}t add extra information
     //   My question: ${reqBody.question}
     //   Your Answer: `,
     // });

@@ -18,7 +18,7 @@ const PricingSection = () => {
                 data-aos-delay="100"
               >
                 Ready to Get Started? <br />
-                Don't Worry, We'll Keep You Under Budget
+                Don{"'"}t Worry, We{"'"}ll Keep You Under Budget
               </h1>
               <p className="mb-0" data-aos="fade-up-sm" data-aos-delay="150">
                 Get started with a 5-day trial, Cancel anytime.

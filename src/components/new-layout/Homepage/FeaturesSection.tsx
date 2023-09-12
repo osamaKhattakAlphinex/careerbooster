@@ -26,11 +26,12 @@ const FeaturesSection = () => {
             The Game-Changing Advantages You Never Knew About
           </h4>
           <p className="py-10 w-3quarter mx-auto">
-            In today's competitive job market, landing your dream role isn't
-            just about qualifications and experience; it's about making sure
-            your resume stands out. But here's the catch: before your resume
-            even reaches the human recruiter's desk, it has to pass through a
-            critical gatekeeper—the Applicant Tracking System (ATS).
+            In today{"'"}s competitive job market, landing your dream role isn
+            {"'"}t just about qualifications and experience; It{"'"}s about
+            making sure your resume stands out. But here{"'"}s the catch: before
+            your resume even reaches the human recruiter{"'"}s desk, it has to
+            pass through a critical gatekeeper—the Applicant Tracking System
+            (ATS).
           </p>
         </div>
 
@@ -60,14 +61,14 @@ const FeaturesSection = () => {
               </div>
               <div className="content">
                 <h4 className="mb-4 text-white">
-                  The ATS: Your Resume's First Adjudicator
+                  The ATS: Your Resume{"'"}s First Adjudicator
                 </h4>
                 <p className="w-3quarter pr-lg-5">
-                  The ATS is no human—it's a robot designed to shortlist resumes
-                  based on specific criteria. This means your resume must speak
-                  the language of machines to secure that initial interview
-                  invitation. The question arises: Who can craft a better
-                  robotfriendly resume than a robot itself?
+                  The ATS is no human—It{"'"}s a robot designed to shortlist
+                  resumes based on specific criteria. This means your resume
+                  must speak the language of machines to secure that initial
+                  interview invitation. The question arises: Who can craft a
+                  better robotfriendly resume than a robot itself?
                 </p>
               </div>
             </div>
@@ -97,11 +98,11 @@ const FeaturesSection = () => {
                   But What About the Human Recruiter?
                 </h4>
                 <p className="w-3quarter pr-lg-5">
-                  We understand your concerns don't end with impressing a
-                  machine. That's why our AI doesn't stop at being ATS-friendly;
-                  it's also human-recruiter-approved. We've fine-tuned our
-                  system to create resumes that captivate the attention of
-                  senior-level professionals.
+                  We understand your concerns Don{"'"}t end with impressing a
+                  machine. That{"'"}s why our AI doesn{"'"}t stop at being
+                  ATS-friendly; It{"'"}s also human-recruiter-approved. We{"'"}
+                  ve fine-tuned our system to create resumes that captivate the
+                  attention of senior-level professionals.
                 </p>
               </div>
             </div>
@@ -173,8 +174,8 @@ const FeaturesSection = () => {
                 <p className="w-3quarter pr-lg-5">
                   Our system has been meticulously trained through extensive
                   research and consultations with numerous executive resume
-                  writers. We've decoded the algorithms that the ATS employs to
-                  shortlist candidates. Your resume is crafted with a deep
+                  writers. We{"'"}ve decoded the algorithms that the ATS employs
+                  to shortlist candidates. Your resume is crafted with a deep
                   understanding of what it takes to pass this robotic
                   gatekeeper.
                 </p>
@@ -213,14 +214,15 @@ const FeaturesSection = () => {
                   Still skeptical? Take it from the experts. Nolan Church, a
                   former Google recruiter, has emphasized that resumes often
                   suffer from an overload of words and paragraphs, resulting in
-                  a "zero chance" of progressing. He recommends using AI tools
-                  to refine your resume. In an interview with Business Insider,
-                  he praised the effectiveness of AI-driven resume optimization,
-                  confirming that it's the smart choice for modern job seekers.
-                  So, when you trust AI for your executive resume, you're not
-                  just appeasing the robots; you're ensuring your resume shines
-                  in the eyes of discerning human recruiters too. It's the
-                  winning combination for your career success.
+                  a {'"'}zero chance{'"'} of progressing. He recommends using AI
+                  tools to refine your resume. In an interview with Business
+                  Insider, he praised the effectiveness of AI-driven resume
+                  optimization, confirming that It{"'"}s the smart choice for
+                  modern job seekers. So, when you trust AI for your executive
+                  resume, you
+                  {"'"}re not just appeasing the robots; you{"'"}re ensuring
+                  your resume shines in the eyes of discerning human recruiters
+                  too. It{"'"}s the winning combination for your career success.
                 </p>
               </div>
             </div>
@@ -232,7 +234,7 @@ const FeaturesSection = () => {
             Ready to craft a resume that impresses both bots and humans?
           </h5>
           <a href="login.html" className="btn btn-primary-dark">
-            Let's get started!
+            Let{"'"}s get started!
           </a>
         </div>
       </div>

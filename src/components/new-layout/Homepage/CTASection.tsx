@@ -21,7 +21,7 @@ const CTASection = () => {
                 <h2 className="mb-6 text-white">
                   Discover the Game-Changing
                   <span className="text-primary-dark">Resume Strategy </span>
-                  You've Been Missing!
+                  You{"'"}ve Been Missing!
                 </h2>
                 <h5 className="text-white mb-6">
                   Unlock Success: Tailor Resumes for Each Job in Mere Minutes
@@ -31,7 +31,7 @@ const CTASection = () => {
                   Are you stuck in the resume rut of using a single generic
                   document for every job application? Break free from old-school
                   methods and learn the secret to crafting job-specific resumes
-                  effortlessly - in just 2-3 minutes! Don't miss out on your
+                  effortlessly - in just 2-3 minutes! Don{"'"}t miss out on your
                   dream job - embrace the future of job hunting now!
                 </p>
 

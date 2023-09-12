@@ -102,10 +102,11 @@ const FAQSection = () => {
                   data-bs-parent="#faqAccordion"
                 >
                   <div className="accordion-body">
-                    CareerBooster stands out because it's specifically designed
-                    for seniorlevel professionals. It's been developed by top
-                    executive resume writers and AI engineers to cater to the
-                    unique needs and expectations of experienced job seekers.
+                    CareerBooster stands out because It{"'"}s specifically
+                    designed for seniorlevel professionals. It{"'"}s been
+                    developed by top executive resume writers and AI engineers
+                    to cater to the unique needs and expectations of experienced
+                    job seekers.
                   </div>
                 </div>
               </div>
@@ -132,9 +133,9 @@ const FAQSection = () => {
                 >
                   <div className="accordion-body">
                     Yes, CareerBooster is designed to be versatile and adaptable
-                    to various industries and career levels. Whether you're a
-                    seasoned executive or a recent graduate, our tools can help
-                    you improve your professional presentation.
+                    to various industries and career levels. Whether you{"'"}re
+                    a seasoned executive or a recent graduate, our tools can
+                    help you improve your professional presentation.
                   </div>
                 </div>
               </div>
@@ -228,8 +229,8 @@ const FAQSection = () => {
                     Our premium packages offer additional benefits, such as
                     unlimited resume tailoring, cover letter customization,
                     personalized emails to recruiters, and more. Please refer to
-                    our pricing section for a detailed breakdown of each
-                    package's features.
+                    our pricing section for a detailed breakdown of each package
+                    {"'"}s features.
                   </div>
                 </div>
               </div>
@@ -245,7 +246,7 @@ const FAQSection = () => {
                     aria-controls="faq-collapseThree"
                   >
                     <span className="icon"></span>
-                    8. How often can I use CareerBooster's services?
+                    8. How often can I use CareerBooster{"'"}s services?
                   </button>
                 </h2>
                 <div
@@ -313,8 +314,8 @@ const FAQSection = () => {
                   <div className="accordion-body">
                     No, CareerBooster is designed to be user-friendly and
                     accessible to individuals with basic computer skills. You
-                    don't need any specialized software or technical expertise
-                    to use our platform.
+                    Don{"'"}t need any specialized software or technical
+                    expertise to use our platform.
                   </div>
                 </div>
               </div>

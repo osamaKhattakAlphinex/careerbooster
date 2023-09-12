@@ -63,7 +63,7 @@ const FeaturesSecond = () => {
                         </g>
                       </svg>
                       <span
-                        >Let's Communicate with your customers with
+                        >Let{"'"}s Communicate with your customers with
                         emotions</span
                       >
                     </li>
@@ -138,16 +138,18 @@ const FeaturesSecond = () => {
                 for Confidential Dream Jobs
               </h1>
               <h4 className="text-white mb-8">
-                Don't Miss Out on Lucrative Unadvertised Opportunities Anymore!
+                Don{"'"}t Miss Out on Lucrative Unadvertised Opportunities
+                Anymore!
               </h4>
               <p className="mb-6">
                 Discover the power of LinkedIn optimization! Senior-level jobs
                 are often concealed, and recruiters prefer to hunt for talent on
-                LinkedIn. If your profile isn't optimized, you're invisible to
-                them, missing out on exclusive career opportunities. Our proven
-                strategies will transform your LinkedIn presence, ensuring
-                you're front and center when those lucrative, unadvertised
-                positions become available. Take control of your future today!
+                LinkedIn. If your profile isn{"'"}t optimized, you{"'"}re
+                invisible to them, missing out on exclusive career
+                opportunities. Our proven strategies will transform your
+                LinkedIn presence, ensuring you{"'"}re front and center when
+                those lucrative, unadvertised positions become available. Take
+                control of your future today!
               </p>
               <a
                 href="login.html"
@@ -201,7 +203,7 @@ const FeaturesSecond = () => {
                 cover letters for job applications? Our AI-powered system
                 streamlines the process, allowing you to create customized cover
                 letters in mere seconds. Say goodbye to the time-consuming grind
-                and embrace a more efficient way to land your dream job!"
+                and embrace a more efficient way to land your dream job!{'"'}
               </p>
 
               <a
@@ -259,8 +261,8 @@ const FeaturesSecond = () => {
               <p className="mb-6">
                 Take control of your job search by uncovering whether your
                 resume passes the ATS screening. Our free ATS Scan service
-                provides insights to optimize your resume for success. Don't let
-                the ATS stand in your way - assess your resume now!"
+                provides insights to optimize your resume for success. Don{"'"}t
+                let the ATS stand in your way - assess your resume now!{'"'}
               </p>
               <a
                 href="login.html"
@@ -302,8 +304,8 @@ const FeaturesSecond = () => {
               <h4 className="text-white">Unlock Resume Excellence</h4>
               <h1 className="text-white">
                 Get Free
-                <span className="text-primary-dark">Resume Review:</span> Don't
-                Let Your Resume Undersell Your Achievements
+                <span className="text-primary-dark">Resume Review:</span> Don
+                {"'"}t Let Your Resume Undersell Your Achievements
               </h1>
               <h4 className="text-white mb-8">
                 Eliminate Costly Mistakes and Supercharge Your Career Success!

@@ -9,16 +9,17 @@ const RewardsSection = () => {
           <div className="reward-content text-center">
             <h1>Get Ready for a $10k Reward - Prove Us Wrong!</h1>
             <h4 className="py-3">
-              We're so confident in our AI tool that we dare you to find a
-              better one. If you do, we'll hand you $10,000. Challenge accepted?
+              We{"'"}re so confident in our AI tool that we dare you to find a
+              better one. If you do, We{"'"}ll hand you $10,000. Challenge
+              accepted?
             </h4>
             <h4 className="pb-3">
               Why CareerBooster is better than GPT and Other Tools?
             </h4>
             <h4>
               At CareerBooster, we understand the value of AI, including GPT, in
-              crafting exceptional resumes. However, here's why our AI stands
-              out
+              crafting exceptional resumes. However, here{"'"}s why our AI
+              stands out
             </h4>
           </div>
           <div className="reward-list col-md-10 mx-auto">
@@ -41,10 +42,10 @@ const RewardsSection = () => {
                   </g>
                 </svg>
                 <span>
-                  Tailored for Senior Level Resumes: We've developed our model
-                  through extensive research and in collaboration with top
-                  executive resume writers. It's laser-focused on senior-level
-                  resumes, following a research-based framework.
+                  Tailored for Senior Level Resumes: We{"'"}ve developed our
+                  model through extensive research and in collaboration with top
+                  executive resume writers. It{"'"}s laser-focused on
+                  senior-level resumes, following a research-based framework.
                 </span>
               </li>
               <li className="font-16 mb-5">
@@ -91,8 +92,8 @@ const RewardsSection = () => {
                 <span>
                   Speed and Efficiency: Unlike GPT and other tools that often
                   require manual input for each section, our system delivers
-                  results with a single click. It's faster and more efficient,
-                  saving you valuable time.
+                  results with a single click. It{"'"}s faster and more
+                  efficient, saving you valuable time.
                 </span>
               </li>
             </ul>

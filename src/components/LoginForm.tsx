@@ -140,7 +140,7 @@ const LoginForm = () => {
       </div>
       <div className="text-center">
         <p>
-          Don't have an account?{" "}
+          Don{"'"}t have an account?{" "}
           <Link href="/register" className="text-decoration-none">
             Sign Up for Free
           </Link>

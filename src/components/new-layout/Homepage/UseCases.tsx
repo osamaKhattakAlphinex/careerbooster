@@ -17,8 +17,8 @@ const UseCases = () => {
                 data-aos="fade-up-sm"
                 data-aos-delay="100"
               >
-                "Transform Your Career with CareerBooster, AI-Powered Tools for
-                Professional Excellence"
+                {'"'}Transform Your Career with CareerBooster, AI-Powered Tools
+                for Professional Excellence{'"'}
               </h1>
             </div>
           </div>
@@ -258,7 +258,8 @@ const UseCases = () => {
                 <p className="mb-0">
                   Avoid the pitfalls of Applicant Tracking Systems (ATS) with
                   our ATS scanning feature. Ensure your resume is ATS-friendly,
-                  increasing your chances of making it to the recruiter's desk.
+                  increasing your chances of making it to the recruiter{"'"}s
+                  desk.
                 </p>
               </div>
               <div className="flex-shrink-0">

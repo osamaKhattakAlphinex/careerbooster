@@ -21,10 +21,10 @@ const handler: NextApiHandler = async (req, res) => {
 
     // Check if the user's resume array is empty
     if (!user.resumes || user.resumes.length === 0) {
-      // If it's empty, create a new array with the new resume object
+      // If It{"'"}s empty, create a new array with the new resume object
       user.resumes = [resumeData];
     } else {
-      // If not empty, check if the new resume's id matches an existing record
+      // If not empty, check if the new Resume{"'"}s id matches an existing record
       const existingResumeIndex = user.resumes.findIndex(
         (resume: any) => resume.id === resumeData.id
       );

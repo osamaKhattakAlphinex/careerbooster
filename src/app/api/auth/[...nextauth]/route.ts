@@ -10,7 +10,7 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       type: "credentials",
-      credentials: {}, // empty because we don't need the UI
+      credentials: {}, // empty because we Don{"'"}t need the UI
       async authorize(credentials, req) {
         const { email, password } = credentials as {
           email: string;
