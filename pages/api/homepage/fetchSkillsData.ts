@@ -14,52 +14,36 @@ import { StructuredOutputParser } from "langchain/output_parsers";
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const reqBody = JSON.parse(req.body);
-    const file = reqBody.file;
-    if (file) {
+    const content = reqBody.content;
+    if (content) {
       // CREATING LLM MODAL
       const model = new OpenAI({
         modelName: "gpt-3.5-turbo",
         temperature: 0.5,
       });
 
-      // load file
-      const dir = path.join(process.cwd() + "/public", "/files", `/temp`);
-      const loader = new PDFLoader(`${dir}/${file}`);
-      const docs = await loader.load();
+      // const parser = StructuredOutputParser.fromZodSchema(
+      //   z.object({
+      //     skills: z
+      //       .array(z.string())
+      //       .describe(
+      //         "List of all Professional, primary, secondary, development, communication etc. Skills"
+      //       ),
+      //   })
+      // );
 
-      // load vector store
-      const vectorStore = await MemoryVectorStore.fromDocuments(
-        docs,
-        new OpenAIEmbeddings()
-      );
+      const input = `
+          This is the User Data:
+          ${content}
 
-      const vectorStoreRetriever = vectorStore.asRetriever();
+          Now please give me a List of all Professional, primary, secondary, development, communication etc. Skills from the above content provided.
 
-      const parser = StructuredOutputParser.fromZodSchema(
-        z.object({
-          skills: z
-            .array(z.string())
-            .describe(
-              "List of all Professional, primary, secondary, development, communicatione etc. Skills"
-            ),
-        })
-      );
-
-      const formatInstructions = parser.getFormatInstructions();
-      const prompt = new PromptTemplate({
-        template:
-          "Answer the users question as best as possible from the provided resume data that you already have about the person.\n{format_instructions}\n{additionalInfo}",
-        inputVariables: ["additionalInfo"],
-        partialVariables: { format_instructions: formatInstructions },
-      });
-
-      const input = await prompt.format({
-        additionalInfo: "Answer should be a valid JSON",
-      });
+          The answer MUST be a valid JSON Array of Strings.
+      `;
 
       try {
-        const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
-        const resp = await chain4.call({ query: input });
+        const resp = await model.call(input);
+        // const resp = await chain4.call({ query: input });
         return res.status(200).json({ success: true, data: resp });
       } catch (error) {
         return res.status(400).json({ success: false, error });

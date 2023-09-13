@@ -48,7 +48,7 @@ const StepThree = () => {
               dispatch(setStepThree({ country: e.target.value }));
             }}
             className="form-control rounded-2"
-            placeholder="United States"
+            placeholder=""
           />
         </div>
       </div>
@@ -83,7 +83,7 @@ const StepThree = () => {
               dispatch(setStepThree({ street: e.target.value }));
             }}
             className="form-control rounded-2"
-            placeholder="123 Main St"
+            placeholder=""
           />
         </div>
       </div>
@@ -118,7 +118,7 @@ const StepThree = () => {
               dispatch(setStepThree({ cityState: e.target.value }));
             }}
             className="form-control rounded-2"
-            placeholder="New York, NY"
+            placeholder=""
           />
         </div>
       </div>
@@ -153,7 +153,7 @@ const StepThree = () => {
               dispatch(setStepThree({ postalCode: e.target.value }));
             }}
             className="form-control rounded-2"
-            placeholder="10001"
+            placeholder=""
           />
         </div>
       </div>

@@ -60,7 +60,7 @@ const StepTwo = () => {
               dispatch(setStepTwo({ phoneNumber: e.target.value }));
             }}
             className="form-control rounded-2"
-            placeholder="+1-212-456-7890"
+            placeholder=""
           />
         </div>
       </div>
@@ -94,7 +94,7 @@ const StepTwo = () => {
               dispatch(setStepTwo({ Email: e.target.value }));
             }}
             className="form-control rounded-2"
-            placeholder="name@email.com"
+            placeholder=""
           />
         </div>
         {stepTwo.emailInvalid && (

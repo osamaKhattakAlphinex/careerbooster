@@ -2,11 +2,18 @@ import { createSlice } from "@reduxjs/toolkit";
 import { Education, WorkExperience } from "./userDataSlice";
 
 interface RegisterSlice {
+  scrappedContent: string;
   activeStep: number;
   isSubmitting: boolean;
   error: string;
   terms: boolean;
   scrapped: {
+    basic: boolean;
+    education: boolean;
+    workExperience: boolean;
+    skills: boolean;
+  };
+  scrapping: {
     basic: boolean;
     education: boolean;
     workExperience: boolean;
@@ -54,11 +61,18 @@ interface RegisterSlice {
 }
 
 const initialState: RegisterSlice = {
+  scrappedContent: "",
   activeStep: 0,
   isSubmitting: false,
   terms: false,
   error: "",
   scrapped: {
+    basic: false,
+    education: false,
+    workExperience: false,
+    skills: false,
+  },
+  scrapping: {
     basic: false,
     education: false,
     workExperience: false,
@@ -120,6 +134,15 @@ const registerSlice = createSlice({
         ...state,
         scrapped: {
           ...state.scrapped,
+          ...action.payload,
+        },
+      };
+    },
+    setScrapping(state, action) {
+      return {
+        ...state,
+        scrapping: {
+          ...state.scrapping,
           ...action.payload,
         },
       };
@@ -205,6 +228,12 @@ const registerSlice = createSlice({
         },
       };
     },
+    setField(state, action) {
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value,
+      };
+    },
   },
 });
 
@@ -214,6 +243,7 @@ export const {
   setError,
   setTerms,
   setScrapped,
+  setScrapping,
   setStepOne,
   setStepTwo,
   setStepThree,
@@ -221,6 +251,7 @@ export const {
   setStepFive,
   setStepSix,
   setStepEight,
+  setField,
 } = registerSlice.actions;
 
 export default registerSlice.reducer;

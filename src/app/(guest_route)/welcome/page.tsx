@@ -14,8 +14,10 @@ import { signIn } from "next-auth/react";
 import {
   setActiveStep,
   setError,
+  setField,
   setIsSubmitting,
   setScrapped,
+  setScrapping,
   setStepFive,
   setStepFour,
   setStepOne,
@@ -25,8 +27,6 @@ import {
 } from "@/store/registerSlice";
 import StepEight from "@/components/welcome/StepEight";
 import {
-  checkIcon,
-  leftArrowIcon,
   refreshBigIconRotating,
   refreshIconRotating,
 } from "@/helpers/iconsProvider";
@@ -43,71 +43,7 @@ const Welcome = () => {
   const resume = useSelector((state: any) => state.resume);
   const reduxStep = register.activeStep;
 
-  useEffect(() => {
-    // dispatch(setError(""));
-    // if step exists in url and activeStep from redux is 0 then set activeStep to step
-    if (reduxStep === 0 && urlStep) {
-      router.push(`/welcome?step=${urlStep}`);
-      dispatch(setActiveStep(Number(urlStep)));
-    } else if (reduxStep === 0 && !urlStep) {
-      dispatch(setActiveStep(1));
-      router.push(`/welcome?step=1`);
-    } else if (reduxStep !== 0) {
-      router.push(`/welcome?step=${reduxStep}`);
-    }
-  }, [reduxStep, urlStep]);
-
-  useEffect(() => {
-    // data scraping from file
-    if (
-      (reduxStep === 1 || reduxStep === 2 || reduxStep === 3) &&
-      resume.uploadedFileName &&
-      resume.uploadedFileName !== ""
-    ) {
-      fetchBasicDataFromResume();
-    }
-
-    if (
-      reduxStep === 4 &&
-      resume.uploadedFileName &&
-      resume.uploadedFileName !== ""
-    ) {
-      fetchEducationDataFromResume();
-    }
-
-    if (
-      reduxStep === 5 &&
-      resume.uploadedFileName &&
-      resume.uploadedFileName !== ""
-    ) {
-      fetchExperienceDataFromResume();
-    }
-
-    if (
-      reduxStep === 6 &&
-      resume.uploadedFileName &&
-      resume.uploadedFileName !== ""
-    ) {
-      fetchSkillsDataFromResume();
-    }
-  }, [reduxStep]);
-
-  useEffect(() => {
-    const confirmExit = (e: any) => {
-      // Display a confirmation message when leaving or refreshing the page
-      e.returnValue =
-        "You are leaving this page, your changes are not saved, you will lose your data.";
-    };
-
-    // Listen for the beforeunload event
-    window.addEventListener("beforeunload", confirmExit);
-
-    return () => {
-      // Remove the event listener when the component unmounts
-      window.removeEventListener("beforeunload", confirmExit);
-    };
-  }, []);
-
+  // function to return true, false based for next button
   const isNextDisabled = () => {
     if (register.activeStep === 1 && register.stepOne.isValid === false) {
       return true;
@@ -232,14 +168,21 @@ const Welcome = () => {
     }
   };
 
-  // Registration Functions End
-
   // file scrapping functions end
-  const fetchBasicDataFromResume = () => {
-    if (register.scrapped.basic === false && resume.uploadedFileName) {
+  const fetchBasicDataFromResume = async () => {
+    if (
+      register.scrapping.basic === false &&
+      register.scrappedContent !== "" &&
+      register.scrapped.basic === false &&
+      resume.uploadedFileName
+    ) {
+      // set scrapping to true so that we don't send multiple requests
+      dispatch(setScrapping({ basic: true }));
+
       const formData = {
         type: "basicInfo",
-        file: resume.uploadedFileName,
+        // file: resume.uploadedFileName,
+        content: register.scrappedContent,
       };
 
       fetch("/api/homepage/fetchRegistrationData", {
@@ -249,9 +192,10 @@ const Welcome = () => {
         const res = await resp.json();
 
         if (res.success) {
-          if (res?.data?.text) {
-            const data = JSON.parse(res?.data?.text);
+          if (res?.data) {
+            const data = JSON.parse(res?.data);
             dispatch(setScrapped({ basic: true }));
+            dispatch(setScrapping({ basic: false }));
             dispatch(
               setStepOne({
                 firstName: data.firstName,
@@ -272,6 +216,8 @@ const Welcome = () => {
                 postalCode: data.postalCode,
               })
             );
+
+            fetchEducationDataFromResume();
           }
         }
       });
@@ -281,10 +227,16 @@ const Welcome = () => {
   const fetchEducationDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.education === false) &&
-      resume.uploadedFileName
+      resume.uploadedFileName &&
+      register.scrappedContent !== "" &&
+      register.scrapping.education === false
     ) {
+      // set scrapping to true so that we don't send multiple requests
+      dispatch(setScrapping({ education: true }));
+
       const formData = {
-        file: resume.uploadedFileName,
+        // file: resume.uploadedFileName,
+        content: register.scrappedContent,
       };
 
       fetch("/api/homepage/fetchEducationData", {
@@ -292,37 +244,39 @@ const Welcome = () => {
         body: JSON.stringify(formData),
       }).then(async (resp: any) => {
         const res = await resp.json();
-
         if (res.success) {
-          if (res?.data?.text) {
-            const data = JSON.parse(res?.data?.text);
+          if (res?.data) {
+            const data = JSON.parse(res?.data);
+
             const formattedArr = data?.education.map((item: any) => {
               return {
                 id: makeid(),
-                educationLevel: item.fields.educationLevel,
-                fieldOfStudy: item.fields.fieldOfStudy,
-                schoolName: item.fields.schoolName,
-                schoolLocation: item.fields.schoolLocation,
-                fromMonth: item.fields.fromMonth,
-                fromYear: item.fields.fromYear,
-                isContinue: item.fields.isContinue,
-                toMonth: item.fields.toMonth,
-                toYear: item.fields.toYear,
+                educationLevel: item?.educationLevel,
+                fieldOfStudy: item?.fieldOfStudy,
+                schoolName: item?.schoolName,
+                schoolLocation: item?.schoolLocation,
+                fromMonth: item?.fromMonth,
+                fromYear: item?.fromYear,
+                isContinue: item?.isContinue,
+                toMonth: item?.toMonth,
+                toYear: item?.toYear,
               };
             });
 
             // Sort the array by fromYear and fromMonth
-            formattedArr.sort((a: any, b: any) => {
-              const yearComparison = a.fromYear.localeCompare(b.fromYear);
-              if (yearComparison !== 0) {
-                return yearComparison;
-              }
-              return a.fromMonth.localeCompare(b.fromMonth);
-            });
-            formattedArr.reverse();
+            // formattedArr.sort((a: any, b: any) => {
+            //   const yearComparison = a.fromYear.localeCompare(b.fromYear);
+            //   if (yearComparison !== 0) {
+            //     return yearComparison;
+            //   }
+            //   return a.fromMonth.localeCompare(b.fromMonth);
+            // });
+            // formattedArr.reverse();
 
             dispatch(setScrapped({ education: true }));
             dispatch(setStepFour({ list: formattedArr }));
+
+            fetchExperienceDataFromResume();
           }
         }
       });
@@ -332,10 +286,16 @@ const Welcome = () => {
   const fetchExperienceDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.workExperience === false) &&
-      resume.uploadedFileName
+      resume.uploadedFileName &&
+      register.scrapping.workExperience === false &&
+      register.scrappedContent !== ""
     ) {
+      // set scrapping to true so that we don't send multiple requests
+      dispatch(setScrapping({ workExperience: true }));
+
       const formData = {
-        file: resume.uploadedFileName,
+        // file: resume.uploadedFileName,
+        content: register.scrappedContent,
       };
 
       fetch("/api/homepage/fetchExperienceData", {
@@ -345,21 +305,21 @@ const Welcome = () => {
         const res = await resp.json();
 
         if (res.success) {
-          if (res?.data?.text) {
-            const data = JSON.parse(res?.data?.text);
+          if (res?.data) {
+            const data = JSON.parse(res?.data);
             const formattedArr = data?.experiences.map((item: any) => {
               return {
                 id: makeid(),
-                jobTitle: item.fields.jobTitle,
-                company: item.fields.company,
-                country: item.fields.country,
-                cityState: item.fields.cityState,
-                fromMonth: item.fields.fromMonth,
-                fromYear: item.fields.fromYear,
-                isContinue: item.fields.isContinue,
-                toMonth: item.fields.toMonth,
-                toYear: item.fields.toYear,
-                description: item.fields.description,
+                jobTitle: item.jobTitle,
+                company: item.company,
+                country: item.country,
+                cityState: item.cityState,
+                fromMonth: item.fromMonth,
+                fromYear: item.fromYear,
+                isContinue: item.isContinue,
+                toMonth: item.toMonth,
+                toYear: item.toYear,
+                description: item.description,
               };
             });
             // Sort the array by fromYear and fromMonth
@@ -373,7 +333,10 @@ const Welcome = () => {
             formattedArr.reverse();
 
             dispatch(setScrapped({ workExperience: true }));
+            dispatch(setScrapping({ workExperience: false }));
             dispatch(setStepFive({ list: formattedArr }));
+
+            fetchSkillsDataFromResume();
           }
         }
       });
@@ -381,9 +344,16 @@ const Welcome = () => {
   };
 
   const fetchSkillsDataFromResume = () => {
-    if (register.scrapped.skills === false && resume.uploadedFileName) {
+    if (
+      register.scrapped.skills === false &&
+      resume.uploadedFileName &&
+      register.scrapping.skills === false &&
+      register.scrappedContent !== ""
+    ) {
+      dispatch(setScrapping({ skills: true }));
       const formData = {
-        file: resume.uploadedFileName,
+        // file: resume.uploadedFileName,
+        content: register.scrappedContent,
       };
 
       fetch("/api/homepage/fetchSkillsData", {
@@ -393,15 +363,100 @@ const Welcome = () => {
         const res = await resp.json();
 
         if (res.success) {
-          if (res?.data?.text) {
-            const data = JSON.parse(res?.data?.text);
+          if (res?.data) {
+            const data = JSON.parse(res?.data);
             dispatch(setScrapped({ skills: true }));
-            dispatch(setStepSix({ list: data.skills }));
+            dispatch(setScrapping({ skills: false }));
+            dispatch(setStepSix({ list: data }));
           }
         }
       });
     }
   };
+
+  // Fetch Text from CV if not already fetched
+  const scrappResumeIfNotExist = async () => {
+    if (register.scrappedContent === "" && resume.uploadedFileName) {
+      const resp = await fetch("/api/homepage/fetchTextFromCV", {
+        method: "POST",
+        body: JSON.stringify({ file: resume.uploadedFileName }),
+      });
+      // .then(async (resp: any) => {
+
+      // });
+      const res = await resp.json();
+      dispatch(setField({ name: "scrappedContent", value: res.text }));
+      return res;
+    }
+  };
+
+  // shallow routing according to step
+  useEffect(() => {
+    // dispatch(setError(""));
+    // if step exists in url and activeStep from redux is 0 then set activeStep to step
+    if (reduxStep === 0 && urlStep) {
+      router.push(`/welcome?step=${urlStep}`);
+      dispatch(setActiveStep(Number(urlStep)));
+    } else if (reduxStep === 0 && !urlStep) {
+      dispatch(setActiveStep(1));
+      router.push(`/welcome?step=1`);
+    } else if (reduxStep !== 0) {
+      router.push(`/welcome?step=${reduxStep}`);
+    }
+  }, [reduxStep, urlStep]);
+
+  // Form data fetching according to steps
+  useEffect(() => {
+    if (
+      (reduxStep === 1 || reduxStep === 2 || reduxStep === 3) &&
+      resume.uploadedFileName &&
+      resume.uploadedFileName !== ""
+    ) {
+      fetchBasicDataFromResume();
+    }
+
+    if (
+      reduxStep === 4 &&
+      resume.uploadedFileName &&
+      resume.uploadedFileName !== ""
+    ) {
+      fetchEducationDataFromResume();
+    }
+
+    if (
+      reduxStep === 5 &&
+      resume.uploadedFileName &&
+      resume.uploadedFileName !== ""
+    ) {
+      fetchExperienceDataFromResume();
+    }
+
+    if (
+      reduxStep === 6 &&
+      resume.uploadedFileName &&
+      resume.uploadedFileName !== ""
+    ) {
+      fetchSkillsDataFromResume();
+    }
+  }, [reduxStep, register.scrappedContent]);
+
+  // On First load fetch text from CV and prevent user from refreshing or leaving page with alert
+  useEffect(() => {
+    scrappResumeIfNotExist();
+    const confirmExit = (e: any) => {
+      // Display a confirmation message when leaving or refreshing the page
+      e.returnValue =
+        "You are leaving this page, your changes are not saved, you will lose your data.";
+    };
+
+    // Listen for the beforeunload event
+    window.addEventListener("beforeunload", confirmExit);
+
+    return () => {
+      // Remove the event listener when the component unmounts
+      window.removeEventListener("beforeunload", confirmExit);
+    };
+  }, []);
 
   // return (
   //   <main className="flex-grow-1">
@@ -575,8 +630,6 @@ const Welcome = () => {
                   </div>
                 ) : (
                   <>
-                    {/* <h1>Basic Information</h1> */}
-
                     {register.activeStep === 1 && <StepOne />}
                     {register.activeStep === 2 && <StepTwo />}
                     {register.activeStep === 3 && <StepThree />}

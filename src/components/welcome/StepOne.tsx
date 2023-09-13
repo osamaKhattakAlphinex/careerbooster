@@ -44,7 +44,7 @@ const StepOne = () => {
             id="firstName"
             name="firstName"
             className="form-control rounded-2"
-            placeholder="John"
+            placeholder=""
             value={firstName}
             onChange={(e) => {
               dispatch(setStepOne({ firstName: e.target.value }));
@@ -82,7 +82,7 @@ const StepOne = () => {
               dispatch(setStepOne({ lastName: e.target.value }));
             }}
             className="form-control rounded-2"
-            placeholder="Doe"
+            placeholder=""
           />
         </div>
       </div>

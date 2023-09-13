@@ -1,74 +1,52 @@
 import { NextApiHandler } from "next";
-import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { OpenAI } from "langchain/llms/openai";
-import path from "path";
-import { PDFLoader } from "langchain/document_loaders/fs/pdf";
-import { MemoryVectorStore } from "langchain/vectorstores/memory";
-
-import { RetrievalQAChain } from "langchain/chains";
-
-import { z } from "zod";
-import { PromptTemplate } from "langchain/prompts";
-import { StructuredOutputParser } from "langchain/output_parsers";
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const reqBody = JSON.parse(req.body);
-    const file = reqBody.file;
-    if (file) {
+    const content = reqBody.content;
+
+    if (content) {
       // CREATING LLM MODAL
       const model = new OpenAI({
         modelName: "gpt-3.5-turbo",
         temperature: 0.5,
       });
 
-      // load file
-      const dir = path.join(process.cwd() + "/public", "/files", `/temp`);
-      const loader = new PDFLoader(`${dir}/${file}`);
-      const docs = await loader.load();
+      const input = `
+          This is the User Data:
+          ${content}
 
-      // load vector store
-      const vectorStore = await MemoryVectorStore.fromDocuments(
-        docs,
-        new OpenAIEmbeddings()
-      );
+          Now please give me the following information about the user:
+          First Name:
+          Last Name:
+          Email Address:
+          Phone / Mobile Number:
+          Country Name:
+          Street Address:
+          City and State Name:
+          Postal Code from the provided data or get from the name of the City:
 
-      const vectorStoreRetriever = vectorStore.asRetriever();
 
-      const parser = StructuredOutputParser.fromZodSchema(
-        z
-          .object({
-            firstName: z.string().describe("First Name"),
-            lastName: z.string().describe("Last Name"),
-            email: z.string().describe("Email Address"),
-            phone: z.string().describe("Phone / Mobile Number"),
-            country: z.string().describe("Country Name"),
-            street: z.string().describe("Street Address"),
-            cityState: z.string().describe("City and State Name"),
-            postalCode: z
-              .string()
-              .describe(
-                "Postal Code from the provided data or get from the name of the City"
-              ),
-          })
-          .describe("If value of a field not found leave it blank string")
-      );
+          The answer MUST be a valid JSON and formatting should be like this 
+          replace the VALUE_HERE with the actual value
+          {
+            firstName: VALUE_HERE,
+            lastName: VALUE_HERE,
+            email: VALUE_HERE,
+            phone: VALUE_HERE,
+            country: VALUE_HERE,
+            street: VALUE_HERE,
+            cityState: VALUE_HERE,
+            postalCode: VALUE_HERE,
+          }
 
-      const formatInstructions = parser.getFormatInstructions();
-      const prompt = new PromptTemplate({
-        template:
-          "Answer the users question as best as possible from the provided resume data that you already have about the person.\n{format_instructions}\n{additionalInfo}",
-        inputVariables: ["additionalInfo"],
-        partialVariables: { format_instructions: formatInstructions },
-      });
-
-      const input = await prompt.format({
-        additionalInfo: "Answer should be a valid JSON",
-      });
+          If there is no value Leave that field blank
+      `;
 
       try {
-        const chain4 = RetrievalQAChain.fromLLM(model, vectorStoreRetriever);
-        const resp = await chain4.call({ query: input });
+        const resp = await model.call(input);
+        // const resp = await chain4.call({ query: input });
         return res.status(200).json({ success: true, data: resp });
       } catch (error) {
         return res.status(400).json({ success: false, error });
