@@ -188,39 +188,45 @@ const Welcome = () => {
       fetch("/api/homepage/fetchRegistrationData", {
         method: "POST",
         body: JSON.stringify(formData),
-      }).then(async (resp: any) => {
-        const res = await resp.json();
-
-        if (res.success) {
-          if (res?.data) {
-            const data = JSON.parse(res?.data);
+      })
+        .then(async (resp: any) => {
+          if (resp.status === 200) {
+            const res = await resp.json();
+            if (res.success) {
+              if (res?.data) {
+                const data = JSON.parse(res?.data);
+                dispatch(setScrapped({ basic: true }));
+                dispatch(setScrapping({ basic: false }));
+                dispatch(
+                  setStepOne({
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                  })
+                );
+                dispatch(
+                  setStepTwo({
+                    phoneNumber: data.phone,
+                    Email: data.email,
+                  })
+                );
+                dispatch(
+                  setStepThree({
+                    country: data.country,
+                    street: data.street,
+                    cityState: data.cityState,
+                    postalCode: data.postalCode,
+                  })
+                );
+              }
+            }
+          } else {
             dispatch(setScrapped({ basic: true }));
             dispatch(setScrapping({ basic: false }));
-            dispatch(
-              setStepOne({
-                firstName: data.firstName,
-                lastName: data.lastName,
-              })
-            );
-            dispatch(
-              setStepTwo({
-                phoneNumber: data.phone,
-                Email: data.email,
-              })
-            );
-            dispatch(
-              setStepThree({
-                country: data.country,
-                street: data.street,
-                cityState: data.cityState,
-                postalCode: data.postalCode,
-              })
-            );
-
-            fetchEducationDataFromResume();
           }
-        }
-      });
+        })
+        .finally(() => {
+          fetchEducationDataFromResume();
+        });
     }
   };
 
@@ -242,51 +248,58 @@ const Welcome = () => {
       fetch("/api/homepage/fetchEducationData", {
         method: "POST",
         body: JSON.stringify(formData),
-      }).then(async (resp: any) => {
-        const res = await resp.json();
-        if (res.success) {
-          if (res?.data) {
-            const data = JSON.parse(res?.data);
-            console.clear();
-            console.log("Education: ", data);
+      })
+        .then(async (resp: any) => {
+          if (resp.status === 200) {
+            const res = await resp.json();
+            if (res.success) {
+              if (res?.data) {
+                const data = JSON.parse(res?.data);
+                console.clear();
+                console.log("Education: ", data);
 
-            const formattedArr = data?.education.map((item: any) => {
-              return {
-                id: makeid(),
-                educationLevel: item?.educationLevel,
-                fieldOfStudy: item?.fieldOfStudy,
-                schoolName: item?.schoolName,
-                schoolLocation: item?.schoolLocation,
-                fromMonth: item?.fromMonth,
-                fromYear: item?.fromYear,
-                isContinue: item?.isContinue,
-                toMonth: item?.toMonth,
-                toYear: item?.toYear,
-              };
-            });
+                const formattedArr = data?.education.map((item: any) => {
+                  return {
+                    id: makeid(),
+                    educationLevel: item?.educationLevel,
+                    fieldOfStudy: item?.fieldOfStudy,
+                    schoolName: item?.schoolName,
+                    schoolLocation: item?.schoolLocation,
+                    fromMonth: item?.fromMonth,
+                    fromYear: item?.fromYear,
+                    isContinue: item?.isContinue,
+                    toMonth: item?.toMonth,
+                    toYear: item?.toYear,
+                  };
+                });
 
-            try {
-              // Sort the array by fromYear and fromMonth
-              formattedArr.sort((a: any, b: any) => {
-                const yearComparison = a.fromYear.localeCompare(b.fromYear);
-                if (yearComparison !== 0) {
-                  return yearComparison;
+                try {
+                  // Sort the array by fromYear and fromMonth
+                  formattedArr.sort((a: any, b: any) => {
+                    const yearComparison = a.fromYear.localeCompare(b.fromYear);
+                    if (yearComparison !== 0) {
+                      return yearComparison;
+                    }
+                    return a.fromMonth.localeCompare(b.fromMonth);
+                  });
+                  formattedArr.reverse();
+                } catch (error) {
+                  console.log("Error in sorting education array: ", error);
                 }
-                return a.fromMonth.localeCompare(b.fromMonth);
-              });
-              formattedArr.reverse();
-            } catch (error) {
-              console.log("Error in sorting education array: ", error);
-            }
 
+                dispatch(setScrapped({ education: true }));
+                dispatch(setScrapping({ education: false }));
+                dispatch(setStepFour({ list: formattedArr }));
+              }
+            }
+          } else {
             dispatch(setScrapped({ education: true }));
             dispatch(setScrapping({ education: false }));
-            dispatch(setStepFour({ list: formattedArr }));
-
-            fetchExperienceDataFromResume();
           }
-        }
-      });
+        })
+        .finally(() => {
+          fetchExperienceDataFromResume();
+        });
     }
   };
 
@@ -308,49 +321,56 @@ const Welcome = () => {
       fetch("/api/homepage/fetchExperienceData", {
         method: "POST",
         body: JSON.stringify(formData),
-      }).then(async (resp: any) => {
-        const res = await resp.json();
+      })
+        .then(async (resp: any) => {
+          if (resp.status === 200) {
+            const res = await resp.json();
 
-        if (res.success) {
-          if (res?.data) {
-            const data = JSON.parse(res?.data);
-            const formattedArr = data?.experiences.map((item: any) => {
-              return {
-                id: makeid(),
-                jobTitle: item.jobTitle,
-                company: item.company,
-                country: item.country,
-                cityState: item.cityState,
-                fromMonth: item.fromMonth,
-                fromYear: item.fromYear,
-                isContinue: item.isContinue,
-                toMonth: item.toMonth,
-                toYear: item.toYear,
-                description: item.description,
-              };
-            });
-            // Sort the array by fromYear and fromMonth
-            try {
-              formattedArr.sort((a: any, b: any) => {
-                const yearComparison = a.fromYear.localeCompare(b.fromYear);
-                if (yearComparison !== 0) {
-                  return yearComparison;
+            if (res.success) {
+              if (res?.data) {
+                const data = JSON.parse(res?.data);
+                const formattedArr = data?.experiences.map((item: any) => {
+                  return {
+                    id: makeid(),
+                    jobTitle: item.jobTitle,
+                    company: item.company,
+                    country: item.country,
+                    cityState: item.cityState,
+                    fromMonth: item.fromMonth,
+                    fromYear: item.fromYear,
+                    isContinue: item.isContinue,
+                    toMonth: item.toMonth,
+                    toYear: item.toYear,
+                    description: item.description,
+                  };
+                });
+                // Sort the array by fromYear and fromMonth
+                try {
+                  formattedArr.sort((a: any, b: any) => {
+                    const yearComparison = a.fromYear.localeCompare(b.fromYear);
+                    if (yearComparison !== 0) {
+                      return yearComparison;
+                    }
+                    return a.fromMonth.localeCompare(b.fromMonth);
+                  });
+                  formattedArr.reverse();
+                } catch (error) {
+                  // console.log("Error in sorting experience array: ", error);
                 }
-                return a.fromMonth.localeCompare(b.fromMonth);
-              });
-              formattedArr.reverse();
-            } catch (error) {
-              console.log("Error in sorting experience array: ", error);
-            }
 
+                dispatch(setScrapped({ workExperience: true }));
+                dispatch(setScrapping({ workExperience: false }));
+                dispatch(setStepFive({ list: formattedArr }));
+              }
+            }
+          } else {
             dispatch(setScrapped({ workExperience: true }));
             dispatch(setScrapping({ workExperience: false }));
-            dispatch(setStepFive({ list: formattedArr }));
-
-            fetchSkillsDataFromResume();
           }
-        }
-      });
+        })
+        .finally(() => {
+          fetchSkillsDataFromResume();
+        });
     }
   };
 
