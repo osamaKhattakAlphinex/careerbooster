@@ -51,19 +51,13 @@ const UploadPDFResume = () => {
     }
   };
 
-  const test = () => {
-    console.clear();
-    console.log("File Content");
-  };
-
   // check file is correct
   useEffect(() => {
     if (file && file.type === "application/pdf") {
       //  file exists and is PDF
       setFileError("");
       // upload it to server
-      test();
-      // uploadFileToServer();
+      uploadFileToServer();
     } else if (file) {
       // if file exists but not PDf
       setFileError("only PDF file is allowed");
