@@ -1,15 +1,5 @@
 import { NextApiHandler } from "next";
-import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { OpenAI } from "langchain/llms/openai";
-import path from "path";
-import { PDFLoader } from "langchain/document_loaders/fs/pdf";
-import { MemoryVectorStore } from "langchain/vectorstores/memory";
-
-import { RetrievalQAChain } from "langchain/chains";
-
-import { z } from "zod";
-import { PromptTemplate } from "langchain/prompts";
-import { StructuredOutputParser } from "langchain/output_parsers";
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {

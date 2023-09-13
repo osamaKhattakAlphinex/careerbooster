@@ -247,6 +247,8 @@ const Welcome = () => {
         if (res.success) {
           if (res?.data) {
             const data = JSON.parse(res?.data);
+            console.clear();
+            console.log("Education: ", data);
 
             const formattedArr = data?.education.map((item: any) => {
               return {
@@ -263,17 +265,22 @@ const Welcome = () => {
               };
             });
 
-            // Sort the array by fromYear and fromMonth
-            // formattedArr.sort((a: any, b: any) => {
-            //   const yearComparison = a.fromYear.localeCompare(b.fromYear);
-            //   if (yearComparison !== 0) {
-            //     return yearComparison;
-            //   }
-            //   return a.fromMonth.localeCompare(b.fromMonth);
-            // });
-            // formattedArr.reverse();
+            try {
+              // Sort the array by fromYear and fromMonth
+              formattedArr.sort((a: any, b: any) => {
+                const yearComparison = a.fromYear.localeCompare(b.fromYear);
+                if (yearComparison !== 0) {
+                  return yearComparison;
+                }
+                return a.fromMonth.localeCompare(b.fromMonth);
+              });
+              formattedArr.reverse();
+            } catch (error) {
+              console.log("Error in sorting education array: ", error);
+            }
 
             dispatch(setScrapped({ education: true }));
+            dispatch(setScrapping({ education: false }));
             dispatch(setStepFour({ list: formattedArr }));
 
             fetchExperienceDataFromResume();
@@ -323,14 +330,18 @@ const Welcome = () => {
               };
             });
             // Sort the array by fromYear and fromMonth
-            formattedArr.sort((a: any, b: any) => {
-              const yearComparison = a.fromYear.localeCompare(b.fromYear);
-              if (yearComparison !== 0) {
-                return yearComparison;
-              }
-              return a.fromMonth.localeCompare(b.fromMonth);
-            });
-            formattedArr.reverse();
+            try {
+              formattedArr.sort((a: any, b: any) => {
+                const yearComparison = a.fromYear.localeCompare(b.fromYear);
+                if (yearComparison !== 0) {
+                  return yearComparison;
+                }
+                return a.fromMonth.localeCompare(b.fromMonth);
+              });
+              formattedArr.reverse();
+            } catch (error) {
+              console.log("Error in sorting experience array: ", error);
+            }
 
             dispatch(setScrapped({ workExperience: true }));
             dispatch(setScrapping({ workExperience: false }));

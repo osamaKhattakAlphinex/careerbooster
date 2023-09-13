@@ -71,12 +71,12 @@ const handler: NextApiHandler = async (req, res) => {
                 company: VALUE_HERE (Company Name),
                 country: VALUE_HERE,
                 cityState: VALUE_HERE,
-                fromMonth: VALUE_HERE,
-                fromYear: VALUE_HERE,
-                isContinue: VALUE_HERE (Is Experience continued? e.g true, false),
-                toMonth: VALUE_HERE,
-                toYear: VALUE_HERE,
+                fromMonth: VALUE_HERE (in full e.g. January, May),
+                fromYear: VALUE_HERE (in full e.g 2023, 1997),
+                toMonth: VALUE_HERE (in full e.g. January, May)
+                toYear: VALUE_HERE (in full e.g 2023, 1997),
                 description: VALUE_HERE,
+                isContinue: VALUE_HERE (Is Experience continued? e.g true, false),
               },
               .
               .
@@ -84,7 +84,10 @@ const handler: NextApiHandler = async (req, res) => {
             ]
           }
 
+          If there is only one year or date fill it in the toYear and toMonth field
+          If there is only Year and no month for an experience record put the year in the toYear field and leave the toMonth field blank
           If there is no value Leave that field blank
+          Months should be in full e.g. January, February, March, April, May, June, July, August, September, October, November, and December
       `;
 
       try {

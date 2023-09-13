@@ -72,12 +72,12 @@ const handler: NextApiHandler = async (req, res) => {
                 educationLevel: VALUE_HERE,
                 fieldOfStudy: VALUE_HERE,
                 schoolName: VALUE_HERE,
-                schoolLocation: VALUE_HERE,
-                fromMonth: VALUE_HERE,
-                fromYear: VALUE_HERE,
+                schoolLocation: VALUE_HERE (Address of School),
+                fromMonth: VALUE_HERE (in full e.g. January, May),
+                fromYear: VALUE_HERE (in full e.g 2023, 1997),
+                toMonth: VALUE_HERE (in full e.g. January, May)
+                toYear: VALUE_HERE (in full e.g 2023, 1997),
                 isContinue: VALUE_HERE (Is Education continued? e.g true, false),
-                toMonth: VALUE_HERE,
-                toYear: VALUE_HERE,
               },
               .
               .
@@ -85,7 +85,10 @@ const handler: NextApiHandler = async (req, res) => {
             ]
           }
 
+          if there is only one year or date fill it in the toYear and toMonth field
+          If there is only Year and no month for an education record put the year in the toYear field and leave the toMonth field blank
           If there is no value Leave that field blank
+          Months should be in full e.g. January, February, March, April, May, June, July, August, September, October, November, and December
       `;
 
       try {
