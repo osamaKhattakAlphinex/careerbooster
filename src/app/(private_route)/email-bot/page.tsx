@@ -62,7 +62,7 @@ const PersonalizedEmailBot = () => {
         obj.userData = aiInputUserData;
       }
       // Fetch keywords
-      fetch("/api/coverLetterBot/coverLetterGenerator", {
+      fetch("/api/emailBot/emailGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
       })
