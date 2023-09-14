@@ -141,6 +141,29 @@ const ToolsCard = () => {
           </div>
         </li>
       </ul>
+      <ul className="flex flex-row gap-4 mr-10 mt-8 pl-0">
+        <li className="w-1/3 ">
+          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
+            {pencilIcon}
+            <Link href="/email-bot" className="no-underline">
+              <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
+                Personalized Email Generator
+              </h5>
+            </Link>
+            <p className="mb-4 text-xs  ">
+              Craft personalized emails to recruiters quickly and easily. Our
+              AI-generated emails help you make a memorable first impression and
+              increase your chances of getting noticed.
+            </p>
+            <Link
+              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              href="/email-bot"
+            >
+              Launch
+            </Link>
+          </div>
+        </li>
+      </ul>
     </>
   );
 };
