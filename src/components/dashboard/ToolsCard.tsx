@@ -119,7 +119,27 @@ const ToolsCard = () => {
             </Link>
           </div>
         </li>
-        <li className="w-1/3 "></li>
+        <li className="w-1/3 ">
+          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
+            {pencilIcon}
+            <Link href="/cover-letter-bot" className="no-underline">
+              <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
+                Cover Letter Generator
+              </h5>
+            </Link>
+            <p className="mb-4 text-xs  ">
+              Create customized cover letters for every job application in just
+              a few minutes. Tailoring your cover letter to each specific
+              position greatly increases your chances of landing interviews.
+            </p>
+            <Link
+              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              href="/cover-letter-bot"
+            >
+              Launch
+            </Link>
+          </div>
+        </li>
       </ul>
     </>
   );

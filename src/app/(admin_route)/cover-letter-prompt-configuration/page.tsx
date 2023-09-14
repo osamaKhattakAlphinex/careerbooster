@@ -4,7 +4,7 @@ import axios from "axios";
 import PromptEditor from "@/components/admin/linkedin-prompts/PromptEditor";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
-const LinkedInPromptsConfiguration = () => {
+const CoverLetterPromptsConfiguration = () => {
   const [promptsLoading, setPromptsLoading] = useState<boolean>(true);
   const [prompts, setPrompts] = useState<any[]>([]);
   const [updating, setUpdating] = useState<string>("");
@@ -12,7 +12,7 @@ const LinkedInPromptsConfiguration = () => {
   useEffect(() => {
     setPromptsLoading(true);
     // get all prompts
-    axios.get("/api/admin/prompts?type=biography").then((res) => {
+    axios.get("/api/admin/prompts?type=coverLetter").then((res) => {
       setPromptsLoading(false);
       setPrompts(res.data.prompts);
     });
@@ -22,7 +22,7 @@ const LinkedInPromptsConfiguration = () => {
       setUpdating(name);
       axios
         .post("/api/admin/prompts", {
-          type: "biography",
+          type: "coverLetter",
           name: name,
           value: val,
           active: true,
@@ -63,7 +63,7 @@ const LinkedInPromptsConfiguration = () => {
               </svg>
 
               <span className="text-semibold">
-                Biography Prompts Configuration
+                Cover Letter Prompts Configuration
               </span>
             </div>
           </h2>
@@ -75,9 +75,9 @@ const LinkedInPromptsConfiguration = () => {
         <>
           <div className="flex m-10 gap-4">
             <PromptEditor
-              name="biographyWriter"
-              title="Biography Prompt"
-              type="biography"
+              name="coverLetterWriter"
+              title="Cover Letter Prompt"
+              type="coverLetter"
               prompts={prompts}
               promptsLoading={promptsLoading}
               handleSave={handleSave}
@@ -90,4 +90,4 @@ const LinkedInPromptsConfiguration = () => {
   );
 };
 
-export default LinkedInPromptsConfiguration;
+export default CoverLetterPromptsConfiguration;

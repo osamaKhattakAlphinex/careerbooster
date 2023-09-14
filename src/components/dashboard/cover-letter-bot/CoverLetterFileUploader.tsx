@@ -1,23 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setUploadedFileName } from "@/store/resumeSlice";
 import { useSession } from "next-auth/react";
-// import { slugify } from "@/helpers/slugify";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { deleteIcon } from "@/helpers/iconsProvider";
 
 interface Props {
   selectedFile: string;
   setSelectedFile: React.Dispatch<React.SetStateAction<string>>;
 }
-const BiograpyFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
+const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   //   const router = useRouter();
   // local states
   const [fileUploading, setFileUploading] = useState<boolean>(false);
-  const [file, setFile] = useState<any>(null);
+  const [file, setFile] = useState<any>(null); // file to upload
   const [fileError, setFileError] = useState<string>("");
   const [successMsg, setSuccessMsg] = useState<string>("");
   const [loadingFiles, setLoadingFiles] = useState<boolean>(false);
@@ -25,18 +20,15 @@ const BiograpyFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   const [fileList, setFileList] = useState([]);
 
   // session
-  const { data, status }: { data: any; status: any } = useSession();
-
-  // Redux
-  const dispatch = useDispatch();
+  const { data }: { data: any } = useSession();
 
   const uploadFileToServer = async () => {
     setFileError("");
     setFileUploading(true);
-    if (file) {
+    if (file && data?.user?.email) {
       const body = new FormData();
       body.append("file", file);
-      fetch("/api/fileUpload?type=biography", {
+      fetch(`/api/fileUpload?type=coverLetter&email=${data.user.email}`, {
         method: "POST",
         body,
       })
@@ -58,30 +50,40 @@ const BiograpyFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   };
 
   const fetchFiles = async () => {
-    setLoadingFiles(true);
-    // Fetch the list of files from the API route
-    fetch("/api/biographyBot/listFiles")
-      .then((response) => response.json())
-      .then((data) => {
-        setLoadingFiles(false);
-        setFileList(data.files);
-      })
-      .catch((error) => {
-        console.error("Error fetching file list:", error);
-      });
+    if (data?.user?.email && !loadingFiles) {
+      setLoadingFiles(true);
+
+      // Fetch the list of files from the API route
+      fetch(`/api/coverLetterBot/listFiles?email=${data.user.email}`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.files) {
+            setFileList(data.files);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching file list:", error);
+        })
+        .finally(() => {
+          setLoadingFiles(false);
+        });
+    }
   };
 
   const handleDelete = async (file: string) => {
     const c = confirm("Are you sure you want to delete this File?");
     if (c) {
       try {
-        const response = await fetch("/api/biographyBot/deleteFile", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ fileName: file }),
-        });
+        const response = await fetch(
+          `/api/coverLetterBot/deleteFile?email=${data.user.email}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ fileName: file }),
+          }
+        );
 
         if (response.ok) {
           alert("File has bee deleted");
@@ -107,11 +109,11 @@ const BiograpyFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
       // if file exists but not PDf
       setFileError("only PDF file is allowed");
     }
-  }, [file]);
+  }, [file, data]);
 
   useEffect(() => {
     fetchFiles();
-  }, []);
+  }, [data]);
 
   return (
     <>
@@ -180,6 +182,7 @@ const BiograpyFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                     </button>
                   </li>
                 ))}
+              {fileList.length === 0 && <p>No Files found</p>}
             </ul>
           </>
         )}
@@ -211,4 +214,4 @@ const BiograpyFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   );
 };
 
-export default BiograpyFileUploader;
+export default CoverLetterFileUploader;

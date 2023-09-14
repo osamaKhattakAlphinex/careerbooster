@@ -6,22 +6,27 @@ import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import ReactToPrint from "react-to-print";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
-import BiograpyFileUploader from "@/components/dashboard/biography-writer/BiograpyFileUploader";
 
-const BiographyWriter = () => {
+import CoverLetterFileUploader from "@/components/dashboard/cover-letter-bot/CoverLetterFileUploader";
+import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
+
+const CoverLetterWriter = () => {
   const componentRef = useRef<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
   const [show, setShow] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<string>("");
+  const [selectedOption, setSelectedOption] = useState<string>(""); // type
   const [streamedData, setStreamedData] = useState<string>("");
 
   const [selectedFile, setSelectedFile] = useState<string>("");
+  const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
+  const [jobDescription, setJobDescription] = useState<string>("");
 
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
+  const { resumes } = userData;
 
   const handleGenerate = async () => {
     await getUserDataIfNotExists();
@@ -32,32 +37,53 @@ const BiographyWriter = () => {
 
       const obj: any = {
         type: selectedOption,
+        email: session?.user?.email,
+        jobDescription,
       };
       if (selectedOption === "file") {
         obj.file = selectedFile;
+      } else if (selectedOption === "aiResume") {
+        const foundResume = resumes.find(
+          (resume: any) => resume.id === setSelectedResumeId
+        );
+        console.clear();
+        console.log(foundResume);
+
+        obj.userData = {
+          jobTitle: foundResume.jobTitle,
+          name: foundResume.name,
+          primarySkills: foundResume.primarySkills,
+          professionalSkills: foundResume.professionalSkills,
+          secondarySkills: foundResume.secondarySkills,
+          education: foundResume.secondarySkills,
+          workExperienceArray: foundResume.workExperienceArray,
+        };
       } else {
         obj.userData = aiInputUserData;
       }
       // Fetch keywords
-      fetch("/api/biographyBot/bioGenerator", {
+      fetch("/api/coverLetterBot/coverLetterGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
-      }).then(async (resp: any) => {
-        if (resp.ok) {
-          const reader = resp.body.getReader();
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) {
-              break;
+      })
+        .then(async (resp: any) => {
+          if (resp.ok) {
+            const reader = resp.body.getReader();
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) {
+                break;
+              }
+              const text = new TextDecoder().decode(value);
+              setStreamedData((prev) => prev + text);
             }
-            const text = new TextDecoder().decode(value);
-            setStreamedData((prev) => prev + text);
+          } else {
+            setStreamedData("Error! Something went wrong");
           }
-        } else {
-          setStreamedData("Error! Something went wrong");
-        }
-        setMsgLoading(false);
-      });
+        })
+        .finally(() => {
+          setMsgLoading(false);
+        });
     }
   };
 
@@ -113,7 +139,7 @@ const BiographyWriter = () => {
       </div>
       <div className="flex m-10 mt-2 gap-4">
         <div className="w-full flex flex-col p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
-          <h2 className="text-2xl mr-10 mb-6">Biography Generator</h2>
+          <h2 className="text-2xl mr-10 mb-6">Cover Letter Generator</h2>
           <div className="mb-6">
             <div className="flex items-center mb-4">
               <input
@@ -128,10 +154,10 @@ const BiographyWriter = () => {
                 htmlFor="default-radio-1"
                 className="ml-2 text-sm font-medium  dark:text-gray-300 cursor-pointer"
               >
-                use my profile date to write biography
+                use my profile date to write Cover Letter
               </label>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center mb-4">
               <input
                 id="default-radio-2"
                 type="radio"
@@ -147,16 +173,56 @@ const BiographyWriter = () => {
                 htmlFor="default-radio-2"
                 className="ml-2 text-sm font-medium  dark:text-gray-300 cursor-pointer"
               >
-                Upload File and use that to write biography
+                Upload File and use that to write Cover Letter
+              </label>
+            </div>
+            <div className="flex items-center mb-4">
+              <input
+                id="default-radio-3"
+                type="radio"
+                value="aiResume"
+                name="default-radio"
+                onChange={(e) => {
+                  setSelectedFile("");
+                  setSelectedOption(e.target.value);
+                }}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  "
+              />
+              <label
+                htmlFor="default-radio-3"
+                className="ml-2 text-sm font-medium  dark:text-gray-300 cursor-pointer"
+              >
+                Choose one of existing Resume (Generated by AI)
               </label>
             </div>
           </div>
           {selectedOption === "file" && (
-            <BiograpyFileUploader
+            <CoverLetterFileUploader
               selectedFile={selectedFile}
               setSelectedFile={setSelectedFile}
             />
           )}
+
+          {selectedOption === "aiResume" && (
+            <CoverLetterResumeSelector
+              setSelectedResumeId={setSelectedResumeId}
+              setSetSelectedResumeId={setSetSelectedResumeId}
+            />
+          )}
+
+          <div className="">
+            <h2 className="text-2xl mr-10 mb-4 mt-6">
+              Paste Job Description *
+            </h2>
+            <textarea
+              name="jobDescription"
+              id="jD"
+              rows={8}
+              value={jobDescription}
+              onChange={(e) => setJobDescription(e.target.value)}
+              className="w-full mb-4 bg-transparent text-white p-4 border rounded-lg"
+            ></textarea>
+          </div>
 
           <div className="flex flex-row gap-4">
             <div>
@@ -166,7 +232,10 @@ const BiographyWriter = () => {
                   !session?.user?.email ||
                   !aiInputUserData ||
                   selectedOption === "" ||
-                  (selectedOption === "file" && selectedFile === "")
+                  (selectedOption === "file" && selectedFile === "") ||
+                  (selectedOption === "aiResume" &&
+                    setSelectedResumeId === "") ||
+                  jobDescription === ""
                 }
                 onClick={() => handleGenerate()}
                 className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300"
@@ -227,7 +296,7 @@ const BiographyWriter = () => {
 
       {show && (
         <div
-          className={`w-[95%]  bg-white border border-gray-200 rounded-lg shadow  m-10 ${
+          className={`w-[95%] text-gray-800  bg-white border border-gray-200 rounded-lg shadow  m-10 ${
             msgLoading ? "animate-pulse" : ""
           }`}
         >
@@ -239,4 +308,4 @@ const BiographyWriter = () => {
     </>
   );
 };
-export default BiographyWriter;
+export default CoverLetterWriter;
