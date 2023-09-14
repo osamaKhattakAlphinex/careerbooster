@@ -163,6 +163,27 @@ const ToolsCard = () => {
             </Link>
           </div>
         </li>
+        <li className="w-1/3 ">
+          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
+            {pencilIcon}
+            <Link href="/review-resume-bot" className="no-underline">
+              <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
+                Review Resume (PDF)
+              </h5>
+            </Link>
+            <p className="mb-4 text-xs  ">
+              Receive valuable feedback on your resume to identify areas for
+              improvement. Our AI tool analyzes your document and provides
+              actionable suggestions to enhance its impact.
+            </p>
+            <Link
+              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              href="/review-resume-bot"
+            >
+              Launch
+            </Link>
+          </div>
+        </li>
       </ul>
     </>
   );
