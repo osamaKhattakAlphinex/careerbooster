@@ -5,7 +5,8 @@ export const EditIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-4 h-4">
+    className="w-4 h-4"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -13,7 +14,6 @@ export const EditIcon = (
     />
   </svg>
 );
-
 export const plusSimpleIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,8 @@ export const plusSimpleIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-4 h-4 ">
+    className="w-4 h-4 "
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -29,7 +30,6 @@ export const plusSimpleIcon = (
     />
   </svg>
 );
-
 export const addressIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,8 @@ export const addressIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-4 h-4">
+    className="w-4 h-4"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -50,7 +51,6 @@ export const addressIcon = (
     />
   </svg>
 );
-
 export const deleteIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,8 @@ export const deleteIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-4 h-4">
+    className="w-4 h-4"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -66,7 +67,6 @@ export const deleteIcon = (
     />
   </svg>
 );
-
 export const checkIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +74,8 @@ export const checkIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-6 h-6">
+    className="w-6 h-6"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -89,7 +90,8 @@ export const checkIconSmall = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-4 h-4">
+    className="w-4 h-4"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -97,7 +99,6 @@ export const checkIconSmall = (
     />
   </svg>
 );
-
 export const refreshIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +106,8 @@ export const refreshIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-5 h-5">
+    className="w-5 h-5"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -113,7 +115,6 @@ export const refreshIcon = (
     />
   </svg>
 );
-
 export const refreshIconRotating = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +122,8 @@ export const refreshIconRotating = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-5 h-5 animate-spin">
+    className="w-5 h-5 animate-spin"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -129,7 +131,6 @@ export const refreshIconRotating = (
     />
   </svg>
 );
-
 export const refreshBigIconRotating = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +138,8 @@ export const refreshBigIconRotating = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-8 h-8 animate-spin">
+    className="w-8 h-8 animate-spin"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -145,7 +147,6 @@ export const refreshBigIconRotating = (
     />
   </svg>
 );
-
 export const fullScreenIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +154,8 @@ export const fullScreenIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-6 h-6">
+    className="w-6 h-6"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -161,7 +163,6 @@ export const fullScreenIcon = (
     />
   </svg>
 );
-
 export const exitFullScreenIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -169,7 +170,8 @@ export const exitFullScreenIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-6 h-6">
+    className="w-6 h-6"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -177,7 +179,6 @@ export const exitFullScreenIcon = (
     />
   </svg>
 );
-
 export const phoneIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -185,7 +186,8 @@ export const phoneIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-4 h-4 ">
+    className="w-4 h-4 "
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -193,7 +195,6 @@ export const phoneIcon = (
     />
   </svg>
 );
-
 export const emailIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -201,7 +202,8 @@ export const emailIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-4 h-4">
+    className="w-4 h-4"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -209,18 +211,33 @@ export const emailIcon = (
     />
   </svg>
 );
-
+export const emailIconBig = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="currentColor"
+    className="w-12 h-12"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+    />
+  </svg>
+);
 export const linkedInIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 50 50"
     width="50px"
     height="50px"
-    className="w-5 h-5">
+    className="w-5 h-5"
+  >
     <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
   </svg>
 );
-
 export const educationIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -228,7 +245,8 @@ export const educationIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-5 h-5">
+    className="w-5 h-5"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -236,7 +254,6 @@ export const educationIcon = (
     />
   </svg>
 );
-
 export const sparkleIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -244,7 +261,8 @@ export const sparkleIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-5 h-5">
+    className="w-5 h-5"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -252,7 +270,6 @@ export const sparkleIcon = (
     />
   </svg>
 );
-
 export const contactIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -260,7 +277,8 @@ export const contactIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-5 h-5">
+    className="w-5 h-5"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -268,7 +286,6 @@ export const contactIcon = (
     />
   </svg>
 );
-
 export const briefCaseIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -276,7 +293,8 @@ export const briefCaseIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-12 h-12">
+    className="w-12 h-12"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -284,14 +302,14 @@ export const briefCaseIcon = (
     />
   </svg>
 );
-
 export const infoSmallIcon = (
   <svg
     className="w-3 h-3 mr-2"
     aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
-    viewBox="0 0 20 20">
+    viewBox="0 0 20 20"
+  >
     <path
       stroke="currentColor"
       strokeLinecap="round"
@@ -301,7 +319,6 @@ export const infoSmallIcon = (
     />
   </svg>
 );
-
 export const brushIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -309,7 +326,8 @@ export const brushIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-12 h-12">
+    className="w-12 h-12"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -317,7 +335,6 @@ export const brushIcon = (
     />
   </svg>
 );
-
 export const pencilIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -325,7 +342,8 @@ export const pencilIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-12 h-12">
+    className="w-12 h-12"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -333,7 +351,6 @@ export const pencilIcon = (
     />
   </svg>
 );
-
 export const shockIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -341,7 +358,8 @@ export const shockIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-12 h-12">
+    className="w-12 h-12"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -349,7 +367,6 @@ export const shockIcon = (
     />
   </svg>
 );
-
 export const chatIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -357,7 +374,8 @@ export const chatIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-12 h-12">
+    className="w-12 h-12"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -365,7 +383,6 @@ export const chatIcon = (
     />
   </svg>
 );
-
 export const starsIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -373,7 +390,8 @@ export const starsIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-8 h-8 float-left mr-2">
+    className="w-8 h-8 float-left mr-2"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -381,7 +399,6 @@ export const starsIcon = (
     />
   </svg>
 );
-
 export const leftArrowIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -389,11 +406,60 @@ export const leftArrowIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-6 h-6">
+    className="w-6 h-6"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
       d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+    />
+  </svg>
+);
+export const documentIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="currentColor"
+    className="w-12 h-12"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+    />
+  </svg>
+);
+export const documentTextIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="currentColor"
+    className="w-12 h-12"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+    />
+  </svg>
+);
+export const checkBubbleIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="currentColor"
+    className="w-12 h-12"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
     />
   </svg>
 );
