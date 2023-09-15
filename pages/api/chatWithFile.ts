@@ -46,7 +46,12 @@ const handler: NextApiHandler = async (req, res) => {
       temperature: 0.5,
     });
 
-    const dir = path.join(process.cwd() + "/public", "/files", `/${email}`);
+    const dir = path.join(
+      process.cwd() + "/public",
+      "/files",
+      "/userResumes",
+      `/${email}`
+    );
     const loader = new DirectoryLoader(dir, {
       ".pdf": (path) => new PDFLoader(path),
     });

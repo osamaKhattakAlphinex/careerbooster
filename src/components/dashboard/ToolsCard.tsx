@@ -9,6 +9,7 @@ import {
   pencilIcon,
   shockIcon,
   starsIcon,
+  trendingArrowIcon,
 } from "@/helpers/iconsProvider";
 import Link from "next/link";
 
@@ -182,6 +183,23 @@ const ToolsCard = () => {
             <Link
               className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href="/review-resume-bot"
+            >
+              Launch
+            </Link>
+          </div>
+        </li>
+        <li className="w-1/3 ">
+          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
+            {trendingArrowIcon}
+            <Link href="/consulting-bids-bot" className="no-underline">
+              <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
+                Consulting Bids Generator
+              </h5>
+            </Link>
+            <p className="mb-4 text-xs  ">Generate consulting Bids</p>
+            <Link
+              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              href="/consulting-bids-bot"
             >
               Launch
             </Link>

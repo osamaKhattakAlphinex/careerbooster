@@ -51,7 +51,7 @@ const initialState: Resume = {
   },
   dateTime: "",
   id: "",
-  uploadedFileName: "1694608934708_Resume-M-Suleman-Ibrahim (1).pdf",
+  uploadedFileName: "",
   // loadingState: "",
   shortName: "",
   name: "",

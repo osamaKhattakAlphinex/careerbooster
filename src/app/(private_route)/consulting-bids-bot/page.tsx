@@ -10,7 +10,7 @@ import { leftArrowIcon } from "@/helpers/iconsProvider";
 import CoverLetterFileUploader from "@/components/dashboard/cover-letter-bot/CoverLetterFileUploader";
 import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
 
-const PersonalizedEmailBot = () => {
+const ConsultingBidsGenerator = () => {
   const componentRef = useRef<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
@@ -46,62 +46,8 @@ const PersonalizedEmailBot = () => {
         const foundResume = resumes.find(
           (resume: any) => resume.id === setSelectedResumeId
         );
-        obj.userData = {
-          jobTitle: foundResume.jobTitle,
-          name: foundResume.name,
-          primarySkills: foundResume.primarySkills,
-          professionalSkills: foundResume.professionalSkills,
-          secondarySkills: foundResume.secondarySkills,
-          education: foundResume.secondarySkills,
-          workExperienceArray: foundResume.workExperienceArray,
-        };
-      } else {
-        obj.userData = aiInputUserData;
-      }
-      // Fetch keywords
-      fetch("/api/emailBot/emailGenerator", {
-        method: "POST",
-        body: JSON.stringify(obj),
-      })
-        .then(async (resp: any) => {
-          if (resp.ok) {
-            const reader = resp.body.getReader();
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) {
-                break;
-              }
-              const text = new TextDecoder().decode(value);
-              setStreamedData((prev) => prev + text);
-            }
-          } else {
-            setStreamedData("Error! Something went wrong");
-          }
-        })
-        .finally(() => {
-          setMsgLoading(false);
-        });
-    }
-  };
-
-  const handleGenerateCoverLetter = async () => {
-    await getUserDataIfNotExists();
-    if (session?.user?.email) {
-      setMsgLoading(true);
-      setShow(true);
-      setStreamedData("");
-
-      const obj: any = {
-        type: selectedOption,
-        email: session?.user?.email,
-        jobDescription,
-      };
-      if (selectedOption === "file") {
-        obj.file = selectedFile;
-      } else if (selectedOption === "aiResume") {
-        const foundResume = resumes.find(
-          (resume: any) => resume.id === setSelectedResumeId
-        );
+        console.clear();
+        console.log(foundResume);
 
         obj.userData = {
           jobTitle: foundResume.jobTitle,
@@ -116,7 +62,7 @@ const PersonalizedEmailBot = () => {
         obj.userData = aiInputUserData;
       }
       // Fetch keywords
-      fetch("/api/coverLetterBot/coverLetterGenerator", {
+      fetch("/api/consultingBidBot/ConsultingBidGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
       })
@@ -193,7 +139,7 @@ const PersonalizedEmailBot = () => {
       </div>
       <div className="flex m-10 mt-2 gap-4">
         <div className="w-full flex flex-col p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
-          <h2 className="text-2xl mr-10 mb-6">Personalized Email Generator</h2>
+          <h2 className="text-2xl mr-10 mb-6">Consulting Bids Generator</h2>
           <div className="mb-6">
             <div className="flex items-center mb-4">
               <input
@@ -208,7 +154,7 @@ const PersonalizedEmailBot = () => {
                 htmlFor="default-radio-1"
                 className="ml-2 text-sm font-medium  dark:text-gray-300 cursor-pointer"
               >
-                use my profile date to write Personalized Email
+                use my profile date to Generate Bid
               </label>
             </div>
             <div className="flex items-center mb-4">
@@ -227,7 +173,7 @@ const PersonalizedEmailBot = () => {
                 htmlFor="default-radio-2"
                 className="ml-2 text-sm font-medium  dark:text-gray-300 cursor-pointer"
               >
-                Upload File and use that to write Personalized Email
+                Upload File and use that to Generate Bid
               </label>
             </div>
             <div className="flex items-center mb-4">
@@ -309,50 +255,10 @@ const PersonalizedEmailBot = () => {
                       d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
                     />
                   </svg>
-                  <span>
-                    {msgLoading ? "Please wait..." : "Generate Email"}
-                  </span>
+                  <span>{msgLoading ? "Please wait..." : "Generate"}</span>
                 </div>
               </button>
             </div>
-
-            <div>
-              <button
-                disabled={
-                  msgLoading ||
-                  !session?.user?.email ||
-                  !aiInputUserData ||
-                  selectedOption === "" ||
-                  (selectedOption === "file" && selectedFile === "") ||
-                  (selectedOption === "aiResume" &&
-                    setSelectedResumeId === "") ||
-                  jobDescription === ""
-                }
-                onClick={() => handleGenerateCoverLetter()}
-                className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300"
-              >
-                <div className="flex flex-row gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className={`w-4 h-4 ${msgLoading ? "animate-spin" : ""}`}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                    />
-                  </svg>
-                  <span>
-                    {msgLoading ? "Please wait..." : "Generate Cover Letter"}
-                  </span>
-                </div>
-              </button>
-            </div>
-
             <ReactToPrint
               trigger={() => (
                 <button
@@ -402,4 +308,4 @@ const PersonalizedEmailBot = () => {
     </>
   );
 };
-export default PersonalizedEmailBot;
+export default ConsultingBidsGenerator;
