@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const CTASection = () => {
   return (
     <section
@@ -35,9 +37,9 @@ const CTASection = () => {
                   dream job - embrace the future of job hunting now!
                 </p>
 
-                <a href="login.html" className="btn btn-primary-dark">
+                <Link href="login.html" className="btn btn-primary-dark">
                   Get Started Free
-                </a>
+                </Link>
                 <div className="cta-image-container mt-10">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

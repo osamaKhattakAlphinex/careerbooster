@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const AboutCard = () => {
   return (
     <section className="py-15">
@@ -19,9 +21,9 @@ const AboutCard = () => {
                 enough, we understand the paramount importance of ensuring your
                 resume stands out from the crowd.
               </p>
-              <a href="login.html" className="btn btn-lg btn-gradient-1">
+              <Link href="login.html" className="btn btn-lg btn-gradient-1">
                 Upload Resume - It{"'"}s Free
-              </a>
+              </Link>
             </div>
           </div>
           <div

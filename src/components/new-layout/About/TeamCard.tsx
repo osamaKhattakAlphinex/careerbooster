@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const TeamCard = () => {
   return (
     <section className="py-10 py-lg-15">
@@ -30,7 +32,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">Digital Marketer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -51,10 +53,10 @@ const TeamCard = () => {
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -67,10 +69,10 @@ const TeamCard = () => {
                       <path stroke="none" d="M0 0h24v24H0z" />
                       <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -84,7 +86,7 @@ const TeamCard = () => {
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -100,7 +102,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">Product Designer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -121,10 +123,10 @@ const TeamCard = () => {
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -137,10 +139,10 @@ const TeamCard = () => {
                       <path stroke="none" d="M0 0h24v24H0z" />
                       <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -154,7 +156,7 @@ const TeamCard = () => {
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -170,7 +172,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">Marketing Coordinator</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -191,10 +193,10 @@ const TeamCard = () => {
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -207,10 +209,10 @@ const TeamCard = () => {
                       <path stroke="none" d="M0 0h24v24H0z" />
                       <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -224,7 +226,7 @@ const TeamCard = () => {
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -240,7 +242,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">Digital Creator</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -261,10 +263,10 @@ const TeamCard = () => {
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -277,10 +279,10 @@ const TeamCard = () => {
                       <path stroke="none" d="M0 0h24v24H0z" />
                       <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -294,7 +296,7 @@ const TeamCard = () => {
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -310,7 +312,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">Web Designer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -331,10 +333,10 @@ const TeamCard = () => {
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -347,10 +349,10 @@ const TeamCard = () => {
                       <path stroke="none" d="M0 0h24v24H0z" />
                       <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -364,7 +366,7 @@ const TeamCard = () => {
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -380,7 +382,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">Software Engineer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -401,10 +403,10 @@ const TeamCard = () => {
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -417,10 +419,10 @@ const TeamCard = () => {
                       <path stroke="none" d="M0 0h24v24H0z" />
                       <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -434,7 +436,7 @@ const TeamCard = () => {
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -450,7 +452,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">Lead Developer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -471,10 +473,10 @@ const TeamCard = () => {
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -487,10 +489,10 @@ const TeamCard = () => {
                       <path stroke="none" d="M0 0h24v24H0z" />
                       <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -504,7 +506,7 @@ const TeamCard = () => {
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -520,7 +522,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">President of Sales</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -541,10 +543,10 @@ const TeamCard = () => {
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -557,10 +559,10 @@ const TeamCard = () => {
                       <path stroke="none" d="M0 0h24v24H0z" />
                       <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -574,7 +576,7 @@ const TeamCard = () => {
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
