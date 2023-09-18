@@ -25,7 +25,7 @@ const Header = () => {
           //   width: "450px",
           // }}
         >
-          <img src="/assets/images/logo.png" alt="" />
+          <img src="/assets/images/logo.png" alt="" className="w-70" />
         </Link>
 
         {/* <!-- Navbar toggler button --> */}

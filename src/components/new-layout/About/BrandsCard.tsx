@@ -8,7 +8,7 @@ const BrandsCard = () => {
               <h4 className="mb-10" data-aos="fade-up-sm" data-aos-delay="50">
                 <span className="text-gradient-2">20,000+</span>
                 Professionals & Teams Choose
-                <span className="text-primary-dark">GenAI.</span>
+                <span className="text-primary-dark"> CareerBooster.</span>
               </h4>
 
               <div className="row align-center justify-center row-cols-3 row-cols-md-5 g-6 g-lg-10 g-xl-20">

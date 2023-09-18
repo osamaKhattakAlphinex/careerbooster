@@ -10,10 +10,14 @@ const Reviews = () => {
                 data-aos="fade-up-sm"
                 data-aos-delay="50"
               >
-                <span className="text-primary-dark">Career Booster.</span>
+                <span className="text-primary-dark">CareerBooster.</span>
                 Received
-                <img src="assets/images/icons/star.png" alt="" /> 4.8/5 Stars in
-                Over 1,000+ Reviews.
+                <img
+                  src="assets/images/icons/star.png"
+                  alt=""
+                  className="m-auto"
+                />{" "}
+                4.8/5 Stars in Over 1,000+ Reviews.
               </h1>
             </div>
           </div>
