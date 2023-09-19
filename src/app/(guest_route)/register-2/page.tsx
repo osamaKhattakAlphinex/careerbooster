@@ -112,7 +112,7 @@ const RegisterNew = () => {
   };
 
   return (
-    <div className="wrapper d-flex flex-column justify-between">
+    <div className="wrapper d-flex flex-column justify-between min-h-[1155px]">
       <main className="flex-grow-1">
         <section className="account-section login-page py-6 h-full">
           <div className="container-fluid h-full">
@@ -125,8 +125,10 @@ const RegisterNew = () => {
                 <div className="bg-dark-blue-4 border rounded-4 h-full p-6 p-md-20 text-center d-flex flex-column justify-center">
                   <h2 className="text-white mb-12">
                     Unlock the Power of <br className="d-none d-xl-block" />
-                    <span className="text-primary-dark">GenAI</span> Copywriting
-                    Tool
+                    <span className="text-primary-dark">
+                      Career Booster
+                    </span>{" "}
+                    Copywriting Tool
                   </h2>
                   <img
                     src="assets/images/screens/screen-5.png"
@@ -140,7 +142,7 @@ const RegisterNew = () => {
                 data-aos="fade-up-sm"
                 data-aos-delay="100"
               >
-                <div className="close-btn">
+                {/* <div className="close-btn">
                   <a
                     href="index.html"
                     className="icon bg-gradient-3 text-white w-12 h-12 rounded p-3 border border-white border-opacity-10 d-flex align-center justify-center ms-auto"
@@ -160,8 +162,8 @@ const RegisterNew = () => {
                       </g>
                     </svg>
                   </a>
-                </div>
-                <div className="account-wrapper h-full d-flex flex-column justify-center">
+                </div> */}
+                <div className="account-wrapper d-flex flex-column justify-center">
                   <div className="text-center">
                     <a href="">
                       <img
@@ -171,7 +173,7 @@ const RegisterNew = () => {
                         width="165"
                       />
                     </a>
-                    <div className="vstack gap-4 mt-10">
+                    {/* <div className="vstack gap-4 mt-10">
                       <button type="button" className="btn account-btn py-4">
                         <img
                           src="assets/images/icons/google.svg"
@@ -194,100 +196,275 @@ const RegisterNew = () => {
 
                     <div className="divider-with-text my-10">
                       <span>Or register with email</span>
+                    </div> */}
+                    <h3 className="pb-4">Register Your Account</h3>
+                    <div className="upload-resume-btn mt-5 mb-10">
+                      <label
+                        className="btn btn-lg btn-gradient-1 aos-init aos-animate"
+                        data-aos="fade-up-sm"
+                        data-aos-delay="200"
+                      >
+                        <input className="hidden" type="file" />
+                        Upload Resume
+                      </label>
                     </div>
-
-                    <form action="#" className="vstack gap-4">
-                      <div className="text-start">
+                    <form
+                      className="vstack gap-4"
+                      onSubmit={formik.handleSubmit}
+                    >
+                      <div className="text-start mb-4">
                         <div className="input-group with-icon">
                           <span className="icon">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
-                              viewBox="0 0 18 18"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4"
                             >
-                              <g
-                                stroke="currentColor"
+                              <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                stroke-width="1.2"
-                              >
-                                <path d="M2.25 5.25a1.5 1.5 0 0 1 1.5-1.5h10.5a1.5 1.5 0 0 1 1.5 1.5v7.5a1.5 1.5 0 0 1-1.5 1.5H3.75a1.5 1.5 0 0 1-1.5-1.5v-7.5Z" />
-                                <path d="M2.25 5.25 9 9.75l6.75-4.5" />
-                              </g>
+                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                              />
                             </svg>
                           </span>
+                          {/* <label
+                            htmlFor="firstName"
+                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                          >
+                            First Name
+                          </label> */}
+                          <input
+                            type="text"
+                            name="firstName"
+                            className="form-control rounded-2 py-4"
+                            placeholder="First Name"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.firstName}
+                          />
+                        </div>
+                        {formik.touched.firstName &&
+                          formik.errors.firstName && (
+                            <p className="text-red-600 pt-3">
+                              {formik.touched.firstName &&
+                                formik.errors.firstName}
+                            </p>
+                          )}
+                      </div>
+                      <div className="text-start my-4">
+                        <div className="input-group with-icon ">
+                          <span className="icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                              />
+                            </svg>
+                          </span>
+                          {/* <label
+                            htmlFor="lastName"
+                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                          >
+                            Last Name
+                          </label> */}
+                          <input
+                            type="text"
+                            name="lastName"
+                            className="form-control rounded-2 py-4"
+                            placeholder="Last Name"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.lastName}
+                          />
+                        </div>
+                        {formik.touched.firstName &&
+                          formik.errors.firstName && (
+                            <p className="text-red-600 pt-3">
+                              {formik.touched.lastName &&
+                                formik.errors.lastName}
+                            </p>
+                          )}
+                      </div>
+                      <div className="text-start my-4">
+                        <div className="input-group with-icon">
+                          <span className="icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                              />
+                            </svg>
+                          </span>
+
+                          {/* <label
+                            htmlFor="Emil"
+                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                          >
+                            Enter Your Email
+                          </label> */}
                           <input
                             type="email"
+                            name="email"
                             className="form-control rounded-2 py-4"
                             placeholder="Enter Your Email"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.email}
                           />
                         </div>
+                        {formik.touched.email && formik.errors.email && (
+                          <p className="text-red-600 pt-3">
+                            {formik.touched.email && formik.errors.email}
+                          </p>
+                        )}
                       </div>
-                      <div className="text-start">
+                      <div className="text-start my-4">
                         <div className="input-group with-icon">
                           <span className="icon">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="1.5"
                               viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4"
                             >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <path d="M12 3a12 12 0 0 0 8.5 3A12 12 0 0 1 12 21 12 12 0 0 1 3.5 6 12 12 0 0 0 12 3" />
-                              <circle cx="12" cy="11" r="1" />
-                              <path d="M12 12v2.5" />
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                              />
                             </svg>
                           </span>
+                          {/* <label
+                            htmlFor="Emil"
+                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                          >
+                            Enter Your Email
+                          </label> */}
                           <input
                             type="password"
+                            name="password"
                             className="form-control rounded-2 py-4"
-                            placeholder="Password"
+                            placeholder="Enter Password"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.password}
                           />
                         </div>
+                        {formik.touched.password && formik.errors.password && (
+                          <p className="text-red-600 pt-3">
+                            {formik.touched.password && formik.errors.password}
+                          </p>
+                        )}
                       </div>
-                      <div className="text-start">
+                      <div className="text-start my-4">
                         <div className="input-group with-icon">
                           <span className="icon">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="1.5"
                               viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4"
                             >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <path d="M12 3a12 12 0 0 0 8.5 3A12 12 0 0 1 12 21 12 12 0 0 1 3.5 6 12 12 0 0 0 12 3" />
-                              <circle cx="12" cy="11" r="1" />
-                              <path d="M12 12v2.5" />
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                              />
                             </svg>
                           </span>
+                          {/* <label
+                            htmlFor="Emil"
+                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                          >
+                            Enter Your Email
+                          </label> */}
                           <input
                             type="password"
+                            name="confirmpassword"
                             className="form-control rounded-2 py-4"
                             placeholder="Confirm Password"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.confirmpassword}
                           />
                         </div>
+                        {formik.touched.confirmpassword &&
+                          formik.errors.confirmpassword && (
+                            <p className="text-red-600 pt-3">
+                              {formik.touched.confirmpassword &&
+                                formik.errors.confirmpassword}
+                            </p>
+                          )}
                       </div>
-                      <div className="text-center">
+                      <div className="text-start my-4">
+                        <div className="ml-3 text-sm">
+                          <input
+                            id="terms"
+                            aria-describedby="terms"
+                            type="checkbox"
+                            className="w-4 mr-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                          />
+                          <label
+                            htmlFor="terms"
+                            className="font-light text-gray-500 dark:text-gray-300"
+                          >
+                            I accept the{" "}
+                            <Link
+                              className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                              href="#"
+                            >
+                              Terms and Conditions
+                            </Link>
+                          </label>
+                        </div>
+                      </div>
+                      {submittingError !== "" && (
+                        <div
+                          className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2"
+                          role="alert"
+                        >
+                          <p>{submittingError}</p>
+                        </div>
+                      )}
+                      <div className="text-center mt-4">
                         <button
                           type="submit"
                           className="btn btn-primary-dark w-full py-4"
                         >
-                          Create an account
+                          {submitting ? "Submitting..." : "Create an account"}
                         </button>
                       </div>
+
                       <div className="text-center">
                         <p>
                           Already have an account?
-                          <a href="login.html" className="text-decoration-none">
+                          <Link href="/login" className="text-decoration-none">
                             {" "}
                             Log in{" "}
-                          </a>
+                          </Link>
                         </p>
                       </div>
                     </form>
@@ -301,3 +478,5 @@ const RegisterNew = () => {
     </div>
   );
 };
+
+export default RegisterNew;

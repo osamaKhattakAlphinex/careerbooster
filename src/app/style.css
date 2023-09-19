@@ -4505,7 +4505,7 @@ textarea.form-control-lg {
 .input-group > .form-floating {
   position: relative;
   flex: 1 1 auto;
-  width: 1%;
+  /* width: 1%; */
   min-width: 0;
 }
 .input-group > .form-control:focus,
@@ -36818,5 +36818,5 @@ article img {
 /*# sourceMappingURL=style.css.map */
 
 .border-stylee {
-border-color: gray !important;
+  border-color: gray !important;
 }
