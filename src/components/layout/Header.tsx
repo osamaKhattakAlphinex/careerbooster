@@ -27,8 +27,7 @@ const Header = () => {
           `/api/users/getOneByEmail?email=${session?.user?.email}`
         );
         const { user } = await res.json();
-        console.clear();
-        console.log(user);
+
         dispatch(setUserData(user));
         dispatch(setIsLoading(false));
         dispatch(setField({ name: "isFetched", value: true }));
@@ -38,6 +37,9 @@ const Header = () => {
             setField({ name: "defaultResumeFile", value: user?.files[0] })
           );
         }
+        dispatch(
+          setField({ name: "wizardCompleted", value: user.wizardCompleted })
+        );
       } catch (err) {
         console.log(err);
       }

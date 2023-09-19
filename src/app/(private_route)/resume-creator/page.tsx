@@ -396,13 +396,6 @@ const ResumeCreator = () => {
       });
   };
 
-  // when page (session) loads, fetch user data if not exists
-  useEffect(() => {
-    if (session?.user?.email) {
-      getUserDataIfNotExists();
-    }
-  }, [session?.user?.email]);
-
   useEffect(() => {
     if (!resumeData.state.resumeLoading && resumeData?.name) {
       saveResumeToDB();

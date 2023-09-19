@@ -43,6 +43,10 @@ const UserSchema = new Schema(
     },
     files: [{ type: String }],
     resumes: [],
+    wizardCompleted: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   { timestamps: true }

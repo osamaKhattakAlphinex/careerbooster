@@ -10,15 +10,35 @@ import {
 } from "langchain/prompts";
 import { LLMChain } from "langchain/chains";
 import { ChatOpenAI } from "langchain/chat_models/openai";
+import { PDFLoader } from "langchain/document_loaders/fs/pdf";
+import path from "path";
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const reqBody = JSON.parse(req.body);
     // const email = reqBody.email;
-    const type = reqBody.type;
+    const type = reqBody.type; // request type
+    const inputType = reqBody.inputType; // input type
+    const aiInputFile = reqBody.aiInputFile; // input file
     const jobPosition = reqBody.jobPosition;
     const userData = reqBody.userData;
+    const email = reqBody.email;
 
+    let content: any;
+    if (inputType === "file") {
+      // Read content from the user file
+      // load file
+      const dir = path.join(process.cwd() + "/public", "/files", `/${email}`);
+      const loader = new PDFLoader(`${dir}/${aiInputFile}`);
+      const docs = await loader.load();
+
+      let contentTxt = docs.map((doc: any) => doc.pageContent);
+      const FileTxt = contentTxt.join(" ");
+      content = { userData: FileTxt };
+    } else if (inputType === "userData") {
+      // pass user data as it is
+      content = userData;
+    }
     // CREATING LLM MODAL
     const model = new ChatOpenAI({
       modelName: "gpt-3.5-turbo",
@@ -57,7 +77,7 @@ const handler: NextApiHandler = async (req, res) => {
         const formatInstructions = parser.getFormatInstructions();
 
         const resp = await chainB.call({
-          userData: JSON.stringify(userData),
+          userData: JSON.stringify(content),
           format_instructions: formatInstructions,
           prompt: "Answer should be a valid JSON",
         });
@@ -94,7 +114,7 @@ const handler: NextApiHandler = async (req, res) => {
         const prompt = promptRec.value;
 
         const chatPrompt = ChatPromptTemplate.fromPromptMessages([
-          SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing Keywords for the person LinkedIn Profile.
+          SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing Professional Summary for a user Resume/CV.
             Following are the content of the resume (in JSON format): 
             JSON user/resume data: {userData}
     
@@ -109,7 +129,7 @@ const handler: NextApiHandler = async (req, res) => {
         });
 
         await chainC.call({
-          userData: JSON.stringify(userData),
+          userData: JSON.stringify(content),
           prompt: promptSummary,
         });
 
@@ -162,7 +182,7 @@ const handler: NextApiHandler = async (req, res) => {
 
       try {
         const resp = await chainB.call({
-          userData: JSON.stringify(userData),
+          userData: JSON.stringify(content),
           format_instructions: formatInstructions,
           prompt: "Answer should be a valid JSON",
         });
@@ -196,7 +216,7 @@ const handler: NextApiHandler = async (req, res) => {
 
       try {
         const resp = await chainB.call({
-          userData: JSON.stringify(userData),
+          userData: JSON.stringify(content),
           format_instructions: formatInstructions,
           prompt: "Answer should be a valid JSON",
         });
@@ -228,7 +248,7 @@ const handler: NextApiHandler = async (req, res) => {
       const formatInstructions = parser.getFormatInstructions();
       try {
         const resp = await chainB.call({
-          userData: JSON.stringify(userData),
+          userData: JSON.stringify(content),
           format_instructions: formatInstructions,
           prompt: "Answer should be a valid JSON",
         });
@@ -260,7 +280,7 @@ const handler: NextApiHandler = async (req, res) => {
       const formatInstructions = parser.getFormatInstructions();
       try {
         const resp = await chainB.call({
-          userData: JSON.stringify(userData),
+          userData: JSON.stringify(content),
           format_instructions: formatInstructions,
           prompt: "Answer should be a valid JSON",
         });

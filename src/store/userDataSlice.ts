@@ -47,6 +47,7 @@ interface UserDataSlice {
   files?: string[];
   skills?: string[];
   defaultResumeFile: string;
+  wizardCompleted: boolean;
 }
 
 const initialState: UserDataSlice = {
@@ -70,6 +71,7 @@ const initialState: UserDataSlice = {
   files: [],
   skills: [],
   defaultResumeFile: "",
+  wizardCompleted: false,
 };
 
 const userDataSlice = createSlice({

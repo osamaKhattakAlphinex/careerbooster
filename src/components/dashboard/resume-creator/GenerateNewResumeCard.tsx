@@ -14,8 +14,6 @@ const GenerateNewResumeCard = ({ handleGenerate, componentRef }: Props) => {
   // Redux
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
-  // const userData = useSelector((state: any) => state.userData);
-  // console.clear();
 
   return (
     <div className="ml-10 w-[95%]  p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
