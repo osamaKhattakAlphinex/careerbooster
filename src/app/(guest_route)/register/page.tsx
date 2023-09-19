@@ -5,7 +5,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
-
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "CareerBooster.Ai-Register",
+};
 const Register = () => {
   const router = useRouter();
   const params = useSearchParams();
