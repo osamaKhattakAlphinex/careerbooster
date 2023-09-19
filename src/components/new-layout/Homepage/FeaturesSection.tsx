@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const FeaturesSection = () => {
   return (
     <section className="py-10 py-lg-15">
@@ -233,9 +235,9 @@ const FeaturesSection = () => {
           <h5 className="my-10">
             Ready to craft a resume that impresses both bots and humans?
           </h5>
-          <a href="login.html" className="btn btn-primary-dark">
+          <Link href="login.html" className="btn btn-primary-dark">
             Let{"'"}s get started!
-          </a>
+          </Link>
         </div>
       </div>
     </section>

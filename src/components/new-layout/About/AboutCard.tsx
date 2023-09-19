@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const AboutCard = () => {
   return (
     <section className="py-15">
@@ -9,17 +11,19 @@ const AboutCard = () => {
             data-aos-delay="50"
           >
             <div className="text-center text-lg-start">
-              <p className="text-primary-dark fs-sm">About GenAI.</p>
-              <h2 className="text-white mb-4">
-                10,000+ Writers, Marketers, & Business owners Love GenAI.
-              </h2>
+              <p className="text-primary-dark fs-sm">About CareerBooster</p>
+              <h2 className="text-white mb-4">Welcome to CareerBooster.</h2>
               <p className="mb-8">
-                With a few clicks of a button, you can create a whole outline,
-                opening paragraph, and body for your blog.
+                Your ultimate destination for revolutionizing your career
+                journey with AI-powered tools that supercharge your professional
+                image. In today's fiercely competitive job market, where
+                qualifications and experience are essential but not always
+                enough, we understand the paramount importance of ensuring your
+                resume stands out from the crowd.
               </p>
-              <a href="login.html" className="btn btn-lg btn-gradient-1">
-                Start Writing - It{"'"}s Free
-              </a>
+              <Link href="login.html" className="btn btn-lg btn-gradient-1">
+                Upload Resume - It{"'"}s Free
+              </Link>
             </div>
           </div>
           <div

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const RewardsSection = () => {
   return (
     <section className="reward py-20">
@@ -104,9 +106,9 @@ const RewardsSection = () => {
             </p>
           </div>
           <div className="col-md-12 text-center my-10">
-            <a href="login.html" className="btn btn-outline-primary-dark">
+            <Link href="login.html" className="btn btn-outline-primary-dark">
               Get started
-            </a>
+            </Link>
           </div>
         </div>
       </div>
