@@ -1,44 +1,12 @@
 "use client";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import SingleRecentResumeCard from "./SingleRecentResumeCard";
 import { Resume } from "@/store/resumeSlice";
-import { useSession } from "next-auth/react";
-import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
-import { useEffect } from "react";
 
 const RecentResumeCard = ({ source = "" }: { source?: string }) => {
-  // session
-  const { data: session } = useSession();
-
   // redux
-  const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const { resumes } = userData;
-
-  const getUserDataIfNotExists = async () => {
-    if (!userData.isLoading && !userData.isFetched) {
-      dispatch(setIsLoading(true));
-      try {
-        // Fetch userdata if not exists in Redux
-        const res = await fetch(
-          `/api/users/getOneByEmail?email=${session?.user?.email}`
-        );
-        const { user } = await res.json();
-        dispatch(setUserData(user));
-        dispatch(setIsLoading(false));
-        dispatch(setField({ name: "isFetched", value: true }));
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
-
-  // when page (session) loads, fetch user data if not exists
-  useEffect(() => {
-    if (session?.user?.email) {
-      getUserDataIfNotExists();
-    }
-  }, [session?.user?.email]);
 
   return (
     <div className="w-full ">

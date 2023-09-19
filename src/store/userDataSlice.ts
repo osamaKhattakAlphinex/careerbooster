@@ -46,6 +46,7 @@ interface UserDataSlice {
   experience?: WorkExperience[];
   files?: string[];
   skills?: string[];
+  defaultResumeFile: string;
 }
 
 const initialState: UserDataSlice = {
@@ -68,6 +69,7 @@ const initialState: UserDataSlice = {
   experience: [],
   files: [],
   skills: [],
+  defaultResumeFile: "",
 };
 
 const userDataSlice = createSlice({

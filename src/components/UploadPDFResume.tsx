@@ -38,9 +38,39 @@ const UploadPDFResume = () => {
           if (res.success) {
             const uploadedFileName = res.fileName + "_" + file.name;
             dispatch(setUploadedFileName(uploadedFileName));
-            // fetchRegistrationDataFromResume(uploadedFileName);
-            router.replace("/welcome?step=1");
+            fetchRegistrationDataFromResume(uploadedFileName);
+            // router.replace("/welcome?step=1");
+            // router.replace("/register");
             // setSuccessMsg("File has been uploaded!");
+          } else {
+            setFileError("Something went wrong");
+          }
+        })
+        .catch((error) => {
+          setFileError("Something went wrong");
+        });
+    }
+  };
+
+  const fetchRegistrationDataFromResume = async (fileName: string) => {
+    setFileError("");
+    setFileUploading(true);
+    if (fileName) {
+      fetch("/api/homepage/fetchRegistrationDataForHomepage", {
+        method: "POST",
+        body: JSON.stringify({ fileName }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
+            const userData = JSON.parse(res.data);
+
+            router.replace(
+              `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&file=${fileName}`
+            );
           } else {
             setFileError("Something went wrong");
           }

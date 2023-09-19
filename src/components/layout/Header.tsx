@@ -1,13 +1,55 @@
 "use client";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
+import { useEffect } from "react";
 
 const Header = () => {
-  const pathname = usePathname();
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
   const role = data?.user?.role;
+
+  // Session
+  const { data: session } = useSession();
+
+  // Redux
+  const dispatch = useDispatch();
+  const userData = useSelector((state: any) => state.userData);
+
+  // when user is authenticated get userdata if not exists
+  const getUserDataIfNotExists = async () => {
+    if (!userData.isLoading && !userData.isFetched) {
+      dispatch(setIsLoading(true));
+      try {
+        // Fetch userdata if not exists in Redux
+        const res = await fetch(
+          `/api/users/getOneByEmail?email=${session?.user?.email}`
+        );
+        const { user } = await res.json();
+        console.clear();
+        console.log(user);
+        dispatch(setUserData(user));
+        dispatch(setIsLoading(false));
+        dispatch(setField({ name: "isFetched", value: true }));
+        // if there is a file in files array of a user then set it as defaultResumeFile
+        if (user?.files && user?.files?.length > 0) {
+          dispatch(
+            setField({ name: "defaultResumeFile", value: user?.files[0] })
+          );
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  // when page (session) loads, fetch user data if not exists
+  useEffect(() => {
+    if (session?.user?.email) {
+      getUserDataIfNotExists();
+    }
+  }, [session?.user?.email]);
 
   // if (pathname === "/login" || pathname === "/register") return null;
 
