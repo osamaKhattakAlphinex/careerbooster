@@ -88,17 +88,13 @@ const Header = () => {
                 </Link>
               </li>
               {isAuth ? (
-                <li className="nav-item">
-                  <button className="nav-link" onClick={() => signOut()}>
-                    Logout
-                  </button>
-                </li>
+                <button className="nav-link" onClick={() => signOut()}>
+                  Logout
+                </button>
               ) : (
-                <li className="nav-item">
-                  <Link className="nav-link" href="/login">
-                    Login
-                  </Link>
-                </li>
+                <Link className="nav-link" href="/login">
+                  Login
+                </Link>
               )}
             </ul>
             <div className="visible">
