@@ -4,13 +4,14 @@ import User from "@/db/schemas/User";
 
 // UPDATES USER AND SET THE FILE
 const handler: NextApiHandler = async (req, res) => {
-  const newFile = req?.body?.newFile;
-  const email = req?.body?.email;
-  if (newFile && email) {
+  const data = req?.body?.data;
+
+  if (data) {
+    // update user
     await startDB();
     User.findOneAndUpdate(
-      { email: email },
-      { $push: { files: newFile } },
+      { email: data.email },
+      { $set: { ...data } },
       { new: true, upsert: true, setDefaultsOnInsert: true }
     )
       .then((updatedUser) => {

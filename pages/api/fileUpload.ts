@@ -25,14 +25,14 @@ const readFile = (
 const handler: NextApiHandler = async (req, res) => {
   let directory = "";
   if (req?.query?.type === "coverLetter" && req?.query?.email) {
-    // for CoverLetter page
+    // for CoverLetter and other tools file upload
     directory = `/public/files/userResumes/${req?.query?.email}`;
   } else if (req?.query?.type === "biography") {
     // for Biography page
     directory = "/public/files/bio";
   } else if (req?.query?.email) {
     // for logged in users
-    directory = `/public/files/${req?.query?.email}`;
+    directory = `/public/files/userResumes/${req?.query?.email}`;
   } else {
     // for homepage
     directory = "/public/files/temp";

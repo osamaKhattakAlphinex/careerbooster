@@ -47,6 +47,10 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    wizardReviewed: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   { timestamps: true }

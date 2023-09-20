@@ -9,7 +9,6 @@ import Footer from "@/components/layout/Footer";
 import Script from "next/script";
 import "./plugins.css";
 import "./style.css";
-import ProfileCreationLayer from "@/components/dashboard/ProfileCreationLayer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +29,7 @@ export default function RootLayout({
           <AuthProvider>
             <ReduxProvider>
               <Header />
-              <ProfileCreationLayer>{children}</ProfileCreationLayer>
+              {children}
               <Footer />
             </ReduxProvider>
           </AuthProvider>

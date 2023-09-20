@@ -77,7 +77,7 @@ const Register = () => {
             }
           })
           .finally(() => {
-            setSubmitting(false);
+            // setSubmitting(false);
           });
       }
     },

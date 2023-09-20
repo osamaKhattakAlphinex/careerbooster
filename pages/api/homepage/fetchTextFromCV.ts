@@ -6,9 +6,23 @@ const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const reqBody = JSON.parse(req.body);
     const file = reqBody.file;
+    const email = reqBody.email;
+
     if (file) {
       // load file
-      const dir = path.join(process.cwd() + "/public", "/files", `/temp`);
+      let dir;
+      if (email) {
+        dir = path.join(
+          process.cwd() + "/public",
+          "/files",
+          `/userResumes`,
+          `/${email}`
+        );
+      } else {
+        // DEPRECATED for old register wizard
+        dir = path.join(process.cwd() + "/public", "/files", `/temp`);
+      }
+
       const loader = new PDFLoader(`${dir}/${file}`);
       const docs = await loader.load();
 
