@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const ProfileCompletionAlert = () => {
   const userData = useSelector((state: any) => state.userData);
-  if (userData?.wizardCompleted) return null;
+  if (userData?.wizardReviewed) return null;
   return (
     <div
       className=" mb-3  w-[96%] items-center rounded-lg bg-warning-100 px-6 py-5 text-base text-warning-800 border"
@@ -25,8 +25,8 @@ const ProfileCompletionAlert = () => {
             />
           </svg>
         </span>
-        It Seems that you have not completed your profile.{" "}
-        <Link href="/welcome">Complete your profile to get better results</Link>
+        It Seems that you have not reviewed your profile. &nbsp;
+        <Link href="/profileReview">Review and make changes to profile</Link>
       </div>
     </div>
   );
