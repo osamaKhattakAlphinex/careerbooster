@@ -5,18 +5,32 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
-import { signIn } from "next-auth/react";
-
 import { Metadata } from "next";
+import { useSession } from "next-auth/react";
+import { refreshIconRotating } from "@/helpers/iconsProvider";
+import { useDispatch } from "react-redux";
+import { setUploadedFileName } from "@/store/resumeSlice";
+
 export const metadata: Metadata = {
   title: "CareerBooster.Ai-Register",
 };
-const Register = () => {
+
+const RegisterNew = () => {
   const router = useRouter();
   const params = useSearchParams();
 
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [submittingError, setSubmittingError] = useState<string>("");
+  const [fileUploading, setFileUploading] = useState<boolean>(false);
+  const [file, setFile] = useState<any>(null);
+  const [fileError, setFileError] = useState<string>("");
+
+  // session
+  const { data, status }: { data: any; status: any } = useSession();
+  const isAuth = status === "authenticated";
+
+  // Redux
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -38,6 +52,7 @@ const Register = () => {
       confirmpassword: Yup.string()
         .required("Enter Password again")
         .oneOf([Yup.ref("password"), "null"], "Passwords must match"),
+      file: Yup.string().required("You Must Upload The Resume"),
     }),
 
     onSubmit: async (values) => {
@@ -52,26 +67,16 @@ const Register = () => {
           email: values.email,
           password: values.password,
           file: values.file,
-          phone: "",
         };
 
         axios
           .post("/api/auth/users", obj)
           .then(async function (response) {
             if (values.file !== "") {
-              const abc = await moveResumeToUserFolder(
-                values.file,
-                values.email
-              );
-              const test = await updateUser(values.file, values.email);
+              await moveResumeToUserFolder(values.file, values.email);
+              await updateUser(values.file, values.email);
             }
-
-            await signIn("credentials", {
-              email: obj.email,
-              password: obj.password,
-              redirect: false, // prevent default redirect
-            });
-            router.replace("/dashboard");
+            router.replace("/login");
           })
           .catch(function (error) {
             if (error.response.data.error) {
@@ -81,7 +86,7 @@ const Register = () => {
             }
           })
           .finally(() => {
-            // setSubmitting(false);
+            setSubmitting(false);
           });
       }
     },
@@ -92,7 +97,6 @@ const Register = () => {
         fileName: fileName,
         email: email,
       };
-      // Delete file from temp folder and move to user folder
       return axios.post(`/api/users/moveResumeToUserFolder`, obj);
     }
   };
@@ -103,6 +107,84 @@ const Register = () => {
         newFile: file,
         email: email,
       });
+    }
+  };
+
+  const removeDashesFromString = (str: string) => {
+    return str.replace(/-/g, " ");
+  };
+
+  const uploadFileToServer = async () => {
+    setFileError("");
+    setFileUploading(true);
+    if (file) {
+      const body = new FormData();
+      body.append("file", file);
+      fetch("/api/fileUpload", {
+        method: "POST",
+        body,
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
+            const uploadedFileName = res.fileName + "_" + file.name;
+            dispatch(setUploadedFileName(uploadedFileName));
+            fetchRegistrationDataFromResume(uploadedFileName);
+            // router.replace("/welcome?step=1");
+            // router.replace("/register");
+            // setSuccessMsg("File has been uploaded!");
+          } else {
+            setFileError("Something went wrong");
+          }
+        })
+        .catch((error) => {
+          setFileError("Something went wrong");
+        });
+    }
+  };
+
+  const fetchRegistrationDataFromResume = async (fileName: string) => {
+    setFileError("");
+    setFileUploading(true);
+    if (fileName) {
+      fetch("/api/homepage/fetchRegistrationDataForHomepage", {
+        method: "POST",
+        body: JSON.stringify({ fileName }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
+            const userData = JSON.parse(res.data);
+
+            // router.replace(
+            //   `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&file=${fileName}`
+            // );
+
+            if ((userData.firstName && userData.lastName) || userData.email) {
+              formik.setFieldValue(
+                "firstName",
+                removeDashesFromString(userData.firstName)
+              );
+              formik.setFieldValue(
+                "lastName",
+                removeDashesFromString(userData.lastName)
+              );
+              formik.setFieldValue(
+                "email",
+                removeDashesFromString(userData.email)
+              );
+              formik.setFieldValue("file", file);
+            }
+          } else {
+            setFileError("Something went wrong");
+          }
+        })
+        .catch((error) => {
+          setFileError("Something went wrong");
+        });
     }
   };
 
@@ -120,195 +202,405 @@ const Register = () => {
     }
   }, [params]);
 
-  const removeDashesFromString = (str: string) => {
-    return str.replace(/-/g, " ");
-  };
+  // check file is correct
+  useEffect(() => {
+    if (file && file.type === "application/pdf") {
+      //  file exists and is PDF
+      setFileError("");
+      // upload it to server
+      uploadFileToServer();
+    } else if (file) {
+      // if file exists but not PDf
+      setFileError("only PDF file is allowed");
+    }
+  }, [file]);
 
   return (
-    <section className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 py-20">
-      <div className="flex flex-col items-center justify-center px-6  mx-auto lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 ">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Create an account
-            </h1>
-            <form
-              className="space-y-4 md:space-y-6"
-              onSubmit={formik.handleSubmit}
-            >
-              <div>
-                <label
-                  htmlFor="firstName"
-                  className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
-                >
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  name="firstName"
-                  id="firstName"
-                  className="bg-gray-50 border  text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 border-gray-300"
-                  placeholder="John"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.firstName}
-                />
-                {formik.touched.firstName && formik.errors.firstName && (
-                  <p className="text-red-600">
-                    {formik.touched.firstName && formik.errors.firstName}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label
-                  htmlFor="lastName"
-                  className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
-                >
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  name="lastName"
-                  id="lastName"
-                  className="bg-gray-50 border  text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 border-gray-300"
-                  placeholder="John"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.lastName}
-                />
-                {formik.touched.lastName && formik.errors.lastName && (
-                  <p className="text-red-600">
-                    {formik.touched.lastName && formik.errors.lastName}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
-                >
-                  Your email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border  text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 border-gray-300"
-                  placeholder="name@company.com"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
-                />
-                {formik.touched.email && formik.errors.email && (
-                  <p className="text-red-600">
-                    {formik.touched.email && formik.errors.email}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                />
-                {formik.touched.password && formik.errors.password && (
-                  <p className="text-red-600">
-                    {formik.touched.password && formik.errors.password}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label
-                  htmlFor="confirmpassword"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Confirm password
-                </label>
-                <input
-                  type="password"
-                  name="confirmpassword"
-                  id="confirmpassword"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.confirmpassword}
-                />
-                {formik.touched.confirmpassword &&
-                  formik.errors.confirmpassword && (
-                    <p className="text-red-600">
-                      {formik.touched.confirmpassword &&
-                        formik.errors.confirmpassword}
-                    </p>
-                  )}
-              </div>
-              <div className="flex items-start">
-                <div className="flex items-center h-5">
-                  <input
-                    id="terms"
-                    aria-describedby="terms"
-                    type="checkbox"
-                    onChange={formik.handleChange}
-                    checked={formik.values.terms ? true : false}
-                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+    <div className="wrapper d-flex flex-column justify-between min-h-[1155px]">
+      <main className="flex-grow-1">
+        <section className="account-section login-page py-6 h-full">
+          <div className="container-fluid h-full">
+            <div className="row h-full">
+              <div
+                className="col-lg-6 d-none d-lg-block"
+                data-aos="fade-up-sm"
+                data-aos-delay="50"
+              >
+                <div className="bg-dark-blue-4 border rounded-4 h-full p-6 p-md-20 text-center d-flex flex-column justify-center">
+                  <h2 className="text-white mb-12">
+                    Unlock the Power of <br className="d-none d-xl-block" />
+                    <span className="text-primary-dark">
+                      Career Booster
+                    </span>{" "}
+                    Copywriting Tool
+                  </h2>
+                  <img
+                    src="assets/images/screens/screen-5.png"
+                    alt=""
+                    className="img-fluid w-full"
                   />
                 </div>
-                <div className="ml-3 text-sm">
-                  <label
-                    htmlFor="terms"
-                    className="font-light text-gray-500 dark:text-gray-300"
+              </div>
+              <div
+                className="col-lg-6"
+                data-aos="fade-up-sm"
+                data-aos-delay="100"
+              >
+                {/* <div className="close-btn">
+                  <a
+                    href="index.html"
+                    className="icon bg-gradient-3 text-white w-12 h-12 rounded p-3 border border-white border-opacity-10 d-flex align-center justify-center ms-auto"
                   >
-                    I accept the{" "}
-                    <Link
-                      className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                      href="#"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
                     >
-                      Terms and Conditions
-                    </Link>
-                  </label>
+                      <g
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      >
+                        <path d="M18 6 6 18M6 6l12 12" />
+                      </g>
+                    </svg>
+                  </a>
+                </div> */}
+                <div className="account-wrapper d-flex flex-column justify-center">
+                  <div className="text-center">
+                    <a href="">
+                      <img
+                        src="assets/images/logo.svg"
+                        alt=""
+                        className="img-fluid"
+                        width="165"
+                      />
+                    </a>
+                    {/* <div className="vstack gap-4 mt-10">
+                      <button type="button" className="btn account-btn py-4">
+                        <img
+                          src="assets/images/icons/google.svg"
+                          alt=""
+                          width="24"
+                          className="img-fluid icon"
+                        />
+                        <span>Continue With Google</span>
+                      </button>
+                      <button type="button" className="btn account-btn py-4">
+                        <img
+                          src="assets/images/icons/apple.svg"
+                          alt=""
+                          width="24"
+                          className="img-fluid icon"
+                        />
+                        <span>Continue With Apple</span>
+                      </button>
+                    </div>
+
+                    <div className="divider-with-text my-10">
+                      <span>Or register with email</span>
+                    </div> */}
+                    <h3 className="pb-4">Register Your Account</h3>
+
+                    <form
+                      className="vstack gap-4"
+                      onSubmit={formik.handleSubmit}
+                    >
+                      <div className="upload-resume-btn mt-5 mb-10">
+                        {!isAuth && data === null && (
+                          <label
+                            className="btn btn-lg btn-gradient-1 aos-init aos-animate"
+                            data-aos="fade-up-sm"
+                            data-aos-delay="200"
+                          >
+                            <input
+                              className="hidden"
+                              type="file"
+                              disabled={fileUploading}
+                              onChange={(e) => {
+                                if (e.target.files) {
+                                  setFile(e.target.files[0]);
+                                }
+                              }}
+                            />
+
+                            {fileUploading
+                              ? refreshIconRotating
+                              : "Upload Resumee"}
+                          </label>
+                        )}
+                        {formik.touched.file && formik.errors.file && (
+                          <p className="text-red-600 pt-3">
+                            {formik.touched.file && formik.errors.file}
+                          </p>
+                        )}
+                      </div>
+                      <div className="text-start mb-4">
+                        <div className="input-group with-icon">
+                          <span className="icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                              />
+                            </svg>
+                          </span>
+                          {/* <label
+                            htmlFor="firstName"
+                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                          >
+                            First Name
+                          </label> */}
+                          <input
+                            type="text"
+                            name="firstName"
+                            className="form-control rounded-2 py-4"
+                            placeholder="First Name"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.firstName}
+                          />
+                        </div>
+                        {formik.touched.firstName &&
+                          formik.errors.firstName && (
+                            <p className="text-red-600 pt-3">
+                              {formik.touched.firstName &&
+                                formik.errors.firstName}
+                            </p>
+                          )}
+                      </div>
+                      <div className="text-start my-4">
+                        <div className="input-group with-icon ">
+                          <span className="icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                              />
+                            </svg>
+                          </span>
+                          {/* <label
+                            htmlFor="lastName"
+                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                          >
+                            Last Name
+                          </label> */}
+                          <input
+                            type="text"
+                            name="lastName"
+                            className="form-control rounded-2 py-4"
+                            placeholder="Last Name"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.lastName}
+                          />
+                        </div>
+                        {formik.touched.firstName &&
+                          formik.errors.firstName && (
+                            <p className="text-red-600 pt-3">
+                              {formik.touched.lastName &&
+                                formik.errors.lastName}
+                            </p>
+                          )}
+                      </div>
+                      <div className="text-start my-4">
+                        <div className="input-group with-icon">
+                          <span className="icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                              />
+                            </svg>
+                          </span>
+
+                          {/* <label
+                            htmlFor="Emil"
+                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                          >
+                            Enter Your Email
+                          </label> */}
+                          <input
+                            type="email"
+                            name="email"
+                            className="form-control rounded-2 py-4"
+                            placeholder="Enter Your Email"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.email}
+                          />
+                        </div>
+                        {formik.touched.email && formik.errors.email && (
+                          <p className="text-red-600 pt-3">
+                            {formik.touched.email && formik.errors.email}
+                          </p>
+                        )}
+                      </div>
+                      <div className="text-start my-4">
+                        <div className="input-group with-icon">
+                          <span className="icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                              />
+                            </svg>
+                          </span>
+                          {/* <label
+                            htmlFor="Emil"
+                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                          >
+                            Enter Your Email
+                          </label> */}
+                          <input
+                            type="password"
+                            name="password"
+                            className="form-control rounded-2 py-4"
+                            placeholder="Enter Password"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.password}
+                          />
+                        </div>
+                        {formik.touched.password && formik.errors.password && (
+                          <p className="text-red-600 pt-3">
+                            {formik.touched.password && formik.errors.password}
+                          </p>
+                        )}
+                      </div>
+                      <div className="text-start my-4">
+                        <div className="input-group with-icon">
+                          <span className="icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                              />
+                            </svg>
+                          </span>
+                          {/* <label
+                            htmlFor="Emil"
+                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                          >
+                            Enter Your Email
+                          </label> */}
+                          <input
+                            type="password"
+                            name="confirmpassword"
+                            className="form-control rounded-2 py-4"
+                            placeholder="Confirm Password"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.confirmpassword}
+                          />
+                        </div>
+                        {formik.touched.confirmpassword &&
+                          formik.errors.confirmpassword && (
+                            <p className="text-red-600 pt-3">
+                              {formik.touched.confirmpassword &&
+                                formik.errors.confirmpassword}
+                            </p>
+                          )}
+                      </div>
+                      <div className="text-start my-4">
+                        <div className="ml-3 text-sm">
+                          <input
+                            id="terms"
+                            aria-describedby="terms"
+                            type="checkbox"
+                            className="w-4 mr-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                          />
+                          <label
+                            htmlFor="terms"
+                            className="font-light text-gray-500 dark:text-gray-300"
+                          >
+                            I accept the{" "}
+                            <Link
+                              className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                              href="#"
+                            >
+                              Terms and Conditions
+                            </Link>
+                          </label>
+                        </div>
+                      </div>
+                      {submittingError !== "" && (
+                        <div
+                          className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2"
+                          role="alert"
+                        >
+                          <p>{submittingError}</p>
+                        </div>
+                      )}
+                      <div className="text-center mt-4">
+                        <button
+                          type="submit"
+                          className="btn btn-primary-dark w-full py-4"
+                        >
+                          {submitting ? "Submitting..." : "Create an account"}
+                        </button>
+                      </div>
+
+                      <div className="text-center">
+                        <p>
+                          Already have an account?
+                          <Link href="/login" className="text-decoration-none">
+                            {" "}
+                            Log in{" "}
+                          </Link>
+                        </p>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
-              {submittingError !== "" && (
-                <div
-                  className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2"
-                  role="alert"
-                >
-                  <p>{submittingError}</p>
-                </div>
-              )}
-              <button
-                type="submit"
-                disabled={!formik.values.terms || submitting}
-                className="w-full  bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300"
-              >
-                {submitting ? "Submitting..." : "Create an account"}
-              </button>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Already have an account?{" "}
-                <Link
-                  href="/login"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Login here
-                </Link>
-              </p>
-            </form>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      </main>
+    </div>
   );
 };
 
-export default Register;
+export default RegisterNew;
