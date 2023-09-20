@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const Register = () => {
   const router = useRouter();
@@ -47,16 +48,26 @@ const Register = () => {
           email: values.email,
           password: values.password,
           file: values.file,
+          phone: "",
         };
 
         axios
           .post("/api/auth/users", obj)
           .then(async function (response) {
             if (values.file !== "") {
-              await moveResumeToUserFolder(values.file, values.email);
-              await updateUser(values.file, values.email);
+              const abc = await moveResumeToUserFolder(
+                values.file,
+                values.email
+              );
+              const test = await updateUser(values.file, values.email);
             }
-            router.replace("/login");
+
+            await signIn("credentials", {
+              email: obj.email,
+              password: obj.password,
+              redirect: false, // prevent default redirect
+            });
+            router.replace("/dashboard");
           })
           .catch(function (error) {
             if (error.response.data.error) {
@@ -66,7 +77,7 @@ const Register = () => {
             }
           })
           .finally(() => {
-            setSubmitting(false);
+            // setSubmitting(false);
           });
       }
     },
@@ -77,6 +88,7 @@ const Register = () => {
         fileName: fileName,
         email: email,
       };
+      // Delete file from temp folder and move to user folder
       return axios.post(`/api/users/moveResumeToUserFolder`, obj);
     }
   };

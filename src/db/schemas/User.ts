@@ -27,8 +27,6 @@ const UserSchema = new Schema(
     },
     phone: {
       type: String,
-      unique: true,
-      required: true,
     },
     contact: {
       country: String,
@@ -45,6 +43,14 @@ const UserSchema = new Schema(
     },
     files: [{ type: String }],
     resumes: [],
+    wizardCompleted: {
+      type: Boolean,
+      default: false,
+    },
+    wizardReviewed: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   { timestamps: true }

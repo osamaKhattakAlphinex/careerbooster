@@ -15,11 +15,11 @@ const handler: NextApiHandler = async (req, res) => {
       );
       const newPath = path.join(
         process.cwd(),
-        `/public/files/${email}/${fileName}`
+        `/public/files/userResumes/${email}/${fileName}`
       );
 
       // check the user folder exists if not create one
-      let directory = `/public/files/${email}`;
+      let directory = `/public/files/userResumes/${email}`;
 
       try {
         await fs.readdir(path.join(process.cwd() + directory));
