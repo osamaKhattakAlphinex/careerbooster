@@ -7,6 +7,10 @@ import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "CareerBooster.Ai-Register",
+};
 const Register = () => {
   const router = useRouter();
   const params = useSearchParams();

@@ -1,5 +1,9 @@
 import Link from "next/link";
 import LoginForm from "@/components/LoginForm";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "CareerBooster.Ai-Login",
+};
 
 const Login = () => {
   return (
@@ -15,8 +19,8 @@ const Login = () => {
               <div className="bg-dark-blue-4 border rounded-4 h-full p-6 p-md-20 text-center d-flex flex-column justify-center">
                 <h2 className="text-white mb-12">
                   Unlock the Power of <br className="d-none d-xl-block" />
-                  <span className="text-primary-dark">GenAI</span> Copywriting
-                  Tool
+                  <span className="text-primary-dark">CareerBooster</span> Cover
+                  Letters Tool
                 </h2>
                 <img
                   src="assets/images/screens/screen-5.png"

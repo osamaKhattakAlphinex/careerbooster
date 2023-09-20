@@ -32,7 +32,10 @@ import {
 } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { makeid } from "@/helpers/makeid";
-
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "CareerBooster.Ai-Welcome",
+};
 const Welcome = () => {
   const router = useRouter();
   const params = useSearchParams();

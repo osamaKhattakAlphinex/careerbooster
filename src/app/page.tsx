@@ -10,8 +10,28 @@ import RewardsSection from "@/components/new-layout/Homepage/RewardsSection";
 import UseCases from "@/components/new-layout/Homepage/UseCases";
 
 export const metadata: Metadata = {
-  title: "Home Page",
-  description: "Home page description",
+  title: "CareerBooster.Ai - Home Page",
+  description:
+    "Unlock your career potential with CareerBooster – AI-powered tools for turbocharging your job search. From ATS-friendly resumes to LinkedIn optimization, discover the winning combination trusted by senior-level professionals. Try it free and revolutionize your job hunt today!",
+  keywords: [
+    "Career Booster",
+    "careerbooster",
+    "CareerBooster.Ai",
+    "AiCareerBooster",
+    "Career advancement",
+    "ATS-friendly resumes",
+    "LinkedIn optimization",
+    "Executive resume",
+    "Career success",
+    "Job market competitiveness",
+    "Job applications",
+    "Cover letter",
+  ],
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
 };
 
 export default function Home() {
