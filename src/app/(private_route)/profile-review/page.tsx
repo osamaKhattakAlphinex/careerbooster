@@ -34,9 +34,9 @@ import axios from "axios";
 import { makeid } from "@/helpers/makeid";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "CareerBooster.Ai-Welcome",
-};
+// export const metadata: Metadata = {
+//   title: "CareerBooster.Ai-Welcome",
+// };
 
 const ProfileReview = () => {
   const router = useRouter();
