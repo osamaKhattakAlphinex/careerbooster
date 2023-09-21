@@ -65,7 +65,7 @@ const Footer = () => {
                     <div className="input-group">
                       <input
                         type="email"
-                        className="form-control"
+                        className="form-control form-control-2"
                         placeholder="Enter your email"
                       />
                       <button

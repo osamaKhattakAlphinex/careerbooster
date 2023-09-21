@@ -307,33 +307,37 @@ const RegisterNew = () => {
                       className="vstack gap-4"
                       onSubmit={formik.handleSubmit}
                     >
-                      <div className="upload-resume-btn mt-5 mb-10">
-                        {!isAuth && data === null && (
-                          <label
-                            className="btn btn-lg btn-gradient-1 aos-init aos-animate"
-                            data-aos="fade-up-sm"
-                            data-aos-delay="200"
-                          >
-                            <input
-                              className="hidden"
-                              type="file"
-                              disabled={fileUploading}
-                              onChange={(e) => {
-                                if (e.target.files) {
-                                  setFile(e.target.files[0]);
-                                }
-                              }}
-                            />
+                      <div className={`upload-resume-btn mt-5 mb-10`}>
+                        {!params?.get("file") && (
+                          <>
+                            {!isAuth && data === null && (
+                              <label
+                                className="btn btn-lg btn-gradient-1 aos-init aos-animate"
+                                data-aos="fade-up-sm"
+                                data-aos-delay="200"
+                              >
+                                <input
+                                  className="hidden"
+                                  type="file"
+                                  disabled={fileUploading}
+                                  onChange={(e) => {
+                                    if (e.target.files) {
+                                      setFile(e.target.files[0]);
+                                    }
+                                  }}
+                                />
 
-                            {fileUploading
-                              ? refreshIconRotating
-                              : "Upload Resumee"}
-                          </label>
-                        )}
-                        {formik.touched.file && formik.errors.file && (
-                          <p className="text-red-600 pt-3">
-                            {formik.touched.file && formik.errors.file}
-                          </p>
+                                {fileUploading
+                                  ? refreshIconRotating
+                                  : "Upload Resume"}
+                              </label>
+                            )}
+                            {formik.touched.file && formik.errors.file && (
+                              <p className="text-red-600 pt-3">
+                                {formik.touched.file && formik.errors.file}
+                              </p>
+                            )}
+                          </>
                         )}
                       </div>
                       <div className="text-start mb-4">
