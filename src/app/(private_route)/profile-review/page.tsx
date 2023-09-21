@@ -105,11 +105,6 @@ const ProfileReview = () => {
       register.stepFive.isValid === false
     ) {
       return true;
-    } else if (
-      register.activeStep === 6 &&
-      register.stepSix.isValid === false
-    ) {
-      return true;
     } else {
       return false;
     }
