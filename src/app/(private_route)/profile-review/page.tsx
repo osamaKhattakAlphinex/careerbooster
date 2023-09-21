@@ -8,7 +8,7 @@ import StepThree from "@/components/dashboard/profileReview/StepThree";
 import StepFour from "@/components/dashboard/profileReview/StepFour";
 import StepFive from "@/components/dashboard/profileReview/StepFive";
 import StepSix from "@/components/dashboard/profileReview/StepSix";
-import ProfileReview from "@/components/dashboard/profileReview/profileReview";
+// import ProfileReview from "@/components/dashboard/profileReview/profileReview";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "next-auth/react";
 import {
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   title: "CareerBooster.Ai-Welcome",
 };
 
-const profileReview = () => {
+const ProfileReview = () => {
   const router = useRouter();
   const params = useSearchParams();
   const urlStep = params?.get("step");
@@ -203,4 +203,4 @@ const profileReview = () => {
   );
 };
 
-export default profileReview;
+export default ProfileReview;

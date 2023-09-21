@@ -39,7 +39,7 @@ const ProfileCompletionAlert = () => {
             </svg>
           </span>
           It Seems that you have not reviewed your profile. &nbsp;
-          <Link href="/profileReview">
+          <Link href="/profile-review">
             To get better Results Please review and make changes to profile
           </Link>
         </div>
