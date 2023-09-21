@@ -8,7 +8,7 @@ import StepThree from "@/components/dashboard/profileReview/StepThree";
 import StepFour from "@/components/dashboard/profileReview/StepFour";
 import StepFive from "@/components/dashboard/profileReview/StepFive";
 import StepSix from "@/components/dashboard/profileReview/StepSix";
-// import ProfileReview from "@/components/dashboard/profileReview/profileReview";
+import ProfilePreview from "@/components/dashboard/profileReview/ProfilePreview";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "next-auth/react";
 import {
@@ -150,7 +150,7 @@ const ProfileReview = () => {
 
                 {register.activeStep === 6 && <StepSix />}
 
-                {register.activeStep === 7 && <ProfileReview />}
+                {register.activeStep === 7 && <ProfilePreview />}
                 {register.activeStep === 8 && <StepEight />}
 
                 <div className="">
