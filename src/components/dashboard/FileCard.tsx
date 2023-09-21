@@ -7,7 +7,7 @@ const FileCard = ({
   file: string;
   email?: string | null | undefined;
 }) => {
-  const url = `/files/${email}/${file}`;
+  const url = `/files/userResumes/${email}/${file}`;
   return (
     <div className="">
       <div className="w-full   ">

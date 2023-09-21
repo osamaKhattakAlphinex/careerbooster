@@ -120,13 +120,13 @@ const ProfileReview = () => {
     // dispatch(setError(""));
     // if step exists in url and activeStep from redux is 0 then set activeStep to step
     if (reduxStep === 0 && urlStep) {
-      router.push(`/profileReview?step=${urlStep}`);
+      router.push(`/profile-review?step=${urlStep}`);
       dispatch(setActiveStep(Number(urlStep)));
     } else if (reduxStep === 0 && !urlStep) {
       dispatch(setActiveStep(1));
-      router.push(`/profileReview?step=1`);
+      router.push(`/profile-review?step=1`);
     } else if (reduxStep !== 0) {
-      router.push(`/profileReview?step=${reduxStep}`);
+      router.push(`/profile-review?step=${reduxStep}`);
     }
   }, [reduxStep, urlStep]);
 
