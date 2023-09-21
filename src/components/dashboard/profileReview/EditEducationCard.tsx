@@ -10,7 +10,7 @@ import EducationForm from "./EducationForm";
 const EditEducationCard = () => {
   const dispatch = useDispatch();
   const stepFour = useSelector((state: any) => state.register.stepFour);
-  const { list, state, editId } = stepFour;
+  const { list, editId } = stepFour;
 
   const formik = useFormik({
     initialValues: {
@@ -29,7 +29,7 @@ const EditEducationCard = () => {
       educationLevel: Yup.string().required("Education Level is Required"),
     }),
     onSubmit: async (values) => {
-      const updatedList = list.filter((rec: Education) => {
+      const updatedList = list.map((rec: Education) => {
         if (rec.id === editId) {
           return values;
         } else {

@@ -6,6 +6,7 @@ const StepTwo = () => {
   // Redux
   const dispatch = useDispatch();
   const stepTwo = useSelector((state: any) => state.register.stepTwo);
+  const userData = useSelector((state: any) => state.userData);
 
   useEffect(() => {
     if (stepTwo.Email) {
@@ -27,6 +28,18 @@ const StepTwo = () => {
       dispatch(setStepTwo({ isValid: false }));
     }
   }, [stepTwo.phoneNumber, stepTwo.Email]);
+
+  useEffect(() => {
+    if (userData && userData.experience) {
+      dispatch(
+        setStepTwo({
+          ...stepTwo,
+          Email: userData.email,
+          phoneNumber: userData.phone,
+        })
+      );
+    }
+  }, [userData]);
 
   return (
     <>
@@ -90,13 +103,15 @@ const StepTwo = () => {
           <input
             type="text"
             name="Email"
+            disabled={true}
             id="Email"
             value={stepTwo.Email}
             onChange={(e) => {
-              dispatch(setStepTwo({ Email: e.target.value }));
+              // dispatch(setStepTwo({ Email: e.target.value }));
             }}
             className="form-control rounded-2"
             placeholder=""
+            title="Email can't be changed"
           />
         </div>
         {stepTwo.emailInvalid && (

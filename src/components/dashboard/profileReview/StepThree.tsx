@@ -7,6 +7,7 @@ const StepThree = () => {
   const dispatch = useDispatch();
   const stepThree = useSelector((state: any) => state.register.stepThree);
   const { country, street, cityState, postalCode } = stepThree;
+  const userData = useSelector((state: any) => state.userData);
 
   useEffect(() => {
     if (country) {
@@ -15,6 +16,20 @@ const StepThree = () => {
       dispatch(setStepThree({ isValid: false }));
     }
   }, [country]);
+
+  useEffect(() => {
+    if (userData && userData.experience) {
+      dispatch(
+        setStepThree({
+          ...stepThree,
+          country: userData.contact.country,
+          street: userData.contact.street,
+          cityState: userData.contact.cityState,
+          postalCode: userData.contact.postalCode,
+        })
+      );
+    }
+  }, [userData]);
 
   return (
     <>

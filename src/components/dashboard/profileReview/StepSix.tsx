@@ -1,7 +1,7 @@
 "use client";
 import { deleteIcon } from "@/helpers/iconsProvider";
 import { setStepSix } from "@/store/registerSlice";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 type Skill = string;
@@ -30,9 +30,12 @@ const suggestedSkillsValues = [
 ];
 
 const StepSix = () => {
+  // redux
   const dispatch = useDispatch();
   const stepSix = useSelector((state: any) => state.register.stepSix);
   const { list } = stepSix;
+  const userData = useSelector((state: any) => state.userData);
+  // state
   const [newSkill, setNewSkill] = useState("");
   const [suggestedSkills, setSuggestedSkills] = useState<Skill[]>(
     suggestedSkillsValues
@@ -62,6 +65,12 @@ const StepSix = () => {
 
     dispatch(setStepSix({ list: [suggestedSkill, ...list] }));
   };
+
+  useEffect(() => {
+    if (userData && userData.skills) {
+      dispatch(setStepSix({ ...stepSix, list: userData.skills }));
+    }
+  }, [userData]);
 
   return (
     <div className="w-full max-w-md mx-auto ">

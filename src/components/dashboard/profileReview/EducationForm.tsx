@@ -5,6 +5,7 @@ const years = getYearsList();
 
 const EducationForm = ({ formik }: any) => {
   const dispatch = useDispatch();
+
   return (
     <form className="space-y-4" onSubmit={formik.handleSubmit}>
       <div className="w-full">
