@@ -11,9 +11,9 @@ import { refreshIconRotating } from "@/helpers/iconsProvider";
 import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
 
-export const metadata: Metadata = {
-  title: "CareerBooster.Ai-Register",
-};
+// export const metadata: Metadata = {
+//   title: "CareerBooster.Ai-Register",
+// };
 
 const RegisterNew = () => {
   const router = useRouter();
