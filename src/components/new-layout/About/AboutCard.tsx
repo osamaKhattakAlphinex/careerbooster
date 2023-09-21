@@ -16,7 +16,7 @@ const AboutCard = () => {
               <p className="mb-8">
                 Your ultimate destination for revolutionizing your career
                 journey with AI-powered tools that supercharge your professional
-                image. In today's fiercely competitive job market, where
+                image. In today{"'"}s fiercely competitive job market, where
                 qualifications and experience are essential but not always
                 enough, we understand the paramount importance of ensuring your
                 resume stands out from the crowd.
