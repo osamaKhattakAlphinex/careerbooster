@@ -329,19 +329,19 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     if (userData.email && !userData.wizardCompleted) {
       createProfileFromResume();
 
-      const confirmExit = (e: any) => {
-        // Display a confirmation message when leaving or refreshing the page
-        e.returnValue =
-          "You are leaving this page, your changes are not saved, you will lose your data.";
-      };
+      // const confirmExit = (e: any) => {
+      //   // Display a confirmation message when leaving or refreshing the page
+      //   e.returnValue =
+      //     "You are leaving this page, your changes are not saved, you will lose your data.";
+      // };
 
-      // Listen for the beforeunload event
-      window.addEventListener("beforeunload", confirmExit);
+      // // Listen for the beforeunload event
+      // window.addEventListener("beforeunload", confirmExit);
 
-      return () => {
-        // Remove the event listener when the component unmounts
-        window.removeEventListener("beforeunload", confirmExit);
-      };
+      // return () => {
+      //   // Remove the event listener when the component unmounts
+      //   window.removeEventListener("beforeunload", confirmExit);
+      // };
     }
   }, [userData.email, userData.wizardCompleted, register.scrappedContent]);
 

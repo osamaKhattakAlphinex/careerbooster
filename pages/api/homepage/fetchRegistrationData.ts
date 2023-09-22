@@ -24,7 +24,7 @@ const handler: NextApiHandler = async (req, res) => {
           Phone / Mobile Number:
           Country Name:
           Street Address:
-          City and State Name:
+          City or/and State Name:
           Postal Code from the provided data or get from the name of the City:
 
 
