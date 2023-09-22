@@ -33,6 +33,7 @@ import {
 import axios from "axios";
 import { makeid } from "@/helpers/makeid";
 import { Metadata } from "next";
+import { setUserData } from "@/store/userDataSlice";
 
 // export const metadata: Metadata = {
 //   title: "CareerBooster.Ai-Welcome",
@@ -77,6 +78,8 @@ const ProfileReview = () => {
         data: obj,
       })
       .then(async (resp: any) => {
+        // Update user data in redux
+        dispatch(setUserData(obj));
         setActiveStep(1);
         router.push("/dashboard");
       });
