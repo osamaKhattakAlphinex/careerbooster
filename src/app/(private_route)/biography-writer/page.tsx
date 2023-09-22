@@ -126,7 +126,7 @@ const BiographyWriter = () => {
               />
               <label
                 htmlFor="default-radio-1"
-                className="ml-2 text-sm font-medium  dark:text-gray-300 cursor-pointer"
+                className="ml-2 text-sm font-medium cursor-pointer"
               >
                 use my profile date to write biography
               </label>
@@ -145,7 +145,7 @@ const BiographyWriter = () => {
               />
               <label
                 htmlFor="default-radio-2"
-                className="ml-2 text-sm font-medium  dark:text-gray-300 cursor-pointer"
+                className="ml-2 text-sm font-medium   cursor-pointer"
               >
                 Upload File and use that to write biography
               </label>
@@ -169,7 +169,7 @@ const BiographyWriter = () => {
                   (selectedOption === "file" && selectedFile === "")
                 }
                 onClick={() => handleGenerate()}
-                className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300"
+                className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  disabled:bg-emerald-300"
               >
                 <div className="flex flex-row gap-2">
                   <svg
@@ -194,7 +194,7 @@ const BiographyWriter = () => {
               trigger={() => (
                 <button
                   disabled={!show || msgLoading || !session?.user?.email}
-                  className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:bg-emerald-300"
+                  className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:bg-emerald-300"
                 >
                   <div className="flex flex-row gap-2">
                     <svg

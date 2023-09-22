@@ -74,11 +74,11 @@ const TrainBotCard = () => {
   }, [file]);
 
   return (
-    <div className="w-full max-w-sm  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-      <h5 className="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
+    <div className="w-full max-w-sm  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 ">
+      <h5 className="mb-3 text-base font-semibold text-gray-900 md:text-xl ">
         Train your Bot
       </h5>
-      <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
+      <p className="text-sm font-normal text-gray-500 ">
         Upload Dcouments to Train your bot
       </p>
       {fileError && (
@@ -121,7 +121,7 @@ const TrainBotCard = () => {
       )}
       <ul className="my-4 space-y-3">
         <li>
-          <label className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white cursor-pointer">
+          <label className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow  cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -149,7 +149,7 @@ const TrainBotCard = () => {
             <span className="flex-1 ml-3 whitespace-nowrap">
               {fileUploading ? "Please wait..." : "Upload PDF Resume"}
             </span>
-            <span className="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
+            <span className="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">
               Popular
             </span>
           </label>
@@ -157,7 +157,7 @@ const TrainBotCard = () => {
         <li>
           <button
             onClick={() => alert("will be available soon")}
-            className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white"
+            className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +182,7 @@ const TrainBotCard = () => {
       <div>
         <a
           href="#"
-          className="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400"
+          className="inline-flex items-center text-xs font-normal text-gray-500 hover:underline "
         >
           <svg
             className="w-3 h-3 mr-2"
