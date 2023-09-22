@@ -19,8 +19,7 @@ const Login = () => {
               <div className="bg-dark-blue-4 border rounded-4 h-full p-6 p-md-20 text-center d-flex flex-column justify-center">
                 <h2 className="text-white mb-12">
                   Unlock the Power of <br className="d-none d-xl-block" />
-                  <span className="text-primary-dark">CareerBooster</span> Cover
-                  Letters Tool
+                  <span className="text-primary-dark">CareerBooster</span>
                 </h2>
                 <img
                   src="assets/images/screens/screen-5.png"
@@ -34,7 +33,7 @@ const Login = () => {
               data-aos="fade-up-sm"
               data-aos-delay="100"
             >
-              <div className="close-btn">
+              <div className="close-btn d-none">
                 <Link
                   href="/"
                   className="icon bg-gradient-3 text-white w-12 h-12 rounded p-3 border border-white border-opacity-10 d-flex align-center justify-center ms-auto"
@@ -65,7 +64,7 @@ const Login = () => {
                       width="165"
                     />
                   </Link>
-                  <div className="vstack gap-4 mt-10">
+                  <div className="vstack gap-4 mt-10 d-none">
                     <button type="button" className="btn account-btn py-4">
                       <img
                         src="assets/images/icons/google.svg"
@@ -86,7 +85,7 @@ const Login = () => {
                     </button>
                   </div>
 
-                  <div className="divider-with-text my-10">
+                  <div className="divider-with-text d-none">
                     <span>Or sign in with email</span>
                   </div>
 

@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Metadata } from "next";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { refreshIconRotating } from "@/helpers/iconsProvider";
 import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
@@ -76,7 +76,17 @@ const RegisterNew = () => {
               await moveResumeToUserFolder(values.file, values.email);
               await updateUser(values.file, values.email);
             }
-            router.replace("/login");
+            const res = await signIn("credentials", {
+              email: values.email,
+              password: values.password,
+              redirect: false, // prevent default redirect
+            });
+
+            if (res?.error) {
+              setSubmitting(false);
+              return setSubmittingError(res.error);
+            }
+            router.replace("/dashboard");
           })
           .catch(function (error) {
             if (error.response.data.error) {
@@ -228,13 +238,12 @@ const RegisterNew = () => {
                 data-aos="fade-up-sm"
                 data-aos-delay="50"
               >
-                <div className="bg-dark-blue-4 border rounded-4 h-full p-6 p-md-20 text-center d-flex flex-column justify-center">
+                <div className="bg-dark-blue-4 border rounded-4  p-6 p-md-20 text-center d-flex flex-column justify-center">
                   <h2 className="text-white mb-12">
                     Unlock the Power of <br className="d-none d-xl-block" />
                     <span className="text-primary-dark">
                       Career Booster
                     </span>{" "}
-                    Copywriting Tool
                   </h2>
                   <img
                     src="assets/images/screens/screen-5.png"
@@ -542,7 +551,13 @@ const RegisterNew = () => {
                           disabled={!formik.values.terms || submitting}
                           className="btn btn-primary-dark w-full py-4"
                         >
-                          {submitting ? "Submitting..." : "Create an account"}
+                          {submitting ? (
+                            <span className="flex items-center justify-center">
+                              {refreshIconRotating}
+                            </span>
+                          ) : (
+                            "Create an account"
+                          )}
                         </button>
                       </div>
 
