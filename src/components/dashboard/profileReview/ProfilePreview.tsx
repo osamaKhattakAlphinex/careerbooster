@@ -11,7 +11,7 @@ import { setActiveStep, setStepFive } from "@/store/registerSlice";
 import { Education, WorkExperience } from "@/store/userDataSlice";
 import ExperienceCard from "./ExperienceCard";
 
-const ProfileReview = () => {
+const ProfilePreview = () => {
   const dispatch = useDispatch();
   const data = useSelector((state: any) => state.register);
   // console.clear();
@@ -223,4 +223,4 @@ const ProfileReview = () => {
   );
 };
 
-export default ProfileReview;
+export default ProfilePreview;

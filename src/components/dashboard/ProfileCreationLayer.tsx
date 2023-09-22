@@ -372,7 +372,10 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           Please wait while we are getting your profile ready.
         </p>
         <p className="text-center mb-10">
-          Are you stuck on this page? <Link href="/contact">Report it</Link>
+          Are you stuck on this page?{" "}
+          <Link href="/contact" target="_blank">
+            Report it
+          </Link>
         </p>
 
         <div className="w-1/3">
