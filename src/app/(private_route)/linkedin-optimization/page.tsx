@@ -26,7 +26,7 @@ const ResumeCreator = () => {
         </Link>
       </div>
       <div className="flex m-10 mt-2 gap-4">
-        <div className="w-full flex p-4  border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-full flex p-4  border border-gray-200 rounded-lg shadow sm:p-6">
           <h2 className="text-2xl mr-10">LinkedIn Optimization</h2>
           <div className="">
             <DownloadDocx
@@ -39,19 +39,19 @@ const ResumeCreator = () => {
         </div>
       </div>
       <div className="flex m-10 gap-4">
-        <div className="w-1/2 p-4  border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-1/2 p-4  border border-gray-200 rounded-lg shadow sm:p-6">
           <KeywordsGenerator setKeywords={setKeywords} />
         </div>
-        <div className="w-1/2 p-4  border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-1/2 p-4  border border-gray-200 rounded-lg shadow sm:p-6">
           <HeadlineGenerator setHeadline={setHeadline} />
         </div>
       </div>
 
       <div className="flex m-10 gap-4">
-        <div className="w-1/2 xs:w-full p-4  border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-1/2 xs:w-full p-4  border border-gray-200 rounded-lg shadow sm:p-6">
           <AboutGenerator setAbout={setAbout} />
         </div>
-        <div className="w-1/2 xs:w-full p-4  border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-1/2 xs:w-full p-4  border border-gray-200 rounded-lg shadow sm:p-6">
           <JDGenerator setJobDesc={setJobDesc} />
         </div>
       </div>

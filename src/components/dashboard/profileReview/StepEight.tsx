@@ -74,10 +74,10 @@ const StepEight = () => {
         </div>
 
         <div className="ml-3 text-sm">
-          <label htmlFor="terms" className="font-light  dark:text-gray-300">
+          <label htmlFor="terms" className="font-light">
             I accept the{" "}
             <Link
-              className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+              className="font-medium text-primary-600 hover:underline"
               href="#"
               target="_blank"
             >
