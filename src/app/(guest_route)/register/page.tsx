@@ -326,7 +326,7 @@ const RegisterNew = () => {
                           </span>
                           {/* <label
                             htmlFor="firstName"
-                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                            className={`block mb-2 text-sm font-medium text-gray-900  `}
                           >
                             First Name
                           </label> */}
