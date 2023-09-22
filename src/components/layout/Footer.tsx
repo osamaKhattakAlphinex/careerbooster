@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 const Footer = () => {
   const pathname = usePathname();
-  if (pathname === "/login" || pathname === "/register") return null;
+  if (pathname === "/login" || pathname === "/register") return <></>;
 
   return (
     <footer className="footer bg-striped pt-10 pt-lg-15">
@@ -60,8 +60,8 @@ const Footer = () => {
               </div>
               <div className="col-md-4 col-lg-4">
                 <div className="footer-widget text-center text-md-start">
-                  <h6 className="text-white mb-4">News & Update</h6>
-                  <form action="#">
+                  <h6 className="text-white mb-4">Get connected</h6>
+                  {/* <form>
                     <div className="input-group">
                       <input
                         type="email"
@@ -89,7 +89,7 @@ const Footer = () => {
                         </svg>
                       </button>
                     </div>
-                  </form>
+                  </form> */}
                   <ul className="list-unstyled d-flex flex-wrap align-center justify-center justify-md-start gap-3 social-list mb-0 mt-5">
                     <li>
                       <Link href="/">
