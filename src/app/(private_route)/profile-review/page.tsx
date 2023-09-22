@@ -77,6 +77,7 @@ const ProfileReview = () => {
         data: obj,
       })
       .then(async (resp: any) => {
+        setActiveStep(1);
         router.push("/dashboard");
       });
   };
