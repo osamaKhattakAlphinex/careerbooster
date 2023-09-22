@@ -368,7 +368,7 @@ const RegisterNew = () => {
                           </span>
                           {/* <label
                             htmlFor="lastName"
-                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                            className={`block mb-2 text-sm font-medium text-gray-900  `}
                           >
                             Last Name
                           </label> */}
@@ -411,7 +411,7 @@ const RegisterNew = () => {
 
                           {/* <label
                             htmlFor="Emil"
-                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                            className={`block mb-2 text-sm font-medium text-gray-900  `}
                           >
                             Enter Your Email
                           </label> */}
@@ -451,7 +451,7 @@ const RegisterNew = () => {
                           </span>
                           {/* <label
                             htmlFor="Emil"
-                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                            className={`block mb-2 text-sm font-medium text-gray-900  `}
                           >
                             Enter Your Email
                           </label> */}
@@ -491,7 +491,7 @@ const RegisterNew = () => {
                           </span>
                           {/* <label
                             htmlFor="Emil"
-                            className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white `}
+                            className={`block mb-2 text-sm font-medium text-gray-900  `}
                           >
                             Enter Your Email
                           </label> */}
@@ -521,15 +521,12 @@ const RegisterNew = () => {
                             type="checkbox"
                             onChange={formik.handleChange}
                             checked={formik.values.terms ? true : false}
-                            className="w-4 mr-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                            className="w-4 mr-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
                           />
-                          <label
-                            htmlFor="terms"
-                            className="font-light text-gray-500 dark:text-gray-300"
-                          >
+                          <label htmlFor="terms" className="font-light">
                             I accept the{" "}
                             <Link
-                              className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                              className="font-medium text-primary-600 hover:underline "
                               href="#"
                             >
                               Terms and Conditions

@@ -60,7 +60,7 @@ const UploadedFilesCard = () => {
           </div>
         </button> */}
       </h5>
-      {/* <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
+      {/* <p className="text-sm font-normal text-gray-500">
         Recently uploaded Files
       </p> */}
       <div className="flex flex-col gap-2">
