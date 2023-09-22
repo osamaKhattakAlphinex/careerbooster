@@ -52,7 +52,7 @@ const RegisterNew = () => {
       confirmpassword: Yup.string()
         .required("Enter Password again")
         .oneOf([Yup.ref("password"), "null"], "Passwords must match"),
-      file: Yup.string().required("You Must Upload The Resume In PDF"),
+      file: Yup.string().required("PDF Resume/CV is Required"),
     }),
 
     onSubmit: async (values) => {
@@ -91,6 +91,7 @@ const RegisterNew = () => {
       }
     },
   });
+
   const moveResumeToUserFolder = async (fileName: string, email: string) => {
     if (fileName && email) {
       const obj = {
@@ -130,15 +131,15 @@ const RegisterNew = () => {
             const uploadedFileName = res.fileName + "_" + file.name;
             dispatch(setUploadedFileName(uploadedFileName));
             fetchRegistrationDataFromResume(uploadedFileName);
-            // router.replace("/welcome?step=1");
-            // router.replace("/register");
-            // setSuccessMsg("File has been uploaded!");
           } else {
             setFileError("Something went wrong");
           }
         })
         .catch((error) => {
           setFileError("Something went wrong");
+        })
+        .finally(() => {
+          setFileUploading(false);
         });
     }
   };
@@ -176,8 +177,9 @@ const RegisterNew = () => {
                 "email",
                 removeDashesFromString(userData.email)
               );
-              formik.setFieldValue("file", file);
             }
+
+            formik.setFieldValue("file", fileName);
           } else {
             setFileError("Something went wrong");
           }
@@ -508,6 +510,8 @@ const RegisterNew = () => {
                             id="terms"
                             aria-describedby="terms"
                             type="checkbox"
+                            onChange={formik.handleChange}
+                            checked={formik.values.terms ? true : false}
                             className="w-4 mr-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                           />
                           <label
@@ -535,6 +539,7 @@ const RegisterNew = () => {
                       <div className="text-center mt-4">
                         <button
                           type="submit"
+                          disabled={!formik.values.terms || submitting}
                           className="btn btn-primary-dark w-full py-4"
                         >
                           {submitting ? "Submitting..." : "Create an account"}
