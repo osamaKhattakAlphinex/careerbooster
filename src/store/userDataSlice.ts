@@ -12,6 +12,7 @@ export interface Education {
   toMonth?: string;
   toYear?: string;
 }
+
 export interface WorkExperience {
   id?: string;
   jobTitle: string;
@@ -49,6 +50,7 @@ interface UserDataSlice {
   defaultResumeFile: string;
   wizardCompleted: boolean;
   wizardReviewed: boolean;
+  userPackage?: any;
 }
 
 const initialState: UserDataSlice = {
@@ -74,6 +76,7 @@ const initialState: UserDataSlice = {
   defaultResumeFile: "",
   wizardCompleted: false,
   wizardReviewed: false,
+  userPackage: {},
 };
 
 const userDataSlice = createSlice({
