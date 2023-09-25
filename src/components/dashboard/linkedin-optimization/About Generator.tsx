@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
+import Button from "@/components/utilities/form-elements/Button";
 
 interface Props {
   setAbout: React.Dispatch<React.SetStateAction<string>>;
@@ -103,10 +104,11 @@ const AboutGenerator = ({ setAbout }: Props) => {
         <h2 className="text-2xl">About Generator</h2>
         <div className="flex flex-row gap-4">
           <div>
-            <button
+            <Button
+              type="button"
               disabled={msgLoading || !session?.user?.email}
               onClick={() => handleGenerate()}
-              className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  disabled:bg-emerald-300"
+              className="btn btn-outline-primary-dark"
             >
               <div className="flex flex-row gap-2">
                 <svg
@@ -125,7 +127,7 @@ const AboutGenerator = ({ setAbout }: Props) => {
                 </svg>
                 <span>{msgLoading ? "Please wait..." : "Generate About"}</span>
               </div>
-            </button>
+            </Button>
           </div>
         </div>
         {streamedData && (

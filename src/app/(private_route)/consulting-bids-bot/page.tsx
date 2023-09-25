@@ -9,6 +9,7 @@ import { leftArrowIcon } from "@/helpers/iconsProvider";
 
 import CoverLetterFileUploader from "@/components/dashboard/cover-letter-bot/CoverLetterFileUploader";
 import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
+import Button from "@/components/utilities/form-elements/Button";
 
 const ConsultingBidsGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -226,7 +227,8 @@ const ConsultingBidsGenerator = () => {
 
           <div className="flex flex-row gap-4">
             <div>
-              <button
+              <Button
+                type="button"
                 disabled={
                   msgLoading ||
                   !session?.user?.email ||
@@ -238,7 +240,7 @@ const ConsultingBidsGenerator = () => {
                   jobDescription === ""
                 }
                 onClick={() => handleGenerate()}
-                className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  disabled:bg-emerald-300"
+                className="btn btn-outline-primary-dark"
               >
                 <div className="flex flex-row gap-2">
                   <svg
@@ -257,13 +259,14 @@ const ConsultingBidsGenerator = () => {
                   </svg>
                   <span>{msgLoading ? "Please wait..." : "Generate"}</span>
                 </div>
-              </button>
+              </Button>
             </div>
             <ReactToPrint
               trigger={() => (
-                <button
+                <Button
+                  type="button"
                   disabled={!show || msgLoading || !session?.user?.email}
-                  className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  disabled:bg-emerald-300"
+                  className="btn btn-outline-primary-dark"
                 >
                   <div className="flex flex-row gap-2">
                     <svg
@@ -285,7 +288,7 @@ const ConsultingBidsGenerator = () => {
                             To download choose destination "save as PDF"
                           </span> */}
                   </div>
-                </button>
+                </Button>
               )}
               content={() => componentRef.current}
             />

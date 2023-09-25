@@ -1,14 +1,19 @@
 import Link from "next/link";
-import { type } from "os";
 interface Props {
   type: "button" | "link";
   disabled?: boolean;
-  className?: string;
   onClick?: () => void;
-  childern: React.ReactNode;
+  className?: string;
+  children?: React.ReactNode;
 }
 
-const Button = ({ type, disabled, onClick, className, childern }: any) => {
+const Button: React.FC<Props> = ({
+  type,
+  disabled,
+  onClick,
+  className,
+  children,
+}: any) => {
   if (type === "button") {
     return (
       <button
@@ -16,7 +21,7 @@ const Button = ({ type, disabled, onClick, className, childern }: any) => {
         onClick={onClick ? onClick : console.log("clicked")}
         disabled={disabled ? disabled : false}
       >
-        {childern}
+        {children}
       </button>
     );
   }

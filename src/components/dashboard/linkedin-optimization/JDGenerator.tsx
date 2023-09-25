@@ -9,6 +9,7 @@ import {
   setIsLoading,
   setUserData,
 } from "@/store/userDataSlice";
+import Button from "@/components/utilities/form-elements/Button";
 
 interface Props {
   setJobDesc: React.Dispatch<React.SetStateAction<string>>;
@@ -110,10 +111,11 @@ const JDGenerator = ({ setJobDesc }: Props) => {
 
         <div className="flex flex-row gap-4">
           <div>
-            <button
+            <Button
+              type="button"
               disabled={msgLoading || !session?.user?.email}
               onClick={() => handleGenerate()}
-              className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:bg-emerald-300"
+              className="btn btn-outline-primary-dark"
             >
               <div className="flex flex-row gap-2">
                 <svg
@@ -134,7 +136,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                   {msgLoading ? "Please wait..." : "Generate Job Description"}
                 </span>
               </div>
-            </button>
+            </Button>
           </div>
         </div>
         {streamedData && (

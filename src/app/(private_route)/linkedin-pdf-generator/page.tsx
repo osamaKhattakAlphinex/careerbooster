@@ -11,6 +11,7 @@ import {
 import ReactToPrint from "react-to-print";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
+import Button from "@/components/utilities/form-elements/Button";
 
 const ResumeCreator = () => {
   const componentRef = useRef<any>(null);
@@ -210,12 +211,13 @@ const ResumeCreator = () => {
 
           <div className="flex flex-row gap-4">
             <div>
-              <button
+              <Button
+                type="button"
                 disabled={
                   msgLoading || !session?.user?.email || !aiInputUserData
                 }
                 onClick={() => handleGenerate()}
-                className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:bg-emerald-300"
+                className="btn btn-outline-primary-dark"
               >
                 <div className="flex flex-row gap-2">
                   <svg
@@ -234,13 +236,14 @@ const ResumeCreator = () => {
                   </svg>
                   <span>{msgLoading ? "Please wait..." : "Generate"}</span>
                 </div>
-              </button>
+              </Button>
             </div>
             <ReactToPrint
               trigger={() => (
-                <button
+                <Button
+                  type="button"
                   disabled={!show || msgLoading || !session?.user?.email}
-                  className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:bg-emerald-300"
+                  className="btn btn-outline-primary-dark"
                 >
                   <div className="flex flex-row gap-2">
                     <svg
@@ -262,7 +265,7 @@ const ResumeCreator = () => {
                             To download choose destination "save as PDF"
                           </span> */}
                   </div>
-                </button>
+                </Button>
               )}
               content={() => componentRef.current}
             />
