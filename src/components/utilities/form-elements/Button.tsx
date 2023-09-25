@@ -1,38 +1,32 @@
 import Link from "next/link";
-
+import { type } from "os";
 interface Props {
   type: "button" | "link";
   disabled?: boolean;
-  onClick?: () => void;
   className?: string;
-  children?: React.ReactNode;
+  onClick?: () => void;
+  childern: React.ReactNode;
 }
 
-const Button: React.FC<Props> = ({
-  type,
-  disabled,
-  onClick,
-  className,
-  children,
-}) => {
+const Button = ({ type, disabled, onClick, className, childern }: any) => {
   if (type === "button") {
     return (
       <button
-        className={className}
+        className={className ? className : ""}
+        onClick={onClick ? onClick : console.log("clicked")}
         disabled={disabled ? disabled : false}
-        onClick={onClick}
       >
-        {children}
+        {childern}
       </button>
     );
   }
-
   if (type === "link") {
-    return (
-      <Link href="/">
-        <a className="btn btn-outline-primary-dark">Link</a>
-      </Link>
-    );
+    <Link href="#">
+      <a href="" className="btn btn-outline-primary-dark">
+        link
+      </a>
+    </Link>;
   }
 };
+
 export default Button;
