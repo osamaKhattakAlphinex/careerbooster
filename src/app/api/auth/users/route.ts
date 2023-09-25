@@ -18,6 +18,7 @@ interface NewUserRequest {
   education?: Education[];
   experience?: WorkExperience[];
   skills?: string[];
+  userPackage?: string;
 }
 interface NewUserResponse {
   id: string;
@@ -25,6 +26,7 @@ interface NewUserResponse {
   lastName: string;
   email: string;
   role: string;
+  userPackage?: string;
   // phone?: string;
   // contact?: {
   //   country?: string;

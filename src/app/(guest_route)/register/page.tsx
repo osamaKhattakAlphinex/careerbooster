@@ -67,6 +67,7 @@ const RegisterNew = () => {
           email: values.email,
           password: values.password,
           file: values.file,
+          userPackage: "6511982f7205dfb643a1d6a0",
         };
 
         axios

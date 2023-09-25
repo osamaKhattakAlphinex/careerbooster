@@ -132,7 +132,7 @@ const Header = () => {
                   Contact
                 </Link>
               </li>
-              {isAuth ? (
+              {/* {isAuth ? (
                 <button className="nav-link" onClick={() => signOut()}>
                   Logout
                 </button>
@@ -140,7 +140,7 @@ const Header = () => {
                 <Link className="nav-link" href="/login">
                   Login
                 </Link>
-              )}
+              )} */}
             </ul>
             <div className="visible">
               {isAuth ? (
