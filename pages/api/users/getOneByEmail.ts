@@ -3,23 +3,24 @@ import startDB from "@/lib/db";
 import User from "@/db/schemas/User";
 
 const handler: NextApiHandler = async (req, res) => {
-  const email = req?.query?.email;
-  if (email) {
+  try {
+    const email = req?.query?.email;
+    if (!email) {
+      return res.status(400).json({ error: "Bad Request" });
+    }
+
     await startDB();
-    User.findOne({ email: email })
-      .select("-password")
-      .then((user) => {
-        if (user) {
-          return res.status(200).json({ success: true, user });
-        } else {
-          return res.status(500).json({ error: `User not found` });
-        }
-      })
-      .catch((error) => {
-        return res.status(500).json({ error: `Error getting User` });
-      });
-  } else {
-    return res.status(500).json({ error: "Bad Request" });
+
+    const user = await User.findOne({ email: email }).select("-password");
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.status(200).json({ success: true, user });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 export default handler;
