@@ -3,11 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactToPrint from "react-to-print";
 import DownloadDocx from "../resume-templates/template-1/DownloadDocx";
 import { setState } from "@/store/resumeSlice";
-<<<<<<< HEAD
 import Button from "@/components/utilities/form-elements/Button";
-=======
 import Link from "next/link";
->>>>>>> master
 
 interface Props {
   handleGenerate: () => Promise<void>;
