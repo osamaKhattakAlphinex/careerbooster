@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    externals : { canvas: {} }
+  externals: { canvas: {} },
+};
 
-
-}
-
-module.exports = nextConfig
+module.exports = nextConfig;
