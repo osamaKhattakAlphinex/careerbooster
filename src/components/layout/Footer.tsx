@@ -17,19 +17,19 @@ const Footer = () => {
                   <h6 className="text-white mb-2">Career Booster</h6>
                   <ul className="link-list list-unstyled mb-0">
                     <li>
-                      <Link href="about.html">About</Link>
+                      <Link href="/about">About</Link>
                     </li>
                     <li>
-                      <Link href="blog.html">Blog</Link>
+                      <Link href="/blog">Blog</Link>
                     </li>
                     <li>
-                      <Link href="login.html">Sign in</Link>
+                      <Link href="/login">Sign in</Link>
                     </li>
                     <li>
-                      <Link href="register.html">Register</Link>
+                      <Link href="/register">Register</Link>
                     </li>
                     <li>
-                      <Link href="contact.html">Contact</Link>
+                      <Link href="/contact">Contact</Link>
                     </li>
                   </ul>
                 </div>
@@ -39,21 +39,19 @@ const Footer = () => {
                   <h6 className="text-white mb-2">Use Cases</h6>
                   <ul className="link-list list-unstyled mb-0">
                     <li>
-                      <Link href="use-cases-details.html">AI writer</Link>
+                      <Link href="/use-cases">AI writer</Link>
                     </li>
                     <li>
-                      <Link href="use-cases-details.html">Businesses AI</Link>
+                      <Link href="/use-cases">Businesses AI</Link>
                     </li>
                     <li>
-                      <Link href="use-cases-details.html">AI Blog writer</Link>
+                      <Link href="/use-cases">AI Blog writer</Link>
                     </li>
                     <li>
-                      <Link href="use-cases-details.html">
-                        AI Content Creator
-                      </Link>
+                      <Link href="/use-cases">AI Content Creator</Link>
                     </li>
                     <li>
-                      <Link href="use-cases-details.html">Article write</Link>
+                      <Link href="/use-cases">Article write</Link>
                     </li>
                   </ul>
                 </div>
@@ -184,7 +182,7 @@ const Footer = () => {
             Copyright
             <span className="text-primary-dark">
               {" "}
-              &copy; NausalTechnologies 2023
+              &copy; CareerBooster 2023
             </span>
             .
           </p>
