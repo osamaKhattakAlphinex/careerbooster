@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactToPrint from "react-to-print";
 import DownloadDocx from "../resume-templates/template-1/DownloadDocx";
 import { setState } from "@/store/resumeSlice";
+import Link from "next/link";
 
 interface Props {
   handleGenerate: () => Promise<void>;
@@ -43,6 +44,13 @@ const GenerateNewResumeCard = ({ handleGenerate, componentRef }: Props) => {
                     )
                   }
                 />
+                <p className="p-2 text-orange-400">
+                  It seems that your profile was auto created please{" "}
+                  <Link href="/profile-review" className="text-orange-400">
+                    review it
+                  </Link>{" "}
+                  to get better results
+                </p>
               </div>
               <div className="w-1/2 p-2 pl-4">
                 <h3 className="text-lg font-medium ">Instructions</h3>
