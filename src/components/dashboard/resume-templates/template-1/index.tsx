@@ -36,6 +36,8 @@ const EditableField = ({
   const [isEditing, setIsEditing] = useState(false);
   const [editedValue, setEditedValue] = useState(value);
 
+  const userData = useSelector((state: any) => state.userData);
+
   const handleBlur = () => {
     setIsEditing(false);
     onSave(editedValue);
@@ -47,7 +49,7 @@ const EditableField = ({
       onBlur={handleBlur}
       className=" "
     >
-      {isEditing ? (
+      {userData?.userPackage?.limit?.can_edit_resume && isEditing ? (
         <>
           {type === "textarea" ? (
             <textarea
@@ -88,6 +90,8 @@ const ResumeTemplate1 = ({
 }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
+
+  //
 
   return (
     <div className="w-full first-page text-gray-900">
