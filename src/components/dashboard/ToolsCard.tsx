@@ -46,7 +46,7 @@ const ToolsCard = () => {
         <li className="w-1/3 ">
           <div className="h-[225px] min-h-full p-4 border border-gray-200 rounded-lg shadow">
             {shockIcon}
-            <Link href="/resume-creator" className="no-underline">
+            <Link href="/resume-builder" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
                 Resume Builder
               </h5>
@@ -56,7 +56,7 @@ const ToolsCard = () => {
             </p>
             <Link
               className=" bg-gray-800 text-xs text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
-              href="/resume-creator"
+              href="/resume-builder"
             >
               Launch
             </Link>

@@ -19,6 +19,15 @@ interface NewUserRequest {
   experience?: WorkExperience[];
   skills?: string[];
   userPackage?: string;
+  resumes_generation: Number;
+  keywords_generation: Number;
+  headline_generation: Number;
+  about_generation: Number;
+  job_desc_generation: Number;
+  cover_letter_generation: Number;
+  pdf_files_upload: Number;
+  review_resume: Number;
+  consulting_bids_generation: Number;
 }
 interface NewUserResponse {
   id: string;

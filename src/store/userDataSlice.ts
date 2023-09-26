@@ -51,6 +51,17 @@ interface UserDataSlice {
   wizardCompleted: boolean;
   wizardReviewed: boolean;
   userPackage?: any;
+  userPackageUsed: {
+    resumes_generation: Number;
+    keywords_generation: Number;
+    headline_generation: Number;
+    about_generation: Number;
+    job_desc_generation: Number;
+    cover_letter_generation: Number;
+    pdf_files_upload: Number;
+    review_resume: Number;
+    consulting_bids_generation: Number;
+  };
 }
 
 const initialState: UserDataSlice = {
@@ -77,6 +88,17 @@ const initialState: UserDataSlice = {
   wizardCompleted: false,
   wizardReviewed: false,
   userPackage: {},
+  userPackageUsed: {
+    resumes_generation: 0,
+    keywords_generation: 0,
+    headline_generation: 0,
+    about_generation: 0,
+    job_desc_generation: 0,
+    cover_letter_generation: 0,
+    pdf_files_upload: 0,
+    review_resume: 0,
+    consulting_bids_generation: 0,
+  },
 };
 
 const userDataSlice = createSlice({

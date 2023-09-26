@@ -25,13 +25,13 @@ import {
 // import { exitFullScreenIcon, fullScreenIcon } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { makeid } from "@/helpers/makeid";
-import RecentResumeCard from "@/components/dashboard/resume-creator/RecenResumesCard";
-import GenerateNewResumeCard from "@/components/dashboard/resume-creator/GenerateNewResumeCard";
+import RecentResumeCard from "@/components/dashboard/resume-builder/RecenResumesCard";
+import GenerateNewResumeCard from "@/components/dashboard/resume-builder/GenerateNewResumeCard";
 import { checkIconSmall, leftArrowIcon } from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
 import Link from "next/link";
 
-const ResumeCreator = () => {
+const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
 
   const confettiConfig = {
@@ -419,7 +419,7 @@ const ResumeCreator = () => {
 
   return (
     <>
-      <div className="my-5 ml-10">
+      <div className="w-[95%] my-5 ml-10 flex items-center justify-between mt-10">
         <Link
           href="/dashboard"
           className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
@@ -427,6 +427,19 @@ const ResumeCreator = () => {
           {leftArrowIcon}
           Dashboard
         </Link>
+
+        <div className="w-1/3">
+          <div className="w-full flex justify-between mb-1">
+            <span className="text-base font-medium ">Usage limit</span>
+            <span className="text-sm font-medium ">10 out of 10</span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+            <div
+              className="bg-green-600 h-2.5 rounded-full"
+              style={{ width: "45%" }}
+            ></div>
+          </div>
+        </div>
       </div>
       {showAlert && (
         <div
@@ -473,4 +486,4 @@ const ResumeCreator = () => {
     </>
   );
 };
-export default ResumeCreator;
+export default ResumeBuilder;
