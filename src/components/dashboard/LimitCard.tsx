@@ -4,11 +4,17 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 interface LimitCardProps {
+  title: string;
+  limit: number;
+  used: number;
   setAvailablePercentage: React.Dispatch<React.SetStateAction<number>>;
   setPercentageCalculated: React.Dispatch<React.SetStateAction<boolean>>;
   availablePercentage: number;
 }
 const LimitCard: React.FC<LimitCardProps> = ({
+  title,
+  limit,
+  used,
   setAvailablePercentage,
   setPercentageCalculated,
   availablePercentage,
@@ -18,31 +24,22 @@ const LimitCard: React.FC<LimitCardProps> = ({
 
   // set availalbe percentage when userdata changes
   useEffect(() => {
-    if (userData?.userPackage && userData?.userPackageUsed) {
-      const availableLimit =
-        userData?.userPackage?.limit?.resumes_generation -
-        userData?.userPackageUsed?.resumes_generation;
-      const percentage =
-        (availableLimit / userData?.userPackage?.limit?.resumes_generation) *
-        100;
+    const availableLimit = limit - used;
+    const percentage = (availableLimit / limit) * 100;
 
-      setAvailablePercentage(percentage);
-      setPercentageCalculated(true);
-    }
-  }, [userData]);
+    setAvailablePercentage(percentage);
+    setPercentageCalculated(true);
+  }, [userData, limit, used]);
 
   return (
     <div className="w-1/3">
       <div className="w-full flex justify-between mb-1">
-        <span className="text-base font-medium ">Generations Available</span>
-        {!isNaN(userData?.userPackage?.limit?.resumes_generation) &&
-          !isNaN(userData?.userPackageUsed?.resumes_generation) && (
-            <span className="text-sm font-medium ">
-              {Number(userData?.userPackage?.limit?.resumes_generation) -
-                Number(userData?.userPackageUsed?.resumes_generation)}{" "}
-              out of {Number(userData?.userPackage?.limit?.resumes_generation)}
-            </span>
-          )}
+        <span className="text-base font-medium ">{title}</span>
+        {!isNaN(limit) && !isNaN(used) && (
+          <span className="text-sm font-medium ">
+            {Number(limit) - Number(used)} out of {Number(limit)}
+          </span>
+        )}
       </div>
       <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
         <div

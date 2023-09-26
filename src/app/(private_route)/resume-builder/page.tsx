@@ -448,6 +448,9 @@ const ResumeBuilder = () => {
         </Link>
 
         <LimitCard
+          title="Generations Available"
+          limit={userData?.userPackage?.limit?.resumes_generation}
+          used={userData?.userPackageUsed?.resumes_generation}
           setPercentageCalculated={setPercentageCalculated}
           availablePercentage={availablePercentage}
           setAvailablePercentage={setAvailablePercentage}
