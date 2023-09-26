@@ -73,7 +73,7 @@ const GenerateNewResumeCard = ({
             </div>
           </div>
           <div className="flex flex-row gap-4">
-            {availablePercentage !== 0 && (
+            {!isNaN(availablePercentage) && availablePercentage !== 0 && (
               <div>
                 <button
                   disabled={

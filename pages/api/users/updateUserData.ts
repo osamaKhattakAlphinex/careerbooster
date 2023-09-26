@@ -6,6 +6,7 @@ import User from "@/db/schemas/User";
 const handler: NextApiHandler = async (req, res) => {
   const data = req?.body?.data;
 
+  // $2b$10$WiQ4hv9c12fXQURVUR7liegHJrZ9YXyaIXOC/nbMgQnxvR3yeq6oi
   if (data) {
     // update user
     await startDB();

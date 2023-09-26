@@ -38,6 +38,11 @@ const handler: NextApiHandler = async (req, res) => {
       }
     }
 
+    // Add one to resumes_generation in userPackageUsed
+    if (user.userPackageUsed && user.userPackageUsed.resumes_generation < 5) {
+      user.userPackageUsed.resumes_generation = user.resumes.length;
+    }
+
     // Save the updated user document
     await user.save();
 

@@ -30,6 +30,7 @@ import GenerateNewResumeCard from "@/components/dashboard/resume-builder/Generat
 import { checkIconSmall, leftArrowIcon } from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
 import Link from "next/link";
+import LimitCard from "@/components/dashboard/LimitCard";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -395,6 +396,17 @@ const ResumeBuilder = () => {
         const { user } = await res.json();
         dispatch(setUserData(user));
 
+        // get user package details
+        const res2 = await fetch(
+          `/api/users/getUserPackageDetails?id=${user?.userPackage}`
+        );
+        const data = await res2.json();
+        if (data.success) {
+          const { userPackage } = data;
+          // set user package details to redux
+          dispatch(setField({ name: "userPackage", value: userPackage }));
+        }
+
         // show alert for 2 seconds using setTimeout
         setShowAlert(true);
         setTimeout(() => {
@@ -424,17 +436,6 @@ const ResumeBuilder = () => {
     }
   }, [userData]);
 
-  // set availalbe percentage when userdata changes
-  useEffect(() => {
-    setAvailablePercentage(
-      ((userData?.userPackage?.limit?.resumes_generation -
-        userData?.userPackageUsed?.resumes_generation) /
-        userData?.userPackage?.limit?.resumes_generation) *
-        100
-    );
-    setPercentageCalculated(true);
-  }, [userData]);
-
   return (
     <>
       <div className="w-[95%] my-5 ml-10 flex items-center justify-between mt-10">
@@ -446,28 +447,11 @@ const ResumeBuilder = () => {
           Dashboard
         </Link>
 
-        <div className="w-1/3">
-          <div className="w-full flex justify-between mb-1">
-            <span className="text-base font-medium ">
-              Generations Available
-            </span>
-            <span className="text-sm font-medium ">
-              {userData?.userPackage?.limit?.resumes_generation -
-                userData?.userPackageUsed?.resumes_generation}{" "}
-              out of {userData?.userPackage?.limit?.resumes_generation}
-            </span>
-          </div>
-          <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-            <div
-              className={`bg-${
-                availablePercentage > 30 ? "green" : "red"
-              }-600 h-2.5 rounded-full`}
-              style={{
-                width: `${availablePercentage}%`,
-              }}
-            ></div>
-          </div>
-        </div>
+        <LimitCard
+          setPercentageCalculated={setPercentageCalculated}
+          availablePercentage={availablePercentage}
+          setAvailablePercentage={setAvailablePercentage}
+        />
       </div>
       {showAlert && (
         <div
