@@ -55,11 +55,12 @@ const ResumeBuilder = () => {
   const componentRef = useRef<any>(null);
   const { data: session } = useSession();
 
-  // streamed data
+  // Local States
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [streamedJDData, setStreamedJDData] = useState("");
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
 
   // Redux
   const dispatch = useDispatch();
@@ -414,8 +415,19 @@ const ResumeBuilder = () => {
         phone: userData?.phone,
         skills: userData?.skills,
       });
+
+      setAvailablePercentage(
+        ((userData?.userPackage?.limit?.resumes_generation -
+          userData?.userPackageUsed?.resumes_generation) /
+          userData?.userPackage?.limit?.resumes_generation) *
+          100
+      );
     }
   }, [userData]);
+
+  if (!availablePercentage) {
+    return <></>;
+  }
 
   return (
     <>
@@ -430,13 +442,21 @@ const ResumeBuilder = () => {
 
         <div className="w-1/3">
           <div className="w-full flex justify-between mb-1">
-            <span className="text-base font-medium ">Usage limit</span>
-            <span className="text-sm font-medium ">10 out of 10</span>
+            <span className="text-base font-medium ">Generation Available</span>
+            <span className="text-sm font-medium ">
+              {userData?.userPackage?.limit?.resumes_generation -
+                userData?.userPackageUsed?.resumes_generation}{" "}
+              out of {userData?.userPackage?.limit?.resumes_generation}
+            </span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
             <div
-              className="bg-green-600 h-2.5 rounded-full"
-              style={{ width: "45%" }}
+              className={`bg-${
+                availablePercentage > 30 ? "green" : "red"
+              }-600 h-2.5 rounded-full`}
+              style={{
+                width: `${availablePercentage}%`,
+              }}
             ></div>
           </div>
         </div>
