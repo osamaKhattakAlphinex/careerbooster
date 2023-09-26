@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, use } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/dashboard/resume-templates/template-1";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,6 +61,8 @@ const ResumeBuilder = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
+  const [percentageCalculated, setPercentageCalculated] =
+    useState<boolean>(false);
 
   // Redux
   const dispatch = useDispatch();
@@ -72,7 +74,11 @@ const ResumeBuilder = () => {
     // reset resume
     dispatch(resetResume(resumeData.state));
 
-    if (resumeData.state.jobPosition !== "" && session?.user?.email) {
+    if (
+      resumeData.state.jobPosition !== "" &&
+      session?.user?.email &&
+      percentageCalculated
+    ) {
       dispatch(setState({ name: "resumeLoading", value: true }));
       dispatch(setId(""));
       getBasicInfo();
@@ -415,19 +421,19 @@ const ResumeBuilder = () => {
         phone: userData?.phone,
         skills: userData?.skills,
       });
-
-      setAvailablePercentage(
-        ((userData?.userPackage?.limit?.resumes_generation -
-          userData?.userPackageUsed?.resumes_generation) /
-          userData?.userPackage?.limit?.resumes_generation) *
-          100
-      );
     }
   }, [userData]);
 
-  if (!availablePercentage) {
-    return <></>;
-  }
+  // set availalbe percentage when userdata changes
+  useEffect(() => {
+    setAvailablePercentage(
+      ((userData?.userPackage?.limit?.resumes_generation -
+        userData?.userPackageUsed?.resumes_generation) /
+        userData?.userPackage?.limit?.resumes_generation) *
+        100
+    );
+    setPercentageCalculated(true);
+  }, [userData]);
 
   return (
     <>
@@ -442,7 +448,9 @@ const ResumeBuilder = () => {
 
         <div className="w-1/3">
           <div className="w-full flex justify-between mb-1">
-            <span className="text-base font-medium ">Generation Available</span>
+            <span className="text-base font-medium ">
+              Generations Available
+            </span>
             <span className="text-sm font-medium ">
               {userData?.userPackage?.limit?.resumes_generation -
                 userData?.userPackageUsed?.resumes_generation}{" "}
@@ -477,6 +485,7 @@ const ResumeBuilder = () => {
       <GenerateNewResumeCard
         handleGenerate={handleGenerate}
         componentRef={componentRef}
+        availablePercentage={availablePercentage}
       />
 
       <div className="flex justify-center items-center">
