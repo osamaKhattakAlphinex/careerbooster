@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, use } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/dashboard/resume-templates/template-1";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,13 +25,14 @@ import {
 // import { exitFullScreenIcon, fullScreenIcon } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { makeid } from "@/helpers/makeid";
-import RecentResumeCard from "@/components/dashboard/resume-creator/RecenResumesCard";
-import GenerateNewResumeCard from "@/components/dashboard/resume-creator/GenerateNewResumeCard";
+import RecentResumeCard from "@/components/dashboard/resume-builder/RecenResumesCard";
+import GenerateNewResumeCard from "@/components/dashboard/resume-builder/GenerateNewResumeCard";
 import { checkIconSmall, leftArrowIcon } from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
 import Link from "next/link";
+import LimitCard from "@/components/dashboard/LimitCard";
 
-const ResumeCreator = () => {
+const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
 
   const confettiConfig = {
@@ -55,11 +56,14 @@ const ResumeCreator = () => {
   const componentRef = useRef<any>(null);
   const { data: session } = useSession();
 
-  // streamed data
+  // Local States
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [streamedJDData, setStreamedJDData] = useState("");
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
+  const [percentageCalculated, setPercentageCalculated] =
+    useState<boolean>(false);
 
   // Redux
   const dispatch = useDispatch();
@@ -71,7 +75,11 @@ const ResumeCreator = () => {
     // reset resume
     dispatch(resetResume(resumeData.state));
 
-    if (resumeData.state.jobPosition !== "" && session?.user?.email) {
+    if (
+      resumeData.state.jobPosition !== "" &&
+      session?.user?.email &&
+      percentageCalculated
+    ) {
       dispatch(setState({ name: "resumeLoading", value: true }));
       dispatch(setId(""));
       getBasicInfo();
@@ -388,6 +396,17 @@ const ResumeCreator = () => {
         const { user } = await res.json();
         dispatch(setUserData(user));
 
+        // get user package details
+        const res2 = await fetch(
+          `/api/users/getUserPackageDetails?id=${user?.userPackage}`
+        );
+        const data = await res2.json();
+        if (data.success) {
+          const { userPackage } = data;
+          // set user package details to redux
+          dispatch(setField({ name: "userPackage", value: userPackage }));
+        }
+
         // show alert for 2 seconds using setTimeout
         setShowAlert(true);
         setTimeout(() => {
@@ -419,7 +438,7 @@ const ResumeCreator = () => {
 
   return (
     <>
-      <div className="my-5 ml-10">
+      <div className="w-[95%] my-5 ml-10 flex items-center justify-between mt-10">
         <Link
           href="/dashboard"
           className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
@@ -427,6 +446,12 @@ const ResumeCreator = () => {
           {leftArrowIcon}
           Dashboard
         </Link>
+
+        <LimitCard
+          setPercentageCalculated={setPercentageCalculated}
+          availablePercentage={availablePercentage}
+          setAvailablePercentage={setAvailablePercentage}
+        />
       </div>
       {showAlert && (
         <div
@@ -444,6 +469,7 @@ const ResumeCreator = () => {
       <GenerateNewResumeCard
         handleGenerate={handleGenerate}
         componentRef={componentRef}
+        availablePercentage={availablePercentage}
       />
 
       <div className="flex justify-center items-center">
@@ -473,4 +499,4 @@ const ResumeCreator = () => {
     </>
   );
 };
-export default ResumeCreator;
+export default ResumeBuilder;

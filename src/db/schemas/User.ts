@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 import bcrypt from "bcrypt";
+import UserPackage from "@/db/schemas/UserPackage";
 
 interface Methods {
   comparePassword(password: string): Promise<boolean>;
@@ -50,6 +51,21 @@ const UserSchema = new Schema(
     wizardReviewed: {
       type: Boolean,
       default: false,
+    },
+    userPackage: {
+      type: Schema.Types.ObjectId,
+      ref: "UserPackage",
+    },
+    userPackageUsed: {
+      resumes_generation: Number,
+      keywords_generation: Number,
+      headline_generation: Number,
+      about_generation: Number,
+      job_desc_generation: Number,
+      cover_letter_generation: Number,
+      pdf_files_upload: Number,
+      review_resume: Number,
+      consulting_bids_generation: Number,
     },
   },
 

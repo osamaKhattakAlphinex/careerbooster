@@ -24,15 +24,15 @@ const ToolsCard = () => {
       </h5>
       <ul className="flex flex-row gap-4 mr-10  pl-0">
         <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full p-4 border border-gray-200 rounded-lg shadow">
+          <div className="h-[250px] min-h-full p-4 border border-gray-200 rounded-lg shadow">
             {chatIcon}
             <Link href="/chatAI" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight">
-                Custom AI Chat Bot
+                Career Coach
               </h5>
             </Link>
             <p className="w-full mb-4 text-xs">
-              This custom AI Chat bot is trained on your data and answers
+              This Career Coach Chatbot is trained on your data and answers
               according to your Profile
             </p>
             <Link
@@ -44,9 +44,9 @@ const ToolsCard = () => {
           </div>
         </li>
         <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full p-4 border border-gray-200 rounded-lg shadow">
+          <div className="h-[250px] min-h-full p-4 border border-gray-200 rounded-lg shadow">
             {shockIcon}
-            <Link href="/resume-creator" className="no-underline">
+            <Link href="/resume-builder" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
                 Resume Builder
               </h5>
@@ -56,36 +56,14 @@ const ToolsCard = () => {
             </p>
             <Link
               className=" bg-gray-800 text-xs text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
-              href="/resume-creator"
+              href="/resume-builder"
             >
               Launch
             </Link>
           </div>
         </li>
-        <li className="w-1/3">
-          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
-            {briefCaseIcon}
-            <Link href="/linkedin-pdf-generator" className="no-underline">
-              <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
-                LinkedIn PDF Generator
-              </h5>
-            </Link>
-            <p className="mb-4 text-xs  ">
-              Generate PDF Report for your LinkedIn Profile based on your
-              profile data
-            </p>
-            <Link
-              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
-              href="/linkedin-pdf-generator"
-            >
-              Launch
-            </Link>
-          </div>
-        </li>
-      </ul>
-      <ul className="flex flex-row gap-4 mr-10 mt-8 pl-0">
         <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
+          <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {brushIcon}
             <Link href="/linkedin-optimization" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
@@ -104,50 +82,31 @@ const ToolsCard = () => {
             </Link>
           </div>
         </li>
-        <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
-            {pencilIcon}
-            <Link href="/biography-writer" className="no-underline">
+        {/* <li className="w-1/3">
+          <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
+            {briefCaseIcon}
+            <Link href="/linkedin-pdf-generator" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
-                Biography Writer
+                LinkedIn PDF Generator
               </h5>
             </Link>
             <p className="mb-4 text-xs  ">
-              AI will write a biography for you. According to your profile data
+              Generate PDF Report for your LinkedIn Profile based on your
+              profile data
             </p>
             <Link
               className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
-              href="/biography-writer"
+              href="/linkedin-pdf-generator"
             >
               Launch
             </Link>
           </div>
-        </li>
-        <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
-            {documentTextIcon}
-            <Link href="/cover-letter-bot" className="no-underline">
-              <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
-                Cover Letter Generator
-              </h5>
-            </Link>
-            <p className="mb-4 text-xs  ">
-              Create customized cover letters for every job application in just
-              a few minutes. Tailoring your cover letter to each specific
-              position greatly increases your chances of landing interviews.
-            </p>
-            <Link
-              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
-              href="/cover-letter-bot"
-            >
-              Launch
-            </Link>
-          </div>
-        </li>
+        </li> */}
       </ul>
+
       <ul className="flex flex-row gap-4 mr-10 mt-8 pl-0">
         <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
+          <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {emailIconBig}
             <Link href="/email-bot" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
@@ -168,7 +127,7 @@ const ToolsCard = () => {
           </div>
         </li>
         <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
+          <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {checkBubbleIcon}
             <Link href="/review-resume-bot" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
@@ -189,7 +148,7 @@ const ToolsCard = () => {
           </div>
         </li>
         <li className="w-1/3 ">
-          <div className="h-[225px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
+          <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {trendingArrowIcon}
             <Link href="/consulting-bids-bot" className="no-underline">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
@@ -200,6 +159,48 @@ const ToolsCard = () => {
             <Link
               className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href="/consulting-bids-bot"
+            >
+              Launch
+            </Link>
+          </div>
+        </li>
+      </ul>
+      <ul className="flex flex-row gap-4 mr-10 mt-8 pl-0">
+        {/* <li className="w-1/3 ">
+          <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
+            {pencilIcon}
+            <Link href="/biography-writer" className="no-underline">
+              <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
+                Biography Writer
+              </h5>
+            </Link>
+            <p className="mb-4 text-xs  ">
+              AI will write a biography for you. According to your profile data
+            </p>
+            <Link
+              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              href="/biography-writer"
+            >
+              Launch
+            </Link>
+          </div>
+        </li> */}
+        <li className="w-1/3 ">
+          <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
+            {documentTextIcon}
+            <Link href="/cover-letter-bot" className="no-underline">
+              <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
+                Cover Letter Generator
+              </h5>
+            </Link>
+            <p className="mb-4 text-xs  ">
+              Create customized cover letters for every job application in just
+              a few minutes. Tailoring your cover letter to each specific
+              position greatly increases your chances of landing interviews.
+            </p>
+            <Link
+              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              href="/cover-letter-bot"
             >
               Launch
             </Link>

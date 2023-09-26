@@ -10,8 +10,13 @@ import Link from "next/link";
 interface Props {
   handleGenerate: () => Promise<void>;
   componentRef: any;
+  availablePercentage: number;
 }
-const GenerateNewResumeCard = ({ handleGenerate, componentRef }: Props) => {
+const GenerateNewResumeCard = ({
+  handleGenerate,
+  componentRef,
+  availablePercentage,
+}: Props) => {
   const { data: session } = useSession();
 
   // Redux
@@ -70,42 +75,82 @@ const GenerateNewResumeCard = ({ handleGenerate, componentRef }: Props) => {
             </div>
           </div>
           <div className="flex flex-row gap-4">
-            <div>
-              <Button
-                type="button"
-                disabled={
-                  resumeData.state.jobPosition === "" ||
-                  resumeData.state.resumeLoading ||
-                  !session?.user?.email
-                }
-                onClick={handleGenerate}
-                className="btn btn-outline-primary-dark"
-              >
-                <div className="flex flex-row gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className={`w-4 h-4 ${
-                      resumeData.state.resumeLoading ? "animate-spin" : ""
-                    }`}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                    />
-                  </svg>
-                  <span>
-                    {resumeData.state.resumeLoading
-                      ? "Please wait..."
-                      : "Generate New Resume"}
-                  </span>
-                </div>
-              </Button>
-            </div>
+            {!isNaN(availablePercentage) && availablePercentage !== 0 && (
+              <div>
+                <Button
+                  type="button"
+                  disabled={
+                    resumeData.state.jobPosition === "" ||
+                    resumeData.state.resumeLoading ||
+                    !session?.user?.email
+                  }
+                  onClick={handleGenerate}
+                  className="btn btn-outline-primary-dark"
+                >
+                  <div className="flex flex-row gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className={`w-4 h-4 ${
+                        resumeData.state.resumeLoading ? "animate-spin" : ""
+                      }`}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                      />
+                    </svg>
+                    <span>
+                      {resumeData.state.resumeLoading
+                        ? "Please wait..."
+                        : "Generate New Resume"}
+                    </span>
+                  </div>
+                </Button>
+              </div>
+            )}
+
+            {/* {!isNaN(availablePercentage) && availablePercentage !== 0 && (
+              <div>
+                <button
+                  disabled={
+                    resumeData.state.jobPosition === "" ||
+                    resumeData.state.resumeLoading ||
+                    !session?.user?.email
+                  }
+                  onClick={handleGenerate}
+                  className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  disabled:bg-emerald-300"
+                >
+                  <div className="flex flex-row gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className={`w-4 h-4 ${
+                        resumeData.state.resumeLoading ? "animate-spin" : ""
+                      }`}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                      />
+                    </svg>
+                    <span>
+                      {resumeData.state.resumeLoading
+                        ? "Please wait..."
+                        : "Generate New Resume"}
+                    </span>
+                  </div>
+                </button>
+              </div>
+            )} */}
 
             {resumeData && (
               <DownloadDocx

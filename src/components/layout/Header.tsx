@@ -41,6 +41,17 @@ const Header = () => {
         dispatch(
           setField({ name: "wizardCompleted", value: user.wizardCompleted })
         );
+
+        // get user package details
+        const res2 = await fetch(
+          `/api/users/getUserPackageDetails?id=${user?.userPackage}`
+        );
+        const data = await res2.json();
+        if (data.success) {
+          const { userPackage } = data;
+          // set user package details to redux
+          dispatch(setField({ name: "userPackage", value: userPackage }));
+        }
       } catch (err) {
         console.log(err);
       }
@@ -132,7 +143,7 @@ const Header = () => {
                   Contact
                 </Link>
               </li>
-              {isAuth ? (
+              {/* {isAuth ? (
                 <button className="nav-link" onClick={() => signOut()}>
                   Logout
                 </button>
@@ -140,7 +151,7 @@ const Header = () => {
                 <Link className="nav-link" href="/login">
                   Login
                 </Link>
-              )}
+              )} */}
             </ul>
             <div className="visible">
               {isAuth ? (
@@ -169,9 +180,9 @@ const Header = () => {
                           aria-hidden="true"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           />
                         </svg>
                       </button>

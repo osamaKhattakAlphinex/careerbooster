@@ -23,7 +23,7 @@ const SingleRecentResumeCard = ({
 
   const handleOnView = () => {
     if (source != "") {
-      router.replace("/resume-creator");
+      router.replace("/resume-builder");
     }
     dispatch(setResume(resume));
   };

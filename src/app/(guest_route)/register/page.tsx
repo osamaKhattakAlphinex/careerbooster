@@ -67,6 +67,18 @@ const RegisterNew = () => {
           email: values.email,
           password: values.password,
           file: values.file,
+          userPackage: "6511982f7205dfb643a1d6a0",
+          userPackageUsed: {
+            resumes_generation: 0,
+            keywords_generation: 0,
+            headline_generation: 0,
+            about_generation: 0,
+            job_desc_generation: 0,
+            cover_letter_generation: 0,
+            pdf_files_upload: 0,
+            review_resume: 0,
+            consulting_bids_generation: 0,
+          },
         };
 
         axios

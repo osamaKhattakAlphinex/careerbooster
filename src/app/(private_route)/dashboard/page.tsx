@@ -3,7 +3,7 @@ import ToolsCard from "@/components/dashboard/ToolsCard";
 // import TrainBotCard from "@/components/dashboard/TrainBotCard";
 import UploadedFilesCard from "@/components/dashboard/UploadedFilesCard";
 import WelcomeCard from "@/components/dashboard/WelcomeCard";
-import RecentResumeCard from "@/components/dashboard/resume-creator/RecenResumesCard";
+import RecentResumeCard from "@/components/dashboard/resume-builder/RecenResumesCard";
 
 const Dashboard = () => {
   return (

@@ -286,7 +286,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       firstName: register.stepOne.firstName,
       lastName: register.stepOne.lastName,
       email: userData.email,
-      password: register.stepEight.password,
       file: resume.uploadedFileName,
       phone: register.stepTwo.phoneNumber,
       contact: {

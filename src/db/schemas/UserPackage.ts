@@ -1,7 +1,28 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const PackageScehema = new Schema(
+export interface UserPackageData {
+  type: "monthly" | "yearly";
+  title: string;
+  amount: number;
+  status: "active" | "inactive";
+  features: string[];
+  category: "basic" | "standard" | "premium";
+  limit: {
+    resumes_generation: number;
+    can_edit_resume: boolean;
+    keywords_generation: number;
+    headline_generation: number;
+    about_generation: number;
+    job_desc_generation: number;
+    cover_letter_generation: number;
+    pdf_files_upload: number;
+    review_resume: number;
+    consulting_bids_generation: number;
+  };
+}
+
+const UserPackageScehema = new Schema(
   {
     type: {
       type: String,
@@ -11,6 +32,7 @@ const PackageScehema = new Schema(
     title: {
       type: String,
       required: true,
+      unique: true,
     },
     amount: {
       type: Number,
@@ -47,5 +69,5 @@ const PackageScehema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.Package ||
-  mongoose.model("Package", PackageScehema);
+export default mongoose.models.UserPackage ||
+  mongoose.model("UserPackage", UserPackageScehema);
