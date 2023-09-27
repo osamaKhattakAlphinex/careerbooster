@@ -364,6 +364,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     // if user package is not available (new user) redirect to subscribe page
     if (
       pathname !== "/subscribe" &&
+      pathname !== "/subscribed" &&
       userData.userPackage &&
       Object.keys(userData.userPackage).length === 0
     ) {

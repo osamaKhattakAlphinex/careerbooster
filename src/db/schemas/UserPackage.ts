@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 export interface UserPackageData {
+  _id?: string;
   type: "monthly" | "yearly";
   title: string;
   amount: number;
@@ -16,7 +17,7 @@ export interface UserPackageData {
     about_generation: number;
     job_desc_generation: number;
     cover_letter_generation: number;
-    email_generation: Number;
+    email_generation: number;
     pdf_files_upload: number;
     review_resume: number;
     consulting_bids_generation: number;

@@ -1,9 +1,6 @@
-import CTASection from "@/components/new-layout/Homepage/CTASection";
-import FAQSection from "@/components/new-layout/Homepage/FAQSection";
-import PricingSection from "@/components/new-layout/Homepage/PricingSection";
-import UseCases from "@/components/new-layout/Homepage/UseCases";
-import PageHeader from "@/components/new-layout/PageHeader";
+import Packages from "@/components/dashboard/checkout/Packages";
 import { Metadata } from "next";
+
 export const metadata: Metadata = {
   title: "CareerBooster.Ai-Pricing",
   description:
@@ -39,8 +36,26 @@ export const metadata: Metadata = {
 export default function SubscribePage() {
   return (
     <main className="flex-grow-1 mb-20">
-      {/* <!-- Pricing --> */}
-      <PricingSection />
+      <section className="py-10 py-lg-15">
+        <div className="container">
+          <div className="row justify-center mb-8">
+            <div className="col-lg-10">
+              <div className="text-center">
+                <h1
+                  className="text-white text-4xl"
+                  data-aos="fade-up-sm"
+                  data-aos-delay="100"
+                >
+                  Please choose a pricing plan to continue
+                </h1>
+              </div>
+            </div>
+          </div>
+          <div className="row g-6 pricing-table">
+            <Packages />
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
