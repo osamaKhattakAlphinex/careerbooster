@@ -42,15 +42,17 @@ const Header = () => {
           setField({ name: "wizardCompleted", value: user.wizardCompleted })
         );
 
-        // get user package details
-        const res2 = await fetch(
-          `/api/users/getUserPackageDetails?id=${user?.userPackage}`
-        );
-        const data = await res2.json();
-        if (data.success) {
-          const { userPackage } = data;
-          // set user package details to redux
-          dispatch(setField({ name: "userPackage", value: userPackage }));
+        if (user?.userPackage) {
+          // get user package details
+          const res2 = await fetch(
+            `/api/users/getUserPackageDetails?id=${user?.userPackage}`
+          );
+          const data = await res2.json();
+          if (data.success) {
+            const { userPackage } = data;
+            // set user package details to redux
+            dispatch(setField({ name: "userPackage", value: userPackage }));
+          }
         }
       } catch (err) {
         console.log(err);
@@ -106,14 +108,7 @@ const Header = () => {
           <div className="navbar-content-inner ms-lg-auto d-flex flex-column flex-lg-row align-lg-center gap-4 gap-lg-10 p-2 p-lg-0">
             <ul className="navbar-nav gap-lg-2 gap-xl-5 visible">
               <li className="nav-item dropdown">
-                <Link
-                  className="nav-link active"
-                  href="/"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  aria-current="page"
-                >
+                <Link className="nav-link active" href="/">
                   Home
                 </Link>
               </li>

@@ -34,7 +34,7 @@ const PricingSection = () => {
           >
             <div className="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-">
               <h3 className="text-primary-dark fw-medium mb-0">Free Forever</h3>
-              <h1 className="display-2 fw-semibold text-white mb-0 mt-4">
+              <h1 className="display-3 fw-semibold text-white mb-0 mt-4 !text-6xl">
                 $00
               </h1>
               {/* <!-- <p className="text-white lead fw-normal mt-4 mb-0">
@@ -42,7 +42,7 @@ const PricingSection = () => {
                   </p> --> */}
               <a
                 href="pricing-plan.html"
-                className="pricing-btn btn btn-lg w-full fs-4 lh-sm mt-9 btn-dark-blue-3"
+                className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9 btn-dark-blue-3"
               >
                 No Credit Card Required
               </a>
@@ -62,7 +62,7 @@ const PricingSection = () => {
           >
             <div className="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-">
               <h3 className="text-primary-dark fw-medium mb-0">Standard</h3>
-              <h1 className="display-2 fw-semibold text-white mb-0 mt-4">
+              <h1 className="display-2 fw-semibold text-white mb-0 mt-4 !text-6xl">
                 $99
               </h1>
               {/* <!-- <p className="text-white lead fw-normal mt-4 mb-0">
@@ -70,7 +70,7 @@ const PricingSection = () => {
                   </p> --> */}
               <a
                 href="pricing-plan.html"
-                className="pricing-btn btn btn-lg w-full fs-4 lh-sm mt-9 btn-dark-blue-3"
+                className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9 btn-dark-blue-3"
               >
                 Choose Plan
               </a>
@@ -97,15 +97,15 @@ const PricingSection = () => {
                     >Most Popular</span
                   > --> */}
               <h3 className="text-primary-dark fw-medium mb-0">Premium</h3>
-              <h1 className="display-2 fw-semibold text-white mb-0 mt-4">
-                $500/year
+              <h1 className="display-2 fw-semibold text-white mb-0 mt-4 !text-6xl">
+                $500 <span className="text-2xl">/ year</span>
               </h1>
               {/* <!-- <p className="text-white lead fw-normal mt-4 mb-0">
                     A 10X faster way to writing your professional copy
                   </p> --> */}
               <a
                 href="pricing-plan.html"
-                className="pricing-btn btn btn-lg w-full fs-4 lh-sm mt-9 btn-dark-blue-3"
+                className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9 btn-dark-blue-3"
               >
                 Choose Plan
               </a>

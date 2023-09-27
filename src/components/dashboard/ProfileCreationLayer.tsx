@@ -20,12 +20,15 @@ import {
   setStepTwo,
 } from "@/store/registerSlice";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 interface Props {
   children: React.ReactNode;
 }
 
 const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
+  const pathname = usePathname();
   // Redux
   const userData = useSelector((state: any) => state.userData);
   const dispatch = useDispatch();
@@ -358,7 +361,16 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   // if the user data is loaded and profile wizard is completed
   // return page content as it is
   if (userData.email && userData.wizardCompleted) {
-    return <>{children}</>;
+    // if user package is not available (new user) redirect to subscribe page
+    if (
+      pathname !== "/subscribe" &&
+      userData.userPackage &&
+      Object.keys(userData.userPackage).length === 0
+    ) {
+      redirect("/subscribe");
+    } else {
+      return <>{children}</>;
+    }
   } else {
     // if the user data is loaded and profile wizard is NOT completed show loader
     return (
