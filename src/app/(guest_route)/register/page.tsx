@@ -75,6 +75,7 @@ const RegisterNew = () => {
             about_generation: 0,
             job_desc_generation: 0,
             cover_letter_generation: 0,
+            email_generation: 0,
             pdf_files_upload: 0,
             review_resume: 0,
             consulting_bids_generation: 0,

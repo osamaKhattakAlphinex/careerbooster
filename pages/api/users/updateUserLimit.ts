@@ -39,6 +39,9 @@ const handler: NextApiHandler = async (req, res) => {
       if (type === "cover_letter_generation") {
         user.userPackageUsed.cover_letter_generation += 1;
       }
+      if (type === "email_generation") {
+        user.userPackageUsed.email_generation += 1;
+      }
       if (type === "pdf_files_upload") {
         user.userPackageUsed.pdf_files_upload += 1;
       }

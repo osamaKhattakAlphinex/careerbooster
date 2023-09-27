@@ -10,6 +10,7 @@ import { leftArrowIcon } from "@/helpers/iconsProvider";
 import CoverLetterFileUploader from "@/components/dashboard/cover-letter-bot/CoverLetterFileUploader";
 import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
 import Button from "@/components/utilities/form-elements/Button";
+import LimitCard from "@/components/dashboard/LimitCard";
 
 const CoverLetterWriter = () => {
   const componentRef = useRef<any>(null);
@@ -24,14 +25,29 @@ const CoverLetterWriter = () => {
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
 
+  // limit bars
+  const [availablePercentageCoverLetter, setAvailablePercentageCoverLetter] =
+    useState<number>(0);
+  const [percentageCalculatedCoverLetter, setPercentageCalculatedCoverLetter] =
+    useState<boolean>(false);
+  const [availablePercentageEmail, setAvailablePercentageEmail] =
+    useState<number>(0);
+  const [percentageCalculatedEmail, setPercentageCalculatedEmail] =
+    useState<boolean>(false);
+
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const { resumes } = userData;
 
   const handleGenerate = async () => {
-    await getUserDataIfNotExists();
-    if (session?.user?.email) {
+    // await getUserDataIfNotExists();
+    if (
+      session?.user?.email &&
+      aiInputUserData &&
+      !isNaN(availablePercentageCoverLetter) &&
+      availablePercentageCoverLetter !== 0
+    ) {
       setMsgLoading(true);
       setShow(true);
       setStreamedData("");
@@ -76,6 +92,27 @@ const CoverLetterWriter = () => {
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
             }
+
+            fetch("/api/users/updateUserLimit", {
+              method: "POST",
+              body: JSON.stringify({
+                email: session?.user?.email,
+                type: "cover_letter_generation",
+              }),
+            }).then(async (resp: any) => {
+              const res = await resp.json();
+              if (res.success) {
+                const updatedObject = {
+                  ...userData,
+                  userPackageUsed: {
+                    ...userData.userPackageUsed,
+                    cover_letter_generation:
+                      res.user.userPackageUsed.cover_letter_generation,
+                  },
+                };
+                dispatch(setUserData({ ...userData, ...updatedObject }));
+              }
+            });
           } else {
             setStreamedData("Error! Something went wrong");
           }
@@ -87,8 +124,13 @@ const CoverLetterWriter = () => {
   };
 
   const handleGenerateEmail = async () => {
-    await getUserDataIfNotExists();
-    if (session?.user?.email) {
+    // await getUserDataIfNotExists();
+    if (
+      session?.user?.email &&
+      aiInputUserData &&
+      !isNaN(availablePercentageEmail) &&
+      availablePercentageEmail !== 0
+    ) {
       setMsgLoading(true);
       setShow(true);
       setStreamedData("");
@@ -132,6 +174,26 @@ const CoverLetterWriter = () => {
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
             }
+
+            fetch("/api/users/updateUserLimit", {
+              method: "POST",
+              body: JSON.stringify({
+                email: session?.user?.email,
+                type: "email_generation",
+              }),
+            }).then(async (resp: any) => {
+              const res = await resp.json();
+              if (res.success) {
+                const updatedObject = {
+                  ...userData,
+                  userPackageUsed: {
+                    ...userData.userPackageUsed,
+                    email_generation: res.user.userPackageUsed.email_generation,
+                  },
+                };
+                dispatch(setUserData({ ...userData, ...updatedObject }));
+              }
+            });
           } else {
             setStreamedData("Error! Something went wrong");
           }
@@ -141,31 +203,6 @@ const CoverLetterWriter = () => {
         });
     }
   };
-
-  const getUserDataIfNotExists = async () => {
-    if (!userData.isLoading && !userData.isFetched) {
-      dispatch(setIsLoading(true));
-      try {
-        // Fetch userdata if not exists in Redux
-        const res = await fetch(
-          `/api/users/getOneByEmail?email=${session?.user?.email}`
-        );
-        const { user } = await res.json();
-        dispatch(setUserData(user));
-        dispatch(setIsLoading(false));
-        dispatch(setField({ name: "isFetched", value: true }));
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
-
-  // when page (session) loads, fetch user data if not exists
-  useEffect(() => {
-    if (session?.user?.email) {
-      getUserDataIfNotExists();
-    }
-  }, [session?.user?.email]);
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -181,9 +218,10 @@ const CoverLetterWriter = () => {
       });
     }
   }, [userData]);
+
   return (
     <>
-      <div className="my-5 ml-10">
+      <div className="w-[95%] my-5 ml-10 flex items-center justify-between mt-10">
         <Link
           href="/dashboard"
           className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
@@ -191,6 +229,23 @@ const CoverLetterWriter = () => {
           {leftArrowIcon}
           Dashboard
         </Link>
+
+        <LimitCard
+          title="Cover Letter Availble"
+          limit={userData?.userPackage?.limit?.cover_letter_generation}
+          used={userData?.userPackageUsed?.cover_letter_generation}
+          setPercentageCalculated={setPercentageCalculatedCoverLetter}
+          availablePercentage={availablePercentageCoverLetter}
+          setAvailablePercentage={setAvailablePercentageCoverLetter}
+        />
+        <LimitCard
+          title="Email Availble"
+          limit={userData?.userPackage?.limit?.email_generation}
+          used={userData?.userPackageUsed?.email_generation}
+          setPercentageCalculated={setPercentageCalculatedEmail}
+          availablePercentage={availablePercentageEmail}
+          setAvailablePercentage={setAvailablePercentageEmail}
+        />
       </div>
       <div className="flex m-10 mt-2 gap-4">
         <div className="w-full flex flex-col p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
@@ -280,80 +335,93 @@ const CoverLetterWriter = () => {
           </div>
 
           <div className="flex flex-row gap-4">
-            <div>
-              <Button
-                type="button"
-                disabled={
-                  msgLoading ||
-                  !session?.user?.email ||
-                  !aiInputUserData ||
-                  selectedOption === "" ||
-                  (selectedOption === "file" && selectedFile === "") ||
-                  (selectedOption === "aiResume" &&
-                    setSelectedResumeId === "") ||
-                  jobDescription === ""
-                }
-                onClick={() => handleGenerate()}
-                className="btn btn-outline-primary-dark"
-              >
-                <div className="flex flex-row gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className={`w-4 h-4 ${msgLoading ? "animate-spin" : ""}`}
+            {!isNaN(availablePercentageCoverLetter) &&
+              availablePercentageCoverLetter !== 0 && (
+                <div>
+                  <Button
+                    type="button"
+                    disabled={
+                      msgLoading ||
+                      !session?.user?.email ||
+                      !aiInputUserData ||
+                      selectedOption === "" ||
+                      (selectedOption === "file" && selectedFile === "") ||
+                      (selectedOption === "aiResume" &&
+                        setSelectedResumeId === "") ||
+                      jobDescription === ""
+                    }
+                    onClick={() => handleGenerate()}
+                    className="btn btn-outline-primary-dark"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                    />
-                  </svg>
-                  <span>
-                    {msgLoading ? "Please wait..." : "Generate Cover Letter"}
-                  </span>
+                    <div className="flex flex-row gap-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className={`w-4 h-4 ${
+                          msgLoading ? "animate-spin" : ""
+                        }`}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                        />
+                      </svg>
+                      <span>
+                        {msgLoading
+                          ? "Please wait..."
+                          : "Generate Cover Letter"}
+                      </span>
+                    </div>
+                  </Button>
                 </div>
-              </Button>
-            </div>
-            <div>
-              <Button
-                type="button"
-                disabled={
-                  msgLoading ||
-                  !session?.user?.email ||
-                  !aiInputUserData ||
-                  selectedOption === "" ||
-                  (selectedOption === "file" && selectedFile === "") ||
-                  (selectedOption === "aiResume" &&
-                    setSelectedResumeId === "") ||
-                  jobDescription === ""
-                }
-                onClick={() => handleGenerateEmail()}
-                className="btn btn-outline-primary-dark"
-              >
-                <div className="flex flex-row gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className={`w-4 h-4 ${msgLoading ? "animate-spin" : ""}`}
+              )}
+            {!isNaN(availablePercentageEmail) &&
+              availablePercentageEmail !== 0 && (
+                <div>
+                  <Button
+                    type="button"
+                    disabled={
+                      msgLoading ||
+                      !session?.user?.email ||
+                      !aiInputUserData ||
+                      selectedOption === "" ||
+                      (selectedOption === "file" && selectedFile === "") ||
+                      (selectedOption === "aiResume" &&
+                        setSelectedResumeId === "") ||
+                      jobDescription === ""
+                    }
+                    onClick={() => handleGenerateEmail()}
+                    className="btn btn-outline-primary-dark"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                    />
-                  </svg>
-                  <span>
-                    {msgLoading ? "Please wait..." : "Generate Email"}
-                  </span>
+                    <div className="flex flex-row gap-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className={`w-4 h-4 ${
+                          msgLoading ? "animate-spin" : ""
+                        }`}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                        />
+                      </svg>
+                      <span>
+                        {msgLoading ? "Please wait..." : "Generate Email"}
+                      </span>
+                    </div>
+                  </Button>
                 </div>
-              </Button>
-            </div>
+              )}
+
             <ReactToPrint
               trigger={() => (
                 <Button

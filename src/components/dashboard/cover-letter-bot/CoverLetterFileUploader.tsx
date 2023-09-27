@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { deleteIcon } from "@/helpers/iconsProvider";
+import LimitCard from "../LimitCard";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserData } from "@/store/userDataSlice";
 
 interface Props {
   selectedFile: string;
@@ -18,9 +21,16 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   const [loadingFiles, setLoadingFiles] = useState<boolean>(false);
 
   const [fileList, setFileList] = useState([]);
+  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
+  const [percentageCalculated, setPercentageCalculated] =
+    useState<boolean>(false);
 
   // session
   const { data }: { data: any } = useSession();
+
+  // redux
+  const dispatch = useDispatch();
+  const userData = useSelector((state: any) => state.userData);
 
   const uploadFileToServer = async () => {
     setFileError("");
@@ -39,6 +49,26 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
             setSuccessMsg("File has been uploaded!");
             setFileUploading(false);
             fetchFiles();
+
+            fetch("/api/users/updateUserLimit", {
+              method: "POST",
+              body: JSON.stringify({
+                email: data?.user?.email,
+                type: "pdf_files_upload",
+              }),
+            }).then(async (resp: any) => {
+              const res = await resp.json();
+              if (res.success) {
+                const updatedObject = {
+                  ...userData,
+                  userPackageUsed: {
+                    ...userData.userPackageUsed,
+                    pdf_files_upload: res.user.userPackageUsed.pdf_files_upload,
+                  },
+                };
+                dispatch(setUserData({ ...userData, ...updatedObject }));
+              }
+            });
           } else {
             setFileError("Something went wrong");
           }
@@ -118,41 +148,54 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   return (
     <>
       <div className="py-4 border p-4 mb-4 rounded-lg">
-        <label
-          className={`bg-black text-white text-sm rounded-full relative flex py-2   items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max cursor-pointer ${
-            fileUploading && "!bg-black"
-          }
-          `}
-        >
-          {fileUploading && (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-6 h-6 mr-2 animate-spin"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-              />
-            </svg>
-          )}
-
-          {fileUploading ? "Uploading..." : "Upload New File"}
-          <input
-            type="file"
-            className="hidden"
-            disabled={fileUploading}
-            onChange={(e) => {
-              if (e.target.files) {
-                setFile(e.target.files[0]);
-              }
-            }}
+        <div className="w-full mb-8">
+          <LimitCard
+            title="File uploads available"
+            limit={userData?.userPackage?.limit?.pdf_files_upload}
+            used={userData?.userPackageUsed?.pdf_files_upload}
+            setPercentageCalculated={setPercentageCalculated}
+            availablePercentage={availablePercentage}
+            setAvailablePercentage={setAvailablePercentage}
           />
-        </label>
+        </div>
+        {!isNaN(availablePercentage) && availablePercentage !== 0 && (
+          <label
+            className={`bg-black text-white text-sm rounded-full relative flex py-2   items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max cursor-pointer ${
+              fileUploading && "!bg-black"
+            }
+          `}
+          >
+            {fileUploading && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6 mr-2 animate-spin"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                />
+              </svg>
+            )}
+
+            {fileUploading ? "Uploading..." : "Upload New File"}
+            <input
+              type="file"
+              className="hidden"
+              disabled={fileUploading}
+              onChange={(e) => {
+                if (e.target.files) {
+                  setFile(e.target.files[0]);
+                }
+              }}
+            />
+          </label>
+        )}
+
         {loadingFiles ? (
           <p>Loading Files...</p>
         ) : (

@@ -143,15 +143,11 @@ const Header = () => {
                   Contact
                 </Link>
               </li>
-              {/* {isAuth ? (
-                <button className="nav-link" onClick={() => signOut()}>
-                  Logout
-                </button>
-              ) : (
+              {!isAuth && (
                 <Link className="nav-link" href="/login">
                   Login
                 </Link>
-              )} */}
+              )}
             </ul>
             <div className="visible">
               {isAuth ? (

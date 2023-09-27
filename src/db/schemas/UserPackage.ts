@@ -16,6 +16,7 @@ export interface UserPackageData {
     about_generation: number;
     job_desc_generation: number;
     cover_letter_generation: number;
+    email_generation: Number;
     pdf_files_upload: number;
     review_resume: number;
     consulting_bids_generation: number;
@@ -61,6 +62,7 @@ const UserPackageScehema = new Schema(
       about_generation: Number,
       job_desc_generation: Number,
       cover_letter_generation: Number,
+      email_generation: Number,
       pdf_files_upload: Number,
       review_resume: Number,
       consulting_bids_generation: Number,
