@@ -10,6 +10,7 @@ import { leftArrowIcon } from "@/helpers/iconsProvider";
 import CoverLetterFileUploader from "@/components/dashboard/cover-letter-bot/CoverLetterFileUploader";
 import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
 import Button from "@/components/utilities/form-elements/Button";
+import LimitCard from "@/components/dashboard/LimitCard";
 
 const ReviewResumeBot = () => {
   const componentRef = useRef<any>(null);
@@ -22,6 +23,9 @@ const ReviewResumeBot = () => {
 
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
+  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
+  const [percentageCalculated, setPercentageCalculated] =
+    useState<boolean>(false);
 
   // Redux
   const dispatch = useDispatch();
@@ -29,8 +33,12 @@ const ReviewResumeBot = () => {
   const { resumes } = userData;
 
   const handleGenerate = async () => {
-    await getUserDataIfNotExists();
-    if (session?.user?.email) {
+    if (
+      session?.user?.email &&
+      aiInputUserData &&
+      !isNaN(availablePercentage) &&
+      availablePercentage !== 0
+    ) {
       setMsgLoading(true);
       setShow(true);
       setStreamedData("");
@@ -45,8 +53,6 @@ const ReviewResumeBot = () => {
         const foundResume = resumes.find(
           (resume: any) => resume.id === setSelectedResumeId
         );
-        console.clear();
-        console.log(foundResume);
 
         obj.userData = {
           jobTitle: foundResume.jobTitle,
@@ -76,6 +82,25 @@ const ReviewResumeBot = () => {
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
             }
+            fetch("/api/users/updateUserLimit", {
+              method: "POST",
+              body: JSON.stringify({
+                email: session?.user?.email,
+                type: "review_resume",
+              }),
+            }).then(async (resp: any) => {
+              const res = await resp.json();
+              if (res.success) {
+                const updatedObject = {
+                  ...userData,
+                  userPackageUsed: {
+                    ...userData.userPackageUsed,
+                    review_resume: res.user.userPackageUsed.review_resume,
+                  },
+                };
+                dispatch(setUserData({ ...userData, ...updatedObject }));
+              }
+            });
           } else {
             setStreamedData("Error! Something went wrong");
           }
@@ -85,31 +110,6 @@ const ReviewResumeBot = () => {
         });
     }
   };
-
-  const getUserDataIfNotExists = async () => {
-    if (!userData.isLoading && !userData.isFetched) {
-      dispatch(setIsLoading(true));
-      try {
-        // Fetch userdata if not exists in Redux
-        const res = await fetch(
-          `/api/users/getOneByEmail?email=${session?.user?.email}`
-        );
-        const { user } = await res.json();
-        dispatch(setUserData(user));
-        dispatch(setIsLoading(false));
-        dispatch(setField({ name: "isFetched", value: true }));
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
-
-  // when page (session) loads, fetch user data if not exists
-  useEffect(() => {
-    if (session?.user?.email) {
-      getUserDataIfNotExists();
-    }
-  }, [session?.user?.email]);
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -127,7 +127,7 @@ const ReviewResumeBot = () => {
   }, [userData]);
   return (
     <>
-      <div className="my-5 ml-10">
+      <div className="w-[95%] my-5 ml-10 flex items-center justify-between mt-10">
         <Link
           href="/dashboard"
           className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
@@ -135,6 +135,15 @@ const ReviewResumeBot = () => {
           {leftArrowIcon}
           Dashboard
         </Link>
+
+        <LimitCard
+          title="Review Availble"
+          limit={userData?.userPackage?.limit?.review_resume}
+          used={userData?.userPackageUsed?.review_resume}
+          setPercentageCalculated={setPercentageCalculated}
+          availablePercentage={availablePercentage}
+          setAvailablePercentage={setAvailablePercentage}
+        />
       </div>
       <div className="flex m-10 mt-2 gap-4">
         <div className="w-full flex flex-col p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
@@ -196,39 +205,42 @@ const ReviewResumeBot = () => {
           )}
 
           <div className="flex flex-row gap-4">
-            <div>
-              <Button
-                type="button"
-                disabled={
-                  msgLoading ||
-                  !session?.user?.email ||
-                  !aiInputUserData ||
-                  selectedOption === "" ||
-                  (selectedOption === "file" && selectedFile === "") ||
-                  (selectedOption === "aiResume" && setSelectedResumeId === "")
-                }
-                onClick={() => handleGenerate()}
-                className="btn btn-outline-primary-dark"
-              >
-                <div className="flex flex-row gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className={`w-4 h-4 ${msgLoading ? "animate-spin" : ""}`}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                    />
-                  </svg>
-                  <span>{msgLoading ? "Please wait..." : "Generate"}</span>
-                </div>
-              </Button>
-            </div>
+            {!isNaN(availablePercentage) && availablePercentage !== 0 && (
+              <div>
+                <Button
+                  type="button"
+                  disabled={
+                    msgLoading ||
+                    !session?.user?.email ||
+                    !aiInputUserData ||
+                    selectedOption === "" ||
+                    (selectedOption === "file" && selectedFile === "") ||
+                    (selectedOption === "aiResume" &&
+                      setSelectedResumeId === "")
+                  }
+                  onClick={() => handleGenerate()}
+                  className="btn btn-outline-primary-dark"
+                >
+                  <div className="flex flex-row gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className={`w-4 h-4 ${msgLoading ? "animate-spin" : ""}`}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                      />
+                    </svg>
+                    <span>{msgLoading ? "Please wait..." : "Generate"}</span>
+                  </div>
+                </Button>
+              </div>
+            )}
             <ReactToPrint
               trigger={() => (
                 <Button
