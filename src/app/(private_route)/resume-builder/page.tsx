@@ -404,7 +404,7 @@ const ResumeBuilder = () => {
         if (data.success) {
           const { userPackage } = data;
           // set user package details to redux
-          dispatch(setField({ name: "userPackage", value: userPackage }));
+          dispatch(setField({ name: "userPackageData", value: userPackage }));
         }
 
         // show alert for 2 seconds using setTimeout
@@ -449,7 +449,7 @@ const ResumeBuilder = () => {
 
         <LimitCard
           title="Generations Available"
-          limit={userData?.userPackage?.limit?.resumes_generation}
+          limit={userData?.userPackageData?.limit?.resumes_generation}
           used={userData?.userPackageUsed?.resumes_generation}
           setPercentageCalculated={setPercentageCalculated}
           availablePercentage={availablePercentage}

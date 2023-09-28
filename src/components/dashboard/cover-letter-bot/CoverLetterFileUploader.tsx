@@ -151,7 +151,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
         <div className="w-full mb-8">
           <LimitCard
             title="File uploads available"
-            limit={userData?.userPackage?.limit?.pdf_files_upload}
+            limit={userData?.userPackageData?.limit?.pdf_files_upload}
             used={userData?.userPackageUsed?.pdf_files_upload}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}

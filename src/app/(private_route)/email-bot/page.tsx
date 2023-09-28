@@ -229,7 +229,7 @@ const PersonalizedEmailBot = () => {
 
         <LimitCard
           title="Email Availble"
-          limit={userData?.userPackage?.limit?.email_generation}
+          limit={userData?.userPackageData?.limit?.email_generation}
           used={userData?.userPackageUsed?.email_generation}
           setPercentageCalculated={setPercentageCalculatedEmail}
           availablePercentage={availablePercentageEmail}
@@ -237,7 +237,7 @@ const PersonalizedEmailBot = () => {
         />
         <LimitCard
           title="Cover Letter Availble"
-          limit={userData?.userPackage?.limit?.cover_letter_generation}
+          limit={userData?.userPackageData?.limit?.cover_letter_generation}
           used={userData?.userPackageUsed?.cover_letter_generation}
           setPercentageCalculated={setPercentageCalculatedCoverLetter}
           availablePercentage={availablePercentageCoverLetter}

@@ -133,7 +133,7 @@ const AboutGenerator = ({ setAbout }: Props) => {
           <h2 className="text-2xl">About Generator</h2>
           <LimitCard
             title="Available"
-            limit={userData?.userPackage?.limit?.about_generation}
+            limit={userData?.userPackageData?.limit?.about_generation}
             used={userData?.userPackageUsed?.about_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}

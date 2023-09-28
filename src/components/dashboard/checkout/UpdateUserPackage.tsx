@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserData } from "@/store/userDataSlice";
+import { setField, setUserData } from "@/store/userDataSlice";
 
 const UpdateUserPackage = ({ customer }: any) => {
   if (!customer) return null;
@@ -60,6 +60,7 @@ const UpdateUserPackage = ({ customer }: any) => {
                 userPackageUsed: obj.userPackageUsed,
               })
             );
+            dispatch(setField({ name: "userPackageData", value: userPackage }));
             // TODO!!! Add new user subsription to db
             // TODO!! invalidate session on stripe
             router.push("/dashboard");

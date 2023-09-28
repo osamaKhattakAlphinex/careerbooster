@@ -135,7 +135,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
           <h2 className="text-2xl">Headline Generator</h2>
           <LimitCard
             title="Available"
-            limit={userData?.userPackage?.limit?.headline_generation}
+            limit={userData?.userPackageData?.limit?.headline_generation}
             used={userData?.userPackageUsed?.headline_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}

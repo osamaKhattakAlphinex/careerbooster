@@ -132,7 +132,7 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
           <h2 className="text-2xl">Keywords Generator</h2>
           <LimitCard
             title="Available"
-            limit={userData?.userPackage?.limit?.keywords_generation}
+            limit={userData?.userPackageData?.limit?.keywords_generation}
             used={userData?.userPackageUsed?.keywords_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}

@@ -142,7 +142,7 @@ const ConsultingBidsGenerator = () => {
 
         <LimitCard
           title="Review Availble"
-          limit={userData?.userPackage?.limit?.consulting_bids_generation}
+          limit={userData?.userPackageData?.limit?.consulting_bids_generation}
           used={userData?.userPackageUsed?.consulting_bids_generation}
           setPercentageCalculated={setPercentageCalculated}
           availablePercentage={availablePercentage}

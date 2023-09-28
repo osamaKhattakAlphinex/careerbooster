@@ -139,7 +139,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
           <h2 className="text-2xl">Job Description Generator</h2>
           <LimitCard
             title="Available"
-            limit={userData?.userPackage?.limit?.job_desc_generation}
+            limit={userData?.userPackageData?.limit?.job_desc_generation}
             used={userData?.userPackageUsed?.job_desc_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}

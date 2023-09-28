@@ -138,7 +138,7 @@ const ReviewResumeBot = () => {
 
         <LimitCard
           title="Review Availble"
-          limit={userData?.userPackage?.limit?.review_resume}
+          limit={userData?.userPackageData?.limit?.review_resume}
           used={userData?.userPackageUsed?.review_resume}
           setPercentageCalculated={setPercentageCalculated}
           availablePercentage={availablePercentage}
