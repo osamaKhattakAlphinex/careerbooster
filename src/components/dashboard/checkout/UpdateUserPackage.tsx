@@ -7,8 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setField, setUserData } from "@/store/userDataSlice";
 
 const UpdateUserPackage = ({ customer }: any) => {
-  if (!customer) return null;
-
   const router = useRouter();
   const [updating, setUpdating] = useState(false);
 
@@ -23,7 +21,6 @@ const UpdateUserPackage = ({ customer }: any) => {
       if (userPackage) {
         let expirationDate;
         if (userPackage.type === "monthly") {
-          console.log("here");
           expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
         } else if (userPackage.type === "yearly") {
           expirationDate = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
@@ -90,7 +87,7 @@ const UpdateUserPackage = ({ customer }: any) => {
 
     return null;
   };
-
+  if (!customer) return null;
   return (
     <div>
       {updating && <p>Please wait while we activate your Package...</p>}
