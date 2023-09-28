@@ -50,7 +50,8 @@ interface UserDataSlice {
   defaultResumeFile: string;
   wizardCompleted: boolean;
   wizardReviewed: boolean;
-  userPackage?: any;
+  userPackage: "";
+  userPackageData: {};
   userPackageUsed: {
     resumes_generation: Number;
     keywords_generation: Number;
@@ -88,7 +89,8 @@ const initialState: UserDataSlice = {
   defaultResumeFile: "",
   wizardCompleted: false,
   wizardReviewed: false,
-  userPackage: {},
+  userPackage: "",
+  userPackageData: {},
   userPackageUsed: {
     resumes_generation: 0,
     keywords_generation: 0,

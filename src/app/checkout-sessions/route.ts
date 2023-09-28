@@ -21,7 +21,8 @@ export interface CheckoutSubscriptionBody {
   };
   amount: number;
   interval: "month" | "year";
-  customerId?: string;
+  // customerId?: string;
+  customer: any;
 }
 
 export async function POST(req: Request) {
@@ -30,14 +31,18 @@ export async function POST(req: Request) {
   const origin = req.headers.get("origin") || appUrl;
 
   // if user is logged in, redirect to thank you page, otherwise redirect to signup page.
-  const success_url = !body.customerId
+  const success_url = !body.customer
     ? `${origin}/subscribed?session_id={CHECKOUT_SESSION_ID}`
     : `${origin}/subscribed?session_id={CHECKOUT_SESSION_ID}`;
 
   try {
+    const customer = await stripe.customers.create({
+      metadata: body.customer.metadata,
+    });
+
     const session = await stripe.checkout.sessions.create({
       // if user is logged in, stripe will set the email in the checkout page
-      customer: body.customerId,
+      customer: customer.id,
       mode: "subscription", // mode should be subscription
       line_items: [
         // generate inline price and product
@@ -50,12 +55,10 @@ export async function POST(req: Request) {
             unit_amount: body.amount,
             product_data: {
               name: body.plan,
-              description: `Description ${body.plan}`,
-              metadata: {
-                myData: "myValue", // add your own metadata here
-              },
+              description: `CareerBooster.ai ${body.plan} Plan Subscription`,
             },
           },
+
           quantity: 1,
         },
       ],

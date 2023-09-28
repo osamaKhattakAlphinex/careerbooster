@@ -56,6 +56,9 @@ const UserSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "UserPackage",
     },
+    userPackageExpirationDate: {
+      type: Date,
+    },
     userPackageUsed: {
       resumes_generation: Number,
       keywords_generation: Number,

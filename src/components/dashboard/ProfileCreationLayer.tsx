@@ -365,8 +365,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     if (
       pathname !== "/subscribe" &&
       pathname !== "/subscribed" &&
-      userData.userPackage &&
-      Object.keys(userData.userPackage).length === 0
+      (!userData.userPackage || userData.userPackage === "")
     ) {
       redirect("/subscribe");
     } else {

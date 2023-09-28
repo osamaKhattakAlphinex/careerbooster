@@ -14,18 +14,24 @@ type Props = {
 
 async function getCustomerbySession(sessionId?: string) {
   if (!sessionId) return null;
-  const session = await stripe.checkout.sessions.retrieve(sessionId, {
-    expand: ["line_items"],
-  });
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
+
   if (!session.customer) return null;
 
   const customer = await stripe.customers.retrieve(session.customer as string);
   return customer as Stripe.Customer;
 }
 
+const getSessionDeatils = async (sessionId?: string) => {
+  if (!sessionId) return null;
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
+  return session;
+};
+
 export default async function SubscribedPage(props: Props) {
   const searchParams = props.searchParams;
   const sessionId = searchParams.session_id;
+  const session: any = await getSessionDeatils(sessionId);
   const customer = await getCustomerbySession(sessionId);
 
   if (!customer || !customer.email) {
@@ -43,9 +49,10 @@ export default async function SubscribedPage(props: Props) {
                     data-aos="fade-up-sm"
                     data-aos-delay="100"
                   >
-                    Thanks for your Subscription {customer.name}
-                    <UpdateUserPackage customer={customer} />
+                    Thanks for your Subscription <br />
+                    {customer.metadata.name}
                   </h1>
+                  <UpdateUserPackage customer={customer.metadata} />
                 </div>
               </div>
             </div>

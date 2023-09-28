@@ -51,7 +51,7 @@ const Header = () => {
           if (data.success) {
             const { userPackage } = data;
             // set user package details to redux
-            dispatch(setField({ name: "userPackage", value: userPackage }));
+            dispatch(setField({ name: "userPackageData", value: userPackage }));
           }
         }
       } catch (err) {

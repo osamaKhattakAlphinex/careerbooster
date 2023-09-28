@@ -3,6 +3,8 @@
 import { CheckoutSubscriptionBody } from "@/app/checkout-sessions/route";
 import { UserPackageData } from "@/db/schemas/UserPackage";
 import { loadStripe } from "@stripe/stripe-js";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import Stripe from "stripe";
 
 interface Props {
@@ -14,7 +16,9 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
   userPackage,
   customer,
 }) => {
+  const [subscribing, setSubscribing] = useState(false);
   const handleClick = async () => {
+    setSubscribing(true);
     if (userPackage) {
       // step 1: load stripe
       const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
@@ -26,6 +30,7 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
         amount: userPackage.amount * 100,
         plan: userPackage.title,
         limit: userPackage.limit,
+        customer: customer,
         // customerId: customer.id,
       };
 
@@ -67,9 +72,14 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
                   </p> --> */}
         <button
           onClick={() => handleClick()}
+          disabled={subscribing}
           className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9 btn-dark-blue-3"
         >
-          {userPackage.amount === 0 ? "No Credit Card Required" : "Subscribe"}
+          {subscribing
+            ? "Please wait..."
+            : userPackage.amount === 0
+            ? "No Credit Card Required"
+            : "Subscribe"}
         </button>
         <ul className="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">
           {userPackage.features.map((feature: string, i: number) => (
