@@ -4,37 +4,37 @@ import { Metadata } from "next";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export const metadata: Metadata = {
-  title: "CareerBooster.Ai-Pricing",
-  description:
-    "Discover CareerBooster's pricing plans and choose the perfect package for your career needs. Unlock AI-powered tools for resume optimization, LinkedIn enhancement, and more. Start your journey to professional excellence with transparent and affordable pricing.",
-  keywords: [
-    "CareerBooster.AI",
-    "AI-powered tools",
-    "ATS-friendly resumes",
-    "Executive resumes",
-    "Professional image",
-    "Competitive job market",
-    "Job hunt transformation",
-    "Career advancement",
-    "20,000+ professionals",
-    "Revolutionize job search",
-    "Career Booster About ",
-    "About Career Booster",
-    "Contact Career Booster",
-    "CareerBooster Contact",
-    "CareerBooster.Ai Contact",
-    "CareerBooster.Ai Pricing",
-    "CareerBooster.Ai Pricing Plans",
-    "Pricing CareerBooster.Ai",
-    "Packages Of CareerBooster",
-  ],
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
-};
+// export const metadata: Metadata = {
+//   title: "CareerBooster.Ai-Pricing",
+//   description:
+//     "Discover CareerBooster's pricing plans and choose the perfect package for your career needs. Unlock AI-powered tools for resume optimization, LinkedIn enhancement, and more. Start your journey to professional excellence with transparent and affordable pricing.",
+//   keywords: [
+//     "CareerBooster.AI",
+//     "AI-powered tools",
+//     "ATS-friendly resumes",
+//     "Executive resumes",
+//     "Professional image",
+//     "Competitive job market",
+//     "Job hunt transformation",
+//     "Career advancement",
+//     "20,000+ professionals",
+//     "Revolutionize job search",
+//     "Career Booster About ",
+//     "About Career Booster",
+//     "Contact Career Booster",
+//     "CareerBooster Contact",
+//     "CareerBooster.Ai Contact",
+//     "CareerBooster.Ai Pricing",
+//     "CareerBooster.Ai Pricing Plans",
+//     "Pricing CareerBooster.Ai",
+//     "Packages Of CareerBooster",
+//   ],
+//   viewport: {
+//     width: "device-width",
+//     initialScale: 1,
+//     maximumScale: 1,
+//   },
+// };
 
 export default function SubscribePage() {
   const [showExpiredAlert, setShowExpiredAlert] = useState(false);
