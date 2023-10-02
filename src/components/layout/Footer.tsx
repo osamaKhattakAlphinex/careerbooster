@@ -177,15 +177,24 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="text-center py-6 mt-8">
-          <p className="fs-sm mb-0">
-            Copyright
-            <span className="text-primary-dark">
-              {" "}
-              &copy; CareerBooster 2023
-            </span>
-            .
-          </p>
+        <div className="py-6 mt-8 mx-auto">
+          <ul className="list-unstyled flex">
+            <li className="mx-5">
+              Copyright
+              <span className="text-primary-dark">
+                {" "}
+                &copy; CareerBooster 2023
+              </span>
+              .
+            </li>
+            <li className="mx-5">
+              <Link href="/privacy-policy">Privacy Policy</Link>
+            </li>
+            <li className="mx-5">
+              <Link href="/terms-and-conditions">Terms And Conditions</Link>
+            </li>
+            <li></li>
+          </ul>
         </div>
       </div>
     </footer>

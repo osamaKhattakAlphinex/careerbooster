@@ -535,13 +535,23 @@ const RegisterNew = () => {
                             checked={formik.values.terms ? true : false}
                             className="w-4 mr-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
                           />
-                          <label htmlFor="terms" className="font-light">
+                          <label htmlFor="terms" className="font-light mr-5">
                             I accept the{" "}
                             <Link
                               className="font-medium text-primary-600 hover:underline "
-                              href="#"
+                              href="/terms-and-conditions"
                             >
                               Terms and Conditions
+                            </Link>
+                          </label>
+
+                          <label htmlFor="terms" className="font-light">
+                            &
+                            <Link
+                              className="font-medium text-primary-600 mx-5 hover:underline "
+                              href="/privacy-policy"
+                            >
+                              Privacy Policy
                             </Link>
                           </label>
                         </div>

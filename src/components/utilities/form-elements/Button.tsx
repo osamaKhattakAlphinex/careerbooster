@@ -4,6 +4,7 @@ interface Props {
   disabled?: boolean;
   onClick?: () => void;
   className?: string;
+  id?: string;
   children?: React.ReactNode;
 }
 
@@ -13,6 +14,7 @@ const Button: React.FC<Props> = ({
   onClick,
   className,
   children,
+  id,
 }: any) => {
   if (type === "button") {
     return (
@@ -20,6 +22,7 @@ const Button: React.FC<Props> = ({
         className={className ? className : ""}
         onClick={onClick ? onClick : console.log("clicked")}
         disabled={disabled ? disabled : false}
+        id={id ? id : ""}
       >
         {children}
       </button>
