@@ -27,7 +27,7 @@ const FeaturesSection = () => {
           >
             The Game-Changing Advantages You Never Knew About
           </h4>
-          <p className="py-10 w-3quarter mx-auto">
+          <p className="py-10 w-md-3quarter mx-auto">
             In today{"'"}s competitive job market, landing your dream role isn
             {"'"}t just about qualifications and experience; It{"'"}s about
             making sure your resume stands out. But here{"'"}s the catch: before
@@ -65,7 +65,7 @@ const FeaturesSection = () => {
                 <h4 className="mb-4 text-white">
                   The ATS: Your Resume{"'"}s First Adjudicator
                 </h4>
-                <p className="w-3quarter pr-lg-5">
+                <p className="w-md-3quarter pr-lg-5">
                   The ATS is no human—It{"'"}s a robot designed to shortlist
                   resumes based on specific criteria. This means your resume
                   must speak the language of machines to secure that initial
@@ -99,7 +99,7 @@ const FeaturesSection = () => {
                 <h4 className="mb-4 text-white">
                   But What About the Human Recruiter?
                 </h4>
-                <p className="w-3quarter pr-lg-5">
+                <p className="w-md-3quarter pr-lg-5">
                   We understand your concerns Don{"'"}t end with impressing a
                   machine. That{"'"}s why our AI doesn{"'"}t stop at being
                   ATS-friendly; It{"'"}s also human-recruiter-approved. We{"'"}
@@ -173,7 +173,7 @@ const FeaturesSection = () => {
                 <h4 className="mb-4 text-white">
                   CareerBooster: Your ATS-Friendly Resume Partner
                 </h4>
-                <p className="w-3quarter pr-lg-5">
+                <p className="w-md-3quarter pr-lg-5">
                   Our system has been meticulously trained through extensive
                   research and consultations with numerous executive resume
                   writers. We{"'"}ve decoded the algorithms that the ATS employs
@@ -212,7 +212,7 @@ const FeaturesSection = () => {
                 <h4 className="mb-4 text-white">
                   Endorsed by a Former Google Recruiter
                 </h4>
-                <p className="w-3quarter pr-lg-5">
+                <p className="w-md-3quarter pr-lg-5">
                   Still skeptical? Take it from the experts. Nolan Church, a
                   former Google recruiter, has emphasized that resumes often
                   suffer from an overload of words and paragraphs, resulting in
@@ -235,7 +235,7 @@ const FeaturesSection = () => {
           <h5 className="my-10">
             Ready to craft a resume that impresses both bots and humans?
           </h5>
-          <Link href="login.html" className="btn btn-primary-dark">
+          <Link href="/register" className="btn btn-primary-dark">
             Let{"'"}s get started!
           </Link>
         </div>

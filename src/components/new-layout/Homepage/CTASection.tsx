@@ -37,7 +37,7 @@ const CTASection = () => {
                   dream job - embrace the future of job hunting now!
                 </p>
 
-                <Link href="login.html" className="btn btn-primary-dark">
+                <Link href="/register" className="btn btn-primary-dark">
                   Get Started Free
                 </Link>
                 <div className="cta-image-container mt-10">
