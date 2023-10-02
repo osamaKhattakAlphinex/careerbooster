@@ -27,6 +27,18 @@ export interface WorkExperience {
   description?: string;
 }
 
+interface limitObject {
+  resumes_generation: Number;
+  keywords_generation: Number;
+  headline_generation: Number;
+  about_generation: Number;
+  job_desc_generation: Number;
+  cover_letter_generation: Number;
+  email_generation: Number;
+  pdf_files_upload: Number;
+  review_resume: Number;
+  consulting_bids_generation: Number;
+}
 interface UserDataSlice {
   isFetched: boolean;
   isLoading: boolean;
@@ -52,18 +64,7 @@ interface UserDataSlice {
   wizardReviewed: boolean;
   userPackage: "";
   userPackageData: {};
-  userPackageUsed: {
-    resumes_generation: Number;
-    keywords_generation: Number;
-    headline_generation: Number;
-    about_generation: Number;
-    job_desc_generation: Number;
-    cover_letter_generation: Number;
-    email_generation: Number;
-    pdf_files_upload: Number;
-    review_resume: Number;
-    consulting_bids_generation: Number;
-  };
+  userPackageUsed: limitObject | {};
 }
 
 const initialState: UserDataSlice = {
@@ -91,18 +92,7 @@ const initialState: UserDataSlice = {
   wizardReviewed: false,
   userPackage: "",
   userPackageData: {},
-  userPackageUsed: {
-    resumes_generation: 0,
-    keywords_generation: 0,
-    headline_generation: 0,
-    about_generation: 0,
-    job_desc_generation: 0,
-    cover_letter_generation: 0,
-    email_generation: 0,
-    pdf_files_upload: 0,
-    review_resume: 0,
-    consulting_bids_generation: 0,
-  },
+  userPackageUsed: {},
 };
 
 const userDataSlice = createSlice({

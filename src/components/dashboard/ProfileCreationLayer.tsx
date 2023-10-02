@@ -362,6 +362,15 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   // return page content as it is
   if (userData.email && userData.wizardCompleted) {
     // if user package is not available (new user) redirect to subscribe page
+    // or if user package is expired
+    if (
+      pathname !== "/subscribe" &&
+      pathname !== "/subscribed" &&
+      (!userData.userPackageExpirationDate ||
+        new Date(userData.userPackageExpirationDate) < new Date())
+    ) {
+      redirect("/subscribe?expired=1");
+    }
     if (
       pathname !== "/subscribe" &&
       pathname !== "/subscribed" &&
