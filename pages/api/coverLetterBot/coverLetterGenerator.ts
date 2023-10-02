@@ -83,7 +83,7 @@ const handler: NextApiHandler = async (req, res) => {
       res.end();
     } else {
       // this will run for both TYPES aiResume and profile
-      console.log("here");
+
       const chatPrompt = ChatPromptTemplate.fromPromptMessages([
         SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing Cover Letter for the person.
           Following are the content of the resume (in JSON format): 

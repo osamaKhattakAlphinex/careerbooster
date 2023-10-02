@@ -2,10 +2,13 @@
 
 import { CheckoutSubscriptionBody } from "@/app/checkout-sessions/route";
 import { UserPackageData } from "@/db/schemas/UserPackage";
+import { setField, setUserData } from "@/store/userDataSlice";
 import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Stripe from "stripe";
+import { useRouter } from "next/navigation";
 
 interface Props {
   userPackage: UserPackageData;
@@ -17,9 +20,18 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
   customer,
 }) => {
   const [subscribing, setSubscribing] = useState(false);
+  const router = useRouter();
+
+  // redux
+  const dispatch = useDispatch();
+  const userData = useSelector((state: any) => state.userData);
+
   const handleClick = async () => {
     setSubscribing(true);
-    if (userPackage) {
+    if (userPackage && userPackage.amount === 0) {
+      // Fee package
+      updateUserWithFreePackage(userPackage._id);
+    } else if (userPackage) {
       // step 1: load stripe
       const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
       const stripe = await loadStripe(STRIPE_PK);
@@ -48,6 +60,73 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
       const sessionId = data.id!;
       stripe?.redirectToCheckout({ sessionId });
     }
+  };
+
+  const updateUserWithFreePackage = async (packageId: string | undefined) => {
+    if (!subscribing && packageId) {
+      const userPackage = await getUserPackageDetails(packageId);
+      if (userPackage) {
+        let expirationDate;
+        if (userPackage.type === "monthly") {
+          expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+        } else if (userPackage.type === "yearly") {
+          expirationDate = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
+        }
+
+        const obj = {
+          email: userData.email,
+          userPackage: userPackage._id,
+          userPackageExpirationDate: expirationDate,
+          userPackageUsed: {
+            resumes_generation: 0,
+            keywords_generation: 0,
+            headline_generation: 0,
+            about_generation: 0,
+            job_desc_generation: 0,
+            cover_letter_generation: 0,
+            email_generation: 0,
+            pdf_files_upload: 0,
+            review_resume: 0,
+            consulting_bids_generation: 0,
+          },
+        };
+        // TODO!! move this code to backeND
+        return axios
+          .post("/api/users/updateUserData", {
+            data: obj,
+          })
+          .then(async (resp: any) => {
+            dispatch(
+              setUserData({
+                ...userData,
+                userPackage: obj.userPackage,
+                userPackageExpirationDate: obj.userPackageExpirationDate,
+                userPackageUsed: obj.userPackageUsed,
+              })
+            );
+            dispatch(setField({ name: "userPackageData", value: userPackage }));
+            // TODO!!! Add new user subsription to db
+            // TODO!! invalidate session on stripe
+            router.push("/dashboard");
+          });
+      }
+    }
+  };
+
+  const getUserPackageDetails = async (packageId: string) => {
+    // get user package details
+    const res2 = await fetch(
+      `/api/users/getUserPackageDetails?id=${packageId}`
+    );
+    const data = await res2.json();
+
+    if (data.success) {
+      const { userPackage } = data;
+      return userPackage;
+      // set user package details to redux
+    }
+
+    return null;
   };
 
   return (
