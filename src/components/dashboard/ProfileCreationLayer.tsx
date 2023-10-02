@@ -366,15 +366,16 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     if (
       pathname !== "/subscribe" &&
       pathname !== "/subscribed" &&
-      (!userData.userPackageExpirationDate ||
-        new Date(userData.userPackageExpirationDate) < new Date())
+      new Date(userData.userPackageExpirationDate) < new Date()
     ) {
       redirect("/subscribe?expired=1");
     }
     if (
       pathname !== "/subscribe" &&
       pathname !== "/subscribed" &&
-      (!userData.userPackage || userData.userPackage === "")
+      (!userData.userPackage ||
+        userData.userPackage === "" ||
+        !userData.userPackageExpirationDate)
     ) {
       redirect("/subscribe");
     } else {

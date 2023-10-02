@@ -157,7 +157,7 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
           {subscribing
             ? "Please wait..."
             : userPackage.amount === 0
-            ? "No Credit Card Required"
+            ? "Stay basic"
             : "Subscribe"}
         </button>
         <ul className="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">

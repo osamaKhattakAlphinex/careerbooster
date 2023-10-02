@@ -221,8 +221,14 @@ const RegisterNew = () => {
 
     if (firstName && lastName && email) {
       formik.setFieldValue("firstName", removeDashesFromString(firstName));
+    }
+    if (lastName) {
       formik.setFieldValue("lastName", removeDashesFromString(lastName));
+    }
+    if (email) {
       formik.setFieldValue("email", removeDashesFromString(email));
+    }
+    if (file) {
       formik.setFieldValue("file", file);
     }
   }, [params]);
