@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "../LimitCard";
+import axios from "axios";
 
 interface Props {
   setAbout: React.Dispatch<React.SetStateAction<string>>;
@@ -40,6 +41,9 @@ const AboutGenerator = ({ setAbout }: Props) => {
         skills: userData?.skills,
       });
     }
+    if (userData.results.about && userData.results.about !== "") {
+      setStreamedData(userData.results.about);
+    }
   }, [userData]);
 
   useEffect(() => {
@@ -58,6 +62,7 @@ const AboutGenerator = ({ setAbout }: Props) => {
         .then(async (resp: any) => {
           if (resp.ok) {
             const reader = resp.body.getReader();
+            let tempText = "";
             while (true) {
               const { done, value } = await reader.read();
 
@@ -66,8 +71,10 @@ const AboutGenerator = ({ setAbout }: Props) => {
               }
 
               const text = new TextDecoder().decode(value);
+              tempText += text;
               setStreamedData((prev) => prev + text);
             }
+            await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -98,6 +105,26 @@ const AboutGenerator = ({ setAbout }: Props) => {
         .finally(() => {
           setMsgLoading(false);
         });
+    }
+  };
+
+  const saveToDB = async (tempText: string) => {
+    try {
+      const response = await axios.post("/api/users/updateUserData", {
+        data: {
+          email: session?.user?.email,
+          results: {
+            ...userData.results,
+            about: tempText,
+          },
+        },
+      });
+      const { success } = response.data;
+      if (success) {
+        console.log("about saved to DB");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

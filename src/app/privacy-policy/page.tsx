@@ -6,19 +6,22 @@ export default function PrivacyPloicyPage() {
           <div className="privacy-policy py-5">
             <h2>Privacy Policy</h2>
             <p>
-              This privacy policy ("Policy") describes how "CareerBooster.AI"
-              ("CareerBooster.AI," "we," "us," or "our") collects, protects, and
-              uses the personally identifiable information ("Personal
-              Information") you ("User," "you," or "your") may provide on the{" "}
+              This privacy policy (&quot;Policy&quot;) describes how
+              &quot;CareerBooster.AI&quot; (&quot;CareerBooster.AI,&quot;
+              &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) collects,
+              protects, and uses the personally identifiable information
+              (&quot;Personal Information&quot;) you (&quot;User,&quot;
+              &quot;you,&quot; or &quot;your&quot;) may provide on the{" "}
               <a href="https://www.CareerBooster.AI">
                 CareerBooster.AI website
               </a>{" "}
-              and any of its products or services (collectively, "Website" or
-              "Services"). It also describes the choices available to you
-              regarding our use of your personal information and how you can
-              access and update this information. This Policy does not apply to
-              the practices of companies that we do not own or control, or to
-              individuals that we do not employ or manage.
+              and any of its products or services (collectively,
+              &quot;Website&quot; or &quot;Services&quot;). It also describes
+              the choices available to you regarding our use of your personal
+              information and how you can access and update this information.
+              This Policy does not apply to the practices of companies that we
+              do not own or control, or to individuals that we do not employ or
+              manage.
             </p>
 
             <h3 className="py-5">Collection of Personal Information</h3>
@@ -29,20 +32,20 @@ export default function PrivacyPloicyPage() {
               may include your email address, name, address, credit card
               information, bank information, or other Personal Information. You
               can choose not to provide us with certain information, but then
-              you may not be able to take advantage of some of the Website's
-              features.
+              you may not be able to take advantage of some of the
+              Website&apos;s features.
             </p>
 
             <h3 className="py-5">Collection of Non-Personal Information</h3>
             <p className="text-[20px]">
               When you visit the Website, our servers automatically record
               information that your browser sends. This data may include
-              information such as your device's IP address, browser type and
-              version, operating system type and version, language preferences,
-              or the webpage you were visiting before you came to our Website,
-              pages of our Website that you visit, the time spent on those
-              pages, information you search for on our Website, access times and
-              dates, and other statistics.
+              information such as your device&apos;s IP address, browser type
+              and version, operating system type and version, language
+              preferences, or the webpage you were visiting before you came to
+              our Website, pages of our Website that you visit, the time spent
+              on those pages, information you search for on our Website, access
+              times and dates, and other statistics.
             </p>
 
             <h3 className="py-5">Managing Personal Information</h3>
@@ -113,18 +116,18 @@ export default function PrivacyPloicyPage() {
 
             <h3 className="py-5">Cookies</h3>
             <p className="text-[20px]">
-              The Website uses "cookies" to help personalize your online
-              experience. A cookie is a text file that is placed on your hard
-              disk by a web page server. Cookies cannot be used to run programs
-              or deliver viruses to your computer. Cookies are uniquely assigned
-              to you and can only be read by a web server in the domain that
-              issued the cookie to you. We may use cookies to collect, store,
-              and track information for statistical purposes to operate our
-              Website and Services. You have the ability to accept or decline
-              cookies. Most web browsers automatically accept cookies, but you
-              can usually modify your browser setting to decline cookies if you
-              prefer. If you choose to decline cookies, you may not be able to
-              fully experience the features of the Website and Services.
+              The Website uses &quot;cookies&quot; to help personalize your
+              online experience. A cookie is a text file that is placed on your
+              hard disk by a web page server. Cookies cannot be used to run
+              programs or deliver viruses to your computer. Cookies are uniquely
+              assigned to you and can only be read by a web server in the domain
+              that issued the cookie to you. We may use cookies to collect,
+              store, and track information for statistical purposes to operate
+              our Website and Services. You have the ability to accept or
+              decline cookies. Most web browsers automatically accept cookies,
+              but you can usually modify your browser setting to decline cookies
+              if you prefer. If you choose to decline cookies, you may not be
+              able to fully experience the features of the Website and Services.
             </p>
             <h3 className="py-5">Links to Other Websites</h3>
             <p className="text-[20px]">

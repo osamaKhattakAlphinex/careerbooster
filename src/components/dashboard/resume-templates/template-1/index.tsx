@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import {
   setPrimarySkills,
   setProfessionalSkills,
   setSecondarySkills,
+  setSummary,
   setWorkExperienceArray,
 } from "@/store/resumeSlice";
 import {
@@ -42,6 +43,12 @@ const EditableField = ({
     setIsEditing(false);
     onSave(editedValue);
   };
+
+  useEffect(() => {
+    if (value !== editedValue) {
+      setEditedValue(value);
+    }
+  }, [value]);
 
   return (
     <span
@@ -481,7 +488,7 @@ const ResumeTemplate1 = ({
                   : streamedSummaryData && streamedSummaryData
               }
               onSave={(value: string) => {
-                dispatch(setField({ name: "summary", value: value }));
+                dispatch(setSummary(value));
                 saveResumeToDB({ ...resume, summary: value });
               }}
             />

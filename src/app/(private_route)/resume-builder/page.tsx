@@ -99,6 +99,7 @@ const ResumeBuilder = () => {
       method: "POST",
       body: JSON.stringify({
         type: "basicDetails",
+        inputType: "userData",
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
       }),

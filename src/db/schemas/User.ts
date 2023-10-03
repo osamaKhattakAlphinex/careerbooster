@@ -71,6 +71,12 @@ const UserSchema = new Schema(
       review_resume: Number,
       consulting_bids_generation: Number,
     },
+    results: {
+      keywords: String,
+      headline: String,
+      about: String,
+      jobDescription: String,
+    },
   },
 
   { timestamps: true }

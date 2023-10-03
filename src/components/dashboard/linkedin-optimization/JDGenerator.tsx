@@ -11,6 +11,7 @@ import {
 } from "@/store/userDataSlice";
 import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "../LimitCard";
+import axios from "axios";
 
 interface Props {
   setJobDesc: React.Dispatch<React.SetStateAction<string>>;
@@ -31,6 +32,15 @@ const JDGenerator = ({ setJobDesc }: Props) => {
   useEffect(() => {
     setJobDesc(streamedData);
   }, [streamedData]);
+
+  useEffect(() => {
+    if (
+      userData.results.jobDescription &&
+      userData.results.jobDescription !== ""
+    ) {
+      setStreamedData(userData.results.jobDescription);
+    }
+  }, [userData]);
 
   const handleGenerate = async () => {
     setStreamedData("");
@@ -85,6 +95,8 @@ const JDGenerator = ({ setJobDesc }: Props) => {
         setStreamedData((prev) => prev + `</p> <br /> `);
       }
 
+      // await saveToDB(html);
+
       fetch("/api/users/updateUserLimit", {
         method: "POST",
         body: JSON.stringify({
@@ -104,6 +116,26 @@ const JDGenerator = ({ setJobDesc }: Props) => {
           dispatch(setUserData({ ...userData, ...updatedObject }));
         }
       });
+    }
+  };
+
+  const saveToDB = async (tempText: string) => {
+    try {
+      const response = await axios.post("/api/users/updateUserData", {
+        data: {
+          email: session?.user?.email,
+          results: {
+            ...userData.results,
+            jobDescription: tempText,
+          },
+        },
+      });
+      const { success } = response.data;
+      if (success) {
+        console.log("Keywords saved to DB");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
