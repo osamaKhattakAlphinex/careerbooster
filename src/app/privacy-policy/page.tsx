@@ -32,8 +32,8 @@ export default function PrivacyPloicyPage() {
               may include your email address, name, address, credit card
               information, bank information, or other Personal Information. You
               can choose not to provide us with certain information, but then
-              you may not be able to take advantage of some of the Website's
-              features.
+              you may not be able to take advantage of some of the
+              Website&apos;s features.
             </p>
 
             <h3 className="py-5">Collection of Non-Personal Information</h3>
