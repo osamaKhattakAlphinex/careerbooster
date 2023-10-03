@@ -113,7 +113,7 @@ const RegistrationForm = () => {
           firstName: obj?.firstName,
           lastName: obj?.lastName,
           email: obj?.email,
-          tags: ["cb-new-user"],
+          tags: ["cb-user"],
         },
         {
           headers: {

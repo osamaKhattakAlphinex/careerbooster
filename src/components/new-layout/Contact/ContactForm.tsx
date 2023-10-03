@@ -1,4 +1,20 @@
+"use client";
+import { useFormik } from "formik";
+
 const ContactForm = () => {
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+      // Submit form data to server
+    },
+  });
+
   return (
     <div
       className="row justify-center mt-18"
@@ -9,8 +25,7 @@ const ContactForm = () => {
         <form
           className="vstack gap-8"
           id="contact-form"
-          method="post"
-          action="assets/php/contact_email.php"
+          onSubmit={formik.handleSubmit}
         >
           <div className="">
             <label htmlFor="name" className="form-label fs-lg fw-medium mb-4">
@@ -38,7 +53,8 @@ const ContactForm = () => {
                 name="name"
                 className="form-control rounded-2"
                 placeholder="What's your name?"
-                required
+                value={formik.values.name}
+                onChange={formik.handleChange}
               />
             </div>
           </div>
@@ -70,7 +86,8 @@ const ContactForm = () => {
                 name="email"
                 className="form-control rounded-2"
                 placeholder="Enter Your Email"
-                required
+                value={formik.values.email}
+                onChange={formik.handleChange}
               />
             </div>
           </div>
@@ -99,6 +116,8 @@ const ContactForm = () => {
                 name="phone"
                 className="form-control rounded-2"
                 placeholder="Phone Number"
+                value={formik.values.phone}
+                onChange={formik.handleChange}
               />
             </div>
           </div>
@@ -115,6 +134,8 @@ const ContactForm = () => {
               className="form-control rounded-2"
               placeholder="Write here your details message"
               rows={4}
+              value={formik.values.message}
+              onChange={formik.handleChange}
             ></textarea>
           </div>
           <div className="">
