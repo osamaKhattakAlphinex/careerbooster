@@ -154,30 +154,97 @@ const Header = () => {
                    Dashboard
                  </Link> */}
                   <div className="relative inline-block text-left">
-                    <div>
-                      <button
-                        type="button"
-                        className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-3 py-2  font-semibold  border text-xs"
-                        id="menu-button"
-                        onMouseOver={() => setDropdownOpen(true)}
-                        onMouseLeave={() => setDropdownOpen(false)}
-                        onClick={() => setDropdownOpen(!dropdownOpen)}
-                      >
+                    {/* if the screen is on mobile */}
+                    {typeof window !== "undefined" &&
+                    /Mobile/.test(navigator.userAgent) ? (
+                      <div>
                         {userData.firstName + " " + userData.lastName}
-                        <svg
-                          className="-mr-1 h-5 w-5 !text-white"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          aria-hidden="true"
+                        <Link
+                          href={role === "admin" ? "/admin" : "/dashboard"}
+                          className=" block px-4 py-2 text-sm no-underline text-white hover:bg-gray-600"
+                          role="menuitem"
+                          id="menu-item-0"
                         >
-                          <path
-                            fillRule="evenodd"
-                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
-                    </div>
+                          Dashboard
+                        </Link>
+                        <button
+                          type="button"
+                          className=" block w-full px-4 py-2 text-left text-sm hover:bg-gray-600"
+                          role="menuitem"
+                          id="menu-item-3"
+                          onClick={() => signOut()}
+                        >
+                          Log out
+                        </button>
+                      </div>
+                    ) : (
+                      <>
+                        <div>
+                          <button
+                            type="button"
+                            className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-3 py-2  font-semibold  border text-xs"
+                            id="menu-button"
+                            onMouseOver={() => setDropdownOpen(true)}
+                            onMouseLeave={() => setDropdownOpen(false)}
+                            onClick={() => setDropdownOpen(!dropdownOpen)}
+                          >
+                            {userData.firstName + " " + userData.lastName}
+                            <svg
+                              className="-mr-1 h-5 w-5 !text-white"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        {dropdownOpen && (
+                          <div
+                            className="absolute right-0 z-10 mt-0 bg-gray-700 text-white w-56 origin-top-right rounded-md  shadow-lg "
+                            role="menu"
+                            onMouseOver={() => setDropdownOpen(true)}
+                            onMouseLeave={() => setDropdownOpen(false)}
+                          >
+                            <div className="py-1" role="none">
+                              {/* <!-- Active: "bg-gray-100 ", Not Active: "text-gray-700" --> */}
+                              <Link
+                                href={
+                                  role === "admin" ? "/admin" : "/dashboard"
+                                }
+                                className=" block px-4 py-2 text-sm no-underline text-white hover:bg-gray-600"
+                                role="menuitem"
+                                id="menu-item-0"
+                              >
+                                Dashboard
+                              </Link>
+                              <Link
+                                href="/profile-review"
+                                className=" block px-4 py-2 text-sm no-underline text-white hover:bg-gray-600"
+                                role="menuitem"
+                                id="menu-item-1"
+                              >
+                                Edit Profile
+                              </Link>
+                              <button
+                                type="button"
+                                className=" block w-full px-4 py-2 text-left text-sm hover:bg-gray-600"
+                                role="menuitem"
+                                id="menu-item-3"
+                                onClick={() => signOut()}
+                              >
+                                Log out
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    )}
+
                     {dropdownOpen && (
                       <div
                         className="absolute right-0 z-10 mt-0 bg-gray-700 text-white w-56 origin-top-right rounded-md  shadow-lg "
