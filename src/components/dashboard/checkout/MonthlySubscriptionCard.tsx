@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Stripe from "stripe";
 import { useRouter } from "next/navigation";
+import { CouponBody } from "@/app/stripe-coupon/route";
 
 interface Props {
   userPackage: UserPackageData;
@@ -20,6 +21,8 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
   customer,
 }) => {
   const [subscribing, setSubscribing] = useState(false);
+  const [coupon, setCoupon] = useState("");
+  const [couponError, setCouponError] = useState("");
   const router = useRouter();
 
   // redux
@@ -27,24 +30,54 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
   const userData = useSelector((state: any) => state.userData);
 
   const handleClick = async () => {
+    // set subscribing to true
     setSubscribing(true);
+    setCouponError("");
+
+    // load stripe
+    const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
+    const stripe = await loadStripe(STRIPE_PK);
+
+    const body: CheckoutSubscriptionBody = {
+      interval: userPackage.type === "monthly" ? "month" : "year",
+      amount: userPackage.amount * 100,
+      plan: userPackage.title,
+      limit: userPackage.limit,
+      customer: customer,
+      // customerId: customer.id,
+    };
+
+    // define the data for monthly subscription without coupon
+    const bocouponBody: CouponBody = {
+      coupon,
+    };
+
+    // check if there is coupon entered
+    if (coupon !== "") {
+      const result = await fetch("/stripe-coupon", {
+        method: "post",
+        body: JSON.stringify(bocouponBody, null),
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+
+      // get the coupon data
+      const data = await result.json();
+      if (data.message) {
+        setCouponError("Invalid or expired coupon");
+        setSubscribing(false);
+        return;
+      } else {
+        body.coupon = data.id;
+      }
+    }
+
     if (userPackage && userPackage.amount === 0) {
       // Fee package
       updateUserWithFreePackage(userPackage._id);
     } else if (userPackage) {
-      // step 1: load stripe
-      const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
-      const stripe = await loadStripe(STRIPE_PK);
-
-      // step 2: define the data for monthly subscription
-      const body: CheckoutSubscriptionBody = {
-        interval: userPackage.type === "monthly" ? "month" : "year",
-        amount: userPackage.amount * 100,
-        plan: userPackage.title,
-        limit: userPackage.limit,
-        customer: customer,
-        // customerId: customer.id,
-      };
+      // paid pacakge checkout to stripe
 
       // step 3: make a post fetch api call to /checkout-session handler
       const result = await fetch("/checkout-sessions", {
@@ -146,9 +179,21 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
             {userPackage.type === "yearly" && " / year"}
           </span>
         </h1>
-        {/* <!-- <p className="text-white lead fw-normal mt-4 mb-0">
-                    A 10X faster way to writing your professional copy
-                  </p> --> */}
+        {/* Apply coupon  */}
+        <div className="mt-4">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Apply coupon"
+            value={coupon}
+            onChange={(e) => setCoupon(e.target.value)}
+          />
+        </div>
+        {/* invalid coupon error */}
+        {couponError && couponError !== "" && (
+          <p className="text-red-500 text-sm mt-1">{couponError}</p>
+        )}
+
         <button
           onClick={() => handleClick()}
           disabled={subscribing}

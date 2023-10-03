@@ -8,7 +8,6 @@ export default function SubscribePage() {
   const [showExpiredAlert, setShowExpiredAlert] = useState(false);
   // check if there is ?expired=1 in the URL
   const params = useSearchParams();
-  console.log(params);
 
   useEffect(() => {
     const expired = params?.get("expired");

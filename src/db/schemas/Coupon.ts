@@ -3,14 +3,37 @@ const { Schema } = mongoose;
 
 const CouponSchema = new Schema(
   {
-    code: {
+    id: {
       type: String,
       required: true,
       unique: true,
     },
-    discount: {
+    amount_off: {
       type: Number,
       required: true,
+      min: 0,
+      max: 100,
+    },
+    currency: String,
+    duration: {
+      type: String,
+      enum: ["once", "repeating", "forever"],
+      required: true,
+    },
+    duration_in_months: {
+      type: Number,
+      min: 1,
+    },
+    livemode: {
+      type: Boolean,
+      default: false,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    percent_off: {
+      type: Number,
       min: 0,
       max: 100,
     },
@@ -22,10 +45,13 @@ const CouponSchema = new Schema(
     expiresAt: {
       type: Date,
     },
-    status: {
-      type: String,
-      enum: ["active", "inactive"],
-      required: true,
+    valid: {
+      type: Boolean,
+      default: true,
+    },
+    times_redeemed: {
+      type: Number,
+      default: 0,
     },
   },
 

@@ -20,15 +20,27 @@ export interface CheckoutSubscriptionBody {
     consulting_bids_generation: number;
   };
   amount: number;
+  coupon?: string;
   interval: "month" | "year";
   // customerId?: string;
   customer: any;
 }
 
+//COUPON jIqH36bY
 export async function POST(req: Request) {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL;
   const body = (await req.json()) as CheckoutSubscriptionBody;
   const origin = req.headers.get("origin") || appUrl;
+
+  // if coupon is provided add it otherwise leave it empty
+  let discounts: any = [];
+  if (body.coupon !== "") {
+    discounts = [
+      {
+        coupon: body.coupon,
+      },
+    ];
+  }
 
   // if user is logged in, redirect to thank you page, otherwise redirect to signup page.
   const success_url = !body.customer
@@ -58,12 +70,12 @@ export async function POST(req: Request) {
               description: `CareerBooster.ai ${body.plan} Plan Subscription`,
             },
           },
-
           quantity: 1,
         },
       ],
       success_url: success_url,
-      cancel_url: `${origin}/cancel?session_id={CHECKOUT_SESSION_ID}`,
+      discounts: discounts,
+      cancel_url: `${origin}/subscribe?session_id={CHECKOUT_SESSION_ID}`,
     });
     return NextResponse.json(session);
   } catch (error) {
