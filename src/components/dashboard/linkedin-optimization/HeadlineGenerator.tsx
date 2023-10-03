@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "../LimitCard";
+import axios from "axios";
 
 interface Props {
   setHeadline: React.Dispatch<React.SetStateAction<string>>;
@@ -39,6 +40,9 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
         skills: userData?.skills,
       });
     }
+    if (userData.results.headline && userData.results.headline !== "") {
+      setStreamedData(userData.results.headline);
+    }
   }, [userData]);
 
   const handleGenerate = async () => {
@@ -58,6 +62,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
         .then(async (resp: any) => {
           if (resp.ok) {
             const reader = resp.body.getReader();
+            let tempText = "";
             while (true) {
               const { done, value } = await reader.read();
 
@@ -67,7 +72,10 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
 
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
+              tempText += text;
             }
+
+            await saveToDB(tempText);
 
             fetch("/api/users/updateUserLimit", {
               method: "POST",
@@ -100,6 +108,26 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
         .finally(() => {
           setMsgLoading(false);
         });
+    }
+  };
+
+  const saveToDB = async (tempText: string) => {
+    try {
+      const response = await axios.post("/api/users/updateUserData", {
+        data: {
+          email: session?.user?.email,
+          results: {
+            ...userData.results,
+            headline: tempText,
+          },
+        },
+      });
+      const { success } = response.data;
+      if (success) {
+        console.log("headline saved to DB");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "../LimitCard";
+import axios from "axios";
 
 interface Props {
   setKeywords: React.Dispatch<React.SetStateAction<string>>;
@@ -40,6 +41,9 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
         skills: userData?.skills,
       });
     }
+    if (userData.results.keywords && userData.results.keywords !== "") {
+      setStreamedData(userData.results.keywords);
+    }
   }, [userData]);
 
   const handleGenerate: any = async () => {
@@ -58,14 +62,17 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
         .then(async (resp: any) => {
           if (resp.ok) {
             const reader = resp.body.getReader();
+            let tempText = "";
             while (true) {
               const { done, value } = await reader.read();
               if (done) {
                 break;
               }
               const text = new TextDecoder().decode(value);
+              tempText += text;
               setStreamedData((prev) => prev + text);
             }
+            await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -97,6 +104,25 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
         .finally(() => {
           setMsgLoading(false);
         });
+    }
+  };
+  const saveToDB = async (tempText: string) => {
+    try {
+      const response = await axios.post("/api/users/updateUserData", {
+        data: {
+          email: session?.user?.email,
+          results: {
+            ...userData.results,
+            keywords: tempText,
+          },
+        },
+      });
+      const { success } = response.data;
+      if (success) {
+        console.log("Keywords saved to DB");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
