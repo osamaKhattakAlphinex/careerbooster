@@ -10,9 +10,9 @@ const FeaturesSecond = () => {
             <div className="content">
               <p className="text-primary-dark">Features 1</p>
               <h4 className="text-white">Unveil The Secret...</h4>
-              <h1 className="text-white">
+              <h1 className="text-white md:text-2xl text-[24px]">
                 Craft a Winning
-                <span className="text-primary-dark">Executive Resume</span> in
+                <span className="text-primary-dark"> Executive Resume</span> in
                 Just 7 Minutes!
               </h1>
               <h4 className="text-white mb-8">

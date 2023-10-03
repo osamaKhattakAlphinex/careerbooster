@@ -9,23 +9,25 @@ const RewardsSection = () => {
       >
         <div className="col-md-10 mx-auto">
           <div className="reward-content text-center">
-            <h1>Get Ready for a $10k Reward - Prove Us Wrong!</h1>
-            <h4 className="py-3">
+            <h1 className="text-[34px] md:text-2xl px-5">
+              Get Ready for a $10k Reward - Prove Us Wrong!
+            </h1>
+            <h4 className="py-3 md:px-0 px-5">
               We{"'"}re so confident in our AI tool that we dare you to find a
               better one. If you do, We{"'"}ll hand you $10,000. Challenge
               accepted?
             </h4>
-            <h4 className="pb-3">
+            <h4 className="pb-3 md:px-0 px-5">
               Why CareerBooster is better than GPT and Other Tools?
             </h4>
-            <h4>
+            <h4 className="md:px-0 px-5">
               At CareerBooster, we understand the value of AI, including GPT, in
               crafting exceptional resumes. However, here{"'"}s why our AI
               stands out
             </h4>
           </div>
           <div className="reward-list col-md-10 mx-auto">
-            <ul className="list-unstyled list-check mb-8 mt-10">
+            <ul className="list-unstyled list-check mb-8 mt-10 md:px-0 px-5">
               <li className="font-16 mb-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +101,7 @@ const RewardsSection = () => {
                 </span>
               </li>
             </ul>
-            <p className="text-center font-16">
+            <p className="text-center md:px-0 px-5 font-16">
               Choose CareerBooster for AI-powered resume excellence tailored to
               your senior-level career goals. Say goodbye to complex prompts and
               slow processes—experience efficiency and quality with us.
