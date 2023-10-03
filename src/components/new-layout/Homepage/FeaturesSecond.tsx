@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const FeaturesSecond = () => {
   return (
     <section className="py-10 py-lg-15 @extraClassList">
@@ -90,8 +92,8 @@ const FeaturesSecond = () => {
                       >
                     </li>
                   </ul> --> */}
-              <a
-                href="login.html"
+              <Link
+                href="/register"
                 className="arrow-link arrow-link-primary-dark text-primary-dark gap-3"
               >
                 <span>Get Started Free</span>
@@ -109,7 +111,7 @@ const FeaturesSecond = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="250">
@@ -151,8 +153,8 @@ const FeaturesSecond = () => {
                 those lucrative, unadvertised positions become available. Take
                 control of your future today!
               </p>
-              <a
-                href="login.html"
+              <Link
+                href="/register"
                 className="arrow-link arrow-link-primary-dark text-primary-dark gap-3"
               >
                 <span>Request A Demo</span>
@@ -170,7 +172,7 @@ const FeaturesSecond = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="250">
@@ -206,8 +208,8 @@ const FeaturesSecond = () => {
                 and embrace a more efficient way to land your dream job!{'"'}
               </p>
 
-              <a
-                href="login.html"
+              <Link
+                href="/register"
                 className="arrow-link arrow-link-primary-dark text-primary-dark gap-3"
               >
                 <span>Get Started Free</span>
@@ -225,7 +227,7 @@ const FeaturesSecond = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="250">
@@ -264,8 +266,8 @@ const FeaturesSecond = () => {
                 provides insights to optimize your resume for success. Don{"'"}t
                 let the ATS stand in your way - assess your resume now!{'"'}
               </p>
-              <a
-                href="login.html"
+              <Link
+                href="/register"
                 className="arrow-link arrow-link-primary-dark text-primary-dark gap-3"
               >
                 <span>Request A Demo</span>
@@ -283,7 +285,7 @@ const FeaturesSecond = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="250">
@@ -319,8 +321,8 @@ const FeaturesSecond = () => {
                 - seize it with a flawless resume!
               </p>
 
-              <a
-                href="login.html"
+              <Link
+                href="/register"
                 className="arrow-link arrow-link-primary-dark text-primary-dark gap-3"
               >
                 <span>Get Started Free</span>
@@ -338,7 +340,7 @@ const FeaturesSecond = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="250">

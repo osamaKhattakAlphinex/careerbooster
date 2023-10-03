@@ -55,7 +55,7 @@ const UseCases = () => {
               </div>
               <div className="flex-shrink-0">
                 <a
-                  href="use-cases-details.html"
+                  href="#"
                   className="arrow-link arrow-link-primary-dark gap-3 fs-sm"
                 >
                   <span>Try Blog Content</span>
@@ -109,7 +109,7 @@ const UseCases = () => {
               </div>
               <div className="flex-shrink-0">
                 <a
-                  href="use-cases-details.html"
+                  href="#"
                   className="arrow-link arrow-link-primary-dark gap-3 fs-sm"
                 >
                   <span>Try Digital Ad</span>
@@ -162,7 +162,7 @@ const UseCases = () => {
               </div>
               <div className="flex-shrink-0">
                 <a
-                  href="use-cases-details.html"
+                  href="#"
                   className="arrow-link arrow-link-primary-dark gap-3 fs-sm"
                 >
                   <span>Try Website Copy</span>
@@ -213,7 +213,7 @@ const UseCases = () => {
               </div>
               <div className="flex-shrink-0">
                 <a
-                  href="use-cases-details.html"
+                  href="#"
                   className="arrow-link arrow-link-primary-dark gap-3 fs-sm"
                 >
                   <span>Try Social Media Content</span>
@@ -264,7 +264,7 @@ const UseCases = () => {
               </div>
               <div className="flex-shrink-0">
                 <a
-                  href="use-cases-details.html"
+                  href="#"
                   className="arrow-link arrow-link-primary-dark gap-3 fs-sm"
                 >
                   <span>Try Landing Page Copy</span>
@@ -316,7 +316,7 @@ const UseCases = () => {
               </div>
               <div className="flex-shrink-0">
                 <a
-                  href="use-cases-details.html"
+                  href="#"
                   className="arrow-link arrow-link-primary-dark gap-3 fs-sm"
                 >
                   <span>Try Marketing Copy</span>
@@ -367,7 +367,7 @@ const UseCases = () => {
               </div>
               <div className="flex-shrink-0">
                 <a
-                  href="use-cases-details.html"
+                  href="#"
                   className="arrow-link arrow-link-primary-dark gap-3 fs-sm"
                 >
                   <span>Try eCommerce Copy</span>
@@ -419,7 +419,7 @@ const UseCases = () => {
               </div>
               <div className="flex-shrink-0">
                 <a
-                  href="use-cases-details.html"
+                  href="#"
                   className="arrow-link arrow-link-primary-dark gap-3 fs-sm"
                 >
                   <span>Try Product Description</span>
