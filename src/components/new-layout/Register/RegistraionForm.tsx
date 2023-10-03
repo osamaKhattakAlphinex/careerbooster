@@ -67,27 +67,17 @@ const RegistrationForm = () => {
           email: values.email,
           password: values.password,
           file: values.file,
-          // userPackage: "6511982f7205dfb643a1d6a0",
-          // userPackageUsed: {
-          //   resumes_generation: 0,
-          //   keywords_generation: 0,
-          //   headline_generation: 0,
-          //   about_generation: 0,
-          //   job_desc_generation: 0,
-          //   cover_letter_generation: 0,
-          //   pdf_files_upload: 0,
-          //   review_resume: 0,
-          //   consulting_bids_generation: 0,
-          // },
         };
 
         axios
           .post("/api/auth/users", obj)
           .then(async function (response) {
             if (values.file !== "") {
+              await UpdateGohighlevel(obj);
               await moveResumeToUserFolder(values.file, values.email);
               await updateUser(values.file, values.email);
             }
+
             const res = await signIn("credentials", {
               email: values.email,
               password: values.password,
@@ -113,6 +103,32 @@ const RegistrationForm = () => {
       }
     },
   });
+
+  const UpdateGohighlevel = async (obj: any) => {
+    axios
+      .post(
+        `${process.env.NEXT_PUBLIC_GHL_API_URL}/contacts/`,
+        {
+          name: obj?.firstName + obj?.lastName,
+          firstName: obj?.firstName,
+          lastName: obj?.lastName,
+          email: obj?.email,
+          tags: ["cb-new-user"],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_GHL_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const moveResumeToUserFolder = async (fileName: string, email: string) => {
     if (fileName && email) {
