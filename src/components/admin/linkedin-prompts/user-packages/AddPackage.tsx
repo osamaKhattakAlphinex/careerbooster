@@ -68,30 +68,28 @@ const AddPackage = () => {
         ),
       }),
     }),
-    onSubmit: (values, action) => {
-      const handelAddPackage = async () => {
-        const res = await axios.post("/api/admin/packages/add_package", {
-          type: "",
-          title: "",
-          amount: 0,
-          status: "",
-          // features: ["Feature 1", "Feature 2"],
-          category: "",
-          limit: {
-            resumes_generation: 0,
-            can_edit_resume: true,
-            keywords_generation: 0,
-            headline_generation: 0,
-            about_generation: 0,
-            job_desc_generation: 0,
-            cover_letter_generation: 0,
-            pdf_files_upload: 0,
-            review_resume: 0,
-            consulting_bids_generation: 0,
-          },
-        });
-        console.log("api response:", res);
-      };
+    onSubmit: async (values, action) => {
+      const res = await axios.post("/api/admin/packages/add_package", {
+        type: values.type,
+        title: values.title,
+        amount: values.amount,
+        status: values.status,
+        // features: ["Feature 1", "Feature 2"],
+        category: values.category,
+        limit: {
+          resumes_generation: values.limit.resumes_generation,
+          can_edit_resume: values.limit.can_edit_resume,
+          keywords_generation: values.limit.keywords_generation,
+          headline_generation: values.limit.headline_generation,
+          about_generation: values.limit.about_generation,
+          job_desc_generation: values.limit.job_desc_generation,
+          cover_letter_generation: values.limit.cover_letter_generation,
+          pdf_files_upload: values.limit.pdf_files_upload,
+          review_resume: values.limit.review_resume,
+          consulting_bids_generation: values.limit.consulting_bid_generation,
+        },
+      });
+      console.log("api response:", res);
       action.resetForm();
       setPopUpModel(false);
     },
@@ -209,8 +207,8 @@ const AddPackage = () => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   >
                     <option defaultValue="">Select Package Type</option>
-                    <option value="mon">Monthly</option>
-                    <option value="year">Yearly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
                   </select>
                   {formik.touched.type && formik.errors.type && (
                     <p className="text-red-600 pt-3">{formik.errors.type}</p>
