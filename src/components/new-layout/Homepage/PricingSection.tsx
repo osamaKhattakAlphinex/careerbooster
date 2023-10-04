@@ -13,7 +13,7 @@ const PricingSection = () => {
                 Pricing Plan
               </p>
               <h1
-                className="text-white mb-5"
+                className="text-white mb-5 md:text-[48px] text-[24px]"
                 data-aos="fade-up-sm"
                 data-aos-delay="100"
               >
@@ -34,7 +34,7 @@ const PricingSection = () => {
           >
             <div className="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-">
               <h3 className="text-primary-dark fw-medium mb-0">Free Forever</h3>
-              <h1 className="display-3 fw-semibold text-white mb-0 mt-4 !text-6xl">
+              <h1 className="display-3 fw-semibold text-white mb-0 mt-4  md:!text-6xl text-[24px]">
                 $00
               </h1>
               {/* <!-- <p className="text-white lead fw-normal mt-4 mb-0">
@@ -62,7 +62,7 @@ const PricingSection = () => {
           >
             <div className="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-">
               <h3 className="text-primary-dark fw-medium mb-0">Standard</h3>
-              <h1 className="display-2 fw-semibold text-white mb-0 mt-4 !text-6xl">
+              <h1 className="display-2 fw-semibold text-white mb-0 mt-4  md:!text-6xl text-[24px]">
                 $99
               </h1>
               {/* <!-- <p className="text-white lead fw-normal mt-4 mb-0">
@@ -97,7 +97,7 @@ const PricingSection = () => {
                     >Most Popular</span
                   > --> */}
               <h3 className="text-primary-dark fw-medium mb-0">Premium</h3>
-              <h1 className="display-2 fw-semibold text-white mb-0 mt-4 !text-6xl">
+              <h1 className="display-2 fw-semibold text-white mb-0 mt-4  md:!text-6xl text-[24px]">
                 $500 <span className="text-2xl">/ year</span>
               </h1>
               {/* <!-- <p className="text-white lead fw-normal mt-4 mb-0">

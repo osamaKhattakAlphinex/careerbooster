@@ -15,22 +15,21 @@ const HeroArea = () => {
                   Unlock Your Career Potential
                 </p>
                 <h1
-                  className="text-white mb-8"
+                  className="text-white mb-8 md:text-[48px] text-[24px]"
                   data-aos="fade-up-sm"
                   data-aos-delay="50"
                 >
-                  7 Reasons to Turbocharge Your <br />
-                  Career with AI-Powered Tools <br />
+                  Your Free AI Resume Writer & LinkedIn Optimization Tool to
+                  Turbocharge Your Career!
+                  <br />
                   <span
-                    className="fw-bold font-36 text-gradient-2 typed-animation text-wrap"
-                    data-strings='["Customizes Your Documents for Each Job", "Creates Documents 100 Times Faster, Saving You Time", 
-                        "Ensures Your Resume Gets Through Applicant Tracking Systems", "Maintains A Consistent Message Across Career Tools",
-                        "Research-Backed Insights and Actionable Feedback",
-                        "Reduces Manual Errors and Ensures Accuracy",
-                        "Generates Keyword-Optimized Resumes to Boost Your Visibility"]'
-                  >
-                    Product Description
-                  </span>
+                    className="fw-bold md:text-[48px] text-[24px] text-gradient-2 typed-animation text-wrap"
+                    data-strings='["Find Your Dream Job Faster.", "Get More Interviews.", 
+                        "Access Confidential Opportunities with the Right Keywords.", "Get the Attention You Deserve from Recruiters.",
+                        "Get Past the ATS and Increase Your Visibility.",
+                        "A Top-Notch Resume Will Boost Your Confidence.",
+                        "Expect a Document That Stands Out from the Competition"]'
+                  ></span>
                 </h1>
                 <UploadPDFResume />
               </div>

@@ -13,12 +13,12 @@ const UseCases = () => {
                 CareerBooster Use Cases
               </p>
               <h1
-                className="text-white mb-0"
+                className="text-white mb-0  md:text-[48px] text-[24px]"
                 data-aos="fade-up-sm"
                 data-aos-delay="100"
               >
-                {'"'}Transform Your Career with CareerBooster, AI-Powered Tools
-                for Professional Excellence{'"'}
+                Transform Your Career with CareerBooster, AI-Powered Tools for
+                Professional Excellence
               </h1>
             </div>
           </div>
