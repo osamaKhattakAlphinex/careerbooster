@@ -6,11 +6,11 @@ const Reviews = () => {
           <div className="col-lg-9">
             <div className="text-center">
               <h1
-                className="text-white"
+                className="text-white md:text-[48px] text-[24px]"
                 data-aos="fade-up-sm"
                 data-aos-delay="50"
               >
-                <span className="text-primary-dark">CareerBooster.</span>
+                <span className="text-primary-dark">CareerBooster </span>
                 Received
                 <img
                   src="assets/images/icons/star.png"

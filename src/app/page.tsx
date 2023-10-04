@@ -26,6 +26,10 @@ export const metadata: Metadata = {
     "Job market competitiveness",
     "Job applications",
     "Cover letter",
+    "Resume ai",
+    "ai resume writer",
+    "Resume Ai builder",
+    "Ai resume generator",
   ],
   viewport: {
     width: "device-width",

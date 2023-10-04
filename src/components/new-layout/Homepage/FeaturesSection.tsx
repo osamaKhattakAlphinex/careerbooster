@@ -6,14 +6,14 @@ const FeaturesSection = () => {
       <div className="container">
         <div className="text-center mb-18">
           <h4
-            className="mb-5 text-white"
+            className="mb-5 text-white md:text-[24px] text-[17px]"
             data-aos="fade-up-sm"
             data-aos-delay="50"
           >
             Uncover the Secret to Superior Resumes
           </h4>
           <h1
-            className="mb-5 text-white"
+            className="mb-5 text-white md:text-[48px] text-[24px]"
             data-aos="fade-up-sm"
             data-aos-delay="50"
           >
@@ -21,7 +21,7 @@ const FeaturesSection = () => {
             <br className="d-none d-lg-block" />
           </h1>
           <h4
-            className="mb-0 text-white"
+            className="mb-0 text-white md:text-[24px] text-[17px]"
             data-aos="fade-up-sm"
             data-aos-delay="50"
           >

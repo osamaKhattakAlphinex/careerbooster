@@ -6,7 +6,7 @@ const FAQSection = () => {
           <div className="col-lg-10">
             <div className="text-center">
               <h1
-                className="mb-0 text-white"
+                className="mb-0 text-white md:text-[48px] text-[24px]"
                 data-aos="fade-up-sm"
                 data-aos-delay="50"
               >

@@ -11,7 +11,7 @@ const TeamCard = () => {
               data-aos="fade-up-sm"
               data-aos-delay="50"
             >
-              <h1 className="text-white">
+              <h1 className="text-white md:text-[48px] text-[24px]">
                 <span className="text-primary-dark">Career Booster.</span> is
                 Powered by a <br className="d-none d-xl-block" />
                 Dynamic Team.
