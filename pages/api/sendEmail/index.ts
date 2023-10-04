@@ -11,9 +11,10 @@ export default async function handler(
       await startDB();
 
       const { email, message, name, phone } = req.body;
-      const senderEmail = process.env.SENDER_EMAIL || "info@careerbooster.ai";
+      const senderEmail =
+        process.env.SENDER_EMAIL || "contact@consultantsperhour.com";
       const receiverEmail =
-        process.env.RECEIVER_EMAIL || "m.sulemankhan@hotmail.com";
+        process.env.RECEIVER_EMAIL || "info@consultantsperhour.com";
 
       const mailjet = new Mailjet({
         apiKey: process.env.SMTP_API_KEY || "your-api-key",
@@ -30,7 +31,7 @@ export default async function handler(
             To: [
               {
                 Email: receiverEmail,
-                Name: "Suleman Khan",
+                Name: "CareerBooster Admin",
               },
             ],
             Subject: `${name} via Contact us form | CareerBooster.ai`,

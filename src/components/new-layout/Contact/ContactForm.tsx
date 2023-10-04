@@ -26,15 +26,17 @@ const ContactForm = () => {
       message: "",
     },
     onSubmit: (values) => {
-      setSubmitting(true);
-      setSuccessAlert("");
-      // Submit form data to server
-      axios.post("/api/sendEmail", values).then((resp) => {
-        setSubmitting(false);
-        formik.resetForm();
-        recaptchaRef.current?.reset();
-        setSuccessAlert("Email has been sent!");
-      });
+      if (isVerified) {
+        setSubmitting(true);
+        setSuccessAlert("");
+        // Submit form data to server
+        axios.post("/api/sendEmail", values).then((resp) => {
+          setSubmitting(false);
+          formik.resetForm();
+          recaptchaRef.current?.reset();
+          setSuccessAlert("Email has been sent!");
+        });
+      }
     },
   });
 

@@ -6,6 +6,7 @@ interface Props {
   className?: string;
   id?: string;
   children?: React.ReactNode;
+  href?: string;
 }
 
 const Button: React.FC<Props> = ({
@@ -15,6 +16,7 @@ const Button: React.FC<Props> = ({
   className,
   children,
   id,
+  href,
 }: any) => {
   if (type === "button") {
     return (
@@ -29,10 +31,8 @@ const Button: React.FC<Props> = ({
     );
   }
   if (type === "link") {
-    <Link href="#">
-      <a href="" className="btn btn-outline-primary-dark">
-        link
-      </a>
+    <Link href={href} className="btn btn-outline-primary-dark">
+      {children}
     </Link>;
   }
 };
