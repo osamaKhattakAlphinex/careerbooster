@@ -1,7 +1,23 @@
 "use client";
+import axios from "axios";
 import { useFormik } from "formik";
+import { useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import { verifyCaptcha } from "@/ServerActions";
 
 const ContactForm = () => {
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [isVerified, setIsverified] = useState<boolean>(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [successAlert, setSuccessAlert] = useState("");
+
+  async function handleCaptchaSubmission(token: string | null) {
+    // Server function to verify captcha
+    await verifyCaptcha(token)
+      .then(() => setIsverified(true))
+      .catch(() => setIsverified(false));
+  }
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -10,8 +26,15 @@ const ContactForm = () => {
       message: "",
     },
     onSubmit: (values) => {
-      console.log(values);
+      setSubmitting(true);
+      setSuccessAlert("");
       // Submit form data to server
+      axios.post("/api/sendEmail", values).then((resp) => {
+        setSubmitting(false);
+        formik.resetForm();
+        recaptchaRef.current?.reset();
+        setSuccessAlert("Email has been sent!");
+      });
     },
   });
 
@@ -22,11 +45,7 @@ const ContactForm = () => {
       data-aos-delay="50"
     >
       <div className="col-lg-8 col-xl-6">
-        <form
-          className="vstack gap-8"
-          id="contact-form"
-          onSubmit={formik.handleSubmit}
-        >
+        <form className="vstack gap-8" onSubmit={formik.handleSubmit}>
           <div className="">
             <label htmlFor="name" className="form-label fs-lg fw-medium mb-4">
               Your name*
@@ -138,9 +157,25 @@ const ContactForm = () => {
               onChange={formik.handleChange}
             ></textarea>
           </div>
+          {/* Success Alert */}
+          {successAlert && (
+            <div className="alert alert-success" role="alert">
+              {successAlert}
+            </div>
+          )}
+          <ReCAPTCHA
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+            ref={recaptchaRef}
+            onChange={handleCaptchaSubmission}
+            theme="dark"
+          />
           <div className="">
-            <button type="submit" className="btn btn-primary-dark">
-              Send Message
+            <button
+              type="submit"
+              disabled={submitting || !isVerified}
+              className="btn btn-primary-dark disabled:btn-secondary-dark"
+            >
+              {submitting ? "Submitting..." : "Send Message"}
             </button>
           </div>
           <div className="status alert mb-0 d-none"></div>
