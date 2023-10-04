@@ -27,12 +27,12 @@ const AdminDashboard = () => {
   // };
   return (
     <section className="   md:h-screen p-10 mb-40">
-      <div className="w-full  rounded-lg shadow  md:mt-0  xl:p-0 ">
-        <div className="w-full flex flex-col gap-4 p-6 space-y-4 md:space-y-6 sm:p-8  ">
-          <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl  ">
+      <div className="w-full   rounded-lg shadow  md:mt-0  xl:p-0 ">
+        <div className="w-full  flex flex-col gap-4 p-6 space-y-4 md:space-y-6 sm:p-8  ">
+          <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl">
             Welcome ADMIN!!
           </h1>
-          <div className="flex gap-2">
+          <div className="flex md:flex-row flex-col gap-2 mx-auto sm:w-full ">
             <Link href="/linkedin-prompts-configuration">
               <button className="bg-gray-900 text-white rounded-lg px-6 py-4 hover:bg-gray-800">
                 <div className="flex flex-row gap-2">
@@ -118,7 +118,7 @@ const AdminDashboard = () => {
               </button>
             </Link>
           </div>
-          <div className="flex gap-2">
+          <div className="flex md:flex-row flex-col gap-2 mx-auto sm:w-full ">
             <Link href="/cover-letter-prompt-configuration">
               <button className="bg-gray-900 text-white rounded-lg px-6 py-4 hover:bg-gray-800">
                 <div className="flex flex-row gap-2">
