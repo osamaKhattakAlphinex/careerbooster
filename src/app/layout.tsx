@@ -9,6 +9,7 @@ import Footer from "@/components/layout/Footer";
 import Script from "next/script";
 import "./plugins.css";
 import "./style.css";
+import useTheme from "@/lib/useTheme";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,8 +23,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [theme] = useTheme();
   return (
-    <html lang="en" data-bs-theme="dark">
+    <html lang="en" data-bs-theme={theme}>
       <body className={inter.className}>
         <div className="wrapper d-flex flex-column justify-between ">
           <AuthProvider>

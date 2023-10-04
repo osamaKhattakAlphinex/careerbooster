@@ -4,12 +4,15 @@ import { signOut, useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import { useEffect, useState } from "react";
+import ThemeToggler from "../Themetoggler";
+// import useTheme from "@/lib/useTheme";
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
   const role = data?.user?.role;
+  // const [theme, toggleTheme] = useTheme();
 
   // Session
   const { data: session } = useSession();
@@ -74,6 +77,7 @@ const Header = () => {
       className="navbar navbar-expand-lg fixed-top bg-dark"
       data-bs-theme="dark"
     >
+      {/* <ThemeToggler /> */}
       <div className="container">
         {/* <!-- Logo --> */}
         <Link
