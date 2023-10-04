@@ -14,6 +14,7 @@ const ChangePasswordPage = () => {
   const params = useSearchParams();
   const token = params?.get("token");
   const [verifyingToken, setVerifyingToken] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,6 +29,7 @@ const ChangePasswordPage = () => {
       return;
     }
 
+    setLoading(true);
     try {
       await changePassword({
         email: decodedEmail,
@@ -37,6 +39,7 @@ const ChangePasswordPage = () => {
     } catch (error: any) {
       setError(error.message);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -113,7 +116,9 @@ const ChangePasswordPage = () => {
                       <button
                         type="submit"
                         className="btn btn-primary"
-                        disabled={password !== confirmPassword || !password}
+                        disabled={
+                          password !== confirmPassword || !password || loading
+                        }
                       >
                         Reset Password
                       </button>

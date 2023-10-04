@@ -59,7 +59,7 @@ export default async function handler(
       });
       request
         .then((result) => {
-          res.status(200).json({ success: true, token });
+          res.status(200).json({ success: true });
         })
         .catch((err) => {
           res

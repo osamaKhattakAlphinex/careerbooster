@@ -41,7 +41,11 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
         skills: userData?.skills,
       });
     }
-    if (userData.results.keywords && userData.results.keywords !== "") {
+    if (
+      userData.results &&
+      userData.results.keywords &&
+      userData.results.keywords !== ""
+    ) {
       setStreamedData(userData.results.keywords);
     }
   }, [userData]);

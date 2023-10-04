@@ -40,7 +40,11 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
         skills: userData?.skills,
       });
     }
-    if (userData.results.headline && userData.results.headline !== "") {
+    if (
+      userData.results &&
+      userData.results.headline &&
+      userData.results.headline !== ""
+    ) {
       setStreamedData(userData.results.headline);
     }
   }, [userData]);

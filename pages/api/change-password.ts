@@ -25,7 +25,7 @@ export default async function handler(
       user.password = await bcrypt.hash(password, salt);
 
       await user.save();
-
+      // sulemankhan1a
       res.status(200).json({ success: true });
     } catch (error) {
       console.error(error);

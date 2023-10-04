@@ -35,6 +35,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
 
   useEffect(() => {
     if (
+      userData.results &&
       userData.results.jobDescription &&
       userData.results.jobDescription !== ""
     ) {
@@ -57,6 +58,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
         return rest;
       });
 
+      let tempText = "";
       for (const [index, experience] of experiences.entries()) {
         let html = "";
         html += `<h4><strong>${experience.jobTitle}</strong></h4>`;
@@ -71,6 +73,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
         html += `<p>`;
 
         setStreamedData((prev) => prev + html);
+        tempText += html;
         const res: any = await fetch("/api/linkedInBots/jdGeneratorSingle", {
           method: "POST",
           body: JSON.stringify({
@@ -89,13 +92,14 @@ const JDGenerator = ({ setJobDesc }: Props) => {
 
             const text = new TextDecoder().decode(value);
             setStreamedData((prev) => prev + text);
+            tempText += text;
           }
         }
 
         setStreamedData((prev) => prev + `</p> <br /> `);
       }
 
-      // await saveToDB(html);
+      await saveToDB(tempText);
 
       fetch("/api/users/updateUserLimit", {
         method: "POST",

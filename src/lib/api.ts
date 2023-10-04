@@ -12,7 +12,7 @@ export async function changePassword(obj: {
   email: string;
   password: string;
 }): Promise<void> {
-  const response = await axios.post("/api/reset-password", { obj });
+  const response = await axios.post("/api/change-password", { ...obj });
   const { success } = response.data;
   if (!success) {
     throw new Error("Failed to reset password");

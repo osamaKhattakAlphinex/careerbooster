@@ -41,7 +41,11 @@ const AboutGenerator = ({ setAbout }: Props) => {
         skills: userData?.skills,
       });
     }
-    if (userData.results.about && userData.results.about !== "") {
+    if (
+      userData.results &&
+      userData.results.about &&
+      userData.results.about !== ""
+    ) {
       setStreamedData(userData.results.about);
     }
   }, [userData]);
