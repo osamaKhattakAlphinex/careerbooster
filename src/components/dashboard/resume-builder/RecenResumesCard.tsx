@@ -8,7 +8,7 @@ const RecentResumeCard = ({
   componentRef,
 }: {
   source?: string;
-  componentRef: any;
+  componentRef?: any;
 }) => {
   // redux
   const userData = useSelector((state: any) => state.userData);
