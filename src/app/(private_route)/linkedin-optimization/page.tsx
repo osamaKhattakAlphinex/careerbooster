@@ -4,7 +4,7 @@ import AboutGenerator from "@/components/dashboard/linkedin-optimization/About G
 import HeadlineGenerator from "@/components/dashboard/linkedin-optimization/HeadlineGenerator";
 import JDGenerator from "@/components/dashboard/linkedin-optimization/JDGenerator";
 import KeywordsGenerator from "@/components/dashboard/linkedin-optimization/KeywordsGenerator";
-import DownloadDocx from "@/components/dashboard/linkedin-optimization/DownloadDocx";
+// import DownloadDocx from "@/components/dashboard/linkedin-optimization/DownloadDocx";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 
@@ -28,14 +28,14 @@ const ResumeCreator = () => {
       <div className="flex m-10 mt-2 gap-4">
         <div className="w-full flex p-4  border border-gray-200 rounded-lg shadow sm:p-6">
           <h2 className="text-2xl mr-10">LinkedIn Optimization</h2>
-          <div className="">
+          {/* <div className="">
             <DownloadDocx
               keywords={keywords}
               headline={headline}
               about={about}
               jobDesc={jobDesc}
             />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex m-10 gap-4">

@@ -31,8 +31,10 @@ import { checkIconSmall, leftArrowIcon } from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
 import Link from "next/link";
 import LimitCard from "@/components/dashboard/LimitCard";
+import useTheme from "@/lib/useTheme";
 
 const ResumeBuilder = () => {
+  const [theme] = useTheme();
   const [confettingRunning, setConfettiRunning] = useState(false);
 
   const confettiConfig = {
@@ -438,7 +440,7 @@ const ResumeBuilder = () => {
   }, [userData]);
 
   return (
-    <>
+    <section data-bs-theme={theme}>
       <div className="w-[95%] my-5 ml-10 flex items-center justify-between mt-10">
         <Link
           href="/dashboard"
@@ -467,7 +469,7 @@ const ResumeBuilder = () => {
         </div>
       )}
       <div className="m-10 mt-2 w-[95%]  p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
-        <RecentResumeCard />
+        <RecentResumeCard componentRef={componentRef} />
       </div>
 
       <GenerateNewResumeCard
@@ -500,7 +502,7 @@ const ResumeBuilder = () => {
           </div>
         )}
       <div className="block mb-40"></div>
-    </>
+    </section>
   );
 };
 export default ResumeBuilder;

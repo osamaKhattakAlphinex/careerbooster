@@ -1,11 +1,14 @@
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactToPrint from "react-to-print";
-import DownloadDocx from "../resume-templates/template-1/DownloadDocx";
+// import DownloadDocx from "../resume-templates/template-1/DownloadDocx";
 import { setState } from "@/store/resumeSlice";
 import Button from "@/components/utilities/form-elements/Button";
 // import NewButton from "@/components/utilities/form-elements/Button";
 import Link from "next/link";
+import { informationCirlceIcon } from "@/helpers/iconsProvider";
+import { faMagicWandSparkles } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Props {
   handleGenerate: () => Promise<void>;
@@ -51,25 +54,44 @@ const GenerateNewResumeCard = ({
                     )
                   }
                 />
-                <p className="p-2 text-orange-400">
-                  It seems that your profile was auto created please{" "}
-                  <Link href="/profile-review" className="text-orange-400">
-                    review it
-                  </Link>{" "}
-                  to get better results
-                </p>
               </div>
               <div className="w-1/2 p-2 pl-4">
-                <h3 className="text-lg font-medium ">Instructions</h3>
-                <p className="text-sm mb-2">
-                  Write The Job Position for which you are Recreating your
-                  Resume so that we can create a Customized stunning Resume for
-                  you{" "}
+                <h3 className="text-lg font-bold flex  items-center gap-1 ">
+                  {informationCirlceIcon} Instructions
+                </h3>
+                <p className="text-sm ml-2">
+                  <span className="font-semibold">Crucial!</span> Review your
+                  profile, and update missing details for improved results.{" "}
+                  <Link
+                    href="/profile-review"
+                    className="text-black dark:text-white"
+                  >
+                    Click here
+                  </Link>{" "}
                 </p>
-                <p className="text-xs my-2 text-gray-600">
-                  Note: The Resume will be created according to your profile. If
-                  you are not satisfied with the results try Editing your
-                  profile and provide as much details as possible
+                <p className="text-sm ml-2">
+                  <span className="font-semibold">
+                    To edit your new Resume!
+                  </span>
+                  &nbsp; and make changes or corrections, double-click the text
+                  or paragraph you wish to edit. Any changes you make will be
+                  automaticaly saved.
+                </p>
+                <p className="text-sm ml-2">
+                  If you{"'"}re{" "}
+                  <span className="font-semibold">
+                    unsatisfied with the results
+                  </span>
+                  , please note that we create your new resume using your
+                  original resume data. If any of your experiences are missing,{" "}
+                  <Link
+                    href="/profile-review"
+                    className="text-black dark:text-white"
+                  >
+                    Edit your profile
+                  </Link>
+                  , add any missing work experience with a brief description,
+                  and then generate your resume again.
                 </p>
               </div>
             </div>
@@ -88,22 +110,7 @@ const GenerateNewResumeCard = ({
                   className="btn btn-outline-primary-dark"
                 >
                   <div className="flex flex-row gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className={`w-4 h-4 ${
-                        resumeData.state.resumeLoading ? "animate-spin" : ""
-                      }`}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                      />
-                    </svg>
+                    <FontAwesomeIcon icon={faMagicWandSparkles} />
                     <span>
                       {resumeData.state.resumeLoading
                         ? "Please wait..."
@@ -152,7 +159,7 @@ const GenerateNewResumeCard = ({
               </div>
             )} */}
 
-            {resumeData && (
+            {/* {resumeData && (
               <DownloadDocx
                 basicInfo={resumeData}
                 disabled={
@@ -161,47 +168,7 @@ const GenerateNewResumeCard = ({
                   !session?.user?.email
                 }
               />
-            )}
-            {resumeData && (
-              <>
-                <ReactToPrint
-                  trigger={() => (
-                    <Button
-                      type="button"
-                      disabled={
-                        resumeData.state.jobPosition === "" ||
-                        resumeData.state.resumeLoading ||
-                        !session?.user?.email ||
-                        !resumeData?.name
-                      }
-                      className="btn btn-outline-primary-dark"
-                    >
-                      <div className="flex flex-row gap-2">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="w-4 h-4"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                          />
-                        </svg>
-                        <span>Print / Download Resume in PDF</span>
-                        {/* <span>
-                            To download choose destination "save as PDF"
-                          </span> */}
-                      </div>
-                    </Button>
-                  )}
-                  content={() => componentRef.current}
-                />
-              </>
-            )}
+            )} */}
           </div>
           {/* {resumeData?.loadingState !== "" && (
               <h3>

@@ -3,7 +3,13 @@ import { useSelector } from "react-redux";
 import SingleRecentResumeCard from "./SingleRecentResumeCard";
 import { Resume } from "@/store/resumeSlice";
 
-const RecentResumeCard = ({ source = "" }: { source?: string }) => {
+const RecentResumeCard = ({
+  source = "",
+  componentRef,
+}: {
+  source?: string;
+  componentRef: any;
+}) => {
   // redux
   const userData = useSelector((state: any) => state.userData);
   const { resumes } = userData;
@@ -28,6 +34,7 @@ const RecentResumeCard = ({ source = "" }: { source?: string }) => {
                       key={resume.id}
                       resume={resume}
                       source={source}
+                      componentRef={componentRef}
                     />
                   </div>
                 );
