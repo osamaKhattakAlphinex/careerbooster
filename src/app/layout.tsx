@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   const [theme] = useTheme();
   return (
-    <html lang="en" data-bs-theme="dark">
+    <html lang="en" data-bs-theme={theme}>
       <body className={inter.className}>
         <div className="wrapper d-flex flex-column justify-between ">
           <AuthProvider>
