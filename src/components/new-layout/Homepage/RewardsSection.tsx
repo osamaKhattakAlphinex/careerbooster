@@ -9,7 +9,7 @@ const RewardsSection = () => {
       >
         <div className="col-md-10 mx-auto">
           <div className="reward-content text-center">
-            <h1 className="text-[34px] md:text-2xl px-5">
+            <h1 className=" md:text-[48px] text-[24px] px-5">
               Get Ready for a $10k Reward - Prove Us Wrong!
             </h1>
             <h4 className="py-3 md:px-0 px-5">
