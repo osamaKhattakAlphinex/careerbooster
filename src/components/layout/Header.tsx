@@ -75,8 +75,12 @@ const Header = () => {
   // if (pathname === "/login" || pathname === "/register") return null;
 
   return (
-    <nav className="navbar navbar-expand-lg fixed-top bg-dark">
-      <ThemeToggler />
+    <nav
+      className={`navbar navbar-expand-lg fixed-top ${
+        theme === "dark" ? "bg-dark" : "bg-white"
+      }`}
+      data-bs-theme={theme}
+    >
       <div className="container">
         {/* <!-- Logo --> */}
         <Link
@@ -297,6 +301,7 @@ const Header = () => {
                   </Link>
                 </>
               )}
+              <ThemeToggler />
             </div>
           </div>
         </div>
