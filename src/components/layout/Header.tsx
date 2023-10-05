@@ -77,7 +77,7 @@ const Header = () => {
       className="navbar navbar-expand-lg fixed-top bg-dark"
       data-bs-theme="dark"
     >
-      {/* <ThemeToggler /> */}
+      <ThemeToggler />
       <div className="container">
         {/* <!-- Logo --> */}
         <Link

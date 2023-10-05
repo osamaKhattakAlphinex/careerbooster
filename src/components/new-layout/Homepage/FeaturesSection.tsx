@@ -1,8 +1,11 @@
+"use client";
+import useTheme from "@/lib/useTheme";
 import Link from "next/link";
 
 const FeaturesSection = () => {
+  const [theme] = useTheme();
   return (
-    <section className="py-10 py-lg-15">
+    <section className="py-10 py-lg-15" data-bs-theme={theme}>
       <div className="container">
         <div className="text-center mb-18">
           <h4
@@ -21,7 +24,7 @@ const FeaturesSection = () => {
             <br className="d-none d-lg-block" />
           </h1>
           <h4
-            className="mb-0 text-white md:text-[24px] text-[17px]"
+            className="mb-0 dark:text-white md:text-[24px] text-[17px]"
             data-aos="fade-up-sm"
             data-aos-delay="50"
           >
@@ -44,7 +47,12 @@ const FeaturesSection = () => {
             data-aos-delay="200"
           >
             <div className="d-flex flex-column gap-6 flex-lg-row">
-              <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10">
+              <div
+                className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary text-primary border-primary border-opacity-25 dark:bg-gradient-3
+                dark:text-primary-dark
+                dark:border-white 
+                dark:border-opacity-10"
+              >
                 <svg
                   className="w-full h-full"
                   xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +70,7 @@ const FeaturesSection = () => {
                 </svg>
               </div>
               <div className="content">
-                <h4 className="mb-4 text-white">
+                <h4 className="mb-4 text-red-600 dark:text-white ">
                   The ATS: Your Resume{"'"}s First Adjudicator
                 </h4>
                 <p className="w-md-3quarter pr-lg-5">
@@ -96,7 +104,7 @@ const FeaturesSection = () => {
                 </svg>
               </div>
               <div className="content">
-                <h4 className="mb-4 text-white">
+                <h4 className="mb-4 dark:text-white">
                   But What About the Human Recruiter?
                 </h4>
                 <p className="w-md-3quarter pr-lg-5">
@@ -133,7 +141,7 @@ const FeaturesSection = () => {
                     </svg>
                   </div>
                   <div className="content">
-                    <h4 className="mb-4 text-white">
+                    <h4 className="mb-4 dark:text-white">
                       Improves Products Productivity
                     </h4>
                     <p>
@@ -170,7 +178,7 @@ const FeaturesSection = () => {
                 </svg>
               </div>
               <div className="content">
-                <h4 className="mb-4 text-white">
+                <h4 className="mb-4 dark:text-white">
                   CareerBooster: Your ATS-Friendly Resume Partner
                 </h4>
                 <p className="w-md-3quarter pr-lg-5">
@@ -209,7 +217,7 @@ const FeaturesSection = () => {
                 </svg>
               </div>
               <div className="content">
-                <h4 className="mb-4 text-white">
+                <h4 className="mb-4 dark:text-white">
                   Endorsed by a Former Google Recruiter
                 </h4>
                 <p className="w-md-3quarter pr-lg-5">
