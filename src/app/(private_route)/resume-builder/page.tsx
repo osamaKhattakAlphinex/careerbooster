@@ -440,7 +440,7 @@ const ResumeBuilder = () => {
   }, [userData]);
 
   return (
-    <section data-bs-theme={theme}>
+    <>
       <div className="w-[95%] my-5 ml-10 flex items-center justify-between mt-10">
         <Link
           href="/dashboard"
@@ -502,7 +502,7 @@ const ResumeBuilder = () => {
           </div>
         )}
       <div className="block mb-40"></div>
-    </section>
+    </>
   );
 };
 export default ResumeBuilder;

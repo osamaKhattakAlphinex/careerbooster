@@ -25,7 +25,7 @@ const GenerateNewResumeCard = ({
   // Redux
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
-
+  console.log("rerendered");
   return (
     <div className="ml-10 w-[95%]  p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
       <div className="w-full ">
@@ -79,14 +79,14 @@ const GenerateNewResumeCard = ({
                 </p>
                 <p className="text-sm ml-2">
                   If you{"'"}re{" "}
-                  <span className="font-semibold">
+                  <span className="font-semibold ">
                     unsatisfied with the results
                   </span>
                   , please note that we create your new resume using your
                   original resume data. If any of your experiences are missing,{" "}
                   <Link
                     href="/profile-review"
-                    className="text-black dark:text-white"
+                    className="text-black dark:text-red-600"
                   >
                     Edit your profile
                   </Link>

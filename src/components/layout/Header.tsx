@@ -76,10 +76,10 @@ const Header = () => {
 
   return (
     <nav
-      className={`navbar navbar-expand-lg fixed-top ${
-        theme === "dark" ? "bg-dark" : "bg-white"
-      }`}
-      data-bs-theme={theme}
+      // className={`navbar navbar-expand-lg fixed-top ${
+      //   theme === "dark" ? "bg-dark" : "bg-white"
+      // }`}
+      className={`navbar navbar-expand-lg fixed-top bg-dark`}
     >
       <div className="container">
         {/* <!-- Logo --> */}
@@ -113,40 +113,40 @@ const Header = () => {
         {/* <!-- Navbar content --> */}
         <div className="collapse navbar-collapse" id="navbarContent">
           <div className="navbar-content-inner ms-lg-auto d-flex flex-column flex-lg-row align-lg-center gap-4 gap-lg-10 p-2 p-lg-0">
-            <ul className="navbar-nav gap-lg-2 gap-xl-5 visible">
+            <ul className="navbar-nav gap-lg-2 gap-xl-5 visible ">
               <li className="nav-item dropdown">
-                <Link className="nav-link active" href="/">
+                <Link className="nav-link active !text-white" href="/">
                   Home
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" href="/about">
+                <Link className="nav-link !text-white" href="/about">
                   About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/blogs">
+                <Link className="nav-link !text-white" href="/blogs">
                   Blogs
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/use-cases">
+                <Link className="nav-link !text-white" href="/use-cases">
                   Use cases
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/pricing">
+                <Link className="nav-link !text-white" href="/pricing">
                   Pricing
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/contact">
+                <Link className="nav-link !text-white" href="/contact">
                   Contact
                 </Link>
               </li>
               {!isAuth && (
-                <Link className="nav-link" href="/login">
+                <Link className="nav-link !text-white" href="/login">
                   Login
                 </Link>
               )}
@@ -301,7 +301,7 @@ const Header = () => {
                   </Link>
                 </>
               )}
-              <ThemeToggler />
+              {/* <ThemeToggler /> */}
             </div>
           </div>
         </div>

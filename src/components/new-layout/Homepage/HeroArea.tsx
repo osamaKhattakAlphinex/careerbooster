@@ -2,10 +2,7 @@ import UploadPDFResume from "@/components/UploadPDFResume";
 
 const HeroArea = () => {
   return (
-    <section
-      className="hero-section style-1 overflow-hidden bg-dark py-10 py-lg-15"
-      data-bs-theme="dark"
-    >
+    <section className="hero-section style-1 overflow-hidden bg-dark py-10 py-lg-15">
       <div className="container ">
         <div className="row justify-center ">
           <div className="col-lg-9">
