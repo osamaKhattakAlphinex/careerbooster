@@ -1,3 +1,4 @@
+import { moonIcon, sunIcon } from "@/helpers/iconsProvider";
 import useTheme from "@/lib/useTheme";
 
 const ThemeToggler = () => {
@@ -13,9 +14,10 @@ const ThemeToggler = () => {
   return (
     <button
       onClick={handleToggleTheme}
-      className="dark:bg-gray-800 bg-gray-100"
+      className="btn btn-icon btn-sm btn-ghost-secondary "
+      title={theme === "dark" ? "Change to light mode" : "Change to dark mode"}
     >
-      Toggle Theme
+      {theme === "dark" ? sunIcon : moonIcon}
     </button>
   );
 };

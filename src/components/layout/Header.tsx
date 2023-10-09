@@ -5,9 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import { useEffect, useState } from "react";
 import ThemeToggler from "../Themetoggler";
+import useTheme from "@/lib/useTheme";
 // import useTheme from "@/lib/useTheme";
 
 const Header = () => {
+  const [theme] = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
@@ -74,10 +76,11 @@ const Header = () => {
 
   return (
     <nav
-      className="navbar navbar-expand-lg fixed-top bg-dark"
-      data-bs-theme="dark"
+      className={`navbar navbar-expand-lg fixed-top ${
+        theme === "dark" ? "bg-dark" : "bg-white"
+      }`}
+      data-bs-theme={theme}
     >
-      <ThemeToggler />
       <div className="container">
         {/* <!-- Logo --> */}
         <Link
@@ -298,6 +301,7 @@ const Header = () => {
                   </Link>
                 </>
               )}
+              <ThemeToggler />
             </div>
           </div>
         </div>

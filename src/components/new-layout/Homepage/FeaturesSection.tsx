@@ -5,7 +5,7 @@ import Link from "next/link";
 const FeaturesSection = () => {
   const [theme] = useTheme();
   return (
-    <section className="py-10 py-lg-15" data-bs-theme={theme}>
+    <section className="py-10 py-lg-15">
       <div className="container">
         <div className="text-center mb-18">
           <h4
@@ -47,30 +47,46 @@ const FeaturesSection = () => {
             data-aos-delay="200"
           >
             <div className="d-flex flex-column gap-6 flex-lg-row">
-              <div
-                className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary text-primary border-primary border-opacity-25 dark:bg-gradient-3
-                dark:text-primary-dark
-                dark:border-white 
-                dark:border-opacity-10"
-              >
-                <svg
-                  className="w-full h-full"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 40 40"
-                >
-                  <g
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
+              {theme === "dark" ? (
+                <div className="  icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10">
+                  <svg
+                    className="w-full h-full"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 40 40"
                   >
-                    <path d="M30.167 10c-1.833 4.855-3.167 8.188-4 10m0 0c-3.132 6.813-6.188 10-10 10-4 0-8-4-8-10s4-10 8-10c3.778 0 6.892 3.31 10 10Zm0 0c.853 1.837 2.187 5.17 4 10" />
-                  </g>
-                </svg>
-              </div>
+                    <g
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                    >
+                      <path d="M30.167 10c-1.833 4.855-3.167 8.188-4 10m0 0c-3.132 6.813-6.188 10-10 10-4 0-8-4-8-10s4-10 8-10c3.778 0 6.892 3.31 10 10Zm0 0c.853 1.837 2.187 5.17 4 10" />
+                    </g>
+                  </svg>
+                </div>
+              ) : (
+                <div className="  icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary text-primary border-primary bg-opacity-10 dark:bg-gradient-3   dark:text-primary-dark  dark:border-white border-opacity-25">
+                  <svg
+                    className="w-full h-full"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 40 40"
+                  >
+                    <g
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                    >
+                      <path d="M30.167 10c-1.833 4.855-3.167 8.188-4 10m0 0c-3.132 6.813-6.188 10-10 10-4 0-8-4-8-10s4-10 8-10c3.778 0 6.892 3.31 10 10Zm0 0c.853 1.837 2.187 5.17 4 10" />
+                    </g>
+                  </svg>
+                </div>
+              )}
+
               <div className="content">
-                <h4 className="mb-4 text-red-600 dark:text-white ">
+                <h4 className="mb-4  dark:text-white ">
                   The ATS: Your Resume{"'"}s First Adjudicator
                 </h4>
                 <p className="w-md-3quarter pr-lg-5">
