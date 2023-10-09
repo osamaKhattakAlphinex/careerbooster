@@ -1,6 +1,7 @@
+import { memo, useMemo } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
-import ReactToPrint from "react-to-print";
+// import ReactToPrint from "react-to-print";
 // import DownloadDocx from "../resume-templates/template-1/DownloadDocx";
 import { setState } from "@/store/resumeSlice";
 import Button from "@/components/utilities/form-elements/Button";
@@ -12,20 +13,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Props {
   handleGenerate: () => Promise<void>;
-  componentRef: any;
   availablePercentage: number;
 }
 const GenerateNewResumeCard = ({
   handleGenerate,
-  componentRef,
   availablePercentage,
 }: Props) => {
   const { data: session } = useSession();
 
   // Redux
   const dispatch = useDispatch();
-  const resumeData = useSelector((state: any) => state.resume);
-  console.log("rerendered");
+  const state = useSelector((state: any) => state.resume.state);
+  const memoizedState = useMemo(() => state, [state]);
+
   return (
     <div className="ml-10 w-[95%]  p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
       <div className="w-full ">
@@ -47,7 +47,7 @@ const GenerateNewResumeCard = ({
                   name="targetedJobPosition"
                   id="targetedJobPosition"
                   className="bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  text-white bg-transparent"
-                  value={resumeData?.state?.jobPosition}
+                  value={memoizedState?.jobPosition}
                   onChange={(e) =>
                     dispatch(
                       setState({ name: "jobPosition", value: e.target.value })
@@ -102,8 +102,8 @@ const GenerateNewResumeCard = ({
                 <Button
                   type="button"
                   disabled={
-                    resumeData.state.jobPosition === "" ||
-                    resumeData.state.resumeLoading ||
+                    memoizedState.jobPosition === "" ||
+                    memoizedState.resumeLoading ||
                     !session?.user?.email
                   }
                   onClick={handleGenerate}
@@ -112,7 +112,7 @@ const GenerateNewResumeCard = ({
                   <div className="flex flex-row gap-2">
                     <FontAwesomeIcon icon={faMagicWandSparkles} />
                     <span>
-                      {resumeData.state.resumeLoading
+                      {memoizedState.resumeLoading
                         ? "Please wait..."
                         : "Generate New Resume"}
                     </span>
@@ -191,4 +191,4 @@ const GenerateNewResumeCard = ({
   );
 };
 
-export default GenerateNewResumeCard;
+export default memo(GenerateNewResumeCard);

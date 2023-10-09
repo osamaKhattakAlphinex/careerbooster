@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef, use } from "react";
+import { useEffect, useState, useRef, use, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/dashboard/resume-templates/template-1";
 import { useDispatch, useSelector } from "react-redux";
@@ -72,7 +72,7 @@ const ResumeBuilder = () => {
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
 
-  const handleGenerate = async () => {
+  const handleGenerate = useCallback(async () => {
     await getUserDataIfNotExists();
     // reset resume
     dispatch(resetResume(resumeData.state));
@@ -92,7 +92,7 @@ const ResumeBuilder = () => {
       await getWorkExperienceNew();
       runConfetti();
     }
-  };
+  }, [resumeData.state, percentageCalculated]);
 
   const getBasicInfo = async () => {
     // dispatch(setLoadingState("basicInfo"));
@@ -474,7 +474,6 @@ const ResumeBuilder = () => {
 
       <GenerateNewResumeCard
         handleGenerate={handleGenerate}
-        componentRef={componentRef}
         availablePercentage={availablePercentage}
       />
 

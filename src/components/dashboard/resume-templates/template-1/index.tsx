@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -707,4 +707,4 @@ const ResumeTemplate1 = ({
     </div>
   );
 };
-export default ResumeTemplate1;
+export default memo(ResumeTemplate1);
