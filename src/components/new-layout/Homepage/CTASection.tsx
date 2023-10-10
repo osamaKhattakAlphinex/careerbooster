@@ -20,7 +20,7 @@ const CTASection = () => {
             <div className="col-lg-10">
               <div className="text-center pt-6 px-6 pt-md-10 px-md-10 pt-lg-18 px-lg-18">
                 <h5 className="text-white">Revolutionize Your Job Hunt</h5>
-                <h2 className="mb-6 text-white md:text-[48px] text-[24px]">
+                <h2 className="mb-6 text-white md:text-[40px] text-[24px]">
                   Discover the Game-Changing
                   <span className="text-primary-dark"> Resume Strategy </span>
                   You{"'"}ve Been Missing!
@@ -70,7 +70,7 @@ const CTASection = () => {
                   </svg>
                   <div className="cta-img rounded-top-4">
                     <img
-                      src="assets/images/screens/screen-1.jpg"
+                      src="assets/images/screens/cover-letter-bot.png"
                       alt=""
                       className="img-fluid w-full h-full object-cover"
                     />

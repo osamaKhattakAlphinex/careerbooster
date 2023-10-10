@@ -87,7 +87,7 @@ export default function TermsAndConditionPage() {
             We respect the intellectual property of others. If you believe that
             your intellectual property rights have been used in a way that gives
             rise to concerns of infringement, please write to us at
-            legal@CareerBooster.Ai and we will make all reasonable efforts to
+            legal@CareerBooster.AI and we will make all reasonable efforts to
             address your concern within a reasonable amount of time. Please
             ensure to provide your name, address, contact information and as
             many relevant details of the claim including name of infringing
@@ -103,7 +103,7 @@ export default function TermsAndConditionPage() {
             <strong>6.1 Consent to Communications</strong>
           </p>
           <p className="text-[20px]">
-            By using the CareerBooster.Ai platform, you consent to receiving
+            By using the CareerBooster.AI platform, you consent to receiving
             communications from us, including but not limited to SMS messages,
             phone calls, and emails. These communications are aimed at enhancing
             your experience with our platform and providing you with relevant
@@ -126,7 +126,7 @@ export default function TermsAndConditionPage() {
           </p>
           <p className="text-[20px]">
             You consent to receiving SMS messages, including important alerts
-            and notifications, from CareerBooster.Ai. You retain the right to
+            and notifications, from CareerBooster.AI. You retain the right to
             opt-out of SMS messages at any time.
           </p>
 
@@ -162,7 +162,7 @@ export default function TermsAndConditionPage() {
           </p>
 
           <p className="text-[24px]">
-            Thank you for choosing CareerBooster.Ai. Your trust and satisfaction
+            Thank you for choosing CareerBooster.AI. Your trust and satisfaction
             are paramount to us.
           </p>
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import LoginForm from "@/components/LoginForm";
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "CareerBooster.Ai-Login",
+  title: "CareerBooster.AI-Login",
 };
 
 const Login = () => {
@@ -12,24 +12,7 @@ const Login = () => {
         <div className="container-fluid h-full">
           <div className="row h-full">
             <div
-              className="col-lg-6 d-none d-lg-block"
-              data-aos="fade-up-sm"
-              data-aos-delay="50"
-            >
-              <div className="bg-dark-blue-4 border rounded-4 h-full p-6 p-md-20 text-center d-flex flex-column justify-center">
-                <h2 className="text-white mb-12">
-                  Unlock the Power of <br className="d-none d-xl-block" />
-                  <span className="text-primary-dark">CareerBooster</span>
-                </h2>
-                <img
-                  src="assets/images/screens/screen-5.png"
-                  alt=""
-                  className="img-fluid w-full"
-                />
-              </div>
-            </div>
-            <div
-              className="col-lg-6"
+              className="col-lg-12"
               data-aos="fade-up-sm"
               data-aos-delay="100"
             >

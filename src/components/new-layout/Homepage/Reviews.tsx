@@ -6,7 +6,7 @@ const Reviews = () => {
           <div className="col-lg-9">
             <div className="text-center">
               <h1
-                className="text-white md:text-[48px] text-[24px]"
+                className="text-white md:text-[40px] text-[24px]"
                 data-aos="fade-up-sm"
                 data-aos-delay="50"
               >

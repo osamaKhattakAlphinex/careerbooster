@@ -47,12 +47,12 @@ export default async function handler(
                 Email: email,
               },
             ],
-            Subject: `Password reset link | CareerBooster.ai`,
+            Subject: `Password reset link | CareerBooster.AI`,
             TextPart: `Here is your password reset link: <a href="${appUrl}/change-password?token=${token}">Reset Password</a>`,
             HTMLPart: `<h3>You Requested to change your password </h3>
               <p>Here is your password reset link: <a href="${appUrl}/change-password?token=${token}">Reset Password</a></p>
                 <br />
-                <p>CareerBooster.ai</p>
+                <p>CareerBooster.AI</p>
               `,
           },
         ],

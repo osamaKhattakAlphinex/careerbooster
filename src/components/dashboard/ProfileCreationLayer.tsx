@@ -390,7 +390,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         </h2>
         <div className="my-10">{refreshBigIconRotating}</div>
         <p className="text-center mb-4">
-          Please wait while we are getting your profile ready.
+          Please wait! We are scanning your resume.
         </p>
         <p className="text-center mb-10">
           Are you stuck on this page?{" "}

@@ -40,8 +40,8 @@ const FAQSection = () => {
                 </h2>
                 <div
                   id="faq-collapseOne"
-                  className="accordion-collapse collapse show"
-                  data-bs-parent="#faqAccordion"
+                  className="accordion-collapse show"
+                  // data-bs-parent="#faqAccordion"
                 >
                   <div className="accordion-body">
                     CareerBooster is an AI-powered platform designed to enhance

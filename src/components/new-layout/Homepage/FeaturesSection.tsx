@@ -16,11 +16,11 @@ const FeaturesSection = () => {
             Uncover the Secret to Superior Resumes
           </h4>
           <h1
-            className="mb-5  dark:text-white md:text-[48px] text-[24px]"
+            className="mb-5  dark:text-white md:text-[40px] text-[24px]"
             data-aos="fade-up-sm"
             data-aos-delay="50"
           >
-            Why Trust Ai for Your{" "}
+            Why Trust AI for Your{" "}
             <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-yellow-500 relative inline-block">
               <span className="relative text-white">Executive </span>
             </span>
@@ -91,14 +91,17 @@ const FeaturesSection = () => {
 
               <div className="content">
                 <h4 className="mb-4  dark:text-white ">
-                  The ATS: Your Resume{"'"}s First Adjudicator
+                  Get Past the ATS and Increase Your Visibility
                 </h4>
                 <p className="w-md-3quarter pr-lg-5">
-                  The ATS is no human—It{"'"}s a robot designed to shortlist
-                  resumes based on specific criteria. This means your resume
-                  must speak the language of machines to secure that initial
-                  interview invitation. The question arises: Who can craft a
-                  better robotfriendly resume than a robot itself?
+                  The ATS is no human—it's a robot designed to shortlist resumes
+                  based on specific criteria. This means your resume must speak
+                  the language of machines to secure that initial interview
+                  invitation. The question arises: Who can craft a better
+                  robotfriendly resume than a robot itself? We've decoded the
+                  algorithms that the ATS employs to shortlist candidates. Your
+                  resume is crafted with a deep understanding of what it takes
+                  to pass this robotic gatekeeper
                 </p>
               </div>
             </div>
@@ -125,52 +128,17 @@ const FeaturesSection = () => {
               </div>
               <div className="content">
                 <h4 className="mb-4 dark:text-white">
-                  But What About the Human Recruiter?
+                  Get the Attention You Deserve from the Recruiters.
                 </h4>
                 <p className="w-md-3quarter pr-lg-5">
-                  We understand your concerns Don{"'"}t end with impressing a
-                  machine. That{"'"}s why our AI doesn{"'"}t stop at being
-                  ATS-friendly; It{"'"}s also human-recruiter-approved. We{"'"}
-                  ve fine-tuned our system to create resumes that captivate the
-                  attention of senior-level professionals.
+                  Our system has been meticulously trained through extensive
+                  research and consultations with numerous executive resume
+                  writers. We've fine-tuned our system to create resumes that
+                  captivate the attention of recruiters and hiring managers.
                 </p>
               </div>
             </div>
           </div>
-          {/* <!-- <div className="col-lg-4" data-aos="fade-up-sm" data-aos-delay="300">
-                <div className="d-flex flex-column gap-6 flex-lg-row">
-                  <div
-                    className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10"
-                  >
-                    <svg
-                      className="w-full h-full"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 40 40"
-                    >
-                      <g
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                      >
-                        <path
-                          d="M10 29.334 6.667 27.5v-4.166m0-6.668V12.5L10 10.666m6.667-3.833L20 5l3.334 1.833M30 10.666l3.333 1.834v4.166m0 6.668V27.5L30 29.367m-6.666 3.799L20 35l-3.333-1.834M20 20l3.333-1.834M30 14.333l3.333-1.833M20 20v4.167m0 6.667V35m0-15-3.333-1.867M10 14.333 6.667 12.5"
-                        />
-                      </g>
-                    </svg>
-                  </div>
-                  <div className="content">
-                    <h4 className="mb-4 dark:text-white">
-                      Improves Products Productivity
-                    </h4>
-                    <p>
-                      Emotions are a powerful tool in advertising. Use emotions
-                      that resonate with your audience to create a connection.
-                    </p>
-                  </div>
-                </div>
-              </div> --> */}
         </div>
         <div className="row my-md-15 py-10">
           <div
@@ -199,15 +167,21 @@ const FeaturesSection = () => {
               </div>
               <div className="content">
                 <h4 className="mb-4 dark:text-white">
-                  CareerBooster: Your ATS-Friendly Resume Partner
+                  Land your Dream Job 10x Faster
                 </h4>
                 <p className="w-md-3quarter pr-lg-5">
-                  Our system has been meticulously trained through extensive
-                  research and consultations with numerous executive resume
-                  writers. We{"'"}ve decoded the algorithms that the ATS employs
-                  to shortlist candidates. Your resume is crafted with a deep
-                  understanding of what it takes to pass this robotic
-                  gatekeeper.
+                  Your applications will be more strategic, more effective, and
+                  more likely to lead to your dream job. Gone are the days of
+                  sending out generic resumes and hoping for the best. With our
+                  Resume AI, you can craft personalized resumes for every job
+                  opportunity you pursue. Our AI analyzes each job posting and
+                  highlights the keywords and skills that matter most to
+                  recruiters. It then helps you incorporate these essential
+                  elements seamlessly into your resume, making it a perfect
+                  match for the position you're targeting. When a recruiter sees
+                  a resume that aligns perfectly with their job opening, it
+                  significantly increases your chances of getting noticed and
+                  landing an interview.
                 </p>
               </div>
             </div>
@@ -244,15 +218,14 @@ const FeaturesSection = () => {
                   Still skeptical? Take it from the experts. Nolan Church, a
                   former Google recruiter, has emphasized that resumes often
                   suffer from an overload of words and paragraphs, resulting in
-                  a {'"'}zero chance{'"'} of progressing. He recommends using AI
-                  tools to refine your resume. In an interview with Business
-                  Insider, he praised the effectiveness of AI-driven resume
-                  optimization, confirming that It{"'"}s the smart choice for
-                  modern job seekers. So, when you trust AI for your executive
-                  resume, you
-                  {"'"}re not just appeasing the robots; you{"'"}re ensuring
-                  your resume shines in the eyes of discerning human recruiters
-                  too. It{"'"}s the winning combination for your career success.
+                  a "zero chance" of progressing. He recommends using AI tools
+                  to refine your resume. In an interview with Business Insider,
+                  he praised the effectiveness of AI-driven resume optimization,
+                  confirming that it's the smart choice for modern job seekers.
+                  So, when you trust AI for your executive resume, you're not
+                  just appeasing the robots; you're ensuring your resume shines
+                  in the eyes of discerning human recruiters too. It's the
+                  winning combination for your career success.
                 </p>
               </div>
             </div>

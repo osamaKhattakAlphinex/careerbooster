@@ -13,7 +13,7 @@ const PricingSection = () => {
                 Pricing Plan
               </p>
               <h1
-                className="text-white mb-5 md:text-[48px] text-[24px]"
+                className="text-white mb-5 md:text-[40px] text-[24px]"
                 data-aos="fade-up-sm"
                 data-aos-delay="100"
               >

@@ -67,7 +67,7 @@ export async function POST(req: Request) {
             unit_amount: body.amount,
             product_data: {
               name: body.plan,
-              description: `CareerBooster.ai ${body.plan} Plan Subscription`,
+              description: `CareerBooster.AI ${body.plan} Plan Subscription`,
             },
           },
           quantity: 1,

@@ -1,5 +1,6 @@
 "use client";
 import {
+  bagIcon,
   briefCaseIcon,
   brushIcon,
   chatIcon,
@@ -7,6 +8,8 @@ import {
   documentTextIcon,
   emailIconBig,
   pencilIcon,
+  resumeIcon,
+  scanIcon,
   shockIcon,
   starsIcon,
   trendingArrowIcon,
@@ -111,7 +114,11 @@ const ToolsCard = () => {
         <li className="w-1/3 ">
           <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {brushIcon}
-            <Link href="/linkedin-optimization" className="no-underline">
+            <Link
+              href="/linkedin-optimization"
+              className="no-underline"
+              style={{ pointerEvents: "none" }}
+            >
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
                 Keyword Optimize Your LinkedIn
               </h5>
@@ -150,6 +157,34 @@ const ToolsCard = () => {
         </li>
         <li className="w-1/3 ">
           <div className="h-[250px] min-h-full p-4 border border-gray-200 rounded-lg shadow">
+            {bagIcon}
+            <Link
+              href="/chatAI"
+              className="no-underline"
+              style={{ pointerEvents: "none" }}
+            >
+              <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight">
+                AI Job Finder
+              </h5>
+            </Link>
+            <p className="w-full mb-4 text-xs">
+              Our AI tool scans the entire web to discover the most relevant and
+              recent opportunities matching your background, saving you from
+              searching multiple job boards.
+            </p>
+            <Link
+              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              href="/chatAI"
+              style={{ pointerEvents: "none" }}
+            >
+              Coming Soon
+            </Link>
+          </div>
+        </li>
+      </ul>
+      <ul className="flex flex-row gap-4 mr-10 mt-8 pl-0">
+        <li className="w-1/3 ">
+          <div className="h-[250px] min-h-full p-4 border border-gray-200 rounded-lg shadow">
             {chatIcon}
             <Link
               href="/chatAI"
@@ -175,31 +210,15 @@ const ToolsCard = () => {
             </Link>
           </div>
         </li>
-      </ul>
-      <ul className="flex flex-row gap-4 mr-10 mt-8 pl-0">
-        {/* <li className="w-1/3 ">
-          <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
-            {pencilIcon}
-            <Link href="/biography-writer" className="no-underline">
-              <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
-                Biography Writer
-              </h5>
-            </Link>
-            <p className="mb-4 text-xs  ">
-              AI will write a biography for you. According to your profile data
-            </p>
-            <Link
-              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
-              href="/biography-writer"
-            >
-              Launch
-            </Link>
-          </div>
-        </li> */}
+
         <li className="w-1/3 ">
           <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
-            {checkBubbleIcon}
-            <Link href="/review-resume-bot" className="no-underline">
+            {resumeIcon}
+            <Link
+              href="/review-resume-bot"
+              className="no-underline"
+              style={{ pointerEvents: "none" }}
+            >
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
                 Get Your Resume Reviewed
               </h5>
@@ -212,14 +231,15 @@ const ToolsCard = () => {
             <Link
               className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href="/review-resume-bot"
+              style={{ pointerEvents: "none" }}
             >
-              Launch
+              Coming Soon
             </Link>
           </div>
         </li>
         <li className="w-1/3 ">
           <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
-            {checkBubbleIcon}
+            {scanIcon}
             <Link
               href="/review-resume-bot"
               className="no-underline"
@@ -243,6 +263,8 @@ const ToolsCard = () => {
             </Link>
           </div>
         </li>
+      </ul>
+      <ul className="flex flex-row gap-4 mr-10 mt-8 pl-0">
         <li className="w-1/3 ">
           <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {checkBubbleIcon}

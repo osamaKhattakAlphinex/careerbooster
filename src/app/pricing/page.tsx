@@ -5,7 +5,7 @@ import UseCases from "@/components/new-layout/Homepage/UseCases";
 import PageHeader from "@/components/new-layout/PageHeader";
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "CareerBooster.Ai-Pricing",
+  title: "CareerBooster.AI-Pricing",
   description:
     "Discover CareerBooster's pricing plans and choose the perfect package for your career needs. Unlock AI-powered tools for resume optimization, LinkedIn enhancement, and more. Start your journey to professional excellence with transparent and affordable pricing.",
   keywords: [
@@ -23,10 +23,10 @@ export const metadata: Metadata = {
     "About Career Booster",
     "Contact Career Booster",
     "CareerBooster Contact",
-    "CareerBooster.Ai Contact",
-    "CareerBooster.Ai Pricing",
-    "CareerBooster.Ai Pricing Plans",
-    "Pricing CareerBooster.Ai",
+    "CareerBooster.AI Contact",
+    "CareerBooster.AI Pricing",
+    "CareerBooster.AI Pricing Plans",
+    "Pricing CareerBooster.AI",
     "Packages Of CareerBooster",
   ],
   viewport: {

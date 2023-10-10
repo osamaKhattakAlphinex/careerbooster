@@ -12,7 +12,7 @@ const HeroArea = () => {
                   Unlock Your Career Potential
                 </p>
                 <h1
-                  className="text-white mb-8 md:text-[48px] text-[24px]"
+                  className="text-white mb-8 md:text-[40px] text-[24px]"
                   data-aos="fade-up-sm"
                   data-aos-delay="50"
                 >
@@ -20,7 +20,7 @@ const HeroArea = () => {
                   Turbocharge Your Career!
                   <br />
                   <span
-                    className="fw-bold md:text-[48px] text-[24px] text-gradient-2 typed-animation text-wrap"
+                    className="fw-bold md:text-[40px] mt-8 text-[24px] text-gradient-2 typed-animation text-wrap"
                     data-strings='["Find Your Dream Job Faster.", "Get More Interviews.", 
                         "Access Confidential Opportunities with the Right Keywords.", "Get the Attention You Deserve from Recruiters.",
                         "Get Past the ATS and Increase Your Visibility.",
@@ -40,7 +40,7 @@ const HeroArea = () => {
                   <div className="mt-12 rounded-5 border border-primary-dark shadow-lg overflow-hidden position-relative z-1">
                     <img
                       className="img-fluid d-inline-block"
-                      src="assets/images/screens/screen-1.jpg"
+                      src="assets/images/screens/dashboard.png"
                       alt=""
                     />
                   </div>

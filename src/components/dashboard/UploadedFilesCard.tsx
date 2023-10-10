@@ -34,7 +34,7 @@ const UploadedFilesCard = () => {
   return (
     <div className="w-[30%] p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
       <h5 className="  font-semibold   ">
-        Your initial Resume{" "}
+        Your Original Resume{" "}
         {/* <button
           type="button"
           className={`float-right`}

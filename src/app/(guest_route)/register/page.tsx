@@ -12,7 +12,6 @@ const RegisterNew = () => {
           <section className="account-section login-page py-6 h-full">
             <div className="container-fluid h-full">
               <div className="row h-full">
-                <RegistrationImage />
                 <RegistrationForm />
               </div>
             </div>

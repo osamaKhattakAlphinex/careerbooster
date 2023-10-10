@@ -262,7 +262,7 @@ const RegistrationForm = () => {
   }, [file]);
 
   return (
-    <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="100">
+    <div className="col-lg-12" data-aos="fade-up-sm" data-aos-delay="100">
       <div className="account-wrapper d-flex flex-column justify-center">
         <div className="text-center">
           <a href="">

@@ -8,15 +8,16 @@ import PricingSection from "@/components/new-layout/Homepage/PricingSection";
 import Reviews from "@/components/new-layout/Homepage/Reviews";
 import RewardsSection from "@/components/new-layout/Homepage/RewardsSection";
 import UseCases from "@/components/new-layout/Homepage/UseCases";
+import FAQList from "@/components/new-layout/Homepage/Faqs";
 
 export const metadata: Metadata = {
-  title: "CareerBooster.Ai - Home Page",
+  title: "CareerBooster.AI - Home Page",
   description:
     "Unlock your career potential with CareerBooster – AI-powered tools for turbocharging your job search. From ATS-friendly resumes to LinkedIn optimization, discover the winning combination trusted by senior-level professionals. Try it free and revolutionize your job hunt today!",
   keywords: [
     "Career Booster",
     "careerbooster",
-    "CareerBooster.Ai",
+    "CareerBooster.AI",
     "AiCareerBooster",
     "Career advancement",
     "ATS-friendly resumes",

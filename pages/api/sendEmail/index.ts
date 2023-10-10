@@ -34,7 +34,7 @@ export default async function handler(
                 Name: "CareerBooster Admin",
               },
             ],
-            Subject: `${name} via Contact us form | CareerBooster.ai`,
+            Subject: `${name} via Contact us form | CareerBooster.AI`,
             TextPart: `Email: ${email}\n Phone: ${phone}\n Message: ${message} \n Name: ${name}`,
             HTMLPart: `<h3>${name} contacted via Contact us Form </h3>
               <p>{message}</p>
@@ -46,7 +46,7 @@ export default async function handler(
                 <p>Name: ${name}</p>
                 <br />
                 <p>Regards,</p>
-                <p>CareerBooster.ai</p>
+                <p>CareerBooster.AI</p>
               `,
           },
         ],

@@ -4,7 +4,7 @@ import MapCard from "@/components/new-layout/Contact/MapCard";
 import PageHeader from "@/components/new-layout/PageHeader";
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "CareerBooster.Ai-Contact",
+  title: "CareerBooster.AI-Contact",
   description:
     "Contact CareerBooster today for personalized assistance in turbocharging your career. Reach out to our expert team for inquiries, support, or partnership opportunities. Your path to career success starts with a simple message.",
   keywords: [
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "About Career Booster",
     "Contact Career Booster",
     "CareerBooster Contact",
-    "CareerBooster.Ai Contact",
+    "CareerBooster.AI Contact",
   ],
   viewport: {
     width: "device-width",
