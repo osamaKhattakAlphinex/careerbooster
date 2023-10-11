@@ -252,7 +252,7 @@ const ToolsCard = () => {
             <p className="mb-4 text-xs  ">
               Avoid the pitfalls of Applicant Tracking Systems (ATS) with our
               ATS scanning feature. Ensure your resume is ATS-friendly,
-              increasing your chances of making it to the recruiter's desk.
+              increasing your chances of making it to the recruiter&apos;s desk.
             </p>
             <Link
               className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
