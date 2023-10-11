@@ -9,12 +9,12 @@ import useTheme from "@/lib/useTheme";
 // import useTheme from "@/lib/useTheme";
 
 const Header = () => {
-  const [theme] = useTheme();
+  // const [theme] = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
   const role = data?.user?.role;
-  // const [theme, toggleTheme] = useTheme();
+  const [theme, toggleTheme] = useTheme();
 
   // Session
   const { data: session } = useSession();
@@ -79,7 +79,7 @@ const Header = () => {
       // className={`navbar navbar-expand-lg fixed-top ${
       //   theme === "dark" ? "bg-dark" : "bg-white"
       // }`}
-      className={`navbar navbar-expand-lg fixed-top bg-dark`}
+      className={`navbar navbar-expand-lg fixed-top bg-hover-scroll on-over headroom headroom--top headroom--not-bottom`}
     >
       <div className="container">
         {/* <!-- Logo --> */}
@@ -92,61 +92,46 @@ const Header = () => {
         >
           <img src="/assets/images/logo.png" alt="" className="w-70" />
         </Link>
-
+        {/* <ThemeToggler /> */}
         {/* <!-- Navbar toggler button --> */}
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarContent"
-          aria-controls="navbarContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <div className="navbar-toggler-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
 
         {/* <!-- Navbar content --> */}
         <div className="collapse navbar-collapse" id="navbarContent">
           <div className="navbar-content-inner ms-lg-auto d-flex flex-column flex-lg-row align-lg-center gap-4 gap-lg-10 p-2 p-lg-0">
             <ul className="navbar-nav gap-lg-2 gap-xl-5 visible ">
               <li className="nav-item dropdown">
-                <Link className="nav-link active !text-white" href="/">
+                <Link className="nav-link active dark:text-white" href="/">
                   Home
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link !text-white" href="/about">
+                <Link className={`nav-link`} href="/about">
                   About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link !text-white" href="/blogs">
+                <Link className={`nav-link`} href="/blogs">
                   Blogs
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link !text-white" href="/use-cases">
+                <Link className="nav-link " href="/use-cases">
                   Use cases
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link !text-white" href="/pricing">
+                <Link className="nav-link " href="/pricing">
                   Pricing
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link !text-white" href="/contact">
+                <Link className="nav-link " href="/contact">
                   Contact
                 </Link>
               </li>
               {!isAuth && (
-                <Link className="nav-link !text-white" href="/login">
+                <Link className="nav-link " href="/login">
                   Login
                 </Link>
               )}
@@ -197,7 +182,7 @@ const Header = () => {
                           >
                             {userData.firstName + " " + userData.lastName}
                             <svg
-                              className="-mr-1 h-5 w-5 !text-white"
+                              className="-mr-1 h-5 w-5 dark:text-white"
                               viewBox="0 0 20 20"
                               fill="currentColor"
                               aria-hidden="true"

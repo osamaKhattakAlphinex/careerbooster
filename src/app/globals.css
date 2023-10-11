@@ -24,3 +24,56 @@
 .resume-sidebar {
   height: 2900px !important;
 }
+
+/* Bootstrap theme change code */
+/* LIGHT THEME */
+.hero-section {
+  background: url(/assets/images/bg/1.jpg) no-repeat center center/cover;
+}
+.hero-section ::before {
+  width: 70%;
+}
+.theme-text {
+  color: rgba(0, 0, 255, 0.61);
+}
+.theme-text-2 {
+  color: black;
+}
+.theme-hero-heading {
+  color: black;
+}
+.theme-features-text {
+  background: linear-gradient(92.73deg, #b324d7 7.07%, #fe577f 97.81%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  color: (var(--gen-dark-rgb), var(--gen-text-opacity)) !important;
+}
+
+/* DARK THEME */
+[data-bs-theme="dark"] .nav-link {
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .theme-text {
+  color: #e6f85e !important;
+}
+
+[data-bs-theme="dark"] .hero-section {
+  background: rgba(var(--gen-dark-rgb), var(--gen-bg-opacity)) !important;
+}
+
+[data-bs-theme="dark"] .theme-hero-heading {
+  color: white;
+}
+[data-bs-theme="dark"] .theme-features-text {
+  background: linear-gradient(90.22deg, #58ebff 0.19%, #e6f85e 101.84%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+[data-bs-theme="dark"] .theme-text-2 {
+  color: white;
+}

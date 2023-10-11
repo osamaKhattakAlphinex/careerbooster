@@ -1,18 +1,22 @@
 import UploadPDFResume from "@/components/UploadPDFResume";
+import HeroImagesCard from "./HeroImagesCard";
 
 const HeroArea = () => {
   return (
-    <section className="hero-section style-1 overflow-hidden bg-dark py-10 py-lg-15">
+    <section
+      className={`hero-section style-1 overflow-hidden  pt-30 pb-15 pb-lg-20 pt-xl-36`}
+    >
+      {/* hero-section style-1 overflow-hidden gradient-bg pt-30 pb-15 pb-lg-20 pt-xl-36 */}
       <div className="container ">
         <div className="row justify-center ">
           <div className="col-lg-9">
             <div className="text-center">
               <div className="position-relative z-1">
-                <p className="text-primary-dark" data-aos="fade-up-sm">
+                <p className=" theme-text" data-aos="fade-up-sm">
                   Unlock Your Career Potential
                 </p>
                 <h1
-                  className="text-white mb-8 md:text-[40px] text-[24px]"
+                  className="theme-hero-heading mb-8 md:text-[40px] text-[24px]"
                   data-aos="fade-up-sm"
                   data-aos-delay="50"
                 >
@@ -20,7 +24,7 @@ const HeroArea = () => {
                   Turbocharge Your Career!
                   <br />
                   <span
-                    className="fw-bold md:text-[40px] mt-8 text-[24px] text-gradient-2 typed-animation text-wrap"
+                    className="fw-bold md:text-[40px] mt-8 text-[24px] theme-features-text typed-animation text-wrap"
                     data-strings='["Find Your Dream Job Faster.", "Get More Interviews.", 
                         "Access Confidential Opportunities with the Right Keywords.", "Get the Attention You Deserve from Recruiters.",
                         "Get Past the ATS and Increase Your Visibility.",
@@ -50,18 +54,7 @@ const HeroArea = () => {
                 <li>Write Resumes 100x Faster</li>
                 <li>Write Keyword-Optimized LinkedIn Profile</li>
               </ul>
-              <div className="d-flex gap-8 align-center justify-center mt-12 review-badges">
-                <img
-                  className="img-fluid"
-                  src="assets/images/review-logos/trustpilot_reviews.svg"
-                  alt=""
-                />
-                <img
-                  className="img-fluid"
-                  src="assets/images/review-logos/capterra_reviews.svg"
-                  alt=""
-                />
-              </div>
+              <HeroImagesCard />
             </div>
           </div>
         </div>

@@ -9,14 +9,14 @@ const FeaturesSection = () => {
       <div className="container">
         <div className="text-center mb-18">
           <h4
-            className="mb-5 dark:text-white md:text-[24px] text-[17px]"
+            className="mb-5 theme-text-2 md:text-[24px] text-[17px]"
             data-aos="fade-up-sm"
             data-aos-delay="50"
           >
             Uncover the Secret to Superior Resumes
           </h4>
           <h1
-            className="mb-5  dark:text-white md:text-[40px] text-[24px]"
+            className="mb-5  theme-text-2 md:text-[40px] text-[24px]"
             data-aos="fade-up-sm"
             data-aos-delay="50"
           >
@@ -28,7 +28,7 @@ const FeaturesSection = () => {
             <br className="d-none d-lg-block" />
           </h1>
           <h4
-            className="mb-0 dark:text-white md:text-[24px] text-[17px]"
+            className="mb-0 theme-text-2 md:text-[24px] text-[17px]"
             data-aos="fade-up-sm"
             data-aos-delay="50"
           >
@@ -90,7 +90,7 @@ const FeaturesSection = () => {
               )}
 
               <div className="content">
-                <h4 className="mb-4  dark:text-white ">
+                <h4 className="mb-4  theme-text-2 ">
                   Get Past the ATS and Increase Your Visibility
                 </h4>
                 <p className="w-md-3quarter pr-lg-5">
@@ -108,26 +108,48 @@ const FeaturesSection = () => {
           </div>
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="250">
             <div className="d-flex flex-column gap-6 flex-lg-row">
-              <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10">
-                <svg
-                  className="w-full h-full"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 40 40"
-                >
-                  <g
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
+              {theme === "dark" ? (
+                <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10">
+                  <svg
+                    className="w-full h-full"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 40 40"
                   >
-                    <path d="M3.333 20 20 32.37 36.666 20" />
-                    <path d="M11.667 15 20 21.667 28.334 15m-10.001-5L20 11.333 21.666 10 20 8.666 18.333 10Z" />
-                  </g>
-                </svg>
-              </div>
+                    <g
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                    >
+                      <path d="M3.333 20 20 32.37 36.666 20" />
+                      <path d="M11.667 15 20 21.667 28.334 15m-10.001-5L20 11.333 21.666 10 20 8.666 18.333 10Z" />
+                    </g>
+                  </svg>
+                </div>
+              ) : (
+                <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+                  <svg
+                    className="w-full h-full"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 40 40"
+                  >
+                    <g
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    >
+                      <path d="M3.333 20 20 32.37 36.666 20"></path>
+                      <path d="M11.667 15 20 21.667 28.334 15m-10.001-5L20 11.333 21.666 10 20 8.666 18.333 10Z"></path>
+                    </g>
+                  </svg>
+                </div>
+              )}
+
               <div className="content">
-                <h4 className="mb-4 dark:text-white">
+                <h4 className="mb-4 theme-text-2">
                   Get the Attention You Deserve from the Recruiters.
                 </h4>
                 <p className="w-md-3quarter pr-lg-5">
@@ -147,26 +169,47 @@ const FeaturesSection = () => {
             data-aos-delay="250"
           >
             <div className="d-flex flex-column gap-6 flex-lg-row">
-              <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10">
-                <svg
-                  className="w-full h-full"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 40 40"
-                >
-                  <g
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
+              {theme === "dark" ? (
+                <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10">
+                  <svg
+                    className="w-full h-full"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 40 40"
                   >
-                    <path d="M3.333 20 20 32.37 36.666 20"></path>
-                    <path d="M11.667 15 20 21.667 28.334 15m-10.001-5L20 11.333 21.666 10 20 8.666 18.333 10Z"></path>
-                  </g>
-                </svg>
-              </div>
+                    <g
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                    >
+                      <path d="M3.333 20 20 32.37 36.666 20"></path>
+                      <path d="M11.667 15 20 21.667 28.334 15m-10.001-5L20 11.333 21.666 10 20 8.666 18.333 10Z"></path>
+                    </g>
+                  </svg>
+                </div>
+              ) : (
+                <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+                  <svg
+                    className="w-full h-full"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 40 40"
+                  >
+                    <g
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    >
+                      <path d="M10 29.334 6.667 27.5v-4.166m0-6.668V12.5L10 10.666m6.667-3.833L20 5l3.334 1.833M30 10.666l3.333 1.834v4.166m0 6.668V27.5L30 29.367m-6.666 3.799L20 35l-3.333-1.834M20 20l3.333-1.834M30 14.333l3.333-1.833M20 20v4.167m0 6.667V35m0-15-3.333-1.867M10 14.333 6.667 12.5"></path>
+                    </g>
+                  </svg>
+                </div>
+              )}
+
               <div className="content">
-                <h4 className="mb-4 dark:text-white">
+                <h4 className="mb-4 theme-text-2">
                   Land your Dream Job 10x Faster
                 </h4>
                 <p className="w-md-3quarter pr-lg-5">
@@ -211,7 +254,7 @@ const FeaturesSection = () => {
                 </svg>
               </div>
               <div className="content">
-                <h4 className="mb-4 dark:text-white">
+                <h4 className="mb-4 theme-text-2">
                   Endorsed by a Former Google Recruiter
                 </h4>
                 <p className="w-md-3quarter pr-lg-5">
