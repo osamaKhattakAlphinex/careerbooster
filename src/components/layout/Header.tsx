@@ -76,13 +76,14 @@ const Header = () => {
 
   return (
     <nav
-      // className={`navbar navbar-expand-lg fixed-top ${
-      //   theme === "dark" ? "bg-dark" : "bg-white"
-      // }`}
-      className={`navbar navbar-expand-lg fixed-top bg-hover-scroll on-over headroom headroom--top headroom--not-bottom`}
+      className={`navbar navbar-expand-lg fixed-top ${
+        theme === "dark" ? "bg-dark" : "bg-white"
+      }`}
+      // className={`navbar navbar-expand-lg fixed-top bg-hover-scroll on-over headroom headroom--top headroom--not-bottom`}
     >
       <div className="container">
         {/* <!-- Logo --> */}
+
         <Link
           className="navbar-brand"
           href="/"
@@ -92,7 +93,7 @@ const Header = () => {
         >
           <img src="/assets/images/logo.png" alt="" className="w-70" />
         </Link>
-        {/* <ThemeToggler /> */}
+
         {/* <!-- Navbar toggler button --> */}
 
         {/* <!-- Navbar content --> */}
@@ -290,6 +291,7 @@ const Header = () => {
             </div>
           </div>
         </div>
+        <ThemeToggler />
       </div>
     </nav>
   );

@@ -235,24 +235,46 @@ const FeaturesSection = () => {
             data-aos-delay="250"
           >
             <div className="d-flex flex-column gap-6 flex-lg-row">
-              <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10">
-                <svg
-                  className="w-full h-full"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 40 40"
-                >
-                  <g
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
+              {theme === "dark" ? (
+                <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10">
+                  <svg
+                    className="w-full h-full"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 40 40"
                   >
-                    <path d="M3.333 20 20 32.37 36.666 20"></path>
-                    <path d="M11.667 15 20 21.667 28.334 15m-10.001-5L20 11.333 21.666 10 20 8.666 18.333 10Z"></path>
-                  </g>
-                </svg>
-              </div>
+                    <g
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                    >
+                      <path d="M3.333 20 20 32.37 36.666 20"></path>
+                      <path d="M11.667 15 20 21.667 28.334 15m-10.001-5L20 11.333 21.666 10 20 8.666 18.333 10Z"></path>
+                    </g>
+                  </svg>
+                </div>
+              ) : (
+                <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
+                  <svg
+                    className="w-full h-full"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 40 40"
+                  >
+                    <g
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    >
+                      <path d="M3.333 20 20 32.37 36.666 20"></path>
+                      <path d="M11.667 15 20 21.667 28.334 15m-10.001-5L20 11.333 21.666 10 20 8.666 18.333 10Z"></path>
+                    </g>
+                  </svg>
+                </div>
+              )}
+
               <div className="content">
                 <h4 className="mb-4 theme-text-2">
                   Endorsed by a Former Google Recruiter
@@ -279,7 +301,7 @@ const FeaturesSection = () => {
           <h5 className="my-10">
             Ready to craft a resume that impresses both bots and humans?
           </h5>
-          <Link href="/register" className="btn btn-primary-dark">
+          <Link href="/register" className="btn theme-btn">
             Let{"'"}s get started!
           </Link>
         </div>

@@ -1,6 +1,8 @@
+"use client";
+import useTheme from "@/lib/useTheme";
 import Link from "next/link";
-
 const FeaturesSecond = () => {
+  const [theme] = useTheme();
   return (
     <section className="py-10 py-lg-15 @extraClassList">
       <div className="container">
@@ -8,16 +10,16 @@ const FeaturesSecond = () => {
         <div className="row g-6 gx-lg-14 gx-xl-20 align-center">
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="150">
             <div className="content">
-              <p className="text-primary-dark">Features 1</p>
-              <h4 className="text-white md:text-[24px] text-[17px]">
+              <p className="theme-text">Features 1</p>
+              <h4 className="theme-feature-heading  md:text-[24px] text-[17px]">
                 Unveil The Secret...
               </h4>
-              <h1 className="text-white md:text-[40px] my-5 text-[24px]">
+              <h1 className="theme-feature-heading  md:text-[40px] my-5 text-[24px]">
                 Craft a Winning
-                <span className="text-primary-dark"> Executive Resume</span> in
-                Just 7 Minutes!
+                <span className="theme-text"> Executive Resume</span> in Just 7
+                Minutes!
               </h1>
-              <h4 className="text-white mb-8 md:text-[24px] text-[17px] ">
+              <h4 className="theme-feature-heading  mb-8 md:text-[24px] text-[17px] ">
                 Stand Out from the Crowd and Secure Your Dream Job Faster
               </h4>
               <p className="mb-6">
@@ -28,7 +30,7 @@ const FeaturesSecond = () => {
               </p>
               <Link
                 href="/register"
-                className="arrow-link arrow-link-primary-dark text-primary-dark gap-3"
+                className="arrow-link arrow-link-primary-dark theme-text gap-3"
               >
                 <span>Get Started Free</span>
                 <svg
@@ -49,13 +51,23 @@ const FeaturesSecond = () => {
             </div>
           </div>
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="250">
-            <div className="feature-img">
-              <img
-                src="assets/images/illustrations/feature-illustration-1-dark.svg"
-                alt=""
-                className="img-fluid"
-              />
-            </div>
+            {theme === "dark" ? (
+              <div className="feature-img">
+                <img
+                  src="assets/images/illustrations/feature-illustration-1-dark.svg"
+                  alt=""
+                  className="img-fluid"
+                />
+              </div>
+            ) : (
+              <div className="feature-img">
+                <img
+                  src="assets/images/illustrations/feature-illustration-1-blue.svg"
+                  alt=""
+                  className="img-fluid"
+                />
+              </div>
+            )}
           </div>
         </div>
         {/* <!-- feature 2 --> */}
@@ -66,16 +78,16 @@ const FeaturesSecond = () => {
             data-aos-delay="150"
           >
             <div className="content">
-              <p className="text-primary-dark">Feature 2</p>
-              <h4 className="text-white md:text-[24px] text-[17px]">
+              <p className="theme-text">Feature 2</p>
+              <h4 className="theme-feature-heading  md:text-[24px] text-[17px]">
                 Unlock Hidden Career Advancements
               </h4>
-              <h1 className="text-white md:text-[40px] my-5 text-[24px] ">
+              <h1 className="theme-feature-heading  md:text-[40px] my-5 text-[24px] ">
                 Supercharge Your
-                <span className="text-primary-dark "> LinkedIn</span> Networking
-                for Confidential Dream Jobs
+                <span className="theme-text "> LinkedIn</span> Networking for
+                Confidential Dream Jobs
               </h1>
-              <h4 className="text-white mb-8 md:text-[24px] text-[17px]">
+              <h4 className="theme-feature-heading  mb-8 md:text-[24px] text-[17px]">
                 Don{"'"}t Miss Out on Lucrative Unadvertised Opportunities
                 Anymore!
               </h4>
@@ -91,7 +103,7 @@ const FeaturesSecond = () => {
               </p>
               <Link
                 href="/register"
-                className="arrow-link arrow-link-primary-dark text-primary-dark gap-3"
+                className="arrow-link arrow-link-primary-dark theme-text gap-3"
               >
                 <span>Request A Demo</span>
                 <svg
@@ -125,15 +137,15 @@ const FeaturesSecond = () => {
         <div className="row g-6 gx-lg-14 gx-xl-20 align-center mt-10">
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="150">
             <div className="content">
-              <p className="text-primary-dark">Features 3</p>
-              <h4 className="text-white md:text-[24px] text-[17px] ">
+              <p className="theme-text">Features 3</p>
+              <h4 className="theme-feature-heading  md:text-[24px] text-[17px] ">
                 Stop Wasting Hours on Tailored Cover Letters!
               </h4>
-              <h1 className="text-white md:text-[40px] my-5 text-[24px]">
+              <h1 className="theme-feature-heading  md:text-[40px] my-5 text-[24px]">
                 Unlock the Future of Job Applications with AI-Powered
-                <span className="text-primary-dark"> Cover Letters. </span>
+                <span className="theme-text"> Cover Letters. </span>
               </h1>
-              <h4 className="text-white md:text-[24px] text-[17px]  mb-8">
+              <h4 className="theme-feature-heading  md:text-[24px] text-[17px]  mb-8">
                 Craft Tailor-Made Cover Letters for Every Job in Seconds!
               </h4>
               <p className="mb-6">
@@ -146,7 +158,7 @@ const FeaturesSecond = () => {
 
               <Link
                 href="/register"
-                className="arrow-link arrow-link-primary-dark text-primary-dark gap-3"
+                className="arrow-link arrow-link-primary-dark theme-text gap-3"
               >
                 <span>Get Started Free</span>
                 <svg
@@ -184,16 +196,16 @@ const FeaturesSecond = () => {
             data-aos-delay="150"
           >
             <div className="content">
-              <p className="text-primary-dark">Feature 4</p>
-              <h4 className="text-white md:text-[24px] text-[17px] ">
+              <p className="theme-text">Feature 4</p>
+              <h4 className="theme-feature-heading  md:text-[24px] text-[17px] ">
                 Discover the Strength of Your Resume
               </h4>
-              <h1 className="text-white md:text-[40px] my-5 text-[24px]">
+              <h1 className="theme-feature-heading  md:text-[40px] my-5 text-[24px]">
                 Conquer the ATS with Our
-                <span className="text-primary-dark"> Free ATS Scan </span>
+                <span className="theme-text"> Free ATS Scan </span>
                 Service!
               </h1>
-              <h4 className="text-white md:text-[24px] text-[17px]  mb-8">
+              <h4 className="theme-feature-heading  md:text-[24px] text-[17px]  mb-8">
                 Ensure Your Resume Navigates Robots and Recruiters Effortlessly
               </h4>
               <p className="mb-6">
@@ -204,7 +216,7 @@ const FeaturesSecond = () => {
               </p>
               <Link
                 href="/register"
-                className="arrow-link arrow-link-primary-dark text-primary-dark gap-3"
+                className="arrow-link arrow-link-primary-dark theme-text gap-3"
               >
                 <span>Request A Demo</span>
                 <svg
@@ -238,16 +250,16 @@ const FeaturesSecond = () => {
         <div className="row g-6 gx-lg-14 gx-xl-20 align-center mt-10">
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="150">
             <div className="content">
-              <p className="text-primary-dark">Feature 5</p>
-              <h4 className="text-white md:text-[24px] text-[17px] ">
+              <p className="theme-text">Feature 5</p>
+              <h4 className="theme-feature-heading  md:text-[24px] text-[17px] ">
                 Unlock Resume Excellence
               </h4>
-              <h1 className="text-white md:text-[40px] my-5 text-[24px]">
+              <h1 className="theme-feature-heading  md:text-[40px] my-5 text-[24px]">
                 Get Free
-                <span className="text-primary-dark"> Resume Review: </span> Don
+                <span className="theme-text"> Resume Review: </span> Don
                 {"'"}t Let Your Resume Undersell Your Achievements
               </h1>
-              <h4 className="text-white md:text-[24px] text-[17px]  mb-8">
+              <h4 className="theme-feature-heading  md:text-[24px] text-[17px]  mb-8">
                 Eliminate Costly Mistakes and Supercharge Your Career Success!
               </h4>
               <p className="mb-6">
@@ -261,7 +273,7 @@ const FeaturesSecond = () => {
 
               <Link
                 href="/register"
-                className="arrow-link arrow-link-primary-dark text-primary-dark gap-3"
+                className="arrow-link arrow-link-primary-dark theme-text gap-3"
               >
                 <span>Get Started Free</span>
                 <svg

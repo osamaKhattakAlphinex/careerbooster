@@ -108,7 +108,7 @@ const RewardsSection = () => {
             </p>
           </div>
           <div className="col-md-12 text-center my-10">
-            <Link href="/register" className="btn btn-outline-primary-dark">
+            <Link href="/register" className="btn theme-outline-btn">
               Get started
             </Link>
           </div>

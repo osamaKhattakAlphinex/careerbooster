@@ -7,8 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme] = useTheme();
   return (
-    <html lang="en" data-bs-theme="dark">
-      {/* <html lang="en" data-bs-theme={theme === "dark" ? "dark" : ""}></html> */}
+    <html lang="en" data-bs-theme={theme === "dark" ? "dark" : ""}>
       <body className={inter.className}>
         <div className="wrapper d-flex flex-column justify-between">
           {children}
