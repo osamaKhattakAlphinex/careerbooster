@@ -94,14 +94,14 @@ const FeaturesSection = () => {
                   Get Past the ATS and Increase Your Visibility
                 </h4>
                 <p className="w-md-3quarter pr-lg-5">
-                  The ATS is no human—it's a robot designed to shortlist resumes
-                  based on specific criteria. This means your resume must speak
-                  the language of machines to secure that initial interview
-                  invitation. The question arises: Who can craft a better
-                  robotfriendly resume than a robot itself? We've decoded the
-                  algorithms that the ATS employs to shortlist candidates. Your
-                  resume is crafted with a deep understanding of what it takes
-                  to pass this robotic gatekeeper
+                  The ATS is no human—it&apos;s a robot designed to shortlist
+                  resumes based on specific criteria. This means your resume
+                  must speak the language of machines to secure that initial
+                  interview invitation. The question arises: Who can craft a
+                  better robotfriendly resume than a robot itself? We&apos;ve
+                  decoded the algorithms that the ATS employs to shortlist
+                  candidates. Your resume is crafted with a deep understanding
+                  of what it takes to pass this robotic gatekeeper
                 </p>
               </div>
             </div>
@@ -155,8 +155,9 @@ const FeaturesSection = () => {
                 <p className="w-md-3quarter pr-lg-5">
                   Our system has been meticulously trained through extensive
                   research and consultations with numerous executive resume
-                  writers. We've fine-tuned our system to create resumes that
-                  captivate the attention of recruiters and hiring managers.
+                  writers. We&apos;ve fine-tuned our system to create resumes
+                  that captivate the attention of recruiters and hiring
+                  managers.
                 </p>
               </div>
             </div>
@@ -221,8 +222,8 @@ const FeaturesSection = () => {
                   highlights the keywords and skills that matter most to
                   recruiters. It then helps you incorporate these essential
                   elements seamlessly into your resume, making it a perfect
-                  match for the position you're targeting. When a recruiter sees
-                  a resume that aligns perfectly with their job opening, it
+                  match for the position you&apos;re targeting. When a recruiter
+                  sees a resume that aligns perfectly with their job opening, it
                   significantly increases your chances of getting noticed and
                   landing an interview.
                 </p>
@@ -261,14 +262,15 @@ const FeaturesSection = () => {
                   Still skeptical? Take it from the experts. Nolan Church, a
                   former Google recruiter, has emphasized that resumes often
                   suffer from an overload of words and paragraphs, resulting in
-                  a "zero chance" of progressing. He recommends using AI tools
-                  to refine your resume. In an interview with Business Insider,
-                  he praised the effectiveness of AI-driven resume optimization,
-                  confirming that it's the smart choice for modern job seekers.
-                  So, when you trust AI for your executive resume, you're not
-                  just appeasing the robots; you're ensuring your resume shines
-                  in the eyes of discerning human recruiters too. It's the
-                  winning combination for your career success.
+                  a &quot;zero chance&quot; of progressing. He recommends using
+                  AI tools to refine your resume. In an interview with Business
+                  Insider, he praised the effectiveness of AI-driven resume
+                  optimization, confirming that it&apos;s the smart choice for
+                  modern job seekers. So, when you trust AI for your executive
+                  resume, you&apos;re not just appeasing the robots; you&apos;re
+                  ensuring your resume shines in the eyes of discerning human
+                  recruiters too. It&apos;s the winning combination for your
+                  career success.
                 </p>
               </div>
             </div>
