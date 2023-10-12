@@ -11,7 +11,7 @@ const FeaturesSecond = () => {
         <div className="row g-6 gx-lg-14 gx-xl-20 align-center">
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="150">
             <div className="content">
-              <p className="theme-text">Features 1</p>
+              <p className="theme-text">Feature 1</p>
               <h4 className="theme-feature-heading  md:text-[24px] text-[17px]">
                 Unveil The Secret...
               </h4>

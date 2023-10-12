@@ -32,7 +32,7 @@ const UploadedFilesCard = () => {
   }, [session?.user?.email, uploadedFileName]);
 
   return (
-    <div className="w-[30%] p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
+    <div className="w-[30%] toolscard  p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
       <h5 className="  font-semibold   ">
         Your Original Resume{" "}
         {/* <button

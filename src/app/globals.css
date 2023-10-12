@@ -91,6 +91,12 @@
   background: white;
   color: black;
 }
+.dashborad {
+  background: url(/assets/images/bg/1.jpg) no-repeat center center/cover;
+}
+.toolscard {
+  background: #dfeee9;
+}
 /* DARK THEME */
 [data-bs-theme="dark"] .nav-link {
   color: #fff;
@@ -180,4 +186,12 @@
 [data-bs-theme="dark"] .menu-dropdown {
   background: gray;
   color: white;
+}
+[data-bs-theme="dark"] .dashboard {
+  color: #fff !important;
+  background: none;
+  background-color: rgba(23, 24, 37, var(--gen-bg-opacity, 1)) !important;
+}
+[data-bs-theme="dark"] .toolscard {
+  background: #13141e;
 }

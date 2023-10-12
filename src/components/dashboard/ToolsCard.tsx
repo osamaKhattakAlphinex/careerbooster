@@ -26,10 +26,10 @@ const ToolsCard = () => {
         AI Tools
       </h5>
       <ul className="flex flex-row gap-4 mr-10  pl-0">
-        <li className="w-1/3 ">
+        <li className="w-1/3 toolscard ">
           <div className="h-[250px] min-h-full p-4 border border-gray-200 rounded-lg shadow">
             {shockIcon}
-            <Link href="/resume-builder" className="no-underline">
+            <Link href="/resume-builder" className="no-underline theme-text-2">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
                 Generate New Resumes
               </h5>
@@ -39,17 +39,20 @@ const ToolsCard = () => {
               positions.
             </p>
             <Link
-              className=" bg-gray-800 text-xs text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              className=" theme-btn text-xs  rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href="/resume-builder"
             >
               Launch
             </Link>
           </div>
         </li>
-        <li className="w-1/3 ">
+        <li className="w-1/3 toolscard ">
           <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {documentTextIcon}
-            <Link href="/cover-letter-bot" className="no-underline">
+            <Link
+              href="/cover-letter-bot"
+              className="no-underline theme-text-2"
+            >
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
                 Generate Cover Letters
               </h5>
@@ -59,17 +62,17 @@ const ToolsCard = () => {
               significantly boosting your chances of landing interviews.
             </p>
             <Link
-              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              className=" theme-btn text-sm  rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href="/cover-letter-bot"
             >
               Launch
             </Link>
           </div>
         </li>
-        <li className="w-1/3 ">
+        <li className="w-1/3 toolscard ">
           <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {emailIconBig}
-            <Link href="/email-bot" className="no-underline">
+            <Link href="/email-bot" className="no-underline theme-text-2">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
                 Email Follow-up Sequence
               </h5>
@@ -80,7 +83,7 @@ const ToolsCard = () => {
               being noticed.
             </p>
             <Link
-              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              className=" theme-btn text-sm  rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href="/email-bot"
             >
               Launch
@@ -88,10 +91,10 @@ const ToolsCard = () => {
           </div>
         </li>
 
-        {/* <li className="w-1/3">
+        {/* <li className="w-1/3 toolscard">
           <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {briefCaseIcon}
-            <Link href="/linkedin-pdf-generator" className="no-underline">
+            <Link href="/linkedin-pdf-generator" className="no-underline theme-text-2">
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
                 LinkedIn PDF Generator
               </h5>
@@ -101,7 +104,7 @@ const ToolsCard = () => {
               profile data
             </p>
             <Link
-              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              className=" theme-btn text-sm  rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href="/linkedin-pdf-generator"
             >
               Launch
@@ -111,12 +114,12 @@ const ToolsCard = () => {
       </ul>
 
       <ul className="flex flex-row gap-4 mr-10 mt-8 pl-0">
-        <li className="w-1/3 ">
+        <li className="w-1/3 toolscard ">
           <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {brushIcon}
             <Link
               href="/linkedin-optimization"
-              className="no-underline"
+              className="no-underline theme-text-2"
               style={{ pointerEvents: "none" }}
             >
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
@@ -129,17 +132,20 @@ const ToolsCard = () => {
               high in recruiter searches.
             </p>
             <Link
-              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              className=" theme-btn text-sm  rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href="/linkedin-optimization"
             >
               Launch
             </Link>
           </div>
         </li>
-        <li className="w-1/3 ">
+        <li className="w-1/3 toolscard ">
           <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {trendingArrowIcon}
-            <Link href="/consulting-bids-bot" className="no-underline">
+            <Link
+              href="/consulting-bids-bot"
+              className="no-underline theme-text-2"
+            >
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
                 Consulting Bids
               </h5>
@@ -148,19 +154,19 @@ const ToolsCard = () => {
               Generate bids in seconds to secure your next consulting gig.
             </p>
             <Link
-              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              className=" theme-btn text-sm  rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href="/consulting-bids-bot"
             >
               Launch
             </Link>
           </div>
         </li>
-        <li className="w-1/3 ">
+        <li className="w-1/3 toolscard ">
           <div className="h-[250px] min-h-full p-4 border border-gray-200 rounded-lg shadow">
             {bagIcon}
             <Link
               href="/chatAI"
-              className="no-underline"
+              className="no-underline theme-text-2"
               style={{ pointerEvents: "none" }}
             >
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight">
@@ -173,7 +179,7 @@ const ToolsCard = () => {
               searching multiple job boards.
             </p>
             <Link
-              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              className=" theme-btn text-sm  rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href="/chatAI"
               style={{ pointerEvents: "none" }}
             >
@@ -183,12 +189,12 @@ const ToolsCard = () => {
         </li>
       </ul>
       <ul className="flex flex-row gap-4 mr-10 mt-8 pl-0">
-        <li className="w-1/3 ">
+        <li className="w-1/3 toolscard ">
           <div className="h-[250px] min-h-full p-4 border border-gray-200 rounded-lg shadow">
             {chatIcon}
             <Link
               href="/chatAI"
-              className="no-underline"
+              className="no-underline theme-text-2"
               style={{ pointerEvents: "none" }}
             >
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight">
@@ -202,7 +208,7 @@ const ToolsCard = () => {
               data-driven insights.
             </p>
             <Link
-              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              className=" theme-btn text-sm  rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href="/chatAI"
               style={{ pointerEvents: "none" }}
             >
@@ -211,12 +217,12 @@ const ToolsCard = () => {
           </div>
         </li>
 
-        <li className="w-1/3 ">
+        <li className="w-1/3 toolscard ">
           <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {resumeIcon}
             <Link
               href="/review-resume-bot"
-              className="no-underline"
+              className="no-underline theme-text-2"
               style={{ pointerEvents: "none" }}
             >
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
@@ -229,7 +235,7 @@ const ToolsCard = () => {
               actionable suggestions to enhance its impact.
             </p>
             <Link
-              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              className=" theme-btn text-sm  rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href="/review-resume-bot"
               style={{ pointerEvents: "none" }}
             >
@@ -237,12 +243,12 @@ const ToolsCard = () => {
             </Link>
           </div>
         </li>
-        <li className="w-1/3 ">
+        <li className="w-1/3 toolscard ">
           <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {scanIcon}
             <Link
               href="/review-resume-bot"
-              className="no-underline"
+              className="no-underline theme-text-2"
               style={{ pointerEvents: "none" }}
             >
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
@@ -255,7 +261,7 @@ const ToolsCard = () => {
               increasing your chances of making it to the recruiter&apos;s desk.
             </p>
             <Link
-              className=" bg-gray-800 text-sm text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              className=" theme-btn text-sm  rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href="/review-resume-bot"
               style={{ pointerEvents: "none" }}
             >
@@ -265,12 +271,12 @@ const ToolsCard = () => {
         </li>
       </ul>
       <ul className="flex flex-row gap-4 mr-10 mt-8 pl-0">
-        <li className="w-1/3 ">
+        <li className="w-1/3 toolscard ">
           <div className="h-[250px] min-h-full p-4  border border-gray-200 rounded-lg shadow  ">
             {checkBubbleIcon}
             <Link
               href="/review-resume-bot"
-              className="no-underline"
+              className="no-underline theme-text-2"
               style={{ pointerEvents: "none" }}
             >
               <h5 className="mb-2 mt-4 text-lg font-semibold tracking-tight  ">
@@ -283,7 +289,7 @@ const ToolsCard = () => {
               establishing you as a thought leader and industry expert.
             </p>
             <Link
-              className=" bg-gray-800 text-sm  text-white rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
+              className=" theme-btn text-sm e rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
               href=""
               aria-disabled="true"
               style={{ pointerEvents: "none" }}

@@ -76,10 +76,10 @@ const Header = () => {
 
   return (
     <nav
-      className={`navbar navbar-expand-lg fixed-top ${
-        theme === "dark" ? "bg-dark" : "bg-white"
-      }`}
-      // className={`navbar navbar-expand-lg fixed-top bg-hover-scroll on-over headroom headroom--top headroom--not-bottom`}
+      // className={`navbar navbar-expand-lg fixed-top ${
+      //   theme === "dark" ? "bg-dark" : "bg-white"
+      // }`}
+      className={`navbar navbar-expand-lg fixed-top bg-hover-scroll on-over headroom headroom--top headroom--not-bottom`}
     >
       <div className="container">
         {/* <!-- Logo --> */}
@@ -101,7 +101,7 @@ const Header = () => {
           <div className="navbar-content-inner ms-lg-auto d-flex flex-column flex-lg-row align-lg-center gap-4 gap-lg-10 p-2 p-lg-0">
             <ul className="navbar-nav gap-lg-2 gap-xl-5 visible ">
               <li className="nav-item dropdown">
-                <Link className="nav-link active dark:theme-text-2" href="/">
+                <Link className="nav-link active " href="/">
                   Home
                 </Link>
               </li>

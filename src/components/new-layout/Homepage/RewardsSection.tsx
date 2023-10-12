@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const RewardsSection = () => {
   return (
-    <section className="reward py-20">
+    <section className="reward pb-10">
       <div
         className="row g-6 gx-lg-14 gx-xl-20 align-center mt-10"
         style={{ width: "100%" }}
