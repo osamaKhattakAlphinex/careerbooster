@@ -69,7 +69,7 @@ const ResetPasswordPage = () => {
                 {error && <p className="text-danger">{error}</p>}
                 <button
                   type="submit"
-                  className="btn btn-outline-primary-dark"
+                  className="btn theme-outline-btn"
                   disabled={isLoading || !isVerified}
                 >
                   {isLoading ? "Loading..." : "Send Reset Link"}

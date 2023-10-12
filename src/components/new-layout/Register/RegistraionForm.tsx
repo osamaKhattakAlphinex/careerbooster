@@ -553,7 +553,7 @@ const RegistrationForm = () => {
               <button
                 type="submit"
                 disabled={!formik.values.terms || submitting}
-                className="btn btn-primary-dark w-full py-4"
+                className="btn theme-btn w-full py-4"
               >
                 {submitting ? (
                   <span className="flex items-center justify-center">

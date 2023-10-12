@@ -14,7 +14,7 @@ const Footer = () => {
             <div className="row g-6">
               <div className="col-md-4 col-lg-4">
                 <div className="footer-widget text-center text-md-start">
-                  <h6 className="text-white mb-2">Career Booster</h6>
+                  <h6 className="theme-text mb-2">Career Booster</h6>
                   <ul className="link-list list-unstyled mb-0">
                     <li>
                       <Link href="/about">About</Link>
@@ -36,7 +36,7 @@ const Footer = () => {
               </div>
               <div className="col-md-4 col-lg-4">
                 <div className="footer-widget text-center text-md-start">
-                  <h6 className="text-white mb-2">Use Cases</h6>
+                  <h6 className="theme-text mb-2">Use Cases</h6>
                   <ul className="link-list list-unstyled mb-0">
                     <li>
                       <Link href="/use-cases">AI writer</Link>
@@ -58,7 +58,7 @@ const Footer = () => {
               </div>
               <div className="col-md-4 col-lg-4">
                 <div className="footer-widget text-center text-md-start">
-                  <h6 className="text-white mb-4">Get connected</h6>
+                  <h6 className="theme-text mb-4">Get connected</h6>
                   {/* <form>
                     <div className="input-group">
                       <input
@@ -92,6 +92,7 @@ const Footer = () => {
                     <li>
                       <Link href="https://www.facebook.com/careerboosterai">
                         <svg
+                          className="theme-text-2 "
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 18 18"
@@ -117,7 +118,7 @@ const Footer = () => {
                       <Link href="https://www.linkedin.com/company/careerboosterai/">
                         <svg
                           className="w-4 h-4 
-                          text-white"
+                          theme-text-2 "
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="currentColor"
@@ -135,6 +136,7 @@ const Footer = () => {
                     <li>
                       <Link href="https://www.instagram.com/careerboosterai/">
                         <svg
+                          className="theme-text-2 "
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 18 18"
@@ -181,11 +183,7 @@ const Footer = () => {
           <ul className="list-unstyled flex">
             <li className="mx-5">
               Copyright
-              <span className="text-primary-dark">
-                {" "}
-                &copy; CareerBooster 2023
-              </span>
-              .
+              <span className="theme-text"> &copy; CareerBooster 2023</span>.
             </li>
             <li className="mx-5">
               <Link href="/privacy-policy">Privacy Policy</Link>

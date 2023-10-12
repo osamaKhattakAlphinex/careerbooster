@@ -11,9 +11,9 @@ const TeamCard = () => {
               data-aos="fade-up-sm"
               data-aos-delay="50"
             >
-              <h1 className="text-white md:text-[48px] text-[24px]">
-                <span className="text-primary-dark">Career Booster.</span> is
-                Powered by a <br className="d-none d-xl-block" />
+              <h1 className="theme-text-2 md:text-[48px] text-[24px]">
+                <span className="theme-text">Career Booster.</span> is Powered
+                by a <br className="d-none d-xl-block" />
                 Dynamic Team.
               </h1>
             </div>
@@ -28,7 +28,7 @@ const TeamCard = () => {
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
-              <h4 className="text-white mb-1">Annette Black</h4>
+              <h4 className="theme-text-2 mb-1">Annette Black</h4>
               <p className="fs-sm mb-2">Digital Marketer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
@@ -98,7 +98,7 @@ const TeamCard = () => {
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
-              <h4 className="text-white mb-1">Jenny Wilson</h4>
+              <h4 className="theme-text-2 mb-1">Jenny Wilson</h4>
               <p className="fs-sm mb-2">Product Designer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
@@ -168,7 +168,7 @@ const TeamCard = () => {
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
-              <h4 className="text-white mb-1">Guy Hawkins</h4>
+              <h4 className="theme-text-2 mb-1">Guy Hawkins</h4>
               <p className="fs-sm mb-2">Marketing Coordinator</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
@@ -238,7 +238,7 @@ const TeamCard = () => {
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
-              <h4 className="text-white mb-1">Jane Cooper</h4>
+              <h4 className="theme-text-2 mb-1">Jane Cooper</h4>
               <p className="fs-sm mb-2">Digital Creator</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
@@ -308,7 +308,7 @@ const TeamCard = () => {
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
-              <h4 className="text-white mb-1">Courtney Henry</h4>
+              <h4 className="theme-text-2 mb-1">Courtney Henry</h4>
               <p className="fs-sm mb-2">Web Designer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
@@ -378,7 +378,7 @@ const TeamCard = () => {
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
-              <h4 className="text-white mb-1">Ralph Edwards</h4>
+              <h4 className="theme-text-2 mb-1">Ralph Edwards</h4>
               <p className="fs-sm mb-2">Software Engineer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
@@ -448,7 +448,7 @@ const TeamCard = () => {
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
-              <h4 className="text-white mb-1">Arlene McCoy</h4>
+              <h4 className="theme-text-2 mb-1">Arlene McCoy</h4>
               <p className="fs-sm mb-2">Lead Developer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
@@ -518,7 +518,7 @@ const TeamCard = () => {
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
-              <h4 className="text-white mb-1">Devon Lane</h4>
+              <h4 className="theme-text-2 mb-1">Devon Lane</h4>
               <p className="fs-sm mb-2">President of Sales</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>

@@ -13,7 +13,7 @@ const PageHeader: React.FC<Props> = ({ title, secondTitle }) => {
     >
       <div className="container">
         <div className="text-center">
-          <h3 className="text-white mb-2">{title}</h3>
+          <h3 className="theme-text-2 mb-2">{title}</h3>
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb justify-center fs-sm">
               <li className="breadcrumb-item">

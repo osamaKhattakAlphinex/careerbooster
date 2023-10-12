@@ -49,43 +49,7 @@ const FeaturesSection = () => {
             data-aos-delay="200"
           >
             <div className="d-flex flex-column gap-6 flex-lg-row">
-              {/* {theme === "dark" ? (
-                <div className="  icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10">
-                  <svg
-                    className="w-full h-full"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 40 40"
-                  >
-                    <g
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    >
-                      <path d="M30.167 10c-1.833 4.855-3.167 8.188-4 10m0 0c-3.132 6.813-6.188 10-10 10-4 0-8-4-8-10s4-10 8-10c3.778 0 6.892 3.31 10 10Zm0 0c.853 1.837 2.187 5.17 4 10" />
-                    </g>
-                  </svg>
-                </div>
-              ) : (
-                <div className="  icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary text-primary border-primary bg-opacity-10 dark:bg-gradient-3   dark:text-primary-dark  dark:border-white border-opacity-25">
-                  <svg
-                    className="w-full h-full"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 40 40"
-                  >
-                    <g
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    >
-                      <path d="M30.167 10c-1.833 4.855-3.167 8.188-4 10m0 0c-3.132 6.813-6.188 10-10 10-4 0-8-4-8-10s4-10 8-10c3.778 0 6.892 3.31 10 10Zm0 0c.853 1.837 2.187 5.17 4 10" />
-                    </g>
-                  </svg>
-                </div>
-              )} */}
+              <SVGProvider type="svg3" />
 
               <div className="content">
                 <h4 className="mb-4  theme-text-2 ">
@@ -159,45 +123,7 @@ const FeaturesSection = () => {
             data-aos-delay="250"
           >
             <div className="d-flex flex-column gap-6 flex-lg-row">
-              {theme === "dark" ? (
-                <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10">
-                  <svg
-                    className="w-full h-full"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 40 40"
-                  >
-                    <g
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    >
-                      <path d="M3.333 20 20 32.37 36.666 20"></path>
-                      <path d="M11.667 15 20 21.667 28.334 15m-10.001-5L20 11.333 21.666 10 20 8.666 18.333 10Z"></path>
-                    </g>
-                  </svg>
-                </div>
-              ) : (
-                <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-primary bg-opacity-10 text-primary border-primary border-opacity-25">
-                  <svg
-                    className="w-full h-full"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 40 40"
-                  >
-                    <g
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                    >
-                      <path d="M3.333 20 20 32.37 36.666 20"></path>
-                      <path d="M11.667 15 20 21.667 28.334 15m-10.001-5L20 11.333 21.666 10 20 8.666 18.333 10Z"></path>
-                    </g>
-                  </svg>
-                </div>
-              )}
+              <SVGProvider type="svg4" />
 
               <div className="content">
                 <h4 className="mb-4 theme-text-2">

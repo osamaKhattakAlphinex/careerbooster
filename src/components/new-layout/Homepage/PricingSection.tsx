@@ -6,14 +6,14 @@ const PricingSection = () => {
           <div className="col-lg-10">
             <div className="text-center">
               <p
-                className="text-primary-dark"
+                className="theme-text"
                 data-aos="fade-up-sm"
                 data-aos-delay="50"
               >
                 Pricing Plan
               </p>
               <h1
-                className="text-white mb-5 md:text-[40px] text-[24px]"
+                className="theme-hero-heading mb-5 md:text-[40px] text-[24px]"
                 data-aos="fade-up-sm"
                 data-aos-delay="100"
               >
@@ -33,16 +33,16 @@ const PricingSection = () => {
             data-aos-delay="50"
           >
             <div className="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-">
-              <h3 className="text-primary-dark fw-medium mb-0">Free Forever</h3>
-              <h1 className="display-3 fw-semibold text-white mb-0 mt-4  md:!text-6xl text-[24px]">
+              <h3 className="theme-text fw-medium mb-0">Free Forever</h3>
+              <h1 className="display-3 fw-semibold theme-text mb-0 mt-4  md:!text-6xl text-[24px]">
                 $00
               </h1>
-              {/* <!-- <p className="text-white lead fw-normal mt-4 mb-0">
+              {/* <!-- <p className="theme-text lead fw-normal mt-4 mb-0">
                     A 10X faster way to writing your professional copy
                   </p> --> */}
               <a
                 href="pricing-plan.html"
-                className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9 btn-dark-blue-3"
+                className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9 theme-pricing-btn"
               >
                 No Credit Card Required
               </a>
@@ -61,16 +61,16 @@ const PricingSection = () => {
             data-aos-delay="100"
           >
             <div className="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-">
-              <h3 className="text-primary-dark fw-medium mb-0">Standard</h3>
-              <h1 className="display-2 fw-semibold text-white mb-0 mt-4  md:!text-6xl text-[24px]">
+              <h3 className="theme-text fw-medium mb-0">Standard</h3>
+              <h1 className="display-2 fw-semibold theme-text mb-0 mt-4  md:!text-6xl text-[24px]">
                 $99
               </h1>
-              {/* <!-- <p className="text-white lead fw-normal mt-4 mb-0">
+              {/* <!-- <p className="theme-text lead fw-normal mt-4 mb-0">
                     A 10X faster way to writing your professional copy
                   </p> --> */}
               <a
                 href="pricing-plan.html"
-                className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9 btn-dark-blue-3"
+                className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9 theme-pricing-btn"
               >
                 Choose Plan
               </a>
@@ -96,16 +96,16 @@ const PricingSection = () => {
               {/* <!-- <span className="badge text-bg-primary px-4 py-2 rounded-end-0"
                     >Most Popular</span
                   > --> */}
-              <h3 className="text-primary-dark fw-medium mb-0">Premium</h3>
-              <h1 className="display-2 fw-semibold text-white mb-0 mt-4  md:!text-6xl text-[24px]">
+              <h3 className="theme-text fw-medium mb-0">Premium</h3>
+              <h1 className="display-2 fw-semibold theme-text mb-0 mt-4  md:!text-6xl text-[24px]">
                 $500 <span className="text-2xl">/ year</span>
               </h1>
-              {/* <!-- <p className="text-white lead fw-normal mt-4 mb-0">
+              {/* <!-- <p className="theme-text lead fw-normal mt-4 mb-0">
                     A 10X faster way to writing your professional copy
                   </p> --> */}
               <a
                 href="pricing-plan.html"
-                className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9 btn-dark-blue-3"
+                className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9 theme-pricing-btn"
               >
                 Choose Plan
               </a>

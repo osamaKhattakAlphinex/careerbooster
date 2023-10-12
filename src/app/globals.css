@@ -34,7 +34,7 @@
   width: 70%;
 }
 .theme-text {
-  color: rgba(0, 0, 255, 0.61);
+  color: rgba(0, 0, 255, 0.61) !important;
 }
 .theme-text-2 {
   color: black;
@@ -44,6 +44,14 @@
 }
 .theme-feature-heading {
   color: black;
+}
+.theme-rating-card {
+  background: white;
+  border-color: gray;
+  color: black;
+}
+.theme-arrow-link::after {
+  background: rgba(0, 0, 255, 0.61) !important;
 }
 .theme-features-text {
   background: linear-gradient(92.73deg, #b324d7 7.07%, #fe577f 97.81%);
@@ -67,7 +75,22 @@
   background-color: #6a4dff !important;
   color: white !important;
 }
-
+.theme-use-cases-bg {
+  background: white;
+}
+.theme-pricing-btn {
+  background: white;
+}
+.theme-pricing-btn:hover {
+  background: #6a4dff;
+}
+.cta {
+  background: url(/assets/images/bg/1.jpg) no-repeat center center/cover;
+}
+.menu-dropdown {
+  background: white;
+  color: black;
+}
 /* DARK THEME */
 [data-bs-theme="dark"] .nav-link {
   color: #fff;
@@ -110,4 +133,51 @@
   background-color: #e6f85e !important;
   border-color: none !important;
   color: black !important;
+}
+
+[data-bs-theme="dark"] .theme-arrow-link::after {
+  background: #e6f85e !important;
+}
+[data-bs-theme="dark"] .theme-use-cases-bg {
+  --gen-bg-opacity: 1;
+  background-color: rgba(
+    var(--gen-dark-blue-4-rgb),
+    var(--gen-bg-opacity)
+  ) !important;
+}
+
+[data-bs-theme="dark"] .theme-rating-card {
+  --gen-bg-opacity: 1;
+  background-color: rgba(
+    var(--gen-dark-blue-3-rgb),
+    var(--gen-bg-opacity)
+  ) !important;
+  color: var(--gen-body-color);
+  border-color: var(--gen-body-color);
+}
+
+[data-bs-theme="dark"] .theme-pricing-btn {
+  --gen-btn-color: #fff;
+  --gen-btn-bg: #191a28;
+  --gen-btn-border-color: #191a28;
+  --gen-btn-hover-color: #fff;
+  --gen-btn-hover-bg: #151622;
+  --gen-btn-hover-border-color: #141520;
+  --gen-btn-focus-shadow-rgb: 60, 60, 72;
+  --gen-btn-active-color: #fff;
+  --gen-btn-active-bg: #141520;
+  --gen-btn-active-border-color: #13141e;
+  --gen-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --gen-btn-disabled-color: #fff;
+  --gen-btn-disabled-bg: #191a28;
+  --gen-btn-disabled-border-color: #191a28;
+}
+[data-bs-theme="dark"] .cta {
+  color: #fff !important;
+  background: none;
+  background-color: rgba(23, 24, 37, var(--gen-bg-opacity, 1)) !important;
+}
+[data-bs-theme="dark"] .menu-dropdown {
+  background: gray;
+  color: white;
 }

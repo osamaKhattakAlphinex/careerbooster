@@ -1,10 +1,11 @@
 "use client";
 import useTheme from "@/lib/useTheme";
 import Link from "next/link";
+import SVGProvider from "../SVGProvider";
 const FeaturesSecond = () => {
   const [theme] = useTheme();
   return (
-    <section className="py-10 py-lg-15 @extraClassList">
+    <section className="pb-10 pb-lg-15 @extraClassList">
       <div className="container">
         {/* <!-- Feature 1 --> */}
         <div className="row g-6 gx-lg-14 gx-xl-20 align-center">
@@ -30,7 +31,7 @@ const FeaturesSecond = () => {
               </p>
               <Link
                 href="/register"
-                className="arrow-link arrow-link-primary-dark theme-text gap-3"
+                className="arrow-link theme-arrow-link theme-text gap-3"
               >
                 <span>Get Started Free</span>
                 <svg
@@ -51,23 +52,7 @@ const FeaturesSecond = () => {
             </div>
           </div>
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="250">
-            {theme === "dark" ? (
-              <div className="feature-img">
-                <img
-                  src="assets/images/illustrations/feature-illustration-1-dark.svg"
-                  alt=""
-                  className="img-fluid"
-                />
-              </div>
-            ) : (
-              <div className="feature-img">
-                <img
-                  src="assets/images/illustrations/feature-illustration-1-blue.svg"
-                  alt=""
-                  className="img-fluid"
-                />
-              </div>
-            )}
+            <SVGProvider type="featuresvg1" />
           </div>
         </div>
         {/* <!-- feature 2 --> */}
@@ -103,7 +88,7 @@ const FeaturesSecond = () => {
               </p>
               <Link
                 href="/register"
-                className="arrow-link arrow-link-primary-dark theme-text gap-3"
+                className="arrow-link theme-arrow-link theme-text gap-3"
               >
                 <span>Request A Demo</span>
                 <svg
@@ -124,13 +109,7 @@ const FeaturesSecond = () => {
             </div>
           </div>
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="250">
-            <div className="feature-img">
-              <img
-                src="assets/images/illustrations/feature-illustration-2-dark.svg"
-                alt=""
-                className="img-fluid"
-              />
-            </div>
+            <SVGProvider type="featuresvg2" />
           </div>
         </div>
         {/* <!-- feature 3 --> */}
@@ -158,7 +137,7 @@ const FeaturesSecond = () => {
 
               <Link
                 href="/register"
-                className="arrow-link arrow-link-primary-dark theme-text gap-3"
+                className="arrow-link theme-arrow-link theme-text gap-3"
               >
                 <span>Get Started Free</span>
                 <svg
@@ -179,13 +158,7 @@ const FeaturesSecond = () => {
             </div>
           </div>
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="250">
-            <div className="feature-img">
-              <img
-                src="assets/images/illustrations/feature-illustration-3-dark.svg"
-                alt=""
-                className="img-fluid"
-              />
-            </div>
+            <SVGProvider type="featuresvg3" />
           </div>
         </div>
         {/* <!-- feature 4 --> */}
@@ -216,7 +189,7 @@ const FeaturesSecond = () => {
               </p>
               <Link
                 href="/register"
-                className="arrow-link arrow-link-primary-dark theme-text gap-3"
+                className="arrow-link theme-arrow-link theme-text gap-3"
               >
                 <span>Request A Demo</span>
                 <svg
@@ -237,13 +210,7 @@ const FeaturesSecond = () => {
             </div>
           </div>
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="250">
-            <div className="feature-img">
-              <img
-                src="assets/images/illustrations/feature-illustration-2-dark.svg"
-                alt=""
-                className="img-fluid"
-              />
-            </div>
+            <SVGProvider type="featuresvg4" />
           </div>
         </div>
         {/* <!-- feature 5 --> */}
@@ -273,7 +240,7 @@ const FeaturesSecond = () => {
 
               <Link
                 href="/register"
-                className="arrow-link arrow-link-primary-dark theme-text gap-3"
+                className="arrow-link theme-arrow-link theme-text gap-3"
               >
                 <span>Get Started Free</span>
                 <svg
@@ -294,13 +261,7 @@ const FeaturesSecond = () => {
             </div>
           </div>
           <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="250">
-            <div className="feature-img">
-              <img
-                src="assets/images/illustrations/feature-illustration-3-dark.svg"
-                alt=""
-                className="img-fluid"
-              />
-            </div>
+            <SVGProvider type="featuresvg5" />
           </div>
         </div>
       </div>

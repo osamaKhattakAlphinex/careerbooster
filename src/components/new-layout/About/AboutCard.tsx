@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SVGProvider from "../SVGProvider";
 
 const AboutCard = () => {
   return (
@@ -11,8 +12,8 @@ const AboutCard = () => {
             data-aos-delay="50"
           >
             <div className="text-center text-lg-start">
-              <p className="text-primary-dark fs-sm">About CareerBooster</p>
-              <h2 className="text-white mb-4">Welcome to CareerBooster.</h2>
+              <p className="theme-text fs-sm">About CareerBooster</p>
+              <h2 className="theme-tex-2 mb-4">Welcome to CareerBooster.</h2>
               <p className="mb-8">
                 Your ultimate destination for revolutionizing your career
                 journey with AI-powered tools that supercharge your professional
@@ -31,28 +32,11 @@ const AboutCard = () => {
             data-aos="fade-up-sm"
             data-aos-delay="100"
           >
-            <div className="text-center">
-              <img
-                className="img-fluid d-inline-block"
-                src="assets/images/screens/screen-4.png"
-                alt=""
-              />
-            </div>
+            <SVGProvider type="aboutimage" />
           </div>
         </div>
         <hr className="border-top border-dark-blue opacity-100" />
-        <div className="d-flex gap-8 align-center justify-center mt-12 review-badges">
-          <img
-            className="img-fluid"
-            src="assets/images/review-logos/trustpilot_reviews.svg"
-            alt=""
-          />
-          <img
-            className="img-fluid"
-            src="assets/images/review-logos/capterra_reviews.svg"
-            alt=""
-          />
-        </div>
+        <SVGProvider type="aboutimage1" />
       </div>
     </section>
   );

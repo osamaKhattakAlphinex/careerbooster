@@ -8,7 +8,7 @@ const CTASection = () => {
       data-aos-offset="150"
     >
       <div className="container">
-        <div className="rounded-5 border position-relative z-1 bg-dark-blue-4">
+        <div className="rounded-5 border position-relative z-1 cta">
           <div className="animate-scale position-absolute w-full h-full z-n1">
             <img
               src="assets/images/shapes/blurry-shape-4.svg"
@@ -19,13 +19,13 @@ const CTASection = () => {
           <div className="row justify-center">
             <div className="col-lg-10">
               <div className="text-center pt-6 px-6 pt-md-10 px-md-10 pt-lg-18 px-lg-18">
-                <h5 className="text-white">Revolutionize Your Job Hunt</h5>
-                <h2 className="mb-6 text-white md:text-[40px] text-[24px]">
+                <h5 className="theme-text">Revolutionize Your Job Hunt</h5>
+                <h2 className="mb-6 theme-hero-heading md:text-[40px] text-[24px]">
                   Discover the Game-Changing
-                  <span className="text-primary-dark"> Resume Strategy </span>
+                  <span className="theme-text"> Resume Strategy </span>
                   You{"'"}ve Been Missing!
                 </h2>
-                <h5 className="text-white mb-6 ">
+                <h5 className="theme-hero-heading mb-6 ">
                   Unlock Success: Tailor Resumes for Each Job in Mere Minutes
                 </h5>
 
@@ -37,7 +37,7 @@ const CTASection = () => {
                   dream job - embrace the future of job hunting now!
                 </p>
 
-                <Link href="/register" className="btn btn-primary-dark">
+                <Link href="/register" className="btn theme-btn">
                   Get Started Free
                 </Link>
                 <div className="cta-image-container mt-10">
@@ -45,7 +45,7 @@ const CTASection = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 34 90"
-                    className="text-primary-dark arrow-shape"
+                    className="theme-text arrow-shape"
                   >
                     <path
                       fill="currentColor"
