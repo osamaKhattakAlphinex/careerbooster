@@ -10,6 +10,7 @@ import "./plugins.css";
 import "./style.css";
 import ThemeProvider from "@/components/new-layout/ThemeProvider";
 import MainLoaderLayer from "@/components/new-layout/MainLoaderLayer";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "AI Resume Bot",
@@ -23,6 +24,9 @@ export default function RootLayout({
 }) {
   return (
     <ThemeProvider>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <AuthProvider>
         <ReduxProvider>
           <MainLoaderLayer />
