@@ -7,7 +7,7 @@ interface Props {
 const PageHeader: React.FC<Props> = ({ title, secondTitle }) => {
   return (
     <section
-      className="py-10 py-lg-15 bg-striped"
+      className="pb-10 pb-lg-15 bg-striped pt-40"
       data-aos="fade-up-sm"
       data-aos-delay="50"
     >

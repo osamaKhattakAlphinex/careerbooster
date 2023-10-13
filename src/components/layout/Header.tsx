@@ -91,7 +91,7 @@ const Header = () => {
           //   width: "450px",
           // }}
         >
-          <img src="/assets/images/logo.png" alt="" className="w-70" />
+          <img src="/assets/images/logo.png" alt="" />
         </Link>
 
         {/* <!-- Navbar toggler button --> */}

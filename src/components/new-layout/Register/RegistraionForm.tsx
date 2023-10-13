@@ -520,7 +520,10 @@ const RegistrationForm = () => {
                   checked={formik.values.terms ? true : false}
                   className="w-4 mr-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
                 />
-                <label htmlFor="terms" className="font-light mr-5">
+                By checking this box, you consent to receiving SMS, Calls and
+                Emails including important alerts and notifications, from
+                CareerBooster.AI
+                {/* <label htmlFor="terms" className="font-light mr-5">
                   I accept the{" "}
                   <Link
                     className="font-medium text-primary-600 hover:underline "
@@ -538,7 +541,7 @@ const RegistrationForm = () => {
                   >
                     Privacy Policy
                   </Link>
-                </label>
+                </label> */}
               </div>
             </div>
             {submittingError !== "" && (

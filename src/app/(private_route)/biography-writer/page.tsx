@@ -103,7 +103,7 @@ const BiographyWriter = () => {
   }, [userData]);
   return (
     <>
-      <div className="my-5 ml-10">
+      <div className="my-5 ml-10 pt-30">
         <Link
           href="/dashboard"
           className="flex flex-row gap-2 items-center hover:font-semibold transition-all"

@@ -67,7 +67,7 @@
 }
 .theme-outline-btn {
   border-color: #6a4dff !important;
-  background-color: white !important;
+  /* background-color: white !important; */
   color: #6a4dff !important;
 }
 .theme-outline-btn:hover {
@@ -187,10 +187,10 @@
   background: gray;
   color: white;
 }
-[data-bs-theme="dark"] .dashboard {
+[data-bs-theme="dark"] .admin-dashboard {
   color: #fff !important;
-  background: none;
-  background-color: rgba(23, 24, 37, var(--gen-bg-opacity, 1)) !important;
+  background: rgba(23, 24, 37, var(--gen-bg-opacity, 1)) !important;
+  /* background-color: rgba(23, 24, 37, var(--gen-bg-opacity, 1)) !important; */
 }
 [data-bs-theme="dark"] .toolscard {
   background: #13141e;

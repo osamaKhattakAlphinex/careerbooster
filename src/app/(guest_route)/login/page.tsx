@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 const Login = () => {
   return (
     <main className="flex-grow-1">
-      <section className="account-section login-page py-6 h-full">
+      <section className="account-section login-page pb-6 pt-30 h-full">
         <div className="container-fluid h-full">
           <div className="row h-full">
             <div

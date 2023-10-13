@@ -131,7 +131,7 @@ const ProfileReview = () => {
 
   return (
     <main className="flex-grow-1">
-      <section className="py-15 pt-lg-6">
+      <section className="pb-15 pt-30">
         <div className="container">
           <div
             className="row justify-center mt-18 w-full "

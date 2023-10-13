@@ -7,7 +7,7 @@ import RecentResumeCard from "@/components/dashboard/resume-builder/RecenResumes
 
 const Dashboard = () => {
   return (
-    <section className="dashborad flex flex-col gap-4  pb-30 pl-20">
+    <section className="dashborad admin-dashboard flex flex-col gap-4  pb-30 pl-20">
       <div className="flex flex-col gap-4 py-30 mt-6">
         <ProfileCompletionAlert />
         <WelcomeCard />
@@ -20,7 +20,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="mt-10">
+      <div className="">
         <ToolsCard />
       </div>
     </section>

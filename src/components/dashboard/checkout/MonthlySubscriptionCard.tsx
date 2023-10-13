@@ -168,7 +168,7 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
       data-aos="fade-up-sm"
       data-aos-delay="50"
     >
-      <div className="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-">
+      <div className="theme-pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-">
         <h3 className="text-primary-dark fw-medium mb-0">
           {userPackage.title}
         </h3>

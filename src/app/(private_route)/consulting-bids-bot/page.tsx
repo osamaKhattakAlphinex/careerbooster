@@ -131,7 +131,7 @@ const ConsultingBidsGenerator = () => {
   }, [userData]);
   return (
     <>
-      <div className="w-[95%] my-5 ml-10 flex items-center justify-between mt-10">
+      <div className="w-[95%] my-5 ml-10 flex items-center justify-between pt-30">
         <Link
           href="/dashboard"
           className="flex flex-row gap-2 items-center hover:font-semibold transition-all"

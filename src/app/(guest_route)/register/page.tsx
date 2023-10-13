@@ -9,7 +9,7 @@ const RegisterNew = () => {
     <>
       <div className="wrapper d-flex flex-column justify-between min-h-[1155px]">
         <main className="flex-grow-1">
-          <section className="account-section login-page py-6 h-full">
+          <section className="account-section login-page pb-6 pt-40 h-full">
             <div className="container-fluid h-full">
               <div className="row h-full">
                 <RegistrationForm />
