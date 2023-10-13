@@ -91,7 +91,13 @@ const Header = () => {
           //   width: "450px",
           // }}
         >
-          <img src="/assets/images/logo.png" alt="" className="w-70" />
+          <div className="flex justify-center items-center">
+            <img src="/trans-icon1.png" alt="icon" className="w-20 m-0" />
+            <span className="ml-[-15px] text-gray-800 font-semibold">
+              CareerBooster
+            </span>
+          </div>
+          {/* <img src="/assets/images/logo.png" alt="" className="w-70" /> */}
         </Link>
 
         {/* <!-- Navbar toggler button --> */}
