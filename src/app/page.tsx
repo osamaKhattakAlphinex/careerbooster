@@ -9,6 +9,7 @@ import Reviews from "@/components/new-layout/Homepage/Reviews";
 import RewardsSection from "@/components/new-layout/Homepage/RewardsSection";
 import UseCases from "@/components/new-layout/Homepage/UseCases";
 import FAQList from "@/components/new-layout/Homepage/Faqs";
+import MainLoaderLayer from "@/components/new-layout/MainLoaderLayer";
 
 export const metadata: Metadata = {
   title: "CareerBooster.AI - Home Page",
