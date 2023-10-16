@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const BrandsCard = () => {
   return (
     <section className="py-10 py-lg-15">
@@ -18,8 +20,10 @@ const BrandsCard = () => {
                   data-aos-delay="100"
                   data-aos-offset="10"
                 >
-                  <img
-                    src="assets/images/brands/1.png"
+                  <Image
+                    width={117}
+                    height={28}
+                    src="/assets/images/brands/1.png"
                     alt=""
                     className="img-fluid brand-img"
                   />
@@ -30,8 +34,10 @@ const BrandsCard = () => {
                   data-aos-delay="150"
                   data-aos-offset="10"
                 >
-                  <img
-                    src="assets/images/brands/2.png"
+                  <Image
+                    width={117}
+                    height={28}
+                    src="/assets/images/brands/2.png"
                     alt=""
                     className="img-fluid brand-img"
                   />
@@ -42,8 +48,10 @@ const BrandsCard = () => {
                   data-aos-delay="200"
                   data-aos-offset="10"
                 >
-                  <img
-                    src="assets/images/brands/3.png"
+                  <Image
+                    width={117}
+                    height={28}
+                    src="/assets/images/brands/3.png"
                     alt=""
                     className="img-fluid brand-img"
                   />
@@ -54,8 +62,10 @@ const BrandsCard = () => {
                   data-aos-delay="250"
                   data-aos-offset="10"
                 >
-                  <img
-                    src="assets/images/brands/4.png"
+                  <Image
+                    width={117}
+                    height={28}
+                    src="/assets/images/brands/4.png"
                     alt=""
                     className="img-fluid brand-img"
                   />
@@ -66,8 +76,10 @@ const BrandsCard = () => {
                   data-aos-delay="300"
                   data-aos-offset="10"
                 >
-                  <img
-                    src="assets/images/brands/5.png"
+                  <Image
+                    width={117}
+                    height={28}
+                    src="/assets/images/brands/5.png"
                     alt=""
                     className="img-fluid brand-img"
                   />

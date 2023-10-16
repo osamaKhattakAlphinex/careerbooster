@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Reviews = () => {
   return (
     <section className="overflow-hidden  pb-10  pb-lg-15">
@@ -12,8 +14,10 @@ const Reviews = () => {
               >
                 <span className="theme-text">CareerBooster </span>
                 Received
-                <img
-                  src="assets/images/icons/star.png"
+                <Image
+                  width={48}
+                  height={48}
+                  src="/assets/images/icons/star.png"
                   alt=""
                   className="m-auto"
                 />{" "}
@@ -31,8 +35,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating-card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/1.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/1.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -100,8 +106,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/2.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/2.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -168,8 +176,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/3.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/3.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -236,8 +246,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/4.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/4.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -304,8 +316,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/1.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/1.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -372,8 +386,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/1.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/1.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -439,8 +455,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/2.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/2.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -506,8 +524,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/3.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/3.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -574,8 +594,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/4.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/4.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -641,8 +663,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/1.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/1.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -717,8 +741,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/1.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/1.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -786,8 +812,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/2.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/2.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -854,8 +882,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/3.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/3.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -922,8 +952,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/4.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/4.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -990,8 +1022,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/1.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/1.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -1058,8 +1092,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/1.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/1.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -1125,8 +1161,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/2.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/2.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -1192,8 +1230,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/3.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/3.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -1260,8 +1300,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/4.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/4.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -1327,8 +1369,10 @@ const Reviews = () => {
               <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
-                    <img
-                      src="assets/images/review/1.png"
+                    <Image
+                      width={48}
+                      height={48}
+                      src="/assets/images/review/1.png"
                       alt=""
                       className="w-full h-full object-cover"
                     />

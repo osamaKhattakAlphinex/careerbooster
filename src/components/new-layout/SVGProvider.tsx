@@ -189,10 +189,10 @@ const SVGProvider = ({ type }: { type: string }) => {
         {theme === "dark" ? (
           <div className="feature-img">
             <Image
-              src="assets/images/illustrations/feature-illustration-1-dark.svg"
-              alt=""
               width={506}
               height={555}
+              src="assets/images/illustrations/feature-illustration-1-dark.svg"
+              alt=""
               className="img-fluid"
             />
           </div>
@@ -659,17 +659,21 @@ const SVGProvider = ({ type }: { type: string }) => {
       <>
         {theme === "dark" ? (
           <div className="text-center">
-            <img
+            <Image
+              width={530}
+              height={491}
               className="img-fluid d-inline-block"
-              src="assets/images/screens/screen-4.png"
+              src="/assets/images/screens/screen-4.png"
               alt=""
             />
           </div>
         ) : (
           <div className="text-center">
-            <img
+            <Image
+              width={530}
+              height={491}
               className="img-fluid d-inline-block"
-              src="assets/images/screens/screen-8.png"
+              src="/assets/images/screens/screen-8.png"
               alt=""
             />
           </div>
@@ -682,12 +686,16 @@ const SVGProvider = ({ type }: { type: string }) => {
       <>
         {theme === "dark" ? (
           <div className="d-flex gap-8 align-center justify-center mt-12 review-badges">
-            <img
+            <Image
+              width={185}
+              height={38}
               className="img-fluid"
               src="assets/images/review-logos/trustpilot_reviews.svg"
               alt=""
             />
-            <img
+            <Image
+              width={185}
+              height={38}
               className="img-fluid"
               src="assets/images/review-logos/capterra_reviews.svg"
               alt=""
@@ -695,12 +703,16 @@ const SVGProvider = ({ type }: { type: string }) => {
           </div>
         ) : (
           <div className="d-flex gap-8 align-center justify-center mt-12 review-badges">
-            <img
+            <Image
+              width={185}
+              height={38}
               className="img-fluid"
               src="assets/images/review-logos/trustpilot_reviews_2.svg"
               alt=""
             />
-            <img
+            <Image
+              width={185}
+              height={38}
               className="img-fluid"
               src="assets/images/review-logos/capterra_reviews_2.svg"
               alt=""

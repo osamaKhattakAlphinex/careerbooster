@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const TeamCard = () => {
@@ -23,8 +24,10 @@ const TeamCard = () => {
         <div className="row justify-center row-cols-1 row-cols-md-3 row-cols-xl-4 gy-10 gy-md-12 gy-lg-18">
           <div className="col" data-aos="fade-up-sm" data-aos-delay="50">
             <div className="team-card text-center">
-              <img
-                src="assets/images/team/1.png"
+              <Image
+                width={200}
+                height={200}
+                src="/assets/images/team/1.png"
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
@@ -93,8 +96,10 @@ const TeamCard = () => {
           </div>
           <div className="col" data-aos="fade-up-sm" data-aos-delay="100">
             <div className="team-card text-center">
-              <img
-                src="assets/images/team/2.png"
+              <Image
+                width={200}
+                height={200}
+                src="/assets/images/team/2.png"
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
@@ -163,8 +168,10 @@ const TeamCard = () => {
           </div>
           <div className="col" data-aos="fade-up-sm" data-aos-delay="150">
             <div className="team-card text-center">
-              <img
-                src="assets/images/team/3.png"
+              <Image
+                width={200}
+                height={200}
+                src="/assets/images/team/3.png"
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
@@ -233,8 +240,10 @@ const TeamCard = () => {
           </div>
           <div className="col" data-aos="fade-up-sm" data-aos-delay="200">
             <div className="team-card text-center">
-              <img
-                src="assets/images/team/4.png"
+              <Image
+                width={200}
+                height={200}
+                src="/assets/images/team/4.png"
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
@@ -303,8 +312,10 @@ const TeamCard = () => {
           </div>
           <div className="col" data-aos="fade-up-sm" data-aos-delay="50">
             <div className="team-card text-center">
-              <img
-                src="assets/images/team/5.png"
+              <Image
+                width={200}
+                height={200}
+                src="/assets/images/team/5.png"
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
@@ -373,8 +384,10 @@ const TeamCard = () => {
           </div>
           <div className="col" data-aos="fade-up-sm" data-aos-delay="100">
             <div className="team-card text-center">
-              <img
-                src="assets/images/team/6.png"
+              <Image
+                width={200}
+                height={200}
+                src="/assets/images/team/6.png"
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
@@ -443,8 +456,10 @@ const TeamCard = () => {
           </div>
           <div className="col" data-aos="fade-up-sm" data-aos-delay="150">
             <div className="team-card text-center">
-              <img
-                src="assets/images/team/7.png"
+              <Image
+                width={200}
+                height={200}
+                src="/assets/images/team/7.png"
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
@@ -513,8 +528,10 @@ const TeamCard = () => {
           </div>
           <div className="col" data-aos="fade-up-sm" data-aos-delay="200">
             <div className="team-card text-center">
-              <img
-                src="assets/images/team/8.png"
+              <Image
+                width={200}
+                height={200}
+                src="/assets/images/team/8.png"
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />

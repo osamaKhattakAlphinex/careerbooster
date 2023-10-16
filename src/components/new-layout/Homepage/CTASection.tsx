@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const CTASection = () => {
@@ -69,8 +70,10 @@ const CTASection = () => {
                     />
                   </svg>
                   <div className="cta-img rounded-top-4">
-                    <img
-                      src="assets/images/screens/cover-letter-bot.png"
+                    <Image
+                      width={758}
+                      height={712}
+                      src="/assets/images/screens/cover-letter-bot.png"
                       alt=""
                       className="img-fluid w-full h-full object-cover"
                     />

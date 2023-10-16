@@ -6,6 +6,7 @@ import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import { useEffect, useState } from "react";
 import ThemeToggler from "../Themetoggler";
 import useTheme from "@/lib/useTheme";
+import Image from "next/image";
 // import useTheme from "@/lib/useTheme";
 
 const Header = () => {
@@ -91,12 +92,31 @@ const Header = () => {
           //   width: "450px",
           // }}
         >
-          <div className="flex justify-center items-center">
-            <img src="/trans-icon1.png" alt="icon" className="w-20 m-0" />
-            <span className="ml-[-15px] text-gray-800 font-semibold">
-              CareerBooster
-            </span>
-          </div>
+          {theme === "dark" ? (
+            <div className="flex justify-center items-center">
+              <Image
+                width={215}
+                height={72}
+                src="/assets/images/logo.png"
+                alt=""
+                className="w-70"
+              />
+            </div>
+          ) : (
+            <div className="flex justify-center items-center">
+              <Image
+                width={80}
+                height={74}
+                src="/trans-icon1.png"
+                alt="icon"
+                className="w-20 m-0"
+              />
+              <span className="ml-[-15px] text-gray-800 font-semibold">
+                CareerBooster
+              </span>
+            </div>
+          )}
+
           {/* <img src="/assets/images/logo.png" alt="" className="w-70" /> */}
         </Link>
 
