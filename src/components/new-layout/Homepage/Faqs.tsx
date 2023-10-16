@@ -2,32 +2,32 @@
 import React, { useState } from "react";
 const faqs = [
   {
-    question: "What is CareerBooster?",
+    question: "What is CareerBooster.AI?",
     answer:
-      "CareerBooster is an AI-powered platform designed to enhance your professional presentation and improve your chances in the job market. It offers a suite of tools and services to optimize your resume, LinkedIn profile, cover letters, and more.",
+      "CareerBooster.AI is an AI-powered platform designed to enhance your professional presentation and improve your chances in the job market. It offers a suite of tools and services to optimize your resume, LinkedIn profile, cover letters, and more.",
   },
   {
-    question: "How does CareerBooster work?",
+    question: "How does CareerBooster.AI work?",
     answer:
-      "CareerBooster uses advanced AI algorithms to analyze your existing career documents, such as resumes and LinkedIn profiles. It provides actionable insights, keyword optimization, and personalized recommendations to make your professional materials stand out to recruiters and employers.",
+      "CareerBooster.AI uses advanced AI algorithms to analyze your existing career documents, such as resumes and LinkedIn profiles. It provides actionable insights, keyword optimization, and personalized recommendations to make your professional materials stand out to recruiters and employers.",
   },
   {
-    question: "What makes CareerBooster different from other tools?",
+    question: "What makes CareerBooster.AI different from other tools?",
     answer:
-      "CareerBooster stands out because it's specifically designed for senior-level professionals. It's been developed by top executive resume writers and AI engineers to cater to the unique needs and expectations of experienced job seekers.",
+      "CareerBooster.AI stands out because it's specifically designed for senior-level professionals. It's been developed by top executive resume writers and AI engineers to cater to the unique needs and expectations of experienced job seekers.",
   },
   {
-    question: "Is CareerBooster suitable for all industries and job levels?",
+    question: "Is CareerBooster.AI suitable for all industries and job levels?",
     answer:
-      "Yes, CareerBooster is designed to be versatile and adaptable to various industries and career levels. Whether you're a seasoned executive or a recent graduate, our tools can help you improve your professional presentation.",
+      "Yes, CareerBooster.AI is designed to be versatile and adaptable to various industries and career levels. Whether you're a seasoned executive or a recent graduate, our tools can help you improve your professional presentation.",
   },
   {
-    question: "Can I try CareerBooster for free?",
+    question: "Can I try CareerBooster.AI for free?",
     answer:
       "Yes, we offer a free package that includes services like ATS resume scanning, resume optimization, and a resume review. You can get a taste of our services before deciding to upgrade to our premium packages.",
   },
   {
-    question: "How secure is my data on CareerBooster?",
+    question: "How secure is my data on CareerBooster.AI?",
     answer:
       "We take data security seriously. Your personal and professional information is protected with the highest level of encryption and security protocols. We do not share your data with third parties.",
   },
@@ -37,20 +37,20 @@ const faqs = [
       "Our premium packages offer additional benefits, such as unlimited resume tailoring, cover letter customization, personalized emails to recruiters, and more. Please refer to our pricing section for a detailed breakdown of each package's features.",
   },
   {
-    question: "How often can I use CareerBooster's services?",
+    question: "How often can I use CareerBooster.AI's services?",
     answer:
       "The frequency of service usage depends on your chosen package. Free users have access to limited credits, while premium users can enjoy unlimited access to our tools and services.",
   },
   {
-    question: "Is CareerBooster suitable for international job seekers?",
+    question: "Is CareerBooster.AI suitable for international job seekers?",
     answer:
-      "Yes, CareerBooster is designed to assist job seekers globally. Our tools are adaptable to various job markets and industries, making them useful for international job searches.",
+      "Yes, CareerBooster.AI is designed to assist job seekers globally. Our tools are adaptable to various job markets and industries, making them useful for international job searches.",
   },
   {
     question:
-      "Do I need any special software or technical skills to use CareerBooster?",
+      "Do I need any special software or technical skills to use CareerBooster.AI?",
     answer:
-      "No, CareerBooster is designed to be user-friendly and accessible to individuals with basic computer skills. You don't need any specialized software or technical expertise to use our platform.",
+      "No, CareerBooster.AI is designed to be user-friendly and accessible to individuals with basic computer skills. You don't need any specialized software or technical expertise to use our platform.",
   },
 ];
 

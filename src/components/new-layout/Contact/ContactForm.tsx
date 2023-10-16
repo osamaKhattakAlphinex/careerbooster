@@ -4,12 +4,14 @@ import { useFormik } from "formik";
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { verifyCaptcha } from "@/ServerActions";
+import useTheme from "@/lib/useTheme";
 
 const ContactForm = () => {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [isVerified, setIsverified] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState(false);
   const [successAlert, setSuccessAlert] = useState("");
+  const [theme, toggleTheme] = useTheme();
 
   async function handleCaptchaSubmission(token: string | null) {
     // Server function to verify captcha
@@ -169,13 +171,13 @@ const ContactForm = () => {
             sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
             ref={recaptchaRef}
             onChange={handleCaptchaSubmission}
-            theme="dark"
+            theme={theme}
           />
           <div className="">
             <button
               type="submit"
               disabled={submitting || !isVerified}
-              className="btn btn-primary-dark disabled:btn-secondary-dark"
+              className="btn theme-btn disabled:theme-btn"
             >
               {submitting ? "Submitting..." : "Send Message"}
             </button>

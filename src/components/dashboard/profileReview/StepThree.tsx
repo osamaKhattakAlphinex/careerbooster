@@ -14,7 +14,7 @@ const StepThree = () => {
   //   if (country) {
   //     dispatch(setStepThree({ isValid: true }));
   //   } else {
-  //     dispatch(setStepThree({ isValid: false }));
+  //     dispatch(setStepThree({ isValid: true }));
   //   }
   // }, [country]);
 

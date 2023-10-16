@@ -13,7 +13,7 @@ const TeamCard = () => {
               data-aos-delay="50"
             >
               <h1 className="theme-text-2 md:text-[48px] text-[24px]">
-                <span className="theme-text">Career Booster.</span> is Powered
+                <span className="theme-text">CareerBooster.AI </span> is Powered
                 by a <br className="d-none d-xl-block" />
                 Dynamic Team.
               </h1>

@@ -21,7 +21,7 @@ const Footer = () => {
                       <Link href="/about">About</Link>
                     </li>
                     <li>
-                      <Link href="/blog">Blogs</Link>
+                      <Link href="/blog">Blog</Link>
                     </li>
                     <li>
                       <Link href="/login">Sign in</Link>
@@ -177,8 +177,11 @@ const Footer = () => {
                 </span>
               </div>
               <p className="fs-sm mb-0 mt-4">
-                A Magical Tool to Optimize you content for the first know who
-                you{"'"}re targeting. Identify your target audience.
+                We specialize in turbocharging your career by harnessing the
+                power of cutting-edge AI-infused tools, ensuring you achieve
+                peak professional excellence. Our innovative solutions are
+                designed to elevate your skills, enhance your professional
+                profile, and propel your career to unprecedented success.
               </p>
             </div>
           </div>

@@ -181,7 +181,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
                 type="button"
                 disabled={msgLoading || !session?.user?.email}
                 onClick={() => handleGenerate()}
-                className="btn btn-outline-primary-dark"
+                className="btn theme-outline-btn"
               >
                 <div className="flex flex-row gap-2">
                   <svg

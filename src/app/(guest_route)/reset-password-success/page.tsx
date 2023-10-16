@@ -27,7 +27,7 @@ const ResetPasswordSuccess = () => {
                   <p className="text-gray-500 mb-5">
                     A password reset link has been sent to your email address.
                   </p>
-                  <Link href="/" className="btn btn-outline-primary-dark">
+                  <Link href="/" className="btn theme-outline-btn">
                     Homepage
                   </Link>
                 </div>

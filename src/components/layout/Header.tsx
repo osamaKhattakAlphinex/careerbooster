@@ -178,7 +178,7 @@ const Header = () => {
                 <>
                   {/* <Link
                  href={role === "admin" ? "/admin" : "/dashboard"}
-                   className="btn btn-outline-primary-dark"
+                   className="btn theme-outline-btn"
                  >
                    Dashboard
                  </Link> */}
@@ -245,7 +245,7 @@ const Header = () => {
                                 href={
                                   role === "admin" ? "/admin" : "/dashboard"
                                 }
-                                className=" block px-4 py-2 text-sm no-underline theme-text-2 hover:bg-gray-600"
+                                className=" block px-4 py-2 text-sm no-underline theme-text-2"
                                 role="menuitem"
                                 id="menu-item-0"
                               >
@@ -253,7 +253,7 @@ const Header = () => {
                               </Link>
                               <Link
                                 href="/profile-review"
-                                className=" block px-4 py-2 text-sm no-underline theme-text-2 hover:bg-gray-600"
+                                className=" block px-4 py-2 text-sm no-underline theme-text-2"
                                 role="menuitem"
                                 id="menu-item-1"
                               >
@@ -261,7 +261,7 @@ const Header = () => {
                               </Link>
                               <button
                                 type="button"
-                                className=" block w-full px-4 py-2 text-left text-sm hover:bg-gray-600"
+                                className=" block w-full px-4 py-2 text-left text-sm"
                                 role="menuitem"
                                 id="menu-item-3"
                                 onClick={() => signOut()}

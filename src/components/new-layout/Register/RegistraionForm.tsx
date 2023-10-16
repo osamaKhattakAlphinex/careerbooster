@@ -18,7 +18,8 @@ import { setUploadedFileName } from "@/store/resumeSlice";
 const RegistrationForm = () => {
   const router = useRouter();
   const params = useSearchParams();
-
+  
+  
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [submittingError, setSubmittingError] = useState<string>("");
   const [fileUploading, setFileUploading] = useState<boolean>(false);
@@ -175,9 +176,6 @@ const RegistrationForm = () => {
         })
         .catch((error) => {
           setFileError("Something went wrong");
-        })
-        .finally(() => {
-          setFileUploading(false);
         });
     }
   };
@@ -224,6 +222,9 @@ const RegistrationForm = () => {
         })
         .catch((error) => {
           setFileError("Something went wrong");
+        })
+        .finally(() => {
+          setFileUploading(false);
         });
     }
   };
@@ -520,10 +521,8 @@ const RegistrationForm = () => {
                   checked={formik.values.terms ? true : false}
                   className="w-4 mr-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
                 />
-                By checking this box, you consent to receiving SMS, Calls and
-                Emails including important alerts and notifications, from
-                CareerBooster.AI
-                {/* <label htmlFor="terms" className="font-light mr-5">
+
+                <label htmlFor="terms" className="font-light mr-1">
                   I accept the{" "}
                   <Link
                     className="font-medium text-primary-600 hover:underline "
@@ -536,12 +535,26 @@ const RegistrationForm = () => {
                 <label htmlFor="terms" className="font-light">
                   &
                   <Link
-                    className="font-medium text-primary-600 mx-5 hover:underline "
+                    className="font-medium text-primary-600 ml-1 hover:underline "
                     href="/privacy-policy"
                   >
                     Privacy Policy
                   </Link>
-                </label> */}
+                </label>
+              </div>
+            </div>
+            <div className="text-start my-4">
+              <div className="ml-3 text-sm">
+                <input
+                  id="terms"
+                  aria-describedby="terms"
+                  type="checkbox"
+                  onChange={formik.handleChange}
+                  className="w-4 mr-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
+                />
+                By checking this box, you consent to receiving SMS, Calls and
+                Emails including important alerts and notifications, from
+                CareerBooster.AI
               </div>
             </div>
             {submittingError !== "" && (
