@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Stripe from "stripe";
 import { useRouter } from "next/navigation";
 import { CouponBody } from "@/app/stripe-coupon/route";
+import { infoSmallIcon } from "@/helpers/iconsProvider";
 
 interface Props {
   userPackage: UserPackageData;
@@ -215,7 +216,19 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
 
         <ul className="d-flex flex-column gap-5 text-sm pl-0 mt-9 mb-0">
           {userPackage.features.map((feature: string, i: number) => (
-            <li key={i}>{feature}</li>
+            <li key={i} className="flex gap-1 items-center group">
+              {feature}{" "}
+              <span className="cursor-pointer text-gray-600 relative ">
+                {infoSmallIcon}
+                <div
+                  role="tooltip"
+                  className="absolute hidden group-hover:show bg-gray-600 text-gray-100 p-2 rounded-md text-xs -top-8 -left-1/2 transform -translate-x-1/2 w-32"
+                >
+                  Tooltip content
+                  <div className="tooltip-arrow" data-popper-arrow></div>
+                </div>
+              </span>
+            </li>
           ))}
         </ul>
         {/* <ul className="pricing-list d-flex flex-column gap-3 fs-lg mt-9 mb-0">

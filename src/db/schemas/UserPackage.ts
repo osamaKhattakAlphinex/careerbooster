@@ -8,6 +8,7 @@ export interface UserPackageData {
   amount: number;
   status: "active" | "inactive";
   features: string[];
+  featuresToolTips: string[];
   category: "basic" | "standard" | "premium";
   limit: {
     resumes_generation: number;
@@ -47,6 +48,10 @@ const UserPackageScehema = new Schema(
       default: "active",
     },
     features: {
+      type: [String],
+      default: [],
+    },
+    featuresToolTips: {
       type: [String],
       default: [],
     },
