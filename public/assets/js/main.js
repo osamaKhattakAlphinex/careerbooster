@@ -295,7 +295,7 @@ Last Update: 9 May 2023
       window.addEventListener("scroll", () => {
         const scrollPosition = window.scrollY;
         const isExpanded =
-          navbarToggler.getAttribute("aria-expanded") === "true";
+          navbarToggler?.getAttribute("aria-expanded") === "true";
 
         if (isExpanded && scrollPosition > 0) {
           navbarCollapse.classList.remove("show");

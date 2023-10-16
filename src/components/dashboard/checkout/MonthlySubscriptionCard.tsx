@@ -14,7 +14,7 @@ import { CouponBody } from "@/app/stripe-coupon/route";
 interface Props {
   userPackage: UserPackageData;
   customer: any;
-  viewOnly?: boolean;
+  viewOnly: boolean;
 }
 
 const MonthlySubscriptionCard: React.FC<Props> = ({
