@@ -94,7 +94,7 @@ const initialState: RegisterSlice = {
     street: "",
     cityState: "",
     postalCode: "",
-    isValid: false,
+    isValid: true,
   },
   stepFour: {
     list: [],
