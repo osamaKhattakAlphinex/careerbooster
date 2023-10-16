@@ -40,13 +40,13 @@ const Footer = () => {
                   <h6 className="theme-text mb-2">Use Cases</h6>
                   <ul className="link-list list-unstyled mb-0">
                     <li>
-                      <Link href="/use-cases">Generate Resume</Link>
+                      <Link href="/use-cases">Generate Resumes</Link>
                     </li>
                     <li>
                       <Link href="/use-cases">Generate Cover Letters</Link>
                     </li>
                     <li>
-                      <Link href="/use-cases">Generate Email</Link>
+                      <Link href="/use-cases">Generate Follow up Emails</Link>
                     </li>
                     <li>
                       <Link href="/use-cases">LinkedIn Optimization</Link>
@@ -162,7 +162,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-3 order-lg-1 me-auto">
+          <div className="col-lg-3 order-lg-1 me-auto mt-4">
             <div className="footer-widget text-center text-lg-start">
               <div className="flex  items-center">
                 <Image
@@ -187,20 +187,12 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="py-6 mt-8 mx-auto">
-          <ul className="list-unstyled flex">
-            <li className="mx-5">
-              Copyright
-              <span className="theme-text"> &copy; CareerBooster 2023</span>.
-            </li>
-            <li className="mx-5">
-              <Link href="/privacy-policy">Privacy Policy</Link>
-            </li>
-            <li className="mx-5">
-              <Link href="/terms-and-conditions">Terms And Conditions</Link>
-            </li>
-            <li></li>
-          </ul>
+        <div className="py-6 mt-8 mx-auto ">
+          <p className="text-center text-xs">
+            Copyright <span> &copy; CareerBooster 2023</span>.{" "}
+            <Link href="/privacy-policy">Privacy Policy</Link> &nbsp;
+            <Link href="/terms-and-conditions">Terms And Conditions</Link>
+          </p>
         </div>
       </div>
     </footer>

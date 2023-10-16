@@ -51,7 +51,7 @@ const FeaturesSecond = () => {
               </Link>
             </div>
           </div>
-          <div className="col-lg-6" data-aos="fade-up-sm" data-aos-delay="250">
+          <div className="col-lg-6" data-aos="fade-up-sm " data-aos-delay="250">
             <SVGProvider type="featuresvg1" />
           </div>
         </div>

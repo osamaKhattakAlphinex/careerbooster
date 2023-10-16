@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 // import { slugify } from "@/helpers/slugify";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { refreshIconRotating } from "@/helpers/iconsProvider";
+import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
 
 const UploadPDFResume = () => {
   const router = useRouter();
@@ -112,9 +112,27 @@ const UploadPDFResume = () => {
               }
             }}
           />
-          {fileUploading ? refreshIconRotating : "Upload Resume - It's Free"}
+          {fileUploading ? (
+            refreshIconRotating
+          ) : (
+            <div className="flex gap-2 ">
+              <div>{uploadIcon}</div>
+              <div>
+                <p className="m-0 text-sm [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                  Upload Your Existing Resume
+                </p>
+                <p className="text-[10px] text-gray-300 m-0">
+                  To eliminate manual data entry
+                </p>
+              </div>
+            </div>
+          )}
         </label>
       )}
+      {/* <p className="text-gray-400 mt-4 text-xs">
+        Your existing resume forms the basis for your new one, eliminating
+        manual data entry.
+      </p> */}
       {isAuth && (
         <Link
           href="/dashboard"

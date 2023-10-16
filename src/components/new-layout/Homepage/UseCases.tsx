@@ -19,8 +19,7 @@ const UseCases = () => {
                 data-aos="fade-up-sm"
                 data-aos-delay="100"
               >
-                Transform Your Career with CareerBooster.AI, AI-Powered Tools
-                for Professional Excellence
+                Leverage our AI-Powered Tools for your Professional Excellence
               </h1>
             </div>
           </div>

@@ -18,11 +18,7 @@ const FeaturesSection = () => {
             data-aos="fade-up-sm"
             data-aos-delay="50"
           >
-            Why Trust AI for Your{" "}
-            <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-yellow-500 relative inline-block">
-              <span className="relative text-white">Executive </span>
-            </span>
-            &nbsp; Resume?
+            Why Trust AI for Your Executive Resume?
             <br className="d-none d-lg-block" />
           </h1>
           <h4

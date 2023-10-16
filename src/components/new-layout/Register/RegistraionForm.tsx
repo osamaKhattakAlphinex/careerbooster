@@ -18,8 +18,7 @@ import { setUploadedFileName } from "@/store/resumeSlice";
 const RegistrationForm = () => {
   const router = useRouter();
   const params = useSearchParams();
-  
-  
+
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [submittingError, setSubmittingError] = useState<string>("");
   const [fileUploading, setFileUploading] = useState<boolean>(false);
@@ -297,9 +296,15 @@ const RegistrationForm = () => {
                         }}
                       />
 
-                      {fileUploading ? refreshIconRotating : "Upload Resume"}
+                      {fileUploading
+                        ? refreshIconRotating
+                        : "Upload Your Existing Resume"}
                     </label>
                   )}
+                  <p className="text-gray-700 mt-4 text-sm">
+                    Your existing resume forms the basis for your new one,
+                    eliminating manual data entry.
+                  </p>
                   {formik.touched.file && formik.errors.file && (
                     <p className="text-red-600 pt-3">
                       {formik.touched.file && formik.errors.file}
