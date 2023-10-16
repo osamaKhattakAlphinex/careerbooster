@@ -2,10 +2,20 @@
 import { checkIcon } from "@/helpers/iconsProvider";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const ProfileCompletionAlert = () => {
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const params = useSearchParams();
+  useEffect(() => {
+    const success = params?.get("success");
+    if (success) {
+      setShowSuccessAlert(true);
+    }
+  }, [params]);
   const userData = useSelector((state: any) => state.userData);
-  if (userData?.wizardReviewed) {
+  if (userData?.wizardReviewed && showSuccessAlert) {
     return (
       <div
         className="mb-3 w-[96%] items-center rounded-lg bg-warning-100 px-6 py-5 text-base text-warning-800 border"
@@ -17,7 +27,8 @@ const ProfileCompletionAlert = () => {
         </div>
       </div>
     );
-  } else {
+  }
+  if (!userData?.wizardReviewed) {
     return (
       <div
         className="mb-3 w-[96%] items-center rounded-lg bg-warning-100 px-6 py-5 text-base text-warning-800 border"
@@ -45,5 +56,6 @@ const ProfileCompletionAlert = () => {
       </div>
     );
   }
+  return null;
 };
 export default ProfileCompletionAlert;

@@ -40,7 +40,7 @@ const RecentResumeCard = ({
                 );
               }
             })}
-          {resumes && resumes.length === 0 && <p>No Recent Resumes found</p>}
+          {resumes && resumes.length === 0 && <p>No Recent Resumes Found</p>}
         </div>
       </div>
     </div>

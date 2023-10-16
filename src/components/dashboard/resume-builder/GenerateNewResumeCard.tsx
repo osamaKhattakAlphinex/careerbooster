@@ -40,7 +40,7 @@ const GenerateNewResumeCard = ({
                   htmlFor="targetedJobPosition"
                   className="block mb-2 text-lg font-medium  "
                 >
-                  Targeted Job position{" "}
+                  Targeted Job Position{" "}
                 </label>
                 <input
                   type="targetedJobPosition"
@@ -62,10 +62,7 @@ const GenerateNewResumeCard = ({
                 <p className="text-sm ml-2">
                   <span className="font-semibold">Crucial!</span> Review your
                   profile, and update missing details for improved results.{" "}
-                  <Link
-                    href="/profile-review"
-                    className="text-black dark:text-white"
-                  >
+                  <Link href="/profile-review" className="theme-text">
                     Click here
                   </Link>{" "}
                 </p>
@@ -84,10 +81,7 @@ const GenerateNewResumeCard = ({
                   </span>
                   , please note that we create your new resume using your
                   original resume data. If any of your experiences are missing,{" "}
-                  <Link
-                    href="/profile-review"
-                    className="text-black dark:text-red-600"
-                  >
+                  <Link href="/profile-review" className="theme-text">
                     Edit your profile
                   </Link>
                   , add any missing work experience with a brief description,
