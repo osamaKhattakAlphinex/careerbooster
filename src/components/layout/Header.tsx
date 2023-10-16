@@ -132,8 +132,6 @@ const Header = () => {
           {/* <img src="/assets/images/logo.png" alt="" className="w-70" /> */}
         </Link>
 
-        {/* <!-- Navbar toggler button --> */}
-
         {/* <!-- Navbar content --> */}
         <div className="collapse navbar-collapse" id="navbarContent">
           <div className="navbar-content-inner ms-lg-auto d-flex flex-column flex-lg-row align-lg-center gap-4 gap-lg-10 p-2 p-lg-0">
@@ -322,11 +320,27 @@ const Header = () => {
                   </Link>
                 </>
               )}
-              {/* <ThemeToggler /> */}
             </div>
           </div>
         </div>
         <ThemeToggler />
+
+        {/* <!-- Navbar toggler button --> */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+          aria-controls="navbarContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <div className="navbar-toggler-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
       </div>
     </nav>
   );

@@ -6,9 +6,7 @@ const StepThree = () => {
   // Redux
   const dispatch = useDispatch();
   const stepThree = useSelector((state: any) => state.register.stepThree);
-  console.log(" stepThree:", stepThree)
-  
-  
+
   const { country, street, cityState, postalCode } = stepThree;
   const userData = useSelector((state: any) => state.userData);
 
@@ -39,7 +37,7 @@ const StepThree = () => {
       <div className="">
         <label htmlFor="name" className="form-label fs-lg fw-medium mb-4">
           {" "}
-          Country {" "}
+          Country{" "}
         </label>
         <div className="input-group with-icon">
           <span className="icon">
