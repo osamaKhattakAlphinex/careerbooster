@@ -14,11 +14,11 @@ import MainLoaderLayer from "@/components/new-layout/MainLoaderLayer";
 export const metadata: Metadata = {
   title: "CareerBooster.AI - Home Page",
   description:
-    "Unlock your career potential with CareerBooster – AI-powered tools for turbocharging your job search. From ATS-friendly resumes to LinkedIn optimization, discover the winning combination trusted by senior-level professionals. Try it free and revolutionize your job hunt today!",
+    "Unlock your career potential with CareerBooster.AI – AI-powered tools for turbocharging your job search. From ATS-friendly resumes to LinkedIn optimization, discover the winning combination trusted by senior-level professionals. Try it free and revolutionize your job hunt today!",
   keywords: [
-    "Career Booster",
-    "careerbooster",
-    "CareerBooster.AI",
+    "CareerBooster.Ai",
+    "careerBooster.Ai",
+    "CareerBooster.Ai",
     "AiCareerBooster",
     "Career advancement",
     "ATS-friendly resumes",
@@ -41,6 +41,8 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+
+  
   return (
     <main className="flex-grow-1 mb-20 ">
       {/* <!-- Hero --> */}
@@ -66,7 +68,7 @@ export default function Home() {
       <PricingSection />
 
       {/* <!-- FAQ --> */}
-      <FAQSection />
+      <FAQList />
 
       {/* <!-- CTA --> */}
       <CTASection />

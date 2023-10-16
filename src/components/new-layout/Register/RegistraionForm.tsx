@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
 
 // export const metadata: Metadata = {
-//   title: "CareerBooster.Ai-Register",
+//   title: "CareerBooster.AI-Register",
 // };
 
 const RegistrationForm = () => {
@@ -273,7 +273,7 @@ const RegistrationForm = () => {
               width="165"
             />
           </a>
-          <h3 className="pb-4">Register Your Account</h3>
+          <h3 className="pb-4">Register your Account</h3>
 
           <form className="vstack gap-4" onSubmit={formik.handleSubmit}>
             <div className={`upload-resume-btn mt-5 mb-10`}>

@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     "Career advancement",
     "20,000+ professionals",
     "Revolutionize job search",
-    "Career Booster About ",
-    "About Career Booster",
+    "CareerBooster About ",
+    "About CareerBooster",
   ],
   viewport: {
     width: "device-width",
