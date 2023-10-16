@@ -14,7 +14,7 @@ import { CouponBody } from "@/app/stripe-coupon/route";
 interface Props {
   userPackage: UserPackageData;
   customer: any;
-  viewOnly: boolean;
+  viewOnly?: boolean;
 }
 
 const MonthlySubscriptionCard: React.FC<Props> = ({
@@ -27,16 +27,16 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
   const [couponError, setCouponError] = useState("");
   const router = useRouter();
 
-  // redux
+  // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
 
   const handleClick = async () => {
-    // set subscribing to true
+    // Set subscribing to true
     setSubscribing(true);
     setCouponError("");
 
-    // load stripe
+    // Load stripe
     const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
     const stripe = await loadStripe(STRIPE_PK);
 

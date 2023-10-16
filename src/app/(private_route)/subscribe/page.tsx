@@ -7,14 +7,14 @@ import { useEffect, useState } from "react";
 export default function SubscribePage() {
   const [showExpiredAlert, setShowExpiredAlert] = useState(false);
   // check if there is ?expired=1 in the URL
-  // const params = useSearchParams();
+  const params = useSearchParams();
 
-  // useEffect(() => {
-  //   const expired = params?.get("expired");
-  //   if (expired) {
-  //     setShowExpiredAlert(true);
-  //   }
-  // }, [params]);
+  useEffect(() => {
+    const expired = params?.get("expired");
+    if (expired) {
+      setShowExpiredAlert(true);
+    }
+  }, [params]);
 
   return (
     <main className="flex-grow-1 mb-20">
@@ -54,7 +54,7 @@ export default function SubscribePage() {
             </div>
           </div>
           <div className="row g-6 pricing-table">
-            {/* <Packages viewOnly={false} /> */}
+            <Packages />
           </div>
         </div>
       </section>

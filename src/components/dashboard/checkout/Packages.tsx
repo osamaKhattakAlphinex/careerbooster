@@ -8,7 +8,7 @@ import { UserPackageData } from "@/db/schemas/UserPackage";
 import { useSession } from "next-auth/react";
 
 interface Props {
-  viewOnly: boolean;
+  viewOnly?: boolean;
 }
 
 const Packages = ({ viewOnly }: Props) => {
