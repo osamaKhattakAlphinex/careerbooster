@@ -207,8 +207,8 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
               {subscribing
                 ? "Please wait..."
                 : userPackage.amount === 0
-                ? "Select A Plan"
-                : "Select A Plan"}
+                ? "Select  Plan"
+                : "Select  Plan"}
             </button>
           </>
         )}

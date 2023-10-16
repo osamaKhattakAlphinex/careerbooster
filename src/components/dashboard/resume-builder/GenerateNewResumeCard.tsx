@@ -24,6 +24,7 @@ const GenerateNewResumeCard = ({
   // Redux
   const dispatch = useDispatch();
   const state = useSelector((state: any) => state.resume.state);
+  const userData = useSelector((state: any) => state.userData);
   const memoizedState = useMemo(() => state, [state]);
 
   return (
@@ -59,13 +60,16 @@ const GenerateNewResumeCard = ({
                 <h3 className="text-lg font-bold flex  items-center gap-1 ">
                   {informationCirlceIcon} Instructions
                 </h3>
-                <p className="text-sm ml-2">
-                  <span className="font-semibold">Crucial!</span> Review your
-                  profile, and update missing details for improved results.{" "}
-                  <Link href="/profile-review" className="theme-text">
-                    Click here
-                  </Link>{" "}
-                </p>
+                {!userData.wizardReviewed && (
+                  <p className="text-sm ml-2">
+                    <span className="font-semibold">Crucial!</span> Review your
+                    profile, and update missing details for improved results.{" "}
+                    <Link href="/profile-review" className="theme-text">
+                      Click here
+                    </Link>{" "}
+                  </p>
+                )}
+
                 <p className="text-sm ml-2">
                   <span className="font-semibold">
                     To edit your new Resume!
