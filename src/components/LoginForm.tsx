@@ -42,7 +42,7 @@ const LoginForm = () => {
   return (
     <form onSubmit={formik.handleSubmit} className="vstack gap-4">
       <div className="text-start">
-        <h2 className="pb-5">Login To Your Account</h2>
+        <h2 className="pb-5">Login to your Account</h2>
         <div className="input-group with-icon">
           <span className="icon">
             <svg
