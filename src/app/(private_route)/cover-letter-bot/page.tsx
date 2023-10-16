@@ -302,7 +302,7 @@ const CoverLetterWriter = () => {
                 htmlFor="default-radio-3"
                 className="ml-2 text-sm font-medium  cursor-pointer"
               >
-                Upload a new PDF Resume 
+                Upload a new PDF Resume
               </label>
             </div>
           </div>
@@ -352,7 +352,7 @@ const CoverLetterWriter = () => {
                       jobDescription === ""
                     }
                     onClick={() => handleGenerate()}
-                    className="btn btn-outline-primary-dark"
+                    className="btn theme-outline-btn"
                   >
                     <div className="flex flex-row gap-2">
                       <svg
@@ -428,7 +428,7 @@ const CoverLetterWriter = () => {
                 <Button
                   type="button"
                   disabled={!show || msgLoading || !session?.user?.email}
-                  className="btn btn-outline-primary-dark"
+                  className="btn theme-outline-btn"
                 >
                   <div className="flex flex-row gap-2">
                     <svg

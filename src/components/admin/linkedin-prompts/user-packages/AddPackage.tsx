@@ -110,7 +110,7 @@ const AddPackage = () => {
           onClick={() => {
             setPopUpModel(true);
           }}
-          className="flex items-center justify-center btn btn-outline-primary-dark pb-[20px] "
+          className="flex items-center justify-center btn  theme-outline-btnpb-[20px] "
         >
           <svg
             className="h-3.5 w-3.5 mr-2"
@@ -527,7 +527,7 @@ const AddPackage = () => {
               </div>
               <button
                 type="submit"
-                className="btn btn-outline-primary-dark"
+                className="btn theme-outline-btn"
                 style={{ display: "flex" }}
               >
                 <svg

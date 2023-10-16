@@ -12,15 +12,15 @@ const UseCases = () => {
                 data-aos="fade-up-sm"
                 data-aos-delay="50"
               >
-                CareerBooster Use Cases
+                CareerBooster.AI Use Cases
               </p>
               <h1
                 className="theme-hero-heading mb-0  md:text-[40px] text-[24px]"
                 data-aos="fade-up-sm"
                 data-aos-delay="100"
               >
-                Transform Your Career with CareerBooster, AI-Powered Tools for
-                Professional Excellence
+                Transform Your Career with CareerBooster.AI, AI-Powered Tools
+                for Professional Excellence
               </h1>
             </div>
           </div>
@@ -34,7 +34,7 @@ const UseCases = () => {
                   Write a Winning Executive Resume:
                 </h5>
                 <p className="mb-0">
-                  With CareerBooster, you can effortlessly craft a compelling
+                  With CareerBooster.AI, you can effortlessly craft a compelling
                   executive resume that grabs the attention of recruiters and
                   showcases your unique skills and achievements.
                 </p>
@@ -259,9 +259,10 @@ const UseCases = () => {
                   Tailor Resume for Each Job
                 </h5>
                 <p className="mb-0">
-                  Ditch the one-size-fits-all approach. CareerBooster lets you
-                  create customized resumes for each job opening, highlighting
-                  the skills and experiences most relevant to the position.
+                  Ditch the one-size-fits-all approach. CareerBooster.AI lets
+                  you create customized resumes for each job opening,
+                  highlighting the skills and experiences most relevant to the
+                  position.
                 </p>
               </div>
               <div className="flex-shrink-0">

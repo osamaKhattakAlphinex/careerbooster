@@ -91,6 +91,10 @@
   background: white;
   color: black;
 }
+.menu-dropdown Link:hover {
+  background-color: black;
+  color: white;
+}
 .dashborad {
   background: url(/assets/images/bg/1.jpg) no-repeat center center/cover;
 }

@@ -252,7 +252,7 @@ const ConsultingBidsGenerator = () => {
                     jobDescription === ""
                   }
                   onClick={() => handleGenerate()}
-                  className="btn btn-outline-primary-dark"
+                  className="btn theme-outline-btn"
                 >
                   <div className="flex flex-row gap-2">
                     <svg
@@ -279,7 +279,7 @@ const ConsultingBidsGenerator = () => {
                 <Button
                   type="button"
                   disabled={!show || msgLoading || !session?.user?.email}
-                  className="btn btn-outline-primary-dark"
+                  className="btn theme-outline-btn"
                 >
                   <div className="flex flex-row gap-2">
                     <svg

@@ -12,7 +12,7 @@ const Reviews = () => {
                 data-aos="fade-up-sm"
                 data-aos-delay="50"
               >
-                <span className="theme-text">CareerBooster </span>
+                <span className="theme-text">CareerBooster.AI </span>
                 Received
                 <Image
                   width={48}
@@ -93,11 +93,12 @@ const Reviews = () => {
                   </div>
                   <p className="review-text mb-0">
                     {'"'}I was blown away by the results I achieved with
-                    CareerBooster. As a CEO, I knew the importance of a strong
-                    professional image, but I didn{"'"}t have the time to craft
-                    a tailored resume and LinkedIn profile for each opportunity.
-                    CareerBooster{"'"}s AI-powered tools did it effortlessly,
-                    and it made a huge difference in my job search.
+                    CareerBooster.AI. As a CEO, I knew the importance of a
+                    strong professional image, but I didn{"'"}t have the time to
+                    craft a tailored resume and LinkedIn profile for each
+                    opportunity. CareerBooster.AI{"'"}s AI-powered tools did it
+                    effortlessly, and it made a huge difference in my job
+                    search.
                   </p>
                 </div>
               </div>
@@ -163,11 +164,11 @@ const Reviews = () => {
                     </svg>
                   </div>
                   <p className="review-text mb-0">
-                    {'"'}CareerBooster helped me optimize my LinkedIn profile
+                    {'"'}CareerBooster.AI helped me optimize my LinkedIn profile
                     with targeted keywords, and I saw a significant increase in
                     recruiter views. The tailored cover letters and AI-generated
                     emails were also gamechangers. I secured my dream job thanks
-                    to CareerBooster.
+                    to CareerBooster.AI.
                   </p>
                 </div>
               </div>
@@ -234,10 +235,10 @@ const Reviews = () => {
                   </div>
                   <p className="review-text mb-0">
                     As a senior marketing executive, I needed a standout resume.
-                    CareerBooster not only helped me create one but also ensured
-                    it was ATS-compliant. The personalized emails to recruiters
-                    saved me time and helped me connect with the right
-                    opportunities.
+                    CareerBooster.AI not only helped me create one but also
+                    ensured it was ATS-compliant. The personalized emails to
+                    recruiters saved me time and helped me connect with the
+                    right opportunities.
                   </p>
                 </div>
               </div>
@@ -303,11 +304,11 @@ const Reviews = () => {
                     </svg>
                   </div>
                   <p className="review-text mb-0">
-                    CareerBooster{"'"}s resume review and ATS scanning services
-                    were invaluable. It pointed out areas of improvement in my
-                    resume that I had overlooked. I can confidently say that
-                    CareerBooster played a crucial role in my successful career
-                    transition.
+                    CareerBooster.AI{"'"}s resume review and ATS scanning
+                    services were invaluable. It pointed out areas of
+                    improvement in my resume that I had overlooked. I can
+                    confidently say that CareerBooster.AI played a crucial role
+                    in my successful career transition.
                   </p>
                 </div>
               </div>
@@ -374,10 +375,10 @@ const Reviews = () => {
                   </div>
                   <p className="review-text mb-0">
                     {'"'}I was skeptical about AI-powered tools, but
-                    CareerBooster exceeded my expectations. It helped me tailor
-                    my resume for multiple job applications effortlessly. The
-                    personalized cover letters and optimized LinkedIn profile
-                    were the icing on the cake.
+                    CareerBooster.AI exceeded my expectations. It helped me
+                    tailor my resume for multiple job applications effortlessly.
+                    The personalized cover letters and optimized LinkedIn
+                    profile were the icing on the cake.
                   </p>
                 </div>
               </div>
@@ -443,10 +444,10 @@ const Reviews = () => {
                     </svg>
                   </div>
                   <p className="review-text mb-0">
-                    CareerBooster{"'"}s AI-generated emails were a game-changer.
-                    They were professional, concise, and grabbed the attention
-                    of recruiters. I landed interviews with top law firms, and
-                    it was all thanks to CareerBooster.
+                    CareerBooster.AI{"'"}s AI-generated emails were a
+                    game-changer. They were professional, concise, and grabbed
+                    the attention of recruiters. I landed interviews with top
+                    law firms, and it was all thanks to CareerBooster.AI.
                   </p>
                 </div>
               </div>
@@ -512,8 +513,8 @@ const Reviews = () => {
                     </svg>
                   </div>
                   <p className="review-text mb-0">
-                    CareerBooster{"'"}s ATS scanning saved me from missing out
-                    on opportunities. It ensured my resume got through the
+                    CareerBooster.AI{"'"}s ATS scanning saved me from missing
+                    out on opportunities. It ensured my resume got through the
                     initial screening process. This tool is a must-have for
                     senior executives serious about their careers.
                   </p>
@@ -581,11 +582,11 @@ const Reviews = () => {
                     </svg>
                   </div>
                   <p className="review-text mb-0">
-                    I{"'"}m a firm believer in CareerBooster. It helped me
+                    I{"'"}m a firm believer in CareerBooster.AI. It helped me
                     tailor my resume and cover letters for each job, making my
                     applications stand out. If you{"'"}re a senior professional
-                    looking to advance your career, CareerBooster is your secret
-                    weapon.
+                    looking to advance your career, CareerBooster.AI is your
+                    secret weapon.
                   </p>
                 </div>
               </div>
@@ -651,7 +652,7 @@ const Reviews = () => {
                     </svg>
                   </div>
                   <p className="review-text mb-0">
-                    CareerBooster{"'"}s AI-powered services provided the
+                    CareerBooster.AI{"'"}s AI-powered services provided the
                     competitive edge I needed in today{"'"}s job market. From
                     personalized emails to resume optimization, It{"'"}s an
                     indispensable tool for senior-level executives.
@@ -723,8 +724,8 @@ const Reviews = () => {
                   </div>
                   <p className="review-text mb-0">
                     As a senior executive, I needed a polished professional
-                    image. CareerBooster{"'"}s suite of AI tools transformed my
-                    resume, LinkedIn profile, and cover letters. The results
+                    image. CareerBooster.AI{"'"}s suite of AI tools transformed
+                    my resume, LinkedIn profile, and cover letters. The results
                     speak for themselves - I landed my ideal role
                   </p>
                 </div>
@@ -799,11 +800,12 @@ const Reviews = () => {
                   </div>
                   <p className="review-text mb-0">
                     {'"'}I was blown away by the results I achieved with
-                    CareerBooster. As a CEO, I knew the importance of a strong
-                    professional image, but I didn{"'"}t have the time to craft
-                    a tailored resume and LinkedIn profile for each opportunity.
-                    CareerBooster{"'"}s AI-powered tools did it effortlessly,
-                    and it made a huge difference in my job search.
+                    CareerBooster.AI. As a CEO, I knew the importance of a
+                    strong professional image, but I didn{"'"}t have the time to
+                    craft a tailored resume and LinkedIn profile for each
+                    opportunity. CareerBooster.AI{"'"}s AI-powered tools did it
+                    effortlessly, and it made a huge difference in my job
+                    search.
                   </p>
                 </div>
               </div>
@@ -869,11 +871,11 @@ const Reviews = () => {
                     </svg>
                   </div>
                   <p className="review-text mb-0">
-                    {'"'}CareerBooster helped me optimize my LinkedIn profile
+                    {'"'}CareerBooster.AI helped me optimize my LinkedIn profile
                     with targeted keywords, and I saw a significant increase in
                     recruiter views. The tailored cover letters and AI-generated
                     emails were also gamechangers. I secured my dream job thanks
-                    to CareerBooster.
+                    to CareerBooster.AI.
                   </p>
                 </div>
               </div>
@@ -940,10 +942,10 @@ const Reviews = () => {
                   </div>
                   <p className="review-text mb-0">
                     As a senior marketing executive, I needed a standout resume.
-                    CareerBooster not only helped me create one but also ensured
-                    it was ATS-compliant. The personalized emails to recruiters
-                    saved me time and helped me connect with the right
-                    opportunities.
+                    CareerBooster.AI not only helped me create one but also
+                    ensured it was ATS-compliant. The personalized emails to
+                    recruiters saved me time and helped me connect with the
+                    right opportunities.
                   </p>
                 </div>
               </div>
@@ -1009,11 +1011,11 @@ const Reviews = () => {
                     </svg>
                   </div>
                   <p className="review-text mb-0">
-                    CareerBooster{"'"}s resume review and ATS scanning services
-                    were invaluable. It pointed out areas of improvement in my
-                    resume that I had overlooked. I can confidently say that
-                    CareerBooster played a crucial role in my successful career
-                    transition.
+                    CareerBooster.AI{"'"}s resume review and ATS scanning
+                    services were invaluable. It pointed out areas of
+                    improvement in my resume that I had overlooked. I can
+                    confidently say that CareerBooster.AI played a crucial role
+                    in my successful career transition.
                   </p>
                 </div>
               </div>
@@ -1080,10 +1082,10 @@ const Reviews = () => {
                   </div>
                   <p className="review-text mb-0">
                     {'"'}I was skeptical about AI-powered tools, but
-                    CareerBooster exceeded my expectations. It helped me tailor
-                    my resume for multiple job applications effortlessly. The
-                    personalized cover letters and optimized LinkedIn profile
-                    were the icing on the cake.
+                    CareerBooster.AI exceeded my expectations. It helped me
+                    tailor my resume for multiple job applications effortlessly.
+                    The personalized cover letters and optimized LinkedIn
+                    profile were the icing on the cake.
                   </p>
                 </div>
               </div>
@@ -1149,10 +1151,10 @@ const Reviews = () => {
                     </svg>
                   </div>
                   <p className="review-text mb-0">
-                    CareerBooster{"'"}s AI-generated emails were a game-changer.
-                    They were professional, concise, and grabbed the attention
-                    of recruiters. I landed interviews with top law firms, and
-                    it was all thanks to CareerBooster.
+                    CareerBooster.AI{"'"}s AI-generated emails were a
+                    game-changer. They were professional, concise, and grabbed
+                    the attention of recruiters. I landed interviews with top
+                    law firms, and it was all thanks to CareerBooster.AI.
                   </p>
                 </div>
               </div>
@@ -1218,8 +1220,8 @@ const Reviews = () => {
                     </svg>
                   </div>
                   <p className="review-text mb-0">
-                    CareerBooster{"'"}s ATS scanning saved me from missing out
-                    on opportunities. It ensured my resume got through the
+                    CareerBooster.AI{"'"}s ATS scanning saved me from missing
+                    out on opportunities. It ensured my resume got through the
                     initial screening process. This tool is a must-have for
                     senior executives serious about their careers.
                   </p>
@@ -1287,11 +1289,11 @@ const Reviews = () => {
                     </svg>
                   </div>
                   <p className="review-text mb-0">
-                    I{"'"}m a firm believer in CareerBooster. It helped me
+                    I{"'"}m a firm believer in CareerBooster.AI. It helped me
                     tailor my resume and cover letters for each job, making my
                     applications stand out. If you{"'"}re a senior professional
-                    looking to advance your career, CareerBooster is your secret
-                    weapon.
+                    looking to advance your career, CareerBooster.AI is your
+                    secret weapon.
                   </p>
                 </div>
               </div>
@@ -1357,7 +1359,7 @@ const Reviews = () => {
                     </svg>
                   </div>
                   <p className="review-text mb-0">
-                    CareerBooster{"'"}s AI-powered services provided the
+                    CareerBooster.AI{"'"}s AI-powered services provided the
                     competitive edge I needed in today{"'"}s job market. From
                     personalized emails to resume optimization, It{"'"}s an
                     indispensable tool for senior-level executives.
@@ -1429,8 +1431,8 @@ const Reviews = () => {
                   </div>
                   <p className="review-text mb-0">
                     As a senior executive, I needed a polished professional
-                    image. CareerBooster{"'"}s suite of AI tools transformed my
-                    resume, LinkedIn profile, and cover letters. The results
+                    image. CareerBooster.AI{"'"}s suite of AI tools transformed
+                    my resume, LinkedIn profile, and cover letters. The results
                     speak for themselves - I landed my ideal role
                   </p>
                 </div>

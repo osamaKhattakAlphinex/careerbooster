@@ -217,7 +217,7 @@ const ResumeCreator = () => {
                   msgLoading || !session?.user?.email || !aiInputUserData
                 }
                 onClick={() => handleGenerate()}
-                className="btn btn-outline-primary-dark"
+                className="btn theme-outline-btn"
               >
                 <div className="flex flex-row gap-2">
                   <svg
@@ -243,7 +243,7 @@ const ResumeCreator = () => {
                 <Button
                   type="button"
                   disabled={!show || msgLoading || !session?.user?.email}
-                  className="btn btn-outline-primary-dark"
+                  className="btn theme-outline-btn"
                 >
                   <div className="flex flex-row gap-2">
                     <svg

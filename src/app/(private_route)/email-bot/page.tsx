@@ -261,7 +261,7 @@ const PersonalizedEmailBot = () => {
                 htmlFor="default-radio-1"
                 className="ml-2 text-sm font-medium  cursor-pointer"
               >
-                Use My Persona to write the  email
+                Use My Persona to write the email
               </label>
             </div>
             <div className="flex items-center mb-4">
@@ -280,7 +280,6 @@ const PersonalizedEmailBot = () => {
                 htmlFor="default-radio-2"
                 className="ml-2 text-sm font-medium  cursor-pointer"
               >
-                
                 Choose one of the recently AI Generated Resumes
               </label>
             </div>
@@ -300,7 +299,7 @@ const PersonalizedEmailBot = () => {
                 htmlFor="default-radio-3"
                 className="ml-2 text-sm font-medium  cursor-pointer"
               >
-                 Upload a new PDF Resume 
+                Upload a new PDF Resume
               </label>
             </div>
           </div>
@@ -350,7 +349,7 @@ const PersonalizedEmailBot = () => {
                       jobDescription === ""
                     }
                     onClick={() => handleGenerate()}
-                    className="btn btn-outline-primary-dark"
+                    className="btn theme-outline-btn"
                   >
                     <div className="flex flex-row gap-2">
                       <svg
@@ -427,7 +426,7 @@ const PersonalizedEmailBot = () => {
                 <Button
                   type="button"
                   disabled={!show || msgLoading || !session?.user?.email}
-                  className="btn btn-outline-primary-dark"
+                  className="btn theme-outline-btn"
                 >
                   <div className="flex flex-row gap-2">
                     <svg

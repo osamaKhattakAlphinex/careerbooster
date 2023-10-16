@@ -31,7 +31,7 @@ const Button: React.FC<Props> = ({
     );
   }
   if (type === "link") {
-    <Link href={href} className="btn btn-outline-primary-dark">
+    <Link href={href} className="btn theme-outline-btn">
       {children}
     </Link>;
   }

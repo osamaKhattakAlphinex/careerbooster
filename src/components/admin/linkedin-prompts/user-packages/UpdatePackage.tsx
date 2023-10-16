@@ -526,7 +526,7 @@ const UpdatePackage = () => {
               </div>
               <button
                 type="submit"
-                className="btn btn-outline-primary-dark"
+                className="btn theme-outline-btn"
                 style={{ display: "flex" }}
               >
                 <svg

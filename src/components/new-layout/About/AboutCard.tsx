@@ -12,7 +12,7 @@ const AboutCard = () => {
             data-aos-delay="50"
           >
             <div className="text-center text-lg-start">
-              <p className="theme-text fs-sm">About CareerBooster</p>
+              <p className="theme-text fs-sm">About CareerBooster.AI</p>
               <h2 className="theme-tex-2 mb-4">Welcome to CareerBooster.AI</h2>
               <p className="mb-8">
                 Your ultimate destination for revolutionizing your career
