@@ -5,23 +5,15 @@ const PricingSection = () => {
         <div className="row justify-center mb-18">
           <div className="col-lg-10">
             <div className="text-center">
-              <p
-                className="theme-text"
-                data-aos="fade-up-sm"
-                data-aos-delay="50"
-              >
-                Pricing Plan
-              </p>
               <h1
                 className="theme-hero-heading mb-5 md:text-[40px] text-[24px]"
                 data-aos="fade-up-sm"
                 data-aos-delay="100"
               >
-                Ready to Get Started? <br />
-                Don{"'"}t Worry, We{"'"}ll Keep You Under Budget
+                All Plans Include A 30-Day Money Back Guarantee
               </h1>
               <p className="mb-0" data-aos="fade-up-sm" data-aos-delay="150">
-                Get started with a 5-day trial, Cancel anytime.
+                Your Path to More Interviews and Better Opportunities
               </p>
             </div>
           </div>
@@ -33,10 +25,10 @@ const PricingSection = () => {
             data-aos-delay="50"
           >
             <div className="pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-">
-              <h3 className="theme-text fw-medium mb-0">Free Forever</h3>
-              <h1 className="display-3 fw-semibold theme-text mb-0 mt-4  md:!text-6xl text-[24px]">
-                $00
+              <h1 className="display-3 fw-semibold theme-text mb-0 mt-4  md:!text-4xl text-[24px]">
+                Free Forever
               </h1>
+              <h3 className="theme-text fw-medium mb-0">$00</h3>
               {/* <!-- <p className="theme-text lead fw-normal mt-4 mb-0">
                     A 10X faster way to writing your professional copy
                   </p> --> */}
@@ -44,7 +36,7 @@ const PricingSection = () => {
                 href="pricing-plan.html"
                 className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9 theme-pricing-btn"
               >
-                No Credit Card Required
+                Free Forever
               </a>
               <ul className="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">
                 <li>ATS Scan your Resume</li>

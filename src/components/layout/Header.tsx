@@ -92,7 +92,7 @@ const Header = () => {
           //   width: "450px",
           // }}
         >
-          {theme === "dark" ? (
+          {/* {theme === "dark" ? (
             <div className="flex justify-center items-center">
               <Image
                 width={215}
@@ -115,7 +115,19 @@ const Header = () => {
                 CareerBooster
               </span>
             </div>
-          )}
+          )} */}
+          <div className="flex justify-center items-center">
+            <Image
+              width={80}
+              height={74}
+              src="/trans-icon1.png"
+              alt="icon"
+              className="w-20 m-0"
+            />
+            <span className="ml-[-15px] logo-text font-semibold">
+              CareerBooster
+            </span>
+          </div>
 
           {/* <img src="/assets/images/logo.png" alt="" className="w-70" /> */}
         </Link>

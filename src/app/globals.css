@@ -97,6 +97,9 @@
 .toolscard {
   background: #dfeee9;
 }
+.logo-text {
+  color: black;
+}
 /* DARK THEME */
 [data-bs-theme="dark"] .nav-link {
   color: #fff;
@@ -194,4 +197,7 @@
 }
 [data-bs-theme="dark"] .toolscard {
   background: #13141e;
+}
+[data-bs-theme="dark"] .logo-text {
+  color: #e6f85e;
 }

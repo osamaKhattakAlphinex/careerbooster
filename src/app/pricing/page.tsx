@@ -40,7 +40,7 @@ export default function PricingPage() {
   return (
     <main className="flex-grow-1 mb-20">
       {/* <!-- Page header --> */}
-      <PageHeader title="Pricing & Plan" secondTitle="Pricing" />
+      <PageHeader secondTitle="Pricing" />
 
       {/* <!-- Pricing --> */}
       <PricingSection />

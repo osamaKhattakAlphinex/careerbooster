@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 interface Props {
-  title: string;
+  title?: string;
   secondTitle?: string;
 }
 const PageHeader: React.FC<Props> = ({ title, secondTitle }) => {

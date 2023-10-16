@@ -164,21 +164,22 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
 
   return (
     <div
-      className="col-md-6 col-lg-4"
+      className="col-md-6 col-lg-4 "
       data-aos="fade-up-sm"
       data-aos-delay="50"
     >
-      <div className="theme-pricing-card p-6 px-lg-10 py-lg-8 rounded-4 h-full bg-">
-        <h3 className="text-primary-dark fw-medium mb-0">
+      <div className=" p-6 pricing-card px-lg-10 py-lg-8 rounded-4 h-full bg-">
+        <h1 className="display-3 fw-semibold theme-text mb-0 mt-4 !text-4xl">
           {userPackage.title}
-        </h3>
-        <h1 className="display-3 fw-semibold text-white mb-0 mt-4 !text-6xl">
-          {userPackage.amount}
-          <span className="text-xl">
-            {userPackage.type === "monthly" && " / month"}
-            {userPackage.type === "yearly" && " / year"}
-          </span>
         </h1>
+        <div className="price flex align-center">
+          <h3 className="theme-text fw-medium mb-0">${userPackage.amount}</h3>
+          <span className="text-2xl theme-text">
+            {userPackage.type === "monthly" && "  / Month"}
+            {userPackage.type === "yearly" && "  / Year"}
+          </span>
+        </div>
+
         {/* Apply coupon  */}
         <div className="mt-4">
           <input
@@ -197,22 +198,22 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
         <button
           onClick={() => handleClick()}
           disabled={subscribing}
-          className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9 btn-dark-blue-3"
+          className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9"
         >
           {subscribing
             ? "Please wait..."
             : userPackage.amount === 0
-            ? "Stay basic"
-            : "Subscribe"}
+            ? "Select A Plan"
+            : "Select A Plan"}
         </button>
         <ul className="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">
           {userPackage.features.map((feature: string, i: number) => (
             <li key={i}>{feature}</li>
           ))}
         </ul>
-        <ul className="pricing-list d-flex flex-column gap-3 fs-lg mt-9 mb-0">
+        {/* <ul className="pricing-list d-flex flex-column gap-3 fs-lg mt-9 mb-0">
           <hr />
-          <li>
+          <li className="theme-text">
             <strong>Limitation</strong>
           </li>
           <li>Generate {userPackage?.limit?.resumes_generation} resumes</li>
@@ -243,7 +244,7 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
           </li>
           <li>Upload {userPackage?.limit?.pdf_files_upload} Files / Resumes</li>
           <li>Review {userPackage?.limit?.review_resume} Resumes by AI</li>
-        </ul>
+        </ul> */}
       </div>
     </div>
   );

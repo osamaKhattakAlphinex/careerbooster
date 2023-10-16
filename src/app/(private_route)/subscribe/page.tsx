@@ -18,7 +18,7 @@ export default function SubscribePage() {
 
   return (
     <main className="flex-grow-1 mb-20">
-      <section className="py-10 py-lg-15">
+      <section className="pt-40">
         <div className="container">
           {showExpiredAlert && (
             <div className="row justify-center mb-8">
@@ -37,12 +37,19 @@ export default function SubscribePage() {
             <div className="col-lg-10">
               <div className="text-center">
                 <h1
-                  className="text-white text-4xl"
+                  className="theme-text-2 text-4xl"
                   data-aos="fade-up-sm"
                   data-aos-delay="100"
                 >
-                  Please choose a pricing plan to continue
+                  All Plans Include A 30-Day Money Back Guarantee
                 </h1>
+                <p
+                  className="mb-0 aos-init aos-animate"
+                  data-aos="fade-up-sm"
+                  data-aos-delay="150"
+                >
+                  Your Path to More Interviews and Better Opportunities
+                </p>
               </div>
             </div>
           </div>
