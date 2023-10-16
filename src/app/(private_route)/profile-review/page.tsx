@@ -81,7 +81,7 @@ const ProfileReview = () => {
         // Update user data in redux
         dispatch(setUserData(obj));
         setActiveStep(1);
-        router.push("/dashboard");
+        router.push("/dashboard?success=1");
       });
   };
 
