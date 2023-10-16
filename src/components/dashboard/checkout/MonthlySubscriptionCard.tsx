@@ -14,11 +14,13 @@ import { CouponBody } from "@/app/stripe-coupon/route";
 interface Props {
   userPackage: UserPackageData;
   customer: any;
+  viewOnly?: boolean;
 }
 
 const MonthlySubscriptionCard: React.FC<Props> = ({
   userPackage,
   customer,
+  viewOnly,
 }) => {
   const [subscribing, setSubscribing] = useState(false);
   const [coupon, setCoupon] = useState("");
@@ -168,7 +170,7 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
       data-aos="fade-up-sm"
       data-aos-delay="50"
     >
-      <div className=" p-6 pricing-card px-lg-10 py-lg-8 rounded-4 h-full bg-">
+      <div className=" p-6 pricing-card px-lg-8 py-lg-8 rounded-4 h-full bg-">
         <h1 className="display-3 fw-semibold theme-text mb-0 mt-4 !text-4xl">
           {userPackage.title}
         </h1>
@@ -181,32 +183,37 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
         </div>
 
         {/* Apply coupon  */}
-        <div className="mt-4">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Apply coupon"
-            value={coupon}
-            onChange={(e) => setCoupon(e.target.value)}
-          />
-        </div>
-        {/* invalid coupon error */}
-        {couponError && couponError !== "" && (
-          <p className="text-red-500 text-sm mt-1">{couponError}</p>
+        {!viewOnly && (
+          <>
+            <div className="mt-4">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Apply coupon"
+                value={coupon}
+                onChange={(e) => setCoupon(e.target.value)}
+              />
+            </div>
+            {/* invalid coupon error */}
+            {couponError && couponError !== "" && (
+              <p className="text-red-500 text-sm mt-1">{couponError}</p>
+            )}
+
+            <button
+              onClick={() => handleClick()}
+              disabled={subscribing}
+              className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9"
+            >
+              {subscribing
+                ? "Please wait..."
+                : userPackage.amount === 0
+                ? "Select A Plan"
+                : "Select A Plan"}
+            </button>
+          </>
         )}
 
-        <button
-          onClick={() => handleClick()}
-          disabled={subscribing}
-          className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9"
-        >
-          {subscribing
-            ? "Please wait..."
-            : userPackage.amount === 0
-            ? "Select A Plan"
-            : "Select A Plan"}
-        </button>
-        <ul className="pricing-list d-flex flex-column gap-5 fs-lg mt-9 mb-0">
+        <ul className="d-flex flex-column gap-5 text-sm pl-0 mt-9 mb-0">
           {userPackage.features.map((feature: string, i: number) => (
             <li key={i}>{feature}</li>
           ))}

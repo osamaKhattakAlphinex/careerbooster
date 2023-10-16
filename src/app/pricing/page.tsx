@@ -1,5 +1,6 @@
 import CTASection from "@/components/new-layout/Homepage/CTASection";
 import FAQSection from "@/components/new-layout/Homepage/FAQSection";
+import FAQList from "@/components/new-layout/Homepage/Faqs";
 import PricingSection from "@/components/new-layout/Homepage/PricingSection";
 import UseCases from "@/components/new-layout/Homepage/UseCases";
 import PageHeader from "@/components/new-layout/PageHeader";
@@ -46,7 +47,7 @@ export default function PricingPage() {
       <PricingSection />
 
       {/* <!-- FAQ --> */}
-      <FAQSection />
+      <FAQList />
 
       {/* <!-- CTA --> */}
       <CTASection />

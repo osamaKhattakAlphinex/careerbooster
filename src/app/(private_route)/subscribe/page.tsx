@@ -41,7 +41,7 @@ export default function SubscribePage() {
                   data-aos="fade-up-sm"
                   data-aos-delay="100"
                 >
-                  All Plans Include A 30-Day Money Back Guarantee
+                  All Plans Include a 30-Day Money Back Guarantee
                 </h1>
                 <p
                   className="mb-0 aos-init aos-animate"

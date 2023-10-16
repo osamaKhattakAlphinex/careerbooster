@@ -12,7 +12,7 @@ const PricingSection = () => {
                 data-aos="fade-up-sm"
                 data-aos-delay="100"
               >
-                All Plans Include A 30-Day Money Back Guarantee
+                All Plans Include a 30-Day Money Back Guarantee
               </h1>
               <p className="mb-0" data-aos="fade-up-sm" data-aos-delay="150">
                 Your Path to More Interviews and Better Opportunities
@@ -21,7 +21,7 @@ const PricingSection = () => {
           </div>
         </div>
         <div className="row g-6 pricing-table">
-          <Packages />
+          <Packages viewOnly={true} />
         </div>
       </div>
     </section>

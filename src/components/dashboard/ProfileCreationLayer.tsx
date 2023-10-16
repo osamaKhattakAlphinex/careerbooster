@@ -315,61 +315,39 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   };
 
   // watch scrapped data and if all scrapped data is scrapped
-  // useEffect(() => {
-  //   if (
-  //     register.scrapped.basic &&
-  //     register.scrapped.education &&
-  //     register.scrapped.workExperience &&
-  //     register.scrapped.skills
-  //   ) {
-  //     updateUser();
-  //   }
-  // }, [register.scrapped]);
+  useEffect(() => {
+    if (
+      register.scrapped.basic &&
+      register.scrapped.education &&
+      register.scrapped.workExperience &&
+      register.scrapped.skills
+    ) {
+      updateUser();
+    }
+  }, [register.scrapped]);
 
   // if the user data loaded, data scrapped, profile wizard isn't completed Make profile from resume
-  // useEffect(() => {
-  //   if (userData.email && !userData.wizardCompleted) {
-  //     createProfileFromResume();
+  useEffect(() => {
+    if (userData.email && !userData.wizardCompleted) {
+      createProfileFromResume();
 
-  //     // const confirmExit = (e: any) => {
-  //     //   // Display a confirmation message when leaving or refreshing the page
-  //     //   e.returnValue =
-  //     //     "You are leaving this page, your changes are not saved, you will lose your data.";
-  //     // };
+      // const confirmExit = (e: any) => {
+      //   // Display a confirmation message when leaving or refreshing the page
+      //   e.returnValue =
+      //     "You are leaving this page, your changes are not saved, you will lose your data.";
+      // };
 
-  //     // // Listen for the beforeunload event
-  //     // window.addEventListener("beforeunload", confirmExit);
+      // // Listen for the beforeunload event
+      // window.addEventListener("beforeunload", confirmExit);
 
-  //     // return () => {
-  //     //   // Remove the event listener when the component unmounts
-  //     //   window.removeEventListener("beforeunload", confirmExit);
-  //     // };
-  //   }
-  // }, [userData.email, userData.wizardCompleted, register.scrappedContent]);
+      // return () => {
+      //   // Remove the event listener when the component unmounts
+      //   window.removeEventListener("beforeunload", confirmExit);
+      // };
+    }
+  }, [userData.email, userData.wizardCompleted, register.scrappedContent]);
 
   // RENDERING LOGIC BLOW !!!!!!
-
-  return (
-    <div className="flex flex-col items-center justify-center h-screen py-20 !pb-42">
-      <h2 className="text-3xl font-bold text-center">
-        Welcome {userData?.firstName + " " + userData?.lastName}
-      </h2>
-      <div className="my-10">{refreshBigIconRotating}</div>
-      <p className="text-center mb-4">
-        Please wait! We are scanning your resume.
-      </p>
-      <p className="text-center mb-10">
-        Are you stuck on this page?{" "}
-        <Link href="/contact" target="_blank">
-          Report it
-        </Link>
-      </p>
-
-      <div className="w-1/3">
-        <DidYouKnowCard />
-      </div>
-    </div>
-  );
 
   // if the user data is still loading
   if (userData.email === "") {

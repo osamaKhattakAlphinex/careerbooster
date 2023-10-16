@@ -7,7 +7,11 @@ import axios from "axios";
 import { UserPackageData } from "@/db/schemas/UserPackage";
 import { useSession } from "next-auth/react";
 
-const Packages = () => {
+interface Props {
+  viewOnly?: boolean;
+}
+
+const Packages = ({ viewOnly }: Props) => {
   const { data: session, status } = useSession();
   const [packages, setPackages] = useState<UserPackageData[]>([]);
 
@@ -32,6 +36,7 @@ const Packages = () => {
           <MonthlySubscriptionCard
             key={pkg._id}
             userPackage={pkg}
+            viewOnly={viewOnly}
             customer={{
               metadata: {
                 packageId: pkg._id,
