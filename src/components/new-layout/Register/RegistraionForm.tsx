@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
 
 // export const metadata: Metadata = {
-//   title: "CareerBooster.Ai-Register",
+//   title: "CareerBooster.AI-Register",
 // };
 
 const RegistrationForm = () => {
