@@ -127,9 +127,9 @@ const ToolsCard = () => {
               </h5>
             </Link>
             <p className="mb-4 text-xs  ">
-              : Optimize the About, Headline, job descriptions, and skills
-              section of your LinkedIn profile with keywords to ensure it ranks
-              high in recruiter searches.
+              Optimize the About, Headline, job descriptions, and skills section
+              of your LinkedIn profile with keywords to ensure it ranks high in
+              recruiter searches.
             </p>
             <Link
               className=" theme-btn text-sm  rounded-lg px-6 py-2 no-underline hover:bg-gray-950"
