@@ -34,6 +34,15 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const dispatch = useDispatch();
   const register = useSelector((state: any) => state.register);
   const resume = useSelector((state: any) => state.resume);
+  const [showStuckError, setShowStuckError] = useState(false);
+
+  // useeffect to show stuck error to true after 2 minutes
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setShowStuckError(true);
+    }, 120000);
+    return () => clearTimeout(t);
+  }, []);
 
   const createProfileFromResume = async () => {
     await scrappResumeIfNotExist();
@@ -392,12 +401,15 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         <p className="text-center mb-4">
           Please wait! We are scanning your resume.
         </p>
-        <p className="text-center mb-10">
-          Are you stuck on this page?{" "}
-          <Link href="/contact" target="_blank">
-            Report it
-          </Link>
-        </p>
+        {showStuckError && (
+          <p className="text-center mb-10">
+            Stuck on this page for longer than expected? &nbsp;
+            <Link href="/contact" target="_blank">
+              Click here
+            </Link>
+            &nbsp; to report the issue for a quick fix
+          </p>
+        )}
 
         <div className="w-1/3">
           <DidYouKnowCard />
