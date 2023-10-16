@@ -8,8 +8,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { refreshIconRotating } from "@/helpers/iconsProvider";
 
-const 
-UploadPDFResume = () => {
+const UploadPDFResume = () => {
   const router = useRouter();
   // local states
   const [fileUploading, setFileUploading] = useState<boolean>(false);
