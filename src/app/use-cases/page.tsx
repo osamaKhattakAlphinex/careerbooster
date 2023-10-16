@@ -1,5 +1,6 @@
 import CTASection from "@/components/new-layout/Homepage/CTASection";
 import FAQSection from "@/components/new-layout/Homepage/FAQSection";
+import FAQList from "@/components/new-layout/Homepage/Faqs";
 import UseCases from "@/components/new-layout/Homepage/UseCases";
 import PageHeader from "@/components/new-layout/PageHeader";
 import { Metadata } from "next";
@@ -42,7 +43,7 @@ export default function UseCasesPage() {
       <UseCases />
 
       {/* <!-- FAQ --> */}
-      <FAQSection />
+      <FAQList />
 
       {/* <!-- CTA --> */}
       <CTASection />

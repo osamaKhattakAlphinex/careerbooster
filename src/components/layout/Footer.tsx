@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -14,7 +15,7 @@ const Footer = () => {
             <div className="row g-6">
               <div className="col-md-4 col-lg-4">
                 <div className="footer-widget text-center text-md-start">
-                  <h6 className="theme-text mb-2">Career Booster</h6>
+                  <h6 className="theme-text mb-2">CareerBooster.AI</h6>
                   <ul className="link-list list-unstyled mb-0">
                     <li>
                       <Link href="/about">About</Link>
@@ -39,19 +40,19 @@ const Footer = () => {
                   <h6 className="theme-text mb-2">Use Cases</h6>
                   <ul className="link-list list-unstyled mb-0">
                     <li>
-                      <Link href="/use-cases">AI writer</Link>
+                      <Link href="/use-cases">Generate Resume</Link>
                     </li>
                     <li>
-                      <Link href="/use-cases">Businesses AI</Link>
+                      <Link href="/use-cases">Generate Cover Letters</Link>
                     </li>
                     <li>
-                      <Link href="/use-cases">AI Blog writer</Link>
+                      <Link href="/use-cases">Generate Email</Link>
                     </li>
                     <li>
-                      <Link href="/use-cases">AI Content Creator</Link>
+                      <Link href="/use-cases">LinkedIn Optimization</Link>
                     </li>
                     <li>
-                      <Link href="/use-cases">Article write</Link>
+                      <Link href="/use-cases">Generate Consulting Bids</Link>
                     </li>
                   </ul>
                 </div>
@@ -163,14 +164,18 @@ const Footer = () => {
           </div>
           <div className="col-lg-3 order-lg-1 me-auto">
             <div className="footer-widget text-center text-lg-start">
-              <Link href="/">
-                <img
-                  src="/assets/images/logo.png"
-                  alt=""
-                  className="img-fluid"
-                  width="335"
+              <div className="flex  items-center">
+                <Image
+                  width={80}
+                  height={74}
+                  src="/trans-icon1.png"
+                  alt="icon"
+                  className="w-20 m-0"
                 />
-              </Link>
+                <span className="ml-[-15px] logo-text font-semibold">
+                  CareerBooster
+                </span>
+              </div>
               <p className="fs-sm mb-0 mt-4">
                 A Magical Tool to Optimize you content for the first know who
                 you{"'"}re targeting. Identify your target audience.
