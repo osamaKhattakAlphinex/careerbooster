@@ -10,7 +10,6 @@ const handler: NextApiHandler = async (req, res) => {
   if (session) {
     const data = req?.body?.data;
 
-    // $2b$10$WiQ4hv9c12fXQURVUR7liegHJrZ9YXyaIXOC/nbMgQnxvR3yeq6oi
     if (data && data.email) {
       // update user
       await startDB();

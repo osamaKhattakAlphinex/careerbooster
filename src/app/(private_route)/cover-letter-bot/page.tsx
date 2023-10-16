@@ -264,7 +264,7 @@ const CoverLetterWriter = () => {
                 htmlFor="default-radio-1"
                 className="ml-2 text-sm font-medium cursor-pointer"
               >
-                use my profile date to write Cover Letter
+                use my profile data to write Cover Letter
               </label>
             </div>
             <div className="flex items-center mb-4">
