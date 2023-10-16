@@ -13,7 +13,7 @@ const AboutCard = () => {
           >
             <div className="text-center text-lg-start">
               <p className="theme-text fs-sm">About CareerBooster</p>
-              <h2 className="theme-tex-2 mb-4">Welcome to CareerBooster.</h2>
+              <h2 className="theme-tex-2 mb-4">Welcome to CareerBooster.AI</h2>
               <p className="mb-8">
                 Your ultimate destination for revolutionizing your career
                 journey with AI-powered tools that supercharge your professional

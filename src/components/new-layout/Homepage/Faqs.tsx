@@ -147,7 +147,7 @@ function FAQList() {
                 data-aos="fade-up-sm"
                 data-aos-delay="50"
               >
-                Questions About CareerBooster.ai?
+                Questions About CareerBooster.AI?
                 <br className="d-none d-md-block" />
                 We have Answers!
               </h1>

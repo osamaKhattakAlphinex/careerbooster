@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 
 const ProfileCompletionAlert = () => {
   const userData = useSelector((state: any) => state.userData);
+  console.log("User Data" , userData);
+  
   if (userData?.wizardReviewed) {
     return (
       <div
