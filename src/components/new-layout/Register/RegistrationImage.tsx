@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const RegistrationImage = () => {
   return (
     <>
@@ -11,7 +13,9 @@ const RegistrationImage = () => {
             Unlock the Power of <br className="d-none d-xl-block" />
             <span className="text-primary-dark">Career Booster</span>{" "}
           </h2>
-          <img
+          <Image
+            width={622}
+            height={450}
             src="assets/images/screens/screen-5.png"
             alt=""
             className="img-fluid w-full"

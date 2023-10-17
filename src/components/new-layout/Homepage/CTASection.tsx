@@ -11,7 +11,9 @@ const CTASection = () => {
       <div className="container">
         <div className="rounded-5 border position-relative z-1 cta">
           <div className="animate-scale position-absolute w-full h-full z-n1">
-            <img
+            <Image
+              width={927}
+              height={445}
               src="assets/images/shapes/blurry-shape-4.svg"
               alt=""
               className="bg-shape img-fluid"
@@ -73,7 +75,7 @@ const CTASection = () => {
                     <Image
                       width={758}
                       height={712}
-                      src="/assets/images/screens/cover-letter-bot.png"
+                      src="/assets/images/screens/cover-letter.png"
                       alt=""
                       className="img-fluid w-full h-full object-cover"
                     />

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Blog(props: any) {
@@ -9,7 +10,7 @@ export default function Blog(props: any) {
             <div className="blog-card card border-0">
               <div className="card-header border-0 bg-transparent ratio ratio-6x4 rounded overflow-hidden">
                 <Link href="article.html" className="d-block">
-                  <img
+                  <Image
                     src={props.src}
                     alt=""
                     className="img-fluid post-thumbnail w-full h-full object-cover"

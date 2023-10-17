@@ -1,5 +1,6 @@
 import UploadPDFResume from "@/components/UploadPDFResume";
 import HeroImagesCard from "./HeroImagesCard";
+import Image from "next/image";
 
 const HeroArea = () => {
   return (
@@ -36,15 +37,19 @@ const HeroArea = () => {
               </div>
               <div data-aos="fade-up-sm" data-aos-delay="300">
                 <div className="image-with-shape">
-                  <img
-                    src="assets/images/shapes/blurry-shape-1.svg"
+                  <Image
+                    width={811}
+                    height={621}
+                    src="/assets/images/shapes/blurry-shape-1.svg"
                     alt=""
                     className="shape animate-scale"
                   />
                   <div className="mt-12 rounded-5 border border-primary-dark shadow-lg overflow-hidden position-relative z-1">
-                    <img
+                    <Image
+                      width={810}
+                      height={793}
                       className="img-fluid d-inline-block"
-                      src="assets/images/screens/dashboard.png"
+                      src="/assets/images/screens/dashboard.png"
                       alt=""
                     />
                   </div>

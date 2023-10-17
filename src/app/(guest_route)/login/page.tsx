@@ -1,6 +1,7 @@
 import Link from "next/link";
 import LoginForm from "@/components/LoginForm";
 import { Metadata } from "next";
+import Image from "next/image";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Login",
 };
@@ -37,31 +38,34 @@ const Login = () => {
                   </svg>
                 </Link>
               </div>
-              <div className="account-wrapper h-full d-flex flex-column justify-center">
+              {/* <div className="account-wrapper h-full d-flex flex-column justify-center">
                 <div className="text-center">
                   <Link href="/">
-                    <img
-                      src="assets/images/logo.svg"
+                    <Image
+                      width={165}
+                      height={40}
+                      src="/assets/images/logo.svg"
                       alt=""
                       className="img-fluid"
-                      width="165"
                     />
                   </Link>
                   <div className="vstack gap-4 mt-10 d-none">
                     <button type="button" className="btn account-btn py-4">
-                      <img
-                        src="assets/images/icons/google.svg"
+                      <Image
+                        src="/assets/images/icons/google.svg"
                         alt=""
-                        width="24"
+                        width={24}
+                        height={24}
                         className="img-fluid icon"
                       />
                       <span>Continue With Google</span>
                     </button>
                     <button type="button" className="btn account-btn py-4">
-                      <img
-                        src="assets/images/icons/apple.svg"
+                      <Image
+                        src="/assets/images/icons/apple.svg"
                         alt=""
-                        width="24"
+                        width={24}
+                        height={24}
                         className="img-fluid icon"
                       />
                       <span>Continue With Apple</span>
@@ -74,7 +78,7 @@ const Login = () => {
 
                   <LoginForm />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

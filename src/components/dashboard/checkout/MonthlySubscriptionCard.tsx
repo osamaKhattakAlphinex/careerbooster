@@ -176,8 +176,8 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
           {userPackage.title}
         </h1>
         <div className="price flex align-center">
-          <h3 className="theme-text fw-medium mb-0">${userPackage.amount}</h3>
-          <span className="text-2xl theme-text">
+          <h3 className="theme-text-2 fw-medium mb-0">${userPackage.amount}</h3>
+          <span className="text-2xl theme-text-2">
             {userPackage.type === "monthly" && "  / Month"}
             {userPackage.type === "yearly" && "  / Year"}
           </span>

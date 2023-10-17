@@ -188,10 +188,15 @@ const Footer = () => {
         </div>
 
         <div className="py-6 mt-8 mx-auto ">
-          <p className="text-center text-xs">
+          <p className="text-center text-xs ">
             Copyright <span> &copy; CareerBooster 2023</span>.{" "}
-            <Link href="/privacy-policy">Privacy Policy</Link> &nbsp;
-            <Link href="/terms-and-conditions">Terms And Conditions</Link>
+            <Link href="/privacy-policy" className="theme-text-2">
+              Privacy Policy
+            </Link>{" "}
+            &nbsp;
+            <Link href="/terms-and-conditions" className="theme-text-2">
+              Terms And Conditions
+            </Link>
           </p>
         </div>
       </div>
