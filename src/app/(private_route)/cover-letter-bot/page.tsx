@@ -11,6 +11,7 @@ import CoverLetterFileUploader from "@/components/dashboard/cover-letter-bot/Cov
 import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
 import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "@/components/dashboard/LimitCard";
+import axios from "axios";
 
 const CoverLetterWriter = () => {
   const componentRef = useRef<any>(null);
@@ -20,6 +21,7 @@ const CoverLetterWriter = () => {
   const [show, setShow] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>(""); // type
   const [streamedData, setStreamedData] = useState<string>("");
+ 
 
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
@@ -38,7 +40,7 @@ const CoverLetterWriter = () => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
-  const { resumes } = userData;
+   const { resumes } = userData;
 
   const handleGenerate = async () => {
     // await getUserDataIfNotExists();
@@ -84,6 +86,7 @@ const CoverLetterWriter = () => {
         .then(async (resp: any) => {
           if (resp.ok) {
             const reader = resp.body.getReader();
+            let tempText = "";
             while (true) {
               const { done, value } = await reader.read();
               if (done) {
@@ -91,8 +94,10 @@ const CoverLetterWriter = () => {
               }
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
+              tempText += text;
             }
-
+            
+            await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -123,87 +128,25 @@ const CoverLetterWriter = () => {
     }
   };
 
-  const handleGenerateEmail = async () => {
-    // await getUserDataIfNotExists();
-    if (
-      session?.user?.email &&
-      aiInputUserData &&
-      !isNaN(availablePercentageEmail) &&
-      availablePercentageEmail !== 0
-    ) {
-      setMsgLoading(true);
-      setShow(true);
-      setStreamedData("");
-
-      const obj: any = {
-        type: selectedOption,
-        email: session?.user?.email,
-        jobDescription,
-      };
-      if (selectedOption === "file") {
-        obj.file = selectedFile;
-      } else if (selectedOption === "aiResume") {
-        const foundResume = resumes.find(
-          (resume: any) => resume.id === setSelectedResumeId
-        );
-        obj.userData = {
-          jobTitle: foundResume.jobTitle,
-          name: foundResume.name,
-          primarySkills: foundResume.primarySkills,
-          professionalSkills: foundResume.professionalSkills,
-          secondarySkills: foundResume.secondarySkills,
-          education: foundResume.secondarySkills,
-          workExperienceArray: foundResume.workExperienceArray,
-        };
-      } else {
-        obj.userData = aiInputUserData;
+  const saveToDB = async (tempText: string) => {
+    try {
+      const response = await axios.post("/api/users/updateUserData", {
+        data: {
+          email: session?.user?.email,
+          results: {
+            ...userData.results,
+            coverletter: tempText,
+          },
+        },
+      });
+      const { success } = response.data;
+      if (success) {
+        console.log("coverletter saved to DB");
       }
-      // Fetch keywords
-      fetch("/api/emailBot/emailGenerator", {
-        method: "POST",
-        body: JSON.stringify(obj),
-      })
-        .then(async (resp: any) => {
-          if (resp.ok) {
-            const reader = resp.body.getReader();
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) {
-                break;
-              }
-              const text = new TextDecoder().decode(value);
-              setStreamedData((prev) => prev + text);
-            }
-
-            fetch("/api/users/updateUserLimit", {
-              method: "POST",
-              body: JSON.stringify({
-                email: session?.user?.email,
-                type: "email_generation",
-              }),
-            }).then(async (resp: any) => {
-              const res = await resp.json();
-              if (res.success) {
-                const updatedObject = {
-                  ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    email_generation: res.user.userPackageUsed.email_generation,
-                  },
-                };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
-              }
-            });
-          } else {
-            setStreamedData("Error! Something went wrong");
-          }
-        })
-        .finally(() => {
-          setMsgLoading(false);
-        });
+    } catch (error) {
+      console.log(error);
     }
   };
-
   useEffect(() => {
     if (userData && userData?.email) {
       setAiInputUserData({
@@ -217,8 +160,15 @@ const CoverLetterWriter = () => {
         skills: userData?.skills,
       });
     }
+    if (
+      userData.results &&
+      userData.results.coverletter &&
+      userData.results.coverletter !== ""
+    ) {
+      setShow(true)
+      setStreamedData(userData.results.coverletter);
+    }
   }, [userData]);
-
   return (
     <>
       <div className="w-[95%] my-5 ml-10 flex items-center justify-between pt-30">
@@ -381,48 +331,7 @@ const CoverLetterWriter = () => {
                   </Button>
                 </div>
               )}
-            {/* {!isNaN(availablePercentageEmail) &&
-              availablePercentageEmail !== 0 && (
-                <div>
-                  <Button
-                    type="button"
-                    disabled={
-                      msgLoading ||
-                      !session?.user?.email ||
-                      !aiInputUserData ||
-                      selectedOption === "" ||
-                      (selectedOption === "file" && selectedFile === "") ||
-                      (selectedOption === "aiResume" &&
-                        setSelectedResumeId === "") ||
-                      jobDescription === ""
-                    }
-                    onClick={() => handleGenerateEmail()}
-                    className="btn btn-outline-primary-dark"
-                  >
-                    <div className="flex flex-row gap-2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className={`w-4 h-4 ${
-                          msgLoading ? "animate-spin" : ""
-                        }`}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                        />
-                      </svg>
-                      <span>
-                        {msgLoading ? "Please wait..." : "Generate Email"}
-                      </span>
-                    </div>
-                  </Button>
-                </div>
-              )} */}
+           
 
             <ReactToPrint
               trigger={() => (
