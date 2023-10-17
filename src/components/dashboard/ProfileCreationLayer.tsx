@@ -135,7 +135,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       register.scrappedContent !== "" &&
       register.scrapping.education === false
     ) {
-      // set scrapping to true so that we don't send multiple requests
+      // set scrapping to true so that we Don't send multiple requests
       dispatch(setScrapping({ education: true }));
 
       const formData = {
