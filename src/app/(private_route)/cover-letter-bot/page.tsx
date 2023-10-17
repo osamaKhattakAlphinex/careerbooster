@@ -32,10 +32,6 @@ const CoverLetterWriter = () => {
     useState<number>(0);
   const [percentageCalculatedCoverLetter, setPercentageCalculatedCoverLetter] =
     useState<boolean>(false);
-  const [availablePercentageEmail, setAvailablePercentageEmail] =
-    useState<number>(0);
-  const [percentageCalculatedEmail, setPercentageCalculatedEmail] =
-    useState<boolean>(false);
 
   // Redux
   const dispatch = useDispatch();
@@ -135,7 +131,7 @@ const CoverLetterWriter = () => {
           email: session?.user?.email,
           results: {
             ...userData.results,
-            coverletter: tempText,
+            coverLetter: tempText,
           },
         },
       });
@@ -166,7 +162,7 @@ const CoverLetterWriter = () => {
       userData.results.coverletter !== ""
     ) {
       setShow(true)
-      setStreamedData(userData.results.coverletter);
+      setStreamedData(userData.results.coverLetter);
     }
   }, [userData]);
   return (
@@ -188,14 +184,14 @@ const CoverLetterWriter = () => {
           availablePercentage={availablePercentageCoverLetter}
           setAvailablePercentage={setAvailablePercentageCoverLetter}
         />
-        <LimitCard
+        {/* <LimitCard
           title="Email Availble"
           limit={userData?.userPackageData?.limit?.email_generation}
           used={userData?.userPackageUsed?.email_generation}
           setPercentageCalculated={setPercentageCalculatedEmail}
           availablePercentage={availablePercentageEmail}
           setAvailablePercentage={setAvailablePercentageEmail}
-        />
+        /> */}
       </div>
       <div className="flex m-10 mt-2 gap-4">
         <div className="w-full flex flex-col p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">

@@ -76,7 +76,9 @@ const UserSchema = new Schema(
       headline: String,
       about: String,
       jobDescription: String,
-      coverletter: String 
+      coverLetter: String ,
+      
+      
     },
   },
 

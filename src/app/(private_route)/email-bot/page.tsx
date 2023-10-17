@@ -26,10 +26,6 @@ const PersonalizedEmailBot = () => {
   const [jobDescription, setJobDescription] = useState<string>("");
 
   // limit bars
-  const [availablePercentageCoverLetter, setAvailablePercentageCoverLetter] =
-    useState<number>(0);
-  const [percentageCalculatedCoverLetter, setPercentageCalculatedCoverLetter] =
-    useState<boolean>(false);
   const [availablePercentageEmail, setAvailablePercentageEmail] =
     useState<number>(0);
   const [percentageCalculatedEmail, setPercentageCalculatedEmail] =
@@ -91,6 +87,7 @@ const PersonalizedEmailBot = () => {
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
             }
+            
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -105,88 +102,6 @@ const PersonalizedEmailBot = () => {
                   userPackageUsed: {
                     ...userData.userPackageUsed,
                     email_generation: res.user.userPackageUsed.email_generation,
-                  },
-                };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
-              }
-            });
-          } else {
-            setStreamedData("Error! Something went wrong");
-          }
-        })
-        .finally(() => {
-          setMsgLoading(false);
-        });
-    }
-  };
-
-  const handleGenerateCoverLetter = async () => {
-    if (
-      session?.user?.email &&
-      aiInputUserData &&
-      !isNaN(availablePercentageCoverLetter) &&
-      availablePercentageCoverLetter !== 0
-    ) {
-      setMsgLoading(true);
-      setShow(true);
-      setStreamedData("");
-
-      const obj: any = {
-        type: selectedOption,
-        email: session?.user?.email,
-        jobDescription,
-      };
-      if (selectedOption === "file") {
-        obj.file = selectedFile;
-      } else if (selectedOption === "aiResume") {
-        const foundResume = resumes.find(
-          (resume: any) => resume.id === setSelectedResumeId
-        );
-
-        obj.userData = {
-          jobTitle: foundResume.jobTitle,
-          name: foundResume.name,
-          primarySkills: foundResume.primarySkills,
-          professionalSkills: foundResume.professionalSkills,
-          secondarySkills: foundResume.secondarySkills,
-          education: foundResume.secondarySkills,
-          workExperienceArray: foundResume.workExperienceArray,
-        };
-      } else {
-        obj.userData = aiInputUserData;
-      }
-      // Fetch keywords
-      fetch("/api/coverLetterBot/coverLetterGenerator", {
-        method: "POST",
-        body: JSON.stringify(obj),
-      })
-        .then(async (resp: any) => {
-          if (resp.ok) {
-            const reader = resp.body.getReader();
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) {
-                break;
-              }
-              const text = new TextDecoder().decode(value);
-              setStreamedData((prev) => prev + text);
-            }
-
-            fetch("/api/users/updateUserLimit", {
-              method: "POST",
-              body: JSON.stringify({
-                email: session?.user?.email,
-                type: "cover_letter_generation",
-              }),
-            }).then(async (resp: any) => {
-              const res = await resp.json();
-              if (res.success) {
-                const updatedObject = {
-                  ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    cover_letter_generation:
-                      res.user.userPackageUsed.cover_letter_generation,
                   },
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
@@ -235,14 +150,7 @@ const PersonalizedEmailBot = () => {
           availablePercentage={availablePercentageEmail}
           setAvailablePercentage={setAvailablePercentageEmail}
         />
-        <LimitCard
-          title="Cover Letter Availble"
-          limit={userData?.userPackageData?.limit?.cover_letter_generation}
-          used={userData?.userPackageUsed?.cover_letter_generation}
-          setPercentageCalculated={setPercentageCalculatedCoverLetter}
-          availablePercentage={availablePercentageCoverLetter}
-          setAvailablePercentage={setAvailablePercentageCoverLetter}
-        />
+       
       </div>
       <div className="flex m-10 mt-2 gap-4">
         <div className="w-full flex flex-col p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
