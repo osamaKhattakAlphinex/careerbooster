@@ -47,10 +47,10 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const createProfileFromResume = async () => {
     await scrappResumeIfNotExist();
     if (register.scrappedContent) {
-      await fetchBasicDataFromResume();
-      await fetchEducationDataFromResume();
-      await fetchExperienceDataFromResume();
-      await fetchSkillsDataFromResume();
+      fetchBasicDataFromResume();
+      fetchEducationDataFromResume();
+      fetchExperienceDataFromResume();
+      fetchSkillsDataFromResume();
     }
   };
 
@@ -216,10 +216,47 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         if (resp.status === 200) {
           const res = await resp.json();
 
-          if (res.success) {
-            if (res?.data) {
-              const data = JSON.parse(res?.data);
-              const formattedArr = data?.experiences.map((item: any) => {
+          if (res.success && res?.data) {
+            const data = JSON.parse(res?.data);
+
+            const experiencesWithTitle = data?.experiences;
+
+            // loop through this array and call an api for individual one
+            // if the result of an api is not done donot make call to another api
+
+            const promises: any = [];
+            experiencesWithTitle.map((experince: any, index: number) => {
+              try {
+                const promise = axios
+                  .post("/api/homepage/fetchExperienceIndividual", {
+                    content: register.scrappedContent,
+                    jobTitle: experince.jobTitle,
+                    company: experince.company,
+                  })
+                  .then((resp: any) => {
+                    if (resp.status === 200) {
+                      const otherFields = JSON.parse(resp?.data?.data);
+
+                      return {
+                        jobTitle: experince.jobTitle,
+                        company: experince.company,
+                        ...otherFields,
+                      };
+                    }
+                  });
+
+                promises.push(promise);
+              } catch (error) {
+                // skip this promise
+              }
+            });
+
+            let completeExperiences: any = [];
+            // wait for all the promises in the promises array to resolve
+            Promise.all(promises).then((results) => {
+              completeExperiences = results;
+
+              const formattedArr = completeExperiences.map((item: any) => {
                 return {
                   id: makeid(),
                   jobTitle: item.jobTitle,
@@ -247,11 +284,12 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
               } catch (error) {
                 // console.log("Error in sorting experience array: ", error);
               }
+              // console.log("formattedArr: ", formattedArr);
 
               dispatch(setScrapped({ workExperience: true }));
               dispatch(setScrapping({ workExperience: false }));
               dispatch(setStepFive({ list: formattedArr }));
-            }
+            });
           }
         } else {
           dispatch(setScrapped({ workExperience: true }));

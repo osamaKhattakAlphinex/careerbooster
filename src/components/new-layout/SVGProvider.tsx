@@ -37,7 +37,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -82,7 +82,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -170,7 +170,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -330,7 +330,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -348,7 +348,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -373,7 +373,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -391,7 +391,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -416,7 +416,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -433,7 +433,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -457,7 +457,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -475,7 +475,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -500,7 +500,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -517,7 +517,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -541,7 +541,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -558,7 +558,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -582,7 +582,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -600,7 +600,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -625,7 +625,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >
@@ -642,7 +642,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             >
               <g
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               >

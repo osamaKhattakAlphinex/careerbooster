@@ -94,7 +94,7 @@ function FAQItem(props: any) {
                     className="w-6 h-6"
                   >
                     <path
-                      stroke-linecap="round"
+                      strokeLinecap="round"
                       stroke-linejoin="round"
                       d="M12 6v12m6-6H6"
                     />
@@ -109,7 +109,7 @@ function FAQItem(props: any) {
                     className="w-6 h-6"
                   >
                     <path
-                      stroke-linecap="round"
+                      strokeLinecap="round"
                       stroke-linejoin="round"
                       d="M19.5 12h-15"
                     />

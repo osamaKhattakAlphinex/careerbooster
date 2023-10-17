@@ -38,6 +38,8 @@ const CoverLetterWriter = () => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
+  console.clear();
+  console.log(userData);
   const { resumes } = userData;
 
   const handleGenerate = async () => {
