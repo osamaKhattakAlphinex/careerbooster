@@ -18,8 +18,6 @@ import { setUploadedFileName } from "@/store/resumeSlice";
 const RegistrationForm = () => {
   const router = useRouter();
   const params = useSearchParams();
-  
-  
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [submittingError, setSubmittingError] = useState<string>("");
   const [fileUploading, setFileUploading] = useState<boolean>(false);

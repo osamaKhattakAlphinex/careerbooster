@@ -283,7 +283,8 @@ const CoverLetterWriter = () => {
                 htmlFor="default-radio-2"
                 className="ml-2 text-sm font-medium  cursor-pointer"
               >
-                Choose one of the recently AI Generated Resumes
+               
+                Upload a new PDF Resume 
               </label>
             </div>
             <div className="flex items-center mb-4">
@@ -302,7 +303,7 @@ const CoverLetterWriter = () => {
                 htmlFor="default-radio-3"
                 className="ml-2 text-sm font-medium  cursor-pointer"
               >
-                Upload a new PDF Resume 
+                 Choose one of the recently AI Generated Resumes
               </label>
             </div>
           </div>
