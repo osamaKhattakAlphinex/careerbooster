@@ -95,7 +95,7 @@ function FAQItem(props: any) {
                   >
                     <path
                       strokeLinecap="round"
-                      stroke-linejoin="round"
+                      strokeLinejoin="round"
                       d="M12 6v12m6-6H6"
                     />
                   </svg>
@@ -110,7 +110,7 @@ function FAQItem(props: any) {
                   >
                     <path
                       strokeLinecap="round"
-                      stroke-linejoin="round"
+                      strokeLinejoin="round"
                       d="M19.5 12h-15"
                     />
                   </svg>
