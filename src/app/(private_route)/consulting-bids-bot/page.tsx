@@ -12,6 +12,7 @@ import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/C
 import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "@/components/dashboard/LimitCard";
 
+
 const ConsultingBidsGenerator = () => {
   const componentRef = useRef<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
@@ -77,6 +78,7 @@ const ConsultingBidsGenerator = () => {
         .then(async (resp: any) => {
           if (resp.ok) {
             const reader = resp.body.getReader();
+            // let tempText = "" ;
             while (true) {
               const { done, value } = await reader.read();
               if (done) {
@@ -84,7 +86,9 @@ const ConsultingBidsGenerator = () => {
               }
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
+              // tempText += text
             }
+           
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -128,6 +132,7 @@ const ConsultingBidsGenerator = () => {
         skills: userData?.skills,
       });
     }
+   
   }, [userData]);
   return (
     <>

@@ -11,6 +11,7 @@ import CoverLetterFileUploader from "@/components/dashboard/cover-letter-bot/Cov
 import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
 import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "@/components/dashboard/LimitCard";
+import axios from "axios";
 
 const PersonalizedEmailBot = () => {
   const componentRef = useRef<any>(null);
@@ -79,6 +80,7 @@ const PersonalizedEmailBot = () => {
         .then(async (resp: any) => {
           if (resp.ok) {
             const reader = resp.body.getReader();
+            let tempText = "";
             while (true) {
               const { done, value } = await reader.read();
               if (done) {
@@ -86,8 +88,9 @@ const PersonalizedEmailBot = () => {
               }
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
+              tempText += text;
             }
-            
+            await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -116,7 +119,25 @@ const PersonalizedEmailBot = () => {
         });
     }
   };
-
+  const saveToDB = async (tempText: string) => {
+    try {
+      const response = await axios.post("/api/users/updateUserData", {
+        data: {
+          email: session?.user?.email,
+          results: {
+            ...userData.results,
+            emailGeneration: tempText
+          },
+        },
+      });
+      const { success } = response.data;
+      if (success) {
+        console.log("email saved to DB");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     if (userData && userData?.email) {
       setAiInputUserData({
@@ -129,6 +150,14 @@ const PersonalizedEmailBot = () => {
         phone: userData?.phone,
         skills: userData?.skills,
       });
+    }
+    if (
+      userData.results &&
+      userData.results.emailGeneration &&
+      userData.results.emailGeneration !== ""
+    ) {
+      setShow(true)
+      setStreamedData(userData.results.emailGeneration);
     }
   }, [userData]);
   return (

@@ -92,7 +92,6 @@ const CoverLetterWriter = () => {
               setStreamedData((prev) => prev + text);
               tempText += text;
             }
-            
             await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
@@ -137,7 +136,7 @@ const CoverLetterWriter = () => {
       });
       const { success } = response.data;
       if (success) {
-        console.log("coverletter saved to DB");
+        console.log("cover letter saved to DB");
       }
     } catch (error) {
       console.log(error);
@@ -158,8 +157,8 @@ const CoverLetterWriter = () => {
     }
     if (
       userData.results &&
-      userData.results.coverletter &&
-      userData.results.coverletter !== ""
+      userData.results.coverLetter &&
+      userData.results.coverLetter !== ""
     ) {
       setShow(true)
       setStreamedData(userData.results.coverLetter);

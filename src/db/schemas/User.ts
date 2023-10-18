@@ -77,8 +77,8 @@ const UserSchema = new Schema(
       about: String,
       jobDescription: String,
       coverLetter: String ,
-      
-      
+      emailGeneration: String,
+    
     },
   },
 
