@@ -39,8 +39,10 @@ const RegistrationForm = () => {
       password: "",
       confirmpassword: "",
       terms: false,
+      alertConsent:false,
       file: "",
     },
+    
     validationSchema: Yup.object({
       firstName: Yup.string().required("First Name is Required"),
       lastName: Yup.string().required("Last Name is Required"),
@@ -66,8 +68,8 @@ const RegistrationForm = () => {
           email: values.email,
           password: values.password,
           file: values.file,
+          alertConsent : values.alertConsent
         };
-
         axios
           .post("/api/auth/users", obj)
           .then(async function (response) {
@@ -76,7 +78,6 @@ const RegistrationForm = () => {
               await moveResumeToUserFolder(values.file, values.email);
               await updateUser(values.file, values.email);
             }
-
             const res = await signIn("credentials", {
               email: values.email,
               password: values.password,
@@ -101,6 +102,7 @@ const RegistrationForm = () => {
           });
       }
     },
+
   });
 
   const UpdateGohighlevel = async (obj: any) => {
@@ -542,18 +544,19 @@ const RegistrationForm = () => {
               </div>
             </div>
             <div className="text-start my-4">
-              <div className="ml-3 text-sm">
+              <label className="ml-3 text-sm" htmlFor="alertConsent" >
                 <input
-                  id="terms"
-                  aria-describedby="terms"
+                  id="alertConsent"
+                  aria-describedby="alertConsent"
                   type="checkbox"
                   onChange={formik.handleChange}
+                  checked={formik.values.alertConsent ? true : false}
                   className="w-4 mr-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
                 />
                 By checking this box, you consent to receiving SMS, Calls and
                 Emails including important alerts and notifications, from
                 CareerBooster.AI
-              </div>
+              </label>
             </div>
             {submittingError !== "" && (
               <div

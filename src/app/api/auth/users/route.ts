@@ -28,6 +28,7 @@ interface NewUserRequest {
   pdf_files_upload: Number;
   review_resume: Number;
   consulting_bids_generation: Number;
+  alertConsent?: Boolean
 }
 interface NewUserResponse {
   id: string;
@@ -36,6 +37,7 @@ interface NewUserResponse {
   email: string;
   role: string;
   userPackage?: string;
+  alertConsent?: Boolean;
   // phone?: string;
   // contact?: {
   //   country?: string;
@@ -73,6 +75,7 @@ export const POST = async (req: Request): Promise<NewResponse> => {
       firstName: user.firstName,
       lastName: user.lastName,
       role: user.role,
+      alertConsent : user.alertConsent
     },
   });
 };

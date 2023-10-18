@@ -52,6 +52,10 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    alertConsent: {
+      type: Boolean,
+      default: false,
+    },
     userPackage: {
       type: Schema.Types.ObjectId,
       ref: "UserPackage",
