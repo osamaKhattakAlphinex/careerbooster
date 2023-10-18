@@ -21,6 +21,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
+  
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
@@ -28,6 +29,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
+  
 
   useEffect(() => {
     setJobDesc(streamedData);
@@ -85,17 +87,14 @@ const JDGenerator = ({ setJobDesc }: Props) => {
           const reader = res.body.getReader();
           while (true) {
             const { done, value } = await reader.read();
-
             if (done) {
               break;
             }
-
             const text = new TextDecoder().decode(value);
             setStreamedData((prev) => prev + text);
             tempText += text;
           }
         }
-
         setStreamedData((prev) => prev + `</p> <br /> `);
       }
 

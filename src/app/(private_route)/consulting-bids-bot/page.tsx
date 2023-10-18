@@ -11,7 +11,7 @@ import CoverLetterFileUploader from "@/components/dashboard/cover-letter-bot/Cov
 import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
 import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "@/components/dashboard/LimitCard";
-
+import axios from "axios";
 
 const ConsultingBidsGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -57,7 +57,6 @@ const ConsultingBidsGenerator = () => {
         const foundResume = resumes.find(
           (resume: any) => resume.id === setSelectedResumeId
         );
-
         obj.userData = {
           jobTitle: foundResume.jobTitle,
           name: foundResume.name,
@@ -78,7 +77,7 @@ const ConsultingBidsGenerator = () => {
         .then(async (resp: any) => {
           if (resp.ok) {
             const reader = resp.body.getReader();
-            // let tempText = "" ;
+            let tempText = "" ;
             while (true) {
               const { done, value } = await reader.read();
               if (done) {
@@ -86,9 +85,9 @@ const ConsultingBidsGenerator = () => {
               }
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
-              // tempText += text
+              tempText += text
             }
-           
+            await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -118,7 +117,25 @@ const ConsultingBidsGenerator = () => {
         });
     }
   };
-
+ const saveToDB = async (tempText: string) => {
+    try {
+      const response = await axios.post("/api/users/updateUserData", {
+        data: {
+          email: session?.user?.email,
+          results: {
+            ...userData.results,
+            consultingBidsGeneration: tempText
+          },
+        },
+      });
+      const { success } = response.data;
+      if (success) {
+        console.log("email saved to DB");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     if (userData && userData?.email) {
       setAiInputUserData({
@@ -132,7 +149,14 @@ const ConsultingBidsGenerator = () => {
         skills: userData?.skills,
       });
     }
-   
+    if (
+      userData.results &&
+      userData.results.consultingBidsGeneration &&
+      userData.results.consultingBidsGeneration !== ""
+    ) {
+      setShow(true)
+      setStreamedData(userData.results.consultingBidsGeneration);
+    }
   }, [userData]);
   return (
     <>

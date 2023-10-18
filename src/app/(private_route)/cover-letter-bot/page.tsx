@@ -61,7 +61,6 @@ const CoverLetterWriter = () => {
         const foundResume = resumes.find(
           (resume: any) => resume.id === setSelectedResumeId
         );
-
         obj.userData = {
           jobTitle: foundResume.jobTitle,
           name: foundResume.name,
@@ -363,7 +362,6 @@ const CoverLetterWriter = () => {
           {/* <div className="">Download PDF</div> */}
         </div>
       </div>
-
       {show && (
         <div
           className={`w-[95%] text-gray-800  bg-white border border-gray-200 rounded-lg shadow  m-10 ${

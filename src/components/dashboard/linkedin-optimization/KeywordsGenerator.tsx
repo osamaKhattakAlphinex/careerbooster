@@ -14,6 +14,7 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
+  
   const [aiInputUserData, setAiInputUserData] = useState<any>();
 
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);

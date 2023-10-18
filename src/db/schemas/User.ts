@@ -78,7 +78,7 @@ const UserSchema = new Schema(
       jobDescription: String,
       coverLetter: String ,
       emailGeneration: String,
-    
+      consultingBidsGeneration: String,
     },
   },
 
