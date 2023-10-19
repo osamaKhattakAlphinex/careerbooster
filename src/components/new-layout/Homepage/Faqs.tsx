@@ -155,10 +155,9 @@ function FAQList() {
         </div>
         <div className="faq-list">
           {faqs.map((faq, index) => (
-            <div className="col-md-8 mx-auto">
+            <div className="col-md-8 mx-auto" key={index}>
               <FAQItem
                 isOpen={index === 0}
-                key={index}
                 question={faq.question}
                 answer={faq.answer}
               />
