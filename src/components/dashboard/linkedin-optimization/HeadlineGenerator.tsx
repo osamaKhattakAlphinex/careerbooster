@@ -69,11 +69,9 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
             let tempText = "";
             while (true) {
               const { done, value } = await reader.read();
-
               if (done) {
                 break;
               }
-
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
               tempText += text;
@@ -144,6 +142,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
           `/api/users/getOneByEmail?email=${session?.user?.email}`
         );
         const { user } = await res.json();
+        
         dispatch(setUserData(user));
         dispatch(setIsLoading(false));
         dispatch(setField({ name: "isFetched", value: true }));

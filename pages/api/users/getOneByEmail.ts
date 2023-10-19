@@ -13,6 +13,7 @@ const handler: NextApiHandler = async (req, res) => {
 
   const user = await User.findOne({ email: email }).select("-password");
 
+  
   if (!user) {
     return res.status(404).json({ error: "User not found" });
   }

@@ -52,6 +52,10 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    alertConsent: {
+      type: Boolean,
+      default: false,
+    },
     userPackage: {
       type: Schema.Types.ObjectId,
       ref: "UserPackage",
@@ -76,6 +80,9 @@ const UserSchema = new Schema(
       headline: String,
       about: String,
       jobDescription: String,
+      coverLetter: String ,
+      emailGeneration: String,
+      consultingBidsGeneration: String,
     },
   },
 
