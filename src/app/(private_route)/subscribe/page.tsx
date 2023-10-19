@@ -18,7 +18,7 @@ export default function SubscribePage() {
 
   return (
     <main className="flex-grow-1 mb-20">
-      <section className="pt-40">
+      <section className="pt-md-40 pt-15">
         <div className="container">
           {showExpiredAlert && (
             <div className="row justify-center mb-8">

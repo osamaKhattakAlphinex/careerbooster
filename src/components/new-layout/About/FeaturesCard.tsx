@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const FeaturesCard = () => {
   return (
     <section className="py-10 py-lg-15">
@@ -111,7 +113,7 @@ const FeaturesCard = () => {
           data-aos-delay="50"
         >
           <div className="ratio ratio-16x9 rounded-4 overflow-hidden mt-16">
-            <img
+            <Image
               src="assets/images/thumbnails/video-thumb.jpg"
               alt=""
               className="img-fluid w-full h-full object-cover"

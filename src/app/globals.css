@@ -104,6 +104,9 @@
 .logo-text {
   color: black;
 }
+.accordion-btn:hover {
+  color: #6a4dff;
+}
 /* DARK THEME */
 [data-bs-theme="dark"] .nav-link {
   color: #fff;
@@ -203,5 +206,8 @@
   background: #13141e;
 }
 [data-bs-theme="dark"] .logo-text {
+  color: #e6f85e;
+}
+[data-bs-theme="dark"] .accordion-btn:hover {
   color: #e6f85e;
 }

@@ -10,6 +10,7 @@ import { signIn, useSession } from "next-auth/react";
 import { refreshIconRotating } from "@/helpers/iconsProvider";
 import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
+import Image from "next/image";
 
 // export const metadata: Metadata = {
 //   title: "CareerBooster.AI-Register",
@@ -266,12 +267,13 @@ const RegistrationForm = () => {
       <div className="account-wrapper d-flex flex-column justify-center">
         <div className="text-center">
           <a href="">
-            <img
-              src="assets/images/logo.svg"
+            {/* <Image
+              src="/assets/images/logo.svg"
               alt=""
               className="img-fluid"
-              width="165"
-            />
+              width={165}
+              height={40}
+            /> */}
           </a>
           <h3 className="pb-4">Register your Account</h3>
 

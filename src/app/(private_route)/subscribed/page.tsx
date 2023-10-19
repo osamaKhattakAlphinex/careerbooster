@@ -39,7 +39,7 @@ export default async function SubscribedPage(props: Props) {
   } else {
     return (
       <main className="flex-grow-1 mb-20">
-        <section className="py-10 py-lg-15">
+        <section className="pt-md-30 pt-10 py-lg-15">
           <div className="container">
             <div className="row justify-center mb-8">
               <div className="col-lg-10">

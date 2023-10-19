@@ -68,67 +68,66 @@ function FAQItem(props: any) {
 
   return (
     <>
-      <div className="col-md-8 mx-auto">
-        <div
-          className="accordion accordion-flush d-flex flex-column gap-6  "
-          id="faqAccordion"
-        >
-          <div className="accordion-item">
-            <h2 className="accordion-header">
-              <button
-                className="accordion-button text-gray-50"
-                onClick={toggleFAQ}
-                type="button"
-                //   data-bs-toggle="collapse"
-                //   data-bs-target="#faq-collapseOne"
-                //   aria-expanded="false"
-                //   aria-controls="faq-collapseOne"
-              >
-                {!isOpen ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 6v12m6-6H6"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19.5 12h-15"
-                    />
-                  </svg>
-                )}
+      <div
+        className="accordion accordion-flush d-flex flex-column gap-6  "
+        id="faqAccordion"
+      >
+        <div className="accordion-item mb-12">
+          <h2 className="accordion-header ">
+            <button
+              className="theme-text-2 accordion-btn flex flex-row text-left justify-center  items-center text-[1.5rem]"
+              onClick={toggleFAQ}
+              type="button"
+              //   data-bs-toggle="collapse"
+              //   data-bs-target="#faq-collapseOne"
+              //   aria-expanded="false"
+              //   aria-controls="faq-collapseOne"
+            >
+              {!isOpen ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6 mr-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 6v12m6-6H6"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6 mr-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 12h-15"
+                  />
+                </svg>
+              )}
 
-                {props.question}
-              </button>
-            </h2>
-            {isOpen && (
-              <div
-                id="faq-collapseOne"
-                className="accordion-collapse"
-                // data-bs-parent="#faqAccordion"
-              >
-                <div className="accordion-body ">{props.answer}</div>
-              </div>
-            )}
-          </div>
+              {props.question}
+            </button>
+          </h2>
+          {isOpen && (
+            <div
+              id="faq-collapseOne"
+              className="accordion-collapse"
+              // data-bs-parent="#faqAccordion"
+            >
+              <div className="accordion-body ">{props.answer}</div>
+            </div>
+          )}
+          <hr />
         </div>
       </div>
     </>
@@ -156,12 +155,14 @@ function FAQList() {
         </div>
         <div className="faq-list">
           {faqs.map((faq, index) => (
-            <FAQItem
-              isOpen={index === 0}
-              key={index}
-              question={faq.question}
-              answer={faq.answer}
-            />
+            <div className="col-md-8 mx-auto">
+              <FAQItem
+                isOpen={index === 0}
+                key={index}
+                question={faq.question}
+                answer={faq.answer}
+              />
+            </div>
           ))}
         </div>
       </div>
