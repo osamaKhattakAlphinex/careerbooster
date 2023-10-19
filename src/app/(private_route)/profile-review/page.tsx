@@ -10,26 +10,9 @@ import StepFive from "@/components/dashboard/profileReview/StepFive";
 import StepSix from "@/components/dashboard/profileReview/StepSix";
 import ProfilePreview from "@/components/dashboard/profileReview/ProfilePreview";
 import { useDispatch, useSelector } from "react-redux";
-import { signIn } from "next-auth/react";
-import {
-  setActiveStep,
-  setError,
-  setField,
-  setIsSubmitting,
-  setScrapped,
-  setScrapping,
-  setStepFive,
-  setStepFour,
-  setStepOne,
-  setStepSix,
-  setStepThree,
-  setStepTwo,
-} from "@/store/registerSlice";
+import { setActiveStep, setField } from "@/store/registerSlice";
 import StepEight from "@/components/dashboard/profileReview/StepEight";
-import {
-  refreshBigIconRotating,
-  refreshIconRotating,
-} from "@/helpers/iconsProvider";
+import { refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { makeid } from "@/helpers/makeid";
 import { Metadata } from "next";
@@ -52,12 +35,12 @@ const ProfileReview = () => {
   const reduxStep = register.activeStep;
 
   const handleSaveDetails = async () => {
+    dispatch(setField({ name: "isSubmitting", value: true }));
     // make an object
     const obj = {
       firstName: register.stepOne.firstName,
       lastName: register.stepOne.lastName,
       email: userData.email,
-      password: register.stepEight.password,
       file: resume.uploadedFileName,
       phone: register.stepTwo.phoneNumber,
       contact: {
@@ -80,7 +63,11 @@ const ProfileReview = () => {
       .then(async (resp: any) => {
         // Update user data in redux
         dispatch(setUserData(obj));
-        setActiveStep(1);
+        dispatch(setActiveStep(1));
+
+        dispatch(setField({ name: "isSubmitting", value: false }));
+      })
+      .finally(() => {
         router.push("/dashboard?success=1");
       });
   };
@@ -140,6 +127,31 @@ const ProfileReview = () => {
           >
             <div className="col-lg-8 col-xl-6">
               <div className="vstack gap-8" id="contact-form">
+                <div>
+                  {register.activeStep > 1 && (
+                    <button
+                      type="submit"
+                      className="btn btn-secondary-dark"
+                      onClick={(e) => {
+                        dispatch(setActiveStep(register.activeStep - 1));
+                      }}
+                    >
+                      Back
+                    </button>
+                  )}
+                  {register.activeStep < 7 && (
+                    <button
+                      type="submit"
+                      disabled={isNextDisabled()}
+                      className="btn btn-primary-dark float-right"
+                      onClick={(e) => {
+                        dispatch(setActiveStep(register.activeStep + 1));
+                      }}
+                    >
+                      Next
+                    </button>
+                  )}
+                </div>
                 {(register.activeStep === 1 ||
                   register.activeStep === 2 ||
                   register.activeStep === 3) && (

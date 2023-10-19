@@ -399,7 +399,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   // if the user data is still loading
   if (userData.email === "") {
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col items-center justify-center h-screen pt-40">
         <h2 className="text-3xl font-bold text-center">Loading...</h2>
       </div>
     );

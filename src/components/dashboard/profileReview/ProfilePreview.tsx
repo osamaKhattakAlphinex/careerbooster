@@ -14,8 +14,7 @@ import ExperienceCard from "./ExperienceCard";
 const ProfilePreview = () => {
   const dispatch = useDispatch();
   const data = useSelector((state: any) => state.register);
-  // console.clear();
-  console.log(data);
+
   return (
     <div className="">
       <h1 className="text-2xl font-semibold mb-2">Review your Resume</h1>

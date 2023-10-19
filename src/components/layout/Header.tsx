@@ -323,24 +323,26 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <ThemeToggler />
+        <div>
+          <ThemeToggler />
 
-        {/* <!-- Navbar toggler button --> */}
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarContent"
-          aria-controls="navbarContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <div className="navbar-toggler-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
+          {/* <!-- Navbar toggler button --> */}
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarContent"
+            aria-controls="navbarContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <div className="navbar-toggler-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+        </div>
       </div>
     </nav>
   );
