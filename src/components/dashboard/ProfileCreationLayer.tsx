@@ -90,41 +90,52 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       fetch("/api/homepage/fetchRegistrationData", {
         method: "POST",
         body: JSON.stringify(formData),
-      }).then(async (resp: any) => {
-        if (resp.status === 200) {
-          const res = await resp.json();
-          if (res.success) {
-            if (res?.data) {
-              const data = JSON.parse(res?.data);
+      })
+        .then(async (resp: any) => {
+          if (resp.status === 200) {
+            const res = await resp.json();
+            if (res.success && res?.data) {
+              try {
+                const data = JSON.parse(res?.data);
+                dispatch(setScrapped({ basic: true }));
+                dispatch(setScrapping({ basic: false }));
+                dispatch(
+                  setStepOne({
+                    firstName: data?.firstName,
+                    lastName: data?.lastName,
+                  })
+                );
+                dispatch(
+                  setStepTwo({
+                    phoneNumber: data?.phone,
+                    Email: data?.email,
+                  })
+                );
+                dispatch(
+                  setStepThree({
+                    country: data?.country,
+                    street: data?.street,
+                    cityState: data?.cityState,
+                    postalCode: data?.postalCode,
+                  })
+                );
+              } catch (error) {
+                dispatch(setScrapped({ basic: true }));
+                dispatch(setScrapping({ basic: false }));
+              }
+            } else {
               dispatch(setScrapped({ basic: true }));
               dispatch(setScrapping({ basic: false }));
-              dispatch(
-                setStepOne({
-                  firstName: data.firstName,
-                  lastName: data.lastName,
-                })
-              );
-              dispatch(
-                setStepTwo({
-                  phoneNumber: data.phone,
-                  Email: data.email,
-                })
-              );
-              dispatch(
-                setStepThree({
-                  country: data.country,
-                  street: data.street,
-                  cityState: data.cityState,
-                  postalCode: data.postalCode,
-                })
-              );
             }
+          } else {
+            dispatch(setScrapped({ basic: true }));
+            dispatch(setScrapping({ basic: false }));
           }
-        } else {
+        })
+        .catch((error) => {
           dispatch(setScrapped({ basic: true }));
           dispatch(setScrapping({ basic: false }));
-        }
-      });
+        });
     }
   };
 
@@ -146,28 +157,27 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       fetch("/api/homepage/fetchEducationData", {
         method: "POST",
         body: JSON.stringify(formData),
-      }).then(async (resp: any) => {
-        if (resp.status === 200) {
-          const res = await resp.json();
-          if (res.success) {
-            if (res?.data) {
-              const data = JSON.parse(res?.data);
-              const formattedArr = data?.education.map((item: any) => {
-                return {
-                  id: makeid(),
-                  educationLevel: item?.educationLevel,
-                  fieldOfStudy: item?.fieldOfStudy,
-                  schoolName: item?.schoolName,
-                  schoolLocation: item?.schoolLocation,
-                  fromMonth: item?.fromMonth,
-                  fromYear: item?.fromYear,
-                  isContinue: item?.isContinue,
-                  toMonth: item?.toMonth,
-                  toYear: item?.toYear,
-                };
-              });
-
+      })
+        .then(async (resp: any) => {
+          if (resp.status === 200) {
+            const res = await resp.json();
+            if (res.success && res?.data) {
               try {
+                const data = JSON.parse(res?.data);
+                const formattedArr = data?.education.map((item: any) => {
+                  return {
+                    id: makeid(),
+                    educationLevel: item?.educationLevel,
+                    fieldOfStudy: item?.fieldOfStudy,
+                    schoolName: item?.schoolName,
+                    schoolLocation: item?.schoolLocation,
+                    fromMonth: item?.fromMonth,
+                    fromYear: item?.fromYear,
+                    isContinue: item?.isContinue,
+                    toMonth: item?.toMonth,
+                    toYear: item?.toYear,
+                  };
+                });
                 // Sort the array by fromYear and fromMonth
                 formattedArr.sort((a: any, b: any) => {
                   const yearComparison = a.fromYear.localeCompare(b.fromYear);
@@ -177,20 +187,26 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                   return a.fromMonth.localeCompare(b.fromMonth);
                 });
                 formattedArr.reverse();
+                dispatch(setScrapped({ education: true }));
+                dispatch(setScrapping({ education: false }));
               } catch (error) {
                 // console.log("Error in sorting education array: ", error);
+                dispatch(setScrapped({ education: true }));
+                dispatch(setScrapping({ education: false }));
               }
-
+            } else {
               dispatch(setScrapped({ education: true }));
               dispatch(setScrapping({ education: false }));
-              dispatch(setStepFour({ list: formattedArr }));
             }
+          } else {
+            dispatch(setScrapped({ education: true }));
+            dispatch(setScrapping({ education: false }));
           }
-        } else {
+        })
+        .catch((error) => {
           dispatch(setScrapped({ education: true }));
           dispatch(setScrapping({ education: false }));
-        }
-      });
+        });
     }
   };
 
@@ -212,90 +228,98 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       fetch("/api/homepage/fetchExperienceData", {
         method: "POST",
         body: JSON.stringify(formData),
-      }).then(async (resp: any) => {
-        if (resp.status === 200) {
-          const res = await resp.json();
+      })
+        .then(async (resp: any) => {
+          if (resp.status === 200) {
+            const res = await resp.json();
 
-          if (res.success && res?.data) {
-            const data = JSON.parse(res?.data);
+            if (res.success && res?.data) {
+              const data = JSON.parse(res?.data);
 
-            const experiencesWithTitle = data?.experiences;
+              const experiencesWithTitle = data?.experiences;
 
-            // loop through this array and call an api for individual one
-            // if the result of an api is not done donot make call to another api
+              // loop through this array and call an api for individual one
+              // if the result of an api is not done donot make call to another api
 
-            const promises: any = [];
-            experiencesWithTitle.map((experince: any, index: number) => {
-              try {
+              const promises: any = [];
+              experiencesWithTitle.map((experince: any, index: number) => {
                 const promise = axios
                   .post("/api/homepage/fetchExperienceIndividual", {
                     content: register.scrappedContent,
-                    jobTitle: experince.jobTitle,
-                    company: experince.company,
+                    jobTitle: experince?.jobTitle,
+                    company: experince?.company,
                   })
                   .then((resp: any) => {
                     if (resp.status === 200) {
-                      const otherFields = JSON.parse(resp?.data?.data);
+                      try {
+                        const otherFields = JSON.parse(resp?.data?.data);
 
-                      return {
-                        jobTitle: experince.jobTitle,
-                        company: experince.company,
-                        ...otherFields,
-                      };
+                        return {
+                          jobTitle: experince?.jobTitle,
+                          company: experince?.company,
+                          ...otherFields,
+                        };
+                      } catch (error) {
+                        // skip this promise
+                      }
                     }
                   });
 
                 promises.push(promise);
-              } catch (error) {
-                // skip this promise
-              }
-            });
-
-            let completeExperiences: any = [];
-            // wait for all the promises in the promises array to resolve
-            Promise.all(promises).then((results) => {
-              completeExperiences = results;
-
-              const formattedArr = completeExperiences.map((item: any) => {
-                return {
-                  id: makeid(),
-                  jobTitle: item.jobTitle,
-                  company: item.company,
-                  country: item.country,
-                  cityState: item.cityState,
-                  fromMonth: item.fromMonth,
-                  fromYear: item.fromYear,
-                  isContinue: item.isContinue,
-                  toMonth: item.toMonth,
-                  toYear: item.toYear,
-                  description: item.description,
-                };
               });
-              // Sort the array by fromYear and fromMonth
-              try {
-                formattedArr.sort((a: any, b: any) => {
-                  const yearComparison = a.fromYear.localeCompare(b.fromYear);
-                  if (yearComparison !== 0) {
-                    return yearComparison;
-                  }
-                  return a.fromMonth.localeCompare(b.fromMonth);
-                });
-                formattedArr.reverse();
-              } catch (error) {
-                // console.log("Error in sorting experience array: ", error);
-              }
-              // console.log("formattedArr: ", formattedArr);
 
+              let completeExperiences: any = [];
+              // wait for all the promises in the promises array to resolve
+              Promise.all(promises).then((results) => {
+                completeExperiences = results;
+
+                const formattedArr = completeExperiences.map((item: any) => {
+                  return {
+                    id: makeid(),
+                    jobTitle: item?.jobTitle,
+                    company: item?.company,
+                    country: item?.country,
+                    cityState: item?.cityState,
+                    fromMonth: item?.fromMonth,
+                    fromYear: item?.fromYear,
+                    isContinue: item?.isContinue,
+                    toMonth: item?.toMonth,
+                    toYear: item?.toYear,
+                    description: item?.description,
+                  };
+                });
+                // Sort the array by fromYear and fromMonth
+                try {
+                  formattedArr.sort((a: any, b: any) => {
+                    const yearComparison = a.fromYear.localeCompare(b.fromYear);
+                    if (yearComparison !== 0) {
+                      return yearComparison;
+                    }
+                    return a.fromMonth.localeCompare(b.fromMonth);
+                  });
+                  formattedArr.reverse();
+                } catch (error) {
+                  // console.log("Error in sorting experience array: ", error);
+                }
+                // console.log("formattedArr: ", formattedArr);
+
+                dispatch(setStepFive({ list: formattedArr }));
+                dispatch(setScrapped({ workExperience: true }));
+                dispatch(setScrapping({ workExperience: false }));
+              });
+            } else {
               dispatch(setScrapped({ workExperience: true }));
               dispatch(setScrapping({ workExperience: false }));
-              dispatch(setStepFive({ list: formattedArr }));
-            });
+            }
+          } else {
+            dispatch(setScrapped({ workExperience: true }));
+            dispatch(setScrapping({ workExperience: false }));
           }
-        } else {
+        })
+        .catch((err) => {
           dispatch(setScrapped({ workExperience: true }));
           dispatch(setScrapping({ workExperience: false }));
-        }
-      });
+        });
     }
   };
 
@@ -315,22 +339,34 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       fetch("/api/homepage/fetchSkillsData", {
         method: "POST",
         body: JSON.stringify(formData),
-      }).then(async (resp: any) => {
-        const res = await resp.json();
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
 
-        if (res.success) {
-          if (res?.data) {
-            const data = JSON.parse(res?.data);
+          if (res.success && res?.data) {
+            try {
+              const data = JSON.parse(res?.data);
+              dispatch(setScrapped({ skills: true }));
+              dispatch(setScrapping({ skills: false }));
+              dispatch(setStepSix({ list: data }));
+            } catch (error) {
+              dispatch(setScrapped({ skills: true }));
+              dispatch(setScrapping({ skills: false }));
+            }
+          } else {
             dispatch(setScrapped({ skills: true }));
             dispatch(setScrapping({ skills: false }));
-            dispatch(setStepSix({ list: data }));
           }
-        }
-      });
+        })
+        .catch((error) => {
+          dispatch(setScrapped({ skills: true }));
+          dispatch(setScrapping({ skills: false }));
+        });
     }
   };
 
   const updateUser = async () => {
+    console.log("t1 ", "updateUser");
     // make an object
     const obj = {
       firstName: register.stepOne.firstName,
@@ -349,12 +385,14 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       skills: register.stepSix.list,
       wizardCompleted: true,
     };
+    console.log("t1: updateObj: ", obj);
 
     return axios
       .post("/api/users/updateUserData", {
         data: obj,
       })
       .then(async (resp: any) => {
+        console.log("t1: resp: resp", resp);
         if (window) {
           window.location.reload();
         }

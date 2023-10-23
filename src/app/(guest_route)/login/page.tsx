@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Metadata } from "next";
+import LoginForm from "@/components/LoginForm";
 
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Login",
@@ -40,7 +41,7 @@ const Login = () => {
               </div>
               <div className="account-wrapper h-full d-flex flex-column justify-center">
                 <div className="text-center">
-                  <Link href="/">
+                  {/* <Link href="/">
                     <Image
                       width={165}
                       height={40}
@@ -48,8 +49,8 @@ const Login = () => {
                       alt=""
                       className="img-fluid"
                     />
-                  </Link>
-                  <div className="vstack gap-4 mt-10 d-none">
+                  </Link> */}
+                  {/* <div className="vstack gap-4 mt-10 d-none">
                     <button type="button" className="btn account-btn py-4">
                       <Image
                         src="/assets/images/icons/google.svg"
@@ -70,11 +71,11 @@ const Login = () => {
                       />
                       <span>Continue With Apple</span>
                     </button>
-                  </div>
+                  </div> */}
 
-                  <div className="divider-with-text d-none">
+                  {/* <div className="divider-with-text d-none">
                     <span>Or sign in with email</span>
-                  </div>
+                  </div> */}
 
                   <LoginForm />
                 </div>
