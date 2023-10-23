@@ -366,7 +366,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   };
 
   const updateUser = async () => {
-    console.log("t1 ", "updateUser");
     // make an object
     const obj = {
       firstName: register.stepOne.firstName,
@@ -385,14 +384,12 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       skills: register.stepSix.list,
       wizardCompleted: true,
     };
-    console.log("t1: updateObj: ", obj);
 
     return axios
       .post("/api/users/updateUserData", {
         data: obj,
       })
       .then(async (resp: any) => {
-        console.log("t1: resp: resp", resp);
         if (window) {
           window.location.reload();
         }

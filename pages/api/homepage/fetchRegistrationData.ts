@@ -13,8 +13,7 @@ const handler: NextApiHandler = async (req, res) => {
         temperature: 0.5,
       });
 
-      const input = `
-          This is the User Data:
+      const input = `This is the User Data:
           ${content}
 
           Now please give me the following information about the user:
@@ -41,8 +40,7 @@ const handler: NextApiHandler = async (req, res) => {
             postalCode: VALUE_HERE,
           }
 
-          If there is no value Leave that field blank
-      `;
+          If there is no value Leave that field blank`;
 
       try {
         const resp = await model.call(input);

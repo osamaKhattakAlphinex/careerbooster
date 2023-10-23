@@ -12,52 +12,6 @@ const handler: NextApiHandler = async (req, res) => {
         temperature: 0.5,
       });
 
-      // const parser = StructuredOutputParser.fromZodSchema(
-      //   z.object({
-      //     education: z
-      //       .array(
-      //         z.object({
-      //           fields: z.object({
-      //             // id: z.string().describe("random non-repeated id"),
-      //             company: z.string().describe("company name"),
-      //             educationLevel: z
-      //               .string()
-      //               .describe("Education level or Degree Name e.g. Bachelors"),
-      //             fieldOfStudy: z
-      //               .string()
-      //               .describe("Field of Study e.g. Computer Science"),
-      //             schoolName: z
-      //               .string()
-      //               .describe(
-      //                 "School, university, college Name e.g. University of Lagos"
-      //               ),
-      //             schoolLocation: z
-      //               .string()
-      //               .describe(
-      //                 "Address or Location of School, university, college"
-      //               ),
-      //             fromMonth: z
-      //               .string()
-      //               .describe("From Month in full e.g May, January"),
-      //             fromYear: z
-      //               .string()
-      //               .describe("From Year in full e.g 2023, 1997"),
-      //             isContinue: z
-      //               .boolean()
-      //               .describe("Is Education continued? e.g true, false"),
-      //             toMonth: z
-      //               .string()
-      //               .describe("To Month in full e.g May, January"),
-      //             toYear: z.string().describe("To Year in full e.g 2023, 1997"),
-      //           }),
-      //         })
-      //       )
-      //       .describe(
-      //         "List of all Educations from the provided Data without Skipping any of the Education. Each education has the following fields: id, company, educationLevel, fieldOfStudy, schoolName, schoolLocation, fromMonth, fromYear, isContinue, toMonth, toYear. The Array you return must be sorted by year the latest one on top and oldest on the bottom"
-      //       ),
-      //   })
-      // );
-
       const input = `
           This is the User Data:
           ${content}

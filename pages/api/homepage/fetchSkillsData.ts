@@ -28,7 +28,7 @@ const handler: NextApiHandler = async (req, res) => {
 
           Now please give me a List of all Professional, primary, secondary, development, communication etc. Skills from the above content provided.
 
-          The answer MUST be a valid JSON Array of Strings.
+          The answer MUST be a valid Javascript JSON Array of Strings.
       `;
 
       try {

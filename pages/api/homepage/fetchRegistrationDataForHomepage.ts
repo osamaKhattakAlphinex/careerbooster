@@ -33,7 +33,7 @@ const handler: NextApiHandler = async (req, res) => {
           Email Address:
 
 
-          The answer MUST be a valid JSON and formatting should be like this 
+          The answer MUST be a valid JSON and formatting should be like the following 
           replace the VALUE_HERE with the actual value
           {
             firstName: VALUE_HERE,
