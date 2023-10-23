@@ -1,7 +1,7 @@
 import Link from "next/link";
-import LoginForm from "@/components/LoginForm";
+
 import { Metadata } from "next";
-import Image from "next/image";
+
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Login",
 };
@@ -38,7 +38,7 @@ const Login = () => {
                   </svg>
                 </Link>
               </div>
-              {/* <div className="account-wrapper h-full d-flex flex-column justify-center">
+              <div className="account-wrapper h-full d-flex flex-column justify-center">
                 <div className="text-center">
                   <Link href="/">
                     <Image
@@ -78,7 +78,7 @@ const Login = () => {
 
                   <LoginForm />
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
