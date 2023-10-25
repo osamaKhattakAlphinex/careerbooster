@@ -33,6 +33,9 @@ const handler: NextApiHandler = async (req, res) => {
   } else if (req?.query?.email) {
     // for logged in users
     directory = `/public/files/userResumes/${req?.query?.email}`;
+  } else if (req?.query?.type === "linkedin-tool") {
+    // for LinkedIn page
+    directory = "/public/files/linkedin-temp";
   } else {
     // for homepage
     directory = "/public/files/temp";

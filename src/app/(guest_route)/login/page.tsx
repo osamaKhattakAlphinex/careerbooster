@@ -38,9 +38,9 @@ const Login = () => {
                   </svg>
                 </Link>
               </div>
-              {/* <div className="account-wrapper h-full d-flex flex-column justify-center">
+              <div className="account-wrapper h-full d-flex flex-column justify-center">
                 <div className="text-center">
-                  <Link href="/">
+                  {/* <Link href="/">
                     <Image
                       width={165}
                       height={40}
@@ -48,7 +48,7 @@ const Login = () => {
                       alt=""
                       className="img-fluid"
                     />
-                  </Link>
+                  </Link> */}
                   <div className="vstack gap-4 mt-10 d-none">
                     <button type="button" className="btn account-btn py-4">
                       <Image
@@ -78,7 +78,7 @@ const Login = () => {
 
                   <LoginForm />
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
