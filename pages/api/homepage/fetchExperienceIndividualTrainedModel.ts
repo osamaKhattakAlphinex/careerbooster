@@ -39,7 +39,7 @@ const handler: NextApiHandler = async (req, res) => {
 
           isContinue: means if the person  is still working there or not (Is Experience continued? e.g true, false)
 
-          description: Work experience description of this person at ${company}
+          description: fetch Work experience description of this person at ${company} from the User Data provided.
 
           The answer MUST be a valid JSON and formatting should be like this
           replace the VALUE_HERE with the actual values
@@ -58,7 +58,7 @@ const handler: NextApiHandler = async (req, res) => {
 
       try {
         const response = await openai.chat.completions.create({
-          model: "ft:gpt-3.5-turbo-0613:nausal-tech::8DCDhXkQ",
+          model: "ft:gpt-3.5-turbo-0613:careerbooster-ai::8Dv9jyy5",
           messages: [
             {
               role: "user",
