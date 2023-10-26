@@ -17,8 +17,10 @@ const handler: NextApiHandler = async (req, res) => {
           This is the User Data:
           ${content}
 
-          Now please give me a List of All Work Experiences of the user from the above content provided.
-
+          Now please give me a List of All Work Experiences of this person from the above provided content.
+          jobTitle means the job title of the work experience
+          company means the company name of the work experience
+          
           The answer MUST be a valid JSON and formatting should be like this 
           replace the VALUE_HERE with the actual values
           {

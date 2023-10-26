@@ -6,14 +6,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { makeid } from "@/helpers/makeid";
 import {
-  setActiveStep,
-  setError,
   setField,
-  setIsSubmitting,
   setScrapped,
   setScrapping,
   setStepFive,
-  setStepFour,
   setStepOne,
   setStepSix,
   setStepThree,
@@ -244,7 +240,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
               const promises: any = [];
               experiencesWithTitle.map((experince: any, index: number) => {
                 const promise = axios
-                  .post("/api/homepage/fetchExperienceIndividual", {
+                  .post("/api/homepage/fetchExperienceIndividualTrainedModel", {
                     content: register.scrappedContent,
                     jobTitle: experince?.jobTitle,
                     company: experince?.company,

@@ -1,5 +1,6 @@
 import { NextApiHandler } from "next";
-import { OpenAI } from "langchain/llms/openai";
+import OpenAI from "openai";
+import TrainBot from "@/db/schemas/TrainBot";
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
@@ -11,53 +12,10 @@ const handler: NextApiHandler = async (req, res) => {
 
     if (content) {
       // CREATING LLM MODAL
-      const model = new OpenAI({
-        modelName: "gpt-3.5-turbo",
-        temperature: 0.5,
+      const openai = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY,
       });
 
-      // OLD PROMPT
-      // const input = `
-      //     This is the User Data:
-      //     ${content}
-
-      //     Here is the Job Title:
-      //     ${jobTitle}
-
-      //     Here is the Company Name:
-      //     ${company}
-
-      //     Now Find the details for this Work Experience (by Job Title and Company Name) of the user from the above provided User Data.
-      //     and return the following fields for that work experience:
-      //     country, cityState, fromMonth, fromYear, isContinue, toMonth, toYear, description
-
-      //     country means the name of teh country where the user worked
-      //     cityState means the name of the city or state where the user worked
-      //     fromMonth means the month when the user started working (in full e.g. January, May)
-      //     fromYear means the year when the user started working (in full e.g 2023, 1997)
-      //     toMonth means the month when the user stopped working (in full e.g. January, May)
-      //     toYear means the year when the user stopped working (in full e.g 2023, 1997)
-      //     description means the description of the work experience. Gather as much details as you can for this current job
-      //     isContinue means if the user is still working there or not (Is Experience continued? e.g true, false)
-
-      //     The answer MUST be a valid JSON and formatting should be like this
-      //     replace the VALUE_HERE with the actual values
-      //     {
-      //       country: VALUE_HERE,
-      //       cityState: VALUE_HERE,
-      //       fromMonth: VALUE_HERE,
-      //       fromYear: VALUE_HERE,
-      //       toMonth: VALUE_HERE,
-      //       toYear: VALUE_HERE,
-      //       description: VALUE_HERE,
-      //       isContinue: VALUE_HERE,
-      //     }
-
-      //     If there is only one year or date fill it in the toYear and toMonth field
-      //     If there is only Year and no month for an experience record put the year in the toYear field and leave the toMonth field blank
-      //     If there is no value for any field Leave that field blank string DONOT add labels like "N/A" or "Not Available" etc.
-      //     Months should be in full e.g. January, February, March, April, May, June, July, August, September, October, November, and December
-      // `;
       const input = `
       This is the User Data:
           ${content}
@@ -97,7 +55,17 @@ const handler: NextApiHandler = async (req, res) => {
           If there is no value for any field Leave that field blank string and do not add labels like N/A or Not Available etc.`;
 
       try {
-        const resp = await model.call(input);
+        const response = await openai.chat.completions.create({
+          model: "ft:gpt-3.5-turbo-0613:nausal-tech::8DCDhXkQ",
+          messages: [
+            {
+              role: "user",
+              content: input,
+            },
+          ],
+          temperature: 1,
+          max_tokens: 2048,
+        });
 
         // const trainingDataset = {
         //   messages: [
@@ -112,9 +80,21 @@ const handler: NextApiHandler = async (req, res) => {
         //   ],
         // };
         // const resp = await chain4.call({ query: input });
+
+        // make a trainBot entry
+        const obj = {
+          type: "register.wizard.individualExperience",
+          input: input,
+          output: response.choices[0].message.content,
+          idealOutput: "",
+          status: "pending",
+        };
+
+        await TrainBot.create({ ...obj });
+
         return res.status(200).json({
           success: true,
-          data: resp,
+          data: response.choices[0].message.content,
           input: input,
           // trainingDataset: trainingDataset,
         });
