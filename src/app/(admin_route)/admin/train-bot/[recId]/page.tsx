@@ -25,7 +25,6 @@ const ReviewTrainBotRecord = ({ params }: { params: { recId: string } }) => {
 
   const handleSave = async () => {
     if (!saving) {
-      setSaving(true);
       try {
         JSON.parse(idealOutput);
       } catch (err) {
@@ -33,6 +32,7 @@ const ReviewTrainBotRecord = ({ params }: { params: { recId: string } }) => {
         return;
       }
 
+      setSaving(true);
       // Save Record
       const record: any = await axios
         .put(`/api/trainBot/${params.recId}`, {
