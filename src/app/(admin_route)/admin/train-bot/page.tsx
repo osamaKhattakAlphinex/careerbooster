@@ -151,6 +151,9 @@ const TrainBotAdminPage = () => {
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     <th scope="col" className="px-6 py-3">
+                      S.No
+                    </th>
+                    <th scope="col" className="px-6 py-3">
                       Type
                     </th>
                     <th scope="col" className="px-6 py-3">
@@ -186,11 +189,12 @@ const TrainBotAdminPage = () => {
                     </tr>
                   )}
                   {records &&
-                    records.map((rec: any) => (
+                    records.map((rec: any, index: number) => (
                       <tr
                         key={rec._id}
                         className="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                       >
+                        <td className="px-6 py-4">{index + 1}</td>
                         <th
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"

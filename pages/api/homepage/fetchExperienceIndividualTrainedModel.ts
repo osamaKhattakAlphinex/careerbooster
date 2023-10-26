@@ -25,19 +25,21 @@ const handler: NextApiHandler = async (req, res) => {
           and provide the following fields for that work experience:
           country, cityState, fromMonth, fromYear, isContinue, toMonth, toYear, description
 
-          cityState:  name of the city or state where the ${personName} worked in ${company}
+          country: name of the country where this person worked in ${company}
 
-          fromMonth: means the month when ${personName} started working at ${company}
+          cityState:  name of the city or state where this person worked in ${company}
 
-          fromYear: means the year when ${personName} started working at ${company}
+          fromMonth: means the month when this person started working at ${company} The month name must be in full e.g. Juanuary, February etc.
 
-          toMonth: means the month when ${personName} stopped working at ${company}
+          fromYear: means the year when this person started working at ${company}
 
-          toYear: means the year when ${personName} stopped working at ${company}
+          toMonth: means the month when this person stopped working at ${company} The month name must be in full e.g. Juanuary, February etc.
 
-          isContinue: means if ${personName}  is still working there or not (Is Experience continued? e.g true, false)
+          toYear: means the year when this person stopped working at ${company}
 
-          description: Work experience description of ${personName} at ${company}
+          isContinue: means if the person  is still working there or not (Is Experience continued? e.g true, false)
+
+          description: Work experience description of this person at ${company}
 
           The answer MUST be a valid JSON and formatting should be like this
           replace the VALUE_HERE with the actual values
@@ -52,7 +54,7 @@ const handler: NextApiHandler = async (req, res) => {
             description: VALUE_HERE
           }
 
-          If there is no value for any field Leave that field blank string and do not add labels like N/A or Not Available etc.`;
+          If there is no value for any field Leave that field blank e.g: ""  and do not add labels like "N/A" or "Not Available" etc.`;
 
       try {
         const response = await openai.chat.completions.create({
