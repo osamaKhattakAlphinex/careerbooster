@@ -99,10 +99,10 @@ const RegistrationForm = () => {
             } else {
               setSubmittingError("Something went wrong");
             }
-          })
-          .finally(() => {
-            setSubmitting(false);
           });
+        // .finally(() => {
+        //   setSubmitting(false);
+        // });
       }
     },
   });

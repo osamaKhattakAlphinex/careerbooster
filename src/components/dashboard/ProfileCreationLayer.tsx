@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DidYouKnowCard from "./DidYouKnowCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 import { makeid } from "@/helpers/makeid";
 import {
   setField,
@@ -21,6 +22,20 @@ import { usePathname } from "next/navigation";
 
 interface Props {
   children: React.ReactNode;
+}
+
+// to Remove special characters from string
+function removeSpecialChars(str: string) {
+  // Remove new lines
+  str = str.replace(/[\r\n]+/gm, "");
+
+  // Remove Unicode characters
+  str = str.replace(/[^\x00-\x7F]/g, "");
+
+  // Remove icons
+  str = str.replace(/[^\w\s]/gi, "");
+
+  return str;
 }
 
 const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
@@ -43,10 +58,10 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const createProfileFromResume = async () => {
     await scrappResumeIfNotExist();
     if (register.scrappedContent) {
-      // fetchBasicDataFromResume();
-      // fetchEducationDataFromResume();
+      fetchBasicDataFromResume();
+      fetchEducationDataFromResume();
       fetchExperienceDataFromResume();
-      // fetchSkillsDataFromResume();
+      fetchSkillsDataFromResume();
     }
   };
 
@@ -62,7 +77,9 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         }),
       });
       const res = await resp.json();
-      dispatch(setField({ name: "scrappedContent", value: res.text }));
+
+      const cleanText = removeSpecialChars(res.text);
+      dispatch(setField({ name: "scrappedContent", value: cleanText }));
 
       return res;
     }
@@ -244,6 +261,11 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                     content: register.scrappedContent,
                     jobTitle: experince?.jobTitle,
                     company: experince?.company,
+                    trainBotData: {
+                      userEmail: userData.email,
+                      fileAddress: userData.defaultResumeFile,
+                    },
+                    timeout: 120000, // abort api call after 2 minutes
                   })
                   .then((resp: any) => {
                     if (resp.status === 200) {
@@ -266,43 +288,50 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
 
               let completeExperiences: any = [];
               // wait for all the promises in the promises array to resolve
-              Promise.all(promises).then((results) => {
-                completeExperiences = results;
+              Promise.all(promises)
+                .then((results) => {
+                  completeExperiences = results;
 
-                const formattedArr = completeExperiences.map((item: any) => {
-                  return {
-                    id: makeid(),
-                    jobTitle: item?.jobTitle,
-                    company: item?.company,
-                    country: item?.country,
-                    cityState: item?.cityState,
-                    fromMonth: item?.fromMonth,
-                    fromYear: item?.fromYear,
-                    isContinue: item?.isContinue,
-                    toMonth: item?.toMonth,
-                    toYear: item?.toYear,
-                    description: item?.description,
-                  };
-                });
-                // Sort the array by fromYear and fromMonth
-                try {
-                  formattedArr.sort((a: any, b: any) => {
-                    const yearComparison = a.fromYear.localeCompare(b.fromYear);
-                    if (yearComparison !== 0) {
-                      return yearComparison;
-                    }
-                    return a.fromMonth.localeCompare(b.fromMonth);
+                  const formattedArr = completeExperiences.map((item: any) => {
+                    return {
+                      id: makeid(),
+                      jobTitle: item?.jobTitle,
+                      company: item?.company,
+                      country: item?.country,
+                      cityState: item?.cityState,
+                      fromMonth: item?.fromMonth,
+                      fromYear: item?.fromYear,
+                      isContinue: item?.isContinue,
+                      toMonth: item?.toMonth,
+                      toYear: item?.toYear,
+                      description: item?.description,
+                    };
                   });
-                  formattedArr.reverse();
-                } catch (error) {
-                  // console.log("Error in sorting experience array: ", error);
-                }
-                // console.log("formattedArr: ", formattedArr);
+                  // Sort the array by fromYear and fromMonth
+                  try {
+                    formattedArr.sort((a: any, b: any) => {
+                      const yearComparison = a.fromYear.localeCompare(
+                        b.fromYear
+                      );
+                      if (yearComparison !== 0) {
+                        return yearComparison;
+                      }
+                      return a.fromMonth.localeCompare(b.fromMonth);
+                    });
+                    formattedArr.reverse();
+                  } catch (error) {
+                    // console.log("Error in sorting experience array: ", error);
+                  }
+                  // console.log("formattedArr: ", formattedArr);
 
-                dispatch(setStepFive({ list: formattedArr }));
-                dispatch(setScrapped({ workExperience: true }));
-                dispatch(setScrapping({ workExperience: false }));
-              });
+                  dispatch(setStepFive({ list: formattedArr }));
+                  dispatch(setScrapped({ workExperience: true }));
+                  dispatch(setScrapping({ workExperience: false }));
+                })
+                .catch(() => {
+                  dispatch(setScrapped({ workExperience: true }));
+                  dispatch(setScrapping({ workExperience: false }));
+                });
             } else {
               dispatch(setScrapped({ workExperience: true }));
               dispatch(setScrapping({ workExperience: false }));
@@ -362,7 +391,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   };
 
   const updateUser = async () => {
-    return;
     // make an object
     const obj = {
       firstName: register.stepOne.firstName,

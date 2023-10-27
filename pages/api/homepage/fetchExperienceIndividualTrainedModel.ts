@@ -9,6 +9,7 @@ const handler: NextApiHandler = async (req, res) => {
     const jobTitle = reqBody.jobTitle;
     const company = reqBody.company;
     const personName = reqBody.personName;
+    const trainBotData = reqBody.trainBotData;
 
     if (content) {
       // CREATING LLM MODAL
@@ -19,26 +20,18 @@ const handler: NextApiHandler = async (req, res) => {
       const input = `
       This is the User Data:
           ${content}
+          ___________________
 
           Now Find the details for  Job Title: ${jobTitle} at  ${company}  from the above provided User Data.
-
           and provide the following fields for that work experience:
           country, cityState, fromMonth, fromYear, isContinue, toMonth, toYear, description
-
           country: name of the country where this person worked in ${company}
-
           cityState:  name of the city or state where this person worked in ${company}
-
           fromMonth: means the month when this person started working at ${company} The month name must be in full e.g. Juanuary, February etc.
-
           fromYear: means the year when this person started working at ${company}
-
           toMonth: means the month when this person stopped working at ${company} The month name must be in full e.g. Juanuary, February etc.
-
           toYear: means the year when this person stopped working at ${company}
-
           isContinue: means if the person  is still working there or not (Is Experience continued? e.g true, false)
-
           description: fetch Work experience description of this person at ${company} from the User Data provided.
 
           The answer MUST be a valid JSON and formatting should be like this
@@ -54,7 +47,7 @@ const handler: NextApiHandler = async (req, res) => {
             description: VALUE_HERE
           }
 
-          If there is no value for any field Leave that field blank e.g: ""  and do not add labels like "N/A" or "Not Available" etc.`;
+          If there is no value for any field Leave that field blank e.g: ""  and do not add labels like "N/A", "Unknown" or "Not Available" etc.`;
 
       try {
         const response = await openai.chat.completions.create({
@@ -66,22 +59,8 @@ const handler: NextApiHandler = async (req, res) => {
             },
           ],
           temperature: 1,
-          max_tokens: 2048,
+          max_tokens: 456,
         });
-
-        // const trainingDataset = {
-        //   messages: [
-        //     {
-        //       role: "user",
-        //       content: input,
-        //     },
-        //     {
-        //       role: "assistant",
-        //       content: resp,
-        //     },
-        //   ],
-        // };
-        // const resp = await chain4.call({ query: input });
 
         // make a trainBot entry
         const obj = {
@@ -90,6 +69,9 @@ const handler: NextApiHandler = async (req, res) => {
           output: response.choices[0].message.content,
           idealOutput: "",
           status: "pending",
+          userEmail: trainBotData.userEmail,
+          fileAddress: trainBotData.fileAddress,
+          Instructions: `Find [[${jobTitle}]] at  [[${company}]]`,
         };
 
         await TrainBot.create({ ...obj });
@@ -98,10 +80,9 @@ const handler: NextApiHandler = async (req, res) => {
           success: true,
           data: response.choices[0].message.content,
           input: input,
-          // trainingDataset: trainingDataset,
         });
       } catch (error) {
-        return res.status(400).json({ success: false, error });
+        return res.status(400).json({ success: false, error, input: input });
       }
     }
   }
