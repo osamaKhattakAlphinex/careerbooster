@@ -51,3 +51,24 @@ export const PUT = async (
     });
   }
 };
+export const DELETE = async (
+  req: any,
+  { params }: { params: { recId: string } }
+) => {
+  try {
+    const { recId } = params;
+    console.log(recId);
+
+    await startDB();
+    const trainBot = await TrainBot.deleteOne({ _id: recId });
+    return NextResponse.json({
+      success: true,
+      data: trainBot,
+    });
+  } catch (err) {
+    return NextResponse.json({
+      success: false,
+      result: "User not found",
+    });
+  }
+};
