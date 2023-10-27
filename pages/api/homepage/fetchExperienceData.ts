@@ -1,10 +1,12 @@
 import { NextApiHandler } from "next";
 import { OpenAI } from "langchain/llms/openai";
+import TrainBot from "@/db/schemas/TrainBot";
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const reqBody = JSON.parse(req.body);
     const content = reqBody.content;
+    const trainBotData = reqBody.trainBotData;
 
     if (content) {
       // CREATING LLM MODAL
@@ -40,6 +42,20 @@ const handler: NextApiHandler = async (req, res) => {
 
       try {
         const resp = await model.call(input);
+
+        // make a trainBot entry
+        const obj = {
+          type: "register.wizard.listExperiences",
+          input: input,
+          output: resp,
+          idealOutput: "",
+          status: "pending",
+          userEmail: trainBotData.userEmail,
+          fileAddress: trainBotData.fileAddress,
+          Instructions: `Get List of all Experiences with jobTitle and company only just check if the list is missing any data`,
+        };
+
+        await TrainBot.create({ ...obj });
         // const resp = await chain4.call({ query: input });
         return res.status(200).json({ success: true, data: resp });
       } catch (error) {
