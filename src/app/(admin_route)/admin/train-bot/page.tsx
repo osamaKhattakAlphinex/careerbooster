@@ -77,19 +77,22 @@ const TrainBotAdminPage = () => {
   };
 
   const handleDelete = async (id: string) => {
-    try {
-      let result = await fetch("http://localhost:3001/api/trainBot/" + id, {
-        method: "DELETE",
-      });
-      const res = await result.json();
-      console.log(result);
-      if (res.success) {
-        return fetchRecords();
-      } else {
-        return alert("User Not Found");
+    const c = confirm("Are you sure you want to delete this Record?");
+    if (c) {
+      try {
+        let result = await fetch("http://localhost:3001/api/trainBot/" + id, {
+          method: "DELETE",
+        });
+        const res = await result.json();
+        console.log(result);
+        if (res.success) {
+          return fetchRecords();
+        } else {
+          return alert("User Not Found");
+        }
+      } catch (error) {
+        console.log("error ===> ", error);
       }
-    } catch (error) {
-      console.log("error ===> ", error);
     }
   };
 
