@@ -43,10 +43,10 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const createProfileFromResume = async () => {
     await scrappResumeIfNotExist();
     if (register.scrappedContent) {
-      fetchBasicDataFromResume();
-      fetchEducationDataFromResume();
+      // fetchBasicDataFromResume();
+      // fetchEducationDataFromResume();
       fetchExperienceDataFromResume();
-      fetchSkillsDataFromResume();
+      // fetchSkillsDataFromResume();
     }
   };
 
@@ -362,6 +362,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   };
 
   const updateUser = async () => {
+    return;
     // make an object
     const obj = {
       firstName: register.stepOne.firstName,
