@@ -76,6 +76,23 @@ const TrainBotAdminPage = () => {
     }
   };
 
+  const handleDelete = async (id: string) => {
+    try {
+      let result = await fetch("http://localhost:3001/api/trainBot/" + id, {
+        method: "DELETE",
+      });
+      const res = await result.json();
+      console.log(result);
+      if (res.success) {
+        return fetchRecords();
+      } else {
+        return alert("User Not Found");
+      }
+    } catch (error) {
+      console.log("error ===> ", error);
+    }
+  };
+
   // when tab changes fetch records for that tab
   useEffect(() => {
     if (activeTab && activeTab !== "") {
@@ -228,6 +245,13 @@ const TrainBotAdminPage = () => {
                           >
                             Review
                           </Link>
+
+                          <button
+                            className="font-medium ml-8 text-blue-600 dark:text-blue-500 hover:underline"
+                            onClick={() => handleDelete(rec._id)}
+                          >
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     ))}

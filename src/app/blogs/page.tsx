@@ -40,7 +40,7 @@ export default function BlogsPage() {
       {/* <!-- Page header --> */}
       <PageHeader title="Blog Posts" />
       <Blog
-        src="assets/images/thumbnails/1.jpg"
+        src="/assets/images/thumbnails/1.jpg"
         category="Design"
         date="2 - 4 - 2023"
         minutesViewed="5 Minutes Read"

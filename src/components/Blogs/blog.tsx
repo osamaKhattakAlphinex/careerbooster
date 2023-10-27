@@ -11,6 +11,8 @@ export default function Blog(props: any) {
               <div className="card-header border-0 bg-transparent ratio ratio-6x4 rounded overflow-hidden">
                 <Link href="article.html" className="d-block">
                   <Image
+                    width={348}
+                    height={227}
                     src={props.src}
                     alt=""
                     className="img-fluid post-thumbnail w-full h-full object-cover"
