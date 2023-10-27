@@ -1,6 +1,5 @@
 "use client";
 import { useEffect } from "react";
-
 import { useRouter, useSearchParams } from "next/navigation";
 import StepOne from "@/components/dashboard/profileReview/StepOne";
 import StepTwo from "@/components/dashboard/profileReview/StepTwo";
@@ -14,8 +13,6 @@ import { setActiveStep, setField } from "@/store/registerSlice";
 import StepEight from "@/components/dashboard/profileReview/StepEight";
 import { refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
-import { makeid } from "@/helpers/makeid";
-import { Metadata } from "next";
 import { setUserData } from "@/store/userDataSlice";
 
 // export const metadata: Metadata = {
@@ -139,6 +136,7 @@ const ProfileReview = () => {
                       Back
                     </button>
                   )}
+
                   {register.activeStep < 7 && (
                     <button
                       type="submit"

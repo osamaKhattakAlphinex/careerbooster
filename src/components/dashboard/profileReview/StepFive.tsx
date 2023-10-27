@@ -1,17 +1,25 @@
 import AddNewExperienceCard from "./AddNewExperienceCard";
 import ExperienceCard from "./ExperienceCard";
 import { useDispatch, useSelector } from "react-redux";
-import { setScrapped, setStepFive } from "@/store/registerSlice";
+import {
+  setField,
+  setScrapped,
+  setScrapping,
+  setStepFive,
+} from "@/store/registerSlice";
 import { WorkExperience } from "@/store/userDataSlice";
 import EditExperienceCard from "./EditExperienceCard";
 import { plusSimpleIcon } from "@/helpers/iconsProvider";
 import { useEffect } from "react";
+import { makeid } from "@/helpers/makeid";
+import axios from "axios";
 // import { useEffect } from "react";
 
 const StepFive = () => {
   // Redux
   const dispatch = useDispatch();
   const stepFive = useSelector((state: any) => state.register.stepFive);
+  const register = useSelector((state: any) => state.register);
   const { list, state } = stepFive;
   const userData = useSelector((state: any) => state.userData);
 
@@ -21,11 +29,156 @@ const StepFive = () => {
     }
   }, [userData]);
 
+  // Fetch Text from CV if not already fetched
+  const scrappResumeIfNotExist = async () => {
+    if (register.scrappedContent === "" && userData.defaultResumeFile) {
+      const resp = await fetch("/api/homepage/fetchTextFromCV", {
+        method: "POST",
+        body: JSON.stringify({
+          file: userData.defaultResumeFile,
+          folder: "resumes",
+          email: userData.email,
+        }),
+      });
+      const res = await resp.json();
+      dispatch(setField({ name: "scrappedContent", value: res.text }));
+
+      return res;
+    }
+  };
+
+  const fetchExperienceDataFromResume = async (refetch = false) => {
+    if (
+      (refetch || register.scrapped.workExperience === false) &&
+      userData.defaultResumeFile &&
+      register.scrapping.workExperience === false &&
+      register.scrappedContent !== ""
+    ) {
+      // set scrapping to true so that we don't send multiple requests
+      dispatch(setScrapping({ workExperience: true }));
+
+      const formData = {
+        // file: userData.defaultResumeFile,
+        content: register.scrappedContent,
+      };
+
+      fetch("/api/homepage/fetchExperienceData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      })
+        .then(async (resp: any) => {
+          if (resp.status === 200) {
+            const res = await resp.json();
+
+            if (res.success && res?.data) {
+              const data = JSON.parse(res?.data);
+
+              const experiencesWithTitle = data?.experiences;
+
+              // loop through this array and call an api for individual one
+              // if the result of an api is not done donot make call to another api
+
+              const promises: any = [];
+              experiencesWithTitle.map((experince: any, index: number) => {
+                const promise = axios
+                  .post("/api/homepage/fetchExperienceIndividualTrainedModel", {
+                    content: register.scrappedContent,
+                    jobTitle: experince?.jobTitle,
+                    company: experince?.company,
+                    personName: userData.firstName + " " + userData.lastName,
+                  })
+                  .then((resp: any) => {
+                    if (resp.status === 200) {
+                      try {
+                        const otherFields = JSON.parse(resp?.data?.data);
+
+                        return {
+                          jobTitle: experince?.jobTitle,
+                          company: experince?.company,
+                          ...otherFields,
+                        };
+                      } catch (error) {
+                        // skip this promise
+                      }
+                    }
+                  });
+
+                promises.push(promise);
+              });
+
+              let completeExperiences: any = [];
+              // wait for all the promises in the promises array to resolve
+              Promise.all(promises).then((results) => {
+                completeExperiences = results;
+
+                const formattedArr = completeExperiences.map((item: any) => {
+                  return {
+                    id: makeid(),
+                    jobTitle: item?.jobTitle,
+                    company: item?.company,
+                    country: item?.country,
+                    cityState: item?.cityState,
+                    fromMonth: item?.fromMonth,
+                    fromYear: item?.fromYear,
+                    isContinue: item?.isContinue,
+                    toMonth: item?.toMonth,
+                    toYear: item?.toYear,
+                    description: item?.description,
+                  };
+                });
+                // Sort the array by fromYear and fromMonth
+                try {
+                  formattedArr.sort((a: any, b: any) => {
+                    const yearComparison = a.fromYear.localeCompare(b.fromYear);
+                    if (yearComparison !== 0) {
+                      return yearComparison;
+                    }
+                    return a.fromMonth.localeCompare(b.fromMonth);
+                  });
+                  formattedArr.reverse();
+                } catch (error) {
+                  // console.log("Error in sorting experience array: ", error);
+                }
+                // console.log("formattedArr: ", formattedArr);
+
+                dispatch(setStepFive({ list: formattedArr }));
+                dispatch(setScrapped({ workExperience: true }));
+                dispatch(setScrapping({ workExperience: false }));
+              });
+            } else {
+              dispatch(setScrapped({ workExperience: true }));
+              dispatch(setScrapping({ workExperience: false }));
+            }
+          } else {
+            dispatch(setScrapped({ workExperience: true }));
+            dispatch(setScrapping({ workExperience: false }));
+          }
+        })
+        .catch((err) => {
+          dispatch(setScrapped({ workExperience: true }));
+          dispatch(setScrapping({ workExperience: false }));
+        });
+    }
+  };
+
+  useEffect(() => {
+    scrappResumeIfNotExist();
+  }, [userData.email]);
+
+  if (register.scrapping.workExperience) {
+    return (
+      <div className="pl-12">
+        <h3>Please wait</h3>
+        <p>Refetching Experience data from your Resume...</p>
+      </div>
+    );
+  }
+
   return (
     <>
-      {/* {state === "show" && (
+      {state === "show" && register.scrappedContent !== "" && (
         <div
-          className="flex items-center bg-blue-500  text-sm  px-4 py-3"
+          className="flex items-center bg-blue-500 text-gray-100  text-sm  px-4 py-3"
           role="alert"
         >
           <svg
@@ -51,7 +204,7 @@ const StepFive = () => {
             to refetch Experience List from your Resume.
           </p>
         </div>
-      )} */}
+      )}
 
       {state === "add" && <AddNewExperienceCard />}
 
