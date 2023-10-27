@@ -49,7 +49,7 @@ const ReviewTrainBotRecord = ({ params }: { params: { recId: string } }) => {
           setSaving(false);
         });
 
-      // fetch pending records again
+      // Fetch pending records again
       axios
         .get("/api/trainBot", {
           params: {
@@ -105,7 +105,11 @@ const ReviewTrainBotRecord = ({ params }: { params: { recId: string } }) => {
             <p>User Email: {rec.userEmail}</p>
             <p className="flex gap-1">
               File:
-              <a href="" className="cursor-pointer flex gap-1 hover:font-bold">
+              <a
+                href={`/files/userResumes/${rec.userEmail}/${rec.fileAddress}`}
+                className="text-sm cursor-pointer flex gap-1 hover:font-bold"
+                target="_blank"
+              >
                 {rec.fileAddress} {exterLinkIconSmall}
               </a>
             </p>
