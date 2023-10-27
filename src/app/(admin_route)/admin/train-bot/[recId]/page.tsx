@@ -1,5 +1,11 @@
 "use client";
-import { checkIconSmall, leftArrowIcon } from "@/helpers/iconsProvider";
+import { getFormattedDate } from "@/helpers/getFormattedDateTime";
+import {
+  checkIconSmall,
+  exterLinkIconSmall,
+  infoSmallIcon,
+  leftArrowIcon,
+} from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -94,8 +100,15 @@ const ReviewTrainBotRecord = ({ params }: { params: { recId: string } }) => {
 
       <div className=" p-8">
         <div className="flex justify-between">
-          <div className="flex flex-col gap-1">
-            <p>Generated on: 25-july-2023 05:100 AM</p>
+          <div className="flex flex-col gap-0">
+            <p>Generated on: {getFormattedDate(rec.createdAt)}</p>
+            <p>User Email: {rec.userEmail}</p>
+            <p className="flex gap-1">
+              File:
+              <a href="" className="cursor-pointer flex gap-1 hover:font-bold">
+                {rec.fileAddress} {exterLinkIconSmall}
+              </a>
+            </p>
             <p>
               Status:{" "}
               {rec.status === "pending" && (
@@ -114,6 +127,18 @@ const ReviewTrainBotRecord = ({ params }: { params: { recId: string } }) => {
                 </span>
               )}
             </p>
+            <div
+              className="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+              role="alert"
+            >
+              {infoSmallIcon}
+              <span className="sr-only">Info</span>
+              <div>
+                <span className="font-medium">
+                  {rec.Instructions || "No instructions provided"}
+                </span>
+              </div>
+            </div>
           </div>
           <div>
             <button

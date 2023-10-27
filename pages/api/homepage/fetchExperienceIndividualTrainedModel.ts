@@ -71,7 +71,7 @@ const handler: NextApiHandler = async (req, res) => {
           status: "pending",
           userEmail: trainBotData.userEmail,
           fileAddress: trainBotData.fileAddress,
-          Instructions: `Trying to fetch Individual Experience for user with email ${trainBotData.userEmail} at ${company}`,
+          Instructions: `Find [[${jobTitle}]] at  [[${company}]]`,
         };
 
         await TrainBot.create({ ...obj });
