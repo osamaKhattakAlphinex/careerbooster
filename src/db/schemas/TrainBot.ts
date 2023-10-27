@@ -18,6 +18,9 @@ const TrainBotSchema = new Schema(
     idealOutput: {
       type: String,
     },
+    userEmail: String,
+    fileAddress: String,
+    Instructions: String,
     status: {
       type: String,
       enum: ["pending", "reviewed", "trained"],
