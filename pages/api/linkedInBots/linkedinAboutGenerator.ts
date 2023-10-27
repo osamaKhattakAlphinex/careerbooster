@@ -19,6 +19,7 @@ const handler: NextApiHandler = async (req, res) => {
 
       let contentTxt = docs.map((doc: any) => doc.pageContent);
       const content = contentTxt.join(" ");
+     
 
       if (content) {
         // CREATING LLM MODAL
@@ -30,20 +31,21 @@ const handler: NextApiHandler = async (req, res) => {
         const input = `
             This is the User data:
             ${content}
-            Write a maximum of 2000 characters copy for the “About Section” from the  above data . Use the following instructions.
-            - It should be detailed but compact, and engaging
+            Write a maximum of 2000 characters copy for the “About Section” of my LinkedIn based the above data. Use the following instructions.
 
-            - Use relevant industry jargon as necessary. Make sure to provide a brief rundown of the main technical skills related to my job title. 
+          - It should be detailed but compact, and engaging
 
-            - Hook the audience right away and make the first sentence count by showing passion.
+          - Use relevant industry jargon as necessary. Make sure to provide a brief rundown of the main technical skills related to my job title. 
 
-            - Provide a professional introduction explaining the present role and framing past job titles.
+          - Hook the audience right away and make the first sentence count by showing passion.
 
-            - Highlight successes and the services I can offer to potential clients.
+          - Provide a professional introduction explaining the present role and framing past job titles.
 
-            - Include a call to action.
+          - Highlight successes and the services I can offer to potential clients.
 
-             Just give me the answer not add any extra labels
+          - Include a call to action.
+
+          Just give me the answer not add any extra labels
 
 
         `;
