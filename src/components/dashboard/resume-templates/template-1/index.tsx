@@ -3,6 +3,7 @@ import { memo, useEffect, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   setBasicInfo,
   setField,
@@ -101,7 +102,6 @@ const ResumeTemplate1 = ({
 }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
-  console.log("🚀 ~ file: index.tsx:102 ~ resume:", resume);
 
   return (
     <div className="w-full first-page text-gray-900">
