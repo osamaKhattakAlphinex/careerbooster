@@ -1,5 +1,5 @@
 "use client";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -102,6 +102,12 @@ const ResumeTemplate1 = ({
 }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
+  console.log("🚀 ~ file: index.tsx:105 ~ resume:", resume);
+  const [show, setShow] = useState(false);
+  const [primarySkill1, setPrimarySkill1] = useState<string>("");
+  const updatePrimarySkill = () => {
+    dispatch(setPrimarySkills(primarySkill1));
+  };
 
   return (
     <div className="w-full first-page text-gray-900">
@@ -240,11 +246,11 @@ const ResumeTemplate1 = ({
                 Skills
               </h3>
               <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-              <ul className="pl-0 flex flex-col gap-1 mb-4 text-sm">
-                <li className="font-semibold uppercase">primary</li>
+              <ul className="pl-0 flex  flex-col gap-1 mb-4 text-sm">
+                <li className="font-semibold  uppercase">primary</li>
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
-                    className="hover:shadow-md parent hover:bg-gray-100 flex justify-between items-center"
+                    className="hover:shadow-md parent  hover:bg-gray-100 flex justify-between items-center"
                     key={i}
                   >
                     <EditableField
@@ -277,7 +283,12 @@ const ResumeTemplate1 = ({
                         const removeSkill = resume.primarySkills.filter(
                           (item: any) => item !== skill
                         );
-                        dispatch(setRemovePrimarySkills(removeSkill));
+                        dispatch(
+                          setPrimarySkills({
+                            ...resume,
+                            primarySkills: removeSkill,
+                          })
+                        );
                         saveResumeToDB({
                           ...resume,
                           primarySkills: removeSkill,
@@ -289,6 +300,45 @@ const ResumeTemplate1 = ({
                     </div>
                   </li>
                 ))}
+                {show ? (
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      updatePrimarySkill();
+                    }}
+                    className="border-gray-400 border rounded-2xl "
+                  >
+                    <div className=" w-full rounded-2xl flex h-9">
+                      <input
+                        type="text"
+                        value={primarySkill1}
+                        placeholder="Please add Skill"
+                        className="bg-white outline-none rounded-2xl px-2 w-full"
+                        autoFocus
+                        onChange={(e) => setPrimarySkill1(e.target.value)}
+                      />
+                      <input
+                        type="submit"
+                        className="bg-indigo-500 h-9 px-2 text-white rounded-r-2xl"
+                        value="Submit"
+                      />
+                    </div>
+                  </form>
+                ) : (
+                  " "
+                )}
+                <div
+                  className="border-2 text-black cursor-pointer  "
+                  onClick={() => setShow(true)}
+                >
+                  + add
+                </div>
+                <div
+                  className="border-2 text-black cursor-pointer  hidden"
+                  onClick={() => setShow(true)}
+                >
+                  Cancel
+                </div>
               </ul>
             </>
           )}
