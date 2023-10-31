@@ -38,7 +38,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/1.png"
+                      src="/assets/images/review/8.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -110,7 +110,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/2.png"
+                      src="/assets/images/review/9.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -180,7 +180,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/3.png"
+                      src="/assets/images/review/3.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -250,7 +250,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/4.png"
+                      src="/assets/images/review/6.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -320,7 +320,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/1.png"
+                      src="/assets/images/review/1.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -390,7 +390,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/1.png"
+                      src="/assets/images/review/7.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -459,7 +459,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/2.png"
+                      src="/assets/images/review/2.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -528,7 +528,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/3.png"
+                      src="/assets/images/review/12.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -598,7 +598,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/4.png"
+                      src="/assets/images/review/4.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -667,7 +667,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/1.png"
+                      src="/assets/images/review/7.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -735,17 +735,17 @@ const Reviews = () => {
         </div>
       </div>
 
-      <div className="review-rolling-carousel-container-reversed mt-6">
-        <div className="swiper review-rolling-carousel-reversed">
+      <div className="review-rolling-carousel-container">
+        <div className="swiper review-rolling-carousel">
           <div className="swiper-wrapper rolling-carousel-wrapper">
             <div className="swiper-slide h-auto">
-              <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
+              <div className="review-card rounded h-full p-6 border theme-rating-card border-opacity-10">
                 <div className="d-flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-circle overflow-hidden">
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/1.png"
+                      src="/assets/images/review/8.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -817,7 +817,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/2.png"
+                      src="/assets/images/review/9.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -887,7 +887,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/3.png"
+                      src="/assets/images/review/3.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -957,7 +957,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/4.png"
+                      src="/assets/images/review/6.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -1027,7 +1027,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/1.png"
+                      src="/assets/images/review/1.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -1097,7 +1097,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/1.png"
+                      src="/assets/images/review/7.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -1166,7 +1166,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/2.png"
+                      src="/assets/images/review/2.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -1235,7 +1235,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/3.png"
+                      src="/assets/images/review/12.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -1305,7 +1305,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/4.png"
+                      src="/assets/images/review/4.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />
@@ -1374,7 +1374,7 @@ const Reviews = () => {
                     <Image
                       width={48}
                       height={48}
-                      src="/assets/images/review/1.png"
+                      src="/assets/images/review/7.jpg"
                       alt=""
                       className="w-full h-full object-cover"
                     />

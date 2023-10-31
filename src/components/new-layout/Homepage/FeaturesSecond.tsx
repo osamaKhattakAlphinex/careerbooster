@@ -16,18 +16,16 @@ const FeaturesSecond = () => {
                 Unveil The Secret...
               </h4>
               <h1 className="theme-feature-heading  md:text-[40px] my-5 text-[24px]">
-                Craft a Winning
-                <span className="theme-text"> Executive Resume</span> in Just 7
+                Transforms your Resume into a Job-Winning Masterpiece in Mere
                 Minutes!
               </h1>
               <h4 className="theme-feature-heading  mb-8 md:text-[24px] text-[17px] ">
                 Stand Out from the Crowd and Secure Your Dream Job Faster
               </h4>
               <p className="mb-6">
-                Discover the expert formula that transforms your resume into a
-                job-winning masterpiece in mere minutes. Say goodbye to career
-                frustrations and hello to boundless opportunities! Your success
-                story starts here.
+                Discover the expert formula to Craft a Winning Executive Resume
+                in Just 7 Minutes. Say goodbye to career frustrations and hello
+                to boundless opportunities! Your success story starts here.
               </p>
               <Link
                 href="/register"
@@ -68,9 +66,8 @@ const FeaturesSecond = () => {
                 Unlock Hidden Career Advancements
               </h4>
               <h1 className="theme-feature-heading  md:text-[40px] my-5 text-[24px] ">
-                Supercharge Your
-                <span className="theme-text "> LinkedIn</span> Networking for
-                Confidential Dream Jobs
+                Keyword Optimize Your LinkedIn to Access Confidential
+                Senior-Level Jobs
               </h1>
               <h4 className="theme-feature-heading  mb-8 md:text-[24px] text-[17px]">
                 Don{"'"}t Miss Out on Lucrative Unadvertised Opportunities
@@ -121,8 +118,8 @@ const FeaturesSecond = () => {
                 Stop Wasting Hours on Tailored Cover Letters!
               </h4>
               <h1 className="theme-feature-heading  md:text-[40px] my-5 text-[24px]">
-                Unlock the Future of Job Applications with AI-Powered
-                <span className="theme-text"> Cover Letters. </span>
+                Unlock the Future of Job Applications with AI-Powered Cover
+                Letters
               </h1>
               <h4 className="theme-feature-heading  md:text-[24px] text-[17px]  mb-8">
                 Craft Tailor-Made Cover Letters for Every Job in Seconds!
@@ -132,7 +129,7 @@ const FeaturesSecond = () => {
                 cover letters for job applications? Our AI-powered system
                 streamlines the process, allowing you to create customized cover
                 letters in mere seconds. Say goodbye to the time-consuming grind
-                and embrace a more efficient way to land your dream job!{'"'}
+                and embrace a more efficient way to land your dream job!
               </p>
 
               <Link
@@ -174,9 +171,7 @@ const FeaturesSecond = () => {
                 Discover the Strength of Your Resume
               </h4>
               <h1 className="theme-feature-heading  md:text-[40px] my-5 text-[24px]">
-                Conquer the ATS with Our
-                <span className="theme-text"> Free ATS Scan </span>
-                Service!
+                Conquer the ATS with Our Free ATS Scan Service!
               </h1>
               <h4 className="theme-feature-heading  md:text-[24px] text-[17px]  mb-8">
                 Ensure Your Resume Navigates Robots and Recruiters Effortlessly
@@ -222,9 +217,8 @@ const FeaturesSecond = () => {
                 Unlock Resume Excellence
               </h4>
               <h1 className="theme-feature-heading  md:text-[40px] my-5 text-[24px]">
-                Get Free
-                <span className="theme-text"> Resume Review: </span> Don
-                {"'"}t Let Your Resume Undersell Your Achievements
+                Get Free Resume Review: Don{"'"}t Let Your Resume Undersell Your
+                Achievements
               </h1>
               <h4 className="theme-feature-heading  md:text-[24px] text-[17px]  mb-8">
                 Eliminate Costly Mistakes and Supercharge Your Career Success!
@@ -235,7 +229,7 @@ const FeaturesSecond = () => {
                 the common mistakes that could be holding you back. Elevate your
                 professional journey by crafting a compelling, interview-winning
                 resume with our Ai Powered Resume Writer. Your dream job awaits
-                - seize it with a flawless resume!
+                – seize it with a flawless resume!
               </p>
 
               <Link
