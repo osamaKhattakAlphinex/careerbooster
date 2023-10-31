@@ -6,7 +6,7 @@ const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const reqBody = JSON.parse(req.body);
     const content = reqBody.content;
-    const trainBotData = reqBody.trainBotData;
+    const trainBotData = reqBody?.trainBotData;
 
     if (content) {
       // CREATING LLM MODAL
@@ -47,19 +47,21 @@ const handler: NextApiHandler = async (req, res) => {
       try {
         const resp = await model.call(input);
 
-        // make a trainBot entry
-        const obj = {
-          type: "register.wizard.basicInfo",
-          input: input,
-          output: resp,
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Fetching basic information e.g. Name, email, phone, address, etc.`,
-        };
+        if (trainBotData) {
+          // make a trainBot entry
+          const obj = {
+            type: "register.wizard.basicInfo",
+            input: input,
+            output: resp,
+            idealOutput: "",
+            status: "pending",
+            userEmail: trainBotData.userEmail,
+            fileAddress: trainBotData.fileAddress,
+            Instructions: `Fetching basic information e.g. Name, email, phone, address, etc.`,
+          };
 
-        await TrainBot.create({ ...obj });
+          await TrainBot.create({ ...obj });
+        }
 
         // const resp = await chain4.call({ query: input });
         return res.status(200).json({ success: true, data: resp });

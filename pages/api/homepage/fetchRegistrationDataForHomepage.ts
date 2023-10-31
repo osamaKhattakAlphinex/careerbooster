@@ -3,10 +3,24 @@ import { OpenAI } from "langchain/llms/openai";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import path from "path";
 
+// to Remove special characters from string
+function removeSpecialChars(str: string) {
+  // Remove new lines
+  str = str.replace(/[\r\n]+/gm, "");
+
+  // Remove Unicode characters
+  str = str.replace(/[^\x00-\x7F]/g, "");
+
+  // Remove icons
+  str = str.replace(/[^\w\s]/gi, "");
+
+  return str;
+}
+
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const fileName = req.body.fileName;
-    
+
     // For Registration if file is uploaded then load content from that fiel
     if (fileName) {
       // load file
@@ -15,7 +29,10 @@ const handler: NextApiHandler = async (req, res) => {
       const docs = await loader.load();
 
       let contentTxt = docs.map((doc: any) => doc.pageContent);
-      const content = contentTxt.join(" ");
+
+      const contentAll = contentTxt.join(" ");
+      const content = removeSpecialChars(contentAll);
+
       if (content) {
         // CREATING LLM MODAL
         const model = new OpenAI({
@@ -46,6 +63,7 @@ const handler: NextApiHandler = async (req, res) => {
 
         try {
           const resp = await model.call(input);
+
           // const resp = await chain4.call({ query: input });
           return res.status(200).json({ success: true, data: resp });
         } catch (error) {
