@@ -19,7 +19,7 @@ const handler: NextApiHandler = async (req, res) => {
           This is the User Data:
           ${content}
 
-          Now please give me a List of All Education from the above content provided.
+          Now please give me a List of All Education from the above user data provided.
 
           The answer MUST be a valid JSON and formatting should be like this 
           replace the VALUE_HERE with the actual values
