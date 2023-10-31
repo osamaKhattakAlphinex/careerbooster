@@ -155,16 +155,35 @@ const resumeSlice = createSlice({
         primarySkills: action.payload.primarySkills,
       };
     },
+    setRemovePrimarySkills(state, action) {
+      return {
+        ...state,
+        primarySkills: action.payload,
+      };
+    },
+    
     setSecondarySkills(state, action) {
       return {
         ...state,
         secondarySkills: action.payload.secondarySkills,
       };
     },
+    setRemoveSecondarySkills(state, action) {
+      return {
+        ...state,
+        secondarySkills: action.payload,
+      };
+    },
     setProfessionalSkills(state, action) {
       return {
         ...state,
         professionalSkills: action.payload.professionalSkills,
+      };
+    },
+    setRemoveProfessionalSkills(state, action) {
+      return {
+        ...state,
+        professionalSkills: action.payload,
       };
     },
     // setLoadingState(state, action) {
@@ -191,6 +210,9 @@ export const {
   setWorkExperienceArray,
   resetResume,
   // setLoadingState,
+  setRemovePrimarySkills,
+  setRemoveProfessionalSkills,
+  setRemoveSecondarySkills
 } = resumeSlice.actions;
 
 export default resumeSlice.reducer;

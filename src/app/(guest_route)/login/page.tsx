@@ -71,7 +71,7 @@ const Login = () => {
                       />
                       <span>Continue With Apple</span>
                     </button>
-                  </div> */}
+                  </div>  */}
 
                   {/* <div className="divider-with-text d-none">
                     <span>Or sign in with email</span>

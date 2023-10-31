@@ -36827,3 +36827,10 @@ article img {
 .border-stylee {
   border-color: gray !important;
 }
+.parent .child {
+  display: none; /* Hide child divs by default */
+}
+
+.parent:hover .child {
+  display: block; /* Show child divs when the parent is hovered */
+}

@@ -2,20 +2,25 @@ import { NextApiHandler } from "next";
 import { OpenAI } from "langchain/llms/openai";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import path from "path";
-
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const fileName = req.body.fileName;
-    
-    // For Registration if file is uploaded then load content from that fiel
+
+    // For LinkedIn Tool if file is uploaded then load content from that fiel
     if (fileName) {
       // load file
-      const dir = path.join(process.cwd() + "/public", "/files", `/temp`);
+      const dir = path.join(
+        process.cwd() + "/public",
+        "/files",
+        `/linkedin-temp`
+      );
       const loader = new PDFLoader(`${dir}/${fileName}`);
       const docs = await loader.load();
 
       let contentTxt = docs.map((doc: any) => doc.pageContent);
       const content = contentTxt.join(" ");
+     
+
       if (content) {
         // CREATING LLM MODAL
         const model = new OpenAI({
@@ -24,25 +29,26 @@ const handler: NextApiHandler = async (req, res) => {
         });
 
         const input = `
-          This is the User Data:
-          ${content}
+            This is the User data:
+            ${content}
+            Write a maximum of 2000 characters copy for the “About Section” of my LinkedIn based the above data. Use the following instructions.
 
-          Now please give me the following information about the user:
-          First Name:
-          Last Name:
-          Email Address:
+          - It should be detailed but compact, and engaging
+
+          - Use relevant industry jargon as necessary. Make sure to provide a brief rundown of the main technical skills related to my job title. 
+
+          - Hook the audience right away and make the first sentence count by showing passion.
+
+          - Provide a professional introduction explaining the present role and framing past job titles.
+
+          - Highlight successes and the services I can offer to potential clients.
+
+          - Include a call to action.
+
+          Just give me the answer not add any extra labels
 
 
-          The answer MUST be a valid JSON and formatting should be like the following 
-          replace the VALUE_HERE with the actual value
-          {
-            firstName: VALUE_HERE,
-            lastName: VALUE_HERE,
-            email: VALUE_HERE,
-          }
-
-          If there is no value Leave that field blank
-      `;
+        `;
 
         try {
           const resp = await model.call(input);

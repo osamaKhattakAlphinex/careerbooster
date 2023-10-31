@@ -3,6 +3,7 @@ import { memo, useEffect, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   setBasicInfo,
   setField,
@@ -11,9 +12,13 @@ import {
   setSecondarySkills,
   setSummary,
   setWorkExperienceArray,
+  setRemovePrimarySkills,
+  setRemoveProfessionalSkills,
+  setRemoveSecondarySkills,
 } from "@/store/resumeSlice";
 import {
   contactIcon,
+  crossIcon,
   educationIcon,
   emailIcon,
   linkedInIcon,
@@ -97,8 +102,6 @@ const ResumeTemplate1 = ({
 }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
-
-  //
 
   return (
     <div className="w-full first-page text-gray-900">
@@ -240,12 +243,17 @@ const ResumeTemplate1 = ({
               <ul className="pl-0 flex flex-col gap-1 mb-4 text-sm">
                 <li className="font-semibold uppercase">primary</li>
                 {resume?.primarySkills.map((skill: string, i: number) => (
-                  <li className="hover:shadow-md hover:bg-gray-100" key={i}>
+                  <li
+                    className="hover:shadow-md parent hover:bg-gray-100 flex justify-between items-center"
+                    key={i}
+                  >
                     <EditableField
                       value={skill}
                       onSave={(value: string) => {
                         let updatedSkills = resume.primarySkills.map(
                           (skill: string, index: number) => {
+                            console.log(index);
+
                             if (index === i) {
                               return value;
                             }
@@ -264,6 +272,21 @@ const ResumeTemplate1 = ({
                         });
                       }}
                     />
+                    <div
+                      onClick={() => {
+                        const removeSkill = resume.primarySkills.filter(
+                          (item: any) => item !== skill
+                        );
+                        dispatch(setRemovePrimarySkills(removeSkill));
+                        saveResumeToDB({
+                          ...resume,
+                          primarySkills: removeSkill,
+                        });
+                      }}
+                      className="w-4 h-4 text-red-500 cursor-pointer child"
+                    >
+                      {crossIcon}
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -394,10 +417,13 @@ const ResumeTemplate1 = ({
                 </h3>
                 <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
                 <ul className="pl-0  flex flex-col gap-1 mb-4 text-sm">
-                  <li className="font-semibold uppercase ">Professional</li>
+                  <li className="font-semibold  uppercase ">Professional</li>
                   {resume?.professionalSkills.map(
                     (skill: string, i: number) => (
-                      <li key={i} className="hover:shadow-md hover:bg-gray-100">
+                      <li
+                        key={i}
+                        className="hover:shadow-md parent hover:bg-gray-100 flex justify-between items-center"
+                      >
                         <EditableField
                           style={{ width: "100%" }}
                           value={skill}
@@ -422,6 +448,24 @@ const ResumeTemplate1 = ({
                             });
                           }}
                         />
+                        <div
+                          onClick={() => {
+                            const removeProSkill =
+                              resume.professionalSkills.filter(
+                                (item: any) => item !== skill
+                              );
+                            dispatch(
+                              setRemoveProfessionalSkills(removeProSkill)
+                            );
+                            saveResumeToDB({
+                              ...resume,
+                              professionalSkills: removeProSkill,
+                            });
+                          }}
+                          className="w-4 h-4 text-red-500 cursor-pointer child"
+                        >
+                          {crossIcon}
+                        </div>
                       </li>
                     )
                   )}
@@ -442,7 +486,10 @@ const ResumeTemplate1 = ({
               <ul className="pl-0 flex flex-col gap-1 mb-4 text-sm">
                 <li className="font-semibold uppercase">Secondary</li>
                 {resume?.secondarySkills.map((skill: string, i: number) => (
-                  <li key={i} className="hover:shadow-md hover:bg-gray-100">
+                  <li
+                    key={i}
+                    className="hover:shadow-md parent hover:bg-gray-100 flex justify-between items-center "
+                  >
                     {/* {skill} */}
                     <EditableField
                       value={skill}
@@ -467,6 +514,24 @@ const ResumeTemplate1 = ({
                         });
                       }}
                     />
+                    <div
+                      onClick={() => {
+                        const removeSecondarySkill =
+                          resume.secondarySkills.filter(
+                            (item: any) => item !== skill
+                          );
+                        dispatch(
+                          setRemoveSecondarySkills(removeSecondarySkill)
+                        );
+                        saveResumeToDB({
+                          ...resume,
+                          secondarySkills: removeSecondarySkill,
+                        });
+                      }}
+                      className="w-4 h-4 text-red-500 cursor-pointer child"
+                    >
+                      {crossIcon}
+                    </div>
                   </li>
                 ))}
               </ul>
