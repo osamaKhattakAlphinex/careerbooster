@@ -49,9 +49,11 @@ const ProfileCompletionAlert = () => {
               />
             </svg>
           </span>
-          Crucial! Review your profile, and update missing details for improved
-          results. &nbsp;
-          <Link href="/profile-review">Click here</Link>
+          <p>
+            Crucial! Review your profile, and update missing details for
+            improved results. &nbsp;
+            <Link href="/profile-review">Click here</Link>
+          </p>
         </div>
       </div>
     );

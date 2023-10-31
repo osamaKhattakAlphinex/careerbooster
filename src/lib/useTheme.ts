@@ -11,7 +11,7 @@ const useTheme = (): [Theme, () => void] => {
     if (storedTheme) {
       setTheme(storedTheme);
     } else {
-      setTheme("light");
+      setTheme("dark");
     }
   }, []);
 
