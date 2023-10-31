@@ -16,6 +16,9 @@ const inactiveCSS =
 
 const TrainBotAdminPage = () => {
   const [activeTab, setActiveTab] = useState("pending");
+  const [showRecordsType, setShowRecordsType] = useState<string>(
+    "register.wizard.basicInfo"
+  );
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [downloading, setDownloading] = useState<boolean>(false);
@@ -27,6 +30,7 @@ const TrainBotAdminPage = () => {
         .get("/api/trainBot", {
           params: {
             status: activeTab,
+            type: showRecordsType,
           },
         })
         .then((res: any) => {
@@ -102,7 +106,7 @@ const TrainBotAdminPage = () => {
       setRecords([]);
       fetchRecords();
     }
-  }, [activeTab]);
+  }, [activeTab, showRecordsType]);
 
   return (
     <div className="pt-30">
@@ -118,7 +122,37 @@ const TrainBotAdminPage = () => {
 
       <div className="flex flex-col gap-2 items-center justify-center">
         <div className=" p-8 flex flex-col gap-2 border w-11/12">
-          <h2 className="text-xl ">Train AI Bots</h2>
+          <div className="flex justify-between">
+            <h2 className="text-xl ">Datasets for Training Models</h2>
+
+            {/* Dropdown */}
+            <div className="flex flex-row gap-2 items-center float-right">
+              <label htmlFor="status" className="text-sm font-medium">
+                Show records:
+              </label>
+              <select
+                name="status"
+                id="status"
+                className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+                onChange={(e) => setShowRecordsType(e.target.value)}
+                value={showRecordsType}
+              >
+                <option value="register.wizard.basicInfo">
+                  Basic Information
+                </option>
+                <option value="register.wizard.listEducation">
+                  Education List
+                </option>
+                <option value="register.wizard.listExperiences">
+                  Experiences List
+                </option>
+                <option value="register.wizard.individualExperience">
+                  Individual Experience
+                </option>
+                <option value="register.wizard.listSkills">Skills List</option>
+              </select>
+            </div>
+          </div>
 
           {/* Tabs */}
 
@@ -241,16 +275,16 @@ const TrainBotAdminPage = () => {
                         <td className="px-6 py-4">
                           {getFormattedDate(rec.createdAt)}
                         </td>
-                        <td className="px-6 py-4 ">
+                        <td className="flex gap-2 mt-2  items-center ">
                           <Link
                             href={`/admin/train-bot/${rec._id}`}
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                            className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
                           >
                             Review
                           </Link>
 
                           <button
-                            className="font-medium ml-8 text-blue-600 dark:text-blue-500 hover:underline"
+                            className="px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 no-underline"
                             onClick={() => handleDelete(rec._id)}
                           >
                             Delete

@@ -98,6 +98,10 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         type: "basicInfo",
         // file: userData.defaultResumeFile,
         content: register.scrappedContent,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
       };
 
       fetch("/api/homepage/fetchRegistrationData", {
@@ -165,6 +169,10 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       const formData = {
         // file: userData.defaultResumeFile,
         content: register.scrappedContent,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
       };
 
       fetch("/api/homepage/fetchEducationData", {
@@ -236,6 +244,10 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       const formData = {
         // file: userData.defaultResumeFile,
         content: register.scrappedContent,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
       };
 
       fetch("/api/homepage/fetchExperienceData", {
@@ -359,6 +371,10 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       const formData = {
         // file: userData.defaultResumeFile,
         content: register.scrappedContent,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
       };
 
       fetch("/api/homepage/fetchSkillsData", {

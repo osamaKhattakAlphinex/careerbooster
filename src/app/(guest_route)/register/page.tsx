@@ -1,5 +1,5 @@
 import RegistrationForm from "@/components/new-layout/Register/RegistraionForm";
-import RegistrationImage from "@/components/new-layout/Register/RegistrationImage";
+
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Register",

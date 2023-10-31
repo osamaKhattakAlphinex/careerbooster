@@ -1,5 +1,5 @@
 "use client";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,9 +12,6 @@ import {
   setSecondarySkills,
   setSummary,
   setWorkExperienceArray,
-  setRemovePrimarySkills,
-  setRemoveProfessionalSkills,
-  setRemoveSecondarySkills,
 } from "@/store/resumeSlice";
 import {
   contactIcon,
@@ -102,6 +99,50 @@ const ResumeTemplate1 = ({
 }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
+  const [newPrimarySkill, setNewPrimarySkill] = useState(false);
+  const [newSecondarySkill, setNewSecondarySkill] = useState(false);
+  const [newProfessionalSkill, setNewProfessionalSkill] = useState(false);
+  const [primarySkillAddButtonVisible, setPrimarySkillAddButtonVisible] =
+    useState(false);
+  const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
+    useState(false);
+  const [
+    professionalSkillAddButtonVisible,
+    setProfessionalSkillAddButtonVisible,
+  ] = useState(false);
+  const [primarySkill, setPrimarySkill] = useState<string>("");
+  const [secondarySkill, setSecondarySkill] = useState<string>("");
+  const [professionalSkill, setProfessionalSkill] = useState<string>("");
+  const addPrimarySkill = () => {
+    const primarySkills = resume?.primarySkills;
+    const updatedSkills = [...primarySkills];
+    updatedSkills.push(primarySkill);
+    dispatch(setPrimarySkills({ primarySkills: updatedSkills }));
+    saveResumeToDB({
+      ...resume,
+      primarySkills: updatedSkills,
+    });
+  };
+  const addSecondarySkill = () => {
+    const secondarySkills = resume?.secondarySkills;
+    const updatedSkills = [...secondarySkills];
+    updatedSkills.push(secondarySkill);
+    dispatch(setSecondarySkills({ secondarySkills: updatedSkills }));
+    saveResumeToDB({
+      ...resume,
+      secondarySkills: updatedSkills,
+    });
+  }
+  const addProfessionalSkill = () => {
+    const professionalSkills = resume?.professionalSkills;
+    const updatedSkills = [...professionalSkills];
+    updatedSkills.push(professionalSkill);
+    dispatch(setProfessionalSkills({ professionalSkills: updatedSkills }));
+    saveResumeToDB({
+      ...resume,
+      professionalSkills: updatedSkills,
+    });
+  };
 
   return (
     <div className="w-full first-page text-gray-900">
@@ -240,11 +281,19 @@ const ResumeTemplate1 = ({
                 Skills
               </h3>
               <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-              <ul className="pl-0 flex flex-col gap-1 mb-4 text-sm">
-                <li className="font-semibold uppercase">primary</li>
+              <ul
+                className="pl-0 flex  flex-col gap-1 mb-4 text-sm"
+                onMouseEnter={() =>
+                  !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
+                }
+                onMouseLeave={() =>
+                  !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
+                }
+              >
+                <li className="font-semibold  uppercase">primary</li>
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
-                    className="hover:shadow-md parent hover:bg-gray-100 flex justify-between items-center"
+                    className="hover:shadow-md parent  hover:bg-gray-100 flex justify-between items-center"
                     key={i}
                   >
                     <EditableField
@@ -277,7 +326,12 @@ const ResumeTemplate1 = ({
                         const removeSkill = resume.primarySkills.filter(
                           (item: any) => item !== skill
                         );
-                        dispatch(setRemovePrimarySkills(removeSkill));
+                        dispatch(
+                          setPrimarySkills({
+                            ...resume,
+                            primarySkills: removeSkill,
+                          })
+                        );
                         saveResumeToDB({
                           ...resume,
                           primarySkills: removeSkill,
@@ -289,6 +343,61 @@ const ResumeTemplate1 = ({
                     </div>
                   </li>
                 ))}
+                {newPrimarySkill ? (
+                  <>
+                    <div className="w-full rounded-2xl border border-black flex h-9.5">
+                      <input
+                        type="text"
+                        value={primarySkill}
+                        placeholder="Please add Skill"
+                        className="bg-white outline-none rounded-2xl px-2 w-full"
+                        autoFocus
+                        onChange={(e) => setPrimarySkill(e.target.value)}
+                        onKeyPress={(e) => {
+                          if (e.key === "Enter") {
+                            if (primarySkill.trim() !== "") {
+                              addPrimarySkill();
+                              setPrimarySkill("");
+                            }
+                          }
+                        }}
+                      />
+                      <button
+                        className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
+                        onClick={() => {
+                          if (primarySkill.trim() !== "") {
+                            addPrimarySkill();
+                            setPrimarySkill(""); // Empty the input field
+                          }
+                        }}
+                      >
+                        save
+                      </button>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setNewPrimarySkill(false);
+                        setPrimarySkillAddButtonVisible(true);
+                      }}
+                      className="bg-red-500 py-1 px-2 text-white rounded-full"
+                    >
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  " "
+                )}
+                {primarySkillAddButtonVisible ? (
+                  <div
+                    className="border-2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                    onClick={() => {
+                      setNewPrimarySkill(true);
+                      setPrimarySkillAddButtonVisible(false);
+                    }}
+                  >
+                    + Add
+                  </div>
+                ) : null}
               </ul>
             </>
           )}
@@ -416,7 +525,17 @@ const ResumeTemplate1 = ({
                   Skills
                 </h3>
                 <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-                <ul className="pl-0  flex flex-col gap-1 mb-4 text-sm">
+                <ul
+                  className="pl-0  flex flex-col gap-1 mb-4 text-sm"
+                  onMouseEnter={() =>
+                    !newProfessionalSkill &&
+                    setProfessionalSkillAddButtonVisible(true)
+                  }
+                  onMouseLeave={() =>
+                    !newProfessionalSkill &&
+                    setProfessionalSkillAddButtonVisible(false)
+                  }
+                >
                   <li className="font-semibold  uppercase ">Professional</li>
                   {resume?.professionalSkills.map(
                     (skill: string, i: number) => (
@@ -455,7 +574,10 @@ const ResumeTemplate1 = ({
                                 (item: any) => item !== skill
                               );
                             dispatch(
-                              setRemoveProfessionalSkills(removeProSkill)
+                              setProfessionalSkills({
+                                ...resume,
+                                professionalSkills: removeProSkill,
+                              })
                             );
                             saveResumeToDB({
                               ...resume,
@@ -469,6 +591,62 @@ const ResumeTemplate1 = ({
                       </li>
                     )
                   )}
+                  {/* ADD New Professional Skill  */}
+                  {newProfessionalSkill ? (
+                    <>
+                      <div className="w-full rounded-2xl border border-black flex h-9.5">
+                        <input
+                          type="text"
+                          value={professionalSkill}
+                          placeholder="Please add Skill"
+                          className="bg-white outline-none rounded-2xl px-2 w-full"
+                          autoFocus
+                          onChange={(e) => setProfessionalSkill(e.target.value)}
+                          onKeyPress={(e) => {
+                            if (e.key === "Enter") {
+                              if (professionalSkill.trim() !== "") {
+                                addProfessionalSkill();
+                                setProfessionalSkill("");
+                              }
+                            }
+                          }}
+                        />
+                        <button
+                          className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
+                          onClick={() => {
+                            if (professionalSkill.trim() !== "") {
+                              addProfessionalSkill();
+                              setProfessionalSkill(""); // Empty the input field
+                            }
+                          }}
+                        >
+                          save
+                        </button>
+                      </div>
+                      <button
+                        onClick={() => {
+                          setNewProfessionalSkill(false);
+                          setPrimarySkillAddButtonVisible(true);
+                        }}
+                        className="bg-red-500 py-1 px-2 text-white rounded-full"
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    " "
+                  )}
+                  {professionalSkillAddButtonVisible ? (
+                    <div
+                      className="border-2 border-gray-400 text-center uppercase justify-center text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                      onClick={() => {
+                        setNewProfessionalSkill(true);
+                        setProfessionalSkillAddButtonVisible(false);
+                      }}
+                    >
+                      + Add
+                    </div>
+                  ) : null}
                 </ul>
               </>
             )}
@@ -483,7 +661,17 @@ const ResumeTemplate1 = ({
                 Skills
               </h3>
               <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-              <ul className="pl-0 flex flex-col gap-1 mb-4 text-sm">
+              <ul
+                className="pl-0 flex flex-col gap-1 mb-4 text-sm"
+                onMouseEnter={() =>
+                  !newSecondarySkill &&
+                  setSecondarySkillAddButtonVisible(true)
+                }
+                onMouseLeave={() =>
+                  !newSecondarySkill &&
+                  setSecondarySkillAddButtonVisible(false)
+                }
+              >
                 <li className="font-semibold uppercase">Secondary</li>
                 {resume?.secondarySkills.map((skill: string, i: number) => (
                   <li
@@ -521,7 +709,10 @@ const ResumeTemplate1 = ({
                             (item: any) => item !== skill
                           );
                         dispatch(
-                          setRemoveSecondarySkills(removeSecondarySkill)
+                          setSecondarySkills({
+                            ...resume,
+                            secondarySkills: removeSecondarySkill,
+                          })
                         );
                         saveResumeToDB({
                           ...resume,
@@ -534,6 +725,62 @@ const ResumeTemplate1 = ({
                     </div>
                   </li>
                 ))}
+                {/* ADD New Secondary Skill  */}
+                {newSecondarySkill ? (
+                    <>
+                      <div className="w-full rounded-2xl border border-black flex h-9.5">
+                        <input
+                          type="text"
+                          value={secondarySkill}
+                          placeholder="Please add Skill"
+                          className="bg-white outline-none rounded-2xl px-2 w-full"
+                          autoFocus
+                          onChange={(e) => setSecondarySkill(e.target.value)}
+                          onKeyPress={(e) => {
+                            if (e.key === "Enter") {
+                              if (secondarySkill.trim() !== "") {
+                                addSecondarySkill();
+                                setSecondarySkill("");
+                              }
+                            }
+                          }}
+                        />
+                        <button
+                          className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
+                          onClick={() => {
+                            if (secondarySkill.trim() !== "") {
+                              addSecondarySkill();
+                              setSecondarySkill(""); // Empty the input field
+                            }
+                          }}
+                        >
+                          save
+                        </button>
+                      </div>
+                      <button
+                        onClick={() => {
+                          setNewSecondarySkill(false);
+                          setSecondarySkillAddButtonVisible(true);
+                        }}
+                        className="bg-red-500 py-1 px-2  text-white rounded-full"
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    " "
+                  )}
+                  {secondarySkillAddButtonVisible ? (
+                    <div
+                      className="border-2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                      onClick={() => {
+                        setNewSecondarySkill(true);
+                        setSecondarySkillAddButtonVisible(false);
+                      }}
+                    >
+                      + Add
+                    </div>
+                  ) : null}
               </ul>
             </>
           )}
@@ -773,3 +1020,6 @@ const ResumeTemplate1 = ({
   );
 };
 export default memo(ResumeTemplate1);
+function addPrimary(): any {
+  throw new Error("Function not implemented.");
+}
