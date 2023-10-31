@@ -53,6 +53,10 @@ const PersonalizedEmailBot = () => {
         type: selectedOption,
         email: session?.user?.email,
         jobDescription,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
       };
       if (selectedOption === "file") {
         obj.file = selectedFile;

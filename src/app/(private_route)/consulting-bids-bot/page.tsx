@@ -50,6 +50,10 @@ const ConsultingBidsGenerator = () => {
         type: selectedOption,
         email: session?.user?.email,
         jobDescription,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
       };
       if (selectedOption === "file") {
         obj.file = selectedFile;
@@ -77,7 +81,7 @@ const ConsultingBidsGenerator = () => {
         .then(async (resp: any) => {
           if (resp.ok) {
             const reader = resp.body.getReader();
-            let tempText = "" ;
+            let tempText = "";
             while (true) {
               const { done, value } = await reader.read();
               if (done) {
@@ -85,7 +89,7 @@ const ConsultingBidsGenerator = () => {
               }
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
-              tempText += text
+              tempText += text;
             }
             await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
@@ -117,14 +121,14 @@ const ConsultingBidsGenerator = () => {
         });
     }
   };
- const saveToDB = async (tempText: string) => {
+  const saveToDB = async (tempText: string) => {
     try {
       const response = await axios.post("/api/users/updateUserData", {
         data: {
           email: session?.user?.email,
           results: {
             ...userData.results,
-            consultingBidsGeneration: tempText
+            consultingBidsGeneration: tempText,
           },
         },
       });
@@ -154,7 +158,7 @@ const ConsultingBidsGenerator = () => {
       userData.results.consultingBidsGeneration &&
       userData.results.consultingBidsGeneration !== ""
     ) {
-      setShow(true)
+      setShow(true);
       setStreamedData(userData.results.consultingBidsGeneration);
     }
   }, [userData]);

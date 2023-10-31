@@ -12,6 +12,7 @@ import { LLMChain } from "langchain/chains";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import path from "path";
+import TrainBot from "@/db/schemas/TrainBot";
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
@@ -23,6 +24,7 @@ const handler: NextApiHandler = async (req, res) => {
     const jobPosition = reqBody.jobPosition;
     const userData = reqBody.userData;
     const email = reqBody.email;
+    const trainBotData = reqBody.trainBotData;
 
     let content: any;
     if (inputType === "file") {
@@ -46,7 +48,7 @@ const handler: NextApiHandler = async (req, res) => {
     });
 
     const chatPrompt = ChatPromptTemplate.fromPromptMessages([
-      SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing Keywords for the person LinkedIn Profile.
+      SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
         Following are the content of the resume (in JSON format): 
         JSON user/resume data: {userData}
 
@@ -81,6 +83,20 @@ const handler: NextApiHandler = async (req, res) => {
           format_instructions: formatInstructions,
           prompt: "Answer should be a valid JSON",
         });
+
+        // make a trainBot entry
+        const obj = {
+          type: "resume.getBasicInfo",
+          input: formatInstructions,
+          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+          idealOutput: "",
+          status: "pending",
+          userEmail: trainBotData.userEmail,
+          fileAddress: trainBotData.fileAddress,
+          Instructions: `Get basic information for the resume`,
+        };
+
+        await TrainBot.create({ ...obj });
 
         return res.status(200).json({
           success: true,
@@ -128,10 +144,24 @@ const handler: NextApiHandler = async (req, res) => {
           llm: model1,
         });
 
-        await chainC.call({
+        const output = await chainC.call({
           userData: JSON.stringify(content),
           prompt: promptSummary,
         });
+
+        // make a trainBot entry
+        const obj = {
+          type: "resume.writeSummary",
+          input: promptSummary,
+          output: output.text.replace(/(\r\n|\n|\r)/gm, ""),
+          idealOutput: "",
+          status: "pending",
+          userEmail: trainBotData.userEmail,
+          fileAddress: trainBotData.fileAddress,
+          Instructions: `Write Summary for the resume`,
+        };
+
+        await TrainBot.create({ ...obj });
 
         res.end();
       } catch (error) {
@@ -221,6 +251,20 @@ const handler: NextApiHandler = async (req, res) => {
           prompt: "Answer should be a valid JSON",
         });
 
+        // make a trainBot entry
+        const obj = {
+          type: "resume.writePrimarySkills",
+          input: formatInstructions,
+          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+          idealOutput: "",
+          status: "pending",
+          userEmail: trainBotData.userEmail,
+          fileAddress: trainBotData.fileAddress,
+          Instructions: `Write Primary Skills for Resume`,
+        };
+
+        await TrainBot.create({ ...obj });
+
         return res.status(200).json({
           success: true,
           data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
@@ -253,6 +297,20 @@ const handler: NextApiHandler = async (req, res) => {
           prompt: "Answer should be a valid JSON",
         });
 
+        // make a trainBot entry
+        const obj = {
+          type: "resume.writeProfessionalSkills",
+          input: formatInstructions,
+          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+          idealOutput: "",
+          status: "pending",
+          userEmail: trainBotData.userEmail,
+          fileAddress: trainBotData.fileAddress,
+          Instructions: `Write Professional Skills for Resume`,
+        };
+
+        await TrainBot.create({ ...obj });
+
         return res.status(200).json({
           success: true,
           data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
@@ -284,6 +342,20 @@ const handler: NextApiHandler = async (req, res) => {
           format_instructions: formatInstructions,
           prompt: "Answer should be a valid JSON",
         });
+
+        // make a trainBot entry
+        const obj = {
+          type: "resume.writeSecondarySkills",
+          input: formatInstructions,
+          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+          idealOutput: "",
+          status: "pending",
+          userEmail: trainBotData.userEmail,
+          fileAddress: trainBotData.fileAddress,
+          Instructions: `Write Secondary Skills for Resume`,
+        };
+
+        await TrainBot.create({ ...obj });
 
         return res.status(200).json({
           success: true,

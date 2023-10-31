@@ -10,6 +10,8 @@ export const GET = async (req: any) => {
   const status = url.searchParams.get("status");
   const type = url.searchParams.get("type");
 
+  const dataType = url.searchParams.get("dataType");
+
   try {
     await startDB();
 
