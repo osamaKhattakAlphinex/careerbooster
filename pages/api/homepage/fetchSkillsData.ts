@@ -29,7 +29,7 @@ const handler: NextApiHandler = async (req, res) => {
           This is the User Data:
           ${content}
 
-          Now please give me a List of all Professional, primary, secondary, development, communication etc. Skills from the above content provided.
+          Now please give me a List of all  Skills from the above content provided.
 
           The answer MUST be a valid Javascript JSON Array of Strings.
       `;
