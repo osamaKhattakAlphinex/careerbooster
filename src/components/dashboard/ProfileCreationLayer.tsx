@@ -11,6 +11,7 @@ import {
   setScrapped,
   setScrapping,
   setStepFive,
+  setStepFour,
   setStepOne,
   setStepSix,
   setStepThree,
@@ -182,9 +183,11 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         .then(async (resp: any) => {
           if (resp.status === 200) {
             const res = await resp.json();
+
             if (res.success && res?.data) {
               try {
                 const data = JSON.parse(res?.data);
+
                 const formattedArr = data?.education.map((item: any) => {
                   return {
                     id: makeid(),
@@ -208,6 +211,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                   return a.fromMonth.localeCompare(b.fromMonth);
                 });
                 formattedArr.reverse();
+
+                dispatch(setStepFour({ list: formattedArr }));
                 dispatch(setScrapped({ education: true }));
                 dispatch(setScrapping({ education: false }));
               } catch (error) {
