@@ -11,7 +11,7 @@ const handler: NextApiHandler = async (req, res) => {
     if (content) {
       // CREATING LLM MODAL
       const model = new OpenAI({
-        modelName: "gpt-3.5-turbo",
+        modelName: "ft:gpt-3.5-turbo-0613:careerbooster-ai::8G6LDoi7",
         temperature: 0.5,
       });
 
