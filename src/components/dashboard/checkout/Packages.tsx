@@ -30,8 +30,7 @@ const Packages = ({ viewOnly }: Props) => {
 
   return (
     <>
-      {session?.user &&
-        packages &&
+      {packages &&
         packages.map((pkg: UserPackageData) => (
           <MonthlySubscriptionCard
             key={pkg._id}

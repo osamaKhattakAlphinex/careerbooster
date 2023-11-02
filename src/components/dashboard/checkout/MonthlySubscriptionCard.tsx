@@ -218,13 +218,13 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
           {userPackage.features.map((feature: string, i: number) => (
             <li key={i} className="flex gap-1 items-center group">
               {feature}{" "}
-              <span className="cursor-pointer text-gray-600 relative ">
+              <span className="cursor-pointer text-gray-600 relative group">
                 {infoSmallIcon}
                 <div
                   role="tooltip"
-                  className="absolute hidden group-hover:show bg-gray-600 text-gray-100 p-2 rounded-md text-xs -top-8 -left-1/2 transform -translate-x-1/2 w-32"
+                  className="hidden absolute bg-gray-600 text-gray-100 p-2 rounded-md text-xs -top-9 left-16 transform -translate-x-1/2 w-32 group-hover:block"
                 >
-                  Tooltip content
+                  {userPackage.featuresToolTips[i]}
                   <div className="tooltip-arrow" data-popper-arrow></div>
                 </div>
               </span>
