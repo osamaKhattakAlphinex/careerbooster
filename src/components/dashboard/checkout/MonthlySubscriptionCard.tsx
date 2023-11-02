@@ -216,7 +216,7 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
 
         <ul className="d-flex flex-column gap-5 text-sm pl-0 mt-9 mb-0">
           {userPackage.features.map((feature: string, i: number) => (
-            <li key={i} className="flex gap-1 items-center group">
+            <li key={i} className="flex gap-1 items-center">
               {feature}{" "}
               <span className="cursor-pointer text-gray-600 relative group">
                 {infoSmallIcon}
