@@ -36,6 +36,10 @@ const UserSchema = new Schema(
       cityState: String,
       postalCode: String,
     },
+    status: {
+      type: Boolean,
+      required: true,
+    },
     education: [],
     experience: [],
     skills: [],

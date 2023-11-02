@@ -735,8 +735,8 @@ const Reviews = () => {
         </div>
       </div>
 
-      <div className="review-rolling-carousel-container">
-        <div className="swiper review-rolling-carousel">
+      <div className="review-rolling-carousel-container-reversed mt-6">
+        <div className="swiper review-rolling-carousel-reversed swiper-initialized swiper-horizontal swiper-backface-hidden">
           <div className="swiper-wrapper rolling-carousel-wrapper">
             <div className="swiper-slide h-auto">
               <div className="review-card rounded h-full p-6 border theme-rating-card border-opacity-10">

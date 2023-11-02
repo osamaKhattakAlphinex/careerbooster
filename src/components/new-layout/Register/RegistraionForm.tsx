@@ -39,6 +39,7 @@ const RegistrationForm = () => {
       email: "",
       password: "",
       confirmpassword: "",
+      // status: "pending",
       terms: false,
       alertConsent: false,
       file: "",
@@ -58,6 +59,7 @@ const RegistrationForm = () => {
     }),
 
     onSubmit: async (values) => {
+      console.log(formik);
       setSubmittingError("");
 
       if (values.terms) {
@@ -69,6 +71,7 @@ const RegistrationForm = () => {
           email: values.email,
           password: values.password,
           file: values.file,
+          status: "pending",
           alertConsent: values.alertConsent,
         };
 
