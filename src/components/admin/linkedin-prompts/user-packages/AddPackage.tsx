@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import Toggle from "@/components/utilities/form-elements/Toggle";
 type Feature = string[];
 
 const AddPackage = () => {
@@ -117,7 +118,7 @@ const AddPackage = () => {
 
   return (
     <>
-      <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+      <div className="md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
         <button
           type="button"
           style={{
@@ -145,7 +146,7 @@ const AddPackage = () => {
               d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
             />
           </svg>
-          Add product
+          Add New Package
         </button>
       </div>
       <div
@@ -300,71 +301,30 @@ const AddPackage = () => {
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
                   </select>
+
+                  <Toggle
+                    value={formik.values.status === "active" ? true : false}
+                    onChange={(e) =>
+                      formik.setFieldValue(
+                        "status",
+                        e.target.checked ? "active" : "inactive"
+                      )
+                    }
+                    onBlur={formik.handleBlur}
+                  />
+
                   {formik.touched.status && formik.errors.status && (
                     <p className="text-red-600 pt-3">{formik.errors.status}</p>
                   )}
                 </div>
-                <div>
-                  <label
-                    htmlFor="features"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Features
-                  </label>
-                  <input
-                    id="features"
-                    type="text"
-                    name="features"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.features}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Feature 1"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const featureToAdd: string[] = formik.values.features;
-                      if (featureToAdd) {
-                        addFeature(featureToAdd);
-                        formik.setFieldValue("features", ""); // Clear the input
-                      }
-                    }}
-                  >
-                    Add Feature
-                  </button>
-                  {features.map((feature: Feature, index: number) => (
-                    <div key={index}>{feature}</div>
-                  ))}
-                </div>
+              </div>
 
-                {/* <div>
-          <label htmlFor="featuresToolTips" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-            Features Tool Tips
-          </label>
-          <input
-            id="featuresToolTips"
-            type="text"
-            name="featuresToolTips"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.featuresToolTips}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            placeholder="Features Tool Tip 1"
-          />
-          <button
-            type="button"
-            onClick={() => {
-              addFeatureToolTip(formik.values.featuresToolTips);
-              formik.setFieldValue('featuresToolTips', ''); // Clear the input
-            }}
-          >
-            Add Feature Tool Tip
-          </button>
-          {featuresToolTips.map((toolTip, index) => (
-            <div key={index}>{toolTip}</div>
-          )}
-        </div> */}
+              {/* Limitations */}
+              <div className="mb-4 w-ful">
+                <span className="text-xl">Limitations</span>
+                <div className="flex pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600"></div>
+              </div>
+              <div className="grid gap-4 mb-4 sm:grid-cols-2">
                 <div>
                   <label
                     htmlFor="amount"
@@ -392,7 +352,6 @@ const AddPackage = () => {
                       </p>
                     )}
                 </div>
-
                 <div>
                   <label
                     htmlFor="amount"
@@ -606,6 +565,74 @@ const AddPackage = () => {
                       </p>
                     )}
                 </div>
+              </div>
+
+              {/* Features */}
+              <div className="mb-4 w-ful">
+                <span className="text-xl">Add Features</span>
+                <div className="flex pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600"></div>
+              </div>
+              <div className="grid gap-4 mb-4 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="features"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Features
+                  </label>
+                  <input
+                    id="features"
+                    type="text"
+                    name="features"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.features}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Feature 1"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const featureToAdd: string[] = formik.values.features;
+                      if (featureToAdd) {
+                        addFeature(featureToAdd);
+                        formik.setFieldValue("features", ""); // Clear the input
+                      }
+                    }}
+                  >
+                    Add Feature
+                  </button>
+                  {features.map((feature: Feature, index: number) => (
+                    <div key={index}>{feature}</div>
+                  ))}
+                </div>
+                {/* <div>
+          <label htmlFor="featuresToolTips" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Features Tool Tips
+          </label>
+          <input
+            id="featuresToolTips"
+            type="text"
+            name="featuresToolTips"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.featuresToolTips}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="Features Tool Tip 1"
+          />
+          <button
+            type="button"
+            onClick={() => {
+              addFeatureToolTip(formik.values.featuresToolTips);
+              formik.setFieldValue('featuresToolTips', ''); // Clear the input
+            }}
+          >
+            Add Feature Tool Tip
+          </button>
+          {featuresToolTips.map((toolTip, index) => (
+            <div key={index}>{toolTip}</div>
+          )}
+        </div> */}
               </div>
               <button
                 type="submit"
