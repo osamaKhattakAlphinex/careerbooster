@@ -78,4 +78,5 @@ export const POST = async (req: Request): Promise<NewResponse> => {
       alertConsent : user.alertConsent
     },
   });
+  
 };
