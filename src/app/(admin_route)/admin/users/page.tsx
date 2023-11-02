@@ -11,6 +11,7 @@ const getUserDeatils = async () => {
 };
 export default async function Page() {
   const users = await getUserDeatils();
+  //   console.log(users);
   return (
     <>
       <div className="container pt-40">
@@ -55,9 +56,9 @@ export default async function Page() {
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   User ID
-                </th>
+                </th> */}
                 <th scope="col" className="px-6 py-3">
                   User Name
                 </th>
@@ -86,20 +87,20 @@ export default async function Page() {
                 return (
                   <>
                     <tr className=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                      <th
+                      {/* <th
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         {item._id}
-                      </th>
+                      </th> */}
                       <td className="px-6 py-4">
                         {item.firstName + " " + item.lastName}
                       </td>
-                      <td className="px-6 py-4">Osama@email</td>
-                      <td className="px-6 py-4">123</td>
-                      <td className="px-6 py-4">Pakistan</td>
-                      <td className="px-6 py-4">Islamabad</td>
-                      <td className="px-6 py-4">Admin</td>
+                      <td className="px-6 py-4"> {item.email} </td>
+                      <td className="px-6 py-4">{item?.phone}</td>
+                      <td className="px-6 py-4">{item.contact?.country}</td>
+                      <td className="px-6 py-4"> {item.contact?.cityState} </td>
+                      <td className="px-6 py-4">{item.role}</td>
                       <td className="px-6 py-4">
                         <a
                           href="#"
