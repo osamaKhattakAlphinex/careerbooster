@@ -50,8 +50,8 @@ const ViewPackage = ({}) => {
               <AddPackage />
             </div>
             <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left text-white pt-10 border-collapse">
-                <thead className="text-white uppercase text-[16px]">
+              <table className="pt-10 border-collapse w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead className="text-[16px] text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     <th scope="col" className="px-4 py-4">
                       Title
@@ -74,10 +74,10 @@ const ViewPackage = ({}) => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-b dark:border-white">
+                  <tr className=" bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th
                       scope="row"
-                      className="px-4 py-3 font-medium text-white whitespace-nowrap dark:text-white"
+                      className="px-4 py-3 font-medium whitespace-nowrap"
                     >
                       Apple iMac 27&#34;
                     </th>
