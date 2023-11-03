@@ -71,7 +71,7 @@ const RegistrationForm = () => {
           email: values.email,
           password: values.password,
           file: values.file,
-          status: "pending",
+          status: false,
           alertConsent: values.alertConsent,
         };
 

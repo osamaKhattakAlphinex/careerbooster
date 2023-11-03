@@ -9,7 +9,6 @@ export const GET = async (
   { params }: { params: { recId: string } }
 ) => {
   try {
-    console.log("params: ", params);
     await startDB();
 
     const rec = await TrainBot.findById(params.recId);

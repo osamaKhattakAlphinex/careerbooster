@@ -1,20 +1,43 @@
+"use client";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
+import axios from "axios";
 import Link from "next/link";
-const getUserDeatils = async () => {
-  const userData = await fetch("http://localhost:3001/api/users");
-  const resp = await userData.json();
-  if (resp.success) {
-    return resp.result;
-  } else {
-    success: false;
-  }
-};
-export default async function Page() {
-  const users = await getUserDeatils();
-  //   console.log(users);
+import { useEffect, useState } from "react";
+
+const UsersPage = () => {
+  const [records, setRecords] = useState([]);
+
+  const handleChange = async (id: string, status: boolean) => {
+    if (window.confirm("Are you sure to Change the status")) {
+      const record: any = await axios
+        .put(`/api/users/${id}`, {
+          status: status,
+        })
+        .finally(() => {
+          getUserDeatils();
+        });
+    }
+  };
+
+  const getUserDeatils = () => {
+    fetch("/api/users").then(async (resp) => {
+      const res = await resp.json();
+
+      if (res.success) {
+        setRecords(res.result);
+      } else {
+        setRecords([]);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getUserDeatils();
+  }, []);
+
   return (
     <>
-      <div className="container pt-40">
+      <div className="mx-10 pt-40">
         <div className="my-5 ml-10">
           <Link
             href="/admin"
@@ -83,40 +106,55 @@ export default async function Page() {
               </tr>
             </thead>
             <tbody>
-              {users.map((item: any) => {
-                return (
-                  <>
-                    <tr className=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                      {/* <th
+              {records &&
+                records.map((item: any) => {
+                  return (
+                    <>
+                      <tr className=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        {/* <th
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         {item._id}
                       </th> */}
-                      <td className="px-6 py-4">
-                        {item.firstName + " " + item.lastName}
-                      </td>
-                      <td className="px-6 py-4"> {item.email} </td>
-                      <td className="px-6 py-4">{item?.phone}</td>
-                      <td className="px-6 py-4">{item.contact?.country}</td>
-                      <td className="px-6 py-4"> {item.contact?.cityState} </td>
-                      <td className="px-6 py-4">{item.role}</td>
-                      <td className="px-6 py-4">
-                        <a
-                          href="#"
-                          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        >
-                          Active
-                        </a>
-                      </td>
-                    </tr>
-                  </>
-                );
-              })}
+                        <td className="px-6 py-4">
+                          {item.firstName + " " + item.lastName}
+                        </td>
+                        <td className="px-6 py-4"> {item.email} </td>
+                        <td className="px-6 py-4">{item?.phone}</td>
+                        <td className="px-6 py-4">{item.contact?.country}</td>
+                        <td className="px-6 py-4">
+                          {" "}
+                          {item.contact?.cityState}{" "}
+                        </td>
+                        <td className="px-6 py-4">{item.role}</td>
+                        <td className="px-6 py-4">
+                          <label className="relative inline-flex items-center cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={item.status}
+                              value=""
+                              className="sr-only peer"
+                              onChange={(e) =>
+                                handleChange(item._id, e.target.checked)
+                              }
+                            />
+                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                            <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                              {item?.status === true ? "Active" : ""}
+                            </span>
+                          </label>
+                        </td>
+                      </tr>
+                    </>
+                  );
+                })}
             </tbody>
           </table>
         </div>
       </div>
     </>
   );
-}
+};
+
+export default UsersPage;
