@@ -8,22 +8,8 @@ import FormFieldArray from "@/components/utilities/form-elements/FormFieldArray"
 import FeaturesFormCard from "./FeaturesFormCard";
 type Feature = string[];
 type FeatureTooltip = string[];
-type FormField = [
-  {
-    name: string;
-    id: string;
-    onChange: (e: React.ChangeEvent<any>) => void;
-    onBlur: (e: any) => void;
-    label: string;
-    type: string;
-    value: string[];
-    placeholder?: string;
-  }
-];
 
 const AddPackage = () => {
-  const [featureFields, setFeatureFields] = useState<any>([]);
-
   const [features, setFeatures] = useState<Feature[]>([]); // State for Features
   const [featuresToolTips, setFeaturesToolTips] = useState<FeatureTooltip[]>(
     []
@@ -108,108 +94,32 @@ const AddPackage = () => {
     }),
     onSubmit: async (values, action) => {
       console.log(values);
-
-      // const res = await axios.post("/api/admin/packages/add_package", {
-      //   type: values.type,
-      //   title: values.title,
-      //   amount: values.amount,
-      //   status: values.status,
-      //   features: ["Feature 1", "Feature 2"],
-      //   category: values.category,
-      //   limit: {
-      //     resumes_generation: values.limit.resumes_generation,
-      //     can_edit_resume: values.limit.can_edit_resume,
-      //     keywords_generation: values.limit.keywords_generation,
-      //     headline_generation: values.limit.headline_generation,
-      //     about_generation: values.limit.about_generation,
-      //     job_desc_generation: values.limit.job_desc_generation,
-      //     cover_letter_generation: values.limit.cover_letter_generation,
-      //     pdf_files_upload: values.limit.pdf_files_upload,
-      //     review_resume: values.limit.review_resume,
-      //     consulting_bids_generation: values.limit.consulting_bid_generation,
-      //   },
-      // });
-      // console.log("api response:", res);
-      // action.resetForm();
-      // setPopUpModel(false);
+      const res = await axios.post("/api/admin/packages/add_package", {
+        type: values.type,
+        title: values.title,
+        amount: values.amount,
+        status: values.status,
+        features: ["Feature 1", "Feature 2"],
+        category: values.category,
+        limit: {
+          resumes_generation: values.limit.resumes_generation,
+          can_edit_resume: values.limit.can_edit_resume,
+          keywords_generation: values.limit.keywords_generation,
+          headline_generation: values.limit.headline_generation,
+          about_generation: values.limit.about_generation,
+          job_desc_generation: values.limit.job_desc_generation,
+          cover_letter_generation: values.limit.cover_letter_generation,
+          pdf_files_upload: values.limit.pdf_files_upload,
+          review_resume: values.limit.review_resume,
+          consulting_bids_generation: values.limit.consulting_bid_generation,
+        },
+      });
+      console.log("api response:", res);
+      action.resetForm();
+      setPopUpModel(false);
     },
   });
 
-  // const featureField: any = [
-  //   {
-  //     name: "features",
-  //     id: "features",
-  //     onChange: formik.handleChange,
-  //     onBlur: formik.handleBlur,
-  //     label: "Feature Text",
-  //     type: "text",
-  //     value: formik.values.features,
-  //     placeholder: "Please provide Feature text",
-  //   },
-  //   {
-  //     name: "featuresToolTips",
-  //     id: "featuresToolTips",
-  //     onChange: formik.handleChange,
-  //     onBlur: formik.handleBlur,
-  //     label: "Feature Tooltip",
-  //     type: "text",
-  //     value: formik.values.featuresToolTips,
-  //     placeholder: "Please provide Tooltip text",
-  //   },
-  //   {
-  //     name: "addFeature",
-  //     id: "addFeature",
-  //     onChange: formik.handleChange,
-  //     onBlur: formik.handleBlur,
-  //     onClick: null,
-  //     label: "Add Feature",
-  //     type: "button",
-  //     value: "",
-  //     placeholder: "",
-  //   },
-  // ];
-
-  // const featureField: any = [];
-
-  // const getFeatureFeilds = <T, U>(
-  //   features: T[],
-  //   tooltips: U[]
-  // ): Array<{ feature: T; tooltip: U }> => {
-  //   const result: Array<{ feature: T; tooltip: U }> = [];
-  //   const minLength = Math.min(features.length, tooltips.length);
-  //   for (let i = 0; i < minLength; i++) {
-  //     result.push({ feature: features[i], tooltip: tooltips[i] });
-  //   }
-  //   return result;
-  // };
-
-  // const handleAddFeatures = () => {
-  //   const featureToAdd: string[] = formik.values.features;
-  //   const toolTipToAdd: string[] = formik.values.featuresToolTips;
-  //   if (featureToAdd && toolTipToAdd) {
-  //     addFeature(featureToAdd);
-  //     addFeatureToolTip(toolTipToAdd);
-  //     formik.setFieldValue("features", "");
-  //     formik.setFieldValue("featuresToolTips", "");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const newFeatureFields = getFeatureFeilds(features, featuresToolTips);
-  //   setFeatureFields(newFeatureFields);
-  //   console.log(featureFields);
-  // }, [formik.values.features, formik.values.featuresToolTips]);
-
-  const _featureFields: any = [
-    ({
-      tooltips: [],
-      features: [],
-    } = {
-      tooltips: formik.values.featuresToolTips,
-      features: formik.values.features,
-    }),
-  ];
-  console.log(formik.values.features);
   return (
     <>
       <div className="md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
