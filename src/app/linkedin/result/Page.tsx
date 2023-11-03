@@ -1,6 +1,6 @@
 import PageHeader from "@/components/new-layout/PageHeader";
-import LinkedInToolNew from "@/components/new-layout/linkedin/LinkedInToolNew";
 import { Metadata } from "next";
+import LinedInCard from "@/components/new-layout/linkedin/LinkedInCard"
 export const metadata: Metadata = {
   title: "CareerBooster.AI-linkedin",
   description:
@@ -26,14 +26,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LinkedInNewPage() {
+export default function LinkedInPage() {
   return (
     <main className="flex-grow-1 mb-20">
       {/* <!-- Page header --> */}
-     
+      <PageHeader title="AI LinkedIn Tool" secondTitle="linkedin" />
 
       {/* LinkedIn Tool Card */}
-      <LinkedInToolNew />
+      <LinedInCard/>
+    
+
     </main>
   );
 }

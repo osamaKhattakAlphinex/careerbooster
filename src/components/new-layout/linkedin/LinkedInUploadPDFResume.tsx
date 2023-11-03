@@ -8,7 +8,7 @@ import {
   starIcon,
   uploadIcon,
 } from "@/helpers/iconsProvider";
-import Button from "./utilities/form-elements/Button";
+import Button from "../../utilities/form-elements/Button";
 import LinkedInSummary from "./LinkedInSummary";
 
 //Editable
