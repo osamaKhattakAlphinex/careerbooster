@@ -17,9 +17,17 @@ const FormFieldArray: React.FC<Props> = ({ fields }: any) => {
           return (
             <>
               {field.type === "button" ? (
-                <button className="w-6 h-6" onClick={(e) => console.log(e)}>
-                  Add Feature
-                </button>
+                <div key={index} className="flex-1">
+                  <label
+                    htmlFor="features"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    {field.label}
+                  </label>
+                  <button className="w-6 h-6" onClick={(e) => console.log(e)}>
+                    Add Feature
+                  </button>
+                </div>
               ) : (
                 <div key={index} className="flex-1">
                   <label

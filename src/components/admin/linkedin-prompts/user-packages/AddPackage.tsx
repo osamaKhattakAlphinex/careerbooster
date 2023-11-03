@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import Toggle from "@/components/utilities/form-elements/Toggle";
 import FormFieldArray from "@/components/utilities/form-elements/FormFieldArray";
+import FeaturesFormCard from "./FeaturesFormCard";
 type Feature = string[];
 type FeatureTooltip = string[];
 type FormField = [
@@ -134,68 +135,70 @@ const AddPackage = () => {
     },
   });
 
-  const featureField: any = [
-    {
-      name: "features",
-      id: "features",
-      onChange: formik.handleChange,
-      onBlur: formik.handleBlur,
-      label: "Feature Text",
-      type: "text",
-      value: formik.values.features,
-      placeholder: "Please provide Feature text",
-    },
-    {
-      name: "featuresToolTips",
-      id: "featuresToolTips",
-      onChange: formik.handleChange,
-      onBlur: formik.handleBlur,
-      label: "Feature Tooltip",
-      type: "text",
-      value: formik.values.featuresToolTips,
-      placeholder: "Please provide Tooltip text",
-    },
-    {
-      name: "addFeature",
-      id: "addFeature",
-      onChange: formik.handleChange,
-      onBlur: formik.handleBlur,
-      onClick: null,
-      label: "Add Feature",
-      type: "button",
-      value: "",
-      placeholder: "",
-    },
-  ];
+  // const featureField: any = [
+  //   {
+  //     name: "features",
+  //     id: "features",
+  //     onChange: formik.handleChange,
+  //     onBlur: formik.handleBlur,
+  //     label: "Feature Text",
+  //     type: "text",
+  //     value: formik.values.features,
+  //     placeholder: "Please provide Feature text",
+  //   },
+  //   {
+  //     name: "featuresToolTips",
+  //     id: "featuresToolTips",
+  //     onChange: formik.handleChange,
+  //     onBlur: formik.handleBlur,
+  //     label: "Feature Tooltip",
+  //     type: "text",
+  //     value: formik.values.featuresToolTips,
+  //     placeholder: "Please provide Tooltip text",
+  //   },
+  //   {
+  //     name: "addFeature",
+  //     id: "addFeature",
+  //     onChange: formik.handleChange,
+  //     onBlur: formik.handleBlur,
+  //     onClick: null,
+  //     label: "Add Feature",
+  //     type: "button",
+  //     value: "",
+  //     placeholder: "",
+  //   },
+  // ];
 
-  const getFeatureFeilds = <T, U>(
-    features: T[],
-    tooltips: U[]
-  ): Array<{ feature: T; tooltip: U }> => {
-    const result: Array<{ feature: T; tooltip: U }> = [];
-    const minLength = Math.min(features.length, tooltips.length);
-    for (let i = 0; i < minLength; i++) {
-      result.push({ feature: features[i], tooltip: tooltips[i] });
-    }
-    return result;
-  };
+  // const featureField: any = [];
 
-  const handleAddFeatures = () => {
-    const featureToAdd: string[] = formik.values.features;
-    const toolTipToAdd: string[] = formik.values.featuresToolTips;
-    if (featureToAdd && toolTipToAdd) {
-      addFeature(featureToAdd);
-      addFeatureToolTip(toolTipToAdd);
-      formik.setFieldValue("features", "");
-      formik.setFieldValue("featuresToolTips", "");
-    }
-  };
+  // const getFeatureFeilds = <T, U>(
+  //   features: T[],
+  //   tooltips: U[]
+  // ): Array<{ feature: T; tooltip: U }> => {
+  //   const result: Array<{ feature: T; tooltip: U }> = [];
+  //   const minLength = Math.min(features.length, tooltips.length);
+  //   for (let i = 0; i < minLength; i++) {
+  //     result.push({ feature: features[i], tooltip: tooltips[i] });
+  //   }
+  //   return result;
+  // };
 
-  useEffect(() => {
-    const newFeatureFields = getFeatureFeilds(features, featuresToolTips);
-    setFeatureFields(newFeatureFields);
-    console.log(featureFields);
-  }, [formik.values.features, formik.values.featuresToolTips]);
+  // const handleAddFeatures = () => {
+  //   const featureToAdd: string[] = formik.values.features;
+  //   const toolTipToAdd: string[] = formik.values.featuresToolTips;
+  //   if (featureToAdd && toolTipToAdd) {
+  //     addFeature(featureToAdd);
+  //     addFeatureToolTip(toolTipToAdd);
+  //     formik.setFieldValue("features", "");
+  //     formik.setFieldValue("featuresToolTips", "");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   const newFeatureFields = getFeatureFeilds(features, featuresToolTips);
+  //   setFeatureFields(newFeatureFields);
+  //   console.log(featureFields);
+  // }, [formik.values.features, formik.values.featuresToolTips]);
 
   const _featureFields: any = [
     ({
@@ -206,7 +209,7 @@ const AddPackage = () => {
       features: formik.values.features,
     }),
   ];
-
+  console.log(formik.values.features);
   return (
     <>
       <div className="md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
@@ -660,24 +663,29 @@ const AddPackage = () => {
               </div>
 
               {/* Features */}
-              <div className="mb-4 w-ful">
-                <span className="text-xl">Features</span>
-                <div className="flex pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600"></div>
-              </div>
+
+              <FeaturesFormCard
+                onChangeFeatures={(arr: any) =>
+                  formik.setFieldValue("features", arr)
+                }
+                onChangeTooltip={(arr: any) =>
+                  formik.setFieldValue("featuresToolTips", arr)
+                }
+              />
 
               <>
-                {_featureFields.map((field: any, index: number) => {
+                {/* {_featureFields.map((field: any, index: number) => {
                   return (
                     <div
                       key={index}
                       className="flex-row flex justify-start items-start"
                     >
-                      <div className="grid gap-4 mb-4 sm:grid-cols-2">
+                      <div className="grid gap-4 mb-4 sm:grid-cols-3">
                         <FormFieldArray fields={featureField} />
                       </div>
                     </div>
                   );
-                })}
+                })} */}
 
                 {/* <div>
                     <label
