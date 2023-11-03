@@ -16,7 +16,6 @@ const Packages = ({ viewOnly }: Props) => {
   const [packages, setPackages] = useState<UserPackageData[]>([]);
 
   const userData = useSelector((state: any) => state.userData);
-
   // TODO STORE PACKAGES IN REDUX AND DONOT REREQUEST THEM IF ALREADY AVAILABLE
 
   const getAllPackages = () => {
