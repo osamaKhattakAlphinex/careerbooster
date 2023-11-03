@@ -1,14 +1,17 @@
 "use client";
-import { leftArrowIcon } from "@/helpers/iconsProvider";
+import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const UsersPage = () => {
   const [records, setRecords] = useState([]);
+  const [loadingId, setLoadingId] = useState("");
+  const [showTableLoader, setshowTableLoader] = useState(false);
 
   const handleChange = async (id: string, status: boolean) => {
     if (window.confirm("Are you sure to Change the status")) {
+      setLoadingId(id);
       const record: any = await axios
         .put(`/api/users/${id}`, {
           status: status,
@@ -20,15 +23,22 @@ const UsersPage = () => {
   };
 
   const getUserDeatils = () => {
-    fetch("/api/users").then(async (resp) => {
-      const res = await resp.json();
+    setshowTableLoader(true);
+    fetch("/api/users")
+      .then(async (resp) => {
+        const res = await resp.json();
+        setLoadingId("");
 
-      if (res.success) {
-        setRecords(res.result);
-      } else {
-        setRecords([]);
-      }
-    });
+        if (res.success) {
+          setRecords(res.result);
+          setshowTableLoader(false);
+        } else {
+          setRecords([]);
+        }
+      })
+      .finally(() => {
+        setshowTableLoader(false);
+      });
   };
 
   useEffect(() => {
@@ -106,17 +116,27 @@ const UsersPage = () => {
               </tr>
             </thead>
             <tbody>
+              {showTableLoader && (
+                <tr>
+                  <td
+                    className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+                    colSpan={10}
+                  >
+                    Loading ...
+                  </td>
+                </tr>
+              )}
               {records &&
                 records.map((item: any) => {
                   return (
                     <>
                       <tr className=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         {/* <th
-                        scope="row"
-                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                      >
-                        {item._id}
-                      </th> */}
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          >
+                            {item._id}
+                          </th> */}
                         <td className="px-6 py-4">
                           {item.firstName + " " + item.lastName}
                         </td>
@@ -129,21 +149,25 @@ const UsersPage = () => {
                         </td>
                         <td className="px-6 py-4">{item.role}</td>
                         <td className="px-6 py-4">
-                          <label className="relative inline-flex items-center cursor-pointer">
-                            <input
-                              type="checkbox"
-                              checked={item.status}
-                              value=""
-                              className="sr-only peer"
-                              onChange={(e) =>
-                                handleChange(item._id, e.target.checked)
-                              }
-                            />
-                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                            <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                              {item?.status === true ? "Active" : ""}
-                            </span>
-                          </label>
+                          {loadingId === item._id ? (
+                            refreshIconRotating
+                          ) : (
+                            <label className="relative inline-flex items-center cursor-pointer">
+                              <input
+                                type="checkbox"
+                                checked={item.status}
+                                value=""
+                                className="sr-only peer"
+                                onChange={(e) =>
+                                  handleChange(item._id, e.target.checked)
+                                }
+                              />
+                              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                              <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                {item?.status === true ? "Active" : "InActive"}
+                              </span>
+                            </label>
+                          )}
                         </td>
                       </tr>
                     </>
