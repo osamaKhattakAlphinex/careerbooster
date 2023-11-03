@@ -104,6 +104,10 @@ const ResumeBuilder = () => {
         inputType: "userData",
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
@@ -134,6 +138,10 @@ const ResumeBuilder = () => {
       body: JSON.stringify({
         type: "summary",
         jobPosition: resumeData.state.jobPosition,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
       }),
     }).then(async (resp: any) => {
       if (resp.ok) {
@@ -150,6 +158,7 @@ const ResumeBuilder = () => {
           setStreamedSummaryData((prev) => prev + text);
           summaryTemp += text;
         }
+        alert("done");
         dispatch(setSummary(summaryTemp));
       } else {
         setStreamedSummaryData("Error! Something went wrong");
@@ -203,6 +212,10 @@ const ResumeBuilder = () => {
           method: "POST",
           body: JSON.stringify({
             experience: experience,
+            trainBotData: {
+              userEmail: userData.email,
+              fileAddress: userData.defaultResumeFile,
+            },
           }),
         });
 
@@ -296,6 +309,10 @@ const ResumeBuilder = () => {
         type: "primarySkills",
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
@@ -321,6 +338,10 @@ const ResumeBuilder = () => {
         email: session?.user?.email,
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
@@ -346,6 +367,10 @@ const ResumeBuilder = () => {
         email: session?.user?.email,
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();

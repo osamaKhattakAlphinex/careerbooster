@@ -61,7 +61,13 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
 
       fetch("/api/linkedInBots/headlineGenerator", {
         method: "POST",
-        body: JSON.stringify({ userData: aiInputUserData }),
+        body: JSON.stringify({
+          userData: aiInputUserData,
+          trainBotData: {
+            userEmail: userData.email,
+            fileAddress: userData.defaultResumeFile,
+          },
+        }),
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -142,7 +148,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
           `/api/users/getOneByEmail?email=${session?.user?.email}`
         );
         const { user } = await res.json();
-        
+
         dispatch(setUserData(user));
         dispatch(setIsLoading(false));
         dispatch(setField({ name: "isFetched", value: true }));

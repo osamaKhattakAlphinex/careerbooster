@@ -61,7 +61,13 @@ const AboutGenerator = ({ setAbout }: Props) => {
       setMsgLoading(true);
       fetch("/api/linkedInBots/aboutGenerator", {
         method: "POST",
-        body: JSON.stringify({ userData: aiInputUserData }),
+        body: JSON.stringify({
+          userData: aiInputUserData,
+          trainBotData: {
+            userEmail: userData.email,
+            fileAddress: userData.defaultResumeFile,
+          },
+        }),
       })
         .then(async (resp: any) => {
           if (resp.ok) {

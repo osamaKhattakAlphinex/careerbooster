@@ -1,5 +1,6 @@
 import { NextApiHandler } from "next";
-import { OpenAI } from "langchain/llms/openai";
+// import { OpenAI } from "langchain/llms/openai";
+import OpenAI from "openai";
 import TrainBot from "@/db/schemas/TrainBot";
 
 const handler: NextApiHandler = async (req, res) => {
@@ -10,9 +11,12 @@ const handler: NextApiHandler = async (req, res) => {
 
     if (content) {
       // CREATING LLM MODAL
-      const model = new OpenAI({
-        modelName: "gpt-3.5-turbo",
-        temperature: 0.5,
+      // const model = new OpenAI({
+      //   modelName: "gpt-3.5-turbo",
+      //   temperature: 0.5,
+      // });
+      const openai = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY,
       });
 
       // const parser = StructuredOutputParser.fromZodSchema(
@@ -29,18 +33,31 @@ const handler: NextApiHandler = async (req, res) => {
           This is the User Data:
           ${content}
 
-          Now please give me a List of all Professional, primary, secondary, development, communication etc. Skills from the above content provided.
+          Now please give me a List of all  Skills from the above content provided.
 
           The answer MUST be a valid Javascript JSON Array of Strings.
       `;
 
       try {
-        const resp = await model.call(input);
+        // const resp = await model.call(input);
+
+        const response = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo", // v2
+          messages: [
+            {
+              role: "user",
+              content: input,
+            },
+          ],
+          temperature: 1,
+          max_tokens: 456,
+        });
+
         // make a trainBot entry
         const obj = {
           type: "register.wizard.listSkills",
           input: input,
-          output: resp,
+          output: response.choices[0].message.content,
           idealOutput: "",
           status: "pending",
           userEmail: trainBotData.userEmail,
@@ -51,7 +68,9 @@ const handler: NextApiHandler = async (req, res) => {
         await TrainBot.create({ ...obj });
 
         // const resp = await chain4.call({ query: input });
-        return res.status(200).json({ success: true, data: resp });
+        return res
+          .status(200)
+          .json({ success: true, data: response.choices[0].message.content });
       } catch (error) {
         return res.status(400).json({ success: false, error });
       }

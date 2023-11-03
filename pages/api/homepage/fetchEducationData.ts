@@ -1,6 +1,7 @@
 import { NextApiHandler } from "next";
-import { OpenAI } from "langchain/llms/openai";
+// import { OpenAI } from "langchain/llms/openai";
 import TrainBot from "@/db/schemas/TrainBot";
+import OpenAI from "openai";
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
@@ -10,9 +11,13 @@ const handler: NextApiHandler = async (req, res) => {
 
     if (content) {
       // CREATING LLM MODAL
-      const model = new OpenAI({
-        modelName: "gpt-3.5-turbo",
-        temperature: 0.5,
+      // const model = new OpenAI({
+      //   modelName: "ft:gpt-3.5-turbo-0613:careerbooster-ai::8G6LDoi7",
+      //   temperature: 0.5,
+      // });
+      // CREATING LLM MODAL
+      const openai = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY,
       });
 
       const input = `
@@ -49,12 +54,23 @@ const handler: NextApiHandler = async (req, res) => {
       `;
 
       try {
-        const resp = await model.call(input);
+        // const resp = await model.call(input);
+        const response = await openai.chat.completions.create({
+          model: "ft:gpt-3.5-turbo-0613:careerbooster-ai::8G6LDoi7", // v2
+          messages: [
+            {
+              role: "user",
+              content: input,
+            },
+          ],
+          temperature: 1,
+          max_tokens: 456,
+        });
         // make a trainBot entry
         const obj = {
           type: "register.wizard.listEducation",
           input: input,
-          output: resp,
+          output: response.choices[0].message.content,
           idealOutput: "",
           status: "pending",
           userEmail: trainBotData.userEmail,
@@ -65,7 +81,9 @@ const handler: NextApiHandler = async (req, res) => {
         await TrainBot.create({ ...obj });
 
         // const resp = await chain4.call({ query: input });
-        return res.status(200).json({ success: true, data: resp });
+        return res
+          .status(200)
+          .json({ success: true, data: response.choices[0].message.content });
       } catch (error) {
         return res.status(400).json({ success: false, error });
       }

@@ -14,7 +14,7 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
-  
+
   const [aiInputUserData, setAiInputUserData] = useState<any>();
 
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
@@ -62,7 +62,13 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
       setMsgLoading(true);
       fetch("/api/linkedInBots/keywordsGenerator", {
         method: "POST",
-        body: JSON.stringify({ userData: aiInputUserData }),
+        body: JSON.stringify({
+          userData: aiInputUserData,
+          trainBotData: {
+            userEmail: userData.email,
+            fileAddress: userData.defaultResumeFile,
+          },
+        }),
       })
         .then(async (resp: any) => {
           if (resp.ok) {

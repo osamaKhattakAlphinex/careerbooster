@@ -14,11 +14,12 @@ const activeCSS =
 const inactiveCSS =
   "inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300";
 
-const TrainBotAdminPage = () => {
+const TrainRegistrationBotAdminPage = () => {
   const [activeTab, setActiveTab] = useState("pending");
+  const [dataType, setDataType] = useState<string>("registrationWizard"); // registrationWizard, aiTools
   const [showRecordsType, setShowRecordsType] = useState<string>(
     "register.wizard.basicInfo"
-  );
+  ); // register.wizard.basicInfo, register.wizard.listEducation etc
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [downloading, setDownloading] = useState<boolean>(false);
@@ -31,6 +32,7 @@ const TrainBotAdminPage = () => {
           params: {
             status: activeTab,
             type: showRecordsType,
+            dataType: dataType,
           },
         })
         .then((res: any) => {
@@ -102,11 +104,26 @@ const TrainBotAdminPage = () => {
 
   // when tab changes fetch records for that tab
   useEffect(() => {
-    if (activeTab && activeTab !== "") {
+    if (
+      activeTab &&
+      activeTab !== "" &&
+      showRecordsType &&
+      showRecordsType !== "" &&
+      dataType &&
+      dataType !== ""
+    ) {
       setRecords([]);
       fetchRecords();
     }
-  }, [activeTab, showRecordsType]);
+  }, [activeTab, showRecordsType, dataType]);
+
+  useEffect(() => {
+    if (dataType && dataType === "aiTools") {
+      setShowRecordsType("resume.getBasicInfo");
+    } else {
+      setShowRecordsType("register.wizard.basicInfo");
+    }
+  }, [dataType]);
 
   return (
     <div className="pt-30">
@@ -137,20 +154,127 @@ const TrainBotAdminPage = () => {
                 onChange={(e) => setShowRecordsType(e.target.value)}
                 value={showRecordsType}
               >
-                <option value="register.wizard.basicInfo">
-                  Basic Information
-                </option>
-                <option value="register.wizard.listEducation">
-                  Education List
-                </option>
-                <option value="register.wizard.listExperiences">
-                  Experiences List
-                </option>
-                <option value="register.wizard.individualExperience">
-                  Individual Experience
-                </option>
-                <option value="register.wizard.listSkills">Skills List</option>
+                {dataType === "registrationWizard" && (
+                  <>
+                    <option value="register.wizard.basicInfo">
+                      Basic Information
+                    </option>
+                    <option value="register.wizard.listEducation">
+                      Education List
+                    </option>
+                    <option value="register.wizard.listExperiences">
+                      Experiences List
+                    </option>
+                    <option value="register.wizard.individualExperience">
+                      Individual Experience
+                    </option>
+                    <option value="register.wizard.listSkills">
+                      Skills List
+                    </option>
+                  </>
+                )}
+                {dataType === "aiTools" && (
+                  <>
+                    <option value="resume.getBasicInfo">
+                      Resume {">"} Get Basic info
+                    </option>
+                    <option value="resume.writeSummary">
+                      Resume {">"} Write Summary
+                    </option>
+                    <option value="resume.writeJDSingle">
+                      Resume {">"} Write JD Single
+                    </option>
+                    <option value="resume.writePrimarySkills">
+                      Resume {">"} Write Primary Skills
+                    </option>
+                    <option value="resume.writeProfessionalSkills">
+                      Resume {">"} Write Professional Skills
+                    </option>
+                    <option value="resume.writeSecondarySkills">
+                      Resume {">"} Write Secondary Skills
+                    </option>
+                    <option value="coverLetter.write">
+                      Write Cover Letter
+                    </option>
+                    <option value="email.followupSequence">
+                      Email {"> "} Followup Sequence
+                    </option>
+                    <option value="linkedin.generateKeywords">
+                      LinkedIn {"> "} Generate Keywords
+                    </option>
+                    <option value="linkedin.generateHeadling">
+                      LinkedIn {"> "} Generate Headline
+                    </option>
+                    <option value="linkedin.generateAbout">
+                      LinkedIn {"> "} Generate About
+                    </option>
+                    <option value="linkedin.generateJD">
+                      LinkedIn {"> "} Generate Job Description
+                    </option>
+                    <option value="linkedin.genearteConsultingBid">
+                      Write Consulting Bid
+                    </option>
+                  </>
+                )}
               </select>
+            </div>
+          </div>
+          {/* Data type radio buttons */}
+          <div>
+            <div
+              className="flex"
+              onClick={() => setDataType("registrationWizard")}
+            >
+              <div className="flex items-center h-5">
+                <input
+                  name="dataType"
+                  type="radio"
+                  value="registrationWizard"
+                  checked={dataType === "registrationWizard"}
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+              </div>
+              <div className="ml-2 text-sm">
+                <label
+                  htmlFor="helper-radio"
+                  className="font-medium text-gray-900 dark:text-gray-300"
+                >
+                  Registration Wizard Data sets
+                </label>
+                <p
+                  id="helper-radio-text"
+                  className="text-xs font-normal text-gray-500 dark:text-gray-300"
+                >
+                  Data for Prompts fetching basic information, educations,
+                  experiences skills etc
+                </p>
+              </div>
+            </div>
+            <div className="flex" onClick={() => setDataType("aiTools")}>
+              <div className="flex items-center h-5">
+                <input
+                  name="dataType"
+                  type="radio"
+                  value="aiTools"
+                  checked={dataType === "aiTools"}
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+              </div>
+              <div className="ml-2 text-sm">
+                <label
+                  htmlFor="helper-radio"
+                  className="font-medium text-gray-900 dark:text-gray-300"
+                >
+                  AI Tools Data sets
+                </label>
+                <p
+                  id="helper-radio-text"
+                  className="text-xs font-normal text-gray-500 dark:text-gray-300"
+                >
+                  Data for Prompts running on all tools like resume builder,
+                  linkedin, etc
+                </p>
+              </div>
             </div>
           </div>
 
@@ -159,6 +283,7 @@ const TrainBotAdminPage = () => {
           <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 m-0">
             <li className="mr-2">
               <button
+                disabled={loading}
                 onClick={() => setActiveTab("pending")}
                 className={activeTab === "pending" ? activeCSS : inactiveCSS}
               >
@@ -167,6 +292,7 @@ const TrainBotAdminPage = () => {
             </li>
             <li className="mr-2">
               <button
+                disabled={loading}
                 onClick={() => setActiveTab("reviewed")}
                 className={activeTab === "reviewed" ? activeCSS : inactiveCSS}
               >
@@ -175,6 +301,7 @@ const TrainBotAdminPage = () => {
             </li>
             <li className="mr-2">
               <button
+                disabled={loading}
                 onClick={() => setActiveTab("trained")}
                 className={activeTab === "trained" ? activeCSS : inactiveCSS}
               >
@@ -206,6 +333,9 @@ const TrainBotAdminPage = () => {
                   <tr>
                     <th scope="col" className="px-6 py-3">
                       S.No
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Email
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Type
@@ -249,6 +379,7 @@ const TrainBotAdminPage = () => {
                         className="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                       >
                         <td className="px-6 py-4">{index + 1}</td>
+                        <td className="px-6 py-4">{rec?.userEmail}</td>
                         <th
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-xs"
@@ -302,4 +433,4 @@ const TrainBotAdminPage = () => {
   );
 };
 
-export default TrainBotAdminPage;
+export default TrainRegistrationBotAdminPage;
