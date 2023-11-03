@@ -9,12 +9,7 @@ import axios from "axios";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react";
 
-const activeCSS =
-  "inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500";
-const inactiveCSS =
-  "inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300";
-
-const TrainRegistrationBotAdminPage = () => {
+const LeadsAdminPage = () => {
   const [limitOfRecords, setLimitOfRecords] = useState<number>(10);
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -41,10 +36,6 @@ const TrainRegistrationBotAdminPage = () => {
     }
   };
 
-  //   useEffect(() => {
-  //     const startIndex = (currentPage - 1) * limitOfRecords;
-  //     const endIndex = startIndex + limitOfRecords;
-  //   }, [limitOfRecords]);
   useEffect(() => {
     fetchRecords();
   }, []);
@@ -117,9 +108,9 @@ const TrainRegistrationBotAdminPage = () => {
                     <th scope="col" className="px-6 py-3">
                       Status
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    {/* <th scope="col" className="px-6 py-3">
                       Send to CRM
-                    </th>
+                    </th> */}
                     <th scope="col" className="px-6 py-3">
                       Creation Date
                     </th>
@@ -165,14 +156,32 @@ const TrainRegistrationBotAdminPage = () => {
                           <td className="px-6 py-4">{rec?.phone}</td>
                           <td className="px-6 py-4">{rec?.location}</td>
                           <td className="px-6 py-4">{rec?.recentJob}</td>
-                          <td className="px-6 py-4">{rec?.status}</td>
-                          <td className="px-6 py-4">{rec?.sendtoCRM}</td>
+                          <td className="px-6 py-4">
+                            {rec?.status === "pending" && (
+                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                Pending
+                              </span>
+                            )}
+                            {rec?.status === "reviewed" && (
+                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                Reviewed
+                              </span>
+                            )}
+                            {rec?.status === "trained" && (
+                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                Trained
+                              </span>
+                            )}
+                          </td>
+                          {/* <td className="px-6 py-4">{rec?.sendtoCRM}</td> */}
                           <td className="px-6 py-4">
                             {getFormattedDate(rec?.createdAt)}
                           </td>
                           <td className="flex gap-2 mt-2  items-center ">
                             <Link
-                              href={`/admin/train-bot/${rec._id}`}
+                              href={`/files/linkedin-temp/${rec?.file}`}
+                              target="_blank"
+                              // href={`/admin/train-bot/${rec._id}`}
                               className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
                             >
                               Preview
@@ -183,46 +192,71 @@ const TrainRegistrationBotAdminPage = () => {
                 </tbody>
               </table>
             </div>
-            <div className="pagination-controls flex justify-end mt-4 items-center">
-              <button
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage(currentPage - 1)}
-                className="px-3 py-1 text-sm font-medium text-center text-white rounded-full transform hover:scale-150 no-underline"
-              >
-                &laquo;
-              </button>
-              <div className="flex space-x-2">
-                {Array.from({ length: 3 }).map((_, index) => {
-                  const pageNumber = currentPage - 1 + index;
-                  if (
-                    pageNumber >= 1 &&
-                    pageNumber <= Math.ceil(records.length / limitOfRecords)
-                  ) {
-                    return (
-                      <button
-                        key={pageNumber}
-                        onClick={() => setCurrentPage(pageNumber)}
-                        className={`w-8 h-8 text-sm font-medium text-center text-white rounded-full hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline ${
-                          pageNumber === currentPage ? "bg-blue-700" : ""
-                        }`}
-                      >
-                        {pageNumber}
-                      </button>
-                    );
-                  } else {
-                    return null; // Skip rendering for pages outside the valid range
-                  }
-                })}
-              </div>
-              <button
-                disabled={
-                  currentPage === Math.ceil(records.length / limitOfRecords)
-                }
-                onClick={() => setCurrentPage(currentPage + 1)}
-                className="px-3 py-1 text-sm font-medium text-center text-white rounded-full transform hover:scale-150 no-underline"
-              >
-                &raquo;
-              </button>
+
+            {/* Pagination Controls */}
+            <div className=" flex justify-end mt-4">
+              <nav aria-label="Page navigation example">
+                <ul className="inline-flex -space-x-px">
+                  <li>
+                    <button
+                      className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (currentPage > 1) {
+                          setCurrentPage(currentPage - 1);
+                        }
+                      }}
+                    >
+                      Previous
+                    </button>
+                  </li>
+                  {Array.from({ length: 3 }).map((_, index) => {
+                    const pageNumber = currentPage - 1 + index;
+                    if (
+                      pageNumber >= 1 &&
+                      pageNumber <= Math.ceil(records.length / limitOfRecords)
+                    ) {
+                      return (
+                        <li key={pageNumber}>
+                          <button
+                            className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+                              currentPage === pageNumber
+                                ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
+                                : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+                            }`}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              console.log("first", currentPage, pageNumber);
+                              setCurrentPage(pageNumber);
+                            }}
+                          >
+                            {pageNumber}
+                          </button>
+                        </li>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}
+
+                  <li>
+                    <button
+                      className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (
+                          currentPage <
+                          Math.ceil(records.length / limitOfRecords)
+                        ) {
+                          setCurrentPage(currentPage + 1);
+                        }
+                      }}
+                    >
+                      Next
+                    </button>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>
@@ -231,4 +265,4 @@ const TrainRegistrationBotAdminPage = () => {
   );
 };
 
-export default TrainRegistrationBotAdminPage;
+export default LeadsAdminPage;
