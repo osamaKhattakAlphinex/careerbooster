@@ -14,13 +14,17 @@ const LeadsAdminPage = () => {
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const startIndex = (currentPage - 1) * limitOfRecords;
-  const endIndex = startIndex + limitOfRecords;
-  const fetchRecords = async () => {
+  const [pageStart, setPageStart] = useState<number>(0);
+  const fetchRecords = async (startIndex: number, endIndex: number) => {
     setLoading(true);
     if (!loading) {
       axios
-        .get("/api/leads")
+        .get("/api/leads", {
+          params: {
+            startIndex: startIndex,
+            endIndex: endIndex,
+          },
+        })
         .then((res: any) => {
           if (res.data.success) {
             const result = res.data;
@@ -37,8 +41,12 @@ const LeadsAdminPage = () => {
   };
 
   useEffect(() => {
-    fetchRecords();
-  }, []);
+    setRecords([]);
+    const startIndex = (currentPage - 1) * limitOfRecords;
+    const endIndex = startIndex + limitOfRecords;
+    setPageStart(startIndex);
+    fetchRecords(startIndex, endIndex);
+  }, [currentPage, limitOfRecords]);
 
   return (
     <div className="pt-30">
@@ -51,7 +59,6 @@ const LeadsAdminPage = () => {
           Dashboard
         </Link>
       </div>
-
       <div className="flex flex-col gap-2 items-center justify-center">
         <div className=" p-8 flex flex-col gap-2 border w-11/12">
           <div className="flex justify-between">
@@ -141,54 +148,50 @@ const LeadsAdminPage = () => {
                     </tr>
                   )}
                   {records &&
-                    records
-                      .slice(startIndex, endIndex)
-                      .map((rec: any, index: number) => (
-                        <tr
-                          key={rec._id}
-                          className="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                        >
-                          <td className="px-6 py-4">
-                            {startIndex + index + 1}
-                          </td>
-                          <td className="px-6 py-4">{rec?.name}</td>
-                          <td className="px-6 py-4">{rec?.email}</td>
-                          <td className="px-6 py-4">{rec?.phone}</td>
-                          <td className="px-6 py-4">{rec?.location}</td>
-                          <td className="px-6 py-4">{rec?.recentJob}</td>
-                          <td className="px-6 py-4">
-                            {rec?.status === "pending" && (
-                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                Pending
-                              </span>
-                            )}
-                            {rec?.status === "reviewed" && (
-                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                Reviewed
-                              </span>
-                            )}
-                            {rec?.status === "trained" && (
-                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                                Trained
-                              </span>
-                            )}
-                          </td>
-                          {/* <td className="px-6 py-4">{rec?.sendtoCRM}</td> */}
-                          <td className="px-6 py-4">
-                            {getFormattedDate(rec?.createdAt)}
-                          </td>
-                          <td className="flex gap-2 mt-2  items-center ">
-                            <Link
-                              href={`/files/linkedin-temp/${rec?.file}`}
-                              target="_blank"
-                              // href={`/admin/train-bot/${rec._id}`}
-                              className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
-                            >
-                              Preview
-                            </Link>
-                          </td>
-                        </tr>
-                      ))}
+                    records.map((rec: any, index: number) => (
+                      <tr
+                        key={rec._id}
+                        className="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                      >
+                        <td className="px-6 py-4">{pageStart + index + 1}</td>
+                        <td className="px-6 py-4">{rec?.name}</td>
+                        <td className="px-6 py-4">{rec?.email}</td>
+                        <td className="px-6 py-4">{rec?.phone}</td>
+                        <td className="px-6 py-4">{rec?.location}</td>
+                        <td className="px-6 py-4">{rec?.recentJob}</td>
+                        <td className="px-6 py-4">
+                          {rec?.status === "pending" && (
+                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                              Pending
+                            </span>
+                          )}
+                          {rec?.status === "reviewed" && (
+                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                              Reviewed
+                            </span>
+                          )}
+                          {rec?.status === "trained" && (
+                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                              Trained
+                            </span>
+                          )}
+                        </td>
+                        {/* <td className="px-6 py-4">{rec?.sendtoCRM}</td> */}
+                        <td className="px-6 py-4">
+                          {getFormattedDate(rec?.createdAt)}
+                        </td>
+                        <td className="flex gap-2 mt-2  items-center ">
+                          <Link
+                            href={`/files/linkedin-temp/${rec?.file}`}
+                            target="_blank"
+                            // href={`/admin/train-bot/${rec._id}`}
+                            className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
+                          >
+                            Preview
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
@@ -212,11 +215,7 @@ const LeadsAdminPage = () => {
                   </li>
                   {Array.from({ length: 3 }).map((_, index) => {
                     const pageNumber = currentPage - 1 + index;
-
-                    if (
-                      pageNumber >= 1 &&
-                      pageNumber <= Math.ceil(records.length / limitOfRecords)
-                    ) {
+                    if (pageNumber >= 1) {
                       return (
                         <li key={pageNumber}>
                           <button
@@ -244,12 +243,7 @@ const LeadsAdminPage = () => {
                       className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                       onClick={(e) => {
                         e.preventDefault();
-                        if (
-                          currentPage <
-                          Math.ceil(records.length / limitOfRecords)
-                        ) {
-                          setCurrentPage(currentPage + 1);
-                        }
+                        setCurrentPage(currentPage + 1);
                       }}
                     >
                       Next
