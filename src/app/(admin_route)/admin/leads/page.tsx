@@ -212,6 +212,7 @@ const LeadsAdminPage = () => {
                   </li>
                   {Array.from({ length: 3 }).map((_, index) => {
                     const pageNumber = currentPage - 1 + index;
+
                     if (
                       pageNumber >= 1 &&
                       pageNumber <= Math.ceil(records.length / limitOfRecords)
