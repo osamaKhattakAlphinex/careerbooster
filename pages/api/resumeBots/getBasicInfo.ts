@@ -70,7 +70,9 @@ const handler: NextApiHandler = async (req, res) => {
             shortName: z
               .string()
               .describe("two letters from Name for short name"),
-            jobTitle: z.string().describe("jobTitle OR Desgination "),
+            jobTitle: z
+              .string()
+              .describe("Write a one line slogan for this person "),
             contact: z.object({
               linkedIn: z.string().describe("LinkedInUrl"),
             }),
