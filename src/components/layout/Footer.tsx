@@ -15,7 +15,7 @@ const Footer = () => {
             <div className="row g-6">
               <div className="col-md-4 col-lg-4">
                 <div className="footer-widget text-center text-md-start">
-                  <h6 className="theme-text mb-2">CareerBooster.AI</h6>
+                  <h6 className="theme-text-2 mb-2">CareerBooster.AI</h6>
                   <ul className="link-list list-unstyled mb-0">
                     <li>
                       <Link href="/about">About</Link>
@@ -37,7 +37,7 @@ const Footer = () => {
               </div>
               <div className="col-md-4 col-lg-4">
                 <div className="footer-widget text-center text-md-start">
-                  <h6 className="theme-text mb-2">Use Cases</h6>
+                  <h6 className="theme-text-2 mb-2">Use Cases</h6>
                   <ul className="link-list list-unstyled mb-0">
                     <li>
                       <Link href="/use-cases">Generate Resumes</Link>
@@ -59,7 +59,7 @@ const Footer = () => {
               </div>
               <div className="col-md-4 col-lg-4">
                 <div className="footer-widget text-center text-md-start">
-                  <h6 className="theme-text mb-4">Get connected</h6>
+                  <h6 className="theme-text-2 mb-4">Get connected</h6>
                   {/* <form>
                     <div className="input-group">
                       <input
