@@ -227,7 +227,6 @@ const LeadsAdminPage = () => {
                             }`}
                             onClick={(e) => {
                               e.preventDefault();
-                              console.log("first", currentPage, pageNumber);
                               setCurrentPage(pageNumber);
                             }}
                           >
