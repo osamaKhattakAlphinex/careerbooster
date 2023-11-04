@@ -13,6 +13,7 @@ const LeadsAdminPage = () => {
   const [limitOfRecords, setLimitOfRecords] = useState<number>(10);
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [numberOfRecords, setNumberOfRecords] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageStart, setPageStart] = useState<number>(0);
   const fetchRecords = async (startIndex: number, endIndex: number) => {
@@ -28,6 +29,7 @@ const LeadsAdminPage = () => {
         .then((res: any) => {
           if (res.data.success) {
             const result = res.data;
+            setNumberOfRecords(result.totalRecords);
             setRecords(result.data);
           }
         })
@@ -213,9 +215,13 @@ const LeadsAdminPage = () => {
                       Previous
                     </button>
                   </li>
+                  {/* {!isLastResult &&} */}
                   {Array.from({ length: 3 }).map((_, index) => {
                     const pageNumber = currentPage - 1 + index;
-                    if (pageNumber >= 1) {
+                    if (
+                      pageNumber >= 1 &&
+                      pageNumber <= Math.ceil(numberOfRecords / limitOfRecords)
+                    ) {
                       return (
                         <li key={pageNumber}>
                           <button

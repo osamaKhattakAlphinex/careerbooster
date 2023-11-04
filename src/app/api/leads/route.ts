@@ -13,16 +13,20 @@ export const GET = async (req: any) => {
   try {
     await startDB();
 
-    const recs = await LinkedinToolEntrie.find({});
-    const filteredRecs = await recs.slice(startIndex, endIndex);
+    const totalRecords = await LinkedinToolEntrie.countDocuments({});
+    const filteredRecs = await LinkedinToolEntrie.find({})
+      .skip(startIndex)
+      .limit(endIndex - startIndex);
     return NextResponse.json({
       success: true,
       data: filteredRecs,
+      totalRecords: totalRecords,
     });
   } catch (err) {
     return NextResponse.json({
       success: false,
       data: [],
+      totalRecords: 0,
     });
   }
 };
