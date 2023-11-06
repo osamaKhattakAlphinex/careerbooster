@@ -8,7 +8,7 @@ import {
 import axios from "axios";
 import Link from "next/link";
 
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
 const LeadsAdminPage = () => {
@@ -20,6 +20,7 @@ const LeadsAdminPage = () => {
   const [pageStart, setPageStart] = useState<number>(0);
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const fetchRecords = async (startIndex: number, endIndex: number) => {
     setLoading(true);
     if (!loading) {
@@ -47,6 +48,17 @@ const LeadsAdminPage = () => {
   };
 
   useEffect(() => {
+    const existingNumberOfRecords = searchParams?.get("r");
+    const existingPage = searchParams?.get("p");
+    if (existingNumberOfRecords) {
+      setLimitOfRecords(parseInt(existingNumberOfRecords, 10));
+    }
+    if (existingPage) {
+      setCurrentPage(parseInt(existingPage, 10));
+    }
+  }, [searchParams?.get("r"), searchParams?.get("p")]);
+
+  useEffect(() => {
     setRecords([]);
     const startIndex = (currentPage - 1) * limitOfRecords;
     const endIndex = startIndex + limitOfRecords;
@@ -55,7 +67,6 @@ const LeadsAdminPage = () => {
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
   }, [currentPage, limitOfRecords]);
 
-  useEffect(() => setCurrentPage(1), [limitOfRecords]);
   return (
     <div className="pt-30">
       <div className="my-5 ml-10">
@@ -81,9 +92,10 @@ const LeadsAdminPage = () => {
                 name="status"
                 id="status"
                 className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
-                onChange={(e) =>
-                  setLimitOfRecords(parseInt(e.target.value, 10))
-                }
+                onChange={(e) => {
+                  setLimitOfRecords(parseInt(e.target.value, 10));
+                  setCurrentPage(1);
+                }}
                 value={limitOfRecords}
               >
                 <>
