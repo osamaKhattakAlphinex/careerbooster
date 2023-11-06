@@ -3,7 +3,7 @@ import LinkedInUploadPDFResume from "@/components/new-layout/linkedin/LinkedInUp
 const LinkedInCard = () => {
   return (
     <section className="py-15">
-      <div className="px-5 flex flex-col items-center">
+      <div className=" flex flex-col items-center">
         <LinkedInUploadPDFResume />
       </div>
     </section>
