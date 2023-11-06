@@ -137,21 +137,21 @@ const Header = () => {
           <div className="navbar-content-inner ms-lg-auto d-flex flex-column flex-lg-row align-lg-center gap-4 gap-lg-10 p-2 p-lg-0">
             <ul className="navbar-nav gap-lg-2 gap-xl-5 visible ">
               <li className="nav-item dropdown">
-                <Link className="nav-link active " href="/">
+                <Link className="nav-link " href="/">
                   Home
                 </Link>
               </li>
 
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className={`nav-link`} href="/about">
                   About
                 </Link>
-              </li>
-              <li className="nav-item">
+              </li> */}
+              {/* <li className="nav-item">
                 <Link className={`nav-link`} href="/blogs">
                   Blog
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link className="nav-link " href="/use-cases">
                   Use cases
