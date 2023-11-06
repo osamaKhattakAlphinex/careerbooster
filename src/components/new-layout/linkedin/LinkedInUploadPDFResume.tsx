@@ -22,8 +22,9 @@ const LinkedInUploadPDFResume = () => {
   const [aboutMsgLoading, setAboutMsgLoading] = useState<boolean>(false); // msg loading for about section
   const [headlineMsgLoading, setHeadlineMsgLoading] = useState<boolean>(false); // msg loading for Headline  section
   const [fileError, setFileError] = useState<string>("");
-  const [streamedHeadlineData, setStreamedHeadlineData] = useState("");
-  const [streamedAboutData, setStreamedAboutData] = useState("");
+  const [streamedHeadlineData, setStreamedHeadlineData] =
+    useState("aslkdfjaklsf");
+  const [streamedAboutData, setStreamedAboutData] = useState("alsdkjfklasdf");
   // Define a state variable to hold both first name and full name
   const [names, setNames] = useState({ firstName: "", fullName: "" });
 
@@ -181,12 +182,14 @@ const LinkedInUploadPDFResume = () => {
       console.error("Failed to copy text: ", error);
     }
   };
-  useEffect(() => {
-    if (params?.get("fileName")) {
-      linkedinHeadline(fileName);
-      linkedinAbout(fileName);
-    }
-  }, [params?.get("fileName")]);
+
+  // useEffect(() => {
+  //   if (params?.get("fileName")) {
+  //     linkedinHeadline(fileName);
+  //     linkedinAbout(fileName);
+  //   }
+  // }, [params?.get("fileName")]);
+
   useEffect(() => {
     if (headlineComplete && aboutComplete) {
       // All APIs have completed, call linkedinToolSaveUser
@@ -198,7 +201,7 @@ const LinkedInUploadPDFResume = () => {
       {headlineMsgLoading || aboutMsgLoading ? (
         refreshIconRotating
       ) : (
-        <div className="flex gap-2 text-lime-500 font-bold text-5xl ">
+        <div className="flex gap-2 text-[#33FF00] font-extrabold text-5xl mb-4">
           Success!
         </div>
       )}
@@ -210,7 +213,7 @@ const LinkedInUploadPDFResume = () => {
             </div>
           ) : (
             <>
-              <div className="p-4 border-2">
+              <div className="p-4 border-2 w-1/2">
                 <h1 className="text-4xl flex items-center font-normal mb-4">
                   <span className="text-yellow-400">{starIcon}</span>
                   <span className="ml-6 text-teal-400 text-4xl">
