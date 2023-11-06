@@ -211,25 +211,19 @@
 [data-bs-theme="dark"] .accordion-btn:hover {
   color: #e6f85e;
 }
-@media print{
-  .noprint{
-      display:none;
+@media print {
+  .noprint {
+    display: none;
   }
 }
 /* Styles for mobile devices (up to 767px wide) */
 @media (max-width: 767px) {
   /* Your mobile-specific CSS styles go here */
-  .mobile-mt-9 {
-    margin-top: 9px;
+  .bullet-1 {
+    margin-top: 50px;
+  }
+  .bullet-2 {
+    margin-top: 75px;
   }
 }
-
-/* Styles for tablets and larger devices (768px and wider) */
-@media (min-width: 768px) {
-  .destop-mt-10{
-    margin-top: 10px;
-  }
-  /* Your tablet and desktop-specific CSS styles go here */
-}
-
 

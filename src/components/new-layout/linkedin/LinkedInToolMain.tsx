@@ -164,13 +164,13 @@ const LinkedInToolMain = () => {
               <div className="w-6 h-6 rounded-full bg-gradient-to-t to-fuchsia-500 from-violet-500 border-4 border-gray-800"></div>
             </div>
             <div className="w-[90%]  h-full pt-10">
-              <ul className="text-lg text-gray-200 flex flex-col gap-3">
+              <ul className="text-lg text-gray-200 flex flex-col gap-0 ">
                 <li>Click here to navigate to your LinkedIn profile.</li>
-                <li className="mt-9">
+                <li className="lg:mt-9 bullet-1">
                   On your profile page, click on the ellipsis (three dots) and
-                  select 'Save to PDF.'
+                  select 'Save to PDF'
                 </li>
-                <li className="mt-10">
+                <li className="lg:mt-16 bullet-2">
                   This will allow you to download and save your LinkedIn profile
                   as a PDF document.
                 </li>
@@ -186,7 +186,7 @@ const LinkedInToolMain = () => {
       </div>
       {/* Card */}
       <div className="w-full lg:h-[550px] lg:flex rounded-2xl mt-14 bg-gradient-to-r from-fuchsia-500 to-violet-500  border-gray-800">
-        <div className=" text-center lg:w-6/12 lg:my-8 lg:mx-14  lg:text-left">
+        <div className=" text-center lg:w-6/12 lg:my-8 lg:mx-14  md:text-left">
           <h3 className="py-6 px-3 lg:text-5xl text-normal font-bold  lg:mr-4 lg:mt-3">
             Challenge us, prove us wrong, and earn a $1000 reward!
           </h3>
