@@ -19,7 +19,7 @@ const CoverLetterWriter = () => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
   const [show, setShow] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<string>(""); // type
+  const [selectedOption, setSelectedOption] = useState<string>("profile"); // type
   const [streamedData, setStreamedData] = useState<string>("");
 
   const [selectedFile, setSelectedFile] = useState<string>("");

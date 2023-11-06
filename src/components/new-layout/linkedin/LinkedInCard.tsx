@@ -5,7 +5,7 @@ const LinkedInCard = () => {
     <section className="py-15">
       <div className="container">
         <div className="px-10 flex flex-col items-center">
-        <LinkedInUploadPDFResume/>
+          <LinkedInUploadPDFResume />
         </div>
       </div>
     </section>
