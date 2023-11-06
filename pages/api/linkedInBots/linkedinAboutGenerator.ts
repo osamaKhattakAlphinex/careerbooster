@@ -5,17 +5,34 @@ import path from "path";
 import Prompt from "@/db/schemas/Prompt";
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
-    const {fileName,option,instruction} = req.body;
+    const { fileName, option, instruction } = req.body;
     let prompt;
-    if (option === "instruction"){
+
+    if (option === "instruction") {
       prompt = instruction;
-    }else if (option) {
-      const promptRec = await Prompt.findOne({
-        type: "linkedin",
-        name: option,
-        active: true,
-      });
-      prompt = promptRec ? promptRec.value : ""; // Set the prompt if found
+    } else if (option) {
+      // const promptRec = await Prompt.findOne({
+      //   type: "linkedin",
+      //   name: option,
+      //   active: true,
+      // });
+      // prompt = promptRec ? promptRec.value : ""; // Set the prompt if found
+      prompt = `Write a maximum of 2000 characters copy for the “About Section” of my LinkedIn based on the data you have. Use the following instructions.
+
+      - It should be detailed but compact, and engaging
+      
+      - Use relevant industry jargon as necessary. Make sure to provide a brief rundown of the main technical skills related to my job title. 
+      
+      - Hook the audience right away and make the first sentence count by showing passion.
+      
+      - Provide a professional introduction explaining the present role and framing past job titles.
+      
+      - Highlight successes and the services I can offer to potential clients.
+      
+      - Include a call to action.
+      
+      
+      Just give me the answer not add any extra labels`;
     }
 
     // For LinkedIn Tool if file is uploaded then load content from that fiel
@@ -31,7 +48,6 @@ const handler: NextApiHandler = async (req, res) => {
 
       let contentTxt = docs.map((doc: any) => doc.pageContent);
       const content = contentTxt.join(" ");
-     
 
       if (content) {
         // CREATING LLM MODAL
@@ -43,8 +59,10 @@ const handler: NextApiHandler = async (req, res) => {
         const input = `
             This is the User data:
             ${content}
+
             This is the prompt:
             ${prompt}
+            
         `;
 
         try {

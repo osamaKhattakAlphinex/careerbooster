@@ -33,7 +33,8 @@ const LinkedInToolMain = () => {
         .then(async (resp: any) => {
           const res = await resp.json();
           if (res.success) {
-            const uploadedFileName = res.fileName + "_" + file.name;
+            // const uploadedFileName = res.fileName + "_" + file.name;
+            const uploadedFileName = res.fileName + ".pdf";
             setFileName(uploadedFileName);
             // linkedinHeadline(uploadedFileName);
             // linkedinAbout(uploadedFileName);
