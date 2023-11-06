@@ -59,7 +59,6 @@ const RegistrationForm = () => {
     }),
 
     onSubmit: async (values) => {
-      console.log(formik);
       setSubmittingError("");
 
       if (values.terms) {
@@ -71,7 +70,7 @@ const RegistrationForm = () => {
           email: values.email,
           password: values.password,
           file: values.file,
-          status: "pending",
+          status: false,
           alertConsent: values.alertConsent,
         };
 
@@ -172,7 +171,7 @@ const RegistrationForm = () => {
         .then(async (resp: any) => {
           const res = await resp.json();
           if (res.success) {
-            const uploadedFileName = res.fileName + "_" + file.name;
+            const uploadedFileName = res.fileName + ".pdf";
             dispatch(setUploadedFileName(uploadedFileName));
             fetchRegistrationDataFromResume(uploadedFileName);
           } else {
@@ -200,7 +199,6 @@ const RegistrationForm = () => {
           const res = await resp.json();
           if (res.success) {
             const userData = JSON.parse(res.data);
-
             // router.replace(
             //   `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&file=${fileName}`
             // );
@@ -271,7 +269,7 @@ const RegistrationForm = () => {
     <div className="col-lg-12" data-aos="fade-up-sm" data-aos-delay="100">
       <div className="account-wrapper d-flex flex-column justify-center">
         <div className="text-center">
-          <a href="">
+          <a>
             {/* <Image
               src="/assets/images/logo.svg"
               alt=""

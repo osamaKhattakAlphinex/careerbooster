@@ -43,6 +43,7 @@ const handler: NextApiHandler = async (req, res) => {
           replace the VALUE_HERE with the actual value
           {
             fullName: VALUE_HERE,
+            firstName: VALUE_HERE,
             email: VALUE_HERE,
             phone : VALUE_HERE,
             recentJob: VALUE_HERE,
@@ -55,7 +56,7 @@ const handler: NextApiHandler = async (req, res) => {
 
         try {
           const resp = await model.call(input);
-          const { fullName, email, phone, location, recentJob } =
+          const { fullName, email, phone, location, recentJob ,firstName } =
             JSON.parse(resp);
 
           //Create user in DB
@@ -74,7 +75,7 @@ const handler: NextApiHandler = async (req, res) => {
           // const resp = await chain4.call({ query: input });
           // const respString = JSON.stringify(resp);
 
-          return res.status(200).json({ success: true });
+          return res.status(200).json({ success: true , firstName,fullName});
         } catch (error) {
           return res.status(400).json({ success: false, error });
         }

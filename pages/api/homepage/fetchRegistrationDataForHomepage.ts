@@ -21,8 +21,7 @@ function removeSpecialChars(str: string) {
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const fileName = req.body.fileName;
-
-    // For Registration if file is uploaded then load content from that fiel
+    // For Registration if file is uploaded then load content from that file
     if (fileName) {
       // load file
       const dir = path.join(process.cwd() + "/public", "/files", `/temp`);

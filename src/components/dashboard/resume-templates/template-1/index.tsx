@@ -99,20 +99,27 @@ const ResumeTemplate1 = ({
 }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
+
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newSecondarySkill, setNewSecondarySkill] = useState(false);
   const [newProfessionalSkill, setNewProfessionalSkill] = useState(false);
+  const [newWorkExperience, setNewWorkExperience] = useState<number>();
+  const [newAchievement, setNewAchievement] = useState("");
   const [primarySkillAddButtonVisible, setPrimarySkillAddButtonVisible] =
     useState(false);
   const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
     useState(false);
+
   const [
     professionalSkillAddButtonVisible,
     setProfessionalSkillAddButtonVisible,
   ] = useState(false);
+  const [workExperienceAddButtonVisible, setWorkExperienceAddButtonVisible] =
+    useState<number>();
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [secondarySkill, setSecondarySkill] = useState<string>("");
   const [professionalSkill, setProfessionalSkill] = useState<string>("");
+
   const addPrimarySkill = () => {
     const primarySkills = resume?.primarySkills;
     const updatedSkills = [...primarySkills];
@@ -132,11 +139,12 @@ const ResumeTemplate1 = ({
       ...resume,
       secondarySkills: updatedSkills,
     });
-  }
+  };
   const addProfessionalSkill = () => {
     const professionalSkills = resume?.professionalSkills;
     const updatedSkills = [...professionalSkills];
     updatedSkills.push(professionalSkill);
+
     dispatch(setProfessionalSkills({ professionalSkills: updatedSkills }));
     saveResumeToDB({
       ...resume,
@@ -377,7 +385,7 @@ const ResumeTemplate1 = ({
                     <button
                       onClick={() => {
                         setNewPrimarySkill(false);
-                        setPrimarySkillAddButtonVisible(true);
+                        setPrimarySkillAddButtonVisible(false);
                       }}
                       className="bg-red-500 py-1 px-2 text-white rounded-full"
                     >
@@ -626,7 +634,7 @@ const ResumeTemplate1 = ({
                       <button
                         onClick={() => {
                           setNewProfessionalSkill(false);
-                          setPrimarySkillAddButtonVisible(true);
+                          setPrimarySkillAddButtonVisible(false);
                         }}
                         className="bg-red-500 py-1 px-2 text-white rounded-full"
                       >
@@ -664,12 +672,10 @@ const ResumeTemplate1 = ({
               <ul
                 className="pl-0 flex flex-col gap-1 mb-4 text-sm"
                 onMouseEnter={() =>
-                  !newSecondarySkill &&
-                  setSecondarySkillAddButtonVisible(true)
+                  !newSecondarySkill && setSecondarySkillAddButtonVisible(true)
                 }
                 onMouseLeave={() =>
-                  !newSecondarySkill &&
-                  setSecondarySkillAddButtonVisible(false)
+                  !newSecondarySkill && setSecondarySkillAddButtonVisible(false)
                 }
               >
                 <li className="font-semibold uppercase">Secondary</li>
@@ -727,60 +733,60 @@ const ResumeTemplate1 = ({
                 ))}
                 {/* ADD New Secondary Skill  */}
                 {newSecondarySkill ? (
-                    <>
-                      <div className="w-full rounded-2xl border border-black flex h-9.5">
-                        <input
-                          type="text"
-                          value={secondarySkill}
-                          placeholder="Please add Skill"
-                          className="bg-white outline-none rounded-2xl px-2 w-full"
-                          autoFocus
-                          onChange={(e) => setSecondarySkill(e.target.value)}
-                          onKeyPress={(e) => {
-                            if (e.key === "Enter") {
-                              if (secondarySkill.trim() !== "") {
-                                addSecondarySkill();
-                                setSecondarySkill("");
-                              }
-                            }
-                          }}
-                        />
-                        <button
-                          className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
-                          onClick={() => {
+                  <>
+                    <div className="w-full rounded-2xl border border-black flex h-9.5">
+                      <input
+                        type="text"
+                        value={secondarySkill}
+                        placeholder="Please add Skill"
+                        className="bg-white outline-none rounded-2xl px-2 w-full"
+                        autoFocus
+                        onChange={(e) => setSecondarySkill(e.target.value)}
+                        onKeyPress={(e) => {
+                          if (e.key === "Enter") {
                             if (secondarySkill.trim() !== "") {
                               addSecondarySkill();
-                              setSecondarySkill(""); // Empty the input field
+                              setSecondarySkill("");
                             }
-                          }}
-                        >
-                          save
-                        </button>
-                      </div>
-                      <button
-                        onClick={() => {
-                          setNewSecondarySkill(false);
-                          setSecondarySkillAddButtonVisible(true);
+                          }
                         }}
-                        className="bg-red-500 py-1 px-2  text-white rounded-full"
+                      />
+                      <button
+                        className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
+                        onClick={() => {
+                          if (secondarySkill.trim() !== "") {
+                            addSecondarySkill();
+                            setSecondarySkill(""); // Empty the input field
+                          }
+                        }}
                       >
-                        Cancel
+                        save
                       </button>
-                    </>
-                  ) : (
-                    " "
-                  )}
-                  {secondarySkillAddButtonVisible ? (
-                    <div
-                      className="border-2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                    </div>
+                    <button
                       onClick={() => {
-                        setNewSecondarySkill(true);
+                        setNewSecondarySkill(false);
                         setSecondarySkillAddButtonVisible(false);
                       }}
+                      className="bg-red-500 py-1 px-2  text-white rounded-full"
                     >
-                      + Add
-                    </div>
-                  ) : null}
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  " "
+                )}
+                {secondarySkillAddButtonVisible ? (
+                  <div
+                    className="border-2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                    onClick={() => {
+                      setNewSecondarySkill(true);
+                      setSecondarySkillAddButtonVisible(false);
+                    }}
+                  >
+                    + Add
+                  </div>
+                ) : null}
               </ul>
             </>
           )}
@@ -946,13 +952,17 @@ const ResumeTemplate1 = ({
                         />
                       </span>
                     </h2>
-                    <div className="p-4">
+                    <div
+                      className="p-4"
+                      onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
+                      onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
+                    >
                       {rec?.achievements && (
                         <ul className="pl-0 flex flex-col gap-1 text-sm">
                           {rec?.achievements.map(
                             (achivement: any, ind: number) => (
                               <li
-                                className="list-disc hover:shadow-md hover:bg-gray-100"
+                                className="list-disc hover:shadow-md relative parent hover:bg-gray-100"
                                 key={ind}
                               >
                                 <EditableField
@@ -993,11 +1003,153 @@ const ResumeTemplate1 = ({
                                     });
                                   }}
                                 />
+                                <div
+                                  onClick={() => {
+                                    const workExperienceArray =
+                                      resume.workExperienceArray.map(
+                                        (rec: any, index: number) => {
+                                          if (index === i) {
+                                            return {
+                                              ...rec,
+                                              achievements:
+                                                rec.achievements.filter(
+                                                  (
+                                                    ach: any,
+                                                    achIndex: number
+                                                  ) => achIndex !== ind
+                                                ),
+                                            };
+                                          }
+                                          return rec;
+                                        }
+                                      );
+                                    dispatch(
+                                      setWorkExperienceArray({
+                                        workExperienceArray:
+                                          workExperienceArray,
+                                      })
+                                    );
+                                    saveResumeToDB({
+                                      ...resume,
+                                      workExperienceArray: workExperienceArray,
+                                    });
+                                  }}
+                                  className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
+                                >
+                                  {crossIcon}
+                                </div>
                               </li>
                             )
                           )}
                         </ul>
                       )}
+                      {newWorkExperience === i ? (
+                        <>
+                          <div className="w-full rounded-md border flex h-9.5">
+                            <textarea
+                              className="w-10/12 rounded-l-md text bg-transparent p-2" // Apply Tailwind CSS classes
+                              onChange={(e) =>
+                                setNewAchievement(e.target.value)
+                              }
+                              value={newAchievement}
+                              rows={1}
+                              cols={1}
+                              name="newAchievement"
+                              id="newAchievement"
+                              autoComplete="off"
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                  e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
+                                  // Save the new achievement to the state and possibly the database
+                                  if (newAchievement !== "") {
+                                    let updatedExp =
+                                      resume?.workExperienceArray.map(
+                                        (exp: any, index: number) => {
+                                          if (index === i) {
+                                            return {
+                                              ...exp,
+                                              achievements: [
+                                                ...exp?.achievements,
+                                                newAchievement,
+                                              ],
+                                            };
+                                          }
+                                          return exp;
+                                        }
+                                      );
+                                    dispatch(
+                                      setWorkExperienceArray({
+                                        workExperienceArray: updatedExp,
+                                      })
+                                    );
+                                    saveResumeToDB({
+                                      ...resume,
+                                      workExperienceArray: updatedExp,
+                                    });
+                                    setNewAchievement("");
+                                  }
+                                }
+                              }}
+                            />
+                            <button
+                              className="bg-green-500 w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
+                              onClick={() => {
+                                // Save the new achievement to the state and possibly the database
+                                if (newAchievement !== "") {
+                                  let updatedExp =
+                                    resume?.workExperienceArray.map(
+                                      (exp: any, index: number) => {
+                                        if (index === i) {
+                                          return {
+                                            ...exp,
+                                            achievements: [
+                                              ...exp?.achievements,
+                                              newAchievement,
+                                            ],
+                                          };
+                                        }
+                                        return exp;
+                                      }
+                                    );
+                                  dispatch(
+                                    setWorkExperienceArray({
+                                      workExperienceArray: updatedExp,
+                                    })
+                                  );
+                                  saveResumeToDB({
+                                    ...resume,
+                                    workExperienceArray: updatedExp,
+                                  });
+                                  setNewAchievement("");
+                                }
+                              }}
+                            >
+                              Save
+                            </button>
+                          </div>
+                          <button
+                            onClick={() => {
+                              setNewAchievement("");
+                              setNewWorkExperience(-1);
+                              setWorkExperienceAddButtonVisible(-1);
+                            }}
+                            className="bg-red-500 w-2/12 py-1 px-2 mt-2 text-white rounded-full"
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      ) : null}
+                      {workExperienceAddButtonVisible === i &&
+                      newWorkExperience !== i ? (
+                        <div
+                          className="border-2 w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                          onClick={() => {
+                            setNewWorkExperience(i);
+                          }}
+                        >
+                          + Add
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 );

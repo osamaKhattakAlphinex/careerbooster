@@ -19,7 +19,6 @@ const handler: NextApiHandler = async (req, res) => {
 
       let contentTxt = docs.map((doc: any) => doc.pageContent);
       const content = contentTxt.join(" ");
-      
 
       if (content) {
         // CREATING LLM MODAL
@@ -32,7 +31,7 @@ const handler: NextApiHandler = async (req, res) => {
             This is the User data:
             ${content}
   
-            No Write a LinkedIn headline from the above user data for me using the headline formula below. 
+            Now Write a LinkedIn headline from the above user data for me using the headline formula below. 
             Job Title |Top Keyword 1 | Top Keyword 2 | Top Keyword 3 | Top Keyword 4 | Value proposition statement
             For example, a Marketing Director could use a headline like "Marketing Director | Social Media Expert | Email Marketing | PPC Expert |  Customer Engagement & Retention | Passionate About Mission Focused Brands & Companies.
         `;

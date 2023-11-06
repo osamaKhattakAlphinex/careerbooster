@@ -40,19 +40,19 @@ const ResumeCreator = () => {
       </div>
       <div className="flex m-10 gap-4">
         <div className="w-1/2 p-4  border border-gray-200 rounded-lg shadow sm:p-6">
-          <KeywordsGenerator setKeywords={setKeywords} />
+          <HeadlineGenerator setHeadline={setHeadline} />
         </div>
         <div className="w-1/2 p-4  border border-gray-200 rounded-lg shadow sm:p-6">
-          <HeadlineGenerator setHeadline={setHeadline} />
+          <AboutGenerator setAbout={setAbout} />
         </div>
       </div>
 
       <div className="flex m-10 gap-4">
         <div className="w-1/2 xs:w-full p-4  border border-gray-200 rounded-lg shadow sm:p-6">
-          <AboutGenerator setAbout={setAbout} />
+          <JDGenerator setJobDesc={setJobDesc} />
         </div>
         <div className="w-1/2 xs:w-full p-4  border border-gray-200 rounded-lg shadow sm:p-6">
-          <JDGenerator setJobDesc={setJobDesc} />
+          <KeywordsGenerator setKeywords={setKeywords} />
         </div>
       </div>
     </div>

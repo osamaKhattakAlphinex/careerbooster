@@ -1,4 +1,4 @@
-import LinkedInToolNew from "@/components/new-layout/linkedin/LinkedInToolNew";
+import PageHeader from "@/components/new-layout/PageHeader";
 import { Metadata } from "next";
 import LinedInCard from "@/components/new-layout/linkedin/LinkedInCard";
 export const metadata: Metadata = {
@@ -26,11 +26,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LinkedInNewPage() {
+export default function LinkedInPage() {
   return (
-    <div className="flex-grow-1 mb-20 bg-gradient-to-r from-gray-950 via-blue-950 to-purple-900">
+    <main className="flex-grow-1 mt-24 mb-20 bg-gradient-to-r from-gray-950 via-blue-950 to-purple-900">
       {/* LinkedIn Tool Card */}
-      <LinkedInToolNew />
-    </div>
+      <LinedInCard />
+    </main>
   );
 }
