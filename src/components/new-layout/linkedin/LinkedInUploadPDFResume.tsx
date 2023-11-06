@@ -24,10 +24,8 @@ const LinkedInUploadPDFResume = () => {
   const [aboutMsgLoading, setAboutMsgLoading] = useState<boolean>(false); // msg loading for about section
   const [headlineMsgLoading, setHeadlineMsgLoading] = useState<boolean>(false); // msg loading for Headline  section
   const [fileError, setFileError] = useState<string>("");
-  const [streamedHeadlineData, setStreamedHeadlineData] = useState(
-    "Marketing Strategist | Branding Expert | Helping businesses build their brand and grow their revenue | Head of People | Talent HR Consultant | People Developer | Recruitment Expert"
-  );
-  const [streamedAboutData, setStreamedAboutData] = useState("alsdkjfklasdf");
+  const [streamedHeadlineData, setStreamedHeadlineData] = useState("");
+  const [streamedAboutData, setStreamedAboutData] = useState("");
   // Define a state variable to hold both first name and full name
   const [names, setNames] = useState({ firstName: "", fullName: "" });
 
@@ -186,12 +184,12 @@ const LinkedInUploadPDFResume = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (params?.get("fileName")) {
-  //     linkedinHeadline(fileName);
-  //     linkedinAbout(fileName);
-  //   }
-  // }, [params?.get("fileName")]);
+  useEffect(() => {
+    if (params?.get("fileName")) {
+      linkedinHeadline(fileName);
+      linkedinAbout(fileName);
+    }
+  }, [params?.get("fileName")]);
 
   useEffect(() => {
     if (headlineComplete && aboutComplete) {
