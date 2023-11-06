@@ -121,6 +121,7 @@ const resumeSlice = createSlice({
         uploadedFileName: action.payload,
       };
     },
+
     setBasicInfo(state, action) {
       return {
         ...state,
@@ -167,7 +168,7 @@ const resumeSlice = createSlice({
         professionalSkills: action.payload.professionalSkills,
       };
     },
-   
+
     // setLoadingState(state, action) {
     //   return {
     //     ...state,

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-const { Schema } = mongoose;
 import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import LinkedinToolEntrie from "@/db/schemas/LinkedinToolEntrie";
@@ -25,6 +24,7 @@ export const GET = async (req: any) => {
 
     // Fetch the data as usual
     const filteredRecs = await LinkedinToolEntrie.find({})
+      .sort({ createdAt: 1 })
       .skip(startIndex)
       .limit(endIndex - startIndex);
 
