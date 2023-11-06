@@ -534,7 +534,7 @@ const LinkedInUploadPDFResume = () => {
 
       {streamedAboutData && (
         <div className="mt-9  flex flex-col justify-center items-center gap-2">
-          <h2 className=" text-red-600 ">Don't Like the results?</h2>
+          <h2 className=" text-red-600 ">Don{"'"}t Like the results?</h2>
           <p className="text-2xl ">
             Change your preference and regenerate you summary
           </p>

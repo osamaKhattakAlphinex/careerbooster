@@ -88,8 +88,8 @@ const LinkedInToolMain = () => {
         </h3>
         <h5 className="mt-5 lg:text-2xl text-center lg:mt-3 leading-7 font-normal  ">
           Simply Upload your Resume or LinkedIn Profile in PDF. Receive results
-          perfectly tailored for you — or we'll compensate you $1000 if we waste
-          your time with irrelevant outcomes.
+          perfectly tailored for you — or we{"'"}ll compensate you $1000 if we
+          waste your time with irrelevant outcomes.
         </h5>
         <div className="mt-5 flex justify-center md:mt-11">
           <label className="h-16 w-84 lg:h-16 lg:w-84 py-3 cursor-pointer px-3 md:px-6 rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
@@ -148,8 +148,8 @@ const LinkedInToolMain = () => {
       <div className="md:flex mt-20">
         <div className="lg:w-6/12">
           <p className="text-3xl text-center lg:text-3xl font-semibold">
-            I don't have a resume. How can I upload my LinkedIn profile in PDF
-            format?
+            I don{"'"}t have a resume. How can I upload my LinkedIn profile in
+            PDF format?
           </p>
           <div className="flex">
             <div className="w-[10%] -mx-1 lg:-mx-4 pt-11 h-full flex flex-col items-center  gap-1">
@@ -169,7 +169,7 @@ const LinkedInToolMain = () => {
                 <li>Click here to navigate to your LinkedIn profile.</li>
                 <li className="lg:mt-9 bullet-1">
                   On your profile page, click on the ellipsis (three dots) and
-                  select 'Save to PDF'
+                  select {"'"}Save to PDF{"'"}
                 </li>
                 <li className="lg:mt-16 bullet-2">
                   This will allow you to download and save your LinkedIn profile
@@ -195,9 +195,9 @@ const LinkedInToolMain = () => {
             We take immense pride in the accuracy and relevance of our AI tool,
             which consistently delivers results that our users adore. Yet, if
             you pinpoint a discrepancy and show that our tool produced content
-            that's either generic or entirely unrelated to your profile, we
+            that{"'"}s either generic or entirely unrelated to your profile, we
             recognize the misstep and will reward you with $1000 for your time.
-            Our goal isn't merely to meet expectations but to surpass them,
+            Our goal isn{"'"}t merely to meet expectations but to surpass them,
             guaranteeing your complete satisfaction.
           </p>
         </div>
@@ -218,19 +218,19 @@ const LinkedInToolMain = () => {
           Why is keyword optimization crucial?{" "}
         </h3>
         <p className="text-xl  font-normal text-center text-gray-300 lg:px-5">
-          Recruiters often use LinkedIn's search engine to find potential
-          candidates. If your profile isn't optimized with relevant keywords for
-          your industry and role, you're likely to be left out of these
+          Recruiters often use LinkedIn{"'"}s search engine to find potential
+          candidates. If your profile isn{"'"}t optimized with relevant keywords
+          for your industry and role, you{"'"}re likely to be left out of these
           searches, no matter how qualified you might be.
         </p>
         <h3 className="text-center pt-1 lg:px-10  text-3xl text-gray-100 font-semibold leading-normal mt-10 bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-fuchsia-500">
           Personalized to Perfection{" "}
         </h3>
         <p className="text-xl  font-normal text-center text-gray-300 lg:px-5">
-          CareerBooster.AI doesn't just sprinkle random keywords onto your
+          CareerBooster.AI doesn{"'"}t just sprinkle random keywords onto your
           profile. Our advanced AI technology dives deep into your resume or
           LinkedIn PDF to understand your career trajectory, aspirations, and
-          strengths. This ensures that the generated content isn't just
+          strengths. This ensures that the generated content isn{"'"}t just
           keyword-rich but also aligns perfectly with your professional
           narrative.
         </p>
@@ -246,7 +246,8 @@ const LinkedInToolMain = () => {
           Keyword-Optimized, Captivating & Under 30 Seconds!
         </h5>
         <h3 className="text-center lg:px-16 lg:leading-relaxed lg:text-5xl font-bold  lg:mt-10">
-          Don't let your LinkedIn profile be just another face in the crowd. Use{" "}
+          Don{"'"}t let your LinkedIn profile be just another face in the crowd.
+          Use{" "}
           <span className="lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r to-violet-500 from-fuchsia-500">
             CareerBooster.AI
           </span>{" "}
