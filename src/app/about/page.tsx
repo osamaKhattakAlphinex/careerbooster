@@ -1,6 +1,6 @@
 import AboutCard from "@/components/new-layout/About/AboutCard";
 import BrandsCard from "@/components/new-layout/About/BrandsCard";
-import FeaturesCard from "@/components/new-layout/About/FeaturesCard";
+// import FeaturesCard from "@/components/new-layout/About/FeaturesCard";
 import TeamCard from "@/components/new-layout/About/TeamCard";
 import CTASection from "@/components/new-layout/Homepage/CTASection";
 import FeaturesSection from "@/components/new-layout/Homepage/FeaturesSection";

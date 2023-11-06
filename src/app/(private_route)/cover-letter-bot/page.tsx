@@ -19,7 +19,7 @@ const CoverLetterWriter = () => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
   const [show, setShow] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<string>(""); // type
+  const [selectedOption, setSelectedOption] = useState<string>("profile"); // type
   const [streamedData, setStreamedData] = useState<string>("");
 
   const [selectedFile, setSelectedFile] = useState<string>("");
@@ -55,7 +55,12 @@ const CoverLetterWriter = () => {
         type: selectedOption,
         email: session?.user?.email,
         jobDescription,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
       };
+
       if (selectedOption === "file") {
         obj.file = selectedFile;
       } else if (selectedOption === "aiResume") {

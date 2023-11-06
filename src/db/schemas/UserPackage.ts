@@ -46,6 +46,7 @@ const UserPackageScehema = new Schema(
       type: String,
       enum: ["active", "inactive"],
       default: "active",
+      required: true,
     },
     features: {
       type: [String],

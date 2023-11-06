@@ -14,6 +14,7 @@ import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 
 import { RetrievalQAChain } from "langchain/chains";
+import TrainBot from "@/db/schemas/TrainBot";
 
 // PROMPT
 // Here is the Job description:
@@ -32,6 +33,7 @@ const handler: NextApiHandler = async (req, res) => {
     const file = reqBody.file;
     const resumeId = reqBody.resumeId;
     const jobDescription = reqBody.jobDescription;
+    const trainBotData = reqBody.trainBotData;
 
     // fetch prompt from db
     const promptRec = await Prompt.findOne({
@@ -96,10 +98,24 @@ const handler: NextApiHandler = async (req, res) => {
         llm: model,
       });
 
-      await chainB.call({
+      const resp = await chainB.call({
         userData: JSON.stringify(userData),
         prompt,
       });
+
+      // make a trainBot entry
+      const obj = {
+        type: "coverLetter.write",
+        input: prompt,
+        output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+        idealOutput: "",
+        status: "pending",
+        userEmail: trainBotData.userEmail,
+        fileAddress: trainBotData.fileAddress,
+        Instructions: `Write Cover Letter`,
+      };
+
+      await TrainBot.create({ ...obj });
 
       res.end();
     }

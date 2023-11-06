@@ -39,6 +39,7 @@ const RegistrationForm = () => {
       email: "",
       password: "",
       confirmpassword: "",
+      // status: "pending",
       terms: false,
       alertConsent: false,
       file: "",
@@ -58,6 +59,7 @@ const RegistrationForm = () => {
     }),
 
     onSubmit: async (values) => {
+      console.log(formik);
       setSubmittingError("");
 
       if (values.terms) {
@@ -69,6 +71,7 @@ const RegistrationForm = () => {
           email: values.email,
           password: values.password,
           file: values.file,
+          status: false,
           alertConsent: values.alertConsent,
         };
 
@@ -99,10 +102,10 @@ const RegistrationForm = () => {
             } else {
               setSubmittingError("Something went wrong");
             }
+          })
+          .finally(() => {
+            setSubmitting(false);
           });
-        // .finally(() => {
-        //   setSubmitting(false);
-        // });
       }
     },
   });

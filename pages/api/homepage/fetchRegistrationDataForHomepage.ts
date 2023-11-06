@@ -1,12 +1,27 @@
 import { NextApiHandler } from "next";
-import { OpenAI } from "langchain/llms/openai";
+// import { OpenAI } from "langchain/llms/openai";
+import OpenAI from "openai";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import path from "path";
+
+// to Remove special characters from string
+function removeSpecialChars(str: string) {
+  // Remove new lines
+  str = str.replace(/[\r\n]+/gm, "");
+
+  // Remove Unicode characters
+  str = str.replace(/[^\x00-\x7F]/g, "");
+
+  // Remove icons
+  str = str.replace(/[^\w\s]/gi, "");
+
+  return str;
+}
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const fileName = req.body.fileName;
-    
+
     // For Registration if file is uploaded then load content from that fiel
     if (fileName) {
       // load file
@@ -15,12 +30,18 @@ const handler: NextApiHandler = async (req, res) => {
       const docs = await loader.load();
 
       let contentTxt = docs.map((doc: any) => doc.pageContent);
-      const content = contentTxt.join(" ");
+
+      const contentAll = contentTxt.join(" ");
+      const content = removeSpecialChars(contentAll);
+
       if (content) {
         // CREATING LLM MODAL
-        const model = new OpenAI({
-          modelName: "gpt-3.5-turbo",
-          temperature: 0.5,
+        // const model = new OpenAI({
+        //   modelName: "gpt-3.5-turbo",
+        //   temperature: 0.5,
+        // });
+        const openai = new OpenAI({
+          apiKey: process.env.OPENAI_API_KEY,
         });
 
         const input = `
@@ -45,9 +66,23 @@ const handler: NextApiHandler = async (req, res) => {
       `;
 
         try {
-          const resp = await model.call(input);
+          // const resp = await model.call(input);
+          const response = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo", // v2
+            messages: [
+              {
+                role: "user",
+                content: input,
+              },
+            ],
+            temperature: 1,
+            max_tokens: 456,
+          });
+
           // const resp = await chain4.call({ query: input });
-          return res.status(200).json({ success: true, data: resp });
+          return res
+            .status(200)
+            .json({ success: true, data: response.choices[0].message.content });
         } catch (error) {
           return res.status(400).json({ success: false, error });
         }

@@ -8,11 +8,14 @@ export const GET = async (req: any) => {
   const url = new URL(req.url);
 
   const status = url.searchParams.get("status");
+  const type = url.searchParams.get("type");
+
+  const dataType = url.searchParams.get("dataType");
 
   try {
     await startDB();
 
-    const recs = await TrainBot.find({ status: status });
+    const recs = await TrainBot.find({ status: status, type: type });
 
     return NextResponse.json({
       success: true,

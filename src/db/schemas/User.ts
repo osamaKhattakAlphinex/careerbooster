@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 import bcrypt from "bcrypt";
 import UserPackage from "@/db/schemas/UserPackage";
+import { boolean } from "yup";
 
 interface Methods {
   comparePassword(password: string): Promise<boolean>;
@@ -34,6 +35,10 @@ const UserSchema = new Schema(
       street: String,
       cityState: String,
       postalCode: String,
+    },
+    status: {
+      type: Boolean,
+      required: true,
     },
     education: [],
     experience: [],
@@ -80,7 +85,7 @@ const UserSchema = new Schema(
       headline: String,
       about: String,
       jobDescription: String,
-      coverLetter: String ,
+      coverLetter: String,
       emailGeneration: String,
       consultingBidsGeneration: String,
     },

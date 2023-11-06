@@ -21,7 +21,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
-  
+
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
@@ -29,7 +29,6 @@ const JDGenerator = ({ setJobDesc }: Props) => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
-  
 
   useEffect(() => {
     setJobDesc(streamedData);
@@ -80,6 +79,10 @@ const JDGenerator = ({ setJobDesc }: Props) => {
           method: "POST",
           body: JSON.stringify({
             experience: experience,
+            trainBotData: {
+              userEmail: userData.email,
+              fileAddress: userData.defaultResumeFile,
+            },
           }),
         });
 

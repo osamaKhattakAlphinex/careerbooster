@@ -7,11 +7,13 @@ import {
 import { LLMChain } from "langchain/chains";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import Prompt from "@/db/schemas/Prompt";
+import TrainBot from "@/db/schemas/TrainBot";
 
 const handler: NextApiHandler = async (req, res) => {
   try {
     const reqBody = JSON.parse(req.body);
     const experience = reqBody.experience;
+    const trainBotData = reqBody.trainBotData;
 
     // CREATING MODAL
     const model = new ChatOpenAI({
@@ -55,7 +57,7 @@ const handler: NextApiHandler = async (req, res) => {
     });
     const prompt = promptRec.value;
 
-    await chainB.call({
+    const output = await chainB.call({
       jobTitle: experience.jobTitle,
       company: experience.company,
       fromMonth: experience.fromMonth,
@@ -68,6 +70,20 @@ const handler: NextApiHandler = async (req, res) => {
       cityState: experience.cityState,
       prompt,
     });
+
+    // make a trainBot entry
+    const obj = {
+      type: "resume.writeJDSingle",
+      input: prompt,
+      output: output.text.replace(/(\r\n|\n|\r)/gm, ""),
+      idealOutput: "",
+      status: "pending",
+      userEmail: trainBotData.userEmail,
+      fileAddress: trainBotData.fileAddress,
+      Instructions: `Write Single Job Description for ${experience.jobTitle} at ${experience.company}`,
+    };
+
+    await TrainBot.create({ ...obj });
 
     res.end();
   } catch (error) {

@@ -43,7 +43,7 @@ const UseCases = () => {
                   href="#"
                   className="arrow-link theme-arrow-link  gap-3 fs-sm"
                 >
-                  <span>Try Blog Content</span>
+                  <span>Elevate Your Resume!</span>
                   <svg
                     className="icon"
                     viewBox="0 0 16 16"
@@ -81,7 +81,7 @@ const UseCases = () => {
                   href="#"
                   className="arrow-link theme-arrow-link  gap-3 fs-sm"
                 >
-                  <span>Try Digital Ad</span>
+                  <span>Boost Your LinkedIn Now!</span>
                   <svg
                     className="icon"
                     viewBox="0 0 16 16"
@@ -119,7 +119,7 @@ const UseCases = () => {
                   href="#"
                   className="arrow-link theme-arrow-link  gap-3 fs-sm"
                 >
-                  <span>Try Website Copy</span>
+                  <span>Craft Your Winning Letter!</span>
                   <svg
                     className="icon"
                     viewBox="0 0 16 16"
@@ -156,7 +156,7 @@ const UseCases = () => {
                   href="#"
                   className="arrow-link theme-arrow-link  gap-3 fs-sm"
                 >
-                  <span>Try Social Media Content</span>
+                  <span>Unlock Your Full Potential!</span>
                   <svg
                     className="icon"
                     viewBox="0 0 16 16"
@@ -194,7 +194,7 @@ const UseCases = () => {
                   href="#"
                   className="arrow-link theme-arrow-link  gap-3 fs-sm"
                 >
-                  <span>Try Landing Page Copy</span>
+                  <span>Beat the ATS</span>
                   <svg
                     className="icon"
                     viewBox="0 0 16 16"
@@ -231,7 +231,7 @@ const UseCases = () => {
                   href="#"
                   className="arrow-link theme-arrow-link  gap-3 fs-sm"
                 >
-                  <span>Try Marketing Copy</span>
+                  <span>Stand Out Now!</span>
                   <svg
                     className="icon"
                     viewBox="0 0 16 16"
@@ -269,7 +269,7 @@ const UseCases = () => {
                   href="#"
                   className="arrow-link theme-arrow-link  gap-3 fs-sm"
                 >
-                  <span>Try eCommerce Copy</span>
+                  <span>Personalize Your Pitch!</span>
                   <svg
                     className="icon"
                     viewBox="0 0 16 16"
@@ -306,7 +306,7 @@ const UseCases = () => {
                   href="#"
                   className="arrow-link theme-arrow-link  gap-3 fs-sm"
                 >
-                  <span>Try Product Description</span>
+                  <span>ATS-Proof Your Resume!</span>
                   <svg
                     className="icon"
                     viewBox="0 0 16 16"

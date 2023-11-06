@@ -79,10 +79,9 @@ const handler: NextApiHandler = async (req, res) => {
         return res.status(200).json({
           success: true,
           data: response.choices[0].message.content,
-          input: input,
         });
       } catch (error) {
-        return res.status(400).json({ success: false, error, input: input });
+        return res.status(400).json({ success: false, error });
       }
     }
   }

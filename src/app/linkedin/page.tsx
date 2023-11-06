@@ -1,5 +1,6 @@
 import LinkedInToolNew from "@/components/new-layout/linkedin/LinkedInToolNew";
 import { Metadata } from "next";
+import LinedInCard from "@/components/new-layout/linkedin/LinkedInCard";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-linkedin",
   description:
@@ -29,7 +30,7 @@ export default function LinkedInNewPage() {
   return (
     <div className="flex-grow-1 mb-20 bg-gradient-to-r from-gray-950 via-blue-950 to-purple-900">
       {/* LinkedIn Tool Card */}
-      <LinkedInToolNew />
+      <LinedInCard />
     </div>
   );
 }

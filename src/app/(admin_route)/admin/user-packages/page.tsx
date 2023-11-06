@@ -1,7 +1,7 @@
 import ViewPackage from "@/components/admin/linkedin-prompts/user-packages/ViewPackage";
 const AdminUserPacakges = () => {
   return (
-    <div className="mb-40">
+    <div className="mb-40 pt-30">
       <ViewPackage />
       <div
         id="deleteModal"
