@@ -20,3 +20,42 @@ export async function POST(request: any) {
     );
   }
 }
+
+export async function GET(request: any) {
+  try {
+    await startDB();
+    const packages = await UserPackage.find();
+    return NextResponse.json({ success: true, packages }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { result: "Internal Server Error", success: false },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(
+  req: any,
+  { params }: { params: { packgeId: string } }
+) {
+  const packgeId = params;
+  const payload = await req.json();
+
+  try {
+    await startDB();
+
+    let userPackage = await UserPackage.findOneAndUpdate(
+      { _id: packgeId },
+      payload,
+      { new: true }
+    );
+
+    return NextResponse.json({ result: userPackage, success: true });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { result: "Internal Server Error", success: false },
+      { status: 404 }
+    );
+  }
+}

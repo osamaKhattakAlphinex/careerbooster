@@ -1,18 +1,18 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Field, FieldArray, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Toggle from "@/components/utilities/form-elements/Toggle";
 import FormFieldArray from "@/components/utilities/form-elements/FormFieldArray";
-import FeaturesFormCard from "./FeaturesFormCard";
+// import FeaturesFormCard from "./FeaturesFormCard";
 type Feature = string[];
 type FeatureTooltip = string[];
 
 type FeatureFieldType = { id: number; feature: string; tooltip: string };
 // Feature Field
 
-const FeatureRow = ({
+export const FeatureRow = ({
   id,
   feature,
   tooltip,
@@ -170,7 +170,7 @@ const AddPackage = () => {
     onSubmit: async (values, action) => {
       console.log(values);
 
-      const res = await axios.post("/api/admin/packages/add_package", {
+      const res = await axios.post("/api/packages", {
         type: values.type,
         title: values.title,
         amount: values.amount,
@@ -197,8 +197,6 @@ const AddPackage = () => {
       setPopUpModel(false);
     },
   });
-
-  console.log("formik.values :", formik.values);
 
   return (
     <>
