@@ -12,8 +12,8 @@ const FeaturesFormCard = ({
 }) => {
   const [featuresArr, setFeaturesArr] = useState([
     {
-      feature: "Feature 1",
-      tooltip: "Tooltip 1",
+      feature: "",
+      tooltip: "",
     },
   ]);
 
@@ -51,20 +51,20 @@ const FeaturesFormCard = ({
             key={i}
             id={row.id}
             handleChange={(rec: any, id: number) => {
-              // featuresArr.splice(id, 1, rec);
-              // setFeaturesArr(featuresArr);
-              const updatedFeaturesArr = [...featuresArr];
-              updatedFeaturesArr[id] = rec;
-              setFeaturesArr(updatedFeaturesArr);
+              featuresArr.splice(id, 1, rec);
+              setFeaturesArr(featuresArr);
+              // const updatedFeaturesArr = [...featuresArr];
+              // updatedFeaturesArr[id] = rec;
+              // setFeaturesArr(updatedFeaturesArr);
             }}
             onRemove={(id) => {
               console.log();
-              // featuresArr.splice(i, 1);
-              // setFeaturesArr(featuresArr);
-              const updatedFeaturesArr = featuresArr.filter(
-                (_, index) => index !== id
-              );
-              setFeaturesArr(updatedFeaturesArr);
+              featuresArr.splice(i, 1);
+              setFeaturesArr(featuresArr);
+              // const updatedFeaturesArr = featuresArr.filter(
+              //   (_, index) => index !== id
+              // );
+              // setFeaturesArr(updatedFeaturesArr);
             }}
           />
         ))}
