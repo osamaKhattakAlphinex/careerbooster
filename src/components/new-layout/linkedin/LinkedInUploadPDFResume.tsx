@@ -474,7 +474,7 @@ const LinkedInUploadPDFResume = () => {
       )}
       <div className="w-full h-80 flex flex-col justify-center items-center rounded-2xl mt-14 bg-gradient-to-r to-fuchsia-600 from-indigo-500  border-gray-800">
         <div className="w-6/12 flex justify-center items-center flex-col">
-          <h3 className="text-5xl text-normal  leading-normal text-white text-center font-bold mt-2">
+          <h3 className="text-5xl text-normal  leading-normal text-white text-center font-bold mt-2p">
             Yes, I Want to Explore Career Boosting Tools!
           </h3>
           <button className="bg-yellow-400 mt-4 h-14 text-center rounded-full font-bold text-xl text-black py-3 px-9">
