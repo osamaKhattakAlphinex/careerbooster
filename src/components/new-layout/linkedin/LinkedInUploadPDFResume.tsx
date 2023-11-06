@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 // import { slugify } from "@/helpers/slugify";
-import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import copy from "clipboard-copy";
 import {
   refreshIconRotating,
@@ -14,22 +14,20 @@ import LinkedInSummary from "./LinkedInSummary";
 //Editable
 
 const LinkedInUploadPDFResume = () => {
-  const router = useRouter();
+  const params = useSearchParams();
+  const fileName: any = params?.get("fileName");
+
   // local states
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const [aboutMsgLoading, setAboutMsgLoading] = useState<boolean>(false); // msg loading for about section
   const [headlineMsgLoading, setHeadlineMsgLoading] = useState<boolean>(false); // msg loading for Headline  section
-  const [fileUploading, setFileUploading] = useState<boolean>(false);
-  const [file, setFile] = useState<any>(null);
-  const [fileName, setFileName] = useState<any>(null);
   const [fileError, setFileError] = useState<string>("");
-  const [streamedHeadlineData, setStreamedHeadlineData] = useState("");
-  const [streamedAboutData, setStreamedAboutData] = useState("");
+  const [streamedHeadlineData, setStreamedHeadlineData] = useState("123");
+  const [streamedAboutData, setStreamedAboutData] = useState("123");
   // Define a state variable to hold both first name and full name
   const [names, setNames] = useState({ firstName: "", fullName: "" });
 
   // Define state variables to track API call statuses
-  const [uploadComplete, setUploadComplete] = useState<boolean>(false);
   const [headlineComplete, setHeadlineComplete] = useState<boolean>(false);
   const [aboutComplete, setAboutComplete] = useState<boolean>(false);
   const [aboutData, setAboutData] = useState<string>("about");
@@ -39,43 +37,43 @@ const LinkedInUploadPDFResume = () => {
   const [isSummaryCopied, setIsSummaryCopied] = useState(false);
   const [isHeadlineEditing, setIsHeadlineEditing] = useState(false);
   const [isSummaryEditing, setIsSummaryEditing] = useState(false);
-  const uploadFileToServer = async () => {
-    setFileError("");
-    setFileUploading(true);
-    setMsgLoading(true);
-    if (file) {
-      const body = new FormData();
-      body.append("file", file);
+  // const uploadFileToServer = async () => {
+  //   setFileError("");
+  //   setFileUploading(true);
+  //   setMsgLoading(true);
+  //   if (file) {
+  //     const body = new FormData();
+  //     body.append("file", file);
 
-      fetch("/api/fileUpload?type=linkedin-tool", {
-        method: "POST",
-        body,
-      })
-        .then(async (resp: any) => {
-          const res = await resp.json();
-          if (res.success) {
-            const uploadedFileName = res.fileName + "_" + file.name;
-            setFileName(uploadedFileName);
-            linkedinHeadline(uploadedFileName);
-            linkedinAbout(uploadedFileName);
+  //     fetch("/api/fileUpload?type=linkedin-tool", {
+  //       method: "POST",
+  //       body,
+  //     })
+  //       .then(async (resp: any) => {
+  //         const res = await resp.json();
+  //         if (res.success) {
+  //           const uploadedFileName = res.fileName + "_" + file.name;
+  //           // setFileName(uploadedFileName);
+  //           linkedinHeadline(uploadedFileName);
+  //           linkedinAbout(uploadedFileName);
 
-            // router.replace("/welcome?step=1");
-            // router.replace("/register");
-            // setSuccessMsg("File has been uploaded!");
-          } else {
-            setFileError("Something went wrong");
-          }
-        })
-        .catch((error) => {
-          setFileError("Something went wrong");
-        })
-        .finally(() => {
-          setFileUploading(false);
-          setMsgLoading(false);
-          setUploadComplete(true);
-        });
-    }
-  };
+  //           // router.replace("/welcome?step=1");
+  //           // router.replace("/register");
+  //           // setSuccessMsg("File has been uploaded!");
+  //         } else {
+  //           setFileError("Something went wrong");
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         setFileError("Something went wrong");
+  //       })
+  //       .finally(() => {
+  //         setFileUploading(false);
+  //         setMsgLoading(false);
+  //         setUploadComplete(true);
+  //       });
+  //   }
+  // };
 
   const linkedinHeadline = async (fileName: string) => {
     setStreamedHeadlineData("");
@@ -184,61 +182,26 @@ const LinkedInUploadPDFResume = () => {
     }
   };
   useEffect(() => {
-    if (file && file.type === "application/pdf") {
-      //  file exists and is PDF
-      setFileError("");
-      // upload it to server
-      uploadFileToServer();
-    } else if (file) {
-      // if file exists but not PDf
-      setFileError("only PDF file is allowed");
+    if (params?.get("fileName")) {
+      linkedinHeadline(fileName);
+      linkedinAbout(fileName);
     }
-  }, [file]);
+  }, [params?.get("fileName")]);
   useEffect(() => {
-    if (uploadComplete && headlineComplete && aboutComplete) {
+    if (headlineComplete && aboutComplete) {
       // All APIs have completed, call linkedinToolSaveUser
       linkedinToolSaveUser(fileName);
     }
-  }, [uploadComplete, headlineComplete, aboutComplete, fileName]);
+  }, [headlineComplete, aboutComplete, fileName]);
   return (
     <>
-      <label
-        className="btn btn-lg  btn-gradient-1"
-        data-aos="fade-up-sm"
-        data-aos-delay="200"
-      >
-        <input
-          type="file"
-          className="hidden"
-          disabled={fileUploading}
-          onChange={(e) => {
-            if (e.target.files) {
-              setFile(e.target.files[0]);
-            }
-          }}
-        />
-        {headlineMsgLoading || aboutMsgLoading ? (
-          refreshIconRotating
-        ) : (
-          <div className="flex gap-2 ">
-            <div>{uploadIcon}</div>
-            <div>
-              <p className="m-0 text-sm [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
-                Upload PDF Resume
-              </p>
-            </div>
-          </div>
-        )}
-      </label>
-      {fileError && (
-        <div
-          className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2 !text-left w-[50%] m-auto"
-          role="alert"
-        >
-          <p className="m-0">{fileError}</p>
+      {headlineMsgLoading || aboutMsgLoading ? (
+        refreshIconRotating
+      ) : (
+        <div className="flex gap-2 text-lime-500 font-bold text-5xl ">
+          Success!
         </div>
       )}
-
       {streamedHeadlineData || streamedAboutData ? (
         <div className=" my-3 w-full flex flex-col">
           {headlineMsgLoading ? (
@@ -247,7 +210,7 @@ const LinkedInUploadPDFResume = () => {
             </div>
           ) : (
             <>
-              <div className="p-4">
+              <div className="p-4 border-2">
                 <h1 className="text-4xl flex items-center font-normal mb-4">
                   <span className="text-yellow-400">{starIcon}</span>
                   <span className="ml-6 text-teal-400 text-4xl">
@@ -276,53 +239,53 @@ const LinkedInUploadPDFResume = () => {
                     {streamedHeadlineData}
                   </div>
                 )}
+                {streamedHeadlineData && (
+                  <div className="flex pl-6">
+                    <Button
+                      type="button"
+                      className="border-2 w-3/12 border-gray-200 rounded-2xl py-2 px-5 text-3xl mt-2 font-normal text-yellow-300"
+                      onClick={() => linkedinHeadline(fileName)}
+                    >
+                      <div className="flex flex-row gap-2">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className={`w-4 h-4 mt-3 ${
+                            headlineMsgLoading ? "animate-spin" : ""
+                          }`}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                          />
+                        </svg>
+                        <span>Re-Generate</span>
+                      </div>
+                    </Button>
+                    <Button
+                      type="button"
+                      className="border-2 border-gray-200 ml-5 rounded-2xl py-2 px-9 text-3xl  mt-2 font-normal text-cyan-300"
+                      onClick={() => {
+                        setIsHeadlineEditing(true);
+                        setIsHeadlineCopied(false);
+                      }}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      type="button"
+                      className="border-2 border-gray-200  rounded-2xl py-2 px-5 text-3xl mt-2 ml-5 font-normal text-green-300"
+                      onClick={copyText}
+                    >
+                      {isHeadlineCopied ? "Copied!" : "Copy to Clipboard"}
+                    </Button>
+                  </div>
+                )}
               </div>
-              {streamedHeadlineData && (
-                <div className="flex pl-6">
-                  <Button
-                    type="button"
-                    className="border-2 w-3/12 border-gray-200 rounded-2xl py-2 px-5 text-3xl mt-2 font-normal text-yellow-300"
-                    onClick={() => linkedinHeadline(fileName)}
-                  >
-                    <div className="flex flex-row gap-2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className={`w-4 h-4 mt-3 ${
-                          headlineMsgLoading ? "animate-spin" : ""
-                        }`}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                        />
-                      </svg>
-                      <span>Re-Generate</span>
-                    </div>
-                  </Button>
-                  <Button
-                    type="button"
-                    className="border-2 border-gray-200 ml-5 rounded-2xl py-2 px-9 text-3xl  mt-2 font-normal text-cyan-300"
-                    onClick={() => {
-                      setIsHeadlineEditing(true);
-                      setIsHeadlineCopied(false);
-                    }}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    type="button"
-                    className="border-2 border-gray-200  rounded-2xl py-2 px-5 text-3xl mt-2 ml-5 font-normal text-green-300"
-                    onClick={copyText}
-                  >
-                    {isHeadlineCopied ? "Copied!" : "Copy to Clipboard"}
-                  </Button>
-                </div>
-              )}
             </>
           )}
           {aboutMsgLoading ? (
@@ -331,7 +294,7 @@ const LinkedInUploadPDFResume = () => {
             </div>
           ) : (
             <>
-              <div className="p-4 mt-20">
+              <div className="p-4 mt-20 ">
                 <h1 className="text-4xl flex items-center font-normal mb-4">
                   <span className="text-yellow-400">{starIcon}</span>
                   <span className="ml-6 text-teal-400">
@@ -360,7 +323,7 @@ const LinkedInUploadPDFResume = () => {
                   </div>
                 )}
               </div>
-              <div className="flex ml-2">
+              <div className="flex ml-2 ">
                 <Button
                   type="button"
                   className="border-2 border-gray-200 ml-5 rounded-2xl py-2 px-9 text-3xl  mt-3 font-normal text-cyan-300"
@@ -509,14 +472,16 @@ const LinkedInUploadPDFResume = () => {
       ) : (
         " "
       )}
-
-      <Button
-        type="button"
-        className="border-2 border-gray-200  rounded-2xl py-2 px-5 text-3xl mt-3 ml-5 font-normal text-green-300"
-        onClick={() => linkedinToolSaveUser(fileName)}
-      >
-        Copy to Clipboard
-      </Button>
+      <div className="w-full h-80 flex flex-col justify-center items-center rounded-2xl mt-14 bg-gradient-to-r to-fuchsia-600 from-indigo-500  border-gray-800">
+        <div className="w-6/12 flex justify-center items-center flex-col">
+          <h3 className="text-5xl text-normal  leading-normal text-white text-center font-bold mt-2">
+            Yes, I Want to Explore Career Boosting Tools!
+          </h3>
+          <button className="bg-yellow-400 mt-4 h-14 text-center rounded-full font-bold text-xl text-black py-3 px-9">
+            Click here to experience the magic
+          </button>
+        </div>
+      </div>
     </>
   );
 };

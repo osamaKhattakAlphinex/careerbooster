@@ -1,4 +1,3 @@
-import PageHeader from "@/components/new-layout/PageHeader";
 import LinkedInToolNew from "@/components/new-layout/linkedin/LinkedInToolNew";
 import { Metadata } from "next";
 export const metadata: Metadata = {
@@ -28,12 +27,9 @@ export const metadata: Metadata = {
 
 export default function LinkedInNewPage() {
   return (
-    <main className="flex-grow-1 mb-20">
-      {/* <!-- Page header --> */}
-     
-
+    <div className="flex-grow-1 mb-20 bg-gradient-to-r from-gray-950 via-blue-950 to-purple-900">
       {/* LinkedIn Tool Card */}
       <LinkedInToolNew />
-    </main>
+    </div>
   );
 }

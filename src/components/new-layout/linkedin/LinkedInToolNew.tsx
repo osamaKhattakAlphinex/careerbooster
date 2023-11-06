@@ -2,13 +2,10 @@ import LinkedInToolMain from "./LinkedInToolMain";
 
 const LinkedInToolNew = () => {
   return (
-    <section className="mt-32">
-      <div className="container">
-        <div className="px-10 flex flex-col text-white items-center">
-
+    <section className="mt-36">
+        <div className="flex flex-col px-4 text-white">
          <LinkedInToolMain />
         </div>
-      </div>
     </section>
   );
 };
