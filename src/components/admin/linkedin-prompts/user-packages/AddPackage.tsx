@@ -1,20 +1,96 @@
 "use client";
-import React, { useState } from "react";
-import { useFormik } from "formik";
+import React, { useState, useEffect } from "react";
+import { Field, FieldArray, useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import Toggle from "@/components/utilities/form-elements/Toggle";
+import FormFieldArray from "@/components/utilities/form-elements/FormFieldArray";
+import FeaturesFormCard from "./FeaturesFormCard";
 type Feature = string[];
+type FeatureTooltip = string[];
+
+type FeatureFieldType = { id: number; feature: string; tooltip: string };
+// Feature Field
+
+const FeatureRow = ({
+  id,
+  feature,
+  tooltip,
+  onChangeFeature,
+  onChangeTooltip,
+  onBlurFeature,
+  onBlurTooltip,
+  onFeatureRemove,
+}: any) => {
+  return (
+    <li className="w-full flex gap-2">
+      <input
+        id={`feature-${id}`}
+        type="text"
+        value={feature}
+        onChange={(e) => onChangeFeature(e.target.value)}
+        placeholder="Feature"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+      />
+      <input
+        id={`tooltip-${id}`}
+        type="text"
+        value={tooltip}
+        onChange={(e) => onChangeTooltip(e.target.value)}
+        placeholder="Tooltip"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+      />
+      <button
+        type="button"
+        className="w-8 h-8 bg-gray-600 rounded-lg px-4 py-2 grid place-content-center"
+        onClick={() => {
+          onFeatureRemove(id);
+        }}
+      >
+        X
+      </button>
+    </li>
+  );
+};
 
 const AddPackage = () => {
   const [features, setFeatures] = useState<Feature[]>([]); // State for Features
-  // const [featuresToolTips, setFeaturesToolTips] = useState([]); // State for Features Tool Tips
+  const [featuresToolTips, setFeaturesToolTips] = useState<FeatureTooltip[]>(
+    []
+  ); // State for Features Tool Tips
 
-  const addFeature = (feature: string[]) => {
-    console.log(features);
-    setFeatures([...features, feature]);
+  const [featureList, setFeatureList] = useState<FeatureFieldType[]>([
+    { id: 0, feature: "", tooltip: "" },
+  ]);
+
+  const addFeatureRow = () => {
+    // const featureIds = featureList.map((_) => _.id).sort((a, b) => a - b);
+    // const biggestId = featureIds[featureIds.length - 1];
+    // const newId = biggestId ? biggestId + 1 : 1;
+    // setFeatureList((prev) => [
+    //   ...prev,
+    //   { id: newId, feature: "", tooltip: "" },
+    // ]);
   };
 
-  // const addFeatureToolTip = (toolTip:String[]) => {
+  const handleFeatureRemove = (idx: number) => {
+    // const newFeatureList = [...featureList];
+    // newFeatureList.splice(idx, 1);
+
+    // setFeatureList(newFeatureList);
+
+    const newFeatures = [...formik.values.features];
+    newFeatures.splice(idx, 1);
+
+    const newTooltips = [...formik.values.featuresToolTips];
+    newTooltips.splice(idx, 1);
+
+    // Set the updated array back into the form values
+    formik.setFieldValue("features", newFeatures);
+    formik.setFieldValue("featuresToolTips", newFeatures);
+  };
+
+  // const addFeatureToolTip = (toolTip: string[]) => {
   //   setFeaturesToolTips([...featuresToolTips, toolTip]);
   // };
   const [popUpModel, setPopUpModel] = useState(false);
@@ -25,8 +101,8 @@ const AddPackage = () => {
       amount: "",
       category: "",
       status: "",
-      features: [],
-      featuresToolTips: [],
+      features: [""],
+      featuresToolTips: [""],
       limit: {
         resumes_generation: "",
         keywords_generation: "",
@@ -48,10 +124,15 @@ const AddPackage = () => {
       status: Yup.string().required(
         'Please select either "Active" or "Inactive"'
       ),
-      features: Yup.string().required("Please Enter THe Features"),
-      featuresToolTips: Yup.string().required(
-        "Please Enter THe Features Tool Tips"
-      ),
+      // features: Yup.string().required("Please Enter THe Features"),
+      // featuresToolTips: Yup.string().required(
+      //   "Please Enter THe Features Tool Tips"
+      // ),
+
+      // features: Yup.array(Yup.string().required("Please Enter THe Features")),
+      // featuresToolTips: Yup.array(
+      //   Yup.string().required("Please Enter THe Features Tooltip")
+      // ),
       limit: Yup.object().shape({
         resumes_generation: Yup.number().required(
           "Please Select The Amount of Resume"
@@ -89,35 +170,39 @@ const AddPackage = () => {
     onSubmit: async (values, action) => {
       console.log(values);
 
-      // const res = await axios.post("/api/admin/packages/add_package", {
-      //   type: values.type,
-      //   title: values.title,
-      //   amount: values.amount,
-      //   status: values.status,
-      //   features: ["Feature 1", "Feature 2"],
-      //   category: values.category,
-      //   limit: {
-      //     resumes_generation: values.limit.resumes_generation,
-      //     can_edit_resume: values.limit.can_edit_resume,
-      //     keywords_generation: values.limit.keywords_generation,
-      //     headline_generation: values.limit.headline_generation,
-      //     about_generation: values.limit.about_generation,
-      //     job_desc_generation: values.limit.job_desc_generation,
-      //     cover_letter_generation: values.limit.cover_letter_generation,
-      //     pdf_files_upload: values.limit.pdf_files_upload,
-      //     review_resume: values.limit.review_resume,
-      //     consulting_bids_generation: values.limit.consulting_bid_generation,
-      //   },
-      // });
+      const res = await axios.post("/api/admin/packages/add_package", {
+        type: values.type,
+        title: values.title,
+        amount: values.amount,
+        status: values.status,
+        features: values.features,
+        featuresToolTips: values.featuresToolTips,
+        //["Feature 1", "Feature 2"],
+        category: values.category,
+        limit: {
+          resumes_generation: values.limit.resumes_generation,
+          can_edit_resume: values.limit.can_edit_resume,
+          keywords_generation: values.limit.keywords_generation,
+          headline_generation: values.limit.headline_generation,
+          about_generation: values.limit.about_generation,
+          job_desc_generation: values.limit.job_desc_generation,
+          cover_letter_generation: values.limit.cover_letter_generation,
+          pdf_files_upload: values.limit.pdf_files_upload,
+          review_resume: values.limit.review_resume,
+          consulting_bids_generation: values.limit.consulting_bid_generation,
+        },
+      });
       // console.log("api response:", res);
-      // action.resetForm();
-      // setPopUpModel(false);
+      action.resetForm();
+      setPopUpModel(false);
     },
   });
 
+  console.log("formik.values :", formik.values);
+
   return (
     <>
-      <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+      <div className="md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
         <button
           type="button"
           style={{
@@ -140,12 +225,12 @@ const AddPackage = () => {
             aria-hidden="true"
           >
             <path
-              clip-rule="evenodd"
-              fill-rule="evenodd"
+              clipRule="evenodd"
+              fillRule="evenodd"
               d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
             />
           </svg>
-          Add product
+          Add New Package
         </button>
       </div>
       <div
@@ -282,7 +367,7 @@ const AddPackage = () => {
                   )}
                 </div>
                 <div>
-                  <label
+                  {/* <label
                     htmlFor="category"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
@@ -299,72 +384,32 @@ const AddPackage = () => {
                     <option>Select Your status</option>
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
-                  </select>
+                  </select> */}
+
+                  <Toggle
+                    label="Active Status"
+                    value={formik.values.status === "active" ? true : false}
+                    onChange={(e) =>
+                      formik.setFieldValue(
+                        "status",
+                        e.target.checked ? "active" : "inactive"
+                      )
+                    }
+                    onBlur={formik.handleBlur}
+                  />
+
                   {formik.touched.status && formik.errors.status && (
                     <p className="text-red-600 pt-3">{formik.errors.status}</p>
                   )}
                 </div>
-                <div>
-                  <label
-                    htmlFor="features"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Features
-                  </label>
-                  <input
-                    id="features"
-                    type="text"
-                    name="features"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.features}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Feature 1"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const featureToAdd: string[] = formik.values.features;
-                      if (featureToAdd) {
-                        addFeature(featureToAdd);
-                        formik.setFieldValue("features", ""); // Clear the input
-                      }
-                    }}
-                  >
-                    Add Feature
-                  </button>
-                  {features.map((feature: Feature, index: number) => (
-                    <div key={index}>{feature}</div>
-                  ))}
-                </div>
+              </div>
 
-                {/* <div>
-          <label htmlFor="featuresToolTips" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-            Features Tool Tips
-          </label>
-          <input
-            id="featuresToolTips"
-            type="text"
-            name="featuresToolTips"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.featuresToolTips}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            placeholder="Features Tool Tip 1"
-          />
-          <button
-            type="button"
-            onClick={() => {
-              addFeatureToolTip(formik.values.featuresToolTips);
-              formik.setFieldValue('featuresToolTips', ''); // Clear the input
-            }}
-          >
-            Add Feature Tool Tip
-          </button>
-          {featuresToolTips.map((toolTip, index) => (
-            <div key={index}>{toolTip}</div>
-          )}
-        </div> */}
+              {/* Limitations */}
+              <div className="mb-4 w-ful">
+                <span className="text-xl">Limitations</span>
+                <div className="flex pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600"></div>
+              </div>
+              <div className="grid gap-4 mb-4 sm:grid-cols-2">
                 <div>
                   <label
                     htmlFor="amount"
@@ -392,7 +437,6 @@ const AddPackage = () => {
                       </p>
                     )}
                 </div>
-
                 <div>
                   <label
                     htmlFor="amount"
@@ -607,6 +651,132 @@ const AddPackage = () => {
                     )}
                 </div>
               </div>
+
+              {/* Features */}
+
+              {/* <FeaturesFormCard
+                onChangeFeatures={(arr: any) =>
+                  formik.setFieldValue("features", arr)
+                }
+                onChangeTooltip={(arr: any) =>
+                  formik.setFieldValue("featuresToolTips", arr)
+                }
+              /> */}
+
+              {formik.values.features.map((_, index) => (
+                // featureList.map((_, index) =>
+
+                <FeatureRow
+                  id={index}
+                  feature={formik.values.features[index]}
+                  tooltip={formik.values.featuresToolTips[index]}
+                  // feature={_.feature}
+                  // tooltip={_.tooltip}
+                  key={`feature-row-${index}`}
+                  onChangeFeature={(feature: string) => {
+                    formik.setFieldValue(`features[${index}]`, feature);
+                    // Update the featureList state with the new feature value
+                    // const updatedFeatureList = [...featureList];
+                    // updatedFeatureList[index].feature = feature;
+                    // setFeatureList(updatedFeatureList);
+                  }}
+                  onChangeTooltip={(tooltip: string) => {
+                    formik.setFieldValue(`featuresToolTips[${index}]`, tooltip);
+                    // const updatedFeatureList = [...featureList];
+                    // updatedFeatureList[index].tooltip = tooltip;
+                    // setFeatureList(updatedFeatureList);
+                  }}
+                  onBlurFeature={formik.handleBlur}
+                  onBlurTooltip={formik.handleBlur}
+                  onFeatureRemove={(idx: number) => handleFeatureRemove(idx)}
+                />
+              ))}
+
+              <button
+                type="button"
+                onClick={
+                  (e) => {
+                    formik.setFieldValue("features", [
+                      ...formik.values.features,
+                      "",
+                    ]);
+                    formik.setFieldValue("featuresToolTips", [
+                      ...formik.values.featuresToolTips,
+                      "",
+                    ]);
+                  }
+
+                  // addFeatureRow
+                }
+              >
+                ADD
+              </button>
+
+              {/* <div className="grid gap-4 mb-4 sm:grid-cols-2">
+                <>
+                  <div>
+                    <label
+                      htmlFor="features"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Feature Text
+                    </label>
+                    <input
+                      id="features"
+                      type="text"
+                      name="features"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.features}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="Feature 1"
+                    />
+                  </div>
+                </>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const featureToAdd: string[] = formik.values.features;
+                    if (featureToAdd) {
+                      addFeature(featureToAdd);
+                      formik.setFieldValue("features", ""); // Clear the input
+                    }
+                  }}
+                >
+                  Add Feature
+                </button>
+                {features.map((feature: Feature, index: number) => (
+                  <div key={index}>{feature}</div>
+                ))} */}
+              {/* <div>
+          <label htmlFor="featuresToolTips" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Features Tool Tips
+          </label>
+          <input
+            id="featuresToolTips"
+            type="text"
+            name="featuresToolTips"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.featuresToolTips}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="Features Tool Tip 1"
+          />
+          <button
+            type="button"
+            onClick={() => {
+              addFeatureToolTip(formik.values.featuresToolTips);
+              formik.setFieldValue('featuresToolTips', ''); // Clear the input
+            }}
+          >
+            Add Feature Tool Tip
+          </button>
+          {featuresToolTips.map((toolTip, index) => (
+            <div key={index}>{toolTip}</div>
+          )}
+        </div> */}
+              {/* </div> */}
+
               <button
                 type="submit"
                 className="btn theme-outline-btn "
@@ -622,9 +792,9 @@ const AddPackage = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   />
                 </svg>
                 Add new product

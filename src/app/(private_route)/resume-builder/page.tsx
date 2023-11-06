@@ -158,7 +158,7 @@ const ResumeBuilder = () => {
           setStreamedSummaryData((prev) => prev + text);
           summaryTemp += text;
         }
-        alert("done");
+
         dispatch(setSummary(summaryTemp));
       } else {
         setStreamedSummaryData("Error! Something went wrong");

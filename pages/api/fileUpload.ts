@@ -24,6 +24,7 @@ const readFile = (
 
 const handler: NextApiHandler = async (req, res) => {
   let directory = "";
+  console.log("in file upload api handler");
   if (req?.query?.type === "coverLetter" && req?.query?.email) {
     // for CoverLetter and other tools file upload
     directory = `/public/files/userResumes/${req?.query?.email}`;
@@ -50,9 +51,10 @@ const handler: NextApiHandler = async (req, res) => {
   const saveLocally = true;
   const fileName = Date.now().toString();
   if (saveLocally) {
+    console.log("inside saveLocally");
     options.uploadDir = path.join(process.cwd(), directory);
     options.filename = (name, ext, path, form) => {
-      return fileName + "_" + path.originalFilename;
+      return fileName + ".pdf";
     };
   }
   await readFile(req, options);

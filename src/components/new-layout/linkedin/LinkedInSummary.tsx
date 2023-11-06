@@ -7,72 +7,83 @@ const LinkedInSummary = ({
 }) => {
   return (
     <div className="mt-10">
-      <div className="border-2 w-full bg-black">
-      <h1 className="text-center text-white">
-        How does the new summary make me a preferred candidate on LinkedIn?
-      </h1>
-      <h4 className="capitalize text-3xl mt-5 text-gray-100 ">
-        understanding your new linkedIn summary:
-      </h4>
-      <p className="text-2xl font-normal mt-6 text-gray-300 ">
-        You might find new summary extensive and consider option for a shorter
-        version. While you can click the button above for a more concise
-        summary, we recommend the lengthier version for specific benefits.
-        LinkedIn allows a generous 2,000-word limit for summaries,and this isn't
-        without reason. A comprehensive summary lets you include a greater
-        number of keywords, enhancing your profile's discoverability and reach
-        on the platform.
-      </p>
-      <p className="text-2xl font-normal mt-6 text-gray-300 ">
-        <span className="text-3xl font-medium  mt-6 text-gray-100">
-          Boosted Recommendations:{" "}
-        </span>
-        When you apply for jobs on LinkedIn, the platform your profile content
-        in relation to the job's requirements. A keyword-optimized summary
-        increases the chances of LinkedIn recommending you as a top candidate to
-        potential employers.
-      </p>
-      <p className="text-2xl font-normal mt-6 text-gray-300 ">
-        <span className="text-3xl font-medium  mt-6 text-gray-100">
-          Enhanced Engagement:{" "}
-        </span>
-        A captivating summary ensures that once a recruiter lands on your
-        profile, they stay there. This longer engagement signals to Linkedin
-        that your profile is valuable, which in turn boosts your profile's
-        ranking in search results.
-      </p>
-      <p className="text-2xl font-normal mt-6 text-gray-300 ">
-        <span className="text-3xl font-medium  mt-6 text-gray-100">
-          Showcasing Achievements:{" "}
-        </span>
-        Your summary isn't just about the roles you've held- it's about the
-        impact you've made. A detailed summary allows you to highlight
-        significant achievements, providing tangible evidence of your expertise
-        and skills.
-      </p>
-      <p className="text-2xl font-normal mt-6 text-gray-300 ">
-        <span className="text-3xl font-medium  mt-6 text-gray-100">
-          Personal Branding:{" "}
-        </span>
-        Your LinkedIn summary is a reflection of your professional brand. A
-        well-crafted, lengthy summary sets you apart and establishes your
-        position as a thought leader or industry expert.
-      </p>
+      <div className=" w-full bg-black pt-20 flex flex-col justify-center items-center font-sans">
+        <div className=" w-5/6 text-center flex flex-col gap-2 pb-16">
+          <h2 className=" text-white">
+            How does the new summary make me a <br /> preferred candidate on
+            LinkedIn?
+          </h2>
+          <p className="text-2xl mb-16 font-thin text-gray-400">
+            Most professionals miss out on valuable opportunities due to
+            non-optimized profiles, lacking the vital keywords and engaging
+            content that recruiters actively seek.
+          </p>
+          <h4 className="text-4xl mt-5 text-gray-100  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
+            Understanding Your New LinkedIn Summary:
+          </h4>
+          <p className="text-2xl font-thin   text-gray-400 ">
+            You might find the new summary extensive and consider opting for a
+            shorter version. While you can click the button above for a more
+            concise summary, we recommend the lengthier version for specific
+            benefits. LinkedIn allows a generous 2,000-word limit for summaries,
+            and this isn{"’"}t without reason. A comprehensive summary lets you
+            include a greater number of keywords, enhancing your profile{"’"}s
+            discoverability and reach on the platform.
+          </p>
+
+          <h4 className="text-4xl mt-5 text-gray-100  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
+            Boosted Recommendations:
+          </h4>
+          <p className="text-2xl font-thin  text-gray-400 ">
+            When you apply for jobs on LinkedIn, the platform your profile
+            content in relation to the job's requirements. A keyword-optimized
+            summary increases the chances of LinkedIn recommending you as a top
+            candidate to potential employers.
+          </p>
+          <h4 className="text-4xl mt-5 text-gray-100  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
+            Enhanced Engagement
+          </h4>
+          <p className="text-2xl font-thin  text-gray-400 ">
+            A captivating summary ensures that once a recruiter lands on your
+            profile, they stay there. This longer engagement signals to Linkedin
+            that your profile is valuable, which in turn boosts your profile's
+            ranking in search results.
+          </p>
+          <h4 className="text-4xl mt-5 text-gray-100  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
+            Showcasing Achievements
+          </h4>
+          <p className="text-2xl font-thin  text-gray-400 ">
+            Your summary isn't just about the roles you've held- it's about the
+            impact you've made. A detailed summary allows you to highlight
+            significant achievements, providing tangible evidence of your
+            expertise and skills.
+          </p>
+          <h4 className="text-4xl mt-5 text-gray-100  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
+            Personal Branding
+          </h4>
+          <p className="text-2xl font-thin  text-gray-400 ">
+            Your LinkedIn summary is a reflection of your professional brand. A
+            well-crafted, lengthy summary sets you apart and establishes your
+            position as a thought leader or industry expert.
+          </p>
+        </div>
       </div>
-     <div className="mx-30" >
-     <h1 className="text-center text-5xl text-bold text-gray-100">
-        <span className="text-yellow-500 text-5xl">Attention, {fullName}!</span>{" "}
-        To become a Linkedin pro and secure your ideal position ASAP, read the
-        following carefully.
-      </h1>
-      <h1 className="text-center text-2xl font-normal italic ml-5 text-gray-200">
-        Don't skim over this! You might miss critical insights and essential
-        information that could cost you your dream job.
-      </h1>
-     </div>
-      <div className="border-2 mt-9 border-indigo-900 rounded-lg mx-30 px-8 py-9">
+      <div className="mx-30 p-16 pb-4 font-sans text-center">
+        <h1 className=" text-5xl text-bold text-gray-100 mb-6">
+          <span className="text-yellow-600 text-5xl">
+            Attention, {fullName} !
+          </span>{" "}
+          To become a Linkedin pro and secure your ideal position ASAP, read the
+          following carefully.
+        </h1>
+        <p className=" text-2xl font-normal italic  text-gray-200 mb-0">
+          Don't skim over this! You might miss critical insights and essential
+          information that could cost you your dream job.
+        </p>
+      </div>
+      <div className="border-2 mt-9 border-indigo-900 rounded-lg mx-30 px-8 py-9 bg-transparent backdrop-blur">
         <h3 className="font-semibold text-lg text-gray-100">
-          Dear <span className="text-yellow-500"> {FirstName}Mubasher</span>,
+          Dear <span className="text-yellow-500"> {FirstName}</span>,
         </h3>
         <p className="text-lg font-normal mt-6 text-gray-300 ">
           I'm curious are you someone who believes in pursuing excellence and
@@ -170,7 +181,7 @@ const LinkedInSummary = ({
         <p className="text-lg font-normal mt-6 text-gray-300 ">
           Warm regards,
           <br />
-          <span className="font-bold">M. Hassa </span>
+          <span className="font-extrabold">M. Hassan</span>
           <br />
           CEO & Co-Founder <br />
           CareerBooster.Al <br />
