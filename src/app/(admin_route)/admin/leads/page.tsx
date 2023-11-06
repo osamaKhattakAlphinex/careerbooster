@@ -7,6 +7,8 @@ import {
 } from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";
+
+import { useRouter, usePathname } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
 const LeadsAdminPage = () => {
@@ -16,6 +18,8 @@ const LeadsAdminPage = () => {
   const [numberOfRecords, setNumberOfRecords] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageStart, setPageStart] = useState<number>(0);
+  const router = useRouter();
+  const pathname = usePathname();
   const fetchRecords = async (startIndex: number, endIndex: number) => {
     setLoading(true);
     if (!loading) {
@@ -48,8 +52,10 @@ const LeadsAdminPage = () => {
     const endIndex = startIndex + limitOfRecords;
     setPageStart(startIndex);
     fetchRecords(startIndex, endIndex);
+    router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
   }, [currentPage, limitOfRecords]);
 
+  useEffect(() => setCurrentPage(1), [limitOfRecords]);
   return (
     <div className="pt-30">
       <div className="my-5 ml-10">
