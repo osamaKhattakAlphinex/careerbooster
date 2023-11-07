@@ -38,11 +38,13 @@ const CoverLetterWriter = () => {
 
   // Function to save the edited content and exit editing mode
   const handleSave = () => {
-    console.log("edited content", editedContent);
     setStreamedData(editedContent);
     setIsEditing(false);
-    saveToDB(streamedData);
   };
+
+  useEffect(() => {
+    saveToDB(streamedData);
+  }, [streamedData]);
 
   // limit bars
   const [availablePercentageCoverLetter, setAvailablePercentageCoverLetter] =
@@ -115,7 +117,6 @@ const CoverLetterWriter = () => {
               setStreamedData((prev) => prev + text);
               tempText += text;
             }
-            console.log("first text: " + tempText);
             await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
@@ -157,10 +158,6 @@ const CoverLetterWriter = () => {
     }
   };
 
-  // useEffect(() => {
-  //   saveToDB(streamedData);
-  // }, [streamedData]);
-
   const saveToDB = async (tempText: string) => {
     try {
       const response = await axios.post("/api/users/updateUserData", {
@@ -200,6 +197,7 @@ const CoverLetterWriter = () => {
       userData.results.coverLetter !== ""
     ) {
       setShow(true);
+      console.log("userData CoverLetter: ", userData.results.coverLetter);
       setStreamedData(userData.results.coverLetter);
     }
   }, [userData]);
@@ -437,6 +435,34 @@ const CoverLetterWriter = () => {
                 </Button>
               </div>
             )}
+            {isEditing && (
+              <div>
+                <Button
+                  type="button"
+                  onClick={handleSave}
+                  className="btn theme-outline-btn"
+                >
+                  <div className="flex flex-row gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                      />
+                    </svg>
+
+                    <span>Save</span>
+                  </div>
+                </Button>
+              </div>
+            )}
           </div>
           {/* <div className="">Download PDF</div> */}
         </div>
@@ -452,9 +478,9 @@ const CoverLetterWriter = () => {
               <div
                 contentEditable="true"
                 dangerouslySetInnerHTML={{ __html: editedContent }}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setEditedContent(e.target.value)
-                }
+                onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
+                  setEditedContent(e.target.innerHTML);
+                }}
               ></div>
             ) : (
               <div onClick={handleClick}>
@@ -462,7 +488,6 @@ const CoverLetterWriter = () => {
               </div>
             )}
           </div>
-          {isEditing && <button onClick={handleSave}>Save</button>}
         </div>
       )}
     </>
