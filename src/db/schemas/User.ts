@@ -47,7 +47,15 @@ const UserSchema = new Schema(
       type: String,
       default: "user",
     },
-    files: [{ type: String }],
+    files: [
+      {
+        type: Schema.Types.ObjectId,
+        id: String,
+        filename: String,
+        fileContent: String,
+        uploadedDateTime: String,
+      },
+    ],
     resumes: [],
     wizardCompleted: {
       type: Boolean,

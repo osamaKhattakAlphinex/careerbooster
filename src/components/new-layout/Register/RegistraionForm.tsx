@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -11,6 +11,7 @@ import { refreshIconRotating } from "@/helpers/iconsProvider";
 import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
 import Image from "next/image";
+import pdf from "pdf-parse";
 
 // export const metadata: Metadata = {
 //   title: "CareerBooster.AI-Register",
@@ -24,7 +25,7 @@ const RegistrationForm = () => {
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [file, setFile] = useState<any>(null);
   const [fileError, setFileError] = useState<string>("");
-
+  const [fileData, setFileData] = useState<string>("");
   // session
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
@@ -232,6 +233,41 @@ const RegistrationForm = () => {
     }
   };
 
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const fileInput = e.target;
+    if (fileInput && fileInput.files && fileInput.files.length > 0) {
+      const uploadedFile = fileInput.files[0];
+
+      if (uploadedFile.type !== "application/pdf") {
+        setFileError("Only PDF files are allowed");
+        return;
+      }
+
+      setFile(uploadedFile);
+      setFileError("");
+
+      // Use pdf-parse to extract text from the PDF file
+      const reader = new FileReader();
+      reader.onload = async (event: any) => {
+        const buffer = event.target.result;
+        if (buffer) {
+          const data = Buffer.from(new Uint8Array(buffer));
+          const pdfData = await pdf(data);
+          const text = pdfData.text;
+          console.log("pdf text: " + text);
+          // Update your component state with the extracted text
+          setFileData(text);
+
+          // Optionally, you can use the extracted text as needed.
+          // For example, you can send it to the server or process it further.
+          // fetchRegistrationDataFromResume(uploadedFile.name, text);
+        }
+      };
+
+      reader.readAsArrayBuffer(uploadedFile);
+    }
+  };
+
   useEffect(() => {
     const firstName = params?.get("firstName");
     const lastName = params?.get("lastName");
@@ -258,7 +294,8 @@ const RegistrationForm = () => {
       //  file exists and is PDF
       setFileError("");
       // upload it to server
-      uploadFileToServer();
+      //uploadFileToServer();
+      // getContentFromResume(file);
     } else if (file) {
       // if file exists but not PDf
       setFileError("only PDF file is allowed");
@@ -295,15 +332,13 @@ const RegistrationForm = () => {
                         type="file"
                         disabled={fileUploading}
                         onChange={(e) => {
-                          if (e.target.files) {
-                            setFile(e.target.files[0]);
-                          }
+                          handleFileChange(e);
                         }}
                       />
-
-                      {fileUploading
+                      {/* {fileUploading
                         ? refreshIconRotating
-                        : "Upload Your Existing Resume"}
+                        : "Upload Your Existing Resume"} */}
+                      Upload Your Existing Resume
                     </label>
                   )}
                   <p className="text-gray-700 mt-4 text-sm">

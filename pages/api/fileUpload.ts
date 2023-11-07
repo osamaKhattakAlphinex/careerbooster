@@ -51,7 +51,6 @@ const handler: NextApiHandler = async (req, res) => {
   const saveLocally = true;
   const fileName = Date.now().toString();
   if (saveLocally) {
-    console.log("inside saveLocally");
     options.uploadDir = path.join(process.cwd(), directory);
     options.filename = (name, ext, path, form) => {
       return fileName + ".pdf";
