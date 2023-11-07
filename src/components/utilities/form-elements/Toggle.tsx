@@ -20,17 +20,20 @@ const Toggle: React.FC<Props> = ({
   onChange,
   onBlur,
 }: any) => {
+  console.clear();
+  console.log("kjhjkhk", value);
+
   return (
     <>
       <label
         className="relative inline-flex items-center cursor-pointer"
-        htmlFor="toggle"
+        htmlFor={id}
       >
         <input
-          id="toggle"
+          id={id}
           type="checkbox"
           checked={value}
-          value=""
+          // value={value}
           onChange={onChange}
           className="sr-only peer"
         />

@@ -6,7 +6,7 @@ import axios from "axios";
 import Toggle from "@/components/utilities/form-elements/Toggle";
 import { FeatureRow } from "./AddPackage";
 
-type Package = {
+interface userPackage {
   _id?: string;
   type: "monthly" | "yearly";
   title: string;
@@ -28,13 +28,19 @@ type Package = {
     review_resume: number;
     consulting_bids_generation: number;
   };
+}
+
+type Props = {
+  userPackage: userPackage;
+  getPackages: () => void;
 };
 
-const UpdatePackage = ({ ...userPackage }: Package) => {
+const UpdatePackage = ({ userPackage, getPackages }: Props) => {
   const [popUpModel, setPopUpModel] = useState(false);
   const [editPopUpModel, setEditPopUpModel] = useState(false);
   // const [previewPopUpModel, setPreviewPopUpModel] = useState(false);
   const packgeId = userPackage._id;
+
   const handleFeatureRemove = (idx: number) => {
     const newFeatures = [...formik.values.features];
     newFeatures.splice(idx, 1);
@@ -48,67 +54,74 @@ const UpdatePackage = ({ ...userPackage }: Package) => {
 
   const formik = useFormik({
     initialValues: {
-      title: userPackage.title || "",
-      type: userPackage.type || "",
-      amount: userPackage.amount || "",
-      category: userPackage.category || "",
-      status: userPackage.status || "",
-      features: userPackage.features || [""],
-      featuresToolTips: userPackage.featuresToolTips || [""],
+      title: userPackage.title,
+      type: userPackage.type,
+      amount: userPackage.amount,
+      category: userPackage.category,
+      status: userPackage.status,
+      features: userPackage.features,
+      featuresToolTips: userPackage.featuresToolTips,
       limit: {
-        resumes_generation: userPackage.limit.resumes_generation || "",
-        keywords_generation: userPackage.limit.keywords_generation || "",
-        headline_generation: userPackage.limit.headline_generation || "",
-        about_generation: userPackage.limit.about_generation || "",
-        job_desc_generation: userPackage.limit.job_desc_generation || "",
-        cover_letter_generation:
-          userPackage.limit.cover_letter_generation || "",
-        consulting_bid_generation:
-          userPackage.limit.consulting_bids_generation || "",
-        review_resume: userPackage.limit.review_resume || "",
-        pdf_files_upload: userPackage.limit.pdf_files_upload || "",
-        can_edit_resume: userPackage.limit.can_edit_resume || false,
+        resumes_generation: userPackage.limit.resumes_generation,
+        keywords_generation: userPackage.limit.keywords_generation,
+        headline_generation: userPackage.limit.headline_generation,
+        about_generation: userPackage.limit.about_generation,
+        job_desc_generation: userPackage.limit.job_desc_generation,
+        cover_letter_generation: userPackage.limit.cover_letter_generation,
+        consulting_bid_generation: userPackage.limit.consulting_bids_generation,
+        review_resume: userPackage.limit.review_resume,
+        pdf_files_upload: userPackage.limit.pdf_files_upload,
+        can_edit_resume: userPackage.limit.can_edit_resume,
       },
     },
     validationSchema: Yup.object().shape({
       title: Yup.string().required("Please Title/Name Your Package"),
       type: Yup.string().required("Please Select One Package"),
-      amount: Yup.number().required("Please Enter Your Amount"),
+      amount: Yup.number()
+        .required("Please Enter Your Amount")
+        .min(0, "Minimum Value is 0"),
       category: Yup.string().required("Please Select at least one category"),
       status: Yup.string().required(
         'Please select either "Active" or "Inactive"'
       ),
 
+      features: Yup.array(Yup.string())
+        .required("Please Enter THe Features")
+        .min(1, "Please Provide atleast 1 feature"),
+      featuresToolTips: Yup.array(Yup.string())
+        .required("Please Enter THe Features Tooltip")
+        .min(1, "Please Provide atleast 1 feature tooltip"),
+
       limit: Yup.object().shape({
-        resumes_generation: Yup.number().required(
-          "Please Select The Amount of Resume"
-        ),
-        keywords_generation: Yup.number().required(
-          "Please Select The Amount of Keywords"
-        ),
-        headline_generation: Yup.number().required(
-          "Please Select The Amount of Headline"
-        ),
+        resumes_generation: Yup.number()
+          .required("Please Select The Amount of Resume")
+          .min(0, "Minimum Value is 0"),
+        keywords_generation: Yup.number()
+          .required("Please Select The Amount of Keywords")
+          .min(0, "Minimum Value is 0"),
+        headline_generation: Yup.number()
+          .required("Please Select The Amount of Headline")
+          .min(0, "Minimum Value is 0"),
         about_generation: Yup.number().required(
           "Please Select The Amount of About Generation"
         ),
-        job_desc_generation: Yup.number().required(
-          "Please Select The Amount of About Description Generation"
-        ),
-        cover_letter_generation: Yup.number().required(
-          "Please Select The Amount of Cover Letters"
-        ),
-        consulting_bid_generation: Yup.number().required(
-          "Please Select The Amount of consulting bid generation"
-        ),
-        review_resume: Yup.number().required(
-          "Please Select The Amount of resume review"
-        ),
-        pdf_files_upload: Yup.number().required(
-          "Please Select The no of pdf files upload"
-        ),
+        job_desc_generation: Yup.number()
+          .required("Please Select The Amount of About Description Generation")
+          .min(0, "Minimum Value is 0"),
+        cover_letter_generation: Yup.number()
+          .required("Please Select The Amount of Cover Letters")
+          .min(0, "Minimum Value is 0"),
+        consulting_bid_generation: Yup.number()
+          .required("Please Select The Amount of consulting bid generation")
+          .min(0, "Minimum Value is 0"),
+        review_resume: Yup.number()
+          .required("Please Select The Amount of resume review")
+          .min(0, "Minimum Value is 0"),
+        pdf_files_upload: Yup.number()
+          .required("Please Select The no of pdf files upload")
+          .min(0, "Minimum Value is 0"),
         can_edit_resume: Yup.boolean().oneOf(
-          [true],
+          [true, false],
           "Please select The CheckBox"
         ),
       }),
@@ -137,11 +150,14 @@ const UpdatePackage = ({ ...userPackage }: Package) => {
           consulting_bids_generation: values.limit.consulting_bid_generation,
         },
       });
+
+      getPackages();
       // console.log("api response:", res);
       action.resetForm();
-      setPopUpModel(false);
+      setEditPopUpModel(false);
     },
   });
+  console.log(formik.values);
   return (
     <>
       <button
@@ -303,16 +319,20 @@ const UpdatePackage = ({ ...userPackage }: Package) => {
                     </p>
                   )}
                 </div>
+
                 <div>
                   <Toggle
+                    id="update-package-toggle"
                     label="Active Status"
                     value={formik.values.status === "active" ? true : false}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      console.log(e);
+
                       formik.setFieldValue(
                         "status",
-                        e.target.checked ? "active" : "inactive"
-                      )
-                    }
+                        e.target.checked === true ? "active" : "inactive"
+                      );
+                    }}
                     onBlur={formik.handleBlur}
                   />
 
@@ -588,6 +608,7 @@ const UpdatePackage = ({ ...userPackage }: Package) => {
               ))}
 
               <button
+                className="mt-2 mb-5"
                 type="button"
                 onClick={(e) => {
                   formik.setFieldValue("features", [
@@ -600,7 +621,7 @@ const UpdatePackage = ({ ...userPackage }: Package) => {
                   ]);
                 }}
               >
-                Add Another Feature
+                + Add More Feature
               </button>
 
               <button

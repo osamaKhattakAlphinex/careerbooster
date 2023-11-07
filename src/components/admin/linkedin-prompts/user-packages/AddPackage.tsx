@@ -4,14 +4,16 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Toggle from "@/components/utilities/form-elements/Toggle";
-import FormFieldArray from "@/components/utilities/form-elements/FormFieldArray";
-// import FeaturesFormCard from "./FeaturesFormCard";
+
 type Feature = string[];
 type FeatureTooltip = string[];
 
+type Props = {
+  getPackages: () => void;
+};
+
 type FeatureFieldType = { id: number; feature: string; tooltip: string };
 // Feature Field
-
 export const FeatureRow = ({
   id,
   feature,
@@ -53,7 +55,7 @@ export const FeatureRow = ({
   );
 };
 
-const AddPackage = () => {
+const AddPackage = ({ getPackages }: Props) => {
   const [features, setFeatures] = useState<Feature[]>([]); // State for Features
   const [featuresToolTips, setFeaturesToolTips] = useState<FeatureTooltip[]>(
     []
@@ -97,10 +99,10 @@ const AddPackage = () => {
   const formik = useFormik({
     initialValues: {
       title: "",
-      type: "",
+      type: "monthly",
       amount: "",
-      category: "",
-      status: "",
+      category: "basic",
+      status: "active",
       features: [""],
       featuresToolTips: [""],
       limit: {
@@ -119,7 +121,9 @@ const AddPackage = () => {
     validationSchema: Yup.object().shape({
       title: Yup.string().required("Please Title/Name Your Package"),
       type: Yup.string().required("Please Select One Package"),
-      amount: Yup.number().required("Please Enter Your Amount"),
+      amount: Yup.number()
+        .required("Please Enter Your Amount")
+        .min(0, "Minimum Value is 0"),
       category: Yup.string().required("Please Select at least one category"),
       status: Yup.string().required(
         'Please select either "Active" or "Inactive"'
@@ -128,41 +132,42 @@ const AddPackage = () => {
       // featuresToolTips: Yup.string().required(
       //   "Please Enter THe Features Tool Tips"
       // ),
-
-      // features: Yup.array(Yup.string().required("Please Enter THe Features")),
-      // featuresToolTips: Yup.array(
-      //   Yup.string().required("Please Enter THe Features Tooltip")
-      // ),
+      features: Yup.array(Yup.string())
+        .required("Please Enter THe Features")
+        .min(1, "Please Provide atleast 1 feature"),
+      featuresToolTips: Yup.array(Yup.string())
+        .required("Please Enter THe Features Tooltip")
+        .min(1, "Please Provide atleast 1 feature tooltip"),
       limit: Yup.object().shape({
-        resumes_generation: Yup.number().required(
-          "Please Select The Amount of Resume"
-        ),
-        keywords_generation: Yup.number().required(
-          "Please Select The Amount of Keywords"
-        ),
-        headline_generation: Yup.number().required(
-          "Please Select The Amount of Headline"
-        ),
-        about_generation: Yup.number().required(
-          "Please Select The Amount of About Generation"
-        ),
-        job_desc_generation: Yup.number().required(
-          "Please Select The Amount of About Description Generation"
-        ),
-        cover_letter_generation: Yup.number().required(
-          "Please Select The Amount of Cover Letters"
-        ),
-        consulting_bid_generation: Yup.number().required(
-          "Please Select The Amount of consulting bid generation"
-        ),
-        review_resume: Yup.number().required(
-          "Please Select The Amount of resume review"
-        ),
-        pdf_files_upload: Yup.number().required(
-          "Please Select The no of pdf files upload"
-        ),
+        resumes_generation: Yup.number()
+          .required("Please Select The Amount of Resume")
+          .min(0, "Minimum Value is 0"),
+        keywords_generation: Yup.number()
+          .required("Please Select The Amount of Keywords")
+          .min(0, "Minimum Value is 0"),
+        headline_generation: Yup.number()
+          .required("Please Select The Amount of Headline")
+          .min(0, "Minimum Value is 0"),
+        about_generation: Yup.number()
+          .required("Please Select The Amount of About Generation")
+          .min(0, "Minimum Value is 0"),
+        job_desc_generation: Yup.number()
+          .required("Please Select The Amount of About Description Generation")
+          .min(0, "Minimum Value is 0"),
+        cover_letter_generation: Yup.number()
+          .required("Please Select The Amount of Cover Letters")
+          .min(0, "Minimum Value is 0"),
+        consulting_bid_generation: Yup.number()
+          .required("Please Select The Amount of consulting bid generation")
+          .min(0, "Minimum Value is 0"),
+        review_resume: Yup.number()
+          .required("Please Select The Amount of resume review")
+          .min(0, "Minimum Value is 0"),
+        pdf_files_upload: Yup.number()
+          .required("Please Select The no of pdf files upload")
+          .min(0, "Minimum Value is 0"),
         can_edit_resume: Yup.boolean().oneOf(
-          [true],
+          [true, false],
           "Please select The CheckBox"
         ),
       }),
@@ -193,6 +198,7 @@ const AddPackage = () => {
         },
       });
       // console.log("api response:", res);
+      getPackages();
       action.resetForm();
       setPopUpModel(false);
     },
@@ -309,8 +315,9 @@ const AddPackage = () => {
                     name="type"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   >
-                    <option defaultValue="">Select Package Type</option>
-                    <option value="monthly">Monthly</option>
+                    <option value="monthly" selected>
+                      Monthly
+                    </option>
                     <option value="yearly">Yearly</option>
                   </select>
                   {formik.touched.type && formik.errors.type && (
@@ -353,8 +360,9 @@ const AddPackage = () => {
                     name="category"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   >
-                    <option>Select Your Category</option>
-                    <option value="basic">Basic</option>
+                    <option value="basic" selected>
+                      Basic
+                    </option>
                     <option value="standard">Standard</option>
                     <option value="premium">Premium</option>
                   </select>
@@ -385,14 +393,15 @@ const AddPackage = () => {
                   </select> */}
 
                   <Toggle
+                    id="add-pacakge-toggle"
                     label="Active Status"
                     value={formik.values.status === "active" ? true : false}
-                    onChange={(e) =>
+                    onChange={(e) => {
                       formik.setFieldValue(
                         "status",
                         e.target.checked ? "active" : "inactive"
-                      )
-                    }
+                      );
+                    }}
                     onBlur={formik.handleBlur}
                   />
 
@@ -691,6 +700,7 @@ const AddPackage = () => {
               ))}
 
               <button
+                className="mt-2 mb-5"
                 type="button"
                 onClick={
                   (e) => {
@@ -707,7 +717,7 @@ const AddPackage = () => {
                   // addFeatureRow
                 }
               >
-                ADD
+                + Add more Features
               </button>
 
               {/* <div className="grid gap-4 mb-4 sm:grid-cols-2">
