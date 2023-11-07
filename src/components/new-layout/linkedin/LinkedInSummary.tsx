@@ -7,13 +7,13 @@ const LinkedInSummary = ({
 }) => {
   return (
     <div className="mt-10">
-      <div className=" w-full bg-black pt-20 flex flex-col justify-center items-center font-sans">
-        <div className=" w-5/6 text-center flex flex-col gap-2 pb-16">
+      <div className="w-full content-2 bg-black lg:pt-20 flex flex-col justify-center items-center font-sans">
+        <div className=" lg:w-5/6 text-center flex flex-col gap-2 pb-16">
           <h2 className=" text-white">
             How does the new summary make me a <br /> preferred candidate on
             LinkedIn?
           </h2>
-          <p className="text-2xl mb-16 font-thin text-gray-400">
+          <p className="text-2xl lg:mb-16 font-thin text-gray-400">
             Most professionals miss out on valuable opportunities due to
             non-optimized profiles, lacking the vital keywords and engaging
             content that recruiters actively seek.
@@ -68,10 +68,10 @@ const LinkedInSummary = ({
           </p>
         </div>
       </div>
-      <div className="mx-30 p-16 pb-4 font-sans text-center">
-        <h1 className=" text-5xl text-bold text-gray-100 mb-6">
-          <span className="text-yellow-600 text-5xl">
-            Attention, {fullName} !
+      <div className="mx-30 lg:p-16 pb-4 font-sans text-center">
+        <h1 className="lg:text-5xl text-bold text-gray-100 mb-6">
+          <span className="text-yellow-600 lg:text-5xl">
+            Attention, {fullName ? fullName : "..."} !
           </span>{" "}
           To become a Linkedin pro and secure your ideal position ASAP, read the
           following carefully.
@@ -81,11 +81,16 @@ const LinkedInSummary = ({
           essential information that could cost you your dream job.
         </p>
       </div>
-      <div className="border-2 mt-9 border-indigo-900 rounded-lg mx-30 px-8 py-9 bg-transparent backdrop-blur">
+      <div className="border-2 mt-9 border-indigo-900 rounded-lg mx-30 px-8 py-9 bg-transparent lg:backdrop-blur">
         <h3 className="font-semibold text-lg text-gray-100">
-          Dear <span className="text-yellow-500"> {FirstName}</span>,
+          Dear{" "}
+          <span className="text-yellow-500">
+            {" "}
+            {FirstName ? FirstName : "..."}{" "}
+          </span>
+          ,
         </h3>
-        <p className="text-lg font-normal mt-6 text-gray-300 ">
+        <p className="text-lg font-normal mt-6 lg:text-gray-300 ">
           I{"'"}m curious are you someone who believes in pursuing excellence
           and ensuring no task is left halfway?
         </p>
