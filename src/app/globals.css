@@ -219,12 +219,7 @@
 /* Styles for mobile devices (up to 767px wide) */
 @media (max-width: 767px) {
   /* Your mobile-specific CSS styles go here */
-  .bullet-1 {
-    margin-top: 50px;
-  }
-  .bullet-2 {
-    margin-top: 75px;
-  }
+
   .heading1 {
     margin-top: 14px;
   }
@@ -268,7 +263,10 @@
     padding-right: 100px;
     padding-left: 100px;
   }
-
+  .content-3 {
+    margin: 0px 96px;
+    padding: 18px;
+  }
   .radio-btn {
     margin-left: 100px;
     margin-right: 100px;
@@ -283,5 +281,19 @@
     display: flex;
     width: 330px;
     align-items: center;
+  }
+  .text {
+    text-align: center;
+  }
+}
+@media (min-width: 768px) {
+  .content-3 {
+    margin: 0px 120px;
+  }
+  .bullet-1 {
+    padding-top: 27px;
+  }
+  .bullet-2 {
+    padding-top: 30px;
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 // import { slugify } from "@/helpers/slugify";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import copy from "clipboard-copy";
 import {
   clipboardIcon,
@@ -11,11 +11,12 @@ import {
 } from "@/helpers/iconsProvider";
 import Button from "../../utilities/form-elements/Button";
 import LinkedInSummary from "./LinkedInSummary";
-import Link from "next/link";
+import axios from "axios";
 
 //Editable
 
 const LinkedInUploadPDFResume = () => {
+  const router = useRouter();
   const params = useSearchParams();
   const fileName: any = params?.get("fileName");
 
@@ -25,12 +26,21 @@ const LinkedInUploadPDFResume = () => {
   const [fileError, setFileError] = useState<string>("");
   const [streamedHeadlineData, setStreamedHeadlineData] = useState("123");
   const [streamedAboutData, setStreamedAboutData] = useState("123");
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
   // Define a state variable to hold both first name and full name
-  const [names, setNames] = useState({ firstName: "", fullName: "" });
+  const [names, setNames] = useState({
+    firstName: "",
+    fullName: "",
+    email: "",
+    lastName: "",
+    phone: "",
+    location: "",
+  });
   // Define state variables to track API call statuses
   const [headlineComplete, setHeadlineComplete] = useState<boolean>(false);
   const [aboutComplete, setAboutComplete] = useState<boolean>(false);
-  const [aboutData, setAboutData] = useState<string>("about");
+  const [aboutData, setAboutData] = useState<string>("aboutdefault");
   const [instruction, setInstruction] = useState<string>("");
   const [isHeadlineCopied, setIsHeadlineCopied] = useState(false);
   const [isSummaryCopied, setIsSummaryCopied] = useState(false);
@@ -151,8 +161,18 @@ const LinkedInUploadPDFResume = () => {
         },
       })
         .then(async (resp: any) => {
-          const { firstName, fullName } = await resp.json();
-          setNames({ firstName, fullName });
+          const { firstName, lastName, fullName, email, phone, location } =
+            await resp.json();
+          setNames({ firstName, fullName, email, lastName, phone, location });
+          setButtonDisabled(false);
+          UpdateGohighlevel({
+            firstName,
+            fullName,
+            email,
+            lastName,
+            phone,
+            location,
+          });
         })
         .catch((error) => {
           setFileError("Something went wrong");
@@ -177,7 +197,73 @@ const LinkedInUploadPDFResume = () => {
       console.error("Failed to copy text: ", error);
     }
   };
-
+  //Move File linkedin-temp To temp folder
+  const moveToRegister = () => {
+    setFileError("");
+    if (fileName) {
+      fetch("/api/linkedInBots/moveResumeToTempFolder", {
+        method: "POST",
+        body: JSON.stringify({ fileName }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
+            router.replace(
+              `/register?firstName=${names.firstName}&lastName=${names.lastName}&email=${names.email}&file=${fileName}`
+            );
+          }
+        })
+        .catch((error) => {
+          setFileError("Something went wrong");
+        });
+    }
+  };
+  const UpdateGohighlevel = async ({
+    firstName,
+    fullName,
+    email,
+    lastName,
+    phone,
+    location,
+  }: {
+    firstName: string;
+    fullName: string;
+    email: string;
+    lastName: string;
+    phone: number;
+    location: string;
+  }) => {
+    axios
+      .post(
+        `${process.env.NEXT_PUBLIC_GHL_API_URL}/contacts/`,
+        {
+          fullName,
+          firstName,
+          lastName,
+          email: email,
+          phone,
+          location,
+          tags: ["cb-linkedinTool"],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_GHL_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        if (response?.status == 200)
+        console.log("Save Data on CRM");
+        
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   useEffect(() => {
     if (params?.get("fileName")) {
       linkedinHeadline(fileName);
@@ -380,11 +466,10 @@ const LinkedInUploadPDFResume = () => {
               <input
                 id="default-radio-1"
                 type="radio"
-                value="about"
+                value="aboutPersona"
                 name="default-radio"
                 onChange={(e) => setAboutData(e.target.value)}
                 className="w-5 h-5"
-                checked={aboutData === "about"}
               />
               Use My Persona to write the Cover Letter
             </label>
@@ -395,7 +480,7 @@ const LinkedInUploadPDFResume = () => {
               <input
                 id="default-radio-2"
                 type="radio"
-                value="jobDescription"
+                value="aboutShort"
                 name="default-radio"
                 onChange={(e) => setAboutData(e.target.value)}
                 className="w-5 h-5"
@@ -409,7 +494,7 @@ const LinkedInUploadPDFResume = () => {
               <input
                 id="default-radio-3"
                 type="radio"
-                value="about"
+                value="aboutStory"
                 name="default-radio"
                 onChange={(e) => setAboutData(e.target.value)}
                 className="w-5 h-5"
@@ -423,7 +508,7 @@ const LinkedInUploadPDFResume = () => {
               <input
                 id="default-radio-4"
                 type="radio"
-                value="instruction"
+                value="aboutInstructions"
                 name="default-radio"
                 onChange={(e) => setAboutData(e.target.value)}
                 className="w-5 h-5"
@@ -437,7 +522,6 @@ const LinkedInUploadPDFResume = () => {
                 onChange={(e) => setInstruction(e.target.value)}
                 autoFocus
                 rows={3}
-                cols={50}
                 placeholder="Enter Instruction"
               />
             ) : (
@@ -479,12 +563,16 @@ const LinkedInUploadPDFResume = () => {
           <h3 className="lg:text-4xl text-normal  lg:leading-normal text-white text-center lg:font-bold ">
             Yes, I Want to Explore More Career Boosting Tools!
           </h3>
-          <Link
-            href="/register"
-            className="mx-1 mt-8 p-3 text-lg my-2 bg-yellow-400 hover:bg-yellow-600  lg:w-8/12 lg:h-14 lg:mt-8 text-center rounded-full font-bold lg:text-xl text-black lg:py-3 lg:px-9 no-underline"
+          <button
+            className={`mx-1 mt-8 p-3 text-lg my-2 bg-yellow-400 hover:bg-yellow-600  lg:w-8/12 lg:h-14 lg:mt-8 text-center rounded-full font-bold lg:text-xl text-black lg:py-3 lg:px-9 no-underline  ${
+              buttonDisabled ? "bg-yellow-600" : "cursor-pointer"
+            } `}
+            onClick={moveToRegister}
+            disabled={buttonDisabled}
           >
             Click here to experience the magic
-          </Link>
+          </button>
+          {fileError && <div className="error-message">{fileError}</div>}
         </div>
       </div>
     </>

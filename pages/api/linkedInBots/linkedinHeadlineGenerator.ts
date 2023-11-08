@@ -2,10 +2,18 @@ import { NextApiHandler } from "next";
 import { OpenAI } from "langchain/llms/openai";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import path from "path";
+import Prompt from "@/db/schemas/Prompt";
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const fileName = req.body.fileName;
+    let prompt;
 
+    const promptRec = await Prompt.findOne({
+      type: "linkedinTool",
+      name: "headline",
+      active: true,
+    });
+    prompt = promptRec ? promptRec.value : "";
     // For LinkedIn Toll  if file is uploaded then load content from that fiel
     if (fileName) {
       // load file
@@ -30,10 +38,9 @@ const handler: NextApiHandler = async (req, res) => {
         const input = `
             This is the User data:
             ${content}
-  
-            Now Write a LinkedIn headline from the above user data for me using the headline formula below. 
-            Job Title |Top Keyword 1 | Top Keyword 2 | Top Keyword 3 | Top Keyword 4 | Value proposition statement
-            For example, a Marketing Director could use a headline like "Marketing Director | Social Media Expert | Email Marketing | PPC Expert |  Customer Engagement & Retention | Passionate About Mission Focused Brands & Companies.
+            This is the prompt:
+            ${prompt}
+           
         `;
 
         try {

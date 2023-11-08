@@ -5,17 +5,17 @@ import path from "path";
 import Prompt from "@/db/schemas/Prompt";
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
-    const { fileName, option, instruction } = req.body;
+    const { fileName, option, aboutInstructions } = req.body;
     let prompt;
 
     const promptRec = await Prompt.findOne({
-      type: "linkedin",
+      type: "linkedinTool",
       name: option,
       active: true,
     });
     prompt = promptRec ? promptRec.value : "";
-    if (option === "instruction") {
-      prompt = prompt.replaceAll('{{instructions}}', instruction);
+    if (option === "aboutInstructions") {
+      prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
     }
 
     // For LinkedIn Tool if file is uploaded then load content from that fiel

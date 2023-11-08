@@ -147,12 +147,12 @@ const LinkedInToolMain = () => {
       {/*Vide  Card */}
       <div className="md:flex mt-20">
         <div className="lg:w-6/12">
-          <p className="text-3xl text-center lg:text-3xl font-semibold">
+          <p className="text-3xl text font-semibold">
             I don{"'"}t have a resume. How can I upload my LinkedIn profile in
             PDF format?
           </p>
           <div className="flex">
-            <div className="w-[10%] -mx-1 lg:-mx-4 pt-11 h-full flex flex-col items-center  gap-1">
+            <div className="w-[10%] -mx-1 lg:-mx-5 pt-11 h-full flex flex-col items-center  gap-1">
               {/* dot */}
               <div className="w-6 h-6 rounded-full bg-gradient-to-t to-fuchsia-500 from-violet-500 border-4 border-gray-800"></div>
               {/* line */}
@@ -167,11 +167,11 @@ const LinkedInToolMain = () => {
             <div className="w-[90%]  h-full pt-10">
               <ul className="text-lg text-gray-200 flex flex-col gap-0 ">
                 <li>Click here to navigate to your LinkedIn profile.</li>
-                <li className="lg:mt-9 bullet-1">
+                <li className="mt-5 bullet-1">
                   On your profile page, click on the ellipsis (three dots) and
                   select {"'"}Save to PDF{"'"}
                 </li>
-                <li className="lg:mt-16 bullet-2">
+                <li className="mt-6 bullet-2">
                   This will allow you to download and save your LinkedIn profile
                   as a PDF document.
                 </li>
@@ -187,7 +187,7 @@ const LinkedInToolMain = () => {
       </div>
       {/* Card */}
       <div className="w-full lg:h-[550px] lg:flex rounded-2xl mt-14 bg-gradient-to-r from-fuchsia-500 to-violet-500  border-gray-800">
-        <div className=" text-center lg:w-6/12 lg:my-8 lg:mx-14  md:text-left">
+        <div className="text lg:w-6/12 lg:my-8 lg:mx-14  md:text-left">
           <h3 className="py-6 px-3 lg:text-5xl text-normal font-bold  lg:mr-4 lg:mt-3">
             Challenge us, prove us wrong, and earn a $1000 reward!
           </h3>

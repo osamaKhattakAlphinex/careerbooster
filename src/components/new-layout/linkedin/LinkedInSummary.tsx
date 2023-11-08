@@ -68,9 +68,9 @@ const LinkedInSummary = ({
           </p>
         </div>
       </div>
-      <div className="mx-30 lg:p-16 pb-4 font-sans text-center">
-        <h1 className="lg:text-5xl text-bold text-gray-100 mb-6">
-          <span className="text-yellow-600 lg:text-5xl">
+      <div className="content-3 lg:p-16 pb-4 font-sans text-center">
+        <h1 className="text-3xl lg:text-5xl text-bold text-gray-100 mb-6">
+          <span className="text-yellow-600">
             Attention, {fullName ? fullName : "..."} !
           </span>{" "}
           To become a Linkedin pro and secure your ideal position ASAP, read the
@@ -81,7 +81,7 @@ const LinkedInSummary = ({
           essential information that could cost you your dream job.
         </p>
       </div>
-      <div className="border-2 mt-9 border-indigo-900 rounded-lg mx-30 px-8 py-9 bg-transparent lg:backdrop-blur">
+      <div className="content-3 border-2 mt-9 border-indigo-900 rounded-lg lg:px-8 lg:py-9 bg-transparent lg:backdrop-blur">
         <h3 className="font-semibold text-lg text-gray-100">
           Dear{" "}
           <span className="text-yellow-500">
