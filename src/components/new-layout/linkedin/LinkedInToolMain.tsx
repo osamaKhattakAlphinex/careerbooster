@@ -1,15 +1,12 @@
 "use client";
 import manyImage from "@/../public/many-image.png";
-import {
-  ArrowDownIcon,
-  refreshIconRotating,
-  uploadIcon,
-} from "@/helpers/iconsProvider";
+import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
 import Image from "next/image";
 import FAQList from "../Homepage/Faqs";
 import Reviews from "../Homepage/Reviews";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import FileUploadHandler from "@/components/FileUploadHandler";
 
 const LinkedInToolMain = () => {
   const router = useRouter();
@@ -19,48 +16,48 @@ const LinkedInToolMain = () => {
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [uploadComplete, setUploadComplete] = useState<boolean>(false);
 
-  const uploadFileToServer = async () => {
-    setFileError("");
-    setFileUploading(true);
-    if (file) {
-      const body = new FormData();
-      body.append("file", file);
+  // const uploadFileToServer = async () => {
+  //   setFileError("");
+  //   setFileUploading(true);
+  //   if (file) {
+  //     const body = new FormData();
+  //     body.append("file", file);
 
-      fetch("/api/fileUpload?type=linkedin-tool", {
-        method: "POST",
-        body,
-      })
-        .then(async (resp: any) => {
-          const res = await resp.json();
-          if (res.success) {
-            // const uploadedFileName = res.fileName + "_" + file.name;
-            const uploadedFileName = res.fileName + ".pdf";
-            setFileName(uploadedFileName);
-            // linkedinHeadline(uploadedFileName);
-            // linkedinAbout(uploadedFileName);
+  //     fetch("/api/fileUpload?type=linkedin-tool", {
+  //       method: "POST",
+  //       body,
+  //     })
+  //       .then(async (resp: any) => {
+  //         const res = await resp.json();
+  //         if (res.success) {
+  //           const uploadedFileName = res.fileName + "_" + file.name;
+  //           setFileName(uploadedFileName);
+  //           // linkedinHeadline(uploadedFileName);
+  //           // linkedinAbout(uploadedFileName);
 
-            // router.replace("/welcome?step=1");
-            // router.replace("/register");
-            // setSuccessMsg("File has been uploaded!");
-          } else {
-            setFileError("Something went wrong");
-          }
-        })
-        .catch((error) => {
-          setFileError("Something went wrong");
-        })
-        .finally(() => {
-          setFileUploading(false);
-          setUploadComplete(true);
-        });
-    }
-  };
+  //           // router.replace("/welcome?step=1");
+  //           // router.replace("/register");
+  //           // setSuccessMsg("File has been uploaded!");
+  //         } else {
+  //           setFileError("Something went wrong");
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         setFileError("Something went wrong");
+  //       })
+  //       .finally(() => {
+  //         setFileUploading(false);
+  //         setUploadComplete(true);
+  //       });
+  //   }
+  // };
+
   useEffect(() => {
     if (file && file.type === "application/pdf") {
       //  file exists and is PDF
       setFileError("");
       // upload it to server
-      uploadFileToServer();
+      // uploadFileToServer();
     } else if (file) {
       // if file exists but not PDf
       setFileError("only PDF file is allowed");
@@ -68,7 +65,7 @@ const LinkedInToolMain = () => {
   }, [file]);
   useEffect(() => {
     if (uploadComplete) {
-      router.replace(`/linkedin/result?fileName=${fileName}`);
+      router.replace(`/linkedin/result`);
     }
   }, [uploadComplete, fileName]);
   return (
@@ -100,6 +97,7 @@ const LinkedInToolMain = () => {
               onChange={(e) => {
                 if (e.target.files) {
                   setFile(e.target.files[0]);
+                  setFileName(e.target.files[0].name);
                 }
               }}
             />
@@ -119,6 +117,14 @@ const LinkedInToolMain = () => {
           </label>
         </div>
       </div>
+      {file !== null && (
+        <FileUploadHandler
+          file={file}
+          // text={text}
+          // setText={setText}
+          // fetchRegistrationDataFromResume={fetchRegistrationDataFromResume}
+        />
+      )}
       {fileError && (
         <div
           className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2 !text-left w-[50%] m-auto"
@@ -129,7 +135,7 @@ const LinkedInToolMain = () => {
       )}
       <div className="mb-10 lg:mb-20 flex justify-center mt-20 ">
         <span className="text-center lg:mt-4 py-2 text-indigo-500 border-indigo-500  rounded-t-2xl rounded-b-2xl border-1">
-          {ArrowDownIcon}
+          {/* {ArrowDownIcon} */}
         </span>
       </div>
       <div className="flex flex-col justify-center">

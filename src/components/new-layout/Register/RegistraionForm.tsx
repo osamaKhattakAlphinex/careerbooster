@@ -13,13 +13,11 @@ import { setUploadedFileName } from "@/store/resumeSlice";
 import Image from "next/image";
 import FileUploadHandler from "@/components/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.AI-Register",
 // };
-type FileUploadHandlerProps = {
-  file: any;
-  handleFileData: any;
-};
+
 const RegistrationForm = () => {
   const router = useRouter();
   const params = useSearchParams();
@@ -27,12 +25,14 @@ const RegistrationForm = () => {
   const [submittingError, setSubmittingError] = useState<string>("");
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [file, setFile] = useState<any>(null);
+  const [fileName, setFileName] = useState<string>("");
   const [fileError, setFileError] = useState<string>("");
-  const [fileData, setFileData] = useState<string>("");
   const [text, setText] = useState("");
   // session
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
+
+  const content = params?.get("content");
 
   // Redux
   const dispatch = useDispatch();
@@ -77,7 +77,7 @@ const RegistrationForm = () => {
           files: [
             {
               id: makeid(),
-              // fileName: String,
+              fileName: fileName,
               fileContent: text,
               uploadedDateTime: new Date(),
             },
@@ -173,9 +173,6 @@ const RegistrationForm = () => {
     return str.replace(/-/g, " ");
   };
 
-  // const handleFileData = (text: string) => {
-  //   setFileData(text);
-  // };
   // const uploadFileToServer = async () => {
   //   setFileError("");
   //   setFileUploading(true);
@@ -203,7 +200,6 @@ const RegistrationForm = () => {
   // };
 
   const fetchRegistrationDataFromResume = async (content: string) => {
-    console.log("fetchRegistrationDataFromResume: ", content);
     setFileError("");
     setFileUploading(true);
     if (content) {
@@ -218,9 +214,7 @@ const RegistrationForm = () => {
           const res = await resp.json();
           if (res.success) {
             const userData = JSON.parse(res.data);
-            // router.replace(
-            //   `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&file=${fileName}`
-            // );
+            router.replace(`/register?content=true`);
 
             if (userData.firstName || userData.lastName || userData.email) {
               formik.setFieldValue(
@@ -236,7 +230,7 @@ const RegistrationForm = () => {
                 removeDashesFromString(userData.email)
               );
             }
-
+            // dispatch(setUploadedFileName(userData.files));
             // formik.setFieldValue("file", fileName);
           } else {
             setFileError("Something went wrong");
@@ -255,8 +249,10 @@ const RegistrationForm = () => {
     e.preventDefault();
     const fileInput = e.target;
     console.log(fileInput.files);
+
     if (fileInput && fileInput.files && fileInput.files.length > 0) {
       setFile(fileInput.files[0]);
+      setFileName(fileInput.files[0].name);
     }
   };
 
@@ -313,7 +309,7 @@ const RegistrationForm = () => {
             <div className={`upload-resume-btn mt-5 mb-10`}>
               {!params?.get("file") && (
                 <>
-                  {!isAuth && data === null && (
+                  {!isAuth && data === null && !content && (
                     <label
                       className="btn btn-lg btn-gradient-1 aos-init aos-animate"
                       data-aos="fade-up-sm"
