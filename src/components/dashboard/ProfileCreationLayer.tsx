@@ -7,7 +7,6 @@ import axios from "axios";
 
 import { makeid } from "@/helpers/makeid";
 import {
-  setField,
   setScrapped,
   setScrapping,
   setStepFive,
@@ -57,7 +56,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   }, []);
 
   const createProfileFromResume = async () => {
-    await scrappResumeIfNotExist();
+    // await scrappResumeIfNotExist();
     if (register.scrappedContent) {
       fetchBasicDataFromResume();
       fetchEducationDataFromResume();
@@ -67,24 +66,24 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   };
 
   // Fetch Text from CV if not already fetched
-  const scrappResumeIfNotExist = async () => {
-    if (register.scrappedContent === "" && userData.defaultResumeFile) {
-      const resp = await fetch("/api/homepage/fetchTextFromCV", {
-        method: "POST",
-        body: JSON.stringify({
-          file: userData.defaultResumeFile,
-          folder: "resumes",
-          email: userData.email,
-        }),
-      });
-      const res = await resp.json();
+  // const scrappResumeIfNotExist = async () => {
+  //   if (register.scrappedContent === "" && userData.defaultResumeFile) {
+  //     const resp = await fetch("/api/homepage/fetchTextFromCV", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         file: userData.defaultResumeFile,
+  //         folder: "resumes",
+  //         email: userData.email,
+  //       }),
+  //     });
+  //     const res = await resp.json();
 
-      const cleanText = removeSpecialChars(res.text);
-      dispatch(setField({ name: "scrappedContent", value: cleanText }));
+  //     const cleanText = removeSpecialChars(res.text);
+  //     dispatch(setField({ name: "scrappedContent", value: cleanText }));
 
-      return res;
-    }
-  };
+  //     return res;
+  //   }
+  // };
 
   const fetchBasicDataFromResume = async () => {
     if (
@@ -160,7 +159,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const fetchEducationDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.education === false) &&
-      userData.defaultResumeFile &&
+      // userData.defaultResumeFile &&
       register.scrappedContent !== "" &&
       register.scrapping.education === false
     ) {
@@ -239,7 +238,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const fetchExperienceDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.workExperience === false) &&
-      userData.defaultResumeFile &&
+      // userData.defaultResumeFile &&
       register.scrapping.workExperience === false &&
       register.scrappedContent !== ""
     ) {
@@ -368,7 +367,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const fetchSkillsDataFromResume = () => {
     if (
       register.scrapped.skills === false &&
-      userData.defaultResumeFile &&
+      // userData.defaultResumeFile &&
       register.scrapping.skills === false &&
       register.scrappedContent !== ""
     ) {
