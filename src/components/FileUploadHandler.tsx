@@ -18,17 +18,18 @@ function removeSpecialChars(str: string) {
 
 const saveToLocalStorage = (text: any) => {
   localStorage.setItem("pdfText", text);
-  console.log("data saved to local storage");
 };
 
 const loadFromLocalStorage = () => {
-  console.log("load from local storage", localStorage.getItem("pdfText"));
   return localStorage.getItem("pdfText");
 };
 
-const FileUploadHandler = ({ file, fetchRegistrationDataFromResume }: any) => {
-  const [text, setText] = useState("");
-
+const FileUploadHandler = ({
+  file,
+  fetchRegistrationDataFromResume,
+  text,
+  setText,
+}: any) => {
   const onDocumentLoadSuccess = async () => {
     if (file) {
       const reader = new FileReader();
@@ -57,14 +58,15 @@ const FileUploadHandler = ({ file, fetchRegistrationDataFromResume }: any) => {
           .then((pageTexts) => {
             const extractedText = pageTexts.join(" ");
             const content = removeSpecialChars(extractedText);
-            console.log("extracted text: ", content);
+
             setText(content);
             saveToLocalStorage(content);
+
+            fetchRegistrationDataFromResume(content);
           })
-          .catch((error) => console.error("Failed to extract PDF text:", error))
-          .finally(() => {
-            fetchRegistrationDataFromResume(text);
-          });
+          .catch((error) =>
+            console.error("Failed to extract PDF text:", error)
+          );
       };
 
       reader.readAsArrayBuffer(file);

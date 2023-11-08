@@ -49,9 +49,8 @@ const UserSchema = new Schema(
     },
     files: [
       {
-        type: Schema.Types.ObjectId,
         id: String,
-        filename: String,
+        fileName: String,
         fileContent: String,
         uploadedDateTime: String,
       },

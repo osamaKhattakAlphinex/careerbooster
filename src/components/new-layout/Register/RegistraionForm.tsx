@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
 import Image from "next/image";
 import FileUploadHandler from "@/components/FileUploadHandler";
+import { makeid } from "@/helpers/makeid";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.AI-Register",
 // };
@@ -28,6 +29,7 @@ const RegistrationForm = () => {
   const [file, setFile] = useState<any>(null);
   const [fileError, setFileError] = useState<string>("");
   const [fileData, setFileData] = useState<string>("");
+  const [text, setText] = useState("");
   // session
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
@@ -58,7 +60,7 @@ const RegistrationForm = () => {
       confirmpassword: Yup.string()
         .required("Enter Password again")
         .oneOf([Yup.ref("password"), "null"], "Passwords must match"),
-      file: Yup.string().required("PDF Resume/CV is Required"),
+      // file: Yup.string().required("PDF Resume/CV is Required"),
     }),
 
     onSubmit: async (values) => {
@@ -72,7 +74,14 @@ const RegistrationForm = () => {
           lastName: values.lastName,
           email: values.email,
           password: values.password,
-          file: values.file,
+          files: [
+            {
+              id: makeid(),
+              // fileName: String,
+              fileContent: text,
+              uploadedDateTime: new Date(),
+            },
+          ],
           status: false,
           alertConsent: values.alertConsent,
         };
@@ -86,6 +95,9 @@ const RegistrationForm = () => {
               await moveResumeToUserFolder(values.file, values.email);
               await updateUser(values.file, values.email);
             }
+
+            // TODO REMOVE CONTENT FROM LOCAL STOARGE
+
             const res = await signIn("credentials", {
               email: values.email,
               password: values.password,
@@ -161,36 +173,37 @@ const RegistrationForm = () => {
     return str.replace(/-/g, " ");
   };
 
-  const handleFileData = (text: string) => {
-    setFileData(text);
-  };
-  const uploadFileToServer = async () => {
-    setFileError("");
-    setFileUploading(true);
-    if (file) {
-      const body = new FormData();
-      body.append("file", file);
-      fetch("/api/fileUpload", {
-        method: "POST",
-        body,
-      })
-        .then(async (resp: any) => {
-          const res = await resp.json();
-          if (res.success) {
-            const uploadedFileName = res.fileName + ".pdf";
-            dispatch(setUploadedFileName(uploadedFileName));
-            fetchRegistrationDataFromResume(uploadedFileName);
-          } else {
-            setFileError("Something went wrong");
-          }
-        })
-        .catch((error) => {
-          setFileError("Something went wrong");
-        });
-    }
-  };
+  // const handleFileData = (text: string) => {
+  //   setFileData(text);
+  // };
+  // const uploadFileToServer = async () => {
+  //   setFileError("");
+  //   setFileUploading(true);
+  //   if (file) {
+  //     const body = new FormData();
+  //     body.append("file", file);
+  //     fetch("/api/fileUpload", {
+  //       method: "POST",
+  //       body,
+  //     })
+  //       .then(async (resp: any) => {
+  //         const res = await resp.json();
+  //         if (res.success) {
+  //           const uploadedFileName = res.fileName + ".pdf";
+  //           dispatch(setUploadedFileName(uploadedFileName));
+  //           fetchRegistrationDataFromResume(uploadedFileName);
+  //         } else {
+  //           setFileError("Something went wrong");
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         setFileError("Something went wrong");
+  //       });
+  //   }
+  // };
 
   const fetchRegistrationDataFromResume = async (content: string) => {
+    console.log("fetchRegistrationDataFromResume: ", content);
     setFileError("");
     setFileUploading(true);
     if (content) {
@@ -322,6 +335,8 @@ const RegistrationForm = () => {
                   {file !== null && (
                     <FileUploadHandler
                       file={file}
+                      text={text}
+                      setText={setText}
                       fetchRegistrationDataFromResume={
                         fetchRegistrationDataFromResume
                       }
