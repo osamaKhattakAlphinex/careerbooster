@@ -3,6 +3,7 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
+import { setField as setFieldRegister } from "@/store/registerSlice";
 import { useEffect, useState } from "react";
 import ThemeToggler from "../Themetoggler";
 import useTheme from "@/lib/useTheme";
@@ -41,8 +42,14 @@ const Header = () => {
         // if there is a file in files array of a user then set it as defaultResumeFile
         if (user?.files && user?.files?.length > 0) {
           dispatch(
-            setField({ name: "defaultResumeFile", value: user?.files[0] })
+            setFieldRegister({
+              name: "scrappedContent",
+              value: user?.files[0]?.fileContent,
+            })
           );
+          // dispatch(
+          //   setField({ name: "defaultResumeFile", value: user?.files[0] })
+          // );
         }
         dispatch(
           setField({ name: "wizardCompleted", value: user.wizardCompleted })
