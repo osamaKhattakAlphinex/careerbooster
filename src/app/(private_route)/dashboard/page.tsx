@@ -13,7 +13,7 @@ const Dashboard = () => {
         <WelcomeCard />
 
         <div className="flex gap-4">
-          <UploadedFilesCard />
+          {/* <UploadedFilesCard /> */}
           <div className="w-full toolscard  border border-gray-200 rounded-lg shadow sm:p-6 mr-10 ">
             <RecentResumeCard source="dashboard" />
           </div>

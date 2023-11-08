@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function LinkedInNewPage() {
   return (
-    <div className="flex-grow-1 mb-20 bg-gradient-to-r from-gray-950 via-blue-950 to-purple-900">
+    <div className="flex-grow-1 mb-20 w-full bg-gradient-to-r from-gray-950 via-blue-950 to-purple-900">
       {/* LinkedIn Tool Card */}
       <LinkedInToolNew />
     </div>
