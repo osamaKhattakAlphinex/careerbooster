@@ -11,12 +11,14 @@ import { refreshIconRotating } from "@/helpers/iconsProvider";
 import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
 import Image from "next/image";
-import pdf from "pdf-parse";
-
+import FileUploadHandler from "@/components/FileUploadHandler";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.AI-Register",
 // };
-
+type FileUploadHandlerProps = {
+  file: any;
+  handleFileData: any;
+};
 const RegistrationForm = () => {
   const router = useRouter();
   const params = useSearchParams();
@@ -159,6 +161,9 @@ const RegistrationForm = () => {
     return str.replace(/-/g, " ");
   };
 
+  const handleFileData = (text: string) => {
+    setFileData(text);
+  };
   const uploadFileToServer = async () => {
     setFileError("");
     setFileUploading(true);
@@ -185,13 +190,13 @@ const RegistrationForm = () => {
     }
   };
 
-  const fetchRegistrationDataFromResume = async (fileName: string) => {
+  const fetchRegistrationDataFromResume = async (content: string) => {
     setFileError("");
     setFileUploading(true);
-    if (fileName) {
+    if (content) {
       fetch("/api/homepage/fetchRegistrationDataForHomepage", {
         method: "POST",
-        body: JSON.stringify({ fileName }),
+        body: JSON.stringify({ content }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -219,7 +224,7 @@ const RegistrationForm = () => {
               );
             }
 
-            formik.setFieldValue("file", fileName);
+            // formik.setFieldValue("file", fileName);
           } else {
             setFileError("Something went wrong");
           }
@@ -234,37 +239,11 @@ const RegistrationForm = () => {
   };
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     const fileInput = e.target;
+    console.log(fileInput.files);
     if (fileInput && fileInput.files && fileInput.files.length > 0) {
-      const uploadedFile = fileInput.files[0];
-
-      if (uploadedFile.type !== "application/pdf") {
-        setFileError("Only PDF files are allowed");
-        return;
-      }
-
-      setFile(uploadedFile);
-      setFileError("");
-
-      // Use pdf-parse to extract text from the PDF file
-      const reader = new FileReader();
-      reader.onload = async (event: any) => {
-        const buffer = event.target.result;
-        if (buffer) {
-          const data = Buffer.from(new Uint8Array(buffer));
-          const pdfData = await pdf(data);
-          const text = pdfData.text;
-          console.log("pdf text: " + text);
-          // Update your component state with the extracted text
-          setFileData(text);
-
-          // Optionally, you can use the extracted text as needed.
-          // For example, you can send it to the server or process it further.
-          // fetchRegistrationDataFromResume(uploadedFile.name, text);
-        }
-      };
-
-      reader.readAsArrayBuffer(uploadedFile);
+      setFile(fileInput.files[0]);
     }
   };
 
@@ -330,16 +309,23 @@ const RegistrationForm = () => {
                       <input
                         className="hidden"
                         type="file"
-                        disabled={fileUploading}
+                        disabled={file}
                         onChange={(e) => {
                           handleFileChange(e);
                         }}
                       />
-                      {/* {fileUploading
+                      {fileUploading
                         ? refreshIconRotating
-                        : "Upload Your Existing Resume"} */}
-                      Upload Your Existing Resume
+                        : "Upload Your Existing Resume"}
                     </label>
+                  )}
+                  {file !== null && (
+                    <FileUploadHandler
+                      file={file}
+                      fetchRegistrationDataFromResume={
+                        fetchRegistrationDataFromResume
+                      }
+                    />
                   )}
                   <p className="text-gray-700 mt-4 text-sm">
                     Your existing resume forms the basis for your new one,
@@ -626,7 +612,6 @@ const RegistrationForm = () => {
                 )}
               </button>
             </div>
-
             <div className="text-center">
               <p>
                 Already have an account?
