@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import Toggle from "@/components/utilities/form-elements/Toggle";
 import { FeatureRow } from "./AddPackage";
 
 interface userPackage {
@@ -128,7 +127,6 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
     }),
     onSubmit: async (values, action) => {
       console.log(values);
-
       const res = await axios.put(`/api/packages/${packgeId}`, {
         type: values.type,
         title: values.title,
@@ -157,7 +155,7 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
       setEditPopUpModel(false);
     },
   });
-  console.log(formik.values);
+
   return (
     <>
       <button
@@ -321,20 +319,23 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
                 </div>
 
                 <div>
-                  <Toggle
-                    id="update-package-toggle"
-                    label="Active Status"
-                    value={formik.values.status === "active" ? true : false}
-                    onChange={(e) => {
-                      console.log(e);
-
-                      formik.setFieldValue(
-                        "status",
-                        e.target.checked === true ? "active" : "inactive"
-                      );
-                    }}
+                  <label
+                    htmlFor="status"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Status
+                  </label>
+                  <select
+                    onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                  />
+                    value={formik.values.status}
+                    id="status"
+                    name="status"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  >
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
 
                   {formik.touched.status && formik.errors.status && (
                     <p className="text-red-600 pt-3">{formik.errors.status}</p>

@@ -144,7 +144,7 @@ const ViewPackage = ({}) => {
                                 />
                               </li>
                               <li>
-                                <ReadPackage />
+                                <ReadPackage userPackage={pckg} />
                               </li>
                               <li>
                                 <button

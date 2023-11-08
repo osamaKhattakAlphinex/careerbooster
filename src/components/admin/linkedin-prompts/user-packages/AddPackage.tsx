@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import Toggle from "@/components/utilities/form-elements/Toggle";
 
 type Feature = string[];
 type FeatureTooltip = string[];
@@ -27,6 +26,7 @@ export const FeatureRow = ({
   return (
     <li className="w-full flex gap-2">
       <input
+        required
         id={`feature-${id}`}
         type="text"
         value={feature}
@@ -35,6 +35,7 @@ export const FeatureRow = ({
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
       />
       <input
+        required
         id={`tooltip-${id}`}
         type="text"
         value={tooltip}
@@ -42,15 +43,18 @@ export const FeatureRow = ({
         placeholder="Tooltip"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
       />
-      <button
-        type="button"
-        className="w-8 h-8 bg-gray-600 rounded-lg px-4 py-2 grid place-content-center"
-        onClick={() => {
-          onFeatureRemove(id);
-        }}
-      >
-        X
-      </button>
+
+      {id >= 1 && (
+        <button
+          type="button"
+          className="w-8 h-8 bg-gray-600 rounded-lg px-4 py-2 grid place-content-center"
+          onClick={() => {
+            onFeatureRemove(id);
+          }}
+        >
+          X
+        </button>
+      )}
     </li>
   );
 };
@@ -65,22 +69,7 @@ const AddPackage = ({ getPackages }: Props) => {
     { id: 0, feature: "", tooltip: "" },
   ]);
 
-  const addFeatureRow = () => {
-    // const featureIds = featureList.map((_) => _.id).sort((a, b) => a - b);
-    // const biggestId = featureIds[featureIds.length - 1];
-    // const newId = biggestId ? biggestId + 1 : 1;
-    // setFeatureList((prev) => [
-    //   ...prev,
-    //   { id: newId, feature: "", tooltip: "" },
-    // ]);
-  };
-
   const handleFeatureRemove = (idx: number) => {
-    // const newFeatureList = [...featureList];
-    // newFeatureList.splice(idx, 1);
-
-    // setFeatureList(newFeatureList);
-
     const newFeatures = [...formik.values.features];
     newFeatures.splice(idx, 1);
 
@@ -103,8 +92,8 @@ const AddPackage = ({ getPackages }: Props) => {
       amount: "",
       category: "basic",
       status: "active",
-      features: [""],
-      featuresToolTips: [""],
+      features: ["Feature 1"],
+      featuresToolTips: [" Tooltip 1"],
       limit: {
         resumes_generation: "",
         keywords_generation: "",
@@ -373,7 +362,7 @@ const AddPackage = ({ getPackages }: Props) => {
                   )}
                 </div>
                 <div>
-                  {/* <label
+                  <label
                     htmlFor="category"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
@@ -387,24 +376,11 @@ const AddPackage = ({ getPackages }: Props) => {
                     name="status"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   >
-                    <option>Select Your status</option>
-                    <option value="active">Active</option>
+                    <option value="active" selected>
+                      Active
+                    </option>
                     <option value="inactive">Inactive</option>
-                  </select> */}
-
-                  <Toggle
-                    id="add-pacakge-toggle"
-                    label="Active Status"
-                    value={formik.values.status === "active" ? true : false}
-                    onChange={(e) => {
-                      formik.setFieldValue(
-                        "status",
-                        e.target.checked ? "active" : "inactive"
-                      );
-                    }}
-                    onBlur={formik.handleBlur}
-                  />
-
+                  </select>
                   {formik.touched.status && formik.errors.status && (
                     <p className="text-red-600 pt-3">{formik.errors.status}</p>
                   )}
@@ -661,37 +637,17 @@ const AddPackage = ({ getPackages }: Props) => {
 
               {/* Features */}
 
-              {/* <FeaturesFormCard
-                onChangeFeatures={(arr: any) =>
-                  formik.setFieldValue("features", arr)
-                }
-                onChangeTooltip={(arr: any) =>
-                  formik.setFieldValue("featuresToolTips", arr)
-                }
-              /> */}
-
               {formik.values.features.map((_, index) => (
-                // featureList.map((_, index) =>
-
                 <FeatureRow
                   id={index}
                   feature={formik.values.features[index]}
                   tooltip={formik.values.featuresToolTips[index]}
-                  // feature={_.feature}
-                  // tooltip={_.tooltip}
                   key={`feature-row-${index}`}
                   onChangeFeature={(feature: string) => {
                     formik.setFieldValue(`features[${index}]`, feature);
-                    // Update the featureList state with the new feature value
-                    // const updatedFeatureList = [...featureList];
-                    // updatedFeatureList[index].feature = feature;
-                    // setFeatureList(updatedFeatureList);
                   }}
                   onChangeTooltip={(tooltip: string) => {
                     formik.setFieldValue(`featuresToolTips[${index}]`, tooltip);
-                    // const updatedFeatureList = [...featureList];
-                    // updatedFeatureList[index].tooltip = tooltip;
-                    // setFeatureList(updatedFeatureList);
                   }}
                   onBlurFeature={formik.handleBlur}
                   onBlurTooltip={formik.handleBlur}
