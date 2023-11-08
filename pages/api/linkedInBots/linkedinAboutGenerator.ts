@@ -5,34 +5,17 @@ import path from "path";
 import Prompt from "@/db/schemas/Prompt";
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
-    const { fileName, option, instruction } = req.body;
+    const { fileName, option, aboutInstructions } = req.body;
     let prompt;
 
-    if (option === "instruction") {
-      prompt = instruction;
-    } else if (option) {
-      // const promptRec = await Prompt.findOne({
-      //   type: "linkedin",
-      //   name: option,
-      //   active: true,
-      // });
-      // prompt = promptRec ? promptRec.value : ""; // Set the prompt if found
-      prompt = `Write a maximum of 2000 characters copy for the “About Section” of my LinkedIn based on the data you have. Use the following instructions.
-
-      - It should be detailed but compact, and engaging
-      
-      - Use relevant industry jargon as necessary. Make sure to provide a brief rundown of the main technical skills related to my job title. 
-      
-      - Hook the audience right away and make the first sentence count by showing passion.
-      
-      - Provide a professional introduction explaining the present role and framing past job titles.
-      
-      - Highlight successes and the services I can offer to potential clients.
-      
-      - Include a call to action.
-      
-      
-      Just give me the answer not add any extra labels`;
+    const promptRec = await Prompt.findOne({
+      type: "linkedinTool",
+      name: option,
+      active: true,
+    });
+    prompt = promptRec ? promptRec.value : "";
+    if (option === "aboutInstructions") {
+      prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
     }
 
     // For LinkedIn Tool if file is uploaded then load content from that fiel
