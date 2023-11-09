@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "pages/api/linkedInBots/linkedinHeadlineGenerator": {
+      "maxDuration": 300
+    },
+    "pages/api/linkedInBots/linkedinAboutGenerator": {
+      "maxDuration": 300
+    }
+  }
+}

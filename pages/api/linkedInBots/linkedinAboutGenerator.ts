@@ -1,9 +1,14 @@
 import { NextApiHandler } from "next";
-import { OpenAI } from "langchain/llms/openai";
-import { PDFLoader } from "langchain/document_loaders/fs/pdf";
-import path from "path";
+import OpenAI from "openai";
 import Prompt from "@/db/schemas/Prompt";
 import startDB from "@/lib/db";
+
+// This function can run for a maximum of 5 seconds
+export const config = {
+  maxDuration: 300,
+};
+// ...
+
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const { linkedinContent, option, aboutInstructions } = req.body;
@@ -34,26 +39,48 @@ const handler: NextApiHandler = async (req, res) => {
       // const content = contentTxt.join(" ");
 
       // CREATING LLM MODAL
-      const model = new OpenAI({
-        modelName: "gpt-3.5-turbo",
-        temperature: 0.5,
+      const openai = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY,
       });
 
       const input = `
             This is the User data:
             ${linkedinContent}
 
-            This is the prompt:
+            This is the prompt: 
             ${prompt}
-            
-        `;
+            `;
 
       try {
-        const resp = await model.call(input);
+        const response = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo", // v2
+          messages: [
+            {
+              role: "user",
+              content: input,
+            },
+          ],
+          temperature: 1,
+          max_tokens: 456,
+        });
         // const resp = await chain4.call({ query: input });
-        return res.status(200).json({ success: true, data: resp });
+        return res.status(200).json({
+          success: true,
+          data: response.choices[0].message.content,
+          linkedinContent,
+          option,
+          aboutInstructions,
+          prompt,
+        });
       } catch (error) {
-        return res.status(400).json({ success: false, error });
+        return res.status(400).json({
+          success: false,
+          error,
+          linkedinContent,
+          option,
+          aboutInstructions,
+          prompt,
+        });
       }
     }
   }

@@ -410,6 +410,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     }
   };
 
+  // laksjdflasjdfl
   const updateUser = async () => {
     // make an object
     const obj = {
