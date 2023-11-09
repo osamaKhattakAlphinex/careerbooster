@@ -1,6 +1,12 @@
 {
   "functions": {
-    "*": {
+    "api/linkedInBots/linkedinHeadlineGenerator": {
+      "maxDuration": 300
+    },
+    "api/api/linkedInBots/linkedinAboutGenerator": {
+      "maxDuration": 300
+    },
+    "api/*": {
       "maxDuration": 300
     }
   }
