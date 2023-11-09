@@ -24,71 +24,63 @@ const handler: NextApiHandler = async (req, res) => {
       prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
     }
 
-    return res.status(200).json({
-      success: true,
-      linkedinContent,
-      option,
-      aboutInstructions,
-      prompt,
-    });
+    // For LinkedIn Tool if file is uploaded then load content from that fiel
+    if (linkedinContent) {
+      // load file
+      // const dir = path.join(
+      //   process.cwd() + "/public",
+      //   "/files",
+      //   `/linkedin-temp`
+      // );
+      // const loader = new PDFLoader(`${dir}/${fileName}`);
+      // const docs = await loader.load();
 
-    // // For LinkedIn Tool if file is uploaded then load content from that fiel
-    // if (linkedinContent) {
-    //   // load file
-    //   // const dir = path.join(
-    //   //   process.cwd() + "/public",
-    //   //   "/files",
-    //   //   `/linkedin-temp`
-    //   // );
-    //   // const loader = new PDFLoader(`${dir}/${fileName}`);
-    //   // const docs = await loader.load();
+      // let contentTxt = docs.map((doc: any) => doc.pageContent);
+      // const content = contentTxt.join(" ");
 
-    //   // let contentTxt = docs.map((doc: any) => doc.pageContent);
-    //   // const content = contentTxt.join(" ");
+      // CREATING LLM MODAL
+      const openai = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY,
+      });
 
-    //   // CREATING LLM MODAL
-    //   const openai = new OpenAI({
-    //     apiKey: process.env.OPENAI_API_KEY,
-    //   });
+      const input = `
+            This is the User data:
+            ${linkedinContent}
 
-    //   const input = `
-    //         This is the User data:
-    //         ${linkedinContent}
+            This is the prompt: `;
 
-    //         This is the prompt: `;
-
-    //   try {
-    //     const response = await openai.chat.completions.create({
-    //       model: "gpt-3.5-turbo", // v2
-    //       messages: [
-    //         {
-    //           role: "user",
-    //           content: input,
-    //         },
-    //       ],
-    //       temperature: 1,
-    //       max_tokens: 456,
-    //     });
-    //     // const resp = await chain4.call({ query: input });
-    //     return res.status(200).json({
-    //       success: true,
-    //       data: response.choices[0].message.content,
-    //       linkedinContent,
-    //       option,
-    //       aboutInstructions,
-    //       prompt,
-    //     });
-    //   } catch (error) {
-    //     return res.status(400).json({
-    //       success: false,
-    //       error,
-    //       linkedinContent,
-    //       option,
-    //       aboutInstructions,
-    //       prompt,
-    //     });
-    //   }
-    // }
+      try {
+        const response = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo", // v2
+          messages: [
+            {
+              role: "user",
+              content: input,
+            },
+          ],
+          temperature: 1,
+          max_tokens: 456,
+        });
+        // const resp = await chain4.call({ query: input });
+        return res.status(200).json({
+          success: true,
+          data: response.choices[0].message.content,
+          linkedinContent,
+          option,
+          aboutInstructions,
+          prompt,
+        });
+      } catch (error) {
+        return res.status(400).json({
+          success: false,
+          error,
+          linkedinContent,
+          option,
+          aboutInstructions,
+          prompt,
+        });
+      }
+    }
   }
 };
 export default handler;
