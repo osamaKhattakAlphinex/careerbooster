@@ -151,7 +151,66 @@ const ResumeTemplate1 = ({
       professionalSkills: updatedSkills,
     });
   };
-
+  //Reorder Redux PrimarySkills array with drag-drop
+  const handleDropPrimary = (e: any, i: number) => {
+    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+    const updatedItems = [...resume.primarySkills];
+    // Swap the positions of the dragged item and the target item.
+    [updatedItems[draggedIndex], updatedItems[i]] = [
+      updatedItems[i],
+      updatedItems[draggedIndex],
+    ];
+    dispatch(
+      setPrimarySkills({
+        ...resume,
+        primarySkills: updatedItems,
+      })
+    );
+    saveResumeToDB({
+      ...resume,
+      primarySkills: updatedItems,
+    });
+  };
+  //Reorder Redux SecondarySkills array with drag-drop
+  const handleDropSecondary = (e: any, i: number) => {
+    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+    const updatedItems = [...resume.primarySkills];
+    // Swap the positions of the dragged item and the target item.
+    [updatedItems[draggedIndex], updatedItems[i]] = [
+      updatedItems[i],
+      updatedItems[draggedIndex],
+    ];
+    dispatch(
+      setSecondarySkills({
+        ...resume,
+        secondarySkills: updatedItems,
+      })
+    );
+    saveResumeToDB({
+      ...resume,
+      secondarySkills: updatedItems,
+    });
+  };
+  //Reorder Redux ProfessionalSkills array with drag-drop
+  const handleDropProfessional = (e: any, i: number) => {
+    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+    const updatedItems = [...resume.primarySkills];
+    // Swap the positions of the dragged item and the target item.
+    [updatedItems[draggedIndex], updatedItems[i]] = [
+      updatedItems[i],
+      updatedItems[draggedIndex],
+    ];
+    dispatch(
+      setProfessionalSkills({
+        ...resume,
+        professionalSkills: updatedItems,
+      })
+    );
+    saveResumeToDB({
+      ...resume,
+      professionalSkills: updatedItems,
+    });
+  };
   return (
     <div className="w-full first-page text-gray-900">
       <div className="flex">
@@ -303,6 +362,12 @@ const ResumeTemplate1 = ({
                   <li
                     className="hover:shadow-md parent  hover:bg-gray-100 flex justify-between items-center"
                     key={i}
+                    onDragStart={(e) =>
+                      e.dataTransfer.setData("text/plain", i.toString())
+                    }
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => handleDropPrimary(e, i)}
+                    draggable
                   >
                     <EditableField
                       value={skill}
@@ -550,6 +615,12 @@ const ResumeTemplate1 = ({
                       <li
                         key={i}
                         className="hover:shadow-md parent hover:bg-gray-100 flex justify-between items-center"
+                        onDragStart={(e) =>
+                          e.dataTransfer.setData("text/plain", i.toString())
+                        }
+                        onDragOver={(e) => e.preventDefault()}
+                        onDrop={(e) => handleDropProfessional(e, i)}
+                        draggable
                       >
                         <EditableField
                           style={{ width: "100%" }}
@@ -683,6 +754,12 @@ const ResumeTemplate1 = ({
                   <li
                     key={i}
                     className="hover:shadow-md parent hover:bg-gray-100 flex justify-between items-center "
+                    onDragStart={(e) =>
+                      e.dataTransfer.setData("text/plain", i.toString())
+                    }
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => handleDropSecondary(e, i)}
+                    draggable
                   >
                     {/* {skill} */}
                     <EditableField
