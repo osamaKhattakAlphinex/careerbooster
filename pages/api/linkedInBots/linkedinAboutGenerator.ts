@@ -24,6 +24,13 @@ const handler: NextApiHandler = async (req, res) => {
       prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
     }
 
+    return res.status(200).json({
+      success: true,
+      linkedinContent,
+      option,
+      aboutInstructions,
+      prompt,
+    });
     // For LinkedIn Tool if file is uploaded then load content from that fiel
     if (linkedinContent) {
       // load file
