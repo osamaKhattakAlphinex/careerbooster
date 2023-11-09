@@ -39,37 +39,39 @@ const handler: NextApiHandler = async (req, res) => {
             ${prompt}
             `;
 
-      try {
-        const response = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo", // v2
-          messages: [
-            {
-              role: "user",
-              content: input,
-            },
-          ],
-          temperature: 1,
-          max_tokens: 2000,
-        });
-        // const resp = await chain4.call({ query: input });
-        return res.status(200).json({
-          success: true,
-          data: response.choices[0].message.content,
-          linkedinContent,
-          option,
-          aboutInstructions,
-          prompt,
-        });
-      } catch (error) {
-        return res.status(400).json({
-          success: false,
-          error,
-          linkedinContent,
-          option,
-          aboutInstructions,
-          prompt,
-        });
-      }
+      const response = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo", // v2
+        messages: [
+          {
+            role: "user",
+            content: input,
+          },
+        ],
+        temperature: 1,
+        max_tokens: 2000,
+      });
+      // const resp = await chain4.call({ query: input });
+      return res.status(200).json({
+        success: true,
+        data: response.choices[0].message.content,
+        linkedinContent,
+        option,
+        aboutInstructions,
+        prompt,
+      });
+
+      // try {
+
+      // } catch (error) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     error,
+      //     linkedinContent,
+      //     option,
+      //     aboutInstructions,
+      //     prompt,
+      //   });
+      // }
     }
   }
 };
