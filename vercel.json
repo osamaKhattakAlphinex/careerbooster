@@ -3,7 +3,7 @@
     "pages/api/linkedInBots/linkedinHeadlineGenerator": {
       "maxDuration": 300
     },
-    "pages/api/api/linkedInBots/linkedinAboutGenerator": {
+    "pages/api/linkedInBots/linkedinAboutGenerator": {
       "maxDuration": 300
     }
   }
