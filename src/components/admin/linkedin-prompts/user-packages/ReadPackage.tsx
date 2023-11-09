@@ -234,7 +234,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                     key={`limitaions-7`}
                     className="flex flex-row justify-between items-center"
                   >
-                    <span className="block">Keyword Generation</span>
+                    <span className="block">Email Generation</span>
                     <span className="block">
                       {userPackage.limit.email_generation}
                     </span>
@@ -276,7 +276,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   >
                     <span className="block">Can Edit Resume</span>
                     <span className="block">
-                      {userPackage.limit.can_edit_resume}
+                      {userPackage.limit.can_edit_resume ? "Yes" : "No"}
                     </span>
                   </li>
                 </ul>

@@ -31,7 +31,7 @@ const LimitCard: React.FC<LimitCardProps> = ({
     setPercentageCalculated(true);
   }, [userData, limit, used]);
 
-  if (limit === used) {
+  if (used >= limit) {
     return (
       // <div className="bg-red-500 px-3 py-1 rounded-3xl border-gray-950">
       <span className="text-sm text-red-500 ">Credit Limit Reached</span>
