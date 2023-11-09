@@ -24,7 +24,7 @@ export const FeatureRow = ({
   onFeatureRemove,
 }: any) => {
   return (
-    <li className="w-full flex gap-2">
+    <li className="w-full grid grid-cols-2 gap-2 mb-2">
       <input
         required
         id={`feature-${id}`}
@@ -34,27 +34,29 @@ export const FeatureRow = ({
         placeholder="Feature"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
       />
-      <input
-        required
-        id={`tooltip-${id}`}
-        type="text"
-        value={tooltip}
-        onChange={(e) => onChangeTooltip(e.target.value)}
-        placeholder="Tooltip"
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-      />
+      <div className="flex flex-row gap-2 items-center">
+        <input
+          required
+          id={`tooltip-${id}`}
+          type="text"
+          value={tooltip}
+          onChange={(e) => onChangeTooltip(e.target.value)}
+          placeholder="Tooltip"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+        />
 
-      {id >= 1 && (
-        <button
-          type="button"
-          className="w-8 h-8 bg-gray-600 rounded-lg px-4 py-2 grid place-content-center"
-          onClick={() => {
-            onFeatureRemove(id);
-          }}
-        >
-          X
-        </button>
-      )}
+        {id >= 1 && (
+          <button
+            type="button"
+            className="w-8 h-8 bg-rose-500 text-gray-50 rounded-lg px-4 py-2 grid place-content-center"
+            onClick={() => {
+              onFeatureRemove(id);
+            }}
+          >
+            X
+          </button>
+        )}
+      </div>
     </li>
   );
 };
@@ -636,7 +638,10 @@ const AddPackage = ({ getPackages }: Props) => {
               </div>
 
               {/* Features */}
-
+              <div className="mb-4 w-ful">
+                <span className="text-xl">Features</span>
+                <div className="flex pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600"></div>
+              </div>
               {formik.values.features.map((_, index) => (
                 <FeatureRow
                   id={index}

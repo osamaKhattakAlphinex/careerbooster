@@ -201,7 +201,7 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
               <button
                 type="button"
                 onClick={() => {
-                  setPopUpModel(false);
+                  setEditPopUpModel(false);
                 }}
                 className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
                 data-modal-target="createProductModal"
@@ -589,7 +589,10 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
                     )}
                 </div>
               </div>
-
+              <div className="mb-4 w-ful">
+                <span className="text-xl">Features</span>
+                <div className="flex pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600"></div>
+              </div>
               {formik.values.features.map((_, index) => (
                 <FeatureRow
                   id={index}

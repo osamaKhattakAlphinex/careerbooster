@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import { useRouter } from "next/navigation";
-import ReactToPrint from "react-to-print";
+import ReactToPrint, { useReactToPrint } from "react-to-print";
 import { useSession } from "next-auth/react";
+import Html2Pdf from "js-html2pdf";
 
 const SingleRecentResumeCard = ({
   resume,
@@ -118,6 +119,15 @@ const SingleRecentResumeCard = ({
                 )}
                 onBeforeGetContent={async () => await handleOnView()}
                 content={() => componentRef.current}
+                print={async (printIframe: HTMLIFrameElement) => {
+                  const document = printIframe.contentDocument;
+                  if (document) {
+                    const exporter = new Html2Pdf(componentRef.current, {
+                      filename: `${resume.name}-${resume.jobTitle}.pdf`,
+                    });
+                    exporter.getPdf(true);
+                  }
+                }}
               />
             </>
           )}

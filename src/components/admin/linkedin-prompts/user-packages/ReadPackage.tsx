@@ -75,12 +75,12 @@ const ReadPackage = ({ userPackage }: Props) => {
       >
         <div className="relative p-4 w-full max-h-full max-w-2xl">
           {/* <!-- Modal content --> */}
-          <div className="relative p-8 rounded-lg shadow bg-white sm:p-5">
+          <div className="relative p-8 rounded-lg shadow bg-gray-100  dark:bg-gray-800 light:bg-white sm:p-5">
             {/* <!-- Modal header --> */}
             <div className="flex flex-row items-start justify-between mb-4 rounded-t sm:mb-5">
-              <div className="flex-1 text-lg  md:text-xl">
+              <div className="flex-1 text-sm md:text-xl">
                 <span className="capitalize">{userPackage.category}</span>
-                <h3 className="font-semibold ">{userPackage.title}</h3>
+                <h3 className="font-semibold text-xl ">{userPackage.title}</h3>
                 <p className="">
                   <strong>{userPackage.amount}</strong> / {userPackage.type}
                 </p>
@@ -116,8 +116,10 @@ const ReadPackage = ({ userPackage }: Props) => {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              <div className="flex-1 bg-slate-50 p-2 rounded-md">
-                <h3 className="text-sm font-bold mb-3">Features</h3>
+              <div className="flex-1 bg-gray-200 dark:bg-gray-700 p-3 rounded-md">
+                <h3 className="text-base font-bold  dark:text-gray-300  pb-4 mb-4 rounded-t border-b  border-gray-300 dark:border-gray-600">
+                  Features Included
+                </h3>
                 <ul className="flex flex-column gap-1 text-sm my-2 pl-0">
                   {userPackage.features.map(
                     (feature: string, index: number) => {
@@ -126,9 +128,10 @@ const ReadPackage = ({ userPackage }: Props) => {
                           key={`feature-${index}`}
                           className="flex flex-row justify-between  items-start"
                         >
-                          <span className="block cursor-pointer text-gray-600 relative group">
+                          <span className="block cursor-pointer  relative group">
                             {feature}
-
+                          </span>
+                          <span className="block cursor-pointer relative group">
                             <svg
                               className="inline-block w-3 h-3 mr-2"
                               aria-hidden="true"
@@ -146,7 +149,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                             </svg>
                             <div
                               role="tooltip"
-                              className="hidden absolute bg-gray-600 text-gray-100 p-2 rounded-md text-xs -top-9 left-16 transform -translate-x-1/2 w-32 group-hover:block"
+                              className="hidden absolute bg-gray-600 text-gray-100 p-2 rounded-md text-xs -top-9 -left-16 transform -translate-x-1/2 w-32 group-hover:block"
                             >
                               <div
                                 className="tooltip-arrow"
@@ -162,8 +165,10 @@ const ReadPackage = ({ userPackage }: Props) => {
                   )}
                 </ul>
               </div>
-              <div className="flex-1 bg-slate-50 p-2 rounded-md">
-                <h3 className="text-sm font-bold mb-3">What you will get</h3>
+              <div className="flex-1  bg-gray-200 dark:bg-gray-700 p-3 rounded-md">
+                <h3 className="text-base font-bold  dark:text-gray-300  pb-4 mb-4 rounded-t border-b  border-gray-300 dark:border-gray-600">
+                  What you will get
+                </h3>
                 <ul className="flex flex-column gap-1 text-sm my-2 pl-0">
                   <li
                     key={`limitaions-1`}
