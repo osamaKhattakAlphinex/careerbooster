@@ -49,7 +49,7 @@ const handler: NextApiHandler = async (req, res) => {
             },
           ],
           temperature: 1,
-          max_tokens: 1000,
+          max_tokens: 2000,
         });
         // const resp = await chain4.call({ query: input });
         return res.status(200).json({
