@@ -26,18 +26,6 @@ const handler: NextApiHandler = async (req, res) => {
 
     // For LinkedIn Tool if file is uploaded then load content from that fiel
     if (linkedinContent) {
-      // load file
-      // const dir = path.join(
-      //   process.cwd() + "/public",
-      //   "/files",
-      //   `/linkedin-temp`
-      // );
-      // const loader = new PDFLoader(`${dir}/${fileName}`);
-      // const docs = await loader.load();
-
-      // let contentTxt = docs.map((doc: any) => doc.pageContent);
-      // const content = contentTxt.join(" ");
-
       // CREATING LLM MODAL
       const openai = new OpenAI({
         apiKey: process.env.OPENAI_API_KEY,
@@ -61,7 +49,7 @@ const handler: NextApiHandler = async (req, res) => {
             },
           ],
           temperature: 1,
-          max_tokens: 456,
+          max_tokens: 1000,
         });
         // const resp = await chain4.call({ query: input });
         return res.status(200).json({
