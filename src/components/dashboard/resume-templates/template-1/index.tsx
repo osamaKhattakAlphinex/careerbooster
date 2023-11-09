@@ -173,8 +173,8 @@ const ResumeTemplate1 = ({
   };
   //Reorder Redux SecondarySkills array with drag-drop
   const handleDropSecondary = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume.primarySkills];
+    const draggedIndex = parseInt(e.dataTransfer.getData("text"));
+    const updatedItems = [...resume.secondarySkills];
     // Swap the positions of the dragged item and the target item.
     [updatedItems[draggedIndex], updatedItems[i]] = [
       updatedItems[i],
@@ -194,7 +194,7 @@ const ResumeTemplate1 = ({
   //Reorder Redux ProfessionalSkills array with drag-drop
   const handleDropProfessional = (e: any, i: number) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume.primarySkills];
+    const updatedItems = [...resume.professionalSkills];
     // Swap the positions of the dragged item and the target item.
     [updatedItems[draggedIndex], updatedItems[i]] = [
       updatedItems[i],
@@ -211,6 +211,7 @@ const ResumeTemplate1 = ({
       professionalSkills: updatedItems,
     });
   };
+
   return (
     <div className="w-full first-page text-gray-900">
       <div className="flex">
@@ -755,7 +756,7 @@ const ResumeTemplate1 = ({
                     key={i}
                     className="hover:shadow-md parent hover:bg-gray-100 flex justify-between items-center "
                     onDragStart={(e) =>
-                      e.dataTransfer.setData("text/plain", i.toString())
+                      e.dataTransfer.setData("text", i.toString())
                     }
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={(e) => handleDropSecondary(e, i)}
@@ -1035,7 +1036,7 @@ const ResumeTemplate1 = ({
                       onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                     >
                       {rec?.achievements && (
-                        <ul className="pl-0 flex flex-col gap-1 text-sm">
+                        <ul className="pl-0 flex flex-col borer-2 gap-1 text-sm">
                           {rec?.achievements.map(
                             (achivement: any, ind: number) => (
                               <li
