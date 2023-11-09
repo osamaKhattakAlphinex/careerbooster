@@ -27,7 +27,7 @@ const RegistrationForm = () => {
   const [file, setFile] = useState<any>(null);
   const [fileName, setFileName] = useState<string>("");
   const [fileError, setFileError] = useState<string>("");
-  const [text, setText] = useState("");
+  const [text, setText] = useState<string>("");
   // session
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
@@ -79,7 +79,7 @@ const RegistrationForm = () => {
           files: [
             {
               id: makeid(),
-              fileName: fileName,
+              fileName: makeid() + ".pdg", //fileName,
               fileContent: text,
               uploadedDateTime: new Date(),
             },
@@ -87,9 +87,6 @@ const RegistrationForm = () => {
           status: false,
           alertConsent: values.alertConsent,
         };
-        console.clear();
-        console.log("obj: ", obj);
-
         // Create user account in database
         axios
           .post("/api/auth/users", obj)
@@ -303,11 +300,15 @@ const RegistrationForm = () => {
   }, [file]);
 
   useEffect(() => {
-    const data: any = localStorage.getItem("pdfText");
-    if (data) {
-      setText(data.pdfText);
+    if (typeof window !== "undefined") {
+      const data: any = localStorage.getItem("pdfText");
+
+      if (data) {
+        setText(data);
+      }
     }
   }, []);
+
   return (
     <div className="col-lg-12" data-aos="fade-up-sm" data-aos-delay="100">
       <div className="account-wrapper d-flex flex-column justify-center">
