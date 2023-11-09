@@ -56,6 +56,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   }, []);
 
   const createProfileFromResume = async () => {
+    // console.clear();
+    // console.log("I am called", register.scrappedContent);
     // await scrappResumeIfNotExist();
     if (register.scrappedContent) {
       fetchBasicDataFromResume();
