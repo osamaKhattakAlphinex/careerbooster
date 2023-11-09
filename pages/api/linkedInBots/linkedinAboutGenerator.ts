@@ -31,6 +31,7 @@ const handler: NextApiHandler = async (req, res) => {
       aboutInstructions,
       prompt,
     });
+
     // For LinkedIn Tool if file is uploaded then load content from that fiel
     if (linkedinContent) {
       // load file
