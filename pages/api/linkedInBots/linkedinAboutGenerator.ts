@@ -24,14 +24,6 @@ const handler: NextApiHandler = async (req, res) => {
       prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
     }
 
-    return res.status(200).json({
-      success: true,
-      linkedinContent,
-      option,
-      aboutInstructions,
-      prompt,
-    });
-
     // For LinkedIn Tool if file is uploaded then load content from that fiel
     if (linkedinContent) {
       // load file
@@ -58,6 +50,15 @@ const handler: NextApiHandler = async (req, res) => {
             This is the prompt: 
             ${prompt}
             `;
+
+      return res.status(200).json({
+        success: true,
+        linkedinContent,
+        option,
+        input,
+        aboutInstructions,
+        prompt,
+      });
 
       try {
         const response = await openai.chat.completions.create({
