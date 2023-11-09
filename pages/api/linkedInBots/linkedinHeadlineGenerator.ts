@@ -37,7 +37,8 @@ const handler: NextApiHandler = async (req, res) => {
             This is the User data:
             ${content}
             This is the prompt:
-            ${prompt}`;
+            ${prompt}
+            `;
 
       try {
         const response = await openai.chat.completions.create({
