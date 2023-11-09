@@ -1,5 +1,6 @@
+"use client";
 import { Document, pdfjs } from "react-pdf";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -18,10 +19,6 @@ function removeSpecialChars(str: string) {
 
 const saveToLocalStorage = (text: any) => {
   localStorage.setItem("pdfText", text);
-};
-
-const loadFromLocalStorage = () => {
-  return localStorage.getItem("pdfText");
 };
 
 const FileUploadHandler = ({
@@ -84,7 +81,6 @@ const FileUploadHandler = ({
           <div>{text}</div>
         </div>
       )}
-      {loadFromLocalStorage()}
     </div>
   );
 };

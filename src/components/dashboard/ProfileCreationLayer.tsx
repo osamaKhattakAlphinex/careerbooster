@@ -15,6 +15,7 @@ import {
   setStepSix,
   setStepThree,
   setStepTwo,
+  setField,
 } from "@/store/registerSlice";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -57,6 +58,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
 
   const createProfileFromResume = async () => {
     // await scrappResumeIfNotExist();
+    console.log("inside profile resume function");
     if (register.scrappedContent) {
       fetchBasicDataFromResume();
       fetchEducationDataFromResume();
@@ -456,23 +458,21 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
 
   // if the user data loaded, data scrapped, profile wizard isn't completed Make profile from resume
   useEffect(() => {
-    if (userData.email && !userData.wizardCompleted) {
-      createProfileFromResume();
+    createProfileFromResume();
 
-      // const confirmExit = (e: any) => {
-      //   // Display a confirmation message when leaving or refreshing the page
-      //   e.returnValue =
-      //     "You are leaving this page, your changes are not saved, you will lose your data.";
-      // };
+    // const confirmExit = (e: any) => {
+    //   // Display a confirmation message when leaving or refreshing the page
+    //   e.returnValue =
+    //     "You are leaving this page, your changes are not saved, you will lose your data.";
+    // };
 
-      // // Listen for the beforeunload event
-      // window.addEventListener("beforeunload", confirmExit);
+    // // Listen for the beforeunload event
+    // window.addEventListener("beforeunload", confirmExit);
 
-      // return () => {
-      //   // Remove the event listener when the component unmounts
-      //   window.removeEventListener("beforeunload", confirmExit);
-      // };
-    }
+    // return () => {
+    //   // Remove the event listener when the component unmounts
+    //   window.removeEventListener("beforeunload", confirmExit);
+    // };
   }, [userData.email, userData.wizardCompleted, register.scrappedContent]);
 
   // RENDERING LOGIC BLOW !!!!!!
