@@ -2,13 +2,14 @@
 import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const UsersPage = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [records, setRecords] = useState([]);
   const [loadingId, setLoadingId] = useState("");
   const [limitOfUser, setLimitOfUser] = useState<number>(10);
@@ -67,8 +68,17 @@ const UsersPage = () => {
     setPageStart(startIndex);
     router.replace(pathname + `?r=${limitOfUser}&p=${currentPage}`);
   }, [limitOfUser, currentPage]);
+  useEffect(() => {
+    const existingNumberOfRecords = searchParams?.get("r");
+    const existingPage = searchParams?.get("p");
+    if (existingNumberOfRecords) {
+      setLimitOfUser(parseInt(existingNumberOfRecords, 10));
+    }
+    if (existingPage) {
+      setCurrentPage(parseInt(existingPage, 10));
+    }
+  }, [searchParams?.get("r"), searchParams?.get("p")]);
 
-  // console.log(limitOfUser);
   return (
     <>
       <div className="mx-10 pt-40">
@@ -234,7 +244,7 @@ const UsersPage = () => {
                   <li key={number}>
                     <button
                       onClick={(e) => setCurrentPage(number)}
-                      className={`border-gray-300  leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white hover:text-gray-700 first-letter
+                      className={`border-gray-300  leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400  text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white hover:text-gray-700 first-letter
                       ${
                         currentPage === number
                           ? "bg-gray-400  dark:!bg-white dark:text-black"

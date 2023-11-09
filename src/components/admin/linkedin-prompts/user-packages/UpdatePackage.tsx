@@ -100,13 +100,13 @@ const UpdatePackage = () => {
         id="updateProductModal"
         tabIndex={-1}
         aria-hidden="true"
-        className={`overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ${
+        className={`overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] z-[10000] max-h-full ${
           !editPopUpModel ? "hidden" : "flex"
         }`}
       >
         <div className="relative p-4 w-full max-w-2xl max-h-full">
           {/* <!-- Modal content --> */}
-          <div className="relative p-4 rounded-lg shadow bg-white">
+          <div className="relative p-4 rounded-lg shadow dark:!border-gray-900 border-white dark:!bg-gray-800 bg-white">
             {/* <!-- Modal header --> */}
             <div className="flex justify-between items-center pb-4 mb-4  pt-5rounded-t border-b sm:mb-5 dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">

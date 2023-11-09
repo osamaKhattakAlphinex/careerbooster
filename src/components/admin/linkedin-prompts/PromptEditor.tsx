@@ -35,7 +35,7 @@ const PromptEditor = ({
   }, prompts);
 
   return (
-    <div className="w-1/2 p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
+    <div className="lg:!w-1/2 w-full p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
       <div className="w-full ">
         <div className="space-y-4 md:space-y-6">
           <h2 className="text-2xl">
@@ -53,7 +53,7 @@ const PromptEditor = ({
             <div>
               <button
                 disabled={promptsLoading || updating === name}
-                className="bg-gray-900 text-white rounded-lg py-3 px-4 hover:bg-gray-800 inline-block disabled:bg-gray-300"
+                className="bg-gray-900 text-white rounded-lg py-3 px-4 hover:bg-gray-800 inline-block disabled:bg-gray-300 sm:ml-auto"
                 onClick={() => handleSave(name, prompt)}
               >
                 <div className="flex flex-row gap-2">

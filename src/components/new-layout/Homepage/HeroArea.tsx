@@ -5,7 +5,7 @@ import Image from "next/image";
 const HeroArea = () => {
   return (
     <section
-      className={`hero-section style-1 overflow-hidden  pt-30 pb-15 pb-lg-20 pt-xl-36`}
+      className={`hero-section style-1 overflow-hidden  pt-40 pb-15 pb-lg-20 `}
     >
       {/* hero-section style-1 overflow-hidden gradient-bg pt-30 pb-15 pb-lg-20 pt-xl-36 */}
       <div className="container ">
