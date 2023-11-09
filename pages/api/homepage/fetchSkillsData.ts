@@ -42,7 +42,7 @@ const handler: NextApiHandler = async (req, res) => {
         // const resp = await model.call(input);
 
         const response = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo", // v2
+          model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icr9I31", // v2
           messages: [
             {
               role: "user",

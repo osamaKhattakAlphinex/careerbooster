@@ -123,6 +123,8 @@ const ResumeBuilder = () => {
           },
           education: userData.education,
         };
+        console.clear();
+        console.log("basicObj: ", basicObj);
         dispatch(setBasicInfo(basicObj));
       }
     });
