@@ -214,7 +214,9 @@ const RegistrationForm = () => {
           const res = await resp.json();
           if (res.success) {
             const userData = JSON.parse(res.data);
-            router.replace(`/register?content=true`);
+            router.replace(
+              `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&content=true`
+            );
 
             if (userData.firstName || userData.lastName || userData.email) {
               formik.setFieldValue(
