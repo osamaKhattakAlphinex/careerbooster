@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -11,7 +11,9 @@ import { refreshIconRotating } from "@/helpers/iconsProvider";
 import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
 import Image from "next/image";
-
+import FileUploadHandler from "@/components/FileUploadHandler";
+import { makeid } from "@/helpers/makeid";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.AI-Register",
 // };
@@ -23,11 +25,14 @@ const RegistrationForm = () => {
   const [submittingError, setSubmittingError] = useState<string>("");
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [file, setFile] = useState<any>(null);
+  const [fileName, setFileName] = useState<string>("");
   const [fileError, setFileError] = useState<string>("");
-
+  const [text, setText] = useState("");
   // session
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
+
+  const content = params?.get("content");
 
   // Redux
   const dispatch = useDispatch();
@@ -55,7 +60,7 @@ const RegistrationForm = () => {
       confirmpassword: Yup.string()
         .required("Enter Password again")
         .oneOf([Yup.ref("password"), "null"], "Passwords must match"),
-      file: Yup.string().required("PDF Resume/CV is Required"),
+      // file: Yup.string().required("PDF Resume/CV is Required"),
     }),
 
     onSubmit: async (values) => {
@@ -69,7 +74,14 @@ const RegistrationForm = () => {
           lastName: values.lastName,
           email: values.email,
           password: values.password,
-          file: values.file,
+          files: [
+            {
+              id: makeid(),
+              fileName: fileName,
+              fileContent: text,
+              uploadedDateTime: new Date(),
+            },
+          ],
           status: false,
           alertConsent: values.alertConsent,
         };
@@ -83,6 +95,9 @@ const RegistrationForm = () => {
               await moveResumeToUserFolder(values.file, values.email);
               await updateUser(values.file, values.email);
             }
+
+            // TODO REMOVE CONTENT FROM LOCAL STOARGE
+
             const res = await signIn("credentials", {
               email: values.email,
               password: values.password,
@@ -158,39 +173,39 @@ const RegistrationForm = () => {
     return str.replace(/-/g, " ");
   };
 
-  const uploadFileToServer = async () => {
-    setFileError("");
-    setFileUploading(true);
-    if (file) {
-      const body = new FormData();
-      body.append("file", file);
-      fetch("/api/fileUpload", {
-        method: "POST",
-        body,
-      })
-        .then(async (resp: any) => {
-          const res = await resp.json();
-          if (res.success) {
-            const uploadedFileName = res.fileName + ".pdf";
-            dispatch(setUploadedFileName(uploadedFileName));
-            fetchRegistrationDataFromResume(uploadedFileName);
-          } else {
-            setFileError("Something went wrong");
-          }
-        })
-        .catch((error) => {
-          setFileError("Something went wrong");
-        });
-    }
-  };
+  // const uploadFileToServer = async () => {
+  //   setFileError("");
+  //   setFileUploading(true);
+  //   if (file) {
+  //     const body = new FormData();
+  //     body.append("file", file);
+  //     fetch("/api/fileUpload", {
+  //       method: "POST",
+  //       body,
+  //     })
+  //       .then(async (resp: any) => {
+  //         const res = await resp.json();
+  //         if (res.success) {
+  //           const uploadedFileName = res.fileName + ".pdf";
+  //           dispatch(setUploadedFileName(uploadedFileName));
+  //           fetchRegistrationDataFromResume(uploadedFileName);
+  //         } else {
+  //           setFileError("Something went wrong");
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         setFileError("Something went wrong");
+  //       });
+  //   }
+  // };
 
-  const fetchRegistrationDataFromResume = async (fileName: string) => {
+  const fetchRegistrationDataFromResume = async (content: string) => {
     setFileError("");
     setFileUploading(true);
-    if (fileName) {
+    if (content) {
       fetch("/api/homepage/fetchRegistrationDataForHomepage", {
         method: "POST",
-        body: JSON.stringify({ fileName }),
+        body: JSON.stringify({ content }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -199,9 +214,7 @@ const RegistrationForm = () => {
           const res = await resp.json();
           if (res.success) {
             const userData = JSON.parse(res.data);
-            // router.replace(
-            //   `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&file=${fileName}`
-            // );
+            router.replace(`/register?content=true`);
 
             if (userData.firstName || userData.lastName || userData.email) {
               formik.setFieldValue(
@@ -217,8 +230,8 @@ const RegistrationForm = () => {
                 removeDashesFromString(userData.email)
               );
             }
-
-            formik.setFieldValue("file", fileName);
+            // dispatch(setUploadedFileName(userData.files));
+            // formik.setFieldValue("file", fileName);
           } else {
             setFileError("Something went wrong");
           }
@@ -229,6 +242,16 @@ const RegistrationForm = () => {
         .finally(() => {
           setFileUploading(false);
         });
+    }
+  };
+
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const fileInput = e.target;
+
+    if (fileInput && fileInput.files && fileInput.files.length > 0) {
+      setFile(fileInput.files[0]);
+      setFileName(fileInput.files[0].name);
     }
   };
 
@@ -258,7 +281,8 @@ const RegistrationForm = () => {
       //  file exists and is PDF
       setFileError("");
       // upload it to server
-      uploadFileToServer();
+      //uploadFileToServer();
+      // getContentFromResume(file);
     } else if (file) {
       // if file exists but not PDf
       setFileError("only PDF file is allowed");
@@ -284,7 +308,7 @@ const RegistrationForm = () => {
             <div className={`upload-resume-btn mt-5 mb-10`}>
               {!params?.get("file") && (
                 <>
-                  {!isAuth && data === null && (
+                  {!isAuth && data === null && !content && (
                     <label
                       className="btn btn-lg btn-gradient-1 aos-init aos-animate"
                       data-aos="fade-up-sm"
@@ -293,18 +317,25 @@ const RegistrationForm = () => {
                       <input
                         className="hidden"
                         type="file"
-                        disabled={fileUploading}
+                        disabled={file}
                         onChange={(e) => {
-                          if (e.target.files) {
-                            setFile(e.target.files[0]);
-                          }
+                          handleFileChange(e);
                         }}
                       />
-
                       {fileUploading
                         ? refreshIconRotating
                         : "Upload Your Existing Resume"}
                     </label>
+                  )}
+                  {file !== null && (
+                    <FileUploadHandler
+                      file={file}
+                      text={text}
+                      setText={setText}
+                      fetchRegistrationDataFromResume={
+                        fetchRegistrationDataFromResume
+                      }
+                    />
                   )}
                   <p className="text-gray-700 mt-4 text-sm">
                     Your existing resume forms the basis for your new one,
@@ -591,7 +622,6 @@ const RegistrationForm = () => {
                 )}
               </button>
             </div>
-
             <div className="text-center">
               <p>
                 Already have an account?

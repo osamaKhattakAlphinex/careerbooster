@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
+import FileUploadHandler from "./FileUploadHandler";
 
 const UploadPDFResume = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const UploadPDFResume = () => {
   const [file, setFile] = useState<any>(null);
   const [fileError, setFileError] = useState<string>("");
   const [successMsg, setSuccessMsg] = useState<string>("");
-
+  const [text, setText] = useState("");
   // session
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
@@ -23,42 +24,42 @@ const UploadPDFResume = () => {
   // Redux
   const dispatch = useDispatch();
 
-  const uploadFileToServer = async () => {
-    setFileError("");
-    setFileUploading(true);
-    if (file) {
-      const body = new FormData();
-      body.append("file", file);
-      fetch("/api/fileUpload", {
-        method: "POST",
-        body,
-      })
-        .then(async (resp: any) => {
-          const res = await resp.json();
-          if (res.success) {
-            const uploadedFileName = res.fileName + "_" + file.name;
-            dispatch(setUploadedFileName(uploadedFileName));
-            fetchRegistrationDataFromResume(uploadedFileName);
-            // router.replace("/welcome?step=1");
-            // router.replace("/register");
-            // setSuccessMsg("File has been uploaded!");
-          } else {
-            setFileError("Something went wrong");
-          }
-        })
-        .catch((error) => {
-          setFileError("Something went wrong");
-        });
-    }
-  };
+  // const uploadFileToServer = async () => {
+  //   setFileError("");
+  //   setFileUploading(true);
+  //   if (file) {
+  //     const body = new FormData();
+  //     body.append("file", file);
+  //     fetch("/api/fileUpload", {
+  //       method: "POST",
+  //       body,
+  //     })
+  //       .then(async (resp: any) => {
+  //         const res = await resp.json();
+  //         if (res.success) {
+  //           const uploadedFileName = res.fileName + "_" + file.name;
+  //           dispatch(setUploadedFileName(uploadedFileName));
+  //           fetchRegistrationDataFromResume(uploadedFileName);
+  //           // router.replace("/welcome?step=1");
+  //           // router.replace("/register");
+  //           // setSuccessMsg("File has been uploaded!");
+  //         } else {
+  //           setFileError("Something went wrong");
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         setFileError("Something went wrong");
+  //       });
+  //   }
+  // };
 
-  const fetchRegistrationDataFromResume = async (fileName: string) => {
+  const fetchRegistrationDataFromResume = async (content: string) => {
     setFileError("");
     setFileUploading(true);
-    if (fileName) {
+    if (content) {
       fetch("/api/homepage/fetchRegistrationDataForHomepage", {
         method: "POST",
-        body: JSON.stringify({ fileName }),
+        body: JSON.stringify({ content }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -67,9 +68,8 @@ const UploadPDFResume = () => {
           const res = await resp.json();
           if (res.success) {
             const userData = JSON.parse(res.data);
-
             router.replace(
-              `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&file=${fileName}`
+              `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&content=true`
             );
           } else {
             setFileError("Something went wrong");
@@ -87,7 +87,7 @@ const UploadPDFResume = () => {
       //  file exists and is PDF
       setFileError("");
       // upload it to server
-      uploadFileToServer();
+      // uploadFileToServer();
     } else if (file) {
       // if file exists but not PDf
       setFileError("only PDF file is allowed");
@@ -129,6 +129,15 @@ const UploadPDFResume = () => {
           )}
         </label>
       )}
+      {file !== null && (
+        <FileUploadHandler
+          file={file}
+          text={text}
+          setText={setText}
+          fetchRegistrationDataFromResume={fetchRegistrationDataFromResume}
+        />
+      )}
+
       {/* <p className="text-gray-400 mt-4 text-xs">
         Your existing resume forms the basis for your new one, eliminating
         manual data entry.
