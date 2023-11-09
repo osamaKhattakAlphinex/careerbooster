@@ -66,7 +66,9 @@ const RegistrationForm = () => {
     onSubmit: async (values) => {
       setSubmittingError("");
 
-      if (values.terms) {
+      if (text === "") {
+        setSubmittingError("Error Reading Resume");
+      } else if (values.terms) {
         setSubmitting(true);
 
         const obj = {
@@ -85,6 +87,8 @@ const RegistrationForm = () => {
           status: false,
           alertConsent: values.alertConsent,
         };
+        console.clear();
+        console.log("obj: ", obj);
 
         // Create user account in database
         axios
