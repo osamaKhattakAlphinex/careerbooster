@@ -51,15 +51,6 @@ const handler: NextApiHandler = async (req, res) => {
             ${prompt}
             `;
 
-      return res.status(200).json({
-        success: true,
-        linkedinContent,
-        option,
-        input,
-        aboutInstructions,
-        prompt,
-      });
-
       try {
         const response = await openai.chat.completions.create({
           model: "gpt-3.5-turbo", // v2
