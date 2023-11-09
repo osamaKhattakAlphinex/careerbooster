@@ -31,27 +31,35 @@ const LimitCard: React.FC<LimitCardProps> = ({
     setPercentageCalculated(true);
   }, [userData, limit, used]);
 
-  return (
-    <div className="w-1/3">
-      <div className="w-full flex justify-between mb-1">
-        <span className="text-base font-medium ">{title}</span>
-        {!isNaN(limit) && !isNaN(used) && (
-          <span className="text-sm font-medium ">
-            {Number(limit) - Number(used)} out of {Number(limit)}
-          </span>
-        )}
+  if (limit === used) {
+    return (
+      // <div className="bg-red-500 px-3 py-1 rounded-3xl border-gray-950">
+      <span className="text-sm text-red-500 ">Credit Limit Reached</span>
+      // </div>
+    );
+  } else {
+    return (
+      <div className="w-1/3">
+        <div className="w-full flex justify-between mb-1">
+          <span className="text-base font-medium ">{title}</span>
+          {!isNaN(limit) && !isNaN(used) && (
+            <span className="text-sm font-medium ">
+              {Number(limit) - Number(used)} out of {Number(limit)}
+            </span>
+          )}
+        </div>
+        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+          <div
+            className={`bg-${
+              availablePercentage > 30 ? "green" : "red"
+            }-600 h-2.5 rounded-full`}
+            style={{
+              width: `${availablePercentage}%`,
+            }}
+          ></div>
+        </div>
       </div>
-      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-        <div
-          className={`bg-${
-            availablePercentage > 30 ? "green" : "red"
-          }-600 h-2.5 rounded-full`}
-          style={{
-            width: `${availablePercentage}%`,
-          }}
-        ></div>
-      </div>
-    </div>
-  );
+    );
+  }
 };
 export default LimitCard;
