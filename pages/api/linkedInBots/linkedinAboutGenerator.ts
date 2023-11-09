@@ -7,6 +7,7 @@ import startDB from "@/lib/db";
 export const config = {
   maxDuration: 300,
 };
+// ...
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
