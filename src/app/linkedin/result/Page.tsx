@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     maximumScale: 1,
   },
 };
-
+//leinked in result page
 export default function LinkedInPage() {
   return (
     <main className="flex-grow-1 mt-24 mb-20 bg-gradient-to-r from-gray-950 via-blue-950 to-purple-900">
