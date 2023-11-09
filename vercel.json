@@ -5,9 +5,6 @@
     },
     "pages/api/api/linkedInBots/linkedinAboutGenerator": {
       "maxDuration": 300
-    },
-    "api/*": {
-      "maxDuration": 300
     }
   }
 }
