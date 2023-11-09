@@ -47,7 +47,9 @@ const handler: NextApiHandler = async (req, res) => {
             This is the User data:
             ${linkedinContent}
 
-            This is the prompt: `;
+            This is the prompt: 
+            ${prompt}
+            `;
 
       try {
         const response = await openai.chat.completions.create({
