@@ -2,6 +2,12 @@ import { NextApiHandler } from "next";
 import OpenAI from "openai";
 import Prompt from "@/db/schemas/Prompt";
 import startDB from "@/lib/db";
+
+// This function can run for a maximum of 5 seconds
+export const config = {
+  maxDuration: 300,
+};
+
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
     const { linkedinContent, option, aboutInstructions } = req.body;
