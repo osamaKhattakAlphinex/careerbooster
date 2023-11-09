@@ -40,7 +40,7 @@ const handler: NextApiHandler = async (req, res) => {
             `;
 
       const response = await openai.chat.completions.create({
-        model: "gpt-4", // v2
+        model: "gpt-3.5-turbo", // v2
         messages: [
           {
             role: "user",
