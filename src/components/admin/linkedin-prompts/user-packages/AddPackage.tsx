@@ -1,18 +1,19 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Field, FieldArray, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import Toggle from "@/components/utilities/form-elements/Toggle";
-import FormFieldArray from "@/components/utilities/form-elements/FormFieldArray";
-import FeaturesFormCard from "./FeaturesFormCard";
+
 type Feature = string[];
 type FeatureTooltip = string[];
 
+type Props = {
+  getPackages: () => void;
+};
+
 type FeatureFieldType = { id: number; feature: string; tooltip: string };
 // Feature Field
-
-const FeatureRow = ({
+export const FeatureRow = ({
   id,
   feature,
   tooltip,
@@ -25,6 +26,7 @@ const FeatureRow = ({
   return (
     <li className="w-full flex gap-2">
       <input
+        required
         id={`feature-${id}`}
         type="text"
         value={feature}
@@ -33,6 +35,7 @@ const FeatureRow = ({
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
       />
       <input
+        required
         id={`tooltip-${id}`}
         type="text"
         value={tooltip}
@@ -40,20 +43,23 @@ const FeatureRow = ({
         placeholder="Tooltip"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
       />
-      <button
-        type="button"
-        className="w-8 h-8 bg-gray-600 rounded-lg px-4 py-2 grid place-content-center"
-        onClick={() => {
-          onFeatureRemove(id);
-        }}
-      >
-        X
-      </button>
+
+      {id >= 1 && (
+        <button
+          type="button"
+          className="w-8 h-8 bg-gray-600 rounded-lg px-4 py-2 grid place-content-center"
+          onClick={() => {
+            onFeatureRemove(id);
+          }}
+        >
+          X
+        </button>
+      )}
     </li>
   );
 };
 
-const AddPackage = () => {
+const AddPackage = ({ getPackages }: Props) => {
   const [features, setFeatures] = useState<Feature[]>([]); // State for Features
   const [featuresToolTips, setFeaturesToolTips] = useState<FeatureTooltip[]>(
     []
@@ -63,22 +69,7 @@ const AddPackage = () => {
     { id: 0, feature: "", tooltip: "" },
   ]);
 
-  const addFeatureRow = () => {
-    // const featureIds = featureList.map((_) => _.id).sort((a, b) => a - b);
-    // const biggestId = featureIds[featureIds.length - 1];
-    // const newId = biggestId ? biggestId + 1 : 1;
-    // setFeatureList((prev) => [
-    //   ...prev,
-    //   { id: newId, feature: "", tooltip: "" },
-    // ]);
-  };
-
   const handleFeatureRemove = (idx: number) => {
-    // const newFeatureList = [...featureList];
-    // newFeatureList.splice(idx, 1);
-
-    // setFeatureList(newFeatureList);
-
     const newFeatures = [...formik.values.features];
     newFeatures.splice(idx, 1);
 
@@ -97,12 +88,12 @@ const AddPackage = () => {
   const formik = useFormik({
     initialValues: {
       title: "",
-      type: "",
+      type: "monthly",
       amount: "",
-      category: "",
-      status: "",
-      features: [""],
-      featuresToolTips: [""],
+      category: "basic",
+      status: "active",
+      features: ["Feature 1"],
+      featuresToolTips: [" Tooltip 1"],
       limit: {
         resumes_generation: "",
         keywords_generation: "",
@@ -119,7 +110,9 @@ const AddPackage = () => {
     validationSchema: Yup.object().shape({
       title: Yup.string().required("Please Title/Name Your Package"),
       type: Yup.string().required("Please Select One Package"),
-      amount: Yup.number().required("Please Enter Your Amount"),
+      amount: Yup.number()
+        .required("Please Enter Your Amount")
+        .min(0, "Minimum Value is 0"),
       category: Yup.string().required("Please Select at least one category"),
       status: Yup.string().required(
         'Please select either "Active" or "Inactive"'
@@ -128,41 +121,42 @@ const AddPackage = () => {
       // featuresToolTips: Yup.string().required(
       //   "Please Enter THe Features Tool Tips"
       // ),
-
-      // features: Yup.array(Yup.string().required("Please Enter THe Features")),
-      // featuresToolTips: Yup.array(
-      //   Yup.string().required("Please Enter THe Features Tooltip")
-      // ),
+      features: Yup.array(Yup.string())
+        .required("Please Enter THe Features")
+        .min(1, "Please Provide atleast 1 feature"),
+      featuresToolTips: Yup.array(Yup.string())
+        .required("Please Enter THe Features Tooltip")
+        .min(1, "Please Provide atleast 1 feature tooltip"),
       limit: Yup.object().shape({
-        resumes_generation: Yup.number().required(
-          "Please Select The Amount of Resume"
-        ),
-        keywords_generation: Yup.number().required(
-          "Please Select The Amount of Keywords"
-        ),
-        headline_generation: Yup.number().required(
-          "Please Select The Amount of Headline"
-        ),
-        about_generation: Yup.number().required(
-          "Please Select The Amount of About Generation"
-        ),
-        job_desc_generation: Yup.number().required(
-          "Please Select The Amount of About Description Generation"
-        ),
-        cover_letter_generation: Yup.number().required(
-          "Please Select The Amount of Cover Letters"
-        ),
-        consulting_bid_generation: Yup.number().required(
-          "Please Select The Amount of consulting bid generation"
-        ),
-        review_resume: Yup.number().required(
-          "Please Select The Amount of resume review"
-        ),
-        pdf_files_upload: Yup.number().required(
-          "Please Select The no of pdf files upload"
-        ),
+        resumes_generation: Yup.number()
+          .required("Please Select The Amount of Resume")
+          .min(0, "Minimum Value is 0"),
+        keywords_generation: Yup.number()
+          .required("Please Select The Amount of Keywords")
+          .min(0, "Minimum Value is 0"),
+        headline_generation: Yup.number()
+          .required("Please Select The Amount of Headline")
+          .min(0, "Minimum Value is 0"),
+        about_generation: Yup.number()
+          .required("Please Select The Amount of About Generation")
+          .min(0, "Minimum Value is 0"),
+        job_desc_generation: Yup.number()
+          .required("Please Select The Amount of About Description Generation")
+          .min(0, "Minimum Value is 0"),
+        cover_letter_generation: Yup.number()
+          .required("Please Select The Amount of Cover Letters")
+          .min(0, "Minimum Value is 0"),
+        consulting_bid_generation: Yup.number()
+          .required("Please Select The Amount of consulting bid generation")
+          .min(0, "Minimum Value is 0"),
+        review_resume: Yup.number()
+          .required("Please Select The Amount of resume review")
+          .min(0, "Minimum Value is 0"),
+        pdf_files_upload: Yup.number()
+          .required("Please Select The no of pdf files upload")
+          .min(0, "Minimum Value is 0"),
         can_edit_resume: Yup.boolean().oneOf(
-          [true],
+          [true, false],
           "Please select The CheckBox"
         ),
       }),
@@ -170,7 +164,7 @@ const AddPackage = () => {
     onSubmit: async (values, action) => {
       console.log(values);
 
-      const res = await axios.post("/api/admin/packages/add_package", {
+      const res = await axios.post("/api/packages", {
         type: values.type,
         title: values.title,
         amount: values.amount,
@@ -193,12 +187,11 @@ const AddPackage = () => {
         },
       });
       // console.log("api response:", res);
+      getPackages();
       action.resetForm();
       setPopUpModel(false);
     },
   });
-
-  console.log("formik.values :", formik.values);
 
   return (
     <>
@@ -311,8 +304,9 @@ const AddPackage = () => {
                     name="type"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   >
-                    <option defaultValue="">Select Package Type</option>
-                    <option value="monthly">Monthly</option>
+                    <option value="monthly" selected>
+                      Monthly
+                    </option>
                     <option value="yearly">Yearly</option>
                   </select>
                   {formik.touched.type && formik.errors.type && (
@@ -355,8 +349,9 @@ const AddPackage = () => {
                     name="category"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   >
-                    <option>Select Your Category</option>
-                    <option value="basic">Basic</option>
+                    <option value="basic" selected>
+                      Basic
+                    </option>
                     <option value="standard">Standard</option>
                     <option value="premium">Premium</option>
                   </select>
@@ -367,7 +362,7 @@ const AddPackage = () => {
                   )}
                 </div>
                 <div>
-                  {/* <label
+                  <label
                     htmlFor="category"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
@@ -381,23 +376,11 @@ const AddPackage = () => {
                     name="status"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   >
-                    <option>Select Your status</option>
-                    <option value="active">Active</option>
+                    <option value="active" selected>
+                      Active
+                    </option>
                     <option value="inactive">Inactive</option>
-                  </select> */}
-
-                  <Toggle
-                    label="Active Status"
-                    value={formik.values.status === "active" ? true : false}
-                    onChange={(e) =>
-                      formik.setFieldValue(
-                        "status",
-                        e.target.checked ? "active" : "inactive"
-                      )
-                    }
-                    onBlur={formik.handleBlur}
-                  />
-
+                  </select>
                   {formik.touched.status && formik.errors.status && (
                     <p className="text-red-600 pt-3">{formik.errors.status}</p>
                   )}
@@ -654,37 +637,17 @@ const AddPackage = () => {
 
               {/* Features */}
 
-              {/* <FeaturesFormCard
-                onChangeFeatures={(arr: any) =>
-                  formik.setFieldValue("features", arr)
-                }
-                onChangeTooltip={(arr: any) =>
-                  formik.setFieldValue("featuresToolTips", arr)
-                }
-              /> */}
-
               {formik.values.features.map((_, index) => (
-                // featureList.map((_, index) =>
-
                 <FeatureRow
                   id={index}
                   feature={formik.values.features[index]}
                   tooltip={formik.values.featuresToolTips[index]}
-                  // feature={_.feature}
-                  // tooltip={_.tooltip}
                   key={`feature-row-${index}`}
                   onChangeFeature={(feature: string) => {
                     formik.setFieldValue(`features[${index}]`, feature);
-                    // Update the featureList state with the new feature value
-                    // const updatedFeatureList = [...featureList];
-                    // updatedFeatureList[index].feature = feature;
-                    // setFeatureList(updatedFeatureList);
                   }}
                   onChangeTooltip={(tooltip: string) => {
                     formik.setFieldValue(`featuresToolTips[${index}]`, tooltip);
-                    // const updatedFeatureList = [...featureList];
-                    // updatedFeatureList[index].tooltip = tooltip;
-                    // setFeatureList(updatedFeatureList);
                   }}
                   onBlurFeature={formik.handleBlur}
                   onBlurTooltip={formik.handleBlur}
@@ -693,6 +656,7 @@ const AddPackage = () => {
               ))}
 
               <button
+                className="mt-2 mb-5"
                 type="button"
                 onClick={
                   (e) => {
@@ -709,7 +673,7 @@ const AddPackage = () => {
                   // addFeatureRow
                 }
               >
-                ADD
+                + Add more Features
               </button>
 
               {/* <div className="grid gap-4 mb-4 sm:grid-cols-2">

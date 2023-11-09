@@ -2,129 +2,198 @@
 
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AddPackage from "./AddPackage";
-import UpdatePackage from "./UpdatePackage";
+
 import ReadPackage from "./ReadPackage";
 // import { Link } from 'react-router-dom'; // Import Link from React Router if you're using it
 // import AddProduct from './AddProduct'; // Import the AddProduct component
+import axios from "axios";
+import UpdatePackage from "./UpdatePackage";
+import ConfirmationModal from "@/components/utilities/form-elements/ConfirmationModal";
+
+type Package = {
+  _id?: string;
+  type: "monthly" | "yearly";
+  title: string;
+  amount: number;
+  status: "active" | "inactive";
+  features: string[];
+  featuresToolTips: string[];
+  category: "basic" | "standard" | "premium";
+  limit: {
+    resumes_generation: number;
+    can_edit_resume: boolean;
+    keywords_generation: number;
+    headline_generation: number;
+    about_generation: number;
+    job_desc_generation: number;
+    cover_letter_generation: number;
+    email_generation: number;
+    pdf_files_upload: number;
+    review_resume: number;
+    consulting_bids_generation: number;
+  };
+};
 
 const ViewPackage = ({}) => {
+  const [packages, setPackages] = useState<Package[]>([]);
+  const confirmationModalRef: React.MutableRefObject<any> = useRef(null);
+
+  const handleOpenConfirmationModal = (record: Package) => {
+    if (confirmationModalRef.current) {
+      confirmationModalRef.current.openModal(true, record._id);
+    }
+  };
+
+  const getPackages = async () => {
+    try {
+      let { data } = await axios.get("/api/packages");
+      if (data.success) {
+        setPackages(data.packages);
+      }
+    } catch {}
+  };
+
+  useEffect(() => {
+    getPackages();
+  }, []);
+
   return (
-    <div className="pt-30">
-      <div className="my-5 ml-10">
-        <Link
-          href="/admin"
-          className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
-        >
-          {leftArrowIcon}
-          Dashboard
-        </Link>
-      </div>
+    <>
+      <ConfirmationModal
+        id={"deletion-confirmation-modal-user-packages"}
+        title={"Deletion Modal"}
+        message={"Are you sure you want to delete this record"}
+        ref={confirmationModalRef}
+        api="/api/packages"
+        refresh={getPackages}
+      />
 
-      <div className="flex flex-col gap-2 items-center justify-center">
-        <div className=" p-8 flex flex-col gap-2 border w-11/12">
-          <div className="w-100 flex flex-row justify-between">
-            <h2 className="text-xl ">User Packages Management</h2>
-            {/* Add Button*/}
-            <AddPackage />
-          </div>
+      <div className="pt-30">
+        <div className="my-5 ml-10">
+          <Link
+            href="/admin"
+            className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+          >
+            {leftArrowIcon}
+            Dashboard
+          </Link>
+        </div>
 
-          {/* Table */}
-          <div className="">
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-              <table className="pt-10 border-collapse w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-[16px] text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                    <th scope="col" className="px-4 py-4">
-                      Title
-                    </th>
-                    <th scope="col" className="px-4 py-3">
-                      Package Name
-                    </th>
-                    <th scope="col" className="px-4 py-3">
-                      Category
-                    </th>
-                    <th scope="col" className="px-4 py-3">
-                      Resume Generation
-                    </th>
-                    <th scope="col" className="px-4 py-3">
-                      Price
-                    </th>
-                    <th scope="col" className="px-4 py-3 text-center">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className=" bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th
-                      scope="row"
-                      className="px-4 py-3 font-medium whitespace-nowrap"
-                    >
-                      Apple iMac 27&#34;
-                    </th>
-                    <td className="px-4 py-3">PC</td>
-                    <td className="px-4 py-3">Apple</td>
-                    <td className="px-4 py-3 max-w-[12rem] truncate">
-                      What is a product description? A product description
-                      describes a product.
-                    </td>
-                    <td className="px-4 py-3">$2999</td>
-                    <td className="px-4 py-3 flex items-center justify-end">
-                      <ul
-                        className="py-1 text-sm flex"
-                        aria-labelledby="apple-imac-27-dropdown-button"
-                      >
-                        <li>
-                          <UpdatePackage />
-                        </li>
-                        <li>
-                          <ReadPackage />
-                        </li>
-                        <li>
-                          <button
-                            type="button"
-                            data-modal-target="deleteModal"
-                            data-modal-toggle="deleteModal"
-                            className="flex w-full items-center py-2 pr-2 hover:text-[#e6f85e]"
+        <div className="flex flex-col gap-2 items-center justify-center">
+          <div className=" p-8 flex flex-col gap-2 border w-11/12">
+            <div className="w-100 flex flex-row justify-between">
+              <h2 className="text-xl ">User Packages Management</h2>
+              {/* Add Button*/}
+              <AddPackage getPackages={getPackages} />
+            </div>
+
+            {/* Table */}
+            <div className="">
+              <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table className="pt-10 border-collapse w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                  <thead className="text-[16px] text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      <th scope="col" className="px-4 py-4">
+                        Title
+                      </th>
+                      <th scope="col" className="px-4 py-3">
+                        Type
+                      </th>
+                      <th scope="col" className="px-4 py-3">
+                        Amount
+                      </th>
+                      <th scope="col" className="px-4 py-3">
+                        Status
+                      </th>
+                      <th scope="col" className="px-4 py-3">
+                        Category
+                      </th>
+                      <th scope="col" className="px-4 py-3 text-center">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {packages.map((pckg: Package, index: number) => {
+                      return (
+                        <tr
+                          key={index}
+                          className=" bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                        >
+                          <th
+                            scope="row"
+                            className="px-4 py-3 font-medium whitespace-nowrap"
                           >
-                            <svg
-                              className="w-4 h-4 mr-2"
-                              viewBox="0 0 14 15"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-hidden="true"
+                            {pckg.title}
+                          </th>
+                          <td className="px-4 py-3">{pckg.type}</td>
+                          <td className="px-4 py-3">{pckg.amount}</td>
+                          <td className="px-4 py-3 ">{pckg.status}</td>
+                          <td className="px-4 py-3">{pckg.category}</td>
+                          <td className="px-4 py-3 flex items-center justify-end">
+                            <ul
+                              className="py-1 text-sm flex"
+                              aria-labelledby="apple-imac-27-dropdown-button"
                             >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="w-4 h-4 mx-3"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                              <li>
+                                <UpdatePackage
+                                  userPackage={pckg}
+                                  getPackages={getPackages}
                                 />
-                              </svg>
-                            </svg>
-                            Delete
-                          </button>
-                        </li>
-                      </ul>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                              </li>
+                              <li>
+                                <ReadPackage userPackage={pckg} />
+                              </li>
+                              <li>
+                                <button
+                                  onClick={() =>
+                                    handleOpenConfirmationModal(pckg)
+                                  }
+                                  type="button"
+                                  data-modal-target="deleteModal"
+                                  data-modal-toggle="deleteModal"
+                                  className="flex w-full items-center py-2 pr-2 hover:text-[#e6f85e]"
+                                >
+                                  <svg
+                                    className="w-4 h-4 mr-2"
+                                    viewBox="0 0 14 15"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true"
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth="1.5"
+                                      stroke="currentColor"
+                                      className="w-4 h-4 mx-3"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                                      />
+                                    </svg>
+                                  </svg>
+                                  Delete
+                                </button>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
+    </>
     // <div>
     //   <div className="my-5 ml-10">
     //     <Link
