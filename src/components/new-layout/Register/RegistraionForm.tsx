@@ -261,6 +261,13 @@ const RegistrationForm = () => {
     }
   };
 
+  // useEffect(() => {
+  //   const data: any = localStorage.getItem("pdfText");
+  //   console.log("first text in registration form", data.pdfText);
+  //   //  if (data) {
+  //   //    dispatch(setField({ name: "scrappedContent", value: data.pdfText }));
+  //   //  }
+  // }, [text]);
   useEffect(() => {
     const firstName = params?.get("firstName");
     const lastName = params?.get("lastName");
@@ -295,6 +302,12 @@ const RegistrationForm = () => {
     }
   }, [file]);
 
+  useEffect(() => {
+    const data: any = localStorage.getItem("pdfText");
+    if (data) {
+      setText(data.pdfText);
+    }
+  }, []);
   return (
     <div className="col-lg-12" data-aos="fade-up-sm" data-aos-delay="100">
       <div className="account-wrapper d-flex flex-column justify-center">
