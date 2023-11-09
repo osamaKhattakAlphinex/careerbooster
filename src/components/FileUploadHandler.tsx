@@ -58,7 +58,6 @@ const FileUploadHandler = ({
           .then((pageTexts) => {
             const extractedText = pageTexts.join(" ");
             const content = removeSpecialChars(extractedText);
-
             setText(content);
             saveToLocalStorage(content);
 

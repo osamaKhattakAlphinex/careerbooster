@@ -6,6 +6,7 @@ import { deleteIcon } from "@/helpers/iconsProvider";
 import LimitCard from "../LimitCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "@/store/userDataSlice";
+import FileUploadHandler from "@/components/FileUploadHandler";
 
 interface Props {
   selectedFile: string;
@@ -32,52 +33,76 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
 
-  const uploadFileToServer = async () => {
-    setFileError("");
-    setFileUploading(true);
-    if (file && data?.user?.email) {
-      const body = new FormData();
-      body.append("file", file);
-      fetch(`/api/fileUpload?type=coverLetter&email=${data.user.email}`, {
-        method: "POST",
-        body,
+  const updateLimits = async () => {
+    fetch("/api/users/updateUserLimit", {
+      method: "POST",
+      body: JSON.stringify({
+        email: data?.user?.email,
+        type: "pdf_files_upload",
+      }),
+    })
+      .then(async (resp: any) => {
+        const res = await resp.json();
+        if (res.success) {
+          const updatedObject = {
+            ...userData,
+            userPackageUsed: {
+              ...userData.userPackageUsed,
+              pdf_files_upload: res.user.userPackageUsed.pdf_files_upload,
+            },
+          };
+          dispatch(setUserData({ ...userData, ...updatedObject }));
+        }
       })
-        .then(async (resp: any) => {
-          const res = await resp.json();
-          if (res.success) {
-            const uploadedFileName = res.fileName + "_" + file.name;
-            setSuccessMsg("File has been uploaded!");
-            setFileUploading(false);
-            fetchFiles();
-
-            fetch("/api/users/updateUserLimit", {
-              method: "POST",
-              body: JSON.stringify({
-                email: data?.user?.email,
-                type: "pdf_files_upload",
-              }),
-            }).then(async (resp: any) => {
-              const res = await resp.json();
-              if (res.success) {
-                const updatedObject = {
-                  ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    pdf_files_upload: res.user.userPackageUsed.pdf_files_upload,
-                  },
-                };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
-              }
-            });
-          } else {
-            setFileError("Something went wrong");
-          }
-        })
-        .catch((error) => {
-          setFileError("Something went wrong");
-        });
-    }
+      .catch((err) => console.log(err));
   };
+
+  // const uploadFileToServer = async () => {
+  //   setFileError("");
+  //   setFileUploading(true);
+  //   if (file && data?.user?.email) {
+  //     const body = new FormData();
+  //     body.append("file", file);
+  //     fetch(`/api/fileUpload?type=coverLetter&email=${data.user.email}`, {
+  //       method: "POST",
+  //       body,
+  //     })
+  //       .then(async (resp: any) => {
+  //         const res = await resp.json();
+  //         if (res.success) {
+  //           const uploadedFileName = res.fileName + "_" + file.name;
+  //           setSuccessMsg("File has been uploaded!");
+  //           setFileUploading(false);
+  //           fetchFiles();
+
+  //           fetch("/api/users/updateUserLimit", {
+  //             method: "POST",
+  //             body: JSON.stringify({
+  //               email: data?.user?.email,
+  //               type: "pdf_files_upload",
+  //             }),
+  //           }).then(async (resp: any) => {
+  //             const res = await resp.json();
+  //             if (res.success) {
+  //               const updatedObject = {
+  //                 ...userData,
+  //                 userPackageUsed: {
+  //                   ...userData.userPackageUsed,
+  //                   pdf_files_upload: res.user.userPackageUsed.pdf_files_upload,
+  //                 },
+  //               };
+  //               dispatch(setUserData({ ...userData, ...updatedObject }));
+  //             }
+  //           });
+  //         } else {
+  //           setFileError("Something went wrong");
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         setFileError("Something went wrong");
+  //       });
+  //   }
+  // };
 
   const fetchFiles = async () => {
     if (data?.user?.email && !loadingFiles) {
@@ -134,7 +159,8 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
       //  file exists and is PDF
       setFileError("");
       // upload it to server
-      uploadFileToServer();
+      updateLimits();
+      // uploadFileToServer();
     } else if (file) {
       // if file exists but not PDf
       setFileError("only PDF file is allowed");
@@ -196,6 +222,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
           </label>
         )}
 
+        {file !== null && <FileUploadHandler file={file} />}
         {loadingFiles ? (
           <p>Loading Files...</p>
         ) : (

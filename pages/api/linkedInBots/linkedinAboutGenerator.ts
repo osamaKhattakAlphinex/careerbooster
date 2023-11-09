@@ -3,11 +3,12 @@ import { OpenAI } from "langchain/llms/openai";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import path from "path";
 import Prompt from "@/db/schemas/Prompt";
+import startDB from "@/lib/db";
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
-    const { fileName, option, aboutInstructions } = req.body;
+    const { linkedinContent, option, aboutInstructions } = req.body;
     let prompt;
-
+    await startDB();
     const promptRec = await Prompt.findOne({
       type: "linkedinTool",
       name: option,
@@ -19,42 +20,40 @@ const handler: NextApiHandler = async (req, res) => {
     }
 
     // For LinkedIn Tool if file is uploaded then load content from that fiel
-    if (fileName) {
+    if (linkedinContent) {
       // load file
-      const dir = path.join(
-        process.cwd() + "/public",
-        "/files",
-        `/linkedin-temp`
-      );
-      const loader = new PDFLoader(`${dir}/${fileName}`);
-      const docs = await loader.load();
+      // const dir = path.join(
+      //   process.cwd() + "/public",
+      //   "/files",
+      //   `/linkedin-temp`
+      // );
+      // const loader = new PDFLoader(`${dir}/${fileName}`);
+      // const docs = await loader.load();
 
-      let contentTxt = docs.map((doc: any) => doc.pageContent);
-      const content = contentTxt.join(" ");
+      // let contentTxt = docs.map((doc: any) => doc.pageContent);
+      // const content = contentTxt.join(" ");
 
-      if (content) {
-        // CREATING LLM MODAL
-        const model = new OpenAI({
-          modelName: "gpt-3.5-turbo",
-          temperature: 0.5,
-        });
+      // CREATING LLM MODAL
+      const model = new OpenAI({
+        modelName: "gpt-3.5-turbo",
+        temperature: 0.5,
+      });
 
-        const input = `
+      const input = `
             This is the User data:
-            ${content}
+            ${linkedinContent}
 
             This is the prompt:
             ${prompt}
             
         `;
 
-        try {
-          const resp = await model.call(input);
-          // const resp = await chain4.call({ query: input });
-          return res.status(200).json({ success: true, data: resp });
-        } catch (error) {
-          return res.status(400).json({ success: false, error });
-        }
+      try {
+        const resp = await model.call(input);
+        // const resp = await chain4.call({ query: input });
+        return res.status(200).json({ success: true, data: resp });
+      } catch (error) {
+        return res.status(400).json({ success: false, error });
       }
     }
   }

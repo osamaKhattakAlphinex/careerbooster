@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 // import { slugify } from "@/helpers/slugify";
-import { useSearchParams, useRouter } from "next/navigation";
 import copy from "clipboard-copy";
 import {
   clipboardIcon,
@@ -14,12 +13,12 @@ import LinkedInSummary from "./LinkedInSummary";
 import axios from "axios";
 
 //Editable
-
+const loadFromLocalStorage = () => {
+  const linkedinContent = localStorage.getItem("linkedin-content");
+  const linkedinFileName = localStorage.getItem("linkedin-fileName");
+  return { linkedinContent, linkedinFileName };
+};
 const LinkedInUploadPDFResume = () => {
-  const router = useRouter();
-  const params = useSearchParams();
-  const fileName: any = params?.get("fileName");
-
   // local states
   const [aboutMsgLoading, setAboutMsgLoading] = useState<boolean>(false); // msg loading for about section
   const [headlineMsgLoading, setHeadlineMsgLoading] = useState<boolean>(false); // msg loading for Headline  section
@@ -27,6 +26,8 @@ const LinkedInUploadPDFResume = () => {
   const [streamedHeadlineData, setStreamedHeadlineData] = useState("123");
   const [streamedAboutData, setStreamedAboutData] = useState("123");
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [linkedinContent, setLinkedinContent] = useState<any>("");
+  const [linkedinFileName, setLinkedinFileName] = useState<any>("");
 
   // Define a state variable to hold both first name and full name
   const [names, setNames] = useState({
@@ -84,14 +85,14 @@ const LinkedInUploadPDFResume = () => {
   //   }
   // };
 
-  const linkedinHeadline = async (fileName: string) => {
+  const linkedinHeadline = async (linkedinContent: string) => {
     setStreamedHeadlineData("");
     setFileError("");
     setHeadlineMsgLoading(true);
-    if (fileName) {
+    if (linkedinContent) {
       fetch("/api/linkedInBots/linkedinHeadlineGenerator", {
         method: "POST",
-        body: JSON.stringify({ fileName }),
+        body: JSON.stringify({ linkedinContent }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -111,20 +112,24 @@ const LinkedInUploadPDFResume = () => {
           setHeadlineMsgLoading(false);
           setHeadlineComplete(true);
         });
-    } else if (!fileName) {
+    } else if (!linkedinFileName) {
       setFileError("PDF Resume / CV is Required");
     }
   };
 
-  const linkedinAbout = async (fileName: string) => {
+  const linkedinAbout = async (linkedinContent: string) => {
     setStreamedAboutData("");
     setFileError("");
     setAboutMsgLoading(true);
 
-    if (fileName) {
+    if (linkedinFileName) {
       fetch("/api/linkedInBots/linkedinAboutGenerator", {
         method: "POST",
-        body: JSON.stringify({ fileName, option: aboutData, instruction }),
+        body: JSON.stringify({
+          linkedinContent,
+          option: aboutData,
+          instruction,
+        }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -144,18 +149,21 @@ const LinkedInUploadPDFResume = () => {
           setAboutMsgLoading(false);
           setAboutComplete(true);
         });
-    } else if (!fileName) {
+    } else if (!linkedinFileName) {
       setFileError("PDF Resume / CV is Required");
     }
   };
 
   //Save User in DB
-  const linkedinToolSaveUser = async (fileName: string) => {
+  const linkedinToolSaveUser = async (
+    linkedinFileName: string,
+    linkedinContent: string
+  ) => {
     setFileError("");
-    if (fileName) {
+    if (linkedinFileName) {
       fetch("/api/linkedInBots/LinkedinToolEntries", {
         method: "POST",
-        body: JSON.stringify({ fileName }),
+        body: JSON.stringify({ linkedinFileName, linkedinContent }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -177,7 +185,7 @@ const LinkedInUploadPDFResume = () => {
         .catch((error) => {
           setFileError("Something went wrong");
         });
-    } else if (!fileName) {
+    } else if (!linkedinFileName) {
       setFileError("PDF Resume / CV is Required");
     }
   };
@@ -198,29 +206,29 @@ const LinkedInUploadPDFResume = () => {
     }
   };
   //Move File linkedin-temp To temp folder
-  const moveToRegister = () => {
-    setFileError("");
-    if (fileName) {
-      fetch("/api/linkedInBots/moveResumeToTempFolder", {
-        method: "POST",
-        body: JSON.stringify({ fileName }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then(async (resp: any) => {
-          const res = await resp.json();
-          if (res.success) {
-            router.replace(
-              `/register?firstName=${names.firstName}&lastName=${names.lastName}&email=${names.email}&file=${fileName}`
-            );
-          }
-        })
-        .catch((error) => {
-          setFileError("Something went wrong");
-        });
-    }
-  };
+  // const moveToRegister = () => {
+  //   setFileError("");
+  //   if (linkedinContent) {
+  //     fetch("/api/linkedInBots/moveResumeToTempFolder", {
+  //       method: "POST",
+  //       body: JSON.stringify({ fileName }),
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //       .then(async (resp: any) => {
+  //         const res = await resp.json();
+  //         if (res.success) {
+  //           router.replace(
+  //             `/register?firstName=${names.firstName}&lastName=${names.lastName}&email=${names.email}&file=${linkedinFileName}`
+  //           );
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         setFileError("Something went wrong");
+  //       });
+  //   }
+  // };
   const UpdateGohighlevel = async ({
     firstName,
     fullName,
@@ -256,27 +264,33 @@ const LinkedInUploadPDFResume = () => {
         }
       )
       .then(function (response) {
-        if (response?.status == 200)
-        console.log("Save Data on CRM");
-        
+        if (response?.status == 200) console.log("Save Data on CRM");
       })
       .catch(function (error) {
         console.log(error);
       });
   };
   useEffect(() => {
-    if (params?.get("fileName")) {
-      linkedinHeadline(fileName);
-      linkedinAbout(fileName);
+    const data = loadFromLocalStorage();
+    if (data) {
+      setLinkedinContent(data.linkedinContent);
+      setLinkedinFileName(data.linkedinFileName);
     }
-  }, [params?.get("fileName")]);
+  }, []);
+
+  useEffect(() => {
+    if (linkedinContent !== "" && linkedinFileName !== "") {
+      linkedinHeadline(linkedinContent);
+      linkedinAbout(linkedinContent);
+    }
+  }, [linkedinContent, linkedinFileName]);
 
   useEffect(() => {
     if (headlineComplete && aboutComplete) {
       // All APIs have completed, call linkedinToolSaveUser
-      linkedinToolSaveUser(fileName);
+      linkedinToolSaveUser(linkedinContent, linkedinFileName);
     }
-  }, [headlineComplete, aboutComplete, fileName]);
+  }, [headlineComplete, aboutComplete]);
 
   return (
     <>
@@ -339,7 +353,7 @@ const LinkedInUploadPDFResume = () => {
                       <Button
                         type="button"
                         className="border-2 border-purple-600 rounded-full headline-btn lg:px-6 lg:py-2 hover:bg-purple-600 hover:text-white"
-                        onClick={() => linkedinHeadline(fileName)}
+                        onClick={() => linkedinHeadline(linkedinContent)}
                       >
                         <div className="flex gap-2 items-center justify-center">
                           <svg
@@ -532,7 +546,7 @@ const LinkedInUploadPDFResume = () => {
             type="button"
             className="flex gap-2 justify-center items-center text-lg text-white mt-6 bg-gradient-to-r from-purple-700 hover:translate-y-[-4px] transition-all duration-200 to-blue-400 px-6 py-3 rounded-full border shadow-md hover:shadow-lg"
             onClick={() => {
-              linkedinAbout(fileName);
+              linkedinAbout(linkedinContent);
               setInstruction("");
             }}
           >
@@ -567,7 +581,7 @@ const LinkedInUploadPDFResume = () => {
             className={`mx-1 mt-8 p-3 text-lg my-2 bg-yellow-400 hover:bg-yellow-600  lg:w-8/12 lg:h-14 lg:mt-8 text-center rounded-full font-bold lg:text-xl text-black lg:py-3 lg:px-9 no-underline  ${
               buttonDisabled ? "bg-yellow-600" : "cursor-pointer"
             } `}
-            onClick={moveToRegister}
+            // onClick={moveToRegister}
             disabled={buttonDisabled}
           >
             Click here to experience the magic

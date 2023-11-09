@@ -248,7 +248,6 @@ const RegistrationForm = () => {
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const fileInput = e.target;
-    console.log(fileInput.files);
 
     if (fileInput && fileInput.files && fileInput.files.length > 0) {
       setFile(fileInput.files[0]);

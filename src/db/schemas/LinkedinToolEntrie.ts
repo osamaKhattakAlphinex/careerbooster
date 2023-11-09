@@ -3,7 +3,11 @@ const { Schema } = mongoose;
 
 const LinkedinToolEntrieSchema = new Schema(
   {
-    file: {
+    fileName: {
+      type: String,
+      required: true,
+    },
+    fileContent: {
       type: String,
       required: true,
     },

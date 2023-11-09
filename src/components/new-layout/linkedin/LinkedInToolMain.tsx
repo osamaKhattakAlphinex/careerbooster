@@ -4,9 +4,14 @@ import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
 import Image from "next/image";
 import FAQList from "../Homepage/Faqs";
 import Reviews from "../Homepage/Reviews";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import FileUploadHandler from "@/components/FileUploadHandler";
+
+const saveToLocalStorage = (text: any, fileName: any) => {
+  localStorage.setItem("linkedin-content", text);
+  localStorage.setItem("linkedin-fileName", fileName);
+};
 
 const LinkedInToolMain = () => {
   const router = useRouter();
@@ -15,6 +20,7 @@ const LinkedInToolMain = () => {
   const [fileError, setFileError] = useState<string>("");
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [uploadComplete, setUploadComplete] = useState<boolean>(false);
+  const [text, setText] = useState<string>("");
 
   // const uploadFileToServer = async () => {
   //   setFileError("");
@@ -63,11 +69,30 @@ const LinkedInToolMain = () => {
       setFileError("only PDF file is allowed");
     }
   }, [file]);
-  useEffect(() => {
-    if (uploadComplete) {
-      router.replace(`/linkedin/result`);
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const fileInput = e.target;
+
+    if (fileInput && fileInput.files && fileInput.files.length > 0) {
+      setFile(fileInput.files[0]);
+      setFileName(fileInput.files[0].name);
     }
-  }, [uploadComplete, fileName]);
+  };
+  useEffect(() => {
+    if (file && file.type === "application/pdf") {
+      setFileUploading(true);
+      // router.push(`/linkedin/result`);
+      setUploadComplete(true);
+    }
+  }, [file, fileName]);
+
+  useEffect(() => {
+    if (uploadComplete && fileUploading && text !== "") {
+      saveToLocalStorage(text, fileName);
+      router.push("/linkedin/result");
+    }
+  }, [fileUploading, uploadComplete, text]);
   return (
     <div className="w-full">
       {/* Upload File */}
@@ -95,10 +120,7 @@ const LinkedInToolMain = () => {
               className="hidden "
               disabled={fileUploading}
               onChange={(e) => {
-                if (e.target.files) {
-                  setFile(e.target.files[0]);
-                  setFileName(e.target.files[0].name);
-                }
+                handleFileChange(e);
               }}
             />
             {fileUploading || uploadComplete ? (
@@ -120,8 +142,8 @@ const LinkedInToolMain = () => {
       {file !== null && (
         <FileUploadHandler
           file={file}
-          // text={text}
-          // setText={setText}
+          text={text}
+          setText={setText}
           // fetchRegistrationDataFromResume={fetchRegistrationDataFromResume}
         />
       )}
