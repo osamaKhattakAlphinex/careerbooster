@@ -13,6 +13,10 @@ import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "@/components/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
+import RecentResumeCard from "@/components/dashboard/resume-builder/RecenResumesCard";
+import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
+import CoverLetterCardSingle from "@/components/dashboard/cover-letter-bot/CoverLetterCardSingle";
+import { makeid } from "@/helpers/makeid";
 
 const CoverLetterWriter = () => {
   const componentRef = useRef<any>(null);
@@ -40,6 +44,21 @@ const CoverLetterWriter = () => {
   const handleSave = () => {
     setStreamedData(editedContent);
     setIsEditing(false);
+  };
+
+  const saveCoverLetterToDb = async () => {
+    try {
+      const coverLetter = await axios.post("/api/coverLetterBot", {
+        id: makeid(),
+        jobDescription: jobDescription,
+        coverLetterText: streamedData,
+        generatedOnDate: new Date(),
+        generatedViaOption: selectedOption,
+        userEmail: session?.user?.email,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -201,9 +220,18 @@ const CoverLetterWriter = () => {
       setStreamedData(userData.results.coverLetter);
     }
   }, [userData]);
+
+  const historyProps = {
+    list: userData.coverLetters,
+    title: "You Generated Cover Letters",
+    Component: (card: any) => (
+      <CoverLetterCardSingle card={card} componentRef={componentRef} />
+    ),
+  };
+
   return (
     <>
-      <div className="w-[95%] my-5 ml-10 flex items-center justify-between pt-30">
+      <div className="w-[95%] my-5 ml-10 flex items-center justify-between ">
         <Link
           href="/dashboard"
           className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
@@ -220,14 +248,10 @@ const CoverLetterWriter = () => {
           availablePercentage={availablePercentageCoverLetter}
           setAvailablePercentage={setAvailablePercentageCoverLetter}
         />
-        {/* <LimitCard
-          title="Email Availble"
-          limit={userData?.userPackageData?.limit?.email_generation}
-          used={userData?.userPackageUsed?.email_generation}
-          setPercentageCalculated={setPercentageCalculatedEmail}
-          availablePercentage={availablePercentageEmail}
-          setAvailablePercentage={setAvailablePercentageEmail}
-        /> */}
+      </div>
+
+      <div className="m-10 mt-2 w-[95%]  p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
+        <PreviouslyGeneratedList {...historyProps} />
       </div>
       <div className="flex m-10 mt-2 gap-4">
         <div className="w-full flex flex-col p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
@@ -435,7 +459,7 @@ const CoverLetterWriter = () => {
                 </Button>
               </div>
             )}
-            {isEditing && (
+            {streamedData && (
               <div>
                 <Button
                   type="button"
@@ -459,6 +483,35 @@ const CoverLetterWriter = () => {
                     </svg>
 
                     <span>Save</span>
+                  </div>
+                </Button>
+              </div>
+            )}
+
+            {streamedData && (
+              <div>
+                <Button
+                  type="button"
+                  onClick={saveCoverLetterToDb}
+                  className="btn theme-outline-btn"
+                >
+                  <div className="flex flex-row gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                      />
+                    </svg>
+
+                    <span>Save Cover Letter To DB</span>
                   </div>
                 </Button>
               </div>
