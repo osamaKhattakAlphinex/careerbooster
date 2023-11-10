@@ -31,6 +31,8 @@ const handler: NextApiHandler = async (req, res) => {
         apiKey: process.env.OPENAI_API_KEY,
       });
 
+      // alsdjkflasf
+
       const input = `
             This is the User data:
             ${linkedinContent}
