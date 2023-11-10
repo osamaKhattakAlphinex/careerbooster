@@ -1,6 +1,10 @@
 "use client";
 import manyImage from "@/../public/many-image.png";
-import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
+import {
+  ArrowDownIcon,
+  refreshIconRotating,
+  uploadIcon,
+} from "@/helpers/iconsProvider";
 import Image from "next/image";
 import FAQList from "../Homepage/Faqs";
 import Reviews from "../Homepage/Reviews";
@@ -96,24 +100,29 @@ const LinkedInToolMain = () => {
   return (
     <div className="w-full">
       {/* Upload File */}
-      <div className="lg:px-36  text-center lg:py-8">
+      <div className="lg:px-36 text-center lg:py-8">
         <h5 className="text-sm lg:text-center w-full font-semibold lg:text-2xl ">
           Keyword-Optimized, Captivating & Under 30 Seconds!
         </h5>
-        <h3 className="text-2xl lg:text-5xl text-center lg:font-bold leading-tight mt-3">
+        <h3 className="py-2 text-2xl lg:text-5xl text-center lg:font-bold mt-3">
           Free{" "}
-          <span className="lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r to-violet-500 from-fuchsia-500">
+          <span className="py-2 lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r to-violet-500 from-fuchsia-500">
             AI LinkedIn
           </span>{" "}
-          Summary Generator Achieve Top Rankings in Recruiter Searches and
-          Secure More Interviews!
+          Summary Generator
+          <h5 className="pt-3 padding-p text-2xl lg:text-5xl text-center lg:font-bold">
+            Achieve Top Rankings in Recruiter
+          </h5>
+          <h5 className="text-2xl lg:text-5xl text-center lg:font-bold ">
+            Searches and Secure More Interviews!
+          </h5>
         </h3>
-        <h5 className="mt-5 lg:text-2xl text-center lg:mt-3 leading-7 font-normal  ">
+        <h5 className="mt-2 text-lg padding-m lg:text-2xl text-center lg:mt-3 leading-7 font-normal">
           Simply Upload your Resume or LinkedIn Profile in PDF. Receive results
           perfectly tailored for you — or we{"'"}ll compensate you $1000 if we
           waste your time with irrelevant outcomes.
         </h5>
-        <div className="mt-5 flex justify-center md:mt-11">
+        <div className="mt-11 flex justify-center md:mt-11">
           <label className="h-16 w-84 lg:h-16 lg:w-84 py-3 cursor-pointer px-3 md:px-6 rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
             <input
               type="file"
@@ -124,7 +133,7 @@ const LinkedInToolMain = () => {
               }}
             />
             {fileUploading || uploadComplete ? (
-              <span className="mt-3">{refreshIconRotating}</span>
+              <p className="p-2">{refreshIconRotating}</p>
             ) : (
               <div className="flex gap-2 ">
                 <div>{uploadIcon}</div>
@@ -155,9 +164,17 @@ const LinkedInToolMain = () => {
           <p className="m-0">{fileError}</p>
         </div>
       )}
-      <div className="mb-10 lg:mb-20 flex justify-center mt-20 ">
+      <div
+        className="mb-14 lg:mb-20 flex justify-center mt-10"
+        onClick={() =>
+          window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: "smooth",
+          })
+        }
+      >
         <span className="text-center lg:mt-4 py-2 text-indigo-500 border-indigo-500  rounded-t-2xl rounded-b-2xl border-1">
-          {/* {ArrowDownIcon} */}
+          {ArrowDownIcon}
         </span>
       </div>
       <div className="flex flex-col justify-center">
@@ -173,8 +190,8 @@ const LinkedInToolMain = () => {
         </h5>
       </div>
       {/*Vide  Card */}
-      <div className="md:flex mt-20">
-        <div className="lg:w-6/12">
+      <div className="md:flex  mt-20">
+        <div className="md:my-2 lg:m-0 md:w-6/12 lg:w-6/12">
           <p className="text-3xl text font-semibold">
             I don{"'"}t have a resume. How can I upload my LinkedIn profile in
             PDF format?
@@ -195,7 +212,7 @@ const LinkedInToolMain = () => {
             <div className="w-[90%]  h-full pt-10">
               <ul className="text-lg text-gray-200 flex flex-col gap-0 ">
                 <li>Click here to navigate to your LinkedIn profile.</li>
-                <li className="mt-5 bullet-1">
+                <li className="mt-5 ms:pt-5 bullet-1">
                   On your profile page, click on the ellipsis (three dots) and
                   select {"'"}Save to PDF{"'"}
                 </li>
@@ -207,14 +224,14 @@ const LinkedInToolMain = () => {
             </div>
           </div>
         </div>
-        <div className="lg:w-6/12">
-          <div className="h-64 lg:h-96 w-full flex justify-center items-center p-2 rounded-xl border-1 bg-gradient-to-r from-fuchsia-500 to-violet-500  border-gray-800 ">
+        <div className="md:w-6/12 md:m-2  flex md:items-center lg:m-0 lg:w-6/12">
+          <div className="h-64 md:h-64  only:odd: lg:h-96 w-full flex justify-center items-center p-2 rounded-xl border-1 bg-gradient-to-r from-fuchsia-500 to-violet-500  border-gray-800 ">
             Video
           </div>
         </div>
       </div>
       {/* Card */}
-      <div className="w-full lg:h-[550px] lg:flex rounded-2xl mt-14 bg-gradient-to-r from-fuchsia-500 to-violet-500  border-gray-800">
+      <div className="w-full md:8/12 lg:h-[550px] lg:flex rounded-2xl mt-14 bg-gradient-to-r from-fuchsia-500 to-violet-500  border-gray-800">
         <div className="text lg:w-6/12 lg:my-8 lg:mx-14  md:text-left">
           <h3 className="py-6 px-3 lg:text-5xl text-normal font-bold  lg:mr-4 lg:mt-3">
             Challenge us, prove us wrong, and earn a $1000 reward!
@@ -229,7 +246,7 @@ const LinkedInToolMain = () => {
             guaranteeing your complete satisfaction.
           </p>
         </div>
-        <div className="lg:w-6/12 mx-5">
+        <div className="lg:w-6/12 md:flex md:justify-center mx-5 md:mx-5">
           <Image src={manyImage} alt="Not Found" />
         </div>
       </div>
@@ -298,7 +315,10 @@ const LinkedInToolMain = () => {
           <p className="text-1xl text-normal text-center mt-4">
             Simply Upload your Resume or LinkedIn Profile in PDF
           </p>
-          <button className="bg-yellow-400 mt-4 h-14 w-56 text-center rounded-full font-bold text-xl text-black py-3 px-9">
+          <button
+            className="bg-yellow-400 mt-4 h-14 w-56 text-center rounded-full font-bold text-xl text-black py-3 px-9"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
             Get Started
           </button>
         </div>

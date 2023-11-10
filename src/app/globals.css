@@ -267,6 +267,10 @@
     margin: 0px 96px;
     padding: 18px;
   }
+  .content-4 {
+    margin: 0px 96px;
+    padding: 18px;
+  }
   .radio-btn {
     margin-left: 100px;
     margin-right: 100px;
@@ -285,10 +289,29 @@
   .text {
     text-align: center;
   }
+  .padding-y {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .padding-m {
+    margin-top: 0px;
+  }
+  .padding-p {
+    padding-top: 0px;
+  }
+  .headlin-copy-btn {
+    padding: 4px 2px;
+    width: 230px;
+  }
 }
 @media (min-width: 768px) {
   .content-3 {
     margin: 0px 120px;
+  }
+  .content-4 {
+    margin: 0px 80px;
+    padding: 20px;
+    
   }
   .bullet-1 {
     padding-top: 27px;
@@ -296,4 +319,50 @@
   .bullet-2 {
     padding-top: 30px;
   }
+  .margin-t {
+    margin-top: 0px;
+  }
+  .headline-btn {
+    padding: 8px 2px;
+    width: 220px;
+  }
+  .headlin-edit-btn {
+    padding: 8px 2px;
+    width: 80px;
+  }
+  .headlin-copy-btn {
+    padding: 4px 2px;
+    width: 230px;
+  }
+  .redio-btn {
+    padding: 0px 20px;
+    display: flex;
+    width: 330px;
+    align-items: center;
+  }
+}
+@media (min-width: 1200px) {
+  .headline-btn {
+    padding: 4px 2px;
+    width: 220px;
+  }
+  .headlin-edit-btn {
+    padding: 2px 0px !important ;
+    width: 80px;
+  }
+  .headlin-copy-btn {
+    padding: 4px 2px;
+    width: 220px;
+  }
+  .redio-btn {
+    padding: 0px 20px;
+    display: flex;
+    width: 470px;
+    align-items: center;
+  }
+  .content-4 {
+    margin: 0px 120px;
+    
+  }
+  
 }
