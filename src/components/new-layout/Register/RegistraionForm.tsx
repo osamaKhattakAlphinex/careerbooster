@@ -92,8 +92,8 @@ const RegistrationForm = () => {
           .post("/api/auth/users", obj)
           .then(async function (response) {
             if (values.file !== "") {
-              await UpdateGohighlevel(obj);
-              await moveResumeToUserFolder(values.file, values.email);
+              // await UpdateGohighlevel(obj);
+              // await moveResumeToUserFolder(values.file, values.email);
               await updateUser(values.file, values.email);
             }
 
