@@ -69,16 +69,6 @@ const handler: NextApiHandler = async (req, res) => {
           location,
           recentJob,
         } = JSON.parse(resp);
-        console.log(
-          "entries",
-          fullName,
-          firstName,
-          lastName,
-          email,
-          phone,
-          location,
-          recentJob
-        );
 
         //Create user in DB
 

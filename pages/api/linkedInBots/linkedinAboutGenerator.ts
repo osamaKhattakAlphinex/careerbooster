@@ -41,6 +41,7 @@ const handler: NextApiHandler = async (req, res) => {
 
       const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo", // v2
+        stream: true,
         messages: [
           {
             role: "user",
@@ -49,15 +50,19 @@ const handler: NextApiHandler = async (req, res) => {
         ],
         temperature: 1,
       });
+
+      // for await (const part of response) {
+      //   console.log(part.choices[0].delta.content);
+      //   // return res.status(200).json({
+      //   //   success: true,
+      //   //   data: part.choices[0].delta.content,
+      //   //   linkedinContent,
+      //   //   option,
+      //   //   aboutInstructions,
+      //   //   prompt,
+      //   // });
+      // }
       // const resp = await chain4.call({ query: input });
-      return res.status(200).json({
-        success: true,
-        data: response.choices[0].message.content,
-        linkedinContent,
-        option,
-        aboutInstructions,
-        prompt,
-      });
 
       // try {
 
@@ -71,6 +76,19 @@ const handler: NextApiHandler = async (req, res) => {
       //     prompt,
       //   });
       // }
+      // res.setHeader("Content-Type", "text/event-stream");
+      // res.setHeader("Cache-Control", "no-cache");
+      // res.setHeader("Connection", "keep-alive");
+
+      for await (const part of response) {
+        const data = part.choices[0].delta.content;
+
+        if (data !== undefined) {
+          res.write(data);
+        }
+      }
+
+      res.end(); // Close the connection after the stream ends
     }
   }
 

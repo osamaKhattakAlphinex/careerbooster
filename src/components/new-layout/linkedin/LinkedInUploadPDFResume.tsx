@@ -137,19 +137,32 @@ const LinkedInUploadPDFResume = () => {
         },
       })
         .then(async (resp: any) => {
-          const res = await resp.json();
-          if (res.data && res.success) {
-            setStreamedAboutData(res.data);
-          } else {
-            setFileError("Something went wrong");
+          if (resp.ok) {
+            const reader = resp.body.getReader();
+            while (true) {
+              const { done, value } = await reader.read();
+
+              if (done) {
+                break;
+              }
+
+              const text = new TextDecoder().decode(value);
+              if (text) {
+                setAboutMsgLoading(false);
+                setStreamedAboutData((prev) => prev + text);
+              }
+            }
+            setAboutComplete(true);
           }
+          // const res = await resp.json();
+          // if (res.data && res.success) {
+          //   setStreamedAboutData(res.data);
+          // } else {
+          //   setFileError("Something went wrong");
+          // }
         })
         .catch((error) => {
           setFileError("Something went wrong");
-        })
-        .finally(() => {
-          setAboutMsgLoading(false);
-          setAboutComplete(true);
         });
     } else if (!linkedinFileName) {
       setFileError("PDF Resume / CV is Required");
@@ -283,7 +296,7 @@ const LinkedInUploadPDFResume = () => {
 
   return (
     <>
-      {headlineMsgLoading || aboutMsgLoading ? (
+      {!aboutComplete || aboutMsgLoading ? (
         refreshIconRotating
       ) : (
         <div className="flex gap-2 text-[#33FF00] font-extrabold text-5xl mb-4">
