@@ -56,8 +56,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     return () => clearTimeout(t);
   }, []);
 
+  //useCallback in order to not call function again and again
   const createProfileFromResume = useCallback(() => {
-    // Your logic here
     if (register.scrappedContent && !userData.wizardCompleted) {
       fetchBasicDataFromResume();
       fetchEducationDataFromResume();
