@@ -2,7 +2,7 @@
 import { refreshBigIconRotating } from "@/helpers/iconsProvider";
 import { useDispatch, useSelector } from "react-redux";
 import DidYouKnowCard from "./DidYouKnowCard";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
 import { makeid } from "@/helpers/makeid";
@@ -15,6 +15,7 @@ import {
   setStepSix,
   setStepThree,
   setStepTwo,
+  setField,
 } from "@/store/registerSlice";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -46,7 +47,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const register = useSelector((state: any) => state.register);
   const resume = useSelector((state: any) => state.resume);
   const [showStuckError, setShowStuckError] = useState(false);
-
+  const [apiCallCount, setApiCallCount] = useState<number>(0);
   // useeffect to show stuck error to true after 2 minutes
   useEffect(() => {
     const t = setTimeout(() => {
@@ -55,15 +56,24 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     return () => clearTimeout(t);
   }, []);
 
-  const createProfileFromResume = async () => {
-    // await scrappResumeIfNotExist();
-    if (register.scrappedContent) {
+  //useCallback in order to not call function again and again
+  const createProfileFromResume = useCallback(() => {
+    if (register.scrappedContent && !userData.wizardCompleted) {
       fetchBasicDataFromResume();
       fetchEducationDataFromResume();
       fetchExperienceDataFromResume();
       fetchSkillsDataFromResume();
     }
-  };
+  }, []);
+  // const createProfileFromResume = async () => {
+  //   // await scrappResumeIfNotExist();
+  //   if (register.scrappedContent) {
+  //     fetchBasicDataFromResume();
+  //     fetchEducationDataFromResume();
+  //     fetchExperienceDataFromResume();
+  //     fetchSkillsDataFromResume();
+  //   }
+  // };
 
   // Fetch Text from CV if not already fetched
   // const scrappResumeIfNotExist = async () => {
@@ -410,6 +420,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     }
   };
 
+  // laksjdflasjdfl
   const updateUser = async () => {
     // make an object
     const obj = {
@@ -455,24 +466,23 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
 
   // if the user data loaded, data scrapped, profile wizard isn't completed Make profile from resume
   useEffect(() => {
-    if (userData.email && !userData.wizardCompleted) {
+    if (userData.email !== "") {
       createProfileFromResume();
-
-      // const confirmExit = (e: any) => {
-      //   // Display a confirmation message when leaving or refreshing the page
-      //   e.returnValue =
-      //     "You are leaving this page, your changes are not saved, you will lose your data.";
-      // };
-
-      // // Listen for the beforeunload event
-      // window.addEventListener("beforeunload", confirmExit);
-
-      // return () => {
-      //   // Remove the event listener when the component unmounts
-      //   window.removeEventListener("beforeunload", confirmExit);
-      // };
     }
-  }, [userData.email, userData.wizardCompleted, register.scrappedContent]);
+    // const confirmExit = (e: any) => {
+    //   // Display a confirmation message when leaving or refreshing the page
+    //   e.returnValue =
+    //     "You are leaving this page, your changes are not saved, you will lose your data.";
+    // };
+
+    // // Listen for the beforeunload event
+    // window.addEventListener("beforeunload", confirmExit);
+
+    // return () => {
+    //   // Remove the event listener when the component unmounts
+    //   window.removeEventListener("beforeunload", confirmExit);
+    // };
+  }, [userData.email]);
 
   // RENDERING LOGIC BLOW !!!!!!
 
@@ -495,7 +505,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       pathname !== "/subscribed" &&
       new Date(userData.userPackageExpirationDate) < new Date()
     ) {
-      redirect("/subscribe?expired=1");
+      ("/subscribe?expired=1");
     }
     if (
       pathname !== "/subscribe" &&

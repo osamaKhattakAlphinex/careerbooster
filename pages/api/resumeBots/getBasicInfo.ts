@@ -124,6 +124,7 @@ const handler: NextApiHandler = async (req, res) => {
           ],
           temperature: 0.5,
         });
+
         const promptRec = await Prompt.findOne({
           type: "resume",
           name: "summary",

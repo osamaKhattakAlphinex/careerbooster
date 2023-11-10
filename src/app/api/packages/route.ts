@@ -20,3 +20,16 @@ export async function POST(request: any) {
     );
   }
 }
+
+export async function GET(request: any) {
+  try {
+    await startDB();
+    const packages = await UserPackage.find();
+    return NextResponse.json({ success: true, packages }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { result: "Internal Server Error", success: false },
+      { status: 500 }
+    );
+  }
+}

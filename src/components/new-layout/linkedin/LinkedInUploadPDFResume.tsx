@@ -11,6 +11,7 @@ import {
 import Button from "../../utilities/form-elements/Button";
 import LinkedInSummary from "./LinkedInSummary";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 //Editable
 const loadFromLocalStorage = () => {
@@ -20,6 +21,7 @@ const loadFromLocalStorage = () => {
 };
 const LinkedInUploadPDFResume = () => {
   // local states
+  const router = useRouter();
   const [aboutMsgLoading, setAboutMsgLoading] = useState<boolean>(false); // msg loading for about section
   const [headlineMsgLoading, setHeadlineMsgLoading] = useState<boolean>(false); // msg loading for Headline  section
   const [fileError, setFileError] = useState<string>("");
@@ -136,19 +138,32 @@ const LinkedInUploadPDFResume = () => {
         },
       })
         .then(async (resp: any) => {
-          const res = await resp.json();
-          if (res.data && res.success) {
-            setStreamedAboutData(res.data);
-          } else {
-            setFileError("Something went wrong");
+          if (resp.ok) {
+            const reader = resp.body.getReader();
+            while (true) {
+              const { done, value } = await reader.read();
+
+              if (done) {
+                break;
+              }
+
+              const text = new TextDecoder().decode(value);
+              if (text) {
+                setAboutMsgLoading(false);
+                setStreamedAboutData((prev) => prev + text);
+              }
+            }
+            setAboutComplete(true);
           }
+          // const res = await resp.json();
+          // if (res.data && res.success) {
+          //   setStreamedAboutData(res.data);
+          // } else {
+          //   setFileError("Something went wrong");
+          // }
         })
         .catch((error) => {
           setFileError("Something went wrong");
-        })
-        .finally(() => {
-          setAboutMsgLoading(false);
-          setAboutComplete(true);
         });
     } else if (!linkedinFileName) {
       setFileError("PDF Resume / CV is Required");
@@ -224,30 +239,17 @@ const LinkedInUploadPDFResume = () => {
       console.error("Failed to copy text: ", error);
     }
   };
-  //Move File linkedin-temp To temp folder
-  // const moveToRegister = () => {
-  //   setFileError("");
-  //   if (linkedinContent) {
-  //     fetch("/api/linkedInBots/moveResumeToTempFolder", {
-  //       method: "POST",
-  //       body: JSON.stringify({ fileName }),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //       .then(async (resp: any) => {
-  //         const res = await resp.json();
-  //         if (res.success) {
-  //           router.replace(
-  //             `/register?firstName=${names.firstName}&lastName=${names.lastName}&email=${names.email}&file=${linkedinFileName}`
-  //           );
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         setFileError("Something went wrong");
-  //       });
-  //   }
-  // };
+  // Move File linkedin-temp To temp folder
+  const moveToRegister = () => {
+    setFileError("");
+    if (linkedinContent) {
+      router.replace(
+        `/register?firstName=${names.firstName}&lastName=${names.lastName}&email=${names.email}&file=${linkedinFileName}`
+      );
+    } else {
+      setFileError("Something went wrong");
+    }
+  };
   const UpdateGohighlevel = async ({
     userId,
     firstName,
@@ -333,7 +335,7 @@ const LinkedInUploadPDFResume = () => {
 
   return (
     <>
-      {headlineMsgLoading || aboutMsgLoading ? (
+      {!aboutComplete || aboutMsgLoading ? (
         refreshIconRotating
       ) : (
         <div className="flex gap-2 text-[#33FF00] font-extrabold text-5xl mb-4">
@@ -622,7 +624,7 @@ const LinkedInUploadPDFResume = () => {
             className={`mx-1 mt-8 p-3 text-lg my-2 bg-yellow-400 hover:bg-yellow-600  lg:w-8/12 lg:h-14 lg:mt-8 text-center rounded-full font-bold lg:text-xl text-black lg:py-3 lg:px-9 no-underline  ${
               buttonDisabled ? "bg-yellow-600" : "cursor-pointer"
             } `}
-            // onClick={moveToRegister}
+            onClick={moveToRegister}
             disabled={buttonDisabled}
           >
             Click here to experience the magic
