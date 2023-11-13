@@ -87,42 +87,12 @@ const Header = () => {
       // className={`navbar navbar-expand-lg fixed-top ${
       //   theme === "dark" ? "bg-dark" : "bg-white"
       // }`}
-      className={`navbar navbar-expand-lg fixed-top bg-hover-scroll on-over headroom headroom--top headroom--not-bottom`}
+      className={`navbar navbar-expand-lg fixed-top dark:!bg-[#11121C] bg-white on-over headroom headroom--top headroom--not-bottom`}
     >
       <div className="container">
         {/* <!-- Logo --> */}
 
-        <Link
-          className="navbar-brand"
-          href="/"
-          // style={{
-          //   width: "450px",
-          // }}
-        >
-          {/* {theme === "dark" ? (
-            <div className="flex justify-center items-center">
-              <Image
-                width={215}
-                height={72}
-                src="/assets/images/logo.png"
-                alt=""
-                className="w-70"
-              />
-            </div>
-          ) : (
-            <div className="flex justify-center items-center">
-              <Image
-                width={80}
-                height={74}
-                src="/trans-icon1.png"
-                alt="icon"
-                className="w-20 m-0"
-              />
-              <span className="ml-[-15px] text-gray-800 font-semibold">
-                CareerBooster
-              </span>
-            </div>
-          )} */}
+        <Link className="navbar-brand" href="/">
           <div className="flex justify-center items-center">
             <Image
               width={80}
@@ -135,8 +105,6 @@ const Header = () => {
               CareerBooster
             </span>
           </div>
-
-          {/* <img src="/assets/images/logo.png" alt="" className="w-70" /> */}
         </Link>
 
         {/* <!-- Navbar content --> */}
@@ -197,7 +165,7 @@ const Header = () => {
                         {userData.firstName + " " + userData.lastName}
                         <Link
                           href={role === "admin" ? "/admin" : "/dashboard"}
-                          className=" block px-4 py-2 text-sm no-underline theme-text-2 hover:bg-gray-600"
+                          className=" block px-4 py-2 text-sm no-underline theme-text-2 dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-0"
                         >
@@ -205,7 +173,7 @@ const Header = () => {
                         </Link>
                         <button
                           type="button"
-                          className=" block w-full px-4 py-2 text-left text-sm hover:bg-gray-600"
+                          className=" block w-full px-4 py-2 text-left text-sm dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-3"
                           onClick={() => signOut()}
@@ -292,7 +260,7 @@ const Header = () => {
                           {/* <!-- Active: "bg-gray-100 ", Not Active: "text-gray-700" --> */}
                           <Link
                             href={role === "admin" ? "/admin" : "/dashboard"}
-                            className=" block px-4 py-2 text-sm no-underline theme-text-2 hover:bg-gray-600"
+                            className=" block px-4 py-2 text-sm no-underline theme-text-2 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-0"
                           >
@@ -300,7 +268,7 @@ const Header = () => {
                           </Link>
                           <Link
                             href="/profile-review"
-                            className=" block px-4 py-2 text-sm no-underline theme-text-2 hover:bg-gray-600"
+                            className=" block px-4 py-2 text-sm no-underline theme-text-2 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-1"
                           >
@@ -308,7 +276,7 @@ const Header = () => {
                           </Link>
                           <button
                             type="button"
-                            className=" block w-full px-4 py-2 text-left text-sm hover:bg-gray-600"
+                            className=" block w-full px-4 py-2 text-left text-sm dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-3"
                             onClick={() => signOut()}
