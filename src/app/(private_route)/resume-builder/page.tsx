@@ -110,9 +110,10 @@ const ResumeBuilder = () => {
         },
       }),
     }).then(async (resp: any) => {
+      // console.log("response: " + resp);
       const res = await resp.json();
-      if (res.success && res?.data) {
-        const myJSON = JSON.parse(res.data);
+      if (res.success && res?.result) {
+        const myJSON = res.result.text;
         const basicObj = {
           ...myJSON,
           name: userData.firstName + " " + userData.lastName,
