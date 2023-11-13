@@ -353,12 +353,12 @@ const LinkedInUploadPDFResume = () => {
 
       {streamedHeadlineData || streamedAboutData ? (
         <div className=" my-3 w-full flex flex-col items-center">
-          <div className="lg:p-6 border-2 border-purple-600 rounded-2xl w-11/12 ">
+          <div className="padding-t sm:p-2 md:p-4 lg:p-6 border-2 border-purple-600 rounded-2xl w-11/12 ">
             <div className=" flex flex-col  md:py-4  gap-4 bg-black div-m lg:p-12 rounded-2xl">
               {/* Headline */}
               <h1 className="text-4xl flex items-center font-normal mb-4 text-white">
                 {/* <span className="text-yellow-400">{starIcon}</span> */}
-                <span className="text-center md:mt-4 md:ml-4 heading1 lg:text-left text-2xl uppercase font-bold">
+                <span className="text-center md:ml-4 lg:text-left text-2xl uppercase font-bold">
                   Your New LinkedIn Headline
                 </span>
               </h1>
@@ -591,6 +591,8 @@ const LinkedInUploadPDFResume = () => {
             onClick={() => {
               linkedinAbout(linkedinContent);
               setInstruction("");
+              window.scrollTo({ top: 50, behavior: "smooth" })
+
             }}
           >
             <svg
