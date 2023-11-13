@@ -9,7 +9,7 @@ import {
 } from "langchain/prompts";
 import { NextResponse } from "next/server";
 
-export async function POST(req: any, res: any) {
+export async function POST(req: any) {
   try {
     const body = await req.json();
 
