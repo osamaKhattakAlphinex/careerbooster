@@ -23,9 +23,6 @@ import TrainBot from "@/db/schemas/TrainBot";
 // };
 // This function can run for a maximum of 5 seconds
 // ...
-// export const config = {
-//   runtime: "edge",
-// };
 // export const runtime = "edge";
 const handler: NextApiHandler = async (req, res) => {
   try {
