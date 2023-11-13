@@ -50,43 +50,6 @@ const LinkedInUploadPDFResume = () => {
   const [isSummaryCopied, setIsSummaryCopied] = useState(false);
   const [isHeadlineEditing, setIsHeadlineEditing] = useState(false);
   const [isSummaryEditing, setIsSummaryEditing] = useState(false);
-  // const uploadFileToServer = async () => {
-  //   setFileError("");
-  //   setFileUploading(true);
-  //   setMsgLoading(true);
-  //   if (file) {
-  //     const body = new FormData();
-  //     body.append("file", file);
-
-  //     fetch("/api/fileUpload?type=linkedin-tool", {
-  //       method: "POST",
-  //       body,
-  //     })
-  //       .then(async (resp: any) => {
-  //         const res = await resp.json();
-  //         if (res.success) {
-  //           const uploadedFileName = res.fileName + "_" + file.name;
-  //           // setFileName(uploadedFileName);
-  //           linkedinHeadline(uploadedFileName);
-  //           linkedinAbout(uploadedFileName);
-
-  //           // router.replace("/welcome?step=1");
-  //           // router.replace("/register");
-  //           // setSuccessMsg("File has been uploaded!");
-  //         } else {
-  //           setFileError("Something went wrong");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         setFileError("Something went wrong");
-  //       })
-  //       .finally(() => {
-  //         setFileUploading(false);
-  //         setMsgLoading(false);
-  //         setUploadComplete(true);
-  //       });
-  //   }
-  // };
 
   const linkedinHeadline = async (linkedinContent: string) => {
     setStreamedHeadlineData("");
@@ -126,7 +89,7 @@ const LinkedInUploadPDFResume = () => {
     setAboutMsgLoading(true);
 
     if (linkedinFileName) {
-      fetch("/api/linkedInBots/linkedinAboutGenerator", {
+      fetch("/api/linkedinTool", {
         method: "POST",
         body: JSON.stringify({
           linkedinContent,
@@ -138,29 +101,35 @@ const LinkedInUploadPDFResume = () => {
         },
       })
         .then(async (resp: any) => {
-          if (resp.ok) {
-            const reader = resp.body.getReader();
-            while (true) {
-              const { done, value } = await reader.read();
+          const res = await resp.json();
+          // if (resp.ok) {
+          //   const reader = resp.body.getReader();
+          //   while (true) {
+          //     const { done, value } = await reader.read();
 
-              if (done) {
-                break;
-              }
+          //     if (done) {
+          //       break;
+          //     }
 
-              const text = new TextDecoder().decode(value);
-              if (text) {
-                setAboutMsgLoading(false);
-                setStreamedAboutData((prev) => prev + text);
-              }
-            }
-            setAboutComplete(true);
-          }
+          //     const text = new TextDecoder().decode(value);
+          //     if (text) {
+          //       setAboutMsgLoading(false);
+          //       setStreamedAboutData((prev) => prev + text);
+          //     }
+          //   }
+          //   setAboutComplete(true);
+          // }
           // const res = await resp.json();
           // if (res.data && res.success) {
           //   setStreamedAboutData(res.data);
           // } else {
           //   setFileError("Something went wrong");
           // }
+          setAboutMsgLoading(false);
+          console.clear();
+          console.log(res.result.text);
+          setStreamedAboutData(res.result.text);
+          setAboutComplete(true);
         })
         .catch((error) => {
           setFileError("Something went wrong");
