@@ -10758,6 +10758,7 @@ fieldset:disabled .btn {
 .focus-ring-dark {
   --gen-focus-ring-color: rgba(
     var(--gen-dark-rgb),
+    
     var(--gen-focus-ring-opacity)
   );
 }
