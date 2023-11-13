@@ -16,7 +16,7 @@ export async function POST(req: any, res: any) {
     if (body) {
       const { linkedinContent, option, aboutInstructions } = body;
 
-      let prompt = `Write a maximum of 100 characters copy for the “About Section” of my LinkedIn based on the data you have. Use the following instructions.
+      let prompt = `Write a maximum of 2000 characters copy for the “About Section” of my LinkedIn based on the data you have. Use the following instructions.
     
           - It should be detailed but compact, and engaging
     
