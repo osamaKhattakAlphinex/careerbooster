@@ -58,19 +58,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
 
   //useCallback in order to not call function again and again
   // const createProfileFromResume = useCallback(() => {
-<<<<<<< HEAD
-  //   if (register.scrappedContent && !userData.wizardCompleted) {
-  //     fetchBasicDataFromResume();
-  //     fetchEducationDataFromResume();
-  //     fetchExperienceDataFromResume();
-  //     fetchSkillsDataFromResume();
-  //   }
-  // }, []);
-
-=======
 
   // }, []);
->>>>>>> a5e4d9c41417caaad3e7e9194500f50894b5b69a
   const createProfileFromResume = () => {
     if (register.scrappedContent && !userData.wizardCompleted) {
       fetchBasicDataFromResume();
