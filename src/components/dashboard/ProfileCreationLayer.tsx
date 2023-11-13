@@ -47,7 +47,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const register = useSelector((state: any) => state.register);
   const resume = useSelector((state: any) => state.resume);
   const [showStuckError, setShowStuckError] = useState(false);
-  const [apiCallCount, setApiCallCount] = useState<number>(0);
+
   // useeffect to show stuck error to true after 2 minutes
   useEffect(() => {
     const t = setTimeout(() => {
@@ -57,14 +57,17 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   }, []);
 
   //useCallback in order to not call function again and again
-  const createProfileFromResume = useCallback(() => {
+  // const createProfileFromResume = useCallback(() => {
+
+  // }, []);
+  const createProfileFromResume = () => {
     if (register.scrappedContent && !userData.wizardCompleted) {
       fetchBasicDataFromResume();
       fetchEducationDataFromResume();
       fetchExperienceDataFromResume();
       fetchSkillsDataFromResume();
     }
-  }, []);
+  };
   // const createProfileFromResume = async () => {
   //   // await scrappResumeIfNotExist();
   //   if (register.scrappedContent) {
@@ -119,7 +122,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         body: JSON.stringify(formData),
       })
         .then(async (resp: any) => {
-          if (resp.status === 200) {
+          if (resp.success) {
             const res = await resp.json();
             if (res.success && res?.data) {
               try {
@@ -422,6 +425,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
 
   // laksjdflasjdfl
   const updateUser = async () => {
+    return;
     // make an object
     const obj = {
       firstName: register.stepOne.firstName,
