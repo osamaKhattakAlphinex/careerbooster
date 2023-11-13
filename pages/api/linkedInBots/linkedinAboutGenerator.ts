@@ -1,100 +1,119 @@
+import { ChatOpenAI } from "langchain/chat_models/openai";
+// import OpenAI from "openai";
+// import Prompt from "@/db/schemas/Prompt";
+// import startDB from "@/lib/db";
+import type { NextRequest, NextResponse } from "next/server";
+import { LLMChain } from "langchain/chains";
 import { NextApiHandler } from "next";
-import OpenAI from "openai";
+import { z } from "zod";
+import { StructuredOutputParser } from "langchain/output_parsers";
 import Prompt from "@/db/schemas/Prompt";
-import startDB from "@/lib/db";
 
+import {
+  ChatPromptTemplate,
+  HumanMessagePromptTemplate,
+  SystemMessagePromptTemplate,
+} from "langchain/prompts";
+import { PDFLoader } from "langchain/document_loaders/fs/pdf";
+import path from "path";
+import TrainBot from "@/db/schemas/TrainBot";
+
+// export const config = {
+//   runtime: "edge",
+// };
 // This function can run for a maximum of 5 seconds
-export const config = {
-  maxDuration: 300,
-};
 // ...
-
+// export const config = {
+//   runtime: "edge",
+// };
+// export const runtime = "edge";
 const handler: NextApiHandler = async (req, res) => {
-  if (req.body) {
-    const { linkedinContent, option, aboutInstructions } = req.body;
-    let prompt;
-    await startDB();
-    const promptRec = await Prompt.findOne({
-      type: "linkedinTool",
-      name: option,
-      active: true,
-    });
-    prompt = promptRec ? promptRec.value : "";
-    if (option === "aboutInstructions") {
-      prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
-    }
+  try {
+    const body = req.body;
 
-    // For LinkedIn Tool if file is uploaded then load content from that fiel
-    if (linkedinContent) {
-      // CREATING LLM MODAL
-      const openai = new OpenAI({
-        apiKey: process.env.OPENAI_API_KEY,
-      });
+    if (body) {
+      const { linkedinContent, option, aboutInstructions } = body;
+      // let prompt;
+      // await startDB();
+      // const promptRec = await Prompt?.findOne({
+      //   type: "linkedinTool",
+      //   name: option,
+      //   active: true,
+      // });
+      // prompt = promptRec ? promptRec.value : "";
+      // if (option === "aboutInstructions") {
+      //   prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
+      // }
+      // For LinkedIn Tool if file is uploaded then load content from that fiel
 
-      const input = `
+      let prompt = `Write a maximum of 100 characters copy for the “About Section” of my LinkedIn based on the data you have. Use the following instructions.
+
+      - It should be detailed but compact, and engaging
+
+      - Use relevant industry jargon as necessary. Make sure to provide a brief rundown of the main technical skills related to my job title.
+
+      - Hook the audience right away and make the first sentence count by showing passion.
+
+      - Provide a professional introduction explaining the present role and framing past job titles.
+
+      - Highlight successes and the services I can offer to potential clients.
+
+      - Include a call to action.
+
+      Just give me the answer not add any extra labels
+
+      pleas write this text the {"About Default Prompt"} in  last`;
+
+      if (linkedinContent) {
+        const model1 = new ChatOpenAI({
+          streaming: true,
+          modelName: "gpt-3.5-turbo",
+          callbacks: [
+            {
+              handleLLMNewToken(token) {
+                console.log(token);
+                res.write(token);
+              },
+            },
+          ],
+          temperature: 0.5,
+        });
+
+        const input = `
             This is the User data:
             ${linkedinContent}
 
-            This is the prompt: 
+            This is the prompt:
             ${prompt}
             `;
 
-      const response = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo", // v2
-        stream: true,
-        messages: [
-          {
-            role: "user",
-            content: input,
-          },
-        ],
-        temperature: 1,
-      });
+        const chatPrompt = ChatPromptTemplate.fromPromptMessages([
+          SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the User data of a person and helps Writing About for the person LinkedIn.
+            Following are the content of the resume (in JSON format):
+            JSON user/resume data: {userData}
 
-      // for await (const part of response) {
-      //   console.log(part.choices[0].delta.content);
-      //   // return res.status(200).json({
-      //   //   success: true,
-      //   //   data: part.choices[0].delta.content,
-      //   //   linkedinContent,
-      //   //   option,
-      //   //   aboutInstructions,
-      //   //   prompt,
-      //   // });
-      // }
-      // const resp = await chain4.call({ query: input });
+            `),
+          HumanMessagePromptTemplate.fromTemplate("{prompt}"),
+        ]);
+        const promptSummary = input;
 
-      // try {
+        const chainC = new LLMChain({
+          prompt: chatPrompt,
+          llm: model1,
+        });
+        await chainC.call({
+          userData: JSON.stringify(linkedinContent),
+          prompt: promptSummary,
+        });
 
-      // } catch (error) {
-      //   return res.status(400).json({
-      //     success: false,
-      //     error,
-      //     linkedinContent,
-      //     option,
-      //     aboutInstructions,
-      //     prompt,
-      //   });
-      // }
-      // res.setHeader("Content-Type", "text/event-stream");
-      // res.setHeader("Cache-Control", "no-cache");
-      // res.setHeader("Connection", "keep-alive");
-
-      for await (const part of response) {
-        const data = part.choices[0].delta.content;
-
-        if (data !== undefined) {
-          res.write(data);
-        }
+        res.end(); // Close  the stream
       }
-
-      res.end(); // Close the connection after the stream ends
     }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      msg: "something went wrong",
+    });
   }
-
-  return res.status(400).json({
-    success: false,
-    msg: "something went wrong",
-  });
 };
 export default handler;
