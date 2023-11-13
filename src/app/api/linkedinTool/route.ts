@@ -16,7 +16,6 @@ export async function POST(req: any) {
     if (body) {
       const { linkedinContent, option, aboutInstructions } = body;
 
-      // cut the linkedinContent 4000 characters only
       const content = linkedinContent.slice(0, 4000);
 
       let prompt = `Write a maximum of 2000 characters copy for the “About Section” of my LinkedIn based on the data you have. Use the following instructions.
