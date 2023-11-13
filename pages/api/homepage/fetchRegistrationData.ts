@@ -59,7 +59,6 @@ const handler: NextApiHandler = async (req, res) => {
             },
           ],
           temperature: 1,
-          max_tokens: 456,
         });
 
         if (trainBotData) {
