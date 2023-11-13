@@ -4,6 +4,7 @@ const nextConfig = {
 
   experimental: {
     serverActions: true,
+    runtime: "edge",
   },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.resolve.alias.canvas = false;

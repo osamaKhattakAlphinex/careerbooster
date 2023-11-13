@@ -309,7 +309,6 @@ const LinkedInUploadPDFResume = () => {
           setFileError("Something went wrong");
         });
     }
-    console.log("Dddddddddd");
   };
   useEffect(() => {
     const data = loadFromLocalStorage();
