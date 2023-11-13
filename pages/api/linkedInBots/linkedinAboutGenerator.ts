@@ -1,14 +1,12 @@
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { LLMChain } from "langchain/chains";
 import { NextApiHandler } from "next";
-import Prompt from "@/db/schemas/Prompt";
 
 import {
   ChatPromptTemplate,
   HumanMessagePromptTemplate,
   SystemMessagePromptTemplate,
 } from "langchain/prompts";
-import startDB from "@/lib/db";
 
 const handler: NextApiHandler = async (req, res) => {
   try {
@@ -16,17 +14,24 @@ const handler: NextApiHandler = async (req, res) => {
 
     if (body) {
       const { linkedinContent, option, aboutInstructions } = body;
-      let prompt;
-      await startDB();
-      const promptRec = await Prompt?.findOne({
-        type: "linkedinTool",
-        name: option,
-        active: true,
-      });
-      prompt = promptRec ? promptRec.value : "";
-      if (option === "aboutInstructions") {
-        prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
-      }
+
+      let prompt = `Write a maximum of 100 characters copy for the “About Section” of my LinkedIn based on the data you have. Use the following instructions.
+
+      - It should be detailed but compact, and engaging
+
+      - Use relevant industry jargon as necessary. Make sure to provide a brief rundown of the main technical skills related to my job title.
+
+      - Hook the audience right away and make the first sentence count by showing passion.
+
+      - Provide a professional introduction explaining the present role and framing past job titles.
+
+      - Highlight successes and the services I can offer to potential clients.
+
+      - Include a call to action.
+
+      Just give me the answer not add any extra labels
+
+      pleas write this text the {"About Default Prompt"} in  last`;
 
       if (linkedinContent) {
         const model1 = new ChatOpenAI({

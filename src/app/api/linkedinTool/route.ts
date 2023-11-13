@@ -17,7 +17,6 @@ export async function POST(req: any) {
 
     if (body) {
       const { linkedinContent, option, aboutInstructions } = body;
-<<<<<<< HEAD
       let prompt;
       await startDB();
       const promptRec = await Prompt?.findOne({
@@ -31,32 +30,7 @@ export async function POST(req: any) {
       }
 
       if (linkedinContent) {
-        let response;
-=======
-
-      // cut the linkedinContent 4000 characters only
-      const content = linkedinContent.slice(0, 4000);
-
-      let prompt = `Write a maximum of 2000 characters copy for the “About Section” of my LinkedIn based on the data you have. Use the following instructions.
-    
-          - It should be detailed but compact, and engaging
-    
-          - Use relevant industry jargon as necessary. Make sure to provide a brief rundown of the main technical skills related to my job title.
-    
-          - Hook the audience right away and make the first sentence count by showing passion.
-    
-          - Provide a professional introduction explaining the present role and framing past job titles.
-    
-          - Highlight successes and the services I can offer to potential clients.
-    
-          - Include a call to action.
-    
-          Just give me the answer not add any extra labels
-    
-          pleas write this text the {"About Default Prompt"} in  last`;
-
-      if (content) {
->>>>>>> master
+        let response: any = new NextResponse();
         const model1 = new ChatOpenAI({
           streaming: true,
           modelName: "gpt-3.5-turbo",
@@ -71,7 +45,7 @@ export async function POST(req: any) {
         });
 
         const input = `This is the User data:
-                ${content}
+                ${linkedinContent}
     
                 This is the prompt:
                 ${prompt}`;
@@ -89,7 +63,7 @@ export async function POST(req: any) {
           llm: model1,
         });
         const output = await chainC.call({
-          userData: JSON.stringify(content),
+          userData: JSON.stringify(linkedinContent),
           prompt: promptSummary,
         });
 

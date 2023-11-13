@@ -125,9 +125,8 @@ const LinkedInUploadPDFResume = () => {
           // } else {
           //   setFileError("Something went wrong");
           // }
+
           setAboutMsgLoading(false);
-          console.clear();
-          console.log(res.result.text);
           setStreamedAboutData(res.result.text);
           setAboutComplete(true);
         })
