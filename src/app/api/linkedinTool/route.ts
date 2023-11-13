@@ -16,6 +16,9 @@ export async function POST(req: any) {
     if (body) {
       const { linkedinContent, option, aboutInstructions } = body;
 
+      // cut the linkedinContent 4000 characters only
+      const content = linkedinContent.slice(0, 4000);
+
       let prompt = `Write a maximum of 2000 characters copy for the “About Section” of my LinkedIn based on the data you have. Use the following instructions.
     
           - It should be detailed but compact, and engaging
@@ -34,7 +37,7 @@ export async function POST(req: any) {
     
           pleas write this text the {"About Default Prompt"} in  last`;
 
-      if (linkedinContent) {
+      if (content) {
         const model1 = new ChatOpenAI({
           streaming: true,
           modelName: "gpt-3.5-turbo",
@@ -50,7 +53,7 @@ export async function POST(req: any) {
         });
 
         const input = `This is the User data:
-                ${linkedinContent}
+                ${content}
     
                 This is the prompt:
                 ${prompt}`;
@@ -68,7 +71,7 @@ export async function POST(req: any) {
           llm: model1,
         });
         const output = await chainC.call({
-          userData: JSON.stringify(linkedinContent),
+          userData: JSON.stringify(content),
           prompt: promptSummary,
         });
 
