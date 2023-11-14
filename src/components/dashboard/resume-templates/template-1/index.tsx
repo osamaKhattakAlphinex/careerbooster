@@ -1032,69 +1032,64 @@ const ResumeTemplate1 = ({
                       onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                     >
                       {rec?.achievements && (
-                        <ul className="pl-0 flex flex-col borer-2 gap-1 text-sm">
+                        <ul
+                          className="pl-0 flex flex-col gap-1 text-sm"
+                          onDragOver={(e) => e.preventDefault()}
+                        >
                           {rec?.achievements.map(
-                            (achivement: any, ind: number) => (
+                            (achievement: any, ind: number) => (
                               <li
-                                className="list-disc hover:border-dashed hover:border-gray-500 hover:border-2 hover:shadow-md relative parent hover:bg-gray-100"
+                                className="list-disc border-2 hover:border-dashed hover:border-gray-500 hover:border-2 hover:shadow-md relative parent hover:bg-gray-100"
                                 key={ind}
-                                onDragStart={(e) => {
+                                onDragStart={(e) =>
                                   e.dataTransfer.setData(
                                     "text/plain",
-                                    ind.toString()
-                                  );
-                                }}
-                                onDragOver={(e) => e.preventDefault()}
+                                    `${i}-${ind}`
+                                  )
+                                }
                                 onDrop={(e) => {
-                                  const draggedIndex = parseInt(
-                                    e.dataTransfer.getData("text/plain")
-                                  );
+                                  const [
+                                    draggedPrimaryIndex,
+                                    draggedSecondaryIndex,
+                                  ] = e.dataTransfer
+                                    .getData("text/plain")
+                                    .split("-")
+                                    .map((index) => parseInt(index));
 
-                                  // Assuming 'i' is the index of the work experience where the drop occurs
-                                  const droppedIndex = i;
+                                  
+                                  let updatedItems = [
+                                    ...resume.workExperienceArray,
+                                  ];
 
-                                  const workExperienceArray =
-                                    resume?.workExperienceArray.map(
-                                      (rec: any, index: number) => {
-                                        if (index === droppedIndex) {
-                                          const updatedAchievements =
-                                            rec.achievements.slice(); // Create a copy of achievements array
-                                          const draggedAchievement =
-                                            updatedAchievements[draggedIndex];
+                                  // Ensure the drag and drop is within the same primary item
+                                  if (draggedPrimaryIndex === i) {
+                                   
 
-                                          // Swap the achievements at draggedIndex and droppedIndex
-                                          updatedAchievements[draggedIndex] =
-                                            updatedAchievements[i];
-                                          updatedAchievements[i] =
-                                            draggedAchievement;
-
-                                          return {
-                                            ...rec,
-                                            achievements: updatedAchievements,
-                                          };
-                                        }
-                                        return rec;
-                                      }
+                                    const draggedItem = updatedItems[
+                                      draggedPrimaryIndex
+                                    ]?.achievements?.splice(
+                                      draggedSecondaryIndex,
+                                      1
+                                    )[0];
+                                    updatedItems[i]?.achievements?.splice(
+                                      ind,
+                                      0,
+                                      draggedItem
                                     );
 
-                                  dispatch(
-                                    setWorkExperienceArray({
-                                      workExperienceArray: workExperienceArray,
-                                    })
-                                  );
-
-                                  // Additional logic for saving to the database if needed
-                                  // saveResumeToDB({
-                                  //   ...resume,
-                                  //   workExperienceArray: workExperienceArray,
-                                  // });
+                                    dispatch(
+                                      setWorkExperienceArray({
+                                        workExperienceArray: updatedItems,
+                                      })
+                                    );
+                                  }
                                 }}
                                 draggable
                               >
                                 <EditableField
                                   type="textarea"
                                   rows={2}
-                                  value={achivement}
+                                  value={achievement}
                                   onSave={(value: string) => {
                                     let updatedExp =
                                       resume?.workExperienceArray.map(
@@ -1102,7 +1097,7 @@ const ResumeTemplate1 = ({
                                           // get the index of the work experience
                                           if (index === i) {
                                             let updatedAchievements =
-                                              exp?.achievements.map(
+                                              exp?.achievements?.map(
                                                 (ach: any, achInd: number) => {
                                                   if (achInd === ind) {
                                                     return value;
