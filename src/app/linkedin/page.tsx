@@ -1,6 +1,6 @@
 import LinkedInToolNew from "@/components/new-layout/linkedin/LinkedInToolNew";
 import { Metadata } from "next";
-import LinedInCard from "@/components/new-layout/linkedin/LinkedInCard";
+
 export const metadata: Metadata = {
   title: "CareerBooster.AI-linkedin",
   description:

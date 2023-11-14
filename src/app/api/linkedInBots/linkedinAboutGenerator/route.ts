@@ -1,11 +1,5 @@
 import OpenAI from "openai";
-import { LLMChain } from "langchain/chains";
 import Prompt from "@/db/schemas/Prompt";
-import {
-  ChatPromptTemplate,
-  HumanMessagePromptTemplate,
-  SystemMessagePromptTemplate,
-} from "langchain/prompts";
 import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import { OpenAIStream, StreamingTextResponse } from "ai";
