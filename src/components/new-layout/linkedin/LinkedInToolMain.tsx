@@ -104,7 +104,7 @@ const LinkedInToolMain = () => {
         <p className="text-md sm:text-sm md:text-md lg:text-lg">
           Keyword-Optimized, Captivating & Under 30 Seconds!
         </p>
-        <h3 className="py-2 md:text-[40px] text-[24px] text-center lg:font-bold mt-3">
+        <h1 className="py-2 md:text-[40px] text-[24px] text-center lg:font-bold mt-3">
           Free{" "}
           <span className="py-2 md:text-[40px] text-[24px] font-bold bg-clip-text text-transparent bg-gradient-to-r to-violet-500 from-fuchsia-500">
             AI LinkedIn
@@ -113,15 +113,15 @@ const LinkedInToolMain = () => {
           <h5 className="pt-3 padding-p md:text-[40px] text-[24px] text-center lg:font-bold">
             Achieve Top Rankings in Recruiter
           </h5>
-          <h5 className="md:text-[40px] text-[24px] text-center lg:font-bold ">
+          <h5 className="md:text-[40px] text-[24px] w-full text-center lg:font-bold ">
             Searches and Secure More Interviews!
           </h5>
-        </h3>
-        <h5 className="mt-2 text-lg padding-m lg:text-2xl text-center lg:mt-3 leading-7 font-normal">
+        </h1>
+        <p className="text-md sm:text-sm md:text-md lg:text-lg">
           Simply Upload your Resume or LinkedIn Profile in PDF. Receive results
           perfectly tailored for you — or we{"'"}ll compensate you $1000 if we
           waste your time with irrelevant outcomes.
-        </h5>
+        </p>
         <div className="mt-11 flex justify-center md:mt-11">
           <label className="h-16 w-84 lg:h-16 lg:w-84 py-3 cursor-pointer px-3 md:px-6 rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
             <input

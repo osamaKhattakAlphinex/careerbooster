@@ -207,7 +207,29 @@ const ResumeTemplate1 = ({
       professionalSkills: updatedItems,
     });
   };
+  //Reorder Redux handleDropExperience array with drag-drop
+  const handleDropExperience = (e: any, i: number) => {
+    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+    const updatedItems = [...resume?.workExperienceArray];
+    // Swap the positions of the dragged item and the target item.
+    [updatedItems[draggedIndex], updatedItems[i]] = [
+      updatedItems[i],
+      updatedItems[draggedIndex],
+    ];
+    console.log("data", updatedItems);
 
+    dispatch(
+      setWorkExperienceArray({
+        ...resume,
+        workExperienceArray: updatedItems,
+      })
+    );
+    saveResumeToDB({
+      ...resume,
+      professionalSkills: updatedItems,
+    });
+  };
+  
   return (
     <div className="w-full first-page text-gray-900">
       <div className="flex">
@@ -896,7 +918,18 @@ const ResumeTemplate1 = ({
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
-                  <div key={i}>
+                  <div
+                    key={i}
+                    className="hover:border-dashed hover:border-gray-500 hover:border-2"
+                    onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
+                    onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
+                    onDragStart={(e) =>
+                      e.dataTransfer.setData("text", i.toString())
+                    }
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => handleDropExperience(e, i)}
+                    draggable
+                  >
                     <h2
                       className="hover:shadow-md hover:bg-gray-100"
                       style={{
@@ -1026,65 +1059,18 @@ const ResumeTemplate1 = ({
                         />
                       </span>
                     </h2>
-                    <div
-                      className="p-4"
-                      onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
-                      onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
-                    >
+                    <div className="p-4">
                       {rec?.achievements && (
                         <ul
                           className="pl-0 flex flex-col gap-1 text-sm"
-                          onDragOver={(e) => e.preventDefault()}
+                         
                         >
                           {rec?.achievements.map(
                             (achievement: any, ind: number) => (
                               <li
-                                className="list-disc border-2 hover:border-dashed hover:border-gray-500 hover:border-2 hover:shadow-md relative parent hover:bg-gray-100"
+                                className="list-disc hover:border-dashed hover:border-gray-500 hover:border-2 hover:shadow-md relative parent hover:bg-gray-100"
                                 key={ind}
-                                onDragStart={(e) =>
-                                  e.dataTransfer.setData(
-                                    "text/plain",
-                                    `${i}-${ind}`
-                                  )
-                                }
-                                onDrop={(e) => {
-                                  const [
-                                    draggedPrimaryIndex,
-                                    draggedSecondaryIndex,
-                                  ] = e.dataTransfer
-                                    .getData("text/plain")
-                                    .split("-")
-                                    .map((index) => parseInt(index));
-
-                                  
-                                  let updatedItems = [
-                                    ...resume.workExperienceArray,
-                                  ];
-
-                                  // Ensure the drag and drop is within the same primary item
-                                  if (draggedPrimaryIndex === i) {
-                                   
-
-                                    const draggedItem = updatedItems[
-                                      draggedPrimaryIndex
-                                    ]?.achievements?.splice(
-                                      draggedSecondaryIndex,
-                                      1
-                                    )[0];
-                                    updatedItems[i]?.achievements?.splice(
-                                      ind,
-                                      0,
-                                      draggedItem
-                                    );
-
-                                    dispatch(
-                                      setWorkExperienceArray({
-                                        workExperienceArray: updatedItems,
-                                      })
-                                    );
-                                  }
-                                }}
-                                draggable
+                                
                               >
                                 <EditableField
                                   type="textarea"
