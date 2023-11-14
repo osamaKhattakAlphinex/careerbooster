@@ -87,7 +87,7 @@ const Header = () => {
       // className={`navbar navbar-expand-lg fixed-top ${
       //   theme === "dark" ? "bg-dark" : "bg-white"
       // }`}
-      className={`navbar navbar-expand-lg fixed-top dark:!bg-[#11121C] bg-white on-over headroom headroom--top headroom--not-bottom`}
+      className={`navbar navbar-expand-lg fixed-top dark:!bg-[#11121C] bg-white on-over headroom headroom--top headroom--not-bottom `}
     >
       <div className="container">
         {/* <!-- Logo --> */}
@@ -99,9 +99,9 @@ const Header = () => {
               height={74}
               src="/trans-icon1.png"
               alt="icon"
-              className="w-20 m-0"
+              className="lg:w-[80px] w-[60px] m-0"
             />
-            <span className="ml-[-15px] logo-text font-semibold">
+            <span className="lg:ml-[-15px] logo-text font-semibold">
               CareerBooster
             </span>
           </div>
