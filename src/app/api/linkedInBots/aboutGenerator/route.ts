@@ -8,10 +8,14 @@ import { LLMChain } from "langchain/chains";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import Prompt from "@/db/schemas/Prompt";
 import TrainBot from "@/db/schemas/TrainBot";
+import { NextResponse } from "next/server";
 
-const handler: NextApiHandler = async (req, res) => {
+export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const dynamic = "force-dynamic";
+
+export async function POST(req: any) {
   try {
-    const reqBody = JSON.parse(req.body);
+    const reqBody = await req.json();
     const userData = reqBody.userData;
     const trainBotData = reqBody.trainBotData;
 
@@ -27,13 +31,13 @@ const handler: NextApiHandler = async (req, res) => {
     const model = new ChatOpenAI({
       streaming: true,
       modelName: "gpt-3.5-turbo",
-      callbacks: [
-        {
-          handleLLMNewToken(token) {
-            res.write(token);
-          },
-        },
-      ],
+      //   callbacks: [
+      //     {
+      //       handleLLMNewToken(token) {
+      //         res.write(token);
+      //       },
+      //     },
+      //   ],
       temperature: 1,
     });
 
@@ -54,23 +58,33 @@ const handler: NextApiHandler = async (req, res) => {
       prompt,
     });
 
+    try {
+      if (trainBotData) {
+        const obj = {
+          type: "linkedin.generateAbout",
+          input: prompt,
+          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+          idealOutput: "",
+          status: "pending",
+          userEmail: trainBotData.userEmail,
+          fileAddress: trainBotData.fileAddress,
+          Instructions: `Generate LinkedIn About for ${trainBotData.userEmail}`,
+        };
+
+        await TrainBot.create({ ...obj });
+      }
+    } catch (error) {}
     // make a trainBot entry
-    const obj = {
-      type: "linkedin.generateAbout",
-      input: prompt,
-      output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-      idealOutput: "",
-      status: "pending",
-      userEmail: trainBotData.userEmail,
-      fileAddress: trainBotData.fileAddress,
-      Instructions: `Generate LinkedIn About for ${trainBotData.userEmail}`,
-    };
 
-    await TrainBot.create({ ...obj });
-
-    res.end();
+    return NextResponse.json(
+      { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+      { status: 200 }
+    );
+    // res.end();
   } catch (error) {
-    return res.status(500).json({ success: false, error });
+    return NextResponse.json(
+      { result: "something went wrong", success: false },
+      { status: 404 }
+    );
   }
-};
-export default handler;
+}

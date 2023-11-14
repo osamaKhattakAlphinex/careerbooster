@@ -1,7 +1,6 @@
 import { NextApiHandler } from "next";
 import startDB from "@/lib/db";
 import User from "@/db/schemas/User";
-// import UserPackage from "@/db/schemas/UserPackage";
 
 const handler: NextApiHandler = async (req, res) => {
   const email = req?.query?.email;
@@ -13,7 +12,6 @@ const handler: NextApiHandler = async (req, res) => {
 
   const user = await User.findOne({ email: email }).select("-password");
 
-  
   if (!user) {
     return res.status(404).json({ error: "User not found" });
   }
