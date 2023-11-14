@@ -192,13 +192,6 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
           !editPopUpModel ? "hidden" : "flex"
         }`}
       >
-<<<<<<< HEAD
-        <div className="relative p-4 w-full max-w-2xl max-h-full ">
-          <div className="relative border-2 border-gray-900 py-4 rounded-lg shadow  dark:bg-gray-800 light:bg-white px-10 sm:p-5">
-            <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white ">
-                Update Package
-=======
         <div className="relative p-4 w-full max-w-2xl max-h-full">
           {/* <!-- Modal content --> */}
           <div className="relative p-4 rounded-lg shadow dark:!border-gray-900 border-white dark:!bg-gray-800 bg-white">
@@ -206,7 +199,6 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
             <div className="flex justify-between items-center pb-4 mb-4  pt-5rounded-t border-b sm:mb-5 dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Update Product
->>>>>>> osama
               </h3>
               <button
                 type="button"
