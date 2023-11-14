@@ -29,8 +29,9 @@ export async function POST(req: any) {
         prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
       }
 
-      if (linkedinContent) {
-        let response: any = new NextResponse();
+      const content = linkedinContent.slice(0, 4000);
+
+      if (content) {
         const model1 = new ChatOpenAI({
           streaming: true,
           modelName: "gpt-3.5-turbo",
