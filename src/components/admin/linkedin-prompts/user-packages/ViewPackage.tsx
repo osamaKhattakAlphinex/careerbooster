@@ -81,7 +81,6 @@ const ViewPackage = ({}) => {
           </Link>
         </div>
 
-<<<<<<< HEAD
         <div className="flex flex-col gap-2 items-center justify-center">
           <div className=" p-8 flex flex-col gap-2 border w-11/12">
             <div className="w-100 flex flex-row justify-between">
@@ -126,66 +125,6 @@ const ViewPackage = ({}) => {
                           <th
                             scope="row"
                             className="px-4 py-3 font-medium whitespace-nowrap"
-=======
-          {/* Table */}
-          <div className="">
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-              <table className="pt-10 border-collapse w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-[16px] text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                    <th scope="col" className="px-4 py-4">
-                      Title
-                    </th>
-                    <th scope="col" className="px-4 py-3">
-                      Package Name
-                    </th>
-                    <th scope="col" className="px-4 py-3">
-                      Category
-                    </th>
-                    <th scope="col" className="px-4 py-3">
-                      Resume Generation
-                    </th>
-                    <th scope="col" className="px-4 py-3">
-                      Price
-                    </th>
-                    <th scope="col" className="px-4 py-3 text-center">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className=" bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th
-                      scope="row"
-                      className="px-4 py-3 font-medium whitespace-nowrap"
-                    >
-                      Apple iMac 27&#34;
-                    </th>
-                    <td className="px-4 py-3">PC</td>
-                    <td className="px-4 py-3">Apple</td>
-                    <td className="px-4 py-3 max-w-[12rem] truncate">
-                      What is a product description? A product description
-                      describes a product.
-                    </td>
-                    <td className="px-4 py-3">$2999</td>
-                    <td className="px-4 py-3 flex items-center justify-end">
-                      <ul
-                        className="py-1 text-sm flex"
-                        aria-labelledby="apple-imac-27-dropdown-button"
-                      >
-                        <li>
-                          <UpdatePackage />
-                        </li>
-                        <li>
-                          <ReadPackage />
-                        </li>
-                        <li>
-                          <button
-                            type="button"
-                            data-modal-target="deleteModal"
-                            data-modal-toggle="deleteModal"
-                            className="flex w-full items-center py-2 pr-2 dark:hover:text-[#e6f85e] hover:text-blue-400"
->>>>>>> 82c38d477fa4c28eb561e37450eb0bf0a9db4866
                           >
                             {pckg.title}
                           </th>
