@@ -3,10 +3,15 @@ import OpenAI from "openai";
 import Prompt from "@/db/schemas/Prompt";
 import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
+import { OpenAIStream, StreamingTextResponse } from "ai";
 
 // This function can run for a maximum of 5 seconds
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export async function POST(req: any) {
   try {
@@ -22,24 +27,10 @@ export async function POST(req: any) {
         active: true,
       });
       prompt = promptRec ? promptRec.value : "";
+
       // For LinkedIn Toll  if file is uploaded then load content from that fiel
       if (content) {
-        // load file
-        // const dir = path.join(
-        //   process.cwd() + "/public",
-        //   "/files",
-        //   `/linkedin-temp`
-        // );
-        // const loader = new PDFLoader(`${dir}/${fileName}`);
-        // const docs = await loader.load();
-
-        // let contentTxt = docs.map((doc: any) => doc.pageContent);
-        // const content = contentTxt.join(" ");
-
         // CREATING LLM MODAL
-        const openai = new OpenAI({
-          apiKey: process.env.OPENAI_API_KEY,
-        });
 
         const input = `
             This is the User data:
@@ -48,30 +39,26 @@ export async function POST(req: any) {
             ${prompt}
             `;
 
-        try {
-          const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo", // v2
-            messages: [
-              {
-                role: "user",
-                content: input,
-              },
-            ],
-            temperature: 1,
-            max_tokens: 456,
-          });
+        const response: any = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo", // v2
+          stream: true,
+          messages: [
+            {
+              role: "user",
+              content: input,
+            },
+          ],
+        });
 
-          // const resp = await chain4.call({ query: input });
-          return NextResponse.json(
-            { result: response.choices[0].message.content, success: true },
-            { status: 200 }
-          );
-        } catch (error) {
-          return NextResponse.json(
-            { result: error, success: false },
-            { status: 400 }
-          );
-        }
+        // const resp = await chain4.call({ query: input });
+        // return NextResponse.json(
+        //   { result: response.choices[0].message.content, success: true },
+        //   { status: 200 }
+        // );
+        // Convert the response into a friendly text-stream
+        const stream = OpenAIStream(response);
+        // Respond with the stream
+        return new StreamingTextResponse(stream);
       }
     }
   } catch (error) {

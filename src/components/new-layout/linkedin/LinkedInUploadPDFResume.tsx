@@ -54,7 +54,7 @@ const LinkedInUploadPDFResume = () => {
   const linkedinHeadline = async (linkedinContent: string) => {
     setStreamedHeadlineData("");
     setFileError("");
-    setHeadlineMsgLoading(true);
+    // setHeadlineMsgLoading(true);
     if (linkedinContent) {
       fetch("/api/linkedInBots/linkedinHeadlineGenerator", {
         method: "POST",
@@ -64,13 +64,24 @@ const LinkedInUploadPDFResume = () => {
         },
       })
         .then(async (resp: any) => {
-          const res = await resp.json();
-          if (res.success) {
-            setStreamedHeadlineData(res.result);
-            setHeadlineMsgLoading(false);
+          if (resp.ok) {
+            const reader = resp.body.getReader();
+
+            while (true) {
+              const { done, value } = await reader.read();
+
+              if (done) {
+                break;
+              }
+
+              const text = new TextDecoder().decode(value);
+
+              if (text) {
+                setHeadlineMsgLoading(false);
+                setStreamedHeadlineData((prev) => prev + text);
+              }
+            }
             setHeadlineComplete(true);
-          } else {
-            setFileError("Something went wrong");
           }
         })
         .catch((error) => {
@@ -99,7 +110,6 @@ const LinkedInUploadPDFResume = () => {
         },
       })
         .then(async (resp: any) => {
-          // const res = await resp.json();
           if (resp.ok) {
             const reader = resp.body.getReader();
             while (true) {
@@ -117,16 +127,6 @@ const LinkedInUploadPDFResume = () => {
             }
             setAboutComplete(true);
           }
-          // const res = await resp.json();
-          // if (res.data && res.success) {
-          //   setStreamedAboutData(res.data);
-          // } else {
-          //   setFileError("Something went wrong");
-          // }
-
-          // setAboutMsgLoading(false);
-          // setStreamedAboutData(res.result.text);
-          // setAboutComplete(true);
         })
         .catch((error) => {
           setFileError("Something went wrong");
