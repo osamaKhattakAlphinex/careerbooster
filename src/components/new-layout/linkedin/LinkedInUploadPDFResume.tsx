@@ -99,24 +99,24 @@ const LinkedInUploadPDFResume = () => {
         },
       })
         .then(async (resp: any) => {
-          const res = await resp.json();
-          // if (resp.ok) {
-          //   const reader = resp.body.getReader();
-          //   while (true) {
-          //     const { done, value } = await reader.read();
+          // const res = await resp.json();
+          if (resp.ok) {
+            const reader = resp.body.getReader();
+            while (true) {
+              const { done, value } = await reader.read();
 
-          //     if (done) {
-          //       break;
-          //     }
+              if (done) {
+                break;
+              }
 
-          //     const text = new TextDecoder().decode(value);
-          //     if (text) {
-          //       setAboutMsgLoading(false);
-          //       setStreamedAboutData((prev) => prev + text);
-          //     }
-          //   }
-          //   setAboutComplete(true);
-          // }
+              const text = new TextDecoder().decode(value);
+              if (text) {
+                setAboutMsgLoading(false);
+                setStreamedAboutData((prev) => prev + text);
+              }
+            }
+            setAboutComplete(true);
+          }
           // const res = await resp.json();
           // if (res.data && res.success) {
           //   setStreamedAboutData(res.data);
@@ -124,9 +124,9 @@ const LinkedInUploadPDFResume = () => {
           //   setFileError("Something went wrong");
           // }
 
-          setAboutMsgLoading(false);
-          setStreamedAboutData(res.result.text);
-          setAboutComplete(true);
+          // setAboutMsgLoading(false);
+          // setStreamedAboutData(res.result.text);
+          // setAboutComplete(true);
         })
         .catch((error) => {
           setFileError("Something went wrong");
