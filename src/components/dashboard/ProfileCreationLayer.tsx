@@ -124,9 +124,9 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         .then(async (resp: any) => {
           if (resp.success) {
             const res = await resp.json();
-            if (res.success && res?.data) {
+            if (res.success && res?.result) {
               try {
-                const data = JSON.parse(res?.data);
+                const data = res.result;
                 dispatch(setScrapped({ basic: true }));
                 dispatch(setScrapping({ basic: false }));
                 dispatch(
@@ -401,9 +401,9 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         .then(async (resp: any) => {
           const res = await resp.json();
 
-          if (res.success && res?.data) {
+          if (res.success && res?.result) {
             try {
-              const data = JSON.parse(res?.data);
+              const data = await res.result;
               dispatch(setScrapped({ skills: true }));
               dispatch(setScrapping({ skills: false }));
               dispatch(setStepSix({ list: data }));
