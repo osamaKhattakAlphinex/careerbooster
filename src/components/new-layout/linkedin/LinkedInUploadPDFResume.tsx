@@ -89,6 +89,7 @@ const LinkedInUploadPDFResume = () => {
     setAboutMsgLoading(true);
 
     if (linkedinFileName) {
+      console.log("linkedin: ------------" + linkedinContent);
       fetch("/api/linkedinTool", {
         method: "POST",
         body: JSON.stringify({
@@ -558,8 +559,7 @@ const LinkedInUploadPDFResume = () => {
             onClick={() => {
               linkedinAbout(linkedinContent);
               setInstruction("");
-              window.scrollTo({ top: 50, behavior: "smooth" })
-
+              window.scrollTo({ top: 50, behavior: "smooth" });
             }}
           >
             <svg

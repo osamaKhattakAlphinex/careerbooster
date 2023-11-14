@@ -13,7 +13,8 @@ import { ChatOpenAI } from "langchain/chat_models/openai";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import path from "path";
 import TrainBot from "@/db/schemas/TrainBot";
-
+export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const dynamic = "force-dynamic";
 export async function POST(req: any) {
   if (req) {
     const reqBody = await req.json();

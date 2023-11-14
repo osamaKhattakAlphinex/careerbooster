@@ -46,7 +46,7 @@ export async function POST(req: any) {
         });
 
         const input = `This is the User data:
-                ${linkedinContent}
+                ${content}
     
                 This is the prompt:
                 ${prompt}`;
@@ -64,7 +64,7 @@ export async function POST(req: any) {
           llm: model1,
         });
         const output = await chainC.call({
-          userData: JSON.stringify(linkedinContent),
+          userData: JSON.stringify(content),
           prompt: promptSummary,
         });
 

@@ -12,7 +12,8 @@ export const config = {
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.body) {
-    const content = req.body.linkedinContent;
+    const content = req.body.linkedinContent.slice(0, 4000);
+
     let prompt;
     await startDB();
     const promptRec = await Prompt.findOne({
