@@ -13,7 +13,6 @@ import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 
 import { RetrievalQAChain } from "langchain/chains";
-import TrainBot from "@/db/schemas/TrainBot";
 import { NextResponse } from "next/server";
 
 // PROMPT
@@ -23,6 +22,7 @@ import { NextResponse } from "next/server";
 // based on the provided data about user and job description write an amazing cover letter.
 
 // The answer must be formatted and returned as HTML
+
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
@@ -33,18 +33,14 @@ export async function POST(req: any) {
     const userData = reqBody.userData;
     const email = reqBody.email;
     const file = reqBody.file;
-    const jobDescription = reqBody.jobDescription;
-    const trainBotData = reqBody.trainBotData;
 
     // fetch prompt from db
     const promptRec = await Prompt.findOne({
-      type: "email",
-      name: "emailWriter",
+      type: "review",
+      name: "reviewResume",
       active: true,
     });
-    const promptDB = promptRec.value;
-
-    const prompt = promptDB.replace("{{jobDescription}}", jobDescription);
+    const prompt = promptRec.value;
 
     // CREATING LLM MODAL
     const model = new ChatOpenAI({
@@ -87,7 +83,7 @@ export async function POST(req: any) {
     } else {
       // this will run for both TYPES aiResume and profile
       const chatPrompt = ChatPromptTemplate.fromPromptMessages([
-        SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing Personalized Email for the person.
+        SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and give suggestions, tips to improve the resume.
           Following are the content of the resume (in JSON format): 
           JSON user/resume data: {userData}
           `),
@@ -98,33 +94,15 @@ export async function POST(req: any) {
         llm: model,
       });
 
-      const resp = await chainB.call({
+      await chainB.call({
         userData: JSON.stringify(userData),
         prompt,
       });
 
-      // make a trainBot entry
-      try {
-        if (trainBotData) {
-          const obj = {
-            type: "email.followupSequence",
-            input: prompt,
-            output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-            idealOutput: "",
-            status: "pending",
-            userEmail: trainBotData.userEmail,
-            fileAddress: trainBotData.fileAddress,
-            Instructions: `Email Followup Sequence for ${trainBotData.userEmail}`,
-          };
-
-          await TrainBot.create({ ...obj });
-        }
-      } catch (error) {}
-
-      return NextResponse.json(
-        { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
-        { status: 200 }
-      );
+      //    return NextResponse.json(
+      //      { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+      //      { status: 200 }
+      //    );
       //   res.end();
     }
   } catch (error) {

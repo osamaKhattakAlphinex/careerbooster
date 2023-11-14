@@ -16,13 +16,6 @@ import { RetrievalQAChain } from "langchain/chains";
 import TrainBot from "@/db/schemas/TrainBot";
 import { NextResponse } from "next/server";
 
-// PROMPT
-// Here is the Job description:
-// {{jobDescription}}
-
-// based on the provided data about user and job description write an amazing cover letter.
-
-// The answer must be formatted and returned as HTML
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
@@ -33,13 +26,14 @@ export async function POST(req: any) {
     const userData = reqBody.userData;
     const email = reqBody.email;
     const file = reqBody.file;
+    const resumeId = reqBody.resumeId;
     const jobDescription = reqBody.jobDescription;
     const trainBotData = reqBody.trainBotData;
 
     // fetch prompt from db
     const promptRec = await Prompt.findOne({
-      type: "email",
-      name: "emailWriter",
+      type: "bid",
+      name: "consulting",
       active: true,
     });
     const promptDB = promptRec.value;
@@ -87,7 +81,7 @@ export async function POST(req: any) {
     } else {
       // this will run for both TYPES aiResume and profile
       const chatPrompt = ChatPromptTemplate.fromPromptMessages([
-        SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing Personalized Email for the person.
+        SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing Bid for a job position for the person who is a consultant.
           Following are the content of the resume (in JSON format): 
           JSON user/resume data: {userData}
           `),
@@ -102,24 +96,23 @@ export async function POST(req: any) {
         userData: JSON.stringify(userData),
         prompt,
       });
-
-      // make a trainBot entry
       try {
         if (trainBotData) {
           const obj = {
-            type: "email.followupSequence",
+            type: "linkedin.genearteConsultingBid",
             input: prompt,
             output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
             idealOutput: "",
             status: "pending",
             userEmail: trainBotData.userEmail,
             fileAddress: trainBotData.fileAddress,
-            Instructions: `Email Followup Sequence for ${trainBotData.userEmail}`,
+            Instructions: `Generate Consulting Bid for ${trainBotData.userEmail}`,
           };
 
           await TrainBot.create({ ...obj });
         }
       } catch (error) {}
+      // make a trainBot entry
 
       return NextResponse.json(
         { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
