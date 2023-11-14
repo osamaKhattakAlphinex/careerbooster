@@ -1,4 +1,4 @@
-import OpenAI from "openai";
+import { ChatOpenAI } from "langchain/chat_models/openai";
 import { LLMChain } from "langchain/chains";
 import Prompt from "@/db/schemas/Prompt";
 import {
@@ -12,12 +12,6 @@ import { OpenAIStream, StreamingTextResponse } from "ai";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
-
-// export const runtime = "edge";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 export async function POST(req: any) {
   try {
@@ -40,22 +34,48 @@ export async function POST(req: any) {
       const content = linkedinContent.slice(0, 4000);
 
       if (content) {
+        const model1 = new ChatOpenAI({
+          streaming: true,
+          modelName: "gpt-3.5-turbo",
+          // callbacks: [
+          //   {
+          //     handleLLMNewToken(token) {
+          //       console.log(token);
+          //     },
+          //   },
+          // ],
+          temperature: 0.5,
+        });
+
         const input = `This is the User data:
                 ${content}
     
                 This is the prompt:
                 ${prompt}`;
 
-        const response: any = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo",
-          stream: true,
-          messages: [{ role: "user", content: input }],
+        const chatPrompt = ChatPromptTemplate.fromPromptMessages([
+          SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the User data of a person and helps Writing About for the person LinkedIn.
+                Following are the content of the resume (in JSON format):
+                JSON user/resume data: {userData}`),
+          HumanMessagePromptTemplate.fromTemplate("{prompt}"),
+        ]);
+        const promptSummary = input;
+
+        const chainC = new LLMChain({
+          prompt: chatPrompt,
+          llm: model1,
+        });
+        const output = await chainC.call({
+          userData: JSON.stringify(content),
+          prompt: promptSummary,
         });
 
-        // Convert the response into a friendly text-stream
-        const stream = OpenAIStream(response);
-        // Respond with the stream
-        return new StreamingTextResponse(stream);
+        return NextResponse.json(
+          { result: output, success: true },
+          { status: 200 }
+        );
+
+        // res.end(); // Close  the stream
       }
     }
   } catch (error) {
