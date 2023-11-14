@@ -27,7 +27,7 @@ const RegistrationForm = () => {
   const [file, setFile] = useState<any>(null);
   const [fileName, setFileName] = useState<string>("");
   const [fileError, setFileError] = useState<string>("");
-  const [text, setText] = useState("");
+  const [text, setText] = useState<string>("");
   // session
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
@@ -66,7 +66,9 @@ const RegistrationForm = () => {
     onSubmit: async (values) => {
       setSubmittingError("");
 
-      if (values.terms) {
+      if (text === "") {
+        setSubmittingError("Error Reading Resume");
+      } else if (values.terms) {
         setSubmitting(true);
 
         const obj = {
@@ -77,7 +79,7 @@ const RegistrationForm = () => {
           files: [
             {
               id: makeid(),
-              fileName: fileName,
+              fileName: makeid() + ".pdg", //fileName,
               fileContent: text,
               uploadedDateTime: new Date(),
             },
@@ -85,14 +87,13 @@ const RegistrationForm = () => {
           status: false,
           alertConsent: values.alertConsent,
         };
-
         // Create user account in database
         axios
           .post("/api/auth/users", obj)
           .then(async function (response) {
             if (values.file !== "") {
-              await UpdateGohighlevel(obj);
-              await moveResumeToUserFolder(values.file, values.email);
+              // await UpdateGohighlevel(obj);
+              // await moveResumeToUserFolder(values.file, values.email);
               await updateUser(values.file, values.email);
             }
 
@@ -214,7 +215,9 @@ const RegistrationForm = () => {
           const res = await resp.json();
           if (res.success) {
             const userData = JSON.parse(res.data);
-            router.replace(`/register?content=true`);
+            router.replace(
+              `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&content=true`
+            );
 
             if (userData.firstName || userData.lastName || userData.email) {
               formik.setFieldValue(
@@ -255,6 +258,13 @@ const RegistrationForm = () => {
     }
   };
 
+  // useEffect(() => {
+  //   const data: any = localStorage.getItem("pdfText");
+  //   console.log("first text in registration form", data.pdfText);
+  //   //  if (data) {
+  //   //    dispatch(setField({ name: "scrappedContent", value: data.pdfText }));
+  //   //  }
+  // }, [text]);
   useEffect(() => {
     const firstName = params?.get("firstName");
     const lastName = params?.get("lastName");
@@ -288,6 +298,16 @@ const RegistrationForm = () => {
       setFileError("only PDF file is allowed");
     }
   }, [file]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const data: any = localStorage.getItem("pdfText");
+
+      if (data) {
+        setText(data);
+      }
+    }
+  }, []);
 
   return (
     <div className="col-lg-12" data-aos="fade-up-sm" data-aos-delay="100">

@@ -53,17 +53,13 @@ const EditableField = ({
   }, [value]);
 
   return (
-    <span
-      onDoubleClick={() => setIsEditing(true)}
-      onBlur={handleBlur}
-      className=" "
-    >
+    <span onClick={() => setIsEditing(true)} onBlur={handleBlur} className=" ">
       {userData?.userPackageData?.limit?.can_edit_resume && isEditing ? (
         <>
           {type === "textarea" ? (
             <textarea
               value={editedValue}
-              className="bg-transparent w-full  h-auto"
+              className="bg-transparent w-full hover:cursor-pointer  h-auto"
               rows={rows ? rows : 15}
               onChange={(e: any) => setEditedValue(e.target.value)}
               autoFocus
@@ -73,7 +69,7 @@ const EditableField = ({
             <input
               type="text"
               value={editedValue}
-              className=" bg-transparent "
+              className=" bg-transparent hover:cursor-pointer"
               style={style ? style : {}}
               onChange={(e: any) => setEditedValue(e.target.value)}
               autoFocus
@@ -173,8 +169,8 @@ const ResumeTemplate1 = ({
   };
   //Reorder Redux SecondarySkills array with drag-drop
   const handleDropSecondary = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume.primarySkills];
+    const draggedIndex = parseInt(e.dataTransfer.getData("text"));
+    const updatedItems = [...resume.secondarySkills];
     // Swap the positions of the dragged item and the target item.
     [updatedItems[draggedIndex], updatedItems[i]] = [
       updatedItems[i],
@@ -194,7 +190,7 @@ const ResumeTemplate1 = ({
   //Reorder Redux ProfessionalSkills array with drag-drop
   const handleDropProfessional = (e: any, i: number) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume.primarySkills];
+    const updatedItems = [...resume.professionalSkills];
     // Swap the positions of the dragged item and the target item.
     [updatedItems[draggedIndex], updatedItems[i]] = [
       updatedItems[i],
@@ -211,6 +207,7 @@ const ResumeTemplate1 = ({
       professionalSkills: updatedItems,
     });
   };
+
   return (
     <div className="w-full first-page text-gray-900">
       <div className="flex">
@@ -360,7 +357,7 @@ const ResumeTemplate1 = ({
                 <li className="font-semibold  uppercase">primary</li>
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
-                    className="hover:shadow-md parent  hover:bg-gray-100 flex justify-between items-center"
+                    className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex justify-between items-center"
                     key={i}
                     onDragStart={(e) =>
                       e.dataTransfer.setData("text/plain", i.toString())
@@ -487,7 +484,7 @@ const ResumeTemplate1 = ({
               <ul className="pl-0 flex flex-col  ">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <li className="font-semibold  uppercase hover:shadow-md hover:bg-gray-100 text-md">
+                    <li className="font-semibold uppercase hover:shadow-md hover:bg-gray-100 text-md">
                       <EditableField
                         type="textarea"
                         rows={2}
@@ -614,7 +611,7 @@ const ResumeTemplate1 = ({
                     (skill: string, i: number) => (
                       <li
                         key={i}
-                        className="hover:shadow-md parent hover:bg-gray-100 flex justify-between items-center"
+                        className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2 hover:bg-gray-100 flex justify-between items-center"
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
                         }
@@ -753,9 +750,9 @@ const ResumeTemplate1 = ({
                 {resume?.secondarySkills.map((skill: string, i: number) => (
                   <li
                     key={i}
-                    className="hover:shadow-md parent hover:bg-gray-100 flex justify-between items-center "
+                    className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2 hover:bg-gray-100 flex justify-between items-center "
                     onDragStart={(e) =>
-                      e.dataTransfer.setData("text/plain", i.toString())
+                      e.dataTransfer.setData("text", i.toString())
                     }
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={(e) => handleDropSecondary(e, i)}
@@ -1035,12 +1032,64 @@ const ResumeTemplate1 = ({
                       onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                     >
                       {rec?.achievements && (
-                        <ul className="pl-0 flex flex-col gap-1 text-sm">
+                        <ul className="pl-0 flex flex-col borer-2 gap-1 text-sm">
                           {rec?.achievements.map(
                             (achivement: any, ind: number) => (
                               <li
-                                className="list-disc hover:shadow-md relative parent hover:bg-gray-100"
+                                className="list-disc hover:border-dashed hover:border-gray-500 hover:border-2 hover:shadow-md relative parent hover:bg-gray-100"
                                 key={ind}
+                                onDragStart={(e) => {
+                                  e.dataTransfer.setData(
+                                    "text/plain",
+                                    ind.toString()
+                                  );
+                                }}
+                                onDragOver={(e) => e.preventDefault()}
+                                onDrop={(e) => {
+                                  const draggedIndex = parseInt(
+                                    e.dataTransfer.getData("text/plain")
+                                  );
+
+                                  // Assuming 'i' is the index of the work experience where the drop occurs
+                                  const droppedIndex = i;
+
+                                  const workExperienceArray =
+                                    resume?.workExperienceArray.map(
+                                      (rec: any, index: number) => {
+                                        if (index === droppedIndex) {
+                                          const updatedAchievements =
+                                            rec.achievements.slice(); // Create a copy of achievements array
+                                          const draggedAchievement =
+                                            updatedAchievements[draggedIndex];
+
+                                          // Swap the achievements at draggedIndex and droppedIndex
+                                          updatedAchievements[draggedIndex] =
+                                            updatedAchievements[i];
+                                          updatedAchievements[i] =
+                                            draggedAchievement;
+
+                                          return {
+                                            ...rec,
+                                            achievements: updatedAchievements,
+                                          };
+                                        }
+                                        return rec;
+                                      }
+                                    );
+
+                                  dispatch(
+                                    setWorkExperienceArray({
+                                      workExperienceArray: workExperienceArray,
+                                    })
+                                  );
+
+                                  // Additional logic for saving to the database if needed
+                                  // saveResumeToDB({
+                                  //   ...resume,
+                                  //   workExperienceArray: workExperienceArray,
+                                  // });
+                                }}
+                                draggable
                               >
                                 <EditableField
                                   type="textarea"

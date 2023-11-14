@@ -2,12 +2,22 @@
 import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const UsersPage = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [records, setRecords] = useState([]);
   const [loadingId, setLoadingId] = useState("");
+  const [limitOfUser, setLimitOfUser] = useState<number>(10);
   const [showTableLoader, setshowTableLoader] = useState(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageStart, setPageStart] = useState<number>(0);
+  const [totalPages, setTotalPages] = useState<number>(0);
+
   const handleChange = async (id: string, status: boolean) => {
     if (window.confirm("Are you sure to Change the status")) {
       setLoadingId(id);
@@ -18,18 +28,22 @@ const UsersPage = () => {
         .finally(() => {
           getUserDeatils();
         });
+    } else {
+      router.push("/admin/users");
     }
   };
 
   const getUserDeatils = () => {
     setshowTableLoader(true);
-    fetch("/api/users")
+
+    fetch(`/api/users?limit=${limitOfUser}&page=${currentPage}`)
       .then(async (resp) => {
         const res = await resp.json();
         setLoadingId("");
 
         if (res.success) {
           setRecords(res.result);
+          setTotalPages(Math.ceil(res.total / limitOfUser));
           setshowTableLoader(false);
         } else {
           setRecords([]);
@@ -43,6 +57,27 @@ const UsersPage = () => {
   useEffect(() => {
     getUserDeatils();
   }, []);
+
+  const selectUsersLimit = (e: any) => {
+    setLimitOfUser(e.target.value);
+  };
+  useEffect(() => {
+    getUserDeatils();
+    const startIndex = (currentPage - 1) * limitOfUser;
+
+    setPageStart(startIndex);
+    router.replace(pathname + `?r=${limitOfUser}&p=${currentPage}`);
+  }, [limitOfUser, currentPage]);
+  useEffect(() => {
+    const existingNumberOfRecords = searchParams?.get("r");
+    const existingPage = searchParams?.get("p");
+    if (existingNumberOfRecords) {
+      setLimitOfUser(parseInt(existingNumberOfRecords, 10));
+    }
+    if (existingPage) {
+      setCurrentPage(parseInt(existingPage, 10));
+    }
+  }, [searchParams?.get("r"), searchParams?.get("p")]);
 
   return (
     <>
@@ -59,38 +94,41 @@ const UsersPage = () => {
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
           <div className="pb-4  dark:bg-gray-900 pt-10">
-            <div className="relative mt-1 ml-auto pl-5 pb-3">
-              {/* <div className="absolute inset-y-0 left-0 flex items-center ml-auto pointer-events-none">
-                <svg
-                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg>
-              </div> */}
-              <input
+            <div className="relative mt-1 ml-auto pl-5 pb-3 flex justify-between">
+              {/* <input
                 type="text"
                 id="table-search"
                 className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search Users By First Name"
-              />
+              /> */}
+              <div className="flex flex-row gap-2 items-center ml-auto  pr-5">
+                <label htmlFor="userPerPage" className="text-sm font-medium">
+                  Number of records per page:
+                </label>
+                <select
+                  name="userPerPage"
+                  id="userPerPage"
+                  className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+                  onChange={selectUsersLimit}
+                  value={limitOfUser}
+                >
+                  <>
+                    <option value={10}>10</option>
+                    <option value={20}>20</option>
+                    <option value={30}>30</option>
+                    <option value={40}>40</option>
+                  </>
+                </select>
+              </div>
             </div>
           </div>
+
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                {/* <th scope="col" className="px-6 py-3">
-                  User ID
-                </th> */}
+                <th scope="col" className="px-6 py-3">
+                  S.N0
+                </th>
                 <th scope="col" className="px-6 py-3">
                   User Name
                 </th>
@@ -125,17 +163,27 @@ const UsersPage = () => {
                   </td>
                 </tr>
               )}
+              {!showTableLoader && records && records.length === 0 && (
+                <tr>
+                  <td
+                    className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+                    colSpan={10}
+                  >
+                    No records found
+                  </td>
+                </tr>
+              )}
               {records &&
-                records.map((item: any) => {
+                records.map((item: any, index: number) => {
                   return (
                     <>
                       <tr className=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        {/* <th
-                            scope="row"
-                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                          >
-                            {item._id}
-                          </th> */}
+                        <th
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                          {pageStart + index + 1}
+                        </th>
                         <td className="px-6 py-4">
                           {item.firstName + " " + item.lastName}
                         </td>
@@ -174,6 +222,54 @@ const UsersPage = () => {
                 })}
             </tbody>
           </table>
+        </div>
+        {/* Pagination Controls */}
+        <div className=" flex justify-end mt-4">
+          <nav aria-label="Page navigation example">
+            <ul className="inline-flex -space-x-px">
+              <li>
+                <button
+                  className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+                  onClick={() => {
+                    setCurrentPage(currentPage - 1);
+                  }}
+                  disabled={currentPage == 1 ? true : false}
+                >
+                  Previous
+                </button>
+              </li>
+              {[currentPage - 1, currentPage, currentPage + 1].map((number) => {
+                if (number < 1 || number > totalPages) return null;
+                return (
+                  <li key={number}>
+                    <button
+                      onClick={(e) => setCurrentPage(number)}
+                      className={`border-gray-300  leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400  text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white hover:text-gray-700 first-letter
+                      ${
+                        currentPage === number
+                          ? "bg-gray-400  dark:!bg-white dark:text-black"
+                          : ""
+                      } `}
+                    >
+                      {number}
+                    </button>
+                  </li>
+                );
+              })}
+
+              <li>
+                <button
+                  className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  onClick={() => {
+                    setCurrentPage(currentPage + 1);
+                  }}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </>

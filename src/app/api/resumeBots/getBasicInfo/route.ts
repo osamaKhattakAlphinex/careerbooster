@@ -1,4 +1,4 @@
-import { NextApiHandler } from "next";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 import { StructuredOutputParser } from "langchain/output_parsers";
 import Prompt from "@/db/schemas/Prompt";
@@ -13,10 +13,11 @@ import { ChatOpenAI } from "langchain/chat_models/openai";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import path from "path";
 import TrainBot from "@/db/schemas/TrainBot";
-
-const handler: NextApiHandler = async (req, res) => {
-  if (req.body) {
-    const reqBody = JSON.parse(req.body);
+export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const dynamic = "force-dynamic";
+export async function POST(req: any) {
+  if (req) {
+    const reqBody = await req.json();
     // const email = reqBody.email;
     const type = reqBody.type; // request type
     const inputType = reqBody.inputType; // input type
@@ -100,12 +101,15 @@ const handler: NextApiHandler = async (req, res) => {
 
         await TrainBot.create({ ...obj });
 
-        return res.status(200).json({
-          success: true,
-          data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-        });
+        return NextResponse.json(
+          { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+          { status: 200 }
+        );
       } catch (error) {
-        return res.status(400).json({ success: false, error });
+        return NextResponse.json(
+          { result: error, success: false },
+          { status: 400 }
+        );
       }
     }
 
@@ -115,15 +119,16 @@ const handler: NextApiHandler = async (req, res) => {
         const model1 = new ChatOpenAI({
           streaming: true,
           modelName: "gpt-3.5-turbo",
-          callbacks: [
-            {
-              handleLLMNewToken(token) {
-                res.write(token);
-              },
-            },
-          ],
+          //   callbacks: [
+          //     {
+          //       handleLLMNewToken(token) {
+          //         res.write(token);
+          //       },
+          //     },
+          //   ],
           temperature: 0.5,
         });
+
         const promptRec = await Prompt.findOne({
           type: "resume",
           name: "summary",
@@ -164,10 +169,16 @@ const handler: NextApiHandler = async (req, res) => {
         };
 
         await TrainBot.create({ ...obj });
-
-        res.end();
+        return NextResponse.json(
+          { result: output, success: true },
+          { status: 200 }
+        );
+        // res.end();
       } catch (error) {
-        return res.status(400).json({ success: false, error });
+        return NextResponse.json(
+          { result: error, success: false },
+          { status: 400 }
+        );
       }
     }
 
@@ -219,12 +230,15 @@ const handler: NextApiHandler = async (req, res) => {
           prompt: "Answer should be a valid JSON",
         });
 
-        return res.status(200).json({
-          success: true,
-          data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-        });
+        return NextResponse.json(
+          { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+          { status: 200 }
+        );
       } catch (error) {
-        return res.status(400).json({ success: false, error });
+        return NextResponse.json(
+          { result: error, success: false },
+          { status: 400 }
+        );
       }
     }
 
@@ -267,12 +281,15 @@ const handler: NextApiHandler = async (req, res) => {
 
         await TrainBot.create({ ...obj });
 
-        return res.status(200).json({
-          success: true,
-          data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-        });
+        return NextResponse.json(
+          { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+          { status: 200 }
+        );
       } catch (error) {
-        return res.status(400).json({ success: false, error });
+        return NextResponse.json(
+          { result: error, success: false },
+          { status: 400 }
+        );
       }
     }
 
@@ -313,12 +330,15 @@ const handler: NextApiHandler = async (req, res) => {
 
         await TrainBot.create({ ...obj });
 
-        return res.status(200).json({
-          success: true,
-          data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-        });
+        return NextResponse.json(
+          { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+          { status: 200 }
+        );
       } catch (error) {
-        return res.status(400).json({ success: false, error });
+        return NextResponse.json(
+          { result: error, success: false },
+          { status: 400 }
+        );
       }
     }
 
@@ -359,14 +379,16 @@ const handler: NextApiHandler = async (req, res) => {
 
         await TrainBot.create({ ...obj });
 
-        return res.status(200).json({
-          success: true,
-          data: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-        });
+        return NextResponse.json(
+          { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+          { status: 200 }
+        );
       } catch (error) {
-        return res.status(400).json({ success: false, error });
+        return NextResponse.json(
+          { result: error, success: false },
+          { status: 400 }
+        );
       }
     }
   }
-};
-export default handler;
+}

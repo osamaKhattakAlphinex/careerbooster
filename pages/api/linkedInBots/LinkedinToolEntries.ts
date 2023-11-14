@@ -10,7 +10,7 @@ const handler: NextApiHandler = async (req, res) => {
     const { linkedinContent, linkedinFileName } = req.body;
 
     // For Registration if file is uploaded then load content from that fiel
-    if (linkedinContent) {
+    if (linkedinFileName) {
       await startDB();
       // load file
       // const dir = path.join(
@@ -31,7 +31,7 @@ const handler: NextApiHandler = async (req, res) => {
 
       const input = `
           This is the User Data:
-          ${linkedinContent}
+          ${linkedinFileName}
 
           Now please give me the following information about the user:
           Full Name:
@@ -69,22 +69,12 @@ const handler: NextApiHandler = async (req, res) => {
           location,
           recentJob,
         } = JSON.parse(resp);
-        console.log(
-          "entries",
-          fullName,
-          firstName,
-          lastName,
-          email,
-          phone,
-          location,
-          recentJob
-        );
-
+       
         //Create user in DB
 
-        await LinkedinToolEntrie.create({
-          fileName: linkedinFileName,
-          fileContent: linkedinContent,
+        const user = await LinkedinToolEntrie.create({
+          fileName: linkedinContent,
+          fileContent: linkedinFileName,
           name: fullName,
           email,
           phone,
@@ -99,6 +89,7 @@ const handler: NextApiHandler = async (req, res) => {
 
         return res.status(200).json({
           success: true,
+          userId:user._id,
           firstName,
           lastName,
           fullName,
