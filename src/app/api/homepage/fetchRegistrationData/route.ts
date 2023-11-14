@@ -15,11 +15,6 @@ export async function POST(req: any) {
       const trainBotData = reqBody?.trainBotData;
 
       if (content) {
-        // CREATING LLM MODAL
-        // const model = new OpenAI({
-        //   modelName: "gpt-3.5-turbo",
-        //   temperature: 0.5,
-        // });
         const openai = new OpenAI({
           apiKey: process.env.OPENAI_API_KEY,
         });

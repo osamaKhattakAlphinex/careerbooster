@@ -26,42 +26,6 @@ const LinkedInToolMain = () => {
   const [uploadComplete, setUploadComplete] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
 
-  // const uploadFileToServer = async () => {
-  //   setFileError("");
-  //   setFileUploading(true);
-  //   if (file) {
-  //     const body = new FormData();
-  //     body.append("file", file);
-
-  //     fetch("/api/fileUpload?type=linkedin-tool", {
-  //       method: "POST",
-  //       body,
-  //     })
-  //       .then(async (resp: any) => {
-  //         const res = await resp.json();
-  //         if (res.success) {
-  //           const uploadedFileName = res.fileName + "_" + file.name;
-  //           setFileName(uploadedFileName);
-  //           // linkedinHeadline(uploadedFileName);
-  //           // linkedinAbout(uploadedFileName);
-
-  //           // router.replace("/welcome?step=1");
-  //           // router.replace("/register");
-  //           // setSuccessMsg("File has been uploaded!");
-  //         } else {
-  //           setFileError("Something went wrong");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         setFileError("Something went wrong");
-  //       })
-  //       .finally(() => {
-  //         setFileUploading(false);
-  //         setUploadComplete(true);
-  //       });
-  //   }
-  // };
-
   useEffect(() => {
     if (file && file.type === "application/pdf") {
       //  file exists and is PDF
@@ -97,6 +61,7 @@ const LinkedInToolMain = () => {
       router.push("/linkedin/result");
     }
   }, [fileUploading, uploadComplete, text]);
+
   return (
     <div className="w-full">
       {/* Upload File */}

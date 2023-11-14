@@ -19,8 +19,11 @@ const Packages = ({ viewOnly }: Props) => {
   // TODO STORE PACKAGES IN REDUX AND DONOT REREQUEST THEM IF ALREADY AVAILABLE
 
   const getAllPackages = () => {
-    axios.get("/api/checkout/getActivePackages").then((resp) => {
-      setPackages(resp.data.packages);
+    fetch("/api/checkout/getActivePackages", {
+      method: "GET",
+    }).then(async (resp: any) => {
+      const res = await resp.json();
+      setPackages(res.result);
     });
   };
   useEffect(() => {

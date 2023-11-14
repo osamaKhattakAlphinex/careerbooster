@@ -95,7 +95,7 @@ const ResumeTemplate1 = ({
 }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
-
+  console.log("resume from redux", resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newSecondarySkill, setNewSecondarySkill] = useState(false);
   const [newProfessionalSkill, setNewProfessionalSkill] = useState(false);
@@ -229,7 +229,7 @@ const ResumeTemplate1 = ({
       professionalSkills: updatedItems,
     });
   };
-  
+
   return (
     <div className="w-full first-page text-gray-900">
       <div className="flex">
@@ -1061,16 +1061,12 @@ const ResumeTemplate1 = ({
                     </h2>
                     <div className="p-4">
                       {rec?.achievements && (
-                        <ul
-                          className="pl-0 flex flex-col gap-1 text-sm"
-                         
-                        >
+                        <ul className="pl-0 flex flex-col gap-1 text-sm">
                           {rec?.achievements.map(
                             (achievement: any, ind: number) => (
                               <li
                                 className="list-disc hover:border-dashed hover:border-gray-500 hover:border-2 hover:shadow-md relative parent hover:bg-gray-100"
                                 key={ind}
-                                
                               >
                                 <EditableField
                                   type="textarea"
