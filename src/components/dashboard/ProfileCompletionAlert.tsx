@@ -31,7 +31,7 @@ const ProfileCompletionAlert = () => {
   if (!userData?.wizardReviewed) {
     return (
       <div
-        className="mb-3 w-[96%] items-center rounded-lg bg-warning-100 px-6 py-5 text-base text-warning-800 border"
+        className="mb-3 w-[96%] items-center rounded-lg bg-warning-100 px-6 py-5 text-base text-warning-800 border dark:bg-gray-800 bg-[#dfeee9]"
         role="alert"
       >
         <div className="inline-flex">

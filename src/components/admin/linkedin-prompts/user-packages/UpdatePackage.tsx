@@ -165,7 +165,7 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
         }}
         data-modal-target="updateProductModal"
         data-modal-toggle="updateProductModal"
-        className="flex w-full items-center py-2 pr-2 hover:text-[#e6f85e]"
+        className="flex w-full items-center py-2 pr-2 dark:hover:text-[#e6f85e] hover:text-blue-400"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

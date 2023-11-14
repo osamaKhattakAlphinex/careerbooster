@@ -33,7 +33,7 @@ const ReviewPromptsConfiguration = () => {
     }
   };
   return (
-    <div className="mb-40">
+    <div className="mb-40 mt-30">
       <div className="my-5 ml-10">
         <Link
           href="/admin"
