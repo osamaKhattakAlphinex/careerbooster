@@ -33,7 +33,7 @@ const LinkedInPromptsConfiguration = () => {
     }
   };
   return (
-    <div className="mb-40">
+    <div className="mb-40 mt-30">
       <div className="my-5 ml-10">
         <Link
           href="/admin"
@@ -73,7 +73,7 @@ const LinkedInPromptsConfiguration = () => {
         <h1 className="text-center text-2xl ">Loading...</h1>
       ) : (
         <>
-          <div className="flex m-10 gap-4 ">
+          <div className="flex m-10 gap-4 lg:!flex-row flex-col ">
             {/* Keywords Genrator Card */}
             <PromptEditor
               name="keyword"
@@ -97,7 +97,7 @@ const LinkedInPromptsConfiguration = () => {
             />
           </div>
 
-          <div className="flex m-10 gap-4">
+          <div className="flex m-10 gap-4 lg:!flex-row flex-col">
             {/* About Generator */}
             <PromptEditor
               name="about"

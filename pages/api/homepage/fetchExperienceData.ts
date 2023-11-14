@@ -47,7 +47,7 @@ const handler: NextApiHandler = async (req, res) => {
       try {
         // const resp = await model.call(input);
         const response = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo", // v2
+          model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IcrLzWo",
           messages: [
             {
               role: "user",
@@ -55,7 +55,6 @@ const handler: NextApiHandler = async (req, res) => {
             },
           ],
           temperature: 1,
-          max_tokens: 456,
         });
 
         // make a trainBot entry

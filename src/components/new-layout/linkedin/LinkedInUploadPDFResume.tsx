@@ -11,6 +11,7 @@ import {
 import Button from "../../utilities/form-elements/Button";
 import LinkedInSummary from "./LinkedInSummary";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 //Editable
 const loadFromLocalStorage = () => {
@@ -20,17 +21,19 @@ const loadFromLocalStorage = () => {
 };
 const LinkedInUploadPDFResume = () => {
   // local states
+  const router = useRouter();
   const [aboutMsgLoading, setAboutMsgLoading] = useState<boolean>(false); // msg loading for about section
   const [headlineMsgLoading, setHeadlineMsgLoading] = useState<boolean>(false); // msg loading for Headline  section
   const [fileError, setFileError] = useState<string>("");
-  const [streamedHeadlineData, setStreamedHeadlineData] = useState("123");
-  const [streamedAboutData, setStreamedAboutData] = useState("123");
+  const [streamedHeadlineData, setStreamedHeadlineData] = useState("");
+  const [streamedAboutData, setStreamedAboutData] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [linkedinContent, setLinkedinContent] = useState<any>("");
   const [linkedinFileName, setLinkedinFileName] = useState<any>("");
 
   // Define a state variable to hold both first name and full name
   const [names, setNames] = useState({
+    id: "",
     firstName: "",
     fullName: "",
     email: "",
@@ -47,43 +50,6 @@ const LinkedInUploadPDFResume = () => {
   const [isSummaryCopied, setIsSummaryCopied] = useState(false);
   const [isHeadlineEditing, setIsHeadlineEditing] = useState(false);
   const [isSummaryEditing, setIsSummaryEditing] = useState(false);
-  // const uploadFileToServer = async () => {
-  //   setFileError("");
-  //   setFileUploading(true);
-  //   setMsgLoading(true);
-  //   if (file) {
-  //     const body = new FormData();
-  //     body.append("file", file);
-
-  //     fetch("/api/fileUpload?type=linkedin-tool", {
-  //       method: "POST",
-  //       body,
-  //     })
-  //       .then(async (resp: any) => {
-  //         const res = await resp.json();
-  //         if (res.success) {
-  //           const uploadedFileName = res.fileName + "_" + file.name;
-  //           // setFileName(uploadedFileName);
-  //           linkedinHeadline(uploadedFileName);
-  //           linkedinAbout(uploadedFileName);
-
-  //           // router.replace("/welcome?step=1");
-  //           // router.replace("/register");
-  //           // setSuccessMsg("File has been uploaded!");
-  //         } else {
-  //           setFileError("Something went wrong");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         setFileError("Something went wrong");
-  //       })
-  //       .finally(() => {
-  //         setFileUploading(false);
-  //         setMsgLoading(false);
-  //         setUploadComplete(true);
-  //       });
-  //   }
-  // };
 
   const linkedinHeadline = async (linkedinContent: string) => {
     setStreamedHeadlineData("");
@@ -123,7 +89,8 @@ const LinkedInUploadPDFResume = () => {
     setAboutMsgLoading(true);
 
     if (linkedinFileName) {
-      fetch("/api/linkedInBots/linkedinAboutGenerator", {
+      console.log("linkedin: ------------" + linkedinContent);
+      fetch("/api/linkedinTool", {
         method: "POST",
         body: JSON.stringify({
           linkedinContent,
@@ -136,18 +103,36 @@ const LinkedInUploadPDFResume = () => {
       })
         .then(async (resp: any) => {
           const res = await resp.json();
-          if (res.data && res.success) {
-            setStreamedAboutData(res.data);
-          } else {
-            setFileError("Something went wrong");
-          }
+          // if (resp.ok) {
+          //   const reader = resp.body.getReader();
+          //   while (true) {
+          //     const { done, value } = await reader.read();
+
+          //     if (done) {
+          //       break;
+          //     }
+
+          //     const text = new TextDecoder().decode(value);
+          //     if (text) {
+          //       setAboutMsgLoading(false);
+          //       setStreamedAboutData((prev) => prev + text);
+          //     }
+          //   }
+          //   setAboutComplete(true);
+          // }
+          // const res = await resp.json();
+          // if (res.data && res.success) {
+          //   setStreamedAboutData(res.data);
+          // } else {
+          //   setFileError("Something went wrong");
+          // }
+
+          setAboutMsgLoading(false);
+          setStreamedAboutData(res.result.text);
+          setAboutComplete(true);
         })
         .catch((error) => {
           setFileError("Something went wrong");
-        })
-        .finally(() => {
-          setAboutMsgLoading(false);
-          setAboutComplete(true);
         });
     } else if (!linkedinFileName) {
       setFileError("PDF Resume / CV is Required");
@@ -169,11 +154,17 @@ const LinkedInUploadPDFResume = () => {
         },
       })
         .then(async (resp: any) => {
-          const { firstName, lastName, fullName, email, phone, location } =
-            await resp.json();
-          setNames({ firstName, fullName, email, lastName, phone, location });
-          setButtonDisabled(false);
-          UpdateGohighlevel({
+          const {
+            userId,
+            firstName,
+            fullName,
+            email,
+            lastName,
+            phone,
+            location,
+          } = await resp.json();
+          setNames({
+            id: userId,
             firstName,
             fullName,
             email,
@@ -181,6 +172,18 @@ const LinkedInUploadPDFResume = () => {
             phone,
             location,
           });
+          setButtonDisabled(false);
+          if (email && phone) {
+            UpdateGohighlevel({
+              userId,
+              firstName,
+              fullName,
+              email,
+              lastName,
+              phone,
+              location,
+            });
+          }
         })
         .catch((error) => {
           setFileError("Something went wrong");
@@ -205,31 +208,19 @@ const LinkedInUploadPDFResume = () => {
       console.error("Failed to copy text: ", error);
     }
   };
-  //Move File linkedin-temp To temp folder
-  // const moveToRegister = () => {
-  //   setFileError("");
-  //   if (linkedinContent) {
-  //     fetch("/api/linkedInBots/moveResumeToTempFolder", {
-  //       method: "POST",
-  //       body: JSON.stringify({ fileName }),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //       .then(async (resp: any) => {
-  //         const res = await resp.json();
-  //         if (res.success) {
-  //           router.replace(
-  //             `/register?firstName=${names.firstName}&lastName=${names.lastName}&email=${names.email}&file=${linkedinFileName}`
-  //           );
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         setFileError("Something went wrong");
-  //       });
-  //   }
-  // };
+  // Move File linkedin-temp To temp folder
+  const moveToRegister = () => {
+    setFileError("");
+    if (linkedinContent) {
+      router.replace(
+        `/register?firstName=${names.firstName}&lastName=${names.lastName}&email=${names.email}&file=${linkedinFileName}`
+      );
+    } else {
+      setFileError("Something went wrong");
+    }
+  };
   const UpdateGohighlevel = async ({
+    userId,
     firstName,
     fullName,
     email,
@@ -237,6 +228,7 @@ const LinkedInUploadPDFResume = () => {
     phone,
     location,
   }: {
+    userId: string;
     firstName: string;
     fullName: string;
     email: string;
@@ -264,11 +256,28 @@ const LinkedInUploadPDFResume = () => {
         }
       )
       .then(function (response) {
-        if (response?.status == 200) console.log("Save Data on CRM");
+        if (names) updateCRMStatus(userId);
       })
       .catch(function (error) {
         console.log(error);
       });
+  };
+  const updateCRMStatus = async (id: string) => {
+    if (id) {
+      fetch("/api/linkedInBots/LinkedinToolEntriesUpdate", {
+        method: "POST",
+        body: JSON.stringify({ id }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+        })
+        .catch((error) => {
+          setFileError("Something went wrong");
+        });
+    }
   };
   useEffect(() => {
     const data = loadFromLocalStorage();
@@ -294,7 +303,7 @@ const LinkedInUploadPDFResume = () => {
 
   return (
     <>
-      {headlineMsgLoading || aboutMsgLoading ? (
+      {!aboutComplete || aboutMsgLoading ? (
         refreshIconRotating
       ) : (
         <div className="flex gap-2 text-[#33FF00] font-extrabold text-5xl mb-4">
@@ -309,14 +318,15 @@ const LinkedInUploadPDFResume = () => {
           <p className="m-0">{fileError}</p>
         </div>
       )}
+
       {streamedHeadlineData || streamedAboutData ? (
         <div className=" my-3 w-full flex flex-col items-center">
-          <div className="lg:p-6 border-2 border-purple-600 rounded-2xl w-11/12 ">
-            <div className=" flex flex-col gap-4 bg-black div-m lg:p-12 rounded-2xl">
+          <div className="padding-t sm:p-2 md:p-4 lg:p-6 border-2 border-purple-600 rounded-2xl w-11/12 ">
+            <div className=" flex flex-col  md:py-4  gap-4 bg-black div-m lg:p-12 rounded-2xl">
               {/* Headline */}
               <h1 className="text-4xl flex items-center font-normal mb-4 text-white">
                 {/* <span className="text-yellow-400">{starIcon}</span> */}
-                <span className="text-center heading1 lg:text-left text-2xl uppercase font-bold">
+                <span className="text-center md:ml-4 lg:text-left text-2xl uppercase font-bold">
                   Your New LinkedIn Headline
                 </span>
               </h1>
@@ -329,7 +339,7 @@ const LinkedInUploadPDFResume = () => {
                 <>
                   {isHeadlineEditing ? (
                     <textarea
-                      className="tracking-wider border-2 box lg:p-8 rounded-2xl border-gray-700 text-white"
+                      className="tracking-wider md:p-3 border-2 box lg:p-8 rounded-2xl border-gray-700 text-white"
                       value={streamedHeadlineData}
                       onChange={(e) => {
                         setStreamedHeadlineData(e.target.value);
@@ -344,15 +354,16 @@ const LinkedInUploadPDFResume = () => {
                       }}
                     />
                   ) : (
-                    <div className="tracking-wider border-2 box lg:p-8 rounded-2xl border-gray-700 text-white">
+                    <div className="tracking-wider md:mx-2 md:p-3 border-2 box lg:p-8 rounded-2xl border-gray-700 text-white">
                       {streamedHeadlineData}
                     </div>
                   )}
+
                   {streamedHeadlineData && (
-                    <div className="flex flex-col div-1 lg:flex-row  gap-4">
+                    <div className="flex flex-col md:flex-row md:mx-2 div-1 lg:flex-row  gap-4">
                       <Button
                         type="button"
-                        className="border-2 border-purple-600 rounded-full headline-btn lg:px-6 lg:py-2 hover:bg-purple-600 hover:text-white"
+                        className="border-2 border-purple-600 rounded-full headline-btn  hover:bg-purple-600 hover:text-white"
                         onClick={() => linkedinHeadline(linkedinContent)}
                       >
                         <div className="flex gap-2 items-center justify-center">
@@ -387,7 +398,7 @@ const LinkedInUploadPDFResume = () => {
                       </Button>
                       <Button
                         type="button"
-                        className="border-2 border-gray-700  rounded-full px-6 py-2 hover:bg-gray-700 hover:text-white flex gap-2"
+                        className="border-2 border-gray-700   rounded-full headlin-copy-btn px-6 py-2 hover:bg-gray-700 hover:text-white flex gap-2"
                         onClick={copyText}
                       >
                         {clipboardIcon}
@@ -401,7 +412,7 @@ const LinkedInUploadPDFResume = () => {
               {/* Summary */}
               <h1 className="text-4xl flex items-center font-normal mb-4 text-white">
                 {/* <span className="text-yellow-400">{starIcon}</span> */}
-                <span className="text-center lg:text-left text-2xl uppercase font-bold">
+                <span className="text-center md:ml-4 lg:text-left text-2xl uppercase font-bold">
                   Your Keyword Optimized LinkedIn Summary
                 </span>
               </h1>
@@ -429,12 +440,13 @@ const LinkedInUploadPDFResume = () => {
                       }}
                     />
                   ) : (
-                    <div className="tracking-wider border-2 box lg:p-8 rounded-2xl border-gray-700 text-white">
+                    <div className="tracking-wider md:mx-2 md:p-3 border-2 box lg:p-8 rounded-2xl border-gray-700 text-white">
                       {streamedAboutData}
                     </div>
                   )}
+
                   {streamedAboutData && (
-                    <div className="flex gap-4 div-1">
+                    <div className="flex md:mx-2 gap-4 div-1">
                       <Button
                         type="button"
                         className="border-2 border-indigo-600 rounded-full px-6 py-2 hover:bg-indigo-600 hover-text-white"
@@ -463,7 +475,6 @@ const LinkedInUploadPDFResume = () => {
       ) : (
         " "
       )}
-
       {streamedAboutData && (
         <div className="content-1 lg:mt-9 flex flex-col justify-center items-center gap-2">
           <h2 className="text-center lg:text-left text-red-600 ">
@@ -529,7 +540,7 @@ const LinkedInUploadPDFResume = () => {
               />
               I want to add my personalized instructions
             </label>
-            {aboutData === "instruction" ? (
+            {aboutData === "aboutInstructions" ? (
               <textarea
                 className="tracking-wider text-area border-2 p-8 rounded-2xl border-gray-700 text-white"
                 value={instruction} // Set the initial value
@@ -548,6 +559,7 @@ const LinkedInUploadPDFResume = () => {
             onClick={() => {
               linkedinAbout(linkedinContent);
               setInstruction("");
+              window.scrollTo({ top: 50, behavior: "smooth" });
             }}
           >
             <svg
@@ -581,7 +593,7 @@ const LinkedInUploadPDFResume = () => {
             className={`mx-1 mt-8 p-3 text-lg my-2 bg-yellow-400 hover:bg-yellow-600  lg:w-8/12 lg:h-14 lg:mt-8 text-center rounded-full font-bold lg:text-xl text-black lg:py-3 lg:px-9 no-underline  ${
               buttonDisabled ? "bg-yellow-600" : "cursor-pointer"
             } `}
-            // onClick={moveToRegister}
+            onClick={moveToRegister}
             disabled={buttonDisabled}
           >
             Click here to experience the magic

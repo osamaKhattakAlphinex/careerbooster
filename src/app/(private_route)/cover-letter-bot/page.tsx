@@ -62,7 +62,7 @@ const CoverLetterWriter = () => {
   };
 
   useEffect(() => {
-    saveToDB(streamedData);
+    // saveToDB(streamedData);
   }, [streamedData]);
 
   // limit bars
@@ -136,7 +136,7 @@ const CoverLetterWriter = () => {
               setStreamedData((prev) => prev + text);
               tempText += text;
             }
-            await saveToDB(tempText);
+            // await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -177,25 +177,25 @@ const CoverLetterWriter = () => {
     }
   };
 
-  const saveToDB = async (tempText: string) => {
-    try {
-      const response = await axios.post("/api/users/updateUserData", {
-        data: {
-          email: session?.user?.email,
-          results: {
-            ...userData.results,
-            coverLetter: tempText,
-          },
-        },
-      });
-      const { success } = response.data;
-      if (success) {
-        console.log("cover letter saved to DB");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const saveToDB = async (tempText: string) => {
+  //   try {
+  //     const response = await axios.post("/api/users/updateUserData", {
+  //       data: {
+  //         email: session?.user?.email,
+  //         results: {
+  //           ...userData.results,
+  //           coverLetter: tempText,
+  //         },
+  //       },
+  //     });
+  //     const { success } = response.data;
+  //     if (success) {
+  //       console.log("cover letter saved to DB");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     if (userData && userData?.email) {

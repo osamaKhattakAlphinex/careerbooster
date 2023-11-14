@@ -8,7 +8,8 @@ import { LLMChain } from "langchain/chains";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import Prompt from "@/db/schemas/Prompt";
 import TrainBot from "@/db/schemas/TrainBot";
-
+export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const dynamic = "force-dynamic";
 const handler: NextApiHandler = async (req, res) => {
   try {
     const reqBody = JSON.parse(req.body);
