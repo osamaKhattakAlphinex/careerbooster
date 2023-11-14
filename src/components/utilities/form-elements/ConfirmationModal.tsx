@@ -59,6 +59,7 @@ const ConfirmationModal = forwardRef(
         <div className="relative p-4 w-full max-w-xl max-h-full">
           <div className="relative p-4 text-center rounded-lg shadow dark:bg-gray-800 sm:p-5">
             <button
+              onClick={() => openModal(false, "")}
               type="button"
               className="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
               data-modal-toggle="deleteModal"

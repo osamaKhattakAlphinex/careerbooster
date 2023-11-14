@@ -9,90 +9,101 @@ import { useRouter } from "next/navigation";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
 import { useSession } from "next-auth/react";
 import Html2Pdf from "js-html2pdf";
+import { current } from "@reduxjs/toolkit";
 
-const SingleRecentResumeCard = ({
-  resume,
-  source,
-  componentRef,
-}: {
-  resume: Resume;
-  source?: string;
+type CoverLetterType = {
+  card: any;
   componentRef: any;
-}) => {
+};
+
+const CoverLetterCardSingle = ({ card, componentRef }: CoverLetterType) => {
   const { data: session } = useSession();
   const router = useRouter();
-  console.log(resume);
+
+  console.log(card.card);
+
   // redux
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
-  const { email, resumes } = userData;
+  // const userData = useSelector((state: any) => state.userData);
+  // const { email, resumes } = userData;
 
-  const handleOnView = async () => {
-    if (source != "") {
-      router.replace("/resume-builder");
-    }
-    return dispatch(setResume(resume));
+  const handleOnView = async (card: any) => {
+    // if (source != "") {
+    //   router.replace("/resume-builder");
+    // }
+    //  return dispatch(setResume(resume));
+    console.log(componentRef.current);
+
+    componentRef.current = card.coverLetterText;
+
+    console.log(componentRef.current);
   };
 
-  const handleOnDelete = () => {
+  const handleOnDelete = async (card: any) => {
     // ask for confirmation
-    const c = confirm("Are you sure you want to delete this resume?");
+    const c = confirm("Are you sure you want to delete this Cover Letter?");
     if (c) {
-      // delete resume
-      const updatedResumes = resumes.filter((r: Resume) => r.id !== resume.id);
-      updateUser(updatedResumes);
+      console.log("Deletion need to be implemented");
+    }
+
+    try {
+      const coverLetters = await axios.delete(`/api/coverLetterBot/${card.id}`);
+      console.log(coverLetters);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   const updateUser = (updatedResumes: any) => {
-    if (email) {
-      return axios
-        .post("/api/users/updateUserResumes", {
-          email,
-          resumes: updatedResumes,
-        })
-        .then(async (res) => {
-          if (res.status === 200) {
-            // update user in redux
-            const res = await fetch(`/api/users/getOneByEmail?email=${email}`);
-
-            const { user } = await res.json();
-            dispatch(setUserData(user));
-          }
-        });
-    }
+    // if (email) {
+    //   return axios
+    //     .post("/api/users/updateUserResumes", {
+    //       email,
+    //       resumes: updatedResumes,
+    //     })
+    //     .then(async (res) => {
+    //       if (res.status === 200) {
+    //         // update user in redux
+    //         const res = await fetch(`/api/users/getOneByEmail?email=${email}`);
+    //         const { user } = await res.json();
+    //         dispatch(setUserData(user));
+    //       }
+    //     });
+    // }
   };
 
+  if (!card) return <h1>Loading </h1>;
+
   return (
-    <div className="w-full  border border-gray-200 rounded-lg shadow p-2 sm:p-4">
-      <h2 className=" text-lg  ">{resume?.state?.jobPosition}</h2>
-      <h2 className="text-sm  ">{resume?.jobTitle}</h2>
-      <p className="text-xs mb-3 ">
-        Generated on {getFormattedDate(resume?.dateTime)}
+    <div className="w-full max-w-sm  border border-gray-200 rounded-lg shadow p-2 sm:p-4">
+      <p className="text-base mb-3 ">
+        Generated on {getFormattedDate(card.generatedOnDate)}
       </p>
+
+      <span className=" text-sm line-clamp-1">{card.jobDescription}</span>
       <div className="flex flex-row gap-2 justify-between">
         <div className="flex gap-2">
           <button
             type="button"
-            onClick={handleOnView}
+            onClick={() => handleOnView(card)}
             className=" border hover:bg-gray-100  text-xs  px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1"
           >
             <FontAwesomeIcon icon={faEye} />
             View
           </button>
 
-          {resume && (
+          {card && (
             <>
               <ReactToPrint
                 trigger={() => (
                   <button
                     type="button"
-                    disabled={
-                      resume.state.jobPosition === "" ||
-                      resume.state.resumeLoading ||
-                      !session?.user?.email ||
-                      !resume?.name
-                    }
+                    // disabled={
+                    //   resume.state.jobPosition === "" ||
+                    //   resume.state.resumeLoading ||
+                    //   !session?.user?.email ||
+                    //   !resume?.name
+                    // }
                     className="  border hover:bg-gray-100  text-xs  px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1"
                   >
                     <div className="flex flex-row gap-2">
@@ -117,13 +128,13 @@ const SingleRecentResumeCard = ({
                     </div>
                   </button>
                 )}
-                onBeforeGetContent={async () => await handleOnView()}
+                onBeforeGetContent={async () => await handleOnView(card)}
                 content={() => componentRef.current}
                 print={async (printIframe: HTMLIFrameElement) => {
                   const document = printIframe.contentDocument;
                   if (document) {
                     const exporter = new Html2Pdf(componentRef.current, {
-                      filename: `${resume.name}-${resume.jobTitle}.pdf`,
+                      filename: `coverletter.pdf`,
                     });
                     exporter.getPdf(true);
                   }
@@ -135,7 +146,7 @@ const SingleRecentResumeCard = ({
 
         <button
           type="button"
-          onClick={handleOnDelete}
+          onClick={() => handleOnDelete(card)}
           className="border px-3 text-white  hover:text-gray-800  text-xs  rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center float-right"
         >
           <FontAwesomeIcon icon={faTrashAlt} />
@@ -145,4 +156,4 @@ const SingleRecentResumeCard = ({
   );
 };
 
-export default SingleRecentResumeCard;
+export default CoverLetterCardSingle;

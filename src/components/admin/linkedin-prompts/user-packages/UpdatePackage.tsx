@@ -71,6 +71,7 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
         review_resume: userPackage.limit.review_resume,
         pdf_files_upload: userPackage.limit.pdf_files_upload,
         can_edit_resume: userPackage.limit.can_edit_resume,
+        email_generation: userPackage.limit.email_generation,
       },
     },
     validationSchema: Yup.object().shape({
@@ -119,6 +120,9 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
         pdf_files_upload: Yup.number()
           .required("Please Select The no of pdf files upload")
           .min(0, "Minimum Value is 0"),
+        email_generation: Yup.number()
+          .required("Please Select the no of emails can be generated")
+          .min(0, "Minimum Value is 0"),
         can_edit_resume: Yup.boolean().oneOf(
           [true, false],
           "Please select The CheckBox"
@@ -146,6 +150,7 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
           pdf_files_upload: values.limit.pdf_files_upload,
           review_resume: values.limit.review_resume,
           consulting_bids_generation: values.limit.consulting_bid_generation,
+          email_generation: values.limit.email_generation,
         },
       });
 
@@ -561,6 +566,30 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
                     onBlur={formik.handleBlur}
                     value={formik.values.limit.consulting_bid_generation}
                     name="limit.consulting_bid_generation"
+                  />
+                  {formik.touched.limit?.consulting_bid_generation &&
+                    formik.errors.limit?.consulting_bid_generation && (
+                      <p className="text-red-600 pt-3">
+                        {formik.errors.limit?.consulting_bid_generation}
+                      </p>
+                    )}
+                </div>
+                <div>
+                  <label
+                    htmlFor="no_email_generation"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    No Of Email Generation
+                  </label>
+                  <input
+                    id="no_email_generation"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="0"
+                    type="number"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.limit.email_generation}
+                    name="limit.email_generation"
                   />
                   {formik.touched.limit?.consulting_bid_generation &&
                     formik.errors.limit?.consulting_bid_generation && (

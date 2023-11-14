@@ -56,6 +56,7 @@ const UserSchema = new Schema(
       },
     ],
     resumes: [],
+    coverLetters: [],
     wizardCompleted: {
       type: Boolean,
       default: false,
