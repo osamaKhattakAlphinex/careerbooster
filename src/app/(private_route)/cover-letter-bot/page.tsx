@@ -17,6 +17,7 @@ import RecentResumeCard from "@/components/dashboard/resume-builder/RecenResumes
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import CoverLetterCardSingle from "@/components/dashboard/cover-letter-bot/CoverLetterCardSingle";
 import { makeid } from "@/helpers/makeid";
+import { setCoverLetter } from "@/store/coverLetterSlice";
 
 const CoverLetterWriter = () => {
   const componentRef = useRef<any>(null);
@@ -76,7 +77,7 @@ const CoverLetterWriter = () => {
   const userData = useSelector((state: any) => state.userData);
   console.clear();
   console.log(userData);
-  const { resumes } = userData;
+  const { resumes, coverLetters } = userData;
 
   const handleGenerate = async () => {
     // await getUserDataIfNotExists();
@@ -219,15 +220,19 @@ const CoverLetterWriter = () => {
       console.log("userData CoverLetter: ", userData.results.coverLetter);
       setStreamedData(userData.results.coverLetter);
     }
+
+    // dispatch(setCoverLetter(coverLetters[0]));
   }, [userData]);
 
   const historyProps = {
     list: userData.coverLetters,
-    title: "You Generated Cover Letters",
+    title: "Your AI Generated Cover Letters",
     Component: (card: any) => (
       <CoverLetterCardSingle card={card} componentRef={componentRef} />
     ),
   };
+
+  console.log(streamedData);
 
   return (
     <>
@@ -520,6 +525,7 @@ const CoverLetterWriter = () => {
           {/* <div className="">Download PDF</div> */}
         </div>
       </div>
+      {/* {coverLetters.length > 0 && ( */}
       {show && (
         <div
           className={`w-[95%] text-gray-800  bg-white border border-gray-200 rounded-lg shadow  m-10 ${

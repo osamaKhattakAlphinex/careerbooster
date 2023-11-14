@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
 import { useSession } from "next-auth/react";
 import Html2Pdf from "js-html2pdf";
+import { current } from "@reduxjs/toolkit";
 
 type CoverLetterType = {
   card: any;
@@ -26,18 +27,30 @@ const CoverLetterCardSingle = ({ card, componentRef }: CoverLetterType) => {
   // const userData = useSelector((state: any) => state.userData);
   // const { email, resumes } = userData;
 
-  const handleOnView = async () => {
+  const handleOnView = async (card: any) => {
     // if (source != "") {
     //   router.replace("/resume-builder");
     // }
-    // return dispatch(setResume(resume));
+    //  return dispatch(setResume(resume));
+    console.log(componentRef.current);
+
+    componentRef.current = card.coverLetterText;
+
+    console.log(componentRef.current);
   };
 
-  const handleOnDelete = () => {
+  const handleOnDelete = async (card: any) => {
     // ask for confirmation
     const c = confirm("Are you sure you want to delete this Cover Letter?");
     if (c) {
       console.log("Deletion need to be implemented");
+    }
+
+    try {
+      const coverLetters = await axios.delete(`/api/coverLetterBot/${card.id}`);
+      console.log(coverLetters);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -72,7 +85,7 @@ const CoverLetterCardSingle = ({ card, componentRef }: CoverLetterType) => {
         <div className="flex gap-2">
           <button
             type="button"
-            onClick={handleOnView}
+            onClick={() => handleOnView(card)}
             className=" border hover:bg-gray-100  text-xs  px-3 rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center py-1"
           >
             <FontAwesomeIcon icon={faEye} />
@@ -115,7 +128,7 @@ const CoverLetterCardSingle = ({ card, componentRef }: CoverLetterType) => {
                     </div>
                   </button>
                 )}
-                onBeforeGetContent={async () => await handleOnView()}
+                onBeforeGetContent={async () => await handleOnView(card)}
                 content={() => componentRef.current}
                 print={async (printIframe: HTMLIFrameElement) => {
                   const document = printIframe.contentDocument;
@@ -133,7 +146,7 @@ const CoverLetterCardSingle = ({ card, componentRef }: CoverLetterType) => {
 
         <button
           type="button"
-          onClick={handleOnDelete}
+          onClick={() => handleOnDelete(card)}
           className="border px-3 text-white  hover:text-gray-800  text-xs  rounded-md shadow-md transition duration-300 ease-in-out flex flex-row gap-2 justify-center items-center float-right"
         >
           <FontAwesomeIcon icon={faTrashAlt} />
