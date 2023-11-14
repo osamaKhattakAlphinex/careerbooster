@@ -65,18 +65,16 @@ const LinkedInUploadPDFResume = () => {
       })
         .then(async (resp: any) => {
           const res = await resp.json();
-          if (res.data) {
-            setStreamedHeadlineData(res.data);
+          if (res.success) {
+            setStreamedHeadlineData(res.result);
+            setHeadlineMsgLoading(false);
+            setHeadlineComplete(true);
           } else {
             setFileError("Something went wrong");
           }
         })
         .catch((error) => {
           setFileError("Something went wrong");
-        })
-        .finally(() => {
-          setHeadlineMsgLoading(false);
-          setHeadlineComplete(true);
         });
     } else if (!linkedinFileName) {
       setFileError("PDF Resume / CV is Required");
@@ -89,8 +87,7 @@ const LinkedInUploadPDFResume = () => {
     setAboutMsgLoading(true);
 
     if (linkedinFileName) {
-      console.log("linkedin: ------------" + linkedinContent);
-      fetch("/api/linkedinTool", {
+      fetch("/api/linkedInBots/linkedinAboutGenerator", {
         method: "POST",
         body: JSON.stringify({
           linkedinContent,
@@ -102,24 +99,24 @@ const LinkedInUploadPDFResume = () => {
         },
       })
         .then(async (resp: any) => {
-          const res = await resp.json();
-          // if (resp.ok) {
-          //   const reader = resp.body.getReader();
-          //   while (true) {
-          //     const { done, value } = await reader.read();
+          // const res = await resp.json();
+          if (resp.ok) {
+            const reader = resp.body.getReader();
+            while (true) {
+              const { done, value } = await reader.read();
 
-          //     if (done) {
-          //       break;
-          //     }
+              if (done) {
+                break;
+              }
 
-          //     const text = new TextDecoder().decode(value);
-          //     if (text) {
-          //       setAboutMsgLoading(false);
-          //       setStreamedAboutData((prev) => prev + text);
-          //     }
-          //   }
-          //   setAboutComplete(true);
-          // }
+              const text = new TextDecoder().decode(value);
+              if (text) {
+                setAboutMsgLoading(false);
+                setStreamedAboutData((prev) => prev + text);
+              }
+            }
+            setAboutComplete(true);
+          }
           // const res = await resp.json();
           // if (res.data && res.success) {
           //   setStreamedAboutData(res.data);
@@ -127,9 +124,9 @@ const LinkedInUploadPDFResume = () => {
           //   setFileError("Something went wrong");
           // }
 
-          setAboutMsgLoading(false);
-          setStreamedAboutData(res.result.text);
-          setAboutComplete(true);
+          // setAboutMsgLoading(false);
+          // setStreamedAboutData(res.result.text);
+          // setAboutComplete(true);
         })
         .catch((error) => {
           setFileError("Something went wrong");
@@ -327,7 +324,7 @@ const LinkedInUploadPDFResume = () => {
               <h1 className="text-4xl  flex items-center font-normal mb-4 text-white">
                 {/* <span className="text-yellow-400">{starIcon}</span> */}
                 <span className="text-center sm:ml-4 md:ml-4 lg:text-left text-2xl uppercase font-bold">
-                Your New LinkedIn Headline
+                  Your New LinkedIn Headline
                 </span>
               </h1>
               {headlineMsgLoading ? (
