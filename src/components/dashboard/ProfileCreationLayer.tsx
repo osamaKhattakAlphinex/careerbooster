@@ -196,9 +196,9 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           if (resp.status === 200) {
             const res = await resp.json();
 
-            if (res.success && res?.data) {
+            if (res?.success && res?.result) {
               try {
-                const data = JSON.parse(res?.data);
+                const data = res?.result;
 
                 const formattedArr = data?.education.map((item: any) => {
                   return {
@@ -272,11 +272,10 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         body: JSON.stringify(formData),
       })
         .then(async (resp: any) => {
-          if (resp.status === 200) {
-            const res = await resp.json();
-
-            if (res.success && res?.data) {
-              const data = JSON.parse(res?.data);
+          const res = await resp.json();
+          if (res.status === 200) {
+            if (res.success && res?.result) {
+              const data = res.result;
 
               const experiencesWithTitle = data?.experiences;
 
@@ -296,10 +295,11 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                     },
                     timeout: 120000, // abort api call after 2 minutes
                   })
-                  .then((resp: any) => {
-                    if (resp.status === 200) {
+                  .then(async (resp: any) => {
+                    const res = await resp.json();
+                    if (res.status === 200) {
                       try {
-                        const otherFields = JSON.parse(resp?.data?.data);
+                        const otherFields = res.result;
 
                         return {
                           jobTitle: experince?.jobTitle,

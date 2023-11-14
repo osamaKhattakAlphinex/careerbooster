@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef, use, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/dashboard/resume-templates/template-1";
 import { useDispatch, useSelector } from "react-redux";
@@ -111,17 +111,17 @@ const ResumeBuilder = () => {
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
-      if (res.success && res?.result) {
+      if (res?.success && res?.result) {
         const myJSON = res.result.text;
         const basicObj = {
           ...myJSON,
-          name: userData.firstName + " " + userData.lastName,
+          name: userData?.firstName + " " + userData?.lastName,
           contact: {
-            ...myJSON.contact,
-            email: userData.email,
-            phone: userData.phone,
+            ...myJSON?.contact,
+            email: userData?.email,
+            phone: userData?.phone,
           },
-          education: userData.education,
+          education: userData?.education,
         };
         dispatch(setBasicInfo(basicObj));
       }
@@ -317,14 +317,14 @@ const ResumeBuilder = () => {
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
-      if (res.success) {
-        if (res?.data?.text) {
+      if (res?.success) {
+        if (res?.result?.text) {
           // const tSon = JSON.stringify(res?.data?.text);
           // const myJSON = JSON.parse(tSon);
-          dispatch(setPrimarySkills(res.data.text));
-        } else if (res?.data) {
+          dispatch(setPrimarySkills(res.result.text));
+        } else if (res?.result) {
           // const myJSON = JSON.parse(res.data);
-          dispatch(setPrimarySkills(res.data));
+          dispatch(setPrimarySkills(res.result));
         }
       }
     });
@@ -346,14 +346,14 @@ const ResumeBuilder = () => {
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
-      if (res.success) {
-        if (res?.data?.text) {
-          // const tSon = JSON.stringify(res?.data?.text);
+      if (res?.success) {
+        if (res?.result?.text) {
+          // const tSon = JSON.stringify(res?.result?.text);
           // const myJSON = JSON.parse(tSon);
-          dispatch(setProfessionalSkills(res.data.text));
-        } else if (res?.data) {
-          // const myJSON = JSON.parse(res.data);
-          dispatch(setProfessionalSkills(res.data));
+          dispatch(setProfessionalSkills(res.result.text));
+        } else if (res?.result) {
+          // const myJSON = JSON.parse(res.result);
+          dispatch(setProfessionalSkills(res.result));
         }
       }
     });
@@ -375,14 +375,14 @@ const ResumeBuilder = () => {
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
-      if (res.success) {
-        if (res?.data?.text) {
-          // const tSon = JSON.stringify(res?.data?.text);
+      if (res?.success) {
+        if (res?.result?.text) {
+          // const tSon = JSON.stringify(res?.result?.text);
           // const myJSON = JSON.parse(tSon);
-          dispatch(setSecondarySkills(res.data.text));
-        } else if (res?.data) {
-          // const myJSON = JSON.parse(res.data);
-          dispatch(setSecondarySkills(res.data));
+          dispatch(setSecondarySkills(res.result.text));
+        } else if (res?.result) {
+          // const myJSON = JSON.parse(res.result);
+          dispatch(setSecondarySkills(res.result));
         }
       }
     });

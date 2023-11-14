@@ -95,7 +95,7 @@ const ResumeTemplate1 = ({
 }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
-
+  console.log("resume from redux", resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newSecondarySkill, setNewSecondarySkill] = useState(false);
   const [newProfessionalSkill, setNewProfessionalSkill] = useState(false);
@@ -1056,15 +1056,12 @@ const ResumeTemplate1 = ({
                                     .split("-")
                                     .map((index) => parseInt(index));
 
-                                  
                                   let updatedItems = [
                                     ...resume.workExperienceArray,
                                   ];
 
                                   // Ensure the drag and drop is within the same primary item
                                   if (draggedPrimaryIndex === i) {
-                                   
-
                                     const draggedItem = updatedItems[
                                       draggedPrimaryIndex
                                     ]?.achievements?.splice(

@@ -62,7 +62,7 @@ export async function POST(req: any) {
         const resp = await model.call(input);
 
         return NextResponse.json(
-          { success: true, data: resp, input: input },
+          { success: true, result: resp, input: input },
           { status: 200 }
         );
       }

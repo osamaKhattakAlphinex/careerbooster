@@ -5,10 +5,9 @@ import { NextResponse } from "next/server";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
-export async function POST(req: any) {
+export async function GET(req: any) {
   try {
-    const body = await req.json();
-    const status = body?.status ?? "active";
+    const status = req?.status ?? "active";
     if (!status) {
       return NextResponse.json(
         { result: "Bad Request", success: false },

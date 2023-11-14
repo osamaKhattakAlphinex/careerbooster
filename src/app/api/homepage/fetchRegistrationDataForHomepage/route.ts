@@ -8,7 +8,7 @@ export async function POST(req: any) {
   try {
     const body = await req.json();
     if (body) {
-      const content = body.content;
+      const content = body.content.slice(0, 4000);
       if (content) {
         const openai = new OpenAI({
           apiKey: process.env.OPENAI_API_KEY,
@@ -49,7 +49,7 @@ export async function POST(req: any) {
         });
 
         return NextResponse.json(
-          { success: true, data: response.choices[0].message.content },
+          { success: true, result: response.choices[0].message.content },
           { status: 200 }
         );
       }

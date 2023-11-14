@@ -72,7 +72,7 @@ export async function POST(req: any) {
         } catch (error) {}
 
         return NextResponse.json(
-          { success: true, data: response.choices[0].message.content },
+          { success: true, result: response.choices[0].message.content },
           { status: 200 }
         );
       }
