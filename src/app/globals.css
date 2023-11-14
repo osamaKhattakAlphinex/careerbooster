@@ -219,7 +219,10 @@
 /* Styles for mobile devices (up to 767px wide) */
 @media (max-width: 767px) {
   /* Your mobile-specific CSS styles go here */
-
+  .navbar-toggler .navbar-toggler-icon {
+    width: 1em !important;
+    height: 0.8em !important;
+  }
   .heading1 {
     margin-top: 14px;
   }

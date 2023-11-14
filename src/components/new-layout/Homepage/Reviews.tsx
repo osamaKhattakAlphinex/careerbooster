@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Reviews = () => {
   return (
-    <section className="overflow-hidden  pb-10  pb-lg-15">
+    <section className="overflow-hidden  pb-10  pb-lg-15  z-[2000000] ">
       <div className="container">
         <div className="row justify-center mb-18">
           <div className="col-lg-9">
