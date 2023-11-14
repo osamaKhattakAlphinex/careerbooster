@@ -65,18 +65,16 @@ const LinkedInUploadPDFResume = () => {
       })
         .then(async (resp: any) => {
           const res = await resp.json();
-          if (res.data) {
-            setStreamedHeadlineData(res.data);
+          if (res.success) {
+            setStreamedHeadlineData(res.result);
+            setHeadlineMsgLoading(false);
+            setHeadlineComplete(true);
           } else {
             setFileError("Something went wrong");
           }
         })
         .catch((error) => {
           setFileError("Something went wrong");
-        })
-        .finally(() => {
-          setHeadlineMsgLoading(false);
-          setHeadlineComplete(true);
         });
     } else if (!linkedinFileName) {
       setFileError("PDF Resume / CV is Required");
@@ -89,8 +87,7 @@ const LinkedInUploadPDFResume = () => {
     setAboutMsgLoading(true);
 
     if (linkedinFileName) {
-      console.log("linkedin: ------------" + linkedinContent);
-      fetch("/api/linkedinTool", {
+      fetch("/api/linkedInBots/linkedinAboutGenerator", {
         method: "POST",
         body: JSON.stringify({
           linkedinContent,
@@ -327,7 +324,7 @@ const LinkedInUploadPDFResume = () => {
               <h1 className="text-4xl  flex items-center font-normal mb-4 text-white">
                 {/* <span className="text-yellow-400">{starIcon}</span> */}
                 <span className="text-center sm:ml-4 md:ml-4 lg:text-left text-2xl uppercase font-bold">
-                Your New LinkedIn Headline
+                  Your New LinkedIn Headline
                 </span>
               </h1>
               {headlineMsgLoading ? (
