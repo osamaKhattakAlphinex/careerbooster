@@ -324,13 +324,12 @@ const LinkedInUploadPDFResume = () => {
           <div className="padding-t sm:p-2 md:p-4 lg:p-6 border-2 border-purple-600 rounded-2xl w-11/12 ">
             <div className=" flex flex-col  md:py-4  gap-4 bg-black div-m lg:p-12 rounded-2xl">
               {/* Headline */}
-              <h1 className="text-4xl flex items-center font-normal mb-4 text-white">
+              <h1 className="text-4xl  flex items-center font-normal mb-4 text-white">
                 {/* <span className="text-yellow-400">{starIcon}</span> */}
-                <span className="text-center md:ml-4 lg:text-left text-2xl uppercase font-bold">
-                  Your New LinkedIn Headline
+                <span className="text-center sm:ml-4 md:ml-4 lg:text-left text-2xl uppercase font-bold">
+                Your New LinkedIn Headline
                 </span>
               </h1>
-
               {headlineMsgLoading ? (
                 <div className="text-2xl text-white flex justify-center font-semibold">
                   {refreshIconRotating}
@@ -410,9 +409,9 @@ const LinkedInUploadPDFResume = () => {
               )}
 
               {/* Summary */}
-              <h1 className="text-4xl flex items-center font-normal mb-4 text-white">
+              <h1 className="text-4xl  flex items-center font-normal mb-4 text-white">
                 {/* <span className="text-yellow-400">{starIcon}</span> */}
-                <span className="text-center md:ml-4 lg:text-left text-2xl uppercase font-bold">
+                <span className="text-center sm:ml-4 md:ml-4 lg:text-left text-2xl uppercase font-bold">
                   Your Keyword Optimized LinkedIn Summary
                 </span>
               </h1>

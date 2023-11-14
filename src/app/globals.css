@@ -349,7 +349,7 @@
     padding: 12px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 991px) {
   .headline-btn {
     padding: 4px 2px;
     width: 220px;
