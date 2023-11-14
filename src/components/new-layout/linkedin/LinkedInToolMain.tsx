@@ -63,6 +63,7 @@ const LinkedInToolMain = () => {
   }, [fileUploading, uploadComplete, text]);
 
   return (
+<<<<<<< HEAD
     <div className="w-full ">
       {/* Hero Section */}
       <section className="hero bg-gradient-to-r from-[#01010D80] via-[#000A6380] to-purple-900 overflow-x-hidden lg:px-0	px-5 ">
@@ -106,6 +107,52 @@ const LinkedInToolMain = () => {
                       No credit card required
                     </p>
                   </div>
+=======
+    <div className="w-full">
+      {/* Upload File */}
+      <div className="lg:px-36 text-center lg:py-8">
+        <p className="text-md sm:text-sm md:text-md lg:text-lg">
+          Keyword-Optimized, Captivating & Under 30 Seconds!
+        </p>
+        <h1 className="py-2 md:text-[40px] text-[24px] text-center lg:font-bold mt-3">
+          Free{" "}
+          <span className="py-2 md:text-[40px] text-[24px] font-bold bg-clip-text text-transparent bg-gradient-to-r to-violet-500 from-fuchsia-500">
+            AI LinkedIn
+          </span>{" "}
+          Summary Generator
+          <h5 className="pt-3 padding-p md:text-[40px] text-[24px] text-center lg:font-bold">
+            Achieve Top Rankings in Recruiter
+          </h5>
+          <h5 className="md:text-[40px] text-[24px] w-full text-center lg:font-bold ">
+            Searches and Secure More Interviews!
+          </h5>
+        </h1>
+        <p className="text-md sm:text-sm md:text-md lg:text-lg">
+          Simply Upload your Resume or LinkedIn Profile in PDF. Receive results
+          perfectly tailored for you — or we{"'"}ll compensate you $1000 if we
+          waste your time with irrelevant outcomes.
+        </p>
+        <div className="mt-11 flex justify-center md:mt-11">
+          <label className="h-16 w-84 lg:h-16 lg:w-84 py-3 cursor-pointer px-3 md:px-6 rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
+            <input
+              type="file"
+              className="hidden "
+              disabled={fileUploading}
+              onChange={(e) => {
+                handleFileChange(e);
+              }}
+            />
+            {fileUploading || uploadComplete ? (
+              <p className="p-2">{refreshIconRotating}</p>
+            ) : (
+              <div className="flex gap-2 ">
+                <div>{uploadIcon}</div>
+                <div className="text-center ">
+                  <p className="m-0 font-semibold text-md [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                    Upload Resume or LinkedIn in PDF
+                  </p>
+                  <p className="text-xs">No credit card required</p>
+>>>>>>> rehmat
                 </div>
               )}
             </label>
