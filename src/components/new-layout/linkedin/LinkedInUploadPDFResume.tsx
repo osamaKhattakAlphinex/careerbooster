@@ -436,7 +436,7 @@ const LinkedInUploadPDFResume = () => {
                       }}
                     />
                   ) : (
-                    <div className="tracking-wider md:mx-2 md:p-3 border-2 box lg:p-8 rounded-2xl border-gray-700 text-white">
+                    <div className="tracking-wider md:mx-2 md:p-3 border-2 box lg:p-8 rounded-2xl border-gray-700 text-white font-sans">
                       {streamedAboutData}
                     </div>
                   )}
