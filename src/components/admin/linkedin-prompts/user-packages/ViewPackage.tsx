@@ -87,7 +87,7 @@ const ViewPackage = ({}) => {
                             type="button"
                             data-modal-target="deleteModal"
                             data-modal-toggle="deleteModal"
-                            className="flex w-full items-center py-2 pr-2 hover:text-[#e6f85e]"
+                            className="flex w-full items-center py-2 pr-2 dark:hover:text-[#e6f85e] hover:text-blue-400"
                           >
                             <svg
                               className="w-4 h-4 mr-2"
