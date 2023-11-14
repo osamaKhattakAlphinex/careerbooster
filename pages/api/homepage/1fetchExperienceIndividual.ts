@@ -16,48 +16,6 @@ const handler: NextApiHandler = async (req, res) => {
         temperature: 0.5,
       });
 
-      // OLD PROMPT
-      // const input = `
-      //     This is the User Data:
-      //     ${content}
-
-      //     Here is the Job Title:
-      //     ${jobTitle}
-
-      //     Here is the Company Name:
-      //     ${company}
-
-      //     Now Find the details for this Work Experience (by Job Title and Company Name) of the user from the above provided User Data.
-      //     and return the following fields for that work experience:
-      //     country, cityState, fromMonth, fromYear, isContinue, toMonth, toYear, description
-
-      //     country means the name of teh country where the user worked
-      //     cityState means the name of the city or state where the user worked
-      //     fromMonth means the month when the user started working (in full e.g. January, May)
-      //     fromYear means the year when the user started working (in full e.g 2023, 1997)
-      //     toMonth means the month when the user stopped working (in full e.g. January, May)
-      //     toYear means the year when the user stopped working (in full e.g 2023, 1997)
-      //     description means the description of the work experience. Gather as much details as you can for this current job
-      //     isContinue means if the user is still working there or not (Is Experience continued? e.g true, false)
-
-      //     The answer MUST be a valid JSON and formatting should be like this
-      //     replace the VALUE_HERE with the actual values
-      //     {
-      //       country: VALUE_HERE,
-      //       cityState: VALUE_HERE,
-      //       fromMonth: VALUE_HERE,
-      //       fromYear: VALUE_HERE,
-      //       toMonth: VALUE_HERE,
-      //       toYear: VALUE_HERE,
-      //       description: VALUE_HERE,
-      //       isContinue: VALUE_HERE,
-      //     }
-
-      //     If there is only one year or date fill it in the toYear and toMonth field
-      //     If there is only Year and no month for an experience record put the year in the toYear field and leave the toMonth field blank
-      //     If there is no value for any field Leave that field blank string DONOT add labels like "N/A" or "Not Available" etc.
-      //     Months should be in full e.g. January, February, March, April, May, June, July, August, September, October, November, and December
-      // `;
       const input = `
       This is the User Data:
           ${content}
