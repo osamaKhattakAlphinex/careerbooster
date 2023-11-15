@@ -320,7 +320,7 @@ const ResumeBuilder = () => {
       const res = await resp.json();
       if (res.success) {
         if (res?.result) {
-          const myJSON = JSON.parse(res.result);
+          const myJSON = await JSON.parse(res.result);
           dispatch(setPrimarySkills(myJSON));
         }
       }
@@ -345,7 +345,7 @@ const ResumeBuilder = () => {
       const res = await resp.json();
       if (res.success) {
         if (res?.result) {
-          const myJSON = JSON.parse(res.result);
+          const myJSON = await JSON.parse(res.result);
 
           dispatch(setProfessionalSkills(myJSON));
         }
@@ -371,7 +371,7 @@ const ResumeBuilder = () => {
       const res = await resp.json();
       if (res.success) {
         if (res?.result) {
-          const myJSON = JSON.parse(res.result);
+          const myJSON = await JSON.parse(res.result);
           dispatch(setSecondarySkills(myJSON));
         }
       }
