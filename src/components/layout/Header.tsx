@@ -109,7 +109,7 @@ const Header = () => {
 
         {/* <!-- Navbar content --> */}
         <div className="collapse navbar-collapse" id="navbarContent">
-          <div className="navbar-content-inner ms-lg-auto d-flex flex-column flex-lg-row align-lg-center gap-4 gap-lg-10 p-2 p-lg-0">
+          <div className="navbar-content-inner ms-lg-auto d-flex  flex-lg-row align-lg-center gap-[100px]  gap-lg-10 p-2 p-lg-0">
             <ul className="navbar-nav gap-lg-2 gap-xl-5 visible ">
               <li className="nav-item dropdown">
                 <Link className="nav-link " href="/">

@@ -303,7 +303,7 @@ const LinkedInUploadPDFResume = () => {
       {!aboutComplete || aboutMsgLoading ? (
         refreshIconRotating
       ) : (
-        <div className="flex gap-2 text-[#33FF00] font-extrabold text-5xl mb-4">
+        <div className="flex gap-2 text-[#33FF00] font-extrabold text-5xl lg:my-[40px] my-[10px]">
           Success!
         </div>
       )}
@@ -317,13 +317,13 @@ const LinkedInUploadPDFResume = () => {
       )}
 
       {streamedHeadlineData || streamedAboutData ? (
-        <div className=" my-3 w-full flex flex-col items-center">
+        <div className=" my-3 w-full flex flex-col items-center lg:px-[100px] px-[10px]">
           <div className="padding-t sm:p-2 md:p-4 lg:p-6 border-2 border-purple-600 rounded-2xl w-11/12 ">
             <div className=" flex flex-col  md:py-4  gap-4 bg-black div-m lg:p-12 rounded-2xl">
               {/* Headline */}
-              <h1 className="text-4xl  flex items-center font-normal mb-4 text-white">
+              <h1 className="  flex items-center font-normal mb-4 text-white">
                 {/* <span className="text-yellow-400">{starIcon}</span> */}
-                <span className="text-center sm:ml-4 md:ml-4 lg:text-left text-2xl uppercase font-bold">
+                <span className="text-center lg:text-[36px] text-[20px] sm:ml-4 md:ml-4 lg:text-left  uppercase font-bold">
                   Your New LinkedIn Headline
                 </span>
               </h1>
@@ -356,7 +356,7 @@ const LinkedInUploadPDFResume = () => {
                   )}
 
                   {streamedHeadlineData && (
-                    <div className="flex flex-col md:flex-row md:mx-2 div-1 lg:flex-row  gap-4">
+                    <div className="flex flex-col md:flex-row md:mx-2 div-1 lg:flex-row  gap-4 lg:text-left text-center">
                       <Button
                         type="button"
                         className="border-2 border-purple-600 rounded-full headline-btn  hover:bg-purple-600 hover:text-white"
@@ -406,9 +406,9 @@ const LinkedInUploadPDFResume = () => {
               )}
 
               {/* Summary */}
-              <h1 className="text-4xl  flex items-center font-normal mb-4 text-white">
+              <h1 className=" flex items-center font-normal mb-4 mt-8 text-white">
                 {/* <span className="text-yellow-400">{starIcon}</span> */}
-                <span className="text-center sm:ml-4 md:ml-4 lg:text-left text-2xl uppercase font-bold">
+                <span className="lg:text-[36px] text-[20px] text-center sm:ml-4 md:ml-4 lg:text-left  uppercase font-bold">
                   Your Keyword Optimized LinkedIn Summary
                 </span>
               </h1>
@@ -472,17 +472,17 @@ const LinkedInUploadPDFResume = () => {
         " "
       )}
       {streamedAboutData && (
-        <div className="content-1 lg:mt-9 flex flex-col justify-center items-center gap-2">
-          <h2 className="text-center lg:text-left text-red-600 ">
+        <div className="lg:content-1 lg:mt-[36px] mt-[20px] flex flex-col justify-center items-center gap-2 ">
+          <h2 className="text-center lg:text-left text-red-600 lg:text-[46px] tex-[28px] lg:px-0 px-[15px]">
             Don{"'"}t Like the results?
           </h2>
-          <p className="text-xl content-p lg:text-2xl">
+          <p className="text-[16px]  lg:text-[24px] lg:text-left text-center">
             Change your preference and regenerate you summary
           </p>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 lg:px-0 px-8">
             <label
               htmlFor="default-radio-1"
-              className="flex gap-3 redio-btn items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 cursor-pointer"
+              className="flex gap-3 redio-btn items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 py-3 cursor-pointer lg:text-[16px] text-[11px]"
             >
               <input
                 id="default-radio-1"
@@ -490,13 +490,13 @@ const LinkedInUploadPDFResume = () => {
                 value="aboutPersona"
                 name="default-radio"
                 onChange={(e) => setAboutData(e.target.value)}
-                className="w-5 h-5"
+                className="lg:w-5 lg:h-5 w-3 h-3 "
               />
               Use My Persona to write the Cover Letter
             </label>
             <label
               htmlFor="default-radio-2"
-              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 cursor-pointer"
+              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 py-3 cursor-pointer lg:text-[16px] text-[11px]"
             >
               <input
                 id="default-radio-2"
@@ -504,13 +504,13 @@ const LinkedInUploadPDFResume = () => {
                 value="aboutShort"
                 name="default-radio"
                 onChange={(e) => setAboutData(e.target.value)}
-                className="w-5 h-5"
+                className="lg:w-5 lg:h-5 w-3 h-3 "
               />
               I need a shorter summary (Not Recommended)
             </label>
             <label
               htmlFor="default-radio-3"
-              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 cursor-pointer"
+              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 py-3 cursor-pointer lg:text-[16px] text-[11px]"
             >
               <input
                 id="default-radio-3"
@@ -518,13 +518,13 @@ const LinkedInUploadPDFResume = () => {
                 value="aboutStory"
                 name="default-radio"
                 onChange={(e) => setAboutData(e.target.value)}
-                className="w-5 h-5"
+                className="lg:w-5 lg:h-5 w-3 h-3 "
               />
               Add a captivating story to hook the visitiors
             </label>
             <label
               htmlFor="default-radio-4"
-              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 cursor-pointer"
+              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 py-3 cursor-pointer lg:text-[16px] text-[11px]"
             >
               <input
                 id="default-radio-4"
@@ -532,7 +532,7 @@ const LinkedInUploadPDFResume = () => {
                 value="aboutInstructions"
                 name="default-radio"
                 onChange={(e) => setAboutData(e.target.value)}
-                className="w-5 h-5"
+                className="lg:w-5 lg:h-5 w-3 h-3 "
               />
               I want to add my personalized instructions
             </label>
@@ -572,7 +572,9 @@ const LinkedInUploadPDFResume = () => {
                 d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
               />
             </svg>
-            <span>Re-generate Summary</span>
+            <span className="lg:text-[20px] text-[16px] font-semibold">
+              Re-generate Summary
+            </span>
           </Button>
           <LinkedInSummary
             fullName={names?.fullName}
@@ -582,11 +584,11 @@ const LinkedInUploadPDFResume = () => {
       )}
       <div className="w-11/12 h-80 flex flex-col justify-center lg:items-center rounded-2xl mt-14 bg-gradient-to-r to-fuchsia-600 from-indigo-600  border-gray-800">
         <div className=" lg:w-6/12  flex items-center flex-col">
-          <h3 className="lg:text-4xl text-normal  lg:leading-normal text-white text-center lg:font-bold ">
+          <h3 className="lg:text-[36px] text-[20] text-normal  lg:leading-normal text-white text-center lg:font-bold ">
             Yes, I Want to Explore More Career Boosting Tools!
           </h3>
           <button
-            className={`mx-1 mt-8 p-3 text-lg my-2 bg-yellow-400 hover:bg-yellow-600  lg:w-8/12 lg:h-14 lg:mt-8 text-center rounded-full font-bold lg:text-xl text-black lg:py-3 lg:px-9 no-underline  ${
+            className={`mx-1 mt-8 p-3  my-2 bg-yellow-400 hover:bg-yellow-600  lg:w-8/12 lg:h-14 lg:mt-8 text-center rounded-full font-bold lg:text-[20px] text-[16px] text-black lg:py-3 lg:px-9 no-underline  ${
               buttonDisabled ? "bg-yellow-600" : "cursor-pointer"
             } `}
             onClick={moveToRegister}
