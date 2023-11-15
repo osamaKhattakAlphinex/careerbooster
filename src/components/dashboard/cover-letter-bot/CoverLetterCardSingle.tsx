@@ -1,15 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEye, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { Resume, setResume } from "@/store/resumeSlice";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
-import { useRouter } from "next/navigation";
-import ReactToPrint, { useReactToPrint } from "react-to-print";
-import { useSession } from "next-auth/react";
+import ReactToPrint from "react-to-print";
 import Html2Pdf from "js-html2pdf";
-import { current } from "@reduxjs/toolkit";
+import { resetCoverLetter, setCoverLetter } from "@/store/coverLetterSlice";
 
 type CoverLetterType = {
   card: any;
@@ -17,59 +14,35 @@ type CoverLetterType = {
 };
 
 const CoverLetterCardSingle = ({ card, componentRef }: CoverLetterType) => {
-  const { data: session } = useSession();
-  const router = useRouter();
-
-  console.log(card.card);
-
   // redux
   const dispatch = useDispatch();
-  // const userData = useSelector((state: any) => state.userData);
-  // const { email, resumes } = userData;
+  const userData = useSelector((state: any) => state.userData);
 
   const handleOnView = async (card: any) => {
-    // if (source != "") {
-    //   router.replace("/resume-builder");
-    // }
-    //  return dispatch(setResume(resume));
-    console.log(componentRef.current);
-
-    componentRef.current = card.coverLetterText;
-
-    console.log(componentRef.current);
+    dispatch(setCoverLetter(card));
   };
 
   const handleOnDelete = async (card: any) => {
-    // ask for confirmation
     const c = confirm("Are you sure you want to delete this Cover Letter?");
     if (c) {
-      console.log("Deletion need to be implemented");
-    }
+      try {
+        await axios.delete(`/api/coverLetterBot/${card.id}`);
+        dispatch(resetCoverLetter());
+        // updated cover letters
+        const updatedCoverLetters = userData.coverLetters.filter(
+          (letter: any) => letter.id !== card.id
+        );
 
-    try {
-      const coverLetters = await axios.delete(`/api/coverLetterBot/${card.id}`);
-      console.log(coverLetters);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+        const updatedObject = {
+          ...userData,
+          coverLetters: updatedCoverLetters,
+        };
 
-  const updateUser = (updatedResumes: any) => {
-    // if (email) {
-    //   return axios
-    //     .post("/api/users/updateUserResumes", {
-    //       email,
-    //       resumes: updatedResumes,
-    //     })
-    //     .then(async (res) => {
-    //       if (res.status === 200) {
-    //         // update user in redux
-    //         const res = await fetch(`/api/users/getOneByEmail?email=${email}`);
-    //         const { user } = await res.json();
-    //         dispatch(setUserData(user));
-    //       }
-    //     });
-    // }
+        dispatch(setUserData({ ...userData, ...updatedObject }));
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   if (!card) return <h1>Loading </h1>;

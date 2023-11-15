@@ -48,15 +48,27 @@ const CoverLetterWriter = () => {
   };
 
   const saveCoverLetterToDb = async () => {
+    const payload = {
+      id: makeid(),
+      jobDescription: jobDescription,
+      coverLetterText: streamedData,
+      generatedOnDate: new Date().toISOString(),
+      generatedViaOption: selectedOption,
+      userEmail: session?.user?.email,
+    };
     try {
-      const coverLetter = await axios.post("/api/coverLetterBot", {
-        id: makeid(),
-        jobDescription: jobDescription,
-        coverLetterText: streamedData,
-        generatedOnDate: new Date(),
-        generatedViaOption: selectedOption,
-        userEmail: session?.user?.email,
-      });
+      const coverLetter = await axios.post("/api/coverLetterBot", payload);
+
+      if (coverLetter.data.success) {
+        dispatch(setCoverLetter(payload));
+
+        const updatedObject = {
+          ...userData,
+          coverLetters: coverLetter.data.result.coverLetters,
+        };
+
+        dispatch(setUserData({ ...userData, ...updatedObject }));
+      }
     } catch (error) {
       console.log(error);
     }
@@ -75,8 +87,9 @@ const CoverLetterWriter = () => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
-  console.clear();
-  console.log(userData);
+  const coverLetter = useSelector((state: any) => state.coverLetter);
+
+  // console.clear();
   const { resumes, coverLetters } = userData;
 
   const handleGenerate = async () => {
@@ -137,28 +150,97 @@ const CoverLetterWriter = () => {
               setStreamedData((prev) => prev + text);
               tempText += text;
             }
+
             // await saveToDB(tempText);
-            fetch("/api/users/updateUserLimit", {
-              method: "POST",
-              body: JSON.stringify({
-                email: session?.user?.email,
-                type: "cover_letter_generation",
-              }),
-            }).then(async (resp: any) => {
-              const res = await resp.json();
-              const user = JSON.parse(res.result);
-              if (res.success) {
+
+            const limitUpdateResponse = await fetch(
+              "/api/users/updateUserLimit",
+              {
+                method: "POST",
+                body: JSON.stringify({
+                  email: session?.user?.email,
+                  type: "cover_letter_generation",
+                }),
+              }
+            );
+
+            const limitUpdateData = await limitUpdateResponse.json();
+
+            if (limitUpdateData.success) {
+              // Generate payload for cover letter
+              const payload = {
+                id: makeid(),
+                jobDescription: jobDescription,
+                coverLetterText: tempText,
+                generatedOnDate: new Date().toISOString(),
+                generatedViaOption: selectedOption,
+                userEmail: session?.user?.email,
+              };
+
+              // Save cover letter to the server
+              const coverLetterResponse = await axios.post(
+                "/api/coverLetterBot",
+                payload
+              );
+
+              if (coverLetterResponse.data.success) {
+                // Update Redux store
                 const updatedObject = {
                   ...userData,
                   userPackageUsed: {
                     ...userData.userPackageUsed,
                     cover_letter_generation:
-                      user.userPackageUsed.cover_letter_generation,
+                      limitUpdateData.user.userPackageUsed
+                        .cover_letter_generation,
                   },
+                  coverLetters: coverLetterResponse.data.result.coverLetters,
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
+                dispatch(setCoverLetter(payload));
               }
-            });
+            }
+
+            // fetch("/api/users/updateUserLimit", {
+            //   method: "POST",
+            //   body: JSON.stringify({
+            //     email: session?.user?.email,
+            //     type: "cover_letter_generation",
+            //   }),
+            // })
+            //   .then(async () => {
+            //     const payload = {
+            //       id: makeid(),
+            //       jobDescription: jobDescription,
+            //       coverLetterText: streamedData,
+            //       generatedOnDate: new Date().toISOString(),
+            //       generatedViaOption: selectedOption,
+            //       userEmail: session?.user?.email,
+            //     };
+            //     try {
+            //       const coverLetter = await axios.post(
+            //         "/api/coverLetterBot",
+            //         payload
+            //       );
+
+            //       if (coverLetter.data.success) {
+            //         dispatch(setCoverLetter(payload));
+            //       }
+            //     } catch {}
+            //   })
+            //   .then(async (resp: any) => {
+            //     const res = await resp.json();
+            //     if (res.success) {
+            //       const updatedObject = {
+            //         ...userData,
+            //         userPackageUsed: {
+            //           ...userData.userPackageUsed,
+            //           cover_letter_generation:
+            //             res.user.userPackageUsed.cover_letter_generation,
+            //         },
+            //       };
+            //       dispatch(setUserData({ ...userData, ...updatedObject }));
+            //     }
+            //   });
           } else {
             setStreamedData("Error! Something went wrong");
           }
@@ -212,14 +294,21 @@ const CoverLetterWriter = () => {
         skills: userData?.skills,
       });
     }
-    if (
-      userData.results &&
-      userData.results.coverLetter &&
-      userData.results.coverLetter !== ""
-    ) {
+    // if (
+    //   userData.results &&
+    //   userData.results.coverLetter &&
+    //   userData.results.coverLetter !== ""
+    // )
+    // {
+    //   setShow(true);
+    //   console.log("userData CoverLetter: ", userData.results.coverLetter);
+    //   setStreamedData(userData.results.coverLetter);
+    // }
+
+    if (!streamedData) {
       setShow(true);
-      console.log("userData CoverLetter: ", userData.results.coverLetter);
-      setStreamedData(userData.results.coverLetter);
+      // console.log("userData CoverLetter: ", userData.results.coverLetter);
+      setStreamedData(coverLetter.coverLetterText);
     }
 
     // dispatch(setCoverLetter(coverLetters[0]));
@@ -233,7 +322,9 @@ const CoverLetterWriter = () => {
     ),
   };
 
-  console.log(streamedData);
+  useEffect(() => {
+    setStreamedData(coverLetter.coverLetterText);
+  }, [coverLetter.coverLetterText]);
 
   return (
     <>
@@ -494,7 +585,7 @@ const CoverLetterWriter = () => {
               </div>
             )}
 
-            {streamedData && (
+            {/* {streamedData && (
               <div>
                 <Button
                   type="button"
@@ -521,7 +612,7 @@ const CoverLetterWriter = () => {
                   </div>
                 </Button>
               </div>
-            )}
+            )} */}
           </div>
           {/* <div className="">Download PDF</div> */}
         </div>
@@ -533,6 +624,21 @@ const CoverLetterWriter = () => {
             msgLoading ? "animate-pulse" : ""
           }`}
         >
+          {/* <div className="p-12" ref={componentRef}>
+            {isEditing ? (
+              <div
+                contentEditable="true"
+                dangerouslySetInnerHTML={{ __html: editedContent }}
+                onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
+                  setEditedContent(e.target.innerHTML);
+                }}
+              ></div>
+            ) : (
+              <div onClick={handleClick}>
+                <div dangerouslySetInnerHTML={{ __html: streamedData }}></div>
+              </div>
+            )}
+          </div> */}
           <div className="p-12" ref={componentRef}>
             {isEditing ? (
               <div
