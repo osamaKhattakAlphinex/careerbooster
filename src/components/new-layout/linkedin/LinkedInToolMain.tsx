@@ -65,12 +65,12 @@ const LinkedInToolMain = () => {
   return (
     <div className="w-full ">
       {/* Hero Section */}
-      <section className="hero bg-gradient-to-r from-[#01010D80] via-[#000A6380] to-purple-900 overflow-x-hidden lg:px-0	px-5 ">
-        <div className="lg:px-36 text-center lg:pt-12 lg:pb-8 pt-15 ">
-          <p className="lg:text-[28px] text-[16px] lg:px-0 	">
+      <section className="hero bg-gradient-to-r from-[#01010D80] via-[#000A6380] to-purple-900 overflow-x-hidden lg:px-0	px-5 lg:npt-10">
+        <div className="lg:px-[120px] text-center lg:pt-12 lg:pb-8 pt-15 ">
+          <p className="lg:text-[24px] text-[16px] lg:px-0 	">
             Keyword-Optimized, Captivating & Under 30 Seconds!
           </p>
-          <h3 className="py-2 lg:text-[50px] text-[35px] text-center font-semibold mt-3 lg:leading-[66px]  lg:mx-17">
+          <h3 className="py-2 lg:text-[50px] text-[32px] text-center font-semibold mt-3 lg:leading-[66px]  lg:mx-17">
             Free{" "}
             <span className="py-2  font-semibold bg-clip-text text-transparent bg-gradient-to-r to-violet-500 from-fuchsia-500">
               AI LinkedIn

@@ -4,7 +4,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-linkedin",
   description:
-    "Elevate your career with CareerBooster.AI – Your go-to destination for AI-powered tools that transform your professional image. In today's competitive job market, trust our expertise in crafting ATS-friendly resumes and captivating executive resumes. Join over 20,000 professionals who've revolutionized their job hunt with CareerBooster.",
+    "Free AI LinkedIn Summary Generator To Achieve Top Rankings In Recruiter Searches And Secure More Interviews!",
   keywords: [
     "CareerBooster.AI",
     "AI-powered tools",
@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     "Revolutionize job search",
     "CareerBooster About ",
     "About CareerBooster",
+    "free ai linkedin summary generator",
+    "free ai linkedin tool",
+    "achieve top ranking in linkedin searches",
   ],
   viewport: {
     width: "device-width",

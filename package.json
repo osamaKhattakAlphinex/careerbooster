@@ -28,6 +28,7 @@
     "file-saver": "^2.0.5",
     "formidable": "^3.5.1",
     "formik": "^2.4.3",
+    "install": "^0.13.0",
     "js-html2pdf": "^1.1.4",
     "jsonwebtoken": "^9.0.2",
     "langchain": "^0.0.125",

@@ -12,11 +12,14 @@ import FAQList from "@/components/new-layout/Homepage/Faqs";
 import MainLoaderLayer from "@/components/new-layout/MainLoaderLayer";
 
 export const metadata: Metadata = {
-  title: "CareerBooster.AI - Home Page",
+  title: "CareerBooster.AI",
   description:
-    "Unlock your career potential with CareerBooster.AI – AI-powered tools for turbocharging your job search. From ATS-friendly resumes to LinkedIn optimization, discover the winning combination trusted by senior-level professionals. Try it free and revolutionize your job hunt today!",
+    "Your Free AI Resume Writer & LinkedIn Optimization Tool to Turbocharge Your Career!",
   keywords: [
     "CareerBooster.Ai",
+    "Ai resume Generator tool",
+    "Ai resume writer tool",
+    "Ai LinkedIn Optimization Tool",
     "careerBooster.Ai",
     "CareerBooster.Ai",
     "AiCareerBooster",

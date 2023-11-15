@@ -72,10 +72,10 @@ function FAQItem(props: any) {
         className="accordion accordion-flush d-flex flex-column gap-6  "
         id="faqAccordion"
       >
-        <div className="accordion-item mb-12">
+        <div className="accordion-item lg:mb-[48px] mb-[24px]">
           <h2 className="accordion-header ">
             <button
-              className="theme-text-2 accordion-btn flex flex-row text-left justify-center  items-center text-[1.5rem]"
+              className="theme-text-2 accordion-btn flex flex-row text-left justify-center  items-center lg:text-[30px] text-[18px]"
               onClick={toggleFAQ}
               type="button"
               //   data-bs-toggle="collapse"
