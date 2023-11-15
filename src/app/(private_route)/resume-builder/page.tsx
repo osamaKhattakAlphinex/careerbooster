@@ -36,7 +36,6 @@ import useTheme from "@/lib/useTheme";
 const ResumeBuilder = () => {
   const [theme] = useTheme();
   const [confettingRunning, setConfettiRunning] = useState(false);
-
   const confettiConfig = {
     angle: 90,
     spread: 360,

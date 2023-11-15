@@ -51,8 +51,9 @@ const SingleRecentResumeCard = ({
           resumes: updatedResumes,
         })
         .then(async (res: any) => {
-          if (res.success) {
+          if (res.data.success) {
             // update user in redux
+            // resumeCardDeleteHandler();
             const res = await fetch(`/api/users/getOneByEmail?email=${email}`);
 
             const response = await res.json();
