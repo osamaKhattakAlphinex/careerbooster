@@ -3,24 +3,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ICoverLetter {
-  coverLetter: any;
+  id: string;
+  jobDescription: string;
+  coverLetterText: string;
+  generatedOnDate: any;
+  generatedViaOption: string;
+  userEmail: string;
 }
 
 const initialState: ICoverLetter = {
-  coverLetter: {},
+  id: "",
+  jobDescription: "",
+  coverLetterText: "",
+  generatedOnDate: "",
+  generatedViaOption: "",
+  userEmail: "",
 };
 
 const coverLetterSlice = createSlice({
   name: "coverLetter",
   initialState,
   reducers: {
-    resetCoverLetter(state, action) {
+    resetCoverLetter() {
       return initialState;
     },
     setCoverLetter(state, action) {
       return {
-        ...state,
-        coverLetter: action.payload,
+        ...action.payload,
       };
     },
   },
