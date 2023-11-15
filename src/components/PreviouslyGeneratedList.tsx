@@ -9,8 +9,6 @@ type Props = {
 const PreviouslyGeneratedList = ({ title, list, Component }: Props) => {
   if (!list) return;
 
-  console.log(list);
-
   return (
     <div className="w-full ">
       <div className="space-y-4 md:space-y-6">
