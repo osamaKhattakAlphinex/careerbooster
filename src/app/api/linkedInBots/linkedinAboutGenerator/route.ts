@@ -31,11 +31,9 @@ export async function POST(req: any) {
         prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
       }
 
-      const content = linkedinContent.slice(0, 4000);
-
-      if (content) {
+      if (linkedinContent) {
         const input = `This is the User data:
-                ${content}
+                ${linkedinContent}
     
                 This is the prompt:
                 ${prompt}`;

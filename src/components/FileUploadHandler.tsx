@@ -18,7 +18,8 @@ function removeSpecialChars(str: string) {
 }
 
 const saveToLocalStorage = (text: any) => {
-  localStorage.setItem("pdfText", text);
+  const newText = text.substring(0, 4000);
+  localStorage.setItem("pdfText", newText);
 };
 
 const FileUploadHandler = ({

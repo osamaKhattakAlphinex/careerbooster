@@ -13,7 +13,8 @@ import { useRouter } from "next/navigation";
 import FileUploadHandler from "@/components/FileUploadHandler";
 
 const saveToLocalStorage = (text: any, fileName: any) => {
-  localStorage.setItem("linkedin-content", text);
+  const newText = text.substring(0, 4000);
+  localStorage.setItem("linkedin-content", newText);
   localStorage.setItem("linkedin-fileName", fileName);
 };
 

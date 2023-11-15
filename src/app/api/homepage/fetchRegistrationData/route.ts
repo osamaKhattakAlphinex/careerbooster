@@ -11,7 +11,7 @@ export async function POST(req: any) {
 
     if (body) {
       const reqBody = body;
-      const content = reqBody.content.slice(0, 4000);
+      const content = reqBody.content;
       const trainBotData = reqBody?.trainBotData;
 
       if (content) {

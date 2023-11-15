@@ -17,7 +17,7 @@ export async function POST(req: any) {
   try {
     const body = await req.json();
     if (body) {
-      const content = body.linkedinContent.slice(0, 4000);
+      const content = body.linkedinContent;
 
       let prompt;
       await startDB();
