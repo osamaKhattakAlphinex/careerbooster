@@ -48,9 +48,10 @@ const ViewPackage = ({}) => {
 
   const getPackages = async () => {
     try {
-      let { data } = await axios.get("/api/packages");
-      if (data.success) {
-        setPackages(data.packages);
+      let response: any = await axios.get("/api/packages");
+      console.log("response: " + response);
+      if (response?.success) {
+        setPackages(response.result);
       }
     } catch {}
   };
@@ -116,7 +117,7 @@ const ViewPackage = ({}) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {packages.map((pckg: Package, index: number) => {
+                    {packages?.map((pckg: Package, index: number) => {
                       return (
                         <tr
                           key={index}

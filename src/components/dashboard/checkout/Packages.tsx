@@ -33,7 +33,7 @@ const Packages = ({ viewOnly }: Props) => {
   return (
     <>
       {packages &&
-        packages.map((pkg: UserPackageData) => (
+        packages?.map((pkg: UserPackageData) => (
           <MonthlySubscriptionCard
             key={pkg._id}
             userPackage={pkg}

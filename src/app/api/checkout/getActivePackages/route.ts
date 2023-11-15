@@ -6,33 +6,29 @@ export const maxDuration = 300; // This function can run for a maximum of 5 seco
 export const dynamic = "force-dynamic";
 
 export async function GET(req: any) {
-  try {
-    const status = req?.status ?? "active";
-    if (!status) {
-      return NextResponse.json(
-        { result: "Bad Request", success: false },
-        { status: 400 }
-      );
-    }
-
-    await startDB();
-
-    const packages = await UserPackage.find({ status });
-
-    if (!packages) {
-      return NextResponse.json(
-        { result: "Packages not found", success: false },
-        { status: 404 }
-      );
-    }
+  // const body = await req.json();
+  // console.log("body: " + body);
+  // const status = body?.status ?? "active";
+  const status = "active";
+  // console.log("status: " + status);
+  if (!status) {
     return NextResponse.json(
-      { result: packages, success: true },
-      { status: 200 }
+      { result: "Bad Request", success: false },
+      { status: 400 }
     );
-  } catch (error) {
+  }
+
+  await startDB();
+
+  const packages = await UserPackage.find({ status });
+  if (!packages) {
     return NextResponse.json(
-      { result: "something went wrong", success: false },
+      { result: "Packages not found", success: false },
       { status: 404 }
     );
   }
+  return NextResponse.json(
+    { result: packages, success: true },
+    { status: 200 }
+  );
 }
