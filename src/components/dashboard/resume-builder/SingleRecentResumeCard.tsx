@@ -21,7 +21,6 @@ const SingleRecentResumeCard = ({
 }) => {
   const { data: session } = useSession();
   const router = useRouter();
-  console.log(resume);
   // redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
@@ -51,13 +50,13 @@ const SingleRecentResumeCard = ({
           email,
           resumes: updatedResumes,
         })
-        .then(async (res) => {
-          if (res.status === 200) {
+        .then(async (res: any) => {
+          if (res.success) {
             // update user in redux
             const res = await fetch(`/api/users/getOneByEmail?email=${email}`);
 
-            const { user } = await res.json();
-            dispatch(setUserData(user));
+            const response = await res.json();
+            dispatch(setUserData(response.result));
           }
         });
     }

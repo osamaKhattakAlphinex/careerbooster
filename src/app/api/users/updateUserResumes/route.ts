@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export async function POST(req: any) {
   try {
     const session = await getServerSession(authOptions);
-    const _body = req.json();
+    const _body = await req.json();
     if (session) {
       // const email = req?.body?.email;
       const email = _body.email;
@@ -26,12 +26,11 @@ export async function POST(req: any) {
           if (!user) {
             return NextResponse.json(
               {
-                error: "User not found",
+                result: "User not found",
                 success: false,
               },
-              { status: 400 }
+              { status: 404 }
             );
-            // return res.status(404).json({ error: "User not found" });
           }
 
           // Update the resumes array with the new data
@@ -42,12 +41,11 @@ export async function POST(req: any) {
 
           return NextResponse.json(
             {
-              msg: "successful",
+              result: "successful",
               success: true,
             },
             { status: 200 }
           );
-          // return res.status(200).json({ success: true });
         } catch (error) {
           return NextResponse.json(
             {
@@ -58,32 +56,39 @@ export async function POST(req: any) {
               status: 500,
             }
           );
-          // return res.status(500).json({ error: "Error updating resumes" });
         }
       } else {
-        return NextResponse.json({
-          error: "Something Went Wrong",
-          success: false,
-        });
-        // return res.status(400).json({ error: "Bad Request" });
+        return NextResponse.json(
+          {
+            result: "Something Went Wrong",
+            success: false,
+          },
+          {
+            status: 400,
+          }
+        );
       }
     } else {
       // Not Signed in
       return NextResponse.json(
         {
-          message: "Forbidden",
+          result: "Forbidden",
           success: false,
         },
         {
           status: 401,
         }
       );
-      // return res.status(401).json({ message: "forbidden" });
     }
   } catch {
-    return NextResponse.json({
-      error: "Something Went Wrong",
-      success: false,
-    });
+    return NextResponse.json(
+      {
+        error: "Something Went Wrong",
+        success: false,
+      },
+      {
+        status: 404,
+      }
+    );
   }
 }

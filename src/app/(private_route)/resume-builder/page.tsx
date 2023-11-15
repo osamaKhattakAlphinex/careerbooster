@@ -111,8 +111,8 @@ const ResumeBuilder = () => {
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
-      if (res?.success && res?.result) {
-        const myJSON = res.result.text;
+      if (res.success && res?.result) {
+        const myJSON = JSON.parse(res.result);
         const basicObj = {
           ...myJSON,
           name: userData?.firstName + " " + userData?.lastName,
@@ -184,27 +184,27 @@ const ResumeBuilder = () => {
       for (const [index, experience] of experiences.entries()) {
         let workExpArrObj: any = {};
         let html = "";
-        html += `<h2 style="font-size: 1.3rem; font-weight: bold; line-height: 2rem; ">${experience.jobTitle}</h2>`;
-        workExpArrObj.title = experience.jobTitle;
+        html += `<h2 style="font-size: 1.3rem; font-weight: bold; line-height: 2rem; ">${experience?.jobTitle}</h2>`;
+        workExpArrObj.title = experience?.jobTitle;
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
         
-        ${experience.fromMonth} ${experience.fromYear} - ${
-          experience.isContinue
+        ${experience?.fromMonth} ${experience?.fromYear} - ${
+          experience?.isContinue
             ? "Present"
-            : experience.toMonth + " " + experience.toYear
-        } | ${experience.company} | 
+            : experience?.toMonth + " " + experience?.toYear
+        } | ${experience?.company} | 
         ${experience?.cityState} ${experience?.country}
                   </h2>`;
         html += `<div>`;
-        workExpArrObj.cityState = experience.cityState;
-        workExpArrObj.country = experience.country;
-        workExpArrObj.company = experience.company;
-        workExpArrObj.fromMonth = experience.fromMonth;
-        workExpArrObj.fromYear = experience.fromYear;
-        workExpArrObj.isContinue = experience.isContinue;
-        workExpArrObj.toMonth = experience.toMonth;
-        workExpArrObj.toYear = experience.toYear;
+        workExpArrObj.cityState = experience?.cityState;
+        workExpArrObj.country = experience?.country;
+        workExpArrObj.company = experience?.company;
+        workExpArrObj.fromMonth = experience?.fromMonth;
+        workExpArrObj.fromYear = experience?.fromYear;
+        workExpArrObj.isContinue = experience?.isContinue;
+        workExpArrObj.toMonth = experience?.toMonth;
+        workExpArrObj.toYear = experience?.toYear;
 
         temp += html;
         let achievementTemp = "";
@@ -219,21 +219,23 @@ const ResumeBuilder = () => {
             },
           }),
         });
+        const response = await res.json();
+        // console.log("result", result, typeof result);
+        if (response.success) {
+          // const reader = res.body.getReader();
+          // while (true) {
+          //   const { done, value } = await reader.read();
 
-        if (res.ok) {
-          const reader = res.body.getReader();
-          while (true) {
-            const { done, value } = await reader.read();
+          //   if (done) {
+          //     break;
+          //   }
 
-            if (done) {
-              break;
-            }
-
-            const text = new TextDecoder().decode(value);
-            setStreamedJDData((prev) => prev + text);
-            temp += text;
-            achievementTemp += text;
-          }
+          // const text = new TextDecoder().decode(value);
+          const text = response.result;
+          setStreamedJDData((prev) => prev + text);
+          temp += text;
+          achievementTemp += text;
+          // }
         }
 
         setStreamedJDData((prev) => prev + `</div> <br /> `);
@@ -317,14 +319,10 @@ const ResumeBuilder = () => {
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
-      if (res?.success) {
-        if (res?.result?.text) {
-          // const tSon = JSON.stringify(res?.data?.text);
-          // const myJSON = JSON.parse(tSon);
-          dispatch(setPrimarySkills(res.result.text));
-        } else if (res?.result) {
-          // const myJSON = JSON.parse(res.data);
-          dispatch(setPrimarySkills(res.result));
+      if (res.success) {
+        if (res?.result) {
+          const myJSON = JSON.parse(res.result);
+          dispatch(setPrimarySkills(myJSON));
         }
       }
     });
@@ -346,14 +344,11 @@ const ResumeBuilder = () => {
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
-      if (res?.success) {
-        if (res?.result?.text) {
-          // const tSon = JSON.stringify(res?.result?.text);
-          // const myJSON = JSON.parse(tSon);
-          dispatch(setProfessionalSkills(res.result.text));
-        } else if (res?.result) {
-          // const myJSON = JSON.parse(res.result);
-          dispatch(setProfessionalSkills(res.result));
+      if (res.success) {
+        if (res?.result) {
+          const myJSON = JSON.parse(res.result);
+
+          dispatch(setProfessionalSkills(myJSON));
         }
       }
     });
@@ -375,14 +370,10 @@ const ResumeBuilder = () => {
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
-      if (res?.success) {
-        if (res?.result?.text) {
-          // const tSon = JSON.stringify(res?.result?.text);
-          // const myJSON = JSON.parse(tSon);
-          dispatch(setSecondarySkills(res.result.text));
-        } else if (res?.result) {
-          // const myJSON = JSON.parse(res.result);
-          dispatch(setSecondarySkills(res.result));
+      if (res.success) {
+        if (res?.result) {
+          const myJSON = JSON.parse(res.result);
+          dispatch(setSecondarySkills(myJSON));
         }
       }
     });
@@ -396,8 +387,9 @@ const ResumeBuilder = () => {
         `/api/users/getOneByEmail?email=${session?.user?.email}`
       );
 
-      const { user } = await res.json();
-      dispatch(setUserData(user));
+      const response = await res.json();
+
+      dispatch(setUserData(response.result));
       dispatch(setIsLoading(false));
       dispatch(setField({ name: "isFetched", value: true }));
     }
@@ -422,16 +414,16 @@ const ResumeBuilder = () => {
           `/api/users/getOneByEmail?email=${session?.user?.email}`
         );
 
-        const { user } = await res.json();
+        const response = await res.json();
+        const user = response.result;
         dispatch(setUserData(user));
-
         // get user package details
         const res2 = await fetch(
           `/api/users/getUserPackageDetails?id=${user?.userPackage}`
         );
         const data = await res2.json();
         if (data.success) {
-          const { userPackage } = data;
+          const userPackage = data.result;
           // set user package details to redux
           dispatch(setField({ name: "userPackageData", value: userPackage }));
         }

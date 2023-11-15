@@ -20,6 +20,7 @@ import {
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { delay } from "@reduxjs/toolkit/dist/utils";
 
 interface Props {
   children: React.ReactNode;
@@ -122,11 +123,11 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         body: JSON.stringify(formData),
       })
         .then(async (resp: any) => {
-          if (resp.success) {
-            const res = await resp.json();
-            if (res.success && res?.result) {
+          const res = await resp.json();
+          if (res.success) {
+            if (res?.result) {
               try {
-                const data = res.result;
+                const data = JSON.parse(res.result);
                 dispatch(setScrapped({ basic: true }));
                 dispatch(setScrapping({ basic: false }));
                 dispatch(
@@ -193,12 +194,11 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         body: JSON.stringify(formData),
       })
         .then(async (resp: any) => {
-          if (resp.status === 200) {
-            const res = await resp.json();
-
-            if (res?.success && res?.result) {
+          const res = await resp.json();
+          if (res.success) {
+            if (res?.result) {
               try {
-                const data = res?.result;
+                const data = JSON.parse(res.result);
 
                 const formattedArr = data?.education.map((item: any) => {
                   return {
@@ -273,22 +273,21 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       })
         .then(async (resp: any) => {
           const res = await resp.json();
-          if (res.status === 200) {
-            if (res.success && res?.result) {
-              const data = res.result;
-
+          if (res.success) {
+            if (res?.result) {
+              const data = await JSON.parse(res.result);
               const experiencesWithTitle = data?.experiences;
 
               // loop through this array and call an api for individual one
               // if the result of an api is not done donot make call to another api
 
               const promises: any = [];
-              experiencesWithTitle.map((experince: any, index: number) => {
+              experiencesWithTitle.map((experience: any, index: number) => {
                 const promise = axios
                   .post("/api/homepage/fetchExperienceIndividualTrainedModel", {
                     content: register.scrappedContent,
-                    jobTitle: experince?.jobTitle,
-                    company: experince?.company,
+                    jobTitle: experience?.jobTitle,
+                    company: experience?.company,
                     trainBotData: {
                       userEmail: userData.email,
                       fileAddress: userData.defaultResumeFile,
@@ -296,14 +295,14 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                     timeout: 120000, // abort api call after 2 minutes
                   })
                   .then(async (resp: any) => {
-                    const res = await resp.json();
-                    if (res.status === 200) {
+                    const res = resp.data;
+                    if (res.success) {
                       try {
-                        const otherFields = res.result;
+                        const otherFields = JSON.parse(res.result);
 
                         return {
-                          jobTitle: experince?.jobTitle,
-                          company: experince?.company,
+                          jobTitle: experience?.jobTitle,
+                          company: experience?.company,
                           ...otherFields,
                         };
                       } catch (error) {

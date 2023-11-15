@@ -100,13 +100,14 @@ const ConsultingBidsGenerator = () => {
               }),
             }).then(async (resp: any) => {
               const res = await resp.json();
+              const user = JSON.parse(res.result);
               if (res.success) {
                 const updatedObject = {
                   ...userData,
                   userPackageUsed: {
                     ...userData.userPackageUsed,
                     consulting_bids_generation:
-                      res.user.userPackageUsed.consulting_bids_generation,
+                      user.userPackageUsed.consulting_bids_generation,
                   },
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
@@ -123,7 +124,7 @@ const ConsultingBidsGenerator = () => {
   };
   const saveToDB = async (tempText: string) => {
     try {
-      const response = await axios.post("/api/users/updateUserData", {
+      const response: any = await axios.post("/api/users/updateUserData", {
         data: {
           email: session?.user?.email,
           results: {
@@ -132,8 +133,8 @@ const ConsultingBidsGenerator = () => {
           },
         },
       });
-      const { success } = response.data;
-      if (success) {
+      const res = await response.json();
+      if (res.success) {
         console.log("email saved to DB");
       }
     } catch (error) {

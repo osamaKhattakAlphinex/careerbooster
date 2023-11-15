@@ -90,12 +90,13 @@ const ReviewResumeBot = () => {
               }),
             }).then(async (resp: any) => {
               const res = await resp.json();
+              const user = JSON.parse(res.result);
               if (res.success) {
                 const updatedObject = {
                   ...userData,
                   userPackageUsed: {
                     ...userData.userPackageUsed,
-                    review_resume: res.user.userPackageUsed.review_resume,
+                    review_resume: user.userPackageUsed.review_resume,
                   },
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));

@@ -25,7 +25,7 @@ export async function POST(req: any) {
         if (updatedUser) {
           return NextResponse.json(
             {
-              msg: "Success Record Updated",
+              result: "Success Record Updated",
               success: true,
             },
             { status: 200 }
@@ -33,7 +33,7 @@ export async function POST(req: any) {
         } else {
           return NextResponse.json(
             {
-              error: "User not found",
+              result: "User not found",
               success: false,
             },
             { status: 500 }
@@ -43,7 +43,7 @@ export async function POST(req: any) {
         console.error(error);
         return NextResponse.json(
           {
-            error: "Error Updating User",
+            result: "Error Updating User",
             success: false,
           },
           { status: 500 }
@@ -52,7 +52,7 @@ export async function POST(req: any) {
     } else {
       return NextResponse.json(
         {
-          error: "Bad Request. Both 'newFile' and 'email' are required.",
+          result: "Bad Request. Both 'newFile' and 'email' are required.",
           success: false,
         },
         { status: 400 }
@@ -62,7 +62,7 @@ export async function POST(req: any) {
     console.error(error);
     return NextResponse.json(
       {
-        error: "Something Went Wrong",
+        result: "Something Went Wrong",
         success: false,
       },
       { status: 500 }

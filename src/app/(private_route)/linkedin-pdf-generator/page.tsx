@@ -163,8 +163,13 @@ const ResumeCreator = () => {
         const res = await fetch(
           `/api/users/getOneByEmail?email=${session?.user?.email}`
         );
-        const { user } = await res.json();
-        dispatch(setUserData(user));
+        const response = await res.json();
+        console.log(
+          "first response: " + response.result,
+          typeof response.result
+        );
+
+        dispatch(setUserData(response.result));
         dispatch(setIsLoading(false));
         dispatch(setField({ name: "isFetched", value: true }));
       } catch (err) {

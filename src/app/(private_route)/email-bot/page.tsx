@@ -103,12 +103,13 @@ const PersonalizedEmailBot = () => {
               }),
             }).then(async (resp: any) => {
               const res = await resp.json();
+              const user = JSON.parse(res.result);
               if (res.success) {
                 const updatedObject = {
                   ...userData,
                   userPackageUsed: {
                     ...userData.userPackageUsed,
-                    email_generation: res.user.userPackageUsed.email_generation,
+                    email_generation: user.userPackageUsed.email_generation,
                   },
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
@@ -125,7 +126,7 @@ const PersonalizedEmailBot = () => {
   };
   const saveToDB = async (tempText: string) => {
     try {
-      const response = await axios.post("/api/users/updateUserData", {
+      const response: any = await axios.post("/api/users/updateUserData", {
         data: {
           email: session?.user?.email,
           results: {
@@ -134,8 +135,8 @@ const PersonalizedEmailBot = () => {
           },
         },
       });
-      const { success } = response.data;
-      if (success) {
+      const res = await response.json();
+      if (res.success) {
         console.log("email saved to DB");
       }
     } catch (error) {

@@ -43,12 +43,13 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
     })
       .then(async (resp: any) => {
         const res = await resp.json();
+        const user = JSON.parse(res.result);
         if (res.success) {
           const updatedObject = {
             ...userData,
             userPackageUsed: {
               ...userData.userPackageUsed,
-              pdf_files_upload: res.user.userPackageUsed.pdf_files_upload,
+              pdf_files_upload: user.userPackageUsed.pdf_files_upload,
             },
           };
           dispatch(setUserData({ ...userData, ...updatedObject }));

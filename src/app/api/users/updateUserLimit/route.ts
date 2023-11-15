@@ -11,15 +11,15 @@ export async function POST(req: any) {
   try {
     const session = await getServerSession(authOptions);
     const _body = await req.json();
-    console.log(_body);
+    // console.log(_body);
 
     if (session) {
-      const { type, email } = _body;
+      // const { type, email } = _body;
 
       if (!_body?.email) {
         return NextResponse.json(
           {
-            error: "Bad Request. 'email' is required.",
+            result: "Bad Request. 'email' is required.",
             success: false,
           },
           { status: 400 }
@@ -35,7 +35,7 @@ export async function POST(req: any) {
         if (!user) {
           return NextResponse.json(
             {
-              error: "User not found",
+              result: "User not found",
               success: false,
             },
             { status: 404 }
@@ -58,7 +58,7 @@ export async function POST(req: any) {
 
         return NextResponse.json(
           {
-            user,
+            result: user,
             success: true,
           },
           { status: 200 }
@@ -67,7 +67,7 @@ export async function POST(req: any) {
         console.error(error);
         return NextResponse.json(
           {
-            error: "Error updating user data",
+            result: "Error updating user data",
             success: false,
           },
           { status: 500 }
@@ -78,7 +78,7 @@ export async function POST(req: any) {
     console.error(error);
     return NextResponse.json(
       {
-        error: "Something Went Wrong",
+        result: "Something Went Wrong",
         success: false,
       },
       { status: 500 }

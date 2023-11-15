@@ -80,7 +80,7 @@ const UpdateUserPackage = ({ customer }: any) => {
     const data = await res2.json();
 
     if (data.success) {
-      const { userPackage } = data;
+      const userPackage = data.result;
       return userPackage;
       // set user package details to redux
     }

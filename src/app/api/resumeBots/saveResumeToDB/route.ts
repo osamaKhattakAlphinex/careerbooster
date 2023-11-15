@@ -23,7 +23,7 @@ export async function POST(req: any) {
 
     if (!user) {
       return NextResponse.json(
-        { result: "User Nof Found!", success: false },
+        { result: "User Not Found!", success: false },
         { status: 404 }
       );
     }
@@ -55,7 +55,10 @@ export async function POST(req: any) {
     // Save the updated user document
     await user.save();
 
-    return NextResponse.json({ success: true }, { status: 400 });
+    return NextResponse.json(
+      { result: "Saved Successfully", success: true },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       { result: "Error updating resume", success: false },

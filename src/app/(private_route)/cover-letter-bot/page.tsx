@@ -146,13 +146,14 @@ const CoverLetterWriter = () => {
               }),
             }).then(async (resp: any) => {
               const res = await resp.json();
+              const user = JSON.parse(res.result);
               if (res.success) {
                 const updatedObject = {
                   ...userData,
                   userPackageUsed: {
                     ...userData.userPackageUsed,
                     cover_letter_generation:
-                      res.user.userPackageUsed.cover_letter_generation,
+                      user.userPackageUsed.cover_letter_generation,
                   },
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));

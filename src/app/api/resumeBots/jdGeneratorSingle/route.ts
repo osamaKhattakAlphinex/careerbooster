@@ -14,8 +14,8 @@ export const dynamic = "force-dynamic";
 export async function POST(req: any) {
   try {
     const reqBody = await req.json();
-    const experience = reqBody.experience;
-    const trainBotData = reqBody.trainBotData;
+    const experience = reqBody?.experience;
+    const trainBotData = reqBody?.trainBotData;
 
     // CREATING MODAL
     const model = new ChatOpenAI({
@@ -97,8 +97,8 @@ export async function POST(req: any) {
     // res.end();
   } catch (error) {
     return NextResponse.json(
-      { result: error, success: false },
-      { status: 400 }
+      { result: "Something went wrong", success: false },
+      { status: 404 }
     );
   }
 }

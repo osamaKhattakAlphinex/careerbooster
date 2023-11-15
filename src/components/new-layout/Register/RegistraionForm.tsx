@@ -151,15 +151,15 @@ const RegistrationForm = () => {
       });
   };
 
-  const moveResumeToUserFolder = async (fileName: string, email: string) => {
-    if (fileName && email) {
-      const obj = {
-        fileName: fileName,
-        email: email,
-      };
-      return axios.post(`/api/users/moveResumeToUserFolder`, obj);
-    }
-  };
+  // const moveResumeToUserFolder = async (fileName: string, email: string) => {
+  //   if (fileName && email) {
+  //     const obj = {
+  //       fileName: fileName,
+  //       email: email,
+  //     };
+  //     return axios.post(`/api/users/moveResumeToUserFolder`, obj);
+  //   }
+  // };
 
   const updateUser = (file: string, email: string) => {
     if (file && email) {
@@ -214,7 +214,7 @@ const RegistrationForm = () => {
         .then(async (resp: any) => {
           const res = await resp.json();
           if (res.success) {
-            const userData = JSON.parse(res.data);
+            const userData = JSON.parse(res.result);
             router.replace(
               `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&content=true`
             );

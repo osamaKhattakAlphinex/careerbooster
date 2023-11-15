@@ -92,13 +92,14 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
               }),
             }).then(async (resp: any) => {
               const res = await resp.json();
+              const user = JSON.parse(res.result);
               if (res.success) {
                 const updatedObject = {
                   ...userData,
                   userPackageUsed: {
                     ...userData.userPackageUsed,
                     keywords_generation:
-                      res.user.userPackageUsed.keywords_generation,
+                      user.userPackageUsed.keywords_generation,
                   },
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
@@ -119,7 +120,7 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
   };
   const saveToDB = async (tempText: string) => {
     try {
-      const response = await axios.post("/api/users/updateUserData", {
+      const response: any = await axios.post("/api/users/updateUserData", {
         data: {
           email: session?.user?.email,
           results: {
@@ -128,8 +129,8 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
           },
         },
       });
-      const { success } = response.data;
-      if (success) {
+      const res = await response.json();
+      if (res.success) {
         console.log("Keywords saved to DB");
       }
     } catch (error) {
@@ -145,8 +146,13 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
         const res = await fetch(
           `/api/users/getOneByEmail?email=${session?.user?.email}`
         );
-        const { user } = await res.json();
-        dispatch(setUserData(user));
+        const response = await res.json();
+        console.log(
+          "first response: " + response.result,
+          typeof response.result
+        );
+
+        dispatch(setUserData(response.result));
         dispatch(setIsLoading(false));
         dispatch(setField({ name: "isFetched", value: true }));
       } catch (err) {

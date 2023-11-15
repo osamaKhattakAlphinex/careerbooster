@@ -51,9 +51,9 @@ const TrainBotCard = () => {
           newFile: file,
           email: data?.user?.email,
         })
-        .then((resp: any) => {
-          // const res = resp.json();
-          if (resp?.data?.success) {
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
             setFileUploading(false);
           }
         });

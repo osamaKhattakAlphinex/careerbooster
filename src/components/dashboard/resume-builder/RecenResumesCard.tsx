@@ -2,6 +2,7 @@
 import { useSelector } from "react-redux";
 import SingleRecentResumeCard from "./SingleRecentResumeCard";
 import { Resume } from "@/store/resumeSlice";
+import { useEffect } from "react";
 
 const RecentResumeCard = ({
   source = "",

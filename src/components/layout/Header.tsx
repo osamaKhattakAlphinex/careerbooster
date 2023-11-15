@@ -34,8 +34,8 @@ const Header = () => {
         const res = await fetch(
           `/api/users/getOneByEmail?email=${session?.user?.email}`
         );
-        const { user } = await res.json();
-
+        const response = await res.json();
+        const user = response.result;
         dispatch(setUserData(user));
         dispatch(setIsLoading(false));
         dispatch(setField({ name: "isFetched", value: true }));
@@ -62,7 +62,7 @@ const Header = () => {
           );
           const data = await res2.json();
           if (data.success) {
-            const { userPackage } = data;
+            const userPackage = data.result;
             // set user package details to redux
             dispatch(setField({ name: "userPackageData", value: userPackage }));
           }

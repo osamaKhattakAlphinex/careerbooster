@@ -62,14 +62,14 @@ const JDGenerator = ({ setJobDesc }: Props) => {
       let tempText = "";
       for (const [index, experience] of experiences.entries()) {
         let html = "";
-        html += `<h4><strong>${experience.jobTitle}</strong></h4>`;
-        html += `<h5>${experience.company} | ${experience?.cityState} ${experience?.country}</h5>`;
-        html += `<p style=' margin-bottom: 10px'>${experience.fromMonth} ${
-          experience.fromYear
+        html += `<h4><strong>${experience?.jobTitle}</strong></h4>`;
+        html += `<h5>${experience?.company} | ${experience?.cityState} ${experience?.country}</h5>`;
+        html += `<p style=' margin-bottom: 10px'>${experience?.fromMonth} ${
+          experience?.fromYear
         } to ${
-          experience.isContinue
+          experience?.isContinue
             ? "Present"
-            : experience.toMonth + " " + experience.toYear
+            : experience?.toMonth + " " + experience?.toYear
         }</p>`;
         html += `<p>`;
 
@@ -111,12 +111,13 @@ const JDGenerator = ({ setJobDesc }: Props) => {
         }),
       }).then(async (resp: any) => {
         const res = await resp.json();
+        const user = JSON.parse(res.result);
         if (res.success) {
           const updatedObject = {
             ...userData,
             userPackageUsed: {
               ...userData.userPackageUsed,
-              job_desc_generation: res.user.userPackageUsed.job_desc_generation,
+              job_desc_generation: user.userPackageUsed.job_desc_generation,
             },
           };
           dispatch(setUserData({ ...userData, ...updatedObject }));
@@ -127,7 +128,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
 
   const saveToDB = async (tempText: string) => {
     try {
-      const response = await axios.post("/api/users/updateUserData", {
+      const response: any = await axios.post("/api/users/updateUserData", {
         data: {
           email: session?.user?.email,
           results: {
@@ -136,8 +137,8 @@ const JDGenerator = ({ setJobDesc }: Props) => {
           },
         },
       });
-      const { success } = response.data;
-      if (success) {
+      const res = await response.json();
+      if (res.success) {
         console.log("Keywords saved to DB");
       }
     } catch (error) {
@@ -153,8 +154,13 @@ const JDGenerator = ({ setJobDesc }: Props) => {
         const res = await fetch(
           `/api/users/getOneByEmail?email=${session?.user?.email}`
         );
-        const { user } = await res.json();
-        dispatch(setUserData(user));
+        const response = await res.json();
+        console.log(
+          "first response: " + response.result,
+          typeof response.result
+        );
+
+        dispatch(setUserData(response.result));
         dispatch(setIsLoading(false));
         dispatch(setField({ name: "isFetched", value: true }));
       } catch (err) {

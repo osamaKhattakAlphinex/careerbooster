@@ -14,7 +14,7 @@ export async function GET(req: any) {
       return NextResponse.json(
         {
           success: false,
-          error: "Bad Request: No email found",
+          result: "Bad Request: No email found",
         },
         { status: 400 }
       );
@@ -27,7 +27,7 @@ export async function GET(req: any) {
     if (!userPackage) {
       return NextResponse.json(
         {
-          error: "No User Package Found",
+          result: "No User Package Found",
           success: false,
         },
         { status: 404 }
@@ -35,7 +35,7 @@ export async function GET(req: any) {
     } else {
       return NextResponse.json(
         {
-          userPackage,
+          result: userPackage,
           success: true,
         },
         { status: 200 }
@@ -44,7 +44,7 @@ export async function GET(req: any) {
   } catch {
     return NextResponse.json(
       {
-        error: "Something Went Wrong",
+        result: "Something Went Wrong",
         success: false,
       },
       { status: 500 }

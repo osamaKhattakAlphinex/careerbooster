@@ -93,12 +93,13 @@ const AboutGenerator = ({ setAbout }: Props) => {
               }),
             }).then(async (resp: any) => {
               const res = await resp.json();
+              const user = JSON.parse(res.result);
               if (res.success) {
                 const updatedObject = {
                   ...userData,
                   userPackageUsed: {
                     ...userData.userPackageUsed,
-                    about_generation: res.user.userPackageUsed.about_generation,
+                    about_generation: user.userPackageUsed.about_generation,
                   },
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
@@ -120,7 +121,7 @@ const AboutGenerator = ({ setAbout }: Props) => {
 
   const saveToDB = async (tempText: string) => {
     try {
-      const response = await axios.post("/api/users/updateUserData", {
+      const response: any = await axios.post("/api/users/updateUserData", {
         data: {
           email: session?.user?.email,
           results: {
@@ -129,8 +130,8 @@ const AboutGenerator = ({ setAbout }: Props) => {
           },
         },
       });
-      const { success } = response.data;
-      if (success) {
+      const res = await response.json();
+      if (res.success) {
         console.log("about saved to DB");
       }
     } catch (error) {
@@ -146,8 +147,13 @@ const AboutGenerator = ({ setAbout }: Props) => {
         const res = await fetch(
           `/api/users/getOneByEmail?email=${session?.user?.email}`
         );
-        const { user } = await res.json();
-        dispatch(setUserData(user));
+        const response = await res.json();
+        console.log(
+          "first response: " + response.result,
+          typeof response.result
+        );
+
+        dispatch(setUserData(response.result));
         dispatch(setIsLoading(false));
         dispatch(setField({ name: "isFetched", value: true }));
       } catch (err) {

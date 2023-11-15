@@ -10,7 +10,7 @@ export async function POST(req: any) {
     const body = await req.json();
     if (body) {
       const reqBody = body;
-      const content = reqBody.content;
+      const content = reqBody.content.slice(0, 4000);
       const trainBotData = reqBody.trainBotData;
 
       if (content) {

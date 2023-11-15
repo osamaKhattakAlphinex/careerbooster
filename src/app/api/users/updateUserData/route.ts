@@ -11,7 +11,7 @@ export async function POST(req: any) {
     if (!session) {
       return NextResponse.json(
         {
-          error: "Unauthorized",
+          result: "Unauthorized",
           success: false,
         },
         { status: 401 }
@@ -24,7 +24,7 @@ export async function POST(req: any) {
     if (!data || !data.email) {
       return NextResponse.json(
         {
-          error: "Bad Request",
+          result: "Bad Request",
           success: false,
         },
         { status: 400 }
@@ -43,7 +43,7 @@ export async function POST(req: any) {
       if (updatedUser) {
         return NextResponse.json(
           {
-            msg: "Updated",
+            result: "Updated",
             success: true,
           },
           { status: 200 }
@@ -51,7 +51,7 @@ export async function POST(req: any) {
       } else {
         return NextResponse.json(
           {
-            error: "Error User not found",
+            result: "Error User not found",
             success: false,
           },
           { status: 500 }
@@ -61,7 +61,7 @@ export async function POST(req: any) {
       console.error(error);
       return NextResponse.json(
         {
-          error: "Error Updating Files",
+          result: "Error Updating Files",
           success: false,
         },
         { status: 500 }
@@ -71,7 +71,7 @@ export async function POST(req: any) {
     console.error(error);
     return NextResponse.json(
       {
-        error: "Something Went Wrong",
+        result: "Something Went Wrong",
         success: false,
       },
       { status: 500 }

@@ -17,7 +17,6 @@ export async function GET(req: any) {
         {
           result: "Bad Request",
           success: false,
-          error: "No email found",
         },
         { status: 400 }
       );
@@ -30,14 +29,15 @@ export async function GET(req: any) {
     if (!user) {
       return NextResponse.json(
         {
-          error: "No User Found",
+          result: "No User Found",
+          success: false,
         },
         { status: 404 }
       );
     } else {
       return NextResponse.json(
         {
-          user,
+          result: user,
           success: true,
         },
         { status: 200 }
@@ -46,7 +46,7 @@ export async function GET(req: any) {
   } catch {
     return NextResponse.json(
       {
-        error: "Something Went Wrong",
+        result: "Something Went Wrong",
         success: false,
       },
       { status: 500 }

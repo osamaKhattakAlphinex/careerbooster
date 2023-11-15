@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
-export async function GET(req: any) {
+export async function GET() {
   // const body = await req.json();
   // console.log("body: " + body);
   // const status = body?.status ?? "active";
