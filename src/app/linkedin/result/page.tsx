@@ -1,6 +1,5 @@
-import PageHeader from "@/components/new-layout/PageHeader";
 import { Metadata } from "next";
-import LinedInCard from "@/components/new-layout/linkedin/LinkedInCard";
+import LinkedInUploadPDFResume from "@/components/new-layout/linkedin/LinkedInUploadPDFResume";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-linkedin",
   description:
@@ -31,7 +30,11 @@ export default function LinkedInPage() {
   return (
     <main className="flex-grow-1 mt-24 mb-20 bg-gradient-to-r from-gray-950 via-blue-950 to-purple-900">
       {/* LinkedIn Tool Card */}
-      <LinedInCard />
+      <section className="py-15">
+      <div className=" flex flex-col items-center">
+        <LinkedInUploadPDFResume />
+      </div>
+    </section>
     </main>
   );
 }

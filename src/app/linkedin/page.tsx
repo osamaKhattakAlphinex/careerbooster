@@ -1,4 +1,4 @@
-import LinkedInToolNew from "@/components/new-layout/linkedin/LinkedInToolNew";
+import LinkedInToolMain from "@/components/new-layout/linkedin/LinkedInToolMain";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -30,7 +30,11 @@ export default function LinkedInNewPage() {
   return (
     <div className="flex-grow-1 mb-20 w-full">
       {/* LinkedIn Tool Card */}
-      <LinkedInToolNew />
+      <section className="mt-28 lg:mt-36">
+      <div className="flex flex-col text-white">
+        <LinkedInToolMain />
+      </div>
+    </section>
     </div>
   );
 }
