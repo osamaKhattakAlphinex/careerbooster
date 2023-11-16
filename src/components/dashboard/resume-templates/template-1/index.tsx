@@ -215,6 +215,7 @@ const ResumeTemplate1 = ({
       updatedItems[i],
       updatedItems[draggedIndex],
     ];
+    console.log("updatedItems", updatedItems);
 
     dispatch(
       setWorkExperienceArray({
@@ -224,9 +225,52 @@ const ResumeTemplate1 = ({
     );
     saveResumeToDB({
       ...resume,
-      professionalSkills: updatedItems,
+      workExperienceArray: updatedItems,
     });
   };
+
+  
+  //     .split("-")
+  //     .map((index: any) => parseInt(index));
+
+  //   const updatedItems = [...(resume?.workExperienceArray || [])];
+  //   console.log("updatedItems", updatedItems);
+
+  //   // Ensure the drag and drop is within the same primary item
+  //   if (draggedPrimaryIndex === i) {
+  //     const draggedItem = {
+  //       ...updatedItems[draggedPrimaryIndex].achievements[
+  //         draggedSecondaryIndex
+  //       ],
+  //     };
+
+  //     // Create a copy of the achievements array
+  //     const sourceAchievements = [
+  //       ...updatedItems[draggedPrimaryIndex].achievements,
+  //     ];
+  //     sourceAchievements.splice(draggedSecondaryIndex, 1);
+
+  //     // Update the source achievements array
+  //     updatedItems[draggedPrimaryIndex] = {
+  //       ...updatedItems[draggedPrimaryIndex],
+  //       achievements: sourceAchievements,
+  //     };
+
+  //     // Insert the dragged item at the target index
+  //     updatedItems[i].achievements.splice(ind, 0, draggedItem);
+
+  //     console.log(
+  //       "🚀 ~ file: page.js:70 ~ handleDrop ~ updatedItems:",
+  //       updatedItems
+  //     );
+  //     dispatch(
+  //       setWorkExperienceArray({
+  //         ...resume,
+  //         workExperienceArray: updatedItems,
+  //       })
+  //     );
+  //   }
+  // };
 
   return (
     <div className="w-full first-page text-gray-900">
