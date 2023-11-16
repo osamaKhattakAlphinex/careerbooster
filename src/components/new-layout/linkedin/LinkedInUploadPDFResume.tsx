@@ -19,6 +19,8 @@ const loadFromLocalStorage = () => {
   const linkedinFileName = localStorage.getItem("linkedin-fileName");
   return { linkedinContent, linkedinFileName };
 };
+
+// alskdfjals?
 const LinkedInUploadPDFResume = () => {
   // local states
   const router = useRouter();
