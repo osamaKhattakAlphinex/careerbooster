@@ -58,7 +58,13 @@ const LinkedInUploadPDFResume = () => {
     if (linkedinContent) {
       fetch("/api/linkedInBots/linkedinHeadlineGenerator", {
         method: "POST",
-        body: JSON.stringify({ linkedinContent }),
+        body: JSON.stringify({
+          linkedinContent,
+          trainBotData: {
+            // userEmail: userData.email,
+            fileContent: linkedinContent,
+          },
+        }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -104,6 +110,10 @@ const LinkedInUploadPDFResume = () => {
           linkedinContent,
           option: aboutData,
           instruction,
+          trainBotData: {
+            // userEmail: userData.email,
+            fileContent: linkedinContent,
+          },
         }),
         headers: {
           "Content-Type": "application/json",

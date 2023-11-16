@@ -1063,6 +1063,7 @@ const ResumeTemplate1 = ({
                           {rec?.achievements.map(
                             (achievement: any, ind: number) => (
                               <li
+                                onClick={() => console.log("important clicked")}
                                 className="list-disc hover:border-dashed hover:border-gray-500 hover:border-2 hover:shadow-md relative parent hover:bg-gray-100"
                                 key={ind}
                               >

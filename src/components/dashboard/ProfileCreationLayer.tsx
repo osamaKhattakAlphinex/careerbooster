@@ -127,7 +127,12 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           if (res.success) {
             if (res?.result) {
               try {
-                const data = JSON.parse(res.result);
+                let data;
+                if (typeof res.result === "object") {
+                  data = res.result;
+                } else {
+                  data = await JSON.parse(res.result);
+                }
                 dispatch(setScrapped({ basic: true }));
                 dispatch(setScrapping({ basic: false }));
                 dispatch(
@@ -198,7 +203,12 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           if (res.success) {
             if (res?.result) {
               try {
-                const data = JSON.parse(res.result);
+                let data;
+                if (typeof res.result === "object") {
+                  data = res.result;
+                } else {
+                  data = await JSON.parse(res.result);
+                }
 
                 const formattedArr = data?.education.map((item: any) => {
                   return {
@@ -215,14 +225,67 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                   };
                 });
                 // Sort the array by fromYear and fromMonth
+                // formattedArr.sort((a: any, b: any) => {
+                //   const yearComparison = a.fromYear.localeCompare(b.fromYear);
+                //   if (yearComparison !== 0) {
+                //     return yearComparison;
+                //   }
+                //   return a.fromMonth.localeCompare(b.fromMonth);
+                // });
+                // formattedArr.reverse();
                 formattedArr.sort((a: any, b: any) => {
-                  const yearComparison = a.fromYear.localeCompare(b.fromYear);
-                  if (yearComparison !== 0) {
-                    return yearComparison;
+                  const hasFromMonthA = a.hasOwnProperty("fromMonth");
+                  const hasFromMonthB = b.hasOwnProperty("fromMonth");
+                  const hasToYearA = a.hasOwnProperty("toYear");
+                  const hasToYearB = b.hasOwnProperty("toYear");
+
+                  if (
+                    (hasFromMonthA && hasFromMonthB) ||
+                    (hasToYearA && hasToYearB)
+                  ) {
+                    // Objects have either fromMonth or toYear property
+                    if (hasFromMonthA && hasFromMonthB) {
+                      const yearComparison = a.fromYear.localeCompare(
+                        b.fromYear
+                      );
+                      if (yearComparison !== 0) {
+                        return yearComparison;
+                      }
+
+                      const monthComparison = a.fromMonth.localeCompare(
+                        b.fromMonth
+                      );
+                      return monthComparison;
+                    } else if (
+                      (!hasFromMonthA && hasFromMonthB) ||
+                      (hasFromMonthA && !hasFromMonthB)
+                    ) {
+                      return hasFromMonthA ? -1 : 1; // Place object with fromMonth before the one without it
+                    } else {
+                      const fromYearComparison = a.fromYear.localeCompare(
+                        b.fromYear
+                      );
+                      if (fromYearComparison !== 0) {
+                        return fromYearComparison;
+                      }
+
+                      return hasToYearA ? -1 : 1; // Place object with toYear before the one without it
+                    }
+                  } else {
+                    // Objects lack both fromYear and toYear properties
+                    return 0; // Maintain the existing order if neither fromYear nor toYear is present
                   }
-                  return a.fromMonth.localeCompare(b.fromMonth);
                 });
-                formattedArr.reverse();
+
+                const shouldReverse = formattedArr.some(
+                  (item: any) =>
+                    item.hasOwnProperty("fromYear") ||
+                    item.hasOwnProperty("toYear")
+                );
+
+                if (shouldReverse) {
+                  formattedArr.reverse();
+                }
 
                 dispatch(setStepFour({ list: formattedArr }));
                 dispatch(setScrapped({ education: true }));
@@ -275,7 +338,12 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           const res = await resp.json();
           if (res.success) {
             if (res?.result) {
-              const data = await JSON.parse(res.result);
+              let data;
+              if (typeof res.result === "object") {
+                data = res.result;
+              } else {
+                data = await JSON.parse(res.result);
+              }
               const experiencesWithTitle = data?.experiences;
 
               // loop through this array and call an api for individual one
@@ -298,8 +366,12 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                     const res = resp.data;
                     if (res.success) {
                       try {
-                        const otherFields = JSON.parse(res.result);
-
+                        let otherFields;
+                        if (typeof res.result === "object") {
+                          otherFields = res.result;
+                        } else {
+                          otherFields = await JSON.parse(res.result);
+                        }
                         return {
                           jobTitle: experience?.jobTitle,
                           company: experience?.company,
@@ -337,14 +409,61 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                   });
                   // Sort the array by fromYear and fromMonth
                   try {
+                    // formattedArr.sort((a: any, b: any) => {
+                    //   const yearComparison = a.fromYear.localeCompare(
+                    //     b.fromYear
+                    //   );
+                    //   if (yearComparison !== 0) {
+                    //     return yearComparison;
+                    //   }
+                    //   return a.fromMonth.localeCompare(b.fromMonth);
+                    // });
+                    // formattedArr.reverse();
+
                     formattedArr.sort((a: any, b: any) => {
-                      const yearComparison = a.fromYear.localeCompare(
-                        b.fromYear
-                      );
-                      if (yearComparison !== 0) {
-                        return yearComparison;
+                      const hasFromMonthA = a.hasOwnProperty("fromMonth");
+                      const hasFromMonthB = b.hasOwnProperty("fromMonth");
+                      const hasToYearA = a.hasOwnProperty("toYear");
+                      const hasToYearB = b.hasOwnProperty("toYear");
+
+                      if (hasFromMonthA && hasFromMonthB) {
+                        // Both objects have fromMonth property
+                        const yearComparison = a.fromYear.localeCompare(
+                          b.fromYear
+                        );
+                        if (yearComparison !== 0) {
+                          return yearComparison;
+                        }
+
+                        const monthComparison = a.fromMonth.localeCompare(
+                          b.fromMonth
+                        );
+                        return monthComparison;
+                      } else if (
+                        (!hasFromMonthA && hasFromMonthB) ||
+                        (hasFromMonthA && !hasFromMonthB)
+                      ) {
+                        // Only one object has fromMonth property
+                        // Sort these cases based on the presence of fromMonth
+                        return hasFromMonthA ? -1 : 1; // Place object with fromMonth before the one without it
+                      } else {
+                        // Neither object has fromMonth property
+                        const fromYearComparison = a.fromYear.localeCompare(
+                          b.fromYear
+                        );
+                        if (fromYearComparison !== 0) {
+                          return fromYearComparison;
+                        }
+
+                        // Check if both objects have toYear property
+                        if (hasToYearA && hasToYearB) {
+                          // Compare based on toYear if fromYear is the same
+                          return a.toYear.localeCompare(b.toYear);
+                        } else {
+                          // If only one object has toYear property, sort based on its presence
+                          return hasToYearA ? -1 : 1; // Place object with toYear before the one without it
+                        }
                       }
-                      return a.fromMonth.localeCompare(b.fromMonth);
                     });
                     formattedArr.reverse();
                   } catch (error) {

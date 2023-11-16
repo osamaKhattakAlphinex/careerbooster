@@ -30,17 +30,17 @@ export async function POST(req: any) {
               and provide the following fields for that work experience:
               country, cityState, fromMonth, fromYear, isContinue, toMonth, toYear, description
     
-              cityState:  name of the city or state where the ${personName} worked in ${company}
+              cityState:  name of the city or state where the ${personName} worked in ${company},
     
-              fromMonth: means the month when ${personName} started working at ${company}
+              fromMonth: means the month when ${personName} started working at ${company}, 
     
-              fromYear: means the year when ${personName} started working at ${company}
+              fromYear: means the year when ${personName} started working at ${company},
     
-              toMonth: means the month when ${personName} stopped working at ${company}
+              toMonth: means the month when ${personName} stopped working at ${company},
     
               toYear: means the year when ${personName} stopped working at ${company}
     
-              isContinue: means if ${personName}  is still working there or not (Is Experience continued? e.g true, false)
+              isContinue: means if ${personName},  is still working there or not (Is Experience continued? e.g true, false)
     
               description: Work experience description of ${personName} at ${company}
     
@@ -57,7 +57,9 @@ export async function POST(req: any) {
                 description: VALUE_HERE
               }
     
-              If there is no value for any field Leave that field blank string and do not add labels like N/A or Not Available etc.`;
+              If there is no value for any field Leave that field blank(empty) string and do not add labels like N/A or Not Available etc.
+              If there is only starting Year when person started working and no month for an experience record put the year in the fromYear field and leave the fromMonth field blank.
+              If there is only ending Year when person stopped working and no month for an experience record put the year in the toYear field and leave the toMonth field blank.`;
 
         const resp = await model.call(input);
 

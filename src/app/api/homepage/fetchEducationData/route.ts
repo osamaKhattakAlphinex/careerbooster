@@ -33,12 +33,12 @@ export async function POST(req: any) {
                     educationLevel: VALUE_HERE,
                     fieldOfStudy: VALUE_HERE,
                     schoolName: VALUE_HERE,
-                    schoolLocation: VALUE_HERE (Address of School),
+                    schoolLocation: VALUE_HERE (Address of School which may include city and state/country),
                     fromMonth: VALUE_HERE (in full e.g. January, May),
                     fromYear: VALUE_HERE (in full e.g 2023, 1997),
                     toMonth: VALUE_HERE (in full e.g. January, May)
                     toYear: VALUE_HERE (in full e.g 2023, 1997),
-                    isContinue: VALUE_HERE (Is Education continued? e.g true, false),
+                    isContinue: VALUE_HERE (Is Education continued? e.g true, false , if you don't see any detail than make it false),
                   },
                   .
                   .
@@ -63,7 +63,6 @@ export async function POST(req: any) {
           ],
           temperature: 1,
         });
-
         try {
           // make a trainBot entry
           const obj = {

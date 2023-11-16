@@ -56,8 +56,8 @@ export async function POST(req: any) {
     }
   } catch (error) {
     return NextResponse.json(
-      { result: "something went wrong", success: false },
-      { status: 500 }
+      { result: "Something went wrong", success: false },
+      { status: 404 }
     );
   }
 }
