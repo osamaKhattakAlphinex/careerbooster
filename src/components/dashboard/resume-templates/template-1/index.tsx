@@ -224,7 +224,7 @@ const ResumeTemplate1 = ({
     );
     saveResumeToDB({
       ...resume,
-      professionalSkills: updatedItems,
+      workExperienceArray: updatedItems,
     });
   };
 
