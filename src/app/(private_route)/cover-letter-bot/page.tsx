@@ -210,7 +210,7 @@ const CoverLetterWriter = () => {
                   userPackageUsed: {
                     ...userData.userPackageUsed,
                     cover_letter_generation:
-                      limitUpdateData.user.userPackageUsed
+                      limitUpdateData.result.userPackageUsed
                         .cover_letter_generation,
                   },
                   coverLetters: coverLetterResponse.data.result.coverLetters,
