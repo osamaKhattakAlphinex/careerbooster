@@ -68,7 +68,7 @@ export async function POST(req: any) {
               type: "linkedinAiTool.headline",
               input: input,
               output: responseForTraining.choices[0].message.content,
-              // idealOutput: "",
+              idealOutput: "",
               status: "pending",
               //  userEmail: trainBotData.userEmail,
               fileContent: trainBotData.fileContent,

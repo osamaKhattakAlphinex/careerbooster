@@ -79,7 +79,7 @@ const RegistrationForm = () => {
           files: [
             {
               id: makeid(),
-              fileName: makeid() + ".pdg", //fileName,
+              fileName: fileName + ".pdf", //fileName,
               fileContent: text,
               uploadedDateTime: new Date(),
             },
@@ -307,6 +307,7 @@ const RegistrationForm = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const data: any = localStorage.getItem("pdfText");
+      const fileName = localStorage.getItem("pdfFileName");
 
       if (data) {
         setText(data);

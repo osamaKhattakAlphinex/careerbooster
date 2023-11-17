@@ -115,7 +115,7 @@ const TrainRegistrationBotAdminPage = () => {
       setRecords([]);
       fetchRecords();
     }
-  }, [activeTab, showRecordsType, dataType]);
+  }, [activeTab, showRecordsType]);
 
   useEffect(() => {
     if (dataType && dataType === "aiTools") {

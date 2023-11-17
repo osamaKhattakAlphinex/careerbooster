@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { StructuredOutputParser } from "langchain/output_parsers";
 import Prompt from "@/db/schemas/Prompt";
-
+import OpenAI from "openai";
 import {
   ChatPromptTemplate,
   HumanMessagePromptTemplate,
@@ -10,11 +10,14 @@ import {
 } from "langchain/prompts";
 import { LLMChain } from "langchain/chains";
 import { ChatOpenAI } from "langchain/chat_models/openai";
-import { PDFLoader } from "langchain/document_loaders/fs/pdf";
-import path from "path";
+import { OpenAIStream, StreamingTextResponse } from "ai";
+
 import TrainBot from "@/db/schemas/TrainBot";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 export async function POST(req: any) {
   if (req) {
     const reqBody = await req.json();
@@ -88,18 +91,22 @@ export async function POST(req: any) {
         });
 
         // make a trainBot entry
-        const obj = {
-          type: "resume.getBasicInfo",
-          input: formatInstructions,
-          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Get basic information for the resume`,
-        };
+        try {
+          if (trainBotData) {
+            const obj = {
+              type: "resume.getBasicInfo",
+              input: formatInstructions,
+              output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData.userEmail,
+              fileAddress: trainBotData.fileAddress,
+              Instructions: `Get basic information for the resume`,
+            };
 
-        await TrainBot.create({ ...obj });
+            await TrainBot.create({ ...obj });
+          }
+        } catch (error) {}
 
         return NextResponse.json(
           { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
@@ -116,18 +123,18 @@ export async function POST(req: any) {
     if (type === "summary") {
       try {
         // For summary we need to use another LLM model
-        const model1 = new ChatOpenAI({
-          streaming: true,
-          modelName: "gpt-3.5-turbo",
-          //   callbacks: [
-          //     {
-          //       handleLLMNewToken(token) {
-          //         res.write(token);
-          //       },
-          //     },
-          //   ],
-          temperature: 0.5,
-        });
+        // const model1 = new ChatOpenAI({
+        //   streaming: true,
+        //   modelName: "gpt-3.5-turbo",
+        //   //   callbacks: [
+        //   //     {
+        //   //       handleLLMNewToken(token) {
+        //   //         res.write(token);
+        //   //       },
+        //   //     },
+        //   //   ],
+        //   temperature: 0.5,
+        // });
 
         const promptRec = await Prompt.findOne({
           type: "resume",
@@ -136,43 +143,71 @@ export async function POST(req: any) {
         });
         const prompt = promptRec.value;
 
-        const chatPrompt = ChatPromptTemplate.fromPromptMessages([
-          SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing Professional Summary for a user Resume/CV.
-            Following are the content of the resume (in JSON format): 
-            JSON user/resume data: {userData}
-    
-            `),
-          HumanMessagePromptTemplate.fromTemplate("{prompt}"),
-        ]);
+        // const chatPrompt = ChatPromptTemplate.fromPromptMessages([
+        //   SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing Professional Summary for a user Resume/CV.
+        //     Following are the content of the resume (in JSON format):
+        //     JSON user/resume data: {userData}
+
+        //     `),
+        //   HumanMessagePromptTemplate.fromTemplate("{prompt}"),
+        // ]);
         const promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
 
-        const chainC = new LLMChain({
-          prompt: chatPrompt,
-          llm: model1,
-        });
+        const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps Writing Professional Summary for a user Resume/CV.
+            Following are the content of the resume (in JSON format): 
+            JSON user/resume data: ${content}
+            
+            This is the prompt:
+                ${promptSummary}`;
+        // const chainC = new LLMChain({
+        //   prompt: chatPrompt,
+        //   llm: model1,
+        // });
 
-        const output = await chainC.call({
-          userData: JSON.stringify(content),
-          prompt: promptSummary,
+        const response: any = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          stream: true,
+          messages: [{ role: "user", content: inputPrompt }],
         });
-
+        const responseForTraining = await openai.chat.completions.create({
+          model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
+          messages: [
+            {
+              role: "user",
+              content: inputPrompt,
+            },
+          ],
+          temperature: 1,
+        });
         // make a trainBot entry
-        const obj = {
-          type: "resume.writeSummary",
-          input: promptSummary,
-          output: output.text.replace(/(\r\n|\n|\r)/gm, ""),
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Write Summary for the resume`,
-        };
 
-        await TrainBot.create({ ...obj });
-        return NextResponse.json(
-          { result: output, success: true },
-          { status: 200 }
-        );
+        try {
+          if (trainBotData) {
+            const obj = {
+              type: "resume.writeSummary",
+              input: promptSummary,
+              output:
+                responseForTraining?.choices[0]?.message?.content?.replace(
+                  /(\r\n|\n|\r)/gm,
+                  ""
+                ),
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData.userEmail,
+              fileAddress: trainBotData.fileAddress,
+              Instructions: `Write Summary for the resume`,
+            };
+
+            await TrainBot.create({ ...obj });
+          }
+        } catch (error) {}
+        const stream = OpenAIStream(response);
+        // Respond with the stream
+        return new StreamingTextResponse(stream);
+        // return NextResponse.json(
+        //   { result: output, success: true },
+        //   { status: 200 }
+        // );
         // res.end();
       } catch (error) {
         return NextResponse.json(
@@ -224,16 +259,28 @@ export async function POST(req: any) {
       const formatInstructions = parser.getFormatInstructions();
 
       try {
-        const resp = await chainB.call({
-          userData: JSON.stringify(content),
-          format_instructions: formatInstructions,
-          prompt: "Answer should be a valid JSON",
-        });
+        const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
+        Following are the content of the resume (in JSON format): 
+        JSON user/resume data: ${content}
 
-        return NextResponse.json(
-          { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
-          { status: 200 }
-        );
+        ${formatInstructions}`;
+        // const resp = await chainB.call({
+        //   userData: JSON.stringify(content),
+        //   format_instructions: formatInstructions,
+        //   prompt: "Answer should be a valid JSON",
+        // });
+        const response: any = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          stream: true,
+          messages: [{ role: "user", content: inputPrompt }],
+        });
+        const stream = OpenAIStream(response);
+        // Respond with the stream
+        return new StreamingTextResponse(stream);
+        // return NextResponse.json(
+        //   { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+        //   { status: 200 }
+        // );
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },

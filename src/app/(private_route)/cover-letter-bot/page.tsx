@@ -156,20 +156,20 @@ const CoverLetterWriter = () => {
         body: JSON.stringify(obj),
       })
         .then(async (resp: any) => {
-          const response = await resp.json();
-          if (response.success) {
-            // const reader = resp.body.getReader();
+          // const response = await resp.json();
+          if (resp.ok) {
+            const reader = resp.body.getReader();
             let tempText = "";
-            // while (true) {
-            //   const { done, value } = await reader.read();
-            //   if (done) {
-            //     break;
-            //   }
-            // const text = new TextDecoder().decode(value);
-            const text = response.result;
-            setStreamedData((prev) => prev + text);
-            tempText += text;
-            // }
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) {
+                break;
+              }
+              const text = new TextDecoder().decode(value);
+              // const text = response.result;
+              setStreamedData((prev) => prev + text);
+              tempText += text;
+            }
 
             // await saveToDB(tempText);
 
@@ -197,7 +197,7 @@ const CoverLetterWriter = () => {
                 userEmail: session?.user?.email,
               };
 
-              // Save cover letter to the server
+              // Save cover letter to the DB
               const coverLetterResponse = await axios.post(
                 "/api/coverLetterBot",
                 payload
