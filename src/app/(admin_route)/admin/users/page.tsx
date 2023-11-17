@@ -59,6 +59,7 @@ const UsersPage = () => {
   }, []);
 
   const selectUsersLimit = (e: any) => {
+    setCurrentPage(1);
     setLimitOfUser(e.target.value);
   };
   useEffect(() => {
@@ -231,6 +232,7 @@ const UsersPage = () => {
                 <button
                   className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
                   onClick={() => {
+                    setRecords([]);
                     setCurrentPage(currentPage - 1);
                   }}
                   disabled={currentPage == 1 ? true : false}
@@ -243,7 +245,10 @@ const UsersPage = () => {
                 return (
                   <li key={number}>
                     <button
-                      onClick={(e) => setCurrentPage(number)}
+                      onClick={(e) => {
+                        setRecords([]);
+                        setCurrentPage(number);
+                      }}
                       className={`border-gray-300  leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400  text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white hover:text-gray-700 first-letter
                       ${
                         currentPage === number
@@ -261,6 +266,7 @@ const UsersPage = () => {
                 <button
                   className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   onClick={() => {
+                    setRecords([]);
                     setCurrentPage(currentPage + 1);
                   }}
                   disabled={currentPage === totalPages}

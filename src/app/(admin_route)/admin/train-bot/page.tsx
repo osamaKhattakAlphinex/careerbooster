@@ -7,6 +7,7 @@ import {
 } from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const activeCSS =
@@ -15,6 +16,13 @@ const inactiveCSS =
   "inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300";
 
 const TrainRegistrationBotAdminPage = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [totalPages, setTotalPages] = useState(0);
+  const [startingPage, setStartingPage] = useState(1);
+  const [limitOfRecords, setLimitOfRecords] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("pending");
   const [dataType, setDataType] = useState<string>("registrationWizard"); // registrationWizard, aiTools
   const [showRecordsType, setShowRecordsType] = useState<string>(
@@ -28,7 +36,7 @@ const TrainRegistrationBotAdminPage = () => {
     setLoading(true);
     if (!loading) {
       axios
-        .get("/api/trainBot", {
+        .get(`/api/trainBot?limit=${limitOfRecords}&page=${currentPage}`, {
           params: {
             status: activeTab,
             type: showRecordsType,
@@ -38,6 +46,7 @@ const TrainRegistrationBotAdminPage = () => {
         .then((res: any) => {
           if (res.data.success) {
             const result = res.data;
+            setTotalPages(Number(Math.ceil(result.totalRecs / limitOfRecords)));
             setRecords(result.data);
           }
         })
@@ -124,6 +133,25 @@ const TrainRegistrationBotAdminPage = () => {
       setShowRecordsType("register.wizard.basicInfo");
     }
   }, [dataType]);
+
+  useEffect(() => {
+    fetchRecords();
+    const startIndex = Number((currentPage - 1) * limitOfRecords);
+    setStartingPage(startIndex);
+    router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
+  }, [limitOfRecords, currentPage]);
+  console.log(totalPages);
+
+  useEffect(() => {
+    const existingNumberOfRecords = searchParams?.get("r");
+    const existingPage = searchParams?.get("p");
+    if (existingNumberOfRecords) {
+      setLimitOfRecords(parseInt(existingNumberOfRecords));
+    }
+    if (existingPage) {
+      setCurrentPage(parseInt(existingPage));
+    }
+  }, [searchParams?.get("r"), searchParams?.get("p")]);
 
   return (
     <div className="pt-30">
@@ -302,6 +330,28 @@ const TrainRegistrationBotAdminPage = () => {
               </div>
             </div>
           </div>
+          <div className="flex flex-row gap-2 items-center ml-auto  pr-5">
+            <label htmlFor="userPerPage" className="text-sm font-medium">
+              Number of records per page:
+            </label>
+            <select
+              name="userPerPage"
+              id="userPerPage"
+              className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+              onChange={(e) => {
+                setCurrentPage(1);
+                setLimitOfRecords(Number(e.target.value));
+              }}
+              value={limitOfRecords}
+            >
+              <>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+              </>
+            </select>
+          </div>
 
           {/* Tabs */}
 
@@ -403,7 +453,9 @@ const TrainRegistrationBotAdminPage = () => {
                         key={rec._id}
                         className="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                       >
-                        <td className="px-6 py-4">{index + 1}</td>
+                        <td className="px-6 py-4">
+                          {startingPage + index + 1}
+                        </td>
                         <td className="px-6 py-4">{rec?.userEmail}</td>
                         <th
                           scope="row"
@@ -450,6 +502,59 @@ const TrainRegistrationBotAdminPage = () => {
                     ))}
                 </tbody>
               </table>
+            </div>
+            {/* Pagination Controls */}
+            <div className=" flex justify-end mt-4">
+              <nav aria-label="Page navigation example">
+                <ul className="inline-flex -space-x-px">
+                  <li>
+                    <button
+                      className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+                      onClick={() => {
+                        setRecords([]);
+                        setCurrentPage(currentPage - 1);
+                      }}
+                      disabled={currentPage == 1 ? true : false}
+                    >
+                      Previous
+                    </button>
+                  </li>
+                  {[currentPage - 1, currentPage, currentPage + 1].map(
+                    (number) => {
+                      if (number < 1 || number > totalPages) return null;
+                      return (
+                        <li key={number}>
+                          {currentPage !== totalPages && (
+                            <button
+                              onClick={(e) => {
+                                setRecords([]);
+                                setCurrentPage(number);
+                              }}
+                              className={`border-gray-300  leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400  text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white hover:text-gray-700 first-letter
+                      ${currentPage === number} `}
+                            >
+                              {number}
+                            </button>
+                          )}
+                        </li>
+                      );
+                    }
+                  )}
+
+                  <li>
+                    <button
+                      className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                      onClick={() => {
+                        setRecords([]);
+                        setCurrentPage(currentPage + 1);
+                      }}
+                      disabled={currentPage === totalPages}
+                    >
+                      Next
+                    </button>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>
