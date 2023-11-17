@@ -112,6 +112,7 @@ const TrainRegistrationBotAdminPage = () => {
   };
 
   // when tab changes fetch records for that tab
+  //
   useEffect(() => {
     if (
       activeTab &&
