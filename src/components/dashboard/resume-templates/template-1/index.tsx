@@ -40,7 +40,6 @@ const EditableField = ({
   const [editedValue, setEditedValue] = useState(value);
 
   const userData = useSelector((state: any) => state.userData);
-
   const handleBlur = () => {
     setIsEditing(false);
     onSave(editedValue);
@@ -59,7 +58,7 @@ const EditableField = ({
           {type === "textarea" ? (
             <textarea
               value={editedValue}
-              className="bg-transparent w-full hover:cursor-pointer  h-auto"
+              className="bg-transparent pr-2 w-full hover:cursor-text  h-auto"
               rows={rows ? rows : 15}
               onChange={(e: any) => setEditedValue(e.target.value)}
               autoFocus
@@ -69,7 +68,7 @@ const EditableField = ({
             <input
               type="text"
               value={editedValue}
-              className=" bg-transparent hover:cursor-pointer"
+              className=" bg-transparent pr-2 hover:cursor-text"
               style={style ? style : {}}
               onChange={(e: any) => setEditedValue(e.target.value)}
               autoFocus
@@ -78,7 +77,7 @@ const EditableField = ({
           )}
         </>
       ) : (
-        <span>{value}</span>
+        <span className="hover:cursor-text">{value}</span>
       )}
     </span>
   );
@@ -114,7 +113,7 @@ const ResumeTemplate1 = ({
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [secondarySkill, setSecondarySkill] = useState<string>("");
   const [professionalSkill, setProfessionalSkill] = useState<string>("");
-
+  const [insideIndex, setInsideIndex] = useState<number>(0);
   const addPrimarySkill = () => {
     const primarySkills = resume?.primarySkills;
     const updatedSkills = [...primarySkills];
@@ -215,62 +214,48 @@ const ResumeTemplate1 = ({
       updatedItems[i],
       updatedItems[draggedIndex],
     ];
-    console.log("updatedItems", updatedItems);
-
-    dispatch(
-      setWorkExperienceArray({
+    if (draggedIndex !== i) {
+      dispatch(
+        setWorkExperienceArray({
+          ...resume,
+          workExperienceArray: updatedItems,
+        })
+      );
+      saveResumeToDB({
         ...resume,
         workExperienceArray: updatedItems,
-      })
-    );
-    saveResumeToDB({
-      ...resume,
-      workExperienceArray: updatedItems,
-    });
+      });
+    }
   };
-
-  
-  //     .split("-")
-  //     .map((index: any) => parseInt(index));
-
-  //   const updatedItems = [...(resume?.workExperienceArray || [])];
-  //   console.log("updatedItems", updatedItems);
-
-  //   // Ensure the drag and drop is within the same primary item
-  //   if (draggedPrimaryIndex === i) {
-  //     const draggedItem = {
-  //       ...updatedItems[draggedPrimaryIndex].achievements[
-  //         draggedSecondaryIndex
-  //       ],
-  //     };
-
-  //     // Create a copy of the achievements array
-  //     const sourceAchievements = [
-  //       ...updatedItems[draggedPrimaryIndex].achievements,
-  //     ];
-  //     sourceAchievements.splice(draggedSecondaryIndex, 1);
-
-  //     // Update the source achievements array
-  //     updatedItems[draggedPrimaryIndex] = {
-  //       ...updatedItems[draggedPrimaryIndex],
-  //       achievements: sourceAchievements,
-  //     };
-
-  //     // Insert the dragged item at the target index
-  //     updatedItems[i].achievements.splice(ind, 0, draggedItem);
-
-  //     console.log(
-  //       "🚀 ~ file: page.js:70 ~ handleDrop ~ updatedItems:",
-  //       updatedItems
-  //     );
-  //     dispatch(
-  //       setWorkExperienceArray({
-  //         ...resume,
-  //         workExperienceArray: updatedItems,
-  //       })
-  //     );
-  //   }
-  // };
+  //Reorder Redux handleDropAchievement array with drag-drop
+  const handleDropAchievement = (i: number, ind: number) => {
+    let draggedIndex: number;
+    let updatedItems = [];
+    draggedIndex = insideIndex;
+    updatedItems = [...resume?.workExperienceArray];
+    let achievements = [...updatedItems[i].achievements];
+    const temp = achievements[draggedIndex];
+    achievements[draggedIndex] = achievements[ind];
+    achievements[ind] = temp;
+    let updatedWorkExperience = {
+      ...updatedItems[i],
+    };
+    updatedWorkExperience.achievements = achievements;
+    // Update the copy of the workExperience in the updatedItems array
+    updatedItems[i] = updatedWorkExperience;
+    if (draggedIndex !== ind) {
+      dispatch(
+        setWorkExperienceArray({
+          ...resume,
+          workExperienceArray: updatedItems,
+        })
+      );
+      saveResumeToDB({
+        ...resume,
+        workExperienceArray: updatedItems,
+      });
+    }
+  };
 
   return (
     <div className="w-full first-page text-gray-900">
@@ -435,8 +420,6 @@ const ResumeTemplate1 = ({
                       onSave={(value: string) => {
                         let updatedSkills = resume.primarySkills.map(
                           (skill: string, index: number) => {
-                            console.log(index);
-
                             if (index === i) {
                               return value;
                             }
@@ -962,18 +945,18 @@ const ResumeTemplate1 = ({
                 return (
                   <div
                     key={i}
-                    className="hover:border-dashed hover:border-gray-500 hover:border-2"
+                    className="hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
                     onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                     onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                     onDragStart={(e) =>
-                      e.dataTransfer.setData("text", i.toString())
+                      e.dataTransfer.setData("text/plain", i.toString())
                     }
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={(e) => handleDropExperience(e, i)}
                     draggable
                   >
                     <h2
-                      className="hover:shadow-md hover:bg-gray-100"
+                      className="hover:shadow-md hover:cursor-text hover:bg-gray-100"
                       style={{
                         fontSize: "1.3rem",
                         fontWeight: "bold",
@@ -1008,6 +991,7 @@ const ResumeTemplate1 = ({
                       />
                     </h2>
                     <h2
+                      className="hover:cursor-default"
                       style={{
                         fontSize: "1.1rem",
                         lineHeight: "1.5rem",
@@ -1018,7 +1002,7 @@ const ResumeTemplate1 = ({
                         ? "Present"
                         : `${rec?.toMonth} ${rec?.toYear}`}{" "}
                       |{" "}
-                      <span className="hover:shadow-md hover:bg-gray-100">
+                      <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
                         <EditableField
                           value={rec?.company}
                           onSave={(value: string) => {
@@ -1107,8 +1091,20 @@ const ResumeTemplate1 = ({
                           {rec?.achievements.map(
                             (achievement: any, ind: number) => (
                               <li
+<<<<<<< HEAD
                                 onClick={() => console.log("important clicked")}
                                 className="list-disc hover:border-dashed hover:border-gray-500 hover:border-2 hover:shadow-md relative parent hover:bg-gray-100"
+=======
+                                onDragStart={(e) => {
+                                  setInsideIndex(ind);
+                                }}
+                                onDragOver={(e) => e.preventDefault()}
+                                onDrop={(e) => {
+                                  handleDropAchievement(i, ind);
+                                }}
+                                draggable
+                                className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
+>>>>>>> rehmat
                                 key={ind}
                               >
                                 <EditableField
