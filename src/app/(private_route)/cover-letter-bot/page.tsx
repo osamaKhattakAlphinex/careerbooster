@@ -13,11 +13,10 @@ import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "@/components/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
-import RecentResumeCard from "@/components/dashboard/resume-builder/RecenResumesCard";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import CoverLetterCardSingle from "@/components/dashboard/cover-letter-bot/CoverLetterCardSingle";
 import { makeid } from "@/helpers/makeid";
-import { setCoverLetter } from "@/store/coverLetterSlice";
+import { resetCoverLetter, setCoverLetter } from "@/store/coverLetterSlice";
 
 const CoverLetterWriter = () => {
   const componentRef = useRef<any>(null);
@@ -37,41 +36,60 @@ const CoverLetterWriter = () => {
 
   // Function to toggle editing mode on double-click
   const handleClick = () => {
-    setEditedContent(streamedData);
+    // setEditedContent(streamedData);
     setIsEditing(true);
   };
 
-  // Function to save the edited content and exit editing mode
-  const handleSave = () => {
-    setStreamedData(editedContent);
-    setIsEditing(false);
-  };
-
-  const saveCoverLetterToDb = async () => {
-    const payload = {
-      id: makeid(),
-      jobDescription: jobDescription,
-      coverLetterText: streamedData,
-      generatedOnDate: new Date().toISOString(),
-      generatedViaOption: selectedOption,
-      userEmail: session?.user?.email,
-    };
-    try {
-      const coverLetter = await axios.post("/api/coverLetterBot", payload);
-
-      if (coverLetter.data.success) {
-        dispatch(setCoverLetter(payload));
-
-        const updatedObject = {
-          ...userData,
-          coverLetters: coverLetter.data.result.coverLetters,
-        };
-
-        dispatch(setUserData({ ...userData, ...updatedObject }));
+  useEffect(() => {
+    if (isEditing) {
+      if (componentRef.current) {
+        const editorElement = componentRef.current.querySelector("#editor");
+        if (editorElement) {
+          editorElement.innerHTML = coverLetter.coverLetterText;
+        }
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      dispatch(resetCoverLetter());
     }
+  }, [isEditing]);
+
+  // Function to save the edited content and exit editing mode
+  const handleSave = async () => {
+    let _coverLetterText = "";
+
+    if (componentRef.current) {
+      const editorElement = componentRef.current.querySelector("#editor");
+      if (editorElement) {
+        _coverLetterText = editorElement.innerHTML;
+        editorElement.innerHTML = "";
+      }
+    }
+
+    // setStreamedData(editedContent);
+    setIsEditing(false);
+    const payLoad = {
+      coverLetterText: _coverLetterText, //editedContent,
+      generatedOnDate: coverLetter.generatedOnDate,
+      generatedViaOption: coverLetter.generatedViaOption,
+      id: coverLetter.id,
+      jobDescription: coverLetter.jobDescription,
+      userEmail: coverLetter.userEmail,
+    };
+
+    const updatedCoverLetters = await axios.put(
+      `/api/coverLetterBot/${coverLetter.id}`,
+      payLoad,
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    console.table(updatedCoverLetters.data.results);
+
+    const updatedObject = {
+      ...userData,
+      coverLetters: updatedCoverLetters.data.results,
+    };
+    dispatch(setUserData({ ...updatedObject }));
+    dispatch(setCoverLetter(payLoad));
   };
 
   useEffect(() => {
@@ -89,7 +107,7 @@ const CoverLetterWriter = () => {
   const userData = useSelector((state: any) => state.userData);
   const coverLetter = useSelector((state: any) => state.coverLetter);
 
-  // console.clear();
+  console.clear();
   const { resumes, coverLetters } = userData;
 
   const handleGenerate = async () => {
@@ -138,18 +156,20 @@ const CoverLetterWriter = () => {
         body: JSON.stringify(obj),
       })
         .then(async (resp: any) => {
-          if (resp.ok) {
-            const reader = resp.body.getReader();
+          const response = await resp.json();
+          if (response.success) {
+            // const reader = resp.body.getReader();
             let tempText = "";
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) {
-                break;
-              }
-              const text = new TextDecoder().decode(value);
-              setStreamedData((prev) => prev + text);
-              tempText += text;
-            }
+            // while (true) {
+            //   const { done, value } = await reader.read();
+            //   if (done) {
+            //     break;
+            //   }
+            // const text = new TextDecoder().decode(value);
+            const text = response.result;
+            setStreamedData((prev) => prev + text);
+            tempText += text;
+            // }
 
             // await saveToDB(tempText);
 
@@ -190,7 +210,7 @@ const CoverLetterWriter = () => {
                   userPackageUsed: {
                     ...userData.userPackageUsed,
                     cover_letter_generation:
-                      limitUpdateData.user.userPackageUsed
+                      limitUpdateData.result.userPackageUsed
                         .cover_letter_generation,
                   },
                   coverLetters: coverLetterResponse.data.result.coverLetters,
@@ -556,7 +576,7 @@ const CoverLetterWriter = () => {
                 </Button>
               </div>
             )}
-            {streamedData && (
+            {isEditing && (
               <div>
                 <Button
                   type="button"
@@ -642,11 +662,12 @@ const CoverLetterWriter = () => {
           <div className="p-12" ref={componentRef}>
             {isEditing ? (
               <div
+                id="editor"
                 contentEditable="true"
-                dangerouslySetInnerHTML={{ __html: editedContent }}
-                onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                  setEditedContent(e.target.innerHTML);
-                }}
+                // dangerouslySetInnerHTML={{ __html: editedContent }}
+                // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
+                //   setEditedContent(e.target.innerHTML);
+                // }}
               ></div>
             ) : (
               <div onClick={handleClick}>

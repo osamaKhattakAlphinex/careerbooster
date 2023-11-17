@@ -15,7 +15,7 @@ import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { RetrievalQAChain } from "langchain/chains";
 import TrainBot from "@/db/schemas/TrainBot";
 import { NextResponse } from "next/server";
-export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const maxDuration = 300; // This function can run for a maximum of 5 minutes
 export const dynamic = "force-dynamic";
 
 export async function POST(req: any) {

@@ -67,7 +67,12 @@ const UploadPDFResume = () => {
         .then(async (resp: any) => {
           const res = await resp.json();
           if (res.success) {
-            const userData = JSON.parse(res.result);
+            let userData;
+            if (typeof res.result === "object") {
+              userData = res.result;
+            } else {
+              userData = await JSON.parse(res.result);
+            }
             router.replace(
               `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&content=true`
             );

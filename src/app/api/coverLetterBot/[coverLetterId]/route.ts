@@ -4,33 +4,46 @@ import { getServerSession } from "next-auth/next";
 import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
-// export async function PUT(
-//   req: any,
-//   { params }: { params: { coverLetterId: string } }
-// ) {
-//   const packgeId = params.packgeId;
-//   const payload = await req.json();
+export async function PUT(
+  req: any,
+  { params }: { params: { coverLetterId: string } }
+) {
+  const requestBody = await req.json(); // To read request data
+  // const url = new URL(req.url);
+  // const coverLetterId = url.searchParams.get("coverLetterId");
+  const coverLetterId = params.coverLetterId;
+  console.log(coverLetterId);
+  try {
+    let email: any = "";
 
-//   console.log(packgeId);
+    const session = await getServerSession(authOptions);
 
-//   try {
-//     await startDB();
+    email = session?.user?.email;
 
-//     let userPackage = await UserPackage.findOneAndUpdate(
-//       { _id: packgeId },
-//       payload,
-//       { new: true }
-//     );
+    await startDB();
 
-//     return NextResponse.json({ result: userPackage, success: true });
-//   } catch (error) {
-//     console.log(error);
-//     return NextResponse.json(
-//       { result: "Internal Server Error", success: false },
-//       { status: 404 }
-//     );
-//   }
-// }
+    const updatedUser = await User.findOneAndUpdate(
+      { email: email, "coverLetters.id": coverLetterId },
+      {
+        $set: {
+          "coverLetters.$.coverLetterText": requestBody.coverLetterText,
+        },
+      },
+      { new: true }
+    );
+
+    return NextResponse.json(
+      { success: true, results: updatedUser.coverLetters },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error:", error);
+    return NextResponse.json(
+      { result: "Internal Server Error", success: false },
+      { status: 500 }
+    );
+  }
+}
 
 export async function DELETE(
   req: any,

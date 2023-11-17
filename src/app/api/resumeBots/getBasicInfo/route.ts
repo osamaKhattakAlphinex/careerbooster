@@ -19,26 +19,26 @@ export async function POST(req: any) {
   if (req) {
     const reqBody = await req.json();
     // const email = reqBody.email;
-    const type = reqBody.type; // request type
-    const inputType = reqBody.inputType; // input type
-    const aiInputFile = reqBody.aiInputFile; // input file
-    const jobPosition = reqBody.jobPosition;
-    const userData = reqBody.userData;
-    const email = reqBody.email;
-    const trainBotData = reqBody.trainBotData;
+    const type = reqBody?.type; // request type
+    const inputType = reqBody?.inputType; // input type
+    const jobPosition = reqBody?.jobPosition;
+    const userData = reqBody?.userData;
+    const email = reqBody?.email;
+    const trainBotData = reqBody?.trainBotData;
 
     let content: any;
-    if (inputType === "file") {
-      // Read content from the user file
-      // load file
-      const dir = path.join(process.cwd() + "/public", "/files", `/${email}`);
-      const loader = new PDFLoader(`${dir}/${aiInputFile}`);
-      const docs = await loader.load();
+    // if (inputType === "file") {
+    //   // Read content from the user file
+    //   // load file
+    //   const dir = path.join(process.cwd() + "/public", "/files", `/${email}`);
+    //   const loader = new PDFLoader(`${dir}/${aiInputFile}`);
+    //   const docs = await loader.load();
 
-      let contentTxt = docs.map((doc: any) => doc.pageContent);
-      const FileTxt = contentTxt.join(" ");
-      content = { userData: FileTxt };
-    } else if (inputType === "userData") {
+    //   let contentTxt = docs.map((doc: any) => doc.pageContent);
+    //   const FileTxt = contentTxt.join(" ");
+    //   content = { userData: FileTxt };
+    // }
+    if (userData || inputType === "userData") {
       // pass user data as it is
       content = userData;
     }
@@ -108,7 +108,7 @@ export async function POST(req: any) {
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },
-          { status: 400 }
+          { status: 404 }
         );
       }
     }
@@ -177,7 +177,7 @@ export async function POST(req: any) {
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },
-          { status: 400 }
+          { status: 404 }
         );
       }
     }
@@ -266,20 +266,21 @@ export async function POST(req: any) {
           format_instructions: formatInstructions,
           prompt: "Answer should be a valid JSON",
         });
-
         // make a trainBot entry
-        const obj = {
-          type: "resume.writePrimarySkills",
-          input: formatInstructions,
-          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Write Primary Skills for Resume`,
-        };
+        try {
+          const obj = {
+            type: "resume.writePrimarySkills",
+            input: formatInstructions,
+            output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+            idealOutput: "",
+            status: "pending",
+            userEmail: trainBotData.userEmail,
+            fileAddress: trainBotData.fileAddress,
+            Instructions: `Write Primary Skills for Resume`,
+          };
 
-        await TrainBot.create({ ...obj });
+          await TrainBot.create({ ...obj });
+        } catch (error) {}
 
         return NextResponse.json(
           { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
@@ -288,7 +289,7 @@ export async function POST(req: any) {
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },
-          { status: 400 }
+          { status: 404 }
         );
       }
     }
@@ -317,18 +318,20 @@ export async function POST(req: any) {
         });
 
         // make a trainBot entry
-        const obj = {
-          type: "resume.writeProfessionalSkills",
-          input: formatInstructions,
-          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Write Professional Skills for Resume`,
-        };
+        try {
+          const obj = {
+            type: "resume.writeProfessionalSkills",
+            input: formatInstructions,
+            output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+            idealOutput: "",
+            status: "pending",
+            userEmail: trainBotData.userEmail,
+            fileAddress: trainBotData.fileAddress,
+            Instructions: `Write Professional Skills for Resume`,
+          };
 
-        await TrainBot.create({ ...obj });
+          await TrainBot.create({ ...obj });
+        } catch (error) {}
 
         return NextResponse.json(
           { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
@@ -337,7 +340,7 @@ export async function POST(req: any) {
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },
-          { status: 400 }
+          { status: 404 }
         );
       }
     }
@@ -366,18 +369,20 @@ export async function POST(req: any) {
         });
 
         // make a trainBot entry
-        const obj = {
-          type: "resume.writeSecondarySkills",
-          input: formatInstructions,
-          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Write Secondary Skills for Resume`,
-        };
+        try {
+          const obj = {
+            type: "resume.writeSecondarySkills",
+            input: formatInstructions,
+            output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+            idealOutput: "",
+            status: "pending",
+            userEmail: trainBotData.userEmail,
+            fileAddress: trainBotData.fileAddress,
+            Instructions: `Write Secondary Skills for Resume`,
+          };
 
-        await TrainBot.create({ ...obj });
+          await TrainBot.create({ ...obj });
+        } catch (error) {}
 
         return NextResponse.json(
           { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
@@ -386,7 +391,7 @@ export async function POST(req: any) {
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },
-          { status: 400 }
+          { status: 404 }
         );
       }
     }

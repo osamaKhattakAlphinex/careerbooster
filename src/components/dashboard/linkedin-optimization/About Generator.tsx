@@ -93,7 +93,12 @@ const AboutGenerator = ({ setAbout }: Props) => {
               }),
             }).then(async (resp: any) => {
               const res = await resp.json();
-              const user = JSON.parse(res.result);
+              let user;
+              if (typeof res?.result === "object") {
+                user = res.result;
+              } else {
+                user = await JSON.parse(res.result);
+              }
               if (res.success) {
                 const updatedObject = {
                   ...userData,

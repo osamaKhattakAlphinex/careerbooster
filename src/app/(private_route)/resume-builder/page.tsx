@@ -111,7 +111,12 @@ const ResumeBuilder = () => {
     }).then(async (resp: any) => {
       const res = await resp.json();
       if (res.success && res?.result) {
-        const myJSON = JSON.parse(res.result);
+        let myJSON;
+        if (typeof res.result === "object") {
+          myJSON = res.result;
+        } else {
+          myJSON = await JSON.parse(res.result);
+        }
         const basicObj = {
           ...myJSON,
           name: userData?.firstName + " " + userData?.lastName,
@@ -181,6 +186,7 @@ const ResumeBuilder = () => {
       let temp = "";
       const workExpArr: any = [];
       for (const [index, experience] of experiences.entries()) {
+        console.log("experience", index, experience);
         let workExpArrObj: any = {};
         let html = "";
         html += `<h2 style="font-size: 1.3rem; font-weight: bold; line-height: 2rem; ">${experience?.jobTitle}</h2>`;
@@ -320,7 +326,12 @@ const ResumeBuilder = () => {
       const res = await resp.json();
       if (res.success) {
         if (res?.result) {
-          const myJSON = await JSON.parse(res.result);
+          let myJSON;
+          if (typeof res.result === "object") {
+            myJSON = res.result;
+          } else {
+            myJSON = await JSON.parse(res.result);
+          }
           dispatch(setPrimarySkills(myJSON));
         }
       }
@@ -345,7 +356,12 @@ const ResumeBuilder = () => {
       const res = await resp.json();
       if (res.success) {
         if (res?.result) {
-          const myJSON = await JSON.parse(res.result);
+          let myJSON;
+          if (typeof res.result === "object") {
+            myJSON = res.result;
+          } else {
+            myJSON = await JSON.parse(res.result);
+          }
 
           dispatch(setProfessionalSkills(myJSON));
         }
@@ -371,7 +387,12 @@ const ResumeBuilder = () => {
       const res = await resp.json();
       if (res.success) {
         if (res?.result) {
-          const myJSON = await JSON.parse(res.result);
+          let myJSON;
+          if (typeof res.result === "object") {
+            myJSON = res.result;
+          } else {
+            myJSON = await JSON.parse(res.result);
+          }
           dispatch(setSecondarySkills(myJSON));
         }
       }
@@ -445,9 +466,9 @@ const ResumeBuilder = () => {
     if (userData && userData?.email) {
       setAiInputUserData({
         contact: userData?.contact,
-        education: userData?.contact,
-        email: userData?.contact,
-        experience: userData?.contact,
+        education: userData?.education,
+        email: userData?.email,
+        experience: userData?.experience,
         firstName: userData?.firstName,
         lastName: userData?.lastName,
         phone: userData?.phone,

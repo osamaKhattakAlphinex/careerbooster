@@ -4,6 +4,7 @@ import Prompt from "@/db/schemas/Prompt";
 import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
 import { OpenAIStream, StreamingTextResponse } from "ai";
+import TrainBot from "@/db/schemas/TrainBot";
 
 // This function can run for a maximum of 5 seconds
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
@@ -18,7 +19,7 @@ export async function POST(req: any) {
     const body = await req.json();
     if (body) {
       const content = body.linkedinContent;
-
+      const trainBotData = body?.trainBotData;
       let prompt;
       await startDB();
       const promptRec = await Prompt.findOne({
@@ -50,6 +51,33 @@ export async function POST(req: any) {
           ],
         });
 
+        const responseForTraining = await openai.chat.completions.create({
+          model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
+          messages: [
+            {
+              role: "user",
+              content: input,
+            },
+          ],
+          temperature: 1,
+        });
+        try {
+          if (trainBotData) {
+            // make a trainBot entry
+            const obj = {
+              type: "linkedinAiTool.headline",
+              input: input,
+              output: responseForTraining.choices[0].message.content,
+              // idealOutput: "",
+              status: "pending",
+              //  userEmail: trainBotData.userEmail,
+              fileContent: trainBotData.fileContent,
+              Instructions: `Writing a LinkedIn headline as Job Title |Top Keyword 1 | Top Keyword 2 | Top Keyword 3 | Top Keyword 4 | Value proposition statement`,
+            };
+
+            await TrainBot.create({ ...obj });
+          }
+        } catch (error) {}
         // const resp = await chain4.call({ query: input });
         // return NextResponse.json(
         //   { result: response.choices[0].message.content, success: true },

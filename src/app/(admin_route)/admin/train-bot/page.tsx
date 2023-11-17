@@ -129,6 +129,8 @@ const TrainRegistrationBotAdminPage = () => {
   useEffect(() => {
     if (dataType && dataType === "aiTools") {
       setShowRecordsType("resume.getBasicInfo");
+    } else if (dataType && dataType === "linkedinTool") {
+      setShowRecordsType("linkedinAiTool.headline");
     } else {
       setShowRecordsType("register.wizard.basicInfo");
     }
@@ -241,6 +243,16 @@ const TrainRegistrationBotAdminPage = () => {
                     </option>
                     <option value="linkedin.genearteConsultingBid">
                       Write Consulting Bid
+                    </option>
+                  </>
+                )}
+                {dataType === "linkedinTool" && (
+                  <>
+                    <option value="linkedinAiTool.headline">
+                      Linkedin {">"} Headline
+                    </option>
+                    <option value="linkedinAiTool.about">
+                      Linkedin {">"} About/Summary
                     </option>
                   </>
                 )}
@@ -409,9 +421,11 @@ const TrainRegistrationBotAdminPage = () => {
                     <th scope="col" className="px-6 py-3">
                       S.No
                     </th>
-                    <th scope="col" className="px-6 py-3">
-                      Email
-                    </th>
+                    {dataType !== "linkedinTool" && (
+                      <th scope="col" className="px-6 py-3">
+                        Email
+                      </th>
+                    )}
                     <th scope="col" className="px-6 py-3">
                       Type
                     </th>
@@ -456,7 +470,10 @@ const TrainRegistrationBotAdminPage = () => {
                         <td className="px-6 py-4">
                           {startingPage + index + 1}
                         </td>
-                        <td className="px-6 py-4">{rec?.userEmail}</td>
+
+                        {dataType !== "linkedinTool" && (
+                          <td className="px-6 py-4">{rec?.userEmail}</td>
+                        )}
                         <th
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-xs"
