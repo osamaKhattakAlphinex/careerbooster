@@ -326,13 +326,20 @@ const CoverLetterWriter = () => {
     // }
 
     if (!streamedData) {
-      setShow(true);
       // console.log("userData CoverLetter: ", userData.results.coverLetter);
       setStreamedData(coverLetter.coverLetterText);
     }
 
     // dispatch(setCoverLetter(coverLetters[0]));
   }, [userData]);
+
+  useEffect(() => {
+    if (coverLetter.id !== "") {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }, [coverLetter]);
 
   const historyProps = {
     list: userData.coverLetters,
@@ -671,7 +678,10 @@ const CoverLetterWriter = () => {
               ></div>
             ) : (
               <div onClick={handleClick}>
-                <div dangerouslySetInnerHTML={{ __html: streamedData }}></div>
+                <div
+                  className="text-black"
+                  dangerouslySetInnerHTML={{ __html: streamedData }}
+                ></div>
               </div>
             )}
           </div>
