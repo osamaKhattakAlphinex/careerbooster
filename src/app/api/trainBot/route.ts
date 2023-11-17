@@ -9,13 +9,9 @@ export const GET = async (req: any) => {
 
   const status = url.searchParams.get("status");
   const type = url.searchParams.get("type");
-<<<<<<< HEAD
   const limit = Number(url.searchParams.get("limit"));
   const page = Number(url.searchParams.get("page"));
   const skip = (page - 1) * limit;
-=======
-  // const dataType = url.searchParams.get("dataType");
->>>>>>> a0bb4c81e3feb931d75d4a82edd1b6405be18cdb
 
   try {
     await startDB();
