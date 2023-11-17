@@ -1091,10 +1091,6 @@ const ResumeTemplate1 = ({
                           {rec?.achievements.map(
                             (achievement: any, ind: number) => (
                               <li
-<<<<<<< HEAD
-                                onClick={() => console.log("important clicked")}
-                                className="list-disc hover:border-dashed hover:border-gray-500 hover:border-2 hover:shadow-md relative parent hover:bg-gray-100"
-=======
                                 onDragStart={(e) => {
                                   setInsideIndex(ind);
                                 }}
@@ -1104,7 +1100,6 @@ const ResumeTemplate1 = ({
                                 }}
                                 draggable
                                 className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
->>>>>>> rehmat
                                 key={ind}
                               >
                                 <EditableField
