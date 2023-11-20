@@ -93,91 +93,170 @@ const ResumeBuilder = () => {
     }
   }, [resumeData.state, percentageCalculated]);
 
-  const makeAPICallWithRetry: any = async (
-    apiFunction: any,
-    retriesLeft = 2
-  ) => {
-    try {
-      // Attempt the API call
-      return await apiFunction();
-    } catch (error) {
-      // If an error occurs and retries are left, retry the call
-      if (retriesLeft > 0) {
-        console.log(
-          `API call failed. Retrying... Retries left: ${retriesLeft}`
-        );
-        return makeAPICallWithRetry(apiFunction, retriesLeft - 1);
-      } else {
-        // If no retries are left, handle the error accordingly
-        console.error("API call failed after multiple retries.", error);
-        throw new Error("API call failed after multiple retries");
-      }
-    }
-  };
+  // const makeAPICallWithRetry: any = async (
+  //   apiFunction: any,
+  //   retriesLeft = 2
+  // ) => {
+  //   try {
+  //     // Attempt the API call
+  //     return await apiFunction();
+  //   } catch (error) {
+  //     // If an error occurs and retries are left, retry the call
+  //     if (retriesLeft > 0) {
+  //       console.log(
+  //         `API call failed. Retrying... Retries left: ${retriesLeft}`
+  //       );
+  //       return makeAPICallWithRetry(apiFunction, retriesLeft - 1);
+  //     } else {
+  //       // If no retries are left, handle the error accordingly
+  //       console.error("API call failed after multiple retries.", error);
+  //       throw new Error("API call failed after multiple retries");
+  //     }
+  //   }
+  // };
   const getBasicInfo = async () => {
     // dispatch(setLoadingState("basicInfo"));
-    return makeAPICallWithRetry(async () => {
-      return fetch("/api/resumeBots/getBasicInfo", {
-        method: "POST",
-        body: JSON.stringify({
-          type: "basicDetails",
-          inputType: "userData",
-          userData: aiInputUserData,
-          jobPosition: resumeData.state.jobPosition,
-          trainBotData: {
-            userEmail: userData.email,
-            fileAddress: userData.defaultResumeFile,
-          },
-        }),
-      }).then(async (resp: any) => {
-        console.log("response", resp);
-        const res = await resp.json();
-        console.log("res", res);
-        if (res.success && res?.result) {
-          let myJSON;
-          if (typeof res.result === "object") {
-            myJSON = res.result;
-          } else {
-            myJSON = await JSON.parse(res.result);
-          }
-          const basicObj = {
-            ...myJSON,
-            name: userData?.firstName + " " + userData?.lastName,
-            contact: {
-              ...myJSON?.contact,
-              email: userData?.email,
-              phone: userData?.phone,
-            },
-            education: userData?.education,
-          };
-          dispatch(setBasicInfo(basicObj));
+    // return makeAPICallWithRetry(async () => {
+    return fetch("/api/resumeBots/getBasicInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        type: "basicDetails",
+        inputType: "userData",
+        userData: aiInputUserData,
+        jobPosition: resumeData.state.jobPosition,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
+      }),
+    }).then(async (resp: any) => {
+      console.log("response", resp);
+      const res = await resp.json();
+      console.log("res", res);
+      if (res.success && res?.result) {
+        let myJSON;
+        if (typeof res.result === "object") {
+          myJSON = res.result;
+        } else {
+          myJSON = await JSON.parse(res.result);
         }
-      });
+        const basicObj = {
+          ...myJSON,
+          name: userData?.firstName + " " + userData?.lastName,
+          contact: {
+            ...myJSON?.contact,
+            email: userData?.email,
+            phone: userData?.phone,
+          },
+          education: userData?.education,
+        };
+        dispatch(setBasicInfo(basicObj));
+      }
     });
+    // });
   };
 
   const getSummary = async () => {
-    return makeAPICallWithRetry(async () => {
-      await getUserDataIfNotExists();
-      setStreamedSummaryData("");
-      dispatch(setSummary(""));
-      // dispatch(setLoadingState("summary"));
-      return fetch("/api/resumeBots/getBasicInfo", {
-        method: "POST",
-        body: JSON.stringify({
-          type: "summary",
-          jobPosition: resumeData.state.jobPosition,
-          trainBotData: {
-            userEmail: userData.email,
-            fileAddress: userData.defaultResumeFile,
-          },
-        }),
-      }).then(async (resp: any) => {
-        // const res = await resp.json();
+    // return makeAPICallWithRetry(async () => {
+    await getUserDataIfNotExists();
+    setStreamedSummaryData("");
+    dispatch(setSummary(""));
+    // dispatch(setLoadingState("summary"));
+    return fetch("/api/resumeBots/getBasicInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        type: "summary",
+        jobPosition: resumeData.state.jobPosition,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
+      }),
+    }).then(async (resp: any) => {
+      // const res = await resp.json();
 
-        if (resp.ok) {
-          const reader = resp.body.getReader();
-          let summaryTemp = "";
+      if (resp.ok) {
+        const reader = resp.body.getReader();
+        let summaryTemp = "";
+        while (true) {
+          const { done, value } = await reader.read();
+
+          if (done) {
+            break;
+          }
+
+          const text = new TextDecoder().decode(value);
+          setStreamedSummaryData((prev) => prev + text);
+          summaryTemp += text;
+        }
+
+        dispatch(setSummary(summaryTemp));
+      } else {
+        setStreamedSummaryData("Error! Something went wrong");
+      }
+    });
+    // });
+  };
+
+  const getWorkExperienceNew = async () => {
+    // return makeAPICallWithRetry(async () => {
+    // dispatch(setLoadingState("workExperience"));
+    await getUserDataIfNotExists();
+
+    if (userData.isFetched) {
+      // remove ids from experiences
+      const experiences = userData.experience.map((item: WorkExperience) => {
+        const { id, ...rest } = item;
+        return rest;
+      });
+      setStreamedJDData("");
+      dispatch(setWorkExperience(""));
+      let temp = "";
+      const workExpArr: any = [];
+      for (const [index, experience] of experiences.entries()) {
+        console.log("experience", index, experience);
+        let workExpArrObj: any = {};
+        let html = "";
+        html += `<h2 style="font-size: 1.3rem; font-weight: bold; line-height: 2rem; ">${experience?.jobTitle}</h2>`;
+        workExpArrObj.title = experience?.jobTitle;
+
+        html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
+        
+        ${experience?.fromMonth} ${experience?.fromYear} - ${
+          experience?.isContinue
+            ? "Present"
+            : experience?.toMonth + " " + experience?.toYear
+        } | ${experience?.company} | 
+        ${experience?.cityState} ${experience?.country}
+                  </h2>`;
+        html += `<div>`;
+        workExpArrObj.cityState = experience?.cityState;
+        workExpArrObj.country = experience?.country;
+        workExpArrObj.company = experience?.company;
+        workExpArrObj.fromMonth = experience?.fromMonth;
+        workExpArrObj.fromYear = experience?.fromYear;
+        workExpArrObj.isContinue = experience?.isContinue;
+        workExpArrObj.toMonth = experience?.toMonth;
+        workExpArrObj.toYear = experience?.toYear;
+
+        temp += html;
+        let achievementTemp = "";
+        setStreamedJDData((prev) => prev + html);
+
+        const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
+          method: "POST",
+          body: JSON.stringify({
+            experience: experience,
+            trainBotData: {
+              userEmail: userData.email,
+              fileAddress: userData.defaultResumeFile,
+            },
+          }),
+        });
+        // const response = await res.json();
+        // console.log("result", result, typeof result);
+        if (res.ok) {
+          const reader = res.body.getReader();
           while (true) {
             const { done, value } = await reader.read();
 
@@ -186,103 +265,24 @@ const ResumeBuilder = () => {
             }
 
             const text = new TextDecoder().decode(value);
-            setStreamedSummaryData((prev) => prev + text);
-            summaryTemp += text;
+            // const text = response.result;
+            setStreamedJDData((prev) => prev + text);
+            temp += text;
+            achievementTemp += text;
           }
-
-          dispatch(setSummary(summaryTemp));
-        } else {
-          setStreamedSummaryData("Error! Something went wrong");
         }
-      });
-    });
-  };
 
-  const getWorkExperienceNew = async () => {
-    return makeAPICallWithRetry(async () => {
-      // dispatch(setLoadingState("workExperience"));
-      await getUserDataIfNotExists();
-
-      if (userData.isFetched) {
-        // remove ids from experiences
-        const experiences = userData.experience.map((item: WorkExperience) => {
-          const { id, ...rest } = item;
-          return rest;
-        });
-        setStreamedJDData("");
-        dispatch(setWorkExperience(""));
-        let temp = "";
-        const workExpArr: any = [];
-        for (const [index, experience] of experiences.entries()) {
-          console.log("experience", index, experience);
-          let workExpArrObj: any = {};
-          let html = "";
-          html += `<h2 style="font-size: 1.3rem; font-weight: bold; line-height: 2rem; ">${experience?.jobTitle}</h2>`;
-          workExpArrObj.title = experience?.jobTitle;
-
-          html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
-        
-        ${experience?.fromMonth} ${experience?.fromYear} - ${
-            experience?.isContinue
-              ? "Present"
-              : experience?.toMonth + " " + experience?.toYear
-          } | ${experience?.company} | 
-        ${experience?.cityState} ${experience?.country}
-                  </h2>`;
-          html += `<div>`;
-          workExpArrObj.cityState = experience?.cityState;
-          workExpArrObj.country = experience?.country;
-          workExpArrObj.company = experience?.company;
-          workExpArrObj.fromMonth = experience?.fromMonth;
-          workExpArrObj.fromYear = experience?.fromYear;
-          workExpArrObj.isContinue = experience?.isContinue;
-          workExpArrObj.toMonth = experience?.toMonth;
-          workExpArrObj.toYear = experience?.toYear;
-
-          temp += html;
-          let achievementTemp = "";
-          setStreamedJDData((prev) => prev + html);
-
-          const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
-            method: "POST",
-            body: JSON.stringify({
-              experience: experience,
-              trainBotData: {
-                userEmail: userData.email,
-                fileAddress: userData.defaultResumeFile,
-              },
-            }),
-          });
-          // const response = await res.json();
-          // console.log("result", result, typeof result);
-          if (res.ok) {
-            const reader = res.body.getReader();
-            while (true) {
-              const { done, value } = await reader.read();
-
-              if (done) {
-                break;
-              }
-
-              const text = new TextDecoder().decode(value);
-              // const text = response.result;
-              setStreamedJDData((prev) => prev + text);
-              temp += text;
-              achievementTemp += text;
-            }
-          }
-
-          setStreamedJDData((prev) => prev + `</div> <br /> `);
-          temp += `</div> <br /> `;
-          const achivementsArray = fetchLIstOfStrings(achievementTemp);
-          workExpArrObj.achievements = achivementsArray;
-          workExpArr.push(workExpArrObj);
-        }
-        dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
-        dispatch(setWorkExperience(temp));
-        dispatch(setState({ name: "resumeLoading", value: false }));
+        setStreamedJDData((prev) => prev + `</div> <br /> `);
+        temp += `</div> <br /> `;
+        const achivementsArray = fetchLIstOfStrings(achievementTemp);
+        workExpArrObj.achievements = achivementsArray;
+        workExpArr.push(workExpArrObj);
       }
-    });
+      dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
+      dispatch(setWorkExperience(temp));
+      dispatch(setState({ name: "resumeLoading", value: false }));
+    }
+    // });
   };
 
   const fetchLIstOfStrings = (text: string) => {
@@ -339,161 +339,161 @@ const ResumeBuilder = () => {
   // };
 
   const getPrimarySkills = async () => {
-    return makeAPICallWithRetry(async () => {
-      // dispatch(setLoadingState("primarySkills"));
-      await getUserDataIfNotExists();
-      return fetch("/api/resumeBots/getBasicInfo", {
-        method: "POST",
-        body: JSON.stringify({
-          type: "primarySkills",
-          userData: aiInputUserData,
-          jobPosition: resumeData.state.jobPosition,
-          trainBotData: {
-            userEmail: userData.email,
-            fileAddress: userData.defaultResumeFile,
-          },
-        }),
-      }).then(async (resp: any) => {
-        const res = await resp.json();
-        if (res.success) {
-          if (res?.result) {
-            let myJSON;
-            if (typeof res.result === "object") {
-              myJSON = res.result;
-            } else {
-              myJSON = await JSON.parse(res.result);
-            }
-            dispatch(setPrimarySkills(myJSON));
+    // return makeAPICallWithRetry(async () => {
+    // dispatch(setLoadingState("primarySkills"));
+    await getUserDataIfNotExists();
+    return fetch("/api/resumeBots/getBasicInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        type: "primarySkills",
+        userData: aiInputUserData,
+        jobPosition: resumeData.state.jobPosition,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
+      }),
+    }).then(async (resp: any) => {
+      const res = await resp.json();
+      if (res.success) {
+        if (res?.result) {
+          let myJSON;
+          if (typeof res.result === "object") {
+            myJSON = res.result;
+          } else {
+            myJSON = await JSON.parse(res.result);
           }
+          dispatch(setPrimarySkills(myJSON));
         }
-      });
+      }
     });
+    // });
   };
 
   const getProfessionalSkills = async () => {
-    return makeAPICallWithRetry(async () => {
-      // dispatch(setLoadingState("professionalSkills"));
-      return fetch("/api/resumeBots/getBasicInfo", {
-        method: "POST",
-        body: JSON.stringify({
-          type: "professionalSkills",
-          email: session?.user?.email,
-          userData: aiInputUserData,
-          jobPosition: resumeData.state.jobPosition,
-          trainBotData: {
-            userEmail: userData.email,
-            fileAddress: userData.defaultResumeFile,
-          },
-        }),
-      }).then(async (resp: any) => {
-        const res = await resp.json();
-        if (res.success) {
-          if (res?.result) {
-            let myJSON;
-            if (typeof res.result === "object") {
-              myJSON = res.result;
-            } else {
-              myJSON = await JSON.parse(res.result);
-            }
-
-            dispatch(setProfessionalSkills(myJSON));
+    // return makeAPICallWithRetry(async () => {
+    // dispatch(setLoadingState("professionalSkills"));
+    return fetch("/api/resumeBots/getBasicInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        type: "professionalSkills",
+        email: session?.user?.email,
+        userData: aiInputUserData,
+        jobPosition: resumeData.state.jobPosition,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
+      }),
+    }).then(async (resp: any) => {
+      const res = await resp.json();
+      if (res.success) {
+        if (res?.result) {
+          let myJSON;
+          if (typeof res.result === "object") {
+            myJSON = res.result;
+          } else {
+            myJSON = await JSON.parse(res.result);
           }
+
+          dispatch(setProfessionalSkills(myJSON));
         }
-      });
+      }
     });
+    // });
   };
 
   const getSecondarySkills = async () => {
-    return makeAPICallWithRetry(async () => {
-      // dispatch(setLoadingState("secondarySkills"));
-      return fetch("/api/resumeBots/getBasicInfo", {
-        method: "POST",
-        body: JSON.stringify({
-          type: "secondarySkills",
-          email: session?.user?.email,
-          userData: aiInputUserData,
-          jobPosition: resumeData.state.jobPosition,
-          trainBotData: {
-            userEmail: userData.email,
-            fileAddress: userData.defaultResumeFile,
-          },
-        }),
-      }).then(async (resp: any) => {
-        const res = await resp.json();
-        if (res.success) {
-          if (res?.result) {
-            let myJSON;
-            if (typeof res.result === "object") {
-              myJSON = res.result;
-            } else {
-              myJSON = await JSON.parse(res.result);
-            }
-            dispatch(setSecondarySkills(myJSON));
+    // return makeAPICallWithRetry(async () => {
+    // dispatch(setLoadingState("secondarySkills"));
+    return fetch("/api/resumeBots/getBasicInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        type: "secondarySkills",
+        email: session?.user?.email,
+        userData: aiInputUserData,
+        jobPosition: resumeData.state.jobPosition,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
+      }),
+    }).then(async (resp: any) => {
+      const res = await resp.json();
+      if (res.success) {
+        if (res?.result) {
+          let myJSON;
+          if (typeof res.result === "object") {
+            myJSON = res.result;
+          } else {
+            myJSON = await JSON.parse(res.result);
           }
+          dispatch(setSecondarySkills(myJSON));
         }
-      });
+      }
     });
+    // });
   };
 
   const getUserDataIfNotExists = async () => {
-    return makeAPICallWithRetry(async () => {
-      if (!userData.isLoading && !userData.isFetched) {
-        dispatch(setIsLoading(true));
-        // Fetch userdata if not exists in Redux
+    // return makeAPICallWithRetry(async () => {
+    if (!userData.isLoading && !userData.isFetched) {
+      dispatch(setIsLoading(true));
+      // Fetch userdata if not exists in Redux
+      const res = await fetch(
+        `/api/users/getOneByEmail?email=${session?.user?.email}`
+      );
+
+      const response = await res.json();
+
+      dispatch(setUserData(response.result));
+      dispatch(setIsLoading(false));
+      dispatch(setField({ name: "isFetched", value: true }));
+    }
+    // });
+  };
+
+  const saveResumeToDB = async (data: any = "") => {
+    // return makeAPICallWithRetry(async () => {
+    const source = data === "" ? resumeData : data;
+    let obj = source;
+    if (!source.id || source.id === "") {
+      obj = { ...source, id: makeid(), dateTime: new Date() };
+    }
+
+    axios
+      .post("/api/resumeBots/saveResumeToDB", {
+        email: session?.user?.email,
+        resumeData: obj,
+      })
+      .then(async (resp) => {
+        dispatch(setId(obj.id));
+        // update user in redux
         const res = await fetch(
           `/api/users/getOneByEmail?email=${session?.user?.email}`
         );
 
         const response = await res.json();
+        const user = response.result;
+        dispatch(setUserData(user));
+        // get user package details
+        const res2 = await fetch(
+          `/api/users/getUserPackageDetails?id=${user?.userPackage}`
+        );
+        const data = await res2.json();
+        if (data.success) {
+          const userPackage = data.result;
+          // set user package details to redux
+          dispatch(setField({ name: "userPackageData", value: userPackage }));
+        }
 
-        dispatch(setUserData(response.result));
-        dispatch(setIsLoading(false));
-        dispatch(setField({ name: "isFetched", value: true }));
-      }
-    });
-  };
-
-  const saveResumeToDB = async (data: any = "") => {
-    return makeAPICallWithRetry(async () => {
-      const source = data === "" ? resumeData : data;
-      let obj = source;
-      if (!source.id || source.id === "") {
-        obj = { ...source, id: makeid(), dateTime: new Date() };
-      }
-
-      axios
-        .post("/api/resumeBots/saveResumeToDB", {
-          email: session?.user?.email,
-          resumeData: obj,
-        })
-        .then(async (resp) => {
-          dispatch(setId(obj.id));
-          // update user in redux
-          const res = await fetch(
-            `/api/users/getOneByEmail?email=${session?.user?.email}`
-          );
-
-          const response = await res.json();
-          const user = response.result;
-          dispatch(setUserData(user));
-          // get user package details
-          const res2 = await fetch(
-            `/api/users/getUserPackageDetails?id=${user?.userPackage}`
-          );
-          const data = await res2.json();
-          if (data.success) {
-            const userPackage = data.result;
-            // set user package details to redux
-            dispatch(setField({ name: "userPackageData", value: userPackage }));
-          }
-
-          // show alert for 2 seconds using setTimeout
-          setShowAlert(true);
-          setTimeout(() => {
-            setShowAlert(false);
-          }, 1000);
-        });
-    });
+        // show alert for 2 seconds using setTimeout
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+        }, 1000);
+      });
+    // });
   };
 
   useEffect(() => {
