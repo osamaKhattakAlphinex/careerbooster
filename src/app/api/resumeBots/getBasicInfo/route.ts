@@ -96,6 +96,13 @@ export async function POST(req: any) {
       //   format_instructions: formatInstructions,
       //   prompt: "Answer should be a valid JSON",
       // });
+      return NextResponse.json(
+        {
+          result: "everything ok",
+          success: true,
+        },
+        { status: 200 }
+      );
       const response: any = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         // stream: true,
@@ -197,7 +204,13 @@ export async function POST(req: any) {
       //   prompt: chatPrompt,
       //   llm: model1,
       // });
-
+      return NextResponse.json(
+        {
+          result: "everything ok",
+          success: true,
+        },
+        { status: 200 }
+      );
       const response: any = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         stream: true,
@@ -293,6 +306,13 @@ export async function POST(req: any) {
       //   format_instructions: formatInstructions,
       //   prompt: "Answer should be a valid JSON",
       // });
+      return NextResponse.json(
+        {
+          result: "everything ok",
+          success: true,
+        },
+        { status: 200 }
+      );
       const response: any = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         stream: true,
@@ -346,6 +366,13 @@ export async function POST(req: any) {
       //   modelName: "gpt-3.5-turbo",
       //   temperature: 0.5,
       // });
+      return NextResponse.json(
+        {
+          result: "everything ok",
+          success: true,
+        },
+        { status: 200 }
+      );
       const response: any = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         // stream: true,
@@ -459,6 +486,13 @@ export async function POST(req: any) {
       //   prompt: chatPrompt,
       //   llm: model,
       // });
+      return NextResponse.json(
+        {
+          result: "everything ok",
+          success: true,
+        },
+        { status: 200 }
+      );
       const response: any = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         // stream: true,
@@ -562,6 +596,13 @@ export async function POST(req: any) {
       //   format_instructions: formatInstructions,
       //   prompt: "Answer should be a valid JSON",
       // });
+      return NextResponse.json(
+        {
+          result: "everything ok",
+          success: true,
+        },
+        { status: 200 }
+      );
       const response: any = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         // stream: true,
