@@ -13,9 +13,20 @@ import { ChatOpenAI } from "langchain/chat_models/openai";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import path from "path";
 import TrainBot from "@/db/schemas/TrainBot";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/route";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 export async function POST(req: any) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
+
   if (req) {
     const reqBody = await req.json();
     // const email = reqBody.email;

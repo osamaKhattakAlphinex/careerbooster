@@ -8,6 +8,14 @@ export const maxDuration = 300; // This function can run for a maximum of 5 seco
 export const dynamic = "force-dynamic";
 
 export async function POST(req: any) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
   try {
     const session = await getServerSession(authOptions);
     const _body = await req.json();

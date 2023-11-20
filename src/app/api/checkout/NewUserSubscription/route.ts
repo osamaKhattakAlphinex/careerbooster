@@ -1,11 +1,21 @@
 import startDB from "@/lib/db";
 import UserSubscription from "@/db/schemas/UserSubscription";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/route";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
 export async function POST(req: any) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
   try {
     const body = await req.json();
     if (req.method === "POST") {

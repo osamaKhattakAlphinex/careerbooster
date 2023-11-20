@@ -15,11 +15,21 @@ import { MemoryVectorStore } from "langchain/vectorstores/memory";
 
 import { RetrievalQAChain } from "langchain/chains";
 import { NextResponse } from "next/server";
+import { authOptions } from "../../auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
 export async function POST(req: any) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
   try {
     const reqBody = await req.json();
     const type = reqBody.type;

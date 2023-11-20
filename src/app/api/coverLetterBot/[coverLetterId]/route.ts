@@ -8,39 +8,43 @@ export async function PUT(
   req: any,
   { params }: { params: { coverLetterId: string } }
 ) {
-  const requestBody = await req.json(); // To read request data
-  // const url = new URL(req.url);
-  // const coverLetterId = url.searchParams.get("coverLetterId");
+  let email: any = "";
+  const session = await getServerSession(authOptions);
+
+  email = session?.user?.email;
+
+  const requestBody = await req.json();
   const coverLetterId = params.coverLetterId;
-  console.log(coverLetterId);
-  try {
-    let email: any = "";
 
-    const session = await getServerSession(authOptions);
+  if (session) {
+    try {
+      await startDB();
 
-    email = session?.user?.email;
-
-    await startDB();
-
-    const updatedUser = await User.findOneAndUpdate(
-      { email: email, "coverLetters.id": coverLetterId },
-      {
-        $set: {
-          "coverLetters.$.coverLetterText": requestBody.coverLetterText,
+      const updatedUser = await User.findOneAndUpdate(
+        { email: email, "coverLetters.id": coverLetterId },
+        {
+          $set: {
+            "coverLetters.$.coverLetterText": requestBody.coverLetterText,
+          },
         },
-      },
-      { new: true }
-    );
+        { new: true }
+      );
 
+      return NextResponse.json(
+        { success: true, results: updatedUser.coverLetters },
+        { status: 200 }
+      );
+    } catch (error) {
+      console.error("Error:", error);
+      return NextResponse.json(
+        { result: "Internal Server Error", success: false },
+        { status: 500 }
+      );
+    }
+  } else {
     return NextResponse.json(
-      { success: true, results: updatedUser.coverLetters },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("Error:", error);
-    return NextResponse.json(
-      { result: "Internal Server Error", success: false },
-      { status: 500 }
+      { result: "Not Authorised", success: false },
+      { status: 401 }
     );
   }
 }
@@ -49,31 +53,38 @@ export async function DELETE(
   req: any,
   { params }: { params: { coverLetterId: string } }
 ) {
-  try {
-    let email: any = "";
-    const coverLetterId = params.coverLetterId;
+  const session = await getServerSession(authOptions);
+  let email: any = "";
 
-    const session = await getServerSession(authOptions);
+  if (session) {
+    try {
+      const coverLetterId = params.coverLetterId;
 
-    email = session?.user?.email;
+      email = session?.user?.email;
 
-    await startDB();
+      await startDB();
 
-    const updatedUser = await User.findOneAndUpdate(
-      { email: email },
-      { $pull: { coverLetters: { id: coverLetterId } } },
-      { new: true }
-    );
+      const updatedUser = await User.findOneAndUpdate(
+        { email: email },
+        { $pull: { coverLetters: { id: coverLetterId } } },
+        { new: true }
+      );
 
+      return NextResponse.json(
+        { success: true, coverLetters: updatedUser.coverLetters },
+        { status: 200 }
+      );
+    } catch (error) {
+      console.error("Error:", error);
+      return NextResponse.json(
+        { result: "Internal Server Error", success: false },
+        { status: 500 }
+      );
+    }
+  } else {
     return NextResponse.json(
-      { success: true, coverLetters: updatedUser.coverLetters },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("Error:", error);
-    return NextResponse.json(
-      { result: "Internal Server Error", success: false },
-      { status: 500 }
+      { result: "Not Authorised", success: false },
+      { status: 401 }
     );
   }
 }
