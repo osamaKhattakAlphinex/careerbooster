@@ -69,6 +69,13 @@ export async function POST(req: any) {
         })
       );
       const formatInstructions = parser.getFormatInstructions();
+      return NextResponse.json(
+        {
+          result: "everything ok",
+          success: true,
+        },
+        { status: 200 }
+      );
       const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
         Following are the content of the resume (in JSON format): 
         JSON user/resume data: ${JSON.stringify(content)}
@@ -96,13 +103,7 @@ export async function POST(req: any) {
       //   format_instructions: formatInstructions,
       //   prompt: "Answer should be a valid JSON",
       // });
-      return NextResponse.json(
-        {
-          result: "everything ok",
-          success: true,
-        },
-        { status: 200 }
-      );
+
       const response: any = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         // stream: true,
@@ -193,7 +194,13 @@ export async function POST(req: any) {
       //   HumanMessagePromptTemplate.fromTemplate("{prompt}"),
       // ]);
       const promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
-
+      return NextResponse.json(
+        {
+          result: "everything ok",
+          success: true,
+        },
+        { status: 200 }
+      );
       const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps Writing Professional Summary for a user Resume/CV.
             Following are the content of the resume (in JSON format): 
             JSON user/resume data: ${JSON.stringify(content)}
@@ -204,13 +211,7 @@ export async function POST(req: any) {
       //   prompt: chatPrompt,
       //   llm: model1,
       // });
-      return NextResponse.json(
-        {
-          result: "everything ok",
-          success: true,
-        },
-        { status: 200 }
-      );
+
       const response: any = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         stream: true,
@@ -294,7 +295,13 @@ export async function POST(req: any) {
       );
 
       const formatInstructions = parser.getFormatInstructions();
-
+      return NextResponse.json(
+        {
+          result: "everything ok",
+          success: true,
+        },
+        { status: 200 }
+      );
       // try {
       const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
         Following are the content of the resume (in JSON format): 
@@ -306,13 +313,7 @@ export async function POST(req: any) {
       //   format_instructions: formatInstructions,
       //   prompt: "Answer should be a valid JSON",
       // });
-      return NextResponse.json(
-        {
-          result: "everything ok",
-          success: true,
-        },
-        { status: 200 }
-      );
+
       const response: any = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         stream: true,
@@ -354,7 +355,13 @@ export async function POST(req: any) {
       );
 
       const formatInstructions = parser.getFormatInstructions();
-
+      return NextResponse.json(
+        {
+          result: "everything ok",
+          success: true,
+        },
+        { status: 200 }
+      );
       const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
            Following are the content of the resume (in JSON format): 
            JSON user/resume data: ${JSON.stringify(content)}
@@ -366,13 +373,7 @@ export async function POST(req: any) {
       //   modelName: "gpt-3.5-turbo",
       //   temperature: 0.5,
       // });
-      return NextResponse.json(
-        {
-          result: "everything ok",
-          success: true,
-        },
-        { status: 200 }
-      );
+
       const response: any = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         // stream: true,
@@ -457,7 +458,13 @@ export async function POST(req: any) {
       );
 
       const formatInstructions = parser.getFormatInstructions();
-
+      return NextResponse.json(
+        {
+          result: "everything ok",
+          success: true,
+        },
+        { status: 200 }
+      );
       const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
            Following are the content of the resume (in JSON format): 
            JSON user/resume data: ${JSON.stringify(content)}
@@ -486,13 +493,7 @@ export async function POST(req: any) {
       //   prompt: chatPrompt,
       //   llm: model,
       // });
-      return NextResponse.json(
-        {
-          result: "everything ok",
-          success: true,
-        },
-        { status: 200 }
-      );
+
       const response: any = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         // stream: true,
