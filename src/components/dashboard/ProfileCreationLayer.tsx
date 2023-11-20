@@ -521,10 +521,9 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
 
           if (res.success && res?.result) {
             try {
-              const data = await res.result;
               dispatch(setScrapped({ skills: true }));
               dispatch(setScrapping({ skills: false }));
-              dispatch(setStepSix({ list: data }));
+              dispatch(setStepSix({ list: res.result }));
             } catch (error) {
               dispatch(setScrapped({ skills: true }));
               dispatch(setScrapping({ skills: false }));
@@ -541,9 +540,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     }
   };
 
-  // laksjdflasjdfl
   const updateUser = async () => {
-    // make an object
+    // Make an object
     const obj = {
       firstName: register.stepOne.firstName,
       lastName: register.stepOne.lastName,
