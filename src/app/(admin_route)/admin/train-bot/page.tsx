@@ -95,11 +95,10 @@ const TrainRegistrationBotAdminPage = () => {
     const c = confirm("Are you sure you want to delete this Record?");
     if (c) {
       try {
-        let result = await fetch("http://localhost:3001/api/trainBot/" + id, {
+        let result = await fetch("/api/trainBot/" + id, {
           method: "DELETE",
         });
         const res = await result.json();
-        console.log(result);
         if (res.success) {
           return fetchRecords();
         } else {

@@ -20,7 +20,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   const [fileError, setFileError] = useState<string>("");
   const [successMsg, setSuccessMsg] = useState<string>("");
   const [loadingFiles, setLoadingFiles] = useState<boolean>(false);
-
+  const [newFileText, setNewFileText] = useState<string>("");
   const [fileList, setFileList] = useState([]);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [percentageCalculated, setPercentageCalculated] =
@@ -166,6 +166,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
       setFileError("");
       // upload it to server
       updateLimits();
+      console.log(newFileText);
       // uploadFileToServer();
     } else if (file) {
       // if file exists but not PDf

@@ -80,20 +80,11 @@ export async function POST(req: any) {
       ${prompt}
       `;
     const response: any = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg",
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-    const responseForTraining = await openai.chat.completions.create({
-      model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
-      messages: [
-        {
-          role: "user",
-          content: inputPrompt,
-        },
-      ],
-      temperature: 1,
-    });
+
     // const output = await chainB.call({
     //   jobTitle: experience.jobTitle,
     //   company: experience.company,
@@ -113,7 +104,7 @@ export async function POST(req: any) {
         const obj = {
           type: "resume.writeJDSingle",
           input: prompt,
-          output: responseForTraining?.choices[0]?.message?.content?.replace(
+          output: response?.choices[0]?.message?.content?.replace(
             /(\r\n|\n|\r)/gm,
             ""
           ),

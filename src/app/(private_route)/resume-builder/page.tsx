@@ -130,9 +130,8 @@ const ResumeBuilder = () => {
         },
       }),
     }).then(async (resp: any) => {
-      console.log("response", resp);
       const res = await resp.json();
-      console.log("res", res);
+
       if (res.success && res?.result) {
         let myJSON;
         if (typeof res.result === "object") {
@@ -214,7 +213,6 @@ const ResumeBuilder = () => {
       let temp = "";
       const workExpArr: any = [];
       for (const [index, experience] of experiences.entries()) {
-        console.log("experience", index, experience);
         let workExpArrObj: any = {};
         let html = "";
         html += `<h2 style="font-size: 1.3rem; font-weight: bold; line-height: 2rem; ">${experience?.jobTitle}</h2>`;

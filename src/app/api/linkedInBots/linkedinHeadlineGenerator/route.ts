@@ -51,23 +51,23 @@ export async function POST(req: any) {
           ],
         });
 
-        const responseForTraining = await openai.chat.completions.create({
-          model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
-          messages: [
-            {
-              role: "user",
-              content: input,
-            },
-          ],
-          temperature: 1,
-        });
+        // const responseForTraining = await openai.chat.completions.create({
+        //   model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
+        //   messages: [
+        //     {
+        //       role: "user",
+        //       content: input,
+        //     },
+        //   ],
+        //   temperature: 1,
+        // });
         try {
           if (trainBotData) {
             // make a trainBot entry
             const obj = {
               type: "linkedinAiTool.headline",
               input: input,
-              output: responseForTraining.choices[0].message.content,
+              output: response.choices[0].message.content,
               idealOutput: "",
               status: "pending",
               //  userEmail: trainBotData.userEmail,
