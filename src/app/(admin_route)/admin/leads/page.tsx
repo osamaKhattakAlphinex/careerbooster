@@ -31,7 +31,8 @@ const LeadsAdminPage = () => {
             endIndex: endIndex,
           },
         })
-        .then((res: any) => {
+        .then(async (res: any) => {
+          console.log(res);
           if (res.data.success) {
             const result = res.data;
             setNumberOfRecords(result.totalRecords);
@@ -50,20 +51,26 @@ const LeadsAdminPage = () => {
   useEffect(() => {
     const existingNumberOfRecords = searchParams?.get("r");
     const existingPage = searchParams?.get("p");
+    console.log(
+      "existingNumberOfRecords: " + existingNumberOfRecords,
+      existingPage
+    );
     if (existingNumberOfRecords) {
-      setLimitOfRecords(parseInt(existingNumberOfRecords, 10));
+      setLimitOfRecords(parseInt(existingNumberOfRecords));
     }
     if (existingPage) {
-      setCurrentPage(parseInt(existingPage, 10));
+      setCurrentPage(parseInt(existingPage));
     }
   }, [searchParams?.get("r"), searchParams?.get("p")]);
 
   useEffect(() => {
     setRecords([]);
+
     const startIndex = (currentPage - 1) * limitOfRecords;
     const endIndex = startIndex + limitOfRecords;
     setPageStart(startIndex);
     fetchRecords(startIndex, endIndex);
+
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
   }, [currentPage, limitOfRecords]);
 
@@ -93,7 +100,7 @@ const LeadsAdminPage = () => {
                 id="status"
                 className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
                 onChange={(e) => {
-                  setLimitOfRecords(parseInt(e.target.value, 10));
+                  setLimitOfRecords(parseInt(e.target.value));
                   setCurrentPage(1);
                 }}
                 value={limitOfRecords}
@@ -225,7 +232,7 @@ const LeadsAdminPage = () => {
                       className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                       onClick={(e) => {
                         e.preventDefault();
-                        if (currentPage > 1) {
+                        if (currentPage && currentPage > 1) {
                           setCurrentPage(currentPage - 1);
                         }
                       }}
@@ -235,30 +242,33 @@ const LeadsAdminPage = () => {
                   </li>
                   {/* {!isLastResult &&} */}
                   {Array.from({ length: 3 }).map((_, index) => {
-                    const pageNumber = currentPage - 1 + index;
-                    if (
-                      pageNumber >= 1 &&
-                      pageNumber <= Math.ceil(numberOfRecords / limitOfRecords)
-                    ) {
-                      return (
-                        <li key={pageNumber}>
-                          <button
-                            className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
-                              currentPage === pageNumber
-                                ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
-                                : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
-                            }`}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setCurrentPage(pageNumber);
-                            }}
-                          >
-                            {pageNumber}
-                          </button>
-                        </li>
-                      );
-                    } else {
-                      return null;
+                    if (currentPage && limitOfRecords) {
+                      const pageNumber = currentPage - 1 + index;
+                      if (
+                        pageNumber >= 1 &&
+                        pageNumber <=
+                          Math.ceil(numberOfRecords / limitOfRecords)
+                      ) {
+                        return (
+                          <li key={pageNumber}>
+                            <button
+                              className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+                                currentPage === pageNumber
+                                  ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
+                                  : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+                              }`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setCurrentPage(pageNumber);
+                              }}
+                            >
+                              {pageNumber}
+                            </button>
+                          </li>
+                        );
+                      } else {
+                        return null;
+                      }
                     }
                   })}
 
@@ -266,8 +276,10 @@ const LeadsAdminPage = () => {
                     <button
                       className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                       onClick={(e) => {
-                        e.preventDefault();
-                        setCurrentPage(currentPage + 1);
+                        if (currentPage) {
+                          e.preventDefault();
+                          setCurrentPage(currentPage + 1);
+                        }
                       }}
                     >
                       Next

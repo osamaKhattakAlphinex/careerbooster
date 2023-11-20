@@ -83,26 +83,62 @@ export async function POST(req: any) {
               Instructions: `Get basic information for the resume`,
             };
 
-            await TrainBot.create({ ...obj });
-          }
-        } catch (error) {}
-
-        return NextResponse.json(
-          {
-            result: response?.choices[0]?.message?.content?.replace(
+      const response: any = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        // stream: true,
+        messages: [{ role: "user", content: inputPrompt }],
+      });
+      // const jsonResponse = extractJSONFromString(
+      //   response?.choices[0]?.message?.content
+      // );
+      // console.log(jsonResponse);
+      // make a trainBot entry
+      try {
+        if (trainBotData) {
+          // const responseForTraining = await openai.chat.completions.create({
+          //   model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
+          //   messages: [
+          //     {
+          //       role: "user",
+          //       content: inputPrompt,
+          //     },
+          //   ],
+          //   temperature: 1,
+          // });
+          const obj = {
+            type: "resume.getBasicInfo",
+            input: formatInstructions,
+            output: response?.choices[0]?.message?.content?.replace(
               /(\r\n|\n|\r)/gm,
               ""
             ),
-            success: true,
-          },
-          { status: 200 }
-        );
-      } catch (error) {
-        return NextResponse.json(
-          { result: error, success: false },
-          { status: 404 }
-        );
-      }
+            idealOutput: "",
+            status: "pending",
+            userEmail: trainBotData.userEmail,
+            fileAddress: trainBotData.fileAddress,
+            Instructions: `Get basic information for the resume`,
+          };
+
+          await TrainBot.create({ ...obj });
+        }
+      } catch (error) {}
+
+      return NextResponse.json(
+        {
+          result: response?.choices[0]?.message?.content?.replace(
+            /(\r\n|\n|\r)/gm,
+            ""
+          ),
+          success: true,
+        },
+        { status: 200 }
+      );
+      // } catch (error) {
+      //   return NextResponse.json(
+      //     { result: error, success: false },
+      //     { status: 404 }
+      //   );
+      // }
     }
 
     if (type === "summary") {
@@ -123,47 +159,47 @@ export async function POST(req: any) {
         From the above resume data please:
                 ${promptSummary}`;
 
-        const response: any = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo",
-          stream: true,
-          messages: [{ role: "user", content: inputPrompt }],
-        });
+      const response: any = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        stream: true,
+        messages: [{ role: "user", content: inputPrompt }],
+      });
 
-        // make a trainBot entry
+      // make a trainBot entry
 
-        try {
-          if (trainBotData) {
-            const obj = {
-              type: "resume.writeSummary",
-              input: promptSummary,
-              output: response?.choices[0]?.message?.content?.replace(
-                /(\r\n|\n|\r)/gm,
-                ""
-              ),
-              idealOutput: "",
-              status: "pending",
-              userEmail: trainBotData.userEmail,
-              fileAddress: trainBotData.fileAddress,
-              Instructions: `Write Summary for the resume`,
-            };
+      try {
+        if (trainBotData) {
+          const obj = {
+            type: "resume.writeSummary",
+            input: promptSummary,
+            output: response?.choices[0]?.message?.content?.replace(
+              /(\r\n|\n|\r)/gm,
+              ""
+            ),
+            idealOutput: "",
+            status: "pending",
+            userEmail: trainBotData.userEmail,
+            fileAddress: trainBotData.fileAddress,
+            Instructions: `Write Summary for the resume`,
+          };
 
-            await TrainBot.create({ ...obj });
-          }
-        } catch (error) {}
-        const stream = OpenAIStream(response);
-        // Respond with the stream
-        return new StreamingTextResponse(stream);
-        // return NextResponse.json(
-        //   { result: output, success: true },
-        //   { status: 200 }
-        // );
-        // res.end();
-      } catch (error) {
-        return NextResponse.json(
-          { result: error, success: false },
-          { status: 404 }
-        );
-      }
+          await TrainBot.create({ ...obj });
+        }
+      } catch (error) {}
+      const stream = OpenAIStream(response);
+      // Respond with the stream
+      return new StreamingTextResponse(stream);
+      // return NextResponse.json(
+      //   { result: output, success: true },
+      //   { status: 200 }
+      // );
+      // res.end();
+      // } catch (error) {
+      //   return NextResponse.json(
+      //     { result: error, success: false },
+      //     { status: 404 }
+      //   );
+      // }
     }
 
     if (type === "workExperience") {
@@ -206,51 +242,58 @@ export async function POST(req: any) {
       );
 
       const formatInstructions = parser.getFormatInstructions();
-
-      try {
-        const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
+      return NextResponse.json(
+        {
+          result: "everything ok",
+          success: true,
+        },
+        { status: 200 }
+      );
+      // try {
+      const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
         Following are the content of the resume (in JSON format): 
         JSON user/resume data: ${JSON.stringify(content)}
 
         ${formatInstructions}`;
-        // const resp = await chainB.call({
-        //   userData: JSON.stringify(content),
-        //   format_instructions: formatInstructions,
-        //   prompt: "Answer should be a valid JSON",
-        // });
-        const response: any = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo",
-          stream: true,
-          messages: [{ role: "user", content: inputPrompt }],
-        });
-        const stream = OpenAIStream(response);
-        // Respond with the stream
-        return new StreamingTextResponse(stream);
-        // return NextResponse.json(
-        //   { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
-        //   { status: 200 }
-        // );
-      } catch (error) {
-        return NextResponse.json(
-          { result: error, success: false },
-          { status: 400 }
-        );
-      }
+      // const resp = await chainB.call({
+      //   userData: JSON.stringify(content),
+      //   format_instructions: formatInstructions,
+      //   prompt: "Answer should be a valid JSON",
+      // });
+
+      const response: any = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        stream: true,
+        messages: [{ role: "user", content: inputPrompt }],
+      });
+      const stream = OpenAIStream(response);
+      // Respond with the stream
+      return new StreamingTextResponse(stream);
+      // return NextResponse.json(
+      //   { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+      //   { status: 200 }
+      // );
+      // } catch (error) {
+      //   return NextResponse.json(
+      //     { result: error, success: false },
+      //     { status: 400 }
+      //   );
+      // }
     }
 
     if (type === "primarySkills") {
-      try {
-        const promptRec = await Prompt.findOne({
-          type: "resume",
-          name: "primarySkills",
-          active: true,
-        });
-        const promptDB = promptRec.value;
+      // try {
+      const promptRec = await Prompt.findOne({
+        type: "resume",
+        name: "primarySkills",
+        active: true,
+      });
+      const promptDB = promptRec.value;
 
-        const promptRefined = await promptDB.replace(
-          "{{jobPosition}}",
-          jobPosition
-        );
+      const promptRefined = await promptDB.replace(
+        "{{jobPosition}}",
+        jobPosition
+      );
 
         const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
           content
@@ -286,36 +329,53 @@ export async function POST(req: any) {
               Instructions: `Write Primary Skills for Resume`,
             };
 
-            await TrainBot.create({ ...obj });
-          }
-        } catch (error) {}
-
-        return NextResponse.json(
-          {
-            result: response?.choices[0]?.message?.content?.replace(
+      // make a trainBot entry
+      try {
+        if (trainBotData) {
+          const obj = {
+            type: "resume.writePrimarySkills",
+            input: formatInstructions,
+            output: response?.choices[0]?.message?.content?.replace(
               /(\r\n|\n|\r)/gm,
               ""
             ),
-            success: true,
-          },
-          { status: 200 }
-        );
-      } catch (error) {
-        return NextResponse.json(
-          { result: error, success: false },
-          { status: 404 }
-        );
-      }
+            idealOutput: "",
+            status: "pending",
+            userEmail: trainBotData.userEmail,
+            fileAddress: trainBotData.fileAddress,
+            Instructions: `Write Primary Skills for Resume`,
+          };
+
+          await TrainBot.create({ ...obj });
+        }
+      } catch (error) {}
+
+      return NextResponse.json(
+        {
+          result: response?.choices[0]?.message?.content?.replace(
+            /(\r\n|\n|\r)/gm,
+            ""
+          ),
+          success: true,
+        },
+        { status: 200 }
+      );
+      // } catch (error) {
+      //   return NextResponse.json(
+      //     { result: error, success: false },
+      //     { status: 404 }
+      //   );
+      // }
     }
 
     if (type === "professionalSkills") {
-      try {
-        const promptRec = await Prompt.findOne({
-          type: "resume",
-          name: "professionalSkills",
-          active: true,
-        });
-        const promptDB = promptRec.value;
+      // try {
+      const promptRec = await Prompt.findOne({
+        type: "resume",
+        name: "professionalSkills",
+        active: true,
+      });
+      const promptDB = promptRec.value;
 
         const promptRefined = await promptDB.replace(
           "{{jobPosition}}",
@@ -355,36 +415,53 @@ export async function POST(req: any) {
               Instructions: `Write Professional Skills for Resume`,
             };
 
-            await TrainBot.create({ ...obj });
-          }
-        } catch (error) {}
-
-        return NextResponse.json(
-          {
-            result: response?.choices[0]?.message?.content?.replace(
+      // make a trainBot entry
+      try {
+        if (trainBotData) {
+          const obj = {
+            type: "resume.writeProfessionalSkills",
+            input: formatInstructions,
+            output: response?.choices[0]?.message?.content?.replace(
               /(\r\n|\n|\r)/gm,
               ""
             ),
-            success: true,
-          },
-          { status: 200 }
-        );
-      } catch (error) {
-        return NextResponse.json(
-          { result: error, success: false },
-          { status: 404 }
-        );
-      }
+            idealOutput: "",
+            status: "pending",
+            userEmail: trainBotData.userEmail,
+            fileAddress: trainBotData.fileAddress,
+            Instructions: `Write Professional Skills for Resume`,
+          };
+
+          await TrainBot.create({ ...obj });
+        }
+      } catch (error) {}
+
+      return NextResponse.json(
+        {
+          result: response?.choices[0]?.message?.content?.replace(
+            /(\r\n|\n|\r)/gm,
+            ""
+          ),
+          success: true,
+        },
+        { status: 200 }
+      );
+      // } catch (error) {
+      //   return NextResponse.json(
+      //     { result: error, success: false },
+      //     { status: 404 }
+      //   );
+      // }
     }
 
     if (type === "secondarySkills") {
-      try {
-        const promptRec = await Prompt.findOne({
-          type: "resume",
-          name: "secondarySkills",
-          active: true,
-        });
-        const promptDB = promptRec.value;
+      // try {
+      const promptRec = await Prompt.findOne({
+        type: "resume",
+        name: "secondarySkills",
+        active: true,
+      });
+      const promptDB = promptRec.value;
 
         const promptRefined = await promptDB.replace(
           "{{jobPosition}}",
@@ -432,16 +509,33 @@ export async function POST(req: any) {
               /(\r\n|\n|\r)/gm,
               ""
             ),
-            success: true,
-          },
-          { status: 200 }
-        );
-      } catch (error) {
-        return NextResponse.json(
-          { result: error, success: false },
-          { status: 404 }
-        );
-      }
+            idealOutput: "",
+            status: "pending",
+            userEmail: trainBotData.userEmail,
+            fileAddress: trainBotData.fileAddress,
+            Instructions: `Write Secondary Skills for Resume`,
+          };
+
+          await TrainBot.create({ ...obj });
+        }
+      } catch (error) {}
+
+      return NextResponse.json(
+        {
+          result: response?.choices[0]?.message?.content?.replace(
+            /(\r\n|\n|\r)/gm,
+            ""
+          ),
+          success: true,
+        },
+        { status: 200 }
+      );
+      // } catch (error) {
+      //   return NextResponse.json(
+      //     { result: error, success: false },
+      //     { status: 404 }
+      //   );
+      // }
     }
   }
 }
