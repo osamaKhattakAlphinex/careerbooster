@@ -3,18 +3,14 @@ import { z } from "zod";
 import { StructuredOutputParser } from "langchain/output_parsers";
 import Prompt from "@/db/schemas/Prompt";
 import OpenAI from "openai";
-import {
-  ChatPromptTemplate,
-  HumanMessagePromptTemplate,
-  SystemMessagePromptTemplate,
-} from "langchain/prompts";
-import { LLMChain } from "langchain/chains";
-import { ChatOpenAI } from "langchain/chat_models/openai";
+
 import { OpenAIStream, StreamingTextResponse } from "ai";
 
 import TrainBot from "@/db/schemas/TrainBot";
+
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -31,17 +27,7 @@ export async function POST(req: any) {
     const trainBotData = reqBody?.trainBotData;
 
     let content: any;
-    // if (inputType === "file") {
-    //   // Read content from the user file
-    //   // load file
-    //   const dir = path.join(process.cwd() + "/public", "/files", `/${email}`);
-    //   const loader = new PDFLoader(`${dir}/${aiInputFile}`);
-    //   const docs = await loader.load();
 
-    //   let contentTxt = docs.map((doc: any) => doc.pageContent);
-    //   const FileTxt = contentTxt.join(" ");
-    //   content = { userData: FileTxt };
-    // }
     if (userData || inputType === "userData") {
       // pass user data as it is
       content = userData;
@@ -49,78 +35,43 @@ export async function POST(req: any) {
 
     if (type === "basicDetails") {
       try {
-        // CREATING LLM MODAL
+        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
+          content
+        )}
+        
+        Please find the following details in above provided userdata:
+        shortName, jobTitle, linkedIn
 
-        // const model = new ChatOpenAI({
-        //   modelName: "gpt-3.5-turbo",
-        //   temperature: 0.5,
-        // });
-        const parser = StructuredOutputParser.fromZodSchema(
-          z.object({
-            shortName: z
-              .string()
-              .describe("two letters from Name for short name"),
-            jobTitle: z
-              .string()
-              .describe("Write a one line slogan for this person "),
-            contact: z.object({
-              linkedIn: z.string().describe("LinkedInUrl"),
-            }),
-          })
-        );
-        const formatInstructions = parser.getFormatInstructions();
-        const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
-        Following are the content of the resume (in JSON format): 
-        JSON user/resume data: ${JSON.stringify(content)}
+        the shortName means two letters from Name of the person.
+        the jobTitle means a one line slogan for this person.
+        the linkedIn means the LinkedInUrl of the person.
 
-        Thse are the instructions:
-        ${formatInstructions}`;
-        // const chatPrompt = ChatPromptTemplate.fromPromptMessages([
-        //   SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
-        // Following are the content of the resume (in JSON format):
-        // JSON user/resume data: {userData}
+        The output must be in this format. (following is an example)
+        {
+          "shortName": "AB",
+          "jobTitle": "Software Engineer",
+          "contact": {
+            "linkedIn": "https://www.linkedin.com/in/abc/"
+          }
+        }
 
-        // {format_instructions}
-        // `),
-        //   HumanMessagePromptTemplate.fromTemplate("{prompt}"),
-        // ]);
 
-        // const chainB = new LLMChain({
-        //   prompt: chatPrompt,
-        //   llm: model,
-        // });
-        // Parser Instructions
+        The output must be a valid JSON
+        Donot add anything if there is no value for a field. if there is no value leave that field blank donot add any extra labesls.
 
-        // const resp = await chainB.call({
-        //   userData: JSON.stringify(content),
-        //   format_instructions: formatInstructions,
-        //   prompt: "Answer should be a valid JSON",
-        // });
+        `;
         const response: any = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
           // stream: true,
           messages: [{ role: "user", content: inputPrompt }],
         });
-        // const jsonResponse = extractJSONFromString(
-        //   response?.choices[0]?.message?.content
-        // );
-        // console.log(jsonResponse);
+
         // make a trainBot entry
         try {
           if (trainBotData) {
-            // const responseForTraining = await openai.chat.completions.create({
-            //   model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
-            //   messages: [
-            //     {
-            //       role: "user",
-            //       content: inputPrompt,
-            //     },
-            //   ],
-            //   temperature: 1,
-            // });
             const obj = {
               type: "resume.getBasicInfo",
-              input: formatInstructions,
+              input: inputPrompt,
               output: response?.choices[0]?.message?.content?.replace(
                 /(\r\n|\n|\r)/gm,
                 ""
@@ -156,20 +107,6 @@ export async function POST(req: any) {
 
     if (type === "summary") {
       try {
-        // For summary we need to use another LLM model
-        // const model1 = new ChatOpenAI({
-        //   streaming: true,
-        //   modelName: "gpt-3.5-turbo",
-        //   //   callbacks: [
-        //   //     {
-        //   //       handleLLMNewToken(token) {
-        //   //         res.write(token);
-        //   //       },
-        //   //     },
-        //   //   ],
-        //   temperature: 0.5,
-        // });
-
         const promptRec = await Prompt.findOne({
           type: "resume",
           name: "summary",
@@ -177,26 +114,14 @@ export async function POST(req: any) {
         });
         const prompt = promptRec.value;
 
-        // const chatPrompt = ChatPromptTemplate.fromPromptMessages([
-        //   SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing Professional Summary for a user Resume/CV.
-        //     Following are the content of the resume (in JSON format):
-        //     JSON user/resume data: {userData}
-
-        //     `),
-        //   HumanMessagePromptTemplate.fromTemplate("{prompt}"),
-        // ]);
         const promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
 
-        const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps Writing Professional Summary for a user Resume/CV.
-            Following are the content of the resume (in JSON format): 
-            JSON user/resume data: ${JSON.stringify(content)}
-            
-            This is the prompt:
+        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
+          content
+        )}
+        
+        From the above resume data please:
                 ${promptSummary}`;
-        // const chainC = new LLMChain({
-        //   prompt: chatPrompt,
-        //   llm: model1,
-        // });
 
         const response: any = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
@@ -327,56 +252,29 @@ export async function POST(req: any) {
           jobPosition
         );
 
-        const parser = StructuredOutputParser.fromZodSchema(
-          z.object({
-            primarySkills: z.array(z.string()).describe(promptRefined),
-          })
-        );
+        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
+          content
+        )}
+        
+      
+        This is the prompt:
+        ${promptRefined}
+        
+        the answer must be in a valid JSON array
+        `;
 
-        const formatInstructions = parser.getFormatInstructions();
-
-        const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
-           Following are the content of the resume (in JSON format): 
-           JSON user/resume data: ${JSON.stringify(content)}
-
-           These are the instructions:
-           ${formatInstructions}`;
-
-        // const model = new ChatOpenAI({
-        //   modelName: "gpt-3.5-turbo",
-        //   temperature: 0.5,
-        // });
         const response: any = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
           // stream: true,
           messages: [{ role: "user", content: inputPrompt }],
         });
-        // const chatPrompt = ChatPromptTemplate.fromPromptMessages([
-        //   SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
-        //   Following are the content of the resume (in JSON format):
-        //   JSON user/resume data: {userData}
-
-        //   {format_instructions}
-        //   `),
-        //   HumanMessagePromptTemplate.fromTemplate("{prompt}"),
-        // ]);
-
-        // const chainB = new LLMChain({
-        //   prompt: chatPrompt,
-        //   llm: model,
-        // });
-        // const resp = await chainB.call({
-        //   userData: JSON.stringify(content),
-        //   format_instructions: formatInstructions,
-        //   prompt: "Answer should be a valid JSON",
-        // });
 
         // make a trainBot entry
         try {
           if (trainBotData) {
             const obj = {
               type: "resume.writePrimarySkills",
-              input: formatInstructions,
+              input: inputPrompt,
               output: response?.choices[0]?.message?.content?.replace(
                 /(\r\n|\n|\r)/gm,
                 ""
@@ -423,59 +321,29 @@ export async function POST(req: any) {
           "{{jobPosition}}",
           jobPosition
         );
-        const parser = StructuredOutputParser.fromZodSchema(
-          z.object({
-            professionalSkills: z.array(z.string()).describe(promptRefined),
-          })
-        );
 
-        const formatInstructions = parser.getFormatInstructions();
+        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
+          content
+        )}
+        
+        This is the prompt:
+        ${promptRefined}
 
-        const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
-           Following are the content of the resume (in JSON format): 
-           JSON user/resume data: ${JSON.stringify(content)}
+        the answer must be in a valid JSON array
+        `;
 
-           These are the instructions:
-           ${formatInstructions}`;
-
-        // CREATING LLM MODAL
-
-        // const model = new ChatOpenAI({
-        //   modelName: "gpt-3.5-turbo",
-        //   temperature: 0.5,
-        // });
-
-        // const chatPrompt = ChatPromptTemplate.fromPromptMessages([
-        //   SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
-        //   Following are the content of the resume (in JSON format):
-        //   JSON user/resume data: {userData}
-
-        //   {format_instructions}
-        //   `),
-        //   HumanMessagePromptTemplate.fromTemplate("{prompt}"),
-        // ]);
-
-        // const chainB = new LLMChain({
-        //   prompt: chatPrompt,
-        //   llm: model,
-        // });
         const response: any = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
           // stream: true,
           messages: [{ role: "user", content: inputPrompt }],
         });
-        // const resp = await chainB.call({
-        //   userData: JSON.stringify(content),
-        //   format_instructions: formatInstructions,
-        //   prompt: "Answer should be a valid JSON",
-        // });
 
         // make a trainBot entry
         try {
           if (trainBotData) {
             const obj = {
               type: "resume.writeProfessionalSkills",
-              input: formatInstructions,
+              input: inputPrompt,
               output: response?.choices[0]?.message?.content?.replace(
                 /(\r\n|\n|\r)/gm,
                 ""
@@ -522,46 +390,16 @@ export async function POST(req: any) {
           "{{jobPosition}}",
           jobPosition
         );
-        const parser = StructuredOutputParser.fromZodSchema(
-          z.object({
-            secondarySkills: z.array(z.string()).describe(promptRefined),
-          })
-        );
+        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
+          content
+        )}
+        
+        This is the prompt:
+        ${promptRefined}
 
-        const formatInstructions = parser.getFormatInstructions();
-        const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
-           Following are the content of the resume (in JSON format): 
-           JSON user/resume data: ${JSON.stringify(content)}
+        the answer must be in a valid JSON array
+        `;
 
-           These are the instructions:
-           ${formatInstructions}`;
-        // CREATING LLM MODAL
-
-        // const model = new ChatOpenAI({
-        //   modelName: "gpt-3.5-turbo",
-        //   temperature: 0.5,
-        // });
-
-        // const chatPrompt = ChatPromptTemplate.fromPromptMessages([
-        //   SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
-        //   Following are the content of the resume (in JSON format):
-        //   JSON user/resume data: {userData}
-
-        //   {format_instructions}
-        //   `),
-        //   HumanMessagePromptTemplate.fromTemplate("{prompt}"),
-        // ]);
-
-        // const chainB = new LLMChain({
-        //   prompt: chatPrompt,
-        //   llm: model,
-        // });
-
-        // const resp = await chainB.call({
-        //   userData: JSON.stringify(content),
-        //   format_instructions: formatInstructions,
-        //   prompt: "Answer should be a valid JSON",
-        // });
         const response: any = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
           // stream: true,
@@ -572,7 +410,7 @@ export async function POST(req: any) {
           if (trainBotData) {
             const obj = {
               type: "resume.writeSecondarySkills",
-              input: formatInstructions,
+              input: inputPrompt,
               output: response?.choices[0]?.message?.content?.replace(
                 /(\r\n|\n|\r)/gm,
                 ""
