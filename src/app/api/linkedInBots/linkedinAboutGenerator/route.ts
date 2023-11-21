@@ -8,8 +8,6 @@ import TrainBot from "@/db/schemas/TrainBot";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
-// export const runtime = "edge";
-
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -47,6 +45,8 @@ export async function POST(req: any) {
 
         try {
           if (trainBotData) {
+            await startDB();
+
             // make a trainBot entry
 
             // const responseForTraining = await openai.chat.completions.create({
@@ -66,7 +66,7 @@ export async function POST(req: any) {
               idealOutput: "",
               status: "pending",
               //  userEmail: trainBotData.userEmail,
-              fileAddress: trainBotData.fileAddress,
+              // fileAddress: trainBotData.fileAddress,
               Instructions: `Writing a detailed LinkedIn Summary awhich is engaging, impactful, have relevant industry jargon, highlight successes and services with call to action statement `,
             };
 

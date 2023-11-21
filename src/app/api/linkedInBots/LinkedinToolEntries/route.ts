@@ -17,7 +17,6 @@ export async function POST(req: any) {
 
       // For Registration if file is uploaded then load content from that fiel
       if (linkedinFileName) {
-        await startDB();
         // load file
         // const dir = path.join(
         //   process.cwd() + "/public",
@@ -65,6 +64,8 @@ export async function POST(req: any) {
       `;
 
         try {
+          await startDB();
+
           const resp = await model.call(input);
           const {
             fullName,

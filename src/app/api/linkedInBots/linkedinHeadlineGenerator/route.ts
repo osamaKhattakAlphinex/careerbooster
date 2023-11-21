@@ -63,6 +63,8 @@ export async function POST(req: any) {
         // });
         try {
           if (trainBotData) {
+            await startDB();
+
             // make a trainBot entry
             const obj = {
               type: "linkedinAiTool.headline",
@@ -71,7 +73,7 @@ export async function POST(req: any) {
               idealOutput: "",
               status: "pending",
               //  userEmail: trainBotData.userEmail,
-              fileAddress: trainBotData.fileAddress,
+              // fileAddress: trainBotData.fileAddress,
               Instructions: `Writing a LinkedIn headline as Job Title |Top Keyword 1 | Top Keyword 2 | Top Keyword 3 | Top Keyword 4 | Value proposition statement`,
             };
 
