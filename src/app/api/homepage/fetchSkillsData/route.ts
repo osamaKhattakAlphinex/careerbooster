@@ -57,17 +57,22 @@ export async function POST(req: any) {
             const obj = {
               type: "register.wizard.listSkills",
               input: input,
-              output: response.choices[0].message.content,
+              output: response?.choices[0]?.message?.content,
               idealOutput: "",
               status: "pending",
-              userEmail: trainBotData.userEmail,
-              fileAddress: trainBotData.fileAddress,
+              userEmail: trainBotData?.userEmail,
+              fileAddress: trainBotData?.fileAddress,
               Instructions: `Get List of all Skills`,
             };
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) {}
+        } catch (error) {
+          return NextResponse.json(
+            { success: false, result: error },
+            { status: 400 }
+          );
+        }
 
         return NextResponse.json(
           { success: true, result: response.choices[0].message.content },
