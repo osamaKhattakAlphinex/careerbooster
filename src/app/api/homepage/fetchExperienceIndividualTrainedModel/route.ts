@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import TrainBot from "@/db/schemas/TrainBot";
+import startDB from "@/lib/db";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -79,6 +80,7 @@ export async function POST(req: any) {
         try {
           // make a trainBot entry
           if (trainBotData) {
+            await startDB();
             const obj = {
               type: "register.wizard.individualExperience",
               input: input,
