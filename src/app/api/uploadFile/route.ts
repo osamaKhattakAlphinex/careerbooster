@@ -23,7 +23,5 @@ export async function POST(request: NextRequest) {
   // With the file data in the buffer, you can do whatever you want with it.
   // For this, we'll just write it to the filesystem in a new location
 
-  //   console.log("buffer: ");
-
   return NextResponse.json({ success: true });
 }
