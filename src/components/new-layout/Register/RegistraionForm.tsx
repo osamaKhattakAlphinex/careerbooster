@@ -92,7 +92,7 @@ const RegistrationForm = () => {
             {
               id: makeid(),
               fileName: fileName, //fileName,
-              fileContent: removeSpecialChars(text),
+              fileContent: text,
               uploadedDateTime: new Date(),
             },
           ],

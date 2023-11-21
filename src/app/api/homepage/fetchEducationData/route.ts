@@ -18,10 +18,9 @@ function removeSpecialChars(str: string) {
 }
 export async function POST(req: any) {
   try {
-    const body = await req.json();
-    if (body) {
-      const reqBody = body;
-      const content = removeSpecialChars(reqBody.content.substring(0, 12000));
+    const reqBody = await req.json();
+    if (reqBody) {
+      const content = removeSpecialChars(reqBody.content.substring(0, 13000));
       const trainBotData = reqBody.trainBotData;
 
       if (content) {
@@ -34,7 +33,7 @@ export async function POST(req: any) {
               This is the User Data:
               ${content}
     
-              Now please give me a List of All Education from the above user data provided.
+              Now please give me a List of All Education(also include certifications, courses and other academic information if present) from the above user data provided.
     
               The answer MUST be a valid JSON and formatting should be like this 
               replace the VALUE_HERE with the actual values
@@ -76,18 +75,20 @@ export async function POST(req: any) {
         });
         try {
           // make a trainBot entry
-          const obj = {
-            type: "register.wizard.listEducation",
-            input: input,
-            output: response.choices[0].message.content,
-            idealOutput: "",
-            status: "pending",
-            userEmail: trainBotData.userEmail,
-            fileAddress: trainBotData.fileAddress,
-            Instructions: `Get List of all Education`,
-          };
+          if (trainBotData) {
+            const obj = {
+              type: "register.wizard.listEducation",
+              input: input,
+              output: response.choices[0].message.content,
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData.userEmail,
+              fileContent: trainBotData.fileContent,
+              Instructions: `Get List of all Education`,
+            };
 
-          await TrainBot.create({ ...obj });
+            await TrainBot.create({ ...obj });
+          }
         } catch (error) {}
 
         return NextResponse.json(
