@@ -7,6 +7,7 @@ import LimitCard from "../LimitCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "@/store/userDataSlice";
 import FileUploadHandler from "@/components/FileUploadHandler";
+import { makeid } from "@/helpers/makeid";
 
 interface Props {
   selectedFile: string;
@@ -17,10 +18,11 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   // local states
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [file, setFile] = useState<any>(null); // file to upload
+  const [fileName, setFileName] = useState<string>(""); // file to upload
   const [fileError, setFileError] = useState<string>("");
   const [successMsg, setSuccessMsg] = useState<string>("");
   const [loadingFiles, setLoadingFiles] = useState<boolean>(false);
-  // const [newFileText, setNewFileText] = useState<string>("");
+  const [newFileText, setNewFileText] = useState<string>("");
   const [fileList, setFileList] = useState([]);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [percentageCalculated, setPercentageCalculated] =
@@ -63,6 +65,24 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
       .catch((err) => console.log(err));
   };
 
+  const uploadFilesToDb = async (newText: string) => {
+    const userEmail = userData.email;
+    const file = {
+      id: makeid(),
+      fileName: fileName, //fileName,
+      fileContent: newText,
+      uploadedDateTime: new Date(),
+    };
+
+    await fetch("/api/users/updateUser", {
+      method: "POST",
+      body: JSON.stringify({
+        newFile: file,
+        email: userEmail,
+      }),
+    });
+    fetchFiles();
+  };
   // const uploadFileToServer = async () => {
   //   setFileError("");
   //   setFileUploading(true);
@@ -171,8 +191,14 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
       // if file exists but not PDf
       setFileError("only PDF file is allowed");
     }
-  }, [file, data]);
+  }, [file]);
 
+  useEffect(() => {
+    if (newFileText !== "") {
+      uploadFilesToDb(newFileText);
+      // fetchFiles();
+    }
+  }, [newFileText]);
   useEffect(() => {
     fetchFiles();
   }, [data]);
@@ -222,13 +248,20 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
               onChange={(e) => {
                 if (e.target.files) {
                   setFile(e.target.files[0]);
+                  setFileName(e.target.files[0].name);
                 }
               }}
             />
           </label>
         )}
 
-        {file !== null && <FileUploadHandler file={file} />}
+        {file !== null && (
+          <FileUploadHandler
+            file={file}
+            text={newFileText}
+            setText={setNewFileText}
+          />
+        )}
         {loadingFiles ? (
           <p>Loading Files...</p>
         ) : (

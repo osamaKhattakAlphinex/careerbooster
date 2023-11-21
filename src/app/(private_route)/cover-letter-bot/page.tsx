@@ -107,7 +107,6 @@ const CoverLetterWriter = () => {
   const userData = useSelector((state: any) => state.userData);
   const coverLetter = useSelector((state: any) => state.coverLetter);
 
-  console.clear();
   const { resumes, coverLetters } = userData;
 
   const handleGenerate = async () => {
