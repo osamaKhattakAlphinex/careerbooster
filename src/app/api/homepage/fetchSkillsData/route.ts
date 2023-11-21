@@ -53,9 +53,10 @@ export async function POST(req: any) {
           temperature: 1,
         });
         try {
-          await startDB();
           // make a trainBot entry
           if (trainBotData) {
+            await startDB();
+
             const obj = {
               type: "register.wizard.listSkills",
               input: input,
@@ -69,12 +70,7 @@ export async function POST(req: any) {
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) {
-          return NextResponse.json(
-            { success: false, result: error },
-            { status: 400 }
-          );
-        }
+        } catch (error) {}
 
         return NextResponse.json(
           { success: true, result: response.choices[0].message.content },

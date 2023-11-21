@@ -85,12 +85,7 @@ export async function POST(req: any) {
             await TrainBot.create({ ...obj });
           }
           // const resp = await chain4.call({ query: input });
-        } catch (error) {
-          return NextResponse.json(
-            { success: false, result: error },
-            { status: 400 }
-          );
-        }
+        } catch (error) {}
 
         return NextResponse.json(
           { success: true, result: response.choices[0].message.content },
