@@ -520,11 +520,16 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           const res = await resp.json();
 
           if (res.success && res?.result) {
+            let result;
+            if (typeof res.result === "object") {
+              result = res.result;
+            } else {
+              result = await JSON.parse(res.result);
+            }
             try {
-              const data = await res.result;
               dispatch(setScrapped({ skills: true }));
               dispatch(setScrapping({ skills: false }));
-              dispatch(setStepSix({ list: data }));
+              dispatch(setStepSix({ list: result }));
             } catch (error) {
               dispatch(setScrapped({ skills: true }));
               dispatch(setScrapping({ skills: false }));

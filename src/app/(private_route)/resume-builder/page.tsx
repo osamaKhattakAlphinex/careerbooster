@@ -355,13 +355,10 @@ const ResumeBuilder = () => {
       const res = await resp.json();
       if (res.success) {
         if (res?.result) {
-          let myJSON;
-          if (typeof res.result === "object") {
-            myJSON = res.result;
-          } else {
-            myJSON = await JSON.parse(res.result);
-          }
-          dispatch(setPrimarySkills(myJSON));
+          let myJSON = JSON.parse(JSON.stringify(res.result));
+
+          myJSON = JSON.parse(myJSON);
+          dispatch(setPrimarySkills({ primarySkills: myJSON }));
         }
       }
     });
@@ -387,14 +384,10 @@ const ResumeBuilder = () => {
       const res = await resp.json();
       if (res.success) {
         if (res?.result) {
-          let myJSON;
-          if (typeof res.result === "object") {
-            myJSON = res.result;
-          } else {
-            myJSON = await JSON.parse(res.result);
-          }
+          let myJSON = JSON.parse(JSON.stringify(res.result));
 
-          dispatch(setProfessionalSkills(myJSON));
+          myJSON = JSON.parse(myJSON);
+          dispatch(setProfessionalSkills({ professionalSkills: myJSON }));
         }
       }
     });
@@ -420,13 +413,10 @@ const ResumeBuilder = () => {
       const res = await resp.json();
       if (res.success) {
         if (res?.result) {
-          let myJSON;
-          if (typeof res.result === "object") {
-            myJSON = res.result;
-          } else {
-            myJSON = await JSON.parse(res.result);
-          }
-          dispatch(setSecondarySkills(myJSON));
+          let myJSON = JSON.parse(JSON.stringify(res.result));
+
+          myJSON = JSON.parse(myJSON);
+          dispatch(setSecondarySkills({ secondarySkills: myJSON }));
         }
       }
     });

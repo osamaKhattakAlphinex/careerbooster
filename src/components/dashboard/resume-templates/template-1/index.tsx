@@ -385,7 +385,6 @@ const ResumeTemplate1 = ({
           </ul>
 
           {/* Skills */}
-
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>

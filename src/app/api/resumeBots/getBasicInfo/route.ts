@@ -301,10 +301,7 @@ export async function POST(req: any) {
 
         return NextResponse.json(
           {
-            result: response?.choices[0]?.message?.content?.replace(
-              /(\r\n|\n|\r)/gm,
-              ""
-            ),
+            result: response?.choices[0]?.message?.content,
             success: true,
           },
           { status: 200 }
