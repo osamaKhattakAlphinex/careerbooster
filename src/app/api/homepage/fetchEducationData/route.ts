@@ -83,7 +83,7 @@ export async function POST(req: any) {
               idealOutput: "",
               status: "pending",
               userEmail: trainBotData.userEmail,
-              fileContent: trainBotData.fileContent,
+              fileAddress: trainBotData.fileAddress,
               Instructions: `Get List of all Education`,
             };
 

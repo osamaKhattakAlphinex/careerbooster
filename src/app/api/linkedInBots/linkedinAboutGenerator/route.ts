@@ -66,7 +66,7 @@ export async function POST(req: any) {
               idealOutput: "",
               status: "pending",
               //  userEmail: trainBotData.userEmail,
-              fileContent: trainBotData.fileContent,
+              fileAddress: trainBotData.fileAddress,
               Instructions: `Writing a detailed LinkedIn Summary awhich is engaging, impactful, have relevant industry jargon, highlight successes and services with call to action statement `,
             };
 

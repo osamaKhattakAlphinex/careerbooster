@@ -53,18 +53,20 @@ export async function POST(req: any) {
         });
         try {
           // make a trainBot entry
-          const obj = {
-            type: "register.wizard.listSkills",
-            input: input,
-            output: response.choices[0].message.content,
-            idealOutput: "",
-            status: "pending",
-            userEmail: trainBotData.userEmail,
-            fileAddress: trainBotData.fileAddress,
-            Instructions: `Get List of all Skills`,
-          };
+          if (trainBotData) {
+            const obj = {
+              type: "register.wizard.listSkills",
+              input: input,
+              output: response.choices[0].message.content,
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData.userEmail,
+              fileAddress: trainBotData.fileAddress,
+              Instructions: `Get List of all Skills`,
+            };
 
-          await TrainBot.create({ ...obj });
+            await TrainBot.create({ ...obj });
+          }
         } catch (error) {}
 
         return NextResponse.json(

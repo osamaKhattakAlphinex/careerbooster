@@ -68,18 +68,20 @@ export async function POST(req: any) {
         });
         try {
           // make a trainBot entry
-          const obj = {
-            type: "register.wizard.listExperiences",
-            input: input,
-            output: response.choices[0].message.content,
-            idealOutput: "",
-            status: "pending",
-            userEmail: trainBotData.userEmail,
-            fileAddress: trainBotData.fileAddress,
-            Instructions: `Get List of all Experiences with jobTitle and company only just check if the list is missing any data`,
-          };
+          if (trainBotData) {
+            const obj = {
+              type: "register.wizard.listExperiences",
+              input: input,
+              output: response.choices[0].message.content,
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData.userEmail,
+              fileAddress: trainBotData.fileAddress,
+              Instructions: `Get List of all Experiences with jobTitle and company only just check if the list is missing any data`,
+            };
 
-          await TrainBot.create({ ...obj });
+            await TrainBot.create({ ...obj });
+          }
           // const resp = await chain4.call({ query: input });
         } catch (error) {}
 

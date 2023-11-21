@@ -126,7 +126,7 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileContent: userData.files[0].fileContent,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -168,7 +168,7 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileContent: userData.files[0].fileContent,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -247,7 +247,7 @@ const ResumeBuilder = () => {
             experience: experience,
             trainBotData: {
               userEmail: userData.email,
-              fileContent: userData.files[0].fileContent,
+              fileAddress: userData.files[0].fileName,
             },
           }),
         });
@@ -348,7 +348,7 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileContent: userData.files[0].fileContent,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -380,7 +380,7 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileContent: userData.files[0].fileContent,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -413,7 +413,7 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileContent: userData.files[0].fileContent,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {

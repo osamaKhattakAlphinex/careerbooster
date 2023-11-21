@@ -79,7 +79,7 @@ export async function POST(req: any) {
               idealOutput: "",
               status: "pending",
               userEmail: trainBotData.userEmail,
-              fileContent: trainBotData.fileContent,
+              fileAddress: trainBotData.fileAddress,
               Instructions: `Get basic information for the resume`,
             };
 
@@ -143,7 +143,7 @@ export async function POST(req: any) {
               idealOutput: "",
               status: "pending",
               userEmail: trainBotData.userEmail,
-              fileContent: trainBotData.fileContent,
+              fileAddress: trainBotData.fileAddress,
               Instructions: `Write Summary for the resume`,
             };
 
@@ -282,7 +282,7 @@ export async function POST(req: any) {
               idealOutput: "",
               status: "pending",
               userEmail: trainBotData.userEmail,
-              fileContent: trainBotData.fileContent,
+              fileAddress: trainBotData.fileAddress,
               Instructions: `Write Primary Skills for Resume`,
             };
 
@@ -351,7 +351,7 @@ export async function POST(req: any) {
               idealOutput: "",
               status: "pending",
               userEmail: trainBotData.userEmail,
-              fileContent: trainBotData.fileContent,
+              fileAddress: trainBotData.fileAddress,
               Instructions: `Write Professional Skills for Resume`,
             };
 
@@ -418,7 +418,7 @@ export async function POST(req: any) {
               idealOutput: "",
               status: "pending",
               userEmail: trainBotData.userEmail,
-              fileContent: trainBotData.fileContent,
+              fileAddress: trainBotData.fileAddress,
               Instructions: `Write Secondary Skills for Resume`,
             };
 

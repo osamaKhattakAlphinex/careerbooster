@@ -114,7 +114,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
-          fileContent: userData.files[0].fileContent,
+          fileAddress: userData.files[0].fileName,
         },
       };
 
