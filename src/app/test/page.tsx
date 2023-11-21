@@ -16,7 +16,6 @@ export default function MyComponent() {
       const reader = new FileReader();
       reader.onload = async function (e: any) {
         const result = e.target.result;
-        console.log(result);
         const pdf = await pdfjsLib.getDocument({ data: result }).promise;
         let content = "";
         for (let i = 1; i <= pdf.numPages; i++) {

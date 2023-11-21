@@ -16,6 +16,7 @@ import OpenAI from "openai";
 import { RetrievalQAChain } from "langchain/chains";
 import TrainBot from "@/db/schemas/TrainBot";
 import { NextResponse } from "next/server";
+import startDB from "@/lib/db";
 export const maxDuration = 300; // This function can run for a maximum of 5 minutes
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -33,6 +34,8 @@ export async function POST(req: any) {
     const trainBotData = reqBody.trainBotData;
 
     // fetch prompt from db
+    await startDB();
+
     const promptRec = await Prompt.findOne({
       type: "bid",
       name: "consulting",
@@ -123,6 +126,8 @@ export async function POST(req: any) {
       // make a trainBot entry
       try {
         if (trainBotData) {
+          await startDB();
+
           const obj = {
             type: "linkedin.genearteConsultingBid",
             input: prompt,

@@ -4,22 +4,8 @@ import React from "react";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-function removeSpecialChars(str: string) {
-  // Remove new lines
-  str = str.replace(/[\r\n]+/gm, "");
-
-  // Remove Unicode characters
-  str = str.replace(/[^\x00-\x7F]/g, "");
-
-  // Remove icons
-  str = str.replace(/[^\w\s]/gi, "");
-
-  return str;
-}
-
 const saveToLocalStorage = (text: any) => {
-  const newText = text.substring(0, 9000);
-  localStorage.setItem("pdfText", newText);
+  localStorage.setItem("pdfText", text);
 };
 
 const FileUploadHandler = ({
@@ -54,8 +40,8 @@ const FileUploadHandler = ({
 
         Promise.all(textPromises)
           .then((pageTexts) => {
-            const extractedText = pageTexts.join(" ");
-            const content = removeSpecialChars(extractedText);
+            const content = pageTexts.join(" ");
+            //const content = removeSpecialChars(extractedText);
             setText(content);
             saveToLocalStorage(content);
 

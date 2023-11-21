@@ -12,7 +12,6 @@ export async function PUT(
   // const url = new URL(req.url);
   // const coverLetterId = url.searchParams.get("coverLetterId");
   const coverLetterId = params.coverLetterId;
-  console.log(coverLetterId);
   try {
     let email: any = "";
 

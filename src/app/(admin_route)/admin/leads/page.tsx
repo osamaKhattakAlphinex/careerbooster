@@ -32,7 +32,6 @@ const LeadsAdminPage = () => {
           },
         })
         .then(async (res: any) => {
-          console.log(res);
           if (res.data.success) {
             const result = res.data;
             setNumberOfRecords(result.totalRecords);
@@ -51,10 +50,7 @@ const LeadsAdminPage = () => {
   useEffect(() => {
     const existingNumberOfRecords = searchParams?.get("r");
     const existingPage = searchParams?.get("p");
-    console.log(
-      "existingNumberOfRecords: " + existingNumberOfRecords,
-      existingPage
-    );
+
     if (existingNumberOfRecords) {
       setLimitOfRecords(parseInt(existingNumberOfRecords));
     }

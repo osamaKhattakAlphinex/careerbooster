@@ -142,7 +142,6 @@ const TrainRegistrationBotAdminPage = () => {
     setStartingPage(startIndex);
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
   }, [limitOfRecords, currentPage]);
-  console.log(totalPages);
 
   useEffect(() => {
     const existingNumberOfRecords = searchParams?.get("r");

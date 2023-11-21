@@ -7,6 +7,7 @@ import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 
 import TrainBot from "@/db/schemas/TrainBot";
+import startDB from "@/lib/db";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -107,6 +108,7 @@ export async function POST(req: any) {
 
     if (type === "summary") {
       try {
+        await startDB();
         const promptRec = await Prompt.findOne({
           type: "resume",
           name: "summary",
@@ -133,6 +135,7 @@ export async function POST(req: any) {
 
         try {
           if (trainBotData) {
+            await startDB();
             const obj = {
               type: "resume.writeSummary",
               input: promptSummary,
@@ -167,6 +170,8 @@ export async function POST(req: any) {
     }
 
     if (type === "workExperience") {
+      await startDB();
+
       const promptRec = await Prompt.findOne({
         type: "resume",
         name: "workExperienceGeneralDescription",
@@ -240,6 +245,8 @@ export async function POST(req: any) {
 
     if (type === "primarySkills") {
       try {
+        await startDB();
+
         const promptRec = await Prompt.findOne({
           type: "resume",
           name: "primarySkills",
@@ -272,6 +279,8 @@ export async function POST(req: any) {
         // make a trainBot entry
         try {
           if (trainBotData) {
+            await startDB();
+
             const obj = {
               type: "resume.writePrimarySkills",
               input: inputPrompt,
@@ -310,6 +319,8 @@ export async function POST(req: any) {
 
     if (type === "professionalSkills") {
       try {
+        await startDB();
+
         const promptRec = await Prompt.findOne({
           type: "resume",
           name: "professionalSkills",
@@ -341,6 +352,8 @@ export async function POST(req: any) {
         // make a trainBot entry
         try {
           if (trainBotData) {
+            await startDB();
+
             const obj = {
               type: "resume.writeProfessionalSkills",
               input: inputPrompt,
@@ -379,6 +392,8 @@ export async function POST(req: any) {
 
     if (type === "secondarySkills") {
       try {
+        await startDB();
+
         const promptRec = await Prompt.findOne({
           type: "resume",
           name: "secondarySkills",
@@ -408,6 +423,8 @@ export async function POST(req: any) {
         // make a trainBot entry
         try {
           if (trainBotData) {
+            await startDB();
+
             const obj = {
               type: "resume.writeSecondarySkills",
               input: inputPrompt,
