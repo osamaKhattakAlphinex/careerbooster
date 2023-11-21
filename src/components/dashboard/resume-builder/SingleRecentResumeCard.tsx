@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
 import { useSession } from "next-auth/react";
 import Html2Pdf from "js-html2pdf";
+import { useState } from "react";
 
 const SingleRecentResumeCard = ({
   resume,
@@ -64,10 +65,19 @@ const SingleRecentResumeCard = ({
   };
 
   return (
-    <div className="w-full  border border-gray-200 rounded-lg shadow p-2 sm:p-4">
-      <h2 className=" text-lg  ">{resume?.state?.jobPosition}</h2>
-      <h2 className="text-sm  ">{resume?.jobTitle}</h2>
-      <p className="text-xs mb-3 ">
+    <div className="w-full border border-gray-200 rounded-lg shadow p-2 sm:p-4">
+      <h2 className="text-lg overflow-hidden whitespace-nowrap">
+        {resume?.state?.jobPosition}
+      </h2>
+      <h2
+        className="text-sm overflow-hidden whitespace-nowrap"
+        title={resume?.jobTitle}
+      >
+        {resume?.jobTitle.length > 28
+          ? resume?.jobTitle.slice(0, 28) + "..."
+          : resume?.jobTitle}
+      </h2>
+      <p className="text-xs mb-3">
         Generated on {getFormattedDate(resume?.dateTime)}
       </p>
       <div className="flex flex-row gap-2 justify-between">

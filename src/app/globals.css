@@ -107,6 +107,10 @@
 .accordion-btn:hover {
   color: #6a4dff;
 }
+.rc-anchor-normal {
+  width: 305px !important;
+  height: 85px !important;
+}
 /* DARK THEME */
 [data-bs-theme="dark"] .nav-link {
   color: #fff;

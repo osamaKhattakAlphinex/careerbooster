@@ -17,6 +17,7 @@ export const GET = async (req: any) => {
     await startDB();
 
     const filter = { status: status, type: type };
+    console.log(limit);
     const recs = await TrainBot.find(filter).limit(limit).skip(skip);
 
     const total = await TrainBot.count(filter); // Count based on filter conditions
