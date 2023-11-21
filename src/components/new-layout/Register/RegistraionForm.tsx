@@ -18,6 +18,18 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 //   title: "CareerBooster.AI-Register",
 // };
 
+function removeSpecialChars(str: string) {
+  // Remove new lines
+  str = str.replace(/[\r\n]+/gm, "");
+
+  // Remove Unicode characters
+  str = str.replace(/[^\x00-\x7F]/g, "");
+
+  // Remove icons
+  str = str.replace(/[^\w\s]/gi, "");
+
+  return str;
+}
 const RegistrationForm = () => {
   const router = useRouter();
   const params = useSearchParams();
@@ -79,8 +91,8 @@ const RegistrationForm = () => {
           files: [
             {
               id: makeid(),
-              fileName: fileName + ".pdf", //fileName,
-              fileContent: text,
+              fileName: fileName, //fileName,
+              fileContent: removeSpecialChars(text),
               uploadedDateTime: new Date(),
             },
           ],
@@ -307,7 +319,6 @@ const RegistrationForm = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const data: any = localStorage.getItem("pdfText");
-      const fileName = localStorage.getItem("pdfFileName");
 
       if (data) {
         setText(data);

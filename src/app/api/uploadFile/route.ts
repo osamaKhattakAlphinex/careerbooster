@@ -12,7 +12,6 @@ export async function POST(request: NextRequest) {
   // });
   const data = request.formData();
   // const file = data.get("file");
-  console.log("data in api", data);
   //   console.log("data in file ", file);
   // if (!file) {
   //   return NextResponse.json({ success: false });
