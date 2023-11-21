@@ -5,6 +5,7 @@ import {
   leftArrowIcon,
   refreshIconRotating,
 } from "@/helpers/iconsProvider";
+import { faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -31,6 +32,9 @@ const TrainRegistrationBotAdminPage = () => {
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [downloading, setDownloading] = useState<boolean>(false);
+
+  const [selectAll, setSelectAll] = useState<boolean>(false);
+  const [dataSelection, setDataSelection] = useState<string[]>([]);
 
   const fetchRecords = async () => {
     setLoading(true);
@@ -153,6 +157,98 @@ const TrainRegistrationBotAdminPage = () => {
       setCurrentPage(parseInt(existingPage));
     }
   }, [searchParams?.get("r"), searchParams?.get("p")]);
+  const showDeleteAllButton = () => {
+    if (selectAll) {
+      return true;
+    }
+    if (dataSelection.length > 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const handleChangeStatus = async () => {
+    setLoading(true);
+
+    axios
+      .put("/api/trainBot/bulkStatusUpdate", {
+        ids: dataSelection,
+        newStatus: "trained",
+      })
+      .then((res: any) => {
+        if (res.data.success) {
+          console.log("Status Change Successfully");
+        }
+        fetchRecords();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {});
+  };
+
+  const handleDeleteAll = async () => {
+    setLoading(true);
+
+    axios
+      .post("/api/trainBot/bulkDelete", { dataSelection })
+      .then((res: any) => {
+        if (res.data.success) {
+          setDataSelection([]);
+          fetchRecords();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {});
+  };
+
+  const isChecked = (id: string) => {
+    if (selectAll) {
+      if (dataSelection.length === records.length) return true;
+    } else {
+      if (dataSelection.includes(id)) return true;
+      else return false;
+    }
+  };
+
+  const onSelecting = (checked: boolean, id: string) => {
+    if (selectAll)
+      if (checked) {
+        setDataSelection((prevSelection) => [...prevSelection, id]);
+      } else {
+        let newSelection = dataSelection.filter(
+          (selectedId) => selectedId !== id
+        );
+        setDataSelection(newSelection);
+        setSelectAll(false);
+      }
+    else {
+      if (checked) {
+        setDataSelection((prevSelection) => [...prevSelection, id]);
+      } else {
+        let newSelection = dataSelection.filter(
+          (selectedId) => selectedId !== id
+        );
+        setDataSelection(newSelection);
+      }
+    }
+  };
+
+  const onSelectAll = (e: any) => {
+    setSelectAll(e.target.checked);
+    if (e.target.checked) {
+      if (records.length >= 1) {
+        let _ids: string[] = [];
+        records.map((rec: any) => _ids.push(rec._id));
+        setDataSelection(_ids);
+      }
+    } else {
+      setDataSelection([]);
+    }
+  };
 
   return (
     <div className="pt-30">
@@ -370,7 +466,11 @@ const TrainRegistrationBotAdminPage = () => {
             <li className="mr-2">
               <button
                 disabled={loading}
-                onClick={() => setActiveTab("pending")}
+                onClick={() => {
+                  setActiveTab("pending");
+                  setDataSelection([]);
+                  setSelectAll(false);
+                }}
                 className={activeTab === "pending" ? activeCSS : inactiveCSS}
               >
                 Pending Review
@@ -379,7 +479,11 @@ const TrainRegistrationBotAdminPage = () => {
             <li className="mr-2">
               <button
                 disabled={loading}
-                onClick={() => setActiveTab("reviewed")}
+                onClick={() => {
+                  setActiveTab("reviewed");
+                  setDataSelection([]);
+                  setSelectAll(false);
+                }}
                 className={activeTab === "reviewed" ? activeCSS : inactiveCSS}
               >
                 Reviewed
@@ -388,7 +492,11 @@ const TrainRegistrationBotAdminPage = () => {
             <li className="mr-2">
               <button
                 disabled={loading}
-                onClick={() => setActiveTab("trained")}
+                onClick={() => {
+                  setActiveTab("trained");
+                  setDataSelection([]);
+                  setSelectAll(false);
+                }}
                 className={activeTab === "trained" ? activeCSS : inactiveCSS}
               >
                 Trained
@@ -396,20 +504,46 @@ const TrainRegistrationBotAdminPage = () => {
             </li>
           </ul>
 
-          {activeTab === "reviewed" && (
-            <div className="flex justify-end">
-              <button
-                onClick={handleDownload}
-                className=" flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-              >
-                {downloading ? (
-                  <>{refreshIconRotating} Downloading...</>
-                ) : (
-                  <>{downloadIcon} Download All</>
-                )}
-              </button>
-            </div>
-          )}
+          <div className=" flex flex-row justify-end items-center gap-3">
+            {activeTab === "reviewed" && (
+              <div className="flex justify-end">
+                <button
+                  onClick={handleDownload}
+                  className=" flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                >
+                  {downloading ? (
+                    <>{refreshIconRotating} Downloading...</>
+                  ) : (
+                    <>{downloadIcon} Download All</>
+                  )}
+                </button>
+              </div>
+            )}
+
+            {activeTab === "reviewed" && dataSelection.length >= 1 && (
+              <div className="flex justify-end">
+                <button
+                  disabled={loading}
+                  onClick={handleChangeStatus}
+                  className=" disabled:cursor-not-allowed flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                >
+                  Set Status to Trained
+                </button>
+              </div>
+            )}
+
+            {showDeleteAllButton() && (
+              <div className="flex justify-end">
+                <button
+                  disabled={loading ? true : false}
+                  onClick={handleDeleteAll}
+                  className=" flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 disabled:cursor-not-allowed"
+                >
+                  Delete All
+                </button>
+              </div>
+            )}
+          </div>
 
           {/* Table */}
           <div className="">
@@ -417,6 +551,19 @@ const TrainRegistrationBotAdminPage = () => {
               <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
+                    <th>
+                      {!loading && records.length !== 0 ? (
+                        <span className="px-6 py-3">
+                          <input
+                            type="checkbox"
+                            checked={selectAll}
+                            onChange={onSelectAll}
+                          />
+                        </span>
+                      ) : (
+                        ""
+                      )}
+                    </th>
                     <th scope="col" className="px-6 py-3">
                       S.No
                     </th>
@@ -467,9 +614,17 @@ const TrainRegistrationBotAdminPage = () => {
                         className="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                       >
                         <td className="px-6 py-4">
+                          <input
+                            type="checkbox"
+                            checked={isChecked(rec._id)}
+                            onChange={(e) =>
+                              onSelecting(e.target.checked, rec._id)
+                            }
+                          />
+                        </td>
+                        <td className="px-6 py-4">
                           {startingPage + index + 1}
                         </td>
-
                         {dataType !== "linkedinTool" && (
                           <td className="px-6 py-4">{rec?.userEmail}</td>
                         )}

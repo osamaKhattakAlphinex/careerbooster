@@ -1,11 +1,22 @@
 // import fs from "fs";
 import fs from "fs/promises";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import path from "path";
+import { authOptions } from "../../auth/[...nextauth]/route";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
 export async function POST(req: any) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
+
   try {
     const url = new URL(req.url);
 
