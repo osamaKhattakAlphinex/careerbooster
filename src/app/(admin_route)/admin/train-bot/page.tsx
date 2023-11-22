@@ -261,8 +261,6 @@ const TrainRegistrationBotAdminPage = () => {
     setLoading(true);
     setRecords([]); // Clear existing records before fetching new ones
 
-    console.log(limitOfRecords);
-
     router.replace(`${pathname}?r=${limitOfRecords}&p=${currentPage}`);
   }, [limitOfRecords, currentPage]);
 
