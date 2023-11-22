@@ -546,9 +546,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     }
   };
 
-  // laksjdflasjdfl
   const updateUser = async () => {
-    // make an object
+    // Make an object
     const obj = {
       firstName: register.stepOne.firstName,
       lastName: register.stepOne.lastName,
