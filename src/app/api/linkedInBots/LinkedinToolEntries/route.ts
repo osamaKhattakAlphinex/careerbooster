@@ -13,8 +13,8 @@ export async function POST(req: any) {
   try {
     const body = await req.json();
     if (body) {
-      const { linkedinContent, linkedinFileName } = body;
-
+      const { linkedinFileName } = body;
+      const linkedinContent = body.linkedinContent.substring(0, 12000);
       // For Registration if file is uploaded then load content from that fiel
       if (linkedinFileName) {
         // load file
@@ -36,7 +36,7 @@ export async function POST(req: any) {
 
         const input = `
           This is the User Data:
-          ${linkedinFileName}
+          ${linkedinContent}
 
           Now please give me the following information about the user:
           Full Name:
@@ -80,8 +80,8 @@ export async function POST(req: any) {
           //Create user in DB
 
           const user = await LinkedinToolEntrie.create({
-            fileName: linkedinContent,
-            fileContent: linkedinFileName,
+            fileName: linkedinFileName,
+            fileContent: linkedinContent,
             name: fullName,
             email,
             phone,
