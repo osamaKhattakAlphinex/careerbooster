@@ -306,7 +306,7 @@ const LinkedInUploadPDFResume = () => {
   useEffect(() => {
     if (headlineComplete && aboutComplete) {
       // All APIs have completed, call linkedinToolSaveUser
-      linkedinToolSaveUser(linkedinContent, linkedinFileName);
+      linkedinToolSaveUser(linkedinFileName, linkedinContent);
     }
   }, [headlineComplete, aboutComplete]);
 

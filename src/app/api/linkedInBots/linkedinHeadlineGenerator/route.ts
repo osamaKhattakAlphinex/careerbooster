@@ -18,7 +18,7 @@ export async function POST(req: any) {
   try {
     const body = await req.json();
     if (body) {
-      const content = body.linkedinContent;
+      const content = body.linkedinContent.substring(0, 8000);
       const trainBotData = body?.trainBotData;
       let prompt;
       await startDB();
