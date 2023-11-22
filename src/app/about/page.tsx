@@ -7,6 +7,8 @@ import FeaturesSection from "@/components/new-layout/Homepage/FeaturesSection";
 import Reviews from "@/components/new-layout/Homepage/Reviews";
 import PageHeader from "@/components/new-layout/PageHeader";
 import { Metadata } from "next";
+import "@/app/plugins.css";
+import "@/app/style.css";
 
 export const metadata: Metadata = {
   title: "CareerBooster.AI-About",
