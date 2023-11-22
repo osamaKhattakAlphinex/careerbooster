@@ -1,6 +1,6 @@
 "use client";
 import Packages from "@/components/dashboard/checkout/Packages";
-import { Metadata } from "next";
+
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 

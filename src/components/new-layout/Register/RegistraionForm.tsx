@@ -96,7 +96,7 @@ const RegistrationForm = () => {
               uploadedDateTime: new Date(),
             },
           ],
-          status: false,
+          status: true,
           alertConsent: values.alertConsent,
         };
         // Create user account in database
