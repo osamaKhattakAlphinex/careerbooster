@@ -26,7 +26,6 @@ export async function POST(request: any) {
       }
 
       const response = await user.save();
-      console.log(response);
       return NextResponse.json(
         { result: response, success: true },
         { status: 200 }

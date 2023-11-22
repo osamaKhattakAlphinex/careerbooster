@@ -155,7 +155,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
     const c = confirm("Are you sure you want to delete this File?");
     if (c) {
       try {
-        const response = await fetch(
+        const response: any = await fetch(
           `/api/coverLetterBot/deleteFile?email=${data.user.email}`,
           {
             method: "POST",
@@ -165,13 +165,12 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
             body: JSON.stringify({ fileName: file }),
           }
         );
-
-        if (response.ok) {
-          alert("File has bee deleted");
+        const responseData = await response.json();
+        if (responseData.success) {
+          alert("File has been deleted");
           fetchFiles();
         } else {
-          const data = await response.json();
-          alert("Error deleting file: " + data.error);
+          alert("Error deleting file: " + responseData.error);
         }
       } catch (error) {
         alert("Error deleting file: " + error);
@@ -196,12 +195,12 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   useEffect(() => {
     if (newFileText !== "") {
       uploadFilesToDb(newFileText);
-      // fetchFiles();
+      fetchFiles();
     }
   }, [newFileText]);
   useEffect(() => {
     fetchFiles();
-  }, [data]);
+  }, []);
 
   return (
     <>
@@ -248,7 +247,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
               onChange={(e) => {
                 if (e.target.files) {
                   setFile(e.target.files[0]);
-                  setFileName(e.target.files[0].name);
+                  setFileName(e.target.files[0]?.name);
                 }
               }}
             />
@@ -279,7 +278,9 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                         selectedFile && selectedFile === file ? true : false
                       }
                       name="selectedFile"
-                      onChange={(e) => setSelectedFile(e.target.value)}
+                      onChange={(e) => {
+                        setSelectedFile(e.target.value);
+                      }}
                     />{" "}
                     <label htmlFor={`file_${i}`}>{file}</label>
                     <button
