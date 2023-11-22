@@ -89,7 +89,6 @@ const DownloadDocx = ({ basicInfo, disabled }: any) => {
       });
       // Output the document using Data-URI
       saveAs(out, "output.docx");
-      console.log("aaa2");
     });
   };
   const handleDownloadDocx = () => {

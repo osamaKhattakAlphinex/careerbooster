@@ -114,7 +114,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          fileAddress: userData.files[0].fileName,
         },
       };
 
@@ -521,10 +521,9 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
 
           if (res.success && res?.result) {
             try {
-              const data = await res.result;
               dispatch(setScrapped({ skills: true }));
               dispatch(setScrapping({ skills: false }));
-              dispatch(setStepSix({ list: data }));
+              dispatch(setStepSix({ list: res.result }));
             } catch (error) {
               dispatch(setScrapped({ skills: true }));
               dispatch(setScrapping({ skills: false }));
@@ -541,9 +540,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     }
   };
 
-  // laksjdflasjdfl
   const updateUser = async () => {
-    // make an object
+    // Make an object
     const obj = {
       firstName: register.stepOne.firstName,
       lastName: register.stepOne.lastName,
@@ -637,7 +635,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     ) {
       redirect("/subscribe");
     } else {
-      return <div className="pt-30">{children}</div>;
+      // return <div className="pt-30">{children}</div>;
+      return <>{children}</>;
     }
   } else {
     // if the user data is loaded and profile wizard is NOT completed show loader

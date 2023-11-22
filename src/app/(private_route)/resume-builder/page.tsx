@@ -93,9 +93,30 @@ const ResumeBuilder = () => {
     }
   }, [resumeData.state, percentageCalculated]);
 
+  // const makeAPICallWithRetry: any = async (
+  //   apiFunction: any,
+  //   retriesLeft = 2
+  // ) => {
+  //   try {
+  //     // Attempt the API call
+  //     return await apiFunction();
+  //   } catch (error) {
+  //     // If an error occurs and retries are left, retry the call
+  //     if (retriesLeft > 0) {
+  //       console.log(
+  //         `API call failed. Retrying... Retries left: ${retriesLeft}`
+  //       );
+  //       return makeAPICallWithRetry(apiFunction, retriesLeft - 1);
+  //     } else {
+  //       // If no retries are left, handle the error accordingly
+  //       console.error("API call failed after multiple retries.", error);
+  //       throw new Error("API call failed after multiple retries");
+  //     }
+  //   }
+  // };
   const getBasicInfo = async () => {
     // dispatch(setLoadingState("basicInfo"));
-
+    // return makeAPICallWithRetry(async () => {
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
@@ -105,11 +126,12 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
+
       if (res.success && res?.result) {
         let myJSON;
         if (typeof res.result === "object") {
@@ -130,9 +152,11 @@ const ResumeBuilder = () => {
         dispatch(setBasicInfo(basicObj));
       }
     });
+    // });
   };
 
   const getSummary = async () => {
+    // return makeAPICallWithRetry(async () => {
     await getUserDataIfNotExists();
     setStreamedSummaryData("");
     dispatch(setSummary(""));
@@ -144,34 +168,37 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
-      const res = await resp.json();
+      // const res = await resp.json();
 
-      if (res.success) {
-        // const reader = resp.body.getReader();
-        // let summaryTemp = "";
-        // while (true) {
-        //   const { done, value } = await reader.read();
+      if (resp.ok) {
+        const reader = resp.body.getReader();
+        let summaryTemp = "";
+        while (true) {
+          const { done, value } = await reader.read();
 
-        //   if (done) {
-        //     break;
-        //   }
+          if (done) {
+            break;
+          }
 
-        //   const text = new TextDecoder().decode(value);
-        //   setStreamedSummaryData((prev) => prev + text);
-        //   summaryTemp += text;
-        // }
-        dispatch(setSummary(res.result.text));
+          const text = new TextDecoder().decode(value);
+          setStreamedSummaryData((prev) => prev + text);
+          summaryTemp += text;
+        }
+
+        dispatch(setSummary(summaryTemp));
       } else {
         setStreamedSummaryData("Error! Something went wrong");
       }
     });
+    // });
   };
 
   const getWorkExperienceNew = async () => {
+    // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("workExperience"));
     await getUserDataIfNotExists();
 
@@ -186,7 +213,6 @@ const ResumeBuilder = () => {
       let temp = "";
       const workExpArr: any = [];
       for (const [index, experience] of experiences.entries()) {
-        console.log("experience", index, experience);
         let workExpArrObj: any = {};
         let html = "";
         html += `<h2 style="font-size: 1.3rem; font-weight: bold; line-height: 2rem; ">${experience?.jobTitle}</h2>`;
@@ -214,33 +240,34 @@ const ResumeBuilder = () => {
         temp += html;
         let achievementTemp = "";
         setStreamedJDData((prev) => prev + html);
+
         const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
           method: "POST",
           body: JSON.stringify({
             experience: experience,
             trainBotData: {
               userEmail: userData.email,
-              fileAddress: userData.defaultResumeFile,
+              fileAddress: userData.files[0].fileName,
             },
           }),
         });
-        const response = await res.json();
+        // const response = await res.json();
         // console.log("result", result, typeof result);
-        if (response.success) {
-          // const reader = res.body.getReader();
-          // while (true) {
-          //   const { done, value } = await reader.read();
+        if (res.ok) {
+          const reader = res.body.getReader();
+          while (true) {
+            const { done, value } = await reader.read();
 
-          //   if (done) {
-          //     break;
-          //   }
+            if (done) {
+              break;
+            }
 
-          // const text = new TextDecoder().decode(value);
-          const text = response.result;
-          setStreamedJDData((prev) => prev + text);
-          temp += text;
-          achievementTemp += text;
-          // }
+            const text = new TextDecoder().decode(value);
+            // const text = response.result;
+            setStreamedJDData((prev) => prev + text);
+            temp += text;
+            achievementTemp += text;
+          }
         }
 
         setStreamedJDData((prev) => prev + `</div> <br /> `);
@@ -253,6 +280,7 @@ const ResumeBuilder = () => {
       dispatch(setWorkExperience(temp));
       dispatch(setState({ name: "resumeLoading", value: false }));
     }
+    // });
   };
 
   const fetchLIstOfStrings = (text: string) => {
@@ -309,6 +337,7 @@ const ResumeBuilder = () => {
   // };
 
   const getPrimarySkills = async () => {
+    // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("primarySkills"));
     await getUserDataIfNotExists();
     return fetch("/api/resumeBots/getBasicInfo", {
@@ -319,7 +348,7 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -336,9 +365,11 @@ const ResumeBuilder = () => {
         }
       }
     });
+    // });
   };
 
   const getProfessionalSkills = async () => {
+    // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("professionalSkills"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
@@ -349,7 +380,7 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -367,9 +398,11 @@ const ResumeBuilder = () => {
         }
       }
     });
+    // });
   };
 
   const getSecondarySkills = async () => {
+    // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("secondarySkills"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
@@ -380,7 +413,7 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -397,9 +430,11 @@ const ResumeBuilder = () => {
         }
       }
     });
+    // });
   };
 
   const getUserDataIfNotExists = async () => {
+    // return makeAPICallWithRetry(async () => {
     if (!userData.isLoading && !userData.isFetched) {
       dispatch(setIsLoading(true));
       // Fetch userdata if not exists in Redux
@@ -413,9 +448,11 @@ const ResumeBuilder = () => {
       dispatch(setIsLoading(false));
       dispatch(setField({ name: "isFetched", value: true }));
     }
+    // });
   };
 
   const saveResumeToDB = async (data: any = "") => {
+    // return makeAPICallWithRetry(async () => {
     const source = data === "" ? resumeData : data;
     let obj = source;
     if (!source.id || source.id === "") {
@@ -454,6 +491,7 @@ const ResumeBuilder = () => {
           setShowAlert(false);
         }, 1000);
       });
+    // });
   };
 
   useEffect(() => {

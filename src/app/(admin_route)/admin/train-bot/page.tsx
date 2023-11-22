@@ -97,11 +97,10 @@ const TrainRegistrationBotAdminPage = () => {
     const c = confirm("Are you sure you want to delete this Record?");
     if (c) {
       try {
-        let result = await fetch("http://localhost:3001/api/trainBot/" + id, {
+        let result = await fetch("/api/trainBot/" + id, {
           method: "DELETE",
         });
         const res = await result.json();
-        console.log(result);
         if (res.success) {
           return fetchRecords();
         } else {
@@ -114,6 +113,7 @@ const TrainRegistrationBotAdminPage = () => {
   };
 
   // when tab changes fetch records for that tab
+  //
   useEffect(() => {
     if (
       activeTab &&
@@ -126,7 +126,7 @@ const TrainRegistrationBotAdminPage = () => {
       setRecords([]);
       fetchRecords();
     }
-  }, [activeTab, showRecordsType, dataType]);
+  }, [activeTab, showRecordsType]);
 
   useEffect(() => {
     if (dataType && dataType === "aiTools") {
@@ -137,6 +137,17 @@ const TrainRegistrationBotAdminPage = () => {
       setShowRecordsType("register.wizard.basicInfo");
     }
   }, [dataType]);
+<<<<<<< HEAD
+=======
+
+  useEffect(() => {
+    fetchRecords();
+    const startIndex = Number((currentPage - 1) * limitOfRecords);
+    setStartingPage(startIndex);
+    router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
+  }, [limitOfRecords, currentPage]);
+
+>>>>>>> 9b35823c368e65c41ca9d3fe7c98515f720f794d
   useEffect(() => {
     const existingNumberOfRecords = searchParams?.get("r");
     const existingPage = searchParams?.get("p");

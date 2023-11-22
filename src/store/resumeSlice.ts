@@ -80,6 +80,12 @@ const resumeSlice = createSlice({
   name: "resume",
   initialState,
   reducers: {
+    emptyResume() {
+      return {
+        ...initialState,
+      };
+    },
+
     resetResume(state, action) {
       return {
         ...initialState,
@@ -192,6 +198,7 @@ export const {
   setField,
   setWorkExperienceArray,
   resetResume,
+  emptyResume,
   // setLoadingState,
 } = resumeSlice.actions;
 

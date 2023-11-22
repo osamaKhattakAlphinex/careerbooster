@@ -156,14 +156,15 @@ const JDGenerator = ({ setJobDesc }: Props) => {
       dispatch(setIsLoading(true));
       try {
         // Fetch userdata if not exists in Redux
-        const res = await fetch(
+        const res: any = await fetch(
           `/api/users/getOneByEmail?email=${session?.user?.email}`
         );
-        const response = await res.json();
-        console.log(
-          "first response: " + response.result,
-          typeof response.result
-        );
+        let response;
+        if (typeof res?.result === "object") {
+          response = res;
+        } else {
+          response = await res.json();
+        }
 
         dispatch(setUserData(response.result));
         dispatch(setIsLoading(false));

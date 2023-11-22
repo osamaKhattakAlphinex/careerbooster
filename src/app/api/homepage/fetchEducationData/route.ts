@@ -1,16 +1,27 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import TrainBot from "@/db/schemas/TrainBot";
+import startDB from "@/lib/db";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
+function removeSpecialChars(str: string) {
+  // Remove new lines
+  str = str.replace(/[\r\n]+/gm, "");
 
+  // Remove Unicode characters
+  str = str.replace(/[^\x00-\x7F]/g, "");
+
+  // Remove icons
+  str = str.replace(/[^\w\s]/gi, "");
+
+  return str;
+}
 export async function POST(req: any) {
   try {
-    const body = await req.json();
-    if (body) {
-      const reqBody = body;
-      const content = reqBody.content;
+    const reqBody = await req.json();
+    if (reqBody) {
+      const content = removeSpecialChars(reqBody.content.substring(0, 13000));
       const trainBotData = reqBody.trainBotData;
 
       if (content) {
@@ -23,7 +34,7 @@ export async function POST(req: any) {
               This is the User Data:
               ${content}
     
-              Now please give me a List of All Education from the above user data provided.
+              Now please give me a List of All Education(also include certifications, courses and other academic information if present) from the above user data provided.
     
               The answer MUST be a valid JSON and formatting should be like this 
               replace the VALUE_HERE with the actual values
@@ -65,18 +76,21 @@ export async function POST(req: any) {
         });
         try {
           // make a trainBot entry
-          const obj = {
-            type: "register.wizard.listEducation",
-            input: input,
-            output: response.choices[0].message.content,
-            idealOutput: "",
-            status: "pending",
-            userEmail: trainBotData.userEmail,
-            fileAddress: trainBotData.fileAddress,
-            Instructions: `Get List of all Education`,
-          };
+          if (trainBotData) {
+            await startDB();
+            const obj = {
+              type: "register.wizard.listEducation",
+              input: input,
+              output: response?.choices[0]?.message?.content,
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData?.userEmail,
+              fileAddress: trainBotData?.fileAddress,
+              Instructions: `Get List of all Education`,
+            };
 
-          await TrainBot.create({ ...obj });
+            await TrainBot.create({ ...obj });
+          }
         } catch (error) {}
 
         return NextResponse.json(

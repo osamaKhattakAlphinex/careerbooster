@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEye, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { Resume, setResume } from "@/store/resumeSlice";
+import { Resume, emptyResume, setResume } from "@/store/resumeSlice";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -41,6 +41,9 @@ const SingleRecentResumeCard = ({
       // delete resume
       const updatedResumes = resumes.filter((r: Resume) => r.id !== resume.id);
       updateUser(updatedResumes);
+      dispatch(emptyResume());
+
+      console.log(updatedResumes);
     }
   };
 

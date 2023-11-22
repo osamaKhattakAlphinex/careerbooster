@@ -3,6 +3,8 @@ import ContactForm from "@/components/new-layout/Contact/ContactForm";
 import MapCard from "@/components/new-layout/Contact/MapCard";
 import PageHeader from "@/components/new-layout/PageHeader";
 import { Metadata } from "next";
+import "@/app/plugins.css";
+import "@/app/style.css";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Contact",
   description:
