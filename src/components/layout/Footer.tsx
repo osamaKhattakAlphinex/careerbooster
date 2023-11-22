@@ -7,6 +7,15 @@ const Footer = () => {
   const pathname = usePathname();
   if (pathname === "/login" || pathname === "/register") return <></>;
 
+  // List of routes or folders where you want to exclude the layout
+  const excludedRoutes = ["/new-dashboard","/resume-builder-2"];
+  // Check if the current route is in the excluded list
+  const excludeLayout = excludedRoutes.some((route) => pathname === route);
+  if (excludeLayout) {
+    // Return only the children without the layout
+    return <></>;
+  }
+
   return (
     <footer className="footer bg-striped pt-10 pt-lg-15">
       <div className="container">
@@ -21,8 +30,8 @@ const Footer = () => {
                       <Link href="/about">About</Link>
                     </li>
                     {/* <li>
-                      <Link href="/blog">Blog</Link>
-                    </li> */}
+                    <Link href="/blog">Blog</Link>
+                  </li> */}
                     <li>
                       <Link href="/login">Sign in</Link>
                     </li>
@@ -61,34 +70,34 @@ const Footer = () => {
                 <div className="footer-widget text-center text-md-start">
                   <h6 className="theme-text-2 mb-4">Get connected</h6>
                   {/* <form>
-                    <div className="input-group">
-                      <input
-                        type="email"
-                        className="form-control form-control-2"
-                        placeholder="Enter your email"
-                      />
-                      <button
-                        className="btn btn-primary-dark px-4"
-                        type="button"
+                  <div className="input-group">
+                    <input
+                      type="email"
+                      className="form-control form-control-2"
+                      placeholder="Enter your email"
+                    />
+                    <button
+                      className="btn btn-primary-dark px-4"
+                      type="button"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          width="24"
-                          height="24"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1.5"
-                            d="m4.031 8.917 15.477-4.334a.5.5 0 0 1 .616.617l-4.333 15.476a.5.5 0 0 1-.94.067l-3.248-7.382a.5.5 0 0 0-.256-.257L3.965 9.856a.5.5 0 0 1 .066-.94v0Z"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </form> */}
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                          d="m4.031 8.917 15.477-4.334a.5.5 0 0 1 .616.617l-4.333 15.476a.5.5 0 0 1-.94.067l-3.248-7.382a.5.5 0 0 0-.256-.257L3.965 9.856a.5.5 0 0 1 .066-.94v0Z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </form> */}
                   <ul className="list-unstyled d-flex flex-wrap align-center justify-center justify-md-start gap-3 social-list mb-0 mt-5">
                     <li>
                       <Link href="https://www.facebook.com/careerboosterai">
@@ -119,7 +128,7 @@ const Footer = () => {
                       <Link href="https://www.linkedin.com/company/careerboosterai/">
                         <svg
                           className="w-4 h-4 
-                          theme-text-2 "
+                        theme-text-2 "
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="currentColor"
