@@ -838,7 +838,7 @@ export const appleIcon = (
 );
 export const searchIcon = (
   <svg
-    className="w-5 h-5 text-gray-300 font-thin dark:text-gray-400"
+    className="w-5 h-4 text-gray-300 font-thin dark:text-gray-400"
     aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"

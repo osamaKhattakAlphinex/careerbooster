@@ -73,6 +73,11 @@ const Header = () => {
       }
     }
   };
+  const pagesArray = [
+    "/dashboard",
+    "/cover-letter-generator",
+    "/resume-builder",
+  ];
 
   // when page (session) loads, fetch user data if not exists
   useEffect(() => {
@@ -83,8 +88,8 @@ const Header = () => {
 
   // if (pathname === "/login" || pathname === "/register") return null;
 
-  const pathname = usePathname();
-  if (pathname?.startsWith("/dashboard")) return <></>;
+  const pathname: any = usePathname();
+  if (pagesArray?.includes(pathname)) return <></>;
   return (
     <nav
       // className={`navbar navbar-expand-lg fixed-top ${

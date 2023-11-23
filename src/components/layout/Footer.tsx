@@ -4,11 +4,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Footer = () => {
-  const pathname = usePathname();
+  const pathname: any = usePathname();
+  const pagesArray = [
+    "/dashboard",
+    "/cover-letter-generator",
+    "/resume-builder",
+  ];
   if (
     pathname === "/login" ||
     pathname === "/register" ||
-    pathname?.startsWith("/dashboard")
+    pagesArray?.includes(pathname)
   )
     return <></>;
 
