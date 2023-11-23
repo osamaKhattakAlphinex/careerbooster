@@ -17,7 +17,10 @@ const UsersPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageStart, setPageStart] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
-
+  const [loading, setLoading] = useState<boolean>(false);
+  const [subscriptionId, setSubscriptionId] = useState("");
+  const [selectAll, setSelectAll] = useState<boolean>(false);
+  const [dataSelection, setDataSelection] = useState<string[]>([]);
   const handleDelete = async (id: string) => {
     const c = confirm("Are you sure you want to delete this Record?");
     if (c) {
@@ -37,7 +40,44 @@ const UsersPage = () => {
       }
     }
   };
+  const showDeleteAllButton = () => {
+    if (selectAll) {
+      return true;
+    }
+    if (dataSelection.length > 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const onSelectAll = (e: any) => {
+    setSelectAll(e.target.checked);
+    if (e.target.checked) {
+      if (records.length >= 1) {
+        let _ids: string[] = [];
+        records.map((rec: any) => _ids.push(rec._id));
+        setDataSelection(_ids);
+      }
+    } else {
+      setDataSelection([]);
+    }
+  };
+  const handleDeleteAll = async () => {
+    setLoading(true);
 
+    axios
+      .post("/api/users/bulkDelete", { dataSelection })
+      .then((res: any) => {
+        if (res.data.success) {
+          setDataSelection([]);
+          getUserDeatils();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {});
+  };
   const handleChange = async (id: string, status: boolean) => {
     if (window.confirm("Are you sure to Change the status")) {
       setLoadingId(id);
@@ -49,10 +89,62 @@ const UsersPage = () => {
           getUserDeatils();
         });
     } else {
-      router.push("/admin/users");
+      // router.push("/admin/users");
+    }
+  };
+  const isChecked = (id: string) => {
+    if (selectAll) {
+      if (dataSelection.length === records.length) return true;
+    } else {
+      if (dataSelection.includes(id)) return true;
+      else return false;
+    }
+  };
+  const checkingSubscription = (expirationDate: any) => {
+    if (new Date(expirationDate).getTime() > Date.now()) {
+      return true;
+    } else {
+      return false;
     }
   };
 
+  const onSubscriptionCheck = async (id: string, status: boolean) => {
+    if (window.confirm("Are you sure to Change the subscription status")) {
+      setSubscriptionId(id);
+      const record: any = await axios
+        .put(`/api/users/${id}`, {
+          userPackageExpirationDate: Date.now() + 30 * 24 * 60 * 60 * 1000,
+        })
+        .finally(() => {
+          setSubscriptionId("");
+          getUserDeatils();
+        });
+    } else {
+      // router.push("/admin/users");
+    }
+  };
+  const onSelecting = (checked: boolean, id: string) => {
+    if (selectAll)
+      if (checked) {
+        setDataSelection((prevSelection) => [...prevSelection, id]);
+      } else {
+        let newSelection = dataSelection.filter(
+          (selectedId) => selectedId !== id
+        );
+        setDataSelection(newSelection);
+        setSelectAll(false);
+      }
+    else {
+      if (checked) {
+        setDataSelection((prevSelection) => [...prevSelection, id]);
+      } else {
+        let newSelection = dataSelection.filter(
+          (selectedId) => selectedId !== id
+        );
+        setDataSelection(newSelection);
+      }
+    }
+  };
   const getUserDeatils = () => {
     setshowTableLoader(true);
 
@@ -65,11 +157,13 @@ const UsersPage = () => {
           setRecords(res.result);
           setTotalPages(Math.ceil(res.total / limitOfUser));
           setshowTableLoader(false);
+          setLoading(false);
         } else {
           setRecords([]);
         }
       })
       .finally(() => {
+        setLoading(false);
         setshowTableLoader(false);
       });
   };
@@ -133,11 +227,35 @@ const UsersPage = () => {
             </select>
           </div>
         </div>
+        {showDeleteAllButton() && (
+          <div className="flex justify-end">
+            <button
+              disabled={loading ? true : false}
+              onClick={handleDeleteAll}
+              className=" flex gap-2 mb-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 disabled:cursor-not-allowed"
+            >
+              Delete All
+            </button>
+          </div>
+        )}
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
+                <th>
+                  {!loading && records.length !== 0 ? (
+                    <span className="px-6 py-3">
+                      <input
+                        type="checkbox"
+                        checked={selectAll}
+                        onChange={onSelectAll}
+                      />
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </th>
                 <th scope="col" className="px-6 py-3">
                   S.N0
                 </th>
@@ -161,6 +279,9 @@ const UsersPage = () => {
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Status
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Subscription
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Action
@@ -193,6 +314,15 @@ const UsersPage = () => {
                   return (
                     <>
                       <tr className=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td className="px-6 py-4">
+                          <input
+                            type="checkbox"
+                            checked={isChecked(item._id)}
+                            onChange={(e) =>
+                              onSelecting(e.target.checked, item._id)
+                            }
+                          />
+                        </td>
                         <th
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -220,15 +350,49 @@ const UsersPage = () => {
                                 checked={item.status}
                                 value=""
                                 className="sr-only peer"
-                                onChange={(e) =>
-                                  handleChange(item._id, e.target.checked)
-                                }
+                                onChange={(e) => {
+                                  handleChange(item._id, e.target.checked);
+                                  if (loadingId === "") {
+                                    e.target.checked = false;
+                                  }
+                                }}
                               />
                               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                               <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
                                 {item?.status === true ? "Active" : "InActive"}
                               </span>
                             </label>
+                          )}
+                        </td>
+                        <td className="px-6 py-4">
+                          {subscriptionId === item._id ? (
+                            refreshIconRotating
+                          ) : (
+                            <div className="flex items-center justify-center">
+                              <input
+                                type="checkbox"
+                                checked={checkingSubscription(
+                                  item.userPackageExpirationDate
+                                )}
+                                onChange={(e) => {
+                                  onSubscriptionCheck(
+                                    item._id,
+                                    e.target.checked
+                                  );
+                                  // if (subscriptionId === "") {
+                                  //   e.target.checked = false;
+                                  // }
+                                }}
+                              />
+                              <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                {new Date(
+                                  item.userPackageExpirationDate
+                                ).getTime() < Date.now() ||
+                                item.userPackageExpirationDate === undefined
+                                  ? "Off"
+                                  : "On"}
+                              </span>
+                            </div>
                           )}
                         </td>
                         <td className="flex gap-2 mt-2  items-center ">

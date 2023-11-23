@@ -27,18 +27,32 @@ export const PUT = async (
   try {
     const { userId } = params;
     const request = await req.json();
-    const { status } = request;
-
+    const status = request?.status;
+    const userPackageExpirationDate = request?.userPackageExpirationDate;
     await startDB();
-    const user = await User.findOneAndUpdate(
-      { _id: userId },
-      { status: status },
-      { new: true }
-    );
-    return NextResponse.json({
-      success: true,
-      data: user,
-    });
+    if (status !== undefined) {
+      const user = await User.findOneAndUpdate(
+        { _id: userId },
+        { status: status },
+        { new: true }
+      );
+      return NextResponse.json({
+        success: true,
+        result: user,
+      });
+    }
+
+    if (userPackageExpirationDate !== undefined) {
+      const user = await User.findOneAndUpdate(
+        { _id: userId },
+        { userPackageExpirationDate: userPackageExpirationDate },
+        { new: true }
+      );
+      return NextResponse.json({
+        success: true,
+        result: user,
+      });
+    }
   } catch (err) {
     return NextResponse.json({
       success: false,
