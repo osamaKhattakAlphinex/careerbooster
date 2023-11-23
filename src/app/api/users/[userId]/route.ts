@@ -45,3 +45,32 @@ export const PUT = async (
     });
   }
 };
+
+export const DELETE = async (
+  req: any,
+  { params }: { params: { userId: string } }
+) => {
+  const session = getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
+  try {
+    const { userId } = params;
+
+    await startDB();
+    const deletedUser = await User.deleteOne({ _id: userId });
+    return NextResponse.json({
+      success: true,
+      data: deletedUser,
+    });
+  } catch (err) {
+    return NextResponse.json({
+      success: false,
+      result: "User not found",
+    });
+  }
+};

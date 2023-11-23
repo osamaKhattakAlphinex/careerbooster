@@ -18,6 +18,26 @@ const UsersPage = () => {
   const [pageStart, setPageStart] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
 
+  const handleDelete = async (id: string) => {
+    const c = confirm("Are you sure you want to delete this Record?");
+    if (c) {
+      try {
+        let result = await fetch("/api/users/" + id, {
+          method: "DELETE",
+        });
+        const res = await result.json();
+        if (res.success) {
+          setRecords([]);
+          return getUserDeatils();
+        } else {
+          return alert("User Not Found");
+        }
+      } catch (error) {
+        console.log("error ===> ", error);
+      }
+    }
+  };
+
   const handleChange = async (id: string, status: boolean) => {
     if (window.confirm("Are you sure to Change the status")) {
       setLoadingId(id);
@@ -142,6 +162,9 @@ const UsersPage = () => {
                 <th scope="col" className="px-6 py-3">
                   Status
                 </th>
+                <th scope="col" className="px-6 py-3">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -207,6 +230,14 @@ const UsersPage = () => {
                               </span>
                             </label>
                           )}
+                        </td>
+                        <td className="flex gap-2 mt-2  items-center ">
+                          <button
+                            className="px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 no-underline"
+                            onClick={() => handleDelete(item._id)}
+                          >
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     </>
