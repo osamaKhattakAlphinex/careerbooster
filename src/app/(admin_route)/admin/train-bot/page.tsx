@@ -137,8 +137,6 @@ const TrainRegistrationBotAdminPage = () => {
       setShowRecordsType("register.wizard.basicInfo");
     }
   }, [dataType]);
-<<<<<<< HEAD
-=======
 
   useEffect(() => {
     fetchRecords();
@@ -147,7 +145,6 @@ const TrainRegistrationBotAdminPage = () => {
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
   }, [limitOfRecords, currentPage]);
 
->>>>>>> 9b35823c368e65c41ca9d3fe7c98515f720f794d
   useEffect(() => {
     const existingNumberOfRecords = searchParams?.get("r");
     const existingPage = searchParams?.get("p");
