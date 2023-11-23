@@ -8,9 +8,11 @@ import {
 import Image from "next/image";
 import FAQList from "../Homepage/Faqs";
 import Reviews from "../Homepage/Reviews";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import FileUploadHandler from "@/components/FileUploadHandler";
+import ReCAPTCHA from "react-google-recaptcha";
+import { verifyCaptcha } from "@/ServerActions";
 
 const saveToLocalStorage = (text: any, fileName: any) => {
   localStorage.setItem("linkedin-content", text);
@@ -19,6 +21,8 @@ const saveToLocalStorage = (text: any, fileName: any) => {
 
 const LinkedInToolMain = () => {
   const router = useRouter();
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [isVerified, setIsverified] = useState<boolean>(false);
   const [file, setFile] = useState<any>(null); //main page
   const [fileName, setFileName] = useState<any>(null);
   const [fileError, setFileError] = useState<string>("");
@@ -37,14 +41,24 @@ const LinkedInToolMain = () => {
       setFileError("only PDF file is allowed");
     }
   }, [file]);
-
+  async function handleCaptchaSubmission(token: string | null) {
+    // Server function to verify captcha
+    await verifyCaptcha(token)
+      .then(() => setIsverified(true))
+      .catch(() => setIsverified(false));
+  }
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const fileInput = e.target;
+    if (isVerified) {
+      console.log("inside");
+      const fileInput = e.target;
 
-    if (fileInput && fileInput.files && fileInput.files.length > 0) {
-      setFile(fileInput.files[0]);
-      setFileName(fileInput.files[0].name);
+      if (fileInput && fileInput.files && fileInput.files.length > 0) {
+        setFile(fileInput.files[0]);
+        setFileName(fileInput.files[0].name);
+      }
+    } else {
+      alert("Please fill recaptcha!");
     }
   };
   useEffect(() => {
@@ -58,6 +72,7 @@ const LinkedInToolMain = () => {
   useEffect(() => {
     if (uploadComplete && fileUploading && text !== "") {
       saveToLocalStorage(text, fileName);
+
       router.push("/linkedin/result");
     }
   }, [fileUploading, uploadComplete, text]);
@@ -109,6 +124,14 @@ const LinkedInToolMain = () => {
                 </div>
               )}
             </label>
+          </div>
+          <div className="flex justify-center mt-4">
+            <ReCAPTCHA
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+              ref={recaptchaRef}
+              onChange={handleCaptchaSubmission}
+              theme="dark"
+            />
           </div>
         </div>
         {file !== null && (
