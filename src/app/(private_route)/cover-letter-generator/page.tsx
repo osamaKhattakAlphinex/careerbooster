@@ -5,7 +5,7 @@ export default function CoverLetterPage() {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-[244px] px-[15px] my-[72px] ">
+        <div className="ml-[244px] px-[15px] mb-[72px] ">
           <AiGeneratedCoverLetters />
           <MainCoverLetterTool />
         </div>

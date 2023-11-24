@@ -8,7 +8,7 @@ export default function AiGeneratedCoverLetters() {
   // const [showInstruction, setShowInstruction] = useState<boolean>(false);
   return (
     <>
-      <div className="text-white bg-[#18181B] rounded-[20px]   my-7 px-[30px] py-[41px]">
+      <div className="text-white bg-[#18181B] rounded-[20px]   mb-7 px-[30px] py-[41px]">
         <div className="flex justify-between items-center ">
           <h1 className="uppercase text-[14px] font-semibold">
             Your AI Generated Cover Letters
