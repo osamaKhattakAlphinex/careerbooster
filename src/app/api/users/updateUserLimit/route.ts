@@ -58,6 +58,10 @@ export async function POST(req: any) {
             case "keywords_generation":
               user.userPackageUsed.keywords_generation += 1;
               break;
+            case "cover_letter_generation":
+              user.userPackageUsed.cover_letter_generation += 1;
+            case "pdf_files_upload":
+              user.userPackageUsed.pdf_files_upload += 1;
             // Add more cases for other types
           }
         }

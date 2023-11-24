@@ -48,7 +48,6 @@ export async function POST(req: any) {
     if (type === "file") {
       const user = await User.findOne({ email: email }, { files: 1 });
       if (user) {
-        console.log("user", user);
         const getFile = user.files.find(
           (userFile: any) => userFile.fileName === file
         );

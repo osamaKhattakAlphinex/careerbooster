@@ -129,17 +129,14 @@ const LinkedInToolMain = () => {
               )}
             </label>
           </div>
-          <div className="flex justify-center mt-4">
-            <ReCAPTCHA
-              sitekey={
-                process.env.NEXT_PUBLIC_RECAPTCHA_INVISIBLE_SITE_KEY || ""
-              }
-              ref={recaptchaRef}
-              size="invisible"
-              onChange={handleCaptchaSubmission}
-              theme="dark"
-            />
-          </div>
+
+          <ReCAPTCHA
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_INVISIBLE_SITE_KEY || ""}
+            ref={recaptchaRef}
+            size="invisible"
+            onChange={handleCaptchaSubmission}
+            theme="dark"
+          />
         </div>
         {file !== null && (
           <FileUploadHandler
