@@ -53,7 +53,7 @@ const CoverLetterWriter = () => {
     }
   }, [isEditing]);
 
-  // Function to save the edited content and exit editing mode
+  /// Function to save the edited content and exit editing mode
   const handleSave = async () => {
     let _coverLetterText = "";
 
