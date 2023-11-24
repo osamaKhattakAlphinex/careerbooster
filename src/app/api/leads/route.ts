@@ -24,7 +24,7 @@ export const GET = async (req: any) => {
 
     // Fetch the data as usual
     const filteredRecs = await LinkedinToolEntrie.find({})
-      .sort({ createdAt: 1 })
+      .sort({ createdAt: -1 })
       .skip(startIndex)
       .limit(endIndex - startIndex);
 

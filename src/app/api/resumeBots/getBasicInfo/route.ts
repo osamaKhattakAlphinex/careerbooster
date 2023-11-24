@@ -55,7 +55,7 @@ export async function POST(req: any) {
         shortName, jobTitle, linkedIn
 
         the shortName means two letters from Name of the person.
-        the jobTitle means a one line slogan for this person.
+        for the jobTitle write a one line catchy slogan that represents this person expertise in his/her Industry.
         the linkedIn means the LinkedInUrl of the person.
 
         The output must be in this format. (following is an example)
