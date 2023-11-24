@@ -1,11 +1,17 @@
 "use client";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
-import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
+import {
+  IconCalendarclock,
+  IconUsersicon,
+  leftArrowIcon,
+  refreshIconRotating,
+} from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card";
 
 const UsersPage = () => {
   const router = useRouter();
@@ -22,6 +28,7 @@ const UsersPage = () => {
   const [subscriptionId, setSubscriptionId] = useState("");
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [dataSelection, setDataSelection] = useState<string[]>([]);
+  const [counts, setCounts] = useState<any>(null);
 
   const handleDelete = async (id: string) => {
     const c = confirm("Are you sure you want to delete this Record?");
@@ -170,8 +177,17 @@ const UsersPage = () => {
       });
   };
 
+  const getUsersCount = async () => {
+    axios.get("/api/users/getCount").then((res) => {
+      if (res.data.success) {
+        setCounts(res.data);
+      }
+    });
+  };
+
   useEffect(() => {
     getUserDeatils();
+    getUsersCount();
   }, []);
 
   const selectUsersLimit = (e: any) => {
@@ -231,6 +247,74 @@ const UsersPage = () => {
             </select>
           </div>
         </div>
+
+        <div
+          key="1"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6"
+        >
+          <Card>
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium mb-0">
+                  Total Users
+                </CardTitle>
+                <IconUsersicon className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+              </div>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <div className="text-3xl font-bold">
+                {counts ? counts.total : 0}
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-1">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium mb-0">
+                  Registered This Week
+                </CardTitle>
+                <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+              </div>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <div className="text-3xl font-bold">
+                {counts ? counts.thisWeek : 0}
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium mb-0">
+                  Registered This Month
+                </CardTitle>
+                <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+              </div>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <div className="text-3xl font-bold">
+                {counts ? counts.thisMonth : 0}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-0">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium mb-0">
+                  Registered This Year
+                </CardTitle>
+                <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+              </div>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <div className="text-3xl font-bold">
+                {counts ? counts.thisYear : 0}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         {showDeleteAllButton() && (
           <div className="flex justify-end">
             <button
