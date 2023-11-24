@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
   const routeNamesToDisplayNames: Record<string, string> = {
     "/dashboard": "Dashboard",
     "/resume-builder": "Generate New Resumes",
-    "/cover-letter-generator": "Generate Cover Letters",
+    "/cover-letter-generator": "Generate Cover Letter",
     // Add more routes as needed
   };
 
@@ -22,9 +22,9 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     routeNamesToDisplayNames[pathname] || "Unknown";
 
   return (
-    <nav className="fixed py-[14px] px-4 left-0 sm:left-60 right-0 z-[1000] bg-zinc-900">
+    <nav className="py-[14px] px-4 ml-[244px] ">
       <div className="w-full rounded-lg flex justify-between sm:justify-between items-center">
-        <h1 className="rounded-[14px] text-[14px] text-neutral-400 font-bold uppercase">
+        <h1 className="rounded-[14px] text-[14px] text-[#959595] font-bold uppercase">
           {currentRouteDisplayName}
         </h1>
         <div className="flex">
