@@ -12,7 +12,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import FileUploadHandler from "@/components/FileUploadHandler";
 import ReCAPTCHA from "react-google-recaptcha";
-import { verifyCaptcha } from "@/ServerActions";
+import { verifyInvisibleCaptcha } from "@/ServerActions";
 
 const saveToLocalStorage = (text: any, fileName: any) => {
   localStorage.setItem("linkedin-content", text);
@@ -43,22 +43,22 @@ const LinkedInToolMain = () => {
   }, [file]);
   async function handleCaptchaSubmission(token: string | null) {
     // Server function to verify captcha
-    await verifyCaptcha(token)
-      .then(() => setIsverified(true))
+    await verifyInvisibleCaptcha(token)
+      .then(() => {
+        setIsverified(true);
+      })
       .catch(() => setIsverified(false));
   }
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange: any = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (isVerified) {
-      console.log("inside");
-      const fileInput = e.target;
+    if (recaptchaRef.current) {
+      recaptchaRef.current.execute();
 
+      const fileInput = e.target;
       if (fileInput && fileInput.files && fileInput.files.length > 0) {
         setFile(fileInput.files[0]);
         setFileName(fileInput.files[0].name);
       }
-    } else {
-      alert("Please fill recaptcha!");
     }
   };
   useEffect(() => {
@@ -72,11 +72,15 @@ const LinkedInToolMain = () => {
   useEffect(() => {
     if (uploadComplete && fileUploading && text !== "") {
       saveToLocalStorage(text, fileName);
-
-      router.push("/linkedin/result");
     }
   }, [fileUploading, uploadComplete, text]);
-
+  useEffect(() => {
+    if (isVerified) {
+      router.push("/linkedin/result");
+    } else {
+      console.log("Captha failed");
+    }
+  }, [isVerified]);
   return (
     <div className="w-full ">
       {/* Hero Section */}
@@ -127,8 +131,11 @@ const LinkedInToolMain = () => {
           </div>
           <div className="flex justify-center mt-4">
             <ReCAPTCHA
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+              sitekey={
+                process.env.NEXT_PUBLIC_RECAPTCHA_INVISIBLE_SITE_KEY || ""
+              }
               ref={recaptchaRef}
+              size="invisible"
               onChange={handleCaptchaSubmission}
               theme="dark"
             />
