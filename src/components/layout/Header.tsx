@@ -10,7 +10,7 @@ import useTheme from "@/lib/useTheme";
 import Image from "next/image";
 // import useTheme from "@/lib/useTheme";
 import { usePathname } from "next/navigation";
-
+const AllowedRoutes = ['/dashboard', '/resume-builder'];
 const Header = () => {
   // const [theme] = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -84,7 +84,10 @@ const Header = () => {
   // if (pathname === "/login" || pathname === "/register") return null;
 
   const pathname = usePathname();
-  if (pathname?.startsWith("/dashboard")) return <></>;
+  // Check if the current pathname is in the allowed routes
+  if (AllowedRoutes.some(route => pathname?.startsWith(route))) {
+    return <></>; // Render nothing if it's one of the allowed routes
+  };
   return (
     <nav
       // className={`navbar navbar-expand-lg fixed-top ${

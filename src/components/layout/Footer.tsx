@@ -2,13 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+const AllowedRoutes = ['/dashboard', '/resume-builder'];
 const Footer = () => {
   const pathname = usePathname();
   if (
     pathname === "/login" ||
     pathname === "/register" ||
-    pathname?.startsWith("/dashboard")
+    AllowedRoutes.some(route => pathname?.startsWith(route))
   )
     return <></>;
 

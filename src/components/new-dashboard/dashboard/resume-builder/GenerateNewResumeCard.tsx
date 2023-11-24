@@ -1,12 +1,30 @@
 "use client";
-
 import Image from "next/image";
+import { memo, useMemo, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useDispatch, useSelector } from "react-redux";
+// import ReactToPrint from "react-to-print";
+// import DownloadDocx from "../resume-templates/template-1/DownloadDocx";
+import { setState } from "@/store/resumeSlice";
+import Button from "@/components/utilities/form-elements/Button";
+// import NewButton from "@/components/utilities/form-elements/Button";
 import Link from "next/link";
-import React, { useState } from "react";
 
-const GenerateResume = () => {
+interface Props {
+  handleGenerate: () => Promise<void>;
+  availablePercentage: number;
+}
+const GenerateResume = ({
+  handleGenerate,
+}: // availablePercentage,
+Props) => {
   const [showInstruction, setShowInstruction] = useState<boolean>(false);
-
+  // Redux
+  const { data: session } = useSession();
+  const dispatch = useDispatch();
+  const state = useSelector((state: any) => state.resume.state);
+  const userData = useSelector((state: any) => state.userData);
+  const memoizedState = useMemo(() => state, [state]);
   return (
     <div className=" bg-[#17151B] rounded-[20px] py-9 px-[30px] flex flex-col gap-7 ">
       {/* header */}
@@ -74,10 +92,10 @@ const GenerateResume = () => {
       )}
 
       {/* form */}
-      <form className="flex flex-col gap-5 justify-between items-start">
+      <div className="flex flex-col gap-5 justify-between items-start">
         <div className="w-full flex flex-col gap-[30px]">
           <label
-            htmlFor="job-title"
+            htmlFor="targetedJobPosition"
             className=" font-bold text-white flex flex-row gap-[10px]"
           >
             <Image
@@ -89,15 +107,24 @@ const GenerateResume = () => {
             Targeted Job Position
           </label>
           <input
-            type="text"
-            id="job-title"
-            name="jobTitle"
+            type="targetedJobPosition"
+            name="targetedJobPosition"
+            id="targetedJobPosition"
+            value={memoizedState?.jobPosition}
+            onChange={(e) =>
+              dispatch(setState({ name: "jobPosition", value: e.target.value }))
+            }
             placeholder="e.g. Sales Associates"
             className="w-full py-4 px-[26px] rounded-full text-sm text-[#959595] bg-transparent border-[#312E37] border"
           />
         </div>
         <button
-          type="submit"
+          disabled={
+            memoizedState.jobPosition === "" ||
+            memoizedState.resumeLoading ||
+            !session?.user?.email
+          }
+          onClick={handleGenerate}
           className="bg-gradient-to-r from-[#B324D7]  to-[#615DFF] flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full"
         >
           <Image
@@ -106,11 +133,15 @@ const GenerateResume = () => {
             height={18}
             width={18}
           />
-          <span className="text-white text-sm">Generate New Resume</span>
+          <span className="text-white text-sm">
+            {memoizedState.resumeLoading
+              ? "Please wait..."
+              : "Generate New Resume"}
+          </span>
         </button>
-      </form>
+      </div>
     </div>
   );
 };
 
-export default GenerateResume;
+export default memo(GenerateResume);

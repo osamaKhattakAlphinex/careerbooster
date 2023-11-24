@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/Button";
 import { useState } from "react";
-import AiToolsCard from "./AiToolsCard";
+import RecentResumeCard from "./resume-builder/RecentResumeCard";
 
 const tabOptions = [
   { name: "Resumes", value: "resumemaker" },
@@ -26,7 +26,7 @@ const CareerBoostingAiToolsCard = () => {
           />
         ))}
       </div>
-      {activeTab === "resumemaker" && <AiToolsCard />}
+      {activeTab === "resumemaker" && <RecentResumeCard source="dashboard" />}
       {activeTab === "career" && (
         <h1 className="text-gray-100">
           CareerBidsConsulting BidsConsulting BidsConsulting

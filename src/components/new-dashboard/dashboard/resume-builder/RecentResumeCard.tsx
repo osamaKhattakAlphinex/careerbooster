@@ -1,10 +1,19 @@
 import { searchIcon } from "@/helpers/iconsProvider";
-import ResumeCard from "./ResumeCard";
-import GenerateResume from "../generateResume/generateResume";
-const AiToolsCard = ({}) => {
+import SingleRecentResumeCard from "./SingleRecentResumeCard";
+import { useSelector } from "react-redux";
+const RecentResumeCard = ({
+  source = "",
+  componentRef,
+}: {
+  source?: string;
+  componentRef?: any;
+}) => {
+  // redux
+  const userData = useSelector((state: any) => state.userData);
+  const { resumes } = userData;
   return (
     <>
-      <div className="text-white bg-[#17151B] rounded-2xl my-7 py-5">
+      <div className="text-white bg-[#17151B] rounded-2xl my-5 py-5">
         <div className="flex justify-between items-center px-5 py-[10px] ">
           <h1 className="uppercase font-semibold text-[13px]">Your Resumes</h1>
           <div className="relative w-[213px]">
@@ -18,10 +27,17 @@ const AiToolsCard = ({}) => {
             </div>
           </div>
         </div>
+        {!resumes && <p>Loading Resumes...</p>}
         <div className="flex mx-4 gap-6">
-          {[1, 2, 3].map((n: number) => (
-            <ResumeCard key={n} />
-          ))}
+          {resumes &&
+            resumes.map((resume: any) => (
+              <SingleRecentResumeCard
+                key={resume.id}
+                resume={resume}
+                source={source}
+                componentRef={componentRef}
+              />
+            ))}
         </div>
       </div>
       {/* <GenerateResume /> */}
@@ -29,4 +45,4 @@ const AiToolsCard = ({}) => {
   );
 };
 
-export default AiToolsCard;
+export default RecentResumeCard;

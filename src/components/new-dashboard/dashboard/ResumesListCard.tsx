@@ -1,4 +1,4 @@
-import ResumeCard from "@/components/new-dashboard/dashboard/ResumeCard";
+import ResumeCard from "@/components/new-dashboard/dashboard/resume-builder/SingleRecentResumeCard";
 import { searchIcon } from "@/helpers/iconsProvider";
 
 const ResumesListCard = () => {
