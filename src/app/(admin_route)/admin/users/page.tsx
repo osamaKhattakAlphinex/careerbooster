@@ -1,4 +1,5 @@
 "use client";
+import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";
@@ -21,6 +22,7 @@ const UsersPage = () => {
   const [subscriptionId, setSubscriptionId] = useState("");
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [dataSelection, setDataSelection] = useState<string[]>([]);
+
   const handleDelete = async (id: string) => {
     const c = confirm("Are you sure you want to delete this Record?");
     if (c) {
@@ -256,26 +258,29 @@ const UsersPage = () => {
                     ""
                   )}
                 </th>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   S.N0
-                </th>
+                </th> */}
                 <th scope="col" className="px-6 py-3">
                   User Name
                 </th>
                 <th scope="col" className="px-6 py-3">
                   User Email
                 </th>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   User Phone
-                </th>
+                </th> */}
                 <th scope="col" className="px-6 py-3">
                   User Country
                 </th>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   User City State
-                </th>
+                </th> */}
                 <th scope="col" className="px-6 py-3">
                   User Role
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Creation Date
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Status
@@ -293,7 +298,7 @@ const UsersPage = () => {
                 <tr>
                   <td
                     className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
-                    colSpan={10}
+                    colSpan={14}
                   >
                     Loading ...
                   </td>
@@ -303,7 +308,7 @@ const UsersPage = () => {
                 <tr>
                   <td
                     className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
-                    colSpan={10}
+                    colSpan={14}
                   >
                     No records found
                   </td>
@@ -323,23 +328,26 @@ const UsersPage = () => {
                             }
                           />
                         </td>
-                        <th
+                        {/* <th
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                         >
                           {pageStart + index + 1}
-                        </th>
+                        </th> */}
                         <td className="px-6 py-4">
                           {item.firstName + " " + item.lastName}
                         </td>
                         <td className="px-6 py-4"> {item.email} </td>
-                        <td className="px-6 py-4">{item?.phone}</td>
+                        {/* <td className="px-6 py-4">{item?.phone}</td> */}
                         <td className="px-6 py-4">{item.contact?.country}</td>
-                        <td className="px-6 py-4">
+                        {/* <td className="px-6 py-4">
                           {" "}
                           {item.contact?.cityState}{" "}
-                        </td>
+                        </td> */}
                         <td className="px-6 py-4">{item.role}</td>
+                        <td className="px-6 py-4">
+                          {getFormattedDate(item.createdAt)}
+                        </td>
                         <td className="px-6 py-4">
                           {loadingId === item._id ? (
                             refreshIconRotating
