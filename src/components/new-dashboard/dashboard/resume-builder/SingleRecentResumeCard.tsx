@@ -66,7 +66,7 @@ const SingleRecentResumeCard = ({
     }
   };
   return (
-    <div className="w-[347px] h-[160px] bg-[#222027] rounded-xl my-[18px] py-[18px]">
+    <div className="w-[347px] h-[160px] bg-[#222027] rounded-xl my-[3px] py-[18px]">
       <div className="">
         <div className="mx-3 border-gray-600 leading-6">
           <h2 className="text-[15px] capitalize text-white font-medium  ">

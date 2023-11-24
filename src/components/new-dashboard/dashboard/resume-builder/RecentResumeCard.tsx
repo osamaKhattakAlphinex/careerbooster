@@ -28,7 +28,7 @@ const RecentResumeCard = ({
           </div>
         </div>
         {!resumes && <p>Loading Resumes...</p>}
-        <div className="flex mx-4 gap-6">
+        <div className="flex flex-wrap mx-2 gap-3">
           {resumes &&
             resumes.map((resume: any) => (
               <SingleRecentResumeCard
