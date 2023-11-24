@@ -183,20 +183,27 @@ const TrainRegistrationBotAdminPage = () => {
   };
 
   const handleDeleteAll = async () => {
-    setLoading(true);
-
-    axios
-      .post("/api/trainBot/bulkDelete", { dataSelection })
-      .then((res: any) => {
-        if (res.data.success) {
-          setDataSelection([]);
-          fetchRecords();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {});
+    const c = confirm("Are you sure you want to delete these Records?");
+    if (c) {
+      setLoading(true);
+      try {
+        // console.log("all data deleted");
+        axios
+          .post("/api/trainBot/bulkDelete", { dataSelection })
+          .then((res: any) => {
+            if (res.data.success) {
+              setDataSelection([]);
+              fetchRecords();
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {});
+      } catch (error) {
+        console.log("error ===> ", error);
+      }
+    }
   };
 
   const isChecked = (id: string) => {
