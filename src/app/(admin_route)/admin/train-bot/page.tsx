@@ -9,6 +9,7 @@ import axios from "axios";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { number } from "yup";
 
 const activeCSS =
   "inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500";
@@ -32,31 +33,32 @@ const TrainRegistrationBotAdminPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [downloading, setDownloading] = useState<boolean>(false);
 
-  const fetchRecords = async () => {
+  const fetchRecords = async (limit = limitOfRecords) => {
     setLoading(true);
-    if (!loading) {
-      axios
-        .get(`/api/trainBot?limit=${limitOfRecords}&page=${currentPage}`, {
-          params: {
-            status: activeTab,
-            type: showRecordsType,
-            dataType: dataType,
-          },
-        })
-        .then((res: any) => {
-          if (res.data.success) {
-            const result = res.data;
-            setTotalPages(Number(Math.ceil(result.totalRecs / limitOfRecords)));
-            setRecords(result.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
+
+    // if(!loading){
+    axios
+      .get(`/api/trainBot?limit=${limitOfRecords}&page=${currentPage}`, {
+        params: {
+          status: activeTab,
+          type: showRecordsType,
+          dataType: dataType,
+        },
+      })
+      .then((res: any) => {
+        if (res.data.success) {
+          const result = res.data;
+          setTotalPages(Number(Math.ceil(result.totalRecs / limitOfRecords)));
+          setRecords(result.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+    // }
   };
 
   const handleDownload = async () => {
@@ -146,13 +148,27 @@ const TrainRegistrationBotAdminPage = () => {
   useEffect(() => {
     const existingNumberOfRecords = searchParams?.get("r");
     const existingPage = searchParams?.get("p");
+
     if (existingNumberOfRecords) {
-      setLimitOfRecords(parseInt(existingNumberOfRecords));
+      setLimitOfRecords(parseInt(existingNumberOfRecords, 10));
     }
     if (existingPage) {
-      setCurrentPage(parseInt(existingPage));
+      setCurrentPage(parseInt(existingPage, 10));
     }
   }, [searchParams?.get("r"), searchParams?.get("p")]);
+
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * limitOfRecords;
+    setStartingPage(startIndex);
+    const endIndex = startIndex + limitOfRecords;
+
+    setLoading(true);
+    setRecords([]); // Clear existing records before fetching new ones
+
+    console.log(limitOfRecords);
+
+    router.replace(`${pathname}?r=${limitOfRecords}&p=${currentPage}`);
+  }, [limitOfRecords, currentPage]);
 
   return (
     <div className="pt-30">
