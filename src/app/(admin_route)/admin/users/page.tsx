@@ -1,10 +1,17 @@
 "use client";
-import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
+import { getFormattedDate } from "@/helpers/getFormattedDateTime";
+import {
+  IconCalendarclock,
+  IconUsersicon,
+  leftArrowIcon,
+  refreshIconRotating,
+} from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card";
 
 const UsersPage = () => {
   const router = useRouter();
@@ -21,6 +28,8 @@ const UsersPage = () => {
   const [subscriptionId, setSubscriptionId] = useState("");
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [dataSelection, setDataSelection] = useState<string[]>([]);
+  const [counts, setCounts] = useState<any>(null);
+
   const handleDelete = async (id: string) => {
     const c = confirm("Are you sure you want to delete this Record?");
     if (c) {
@@ -168,8 +177,17 @@ const UsersPage = () => {
       });
   };
 
+  const getUsersCount = async () => {
+    axios.get("/api/users/getCount").then((res) => {
+      if (res.data.success) {
+        setCounts(res.data);
+      }
+    });
+  };
+
   useEffect(() => {
     getUserDeatils();
+    getUsersCount();
   }, []);
 
   const selectUsersLimit = (e: any) => {
@@ -223,10 +241,80 @@ const UsersPage = () => {
                 <option value={20}>20</option>
                 <option value={30}>30</option>
                 <option value={40}>40</option>
+                <option value={100}>100</option>
+                <option value={500}>500</option>
               </>
             </select>
           </div>
         </div>
+
+        <div
+          key="1"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6"
+        >
+          <Card>
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium mb-0">
+                  Total Users
+                </CardTitle>
+                <IconUsersicon className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+              </div>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <div className="text-3xl font-bold">
+                {counts ? counts.total : 0}
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-1">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium mb-0">
+                  Registered This Week
+                </CardTitle>
+                <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+              </div>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <div className="text-3xl font-bold">
+                {counts ? counts.thisWeek : 0}
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium mb-0">
+                  Registered This Month
+                </CardTitle>
+                <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+              </div>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <div className="text-3xl font-bold">
+                {counts ? counts.thisMonth : 0}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-0">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium mb-0">
+                  Registered This Year
+                </CardTitle>
+                <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+              </div>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <div className="text-3xl font-bold">
+                {counts ? counts.thisYear : 0}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         {showDeleteAllButton() && (
           <div className="flex justify-end">
             <button
@@ -256,26 +344,29 @@ const UsersPage = () => {
                     ""
                   )}
                 </th>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   S.N0
-                </th>
+                </th> */}
                 <th scope="col" className="px-6 py-3">
                   User Name
                 </th>
                 <th scope="col" className="px-6 py-3">
                   User Email
                 </th>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   User Phone
-                </th>
+                </th> */}
                 <th scope="col" className="px-6 py-3">
                   User Country
                 </th>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   User City State
-                </th>
+                </th> */}
                 <th scope="col" className="px-6 py-3">
                   User Role
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Creation Date
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Status
@@ -293,7 +384,7 @@ const UsersPage = () => {
                 <tr>
                   <td
                     className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
-                    colSpan={10}
+                    colSpan={14}
                   >
                     Loading ...
                   </td>
@@ -303,7 +394,7 @@ const UsersPage = () => {
                 <tr>
                   <td
                     className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
-                    colSpan={10}
+                    colSpan={14}
                   >
                     No records found
                   </td>
@@ -323,23 +414,26 @@ const UsersPage = () => {
                             }
                           />
                         </td>
-                        <th
+                        {/* <th
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                         >
                           {pageStart + index + 1}
-                        </th>
+                        </th> */}
                         <td className="px-6 py-4">
                           {item.firstName + " " + item.lastName}
                         </td>
                         <td className="px-6 py-4"> {item.email} </td>
-                        <td className="px-6 py-4">{item?.phone}</td>
+                        {/* <td className="px-6 py-4">{item?.phone}</td> */}
                         <td className="px-6 py-4">{item.contact?.country}</td>
-                        <td className="px-6 py-4">
+                        {/* <td className="px-6 py-4">
                           {" "}
                           {item.contact?.cityState}{" "}
-                        </td>
+                        </td> */}
                         <td className="px-6 py-4">{item.role}</td>
+                        <td className="px-6 py-4">
+                          {getFormattedDate(item.createdAt)}
+                        </td>
                         <td className="px-6 py-4">
                           {loadingId === item._id ? (
                             refreshIconRotating

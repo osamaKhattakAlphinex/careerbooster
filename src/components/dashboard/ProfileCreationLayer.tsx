@@ -644,7 +644,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       return <div className="pt-30">{children}</div>;
     }
   } else {
-    // if the user data is loaded and profile wizard is NOT completed show loader
+    /// if the user data is loaded and profile wizard is NOT completed show loader
     return (
       <div className="flex flex-col items-center justify-center h-screen pt-30 !pb-42">
         <h2 className="text-3xl font-bold text-center">
