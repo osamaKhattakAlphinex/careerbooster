@@ -21,7 +21,7 @@ const ToolsCard = ({
   isActive: boolean;
 }) => {
   return (
-    <div className="w-[320px] mr-6 h-auto flex mb-8">
+    <div className="w-[310px] h-auto flex mb-8">
       <div className="mr-4">
         <div
           className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-[60px] h-[60px] `}

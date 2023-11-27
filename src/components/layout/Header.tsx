@@ -10,7 +10,7 @@ import useTheme from "@/lib/useTheme";
 import Image from "next/image";
 // import useTheme from "@/lib/useTheme";
 import { usePathname } from "next/navigation";
-const AllowedRoutes = ['/dashboard', '/resume-builder'];
+const AllowedRoutes = ["/dashboard", "/resume-builder"];
 const Header = () => {
   // const [theme] = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -77,6 +77,7 @@ const Header = () => {
     "/dashboard",
     "/cover-letter-generator",
     "/resume-builder",
+    "/linkedin-generator",
   ];
 
   // when page (session) loads, fetch user data if not exists

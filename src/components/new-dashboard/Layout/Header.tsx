@@ -15,6 +15,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     "/dashboard": "Dashboard",
     "/resume-builder": "Generate New Resumes",
     "/cover-letter-generator": "Generate Cover Letter",
+    "/linkedin-generator": "Keyword Optimized Linkedin",
     // Add more routes as needed
   };
 

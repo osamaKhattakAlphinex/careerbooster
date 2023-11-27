@@ -2,13 +2,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-const AllowedRoutes = ['/dashboard', '/resume-builder'];
+const AllowedRoutes = ["/dashboard", "/resume-builder"];
 const Footer = () => {
   const pathname: any = usePathname();
   const pagesArray = [
     "/dashboard",
     "/cover-letter-generator",
     "/resume-builder",
+    "/linkedin-generator",
   ];
   if (
     pathname === "/login" ||
