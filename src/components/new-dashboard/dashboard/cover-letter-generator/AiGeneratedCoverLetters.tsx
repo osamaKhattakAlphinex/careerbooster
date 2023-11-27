@@ -8,7 +8,7 @@ export default function AiGeneratedCoverLetters() {
   // const [showInstruction, setShowInstruction] = useState<boolean>(false);
   return (
     <>
-      <div className="text-white bg-[#18181B] rounded-[20px]   mb-7 px-[30px] py-[41px]">
+      <div className="text-white bg-[#18181B] rounded-[20px]   mb-7 px-[30px] py-[35px]">
         <div className="flex justify-between items-center ">
           <h1 className="uppercase text-[14px] font-semibold">
             Your AI Generated Cover Letters
@@ -24,7 +24,7 @@ export default function AiGeneratedCoverLetters() {
             </div>
           </div>
         </div>
-        <div className="w-[350px] bg-[#222027] rounded-xl mt-[40px] py-[20px] px-[18px] ">
+        <div className="w-[350px] bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[18px] ">
           <div className="">
             <div className="mx-3 border-gray-600 leading-6">
               <h2 className="text-[15px] capitalize text-white font-semibold  ">

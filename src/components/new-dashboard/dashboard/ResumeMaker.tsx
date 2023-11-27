@@ -77,10 +77,14 @@ const cardDetail = [
 const ResumeMaker = () => {
   const [activeTab, setActiveTab] = useState("Career Coach");
   return (
-    <div className="px-5 gap-1 pt-2 mt-6">
-      <div className="flex flex-wrap">
+    <div className="px-5 pt-2 mt-6">
+      <div className="flex gap-1 flex-wrap">
         {cardDetail.map((item, index) => (
-          <ToolsCard key={index} {...item} isActive={activeTab === item.title} />
+          <ToolsCard
+            key={index}
+            {...item}
+            isActive={activeTab === item.title}
+          />
         ))}
       </div>
     </div>
