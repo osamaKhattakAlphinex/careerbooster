@@ -7,6 +7,7 @@ import LimitCard from "../LimitCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "@/store/userDataSlice";
 import FileUploadHandler from "@/components/FileUploadHandler";
+import { makeid } from "@/helpers/makeid";
 
 interface Props {
   selectedFile: string;
@@ -17,10 +18,11 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   // local states
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [file, setFile] = useState<any>(null); // file to upload
+  const [fileName, setFileName] = useState<string>(""); // file to upload
   const [fileError, setFileError] = useState<string>("");
   const [successMsg, setSuccessMsg] = useState<string>("");
   const [loadingFiles, setLoadingFiles] = useState<boolean>(false);
-
+  const [newFileText, setNewFileText] = useState<string>("");
   const [fileList, setFileList] = useState([]);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [percentageCalculated, setPercentageCalculated] =
@@ -63,6 +65,24 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
       .catch((err) => console.log(err));
   };
 
+  const uploadFilesToDb = async (newText: string) => {
+    const userEmail = userData.email;
+    const file = {
+      id: makeid(),
+      fileName: fileName, //fileName,
+      fileContent: newText,
+      uploadedDateTime: new Date(),
+    };
+
+    await fetch("/api/users/updateUser", {
+      method: "POST",
+      body: JSON.stringify({
+        newFile: file,
+        email: userEmail,
+      }),
+    });
+    fetchFiles();
+  };
   // const uploadFileToServer = async () => {
   //   setFileError("");
   //   setFileUploading(true);
@@ -116,10 +136,10 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
 
       // Fetch the list of files from the API route
       fetch(`/api/coverLetterBot/listFiles?email=${data.user.email}`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.files) {
-            setFileList(data.files);
+        .then(async (response: any) => {
+          const res = await response.json();
+          if (res.result) {
+            setFileList(res.result);
           }
         })
         .catch((error) => {
@@ -135,7 +155,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
     const c = confirm("Are you sure you want to delete this File?");
     if (c) {
       try {
-        const response = await fetch(
+        const response: any = await fetch(
           `/api/coverLetterBot/deleteFile?email=${data.user.email}`,
           {
             method: "POST",
@@ -145,13 +165,12 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
             body: JSON.stringify({ fileName: file }),
           }
         );
-
-        if (response.ok) {
-          alert("File has bee deleted");
+        const responseData = await response.json();
+        if (responseData.success) {
+          alert("File has been deleted");
           fetchFiles();
         } else {
-          const data = await response.json();
-          alert("Error deleting file: " + data.error);
+          alert("Error deleting file: " + responseData.error);
         }
       } catch (error) {
         alert("Error deleting file: " + error);
@@ -171,11 +190,17 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
       // if file exists but not PDf
       setFileError("only PDF file is allowed");
     }
-  }, [file, data]);
+  }, [file]);
 
   useEffect(() => {
+    if (newFileText !== "") {
+      uploadFilesToDb(newFileText);
+      fetchFiles();
+    }
+  }, [newFileText]);
+  useEffect(() => {
     fetchFiles();
-  }, [data]);
+  }, []);
 
   return (
     <>
@@ -222,13 +247,20 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
               onChange={(e) => {
                 if (e.target.files) {
                   setFile(e.target.files[0]);
+                  setFileName(e.target.files[0]?.name);
                 }
               }}
             />
           </label>
         )}
 
-        {file !== null && <FileUploadHandler file={file} />}
+        {file !== null && (
+          <FileUploadHandler
+            file={file}
+            text={newFileText}
+            setText={setNewFileText}
+          />
+        )}
         {loadingFiles ? (
           <p>Loading Files...</p>
         ) : (
@@ -246,7 +278,9 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                         selectedFile && selectedFile === file ? true : false
                       }
                       name="selectedFile"
-                      onChange={(e) => setSelectedFile(e.target.value)}
+                      onChange={(e) => {
+                        setSelectedFile(e.target.value);
+                      }}
                     />{" "}
                     <label htmlFor={`file_${i}`}>{file}</label>
                     <button

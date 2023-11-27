@@ -18,7 +18,7 @@ export async function POST(req: any) {
   try {
     const body = await req.json();
     if (body) {
-      const content = body.linkedinContent;
+      const content = body.linkedinContent.substring(0, 8000);
       const trainBotData = body?.trainBotData;
       let prompt;
       await startDB();
@@ -51,27 +51,29 @@ export async function POST(req: any) {
           ],
         });
 
-        const responseForTraining = await openai.chat.completions.create({
-          model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
-          messages: [
-            {
-              role: "user",
-              content: input,
-            },
-          ],
-          temperature: 1,
-        });
+        // const responseForTraining = await openai.chat.completions.create({
+        //   model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
+        //   messages: [
+        //     {
+        //       role: "user",
+        //       content: input,
+        //     },
+        //   ],
+        //   temperature: 1,
+        // });
         try {
           if (trainBotData) {
+            await startDB();
+
             // make a trainBot entry
             const obj = {
               type: "linkedinAiTool.headline",
               input: input,
-              output: responseForTraining.choices[0].message.content,
-              // idealOutput: "",
+              output: response.choices[0].message.content,
+              idealOutput: "",
               status: "pending",
               //  userEmail: trainBotData.userEmail,
-              fileContent: trainBotData.fileContent,
+              // fileAddress: trainBotData.fileAddress,
               Instructions: `Writing a LinkedIn headline as Job Title |Top Keyword 1 | Top Keyword 2 | Top Keyword 3 | Top Keyword 4 | Value proposition statement`,
             };
 

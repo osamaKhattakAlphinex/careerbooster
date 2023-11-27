@@ -18,6 +18,18 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 //   title: "CareerBooster.AI-Register",
 // };
 
+function removeSpecialChars(str: string) {
+  // Remove new lines
+  str = str.replace(/[\r\n]+/gm, "");
+
+  // Remove Unicode characters
+  str = str.replace(/[^\x00-\x7F]/g, "");
+
+  // Remove icons
+  str = str.replace(/[^\w\s]/gi, "");
+
+  return str;
+}
 const RegistrationForm = () => {
   const router = useRouter();
   const params = useSearchParams();
@@ -79,12 +91,12 @@ const RegistrationForm = () => {
           files: [
             {
               id: makeid(),
-              fileName: makeid() + ".pdg", //fileName,
+              fileName: fileName, //fileName,
               fileContent: text,
               uploadedDateTime: new Date(),
             },
           ],
-          status: false,
+          status: true,
           alertConsent: values.alertConsent,
         };
         // Create user account in database
@@ -92,7 +104,7 @@ const RegistrationForm = () => {
           .post("/api/auth/users", obj)
           .then(async function (response) {
             if (values.file !== "") {
-              // await UpdateGohighlevel(obj);
+              await UpdateGohighlevel(obj);
               // await moveResumeToUserFolder(values.file, values.email);
               await updateUser(values.file, values.email);
             }

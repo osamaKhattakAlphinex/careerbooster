@@ -75,7 +75,6 @@ export const DELETE = async (
   }
   try {
     const { recId } = params;
-    console.log(recId);
 
     await startDB();
     const trainBot = await TrainBot.deleteOne({ _id: recId });

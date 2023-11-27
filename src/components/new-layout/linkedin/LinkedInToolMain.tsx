@@ -8,18 +8,21 @@ import {
 import Image from "next/image";
 import FAQList from "../Homepage/Faqs";
 import Reviews from "../Homepage/Reviews";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import FileUploadHandler from "@/components/FileUploadHandler";
+import ReCAPTCHA from "react-google-recaptcha";
+import { verifyInvisibleCaptcha } from "@/ServerActions";
 
 const saveToLocalStorage = (text: any, fileName: any) => {
-  const newText = text.substring(0, 4000);
-  localStorage.setItem("linkedin-content", newText);
+  localStorage.setItem("linkedin-content", text);
   localStorage.setItem("linkedin-fileName", fileName);
 };
 
 const LinkedInToolMain = () => {
   const router = useRouter();
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [isVerified, setIsverified] = useState<boolean>(false);
   const [file, setFile] = useState<any>(null); //main page
   const [fileName, setFileName] = useState<any>(null);
   const [fileError, setFileError] = useState<string>("");
@@ -38,14 +41,24 @@ const LinkedInToolMain = () => {
       setFileError("only PDF file is allowed");
     }
   }, [file]);
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  async function handleCaptchaSubmission(token: string | null) {
+    // Server function to verify captcha
+    await verifyInvisibleCaptcha(token)
+      .then(() => {
+        setIsverified(true);
+      })
+      .catch(() => setIsverified(false));
+  }
+  const handleFileChange: any = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const fileInput = e.target;
+    if (recaptchaRef.current) {
+      recaptchaRef.current.execute();
 
-    if (fileInput && fileInput.files && fileInput.files.length > 0) {
-      setFile(fileInput.files[0]);
-      setFileName(fileInput.files[0].name);
+      const fileInput = e.target;
+      if (fileInput && fileInput.files && fileInput.files.length > 0) {
+        setFile(fileInput.files[0]);
+        setFileName(fileInput.files[0].name);
+      }
     }
   };
   useEffect(() => {
@@ -59,10 +72,15 @@ const LinkedInToolMain = () => {
   useEffect(() => {
     if (uploadComplete && fileUploading && text !== "") {
       saveToLocalStorage(text, fileName);
-      router.push("/linkedin/result");
     }
   }, [fileUploading, uploadComplete, text]);
-
+  useEffect(() => {
+    if (isVerified) {
+      router.push("/linkedin/result");
+    } else {
+      console.log("Captha failed");
+    }
+  }, [isVerified]);
   return (
     <div className="w-full ">
       {/* Hero Section */}
@@ -111,6 +129,14 @@ const LinkedInToolMain = () => {
               )}
             </label>
           </div>
+
+          <ReCAPTCHA
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_INVISIBLE_SITE_KEY || ""}
+            ref={recaptchaRef}
+            size="invisible"
+            onChange={handleCaptchaSubmission}
+            theme="dark"
+          />
         </div>
         {file !== null && (
           <FileUploadHandler

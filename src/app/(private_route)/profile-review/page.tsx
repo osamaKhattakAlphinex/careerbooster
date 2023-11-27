@@ -150,22 +150,26 @@ const ProfileReview = () => {
                     </button>
                   )}
                 </div>
-                {(register.activeStep === 1 ||
-                  register.activeStep === 2 ||
-                  register.activeStep === 3) && (
+                {register.activeStep === 1 && (
                   <>
-                    {register.activeStep === 1 && <StepOne />}
-                    {register.activeStep === 2 && <StepTwo />}
-                    {register.activeStep === 3 && <StepThree />}
+                    {register.activeStep === 1 && (
+                      <>
+                        <StepOne />
+                        <StepTwo />
+                        <StepThree />
+                      </>
+                    )}
+                    {/* {register.activeStep === 2 && <StepTwo />}
+                    {register.activeStep === 3 && <StepThree />} */}
                   </>
                 )}
-                {register.activeStep === 4 && <StepFour />}
-                {register.activeStep === 5 && <StepFive />}
+                {register.activeStep === 2 && <StepFour />}
+                {register.activeStep === 3 && <StepFive />}
 
-                {register.activeStep === 6 && <StepSix />}
+                {register.activeStep === 4 && <StepSix />}
 
-                {register.activeStep === 7 && <ProfilePreview />}
-                {register.activeStep === 8 && <StepEight />}
+                {register.activeStep === 5 && <ProfilePreview />}
+                {register.activeStep === 6 && <StepEight />}
 
                 <div className="">
                   {register.activeStep > 1 && (
@@ -179,7 +183,7 @@ const ProfileReview = () => {
                       Back
                     </button>
                   )}
-                  {register.activeStep < 7 && (
+                  {register.activeStep < 5 && (
                     <button
                       type="submit"
                       disabled={isNextDisabled()}
@@ -192,7 +196,7 @@ const ProfileReview = () => {
                     </button>
                   )}
 
-                  {register.activeStep === 7 && (
+                  {register.activeStep === 5 && (
                     <button
                       type="submit"
                       className="btn btn-primary-dark float-right"

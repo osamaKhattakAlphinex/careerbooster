@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import { string } from "yup";
 
 import OpenAI from "openai";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const activeCSS =
   "inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500";
@@ -20,6 +21,13 @@ const inactiveCSS =
   "inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300";
 
 const TrainRegistrationBotAdminPage = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [totalPages, setTotalPages] = useState(0);
+  const [startingPage, setStartingPage] = useState(1);
+  const [limitOfRecords, setLimitOfRecords] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("pending");
   const [dataType, setDataType] = useState<string>("registrationWizard"); // registrationWizard, aiTools
   const [showRecordsType, setShowRecordsType] = useState<string>(
@@ -36,28 +44,30 @@ const TrainRegistrationBotAdminPage = () => {
 
   const fetchRecords = async () => {
     setLoading(true);
-    if (!loading) {
-      axios
-        .get("/api/trainBot", {
-          params: {
-            status: activeTab,
-            type: showRecordsType,
-            dataType: dataType,
-          },
-        })
-        .then((res: any) => {
-          if (res.data.success) {
-            const result = res.data;
-            setRecords(result.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
+
+    // if(!loading){
+    axios
+      .get(`/api/trainBot?limit=${limitOfRecords}&page=${currentPage}`, {
+        params: {
+          status: activeTab,
+          type: showRecordsType,
+          dataType: dataType,
+        },
+      })
+      .then((res: any) => {
+        if (res.data.success) {
+          const result = res.data;
+          setTotalPages(Number(Math.ceil(result.totalRecs / limitOfRecords)));
+          setRecords(result.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+    // }
   };
 
   const handleTuneModel = async (values: any) => {
@@ -110,11 +120,10 @@ const TrainRegistrationBotAdminPage = () => {
     const c = confirm("Are you sure you want to delete this Record?");
     if (c) {
       try {
-        let result = await fetch("http://localhost:3001/api/trainBot/" + id, {
+        let result = await fetch("/api/trainBot/" + id, {
           method: "DELETE",
         });
         const res = await result.json();
-        console.log(result);
         if (res.success) {
           return fetchRecords();
         } else {
@@ -127,6 +136,7 @@ const TrainRegistrationBotAdminPage = () => {
   };
 
   // when tab changes fetch records for that tab
+  //
   useEffect(() => {
     if (
       activeTab &&
@@ -139,7 +149,7 @@ const TrainRegistrationBotAdminPage = () => {
       setRecords([]);
       fetchRecords();
     }
-  }, [activeTab, showRecordsType, dataType]);
+  }, [activeTab, showRecordsType]);
 
   useEffect(() => {
     if (dataType && dataType === "aiTools") {
@@ -151,6 +161,24 @@ const TrainRegistrationBotAdminPage = () => {
     }
   }, [dataType]);
 
+  useEffect(() => {
+    fetchRecords();
+    const startIndex = Number((currentPage - 1) * limitOfRecords);
+    setStartingPage(startIndex);
+    router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
+  }, [limitOfRecords, currentPage]);
+
+  useEffect(() => {
+    const existingNumberOfRecords = searchParams?.get("r");
+    const existingPage = searchParams?.get("p");
+
+    if (existingNumberOfRecords) {
+      setLimitOfRecords(parseInt(existingNumberOfRecords, 10));
+    }
+    if (existingPage) {
+      setCurrentPage(parseInt(existingPage, 10));
+    }
+  }, [searchParams?.get("r"), searchParams?.get("p")]);
   const showDeleteAllButton = () => {
     if (selectAll) {
       return true;
@@ -250,6 +278,17 @@ const TrainRegistrationBotAdminPage = () => {
       setDataSelection([]);
     }
   };
+
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * limitOfRecords;
+    setStartingPage(startIndex);
+    const endIndex = startIndex + limitOfRecords;
+
+    setLoading(true);
+    setRecords([]); // Clear existing records before fetching new ones
+
+    router.replace(`${pathname}?r=${limitOfRecords}&p=${currentPage}`);
+  }, [limitOfRecords, currentPage]);
 
   return (
     <>
@@ -669,6 +708,59 @@ const TrainRegistrationBotAdminPage = () => {
                   </tbody>
                 </table>
               </div>
+            </div>
+            {/* Pagination Controls */}
+            <div className=" flex justify-end mt-4">
+              <nav aria-label="Page navigation example">
+                <ul className="inline-flex -space-x-px">
+                  <li>
+                    <button
+                      className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+                      onClick={() => {
+                        setRecords([]);
+                        setCurrentPage(currentPage - 1);
+                      }}
+                      disabled={currentPage == 1 ? true : false}
+                    >
+                      Previous
+                    </button>
+                  </li>
+                  {[currentPage - 1, currentPage, currentPage + 1].map(
+                    (number) => {
+                      if (number < 1 || number > totalPages) return null;
+                      return (
+                        <li key={number}>
+                          {currentPage !== totalPages && (
+                            <button
+                              onClick={(e) => {
+                                setRecords([]);
+                                setCurrentPage(number);
+                              }}
+                              className={`border-gray-300  leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400  text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white hover:text-gray-700 first-letter
+                      ${currentPage === number} `}
+                            >
+                              {number}
+                            </button>
+                          )}
+                        </li>
+                      );
+                    }
+                  )}
+
+                  <li>
+                    <button
+                      className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                      onClick={() => {
+                        setRecords([]);
+                        setCurrentPage(currentPage + 1);
+                      }}
+                      disabled={currentPage === totalPages}
+                    >
+                      Next
+                    </button>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>

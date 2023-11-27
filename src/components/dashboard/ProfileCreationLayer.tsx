@@ -114,7 +114,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          fileAddress: userData.files[0].fileName,
         },
       };
 
@@ -520,11 +520,16 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           const res = await resp.json();
 
           if (res.success && res?.result) {
+            let result;
+            if (typeof res.result === "object") {
+              result = res.result;
+            } else {
+              result = await JSON.parse(res.result);
+            }
             try {
-              const data = await res.result;
               dispatch(setScrapped({ skills: true }));
               dispatch(setScrapping({ skills: false }));
-              dispatch(setStepSix({ list: data }));
+              dispatch(setStepSix({ list: result }));
             } catch (error) {
               dispatch(setScrapped({ skills: true }));
               dispatch(setScrapping({ skills: false }));
@@ -541,9 +546,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     }
   };
 
-  // laksjdflasjdfl
   const updateUser = async () => {
-    // make an object
+    // Make an object
     const obj = {
       firstName: register.stepOne.firstName,
       lastName: register.stepOne.lastName,
@@ -640,7 +644,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       return <div className="pt-30">{children}</div>;
     }
   } else {
-    // if the user data is loaded and profile wizard is NOT completed show loader
+    /// if the user data is loaded and profile wizard is NOT completed show loader
     return (
       <div className="flex flex-col items-center justify-center h-screen pt-30 !pb-42">
         <h2 className="text-3xl font-bold text-center">

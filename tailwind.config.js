@@ -37,6 +37,7 @@ module.exports = {
     plugin(function ({ addVariant }) {
       addVariant("current", "&.active");
     }),
-  ],
+      require("tailwindcss-animate")
+],
   darkMode: ["class"],
 };

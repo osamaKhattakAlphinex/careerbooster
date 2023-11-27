@@ -19,6 +19,8 @@ const loadFromLocalStorage = () => {
   const linkedinFileName = localStorage.getItem("linkedin-fileName");
   return { linkedinContent, linkedinFileName };
 };
+
+// alskdfjals?
 const LinkedInUploadPDFResume = () => {
   // local states
   const router = useRouter();
@@ -304,7 +306,7 @@ const LinkedInUploadPDFResume = () => {
   useEffect(() => {
     if (headlineComplete && aboutComplete) {
       // All APIs have completed, call linkedinToolSaveUser
-      linkedinToolSaveUser(linkedinContent, linkedinFileName);
+      linkedinToolSaveUser(linkedinFileName, linkedinContent);
     }
   }, [headlineComplete, aboutComplete]);
 
@@ -447,7 +449,10 @@ const LinkedInUploadPDFResume = () => {
                     />
                   ) : (
                     <div className="tracking-wider md:mx-2 md:p-3 border-2 box lg:p-8 rounded-2xl border-gray-700 text-white font-sans">
-                      {streamedAboutData}
+                      {/* text in paragraph logic */}
+                      {streamedAboutData.split("\n").map((paragraph, index) => (
+                        <p key={index}>{paragraph}</p>
+                      ))}
                     </div>
                   )}
 
