@@ -1,5 +1,3 @@
-// app/sitemap.js
-
 import { getPages } from "../lib/pages";
 
 const URL = "https://careerbooster.ai";
