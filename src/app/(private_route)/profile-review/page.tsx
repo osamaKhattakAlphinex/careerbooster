@@ -139,7 +139,7 @@ const ProfileReview = () => {
                       </button>
                     )}
 
-                    {register.activeStep < 7 && (
+                    {register.activeStep < 5 && (
                       <button
                         type="submit"
                         disabled={isNextDisabled()}
@@ -185,6 +185,7 @@ const ProfileReview = () => {
                         Back
                       </button>
                     )}
+
                     {register.activeStep < 5 && (
                       <button
                         type="submit"
