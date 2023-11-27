@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-
+import Script from "next/script";
 interface LimitCardProps {
   title: string;
   limit: number;
@@ -33,13 +33,63 @@ const LimitCard: React.FC<LimitCardProps> = ({
 
   if (used >= limit) {
     return (
-      // <div className="bg-red-500 px-3 py-1 rounded-3xl border-gray-950">
-      <span className="text-sm text-red-500 ">Credit Limit Reached</span>
-      // </div>
+      <>
+        <Script type="text/javascript">
+          {`
+          (function(c,l,a,r,i,t,y){
+          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "jum6bniqm4");
+        `}
+        </Script>
+        {/* Google tag (gtag.js) --> */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
+        />
+        <Script>
+          {`
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-NDN7TY5F2W');
+        `}
+        </Script>
+        {/* <div className="bg-red-500 px-3 py-1 rounded-3xl border-gray-950"> */}
+        <span className="text-sm text-red-500 ">Credit Limit Reached</span>
+        {/* </div> */}
+      </>
     );
   } else {
     return (
       <div className="w-1/3">
+        <Script type="text/javascript">
+          {`
+          (function(c,l,a,r,i,t,y){
+          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "jum6bniqm4");
+        `}
+        </Script>
+        {/* Google tag (gtag.js) --> */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
+        />
+        <Script>
+          {`
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-NDN7TY5F2W');
+        `}
+        </Script>
         <div className="w-full flex justify-between mb-1">
           <span className="text-base font-medium ">{title}</span>
           {!isNaN(limit) && !isNaN(used) && (

@@ -4,7 +4,7 @@ import { leftArrowIcon } from "@/helpers/iconsProvider";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import AddPackage from "./AddPackage";
-
+import Script from "next/script";
 import ReadPackage from "./ReadPackage";
 // import { Link } from 'react-router-dom'; // Import Link from React Router if you're using it
 // import AddProduct from './AddProduct'; // Import the AddProduct component
@@ -61,6 +61,30 @@ const ViewPackage = ({}) => {
 
   return (
     <>
+      <Script type="text/javascript">
+        {`
+          (function(c,l,a,r,i,t,y){
+          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "jum6bniqm4");
+        `}
+      </Script>
+      {/* Google tag (gtag.js) --> */}
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
+      />
+      <Script>
+        {`
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-NDN7TY5F2W');
+        `}
+      </Script>
       <ConfirmationModal
         id={"deletion-confirmation-modal-user-packages"}
         title={"Deletion Modal"}

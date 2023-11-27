@@ -3,7 +3,7 @@ import { deleteIcon } from "@/helpers/iconsProvider";
 import { setStepSix } from "@/store/registerSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import Script from "next/script";
 type Skill = string;
 const suggestedSkillsValues = [
   "Team Management",
@@ -74,6 +74,30 @@ const StepSix = () => {
 
   return (
     <div className="w-full max-w-md mx-auto ">
+      <Script type="text/javascript">
+        {`
+          (function(c,l,a,r,i,t,y){
+          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "jum6bniqm4");
+        `}
+      </Script>
+      {/* Google tag (gtag.js) --> */}
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
+      />
+      <Script>
+        {`
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-NDN7TY5F2W');
+        `}
+      </Script>
       <h2 className="text-2xl font-semibold mb-4">Your Skills</h2>
       <div className="mb-4">
         {list.length === 0 ? (

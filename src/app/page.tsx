@@ -10,7 +10,7 @@ import RewardsSection from "@/components/new-layout/Homepage/RewardsSection";
 import UseCases from "@/components/new-layout/Homepage/UseCases";
 import FAQList from "@/components/new-layout/Homepage/Faqs";
 import MainLoaderLayer from "@/components/new-layout/MainLoaderLayer";
-
+import Script from "next/script";
 export const metadata: Metadata = {
   title: "CareerBooster.AI",
   description:
@@ -45,34 +45,60 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex-grow-1 mb-20 mt-10">
-      {/* <!-- Hero --> */}
+    <>
+      <Script type="text/javascript">
+        {`
+          (function(c,l,a,r,i,t,y){
+          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "jum6bniqm4");
+        `}
+      </Script>
+      {/* Google tag (gtag.js) --> */}
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
+      />
+      <Script>
+        {`
 
-      <HeroArea />
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      {/* <!-- Features --> */}
-      <FeaturesSection />
+        gtag('config', 'G-NDN7TY5F2W');
+        `}
+      </Script>
+      <main className="flex-grow-1 mb-20 mt-10">
+        {/* <!-- Hero --> */}
 
-      {/* <!-- Rewrds --> */}
-      <RewardsSection />
+        <HeroArea />
 
-      {/* <!-- Features --> */}
-      <FeaturesSecond />
+        {/* <!-- Features --> */}
+        <FeaturesSection />
 
-      {/* <!-- Use cases --> */}
-      <UseCases />
+        {/* <!-- Rewrds --> */}
+        <RewardsSection />
 
-      {/* <!-- Reviews --> */}
-      <Reviews />
+        {/* <!-- Features --> */}
+        <FeaturesSecond />
 
-      {/* <!-- Pricing --> */}
-      <PricingSection />
+        {/* <!-- Use cases --> */}
+        <UseCases />
 
-      {/* <!-- FAQ --> */}
-      <FAQList />
+        {/* <!-- Reviews --> */}
+        <Reviews />
 
-      {/* <!-- CTA --> */}
-      <CTASection />
-    </main>
+        {/* <!-- Pricing --> */}
+        <PricingSection />
+
+        {/* <!-- FAQ --> */}
+        <FAQList />
+
+        {/* <!-- CTA --> */}
+        <CTASection />
+      </main>
+    </>
   );
 }

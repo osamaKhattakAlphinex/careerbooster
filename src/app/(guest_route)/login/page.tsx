@@ -2,46 +2,71 @@ import Link from "next/link";
 
 import { Metadata } from "next";
 import LoginForm from "@/components/LoginForm";
-
+import Script from "next/script";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Login",
 };
 
 const Login = () => {
   return (
-    <main className="flex-grow-1">
-      <section className="account-section login-page pb-6 pt-30 h-full">
-        <div className="container-fluid h-full">
-          <div className="row h-full">
-            <div
-              className="col-lg-12"
-              data-aos="fade-up-sm"
-              data-aos-delay="100"
-            >
-              <div className="close-btn d-none">
-                <Link
-                  href="/"
-                  className="icon bg-gradient-3 text-white w-12 h-12 rounded p-3 border border-white border-opacity-10 d-flex align-center justify-center ms-auto"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
+    <>
+      <Script type="text/javascript">
+        {`
+          (function(c,l,a,r,i,t,y){
+          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "jum6bniqm4");
+        `}
+      </Script>
+      {/* Google tag (gtag.js) --> */}
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
+      />
+      <Script>
+        {`
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-NDN7TY5F2W');
+        `}
+      </Script>
+      <main className="flex-grow-1">
+        <section className="account-section login-page pb-6 pt-30 h-full">
+          <div className="container-fluid h-full">
+            <div className="row h-full">
+              <div
+                className="col-lg-12"
+                data-aos="fade-up-sm"
+                data-aos-delay="100"
+              >
+                <div className="close-btn d-none">
+                  <Link
+                    href="/"
+                    className="icon bg-gradient-3 text-white w-12 h-12 rounded p-3 border border-white border-opacity-10 d-flex align-center justify-center ms-auto"
                   >
-                    <g
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
                     >
-                      <path d="M18 6 6 18M6 6l12 12" />
-                    </g>
-                  </svg>
-                </Link>
-              </div>
-              <div className="account-wrapper h-full d-flex flex-column justify-center">
-                <div className="text-center">
-                  {/* <Link href="/">
+                      <g
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                      >
+                        <path d="M18 6 6 18M6 6l12 12" />
+                      </g>
+                    </svg>
+                  </Link>
+                </div>
+                <div className="account-wrapper h-full d-flex flex-column justify-center">
+                  <div className="text-center">
+                    {/* <Link href="/">
                     <Image
                       width={165}
                       height={40}
@@ -50,7 +75,7 @@ const Login = () => {
                       className="img-fluid"
                     />
                   </Link> */}
-                  {/* <div className="vstack gap-4 mt-10 d-none">
+                    {/* <div className="vstack gap-4 mt-10 d-none">
                     <button type="button" className="btn account-btn py-4">
                       <Image
                         src="/assets/images/icons/google.svg"
@@ -73,18 +98,19 @@ const Login = () => {
                     </button>
                   </div>  */}
 
-                  {/* <div className="divider-with-text d-none">
+                    {/* <div className="divider-with-text d-none">
                     <span>Or sign in with email</span>
                   </div> */}
 
-                  <LoginForm />
+                    <LoginForm />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 };
 

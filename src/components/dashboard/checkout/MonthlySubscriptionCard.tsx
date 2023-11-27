@@ -11,7 +11,7 @@ import Stripe from "stripe";
 import { useRouter } from "next/navigation";
 import { CouponBody } from "@/app/stripe-coupon/route";
 import { infoSmallIcon } from "@/helpers/iconsProvider";
-
+import Script from "next/script";
 interface Props {
   userPackage: UserPackageData;
   customer: any;
@@ -171,6 +171,30 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
       data-aos="fade-up-sm"
       data-aos-delay="50"
     >
+      <Script type="text/javascript">
+        {`
+          (function(c,l,a,r,i,t,y){
+          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "jum6bniqm4");
+        `}
+      </Script>
+      {/* Google tag (gtag.js) --> */}
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
+      />
+      <Script>
+        {`
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-NDN7TY5F2W');
+        `}
+      </Script>
       <div className=" p-6 pricing-card px-lg-8 py-lg-8 rounded-4 h-full bg-">
         <h1 className="display-3 fw-semibold theme-text mb-0 mt-4 !text-4xl">
           {userPackage.title}

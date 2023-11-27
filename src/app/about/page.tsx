@@ -7,7 +7,7 @@ import FeaturesSection from "@/components/new-layout/Homepage/FeaturesSection";
 import Reviews from "@/components/new-layout/Homepage/Reviews";
 import PageHeader from "@/components/new-layout/PageHeader";
 import { Metadata } from "next";
-
+import Script from "next/script";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-About",
   description:
@@ -35,27 +35,53 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="flex-grow-1 mb-20">
-      {/* <!-- Page header --> */}
-      <PageHeader title="About CareerBooster.AI" secondTitle="About us" />
+    <>
+      <Script type="text/javascript">
+        {`
+          (function(c,l,a,r,i,t,y){
+          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "jum6bniqm4");
+        `}
+      </Script>
+      {/* Google tag (gtag.js) --> */}
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
+      />
+      <Script>
+        {`
 
-      {/* About Card */}
-      <AboutCard />
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      {/* Features Section */}
-      <FeaturesSection />
+        gtag('config', 'G-NDN7TY5F2W');
+        `}
+      </Script>
+      <main className="flex-grow-1 mb-20">
+        {/* <!-- Page header --> */}
+        <PageHeader title="About CareerBooster.AI" secondTitle="About us" />
 
-      {/* Team */}
-      <TeamCard />
+        {/* About Card */}
+        <AboutCard />
 
-      {/* Reviews */}
-      <Reviews />
+        {/* Features Section */}
+        <FeaturesSection />
 
-      {/* Brands */}
-      <BrandsCard />
+        {/* Team */}
+        <TeamCard />
 
-      {/*<!-- CTA --> */}
-      <CTASection />
-    </main>
+        {/* Reviews */}
+        <Reviews />
+
+        {/* Brands */}
+        <BrandsCard />
+
+        {/*<!-- CTA --> */}
+        <CTASection />
+      </main>
+    </>
   );
 }

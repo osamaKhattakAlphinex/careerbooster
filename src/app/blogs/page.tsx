@@ -6,7 +6,7 @@ import MapCard from "@/components/new-layout/Contact/MapCard";
 import CTASection from "@/components/new-layout/Homepage/CTASection";
 import PageHeader from "@/components/new-layout/PageHeader";
 import { Metadata } from "next";
-
+import Script from "next/script";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Blogs",
   description:
@@ -36,20 +36,46 @@ export const metadata: Metadata = {
 
 export default function BlogsPage() {
   return (
-    <main className="flex-grow-1 mb-20">
-      {/* <!-- Page header --> */}
-      <PageHeader title="Blog Posts" />
-      <Blog
-        src="/assets/images/thumbnails/1.jpg"
-        category="Design"
-        date="2 - 4 - 2023"
-        minutesViewed="5 Minutes Read"
-        title=" Best free AI content generator & AI writers for 2023"
+    <>
+      <Script type="text/javascript">
+        {`
+          (function(c,l,a,r,i,t,y){
+          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "jum6bniqm4");
+        `}
+      </Script>
+      {/* Google tag (gtag.js) --> */}
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
       />
-      <BlogPagination />
+      <Script>
+        {`
 
-      {/*<!-- CTA --> */}
-      <CTASection />
-    </main>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-NDN7TY5F2W');
+        `}
+      </Script>
+      <main className="flex-grow-1 mb-20">
+        {/* <!-- Page header --> */}
+        <PageHeader title="Blog Posts" />
+        <Blog
+          src="/assets/images/thumbnails/1.jpg"
+          category="Design"
+          date="2 - 4 - 2023"
+          minutesViewed="5 Minutes Read"
+          title=" Best free AI content generator & AI writers for 2023"
+        />
+        <BlogPagination />
+
+        {/*<!-- CTA --> */}
+        <CTASection />
+      </main>
+    </>
   );
 }

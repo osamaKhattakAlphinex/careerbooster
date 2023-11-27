@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { deleteIcon } from "@/helpers/iconsProvider";
-
+import Script from "next/script";
 interface Props {
   selectedFile: string;
   setSelectedFile: React.Dispatch<React.SetStateAction<string>>;
@@ -116,6 +116,30 @@ const BiograpyFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   return (
     <>
       <div className="py-4 border p-4 mb-4 rounded-lg">
+        <Script type="text/javascript">
+          {`
+          (function(c,l,a,r,i,t,y){
+          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "jum6bniqm4");
+        `}
+        </Script>
+        {/* Google tag (gtag.js) --> */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
+        />
+        <Script>
+          {`
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-NDN7TY5F2W');
+        `}
+        </Script>
         <label
           className={`bg-black text-white text-sm rounded-full relative flex py-2   items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max cursor-pointer ${
             fileUploading && "!bg-black"
