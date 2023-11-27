@@ -74,16 +74,16 @@ const ResumeBuilder = () => {
   const userData = useSelector((state: any) => state.userData);
   const handleGenerate = useCallback(async () => {
     console.log("resumeData.state.jobPosition", percentageCalculated);
-    
+
     await getUserDataIfNotExists();
     // reset resume
     dispatch(resetResume(resumeData.state));
 
     if (
       resumeData.state.jobPosition !== "" &&
-      session?.user?.email 
+      session?.user?.email
       // &&
-      // percentageCalculated 
+      // percentageCalculated
     ) {
       dispatch(setState({ name: "resumeLoading", value: true }));
       dispatch(setId(""));
@@ -522,12 +522,24 @@ const ResumeBuilder = () => {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-[244px] px-[15px] my-[72px] ">
+        <div className="ml-[244px] px-[15px] mb-[72px] ">
           <RecentResumeCard source="dashboard" componentRef={componentRef} />
+          {showAlert && (
+            <div
+              className="fixed bottom-10 right-10 flex flex-row gap-2 justify-center items-center bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white transition-opacity cursor-pointer"
+              onClick={() => setShowAlert(false)}
+            >
+              {checkIconSmall}
+              Auto saved
+            </div>
+          )}
           <GenerateResume
             handleGenerate={handleGenerate}
             availablePercentage={availablePercentage}
           />
+          <div className="flex justify-center items-center">
+            <Confetti active={confettingRunning} config={confettiConfig} />
+          </div>
           {resumeData &&
             (resumeData?.name ||
               resumeData?.contact?.email ||

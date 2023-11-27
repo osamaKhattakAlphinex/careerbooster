@@ -2,9 +2,22 @@ import { NextApiHandler } from "next";
 import fs from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/route";
+import startDB from "@/lib/db";
+import User from "@/db/schemas/User";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 export async function POST(req: any) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
+
   try {
     const body = await req.json();
     const url = new URL(req.url);
@@ -25,20 +38,32 @@ export async function POST(req: any) {
       );
     }
 
-    // Define the directory path where the file is located
-    const directoryPath = path.join(
-      process.cwd(),
-      "public",
-      "files",
-      "userResumes",
-      email
-    );
-    const filePath = path.join(directoryPath, fileName);
-
     try {
-      // Use fs.promises.unlink to delete the file
-      await fs.promises.unlink(filePath);
-      return NextResponse.json({ success: true }, { status: 200 });
+      await startDB();
+
+      // const user = await User.findOne({ email: email }, { files: 1 });
+      // const fileObject = user.files.find(
+      //   (file: any) => file.fileName === fileName
+      // );
+      // console.log("file: " + fileObject);
+      const user = await User.findOne({ email: email });
+
+      if (user) {
+        const updatedFiles = user.files.filter(
+          (file: any) => file.fileName !== fileName
+        );
+
+        // Updating the user document in the database to remove the file
+        await User.findOneAndUpdate(
+          { email: email },
+          { $set: { files: updatedFiles } },
+          { new: true }
+        );
+
+        return NextResponse.json({ success: true }, { status: 200 });
+      } else {
+        console.log("User not found.");
+      }
     } catch (error) {
       console.error("Error deleting file:", error);
       return NextResponse.json(

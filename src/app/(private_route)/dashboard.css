@@ -25,3 +25,7 @@
 .parent:hover .child {
   display: block; /* Show child divs when the parent is hovered */
 }
+@media print {
+  .text-color {
+    color: black;
+  }}

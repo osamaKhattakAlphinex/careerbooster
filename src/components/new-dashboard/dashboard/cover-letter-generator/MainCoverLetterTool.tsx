@@ -42,7 +42,7 @@ export default function MainCoverLetterTool() {
               }}
               id="default-radio-1"
               type="radio"
-              value="useYourPersona"
+              value="profile"
               name="default-radio"
               onChange={(e) => {
                 setUploadPdfFile(e.target.value);
@@ -60,7 +60,7 @@ export default function MainCoverLetterTool() {
               type="radio"
               value="uploadYourResume"
               onChange={(e) => {
-                setUploadPdfFile(e.target.value);
+                setUploadPdfFile("uploadYourResume"); 
               }}
               name="default-radio"
               className="w-4 h-4 border-[1px]"
