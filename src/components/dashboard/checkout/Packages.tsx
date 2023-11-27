@@ -23,7 +23,13 @@ const Packages = ({ viewOnly }: Props) => {
       method: "GET",
     }).then(async (resp: any) => {
       const res = await resp.json();
-      setPackages(res.result);
+      let result;
+      if (typeof res.result === "string") {
+        result = await JSON.parse(res.result);
+      } else {
+        result = res.result;
+      }
+      setPackages(result);
     });
   };
   useEffect(() => {

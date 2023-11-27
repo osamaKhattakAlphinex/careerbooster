@@ -84,7 +84,7 @@ const LeadsAdminPage = () => {
       <div className="flex flex-col gap-2 items-center justify-center">
         <div className=" p-8 flex flex-col gap-2 border w-11/12">
           <div className="flex justify-between">
-            <h2 className="text-xl ">Leads</h2>
+            <h2 className="text-xl ">Linkedin Tool Users</h2>
 
             {/* Dropdown */}
             <div className="flex flex-row gap-2 items-center float-right">

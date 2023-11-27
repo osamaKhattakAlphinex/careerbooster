@@ -49,7 +49,6 @@ const ViewPackage = ({}) => {
   const getPackages = async () => {
     try {
       let response: any = await axios.get("/api/packages");
-      console.log("response: " + response);
       if (response?.success) {
         setPackages(response.result);
       }
