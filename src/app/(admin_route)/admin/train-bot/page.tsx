@@ -1,4 +1,5 @@
 "use client";
+import FineTuningModel from "@/components/admin/fineTuning/fineTuningModels";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import {
   downloadIcon,
@@ -8,9 +9,10 @@ import {
 import { faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { number } from "yup";
+import { useEffect, useRef, useState } from "react";
+import { string } from "yup";
+
+import OpenAI from "openai";
 
 const activeCSS =
   "inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500";
@@ -36,6 +38,8 @@ const TrainRegistrationBotAdminPage = () => {
 
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [dataSelection, setDataSelection] = useState<string[]>([]);
+
+  const fineTuningModalRef: React.MutableRefObject<any> = useRef(null);
 
   const fetchRecords = async () => {
     setLoading(true);
@@ -63,6 +67,20 @@ const TrainRegistrationBotAdminPage = () => {
         setLoading(false);
       });
     // }
+  };
+
+  const handleTuneModel = async (values: any) => {
+    const formData = new FormData();
+
+    formData.append("traing-file", values.trainingFile);
+    formData.append("tuning-type", values.tuningType);
+    formData.append("base-model", values.baseModel);
+
+    try {
+      axios.post("/api/trainBot/tuneModel", formData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleDownload = async () => {
@@ -192,20 +210,27 @@ const TrainRegistrationBotAdminPage = () => {
   };
 
   const handleDeleteAll = async () => {
-    setLoading(true);
-
-    axios
-      .post("/api/trainBot/bulkDelete", { dataSelection })
-      .then((res: any) => {
-        if (res.data.success) {
-          setDataSelection([]);
-          fetchRecords();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {});
+    const c = confirm("Are you sure you want to delete these Records?");
+    if (c) {
+      setLoading(true);
+      try {
+        // console.log("all data deleted");
+        axios
+          .post("/api/trainBot/bulkDelete", { dataSelection })
+          .then((res: any) => {
+            if (res.data.success) {
+              setDataSelection([]);
+              fetchRecords();
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {});
+      } catch (error) {
+        console.log("error ===> ", error);
+      }
+    }
   };
 
   const isChecked = (id: string) => {
@@ -265,428 +290,423 @@ const TrainRegistrationBotAdminPage = () => {
   }, [limitOfRecords, currentPage]);
 
   return (
-    <div className="pt-30">
-      <div className="my-5 ml-10">
-        <Link
-          href="/admin"
-          className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
-        >
-          {leftArrowIcon}
-          Dashboard
-        </Link>
-      </div>
+    <>
+      <FineTuningModel formHandler={handleTuneModel} ref={fineTuningModalRef} />
 
-      <div className="flex flex-col gap-2 items-center justify-center">
-        <div className=" p-8 flex flex-col gap-2 border w-11/12">
-          <div className="flex justify-between">
-            <h2 className="text-xl ">Datasets for Training Models</h2>
+      <div className="pt-30">
+        <div className="my-5 ml-10">
+          <Link
+            href="/admin"
+            className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+          >
+            {leftArrowIcon}
+            Dashboard
+          </Link>
+        </div>
 
-            {/* Dropdown */}
-            <div className="flex flex-row gap-2 items-center float-right">
-              <label htmlFor="status" className="text-sm font-medium">
-                Show records:
-              </label>
-              <select
-                name="status"
-                id="status"
-                className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
-                onChange={(e) => setShowRecordsType(e.target.value)}
-                value={showRecordsType}
-              >
-                {dataType === "registrationWizard" && (
-                  <>
-                    <option value="register.wizard.basicInfo">
-                      Basic Information
-                    </option>
-                    <option value="register.wizard.listEducation">
-                      Education List
-                    </option>
-                    <option value="register.wizard.listExperiences">
-                      Experiences List
-                    </option>
-                    <option value="register.wizard.individualExperience">
-                      Individual Experience
-                    </option>
-                    <option value="register.wizard.listSkills">
-                      Skills List
-                    </option>
-                  </>
-                )}
-                {dataType === "aiTools" && (
-                  <>
-                    <option value="resume.getBasicInfo">
-                      Resume {">"} Get Basic info
-                    </option>
-                    <option value="resume.writeSummary">
-                      Resume {">"} Write Summary
-                    </option>
-                    <option value="resume.writeJDSingle">
-                      Resume {">"} Write JD Single
-                    </option>
-                    <option value="resume.writePrimarySkills">
-                      Resume {">"} Write Primary Skills
-                    </option>
-                    <option value="resume.writeProfessionalSkills">
-                      Resume {">"} Write Professional Skills
-                    </option>
-                    <option value="resume.writeSecondarySkills">
-                      Resume {">"} Write Secondary Skills
-                    </option>
-                    <option value="coverLetter.write">
-                      Write Cover Letter
-                    </option>
-                    <option value="email.followupSequence">
-                      Email {"> "} Followup Sequence
-                    </option>
-                    <option value="linkedin.generateKeywords">
-                      LinkedIn {"> "} Generate Keywords
-                    </option>
-                    <option value="linkedin.generateHeadling">
-                      LinkedIn {"> "} Generate Headline
-                    </option>
-                    <option value="linkedin.generateAbout">
-                      LinkedIn {"> "} Generate About
-                    </option>
-                    <option value="linkedin.generateJD">
-                      LinkedIn {"> "} Generate Job Description
-                    </option>
-                    <option value="linkedin.genearteConsultingBid">
-                      Write Consulting Bid
-                    </option>
-                  </>
-                )}
-                {dataType === "linkedinTool" && (
-                  <>
-                    <option value="linkedinAiTool.headline">
-                      Linkedin {">"} Headline
-                    </option>
-                    <option value="linkedinAiTool.about">
-                      Linkedin {">"} About/Summary
-                    </option>
-                  </>
-                )}
-              </select>
-            </div>
-          </div>
-          {/* Data type radio buttons */}
-          <div>
-            <div
-              className="flex"
-              onClick={() => setDataType("registrationWizard")}
-            >
-              <div className="flex items-center h-5">
-                <input
-                  name="dataType"
-                  type="radio"
-                  value="registrationWizard"
-                  checked={dataType === "registrationWizard"}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-              </div>
-              <div className="ml-2 text-sm">
-                <label
-                  htmlFor="helper-radio"
-                  className="font-medium text-gray-900 dark:text-gray-300"
-                >
-                  Registration Wizard Data sets
+        <div className="flex flex-col gap-2 items-center justify-center">
+          <div className=" p-8 flex flex-col gap-2 border w-11/12">
+            <div className="flex justify-between">
+              <h2 className="text-xl ">Datasets for Training Models</h2>
+
+              {/* Dropdown */}
+              <div className="flex flex-row gap-2 items-center float-right">
+                <label htmlFor="status" className="text-sm font-medium">
+                  Show records:
                 </label>
-                <p
-                  id="helper-radio-text"
-                  className="text-xs font-normal text-gray-500 dark:text-gray-300"
+                <select
+                  name="status"
+                  id="status"
+                  className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+                  onChange={(e) => setShowRecordsType(e.target.value)}
+                  value={showRecordsType}
                 >
-                  Data for Prompts fetching basic information, educations,
-                  experiences skills etc
-                </p>
-              </div>
-            </div>
-            <div className="flex" onClick={() => setDataType("aiTools")}>
-              <div className="flex items-center h-5">
-                <input
-                  name="dataType"
-                  type="radio"
-                  value="aiTools"
-                  checked={dataType === "aiTools"}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-              </div>
-              <div className="ml-2 text-sm">
-                <label
-                  htmlFor="helper-radio"
-                  className="font-medium text-gray-900 dark:text-gray-300"
-                >
-                  AI Tools Data sets
-                </label>
-                <p
-                  id="helper-radio-text"
-                  className="text-xs font-normal text-gray-500 dark:text-gray-300"
-                >
-                  Data for Prompts running on all tools like resume builder,
-                  linkedin, etc
-                </p>
-              </div>
-            </div>
-            <div className="flex" onClick={() => setDataType("linkedinTool")}>
-              <div className="flex items-center h-5">
-                <input
-                  name="dataType"
-                  type="radio"
-                  value="linkedinTool"
-                  checked={dataType === "linkedinTool"}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-              </div>
-              <div className="ml-2 text-sm">
-                <label
-                  htmlFor="helper-radio"
-                  className="font-medium text-gray-900 dark:text-gray-300"
-                >
-                  Linkedin Tool Data sets
-                </label>
-                <p
-                  id="helper-radio-text"
-                  className="text-xs font-normal text-gray-500 dark:text-gray-300"
-                >
-                  Data for Prompts running on Linkedin Tool
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-row gap-2 items-center ml-auto  pr-5">
-            <label htmlFor="userPerPage" className="text-sm font-medium">
-              Number of records per page:
-            </label>
-            <select
-              name="userPerPage"
-              id="userPerPage"
-              className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
-              onChange={(e) => {
-                setCurrentPage(1);
-                setLimitOfRecords(Number(e.target.value));
-              }}
-              value={limitOfRecords}
-            >
-              <>
-                <option value={10}>10</option>
-                <option value={25}>25</option>
-                <option value={50}>50</option>
-                <option value={100}>100</option>
-              </>
-            </select>
-          </div>
-
-          {/* Tabs */}
-
-          <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 m-0">
-            <li className="mr-2">
-              <button
-                disabled={loading}
-                onClick={() => {
-                  setActiveTab("pending");
-                  setDataSelection([]);
-                  setSelectAll(false);
-                }}
-                className={activeTab === "pending" ? activeCSS : inactiveCSS}
-              >
-                Pending Review
-              </button>
-            </li>
-            <li className="mr-2">
-              <button
-                disabled={loading}
-                onClick={() => {
-                  setActiveTab("reviewed");
-                  setDataSelection([]);
-                  setSelectAll(false);
-                }}
-                className={activeTab === "reviewed" ? activeCSS : inactiveCSS}
-              >
-                Reviewed
-              </button>
-            </li>
-            <li className="mr-2">
-              <button
-                disabled={loading}
-                onClick={() => {
-                  setActiveTab("trained");
-                  setDataSelection([]);
-                  setSelectAll(false);
-                }}
-                className={activeTab === "trained" ? activeCSS : inactiveCSS}
-              >
-                Trained
-              </button>
-            </li>
-          </ul>
-
-          <div className=" flex flex-row justify-end items-center gap-3">
-            {activeTab === "reviewed" && (
-              <div className="flex justify-end">
-                <button
-                  onClick={handleDownload}
-                  className=" flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                >
-                  {downloading ? (
-                    <>{refreshIconRotating} Downloading...</>
-                  ) : (
-                    <>{downloadIcon} Download All</>
+                  {dataType === "registrationWizard" && (
+                    <>
+                      <option value="register.wizard.basicInfo">
+                        Basic Information
+                      </option>
+                      <option value="register.wizard.listEducation">
+                        Education List
+                      </option>
+                      <option value="register.wizard.listExperiences">
+                        Experiences List
+                      </option>
+                      <option value="register.wizard.individualExperience">
+                        Individual Experience
+                      </option>
+                      <option value="register.wizard.listSkills">
+                        Skills List
+                      </option>
+                    </>
                   )}
-                </button>
+                  {dataType === "aiTools" && (
+                    <>
+                      <option value="resume.getBasicInfo">
+                        Resume {">"} Get Basic info
+                      </option>
+                      <option value="resume.writeSummary">
+                        Resume {">"} Write Summary
+                      </option>
+                      <option value="resume.writeJDSingle">
+                        Resume {">"} Write JD Single
+                      </option>
+                      <option value="resume.writePrimarySkills">
+                        Resume {">"} Write Primary Skills
+                      </option>
+                      <option value="resume.writeProfessionalSkills">
+                        Resume {">"} Write Professional Skills
+                      </option>
+                      <option value="resume.writeSecondarySkills">
+                        Resume {">"} Write Secondary Skills
+                      </option>
+                      <option value="coverLetter.write">
+                        Write Cover Letter
+                      </option>
+                      <option value="email.followupSequence">
+                        Email {"> "} Followup Sequence
+                      </option>
+                      <option value="linkedin.generateKeywords">
+                        LinkedIn {"> "} Generate Keywords
+                      </option>
+                      <option value="linkedin.generateHeadling">
+                        LinkedIn {"> "} Generate Headline
+                      </option>
+                      <option value="linkedin.generateAbout">
+                        LinkedIn {"> "} Generate About
+                      </option>
+                      <option value="linkedin.generateJD">
+                        LinkedIn {"> "} Generate Job Description
+                      </option>
+                      <option value="linkedin.genearteConsultingBid">
+                        Write Consulting Bid
+                      </option>
+                    </>
+                  )}
+                  {dataType === "linkedinTool" && (
+                    <>
+                      <option value="linkedinAiTool.headline">
+                        Linkedin {">"} Headline
+                      </option>
+                      <option value="linkedinAiTool.about">
+                        Linkedin {">"} About/Summary
+                      </option>
+                    </>
+                  )}
+                </select>
               </div>
-            )}
+            </div>
+            {/* Data type radio buttons */}
+            <div>
+              <div
+                className="flex"
+                onClick={() => setDataType("registrationWizard")}
+              >
+                <div className="flex items-center h-5">
+                  <input
+                    name="dataType"
+                    type="radio"
+                    value="registrationWizard"
+                    checked={dataType === "registrationWizard"}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                </div>
+                <div className="ml-2 text-sm">
+                  <label
+                    htmlFor="helper-radio"
+                    className="font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Registration Wizard Data sets
+                  </label>
+                  <p
+                    id="helper-radio-text"
+                    className="text-xs font-normal text-gray-500 dark:text-gray-300"
+                  >
+                    Data for Prompts fetching basic information, educations,
+                    experiences skills etc
+                  </p>
+                </div>
+              </div>
+              <div className="flex" onClick={() => setDataType("aiTools")}>
+                <div className="flex items-center h-5">
+                  <input
+                    name="dataType"
+                    type="radio"
+                    value="aiTools"
+                    checked={dataType === "aiTools"}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                </div>
+                <div className="ml-2 text-sm">
+                  <label
+                    htmlFor="helper-radio"
+                    className="font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    AI Tools Data sets
+                  </label>
+                  <p
+                    id="helper-radio-text"
+                    className="text-xs font-normal text-gray-500 dark:text-gray-300"
+                  >
+                    Data for Prompts running on all tools like resume builder,
+                    linkedin, etc
+                  </p>
+                </div>
+              </div>
+              <div className="flex" onClick={() => setDataType("linkedinTool")}>
+                <div className="flex items-center h-5">
+                  <input
+                    name="dataType"
+                    type="radio"
+                    value="linkedinTool"
+                    checked={dataType === "linkedinTool"}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                </div>
+                <div className="ml-2 text-sm">
+                  <label
+                    htmlFor="helper-radio"
+                    className="font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Linkedin Tool Data sets
+                  </label>
+                  <p
+                    id="helper-radio-text"
+                    className="text-xs font-normal text-gray-500 dark:text-gray-300"
+                  >
+                    Data for Prompts running on Linkedin Tool
+                  </p>
+                </div>
+              </div>
+            </div>
 
-            {activeTab === "reviewed" && dataSelection.length >= 1 && (
-              <div className="flex justify-end">
+            {/* Tabs */}
+
+            <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 m-0">
+              <li className="mr-2">
                 <button
                   disabled={loading}
-                  onClick={handleChangeStatus}
-                  className=" disabled:cursor-not-allowed flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                  onClick={() => {
+                    setActiveTab("pending");
+                    setDataSelection([]);
+                    setSelectAll(false);
+                  }}
+                  className={activeTab === "pending" ? activeCSS : inactiveCSS}
                 >
-                  Set Status to Trained
+                  Pending Review
                 </button>
-              </div>
-            )}
-
-            {showDeleteAllButton() && (
-              <div className="flex justify-end">
+              </li>
+              <li className="mr-2">
                 <button
-                  disabled={loading ? true : false}
-                  onClick={handleDeleteAll}
-                  className=" flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 disabled:cursor-not-allowed"
+                  disabled={loading}
+                  onClick={() => {
+                    setActiveTab("reviewed");
+                    setDataSelection([]);
+                    setSelectAll(false);
+                  }}
+                  className={activeTab === "reviewed" ? activeCSS : inactiveCSS}
                 >
-                  Delete All
+                  Reviewed
                 </button>
-              </div>
-            )}
-          </div>
+              </li>
+              <li className="mr-2">
+                <button
+                  disabled={loading}
+                  onClick={() => {
+                    setActiveTab("trained");
+                    setDataSelection([]);
+                    setSelectAll(false);
+                  }}
+                  className={activeTab === "trained" ? activeCSS : inactiveCSS}
+                >
+                  Trained
+                </button>
+              </li>
+            </ul>
 
-          {/* Table */}
-          <div className="">
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                    <th>
-                      {!loading && records.length !== 0 ? (
-                        <span className="px-6 py-3">
-                          <input
-                            type="checkbox"
-                            checked={selectAll}
-                            onChange={onSelectAll}
-                          />
-                        </span>
-                      ) : (
-                        ""
-                      )}
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      S.No
-                    </th>
-                    {dataType !== "linkedinTool" && (
-                      <th scope="col" className="px-6 py-3">
-                        Email
-                      </th>
+            <div className=" flex flex-row justify-end items-center gap-3">
+              {activeTab === "reviewed" && (
+                <div className="flex justify-end">
+                  <button
+                    onClick={handleDownload}
+                    className=" flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                  >
+                    {downloading ? (
+                      <>{refreshIconRotating} Downloading...</>
+                    ) : (
+                      <>{downloadIcon} Download All</>
                     )}
-                    <th scope="col" className="px-6 py-3">
-                      Type
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Status
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Date Time
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {loading && (
-                    <tr>
-                      <td
-                        className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
-                        colSpan={10}
-                      >
-                        Loading ...
-                      </td>
-                    </tr>
-                  )}
-                  {!loading && records && records.length === 0 && (
-                    <tr>
-                      <td
-                        className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
-                        colSpan={10}
-                      >
-                        No records found
-                      </td>
-                    </tr>
-                  )}
-                  {records &&
-                    records.map((rec: any, index: number) => (
-                      <tr
-                        key={rec._id}
-                        className="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                      >
-                        <td className="px-6 py-4">
-                          <input
-                            type="checkbox"
-                            checked={isChecked(rec._id)}
-                            onChange={(e) =>
-                              onSelecting(e.target.checked, rec._id)
-                            }
-                          />
-                        </td>
-                        <td className="px-6 py-4">
-                          {startingPage + index + 1}
-                        </td>
-                        {dataType !== "linkedinTool" && (
-                          <td className="px-6 py-4">{rec?.userEmail}</td>
-                        )}
-                        <th
-                          scope="row"
-                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-xs"
-                        >
-                          {rec.type.replaceAll(".", " -> ")}
-                        </th>
-                        <td className="px-6 py-4">
-                          {rec.status === "pending" && (
-                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                              Pending
-                            </span>
-                          )}
-                          {rec.status === "reviewed" && (
-                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                              Reviewed
-                            </span>
-                          )}
-                          {rec.status === "trained" && (
-                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                              Trained
-                            </span>
-                          )}
-                        </td>
-                        <td className="px-6 py-4">
-                          {getFormattedDate(rec.createdAt)}
-                        </td>
-                        <td className="flex gap-2 mt-2  items-center ">
-                          <Link
-                            href={`/admin/train-bot/${rec._id}`}
-                            className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
-                          >
-                            Review
-                          </Link>
+                  </button>
+                </div>
+              )}
 
-                          <button
-                            className="px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 no-underline"
-                            onClick={() => handleDelete(rec._id)}
-                          >
-                            Delete
-                          </button>
+              {activeTab === "reviewed" && records.length > 0 && (
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => {
+                      if (fineTuningModalRef.current) {
+                        fineTuningModalRef.current.openModal(true);
+                      }
+                    }}
+                    className=" flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                  >
+                    Tune Model
+                  </button>
+                </div>
+              )}
+
+              {activeTab === "reviewed" && dataSelection.length >= 1 && (
+                <div className="flex justify-end">
+                  <button
+                    disabled={loading}
+                    onClick={handleChangeStatus}
+                    className=" disabled:cursor-not-allowed flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                  >
+                    Set Status to Trained
+                  </button>
+                </div>
+              )}
+
+              {showDeleteAllButton() && (
+                <div className="flex justify-end">
+                  <button
+                    disabled={loading ? true : false}
+                    onClick={handleDeleteAll}
+                    className=" flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 disabled:cursor-not-allowed"
+                  >
+                    Delete All
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Table */}
+            <div className="">
+              <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      <th>
+                        {!loading && records.length !== 0 ? (
+                          <span className="px-6 py-3">
+                            <input
+                              type="checkbox"
+                              checked={selectAll}
+                              onChange={onSelectAll}
+                            />
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        S.No
+                      </th>
+                      {dataType !== "linkedinTool" && (
+                        <th scope="col" className="px-6 py-3">
+                          Email
+                        </th>
+                      )}
+                      <th scope="col" className="px-6 py-3">
+                        Type
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        Status
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        Date Time
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {loading && (
+                      <tr>
+                        <td
+                          className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+                          colSpan={10}
+                        >
+                          Loading ...
                         </td>
                       </tr>
-                    ))}
-                </tbody>
-              </table>
+                    )}
+                    {!loading && records && records.length === 0 && (
+                      <tr>
+                        <td
+                          className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+                          colSpan={10}
+                        >
+                          No records found
+                        </td>
+                      </tr>
+                    )}
+                    {records &&
+                      records.map((rec: any, index: number) => (
+                        <tr
+                          key={rec._id}
+                          className="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                        >
+                          <td className="px-6 py-4">
+                            <input
+                              type="checkbox"
+                              checked={isChecked(rec._id)}
+                              onChange={(e) =>
+                                onSelecting(e.target.checked, rec._id)
+                              }
+                            />
+                          </td>
+                          <td className="px-6 py-4">{index + 1}</td>
+                          {dataType !== "linkedinTool" && (
+                            <td className="px-6 py-4">{rec?.userEmail}</td>
+                          )}
+                          <th
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-xs"
+                          >
+                            {rec.type.replaceAll(".", " -> ")}
+                          </th>
+                          <td className="px-6 py-4">
+                            {rec.status === "pending" && (
+                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                Pending
+                              </span>
+                            )}
+                            {rec.status === "reviewed" && (
+                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                Reviewed
+                              </span>
+                            )}
+                            {rec.status === "trained" && (
+                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                Trained
+                              </span>
+                            )}
+                          </td>
+                          <td className="px-6 py-4">
+                            {getFormattedDate(rec.createdAt)}
+                          </td>
+                          <td className="flex gap-2 mt-2  items-center ">
+                            <Link
+                              href={`/admin/train-bot/${rec._id}`}
+                              className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
+                            >
+                              Review
+                            </Link>
+
+                            <button
+                              className="px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 no-underline"
+                              onClick={() => handleDelete(rec._id)}
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
             {/* Pagination Controls */}
             <div className=" flex justify-end mt-4">
@@ -744,7 +764,7 @@ const TrainRegistrationBotAdminPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

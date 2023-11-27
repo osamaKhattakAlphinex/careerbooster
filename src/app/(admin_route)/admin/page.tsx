@@ -17,6 +17,13 @@ const AdminDashboard = () => {
                 </div>
               </button>
             </Link>
+            <Link href="/admin/fine-tuning">
+              <button className="bg-gray-900 text-white rounded-lg px-6 py-4 hover:bg-gray-800">
+                <div className="flex flex-row gap-2">
+                  <span>Fine Tune Models</span>
+                </div>
+              </button>
+            </Link>
           </div>
         </div>
       </div>
