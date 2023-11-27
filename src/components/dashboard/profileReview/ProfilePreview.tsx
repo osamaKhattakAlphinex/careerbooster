@@ -10,37 +10,13 @@ import {
 import { setActiveStep, setStepFive } from "@/store/registerSlice";
 import { Education, WorkExperience } from "@/store/userDataSlice";
 import ExperienceCard from "./ExperienceCard";
-import Script from "next/script";
+
 const ProfilePreview = () => {
   const dispatch = useDispatch();
   const data = useSelector((state: any) => state.register);
 
   return (
     <div className="">
-      <Script type="text/javascript">
-        {`
-          (function(c,l,a,r,i,t,y){
-          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "jum6bniqm4");
-        `}
-      </Script>
-      {/* Google tag (gtag.js) --> */}
-      <Script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
-      />
-      <Script>
-        {`
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-NDN7TY5F2W');
-        `}
-      </Script>
       <h1 className="text-2xl font-semibold mb-2">Review your Resume</h1>
       <p className=" mb-4">Review and make any changes below.</p>
       <hr className="mb-4" />

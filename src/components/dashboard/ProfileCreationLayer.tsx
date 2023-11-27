@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DidYouKnowCard from "./DidYouKnowCard";
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import Script from "next/script";
+
 import { makeid } from "@/helpers/makeid";
 import {
   setScrapped,
@@ -615,30 +615,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   if (userData.email === "") {
     return (
       <div className="flex flex-col items-center justify-center h-screen pt-30">
-        <Script type="text/javascript">
-          {`
-          (function(c,l,a,r,i,t,y){
-          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "jum6bniqm4");
-        `}
-        </Script>
-        {/* Google tag (gtag.js) --> */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
-        />
-        <Script>
-          {`
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-NDN7TY5F2W');
-        `}
-        </Script>
         <h2 className="text-3xl font-bold text-center">Loading...</h2>
       </div>
     );
@@ -665,64 +641,12 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     ) {
       redirect("/subscribe");
     } else {
-      return (
-        <div className="pt-30">
-          <Script type="text/javascript">
-            {`
-          (function(c,l,a,r,i,t,y){
-          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "jum6bniqm4");
-        `}
-          </Script>
-          {/* Google tag (gtag.js) --> */}
-          <Script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
-          />
-          <Script>
-            {`
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-NDN7TY5F2W');
-        `}
-          </Script>
-          {children}
-        </div>
-      );
+      return <div className="pt-30">{children}</div>;
     }
   } else {
     /// if the user data is loaded and profile wizard is NOT completed show loader
     return (
       <div className="flex flex-col items-center justify-center h-screen pt-30 !pb-42">
-        <Script type="text/javascript">
-          {`
-          (function(c,l,a,r,i,t,y){
-          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "jum6bniqm4");
-        `}
-        </Script>
-        {/* Google tag (gtag.js) --> */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
-        />
-        <Script>
-          {`
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-NDN7TY5F2W');
-        `}
-        </Script>
         <h2 className="text-3xl font-bold text-center">
           Welcome {userData?.firstName + " " + userData?.lastName}
         </h2>

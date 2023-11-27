@@ -1,5 +1,5 @@
 import ViewPackage from "@/components/admin/linkedin-prompts/user-packages/ViewPackage";
-import Script from "next/script";
+
 const AdminUserPacakges = () => {
   return (
     <div className="mb-40 pt-16">

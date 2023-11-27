@@ -1,6 +1,5 @@
 /* eslint-disable react/display-name */
 "use client";
-import Script from "next/script";
 
 import axios from "axios";
 import React, {

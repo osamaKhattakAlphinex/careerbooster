@@ -4,7 +4,7 @@ import axios from "axios";
 import PromptEditor from "@/components/admin/linkedin-prompts/PromptEditor";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
-import Script from "next/script";
+
 const CoverLetterPromptsConfiguration = () => {
   const [promptsLoading, setPromptsLoading] = useState<boolean>(true);
   const [prompts, setPrompts] = useState<any[]>([]);

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Script from "next/script";
+
 const ProfileCompletionAlert = () => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const params = useSearchParams();

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "@/store/userDataSlice";
 import FileUploadHandler from "@/components/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
-import Script from "next/script";
+
 interface Props {
   selectedFile: string;
   setSelectedFile: React.Dispatch<React.SetStateAction<string>>;

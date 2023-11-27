@@ -12,7 +12,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card";
-import Script from "next/script";
+
 const UsersPage = () => {
   const router = useRouter();
   const pathname = usePathname();

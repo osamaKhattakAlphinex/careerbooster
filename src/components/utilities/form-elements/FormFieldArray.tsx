@@ -1,5 +1,4 @@
 import React from "react";
-import Script from "next/script";
 
 interface Props {
   fields: any;

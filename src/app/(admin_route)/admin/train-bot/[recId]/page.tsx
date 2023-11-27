@@ -8,7 +8,7 @@ import {
 } from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";
-import Script from "next/script";
+
 import { useEffect, useState } from "react";
 
 const ReviewTrainBotRecord = ({ params }: { params: { recId: string } }) => {

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import Script from "next/script";
+
 interface LimitCardProps {
   title: string;
   limit: number;

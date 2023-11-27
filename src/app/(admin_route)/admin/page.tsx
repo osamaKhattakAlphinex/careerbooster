@@ -1,6 +1,6 @@
 import { antIcon } from "@/helpers/iconsProvider";
 import Link from "next/link";
-import Script from "next/script";
+
 const AdminDashboard = () => {
   return (
     <>

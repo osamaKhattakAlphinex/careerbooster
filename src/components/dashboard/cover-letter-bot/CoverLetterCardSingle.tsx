@@ -7,7 +7,7 @@ import { setUserData } from "@/store/userDataSlice";
 import ReactToPrint from "react-to-print";
 import Html2Pdf from "js-html2pdf";
 import { resetCoverLetter, setCoverLetter } from "@/store/coverLetterSlice";
-import Script from "next/script";
+
 type CoverLetterType = {
   card: any;
   componentRef: any;
@@ -49,30 +49,6 @@ const CoverLetterCardSingle = ({ card, componentRef }: CoverLetterType) => {
 
   return (
     <div className="w-full max-w-sm  border border-gray-200 rounded-lg shadow p-2 sm:p-4">
-      <Script type="text/javascript">
-        {`
-          (function(c,l,a,r,i,t,y){
-          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "jum6bniqm4");
-        `}
-      </Script>
-      {/* Google tag (gtag.js) --> */}
-      <Script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
-      />
-      <Script>
-        {`
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-NDN7TY5F2W');
-        `}
-      </Script>
       <p className="text-base mb-3 ">
         Generated on {getFormattedDate(card.generatedOnDate)}
       </p>

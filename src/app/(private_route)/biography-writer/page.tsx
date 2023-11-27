@@ -8,7 +8,7 @@ import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import BiograpyFileUploader from "@/components/dashboard/biography-writer/BiograpyFileUploader";
 import Button from "@/components/utilities/form-elements/Button";
-import Script from "next/script";
+
 const BiographyWriter = () => {
   const componentRef = useRef<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();

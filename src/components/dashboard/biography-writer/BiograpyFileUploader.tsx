@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { deleteIcon } from "@/helpers/iconsProvider";
-import Script from "next/script";
+
 interface Props {
   selectedFile: string;
   setSelectedFile: React.Dispatch<React.SetStateAction<string>>;

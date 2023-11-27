@@ -1,6 +1,6 @@
 "use client";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
-import Script from "next/script";
+
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";

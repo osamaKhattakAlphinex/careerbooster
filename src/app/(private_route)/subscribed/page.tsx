@@ -3,7 +3,7 @@ import { stripe } from "@/lib/stripe";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
 import Stripe from "stripe";
-import Script from "next/script";
+
 type Props = {
   params: any;
   searchParams: {

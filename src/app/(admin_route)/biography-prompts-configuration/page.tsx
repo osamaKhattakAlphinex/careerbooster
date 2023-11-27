@@ -4,7 +4,6 @@ import axios from "axios";
 import PromptEditor from "@/components/admin/linkedin-prompts/PromptEditor";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
-import Script from "next/script";
 
 const LinkedInPromptsConfiguration = () => {
   const [promptsLoading, setPromptsLoading] = useState<boolean>(true);

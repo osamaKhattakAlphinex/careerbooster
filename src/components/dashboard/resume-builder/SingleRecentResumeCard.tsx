@@ -10,7 +10,7 @@ import ReactToPrint, { useReactToPrint } from "react-to-print";
 import { useSession } from "next-auth/react";
 import Html2Pdf from "js-html2pdf";
 import { useState } from "react";
-import Script from "next/script";
+
 const SingleRecentResumeCard = ({
   resume,
   source,
@@ -69,30 +69,6 @@ const SingleRecentResumeCard = ({
 
   return (
     <div className="w-full border border-gray-200 rounded-lg shadow p-2 sm:p-4">
-      <Script type="text/javascript">
-        {`
-          (function(c,l,a,r,i,t,y){
-          c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "jum6bniqm4");
-        `}
-      </Script>
-      {/* Google tag (gtag.js) --> */}
-      <Script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
-      />
-      <Script>
-        {`
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-NDN7TY5F2W');
-        `}
-      </Script>
       <h2 className="text-lg overflow-hidden whitespace-nowrap">
         {resume?.state?.jobPosition}
       </h2>

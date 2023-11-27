@@ -9,7 +9,7 @@ import {
 import { faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Link from "next/link";
-import Script from "next/script";
+
 import { useEffect, useRef, useState } from "react";
 import { string } from "yup";
 

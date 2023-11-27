@@ -1,5 +1,5 @@
 import RegistrationForm from "@/components/new-layout/Register/RegistraionForm";
-import Script from "next/script";
+
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Register",

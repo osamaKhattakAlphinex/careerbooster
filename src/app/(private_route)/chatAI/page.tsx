@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { getFilesForUser } from "@/helpers/getFilesForUser";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
-import Script from "next/script";
+
 const ChatAI = () => {
   const [msgTxt, setMsgTxt] = useState<string>("what is my name?");
   const [loading, setMsgLoading] = useState<boolean>(false); // msg loading
