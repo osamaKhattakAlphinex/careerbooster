@@ -1,6 +1,7 @@
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
+const ObjectId = require("mongodb").ObjectId;
 
 export async function GET(req: any) {
   const url = new URL(req.url);
@@ -43,11 +44,28 @@ export async function GET(req: any) {
       createdAt: { $gt: firstDayOfYear, $lt: currentDate },
     });
 
+    const activeUser = await User.countDocuments({
+      status: true,
+    });
+
+    const userPackageId = new ObjectId("65144e9817dd55f9a2e3ff6c");
+
+    const freeUser = await User.countDocuments({
+      userPackage: userPackageId,
+    });
+
+    const paidUser = await User.countDocuments({
+      userPackage: { $ne: userPackageId },
+    });
+
     return NextResponse.json({
       total,
       thisMonth,
       thisWeek,
       thisYear,
+      activeUser,
+      paidUser,
+      freeUser,
       success: true,
     });
   } catch {

@@ -11,7 +11,7 @@ export async function GET(req: any) {
   try {
     await startDB();
 
-    const userDetails = await User.find()
+    const userDetails = await User.find({ role: { $ne: "admin" } })
       .sort({ createdAt: -1 })
       .limit(limit)
       .skip(skip);
