@@ -17,6 +17,7 @@ import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import CoverLetterCardSingle from "@/components/dashboard/cover-letter-bot/CoverLetterCardSingle";
 import { makeid } from "@/helpers/makeid";
 import { resetCoverLetter, setCoverLetter } from "@/store/coverLetterSlice";
+import Html2Pdf from "js-html2pdf";
 
 const CoverLetterWriter = () => {
   const componentRef = useRef<any>(null);
@@ -531,14 +532,25 @@ const CoverLetterWriter = () => {
                         d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
                       />
                     </svg>
-                    <span>Print / Download in PDF</span>
+                    <span>Download</span>
                     {/* <span>
                             To download choose destination "save as PDF"
                           </span> */}
                   </div>
                 </Button>
               )}
+              // content={() => componentRef.current}
+              // onBeforeGetContent={async () => await handleOnView(card)}
               content={() => componentRef.current}
+              print={async (printIframe: HTMLIFrameElement) => {
+                const document = printIframe.contentDocument;
+                if (document) {
+                  const exporter = new Html2Pdf(componentRef.current, {
+                    filename: `coverletter.pdf`,
+                  });
+                  exporter.getPdf(true);
+                }
+              }}
             />
             {show && (
               <div>

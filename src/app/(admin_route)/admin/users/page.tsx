@@ -28,7 +28,9 @@ const UsersPage = () => {
   const [subscriptionId, setSubscriptionId] = useState("");
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [dataSelection, setDataSelection] = useState<string[]>([]);
+
   const [counts, setCounts] = useState<any>(null);
+  const [userStats, setUserStats] = useState<any>("total");
 
   const handleDelete = async (id: string) => {
     const c = confirm("Are you sure you want to delete this Record?");
@@ -254,16 +256,27 @@ const UsersPage = () => {
         >
           <Card>
             <CardHeader className="pb-2">
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between">
                 <CardTitle className="text-sm font-medium mb-0">
                   Total Users
                 </CardTitle>
                 <IconUsersicon className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
-              </div>
+              </div> */}
+
+              <select
+                onChange={(e) => setUserStats(e.target.value)}
+                className="p-2"
+              >
+                <option value="total">Total Users</option>
+                <option value="thisWeek">Registered This Week</option>
+                <option value="thisMonth">Registered This Month</option>
+                <option value="thisYear">Registered This Year</option>
+              </select>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-3xl font-bold">
-                {counts ? counts.total : 0}
+                {/* {counts ? counts.total : 0} */}
+                {counts ? counts[userStats] : 0}
               </div>
             </CardContent>
           </Card>
@@ -271,14 +284,15 @@ const UsersPage = () => {
             <CardHeader className="pb-1">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-sm font-medium mb-0">
-                  Registered This Week
+                  {/* Registered This Week */}
+                  Free Users
                 </CardTitle>
                 <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
               </div>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-3xl font-bold">
-                {counts ? counts.thisWeek : 0}
+                {counts ? counts.freeUser : 0}
               </div>
             </CardContent>
           </Card>
@@ -286,30 +300,31 @@ const UsersPage = () => {
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-sm font-medium mb-0">
-                  Registered This Month
+                  {/* Registered This Month */}
+                  Paid Users
                 </CardTitle>
                 <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
               </div>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-3xl font-bold">
-                {counts ? counts.thisMonth : 0}
+                {counts ? counts.paidUser : 0}
               </div>
             </CardContent>
           </Card>
-
           <Card>
             <CardHeader className="pb-0">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-sm font-medium mb-0">
-                  Registered This Year
+                  {/* Registered This Year */}
+                  Active Users
                 </CardTitle>
                 <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
               </div>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-3xl font-bold">
-                {counts ? counts.thisYear : 0}
+                {counts ? counts.activeUser : 0}
               </div>
             </CardContent>
           </Card>
