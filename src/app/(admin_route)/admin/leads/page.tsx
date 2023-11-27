@@ -1,4 +1,5 @@
 "use client";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import {
   downloadIcon,
@@ -10,6 +11,7 @@ import Link from "next/link";
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
+import { string } from "yup";
 
 const LeadsAdminPage = () => {
   const [limitOfRecords, setLimitOfRecords] = useState<number>(10);
@@ -21,6 +23,10 @@ const LeadsAdminPage = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const [counts, setCounts] = useState<any>(0);
+  const [countLabel, setCountLabel] = useState<string>("total");
+
   const fetchRecords = async (startIndex: number, endIndex: number) => {
     setLoading(true);
     if (!loading) {
@@ -47,6 +53,18 @@ const LeadsAdminPage = () => {
     }
   };
 
+  const getlinkedInToolUsersCount = async () => {
+    axios.get("/api/leads/getLinkedInToolUserCount").then((res) => {
+      if (res.data.success) {
+        setCounts(res.data);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getlinkedInToolUsersCount();
+  }, []);
+
   useEffect(() => {
     const existingNumberOfRecords = searchParams?.get("r");
     const existingPage = searchParams?.get("p");
@@ -72,6 +90,37 @@ const LeadsAdminPage = () => {
 
   return (
     <div className="pt-30">
+      <div
+        key="1"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6"
+      >
+        <Card>
+          <CardHeader className="pb-2">
+            {/* <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium mb-0">
+                  Total Users
+                </CardTitle>
+                <IconUsersicon className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+              </div> */}
+            <select
+              onChange={(e) => setCountLabel(e.target.value)}
+              className="p-2"
+            >
+              <option value="total">Total Users</option>
+              <option value="thisWeek">Used This Week</option>
+              <option value="thisMonth">Used This Month</option>
+              <option value="thisYear">Used This Year</option>
+            </select>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="text-3xl font-bold">
+              {/* {counts ? counts.total : 0} */}
+              {counts ? counts[countLabel] : 0}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
       <div className="my-5 ml-10">
         <Link
           href="/admin"
