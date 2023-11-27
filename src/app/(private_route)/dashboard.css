@@ -18,3 +18,10 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.parent .child {
+  display: none; /* Hide child divs by default */
+}
+
+.parent:hover .child {
+  display: block; /* Show child divs when the parent is hovered */
+}

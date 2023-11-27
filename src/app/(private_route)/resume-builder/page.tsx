@@ -73,14 +73,17 @@ const ResumeBuilder = () => {
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
   const handleGenerate = useCallback(async () => {
+    console.log("resumeData.state.jobPosition", percentageCalculated);
+    
     await getUserDataIfNotExists();
     // reset resume
     dispatch(resetResume(resumeData.state));
 
     if (
       resumeData.state.jobPosition !== "" &&
-      session?.user?.email &&
-      percentageCalculated
+      session?.user?.email 
+      // &&
+      // percentageCalculated 
     ) {
       dispatch(setState({ name: "resumeLoading", value: true }));
       dispatch(setId(""));

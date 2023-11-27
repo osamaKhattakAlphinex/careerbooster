@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 // import ReactToPrint from "react-to-print";
 // import DownloadDocx from "../resume-templates/template-1/DownloadDocx";
 import { setState } from "@/store/resumeSlice";
-import Button from "@/components/utilities/form-elements/Button";
 // import NewButton from "@/components/utilities/form-elements/Button";
 import Link from "next/link";
+import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 
 interface Props {
   handleGenerate: () => Promise<void>;
@@ -19,12 +19,16 @@ const GenerateResume = ({
 }: // availablePercentage,
 Props) => {
   const [showInstruction, setShowInstruction] = useState<boolean>(false);
+  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
+  const [percentageCalculated, setPercentageCalculated] =
+    useState<boolean>(false);
   // Redux
   const { data: session } = useSession();
   const dispatch = useDispatch();
   const state = useSelector((state: any) => state.resume.state);
   const userData = useSelector((state: any) => state.userData);
   const memoizedState = useMemo(() => state, [state]);
+
   return (
     <div className=" bg-[#17151B] rounded-[20px] py-9 px-[30px] flex flex-col gap-7 ">
       {/* header */}
@@ -33,7 +37,14 @@ Props) => {
           generate new resume
         </h3>
         <div className=" text-sm text-white uppercase font-bold">
-          Available Credits:<span className="text-[#B324D7]"> 1 out of 1</span>
+          <LimitCard
+            title="AvailableCredits : "
+            limit={userData?.userPackageData?.limit?.resumes_generation}
+            used={userData?.userPackageUsed?.resumes_generation}
+            setPercentageCalculated={setPercentageCalculated}
+            availablePercentage={availablePercentage}
+            setAvailablePercentage={setAvailablePercentage}
+          />
         </div>
       </div>
 
