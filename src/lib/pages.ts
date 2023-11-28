@@ -33,6 +33,10 @@ export const getPages = () => {
       route: "/linkedin",
     },
     {
+      name: "Profile Review",
+      route: "/profile-review",
+    },
+    {
       name: "Privacy Policy",
       route: "/privacy-policy",
     },
