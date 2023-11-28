@@ -29,7 +29,7 @@ const cardDetail = [
     action: "launch",
   },
   {
-    title: "Generator Letter Generator",
+    title: "Generator Cover Letters",
     description:
       "From its medieval origins to the digital era, learn everything",
     link: "/cover-letter-generator",
