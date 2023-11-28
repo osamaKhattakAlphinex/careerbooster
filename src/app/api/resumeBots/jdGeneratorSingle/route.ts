@@ -83,11 +83,6 @@ export async function POST(req: any) {
     const stream = OpenAIStream(response);
     // Respond with the stream
     return new StreamingTextResponse(stream);
-    // return NextResponse.json(
-    //   { result: output.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
-    //   { status: 200 }
-    // );
-    // res.end();
   } catch (error) {
     return NextResponse.json(
       { result: "Something went wrong", success: false },
