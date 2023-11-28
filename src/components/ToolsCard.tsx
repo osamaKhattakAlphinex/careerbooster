@@ -11,6 +11,7 @@ const ToolsCard = ({
   bgColor1,
   bgColor2,
   isActive,
+  action
 }: {
   title: string;
   description: string;
@@ -19,6 +20,7 @@ const ToolsCard = ({
   bgColor1: string;
   bgColor2: string;
   isActive: boolean;
+  action:string;
 }) => {
   return (
     <div className="w-[310px] h-auto flex mb-8">
@@ -40,7 +42,7 @@ const ToolsCard = ({
             isActive ? `text-white` : `text-[#959595]`
           } font-semibold`}
         >
-          launch <i className="ml-2">{chevronRight}</i>
+          {action} <i className="ml-2">{chevronRight}</i>
         </Link>
       </div>
     </div>

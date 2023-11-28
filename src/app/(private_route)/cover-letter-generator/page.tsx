@@ -10,7 +10,7 @@ import copy from "clipboard-copy";
 import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
 import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
 import Button from "@/components/utilities/form-elements/Button";
-import LimitCard from "@/components/dashboard/LimitCard";
+import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
@@ -115,14 +115,13 @@ export default function CoverLetterPage() {
   const { resumes, coverLetters } = userData;
 
   const handleGenerate = async () => {
-  
-
     // await getUserDataIfNotExists();
     if (
-      session?.user?.email &&
-      aiInputUserData &&
-      !isNaN(availablePercentageCoverLetter) &&
-      availablePercentageCoverLetter !== 0
+      true
+      // session?.user?.email &&
+      // aiInputUserData &&
+      // !isNaN(availablePercentageCoverLetter) &&
+      // availablePercentageCoverLetter !== 0
     ) {
       setMsgLoading(true);
       setShow(true);
@@ -374,8 +373,16 @@ export default function CoverLetterPage() {
                   Generate Cover Letter
                 </h3>
                 <div className=" text-sm text-white uppercase font-bold">
-                  Available Credits:
-                  <span className="text-[#B324D7]"> 1 out of 1</span>
+                  <LimitCard
+                    title="Cover Letter Availble"
+                    limit={
+                      userData?.userPackageData?.limit?.cover_letter_generation
+                    }
+                    used={userData?.userPackageUsed?.cover_letter_generation}
+                    setPercentageCalculated={setPercentageCalculatedCoverLetter}
+                    availablePercentage={availablePercentageCoverLetter}
+                    setAvailablePercentage={setAvailablePercentageCoverLetter}
+                  />
                 </div>
               </div>
 
@@ -395,7 +402,11 @@ export default function CoverLetterPage() {
               <div className="flex flex-col gap-5 lg:px-0 px-8">
                 <label
                   htmlFor="default-radio-1"
-                  className="flex gap-3 items-center rounded-full border-[1px] border-[#615DFF] lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[400px]"
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[400px] ${
+                    selectedOption === "profile"
+                      ? "border-[1px] border-[#615DFF]"
+                      : ""
+                  }`}
                 >
                   <input
                     style={{
@@ -407,35 +418,41 @@ export default function CoverLetterPage() {
                     type="radio"
                     value="profile"
                     name="default-radio"
-                    // onChange={(e) => setSelectedOption(e.target.value)}
-                    onChange={(e) => {
-                      setUploadPdfFile(e.target.value);
-                    }}
+                    onChange={(e) => setSelectedOption(e.target.value)}
+                    // onChange={(e) => {
+                    //   setUploadPdfFile(e.target.value);
+                    // }}
+                    checked={selectedOption === "profile"}
                     className="w-5 h-4"
                   />
                   Use My Persona to write the Cover Letter
                 </label>
                 <label
-                  htmlFor="default-radio-1"
-                  className="flex gap-3 items-center rounded-full border-[1px] border-[#353672] lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[290px]"
+                  htmlFor="default-radio-2"
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[290px] ${
+                    selectedOption === "file"
+                      ? "border-[1px] border-[#615DFF]"
+                      : ""
+                  } `}
                 >
                   <input
-                    id="default-radio-1"
+                    id="default-radio-2"
                     type="radio"
                     value="file"
-                    onChange={(e) => {
-                      setUploadPdfFile(e.target.value);
-                    }}
                     // onChange={(e) => {
-                    //   setSelectedFile("");
-                    //   setSelectedOption(e.target.value);
+                    //   setUploadPdfFile(e.target.value);
                     // }}
+                    onChange={(e) => {
+                      setSelectedFile("");
+                      setSelectedOption(e.target.value);
+                    }}
                     name="default-radio"
                     className="w-4 h-4 border-[1px]"
+                    checked={selectedOption === "file"}
                   />
                   Upload a new PDF Resume
                 </label>
-                {uploadPdfFile == "file" ? (
+                {selectedOption == "file" ? (
                   <CoverLetterFileUploader
                     selectedFile={selectedFile}
                     setSelectedFile={setSelectedFile}
@@ -466,8 +483,24 @@ export default function CoverLetterPage() {
                 </div>
                 <button
                   type="button"
+                  disabled={
+                    msgLoading ||
+                    !session?.user?.email ||
+                    !aiInputUserData ||
+                    selectedOption === "" ||
+                    (selectedOption === "file" && selectedFile === "") ||
+                    jobDescription === ""
+                  }
                   onClick={handleGenerate}
-                  className="bg-gradient-to-r from-[#B324D7]  to-[#615DFF] flex flex-row justify-center items-center gap-2 py-3 px-[28px]  rounded-full"
+                  className={`bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                    (msgLoading ||
+                      !session?.user?.email ||
+                      !aiInputUserData ||
+                      selectedOption === "" ||
+                      (selectedOption === "file" && selectedFile === "") ||
+                      jobDescription === "") &&
+                    "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
+                  }`}
                 >
                   <Image
                     src="/icon/u_bolt-alt.svg"
@@ -476,14 +509,11 @@ export default function CoverLetterPage() {
                     width={18}
                   />
                   <span className="text-white text-[15px] font-semibold">
-                    Generate Cover Letter
+                    {msgLoading ? "Please wait..." : "Generate Cover Letter"}
                   </span>
                 </button>
               </div>
-              <div className="mt-[40px] ">
-                  <h1 className="uppercase text-white font-bold text-[18px] pb-5">
-                    your ai generated cover letter
-                  </h1>
+
               {/* <h2 className="text-white font-bold text-[22px]">
                     Job Bid as a Consultant
                   </h2>
@@ -522,8 +552,11 @@ export default function CoverLetterPage() {
                     <p className="text-white text-[16px]">[Your Name]</p>
                   </div> */}
               {show && (
-                <>
-                 <div className="aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px]">
+                <div className="mt-[40px] ">
+                  <h1 className="uppercase text-white font-bold text-[18px] pb-5">
+                    your ai generated cover letter
+                  </h1>
+                  <div className="aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px]">
                     <div
                       className={`w-[100%] text-white ${
                         msgLoading ? "animate-pulse" : ""
@@ -561,12 +594,21 @@ export default function CoverLetterPage() {
                             selectedOption === "" ||
                             (selectedOption === "file" &&
                               selectedFile === "") ||
-                            (selectedOption === "aiResume" &&
-                              setSelectedResumeId === "") ||
+                            // (selectedOption === "aiResume" &&
+                            //   setSelectedResumeId === "") ||
                             jobDescription === ""
                           }
                           onClick={handleGenerate}
-                          className="flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#B324D7] border rounded-full"
+                          className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#B324D7] border rounded-full ${
+                            (msgLoading ||
+                              !session?.user?.email ||
+                              !aiInputUserData ||
+                              selectedOption === "" ||
+                              (selectedOption === "file" &&
+                                selectedFile === "") ||
+                              jobDescription === "") &&
+                            "disabled-btn" // Add this class when the button is disabled
+                          }`}
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -679,11 +721,8 @@ export default function CoverLetterPage() {
                       </button>
                     )}
                   </div>
-                </>
-                 
-               
+                </div>
               )}
-              </div>
             </div>
           </>
         </div>

@@ -205,23 +205,8 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   return (
     <>
       <div className="py-4  p-4 mb-4 rounded-lg">
-        <div className="w-full mb-8">
-          <LimitCard
-            title="File uploads available"
-            limit={userData?.userPackageData?.limit?.pdf_files_upload}
-            used={userData?.userPackageUsed?.pdf_files_upload}
-            setPercentageCalculated={setPercentageCalculated}
-            availablePercentage={availablePercentage}
-            setAvailablePercentage={setAvailablePercentage}
-          />
-        </div>
-
         {!isNaN(availablePercentage) && availablePercentage !== 0 && (
           <div className="py-3">
-            <div className=" text-sm text-white uppercase ">
-              File uploads available :
-              <span className="text-[#B324D7] font-bold"> 2 out of 3</span>
-            </div>
             <div className="py-[20px] w-[480px] px-[30px] flex gap-4 border-2 rounded-[10px] mt-4 border-[#312E37] border-dashed	">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -282,7 +267,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
           <p>Loading Files...</p>
         ) : (
           <div className="flex flex-col gap-4 mt-[30px]">
-            <span className="text-sm text-[#615DFF] uppercase font-bold">
+            <span className="text-sm text-[#615DFF]  uppercase font-bold">
               or Choose File to use
             </span>
             <ul>
