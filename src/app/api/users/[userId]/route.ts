@@ -5,6 +5,7 @@ import startDB from "@/lib/db";
 import User from "@/db/schemas/User";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
+const ObjectId = require("mongodb").ObjectId;
 
 export const PUT = async (
   req: any,
@@ -28,7 +29,12 @@ export const PUT = async (
     const { userId } = params;
     const request = await req.json();
     const status = request?.status;
-    const userPackageExpirationDate = request?.userPackageExpirationDate;
+    const userPackage = await new ObjectId(request?.userPackage);
+    const userPackageExpirationDate =
+      request?.userPackage === "65144fcc17dd55f9a2e3ff6e"
+        ? Date.now() + 365 * 24 * 60 * 60 * 1000
+        : Date.now() + 30 * 24 * 60 * 60 * 1000;
+    const userPackageUsed = request?.userPackageUsed;
     await startDB();
     if (status !== undefined) {
       const user = await User.findOneAndUpdate(
@@ -45,7 +51,11 @@ export const PUT = async (
     if (userPackageExpirationDate !== undefined) {
       const user = await User.findOneAndUpdate(
         { _id: userId },
-        { userPackageExpirationDate: userPackageExpirationDate },
+        {
+          userPackageExpirationDate: userPackageExpirationDate,
+          userPackage: userPackage,
+          userPackageUsed: userPackageUsed,
+        },
         { new: true }
       );
       return NextResponse.json({
