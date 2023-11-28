@@ -17,7 +17,6 @@ export async function POST(request: any) {
   try {
     await startDB();
     const payload = await request.json();
-    console.log(payload);
     const response = await Coupon.create({ ...payload });
     return NextResponse.json(
       { result: response, success: true },

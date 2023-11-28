@@ -51,16 +51,6 @@ export async function POST(req: any) {
           ],
         });
 
-        // const responseForTraining = await openai.chat.completions.create({
-        //   model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
-        //   messages: [
-        //     {
-        //       role: "user",
-        //       content: input,
-        //     },
-        //   ],
-        //   temperature: 1,
-        // });
         try {
           if (trainBotData) {
             await startDB();
@@ -69,7 +59,7 @@ export async function POST(req: any) {
             const obj = {
               type: "linkedinAiTool.headline",
               input: input,
-              output: response.choices[0].message.content,
+              output: response,
               idealOutput: "",
               status: "pending",
               //  userEmail: trainBotData.userEmail,

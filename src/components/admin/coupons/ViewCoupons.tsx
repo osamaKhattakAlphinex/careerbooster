@@ -9,7 +9,7 @@ import ReadCoupon from "./ReadCoupon";
 // import { Link } from 'react-router-dom'; // Import Link from React Router if you're using it
 // import AddProduct from './AddProduct'; // Import the AddProduct component
 import axios from "axios";
-// import UpdateCoupon from "./UpdateCoupon";
+import UpdateCoupon from "./UpdateCoupon";
 import ConfirmationModal from "@/components/utilities/form-elements/ConfirmationModal";
 
 type Coupon = {
@@ -140,10 +140,10 @@ const ViewCoupons = ({}) => {
                               aria-labelledby="apple-imac-27-dropdown-button"
                             >
                               <li>
-                                {/* <UpdatePackage
-                                  userPackage={pckg}
-                                  getPackages={getPackages}
-                                /> */}
+                                <UpdateCoupon
+                                  userCoupon={coupon}
+                                  getCoupons={getCoupons}
+                                />
                               </li>
                               <li>
                                 <ReadCoupon userCoupon={coupon} />

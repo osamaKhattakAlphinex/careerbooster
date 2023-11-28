@@ -150,10 +150,7 @@ export async function POST(req: any) {
             const obj = {
               type: "resume.writeSummary",
               input: promptSummary,
-              output: response?.choices[0]?.message?.content?.replace(
-                /(\r\n|\n|\r)/gm,
-                ""
-              ),
+              output: response,
               idealOutput: "",
               status: "pending",
               userEmail: trainBotData.userEmail,

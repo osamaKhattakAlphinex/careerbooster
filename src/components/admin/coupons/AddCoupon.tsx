@@ -113,7 +113,7 @@ const AddCoupon = ({ getCoupons }: Props) => {
         livemode: false,
         // percent_off: null,
         forUserPackageCategory: values.category,
-        expiresAt: values.expiryDate,
+        expiresAt: new Date(values.expiryDate),
         valid: values.status === "active" ? true : false,
         times_redeemed: 0,
       });

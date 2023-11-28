@@ -65,10 +65,7 @@ export async function POST(req: any) {
         const obj = {
           type: "resume.writeJDSingle",
           input: prompt,
-          output: response?.choices[0]?.message?.content?.replace(
-            /(\r\n|\n|\r)/gm,
-            ""
-          ),
+          output: response,
           idealOutput: "",
           status: "pending",
           userEmail: trainBotData.userEmail,
