@@ -10,7 +10,6 @@ type Props = {
 const PreviouslyGeneratedList = ({Component }: Props) => {
   const userData = useSelector((state: any) => state.userData);
   if (!userData) return;
-
   return (
 
        <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-[30px] py-[35px]">

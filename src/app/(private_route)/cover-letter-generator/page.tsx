@@ -348,7 +348,11 @@ export default function CoverLetterPage() {
 
   const historyProps = {
     Component: (card: any) => (
-      <CoverLetterCardSingle card={card} componentRef={componentRef} />
+      <CoverLetterCardSingle
+        card={card}
+        source="dashboard"
+        componentRef={componentRef}
+      />
     ),
   };
 
@@ -514,49 +518,12 @@ export default function CoverLetterPage() {
                 </button>
               </div>
 
-              {/* <h2 className="text-white font-bold text-[22px]">
-                    Job Bid as a Consultant
-                  </h2>
-                  <h3 className="text-white text-[16px]">
-                    Dear [Hiring Manager's Name],
-                  </h3>
-                  <p className="text-white text-[16px]  leading-[30px]">
-                    I am writing to express my interest in the Consultant
-                    position at your company, as advertised in the job
-                    description. With my extensive background and expertise in
-                    [relevant field], I believe I am well-suited to provide
-                    valuable insights and strategies to support your
-                    organization's goals.
-                  </p>
-                  <p className="text-white text-[16px]  leading-[30px]">
-                    Using my proven track record in [specific area of
-                    expertise], I have successfully assisted numerous clients in
-                    achieving their objectives and driving business growth. I
-                    have a deep understanding of [industry/sector], enabling me
-                    to quickly identify opportunities and develop effective
-                    solutions. Drawing on my strong analytical skills, I am
-                    capable of analyzing complex data sets and providing
-                    actionable recommendations.
-                    <br />
-                    <br />
-                  </p>
-                  <p className="text-white text-[16px]  leading-[30px]">
-                    Thank you for considering my application. I am eager to
-                    discuss my qualifications further and explore ways in which
-                    I can support your organization's success. Please find
-                    attached my resume for your review. <br />
-                    <br />
-                  </p>
-                  <div className="flex flex-col gap-2">
-                    <p className="text-white text-[16px]">Sincerely,</p>
-                    <p className="text-white text-[16px]">[Your Name]</p>
-                  </div> */}
               {show && (
                 <div className="mt-[40px] ">
                   <h1 className="uppercase text-white font-bold text-[18px] pb-5">
                     your ai generated cover letter
                   </h1>
-                  <div className="aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px]">
+                  {/* <div className="aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px]">
                     <div
                       className={`w-[100%] text-white ${
                         msgLoading ? "animate-pulse" : ""
@@ -582,10 +549,50 @@ export default function CoverLetterPage() {
                         )}
                       </div>
                     </div>
+                  </div> */}
+                  <div
+                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px] shadow ${
+                      msgLoading ? "animate-pulse" : ""
+                    }`}
+                  >
+                    {/* <div className="p-12" ref={componentRef}>
+            {isEditing ? (
+              <div
+                contentEditable="true"
+                dangerouslySetInnerHTML={{ __html: editedContent }}
+                onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
+                  setEditedContent(e.target.innerHTML);
+                }}
+              ></div>
+            ) : (
+              <div onClick={handleClick}>
+                <div dangerouslySetInnerHTML={{ __html: streamedData }}></div>
+              </div>
+            )}
+          </div> */}
+                    <div ref={componentRef}>
+                      {isEditing ? (
+                        <div
+                          id="editor"
+                          contentEditable="true"
+                          // dangerouslySetInnerHTML={{ __html: editedContent }}
+                          // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
+                          //   setEditedContent(e.target.innerHTML);
+                          // }}
+                        ></div>
+                      ) : (
+                        <div>
+                          <div
+                            className="text-white "
+                            dangerouslySetInnerHTML={{ __html: streamedData }}
+                          ></div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div className="buttons mt-5 flex gap-3">
                     {!isNaN(availablePercentageCoverLetter) &&
-                      availablePercentageCoverLetter == 0 && (
+                      availablePercentageCoverLetter !== 0 && (
                         <button
                           disabled={
                             msgLoading ||
@@ -607,7 +614,7 @@ export default function CoverLetterPage() {
                               (selectedOption === "file" &&
                                 selectedFile === "") ||
                               jobDescription === "") &&
-                            "disabled-btn" // Add this class when the button is disabled
+                            "opacity-50 cursor-not-allowed" // Add this class when the button is disabled
                           }`}
                         >
                           <svg
@@ -637,7 +644,11 @@ export default function CoverLetterPage() {
                           disabled={
                             !show || msgLoading || !session?.user?.email
                           }
-                          className="flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#37B944] border rounded-full"
+                          className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#37B944] border rounded-full ${
+                            !show || msgLoading || !session?.user?.email
+                              ? "opacity-50 cursor-not-allowed"
+                              : ""
+                          } `}
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -675,7 +686,19 @@ export default function CoverLetterPage() {
                           isCoverLetterCopied
                         }
                         onClick={() => copyCoverLetter(streamedData)}
-                        className="flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full"
+                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full ${
+                          msgLoading ||
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          (selectedOption === "aiResume" &&
+                            setSelectedResumeId === "") ||
+                          !show ||
+                          isCoverLetterCopied
+                            ? "opacity-50 cursor-not-allowed"
+                            : ""
+                        }`}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

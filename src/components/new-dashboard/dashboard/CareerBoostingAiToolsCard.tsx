@@ -17,7 +17,7 @@ const CareerBoostingAiToolsCard = () => {
   const [activeTab, setActiveTab] = useState("resumemaker");
   const historyProps = {
     Component: (card: any) => (
-      <CoverLetterCardSingle card={card}  />
+      <CoverLetterCardSingle card={card} source="dashboard" />
     ),
   };
   return (

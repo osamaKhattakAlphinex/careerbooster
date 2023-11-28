@@ -1,3 +1,4 @@
+"use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEye, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
@@ -10,22 +11,28 @@ import { resetCoverLetter, setCoverLetter } from "@/store/coverLetterSlice";
 import Image from "next/image";
 import { rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
 import PencilLine from "@/../public/icon/PencilLine.png";
+import { useRouter } from "next/navigation";
 
 type CoverLetterType = {
   card?: any;
   componentRef?: any;
+  source?: string;
 };
 
-const CoverLetterCardSingle = ({ card, componentRef }: CoverLetterType) => {
-  console.log(
-    "🚀 ~ file: CoverLetterCardSingle.tsx:20 ~ CoverLetterCardSingle ~ card:",
-    card
-  );
+const CoverLetterCardSingle = ({
+  card,
+  componentRef,
+  source,
+}: CoverLetterType) => {
   // redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
-
+  const router = useRouter();
   const handleOnView = async (card: any) => {
+    
+    if (source != "") {
+      router.replace("/cover-letter-generator");
+    }
     dispatch(setCoverLetter(card));
   };
 

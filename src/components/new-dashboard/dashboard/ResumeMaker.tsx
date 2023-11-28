@@ -36,7 +36,7 @@ const cardDetail = [
     icon: letter,
     bgColor1: "from-yellow-600",
     bgColor2: "to-yellow-400",
-    action: "coming soon",
+    action: "launch",
   },
   {
     title: "Keyword Optimize Your LinkedIn",
