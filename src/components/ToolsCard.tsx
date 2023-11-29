@@ -23,12 +23,12 @@ const ToolsCard = ({
   action: string;
 }) => {
   return (
-    <div className="w-[32%] flex mb-8">
+    <div className="lg:w-[32%] w-full flex mb-8 ">
       <div className="mr-4">
         <div
           className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-[60px] h-[60px] `}
         >
-          <Image src={icon} alt="Not Found" />
+          <Image width={35} height={35} src={icon} alt="Not Found" />
         </div>
       </div>
       <div className="">

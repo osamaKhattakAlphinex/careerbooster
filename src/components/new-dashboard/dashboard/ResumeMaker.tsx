@@ -8,7 +8,6 @@ import bigs from "@/../public/icon/bigs.png";
 import letter from "@/../public/icon/letter.png";
 import { useState } from "react";
 const cardDetail = [
-  
   {
     title: "Resume Builder",
     description:
@@ -49,7 +48,7 @@ const cardDetail = [
     bgColor2: "to-orange-700",
     action: "launch",
   },
-  
+
   {
     title: "Consulting Bids Generator",
     description:
@@ -86,8 +85,8 @@ const cardDetail = [
 const ResumeMaker = () => {
   const [activeTab, setActiveTab] = useState("Career Coach");
   return (
-    <div className="px-5 pt-2 mt-6">
-      <div className="flex gap-1 flex-wrap">
+    <div className="lg:px-[20px] px-[12px] pt-2 lg:mt-6">
+      <div className="flex lg:flex-row flex-col gap-1 flex-wrap ">
         {cardDetail.map((item, index) => (
           <ToolsCard
             key={index}

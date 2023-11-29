@@ -29,7 +29,6 @@ const CoverLetterCardSingle = ({
   const userData = useSelector((state: any) => state.userData);
   const router = useRouter();
   const handleOnView = async (card: any) => {
-    
     if (source != "") {
       router.replace("/cover-letter-generator");
     }
@@ -62,19 +61,20 @@ const CoverLetterCardSingle = ({
   if (!card) return <h1>Loading </h1>;
 
   return (
-    <div className="flex-item w-[32%] ">
+    <div className="flex-item lg:w-[32%] w-full ">
       <div className="flex flex-col   bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[14px] ">
         <div className="">
-          <div className="mx-3 border-gray-600 leading-6">
+          <div className="mx-3 border-gray-600 leading-6 w-full">
             <h2
               title={card.jobDescription}
-              className="text-[15px] capitalize text-white font-semibold  "
+              className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize text-white font-semibold  "
             >
-              {card.jobDescription.length < 20
+              {card.jobDescription}
+              {/* {card.jobDescription.length < 20
                 ? card.jobDescription
-                : card.jobDescription.slice(0, 20) + "..."}
+                : card.jobDescription.slice(0, 20) + "..."} */}
             </h2>
-            <h4 className="uppercase text-[#959595] font-medium  text-[12px] pt-[8px] pb-[12px]">
+            <h4 className="uppercase text-[#959595] font-medium  lg:text-[12px] text-[10px] pt-[8px] pb-[12px]">
               Generated on {getFormattedDate(card.generatedOnDate)}
             </h4>
           </div>
@@ -106,7 +106,7 @@ const CoverLetterCardSingle = ({
                     //   !session?.user?.email ||
                     //   !resume?.name
                     // }
-                    className="text-[14px] px-8 py-2 rounded-full bg-zinc-900 text-green-500 border border-green-500"
+                    className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
                   >
                     Download
                     {/* <span>

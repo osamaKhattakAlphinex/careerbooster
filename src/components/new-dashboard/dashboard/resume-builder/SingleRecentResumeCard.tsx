@@ -66,17 +66,17 @@ const SingleRecentResumeCard = ({
     }
   };
   return (
-    <div className="flex flex-col w-[32%]  bg-[#222027] rounded-xl my-[3px] py-[18px]">
+    <div className="flex flex-col lg:w-[32%] w-full  bg-[#222027] rounded-xl my-[3px] py-[20px] px-[14px]">
       <div className="">
         <div className="mx-3 border-gray-600 leading-6">
-          <h2 className="text-[15px] capitalize text-white font-medium  ">
+          <h2 className="lg:text-[15px] text-[13px]  capitalize text-white font-medium  ">
             {resume?.state?.jobPosition}
           </h2>
-          <h2 className="text-[13px] uppercase font-semibold text-[#959595] flex items-center">
+          <h2 className="lg:text-[13px] text-[10px]  uppercase font-semibold text-[#959595] flex items-center py-1">
             {" "}
-            <i className="mr-1">{rocketLaunch}</i> {resume?.jobTitle}
+            <i className="mr-2">{rocketLaunch}</i> {resume?.jobTitle}
           </h2>
-          <h4 className="uppercase text-[#959595] font-medium  text-[12px]">
+          <h4 className="uppercase text-[#959595] font-medium  lg:text-[12px] text-[10px]">
             Created on: {getFormattedDate(resume?.dateTime)}
           </h4>
         </div>
@@ -84,9 +84,14 @@ const SingleRecentResumeCard = ({
       <div className="flex gap-3 mx-3 my-3">
         <button
           onClick={handleOnView}
-          className=" w-[36px] flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+          className=" w-[36px]  flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
         >
-          <Image src={PencilLine} alt="Image Not Found" />
+          <Image
+            width={20}
+            height={20}
+            src={PencilLine}
+            alt="Image Not Found"
+          />
         </button>
         <button
           type="button"
@@ -107,7 +112,7 @@ const SingleRecentResumeCard = ({
                     !session?.user?.email ||
                     !resume?.name
                   }
-                  className="text-[14px] px-8 py-2 rounded-full bg-zinc-900 text-green-500 border border-green-500"
+                  className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
                 >
                   Download
                 </button>
