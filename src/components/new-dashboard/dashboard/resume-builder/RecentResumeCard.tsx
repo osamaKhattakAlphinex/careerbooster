@@ -13,7 +13,7 @@ const RecentResumeCard = ({
   const { resumes } = userData;
   return (
     <>
-      <div className="text-white bg-[#17151B] rounded-2xl my-5 py-5">
+      <div className="text-white bg-[#17151B] px-3 rounded-2xl my-5 py-5">
         <div className="flex justify-between items-center px-5 py-[10px] ">
           <h1 className="uppercase font-semibold text-[13px]">Your Resumes</h1>
           <div className="relative w-[213px]">
@@ -28,7 +28,7 @@ const RecentResumeCard = ({
           </div>
         </div>
         {!resumes && <p>Loading Resumes...</p>}
-        <div className="flex flex-wrap mx-2 gap-3">
+        <div className="flex flex-wrap  gap-4">
           {resumes &&
             resumes.map((resume: any) => (
               <SingleRecentResumeCard

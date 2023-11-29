@@ -62,66 +62,73 @@ const CoverLetterCardSingle = ({
   if (!card) return <h1>Loading </h1>;
 
   return (
-    <div className="w-[350px] bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[18px] ">
-      <div className="">
-        <div className="mx-3 border-gray-600 leading-6">
-          <h2 className="text-[15px] capitalize text-white font-semibold  ">
-            {card.jobDescription}
-          </h2>
-          <h4 className="uppercase text-[#959595] font-medium  text-[13px] pt-[8px] pb-[12px]">
-            Generated on {getFormattedDate(card.generatedOnDate)}
-          </h4>
+    <div className="flex-item w-[32%] ">
+      <div className="flex flex-col   bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[14px] ">
+        <div className="">
+          <div className="mx-3 border-gray-600 leading-6">
+            <h2
+              title={card.jobDescription}
+              className="text-[15px] capitalize text-white font-semibold  "
+            >
+              {card.jobDescription.length < 20
+                ? card.jobDescription
+                : card.jobDescription.slice(0, 20) + "..."}
+            </h2>
+            <h4 className="uppercase text-[#959595] font-medium  text-[12px] pt-[8px] pb-[12px]">
+              Generated on {getFormattedDate(card.generatedOnDate)}
+            </h4>
+          </div>
         </div>
-      </div>
-      <div className="flex justify-between ">
-        <button
-          type="button"
-          onClick={() => handleOnView(card)}
-          className=" w-[36px] flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
-        >
-          <Image src={PencilLine} alt="Image Not Found" />
-        </button>
-        <button
-          type="button"
-          onClick={() => handleOnDelete(card)}
-          className="w-[36px] flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
-        >
-          {trashIcon}
-        </button>
-        {card && (
-          <>
-            <ReactToPrint
-              trigger={() => (
-                <button
-                  type="button"
-                  // disabled={
-                  //   resume.state.jobPosition === "" ||
-                  //   resume.state.resumeLoading ||
-                  //   !session?.user?.email ||
-                  //   !resume?.name
-                  // }
-                  className="text-[14px] w-[217px] h-[32px] rounded-full bg-zinc-900 text-green-500 border border-green-500"
-                >
-                  Download
-                  {/* <span>
+        <div className="flex gap-3 ">
+          <button
+            type="button"
+            onClick={() => handleOnView(card)}
+            className=" w-[36px] flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+          >
+            <Image src={PencilLine} alt="Image Not Found" />
+          </button>
+          <button
+            type="button"
+            onClick={() => handleOnDelete(card)}
+            className="w-[36px] flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+          >
+            {trashIcon}
+          </button>
+          {card && (
+            <>
+              <ReactToPrint
+                trigger={() => (
+                  <button
+                    type="button"
+                    // disabled={
+                    //   resume.state.jobPosition === "" ||
+                    //   resume.state.resumeLoading ||
+                    //   !session?.user?.email ||
+                    //   !resume?.name
+                    // }
+                    className="text-[14px] px-8 py-2 rounded-full bg-zinc-900 text-green-500 border border-green-500"
+                  >
+                    Download
+                    {/* <span>
                             To download choose destination "save as PDF"
                           </span> */}
-                </button>
-              )}
-              onBeforeGetContent={async () => await handleOnView(card)}
-              content={() => componentRef.current}
-              print={async (printIframe: HTMLIFrameElement) => {
-                const document = printIframe.contentDocument;
-                if (document) {
-                  const exporter = new Html2Pdf(componentRef.current, {
-                    filename: `coverletter.pdf`,
-                  });
-                  exporter.getPdf(true);
-                }
-              }}
-            />
-          </>
-        )}
+                  </button>
+                )}
+                onBeforeGetContent={async () => await handleOnView(card)}
+                content={() => componentRef.current}
+                print={async (printIframe: HTMLIFrameElement) => {
+                  const document = printIframe.contentDocument;
+                  if (document) {
+                    const exporter = new Html2Pdf(componentRef.current, {
+                      filename: `coverletter.pdf`,
+                    });
+                    exporter.getPdf(true);
+                  }
+                }}
+              />
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

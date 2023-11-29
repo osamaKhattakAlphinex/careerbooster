@@ -8,16 +8,7 @@ import bigs from "@/../public/icon/bigs.png";
 import letter from "@/../public/icon/letter.png";
 import { useState } from "react";
 const cardDetail = [
-  {
-    title: "Career Coach",
-    description:
-      "From its medieval origins to the digital era, learn everything.",
-    link: "/",
-    icon: chatbot,
-    bgColor1: "from-teal-600",
-    bgColor2: "to-green-400",
-    action: "launch",
-  },
+  
   {
     title: "Resume Builder",
     description:
@@ -58,16 +49,7 @@ const cardDetail = [
     bgColor2: "to-orange-700",
     action: "launch",
   },
-  {
-    title: "Review Resume by AI",
-    description:
-      "From its medieval origins to the digital era, learn everything",
-    link: "/",
-    icon: review,
-    bgColor1: "from-cyan-600",
-    bgColor2: "to-sky-300",
-    action: "launch",
-  },
+  
   {
     title: "Consulting Bids Generator",
     description:
@@ -76,6 +58,26 @@ const cardDetail = [
     icon: bigs,
     bgColor1: "from-red-600",
     bgColor2: "to-orange-400",
+    action: "launch",
+  },
+  {
+    title: "Review Resume by AI",
+    description:
+      "From its medieval origins to the digital era, learn everything",
+    link: "/",
+    icon: review,
+    bgColor1: "from-cyan-600",
+    bgColor2: "to-sky-300",
+    action: "coming soon",
+  },
+  {
+    title: "Career Coach",
+    description:
+      "From its medieval origins to the digital era, learn everything.",
+    link: "/",
+    icon: chatbot,
+    bgColor1: "from-teal-600",
+    bgColor2: "to-green-400",
     action: "coming soon",
   },
 ];
