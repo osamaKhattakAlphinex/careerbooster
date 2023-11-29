@@ -32,6 +32,15 @@ const items = [
 const SideBar = () => {
   const userData = useSelector((state: any) => state.userData);
   const [close, setClose] = useState("left-0"); // State to manage sidebar open/close
+  const [hoveredItem, setHoveredItem] = useState(null);
+
+  const handleMouseOver = (index: any) => {
+    setHoveredItem(index);
+  };
+
+  const handleMouseOut = () => {
+    setHoveredItem(null);
+  };
 
   return (
     <div
@@ -77,11 +86,19 @@ const SideBar = () => {
           {items?.map((item, index) => (
             <li
               key={index}
-              className="px-7 py-[11px] inline-block cursor-pointer transition-all text-neutral-500 hover:text-white"
+              className="py-[11px] inline-block cursor-pointer transition-all text-neutral-500 hover:text-white"
             >
               <Link
                 href={item.url}
-                className="text-base flex capitalize items-center"
+                className="text-base flex capitalize items-center "
+                onMouseOver={() => handleMouseOver(index)}
+                onMouseOut={handleMouseOut}
+                style={{
+                  opacity: hoveredItem === index ? 1 : 0.7,
+                  color: hoveredItem === index ? "white" : "rgb(115, 115, 115)",
+                  textDecoration: "none",
+                  paddingRight: "1.75rem",
+                }}
               >
                 <div className="w-6 h-6 inline-block pr-2">{item.icon}</div>
                 <h2 className="text-base ml-3">{item.text}</h2>
