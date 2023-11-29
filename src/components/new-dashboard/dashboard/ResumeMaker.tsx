@@ -20,7 +20,7 @@ const cardDetail = [
     action: "launch",
   },
   {
-    title: "Generator Letter Generator",
+    title: "Generator Cover Letters",
     description:
       "From its medieval origins to the digital era, learn everything",
     link: "/cover-letter-generator",
@@ -30,10 +30,10 @@ const cardDetail = [
     action: "launch",
   },
   {
-    title: "LinkedIn Profile Optimization",
+    title: "Keyword Optimize Your LinkedIn",
     description:
       "The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.)",
-    link: "/",
+    link: "/linkedin-generator",
     icon: profile,
     bgColor1: "from-cyan-400",
     bgColor2: "to-blue-600",

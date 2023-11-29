@@ -16,6 +16,7 @@ interface Props {
 }
 const GenerateResume = ({
   handleGenerate,
+  
 }: // availablePercentage,
 Props) => {
   const [showInstruction, setShowInstruction] = useState<boolean>(false);
@@ -129,14 +130,17 @@ Props) => {
             className="w-full py-4 px-[26px] rounded-full text-sm text-[#959595] bg-transparent border-[#312E37] border"
           />
         </div>
-        <button
+        {!isNaN(availablePercentage) && availablePercentage !== 0 && (
+          <button
           disabled={
             memoizedState.jobPosition === "" ||
             memoizedState.resumeLoading ||
             !session?.user?.email
           }
           onClick={handleGenerate}
-          className="bg-gradient-to-r from-[#B324D7]  to-[#615DFF] flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full"
+          className={`bg-gradient-to-r from-[#B324D7]  to-[#615DFF] flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${memoizedState.jobPosition === "" ||
+          memoizedState.resumeLoading ||
+          !session?.user?.email  ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           <Image
             src="/icon/u_bolt-alt.svg"
@@ -150,6 +154,8 @@ Props) => {
               : "Generate New Resume"}
           </span>
         </button>
+        )}
+        
       </div>
     </div>
   );

@@ -205,6 +205,16 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   return (
     <>
       <div className="py-4  p-4 mb-4 rounded-lg">
+      <div className="w-full mb-8">
+          <LimitCard
+            title="File uploads available"
+            limit={userData?.userPackageData?.limit?.pdf_files_upload}
+            used={userData?.userPackageUsed?.pdf_files_upload}
+            setPercentageCalculated={setPercentageCalculated}
+            availablePercentage={availablePercentage}
+            setAvailablePercentage={setAvailablePercentage}
+          />
+        </div>
         {!isNaN(availablePercentage) && availablePercentage !== 0 && (
           <div className="py-3">
             <div className="py-[20px] w-[480px] px-[30px] flex gap-4 border-2 rounded-[10px] mt-4 border-[#312E37] border-dashed	">
@@ -253,8 +263,6 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
             </div>
           </div>
         )}
-
-    
 
         {file !== null && (
           <FileUploadHandler
