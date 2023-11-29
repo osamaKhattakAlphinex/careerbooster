@@ -17,6 +17,8 @@ import {
 import Button from "@/components/Button";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 const items = [
   { icon: homeIcon, text: "Dashboard", url: "/dashboard" },
@@ -33,7 +35,12 @@ const SideBar = () => {
   const userData = useSelector((state: any) => state.userData);
   const [close, setClose] = useState("left-0"); // State to manage sidebar open/close
   const [hoveredItem, setHoveredItem] = useState(null);
-
+  const pagesArray = [
+    "/dashboard",
+    "/cover-letter-generator",
+    "/resume-builder",
+    "/linkedin-generator",
+  ];
   const handleMouseOver = (index: any) => {
     setHoveredItem(index);
   };
@@ -41,7 +48,8 @@ const SideBar = () => {
   const handleMouseOut = () => {
     setHoveredItem(null);
   };
-
+  // const pathname: any = usePathname();
+  // if (!pagesArray?.includes(pathname)) return <></>;
   return (
     <div
       className={`fixed pb-10 top-0  ${close}  w-[244px]   bg-zinc-900 overflow-y-auto z-100000 transition-all`}
@@ -70,7 +78,12 @@ const SideBar = () => {
             <h1 className="text-gray-200 text-base gap-1 font-semibold ">
               {userData.firstName + " " + userData.lastName}
             </h1>
-            <h5 className="text-[11px] text-[#B324D7] p-.5">Edit Profile</h5>
+            <Link
+              href={"/profile-review"}
+              className="text-[11px] text-[#B324D7] p-.5"
+            >
+              Edit Profile
+            </Link>
           </div>
         </div>
         <div className="px-7 py-[8px]">
@@ -88,22 +101,39 @@ const SideBar = () => {
               key={index}
               className="py-[11px] inline-block cursor-pointer transition-all text-neutral-500 hover:text-white"
             >
-              <Link
-                href={item.url}
-                className="text-base flex capitalize items-center "
-                onMouseOver={() => handleMouseOver(index)}
-                onMouseOut={handleMouseOut}
-                style={{
-                  opacity: hoveredItem === index ? 1 : 0.7,
-                  color: hoveredItem === index ? "white" : "rgb(115, 115, 115)",
-                  textDecoration: "none",
-                  paddingRight: "1.75rem",
-                  paddingLeft: "1.75rem",
-                }}
-              >
-                <div className="w-6 h-6 inline-block pr-2">{item.icon}</div>
-                <h2 className="text-base ml-3">{item.text}</h2>
-              </Link>
+              {item.text !== "Logout" ? (
+                <Link
+                  href={item.url}
+                  className="px-7 text-base flex capitalize items-center "
+                  onMouseOver={() => handleMouseOver(index)}
+                  onMouseOut={handleMouseOut}
+                  style={{
+                    opacity: hoveredItem === index ? 1 : 0.7,
+                    color:
+                      hoveredItem === index ? "white" : "rgb(115, 115, 115)",
+                    textDecoration: "none",
+                  }}
+                >
+                  <div className="w-6 h-6 inline-block pr-2">{item.icon}</div>
+                  <h2 className="text-base ml-3">{item.text}</h2>
+                </Link>
+              ) : (
+                <button
+                  className="px-7 text-base flex capitalize items-center "
+                  onMouseOver={() => handleMouseOver(index)}
+                  onMouseOut={handleMouseOut}
+                  onClick={() => signOut()}
+                  style={{
+                    opacity: hoveredItem === index ? 1 : 0.7,
+                    color:
+                      hoveredItem === index ? "white" : "rgb(115, 115, 115)",
+                    textDecoration: "none",
+                  }}
+                >
+                  <div className="w-6 h-6 inline-block pr-2">{item.icon}</div>
+                  <h2 className="text-base ml-3">{item.text}</h2>
+                </button>
+              )}
             </li>
           ))}
         </ul>
