@@ -1,19 +1,50 @@
 "use client";
+import StatusIndicator from "@/components/admin/fineTuning/statusIndicator";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
-
 const FineTuningModels = () => {
-  const [records, setRecords] = useState([]);
+  const [records, setRecords] = useState<[] | any>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const { data, error } = useSWR(
     "/api/trainBot/tuneModel/tuningJobsStatus",
-    fetcher
+    async function (url) {
+      const inprogressJobs: any = records.filter(
+        (rec: any) =>
+          rec.status === "in-progress" ||
+          rec.status === "validating_files" ||
+          rec.status === "queued" ||
+          rec.status === "running"
+      );
+
+      console.table("inprogress-jobs-list", inprogressJobs);
+
+      const responseData = await axios.get(url).then((res) => res.data);
+
+      return inprogressJobs.filter((inprogressJob: any) => {
+        return responseData.jobs.some((job: any) => {
+          job.id === inprogressJob.fineTuningJobId;
+          // inprogressJob.status = job.status;
+          axios
+            .get(`/api/trainBot/tuneModel/tuningJobsStatus/${job.id}`)
+            .then((res: any) => {
+              if (res.data.success) {
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+            .finally(() => {
+              fetchRecords();
+              setLoading(false);
+            });
+        });
+      });
+    }
   );
 
   const fetchRecords = async () => {
@@ -118,7 +149,7 @@ const FineTuningModels = () => {
       .get(`/api/trainBot/tuneModel/tuningJobsStatus`)
       .then((res: any) => {
         if (res.data.success) {
-          // console.log(res.data.content);
+          // console.log(res.data);
         }
       })
       .catch((err) => {
@@ -154,17 +185,12 @@ const FineTuningModels = () => {
                       <th scope="col" className="px-6 py-3">
                         S.No
                       </th>
-                      {/* <th scope="col" className="px-6 py-3">
-                        file Name
-                      </th> */}
+
                       <th scope="col" className="px-6 py-3">
                         file Id
                       </th>
                       <th scope="col" className="px-6 py-3 whitespace-nowrap">
                         dataset type
-                      </th>
-                      <th scope="col" className="px-6 py-3 whitespace-nowrap">
-                        tuning Type
                       </th>
                       <th scope="col" className="px-6 py-3 whitespace-nowrap">
                         tuning Base Model
@@ -213,9 +239,6 @@ const FineTuningModels = () => {
                           <td className="px-6 py-4 whitespace-nowrap">
                             {index + 1}
                           </td>
-                          {/* <td className="px-6 py-4 whitespace-nowrap">
-                            {rec.fileName}
-                          </td> */}
                           <td className="px-6 py-4 whitespace-nowrap">
                             {rec.fileId}
                           </td>
@@ -223,13 +246,11 @@ const FineTuningModels = () => {
                             {rec.datasetType}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            {rec.tuningType}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
                             {rec.tuningBaseModel}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            {rec.status}
+                            {/* {rec.status} */}
+                            <StatusIndicator status={rec.status} />
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             {rec.fineTuningJobId}

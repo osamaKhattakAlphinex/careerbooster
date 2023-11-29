@@ -11,7 +11,7 @@ export const GET = async (req: any) => {
     return NextResponse.json(
       {
         success: true,
-        data: settings,
+        settings,
       },
       { status: 200 }
     );
@@ -30,6 +30,7 @@ export const POST = async (req: any) => {
     const { tuningBaseModel, allowSendingDataToTuning } = await req.json();
 
     await startDB();
+
     const settings: any = await FineTuningSetting.findOne({});
 
     const newSettings = await FineTuningSetting.findOneAndUpdate(
@@ -40,10 +41,11 @@ export const POST = async (req: any) => {
       },
       { new: true }
     );
+
     return NextResponse.json(
       {
         success: true,
-        data: settings,
+        settings: newSettings,
       },
       { status: 200 }
     );

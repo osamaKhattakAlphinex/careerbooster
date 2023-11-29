@@ -1,18 +1,13 @@
 "use client";
-import FineTuningModel from "@/components/admin/fineTuning/fineTuningModels";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import {
   downloadIcon,
   leftArrowIcon,
   refreshIconRotating,
 } from "@/helpers/iconsProvider";
-import { faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { string } from "yup";
-
-import OpenAI from "openai";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FineTuningSettingModel from "@/components/admin/fineTuning/fineTuningSettingModels";
 
@@ -41,7 +36,6 @@ const TrainRegistrationBotAdminPage = () => {
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [dataSelection, setDataSelection] = useState<string[]>([]);
 
-  const fineTuningModalRef: React.MutableRefObject<any> = useRef(null);
   const settingModelRef: React.MutableRefObject<any> = useRef(null);
 
   const fetchRecords = async () => {
@@ -73,49 +67,131 @@ const TrainRegistrationBotAdminPage = () => {
   };
 
   const handleTuneModel = async (values: any = {}) => {
-    if (records) {
-      const data = records.map((rec: any) => {
-        return {
+    if (records.length === 0) return;
+
+    let data: any = [];
+
+    const consent = confirm(
+      "Are you sure you want to send this data for training?"
+    );
+
+    if (!consent) return;
+
+    try {
+      setLoading(true);
+
+      const {
+        data: { success, reviewedData },
+      } = await axios.get(`/api/trainBot/getAllDataForTraining`, {
+        params: {
+          status: activeTab,
+          type: showRecordsType,
+        },
+      });
+
+      if (success) {
+        const formattedData = reviewedData.map((rec: any) => ({
           messages: [
             { role: "user", content: rec.input },
             { role: "assistant", content: rec.idealOutput },
           ],
-        };
-      });
+        }));
 
-      const jsonl = data
-        .map((obj) => JSON.stringify(obj, (key, value) => value, 0))
-        .join("\n");
+        const jsonl = formattedData
+          .map((obj: any) => JSON.stringify(obj, null, 0))
+          .join("\n");
 
-      const blob = new Blob([jsonl], {
-        type: "application/json",
-      });
+        const blob = new Blob([jsonl], { type: "application/json" });
 
-      const formData = new FormData();
-      formData.append("traing-file", blob);
-      formData.append("record-type", showRecordsType);
+        const formData = new FormData();
+        formData.append("traing-file", blob);
+        formData.append("record-type", showRecordsType);
 
-      try {
-        axios
-          .post("/api/trainBot/tuneModel", formData)
-          .then((res: any) => {
-            if (res.data.success) {
-              if (records.length >= 1) {
-                let _ids: string[] = [];
-                records.map((rec: any) => _ids.push(rec._id));
-                setDataSelection(_ids);
-              }
-            } else {
-              console.log("Something went wrong");
-            }
-          })
-          .then(function () {
-            handleChangeStatus(dataSelection);
-          });
-      } catch (err) {
-        console.log(err);
+        const trainingResponse = await axios.post(
+          "/api/trainBot/tuneModel",
+          formData
+        );
+
+        if (trainingResponse.data.success) {
+          if (reviewedData.length >= 1) {
+            const _ids = reviewedData.map((rec: any) => rec._id);
+            handleChangeStatus(_ids);
+          }
+
+          fetchRecords();
+        } else {
+          console.log("Something went wrong");
+        }
       }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
+
+    // if (consent) {
+    //   let allData = await axios
+    //     .get(`/api/trainBot/getAllDataForTraining`, {
+    //       params: {
+    //         status: activeTab,
+    //         type: showRecordsType,
+    //       },
+    //     })
+    //     .then((res: any) => {
+    //       if (res.data.success) {
+    //         data = res.data.map((rec: any) => {
+    //           return {
+    //             messages: [
+    //               { role: "user", content: rec.input },
+    //               { role: "assistant", content: rec.idealOutput },
+    //             ],
+    //           };
+    //         });
+    //         return res.data;
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     })
+    //     .finally(() => {
+    //       setLoading(false);
+    //     });
+
+    //   if (data) {
+    //     const jsonl = data
+    //       .map((obj: any) => JSON.stringify(obj, (key, value) => value, 0))
+    //       .join("\n");
+
+    //     const blob = new Blob([jsonl], {
+    //       type: "application/json",
+    //     });
+
+    //     const formData = new FormData();
+    //     formData.append("traing-file", blob);
+    //     formData.append("record-type", showRecordsType);
+
+    //     try {
+    //       axios
+    //         .post("/api/trainBot/tuneModel", formData)
+    //         .then((res: any) => {
+    //           if (res.data.success) {
+    //           } else {
+    //             console.log("Something went wrong");
+    //           }
+    //         })
+    //         .then(function () {
+    //           if (allData.length >= 1) {
+    //             let _ids: string[] = [];
+    //             allData.map((rec: any) => _ids.push(rec._id));
+    //             handleChangeStatus(_ids);
+    //           }``
+    //           fetchRecords();
+    //         });
+    //     } catch (err) {
+    //       console.log(err);
+    //     }
+    //   }
+    // }
   };
 
   const handleDownload = async () => {
@@ -330,7 +406,6 @@ const TrainRegistrationBotAdminPage = () => {
 
   return (
     <>
-      <FineTuningModel formHandler={handleTuneModel} ref={fineTuningModalRef} />
       <FineTuningSettingModel ref={settingModelRef} />
       <div className="pt-30">
         <div className="my-5 ml-10">
@@ -348,7 +423,7 @@ const TrainRegistrationBotAdminPage = () => {
             <Link href="/admin/fine-tuning">
               <button className="bg-gray-900 text-white rounded-lg px-6 py-4 hover:bg-gray-800">
                 <div className="flex flex-row gap-2">
-                  <span>Fine Tune Models</span>
+                  <span>Training Models</span>
                 </div>
               </button>
             </Link>

@@ -24,41 +24,50 @@ const FineTuningSettingModel = forwardRef((props: any, ref: any) => {
   const getTuningConfigurations = async () => {
     try {
       const res = await axios.get("/api/tuningConfiguration");
+
       if (res.data.success) {
-        console.log(res.data);
-
-        const { tuningBaseModel, allowSendingDataToTuning } = res.data;
-
-        formik.setFieldValue("tuningBaseModel", tuningBaseModel);
-        formik.setFieldValue(
-          "allowSendingDataToTuning",
-          allowSendingDataToTuning
-        );
-
-        // setSettings({
-        //   tuningBaseModel: res.data.tuningBaseModel,
-        //   allowSendingDataToTuning: res.data.allowSendingDataToTuning,
-        // });
+        const { tuningBaseModel, allowSendingDataToTuning } = res.data.settings;
+        setSettings({
+          tuningBaseModel,
+          allowSendingDataToTuning,
+        });
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  // ... (other functions)
+  const setTuningConfigurations = async (values: TuningConfiguration) => {
+    try {
+      const res = await axios.post("/api/tuningConfiguration", { ...values });
+
+      if (res.data.success) {
+        const { tuningBaseModel, allowSendingDataToTuning } = res.data.settings;
+        setSettings({
+          tuningBaseModel,
+          allowSendingDataToTuning,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     getTuningConfigurations();
   }, []);
-  const setTuningConfigurations = async () => {};
+
+  useEffect(() => {
+    formik.setFieldValue("tuningBaseModel", settings?.tuningBaseModel);
+    formik.setFieldValue(
+      "allowSendingDataToTuning",
+      settings?.allowSendingDataToTuning
+    );
+  }, [settings]);
 
   const openModal = (open: boolean) => {
     setOpenFineTuneModel(open);
   };
-
-  useEffect(() => {
-    console.log(settings?.allowSendingDataToTuning);
-  }, [settings?.allowSendingDataToTuning]);
 
   const formik = useFormik({
     initialValues: {
@@ -67,7 +76,7 @@ const FineTuningSettingModel = forwardRef((props: any, ref: any) => {
     },
 
     onSubmit: (values) => {
-      setOpenFineTuneModel(false);
+      setTuningConfigurations(values);
     },
 
     validationSchema: Yup.object().shape({
@@ -78,8 +87,6 @@ const FineTuningSettingModel = forwardRef((props: any, ref: any) => {
   useImperativeHandle(ref, () => ({
     openModal,
   }));
-
-  const handleDeletionOk = async () => {};
 
   return (
     <div
@@ -95,29 +102,6 @@ const FineTuningSettingModel = forwardRef((props: any, ref: any) => {
             Fine-Tuning Configuaration
           </h1>
           <div className="absolute top-2.5 right-2.5">
-            <button
-              onClick={() => setEditing(true)}
-              type="button"
-              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-              data-modal-toggle="deleteModal"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
-                />
-              </svg>
-
-              <span className="sr-only">Edit </span>
-            </button>
             <button
               onClick={() => openModal(false)}
               type="button"
@@ -153,7 +137,7 @@ const FineTuningSettingModel = forwardRef((props: any, ref: any) => {
                 className="block col-span-2 w-full"
                 type="text"
                 name="tuningBaseModel"
-                // disabled={!editing}
+                disabled={!editing}
                 value={formik.values.tuningBaseModel}
                 onChange={formik.handleChange}
               />
@@ -167,20 +151,20 @@ const FineTuningSettingModel = forwardRef((props: any, ref: any) => {
                   className="h-6 w-6"
                   type="checkbox"
                   name="allowSendingDataToTuning"
-                  // disabled={!editing}
+                  disabled={!editing}
                   checked={formik.values.allowSendingDataToTuning}
                   onChange={formik.handleChange}
                 />
               </div>
             </div>
-            {editing && (
+            {editing ? (
               <div className="grid grid-cols-4 w-full">
                 <div className=" col-span-1"></div>
                 <div className=" col-span-2 flex justify-end items-center space-x-4">
                   <button
                     type="button"
-                    onClick={() => setOpenFineTuneModel(false)}
-                    className="py-2 px-3 text-sm font-medium text-gray-500 rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                    onClick={() => setEditing(false)}
+                    className="py-2 px-3 text-sm font-medium text-red-500 rounded-lg border border-red-200 hover:bg-red-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-red-700 dark:text-white dark:border-red-500 dark:hover:text-white dark:hover:bg-red-600 "
                   >
                     Cancel
                   </button>
@@ -189,6 +173,27 @@ const FineTuningSettingModel = forwardRef((props: any, ref: any) => {
                     className="py-2 px-3 text-sm font-medium text-gray-500 rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                   >
                     Save Settings
+                  </button>
+                </div>
+                <div className=" col-span-1"></div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-4 w-full">
+                <div className=" col-span-1"></div>
+                <div className=" col-span-2 flex justify-end items-center space-x-4">
+                  <button
+                    type="button"
+                    onClick={() => openModal(false)}
+                    className="py-2 px-3 text-sm font-medium text-red-500 rounded-lg border border-red-200 hover:bg-red-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-red-700 dark:text-white dark:border-red-500 dark:hover:text-white dark:hover:bg-red-600 "
+                  >
+                    Close Setting
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setEditing(true)}
+                    className="py-2 px-3 text-sm font-medium text-gray-500 rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                  >
+                    Edit Settings
                   </button>
                 </div>
                 <div className=" col-span-1"></div>

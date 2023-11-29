@@ -9,9 +9,6 @@ const FineTuningModelSchema = new Schema(
     fileId: {
       type: String,
     },
-    tuningType: {
-      type: String,
-    },
     tuningBaseModel: {
       type: String,
     },

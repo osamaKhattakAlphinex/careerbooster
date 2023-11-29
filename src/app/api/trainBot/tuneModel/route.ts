@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
 import OpenAI, { toFile } from "openai";
-import formidable from "formidable";
 import startDB from "@/lib/db";
 import FineTuneModel from "@/db/schemas/FineTuningModel";
 
@@ -17,8 +15,6 @@ export const POST = async (
     const formData = await req.formData();
 
     const file = formData.get("traing-file") as Blob | null;
-    const tuningType = formData.get("tuning-type");
-    const baseModel = formData.get("base-model");
     const datasetType = formData.get("record-type");
 
     if (!file) {
@@ -40,7 +36,6 @@ export const POST = async (
     const fineTuneModel = await FineTuneModel.create({
       fileName: uploadedfile.filename,
       fileId: uploadedfile.id,
-      tuningType: tuningType,
       tuningBaseModel: "N/A",
       status: "not-started",
       fineTunedModel: "N/A",

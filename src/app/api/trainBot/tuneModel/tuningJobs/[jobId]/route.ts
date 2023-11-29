@@ -26,7 +26,7 @@ export const POST = async (
       {
         fineTuningJobId: jobId,
       },
-      { status: status, fineTuningJobId: "N/A" },
+      { status: status, fineTuningJobId: "N/A", tuningBaseModel: "N/A" },
       { new: true }
     );
 

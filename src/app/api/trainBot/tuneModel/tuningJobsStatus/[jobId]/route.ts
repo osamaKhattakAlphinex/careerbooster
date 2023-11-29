@@ -14,26 +14,41 @@ export const GET = async (
 ) => {
   try {
     const { jobId } = params;
-    // const request = await req.json();
-    // const { status } = request;
 
     await startDB();
 
     let fineTune = await openai.fineTuning.jobs.retrieve(jobId);
 
     if (fineTune.status === "succeeded") {
+      var query1 = { fineTuningJobId: jobId },
+        update1 = {
+          status: fineTune.status,
+          fineTunedModel: fineTune.fine_tuned_model,
+        },
+        options1 = { new: true };
+
       const fineTuneModel = await FineTuneModel.findOneAndUpdate(
+        query1,
+        update1,
+        options1
+      );
+
+      var query2 = { dataset: fineTuneModel.datasetType },
+        update2 = {
+          dataset: fineTuneModel.datasetType,
+          model: fineTune.fine_tuned_model,
+        },
+        options2 = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+      await TrainedModel.findOneAndUpdate(query2, update2, options2);
+    } else {
+      const newStatus = await FineTuneModel.findOneAndUpdate(
         {
           fineTuningJobId: jobId,
         },
-        { status: fineTune.status, fineTunedModel: fineTune.fine_tuned_model },
+        { status: fineTune.status },
         { new: true }
       );
-
-      var query = { dataset: fineTuneModel.datasetType },
-        update = { dataset: fineTune.fine_tuned_model },
-        options = { upsert: true, new: true, setDefaultsOnInsert: true };
-      await TrainedModel.findOneAndUpdate(query, update, options);
     }
 
     return NextResponse.json({
