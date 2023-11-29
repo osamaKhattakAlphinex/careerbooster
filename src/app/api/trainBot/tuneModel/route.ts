@@ -19,6 +19,7 @@ export const POST = async (
     const file = formData.get("traing-file") as Blob | null;
     const tuningType = formData.get("tuning-type");
     const baseModel = formData.get("base-model");
+    const datasetType = formData.get("record-type");
 
     if (!file) {
       return NextResponse.json(
@@ -29,6 +30,8 @@ export const POST = async (
 
     const _file = await toFile(file, "my-traing-file");
 
+    console.log(_file);
+
     const uploadedfile = await openai.files.create({
       file: _file,
       purpose: "fine-tune",
@@ -38,10 +41,11 @@ export const POST = async (
       fileName: uploadedfile.filename,
       fileId: uploadedfile.id,
       tuningType: tuningType,
-      tuningBaseModel: baseModel,
+      tuningBaseModel: "N/A",
       status: "not-started",
       fineTunedModel: "N/A",
       fineTuningJobId: "N/A",
+      datasetType: datasetType,
     });
 
     return NextResponse.json(

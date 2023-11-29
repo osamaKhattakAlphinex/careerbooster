@@ -21,6 +21,9 @@ const FineTuningModelSchema = new Schema(
     fineTuningJobId: {
       type: String,
     },
+    datasetType: {
+      type: String,
+    },
     fineTunedModel: {
       type: String,
     },
