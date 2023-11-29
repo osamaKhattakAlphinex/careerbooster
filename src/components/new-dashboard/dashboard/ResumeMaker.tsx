@@ -8,7 +8,6 @@ import bigs from "@/../public/icon/bigs.png";
 import letter from "@/../public/icon/letter.png";
 import { useState } from "react";
 const cardDetail = [
-  
   {
     title: "Resume Builder",
     description:
@@ -43,18 +42,18 @@ const cardDetail = [
     title: "Personalized Email Generator",
     description:
       "From its medieval origins to the digital era, learn everything",
-    link: "/",
+    link: "/email-bot",
     icon: email,
     bgColor1: "from-pink-600",
     bgColor2: "to-orange-700",
     action: "launch",
   },
-  
+
   {
     title: "Consulting Bids Generator",
     description:
       "From its medieval origins to the digital era, learn everything",
-    link: "/",
+    link: "/consulting-bids-bot",
     icon: bigs,
     bgColor1: "from-red-600",
     bgColor2: "to-orange-400",

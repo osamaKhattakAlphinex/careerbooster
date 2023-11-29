@@ -1,10 +1,10 @@
+import Link from "next/link";
 
 interface Props {
   show: boolean;
   onClose: () => void;
 }
 const Alert = ({ show, onClose }: Props) => {
-   
   if (!show) return null;
 
   return (
@@ -20,12 +20,13 @@ const Alert = ({ show, onClose }: Props) => {
         Complete your profile to get butter result
       </p>
 
-      <div
+      <Link
+        href="/profile-review"
         className="bg-yellow-400 cursor-pointer ml-4 font-bold text-stone-950 rounded-full px-[28px] py-[11px] text-[14px] mx-[13px]`"
-        onClick={onClose}
+        // onClick={onClose}
       >
         Complete now
-      </div>
+      </Link>
     </div>
   );
 };

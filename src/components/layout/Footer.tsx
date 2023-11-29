@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-const AllowedRoutes = ["/dashboard", "/resume-builder"];
+
 const Footer = () => {
   const pathname: any = usePathname();
   const pagesArray = [
@@ -11,6 +11,9 @@ const Footer = () => {
     "/cover-letter-generator",
     "/resume-builder",
     "/linkedin-generator",
+    "/profile-review",
+    "/email-bot",
+    "/consulting-bids-bot",
   ];
   if (
     pathname === "/login" ||
