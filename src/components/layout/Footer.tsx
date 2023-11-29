@@ -1,12 +1,23 @@
 "use client";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Head from "next/head";
-
+const AllowedRoutes = ["/dashboard", "/resume-builder"];
 const Footer = () => {
-  const pathname = usePathname();
-  if (pathname === "/login" || pathname === "/register") return <></>;
+  const pathname: any = usePathname();
+  const pagesArray = [
+    "/dashboard",
+    "/cover-letter-generator",
+    "/resume-builder",
+    "/linkedin-generator",
+  ];
+  if (
+    pathname === "/login" ||
+    pathname === "/register" ||
+    pagesArray?.includes(pathname)
+  )
+    return <></>;
 
   return (
     <>

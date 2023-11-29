@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
-import ResumeTemplate1 from "@/components/dashboard/resume-templates/template-1";
+// import ResumeTemplate1 from "@/components/dashboard/resume-templates/template-1";
+import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/template-1";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -26,14 +27,15 @@ import {
 // import { exitFullScreenIcon, fullScreenIcon } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { makeid } from "@/helpers/makeid";
-import RecentResumeCard from "@/components/dashboard/resume-builder/RecenResumesCard";
 import GenerateNewResumeCard from "@/components/dashboard/resume-builder/GenerateNewResumeCard";
 import { checkIconSmall, leftArrowIcon } from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
 import Link from "next/link";
 import LimitCard from "@/components/dashboard/LimitCard";
 import useTheme from "@/lib/useTheme";
-
+import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
+import RecentDocumentsCard from "@/components/new-dashboard/dashboard/RecentDocumentsCard";
+import GenerateResume from "@/components/new-dashboard/dashboard/resume-builder/GenerateNewResumeCard";
 const ResumeBuilder = () => {
   const [theme] = useTheme();
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -71,16 +73,18 @@ const ResumeBuilder = () => {
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
-
   const handleGenerate = useCallback(async () => {
+    console.log("resumeData.state.jobPosition", percentageCalculated);
+
     await getUserDataIfNotExists();
     // reset resume
     dispatch(resetResume(resumeData.state));
 
     if (
       resumeData.state.jobPosition !== "" &&
-      session?.user?.email &&
-      percentageCalculated
+      session?.user?.email
+      // &&
+      // percentageCalculated
     ) {
       dispatch(setState({ name: "resumeLoading", value: true }));
       dispatch(setId(""));
@@ -92,7 +96,7 @@ const ResumeBuilder = () => {
       await getWorkExperienceNew();
       runConfetti();
     }
-  }, [resumeData.state, percentageCalculated]);
+  }, [resumeData.state]);
 
   // const makeAPICallWithRetry: any = async (
   //   apiFunction: any,
@@ -508,66 +512,46 @@ const ResumeBuilder = () => {
 
   return (
     <>
-      <div className="w-[95%] my-5 ml-10 flex items-center justify-between ">
-        <Link
-          href="/dashboard"
-          className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
-        >
-          {leftArrowIcon}
-          Dashboard
-        </Link>
-
-        <LimitCard
-          title="AvailableCredits"
-          limit={userData?.userPackageData?.limit?.resumes_generation}
-          used={userData?.userPackageUsed?.resumes_generation}
-          setPercentageCalculated={setPercentageCalculated}
-          availablePercentage={availablePercentage}
-          setAvailablePercentage={setAvailablePercentage}
-        />
-      </div>
-      {showAlert && (
-        <div
-          className="fixed bottom-10 right-10 flex flex-row gap-2 justify-center items-center bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white transition-opacity cursor-pointer"
-          onClick={() => setShowAlert(false)}
-        >
-          {checkIconSmall}
-          Auto saved
-        </div>
-      )}
-      <div className="m-10 mt-2 w-[95%]  p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
-        <RecentResumeCard componentRef={componentRef} />
-      </div>
-
-      <GenerateNewResumeCard
-        handleGenerate={handleGenerate}
-        availablePercentage={availablePercentage}
-      />
-
-      <div className="flex justify-center items-center">
-        <Confetti active={confettingRunning} config={confettiConfig} />
-      </div>
-
-      {resumeData &&
-        (resumeData?.name ||
-          resumeData?.contact?.email ||
-          resumeData?.summary) && (
-          <div className="m-10  w-[95%] bg-white border border-gray-200 rounded-lg shadow sm:p-6 ">
+      <div className="w-full sm:w-full z-1000 ">
+        <div className="ml-[244px] px-[15px] mb-[72px] ">
+          <RecentResumeCard source="dashboard" componentRef={componentRef} />
+          {showAlert && (
             <div
-              className={`w-full  ${
-                resumeData.state.resumeLoading ? "animate-pulse" : ""
-              }`}
-              ref={componentRef}
+              className="fixed bottom-10 right-10 flex flex-row gap-2 justify-center items-center bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white transition-opacity cursor-pointer"
+              onClick={() => setShowAlert(false)}
             >
-              <ResumeTemplate1
-                streamedSummaryData={streamedSummaryData}
-                streamedJDData={streamedJDData}
-                saveResumeToDB={saveResumeToDB}
-              />
+              {checkIconSmall}
+              Auto saved
             </div>
+          )}
+          <GenerateResume
+            handleGenerate={handleGenerate}
+            availablePercentage={availablePercentage}
+          />
+          <div className="flex justify-center items-center">
+            <Confetti active={confettingRunning} config={confettiConfig} />
           </div>
-        )}
-      <div className="block mb-40"></div>
+          {resumeData &&
+            (resumeData?.name ||
+              resumeData?.contact?.email ||
+              resumeData?.summary) && (
+              <div className="my-10  w-[100%] bg-white border border-gray-200 rounded-lg shadow sm:p-6 ">
+                <div
+                  className={`w-full  ${
+                    resumeData.state.resumeLoading ? "animate-pulse" : ""
+                  }`}
+                  ref={componentRef}
+                >
+                  <ResumeTemplate1
+                    streamedSummaryData={streamedSummaryData}
+                    streamedJDData={streamedJDData}
+                    saveResumeToDB={saveResumeToDB}
+                  />
+                </div>
+              </div>
+            )}
+        </div>
+      </div>
     </>
   );
 };

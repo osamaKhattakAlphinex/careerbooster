@@ -641,7 +641,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     ) {
       redirect("/subscribe");
     } else {
-      return <div className="pt-30">{children}</div>;
+      // return <div className="pt-30">{children}</div>;
+      return <>{children}</>;
     }
   } else {
     /// if the user data is loaded and profile wizard is NOT completed show loader

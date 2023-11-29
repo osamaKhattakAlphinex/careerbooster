@@ -6,6 +6,8 @@ import UseCases from "@/components/new-layout/Homepage/UseCases";
 import PageHeader from "@/components/new-layout/PageHeader";
 
 import { Metadata } from "next";
+import "@/app/plugins.css";
+import "@/app/style.css";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Pricing",
   description:

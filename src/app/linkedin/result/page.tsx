@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import LinkedInUploadPDFResume from "@/components/new-layout/linkedin/LinkedInUploadPDFResume";
-
+import "@/app/plugins.css";
+import "@/app/style.css";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-linkedin",
   description:
@@ -29,15 +30,13 @@ export const metadata: Metadata = {
 //leinked in result page
 export default function LinkedInPage() {
   return (
-    <>
-      <main className="flex-grow-1 mt-24 mb-20 bg-gradient-to-r from-gray-950 via-blue-950 to-purple-900">
-        {/* LinkedIn Tool Card */}
-        <section className="py-15">
-          <div className=" flex flex-col items-center">
-            <LinkedInUploadPDFResume />
-          </div>
-        </section>
-      </main>
-    </>
+    <main className="flex-grow-1 mt-24 mb-20 bg-gradient-to-r from-gray-950 via-blue-950 to-purple-900">
+      {/* LinkedIn Tool Card */}
+      <section className="py-15">
+        <div className=" flex flex-col items-center">
+          <LinkedInUploadPDFResume />
+        </div>
+      </section>
+    </main>
   );
 }

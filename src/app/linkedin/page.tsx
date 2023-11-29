@@ -1,5 +1,7 @@
 import LinkedInToolMain from "@/components/new-layout/linkedin/LinkedInToolMain";
 import { Metadata } from "next";
+import "@/app/plugins.css";
+import "@/app/style.css";
 
 export const metadata: Metadata = {
   title: "CareerBooster.AI-linkedin",

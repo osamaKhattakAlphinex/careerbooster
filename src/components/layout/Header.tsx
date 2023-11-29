@@ -9,7 +9,8 @@ import ThemeToggler from "../Themetoggler";
 import useTheme from "@/lib/useTheme";
 import Image from "next/image";
 // import useTheme from "@/lib/useTheme";
-
+import { usePathname } from "next/navigation";
+const AllowedRoutes = ["/dashboard", "/resume-builder"];
 const Header = () => {
   // const [theme] = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -72,6 +73,12 @@ const Header = () => {
       }
     }
   };
+  const pagesArray = [
+    "/dashboard",
+    "/cover-letter-generator",
+    "/resume-builder",
+    "/linkedin-generator",
+  ];
 
   // when page (session) loads, fetch user data if not exists
   useEffect(() => {
@@ -82,6 +89,8 @@ const Header = () => {
 
   // if (pathname === "/login" || pathname === "/register") return null;
 
+  const pathname: any = usePathname();
+  if (pagesArray?.includes(pathname)) return <></>;
   return (
     <nav
       // className={`navbar navbar-expand-lg fixed-top ${
@@ -163,14 +172,14 @@ const Header = () => {
                     /Mobile/.test(navigator.userAgent) ? (
                       <div>
                         {userData.firstName + " " + userData.lastName}
-                        <Link
+                        <a
                           href={role === "admin" ? "/admin" : "/dashboard"}
                           className=" block px-4 py-2 text-sm no-underline theme-text-2 dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-0"
                         >
                           Dashboard
-                        </Link>
+                        </a>
                         <button
                           type="button"
                           className=" block w-full px-4 py-2 text-left text-sm dark:hover:bg-gray-600 hover:bg-blue-100"
@@ -216,7 +225,7 @@ const Header = () => {
                           >
                             <div className="py-1" role="none">
                               {/* <!-- Active: "bg-gray-100 ", Not Active: "text-gray-700" --> */}
-                              <Link
+                              <a
                                 href={
                                   role === "admin" ? "/admin" : "/dashboard"
                                 }
@@ -225,15 +234,15 @@ const Header = () => {
                                 id="menu-item-0"
                               >
                                 Dashboard
-                              </Link>
-                              <Link
+                              </a>
+                              <a
                                 href="/profile-review"
                                 className=" block px-4 py-2 text-sm no-underline theme-text-2"
                                 role="menuitem"
                                 id="menu-item-1"
                               >
                                 Edit Profile
-                              </Link>
+                              </a>
                               <button
                                 type="button"
                                 className=" block w-full px-4 py-2 text-left text-sm"
@@ -258,22 +267,22 @@ const Header = () => {
                       >
                         <div className="py-1" role="none">
                           {/* <!-- Active: "bg-gray-100 ", Not Active: "text-gray-700" --> */}
-                          <Link
+                          <a
                             href={role === "admin" ? "/admin" : "/dashboard"}
                             className=" block px-4 py-2 text-sm no-underline theme-text-2 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-0"
                           >
                             Dashboard
-                          </Link>
-                          <Link
+                          </a>
+                          <a
                             href="/profile-review"
                             className=" block px-4 py-2 text-sm no-underline theme-text-2 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-1"
                           >
                             Edit Profile
-                          </Link>
+                          </a>
                           <button
                             type="button"
                             className=" block w-full px-4 py-2 text-left text-sm dark:hover:bg-gray-600 hover:bg-blue-100"
