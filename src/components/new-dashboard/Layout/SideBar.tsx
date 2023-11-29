@@ -82,7 +82,7 @@ const SideBar = () => {
         </div>
       </div>
       <div className="flex flex-col">
-        <ul className="pb-20 pt-[8px]">
+        <ul className="pb-20 pt-[8px] pl-0">
           {items?.map((item, index) => (
             <li
               key={index}
@@ -98,6 +98,7 @@ const SideBar = () => {
                   color: hoveredItem === index ? "white" : "rgb(115, 115, 115)",
                   textDecoration: "none",
                   paddingRight: "1.75rem",
+                  paddingLeft: "1.75rem",
                 }}
               >
                 <div className="w-6 h-6 inline-block pr-2">{item.icon}</div>
