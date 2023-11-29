@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/../public/logo.svg";
@@ -16,26 +16,38 @@ import {
 } from "@/helpers/iconsProvider";
 import Button from "@/components/Button";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const items = [
-  { icon: homeIcon, text: "Dashboard",url:'/dashboard' },
-  { icon: dollarIcon, text: "My Billing",url:'/dashboard' },
-  { icon: flagIcon, text: "User Guide",url:'/dashboard' },
-  { icon: ticketIcon, text: "My Tickets",url:'/dashboard' },
-  { icon: starIcon, text: "Write Review",url:'/dashboard' },
-  { icon: linkIcon, text: "Affiliate Program",url:'/dashboard' },
-  { icon: settingIcon, text: "Settings",url:'/dashboard' },
-  { icon: powerIcon, text: "Logout",url:'/dashboard' },
+  { icon: homeIcon, text: "Dashboard", url: "/dashboard" },
+  { icon: dollarIcon, text: "My Billing", url: "/dashboard" },
+  { icon: flagIcon, text: "User Guide", url: "/dashboard" },
+  { icon: ticketIcon, text: "My Tickets", url: "/dashboard" },
+  { icon: starIcon, text: "Write Review", url: "/dashboard" },
+  { icon: linkIcon, text: "Affiliate Program", url: "/dashboard" },
+  { icon: settingIcon, text: "Settings", url: "/dashboard" },
+  { icon: powerIcon, text: "Logout", url: "/dashboard" },
 ];
 
 const SideBar = () => {
   const userData = useSelector((state: any) => state.userData);
+  const [close, setClose] = useState("left-0"); // State to manage sidebar open/close
+
   return (
-    <div className="fixed pb-10 inset-0 sm:left-0 w-[244px]  bg-zinc-900 overflow-y-auto z-10 transition-all">
+    <div
+      className={`fixed pb-10 top-0  ${close}  w-[244px]   bg-zinc-900 overflow-y-auto z-100000 transition-all`}
+    >
       <div className="">
         <div className="px-6 py-[10px] flex justify-between items-center ">
           <Image src={logo} alt="" className="w-35 h-14" />
-          <div className="w-5 h-5 text-zinc-600">{arrowLeft}</div>
+          <div
+            className="w-5 h-5 text-zinc-600 lg:hidden"
+            onClick={() => {
+              setClose("-left-[244px]");
+            }}
+          >
+            {arrowLeft}
+          </div>
         </div>
         <div className="px-7 py-2 flex">
           <div className="mr-4">
@@ -47,7 +59,7 @@ const SideBar = () => {
           </div>
           <div>
             <h1 className="text-gray-200 text-base gap-1 font-semibold ">
-            {userData.firstName + " " + userData.lastName}
+              {userData.firstName + " " + userData.lastName}
             </h1>
             <h5 className="text-[11px] text-[#B324D7] p-.5">Edit Profile</h5>
           </div>
@@ -67,7 +79,10 @@ const SideBar = () => {
               key={index}
               className="px-7 py-[11px] inline-block cursor-pointer transition-all text-neutral-500 hover:text-white"
             >
-              <Link href={item.url} className="text-base flex capitalize items-center">
+              <Link
+                href={item.url}
+                className="text-base flex capitalize items-center"
+              >
                 <div className="w-6 h-6 inline-block pr-2">{item.icon}</div>
                 <h2 className="text-base ml-3">{item.text}</h2>
               </Link>

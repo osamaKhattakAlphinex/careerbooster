@@ -2,12 +2,11 @@ import AiToolsCard from "@/components/new-dashboard/dashboard/CareerBoostingAiTo
 import RecentDocumentsCard from "@/components/new-dashboard/dashboard/RecentDocumentsCard";
 
 const Dashboard = () => {
-  
   return (
     <div className="w-full sm:w-full z-1000 ">
-      <div className="ml-[244px] px-[15px] mb-[72px] ">
-        <RecentDocumentsCard  />
-        <AiToolsCard  />
+      <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] ">
+        <RecentDocumentsCard />
+        <AiToolsCard />
         {/* <GenerateResume /> */}
       </div>
     </div>

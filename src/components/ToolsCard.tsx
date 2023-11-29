@@ -11,7 +11,7 @@ const ToolsCard = ({
   bgColor1,
   bgColor2,
   isActive,
-  action
+  action,
 }: {
   title: string;
   description: string;
@@ -20,10 +20,10 @@ const ToolsCard = ({
   bgColor1: string;
   bgColor2: string;
   isActive: boolean;
-  action:string;
+  action: string;
 }) => {
   return (
-    <div className="w-[310px] h-auto flex mb-8">
+    <div className="w-[32%] flex mb-8">
       <div className="mr-4">
         <div
           className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-[60px] h-[60px] `}
@@ -38,9 +38,7 @@ const ToolsCard = ({
         </p>
         <Link
           href={link}
-          className={`text-[14px] mt-[11px] flex items-center uppercase ${
-            isActive ? `text-white` : `text-[#959595]`
-          } font-semibold`}
+          className={`text-[14px] mt-[11px] flex items-center uppercase text-[#959595] hover:text-white font-semibold`}
         >
           {action} <i className="ml-2">{chevronRight}</i>
         </Link>
