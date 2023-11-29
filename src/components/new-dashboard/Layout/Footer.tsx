@@ -28,22 +28,25 @@ const tabOption = [
 ];
 
 const Footer = () => (
-  <div className="ml-[244px] pb-7 w-4/5 px-3 text-center ">
+  <div className="lg:ml-[244px] pb-7 lg:w-4/5 w-full px-3 text-center ">
     <div className="flex justify-between h-[52px] items-end border-t border-[#312E37]">
-      <p className="text-[#959595] text-[14px]">
-        2023 © CareerAi | Design by AlyStudio
+      <p className="text-[#959595] lg:text-[14px] text-[10px]">
+        2023 © CareerAi
       </p>
-      <div className="flex gap-[22px] items-center">
+      <div className="flex lg:gap-[22px] gap-[10px] items-center">
         <Link
           href={"/terms-and-conditions"}
-          className="text-[#959595] text-[14px]"
+          className="text-[#959595] lg:text-[14px] text-[10px]"
         >
           Terms use
         </Link>
-        <Link href={"/privacy-policy"} className="text-[#959595] text-[14px]">
+        <Link
+          href={"/privacy-policy"}
+          className="text-[#959595] lg:text-[14px] text-[10px]"
+        >
           Privacy Policy
         </Link>
-        <div className="flex gap-[21px]">
+        <div className="flex lg:gap-[21px] gap-[8px]">
           {tabOption.map((item, i) => (
             <a href={item.href} key={i}>
               {item.icon}
