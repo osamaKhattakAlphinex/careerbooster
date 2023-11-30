@@ -59,7 +59,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
         .required("Please Enter Your Amount")
         .min(0, "Minimum Value is 0"),
       duration_in_months: Yup.number()
-        .required("Please Enter Your Amount")
+        .required("Please Enter Duration in Months")
         .min(0, "Minimum Value is 0"),
       duration: Yup.string().required("Please Select duration"),
       status: Yup.string().required(
@@ -74,8 +74,20 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
         ),
     }),
     onSubmit: async (values, action) => {
-      console.log(values);
       const res = await axios.put(`/api/coupons/${couponId}`, {
+        name: values.name,
+        amount_off: values.amount_off,
+        duration: values.duration,
+        status: values.status,
+        duration_in_months:
+          values.duration === "repeating" ? values.duration_in_months : null,
+        currency: values.currency,
+        livemode: false,
+        // percent_off: null,
+        forUserPackageCategory: values.category,
+        expiresAt: new Date(values.expiryDate),
+        valid: values.status === "active" ? true : false,
+        // times_redeemed: 0,
         // type: values.type,
         // title: values.title,
         // amount: values.amount,
@@ -200,7 +212,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                 </div>
                 <div>
                   <label
-                    htmlFor="type"
+                    htmlFor="category"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Select For Category
@@ -226,7 +238,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                 </div>
                 <div>
                   <label
-                    htmlFor="amount"
+                    htmlFor="amount_off"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Amount-Off
@@ -250,7 +262,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
 
                 <div>
                   <label
-                    htmlFor="category"
+                    htmlFor="status"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Status
@@ -259,7 +271,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.status}
-                    id="category"
+                    id="status"
                     name="status"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   >
@@ -277,7 +289,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
               <div className="grid gap-4 mb-4 sm:grid-cols-2">
                 <div>
                   <label
-                    htmlFor="type"
+                    htmlFor="duration"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Duration
@@ -304,7 +316,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                 </div>
                 <div>
                   <label
-                    htmlFor="amount"
+                    htmlFor="duration_in_months"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Duration In Months
@@ -328,7 +340,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                 </div>
                 <div>
                   <label
-                    htmlFor="type"
+                    htmlFor="currency"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Currency

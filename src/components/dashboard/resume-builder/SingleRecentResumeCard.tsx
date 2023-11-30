@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import { useRouter } from "next/navigation";
-import ReactToPrint, { useReactToPrint } from "react-to-print";
+import ReactToPrint from "react-to-print";
 import { useSession } from "next-auth/react";
 import Html2Pdf from "js-html2pdf";
 import { useState } from "react";

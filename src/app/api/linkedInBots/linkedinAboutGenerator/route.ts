@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import TrainBot from "@/db/schemas/TrainBot";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -32,6 +33,10 @@ export async function POST(req: any) {
       }
 
       if (linkedinContent) {
+        const dataset = "linkedinAiTool.about";
+        const model = await getTrainedModel(dataset);
+        console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+
         const input = `This is the User data:
                 ${linkedinContent}
     
@@ -50,16 +55,6 @@ export async function POST(req: any) {
 
             // make a trainBot entry
 
-            // const responseForTraining = await openai.chat.completions.create({
-            //   model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
-            //   messages: [
-            //     {
-            //       role: "user",
-            //       content: input,
-            //     },
-            //   ],
-            //   temperature: 1,
-            // });
             const obj = {
               type: "linkedinAiTool.about",
               input: input,

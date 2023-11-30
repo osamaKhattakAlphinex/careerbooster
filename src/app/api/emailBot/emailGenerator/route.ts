@@ -8,6 +8,7 @@ import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
 
 // PROMPT
 // Here is the Job description:
@@ -54,6 +55,10 @@ export async function POST(req: any) {
     // CREATING LLM MODAL
 
     if (type === "file") {
+      const dataset = "linkedin.genearteConsultingBid";
+      const model = await getTrainedModel(dataset);
+      console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+
       const user = await User.findOne({ email: email }, { files: 1 });
       if (user) {
         const getFile = user.files.find(

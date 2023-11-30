@@ -9,6 +9,7 @@ import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import User from "@/db/schemas/User";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
 export const maxDuration = 300; // This function can run for a maximum of 5 minutes
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -46,6 +47,10 @@ export async function POST(req: any) {
 
     const prompt = promptDB.replace("{{jobDescription}}", jobDescription);
     if (type === "file") {
+      const dataset = "linkedin.genearteConsultingBid";
+      const model = await getTrainedModel(dataset);
+      console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+
       const user = await User.findOne({ email: email }, { files: 1 });
       if (user) {
         const getFile = user.files.find(

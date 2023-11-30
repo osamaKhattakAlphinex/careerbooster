@@ -4,6 +4,9 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
 import Coupon from "@/db/schemas/Coupon";
+import { loadStripe } from "@stripe/stripe-js";
+import { stripe } from "@/lib/stripe";
+// import { stripe } from "@/lib/stripe";
 export async function POST(request: any) {
   const session = await getServerSession(authOptions);
 
@@ -17,6 +20,7 @@ export async function POST(request: any) {
   try {
     await startDB();
     const payload = await request.json();
+
     const response = await Coupon.create({ ...payload });
     return NextResponse.json(
       { result: response, success: true },
