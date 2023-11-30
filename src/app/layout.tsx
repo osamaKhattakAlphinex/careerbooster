@@ -23,18 +23,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ThemeProvider>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <AuthProvider>
-        <ReduxProvider>
-          <MainLoaderLayer />
-          <Header />
-          {children}
-          <Footer />
-        </ReduxProvider>
-      </AuthProvider>
-    </ThemeProvider>
+    <>
+      <ThemeProvider>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
+        <AuthProvider>
+          <ReduxProvider>
+            <MainLoaderLayer />
+            <Header />
+            {children}
+            <Footer />
+          </ReduxProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </>
   );
 }

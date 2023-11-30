@@ -4,6 +4,7 @@ import FAQList from "@/components/new-layout/Homepage/Faqs";
 import UseCases from "@/components/new-layout/Homepage/UseCases";
 import PageHeader from "@/components/new-layout/PageHeader";
 import { Metadata } from "next";
+
 export const metadata: Metadata = {
   title: "CareerBooster.AI-UseCases",
   description:
@@ -35,18 +36,20 @@ export const metadata: Metadata = {
 
 export default function UseCasesPage() {
   return (
-    <main className="flex-grow-1 mb-20">
-      {/* <!-- Page header --> */}
-      <PageHeader title="Use Cases" />
+    <>
+      <main className="flex-grow-1 mb-20">
+        {/* <!-- Page header --> */}
+        <PageHeader title="Use Cases" />
 
-      {/* <!-- Use cases --> */}
-      <UseCases />
+        {/* <!-- Use cases --> */}
+        <UseCases />
 
-      {/* <!-- FAQ --> */}
-      <FAQList />
+        {/* <!-- FAQ --> */}
+        <FAQList />
 
-      {/* <!-- CTA --> */}
-      <CTASection />
-    </main>
+        {/* <!-- CTA --> */}
+        <CTASection />
+      </main>
+    </>
   );
 }

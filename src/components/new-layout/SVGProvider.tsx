@@ -1,5 +1,4 @@
 "use client";
-
 import useTheme from "@/lib/useTheme";
 import Image from "next/image";
 

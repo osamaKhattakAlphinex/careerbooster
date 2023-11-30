@@ -36,20 +36,22 @@ export const metadata: Metadata = {
 
 export default function BlogsPage() {
   return (
-    <main className="flex-grow-1 mb-20">
-      {/* <!-- Page header --> */}
-      <PageHeader title="Blog Posts" />
-      <Blog
-        src="/assets/images/thumbnails/1.jpg"
-        category="Design"
-        date="2 - 4 - 2023"
-        minutesViewed="5 Minutes Read"
-        title=" Best free AI content generator & AI writers for 2023"
-      />
-      <BlogPagination />
+    <>
+      <main className="flex-grow-1 mb-20">
+        {/* <!-- Page header --> */}
+        <PageHeader title="Blog Posts" />
+        <Blog
+          src="/assets/images/thumbnails/1.jpg"
+          category="Design"
+          date="2 - 4 - 2023"
+          minutesViewed="5 Minutes Read"
+          title=" Best free AI content generator & AI writers for 2023"
+        />
+        <BlogPagination />
 
-      {/*<!-- CTA --> */}
-      <CTASection />
-    </main>
+        {/*<!-- CTA --> */}
+        <CTASection />
+      </main>
+    </>
   );
 }

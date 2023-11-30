@@ -28,7 +28,7 @@ const UsersPage = () => {
   const [subscriptionId, setSubscriptionId] = useState("");
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [dataSelection, setDataSelection] = useState<string[]>([]);
-
+  const [pkg, setPkg] = useState<any>([]);
   const [counts, setCounts] = useState<any>(null);
   const [userStats, setUserStats] = useState<any>("total");
 
@@ -119,19 +119,30 @@ const UsersPage = () => {
     }
   };
 
-  const onSubscriptionCheck = async (id: string, status: boolean) => {
+  const onSubscriptionChange = async (id: string, pckg: string) => {
     if (window.confirm("Are you sure to Change the subscription status")) {
       setSubscriptionId(id);
+      console.log(pckg);
       const record: any = await axios
         .put(`/api/users/${id}`, {
-          userPackageExpirationDate: Date.now() + 30 * 24 * 60 * 60 * 1000,
+          userPackage: pckg,
+          userPackageUsed: {
+            resumes_generation: 0,
+            keywords_generation: 0,
+            headline_generation: 0,
+            about_generation: 0,
+            job_desc_generation: 0,
+            cover_letter_generation: 0,
+            email_generation: 0,
+            pdf_files_upload: 0,
+            review_resume: 0,
+            consulting_bids_generation: 0,
+          },
         })
         .finally(() => {
           setSubscriptionId("");
           getUserDeatils();
         });
-    } else {
-      // router.push("/admin/users");
     }
   };
   const onSelecting = (checked: boolean, id: string) => {
@@ -186,8 +197,22 @@ const UsersPage = () => {
       }
     });
   };
-
+  const getAllPackages = () => {
+    fetch("/api/checkout/getActivePackages", {
+      method: "GET",
+    }).then(async (resp: any) => {
+      const res = await resp.json();
+      let result;
+      if (typeof res.result === "string") {
+        result = await JSON.parse(res.result);
+      } else {
+        result = res.result;
+      }
+      setPkg(result);
+    });
+  };
   useEffect(() => {
+    getAllPackages();
     getUserDeatils();
     getUsersCount();
   }, []);
@@ -477,30 +502,54 @@ const UsersPage = () => {
                           {subscriptionId === item._id ? (
                             refreshIconRotating
                           ) : (
-                            <div className="flex items-center justify-center">
-                              <input
-                                type="checkbox"
-                                checked={checkingSubscription(
-                                  item.userPackageExpirationDate
-                                )}
+                            <div className="flex justify-center items-center gap-2">
+                              <select
+                                className="rounded"
+                                value={item.usedPackage}
                                 onChange={(e) => {
-                                  onSubscriptionCheck(
+                                  onSubscriptionChange(
                                     item._id,
-                                    e.target.checked
+                                    e.target.value
                                   );
-                                  // if (subscriptionId === "") {
-                                  //   e.target.checked = false;
-                                  // }
                                 }}
-                              />
-                              <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                {new Date(
-                                  item.userPackageExpirationDate
-                                ).getTime() < Date.now() ||
-                                item.userPackageExpirationDate === undefined
-                                  ? "Off"
-                                  : "On"}
-                              </span>
+                              >
+                                {pkg.map((p: any, i: any) => {
+                                  return (
+                                    <option
+                                      key={i}
+                                      value={p._id}
+                                      selected={item.userPackage === p._id}
+                                    >
+                                      {p.title}
+                                    </option>
+                                  );
+                                })}
+                              </select>
+                              <div className="flex justify-center items-center">
+                                <input
+                                  type="checkbox"
+                                  checked={checkingSubscription(
+                                    item.userPackageExpirationDate
+                                  )}
+                                  onChange={(e) => {
+                                    onSubscriptionChange(
+                                      item._id,
+                                      item.userPackage
+                                    );
+                                    if (subscriptionId === "") {
+                                      e.target.checked = false;
+                                    }
+                                  }}
+                                />
+                                <span className=" text-sm font-medium text-gray-900 dark:text-gray-300">
+                                  {new Date(
+                                    item.userPackageExpirationDate
+                                  ).getTime() < Date.now() ||
+                                  item.userPackageExpirationDate === undefined
+                                    ? "Off"
+                                    : "On"}
+                                </span>
+                              </div>
                             </div>
                           )}
                         </td>

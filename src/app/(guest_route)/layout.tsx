@@ -12,5 +12,5 @@ export default async function GuestLayout({ children }: Props) {
 
   if (session) redirect("/dashboard");
 
-  return <>{children}</>;
+  return <> {children}</>;
 }

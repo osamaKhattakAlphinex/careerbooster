@@ -1,20 +1,17 @@
-import { NextApiHandler } from "next";
-import {
-  ChatPromptTemplate,
-  HumanMessagePromptTemplate,
-  SystemMessagePromptTemplate,
-} from "langchain/prompts";
-import { LLMChain } from "langchain/chains";
-import { ChatOpenAI } from "langchain/chat_models/openai";
 import Prompt from "@/db/schemas/Prompt";
 import TrainBot from "@/db/schemas/TrainBot";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
+import { OpenAIStream, StreamingTextResponse } from "ai";
+import startDB from "@/lib/db";
+import OpenAI from "openai";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
-
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 export async function POST(req: any) {
   const session = await getServerSession(authOptions);
 
@@ -27,9 +24,9 @@ export async function POST(req: any) {
 
   try {
     const reqBody = await req.json();
-    const userData = reqBody.userData;
-    const trainBotData = reqBody.trainBotData;
-
+    const userData = reqBody?.userData;
+    const trainBotData = reqBody?.trainBotData;
+    await startDB();
     // fetch prompt from db
     const promptRec = await Prompt.findOne({
       type: "linkedin",
@@ -38,59 +35,40 @@ export async function POST(req: any) {
     });
     const prompt = promptRec.value;
 
-    // CREATING LLM MODAL
-    const model = new ChatOpenAI({
-      streaming: true,
-      modelName: "gpt-3.5-turbo",
-      //   callbacks: [
-      //     {
-      //       handleLLMNewToken(token) {
-      //         res.write(token);
-      //       },
-      //     },
-      //   ],
-      temperature: 1,
-    });
+    const inputPrompt = `This is the User data: ${JSON.stringify(userData)}
 
-    const chatPrompt = ChatPromptTemplate.fromPromptMessages([
-      SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing About Section for the person LinkedIn Profile.
-        Following are the content of the resume (in JSON format): 
-        JSON user/resume data: {userData}
-        `),
-      HumanMessagePromptTemplate.fromTemplate("{prompt}"),
-    ]);
-    const chainB = new LLMChain({
-      prompt: chatPrompt,
-      llm: model,
-    });
+          this is the prompt:
+          ${prompt}
+          `;
 
-    const resp = await chainB.call({
-      userData: JSON.stringify(userData),
-      prompt,
+    const response: any = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      stream: true,
+      messages: [{ role: "user", content: inputPrompt }],
     });
-
+    // make a trainBot entry
     try {
       if (trainBotData) {
+        await startDB();
+
         const obj = {
-          type: "linkedin.generateAbout",
+          type: "linkedin.genearteConsultingBid",
           input: prompt,
-          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
+          output: response,
           idealOutput: "",
           status: "pending",
           userEmail: trainBotData.userEmail,
           fileAddress: trainBotData.fileAddress,
-          Instructions: `Generate LinkedIn About for ${trainBotData.userEmail}`,
+          Instructions: `Generate Linkedin About for ${trainBotData.userEmail}`,
         };
 
         await TrainBot.create({ ...obj });
       }
     } catch (error) {}
-    // make a trainBot entry
-
-    return NextResponse.json(
-      { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
-      { status: 200 }
-    );
+    // Convert the response into a friendly text-stream
+    const stream = OpenAIStream(response);
+    // Respond with the stream
+    return new StreamingTextResponse(stream);
     // res.end();
   } catch (error) {
     return NextResponse.json(

@@ -150,9 +150,9 @@ const ConsultingBidsGenerator = () => {
     if (userData && userData?.email) {
       setAiInputUserData({
         contact: userData?.contact,
-        education: userData?.contact,
-        email: userData?.contact,
-        experience: userData?.contact,
+        education: userData?.education,
+        email: userData?.email,
+        experience: userData?.experience,
         firstName: userData?.firstName,
         lastName: userData?.lastName,
         phone: userData?.phone,

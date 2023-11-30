@@ -5,6 +5,7 @@ import HeadlineGenerator from "@/components/dashboard/linkedin-optimization/Head
 import JDGenerator from "@/components/dashboard/linkedin-optimization/JDGenerator";
 import KeywordsGenerator from "@/components/dashboard/linkedin-optimization/KeywordsGenerator";
 // import DownloadDocx from "@/components/dashboard/linkedin-optimization/DownloadDocx";
+
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 

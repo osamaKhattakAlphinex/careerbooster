@@ -1,4 +1,5 @@
 "use client";
+
 import manyImage from "@/../public/many-image.png";
 import {
   ArrowDownIcon,
