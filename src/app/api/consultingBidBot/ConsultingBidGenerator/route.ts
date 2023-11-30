@@ -8,6 +8,7 @@ import startDB from "@/lib/db";
 import User from "@/db/schemas/User";
 import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -49,6 +50,10 @@ export async function POST(req: any) {
     // CREATING LLM MODAL
 
     if (type === "file") {
+      const dataset = "linkedin.genearteConsultingBid";
+      const model = await getTrainedModel(dataset);
+      console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+
       const user = await User.findOne({ email: email }, { files: 1 });
       if (user) {
         const getFile = user.files.find(

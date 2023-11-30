@@ -4,15 +4,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { makeid } from "@/helpers/makeid";
-
-type Feature = string[];
-type FeatureTooltip = string[];
+import { loadStripe } from "@stripe/stripe-js";
+import { stripe } from "@/lib/stripe";
 
 type Props = {
   getCoupons: () => void;
 };
-
-type FeatureFieldType = { id: number; feature: string; tooltip: string };
 // Feature Field
 export const FeatureRow = ({
   id,
@@ -20,8 +17,6 @@ export const FeatureRow = ({
   tooltip,
   onChangeFeature,
   onChangeTooltip,
-  onBlurFeature,
-  onBlurTooltip,
   onFeatureRemove,
 }: any) => {
   return (
@@ -62,10 +57,28 @@ export const FeatureRow = ({
   );
 };
 
+const addCouponToStripe = async (data: any) => {
+  const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
+  // const stripe: any = await loadStripe(STRIPE_PK);
+  // console.log(stripe);
+
+  const couponDetails = await stripe.coupons.create({
+    id: data.name,
+    // object:"coupon",
+    amount_off: data.amount_off,
+    currency: data.currency,
+    duration: data.duration,
+    duration_in_months: data.duration_in_months,
+    name: "coupon first",
+    percent_off: 20,
+  });
+  console.log(couponDetails);
+};
 const AddCoupon = ({ getCoupons }: Props) => {
   // const addFeatureToolTip = (toolTip: string[]) => {
   //   setFeaturesToolTips([...featuresToolTips, toolTip]);
   // };
+
   const [popUpModel, setPopUpModel] = useState(false);
   const formik = useFormik({
     initialValues: {
@@ -100,9 +113,7 @@ const AddCoupon = ({ getCoupons }: Props) => {
         ),
     }),
     onSubmit: async (values, action) => {
-      console.log(values);
-
-      const res = await axios.post("/api/coupons", {
+      const data = {
         name: values.name,
         amount_off: values.amount_off,
         duration: values.duration,
@@ -116,8 +127,12 @@ const AddCoupon = ({ getCoupons }: Props) => {
         expiresAt: new Date(values.expiryDate),
         valid: values.status === "active" ? true : false,
         times_redeemed: 0,
+      };
+      const res = await axios.post("/api/coupons", {
+        ...data,
       });
       // console.log("api response:", res);
+      // addCouponToStripe(data);
       getCoupons();
       action.resetForm();
       setPopUpModel(false);
@@ -169,7 +184,7 @@ const AddCoupon = ({ getCoupons }: Props) => {
           <div className="relative border-2 dark:!border-gray-900 border-white py-4 rounded-lg shadow  dark:!bg-gray-800 bg-white px-10 sm:p-5">
             <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white ">
-                Add Package
+                Add Coupon
               </h3>
               <button
                 type="button"

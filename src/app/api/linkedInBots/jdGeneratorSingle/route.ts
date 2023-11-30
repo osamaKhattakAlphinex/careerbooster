@@ -6,6 +6,7 @@ import { authOptions } from "../../auth/[...nextauth]/route";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
 import startDB from "@/lib/db";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -25,6 +26,10 @@ export async function POST(req: any) {
     const reqBody = await req.json();
     const experience = reqBody?.experience;
     const trainBotData = reqBody?.trainBotData;
+
+    const dataset = "resume.writeJDSingle";
+    const model = await getTrainedModel(dataset);
+    console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
     const promptRec = await Prompt.findOne({
       type: "linkedin",

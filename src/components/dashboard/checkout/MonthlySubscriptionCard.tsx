@@ -40,7 +40,6 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
     // Load stripe
     const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
     const stripe = await loadStripe(STRIPE_PK);
-
     const body: CheckoutSubscriptionBody = {
       interval: userPackage.type === "monthly" ? "month" : "year",
       amount: userPackage.amount * 100,

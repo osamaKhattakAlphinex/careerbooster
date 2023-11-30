@@ -5,6 +5,8 @@ import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import TrainBot from "@/db/schemas/TrainBot";
+import TrainedModel from "@/db/schemas/TrainedModel";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
 
 // This function can run for a maximum of 5 seconds
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
@@ -31,6 +33,10 @@ export async function POST(req: any) {
 
       // For LinkedIn Toll  if file is uploaded then load content from that fiel
       if (content) {
+        const dataset = "linkedinAiTool.headline";
+        const model = await getTrainedModel(dataset);
+        console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+
         // CREATING LLM MODAL
 
         const input = `

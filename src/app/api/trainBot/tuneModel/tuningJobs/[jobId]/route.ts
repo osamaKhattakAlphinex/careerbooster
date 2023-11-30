@@ -18,21 +18,20 @@ export const POST = async (
 
     await startDB();
 
-    const fineTune = await openai.fineTuning.jobs.cancel(jobId);
+    // cancel the job
+    await openai.fineTuning.jobs.cancel(jobId);
 
+    // reset the status and jobId to normal
     const fineTuneModel = await FineTuneModel.findOneAndUpdate(
       {
         fineTuningJobId: jobId,
       },
-      { status: status, fineTuningJobId: "" },
+      { status: status, fineTuningJobId: "N/A", tuningBaseModel: "N/A" },
       { new: true }
     );
 
-    console.log(fineTune);
-
     return NextResponse.json({
       success: true,
-      //   content,
     });
   } catch (err) {
     return NextResponse.json({
