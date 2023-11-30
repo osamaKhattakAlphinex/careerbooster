@@ -5,20 +5,22 @@ const Button = ({
   btnText,
   bgColor,
   onClick,
-  textColor
+  textColor,
 }: {
   isActive?: Boolean;
   btnText: String;
   bgColor?: String;
   onClick?: any;
-  textColor?:any;
+  textColor?: any;
 }) => {
   // Define a set of classes based on the 'isActive' prop
   const buttonClasses = isActive ? "border-fuchsia-600" : " border-[#312E37] ";
   return (
     <div>
       <button
-        className={`border ${isActive ? `text-fuchsia-600 font-semibold ` : `text-neutral-400` } ${textColor}  ${buttonClasses} ${bgColor} rounded-full px-[28px] py-[9px] text-[14px] mr-[13px]`}
+        className={`border ${
+          isActive ? `text-fuchsia-600 font-semibold ` : `text-neutral-400`
+        } ${textColor}  ${buttonClasses} ${bgColor} rounded-full lg:px-[28px] px-[12px] lg:py-[9px] py-[6px] lg:text-[14px] text-[9px] lg:mr-[13px] mr-[6px]`}
         onClick={onClick}
       >
         {btnText}

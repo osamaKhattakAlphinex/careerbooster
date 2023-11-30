@@ -4,6 +4,7 @@ import { useState } from "react";
 import ResumesListCard from "@/components/new-dashboard/dashboard/ResumesListCard";
 import Alert from "../common/Alert";
 import ResumeMaker from "./ResumeMaker";
+import ProfileCompletionAlert from "@/components/dashboard/ProfileCompletionAlert";
 
 const tabOptions = [
   { name: "Career", value: "career" },
@@ -17,26 +18,16 @@ const RecentDocumentsCard = () => {
   const [show, setShow] = useState(true);
   return (
     <>
-      <Alert show={show} onClose={() => setShow(false)} />
-
-      <h1 className="pb-2 rounded-[14px] text-zinc-500 font-bold uppercase text-[14px] ">
-        career boosting ai tools
-      </h1>
-      <div className="flex mt-5">
-        {tabOptions.map((option) => (
-          <Button
-            btnText={option.name}
-            isActive={activeTab === option.value}
-            onClick={() => setActiveTab(option.value)}
-          />
-        ))}
+      {/* <Alert show={show} onClose={() => setShow(false)} /> */}
+      <ProfileCompletionAlert />
+      <div className="lg:mt-0 mt-10">
+        <h1 className="pb-2 rounded-[14px] text-zinc-500 font-bold uppercase text-[14px] lg:pl-0 pl-5 lg:mt-0 ">
+          career booster ai tools
+        </h1>
+        <div className="flex mt-5">
+          <ResumeMaker />
+        </div>
       </div>
-      {activeTab === "career" && <ResumesListCard />}
-      {activeTab === "resumeMaker" && <ResumeMaker />}
-      {activeTab === "proposals" && (
-        <h1 className="text-gray-100">Consulting Bids</h1>
-      )}
-      {activeTab === "linkedin" && <h1 className="text-gray-100">LinedIn</h1>}
     </>
   );
 };

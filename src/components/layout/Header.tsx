@@ -81,6 +81,7 @@ const Header = () => {
     "/profile-review",
     "/email-bot",
     "/consulting-bids-bot",
+    "/subscribe",
   ];
 
   // when page (session) loads, fetch user data if not exists

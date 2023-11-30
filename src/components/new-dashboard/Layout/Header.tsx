@@ -19,6 +19,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     "/profile-review": "Review Your Profile",
     "/email-bot": "Generate Emails Using AI",
     "/consulting-bids-bot": "Generate Bids Using AI",
+    "/subscribe": "Select Your Plan",
     // Add more routes as needed
   };
 
@@ -26,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     routeNamesToDisplayNames[pathname] || "Unknown";
 
   return (
-    <nav className="py-[14px] px-4 ml-[244px] ">
+    <nav className="py-[14px] px-4 ml-0 lg:ml-[244px] ">
       <div className="w-full rounded-lg flex justify-between sm:justify-between items-center">
         <h1 className="rounded-[14px] text-[14px] text-[#959595] font-bold uppercase">
           {currentRouteDisplayName}

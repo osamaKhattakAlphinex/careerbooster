@@ -13,16 +13,16 @@ const PreviouslyGeneratedList = ({ Component }: Props) => {
   return (
     <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-[24px] py-[35px]">
       <div className="flex justify-between items-center ">
-        <h1 className="uppercase text-[14px] font-semibold">
+        <h1 className="uppercase lg:text-[14px] text-[12px] font-semibold lg:pr-0 pr-4">
           Your AI Generated Cover Letters
         </h1>
-        <div className="relative flex justify-end">
+        <div className="relative lg:w-[213px] w-[120px] flex">
           <input
-            className="w-full pl-5 py-2 rounded-full border border-zinc-600 placeholder-gray-400 text-white focus:outline-none focus:border-zinc-600 bg-transparent text-[14px]"
+            className="w-full pl-4 lg:h-[38px] lg:py-[8px] py-[6px] placeholder:text-[#5B5B5B] rounded-full border border-[#312E37] placeholder-gray-400 text-white lg:text-[14px] text-[10px] focus:outline-none focus:border-zinc-600 bg-transparent"
             type="text"
-            placeholder="Search Here"
+            placeholder="Search here"
           />
-          <div className="absolute inset-y-0 mr-4  flex items-center">
+          <div className="absolute inset-y-0 right-3   items-center lg:flex hidden">
             {searchIcon}
           </div>
         </div>

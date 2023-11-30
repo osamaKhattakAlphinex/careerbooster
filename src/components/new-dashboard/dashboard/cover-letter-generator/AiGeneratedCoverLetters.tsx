@@ -11,7 +11,7 @@ export default function AiGeneratedCoverLetters() {
     <>
       <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-[30px] py-[35px]">
         <div className="flex justify-between items-center ">
-          <h1 className="uppercase text-[14px] font-semibold">
+          <h1 className="uppercase lg:text-[14px] text-[12px] font-semibold">
             Your AI Generated Cover Letters
           </h1>
           <div className="relative flex justify-end">
@@ -24,7 +24,7 @@ export default function AiGeneratedCoverLetters() {
               {searchIcon}
             </div>
           </div>
-        </div>  
+        </div>
       </div>
     </>
   );
