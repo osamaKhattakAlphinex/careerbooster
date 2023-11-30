@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import TrainBot from "@/db/schemas/TrainBot";
 import startDB from "@/lib/db";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -29,6 +30,10 @@ export async function POST(req: any) {
         const openai = new OpenAI({
           apiKey: process.env.OPENAI_API_KEY,
         });
+
+        const dataset = "register.wizard.listEducation";
+        const model = await getTrainedModel(dataset);
+        console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
         const input = `
               This is the User Data:

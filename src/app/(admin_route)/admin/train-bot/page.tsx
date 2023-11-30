@@ -1,20 +1,16 @@
 "use client";
-import FineTuningModel from "@/components/admin/fineTuning/fineTuningModels";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import {
   downloadIcon,
   leftArrowIcon,
   refreshIconRotating,
 } from "@/helpers/iconsProvider";
-import { faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Link from "next/link";
 
 import { useEffect, useRef, useState } from "react";
-import { string } from "yup";
-
-import OpenAI from "openai";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import FineTuningSettingModel from "@/components/admin/fineTuning/fineTuningSettingModels";
 
 const activeCSS =
   "inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500";
@@ -41,7 +37,7 @@ const TrainRegistrationBotAdminPage = () => {
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [dataSelection, setDataSelection] = useState<string[]>([]);
 
-  const fineTuningModalRef: React.MutableRefObject<any> = useRef(null);
+  const settingModelRef: React.MutableRefObject<any> = useRef(null);
 
   const fetchRecords = async () => {
     setLoading(true);
@@ -71,18 +67,132 @@ const TrainRegistrationBotAdminPage = () => {
     // }
   };
 
-  const handleTuneModel = async (values: any) => {
-    const formData = new FormData();
+  const handleTuneModel = async (values: any = {}) => {
+    if (records.length === 0) return;
 
-    formData.append("traing-file", values.trainingFile);
-    formData.append("tuning-type", values.tuningType);
-    formData.append("base-model", values.baseModel);
+    let data: any = [];
+
+    const consent = confirm(
+      "Are you sure you want to send this data for training?"
+    );
+
+    if (!consent) return;
 
     try {
-      axios.post("/api/trainBot/tuneModel", formData);
-    } catch (err) {
-      console.log(err);
+      setLoading(true);
+
+      const {
+        data: { success, reviewedData },
+      } = await axios.get(`/api/trainBot/getAllDataForTraining`, {
+        params: {
+          status: activeTab,
+          type: showRecordsType,
+        },
+      });
+
+      if (success) {
+        const formattedData = reviewedData.map((rec: any) => ({
+          messages: [
+            { role: "user", content: rec.input },
+            { role: "assistant", content: rec.idealOutput },
+          ],
+        }));
+
+        const jsonl = formattedData
+          .map((obj: any) => JSON.stringify(obj, null, 0))
+          .join("\n");
+
+        const blob = new Blob([jsonl], { type: "application/json" });
+
+        const formData = new FormData();
+        formData.append("traing-file", blob);
+        formData.append("record-type", showRecordsType);
+
+        const trainingResponse = await axios.post(
+          "/api/trainBot/tuneModel",
+          formData
+        );
+
+        if (trainingResponse.data.success) {
+          if (reviewedData.length >= 1) {
+            const _ids = reviewedData.map((rec: any) => rec._id);
+            handleChangeStatus(_ids);
+          }
+
+          fetchRecords();
+        } else {
+          console.log("Something went wrong");
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
+
+    // if (consent) {
+    //   let allData = await axios
+    //     .get(`/api/trainBot/getAllDataForTraining`, {
+    //       params: {
+    //         status: activeTab,
+    //         type: showRecordsType,
+    //       },
+    //     })
+    //     .then((res: any) => {
+    //       if (res.data.success) {
+    //         data = res.data.map((rec: any) => {
+    //           return {
+    //             messages: [
+    //               { role: "user", content: rec.input },
+    //               { role: "assistant", content: rec.idealOutput },
+    //             ],
+    //           };
+    //         });
+    //         return res.data;
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     })
+    //     .finally(() => {
+    //       setLoading(false);
+    //     });
+
+    //   if (data) {
+    //     const jsonl = data
+    //       .map((obj: any) => JSON.stringify(obj, (key, value) => value, 0))
+    //       .join("\n");
+
+    //     const blob = new Blob([jsonl], {
+    //       type: "application/json",
+    //     });
+
+    //     const formData = new FormData();
+    //     formData.append("traing-file", blob);
+    //     formData.append("record-type", showRecordsType);
+
+    //     try {
+    //       axios
+    //         .post("/api/trainBot/tuneModel", formData)
+    //         .then((res: any) => {
+    //           if (res.data.success) {
+    //           } else {
+    //             console.log("Something went wrong");
+    //           }
+    //         })
+    //         .then(function () {
+    //           if (allData.length >= 1) {
+    //             let _ids: string[] = [];
+    //             allData.map((rec: any) => _ids.push(rec._id));
+    //             handleChangeStatus(_ids);
+    //           }``
+    //           fetchRecords();
+    //         });
+    //     } catch (err) {
+    //       console.log(err);
+    //     }
+    //   }
+    // }
   };
 
   const handleDownload = async () => {
@@ -163,6 +273,10 @@ const TrainRegistrationBotAdminPage = () => {
   }, [dataType]);
 
   useEffect(() => {
+    console.log(dataSelection);
+  }, [dataSelection]);
+
+  useEffect(() => {
     fetchRecords();
     const startIndex = Number((currentPage - 1) * limitOfRecords);
     setStartingPage(startIndex);
@@ -191,12 +305,12 @@ const TrainRegistrationBotAdminPage = () => {
     }
   };
 
-  const handleChangeStatus = async () => {
+  const handleChangeStatus = async (dataIds: string[] = []) => {
     setLoading(true);
 
     axios
       .put("/api/trainBot/bulkStatusUpdate", {
-        ids: dataSelection,
+        ids: dataIds,
         newStatus: "trained",
       })
       .then((res: any) => {
@@ -293,8 +407,7 @@ const TrainRegistrationBotAdminPage = () => {
 
   return (
     <>
-      <FineTuningModel formHandler={handleTuneModel} ref={fineTuningModalRef} />
-
+      <FineTuningSettingModel ref={settingModelRef} />
       <div className="pt-30">
         <div className="my-5 ml-10">
           <Link
@@ -307,6 +420,48 @@ const TrainRegistrationBotAdminPage = () => {
         </div>
 
         <div className="flex flex-col gap-2 items-center justify-center">
+          <div className="flex md:flex-row flex-col gap-2 mx-auto sm:w-full px-12">
+            <Link href="/admin/fine-tuning">
+              <button className="bg-gray-900 text-white rounded-lg px-6 py-4 hover:bg-gray-800">
+                <div className="flex flex-row gap-2">
+                  <span>Training Models</span>
+                </div>
+              </button>
+            </Link>
+            <button
+              onClick={() => {
+                if (settingModelRef.current) {
+                  settingModelRef.current.openModal(true);
+                }
+              }}
+              className="bg-gray-900 text-white rounded-lg px-6 py-4 hover:bg-gray-800"
+            >
+              <div className="flex flex-row gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+
+                <span>Setting</span>
+              </div>
+            </button>
+          </div>
+
           <div className=" p-8 flex flex-col gap-2 border w-11/12">
             <div className="flex justify-between">
               <h2 className="text-xl ">Datasets for Training Models</h2>
@@ -546,13 +701,14 @@ const TrainRegistrationBotAdminPage = () => {
                 <div className="flex justify-end">
                   <button
                     onClick={() => {
-                      if (fineTuningModalRef.current) {
-                        fineTuningModalRef.current.openModal(true);
-                      }
+                      handleTuneModel();
+                      // if (fineTuningModalRef.current) {
+                      //   fineTuningModalRef.current.openModal(true);
+                      // }
                     }}
                     className=" flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
                   >
-                    Tune Model
+                    Send For Training
                   </button>
                 </div>
               )}
@@ -561,7 +717,7 @@ const TrainRegistrationBotAdminPage = () => {
                 <div className="flex justify-end">
                   <button
                     disabled={loading}
-                    onClick={handleChangeStatus}
+                    onClick={() => handleChangeStatus(dataSelection)}
                     className=" disabled:cursor-not-allowed flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
                   >
                     Set Status to Trained
