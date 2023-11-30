@@ -14,6 +14,7 @@ import Image from "next/image";
 import FileUploadHandler from "@/components/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+
 // export const metadata: Metadata = {
 //   title: "CareerBooster.AI-Register",
 // };

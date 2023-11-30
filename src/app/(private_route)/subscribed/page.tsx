@@ -38,27 +38,29 @@ export default async function SubscribedPage(props: Props) {
     redirect("/dashboard");
   } else {
     return (
-      <main className="flex-grow-1 mb-20">
-        <section className="pt-md-30 pt-10 py-lg-15">
-          <div className="container">
-            <div className="row justify-center mb-8">
-              <div className="col-lg-10">
-                <div className="text-center">
-                  <h1
-                    className="text-white text-4xl"
-                    data-aos="fade-up-sm"
-                    data-aos-delay="100"
-                  >
-                    Thanks for your Subscription <br />
-                    {customer.metadata.name}
-                  </h1>
-                  <UpdateUserPackage customer={customer.metadata} />
+      <>
+        <main className="flex-grow-1 mb-20">
+          <section className="pt-md-30 pt-10 py-lg-15">
+            <div className="container">
+              <div className="row justify-center mb-8">
+                <div className="col-lg-10">
+                  <div className="text-center">
+                    <h1
+                      className="text-white text-4xl"
+                      data-aos="fade-up-sm"
+                      data-aos-delay="100"
+                    >
+                      Thanks for your Subscription <br />
+                      {customer.metadata.name}
+                    </h1>
+                    <UpdateUserPackage customer={customer.metadata} />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      </main>
+          </section>
+        </main>
+      </>
     );
   }
 }

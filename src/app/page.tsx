@@ -45,34 +45,36 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex-grow-1 mb-20 mt-10">
-      {/* <!-- Hero --> */}
+    <>
+      <main className="flex-grow-1 mb-20 mt-10">
+        {/* <!-- Hero --> */}
 
-      <HeroArea />
+        <HeroArea />
 
-      {/* <!-- Features --> */}
-      <FeaturesSection />
+        {/* <!-- Features --> */}
+        <FeaturesSection />
 
-      {/* <!-- Rewrds --> */}
-      <RewardsSection />
+        {/* <!-- Rewrds --> */}
+        <RewardsSection />
 
-      {/* <!-- Features --> */}
-      <FeaturesSecond />
+        {/* <!-- Features --> */}
+        <FeaturesSecond />
 
-      {/* <!-- Use cases --> */}
-      <UseCases />
+        {/* <!-- Use cases --> */}
+        <UseCases />
 
-      {/* <!-- Reviews --> */}
-      <Reviews />
+        {/* <!-- Reviews --> */}
+        <Reviews />
 
-      {/* <!-- Pricing --> */}
-      <PricingSection />
+        {/* <!-- Pricing --> */}
+        <PricingSection />
 
-      {/* <!-- FAQ --> */}
-      <FAQList />
+        {/* <!-- FAQ --> */}
+        <FAQList />
 
-      {/* <!-- CTA --> */}
-      <CTASection />
-    </main>
+        {/* <!-- CTA --> */}
+        <CTASection />
+      </main>
+    </>
   );
 }

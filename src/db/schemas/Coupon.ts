@@ -3,11 +3,6 @@ const { Schema } = mongoose;
 
 const CouponSchema = new Schema(
   {
-    id: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     amount_off: {
       type: Number,
       required: true,
@@ -22,7 +17,6 @@ const CouponSchema = new Schema(
     },
     duration_in_months: {
       type: Number,
-      min: 1,
     },
     livemode: {
       type: Boolean,
@@ -36,6 +30,11 @@ const CouponSchema = new Schema(
       type: Number,
       min: 0,
       max: 100,
+    },
+    status: {
+      type: String,
+      enum: ["active", "inactive"],
+      required: true,
     },
     forUserPackageCategory: {
       type: String,

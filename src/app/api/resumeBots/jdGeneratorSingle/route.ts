@@ -65,10 +65,7 @@ export async function POST(req: any) {
         const obj = {
           type: "resume.writeJDSingle",
           input: prompt,
-          output: response?.choices[0]?.message?.content?.replace(
-            /(\r\n|\n|\r)/gm,
-            ""
-          ),
+          output: response,
           idealOutput: "",
           status: "pending",
           userEmail: trainBotData.userEmail,
@@ -83,11 +80,6 @@ export async function POST(req: any) {
     const stream = OpenAIStream(response);
     // Respond with the stream
     return new StreamingTextResponse(stream);
-    // return NextResponse.json(
-    //   { result: output.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
-    //   { status: 200 }
-    // );
-    // res.end();
   } catch (error) {
     return NextResponse.json(
       { result: "Something went wrong", success: false },

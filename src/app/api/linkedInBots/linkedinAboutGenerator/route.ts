@@ -50,27 +50,16 @@ export async function POST(req: any) {
 
             // make a trainBot entry
 
-            // const responseForTraining = await openai.chat.completions.create({
-            //   model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
-            //   messages: [
-            //     {
-            //       role: "user",
-            //       content: input,
-            //     },
-            //   ],
-            //   temperature: 1,
-            // });
             const obj = {
               type: "linkedinAiTool.about",
               input: input,
-              output: response.choices[0].message.content,
+              output: response,
               idealOutput: "",
               status: "pending",
               //  userEmail: trainBotData.userEmail,
               // fileAddress: trainBotData.fileAddress,
               Instructions: `Writing a detailed LinkedIn Summary awhich is engaging, impactful, have relevant industry jargon, highlight successes and services with call to action statement `,
             };
-
             await TrainBot.create({ ...obj });
           }
         } catch (error) {}

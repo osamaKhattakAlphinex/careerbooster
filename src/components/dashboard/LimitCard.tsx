@@ -33,9 +33,11 @@ const LimitCard: React.FC<LimitCardProps> = ({
 
   if (used >= limit) {
     return (
-      // <div className="bg-red-500 px-3 py-1 rounded-3xl border-gray-950">
-      <span className="text-sm text-red-500 ">Credit Limit Reached</span>
-      // </div>
+      <>
+        {/* <div className="bg-red-500 px-3 py-1 rounded-3xl border-gray-950"> */}
+        <span className="text-sm text-red-500 ">Credit Limit Reached</span>
+        {/* </div> */}
+      </>
     );
   } else {
     return (

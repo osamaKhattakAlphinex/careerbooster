@@ -1,4 +1,5 @@
 import UploadPDFResume from "@/components/UploadPDFResume";
+
 import RegistrationForm from "@/components/new-layout/Register/RegistraionForm";
 import RegistrationImage from "@/components/new-layout/Register/RegistrationImage";
 import { Metadata } from "next";

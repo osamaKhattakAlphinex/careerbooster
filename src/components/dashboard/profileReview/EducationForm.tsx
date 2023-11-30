@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { months, getYearsList } from "@/helpers/listsProvider";
 import { setStepFour } from "@/store/registerSlice";
+
 const years = getYearsList();
 
 const EducationForm = ({ formik }: any) => {

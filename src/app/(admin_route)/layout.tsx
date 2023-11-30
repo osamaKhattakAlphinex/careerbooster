@@ -15,5 +15,5 @@ export default async function AdminLayout({ children }: Props) {
 
   if (!isAdmin) redirect("/login");
 
-  return <>{children}</>;
+  return <> {children}</>;
 }

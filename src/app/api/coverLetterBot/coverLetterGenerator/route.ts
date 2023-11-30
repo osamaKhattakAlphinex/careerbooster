@@ -70,16 +70,6 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-    const responseForTraining = await openai.chat.completions.create({
-      model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
-      messages: [
-        {
-          role: "user",
-          content: inputPrompt,
-        },
-      ],
-      temperature: 1,
-    });
     // make a trainBot entry
     try {
       if (trainBotData) {
@@ -88,7 +78,7 @@ export async function POST(req: any) {
         const obj = {
           type: "linkedin.genearteConsultingBid",
           input: prompt,
-          output: responseForTraining?.choices[0]?.message?.content?.replace(
+          output: response?.choices[0]?.message?.content?.replace(
             /(\r\n|\n|\r)/gm,
             ""
           ),
@@ -96,7 +86,7 @@ export async function POST(req: any) {
           status: "pending",
           userEmail: trainBotData.userEmail,
           fileAddress: trainBotData.fileAddress,
-          Instructions: `Generate Consulting Bid for ${trainBotData.userEmail}`,
+          Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
         };
 
         await TrainBot.create({ ...obj });

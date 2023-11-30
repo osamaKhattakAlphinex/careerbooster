@@ -35,27 +35,29 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="flex-grow-1 mb-20">
-      {/* <!-- Page header --> */}
-      <PageHeader title="About CareerBooster.AI" secondTitle="About us" />
+    <>
+      <main className="flex-grow-1 mb-20">
+        {/* <!-- Page header --> */}
+        <PageHeader title="About CareerBooster.AI" secondTitle="About us" />
 
-      {/* About Card */}
-      <AboutCard />
+        {/* About Card */}
+        <AboutCard />
 
-      {/* Features Section */}
-      <FeaturesSection />
+        {/* Features Section */}
+        <FeaturesSection />
 
-      {/* Team */}
-      <TeamCard />
+        {/* Team */}
+        <TeamCard />
 
-      {/* Reviews */}
-      <Reviews />
+        {/* Reviews */}
+        <Reviews />
 
-      {/* Brands */}
-      <BrandsCard />
+        {/* Brands */}
+        <BrandsCard />
 
-      {/*<!-- CTA --> */}
-      <CTASection />
-    </main>
+        {/*<!-- CTA --> */}
+        <CTASection />
+      </main>
+    </>
   );
 }

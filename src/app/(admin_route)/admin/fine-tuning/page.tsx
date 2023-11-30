@@ -1,5 +1,7 @@
 "use client";
 import StatusIndicator from "@/components/admin/fineTuning/statusIndicator";
+import { getFormattedDate } from "@/helpers/getFormattedDateTime";
+
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";

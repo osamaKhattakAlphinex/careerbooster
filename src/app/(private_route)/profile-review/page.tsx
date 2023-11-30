@@ -114,105 +114,109 @@ const ProfileReview = () => {
   }, [reduxStep, urlStep]);
 
   return (
-    <main className="flex-grow-1">
-      <section className="pb-15 ">
-        <div className="container">
-          <div
-            className="row justify-center mt-18 w-full "
-            data-aos="fade-up-sm"
-            data-aos-delay="50"
-          >
-            <div className="col-lg-8 col-xl-6">
-              <div className="vstack gap-8" id="contact-form">
-                <div>
-                  {register.activeStep > 1 && (
-                    <button
-                      type="submit"
-                      className="btn btn-secondary-dark"
-                      onClick={(e) => {
-                        dispatch(setActiveStep(register.activeStep - 1));
-                      }}
-                    >
-                      Back
-                    </button>
-                  )}
-
-                  {register.activeStep < 7 && (
-                    <button
-                      type="submit"
-                      disabled={isNextDisabled()}
-                      className="btn btn-primary-dark float-right"
-                      onClick={(e) => {
-                        dispatch(setActiveStep(register.activeStep + 1));
-                      }}
-                    >
-                      Next
-                    </button>
-                  )}
-                </div>
-                {register.activeStep === 1 && (
-                  <>
-                    {register.activeStep === 1 && (
-                      <>
-                        <StepOne />
-                        <StepTwo />
-                        <StepThree />
-                      </>
+    <>
+      {/* </script> */}
+      <main className="flex-grow-1">
+        <section className="pb-15 ">
+          <div className="container">
+            <div
+              className="row justify-center mt-18 w-full "
+              data-aos="fade-up-sm"
+              data-aos-delay="50"
+            >
+              <div className="col-lg-8 col-xl-6">
+                <div className="vstack gap-8" id="contact-form">
+                  <div>
+                    {register.activeStep > 1 && (
+                      <button
+                        type="submit"
+                        className="btn btn-secondary-dark"
+                        onClick={(e) => {
+                          dispatch(setActiveStep(register.activeStep - 1));
+                        }}
+                      >
+                        Back
+                      </button>
                     )}
-                    {/* {register.activeStep === 2 && <StepTwo />}
+
+                    {register.activeStep < 5 && (
+                      <button
+                        type="submit"
+                        disabled={isNextDisabled()}
+                        className="btn btn-primary-dark float-right"
+                        onClick={(e) => {
+                          dispatch(setActiveStep(register.activeStep + 1));
+                        }}
+                      >
+                        Next
+                      </button>
+                    )}
+                  </div>
+                  {register.activeStep === 1 && (
+                    <>
+                      {register.activeStep === 1 && (
+                        <>
+                          <StepOne />
+                          <StepTwo />
+                          <StepThree />
+                        </>
+                      )}
+                      {/* {register.activeStep === 2 && <StepTwo />}
                     {register.activeStep === 3 && <StepThree />} */}
-                  </>
-                )}
-                {register.activeStep === 2 && <StepFour />}
-                {register.activeStep === 3 && <StepFive />}
-
-                {register.activeStep === 4 && <StepSix />}
-
-                {register.activeStep === 5 && <ProfilePreview />}
-                {register.activeStep === 6 && <StepEight />}
-
-                <div className="">
-                  {register.activeStep > 1 && (
-                    <button
-                      type="submit"
-                      className="btn btn-secondary-dark"
-                      onClick={(e) => {
-                        dispatch(setActiveStep(register.activeStep - 1));
-                      }}
-                    >
-                      Back
-                    </button>
+                    </>
                   )}
-                  {register.activeStep < 5 && (
-                    <button
-                      type="submit"
-                      disabled={isNextDisabled()}
-                      className="btn btn-primary-dark float-right"
-                      onClick={(e) => {
-                        dispatch(setActiveStep(register.activeStep + 1));
-                      }}
-                    >
-                      Next
-                    </button>
-                  )}
+                  {register.activeStep === 2 && <StepFour />}
+                  {register.activeStep === 3 && <StepFive />}
 
-                  {register.activeStep === 5 && (
-                    <button
-                      type="submit"
-                      className="btn btn-primary-dark float-right"
-                      onClick={handleSaveDetails}
-                    >
-                      {register.isSubmitting ? refreshIconRotating : "Save"}
-                    </button>
-                  )}
+                  {register.activeStep === 4 && <StepSix />}
+
+                  {register.activeStep === 5 && <ProfilePreview />}
+                  {register.activeStep === 6 && <StepEight />}
+
+                  <div className="">
+                    {register.activeStep > 1 && (
+                      <button
+                        type="submit"
+                        className="btn btn-secondary-dark"
+                        onClick={(e) => {
+                          dispatch(setActiveStep(register.activeStep - 1));
+                        }}
+                      >
+                        Back
+                      </button>
+                    )}
+
+                    {register.activeStep < 5 && (
+                      <button
+                        type="submit"
+                        disabled={isNextDisabled()}
+                        className="btn btn-primary-dark float-right"
+                        onClick={(e) => {
+                          dispatch(setActiveStep(register.activeStep + 1));
+                        }}
+                      >
+                        Next
+                      </button>
+                    )}
+
+                    {register.activeStep === 5 && (
+                      <button
+                        type="submit"
+                        className="btn btn-primary-dark float-right"
+                        onClick={handleSaveDetails}
+                      >
+                        {register.isSubmitting ? refreshIconRotating : "Save"}
+                      </button>
+                    )}
+                  </div>
+                  <div className="status alert mb-0 d-none"></div>
                 </div>
-                <div className="status alert mb-0 d-none"></div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 };
 
