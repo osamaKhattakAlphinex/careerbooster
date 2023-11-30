@@ -28,7 +28,17 @@ type Coupon = {
   times_redeemed: number;
   status: "active" | "inactive";
 };
-
+const handleDelete = (confirmed: any) => {
+  if (confirmed) {
+    // If confirmed, perform the deletion action or other logic here
+    // For example:
+    // deleteCoupon(record._id);
+    console.log("Deletion confirmed");
+  } else {
+    // If canceled, handle cancellation or do nothing
+    console.log("Deletion canceled");
+  }
+};
 const ViewCoupons = ({}) => {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const confirmationModalRef: React.MutableRefObject<any> = useRef(null);
@@ -51,11 +61,11 @@ const ViewCoupons = ({}) => {
   return (
     <>
       <ConfirmationModal
-        id={"deletion-confirmation-modal-user-packages"}
+        id={"deletion-confirmation-modal-user-coupons"}
         title={"Deletion Modal"}
         message={"Are you sure you want to delete this record"}
         ref={confirmationModalRef}
-        api="/api/packages"
+        api="/api/coupons"
         refresh={getCoupons}
       />
       <div className="pt-30">
