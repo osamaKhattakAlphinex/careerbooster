@@ -50,16 +50,6 @@ export async function POST(req: any) {
 
             // make a trainBot entry
 
-            // const responseForTraining = await openai.chat.completions.create({
-            //   model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg", // v2
-            //   messages: [
-            //     {
-            //       role: "user",
-            //       content: input,
-            //     },
-            //   ],
-            //   temperature: 1,
-            // });
             const obj = {
               type: "linkedinAiTool.about",
               input: input,
