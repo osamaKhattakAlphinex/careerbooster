@@ -106,7 +106,7 @@ const UpdateUserPackage = ({ customer }: any) => {
   };
   if (!customer) return null;
   return (
-    <div>
+    <div className="text-gray-700">
       {updating && <p>Please wait while we activate your Package...</p>}
     </div>
   );

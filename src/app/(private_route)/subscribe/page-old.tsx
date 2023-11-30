@@ -3,8 +3,7 @@ import Packages from "@/components/dashboard/checkout/Packages";
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import "@/app/plugins.css";
-import "@/app/style.css";
+
 export default function SubscribePage() {
   const [showExpiredAlert, setShowExpiredAlert] = useState(false);
   // check if there is ?expired=1 in the URL
@@ -19,9 +18,9 @@ export default function SubscribePage() {
 
   return (
     <>
-      <div className="ml-0 px-[15px] mb-[72px]">
+      <div className="ml-[244px] px-[15px] mb-[72px] ">
         <main className="flex-grow-1 mb-20">
-          <section className=" pt-10">
+          <section className="pt-md-40 pt-15">
             <div className="container">
               {showExpiredAlert && (
                 <div className="row justify-center mb-8">

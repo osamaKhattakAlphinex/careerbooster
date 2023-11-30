@@ -33,17 +33,18 @@ export default async function SubscribedPage(props: Props) {
   const sessionId = searchParams.session_id;
   const session: any = await getSessionDeatils(sessionId);
   const customer = await getCustomerbySession(sessionId);
+
   if (!customer || !customer.email) {
     redirect("/dashboard");
   } else {
     return (
       <>
-        <main className="flex-grow-1  flex justify-center items-center border-2 h-screen ">
-          <section className="pt-md-30 py-lg-15">
+        <main className="flex-grow-1 mb-20">
+          <section className="pt-md-30 pt-10 py-lg-15">
             <div className="container">
-              <div className="row justify-center">
+              <div className="row justify-center mb-8">
                 <div className="col-lg-10">
-                  <div className="text-center ">
+                  <div className="text-center">
                     <h1
                       className="text-white text-4xl"
                       data-aos="fade-up-sm"

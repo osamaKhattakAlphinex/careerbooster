@@ -1,3 +1,4 @@
+"use client";
 import { memo } from "react";
 import AppleLogo from "@/../public/icon/AppleLogo.svg";
 import AndroidLogo from "@/../public/icon/AndroidLogo.svg";
@@ -6,6 +7,7 @@ import LinkedinLogo from "@/../public/icon/LinkedinLogo.svg";
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 const tabOption = [
   {
     href: "https://www.facebook.com/careerboosterai",
@@ -26,9 +28,21 @@ const tabOption = [
     icon: <Image src={AppleLogo} alt="AppleLogo" width={26} height={26} />,
   },
 ];
+const pagesArray = [
+  "/subscribe",
 
-const Footer = () => (
-  <div className="lg:ml-[244px] pb-7 lg:w-4/5 w-full px-3 text-center ">
+];
+const Footer = () => {
+  const pathname: any = usePathname();
+  // if (pagesArray?.includes(pathname)) return <></>;
+  return(
+    <div
+    className={`pb-7 lg:w-4/5 w-full px-3 text-center ${
+      pagesArray?.includes(pathname) ? "" : "lg:ml-[244px]"
+    }
+    ${pathname === "/subscribed" ? "hidden" : ""}
+     `}
+  >
     <div className="flex justify-between h-[52px] items-end border-t border-[#312E37]">
       <p className="text-[#959595] lg:text-[14px] text-[10px]">
         2023 © CareerAi
@@ -56,6 +70,7 @@ const Footer = () => (
       </div>
     </div>
   </div>
-);
+  )
+};
 
-export default memo(Footer);
+export default Footer;

@@ -15,6 +15,7 @@ const Footer = () => {
     "/email-bot",
     "/consulting-bids-bot",
     "/subscribe",
+    "/subscribed"
   ];
   if (
     pathname === "/login" ||

@@ -3,14 +3,16 @@ import { ReactNode, useState } from "react";
 import { usePathname } from "next/navigation";
 import Modal from "@/components/Modal";
 import { bellIcon, sunIcon } from "@/helpers/iconsProvider";
+
+import { useSelector } from "react-redux";
 interface HeaderProps {
   children?: ReactNode;
 }
-
+const pagesArray = ["/subscribe"];
 const Header: React.FC<HeaderProps> = ({ children }) => {
   const pathname: any = usePathname();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
+  const userData = useSelector((state: any) => state.userData);
   const routeNamesToDisplayNames: Record<string, string> = {
     "/dashboard": "Dashboard",
     "/resume-builder": "Generate New Resumes",
@@ -19,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     "/profile-review": "Review Your Profile",
     "/email-bot": "Generate Emails Using AI",
     "/consulting-bids-bot": "Generate Bids Using AI",
-    "/subscribe": "Select Your Plan",
+    "/subscribe": `welCome, ${userData.firstName + " " + userData.lastName}`,
     // Add more routes as needed
   };
 
@@ -27,7 +29,12 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     routeNamesToDisplayNames[pathname] || "Unknown";
 
   return (
-    <nav className="py-[14px] px-4 ml-0 lg:ml-[244px] ">
+    <nav
+      className={`mt-10 lg:mt-0 py-[14px] px-4 ml-0  
+      ${pagesArray?.includes(pathname) ? "m-5" : "lg:ml-[244px]"} 
+      ${pathname === "/subscribed" && "hidden"} 
+      `}
+    >
       <div className="w-full rounded-lg flex justify-between sm:justify-between items-center">
         <h1 className="rounded-[14px] text-[14px] text-[#959595] font-bold uppercase">
           {currentRouteDisplayName}
@@ -35,13 +42,15 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
         <div className="flex">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="text-white flex justify-center mr-3 items-center bg-zinc-900 border-zinc-800 w-[40px] h-[40px] rounded-full capitalize"
+            className={`text-white flex justify-center mr-3 items-center bg-zinc-900 border-zinc-800 w-[40px] h-[40px] rounded-full capitalize  ${
+              pathname === "/subscribe" ? "hidden" : ""
+            } `}
           >
             {bellIcon}
           </button>
-          <button className="text-white flex justify-center mr-1 items-center bg-zinc-900 border-zinc-800 w-[40px] h-[40px] rounded-full capitalize">
+          {/* <button className="text-white flex justify-center mr-1 items-center bg-zinc-900 border-zinc-800 w-[40px] h-[40px] rounded-full capitalize">
             {sunIcon}
-          </button>
+          </button> */}
         </div>
       </div>
 

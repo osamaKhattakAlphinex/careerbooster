@@ -5,6 +5,7 @@ import logo from "@/../public/logo.svg";
 import profile from "@/../public/profile/man.jpg";
 import {
   arrowLeft,
+  userCircle,
   menuIcon,
   dollarIcon,
   flagIcon,
@@ -12,9 +13,15 @@ import {
   linkIcon,
   powerIcon,
   settingIcon,
+  inboxArrowDown,
+  userGroup,
+  deviceTablet,
+  clipboard,
   starIcon,
   ticketIcon,
+  
 } from "@/helpers/iconsProvider";
+
 import Button from "@/components/Button";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -23,25 +30,31 @@ import { signOut } from "next-auth/react";
 
 const items = [
   { icon: homeIcon, text: "Dashboard", url: "/dashboard" },
-  { icon: dollarIcon, text: "My Billing", url: "/dashboard" },
-  { icon: flagIcon, text: "User Guide", url: "/dashboard" },
-  { icon: ticketIcon, text: "My Tickets", url: "/dashboard" },
-  { icon: starIcon, text: "Write Review", url: "/dashboard" },
-  { icon: linkIcon, text: "Affiliate Program", url: "/dashboard" },
-  { icon: settingIcon, text: "Settings", url: "/dashboard" },
+  { icon: clipboard, text: "Resumes", url: "/resume-builder" },
+  { icon: deviceTablet, text: "Cover Letters", url: "/cover-letter-generator" },
+  { icon: userGroup, text: "LinkedIn Tool", url: "/linkedin-generator" },
+  { icon: inboxArrowDown, text: "Email Bot", url: "/email-bot" },
+  { icon: dollarIcon, text: "Consulting Bot", url: "/consulting-bids-bot" },
+  { icon: userCircle, text: "Profile", url: "/profile-review" },
   { icon: powerIcon, text: "Logout", url: "/dashboard" },
-];
+]
+const pagesArray = [
+  "/subscribe",
+  "/subscribed"
 
+];
 const SideBar = () => {
+  const pathname: any = usePathname();
   const userData = useSelector((state: any) => state.userData);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const pagesArray = [
-    "/dashboard",
-    "/cover-letter-generator",
-    "/resume-builder",
-    "/linkedin-generator",
-  ];
+  // const pagesArray = [
+  //   "/dashboard",
+  //   "/cover-letter-generator",
+  //   "/resume-builder",
+  //   "/linkedin-generator",
+  // ];
+  if (pagesArray?.includes(pathname)) return <></>;
   const handleMouseOver = (index: any) => {
     setHoveredItem(index);
   };
@@ -60,7 +73,12 @@ const SideBar = () => {
       }`}
     >
       {/* Mobile Menu Button */}
-      <div className=" px-6 py-[10px] flex justify-between items-center">
+
+      <div
+        className={`px-3 lg:px-6 py-[10px] flex items-center  ${
+          isOpen ? "justify-between" : ""
+        }`}
+      >
         <Image src={logo} alt="" className="w-35 h-14" />
         <div
           className="w-5 h-5 text-zinc-600 lg:hidden cursor-pointer"

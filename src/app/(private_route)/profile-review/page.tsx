@@ -14,7 +14,8 @@ import StepEight from "@/components/dashboard/profileReview/StepEight";
 import { refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
-
+import "@/app/plugins.css";
+import "@/app/style.css";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.Ai-Welcome",
 // };
