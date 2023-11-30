@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface Props {
   show: boolean;
   onClose: () => void;
@@ -20,12 +22,12 @@ const Alert = ({ show, onClose }: Props) => {
         </p>
       </div>
 
-      <div
+      <Link
         className="bg-yellow-400 cursor-pointer ml-4 font-bold text-stone-950 rounded-full lg:px-[28px] px-[20px] lg:py-[11px] py-[7px] lg:text-[14px] text-[12px] mx-[13px] flex flex-col mt-[10px] lg:mt-[0px] `"
-        onClick={onClose}
+        href="/profile-review"
       >
         Complete now
-      </div>
+      </Link>
     </div>
   );
 };
