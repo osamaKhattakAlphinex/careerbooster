@@ -200,7 +200,7 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
             )}
 
             <button
-              onClick={() => handleClick()}
+              onClick={handleClick}
               disabled={subscribing}
               className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9"
             >
