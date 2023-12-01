@@ -39,11 +39,12 @@ const PersonalizedEmailBot = () => {
 
   const handleGenerate = async () => {
     // await getUserDataIfNotExists();
+    alert("we")
     if (
       session?.user?.email &&
       aiInputUserData &&
       !isNaN(availablePercentageEmail) &&
-      availablePercentageEmail !== 0
+      availablePercentageEmail == 0
     ) {
       setMsgLoading(true);
       setShow(true);
