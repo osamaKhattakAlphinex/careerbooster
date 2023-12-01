@@ -2,7 +2,6 @@
 import useTheme from "@/lib/useTheme";
 import Link from "next/link";
 import SVGProvider from "../SVGProvider";
-
 const FeaturesSecond = () => {
   const [theme] = useTheme();
   return (

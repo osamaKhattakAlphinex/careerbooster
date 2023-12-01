@@ -148,14 +148,14 @@ const UploadPDFResume = () => {
         manual data entry.
       </p> */}
       {isAuth && (
-        <Link
+        <a
           href="/dashboard"
           className="btn btn-lg btn-gradient-1"
           data-aos="fade-up-sm"
           data-aos-delay="200"
         >
           Dashboard
-        </Link>
+        </a>
       )}
 
       {successMsg && (
