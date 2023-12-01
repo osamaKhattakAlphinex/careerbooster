@@ -13,7 +13,6 @@ interface Props {
   setHeadline: React.Dispatch<React.SetStateAction<string>>;
 }
 const HeadlineGenerator = ({ setHeadline }: Props) => {
- 
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
@@ -53,7 +52,6 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
   }, [userData]);
 
   const handleGenerate = async () => {
-    
     setStreamedData("");
     await getUserDataIfNotExists();
     //change condition
@@ -182,9 +180,9 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
   }, [session?.user?.email]);
   return (
     <>
-      <div className="headline-generator bg-[#222027] py-8 px-6 flex align-center gap-5 justify-center items-center rounded-[10px] mb-[20px]">
+      <div className="headline-generator bg-[#222027] py-8 px-3 lg:px-6 flex flex-col lg:flex-row lg:align-center gap-5 justify-center items-center rounded-[10px] mb-[20px]">
         <div
-          className={`icon rounded-full  bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] flex justify-center items-center w-16 h-16`}
+          className={`icon  hidden rounded-full  bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] lg:flex justify-center items-center lg:w-16 lg:h-16`}
         >
           <Image
             alt="Svg1"
@@ -194,13 +192,13 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
             className="z-[10000px]"
           />
         </div>
-        <div className="linkedintooltext flex flex-col w-[24.0625rem] gap-2 ml-2">
-          <div className="flex flex-row gap-3">
+        <div className="linkedintooltext flex  flex-col lg:w-[24.0625rem] gap-2 ml-2">
+          <div className="justify-between flex  lg:justify-start flex-row">
             <h1 className="text-[16px] text-white font-bold">
               Headline Generator
             </h1>
             <span
-              className={`rounded-full flex justify-center items-center px-[16px] py-[6px]  bg-[#02FF19] text-[12px] uppercase font-bold `}
+              className={`rounded-full flex justify-center items-center px-[16px] py-[6px] lg:mx-2  bg-[#02FF19] text-[12px] uppercase font-bold `}
             >
               {/* {iconOfPackageBadge ? (
                 <Image
@@ -223,7 +221,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
           type="button"
           disabled={msgLoading || !session?.user?.email}
           onClick={() => handleGenerate()}
-          className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] ml-auto`}
+          className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
         >
           <span className={`text-white text-[15px] font-semibold`}>
             {msgLoading ? (
@@ -253,7 +251,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
                   width={18}
                 />
                 <span
-                  className={`text-white ml-3 text-[15px] font-semibold`}
+                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
                 >
                   Generate Headline
                 </span>
@@ -262,7 +260,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
           </span>
         </button>
       </div>
-     
+
       {streamedData && (
         <div className="rounded border border-gray-500 p-4 mb-4">
           <h1 className="text-4xl font-extrabold text-gray-900  mb-4">

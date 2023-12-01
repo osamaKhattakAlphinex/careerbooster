@@ -26,7 +26,7 @@ import {
 import Button from "@/components/Button";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 
 const items = [
@@ -67,7 +67,7 @@ const SideBar = () => {
   // if (!pagesArray?.includes(pathname)) return <></>;
   return (
     <div
-      className={`fixed pb-10 top-0 w-[244px] bg-zinc-900 overflow-y-auto z-100000 transition-all ${
+      className={`fixed pb-10 top-0 w-[244px] h-screen bg-zinc-900 overflow-y-auto z-100000 transition-all ${
         isOpen
           ? "lg:bg-opacity-100 bg-opacity-100 "
           : "lg:bg-opacity-100 bg-opacity-0 " // Apply opacity only on small screens
@@ -167,6 +167,10 @@ const SideBar = () => {
               Upgrade to Pro version to get hired faster
             </p>
             <Button
+              onClick={()=>{
+                const router = useRouter()
+                router.push("/subscribe")
+              }}
               btnText="Upgrade"
               textColor={`text-white`}
               bgColor="bg-zinc-900"
