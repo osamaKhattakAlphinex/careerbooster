@@ -584,12 +584,10 @@ export default function CoverLetterPage() {
                           // }}
                         ></div>
                       ) : (
-                        <div>
-                          <div
-                            className="text-white "
-                            dangerouslySetInnerHTML={{ __html: streamedData }}
-                          ></div>
-                        </div>
+                        <div
+                          className="text-white "
+                          dangerouslySetInnerHTML={{ __html: streamedData }}
+                        ></div>
                       )}
                     </div>
                   </div>
