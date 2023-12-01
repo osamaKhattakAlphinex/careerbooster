@@ -225,14 +225,14 @@ const PersonalizedEmailBot = () => {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-[244px] px-[15px] mb-[72px] ">
+        <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] ">
           {/* <AiGeneratedCoverLetters /> */}
           {/* <PreviouslyGeneratedList {...historyProps} /> */}
           {/* <MainCoverLetterTool /> */}
           <>
             <div className=" bg-[#17151B] rounded-[20px]  px-[30px] py-[41px] flex flex-col gap-5 ">
               {/* header */}
-              <div className="flex flex-row justify-between items-center">
+              <div className="flex gap-2 flex-col lg:flex-row  justify-between items-center">
                 <h3 className=" text-sm uppercase text-white font-bold">
                   Generate Emails
                 </h3>
@@ -261,10 +261,10 @@ const PersonalizedEmailBot = () => {
                 </span>
               </div>
 
-              <div className="flex flex-col gap-5 lg:px-0 px-8">
+              <div className="flex flex-col gap-5 lg:px-0 ">
                 <label
                   htmlFor="default-radio-1"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[400px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-2 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white lg:w-[400px] ${
                     selectedOption === "profile"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -288,7 +288,7 @@ const PersonalizedEmailBot = () => {
                 </label>
                 <label
                   htmlFor="default-radio-2"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[290px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-2 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white lg:w-[290px] ${
                     selectedOption === "file"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -323,7 +323,7 @@ const PersonalizedEmailBot = () => {
                 <div className="w-full flex flex-col">
                   <label
                     htmlFor="job-title"
-                    className=" font-bold text-[23px] text-white flex py-[20px] gap-[3px]"
+                    className=" font-bold lg:text-[23px] text-white flex py-[20px] gap-[3px]"
                   >
                     Paste Your Job Description
                     <span className="text-[#F04248] text-[19px]">*</span>
@@ -465,7 +465,7 @@ const PersonalizedEmailBot = () => {
                       )}
                     </div>
                   </div>
-                  <div className="buttons mt-5 flex gap-3">
+                  <div className="buttons mt-5 flex flex-col lg:flex-row gap-3">
                     {!isNaN(availablePercentageEmail) &&
                       availablePercentageEmail !== 0 && (
                         <button
@@ -506,8 +506,8 @@ const PersonalizedEmailBot = () => {
                               d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
                             />
                           </svg>
-                          <span className="text-white text-[15px] font-semibold">
-                            Re-generate Cover Letter
+                          <span className="text-white lg:text-[15px] font-semibold">
+                            Re-generate
                           </span>
                         </button>
                       )}
