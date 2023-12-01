@@ -52,7 +52,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
     if (
       userData.isFetched &&
       !isNaN(availablePercentage) &&
-      availablePercentage == 0
+      availablePercentage !== 0
     ) {
       // remove ids from experiences
       const experiences = userData.experience.map((item: WorkExperience) => {
@@ -216,17 +216,25 @@ const JDGenerator = ({ setJobDesc }: Props) => {
               Premium
             </span>
           </div>
+          <LimitCard
+            title="Available"
+            limit={userData?.userPackageData?.limit?.job_desc_generation}
+            used={userData?.userPackageUsed?.job_desc_generation}
+            setPercentageCalculated={setPercentageCalculated}
+            availablePercentage={availablePercentage}
+            setAvailablePercentage={setAvailablePercentage}
+          />
           <p className="text-[14px] text-[#959595] pr-5">
-            {" "}
-            The purpose of lorem ipsum is to create a natural looking block of
-            text (sentence{","} paragraph{","} page{","} etc{"."})
+            Get job descriptions with respect to each job
           </p>
         </div>
         <button
           type="button"
           disabled={msgLoading || !session?.user?.email}
           onClick={() => handleGenerate()}
-          className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
+          className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
+
+          // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
         >
           <span className={`text-black text-[15px] font-semibold`}>
             {msgLoading ? (
@@ -248,11 +256,12 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                 Please wait...
               </div>
             ) : (
-              
-                <span className={`text-black text-[15px] font-semibold`}>
-                  Upgrade Plan
-                </span>
-              
+              <span className="text-white ml-3 text-[15px] font-semibold">
+                {/* <span className={`text-black text-[15px] font-semibold`}> */}
+                {/* Upgrade Plan */}
+                Generate Description
+                {/* </span> */}
+              </span>
             )}
           </span>
         </button>

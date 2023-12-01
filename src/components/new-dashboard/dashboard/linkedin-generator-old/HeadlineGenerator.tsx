@@ -58,7 +58,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
     if (
       session?.user?.email &&
       !isNaN(availablePercentage) &&
-      availablePercentage == 0
+      availablePercentage !== 0
     ) {
       setMsgLoading(true);
 
@@ -212,9 +212,16 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
               free
             </span>
           </div>
+          <LimitCard
+            title="Available"
+            limit={userData?.userPackageData?.limit?.headline_generation}
+            used={userData?.userPackageUsed?.headline_generation}
+            setPercentageCalculated={setPercentageCalculated}
+            availablePercentage={availablePercentage}
+            setAvailablePercentage={setAvailablePercentage}
+          />
           <p className="text-[14px] text-[#959595] pr-5">
-            The purpose of lorem ipsum is to create a natural looking block of
-            text (sentence{","} paragraph{","} page{","} etc{"."})
+            Generate headlinr for your linkedin in one click
           </p>
         </div>
         <button

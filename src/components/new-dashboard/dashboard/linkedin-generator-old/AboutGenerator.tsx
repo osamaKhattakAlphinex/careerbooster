@@ -200,9 +200,17 @@ const AboutGenerator = ({ setAbout }: Props) => {
               free
             </span>
           </div>
+          <LimitCard
+            title="Available"
+            limit={userData?.userPackageData?.limit?.about_generation}
+            used={userData?.userPackageUsed?.about_generation}
+            setPercentageCalculated={setPercentageCalculated}
+            availablePercentage={availablePercentage}
+            setAvailablePercentage={setAvailablePercentage}
+          />
+
           <p className="text-[14px] text-[#959595] pr-5">
-            The purpose of lorem ipsum is to create a natural looking block of
-            text (sentence{","} paragraph{","} page{","} etc{"."})
+            Generate impressive about for your linkedin
           </p>
         </div>
         <button
@@ -212,7 +220,7 @@ const AboutGenerator = ({ setAbout }: Props) => {
           className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
         >
           <span className={`text-white text-[15px] font-semibold`}>
-          {msgLoading ? (
+            {msgLoading ? (
               <div className="flex">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -238,9 +246,7 @@ const AboutGenerator = ({ setAbout }: Props) => {
                   height={18}
                   width={18}
                 />
-                <span
-                  className={`text-white ml-3 text-[15px] font-semibold`}
-                >
+                <span className={`text-white ml-3 text-[15px] font-semibold`}>
                   Generate About
                 </span>
               </div>
@@ -249,20 +255,20 @@ const AboutGenerator = ({ setAbout }: Props) => {
         </button>
       </div>
       {streamedData && (
-          <div className="rounded border border-gray-500 mb-4 p-4">
-            <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
-                AI Response{" "}
-              </span>
-            </h1>
-            <div
-              className="font-sans text-gray-300 whitespace-pre-wrap break-words"
-              // style={{ textW: "auto" }}
-            >
-              {streamedData}
-            </div>
+        <div className="rounded border border-gray-500 mb-4 p-4">
+          <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+              AI Response{" "}
+            </span>
+          </h1>
+          <div
+            className="font-sans text-gray-300 whitespace-pre-wrap break-words"
+            // style={{ textW: "auto" }}
+          >
+            {streamedData}
           </div>
-        )}
+        </div>
+      )}
     </>
   );
 };

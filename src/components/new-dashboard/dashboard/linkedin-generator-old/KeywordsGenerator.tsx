@@ -60,7 +60,7 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
     if (
       session?.user?.email &&
       !isNaN(availablePercentage) &&
-      availablePercentage == 0
+      availablePercentage !== 0
     ) {
       setMsgLoading(true);
       fetch("/api/linkedInBots/keywordsGenerator", {
@@ -209,17 +209,25 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
               Premium
             </span>
           </div>
+          <LimitCard
+            title="Available"
+            limit={userData?.userPackageData?.limit?.keywords_generation}
+            used={userData?.userPackageUsed?.keywords_generation}
+            setPercentageCalculated={setPercentageCalculated}
+            availablePercentage={availablePercentage}
+            setAvailablePercentage={setAvailablePercentage}
+          />
           <p className="text-[14px] text-[#959595] pr-5">
-            {" "}
-            The purpose of lorem ipsum is to create a natural looking block of
-            text (sentence{","} paragraph{","} page{","} etc{"."})
+            Generator popular keywords for your linkedin profile
           </p>
         </div>
         <button
           type="button"
           disabled={msgLoading || !session?.user?.email}
           onClick={() => handleGenerate()}
-          className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
+          className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
+
+          // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
         >
           <span className={`text-black text-[15px] font-semibold`}>
             {msgLoading ? (
@@ -242,8 +250,12 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
               </div>
             ) : (
               <div className="flex">
-                <span className={`text-black text-[15px] font-semibold`}>
-                  Upgrade Plan
+                <span
+                  className="text-white ml-3 text-[15px] font-semibold"
+                  // className={`text-black text-[15px] font-semibold`}
+                >
+                  {/* Upgrade Plan */}
+                  Generate Keywords
                 </span>
               </div>
             )}
