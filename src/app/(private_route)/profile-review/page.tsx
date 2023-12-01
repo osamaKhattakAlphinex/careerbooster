@@ -116,7 +116,7 @@ const ProfileReview = () => {
 
   return (
     <>
-      <div className="ml-[244px] px-[15px] mb-[72px] ">
+      <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] ">
         {/* </script> */}
         <main className="flex-grow-1">
           <section className="pb-15 ">
