@@ -365,10 +365,8 @@ export default function CoverLetterPage() {
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-[244px] px-[15px] mb-[72px] ">
           {/* <AiGeneratedCoverLetters /> */}
-
           <PreviouslyGeneratedList {...historyProps} />
           {/* <MainCoverLetterTool /> */}
-
           <>
             <div className=" bg-[#17151B] rounded-[20px]  px-[30px] py-[41px] flex flex-col gap-5 ">
               {/* header */}

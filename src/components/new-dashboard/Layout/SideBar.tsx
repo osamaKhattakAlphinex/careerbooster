@@ -19,6 +19,7 @@ import {
   clipboard,
   starIcon,
   ticketIcon,
+  xMark,
   
 } from "@/helpers/iconsProvider";
 
@@ -85,7 +86,7 @@ const SideBar = () => {
           onClick={() => setIsOpen(!isOpen)}
         >
           {/* Use your icon here for mobile menu toggle */}
-          {isOpen ? arrowLeft : menuIcon}
+          {isOpen ? xMark : menuIcon}
         </div>
       </div>
       <div className={`lg:block ${isOpen ? "block" : "hidden"} `}>

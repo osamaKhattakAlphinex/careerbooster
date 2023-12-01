@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-import ProfileCreationLayer from "@/components/dashboard/ProfileCreationLayer";
+import ProfileCreationLayer from "@/components/new-dashboard/dashboard/ProfileCreationLayer";
 import Footer from "@/components/new-dashboard/Layout/Footer";
 import Header from "@/components/new-dashboard/Layout/Header";
 import SideBar from "@/components/new-dashboard/Layout/SideBar";

@@ -27,7 +27,7 @@ export default function RootLayout({
       </Head>
       <AuthProvider>
         <ReduxProvider>
-          {/* <MainLoaderLayer /> */}
+          <MainLoaderLayer />
           <Header />
           {children}
           <Footer />

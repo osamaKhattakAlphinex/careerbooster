@@ -24,6 +24,7 @@ const ToolsCard = ({
 }) => {
   return (
     <div className="lg:w-[32%] w-full flex mb-8 ">
+      <Link href={link}  className="flex">
       <div className="mr-4">
         <div
           className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-[60px] h-[60px] `}
@@ -43,6 +44,7 @@ const ToolsCard = ({
           {action} <i className="ml-2">{chevronRight}</i>
         </Link>
       </div>
+      </Link>
     </div>
   );
 };
