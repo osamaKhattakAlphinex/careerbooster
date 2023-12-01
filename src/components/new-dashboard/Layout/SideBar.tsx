@@ -67,7 +67,7 @@ const SideBar = () => {
   // if (!pagesArray?.includes(pathname)) return <></>;
   return (
     <div
-      className={`fixed pb-10 top-0 w-[244px] h-screen bg-zinc-900 overflow-y-auto z-100000 transition-all ${
+      className={`fixed pb-10 top-0 w-[244px] h-screen bg-zinc-900 overflow-y-auto z-1000 transition-all ${
         isOpen
           ? "lg:bg-opacity-100 bg-opacity-100 "
           : "lg:bg-opacity-100 bg-opacity-0 " // Apply opacity only on small screens

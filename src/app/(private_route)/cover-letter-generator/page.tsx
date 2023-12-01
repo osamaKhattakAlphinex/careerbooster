@@ -362,14 +362,14 @@ export default function CoverLetterPage() {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-[244px] px-[15px] mb-[72px] ">
+        <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] ">
           {/* <AiGeneratedCoverLetters /> */}
           <PreviouslyGeneratedList {...historyProps} />
           {/* <MainCoverLetterTool /> */}
           <>
             <div className=" bg-[#17151B] rounded-[20px]  px-[30px] py-[41px] flex flex-col gap-5 ">
               {/* header */}
-              <div className="flex flex-row justify-between items-center">
+              <div className="flex flex-col gap-2 lg:flex-row  justify-between items-center">
                 <h3 className=" text-sm uppercase text-white font-bold">
                   Generate Cover Letter
                 </h3>
@@ -400,10 +400,10 @@ export default function CoverLetterPage() {
                 </span>
               </div>
 
-              <div className="flex flex-col gap-5 lg:px-0 px-8">
+              <div className="flex flex-col gap-5 lg:px-0 ">
                 <label
                   htmlFor="default-radio-1"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[400px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-2 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white lg:w-[400px] ${
                     selectedOption === "profile"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -430,7 +430,7 @@ export default function CoverLetterPage() {
                 </label>
                 <label
                   htmlFor="default-radio-2"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[290px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-2 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white lg:w-[290px] ${
                     selectedOption === "file"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -553,7 +553,7 @@ export default function CoverLetterPage() {
                     </div>
                   </div> */}
                   <div
-                    className={`w-[90%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px] shadow ${
+                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px] shadow ${
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >

@@ -204,7 +204,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
 
   return (
     <>
-      <div className="py-4  p-4 mb-4 rounded-lg">
+      <div className="py-4  lg:p-4 mb-4 rounded-lg">
         <div className="w-full mb-8">
           <LimitCard
             title="File uploads available"
@@ -217,7 +217,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
         </div>
         {!isNaN(availablePercentage) && availablePercentage !== 0 && (
           <div className="py-3">
-            <div className="py-[20px] w-[480px] px-[30px] flex gap-4 border-2 rounded-[10px] mt-4 border-[#312E37] border-dashed	">
+            <div className="py-[20px] lg:w-[480px] px-[30px] flex flex-col lg:flex-row  gap-4 border-2 rounded-[10px] mt-4 border-[#312E37] border-dashed	">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -232,6 +232,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                   d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
                 />
               </svg>
+
               <div className="flex flex-col gap-[3px]">
                 <h2 className="text-white text-[16px] font-semibold">
                   Drag and drop file here
@@ -260,7 +261,8 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                   }}
                 />
               </label>
-            </div>
+              </div>
+
           </div>
         )}
 
@@ -283,7 +285,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                 fileList.map((file: string, i: number) => (
                   <li key={i} className="flex">
                     <label
-                      className="flex gap-3 mt-2  items-center rounded-full border-[1px] border-[#353672] lg:px-6 lg:py-3  cursor-pointer lg:text-[15px] text-[11px] text-white"
+                      className="flex gap-3 mt-2   items-center rounded-full border-[1px] border-[#353672] px-3 lg:px-6 lg:py-3  cursor-pointer lg:text-[15px] text-[11px] text-white"
                       htmlFor={`file_${i}`}
                     >
                       <input
@@ -302,7 +304,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                       {file}
                       <button
                         type="button"
-                        className="mx-2  p-1 "
+                        className="mx-2  p-1"
                         onClick={(e) => handleDelete(file)}
                       >
                         {deleteIcon}
