@@ -5,7 +5,6 @@ import startDB from "@/lib/db";
 import Payment from "@/db/schemas/Payment";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
-import { Session } from "inspector";
 
 export async function POST(req: any) {
   try {
