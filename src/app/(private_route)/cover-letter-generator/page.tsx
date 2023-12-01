@@ -39,7 +39,7 @@ export default function CoverLetterPage() {
   const [editedContent, setEditedContent] = useState<string>("");
 
   // Function to toggle editing mode on double-click
-  const handleClick = () => {
+  const handleClick: any = () => {
     // setEditedContent(streamedData);
     setIsEditing(true);
   };
@@ -482,37 +482,42 @@ export default function CoverLetterPage() {
                     className="w-full  px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border pt-3"
                   />
                 </div>
-                <button
-                  type="button"
-                  disabled={
-                    msgLoading ||
-                    !session?.user?.email ||
-                    !aiInputUserData ||
-                    selectedOption === "" ||
-                    (selectedOption === "file" && selectedFile === "") ||
-                    jobDescription === ""
-                  }
-                  onClick={handleGenerate}
-                  className={`bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
-                    (msgLoading ||
-                      !session?.user?.email ||
-                      !aiInputUserData ||
-                      selectedOption === "" ||
-                      (selectedOption === "file" && selectedFile === "") ||
-                      jobDescription === "") &&
-                    "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                  }`}
-                >
-                  <Image
-                    src="/icon/u_bolt-alt.svg"
-                    alt="bold icon"
-                    height={18}
-                    width={18}
-                  />
-                  <span className="text-white text-[15px] font-semibold">
-                    {msgLoading ? "Please wait..." : "Generate Cover Letter"}
-                  </span>
-                </button>
+                {!isNaN(availablePercentageCoverLetter) &&
+                  availablePercentageCoverLetter !== 0 && (
+                    <button
+                      type="button"
+                      disabled={
+                        msgLoading ||
+                        !session?.user?.email ||
+                        !aiInputUserData ||
+                        selectedOption === "" ||
+                        (selectedOption === "file" && selectedFile === "") ||
+                        jobDescription === ""
+                      }
+                      onClick={handleGenerate}
+                      className={`bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                        (msgLoading ||
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          jobDescription === "") &&
+                        "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
+                      }`}
+                    >
+                      <Image
+                        src="/icon/u_bolt-alt.svg"
+                        alt="bold icon"
+                        height={18}
+                        width={18}
+                      />
+                      <span className="text-white text-[15px] font-semibold">
+                        {msgLoading
+                          ? "Please wait..."
+                          : "Generate Cover Letter"}
+                      </span>
+                    </button>
+                  )}
               </div>
 
               {show && (
@@ -548,7 +553,7 @@ export default function CoverLetterPage() {
                     </div>
                   </div> */}
                   <div
-                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px] shadow ${
+                    className={`w-[90%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px] shadow ${
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >
@@ -572,6 +577,7 @@ export default function CoverLetterPage() {
                         <div
                           id="editor"
                           contentEditable="true"
+                          className="text-white "
                           // dangerouslySetInnerHTML={{ __html: editedContent }}
                           // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
                           //   setEditedContent(e.target.innerHTML);
@@ -716,6 +722,38 @@ export default function CoverLetterPage() {
                           {msgLoading ? "Please wait..." : "Copy to clipboard"}
                         </span>
                       </button>
+                    )}
+                    {show && (
+                      <div>
+                        <button
+                          type="button"
+                          disabled={
+                            !show || msgLoading || !session?.user?.email
+                          }
+                          onClick={handleClick}
+                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full `}
+                        >
+                          <div className="flex flex-row gap-2">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              className="w-6 h-6 text-yellow-200"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
+                              />
+                            </svg>
+                            <span className="text-yellow-200 text-[15px] font-semibold">
+                              Edit
+                            </span>
+                          </div>
+                        </button>
+                      </div>
                     )}
 
                     {isEditing && (

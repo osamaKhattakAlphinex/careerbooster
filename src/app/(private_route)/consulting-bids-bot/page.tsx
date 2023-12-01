@@ -7,11 +7,13 @@ import ReactToPrint from "react-to-print";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 
-import CoverLetterFileUploader from "@/components/dashboard/cover-letter-bot/CoverLetterFileUploader";
+import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
 import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
 import Button from "@/components/utilities/form-elements/Button";
-import LimitCard from "@/components/dashboard/LimitCard";
+import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
+import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
+import copy from "clipboard-copy";
 
 const ConsultingBidsGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -21,30 +23,41 @@ const ConsultingBidsGenerator = () => {
   const [show, setShow] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>(""); // type
   const [streamedData, setStreamedData] = useState<string>("");
-
+  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
+  const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
-
-  // limit bars
-  const [availablePercentageEmail, setAvailablePercentageEmail] =
-    useState<number>(0);
-  const [percentageCalculatedEmail, setPercentageCalculatedEmail] =
+  const [isBidCopied, setIsBidCopied] = useState<boolean>(false);
+  const [editedContent, setEditedContent] = useState<string>("");
+  const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
+  // limit bars
 
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const { resumes } = userData;
+  const copyBid = async (text: string) => {
+    try {
+      const coverLetterData = await htmlToPlainText(text);
+      await copy(coverLetterData);
+      setIsBidCopied(true);
+    } catch (error) {
+      console.error("Failed to copy text: ", error);
+    }
+  };
 
+  const handleClick = () => {
+    // setEditedContent(streamedData);
+    setIsEditing(true);
+  };
   const handleGenerate = async () => {
-    // await getUserDataIfNotExists();
-    alert("we");
     if (
       session?.user?.email &&
       aiInputUserData &&
-      !isNaN(availablePercentageEmail) &&
-      availablePercentageEmail == 0
+      !isNaN(availablePercentage) &&
+      availablePercentage !== 0
     ) {
       setMsgLoading(true);
       setShow(true);
@@ -78,7 +91,7 @@ const ConsultingBidsGenerator = () => {
         obj.userData = aiInputUserData;
       }
       // Fetch keywords
-      fetch("/api/emailBot/emailGenerator", {
+      fetch("/api/consultingBidBot/ConsultingBidGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
       })
@@ -100,7 +113,7 @@ const ConsultingBidsGenerator = () => {
               method: "POST",
               body: JSON.stringify({
                 email: session?.user?.email,
-                type: "email_generation",
+                type: "consulting_bids_generation",
               }),
             }).then(async (resp: any) => {
               const res = await resp.json();
@@ -115,7 +128,8 @@ const ConsultingBidsGenerator = () => {
                   ...userData,
                   userPackageUsed: {
                     ...userData.userPackageUsed,
-                    email_generation: user.userPackageUsed.email_generation,
+                    consulting_bids_generation:
+                      user.userPackageUsed.consulting_bids_generation,
                   },
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
@@ -137,7 +151,7 @@ const ConsultingBidsGenerator = () => {
           email: session?.user?.email,
           results: {
             ...userData.results,
-            emailGeneration: tempText,
+            consultingBidsGeneration: tempText,
           },
         },
       });
@@ -164,11 +178,11 @@ const ConsultingBidsGenerator = () => {
     }
     if (
       userData.results &&
-      userData.results.emailGeneration &&
-      userData.results.emailGeneration !== ""
+      userData.results.consultingBidsGeneration &&
+      userData.results.consultingBidsGeneration !== ""
     ) {
       setShow(true);
-      setStreamedData(userData.results.emailGeneration);
+      setStreamedData(userData.results.consultingBidsGeneration);
     }
   }, [userData]);
   return (
@@ -186,16 +200,17 @@ const ConsultingBidsGenerator = () => {
                   Consulting Bids Generator
                 </h3>
                 <div className=" text-sm text-white uppercase font-bold">
-                  {/* <LimitCard
-                  title="Cover Letter Availble"
-                  limit={
-                    userData?.userPackageData?.limit?.cover_letter_generation
-                  }
-                  used={userData?.userPackageUsed?.cover_letter_generation}
-                  setPercentageCalculated={setPercentageCalculatedCoverLetter}
-                  availablePercentage={availablePercentageCoverLetter}
-                  setAvailablePercentage={setAvailablePercentageCoverLetter}
-                /> */}
+                  <LimitCard
+                    title="Email Availble"
+                    limit={
+                      userData?.userPackageData?.limit
+                        ?.consulting_bids_generation
+                    }
+                    used={userData?.userPackageUsed?.consulting_bids_generation}
+                    setPercentageCalculated={setPercentageCalculated}
+                    availablePercentage={availablePercentage}
+                    setAvailablePercentage={setAvailablePercentage}
+                  />
                 </div>
               </div>
 
@@ -238,7 +253,7 @@ const ConsultingBidsGenerator = () => {
                     checked={selectedOption === "profile"}
                     className="w-5 h-4"
                   />
-                  Use My Persona to write the Cover Letter
+                  Use My Persona to write Consulting Bid
                 </label>
                 <label
                   htmlFor="default-radio-2"
@@ -294,43 +309,45 @@ const ConsultingBidsGenerator = () => {
                     className="w-full  px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border pt-3"
                   />
                 </div>
-                <button
-                  type="button"
-                  disabled={
-                    msgLoading ||
-                    !session?.user?.email ||
-                    !aiInputUserData ||
-                    selectedOption === "" ||
-                    (selectedOption === "file" && selectedFile === "") ||
-                    jobDescription === ""
-                  }
-                  onClick={handleGenerate}
-                  className={`bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
-                    (msgLoading ||
+                {!isNaN(availablePercentage) && availablePercentage !== 0 && (
+                  <button
+                    type="button"
+                    disabled={
+                      msgLoading ||
                       !session?.user?.email ||
                       !aiInputUserData ||
                       selectedOption === "" ||
                       (selectedOption === "file" && selectedFile === "") ||
-                      jobDescription === "") &&
-                    "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                  }`}
-                >
-                  {/* <Image
+                      jobDescription === ""
+                    }
+                    onClick={handleGenerate}
+                    className={`bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                      (msgLoading ||
+                        !session?.user?.email ||
+                        !aiInputUserData ||
+                        selectedOption === "" ||
+                        (selectedOption === "file" && selectedFile === "") ||
+                        jobDescription === "") &&
+                      "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
+                    }`}
+                  >
+                    {/* <Image
                   src="/icon/u_bolt-alt.svg"
                   alt="bold icon"
                   height={18}
                   width={18}
                 /> */}
-                  <span className="text-white text-[15px] font-semibold">
-                    {msgLoading ? "Please wait..." : "Generate Cover Letter"}
-                  </span>
-                </button>
+                    <span className="text-white text-[15px] font-semibold">
+                      {msgLoading ? "Please wait..." : "Generate Bid"}
+                    </span>
+                  </button>
+                )}
               </div>
 
               {show && (
                 <div className="mt-[40px] ">
                   <h1 className="uppercase text-white font-bold text-[18px] pb-5">
-                    your ai generated cover letter
+                    your ai generated bid
                   </h1>
                   {/* <div className="aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px]">
                   <div
@@ -398,6 +415,26 @@ const ConsultingBidsGenerator = () => {
                       </div>
                     )}
                   </div> */}
+                    <div ref={componentRef}>
+                      {isEditing ? (
+                        <div
+                          id="editor"
+                          contentEditable="true"
+                          // className="text-white "
+                          // dangerouslySetInnerHTML={{ __html: streamedData }}
+                          // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
+                          //   setEditedContent(e.target.innerHTML);
+                          // }}
+                        ></div>
+                      ) : (
+                        <div>
+                          <div
+                            className="text-white "
+                            dangerouslySetInnerHTML={{ __html: streamedData }}
+                          ></div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div className="buttons mt-5 flex gap-3">
                     {/* {!isNaN(availablePercentageCoverLetter) &&
@@ -446,6 +483,52 @@ const ConsultingBidsGenerator = () => {
                       </button>
                     )} */}
 
+                    {!isNaN(availablePercentage) &&
+                      availablePercentage !== 0 && (
+                        <button
+                          disabled={
+                            msgLoading ||
+                            !session?.user?.email ||
+                            !aiInputUserData ||
+                            selectedOption === "" ||
+                            (selectedOption === "file" &&
+                              selectedFile === "") ||
+                            // (selectedOption === "aiResume" &&
+                            //   setSelectedResumeId === "") ||
+                            jobDescription === ""
+                          }
+                          onClick={handleGenerate}
+                          className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#B324D7] border rounded-full ${
+                            (msgLoading ||
+                              !session?.user?.email ||
+                              !aiInputUserData ||
+                              selectedOption === "" ||
+                              (selectedOption === "file" &&
+                                selectedFile === "") ||
+                              jobDescription === "") &&
+                            "opacity-50 cursor-not-allowed" // Add this class when the button is disabled
+                          }`}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            className="w-4 h-4 text-white"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                            />
+                          </svg>
+                          <span className="text-white text-[15px] font-semibold">
+                            Re-generate Cover Letter
+                          </span>
+                        </button>
+                      )}
+
                     <ReactToPrint
                       trigger={() => (
                         <button
@@ -481,77 +564,108 @@ const ConsultingBidsGenerator = () => {
                       )}
                       content={() => componentRef.current}
                     />
+                    {show && (
+                      <button
+                        disabled={
+                          msgLoading ||
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          (selectedOption === "aiResume" &&
+                            setSelectedResumeId === "") ||
+                          !show ||
+                          isBidCopied
+                        }
+                        onClick={() => copyBid(streamedData)}
+                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full ${
+                          msgLoading ||
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          (selectedOption === "aiResume" &&
+                            setSelectedResumeId === "") ||
+                          !show ||
+                          isBidCopied
+                            ? "opacity-50 cursor-not-allowed"
+                            : ""
+                        }`}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          className="w-4 h-4 text-white"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
+                          />
+                        </svg>
+
+                        <span className="text-white text-[15px] font-semibold">
+                          {msgLoading ? "Please wait..." : "Copy to clipboard"}
+                        </span>
+                      </button>
+                    )}
                     {/* {show && (
-                    <button
-                      disabled={
-                        msgLoading ||
-                        !session?.user?.email ||
-                        !aiInputUserData ||
-                        selectedOption === "" ||
-                        (selectedOption === "file" && selectedFile === "") ||
-                        (selectedOption === "aiResume" &&
-                          setSelectedResumeId === "") ||
-                        !show ||
-                        isCoverLetterCopied
-                      }
-                      onClick={() => copyCoverLetter(streamedData)}
-                      className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full ${
-                        msgLoading ||
-                        !session?.user?.email ||
-                        !aiInputUserData ||
-                        selectedOption === "" ||
-                        (selectedOption === "file" && selectedFile === "") ||
-                        (selectedOption === "aiResume" &&
-                          setSelectedResumeId === "") ||
-                        !show ||
-                        isCoverLetterCopied
-                          ? "opacity-50 cursor-not-allowed"
-                          : ""
-                      }`}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        className="w-4 h-4 text-white"
+                      <div>
+                        <button
+                          type="button"
+                          disabled={
+                            !show || msgLoading || !session?.user?.email
+                          }
+                          onClick={handleClick}
+                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full `}
+                        >
+                          <div className="flex flex-row gap-2">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              className="w-6 h-6 text-yellow-200"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
+                              />
+                            </svg>
+                            <span className="text-yellow-200 text-[15px] font-semibold">
+                              Edit
+                            </span>
+                          </div>
+                        </button>
+                      </div>
+                    )}
+                    {isEditing && (
+                      <button
+                        type="submit"
+                        onClick={() => saveToDB(editedContent)}
+                        className="flex flex-row justify-center ml-auto items-center gap-2 py-3 px-3 border-[#312E37] border rounded-full"
                       >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
-                        />
-                      </svg>
-
-                      <span className="text-white text-[15px] font-semibold">
-                        {msgLoading ? "Please wait..." : "Copy to clipboard"}
-                      </span>
-                    </button>
-                  )}
-
-                  {isEditing && (
-                    <button
-                      type="submit"
-                      onClick={handleSave}
-                      className="flex flex-row justify-center ml-auto items-center gap-2 py-3 px-3 border-[#312E37] border rounded-full"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6 text-white"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                        />
-                      </svg>
-                    </button>
-                  )} */}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6 text-white"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                          />
+                        </svg>
+                      </button>
+                    )} */}
                   </div>
                 </div>
               )}
