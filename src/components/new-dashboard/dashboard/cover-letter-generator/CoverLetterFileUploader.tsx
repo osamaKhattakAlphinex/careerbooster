@@ -205,7 +205,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   return (
     <>
       <div className="py-4  p-4 mb-4 rounded-lg">
-      <div className="w-full mb-8">
+        <div className="w-full mb-8">
           <LimitCard
             title="File uploads available"
             limit={userData?.userPackageData?.limit?.pdf_files_upload}
@@ -272,7 +272,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
           />
         )}
         {loadingFiles ? (
-          <p>Loading Files...</p>
+          <p className="text-white">Loading Files...</p>
         ) : (
           <div className="flex flex-col gap-4 mt-[30px]">
             <span className="text-sm text-[#615DFF]  uppercase font-bold">

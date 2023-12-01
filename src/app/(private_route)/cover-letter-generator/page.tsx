@@ -117,11 +117,10 @@ export default function CoverLetterPage() {
   const handleGenerate = async () => {
     // await getUserDataIfNotExists();
     if (
-      true
-      // session?.user?.email &&
-      // aiInputUserData &&
-      // !isNaN(availablePercentageCoverLetter) &&
-      // availablePercentageCoverLetter !== 0
+      session?.user?.email &&
+      aiInputUserData &&
+      !isNaN(availablePercentageCoverLetter) &&
+      availablePercentageCoverLetter !== 0
     ) {
       setMsgLoading(true);
       setShow(true);

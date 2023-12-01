@@ -13,7 +13,6 @@ interface Props {
   setHeadline: React.Dispatch<React.SetStateAction<string>>;
 }
 const HeadlineGenerator = ({ setHeadline }: Props) => {
- 
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
@@ -53,7 +52,6 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
   }, [userData]);
 
   const handleGenerate = async () => {
-    
     setStreamedData("");
     await getUserDataIfNotExists();
     //change condition
@@ -184,14 +182,14 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
     <>
       <div className="headline-generator bg-[#222027] py-8 px-6 flex align-center gap-5 justify-center items-center rounded-[10px] mb-[20px]">
         <div
-          className={`icon rounded-full  bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] flex justify-center items-center w-16 h-16`}
+          className={`icon rounded-full sm:hidden bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] flex justify-center items-center w-16 h-16`}
         >
           <Image
             alt="Svg1"
             src={Svg1}
             width={32}
             height={32}
-            className="z-[10000px]"
+            className="z-[10000px] "
           />
         </div>
         <div className="linkedintooltext flex flex-col w-[24.0625rem] gap-2 ml-2">
@@ -252,9 +250,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
                   height={18}
                   width={18}
                 />
-                <span
-                  className={`text-white ml-3 text-[15px] font-semibold`}
-                >
+                <span className={`text-white ml-3 text-[15px] font-semibold`}>
                   Generate Headline
                 </span>
               </div>
@@ -262,7 +258,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
           </span>
         </button>
       </div>
-     
+
       {streamedData && (
         <div className="rounded border border-gray-500 p-4 mb-4">
           <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
