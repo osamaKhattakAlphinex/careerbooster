@@ -188,14 +188,14 @@ const ConsultingBidsGenerator = () => {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-[244px] px-[15px] mb-[72px] ">
+        <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] ">
           {/* <AiGeneratedCoverLetters /> */}
           {/* <PreviouslyGeneratedList {...historyProps} /> */}
           {/* <MainCoverLetterTool /> */}
           <>
             <div className=" bg-[#17151B] rounded-[20px]  px-[30px] py-[41px] flex flex-col gap-5 ">
               {/* header */}
-              <div className="flex flex-row justify-between items-center">
+              <div className="flex flex-col  lg:flex-row justify-between items-center">
                 <h3 className=" text-sm uppercase text-white font-bold">
                   Consulting Bids Generator
                 </h3>
@@ -227,10 +227,10 @@ const ConsultingBidsGenerator = () => {
                 </span>
               </div>
 
-              <div className="flex flex-col gap-5 lg:px-0 px-8">
+              <div className="flex flex-col gap-5 lg:px-0">
                 <label
                   htmlFor="default-radio-1"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[400px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-2 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white lg:w-[400px] ${
                     selectedOption === "profile"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -257,7 +257,7 @@ const ConsultingBidsGenerator = () => {
                 </label>
                 <label
                   htmlFor="default-radio-2"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[290px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-2 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white lg:w-[290px] ${
                     selectedOption === "file"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -295,7 +295,7 @@ const ConsultingBidsGenerator = () => {
                 <div className="w-full flex flex-col">
                   <label
                     htmlFor="job-title"
-                    className=" font-bold text-[23px] text-white flex py-[20px] gap-[3px]"
+                    className=" font-bold lg:text-[23px] text-white flex py-[20px] gap-[3px]"
                   >
                     Paste Your Job Description
                     <span className="text-[#F04248] text-[19px]">*</span>
@@ -436,7 +436,7 @@ const ConsultingBidsGenerator = () => {
                       )}
                     </div>
                   </div>
-                  <div className="buttons mt-5 flex gap-3">
+                  <div className="buttons mt-5 flex flex-col lg:flex-row gap-3">
                     {/* {!isNaN(availablePercentageCoverLetter) &&
                     availablePercentageCoverLetter !== 0 && (
                       <button
@@ -524,7 +524,7 @@ const ConsultingBidsGenerator = () => {
                             />
                           </svg>
                           <span className="text-white text-[15px] font-semibold">
-                            Re-generate Cover Letter
+                            Re-generate
                           </span>
                         </button>
                       )}
