@@ -30,13 +30,13 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
   return (
     <nav
-      className={`mt-10 lg:mt-0 py-[14px] px-4 ml-0  
+      className={`mt-0 py-[14px] px-4 ml-0  
       ${pagesArray?.includes(pathname) ? "m-5" : "lg:ml-[244px]"} 
       ${pathname === "/subscribed" && "hidden"} 
       `}
     >
       <div className="w-full rounded-lg flex justify-between sm:justify-between items-center">
-        <h1 className="rounded-[14px] text-[14px] text-[#959595] font-bold uppercase">
+        <h1 className="headText mt-5 rounded-[14px] text-[14px] text-[#959595] font-bold uppercase">
           {currentRouteDisplayName}
         </h1>
         <div className="flex">

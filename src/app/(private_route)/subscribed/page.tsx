@@ -29,8 +29,8 @@ const getSessionDeatils = async (sessionId?: string) => {
 };
 
 export default async function SubscribedPage(props: Props) {
-  const searchParams = props.searchParams;
-  const sessionId = searchParams.session_id;
+  const searchParams = props?.searchParams;
+  const sessionId = searchParams?.session_id;
   const session: any = await getSessionDeatils(sessionId);
   const customer = await getCustomerbySession(sessionId);
   if (!customer || !customer.email) {

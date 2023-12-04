@@ -28,4 +28,11 @@
 @media print {
   .text-color {
     color: black;
-  }}
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .headText {
+    margin-top: 2.5rem;
+  }
+}

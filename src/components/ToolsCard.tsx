@@ -23,27 +23,27 @@ const ToolsCard = ({
   action: string;
 }) => {
   return (
-    <div className="lg:w-[32%] w-full flex mb-8 ">
-      <Link href={link}  className="flex">
-      <div className="mr-4">
-        <div
-          className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-[60px] h-[60px] `}
-        >
-          <Image width={35} height={35} src={icon} alt="Not Found" />
+    <div className="lg:w-[32%] flex mb-8 ">
+      <Link href={link} className="flex no-underline">
+        <div className="mr-4">
+          <div
+            className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-[60px] h-[60px] `}
+          >
+            <Image width={35} height={35} src={icon} alt="Not Found" />
+          </div>
         </div>
-      </div>
-      <div className="">
-        <h2 className="text-[16px] text-white font-semibold">{title}</h2>
-        <p className="text-[#959595] mt-[6px] font-normal text-[14px]">
-          {description}
-        </p>
-        <Link
-          href={link}
-          className={`text-[14px] mt-[11px] flex items-center uppercase text-[#959595] hover:text-white font-semibold`}
-        >
-          {action} <i className="ml-2">{chevronRight}</i>
-        </Link>
-      </div>
+        <div className="">
+          <h2 className="text-[16px] text-white font-semibold">{title}</h2>
+          <p className="text-[#959595] mt-[6px] font-normal text-[14px]">
+            {description}
+          </p>
+          <Link
+            href={link}
+            className={`text-[14px] mt-[11px] flex items-center uppercase text-[#959595] hover:text-white font-semibold`}
+          >
+            {action} <i className="ml-2">{chevronRight}</i>
+          </Link>
+        </div>
       </Link>
     </div>
   );

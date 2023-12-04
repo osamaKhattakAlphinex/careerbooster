@@ -98,6 +98,7 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
   };
 
   const updateUserWithFreePackage = async (packageId: string | undefined) => {
+    console.log("Updating user with free package...");
     if (!subscribing && packageId) {
       const userPackage = await getUserPackageDetails(packageId);
       if (userPackage) {
@@ -142,6 +143,7 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
             dispatch(setField({ name: "userPackageData", value: userPackage }));
             // TODO!!! Add new user subsription to db
             // TODO!! invalidate session on stripe
+
             router.push("/dashboard");
           });
       }
@@ -199,7 +201,7 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
               <p className="text-red-500 text-sm mt-1">{couponError}</p>
             )}
 
-            <button
+            {/* <button
               onClick={handleClick}
               disabled={subscribing}
               className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9"
@@ -209,7 +211,21 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
                 : userPackage.amount === 0
                 ? "Select  Plan"
                 : "Select  Plan"}
-            </button>
+            </button> */}
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault(); // Prevent default anchor behavior
+                handleClick(); // Call handleAnchorClick function
+              }}
+              className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9"
+            >
+              {subscribing
+                ? "Please wait..."
+                : userPackage.amount === 0
+                ? "Select Plan"
+                : "Select Plan"}
+            </a>
           </>
         )}
 

@@ -35,7 +35,11 @@ const CareerBoostingAiToolsCard = () => {
         ))}
       </div>
       {activeTab === "resumemaker" && <RecentResumeCard source="dashboard" />}
-      {activeTab === "cover-letter" && <div className="my-5"><PreviouslyGeneratedList {...historyProps} /></div> }
+      {activeTab === "cover-letter" && (
+        <div className="my-5">
+          <PreviouslyGeneratedList {...historyProps} />
+        </div>
+      )}
       {activeTab === "proposals" && (
         <h1 className="text-gray-100">
           Consulting BidsConsulting BidsConsulting BidsConsulting BidsConsulting
