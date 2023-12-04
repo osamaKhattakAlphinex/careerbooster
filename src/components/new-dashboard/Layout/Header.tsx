@@ -30,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
   return (
     <nav
-      className={`nav-item py-[14px] px-4 ml-0 sticky top-5 z-[999] bg-inherit  
+      className={`nav-item py-[14px] px-4 ml-0  
       ${pagesArray?.includes(pathname) ? "m-5" : "lg:ml-[244px]"} 
       ${pathname === "/subscribed" && "hidden"} 
       `}

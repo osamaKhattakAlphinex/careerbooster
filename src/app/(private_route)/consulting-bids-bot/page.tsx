@@ -195,13 +195,16 @@ const ConsultingBidsGenerator = () => {
         skills: userData?.skills,
       });
     }
-    if (
-      userData.results &&
-      userData.results.consultingBidsGeneration &&
-      userData.results.consultingBidsGeneration !== ""
-    ) {
-      setShow(true);
-      setStreamedData(userData.results.consultingBidsGeneration);
+    // if (
+    //   userData.results &&
+    //   userData.results.consultingBidsGeneration &&
+    //   userData.results.consultingBidsGeneration !== ""
+    // ) {
+    //   setShow(true);
+    //   setStreamedData(userData.results.consultingBidsGeneration);
+    // }
+    if (!streamedData) {
+      setStreamedData(consultingBid.consultingBidText);
     }
   }, [userData]);
 
@@ -389,74 +392,14 @@ const ConsultingBidsGenerator = () => {
               {show && (
                 <div className="mt-[40px] ">
                   <h1 className="uppercase text-white font-bold text-[18px] pb-5">
-                    your ai generated bids
+                    your ai generated bid
                   </h1>
-                  {/* <div className="aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px]">
-                  <div
-                    className={`w-[100%] text-white ${
-                      msgLoading ? "animate-pulse" : ""
-                    }`}
-                  >
-                    <div ref={componentRef}>
-                      {isEditing ? (
-                        <div
-                          id="editor"
-                          contentEditable="true"
-                          // dangerouslySetInnerHTML={{ __html: editedContent }}
-                          // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                          //   setEditedContent(e.target.innerHTML);
-                          // }}
-                        ></div>
-                      ) : (
-                        <div onClick={handleClick}>
-                          <div
-                            className="text-white text-color"
-                            dangerouslySetInnerHTML={{ __html: streamedData }}
-                          ></div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div> */}
+
                   <div
                     className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px] shadow ${
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >
-                    {/* <div className="p-12" ref={componentRef}>
-          {isEditing ? (
-            <div
-              contentEditable="true"
-              dangerouslySetInnerHTML={{ __html: editedContent }}
-              onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                setEditedContent(e.target.innerHTML);
-              }}
-            ></div>
-          ) : (
-            <div onClick={handleClick}>
-              <div dangerouslySetInnerHTML={{ __html: streamedData }}></div>
-            </div>
-          )}
-        </div> */}
-                    {/* <div ref={componentRef}>
-                    {isEditing ? (
-                      <div
-                        id="editor"
-                        contentEditable="true"
-                        // dangerouslySetInnerHTML={{ __html: editedContent }}
-                        // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                        //   setEditedContent(e.target.innerHTML);
-                        // }}
-                      ></div>
-                    ) : (
-                      <div>
-                        <div
-                          className="text-white "
-                          dangerouslySetInnerHTML={{ __html: streamedData }}
-                        ></div>
-                      </div>
-                    )}
-                  </div> */}
                     <div ref={componentRef}>
                       {isEditing ? (
                         <div
@@ -479,52 +422,6 @@ const ConsultingBidsGenerator = () => {
                     </div>
                   </div>
                   <div className="buttons mt-5 flex flex-col lg:flex-row gap-3">
-                    {/* {!isNaN(availablePercentageCoverLetter) &&
-                    availablePercentageCoverLetter !== 0 && (
-                      <button
-                        disabled={
-                          msgLoading ||
-                          !session?.user?.email ||
-                          !aiInputUserData ||
-                          selectedOption === "" ||
-                          (selectedOption === "file" &&
-                            selectedFile === "") ||
-                          // (selectedOption === "aiResume" &&
-                          //   setSelectedResumeId === "") ||
-                          jobDescription === ""
-                        }
-                        onClick={handleGenerate}
-                        className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#B324D7] border rounded-full ${
-                          (msgLoading ||
-                            !session?.user?.email ||
-                            !aiInputUserData ||
-                            selectedOption === "" ||
-                            (selectedOption === "file" &&
-                              selectedFile === "") ||
-                            jobDescription === "") &&
-                          "opacity-50 cursor-not-allowed" // Add this class when the button is disabled
-                        }`}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          className="w-4 h-4 text-white"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                          />
-                        </svg>
-                        <span className="text-white text-[15px] font-semibold">
-                          Re-generate Cover Letter
-                        </span>
-                      </button>
-                    )} */}
-
                     {!isNaN(availablePercentage) &&
                       availablePercentage !== 0 && (
                         <button

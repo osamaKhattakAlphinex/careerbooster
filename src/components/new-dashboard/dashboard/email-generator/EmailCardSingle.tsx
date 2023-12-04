@@ -55,7 +55,7 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
   if (!card) return <h1>Loading </h1>;
 
   return (
-    <div className="flex-item lg:w-[32%] w-full ">
+    <div className="flex-item lg:w-[32%]  ">
       <div className="flex flex-col   bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[14px] ">
         <div className="">
           <div className="mx-3 border-gray-600 leading-6 w-full">

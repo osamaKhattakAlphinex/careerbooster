@@ -240,13 +240,16 @@ const PersonalizedEmailBot = () => {
         skills: userData?.skills,
       });
     }
-    if (
-      userData.results &&
-      userData.results.emailGeneration &&
-      userData.results.emailGeneration !== ""
-    ) {
-      setShow(true);
-      setStreamedData(userData.results.emailGeneration);
+    // if (
+    //   userData.results &&
+    //   userData.results.emailGeneration &&
+    //   userData.results.emailGeneration !== ""
+    // ) {
+    //   setShow(true);
+    //   setStreamedData(userData.results.emailGeneration);
+    // }
+    if (!streamedData) {
+      setStreamedData(email.emailText);
     }
   }, [userData]);
 
