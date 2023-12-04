@@ -43,6 +43,7 @@ const PersonalizedEmailBot = () => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
+  const email = useSelector((state: any) => state.emails);
   const { resumes } = userData;
   const copyEmail = async (text: string) => {
     try {
@@ -249,6 +250,18 @@ const PersonalizedEmailBot = () => {
     }
   }, [userData]);
 
+  useEffect(() => {
+    console.log(email);
+    if (email.id !== "") {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }, [email]);
+
+  useEffect(() => {
+    setStreamedData(email.emailText);
+  }, [email.emailText]);
   const historyProps = {
     dataSource: "emails",
     Component: (card: any) => (

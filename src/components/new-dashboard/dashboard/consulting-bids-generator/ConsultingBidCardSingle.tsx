@@ -33,9 +33,6 @@ const ConsultingBidCardSingle = ({
   const userData = useSelector((state: any) => state.userData);
   const router = useRouter();
   const handleOnView = async (card: any) => {
-    if (source != "") {
-      router.replace("/consulting-bids-bot");
-    }
     dispatch(setConsultingBid(card));
   };
 

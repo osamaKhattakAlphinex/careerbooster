@@ -21,7 +21,7 @@ const initialState: IEmail = {
 };
 
 const emailSlice = createSlice({
-  name: "emails",
+  name: "email",
   initialState,
   reducers: {
     resetEmail() {

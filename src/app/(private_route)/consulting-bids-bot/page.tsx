@@ -38,6 +38,7 @@ const ConsultingBidsGenerator = () => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
+  const consultingBid = useSelector((state: any) => state.consultingBids);
   const { resumes } = userData;
   const copyBid = async (text: string) => {
     try {
@@ -204,6 +205,17 @@ const ConsultingBidsGenerator = () => {
     }
   }, [userData]);
 
+  useEffect(() => {
+    if (consultingBid.id !== "") {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }, [consultingBid]);
+
+  useEffect(() => {
+    setStreamedData(consultingBid.consultingBidText);
+  }, [consultingBid.consultingBidText]);
   const historyProps = {
     dataSource: "consultingBids",
     Component: (card: any) => (
@@ -377,7 +389,7 @@ const ConsultingBidsGenerator = () => {
               {show && (
                 <div className="mt-[40px] ">
                   <h1 className="uppercase text-white font-bold text-[18px] pb-5">
-                    your ai generated bid
+                    your ai generated bids
                   </h1>
                   {/* <div className="aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px]">
                   <div
