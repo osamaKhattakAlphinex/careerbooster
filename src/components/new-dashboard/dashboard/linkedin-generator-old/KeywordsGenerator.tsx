@@ -191,12 +191,12 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
           />
         </div>
         <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
-          <div className="justify-between flex  md:justify-start flex-row">
+          <div className=" flex items-center md:justify-start flex-row">
             <h1 className="text-[16px] text-white font-bold">
               Keywords Generator
             </h1>
             <span
-              className={`rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
+              className={`text-black rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
             >
               {iconOfPackageBadge ? (
                 <Image

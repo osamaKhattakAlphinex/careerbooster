@@ -190,12 +190,12 @@ const AboutGenerator = ({ setAbout }: Props) => {
           />
         </div>
         <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
-          <div className="justify-between flex  md:justify-start flex-row">
+          <div className=" flex items-center  md:justify-start flex-row">
             <h1 className="text-[16px] text-white font-bold">
               About Generator
             </h1>
             <span
-              className={`rounded-full flex justify-center items-center px-[16px] py-[6px] md:mx-2  bg-[#02FF19] text-[12px] uppercase font-bold `}
+              className={`text-black rounded-full flex justify-center items-center px-[16px] py-[6px] md:mx-2  bg-[#02FF19] text-[12px] uppercase font-bold `}
             >
               free
             </span>
