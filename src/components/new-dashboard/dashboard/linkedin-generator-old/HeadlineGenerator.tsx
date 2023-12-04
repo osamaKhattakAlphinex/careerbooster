@@ -182,7 +182,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
     <>
       <div className="headline-generator bg-[#222027] py-8 px-3 lg:px-6 flex flex-col md:flex-row md:align-center gap-5 justify-center items-center rounded-[10px] mb-[20px]">
         <div
-          className={`icon  hidden rounded-full  bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] md:flex justify-center items-center md:w-16 md:h-16`}
+          className={`icon  hidden rounded-full  bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] md:flex justify-center items-center w-16 h-16`}
         >
           <Image
             alt="Svg1"
@@ -228,7 +228,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
           type="button"
           disabled={msgLoading || !session?.user?.email}
           onClick={() => handleGenerate()}
-          className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
+          className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
         >
           <span className={`text-white text-[15px] font-semibold`}>
             {msgLoading ? (

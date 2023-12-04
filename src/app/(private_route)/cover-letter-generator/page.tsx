@@ -522,7 +522,7 @@ export default function CoverLetterPage() {
               </div>
 
               {show && (
-                <div className="mt-[40px] ">
+                <div className="mt-[40px]">
                   <h1 className="uppercase text-white font-bold text-[18px] pb-5">
                     your ai generated cover letter
                   </h1>
@@ -554,7 +554,7 @@ export default function CoverLetterPage() {
                     </div>
                   </div> */}
                   <div
-                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] shadow ${
+                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] md:[30px] shadow ${
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >

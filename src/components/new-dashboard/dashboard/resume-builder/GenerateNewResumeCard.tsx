@@ -31,9 +31,9 @@ Props) => {
   const memoizedState = useMemo(() => state, [state]);
 
   return (
-    <div className=" bg-[#17151B] rounded-[20px] py-9 px-[30px] flex flex-col gap-7 ">
+    <div className=" bg-[#17151B] rounded-[20px] py-9 px-4 md:px-[30px] flex flex-col gap-7 ">
       {/* header */}
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex gap-2 flex-col md:flex-row  justify-between items-center">
         <h3 className=" text-sm uppercase text-white font-bold">
           generate new resume
         </h3>

@@ -35,7 +35,7 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
 
       <div className="flex gap-2 flex-wrap">
         {userData &&
-          userData?.[dataSource].map((item: any, key: number) => {
+          userData?.[dataSource]?.map((item: any, key: number) => {
             return <Component key={key} {...item} />;
           })}
       </div>
