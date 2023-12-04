@@ -4,16 +4,17 @@ import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import ReactToPrint from "react-to-print";
-import Link from "next/link";
-import { leftArrowIcon } from "@/helpers/iconsProvider";
 
 import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
 import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
-import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
+import ConsultingBidCardSingle from "@/components/new-dashboard/dashboard/consulting-bids-generator/ConsultingBidCardSingle";
+import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
+import { makeid } from "@/helpers/makeid";
+import { setConsultingBid } from "@/store/consultingBidSlice";
 
 const ConsultingBidsGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -124,6 +125,20 @@ const ConsultingBidsGenerator = () => {
                 user = await JSON.parse(res.result);
               }
               if (res.success) {
+                const payload = {
+                  id: makeid(),
+                  jobDescription: jobDescription,
+                  consultingBidText: tempText,
+                  generatedOnDate: new Date().toISOString(),
+                  generatedViaOption: selectedOption,
+                  userEmail: session?.user?.email,
+                };
+
+                const consultingBidResponse = await axios.post(
+                  "/api/consultingBidBot",
+                  payload
+                );
+
                 const updatedObject = {
                   ...userData,
                   userPackageUsed: {
@@ -131,8 +146,11 @@ const ConsultingBidsGenerator = () => {
                     consulting_bids_generation:
                       user.userPackageUsed.consulting_bids_generation,
                   },
+                  consultingBids:
+                    consultingBidResponse.data.result.consultingBids,
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
+                dispatch(setConsultingBid(payload));
               }
             });
           } else {
@@ -185,12 +203,24 @@ const ConsultingBidsGenerator = () => {
       setStreamedData(userData.results.consultingBidsGeneration);
     }
   }, [userData]);
+
+  const historyProps = {
+    dataSource: "consultingBids",
+    Component: (card: any) => (
+      <ConsultingBidCardSingle
+        card={card}
+        // source="dashboard"
+        componentRef={componentRef}
+      />
+    ),
+  };
+
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] ">
           {/* <AiGeneratedCoverLetters /> */}
-          {/* <PreviouslyGeneratedList {...historyProps} /> */}
+          <PreviouslyGeneratedList {...historyProps} />
           {/* <MainCoverLetterTool /> */}
           <>
             <div className=" bg-[#17151B] rounded-[20px]  px-[30px] py-[41px] flex flex-col gap-5 ">
