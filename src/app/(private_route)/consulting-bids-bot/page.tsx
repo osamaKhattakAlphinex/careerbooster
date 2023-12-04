@@ -14,7 +14,10 @@ import copy from "clipboard-copy";
 import ConsultingBidCardSingle from "@/components/new-dashboard/dashboard/consulting-bids-generator/ConsultingBidCardSingle";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import { makeid } from "@/helpers/makeid";
-import { setConsultingBid } from "@/store/consultingBidSlice";
+import {
+  resetConsultingBid,
+  setConsultingBid,
+} from "@/store/consultingBidSlice";
 
 const ConsultingBidsGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -54,6 +57,20 @@ const ConsultingBidsGenerator = () => {
     // setEditedContent(streamedData);
     setIsEditing(true);
   };
+
+  useEffect(() => {
+    if (isEditing) {
+      if (componentRef.current) {
+        const editorElement = componentRef.current.querySelector("#editor");
+        if (editorElement) {
+          editorElement.innerHTML = consultingBid.consultingBidText;
+        }
+      }
+    } else {
+      dispatch(resetConsultingBid());
+    }
+  }, [isEditing]);
+
   const handleGenerate = async () => {
     if (
       session?.user?.email &&
@@ -182,6 +199,45 @@ const ConsultingBidsGenerator = () => {
       console.log(error);
     }
   };
+
+  const handleSave = async () => {
+    let _consultingBidText = "";
+
+    if (componentRef.current) {
+      const editorElement = componentRef.current.querySelector("#editor");
+      if (editorElement) {
+        _consultingBidText = editorElement.innerHTML;
+        editorElement.innerHTML = "";
+      }
+    }
+
+    // setStreamedData(editedContent);
+    setIsEditing(false);
+    const payLoad = {
+      consultingBidText: _consultingBidText, //editedContent,
+      generatedOnDate: consultingBid.generatedOnDate,
+      generatedViaOption: consultingBid.generatedViaOption,
+      id: consultingBid.id,
+      jobDescription: consultingBid.jobDescription,
+      userEmail: consultingBid.userEmail,
+    };
+
+    const updatedConsultingBids = await axios.put(
+      `/api/consultingBidBot/${consultingBid.id}`,
+      payLoad,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    const updatedObject = {
+      ...userData,
+      consultingBids: updatedConsultingBids.data.results,
+    };
+    dispatch(setUserData({ ...updatedObject }));
+    dispatch(setConsultingBid(payLoad));
+  };
+
   useEffect(() => {
     if (userData && userData?.email) {
       setAiInputUserData({
@@ -462,7 +518,7 @@ const ConsultingBidsGenerator = () => {
                         <div
                           id="editor"
                           contentEditable="true"
-                          // className="text-white "
+                          className="text-white "
                           // dangerouslySetInnerHTML={{ __html: streamedData }}
                           // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
                           //   setEditedContent(e.target.innerHTML);
@@ -654,7 +710,7 @@ const ConsultingBidsGenerator = () => {
                         </span>
                       </button>
                     )}
-                    {/* {show && (
+                    {show && (
                       <div>
                         <button
                           type="button"
@@ -689,7 +745,7 @@ const ConsultingBidsGenerator = () => {
                     {isEditing && (
                       <button
                         type="submit"
-                        onClick={() => saveToDB(editedContent)}
+                        onClick={handleSave}
                         className="flex flex-row justify-center ml-auto items-center gap-2 py-3 px-3 border-[#312E37] border rounded-full"
                       >
                         <svg
@@ -707,7 +763,7 @@ const ConsultingBidsGenerator = () => {
                           />
                         </svg>
                       </button>
-                    )} */}
+                    )}
                   </div>
                 </div>
               )}

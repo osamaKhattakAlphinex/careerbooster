@@ -14,7 +14,7 @@ import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import { makeid } from "@/helpers/makeid";
-import { setEmail } from "@/store/emailSlice";
+import { resetEmail, setEmail } from "@/store/emailSlice";
 
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import EmailCardSingle from "@/components/new-dashboard/dashboard/email-generator/EmailCardSingle";
@@ -58,6 +58,20 @@ const PersonalizedEmailBot = () => {
     // setEditedContent(streamedData);
     setIsEditing(true);
   };
+
+  useEffect(() => {
+    if (isEditing) {
+      if (componentRef.current) {
+        const editorElement = componentRef.current.querySelector("#editor");
+        if (editorElement) {
+          editorElement.innerHTML = email.emailText;
+        }
+      }
+    } else {
+      dispatch(resetEmail());
+    }
+  }, [isEditing]);
+
   // const handleSave = async () => {
   //   let _coverLetterText = "";
 
@@ -227,6 +241,43 @@ const PersonalizedEmailBot = () => {
       console.log(error);
     }
   };
+
+  const handleSave = async () => {
+    let _emailText = "";
+
+    if (componentRef.current) {
+      const editorElement = componentRef.current.querySelector("#editor");
+      if (editorElement) {
+        _emailText = editorElement.innerHTML;
+        editorElement.innerHTML = "";
+      }
+    }
+
+    // setStreamedData(editedContent);
+    setIsEditing(false);
+    const payLoad = {
+      emailText: _emailText, //editedContent,
+      generatedOnDate: email.generatedOnDate,
+      generatedViaOption: email.generatedViaOption,
+      id: email.id,
+      jobDescription: email.jobDescription,
+      userEmail: email.userEmail,
+    };
+
+    const updatedEmails = await axios.put(
+      `/api/emailBot/${email.id}`,
+      payLoad,
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    const updatedObject = {
+      ...userData,
+      emails: updatedEmails.data.results,
+    };
+    dispatch(setUserData({ ...updatedObject }));
+    dispatch(setEmail(payLoad));
+  };
+
   useEffect(() => {
     if (userData && userData?.email) {
       setAiInputUserData({
@@ -499,6 +550,7 @@ const PersonalizedEmailBot = () => {
                     <div ref={componentRef}>
                       {isEditing ? (
                         <div
+                          className="text-white "
                           id="editor"
                           contentEditable="true"
                           // dangerouslySetInnerHTML={{ __html: streamedData }}
@@ -646,7 +698,7 @@ const PersonalizedEmailBot = () => {
                         </span>
                       </button>
                     )}
-                    {/* {show && (
+                    {show && (
                       <div>
                         <button
                           type="button"
@@ -677,11 +729,11 @@ const PersonalizedEmailBot = () => {
                           </div>
                         </button>
                       </div>
-                    )} */}
-                    {/* {isEditing && (
+                    )}
+                    {isEditing && (
                       <button
-                        type="submit"
-                        onClick={() => saveToDB(editedContent)}
+                        type="button"
+                        onClick={handleSave}
                         className="flex flex-row justify-center ml-auto items-center gap-2 py-3 px-3 border-[#312E37] border rounded-full"
                       >
                         <svg
@@ -699,7 +751,7 @@ const PersonalizedEmailBot = () => {
                           />
                         </svg>
                       </button>
-                    )} */}
+                    )}
                   </div>
                 </div>
               )}
