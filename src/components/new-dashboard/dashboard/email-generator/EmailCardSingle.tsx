@@ -9,43 +9,40 @@ import ReactToPrint from "react-to-print";
 import Html2Pdf from "js-html2pdf";
 import { resetCoverLetter, setCoverLetter } from "@/store/coverLetterSlice";
 import Image from "next/image";
-import { eyeIcon, rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
+import { rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
 import PencilLine from "@/../public/icon/PencilLine.png";
 import { useRouter } from "next/navigation";
+import { resetEmail, setEmail } from "@/store/emailSlice";
 
-type CoverLetterType = {
+type EmailType = {
   card?: any;
   componentRef?: any;
   source?: string;
 };
 
-const CoverLetterCardSingle = ({
-  card,
-  componentRef,
-  source,
-}: CoverLetterType) => {
+const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
   // redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const router = useRouter();
   const handleOnView = async (card: any) => {
-    dispatch(setCoverLetter(card));
+    dispatch(setEmail(card));
   };
 
   const handleOnDelete = async (card: any) => {
-    const c = confirm("Are you sure you want to delete this Cover Letter?");
+    const c = confirm("Are you sure you want to delete this Emails?");
     if (c) {
       try {
-        await axios.delete(`/api/coverLetterBot/${card.id}`);
-        dispatch(resetCoverLetter());
+        await axios.delete(`/api/emailBot/${card.id}`);
+        dispatch(resetEmail());
         // updated cover letters
-        const updatedCoverLetters = userData.coverLetters.filter(
-          (letter: any) => letter.id !== card.id
+        const updatedEmails = userData.emails.filter(
+          (email: any) => email.id !== card.id
         );
 
         const updatedObject = {
           ...userData,
-          coverLetters: updatedCoverLetters,
+          emails: updatedEmails,
         };
 
         dispatch(setUserData({ ...userData, ...updatedObject }));
@@ -58,8 +55,8 @@ const CoverLetterCardSingle = ({
   if (!card) return <h1>Loading </h1>;
 
   return (
-    <div className="w-[100%]  md:w-[32%]  ">
-      <div className="flex flex-col bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[14px] ">
+    <div className="flex-item lg:w-[32%]  ">
+      <div className="flex flex-col   bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[14px] ">
         <div className="">
           <div className="mx-3 border-gray-600 leading-6 w-full">
             <h2
@@ -82,8 +79,7 @@ const CoverLetterCardSingle = ({
             onClick={() => handleOnView(card)}
             className=" w-[36px] flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
           >
-            {/* <Image src={PencilLine} alt="Image Not Found" /> */}
-            {eyeIcon}
+            <Image src={PencilLine} alt="Image Not Found" />
           </button>
           <button
             type="button"
@@ -118,7 +114,7 @@ const CoverLetterCardSingle = ({
                   const document = printIframe.contentDocument;
                   if (document) {
                     const exporter = new Html2Pdf(componentRef.current, {
-                      filename: `coverletter.pdf`,
+                      filename: `email.pdf`,
                     });
                     exporter.getPdf(true);
                   }
@@ -132,4 +128,4 @@ const CoverLetterCardSingle = ({
   );
 };
 
-export default CoverLetterCardSingle;
+export default EmailCardSingle;

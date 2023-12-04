@@ -41,6 +41,10 @@ export async function POST(req: any) {
     const jobDescription = reqBody?.jobDescription;
     const trainBotData = reqBody?.trainBotData;
 
+    const dataset = "linkedin.genearteConsultingBid";
+    const model = await getTrainedModel(dataset);
+    console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+
     // fetch prompt from db
     await startDB();
     const promptRec = await Prompt.findOne({
@@ -55,10 +59,6 @@ export async function POST(req: any) {
     // CREATING LLM MODAL
 
     if (type === "file") {
-      const dataset = "linkedin.genearteConsultingBid";
-      const model = await getTrainedModel(dataset);
-      console.log(`Trained Model(${model}) for Dataset(${dataset})`);
-
       const user = await User.findOne({ email: email }, { files: 1 });
       if (user) {
         const getFile = user.files.find(

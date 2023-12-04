@@ -4,16 +4,17 @@ import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import ReactToPrint from "react-to-print";
-import Link from "next/link";
-import { leftArrowIcon } from "@/helpers/iconsProvider";
 
 import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
 import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
-import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
+import ConsultingBidCardSingle from "@/components/new-dashboard/dashboard/consulting-bids-generator/ConsultingBidCardSingle";
+import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
+import { makeid } from "@/helpers/makeid";
+import { setConsultingBid } from "@/store/consultingBidSlice";
 
 const ConsultingBidsGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -37,6 +38,7 @@ const ConsultingBidsGenerator = () => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
+  const consultingBid = useSelector((state: any) => state.consultingBids);
   const { resumes } = userData;
   const copyBid = async (text: string) => {
     try {
@@ -124,6 +126,20 @@ const ConsultingBidsGenerator = () => {
                 user = await JSON.parse(res.result);
               }
               if (res.success) {
+                const payload = {
+                  id: makeid(),
+                  jobDescription: jobDescription,
+                  consultingBidText: tempText,
+                  generatedOnDate: new Date().toISOString(),
+                  generatedViaOption: selectedOption,
+                  userEmail: session?.user?.email,
+                };
+
+                const consultingBidResponse = await axios.post(
+                  "/api/consultingBidBot",
+                  payload
+                );
+
                 const updatedObject = {
                   ...userData,
                   userPackageUsed: {
@@ -131,8 +147,11 @@ const ConsultingBidsGenerator = () => {
                     consulting_bids_generation:
                       user.userPackageUsed.consulting_bids_generation,
                   },
+                  consultingBids:
+                    consultingBidResponse.data.result.consultingBids,
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
+                dispatch(setConsultingBid(payload));
               }
             });
           } else {
@@ -176,21 +195,47 @@ const ConsultingBidsGenerator = () => {
         skills: userData?.skills,
       });
     }
-    if (
-      userData.results &&
-      userData.results.consultingBidsGeneration &&
-      userData.results.consultingBidsGeneration !== ""
-    ) {
-      setShow(true);
-      setStreamedData(userData.results.consultingBidsGeneration);
+    // if (
+    //   userData.results &&
+    //   userData.results.consultingBidsGeneration &&
+    //   userData.results.consultingBidsGeneration !== ""
+    // ) {
+    //   setShow(true);
+    //   setStreamedData(userData.results.consultingBidsGeneration);
+    // }
+    if (!streamedData) {
+      setStreamedData(consultingBid.consultingBidText);
     }
   }, [userData]);
+
+  useEffect(() => {
+    if (consultingBid.id !== "") {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }, [consultingBid]);
+
+  useEffect(() => {
+    setStreamedData(consultingBid.consultingBidText);
+  }, [consultingBid.consultingBidText]);
+  const historyProps = {
+    dataSource: "consultingBids",
+    Component: (card: any) => (
+      <ConsultingBidCardSingle
+        card={card}
+        // source="dashboard"
+        componentRef={componentRef}
+      />
+    ),
+  };
+
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] ">
           {/* <AiGeneratedCoverLetters /> */}
-          {/* <PreviouslyGeneratedList {...historyProps} /> */}
+          <PreviouslyGeneratedList {...historyProps} />
           {/* <MainCoverLetterTool /> */}
           <>
             <div className=" bg-[#17151B] rounded-[20px]  px-[30px] py-[41px] flex flex-col gap-5 ">
@@ -349,72 +394,12 @@ const ConsultingBidsGenerator = () => {
                   <h1 className="uppercase text-white font-bold text-[18px] pb-5">
                     your ai generated bid
                   </h1>
-                  {/* <div className="aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px]">
-                  <div
-                    className={`w-[100%] text-white ${
-                      msgLoading ? "animate-pulse" : ""
-                    }`}
-                  >
-                    <div ref={componentRef}>
-                      {isEditing ? (
-                        <div
-                          id="editor"
-                          contentEditable="true"
-                          // dangerouslySetInnerHTML={{ __html: editedContent }}
-                          // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                          //   setEditedContent(e.target.innerHTML);
-                          // }}
-                        ></div>
-                      ) : (
-                        <div onClick={handleClick}>
-                          <div
-                            className="text-white text-color"
-                            dangerouslySetInnerHTML={{ __html: streamedData }}
-                          ></div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div> */}
+
                   <div
                     className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px] shadow ${
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >
-                    {/* <div className="p-12" ref={componentRef}>
-          {isEditing ? (
-            <div
-              contentEditable="true"
-              dangerouslySetInnerHTML={{ __html: editedContent }}
-              onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                setEditedContent(e.target.innerHTML);
-              }}
-            ></div>
-          ) : (
-            <div onClick={handleClick}>
-              <div dangerouslySetInnerHTML={{ __html: streamedData }}></div>
-            </div>
-          )}
-        </div> */}
-                    {/* <div ref={componentRef}>
-                    {isEditing ? (
-                      <div
-                        id="editor"
-                        contentEditable="true"
-                        // dangerouslySetInnerHTML={{ __html: editedContent }}
-                        // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                        //   setEditedContent(e.target.innerHTML);
-                        // }}
-                      ></div>
-                    ) : (
-                      <div>
-                        <div
-                          className="text-white "
-                          dangerouslySetInnerHTML={{ __html: streamedData }}
-                        ></div>
-                      </div>
-                    )}
-                  </div> */}
                     <div ref={componentRef}>
                       {isEditing ? (
                         <div
@@ -437,52 +422,6 @@ const ConsultingBidsGenerator = () => {
                     </div>
                   </div>
                   <div className="buttons mt-5 flex flex-col lg:flex-row gap-3">
-                    {/* {!isNaN(availablePercentageCoverLetter) &&
-                    availablePercentageCoverLetter !== 0 && (
-                      <button
-                        disabled={
-                          msgLoading ||
-                          !session?.user?.email ||
-                          !aiInputUserData ||
-                          selectedOption === "" ||
-                          (selectedOption === "file" &&
-                            selectedFile === "") ||
-                          // (selectedOption === "aiResume" &&
-                          //   setSelectedResumeId === "") ||
-                          jobDescription === ""
-                        }
-                        onClick={handleGenerate}
-                        className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#B324D7] border rounded-full ${
-                          (msgLoading ||
-                            !session?.user?.email ||
-                            !aiInputUserData ||
-                            selectedOption === "" ||
-                            (selectedOption === "file" &&
-                              selectedFile === "") ||
-                            jobDescription === "") &&
-                          "opacity-50 cursor-not-allowed" // Add this class when the button is disabled
-                        }`}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          className="w-4 h-4 text-white"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                          />
-                        </svg>
-                        <span className="text-white text-[15px] font-semibold">
-                          Re-generate Cover Letter
-                        </span>
-                      </button>
-                    )} */}
-
                     {!isNaN(availablePercentage) &&
                       availablePercentage !== 0 && (
                         <button

@@ -53,8 +53,11 @@ const UserSchema = new Schema(
         uploadedDateTime: String,
       },
     ],
+    emails: [],
     resumes: [],
     coverLetters: [],
+    consultingBids: [],
+
     wizardCompleted: {
       type: Boolean,
       default: false,

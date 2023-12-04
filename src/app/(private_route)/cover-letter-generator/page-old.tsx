@@ -375,7 +375,7 @@ const CoverLetterWriter = () => {
       </div>
 
       <div className="m-10 mt-2 w-[95%]  p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
-        <PreviouslyGeneratedList {...historyProps} />
+        {/* <PreviouslyGeneratedList  {...historyProps} /> */}
       </div>
       <div className="flex m-10 mt-2 gap-4">
         <div className="w-full flex flex-col p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">

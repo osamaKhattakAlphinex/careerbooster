@@ -4,6 +4,8 @@ import resumeReducer from "./resumeSlice";
 import registerSlice from "./registerSlice";
 import userDataSlice from "./userDataSlice";
 import coverLetterSlice from "./coverLetterSlice";
+import emailSlice from "./emailSlice";
+import consultingBidSlice from "./consultingBidSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +13,8 @@ const store = configureStore({
     register: registerSlice,
     userData: userDataSlice,
     coverLetter: coverLetterSlice,
+    emails: emailSlice,
+    consultingBids: consultingBidSlice,
   },
 });
 

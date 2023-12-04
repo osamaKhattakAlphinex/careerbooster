@@ -342,8 +342,7 @@ const CoverLetterWriter = () => {
   }, [coverLetter]);
 
   const historyProps = {
-    list: userData.coverLetters,
-    title: "Your AI Generated Cover Letters",
+    dataSource: "coverLetters",
     Component: (card: any) => (
       <CoverLetterCardSingle card={card} componentRef={componentRef} />
     ),
