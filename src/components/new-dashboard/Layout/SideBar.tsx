@@ -122,7 +122,7 @@ const SideBar = () => {
                 </div>
               </div>
               <div>
-                <h1 className="text-gray-200 text-base gap-1 font-semibold ">
+                <h1 className="text-gray-200 text-base gap-1 font-semibold mb-0 ">
                   {userData.firstName + " " + userData.lastName}
                 </h1>
                 <Link
@@ -176,13 +176,13 @@ const SideBar = () => {
                         {item.icon}
                       </div>
                       <h2
-                        className={`text-base ml-3 hover:text-white ${
+                        className={`text-base ml-3 mb-0 hover:text-white font-normal ${
                           pathname === item.url
                             ? "text-white "
                             : "text-neutral-500"
                         }`}
                       >
-                        {item.text}  
+                        {item.text}
                       </h2>
                     </Link>
                   ) : (
@@ -203,7 +203,9 @@ const SideBar = () => {
                       <div className="w-6 h-6 inline-block pr-2">
                         {item.icon}
                       </div>
-                      <h2 className="text-base ml-3">{item.text}</h2>
+                      <h2 className="text-base ml-3 mb-0 font-normal">
+                        {item.text}
+                      </h2>
                     </button>
                   )}
                 </li>
