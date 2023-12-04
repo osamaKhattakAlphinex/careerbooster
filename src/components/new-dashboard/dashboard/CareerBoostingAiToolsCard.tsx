@@ -16,6 +16,7 @@ const tabOptions = [
 const CareerBoostingAiToolsCard = () => {
   const [activeTab, setActiveTab] = useState("resumemaker");
   const historyProps = {
+    dataSource: "coverLetters",
     Component: (card: any) => (
       <CoverLetterCardSingle card={card} source="dashboard" />
     ),
@@ -35,7 +36,11 @@ const CareerBoostingAiToolsCard = () => {
         ))}
       </div>
       {activeTab === "resumemaker" && <RecentResumeCard source="dashboard" />}
-      {activeTab === "cover-letter" && <div className="my-5"><PreviouslyGeneratedList {...historyProps} /></div> }
+      {activeTab === "cover-letter" && (
+        <div className="my-5">
+          <PreviouslyGeneratedList {...historyProps} />
+        </div>
+      )}
       {activeTab === "proposals" && (
         <h1 className="text-gray-100">
           Consulting BidsConsulting BidsConsulting BidsConsulting BidsConsulting
