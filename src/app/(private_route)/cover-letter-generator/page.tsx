@@ -96,10 +96,6 @@ export default function CoverLetterPage() {
     dispatch(setCoverLetter(payLoad));
   };
 
-  useEffect(() => {
-    // saveToDB(streamedData);
-  }, [streamedData]);
-
   // limit bars
   const [availablePercentageCoverLetter, setAvailablePercentageCoverLetter] =
     useState<number>(0);
@@ -328,7 +324,7 @@ export default function CoverLetterPage() {
     //   console.log("userData CoverLetter: ", userData.results.coverLetter);
     //   setStreamedData(userData.results.coverLetter);
     // }
-
+    console.log("in useEffect userData: ");
     if (!streamedData) {
       // console.log("userData CoverLetter: ", userData.results.coverLetter);
       setStreamedData(coverLetter.coverLetterText);
@@ -338,6 +334,7 @@ export default function CoverLetterPage() {
   }, [userData]);
 
   useEffect(() => {
+    console.log("in UseEffect coverLetter");
     if (coverLetter.id !== "") {
       setShow(true);
     } else {
@@ -348,16 +345,22 @@ export default function CoverLetterPage() {
   const historyProps = {
     dataSource: "coverLetters",
     Component: (card: any) => (
-      <CoverLetterCardSingle
-        card={card}
-        // source="dashboard"
-        componentRef={componentRef}
-      />
+      <CoverLetterCardSingle card={card} componentRef={componentRef} />
     ),
   };
 
   useEffect(() => {
-    setStreamedData(coverLetter.coverLetterText);
+    console.log(streamedData.length, componentRef);
+  }, [streamedData]);
+  useEffect(() => {
+    console.log(
+      "in UseEffect coverLetter.coverLetterText",
+      coverLetter.coverLetterText.length
+    );
+    if (coverLetter.coverLetterText.length !== 0) {
+      console.log("inside ");
+      setStreamedData(coverLetter.coverLetterText);
+    }
   }, [coverLetter.coverLetterText]);
   const [uploadPdfFile, setUploadPdfFile] = useState<string>("useYourPersona");
   return (
@@ -563,7 +566,7 @@ export default function CoverLetterPage() {
               <div
                 contentEditable="true"
                 dangerouslySetInnerHTML={{ __html: editedContent }}
-                onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
+                onInput={(e: React.ChangeEvent<HTMLDivElement>) => {componentRef
                   setEditedContent(e.target.innerHTML);
                 }}
               ></div>

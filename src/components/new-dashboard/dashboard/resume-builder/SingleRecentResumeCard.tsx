@@ -86,7 +86,7 @@ const SingleRecentResumeCard = ({
           onClick={handleOnView}
           className=" w-[36px]  flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
         >
-         {eyeIcon}
+          {eyeIcon}
         </button>
         <button
           type="button"

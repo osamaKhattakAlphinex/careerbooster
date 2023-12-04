@@ -29,6 +29,11 @@
 .sidebar {
   z-index: 1000 !important;
 }
+
+.sidebarTop {
+  transition: background-color 0.2s;
+}
+
 @media print {
   .text-color {
     color: black;

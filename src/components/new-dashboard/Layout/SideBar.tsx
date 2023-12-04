@@ -87,7 +87,7 @@ const SideBar = () => {
       {/* Mobile Menu Button */}
 
       <div
-        className={`sidebar  fixed px-6 top-0  w-[244px]  py-[10px]  bg-zinc-900 flex items-center   ${
+        className={`sidebarTop sidebar  fixed px-6 top-0  w-[244px]  py-[10px]  bg-zinc-900 flex items-center transition-all duration-200   ${
           isOpen ? " " : "bg-opacity-0 lg:bg-opacity-100"
         }`}
       >
@@ -101,10 +101,10 @@ const SideBar = () => {
         </div>
       </div>
       <div
-        className={`sidebar fixed pb-20 w-[244px] h-screen bg-zinc-900 overflow-y-auto  transition-all ${
+        className={`sidebar fixed pb-20 w-[244px] top-0  mt-16 h-screen bg-zinc-900 overflow-y-auto  transition-all ${
           isOpen
-            ? "translate-x-0 lg:translate-x-0 top-0 = mt-16"
-            : "-translate-x-full lg:translate-x-0" // Apply opacity only on small screens
+            ? "translate-x-0 lg:translate-x-0 "
+            : "-translate-x-full lg:translate-x-0 " // Apply opacity only on small screens
         }`}
       >
         <div className="block">

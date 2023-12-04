@@ -29,6 +29,9 @@ const CoverLetterCardSingle = ({
   const userData = useSelector((state: any) => state.userData);
   const router = useRouter();
   const handleOnView = async (card: any) => {
+    if (source != "") {
+      router.replace("/cover-letter-generator");
+    }
     dispatch(setCoverLetter(card));
   };
 
