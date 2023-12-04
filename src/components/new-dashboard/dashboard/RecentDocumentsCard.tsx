@@ -20,7 +20,7 @@ const RecentDocumentsCard = () => {
     <>
       {/* <Alert show={show} onClose={() => setShow(false)} /> */}
       <ProfileCompletionAlert />
-      <div className="lg:mt-0 mt-10">
+      <div className="mt-5">
         <h1 className="pb-2 rounded-[14px] text-zinc-500 font-bold uppercase text-[14px] lg:pl-0 pl-5 lg:mt-0 ">
           career booster ai tools
         </h1>

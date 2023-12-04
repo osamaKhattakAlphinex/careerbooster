@@ -177,14 +177,14 @@ const Header = () => {
                     /Mobile/.test(navigator.userAgent) ? (
                       <div>
                         {userData.firstName + " " + userData.lastName}
-                        <a
+                        <Link
                           href={role === "admin" ? "/admin" : "/dashboard"}
                           className=" block px-4 py-2 text-sm no-underline theme-text-2 dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-0"
                         >
                           Dashboard
-                        </a>
+                        </Link>
                         <button
                           type="button"
                           className=" block w-full px-4 py-2 text-left text-sm dark:hover:bg-gray-600 hover:bg-blue-100"
@@ -230,7 +230,7 @@ const Header = () => {
                           >
                             <div className="py-1" role="none">
                               {/* <!-- Active: "bg-gray-100 ", Not Active: "text-gray-700" --> */}
-                              <a
+                              <Link
                                 href={
                                   role === "admin" ? "/admin" : "/dashboard"
                                 }
@@ -239,7 +239,7 @@ const Header = () => {
                                 id="menu-item-0"
                               >
                                 Dashboard
-                              </a>
+                              </Link>
                               <Link
                                 href="/profile-review"
                                 className=" block px-4 py-2 text-sm no-underline theme-text-2"
@@ -272,14 +272,14 @@ const Header = () => {
                       >
                         <div className="py-1" role="none">
                           {/* <!-- Active: "bg-gray-100 ", Not Active: "text-gray-700" --> */}
-                          <a
+                          <Link
                             href={role === "admin" ? "/admin" : "/dashboard"}
                             className=" block px-4 py-2 text-sm no-underline theme-text-2 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-0"
                           >
                             Dashboard
-                          </a>
+                          </Link>
                           <Link
                             href="/profile-review"
                             className=" block px-4 py-2 text-sm no-underline theme-text-2 dark:hover:bg-gray-600 hover:bg-blue-100"

@@ -25,14 +25,22 @@
 .parent:hover .child {
   display: block; /* Show child divs when the parent is hovered */
 }
+
+.sidebar {
+  z-index: 1000 !important;
+}
 @media print {
   .text-color {
     color: black;
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1026px) {
   .headText {
-    margin-top: 2.5rem;
+    margin-top: 1.5rem !important;
+    margin-left: 1rem;
+  }
+  .nav-item {
+    margin-top: 1.25rem !important;
   }
 }

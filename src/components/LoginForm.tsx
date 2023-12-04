@@ -36,7 +36,6 @@ const LoginForm = () => {
         setSubmitting(false);
         return setSubmittingError(res.error);
       }
-      window.location.reload();
       router.replace("/dashboard");
     },
   });

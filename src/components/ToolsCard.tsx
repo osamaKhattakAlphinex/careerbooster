@@ -24,7 +24,7 @@ const ToolsCard = ({
 }) => {
   return (
     <div className="lg:w-[32%] flex mb-8 ">
-      <Link href={link} className="flex no-underline">
+      <Link href={link} className="flex no-underline text-white">
         <div className="mr-4">
           <div
             className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-[60px] h-[60px] `}

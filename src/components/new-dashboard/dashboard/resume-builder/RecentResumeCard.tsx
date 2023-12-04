@@ -14,7 +14,7 @@ const RecentResumeCard = ({
   return (
     <>
       <div className="text-white bg-[#17151B] rounded-[20px]  mb-7 px-[24px] py-[35px] my-5 ">
-        <div className="flex justify-between items-center  py-[10px] ">
+        <div className="flex justify-between items-center  ">
           <h1 className="uppercase font-semibold lg:text-[14px] text-[11px]">
             Your Resumes
           </h1>
@@ -30,15 +30,18 @@ const RecentResumeCard = ({
           </div>
         </div>
         {!resumes && <p>Loading Resumes...</p>}
-        <div className="flex flex-wrap lg:flex-row flex-col  gap-4">
+        {/* <div className="flex flex-wrap lg:flex-row flex-col  gap-4"> */}
+        <div className="flex flex-wrap  gap-2 ">
           {resumes &&
             resumes.map((resume: any) => (
-              <SingleRecentResumeCard
-                key={resume.id}
-                resume={resume}
-                source={source}
-                componentRef={componentRef}
-              />
+              <div key={resume.id} className="lg:w-[32%] ">
+                <SingleRecentResumeCard
+                  key={resume.id}
+                  resume={resume}
+                  source={source}
+                  componentRef={componentRef}
+                />
+              </div>
             ))}
         </div>
       </div>

@@ -3,7 +3,7 @@ import { ReactNode, useState } from "react";
 import { usePathname } from "next/navigation";
 import Modal from "@/components/Modal";
 import { bellIcon, sunIcon } from "@/helpers/iconsProvider";
-
+import "@/app/(private_route)/dashboard.css";
 import { useSelector } from "react-redux";
 interface HeaderProps {
   children?: ReactNode;
@@ -30,13 +30,13 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
   return (
     <nav
-      className={`mt-0 py-[14px] px-4 ml-0  
+      className={`nav-item py-[14px] px-4 ml-0 sticky top-5 z-[999]  
       ${pagesArray?.includes(pathname) ? "m-5" : "lg:ml-[244px]"} 
       ${pathname === "/subscribed" && "hidden"} 
       `}
     >
       <div className="w-full rounded-lg flex justify-between sm:justify-between items-center">
-        <h1 className="headText mt-5 rounded-[14px] text-[14px] text-[#959595] font-bold uppercase">
+        <h1 className="headText  rounded-[14px] text-[14px] text-[#959595] font-bold uppercase">
           {currentRouteDisplayName}
         </h1>
         <div className="flex">

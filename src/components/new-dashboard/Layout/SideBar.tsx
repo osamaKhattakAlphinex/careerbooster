@@ -21,7 +21,7 @@ import {
   ticketIcon,
   xMark,
 } from "@/helpers/iconsProvider";
-
+import "@/app/(private_route)/dashboard.css";
 import Button from "@/components/Button";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -86,7 +86,7 @@ const SideBar = () => {
       {/* Mobile Menu Button */}
 
       <div
-        className={` fixed px-6 top-0  w-[244px]  py-[10px]  bg-zinc-900 flex items-center   ${
+        className={`sidebar  fixed px-6 top-0  w-[244px]  py-[10px]  bg-zinc-900 flex items-center   ${
           isOpen ? " " : "bg-opacity-0 lg:bg-opacity-100"
         }`}
       >
@@ -100,7 +100,7 @@ const SideBar = () => {
         </div>
       </div>
       <div
-        className={`fixed pb-10 w-[244px] h-screen bg-zinc-900 overflow-y-auto  transition-all ${
+        className={`sidebar fixed pb-20 w-[244px] h-screen bg-zinc-900 overflow-y-auto  transition-all ${
           isOpen
             ? "translate-x-0 lg:translate-x-0 top-0 = mt-16"
             : "-translate-x-full lg:translate-x-0" // Apply opacity only on small screens
@@ -110,11 +110,15 @@ const SideBar = () => {
           <div>
             <div className="px-7 py-2 flex">
               <div className="mr-4">
-                <Image
+                {/* <Image
                   src={profile}
                   alt=""
                   className="w-10 h-10 object-cover border-[1px] border-fuchsia-600 rounded-full"
-                />
+                /> */}
+                <div className="w-10 h-10 flex items-center justify-center bg-gray-300 text-gray-600 rounded-full">
+                  {userData.firstName[0]}
+                  {userData.lastName[0]}
+                </div>
               </div>
               <div>
                 <h1 className="text-gray-200 text-base gap-1 font-semibold ">
@@ -192,9 +196,9 @@ const SideBar = () => {
                 Upgrade to Pro version to get hired faster
               </p>
               <Button
-                // onClick={() => {
-                //   router.push("/subscribe");
-                // }}
+                onClick={() => {
+                  router.push("/subscribe");
+                }}
                 btnText="Upgrade"
                 textColor={`text-white`}
                 bgColor="bg-zinc-900"
