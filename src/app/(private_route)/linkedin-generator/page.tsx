@@ -67,7 +67,7 @@ export default function LinkedInPage() {
   const [jobDesc, setJobDesc] = useState<string>("");
   return (
     <div className="w-full sm:w-full z-1000 ">
-      <div className="ml-0 lg:ml-[244px] px-[15px] lg:mb-[72px] ">
+      <div className="ml-0 lg:ml-[244px] px-[15px] lg:mb-[72px] my-5 ">
         <div className=" bg-[#18181B] rounded-[20px]   mb-7 px-[30px] py-[35px]">
           <div className="flex justify-between items-center ">
             <h1 className="uppercase text-[14px] font-semibold text-white pb-4">

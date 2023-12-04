@@ -9,6 +9,7 @@ import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "../LimitCard";
 import axios from "axios";
+import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 interface Props {
   setKeywords: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -177,9 +178,9 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
   }, [session?.user?.email]);
   return (
     <>
-      <div className="headline-generator bg-[#222027] py-8 px-3 lg:px-6 flex flex-col lg:flex-row align-center gap-5 lg:justify-center lg:items-center rounded-[10px] mb-[20px]">
+      <div className="headline-generator bg-[#222027] py-8 px-3 md:px-6 flex flex-col md:flex-row align-center gap-5 md:justify-center md:items-center rounded-[10px] mb-[20px]">
         <div
-          className={`icon hidden rounded-full  bg-gradient-to-b from-[#20AA89] to-[#65D4AC]  lg:flex justify-center items-center w-16 h-16`}
+          className={`icon hidden rounded-full  bg-gradient-to-b from-[#20AA89] to-[#65D4AC]  md:flex justify-center items-center w-16 h-16`}
         >
           <Image
             alt="Svg1"
@@ -190,12 +191,12 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
           />
         </div>
         <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
-          <div className="justify-between flex  lg:justify-start flex-row">
+          <div className="justify-between flex  md:justify-start flex-row">
             <h1 className="text-[16px] text-white font-bold">
               Keywords Generator
             </h1>
             <span
-              className={`rounded-full h-8 lg:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
+              className={`rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
             >
               {iconOfPackageBadge ? (
                 <Image
@@ -225,7 +226,7 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
           type="button"
           disabled={msgLoading || !session?.user?.email}
           onClick={() => handleGenerate()}
-          className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
+          className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
 
           // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
         >
@@ -250,6 +251,12 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
               </div>
             ) : (
               <div className="flex">
+                <Image
+                  src={buttonIconSrc}
+                  alt="bold icon"
+                  height={18}
+                  width={18}
+                />
                 <span
                   className="text-white ml-3 text-[15px] font-semibold"
                   // className={`text-black text-[15px] font-semibold`}

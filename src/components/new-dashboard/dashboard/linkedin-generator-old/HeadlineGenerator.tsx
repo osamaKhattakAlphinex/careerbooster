@@ -180,9 +180,9 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
   }, [session?.user?.email]);
   return (
     <>
-      <div className="headline-generator bg-[#222027] py-8 px-3 lg:px-6 flex flex-col lg:flex-row lg:align-center gap-5 justify-center items-center rounded-[10px] mb-[20px]">
+      <div className="headline-generator bg-[#222027] py-8 px-3 lg:px-6 flex flex-col md:flex-row md:align-center gap-5 justify-center items-center rounded-[10px] mb-[20px]">
         <div
-          className={`icon  hidden rounded-full  bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] lg:flex justify-center items-center lg:w-16 lg:h-16`}
+          className={`icon  hidden rounded-full  bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] md:flex justify-center items-center md:w-16 md:h-16`}
         >
           <Image
             alt="Svg1"
@@ -193,12 +193,12 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
           />
         </div>
         <div className="linkedintooltext flex  flex-col lg:w-[24.0625rem] gap-2 ml-2">
-          <div className="justify-between flex  lg:justify-start flex-row">
+          <div className="justify-between flex  md:justify-start flex-row">
             <h1 className="text-[16px] text-white font-bold">
               Headline Generator
             </h1>
             <span
-              className={`rounded-full flex justify-center items-center px-[16px] py-[6px] lg:mx-2  bg-[#02FF19] text-[12px] uppercase font-bold `}
+              className={`rounded-full flex justify-center items-center px-[16px] py-[6px] md:mx-2  bg-[#02FF19] text-[12px] uppercase font-bold `}
             >
               {/* {iconOfPackageBadge ? (
                 <Image
