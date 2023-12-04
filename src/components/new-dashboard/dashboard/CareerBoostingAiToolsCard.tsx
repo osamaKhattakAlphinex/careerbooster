@@ -1,24 +1,47 @@
 "use client";
 import Button from "@/components/Button";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import RecentResumeCard from "./resume-builder/RecentResumeCard";
 import AiGeneratedCoverLetters from "./cover-letter-generator/AiGeneratedCoverLetters";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import CoverLetterCardSingle from "./cover-letter-generator/CoverLetterCardSingle";
+import ConsultingBidCardSingle from "./consulting-bids-generator/ConsultingBidCardSingle";
+import EmailCardSingle from "@/components/new-dashboard/dashboard/email-generator/EmailCardSingle";
 
 const tabOptions = [
   { name: "Resumes", value: "resumemaker" },
   { name: "Cover Letter", value: "cover-letter" },
-  { name: "Consulting Bids", value: "proposals" },
-  { name: "LinkedIn", value: "linkedin" },
+  { name: "Consulting Bids", value: "consulting-bids" },
+  { name: "Email Bot", value: "email-bot" },
 ];
 
 const CareerBoostingAiToolsCard = () => {
+  const componentRef = useRef<any>(null);
   const [activeTab, setActiveTab] = useState("resumemaker");
   const historyProps = {
     dataSource: "coverLetters",
     Component: (card: any) => (
       <CoverLetterCardSingle card={card} source="dashboard" />
+    ),
+  };
+  const historyProp = {
+    dataSource: "consultingBids",
+    Component: (card: any) => (
+      <ConsultingBidCardSingle
+        card={card}
+        // source="dashboard"
+        componentRef={componentRef}
+      />
+    ),
+  };
+  const historyProps1 = {
+    dataSource: "emails",
+    Component: (card: any) => (
+      <EmailCardSingle
+        card={card}
+        // source="dashboard"
+        componentRef={componentRef}
+      />
     ),
   };
   return (
@@ -41,18 +64,16 @@ const CareerBoostingAiToolsCard = () => {
           <PreviouslyGeneratedList {...historyProps} />
         </div>
       )}
-      {activeTab === "proposals" && (
-        <h1 className="text-gray-100">
-          Consulting BidsConsulting BidsConsulting BidsConsulting BidsConsulting
-          BidsConsulting BidsConsulting BidsConsulting BidsConsulting
-          BidsConsulting BidsConsulting BidsConsulting BidsConsulting
-          BidsConsulting BidsConsulting BidsConsulting BidsConsulting
-          BidsConsulting BidsConsulting BidsConsulting BidsConsulting
-          BidsConsulting BidsConsulting BidsConsulting BidsConsulting
-          BidsConsulting BidsConsulting BidsConsulting BidsConsulting Bids
-        </h1>
+      {activeTab === "consulting-bids" && (
+        <div className="my-5">
+          <PreviouslyGeneratedList {...historyProp} />
+        </div>
       )}
-      {activeTab === "linkedin" && <h1 className="text-gray-100">1</h1>}
+      {activeTab === "email-bot" && (
+        <div className="my-5">
+          <PreviouslyGeneratedList {...historyProps1} />
+        </div>
+      )}
     </div>
   );
 };

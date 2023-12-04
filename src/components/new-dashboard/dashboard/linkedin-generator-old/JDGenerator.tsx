@@ -14,6 +14,7 @@ import {
 import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "../LimitCard";
 import axios from "axios";
+import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 interface Props {
   setJobDesc: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -232,7 +233,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
           type="button"
           disabled={msgLoading || !session?.user?.email}
           onClick={() => handleGenerate()}
-          className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
+          className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full md:px-[25px] px-[32px] py-[12px] md:ml-auto`}
 
           // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
         >
@@ -256,12 +257,19 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                 Please wait...
               </div>
             ) : (
+              <div className="flex">
+              <Image
+                  src={buttonIconSrc}
+                  alt="bold icon"
+                  height={18}
+                  width={18}
+                />
               <span className="text-white ml-3 text-[15px] font-semibold">
                 {/* <span className={`text-black text-[15px] font-semibold`}> */}
                 {/* Upgrade Plan */}
                 Generate Description
                 {/* </span> */}
-              </span>
+              </span></div>
             )}
           </span>
         </button>

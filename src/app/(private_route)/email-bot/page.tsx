@@ -335,9 +335,9 @@ const PersonalizedEmailBot = () => {
           <PreviouslyGeneratedList {...historyProps} />
           {/* <MainCoverLetterTool /> */}
           <>
-            <div className=" bg-[#17151B] rounded-[20px]  px-[30px] py-[41px] flex flex-col gap-5 ">
+            <div className=" bg-[#17151B] rounded-[20px] px-4 lg:px-[30px] py-[41px] flex flex-col gap-5 ">
               {/* header */}
-              <div className="flex gap-2 flex-col lg:flex-row  justify-between items-center">
+              <div className="flex gap-2 flex-col md:flex-row  justify-between items-center">
                 <h3 className=" text-sm uppercase text-white font-bold">
                   Generate Emails
                 </h3>
@@ -369,7 +369,7 @@ const PersonalizedEmailBot = () => {
               <div className="flex flex-col gap-5 lg:px-0 ">
                 <label
                   htmlFor="default-radio-1"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-2 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white lg:w-[400px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[290px] lg:w-[400px] ${
                     selectedOption === "profile"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -393,7 +393,7 @@ const PersonalizedEmailBot = () => {
                 </label>
                 <label
                   htmlFor="default-radio-2"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-2 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white lg:w-[290px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[220px] lg:w-[290px] ${
                     selectedOption === "file"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -439,7 +439,7 @@ const PersonalizedEmailBot = () => {
                     rows={6}
                     onChange={(e) => setJobDescription(e.target.value)}
                     placeholder="Copy the job description for the position you are applying and paste it here to generate a tailor cover letter."
-                    className="w-full  px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border pt-3"
+                    className="w-full px-3 lg:px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border pt-3"
                   />
                 </div>
                 {!isNaN(availablePercentageEmail) &&
@@ -512,7 +512,7 @@ const PersonalizedEmailBot = () => {
                   </div>
                 </div> */}
                   <div
-                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px] shadow ${
+                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] md:p-[30px] shadow ${
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >
@@ -571,7 +571,7 @@ const PersonalizedEmailBot = () => {
                       )}
                     </div>
                   </div>
-                  <div className="buttons mt-5 flex flex-col lg:flex-row gap-3">
+                  <div className="buttons mt-5 flex flex-col md:flex-row gap-3">
                     {!isNaN(availablePercentageEmail) &&
                       availablePercentageEmail !== 0 && (
                         <button
