@@ -1,4 +1,4 @@
-import { rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
+import { eyeIcon, rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
 import PencilLine from "@/../public/icon/PencilLine.png";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import Image from "next/image";
@@ -86,12 +86,7 @@ const SingleRecentResumeCard = ({
           onClick={handleOnView}
           className=" w-[36px]  flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
         >
-          <Image
-            width={20}
-            height={20}
-            src={PencilLine}
-            alt="Image Not Found"
-          />
+         {eyeIcon}
         </button>
         <button
           type="button"

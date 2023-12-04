@@ -9,7 +9,7 @@ import ReactToPrint from "react-to-print";
 import Html2Pdf from "js-html2pdf";
 import { resetCoverLetter, setCoverLetter } from "@/store/coverLetterSlice";
 import Image from "next/image";
-import { rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
+import { eyeIcon, rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
 import PencilLine from "@/../public/icon/PencilLine.png";
 import { useRouter } from "next/navigation";
 
@@ -61,8 +61,8 @@ const CoverLetterCardSingle = ({
   if (!card) return <h1>Loading </h1>;
 
   return (
-    <div className=" lg:w-[32%]  ">
-      <div className="flex flex-col   bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[14px] ">
+    <div className="w-[100%]  md:w-[32%]  ">
+      <div className="flex flex-col bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[14px] ">
         <div className="">
           <div className="mx-3 border-gray-600 leading-6 w-full">
             <h2
@@ -85,7 +85,8 @@ const CoverLetterCardSingle = ({
             onClick={() => handleOnView(card)}
             className=" w-[36px] flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
           >
-            <Image src={PencilLine} alt="Image Not Found" />
+            {/* <Image src={PencilLine} alt="Image Not Found" /> */}
+            {eyeIcon}
           </button>
           <button
             type="button"

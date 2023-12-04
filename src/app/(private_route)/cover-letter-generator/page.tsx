@@ -362,14 +362,14 @@ export default function CoverLetterPage() {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] ">
+        <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] my-5 ">
           {/* <AiGeneratedCoverLetters /> */}
           <PreviouslyGeneratedList {...historyProps} />
           {/* <MainCoverLetterTool /> */}
           <>
-            <div className=" bg-[#17151B] rounded-[20px]  px-[30px] py-[41px] flex flex-col gap-5 ">
+            <div className=" bg-[#17151B] rounded-[20px] px-4 lg:px-[30px] py-8 lg:py-[41px] flex flex-col gap-5 ">
               {/* header */}
-              <div className="flex flex-col gap-2 lg:flex-row  justify-between items-center">
+              <div className="flex flex-col gap-2 md:flex-row  justify-between items-center">
                 <h3 className=" text-sm uppercase text-white font-bold">
                   Generate Cover Letter
                 </h3>
@@ -403,7 +403,7 @@ export default function CoverLetterPage() {
               <div className="flex flex-col gap-5 lg:px-0 ">
                 <label
                   htmlFor="default-radio-1"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-2 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white lg:w-[400px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[290px] lg:w-[400px] ${
                     selectedOption === "profile"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -430,7 +430,7 @@ export default function CoverLetterPage() {
                 </label>
                 <label
                   htmlFor="default-radio-2"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-2 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white lg:w-[290px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[220px] lg:w-[290px] ${
                     selectedOption === "file"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -468,7 +468,7 @@ export default function CoverLetterPage() {
                 <div className="w-full flex flex-col">
                   <label
                     htmlFor="job-title"
-                    className=" font-bold text-[23px] text-white flex py-[20px] gap-[3px]"
+                    className=" font-bold lg:text-[23px] text-white flex lg:py-[20px] gap-[3px]"
                   >
                     Paste Your Job Description
                     <span className="text-[#F04248] text-[19px]">*</span>
@@ -479,7 +479,7 @@ export default function CoverLetterPage() {
                     rows={6}
                     onChange={(e) => setJobDescription(e.target.value)}
                     placeholder="Copy the job description for the position you are applying and paste it here to generate a tailor cover letter."
-                    className="w-full  px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border pt-3"
+                    className="w-full px-3 lg:px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border pt-3"
                   />
                 </div>
                 {!isNaN(availablePercentageCoverLetter) &&
@@ -553,7 +553,7 @@ export default function CoverLetterPage() {
                     </div>
                   </div> */}
                   <div
-                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px] shadow ${
+                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] shadow ${
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >
@@ -591,7 +591,7 @@ export default function CoverLetterPage() {
                       )}
                     </div>
                   </div>
-                  <div className="buttons mt-5 flex gap-3">
+                  <div className="buttons mt-5 flex flex-col flex-wrap md:flex-row gap-3">
                     {!isNaN(availablePercentageCoverLetter) &&
                       availablePercentageCoverLetter !== 0 && (
                         <button
@@ -632,7 +632,7 @@ export default function CoverLetterPage() {
                               d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
                             />
                           </svg>
-                          <span className="text-white text-[15px] font-semibold">
+                          <span className="text-white md:text-[15px]  font-semibold">
                             Re-generate Cover Letter
                           </span>
                         </button>

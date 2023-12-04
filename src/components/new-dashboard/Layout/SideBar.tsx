@@ -116,7 +116,7 @@ const SideBar = () => {
                   alt=""
                   className="w-10 h-10 object-cover border-[1px] border-fuchsia-600 rounded-full"
                 /> */}
-                <div className="w-10 h-10 flex items-center justify-center bg-gray-300 text-gray-600 rounded-full">
+                <div className="w-10 h-10 uppercase flex items-center justify-center bg-gray-300 text-gray-600 rounded-full">
                   {userData.firstName[0]}
                   {userData.lastName[0]}
                 </div>

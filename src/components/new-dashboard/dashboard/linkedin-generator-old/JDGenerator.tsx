@@ -184,9 +184,9 @@ const JDGenerator = ({ setJobDesc }: Props) => {
   }, [session?.user?.email]);
   return (
     <>
-      <div className="headline-generator  bg-[#222027] py-8 px-3 lg:px-6 flex flex-col lg:flex-row  align-center gap-5 lg:justify-center lg:items-center rounded-[10px] mb-[20px]">
+      <div className="headline-generator  bg-[#222027] py-8 px-3 md:px-6 flex flex-col md:flex-row  align-center gap-5 md:justify-center md:items-center rounded-[10px] mb-[20px]">
         <div
-          className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] lg:flex justify-center items-center w-16 h-16`}
+          className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16`}
         >
           <Image
             alt="Svg1"
@@ -197,12 +197,12 @@ const JDGenerator = ({ setJobDesc }: Props) => {
           />
         </div>
         <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
-          <div className="justify-between flex  lg:justify-start flex-row ">
+          <div className="justify-between flex  md:justify-start flex-row ">
             <h1 className="text-[16px] text-white font-bold">
               Job Description Generator
             </h1>
             <span
-              className={`rounded-full h-8 lg:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
+              className={`rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
             >
               {iconOfPackageBadge ? (
                 <Image

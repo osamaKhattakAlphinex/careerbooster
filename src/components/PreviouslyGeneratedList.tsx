@@ -11,7 +11,7 @@ const PreviouslyGeneratedList = ({ Component }: Props) => {
   const userData = useSelector((state: any) => state.userData);
   if (!userData) return;
   return (
-    <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-[24px] py-[35px]">
+    <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-4 lg:px-[24px] py-[35px]">
       <div className="flex justify-between items-center ">
         <h1 className="uppercase lg:text-[14px] text-[12px] font-semibold lg:pr-0 pr-4">
           Your AI Generated Cover Letters
