@@ -44,6 +44,7 @@ const SideBar = () => {
   const userData = useSelector((state: any) => state.userData);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState(null);
   const router = useRouter();
   // const pagesArray = [
   //   "/dashboard",
@@ -150,7 +151,8 @@ const SideBar = () => {
                   {item.text !== "Logout" ? (
                     <Link
                       href={item.url}
-                      className="px-7 text-base flex capitalize items-center "
+                      className={`px-7 text-base flex capitalize items-center 
+                        `}
                       onMouseOver={() => handleMouseOver(index)}
                       onMouseOut={handleMouseOut}
                       style={{
@@ -162,10 +164,26 @@ const SideBar = () => {
                         textDecoration: "none",
                       }}
                     >
-                      <div className="w-6 h-6 inline-block pr-2">
+                      <div
+                        className={`w-6 h-6 inline-block pr-2 hover:text-white 
+                        ${
+                          pathname === item.url
+                            ? "text-white"
+                            : "text-neutral-500"
+                        }
+                         `}
+                      >
                         {item.icon}
                       </div>
-                      <h2 className="text-base ml-3">{item.text}</h2>
+                      <h2
+                        className={`text-base ml-3 hover:text-white ${
+                          pathname === item.url
+                            ? "text-white "
+                            : "text-neutral-500"
+                        }`}
+                      >
+                        {item.text}  
+                      </h2>
                     </Link>
                   ) : (
                     <button
