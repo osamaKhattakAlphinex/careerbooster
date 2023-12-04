@@ -15,7 +15,7 @@ const Footer = () => {
     "/email-bot",
     "/consulting-bids-bot",
     "/subscribe",
-    "/subscribed"
+    "/subscribed",
   ];
   if (
     pathname === "/login" ||
@@ -126,7 +126,10 @@ const Footer = () => {
                   </form> */}
                     <ul className="list-unstyled d-flex flex-wrap align-center justify-center justify-md-start gap-3 social-list mb-0 mt-5">
                       <li>
-                        <Link href="https://www.facebook.com/careerboosterai">
+                        <Link
+                          href="https://www.facebook.com/careerboosterai"
+                          target="_blank"
+                        >
                           <svg
                             className="theme-text-2 "
                             xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +154,10 @@ const Footer = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link href="https://www.linkedin.com/company/careerboosterai/">
+                        <Link
+                          href="https://www.linkedin.com/company/careerboosterai/"
+                          target="_blank"
+                        >
                           <svg
                             className="w-4 h-4 
                           theme-text-2 "
@@ -170,7 +176,10 @@ const Footer = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link href="https://www.instagram.com/careerboosterai/">
+                        <Link
+                          href="https://www.instagram.com/careerboosterai/"
+                          target="_blank"
+                        >
                           <svg
                             className="theme-text-2 "
                             xmlns="http://www.w3.org/2000/svg"
