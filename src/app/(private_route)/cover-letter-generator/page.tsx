@@ -325,7 +325,7 @@ export default function CoverLetterPage() {
     //   setStreamedData(userData.results.coverLetter);
     // }
     console.log("in useEffect userData: ");
-    if (!streamedData) {
+    if (streamedData !== "") {
       // console.log("userData CoverLetter: ", userData.results.coverLetter);
       setStreamedData(coverLetter.coverLetterText);
     }
@@ -357,7 +357,7 @@ export default function CoverLetterPage() {
       "in UseEffect coverLetter.coverLetterText",
       coverLetter.coverLetterText.length
     );
-    if (coverLetter.coverLetterText.length !== 0) {
+    if (coverLetter.coverLetterText.length === 0) {
       console.log("inside ");
       setStreamedData(coverLetter.coverLetterText);
     }
