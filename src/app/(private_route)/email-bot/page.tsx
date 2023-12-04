@@ -13,6 +13,11 @@ import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
+import { makeid } from "@/helpers/makeid";
+import { setEmail } from "@/store/emailSlice";
+
+import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
+import EmailCardSingle from "@/components/new-dashboard/dashboard/email-generator/EmailCardSingle";
 
 const PersonalizedEmailBot = () => {
   const componentRef = useRef<any>(null);
@@ -162,14 +167,35 @@ const PersonalizedEmailBot = () => {
                 user = await JSON.parse(res.result);
               }
               if (res.success) {
-                const updatedObject = {
-                  ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    email_generation: user.userPackageUsed.email_generation,
-                  },
+                // email payload
+
+                const payload = {
+                  id: makeid(),
+                  jobDescription: jobDescription,
+                  emailText: tempText,
+                  generatedOnDate: new Date().toISOString(),
+                  generatedViaOption: selectedOption,
+                  userEmail: session?.user?.email,
                 };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
+
+                const emailsResponse = await axios.post(
+                  "/api/emailBot",
+                  payload
+                );
+
+                if (emailsResponse.data.success) {
+                  const updatedObject = {
+                    ...userData,
+                    userPackageUsed: {
+                      ...userData.userPackageUsed,
+                      email_generation: user.userPackageUsed.email_generation,
+                    },
+                    emails: emailsResponse.data.result.emails,
+                  };
+
+                  dispatch(setUserData({ ...userData, ...updatedObject }));
+                  dispatch(setEmail(payload));
+                }
               }
             });
           } else {
@@ -222,12 +248,24 @@ const PersonalizedEmailBot = () => {
       setStreamedData(userData.results.emailGeneration);
     }
   }, [userData]);
+
+  const historyProps = {
+    dataSource: "emails",
+    Component: (card: any) => (
+      <EmailCardSingle
+        card={card}
+        // source="dashboard"
+        componentRef={componentRef}
+      />
+    ),
+  };
+
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] ">
           {/* <AiGeneratedCoverLetters /> */}
-          {/* <PreviouslyGeneratedList {...historyProps} /> */}
+          <PreviouslyGeneratedList {...historyProps} />
           {/* <MainCoverLetterTool /> */}
           <>
             <div className=" bg-[#17151B] rounded-[20px]  px-[30px] py-[41px] flex flex-col gap-5 ">
@@ -341,14 +379,14 @@ const PersonalizedEmailBot = () => {
                   availablePercentageEmail !== 0 && (
                     <button
                       type="button"
-                      disabled={
-                        msgLoading ||
-                        !session?.user?.email ||
-                        !aiInputUserData ||
-                        selectedOption === "" ||
-                        (selectedOption === "file" && selectedFile === "") ||
-                        jobDescription === ""
-                      }
+                      // disabled={
+                      //   msgLoading ||
+                      //   !session?.user?.email ||
+                      //   !aiInputUserData ||
+                      //   selectedOption === "" ||
+                      //   (selectedOption === "file" && selectedFile === "") ||
+                      //   jobDescription === ""
+                      // }
                       onClick={handleGenerate}
                       className={`bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                         (msgLoading ||
