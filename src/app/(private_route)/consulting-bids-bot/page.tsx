@@ -41,7 +41,7 @@ const ConsultingBidsGenerator = () => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
-  const consultingBid = useSelector((state: any) => state.consultingBids);
+  const consultingBid = useSelector((state: any) => state.consultingBid);
   const { resumes } = userData;
   const copyBid = async (text: string) => {
     try {
@@ -278,11 +278,7 @@ const ConsultingBidsGenerator = () => {
   const historyProps = {
     dataSource: "consultingBids",
     Component: (card: any) => (
-      <ConsultingBidCardSingle
-        card={card}
-        // source="dashboard"
-        componentRef={componentRef}
-      />
+      <ConsultingBidCardSingle card={card} componentRef={componentRef} />
     ),
   };
 

@@ -59,7 +59,17 @@ const Footer = () => {
           </Link>
           <div className="flex lg:gap-[21px] gap-[8px]">
             {tabOption.map((item, i) => (
-              <a href={item.href} key={i} target="_blank">
+              <a
+                href={item.href}
+                key={i}
+                target={
+                  item.href === "https://www.facebook.com/careerboosterai" ||
+                  item.href ===
+                    "https://www.linkedin.com/company/careerboosterai/"
+                    ? "_blank"
+                    : ""
+                }
+              >
                 {item.icon}
               </a>
             ))}

@@ -52,9 +52,10 @@ export default function CoverLetterPage() {
           editorElement.innerHTML = coverLetter.coverLetterText;
         }
       }
-    } else {
-      dispatch(resetCoverLetter());
     }
+    // else {
+    //   dispatch(resetCoverLetter());
+    // }
   }, [isEditing]);
 
   // Function to save the edited content and exit editing mode
@@ -324,9 +325,8 @@ export default function CoverLetterPage() {
     //   console.log("userData CoverLetter: ", userData.results.coverLetter);
     //   setStreamedData(userData.results.coverLetter);
     // }
-    console.log("in useEffect userData: ");
+
     if (streamedData !== "") {
-      // console.log("userData CoverLetter: ", userData.results.coverLetter);
       setStreamedData(coverLetter.coverLetterText);
     }
 
@@ -334,7 +334,6 @@ export default function CoverLetterPage() {
   }, [userData]);
 
   useEffect(() => {
-    console.log("in UseEffect coverLetter");
     if (coverLetter.id !== "") {
       setShow(true);
     } else {
@@ -350,17 +349,7 @@ export default function CoverLetterPage() {
   };
 
   useEffect(() => {
-    console.log(streamedData.length, componentRef);
-  }, [streamedData]);
-  useEffect(() => {
-    console.log(
-      "in UseEffect coverLetter.coverLetterText",
-      coverLetter.coverLetterText.length
-    );
-    if (coverLetter.coverLetterText.length === 0) {
-      console.log("inside ");
-      setStreamedData(coverLetter.coverLetterText);
-    }
+    setStreamedData(coverLetter.coverLetterText);
   }, [coverLetter.coverLetterText]);
   const [uploadPdfFile, setUploadPdfFile] = useState<string>("useYourPersona");
   return (

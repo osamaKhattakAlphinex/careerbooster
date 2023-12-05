@@ -13,8 +13,8 @@ const store = configureStore({
     register: registerSlice,
     userData: userDataSlice,
     coverLetter: coverLetterSlice,
-    emails: emailSlice,
-    consultingBids: consultingBidSlice,
+    email: emailSlice,
+    consultingBid: consultingBidSlice,
   },
 });
 

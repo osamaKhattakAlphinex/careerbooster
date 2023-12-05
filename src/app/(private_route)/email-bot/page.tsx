@@ -43,7 +43,7 @@ const PersonalizedEmailBot = () => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
-  const email = useSelector((state: any) => state.emails);
+  const email = useSelector((state: any) => state.email);
   const { resumes } = userData;
   const copyEmail = async (text: string) => {
     try {
@@ -319,11 +319,7 @@ const PersonalizedEmailBot = () => {
   const historyProps = {
     dataSource: "emails",
     Component: (card: any) => (
-      <EmailCardSingle
-        card={card}
-        // source="dashboard"
-        componentRef={componentRef}
-      />
+      <EmailCardSingle card={card} componentRef={componentRef} />
     ),
   };
 

@@ -29,7 +29,7 @@ const CareerBoostingAiToolsCard = () => {
     Component: (card: any) => (
       <ConsultingBidCardSingle
         card={card}
-        // source="dashboard"
+        source="dashboard"
         componentRef={componentRef}
       />
     ),
@@ -39,7 +39,7 @@ const CareerBoostingAiToolsCard = () => {
     Component: (card: any) => (
       <EmailCardSingle
         card={card}
-        // source="dashboard"
+        source="dashboard"
         componentRef={componentRef}
       />
     ),
