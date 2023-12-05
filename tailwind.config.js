@@ -15,6 +15,8 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       screens: {
+        xs: "480px",
+
         sm: "640px",
         // => @media (min-width: 640px) { ... }
 
@@ -37,7 +39,7 @@ module.exports = {
     plugin(function ({ addVariant }) {
       addVariant("current", "&.active");
     }),
-      require("tailwindcss-animate")
-],
+    require("tailwindcss-animate"),
+  ],
   darkMode: ["class"],
 };

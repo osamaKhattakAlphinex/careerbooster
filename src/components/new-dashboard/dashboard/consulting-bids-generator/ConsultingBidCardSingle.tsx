@@ -62,7 +62,7 @@ const ConsultingBidCardSingle = ({
   if (!card) return <h1>Loading </h1>;
 
   return (
-    <div className="flex-item w-full md:w-[32%]  ">
+    <div className="xs:w-[100%] sm:w-[100%] md:w-[50%] lg:w-[32%]  ">
       <div className="flex flex-col   bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[14px] ">
         <div className="">
           <div className="mx-3 border-gray-600 leading-6 w-full">

@@ -34,7 +34,7 @@ const RecentResumeCard = ({
         <div className="flex flex-wrap  gap-2 ">
           {resumes &&
             resumes.map((resume: any) => (
-              <div key={resume.id} className="w-full md:w-[35%]  ">
+              <div key={resume.id} className="lg:w-[32%]  ">
                 <SingleRecentResumeCard
                   key={resume.id}
                   resume={resume}
