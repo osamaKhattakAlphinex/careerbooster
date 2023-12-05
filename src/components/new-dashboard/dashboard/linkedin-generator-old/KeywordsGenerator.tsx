@@ -206,7 +206,7 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
           />
         </div>
         <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
-          <div className=" flex items-center justify-between gap-4 md:justify-start flex-row">
+          <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
             <h1 className="text-[16px] text-white font-bold">
               Keywords Generator
             </h1>
