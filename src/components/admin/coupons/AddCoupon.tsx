@@ -3,9 +3,24 @@ import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { makeid } from "@/helpers/makeid";
-import { loadStripe } from "@stripe/stripe-js";
-import { stripe } from "@/lib/stripe";
+
+type Coupon = {
+  name?: string;
+  amount_off?: number;
+  currency?: string;
+  duration: "once" | "repeating" | "forever";
+  duration_in_months: number;
+  percent_off?: number;
+  redeem_by?: number; // timestamp - expiration
+  valid?: "yes" | "no";
+  // times_redeemed?: number;
+  // max_redemptions?: number;
+  // livemode: boolean;
+  // id: string;
+  // object?: string;
+  // created: number;
+  // metadata: {};
+};
 
 type Props = {
   getCoupons: () => void;
@@ -57,80 +72,82 @@ export const FeatureRow = ({
   );
 };
 
-const addCouponToStripe = async (data: any) => {
-  const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
-  // const stripe: any = await loadStripe(STRIPE_PK);
-  // console.log(stripe);
-
-  const couponDetails = await stripe.coupons.create({
-    id: data.name,
-    // object:"coupon",
-    amount_off: data.amount_off,
-    currency: data.currency,
-    duration: data.duration,
-    duration_in_months: data.duration_in_months,
-    name: "coupon first",
-    percent_off: 20,
-  });
-  console.log(couponDetails);
-};
 const AddCoupon = ({ getCoupons }: Props) => {
   // const addFeatureToolTip = (toolTip: string[]) => {
   //   setFeaturesToolTips([...featuresToolTips, toolTip]);
   // };
 
+  const initailsValues: Coupon = {
+    name: "",
+    amount_off: 0,
+    currency: "usd",
+    duration: "once",
+    duration_in_months: 0,
+    percent_off: 0,
+    redeem_by: 0,
+    valid: "yes",
+    // times_redeemed: 0,
+    // max_redemptions: -1,
+    // id: string;
+    // livemode: boolean;
+    // object?: string;
+    // created: number;
+    // metadata: {};
+  };
+
   const [popUpModel, setPopUpModel] = useState(false);
   const formik = useFormik({
-    initialValues: {
-      name: "",
-      amount_off: "",
-      category: "standard",
-      status: "active",
-      duration: "once",
-      currency: "usd",
-      duration_in_months: 0,
-      expiryDate: "",
-    },
+    initialValues: initailsValues,
     validationSchema: Yup.object().shape({
-      name: Yup.string().required("Please Name Your Coupon"),
-      category: Yup.string().required("Please Select One Package"),
-      amount_off: Yup.number()
-        .required("Please Enter Your Amount")
-        .min(0, "Minimum Value is 0"),
+      name: Yup.string().required("Name for coupon is required"),
+      percent_off: Yup.number()
+        .required("Please Enter Your Percent Off percent")
+        .min(1, "Minimum Value is 0"),
+
+      amount_off: Yup.number().when("percent_off", {
+        is: 0,
+        then: () =>
+          Yup.number()
+            .required("Please Enter Your Amount Off price")
+            .min(1, "Minimum Value is 0"),
+      }),
+
       duration_in_months: Yup.number()
         .required("Please Enter Your Amount")
-        .min(0, "Minimum Value is 0"),
+        .min(1, "Minimum Value is 0"),
       duration: Yup.string().required("Please Select duration"),
-      status: Yup.string().required(
-        'Please select either "Active" or "Inactive"'
-      ),
-      currency: Yup.string().required("Please select currency"),
-      expiryDate: Yup.string()
-        .required("Please enter the expiry date")
-        .matches(
-          /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-          "Please use the format DD/MM/YYYY"
-        ),
+      currency: Yup.string()
+        .when("amount_off", {
+          is: 0,
+          then: () =>
+            Yup.number()
+              .required("Please Enter Your Amount Off price")
+              .min(1, "Minimum Value is 0"),
+        })
+        .required("Please select currency"),
     }),
     onSubmit: async (values, action) => {
-      const data = {
-        name: values.name,
-        amount_off: values.amount_off,
-        duration: values.duration,
-        status: values.status,
-        duration_in_months:
-          values.duration === "repeating" ? values.duration_in_months : null,
-        currency: values.currency,
-        livemode: false,
-        // percent_off: null,
-        forUserPackageCategory: values.category,
-        expiresAt: new Date(values.expiryDate),
-        valid: values.status === "active" ? true : false,
-        times_redeemed: 0,
-      };
-      const res = await axios.post("/api/coupons", {
-        ...data,
-      });
+      console.log(values);
+
+      // const data = {
+      //   name: values.name,
+      //   amount_off: values.amount_off,
+      //   duration: values.duration,
+      //   status: values.status,
+      //   duration_in_months:
+      //     values.duration === "repeating" ? values.duration_in_months : null,
+      //   currency: values.currency,
+      //   livemode: false,
+      //   // percent_off: null,
+      //   forUserPackageCategory: values.category,
+      //   expiresAt: new Date(values.expiryDate),
+      //   valid: values.status === "active" ? true : false,
+      //   times_redeemed: 0,
+      // };
+      // const res = await axios.post("/api/coupons", {
+      //   ...data,
+      // }
+      // );
       // console.log("api response:", res);
       // addCouponToStripe(data);
       getCoupons();
@@ -214,12 +231,13 @@ const AddCoupon = ({ getCoupons }: Props) => {
 
             <form onSubmit={formik.handleSubmit}>
               <div className="grid gap-4 mb-4 sm:grid-cols-2">
+                {/* Name of the coupan */}
                 <div>
                   <label
                     htmlFor="name"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Coupon Code
+                    Coupon Name
                   </label>
                   <input
                     onChange={formik.handleChange}
@@ -235,35 +253,10 @@ const AddCoupon = ({ getCoupons }: Props) => {
                     <p className="text-red-600 pt-3">{formik.errors.name}</p>
                   )}
                 </div>
+                {/* ammount off amount */}
                 <div>
                   <label
-                    htmlFor="type"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Select For Category
-                  </label>
-                  <select
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.category}
-                    id="category"
-                    name="category"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  >
-                    <option value="standard" selected>
-                      Standard
-                    </option>
-                    <option value="premium">Premium</option>
-                  </select>
-                  {formik.touched.category && formik.errors.category && (
-                    <p className="text-red-600 pt-3">
-                      {formik.errors.category}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label
-                    htmlFor="amount"
+                    htmlFor="amount_off"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Amount-Off
@@ -284,37 +277,57 @@ const AddCoupon = ({ getCoupons }: Props) => {
                     </p>
                   )}
                 </div>
-
+                {/* percentage off percent */}
                 <div>
                   <label
-                    htmlFor="category"
+                    htmlFor="percent_off"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Status
+                    Percent-Off
+                  </label>
+                  <input
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.percent_off}
+                    type="number"
+                    name="percent_off"
+                    id="percent_off"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="0"
+                  />
+                  {formik.touched.percent_off && formik.errors.percent_off && (
+                    <p className="text-red-600 pt-3">
+                      {formik.errors.percent_off}
+                    </p>
+                  )}
+                </div>
+                {/*  valid : yes or no  */}
+                <div>
+                  <label
+                    htmlFor="valid"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Valid
                   </label>
                   <select
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.status}
-                    id="category"
-                    name="status"
+                    value={formik.values.valid}
+                    id="valid"
+                    name="valid"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   >
-                    <option value="active" selected>
-                      Active
-                    </option>
-                    <option value="inactive">Inactive</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
                   </select>
-                  {formik.touched.status && formik.errors.status && (
-                    <p className="text-red-600 pt-3">{formik.errors.status}</p>
-                  )}
                 </div>
               </div>
 
               <div className="grid gap-4 mb-4 sm:grid-cols-2">
+                {/* duration  once | repeating | forever */}
                 <div>
                   <label
-                    htmlFor="type"
+                    htmlFor="duration"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Duration
@@ -339,9 +352,10 @@ const AddCoupon = ({ getCoupons }: Props) => {
                     </p>
                   )}
                 </div>
+                {/* duration in months */}
                 <div>
                   <label
-                    htmlFor="amount"
+                    htmlFor="duration_in_months"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Duration In Months
@@ -363,9 +377,10 @@ const AddCoupon = ({ getCoupons }: Props) => {
                       </p>
                     )}
                 </div>
+                {/* currency */}
                 <div>
                   <label
-                    htmlFor="type"
+                    htmlFor="currency"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Currency
@@ -388,9 +403,10 @@ const AddCoupon = ({ getCoupons }: Props) => {
                     </p>
                   )}
                 </div>
+                {/* redeem by date i.e expiration data*/}
                 <div>
                   <label
-                    htmlFor="expiryDate"
+                    htmlFor="redeem_by"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Expiry Date (DD/MM/YYYY)
@@ -398,16 +414,16 @@ const AddCoupon = ({ getCoupons }: Props) => {
                   <input
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.expiryDate}
+                    value={formik.values.redeem_by}
                     type="text"
-                    name="expiryDate"
-                    id="expiryDate"
+                    name="redeem_by"
+                    id="redeem_by"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="DD/MM/YYYY"
                   />
-                  {formik.touched.expiryDate && formik.errors.expiryDate && (
+                  {formik.touched.redeem_by && formik.errors.redeem_by && (
                     <p className="text-red-600 pt-3">
-                      {formik.errors.expiryDate}
+                      {formik.errors.redeem_by}
                     </p>
                   )}
                 </div>
@@ -417,9 +433,6 @@ const AddCoupon = ({ getCoupons }: Props) => {
                 type="submit"
                 className="btn theme-outline-btn "
                 style={{ display: "flex" }}
-                // onClick={() => {
-                //   alert("clicked");
-                // }}
               >
                 <svg
                   className="mr-1 -ml-1 w-6 h-6"

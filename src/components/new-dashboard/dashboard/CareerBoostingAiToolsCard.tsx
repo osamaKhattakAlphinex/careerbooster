@@ -51,7 +51,7 @@ const CareerBoostingAiToolsCard = () => {
       <div className="flex mt-3">
         {tabOptions.map((option, index) => (
           <Button
-            key={index}
+            key={`tab-${index}`}
             btnText={option.name}
             isActive={activeTab === option.value}
             onClick={() => setActiveTab(option.value)}

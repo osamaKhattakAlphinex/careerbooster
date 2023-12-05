@@ -13,40 +13,51 @@ import UpdateCoupon from "./UpdateCoupon";
 import ConfirmationModal from "@/components/utilities/form-elements/ConfirmationModal";
 
 type Coupon = {
-  _id?: string;
-  name: string;
-  code: string;
-  amount_off: number;
-  currency: string;
+  id: string;
+  name?: string;
+  amount_off?: number;
+  currency?: string;
   duration: "once" | "repeating" | "forever";
-  duration_in_months: number;
+  duration_in_months?: number;
   livemode: boolean;
-  percent_off: number;
-  forUserPackageCategory: "basic" | "standard" | "premium";
-  expiresAt: Date;
-  valid: boolean;
-  times_redeemed: number;
-  status: "active" | "inactive";
+  percent_off?: number;
+  redeem_by?: number;
+  valid?: boolean;
+  times_redeemed?: number;
+  max_redemptions?: number;
+  object?: string;
+  created: number;
+  metadata: {};
 };
-const handleDelete = (confirmed: any) => {
-  if (confirmed) {
-    // If confirmed, perform the deletion action or other logic here
-    // For example:
-    // deleteCoupon(record._id);
-    console.log("Deletion confirmed");
-  } else {
-    // If canceled, handle cancellation or do nothing
-    console.log("Deletion canceled");
-  }
-};
+
 const ViewCoupons = ({}) => {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const confirmationModalRef: React.MutableRefObject<any> = useRef(null);
   const handleOpenConfirmationModal = (record: Coupon) => {
     if (confirmationModalRef.current) {
-      confirmationModalRef.current.openModal(true, record._id);
+      confirmationModalRef.current.openModal(true, record.id);
     }
   };
+
+  const toDateAndTime = (timestamp: number) => {
+    const date = new Date(timestamp * 1000);
+    const formattedDate = date.toLocaleString();
+    return formattedDate;
+  };
+
+  const handleDelete = async (couponCode: string) => {
+    const consent = confirm("Are you sure you want to delete this coupan?");
+    if (!consent) return;
+    try {
+      let response: any = await axios.delete(`/api/coupons/${couponCode}`);
+      if (response?.data.success) {
+        console.log("coupan deleted");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getCoupons = async () => {
     try {
       let response: any = await axios.get("/api/coupons");
@@ -92,19 +103,25 @@ const ViewCoupons = ({}) => {
                   <thead className="text-[16px] text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                       <th scope="col" className="px-4 py-4">
-                        Code
+                        Coupon ID / CODE
                       </th>
                       <th scope="col" className="px-4 py-3">
-                        Used for Category
+                        Name
                       </th>
                       <th scope="col" className="px-4 py-3">
                         Amount-Off
                       </th>
                       <th scope="col" className="px-4 py-3">
-                        Status
+                        Percent-Off
+                      </th>
+                      <th scope="col" className="px-4 py-3">
+                        Valid
                       </th>
                       <th scope="col" className="px-4 py-3">
                         Duration
+                      </th>
+                      <th scope="col" className="px-4 py-3">
+                        Creation Date
                       </th>
                       <th scope="col" className="px-4 py-3">
                         Expiry Date
@@ -128,72 +145,62 @@ const ViewCoupons = ({}) => {
                             scope="row"
                             className="px-4 py-3 font-medium whitespace-nowrap"
                           >
-                            {coupon?.name}
+                            {coupon?.id}
                           </th>
+                          <td className="px-4 py-3">{coupon?.name}</td>
                           <td className="px-4 py-3">
-                            {coupon?.forUserPackageCategory}
+                            {coupon.amount_off && `${coupon?.amount_off} $`}
                           </td>
-                          <td className="px-4 py-3">{coupon?.amount_off}</td>
-                          <td className="px-4 py-3 ">{coupon?.status}</td>
+                          <td className="px-4 py-3">
+                            {coupon?.percent_off && `${coupon?.percent_off} %`}
+                          </td>
+                          <td className="px-4 py-3">
+                            {coupon?.valid ? "Yes" : "No"}
+                          </td>
                           <td className="px-4 py-3">{coupon?.duration}</td>
                           <td className="px-4 py-3">
-                            {coupon?.expiresAt
-                              ? new Date(coupon.expiresAt).toLocaleDateString()
-                              : "No expiry date"}
+                            {coupon?.created
+                              ? toDateAndTime(coupon.created)
+                              : "---"}
+                          </td>
+                          <td className="px-4 py-3 italic">
+                            {coupon?.redeem_by
+                              ? toDateAndTime(coupon.redeem_by)
+                              : "Null"}
                           </td>
                           <td className="px-4 py-3">
                             {coupon?.times_redeemed}
                           </td>
                           <td className="px-4 py-3 flex items-center justify-end">
-                            <ul
-                              className="py-1 text-sm flex"
-                              aria-labelledby="apple-imac-27-dropdown-button"
+                            <button
+                              onClick={() => handleDelete(coupon.id)}
+                              type="button"
+                              className="flex w-full items-center py-2 pr-2 hover:text-[#e6f85e]"
                             >
-                              <li>
-                                <UpdateCoupon
-                                  userCoupon={coupon}
-                                  getCoupons={getCoupons}
-                                />
-                              </li>
-                              <li>
-                                <ReadCoupon userCoupon={coupon} />
-                              </li>
-                              <li>
-                                <button
-                                  onClick={() =>
-                                    handleOpenConfirmationModal(coupon)
-                                  }
-                                  type="button"
-                                  data-modal-target="deleteModal"
-                                  data-modal-toggle="deleteModal"
-                                  className="flex w-full items-center py-2 pr-2 hover:text-[#e6f85e]"
+                              <svg
+                                className="w-4 h-4 mr-2"
+                                viewBox="0 0 14 15"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth="1.5"
+                                  stroke="currentColor"
+                                  className="w-4 h-4 mx-3"
                                 >
-                                  <svg
-                                    className="w-4 h-4 mr-2"
-                                    viewBox="0 0 14 15"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    aria-hidden="true"
-                                  >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      strokeWidth="1.5"
-                                      stroke="currentColor"
-                                      className="w-4 h-4 mx-3"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                                      />
-                                    </svg>
-                                  </svg>
-                                  Delete
-                                </button>
-                              </li>
-                            </ul>
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                                  />
+                                </svg>
+                              </svg>
+                              Delete
+                            </button>
                           </td>
                         </tr>
                       );

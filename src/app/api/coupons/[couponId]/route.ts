@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import Coupon from "@/db/schemas/Coupon";
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export async function PUT(
   req: any,
@@ -54,10 +55,17 @@ export async function DELETE(
   }
 
   const couponId = params.couponId;
+
   try {
-    await startDB();
-    let userPackage = await Coupon.findByIdAndDelete({ _id: couponId }, {});
-    return NextResponse.json({ result: userPackage, success: true });
+    const response = await stripe.coupons.del(couponId);
+    if (response.deleted) {
+      return NextResponse.json({ result: response.deleted, success: true });
+    } else {
+      return NextResponse.json(
+        { result: "something went wrong", success: false },
+        { status: 500 }
+      );
+    }
   } catch (error) {
     console.log(error);
     return NextResponse.json(
