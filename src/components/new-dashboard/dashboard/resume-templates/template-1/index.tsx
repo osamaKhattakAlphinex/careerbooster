@@ -99,6 +99,7 @@ const ResumeTemplate1 = ({
   const [newProfessionalSkill, setNewProfessionalSkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
+  const [newEducation, setNewEducation] = useState(false);
   const [primarySkillAddButtonVisible, setPrimarySkillAddButtonVisible] =
     useState(false);
   const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
@@ -110,9 +111,11 @@ const ResumeTemplate1 = ({
   ] = useState(false);
   const [workExperienceAddButtonVisible, setWorkExperienceAddButtonVisible] =
     useState<number>();
+    const [educationAddButtonVisible, setEducationAddButtonVisible] = useState(false);
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [secondarySkill, setSecondarySkill] = useState<string>("");
   const [professionalSkill, setProfessionalSkill] = useState<string>("");
+
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const addPrimarySkill = () => {
     const primarySkills = resume?.primarySkills;
@@ -227,6 +230,28 @@ const ResumeTemplate1 = ({
       });
     }
   };
+  //Reorder Redux handleDropEducation array with drag-drop
+  const handleDropEducation = (e: any, i: number) => {
+    // const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+    // const updatedItems = [...resume?.educationArray];
+    // // Swap the positions of the dragged item and the target item.
+    // [updatedItems[draggedIndex], updatedItems[i]] = [
+    //   updatedItems[i],
+    //   updatedItems[draggedIndex],
+    // ];
+    // if (draggedIndex !== i) {
+    //   // dispatch(
+    //   //   setEducationArray({
+    //   //     ...resume,
+    //   //     educationArray: updatedItems,
+    //   //   })
+    //   // );
+    //   saveResumeToDB({
+    //     ...resume,
+    //     educationArray: updatedItems,
+    //   });
+    // }
+  }
   //Reorder Redux handleDropAchievement array with drag-drop
   const handleDropAchievement = (i: number, ind: number) => {
     let draggedIndex: number;
@@ -528,10 +553,20 @@ const ResumeTemplate1 = ({
                 Education
               </h3>
               <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-              <ul className="pl-0 flex flex-col  ">
+              <ul className="pl-0 flex flex-col"
+              onMouseEnter={() =>
+                  !newEducation && setEducationAddButtonVisible(true)
+                }
+                onMouseLeave={() =>
+                  !newEducation && setEducationAddButtonVisible(false)
+                }
+              >
+                
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <li className="font-semibold uppercase hover:shadow-md hover:bg-gray-100 text-md">
+                    <li className=" hover:shadow-md hover:cursor-move 
+                  parent hover:border-dashed hover:border-gray-500 hover:border-2 
+                   hover:bg-gray-100 font-semibold flex uppercase text-md  justify-between items-center ">
                       <EditableField
                         type="textarea"
                         rows={2}
@@ -560,6 +595,27 @@ const ResumeTemplate1 = ({
                           });
                         }}
                       />
+                      <div
+                      onClick={() => {
+                        const removeEducation = resume.education.filter(
+                          (item: any) => item !== education
+                        );
+                        dispatch(
+                          setField({
+                            name: "education",
+                            value: removeEducation,
+                          })
+                        );
+                        saveResumeToDB({
+                          ...resume,
+                          education: removeEducation,
+                        });
+                      
+                      }}
+                      className="w-4 h-4  cursor-pointer child"
+                    >
+                      {crossIcon1}
+                    </div>
                     </li>
                     <li className="hover:shadow-md uppercase hover:bg-gray-100 text-base">
                       <EditableField

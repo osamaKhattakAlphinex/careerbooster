@@ -6,6 +6,7 @@ import { setUserData } from "@/store/userDataSlice";
 import ReactToPrint from "react-to-print";
 import Html2Pdf from "js-html2pdf";
 import Link from "next/link";
+import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
@@ -17,13 +18,15 @@ import { makeid } from "@/helpers/makeid";
 import { setConsultingBid } from "@/store/consultingBidSlice";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 
+import Image from "next/image";
+
 const ConsultingBidsGenerator = () => {
   const componentRef = useRef<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
   const [show, setShow] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<string>(""); // type
+  const [selectedOption, setSelectedOption] = useState<string>("profile"); // type
   const [streamedData, setStreamedData] = useState<string>("");
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [isEditing, setIsEditing] = useState(false);
@@ -46,6 +49,9 @@ const ConsultingBidsGenerator = () => {
       const coverLetterData = await htmlToPlainText(text);
       await copy(coverLetterData);
       setIsBidCopied(true);
+      setTimeout(() => {
+        setIsBidCopied(false);
+      }, 2000);
     } catch (error) {
       console.error("Failed to copy text: ", error);
     }
@@ -442,7 +448,41 @@ const ConsultingBidsGenerator = () => {
                   width={18}
                 /> */}
                     <span className="text-white text-[15px] font-semibold">
-                      {msgLoading ? "Please wait..." : "Generate Bid"}
+                      {msgLoading ? (
+                        <div className="flex">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className={`w-4 h-4 mr-3 ${
+                              msgLoading ? "animate-spin" : ""
+                            }`}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                            />
+                          </svg>
+                          Please wait...
+                        </div>
+                      ) : (
+                        <div className="flex">
+                          <Image
+                            src={buttonIconSrc}
+                            alt="bold icon"
+                            height={18}
+                            width={18}
+                          />
+                          <span
+                            className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                          >
+                            Generate Bid
+                          </span>
+                        </div>
+                      )}
                     </span>
                   </button>
                 )}
@@ -507,22 +547,42 @@ const ConsultingBidsGenerator = () => {
                             "opacity-50 cursor-not-allowed" // Add this class when the button is disabled
                           }`}
                         >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            className="w-4 h-4 text-white"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                            />
-                          </svg>
                           <span className="text-white text-[15px] font-semibold">
-                            Re-generate
+                            {msgLoading ? (
+                              <div className="flex">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth="1.5"
+                                  stroke="currentColor"
+                                  className={`w-4 h-4 mr-3 ${
+                                    msgLoading ? "animate-spin" : ""
+                                  }`}
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                                  />
+                                </svg>
+                                Please wait...
+                              </div>
+                            ) : (
+                              <div className="flex">
+                                <Image
+                                  src={buttonIconSrc}
+                                  alt="bold icon"
+                                  height={18}
+                                  width={18}
+                                />
+                                <span
+                                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                                >
+                                  Re-generate
+                                </span>
+                              </div>
+                            )}
                           </span>
                         </button>
                       )}
@@ -618,7 +678,11 @@ const ConsultingBidsGenerator = () => {
                         </svg>
 
                         <span className="text-white text-[15px] font-semibold">
-                          {msgLoading ? "Please wait..." : "Copy to clipboard"}
+                          {msgLoading
+                            ? "Please wait..."
+                            : isBidCopied
+                            ? "Copied"
+                            : "Copy to clipboard"}
                         </span>
                       </button>
                     )}
@@ -630,7 +694,11 @@ const ConsultingBidsGenerator = () => {
                             !show || msgLoading || !session?.user?.email
                           }
                           onClick={handleClick}
-                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full `}
+                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full ${
+                            !show || msgLoading || !session?.user?.email
+                              ? "opacity-50 cursor-not-allowed"
+                              : ""
+                          }`}
                         >
                           <div className="flex flex-row gap-2">
                             <svg

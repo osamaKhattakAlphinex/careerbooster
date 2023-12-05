@@ -9,6 +9,7 @@ import Html2Pdf from "js-html2pdf";
 import copy from "clipboard-copy";
 import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
 import "@/app/(private_route)/dashboard.css";
+
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
@@ -16,6 +17,7 @@ import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import { makeid } from "@/helpers/makeid";
 import { setCoverLetter } from "@/store/coverLetterSlice";
 
+import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import CoverLetterCardSingle from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterCardSingle";
 import Image from "next/image";
 import Link from "next/link";
@@ -253,6 +255,10 @@ export default function CoverLetterPage() {
       const coverLetterData = await htmlToPlainText(text);
       await copy(coverLetterData);
       setIsCoverLetterCopied(true);
+      // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
+      setTimeout(() => {
+        setIsCoverLetterCopied(false);
+      }, 2000);
     } catch (error) {
       console.error("Failed to copy text: ", error);
     }
@@ -461,16 +467,42 @@ export default function CoverLetterPage() {
                         "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
                       }`}
                     >
-                      <Image
-                        src="/icon/u_bolt-alt.svg"
-                        alt="bold icon"
-                        height={18}
-                        width={18}
-                      />
                       <span className="text-white text-[15px] font-semibold">
-                        {msgLoading
-                          ? "Please wait..."
-                          : "Generate Cover Letter"}
+                        {msgLoading ? (
+                          <div className="flex">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className={`w-4 h-4 mr-3 ${
+                                msgLoading ? "animate-spin" : ""
+                              }`}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                              />
+                            </svg>
+                            Please wait...
+                          </div>
+                        ) : (
+                          <div className="flex">
+                            <Image
+                              src={buttonIconSrc}
+                              alt="bold icon"
+                              height={18}
+                              width={18}
+                            />
+                            <span
+                              className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                            >
+                              Generate Cover Letter
+                            </span>
+                          </div>
+                        )}
                       </span>
                     </button>
                   )}
@@ -510,6 +542,7 @@ export default function CoverLetterPage() {
                     {!isNaN(availablePercentageCoverLetter) &&
                       availablePercentageCoverLetter !== 0 && (
                         <button
+                          type="button"
                           disabled={
                             msgLoading ||
                             !session?.user?.email ||
@@ -517,12 +550,10 @@ export default function CoverLetterPage() {
                             selectedOption === "" ||
                             (selectedOption === "file" &&
                               selectedFile === "") ||
-                            // (selectedOption === "aiResume" &&
-                            //   setSelectedResumeId === "") ||
                             jobDescription === ""
                           }
                           onClick={handleGenerate}
-                          className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#B324D7] border rounded-full ${
+                          className={`bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                             (msgLoading ||
                               !session?.user?.email ||
                               !aiInputUserData ||
@@ -530,25 +561,45 @@ export default function CoverLetterPage() {
                               (selectedOption === "file" &&
                                 selectedFile === "") ||
                               jobDescription === "") &&
-                            "opacity-50 cursor-not-allowed" // Add this class when the button is disabled
+                            "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
                           }`}
                         >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            className="w-4 h-4 text-white"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                            />
-                          </svg>
-                          <span className="text-white md:text-[15px]  font-semibold">
-                            Re-generate Cover Letter
+                          <span className="text-white text-[15px] font-semibold">
+                            {msgLoading ? (
+                              <div className="flex">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth="1.5"
+                                  stroke="currentColor"
+                                  className={`w-4 h-4 mr-3 ${
+                                    msgLoading ? "animate-spin" : ""
+                                  }`}
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                                  />
+                                </svg>
+                                Please wait...
+                              </div>
+                            ) : (
+                              <div className="flex">
+                                <Image
+                                  src={buttonIconSrc}
+                                  alt="bold icon"
+                                  height={18}
+                                  width={18}
+                                />
+                                <span
+                                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                                >
+                                  Re-generate Cover Letter
+                                </span>
+                              </div>
+                            )}
                           </span>
                         </button>
                       )}
@@ -645,7 +696,11 @@ export default function CoverLetterPage() {
                         </svg>
 
                         <span className="text-white text-[15px] font-semibold">
-                          {msgLoading ? "Please wait..." : "Copy to clipboard"}
+                          {msgLoading
+                            ? "Please wait..."
+                            : isCoverLetterCopied
+                            ? "Copied"
+                            : "Copy to clipboard"}
                         </span>
                       </button>
                     )}
@@ -657,7 +712,11 @@ export default function CoverLetterPage() {
                             !show || msgLoading || !session?.user?.email
                           }
                           onClick={handleClick}
-                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full `}
+                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full ${
+                            !show || msgLoading || !session?.user?.email
+                              ? "opacity-50 cursor-not-allowed"
+                              : ""
+                          } `}
                         >
                           <div className="flex flex-row gap-2">
                             <svg
@@ -674,7 +733,13 @@ export default function CoverLetterPage() {
                                 d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
                               />
                             </svg>
-                            <span className="text-yellow-200 text-[15px] font-semibold">
+                            <span
+                              className={`text-yellow-200 text-[15px] font-semibold ${
+                                !show || msgLoading || !session?.user?.email
+                                  ? "opacity-50 cursor-not-allowed"
+                                  : ""
+                              } `}
+                            >
                               Edit
                             </span>
                           </div>
