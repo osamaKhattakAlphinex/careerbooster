@@ -202,7 +202,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
   }, [session?.user?.email]);
   return (
     <>
-      <div className="headline-generator  bg-[#222027] py-8 px-3 md:px-6 flex flex-col md:flex-row  align-center gap-5 md:justify-center md:items-center rounded-[10px] mb-[20px]">
+      <div className="headline-generator bg-[#222027] py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
         <div
           className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16`}
         >
@@ -215,7 +215,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
           />
         </div>
         <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
-          <div className=" flex items-center md:justify-start flex-row ">
+          <div className=" flex items-center justify-between gap-4 md:justify-start flex-row ">
             <h1 className="text-[16px] text-white font-bold">
               Job Description Generator
             </h1>
@@ -250,7 +250,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
           type="button"
           disabled={msgLoading || !session?.user?.email}
           onClick={() => handleGenerate()}
-          className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full md:px-[25px] px-[32px] py-[12px] md:ml-auto`}
+          className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
 
           // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
         >
@@ -282,10 +282,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                   width={18}
                 />
                 <span className="text-white ml-3 text-[15px] font-semibold">
-                  {/* <span className={`text-black text-[15px] font-semibold`}> */}
-                  {/* Upgrade Plan */}
                   Generate Description
-                  {/* </span> */}
                 </span>
               </div>
             )}

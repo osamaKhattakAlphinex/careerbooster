@@ -13,7 +13,7 @@ const RecentResumeCard = ({
   const { resumes } = userData;
   return (
     <>
-      <div className="text-white bg-[#17151B] rounded-[20px]  mb-7 px-4 md:px-[24px] py-[35px] my-5 ">
+      <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-4 md:px-[24px] py-[35px]  ">
         <div className="flex justify-between items-center  ">
           <h1 className="uppercase font-semibold lg:text-[14px] text-[11px]">
             Your Resumes
