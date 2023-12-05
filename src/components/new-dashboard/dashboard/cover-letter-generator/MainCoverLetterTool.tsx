@@ -172,14 +172,14 @@ export default function MainCoverLetterTool() {
               Job Bid as a Consultant
             </h2>
             <h3 className="text-white text-[16px]">
-              Dear [Hiring Manager's Name],
+              Dear [Hiring Manager{"'"}s Name],
             </h3>
             <p className="text-white text-[16px]  leading-[30px]">
               I am writing to express my interest in the Consultant position at
               your company, as advertised in the job description. With my
               extensive background and expertise in [relevant field], I believe
               I am well-suited to provide valuable insights and strategies to
-              support your organization's goals.
+              support your organization{"'"}s goals.
             </p>
             <p className="text-white text-[16px]  leading-[30px]">
               Using my proven track record in [specific area of expertise], I
@@ -195,8 +195,8 @@ export default function MainCoverLetterTool() {
             <p className="text-white text-[16px]  leading-[30px]">
               Thank you for considering my application. I am eager to discuss my
               qualifications further and explore ways in which I can support
-              your organization's success. Please find attached my resume for
-              your review. <br />
+              your organization{"'"}s success. Please find attached my resume
+              for your review. <br />
               <br />
             </p>
             <div className="flex flex-col gap-2">

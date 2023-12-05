@@ -89,9 +89,9 @@ Props) => {
           <div className="flex flex-row gap-2">
             <span className="block text-white font-bold text-base">3.</span>
             <p className="text-white text-base">
-              If you're unsatisfied with the results, please note that we create
-              your new resume using your original resume data. If any of your
-              experiences are missing,
+              If you{"'"}re unsatisfied with the results, please note that we
+              create your new resume using your original resume data. If any of
+              your experiences are missing,
               <Link href="#" className="text-[#615DFF] font-bold">
                 &nbsp; Edit your profile
               </Link>
@@ -146,43 +146,41 @@ Props) => {
             }`}
           >
             <span className="text-white text-sm">
-              {memoizedState.resumeLoading
-                ? (
-                  <div className="flex">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className={`w-4 h-4 mr-3 ${memoizedState.resumeLoading ? "animate-spin" : ""}`}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+              {memoizedState.resumeLoading ? (
+                <div className="flex">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className={`w-4 h-4 mr-3 ${
+                      memoizedState.resumeLoading ? "animate-spin" : ""
+                    }`}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                    />
+                  </svg>
+                  Please wait...
+                </div>
+              ) : (
+                <div className="flex">
+                  <Image
+                    src={buttonIconSrc}
+                    alt="bold icon"
+                    height={18}
+                    width={18}
                   />
-                </svg>
-                Please wait...
-              </div>
-                )
-                : 
-                (
-                  <div className="flex">
-                <Image
-                  src={buttonIconSrc}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                />
-                <span
-                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
-                >
-                  Generate New Resume
-                </span>
-              </div>
-                )
-                }
+                  <span
+                    className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                  >
+                    Generate New Resume
+                  </span>
+                </div>
+              )}
             </span>
           </button>
         )}
