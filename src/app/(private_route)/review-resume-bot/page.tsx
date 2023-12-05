@@ -7,10 +7,9 @@ import ReactToPrint from "react-to-print";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 
-import CoverLetterFileUploader from "@/components/dashboard/cover-letter-bot/CoverLetterFileUploader";
-import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
 import Button from "@/components/utilities/form-elements/Button";
-import LimitCard from "@/components/dashboard/LimitCard";
+import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
+import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
 
 const ReviewResumeBot = () => {
   const componentRef = useRef<any>(null);
@@ -200,13 +199,6 @@ const ReviewResumeBot = () => {
             <CoverLetterFileUploader
               selectedFile={selectedFile}
               setSelectedFile={setSelectedFile}
-            />
-          )}
-
-          {selectedOption === "aiResume" && (
-            <CoverLetterResumeSelector
-              setSelectedResumeId={setSelectedResumeId}
-              setSetSelectedResumeId={setSetSelectedResumeId}
             />
           )}
 
