@@ -9,14 +9,13 @@ import { setState } from "@/store/resumeSlice";
 // import NewButton from "@/components/utilities/form-elements/Button";
 import Link from "next/link";
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
-
+import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 interface Props {
   handleGenerate: () => Promise<void>;
   availablePercentage: number;
 }
 const GenerateResume = ({
   handleGenerate,
-  
 }: // availablePercentage,
 Props) => {
   const [showInstruction, setShowInstruction] = useState<boolean>(false);
@@ -132,30 +131,61 @@ Props) => {
         </div>
         {!isNaN(availablePercentage) && availablePercentage !== 0 && (
           <button
-          disabled={
-            memoizedState.jobPosition === "" ||
-            memoizedState.resumeLoading ||
-            !session?.user?.email
-          }
-          onClick={handleGenerate}
-          className={`bg-gradient-to-r from-[#B324D7]  to-[#615DFF] flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${memoizedState.jobPosition === "" ||
-          memoizedState.resumeLoading ||
-          !session?.user?.email  ? "opacity-50 cursor-not-allowed" : ""}`}
-        >
-          <Image
-            src="/icon/u_bolt-alt.svg"
-            alt="bold icon"
-            height={18}
-            width={18}
-          />
-          <span className="text-white text-sm">
-            {memoizedState.resumeLoading
-              ? "Please wait..."
-              : "Generate New Resume"}
-          </span>
-        </button>
+            disabled={
+              memoizedState.jobPosition === "" ||
+              memoizedState.resumeLoading ||
+              !session?.user?.email
+            }
+            onClick={handleGenerate}
+            className={`bg-gradient-to-r from-[#B324D7]  to-[#615DFF] flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${
+              memoizedState.jobPosition === "" ||
+              memoizedState.resumeLoading ||
+              !session?.user?.email
+                ? "opacity-50 cursor-not-allowed"
+                : ""
+            }`}
+          >
+            <span className="text-white text-sm">
+              {memoizedState.resumeLoading
+                ? (
+                  <div className="flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className={`w-4 h-4 mr-3 ${memoizedState.resumeLoading ? "animate-spin" : ""}`}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                  />
+                </svg>
+                Please wait...
+              </div>
+                )
+                : 
+                (
+                  <div className="flex">
+                <Image
+                  src={buttonIconSrc}
+                  alt="bold icon"
+                  height={18}
+                  width={18}
+                />
+                <span
+                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                >
+                  Generate New Resume
+                </span>
+              </div>
+                )
+                }
+            </span>
+          </button>
         )}
-        
       </div>
     </div>
   );
