@@ -23,8 +23,6 @@ const FineTuningModels = () => {
           rec.status === "running"
       );
 
-      console.table("inprogress-jobs-list", inprogressJobs);
-
       const responseData = await axios.get(url).then((res) => res.data);
 
       return inprogressJobs.filter((inprogressJob: any) => {

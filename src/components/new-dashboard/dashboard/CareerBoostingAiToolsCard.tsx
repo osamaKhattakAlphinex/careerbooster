@@ -50,8 +50,9 @@ const CareerBoostingAiToolsCard = () => {
         Recent ai generated documents
       </h1>
       <div className="flex mt-3">
-        {tabOptions.map((option) => (
+        {tabOptions.map((option, index) => (
           <Button
+            key={`tab-${index}`}
             btnText={option.name}
             isActive={activeTab === option.value}
             onClick={() => setActiveTab(option.value)}

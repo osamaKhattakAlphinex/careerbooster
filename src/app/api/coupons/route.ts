@@ -5,7 +5,8 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
 import Coupon from "@/db/schemas/Coupon";
 import { loadStripe } from "@stripe/stripe-js";
-import { stripe } from "@/lib/stripe";
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+// const stripe: any = await loadStripe(STRIPE_PK);)
 // import { stripe } from "@/lib/stripe";
 export async function POST(request: any) {
   const session = await getServerSession(authOptions);
@@ -20,6 +21,12 @@ export async function POST(request: any) {
   try {
     await startDB();
     const payload = await request.json();
+
+    const coupon = await stripe.coupons.create({
+      name: "24_PER_OFF",
+      amount_off: 4,
+      currency: "usd",
+    });
 
     const response = await Coupon.create({ ...payload });
     return NextResponse.json(
@@ -37,10 +44,11 @@ export async function POST(request: any) {
 
 export async function GET(request: any) {
   try {
-    await startDB();
-    const coupons = await Coupon.find();
+    const coupons = await stripe.coupons.list();
+    // await startDB();
+    // const coupons = await Coupon.find();
     return NextResponse.json(
-      { success: true, result: coupons },
+      { success: true, result: coupons.data },
       { status: 200 }
     );
   } catch (error) {

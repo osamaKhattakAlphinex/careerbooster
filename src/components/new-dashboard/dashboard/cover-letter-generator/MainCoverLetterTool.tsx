@@ -60,7 +60,7 @@ export default function MainCoverLetterTool() {
               type="radio"
               value="uploadYourResume"
               onChange={(e) => {
-                setUploadPdfFile("uploadYourResume"); 
+                setUploadPdfFile("uploadYourResume");
               }}
               name="default-radio"
               className="w-4 h-4 border-[1px]"
@@ -78,7 +78,7 @@ export default function MainCoverLetterTool() {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   className="w-[40px] h-[40px] text-[#B324D7] font-normal"
                 >
@@ -213,7 +213,7 @@ export default function MainCoverLetterTool() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="w-4 h-4 text-white"
               >
@@ -235,7 +235,7 @@ export default function MainCoverLetterTool() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="w-6 h-6 text-[#37B944]"
               >
@@ -258,7 +258,7 @@ export default function MainCoverLetterTool() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="w-4 h-4 text-white"
               >
