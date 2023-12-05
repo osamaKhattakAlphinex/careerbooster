@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import "@/app/plugins.css";
 import "@/app/style.css";
+import { leftArrowIcon } from "@/helpers/iconsProvider";
+import Link from "next/link";
 export default function SubscribePage() {
   const [showExpiredAlert, setShowExpiredAlert] = useState(false);
   // check if there is ?expired=1 in the URL

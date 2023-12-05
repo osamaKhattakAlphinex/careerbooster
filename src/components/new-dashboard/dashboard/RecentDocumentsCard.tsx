@@ -1,8 +1,5 @@
-"use client";
 import Button from "@/components/Button";
-import { useState } from "react";
-import ResumesListCard from "@/components/new-dashboard/dashboard/ResumesListCard";
-import Alert from "../common/Alert";
+
 import ResumeMaker from "./ResumeMaker";
 import ProfileCompletionAlert from "@/components/dashboard/ProfileCompletionAlert";
 
@@ -14,8 +11,6 @@ const tabOptions = [
 ];
 
 const RecentDocumentsCard = () => {
-  const [activeTab, setActiveTab] = useState("resumeMaker");
-  const [show, setShow] = useState(true);
   return (
     <>
       {/* <Alert show={show} onClose={() => setShow(false)} /> */}

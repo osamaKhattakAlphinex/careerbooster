@@ -83,52 +83,6 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
     });
     fetchFiles();
   };
-  // const uploadFileToServer = async () => {
-  //   setFileError("");
-  //   setFileUploading(true);
-  //   if (file && data?.user?.email) {
-  //     const body = new FormData();
-  //     body.append("file", file);
-  //     fetch(`/api/fileUpload?type=coverLetter&email=${data.user.email}`, {
-  //       method: "POST",
-  //       body,
-  //     })
-  //       .then(async (resp: any) => {
-  //         const res = await resp.json();
-  //         if (res.success) {
-  //           const uploadedFileName = res.fileName + "_" + file.name;
-  //           setSuccessMsg("File has been uploaded!");
-  //           setFileUploading(false);
-  //           fetchFiles();
-
-  //           fetch("/api/users/updateUserLimit", {
-  //             method: "POST",
-  //             body: JSON.stringify({
-  //               email: data?.user?.email,
-  //               type: "pdf_files_upload",
-  //             }),
-  //           }).then(async (resp: any) => {
-  //             const res = await resp.json();
-  //             if (res.success) {
-  //               const updatedObject = {
-  //                 ...userData,
-  //                 userPackageUsed: {
-  //                   ...userData.userPackageUsed,
-  //                   pdf_files_upload: res.user.userPackageUsed.pdf_files_upload,
-  //                 },
-  //               };
-  //               dispatch(setUserData({ ...userData, ...updatedObject }));
-  //             }
-  //           });
-  //         } else {
-  //           setFileError("Something went wrong");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         setFileError("Something went wrong");
-  //       });
-  //   }
-  // };
 
   const fetchFiles = async () => {
     if (data?.user?.email && !loadingFiles) {
@@ -261,8 +215,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                   }}
                 />
               </label>
-              </div>
-
+            </div>
           </div>
         )}
 

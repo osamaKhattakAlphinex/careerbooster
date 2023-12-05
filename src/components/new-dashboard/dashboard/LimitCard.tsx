@@ -32,11 +32,7 @@ const LimitCard: React.FC<LimitCardProps> = ({
   }, [userData, limit, used]);
 
   if (used >= limit) {
-    return (
-      // <div className="bg-red-500 px-3 py-1 rounded-3xl border-gray-950">
-      <span className="text-sm text-red-500 ">Credit Limit Reached</span>
-      // </div>
-    );
+    return <span className="text-sm text-red-500 ">Credit Limit Reached</span>;
   } else {
     return (
       <div className="">
@@ -50,16 +46,6 @@ const LimitCard: React.FC<LimitCardProps> = ({
             </span>
           )}
         </div>
-        {/* <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-          <div
-            className={`bg-${
-              availablePercentage > 30 ? "green" : "red"
-            }-600 h-2.5 rounded-full`}
-            style={{
-              width: `${availablePercentage}%`,
-            }}
-          ></div>
-        </div> */}
       </div>
     );
   }

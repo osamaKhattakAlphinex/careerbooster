@@ -127,7 +127,7 @@ const SideBar = () => {
                 </h1>
                 <Link
                   href="/profile-review"
-                  className="text-[14px] text-[#B324D7] p-.5"
+                  className="text-[14px] text-[#B324D7] p-.5 hover:text-[#E6F85E] hover:opacity-80"
                 >
                   Edit Profile
                 </Link>

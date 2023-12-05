@@ -1,9 +1,6 @@
 import { eyeIcon, rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
-import PencilLine from "@/../public/icon/PencilLine.png";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEye, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
 import { Resume, emptyResume, setResume } from "@/store/resumeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";

@@ -34,9 +34,13 @@
   transition: background-color 0.2s;
 }
 
+.text-color {
+  color: white;
+  padding: 1rem;
+}
 @media print {
   .text-color {
-    color: black;
+    color: black !important;
   }
 }
 

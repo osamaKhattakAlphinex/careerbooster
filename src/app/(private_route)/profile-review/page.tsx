@@ -11,11 +11,12 @@ import ProfilePreview from "@/components/dashboard/profileReview/ProfilePreview"
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveStep, setField } from "@/store/registerSlice";
 import StepEight from "@/components/dashboard/profileReview/StepEight";
-import { refreshIconRotating } from "@/helpers/iconsProvider";
+import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import "@/app/plugins.css";
 import "@/app/style.css";
+import Link from "next/link";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.Ai-Welcome",
 // };
@@ -118,6 +119,13 @@ const ProfileReview = () => {
     <>
       <div className="ml-0 lg:ml-[244px] px-[15px] lg:mb-[72px]">
         {/* </script> */}
+        <Link
+          href="/dashboard"
+          className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
+        >
+          {leftArrowIcon}
+          Back
+        </Link>
         <main className="flex-grow-1">
           <section className="pb-15 ">
             <div className="container">

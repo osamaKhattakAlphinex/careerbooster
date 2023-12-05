@@ -2,11 +2,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
-import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
+import { setUserData } from "@/store/userDataSlice";
 import ReactToPrint from "react-to-print";
-
+import Html2Pdf from "js-html2pdf";
+import Link from "next/link";
 import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
-import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
@@ -14,10 +14,8 @@ import copy from "clipboard-copy";
 import ConsultingBidCardSingle from "@/components/new-dashboard/dashboard/consulting-bids-generator/ConsultingBidCardSingle";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import { makeid } from "@/helpers/makeid";
-import {
-  resetConsultingBid,
-  setConsultingBid,
-} from "@/store/consultingBidSlice";
+import { setConsultingBid } from "@/store/consultingBidSlice";
+import { leftArrowIcon } from "@/helpers/iconsProvider";
 
 const ConsultingBidsGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -66,9 +64,10 @@ const ConsultingBidsGenerator = () => {
           editorElement.innerHTML = consultingBid.consultingBidText;
         }
       }
-    } else {
-      dispatch(resetConsultingBid());
     }
+    // else {
+    //   dispatch(resetConsultingBid());
+    // }
   }, [isEditing]);
 
   const handleGenerate = async () => {
@@ -286,6 +285,14 @@ const ConsultingBidsGenerator = () => {
     <>
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] ">
+          <Link
+            href="/dashboard"
+            className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
+          >
+            {leftArrowIcon}
+            Back
+          </Link>
+
           {/* <AiGeneratedCoverLetters /> */}
           <PreviouslyGeneratedList {...historyProps} />
           {/* <MainCoverLetterTool /> */}
@@ -554,6 +561,18 @@ const ConsultingBidsGenerator = () => {
                         </button>
                       )}
                       content={() => componentRef.current}
+                      print={async (printIframe: HTMLIFrameElement) => {
+                        const document = componentRef.current;
+                        let doc: any = document?.querySelector(".text-white");
+                        const clonedDoc = doc.cloneNode(true);
+                        clonedDoc.style.color = "black";
+                        if (document) {
+                          const exporter = new Html2Pdf(clonedDoc, {
+                            filename: `consulting_bid.pdf`,
+                          });
+                          exporter.getPdf(true);
+                        }
+                      }}
                     />
                     {show && (
                       <button

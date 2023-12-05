@@ -7,10 +7,8 @@ import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import ReactToPrint from "react-to-print";
 import Html2Pdf from "js-html2pdf";
-import { resetCoverLetter, setCoverLetter } from "@/store/coverLetterSlice";
-import Image from "next/image";
+
 import { eyeIcon, rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
-import PencilLine from "@/../public/icon/PencilLine.png";
 import { useRouter } from "next/navigation";
 import { resetEmail, setEmail } from "@/store/emailSlice";
 
@@ -114,9 +112,12 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
                 onBeforeGetContent={async () => await handleOnView(card)}
                 content={() => componentRef.current}
                 print={async (printIframe: HTMLIFrameElement) => {
-                  const document = printIframe.contentDocument;
+                  const document = componentRef.current;
+                  let doc: any = document?.querySelector(".text-white");
+                  const clonedDoc = doc.cloneNode(true);
+                  clonedDoc.style.color = "black";
                   if (document) {
-                    const exporter = new Html2Pdf(componentRef.current, {
+                    const exporter = new Html2Pdf(clonedDoc, {
                       filename: `email.pdf`,
                     });
                     exporter.getPdf(true);

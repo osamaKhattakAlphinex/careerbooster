@@ -29,7 +29,12 @@ const ToolsCard = ({
           <div
             className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-[60px] h-[60px] `}
           >
-            <Image width={35} height={35} src={icon} alt="Not Found" />
+            <Image
+              width={title !== "Resume Builder" ? 55 : 35}
+              height={title !== "Resume Builder" ? 55 : 35}
+              src={icon}
+              alt="Not Found"
+            />
           </div>
         </div>
         <div className="">

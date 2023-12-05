@@ -8,13 +8,13 @@ import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import copy from "clipboard-copy";
 import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
-import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
 import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import { makeid } from "@/helpers/makeid";
-import { resetEmail, setEmail } from "@/store/emailSlice";
+import { setEmail } from "@/store/emailSlice";
+import Html2Pdf from "js-html2pdf";
 
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import EmailCardSingle from "@/components/new-dashboard/dashboard/email-generator/EmailCardSingle";
@@ -67,9 +67,10 @@ const PersonalizedEmailBot = () => {
           editorElement.innerHTML = email.emailText;
         }
       }
-    } else {
-      dispatch(resetEmail());
     }
+    //  else {
+    //   dispatch(resetEmail());
+    // }
   }, [isEditing]);
 
   // const handleSave = async () => {
@@ -305,7 +306,6 @@ const PersonalizedEmailBot = () => {
   }, [userData]);
 
   useEffect(() => {
-    console.log(email);
     if (email.id !== "") {
       setShow(true);
     } else {
@@ -328,6 +328,13 @@ const PersonalizedEmailBot = () => {
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] ">
           {/* <AiGeneratedCoverLetters /> */}
+          <Link
+            href="/dashboard"
+            className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
+          >
+            {leftArrowIcon}
+            Back
+          </Link>
           <PreviouslyGeneratedList {...historyProps} />
           {/* <MainCoverLetterTool /> */}
           <>
@@ -648,6 +655,18 @@ const PersonalizedEmailBot = () => {
                         </button>
                       )}
                       content={() => componentRef.current}
+                      print={async (printIframe: HTMLIFrameElement) => {
+                        const document = componentRef.current;
+                        let doc: any = document?.querySelector(".text-white");
+                        const clonedDoc = doc.cloneNode(true);
+                        clonedDoc.style.color = "black";
+                        if (document) {
+                          const exporter = new Html2Pdf(clonedDoc, {
+                            filename: `email.pdf`,
+                          });
+                          exporter.getPdf(true);
+                        }
+                      }}
                     />
                     {show && (
                       <button

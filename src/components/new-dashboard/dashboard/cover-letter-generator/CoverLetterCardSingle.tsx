@@ -101,26 +101,20 @@ const CoverLetterCardSingle = ({
                 trigger={() => (
                   <button
                     type="button"
-                    // disabled={
-                    //   resume.state.jobPosition === "" ||
-                    //   resume.state.resumeLoading ||
-                    //   !session?.user?.email ||
-                    //   !resume?.name
-                    // }
                     className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
                   >
                     Download
-                    {/* <span>
-                            To download choose destination "save as PDF"
-                          </span> */}
                   </button>
                 )}
                 onBeforeGetContent={async () => await handleOnView(card)}
                 content={() => componentRef.current}
                 print={async (printIframe: HTMLIFrameElement) => {
-                  const document = printIframe.contentDocument;
+                  const document = componentRef.current;
+                  let doc: any = document?.querySelector(".text-white");
+                  const clonedDoc = doc.cloneNode(true);
+                  clonedDoc.style.color = "black";
                   if (document) {
-                    const exporter = new Html2Pdf(componentRef.current, {
+                    const exporter = new Html2Pdf(clonedDoc, {
                       filename: `coverletter.pdf`,
                     });
                     exporter.getPdf(true);

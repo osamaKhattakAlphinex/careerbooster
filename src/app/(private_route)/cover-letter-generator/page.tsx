@@ -1,26 +1,25 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { cloneElement, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
-import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
+import { setUserData } from "@/store/userDataSlice";
 import ReactToPrint from "react-to-print";
-import Link from "next/link";
-import { leftArrowIcon } from "@/helpers/iconsProvider";
+import Html2Pdf from "js-html2pdf";
+
 import copy from "clipboard-copy";
 import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
-import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
-import Button from "@/components/utilities/form-elements/Button";
+import "@/app/(private_route)/dashboard.css";
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import { makeid } from "@/helpers/makeid";
-import { resetCoverLetter, setCoverLetter } from "@/store/coverLetterSlice";
+import { setCoverLetter } from "@/store/coverLetterSlice";
 
-import AiGeneratedCoverLetters from "@/components/new-dashboard/dashboard/cover-letter-generator/AiGeneratedCoverLetters";
 import CoverLetterCardSingle from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterCardSingle";
-import MainCoverLetterTool from "@/components/new-dashboard/dashboard/cover-letter-generator/MainCoverLetterTool";
 import Image from "next/image";
+import Link from "next/link";
+import { leftArrowIcon } from "@/helpers/iconsProvider";
 
 export default function CoverLetterPage() {
   const componentRef = useRef<any>(null);
@@ -44,6 +43,25 @@ export default function CoverLetterPage() {
     setIsEditing(true);
   };
 
+  const handleDownload = async () => {
+    const domElement = componentRef.current.querySelector(".text-white");
+    console.log(domElement);
+    const exporter = new Html2Pdf(domElement, {
+      filename: `coverletter.pdf`,
+      html2canvas: {
+        backgroundColor: "white",
+        onclone: async function (doc: any) {
+          doc = await componentRef.current.querySelector(".text-white");
+          doc.style.color = "black";
+          console.log(doc);
+        },
+      },
+    })
+      .getPdf()
+      .then(() => {
+        exporter.getPdf(true);
+      });
+  };
   useEffect(() => {
     if (isEditing) {
       if (componentRef.current) {
@@ -220,48 +238,6 @@ export default function CoverLetterPage() {
                 dispatch(setCoverLetter(payload));
               }
             }
-
-            // fetch("/api/users/updateUserLimit", {
-            //   method: "POST",
-            //   body: JSON.stringify({
-            //     email: session?.user?.email,
-            //     type: "cover_letter_generation",
-            //   }),
-            // })
-            //   .then(async () => {
-            //     const payload = {
-            //       id: makeid(),
-            //       jobDescription: jobDescription,
-            //       coverLetterText: streamedData,
-            //       generatedOnDate: new Date().toISOString(),
-            //       generatedViaOption: selectedOption,
-            //       userEmail: session?.user?.email,
-            //     };
-            //     try {
-            //       const coverLetter = await axios.post(
-            //         "/api/coverLetterBot",
-            //         payload
-            //       );
-
-            //       if (coverLetter.data.success) {
-            //         dispatch(setCoverLetter(payload));
-            //       }
-            //     } catch {}
-            //   })
-            //   .then(async (resp: any) => {
-            //     const res = await resp.json();
-            //     if (res.success) {
-            //       const updatedObject = {
-            //         ...userData,
-            //         userPackageUsed: {
-            //           ...userData.userPackageUsed,
-            //           cover_letter_generation:
-            //             res.user.userPackageUsed.cover_letter_generation,
-            //         },
-            //       };
-            //       dispatch(setUserData({ ...userData, ...updatedObject }));
-            //     }
-            //   });
           } else {
             setStreamedData("Error! Something went wrong");
           }
@@ -281,26 +257,6 @@ export default function CoverLetterPage() {
       console.error("Failed to copy text: ", error);
     }
   };
-
-  // const saveToDB = async (tempText: string) => {
-  //   try {
-  //     const response = await axios.post("/api/users/updateUserData", {
-  //       data: {
-  //         email: session?.user?.email,
-  //         results: {
-  //           ...userData.results,
-  //           coverLetter: tempText,
-  //         },
-  //       },
-  //     });
-  //     const { success } = response.data;
-  //     if (success) {
-  //       console.log("cover letter saved to DB");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -355,8 +311,15 @@ export default function CoverLetterPage() {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] my-5 ">
+        <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px]">
           {/* <AiGeneratedCoverLetters /> */}
+          <Link
+            href="/dashboard"
+            className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
+          >
+            {leftArrowIcon}
+            Back
+          </Link>
           <PreviouslyGeneratedList {...historyProps} />
           {/* <MainCoverLetterTool /> */}
           <>
@@ -518,53 +481,12 @@ export default function CoverLetterPage() {
                   <h1 className="uppercase text-white font-bold text-[18px] pb-5">
                     your ai generated cover letter
                   </h1>
-                  {/* <div className="aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px]">
-                    <div
-                      className={`w-[100%] text-white ${
-                        msgLoading ? "animate-pulse" : ""
-                      }`}
-                    >
-                      <div ref={componentRef}>
-                        {isEditing ? (
-                          <div
-                            id="editor"
-                            contentEditable="true"
-                            // dangerouslySetInnerHTML={{ __html: editedContent }}
-                            // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                            //   setEditedContent(e.target.innerHTML);
-                            // }}
-                          ></div>
-                        ) : (
-                          <div onClick={handleClick}>
-                            <div
-                              className="text-white text-color"
-                              dangerouslySetInnerHTML={{ __html: streamedData }}
-                            ></div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div> */}
+
                   <div
                     className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] md:[30px] shadow ${
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >
-                    {/* <div className="p-12" ref={componentRef}>
-            {isEditing ? (
-              <div
-                contentEditable="true"
-                dangerouslySetInnerHTML={{ __html: editedContent }}
-                onInput={(e: React.ChangeEvent<HTMLDivElement>) => {componentRef
-                  setEditedContent(e.target.innerHTML);
-                }}
-              ></div>
-            ) : (
-              <div onClick={handleClick}>
-                <div dangerouslySetInnerHTML={{ __html: streamedData }}></div>
-              </div>
-            )}
-          </div> */}
                     <div ref={componentRef}>
                       {isEditing ? (
                         <div
@@ -631,6 +553,7 @@ export default function CoverLetterPage() {
                         </button>
                       )}
 
+                    {/* <button onClick={handleDownload}>Download</button> */}
                     <ReactToPrint
                       trigger={() => (
                         <button
@@ -665,6 +588,18 @@ export default function CoverLetterPage() {
                         </button>
                       )}
                       content={() => componentRef.current}
+                      print={async (printIframe: HTMLIFrameElement) => {
+                        const document = componentRef.current;
+                        let doc: any = document?.querySelector(".text-white");
+                        const clonedDoc = doc.cloneNode(true);
+                        clonedDoc.style.color = "black";
+                        if (document) {
+                          const exporter = new Html2Pdf(clonedDoc, {
+                            filename: `coverletter.pdf`,
+                          });
+                          exporter.getPdf(true);
+                        }
+                      }}
                     />
                     {show && (
                       <button

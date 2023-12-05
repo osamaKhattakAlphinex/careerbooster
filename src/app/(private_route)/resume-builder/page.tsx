@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
-// import ResumeTemplate1 from "@/components/dashboard/resume-templates/template-1";
 import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/template-1";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -27,15 +26,12 @@ import {
 // import { exitFullScreenIcon, fullScreenIcon } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { makeid } from "@/helpers/makeid";
-import GenerateNewResumeCard from "@/components/dashboard/resume-builder/GenerateNewResumeCard";
 import { checkIconSmall, leftArrowIcon } from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
-import Link from "next/link";
-import LimitCard from "@/components/dashboard/LimitCard";
 import useTheme from "@/lib/useTheme";
 import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
-import RecentDocumentsCard from "@/components/new-dashboard/dashboard/RecentDocumentsCard";
 import GenerateResume from "@/components/new-dashboard/dashboard/resume-builder/GenerateNewResumeCard";
+import Link from "next/link";
 const ResumeBuilder = () => {
   const [theme] = useTheme();
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -74,8 +70,6 @@ const ResumeBuilder = () => {
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
   const handleGenerate = useCallback(async () => {
-    console.log("resumeData.state.jobPosition", percentageCalculated);
-
     await getUserDataIfNotExists();
     // reset resume
     dispatch(resetResume(resumeData.state));
@@ -514,6 +508,13 @@ const ResumeBuilder = () => {
     <>
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[244px] px-[15px] lg:mb-[72px] ">
+          <Link
+            href="/dashboard"
+            className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
+          >
+            {leftArrowIcon}
+            Back
+          </Link>
           <RecentResumeCard source="dashboard" componentRef={componentRef} />
           {showAlert && (
             <div

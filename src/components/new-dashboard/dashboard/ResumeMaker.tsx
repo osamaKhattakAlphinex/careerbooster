@@ -1,3 +1,4 @@
+"use client";
 import ToolsCard from "@/components/ToolsCard";
 import chatbot from "@/../public/icon/chatbot.png";
 import book from "@/../public/icon/book.png";

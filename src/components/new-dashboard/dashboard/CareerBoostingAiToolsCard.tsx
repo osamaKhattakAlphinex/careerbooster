@@ -2,7 +2,6 @@
 import Button from "@/components/Button";
 import { useRef, useState } from "react";
 import RecentResumeCard from "./resume-builder/RecentResumeCard";
-import AiGeneratedCoverLetters from "./cover-letter-generator/AiGeneratedCoverLetters";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import CoverLetterCardSingle from "./cover-letter-generator/CoverLetterCardSingle";
 import ConsultingBidCardSingle from "./consulting-bids-generator/ConsultingBidCardSingle";
@@ -50,8 +49,9 @@ const CareerBoostingAiToolsCard = () => {
         Recent ai generated documents
       </h1>
       <div className="flex mt-3">
-        {tabOptions.map((option) => (
+        {tabOptions.map((option, index) => (
           <Button
+            key={index}
             btnText={option.name}
             isActive={activeTab === option.value}
             onClick={() => setActiveTab(option.value)}

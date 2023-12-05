@@ -1,16 +1,13 @@
 "use client";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEye, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import ReactToPrint from "react-to-print";
 import Html2Pdf from "js-html2pdf";
-import { resetCoverLetter, setCoverLetter } from "@/store/coverLetterSlice";
-import Image from "next/image";
-import { eyeIcon, rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
-import PencilLine from "@/../public/icon/PencilLine.png";
+
+import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
 import { useRouter } from "next/navigation";
 import {
   resetConsultingBid,
@@ -121,10 +118,13 @@ const ConsultingBidCardSingle = ({
                 onBeforeGetContent={async () => await handleOnView(card)}
                 content={() => componentRef.current}
                 print={async (printIframe: HTMLIFrameElement) => {
-                  const document = printIframe.contentDocument;
+                  const document = componentRef.current;
+                  let doc: any = document?.querySelector(".text-white");
+                  const clonedDoc = doc.cloneNode(true);
+                  clonedDoc.style.color = "black";
                   if (document) {
-                    const exporter = new Html2Pdf(componentRef.current, {
-                      filename: `cosultingBid.pdf`,
+                    const exporter = new Html2Pdf(clonedDoc, {
+                      filename: `consulting_bid.pdf`,
                     });
                     exporter.getPdf(true);
                   }
