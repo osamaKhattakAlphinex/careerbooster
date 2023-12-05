@@ -3,7 +3,7 @@ export const EditIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4"
   >
@@ -19,7 +19,7 @@ export const plusSimpleIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4 "
   >
@@ -35,7 +35,7 @@ export const plusIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-6 h-6"
   >
@@ -47,7 +47,7 @@ export const addressIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4"
   >
@@ -68,7 +68,7 @@ export const deleteIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4"
   >
@@ -84,7 +84,7 @@ export const checkIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-6 h-6"
   >
@@ -100,7 +100,7 @@ export const checkIconSmall = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4"
   >
@@ -116,7 +116,7 @@ export const refreshIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -132,7 +132,7 @@ export const refreshIconRotating = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5 animate-spin"
   >
@@ -148,7 +148,7 @@ export const refreshBigIconRotating = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-8 h-8 animate-spin"
   >
@@ -164,7 +164,7 @@ export const fullScreenIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-6 h-6"
   >
@@ -180,7 +180,7 @@ export const exitFullScreenIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-6 h-6"
   >
@@ -196,7 +196,7 @@ export const phoneIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4 "
   >
@@ -212,7 +212,7 @@ export const emailIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4"
   >
@@ -228,7 +228,7 @@ export const emailIconBig = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-12 h-12"
   >
@@ -255,7 +255,7 @@ export const educationIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -271,7 +271,7 @@ export const sparkleIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -287,7 +287,7 @@ export const contactIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -303,7 +303,7 @@ export const briefCaseIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-12 h-12"
   >
@@ -326,7 +326,7 @@ export const infoSmallIcon = (
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth="2"
+      stroke-width="2"
       d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
     />
   </svg>
@@ -336,7 +336,7 @@ export const informationCirlceIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -352,7 +352,7 @@ export const brushIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-12 h-12"
   >
@@ -368,7 +368,7 @@ export const pencilIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-12 h-12"
   >
@@ -385,7 +385,7 @@ export const resumeIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-12 h-12"
   >
@@ -402,7 +402,7 @@ export const scanIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-12 h-12"
   >
@@ -419,7 +419,7 @@ export const bagIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-12 h-12"
   >
@@ -435,7 +435,7 @@ export const starsIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-8 h-8 float-left mr-2"
   >
@@ -452,7 +452,7 @@ export const menuIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-6 h-6"
   >
@@ -468,7 +468,7 @@ export const leftArrowIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-6 h-6"
   >
@@ -484,7 +484,7 @@ export const documentIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-12 h-12"
   >
@@ -501,7 +501,7 @@ export const checkBubbleIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-12 h-12"
   >
@@ -517,7 +517,7 @@ export const trendingArrowIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-12 h-12"
   >
@@ -533,7 +533,7 @@ export const bulbIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -550,7 +550,7 @@ export const moonIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-6 h-6"
   >
@@ -566,7 +566,7 @@ export const uploadIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-6 h-6"
   >
@@ -582,7 +582,7 @@ export const downloadIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4"
   >
@@ -598,7 +598,7 @@ export const exterLinkIconSmall = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4"
   >
@@ -615,7 +615,7 @@ export const antIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-6 h-6"
   >
@@ -632,7 +632,7 @@ export const clipboardIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4"
   >
@@ -648,7 +648,7 @@ export const ArrowDownIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-6 h-6"
   >
@@ -669,7 +669,7 @@ export function IconCalendarclock(props: any) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      stroke-width="2"
       strokeLinecap="round"
       strokeLinejoin="round"
     >
@@ -692,7 +692,7 @@ export function IconUsersicon(props: any) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      stroke-width="2"
       strokeLinecap="round"
       strokeLinejoin="round"
     >
@@ -709,7 +709,7 @@ export const arrowLeft = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -725,7 +725,7 @@ export const homeIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -741,7 +741,7 @@ export const dollarIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -757,7 +757,7 @@ export const flagIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -773,7 +773,7 @@ export const ticketIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -789,7 +789,7 @@ export const starIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -805,7 +805,7 @@ export const linkIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -821,7 +821,7 @@ export const settingIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -842,7 +842,7 @@ export const powerIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -859,7 +859,7 @@ export const facebookIcon = (
     fill="none"
     height="1em"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 text-white h-6"
   >
@@ -876,7 +876,7 @@ export const bellIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 text-white  h-5"
   >
@@ -909,7 +909,7 @@ export const searchIcon = (
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth="2"
+      stroke-width="2"
       d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
     />
   </svg>
@@ -953,7 +953,7 @@ export const shockIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-12 h-12"
   >
@@ -969,7 +969,7 @@ export const documentTextIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-12 h-12"
   >
@@ -991,7 +991,7 @@ export const crossIcon = (
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth="2"
+      stroke-width="2"
       d="M6 18L18 6M6 6l12 12"
     />
   </svg>
@@ -1001,7 +1001,7 @@ export const chevronRight = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4"
   >
@@ -1017,7 +1017,7 @@ export const trashIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4 text-neutral-400 "
   >
@@ -1033,7 +1033,7 @@ export const rocketLaunch = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4 text-fuchsia-600"
   >
@@ -1049,7 +1049,7 @@ export const sunIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 text-white  h-5"
   >
@@ -1065,7 +1065,7 @@ export const crossIcon1 = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4 text-red-500 "
   >
@@ -1081,7 +1081,7 @@ export const clipboard = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -1097,7 +1097,7 @@ export const deviceTablet = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -1113,7 +1113,7 @@ export const userGroup = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -1129,7 +1129,7 @@ export const inboxArrowDown = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -1145,7 +1145,7 @@ export const userCircle = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-5 h-5"
   >
@@ -1161,7 +1161,7 @@ export const xMark = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-6 h-6"
   >
@@ -1177,7 +1177,7 @@ export const eyeIcon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth="1.5"
+    stroke-width="1.5"
     stroke="currentColor"
     className="w-4 h-4 text-neutral-400"
   >

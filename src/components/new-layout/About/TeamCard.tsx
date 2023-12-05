@@ -45,14 +45,14 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
                       />
                       <path
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
@@ -66,7 +66,7 @@ const TeamCard = () => {
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth="1.5"
+                      stroke-width="1.5"
                       viewBox="0 0 24 24"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" />
@@ -85,7 +85,7 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
@@ -117,14 +117,14 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
                       />
                       <path
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
@@ -138,7 +138,7 @@ const TeamCard = () => {
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth="1.5"
+                      stroke-width="1.5"
                       viewBox="0 0 24 24"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" />
@@ -157,7 +157,7 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
@@ -189,14 +189,14 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
                       />
                       <path
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
@@ -210,7 +210,7 @@ const TeamCard = () => {
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth="1.5"
+                      stroke-width="1.5"
                       viewBox="0 0 24 24"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" />
@@ -229,7 +229,7 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
@@ -261,14 +261,14 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
                       />
                       <path
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
@@ -282,7 +282,7 @@ const TeamCard = () => {
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth="1.5"
+                      stroke-width="1.5"
                       viewBox="0 0 24 24"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" />
@@ -301,7 +301,7 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
@@ -333,14 +333,14 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
                       />
                       <path
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
@@ -354,7 +354,7 @@ const TeamCard = () => {
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth="1.5"
+                      stroke-width="1.5"
                       viewBox="0 0 24 24"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" />
@@ -373,7 +373,7 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
@@ -405,14 +405,14 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
                       />
                       <path
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
@@ -426,7 +426,7 @@ const TeamCard = () => {
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth="1.5"
+                      stroke-width="1.5"
                       viewBox="0 0 24 24"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" />
@@ -445,7 +445,7 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
@@ -477,14 +477,14 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
                       />
                       <path
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
@@ -498,7 +498,7 @@ const TeamCard = () => {
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth="1.5"
+                      stroke-width="1.5"
                       viewBox="0 0 24 24"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" />
@@ -517,7 +517,7 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>
@@ -549,14 +549,14 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
                       />
                       <path
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
@@ -570,7 +570,7 @@ const TeamCard = () => {
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth="1.5"
+                      stroke-width="1.5"
                       viewBox="0 0 24 24"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" />
@@ -589,7 +589,7 @@ const TeamCard = () => {
                         stroke="currentColor"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="1.5"
+                        stroke-width="1.5"
                         d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
                       />
                     </svg>

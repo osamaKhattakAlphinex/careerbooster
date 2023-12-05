@@ -244,7 +244,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth="1.5"
+                  stroke-width="1.5"
                   stroke="currentColor"
                   className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""}`}
                 >
@@ -258,18 +258,19 @@ const JDGenerator = ({ setJobDesc }: Props) => {
               </div>
             ) : (
               <div className="flex">
-              <Image
+                <Image
                   src={buttonIconSrc}
                   alt="bold icon"
                   height={18}
                   width={18}
                 />
-              <span className="text-white ml-3 text-[15px] font-semibold">
-                {/* <span className={`text-black text-[15px] font-semibold`}> */}
-                {/* Upgrade Plan */}
-                Generate Description
-                {/* </span> */}
-              </span></div>
+                <span className="text-white ml-3 text-[15px] font-semibold">
+                  {/* <span className={`text-black text-[15px] font-semibold`}> */}
+                  {/* Upgrade Plan */}
+                  Generate Description
+                  {/* </span> */}
+                </span>
+              </div>
             )}
           </span>
         </button>

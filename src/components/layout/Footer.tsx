@@ -117,7 +117,7 @@ const Footer = () => {
                             stroke="currentColor"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            strokeWidth="1.5"
+                            stroke-width="1.5"
                             d="m4.031 8.917 15.477-4.334a.5.5 0 0 1 .616.617l-4.333 15.476a.5.5 0 0 1-.94.067l-3.248-7.382a.5.5 0 0 0-.256-.257L3.965 9.856a.5.5 0 0 1 .066-.94v0Z"
                           />
                         </svg>
@@ -140,14 +140,14 @@ const Footer = () => {
                               stroke="currentColor"
                               strokeLinecap="round"
                               strokeLinejoin="round"
-                              strokeWidth="1.5"
+                              stroke-width="1.5"
                               d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
                             />
                             <path
                               stroke="currentColor"
                               strokeLinecap="round"
                               strokeLinejoin="round"
-                              strokeWidth="1.5"
+                              stroke-width="1.5"
                               d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                             />
                           </svg>
@@ -190,12 +190,12 @@ const Footer = () => {
                               stroke="currentColor"
                               strokeLinecap="round"
                               strokeLinejoin="round"
-                              strokeWidth="1.5"
+                              stroke-width="1.5"
                               d="M9 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6v0Z"
                             />
                             <path
                               stroke="currentColor"
-                              strokeWidth="1.5"
+                              stroke-width="1.5"
                               d="M2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12Z"
                             />
                           </svg>

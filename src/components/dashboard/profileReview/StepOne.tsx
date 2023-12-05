@@ -44,7 +44,7 @@ const StepOne = () => {
               stroke="currentColor"
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="1.5"
+              stroke-width="1.5"
               viewBox="0 0 24 24"
             >
               <path stroke="none" d="M0 0h24v24H0z" />
@@ -78,7 +78,7 @@ const StepOne = () => {
               stroke="currentColor"
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="1.5"
+              stroke-width="1.5"
               viewBox="0 0 24 24"
             >
               <path stroke="none" d="M0 0h24v24H0z" />
