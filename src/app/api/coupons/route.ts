@@ -22,15 +22,15 @@ export async function POST(request: any) {
     await startDB();
     const payload = await request.json();
 
+    console.log(payload);
+
     const coupon = await stripe.coupons.create({
-      name: "24_PER_OFF",
-      amount_off: 4,
-      currency: "usd",
+      ...payload,
     });
 
-    const response = await Coupon.create({ ...payload });
+    // const response = await Coupon.create({ ...payload });
     return NextResponse.json(
-      { result: response, success: true },
+      { result: coupon, success: true },
       { status: 200 }
     );
   } catch (error) {
