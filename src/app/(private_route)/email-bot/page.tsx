@@ -347,7 +347,7 @@ const PersonalizedEmailBot = () => {
             <div className=" bg-[#17151B] rounded-[20px] px-4 lg:px-[30px] py-[41px] flex flex-col gap-5 ">
               {/* header */}
               <div className="flex gap-2 flex-col md:flex-row  justify-between items-center">
-                <h3 className=" text-sm uppercase text-white font-bold">
+                <h3 className="text-md md:text-sm uppercase text-white font-bold">
                   Generate Emails
                 </h3>
                 <div className=" text-sm text-white uppercase font-bold">
@@ -370,7 +370,7 @@ const PersonalizedEmailBot = () => {
               type="button"
               onClick={() => setShowInstruction(!showInstruction)}
             > */}
-                <span className="uppercase font-bold block gro">
+                <span className="uppercase text-[11px] md:text-sm font-bold block gro">
                   select options
                 </span>
               </div>
@@ -437,10 +437,10 @@ const PersonalizedEmailBot = () => {
                 <div className="w-full flex flex-col">
                   <label
                     htmlFor="job-title"
-                    className=" font-bold lg:text-[23px] text-white flex py-[20px] gap-[3px]"
+                    className=" font-bold text-md md:text-[24px] text-white flex py-[20px] gap-[3px]"
                   >
                     Paste Your Job Description
-                    <span className="text-[#F04248] text-[19px]">*</span>
+                    <span className="text-[#F04248] text-md md:text-[24px]">*</span>
                   </label>
                   <textarea
                     id="job-title"
