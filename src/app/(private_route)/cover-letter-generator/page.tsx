@@ -647,9 +647,12 @@ export default function CoverLetterPage() {
 
                         if (document) {
                           const exporter = new Html2Pdf(clonedDoc);
-                          exporter.getPdf(false).then((pdf: any) => {
-                            pdf.save("cover_letter.pdf");
-                          });
+                          exporter
+                            .getPdf(false)
+                            .then((pdf: any) => {
+                              pdf.save("cover_letter.pdf");
+                            })
+                            .catch((error: any) => console.log(error));
                         }
                       }}
                     />
