@@ -158,7 +158,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
 
   return (
     <>
-      <div className="py-4  lg:p-4 mb-4 rounded-lg">
+      <div className="py-4 lg:p-4 mb-4 rounded-lg">
         <div className="w-full mb-8">
           <LimitCard
             title="File uploads available"
@@ -170,7 +170,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
           />
         </div>
         {!isNaN(availablePercentage) && availablePercentage !== 0 && (
-          <div className="py-3">
+          <div className="md:py-3">
             <div className="py-[20px] lg:w-[480px] px-[30px] flex flex-col lg:flex-row  gap-4 border-2 rounded-[10px] mt-4 border-[#312E37] border-dashed	">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +192,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                   Drag and drop file here
                 </h2>
                 <p className="text-[#312E37] text-[14px]">
-                  Limit 200mb per file
+                  Limit 20mb per file
                 </p>
               </div>
               <label

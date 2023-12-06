@@ -2,29 +2,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/../public/logo.svg";
-import profile from "@/../public/profile/man.jpg";
 import {
-  arrowLeft,
   userCircle,
   menuIcon,
   dollarIcon,
-  flagIcon,
   homeIcon,
-  linkIcon,
   powerIcon,
-  settingIcon,
   inboxArrowDown,
   userGroup,
   deviceTablet,
   clipboard,
-  starIcon,
-  ticketIcon,
   xMark,
 } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
 import Button from "@/components/Button";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 
@@ -88,12 +81,12 @@ const SideBar = () => {
 
       <div
         className={`sidebarTop sidebar  fixed px-6 top-0  w-[244px]  py-[10px]  bg-zinc-900 flex items-center transition-all duration-200   ${
-          isOpen ? " " : "bg-opacity-0 lg:bg-opacity-100"
+          isOpen ? " " : "bg-opacity-0 lg:bg-opacity-100 "
         }`}
       >
         <Image src={logo} alt="" className="w-35 h-14" />
         <div
-          className="w-5 h-5 text-zinc-600 lg:hidden cursor-pointer"
+          className="w-5 h-5 text-zinc-600 lg:hidden ml-4 cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
           {/* Use your icon here for mobile menu toggle */}
@@ -103,7 +96,7 @@ const SideBar = () => {
       <div
         className={`sidebar fixed pb-20 w-[244px] top-0  mt-16 h-screen bg-zinc-900 overflow-y-auto  transition-all ${
           isOpen
-            ? "translate-x-0 lg:translate-x-0 "
+            ? "translate-x-0 lg:translate-x-0"
             : "-translate-x-full lg:translate-x-0 " // Apply opacity only on small screens
         }`}
       >
@@ -142,7 +135,7 @@ const SideBar = () => {
             </div>
           </div>
           <div className="flex flex-col">
-            <ul className="pb-20 pt-[8px] pl-0">
+            <ul className="pb-10 pt-[8px] pl-0">
               {items?.map((item, index) => (
                 <li
                   key={index}
@@ -155,6 +148,7 @@ const SideBar = () => {
                         `}
                       onMouseOver={() => handleMouseOver(index)}
                       onMouseOut={handleMouseOut}
+                      onClick={() => setIsOpen(!isOpen)}
                       style={{
                         opacity: hoveredItem === index ? 1 : 0.7,
                         color:
@@ -211,7 +205,7 @@ const SideBar = () => {
                 </li>
               ))}
             </ul>
-            <div className="w-[190px] h-[210px] mx-7 mt-5 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
+            <div className="w-[190px] h-[210px] sm:mb-10 mx-7 mt-5 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
               <p className="text-white px-8 mb-4 text-xl text-center font-semibold">
                 Upgrade to Pro version to get hired faster
               </p>
