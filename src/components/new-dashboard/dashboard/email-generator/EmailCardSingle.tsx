@@ -8,7 +8,7 @@ import ReactToPrint from "react-to-print";
 import Html2Pdf from "js-html2pdf";
 
 import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { resetEmail, setEmail } from "@/store/emailSlice";
 
 type EmailType = {
@@ -22,6 +22,7 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const router = useRouter();
+  const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
     if (source != "") {
       router.replace("/email-bot");
@@ -77,58 +78,70 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
           <button
             type="button"
             onClick={() => handleOnView(card)}
-            className=" w-[36px] flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+            className="px-2 flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
           >
             {eyeIcon}
+            {pathname == "/dashboard" ? (
+              <span className="text-[13px] mx-2 text-neutral-400">View</span>
+            ) : (
+              ""
+            )}
           </button>
           <button
             type="button"
             onClick={() => handleOnDelete(card)}
-            className="w-[36px] flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+            className="px-2 flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
           >
             {trashIcon}
+            {pathname == "/dashboard" ? (
+              <span className="text-[13px] mx-2 text-neutral-400">Delete</span>
+            ) : (
+              ""
+            )}
           </button>
-          {card && (
-            <>
-              <ReactToPrint
-                trigger={() => (
-                  <button
-                    type="button"
-                    // disabled={
-                    //   resume.state.jobPosition === "" ||
-                    //   resume.state.resumeLoading ||
-                    //   !session?.user?.email ||
-                    //   !resume?.name
-                    // }
-                    className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border borderGreen"
-                  >
-                    Download
-                    {/* <span>
-                            To download choose destination "save as PDF"
-                          </span> */}
-                  </button>
-                )}
-                onBeforeGetContent={async () => await handleOnView(card)}
-                content={() => componentRef.current}
-                print={async (printIframe: HTMLIFrameElement) => {
-                  const document = componentRef.current;
-                  let doc: any = document?.querySelector(".text-white");
-                  const clonedDoc = doc.cloneNode(true);
-                  clonedDoc.style.color = "black";
+          {pathname == "/dashboard"
+            ? ""
+            : card && (
+                <>
+                  <ReactToPrint
+                    trigger={() => (
+                      <button
+                        type="button"
+                        // disabled={
+                        //   resume.state.jobPosition === "" ||
+                        //   resume.state.resumeLoading ||
+                        //   !session?.user?.email ||
+                        //   !resume?.name
+                        // }
+                        className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
+                      >
+                        Download
+                        {/* <span>
+                              To download choose destination "save as PDF"
+                            </span> */}
+                      </button>
+                    )}
+                    onBeforeGetContent={async () => await handleOnView(card)}
+                    content={() => componentRef.current}
+                    print={async (printIframe: HTMLIFrameElement) => {
+                      const document = componentRef.current;
+                      let doc: any = document?.querySelector(".text-white");
+                      const clonedDoc = doc.cloneNode(true);
+                      clonedDoc.style.color = "black";
 
-                  if (document) {
-                    const exporter = new Html2Pdf(clonedDoc);
-                    exporter
-                      .getPdf(false)
-                      .then(async (pdf: any) => {
-                        await pdf.save("email.pdf");
-                      })
-                      .catch((error: any) => console.log(error));
-                  }
-                }}
-              />
-            </>
-          )}
+                      if (document) {
+                        const exporter = new Html2Pdf(clonedDoc);
+                        exporter
+                          .getPdf(false)
+                          .then(async (pdf: any) => {
+                            await pdf.save("email.pdf");
+                          })
+                          .catch((error: any) => console.log(error));
+                      }
+                    }}
+                  />
+                </>
+              )}
         </div>
       </div>
     </div>

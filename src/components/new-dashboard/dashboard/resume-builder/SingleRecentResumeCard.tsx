@@ -1,11 +1,10 @@
 import { eyeIcon, rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
-
 import { Resume, emptyResume, setResume } from "@/store/resumeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
 import { useSession } from "next-auth/react";
 import Html2Pdf from "js-html2pdf";
@@ -23,6 +22,7 @@ const SingleRecentResumeCard = ({
   const { data: session } = useSession();
   const { email, resumes } = userData;
   const router = useRouter();
+  const pathname: any = usePathname();
   const dispatch = useDispatch();
   const handleOnView = async () => {
     if (source != "") {
@@ -81,48 +81,60 @@ const SingleRecentResumeCard = ({
       <div className="flex gap-3 mx-3 my-3">
         <button
           onClick={handleOnView}
-          className=" w-[36px]  flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+          className="flex px-2 text-[16px] justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
         >
           {eyeIcon}
+          {pathname == "/dashboard" ? (
+            <span className="text-[13px] mx-2 text-neutral-400">View</span>
+          ) : (
+            ""
+          )}
         </button>
         <button
           type="button"
           onClick={handleOnDelete}
-          className="w-[36px] flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+          className="flex px-2 justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
         >
-          {trashIcon}
+          {trashIcon}{" "}
+          {pathname == "/dashboard" ? (
+            <span className="text-[13px] mx-2 text-neutral-400">Delete</span>
+          ) : (
+            ""
+          )}
         </button>
-        {resume && (
-          <>
-            <ReactToPrint
-              trigger={() => (
-                <button
-                  type="button"
-                  disabled={
-                    resume.state.jobPosition === "" ||
-                    resume.state.resumeLoading ||
-                    !session?.user?.email ||
-                    !resume?.name
-                  }
-                  className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 borderGreen"
-                >
-                  Download
-                </button>
-              )}
-              onBeforeGetContent={async () => await handleOnView()}
-              content={() => componentRef.current}
-              print={async (printIframe: HTMLIFrameElement) => {
-                const document = printIframe.contentDocument;
-                if (document) {
-                  const exporter = new Html2Pdf(componentRef.current, {
-                    filename: `${resume.name}-${resume.jobTitle}.pdf`,
-                  });
-                  exporter.getPdf(true);
-                }
-              }}
-            />
-          </>
-        )}
+        {pathname == "/dashboard"
+          ? ""
+          : resume && (
+              <>
+                <ReactToPrint
+                  trigger={() => (
+                    <button
+                      type="button"
+                      disabled={
+                        resume.state.jobPosition === "" ||
+                        resume.state.resumeLoading ||
+                        !session?.user?.email ||
+                        !resume?.name
+                      }
+                      className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
+                    >
+                      Download
+                    </button>
+                  )}
+                  onBeforeGetContent={async () => await handleOnView()}
+                  content={() => componentRef.current}
+                  print={async (printIframe: HTMLIFrameElement) => {
+                    const document = printIframe.contentDocument;
+                    if (document) {
+                      const exporter = new Html2Pdf(componentRef.current, {
+                        filename: `${resume.name}-${resume.jobTitle}.pdf`,
+                      });
+                      exporter.getPdf(true);
+                    }
+                  }}
+                />
+              </>
+            )}
       </div>
     </div>
   );
