@@ -647,7 +647,7 @@ export default function CoverLetterPage() {
 
                         if (document) {
                           const exporter = new Html2Pdf(clonedDoc);
-                          exporter.getPdf().then((pdf: any) => {
+                          exporter.getPdf(false).then((pdf: any) => {
                             pdf.save("cover_letter.pdf");
                           });
                         }
