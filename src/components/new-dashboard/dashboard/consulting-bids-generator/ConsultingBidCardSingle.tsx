@@ -6,7 +6,6 @@ import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import ReactToPrint from "react-to-print";
 import Html2Pdf from "js-html2pdf";
-
 import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
 import { useRouter } from "next/navigation";
 import {
@@ -107,7 +106,7 @@ const ConsultingBidCardSingle = ({
                     //   !session?.user?.email ||
                     //   !resume?.name
                     // }
-                    className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
+                    className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border borderGreen"
                   >
                     Download
                     {/* <span>
