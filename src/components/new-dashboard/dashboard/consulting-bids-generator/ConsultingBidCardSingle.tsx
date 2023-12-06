@@ -125,9 +125,12 @@ const ConsultingBidCardSingle = ({
 
                   if (document) {
                     const exporter = new Html2Pdf(clonedDoc);
-                    exporter.getPdf().then((pdf: any) => {
-                      pdf.save("consulting_bid.pdf");
-                    });
+                    exporter
+                      .getPdf(false)
+                      .then(async (pdf: any) => {
+                        await pdf.save("consulting_bid.pdf");
+                      })
+                      .catch((error: any) => console.log(error));
                   }
                 }}
               />

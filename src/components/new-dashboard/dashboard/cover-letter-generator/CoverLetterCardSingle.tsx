@@ -115,9 +115,12 @@ const CoverLetterCardSingle = ({
 
                   if (document) {
                     const exporter = new Html2Pdf(clonedDoc);
-                    exporter.getPdf().then((pdf: any) => {
-                      pdf.save("cover_letter.pdf");
-                    });
+                    exporter
+                      .getPdf(false)
+                      .then(async (pdf: any) => {
+                        await pdf.save("cover_letter.pdf");
+                      })
+                      .catch((error: any) => console.log(error));
                   }
                 }}
               />

@@ -118,9 +118,12 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
 
                   if (document) {
                     const exporter = new Html2Pdf(clonedDoc);
-                    exporter.getPdf().then((pdf: any) => {
-                      pdf.save("email.pdf");
-                    });
+                    exporter
+                      .getPdf(false)
+                      .then(async (pdf: any) => {
+                        await pdf.save("email.pdf");
+                      })
+                      .catch((error: any) => console.log(error));
                   }
                 }}
               />
