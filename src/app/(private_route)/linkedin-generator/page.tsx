@@ -25,18 +25,19 @@ export default function LinkedInPage() {
           {leftArrowIcon}
           Back
         </Link>
-        <div className=" bg-[#18181B] rounded-[20px]   mb-7 px-4 lg:px-[30px] py-[35px]">
-          <div className="flex justify-between items-center ">
-            <h1 className="uppercase text-[14px] font-semibold text-white pb-4">
+        <div className=" bg-[#18181B] rounded-[20px]   mb-7 px-4 lg:px-[24px] py-[35px]">
+          <div className="flex justify-between items-center lg:h-[38px] ">
+            <h1 className="uppercase text-[12px] lg:text-[14px] font-semibold text-white">
               AI LinkedIn Optimization tools
             </h1>
           </div>
+          <div className="mt-5">
+            <HeadlineGenerator setHeadline={setHeadline} />
 
-          <HeadlineGenerator setHeadline={setHeadline} />
-
-          <AboutGenerator setAbout={setAbout} />
-          <JDGenerator setJobDesc={setJobDesc} />
-          <KeywordsGenerator setKeywords={setKeywords} />
+            <AboutGenerator setAbout={setAbout} />
+            <JDGenerator setJobDesc={setJobDesc} />
+            <KeywordsGenerator setKeywords={setKeywords} />
+          </div>
         </div>
       </div>
     </div>
