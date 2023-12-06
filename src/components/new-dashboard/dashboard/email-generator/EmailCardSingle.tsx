@@ -1,6 +1,5 @@
 "use client";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEye, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -8,7 +7,7 @@ import { setUserData } from "@/store/userDataSlice";
 import ReactToPrint from "react-to-print";
 import Html2Pdf from "js-html2pdf";
 
-import { eyeIcon, rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
+import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
 import { useRouter } from "next/navigation";
 import { resetEmail, setEmail } from "@/store/emailSlice";
 
@@ -116,11 +115,14 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
                   let doc: any = document?.querySelector(".text-white");
                   const clonedDoc = doc.cloneNode(true);
                   clonedDoc.style.color = "black";
+                  const options = {
+                    filename: "email.pdf",
+                  };
                   if (document) {
-                    const exporter = new Html2Pdf(clonedDoc, {
-                      filename: `email.pdf`,
+                    const exporter = new Html2Pdf(clonedDoc, options);
+                    exporter.getPdf(true).then((pdf: any) => {
+                      console.log("pdf downloaded successfully");
                     });
-                    exporter.getPdf(true);
                   }
                 }}
               />

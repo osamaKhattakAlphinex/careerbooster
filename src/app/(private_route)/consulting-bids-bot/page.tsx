@@ -626,11 +626,14 @@ const ConsultingBidsGenerator = () => {
                         let doc: any = document?.querySelector(".text-white");
                         const clonedDoc = doc.cloneNode(true);
                         clonedDoc.style.color = "black";
+                        const options = {
+                          filename: "consulting_bid.pdf",
+                        };
                         if (document) {
-                          const exporter = new Html2Pdf(clonedDoc, {
-                            filename: `consulting_bid.pdf`,
+                          const exporter = new Html2Pdf(clonedDoc, options);
+                          exporter.getPdf(true).then((pdf: any) => {
+                            console.log("pdf downloaded successfully");
                           });
-                          exporter.getPdf(true);
                         }
                       }}
                     />
