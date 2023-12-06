@@ -1,6 +1,6 @@
 import AiToolsCard from "@/components/new-dashboard/dashboard/CareerBoostingAiToolsCard";
 import RecentDocumentsCard from "@/components/new-dashboard/dashboard/RecentDocumentsCard";
-// new version (dashboard design)
+// new version (dashboard design and styles fixes)
 const Dashboard = () => {
   return (
     <div className="w-full sm:w-full z-1000 ">
