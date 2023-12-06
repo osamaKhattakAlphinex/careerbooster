@@ -10,7 +10,7 @@ import { resetCoverLetter, setCoverLetter } from "@/store/coverLetterSlice";
 
 import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 type CoverLetterType = {
   card?: any;
@@ -27,6 +27,7 @@ const CoverLetterCardSingle = ({
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const router = useRouter();
+  const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
     if (source != "") {
       router.replace("/cover-letter-generator");
@@ -82,50 +83,62 @@ const CoverLetterCardSingle = ({
           <button
             type="button"
             onClick={() => handleOnView(card)}
-            className=" w-[36px] flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+            className="flex px-2 justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
           >
             {/* <Image src={PencilLine} alt="Image Not Found" /> */}
             {eyeIcon}
+            {pathname == "/dashboard" ? (
+              <span className="text-[13px] mx-2 text-neutral-400">View</span>
+            ) : (
+              ""
+            )}
           </button>
           <button
             type="button"
             onClick={() => handleOnDelete(card)}
-            className="w-[36px] flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+            className="flex px-2 justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
           >
             {trashIcon}
+            {pathname == "/dashboard" ? (
+              <span className="text-[13px] mx-2 text-neutral-400">Delete</span>
+            ) : (
+              ""
+            )}
           </button>
-          {card && (
-            <>
-              <ReactToPrint
-                trigger={() => (
-                  <button
-                    type="button"
-                    className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
-                  >
-                    Download
-                  </button>
-                )}
-                onBeforeGetContent={async () => await handleOnView(card)}
-                content={() => componentRef.current}
-                print={async (printIframe: HTMLIFrameElement) => {
-                  const document = componentRef.current;
-                  let doc: any = document?.querySelector(".text-white");
-                  const clonedDoc = doc.cloneNode(true);
-                  clonedDoc.style.color = "black";
+          {pathname == "/dashboard"
+            ? ""
+            : card && (
+                <>
+                  <ReactToPrint
+                    trigger={() => (
+                      <button
+                        type="button"
+                        className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
+                      >
+                        Download
+                      </button>
+                    )}
+                    onBeforeGetContent={async () => await handleOnView(card)}
+                    content={() => componentRef.current}
+                    print={async (printIframe: HTMLIFrameElement) => {
+                      const document = componentRef.current;
+                      let doc: any = document?.querySelector(".text-white");
+                      const clonedDoc = doc.cloneNode(true);
+                      clonedDoc.style.color = "black";
 
-                  if (document) {
-                    const exporter = new Html2Pdf(clonedDoc);
-                    exporter
-                      .getPdf(false)
-                      .then(async (pdf: any) => {
-                        await pdf.save("cover_letter.pdf");
-                      })
-                      .catch((error: any) => console.log(error));
-                  }
-                }}
-              />
-            </>
-          )}
+                      if (document) {
+                        const exporter = new Html2Pdf(clonedDoc);
+                        exporter
+                          .getPdf(false)
+                          .then(async (pdf: any) => {
+                            await pdf.save("cover_letter.pdf");
+                          })
+                          .catch((error: any) => console.log(error));
+                      }
+                    }}
+                  />
+                </>
+              )}
         </div>
       </div>
     </div>
