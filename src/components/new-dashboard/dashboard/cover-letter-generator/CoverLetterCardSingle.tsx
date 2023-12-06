@@ -112,13 +112,11 @@ const CoverLetterCardSingle = ({
                   let doc: any = document?.querySelector(".text-white");
                   const clonedDoc = doc.cloneNode(true);
                   clonedDoc.style.color = "black";
-                  const options = {
-                    filename: "cover_letter.pdf",
-                  };
+
                   if (document) {
-                    const exporter = new Html2Pdf(clonedDoc, options);
-                    exporter.getPdf(true).then((pdf: any) => {
-                      console.log("pdf downloaded successfully");
+                    const exporter = new Html2Pdf(clonedDoc);
+                    exporter.getPdf().then((pdf: any) => {
+                      pdf.save("cover_letter.pdf");
                     });
                   }
                 }}
