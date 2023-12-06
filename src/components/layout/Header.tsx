@@ -83,6 +83,7 @@ const Header = () => {
     "/consulting-bids-bot",
     "/subscribe",
     "/subscribed",
+    "/chatAI",
   ];
 
   // when page (session) loads, fetch user data if not exists
