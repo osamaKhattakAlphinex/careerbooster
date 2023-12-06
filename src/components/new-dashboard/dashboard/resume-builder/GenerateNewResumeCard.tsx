@@ -33,10 +33,10 @@ Props) => {
     <div className=" bg-[#17151B] rounded-[20px] py-9 px-4 md:px-[30px] flex flex-col gap-7 ">
       {/* header */}
       <div className="flex gap-2 flex-col md:flex-row  justify-between items-center">
-        <h3 className=" text-sm uppercase text-white font-bold">
+        <h3 className=" text-[16px] md:text-sm uppercase text-white font-bold">
           generate new resume
         </h3>
-        <div className=" text-sm text-white uppercase font-bold">
+        <div className="text-white uppercase font-bold">
           <LimitCard
             title="AvailableCredits : "
             limit={userData?.userPackageData?.limit?.resumes_generation}
@@ -50,13 +50,15 @@ Props) => {
 
       {/* instruction */}
 
-      <div className="text-sm text-[#615DFF] self-start">
+      <div className="text-sm text-[#706dff] self-start">
         <button
           className="flex flex-row justify-start items-center gap-[10px]"
           type="button"
           onClick={() => setShowInstruction(!showInstruction)}
         >
-          <span className="uppercase font-bold block gro">instructions</span>
+          <span className="uppercase text-[11px] md:text-sm font-bold block gro">
+            instructions
+          </span>
           <Image
             src="/icon/fi_chevron-down.svg"
             alt="menu"
@@ -107,7 +109,7 @@ Props) => {
         <div className="w-full flex flex-col gap-[30px]">
           <label
             htmlFor="targetedJobPosition"
-            className=" font-bold text-white flex flex-row gap-[10px]"
+            className=" font-bold text-white text-md md:text-[24px] flex flex-row gap-[10px]"
           >
             <Image
               src="/icon/rocket.svg"

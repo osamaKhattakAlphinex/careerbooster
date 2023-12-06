@@ -15,7 +15,7 @@ const RecentResumeCard = ({
     <>
       <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-4 md:px-[24px] py-[35px]  ">
         <div className="flex justify-between items-center  ">
-          <h1 className="uppercase font-semibold lg:text-[14px] text-[11px]">
+          <h1 className="uppercase font-semibold text-[16px] md:text-sm">
             Your Resumes
           </h1>
           <div className="relative lg:w-[213px] w-[120px]">
