@@ -35,6 +35,7 @@ import Link from "next/link";
 const ResumeBuilder = () => {
   const [theme] = useTheme();
   const [confettingRunning, setConfettiRunning] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const confettiConfig = {
     angle: 90,
     spread: 360,
@@ -76,9 +77,8 @@ const ResumeBuilder = () => {
 
     if (
       resumeData.state.jobPosition !== "" &&
-      session?.user?.email
-      // &&
-      // percentageCalculated
+      session?.user?.email &&
+      percentageCalculated
     ) {
       dispatch(setState({ name: "resumeLoading", value: true }));
       dispatch(setId(""));
@@ -89,6 +89,13 @@ const ResumeBuilder = () => {
       getSecondarySkills();
       await getWorkExperienceNew();
       runConfetti();
+    } else {
+      setShowPopup(true);
+
+      // Hide the popup after 3 seconds
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
     }
   }, [resumeData.state]);
 
@@ -551,6 +558,12 @@ const ResumeBuilder = () => {
                 </div>
               </div>
             )}
+          {showPopup && (
+            <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
+              {/* Popup content here */}
+              Credit Limit Reached !
+            </div>
+          )}
         </div>
       </div>
     </>

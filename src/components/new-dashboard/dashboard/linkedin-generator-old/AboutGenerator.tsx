@@ -19,6 +19,8 @@ const AboutGenerator = ({ setAbout }: Props) => {
   const [streamedData, setStreamedData] = useState("");
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
+  const [showPopup, setShowPopup] = useState(false);
+
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
   const [isAboutCopied, setIsAboutCopied] = useState<boolean>(false);
@@ -73,7 +75,11 @@ const AboutGenerator = ({ setAbout }: Props) => {
   const handleGenerate = async () => {
     setStreamedData("");
     await getUserDataIfNotExists();
-    if (session?.user?.email) {
+    if (
+      session?.user?.email &&
+      !isNaN(availablePercentage) &&
+      availablePercentage !== 0
+    ) {
       setMsgLoading(true);
       fetch("/api/linkedInBots/aboutGenerator", {
         method: "POST",
@@ -137,6 +143,13 @@ const AboutGenerator = ({ setAbout }: Props) => {
         .finally(() => {
           setMsgLoading(false);
         });
+    } else {
+      setShowPopup(true);
+
+      // Hide the popup after 3 seconds
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
     }
   };
 
@@ -311,6 +324,12 @@ const AboutGenerator = ({ setAbout }: Props) => {
               </span>
             </button>
           </div>
+        </div>
+      )}
+      {showPopup && (
+        <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
+          {/* Popup content here */}
+          Credit Limit Reached !
         </div>
       )}
     </>

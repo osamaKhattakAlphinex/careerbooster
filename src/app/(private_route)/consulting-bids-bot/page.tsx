@@ -34,7 +34,8 @@ const ConsultingBidsGenerator = () => {
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
   const [isBidCopied, setIsBidCopied] = useState<boolean>(false);
-  const [editedContent, setEditedContent] = useState<string>("");
+  const [showPopup, setShowPopup] = useState(false);
+
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
   // limit bars
@@ -183,6 +184,13 @@ const ConsultingBidsGenerator = () => {
         .finally(() => {
           setMsgLoading(false);
         });
+    } else {
+      setShowPopup(true);
+
+      // Hide the popup after 3 seconds
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
     }
   };
   const saveToDB = async (tempText: string) => {
@@ -419,73 +427,72 @@ const ConsultingBidsGenerator = () => {
                     className="w-full px-3 lg:px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border pt-3"
                   />
                 </div>
-                {!isNaN(availablePercentage) && availablePercentage !== 0 && (
-                  <button
-                    type="button"
-                    disabled={
-                      msgLoading ||
+
+                <button
+                  type="button"
+                  disabled={
+                    msgLoading ||
+                    !session?.user?.email ||
+                    !aiInputUserData ||
+                    selectedOption === "" ||
+                    (selectedOption === "file" && selectedFile === "") ||
+                    jobDescription === ""
+                  }
+                  onClick={handleGenerate}
+                  className={`bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                    (msgLoading ||
                       !session?.user?.email ||
                       !aiInputUserData ||
                       selectedOption === "" ||
                       (selectedOption === "file" && selectedFile === "") ||
-                      jobDescription === ""
-                    }
-                    onClick={handleGenerate}
-                    className={`bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
-                      (msgLoading ||
-                        !session?.user?.email ||
-                        !aiInputUserData ||
-                        selectedOption === "" ||
-                        (selectedOption === "file" && selectedFile === "") ||
-                        jobDescription === "") &&
-                      "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                    }`}
-                  >
-                    {/* <Image
+                      jobDescription === "") &&
+                    "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
+                  }`}
+                >
+                  {/* <Image
                   src="/icon/u_bolt-alt.svg"
                   alt="bold icon"
                   height={18}
                   width={18}
                 /> */}
-                    <span className="text-white text-[15px] font-semibold">
-                      {msgLoading ? (
-                        <div className="flex">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className={`w-4 h-4 mr-3 ${
-                              msgLoading ? "animate-spin" : ""
-                            }`}
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                            />
-                          </svg>
-                          Please wait...
-                        </div>
-                      ) : (
-                        <div className="flex">
-                          <Image
-                            src={buttonIconSrc}
-                            alt="bold icon"
-                            height={18}
-                            width={18}
+                  <span className="text-white text-[15px] font-semibold">
+                    {msgLoading ? (
+                      <div className="flex">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className={`w-4 h-4 mr-3 ${
+                            msgLoading ? "animate-spin" : ""
+                          }`}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
                           />
-                          <span
-                            className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
-                          >
-                            Generate Bid
-                          </span>
-                        </div>
-                      )}
-                    </span>
-                  </button>
-                )}
+                        </svg>
+                        Please wait...
+                      </div>
+                    ) : (
+                      <div className="flex">
+                        <Image
+                          src={buttonIconSrc}
+                          alt="bold icon"
+                          height={18}
+                          width={18}
+                        />
+                        <span
+                          className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                        >
+                          Generate Bid
+                        </span>
+                      </div>
+                    )}
+                  </span>
+                </button>
               </div>
 
               {show && (
@@ -521,71 +528,66 @@ const ConsultingBidsGenerator = () => {
                     </div>
                   </div>
                   <div className="buttons mt-5 flex flex-col md:flex-row gap-3">
-                    {!isNaN(availablePercentage) &&
-                      availablePercentage !== 0 && (
-                        <button
-                          disabled={
-                            msgLoading ||
-                            !session?.user?.email ||
-                            !aiInputUserData ||
-                            selectedOption === "" ||
-                            (selectedOption === "file" &&
-                              selectedFile === "") ||
-                            // (selectedOption === "aiResume" &&
-                            //   setSelectedResumeId === "") ||
-                            jobDescription === ""
-                          }
-                          onClick={handleGenerate}
-                          className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#B324D7] border rounded-full ${
-                            (msgLoading ||
-                              !session?.user?.email ||
-                              !aiInputUserData ||
-                              selectedOption === "" ||
-                              (selectedOption === "file" &&
-                                selectedFile === "") ||
-                              jobDescription === "") &&
-                            "opacity-50 cursor-not-allowed" // Add this class when the button is disabled
-                          }`}
-                        >
-                          <span className="text-white text-[15px] font-semibold">
-                            {msgLoading ? (
-                              <div className="flex">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="currentColor"
-                                  className={`w-4 h-4 mr-3 ${
-                                    msgLoading ? "animate-spin" : ""
-                                  }`}
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                                  />
-                                </svg>
-                                Please wait...
-                              </div>
-                            ) : (
-                              <div className="flex">
-                                <Image
-                                  src={buttonIconSrc}
-                                  alt="bold icon"
-                                  height={18}
-                                  width={18}
-                                />
-                                <span
-                                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
-                                >
-                                  Re-generate
-                                </span>
-                              </div>
-                            )}
-                          </span>
-                        </button>
-                      )}
+                    <button
+                      disabled={
+                        msgLoading ||
+                        !session?.user?.email ||
+                        !aiInputUserData ||
+                        selectedOption === "" ||
+                        (selectedOption === "file" && selectedFile === "") ||
+                        // (selectedOption === "aiResume" &&
+                        //   setSelectedResumeId === "") ||
+                        jobDescription === ""
+                      }
+                      onClick={handleGenerate}
+                      className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#B324D7] border rounded-full ${
+                        (msgLoading ||
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          jobDescription === "") &&
+                        "opacity-50 cursor-not-allowed" // Add this class when the button is disabled
+                      }`}
+                    >
+                      <span className="text-white text-[15px] font-semibold">
+                        {msgLoading ? (
+                          <div className="flex">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className={`w-4 h-4 mr-3 ${
+                                msgLoading ? "animate-spin" : ""
+                              }`}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                              />
+                            </svg>
+                            Please wait...
+                          </div>
+                        ) : (
+                          <div className="flex">
+                            <Image
+                              src={buttonIconSrc}
+                              alt="bold icon"
+                              height={18}
+                              width={18}
+                            />
+                            <span
+                              className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                            >
+                              Re-generate
+                            </span>
+                          </div>
+                        )}
+                      </span>
+                    </button>
 
                     <ReactToPrint
                       trigger={() => (
@@ -749,6 +751,12 @@ const ConsultingBidsGenerator = () => {
                       </button>
                     )}
                   </div>
+                </div>
+              )}
+              {showPopup && (
+                <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
+                  {/* Popup content here */}
+                  Credit Limit Reached !
                 </div>
               )}
             </div>

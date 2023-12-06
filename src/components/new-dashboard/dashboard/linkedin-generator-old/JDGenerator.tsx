@@ -25,6 +25,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [percentageCalculated, setPercentageCalculated] =
@@ -147,6 +148,13 @@ const JDGenerator = ({ setJobDesc }: Props) => {
           dispatch(setUserData({ ...userData, ...updatedObject }));
         }
       });
+    } else {
+      setShowPopup(true);
+
+      // Hide the popup after 3 seconds
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
     }
   };
 
@@ -335,6 +343,12 @@ const JDGenerator = ({ setJobDesc }: Props) => {
               </span>
             </button>
           </div>
+        </div>
+      )}
+      {showPopup && (
+        <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
+          {/* Popup content here */}
+          Credit Limit Reached !
         </div>
       )}
     </>

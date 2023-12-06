@@ -19,6 +19,8 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
   const [streamedData, setStreamedData] = useState("");
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
+  const [showPopup, setShowPopup] = useState(false);
+
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
   const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
@@ -139,6 +141,13 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
         .finally(() => {
           setMsgLoading(false);
         });
+    } else {
+      setShowPopup(true);
+
+      // Hide the popup after 3 seconds
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
     }
   };
 
@@ -235,7 +244,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
             setAvailablePercentage={setAvailablePercentage}
           />
           <p className="text-[14px] text-[#959595] pr-5">
-            Generate headlinr for your linkedin in one click
+            Generate headline for your linkedin in one click
           </p>
         </div>
         <button
@@ -325,6 +334,12 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
               </span>
             </button>
           </div>
+        </div>
+      )}
+      {showPopup && (
+        <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
+          {/* Popup content here */}
+          Credit Limit Reached !
         </div>
       )}
     </>
