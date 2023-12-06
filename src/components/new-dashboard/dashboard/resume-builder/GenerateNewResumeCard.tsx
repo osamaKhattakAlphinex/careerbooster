@@ -33,10 +33,10 @@ Props) => {
     <div className=" bg-[#17151B] rounded-[20px] py-9 px-4 md:px-[30px] flex flex-col gap-7 ">
       {/* header */}
       <div className="flex gap-2 flex-col md:flex-row  justify-between items-center">
-        <h3 className=" text-sm uppercase text-white font-bold">
+        <h3 className=" text-[16px] md:text-sm uppercase text-white font-bold">
           generate new resume
         </h3>
-        <div className=" text-sm text-white uppercase font-bold">
+        <div className="text-white uppercase font-bold">
           <LimitCard
             title="AvailableCredits : "
             limit={userData?.userPackageData?.limit?.resumes_generation}
@@ -50,13 +50,15 @@ Props) => {
 
       {/* instruction */}
 
-      <div className="text-sm text-[#615DFF] self-start">
+      <div className="text-sm text-[#706dff] self-start">
         <button
           className="flex flex-row justify-start items-center gap-[10px]"
           type="button"
           onClick={() => setShowInstruction(!showInstruction)}
         >
-          <span className="uppercase font-bold block gro">instructions</span>
+          <span className="uppercase text-[11px] md:text-sm font-bold block gro">
+            instructions
+          </span>
           <Image
             src="/icon/fi_chevron-down.svg"
             alt="menu"
@@ -107,7 +109,7 @@ Props) => {
         <div className="w-full flex flex-col gap-[30px]">
           <label
             htmlFor="targetedJobPosition"
-            className=" font-bold text-white flex flex-row gap-[10px]"
+            className=" font-bold text-white text-md md:text-[24px] flex flex-row gap-[10px]"
           >
             <Image
               src="/icon/rocket.svg"
@@ -146,43 +148,41 @@ Props) => {
             }`}
           >
             <span className="text-white text-sm">
-              {memoizedState.resumeLoading
-                ? (
-                  <div className="flex">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className={`w-4 h-4 mr-3 ${memoizedState.resumeLoading ? "animate-spin" : ""}`}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+              {memoizedState.resumeLoading ? (
+                <div className="flex">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className={`w-4 h-4 mr-3 ${
+                      memoizedState.resumeLoading ? "animate-spin" : ""
+                    }`}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                    />
+                  </svg>
+                  Please wait...
+                </div>
+              ) : (
+                <div className="flex">
+                  <Image
+                    src={buttonIconSrc}
+                    alt="bold icon"
+                    height={18}
+                    width={18}
                   />
-                </svg>
-                Please wait...
-              </div>
-                )
-                : 
-                (
-                  <div className="flex">
-                <Image
-                  src={buttonIconSrc}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                />
-                <span
-                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
-                >
-                  Generate New Resume
-                </span>
-              </div>
-                )
-                }
+                  <span
+                    className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                  >
+                    Generate New Resume
+                  </span>
+                </div>
+              )}
             </span>
           </button>
         )}

@@ -37,11 +37,11 @@ const LimitCard: React.FC<LimitCardProps> = ({
     return (
       <div className="">
         <div className="w-full flex mb-1">
-          <span className="text-sm text-white uppercase font-bold">
+          <span className="text-[11px] md:text-sm text-white uppercase font-bold">
             {title}
           </span>
           {!isNaN(limit) && !isNaN(used) && (
-            <span className="text-sm uppercase font-bold text-[#B324D7] ml-1 ">
+            <span className="text-[11px] md:text-sm uppercase font-bold text-[#B324D7] ml-1 ">
               {Number(limit) - Number(used)} out of {Number(limit)}
             </span>
           )}
