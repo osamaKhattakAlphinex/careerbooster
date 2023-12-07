@@ -5,10 +5,10 @@ import React, { useRef, useState } from "react";
 const Test = () => {
   const [input, setInput] = useState("");
   const [message, setMessage] = useState("");
-  const [audioUrl, setAudioUrl] = useState("");
+  const [audioUrl, setAudioUrl] = useState<any>("");
   const audioContextRef: any = useRef(null);
   const sourceRef: any = useRef(null);
-  const componentRef = useRef(null);
+  const componentRef: any = useRef(null);
   const handleGenerateSpeech = async () => {
     try {
       const response = await axios.post(
@@ -30,10 +30,11 @@ const Test = () => {
         // // Assuming buffer is the ArrayBuffer you receive from the backend
 
         // Convert ArrayBuffer to Blob
-        const audioBlob = new Blob(audioData.data, { type: "audio/mp3" });
+        const audioBlob = new Blob([audioData.data], { type: "audio/mp3" });
         console.log(audioBlob);
         const url = URL.createObjectURL(audioBlob);
         console.log(url);
+        // url.play().catch((err) => console.log(err));
         setAudioUrl(url);
 
         // // let fileReader = new FileReader();
@@ -97,12 +98,32 @@ const Test = () => {
     }
   };
 
+  const handlePlay = () => {
+    const audioElement: any = componentRef.current;
+    if (audioElement && audioElement.src) {
+      audioElement.play().catch((error: any) => {
+        console.error("Error playing audio:", error);
+      });
+    } else {
+      console.error("No valid audio source.");
+    }
+  };
+
   return (
     <div className="ml-[244px]">
       <textarea value={input} onChange={(e) => setInput(e.target.value)} />
       <button onClick={handleGenerateSpeech}>Generate Speech</button>
       {message && <p>{message}</p>}
-      <audio controls src={audioUrl} />
+      <audio
+        ref={componentRef}
+        controls
+        src={audioUrl}
+
+        // Specify the type directly with a type assertion
+      >
+        {/* <source src={audioUrl} type="audio/mp3"></source> */}
+      </audio>
+      <button onClick={handlePlay}>Play Audio</button>
     </div>
   );
 };
