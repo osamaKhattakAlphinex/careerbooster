@@ -23,7 +23,8 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     "/profile-review": "Review Your Profile",
     "/email-bot": "Generate Emails Using AI",
     "/consulting-bids-bot": "Generate Bids Using AI",
-    "/subscribe": `welCome, ${userData.firstName + " " + userData.lastName}`,
+    "/subscribe": `Welcome, ${userData.firstName + " " + userData.lastName}`,
+    "/chatAI": `Welcome to our latest Chat Bot`,
     // Add more routes as needed
   };
 

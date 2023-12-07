@@ -1,18 +1,15 @@
 import { NextResponse } from "next/server";
+import OpenAI from "openai";
 import fs from "fs/promises";
 import path from "path";
-import OpenAI from "openai";
-
-export async function POST(request: any) {
-  const body = await request.json();
-  console.log(body);
+import { OpenAIStream, StreamingTextResponse } from "ai";
+export async function POST(req: any) {
+  const body = await req.json();
   const { input } = body;
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
   });
-
   const speechFile = path.resolve("./public/speech.mp3");
-
   try {
     const mp3 = await openai.audio.speech.create({
       model: "tts-1",
@@ -22,9 +19,12 @@ export async function POST(request: any) {
 
     const buffer = Buffer.from(await mp3.arrayBuffer());
     await fs.writeFile(speechFile, buffer);
-
     return NextResponse.json(
-      { success: true, buffer, message: "Speech file created successfully" },
+      {
+        success: true,
+        buffer,
+        message: "Speech file created successfully",
+      },
       { status: 200 }
     );
   } catch (error) {

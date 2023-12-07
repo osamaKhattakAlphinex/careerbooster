@@ -16,6 +16,7 @@ const Footer = () => {
     "/consulting-bids-bot",
     "/subscribe",
     "/subscribed",
+    "/chatAI",
   ];
   if (
     pathname === "/login" ||
