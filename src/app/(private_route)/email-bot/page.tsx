@@ -354,7 +354,7 @@ const PersonalizedEmailBot = () => {
             <div className=" bg-[#17151B] rounded-[20px] px-4 lg:px-[30px] py-[41px] flex flex-col gap-5 ">
               {/* header */}
               <div className="flex gap-2 flex-col md:flex-row  justify-between items-center">
-                <h3 className="text-md md:text-sm uppercase text-white font-bold">
+                <h3 className="text-[16px] md:text-sm uppercase text-white font-bold">
                   Generate Emails
                 </h3>
                 <div className=" text-sm text-white uppercase font-bold">
