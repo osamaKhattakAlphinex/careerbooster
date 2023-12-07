@@ -14,11 +14,14 @@ const Button = ({
   textColor?: any;
 }) => {
   // Define a set of classes based on the 'isActive' prop
-  const buttonClasses = isActive ? "border-fuchsia-600" : " border-[#312E37] ";
+  const buttonClasses = isActive ? "borderFuscia" : " borderLight ";
   return (
     <div>
       <button
-        className={`border ${
+        style={{
+          border: buttonClasses,
+        }}
+        className={` ${
           isActive ? `text-fuchsia-600 font-semibold ` : `text-neutral-400`
         } ${textColor}  ${buttonClasses} ${bgColor} rounded-full lg:px-[28px] px-[12px] lg:py-[9px] py-[6px] lg:text-[14px] text-[12px] lg:mr-[13px] mr-[6px] hover:bg-opacity-95 hover:font-semibold`}
         onClick={onClick}

@@ -5,6 +5,7 @@ export const maxDuration = 300; // This function can run for a maximum of 5 seco
 export const dynamic = "force-dynamic";
 
 import nodemailer from "nodemailer";
+import Contact from "@/db/schemas/Contact";
 
 export async function POST(req: Request) {
   try {
@@ -39,6 +40,15 @@ export async function POST(req: Request) {
                `,
     });
     if (info.messageId) {
+      const contactEntry = new Contact({
+        email,
+        message,
+        name,
+        phone,
+      });
+
+      await contactEntry.save();
+
       return NextResponse.json(
         { result: "Message sent successfully", success: true },
         { status: 200 }

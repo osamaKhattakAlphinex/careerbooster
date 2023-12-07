@@ -34,6 +34,18 @@
   transition: background-color 0.2s;
 }
 
+.borderFuscia {
+  border: 1px solid #c026d3 !important;
+}
+
+.borderLight {
+  border: 1px solid #312e37 !important;
+}
+
+.borderGreen {
+  border: 1px solid #22c255 !important;
+}
+
 .text-color {
   color: white;
   padding: 1rem;
@@ -46,8 +58,9 @@
 
 @media screen and (max-width: 1026px) {
   .headText {
-    margin-top: 1.5rem !important;
+    margin-top: 2.5rem !important;
     margin-left: 1rem;
+    margin-bottom: 0rem !important;
   }
   .nav-item {
     margin-top: 1.25rem !important;

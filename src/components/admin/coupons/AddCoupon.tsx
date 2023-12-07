@@ -11,72 +11,17 @@ type Coupon = {
   duration: "once" | "repeating" | "forever";
   duration_in_months: number;
   percent_off?: number;
-  redeem_by?: number; // timestamp - expiration
-  valid?: "yes" | "no";
-  // times_redeemed?: number;
-  // max_redemptions?: number;
-  // livemode: boolean;
-  // id: string;
-  // object?: string;
-  // created: number;
-  // metadata: {};
+  redeem_by: string; // timestamp - expiration
+  valid?: "true" | "false";
+  // these are not specific to the coupan itself.
+  discount_type: "amount_off" | "percent_off";
+  expirable: "true" | "false";
 };
 
 type Props = {
   getCoupons: () => void;
 };
-// Feature Field
-export const FeatureRow = ({
-  id,
-  feature,
-  tooltip,
-  onChangeFeature,
-  onChangeTooltip,
-  onFeatureRemove,
-}: any) => {
-  return (
-    <li className="w-full grid grid-cols-2 gap-2 mb-2">
-      <input
-        required
-        id={`feature-${id}`}
-        type="text"
-        value={feature}
-        onChange={(e) => onChangeFeature(e.target.value)}
-        placeholder="Feature"
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-      />
-      <div className="flex flex-row gap-2 items-center">
-        <input
-          required
-          id={`tooltip-${id}`}
-          type="text"
-          value={tooltip}
-          onChange={(e) => onChangeTooltip(e.target.value)}
-          placeholder="Tooltip"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-        />
-
-        {id >= 1 && (
-          <button
-            type="button"
-            className="w-8 h-8 bg-rose-500 text-gray-50 rounded-lg px-4 py-2 grid place-content-center"
-            onClick={() => {
-              onFeatureRemove(id);
-            }}
-          >
-            X
-          </button>
-        )}
-      </div>
-    </li>
-  );
-};
-
 const AddCoupon = ({ getCoupons }: Props) => {
-  // const addFeatureToolTip = (toolTip: string[]) => {
-  //   setFeaturesToolTips([...featuresToolTips, toolTip]);
-  // };
-
   const initailsValues: Coupon = {
     name: "",
     amount_off: 0,
@@ -84,15 +29,10 @@ const AddCoupon = ({ getCoupons }: Props) => {
     duration: "once",
     duration_in_months: 0,
     percent_off: 0,
-    redeem_by: 0,
-    valid: "yes",
-    // times_redeemed: 0,
-    // max_redemptions: -1,
-    // id: string;
-    // livemode: boolean;
-    // object?: string;
-    // created: number;
-    // metadata: {};
+    redeem_by: new Date().toDateString(),
+    valid: "true",
+    discount_type: "amount_off",
+    expirable: "false",
   };
 
   const [popUpModel, setPopUpModel] = useState(false);
@@ -100,59 +40,84 @@ const AddCoupon = ({ getCoupons }: Props) => {
     initialValues: initailsValues,
     validationSchema: Yup.object().shape({
       name: Yup.string().required("Name for coupon is required"),
-      percent_off: Yup.number()
-        .required("Please Enter Your Percent Off percent")
-        .min(1, "Minimum Value is 0"),
-
-      amount_off: Yup.number().when("percent_off", {
-        is: 0,
+      percent_off: Yup.number().when("discount_type", {
+        is: "percent_off",
         then: () =>
           Yup.number()
-            .required("Please Enter Your Amount Off price")
-            .min(1, "Minimum Value is 0"),
+            .required("Please Enter Your percent_off percent")
+            .min(0, "Minimum Value is 0"),
       }),
 
-      duration_in_months: Yup.number()
-        .required("Please Enter Your Amount")
-        .min(1, "Minimum Value is 0"),
+      amount_off: Yup.number().when("discount_type", {
+        is: "amount_off",
+        then: () =>
+          Yup.number()
+            .required("Please Enter Your amount_off amount")
+            .min(0, "Minimum Value is 0"),
+      }),
+
+      duration_in_months: Yup.number().when("duration", {
+        is: "repeating",
+        then: () =>
+          Yup.number()
+            .required("Please Enter repeating month in numbers")
+            .min(1, "Minimum Value is 1"),
+      }),
+
       duration: Yup.string().required("Please Select duration"),
-      currency: Yup.string()
-        .when("amount_off", {
-          is: 0,
-          then: () =>
-            Yup.number()
-              .required("Please Enter Your Amount Off price")
-              .min(1, "Minimum Value is 0"),
-        })
-        .required("Please select currency"),
+      currency: Yup.string().when("discount_type", {
+        is: "amount_off",
+        then: () => Yup.string().required("Please select currency"),
+      }),
+      redeem_by: Yup.date().when("expirable", {
+        is: "true",
+        then: () =>
+          Yup.date().min(new Date(), "Please choose future expiry date"),
+      }),
     }),
     onSubmit: async (values, action) => {
-      console.log(values);
+      const payload = {
+        name: values.name,
+        [values.discount_type]: values[values.discount_type],
+        duration: values.duration,
+        // valid: values.valid,
+      };
 
-      // const data = {
-      //   name: values.name,
-      //   amount_off: values.amount_off,
-      //   duration: values.duration,
-      //   status: values.status,
-      //   duration_in_months:
-      //     values.duration === "repeating" ? values.duration_in_months : null,
-      //   currency: values.currency,
-      //   livemode: false,
-      //   // percent_off: null,
-      //   forUserPackageCategory: values.category,
-      //   expiresAt: new Date(values.expiryDate),
-      //   valid: values.status === "active" ? true : false,
-      //   times_redeemed: 0,
-      // };
-      // const res = await axios.post("/api/coupons", {
-      //   ...data,
-      // }
-      // );
-      // console.log("api response:", res);
-      // addCouponToStripe(data);
-      getCoupons();
-      action.resetForm();
-      setPopUpModel(false);
+      if (values.discount_type === "amount_off") {
+        if (values.amount_off) {
+          payload.amount_off = 100 * values.amount_off;
+        }
+      } else {
+        if (values.percent_off) {
+          payload.percent_off = values.percent_off;
+        }
+      }
+      if (values.discount_type === "amount_off") {
+        payload.currency = values.currency;
+      }
+      if (values.expirable === "true") {
+        const expiryDate = new Date(values.redeem_by);
+        expiryDate.setHours(23, 59, 59, 999);
+        const expiryTimestamp = expiryDate.getTime() / 1000;
+
+        console.log(expiryTimestamp);
+        payload.redeem_by = Math.trunc(expiryTimestamp);
+      }
+      if (values.duration === "repeating") {
+        payload.duration_in_months = values.duration_in_months;
+      }
+      try {
+        let response: any = await axios.post("/api/coupons", payload);
+        if (response?.data.success) {
+          console.log(response.data.result);
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        getCoupons();
+        action.resetForm();
+        setPopUpModel(false);
+      }
     },
   });
 
@@ -253,54 +218,79 @@ const AddCoupon = ({ getCoupons }: Props) => {
                     <p className="text-red-600 pt-3">{formik.errors.name}</p>
                   )}
                 </div>
-                {/* ammount off amount */}
+                {/* Type Of Discount */}
                 <div>
                   <label
-                    htmlFor="amount_off"
+                    htmlFor="discount_type"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Amount-Off
+                    Discount Type
                   </label>
-                  <input
+                  <select
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.amount_off}
-                    type="number"
-                    name="amount_off"
-                    id="amount_off"
+                    value={formik.values.discount_type}
+                    name="discount_type"
+                    id="discount_type"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="0"
-                  />
-                  {formik.touched.amount_off && formik.errors.amount_off && (
-                    <p className="text-red-600 pt-3">
-                      {formik.errors.amount_off}
-                    </p>
-                  )}
-                </div>
-                {/* percentage off percent */}
-                <div>
-                  <label
-                    htmlFor="percent_off"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Percent-Off
-                  </label>
-                  <input
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.percent_off}
-                    type="number"
-                    name="percent_off"
-                    id="percent_off"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="0"
-                  />
-                  {formik.touched.percent_off && formik.errors.percent_off && (
-                    <p className="text-red-600 pt-3">
-                      {formik.errors.percent_off}
-                    </p>
-                  )}
+                    <option value="amount_off">Amount Off</option>
+                    <option value="percent_off">Percent Off</option>
+                  </select>
                 </div>
+                {formik.values.discount_type === "amount_off" ? (
+                  <div>
+                    {/* ammount off amount */}
+                    <label
+                      htmlFor="amount_off"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Amount-Off
+                    </label>
+                    <input
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.amount_off}
+                      type="number"
+                      name="amount_off"
+                      id="amount_off"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="0"
+                      pattern="0.0"
+                    />
+                    {formik.touched.amount_off && formik.errors.amount_off && (
+                      <p className="text-red-600 pt-3">
+                        {formik.errors.amount_off}
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    {/* percentage off percent */}
+                    <label
+                      htmlFor="percent_off"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Percent-Off
+                    </label>
+                    <input
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.percent_off}
+                      type="number"
+                      name="percent_off"
+                      id="percent_off"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="0"
+                    />
+                    {formik.touched.percent_off &&
+                      formik.errors.percent_off && (
+                        <p className="text-red-600 pt-3">
+                          {formik.errors.percent_off}
+                        </p>
+                      )}
+                  </div>
+                )}
                 {/*  valid : yes or no  */}
                 <div>
                   <label
@@ -352,81 +342,112 @@ const AddCoupon = ({ getCoupons }: Props) => {
                     </p>
                   )}
                 </div>
+
                 {/* duration in months */}
-                <div>
-                  <label
-                    htmlFor="duration_in_months"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Duration In Months
-                  </label>
-                  <input
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.duration_in_months}
-                    type="number"
-                    name="duration_in_months"
-                    id="duration_in_months"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="0"
-                  />
-                  {formik.touched.duration_in_months &&
-                    formik.errors.duration_in_months && (
+                {formik.values.duration === "repeating" && (
+                  <div>
+                    <label
+                      htmlFor="duration_in_months"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Duration In Months
+                    </label>
+                    <input
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.duration_in_months}
+                      type="number"
+                      name="duration_in_months"
+                      id="duration_in_months"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="0"
+                    />
+                    {formik.touched.duration_in_months &&
+                      formik.errors.duration_in_months && (
+                        <p className="text-red-600 pt-3">
+                          {formik.errors.duration_in_months}
+                        </p>
+                      )}
+                  </div>
+                )}
+
+                {formik.values.discount_type === "amount_off" && (
+                  <div>
+                    {/* currency */}
+                    <label
+                      htmlFor="currency"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Currency
+                    </label>
+                    <select
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.currency}
+                      id="currency"
+                      name="currency"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >
+                      <option value="usd" selected>
+                        USD
+                      </option>
+                    </select>
+                    {formik.touched.currency && formik.errors.currency && (
                       <p className="text-red-600 pt-3">
-                        {formik.errors.duration_in_months}
+                        {formik.errors.currency}
                       </p>
                     )}
-                </div>
-                {/* currency */}
+                  </div>
+                )}
+              </div>
+
+              <div className="grid gap-4 mb-4 sm:grid-cols-2">
                 <div>
+                  {/* Expirable Coupon*/}
                   <label
-                    htmlFor="currency"
+                    htmlFor="expirable"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Currency
+                    Is this coupan expiring soon?
                   </label>
                   <select
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.currency}
-                    id="currency"
-                    name="currency"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    value={formik.values.expirable}
+                    id="expirable"
+                    name="expirable"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   >
-                    <option value="usd" selected>
-                      USD
-                    </option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
                   </select>
-                  {formik.touched.currency && formik.errors.currency && (
-                    <p className="text-red-600 pt-3">
-                      {formik.errors.currency}
-                    </p>
-                  )}
                 </div>
-                {/* redeem by date i.e expiration data*/}
-                <div>
-                  <label
-                    htmlFor="redeem_by"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Expiry Date (DD/MM/YYYY)
-                  </label>
-                  <input
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.redeem_by}
-                    type="text"
-                    name="redeem_by"
-                    id="redeem_by"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="DD/MM/YYYY"
-                  />
-                  {formik.touched.redeem_by && formik.errors.redeem_by && (
-                    <p className="text-red-600 pt-3">
-                      {formik.errors.redeem_by}
-                    </p>
-                  )}
-                </div>
+                {formik.values.expirable === "true" && (
+                  <div>
+                    {/* redeem by date i.e expiration data*/}
+                    <label
+                      htmlFor="redeem_by"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Expiry Date (DD/MM/YYYY)
+                    </label>
+                    <input
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.redeem_by}
+                      type="date"
+                      name="redeem_by"
+                      id="redeem_by"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="DD/MM/YYYY"
+                    />
+                    {formik.touched.redeem_by && formik.errors.redeem_by && (
+                      <p className="text-red-600 pt-3">
+                        {formik.errors.redeem_by}
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
 
               <button

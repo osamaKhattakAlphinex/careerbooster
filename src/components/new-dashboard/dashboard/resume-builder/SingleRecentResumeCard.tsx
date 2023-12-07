@@ -84,14 +84,23 @@ const SingleRecentResumeCard = ({
           className="flex px-2 text-[16px] justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
         >
           {eyeIcon}
-          {pathname == "/dashboard" ? (<span className="text-[13px] mx-2 text-neutral-400">View</span>) : ""}
+          {pathname == "/dashboard" ? (
+            <span className="text-[13px] mx-2 text-neutral-400">View</span>
+          ) : (
+            ""
+          )}
         </button>
         <button
           type="button"
           onClick={handleOnDelete}
           className="flex px-2 justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
         >
-          {trashIcon}  {pathname == "/dashboard" ? (<span className="text-[13px] mx-2 text-neutral-400">Delete</span>) : ""}
+          {trashIcon}{" "}
+          {pathname == "/dashboard" ? (
+            <span className="text-[13px] mx-2 text-neutral-400">Delete</span>
+          ) : (
+            ""
+          )}
         </button>
         {pathname == "/dashboard"
           ? ""

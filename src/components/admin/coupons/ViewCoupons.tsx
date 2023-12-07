@@ -149,7 +149,8 @@ const ViewCoupons = ({}) => {
                           </th>
                           <td className="px-4 py-3">{coupon?.name}</td>
                           <td className="px-4 py-3">
-                            {coupon.amount_off && `${coupon?.amount_off} $`}
+                            {coupon.amount_off &&
+                              `${coupon?.amount_off / 100} $`}
                           </td>
                           <td className="px-4 py-3">
                             {coupon?.percent_off && `${coupon?.percent_off} %`}

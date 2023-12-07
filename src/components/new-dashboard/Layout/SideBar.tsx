@@ -80,7 +80,7 @@ const SideBar = () => {
       {/* Mobile Menu Button */}
 
       <div
-        className={`sidebarTop sidebar  fixed px-6 top-0  w-[244px]  py-[10px]  bg-zinc-900 flex items-center transition-all duration-200   ${
+        className={`sidebarTop sidebar  fixed px-6 top-0  w-[244px]  pb-[10px]  bg-zinc-900 flex items-center transition-all duration-200   ${
           isOpen ? " " : "bg-opacity-0 lg:bg-opacity-100 "
         }`}
       >

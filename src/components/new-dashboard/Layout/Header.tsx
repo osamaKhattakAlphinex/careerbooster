@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Modal from "@/components/Modal";
 import { bellIcon, sunIcon } from "@/helpers/iconsProvider";
@@ -12,7 +12,9 @@ const pagesArray = ["/subscribe"];
 const Header: React.FC<HeaderProps> = ({ children }) => {
   const pathname: any = usePathname();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isSticky, setIsSticky] = useState(false);
   const userData = useSelector((state: any) => state.userData);
+  const [pageScroll, setPageScroll] = useState(0);
   const routeNamesToDisplayNames: Record<string, string> = {
     "/dashboard": "Dashboard",
     "/resume-builder": "Generate New Resumes",
@@ -30,13 +32,13 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
   return (
     <nav
-      className={`nav-item py-[14px] px-4 ml-0  
+      className={` py-[14px] px-4 ml-0 sticky top-0 bg-gradient-to-l from-[#340E53] to-[#000533]  z-999      
       ${pagesArray?.includes(pathname) ? "m-5" : "lg:ml-[244px]"} 
       ${pathname === "/subscribed" && "hidden"} 
       `}
     >
       <div className="w-full rounded-lg flex justify-between sm:justify-between items-center">
-        <h1 className="headText  rounded-[14px] text-[14px] text-[#959595] font-bold uppercase">
+        <h1 className="headText mb-0 rounded-[14px] text-[14px] text-[#959595] font-bold uppercase">
           {currentRouteDisplayName}
         </h1>
         <div className="flex">

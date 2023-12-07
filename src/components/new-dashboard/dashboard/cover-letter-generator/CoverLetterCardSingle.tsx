@@ -7,7 +7,6 @@ import { setUserData } from "@/store/userDataSlice";
 import ReactToPrint from "react-to-print";
 import Html2Pdf from "js-html2pdf";
 import { resetCoverLetter, setCoverLetter } from "@/store/coverLetterSlice";
-
 import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
 
 import { usePathname, useRouter } from "next/navigation";
