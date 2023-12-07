@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import fs from "fs/promises";
 import path from "path";
-import { OpenAIStream, StreamingTextResponse } from "ai";
 export async function POST(req: any) {
   const body = await req.json();
   const { input } = body;
@@ -16,15 +15,28 @@ export async function POST(req: any) {
       voice: "alloy",
       input: input,
     });
-
+    // console.log(mp3);
     const buffer = Buffer.from(await mp3.arrayBuffer());
     // console.log(buffer);
+    // console.log(Buffer.isEncoding("utf8"));
+    // console.log(buffer);
+    // const requestHeaders = new Headers(req.headers);
+    //     // await fs.writeFile(speechFile, buffer);
+    //     const response = NextResponse.next({
+    //       request: {
+    //         // New request headers
+    //         headers: requestHeaders,
+    //       },
+    //     });
 
-    await fs.writeFile(speechFile, buffer);
+    //     // Set a new response header x-hello-from-middleware2
+    //     response.headers.set("Content-Type", "audio/mp3");
+    //     return response;
     return NextResponse.json(
       {
         success: true,
-        buffer,
+        result: buffer,
+        // mp3,
         message: "Speech file created successfully",
       },
       { status: 200 }

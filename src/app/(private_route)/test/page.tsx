@@ -9,6 +9,16 @@ const Test = () => {
   const audioContextRef: any = useRef(null);
   const sourceRef: any = useRef(null);
   const componentRef: any = useRef(null);
+  function base64ToArrayBuffer(base64: any) {
+    var binaryString = window.atob(base64);
+    var len = binaryString.length;
+    var bytes = new Uint8Array(len);
+    for (var i = 0; i < len; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    return bytes.buffer;
+  }
+
   const handleGenerateSpeech = async () => {
     try {
       const response = await axios.post(
@@ -16,21 +26,23 @@ const Test = () => {
         { input }
         // { responseType: "arraybuffer" }
       );
+
       if (response.status === 200) {
         setMessage("Speech generated successfully");
         // Play the audio
-        console.log(response.data);
+        console.log(response.data, typeof response.data);
         // Convert base64 data to ArrayBuffer
-        const audioData = response.data.buffer; // Assuming the audio data is in base64 format
-
-        // console.log(audioData);
+        const audioData = response.data.result.data; // Assuming the audio data is in base64 format
+        // const arrayBuffer = base64ToArrayBuffer(audioData.data);
+        // debugger;
+        console.log(audioData);
         // const arrayBuffer = new ArrayBuffer(audioData.data);
 
         // console.log(arrayBuffer);
         // // Assuming buffer is the ArrayBuffer you receive from the backend
 
         // Convert ArrayBuffer to Blob
-        const audioBlob = new Blob([audioData.data], { type: "audio/mp3" });
+        const audioBlob = new Blob(audioData, { type: "audio/mp3" });
         console.log(audioBlob);
         const url = URL.createObjectURL(audioBlob);
         console.log(url);
