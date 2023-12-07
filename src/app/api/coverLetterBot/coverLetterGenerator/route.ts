@@ -36,9 +36,12 @@ export async function POST(req: any) {
     const trainBotData = reqBody?.trainBotData;
     let fileContent;
 
-    const dataset = "linkedin.genearteConsultingBid";
+    let trainBotEntry: any = {};
+
+    // const dataset = "linkedin.genearteConsultingBid";
+    const dataset = "coverLetter.write";
     const model = await getTrainedModel(dataset);
-    console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+    //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
     // fetch prompt from db
     await startDB();
@@ -76,32 +79,58 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
+
     // make a trainBot entry
     try {
-      if (trainBotData) {
-        await startDB();
-
-        const obj = {
-          type: "linkedin.genearteConsultingBid",
-          input: prompt,
-          output: response?.choices[0]?.message?.content?.replace(
-            /(\r\n|\n|\r)/gm,
-            ""
-          ),
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
-        };
-
-        await TrainBot.create({ ...obj });
-      }
+      // if (trainBotData) {
+      //   // console.log(trainBotData);
+      //   await startDB();
+      //   const obj = {
+      //     type: "coverLetter.write",
+      //     input: prompt,
+      //     output: response,
+      //     idealOutput: "",
+      //     status: "pending",
+      //     userEmail: trainBotData.userEmail,
+      //     fileAddress: trainBotData.fileAddress,
+      //     Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
+      //   };
+      //   // console.log(obj);
+      //   await TrainBot.create({ ...obj });
+      // }
     } catch (error) {}
+
     // Convert the response into a friendly text-stream
-    const stream = OpenAIStream(response);
+    const stream = OpenAIStream(response, {
+      onFinal(completions) {
+        if (trainBotData) {
+          // console.log(trainBotData);
+
+          startDB();
+
+          const obj = {
+            type: "coverLetter.write",
+            input: prompt,
+            output: completions,
+            idealOutput: "",
+            status: "pending",
+            userEmail: trainBotData.userEmail,
+            fileAddress: trainBotData.fileAddress,
+            Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
+          };
+          // console.log(obj);
+          trainBotEntry = new TrainBot({ ...obj });
+          trainBotEntry.save();
+          console.log(trainBotEntry);
+        }
+      },
+    });
     // Respond with the stream
-    return new StreamingTextResponse(stream);
+    return new StreamingTextResponse(stream, {
+      headers: {
+        "xxx-train-bot-entry-xxx": trainBotEntry._id,
+      },
+    });
     // return NextResponse.json(
     //   { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
     //   { status: 200 }

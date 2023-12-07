@@ -75,11 +75,7 @@ const ResumeBuilder = () => {
     // reset resume
     dispatch(resetResume(resumeData.state));
 
-    if (
-      resumeData.state.jobPosition !== "" &&
-      session?.user?.email &&
-      percentageCalculated
-    ) {
+    if (resumeData.state.jobPosition !== "" && session?.user?.email) {
       dispatch(setState({ name: "resumeLoading", value: true }));
       dispatch(setId(""));
       getBasicInfo();

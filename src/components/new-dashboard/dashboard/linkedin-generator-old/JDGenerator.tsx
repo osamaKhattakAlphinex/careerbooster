@@ -269,7 +269,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""}`}
                 >
@@ -323,7 +323,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="w-4 h-4 text-white"
               >
