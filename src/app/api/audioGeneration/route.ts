@@ -18,6 +18,8 @@ export async function POST(req: any) {
     });
 
     const buffer = Buffer.from(await mp3.arrayBuffer());
+    // console.log(buffer);
+
     await fs.writeFile(speechFile, buffer);
     return NextResponse.json(
       {

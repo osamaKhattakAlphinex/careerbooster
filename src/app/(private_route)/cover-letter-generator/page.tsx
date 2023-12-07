@@ -149,7 +149,7 @@ export default function CoverLetterPage() {
         jobDescription,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          fileAddress: userData.files[0].fileName,
         },
       };
 
