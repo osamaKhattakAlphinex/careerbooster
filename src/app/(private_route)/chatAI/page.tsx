@@ -3,11 +3,19 @@ import { getFilesForUser } from "@/helpers/getFilesForUser";
 import { useChat } from "ai/react";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { makeid } from "@/helpers/makeid";
 
 const ChatAI = () => {
   const [userData, setUserData] = useState({});
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "/api/chatWithFile",
+    initialMessages: [
+      {
+        id: makeid(),
+        role: "user",
+        content: JSON.stringify(userData).substring(0, 16000),
+      },
+    ],
     body: {
       userData: userData,
     },
@@ -17,8 +25,16 @@ const ChatAI = () => {
 
   const getDataForChat = async () => {
     const data = await getFilesForUser(session?.user?.email);
-    console.log(data);
-    setUserData(data);
+    setUserData({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone,
+      email: data.email,
+      contact: data.contact,
+      skills: data.skills,
+      education: data.education,
+      files: data.files,
+    });
   };
   useEffect(() => {
     getDataForChat();
@@ -27,7 +43,7 @@ const ChatAI = () => {
   return (
     <main className="mx-auto w-full h-screen max-w-lg p-24 flex flex-col">
       <section className="mb-auto m">
-        {messages.map((m) => (
+        {messages.slice(1).map((m) => (
           <div className="mb-4" key={m.id}>
             {m.role === "user" ? "User: " : "AI Resume Bot: "}
             {m.content}
