@@ -80,7 +80,7 @@ const SideBar = () => {
       {/* Mobile Menu Button */}
 
       <div
-        className={`sidebarTop sidebar  fixed px-6 top-0  w-[244px]  pb-[10px]  bg-zinc-900 flex items-center transition-all duration-200   ${
+        className={`sidebarTop sidebar  fixed px-6 top-0  w-[234px]  pb-[10px]  bg-zinc-900 flex items-center transition-all duration-200   ${
           isOpen ? " " : "bg-opacity-0 lg:bg-opacity-100 "
         }`}
       >
@@ -94,7 +94,7 @@ const SideBar = () => {
         </div>
       </div>
       <div
-        className={`sidebar fixed pb-20 w-[244px] top-0  mt-16 h-screen bg-zinc-900 overflow-y-auto  transition-all ${
+        className={`sidebar fixed w-[234px] top-0 flex justify-center  mt-16 h-[100%] bg-zinc-900 overflow-y-auto  transition-all ${
           isOpen
             ? "translate-x-0 lg:translate-x-0"
             : "-translate-x-full lg:translate-x-0 " // Apply opacity only on small screens
@@ -102,7 +102,7 @@ const SideBar = () => {
       >
         <div className="block">
           <div>
-            <div className="px-7 py-2 flex">
+            <div className="px-7 py-[6px] flex">
               <div className="mr-4">
                 {/* <Image
                   src={profile}
@@ -135,11 +135,11 @@ const SideBar = () => {
             </div>
           </div>
           <div className="flex flex-col">
-            <ul className="pb-10 pt-[8px] pl-0">
+            <ul className="pb-3 pt-[8px] pl-0">
               {items?.map((item, index) => (
                 <li
                   key={index}
-                  className="py-[11px] inline-block cursor-pointer transition-all text-neutral-500 hover:text-white"
+                  className="py-[3px] inline-block cursor-pointer transition-all text-neutral-500 hover:text-white"
                 >
                   {item.text !== "Logout" ? (
                     <Link
@@ -205,18 +205,20 @@ const SideBar = () => {
                 </li>
               ))}
             </ul>
-            <div className="w-[190px] h-[210px] sm:mb-10 mx-7 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
-              <p className="text-white px-8 mb-4 text-xl text-center font-semibold">
+            <div className="w-[160px] md:w-[170px] h-[170px] mt-9 md:mt-3 mx-7 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
+              <p className="text-white px-4 mb-4 text-[15px] text-center font-semibold">
                 Upgrade to Pro version to get hired faster
               </p>
-              <Button
-                onClick={() => {
-                  router.push("/subscribe");
-                }}
-                btnText="Upgrade"
-                textColor={`text-white`}
-                bgColor="bg-zinc-900"
-              />
+              <div className="items-center">
+                <Button
+                  onClick={() => {
+                    router.push("/subscribe");
+                  }}
+                  btnText="Upgrade"
+                  textColor={`text-white`}
+                  bgColor="bg-zinc-900"
+                />
+              </div>
             </div>
           </div>
         </div>
