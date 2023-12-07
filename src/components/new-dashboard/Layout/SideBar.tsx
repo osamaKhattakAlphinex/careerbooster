@@ -205,7 +205,7 @@ const SideBar = () => {
                 </li>
               ))}
             </ul>
-            <div className="w-[190px] h-[210px] sm:mb-10 mx-7 mt-5 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
+            <div className="w-[190px] h-[210px] sm:mb-10 mx-7 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
               <p className="text-white px-8 mb-4 text-xl text-center font-semibold">
                 Upgrade to Pro version to get hired faster
               </p>
