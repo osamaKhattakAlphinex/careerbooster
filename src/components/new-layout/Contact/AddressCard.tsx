@@ -12,7 +12,7 @@ const AddressCard = () => {
                   stroke="currentColor"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   viewBox="0 0 24 24"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" />
@@ -34,7 +34,7 @@ const AddressCard = () => {
                   stroke="currentColor"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   viewBox="0 0 24 24"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" />

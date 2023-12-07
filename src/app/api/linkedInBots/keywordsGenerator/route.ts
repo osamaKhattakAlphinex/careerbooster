@@ -43,7 +43,7 @@ export async function POST(req: any) {
 
     const dataset = "linkedin.genearteConsultingBid";
     const model = await getTrainedModel(dataset);
-    console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+    //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
     const response: any = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",

@@ -34,7 +34,7 @@ export async function POST(req: any) {
 
         const dataset = "register.wizard.listExperiences";
         const model = await getTrainedModel(dataset);
-        console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+        //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
         const input = `
               This is the User Data:

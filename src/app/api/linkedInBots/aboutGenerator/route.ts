@@ -26,7 +26,7 @@ export async function POST(req: any) {
   try {
     const dataset = "linkedin.genearteConsultingBid";
     const model = await getTrainedModel(dataset);
-    console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+    //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
     const reqBody = await req.json();
     const userData = reqBody?.userData;
