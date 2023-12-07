@@ -8,7 +8,9 @@ const ChatAI = () => {
   const [userData, setUserData] = useState({});
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "/api/chatWithFile",
-    body: userData,
+    body: {
+      userData: userData,
+    },
   });
 
   const { data: session, status } = useSession();
