@@ -314,7 +314,7 @@ const ConsultingBidsGenerator = () => {
             <div className=" bg-[#17151B] rounded-[20px] px-4  lg:px-[30px] py-[41px] flex flex-col gap-5 ">
               {/* header */}
               <div className="flex flex-col  md:flex-row justify-between items-center">
-                <h3 className="text-md md:text-sm uppercase text-white font-bold">
+                <h3 className="text-[16px] md:text-sm uppercase text-white font-bold">
                   Consulting Bids Generator
                 </h3>
                 <div className=" text-sm text-white uppercase font-bold">
@@ -416,7 +416,9 @@ const ConsultingBidsGenerator = () => {
                     className=" font-bold text-md md:text-[24px] text-white flex py-[20px] gap-[3px]"
                   >
                     Paste Your Job Description
-                    <span className="text-[#F04248] text-md md:text-[24px]">*</span>
+                    <span className="text-[#F04248] text-md md:text-[24px]">
+                      *
+                    </span>
                   </label>
                   <textarea
                     id="job-title"
@@ -606,7 +608,7 @@ const ConsultingBidsGenerator = () => {
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke-width="1.5"
+                            strokeWidth="1.5"
                             stroke="currentColor"
                             className="w-6 h-6 text-[#37B944]"
                           >
@@ -672,7 +674,7 @@ const ConsultingBidsGenerator = () => {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke="currentColor"
                           className="w-4 h-4 text-white"
                         >
@@ -711,7 +713,7 @@ const ConsultingBidsGenerator = () => {
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
                               viewBox="0 0 24 24"
-                              stroke-width="1.5"
+                              strokeWidth="1.5"
                               stroke="currentColor"
                               className="w-6 h-6 text-yellow-200"
                             >
@@ -738,7 +740,7 @@ const ConsultingBidsGenerator = () => {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
-                          stroke-width={1.5}
+                          strokeWidth={1.5}
                           stroke="currentColor"
                           className="w-6 h-6 text-white"
                         >

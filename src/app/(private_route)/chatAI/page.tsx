@@ -41,7 +41,7 @@ const ChatAI = () => {
   }, []);
 
   return (
-    <div className="ml-[244px] w-full flex flex-col min-h-[400px] max-h-[400px] overflow-y-scroll">
+    <div className="ml-[244px] w-full flex flex-col min-h-[400px] max-h-[400px] overflow-y-scroll pt-20">
       <section className="flex flex-col justify-center gap-8 mb-5 w-3/5 ml-28 flex-1 overflow-y-scroll no-scrollbar ">
         {/* {m.role === "user" ? "User: " : "AI Resume Bot: "} */}
         {messages.slice(1).map((m) => (

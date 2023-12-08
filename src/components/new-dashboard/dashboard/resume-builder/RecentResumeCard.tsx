@@ -1,6 +1,9 @@
 import { searchIcon } from "@/helpers/iconsProvider";
 import SingleRecentResumeCard from "./SingleRecentResumeCard";
 import { useSelector } from "react-redux";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
+
 const RecentResumeCard = ({
   source = "",
   componentRef,
@@ -31,23 +34,51 @@ const RecentResumeCard = ({
         </div>
         {!resumes && <p>Loading Resumes...</p>}
         {/* <div className="flex flex-wrap lg:flex-row flex-col  gap-4"> */}
-        <div className="flex flex-wrap  gap-2 ">
-          {resumes &&
-            resumes.map((resume: any) => (
-              <div
-                key={resume.id}
-                className="xs:w-[100%] sm:w-[100%] md:w-[48%] lg:w-[32%]   "
-              >
-                <SingleRecentResumeCard
+        <div className="flex flex-row">
+          <Swiper
+            spaceBetween={10}
+            slidesPerView={3}
+           
+            navigation={true}
+            modules={[Navigation]}
+            
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              640: {
+                slidesPerView: 1,
+              },
+              768: {
+                slidesPerView: 2,
+              },
+              1080: {
+                slidesPerView: 3,
+              },
+              1280: {
+                slidesPerView: 3,
+              },
+            }}
+          >
+
+            {resumes &&
+              resumes.map((resume: any) => (
+                <SwiperSlide
+                  className="xs:w-[100%] sm:w-[100%] md:w-[48%] lg:w-[30%]"
                   key={resume.id}
-                  resume={resume}
-                  source={source}
-                  componentRef={componentRef}
-                />
-              </div>
-            ))}
+                >
+                    <SingleRecentResumeCard
+                      key={resume.id}
+                      resume={resume}
+                      source={source}
+                      componentRef={componentRef}
+                    />
+                </SwiperSlide>
+              ))}
+          </Swiper>
         </div>
       </div>
+
       {/* <GenerateResume /> */}
     </>
   );
