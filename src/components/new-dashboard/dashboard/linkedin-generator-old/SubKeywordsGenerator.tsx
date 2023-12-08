@@ -14,6 +14,7 @@ import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
 import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
+import LinkedInHKeywordsCardSingle from "./LinkedInKeywordsCardSingle";
 
 const SubKeywordsGenerator = () => {
     const [keywords, setKeywords] = useState<string>("");
@@ -202,9 +203,9 @@ const SubKeywordsGenerator = () => {
     }
   }, [session?.user?.email]);
   const historyProps = {
-    dataSource: "coverLetters",
+    dataSource: "linkedInKeywords",
     Component: (card: any) => (
-      <CoverLetterCardSingle card={card} componentRef={componentRef} />
+      <LinkedInHKeywordsCardSingle card={card} componentRef={componentRef} />
     ),
   };
   return (

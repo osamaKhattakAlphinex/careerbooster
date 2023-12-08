@@ -12,6 +12,7 @@ import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
 import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
+import LinkedInHeadlineCardSingle from "./LinkedInHeadeLineCardSingle";
 
 const SubHeadlineGenerator = () => {
   const [headline, setHeadline] = useState<string>("");
@@ -204,9 +205,9 @@ const SubHeadlineGenerator = () => {
     }
   }, [session?.user?.email]);
   const historyProps = {
-    dataSource: "coverLetters",
+    dataSource: "linkedInHeadlines",
     Component: (card: any) => (
-      <CoverLetterCardSingle card={card} componentRef={componentRef} />
+      <LinkedInHeadlineCardSingle card={card} componentRef={componentRef} />
     ),
   };
   return (

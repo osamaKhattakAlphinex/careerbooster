@@ -15,12 +15,13 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
   if (!userData) return;
 
   return (
-    <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-4 lg:px-[24px] pt-[35px]">
+    <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-4 lg:px-[24px] py-[35px]">
       <div className="flex justify-between items-center ">
         <h1 className="uppercase text-[14px] md:text-sm font-semibold lg:pr-0 pr-4">
           {dataSource === "coverLetters" && "Your AI Generated Cover Letters"}
           {dataSource === "emails" && "Your AI Generated Emails"}
           {dataSource === "consultingBids" && "Your AI Generated Bids"}
+          {dataSource === "resume" && "Your AI Generated Resume"}
         </h1>
         <div className="relative lg:w-[213px] w-[120px] flex">
           <input

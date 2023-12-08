@@ -19,6 +19,7 @@ import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
+import LinkedInJDCardSingle from "./LinkedInJDCardSingle";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
   const [jobDesc, setJobDesc] = useState<string>("");
@@ -210,9 +211,9 @@ const SubJDGenerator = () => {
     }
   }, [session?.user?.email]);
   const historyProps = {
-    dataSource: "coverLetters",
+    dataSource: "linkedInJobDescriptions",
     Component: (card: any) => (
-      <CoverLetterCardSingle card={card} componentRef={componentRef} />
+      <LinkedInJDCardSingle card={card} componentRef={componentRef} />
     ),
   };
   return (
