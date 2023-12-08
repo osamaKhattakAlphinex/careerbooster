@@ -41,7 +41,7 @@ const FeaturesSecond = () => {
                   <path
                     d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
                     stroke="currentColor"
-                    stroke-width="1.21"
+                    strokeWidth="1.21"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
@@ -97,7 +97,7 @@ const FeaturesSecond = () => {
                   <path
                     d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
                     stroke="currentColor"
-                    stroke-width="1.21"
+                    strokeWidth="1.21"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
@@ -146,7 +146,7 @@ const FeaturesSecond = () => {
                   <path
                     d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
                     stroke="currentColor"
-                    stroke-width="1.21"
+                    strokeWidth="1.21"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
@@ -196,7 +196,7 @@ const FeaturesSecond = () => {
                   <path
                     d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
                     stroke="currentColor"
-                    stroke-width="1.21"
+                    strokeWidth="1.21"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
@@ -246,7 +246,7 @@ const FeaturesSecond = () => {
                   <path
                     d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
                     stroke="currentColor"
-                    stroke-width="1.21"
+                    strokeWidth="1.21"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />

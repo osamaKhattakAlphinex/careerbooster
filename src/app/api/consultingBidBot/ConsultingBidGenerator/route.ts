@@ -9,6 +9,13 @@ import User from "@/db/schemas/User";
 import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
+import { makeid } from "@/helpers/makeid";
+import {
+  TrainBotEntryType,
+  makeTrainedBotEntry,
+} from "@/helpers/makeTrainBotEntry";
+import { postCoverLetter } from "../../coverLetterBot/route";
+import { postConsultingBid } from "../route";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -77,26 +84,60 @@ export async function POST(req: any) {
       messages: [{ role: "user", content: inputPrompt }],
     });
     // make a trainBot entry
-    try {
-      if (trainBotData) {
-        await startDB();
+    // try {
+    //   if (trainBotData) {
+    //     await startDB();
 
-        const obj = {
-          type: "linkedin.genearteConsultingBid",
-          input: prompt,
-          output: response,
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Generate Consulting Bid for ${trainBotData.userEmail}`,
-        };
+    //     const obj = {
+    //       type: "linkedin.genearteConsultingBid",
+    //       input: prompt,
+    //       output: response,
+    //       idealOutput: "",
+    //       status: "pending",
+    //       userEmail: trainBotData.userEmail,
+    //       fileAddress: trainBotData.fileAddress,
+    //       Instructions: `Generate Consulting Bid for ${trainBotData.userEmail}`,
+    //     };
 
-        await TrainBot.create({ ...obj });
-      }
-    } catch (error) {}
+    //     await TrainBot.create({ ...obj });
+    //   }
+    // } catch (error) {}
     // Convert the response into a friendly text-stream
-    const stream = OpenAIStream(response);
+    const stream = OpenAIStream(response, {
+      onFinal(completions) {
+        try {
+          if (trainBotData) {
+            const consultingBidId = makeid();
+
+            const payload = {
+              id: consultingBidId,
+              jobDescription: jobDescription,
+              coverLetterText: completions,
+              generatedOnDate: new Date().toISOString(),
+              generatedViaOption: type,
+              userEmail: email,
+            };
+
+            postConsultingBid(payload);
+
+            let entry: TrainBotEntryType = {
+              entryId: consultingBidId,
+              type: "linkedin.genearteConsultingBid",
+              input: inputPrompt,
+              output: completions,
+              idealOutput: "",
+              status: "pending",
+              userEmail: email,
+              fileAddress: "",
+              Instructions: `Generate Consulting Bid for ${trainBotData.userEmail}`,
+            };
+            makeTrainedBotEntry(entry);
+          }
+        } catch {
+          console.log("error while saving consulting bids....");
+        }
+      },
+    });
     // Respond with the stream
     return new StreamingTextResponse(stream);
     //   res.end();

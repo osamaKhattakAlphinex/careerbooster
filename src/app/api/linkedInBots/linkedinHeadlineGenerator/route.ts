@@ -35,7 +35,7 @@ export async function POST(req: any) {
       if (content) {
         const dataset = "linkedinAiTool.headline";
         const model = await getTrainedModel(dataset);
-        console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+        //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
         // CREATING LLM MODAL
 

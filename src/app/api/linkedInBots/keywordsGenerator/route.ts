@@ -7,6 +7,12 @@ import { OpenAIStream, StreamingTextResponse } from "ai";
 import startDB from "@/lib/db";
 import OpenAI from "openai";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
+import {
+  TrainBotEntryType,
+  makeTrainedBotEntry,
+} from "@/helpers/makeTrainBotEntry";
+import { makeid } from "@/helpers/makeid";
+import { postKeywords } from "./linkedInKeywords/route";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -41,9 +47,9 @@ export async function POST(req: any) {
           ${prompt}
           `;
 
-    const dataset = "linkedin.genearteConsultingBid";
+    const dataset = "linkedin.keywords";
     const model = await getTrainedModel(dataset);
-    console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+    //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
     const response: any = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -51,26 +57,56 @@ export async function POST(req: any) {
       messages: [{ role: "user", content: inputPrompt }],
     });
     // make a trainBot entry
-    try {
-      if (trainBotData) {
-        await startDB();
+    // try {
+    //   if (trainBotData) {
+    //     await startDB();
 
-        const obj = {
-          type: "linkedin.genearteConsultingBid",
-          input: prompt,
-          output: response,
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Generate Linkedin Keywords for ${trainBotData.userEmail}`,
-        };
+    //     const obj = {
+    //       type: "linkedin.keywords",
+    //       input: prompt,
+    //       output: response,
+    //       idealOutput: "",
+    //       status: "pending",
+    //       userEmail: trainBotData.userEmail,
+    //       fileAddress: trainBotData.fileAddress,
+    //       Instructions: `Generate Linkedin Keywords for ${trainBotData.userEmail}`,
+    //     };
 
-        await TrainBot.create({ ...obj });
-      }
-    } catch (error) {}
+    //     await TrainBot.create({ ...obj });
+    //   }
+    // } catch (error) {}
     // Convert the response into a friendly text-stream
-    const stream = OpenAIStream(response);
+    const stream = OpenAIStream(response, {
+      onFinal(completions) {
+        try {
+          if (trainBotData) {
+            const keywordsId = makeid();
+
+            const payload = {
+              id: keywordsId,
+              keywordsText: completions,
+              generatedOnDate: new Date().toISOString(),
+              userEmail: trainBotData.userEmail,
+            };
+
+            postKeywords(payload);
+
+            let entry: TrainBotEntryType = {
+              entryId: keywordsId,
+              type: "linkedin.keywords",
+              input: inputPrompt,
+              output: completions,
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData.email,
+              fileAddress: "",
+              Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
+            };
+            makeTrainedBotEntry(entry);
+          }
+        } catch (err) {}
+      },
+    });
     // Respond with the stream
     return new StreamingTextResponse(stream);
     // res.end();
