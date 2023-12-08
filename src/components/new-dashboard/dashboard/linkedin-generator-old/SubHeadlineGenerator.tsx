@@ -1,45 +1,39 @@
 "use client";
 import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
-import iconOfPackageBadge from "@/../public/icon/crown.svg";
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  WorkExperience,
-  setField,
-  setIsLoading,
-  setUserData,
-} from "@/store/userDataSlice";
-import Button from "@/components/utilities/form-elements/Button";
+import { useEffect, useRef, useState } from "react";
+import { useSession } from "next-auth/react";
+import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import LimitCard from "../LimitCard";
 import axios from "axios";
-import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
-import Link from "next/link";
-interface Props {
-  setJobDesc: React.Dispatch<React.SetStateAction<string>>;
-}
-const JDGenerator = ({ setJobDesc }: Props) => {
-  // local States
+import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
+import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
+
+const SubHeadlineGenerator = () => {
+  const [headline, setHeadline] = useState<string>("");
+  const componentRef = useRef<any>(null);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
+  const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [showPopup, setShowPopup] = useState(false);
 
-  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
-  const [isJDCopied, setIsJDCopied] = useState<boolean>(false);
-  const copyJD = async (text: string) => {
+  const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
+  const copyHeadline = async (text: string) => {
     try {
-      const jD_Data = await htmlToPlainText(text);
-      await copy(jD_Data);
-      setIsJDCopied(true);
+      const headlineData = await htmlToPlainText(text);
+      await copy(headlineData);
+      setIsHeadlineCopied(true);
       // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
       setTimeout(() => {
-        setIsJDCopied(false);
+        setIsHeadlineCopied(false);
       }, 2000);
     } catch (error) {
       console.error("Failed to copy text: ", error);
@@ -50,16 +44,28 @@ const JDGenerator = ({ setJobDesc }: Props) => {
   const userData = useSelector((state: any) => state.userData);
 
   useEffect(() => {
-    setJobDesc(streamedData);
+    setHeadline(streamedData);
   }, [streamedData]);
 
   useEffect(() => {
+    if (userData && userData?.email) {
+      setAiInputUserData({
+        contact: userData?.contact,
+        education: userData?.education,
+        email: userData?.email,
+        experience: userData?.experience,
+        firstName: userData?.firstName,
+        lastName: userData?.lastName,
+        phone: userData?.phone,
+        skills: userData?.skills,
+      });
+    }
     if (
       userData.results &&
-      userData.results.jobDescription &&
-      userData.results.jobDescription !== ""
+      userData.results.headline &&
+      userData.results.headline !== ""
     ) {
-      setStreamedData(userData.results.jobDescription);
+      setStreamedData(userData.results.headline);
     }
   }, [userData]);
 
@@ -68,87 +74,75 @@ const JDGenerator = ({ setJobDesc }: Props) => {
     await getUserDataIfNotExists();
     //change condition
     if (
-      userData.isFetched &&
+      session?.user?.email &&
       !isNaN(availablePercentage) &&
       availablePercentage !== 0
     ) {
-      // remove ids from experiences
-      const experiences = userData.experience.map((item: WorkExperience) => {
-        const { id, ...rest } = item;
-        return rest;
-      });
+      setMsgLoading(true);
 
-      let tempText = "";
-      for (const [index, experience] of experiences.entries()) {
-        let html = "";
-        html += `<h4><strong>${experience?.jobTitle}</strong></h4>`;
-        html += `<h5>${experience?.company} | ${experience?.cityState} ${experience?.country}</h5>`;
-        html += `<p style=' margin-bottom: 10px'>${experience?.fromMonth} ${
-          experience?.fromYear
-        } to ${
-          experience?.isContinue
-            ? "Present"
-            : experience?.toMonth + " " + experience?.toYear
-        }</p>`;
-        html += `<p>`;
-
-        setStreamedData((prev) => prev + html);
-        tempText += html;
-        setMsgLoading(true);
-        const res: any = await fetch("/api/linkedInBots/jdGeneratorSingle", {
-          method: "POST",
-          body: JSON.stringify({
-            experience: experience,
-            trainBotData: {
-              userEmail: userData.email,
-              fileAddress: userData.defaultResumeFile,
-            },
-          }),
-        });
-
-        if (res.ok) {
-          const reader = res.body.getReader();
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) {
-              break;
-            }
-            const text = new TextDecoder().decode(value);
-            setStreamedData((prev) => prev + text);
-            tempText += text;
-          }
-        }
-        setStreamedData((prev) => prev + `</p> <br /> `);
-        setMsgLoading(false);
-      }
-
-      await saveToDB(tempText);
-
-      fetch("/api/users/updateUserLimit", {
+      fetch("/api/linkedInBots/headlineGenerator", {
         method: "POST",
         body: JSON.stringify({
-          email: session?.user?.email,
-          type: "job_desc_generation",
+          userData: aiInputUserData,
+          trainBotData: {
+            userEmail: userData.email,
+            fileAddress: userData.defaultResumeFile,
+          },
         }),
-      }).then(async (resp: any) => {
-        const res = await resp.json();
-        let user;
-        if (typeof res?.result === "object") {
-          user = res.result;
-        } else {
-          user = await JSON.parse(res.result);
-        }
-        if (res.success) {
-          const updatedObject = {
-            ...userData,
-            userPackageUsed: {
-              ...userData.userPackageUsed,
-              job_desc_generation: user.userPackageUsed.job_desc_generation,
-            },
-          };
-          dispatch(setUserData({ ...userData, ...updatedObject }));
-        }
-      });
+      })
+        .then(async (resp: any) => {
+          if (resp.ok) {
+            const reader = resp.body.getReader();
+            let tempText = "";
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) {
+                break;
+              }
+              const text = new TextDecoder().decode(value);
+              setStreamedData((prev) => prev + text);
+              tempText += text;
+            }
+
+            await saveToDB(tempText);
+
+            fetch("/api/users/updateUserLimit", {
+              method: "POST",
+              body: JSON.stringify({
+                email: session?.user?.email,
+                type: "headline_generation",
+              }),
+            }).then(async (resp: any) => {
+              const res = await resp.json();
+              let user;
+              if (typeof res?.result === "object") {
+                user = res.result;
+              } else {
+                user = await JSON.parse(res.result);
+              }
+              if (res.success) {
+                const updatedObject = {
+                  ...userData,
+                  userPackageUsed: {
+                    ...userData.userPackageUsed,
+                    headline_generation:
+                      user.userPackageUsed.headline_generation,
+                  },
+                };
+                dispatch(setUserData({ ...userData, ...updatedObject }));
+              }
+            });
+          } else {
+            setStreamedData("Error! Something went wrong");
+          }
+          setMsgLoading(false);
+        })
+        .catch((error) => {
+          console.log("Error encountered");
+        })
+        .finally(() => {
+          setMsgLoading(false);
+        });
     } else {
       setShowPopup(true);
 
@@ -166,13 +160,13 @@ const JDGenerator = ({ setJobDesc }: Props) => {
           email: session?.user?.email,
           results: {
             ...userData.results,
-            jobDescription: tempText,
+            headline: tempText,
           },
         },
       });
       const res = await response.json();
       if (res.success) {
-        console.log("Keywords saved to DB");
+        console.log("headline saved to DB");
       }
     } catch (error) {
       console.log(error);
@@ -184,17 +178,17 @@ const JDGenerator = ({ setJobDesc }: Props) => {
       dispatch(setIsLoading(true));
       try {
         // Fetch userdata if not exists in Redux
-        const res: any = await fetch(
+        const res = await fetch(
           `/api/users/getOneByEmail?email=${session?.user?.email}`
         );
-        let response;
-        if (typeof res?.result === "object") {
-          response = res;
-        } else {
-          response = await res.json();
-        }
+        const response = await res.json();
+        console.log(
+          "first response: " + response.result,
+          typeof response.result
+        );
 
         dispatch(setUserData(response.result));
+
         dispatch(setIsLoading(false));
         dispatch(setField({ name: "isFetched", value: true }));
       } catch (err) {
@@ -209,59 +203,55 @@ const JDGenerator = ({ setJobDesc }: Props) => {
       getUserDataIfNotExists();
     }
   }, [session?.user?.email]);
+  const historyProps = {
+    dataSource: "coverLetters",
+    Component: (card: any) => (
+      <CoverLetterCardSingle card={card} componentRef={componentRef} />
+    ),
+  };
   return (
     <>
-      <div className="headline-generator bg-[#222027] py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
+      <PreviouslyGeneratedList {...historyProps} />
+      <div className="headline-generator bg-[#17151B] py-8 px-3 lg:px-6 flex flex-col md:flex-row md:align-center gap-5 justify-center items-center rounded-[10px] mb-[20px]">
         <div
-          className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16`}
+          className={`icon  hidden rounded-full  bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] md:flex justify-center items-center w-16 h-16`}
         >
           <Image
             alt="Svg1"
             src={Svg1}
             width={32}
             height={32}
-            className="z-[10000px]"
+            className="z-[10000px] "
           />
         </div>
-        <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
-          <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row ">
+        <div className="linkedintooltext flex  flex-col lg:w-[24.0625rem] gap-2 ml-2">
+          <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
             <h1 className="text-[16px] text-white font-bold">
-              Job Description Generator
+              Headline Generator
             </h1>
             <span
-              className={`text-black rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
+              className={`text-black rounded-full flex justify-center items-center px-[16px] py-[6px] md:mx-2  bg-[#02FF19] text-[12px] uppercase font-bold `}
             >
-              {iconOfPackageBadge ? (
-                <Image
-                  src={iconOfPackageBadge}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                  className="mr-2"
-                />
-              ) : null}
-              Premium
+              free
             </span>
           </div>
-          {/* <LimitCard
+          <LimitCard
             title="Available"
-            limit={userData?.userPackageData?.limit?.job_desc_generation}
-            used={userData?.userPackageUsed?.job_desc_generation}
+            limit={userData?.userPackageData?.limit?.headline_generation}
+            used={userData?.userPackageUsed?.headline_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          /> */}
+          />
           <p className="text-[14px] text-[#959595] pr-5">
-            Get job descriptions with respect to each job
+            Generate headline for your linkedin in one click
           </p>
         </div>
         <button
           type="button"
           disabled={msgLoading || !session?.user?.email}
           onClick={() => handleGenerate()}
-          className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
-
-          // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
+          className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
         >
           <span className={`text-white text-[15px] font-semibold`}>
             {msgLoading ? (
@@ -270,7 +260,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth="1.5"
+                  stroke-width="1.5"
                   stroke="currentColor"
                   className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""}`}
                 >
@@ -290,32 +280,32 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                   height={18}
                   width={18}
                 />
-                <Link href="/linkedin-generator/job-description" className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`} >
-                  Generate Description
-                </Link>
+                <span
+                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                >
+                  Generate Headline
+                </span>
               </div>
             )}
           </span>
         </button>
       </div>
-      {/* {streamedData && (
-        <div className="mb-4 border-gray-500  rounded border p-4">
+
+      {streamedData && (
+        <div className="rounded border border-gray-500 p-4 mb-4">
           <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
               AI Response{" "}
             </span>
           </h1>
           <div
-            className="font-sans text-gray-300 whitespace-pre-wrap break-words"
+            className="font-sans whitespace-pre-wrap text-gray-300 break-words"
             // style={{ textW: "auto" }}
           >
-            <div
-              className="list-disc"
-              dangerouslySetInnerHTML={{ __html: streamedData }}
-            ></div>
+            {streamedData}
             <button
               disabled={msgLoading}
-              onClick={() => copyJD(streamedData)}
+              onClick={() => copyHeadline(streamedData)}
               className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${
                 msgLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
@@ -324,7 +314,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                strokeWidth="1.5"
+                stroke-width="1.5"
                 stroke="currentColor"
                 className="w-4 h-4 text-white"
               >
@@ -338,7 +328,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
               <span className="text-white text-[15px] font-semibold">
                 {msgLoading
                   ? "Please wait..."
-                  : isJDCopied
+                  : isHeadlineCopied
                   ? "Copied"
                   : "Copy to clipboard"}
               </span>
@@ -348,12 +338,12 @@ const JDGenerator = ({ setJobDesc }: Props) => {
       )}
       {showPopup && (
         <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
-         
+          {/* Popup content here */}
           Credit Limit Reached !
         </div>
-      )} */}
+      )}
     </>
   );
 };
 
-export default JDGenerator;
+export default SubHeadlineGenerator;

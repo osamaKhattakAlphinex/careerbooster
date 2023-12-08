@@ -64,7 +64,7 @@ const RecentResumeCard = ({
             {resumes &&
               resumes.map((resume: any) => (
                 <SwiperSlide
-                  className="xs:w-[100%] sm:w-[100%] md:w-[48%] lg:w-[30%]"
+                  
                   key={resume.id}
                 >
                     <SingleRecentResumeCard

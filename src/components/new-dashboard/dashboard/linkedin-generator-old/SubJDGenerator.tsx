@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
 import iconOfPackageBadge from "@/../public/icon/crown.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,11 +17,11 @@ import axios from "axios";
 import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
-import Link from "next/link";
-interface Props {
-  setJobDesc: React.Dispatch<React.SetStateAction<string>>;
-}
-const JDGenerator = ({ setJobDesc }: Props) => {
+import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
+import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
+const SubJDGenerator = () => {
+  const componentRef = useRef<any>(null);
+  const [jobDesc, setJobDesc] = useState<string>("");
   // local States
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
@@ -209,8 +209,16 @@ const JDGenerator = ({ setJobDesc }: Props) => {
       getUserDataIfNotExists();
     }
   }, [session?.user?.email]);
+  const historyProps = {
+    dataSource: "coverLetters",
+    Component: (card: any) => (
+      <CoverLetterCardSingle card={card} componentRef={componentRef} />
+    ),
+  };
   return (
     <>
+      <PreviouslyGeneratedList {...historyProps} />
+      <>
       <div className="headline-generator bg-[#222027] py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
         <div
           className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16`}
@@ -243,14 +251,14 @@ const JDGenerator = ({ setJobDesc }: Props) => {
               Premium
             </span>
           </div>
-          {/* <LimitCard
+          <LimitCard
             title="Available"
             limit={userData?.userPackageData?.limit?.job_desc_generation}
             used={userData?.userPackageUsed?.job_desc_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          /> */}
+          />
           <p className="text-[14px] text-[#959595] pr-5">
             Get job descriptions with respect to each job
           </p>
@@ -270,7 +278,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth="1.5"
+                  stroke-width="1.5"
                   stroke="currentColor"
                   className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""}`}
                 >
@@ -290,15 +298,15 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                   height={18}
                   width={18}
                 />
-                <Link href="/linkedin-generator/job-description" className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`} >
+                <span className="text-white ml-3 text-[15px] font-semibold">
                   Generate Description
-                </Link>
+                </span>
               </div>
             )}
           </span>
         </button>
       </div>
-      {/* {streamedData && (
+      {streamedData && (
         <div className="mb-4 border-gray-500  rounded border p-4">
           <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
@@ -324,7 +332,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                strokeWidth="1.5"
+                stroke-width="1.5"
                 stroke="currentColor"
                 className="w-4 h-4 text-white"
               >
@@ -348,12 +356,13 @@ const JDGenerator = ({ setJobDesc }: Props) => {
       )}
       {showPopup && (
         <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
-         
+          {/* Popup content here */}
           Credit Limit Reached !
         </div>
-      )} */}
+      )}
+    </>
     </>
   );
 };
 
-export default JDGenerator;
+export default SubJDGenerator;

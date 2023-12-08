@@ -84,6 +84,11 @@ const Header = () => {
     "/subscribe",
     "/subscribed",
     "/chatAI",
+    "/linkedin-generator/headline",
+    "/linkedin-generator/about",
+    "/linkedin-generator/job-description",
+    "/linkedin-generator/keywords",
+
   ];
 
   // when page (session) loads, fetch user data if not exists

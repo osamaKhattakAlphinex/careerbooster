@@ -10,6 +10,7 @@ import LimitCard from "../LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
+import Link from "next/link";
 interface Props {
   setAbout: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -227,14 +228,14 @@ const AboutGenerator = ({ setAbout }: Props) => {
               free
             </span>
           </div>
-          <LimitCard
+          {/* <LimitCard
             title="Available"
             limit={userData?.userPackageData?.limit?.about_generation}
             used={userData?.userPackageUsed?.about_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          />
+          /> */}
 
           <p className="text-[14px] text-[#959595] pr-5">
             Generate impressive about for your linkedin
@@ -273,15 +274,18 @@ const AboutGenerator = ({ setAbout }: Props) => {
                   height={18}
                   width={18}
                 />
-                <span className={`text-white ml-3 text-[15px] font-semibold`}>
+                <Link
+                  href="/linkedin-generator/about"
+                  className={`text-white ml-3 text-[15px] font-semibold`}
+                >
                   Generate About
-                </span>
+                </Link>
               </div>
             )}
           </span>
         </button>
       </div>
-      {streamedData && (
+      {/* {streamedData && (
         <div className="rounded border border-gray-500 mb-4 p-4">
           <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
@@ -328,10 +332,10 @@ const AboutGenerator = ({ setAbout }: Props) => {
       )}
       {showPopup && (
         <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
-          {/* Popup content here */}
+       
           Credit Limit Reached !
         </div>
-      )}
+      )} */}
     </>
   );
 };
