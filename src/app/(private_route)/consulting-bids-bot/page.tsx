@@ -133,7 +133,7 @@ const ConsultingBidsGenerator = () => {
               setStreamedData((prev) => prev + text);
               tempText += text;
             }
-            await saveToDB(tempText);
+            // await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -149,18 +149,17 @@ const ConsultingBidsGenerator = () => {
                 user = await JSON.parse(res.result);
               }
               if (res.success) {
-                const payload = {
-                  id: makeid(),
-                  jobDescription: jobDescription,
-                  consultingBidText: tempText,
-                  generatedOnDate: new Date().toISOString(),
-                  generatedViaOption: selectedOption,
-                  userEmail: session?.user?.email,
-                };
+                // const payload = {
+                //   id: makeid(),
+                //   jobDescription: jobDescription,
+                //   consultingBidText: tempText,
+                //   generatedOnDate: new Date().toISOString(),
+                //   generatedViaOption: selectedOption,
+                //   userEmail: session?.user?.email,
+                // };
 
-                const consultingBidResponse = await axios.post(
-                  "/api/consultingBidBot",
-                  payload
+                const consultingBidResponse = await axios.get(
+                  "/api/consultingBidBot/getAllConsultingBids"
                 );
 
                 const updatedObject = {
@@ -174,7 +173,14 @@ const ConsultingBidsGenerator = () => {
                     consultingBidResponse.data.result.consultingBids,
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
-                dispatch(setConsultingBid(payload));
+                dispatch(
+                  setConsultingBid(
+                    consultingBidResponse.data.result.consultingBids[
+                      consultingBidResponse.data.result.consultingBids.length -
+                        1
+                    ]
+                  )
+                );
               }
             });
           } else {

@@ -14,7 +14,6 @@ import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
-import { makeid } from "@/helpers/makeid";
 import { setCoverLetter } from "@/store/coverLetterSlice";
 
 import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
@@ -64,6 +63,7 @@ export default function CoverLetterPage() {
         exporter.getPdf(true);
       });
   };
+
   useEffect(() => {
     if (isEditing) {
       if (componentRef.current) {
@@ -106,8 +106,6 @@ export default function CoverLetterPage() {
       payLoad,
       { headers: { "Content-Type": "application/json" } }
     );
-
-    console.table(updatedCoverLetters.data.results);
 
     const updatedObject = {
       ...userData,
@@ -208,20 +206,8 @@ export default function CoverLetterPage() {
             const limitUpdateData = await limitUpdateResponse.json();
 
             if (limitUpdateData.success) {
-              // Generate payload for cover letter
-              const payload = {
-                id: makeid(),
-                jobDescription: jobDescription,
-                coverLetterText: tempText,
-                generatedOnDate: new Date().toISOString(),
-                generatedViaOption: selectedOption,
-                userEmail: session?.user?.email,
-              };
-
-              // Save cover letter to the DB
-              const coverLetterResponse = await axios.post(
-                "/api/coverLetterBot",
-                payload
+              const coverLetterResponse = await axios.get(
+                "/api/coverLetterBot/getAllCoverLetters"
               );
 
               if (coverLetterResponse.data.success) {
@@ -237,7 +223,13 @@ export default function CoverLetterPage() {
                   coverLetters: coverLetterResponse.data.result.coverLetters,
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
-                dispatch(setCoverLetter(payload));
+                dispatch(
+                  setCoverLetter(
+                    coverLetterResponse.data.result.coverLetters[
+                      coverLetterResponse.data.result.coverLetters.length - 1
+                    ]
+                  )
+                );
               }
             }
           } else {
