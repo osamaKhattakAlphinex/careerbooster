@@ -316,7 +316,7 @@ export default function CoverLetterPage() {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px]">
+        <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]">
           {/* <AiGeneratedCoverLetters /> */}
           <Link
             href="/dashboard"
@@ -325,9 +325,9 @@ export default function CoverLetterPage() {
             {leftArrowIcon}
             Back
           </Link>
-          
-            <PreviouslyGeneratedList {...historyProps} />
-          
+
+          <PreviouslyGeneratedList {...historyProps} />
+
           {/* <MainCoverLetterTool /> */}
           <>
             <div className=" bg-[#17151B] rounded-[20px] px-4 lg:px-[30px] py-8 lg:py-[41px] flex flex-col gap-5 ">
