@@ -173,7 +173,7 @@ const PersonalizedEmailBot = () => {
               setStreamedData((prev) => prev + text);
               tempText += text;
             }
-            await saveToDB(tempText);
+            // await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -191,18 +191,18 @@ const PersonalizedEmailBot = () => {
               if (res.success) {
                 // email payload
 
-                const payload = {
-                  id: makeid(),
-                  jobDescription: jobDescription,
-                  emailText: tempText,
-                  generatedOnDate: new Date().toISOString(),
-                  generatedViaOption: selectedOption,
-                  userEmail: session?.user?.email,
-                };
+                // const payload = {
+                //   id: makeid(),
+                //   jobDescription: jobDescription,
+                //   emailText: tempText,
+                //   generatedOnDate: new Date().toISOString(),
+                //   generatedViaOption: selectedOption,
+                //   userEmail: session?.user?.email,
+                // };
 
-                const emailsResponse = await axios.post(
-                  "/api/emailBot",
-                  payload
+                const emailsResponse = await axios.get(
+                  "/api/emailBot/getAllEmails"
+                  // payload
                 );
 
                 if (emailsResponse.data.success) {
@@ -216,7 +216,13 @@ const PersonalizedEmailBot = () => {
                   };
 
                   dispatch(setUserData({ ...userData, ...updatedObject }));
-                  dispatch(setEmail(payload));
+                  dispatch(
+                    setEmail(
+                      emailsResponse.data.result.emails[
+                        emailsResponse.data.result.emails.length - 1
+                      ]
+                    )
+                  );
                 }
               }
             });

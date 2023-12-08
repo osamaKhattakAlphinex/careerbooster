@@ -9,6 +9,13 @@ import startDB from "@/lib/db";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
+import { makeid } from "@/helpers/makeid";
+import { postCoverLetter } from "../../coverLetterBot/route";
+import {
+  TrainBotEntryType,
+  makeTrainedBotEntry,
+} from "@/helpers/makeTrainBotEntry";
+import { postEmail } from "../route";
 
 // PROMPT
 // Here is the Job description:
@@ -82,26 +89,60 @@ export async function POST(req: any) {
       messages: [{ role: "user", content: inputPrompt }],
     });
     // make a trainBot entry
-    try {
-      if (trainBotData) {
-        await startDB();
+    // try {
+    //   if (trainBotData) {
+    //     await startDB();
 
-        const obj = {
-          type: "linkedin.genearteConsultingBid",
-          input: prompt,
-          output: response,
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Generate Email for ${trainBotData.userEmail}`,
-        };
+    //     const obj = {
+    //       type: "linkedin.genearteConsultingBid",
+    //       input: prompt,
+    //       output: response,
+    //       idealOutput: "",
+    //       status: "pending",
+    //       userEmail: trainBotData.userEmail,
+    //       fileAddress: trainBotData.fileAddress,
+    //       Instructions: `Generate Email for ${trainBotData.userEmail}`,
+    //     };
 
-        await TrainBot.create({ ...obj });
-      }
-    } catch (error) {}
+    //     await TrainBot.create({ ...obj });
+    //   }
+    // } catch (error) {}
     // Convert the response into a friendly text-stream
-    const stream = OpenAIStream(response);
+    const stream = OpenAIStream(response, {
+      onFinal(completions) {
+        try {
+          if (trainBotData) {
+            const emailId = makeid();
+
+            const payload = {
+              id: emailId,
+              jobDescription: jobDescription,
+              coverLetterText: completions,
+              generatedOnDate: new Date().toISOString(),
+              generatedViaOption: type,
+              userEmail: email,
+            };
+
+            postEmail(payload);
+
+            let entry: TrainBotEntryType = {
+              entryId: emailId,
+              type: "tool.email",
+              input: inputPrompt,
+              output: completions,
+              idealOutput: "",
+              status: "pending",
+              userEmail: email,
+              fileAddress: "",
+              Instructions: `Generate Email for ${trainBotData.userEmail}`,
+            };
+            makeTrainedBotEntry(entry);
+          }
+        } catch {
+          console.log("error while saving Emails....");
+        }
+      },
+    });
     // Respond with the stream
     return new StreamingTextResponse(stream);
     //   res.end();
