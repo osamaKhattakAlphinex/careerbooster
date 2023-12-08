@@ -90,7 +90,7 @@ const Avatar: React.FC = () => {
 
   return (
     <div
-      className="absolute bottom-4 right-4 mr-4 mb-4 w-20 h-20 cursor-pointer animate-bounce-slow"
+      className="absolute bottom-4 right-4 mr-4 mb-4 w-20 h-20 cursor-pointer animate-bounce-slow z-10"
       onClick={handleClick}
     >
       <Tooltip text="Hey! Click me" audioPlayed={audioPlayed}>

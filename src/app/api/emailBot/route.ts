@@ -18,6 +18,7 @@ export async function postEmail(payload: any) {
   }
 
   const response = await user.save();
+  return response;
 }
 
 export async function POST(request: any) {

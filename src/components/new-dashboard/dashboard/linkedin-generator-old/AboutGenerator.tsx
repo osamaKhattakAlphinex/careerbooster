@@ -107,7 +107,7 @@ const AboutGenerator = ({ setAbout }: Props) => {
               tempText += text;
               setStreamedData((prev) => prev + text);
             }
-            await saveToDB(tempText);
+            // await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({

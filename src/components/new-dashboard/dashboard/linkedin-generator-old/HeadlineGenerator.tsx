@@ -103,7 +103,7 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
               tempText += text;
             }
 
-            await saveToDB(tempText);
+            // await saveToDB(tempText);
 
             fetch("/api/users/updateUserLimit", {
               method: "POST",
