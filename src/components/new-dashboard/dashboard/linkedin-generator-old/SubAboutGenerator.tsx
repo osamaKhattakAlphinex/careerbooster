@@ -12,6 +12,7 @@ import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
+import LinkedInAboutCardSingle from "./LinkedInAboutCardSingle";
 const SubAboutGenerator = () => {
   const componentRef = useRef<any>(null);
   const [about, setAbout] = useState<string>("");
@@ -204,9 +205,9 @@ const SubAboutGenerator = () => {
     }
   }, [session?.user?.email]);
   const historyProps = {
-    dataSource: "coverLetters",
+    dataSource: "linkedInAbouts",
     Component: (card: any) => (
-      <CoverLetterCardSingle card={card} componentRef={componentRef} />
+      <LinkedInAboutCardSingle card={card} componentRef={componentRef} />
     ),
   };
   return (
