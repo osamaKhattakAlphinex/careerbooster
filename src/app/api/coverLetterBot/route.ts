@@ -15,6 +15,7 @@ export async function postCoverLetter(payload: any) {
     user.coverLetters.push(payload);
   }
   const response = await user.save();
+  return response;
 }
 
 export async function POST(request: any) {

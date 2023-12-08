@@ -21,13 +21,8 @@ export type TrainBotEntryType = {
 export const makeTrainedBotEntry = async (entry: TrainBotEntryType) => {
   try {
     await startDB();
-    // Getting the dataset model if trained previously
-    console.log(entry);
     const trainBotEntry = new TrainBot(entry);
-
     trainBotEntry.save();
-
-    console.log(trainBotEntry);
   } catch (error) {
     console.error("Error fetching trained model:", error);
   }

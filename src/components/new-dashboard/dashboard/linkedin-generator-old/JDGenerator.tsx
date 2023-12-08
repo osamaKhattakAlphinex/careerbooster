@@ -121,7 +121,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
         setMsgLoading(false);
       }
 
-      await saveToDB(tempText);
+      // await saveToDB(tempText);
 
       fetch("/api/users/updateUserLimit", {
         method: "POST",

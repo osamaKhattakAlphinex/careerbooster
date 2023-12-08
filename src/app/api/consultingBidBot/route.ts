@@ -15,6 +15,7 @@ export async function postConsultingBid(payload: any) {
     user.consultingBids.push(payload);
   }
   const response = await user.save();
+  return response;
 }
 
 export async function POST(request: any) {
