@@ -12,6 +12,7 @@ import axios from "axios";
 import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
+import Link from "next/link";
 interface Props {
   setKeywords: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -233,14 +234,14 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
               Premium
             </span>
           </div>
-          <LimitCard
+          {/* <LimitCard
             title="Available"
             limit={userData?.userPackageData?.limit?.keywords_generation}
             used={userData?.userPackageUsed?.keywords_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          />
+          /> */}
           <p className="text-[14px] text-[#959595] pr-5">
             Generator popular keywords for your linkedin profile
           </p>
@@ -280,19 +281,20 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
                   height={18}
                   width={18}
                 />
-                <span
-                  className="text-white ml-3 text-[15px] font-semibold"
+                <Link
+                  href="/linkedin-generator/keywords"
+                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
                   // className={`text-black text-[15px] font-semibold`}
                 >
                   {/* Upgrade Plan */}
                   Generate Keywords
-                </span>
+                </Link>
               </div>
             )}
           </span>
         </button>
       </div>
-      {streamedData && (
+      {/* {streamedData && (
         <div className="mb-4  rounded border-gray-500 border p-4">
           <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
@@ -336,10 +338,10 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
       )}
       {showPopup && (
         <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
-          {/* Popup content here */}
+     
           Credit Limit Reached !
         </div>
-      )}
+      )} */}
     </>
   );
 };

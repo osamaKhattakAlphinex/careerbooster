@@ -1,38 +1,42 @@
 "use client";
 import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
-import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import iconOfPackageBadge from "@/../public/icon/crown.svg";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef, useState } from "react";
+import { useSession } from "next-auth/react";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
+import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "../LimitCard";
 import axios from "axios";
+import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
-import Link from "next/link";
-interface Props {
-  setAbout: React.Dispatch<React.SetStateAction<string>>;
-}
-const AboutGenerator = ({ setAbout }: Props) => {
+import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
+import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
+
+const SubKeywordsGenerator = () => {
+    const [keywords, setKeywords] = useState<string>("");
+  const componentRef = useRef<any>(null);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
-  const [aiInputUserData, setAiInputUserData] = useState<any>();
-  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [showPopup, setShowPopup] = useState(false);
 
+  const [aiInputUserData, setAiInputUserData] = useState<any>();
+
+  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
-  const [isAboutCopied, setIsAboutCopied] = useState<boolean>(false);
-  const copyAbout = async (text: string) => {
+  const [isKeywordsCopied, setIsKeywordsCopied] = useState<boolean>(false);
+  const copyKeyword = async (text: string) => {
     try {
-      const aboutData = await htmlToPlainText(text);
-      await copy(aboutData);
-      setIsAboutCopied(true);
+      const keywordData = await htmlToPlainText(text);
+      await copy(keywordData);
+      setIsKeywordsCopied(true);
       // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
       setTimeout(() => {
-        setIsAboutCopied(false);
+        setIsKeywordsCopied(false);
       }, 2000);
     } catch (error) {
       console.error("Failed to copy text: ", error);
@@ -43,12 +47,11 @@ const AboutGenerator = ({ setAbout }: Props) => {
   const userData = useSelector((state: any) => state.userData);
 
   useEffect(() => {
-    if (
-      userData &&
-      userData?.email &&
-      !isNaN(availablePercentage) &&
-      availablePercentage !== 0
-    ) {
+    setKeywords(streamedData);
+  }, [streamedData]);
+
+  useEffect(() => {
+    if (userData && userData?.email) {
       setAiInputUserData({
         contact: userData?.contact,
         education: userData?.education,
@@ -62,27 +65,24 @@ const AboutGenerator = ({ setAbout }: Props) => {
     }
     if (
       userData.results &&
-      userData.results.about &&
-      userData.results.about !== ""
+      userData.results.keywords &&
+      userData.results.keywords !== ""
     ) {
-      setStreamedData(userData.results.about);
+      setStreamedData(userData.results.keywords);
     }
   }, [userData]);
 
-  useEffect(() => {
-    setAbout(streamedData);
-  }, [streamedData]);
-
-  const handleGenerate = async () => {
+  const handleGenerate: any = async () => {
     setStreamedData("");
     await getUserDataIfNotExists();
+    //change condition
     if (
       session?.user?.email &&
       !isNaN(availablePercentage) &&
       availablePercentage !== 0
     ) {
       setMsgLoading(true);
-      fetch("/api/linkedInBots/aboutGenerator", {
+      fetch("/api/linkedInBots/keywordsGenerator", {
         method: "POST",
         body: JSON.stringify({
           userData: aiInputUserData,
@@ -98,11 +98,9 @@ const AboutGenerator = ({ setAbout }: Props) => {
             let tempText = "";
             while (true) {
               const { done, value } = await reader.read();
-
               if (done) {
                 break;
               }
-
               const text = new TextDecoder().decode(value);
               tempText += text;
               setStreamedData((prev) => prev + text);
@@ -112,7 +110,7 @@ const AboutGenerator = ({ setAbout }: Props) => {
               method: "POST",
               body: JSON.stringify({
                 email: session?.user?.email,
-                type: "about_generation",
+                type: "keywords_generation",
               }),
             }).then(async (resp: any) => {
               const res = await resp.json();
@@ -127,7 +125,8 @@ const AboutGenerator = ({ setAbout }: Props) => {
                   ...userData,
                   userPackageUsed: {
                     ...userData.userPackageUsed,
-                    about_generation: user.userPackageUsed.about_generation,
+                    keywords_generation:
+                      user.userPackageUsed.keywords_generation,
                   },
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
@@ -153,7 +152,6 @@ const AboutGenerator = ({ setAbout }: Props) => {
       }, 3000);
     }
   };
-
   const saveToDB = async (tempText: string) => {
     try {
       const response: any = await axios.post("/api/users/updateUserData", {
@@ -161,13 +159,13 @@ const AboutGenerator = ({ setAbout }: Props) => {
           email: session?.user?.email,
           results: {
             ...userData.results,
-            about: tempText,
+            keywords: tempText,
           },
         },
       });
       const res = await response.json();
       if (res.success) {
-        console.log("about saved to DB");
+        console.log("Keywords saved to DB");
       }
     } catch (error) {
       console.log(error);
@@ -203,11 +201,18 @@ const AboutGenerator = ({ setAbout }: Props) => {
       getUserDataIfNotExists();
     }
   }, [session?.user?.email]);
+  const historyProps = {
+    dataSource: "coverLetters",
+    Component: (card: any) => (
+      <CoverLetterCardSingle card={card} componentRef={componentRef} />
+    ),
+  };
   return (
     <>
+      <PreviouslyGeneratedList {...historyProps} />
       <div className="headline-generator bg-[#222027] py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
         <div
-          className={`icon hidden rounded-full bg-gradient-to-b from-[#26A5C1] to-[#84E1E7] md:flex justify-center items-center w-16 h-16`}
+          className={`icon hidden rounded-full  bg-gradient-to-b from-[#20AA89] to-[#65D4AC]  md:flex justify-center items-center w-16 h-16`}
         >
           <Image
             alt="Svg1"
@@ -220,32 +225,42 @@ const AboutGenerator = ({ setAbout }: Props) => {
         <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
           <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
             <h1 className="text-[16px] text-white font-bold">
-              About Generator
+              Keywords Generator
             </h1>
             <span
-              className={`text-black rounded-full flex justify-center items-center px-[16px] py-[6px] md:mx-2  bg-[#02FF19] text-[12px] uppercase font-bold `}
+              className={`text-black rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
             >
-              free
+              {iconOfPackageBadge ? (
+                <Image
+                  src={iconOfPackageBadge}
+                  alt="bold icon"
+                  height={18}
+                  width={18}
+                  className="mr-2"
+                />
+              ) : null}
+              Premium
             </span>
           </div>
-          {/* <LimitCard
+          <LimitCard
             title="Available"
-            limit={userData?.userPackageData?.limit?.about_generation}
-            used={userData?.userPackageUsed?.about_generation}
+            limit={userData?.userPackageData?.limit?.keywords_generation}
+            used={userData?.userPackageUsed?.keywords_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          /> */}
-
+          />
           <p className="text-[14px] text-[#959595] pr-5">
-            Generate impressive about for your linkedin
+            Generator popular keywords for your linkedin profile
           </p>
         </div>
         <button
           type="button"
           disabled={msgLoading || !session?.user?.email}
           onClick={() => handleGenerate()}
-          className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
+          className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
+
+          // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
         >
           <span className={`text-white text-[15px] font-semibold`}>
             {msgLoading ? (
@@ -274,32 +289,30 @@ const AboutGenerator = ({ setAbout }: Props) => {
                   height={18}
                   width={18}
                 />
-                <Link
-                  href="/linkedin-generator/about"
-                  className={`text-white ml-3 text-[15px] font-semibold`}
+                <span
+                  className="text-white ml-3 text-[15px] font-semibold"
+                  // className={`text-black text-[15px] font-semibold`}
                 >
-                  Generate About
-                </Link>
+                  {/* Upgrade Plan */}
+                  Generate Keywords
+                </span>
               </div>
             )}
           </span>
         </button>
       </div>
-      {/* {streamedData && (
-        <div className="rounded border border-gray-500 mb-4 p-4">
+      {streamedData && (
+        <div className="mb-4  rounded border-gray-500 border p-4">
           <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
               AI Response{" "}
             </span>
           </h1>
-          <div
-            className="font-sans text-gray-300 whitespace-pre-wrap break-words"
-            // style={{ textW: "auto" }}
-          >
+          <div className="font-sans text-gray-300 whitespace-pre-wrap break-words">
             {streamedData}
             <button
               disabled={msgLoading}
-              onClick={() => copyAbout(streamedData)}
+              onClick={() => copyKeyword(streamedData)}
               className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${
                 msgLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
@@ -322,7 +335,7 @@ const AboutGenerator = ({ setAbout }: Props) => {
               <span className="text-white text-[15px] font-semibold">
                 {msgLoading
                   ? "Please wait..."
-                  : isAboutCopied
+                  : isKeywordsCopied
                   ? "Copied"
                   : "Copy to clipboard"}
               </span>
@@ -332,12 +345,12 @@ const AboutGenerator = ({ setAbout }: Props) => {
       )}
       {showPopup && (
         <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
-       
+          {/* Popup content here */}
           Credit Limit Reached !
         </div>
-      )} */}
+      )}
     </>
   );
 };
 
-export default AboutGenerator;
+export default SubKeywordsGenerator;

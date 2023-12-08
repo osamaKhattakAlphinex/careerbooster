@@ -60,7 +60,7 @@ const CoverLetterCardSingle = ({
   if (!card) return <h1>Loading </h1>;
 
   return (
-    <div className="xs:w-[100%] sm:w-[100%] md:w-[48%] lg:w-[32%]  ">
+    <div >
       <div className="flex flex-col bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[14px] ">
         <div className="">
           <div className="mx-3 border-gray-600 leading-6 w-full">

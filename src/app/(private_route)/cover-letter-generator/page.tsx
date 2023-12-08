@@ -333,7 +333,9 @@ export default function CoverLetterPage() {
             {leftArrowIcon}
             Back
           </Link>
-          <PreviouslyGeneratedList {...historyProps} />
+          
+            <PreviouslyGeneratedList {...historyProps} />
+          
           {/* <MainCoverLetterTool /> */}
           <>
             <div className=" bg-[#17151B] rounded-[20px] px-4 lg:px-[30px] py-8 lg:py-[41px] flex flex-col gap-5 ">

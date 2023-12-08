@@ -10,6 +10,7 @@ import LimitCard from "../LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
+import Link from "next/link";
 interface Props {
   setHeadline: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -235,14 +236,14 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
               free
             </span>
           </div>
-          <LimitCard
+          {/* <LimitCard
             title="Available"
             limit={userData?.userPackageData?.limit?.headline_generation}
             used={userData?.userPackageUsed?.headline_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          />
+          /> */}
           <p className="text-[14px] text-[#959595] pr-5">
             Generate headline for your linkedin in one click
           </p>
@@ -280,17 +281,17 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
                   height={18}
                   width={18}
                 />
-                <span
+                <Link href="/linkedin-generator/headline"
                   className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
                 >
                   Generate Headline
-                </span>
+                </Link>
               </div>
             )}
           </span>
         </button>
       </div>
-
+{/* 
       {streamedData && (
         <div className="rounded border border-gray-500 p-4 mb-4">
           <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
@@ -338,10 +339,10 @@ const HeadlineGenerator = ({ setHeadline }: Props) => {
       )}
       {showPopup && (
         <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
-          {/* Popup content here */}
+        
           Credit Limit Reached !
         </div>
-      )}
+      )} */}
     </>
   );
 };

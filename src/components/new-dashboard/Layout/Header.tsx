@@ -25,6 +25,11 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     "/consulting-bids-bot": "Generate Bids Using AI",
     "/subscribe": `Welcome, ${userData.firstName + " " + userData.lastName}`,
     "/chatAI": `Welcome to our latest Chat Bot`,
+    "/linkedin-generator/headline" : "Headline Generator",
+    "/linkedin-generator/about" : "About Generator",
+    "/linkedin-generator/job-description" : "Job Description Generator",
+    "/linkedin-generator/keywords" : "Keyword Generator",
+    
     // Add more routes as needed
   };
 
@@ -33,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
   return (
     <nav
-      className={` py-[14px] px-4 ml-0 sticky top-0 bg-gradient-to-l from-[#340E53] to-[#000533]  z-999      
+      className={` py-[14px] px-4 ml-0 sticky top-0 bg-gradient-to-l from-[#340E53] to-[#000533]  z-10000      
       ${pagesArray?.includes(pathname) ? "m-5" : "lg:ml-[244px]"} 
       ${pathname === "/subscribed" && "hidden"} 
       `}

@@ -28,7 +28,7 @@ export default async function Privatelayout({ children }: Props) {
       <ProfileCreationLayer>
         <Header />
         <SideBar />
-        <div className="pb-12">{children}</div>
+        <div className="">{children}</div>
         <Footer />
       </ProfileCreationLayer>
     </div>

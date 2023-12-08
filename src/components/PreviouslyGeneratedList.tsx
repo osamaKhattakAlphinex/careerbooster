@@ -2,7 +2,8 @@
 import { searchIcon } from "@/helpers/iconsProvider";
 import React from "react";
 import { useSelector } from "react-redux";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
 type Props = {
   dataSource: string;
   Component: any;
@@ -14,7 +15,7 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
   if (!userData) return;
 
   return (
-    <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-4 lg:px-[24px] py-[35px]">
+    <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-4 lg:px-[24px] pt-[35px]">
       <div className="flex justify-between items-center ">
         <h1 className="uppercase text-[14px] md:text-sm font-semibold lg:pr-0 pr-4">
           {dataSource === "coverLetters" && "Your AI Generated Cover Letters"}
@@ -33,11 +34,42 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
         </div>
       </div>
 
-      <div className="flex gap-2 flex-wrap">
-        {userData &&
-          userData?.[dataSource]?.map((item: any, key: number) => {
-            return <Component key={key} {...item} />;
-          })}
+      <div className="flex gap-2 flex-row ">
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={3}
+          navigation={true}
+          modules={[Navigation]}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+            },
+            640: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1080: {
+              slidesPerView: 3,
+            },
+            1280: {
+              slidesPerView: 3,
+            },
+          }}
+        >
+          {userData &&
+            userData?.[dataSource]?.map((item: any, key: number) => {
+              return (
+                <SwiperSlide
+                  key={key}
+                  className="xs:w-[100%] sm:w-[100%] md:w-[48%] lg:w-[30%]"
+                >
+                  <Component {...item} />
+                </SwiperSlide>
+              );
+            })}
+        </Swiper>
       </div>
     </div>
   );

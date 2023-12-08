@@ -17,6 +17,10 @@ const Footer = () => {
     "/subscribe",
     "/subscribed",
     "/chatAI",
+    "/linkedin-generator/headline",
+    "/linkedin-generator/about",
+    "/linkedin-generator/job-description",
+    "/linkedin-generator/keywords",
   ];
   if (
     pathname === "/login" ||

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
 import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
@@ -10,11 +10,11 @@ import LimitCard from "../LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
-import Link from "next/link";
-interface Props {
-  setAbout: React.Dispatch<React.SetStateAction<string>>;
-}
-const AboutGenerator = ({ setAbout }: Props) => {
+import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
+import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
+const SubAboutGenerator = () => {
+  const componentRef = useRef<any>(null);
+  const [about, setAbout] = useState<string>("");
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
@@ -203,9 +203,16 @@ const AboutGenerator = ({ setAbout }: Props) => {
       getUserDataIfNotExists();
     }
   }, [session?.user?.email]);
+  const historyProps = {
+    dataSource: "coverLetters",
+    Component: (card: any) => (
+      <CoverLetterCardSingle card={card} componentRef={componentRef} />
+    ),
+  };
   return (
     <>
-      <div className="headline-generator bg-[#222027] py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
+      <PreviouslyGeneratedList {...historyProps} />
+      <div className="headline-generator bg-[#17151B] py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
         <div
           className={`icon hidden rounded-full bg-gradient-to-b from-[#26A5C1] to-[#84E1E7] md:flex justify-center items-center w-16 h-16`}
         >
@@ -228,14 +235,14 @@ const AboutGenerator = ({ setAbout }: Props) => {
               free
             </span>
           </div>
-          {/* <LimitCard
+          <LimitCard
             title="Available"
             limit={userData?.userPackageData?.limit?.about_generation}
             used={userData?.userPackageUsed?.about_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          /> */}
+          />
 
           <p className="text-[14px] text-[#959595] pr-5">
             Generate impressive about for your linkedin
@@ -274,18 +281,15 @@ const AboutGenerator = ({ setAbout }: Props) => {
                   height={18}
                   width={18}
                 />
-                <Link
-                  href="/linkedin-generator/about"
-                  className={`text-white ml-3 text-[15px] font-semibold`}
-                >
+                <span className={`text-white ml-3 text-[15px] font-semibold`}>
                   Generate About
-                </Link>
+                </span>
               </div>
             )}
           </span>
         </button>
       </div>
-      {/* {streamedData && (
+      {streamedData && (
         <div className="rounded border border-gray-500 mb-4 p-4">
           <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
@@ -332,12 +336,12 @@ const AboutGenerator = ({ setAbout }: Props) => {
       )}
       {showPopup && (
         <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
-       
+          {/* Popup content here */}
           Credit Limit Reached !
         </div>
-      )} */}
+      )}
     </>
   );
 };
 
-export default AboutGenerator;
+export default SubAboutGenerator;
