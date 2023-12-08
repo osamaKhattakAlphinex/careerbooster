@@ -40,7 +40,7 @@ const RewardsSection = () => {
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       d="m3.75 9 3.75 3.75 7.5-7.5"
                     ></path>
                   </g>
@@ -64,7 +64,7 @@ const RewardsSection = () => {
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       d="m3.75 9 3.75 3.75 7.5-7.5"
                     ></path>
                   </g>
@@ -88,7 +88,7 @@ const RewardsSection = () => {
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       d="m3.75 9 3.75 3.75 7.5-7.5"
                     ></path>
                   </g>

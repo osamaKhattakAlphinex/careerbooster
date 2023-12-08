@@ -3,6 +3,11 @@ const { Schema } = mongoose;
 
 const TrainBotSchema = new Schema(
   {
+    entryId: {
+      type: String,
+      required: true,
+    },
+
     type: {
       type: String,
       required: true,

@@ -133,7 +133,7 @@ const ConsultingBidsGenerator = () => {
               setStreamedData((prev) => prev + text);
               tempText += text;
             }
-            await saveToDB(tempText);
+            // await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -149,18 +149,17 @@ const ConsultingBidsGenerator = () => {
                 user = await JSON.parse(res.result);
               }
               if (res.success) {
-                const payload = {
-                  id: makeid(),
-                  jobDescription: jobDescription,
-                  consultingBidText: tempText,
-                  generatedOnDate: new Date().toISOString(),
-                  generatedViaOption: selectedOption,
-                  userEmail: session?.user?.email,
-                };
+                // const payload = {
+                //   id: makeid(),
+                //   jobDescription: jobDescription,
+                //   consultingBidText: tempText,
+                //   generatedOnDate: new Date().toISOString(),
+                //   generatedViaOption: selectedOption,
+                //   userEmail: session?.user?.email,
+                // };
 
-                const consultingBidResponse = await axios.post(
-                  "/api/consultingBidBot",
-                  payload
+                const consultingBidResponse = await axios.get(
+                  "/api/consultingBidBot/getAllConsultingBids"
                 );
 
                 const updatedObject = {
@@ -174,7 +173,14 @@ const ConsultingBidsGenerator = () => {
                     consultingBidResponse.data.result.consultingBids,
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
-                dispatch(setConsultingBid(payload));
+                dispatch(
+                  setConsultingBid(
+                    consultingBidResponse.data.result.consultingBids[
+                      consultingBidResponse.data.result.consultingBids.length -
+                        1
+                    ]
+                  )
+                );
               }
             });
           } else {
@@ -608,7 +614,7 @@ const ConsultingBidsGenerator = () => {
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke-width="1.5"
+                            strokeWidth="1.5"
                             stroke="currentColor"
                             className="w-6 h-6 text-[#37B944]"
                           >
@@ -674,7 +680,7 @@ const ConsultingBidsGenerator = () => {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke="currentColor"
                           className="w-4 h-4 text-white"
                         >
@@ -713,7 +719,7 @@ const ConsultingBidsGenerator = () => {
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
                               viewBox="0 0 24 24"
-                              stroke-width="1.5"
+                              strokeWidth="1.5"
                               stroke="currentColor"
                               className="w-6 h-6 text-yellow-200"
                             >
@@ -740,7 +746,7 @@ const ConsultingBidsGenerator = () => {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
-                          stroke-width={1.5}
+                          strokeWidth={1.5}
                           stroke="currentColor"
                           className="w-6 h-6 text-white"
                         >

@@ -49,7 +49,7 @@ export async function POST(req: any) {
     if (type === "basicDetails") {
       const dataset = "resume.getBasicInfo";
       const model = await getTrainedModel(dataset);
-      console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+      //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
       try {
         const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
@@ -125,7 +125,7 @@ export async function POST(req: any) {
     if (type === "summary") {
       const dataset = "resume.writeSummary";
       const model = await getTrainedModel(dataset);
-      console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+      //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
       try {
         await startDB();
@@ -170,9 +170,10 @@ export async function POST(req: any) {
             await TrainBot.create({ ...obj });
           }
         } catch (error) {}
+
         const stream = OpenAIStream(response);
         // Respond with the stream
-        return new StreamingTextResponse(stream);
+        return new StreamingTextResponse(stream, {});
         // return NextResponse.json(
         //   { result: output, success: true },
         //   { status: 200 }
@@ -267,7 +268,7 @@ export async function POST(req: any) {
     if (type === "primarySkills") {
       const dataset = "resume.writePrimarySkills";
       const model = await getTrainedModel(dataset);
-      console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+      //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
       try {
         await startDB();
@@ -345,7 +346,7 @@ export async function POST(req: any) {
     if (type === "professionalSkills") {
       const dataset = "resume.writeProfessionalSkills";
       const model = await getTrainedModel(dataset);
-      console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+      //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
       try {
         await startDB();
@@ -422,7 +423,7 @@ export async function POST(req: any) {
     if (type === "secondarySkills") {
       const dataset = "resume.writeSecondarySkills";
       const model = await getTrainedModel(dataset);
-      console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+      //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
       try {
         await startDB();
