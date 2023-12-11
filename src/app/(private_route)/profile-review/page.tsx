@@ -117,7 +117,7 @@ const ProfileReview = () => {
 
   return (
     <>
-      <div className="ml-0 lg:ml-[244px] px-[15px] lg:mb-[72px]">
+      <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]">
         {/* </script> */}
         <Link
           href="/dashboard"

@@ -50,6 +50,7 @@
   color: white;
   padding: 1rem;
 }
+
 @media print {
   .text-color {
     color: black !important;
@@ -82,8 +83,6 @@
 .swiper {
   /* margin: 0 auto; */
   cursor: grab;
-
-  
 }
 /* .swiper-slide {
   width: 100% !important;
@@ -119,7 +118,6 @@
   background: #fff !important;
   border-radius: 2px;
   border-radius: 50%;
-  
 }
 
 .swiper-button-next::after,
@@ -128,8 +126,6 @@
   font-weight: bold;
   color: #000 !important;
   background: #fff !important;
-  
-  
 }
 /* .swiper-button-next:hover {
   transform: scale(1.2) translateX(80%);

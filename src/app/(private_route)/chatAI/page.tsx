@@ -1,7 +1,7 @@
 "use client";
 import { getFilesForUser } from "@/helpers/getFilesForUser";
 import { useChat } from "ai/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { makeid } from "@/helpers/makeid";
 import logo from "@/../public/trans-icon1.png";
@@ -10,13 +10,14 @@ import { leftArrowIcon } from "@/helpers/iconsProvider";
 import Image from "next/image";
 const ChatAI = () => {
   const [userData, setUserData] = useState({});
+  const messagesContainer: any = useRef(null);
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "/api/chatWithFile",
     initialMessages: [
       {
         id: makeid(),
         role: "user",
-        content: JSON.stringify(userData).substring(0, 16000),
+        content: JSON.stringify(userData).substring(0, 10000),
       },
     ],
     body: {
@@ -36,18 +37,26 @@ const ChatAI = () => {
       contact: data.contact,
       skills: data.skills,
       education: data.education,
-      files: data.files,
+      files: data.files[0],
     });
   };
   useEffect(() => {
     getDataForChat();
   }, []);
-  console.log("message", messages);
+  const scrollToBottom = () => {
+    if (messagesContainer.current) {
+      messagesContainer.current.scrollTop =
+        messagesContainer.current.scrollHeight;
+    }
+  };
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
   return (
     <>
       <div className="w-full sm:w-full z-1000 mb-[10px]">
-        <div className="ml-0 lg:ml-[244px]">
+        <div className="ml-0 lg:ml-[234px]">
           <Link
             href="/dashboard"
             className="ml-2 no-underline px-[15px]   text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
@@ -55,8 +64,11 @@ const ChatAI = () => {
             {leftArrowIcon}
             Back
           </Link>
-          <div className="w-full h-[29rem] flex flex-col items-center ">
-            <section className="flex h-20  flex-col py-3 gap-8 w-9/12  flex-1 overflow-y-scroll no-scrollbar ">
+          <div className="w-full h-[75vh] flex flex-col items-center ">
+            <section
+              ref={messagesContainer}
+              className="flex h-20  flex-col py-3 gap-8 w-9/12  flex-1 overflow-y-scroll no-scrollbar "
+            >
               {/* {m.role === "user" ? "User: " : "AI Resume Bot: "} */}
               {messages.slice(1).map((m) => (
                 <div className="flex flex-row items-start gap-2" key={m.id}>
@@ -72,12 +84,12 @@ const ChatAI = () => {
                           <path d="M230.92 212c-15.23-26.33-38.7-45.21-66.09-54.16a72 72 0 1 0-73.66 0c-27.39 8.94-50.86 27.82-66.09 54.16a8 8 0 1 0 13.85 8c18.84-32.56 52.14-52 89.07-52s70.23 19.44 89.07 52a8 8 0 1 0 13.85-8ZM72 96a56 56 0 1 1 56 56 56.06 56.06 0 0 1-56-56Z"></path>
                         </svg>
                       </div>
-                      <div className="text-right pr-40 text-white">
+                      <div className="text-right  text-white">
                         {m.content.length > 0 ? m.content : "Logind"}
                       </div>
                     </div>
                   ) : (
-                    <div className="flex flex-row-reverse items-start gap-2  w-full">
+                    <div className="flex flex-row items-start gap-2  w-full">
                       <div className="w-8 h-8 bg-white flex justify-center items-center text-center  rounded-md">
                         {/* <svg
                           fill="currentColor"
@@ -91,9 +103,7 @@ const ChatAI = () => {
                         </svg> */}
                         <Image src={logo} alt="" className="w-8 h-8" />
                       </div>
-                      <div className="text-justify pl-40 text-white">
-                        {m.content}
-                      </div>
+                      <div className="w-fit text-white">{m.content}</div>
                     </div>
                   )}
                 </div>

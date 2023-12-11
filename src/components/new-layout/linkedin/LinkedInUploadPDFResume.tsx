@@ -13,6 +13,7 @@ import Button from "../../utilities/form-elements/Button";
 import LinkedInSummary from "./LinkedInSummary";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Avatar from "@/components/utilities/Avatar";
 
 //Editable
 const loadFromLocalStorage = () => {
@@ -299,8 +300,8 @@ const LinkedInUploadPDFResume = () => {
 
   useEffect(() => {
     if (linkedinContent !== "" && linkedinFileName !== "") {
-      linkedinHeadline(linkedinContent);
-      linkedinAbout(linkedinContent);
+      // linkedinHeadline(linkedinContent);
+      // linkedinAbout(linkedinContent);
     }
   }, [linkedinContent, linkedinFileName]);
 
@@ -615,6 +616,7 @@ const LinkedInUploadPDFResume = () => {
           {fileError && <div className="error-message">{fileError}</div>}
         </div>
       </div>
+      <Avatar />
     </>
   );
 };

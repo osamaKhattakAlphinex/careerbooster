@@ -318,7 +318,7 @@ export default function CoverLetterPage() {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px]">
+        <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]">
           {/* <AiGeneratedCoverLetters /> */}
           <Link
             href="/dashboard"

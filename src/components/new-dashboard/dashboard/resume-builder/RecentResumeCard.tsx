@@ -14,9 +14,16 @@ const RecentResumeCard = ({
   // redux
   const userData = useSelector((state: any) => state.userData);
   const { resumes } = userData;
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index: any, className: any) {
+      return '<span class="' + className + '">' + (index + 1) + "</span>";
+    },
+  };
+
   return (
     <>
-      <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-4 md:px-[24px] py-[35px]  ">
+      <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-4 md:px-[24px] pt-[35px] pb-[20px]  ">
         <div className="flex justify-between items-center  ">
           <h1 className="uppercase font-semibold text-[16px] md:text-sm">
             Your Resumes
@@ -36,43 +43,21 @@ const RecentResumeCard = ({
         {/* <div className="flex flex-wrap lg:flex-row flex-col  gap-4"> */}
         <div className="flex flex-row">
           <Swiper
-            spaceBetween={10}
             slidesPerView={3}
-           
-            navigation={true}
-            modules={[Navigation]}
-            
-            breakpoints={{
-              0: {
-                slidesPerView: 1,
-              },
-              640: {
-                slidesPerView: 1,
-              },
-              768: {
-                slidesPerView: 2,
-              },
-              1080: {
-                slidesPerView: 3,
-              },
-              1280: {
-                slidesPerView: 3,
-              },
-            }}
+            spaceBetween={30}
+            pagination={pagination}
+            modules={[Pagination]}
+            className="mySwiper"
           >
-
             {resumes &&
               resumes.map((resume: any) => (
-                <SwiperSlide
-                  
-                  key={resume.id}
-                >
-                    <SingleRecentResumeCard
-                      key={resume.id}
-                      resume={resume}
-                      source={source}
-                      componentRef={componentRef}
-                    />
+                <SwiperSlide key={resume.id}>
+                  <SingleRecentResumeCard
+                    key={resume.id}
+                    resume={resume}
+                    source={source}
+                    componentRef={componentRef}
+                  />
                 </SwiperSlide>
               ))}
           </Swiper>
