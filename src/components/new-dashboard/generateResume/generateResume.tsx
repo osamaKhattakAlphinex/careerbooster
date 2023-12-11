@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import  fi_chevron_down from "@/../public/Ai tools/icon/fi_chevron-down.svg"
+import fi_chevron_down from "@/../public/Ai tools/icon/fi_chevron-down.svg";
 const GenerateResume = () => {
   const [showInstruction, setShowInstruction] = useState<boolean>(false);
 
@@ -59,9 +59,9 @@ const GenerateResume = () => {
           <div className="flex flex-row gap-2">
             <span className="block text-white font-bold text-base">3.</span>
             <p className="text-white text-base">
-              If you're unsatisfied with the results, please note that we create
-              your new resume using your original resume data. If any of your
-              experiences are missing,
+              If you{"'"}re unsatisfied with the results, please note that we
+              create your new resume using your original resume data. If any of
+              your experiences are missing,
               <Link href="#" className="text-[#615DFF] font-bold">
                 &nbsp; Edit your profile
               </Link>
