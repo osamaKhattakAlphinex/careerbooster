@@ -128,7 +128,8 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.files[0].fileName,
+          // fileAddress: userData.files[0].fileName,
+          fileAddress: userData.uploadedResume.fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -170,7 +171,8 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.files[0].fileName,
+          // fileAddress: userData.files[0].fileName,
+          fileAddress: userData.uploadedResume.fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -249,7 +251,8 @@ const ResumeBuilder = () => {
             experience: experience,
             trainBotData: {
               userEmail: userData.email,
-              fileAddress: userData.files[0].fileName,
+              // fileAddress: userData.files[0].fileName,
+              fileAddress: userData.uploadedResume.fileName,
             },
           }),
         });
@@ -350,7 +353,8 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.files[0].fileName,
+          // fileAddress: userData.files[0].fileName,
+          fileAddress: userData.uploadedResume.fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -379,7 +383,8 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.files[0].fileName,
+          // fileAddress: userData.files[0].fileName,
+          fileAddress: userData.uploadedResume.fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -408,7 +413,8 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.files[0].fileName,
+          // fileAddress: userData.files[0].fileName,
+          fileAddress: userData.uploadedResume.fileName,
         },
       }),
     }).then(async (resp: any) => {

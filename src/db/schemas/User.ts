@@ -61,7 +61,7 @@ const UserSchema = new Schema(
     linkedInHeadlines: [],
     linkedInJobDescriptions: [],
     linkedInKeywords: [],
-
+    uploadedResume: {},
     wizardCompleted: {
       type: Boolean,
       default: false,

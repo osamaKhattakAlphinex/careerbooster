@@ -5,6 +5,7 @@ import Modal from "@/components/Modal";
 import { bellIcon, sunIcon } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
 import { useSelector } from "react-redux";
+import Notifications from "@/components/Notifications";
 interface HeaderProps {
   children?: ReactNode;
 }
@@ -49,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
         </h1>
         <div className="flex">
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsModalOpen(!isModalOpen)}
             className={`text-white flex justify-center mr-3 items-center bg-zinc-900 border-zinc-800 w-[40px] h-[40px] rounded-full capitalize  ${
               pathname === "/subscribe" ? "hidden" : ""
             } `}
