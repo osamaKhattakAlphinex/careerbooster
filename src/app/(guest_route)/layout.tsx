@@ -2,7 +2,8 @@ import React, { ReactNode } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-
+import "@/app/plugins.css";
+import "@/app/style.css";
 interface Props {
   children: ReactNode;
 }
@@ -12,5 +13,5 @@ export default async function GuestLayout({ children }: Props) {
 
   if (session) redirect("/dashboard");
 
-  return <>{children}</>;
+  return <> {children}</>;
 }

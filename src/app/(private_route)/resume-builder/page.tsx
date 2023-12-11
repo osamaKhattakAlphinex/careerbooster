@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
-import ResumeTemplate1 from "@/components/dashboard/resume-templates/template-1";
+import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/template-1";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   WorkExperience,
   setField,
@@ -25,17 +26,16 @@ import {
 // import { exitFullScreenIcon, fullScreenIcon } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { makeid } from "@/helpers/makeid";
-import RecentResumeCard from "@/components/dashboard/resume-builder/RecenResumesCard";
-import GenerateNewResumeCard from "@/components/dashboard/resume-builder/GenerateNewResumeCard";
 import { checkIconSmall, leftArrowIcon } from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
-import Link from "next/link";
-import LimitCard from "@/components/dashboard/LimitCard";
 import useTheme from "@/lib/useTheme";
-
+import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
+import GenerateResume from "@/components/new-dashboard/dashboard/resume-builder/GenerateNewResumeCard";
+import Link from "next/link";
 const ResumeBuilder = () => {
   const [theme] = useTheme();
   const [confettingRunning, setConfettiRunning] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const confettiConfig = {
     angle: 90,
     spread: 360,
@@ -70,17 +70,12 @@ const ResumeBuilder = () => {
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
-
   const handleGenerate = useCallback(async () => {
     await getUserDataIfNotExists();
     // reset resume
     dispatch(resetResume(resumeData.state));
 
-    if (
-      resumeData.state.jobPosition !== "" &&
-      session?.user?.email &&
-      percentageCalculated
-    ) {
+    if (resumeData.state.jobPosition !== "" && session?.user?.email) {
       dispatch(setState({ name: "resumeLoading", value: true }));
       dispatch(setId(""));
       getBasicInfo();
@@ -90,12 +85,40 @@ const ResumeBuilder = () => {
       getSecondarySkills();
       await getWorkExperienceNew();
       runConfetti();
-    }
-  }, [resumeData.state, percentageCalculated]);
+    } else {
+      setShowPopup(true);
 
+      // Hide the popup after 3 seconds
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
+    }
+  }, [resumeData.state]);
+
+  // const makeAPICallWithRetry: any = async (
+  //   apiFunction: any,
+  //   retriesLeft = 2
+  // ) => {
+  //   try {
+  //     // Attempt the API call
+  //     return await apiFunction();
+  //   } catch (error) {
+  //     // If an error occurs and retries are left, retry the call
+  //     if (retriesLeft > 0) {
+  //       console.log(
+  //         `API call failed. Retrying... Retries left: ${retriesLeft}`
+  //       );
+  //       return makeAPICallWithRetry(apiFunction, retriesLeft - 1);
+  //     } else {
+  //       // If no retries are left, handle the error accordingly
+  //       console.error("API call failed after multiple retries.", error);
+  //       throw new Error("API call failed after multiple retries");
+  //     }
+  //   }
+  // };
   const getBasicInfo = async () => {
     // dispatch(setLoadingState("basicInfo"));
-
+    // return makeAPICallWithRetry(async () => {
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
@@ -105,13 +128,19 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
+
       if (res.success && res?.result) {
-        const myJSON = JSON.parse(res.result);
+        let myJSON;
+        if (typeof res.result === "object") {
+          myJSON = res.result;
+        } else {
+          myJSON = await JSON.parse(res.result);
+        }
         const basicObj = {
           ...myJSON,
           name: userData?.firstName + " " + userData?.lastName,
@@ -125,9 +154,11 @@ const ResumeBuilder = () => {
         dispatch(setBasicInfo(basicObj));
       }
     });
+    // });
   };
 
   const getSummary = async () => {
+    // return makeAPICallWithRetry(async () => {
     await getUserDataIfNotExists();
     setStreamedSummaryData("");
     dispatch(setSummary(""));
@@ -139,34 +170,37 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
-      const res = await resp.json();
+      // const res = await resp.json();
 
-      if (res.success) {
-        // const reader = resp.body.getReader();
-        // let summaryTemp = "";
-        // while (true) {
-        //   const { done, value } = await reader.read();
+      if (resp.ok) {
+        const reader = resp.body.getReader();
+        let summaryTemp = "";
+        while (true) {
+          const { done, value } = await reader.read();
 
-        //   if (done) {
-        //     break;
-        //   }
+          if (done) {
+            break;
+          }
 
-        //   const text = new TextDecoder().decode(value);
-        //   setStreamedSummaryData((prev) => prev + text);
-        //   summaryTemp += text;
-        // }
-        dispatch(setSummary(res.result.text));
+          const text = new TextDecoder().decode(value);
+          setStreamedSummaryData((prev) => prev + text);
+          summaryTemp += text;
+        }
+
+        dispatch(setSummary(summaryTemp));
       } else {
         setStreamedSummaryData("Error! Something went wrong");
       }
     });
+    // });
   };
 
   const getWorkExperienceNew = async () => {
+    // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("workExperience"));
     await getUserDataIfNotExists();
 
@@ -208,33 +242,34 @@ const ResumeBuilder = () => {
         temp += html;
         let achievementTemp = "";
         setStreamedJDData((prev) => prev + html);
+
         const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
           method: "POST",
           body: JSON.stringify({
             experience: experience,
             trainBotData: {
               userEmail: userData.email,
-              fileAddress: userData.defaultResumeFile,
+              fileAddress: userData.files[0].fileName,
             },
           }),
         });
-        const response = await res.json();
+        // const response = await res.json();
         // console.log("result", result, typeof result);
-        if (response.success) {
-          // const reader = res.body.getReader();
-          // while (true) {
-          //   const { done, value } = await reader.read();
+        if (res.ok) {
+          const reader = res.body.getReader();
+          while (true) {
+            const { done, value } = await reader.read();
 
-          //   if (done) {
-          //     break;
-          //   }
+            if (done) {
+              break;
+            }
 
-          // const text = new TextDecoder().decode(value);
-          const text = response.result;
-          setStreamedJDData((prev) => prev + text);
-          temp += text;
-          achievementTemp += text;
-          // }
+            const text = new TextDecoder().decode(value);
+            // const text = response.result;
+            setStreamedJDData((prev) => prev + text);
+            temp += text;
+            achievementTemp += text;
+          }
         }
 
         setStreamedJDData((prev) => prev + `</div> <br /> `);
@@ -247,6 +282,7 @@ const ResumeBuilder = () => {
       dispatch(setWorkExperience(temp));
       dispatch(setState({ name: "resumeLoading", value: false }));
     }
+    // });
   };
 
   const fetchLIstOfStrings = (text: string) => {
@@ -303,6 +339,7 @@ const ResumeBuilder = () => {
   // };
 
   const getPrimarySkills = async () => {
+    // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("primarySkills"));
     await getUserDataIfNotExists();
     return fetch("/api/resumeBots/getBasicInfo", {
@@ -313,21 +350,25 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
       if (res.success) {
         if (res?.result) {
-          const myJSON = await JSON.parse(res.result);
-          dispatch(setPrimarySkills(myJSON));
+          let myJSON = JSON.parse(JSON.stringify(res.result));
+
+          myJSON = JSON.parse(myJSON);
+          dispatch(setPrimarySkills({ primarySkills: myJSON }));
         }
       }
     });
+    // });
   };
 
   const getProfessionalSkills = async () => {
+    // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("professionalSkills"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
@@ -338,22 +379,25 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
       if (res.success) {
         if (res?.result) {
-          const myJSON = await JSON.parse(res.result);
+          let myJSON = JSON.parse(JSON.stringify(res.result));
 
-          dispatch(setProfessionalSkills(myJSON));
+          myJSON = JSON.parse(myJSON);
+          dispatch(setProfessionalSkills({ professionalSkills: myJSON }));
         }
       }
     });
+    // });
   };
 
   const getSecondarySkills = async () => {
+    // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("secondarySkills"));
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
@@ -364,21 +408,25 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          fileAddress: userData.files[0].fileName,
         },
       }),
     }).then(async (resp: any) => {
       const res = await resp.json();
       if (res.success) {
         if (res?.result) {
-          const myJSON = await JSON.parse(res.result);
-          dispatch(setSecondarySkills(myJSON));
+          let myJSON = JSON.parse(JSON.stringify(res.result));
+
+          myJSON = JSON.parse(myJSON);
+          dispatch(setSecondarySkills({ secondarySkills: myJSON }));
         }
       }
     });
+    // });
   };
 
   const getUserDataIfNotExists = async () => {
+    // return makeAPICallWithRetry(async () => {
     if (!userData.isLoading && !userData.isFetched) {
       dispatch(setIsLoading(true));
       // Fetch userdata if not exists in Redux
@@ -392,9 +440,11 @@ const ResumeBuilder = () => {
       dispatch(setIsLoading(false));
       dispatch(setField({ name: "isFetched", value: true }));
     }
+    // });
   };
 
   const saveResumeToDB = async (data: any = "") => {
+    // return makeAPICallWithRetry(async () => {
     const source = data === "" ? resumeData : data;
     let obj = source;
     if (!source.id || source.id === "") {
@@ -433,6 +483,7 @@ const ResumeBuilder = () => {
           setShowAlert(false);
         }, 1000);
       });
+    // });
   };
 
   useEffect(() => {
@@ -445,9 +496,9 @@ const ResumeBuilder = () => {
     if (userData && userData?.email) {
       setAiInputUserData({
         contact: userData?.contact,
-        education: userData?.contact,
-        email: userData?.contact,
-        experience: userData?.contact,
+        education: userData?.education,
+        email: userData?.email,
+        experience: userData?.experience,
         firstName: userData?.firstName,
         lastName: userData?.lastName,
         phone: userData?.phone,
@@ -458,66 +509,59 @@ const ResumeBuilder = () => {
 
   return (
     <>
-      <div className="w-[95%] my-5 ml-10 flex items-center justify-between ">
-        <Link
-          href="/dashboard"
-          className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
-        >
-          {leftArrowIcon}
-          Dashboard
-        </Link>
-
-        <LimitCard
-          title="AvailableCredits"
-          limit={userData?.userPackageData?.limit?.resumes_generation}
-          used={userData?.userPackageUsed?.resumes_generation}
-          setPercentageCalculated={setPercentageCalculated}
-          availablePercentage={availablePercentage}
-          setAvailablePercentage={setAvailablePercentage}
-        />
-      </div>
-      {showAlert && (
-        <div
-          className="fixed bottom-10 right-10 flex flex-row gap-2 justify-center items-center bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white transition-opacity cursor-pointer"
-          onClick={() => setShowAlert(false)}
-        >
-          {checkIconSmall}
-          Auto saved
-        </div>
-      )}
-      <div className="m-10 mt-2 w-[95%]  p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
-        <RecentResumeCard componentRef={componentRef} />
-      </div>
-
-      <GenerateNewResumeCard
-        handleGenerate={handleGenerate}
-        availablePercentage={availablePercentage}
-      />
-
-      <div className="flex justify-center items-center">
-        <Confetti active={confettingRunning} config={confettiConfig} />
-      </div>
-
-      {resumeData &&
-        (resumeData?.name ||
-          resumeData?.contact?.email ||
-          resumeData?.summary) && (
-          <div className="m-10  w-[95%] bg-white border border-gray-200 rounded-lg shadow sm:p-6 ">
+      <div className="w-full sm:w-full z-1000 ">
+        <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px] ">
+          <Link
+            href="/dashboard"
+            className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
+          >
+            {leftArrowIcon}
+            Back
+          </Link>
+          <RecentResumeCard source="dashboard" componentRef={componentRef} />
+          {showAlert && (
             <div
-              className={`w-full  ${
-                resumeData.state.resumeLoading ? "animate-pulse" : ""
-              }`}
-              ref={componentRef}
+              className="fixed bottom-10 right-10 flex flex-row gap-2 justify-center items-center bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white transition-opacity cursor-pointer"
+              onClick={() => setShowAlert(false)}
             >
-              <ResumeTemplate1
-                streamedSummaryData={streamedSummaryData}
-                streamedJDData={streamedJDData}
-                saveResumeToDB={saveResumeToDB}
-              />
+              {checkIconSmall}
+              Auto saved
             </div>
+          )}
+          <GenerateResume
+            handleGenerate={handleGenerate}
+            availablePercentage={availablePercentage}
+          />
+          <div className="flex justify-center items-center">
+            <Confetti active={confettingRunning} config={confettiConfig} />
           </div>
-        )}
-      <div className="block mb-40"></div>
+          {resumeData &&
+            (resumeData?.name ||
+              resumeData?.contact?.email ||
+              resumeData?.summary) && (
+              <div className="my-10  w-[100%] bg-white border border-gray-200 rounded-lg shadow sm:p-6 ">
+                <div
+                  className={`w-full  ${
+                    resumeData.state.resumeLoading ? "animate-pulse" : ""
+                  }`}
+                  ref={componentRef}
+                >
+                  <ResumeTemplate1
+                    streamedSummaryData={streamedSummaryData}
+                    streamedJDData={streamedJDData}
+                    saveResumeToDB={saveResumeToDB}
+                  />
+                </div>
+              </div>
+            )}
+          {showPopup && (
+            <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
+              {/* Popup content here */}
+              Credit Limit Reached !
+            </div>
+          )}
+        </div>
+      </div>
     </>
   );
 };

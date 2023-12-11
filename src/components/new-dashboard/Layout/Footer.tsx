@@ -1,50 +1,83 @@
+"use client";
 import { memo } from "react";
-import AppleLogo from "@/../public/Ai tools/icon/AppleLogo.svg";
-import AndroidLogo from "@/../public/Ai tools/icon/AndroidLogo.svg";
-import FacebookIcon from "@/../public/Ai tools/icon/FacebookLogo.svg";
-import LinkedinLogo from "@/../public/Ai tools/icon/LinkedinLogo.svg";
+import AppleLogo from "@/../public/icon/AppleLogo.svg";
+import AndroidLogo from "@/../public/icon/AndroidLogo.svg";
+import FacebookIcon from "@/../public/icon/FacebookLogo.svg";
+import LinkedinLogo from "@/../public/icon/LinkedinLogo.svg";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 const tabOption = [
   {
-    href: "/",
-    icon: <Image src={AppleLogo} alt="AppleLogo" width={32} height={32} />,
-  },
-  {
-    href: "/",
-    icon: <Image src={AndroidLogo} alt="AndroidLogo" width={32} height={32} />,
-  },
-  {
-    href: "/",
+    href: "https://www.facebook.com/careerboosterai",
     icon: (
-      <Image src={FacebookIcon} alt="FacebookIcon" width={32} height={32} />
+      <Image src={FacebookIcon} alt="FacebookIcon" width={26} height={26} />
     ),
   },
   {
+    href: "https://www.linkedin.com/company/careerboosterai/",
+    icon: <Image src={LinkedinLogo} alt="linkIcon" width={26} height={26} />,
+  },
+  {
     href: "/",
-    icon: <Image src={LinkedinLogo} alt="linkIcon" width={32} height={32} />,
+    icon: <Image src={AndroidLogo} alt="AndroidLogo" width={26} height={26} />,
+  },
+  {
+    href: "/",
+    icon: <Image src={AppleLogo} alt="AppleLogo" width={26} height={26} />,
   },
 ];
-
-const Footer = () => (
-  <div className="fixed left-64 bottom-0 pb-7 w-4/5 px-3 text-center">
-    <div className="flex justify-between h-[52px] items-end border-t-2 border-zinc-900">
-      <p className="text-[#959595] text-4">
-        2023 © CareerAi | Design by AlyStudio
-      </p>
-      <div className="flex gap-[22px] items-center">
-        <p className="text-[#959595]">Teams use</p>
-        <p className="text-[#959595]">Privacy Policy</p>
-        <div className="flex gap-[21px]">
-          {tabOption.map((item, i) => (
-            <a href={item.href} key={i}>
-              {item.icon}
-            </a>
-          ))}
+const pagesArray = ["/subscribe"];
+const Footer = () => {
+  const pathname: any = usePathname();
+  // if (pagesArray?.includes(pathname)) return <></>;
+  return (
+    <div
+      className={`pb-7  px-3 text-center ${
+        pagesArray?.includes(pathname) ? "" : "lg:ml-[234px]"
+      }
+    ${pathname === "/subscribed" ? "hidden" : ""}
+     `}
+    >
+      <div className="flex justify-between h-[52px] items-end border-t border-[#312E37]">
+        <p className="text-[#959595] lg:text-[14px] text-[10px]">
+          2023 © CareerAi
+        </p>
+        <div className="flex lg:gap-[22px] gap-[10px] items-center">
+          <Link
+            href={"/terms-and-conditions"}
+            className="text-[#959595] lg:text-[14px] text-[10px]"
+          >
+            Terms use
+          </Link>
+          <Link
+            href={"/privacy-policy"}
+            className="text-[#959595] lg:text-[14px] text-[10px]"
+          >
+            Privacy Policy
+          </Link>
+          <div className="flex lg:gap-[21px] gap-[8px]">
+            {tabOption.map((item, i) => (
+              <a
+                href={item.href}
+                key={i}
+                target={
+                  item.href === "https://www.facebook.com/careerboosterai" ||
+                  item.href ===
+                    "https://www.linkedin.com/company/careerboosterai/"
+                    ? "_blank"
+                    : ""
+                }
+              >
+                {item.icon}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-export default memo(Footer);
+export default Footer;

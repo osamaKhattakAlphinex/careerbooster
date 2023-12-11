@@ -12229,7 +12229,7 @@
     if (!t) return !1;
     (e.style.backgroundColor = C),
       (b.innerHTML = (function (e) {
-        if (!e) return "Loading...";
+        if (!e) return "Loading...123";
         let t = '<div class="sk-center ' + e[0] + '">',
           o = 0;
         for (o = 0; o < e[2]; o++) t += '<div class="' + e[1] + '"></div>';

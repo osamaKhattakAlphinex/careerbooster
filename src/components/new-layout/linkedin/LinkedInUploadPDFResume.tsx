@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 // import { slugify } from "@/helpers/slugify";
 import copy from "clipboard-copy";
@@ -12,6 +13,7 @@ import Button from "../../utilities/form-elements/Button";
 import LinkedInSummary from "./LinkedInSummary";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Avatar from "@/components/utilities/Avatar";
 
 //Editable
 const loadFromLocalStorage = () => {
@@ -19,6 +21,8 @@ const loadFromLocalStorage = () => {
   const linkedinFileName = localStorage.getItem("linkedin-fileName");
   return { linkedinContent, linkedinFileName };
 };
+
+// alskdfjals?
 const LinkedInUploadPDFResume = () => {
   // local states
   const router = useRouter();
@@ -30,6 +34,7 @@ const LinkedInUploadPDFResume = () => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [linkedinContent, setLinkedinContent] = useState<any>("");
   const [linkedinFileName, setLinkedinFileName] = useState<any>("");
+  const [showAvatar, setShowAvatar] = useState<boolean>(true);
 
   // Define a state variable to hold both first name and full name
   const [names, setNames] = useState({
@@ -58,7 +63,13 @@ const LinkedInUploadPDFResume = () => {
     if (linkedinContent) {
       fetch("/api/linkedInBots/linkedinHeadlineGenerator", {
         method: "POST",
-        body: JSON.stringify({ linkedinContent }),
+        body: JSON.stringify({
+          linkedinContent,
+          trainBotData: {
+            // userEmail: userData.email,
+            fileContent: linkedinContent,
+          },
+        }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -104,6 +115,10 @@ const LinkedInUploadPDFResume = () => {
           linkedinContent,
           option: aboutData,
           instruction,
+          trainBotData: {
+            // userEmail: userData.email,
+            fileContent: linkedinContent,
+          },
         }),
         headers: {
           "Content-Type": "application/json",
@@ -170,6 +185,9 @@ const LinkedInUploadPDFResume = () => {
             location,
           });
           setButtonDisabled(false);
+          if (firstName && lastName) {
+            setShowAvatar(true);
+          }
           if (email && phone) {
             UpdateGohighlevel({
               userId,
@@ -286,15 +304,15 @@ const LinkedInUploadPDFResume = () => {
 
   useEffect(() => {
     if (linkedinContent !== "" && linkedinFileName !== "") {
-      linkedinHeadline(linkedinContent);
-      linkedinAbout(linkedinContent);
+      // linkedinHeadline(linkedinContent);
+      // linkedinAbout(linkedinContent);
     }
   }, [linkedinContent, linkedinFileName]);
 
   useEffect(() => {
     if (headlineComplete && aboutComplete) {
       // All APIs have completed, call linkedinToolSaveUser
-      linkedinToolSaveUser(linkedinContent, linkedinFileName);
+      linkedinToolSaveUser(linkedinFileName, linkedinContent);
     }
   }, [headlineComplete, aboutComplete]);
 
@@ -437,7 +455,10 @@ const LinkedInUploadPDFResume = () => {
                     />
                   ) : (
                     <div className="tracking-wider md:mx-2 md:p-3 border-2 box lg:p-8 rounded-2xl border-gray-700 text-white font-sans">
-                      {streamedAboutData}
+                      {/* text in paragraph logic */}
+                      {streamedAboutData.split("\n").map((paragraph, index) => (
+                        <p key={index}>{paragraph}</p>
+                      ))}
                     </div>
                   )}
 
@@ -599,6 +620,9 @@ const LinkedInUploadPDFResume = () => {
           {fileError && <div className="error-message">{fileError}</div>}
         </div>
       </div>
+      {showAvatar && (
+        <Avatar firstName={names.firstName} lastName={names.lastName} />
+      )}
     </>
   );
 };

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import SVGProvider from "../SVGProvider";
-
 const FeaturesSection = () => {
   return (
     <section className="py-10 py-lg-15">

@@ -12,7 +12,6 @@ export async function POST(request: NextRequest) {
   // });
   const data = request.formData();
   // const file = data.get("file");
-  console.log("data in api", data);
   //   console.log("data in file ", file);
   // if (!file) {
   //   return NextResponse.json({ success: false });
@@ -23,8 +22,6 @@ export async function POST(request: NextRequest) {
 
   // With the file data in the buffer, you can do whatever you want with it.
   // For this, we'll just write it to the filesystem in a new location
-
-  //   console.log("buffer: ");
 
   return NextResponse.json({ success: true });
 }

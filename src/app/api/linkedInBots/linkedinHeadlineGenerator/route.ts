@@ -4,6 +4,9 @@ import Prompt from "@/db/schemas/Prompt";
 import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
 import { OpenAIStream, StreamingTextResponse } from "ai";
+import TrainBot from "@/db/schemas/TrainBot";
+import TrainedModel from "@/db/schemas/TrainedModel";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
 
 // This function can run for a maximum of 5 seconds
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
@@ -17,8 +20,8 @@ export async function POST(req: any) {
   try {
     const body = await req.json();
     if (body) {
-      const content = body.linkedinContent;
-
+      const content = body.linkedinContent.substring(0, 8000);
+      const trainBotData = body?.trainBotData;
       let prompt;
       await startDB();
       const promptRec = await Prompt.findOne({
@@ -30,6 +33,10 @@ export async function POST(req: any) {
 
       // For LinkedIn Toll  if file is uploaded then load content from that fiel
       if (content) {
+        const dataset = "linkedinAiTool.headline";
+        const model = await getTrainedModel(dataset);
+        //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+
         // CREATING LLM MODAL
 
         const input = `
@@ -50,6 +57,25 @@ export async function POST(req: any) {
           ],
         });
 
+        try {
+          if (trainBotData) {
+            await startDB();
+
+            // make a trainBot entry
+            const obj = {
+              type: "linkedinAiTool.headline",
+              input: input,
+              output: response,
+              idealOutput: "",
+              status: "pending",
+              //  userEmail: trainBotData.userEmail,
+              // fileAddress: trainBotData.fileAddress,
+              Instructions: `Writing a LinkedIn headline as Job Title |Top Keyword 1 | Top Keyword 2 | Top Keyword 3 | Top Keyword 4 | Value proposition statement`,
+            };
+
+            await TrainBot.create({ ...obj });
+          }
+        } catch (error) {}
         // const resp = await chain4.call({ query: input });
         // return NextResponse.json(
         //   { result: response.choices[0].message.content, success: true },

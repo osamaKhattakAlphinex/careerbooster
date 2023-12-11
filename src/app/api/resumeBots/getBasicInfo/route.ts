@@ -2,133 +2,133 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { StructuredOutputParser } from "langchain/output_parsers";
 import Prompt from "@/db/schemas/Prompt";
+import OpenAI from "openai";
 
-import {
-  ChatPromptTemplate,
-  HumanMessagePromptTemplate,
-  SystemMessagePromptTemplate,
-} from "langchain/prompts";
-import { LLMChain } from "langchain/chains";
-import { ChatOpenAI } from "langchain/chat_models/openai";
-import { PDFLoader } from "langchain/document_loaders/fs/pdf";
-import path from "path";
+import { OpenAIStream, StreamingTextResponse } from "ai";
+
 import TrainBot from "@/db/schemas/TrainBot";
+import startDB from "@/lib/db";
+
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/route";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
 export async function POST(req: any) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
+
   if (req) {
     const reqBody = await req.json();
     // const email = reqBody.email;
-    const type = reqBody.type; // request type
-    const inputType = reqBody.inputType; // input type
-    const aiInputFile = reqBody.aiInputFile; // input file
-    const jobPosition = reqBody.jobPosition;
-    const userData = reqBody.userData;
-    const email = reqBody.email;
-    const trainBotData = reqBody.trainBotData;
+    const type = reqBody?.type; // request type
+    const inputType = reqBody?.inputType; // input type
+    const jobPosition = reqBody?.jobPosition;
+    const userData = reqBody?.userData;
+    // const email = reqBody?.email;
+    const trainBotData = reqBody?.trainBotData;
 
     let content: any;
-    if (inputType === "file") {
-      // Read content from the user file
-      // load file
-      const dir = path.join(process.cwd() + "/public", "/files", `/${email}`);
-      const loader = new PDFLoader(`${dir}/${aiInputFile}`);
-      const docs = await loader.load();
 
-      let contentTxt = docs.map((doc: any) => doc.pageContent);
-      const FileTxt = contentTxt.join(" ");
-      content = { userData: FileTxt };
-    } else if (inputType === "userData") {
+    if (userData || inputType === "userData") {
       // pass user data as it is
       content = userData;
     }
-    // CREATING LLM MODAL
-    const model = new ChatOpenAI({
-      modelName: "gpt-3.5-turbo",
-      temperature: 0.5,
-    });
-
-    const chatPrompt = ChatPromptTemplate.fromPromptMessages([
-      SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
-        Following are the content of the resume (in JSON format): 
-        JSON user/resume data: {userData}
-
-        {format_instructions}
-        `),
-      HumanMessagePromptTemplate.fromTemplate("{prompt}"),
-    ]);
-
-    const chainB = new LLMChain({
-      prompt: chatPrompt,
-      llm: model,
-    });
 
     if (type === "basicDetails") {
-      try {
-        // Parser Instructions
-        const parser = StructuredOutputParser.fromZodSchema(
-          z.object({
-            shortName: z
-              .string()
-              .describe("two letters from Name for short name"),
-            jobTitle: z
-              .string()
-              .describe("Write a one line slogan for this person "),
-            contact: z.object({
-              linkedIn: z.string().describe("LinkedInUrl"),
-            }),
-          })
-        );
-        const formatInstructions = parser.getFormatInstructions();
+      const dataset = "resume.getBasicInfo";
+      const model = await getTrainedModel(dataset);
+      //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
-        const resp = await chainB.call({
-          userData: JSON.stringify(content),
-          format_instructions: formatInstructions,
-          prompt: "Answer should be a valid JSON",
+      try {
+        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
+          content
+        )}
+        
+        Please find the following details in above provided userdata:
+        shortName, jobTitle, linkedIn
+
+        the shortName means two letters from Name of the person.
+        for the jobTitle write a one line catchy slogan that represents this person expertise in his/her Industry.
+        the linkedIn means the LinkedInUrl of the person.
+
+        The output must be in this format. (following is an example)
+        {
+          "shortName": "AB",
+          "jobTitle": "Software Engineer",
+          "contact": {
+            "linkedIn": "https://www.linkedin.com/in/abc/"
+          }
+        }
+
+
+        The output must be a valid JSON
+        Donot add anything if there is no value for a field. if there is no value leave that field blank donot add any extra labesls.
+
+        `;
+        const response: any = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          // stream: true,
+          messages: [{ role: "user", content: inputPrompt }],
         });
 
         // make a trainBot entry
-        const obj = {
-          type: "resume.getBasicInfo",
-          input: formatInstructions,
-          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Get basic information for the resume`,
-        };
+        try {
+          if (trainBotData) {
+            const obj = {
+              type: "resume.getBasicInfo",
+              input: inputPrompt,
+              output: response?.choices[0]?.message?.content?.replace(
+                /(\r\n|\n|\r)/gm,
+                ""
+              ),
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData.userEmail,
+              fileAddress: trainBotData.fileAddress,
+              Instructions: `Get basic information for the resume`,
+            };
 
-        await TrainBot.create({ ...obj });
+            await TrainBot.create({ ...obj });
+          }
+        } catch (error) {}
 
         return NextResponse.json(
-          { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+          {
+            result: response?.choices[0]?.message?.content?.replace(
+              /(\r\n|\n|\r)/gm,
+              ""
+            ),
+            success: true,
+          },
           { status: 200 }
         );
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },
-          { status: 400 }
+          { status: 404 }
         );
       }
     }
 
     if (type === "summary") {
-      try {
-        // For summary we need to use another LLM model
-        const model1 = new ChatOpenAI({
-          streaming: true,
-          modelName: "gpt-3.5-turbo",
-          //   callbacks: [
-          //     {
-          //       handleLLMNewToken(token) {
-          //         res.write(token);
-          //       },
-          //     },
-          //   ],
-          temperature: 0.5,
-        });
+      const dataset = "resume.writeSummary";
+      const model = await getTrainedModel(dataset);
+      //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
+      try {
+        await startDB();
         const promptRec = await Prompt.findOne({
           type: "resume",
           name: "summary",
@@ -136,53 +136,64 @@ export async function POST(req: any) {
         });
         const prompt = promptRec.value;
 
-        const chatPrompt = ChatPromptTemplate.fromPromptMessages([
-          SystemMessagePromptTemplate.fromTemplate(`You are a helpful assistant that Reads the Resume data of a person and helps Writing Professional Summary for a user Resume/CV.
-            Following are the content of the resume (in JSON format): 
-            JSON user/resume data: {userData}
-    
-            `),
-          HumanMessagePromptTemplate.fromTemplate("{prompt}"),
-        ]);
         const promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
 
-        const chainC = new LLMChain({
-          prompt: chatPrompt,
-          llm: model1,
-        });
+        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
+          content
+        )}
+        
+        From the above resume data please:
+                ${promptSummary}`;
 
-        const output = await chainC.call({
-          userData: JSON.stringify(content),
-          prompt: promptSummary,
+        const response: any = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          stream: true,
+          messages: [{ role: "user", content: inputPrompt }],
         });
 
         // make a trainBot entry
-        const obj = {
-          type: "resume.writeSummary",
-          input: promptSummary,
-          output: output.text.replace(/(\r\n|\n|\r)/gm, ""),
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Write Summary for the resume`,
-        };
 
-        await TrainBot.create({ ...obj });
-        return NextResponse.json(
-          { result: output, success: true },
-          { status: 200 }
-        );
+        try {
+          if (trainBotData) {
+            await startDB();
+            const obj = {
+              type: "resume.writeSummary",
+              input: promptSummary,
+              output: response,
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData.userEmail,
+              fileAddress: trainBotData.fileAddress,
+              Instructions: `Write Summary for the resume`,
+            };
+
+            await TrainBot.create({ ...obj });
+          }
+        } catch (error) {}
+
+        const stream = OpenAIStream(response);
+        // Respond with the stream
+        return new StreamingTextResponse(stream, {});
+        // return NextResponse.json(
+        //   { result: output, success: true },
+        //   { status: 200 }
+        // );
         // res.end();
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },
-          { status: 400 }
+          { status: 404 }
         );
       }
     }
 
     if (type === "workExperience") {
+      // const dataset = "resume.writeSummary";
+      // const model = await getTrainedModel(dataset);
+      // console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+
+      await startDB();
+
       const promptRec = await Prompt.findOne({
         type: "resume",
         name: "workExperienceGeneralDescription",
@@ -224,16 +235,28 @@ export async function POST(req: any) {
       const formatInstructions = parser.getFormatInstructions();
 
       try {
-        const resp = await chainB.call({
-          userData: JSON.stringify(content),
-          format_instructions: formatInstructions,
-          prompt: "Answer should be a valid JSON",
-        });
+        const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
+        Following are the content of the resume (in JSON format): 
+        JSON user/resume data: ${JSON.stringify(content)}
 
-        return NextResponse.json(
-          { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
-          { status: 200 }
-        );
+        ${formatInstructions}`;
+        // const resp = await chainB.call({
+        //   userData: JSON.stringify(content),
+        //   format_instructions: formatInstructions,
+        //   prompt: "Answer should be a valid JSON",
+        // });
+        const response: any = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          stream: true,
+          messages: [{ role: "user", content: inputPrompt }],
+        });
+        const stream = OpenAIStream(response);
+        // Respond with the stream
+        return new StreamingTextResponse(stream);
+        // return NextResponse.json(
+        //   { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+        //   { status: 200 }
+        // );
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },
@@ -243,150 +266,231 @@ export async function POST(req: any) {
     }
 
     if (type === "primarySkills") {
-      const promptRec = await Prompt.findOne({
-        type: "resume",
-        name: "primarySkills",
-        active: true,
-      });
-      const promptDB = promptRec.value;
-
-      const promptRefined = promptDB.replace("{{jobPosition}}", jobPosition);
-
-      const parser = StructuredOutputParser.fromZodSchema(
-        z.object({
-          primarySkills: z.array(z.string()).describe(promptRefined),
-        })
-      );
-
-      const formatInstructions = parser.getFormatInstructions();
+      const dataset = "resume.writePrimarySkills";
+      const model = await getTrainedModel(dataset);
+      //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
       try {
-        const resp = await chainB.call({
-          userData: JSON.stringify(content),
-          format_instructions: formatInstructions,
-          prompt: "Answer should be a valid JSON",
+        await startDB();
+
+        const promptRec = await Prompt.findOne({
+          type: "resume",
+          name: "primarySkills",
+          active: true,
+        });
+        const promptDB = promptRec.value;
+
+        const promptRefined = await promptDB.replace(
+          "{{jobPosition}}",
+          jobPosition
+        );
+
+        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
+          content
+        )}
+        
+      
+        This is the prompt:
+        ${promptRefined}
+        
+        the answer must be in a valid JSON array
+        `;
+
+        const response: any = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          // stream: true,
+          messages: [{ role: "user", content: inputPrompt }],
         });
 
         // make a trainBot entry
-        const obj = {
-          type: "resume.writePrimarySkills",
-          input: formatInstructions,
-          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Write Primary Skills for Resume`,
-        };
+        try {
+          if (trainBotData) {
+            await startDB();
 
-        await TrainBot.create({ ...obj });
+            const obj = {
+              type: "resume.writePrimarySkills",
+              input: inputPrompt,
+              output: response?.choices[0]?.message?.content?.replace(
+                /(\r\n|\n|\r)/gm,
+                ""
+              ),
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData.userEmail,
+              fileAddress: trainBotData.fileAddress,
+              Instructions: `Write Primary Skills for Resume`,
+            };
+
+            await TrainBot.create({ ...obj });
+          }
+        } catch (error) {}
 
         return NextResponse.json(
-          { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+          {
+            result: response?.choices[0]?.message?.content?.replace(
+              /(\r\n|\n|\r)/gm,
+              ""
+            ),
+            success: true,
+          },
           { status: 200 }
         );
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },
-          { status: 400 }
+          { status: 404 }
         );
       }
     }
 
     if (type === "professionalSkills") {
-      const promptRec = await Prompt.findOne({
-        type: "resume",
-        name: "professionalSkills",
-        active: true,
-      });
-      const promptDB = promptRec.value;
+      const dataset = "resume.writeProfessionalSkills";
+      const model = await getTrainedModel(dataset);
+      //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
-      const promptRefined = promptDB.replace("{{jobPosition}}", jobPosition);
-      const parser = StructuredOutputParser.fromZodSchema(
-        z.object({
-          professionalSkills: z.array(z.string()).describe(promptRefined),
-        })
-      );
-
-      const formatInstructions = parser.getFormatInstructions();
       try {
-        const resp = await chainB.call({
-          userData: JSON.stringify(content),
-          format_instructions: formatInstructions,
-          prompt: "Answer should be a valid JSON",
+        await startDB();
+
+        const promptRec = await Prompt.findOne({
+          type: "resume",
+          name: "professionalSkills",
+          active: true,
+        });
+        const promptDB = promptRec.value;
+
+        const promptRefined = await promptDB.replace(
+          "{{jobPosition}}",
+          jobPosition
+        );
+
+        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
+          content
+        )}
+        
+        This is the prompt:
+        ${promptRefined}
+
+        the answer must be in a valid JSON array
+        `;
+
+        const response: any = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          // stream: true,
+          messages: [{ role: "user", content: inputPrompt }],
         });
 
         // make a trainBot entry
-        const obj = {
-          type: "resume.writeProfessionalSkills",
-          input: formatInstructions,
-          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Write Professional Skills for Resume`,
-        };
+        try {
+          if (trainBotData) {
+            await startDB();
 
-        await TrainBot.create({ ...obj });
+            const obj = {
+              type: "resume.writeProfessionalSkills",
+              input: inputPrompt,
+              output: response?.choices[0]?.message?.content?.replace(
+                /(\r\n|\n|\r)/gm,
+                ""
+              ),
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData.userEmail,
+              fileAddress: trainBotData.fileAddress,
+              Instructions: `Write Professional Skills for Resume`,
+            };
+
+            await TrainBot.create({ ...obj });
+          }
+        } catch (error) {}
 
         return NextResponse.json(
-          { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+          {
+            result: response?.choices[0]?.message?.content?.replace(
+              /(\r\n|\n|\r)/gm,
+              ""
+            ),
+            success: true,
+          },
           { status: 200 }
         );
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },
-          { status: 400 }
+          { status: 404 }
         );
       }
     }
 
     if (type === "secondarySkills") {
-      const promptRec = await Prompt.findOne({
-        type: "resume",
-        name: "secondarySkills",
-        active: true,
-      });
-      const promptDB = promptRec.value;
+      const dataset = "resume.writeSecondarySkills";
+      const model = await getTrainedModel(dataset);
+      //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
-      const promptRefined = promptDB.replace("{{jobPosition}}", jobPosition);
-      const parser = StructuredOutputParser.fromZodSchema(
-        z.object({
-          secondarySkills: z.array(z.string()).describe(promptRefined),
-        })
-      );
-
-      const formatInstructions = parser.getFormatInstructions();
       try {
-        const resp = await chainB.call({
-          userData: JSON.stringify(content),
-          format_instructions: formatInstructions,
-          prompt: "Answer should be a valid JSON",
+        await startDB();
+
+        const promptRec = await Prompt.findOne({
+          type: "resume",
+          name: "secondarySkills",
+          active: true,
         });
+        const promptDB = promptRec.value;
 
+        const promptRefined = await promptDB.replace(
+          "{{jobPosition}}",
+          jobPosition
+        );
+        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
+          content
+        )}
+        
+        This is the prompt:
+        ${promptRefined}
+
+        the answer must be in a valid JSON array
+        `;
+
+        const response: any = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          // stream: true,
+          messages: [{ role: "user", content: inputPrompt }],
+        });
         // make a trainBot entry
-        const obj = {
-          type: "resume.writeSecondarySkills",
-          input: formatInstructions,
-          output: resp.text.replace(/(\r\n|\n|\r)/gm, ""),
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Write Secondary Skills for Resume`,
-        };
+        try {
+          if (trainBotData) {
+            await startDB();
 
-        await TrainBot.create({ ...obj });
+            const obj = {
+              type: "resume.writeSecondarySkills",
+              input: inputPrompt,
+              output: response?.choices[0]?.message?.content?.replace(
+                /(\r\n|\n|\r)/gm,
+                ""
+              ),
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData.userEmail,
+              fileAddress: trainBotData.fileAddress,
+              Instructions: `Write Secondary Skills for Resume`,
+            };
+
+            await TrainBot.create({ ...obj });
+          }
+        } catch (error) {}
 
         return NextResponse.json(
-          { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
+          {
+            result: response?.choices[0]?.message?.content?.replace(
+              /(\r\n|\n|\r)/gm,
+              ""
+            ),
+            success: true,
+          },
           { status: 200 }
         );
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },
-          { status: 400 }
+          { status: 404 }
         );
       }
     }

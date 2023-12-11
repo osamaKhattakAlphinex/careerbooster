@@ -49,9 +49,8 @@ const ViewPackage = ({}) => {
   const getPackages = async () => {
     try {
       let response: any = await axios.get("/api/packages");
-      console.log("response: " + response);
-      if (response?.success) {
-        setPackages(response.result);
+      if (response?.data.success) {
+        setPackages(response.data.result);
       }
     } catch {}
   };
@@ -353,9 +352,9 @@ const ViewPackage = ({}) => {
     //                   xmlns="http://www.w3.org/2000/svg"
     //                 >
     //                   <path
-    //                     fill-rule="evenodd"
+    //                     fillRule="evenodd"
     //                     d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-    //                     clip-rule="evenodd"
+    //                     clipRule="evenodd"
     //                   />
     //                 </svg>
     //               </a>
@@ -415,9 +414,9 @@ const ViewPackage = ({}) => {
     //                   xmlns="http://www.w3.org/2000/svg"
     //                 >
     //                   <path
-    //                     fill-rule="evenodd"
+    //                     fillRule="evenodd"
     //                     d="M7.293 14.707a1 1 0 010 1.414L10.586 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-    //                     clip-rule="evenodd"
+    //                     clipRule="evenodd"
     //                   />
     //                 </svg>
     //               </a>

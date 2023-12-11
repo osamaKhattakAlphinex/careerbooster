@@ -29,36 +29,37 @@ const getSessionDeatils = async (sessionId?: string) => {
 };
 
 export default async function SubscribedPage(props: Props) {
-  const searchParams = props.searchParams;
-  const sessionId = searchParams.session_id;
+  const searchParams = props?.searchParams;
+  const sessionId = searchParams?.session_id;
   const session: any = await getSessionDeatils(sessionId);
   const customer = await getCustomerbySession(sessionId);
-
   if (!customer || !customer.email) {
     redirect("/dashboard");
   } else {
     return (
-      <main className="flex-grow-1 mb-20">
-        <section className="pt-md-30 pt-10 py-lg-15">
-          <div className="container">
-            <div className="row justify-center mb-8">
-              <div className="col-lg-10">
-                <div className="text-center">
-                  <h1
-                    className="text-white text-4xl"
-                    data-aos="fade-up-sm"
-                    data-aos-delay="100"
-                  >
-                    Thanks for your Subscription <br />
-                    {customer.metadata.name}
-                  </h1>
-                  <UpdateUserPackage customer={customer.metadata} />
+      <>
+        <main className="flex-grow-1  flex justify-center items-center h-screen ">
+          <section className="pt-md-30 py-lg-15">
+            <div className="container">
+              <div className="row justify-center">
+                <div className="col-lg-10">
+                  <div className="text-center ">
+                    <h1
+                      className="text-white text-4xl"
+                      data-aos="fade-up-sm"
+                      data-aos-delay="100"
+                    >
+                      Thanks for your Subscription <br />
+                      {customer.metadata.name}
+                    </h1>
+                    <UpdateUserPackage customer={customer.metadata} />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      </main>
+          </section>
+        </main>
+      </>
     );
   }
 }

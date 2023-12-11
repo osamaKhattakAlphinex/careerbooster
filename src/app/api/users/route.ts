@@ -11,9 +11,12 @@ export async function GET(req: any) {
   try {
     await startDB();
 
-    const userDetails = await User.find().limit(limit).skip(skip);
+    const userDetails = await User.find({ role: { $ne: "admin" } })
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .skip(skip);
     const total = await User.count();
-    // console.log(userDetails);
+
     return NextResponse.json({
       result: userDetails,
       total: total,

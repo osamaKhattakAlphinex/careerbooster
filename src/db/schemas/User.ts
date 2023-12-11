@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 import bcrypt from "bcrypt";
-import UserPackage from "@/db/schemas/UserPackage";
-import { boolean } from "yup";
 
 interface Methods {
   comparePassword(password: string): Promise<boolean>;
@@ -55,8 +53,15 @@ const UserSchema = new Schema(
         uploadedDateTime: String,
       },
     ],
+    emails: [],
     resumes: [],
     coverLetters: [],
+    consultingBids: [],
+    linkedInAbouts: [],
+    linkedInHeadlines: [],
+    linkedInJobDescriptions: [],
+    linkedInKeywords: [],
+
     wizardCompleted: {
       type: Boolean,
       default: false,

@@ -1,15 +1,24 @@
 import UserPackage from "@/db/schemas/UserPackage";
 import startDB from "@/lib/db";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { authOptions } from "../../auth/[...nextauth]/route";
 
 export async function PUT(
   req: any,
   { params }: { params: { packgeId: string } }
 ) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
+
   const packgeId = params.packgeId;
   const payload = await req.json();
-
-  console.log(packgeId);
 
   try {
     await startDB();
@@ -34,6 +43,15 @@ export async function DELETE(
   req: any,
   { params }: { params: { packgeId: string } }
 ) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
+
   const packgeId = params.packgeId;
   try {
     await startDB();

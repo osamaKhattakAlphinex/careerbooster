@@ -18,6 +18,7 @@ const UpdateUserPackage = ({ customer }: any) => {
     if (!updating) {
       setUpdating(true);
       const userPackage = await getUserPackageDetails(customer.packageId);
+
       if (userPackage) {
         let expirationDate;
         if (userPackage.type === "monthly") {
@@ -58,12 +59,28 @@ const UpdateUserPackage = ({ customer }: any) => {
               })
             );
             dispatch(setField({ name: "userPackageData", value: userPackage }));
+
+            makePaymentEntry(userPackage);
+
             // TODO!!! Add new user subsription to db
             // TODO!! invalidate session on stripe
-            router.push("/dashboard");
           });
       }
     }
+  };
+
+  const makePaymentEntry = async (userPackage: any) => {
+    axios
+      .post("/api/payment", {
+        data: {
+          userEmail: userData.email,
+          amountPaid: userPackage.amount,
+          PackageId: userPackage._id,
+        },
+      })
+      .then(async (resp: any) => {
+        router.push("/dashboard");
+      });
   };
   useEffect(() => {
     if (customer && customer.email) {
@@ -89,7 +106,7 @@ const UpdateUserPackage = ({ customer }: any) => {
   };
   if (!customer) return null;
   return (
-    <div>
+    <div className="text-gray-700">
       {updating && <p>Please wait while we activate your Package...</p>}
     </div>
   );

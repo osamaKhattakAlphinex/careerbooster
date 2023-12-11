@@ -11,10 +11,12 @@ import ProfilePreview from "@/components/dashboard/profileReview/ProfilePreview"
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveStep, setField } from "@/store/registerSlice";
 import StepEight from "@/components/dashboard/profileReview/StepEight";
-import { refreshIconRotating } from "@/helpers/iconsProvider";
+import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
-
+import "@/app/plugins.css";
+import "@/app/style.css";
+import Link from "next/link";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.Ai-Welcome",
 // };
@@ -114,101 +116,118 @@ const ProfileReview = () => {
   }, [reduxStep, urlStep]);
 
   return (
-    <main className="flex-grow-1">
-      <section className="pb-15 ">
-        <div className="container">
-          <div
-            className="row justify-center mt-18 w-full "
-            data-aos="fade-up-sm"
-            data-aos-delay="50"
-          >
-            <div className="col-lg-8 col-xl-6">
-              <div className="vstack gap-8" id="contact-form">
-                <div>
-                  {register.activeStep > 1 && (
-                    <button
-                      type="submit"
-                      className="btn btn-secondary-dark"
-                      onClick={(e) => {
-                        dispatch(setActiveStep(register.activeStep - 1));
-                      }}
-                    >
-                      Back
-                    </button>
-                  )}
+    <>
+      <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]">
+        {/* </script> */}
+        <Link
+          href="/dashboard"
+          className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
+        >
+          {leftArrowIcon}
+          Back
+        </Link>
+        <main className="flex-grow-1">
+          <section className="pb-15 ">
+            <div className="container">
+              <div
+                className="row justify-center mt-18 w-full "
+                data-aos="fade-up-sm"
+                data-aos-delay="50"
+              >
+                <div className="col-lg-8 col-xl-6">
+                  <div className="vstack gap-8" id="contact-form">
+                    <div>
+                      {register.activeStep > 1 && (
+                        <button
+                          type="submit"
+                          className="btn btn-secondary-dark"
+                          onClick={(e) => {
+                            dispatch(setActiveStep(register.activeStep - 1));
+                          }}
+                        >
+                          Back
+                        </button>
+                      )}
 
-                  {register.activeStep < 7 && (
-                    <button
-                      type="submit"
-                      disabled={isNextDisabled()}
-                      className="btn btn-primary-dark float-right"
-                      onClick={(e) => {
-                        dispatch(setActiveStep(register.activeStep + 1));
-                      }}
-                    >
-                      Next
-                    </button>
-                  )}
+                      {register.activeStep < 5 && (
+                        <button
+                          type="submit"
+                          disabled={isNextDisabled()}
+                          className="btn btn-primary-dark float-right"
+                          onClick={(e) => {
+                            dispatch(setActiveStep(register.activeStep + 1));
+                          }}
+                        >
+                          Next
+                        </button>
+                      )}
+                    </div>
+                    {register.activeStep === 1 && (
+                      <>
+                        {register.activeStep === 1 && (
+                          <>
+                            <StepOne />
+                            <StepTwo />
+                            <StepThree />
+                          </>
+                        )}
+                        {/* {register.activeStep === 2 && <StepTwo />}
+                    {register.activeStep === 3 && <StepThree />} */}
+                      </>
+                    )}
+                    {register.activeStep === 2 && <StepFour />}
+                    {register.activeStep === 3 && <StepFive />}
+
+                    {register.activeStep === 4 && <StepSix />}
+
+                    {register.activeStep === 5 && <ProfilePreview />}
+                    {register.activeStep === 6 && <StepEight />}
+
+                    <div className="">
+                      {register.activeStep > 1 && (
+                        <button
+                          type="submit"
+                          className="btn btn-secondary-dark"
+                          onClick={(e) => {
+                            dispatch(setActiveStep(register.activeStep - 1));
+                          }}
+                        >
+                          Back
+                        </button>
+                      )}
+
+                      {register.activeStep < 5 && (
+                        <button
+                          type="submit"
+                          disabled={isNextDisabled()}
+                          className="btn btn-primary-dark float-right"
+                          onClick={(e) => {
+                            dispatch(setActiveStep(register.activeStep + 1));
+                          }}
+                        >
+                          Next
+                        </button>
+                      )}
+
+                      {register.activeStep === 5 && (
+                        <button
+                          type="submit"
+                          className="btn btn-primary-dark float-right"
+                          onClick={handleSaveDetails}
+                        >
+                          {register.isSubmitting ? refreshIconRotating : "Save"}
+                        </button>
+                      )}
+                    </div>
+                    <div className="status alert mb-0 d-none"></div>
+                  </div>
                 </div>
-                {(register.activeStep === 1 ||
-                  register.activeStep === 2 ||
-                  register.activeStep === 3) && (
-                  <>
-                    {register.activeStep === 1 && <StepOne />}
-                    {register.activeStep === 2 && <StepTwo />}
-                    {register.activeStep === 3 && <StepThree />}
-                  </>
-                )}
-                {register.activeStep === 4 && <StepFour />}
-                {register.activeStep === 5 && <StepFive />}
-
-                {register.activeStep === 6 && <StepSix />}
-
-                {register.activeStep === 7 && <ProfilePreview />}
-                {register.activeStep === 8 && <StepEight />}
-
-                <div className="">
-                  {register.activeStep > 1 && (
-                    <button
-                      type="submit"
-                      className="btn btn-secondary-dark"
-                      onClick={(e) => {
-                        dispatch(setActiveStep(register.activeStep - 1));
-                      }}
-                    >
-                      Back
-                    </button>
-                  )}
-                  {register.activeStep < 7 && (
-                    <button
-                      type="submit"
-                      disabled={isNextDisabled()}
-                      className="btn btn-primary-dark float-right"
-                      onClick={(e) => {
-                        dispatch(setActiveStep(register.activeStep + 1));
-                      }}
-                    >
-                      Next
-                    </button>
-                  )}
-
-                  {register.activeStep === 7 && (
-                    <button
-                      type="submit"
-                      className="btn btn-primary-dark float-right"
-                      onClick={handleSaveDetails}
-                    >
-                      {register.isSubmitting ? refreshIconRotating : "Save"}
-                    </button>
-                  )}
-                </div>
-                <div className="status alert mb-0 d-none"></div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-    </main>
+          </section>
+        </main>
+      </div>
+    </>
   );
 };
 

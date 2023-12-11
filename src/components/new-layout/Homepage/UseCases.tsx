@@ -1,5 +1,4 @@
 import SVGProvider from "../SVGProvider";
-
 const UseCases = () => {
   return (
     <section className="bg-striped bg-striped-sm bg-striped-bottom theme-use-cases-bg py-20 py-lg-30">

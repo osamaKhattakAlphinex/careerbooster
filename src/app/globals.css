@@ -3,6 +3,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  @variants responsive {
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
+}
+
 @media print {
   .page-break {
     page-break-before: always;
@@ -23,6 +35,27 @@
 
 .resume-sidebar {
   height: 2900px !important;
+}
+.swiper-pagination-bullet {
+  width: 20px !important;
+  height: 20px !important;
+  text-align: center !important;
+  line-height: 20px !important;
+  font-size: 12px !important;
+  color: #ffffff90 !important;
+  opacity: 1 !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.swiper-pagination-bullet-active {
+  color: #fff !important;
+  background: #8620a0 !important;
+}
+
+.swiper,
+.swiper-slide,
+.swiper-wrapper {
+  z-index: 0 !important;
 }
 
 /* Bootstrap theme change code */
@@ -106,6 +139,10 @@
 }
 .accordion-btn:hover {
   color: #6a4dff;
+}
+.rc-anchor-normal {
+  width: 305px !important;
+  height: 85px !important;
 }
 /* DARK THEME */
 [data-bs-theme="dark"] .nav-link {
@@ -379,5 +416,8 @@
   }
   .bullet-2 {
     padding-top: 50px;
+  }
+  .mt-z {
+    margin-left: 0;
   }
 }

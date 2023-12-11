@@ -1,3 +1,6 @@
+import "@/app/plugins.css";
+import "@/app/style.css";
+
 export default function TermsAndConditionPage() {
   return (
     <>

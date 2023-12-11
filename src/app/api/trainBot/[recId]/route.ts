@@ -3,6 +3,8 @@ const { Schema } = mongoose;
 import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import TrainBot from "@/db/schemas/TrainBot";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/route";
 
 export const GET = async (
   req: any,
@@ -29,6 +31,15 @@ export const PUT = async (
   req: any,
   { params }: { params: { recId: string } }
 ) => {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
+
   try {
     const { recId } = params;
     const request = await req.json();
@@ -54,9 +65,16 @@ export const DELETE = async (
   req: any,
   { params }: { params: { recId: string } }
 ) => {
+  const session = getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
   try {
     const { recId } = params;
-    console.log(recId);
 
     await startDB();
     const trainBot = await TrainBot.deleteOne({ _id: recId });

@@ -7,10 +7,9 @@ import ReactToPrint from "react-to-print";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 
-import CoverLetterFileUploader from "@/components/dashboard/cover-letter-bot/CoverLetterFileUploader";
-import CoverLetterResumeSelector from "@/components/dashboard/cover-letter-bot/CoverLetterResumeSelector";
 import Button from "@/components/utilities/form-elements/Button";
-import LimitCard from "@/components/dashboard/LimitCard";
+import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
+import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
 
 const ReviewResumeBot = () => {
   const componentRef = useRef<any>(null);
@@ -90,7 +89,12 @@ const ReviewResumeBot = () => {
               }),
             }).then(async (resp: any) => {
               const res = await resp.json();
-              const user = JSON.parse(res.result);
+              let user;
+              if (typeof res.result === "object") {
+                user = res.result;
+              } else {
+                user = await JSON.parse(res.result);
+              }
               if (res.success) {
                 const updatedObject = {
                   ...userData,
@@ -116,9 +120,9 @@ const ReviewResumeBot = () => {
     if (userData && userData?.email) {
       setAiInputUserData({
         contact: userData?.contact,
-        education: userData?.contact,
-        email: userData?.contact,
-        experience: userData?.contact,
+        education: userData?.education,
+        email: userData?.email,
+        experience: userData?.experience,
         firstName: userData?.firstName,
         lastName: userData?.lastName,
         phone: userData?.phone,
@@ -195,13 +199,6 @@ const ReviewResumeBot = () => {
             <CoverLetterFileUploader
               selectedFile={selectedFile}
               setSelectedFile={setSelectedFile}
-            />
-          )}
-
-          {selectedOption === "aiResume" && (
-            <CoverLetterResumeSelector
-              setSelectedResumeId={setSelectedResumeId}
-              setSetSelectedResumeId={setSetSelectedResumeId}
             />
           )}
 

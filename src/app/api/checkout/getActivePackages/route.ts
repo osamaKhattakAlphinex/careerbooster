@@ -20,7 +20,7 @@ export async function GET() {
 
   await startDB();
 
-  const packages = await UserPackage.find({ status });
+  const packages = await UserPackage.find({ status }).sort({ amount: 1 });
   if (!packages) {
     return NextResponse.json(
       { result: "Packages not found", success: false },

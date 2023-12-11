@@ -7,6 +7,8 @@ import FeaturesSection from "@/components/new-layout/Homepage/FeaturesSection";
 import Reviews from "@/components/new-layout/Homepage/Reviews";
 import PageHeader from "@/components/new-layout/PageHeader";
 import { Metadata } from "next";
+import "@/app/plugins.css";
+import "@/app/style.css";
 
 export const metadata: Metadata = {
   title: "CareerBooster.AI-About",
@@ -35,27 +37,29 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="flex-grow-1 mb-20">
-      {/* <!-- Page header --> */}
-      <PageHeader title="About CareerBooster.AI" secondTitle="About us" />
+    <>
+      <main className="flex-grow-1 mb-20">
+        {/* <!-- Page header --> */}
+        <PageHeader title="About CareerBooster.AI" secondTitle="About us" />
 
-      {/* About Card */}
-      <AboutCard />
+        {/* About Card */}
+        <AboutCard />
 
-      {/* Features Section */}
-      <FeaturesSection />
+        {/* Features Section */}
+        <FeaturesSection />
 
-      {/* Team */}
-      <TeamCard />
+        {/* Team */}
+        <TeamCard />
 
-      {/* Reviews */}
-      <Reviews />
+        {/* Reviews */}
+        <Reviews />
 
-      {/* Brands */}
-      <BrandsCard />
+        {/* Brands */}
+        <BrandsCard />
 
-      {/*<!-- CTA --> */}
-      <CTASection />
-    </main>
+        {/*<!-- CTA --> */}
+        <CTASection />
+      </main>
+    </>
   );
 }

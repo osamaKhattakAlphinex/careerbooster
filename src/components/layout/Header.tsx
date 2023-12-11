@@ -11,7 +11,8 @@ import useTheme from "@/lib/useTheme";
 import Image from "next/image";
 
 // import useTheme from "@/lib/useTheme";
-
+import { usePathname } from "next/navigation";
+const AllowedRoutes = ["/dashboard", "/resume-builder"];
 const Header = () => {
   // const [theme] = useTheme();
   const pathname = usePathname();
@@ -83,6 +84,23 @@ const Header = () => {
       }
     }
   };
+  const pagesArray = [
+    "/dashboard",
+    "/cover-letter-generator",
+    "/resume-builder",
+    "/linkedin-generator",
+    "/profile-review",
+    "/email-bot",
+    "/consulting-bids-bot",
+    "/subscribe",
+    "/subscribed",
+    "/chatAI",
+    "/linkedin-generator/headline",
+    "/linkedin-generator/about",
+    "/linkedin-generator/job-description",
+    "/linkedin-generator/keywords",
+
+  ];
 
   // when page (session) loads, fetch user data if not exists
   useEffect(() => {
@@ -93,6 +111,8 @@ const Header = () => {
 
   // if (pathname === "/login" || pathname === "/register") return null;
 
+  const pathname: any = usePathname();
+  if (pagesArray?.includes(pathname)) return <></>;
   return (
     <nav
       // className={`navbar navbar-expand-lg fixed-top ${

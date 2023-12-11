@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import TrainBot from "@/db/schemas/TrainBot";
+import startDB from "@/lib/db";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -18,6 +20,10 @@ export async function POST(req: any) {
         const openai = new OpenAI({
           apiKey: process.env.OPENAI_API_KEY,
         });
+
+        const dataset = "register.wizard.basicInfo";
+        const model = await getTrainedModel(dataset);
+        //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
         const input = `This is the User Data:
                 ${content}
@@ -62,15 +68,16 @@ export async function POST(req: any) {
 
         try {
           if (trainBotData) {
+            await startDB();
             // make a trainBot entry
             const obj = {
               type: "register.wizard.basicInfo",
               input: input,
-              output: response.choices[0].message.content,
+              output: response?.choices[0]?.message?.content,
               idealOutput: "",
               status: "pending",
-              userEmail: trainBotData.userEmail,
-              fileAddress: trainBotData.fileAddress,
+              userEmail: trainBotData?.userEmail,
+              fileAddress: trainBotData?.fileAddress,
               Instructions: `Fetching basic information e.g. Name, email, phone, address, etc.`,
             };
 

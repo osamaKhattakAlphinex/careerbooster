@@ -38,48 +38,50 @@ const ResetPasswordPage = () => {
   }
 
   return (
-    <main className="flex-grow-1 mb-20">
-      <section className="py-15 pt-lg-30">
-        <div className="container">
-          <div className="row justify-center">
-            <div className="col-lg-8 col-xl-6">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    className="form-control"
-                    required
-                  />
-                </div>
-                <div className="mb-6">
-                  <ReCAPTCHA
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-                    ref={recaptchaRef}
-                    onChange={handleCaptchaSubmission}
-                    theme="dark"
-                  />
-                </div>
-                {error && <p className="text-danger">{error}</p>}
-                <button
-                  type="submit"
-                  className="btn theme-outline-btn"
-                  disabled={isLoading || !isVerified}
-                >
-                  {isLoading ? "Loading..." : "Send Reset Link"}
-                </button>
-              </form>
+    <>
+      <main className="flex-grow-1 mb-20">
+        <section className="py-15 pt-lg-30">
+          <div className="container">
+            <div className="row justify-center">
+              <div className="col-lg-8 col-xl-6">
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label htmlFor="email" className="form-label">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      className="form-control"
+                      required
+                    />
+                  </div>
+                  <div className="mb-6">
+                    <ReCAPTCHA
+                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                      ref={recaptchaRef}
+                      onChange={handleCaptchaSubmission}
+                      theme="dark"
+                    />
+                  </div>
+                  {error && <p className="text-danger">{error}</p>}
+                  <button
+                    type="submit"
+                    className="btn theme-outline-btn"
+                    disabled={isLoading || !isVerified}
+                  >
+                    {isLoading ? "Loading..." : "Send Reset Link"}
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 };
 

@@ -1,6 +1,4 @@
-"use client";
 export default function BlogsDetails({ params }: { params: { slug: string } }) {
-  console.log(params);
   return (
     <>
       <div className="container">

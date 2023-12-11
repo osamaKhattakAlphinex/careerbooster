@@ -67,70 +67,77 @@ const ChangePasswordPage = () => {
     }
   }, [token]);
   return (
-    <main className="flex-grow-1 mb-20">
-      <section className="py-15 pt-lg-30">
-        <div className="container">
-          <div className="row justify-center">
-            <div className="col-lg-8 col-xl-6">
-              {verifyingToken ? (
-                <p>Verifying token...</p>
-              ) : (
-                <>
-                  {tokenError ? (
-                    <div className="alert alert-danger" role="alert">
-                      {tokenError}
-                    </div>
-                  ) : (
-                    <form onSubmit={handleSubmit}>
-                      <div className="mb-3">
-                        <label htmlFor="password" className="form-label">
-                          New Password
-                        </label>
-                        <input
-                          type="password"
-                          id="password"
-                          name="password"
-                          value={password}
-                          onChange={(event) => setPassword(event.target.value)}
-                          className="form-control"
-                          required
-                        />
+    <>
+      <main className="flex-grow-1 mb-20">
+        <section className="py-15 pt-lg-30">
+          <div className="container">
+            <div className="row justify-center">
+              <div className="col-lg-8 col-xl-6">
+                {verifyingToken ? (
+                  <p>Verifying token...</p>
+                ) : (
+                  <>
+                    {tokenError ? (
+                      <div className="alert alert-danger" role="alert">
+                        {tokenError}
                       </div>
-                      <div className="mb-3">
-                        <label htmlFor="confirmPassword" className="form-label">
-                          Confirm Password
-                        </label>
-                        <input
-                          type="password"
-                          id="confirmPassword"
-                          name="confirmPassword"
-                          value={confirmPassword}
-                          onChange={(event) =>
-                            setConfirmPassword(event.target.value)
+                    ) : (
+                      <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                          <label htmlFor="password" className="form-label">
+                            New Password
+                          </label>
+                          <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={password}
+                            onChange={(event) =>
+                              setPassword(event.target.value)
+                            }
+                            className="form-control"
+                            required
+                          />
+                        </div>
+                        <div className="mb-3">
+                          <label
+                            htmlFor="confirmPassword"
+                            className="form-label"
+                          >
+                            Confirm Password
+                          </label>
+                          <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            value={confirmPassword}
+                            onChange={(event) =>
+                              setConfirmPassword(event.target.value)
+                            }
+                            className="form-control"
+                            required
+                          />
+                        </div>
+                        {error && <p className="text-danger">{error}</p>}
+                        <button
+                          type="submit"
+                          className="btn btn-primary"
+                          disabled={
+                            password !== confirmPassword || !password || loading
                           }
-                          className="form-control"
-                          required
-                        />
-                      </div>
-                      {error && <p className="text-danger">{error}</p>}
-                      <button
-                        type="submit"
-                        className="btn btn-primary"
-                        disabled={
-                          password !== confirmPassword || !password || loading
-                        }
-                      >
-                        Reset Password
-                      </button>
-                    </form>
-                  )}
-                </>
-              )}
+                        >
+                          Reset Password
+                        </button>
+                      </form>
+                    )}
+                  </>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 };
 

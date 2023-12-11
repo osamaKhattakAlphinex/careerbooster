@@ -2,8 +2,14 @@ import React, { ReactNode } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-import ProfileCreationLayer from "@/components/dashboard/ProfileCreationLayer";
-
+import ProfileCreationLayer from "@/components/new-dashboard/dashboard/ProfileCreationLayer";
+import Footer from "@/components/new-dashboard/Layout/Footer";
+import Header from "@/components/new-dashboard/Layout/Header";
+import SideBar from "@/components/new-dashboard/Layout/SideBar";
+import "./dashboard.css";
+import "./plugins.css";
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 interface Props {
   children: ReactNode;
 }
@@ -17,5 +23,14 @@ export default async function Privatelayout({ children }: Props) {
   if (isAdmin) redirect("/admin");
   if (!session?.user) redirect("/login");
 
-  return <ProfileCreationLayer>{children}</ProfileCreationLayer>;
+  return (
+    <div className="bg-gradient-to-bl from-[#340e53] via-[#000533] to-[#010111]   w-screen h-screen overflow-y-scroll">
+      <ProfileCreationLayer>
+        <Header />
+        <SideBar />
+        <div className="">{children}</div>
+        <Footer />
+      </ProfileCreationLayer>
+    </div>
+  );
 }

@@ -1,29 +1,16 @@
-import ProfileCompletionAlert from "@/components/dashboard/ProfileCompletionAlert";
-import ToolsCard from "@/components/dashboard/ToolsCard";
-// import TrainBotCard from "@/components/dashboard/TrainBotCard";
-import UploadedFilesCard from "@/components/dashboard/UploadedFilesCard";
-import WelcomeCard from "@/components/dashboard/WelcomeCard";
-import RecentResumeCard from "@/components/dashboard/resume-builder/RecenResumesCard";
-
+import AiToolsCard from "@/components/new-dashboard/dashboard/CareerBoostingAiToolsCard";
+import RecentDocumentsCard from "@/components/new-dashboard/dashboard/RecentDocumentsCard";
+import Avatar from "@/components/utilities/Avatar";
+// new version (dashboard design)
 const Dashboard = () => {
   return (
-    <section className="dashborad admin-dashboard flex flex-col gap-4  pb-30 pl-20">
-      <div className="flex flex-col gap-4 py-30">
-        <ProfileCompletionAlert />
-        <WelcomeCard />
-
-        <div className="flex gap-4">
-          {/* <UploadedFilesCard /> */}
-          <div className="w-full toolscard  border border-gray-200 rounded-lg shadow sm:p-6 mr-10 ">
-            <RecentResumeCard source="dashboard" />
-          </div>
-        </div>
+    <div className="w-full sm:w-full z-1000 ">
+      <div className="ml-0 mt-0 lg:ml-[234px] px-[15px] lg:mb-[72px] ">
+        <RecentDocumentsCard />
+        <AiToolsCard />
       </div>
-
-      <div className="">
-        <ToolsCard />
-      </div>
-    </section>
+      {/* <Avatar /> */}
+    </div>
   );
 };
 

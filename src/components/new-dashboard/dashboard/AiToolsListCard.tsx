@@ -1,9 +1,9 @@
-import AiToolsCard from "./AiToolsCard";
+import AiToolsCard from "./resume-builder/RecentResumeCard";
 
 const AiToolsListCard = () => {
   return (
     <div className="">
-        <AiToolsCard />
+      <AiToolsCard />
     </div>
   );
 };

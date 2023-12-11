@@ -6,7 +6,8 @@ import MapCard from "@/components/new-layout/Contact/MapCard";
 import CTASection from "@/components/new-layout/Homepage/CTASection";
 import PageHeader from "@/components/new-layout/PageHeader";
 import { Metadata } from "next";
-
+import "@/app/plugins.css";
+import "@/app/style.css";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Blogs",
   description:
@@ -36,20 +37,22 @@ export const metadata: Metadata = {
 
 export default function BlogsPage() {
   return (
-    <main className="flex-grow-1 mb-20">
-      {/* <!-- Page header --> */}
-      <PageHeader title="Blog Posts" />
-      <Blog
-        src="/assets/images/thumbnails/1.jpg"
-        category="Design"
-        date="2 - 4 - 2023"
-        minutesViewed="5 Minutes Read"
-        title=" Best free AI content generator & AI writers for 2023"
-      />
-      <BlogPagination />
+    <>
+      <main className="flex-grow-1 mb-20">
+        {/* <!-- Page header --> */}
+        <PageHeader title="Blog Posts" />
+        <Blog
+          src="/assets/images/thumbnails/1.jpg"
+          category="Design"
+          date="2 - 4 - 2023"
+          minutesViewed="5 Minutes Read"
+          title=" Best free AI content generator & AI writers for 2023"
+        />
+        <BlogPagination />
 
-      {/*<!-- CTA --> */}
-      <CTASection />
-    </main>
+        {/*<!-- CTA --> */}
+        <CTASection />
+      </main>
+    </>
   );
 }

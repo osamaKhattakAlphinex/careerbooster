@@ -10,6 +10,8 @@ import RewardsSection from "@/components/new-layout/Homepage/RewardsSection";
 import UseCases from "@/components/new-layout/Homepage/UseCases";
 import FAQList from "@/components/new-layout/Homepage/Faqs";
 import MainLoaderLayer from "@/components/new-layout/MainLoaderLayer";
+import "./plugins.css";
+import "./style.css";
 
 export const metadata: Metadata = {
   title: "CareerBooster.AI",
@@ -45,34 +47,36 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex-grow-1 mb-20 mt-10">
-      {/* <!-- Hero --> */}
+    <>
+      <main className="flex-grow-1 mb-20 ">
+        {/* <!-- Hero --> */}
 
-      <HeroArea />
+        <HeroArea />
 
-      {/* <!-- Features --> */}
-      <FeaturesSection />
+        {/* <!-- Features --> */}
+        <FeaturesSection />
 
-      {/* <!-- Rewrds --> */}
-      <RewardsSection />
+        {/* <!-- Rewrds --> */}
+        <RewardsSection />
 
-      {/* <!-- Features --> */}
-      <FeaturesSecond />
+        {/* <!-- Features --> */}
+        <FeaturesSecond />
 
-      {/* <!-- Use cases --> */}
-      <UseCases />
+        {/* <!-- Use cases --> */}
+        <UseCases />
 
-      {/* <!-- Reviews --> */}
-      <Reviews />
+        {/* <!-- Reviews --> */}
+        <Reviews />
 
-      {/* <!-- Pricing --> */}
-      <PricingSection />
+        {/* <!-- Pricing --> */}
+        <PricingSection />
 
-      {/* <!-- FAQ --> */}
-      <FAQList />
+        {/* <!-- FAQ --> */}
+        <FAQList />
 
-      {/* <!-- CTA --> */}
-      <CTASection />
-    </main>
+        {/* <!-- CTA --> */}
+        <CTASection />
+      </main>
+    </>
   );
 }

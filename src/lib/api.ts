@@ -2,6 +2,7 @@ import axios from "axios";
 
 export async function resetPassword(email: string): Promise<void> {
   const response = await axios.post("/api/reset-password", { email });
+  console.log("response: ", response);
   const { success } = response.data;
   if (!success) {
     throw new Error("Failed to reset password");

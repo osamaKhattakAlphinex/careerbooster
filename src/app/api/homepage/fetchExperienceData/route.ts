@@ -1,22 +1,40 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import TrainBot from "@/db/schemas/TrainBot";
+import startDB from "@/lib/db";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
+function removeSpecialChars(str: string) {
+  // Remove new lines
+  str = str.replace(/[\r\n]+/gm, "");
+
+  // Remove Unicode characters
+  str = str.replace(/[^\x00-\x7F]/g, "");
+
+  // Remove icons
+  str = str.replace(/[^\w\s]/gi, "");
+
+  return str;
+}
 export async function POST(req: any) {
   try {
     const body = await req.json();
     if (body) {
       const reqBody = body;
-      const content = reqBody.content;
+      const content = removeSpecialChars(reqBody.content.substring(0, 12000));
       const trainBotData = reqBody.trainBotData;
 
       if (content) {
         const openai = new OpenAI({
           apiKey: process.env.OPENAI_API_KEY,
         });
+
+        const dataset = "register.wizard.listExperiences";
+        const model = await getTrainedModel(dataset);
+        //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
         const input = `
               This is the User Data:
@@ -56,18 +74,21 @@ export async function POST(req: any) {
         });
         try {
           // make a trainBot entry
-          const obj = {
-            type: "register.wizard.listExperiences",
-            input: input,
-            output: response.choices[0].message.content,
-            idealOutput: "",
-            status: "pending",
-            userEmail: trainBotData.userEmail,
-            fileAddress: trainBotData.fileAddress,
-            Instructions: `Get List of all Experiences with jobTitle and company only just check if the list is missing any data`,
-          };
+          if (trainBotData) {
+            await startDB();
+            const obj = {
+              type: "register.wizard.listExperiences",
+              input: input,
+              output: response?.choices[0]?.message?.content,
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData?.userEmail,
+              fileAddress: trainBotData?.fileAddress,
+              Instructions: `Get List of all Experiences with jobTitle and company only just check if the list is missing any data`,
+            };
 
-          await TrainBot.create({ ...obj });
+            await TrainBot.create({ ...obj });
+          }
           // const resp = await chain4.call({ query: input });
         } catch (error) {}
 

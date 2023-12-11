@@ -6,6 +6,7 @@ Template URI: https://themeforest.net/item/genai-ai-based-copywriting-and-conten
 Author: Marvel Theme
 Author URI: https://themeforest.net/user/marvel_theme
 Version: 1.1
+
 Published: 1 May 2023
 Last Update: 9 May 2023
 ==================================== */
@@ -36777,61 +36778,22 @@ article img {
 [data-bs-theme="dark"] .hover-border:hover {
   border-color: #e6f85e;
 }
-@media (min-width: 992px) {
-  [data-bs-theme="dark"] .divider-x > *:not(:first-child) {
-    border-color: #2e2f45;
+/* mobile */
+@media screen and (max-width: 767px){
+  .mt-z {
+    margin-top:40px;
   }
 }
-[data-bs-theme="dark"] .swiper-pagination-bullet {
-  background: #2e2f45;
+/*large Screen*/
+@media (min-width: 991px) {
+  .mt-z {
+    margin-top:0px;
+  }
 }
-[data-bs-theme="dark"] .swiper-pagination-bullet-active {
-  background: #e6f85e;
-}
-[data-bs-theme="dark"] .blog-card .post-title a {
-  color: #fff;
-}
-[data-bs-theme="dark"] .blog-card .post-title a:hover {
-  color: #e6f85e;
-}
-[data-bs-theme="dark"] .post-author a:hover {
-  color: #e6f85e;
-}
-[data-bs-theme="dark"] .pagination {
-  --gen-pagination-active-color: #11121c;
-  --gen-pagination-active-bg: #e6f85e;
-  --gen-pagination-active-border-color: #e6f85e;
-  --gen-pagination-disabled-color: #bdbfd4;
-  --gen-pagination-disabled-bg: #2e2f45;
-  --gen-pagination-disabled-border-color: #2e2f45;
-}
-[data-bs-theme="dark"] .account-btn {
-  color: #fff;
-  border-color: #2e2f45;
-}
-[data-bs-theme="dark"] .account-btn:hover,
-[data-bs-theme="dark"] .account-btn:focus,
-.btn-check:checked + [data-bs-theme="dark"] .account-btn,
-:not(.btn-check) + [data-bs-theme="dark"] .account-btn:active,
-[data-bs-theme="dark"] .account-btn:first-child:active,
-[data-bs-theme="dark"] .account-btn.active,
-[data-bs-theme="dark"] .account-btn.show {
-  color: #fff;
-  border-color: #e6f85e;
-}
-[data-bs-theme="dark"] .divider-with-text {
-  -webkit-border-before: 0 #2e2f45;
-  border-block-start: 0 #2e2f45;
-}
-/*# sourceMappingURL=style.css.map */
-
-.border-stylee {
-  border-color: gray !important;
-}
-.parent .child {
-  display: none; /* Hide child divs by default */
-}
-
-.parent:hover .child {
-  display: block; /* Show child divs when the parent is hovered */
+/*md*/
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .mt-z {
+    margin-top:0px;
+   
+  }
 }

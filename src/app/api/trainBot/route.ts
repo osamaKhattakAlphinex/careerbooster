@@ -9,22 +9,27 @@ export const GET = async (req: any) => {
 
   const status = url.searchParams.get("status");
   const type = url.searchParams.get("type");
-
-  // const dataType = url.searchParams.get("dataType");
+  const limit = Number(url.searchParams.get("limit"));
+  const page = Number(url.searchParams.get("page"));
+  const skip = (page - 1) * limit;
 
   try {
     await startDB();
 
-    const recs = await TrainBot.find({ status: status, type: type });
+    const filter = { status: status, type: type };
+    const recs = await TrainBot.find(filter).limit(limit).skip(skip);
 
+    const total = await TrainBot.count(filter); // Count based on filter conditions
     return NextResponse.json({
       success: true,
       data: recs,
+      totalRecs: total,
     });
   } catch (err) {
     return NextResponse.json({
       success: false,
       data: [],
+      totalRecords: "no records found",
     });
   }
 };

@@ -1,5 +1,4 @@
 import Packages from "@/components/dashboard/checkout/Packages";
-
 const PricingSection = () => {
   return (
     <section className="py-10 py-lg-15">

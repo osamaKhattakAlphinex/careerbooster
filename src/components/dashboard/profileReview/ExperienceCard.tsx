@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setStepFive } from "@/store/registerSlice";
 import { EditIcon, deleteIcon, plusSimpleIcon } from "@/helpers/iconsProvider";
 
+import { useState } from "react";
+
 const ExperienceCard = ({
   rec,
   isShowing = false, // not editing only showing for profileview page
@@ -10,6 +12,7 @@ const ExperienceCard = ({
   rec: WorkExperience;
   isShowing?: boolean;
 }) => {
+  const [showMore, setShowMore] = useState(false);
   const dispatch = useDispatch();
   const stepFive = useSelector((state: any) => state.register.stepFive);
   const { list, state } = stepFive;
@@ -20,6 +23,7 @@ const ExperienceCard = ({
     const newList = list.filter((rec: WorkExperience) => rec.id !== id);
     dispatch(setStepFive({ list: newList }));
   };
+
   return (
     <div className="w-full  rounded-lg shadow-md p-6 border" key={rec.id}>
       <div className="flex justify-between items-center mb-4">
@@ -147,7 +151,17 @@ const ExperienceCard = ({
       </p>
       <p className="text-md">
         {rec.description || isShowing ? (
-          rec.description
+          <>
+            <span>
+              {showMore ? rec.description : rec?.description?.slice(0, 50)}
+            </span>
+            <button
+              className="ml-1 lowercase text-white/40 text-xs"
+              onClick={() => setShowMore(!showMore)}
+            >
+              {showMore ? "<< Show Less" : "Show More >>"}
+            </button>
+          </>
         ) : (
           <button
             onClick={(e) => handleEdit(rec.id)}

@@ -14,10 +14,23 @@ import Image from "next/image";
 import FileUploadHandler from "@/components/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+
 // export const metadata: Metadata = {
 //   title: "CareerBooster.AI-Register",
 // };
 
+function removeSpecialChars(str: string) {
+  // Remove new lines
+  str = str.replace(/[\r\n]+/gm, "");
+
+  // Remove Unicode characters
+  str = str.replace(/[^\x00-\x7F]/g, "");
+
+  // Remove icons
+  str = str.replace(/[^\w\s]/gi, "");
+
+  return str;
+}
 const RegistrationForm = () => {
   const router = useRouter();
   const params = useSearchParams();
@@ -79,12 +92,12 @@ const RegistrationForm = () => {
           files: [
             {
               id: makeid(),
-              fileName: makeid() + ".pdg", //fileName,
+              fileName: fileName, //fileName,
               fileContent: text,
               uploadedDateTime: new Date(),
             },
           ],
-          status: false,
+          status: true,
           alertConsent: values.alertConsent,
         };
         // Create user account in database
@@ -92,7 +105,7 @@ const RegistrationForm = () => {
           .post("/api/auth/users", obj)
           .then(async function (response) {
             if (values.file !== "") {
-              // await UpdateGohighlevel(obj);
+              await UpdateGohighlevel(obj);
               // await moveResumeToUserFolder(values.file, values.email);
               await updateUser(values.file, values.email);
             }
@@ -214,7 +227,12 @@ const RegistrationForm = () => {
         .then(async (resp: any) => {
           const res = await resp.json();
           if (res.success) {
-            const userData = JSON.parse(res.result);
+            let userData;
+            if (typeof res.result === "object") {
+              userData = res.result;
+            } else {
+              userData = await JSON.parse(res.result);
+            }
             router.replace(
               `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&content=true`
             );

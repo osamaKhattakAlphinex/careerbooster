@@ -8,7 +8,7 @@ export async function POST(req: any) {
   try {
     const body = await req.json();
     if (body) {
-      const content = body.content.substring(0, 4000);
+      const content = body.content.substring(0, 12000);
       if (content) {
         const openai = new OpenAI({
           apiKey: process.env.OPENAI_API_KEY,
@@ -56,8 +56,8 @@ export async function POST(req: any) {
     }
   } catch (error) {
     return NextResponse.json(
-      { result: "something went wrong", success: false },
-      { status: 500 }
+      { result: "Something went wrong", success: false },
+      { status: 404 }
     );
   }
 }

@@ -20,6 +20,7 @@ export const authOptions: NextAuthOptions = {
         await startDB();
         const user = await User.findOne({ email });
         if (!user) throw Error("Invalid Email / Password");
+        if (!user.status) throw Error("User is not active");
 
         const passwordMatch = await user.comparePassword(password);
         if (!passwordMatch) throw Error("Invalid Email / Password");
