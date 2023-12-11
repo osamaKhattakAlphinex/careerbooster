@@ -5,9 +5,9 @@ import GenerateResume from "@/components/new-dashboard/generateResume/generateRe
 export default function ResumeBuilder() {
   return (
     <div className="w-full sm:w-full z-1000 ">
-      <div className="ml-[244px] px-[15px] my-[72px] ">
+      <div className="ml-[234px] px-[15px] my-[72px] ">
         <ResumesListCard />
-       <GenerateResume/>
+        <GenerateResume />
       </div>
     </div>
   );

@@ -30,7 +30,7 @@ const Footer = () => {
     return <></>;
 
   // List of routes or folders where you want to exclude the layout
-  const excludedRoutes = ["/new-dashboard","/resume-builder-2"];
+  const excludedRoutes = ["/new-dashboard", "/resume-builder-2"];
   // Check if the current route is in the excluded list
   const excludeLayout = excludedRoutes.some((route) => pathname === route);
   if (excludeLayout) {
@@ -39,33 +39,6 @@ const Footer = () => {
   }
 
   return (
-<<<<<<< HEAD
-    <footer className="footer bg-striped pt-10 pt-lg-15">
-      <div className="container">
-        <div className="row g-10">
-          <div className="col-lg-9 col-xl-8 order-lg-2">
-            <div className="row g-6">
-              <div className="col-md-4 col-lg-4">
-                <div className="footer-widget text-center text-md-start">
-                  <h6 className="theme-text-2 mb-2">CareerBooster.AI</h6>
-                  <ul className="link-list list-unstyled mb-0">
-                    <li>
-                      <Link href="/about">About</Link>
-                    </li>
-                    {/* <li>
-                    <Link href="/blog">Blog</Link>
-                  </li> */}
-                    <li>
-                      <Link href="/login">Sign in</Link>
-                    </li>
-                    <li>
-                      <Link href="/register">Register</Link>
-                    </li>
-                    <li>
-                      <Link href="/contact">Contact</Link>
-                    </li>
-                  </ul>
-=======
     <>
       <footer className="footer bg-striped pt-10 pt-lg-15">
         <Head>
@@ -110,7 +83,6 @@ const Footer = () => {
                       </li>
                     </ul>
                   </div>
->>>>>>> osama
                 </div>
                 <div className="col-md-4 col-lg-4">
                   <div className="footer-widget text-center text-md-start">
@@ -134,76 +106,6 @@ const Footer = () => {
                     </ul>
                   </div>
                 </div>
-<<<<<<< HEAD
-              </div>
-              <div className="col-md-4 col-lg-4">
-                <div className="footer-widget text-center text-md-start">
-                  <h6 className="theme-text-2 mb-4">Get connected</h6>
-                  {/* <form>
-                  <div className="input-group">
-                    <input
-                      type="email"
-                      className="form-control form-control-2"
-                      placeholder="Enter your email"
-                    />
-                    <button
-                      className="btn btn-primary-dark px-4"
-                      type="button"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        width="24"
-                        height="24"
-                      >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="1.5"
-                          d="m4.031 8.917 15.477-4.334a.5.5 0 0 1 .616.617l-4.333 15.476a.5.5 0 0 1-.94.067l-3.248-7.382a.5.5 0 0 0-.256-.257L3.965 9.856a.5.5 0 0 1 .066-.94v0Z"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </form> */}
-                  <ul className="list-unstyled d-flex flex-wrap align-center justify-center justify-md-start gap-3 social-list mb-0 mt-5">
-                    <li>
-                      <Link href="https://www.facebook.com/careerboosterai">
-                        <svg
-                          className="theme-text-2 "
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 18 18"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1.5"
-                            d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
-                          />
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1.5"
-                            d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
-                          />
-                        </svg>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="https://www.linkedin.com/company/careerboosterai/">
-                        <svg
-                          className="w-4 h-4 
-                        theme-text-2 "
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 15 15"
-=======
                 <div className="col-md-4 col-lg-4">
                   <div className="footer-widget text-center text-md-start">
                     <h6 className="theme-text-2 mb-4">Get connected</h6>
@@ -291,7 +193,6 @@ const Footer = () => {
                         <Link
                           href="https://www.instagram.com/careerboosterai/"
                           target="_blank"
->>>>>>> osama
                         >
                           <svg
                             className="theme-text-2 "

@@ -9,16 +9,21 @@ import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import Image from "next/image";
 const ChatAI = () => {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState<any>({});
   const [chat, setChat] = useState<any>([]);
   const messagesContainer: any = useRef(null);
   // const {stop } = useCompletion({
   //   api: "/api/chatCompletion",
   // });
   const handleStop = async () => {
+    const obj: any = {
+      chatData: chat,
+      email: userData.email,
+    };
+    console.log(obj);
     const res = await fetch("/api/chatCompletion", {
       method: "POST",
-      body: JSON.stringify(chat),
+      body: JSON.stringify(obj),
     });
   };
   const { messages, input, handleInputChange, handleSubmit } = useChat({
