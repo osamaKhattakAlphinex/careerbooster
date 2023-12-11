@@ -3,6 +3,8 @@ import SingleRecentResumeCard from "./SingleRecentResumeCard";
 import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
+import SwiperCore from "swiper/core";
+SwiperCore.use([Pagination]);
 
 const RecentResumeCard = ({
   source = "",
@@ -14,12 +16,6 @@ const RecentResumeCard = ({
   // redux
   const userData = useSelector((state: any) => state.userData);
   const { resumes } = userData;
-  const pagination = {
-    clickable: true,
-    renderBullet: function (index: any, className: any) {
-      return '<span class="' + className + '">' + (index + 1) + "</span>";
-    },
-  };
 
   return (
     <>
@@ -44,9 +40,26 @@ const RecentResumeCard = ({
         <div className="flex flex-row">
           <Swiper
             slidesPerView={3}
-            spaceBetween={30}
-            pagination={pagination}
-            modules={[Pagination]}
+            spaceBetween={15}
+            navigation={true}
+            modules={[Navigation]}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              640: {
+                slidesPerView: 1,
+              },
+              768: {
+                slidesPerView: 3,
+              },
+              1080: {
+                slidesPerView: 3,
+              },
+              1280: {
+                slidesPerView: 3,
+              },
+            }}
             className="mySwiper"
           >
             {resumes &&
