@@ -46,9 +46,26 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
       <div className="flex gap-2 flex-row  ">
         <Swiper
           slidesPerView={3}
-          spaceBetween={30}
-          pagination={pagination}
-          modules={[Pagination]}
+          spaceBetween={15}
+          navigation={true}
+          modules={[Navigation]}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+            },
+            640: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1080: {
+              slidesPerView: 3,
+            },
+            1280: {
+              slidesPerView: 3,
+            },
+          }}
           className="mySwiper"
         >
           {userData &&
