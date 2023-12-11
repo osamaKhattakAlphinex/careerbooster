@@ -35,6 +35,7 @@ const LinkedInAboutCardSingle = ({
     if (source != "") {
       router.replace("/linkedin-generator/about");
     }
+    console.log("card", card);
     return dispatch(setLinkedInAbout(card));
   };
 
@@ -71,13 +72,13 @@ const LinkedInAboutCardSingle = ({
         <div className="">
           <div className="mx-3 border-gray-600 leading-6 w-full">
             <h2
-              title={card.jobDescription}
+              title={card.aboutText}
               className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize text-white font-semibold  "
             >
-              {card.jobDescription}
-              {/* {card.jobDescription.length < 20
-                ? card.jobDescription
-                : card.jobDescription.slice(0, 20) + "..."} */}
+              {/* {card.jobDescription} */}
+              {card.aboutText.length < 20
+                ? card.aboutText
+                : card.aboutText.slice(0, 20) + "..."}
             </h2>
             <h4 className="uppercase text-[#959595] font-medium  lg:text-[12px] text-[10px] pt-[8px] pb-[12px]">
               Generated on {getFormattedDate(card.generatedOnDate)}

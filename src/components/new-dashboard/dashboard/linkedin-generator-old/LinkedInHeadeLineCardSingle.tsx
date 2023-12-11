@@ -35,6 +35,7 @@ const LinkedInHeadlineCardSingle = ({
     console.log("source", source);
     if (source != "") {
       router.replace("/linkedin-generator/headline");
+     
     }
     return dispatch(setLinkedInHeadline(card));
   };
@@ -48,7 +49,7 @@ const LinkedInHeadlineCardSingle = ({
         const res = await axios.delete(
           `/api/linkedInBots/linkedinHeadlineGenerator/${card.id}`
         );
-        
+
         dispatch(resetLinkedInHeadline());
         // updated cover letters
         const updatedLinkedInHeadlines = userData.linkedInHeadlines.filter(
@@ -74,13 +75,14 @@ const LinkedInHeadlineCardSingle = ({
         <div className="">
           <div className="mx-3 border-gray-600 leading-6 w-full">
             <h2
-              title={card.jobDescription}
+              title={card.headlineText}
               className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize text-white font-semibold  "
             >
-              {card.jobDescription}React js
-              {/* {card.jobDescription.length < 20
-                ? card.jobDescription
-                : card.jobDescription.slice(0, 20) + "..."} */}
+              {/* {card.headlineText.slice(0, 20)} */}
+
+              {card.headlineText.length < 20
+                ? card.headlineText
+                : card.headlineText.slice(0, 20) + "..."}
             </h2>
             <h4 className="uppercase text-[#959595] font-medium  lg:text-[12px] text-[10px] pt-[8px] pb-[12px]">
               Generated on {getFormattedDate(card.generatedOnDate)}

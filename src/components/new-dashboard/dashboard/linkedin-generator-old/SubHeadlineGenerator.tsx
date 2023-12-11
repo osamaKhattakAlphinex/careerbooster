@@ -45,9 +45,9 @@ const SubHeadlineGenerator = () => {
   const userData = useSelector((state: any) => state.userData);
   const linkedinHeadline = useSelector((state: any) => state.linkedinHeadline);
 
-  useEffect(() => {
-    setHeadline(streamedData);
-  }, [streamedData]);
+  // useEffect(() => {
+  //   setHeadline(streamedData);
+  // }, [streamedData]);
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -62,22 +62,13 @@ const SubHeadlineGenerator = () => {
         skills: userData?.skills,
       });
     }
-    // console.log(userData);
-    // if (
-    //   userData.results &&
-    //   userData.results.headline &&
-    //   userData.results.headline !== ""
-    // ) {
-    //   setStreamedData(userData.results.headline);
-    // }
-    if (streamedData !== "") {
+
+    if (streamedData === "") {
+     
       setStreamedData(linkedinHeadline.headlineText);
     }
   }, [userData]);
 
-  useEffect(() => {
-    setStreamedData(linkedinHeadline.headlineText);
-  }, [linkedinHeadline.headlineText]);
   const handleGenerate = async () => {
     setStreamedData("");
     await getUserDataIfNotExists();
@@ -113,7 +104,7 @@ const SubHeadlineGenerator = () => {
               tempText += text;
             }
 
-            await saveToDB(tempText);
+            // await saveToDB(tempText);
 
             fetch("/api/users/updateUserLimit", {
               method: "POST",
@@ -133,7 +124,6 @@ const SubHeadlineGenerator = () => {
                 const HeadlineResponse = await axios.get(
                   "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines"
                 );
-
                 const updatedObject = {
                   ...userData,
                   userPackageUsed: {
@@ -225,6 +215,9 @@ const SubHeadlineGenerator = () => {
       <LinkedInHeadlineCardSingle card={card} componentRef={componentRef} />
     ),
   };
+  useEffect(() => {
+    setStreamedData(linkedinHeadline.headlineText);
+  }, [linkedinHeadline.headlineText]);
   return (
     <>
       <PreviouslyGeneratedList {...historyProps} />
@@ -307,7 +300,7 @@ const SubHeadlineGenerator = () => {
         </button>
       </div>
 
-      {streamedData && (
+      {streamedData !== "" && (
         <div className="rounded border border-gray-500 p-4 mb-4">
           <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">

@@ -63,7 +63,7 @@ const SubJDGenerator = () => {
     // ) {
     //   setStreamedData(userData.results.jobDescription);
     // }
-    if (streamedData !== "") {
+    if (streamedData === "") {
       setStreamedData(linkedinJD.jobDescriptionText);
     }
   }, [userData]);
