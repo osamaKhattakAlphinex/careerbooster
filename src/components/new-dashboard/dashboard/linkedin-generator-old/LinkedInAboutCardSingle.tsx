@@ -9,12 +9,11 @@ import Html2Pdf from "js-html2pdf";
 
 import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
 import { useRouter, usePathname } from "next/navigation";
-import { resetEmail, setEmail } from "@/store/emailSlice";
+
 import {
-  resetLinkedInHeadline,
-  setLinkedInHeadline,
-} from "@/store/linkedInHeadLineSlice";
-import { setLinkedInAbout } from "@/store/linkedInAboutSlice";
+  resetLinkedInAbout,
+  setLinkedInAbout,
+} from "@/store/linkedInAboutSlice";
 
 type LinkedInAboutType = {
   card?: any;
@@ -34,32 +33,34 @@ const LinkedInAboutCardSingle = ({
   const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
     if (source != "") {
-      router.replace("/email-bot");
+      router.replace("/linkedin-generator/about");
     }
     return dispatch(setLinkedInAbout(card));
   };
 
   const handleOnDelete = async (card: any) => {
     const c = confirm("Are you sure you want to delete this Linked In About?");
-    // if (c) {
-    //   try {
-    //     await axios.delete(`/api/emailBot/${card.id}`);
-    //     dispatch(resetLinkedInHeadline());
-    //     // updated cover letters
-    //     const updatedEmails = userData.emails.filter(
-    //       (email: any) => email.id !== card.id
-    //     );
+    if (c) {
+      try {
+        await axios.delete(
+          `/api/linkedInBots/linkedinAboutGenerator/${card.id}`
+        );
+        dispatch(resetLinkedInAbout());
+        // updated cover letters
+        const updatedAbouts = userData.linkedInAbouts.filter(
+          (about: any) => about.id !== card.id
+        );
 
-    //     const updatedObject = {
-    //       ...userData,
-    //       emails: updatedEmails,
-    //     };
+        const updatedObject = {
+          ...userData,
+          linkedInAbouts: updatedAbouts,
+        };
 
-    //     dispatch(setUserData({ ...userData, ...updatedObject }));
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+        dispatch(setUserData({ ...userData, ...updatedObject }));
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   if (!card) return <h1>Loading </h1>;
@@ -108,7 +109,7 @@ const LinkedInAboutCardSingle = ({
               ""
             )}
           </button>
-          {pathname == "/dashboard"
+          {/* {pathname == "/dashboard"
             ? ""
             : card && (
                 <>
@@ -116,18 +117,11 @@ const LinkedInAboutCardSingle = ({
                     trigger={() => (
                       <button
                         type="button"
-                        // disabled={
-                        //   resume.state.jobPosition === "" ||
-                        //   resume.state.resumeLoading ||
-                        //   !session?.user?.email ||
-                        //   !resume?.name
-                        // }
+                      
                         className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
                       >
                         Download
-                        {/* <span>
-                              To download choose destination "save as PDF"
-                            </span> */}
+                     
                       </button>
                     )}
                     onBeforeGetContent={async () => await handleOnView(card)}
@@ -150,7 +144,7 @@ const LinkedInAboutCardSingle = ({
                     }}
                   />
                 </>
-              )}
+              )} */}
         </div>
       </div>
     </div>

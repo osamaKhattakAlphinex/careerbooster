@@ -29,7 +29,6 @@ const CoverLetterCardSingle = ({
   const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
     if (source != "") {
-     
       router.replace("/cover-letter-generator");
     }
     return dispatch(setCoverLetter(card));
@@ -37,6 +36,8 @@ const CoverLetterCardSingle = ({
 
   const handleOnDelete = async (card: any) => {
     const c = confirm("Are you sure you want to delete this Cover Letter?");
+   
+
     if (c) {
       try {
         await axios.delete(`/api/coverLetterBot/${card.id}`);
@@ -61,7 +62,7 @@ const CoverLetterCardSingle = ({
   if (!card) return <h1>Loading </h1>;
 
   return (
-    <div >
+    <div>
       <div className="flex flex-col bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[14px] ">
         <div className="">
           <div className="mx-3 border-gray-600 leading-6 w-full">

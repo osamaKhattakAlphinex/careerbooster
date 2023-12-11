@@ -42,6 +42,7 @@ const SubAboutGenerator = () => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
+  const linkedinAbout = useSelector((state: any) => state.linkedinAbout);
 
   useEffect(() => {
     if (
@@ -61,18 +62,21 @@ const SubAboutGenerator = () => {
         skills: userData?.skills,
       });
     }
-    if (
-      userData.results &&
-      userData.results.about &&
-      userData.results.about !== ""
-    ) {
-      setStreamedData(userData.results.about);
+    // if (
+    //   userData.results &&
+    //   userData.results.about &&
+    //   userData.results.about !== ""
+    // ) {
+    //   setStreamedData(userData.results.about);
+    // }
+    if (streamedData !== "") {
+      setStreamedData(linkedinAbout.aboutText);
     }
   }, [userData]);
 
   useEffect(() => {
-    setAbout(streamedData);
-  }, [streamedData]);
+    setStreamedData(linkedinAbout.aboutText);
+  }, [linkedinAbout.aboutText]);
 
   const handleGenerate = async () => {
     setStreamedData("");
@@ -124,12 +128,16 @@ const SubAboutGenerator = () => {
                 user = await JSON.parse(res.result);
               }
               if (res.success) {
+                const AboutResponse = await axios.get(
+                  "/api/linkedInBots/linkedinAboutGenerator/getAllAbout"
+                );
                 const updatedObject = {
                   ...userData,
                   userPackageUsed: {
                     ...userData.userPackageUsed,
                     about_generation: user.userPackageUsed.about_generation,
                   },
+                  linkedInAbouts: AboutResponse.data.result.linkedInAbouts,
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
               }

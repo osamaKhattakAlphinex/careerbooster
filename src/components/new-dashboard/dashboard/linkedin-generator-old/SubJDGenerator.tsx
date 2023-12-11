@@ -49,20 +49,28 @@ const SubJDGenerator = () => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
+  const linkedinJD = useSelector((state: any) => state.linkedinJobDesc);
+
+  // useEffect(() => {
+  //   setJobDesc(streamedData);
+  // }, [streamedData]);
 
   useEffect(() => {
-    setJobDesc(streamedData);
-  }, [streamedData]);
-
-  useEffect(() => {
-    if (
-      userData.results &&
-      userData.results.jobDescription &&
-      userData.results.jobDescription !== ""
-    ) {
-      setStreamedData(userData.results.jobDescription);
+    // if (
+    //   userData.results &&
+    //   userData.results.jobDescription &&
+    //   userData.results.jobDescription !== ""
+    // ) {
+    //   setStreamedData(userData.results.jobDescription);
+    // }
+    if (streamedData !== "") {
+      setStreamedData(linkedinJD.jobDescriptionText);
     }
   }, [userData]);
+
+  useEffect(() => {
+    setStreamedData(linkedinJD.jobDescriptionText);
+  }, [linkedinJD.jobDescriptionText]);
 
   const handleGenerate = async () => {
     setStreamedData("");
@@ -140,12 +148,16 @@ const SubJDGenerator = () => {
           user = await JSON.parse(res.result);
         }
         if (res.success) {
+          const JDResponse = await axios.get(
+            "/api/linkedInBots/jdGeneratorSingle/getAllJD"
+          );
           const updatedObject = {
             ...userData,
             userPackageUsed: {
               ...userData.userPackageUsed,
               job_desc_generation: user.userPackageUsed.job_desc_generation,
             },
+            linkedInJobDescriptions: JDResponse.data.result.linkedInJobDescriptions,
           };
           dispatch(setUserData({ ...userData, ...updatedObject }));
         }
@@ -220,148 +232,150 @@ const SubJDGenerator = () => {
     <>
       <PreviouslyGeneratedList {...historyProps} />
       <>
-      <div className="headline-generator bg-[#222027] py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
-        <div
-          className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16`}
-        >
-          <Image
-            alt="Svg1"
-            src={Svg1}
-            width={32}
-            height={32}
-            className="z-[10000px]"
-          />
-        </div>
-        <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
-          <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row ">
-            <h1 className="text-[16px] text-white font-bold">
-              Job Description Generator
-            </h1>
-            <span
-              className={`text-black rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
-            >
-              {iconOfPackageBadge ? (
-                <Image
-                  src={iconOfPackageBadge}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                  className="mr-2"
-                />
-              ) : null}
-              Premium
-            </span>
+        <div className="headline-generator bg-[#222027] py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
+          <div
+            className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16`}
+          >
+            <Image
+              alt="Svg1"
+              src={Svg1}
+              width={32}
+              height={32}
+              className="z-[10000px]"
+            />
           </div>
-          <LimitCard
-            title="Available"
-            limit={userData?.userPackageData?.limit?.job_desc_generation}
-            used={userData?.userPackageUsed?.job_desc_generation}
-            setPercentageCalculated={setPercentageCalculated}
-            availablePercentage={availablePercentage}
-            setAvailablePercentage={setAvailablePercentage}
-          />
-          <p className="text-[14px] text-[#959595] pr-5">
-            Get job descriptions with respect to each job
-          </p>
-        </div>
-        <button
-          type="button"
-          disabled={msgLoading || !session?.user?.email}
-          onClick={() => handleGenerate()}
-          className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
+          <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
+            <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row ">
+              <h1 className="text-[16px] text-white font-bold">
+                Job Description Generator
+              </h1>
+              <span
+                className={`text-black rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
+              >
+                {iconOfPackageBadge ? (
+                  <Image
+                    src={iconOfPackageBadge}
+                    alt="bold icon"
+                    height={18}
+                    width={18}
+                    className="mr-2"
+                  />
+                ) : null}
+                Premium
+              </span>
+            </div>
+            <LimitCard
+              title="Available"
+              limit={userData?.userPackageData?.limit?.job_desc_generation}
+              used={userData?.userPackageUsed?.job_desc_generation}
+              setPercentageCalculated={setPercentageCalculated}
+              availablePercentage={availablePercentage}
+              setAvailablePercentage={setAvailablePercentage}
+            />
+            <p className="text-[14px] text-[#959595] pr-5">
+              Get job descriptions with respect to each job
+            </p>
+          </div>
+          <button
+            type="button"
+            disabled={msgLoading || !session?.user?.email}
+            onClick={() => handleGenerate()}
+            className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
 
-          // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
-        >
-          <span className={`text-white text-[15px] font-semibold`}>
-            {msgLoading ? (
-              <div className="flex">
+            // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
+          >
+            <span className={`text-white text-[15px] font-semibold`}>
+              {msgLoading ? (
+                <div className="flex">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className={`w-4 h-4 mr-3 ${
+                      msgLoading ? "animate-spin" : ""
+                    }`}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                    />
+                  </svg>
+                  Please wait...
+                </div>
+              ) : (
+                <div className="flex">
+                  <Image
+                    src={buttonIconSrc}
+                    alt="bold icon"
+                    height={18}
+                    width={18}
+                  />
+                  <span className="text-white ml-3 text-[15px] font-semibold">
+                    Generate Description
+                  </span>
+                </div>
+              )}
+            </span>
+          </button>
+        </div>
+        {streamedData && (
+          <div className="mb-4 border-gray-500  rounded border p-4">
+            <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+                AI Response{" "}
+              </span>
+            </h1>
+            <div
+              className="font-sans text-gray-300 whitespace-pre-wrap break-words"
+              // style={{ textW: "auto" }}
+            >
+              <div
+                className="list-disc"
+                dangerouslySetInnerHTML={{ __html: streamedData }}
+              ></div>
+              <button
+                disabled={msgLoading}
+                onClick={() => copyJD(streamedData)}
+                className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${
+                  msgLoading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""}`}
+                  className="w-4 h-4 text-white"
                 >
                   <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
                   />
                 </svg>
-                Please wait...
-              </div>
-            ) : (
-              <div className="flex">
-                <Image
-                  src={buttonIconSrc}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                />
-                <span className="text-white ml-3 text-[15px] font-semibold">
-                  Generate Description
-                </span>
-              </div>
-            )}
-          </span>
-        </button>
-      </div>
-      {streamedData && (
-        <div className="mb-4 border-gray-500  rounded border p-4">
-          <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
-              AI Response{" "}
-            </span>
-          </h1>
-          <div
-            className="font-sans text-gray-300 whitespace-pre-wrap break-words"
-            // style={{ textW: "auto" }}
-          >
-            <div
-              className="list-disc"
-              dangerouslySetInnerHTML={{ __html: streamedData }}
-            ></div>
-            <button
-              disabled={msgLoading}
-              onClick={() => copyJD(streamedData)}
-              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${
-                msgLoading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="w-4 h-4 text-white"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
-                />
-              </svg>
 
-              <span className="text-white text-[15px] font-semibold">
-                {msgLoading
-                  ? "Please wait..."
-                  : isJDCopied
-                  ? "Copied"
-                  : "Copy to clipboard"}
-              </span>
-            </button>
+                <span className="text-white text-[15px] font-semibold">
+                  {msgLoading
+                    ? "Please wait..."
+                    : isJDCopied
+                    ? "Copied"
+                    : "Copy to clipboard"}
+                </span>
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-      {showPopup && (
-        <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
-          {/* Popup content here */}
-          Credit Limit Reached !
-        </div>
-      )}
-    </>
+        )}
+        {showPopup && (
+          <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
+            {/* Popup content here */}
+            Credit Limit Reached !
+          </div>
+        )}
+      </>
     </>
   );
 };

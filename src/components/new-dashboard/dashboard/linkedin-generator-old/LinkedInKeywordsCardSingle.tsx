@@ -14,7 +14,10 @@ import {
   resetLinkedInHeadline,
   setLinkedInHeadline,
 } from "@/store/linkedInHeadLineSlice";
-import { setLinkedKeywords } from "@/store/linkedInKeywordsSlice";
+import {
+  resetLinkedKeywords,
+  setLinkedKeywords,
+} from "@/store/linkedInKeywordsSlice";
 
 type LinkedInHeadlineType = {
   card?: any;
@@ -34,32 +37,34 @@ const LinkedInHKeywordsCardSingle = ({
   const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
     if (source != "") {
-      router.replace("/email-bot");
+      router.replace("/linkedin-generator/keywords");
     }
     return dispatch(setLinkedKeywords(card));
   };
 
   const handleOnDelete = async (card: any) => {
-    const c = confirm("Are you sure you want to delete this Linked In Keywords?");
-    // if (c) {
-    //   try {
-    //     await axios.delete(`/api/emailBot/${card.id}`);
-    //     dispatch(resetLinkedInHeadline());
-    //     // updated cover letters
-    //     const updatedEmails = userData.emails.filter(
-    //       (email: any) => email.id !== card.id
-    //     );
+    const c = confirm(
+      "Are you sure you want to delete this Linked In Keywords?"
+    );
+    if (c) {
+      try {
+        await axios.delete(`/api/linkedInBots/keywordsGenerator/${card.id}`);
+        dispatch(resetLinkedKeywords());
+        // updated cover letters
+        const updatedKeyword = userData.linkedInKeywords.filter(
+          (keyword: any) => keyword.id !== card.id
+        );
 
-    //     const updatedObject = {
-    //       ...userData,
-    //       emails: updatedEmails,
-    //     };
+        const updatedObject = {
+          ...userData,
+          linkedInKeywords: updatedKeyword,
+        };
 
-    //     dispatch(setUserData({ ...userData, ...updatedObject }));
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+        dispatch(setUserData({ ...userData, ...updatedObject }));
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   if (!card) return <h1>Loading </h1>;
@@ -108,7 +113,7 @@ const LinkedInHKeywordsCardSingle = ({
               ""
             )}
           </button>
-          {pathname == "/dashboard"
+          {/* {pathname == "/dashboard"
             ? ""
             : card && (
                 <>
@@ -116,18 +121,11 @@ const LinkedInHKeywordsCardSingle = ({
                     trigger={() => (
                       <button
                         type="button"
-                        // disabled={
-                        //   resume.state.jobPosition === "" ||
-                        //   resume.state.resumeLoading ||
-                        //   !session?.user?.email ||
-                        //   !resume?.name
-                        // }
+                        
                         className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
                       >
                         Download
-                        {/* <span>
-                              To download choose destination "save as PDF"
-                            </span> */}
+                       
                       </button>
                     )}
                     onBeforeGetContent={async () => await handleOnView(card)}
@@ -150,7 +148,7 @@ const LinkedInHKeywordsCardSingle = ({
                     }}
                   />
                 </>
-              )}
+              )} */}
         </div>
       </div>
     </div>
