@@ -46,26 +46,24 @@ const LinkedInHeadlineCardSingle = ({
     if (c) {
       try {
         const res = await axios.delete(
-          `/api/linkedin-headlines/delete/${card._id}`
+          `/api/linkedInBots/linkedinHeadlineGenerator/${card.id}`
         );
-        console.log(res.data);
+        
         dispatch(resetLinkedInHeadline());
         // updated cover letters
         const updatedLinkedInHeadlines = userData.linkedInHeadlines.filter(
-          (letter: any) => letter._id !== card._id 
+          (letter: any) => letter.id !== card.id
           // letter.id !== card.id
-        )
+        );
         const updatedObject = {
           ...userData,
-          linkedInHeadlines: updatedLinkedInHeadlines
+          linkedInHeadlines: updatedLinkedInHeadlines,
         };
         dispatch(setUserData({ ...userData, ...updatedObject }));
       } catch (error) {
         console.log(error);
       }
-      
     }
-    
   };
 
   if (!card) return <h1>Loading </h1>;
@@ -114,7 +112,7 @@ const LinkedInHeadlineCardSingle = ({
               ""
             )}
           </button>
-          {pathname == "/dashboard"
+          {/* {pathname == "/dashboard"
             ? ""
             : card && (
                 <>
@@ -122,18 +120,11 @@ const LinkedInHeadlineCardSingle = ({
                     trigger={() => (
                       <button
                         type="button"
-                        // disabled={
-                        //   resume.state.jobPosition === "" ||
-                        //   resume.state.resumeLoading ||
-                        //   !session?.user?.email ||
-                        //   !resume?.name
-                        // }
+                       
                         className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
                       >
                         Download
-                        {/* <span>
-                              To download choose destination "save as PDF"
-                            </span> */}
+                       
                       </button>
                     )}
                     onBeforeGetContent={async () => await handleOnView(card)}
@@ -156,7 +147,7 @@ const LinkedInHeadlineCardSingle = ({
                     }}
                   />
                 </>
-              )}
+              )} */}
         </div>
       </div>
     </div>

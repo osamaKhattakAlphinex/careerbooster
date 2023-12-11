@@ -46,10 +46,11 @@ const SubKeywordsGenerator = () => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
+  const linkedinKeywords = useSelector((state: any) => state.linkedinKeywords);
 
-  useEffect(() => {
-    setKeywords(streamedData);
-  }, [streamedData]);
+  // useEffect(() => {
+  //   setKeywords(streamedData);
+  // }, [streamedData]);
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -64,14 +65,22 @@ const SubKeywordsGenerator = () => {
         skills: userData?.skills,
       });
     }
-    if (
-      userData.results &&
-      userData.results.keywords &&
-      userData.results.keywords !== ""
-    ) {
-      setStreamedData(userData.results.keywords);
+    // if (
+    //   userData.results &&
+    //   userData.results.keywords &&
+    //   userData.results.keywords !== ""
+    // ) {
+    //   setStreamedData(userData.results.keywords);
+    // }
+    if (streamedData !== "") {
+      setStreamedData(linkedinKeywords.keywordsText);
     }
   }, [userData]);
+  useEffect(() => {
+    setStreamedData(linkedinKeywords.keywordsText);
+  },[linkedinKeywords.keywordsText])
+    
+
 
   const handleGenerate: any = async () => {
     setStreamedData("");
@@ -122,6 +131,9 @@ const SubKeywordsGenerator = () => {
                 user = await JSON.parse(res.result);
               }
               if (res.success) {
+                const KeywordsResponse = await axios.get(
+                  "/api/linkedInBots/keywordsGenerator/getAllLinkedInKeyword"
+                );
                 const updatedObject = {
                   ...userData,
                   userPackageUsed: {
@@ -129,6 +141,8 @@ const SubKeywordsGenerator = () => {
                     keywords_generation:
                       user.userPackageUsed.keywords_generation,
                   },
+                  linkedInKeywords: KeywordsResponse.data.result.linkedInKeywords,
+
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
               }

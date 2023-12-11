@@ -43,6 +43,7 @@ const SubHeadlineGenerator = () => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
+  const linkedinHeadline = useSelector((state: any) => state.linkedinHeadline);
 
   useEffect(() => {
     setHeadline(streamedData);
@@ -61,15 +62,22 @@ const SubHeadlineGenerator = () => {
         skills: userData?.skills,
       });
     }
-    if (
-      userData.results &&
-      userData.results.headline &&
-      userData.results.headline !== ""
-    ) {
-      setStreamedData(userData.results.headline);
+    // console.log(userData);
+    // if (
+    //   userData.results &&
+    //   userData.results.headline &&
+    //   userData.results.headline !== ""
+    // ) {
+    //   setStreamedData(userData.results.headline);
+    // }
+    if (streamedData !== "") {
+      setStreamedData(linkedinHeadline.headlineText);
     }
   }, [userData]);
 
+  useEffect(() => {
+    setStreamedData(linkedinHeadline.headlineText);
+  }, [linkedinHeadline.headlineText]);
   const handleGenerate = async () => {
     setStreamedData("");
     await getUserDataIfNotExists();
@@ -122,6 +130,10 @@ const SubHeadlineGenerator = () => {
                 user = await JSON.parse(res.result);
               }
               if (res.success) {
+                const HeadlineResponse = await axios.get(
+                  "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines"
+                );
+
                 const updatedObject = {
                   ...userData,
                   userPackageUsed: {
@@ -129,8 +141,11 @@ const SubHeadlineGenerator = () => {
                     headline_generation:
                       user.userPackageUsed.headline_generation,
                   },
+                  linkedInHeadlines:
+                    HeadlineResponse.data.result.linkedInHeadlines,
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
+                // dispatch()
               }
             });
           } else {

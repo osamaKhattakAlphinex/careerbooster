@@ -60,6 +60,7 @@ export async function DELETE(
   req: any,
   { params }: { params: { coverLetterId: string } }
 ) {
+  console.log("params",params);
   const session = await getServerSession(authOptions);
   let email: any = "";
 
