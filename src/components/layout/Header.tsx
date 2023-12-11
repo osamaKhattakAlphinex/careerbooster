@@ -12,23 +12,16 @@ import Image from "next/image";
 
 // import useTheme from "@/lib/useTheme";
 import { usePathname } from "next/navigation";
-const AllowedRoutes = ["/dashboard", "/resume-builder"];
+
 const Header = () => {
   // const [theme] = useTheme();
   const pathname: any = usePathname();
   // List of routes or folders where you want to exclude the layout
-  const excludedRoutes = ["/new-dashboard", "/resume-builder-2"];
-  // Check if the current route is in the excluded list
-  const excludeLayout = excludedRoutes.some((route) => pathname === route);
-  if (excludeLayout) {
-    // Return only the children without the layout
-    return <></>;
-  }
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
   const role = data?.user?.role;
-  const [theme, toggleTheme] = useTheme();
 
   // Session
   const { data: session } = useSession();
