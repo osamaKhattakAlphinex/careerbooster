@@ -34,6 +34,7 @@ const LinkedInUploadPDFResume = () => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [linkedinContent, setLinkedinContent] = useState<any>("");
   const [linkedinFileName, setLinkedinFileName] = useState<any>("");
+  const [showAvatar, setShowAvatar] = useState<boolean>(true);
 
   // Define a state variable to hold both first name and full name
   const [names, setNames] = useState({
@@ -184,6 +185,9 @@ const LinkedInUploadPDFResume = () => {
             location,
           });
           setButtonDisabled(false);
+          if (firstName && lastName) {
+            setShowAvatar(true);
+          }
           if (email && phone) {
             UpdateGohighlevel({
               userId,
@@ -616,7 +620,9 @@ const LinkedInUploadPDFResume = () => {
           {fileError && <div className="error-message">{fileError}</div>}
         </div>
       </div>
-      <Avatar />
+      {showAvatar && (
+        <Avatar firstName={names.firstName} lastName={names.lastName} />
+      )}
     </>
   );
 };
