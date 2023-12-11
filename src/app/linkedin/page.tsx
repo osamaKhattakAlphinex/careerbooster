@@ -40,7 +40,7 @@ export default function LinkedInNewPage() {
         <div className="flex flex-col text-white">
           <LinkedInToolMain />
         </div>
-        <Avatar />
+        {/* <Avatar /> */}
       </section>
     </div>
   );

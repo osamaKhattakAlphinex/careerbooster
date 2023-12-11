@@ -74,7 +74,7 @@ const cardDetail = [
     title: "Career Coach",
     description:
       "From its medieval origins to the digital era, learn everything.",
-    link: "/chatAI",
+    link: "/",
     icon: chatbot,
     bgColor1: "from-teal-600",
     bgColor2: "to-green-400",

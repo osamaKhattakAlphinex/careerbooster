@@ -37,6 +37,7 @@ interface AvatarProps {
 const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
   const [isGif, setIsGif] = useState(false);
   const [audioPlayed, setAudioPlayed] = useState(false);
+  const [response, setResponse] = useState<any>({});
   const componentRef: any = useRef(null);
   const userData = useSelector((state: any) => state.userData);
 
@@ -47,6 +48,18 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
     firstName: "",
     lastName: "",
   });
+
+  useEffect(() => {
+    axios
+      .post("/api/audioGeneration", {
+        input: `Hey ${firstName} ${lastName}, I have generated Linkedin Headline and About Sections for you.
+        
+       Our results maximize your LinkedIn potential with our AI-powered tool! Elevate your profile, stand out to recruiters, and land your dream job faster. `,
+      })
+      .then((res) => {
+        setResponse(res);
+      });
+  }, [firstName, lastName]);
   const handleClick = async () => {
     try {
       if (
@@ -57,11 +70,9 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
         componentRef.current.play();
         return; // If firstName and lastName haven't changed, don't make the request again
       }
-      const response = await axios.post("/api/audioGeneration", {
-        input: `Hey ${firstName} ${lastName}, I have generated headline and about for your linkedin, hope you will like it `,
-      });
 
       if (response) {
+        console.log(response);
         setIsGif(!isGif);
         setAudioPlayed(true);
         const audioData = response.data.data;

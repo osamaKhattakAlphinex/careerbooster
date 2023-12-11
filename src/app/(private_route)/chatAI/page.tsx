@@ -49,10 +49,10 @@ const ChatAI = () => {
       contact: data.contact,
       skills: data.skills,
       education: data.education,
-      // files: data?.uploadedResume?.fileContent
-      //   ? data.uploadedResume.fileContent
-      //   : data.files[0],
-      files: data.files[0],
+      files: data?.uploadedResume?.fileContent
+        ? data.uploadedResume.fileContent
+        : data.files[0],
+      // files: data.files[0],
     });
   };
   useEffect(() => {
@@ -67,7 +67,9 @@ const ChatAI = () => {
 
   useEffect(() => {
     scrollToBottom();
-    setChat([...messages]);
+    if (messages.length > 1) {
+      setChat([...messages]);
+    }
   }, [messages]);
   return (
     <>
@@ -135,9 +137,9 @@ const ChatAI = () => {
                 onChange={handleInputChange}
                 placeholder="Say something..."
               />
-              <button type="button" onClick={handleStop}>
+              {/* <button type="button" onClick={handleStop}>
                 Stop
-              </button>
+              </button> */}
               <button
                 className="border-solid bg-[#18181B] border-2 border-white text-white p-2 rounded-md"
                 type="submit"

@@ -70,10 +70,12 @@ const Notifications = () => {
       {/* <div className="flex flex-col items-start"> */}
       <div className="flex flex-row  justify-between items-center">
         <div>
-          <h3 className="text-sm text-white font-bold inline">Notifications</h3>
-          <span className="ml-3 px-2 py-1 rounded bg-[#B324D7] text-xs text-white inline">
+          <h3 className="text-sm text-white font-bold inline">
+            Notifications/Updates
+          </h3>
+          {/* <span className="ml-3 px-2 py-1 rounded bg-[#B324D7] text-xs text-white inline">
             7
-          </span>
+          </span> */}
         </div>
         <div>
           <button className="text-[#E1E562] text-xs">Mark all as read</button>
@@ -81,9 +83,10 @@ const Notifications = () => {
       </div>
       {/* list */}
       <div className="flex flex-col gap-1 mt-3">
-        {data.map((item) => (
+        {/* {data.map((item) => (
           <Notification key={item.id} {...item} />
-        ))}
+        ))} */}
+        <span className="text-white">Nothing here </span>
       </div>
       {/* </div> */}
     </>
