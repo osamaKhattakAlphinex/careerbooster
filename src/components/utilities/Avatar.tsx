@@ -96,7 +96,7 @@ const Avatar: React.FC = () => {
       <Tooltip text="Hey! Click me" audioPlayed={audioPlayed}>
         <img
           src={isGif ? "serviceBot.gif" : "serviceBot.png"}
-          alt="Your GIF"
+          alt="GIF"
           className="w-full h-full object-cover rounded"
         />
       </Tooltip>

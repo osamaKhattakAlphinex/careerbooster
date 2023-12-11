@@ -9,7 +9,7 @@ const Dashboard = () => {
         <RecentDocumentsCard />
         <AiToolsCard />
       </div>
-      <Avatar />
+      {/* <Avatar /> */}
     </div>
   );
 };
