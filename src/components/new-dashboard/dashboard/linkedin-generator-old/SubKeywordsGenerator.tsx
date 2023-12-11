@@ -72,7 +72,7 @@ const SubKeywordsGenerator = () => {
     // ) {
     //   setStreamedData(userData.results.keywords);
     // }
-    if (streamedData !== "") {
+    if (streamedData === "") {
       setStreamedData(linkedinKeywords.keywordsText);
     }
   }, [userData]);

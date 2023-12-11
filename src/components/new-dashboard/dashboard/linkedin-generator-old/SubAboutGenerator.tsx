@@ -69,7 +69,7 @@ const SubAboutGenerator = () => {
     // ) {
     //   setStreamedData(userData.results.about);
     // }
-    if (streamedData !== "") {
+    if (streamedData === "") {
       setStreamedData(linkedinAbout.aboutText);
     }
   }, [userData]);
@@ -138,6 +138,7 @@ const SubAboutGenerator = () => {
                     about_generation: user.userPackageUsed.about_generation,
                   },
                   linkedInAbouts: AboutResponse.data.result.linkedInAbouts,
+                  
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
               }
