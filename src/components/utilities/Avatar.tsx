@@ -3,7 +3,7 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-
+import "@/app/(private_route)/dashboard.css";
 interface TooltipProps {
   text: string;
   children: React.ReactNode;
@@ -39,6 +39,7 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
   const [audioPlayed, setAudioPlayed] = useState(false);
   const componentRef: any = useRef(null);
   const userData = useSelector((state: any) => state.userData);
+
   const [prevUserData, setPrevUserData] = useState<{
     firstName: string;
     lastName: string;
@@ -101,7 +102,7 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
 
   return (
     <div
-      className="fixed bottom-4 right-4 mr-4 mb-4 w-20 h-20 cursor-pointer animate-bounce-slow z-10"
+      className="fixed bottom-4 right-4 mr-4 mb-4 w-20 h-20 cursor-pointer animate-bounce-slow z-10 avatar-animate"
       onClick={handleClick}
     >
       <Tooltip text="Hey! Click me" audioPlayed={audioPlayed}>

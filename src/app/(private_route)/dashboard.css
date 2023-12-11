@@ -51,6 +51,22 @@
   padding: 1rem;
 }
 
+/* In your CSS or Tailwind CSS file */
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.avatar-animate {
+  animation: slideInFromBottom 2s ease-in-out forwards;
+}
+
 @media print {
   .text-color {
     color: black !important;

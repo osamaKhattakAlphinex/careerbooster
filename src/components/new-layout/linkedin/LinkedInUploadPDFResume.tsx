@@ -34,7 +34,7 @@ const LinkedInUploadPDFResume = () => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [linkedinContent, setLinkedinContent] = useState<any>("");
   const [linkedinFileName, setLinkedinFileName] = useState<any>("");
-  const [showAvatar, setShowAvatar] = useState<boolean>(true);
+  const [showAvatar, setShowAvatar] = useState<boolean>(false);
 
   // Define a state variable to hold both first name and full name
   const [names, setNames] = useState({
@@ -304,8 +304,8 @@ const LinkedInUploadPDFResume = () => {
 
   useEffect(() => {
     if (linkedinContent !== "" && linkedinFileName !== "") {
-      // linkedinHeadline(linkedinContent);
-      // linkedinAbout(linkedinContent);
+      linkedinHeadline(linkedinContent);
+      linkedinAbout(linkedinContent);
     }
   }, [linkedinContent, linkedinFileName]);
 
