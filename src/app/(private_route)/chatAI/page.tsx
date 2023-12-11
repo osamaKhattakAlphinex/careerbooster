@@ -10,7 +10,17 @@ import { leftArrowIcon } from "@/helpers/iconsProvider";
 import Image from "next/image";
 const ChatAI = () => {
   const [userData, setUserData] = useState({});
+  const [chat, setChat] = useState<any>([]);
   const messagesContainer: any = useRef(null);
+  // const {stop } = useCompletion({
+  //   api: "/api/chatCompletion",
+  // });
+  const handleStop = async () => {
+    const res = await fetch("/api/chatCompletion", {
+      method: "POST",
+      body: JSON.stringify(chat),
+    });
+  };
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "/api/chatWithFile",
     initialMessages: [
@@ -20,9 +30,6 @@ const ChatAI = () => {
         content: JSON.stringify(userData).substring(0, 10000),
       },
     ],
-    body: {
-      userData: userData,
-    },
   });
 
   const { data: session, status } = useSession();
@@ -37,6 +44,9 @@ const ChatAI = () => {
       contact: data.contact,
       skills: data.skills,
       education: data.education,
+      // files: data?.uploadedResume?.fileContent
+      //   ? data.uploadedResume.fileContent
+      //   : data.files[0],
       files: data.files[0],
     });
   };
@@ -52,6 +62,7 @@ const ChatAI = () => {
 
   useEffect(() => {
     scrollToBottom();
+    setChat([...messages]);
   }, [messages]);
   return (
     <>
@@ -119,6 +130,9 @@ const ChatAI = () => {
                 onChange={handleInputChange}
                 placeholder="Say something..."
               />
+              <button type="button" onClick={handleStop}>
+                Stop
+              </button>
               <button
                 className="border-solid bg-[#18181B] border-2 border-white text-white p-2 rounded-md"
                 type="submit"
