@@ -169,6 +169,8 @@ export default function CoverLetterPage() {
       } else {
         obj.userData = aiInputUserData;
       }
+      console.log("obj", obj);
+
       // Fetch keywords
       fetch("/api/coverLetterBot/coverLetterGenerator", {
         method: "POST",

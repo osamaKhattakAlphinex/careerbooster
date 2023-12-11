@@ -32,8 +32,9 @@ const LinkedInHeadlineCardSingle = ({
   const router = useRouter();
   const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
+    console.log("source", source);
     if (source != "") {
-      router.replace("/email-bot");
+      router.replace("/linkedin-generator/headline");
     }
     return dispatch(setLinkedInHeadline(card));
   };
@@ -42,25 +43,29 @@ const LinkedInHeadlineCardSingle = ({
     const c = confirm(
       "Are you sure you want to delete this Linked In Headline?"
     );
-    // if (c) {
-    //   try {
-    //     await axios.delete(`/api/emailBot/${card.id}`);
-    //     dispatch(resetLinkedInHeadline());
-    //     // updated cover letters
-    //     const updatedEmails = userData.emails.filter(
-    //       (email: any) => email.id !== card.id
-    //     );
-
-    //     const updatedObject = {
-    //       ...userData,
-    //       emails: updatedEmails,
-    //     };
-
-    //     dispatch(setUserData({ ...userData, ...updatedObject }));
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+    if (c) {
+      try {
+        const res = await axios.delete(
+          `/api/linkedin-headlines/delete/${card._id}`
+        );
+        console.log(res.data);
+        dispatch(resetLinkedInHeadline());
+        // updated cover letters
+        const updatedLinkedInHeadlines = userData.linkedInHeadlines.filter(
+          (letter: any) => letter._id !== card._id 
+          // letter.id !== card.id
+        )
+        const updatedObject = {
+          ...userData,
+          linkedInHeadlines: updatedLinkedInHeadlines
+        };
+        dispatch(setUserData({ ...userData, ...updatedObject }));
+      } catch (error) {
+        console.log(error);
+      }
+      
+    }
+    
   };
 
   if (!card) return <h1>Loading </h1>;
@@ -74,7 +79,7 @@ const LinkedInHeadlineCardSingle = ({
               title={card.jobDescription}
               className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize text-white font-semibold  "
             >
-              {card.jobDescription}
+              {card.jobDescription}React js
               {/* {card.jobDescription.length < 20
                 ? card.jobDescription
                 : card.jobDescription.slice(0, 20) + "..."} */}
