@@ -301,6 +301,7 @@ const SubHeadlineGenerator = () => {
           </h1>
           <div
             className="font-sans whitespace-pre-wrap text-gray-300 break-words"
+            ref={componentRef}
             // style={{ textW: "auto" }}
           >
             {streamedData}

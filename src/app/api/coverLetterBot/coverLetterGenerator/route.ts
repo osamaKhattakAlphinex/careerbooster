@@ -1,4 +1,4 @@
-import Prompt from "@/db/schemas/Prompt";
+ import Prompt from "@/db/schemas/Prompt";
 
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
