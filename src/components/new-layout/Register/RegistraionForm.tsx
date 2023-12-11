@@ -89,14 +89,22 @@ const RegistrationForm = () => {
           lastName: values.lastName,
           email: values.email,
           password: values.password,
-          files: [
-            {
-              id: makeid(),
-              fileName: fileName, //fileName,
-              fileContent: text,
-              uploadedDateTime: new Date(),
-            },
-          ],
+          // files: [
+          //   {
+          //     id: makeid(),
+          //     fileName: fileName, //fileName,
+          //     fileContent: text,
+          //     uploadedDateTime: new Date(),
+          //   },
+          // ],
+
+          uploadedResume: {
+            id: makeid(),
+            fileName: fileName,
+            fileContent: text,
+            uploadedDateTime: new Date(),
+          },
+
           status: true,
           alertConsent: values.alertConsent,
         };
@@ -308,6 +316,7 @@ const RegistrationForm = () => {
     if (file && file.type === "application/pdf") {
       //  file exists and is PDF
       setFileError("");
+
       // upload it to server
       //uploadFileToServer();
       // getContentFromResume(file);

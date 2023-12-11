@@ -41,17 +41,17 @@ const Header = () => {
         dispatch(setIsLoading(false));
         dispatch(setField({ name: "isFetched", value: true }));
         // if there is a file in files array of a user then set it as defaultResumeFile
-        if (user?.files && user?.files?.length > 0) {
-          dispatch(
-            setFieldRegister({
-              name: "scrappedContent",
-              value: user?.files[0]?.fileContent,
-            })
-          );
-          // dispatch(
-          //   setField({ name: "defaultResumeFile", value: user?.files[0] })
-          // );
-        }
+        // if (user?.files && user?.files?.length > 0) {
+        dispatch(
+          setFieldRegister({
+            name: "scrappedContent",
+            value: user?.uploadedResume?.fileContent,
+          })
+        );
+        // dispatch(
+        //   setField({ name: "defaultResumeFile", value: user?.files[0] })
+        // );
+        // }
         dispatch(
           setField({ name: "wizardCompleted", value: user.wizardCompleted })
         );
