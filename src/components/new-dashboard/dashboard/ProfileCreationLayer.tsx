@@ -41,8 +41,6 @@ function removeSpecialChars(str: string) {
 }
 
 const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
- 
-
   const pathname = usePathname();
   // Redux
   const userData = useSelector((state: any) => state.userData);
@@ -116,7 +114,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.files[0].fileName,
+          fileAddress: userData.uploadedResume.fileName,
         },
       };
 

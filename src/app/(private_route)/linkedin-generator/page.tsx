@@ -17,9 +17,9 @@ export default function LinkedInPage() {
   const [jobDesc, setJobDesc] = useState<string>("");
   return (
     <div className="w-full sm:w-full z-1000 ">
-      <div className="ml-0 lg:ml-[244px] px-[15px] lg:mb-[72px]  ">
+      <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]  ">
         <Link
-          href="/dashboard"
+          href="/linkedin-generator"
           className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
         >
           {leftArrowIcon}

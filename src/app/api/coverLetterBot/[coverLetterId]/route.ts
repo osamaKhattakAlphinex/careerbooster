@@ -3,6 +3,7 @@ import startDB from "@/lib/db";
 import { getServerSession } from "next-auth/next";
 import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
+import { updateTrainedBotEntry } from "@/helpers/updateTrainBotEntry";
 
 export async function PUT(
   req: any,
@@ -30,6 +31,12 @@ export async function PUT(
         { new: true }
       );
 
+      updateTrainedBotEntry({
+        entryId: coverLetterId,
+        type: "coverLetter.write",
+        output: requestBody.coverLetterText,
+      });
+
       return NextResponse.json(
         { success: true, results: updatedUser.coverLetters },
         { status: 200 }
@@ -53,6 +60,7 @@ export async function DELETE(
   req: any,
   { params }: { params: { coverLetterId: string } }
 ) {
+  console.log("params",params);
   const session = await getServerSession(authOptions);
   let email: any = "";
 

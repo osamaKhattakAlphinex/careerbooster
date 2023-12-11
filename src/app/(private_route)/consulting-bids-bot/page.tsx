@@ -133,7 +133,7 @@ const ConsultingBidsGenerator = () => {
               setStreamedData((prev) => prev + text);
               tempText += text;
             }
-            await saveToDB(tempText);
+            // await saveToDB(tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -149,18 +149,17 @@ const ConsultingBidsGenerator = () => {
                 user = await JSON.parse(res.result);
               }
               if (res.success) {
-                const payload = {
-                  id: makeid(),
-                  jobDescription: jobDescription,
-                  consultingBidText: tempText,
-                  generatedOnDate: new Date().toISOString(),
-                  generatedViaOption: selectedOption,
-                  userEmail: session?.user?.email,
-                };
+                // const payload = {
+                //   id: makeid(),
+                //   jobDescription: jobDescription,
+                //   consultingBidText: tempText,
+                //   generatedOnDate: new Date().toISOString(),
+                //   generatedViaOption: selectedOption,
+                //   userEmail: session?.user?.email,
+                // };
 
-                const consultingBidResponse = await axios.post(
-                  "/api/consultingBidBot",
-                  payload
+                const consultingBidResponse = await axios.get(
+                  "/api/consultingBidBot/getAllConsultingBids"
                 );
 
                 const updatedObject = {
@@ -174,7 +173,14 @@ const ConsultingBidsGenerator = () => {
                     consultingBidResponse.data.result.consultingBids,
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
-                dispatch(setConsultingBid(payload));
+                dispatch(
+                  setConsultingBid(
+                    consultingBidResponse.data.result.consultingBids[
+                      consultingBidResponse.data.result.consultingBids.length -
+                        1
+                    ]
+                  )
+                );
               }
             });
           } else {
@@ -298,7 +304,7 @@ const ConsultingBidsGenerator = () => {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px] ">
+        <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px] ">
           <Link
             href="/dashboard"
             className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
@@ -314,7 +320,7 @@ const ConsultingBidsGenerator = () => {
             <div className=" bg-[#17151B] rounded-[20px] px-4  lg:px-[30px] py-[41px] flex flex-col gap-5 ">
               {/* header */}
               <div className="flex flex-col  md:flex-row justify-between items-center">
-                <h3 className="text-md md:text-sm uppercase text-white font-bold">
+                <h3 className="text-[16px] md:text-sm uppercase text-white font-bold">
                   Consulting Bids Generator
                 </h3>
                 <div className=" text-sm text-white uppercase font-bold">
@@ -416,7 +422,9 @@ const ConsultingBidsGenerator = () => {
                     className=" font-bold text-md md:text-[24px] text-white flex py-[20px] gap-[3px]"
                   >
                     Paste Your Job Description
-                    <span className="text-[#F04248] text-md md:text-[24px]">*</span>
+                    <span className="text-[#F04248] text-md md:text-[24px]">
+                      *
+                    </span>
                   </label>
                   <textarea
                     id="job-title"
@@ -606,7 +614,7 @@ const ConsultingBidsGenerator = () => {
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke-width="1.5"
+                            strokeWidth="1.5"
                             stroke="currentColor"
                             className="w-6 h-6 text-[#37B944]"
                           >
@@ -672,7 +680,7 @@ const ConsultingBidsGenerator = () => {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke="currentColor"
                           className="w-4 h-4 text-white"
                         >
@@ -711,7 +719,7 @@ const ConsultingBidsGenerator = () => {
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
                               viewBox="0 0 24 24"
-                              stroke-width="1.5"
+                              strokeWidth="1.5"
                               stroke="currentColor"
                               className="w-6 h-6 text-yellow-200"
                             >
@@ -738,7 +746,7 @@ const ConsultingBidsGenerator = () => {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
-                          stroke-width={1.5}
+                          strokeWidth={1.5}
                           stroke="currentColor"
                           className="w-6 h-6 text-white"
                         >

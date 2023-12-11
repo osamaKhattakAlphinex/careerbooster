@@ -50,6 +50,23 @@
   color: white;
   padding: 1rem;
 }
+
+/* In your CSS or Tailwind CSS file */
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.avatar-animate {
+  animation: slideInFromBottom 2s ease-in-out forwards;
+}
+
 @media print {
   .text-color {
     color: black !important;
@@ -66,3 +83,73 @@
     margin-top: 1.25rem !important;
   }
 }
+/* Swiper styles */
+.slide {
+  @apply relative;
+}
+
+.slide-img {
+  @apply absolute inset-0 bg-no-repeat bg-cover;
+}
+
+.swiper {
+  width: 100%;
+  height: 14rem;
+}
+.swiper {
+  /* margin: 0 auto; */
+  cursor: grab;
+}
+/* .swiper-slide {
+  width: 100% !important;
+} */
+/* Center slide text vertically */
+/* display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+} */
+/* .swiper-slide-active{
+  width: 100% !important;
+} */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 30px !important;
+  height: 30px !important;
+
+  margin-left: -5px;
+  margin-right: -20px;
+}
+/* .swiper-button-prev {
+
+  border-radius: 2px;
+  border-radius: 50%;
+} */
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px !important;
+  font-weight: bold;
+  color: white !important;
+  /* background: #fff !important; */
+}
+/* .swiper-button-next:hover {
+  transform: scale(1.2) translateX(80%);
+} */
+/* .swiper-button-prev:hover {
+  transform: scale(1.2) translateX(-80%);
+} */
+/* .swiper-button-next {
+  transform: translateX(100%);
+} */
+/* .swiper-button-prev {
+  transform: translateX(-100%);
+} */

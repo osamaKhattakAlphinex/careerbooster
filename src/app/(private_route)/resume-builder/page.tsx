@@ -75,11 +75,7 @@ const ResumeBuilder = () => {
     // reset resume
     dispatch(resetResume(resumeData.state));
 
-    if (
-      resumeData.state.jobPosition !== "" &&
-      session?.user?.email &&
-      percentageCalculated
-    ) {
+    if (resumeData.state.jobPosition !== "" && session?.user?.email) {
       dispatch(setState({ name: "resumeLoading", value: true }));
       dispatch(setId(""));
       getBasicInfo();
@@ -132,7 +128,8 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.files[0].fileName,
+          // fileAddress: userData.files[0].fileName,
+          fileAddress: userData.uploadedResume.fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -174,7 +171,8 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.files[0].fileName,
+          // fileAddress: userData.files[0].fileName,
+          fileAddress: userData.uploadedResume.fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -253,7 +251,8 @@ const ResumeBuilder = () => {
             experience: experience,
             trainBotData: {
               userEmail: userData.email,
-              fileAddress: userData.files[0].fileName,
+              // fileAddress: userData.files[0].fileName,
+              fileAddress: userData.uploadedResume.fileName,
             },
           }),
         });
@@ -354,7 +353,8 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.files[0].fileName,
+          // fileAddress: userData.files[0].fileName,
+          fileAddress: userData.uploadedResume.fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -383,7 +383,8 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.files[0].fileName,
+          // fileAddress: userData.files[0].fileName,
+          fileAddress: userData.uploadedResume.fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -412,7 +413,8 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.files[0].fileName,
+          // fileAddress: userData.files[0].fileName,
+          fileAddress: userData.uploadedResume.fileName,
         },
       }),
     }).then(async (resp: any) => {
@@ -514,7 +516,7 @@ const ResumeBuilder = () => {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-0 lg:ml-[244px] px-[15px] lg:mb-[72px] ">
+        <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px] ">
           <Link
             href="/dashboard"
             className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"

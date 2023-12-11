@@ -3,6 +3,7 @@ import startDB from "@/lib/db";
 import { getServerSession } from "next-auth/next";
 import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
+import { updateTrainedBotEntry } from "@/helpers/updateTrainBotEntry";
 
 export async function PUT(
   req: any,
@@ -29,6 +30,12 @@ export async function PUT(
         },
         { new: true }
       );
+
+      updateTrainedBotEntry({
+        entryId: emailId,
+        type: "tool.email",
+        output: requestBody.emailText,
+      });
 
       return NextResponse.json(
         { success: true, results: updatedUser.emails },

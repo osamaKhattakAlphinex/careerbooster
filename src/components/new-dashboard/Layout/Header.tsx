@@ -5,6 +5,7 @@ import Modal from "@/components/Modal";
 import { bellIcon, sunIcon } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
 import { useSelector } from "react-redux";
+import Notifications from "@/components/Notifications";
 interface HeaderProps {
   children?: ReactNode;
 }
@@ -23,7 +24,13 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     "/profile-review": "Review Your Profile",
     "/email-bot": "Generate Emails Using AI",
     "/consulting-bids-bot": "Generate Bids Using AI",
-    "/subscribe": `welCome, ${userData.firstName + " " + userData.lastName}`,
+    "/subscribe": `Welcome, ${userData.firstName + " " + userData.lastName}`,
+    "/chatAI": `Welcome to our latest Chat Bot`,
+    "/linkedin-generator/headline": "Headline Generator",
+    "/linkedin-generator/about": "About Generator",
+    "/linkedin-generator/job-description": "Job Description Generator",
+    "/linkedin-generator/keywords": "Keyword Generator",
+
     // Add more routes as needed
   };
 
@@ -32,8 +39,8 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
   return (
     <nav
-      className={` py-[14px] px-4 ml-0 sticky top-0 bg-gradient-to-l from-[#340E53] to-[#000533]  z-999      
-      ${pagesArray?.includes(pathname) ? "m-5" : "lg:ml-[244px]"} 
+      className={` py-[14px] px-4 ml-0 sticky top-0 bg-gradient-to-l from-[#340E53] to-[#000533]  z-10     
+      ${pagesArray?.includes(pathname) ? "m-5" : "lg:ml-[234px]"} 
       ${pathname === "/subscribed" && "hidden"} 
       `}
     >
@@ -43,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
         </h1>
         <div className="flex">
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsModalOpen(!isModalOpen)}
             className={`text-white flex justify-center mr-3 items-center bg-zinc-900 border-zinc-800 w-[40px] h-[40px] rounded-full capitalize  ${
               pathname === "/subscribe" ? "hidden" : ""
             } `}

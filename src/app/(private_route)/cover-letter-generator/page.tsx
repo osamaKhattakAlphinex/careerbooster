@@ -14,7 +14,6 @@ import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
-import { makeid } from "@/helpers/makeid";
 import { setCoverLetter } from "@/store/coverLetterSlice";
 
 import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
@@ -64,6 +63,7 @@ export default function CoverLetterPage() {
         exporter.getPdf(true);
       });
   };
+
   useEffect(() => {
     if (isEditing) {
       if (componentRef.current) {
@@ -107,8 +107,6 @@ export default function CoverLetterPage() {
       { headers: { "Content-Type": "application/json" } }
     );
 
-    console.table(updatedCoverLetters.data.results);
-
     const updatedObject = {
       ...userData,
       coverLetters: updatedCoverLetters.data.results,
@@ -149,7 +147,8 @@ export default function CoverLetterPage() {
         jobDescription,
         trainBotData: {
           userEmail: userData.email,
-          fileAddress: userData.defaultResumeFile,
+          // fileAddress: userData.files[0].fileName,
+          fileAddress: userData.uploadedResume.fileName,
         },
       };
 
@@ -171,6 +170,8 @@ export default function CoverLetterPage() {
       } else {
         obj.userData = aiInputUserData;
       }
+      console.log("obj", obj);
+
       // Fetch keywords
       fetch("/api/coverLetterBot/coverLetterGenerator", {
         method: "POST",
@@ -208,20 +209,8 @@ export default function CoverLetterPage() {
             const limitUpdateData = await limitUpdateResponse.json();
 
             if (limitUpdateData.success) {
-              // Generate payload for cover letter
-              const payload = {
-                id: makeid(),
-                jobDescription: jobDescription,
-                coverLetterText: tempText,
-                generatedOnDate: new Date().toISOString(),
-                generatedViaOption: selectedOption,
-                userEmail: session?.user?.email,
-              };
-
-              // Save cover letter to the DB
-              const coverLetterResponse = await axios.post(
-                "/api/coverLetterBot",
-                payload
+              const coverLetterResponse = await axios.get(
+                "/api/coverLetterBot/getAllCoverLetters"
               );
 
               if (coverLetterResponse.data.success) {
@@ -237,7 +226,13 @@ export default function CoverLetterPage() {
                   coverLetters: coverLetterResponse.data.result.coverLetters,
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
-                dispatch(setCoverLetter(payload));
+                dispatch(
+                  setCoverLetter(
+                    coverLetterResponse.data.result.coverLetters[
+                      coverLetterResponse.data.result.coverLetters.length - 1
+                    ]
+                  )
+                );
               }
             }
           } else {
@@ -324,7 +319,7 @@ export default function CoverLetterPage() {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-0 lg:ml-[244px] px-[15px] mb-[72px]">
+        <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]">
           {/* <AiGeneratedCoverLetters /> */}
           <Link
             href="/dashboard"
@@ -333,7 +328,9 @@ export default function CoverLetterPage() {
             {leftArrowIcon}
             Back
           </Link>
+
           <PreviouslyGeneratedList {...historyProps} />
+
           {/* <MainCoverLetterTool /> */}
           <>
             <div className=" bg-[#17151B] rounded-[20px] px-4 lg:px-[30px] py-8 lg:py-[41px] flex flex-col gap-5 ">
@@ -627,7 +624,7 @@ export default function CoverLetterPage() {
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke-width="1.5"
+                            strokeWidth="1.5"
                             stroke="currentColor"
                             className="w-6 h-6 text-[#37B944]"
                           >
@@ -693,7 +690,7 @@ export default function CoverLetterPage() {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke="currentColor"
                           className="w-4 h-4 text-white"
                         >
@@ -732,7 +729,7 @@ export default function CoverLetterPage() {
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
                               viewBox="0 0 24 24"
-                              stroke-width="1.5"
+                              strokeWidth="1.5"
                               stroke="currentColor"
                               className="w-6 h-6 text-yellow-200"
                             >
@@ -766,7 +763,7 @@ export default function CoverLetterPage() {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
-                          stroke-width={1.5}
+                          strokeWidth={1.5}
                           stroke="currentColor"
                           className="w-6 h-6 text-white"
                         >

@@ -7,6 +7,9 @@ import Footer from "@/components/new-dashboard/Layout/Footer";
 import Header from "@/components/new-dashboard/Layout/Header";
 import SideBar from "@/components/new-dashboard/Layout/SideBar";
 import "./dashboard.css";
+import "./plugins.css";
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 interface Props {
   children: ReactNode;
 }
@@ -25,7 +28,7 @@ export default async function Privatelayout({ children }: Props) {
       <ProfileCreationLayer>
         <Header />
         <SideBar />
-        <div className="pb-12">{children}</div>
+        <div className="">{children}</div>
         <Footer />
       </ProfileCreationLayer>
     </div>

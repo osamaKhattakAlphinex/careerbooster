@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+
 import { signOut, useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
@@ -8,11 +9,21 @@ import { useEffect, useState } from "react";
 import ThemeToggler from "../Themetoggler";
 import useTheme from "@/lib/useTheme";
 import Image from "next/image";
+
 // import useTheme from "@/lib/useTheme";
 import { usePathname } from "next/navigation";
 const AllowedRoutes = ["/dashboard", "/resume-builder"];
 const Header = () => {
   // const [theme] = useTheme();
+  const pathname: any = usePathname();
+  // List of routes or folders where you want to exclude the layout
+  const excludedRoutes = ["/new-dashboard", "/resume-builder-2"];
+  // Check if the current route is in the excluded list
+  const excludeLayout = excludedRoutes.some((route) => pathname === route);
+  if (excludeLayout) {
+    // Return only the children without the layout
+    return <></>;
+  }
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
@@ -41,17 +52,17 @@ const Header = () => {
         dispatch(setIsLoading(false));
         dispatch(setField({ name: "isFetched", value: true }));
         // if there is a file in files array of a user then set it as defaultResumeFile
-        if (user?.files && user?.files?.length > 0) {
-          dispatch(
-            setFieldRegister({
-              name: "scrappedContent",
-              value: user?.files[0]?.fileContent,
-            })
-          );
-          // dispatch(
-          //   setField({ name: "defaultResumeFile", value: user?.files[0] })
-          // );
-        }
+        // if (user?.files && user?.files?.length > 0) {
+        dispatch(
+          setFieldRegister({
+            name: "scrappedContent",
+            value: user?.uploadedResume?.fileContent,
+          })
+        );
+        // dispatch(
+        //   setField({ name: "defaultResumeFile", value: user?.files[0] })
+        // );
+        // }
         dispatch(
           setField({ name: "wizardCompleted", value: user.wizardCompleted })
         );
@@ -83,6 +94,11 @@ const Header = () => {
     "/consulting-bids-bot",
     "/subscribe",
     "/subscribed",
+    "/chatAI",
+    "/linkedin-generator/headline",
+    "/linkedin-generator/about",
+    "/linkedin-generator/job-description",
+    "/linkedin-generator/keywords",
   ];
 
   // when page (session) loads, fetch user data if not exists
@@ -94,7 +110,6 @@ const Header = () => {
 
   // if (pathname === "/login" || pathname === "/register") return null;
 
-  const pathname: any = usePathname();
   if (pagesArray?.includes(pathname)) return <></>;
   return (
     <nav

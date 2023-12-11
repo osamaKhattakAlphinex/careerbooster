@@ -4,6 +4,20 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
 
+export async function postConsultingBid(payload: any) {
+  await startDB();
+  const user = await User.findOne({ email: payload.userEmail });
+  if (!user) {
+    return NextResponse.json({ result: "", success: false }, { status: 404 });
+  } else if (!user.consultingBids || user.consultingBids.length === 0) {
+    user.consultingBids = [payload];
+  } else {
+    user.consultingBids.push(payload);
+  }
+  const response = await user.save();
+  return response;
+}
+
 export async function POST(request: any) {
   const session = await getServerSession(authOptions);
 
@@ -12,20 +26,22 @@ export async function POST(request: any) {
       await startDB();
       const payload = await request.json();
 
-      const user = await User.findOne({ email: payload.userEmail });
+      // const user = await User.findOne({ email: payload.userEmail });
 
-      if (!user) {
-        return NextResponse.json(
-          { result: "", success: false },
-          { status: 404 }
-        );
-      } else if (!user.emails || user.consultingBids.length === 0) {
-        user.consultingBids = [payload];
-      } else {
-        user.consultingBids.push(payload);
-      }
+      // if (!user) {
+      //   return NextResponse.json(
+      //     { result: "", success: false },
+      //     { status: 404 }
+      //   );
+      // } else if (!user.emails || user.consultingBids.length === 0) {
+      //   user.consultingBids = [payload];
+      // } else {
+      //   user.consultingBids.push(payload);
+      // }
 
-      const response = await user.save();
+      // const response = await user.save();
+      const response = await postConsultingBid(payload);
+
       return NextResponse.json(
         { result: response, success: true },
         { status: 200 }

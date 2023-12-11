@@ -13,6 +13,7 @@ import Button from "../../utilities/form-elements/Button";
 import LinkedInSummary from "./LinkedInSummary";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Avatar from "@/components/utilities/Avatar";
 
 //Editable
 const loadFromLocalStorage = () => {
@@ -33,6 +34,7 @@ const LinkedInUploadPDFResume = () => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [linkedinContent, setLinkedinContent] = useState<any>("");
   const [linkedinFileName, setLinkedinFileName] = useState<any>("");
+  const [showAvatar, setShowAvatar] = useState<boolean>(false);
 
   // Define a state variable to hold both first name and full name
   const [names, setNames] = useState({
@@ -183,6 +185,9 @@ const LinkedInUploadPDFResume = () => {
             location,
           });
           setButtonDisabled(false);
+          if (firstName && lastName) {
+            setShowAvatar(true);
+          }
           if (email && phone) {
             UpdateGohighlevel({
               userId,
@@ -380,7 +385,7 @@ const LinkedInUploadPDFResume = () => {
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke-width="1.5"
+                            strokeWidth="1.5"
                             stroke="currentColor"
                             className={`w-4 h-4 ${
                               headlineMsgLoading ? "animate-spin" : ""
@@ -578,7 +583,7 @@ const LinkedInUploadPDFResume = () => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               className={`w-4 h-4 ${headlineMsgLoading ? "animate-spin" : ""}`}
             >
@@ -598,23 +603,28 @@ const LinkedInUploadPDFResume = () => {
           />
         </div>
       )}
-      <div className="w-11/12 h-80 flex flex-col justify-center lg:items-center rounded-2xl mt-14 bg-gradient-to-r to-fuchsia-600 from-indigo-600  border-gray-800">
-        <div className=" lg:w-6/12  flex items-center flex-col">
-          <h3 className="lg:text-[36px] text-[20] text-normal  lg:leading-normal text-white text-center lg:font-bold ">
-            Yes, I Want to Explore More Career Boosting Tools!
-          </h3>
-          <button
-            className={`mx-1 mt-8 p-3  my-2 bg-yellow-400 hover:bg-yellow-600  lg:w-8/12 lg:h-14 lg:mt-8 text-center rounded-full font-bold lg:text-[20px] text-[16px] text-black lg:py-3 lg:px-9 no-underline  ${
-              buttonDisabled ? "bg-yellow-600" : "cursor-pointer"
-            } `}
-            onClick={moveToRegister}
-            disabled={buttonDisabled}
-          >
-            Click here to experience the magic
-          </button>
-          {fileError && <div className="error-message">{fileError}</div>}
+      {aboutComplete && (
+        <div className="w-11/12 h-80 flex flex-col justify-center lg:items-center rounded-2xl mt-14 bg-gradient-to-r to-fuchsia-600 from-indigo-600  border-gray-800">
+          <div className=" lg:w-6/12  flex items-center flex-col">
+            <h3 className="lg:text-[36px] text-[20] text-normal  lg:leading-normal text-white text-center lg:font-bold ">
+              Yes, I Want to Explore More Career Boosting Tools!
+            </h3>
+            <button
+              className={`mx-1 mt-8 p-3  my-2 bg-yellow-400 hover:bg-yellow-600  lg:w-8/12 lg:h-14 lg:mt-8 text-center rounded-full font-bold lg:text-[20px] text-[16px] text-black lg:py-3 lg:px-9 no-underline  ${
+                buttonDisabled ? "bg-yellow-600" : "cursor-pointer"
+              } `}
+              onClick={moveToRegister}
+              disabled={buttonDisabled}
+            >
+              Click here to experience the magic
+            </button>
+            {fileError && <div className="error-message">{fileError}</div>}
+          </div>
         </div>
-      </div>
+      )}
+      {showAvatar && (
+        <Avatar firstName={names.firstName} lastName={names.lastName} />
+      )}
     </>
   );
 };

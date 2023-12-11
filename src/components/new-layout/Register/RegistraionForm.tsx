@@ -89,14 +89,22 @@ const RegistrationForm = () => {
           lastName: values.lastName,
           email: values.email,
           password: values.password,
-          files: [
-            {
-              id: makeid(),
-              fileName: fileName, //fileName,
-              fileContent: text,
-              uploadedDateTime: new Date(),
-            },
-          ],
+          // files: [
+          //   {
+          //     id: makeid(),
+          //     fileName: fileName, //fileName,
+          //     fileContent: text,
+          //     uploadedDateTime: new Date(),
+          //   },
+          // ],
+
+          uploadedResume: {
+            id: makeid(),
+            fileName: fileName,
+            fileContent: text,
+            uploadedDateTime: new Date(),
+          },
+
           status: true,
           alertConsent: values.alertConsent,
         };
@@ -308,6 +316,7 @@ const RegistrationForm = () => {
     if (file && file.type === "application/pdf") {
       //  file exists and is PDF
       setFileError("");
+
       // upload it to server
       //uploadFileToServer();
       // getContentFromResume(file);
@@ -394,7 +403,7 @@ const RegistrationForm = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     className="w-4 h-4"
                   >
@@ -434,7 +443,7 @@ const RegistrationForm = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     className="w-4 h-4"
                   >
@@ -474,7 +483,7 @@ const RegistrationForm = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     className="w-4 h-4"
                   >
@@ -515,7 +524,7 @@ const RegistrationForm = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     className="w-4 h-4"
                   >
@@ -555,7 +564,7 @@ const RegistrationForm = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     className="w-4 h-4"
                   >
