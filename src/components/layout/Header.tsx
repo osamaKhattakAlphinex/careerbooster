@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+
 import { signOut, useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
@@ -15,9 +15,9 @@ import { usePathname } from "next/navigation";
 const AllowedRoutes = ["/dashboard", "/resume-builder"];
 const Header = () => {
   // const [theme] = useTheme();
-  const pathname = usePathname();
+  const pathname: any = usePathname();
   // List of routes or folders where you want to exclude the layout
-  const excludedRoutes = ["/new-dashboard","/resume-builder-2"];
+  const excludedRoutes = ["/new-dashboard", "/resume-builder-2"];
   // Check if the current route is in the excluded list
   const excludeLayout = excludedRoutes.some((route) => pathname === route);
   if (excludeLayout) {
@@ -99,7 +99,6 @@ const Header = () => {
     "/linkedin-generator/about",
     "/linkedin-generator/job-description",
     "/linkedin-generator/keywords",
-
   ];
 
   // when page (session) loads, fetch user data if not exists
@@ -111,7 +110,6 @@ const Header = () => {
 
   // if (pathname === "/login" || pathname === "/register") return null;
 
-  const pathname: any = usePathname();
   if (pagesArray?.includes(pathname)) return <></>;
   return (
     <nav
