@@ -5,7 +5,7 @@ import { UserPackageData } from "@/db/schemas/UserPackage";
 import { setField, setUserData } from "@/store/userDataSlice";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Stripe from "stripe";
 import { useRouter } from "next/navigation";
@@ -26,6 +26,8 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
   const [subscribing, setSubscribing] = useState(false);
   const [coupon, setCoupon] = useState("");
   const [couponError, setCouponError] = useState("");
+  const [data, setData] = useState<any>();
+  const [msgLoading, setMsgLoading] = useState<boolean>(false);
   const router = useRouter();
 
   // Redux
@@ -166,122 +168,147 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
     return null;
   };
 
+  useEffect(() => {
+    setMsgLoading(true);
+    fetch(`/api/packages/package-status?email=${userData?.email}`)
+      .then(async (response) => {
+        const data = await response.json();
+        console.log("data", data);
+        if (data.success) {
+          setData(data.result);
+          setMsgLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.log("Error occurred", err);
+        setMsgLoading(false);
+      });
+  }, []);
+
   return (
-    <div
-      className="col-md-6 col-lg-4 "
-      data-aos="fade-up-sm"
-      data-aos-delay="50"
-    >
-      <div className=" p-6 pricing-card px-lg-8 py-lg-8 rounded-4 h-full bg-">
-        <h1 className="display-3 fw-semibold theme-text mb-0 mt-4 !text-4xl">
-          {userPackage.title}
-        </h1>
-        <div className="price flex align-center">
-          <h3 className="theme-text-2 fw-medium mb-0">${userPackage.amount}</h3>
-          <span className="text-2xl theme-text-2">
-            {userPackage.type === "monthly" && "  / Month"}
-            {userPackage.type === "yearly" && "  / Year"}
-          </span>
-        </div>
+    !msgLoading && (
+      <div
+        className={`col-md-6 col-lg-4 ${
+          userPackage.amount === 0 && data ? "hidden" : ""
+        } `}
+        data-aos="fade-up-sm"
+        data-aos-delay="50"
+      >
+        <div
+          className={`p-6 pricing-card px-lg-8 py-lg-8 rounded-4 h-full bg- `}
+        >
+          <h1 className="display-3 fw-semibold theme-text mb-0 mt-4 !text-4xl">
+            {userPackage.title}
+          </h1>
+          <div className="price flex align-center">
+            <h3 className="theme-text-2 fw-medium mb-0">
+              ${userPackage.amount}
+            </h3>
+            <span className="text-2xl theme-text-2">
+              {userPackage.type === "monthly" && "  / Month"}
+              {userPackage.type === "yearly" && "  / Year"}
+            </span>
+          </div>
 
-        {/* Apply coupon  */}
-        {!viewOnly && (
-          <>
-            <div className="mt-4">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Apply coupon"
-                value={coupon}
-                onChange={(e) => setCoupon(e.target.value)}
-              />
-            </div>
-            {/* invalid coupon error */}
-            {couponError && couponError !== "" && (
-              <p className="text-red-500 text-sm mt-1">{couponError}</p>
-            )}
+          {/* Apply coupon  */}
+          {!viewOnly && (
+            <>
+              <div className="mt-4 ">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Apply coupon"
+                  value={coupon}
+                  onChange={(e) => setCoupon(e.target.value)}
+                />
+              </div>
+              {/* invalid coupon error */}
+              {couponError && couponError !== "" && (
+                <p className="text-red-500 text-sm mt-1">{couponError}</p>
+              )}
 
-            {/* <button
-              onClick={handleClick}
-              disabled={subscribing}
-              className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9"
-            >
-              {subscribing
-                ? "Please wait..."
-                : userPackage.amount === 0
-                ? "Select  Plan"
-                : "Select  Plan"}
-            </button> */}
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault(); // Prevent default anchor behavior
-                handleClick(); // Call handleAnchorClick function
-              }}
-              className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9"
-            >
-              {subscribing
-                ? "Please wait..."
-                : userPackage.amount === 0
-                ? "Select Plan"
-                : "Select Plan"}
-            </a>
-          </>
-        )}
+              {/* <button
+                onClick={handleClick}
+                disabled={subscribing}
+                className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9"
+              >
+                {subscribing
+                  ? "Please wait..."
+                  : userPackage.amount === 0
+                  ? "Select  Plan"
+                  : "Select  Plan"}
+              </button> */}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent default anchor behavior
+                  handleClick(); // Call handleAnchorClick function
+                }}
+                className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9"
+              >
+                {subscribing
+                  ? "Please wait..."
+                  : userPackage.amount === 0
+                  ? "Select Plan"
+                  : "Select Plan"}
+              </a>
+            </>
+          )}
 
-        <ul className="d-flex flex-column gap-5 text-sm pl-0 mt-9 mb-0">
-          {userPackage.features.map((feature: string, i: number) => (
-            <li key={i} className="flex gap-1 items-center">
-              {feature}{" "}
-              <span className="cursor-pointer text-gray-600 relative group">
-                {infoSmallIcon}
-                <div
-                  role="tooltip"
-                  className="hidden absolute bg-gray-600 text-gray-100 p-2 rounded-md text-xs -top-9 left-16 transform -translate-x-1/2 w-32 group-hover:block"
-                >
-                  {userPackage.featuresToolTips[i]}
-                  <div className="tooltip-arrow" data-popper-arrow></div>
-                </div>
-              </span>
+          <ul className="d-flex flex-column gap-5 text-sm pl-0 mt-9 mb-0">
+            {userPackage.features.map((feature: string, i: number) => (
+              <li key={i} className="flex gap-1 items-center">
+                {feature}{" "}
+                <span className="cursor-pointer text-gray-600 relative group">
+                  {infoSmallIcon}
+                  <div
+                    role="tooltip"
+                    className="hidden absolute bg-gray-600 text-gray-100 p-2 rounded-md text-xs -top-9 left-16 transform -translate-x-1/2 w-32 group-hover:block"
+                  >
+                    {userPackage.featuresToolTips[i]}
+                    <div className="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+                </span>
+              </li>
+            ))}
+          </ul>
+          {/* <ul className="pricing-list d-flex flex-column gap-3 fs-lg mt-9 mb-0">
+            <hr />
+            <li className="theme-text">
+              <strong>Limitation</strong>
             </li>
-          ))}
-        </ul>
-        {/* <ul className="pricing-list d-flex flex-column gap-3 fs-lg mt-9 mb-0">
-          <hr />
-          <li className="theme-text">
-            <strong>Limitation</strong>
-          </li>
-          <li>Generate {userPackage?.limit?.resumes_generation} resumes</li>
-          {userPackage?.limit?.can_edit_resume && <li>Edit Resume</li>}
-          <li>
-            Generate {userPackage?.limit?.consulting_bids_generation} consulting
-            bids
-          </li>
-          <li>
-            Generate {userPackage?.limit?.cover_letter_generation} Cover Letter
-          </li>
-          <li>Generate {userPackage?.limit?.email_generation} Emails</li>
-          <li>
-            write {userPackage?.limit?.headline_generation} Headlines for
-            LinkedIn
-          </li>
-          <li>
-            write {userPackage?.limit?.job_desc_generation} Job Description for
-            LinkedIn
-          </li>
-          <li>
-            write {userPackage?.limit?.about_generation} About Description for
-            LinkedIn
-          </li>
-          <li>
-            write {userPackage?.limit?.keywords_generation} Keywords for
-            LinkedIn
-          </li>
-          <li>Upload {userPackage?.limit?.pdf_files_upload} Files / Resumes</li>
-          <li>Review {userPackage?.limit?.review_resume} Resumes by AI</li>
-        </ul> */}
+            <li>Generate {userPackage?.limit?.resumes_generation} resumes</li>
+            {userPackage?.limit?.can_edit_resume && <li>Edit Resume</li>}
+            <li>
+              Generate {userPackage?.limit?.consulting_bids_generation} consulting
+              bids
+            </li>
+            <li>
+              Generate {userPackage?.limit?.cover_letter_generation} Cover Letter
+            </li>
+            <li>Generate {userPackage?.limit?.email_generation} Emails</li>
+            <li>
+              write {userPackage?.limit?.headline_generation} Headlines for
+              LinkedIn
+            </li>
+            <li>
+              write {userPackage?.limit?.job_desc_generation} Job Description for
+              LinkedIn
+            </li>
+            <li>
+              write {userPackage?.limit?.about_generation} About Description for
+              LinkedIn
+            </li>
+            <li>
+              write {userPackage?.limit?.keywords_generation} Keywords for
+              LinkedIn
+            </li>
+            <li>Upload {userPackage?.limit?.pdf_files_upload} Files / Resumes</li>
+            <li>Review {userPackage?.limit?.review_resume} Resumes by AI</li>
+          </ul> */}
+        </div>
       </div>
-    </div>
+    )
   );
 
   // render a simple card
