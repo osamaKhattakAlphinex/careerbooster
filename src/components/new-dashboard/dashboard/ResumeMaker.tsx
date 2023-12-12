@@ -8,6 +8,9 @@ import review from "@/../public/icon/review.png";
 import bigs from "@/../public/icon/bigs.png";
 import letter from "@/../public/icon/letter.png";
 import { useState } from "react";
+import bagsIcon from "@/../public/icon/bagsIcon.svg";
+import scanIcon from "@/../public/icon/scanIcon.svg";
+
 const cardDetail = [
   {
     title: "Resume Builder",
@@ -78,6 +81,26 @@ const cardDetail = [
     icon: chatbot,
     bgColor1: "from-teal-600",
     bgColor2: "to-green-400",
+    action: "coming soon",
+  },
+  {
+    title: "AI Job Finder",
+    description:
+      "Our AI tool scans the entire web to discover the most relevant and recent opportunities matching your background, saving you from searching multiple job boards.",
+    link: "/",
+    icon: bagsIcon,
+    bgColor1: "from-[#ff0070]",
+    bgColor2: "to-[#fd73ff]",
+    action: "coming soon",
+  },
+  {
+    title: "ATS Scan Your Resume",
+    description:
+      "Avoid the pitfalls of Applicant Tracking Systems (ATS) with our ATS scanning feature. Ensure your resume is ATS-friendly, increasing your chances of making it to the recruiter's desk.",
+    link: "/",
+    icon: scanIcon,
+    bgColor1: "from-[#008a04]",
+    bgColor2: "to-[#57c84c]",
     action: "coming soon",
   },
 ];
