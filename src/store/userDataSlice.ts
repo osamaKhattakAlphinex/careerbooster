@@ -59,6 +59,7 @@ interface UserDataSlice {
   experience?: WorkExperience[];
   files?: string[];
   uploadedResume: { fileName: string; fileContent: string } | {};
+  chatThreads?: { assistant_id: string; threads: string[] } | {};
   skills?: string[];
   defaultResumeFile: string;
   wizardCompleted: boolean;
@@ -88,6 +89,7 @@ const initialState: UserDataSlice = {
   experience: [],
   files: [],
   uploadedResume: {},
+  chatThreads: {},
   skills: [],
   defaultResumeFile: "",
   wizardCompleted: false,

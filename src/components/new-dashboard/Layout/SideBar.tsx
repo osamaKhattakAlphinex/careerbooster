@@ -135,7 +135,7 @@ const SideBar = () => {
             </div>
           </div>
           <div className="flex flex-col">
-            <ul className="pb-3 pt-[8px] pl-0">
+            <ul className="pb-3 pt-[8px] pl-0 mb-0">
               {items?.map((item, index) => (
                 <li
                   key={index}
@@ -205,7 +205,7 @@ const SideBar = () => {
                 </li>
               ))}
             </ul>
-            <div className="w-[160px] md:w-[170px] h-[170px] mt-9 md:mt-3 mx-7 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
+            <div className="w-[160px] md:w-[170px] h-[170px] mt-3  mx-7 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
               <p className="text-white px-4 mb-4 text-[15px] text-center font-semibold">
                 Upgrade to Pro version to get hired faster
               </p>

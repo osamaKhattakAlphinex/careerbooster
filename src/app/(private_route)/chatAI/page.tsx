@@ -11,6 +11,7 @@ import Image from "next/image";
 const ChatAI = () => {
   const [userData, setUserData] = useState<any>({});
   const [chat, setChat] = useState<any>([]);
+  const [input, setInput] = useState<string>("");
   const messagesContainer: any = useRef(null);
   // const {stop } = useCompletion({
   //   api: "/api/chatCompletion",
@@ -26,16 +27,16 @@ const ChatAI = () => {
       body: JSON.stringify(obj),
     });
   };
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "/api/chatWithFile",
-    initialMessages: [
-      {
-        id: makeid(),
-        role: "user",
-        content: JSON.stringify(userData).substring(0, 10000),
-      },
-    ],
-  });
+  // const { messages, input, handleInputChange, handleSubmit } = useChat({
+  //   api: "/api/chatWithFile",
+  //   initialMessages: [
+  //     {
+  //       id: makeid(),
+  //       role: "user",
+  //       content: JSON.stringify(userData).substring(0, 10000),
+  //     },
+  //   ],
+  // });
 
   const { data: session, status } = useSession();
 
@@ -55,9 +56,53 @@ const ChatAI = () => {
       // files: data.files[0],
     });
   };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setInput("");
+    setChat((prev: any) => [
+      ...prev,
+      {
+        id: makeid(),
+        role: "user",
+        content: input,
+      },
+    ]);
+    const obj: any = {
+      email: userData.email,
+      message: input,
+    };
+    console.log(obj);
+    await fetch("/api/chatCompletion", {
+      method: "POST",
+      body: JSON.stringify(obj),
+    }).then(async (res) => {
+      const response = await res.json();
+      console.log(response);
+      setChat((prev: any) => [...prev, response.result]);
+    });
+  };
+  const getPreviosChat = async () => {
+    const obj: any = {
+      email: userData.email,
+    };
+    console.log(obj);
+    await fetch("/api/chatCompletion", {
+      method: "POST",
+      body: JSON.stringify(obj),
+    }).then(async (res) => {
+      const response = await res.json();
+      console.log(response);
+      setChat(response.result);
+    });
+  };
+
   useEffect(() => {
     getDataForChat();
   }, []);
+  useEffect(() => {
+    // getPreviosChat();
+  }, [userData]);
   const scrollToBottom = () => {
     if (messagesContainer.current) {
       messagesContainer.current.scrollTop =
@@ -67,10 +112,11 @@ const ChatAI = () => {
 
   useEffect(() => {
     scrollToBottom();
-    if (messages.length > 1) {
-      setChat([...messages]);
-    }
-  }, [messages]);
+    // if (messages.length > 1) {
+    //   setChat([...messages]);
+    // }
+  }, [chat]);
+
   return (
     <>
       <div className="w-full sm:w-full z-1000 mb-[10px]">
@@ -88,7 +134,7 @@ const ChatAI = () => {
               className="flex h-20  flex-col py-3 gap-8 w-9/12  flex-1 overflow-y-scroll no-scrollbar "
             >
               {/* {m.role === "user" ? "User: " : "AI Resume Bot: "} */}
-              {messages.slice(1).map((m) => (
+              {chat?.map((m: any) => (
                 <div className="flex flex-row items-start gap-2" key={m.id}>
                   {m.role === "user" ? (
                     <div className="flex flex-row items-start gap-2 max-w-full">
@@ -134,12 +180,15 @@ const ChatAI = () => {
               <input
                 className="w-full rounded-md p-2 text-black"
                 value={input}
-                onChange={handleInputChange}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setInput(e.target.value);
+                }}
                 placeholder="Say something..."
               />
-              <button type="button" onClick={handleStop}>
+              {/* <button type="button" onClick={handleStop}>
                 Stop
-              </button>
+              </button> */}
               <button
                 className="border-solid bg-[#18181B] border-2 border-white text-white p-2 rounded-md"
                 type="submit"
