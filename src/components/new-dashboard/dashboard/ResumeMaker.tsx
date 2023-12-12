@@ -15,7 +15,7 @@ const cardDetail = [
   {
     title: "Resume Builder",
     description:
-      "he passage is attributed to an unknown typesetter in the 15th century who is thought to have.",
+      "Create multiple AI-Powered resumes tailored for your targeted job positions.",
     link: "/resume-builder",
     icon: book,
     bgColor1: "from-violet-800",
@@ -25,7 +25,7 @@ const cardDetail = [
   {
     title: "Generator Cover Letters",
     description:
-      "From its medieval origins to the digital era, learn everything",
+      "Tailor cover letters for each application, skyrocketing your interview chances.",
     link: "/cover-letter-generator",
     icon: letter,
     bgColor1: "from-yellow-600",
@@ -35,7 +35,7 @@ const cardDetail = [
   {
     title: "Keyword Optimize Your LinkedIn",
     description:
-      "The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.)",
+      "Boost LinkedIn visibility by optimizing your linkedin for recruiters.",
     link: "/linkedin-generator",
     icon: profile,
     bgColor1: "from-cyan-400",
@@ -45,7 +45,7 @@ const cardDetail = [
   {
     title: "Personalized Email Generator",
     description:
-      "From its medieval origins to the digital era, learn everything",
+      "Boost chances with AI-crafted emails and follow-ups for a standout impression.",
     link: "/email-bot",
     icon: email,
     bgColor1: "from-pink-600",
@@ -55,8 +55,7 @@ const cardDetail = [
 
   {
     title: "Consulting Bids Generator",
-    description:
-      "From its medieval origins to the digital era, learn everything",
+    description: "Generate bids in seconds to secure your next consulting gig.",
     link: "/consulting-bids-bot",
     icon: bigs,
     bgColor1: "from-red-600",
@@ -66,7 +65,7 @@ const cardDetail = [
   {
     title: "Review Resume by AI",
     description:
-      "From its medieval origins to the digital era, learn everything",
+      "AI analyzes your resume, offering valuable suggestions for impactful improvements.",
     link: "/",
     icon: review,
     bgColor1: "from-cyan-600",
@@ -76,7 +75,7 @@ const cardDetail = [
   {
     title: "Career Coach",
     description:
-      "From its medieval origins to the digital era, learn everything.",
+      "Empower your career with AI-driven insights by our career coach for strategic moves.",
     link: "/",
     icon: chatbot,
     bgColor1: "from-teal-600",
@@ -85,8 +84,7 @@ const cardDetail = [
   },
   {
     title: "AI Job Finder",
-    description:
-      "Our AI tool scans the entire web to discover the most relevant and recent opportunities matching your background, saving you from searching multiple job boards.",
+    description: `Our AI finds fitting job matches across the web, saving you from multiple board searches.`,
     link: "/",
     icon: bagsIcon,
     bgColor1: "from-[#ff0070]",
@@ -96,7 +94,7 @@ const cardDetail = [
   {
     title: "ATS Scan Your Resume",
     description:
-      "Avoid the pitfalls of Applicant Tracking Systems (ATS) with our ATS scanning feature. Ensure your resume is ATS-friendly, increasing your chances of making it to the recruiter's desk.",
+      "Maximize your resume's ATS compatibility to reach recruiters hassle-free.",
     link: "/",
     icon: scanIcon,
     bgColor1: "from-[#008a04]",
@@ -109,7 +107,7 @@ const cardDetail = [
 const ResumeMaker = () => {
   const [activeTab, setActiveTab] = useState("Career Coach");
   return (
-    <div className="lg:px-[20px] px-[12px] pt-2 lg:mt-6">
+    <div className="lg:px-[20px] pt-2 px-[12px] lg:mt-2">
       <div className="flex lg:flex-row flex-col gap-1 flex-wrap ">
         {cardDetail.map((item, index) => (
           <ToolsCard

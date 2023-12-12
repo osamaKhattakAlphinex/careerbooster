@@ -8,8 +8,8 @@ import Header from "@/components/new-dashboard/Layout/Header";
 import SideBar from "@/components/new-dashboard/Layout/SideBar";
 import "./dashboard.css";
 import "./plugins.css";
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 interface Props {
   children: ReactNode;
 }
