@@ -137,9 +137,9 @@ const ChatAI = () => {
                 onChange={handleInputChange}
                 placeholder="Say something..."
               />
-              {/* <button type="button" onClick={handleStop}>
+              <button type="button" onClick={handleStop}>
                 Stop
-              </button> */}
+              </button>
               <button
                 className="border-solid bg-[#18181B] border-2 border-white text-white p-2 rounded-md"
                 type="submit"

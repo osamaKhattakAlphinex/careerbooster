@@ -39,16 +39,16 @@ const HeroArea = () => {
                 <div className="image-with-shape">
                   <Image
                     width={811}
-                    height={621}
+                    height={341}
                     src="/assets/images/shapes/blurry-shape-1.svg"
                     alt=""
                     className="shape animate-scale"
                   />
-                  <div className="mt-12 rounded-5 border border-primary-dark shadow-lg overflow-hidden position-relative z-1">
+                  <div className="mt-12 p-4 rounded-5 border border-primary-dark shadow-lg overflow-hidden position-relative z-1">
                     <Image
                       width={810}
                       height={793}
-                      className="img-fluid d-inline-block"
+                      className="img-fluid d-inline-block rounded-md"
                       src="/assets/images/screens/dashboard.png"
                       alt=""
                     />
