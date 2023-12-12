@@ -30,8 +30,21 @@ const ToolsCard = ({
             className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-[60px] h-[60px] `}
           >
             <Image
-              width={title !== "Resume Builder" ? 55 : 35}
-              height={title !== "Resume Builder" ? 55 : 35}
+              width={
+                title !== "Resume Builder" &&
+                title !== "AI Job Finder" &&
+                title !== "ATS Scan Your Resume"
+                  ? 55
+                  : 35
+              }
+              height={
+                title !== "Resume Builder" &&
+                title !== "AI Job Finder" &&
+                title !== "ATS Scan Your Resume"
+                  ? 55
+                  : 35
+              }
+              className="text-white"
               src={icon}
               alt="Not Found"
             />
@@ -39,7 +52,7 @@ const ToolsCard = ({
         </div>
         <div className="">
           <h2 className="text-[16px] text-white font-semibold">{title}</h2>
-          <p className="text-[#959595] mt-[6px] font-normal text-[14px]">
+          <p className="text-[#959595] mt-[6px] font-normal text-[14px] pr-2">
             {description}
           </p>
           <Link

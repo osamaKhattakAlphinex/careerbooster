@@ -29,24 +29,18 @@ export async function POST(req: Request) {
     content: "Hi",
   });
   console.log(message);
-  const run = await openai.beta.threads.runs.create(thread.id, {
+  let run = await openai.beta.threads.runs.create(thread.id, {
     assistant_id: assistant.id,
     instructions: "Please address the user.",
   });
-  const runFor = await openai.beta.threads.runs.submitToolOutputs(
-    thread.id,
-    run.id,
-    {
-      tool_outputs: [
-        {
-          tool_call_id: "call_abc123",
-          output: "28C",
-        },
-      ],
-    }
-  );
+
+  while (run.status === "queued" || run.status == "in_progress") {
+    run = await openai.beta.threads.runs.retrieve(thread.id, run.id);
+  }
+  console.log(run);
   const messages = await openai.beta.threads.messages.list(thread.id);
   console.log(messages.data);
+
   return NextResponse.json(
     { result: "Chat Saved", success: true },
     { status: 200 }
