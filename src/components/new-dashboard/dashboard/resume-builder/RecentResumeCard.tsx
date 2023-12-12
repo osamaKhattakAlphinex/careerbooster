@@ -19,7 +19,7 @@ const RecentResumeCard = ({
 
   return (
     <>
-      <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-4 md:px-[24px] pt-[35px] pb-[20px]  ">
+      <div className="text-white bg-[#18181B] rounded-[20px]  mb-7 px-4 md:px-[24px] pt-[35px] pb-[25px] ">
         <div className="flex justify-between items-center  ">
           <h1 className="uppercase font-semibold text-[16px] md:text-sm">
             Your Resumes
