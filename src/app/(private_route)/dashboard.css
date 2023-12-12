@@ -93,8 +93,8 @@
 }
 
 .swiper {
-  width: 100%;
-  height: 14rem;
+  /* width: 100%; */
+  /* height: 14rem; */
 }
 .swiper {
   /* margin: 0 auto; */
@@ -122,24 +122,27 @@
 } */
 .swiper-button-next,
 .swiper-button-prev {
-  width: 30px !important;
-  height: 30px !important;
+  width: 24px !important;
+  height: 24px !important;
+  top: 104px !important;
 
-  margin-left: -5px;
-  margin-right: -20px;
+  margin-left: -10px;
+  margin-right: -10px;
+  border-radius: 50px;
+  background: white;
 }
 /* .swiper-button-prev {
-
   border-radius: 2px;
   border-radius: 50%;
 } */
 
 .swiper-button-next::after,
 .swiper-button-prev::after {
-  font-size: 16px !important;
+  font-size: 12px !important;
   font-weight: bold;
-  color: white !important;
-  /* background: #fff !important; */
+  color: black !important;
+  /* background: #fff !important;
+  border-radius: 5px; */
 }
 /* .swiper-button-next:hover {
   transform: scale(1.2) translateX(80%);
