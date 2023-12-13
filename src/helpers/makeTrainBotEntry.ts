@@ -16,6 +16,7 @@ export type TrainBotEntryType = {
   userEmail: String;
   fileAddress: String;
   Instructions: String;
+  createdAt?: any;
 };
 
 export const makeTrainedBotEntry = async (entry: TrainBotEntryType) => {

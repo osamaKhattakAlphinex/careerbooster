@@ -1,6 +1,6 @@
 "use client";
 
-import { leftArrowIcon } from "@/helpers/iconsProvider";
+import { leftArrowIcon, deleteIcon } from "@/helpers/iconsProvider";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import AddCoupon from "./AddCoupon";
@@ -11,6 +11,8 @@ import ReadCoupon from "./ReadCoupon";
 import axios from "axios";
 import UpdateCoupon from "./UpdateCoupon";
 import ConfirmationModal from "@/components/utilities/form-elements/ConfirmationModal";
+import { createColumnHelper } from "@tanstack/react-table";
+import DataTable, { TableAction } from "@/components/DataTable";
 
 type Coupon = {
   id: string;
@@ -39,6 +41,68 @@ const ViewCoupons = ({}) => {
     }
   };
 
+  const columnHelper = createColumnHelper<Coupon>();
+
+  const columns = [
+    columnHelper.accessor("id", {
+      header: () => "coupon code / id",
+      cell: (info) => info.renderValue(),
+      // footer: (info) => info.column.id,
+    }),
+    columnHelper.accessor("name", {
+      header: () => "name",
+      cell: (info) => info.renderValue(),
+      // footer: (info) => info.column.id,
+    }),
+    columnHelper.accessor("amount_off", {
+      header: () => "Disc Amount",
+      cell: (info: any) => info.renderValue() / 100,
+      // footer: (info) => info.column.id,
+    }),
+    columnHelper.accessor("percent_off", {
+      header: () => "Disc Percentage",
+      cell: (info) => info.renderValue(),
+      // footer: (info) => info.column.id,
+    }),
+    columnHelper.accessor("duration", {
+      header: () => "duration",
+      cell: (info) => info.renderValue(),
+      // footer: (info) => info.column.id,
+    }),
+    columnHelper.accessor("valid", {
+      header: () => "is Valid",
+      cell: (info) => (info.renderValue() ? "Yes" : "No"),
+      // footer: (info) => info.column.id,
+    }),
+    columnHelper.accessor("created", {
+      header: () => "Created On",
+      cell: (info: any) => toDateAndTime(info.renderValue()),
+      // footer: (info) => info.column.id,
+    }),
+
+    columnHelper.accessor("redeem_by", {
+      header: () => "expires on",
+      cell: (info: any) => toDateAndTime(info.renderValue()),
+      // footer: (info) => info.column.id,
+    }),
+    columnHelper.accessor("times_redeemed", {
+      header: () => "Times Redeemed ",
+      cell: (info) => info.renderValue(),
+      // footer: (info) => info.column.id,
+    }),
+  ];
+
+  const actions: TableAction[] = [
+    {
+      name: "delete",
+      type: "handler",
+      element: (coupon: any) => handleDelete(coupon.id),
+      styles:
+        "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-rose-700 rounded-lg hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800 no-underline",
+      icon: deleteIcon,
+    },
+  ];
+
   const toDateAndTime = (timestamp: number) => {
     const date = new Date(timestamp * 1000);
     const formattedDate = date.toLocaleString();
@@ -55,6 +119,8 @@ const ViewCoupons = ({}) => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      getCoupons();
     }
   };
 
@@ -97,7 +163,25 @@ const ViewCoupons = ({}) => {
               <AddCoupon getCoupons={getCoupons} />
             </div>
             {/* Table */}
-            <div className="">
+
+            <DataTable
+              loading={false}
+              columns={columns}
+              data={coupons}
+              actions={actions}
+              source="coupons"
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default ViewCoupons;
+
+{
+  /* <div className="">
               <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="pt-10 border-collapse w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead className="text-[16px] text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -209,12 +293,5 @@ const ViewCoupons = ({}) => {
                   </tbody>
                 </table>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-export default ViewCoupons;
+            </div> */
+}

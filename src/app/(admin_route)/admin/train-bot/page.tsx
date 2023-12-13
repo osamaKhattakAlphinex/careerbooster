@@ -1,9 +1,17 @@
 "use client";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import {
+  deleteIcon,
+  documentTextIcon,
   downloadIcon,
+  eyeIcon,
   leftArrowIcon,
+  powerIcon,
   refreshIconRotating,
+  rocketLaunch,
+  settingIcon,
+  shockIcon,
+  statusIcon,
 } from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";
@@ -11,11 +19,28 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FineTuningSettingModel from "@/components/admin/fineTuning/fineTuningSettingModels";
+import { TrainBotEntryType } from "@/helpers/makeTrainBotEntry";
+import { createColumnHelper } from "@tanstack/react-table";
+import DataTable, {
+  BulkDataOperation,
+  TableAction,
+} from "@/components/DataTable";
 
 const activeCSS =
   "inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500";
 const inactiveCSS =
   "inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300";
+
+const Review = ({ rec }: any) => {
+  return (
+    <Link
+      href={`/admin/train-bot/${rec._id}`}
+      className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
+    >
+      {eyeIcon}
+    </Link>
+  );
+};
 
 const TrainRegistrationBotAdminPage = () => {
   const router = useRouter();
@@ -65,6 +90,117 @@ const TrainRegistrationBotAdminPage = () => {
         setLoading(false);
       });
     // }
+  };
+
+  const columnHelper = createColumnHelper<TrainBotEntryType>();
+
+  const columns = [
+    columnHelper.accessor("userEmail", {
+      header: () => "Email",
+      cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("status", {
+      header: () => "Status",
+      cell: (info) => {
+        let status = info.renderValue();
+
+        if (status === "pending") {
+          return (
+            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+              Pending
+            </span>
+          );
+        } else if (status === "reviewed") {
+          return (
+            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+              Reviewed
+            </span>
+          );
+        } else if (status === "trained") {
+          return (
+            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+              Trained
+            </span>
+          );
+        }
+      },
+    }),
+    columnHelper.accessor("createdAt", {
+      header: () => "Created At",
+      cell: (info) => getFormattedDate(info.renderValue()),
+    }),
+    columnHelper.accessor("type", {
+      header: () => "Type",
+      cell: (info) => info.renderValue()?.replaceAll(".", " -> "),
+    }),
+  ];
+
+  const actions: TableAction[] = [
+    {
+      name: "review",
+      type: "component",
+      element: (rec: any) => <Review rec={rec} />,
+      styles: "",
+      icon: "",
+    },
+
+    {
+      name: "",
+      type: "handler",
+      element: (rec: any) => handleDelete(rec),
+      styles:
+        "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-rose-700 rounded-lg hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800 no-underline",
+      icon: deleteIcon,
+    },
+  ];
+  // this is for tab 1 (pending) and 3 (trained)
+  const bulkDataOperations: BulkDataOperation = {
+    operations: [
+      {
+        name: "Delete All",
+        type: "handler",
+        element: () => handleDeleteAll(),
+        styles:
+          "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-rose-700 rounded-lg hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800 no-underline",
+        icon: deleteIcon,
+      },
+    ],
+  };
+  const bulkDataOperationsReviewd: BulkDataOperation = {
+    operations: [
+      {
+        name: "Delete All",
+        type: "handler",
+        element: (ids: string[] | []) => handleDeleteAll(ids),
+        styles:
+          "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-rose-700 rounded-lg hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800 no-underline",
+        icon: deleteIcon,
+      },
+      {
+        name: "Download All",
+        type: "handler",
+        element: () => handleDownload(),
+        styles:
+          "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline",
+        icon: downloadIcon,
+      },
+      {
+        name: "Change Status To Reviewed",
+        type: "handler",
+        element: (ids: string[] | []) => handleChangeStatus(ids),
+        styles:
+          "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline",
+        icon: "",
+      },
+      {
+        name: "Send For Training",
+        type: "handler",
+        element: () => handleTuneModel(),
+        styles:
+          "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-indigo-700 rounded-lg hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 no-underline",
+        icon: settingIcon,
+      },
+    ],
   };
 
   const handleTuneModel = async (values: any = {}) => {
@@ -227,7 +363,8 @@ const TrainRegistrationBotAdminPage = () => {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (rec: any) => {
+    const { _id: id } = rec;
     const c = confirm("Are you sure you want to delete this Record?");
     if (c) {
       try {
@@ -294,6 +431,7 @@ const TrainRegistrationBotAdminPage = () => {
       setCurrentPage(parseInt(existingPage, 10));
     }
   }, [searchParams?.get("r"), searchParams?.get("p")]);
+
   const showDeleteAllButton = () => {
     if (selectAll) {
       return true;
@@ -322,27 +460,32 @@ const TrainRegistrationBotAdminPage = () => {
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => {});
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const handleDeleteAll = async () => {
+  const handleDeleteAll = async (ids: string[] | [] = []) => {
     const c = confirm("Are you sure you want to delete these Records?");
     if (c) {
       setLoading(true);
+      console.log("train-bot ids ", ids);
       try {
         // console.log("all data deleted");
         axios
-          .post("/api/trainBot/bulkDelete", { dataSelection })
+          .post("/api/trainBot/bulkDelete", { dataSelection: ids })
           .then((res: any) => {
             if (res.data.success) {
-              setDataSelection([]);
+              // setDataSelection([]);
               fetchRecords();
             }
           })
           .catch((err) => {
             console.log(err);
           })
-          .finally(() => {});
+          .finally(() => {
+            setLoading(false);
+          });
       } catch (error) {
         console.log("error ===> ", error);
       }
@@ -682,7 +825,7 @@ const TrainRegistrationBotAdminPage = () => {
             </ul>
 
             <div className=" flex flex-row justify-end items-center gap-3">
-              {activeTab === "reviewed" && (
+              {/* {activeTab === "reviewed" && (
                 <div className="flex justify-end">
                   <button
                     onClick={handleDownload}
@@ -695,9 +838,9 @@ const TrainRegistrationBotAdminPage = () => {
                     )}
                   </button>
                 </div>
-              )}
+              )} */}
 
-              {activeTab === "reviewed" && records.length > 0 && (
+              {/* {activeTab === "reviewed" && records.length > 0 && (
                 <div className="flex justify-end">
                   <button
                     onClick={() => {
@@ -711,9 +854,9 @@ const TrainRegistrationBotAdminPage = () => {
                     Send For Training
                   </button>
                 </div>
-              )}
+              )} */}
 
-              {activeTab === "reviewed" && dataSelection.length >= 1 && (
+              {/* {activeTab === "reviewed" && dataSelection.length >= 1 && (
                 <div className="flex justify-end">
                   <button
                     disabled={loading}
@@ -723,9 +866,9 @@ const TrainRegistrationBotAdminPage = () => {
                     Set Status to Trained
                   </button>
                 </div>
-              )}
+              )} */}
 
-              {showDeleteAllButton() && (
+              {/* {showDeleteAllButton() && (
                 <div className="flex justify-end">
                   <button
                     disabled={loading ? true : false}
@@ -735,11 +878,90 @@ const TrainRegistrationBotAdminPage = () => {
                     Delete All
                   </button>
                 </div>
-              )}
+              )} */}
             </div>
 
-            {/* Table */}
-            <div className="">
+            <DataTable
+              loading={loading}
+              data={records}
+              columns={columns}
+              source="trainbots"
+              actions={actions}
+              enableRowSelection={true}
+              bulkDataOperations={
+                activeTab === "reviewed"
+                  ? bulkDataOperationsReviewd
+                  : bulkDataOperations
+              }
+            />
+
+            {/* Pagination Controls */}
+            <div className=" flex justify-end mt-4">
+              <nav aria-label="Page navigation example">
+                <ul className="inline-flex -space-x-px">
+                  <li>
+                    <button
+                      className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+                      onClick={() => {
+                        setRecords([]);
+                        setCurrentPage(currentPage - 1);
+                      }}
+                      disabled={currentPage == 1 ? true : false}
+                    >
+                      Previous
+                    </button>
+                  </li>
+                  {[currentPage - 1, currentPage, currentPage + 1].map(
+                    (number) => {
+                      if (number < 1 || number > totalPages) return null;
+                      return (
+                        <li key={number}>
+                          {currentPage !== totalPages && (
+                            <button
+                              onClick={(e) => {
+                                setRecords([]);
+                                setCurrentPage(number);
+                              }}
+                              className={`border-gray-300  leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400  text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white hover:text-gray-700 first-letter
+                      ${currentPage === number} `}
+                            >
+                              {number}
+                            </button>
+                          )}
+                        </li>
+                      );
+                    }
+                  )}
+
+                  <li>
+                    <button
+                      className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                      onClick={() => {
+                        setRecords([]);
+                        setCurrentPage(currentPage + 1);
+                      }}
+                      disabled={currentPage === totalPages}
+                    >
+                      Next
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default TrainRegistrationBotAdminPage;
+
+{
+  /* Table */
+}
+{
+  /* <div className="">
               <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -800,6 +1022,7 @@ const TrainRegistrationBotAdminPage = () => {
                         </td>
                       </tr>
                     )}
+
                     {records &&
                       records.map((rec: any, index: number) => (
                         <tr
@@ -865,65 +1088,5 @@ const TrainRegistrationBotAdminPage = () => {
                   </tbody>
                 </table>
               </div>
-            </div>
-            {/* Pagination Controls */}
-            <div className=" flex justify-end mt-4">
-              <nav aria-label="Page navigation example">
-                <ul className="inline-flex -space-x-px">
-                  <li>
-                    <button
-                      className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
-                      onClick={() => {
-                        setRecords([]);
-                        setCurrentPage(currentPage - 1);
-                      }}
-                      disabled={currentPage == 1 ? true : false}
-                    >
-                      Previous
-                    </button>
-                  </li>
-                  {[currentPage - 1, currentPage, currentPage + 1].map(
-                    (number) => {
-                      if (number < 1 || number > totalPages) return null;
-                      return (
-                        <li key={number}>
-                          {currentPage !== totalPages && (
-                            <button
-                              onClick={(e) => {
-                                setRecords([]);
-                                setCurrentPage(number);
-                              }}
-                              className={`border-gray-300  leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400  text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white hover:text-gray-700 first-letter
-                      ${currentPage === number} `}
-                            >
-                              {number}
-                            </button>
-                          )}
-                        </li>
-                      );
-                    }
-                  )}
-
-                  <li>
-                    <button
-                      className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                      onClick={() => {
-                        setRecords([]);
-                        setCurrentPage(currentPage + 1);
-                      }}
-                      disabled={currentPage === totalPages}
-                    >
-                      Next
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-export default TrainRegistrationBotAdminPage;
+            </div> */
+}

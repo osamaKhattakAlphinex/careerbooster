@@ -1,17 +1,39 @@
 "use client";
+import DataTable from "@/components/DataTable";
 import FineTuningSettingModel from "@/components/admin/fineTuning/fineTuningSettingModels";
 import PaymentsDecryptionModal from "@/components/admin/payments/paymentsDecryptionModal";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
+import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+
+type Payment = {
+  userEmail: string;
+  amountPaid: string;
+};
 
 const Payments = () => {
   const [payments, setPayments] = useState<[] | any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const showTransactionModelRef: React.MutableRefObject<any> = useRef(null);
   const [isDecrypted, setIsDecrypted] = useState<boolean>(false);
+
+  const columnHelper = createColumnHelper<Payment>();
+
+  const columns = [
+    columnHelper.accessor("userEmail", {
+      header: () => "Email",
+      cell: (info) => (
+        <div className="truncate max-w-sm">{info.renderValue()}</div>
+      ),
+    }),
+    columnHelper.accessor("amountPaid", {
+      header: () => "Amount",
+      cell: (info) => info.renderValue(),
+    }),
+  ];
 
   const fetchPayments = async () => {
     setLoading(true);
@@ -134,85 +156,16 @@ const Payments = () => {
               </button>
             )}
           </div>
-          <div className=" p-8 flex flex-col gap-2 border w-11/12">
+          <div className="flex flex-col gap-2  w-11/12">
             {/* Table */}
-            <div className="">
-              <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
-                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                      <th scope="col" className="px-6 py-3 columns-sm">
-                        S.No
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 columns-sm overflow-ellipsis"
-                      >
-                        userEmail
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 whitespace-nowrap columns-sm"
-                      >
-                        amountPaid
-                      </th>
-                      {/* <th
-                        scope="col"
-                        className="px-6 py-3 whitespace-nowrap columns-sm overflow-ellipsis"
-                      >
-                        PackageId
-                      </th> */}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {loading && (
-                      <tr>
-                        <td
-                          className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
-                          colSpan={10}
-                        >
-                          Loading ...
-                        </td>
-                      </tr>
-                    )}
-                    {!loading && payments && payments.length === 0 && (
-                      <tr>
-                        <td
-                          className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
-                          colSpan={10}
-                        >
-                          No models found
-                        </td>
-                      </tr>
-                    )}
-                    {payments &&
-                      payments.map((rec: any, index: number) => (
-                        <tr
-                          key={rec._id}
-                          className="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                        >
-                          <td className="px-6 py-4 whitespace-nowrap columns-auto">
-                            {index + 1}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap columns-3xs">
-                            <div className="truncate w-full">
-                              {rec.userEmail}
-                            </div>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap columns-3xs">
-                            <div className="truncate w-full">
-                              {rec.amountPaid}
-                            </div>
-                          </td>
-                          {/* <td className="px-6 py-4 whitespace-nowrap columns-auto">
-                            PackageId
-                          </td> */}
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <DataTable
+              loading={loading}
+              columns={columns}
+              data={payments}
+              source="payments"
+              actions={[]}
+              conditionalTableAction={[]}
+            />
           </div>
         </div>
       </div>
