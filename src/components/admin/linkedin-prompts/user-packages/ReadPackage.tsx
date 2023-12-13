@@ -121,7 +121,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   Features Included
                 </h3>
                 <ul className="flex flex-column gap-1 text-sm my-2 pl-0">
-                  {userPackage.features.map(
+                  {userPackage.features?.map(
                     (feature: string, index: number) => {
                       return (
                         <li
@@ -176,7 +176,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   >
                     <span className="block">Resume Generation</span>
                     <span className="block">
-                      {userPackage.limit.resumes_generation}
+                      {userPackage.limit?.resumes_generation}
                     </span>
                   </li>
 
@@ -186,7 +186,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   >
                     <span className="block">Keywords Generation</span>
                     <span className="block">
-                      {userPackage.limit.keywords_generation}
+                      {userPackage.limit?.keywords_generation}
                     </span>
                   </li>
 
@@ -196,7 +196,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   >
                     <span className="block">Headlines Generation</span>
                     <span className="block">
-                      {userPackage.limit.headline_generation}
+                      {userPackage.limit?.headline_generation}
                     </span>
                   </li>
 
@@ -206,7 +206,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   >
                     <span className="block">Job Descriptions</span>
                     <span className="block">
-                      {userPackage.limit.job_desc_generation}
+                      {userPackage.limit?.job_desc_generation}
                     </span>
                   </li>
 
@@ -216,7 +216,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   >
                     <span className="block">About Generation</span>
                     <span className="block">
-                      {userPackage.limit.about_generation}
+                      {userPackage.limit?.about_generation}
                     </span>
                   </li>
 
@@ -226,7 +226,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   >
                     <span className="block">Cover Letter</span>
                     <span className="block">
-                      {userPackage.limit.cover_letter_generation}
+                      {userPackage.limit?.cover_letter_generation}
                     </span>
                   </li>
 
@@ -236,7 +236,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   >
                     <span className="block">Email Generation</span>
                     <span className="block">
-                      {userPackage.limit.email_generation}
+                      {userPackage.limit?.email_generation}
                     </span>
                   </li>
 
@@ -246,7 +246,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   >
                     <span className="block">Keyword Generation</span>
                     <span className="block">
-                      {userPackage.limit.pdf_files_upload}
+                      {userPackage.limit?.pdf_files_upload}
                     </span>
                   </li>
 
@@ -256,7 +256,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   >
                     <span className="block">Review Resume</span>
                     <span className="block">
-                      {userPackage.limit.review_resume}
+                      {userPackage.limit?.review_resume}
                     </span>
                   </li>
 
@@ -266,7 +266,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   >
                     <span className="block">Consulting Bids</span>
                     <span className="block">
-                      {userPackage.limit.consulting_bids_generation}
+                      {userPackage.limit?.consulting_bids_generation}
                     </span>
                   </li>
 
@@ -276,7 +276,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   >
                     <span className="block">Can Edit Resume</span>
                     <span className="block">
-                      {userPackage.limit.can_edit_resume ? "Yes" : "No"}
+                      {userPackage.limit?.can_edit_resume ? "Yes" : "No"}
                     </span>
                   </li>
                 </ul>

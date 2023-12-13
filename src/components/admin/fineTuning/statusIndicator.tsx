@@ -30,7 +30,7 @@ const StatusIndicator = ({ status }: { status: string }) => {
 
   return (
     <div
-      className={`rounded-md p-1 text-center font-bold text-white ${statusColorClass}`}
+      className={`text-xs rounded-md p-1 text-center font-bold text-white uppercase ${statusColorClass}`}
     >
       {status}
     </div>

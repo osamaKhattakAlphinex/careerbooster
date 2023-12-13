@@ -1,6 +1,6 @@
 "use client";
 
-import { leftArrowIcon } from "@/helpers/iconsProvider";
+import { leftArrowIcon, deleteIcon } from "@/helpers/iconsProvider";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import AddPackage from "./AddPackage";
@@ -11,6 +11,8 @@ import ReadPackage from "./ReadPackage";
 import axios from "axios";
 import UpdatePackage from "./UpdatePackage";
 import ConfirmationModal from "@/components/utilities/form-elements/ConfirmationModal";
+import { createColumnHelper } from "@tanstack/react-table";
+import DataTable, { TableAction } from "@/components/DataTable";
 
 type Package = {
   _id?: string;
@@ -45,6 +47,63 @@ const ViewPackage = ({}) => {
       confirmationModalRef.current.openModal(true, record._id);
     }
   };
+
+  const columnHelper = createColumnHelper<Package>();
+
+  const actions: TableAction[] = [
+    {
+      name: "update",
+      type: "component",
+      element: (pckg: any) => (
+        <UpdatePackage userPackage={pckg} getPackages={getPackages} />
+      ),
+      styles:
+        "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline",
+      icon: "",
+      props: { getPackages: () => getPackages() },
+    },
+
+    {
+      name: "preview",
+      type: "component",
+      element: (pckg: any) => <ReadPackage userPackage={pckg} />,
+      styles:
+        "px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline",
+      icon: "",
+    },
+
+    {
+      name: "delete",
+      type: "handler",
+      element: (pckg: any) => handleOpenConfirmationModal(pckg),
+      styles:
+        "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-rose-700 rounded-lg hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800 no-underline",
+      icon: deleteIcon,
+    },
+  ];
+
+  const columns = [
+    columnHelper.accessor("title", {
+      header: () => "Title",
+      cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("type", {
+      header: () => "Type",
+      cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("amount", {
+      header: () => "Amount",
+      cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("status", {
+      header: () => "Status",
+      cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("category", {
+      header: () => "Category",
+      cell: (info) => info.renderValue(),
+    }),
+  ];
 
   const getPackages = async () => {
     try {
@@ -89,107 +148,13 @@ const ViewPackage = ({}) => {
               <AddPackage getPackages={getPackages} />
             </div>
 
-            {/* Table */}
-            <div className="">
-              <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="pt-10 border-collapse w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                  <thead className="text-[16px] text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                      <th scope="col" className="px-4 py-4">
-                        Title
-                      </th>
-                      <th scope="col" className="px-4 py-3">
-                        Type
-                      </th>
-                      <th scope="col" className="px-4 py-3">
-                        Amount
-                      </th>
-                      <th scope="col" className="px-4 py-3">
-                        Status
-                      </th>
-                      <th scope="col" className="px-4 py-3">
-                        Category
-                      </th>
-                      <th scope="col" className="px-4 py-3 text-center">
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {packages?.map((pckg: Package, index: number) => {
-                      return (
-                        <tr
-                          key={index}
-                          className=" bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                        >
-                          <th
-                            scope="row"
-                            className="px-4 py-3 font-medium whitespace-nowrap"
-                          >
-                            {pckg.title}
-                          </th>
-                          <td className="px-4 py-3">{pckg.type}</td>
-                          <td className="px-4 py-3">{pckg.amount}</td>
-                          <td className="px-4 py-3 ">{pckg.status}</td>
-                          <td className="px-4 py-3">{pckg.category}</td>
-                          <td className="px-4 py-3 flex items-center justify-end">
-                            <ul
-                              className="py-1 text-sm flex"
-                              aria-labelledby="apple-imac-27-dropdown-button"
-                            >
-                              <li>
-                                <UpdatePackage
-                                  userPackage={pckg}
-                                  getPackages={getPackages}
-                                />
-                              </li>
-                              <li>
-                                <ReadPackage userPackage={pckg} />
-                              </li>
-                              <li>
-                                <button
-                                  onClick={() =>
-                                    handleOpenConfirmationModal(pckg)
-                                  }
-                                  type="button"
-                                  data-modal-target="deleteModal"
-                                  data-modal-toggle="deleteModal"
-                                  className="flex w-full items-center py-2 pr-2 hover:text-[#e6f85e]"
-                                >
-                                  <svg
-                                    className="w-4 h-4 mr-2"
-                                    viewBox="0 0 14 15"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    aria-hidden="true"
-                                  >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      strokeWidth="1.5"
-                                      stroke="currentColor"
-                                      className="w-4 h-4 mx-3"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                                      />
-                                    </svg>
-                                  </svg>
-                                  Delete
-                                </button>
-                              </li>
-                            </ul>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <DataTable
+              loading={false}
+              columns={columns}
+              data={packages}
+              actions={actions}
+              source="packages"
+            />
           </div>
         </div>
       </div>
@@ -431,3 +396,109 @@ const ViewPackage = ({}) => {
 };
 
 export default ViewPackage;
+
+{
+  /* Table */
+}
+{
+  /* <div className="">
+              <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table className="pt-10 border-collapse w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                  <thead className="text-[16px] text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      <th scope="col" className="px-4 py-4">
+                        Title
+                      </th>
+                      <th scope="col" className="px-4 py-3">
+                        Type
+                      </th>
+                      <th scope="col" className="px-4 py-3">
+                        Amount
+                      </th>
+                      <th scope="col" className="px-4 py-3">
+                        Status
+                      </th>
+                      <th scope="col" className="px-4 py-3">
+                        Category
+                      </th>
+                      <th scope="col" className="px-4 py-3 text-center">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {packages?.map((pckg: Package, index: number) => {
+                      return (
+                        <tr
+                          key={index}
+                          className=" bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                        >
+                          <th
+                            scope="row"
+                            className="px-4 py-3 font-medium whitespace-nowrap"
+                          >
+                            {pckg.title}
+                          </th>
+                          <td className="px-4 py-3">{pckg.type}</td>
+                          <td className="px-4 py-3">{pckg.amount}</td>
+                          <td className="px-4 py-3 ">{pckg.status}</td>
+                          <td className="px-4 py-3">{pckg.category}</td>
+                          <td className="px-4 py-3 flex items-center justify-end">
+                            <ul
+                              className="py-1 text-sm flex"
+                              aria-labelledby="apple-imac-27-dropdown-button"
+                            >
+                              <li>
+                                <UpdatePackage
+                                  userPackage={pckg}
+                                  getPackages={getPackages}
+                                />
+                              </li>
+                              <li>
+                                <ReadPackage userPackage={pckg} />
+                              </li>
+                              <li>
+                                <button
+                                  onClick={() =>
+                                    handleOpenConfirmationModal(pckg)
+                                  }
+                                  type="button"
+                                  data-modal-target="deleteModal"
+                                  data-modal-toggle="deleteModal"
+                                  className="flex w-full items-center py-2 pr-2 hover:text-[#e6f85e]"
+                                >
+                                  <svg
+                                    className="w-4 h-4 mr-2"
+                                    viewBox="0 0 14 15"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true"
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth="1.5"
+                                      stroke="currentColor"
+                                      className="w-4 h-4 mx-3"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                                      />
+                                    </svg>
+                                  </svg>
+                                  Delete
+                                </button>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div> */
+}
