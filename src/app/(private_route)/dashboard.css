@@ -63,8 +63,24 @@
   }
 }
 
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-12px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(-12px);
+  }
+}
+
 .avatar-animate {
-  animation: slideInFromBottom 2s ease-in-out forwards;
+  animation: slideInFromBottom 2s ease-in-out forwards, bounce 4s infinite;
 }
 
 @media print {

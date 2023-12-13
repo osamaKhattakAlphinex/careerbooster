@@ -14,7 +14,8 @@ export async function POST(req: Request) {
   const body = await req.json();
   const email = body.email;
   const messageData = body.message;
-  console.log(email, messageData);
+  const userData = body.userData;
+  console.log(email, messageData, userData.length);
   await startDB();
 
   const user = await User.findOne({ email: email });
@@ -59,6 +60,10 @@ export async function POST(req: Request) {
       { $push: { "chatThreads.threads": thread.id } },
       { new: true }
     );
+    await openai.beta.threads.messages.create(threadId, {
+      role: "user",
+      content: userData,
+    });
   }
 
   const message = await openai.beta.threads.messages.create(threadId, {
@@ -74,9 +79,7 @@ export async function POST(req: Request) {
   while (run.status === "queued" || run.status == "in_progress") {
     run = await openai.beta.threads.runs.retrieve(threadId, run.id);
   }
-  console.log(run);
   const messages = await openai.beta.threads.messages.list(threadId);
-  console.log(messages);
 
   const id = messages.data[0].id;
   const role = messages.data[0].role;
@@ -88,6 +91,7 @@ export async function POST(req: Request) {
       role: role,
       content: latest_message.text.value,
     }; // Accessing the text value if it's a text message
+    console.log(responseMessage);
   } else {
     console.log("Unknown message type"); // Handling other types of messages
   }
