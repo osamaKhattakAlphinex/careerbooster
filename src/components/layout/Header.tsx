@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import ThemeToggler from "../Themetoggler";
 import useTheme from "@/lib/useTheme";
 import Image from "next/image";
-
+import "@/app/(private_route)/dashboard.css";
 // import useTheme from "@/lib/useTheme";
 import { usePathname } from "next/navigation";
 
@@ -109,31 +109,51 @@ const Header = () => {
       // className={`navbar navbar-expand-lg fixed-top ${
       //   theme === "dark" ? "bg-dark" : "bg-white"
       // }`}
-      className={`navbar navbar-expand-lg fixed-top dark:!bg-[#11121C] bg-white on-over headroom headroom--top headroom--not-bottom `}
+      className={`navbar navbar-expand-lg fixed-top  dark:!bg-[#11121C] bg-white on-over  headroom headroom--top headroom--not-bottom `}
     >
-      <div className="container">
+      <div className="head_container container">
         {/* <!-- Logo --> */}
 
-        <Link className="navbar-brand" href="/">
-          <div className="flex justify-center items-center">
+        <Link className="navbar-brand flex justify-between m-0" href="/">
+          <div className="flex justify-center items-center ">
             <Image
               width={80}
               height={74}
               src="/trans-icon1.png"
               alt="icon"
-              className="lg:w-[80px] w-[60px] m-0"
+              className="w-[42px] lg:w-[80px]  sm:m-0"
             />
-            <span className="lg:ml-[-15px] logo-text font-semibold">
+            <span className="lg:ml-[-15px] logo-text lg:font-semibold">
               CareerBooster
             </span>
+          </div>
+          <div>
+            <span className="lg:hidden">
+              <ThemeToggler />
+            </span>
+            <button
+              className="navbar-toggler "
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarContent"
+              aria-controls="navbarContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <div className="navbar-toggler-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </button>
           </div>
         </Link>
 
         {/* <!-- Navbar content --> */}
         <div className="collapse navbar-collapse" id="navbarContent">
-          <div className="navbar-content-inner ms-lg-auto d-flex  flex-lg-row align-lg-center gap-[100px]  gap-lg-10 p-2 p-lg-0">
+          <div className="navbar-content-inner mt-2 ms-lg-auto d-flex justify-around  flex-lg-row align-lg-center gap-[100px]  gap-lg-10 p-2 p-lg-0">
             <ul className="navbar-nav gap-lg-2 gap-xl-5 visible ">
-              <li className="nav-item dropdown">
+              <li className="nav-item dropdown mt-0">
                 <Link className="nav-link " href="/">
                   Home
                 </Link>
@@ -149,17 +169,17 @@ const Header = () => {
                   Blog
                 </Link>
               </li> */}
-              <li className="nav-item">
+              <li className="nav-item mt-0">
                 <Link className="nav-link " href="/use-cases">
                   Use cases
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item mt-0">
                 <Link className="nav-link " href="/pricing">
                   Pricing
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item mt-0">
                 <Link className="nav-link " href="/contact">
                   Contact
                 </Link>
@@ -208,7 +228,7 @@ const Header = () => {
                         <div>
                           <button
                             type="button"
-                            className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-3 py-2  font-semibold  border text-xs"
+                            className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-1 border py-2  font-semibold   text-xs"
                             id="menu-button"
                             onMouseOver={() => setDropdownOpen(true)}
                             onMouseLeave={() => setDropdownOpen(false)}
@@ -273,12 +293,12 @@ const Header = () => {
 
                     {dropdownOpen && (
                       <div
-                        className="absolute right-0 z-10 mt-0 menu-dropdown w-56 origin-top-right rounded-md  shadow-lg "
+                        className="absolute  right-0 z-10 mt-0 menu-dropdown w-56 origin-top-right rounded-md  shadow-lg "
                         role="menu"
                         onMouseOver={() => setDropdownOpen(true)}
                         onMouseLeave={() => setDropdownOpen(false)}
                       >
-                        <div className="py-1" role="none">
+                        <div className="py-1 " role="none">
                           {/* <!-- Active: "bg-gray-100 ", Not Active: "text-gray-700" --> */}
                           <Link
                             href={role === "admin" ? "/admin" : "/dashboard"}
@@ -321,24 +341,10 @@ const Header = () => {
           </div>
         </div>
         <div>
-          <ThemeToggler />
-
           {/* <!-- Navbar toggler button --> */}
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarContent"
-            aria-controls="navbarContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <div className="navbar-toggler-icon">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </button>
+          <span className="hidden lg:block xl:block">
+            <ThemeToggler />
+          </span>
         </div>
       </div>
     </nav>

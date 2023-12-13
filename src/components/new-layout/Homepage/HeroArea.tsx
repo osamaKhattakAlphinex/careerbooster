@@ -56,7 +56,7 @@ const HeroArea = () => {
                 </div>
               </div>
               <ul className="d-flex flex-wrap gap-4 gap-md-8 gap-lg-10 align-center justify-center mt-8 mb-0">
-                <li>Write Resumes 100x Faster111111111111</li>
+                <li>Write Resumes 100x Faster</li>
                 <li>Write Keyword-Optimized LinkedIn Profile</li>
               </ul>
               <HeroImagesCard />

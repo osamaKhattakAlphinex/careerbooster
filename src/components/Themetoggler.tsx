@@ -12,9 +12,10 @@ const ThemeToggler = () => {
   };
 
   return (
+    // xs:fixed xs:top-6 xs:right-11 lg:top-12 lg:right-8
     <button
       onClick={handleToggleTheme}
-      className="btn btn-icon btn-sm btn-ghost-secondary "
+      className="btn btn-icon btn-sm btn-ghost-secondary"
       title={theme === "dark" ? "Change to light mode" : "Change to dark mode"}
     >
       {theme === "dark" ? sunIcon : moonIcon}
