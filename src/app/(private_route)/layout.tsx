@@ -10,6 +10,7 @@ import "./dashboard.css";
 import "./plugins.css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import ThemeProvider from "@/components/new-layout/ThemeProvider";
 interface Props {
   children: ReactNode;
 }
@@ -24,13 +25,15 @@ export default async function Privatelayout({ children }: Props) {
   if (!session?.user) redirect("/login");
 
   return (
-    <div className="bg-gradient-to-bl from-[#340e53] via-[#000533] to-[#010111]   w-screen h-screen overflow-y-scroll">
-      <ProfileCreationLayer>
-        <Header />
-        <SideBar />
-        <div className="">{children}</div>
-        <Footer />
-      </ProfileCreationLayer>
-    </div>
+    <ThemeProvider>
+      <div className="bg-gradient-to-bl from-[#340e53] via-[#000533] to-[#010111]   w-screen h-screen overflow-y-scroll">
+        <ProfileCreationLayer>
+          <Header />
+          <SideBar />
+          <div className="">{children}</div>
+          <Footer />
+        </ProfileCreationLayer>
+      </div>
+    </ThemeProvider>
   );
 }
