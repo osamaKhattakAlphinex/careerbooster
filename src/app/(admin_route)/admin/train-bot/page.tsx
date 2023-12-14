@@ -182,7 +182,7 @@ const TrainRegistrationBotAdminPage = () => {
         icon: deleteIcon,
       },
       {
-        name: "Download All",
+        name: "Download",
         type: "handler",
         element: () => handleDownload(),
         styles:
@@ -190,7 +190,7 @@ const TrainRegistrationBotAdminPage = () => {
         icon: downloadIcon,
       },
       {
-        name: "Change Status To Reviewed",
+        name: "Change Status To Trained",
         type: "handler",
         element: (ids: string[] | []) => handleChangeStatus(ids),
         styles:

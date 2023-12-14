@@ -449,7 +449,7 @@ const ColumnSelector = ({ table, columns }: ColumnSelectorType) => {
                           checked: column.getIsVisible(),
                           onChange: column.getToggleVisibilityHandler(),
                         }}
-                      />{" "}
+                      />
                       {columns?.map((col: any) => {
                         if (col.id === column.id) {
                           return col.header();
