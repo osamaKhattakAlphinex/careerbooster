@@ -24,12 +24,14 @@ const Payments = () => {
 
   const columns = [
     columnHelper.accessor("userEmail", {
+      id: "userEmail",
       header: () => "Email",
       cell: (info) => (
         <div className="truncate max-w-sm">{info.renderValue()}</div>
       ),
     }),
     columnHelper.accessor("amountPaid", {
+      id: "amountPaid",
       header: () => "Amount",
       cell: (info) => info.renderValue(),
     }),

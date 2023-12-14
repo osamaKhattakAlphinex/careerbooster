@@ -67,23 +67,27 @@ const UsersPage = () => {
         `${info.row.original["firstName"]} ${info.row.original["lastName"]}`,
     }),
     columnHelper.accessor("email", {
+      id: "email",
       header: () => "Email",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("contact.country", {
+      id: "contact_country",
       header: () => "Country",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("role", {
+      id: "role",
       header: () => "Role",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("createdAt", {
+      id: "createdAt",
       header: () => "Created At",
       cell: (info) => getFormattedDate(info.renderValue()),
     }),
     columnHelper.accessor((row) => row, {
-      id: "e",
+      id: "status",
       header: () => "Status",
       cell: (info) => {
         const { _id, status } = info.getValue();

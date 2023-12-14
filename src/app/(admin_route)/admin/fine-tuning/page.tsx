@@ -36,24 +36,29 @@ const FineTuningModels = () => {
 
   const columns = [
     columnHelper.accessor("fileId", {
+      id: "fileId",
       header: () => "File Id",
       cell: (info) => {
         return info.getValue();
       },
     }),
     columnHelper.accessor("datasetType", {
+      id: "datasetType",
       header: () => "Dataset",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("status", {
+      id: "status",
       header: () => "Status",
       cell: (info: any) => <StatusIndicator status={info.renderValue()} />,
     }),
     columnHelper.accessor("fineTuningJobId", {
+      id: "fineTuningJobId",
       header: () => "Fine Tuning Job Id",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("fineTunedModel", {
+      id: "fineTunedModel",
       header: () => "Trained Model",
       cell: (info) => info.renderValue(),
     }),
