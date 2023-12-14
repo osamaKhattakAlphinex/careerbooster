@@ -63,19 +63,19 @@ const ConsultingBidCardSingle = ({
 
   return (
     <div>
-      <div className="flex flex-col   bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[14px] ">
+      <div className="flex flex-col single-service-card-bg  rounded-xl mt-[20px] py-[20px] px-[14px] ">
         <div className="">
           <div className="mx-3 border-gray-600 leading-6 w-full">
             <h2
               title={card.jobDescription}
-              className="w-full pr-3 truncate md:text-[15px] text-[13px] capitalize text-white font-semibold  "
+              className="w-full pr-3 truncate md:text-[15px] text-[13px] capitalize card-h2  font-semibold  "
             >
               {card.jobDescription}
               {/* {card.jobDescription.length < 20
                 ? card.jobDescription
                 : card.jobDescription.slice(0, 20) + "..."} */}
             </h2>
-            <h4 className="uppercase text-[#959595] font-medium  lg:text-[12px] text-[10px] pt-[8px] pb-[12px]">
+            <h4 className="uppercase text-[#959595]  font-medium  lg:text-[12px] text-[10px] pt-[8px] pb-[12px]">
               Generated on {getFormattedDate(card.generatedOnDate)}
             </h4>
           </div>
@@ -84,7 +84,7 @@ const ConsultingBidCardSingle = ({
           <button
             type="button"
             onClick={() => handleOnView(card)}
-            className="px-2 flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+            className="px-2 flex justify-center items-center rounded-full h-[36px] card-btn "
           >
             {eyeIcon}
             {pathname == "/dashboard" ? (
@@ -96,7 +96,7 @@ const ConsultingBidCardSingle = ({
           <button
             type="button"
             onClick={() => handleOnDelete(card)}
-            className="px-2 flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+            className="px-2 flex justify-center items-center rounded-full h-[36px] card-btn"
           >
             {trashIcon}
             {pathname == "/dashboard" ? (
@@ -119,7 +119,7 @@ const ConsultingBidCardSingle = ({
                         //   !session?.user?.email ||
                         //   !resume?.name
                         // }
-                        className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
+                        className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full  card-download-btn text-green-500 border border-green-500"
                       >
                         Download
                         {/* <span>

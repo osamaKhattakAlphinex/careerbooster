@@ -307,7 +307,7 @@ const ConsultingBidsGenerator = () => {
         <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px] ">
           <Link
             href="/dashboard"
-            className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
+            className="ml-2 my-4 no-underline back-btn-text  flex flex-row gap-2 items-center ] hover:opacity-80 transition-all"
           >
             {leftArrowIcon}
             Back
@@ -317,13 +317,13 @@ const ConsultingBidsGenerator = () => {
           <PreviouslyGeneratedList {...historyProps} />
           {/* <MainCoverLetterTool /> */}
           <>
-            <div className=" bg-[#17151B] rounded-[20px] px-4  lg:px-[30px] py-[41px] flex flex-col gap-5 ">
+            <div className=" single-service-bg  rounded-[20px] px-4  lg:px-[30px] py-[41px] flex flex-col gap-5 ">
               {/* header */}
               <div className="flex flex-col  md:flex-row justify-between items-center">
-                <h3 className="text-[16px] md:text-sm uppercase text-white font-bold">
+                <h3 className="text-[16px] md:text-sm uppercase card-h2 font-bold">
                   Consulting Bids Generator
                 </h3>
-                <div className=" text-sm text-white uppercase font-bold">
+                <div className=" text-sm card-h2 uppercase font-bold">
                   <LimitCard
                     title="Email Availble"
                     limit={
@@ -354,7 +354,7 @@ const ConsultingBidsGenerator = () => {
               <div className="flex flex-col gap-5 lg:px-0">
                 <label
                   htmlFor="default-radio-1"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[290px] lg:w-[400px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] card-h2 w-[290px] lg:w-[400px] ${
                     selectedOption === "profile"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -381,7 +381,7 @@ const ConsultingBidsGenerator = () => {
                 </label>
                 <label
                   htmlFor="default-radio-2"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white  w-[220px] lg:w-[290px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] card-h2  w-[220px] lg:w-[290px] ${
                     selectedOption === "file"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -419,7 +419,7 @@ const ConsultingBidsGenerator = () => {
                 <div className="w-full flex flex-col">
                   <label
                     htmlFor="job-title"
-                    className=" font-bold text-md md:text-[24px] text-white flex py-[20px] gap-[3px]"
+                    className=" font-bold text-md md:text-[24px] card-h2 flex py-[20px] gap-[3px]"
                   >
                     Paste Your Job Description
                     <span className="text-[#F04248] text-md md:text-[24px]">
@@ -447,7 +447,7 @@ const ConsultingBidsGenerator = () => {
                     jobDescription === ""
                   }
                   onClick={handleGenerate}
-                  className={`bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                  className={`dashboard-outline-btn s flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                     (msgLoading ||
                       !session?.user?.email ||
                       !aiInputUserData ||
@@ -463,7 +463,7 @@ const ConsultingBidsGenerator = () => {
                   height={18}
                   width={18}
                 /> */}
-                  <span className="text-white text-[15px] font-semibold">
+                  <span className="card-h2 text-[15px] font-semibold">
                     {msgLoading ? (
                       <div className="flex">
                         <svg
@@ -472,7 +472,7 @@ const ConsultingBidsGenerator = () => {
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="currentColor"
-                          className={`w-4 h-4 mr-3 ${
+                          className={`w-4 h-4 mr-3 card-h2 ${
                             msgLoading ? "animate-spin" : ""
                           }`}
                         >
@@ -486,14 +486,23 @@ const ConsultingBidsGenerator = () => {
                       </div>
                     ) : (
                       <div className="flex">
-                        <Image
-                          src={buttonIconSrc}
-                          alt="bold icon"
-                          height={18}
-                          width={18}
-                        />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-4 h-4 card-h2"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                          />
+                        </svg>
+
                         <span
-                          className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                          className={`card-h2 ml-3 text-[15px] font-semibold cursor-pointer`}
                         >
                           Generate Bid
                         </span>
@@ -505,7 +514,7 @@ const ConsultingBidsGenerator = () => {
 
               {show && (
                 <div className="mt-[40px] ">
-                  <h1 className="uppercase text-white font-bold text-[18px] pb-5">
+                  <h1 className="uppercase card-h2 font-bold text-[18px] pb-5">
                     your ai generated bid
                   </h1>
 
@@ -519,7 +528,7 @@ const ConsultingBidsGenerator = () => {
                         <div
                           id="editor"
                           contentEditable="true"
-                          className="text-white "
+                          className="card-h2 "
                           // dangerouslySetInnerHTML={{ __html: streamedData }}
                           // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
                           //   setEditedContent(e.target.innerHTML);
@@ -528,7 +537,7 @@ const ConsultingBidsGenerator = () => {
                       ) : (
                         <div>
                           <div
-                            className="text-white "
+                            className="card-h2 "
                             dangerouslySetInnerHTML={{ __html: streamedData }}
                           ></div>
                         </div>
@@ -548,7 +557,7 @@ const ConsultingBidsGenerator = () => {
                         jobDescription === ""
                       }
                       onClick={handleGenerate}
-                      className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#B324D7] border rounded-full ${
+                      className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px]  border rounded-full re-generate-btn ${
                         (msgLoading ||
                           !session?.user?.email ||
                           !aiInputUserData ||
@@ -558,7 +567,7 @@ const ConsultingBidsGenerator = () => {
                         "opacity-50 cursor-not-allowed" // Add this class when the button is disabled
                       }`}
                     >
-                      <span className="text-white text-[15px] font-semibold">
+                      <span className="card-h2 text-[15px] font-semibold">
                         {msgLoading ? (
                           <div className="flex">
                             <svg
@@ -581,14 +590,22 @@ const ConsultingBidsGenerator = () => {
                           </div>
                         ) : (
                           <div className="flex">
-                            <Image
-                              src={buttonIconSrc}
-                              alt="bold icon"
-                              height={18}
-                              width={18}
-                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={1.5}
+                              stroke="currentColor"
+                              className="w-4 h-4 card-h2"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                              />
+                            </svg>
                             <span
-                              className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                              className={`card-h2 ml-3 text-[15px] font-semibold cursor-pointer`}
                             >
                               Re-generate
                             </span>
@@ -604,7 +621,7 @@ const ConsultingBidsGenerator = () => {
                           disabled={
                             !show || msgLoading || !session?.user?.email
                           }
-                          className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#37B944] border rounded-full ${
+                          className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full download-pdf-btn ${
                             !show || msgLoading || !session?.user?.email
                               ? "opacity-50 cursor-not-allowed"
                               : ""
@@ -616,7 +633,7 @@ const ConsultingBidsGenerator = () => {
                             viewBox="0 0 24 24"
                             strokeWidth="1.5"
                             stroke="currentColor"
-                            className="w-6 h-6 text-[#37B944]"
+                            className="w-6 h-6 green-text"
                           >
                             <path
                               stroke-linecap="round"
@@ -625,7 +642,7 @@ const ConsultingBidsGenerator = () => {
                             />
                           </svg>
 
-                          <span className="text-[#37B944] text-[15px] font-semibold">
+                          <span className="text-[15px] font-semibold green-text">
                             Download in PDF
                           </span>
                         </button>
@@ -662,7 +679,7 @@ const ConsultingBidsGenerator = () => {
                           isBidCopied
                         }
                         onClick={() => copyBid(streamedData)}
-                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full ${
+                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px]  border rounded-full copy-to-clip-board-btn ${
                           msgLoading ||
                           !session?.user?.email ||
                           !aiInputUserData ||
@@ -682,7 +699,7 @@ const ConsultingBidsGenerator = () => {
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="currentColor"
-                          className="w-4 h-4 text-white"
+                          className="w-4 h-4 card-h2"
                         >
                           <path
                             stroke-linecap="round"
@@ -691,7 +708,7 @@ const ConsultingBidsGenerator = () => {
                           />
                         </svg>
 
-                        <span className="text-white text-[15px] font-semibold">
+                        <span className="card-h2 text-[15px] font-semibold">
                           {msgLoading
                             ? "Please wait..."
                             : isBidCopied
@@ -708,7 +725,7 @@ const ConsultingBidsGenerator = () => {
                             !show || msgLoading || !session?.user?.email
                           }
                           onClick={handleClick}
-                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full ${
+                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px]  rounded-full edit-btn${
                             !show || msgLoading || !session?.user?.email
                               ? "opacity-50 cursor-not-allowed"
                               : ""
@@ -721,7 +738,7 @@ const ConsultingBidsGenerator = () => {
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="currentColor"
-                              className="w-6 h-6 text-yellow-200"
+                              className="w-6 h-6  yellow-text"
                             >
                               <path
                                 stroke-linecap="round"
@@ -729,7 +746,7 @@ const ConsultingBidsGenerator = () => {
                                 d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
                               />
                             </svg>
-                            <span className="text-yellow-200 text-[15px] font-semibold">
+                            <span className="yellow-text text-[15px] font-semibold">
                               Edit
                             </span>
                           </div>

@@ -323,7 +323,7 @@ export default function CoverLetterPage() {
           {/* <AiGeneratedCoverLetters /> */}
           <Link
             href="/dashboard"
-            className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
+            className="ml-2 my-4 no-underline back-btn-text flex flex-row gap-2 items-center hover:opacity-80 transition-all"
           >
             {leftArrowIcon}
             Back
@@ -333,13 +333,13 @@ export default function CoverLetterPage() {
 
           {/* <MainCoverLetterTool /> */}
           <>
-            <div className=" bg-[#17151B] rounded-[20px] px-4 lg:px-[30px] py-8 lg:py-[41px] flex flex-col gap-5 ">
+            <div className=" single-service-bg rounded-[20px] px-4 lg:px-[30px] py-8 lg:py-[41px] flex flex-col gap-5 ">
               {/* header */}
               <div className="flex flex-col gap-2 md:flex-row  justify-between items-center">
-                <h3 className=" text-[16px] md:text-sm uppercase text-white font-bold">
+                <h3 className=" text-[16px] md:text-sm uppercase card-h2 font-bold">
                   Generate Cover Letter
                 </h3>
-                <div className=" text-sm text-white uppercase font-bold">
+                <div className=" text-sm card-h2 uppercase font-bold">
                   <LimitCard
                     title="Cover Letter Availble"
                     limit={
@@ -369,7 +369,7 @@ export default function CoverLetterPage() {
               <div className="flex flex-col gap-5 lg:px-0 ">
                 <label
                   htmlFor="default-radio-1"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[290px] lg:w-[400px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] card-h2 w-[290px] lg:w-[400px] ${
                     selectedOption === "profile"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -396,7 +396,7 @@ export default function CoverLetterPage() {
                 </label>
                 <label
                   htmlFor="default-radio-2"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] text-white w-[220px] lg:w-[290px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] card-h2 w-[220px] lg:w-[290px] ${
                     selectedOption === "file"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -434,7 +434,7 @@ export default function CoverLetterPage() {
                 <div className="w-full flex flex-col">
                   <label
                     htmlFor="job-title"
-                    className=" font-bold text-md md:text-[24px] text-white flex lg:py-[20px] gap-[3px]"
+                    className=" font-bold text-md md:text-[24px] card-h2 flex lg:py-[20px] gap-[3px]"
                   >
                     Paste Your Job Description
                     <span className="text-[#F04248] text-[24px]">*</span>
@@ -460,7 +460,7 @@ export default function CoverLetterPage() {
                     jobDescription === ""
                   }
                   onClick={handleGenerate}
-                  className={`bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                  className={`dashboard-outline-btn flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                     (msgLoading ||
                       !session?.user?.email ||
                       !aiInputUserData ||
@@ -470,7 +470,7 @@ export default function CoverLetterPage() {
                     "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
                   }`}
                 >
-                  <span className="text-white text-[15px] font-semibold">
+                  <span className="card-h2 text-[15px] font-semibold">
                     {msgLoading ? (
                       <div className="flex">
                         <svg
@@ -493,14 +493,23 @@ export default function CoverLetterPage() {
                       </div>
                     ) : (
                       <div className="flex">
-                        <Image
-                          src={buttonIconSrc}
-                          alt="bold icon"
-                          height={18}
-                          width={18}
-                        />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-4 h-4 card-h2"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                          />
+                        </svg>
+
                         <span
-                          className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                          className={`card-h2 ml-3 text-[15px] font-semibold cursor-pointer`}
                         >
                           Generate Cover Letter
                         </span>
@@ -512,7 +521,7 @@ export default function CoverLetterPage() {
 
               {show && (
                 <div className="mt-[40px]">
-                  <h1 className="uppercase text-white font-bold text-[18px] pb-5">
+                  <h1 className="uppercase card-h2 font-bold text-[18px] pb-5">
                     your ai generated cover letter
                   </h1>
 
