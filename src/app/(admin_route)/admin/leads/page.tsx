@@ -67,26 +67,32 @@ const LeadsAdminPage = () => {
 
   const columns = [
     columnHelper.accessor("name", {
+      id: "name",
       header: () => "Name",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("email", {
+      id: "email",
       header: () => "Email",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("phone", {
+      id: "phone",
       header: () => "Phone",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("location", {
+      id: "location",
       header: () => "location",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("recentJob", {
+      id: "recentJob",
       header: () => "Recent Job",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("status", {
+      id: "status",
       header: () => "status",
       cell: (info) => {
         let status = info.renderValue();
@@ -113,6 +119,7 @@ const LeadsAdminPage = () => {
       },
     }),
     columnHelper.accessor("created", {
+      id: "created",
       header: () => "Created On",
       cell: (info: any) => getFormattedDate(info.renderValue()),
     }),

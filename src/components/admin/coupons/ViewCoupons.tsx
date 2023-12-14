@@ -45,47 +45,56 @@ const ViewCoupons = ({}) => {
 
   const columns = [
     columnHelper.accessor("id", {
+      id: "id",
       header: () => "coupon code / id",
       cell: (info) => info.renderValue(),
       // footer: (info) => info.column.id,
     }),
     columnHelper.accessor("name", {
+      id: "name",
       header: () => "name",
       cell: (info) => info.renderValue(),
       // footer: (info) => info.column.id,
     }),
     columnHelper.accessor("amount_off", {
+      id: "amount_off",
       header: () => "Disc Amount",
       cell: (info: any) => info.renderValue() / 100,
       // footer: (info) => info.column.id,
     }),
     columnHelper.accessor("percent_off", {
+      id: "percent_off",
       header: () => "Disc Percentage",
       cell: (info) => info.renderValue(),
       // footer: (info) => info.column.id,
     }),
     columnHelper.accessor("duration", {
+      id: "duration",
       header: () => "duration",
       cell: (info) => info.renderValue(),
       // footer: (info) => info.column.id,
     }),
     columnHelper.accessor("valid", {
+      id: "valid",
       header: () => "is Valid",
       cell: (info) => (info.renderValue() ? "Yes" : "No"),
       // footer: (info) => info.column.id,
     }),
     columnHelper.accessor("created", {
+      id: "created",
       header: () => "Created On",
       cell: (info: any) => toDateAndTime(info.renderValue()),
       // footer: (info) => info.column.id,
     }),
 
     columnHelper.accessor("redeem_by", {
+      id: "redeem_by",
       header: () => "expires on",
       cell: (info: any) => toDateAndTime(info.renderValue()),
       // footer: (info) => info.column.id,
     }),
     columnHelper.accessor("times_redeemed", {
+      id: "times_redeemed",
       header: () => "Times Redeemed ",
       cell: (info) => info.renderValue(),
       // footer: (info) => info.column.id,

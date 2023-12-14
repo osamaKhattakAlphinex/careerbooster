@@ -52,18 +52,22 @@ const Contacts = () => {
 
   const columns = [
     columnHelper.accessor("name", {
+      id: "name",
       header: () => "Sender name",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("email", {
+      id: "email",
       header: () => "Email",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("phone", {
+      id: "phone",
       header: () => "Phone",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("message", {
+      id: "message",
       header: () => "Message",
       cell: (info) => (
         <span className="max-w-sm truncate inline-block">

@@ -136,14 +136,20 @@ const DataTable = <C, D>({
   const [rowSelection, setRowSelection] = React.useState({});
   const [rowSelectionIds, setRowSelectionIds] = React.useState<string[]>([]);
 
+  const [datacolumns] = React.useState<any>(() => [...columns]);
+
+  const [columnVisibility, setColumnVisibility] = React.useState({});
+
   const table = useReactTable({
     columns: columns as ColumnDef<D, any>[],
     data,
     state: {
       rowSelection,
+      columnVisibility,
     },
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
     enableRowSelection: enableRowSelection,
     onRowSelectionChange: setRowSelection,
   });
@@ -174,7 +180,6 @@ const DataTable = <C, D>({
   }
   useEffect(() => {
     return function cleanup() {
-      console.log("reseting the selected rows");
       setRowSelection([]);
     };
   }, [data]);
@@ -198,11 +203,18 @@ const DataTable = <C, D>({
   return (
     <>
       <div className="p-2 overflow-x-auto">
-        {Object.entries(rowSelection).length > 0 && (
-          <div className="flex flex-row justify-end items-center gap-2 my-3">
-            {showBulkDataOperations(bulkDataOperations, rowSelectionIds)}
+        <div className="grid grid-cols-5  my-3">
+          <div className=" col-span-1">
+            <ColumnSelector table={table} columns={datacolumns} />
           </div>
-        )}
+          <div className="col-span-4">
+            {Object.entries(rowSelection).length > 0 && (
+              <div className="flex flex-row justify-end items-center gap-2">
+                {showBulkDataOperations(bulkDataOperations, rowSelectionIds)}
+              </div>
+            )}
+          </div>
+        </div>
 
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -373,5 +385,88 @@ function IndeterminateCheckbox({
     />
   );
 }
+
+type ColumnSelectorType = {
+  table: any;
+  columns: any;
+};
+
+const ColumnSelector = ({ table, columns }: ColumnSelectorType) => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  if (!columns) return;
+
+  return (
+    <div className="w-full">
+      <div className="relative p-2 bg-[#1F2937]">
+        <button
+          className="w-full  flex flex-row justify-between items-center rounded-sm"
+          onClick={() => setOpen(!open)}
+        >
+          <span className="font-semibold text-xs">Columns Selector</span>
+
+          {open ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-4 h-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 15.75l7.5-7.5 7.5 7.5"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-4 h-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          )}
+        </button>
+        <div className="z-10 absolute left-0 top-11 right-0 bottom-0 shadow-sm">
+          <div className={`${open ? "block" : "hidden"} bg-[#1F2937] `}>
+            {table.getAllLeafColumns().map((column: any, index: number) => {
+              if (column.id !== "select") {
+                console.log(columns, column);
+                return (
+                  <div key={column.id} className="p-2 border border-[#232b38]">
+                    <label className="w-full">
+                      <input
+                        {...{
+                          type: "checkbox",
+                          checked: column.getIsVisible(),
+                          onChange: column.getToggleVisibilityHandler(),
+                        }}
+                      />{" "}
+                      {columns?.map((col: any) => {
+                        if (col.id === column.id) {
+                          return col.header();
+                        }
+                      })}
+                    </label>
+                  </div>
+                );
+              }
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default DataTable;

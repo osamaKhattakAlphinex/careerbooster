@@ -96,10 +96,12 @@ const TrainRegistrationBotAdminPage = () => {
 
   const columns = [
     columnHelper.accessor("userEmail", {
+      id: "userEmail",
       header: () => "Email",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("status", {
+      id: "status",
       header: () => "Status",
       cell: (info) => {
         let status = info.renderValue();
@@ -126,10 +128,12 @@ const TrainRegistrationBotAdminPage = () => {
       },
     }),
     columnHelper.accessor("createdAt", {
+      id: "createdAt",
       header: () => "Created At",
       cell: (info) => getFormattedDate(info.renderValue()),
     }),
     columnHelper.accessor("type", {
+      id: "type",
       header: () => "Type",
       cell: (info) => info.renderValue()?.replaceAll(".", " -> "),
     }),

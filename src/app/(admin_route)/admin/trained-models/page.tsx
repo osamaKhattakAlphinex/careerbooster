@@ -23,16 +23,19 @@ const TrainedModel = () => {
 
   const columns = [
     columnHelper.accessor("dataset", {
+      id: "dataset",
       header: () => "Dataset",
       cell: (info) => {
         return info.getValue();
       },
     }),
     columnHelper.accessor("model", {
+      id: "model",
       header: () => "Model",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("updatedAt", {
+      id: "updatedAt",
       header: () => "Trained On",
       cell: (info: any) => getFormattedDate(info.renderValue()),
     }),
