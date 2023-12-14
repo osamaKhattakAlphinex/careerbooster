@@ -441,7 +441,6 @@ const ColumnSelector = ({ table, columns }: ColumnSelectorType) => {
           <div className={`${open ? "block" : "hidden"} bg-[#1F2937] `}>
             {table.getAllLeafColumns().map((column: any, index: number) => {
               if (column.id !== "select") {
-                console.log(columns, column);
                 return (
                   <div key={column.id} className="p-2 border border-[#232b38]">
                     <label className="w-full">
@@ -451,7 +450,7 @@ const ColumnSelector = ({ table, columns }: ColumnSelectorType) => {
                           checked: column.getIsVisible(),
                           onChange: column.getToggleVisibilityHandler(),
                         }}
-                      />{" "}
+                      />
                       {columns?.map((col: any) => {
                         if (col.id === column.id) {
                           return col.header();

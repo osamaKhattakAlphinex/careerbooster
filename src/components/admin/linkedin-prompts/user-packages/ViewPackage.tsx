@@ -39,6 +39,7 @@ type Package = {
 };
 
 const ViewPackage = ({}) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [packages, setPackages] = useState<Package[]>([]);
   const confirmationModalRef: React.MutableRefObject<any> = useRef(null);
 
@@ -111,12 +112,18 @@ const ViewPackage = ({}) => {
   ];
 
   const getPackages = async () => {
-    try {
-      let response: any = await axios.get("/api/packages");
-      if (response?.data.success) {
-        setPackages(response.data.result);
+    setLoading(true);
+    if (!loading) {
+      try {
+        let response: any = await axios.get("/api/packages");
+        if (response?.data.success) {
+          setPackages(response.data.result);
+        }
+      } catch {
+      } finally {
+        setLoading(false);
       }
-    } catch {}
+    }
   };
 
   useEffect(() => {
@@ -154,7 +161,7 @@ const ViewPackage = ({}) => {
             </div>
 
             <DataTable
-              loading={false}
+              loading={loading}
               columns={columns}
               data={packages}
               actions={actions}

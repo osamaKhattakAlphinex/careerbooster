@@ -282,7 +282,7 @@ const UsersPage = () => {
   const onSubscriptionChange = async (id: string, pckg: string) => {
     if (window.confirm("Are you sure to Change the subscription status")) {
       setSubscriptionId(id);
-      console.log(pckg);
+
       const record: any = await axios
         .put(`/api/users/${id}`, {
           userPackage: pckg,
@@ -329,25 +329,27 @@ const UsersPage = () => {
   };
   const getUserDeatils = () => {
     setshowTableLoader(true);
+    setLoading(true);
+    if (!loading) {
+      fetch(`/api/users?limit=${limitOfUser}&page=${currentPage}`)
+        .then(async (resp) => {
+          const res = await resp.json();
+          setLoadingId("");
 
-    fetch(`/api/users?limit=${limitOfUser}&page=${currentPage}`)
-      .then(async (resp) => {
-        const res = await resp.json();
-        setLoadingId("");
-
-        if (res.success) {
-          setRecords(res.result);
-          setTotalPages(Math.ceil(res.total / limitOfUser));
-          setshowTableLoader(false);
+          if (res.success) {
+            setRecords(res.result);
+            setTotalPages(Math.ceil(res.total / limitOfUser));
+            setshowTableLoader(false);
+            setLoading(false);
+          } else {
+            setRecords([]);
+          }
+        })
+        .finally(() => {
           setLoading(false);
-        } else {
-          setRecords([]);
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-        setshowTableLoader(false);
-      });
+          setshowTableLoader(false);
+        });
+    }
   };
 
   const getUsersCount = async () => {

@@ -34,6 +34,7 @@ type Coupon = {
 
 const ViewCoupons = ({}) => {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const confirmationModalRef: React.MutableRefObject<any> = useRef(null);
   const handleOpenConfirmationModal = (record: Coupon) => {
     if (confirmationModalRef.current) {
@@ -134,12 +135,18 @@ const ViewCoupons = ({}) => {
   };
 
   const getCoupons = async () => {
-    try {
-      let response: any = await axios.get("/api/coupons");
-      if (response?.data.success) {
-        setCoupons(response.data.result);
+    setLoading(true);
+    if (!loading) {
+      try {
+        let response: any = await axios.get("/api/coupons");
+        if (response?.data.success) {
+          setCoupons(response.data.result);
+        }
+      } catch {
+      } finally {
+        setLoading(false);
       }
-    } catch {}
+    }
   };
   useEffect(() => {
     getCoupons();
@@ -174,7 +181,7 @@ const ViewCoupons = ({}) => {
             {/* Table */}
 
             <DataTable
-              loading={false}
+              loading={loading}
               columns={columns}
               data={coupons}
               actions={actions}

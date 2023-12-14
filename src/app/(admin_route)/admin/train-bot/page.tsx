@@ -67,29 +67,29 @@ const TrainRegistrationBotAdminPage = () => {
   const fetchRecords = async () => {
     setLoading(true);
 
-    // if(!loading){
-    axios
-      .get(`/api/trainBot?limit=${limitOfRecords}&page=${currentPage}`, {
-        params: {
-          status: activeTab,
-          type: showRecordsType,
-          dataType: dataType,
-        },
-      })
-      .then((res: any) => {
-        if (res.data.success) {
-          const result = res.data;
-          setTotalPages(Number(Math.ceil(result.totalRecs / limitOfRecords)));
-          setRecords(result.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-    // }
+    if (!loading) {
+      axios
+        .get(`/api/trainBot?limit=${limitOfRecords}&page=${currentPage}`, {
+          params: {
+            status: activeTab,
+            type: showRecordsType,
+            dataType: dataType,
+          },
+        })
+        .then((res: any) => {
+          if (res.data.success) {
+            const result = res.data;
+            setTotalPages(Number(Math.ceil(result.totalRecs / limitOfRecords)));
+            setRecords(result.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   };
 
   const columnHelper = createColumnHelper<TrainBotEntryType>();
@@ -181,7 +181,7 @@ const TrainRegistrationBotAdminPage = () => {
         icon: deleteIcon,
       },
       {
-        name: "Download All",
+        name: "Download",
         type: "handler",
         element: () => handleDownload(),
         styles:
@@ -189,7 +189,7 @@ const TrainRegistrationBotAdminPage = () => {
         icon: downloadIcon,
       },
       {
-        name: "Change Status To Reviewed",
+        name: "Change Status To Trained",
         type: "handler",
         element: (ids: string[] | []) => handleChangeStatus(ids),
         styles:
