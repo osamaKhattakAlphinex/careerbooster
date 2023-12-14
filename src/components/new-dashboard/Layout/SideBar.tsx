@@ -80,7 +80,7 @@ const SideBar = () => {
       {/* Mobile Menu Button */}
 
       <div
-        className={`sidebarTop sidebar  fixed px-6 top-0  w-[234px]  pb-[10px]  bg-zinc-900 flex items-center transition-all duration-200   ${
+        className={`sidebarTop sidebar  fixed px-6 top-0  w-[234px]  pb-[10px]  sideBar flex items-center transition-all duration-200   ${
           isOpen ? " " : "bg-opacity-0 lg:bg-opacity-100 "
         }`}
       >
@@ -94,7 +94,7 @@ const SideBar = () => {
         </div>
       </div>
       <div
-        className={`sidebar fixed w-[234px] top-0 flex justify-center  mt-16 h-[100%] bg-zinc-900 overflow-y-auto  transition-all ${
+        className={`sidebar fixed w-[234px] top-0 flex justify-center  mt-16 h-[100%] sideBar overflow-y-auto  transition-all ${
           isOpen
             ? "translate-x-0 lg:translate-x-0"
             : "-translate-x-full lg:translate-x-0 " // Apply opacity only on small screens
@@ -115,12 +115,12 @@ const SideBar = () => {
                 </div>
               </div>
               <div>
-                <h1 className="text-gray-200 text-base gap-1 font-semibold mb-0 ">
+                <h1 className="sideBar_text text-base gap-1 font-semibold mb-0 ">
                   {userData.firstName + " " + userData.lastName}
                 </h1>
                 <Link
                   href="/profile-review"
-                  className="text-[14px] text-[#B324D7] p-.5 hover:text-[#E6F85E] hover:opacity-80"
+                  className="text-[14px] text-[#B324D7] p-.5 sideBar_p_text"
                 >
                   Edit Profile
                 </Link>
@@ -129,7 +129,7 @@ const SideBar = () => {
             <div className="px-7 py-[8px]">
               <Button
                 btnText="Resume Review"
-                textColor={`text-white`}
+                textColor={`btn-text`}
                 isActive={true}
               />
             </div>

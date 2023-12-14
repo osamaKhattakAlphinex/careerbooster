@@ -17,7 +17,7 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
           {children}
         </div>
 
-        <Script src="assets/js/plugins.js" />
+        {/* <Script src="assets/js/plugins.js" /> */}
         <Script src="assets/js/main.js" />
       </body>
     </html>
