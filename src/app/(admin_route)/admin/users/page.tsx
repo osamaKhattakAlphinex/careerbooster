@@ -119,15 +119,14 @@ const UsersPage = () => {
       id: "subscription",
       header: () => "Subscription",
       cell: (info) => {
-        const { _id, usedPackage, userPackage, userPackageExpirationDate } =
-          info.getValue();
+        const { _id, userPackage, userPackageExpirationDate } = info.getValue();
         return subscriptionId === _id ? (
           refreshIconRotating
         ) : (
           <div className="flex justify-center items-center gap-2">
             <select
               className="rounded"
-              value={usedPackage}
+              value={userPackage}
               onChange={(e) => {
                 onSubscriptionChange(_id, e.target.value);
               }}
