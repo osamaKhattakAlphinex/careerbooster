@@ -325,7 +325,7 @@ const UsersPage = () => {
   };
   const getUserDeatils = () => {
     setshowTableLoader(true);
-
+    setLoading(true);
     fetch(`/api/users?limit=${limitOfUser}&page=${currentPage}`)
       .then(async (resp) => {
         const res = await resp.json();
@@ -378,6 +378,7 @@ const UsersPage = () => {
     setLimitOfUser(e.target.value);
   };
   useEffect(() => {
+    setRecords([]);
     getUserDeatils();
     const startIndex = (currentPage - 1) * limitOfUser;
 
@@ -559,12 +560,11 @@ const UsersPage = () => {
                         setRecords([]);
                         setCurrentPage(number);
                       }}
-                      className={`border-gray-300  leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400  text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white hover:text-gray-700 first-letter
-                      ${
+                      className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
                         currentPage === number
-                          ? "bg-gray-400  dark:!bg-white dark:text-black"
-                          : ""
-                      } `}
+                          ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
+                          : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+                      }`}
                     >
                       {number}
                     </button>
@@ -593,194 +593,3 @@ const UsersPage = () => {
 };
 
 export default UsersPage;
-
-// <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-//   <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-//     <tr>
-//       <th>
-//         {!loading && records.length !== 0 ? (
-//           <span className="px-6 py-3">
-//             <input
-//               type="checkbox"
-//               checked={selectAll}
-//               onChange={onSelectAll}
-//             />
-//           </span>
-//         ) : (
-//           ""
-//         )}
-//       </th>
-//       {/* <th scope="col" className="px-6 py-3">
-//                 S.N0
-//               </th> */}
-//       <th scope="col" className="px-6 py-3">
-//         User Name
-//       </th>
-//       <th scope="col" className="px-6 py-3">
-//         User Email
-//       </th>
-//       {/* <th scope="col" className="px-6 py-3">
-//                 User Phone
-//               </th> */}
-//       <th scope="col" className="px-6 py-3">
-//         User Country
-//       </th>
-//       {/* <th scope="col" className="px-6 py-3">
-//                 User City State
-//               </th> */}
-//       <th scope="col" className="px-6 py-3">
-//         User Role
-//       </th>
-//       <th scope="col" className="px-6 py-3">
-//         Creation Date
-//       </th>
-//       <th scope="col" className="px-6 py-3">
-//         Status
-//       </th>
-//       <th scope="col" className="px-6 py-3">
-//         Subscription
-//       </th>
-//       <th scope="col" className="px-6 py-3">
-//         Action
-//       </th>
-//     </tr>
-//   </thead>
-//   <tbody>
-//     {showTableLoader && (
-//       <tr>
-//         <td
-//           className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
-//           colSpan={14}
-//         >
-//           Loading ...
-//         </td>
-//       </tr>
-//     )}
-//     {!showTableLoader && records && records.length === 0 && (
-//       <tr>
-//         <td
-//           className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
-//           colSpan={14}
-//         >
-//           No records found
-//         </td>
-//       </tr>
-//     )}
-//     {records &&
-//       records.map((item: any, index: number) => {
-//         return (
-//           <>
-//             <tr className=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-//               <td className="px-6 py-4">
-//                 <input
-//                   type="checkbox"
-//                   checked={isChecked(item._id)}
-//                   onChange={(e) => onSelecting(e.target.checked, item._id)}
-//                 />
-//               </td>
-//               {/* <th
-//                         scope="row"
-//                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-//                       >
-//                         {pageStart + index + 1}
-//                       </th> */}
-//               <td className="px-6 py-4">
-//                 {item.firstName + " " + item.lastName}
-//               </td>
-//               <td className="px-6 py-4"> {item.email} </td>
-//               {/* <td className="px-6 py-4">{item?.phone}</td> */}
-//               <td className="px-6 py-4">{item.contact?.country}</td>
-//               {/* <td className="px-6 py-4">
-//                         {" "}
-//                         {item.contact?.cityState}{" "}
-//                       </td> */}
-//               <td className="px-6 py-4">{item.role}</td>
-//               <td className="px-6 py-4">
-//                 {getFormattedDate(item.createdAt)}
-//               </td>
-//               <td className="px-6 py-4">
-//                 {loadingId === item._id ? (
-//                   refreshIconRotating
-//                 ) : (
-//                   <label className="relative inline-flex items-center cursor-pointer">
-//                     <input
-//                       type="checkbox"
-//                       checked={item.status}
-//                       value=""
-//                       className="sr-only peer"
-//                       onChange={(e) => {
-//                         handleChange(item._id, e.target.checked);
-//                         if (loadingId === "") {
-//                           e.target.checked = false;
-//                         }
-//                       }}
-//                     />
-//                     <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-//                     <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-//                       {item?.status === true ? "Active" : "InActive"}
-//                     </span>
-//                   </label>
-//                 )}
-//               </td>
-//               <td className="px-6 py-4">
-//                 {subscriptionId === item._id ? (
-//                   refreshIconRotating
-//                 ) : (
-//                   <div className="flex justify-center items-center gap-2">
-//                     <select
-//                       className="rounded"
-//                       value={item.usedPackage}
-//                       onChange={(e) => {
-//                         onSubscriptionChange(item._id, e.target.value);
-//                       }}
-//                     >
-//                       {pkg.map((p: any, i: any) => {
-//                         return (
-//                           <option
-//                             key={i}
-//                             value={p._id}
-//                             selected={item.userPackage === p._id}
-//                           >
-//                             {p.title}
-//                           </option>
-//                         );
-//                       })}
-//                     </select>
-//                     <div className="flex justify-center items-center">
-//                       <input
-//                         type="checkbox"
-//                         checked={checkingSubscription(
-//                           item.userPackageExpirationDate
-//                         )}
-//                         onChange={(e) => {
-//                           onSubscriptionChange(item._id, item.userPackage);
-//                           if (subscriptionId === "") {
-//                             e.target.checked = false;
-//                           }
-//                         }}
-//                       />
-//                       <span className=" text-sm font-medium text-gray-900 dark:text-gray-300">
-//                         {new Date(item.userPackageExpirationDate).getTime() <
-//                           Date.now() ||
-//                         item.userPackageExpirationDate === undefined
-//                           ? "Off"
-//                           : "On"}
-//                       </span>
-//                     </div>
-//                   </div>
-//                 )}
-//               </td>
-//               <td className="flex gap-2 mt-2  items-center ">
-//                 <button
-//                   className="px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 no-underline"
-//                   onClick={() => handleDelete(item._id)}
-//                 >
-//                   Delete
-//                 </button>
-//               </td>
-//             </tr>
-//           </>
-//         );
-//       })}
-//   </tbody>
-// </table>;

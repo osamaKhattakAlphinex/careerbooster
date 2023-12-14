@@ -1,27 +1,61 @@
 "use client";
-import * as React from "react";
-import { AudioRecorder } from "react-audio-voice-recorder";
 
-export default function App() {
-  const addAudioElement = (blob: Blob) => {
-    const url = URL.createObjectURL(blob);
-    console.log(url);
-  };
+import { useEffect } from "react";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
+const AudioComponent = () => {
+  //subscribe to thapa technical for more awesome videos
+
+  const startListening = () =>
+    SpeechRecognition.startListening({ continuous: true, language: "en-US" });
+  const { transcript, browserSupportsSpeechRecognition } =
+    useSpeechRecognition();
+
+  if (!browserSupportsSpeechRecognition) {
+    console.log("Your browser does not support speech recognition");
+  }
+  useEffect(() => {
+    startListening();
+  }, []);
   return (
     <div>
-      <AudioRecorder
-        onRecordingComplete={addAudioElement}
-        audioTrackConstraints={{
-          noiseSuppression: true,
-          echoCancellation: true,
-        }}
-        onNotAllowedOrFound={(err: any) => console.table(err)}
-        mediaRecorderOptions={{
-          audioBitsPerSecond: 128000,
-        }}
-      />
-      <br />
+      <div>{transcript}</div>
+
+      <div>
+        <button onClick={SpeechRecognition.stopListening}>
+          Stop Listening
+        </button>
+      </div>
     </div>
   );
-}
+};
+
+export default AudioComponent;
+
+// import { useEffect } from "react";
+// import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
+
+// const AudioRecording = () => {
+//   const recorderControls = useAudioRecorder();
+//   const addAudioElement = (blob: any) => {
+//     const url = URL.createObjectURL(blob);
+//     console.log(url);
+//   };
+//   useEffect(() => {
+//     recorderControls.startRecording();
+//   }, []);
+
+//   return (
+//     <div>
+//       <AudioRecorder
+//         onRecordingComplete={(blob) => addAudioElement(blob)}
+//         recorderControls={recorderControls}
+//       />
+//       <button onClick={recorderControls.stopRecording}>Stop recording</button>
+//     </div>
+//   );
+// };
+
+// export default AudioRecording;

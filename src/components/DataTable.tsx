@@ -6,7 +6,7 @@ import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
-  getPaginationRowModel,
+  // getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 
@@ -143,7 +143,7 @@ const DataTable = <C, D>({
       rowSelection,
     },
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    // getPaginationRowModel: getPaginationRowModel(),
     enableRowSelection: enableRowSelection,
     onRowSelectionChange: setRowSelection,
   });
@@ -281,7 +281,7 @@ const DataTable = <C, D>({
           </tbody>
         </table>
       </div>
-      {/* PAGINATION */}
+      {/* PAGINATION
       <div className="h-2" />
       {data && data.length > 0 && (
         <div className="flex items-center gap-2 w-full">
@@ -346,7 +346,7 @@ const DataTable = <C, D>({
             ))}
           </select>
         </div>
-      )}
+      )} */}
     </>
   );
 };

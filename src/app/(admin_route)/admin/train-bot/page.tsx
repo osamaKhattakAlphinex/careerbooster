@@ -48,6 +48,7 @@ const TrainRegistrationBotAdminPage = () => {
   const searchParams = useSearchParams();
   const [totalPages, setTotalPages] = useState(0);
   const [startingPage, setStartingPage] = useState(1);
+
   const [limitOfRecords, setLimitOfRecords] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("pending");
@@ -79,7 +80,7 @@ const TrainRegistrationBotAdminPage = () => {
       .then((res: any) => {
         if (res.data.success) {
           const result = res.data;
-          setTotalPages(Number(Math.ceil(result.totalRecs / limitOfRecords)));
+          setTotalPages(Math.ceil(result.totalRecs / limitOfRecords));
           setRecords(result.data);
         }
       })
@@ -202,7 +203,10 @@ const TrainRegistrationBotAdminPage = () => {
       },
     ],
   };
-
+  const selectUsersLimit = (e: any) => {
+    setCurrentPage(1);
+    setLimitOfRecords(e.target.value);
+  };
   const handleTuneModel = async (values: any = {}) => {
     if (records.length === 0) return;
 
@@ -410,10 +414,8 @@ const TrainRegistrationBotAdminPage = () => {
   }, [dataType]);
 
   useEffect(() => {
-    console.log(dataSelection);
-  }, [dataSelection]);
+    setRecords([]);
 
-  useEffect(() => {
     fetchRecords();
     const startIndex = Number((currentPage - 1) * limitOfRecords);
     setStartingPage(startIndex);
@@ -537,16 +539,15 @@ const TrainRegistrationBotAdminPage = () => {
     }
   };
 
-  useEffect(() => {
-    const startIndex = (currentPage - 1) * limitOfRecords;
-    setStartingPage(startIndex);
-    const endIndex = startIndex + limitOfRecords;
+  // useEffect(() => {
+  //   const startIndex = (currentPage - 1) * limitOfRecords;
+  //   setStartingPage(startIndex);
+  //   const endIndex = startIndex + limitOfRecords;
 
-    setLoading(true);
-    setRecords([]); // Clear existing records before fetching new ones
-
-    router.replace(`${pathname}?r=${limitOfRecords}&p=${currentPage}`);
-  }, [limitOfRecords, currentPage]);
+  //   setRecords([]); // Clear existing records before fetching new ones
+  //   fetchRecords();
+  //   router.replace(`${pathname}?r=${limitOfRecords}&p=${currentPage}`);
+  // }, [limitOfRecords, currentPage]);
 
   return (
     <>
@@ -779,7 +780,27 @@ const TrainRegistrationBotAdminPage = () => {
                 </div>
               </div>
             </div>
-
+            <div className="flex flex-row gap-2 items-center ml-auto  pr-5">
+              <label htmlFor="userPerPage" className="text-sm font-medium">
+                Number of records per page:
+              </label>
+              <select
+                name="userPerPage"
+                id="userPerPage"
+                className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+                onChange={selectUsersLimit}
+                value={limitOfRecords}
+              >
+                <>
+                  <option value={10}>10</option>
+                  <option value={20}>20</option>
+                  <option value={30}>30</option>
+                  <option value={40}>40</option>
+                  <option value={100}>100</option>
+                  <option value={500}>500</option>
+                </>
+              </select>
+            </div>
             {/* Tabs */}
 
             <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 m-0">
@@ -824,63 +845,6 @@ const TrainRegistrationBotAdminPage = () => {
               </li>
             </ul>
 
-            <div className=" flex flex-row justify-end items-center gap-3">
-              {/* {activeTab === "reviewed" && (
-                <div className="flex justify-end">
-                  <button
-                    onClick={handleDownload}
-                    className=" flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                  >
-                    {downloading ? (
-                      <>{refreshIconRotating} Downloading...</>
-                    ) : (
-                      <>{downloadIcon} Download All</>
-                    )}
-                  </button>
-                </div>
-              )} */}
-
-              {/* {activeTab === "reviewed" && records.length > 0 && (
-                <div className="flex justify-end">
-                  <button
-                    onClick={() => {
-                      handleTuneModel();
-                      // if (fineTuningModalRef.current) {
-                      //   fineTuningModalRef.current.openModal(true);
-                      // }
-                    }}
-                    className=" flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                  >
-                    Send For Training
-                  </button>
-                </div>
-              )} */}
-
-              {/* {activeTab === "reviewed" && dataSelection.length >= 1 && (
-                <div className="flex justify-end">
-                  <button
-                    disabled={loading}
-                    onClick={() => handleChangeStatus(dataSelection)}
-                    className=" disabled:cursor-not-allowed flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                  >
-                    Set Status to Trained
-                  </button>
-                </div>
-              )} */}
-
-              {/* {showDeleteAllButton() && (
-                <div className="flex justify-end">
-                  <button
-                    disabled={loading ? true : false}
-                    onClick={handleDeleteAll}
-                    className=" flex gap-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 disabled:cursor-not-allowed"
-                  >
-                    Delete All
-                  </button>
-                </div>
-              )} */}
-            </div>
-
             <DataTable
               loading={loading}
               data={records}
@@ -916,18 +880,16 @@ const TrainRegistrationBotAdminPage = () => {
                       if (number < 1 || number > totalPages) return null;
                       return (
                         <li key={number}>
-                          {currentPage !== totalPages && (
-                            <button
-                              onClick={(e) => {
-                                setRecords([]);
-                                setCurrentPage(number);
-                              }}
-                              className={`border-gray-300  leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400  text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white hover:text-gray-700 first-letter
+                          <button
+                            onClick={(e) => {
+                              setRecords([]);
+                              setCurrentPage(number);
+                            }}
+                            className={`border-gray-300  leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400  text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white hover:text-gray-700 first-letter
                       ${currentPage === number} `}
-                            >
-                              {number}
-                            </button>
-                          )}
+                          >
+                            {number}
+                          </button>
                         </li>
                       );
                     }
@@ -956,137 +918,3 @@ const TrainRegistrationBotAdminPage = () => {
 };
 
 export default TrainRegistrationBotAdminPage;
-
-{
-  /* Table */
-}
-{
-  /* <div className="">
-              <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
-                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                      <th>
-                        {!loading && records.length !== 0 ? (
-                          <span className="px-6 py-3">
-                            <input
-                              type="checkbox"
-                              checked={selectAll}
-                              onChange={onSelectAll}
-                            />
-                          </span>
-                        ) : (
-                          ""
-                        )}
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        S.No
-                      </th>
-                      {dataType !== "linkedinTool" && (
-                        <th scope="col" className="px-6 py-3">
-                          Email
-                        </th>
-                      )}
-                      <th scope="col" className="px-6 py-3">
-                        Type
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Status
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Date Time
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {loading && (
-                      <tr>
-                        <td
-                          className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
-                          colSpan={10}
-                        >
-                          Loading ...
-                        </td>
-                      </tr>
-                    )}
-                    {!loading && records && records.length === 0 && (
-                      <tr>
-                        <td
-                          className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
-                          colSpan={10}
-                        >
-                          No records found
-                        </td>
-                      </tr>
-                    )}
-
-                    {records &&
-                      records.map((rec: any, index: number) => (
-                        <tr
-                          key={rec._id}
-                          className="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                        >
-                          <td className="px-6 py-4">
-                            <input
-                              type="checkbox"
-                              checked={isChecked(rec._id)}
-                              onChange={(e) =>
-                                onSelecting(e.target.checked, rec._id)
-                              }
-                            />
-                          </td>
-                          <td className="px-6 py-4">{index + 1}</td>
-                          {dataType !== "linkedinTool" && (
-                            <td className="px-6 py-4">{rec?.userEmail}</td>
-                          )}
-                          <th
-                            scope="row"
-                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-xs"
-                          >
-                            {rec.type.replaceAll(".", " -> ")}
-                          </th>
-                          <td className="px-6 py-4">
-                            {rec.status === "pending" && (
-                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                Pending
-                              </span>
-                            )}
-                            {rec.status === "reviewed" && (
-                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                Reviewed
-                              </span>
-                            )}
-                            {rec.status === "trained" && (
-                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                                Trained
-                              </span>
-                            )}
-                          </td>
-                          <td className="px-6 py-4">
-                            {getFormattedDate(rec.createdAt)}
-                          </td>
-                          <td className="flex gap-2 mt-2  items-center ">
-                            <Link
-                              href={`/admin/train-bot/${rec._id}`}
-                              className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
-                            >
-                              Review
-                            </Link>
-
-                            <button
-                              className="px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 no-underline"
-                              onClick={() => handleDelete(rec._id)}
-                            >
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </div>
-            </div> */
-}
