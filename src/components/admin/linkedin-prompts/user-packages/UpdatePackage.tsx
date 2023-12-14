@@ -38,7 +38,7 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
   const [popUpModel, setPopUpModel] = useState(false);
   const [editPopUpModel, setEditPopUpModel] = useState(false);
   // const [previewPopUpModel, setPreviewPopUpModel] = useState(false);
-  const packgeId = userPackage._id;
+  const packgeId = userPackage?._id;
 
   const handleFeatureRemove = (idx: number) => {
     const newFeatures = [...formik.values.features];

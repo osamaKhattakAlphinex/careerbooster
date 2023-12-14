@@ -2,7 +2,7 @@ import LinkedInToolMain from "@/components/new-layout/linkedin/LinkedInToolMain"
 import { Metadata } from "next";
 import "@/app/plugins.css";
 import "@/app/style.css";
-import Avatar from "@/components/utilities/Avatar";
+import Avatar from "@/components/Avatar";
 //latest code
 export const metadata: Metadata = {
   title: "CareerBooster.AI-linkedin",

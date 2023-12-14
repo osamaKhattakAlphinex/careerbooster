@@ -1,6 +1,6 @@
 import AiToolsCard from "@/components/new-dashboard/dashboard/CareerBoostingAiToolsCard";
 import RecentDocumentsCard from "@/components/new-dashboard/dashboard/RecentDocumentsCard";
-import Avatar from "@/components/utilities/Avatar";
+import Avatar from "@/components/Avatar";
 // new version (dashboard design)
 
 const Dashboard = () => {

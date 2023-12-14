@@ -1,17 +1,32 @@
 "use client";
+import DataTable, { TableAction } from "@/components/DataTable";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import {
   downloadIcon,
+  exterLinkIconSmall,
   leftArrowIcon,
   refreshIconRotating,
 } from "@/helpers/iconsProvider";
+import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
 import Link from "next/link";
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { string } from "yup";
+
+type Lead = {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  location: string;
+  recentJob: string;
+  status: string;
+  created: string;
+  file: string;
+};
 
 const LeadsAdminPage = () => {
   const [limitOfRecords, setLimitOfRecords] = useState<number>(10);
@@ -23,6 +38,85 @@ const LeadsAdminPage = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const columnHelper = createColumnHelper<Lead>();
+
+  const FileViewer = (rec: any) => {
+    return (
+      <Link
+        href={`/files/linkedin-temp/${rec?.file}`}
+        target="_blank"
+        // href={`/admin/train-bot/${rec._id}`}
+        className="flex flex-row gap-1 px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
+      >
+        Preview {exterLinkIconSmall}
+      </Link>
+    );
+  };
+
+  const actions: TableAction[] = [
+    {
+      name: "view file",
+      type: "component",
+      element: (rec: any) => FileViewer(rec),
+      styles:
+        "px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline",
+      icon: "",
+    },
+  ];
+
+  const columns = [
+    columnHelper.accessor("name", {
+      header: () => "Name",
+      cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("email", {
+      header: () => "Email",
+      cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("phone", {
+      header: () => "Phone",
+      cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("location", {
+      header: () => "location",
+      cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("recentJob", {
+      header: () => "Recent Job",
+      cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("status", {
+      header: () => "status",
+      cell: (info) => {
+        let status = info.renderValue();
+
+        if (status === "pending") {
+          return (
+            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+              Pending
+            </span>
+          );
+        } else if (status === "reviewed") {
+          return (
+            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+              Reviewed
+            </span>
+          );
+        } else if (status === "trained") {
+          return (
+            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+              Trained
+            </span>
+          );
+        }
+      },
+    }),
+    columnHelper.accessor("created", {
+      header: () => "Created On",
+      cell: (info: any) => getFormattedDate(info.renderValue()),
+    }),
+  ];
 
   const [counts, setCounts] = useState<any>(0);
   const [countLabel, setCountLabel] = useState<string>("total");
@@ -160,8 +254,26 @@ const LeadsAdminPage = () => {
             </div>
           </div>
 
-          {/* Table */}
-          <div className="">
+          <DataTable
+            loading={loading}
+            columns={columns}
+            data={records}
+            actions={actions}
+            source="leads"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LeadsAdminPage;
+
+{
+  /* Table */
+}
+{
+  /* <div className="">
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
               <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -187,9 +299,6 @@ const LeadsAdminPage = () => {
                     <th scope="col" className="px-6 py-3">
                       Status
                     </th>
-                    {/* <th scope="col" className="px-6 py-3">
-                      Send to CRM
-                    </th> */}
                     <th scope="col" className="px-6 py-3">
                       Creation Date
                     </th>
@@ -248,7 +357,6 @@ const LeadsAdminPage = () => {
                             </span>
                           )}
                         </td>
-                        {/* <td className="px-6 py-4">{rec?.sendtoCRM}</td> */}
                         <td className="px-6 py-4">
                           {getFormattedDate(rec?.createdAt)}
                         </td>
@@ -256,7 +364,6 @@ const LeadsAdminPage = () => {
                           <Link
                             href={`/files/linkedin-temp/${rec?.file}`}
                             target="_blank"
-                            // href={`/admin/train-bot/${rec._id}`}
                             className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
                           >
                             Preview
@@ -268,7 +375,6 @@ const LeadsAdminPage = () => {
               </table>
             </div>
 
-            {/* Pagination Controls */}
             <div className=" flex justify-end mt-4">
               <nav aria-label="Page navigation example">
                 <ul className="inline-flex -space-x-px">
@@ -285,7 +391,6 @@ const LeadsAdminPage = () => {
                       Previous
                     </button>
                   </li>
-                  {/* {!isLastResult &&} */}
                   {Array.from({ length: 3 }).map((_, index) => {
                     if (currentPage && limitOfRecords) {
                       const pageNumber = currentPage - 1 + index;
@@ -333,11 +438,5 @@ const LeadsAdminPage = () => {
                 </ul>
               </nav>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default LeadsAdminPage;
+          </div> */
+}

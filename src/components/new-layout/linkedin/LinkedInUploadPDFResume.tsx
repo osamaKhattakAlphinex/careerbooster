@@ -13,7 +13,7 @@ import Button from "../../utilities/form-elements/Button";
 import LinkedInSummary from "./LinkedInSummary";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Avatar from "@/components/utilities/Avatar";
+import Avatar from "@/components/Avatar";
 
 //Editable
 const loadFromLocalStorage = () => {
