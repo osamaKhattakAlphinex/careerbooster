@@ -8,7 +8,7 @@ export async function GET(req: any) {
     await startDB();
     const notification = await Notification.find();
     return NextResponse.json({
-      result: "notification",
+      result: notification,
       success: true,
       status: 200,
     });
