@@ -201,28 +201,19 @@
     padding-left: 1rem !important;
   }
 }
-/* Dark and Light Mode */
+/* /* Dark Mode Rehamt Code  */
 [data-bs-theme="dark"] .sideBar {
   background: #17151b !important;
 }
-.sideBar {
-  background-image: url("/assets/images/bg/1.jpg");
-  background-size: cover; /* Adjusts the background image size */
-  background-position: center; /* Centers the background image */
-  background-repeat: no-repeat; /* Prevents the background image from repeating */
-}
+
 [data-bs-theme="dark"] .sideBar_text {
   color: rgb(229 231 235) !important;
 }
-.sideBar_text {
-  color: rgb(229 231 235) !important;
-}
+
 [data-bs-theme="dark"] .sideBar_text {
   color: rgb(255, 255, 255) !important;
 }
-.sideBar_text {
-  color: rgb(0, 0, 0) !important;
-}
+
 [data-bs-theme="dark"] .sideBar_p_text:hover {
   color: #e6f85e !important;
   opacity: 80% !important;
@@ -235,24 +226,152 @@
   color: white !important;
   border: rgb(192 38 211) 1px solid !important ;
 }
-.btn-text {
-  color: cornflowerblue !important;
-  border: text-fuchsia-600 1px solid !important ;
-}
 
 [data-bs-theme="dark"] .btn-active {
   color: red !important;
+}
+
+[data-bs-theme="dark"] .new-btn {
+  color: rgb(0, 0, 0) !important;
+  /* background-color: cornflowerblue !important; */
+}
+/* Dark Mode Osama Code */
+[data-bs-theme="dark"] .header-bg {
+  background: linear-gradient(to left, #340e53, #000533);
+}
+[data-bs-theme="dark"] .header-mode-btn {
+  color: white;
+}
+
+[data-bs-theme="dark"] .gradient-bg {
+  background: linear-gradient(to bottom left, #340e53, #000533, #010111);
+}
+[data-bs-theme="dark"] .back-btn-text {
+  color: #b324d7;
+}
+[data-bs-theme="dark"] .back-btn-text:hover {
+  color: #e6f85e;
+}
+[data-bs-theme="dark"] .single-service-bg {
+  background: #17151b;
+  color: white;
+}
+[data-bs-theme="dark"] .single-service-card-bg {
+  background: #222027;
+  color: black !important;
+}
+[data-bs-theme="dark"] .card-h2 {
+  color: white;
+}
+[data-bs-theme="dark"] .card-btn {
+  background: rgb(24 24 27 / var(--tw-bg-opacity));
+  border-color: rgb(39 39 42 / var(--tw-border-opacity));
+  border: 2px;
+}
+[data-bs-theme="dark"] .card-download-btn {
+  background: rgb(24 24 27 / var(--tw-bg-opacity));
+}
+[data-bs-theme="dark"] .eye-icon,
+.trash-icon {
+  color: rgb(163 163 163);
+}
+[data-bs-theme="dark"] .dashboard-outline-btn {
+  background: linear-gradient(to right, #b324d7, #615dff);
+}
+[data-bs-theme="dark"] .re-generate-btn {
+  border: 1px solid #b324d7;
+}
+[data-bs-theme="dark"] .download-pdf-btn {
+  border: 1px solid #37b944;
+}
+[data-bs-theme="dark"] .green-text {
+  color: #37b944;
+}
+[data-bs-theme="dark"] .copy-to-clip-board-btn {
+  border: 1px solid #312e37;
+}
+[data-bs-theme="dark"] .edit-btn {
+  border: 1px solid #312e37;
+}
+[data-bs-theme="dark"] .yellow-text {
+  color: rgb(254 240 138);
+}
+
+/* Light Mode Rehamt Code */
+.new-btn:hover {
+  color: white !important;
+  background-color: cornflowerblue !important;
+  border: #6a4dff;
+}
+.btn-text {
+  color: cornflowerblue !important;
+  border: text-fuchsia-600 1px solid !important ;
 }
 .btn-active {
   color: cornflowerblue !important;
   border: cornflowerblue 1px solid !important ;
 }
-[data-bs-theme="dark"] .new-btn {
+.sideBar_text {
   color: rgb(0, 0, 0) !important;
-  /* background-color: cornflowerblue !important; */
 }
-.new-btn:hover {
-  color: white !important;
-  background-color: cornflowerblue !important;
-  border: #6a4dff;
+.sideBar_text {
+  color: rgb(229 231 235) !important;
+}
+.sideBar {
+  background-image: url("/assets/images/bg/1.jpg");
+  background-size: cover; /* Adjusts the background image size */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the background image from repeating */
+}
+
+/* Light Mode Osama Code */
+.gradient-bg {
+  background: #c2c6d1;
+}
+.header-bg {
+  background: #c2c6d1;
+}
+.back-btn-text {
+  color: black;
+}
+.back-btn-text:hover {
+  color: white;
+}
+.single-service-bg {
+  background-color: rgba(255, 255, 255, 0.58);
+  color: black;
+}
+.single-service-card-bg {
+  background: rgba(255, 255, 255, 0.58);
+  color: black;
+}
+.card-h2 {
+  color: rgb(0, 0, 0);
+}
+.card-btn {
+  background: none;
+  color: rgb(34 197 94);
+  border: 1px solid rgb(34 197 94);
+}
+.eye-icon,
+.trash-icon {
+  color: rgb(34 197 94);
+}
+.card-download-btn {
+  background: none;
+}
+.dashboard-outline-btn {
+  background: none;
+  border: 2px solid black;
+}
+
+.re-generate-btn,
+.download-pdf-btn,
+.copy-to-clip-board-btn,
+.edit-btn {
+  border: 1px solid #c026d3 !important;
+  color: #b7bd13;
+}
+.header-mode-btn {
+  color: black;
 }

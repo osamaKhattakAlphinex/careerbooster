@@ -32,12 +32,16 @@ const LimitCard: React.FC<LimitCardProps> = ({
   }, [userData, limit, used]);
 
   if (used >= limit) {
-    return <span className="text-[11px] md:text-sm text-red-500 ">Credit Limit Reached</span>;
+    return (
+      <span className="text-[11px] md:text-sm text-red-500 ">
+        Credit Limit Reached
+      </span>
+    );
   } else {
     return (
       <div className="">
         <div className="w-full flex mb-1">
-          <span className="text-[11px] md:text-sm text-white uppercase font-bold">
+          <span className="text-[11px] md:text-sm card-h2 uppercase font-bold">
             {title}
           </span>
           {!isNaN(limit) && !isNaN(used) && (

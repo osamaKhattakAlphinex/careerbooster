@@ -63,10 +63,10 @@ const SingleRecentResumeCard = ({
     }
   };
   return (
-    <div className="flex flex-col lg:w-[100%]   bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[14px] ">
+    <div className="flex flex-col lg:w-[100%]   single-service-card-bg rounded-xl mt-[20px] py-[20px] px-[14px] ">
       <div className="">
         <div className="mx-3 border-gray-600 leading-6">
-          <h2 className="lg:text-[15px] text-[13px]  capitalize text-white font-medium  ">
+          <h2 className="lg:text-[15px] text-[13px]  capitalize card-h2 font-medium  ">
             {resume?.state?.jobPosition}
           </h2>
           {/* <h2
@@ -84,7 +84,7 @@ const SingleRecentResumeCard = ({
       <div className="flex gap-3 ">
         <button
           onClick={handleOnView}
-          className="flex px-2 text-[16px] justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+          className="flex px-2 text-[16px] justify-center items-center rounded-full h-[36px] card-btn"
         >
           {eyeIcon}
           {pathname == "/dashboard" ? (
@@ -96,7 +96,7 @@ const SingleRecentResumeCard = ({
         <button
           type="button"
           onClick={handleOnDelete}
-          className="flex px-2 justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+          className="flex px-2 justify-center items-center rounded-full h-[36px] card-btn"
         >
           {trashIcon}{" "}
           {pathname == "/dashboard" ? (
@@ -119,7 +119,7 @@ const SingleRecentResumeCard = ({
                         !session?.user?.email ||
                         !resume?.name
                       }
-                      className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
+                      className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full card-download-btn  text-green-500 border border-green-500"
                     >
                       Download
                     </button>

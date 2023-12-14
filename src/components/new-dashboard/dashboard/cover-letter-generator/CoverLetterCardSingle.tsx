@@ -36,7 +36,6 @@ const CoverLetterCardSingle = ({
 
   const handleOnDelete = async (card: any) => {
     const c = confirm("Are you sure you want to delete this Cover Letter?");
-   
 
     if (c) {
       try {
@@ -63,12 +62,12 @@ const CoverLetterCardSingle = ({
 
   return (
     <div>
-      <div className="flex flex-col bg-[#222027] rounded-xl mt-[20px] py-[20px] px-[14px] ">
+      <div className="flex flex-col single-service-card-bg rounded-xl mt-[20px] py-[20px] px-[14px] ">
         <div className="">
           <div className="mx-3 border-gray-600 leading-6 w-full">
             <h2
               title={card.jobDescription}
-              className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize text-white font-semibold  "
+              className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize card-h2 font-semibold  "
             >
               {card.jobDescription}
               {/* {card.jobDescription.length < 20
@@ -84,7 +83,7 @@ const CoverLetterCardSingle = ({
           <button
             type="button"
             onClick={() => handleOnView(card)}
-            className="flex px-2 justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+            className="flex px-2 justify-center items-center rounded-full h-[36px] card-btn"
           >
             {/* <Image src={PencilLine} alt="Image Not Found" /> */}
             {eyeIcon}
@@ -97,7 +96,7 @@ const CoverLetterCardSingle = ({
           <button
             type="button"
             onClick={() => handleOnDelete(card)}
-            className="flex px-2 justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800"
+            className="flex px-2 justify-center items-center rounded-full h-[36px] card-btn"
           >
             {trashIcon}
             {pathname == "/dashboard" ? (
@@ -114,7 +113,7 @@ const CoverLetterCardSingle = ({
                     trigger={() => (
                       <button
                         type="button"
-                        className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
+                        className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full card-download-btn text-green-500 border border-green-500"
                       >
                         Download
                       </button>
