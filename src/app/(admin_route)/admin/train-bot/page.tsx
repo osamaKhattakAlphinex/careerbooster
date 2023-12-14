@@ -2,16 +2,10 @@
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import {
   deleteIcon,
-  documentTextIcon,
   downloadIcon,
   eyeIcon,
   leftArrowIcon,
-  powerIcon,
-  refreshIconRotating,
-  rocketLaunch,
   settingIcon,
-  shockIcon,
-  statusIcon,
 } from "@/helpers/iconsProvider";
 import axios from "axios";
 import Link from "next/link";
@@ -200,21 +194,20 @@ const TrainRegistrationBotAdminPage = () => {
       {
         name: "Send For Training",
         type: "handler",
-        element: () => handleTuneModel(),
+        element: (ids: string[] | []) => handleTuneModel(ids),
         styles:
           "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-indigo-700 rounded-lg hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 no-underline",
         icon: settingIcon,
       },
     ],
   };
+
   const selectUsersLimit = (e: any) => {
     setCurrentPage(1);
     setLimitOfRecords(e.target.value);
   };
-  const handleTuneModel = async (values: any = {}) => {
-    if (records.length === 0) return;
-
-    let data: any = [];
+  const handleTuneModel = async (ids: string[] | []) => {
+    if (ids.length === 0) return;
 
     const consent = confirm(
       "Are you sure you want to send this data for training?"
@@ -224,14 +217,12 @@ const TrainRegistrationBotAdminPage = () => {
 
     try {
       setLoading(true);
-
       const {
         data: { success, reviewedData },
-      } = await axios.get(`/api/trainBot/getAllDataForTraining`, {
-        params: {
-          status: activeTab,
-          type: showRecordsType,
-        },
+      } = await axios.post(`/api/trainBot/getAllDataForTraining`, {
+        status: activeTab,
+        type: showRecordsType,
+        ids,
       });
 
       if (success) {
@@ -258,11 +249,7 @@ const TrainRegistrationBotAdminPage = () => {
         );
 
         if (trainingResponse.data.success) {
-          if (reviewedData.length >= 1) {
-            const _ids = reviewedData.map((rec: any) => rec._id);
-            handleChangeStatus(_ids);
-          }
-
+          handleChangeStatus(ids);
           fetchRecords();
         } else {
           console.log("Something went wrong");
@@ -273,70 +260,55 @@ const TrainRegistrationBotAdminPage = () => {
     } finally {
       setLoading(false);
     }
+  };
 
-    // if (consent) {
-    //   let allData = await axios
-    //     .get(`/api/trainBot/getAllDataForTraining`, {
-    //       params: {
-    //         status: activeTab,
-    //         type: showRecordsType,
-    //       },
-    //     })
-    //     .then((res: any) => {
-    //       if (res.data.success) {
-    //         data = res.data.map((rec: any) => {
-    //           return {
-    //             messages: [
-    //               { role: "user", content: rec.input },
-    //               { role: "assistant", content: rec.idealOutput },
-    //             ],
-    //           };
-    //         });
-    //         return res.data;
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     })
-    //     .finally(() => {
-    //       setLoading(false);
-    //     });
+  const handleChangeStatus = async (dataIds: string[] = []) => {
+    setLoading(true);
 
-    //   if (data) {
-    //     const jsonl = data
-    //       .map((obj: any) => JSON.stringify(obj, (key, value) => value, 0))
-    //       .join("\n");
+    axios
+      .put("/api/trainBot/bulkStatusUpdate", {
+        ids: dataIds,
+        newStatus: "trained",
+      })
+      .then((res: any) => {
+        if (res.data.success) {
+          console.log("Status Change Successfully");
+        }
+        fetchRecords();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
-    //     const blob = new Blob([jsonl], {
-    //       type: "application/json",
-    //     });
-
-    //     const formData = new FormData();
-    //     formData.append("traing-file", blob);
-    //     formData.append("record-type", showRecordsType);
-
-    //     try {
-    //       axios
-    //         .post("/api/trainBot/tuneModel", formData)
-    //         .then((res: any) => {
-    //           if (res.data.success) {
-    //           } else {
-    //             console.log("Something went wrong");
-    //           }
-    //         })
-    //         .then(function () {
-    //           if (allData.length >= 1) {
-    //             let _ids: string[] = [];
-    //             allData.map((rec: any) => _ids.push(rec._id));
-    //             handleChangeStatus(_ids);
-    //           }``
-    //           fetchRecords();
-    //         });
-    //     } catch (err) {
-    //       console.log(err);
-    //     }
-    //   }
-    // }
+  const handleDeleteAll = async (ids: string[] | []) => {
+    const c = confirm("Are you sure you want to delete these Records?");
+    if (c) {
+      setLoading(true);
+      console.log("train-bot ids ", ids);
+      try {
+        // console.log("all data deleted");
+        axios
+          .post("/api/trainBot/bulkDelete", { dataSelection: ids })
+          .then((res: any) => {
+            if (res.data.success) {
+              // setDataSelection([]);
+              fetchRecords();
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      } catch (error) {
+        console.log("error ===> ", error);
+      }
+    }
   };
 
   const handleDownload = async () => {
@@ -446,55 +418,6 @@ const TrainRegistrationBotAdminPage = () => {
       return true;
     } else {
       return false;
-    }
-  };
-
-  const handleChangeStatus = async (dataIds: string[] = []) => {
-    setLoading(true);
-
-    axios
-      .put("/api/trainBot/bulkStatusUpdate", {
-        ids: dataIds,
-        newStatus: "trained",
-      })
-      .then((res: any) => {
-        if (res.data.success) {
-          console.log("Status Change Successfully");
-        }
-        fetchRecords();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const handleDeleteAll = async (ids: string[] | []) => {
-    const c = confirm("Are you sure you want to delete these Records?");
-    if (c) {
-      setLoading(true);
-      console.log("train-bot ids ", ids);
-      try {
-        // console.log("all data deleted");
-        axios
-          .post("/api/trainBot/bulkDelete", { dataSelection: ids })
-          .then((res: any) => {
-            if (res.data.success) {
-              // setDataSelection([]);
-              fetchRecords();
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-          .finally(() => {
-            setLoading(false);
-          });
-      } catch (error) {
-        console.log("error ===> ", error);
-      }
     }
   };
 

@@ -4,17 +4,13 @@ import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import TrainBot from "@/db/schemas/TrainBot";
 
-export const GET = async (req: any) => {
-  const url = new URL(req.url);
-
-  const status = url.searchParams.get("status");
-  const type = url.searchParams.get("type");
+export const POST = async (req: any) => {
+  const { ids } = await req.json();
 
   try {
     await startDB();
 
-    const filter = { status: status, type: type };
-    const recs = await TrainBot.find(filter);
+    const recs = await TrainBot.find({ _id: { $in: ids } });
 
     return NextResponse.json({
       success: true,
