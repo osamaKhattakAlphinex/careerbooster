@@ -3,7 +3,6 @@
 import { hotjar } from "react-hotjar";
 import type { Metadata } from "next";
 import CTASection from "@/components/new-layout/Homepage/CTASection";
-import FAQSection from "@/components/new-layout/Homepage/FAQSection";
 import FeaturesSecond from "@/components/new-layout/Homepage/FeaturesSecond";
 import FeaturesSection from "@/components/new-layout/Homepage/FeaturesSection";
 import HeroArea from "@/components/new-layout/Homepage/HeroArea";
@@ -12,7 +11,6 @@ import Reviews from "@/components/new-layout/Homepage/Reviews";
 import RewardsSection from "@/components/new-layout/Homepage/RewardsSection";
 import UseCases from "@/components/new-layout/Homepage/UseCases";
 import FAQList from "@/components/new-layout/Homepage/Faqs";
-import MainLoaderLayer from "@/components/new-layout/MainLoaderLayer";
 import "./plugins.css";
 import "./style.css";
 import { useEffect } from "react";
