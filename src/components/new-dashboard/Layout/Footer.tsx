@@ -19,14 +19,14 @@ const tabOption = [
     href: "https://www.linkedin.com/company/careerboosterai/",
     icon: <Image src={LinkedinLogo} alt="linkIcon" width={26} height={26} />,
   },
-  {
-    href: "/",
-    icon: <Image src={AndroidLogo} alt="AndroidLogo" width={26} height={26} />,
-  },
-  {
-    href: "/",
-    icon: <Image src={AppleLogo} alt="AppleLogo" width={26} height={26} />,
-  },
+  // {
+  //   href: "/",
+  //   icon: <Image src={AndroidLogo} alt="AndroidLogo" width={26} height={26} />,
+  // },
+  // {
+  //   href: "/",
+  //   icon: <Image src={AppleLogo} alt="AppleLogo" width={26} height={26} />,
+  // },
 ];
 const pagesArray = ["/subscribe"];
 const Footer = () => {
@@ -56,6 +56,12 @@ const Footer = () => {
             className="text-[#959595] lg:text-[14px] text-[10px]"
           >
             Privacy Policy
+          </Link>
+          <Link
+            href={"/contact"}
+            className="text-[#959595] lg:text-[14px] text-[10px]"
+          >
+            Contact Us
           </Link>
           <div className="flex lg:gap-[21px] gap-[8px]">
             {tabOption.map((item, i) => (
