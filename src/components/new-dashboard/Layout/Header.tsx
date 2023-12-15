@@ -6,6 +6,7 @@ import { bellIcon, sunIcon } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
 import { useSelector } from "react-redux";
 import Notifications from "@/components/Notifications";
+import ThemeToggler from "@/components/Themetoggler";
 interface HeaderProps {
   children?: ReactNode;
 }
@@ -39,27 +40,27 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
   return (
     <nav
-      className={` py-[14px] px-4 ml-0 sticky top-0 bg-gradient-to-l from-[#340E53] to-[#000533]  z-10     
+      className={`header-bg py-[14px] px-4 ml-0 sticky top-0   z-10     
       ${pagesArray?.includes(pathname) ? "m-5" : "lg:ml-[234px]"} 
       ${pathname === "/subscribed" && "hidden"} 
       `}
     >
       <div className="w-full rounded-lg flex justify-between sm:justify-between items-center">
-        <h1 className="headText mb-0 rounded-[14px] text-[14px] text-[#959595] font-bold uppercase">
+        <h1 className="headText mb-0 rounded-[14px] text-[14px] card-h2 font-bold uppercase">
           {currentRouteDisplayName}
         </h1>
         <div className="flex">
           <button
             onClick={() => setIsModalOpen(!isModalOpen)}
-            className={`text-white flex justify-center mr-3 items-center bg-zinc-900 border-zinc-800 w-[40px] h-[40px] rounded-full capitalize  ${
+            className={` flex justify-center mr-3 items-center header-mode-btn w-[40px] h-[40px] rounded-full capitalize  ${
               pathname === "/subscribe" ? "hidden" : ""
             } `}
           >
             {bellIcon}
           </button>
-          {/* <button className="text-white flex justify-center mr-1 items-center bg-zinc-900 border-zinc-800 w-[40px] h-[40px] rounded-full capitalize">
-            {sunIcon}
-          </button> */}
+          <button className=" flex justify-center mr-1 items-center header-mode-btn w-[40px] h-[40px] rounded-full capitalize">
+            <ThemeToggler />
+          </button>
         </div>
       </div>
 

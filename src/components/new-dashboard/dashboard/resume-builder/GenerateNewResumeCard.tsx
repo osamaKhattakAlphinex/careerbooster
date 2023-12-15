@@ -30,13 +30,13 @@ Props) => {
   const memoizedState = useMemo(() => state, [state]);
 
   return (
-    <div className=" bg-[#17151B] rounded-[20px] py-9 px-4 md:px-[30px] flex flex-col gap-7 ">
+    <div className=" single-service-bg rounded-[20px] py-9 px-4 md:px-[30px] flex flex-col gap-7 ">
       {/* header */}
       <div className="flex gap-2 flex-col md:flex-row  justify-between items-center">
-        <h3 className=" text-[16px] md:text-sm uppercase text-white font-bold">
+        <h3 className=" text-[16px] md:text-sm uppercase card-h2 font-bold">
           generate new resume
         </h3>
-        <div className="text-white uppercase font-bold">
+        <div className="card-h2 uppercase font-bold">
           <LimitCard
             title="AvailableCredits : "
             limit={userData?.userPackageData?.limit?.resumes_generation}
@@ -71,8 +71,8 @@ Props) => {
       {showInstruction && (
         <div className=" flex flex-col justify-start gap-[10px]">
           <div className="flex flex-row gap-2">
-            <span className="block text-white font-bold text-base">1.</span>
-            <p className="text-white text-base">
+            <span className="block card-h2 font-bold text-base">1.</span>
+            <p className="card-h2 text-base">
               <span className=" font-bold">Crucial!</span> Review your profile,
               and update missing details for improved results
               <Link href="#" className="text-[#615DFF] font-bold">
@@ -81,16 +81,16 @@ Props) => {
             </p>
           </div>
           <div className="flex flex-row gap-2">
-            <span className="block text-white font-bold text-base">2.</span>
-            <p className="text-white text-base">
+            <span className="block card-h2 font-bold text-base">2.</span>
+            <p className="card-h2 text-base">
               To edit your new Resume! and make changes or corrections,
               double-click the text or paragraph you wish to edit. Any changes
               you make will be automatically saved.
             </p>
           </div>
           <div className="flex flex-row gap-2">
-            <span className="block text-white font-bold text-base">3.</span>
-            <p className="text-white text-base">
+            <span className="block card-h2 font-bold text-base">3.</span>
+            <p className="card-h2 text-base">
               If you{"'"}re unsatisfied with the results, please note that we
               create your new resume using your original resume data. If any of
               your experiences are missing,
@@ -109,7 +109,7 @@ Props) => {
         <div className="w-full flex flex-col gap-[30px]">
           <label
             htmlFor="targetedJobPosition"
-            className=" font-bold text-white text-md md:text-[24px] flex flex-row gap-[10px]"
+            className=" font-bold card-h2 text-md md:text-[24px] flex flex-row gap-[10px]"
           >
             <Image
               src="/icon/rocket.svg"
@@ -139,7 +139,7 @@ Props) => {
             !session?.user?.email
           }
           onClick={handleGenerate}
-          className={`bg-gradient-to-r from-[#B324D7]  to-[#615DFF] flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${
+          className={`dashboard-outline-btn flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${
             memoizedState.jobPosition === "" ||
             memoizedState.resumeLoading ||
             !session?.user?.email
@@ -147,7 +147,7 @@ Props) => {
               : ""
           }`}
         >
-          <span className="text-white text-sm">
+          <span className="card-h2 text-sm">
             {memoizedState.resumeLoading ? (
               <div className="flex">
                 <svg
@@ -170,14 +170,23 @@ Props) => {
               </div>
             ) : (
               <div className="flex">
-                <Image
-                  src={buttonIconSrc}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-4 card-h2 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                  />
+                </svg>
+
                 <span
-                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                  className={`card-h2 ml-3 text-[15px] font-semibold cursor-pointer`}
                 >
                   Generate Resume
                 </span>

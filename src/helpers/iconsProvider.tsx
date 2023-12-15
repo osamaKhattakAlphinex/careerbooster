@@ -878,7 +878,7 @@ export const bellIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-5 text-white  h-5"
+    className="w-5   h-5"
   >
     <path
       strokeLinecap="round"
@@ -1019,7 +1019,7 @@ export const trashIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-4 h-4 text-neutral-400 "
+    className="w-4 h-4 trash-icon "
   >
     <path
       strokeLinecap="round"
@@ -1179,7 +1179,7 @@ export const eyeIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-4 h-4 text-neutral-400"
+    className="w-4 h-4  eye-icon"
   >
     <path
       strokeLinecap="round"

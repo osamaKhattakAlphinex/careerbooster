@@ -2,7 +2,7 @@ import LinkedInToolMain from "@/components/new-layout/linkedin/LinkedInToolMain"
 import { Metadata } from "next";
 import "@/app/plugins.css";
 import "@/app/style.css";
-import Avatar from "@/components/Avatar";
+import Avatar1 from "@/components/Avatar1";
 //latest code
 export const metadata: Metadata = {
   title: "CareerBooster.AI-linkedin",
@@ -40,7 +40,7 @@ export default function LinkedInNewPage() {
         <div className="flex flex-col text-white">
           <LinkedInToolMain />
         </div>
-        {/* <Avatar /> */}
+        {/* <Avatar1 firstName="one" lastName="any" /> */}
       </section>
     </div>
   );
