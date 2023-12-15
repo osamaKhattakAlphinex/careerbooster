@@ -23,7 +23,7 @@ export default function RootLayout({
     <ThemeProvider>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
               (function(h,o,t,j,a,r){
@@ -36,7 +36,7 @@ export default function RootLayout({
               })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
             `,
           }}
-        />
+        /> */}
       </Head>
       <AuthProvider>
         <ReduxProvider>

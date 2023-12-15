@@ -1,11 +1,10 @@
 "use client";
-import { ReactNode, useCallback, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { usePathname } from "next/navigation";
 import Modal from "@/components/Modal";
-import { bellIcon, sunIcon } from "@/helpers/iconsProvider";
+import { bellIcon } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
 import { useSelector } from "react-redux";
-import ThemeToggler from "@/components/Themetoggler";
 interface HeaderProps {
   children?: ReactNode;
 }
