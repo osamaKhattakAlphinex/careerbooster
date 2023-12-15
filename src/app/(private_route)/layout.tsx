@@ -26,7 +26,7 @@ export default async function Privatelayout({ children }: Props) {
 
   return (
     <ThemeProvider>
-      <div className="gradient-bg  w-screen h-screen overflow-y-scroll">
+      <div className="gradient-bg   w-screen h-screen overflow-y-scroll">
         <ProfileCreationLayer>
           <Header />
           <SideBar />
