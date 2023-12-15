@@ -1,7 +1,6 @@
 import Header from "@/components/layout/Header";
 import "./globals.css";
 import type { Metadata } from "next";
-//check
 import AuthProvider from "@/components/AuthProvider";
 import ReduxProvider from "@/components/ReduxProvider";
 import Footer from "@/components/layout/Footer";

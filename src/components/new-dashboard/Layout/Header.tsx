@@ -53,12 +53,9 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
             onClick={() => setIsModalOpen(!isModalOpen)}
             className={` flex justify-center mr-3 items-center header-mode-btn w-[40px] h-[40px] rounded-full capitalize  ${
               pathname === "/subscribe" ? "hidden" : ""
-            } ${isModalOpen && "text-white"} `}
+            } ${isModalOpen && "header-mode-btn-click"} `}
           >
             {bellIcon}
-          </button>
-          <button className="text-white flex justify-center mr-1 items-center  border-zinc-800 w-[40px] h-[40px] rounded-full capitalize">
-            <ThemeToggler />
           </button>
         </div>
       </div>

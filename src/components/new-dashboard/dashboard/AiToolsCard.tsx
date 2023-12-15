@@ -25,12 +25,7 @@ const AiToolsCard = ({}) => {
    </div>
   </div>
     <GenerateResume />
-    
     </>
-  
-      
-     
-   
   );
 };
 

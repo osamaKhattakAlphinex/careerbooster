@@ -211,7 +211,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
   }, [session?.user?.email]);
   return (
     <>
-      <div className="headline-generator bg-[#222027] py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
+      <div className="headline-generator single-service-card-bg py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
         <div
           className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16`}
         >
@@ -225,7 +225,7 @@ const JDGenerator = ({ setJobDesc }: Props) => {
         </div>
         <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
           <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row ">
-            <h1 className="text-[16px] text-white font-bold">
+            <h1 className="text-[16px] card-h2 font-bold">
               Job Description Generator
             </h1>
             <span

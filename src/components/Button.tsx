@@ -22,8 +22,8 @@ const Button = ({
           border: buttonClasses,
         }}
         className={` ${
-          isActive ? `text-fuchsia-600 font-semibold ` : `text-neutral-400`
-        } ${textColor}  ${buttonClasses} ${bgColor} rounded-full lg:px-[28px] px-[12px] lg:py-[9px] py-[6px] lg:text-[14px] text-[12px] lg:mr-[13px] mr-[6px] hover:bg-opacity-95 hover:font-semibold`}
+          isActive ? `text-fuchsia-600 font-semibold ` : `text-black`
+        } ${textColor}  ${buttonClasses} ${bgColor}  rounded-full lg:px-[28px] px-[12px] lg:py-[9px] py-[6px] lg:text-[14px] text-[12px] lg:mr-[13px] mr-[6px] hover:bg-opacity-95 hover:font-semibold`}
         onClick={onClick}
       >
         {btnText}

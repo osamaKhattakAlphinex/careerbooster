@@ -535,7 +535,7 @@ export default function CoverLetterPage() {
                         <div
                           id="editor"
                           contentEditable="true"
-                          className="text-white "
+                          className="card-h2 "
                           // dangerouslySetInnerHTML={{ __html: editedContent }}
                           // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
                           //   setEditedContent(e.target.innerHTML);
@@ -543,7 +543,7 @@ export default function CoverLetterPage() {
                         ></div>
                       ) : (
                         <div
-                          className="text-white "
+                          className="card-h2"
                           dangerouslySetInnerHTML={{ __html: streamedData }}
                         ></div>
                       )}
@@ -564,7 +564,7 @@ export default function CoverLetterPage() {
                             jobDescription === ""
                           }
                           onClick={handleGenerate}
-                          className={`bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                          className={`re-generate-btn flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                             (msgLoading ||
                               !session?.user?.email ||
                               !aiInputUserData ||
@@ -575,7 +575,7 @@ export default function CoverLetterPage() {
                             "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
                           }`}
                         >
-                          <span className="text-white text-[15px] font-semibold">
+                          <span className="card-h2 text-[15px] font-semibold">
                             {msgLoading ? (
                               <div className="flex">
                                 <svg
@@ -598,14 +598,22 @@ export default function CoverLetterPage() {
                               </div>
                             ) : (
                               <div className="flex">
-                                <Image
-                                  src={buttonIconSrc}
-                                  alt="bold icon"
-                                  height={18}
-                                  width={18}
-                                />
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth={1.5}
+                                  stroke="currentColor"
+                                  className="w-4 h-4 card-h2"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                                  />
+                                </svg>
                                 <span
-                                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
+                                  className={`card-h2 ml-3 text-[15px] font-semibold cursor-pointer`}
                                 >
                                   Re-generate Cover Letter
                                 </span>
@@ -623,7 +631,7 @@ export default function CoverLetterPage() {
                           disabled={
                             !show || msgLoading || !session?.user?.email
                           }
-                          className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#37B944] border rounded-full ${
+                          className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] download-pdf-btn rounded-full ${
                             !show || msgLoading || !session?.user?.email
                               ? "opacity-50 cursor-not-allowed"
                               : ""
@@ -635,7 +643,7 @@ export default function CoverLetterPage() {
                             viewBox="0 0 24 24"
                             strokeWidth="1.5"
                             stroke="currentColor"
-                            className="w-6 h-6 text-[#37B944]"
+                            className="w-6 h-6 green-text"
                           >
                             <path
                               stroke-linecap="round"
@@ -644,7 +652,7 @@ export default function CoverLetterPage() {
                             />
                           </svg>
 
-                          <span className="text-[#37B944] text-[15px] font-semibold">
+                          <span className="green-text text-[15px] font-semibold">
                             Download in PDF
                           </span>
                         </button>
@@ -681,7 +689,7 @@ export default function CoverLetterPage() {
                           isCoverLetterCopied
                         }
                         onClick={() => copyCoverLetter(streamedData)}
-                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full ${
+                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] copy-to-clip-board-btn rounded-full ${
                           msgLoading ||
                           !session?.user?.email ||
                           !aiInputUserData ||
@@ -701,7 +709,7 @@ export default function CoverLetterPage() {
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="currentColor"
-                          className="w-4 h-4 text-white"
+                          className="w-4 h-4 card-h2"
                         >
                           <path
                             stroke-linecap="round"
@@ -710,7 +718,7 @@ export default function CoverLetterPage() {
                           />
                         </svg>
 
-                        <span className="text-white text-[15px] font-semibold">
+                        <span className="card-h2 text-[15px] font-semibold">
                           {msgLoading
                             ? "Please wait..."
                             : isCoverLetterCopied
@@ -727,7 +735,7 @@ export default function CoverLetterPage() {
                             !show || msgLoading || !session?.user?.email
                           }
                           onClick={handleClick}
-                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full ${
+                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] edit-btn rounded-full ${
                             !show || msgLoading || !session?.user?.email
                               ? "opacity-50 cursor-not-allowed"
                               : ""
@@ -740,7 +748,7 @@ export default function CoverLetterPage() {
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="currentColor"
-                              className="w-6 h-6 text-yellow-200"
+                              className="w-6 h-6 yellow-text"
                             >
                               <path
                                 stroke-linecap="round"
@@ -749,7 +757,7 @@ export default function CoverLetterPage() {
                               />
                             </svg>
                             <span
-                              className={`text-yellow-200 text-[15px] font-semibold ${
+                              className={`yellow-text text-[15px] font-semibold ${
                                 !show || msgLoading || !session?.user?.email
                                   ? "opacity-50 cursor-not-allowed"
                                   : ""

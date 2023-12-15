@@ -30,10 +30,16 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
           {dataSource === "emails" && "Your AI Generated Emails"}
           {dataSource === "consultingBids" && "Your AI Generated Bids"}
           {dataSource === "resume" && "Your AI Generated Resume"}
+          {dataSource === "linkedInHeadlines" && "Your AI Generated Headlines"}
+          {dataSource === "linkedInAbouts" && "Your AI Generated Abouts"}
+          {dataSource === "linkedInJobDescriptions" &&
+            "Your AI Generated Descriptions"}
+          {dataSource === "linkedInKeywords" && "Your AI Generated Keywords"}
         </h1>
         <div className="relative lg:w-[213px] w-[120px] flex">
           <input
-            className="w-full pl-4 lg:h-[38px] lg:py-[8px] py-[6px] placeholder:text-[#5B5B5B] rounded-full border border-[#312E37] placeholder-gray-400 text-white lg:text-[14px] text-[10px] focus:outline-none focus:border-zinc-600 bg-transparent"
+            className="w-full pl-4 lg:h-[38px] lg:py-[8px] py-[6px]
+            placeholder:text-[#5B5B5B] rounded-full border border-[#312E37] placeholder-gray-400 text-white lg:text-[14px] text-[10px] focus:outline-none focus:border-zinc-600 bg-transparent"
             type="text"
             placeholder="Search here"
           />

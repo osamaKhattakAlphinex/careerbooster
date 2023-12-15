@@ -51,7 +51,9 @@ const ToolsCard = ({
           </div>
         </div>
         <div className="">
-          <h2 className="text-[16px] card-dashboard-h1 font-semibold">{title}</h2>
+          <h2 className="text-[16px] card-dashboard-h1 font-semibold">
+            {title}
+          </h2>
           <p className=" card-dashboard-p mt-[6px] font-normal text-[14px] pr-2">
             {description}
           </p>

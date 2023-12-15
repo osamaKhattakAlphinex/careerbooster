@@ -41,19 +41,17 @@ const Footer = () => {
      `}
     >
       <div className="flex justify-between h-[52px] items-end border-t border-[#312E37]">
-        <p className="text-[#959595] lg:text-[14px] text-[10px]">
-          2023 © CareerAi
-        </p>
+        <p className="card-h2 lg:text-[14px] text-[10px]">2023 © CareerAi</p>
         <div className="flex lg:gap-[22px] gap-[10px] items-center">
           <Link
             href={"/terms-and-conditions"}
-            className="text-[#959595] lg:text-[14px] text-[10px]"
+            className="card-h2 no-underline lg:text-[14px] text-[10px]"
           >
             Terms use
           </Link>
           <Link
             href={"/privacy-policy"}
-            className="text-[#959595] lg:text-[14px] text-[10px]"
+            className="card-h2 no-underline lg:text-[14px] text-[10px]"
           >
             Privacy Policy
           </Link>
