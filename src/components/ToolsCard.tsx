@@ -57,7 +57,7 @@ const ToolsCard = ({
           </p>
           <Link
             href={link}
-            className={`text-[14px] mt-[11px] flex items-center uppercase text-[#959595] hover:text-white font-semibold`}
+            className={`text-[14px] mt-[11px] flex items-center uppercase text-[#959595] card-hover  font-semibold`}
           >
             {action} <i className="ml-2">{chevronRight}</i>
           </Link>

@@ -30,6 +30,11 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
           {dataSource === "emails" && "Your AI Generated Emails"}
           {dataSource === "consultingBids" && "Your AI Generated Bids"}
           {dataSource === "resume" && "Your AI Generated Resume"}
+          {dataSource === "linkedInHeadlines" && "Your AI Generated Headlines"}
+          {dataSource === "linkedInAbouts" && "Your AI Generated Abouts"}
+          {dataSource === "linkedInJobDescriptions" && "Your AI Generated Descriptions"}
+          {dataSource === "linkedInKeywords" && "Your AI Generated Keywords"}
+
         </h1>
         <div className="relative lg:w-[213px] w-[120px] flex">
           <input

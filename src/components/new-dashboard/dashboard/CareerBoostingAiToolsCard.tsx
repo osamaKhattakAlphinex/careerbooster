@@ -1,14 +1,14 @@
 "use client";
-import Button from "@/components/Button";
 import { useRef, useState } from "react";
 import RecentResumeCard from "./resume-builder/RecentResumeCard";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import CoverLetterCardSingle from "./cover-letter-generator/CoverLetterCardSingle";
 import ConsultingBidCardSingle from "./consulting-bids-generator/ConsultingBidCardSingle";
 import EmailCardSingle from "@/components/new-dashboard/dashboard/email-generator/EmailCardSingle";
+import Button from "../Button";
 
 const tabOptions = [
-  { name: "Resumes", value: "resumemaker" },
+  { name: "Resumes", value: "resumemaker" ,},
   { name: "Cover Letter", value: "cover-letter" },
   { name: "Consulting Bids", value: "consulting-bids" },
   { name: "Email Bot", value: "email-bot" },
@@ -54,7 +54,10 @@ const CareerBoostingAiToolsCard = () => {
             key={`tab-${index}`}
             btnText={option.name}
             isActive={activeTab === option.value}
+           
             onClick={() => setActiveTab(option.value)}
+           
+
           />
         ))}
       </div>

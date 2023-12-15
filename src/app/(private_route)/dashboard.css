@@ -273,6 +273,7 @@
 }
 [data-bs-theme="dark"] .li-text-active {
   color: rgb(255, 255, 255) !important;
+  font-weight: bold;
 }
 [data-bs-theme="dark"] .li-text {
   color: rgb(115, 115, 115) !important;
@@ -356,16 +357,28 @@
 [data-bs-theme="dark"] .card-dashboard-p {
   color: #959595;
 }
+[data-bs-theme="dark"] .tab-btn-text {
+  color: rgb(163 163 163);
+}
+[data-bs-theme="dark"] .card-hover:hover {
+  color: #fff;
+}
 
 /* Light Mode Rehamt Code */
+.tab-btn-text {
+  color: black;
+}
 .new-btn:hover {
   color: white !important;
   background-color: cornflowerblue !important;
   border: #6a4dff;
 }
-
+.card-hover:hover {
+  color: #000000;
+}
 .li-text-active {
-  color: rgb(185, 177, 177) !important;
+  color: #b324d7 !important;
+  font-weight: bold;
 }
 .li-text {
   color: rgb(0, 0, 0) !important;

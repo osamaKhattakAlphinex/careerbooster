@@ -18,7 +18,7 @@ const Button = ({
   return (
     <div>
       <button
-        className={`border ${isActive ? `text-fuchsia-600 font-semibold ` : `text-neutral-400` } ${textColor}  ${buttonClasses} ${bgColor} rounded-full px-[28px] py-[9px] text-[14px] mr-[13px]`}
+        className={`border ${isActive ? `text-fuchsia-600 font-semibold ` : `tab-btn-text` } ${textColor}  ${buttonClasses} ${bgColor} rounded-full px-[28px] py-[9px] text-[14px] mr-[13px]`}
         onClick={onClick}
       >
         {btnText}
