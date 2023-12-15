@@ -51,7 +51,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   useEffect(() => {
-    hotjar.initialize(3796068, 6);
+    hotjar.initialize(3796095, 6);
   }, []);
   return (
     <>
