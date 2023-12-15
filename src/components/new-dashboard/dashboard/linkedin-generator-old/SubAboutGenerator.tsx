@@ -138,7 +138,6 @@ const SubAboutGenerator = () => {
                     about_generation: user.userPackageUsed.about_generation,
                   },
                   linkedInAbouts: AboutResponse.data.result.linkedInAbouts,
-                  
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
               }
@@ -222,7 +221,7 @@ const SubAboutGenerator = () => {
   return (
     <>
       <PreviouslyGeneratedList {...historyProps} />
-      <div className="headline-generator bg-[#17151B] py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
+      <div className="headline-generator single-service-card-bg py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
         <div
           className={`icon hidden rounded-full bg-gradient-to-b from-[#26A5C1] to-[#84E1E7] md:flex justify-center items-center w-16 h-16`}
         >
@@ -236,9 +235,7 @@ const SubAboutGenerator = () => {
         </div>
         <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
           <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
-            <h1 className="text-[16px] text-white font-bold">
-              About Generator
-            </h1>
+            <h1 className="text-[16px] card-h2 font-bold">About Generator</h1>
             <span
               className={`text-black rounded-full flex justify-center items-center px-[16px] py-[6px] md:mx-2  bg-[#02FF19] text-[12px] uppercase font-bold `}
             >

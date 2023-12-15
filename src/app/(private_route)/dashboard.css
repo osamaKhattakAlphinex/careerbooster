@@ -224,7 +224,7 @@
     background-color: rgba(194, 198, 209, 0) !important;
   }
   .sidebar {
-    background-color: #c2c6d1 !important;
+    background-color: rgba(228, 233, 247, 1) !important;
     /* box-shadow: 0 2px 150px rgba(0, 0, 0, 0.2); */
   }
 }
@@ -240,7 +240,7 @@
   background-repeat: no-repeat; /* Prevents the background image from repeating */
 }
 .sideBar1 {
-  background-color: rgba(194, 198, 209, 1) !important;
+  background-color: rgba(228, 233, 247, 1) !important;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
 }
 [data-bs-theme="dark"] .sideBar_text {
@@ -384,7 +384,7 @@
   background: #e4e9f7;
 }
 .header-bg {
-  background: #c2c6d1;
+  background: #e4e9f7;
 }
 .back-btn-text {
   color: black;
@@ -393,7 +393,7 @@
   color: white;
 }
 .single-service-bg {
-  background-color: rgba(255, 255, 255, 0.58);
+  background-color: rgba(0, 0, 0, 0.08);
   color: black;
 }
 .single-service-card-bg {

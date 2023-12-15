@@ -41,6 +41,7 @@
   overflow: hidden;
   list-style: none;
   padding: 0;
+  width: 100%;
   /* Fix of Webkit flickering */
   z-index: 1;
   display: block;

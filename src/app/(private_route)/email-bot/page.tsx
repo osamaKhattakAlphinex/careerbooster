@@ -648,7 +648,7 @@ const PersonalizedEmailBot = () => {
                         jobDescription === ""
                       }
                       onClick={handleGenerate}
-                      className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#B324D7] border rounded-full ${
+                      className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] re-generate-btn  rounded-full ${
                         (msgLoading ||
                           !session?.user?.email ||
                           !aiInputUserData ||
@@ -681,12 +681,20 @@ const PersonalizedEmailBot = () => {
                           </div>
                         ) : (
                           <div className="flex">
-                            <Image
-                              src={buttonIconSrc}
-                              alt="bold icon"
-                              height={18}
-                              width={18}
-                            />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={1.5}
+                              stroke="currentColor"
+                              className="w-4 h-4 card-h2"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                              />
+                            </svg>
                             <span
                               className={`card-h2 ml-3 text-[15px] font-semibold cursor-pointer`}
                             >
@@ -704,7 +712,7 @@ const PersonalizedEmailBot = () => {
                           disabled={
                             !show || msgLoading || !session?.user?.email
                           }
-                          className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#37B944] border rounded-full ${
+                          className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] download-pdf-btn rounded-full ${
                             !show || msgLoading || !session?.user?.email
                               ? "opacity-50 cursor-not-allowed"
                               : ""
@@ -716,7 +724,7 @@ const PersonalizedEmailBot = () => {
                             viewBox="0 0 24 24"
                             strokeWidth="1.5"
                             stroke="currentColor"
-                            className="w-6 h-6 text-[#37B944]"
+                            className="w-6 h-6 green-text"
                           >
                             <path
                               stroke-linecap="round"
@@ -725,7 +733,7 @@ const PersonalizedEmailBot = () => {
                             />
                           </svg>
 
-                          <span className="text-[#37B944] text-[15px] font-semibold">
+                          <span className="green-text text-[15px] font-semibold">
                             Download in PDF
                           </span>
                         </button>
@@ -762,7 +770,7 @@ const PersonalizedEmailBot = () => {
                           isEmailCopied
                         }
                         onClick={() => copyEmail(streamedData)}
-                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full ${
+                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] copy-to-clip-board-btn rounded-full ${
                           msgLoading ||
                           !session?.user?.email ||
                           !aiInputUserData ||
@@ -782,7 +790,7 @@ const PersonalizedEmailBot = () => {
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="currentColor"
-                          className="w-4 h-4 text-white"
+                          className="w-4 h-4 card-h2"
                         >
                           <path
                             stroke-linecap="round"
@@ -808,7 +816,7 @@ const PersonalizedEmailBot = () => {
                             !show || msgLoading || !session?.user?.email
                           }
                           onClick={handleClick}
-                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full ${
+                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] edit-btn rounded-full ${
                             !show || msgLoading || !session?.user?.email
                               ? "opacity-50 cursor-not-allowed"
                               : ""
@@ -821,7 +829,7 @@ const PersonalizedEmailBot = () => {
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="currentColor"
-                              className={`w-6 h-6 text-yellow-200  `}
+                              className={`w-6 h-6 yellow-text  `}
                             >
                               <path
                                 stroke-linecap="round"
@@ -830,7 +838,7 @@ const PersonalizedEmailBot = () => {
                               />
                             </svg>
                             <span
-                              className={`text-yellow-200 text-[15px] font-semibold  `}
+                              className={`yellow-text text-[15px] font-semibold  `}
                             >
                               Edit
                             </span>
@@ -850,7 +858,7 @@ const PersonalizedEmailBot = () => {
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="w-6 h-6 text-white"
+                          className="w-6 h-6 card-h2"
                         >
                           <path
                             strokeLinecap="round"
