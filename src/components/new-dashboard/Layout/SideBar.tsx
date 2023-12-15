@@ -80,11 +80,11 @@ const SideBar = () => {
       {/* Mobile Menu Button */}
 
       <div
-        className={`sidebarTop sidebar  fixed px-6 top-0  w-[234px]  pb-[10px]  sideBar flex items-center transition-all duration-200   ${
-          isOpen ? " " : "bg-opacity-0 lg:bg-opacity-100 "
+        className={`sidebarTop sidebar fixed px-6 top-0 w-[234px]       flex items-center transition-all duration-200   ${
+          isOpen ? "sideBar1" : "sideBar-bg-opacity"
         }`}
       >
-        <Image src={logo} alt="" className="w-35 h-14" />
+        <Image src={logo} alt="" className="w-35 h-16" />
         <div
           className="w-5 h-5 text-zinc-600 lg:hidden ml-4 cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
@@ -94,7 +94,7 @@ const SideBar = () => {
         </div>
       </div>
       <div
-        className={`sidebar fixed w-[234px] top-0 flex justify-center  mt-16 h-[100%] sideBar overflow-y-auto  transition-all ${
+        className={`sidebar fixed w-[234px]  top-0 flex justify-center sideBar2  mt-16 h-[100%] overflow-y-auto  transition-all ${
           isOpen
             ? "translate-x-0 lg:translate-x-0"
             : "-translate-x-full lg:translate-x-0 " // Apply opacity only on small screens
@@ -139,7 +139,7 @@ const SideBar = () => {
               {items?.map((item, index) => (
                 <li
                   key={index}
-                  className="py-[3px] inline-block cursor-pointer transition-all text-neutral-500 hover:text-white"
+                  className="py-[3px] inline-block cursor-pointer transition-all"
                 >
                   {item.text !== "Logout" ? (
                     <Link
@@ -152,28 +152,20 @@ const SideBar = () => {
                       style={{
                         opacity: hoveredItem === index ? 1 : 0.7,
                         color:
-                          hoveredItem === index
-                            ? "white"
-                            : "rgb(115, 115, 115)",
+                          hoveredItem === index ? "red" : "rgb(115, 115, 115)",
                         textDecoration: "none",
                       }}
                     >
                       <div
-                        className={`w-6 h-6 inline-block pr-2 hover:text-white 
-                        ${
-                          pathname === item.url
-                            ? "text-white"
-                            : "text-neutral-500"
-                        }
+                        className={`w-6 h-6 inline-block pr-2 
+                        ${pathname === item.url ? "li-text-active" : "li-text"}
                          `}
                       >
                         {item.icon}
                       </div>
                       <h2
-                        className={`text-base ml-3 mb-0 hover:text-white font-normal ${
-                          pathname === item.url
-                            ? "text-white "
-                            : "text-neutral-500"
+                        className={`text-base ml-3 mb-0 font-normal ${
+                          pathname === item.url ? "li-text-active" : "li-text"
                         }`}
                       >
                         {item.text}
@@ -194,10 +186,10 @@ const SideBar = () => {
                         textDecoration: "none",
                       }}
                     >
-                      <div className="w-6 h-6 inline-block pr-2">
+                      <div className="w-6 h-6 inline-block pr-2 li-text">
                         {item.icon}
                       </div>
-                      <h2 className="text-base ml-3 mb-0 font-normal">
+                      <h2 className="text-base ml-3 mb-0 font-normal li-text">
                         {item.text}
                       </h2>
                     </button>

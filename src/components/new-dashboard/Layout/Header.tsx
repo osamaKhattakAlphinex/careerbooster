@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
   return (
     <nav
-      className={`header-bg py-[14px] px-4 ml-0 sticky top-0   z-10     
+      className={`header-bg py-[12px] px-4 ml-0 sticky top-0   z-10     
       ${pagesArray?.includes(pathname) ? "m-5" : "lg:ml-[234px]"} 
       ${pathname === "/subscribed" && "hidden"} 
       `}
@@ -54,11 +54,11 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
             onClick={() => setIsModalOpen(!isModalOpen)}
             className={` flex justify-center mr-3 items-center header-mode-btn w-[40px] h-[40px] rounded-full capitalize  ${
               pathname === "/subscribe" ? "hidden" : ""
-            } `}
+            } ${isModalOpen && "text-white"} `}
           >
             {bellIcon}
           </button>
-          <button className=" flex justify-center mr-1 items-center header-mode-btn w-[40px] h-[40px] rounded-full capitalize">
+          <button className="text-white flex justify-center mr-1 items-center  border-zinc-800 w-[40px] h-[40px] rounded-full capitalize">
             <ThemeToggler />
           </button>
         </div>
