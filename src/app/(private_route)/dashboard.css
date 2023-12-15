@@ -224,7 +224,7 @@
     background-color: rgba(194, 198, 209, 0) !important;
   }
   .sidebar {
-    background-color: #c2c6d1 !important;
+    background-color: rgba(228, 233, 247, 1) !important;
     /* box-shadow: 0 2px 150px rgba(0, 0, 0, 0.2); */
   }
 }
@@ -240,7 +240,7 @@
   background-repeat: no-repeat; /* Prevents the background image from repeating */
 }
 .sideBar1 {
-  background-color: rgba(194, 198, 209, 1) !important;
+  background-color: rgba(228, 233, 247, 1) !important;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
 }
 [data-bs-theme="dark"] .sideBar_text {
@@ -319,14 +319,15 @@
 }
 [data-bs-theme="dark"] .card-btn {
   background: rgb(24 24 27 / var(--tw-bg-opacity));
-  border-color: rgb(39 39 42 / var(--tw-border-opacity));
-  border: 2px;
+  border: 2px solid rgb(39 39 42);
 }
 [data-bs-theme="dark"] .card-download-btn {
   background: rgb(24 24 27 / var(--tw-bg-opacity));
 }
-[data-bs-theme="dark"] .eye-icon,
-.trash-icon {
+[data-bs-theme="dark"] .eye-icon {
+  color: rgb(163 163 163);
+}
+[data-bs-theme="dark"] .trash-icon {
   color: rgb(163 163 163);
 }
 [data-bs-theme="dark"] .dashboard-outline-btn {
@@ -400,7 +401,7 @@
   background: #e4e9f7;
 }
 .header-bg {
-  background: #c2c6d1;
+  background: #e4e9f7;
 }
 .back-btn-text {
   color: black;
@@ -409,7 +410,7 @@
   color: white;
 }
 .single-service-bg {
-  background-color: rgba(255, 255, 255, 0.58);
+  background-color: rgba(0, 0, 0, 0.08);
   color: black;
 }
 .single-service-card-bg {
@@ -424,7 +425,9 @@
   color: rgb(34 197 94);
   border: 1px solid rgb(34 197 94);
 }
-.eye-icon,
+.eye-icon {
+  color: rgb(34 197 94);
+}
 .trash-icon {
   color: rgb(34 197 94);
 }

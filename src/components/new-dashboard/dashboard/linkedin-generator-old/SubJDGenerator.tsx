@@ -157,7 +157,8 @@ const SubJDGenerator = () => {
               ...userData.userPackageUsed,
               job_desc_generation: user.userPackageUsed.job_desc_generation,
             },
-            linkedInJobDescriptions: JDResponse.data.result.linkedInJobDescriptions,
+            linkedInJobDescriptions:
+              JDResponse.data.result.linkedInJobDescriptions,
           };
           dispatch(setUserData({ ...userData, ...updatedObject }));
         }
@@ -232,7 +233,7 @@ const SubJDGenerator = () => {
     <>
       <PreviouslyGeneratedList {...historyProps} />
       <>
-        <div className="headline-generator bg-[#222027] py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
+        <div className="headline-generator single-service-card-bg py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
           <div
             className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16`}
           >
@@ -246,7 +247,7 @@ const SubJDGenerator = () => {
           </div>
           <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
             <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row ">
-              <h1 className="text-[16px] text-white font-bold">
+              <h1 className="text-[16px] card-h2 font-bold">
                 Job Description Generator
               </h1>
               <span
@@ -284,7 +285,7 @@ const SubJDGenerator = () => {
 
             // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
           >
-            <span className={`text-white text-[15px] font-semibold`}>
+            <span className={`card-h2 text-[15px] font-semibold`}>
               {msgLoading ? (
                 <div className="flex">
                   <svg
@@ -313,7 +314,7 @@ const SubJDGenerator = () => {
                     height={18}
                     width={18}
                   />
-                  <span className="text-white ml-3 text-[15px] font-semibold">
+                  <span className="card-h2 ml-3 text-[15px] font-semibold">
                     Generate Description
                   </span>
                 </div>
@@ -349,7 +350,7 @@ const SubJDGenerator = () => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  className="w-4 h-4 text-white"
+                  className="w-4 h-4 card-h2"
                 >
                   <path
                     stroke-linecap="round"
@@ -358,7 +359,7 @@ const SubJDGenerator = () => {
                   />
                 </svg>
 
-                <span className="text-white text-[15px] font-semibold">
+                <span className="card-h2 text-[15px] font-semibold">
                   {msgLoading
                     ? "Please wait..."
                     : isJDCopied

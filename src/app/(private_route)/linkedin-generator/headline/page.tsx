@@ -8,7 +8,7 @@ const HeadlineGenerator = () => {
       <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]  ">
         <Link
           href="/linkedin-generator"
-          className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
+          className="ml-2 my-4 no-underline back-btn-text flex flex-row gap-2 items-center hover:opacity-80 transition-all"
         >
           {leftArrowIcon}
           Back

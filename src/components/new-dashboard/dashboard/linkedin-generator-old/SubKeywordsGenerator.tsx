@@ -17,7 +17,7 @@ import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import LinkedInHKeywordsCardSingle from "./LinkedInKeywordsCardSingle";
 
 const SubKeywordsGenerator = () => {
-    const [keywords, setKeywords] = useState<string>("");
+  const [keywords, setKeywords] = useState<string>("");
   const componentRef = useRef<any>(null);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
@@ -78,9 +78,7 @@ const SubKeywordsGenerator = () => {
   }, [userData]);
   useEffect(() => {
     setStreamedData(linkedinKeywords.keywordsText);
-  },[linkedinKeywords.keywordsText])
-    
-
+  }, [linkedinKeywords.keywordsText]);
 
   const handleGenerate: any = async () => {
     setStreamedData("");
@@ -141,8 +139,8 @@ const SubKeywordsGenerator = () => {
                     keywords_generation:
                       user.userPackageUsed.keywords_generation,
                   },
-                  linkedInKeywords: KeywordsResponse.data.result.linkedInKeywords,
-
+                  linkedInKeywords:
+                    KeywordsResponse.data.result.linkedInKeywords,
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
               }
@@ -225,7 +223,7 @@ const SubKeywordsGenerator = () => {
   return (
     <>
       <PreviouslyGeneratedList {...historyProps} />
-      <div className="headline-generator bg-[#222027] py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
+      <div className="headline-generator single-service-card-bg py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
         <div
           className={`icon hidden rounded-full  bg-gradient-to-b from-[#20AA89] to-[#65D4AC]  md:flex justify-center items-center w-16 h-16`}
         >
@@ -239,7 +237,7 @@ const SubKeywordsGenerator = () => {
         </div>
         <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
           <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
-            <h1 className="text-[16px] text-white font-bold">
+            <h1 className="text-[16px] card-h2 font-bold">
               Keywords Generator
             </h1>
             <span
@@ -323,7 +321,7 @@ const SubKeywordsGenerator = () => {
               AI Response{" "}
             </span>
           </h1>
-          <div className="font-sans text-gray-300 whitespace-pre-wrap break-words">
+          <div className="font-sans card-h2 whitespace-pre-wrap break-words">
             {streamedData}
             <button
               disabled={msgLoading}
@@ -338,7 +336,7 @@ const SubKeywordsGenerator = () => {
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                className="w-4 h-4 text-white"
+                className="w-4 h-4 card-h2"
               >
                 <path
                   stroke-linecap="round"
@@ -347,7 +345,7 @@ const SubKeywordsGenerator = () => {
                 />
               </svg>
 
-              <span className="text-white text-[15px] font-semibold">
+              <span className="card-h2 text-[15px] font-semibold">
                 {msgLoading
                   ? "Please wait..."
                   : isKeywordsCopied
