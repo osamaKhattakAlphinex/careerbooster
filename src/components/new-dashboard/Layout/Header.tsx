@@ -5,7 +5,6 @@ import Modal from "@/components/Modal";
 import { bellIcon, sunIcon } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
 import { useSelector } from "react-redux";
-import Notifications from "@/components/Notifications";
 import ThemeToggler from "@/components/Themetoggler";
 interface HeaderProps {
   children?: ReactNode;
@@ -14,9 +13,9 @@ const pagesArray = ["/subscribe"];
 const Header: React.FC<HeaderProps> = ({ children }) => {
   const pathname: any = usePathname();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [isSticky, setIsSticky] = useState(false);
+
   const userData = useSelector((state: any) => state.userData);
-  const [pageScroll, setPageScroll] = useState(0);
+
   const routeNamesToDisplayNames: Record<string, string> = {
     "/dashboard": "Dashboard",
     "/resume-builder": "Generate New Resumes",
@@ -31,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     "/linkedin-generator/about": "About Generator",
     "/linkedin-generator/job-description": "Job Description Generator",
     "/linkedin-generator/keywords": "Keyword Generator",
-
+    "/change-current-password": "Change Password",
     // Add more routes as needed
   };
 

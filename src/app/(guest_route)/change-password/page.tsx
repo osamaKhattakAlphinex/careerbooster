@@ -5,6 +5,7 @@ import { changePassword } from "@/lib/api";
 import axios from "axios";
 import "@/app/plugins.css";
 import "@/app/style.css";
+
 const ChangePasswordPage = () => {
   const router = useRouter();
   const [password, setPassword] = useState("");
@@ -54,8 +55,9 @@ const ChangePasswordPage = () => {
           token,
         })
         .then((resp) => {
+          console.log(resp);
           if (resp.data.success) {
-            setDecodedEmail(resp?.data?.decoded?.email);
+            setDecodedEmail(resp?.data?.result?.email);
             setVerifyingToken(false);
           }
         })
@@ -69,7 +71,7 @@ const ChangePasswordPage = () => {
   }, [token]);
   return (
     <>
-      <main className="flex-grow-1 mb-20  lg:ml-[234px] ">
+      <main className="flex-grow-1 mb-20 ">
         <section className="py-15 pt-lg-30">
           <div className="container">
             <div className="row justify-center">

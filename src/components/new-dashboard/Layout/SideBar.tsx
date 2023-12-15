@@ -13,6 +13,7 @@ import {
   deviceTablet,
   clipboard,
   xMark,
+  keyIcon,
 } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
 import Button from "@/components/Button";
@@ -29,6 +30,7 @@ const items = [
   { icon: inboxArrowDown, text: "Email Bot", url: "/email-bot" },
   { icon: dollarIcon, text: "Consulting Bot", url: "/consulting-bids-bot" },
   { icon: userCircle, text: "Profile", url: "/profile-review" },
+  { icon: keyIcon, text: "Change Password", url: "/change-current-password" },
   { icon: powerIcon, text: "Logout", url: "/dashboard" },
 ];
 const pagesArray = ["/subscribe", "/subscribed"];
@@ -120,7 +122,7 @@ const SideBar = () => {
                 </h1>
                 <Link
                   href="/profile-review"
-                  className="text-[14px] text-[#B324D7] p-.5 sideBar_p_text"
+                  className="text-[14px] no-underline text-[#B324D7] p-.5 sideBar_p_text"
                 >
                   Edit Profile
                 </Link>

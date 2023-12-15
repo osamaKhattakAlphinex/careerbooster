@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import User from "@/db/schemas/User";
-import bcrypt from "bcrypt";
 
 export async function POST(req: any) {
   const body = await req.json();
-
   try {
     await startDB();
 
@@ -20,9 +18,7 @@ export async function POST(req: any) {
       );
     }
 
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(password, salt);
-
+    user.password = password;
     await user.save();
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
