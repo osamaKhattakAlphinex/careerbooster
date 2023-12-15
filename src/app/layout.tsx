@@ -9,6 +9,7 @@ import Footer from "@/components/layout/Footer";
 import ThemeProvider from "@/components/new-layout/ThemeProvider";
 
 import Head from "next/head";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "AI Resume Bot",
@@ -24,7 +25,7 @@ export default function RootLayout({
     <ThemeProvider>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script
+        <Script
           dangerouslySetInnerHTML={{
             __html: `
               (function(h,o,t,j,a,r){
