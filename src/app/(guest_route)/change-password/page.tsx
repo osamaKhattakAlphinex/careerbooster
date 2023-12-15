@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { changePassword } from "@/lib/api";
 import axios from "axios";
-
+import "@/app/plugins.css";
+import "@/app/style.css";
 const ChangePasswordPage = () => {
   const router = useRouter();
   const [password, setPassword] = useState("");
@@ -68,7 +69,7 @@ const ChangePasswordPage = () => {
   }, [token]);
   return (
     <>
-      <main className="flex-grow-1 mb-20">
+      <main className="flex-grow-1 mb-20  lg:ml-[234px] ">
         <section className="py-15 pt-lg-30">
           <div className="container">
             <div className="row justify-center">

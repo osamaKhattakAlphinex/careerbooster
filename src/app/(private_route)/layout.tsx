@@ -10,7 +10,6 @@ import "./dashboard.css";
 import "./plugins.css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import ThemeProvider from "@/components/new-layout/ThemeProvider";
 interface Props {
   children: ReactNode;
 }

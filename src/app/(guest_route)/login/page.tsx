@@ -42,42 +42,6 @@ const Login = () => {
                 </div>
                 <div className="account-wrapper h-full d-flex flex-column justify-center">
                   <div className="text-center">
-                    {/* <Link href="/">
-                    <Image
-                      width={165}
-                      height={40}
-                      src="/assets/images/logo.svg"
-                      alt=""
-                      className="img-fluid"
-                    />
-                  </Link> */}
-                    {/* <div className="vstack gap-4 mt-10 d-none">
-                    <button type="button" className="btn account-btn py-4">
-                      <Image
-                        src="/assets/images/icons/google.svg"
-                        alt=""
-                        width={24}
-                        height={24}
-                        className="img-fluid icon"
-                      />
-                      <span>Continue With Google</span>
-                    </button>
-                    <button type="button" className="btn account-btn py-4">
-                      <Image
-                        src="/assets/images/icons/apple.svg"
-                        alt=""
-                        width={24}
-                        height={24}
-                        className="img-fluid icon"
-                      />
-                      <span>Continue With Apple</span>
-                    </button>
-                  </div>  */}
-
-                    {/* <div className="divider-with-text d-none">
-                    <span>Or sign in with email</span>
-                  </div> */}
-
                     <LoginForm />
                   </div>
                 </div>
