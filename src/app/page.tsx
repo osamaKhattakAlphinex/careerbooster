@@ -13,7 +13,6 @@ import UseCases from "@/components/new-layout/Homepage/UseCases";
 import FAQList from "@/components/new-layout/Homepage/Faqs";
 import "./plugins.css";
 import "./style.css";
-import { useEffect } from "react";
 
 export const metadata: Metadata = {
   title: "CareerBooster.AI",
