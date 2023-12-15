@@ -290,6 +290,9 @@
 [data-bs-theme="dark"] .header-mode-btn {
   color: white;
 }
+[data-bs-theme="dark"] .header-mode-btn-click {
+  color: rgb(0, 0, 0) !important;
+}
 [data-bs-theme="dark"] .header-mode-btn :hover {
   color: #e6f85e;
 }
@@ -442,6 +445,12 @@
 }
 .header-mode-btn {
   color: black;
+}
+.header-mode-btn:hover {
+  color: #e6f85e;
+}
+.header-mode-btn-click {
+  color: rgb(255, 255, 255) !important;
 }
 .card-dashboard {
   border: 1px solid rgb(182, 184, 182);

@@ -25,7 +25,7 @@ export default async function Privatelayout({ children }: Props) {
   if (!session?.user) redirect("/login");
 
   return (
-    <ThemeProvider>
+    // <ThemeProvider>
       <div className="gradient-bg   w-screen h-screen overflow-y-scroll">
         <ProfileCreationLayer>
           <Header />
@@ -34,6 +34,6 @@ export default async function Privatelayout({ children }: Props) {
           <Footer />
         </ProfileCreationLayer>
       </div>
-    </ThemeProvider>
+    // </ThemeProvider>
   );
 }

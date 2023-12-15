@@ -45,13 +45,13 @@ const Footer = () => {
         <div className="flex lg:gap-[22px] gap-[10px] items-center">
           <Link
             href={"/terms-and-conditions"}
-            className="card-h2  lg:text-[14px] text-[10px]"
+            className="card-h2 no-underline lg:text-[14px] text-[10px]"
           >
             Terms use
           </Link>
           <Link
             href={"/privacy-policy"}
-            className="card-h2  lg:text-[14px] text-[10px]"
+            className="card-h2 no-underline lg:text-[14px] text-[10px]"
           >
             Privacy Policy
           </Link>
