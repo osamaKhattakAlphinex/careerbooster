@@ -1,6 +1,6 @@
-"use client";
+// "use client";
 
-import { hotjar } from "react-hotjar";
+// import { hotjar } from "react-hotjar";
 import type { Metadata } from "next";
 import CTASection from "@/components/new-layout/Homepage/CTASection";
 import FeaturesSecond from "@/components/new-layout/Homepage/FeaturesSecond";
@@ -48,9 +48,9 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  useEffect(() => {
-    hotjar.initialize(3796095, 6);
-  }, []);
+  // useEffect(() => {
+  //   hotjar.initialize(3796095, 6);
+  // }, []);
   return (
     <>
       <main className="flex-grow-1 mb-20 ">
