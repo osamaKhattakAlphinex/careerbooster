@@ -95,28 +95,19 @@ const Contacts = () => {
   return (
     <>
       <MessageViewer ref={messageViewerRef} message={message} />
-      <div className="pt-30">
-        <div className="my-5 ml-10">
-          <Link
-            href="/admin"
-            className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
-          >
-            {leftArrowIcon}
-            Dashboard
-          </Link>
-        </div>
-
-        <div className="flex flex-col gap-2 items-center justify-center">
-          <div className="flex flex-col gap-2 w-11/12">
-            {/* Table */}
-            <DataTable
-              columns={columns}
-              data={records}
-              source="contacts"
-              actions={actions}
-              loading={loading}
-            />
-          </div>
+      <div className="flex flex-col justify-start items-start">
+        <h2 className=" text-xl text-white uppercase">Emails</h2>
+        <span className="text-white/70 text-base">
+          List of emails you recieved in in your email.
+        </span>
+        <div className="w-full overflow-x-auto mt-4">
+          <DataTable
+            columns={columns}
+            data={records}
+            source="contacts"
+            actions={actions}
+            loading={loading}
+          />
         </div>
       </div>
     </>

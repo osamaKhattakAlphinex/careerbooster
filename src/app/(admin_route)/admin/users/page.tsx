@@ -402,122 +402,137 @@ const UsersPage = () => {
   }, [searchParams?.get("r"), searchParams?.get("p")]);
 
   return (
-    <>
-      <div className="mx-10 pt-40">
-        <div className="flex justify-between">
-          <div className="my-5 ml-10">
-            <Link
-              href="/admin"
-              className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
-            >
-              {leftArrowIcon}
-              Dashboard
-            </Link>
-          </div>
-          <div className="flex flex-row gap-2 items-center ml-auto  pr-5">
-            <label htmlFor="userPerPage" className="text-sm font-medium">
-              Number of records per page:
-            </label>
-            <select
-              name="userPerPage"
-              id="userPerPage"
-              className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
-              onChange={selectUsersLimit}
-              value={limitOfUser}
-            >
-              <>
-                <option value={10}>10</option>
-                <option value={20}>20</option>
-                <option value={30}>30</option>
-                <option value={40}>40</option>
-                <option value={100}>100</option>
-                <option value={500}>500</option>
-              </>
-            </select>
-          </div>
-        </div>
+    <div className="flex flex-col justify-start items-start">
+      <h2 className=" text-xl text-white uppercase">Users</h2>
+      <span className="text-white/70 text-base">List of all the users</span>
+      <div className="w-full overflow-x-auto mt-4">
+        <DataTable
+          loading={loading}
+          data={records}
+          columns={columns}
+          actions={actions}
+          source="user"
+          enableRowSelection={true}
+          bulkDataOperations={bulkDataOperations}
+        />
+      </div>
+    </div>
+  );
+};
 
-        <div
-          key="1"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6"
-        >
-          <Card>
-            <CardHeader className="pb-2">
-              {/* <div className="flex items-center justify-between">
+export default UsersPage;
+
+{
+  /* <div className="mx-10 pt-40">
+  <div className="flex justify-between">
+    <div className="my-5 ml-10">
+      <Link
+        href="/admin"
+        className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+      >
+        {leftArrowIcon}
+        Dashboard
+      </Link>
+    </div>
+    <div className="flex flex-row gap-2 items-center ml-auto  pr-5">
+      <label htmlFor="userPerPage" className="text-sm font-medium">
+        Number of records per page:
+      </label>
+      <select
+        name="userPerPage"
+        id="userPerPage"
+        className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+        onChange={selectUsersLimit}
+        value={limitOfUser}
+      >
+        <>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={30}>30</option>
+          <option value={40}>40</option>
+          <option value={100}>100</option>
+          <option value={500}>500</option>
+        </>
+      </select>
+    </div>
+  </div>
+
+  <div
+    key="1"
+    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6"
+  >
+    <Card>
+      <CardHeader className="pb-2">
+        {/* <div className="flex items-center justify-between">
                 <CardTitle className="text-sm font-medium mb-0">
                   Total Users
                 </CardTitle>
                 <IconUsersicon className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
-              </div> */}
+              </div> */
+}
 
-              <select
-                onChange={(e) => setUserStats(e.target.value)}
-                className="p-2"
-              >
-                <option value="total">Total Users</option>
-                <option value="thisWeek">Registered This Week</option>
-                <option value="thisMonth">Registered This Month</option>
-                <option value="thisYear">Registered This Year</option>
-              </select>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-3xl font-bold">
-                {/* {counts ? counts.total : 0} */}
-                {counts ? counts[userStats] : 0}
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-1">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium mb-0">
-                  {/* Registered This Week */}
-                  Free Users
-                </CardTitle>
-                <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
-              </div>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-3xl font-bold">
-                {counts ? counts.freeUser : 0}
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium mb-0">
-                  {/* Registered This Month */}
-                  Paid Users
-                </CardTitle>
-                <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
-              </div>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-3xl font-bold">
-                {counts ? counts.paidUser : 0}
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-0">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium mb-0">
-                  {/* Registered This Year */}
-                  Active Users
-                </CardTitle>
-                <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
-              </div>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-3xl font-bold">
-                {counts ? counts.activeUser : 0}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+//       <select onChange={(e) => setUserStats(e.target.value)} className="p-2">
+//         <option value="total">Total Users</option>
+//         <option value="thisWeek">Registered This Week</option>
+//         <option value="thisMonth">Registered This Month</option>
+//         <option value="thisYear">Registered This Year</option>
+//       </select>
+//     </CardHeader>
+//     <CardContent className="pt-0">
+//       <div className="text-3xl font-bold">
+//         {/* {counts ? counts.total : 0} */}
+//         {counts ? counts[userStats] : 0}
+//       </div>
+//     </CardContent>
+//   </Card>
+//   <Card>
+//     <CardHeader className="pb-1">
+//       <div className="flex items-center justify-between">
+//         <CardTitle className="text-sm font-medium mb-0">
+//           {/* Registered This Week */}
+//           Free Users
+//         </CardTitle>
+//         <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+//       </div>
+//     </CardHeader>
+//     <CardContent className="pt-0">
+//       <div className="text-3xl font-bold">{counts ? counts.freeUser : 0}</div>
+//     </CardContent>
+//   </Card>
+//   <Card>
+//     <CardHeader className="pb-2">
+//       <div className="flex items-center justify-between">
+//         <CardTitle className="text-sm font-medium mb-0">
+//           {/* Registered This Month */}
+//           Paid Users
+//         </CardTitle>
+//         <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+//       </div>
+//     </CardHeader>
+//     <CardContent className="pt-0">
+//       <div className="text-3xl font-bold">{counts ? counts.paidUser : 0}</div>
+//     </CardContent>
+//   </Card>
+//   <Card>
+//     <CardHeader className="pb-0">
+//       <div className="flex items-center justify-between">
+//         <CardTitle className="text-sm font-medium mb-0">
+//           {/* Registered This Year */}
+//           Active Users
+//         </CardTitle>
+//         <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+//       </div>
+//     </CardHeader>
+//     <CardContent className="pt-0">
+//       <div className="text-3xl font-bold">
+//         {counts ? counts.activeUser : 0}
+//       </div>
+//     </CardContent>
+//   </Card>
+// </div>
 
-        {/* {showDeleteAllButton() && (
+{
+  /* {showDeleteAllButton() && (
           <div className="flex justify-end">
             <button
               disabled={loading ? true : false}
@@ -527,74 +542,72 @@ const UsersPage = () => {
               Delete All
             </button>
           </div>
-        )} */}
+        )} */
+}
 
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
-          <DataTable
-            loading={loading}
-            data={records}
-            columns={columns}
-            actions={actions}
-            source="user"
-            enableRowSelection={true}
-            bulkDataOperations={bulkDataOperations}
-          />
-        </div>
-        {/* Pagination Controls */}
-        <div className=" flex justify-end mt-4">
-          <nav aria-label="Page navigation example">
-            <ul className="inline-flex -space-x-px">
-              <li>
-                <button
-                  className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
-                  onClick={() => {
-                    setRecords([]);
-                    setCurrentPage(currentPage - 1);
-                  }}
-                  disabled={currentPage == 1 ? true : false}
-                >
-                  Previous
-                </button>
-              </li>
-              {[currentPage - 1, currentPage, currentPage + 1].map((number) => {
-                if (number < 1 || number > totalPages) return null;
-                return (
-                  <li key={number}>
-                    <button
-                      onClick={(e) => {
-                        setRecords([]);
-                        setCurrentPage(number);
-                      }}
-                      className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
-                        currentPage === number
-                          ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
-                          : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
-                      }`}
-                    >
-                      {number}
-                    </button>
-                  </li>
-                );
-              })}
+// <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
+//   <DataTable
+//     loading={loading}
+//     data={records}
+//     columns={columns}
+//     actions={actions}
+//     source="user"
+//     enableRowSelection={true}
+//     bulkDataOperations={bulkDataOperations}
+//   />
+// </div>
+{
+  /* Pagination Controls */
+}
+// <div className=" flex justify-end mt-4">
+//   <nav aria-label="Page navigation example">
+//     <ul className="inline-flex -space-x-px">
+//       <li>
+//         <button
+//           className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+//           onClick={() => {
+//             setRecords([]);
+//             setCurrentPage(currentPage - 1);
+//           }}
+//           disabled={currentPage == 1 ? true : false}
+//         >
+//           Previous
+//         </button>
+//       </li>
+//       {[currentPage - 1, currentPage, currentPage + 1].map((number) => {
+//         if (number < 1 || number > totalPages) return null;
+//         return (
+//           <li key={number}>
+//             <button
+//               onClick={(e) => {
+//                 setRecords([]);
+//                 setCurrentPage(number);
+//               }}
+//               className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+//                 currentPage === number
+//                   ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
+//                   : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+//               }`}
+//             >
+//               {number}
+//             </button>
+//           </li>
+//         );
+//       })}
 
-              <li>
-                <button
-                  className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  onClick={() => {
-                    setRecords([]);
-                    setCurrentPage(currentPage + 1);
-                  }}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </>
-  );
-};
-
-export default UsersPage;
+//       <li>
+//         <button
+//           className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+//           onClick={() => {
+//             setRecords([]);
+//             setCurrentPage(currentPage + 1);
+//           }}
+//           disabled={currentPage === totalPages}
+//         >
+//           Next
+//         </button>
+//       </li>
+//     </ul>
+//   </nav>
+// </div>
+// </div>; */}

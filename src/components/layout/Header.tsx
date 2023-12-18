@@ -78,6 +78,7 @@ const Header = () => {
     }
   };
   const pagesArray = [
+    "/admin",
     "/dashboard",
     "/cover-letter-generator",
     "/resume-builder",
