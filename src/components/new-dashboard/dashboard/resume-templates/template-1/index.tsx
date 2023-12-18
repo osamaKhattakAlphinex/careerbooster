@@ -38,6 +38,13 @@ const EditableField = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedValue, setEditedValue] = useState(value);
+  const [showPopup, setShowPopup] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 5000);
+    // Clean up the timeout to avoid memory leaks
+  }, [showPopup]); // The empty dependency array ensures that this effect runs only once after the initial render
 
   const userData = useSelector((state: any) => state.userData);
   const handleBlur = () => {
@@ -50,36 +57,48 @@ const EditableField = ({
       setEditedValue(value);
     }
   }, [value]);
-
+  const showAlertpopupFun = () => {
+    !userData?.userPackageData?.limit?.can_edit_resume &&
+      alert("please upgrade to pro plan in order to edit !");
+  };
   return (
-    <span onClick={() => setIsEditing(true)} onBlur={handleBlur} className=" ">
-      {userData?.userPackageData?.limit?.can_edit_resume && isEditing ? (
-        <>
-          {type === "textarea" ? (
-            <textarea
-              value={editedValue}
-              className="bg-transparent pr-2 w-full hover:cursor-text  h-auto"
-              rows={rows ? rows : 15}
-              onChange={(e: any) => setEditedValue(e.target.value)}
-              autoFocus
-              onBlur={handleBlur}
-            />
-          ) : (
-            <input
-              type="text"
-              value={editedValue}
-              className=" bg-transparent pr-2 hover:cursor-text"
-              style={style ? style : {}}
-              onChange={(e: any) => setEditedValue(e.target.value)}
-              autoFocus
-              onBlur={handleBlur}
-            />
-          )}
-        </>
-      ) : (
-        <span className="hover:cursor-text">{value}</span>
-      )}
-    </span>
+    <>
+      <span
+        onClick={() => {
+          setIsEditing(true);
+          showAlertpopupFun();
+        }}
+        onBlur={handleBlur}
+        className=""
+      >
+        {userData?.userPackageData?.limit?.can_edit_resume && isEditing ? (
+          <>
+            {type === "textarea" ? (
+              <textarea
+                value={editedValue}
+                className="bg-transparent pr-2 w-full hover:cursor-text  h-auto"
+                rows={rows ? rows : 15}
+                onChange={(e: any) => setEditedValue(e.target.value)}
+                autoFocus
+                onBlur={handleBlur}
+              />
+            ) : (
+              <input
+                type="text"
+                value={editedValue}
+                className=" bg-transparent pr-2 hover:cursor-text"
+                style={style ? style : {}}
+                onChange={(e: any) => setEditedValue(e.target.value)}
+                autoFocus
+                onBlur={handleBlur}
+              />
+            )}
+          </>
+        ) : (
+          <span className="hover:cursor-text">{value}</span>
+        )}
+      </span>
+    </>
   );
 };
 
@@ -111,7 +130,8 @@ const ResumeTemplate1 = ({
   ] = useState(false);
   const [workExperienceAddButtonVisible, setWorkExperienceAddButtonVisible] =
     useState<number>();
-    const [educationAddButtonVisible, setEducationAddButtonVisible] = useState(false);
+  const [educationAddButtonVisible, setEducationAddButtonVisible] =
+    useState(false);
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [secondarySkill, setSecondarySkill] = useState<string>("");
   const [professionalSkill, setProfessionalSkill] = useState<string>("");
@@ -251,7 +271,7 @@ const ResumeTemplate1 = ({
     //     educationArray: updatedItems,
     //   });
     // }
-  }
+  };
   //Reorder Redux handleDropAchievement array with drag-drop
   const handleDropAchievement = (i: number, ind: number) => {
     let draggedIndex: number;
@@ -283,10 +303,10 @@ const ResumeTemplate1 = ({
   };
 
   return (
-    <div className="w-full first-page text-gray-900">
+    <div className="w-full first-page  text-gray-900">
       <div className="flex">
         <div className="flex flex-col w-10/12 p-8">
-          <h2 className="text-6xl hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-2xl md:text-6xl hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -296,7 +316,7 @@ const ResumeTemplate1 = ({
               }}
             />
           </h2>
-          <h3 className="text-2xl hover:shadow-md hover:bg-gray-100">
+          <h3 className="text-[16px] md:text-2xl hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -307,8 +327,8 @@ const ResumeTemplate1 = ({
           </h3>
         </div>
         <div>
-          <div className="w-32 h-32 text-white bg-gray-800 text-center p-10 rounded-full mr-8">
-            <span className="text-4xl  hover:shadow-md hover:bg-gray-900">
+          <div className=" w-24 h-24 md:w-32 md:h-32 text-white bg-gray-800 text-center flex justify-center items-center  rounded-full mx-4 my-4 md:my-0 md:mr-8">
+            <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
               <EditableField
                 value={resume?.shortName ? resume?.shortName : "CPH"}
                 style={{ width: "60px" }}
@@ -322,7 +342,7 @@ const ResumeTemplate1 = ({
         </div>
       </div>
       <div className="flex">
-        <div className="w-1/3 flex flex-col pl-8 pr-6 border-r-2">
+        <div className=" w-5/12 md:w-1/3 flex flex-col pl-3 md:pl-8 pr-6 border-r-2">
           {/* contacts */}
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
           <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
@@ -553,20 +573,22 @@ const ResumeTemplate1 = ({
                 Education
               </h3>
               <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-              <ul className="pl-0 flex flex-col"
-              onMouseEnter={() =>
+              <ul
+                className="pl-0 flex flex-col"
+                onMouseEnter={() =>
                   !newEducation && setEducationAddButtonVisible(true)
                 }
                 onMouseLeave={() =>
                   !newEducation && setEducationAddButtonVisible(false)
                 }
               >
-                
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <li className=" hover:shadow-md hover:cursor-move 
+                    <li
+                      className=" hover:shadow-md hover:cursor-move 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
-                   hover:bg-gray-100 font-semibold flex uppercase text-md  justify-between items-center ">
+                   hover:bg-gray-100 font-semibold flex uppercase text-md  justify-between items-center "
+                    >
                       <EditableField
                         type="textarea"
                         rows={2}
@@ -596,26 +618,25 @@ const ResumeTemplate1 = ({
                         }}
                       />
                       <div
-                      onClick={() => {
-                        const removeEducation = resume.education.filter(
-                          (item: any) => item !== education
-                        );
-                        dispatch(
-                          setField({
-                            name: "education",
-                            value: removeEducation,
-                          })
-                        );
-                        saveResumeToDB({
-                          ...resume,
-                          education: removeEducation,
-                        });
-                      
-                      }}
-                      className="w-4 h-4  cursor-pointer child"
-                    >
-                      {crossIcon1}
-                    </div>
+                        onClick={() => {
+                          const removeEducation = resume.education.filter(
+                            (item: any) => item !== education
+                          );
+                          dispatch(
+                            setField({
+                              name: "education",
+                              value: removeEducation,
+                            })
+                          );
+                          saveResumeToDB({
+                            ...resume,
+                            education: removeEducation,
+                          });
+                        }}
+                        className="w-4 h-4  cursor-pointer child"
+                      >
+                        {crossIcon1}
+                      </div>
                     </li>
                     <li className="hover:shadow-md uppercase hover:bg-gray-100 text-base">
                       <EditableField
@@ -968,7 +989,7 @@ const ResumeTemplate1 = ({
             </>
           )}
         </div>
-        <div className="w-full flex flex-col px-8">
+        <div className="w-full flex flex-col px-4 md:px-8">
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
           <h3 className="uppercase text-lg font-semibold">EXECUTIVE SUMMARY</h3>
@@ -1238,9 +1259,9 @@ const ResumeTemplate1 = ({
                       )}
                       {newWorkExperience === i ? (
                         <>
-                          <div className="w-full rounded-md border flex h-9.5">
+                          <div className="w-full gap-1 rounded-md flex flex-wrap h-9.5">
                             <textarea
-                              className="w-10/12 rounded-l-md text bg-transparent p-2" // Apply Tailwind CSS classes
+                              className="w-full md:w-9/12 rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
                               onChange={(e) =>
                                 setNewAchievement(e.target.value)
                               }
@@ -1285,7 +1306,7 @@ const ResumeTemplate1 = ({
                               }}
                             />
                             <button
-                              className="bg-green-500 w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
+                              className="bg-green-500 w-full md:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
                               onClick={() => {
                                 // Save the new achievement to the state and possibly the database
                                 if (newAchievement !== "") {
@@ -1326,7 +1347,7 @@ const ResumeTemplate1 = ({
                               setNewWorkExperience(-1);
                               setWorkExperienceAddButtonVisible(-1);
                             }}
-                            className="bg-red-500 w-2/12 py-1 px-2 mt-2 text-white rounded-full"
+                            className="bg-red-500 w-full md:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
                           >
                             Cancel
                           </button>
@@ -1335,7 +1356,7 @@ const ResumeTemplate1 = ({
                       {workExperienceAddButtonVisible === i &&
                       newWorkExperience !== i ? (
                         <div
-                          className="border-2 w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                          className="border-2 w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {
                             setNewWorkExperience(i);
                           }}

@@ -204,13 +204,14 @@ const SideBar = () => {
               <p className="text-white px-4 mb-4 text-[15px] text-center font-semibold">
                 Upgrade to Pro version to get hired faster
               </p>
-              <div className="flex justify-center pl-3">
+              <div className="flex justify-center">
                 <Button
                   onClick={() => {
                     router.push("/subscribe");
                   }}
                   btnText="Upgrade"
                   textColor={`text-white`}
+                  // isActive={true}
                   bgColor="bg-zinc-900"
                 />
               </div>
