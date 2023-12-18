@@ -93,6 +93,7 @@ const Header = () => {
     "/linkedin-generator/job-description",
     "/linkedin-generator/keywords",
     "/change-current-password",
+    "/review-resume-bot",
   ];
 
   // when page (session) loads, fetch user data if not exists

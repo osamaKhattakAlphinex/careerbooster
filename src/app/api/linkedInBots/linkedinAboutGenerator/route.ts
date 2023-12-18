@@ -6,7 +6,7 @@ import { OpenAIStream, StreamingTextResponse } from "ai";
 import TrainBot from "@/db/schemas/TrainBot";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
 
-export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const maxDuration = 10; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
 const openai = new OpenAI({

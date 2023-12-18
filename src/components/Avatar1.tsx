@@ -51,6 +51,7 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
   const [response, setResponse] = useState<any>({});
   const componentRef: any = useRef(null);
   const [listeningUser, setListeningUser] = useState(false);
+  const [speechText, setSpeechText] = useState("");
   const [tooltipText, setTooltipText] = useState<string>("Hey, Click me!");
   const audioFileUrl1 = "/speech1.mp3";
   const audioFileUrl2 = "/speech2.mp3";
@@ -176,7 +177,7 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
       if (listeningUser) {
         console.log("inside last");
         SpeechRecognition.stopListening();
-        console.log(transcript);
+        setSpeechText(transcript);
         setListeningUser(false);
         setTooltipText("");
         return;
@@ -202,6 +203,19 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
       audio.removeEventListener("ended", handleAudioEnded);
     };
   }, []);
+
+  useEffect(() => {
+    if (speechText.length > 0 && !listeningUser) {
+      axios
+        .post("/api/audioAnswer", {
+          input: speechText,
+        })
+        .then((res) => {
+          console.log(res);
+          setResponse(res);
+        });
+    }
+  }, [speechText]);
 
   return (
     <div
