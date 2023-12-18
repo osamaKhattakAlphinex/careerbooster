@@ -28,7 +28,7 @@ const CoverLetterCardSingle = ({
   const router = useRouter();
   const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
-    if (source != "") {
+    if (source !== "") {
       router.replace("/cover-letter-generator");
     }
     return dispatch(setCoverLetter(card));

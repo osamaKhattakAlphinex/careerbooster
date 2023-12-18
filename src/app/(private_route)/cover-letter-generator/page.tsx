@@ -308,7 +308,11 @@ export default function CoverLetterPage() {
   const historyProps = {
     dataSource: "coverLetters",
     Component: (card: any) => (
-      <CoverLetterCardSingle card={card} componentRef={componentRef} />
+      <CoverLetterCardSingle
+        card={card}
+        componentRef={componentRef}
+        source=""
+      />
     ),
   };
 
