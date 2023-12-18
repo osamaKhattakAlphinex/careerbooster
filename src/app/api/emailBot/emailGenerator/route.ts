@@ -109,9 +109,11 @@ export async function POST(req: any) {
     // } catch (error) {}
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      onFinal(completions) {
+      async onFinal(completions) {
         try {
           if (trainBotData) {
+            await startDB();
+
             const emailId = makeid();
 
             const payload = {
@@ -123,7 +125,7 @@ export async function POST(req: any) {
               userEmail: email,
             };
 
-            postEmail(payload);
+            await postEmail(payload);
 
             let entry: TrainBotEntryType = {
               entryId: emailId,
@@ -136,7 +138,7 @@ export async function POST(req: any) {
               fileAddress: "",
               Instructions: `Generate Email for ${trainBotData.userEmail}`,
             };
-            makeTrainedBotEntry(entry);
+            await makeTrainedBotEntry(entry);
           }
         } catch {
           console.log("error while saving Emails....");

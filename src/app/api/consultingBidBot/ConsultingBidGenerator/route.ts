@@ -103,9 +103,10 @@ export async function POST(req: any) {
     // } catch (error) {}
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      onFinal(completions) {
+      async onFinal(completions) {
         try {
           if (trainBotData) {
+            await startDB();
             const consultingBidId = makeid();
 
             const payload = {
@@ -117,7 +118,7 @@ export async function POST(req: any) {
               userEmail: email,
             };
 
-            postConsultingBid(payload);
+            await postConsultingBid(payload);
 
             let entry: TrainBotEntryType = {
               entryId: consultingBidId,
@@ -130,7 +131,7 @@ export async function POST(req: any) {
               fileAddress: "",
               Instructions: `Generate Consulting Bid for ${trainBotData.userEmail}`,
             };
-            makeTrainedBotEntry(entry);
+            await makeTrainedBotEntry(entry);
           }
         } catch {
           console.log("error while saving consulting bids....");

@@ -83,9 +83,10 @@ export async function POST(req: any) {
 
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      onFinal(completions) {
+      async onFinal(completions) {
         try {
           if (trainBotData) {
+            await startDB();
             const coverletterId = makeid();
 
             const payload = {
@@ -97,7 +98,7 @@ export async function POST(req: any) {
               userEmail: email,
             };
 
-            postCoverLetter(payload);
+            await postCoverLetter(payload);
 
             let entry: TrainBotEntryType = {
               entryId: coverletterId,
@@ -110,7 +111,7 @@ export async function POST(req: any) {
               fileAddress: "",
               Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
             };
-            makeTrainedBotEntry(entry);
+            await makeTrainedBotEntry(entry);
           }
         } catch {
           console.log("error while saving coverletter....");
