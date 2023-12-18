@@ -111,7 +111,8 @@ const ResumeTemplate1 = ({
   ] = useState(false);
   const [workExperienceAddButtonVisible, setWorkExperienceAddButtonVisible] =
     useState<number>();
-    const [educationAddButtonVisible, setEducationAddButtonVisible] = useState(false);
+  const [educationAddButtonVisible, setEducationAddButtonVisible] =
+    useState(false);
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [secondarySkill, setSecondarySkill] = useState<string>("");
   const [professionalSkill, setProfessionalSkill] = useState<string>("");
@@ -251,7 +252,7 @@ const ResumeTemplate1 = ({
     //     educationArray: updatedItems,
     //   });
     // }
-  }
+  };
   //Reorder Redux handleDropAchievement array with drag-drop
   const handleDropAchievement = (i: number, ind: number) => {
     let draggedIndex: number;
@@ -553,20 +554,22 @@ const ResumeTemplate1 = ({
                 Education
               </h3>
               <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-              <ul className="pl-0 flex flex-col"
-              onMouseEnter={() =>
+              <ul
+                className="pl-0 flex flex-col"
+                onMouseEnter={() =>
                   !newEducation && setEducationAddButtonVisible(true)
                 }
                 onMouseLeave={() =>
                   !newEducation && setEducationAddButtonVisible(false)
                 }
               >
-                
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <li className=" hover:shadow-md hover:cursor-move 
+                    <li
+                      className=" hover:shadow-md hover:cursor-move 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
-                   hover:bg-gray-100 font-semibold flex uppercase text-md  justify-between items-center ">
+                   hover:bg-gray-100 font-semibold flex uppercase text-md  justify-between items-center "
+                    >
                       <EditableField
                         type="textarea"
                         rows={2}
@@ -596,26 +599,25 @@ const ResumeTemplate1 = ({
                         }}
                       />
                       <div
-                      onClick={() => {
-                        const removeEducation = resume.education.filter(
-                          (item: any) => item !== education
-                        );
-                        dispatch(
-                          setField({
-                            name: "education",
-                            value: removeEducation,
-                          })
-                        );
-                        saveResumeToDB({
-                          ...resume,
-                          education: removeEducation,
-                        });
-                      
-                      }}
-                      className="w-4 h-4  cursor-pointer child"
-                    >
-                      {crossIcon1}
-                    </div>
+                        onClick={() => {
+                          const removeEducation = resume.education.filter(
+                            (item: any) => item !== education
+                          );
+                          dispatch(
+                            setField({
+                              name: "education",
+                              value: removeEducation,
+                            })
+                          );
+                          saveResumeToDB({
+                            ...resume,
+                            education: removeEducation,
+                          });
+                        }}
+                        className="w-4 h-4  cursor-pointer child"
+                      >
+                        {crossIcon1}
+                      </div>
                     </li>
                     <li className="hover:shadow-md uppercase hover:bg-gray-100 text-base">
                       <EditableField
