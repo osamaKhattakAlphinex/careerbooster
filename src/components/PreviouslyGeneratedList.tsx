@@ -26,15 +26,15 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
     <div className="single-service-bg  rounded-[20px]  mb-7 px-4 lg:px-[24px] pt-[35px] pb-[20px] z-0">
       <div className="flex justify-between items-center ">
         <h1 className="uppercase text-[14px] md:text-sm font-semibold lg:pr-0 pr-4">
-          {dataSource === "coverLetters" && "Your AI Generated Cover Letters"}
-          {dataSource === "emails" && "Your AI Generated Emails"}
-          {dataSource === "consultingBids" && "Your AI Generated Bids"}
-          {dataSource === "resume" && "Your AI Generated Resume"}
-          {dataSource === "linkedInHeadlines" && "Your AI Generated Headlines"}
-          {dataSource === "linkedInAbouts" && "Your AI Generated Abouts"}
+          {dataSource === "coverLetters" && "recent Cover Letters"}
+          {dataSource === "emails" && "recent Emails"}
+          {dataSource === "consultingBids" && "recent Bids"}
+          {dataSource === "resume" && "recent Resume"}
+          {dataSource === "linkedInHeadlines" && "recent Headlines"}
+          {dataSource === "linkedInAbouts" && "recent Abouts"}
           {dataSource === "linkedInJobDescriptions" &&
-            "Your AI Generated Descriptions"}
-          {dataSource === "linkedInKeywords" && "Your AI Generated Keywords"}
+            "recent Descriptions"}
+          {dataSource === "linkedInKeywords" && "recent Keywords"}
         </h1>
         <div className="relative lg:w-[213px] w-[120px] flex">
           <input
