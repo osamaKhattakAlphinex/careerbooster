@@ -58,8 +58,8 @@ export async function POST(req: any) {
     }
 
     // Add one to resumes_generation in userPackageUsed
-    if (user.userPackageUsed && user.userPackageUsed.resumes_generation < 5) {
-      user.userPackageUsed.resumes_generation = user.resumes.length;
+    if (user.userPackageUsed && user.userPackageUsed.resumes_generation) {
+      user.userPackageUsed.resumes_generation += 1;
     }
 
     // Save the updated user document
