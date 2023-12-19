@@ -80,15 +80,18 @@ export default function CoverLetterPage() {
   }, [isEditing]);
 
   const saveToDB = async (obj: any, text: any) => {
-    const payload = {
-      ...obj,
+    const id = obj?.coverletterId;
+    const email = obj?.email;
+    const payload: any = {
+      id,
+      email,
       text,
     };
 
-    // await fetch("/api/coverLetterBot", {
-    //   method: "POST",
-    //   body: payload,
-    // });
+    await fetch("/api/coverLetterBot", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
   };
 
   // Function to save the edited content and exit editing mode

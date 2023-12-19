@@ -82,23 +82,6 @@ export async function POST(req: any) {
       messages: [{ role: "user", content: inputPrompt }],
     });
 
-    // if (response) {
-    //   if (trainBotData) {
-    //     let entry: TrainBotEntryType = {
-    //       entryId: "",
-    //       type: "coverLetter.write",
-    //       input: inputPrompt,
-    //       output: "",
-    //       idealOutput: "",
-    //       status: "pending",
-    //       userEmail: email,
-    //       fileAddress: "",
-    //       Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
-    //     };
-    //     await makeTrainedBotEntry(entry);
-    //   }
-    // }
-    // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
       onStart: async () => {
         const payload: any = {
@@ -110,7 +93,6 @@ export async function POST(req: any) {
           userEmail: email,
         };
         await postCoverLetter(payload);
-
         if (trainBotData) {
           let entry: TrainBotEntryType = {
             entryId: coverletterId,

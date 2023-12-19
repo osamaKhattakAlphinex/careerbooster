@@ -3,6 +3,8 @@ import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
+import TrainBot from "@/db/schemas/TrainBot";
+import { updateTrainedBotEntry } from "@/helpers/updateTrainBotEntry";
 
 export async function postCoverLetter(payload: any) {
   await startDB();
@@ -18,19 +20,35 @@ export async function postCoverLetter(payload: any) {
   return response;
 }
 
+async function updateCoverLetter(payload: any) {
+  await startDB();
+
+  await User.findOneAndUpdate(
+    { email: payload.email, "coverLetters.id": payload.id },
+    {
+      $set: {
+        "coverLetters.$.coverLetterText": payload.text,
+      },
+    },
+    { new: true }
+  );
+  updateTrainedBotEntry({
+    entryId: payload.id,
+    type: "coverLetter.write",
+    output: payload.text,
+  });
+}
 export async function POST(request: any) {
   const session = await getServerSession(authOptions);
   if (session) {
     try {
       const payload = await request.json();
+      const response = updateCoverLetter(payload);
 
-      console.log(payload);
-      // const response = postCoverLetter(payload);
-
-      // return NextResponse.json(
-      //   { result: response, success: true },
-      //   { status: 200 }
-      // );
+      return NextResponse.json(
+        { result: "updated successfully", success: true },
+        { status: 200 }
+      );
     } catch (error) {
       console.log(error);
       return NextResponse.json(
