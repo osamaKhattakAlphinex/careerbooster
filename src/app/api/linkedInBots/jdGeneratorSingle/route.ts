@@ -89,9 +89,10 @@ export async function POST(req: any) {
     // } catch (error) {}
 
     const stream = OpenAIStream(response, {
-      onFinal(completions) {
+      async onFinal(completions) {
         try {
           if (trainBotData) {
+            await startDB();
             const jobDescriptionId = makeid();
 
             const payload = {
@@ -101,7 +102,7 @@ export async function POST(req: any) {
               userEmail: trainBotData.userEmail,
             };
 
-            postJobDescriptions(payload);
+            await postJobDescriptions(payload);
 
             let entry: TrainBotEntryType = {
               entryId: jobDescriptionId,
@@ -114,7 +115,7 @@ export async function POST(req: any) {
               fileAddress: "",
               Instructions: `Write Single Job Description for ${experience.jobTitle} at ${experience.company}`,
             };
-            makeTrainedBotEntry(entry);
+            await makeTrainedBotEntry(entry);
           }
         } catch (err) {}
       },

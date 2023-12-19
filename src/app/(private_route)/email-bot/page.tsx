@@ -319,6 +319,7 @@ const PersonalizedEmailBot = () => {
     //   setShow(true);
     //   setStreamedData(userData.results.emailGeneration);
     // }
+    console.log(streamedData, email);
     if (!streamedData) {
       setStreamedData(email.emailText);
     }
@@ -338,7 +339,7 @@ const PersonalizedEmailBot = () => {
   const historyProps = {
     dataSource: "emails",
     Component: (card: any) => (
-      <EmailCardSingle card={card} componentRef={componentRef} />
+      <EmailCardSingle card={card} componentRef={componentRef} source="" />
     ),
   };
 

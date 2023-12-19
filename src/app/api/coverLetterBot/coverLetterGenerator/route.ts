@@ -83,22 +83,22 @@ export async function POST(req: any) {
 
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      onFinal(completions) {
+      async onFinal(completions) {
         try {
+          await startDB();
+          const coverletterId = makeid();
+
+          const payload = {
+            id: coverletterId,
+            jobDescription: jobDescription,
+            coverLetterText: completions,
+            generatedOnDate: new Date().toISOString(),
+            generatedViaOption: type,
+            userEmail: email,
+          };
+
+          await postCoverLetter(payload);
           if (trainBotData) {
-            const coverletterId = makeid();
-
-            const payload = {
-              id: coverletterId,
-              jobDescription: jobDescription,
-              coverLetterText: completions,
-              generatedOnDate: new Date().toISOString(),
-              generatedViaOption: type,
-              userEmail: email,
-            };
-
-            postCoverLetter(payload);
-
             let entry: TrainBotEntryType = {
               entryId: coverletterId,
               type: "coverLetter.write",
@@ -110,7 +110,7 @@ export async function POST(req: any) {
               fileAddress: "",
               Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
             };
-            makeTrainedBotEntry(entry);
+            await makeTrainedBotEntry(entry);
           }
         } catch {
           console.log("error while saving coverletter....");

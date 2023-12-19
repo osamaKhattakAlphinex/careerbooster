@@ -57,32 +57,35 @@ export async function POST(req: any) {
           ],
         });
 
-        try {
-          if (trainBotData) {
-            await startDB();
-
-            // make a trainBot entry
-            const obj = {
-              type: "linkedinAiTool.headline",
-              input: input,
-              output: response,
-              idealOutput: "",
-              status: "pending",
-              //  userEmail: trainBotData.userEmail,
-              // fileAddress: trainBotData.fileAddress,
-              Instructions: `Writing a LinkedIn headline as Job Title |Top Keyword 1 | Top Keyword 2 | Top Keyword 3 | Top Keyword 4 | Value proposition statement`,
-            };
-
-            await TrainBot.create({ ...obj });
-          }
-        } catch (error) {}
         // const resp = await chain4.call({ query: input });
         // return NextResponse.json(
         //   { result: response.choices[0].message.content, success: true },
         //   { status: 200 }
         // );
         // Convert the response into a friendly text-stream
-        const stream = OpenAIStream(response);
+        const stream = OpenAIStream(response, {
+          async onFinal(completions) {
+            try {
+              if (trainBotData) {
+                await startDB();
+
+                // make a trainBot entry
+                const obj = {
+                  type: "linkedinAiTool.headline",
+                  input: input,
+                  output: response,
+                  idealOutput: "",
+                  status: "pending",
+                  //  userEmail: trainBotData.userEmail,
+                  // fileAddress: trainBotData.fileAddress,
+                  Instructions: `Writing a LinkedIn headline as Job Title |Top Keyword 1 | Top Keyword 2 | Top Keyword 3 | Top Keyword 4 | Value proposition statement`,
+                };
+
+                await TrainBot.create({ ...obj });
+              }
+            } catch (error) {}
+          },
+        });
         // Respond with the stream
         return new StreamingTextResponse(stream);
       }
