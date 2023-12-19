@@ -81,7 +81,7 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-    console.log(response);
+
     // if (response) {
     //   if (trainBotData) {
     //     let entry: TrainBotEntryType = {
@@ -109,22 +109,21 @@ export async function POST(req: any) {
           generatedViaOption: type,
           userEmail: email,
         };
-        const coverLetterResponse = await postCoverLetter(payload);
-        if (coverLetterResponse) {
-          if (trainBotData) {
-            let entry: TrainBotEntryType = {
-              entryId: coverletterId,
-              type: "coverLetter.write",
-              input: inputPrompt,
-              output: "",
-              idealOutput: "",
-              status: "pending",
-              userEmail: email,
-              fileAddress: "",
-              Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
-            };
-            await makeTrainedBotEntry(entry);
-          }
+        await postCoverLetter(payload);
+
+        if (trainBotData) {
+          let entry: TrainBotEntryType = {
+            entryId: coverletterId,
+            type: "coverLetter.write",
+            input: inputPrompt,
+            output: "out",
+            idealOutput: "",
+            status: "pending",
+            userEmail: email,
+            fileAddress: "",
+            Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
+          };
+          await makeTrainedBotEntry(entry);
         }
       },
     });

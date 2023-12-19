@@ -84,10 +84,11 @@ export default function CoverLetterPage() {
       ...obj,
       text,
     };
-    await fetch("/api/coverLetterBot", {
-      method: "POST",
-      body: payload,
-    });
+
+    // await fetch("/api/coverLetterBot", {
+    //   method: "POST",
+    //   body: payload,
+    // });
   };
 
   // Function to save the edited content and exit editing mode
