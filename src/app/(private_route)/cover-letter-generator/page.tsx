@@ -79,6 +79,17 @@ export default function CoverLetterPage() {
     // }
   }, [isEditing]);
 
+  const saveToDB = async (obj: any, text: any) => {
+    const payload = {
+      ...obj,
+      text,
+    };
+    await fetch("/api/coverLetterBot", {
+      method: "POST",
+      body: payload,
+    });
+  };
+
   // Function to save the edited content and exit editing mode
   const handleSave = async () => {
     let _coverLetterText = "";
@@ -141,8 +152,9 @@ export default function CoverLetterPage() {
       setMsgLoading(true);
       setShow(true);
       setStreamedData("");
-
+      const coverletterId = makeid();
       const obj: any = {
+        coverletterId: coverletterId,
         type: selectedOption,
         email: session?.user?.email,
         jobDescription,
@@ -171,7 +183,6 @@ export default function CoverLetterPage() {
       } else {
         obj.userData = aiInputUserData;
       }
-      console.log("obj", obj);
 
       // Fetch keywords
       fetch("/api/coverLetterBot/coverLetterGenerator", {
@@ -194,7 +205,7 @@ export default function CoverLetterPage() {
               tempText += text;
             }
 
-            // await saveToDB(obj, tempText);
+            await saveToDB(obj, tempText);
 
             const limitUpdateResponse = await fetch(
               "/api/users/updateUserLimit",

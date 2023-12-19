@@ -8,45 +8,43 @@ export async function postCoverLetter(payload: any) {
   await startDB();
   const user = await User.findOne({ email: payload.userEmail });
   if (!user) {
-    return NextResponse.json({ result: "", success: false }, { status: 404 });
+    return NextResponse.json({ success: false }, { status: 404 });
   } else if (!user.coverLetters || user.coverLetters.length === 0) {
     user.coverLetters = [payload];
   } else {
     user.coverLetters.push(payload);
   }
   const response = await user.save();
-  return NextResponse.json(
-    { result: response, success: true },
-    { status: 200 }
-  );
+  return response;
 }
 
-// export async function POST(request: any) {
-//   const session = await getServerSession(authOptions);
-//   if (session) {
-//     try {
-//       const payload = await request.json();
+export async function POST(request: any) {
+  const session = await getServerSession(authOptions);
+  if (session) {
+    try {
+      const payload = await request.json();
 
-//       const response = postCoverLetter(payload);
+      console.log(payload);
+      // const response = postCoverLetter(payload);
 
-//       return NextResponse.json(
-//         { result: response, success: true },
-//         { status: 200 }
-//       );
-//     } catch (error) {
-//       console.log(error);
-//       return NextResponse.json(
-//         { result: "Internal Server Error", success: false },
-//         { status: 404 }
-//       );
-//     }
-//   } else {
-//     return NextResponse.json(
-//       { result: "Not Authorised", success: false },
-//       { status: 401 }
-//     );
-//   }
-// }
+      // return NextResponse.json(
+      //   { result: response, success: true },
+      //   { status: 200 }
+      // );
+    } catch (error) {
+      console.log(error);
+      return NextResponse.json(
+        { result: "Internal Server Error", success: false },
+        { status: 404 }
+      );
+    }
+  } else {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
+}
 
 // export async function GET(request: any) {
 //   try {

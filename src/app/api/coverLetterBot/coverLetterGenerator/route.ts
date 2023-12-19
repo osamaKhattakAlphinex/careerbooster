@@ -36,6 +36,7 @@ export async function POST(req: any) {
     const userData = reqBody?.userData;
     const email = reqBody?.email;
     const file = reqBody?.file;
+    const coverletterId = reqBody?.coverletterId;
     const resumeId = reqBody?.resumeId;
     const jobDescription = reqBody?.jobDescription;
     const trainBotData = reqBody?.trainBotData;
@@ -80,35 +81,50 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-
+    console.log(response);
+    // if (response) {
+    //   if (trainBotData) {
+    //     let entry: TrainBotEntryType = {
+    //       entryId: "",
+    //       type: "coverLetter.write",
+    //       input: inputPrompt,
+    //       output: "",
+    //       idealOutput: "",
+    //       status: "pending",
+    //       userEmail: email,
+    //       fileAddress: "",
+    //       Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
+    //     };
+    //     await makeTrainedBotEntry(entry);
+    //   }
+    // }
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      onFinal: async (completions) => {
-        const coverletterId = makeid();
-
-        const payload = {
+      onStart: async () => {
+        const payload: any = {
           id: coverletterId,
           jobDescription: jobDescription,
-          coverLetterText: completions,
+          coverLetterText: "",
           generatedOnDate: new Date().toISOString(),
           generatedViaOption: type,
           userEmail: email,
         };
-
-        await postCoverLetter(payload);
-        if (trainBotData) {
-          let entry: TrainBotEntryType = {
-            entryId: coverletterId,
-            type: "coverLetter.write",
-            input: inputPrompt,
-            output: completions,
-            idealOutput: "",
-            status: "pending",
-            userEmail: email,
-            fileAddress: "",
-            Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
-          };
-          await makeTrainedBotEntry(entry);
+        const coverLetterResponse = await postCoverLetter(payload);
+        if (coverLetterResponse) {
+          if (trainBotData) {
+            let entry: TrainBotEntryType = {
+              entryId: coverletterId,
+              type: "coverLetter.write",
+              input: inputPrompt,
+              output: "",
+              idealOutput: "",
+              status: "pending",
+              userEmail: email,
+              fileAddress: "",
+              Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
+            };
+            await makeTrainedBotEntry(entry);
+          }
         }
       },
     });
