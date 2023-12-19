@@ -87,7 +87,7 @@ const Header = () => {
     "/consulting-bids-bot",
     "/subscribe",
     "/subscribed",
-    "/chatAI",
+    "/career-coach",
     "/linkedin-generator/headline",
     "/linkedin-generator/about",
     "/linkedin-generator/job-description",
