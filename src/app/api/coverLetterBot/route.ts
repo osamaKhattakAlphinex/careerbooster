@@ -36,17 +36,20 @@ async function updateCoverLetter(payload: any) {
     type: "coverLetter.write",
     output: payload.text,
   });
-  return NextResponse.json(
-    { result: "updated successfully", success: true },
-    { status: 200 }
-  );
+  return "ok";
 }
 export async function POST(request: any) {
   const session = await getServerSession(authOptions);
   if (session) {
     try {
       const payload = await request.json();
-      await updateCoverLetter(payload);
+      const response = await updateCoverLetter(payload);
+      if (response) {
+        return NextResponse.json(
+          { result: "updated successfully", success: true },
+          { status: 200 }
+        );
+      }
     } catch (error) {
       console.log(error);
       return NextResponse.json(
