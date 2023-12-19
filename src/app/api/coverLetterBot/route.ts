@@ -15,35 +15,38 @@ export async function postCoverLetter(payload: any) {
     user.coverLetters.push(payload);
   }
   const response = await user.save();
-  return response;
+  return NextResponse.json(
+    { result: response, success: true },
+    { status: 200 }
+  );
 }
 
-export async function POST(request: any) {
-  const session = await getServerSession(authOptions);
-  if (session) {
-    try {
-      const payload = await request.json();
+// export async function POST(request: any) {
+//   const session = await getServerSession(authOptions);
+//   if (session) {
+//     try {
+//       const payload = await request.json();
 
-      const response = postCoverLetter(payload);
+//       const response = postCoverLetter(payload);
 
-      return NextResponse.json(
-        { result: response, success: true },
-        { status: 200 }
-      );
-    } catch (error) {
-      console.log(error);
-      return NextResponse.json(
-        { result: "Internal Server Error", success: false },
-        { status: 404 }
-      );
-    }
-  } else {
-    return NextResponse.json(
-      { result: "Not Authorised", success: false },
-      { status: 401 }
-    );
-  }
-}
+//       return NextResponse.json(
+//         { result: response, success: true },
+//         { status: 200 }
+//       );
+//     } catch (error) {
+//       console.log(error);
+//       return NextResponse.json(
+//         { result: "Internal Server Error", success: false },
+//         { status: 404 }
+//       );
+//     }
+//   } else {
+//     return NextResponse.json(
+//       { result: "Not Authorised", success: false },
+//       { status: 401 }
+//     );
+//   }
+// }
 
 // export async function GET(request: any) {
 //   try {
