@@ -1,23 +1,16 @@
 "use client";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
-import {
-  IconCalendarclock,
-  IconUsersicon,
-  deleteIcon,
-  leftArrowIcon,
-  refreshIconRotating,
-} from "@/helpers/iconsProvider";
+import { deleteIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
-import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card";
 import { createColumnHelper } from "@tanstack/react-table";
 import DataTable, {
   BulkDataOperation,
   TableAction,
 } from "@/components/DataTable";
+import TablePagination from "@/components/TablePagination";
 
 type User = {
   alertConsent: any;
@@ -210,28 +203,6 @@ const UsersPage = () => {
       }
     }
   };
-  const showDeleteAllButton = () => {
-    if (selectAll) {
-      return true;
-    }
-    if (dataSelection.length > 1) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const onSelectAll = (e: any) => {
-    setSelectAll(e.target.checked);
-    if (e.target.checked) {
-      if (records.length >= 1) {
-        let _ids: string[] = [];
-        records.map((rec: any) => _ids.push(rec._id));
-        setDataSelection(_ids);
-      }
-    } else {
-      setDataSelection([]);
-    }
-  };
   const handleDeleteAll = async (ids: string[] | [] = []) => {
     setLoading(true);
 
@@ -262,14 +233,6 @@ const UsersPage = () => {
       // router.push("/admin/users");
     }
   };
-  const isChecked = (id: string) => {
-    if (selectAll) {
-      if (dataSelection.length === records.length) return true;
-    } else {
-      if (dataSelection.includes(id)) return true;
-      else return false;
-    }
-  };
   const checkingSubscription = (expirationDate: any) => {
     if (new Date(expirationDate).getTime() > Date.now()) {
       return true;
@@ -277,7 +240,6 @@ const UsersPage = () => {
       return false;
     }
   };
-
   const onSubscriptionChange = async (id: string, pckg: string) => {
     if (window.confirm("Are you sure to Change the subscription status")) {
       setSubscriptionId(id);
@@ -304,6 +266,37 @@ const UsersPage = () => {
         });
     }
   };
+
+  const isChecked = (id: string) => {
+    if (selectAll) {
+      if (dataSelection.length === records.length) return true;
+    } else {
+      if (dataSelection.includes(id)) return true;
+      else return false;
+    }
+  };
+  const showDeleteAllButton = () => {
+    if (selectAll) {
+      return true;
+    }
+    if (dataSelection.length > 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const onSelectAll = (e: any) => {
+    setSelectAll(e.target.checked);
+    if (e.target.checked) {
+      if (records.length >= 1) {
+        let _ids: string[] = [];
+        records.map((rec: any) => _ids.push(rec._id));
+        setDataSelection(_ids);
+      }
+    } else {
+      setDataSelection([]);
+    }
+  };
   const onSelecting = (checked: boolean, id: string) => {
     if (selectAll)
       if (checked) {
@@ -326,6 +319,11 @@ const UsersPage = () => {
       }
     }
   };
+  const selectUsersLimit = (e: any) => {
+    setCurrentPage(1);
+    setLimitOfUser(e.target.value);
+  };
+
   const getUserDeatils = () => {
     setshowTableLoader(true);
     setLoading(true);
@@ -350,7 +348,6 @@ const UsersPage = () => {
         });
     }
   };
-
   const getUsersCount = async () => {
     axios.get("/api/users/getCount").then((res) => {
       if (res.data.success) {
@@ -378,10 +375,6 @@ const UsersPage = () => {
     getUsersCount();
   }, []);
 
-  const selectUsersLimit = (e: any) => {
-    setCurrentPage(1);
-    setLimitOfUser(e.target.value);
-  };
   useEffect(() => {
     setRecords([]);
     getUserDeatils();
@@ -415,6 +408,80 @@ const UsersPage = () => {
           enableRowSelection={true}
           bulkDataOperations={bulkDataOperations}
         />
+      </div>
+      <div className=" flex flex-row justify-between items-center w-full ">
+        <div className="flex flex-row gap-2 items-center">
+          <label htmlFor="userPerPage" className="text-sm font-medium">
+            Number of records per page:
+          </label>
+          <select
+            name="userPerPage"
+            id="userPerPage"
+            className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+            onChange={selectUsersLimit}
+            value={limitOfUser}
+          >
+            <>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={30}>30</option>
+              <option value={40}>40</option>
+              <option value={100}>100</option>
+              <option value={500}>500</option>
+            </>
+          </select>
+        </div>
+        <div className=" flex justify-end mt-4">
+          <nav aria-label="Page navigation example">
+            <ul className="inline-flex -space-x-px">
+              <li>
+                <button
+                  className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+                  onClick={() => {
+                    setRecords([]);
+                    setCurrentPage(currentPage - 1);
+                  }}
+                  disabled={currentPage == 1 ? true : false}
+                >
+                  Previous
+                </button>
+              </li>
+              {[currentPage - 1, currentPage, currentPage + 1].map((number) => {
+                if (number < 1 || number > totalPages) return null;
+                return (
+                  <li key={number}>
+                    <button
+                      onClick={(e) => {
+                        setRecords([]);
+                        setCurrentPage(number);
+                      }}
+                      className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+                        currentPage === number
+                          ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
+                          : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+                      }`}
+                    >
+                      {number}
+                    </button>
+                  </li>
+                );
+              })}
+
+              <li>
+                <button
+                  className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  onClick={() => {
+                    setRecords([]);
+                    setCurrentPage(currentPage + 1);
+                  }}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   );
@@ -559,55 +626,57 @@ export default UsersPage;
 {
   /* Pagination Controls */
 }
-// <div className=" flex justify-end mt-4">
-//   <nav aria-label="Page navigation example">
-//     <ul className="inline-flex -space-x-px">
-//       <li>
-//         <button
-//           className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
-//           onClick={() => {
-//             setRecords([]);
-//             setCurrentPage(currentPage - 1);
-//           }}
-//           disabled={currentPage == 1 ? true : false}
-//         >
-//           Previous
-//         </button>
-//       </li>
-//       {[currentPage - 1, currentPage, currentPage + 1].map((number) => {
-//         if (number < 1 || number > totalPages) return null;
-//         return (
-//           <li key={number}>
-//             <button
-//               onClick={(e) => {
-//                 setRecords([]);
-//                 setCurrentPage(number);
-//               }}
-//               className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
-//                 currentPage === number
-//                   ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
-//                   : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
-//               }`}
-//             >
-//               {number}
-//             </button>
-//           </li>
-//         );
-//       })}
+{
+  /* <div className=" flex justify-end mt-4">
+  <nav aria-label="Page navigation example">
+    <ul className="inline-flex -space-x-px">
+      <li>
+        <button
+          className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+          onClick={() => {
+            setRecords([]);
+            setCurrentPage(currentPage - 1);
+          }}
+          disabled={currentPage == 1 ? true : false}
+        >
+          Previous
+        </button>
+      </li>
+      {[currentPage - 1, currentPage, currentPage + 1].map((number) => {
+        if (number < 1 || number > totalPages) return null;
+        return (
+          <li key={number}>
+            <button
+              onClick={(e) => {
+                setRecords([]);
+                setCurrentPage(number);
+              }}
+              className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+                currentPage === number
+                  ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
+                  : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+              }`}
+            >
+              {number}
+            </button>
+          </li>
+        );
+      })}
 
-//       <li>
-//         <button
-//           className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-//           onClick={() => {
-//             setRecords([]);
-//             setCurrentPage(currentPage + 1);
-//           }}
-//           disabled={currentPage === totalPages}
-//         >
-//           Next
-//         </button>
-//       </li>
-//     </ul>
-//   </nav>
-// </div>
+      <li>
+        <button
+          className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          onClick={() => {
+            setRecords([]);
+            setCurrentPage(currentPage + 1);
+          }}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div> */
+}
 // </div>; */}

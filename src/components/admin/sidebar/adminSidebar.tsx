@@ -1,6 +1,7 @@
 "use client";
 import ThemeToggler from "@/components/Themetoggler";
 import { IconUsersicon, antIcon } from "@/helpers/iconsProvider";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -23,44 +24,49 @@ const AdminSidebar = () => {
       <div className="p-4 text-center">
         <h1 className="text-2xl text-white">CareerBooster.AI</h1>
         <div className="flex flex-row justify-center items-center gap-2">
-          <div className="h-8 w-8 bg-indigo-700 rounded-md shadow-md grid place-content-center">
-            <span className="text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-                />
-              </svg>
-            </span>
-          </div>
+          <Link href="/">
+            <div className="h-8 w-8 bg-indigo-700 rounded-md shadow-md grid place-content-center">
+              <span className="text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                  />
+                </svg>
+              </span>
+            </div>
+          </Link>
           <div className="h-8 w-8 bg-green-700 rounded-md shadow-md grid place-content-center">
             <ThemeToggler />
           </div>
+
           <div className="h-8 w-8 bg-rose-700 rounded-md shadow-md grid place-content-center">
-            <span className="text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5.636 5.636a9 9 0 1012.728 0M12 3v9"
-                />
-              </svg>
-            </span>
+            <button onClick={() => signOut()}>
+              <span className="text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5.636 5.636a9 9 0 1012.728 0M12 3v9"
+                  />
+                </svg>
+              </span>
+            </button>
           </div>
         </div>
       </div>

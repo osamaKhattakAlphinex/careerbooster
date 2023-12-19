@@ -719,6 +719,82 @@ const TrainRegistrationBotAdminPage = () => {
             }
           />
         </div>
+        <div className=" flex flex-row justify-between items-center w-full ">
+          <div className="flex flex-row gap-2 items-center">
+            <label htmlFor="userPerPage" className="text-sm font-medium">
+              Number of records per page:
+            </label>
+            <select
+              name="userPerPage"
+              id="userPerPage"
+              className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+              onChange={selectUsersLimit}
+              value={limitOfRecords}
+            >
+              <>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+                <option value={30}>30</option>
+                <option value={40}>40</option>
+                <option value={100}>100</option>
+                <option value={500}>500</option>
+              </>
+            </select>
+          </div>
+          <div className=" flex justify-end mt-4">
+            <nav aria-label="Page navigation example">
+              <ul className="inline-flex -space-x-px">
+                <li>
+                  <button
+                    className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+                    onClick={() => {
+                      setRecords([]);
+                      setCurrentPage(currentPage - 1);
+                    }}
+                    disabled={currentPage == 1 ? true : false}
+                  >
+                    Previous
+                  </button>
+                </li>
+                {[currentPage - 1, currentPage, currentPage + 1].map(
+                  (number) => {
+                    if (number < 1 || number > totalPages) return null;
+                    return (
+                      <li key={number}>
+                        <button
+                          onClick={(e) => {
+                            setRecords([]);
+                            setCurrentPage(number);
+                          }}
+                          className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+                            currentPage === number
+                              ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
+                              : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+                          }`}
+                        >
+                          {number}
+                        </button>
+                      </li>
+                    );
+                  }
+                )}
+
+                <li>
+                  <button
+                    className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    onClick={() => {
+                      setRecords([]);
+                      setCurrentPage(currentPage + 1);
+                    }}
+                    disabled={currentPage === totalPages}
+                  >
+                    Next
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
     </>
   );
