@@ -111,11 +111,6 @@ export async function POST(req: any) {
     });
     // Respond with the stream
     return new StreamingTextResponse(stream);
-    // return NextResponse.json(
-    //   { result: resp.text.replace(/(\r\n|\n|\r)/gm, ""), success: true },
-    //   { status: 200 }
-    // );
-    //   res.end();
   } catch (error) {
     return NextResponse.json(
       { result: "something went wrong", success: false },

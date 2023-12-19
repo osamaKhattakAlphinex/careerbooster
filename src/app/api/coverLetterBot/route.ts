@@ -31,23 +31,22 @@ async function updateCoverLetter(payload: any) {
     },
     { new: true }
   );
-  updateTrainedBotEntry({
+  await updateTrainedBotEntry({
     entryId: payload.id,
     type: "coverLetter.write",
     output: payload.text,
   });
+  return NextResponse.json(
+    { result: "updated successfully", success: true },
+    { status: 200 }
+  );
 }
 export async function POST(request: any) {
   const session = await getServerSession(authOptions);
   if (session) {
     try {
       const payload = await request.json();
-      const response = updateCoverLetter(payload);
-
-      return NextResponse.json(
-        { result: "updated successfully", success: true },
-        { status: 200 }
-      );
+      await updateCoverLetter(payload);
     } catch (error) {
       console.log(error);
       return NextResponse.json(
