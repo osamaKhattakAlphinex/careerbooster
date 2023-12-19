@@ -5,8 +5,6 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function postCoverLetter(payload: any) {
-  console.log("inside post cover");
-
   await startDB();
   const user = await User.findOne({ email: payload.userEmail });
   if (!user) {

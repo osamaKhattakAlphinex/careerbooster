@@ -20,7 +20,6 @@ export const dynamic = "force-dynamic";
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-
 export async function POST(req: any) {
   const session = await getServerSession(authOptions);
 
@@ -81,9 +80,10 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-    const databaseEntries = async (completions: any) => {
-      try {
-        await startDB();
+
+    // Convert the response into a friendly text-stream
+    const stream = OpenAIStream(response, {
+      onFinal: async (completions) => {
         const coverletterId = makeid();
 
         const payload = {
@@ -110,14 +110,6 @@ export async function POST(req: any) {
           };
           await makeTrainedBotEntry(entry);
         }
-      } catch {
-        console.log("error while saving coverletter....");
-      }
-    };
-    // Convert the response into a friendly text-stream
-    const stream = OpenAIStream(response, {
-      onFinal(completions) {
-        databaseEntries(completions);
       },
     });
     // Respond with the stream

@@ -21,6 +21,7 @@ import CoverLetterCardSingle from "@/components/new-dashboard/dashboard/cover-le
 import Image from "next/image";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
+import { makeid } from "@/helpers/makeid";
 
 export default function CoverLetterPage() {
   const componentRef = useRef<any>(null);
@@ -193,7 +194,7 @@ export default function CoverLetterPage() {
               tempText += text;
             }
 
-            // await saveToDB(tempText);
+            // await saveToDB(obj, tempText);
 
             const limitUpdateResponse = await fetch(
               "/api/users/updateUserLimit",
