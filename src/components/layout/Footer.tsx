@@ -22,6 +22,7 @@ const Footer = () => {
     "/linkedin-generator/job-description",
     "/linkedin-generator/keywords",
     "/change-current-password",
+    "/review-resume-bot",
   ];
   if (
     pathname === "/login" ||

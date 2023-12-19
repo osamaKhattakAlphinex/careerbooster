@@ -1,4 +1,4 @@
- import Prompt from "@/db/schemas/Prompt";
+import Prompt from "@/db/schemas/Prompt";
 
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
@@ -15,7 +15,7 @@ import {
   TrainBotEntryType,
   makeTrainedBotEntry,
 } from "@/helpers/makeTrainBotEntry";
-export const maxDuration = 300; // This function can run for a maximum of 5 minutes
+export const maxDuration = 10; // This function can run for a maximum of 5 minutes
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -65,7 +65,7 @@ export async function POST(req: any) {
         const getFile = user.files.find(
           (userFile: any) => userFile.fileName === file
         );
-        fileContent = getFile.fileContent;
+        fileContent = getFile.fileContent.substring(0, 10000);
       }
     }
     const inputPrompt = `Following are the content of the resume (in JSON format): 
@@ -75,10 +75,6 @@ export async function POST(req: any) {
           ${prompt}
           `;
 
-    // const resp = await chainB.call({
-    //   userData: JSON.stringify(userData),
-    //   prompt,
-    // });
     const response: any = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       stream: true,

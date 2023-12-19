@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import path from "path";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 
-export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const maxDuration = 10; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
 export async function POST(req: any) {

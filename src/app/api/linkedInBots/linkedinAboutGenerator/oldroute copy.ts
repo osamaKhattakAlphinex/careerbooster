@@ -10,7 +10,7 @@ import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 
-export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const maxDuration = 10; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
 export async function POST(req: any) {
