@@ -201,7 +201,6 @@ export default function CoverLetterPage() {
             while (true) {
               const { done, value } = await reader.read();
               if (done) {
-                console.log("done called");
                 break;
               }
               const text = new TextDecoder().decode(value);
