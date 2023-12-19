@@ -85,21 +85,20 @@ export async function POST(req: any) {
     const stream = OpenAIStream(response, {
       async onFinal(completions) {
         try {
+          await startDB();
+          const coverletterId = makeid();
+
+          const payload = {
+            id: coverletterId,
+            jobDescription: jobDescription,
+            coverLetterText: completions,
+            generatedOnDate: new Date().toISOString(),
+            generatedViaOption: type,
+            userEmail: email,
+          };
+
+          await postCoverLetter(payload);
           if (trainBotData) {
-            await startDB();
-            const coverletterId = makeid();
-
-            const payload = {
-              id: coverletterId,
-              jobDescription: jobDescription,
-              coverLetterText: completions,
-              generatedOnDate: new Date().toISOString(),
-              generatedViaOption: type,
-              userEmail: email,
-            };
-
-            await postCoverLetter(payload);
-
             let entry: TrainBotEntryType = {
               entryId: coverletterId,
               type: "coverLetter.write",
