@@ -20,6 +20,7 @@ export const dynamic = "force-dynamic";
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
+
 export async function POST(req: any) {
   const session = await getServerSession(authOptions);
 
@@ -80,41 +81,43 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
+    const databaseEntries = async (completions: any) => {
+      try {
+        await startDB();
+        const coverletterId = makeid();
 
+        const payload = {
+          id: coverletterId,
+          jobDescription: jobDescription,
+          coverLetterText: completions,
+          generatedOnDate: new Date().toISOString(),
+          generatedViaOption: type,
+          userEmail: email,
+        };
+
+        await postCoverLetter(payload);
+        if (trainBotData) {
+          let entry: TrainBotEntryType = {
+            entryId: coverletterId,
+            type: "coverLetter.write",
+            input: inputPrompt,
+            output: completions,
+            idealOutput: "",
+            status: "pending",
+            userEmail: email,
+            fileAddress: "",
+            Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
+          };
+          await makeTrainedBotEntry(entry);
+        }
+      } catch {
+        console.log("error while saving coverletter....");
+      }
+    };
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      async onFinal(completions) {
-        try {
-          await startDB();
-          const coverletterId = makeid();
-
-          const payload = {
-            id: coverletterId,
-            jobDescription: jobDescription,
-            coverLetterText: completions,
-            generatedOnDate: new Date().toISOString(),
-            generatedViaOption: type,
-            userEmail: email,
-          };
-
-          await postCoverLetter(payload);
-          if (trainBotData) {
-            let entry: TrainBotEntryType = {
-              entryId: coverletterId,
-              type: "coverLetter.write",
-              input: inputPrompt,
-              output: completions,
-              idealOutput: "",
-              status: "pending",
-              userEmail: email,
-              fileAddress: "",
-              Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
-            };
-            await makeTrainedBotEntry(entry);
-          }
-        } catch {
-          console.log("error while saving coverletter....");
-        }
+      onFinal(completions) {
+        databaseEntries(completions);
       },
     });
     // Respond with the stream
