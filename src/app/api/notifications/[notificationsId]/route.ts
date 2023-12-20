@@ -1,4 +1,5 @@
 import Notification from "@/db/schemas/Notification";
+import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
 
 // PUT request handler
