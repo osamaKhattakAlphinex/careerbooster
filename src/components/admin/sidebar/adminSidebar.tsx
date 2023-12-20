@@ -18,7 +18,6 @@ const AdminSidebar = () => {
     users: false,
   });
 
-  console.log(sidebarToggler);
   return (
     <div className="w-full">
       <div className="p-4 text-center">
