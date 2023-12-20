@@ -87,8 +87,9 @@ const ConsultingBidsGenerator = () => {
       setMsgLoading(true);
       setShow(true);
       setStreamedData("");
-
+      const consultingBidId = makeid();
       const obj: any = {
+        consultingBidId: consultingBidId,
         type: selectedOption,
         email: session?.user?.email,
         jobDescription,
@@ -133,7 +134,7 @@ const ConsultingBidsGenerator = () => {
               setStreamedData((prev) => prev + text);
               tempText += text;
             }
-            // await saveToDB(tempText);
+            await saveToDB(obj, tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -199,24 +200,19 @@ const ConsultingBidsGenerator = () => {
       }, 3000);
     }
   };
-  const saveToDB = async (tempText: string) => {
-    try {
-      const response: any = await axios.post("/api/users/updateUserData", {
-        data: {
-          email: session?.user?.email,
-          results: {
-            ...userData.results,
-            consultingBidsGeneration: tempText,
-          },
-        },
-      });
-      const res = await response.json();
-      if (res.success) {
-        console.log("email saved to DB");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const saveToDB = async (obj: any, text: any) => {
+    const id = obj?.consultingBidId;
+    const email = obj?.email;
+    const payload: any = {
+      id,
+      email,
+      text,
+    };
+
+    await fetch("/api/coverLetterBot", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
   };
 
   const handleSave = async () => {
