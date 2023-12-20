@@ -13,6 +13,7 @@ import copy from "clipboard-copy";
 import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import LinkedInHeadlineCardSingle from "./LinkedInHeadeLineCardSingle";
+import { makeid } from "@/helpers/makeid";
 
 const SubHeadlineGenerator = () => {
   const [headline, setHeadline] = useState<string>("");
@@ -78,16 +79,19 @@ const SubHeadlineGenerator = () => {
       availablePercentage !== 0
     ) {
       setMsgLoading(true);
-
+      const headlineId = makeid();
+      const obj: any = {
+        headlineId: headlineId,
+        email: session?.user?.email,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.uploadedResume.fileName,
+        },
+        userData: aiInputUserData,
+      };
       fetch("/api/linkedInBots/headlineGenerator", {
         method: "POST",
-        body: JSON.stringify({
-          userData: aiInputUserData,
-          trainBotData: {
-            userEmail: userData.email,
-            fileAddress: userData.defaultResumeFile,
-          },
-        }),
+        body: JSON.stringify(obj),
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -103,7 +107,7 @@ const SubHeadlineGenerator = () => {
               tempText += text;
             }
 
-            // await saveToDB(tempText);
+            await saveToDB(obj, tempText);
 
             fetch("/api/users/updateUserLimit", {
               method: "POST",
@@ -158,24 +162,19 @@ const SubHeadlineGenerator = () => {
     }
   };
 
-  const saveToDB = async (tempText: string) => {
-    try {
-      const response: any = await axios.post("/api/users/updateUserData", {
-        data: {
-          email: session?.user?.email,
-          results: {
-            ...userData.results,
-            headline: tempText,
-          },
-        },
-      });
-      const res = await response.json();
-      if (res.success) {
-        console.log("headline saved to DB");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const saveToDB = async (obj: any, text: any) => {
+    const id = obj?.headlineId;
+    const email = obj?.email;
+    const payload: any = {
+      id,
+      email,
+      text,
+    };
+
+    await fetch("/api/linkedInBots/headlineGenerator/linkedInHeadline", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
   };
 
   const getUserDataIfNotExists = async () => {

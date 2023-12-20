@@ -56,16 +56,12 @@ export async function POST(req: any) {
               if (trainBotData) {
                 await startDB();
 
-                // make a trainBot entry
-
                 const obj = {
                   type: "linkedinAiTool.about",
                   input: input,
-                  output: response,
+                  output: completions,
                   idealOutput: "",
                   status: "pending",
-                  //  userEmail: trainBotData.userEmail,
-                  // fileAddress: trainBotData.fileAddress,
                   Instructions: `Writing a detailed LinkedIn Summary awhich is engaging, impactful, have relevant industry jargon, highlight successes and services with call to action statement `,
                 };
                 await TrainBot.create({ ...obj });

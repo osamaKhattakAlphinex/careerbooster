@@ -7,105 +7,18 @@ import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import { setField as setFieldRegister } from "@/store/registerSlice";
 import { useEffect, useState } from "react";
 import ThemeToggler from "../Themetoggler";
-import useTheme from "@/lib/useTheme";
+
 import Image from "next/image";
 import "@/app/(private_route)/dashboard.css";
-// import useTheme from "@/lib/useTheme";
-import { usePathname } from "next/navigation";
 
 const Header = () => {
-  // const [theme] = useTheme();
-  const pathname: any = usePathname();
-  // List of routes or folders where you want to exclude the layout
-
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
   const role = data?.user?.role;
 
-  // Session
-  const { data: session } = useSession();
-
-  // Redux
-  const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
-  // when user is authenticated get userdata if not exists
-  const getUserDataIfNotExists = async () => {
-    if (!userData.isLoading && !userData.isFetched) {
-      dispatch(setIsLoading(true));
-      try {
-        // Fetch userdata if not exists in Redux
-        const res = await fetch(
-          `/api/users/getOneByEmail?email=${session?.user?.email}`
-        );
-        const response = await res.json();
-        const user = response.result;
-        dispatch(setUserData(user));
-        dispatch(setIsLoading(false));
-        dispatch(setField({ name: "isFetched", value: true }));
-        // if there is a file in files array of a user then set it as defaultResumeFile
-        // if (user?.files && user?.files?.length > 0) {
-        dispatch(
-          setFieldRegister({
-            name: "scrappedContent",
-            value: user?.uploadedResume?.fileContent,
-          })
-        );
-        // dispatch(
-        //   setField({ name: "defaultResumeFile", value: user?.files[0] })
-        // );
-        // }
-        dispatch(
-          setField({ name: "wizardCompleted", value: user.wizardCompleted })
-        );
 
-        if (user?.userPackage) {
-          // get user package details
-          const res2 = await fetch(
-            `/api/users/getUserPackageDetails?id=${user?.userPackage}`
-          );
-          const data = await res2.json();
-          if (data.success) {
-            const userPackage = data.result;
-            // set user package details to redux
-            dispatch(setField({ name: "userPackageData", value: userPackage }));
-          }
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
-  const pagesArray = [
-    "/admin",
-    "/dashboard",
-    "/cover-letter-generator",
-    "/resume-builder",
-    "/linkedin-generator",
-    "/profile-review",
-    "/email-bot",
-    "/consulting-bids-bot",
-    "/subscribe",
-    "/subscribed",
-    "/career-coach",
-    "/linkedin-generator/headline",
-    "/linkedin-generator/about",
-    "/linkedin-generator/job-description",
-    "/linkedin-generator/keywords",
-    "/change-current-password",
-    "/review-resume-bot",
-  ];
-
-  // when page (session) loads, fetch user data if not exists
-  useEffect(() => {
-    if (session?.user?.email) {
-      getUserDataIfNotExists();
-    }
-  }, [session?.user?.email]);
-
-  // if (pathname === "/login" || pathname === "/register") return null;
-
-  if (pagesArray?.includes(pathname)) return <></>;
   return (
     <nav
       // className={`navbar navbar-expand-lg fixed-top ${
@@ -195,12 +108,6 @@ const Header = () => {
             <div className="visible">
               {isAuth ? (
                 <>
-                  {/* <Link
-                 href={role === "admin" ? "/admin" : "/dashboard"}
-                   className="btn theme-outline-btn"
-                 >
-                   Dashboard
-                 </Link> */}
                   <div className="relative inline-block text-left">
                     {/* if the screen is on mobile */}
                     {typeof window !== "undefined" &&

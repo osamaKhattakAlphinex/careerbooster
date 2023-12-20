@@ -14,7 +14,11 @@ import {
   resetLinkedInHeadline,
   setLinkedInHeadline,
 } from "@/store/linkedInHeadLineSlice";
-import { resetLinkedInJobDescription, setLinkedInJobDescription } from "@/store/linkedInJobDescriptionSlice";
+import {
+  resetLinkedInJobDescription,
+  setLinkedInJobDescription,
+} from "@/store/linkedInJobDescriptionSlice";
+import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 
 type LinkedInHeadlineType = {
   card?: any;
@@ -30,7 +34,7 @@ const LinkedInJDCardSingle = ({
   // redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
-  
+
   const router = useRouter();
   const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
@@ -39,7 +43,6 @@ const LinkedInJDCardSingle = ({
     }
     console.log("card", card);
     return dispatch(setLinkedInJobDescription(card));
-    
   };
 
   const handleOnDelete = async (card: any) => {
@@ -51,7 +54,7 @@ const LinkedInJDCardSingle = ({
         await axios.delete(`/api/linkedInBots/jdGeneratorSingle/${card.id}`);
         dispatch(resetLinkedInJobDescription());
         // updated cover letters
-        const updatedDescriptions= userData.linkedInJobDescriptions.filter(
+        const updatedDescriptions = userData.linkedInJobDescriptions.filter(
           (jd: any) => jd.id !== card.id
         );
 
@@ -68,7 +71,7 @@ const LinkedInJDCardSingle = ({
   };
 
   if (!card) return <h1>Loading </h1>;
-
+  console.log(card);
   return (
     <div>
       <div className="flex flex-col   single-service-card-bg  rounded-xl mt-[20px] py-[20px] px-[14px] ">
@@ -78,10 +81,7 @@ const LinkedInJDCardSingle = ({
               title={card.jobDescription}
               className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize card-h2 font-semibold  "
             >
-              {card.jobDescription}
-              {/* {card.jobDescription.length < 20
-                ? card.jobDescription
-                : card.jobDescription.slice(0, 20) + "..."} */}
+              {htmlToPlainText(card.jobDescriptionText)}
             </h2>
             <h4 className="uppercase text-[#959595] font-medium  lg:text-[12px] text-[10px] pt-[8px] pb-[12px]">
               Generated on {getFormattedDate(card.generatedOnDate)}

@@ -36,6 +36,8 @@ export async function POST(req: any) {
 
     const reqBody = await req.json();
     const userData = reqBody?.userData;
+    const aboutId = reqBody?.aboutId;
+    const email = reqBody?.email;
     const trainBotData = reqBody?.trainBotData;
     await startDB();
     // fetch prompt from db
@@ -57,56 +59,33 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-    // make a trainBot entry
-    // try {
-    //   if (trainBotData) {
-    //     await startDB();
 
-    //     const obj = {
-    //       type: "linkedin.genearteConsultingBid",
-    //       input: prompt,
-    //       output: response,
-    //       idealOutput: "",
-    //       status: "pending",
-    //       userEmail: trainBotData.userEmail,
-    //       fileAddress: trainBotData.fileAddress,
-    //       Instructions: `Generate Linkedin About for ${trainBotData.userEmail}`,
-    //     };
-
-    //     await TrainBot.create({ ...obj });
-    //   }
-    // } catch (error) {}
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      async onFinal(completions) {
-        try {
-          if (trainBotData) {
-            await startDB();
-            const aboutId = makeid();
+      onStart: async () => {
+        const payload = {
+          id: aboutId,
+          aboutText: "",
+          generatedOnDate: new Date().toISOString(),
+          userEmail: email,
+        };
 
-            const payload = {
-              id: aboutId,
-              aboutText: completions,
-              generatedOnDate: new Date().toISOString(),
-              userEmail: trainBotData.userEmail,
-            };
+        await postAbouts(payload);
 
-            await postAbouts(payload);
-
-            let entry: TrainBotEntryType = {
-              entryId: aboutId,
-              type: "linkedin.abouts",
-              input: inputPrompt,
-              output: completions,
-              idealOutput: "",
-              status: "pending",
-              userEmail: trainBotData.email,
-              fileAddress: "",
-              Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
-            };
-            await makeTrainedBotEntry(entry);
-          }
-        } catch (err) {}
+        if (trainBotData) {
+          let entry: TrainBotEntryType = {
+            entryId: aboutId,
+            type: "linkedin.abouts",
+            input: inputPrompt,
+            output: "out",
+            idealOutput: "",
+            status: "pending",
+            userEmail: email,
+            fileAddress: "",
+            Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
+          };
+          await makeTrainedBotEntry(entry);
+        }
       },
     });
     // Respond with the stream

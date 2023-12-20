@@ -32,6 +32,8 @@ export async function POST(req: any) {
     const reqBody = await req.json();
     const userData = reqBody?.userData;
     const trainBotData = reqBody?.trainBotData;
+    const headlineId = reqBody?.headlineId;
+    const email = reqBody?.email;
 
     await startDB();
     // fetch prompt from db
@@ -57,56 +59,31 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-    // make a trainBot entry
-    // try {
-    //   if (trainBotData) {
-    //     await startDB();
 
-    //     const obj = {
-    //       type: "linkedin.genearteConsultingBid",
-    //       input: prompt,
-    //       output: response,
-    //       idealOutput: "",
-    //       status: "pending",
-    //       userEmail: trainBotData.userEmail,
-    //       fileAddress: trainBotData.fileAddress,
-    //       Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
-    //     };
-
-    //     await TrainBot.create({ ...obj });
-    //   }
-    // } catch (error) {}
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      async onFinal(completions) {
-        try {
-          if (trainBotData) {
-            await startDB();
-            const headlineId = makeid();
-
-            const payload = {
-              id: headlineId,
-              headlineText: completions,
-              generatedOnDate: new Date().toISOString(),
-              userEmail: trainBotData.userEmail,
-            };
-
-            await postHeadlines(payload);
-
-            let entry: TrainBotEntryType = {
-              entryId: headlineId,
-              type: "linkedin.headlines",
-              input: inputPrompt,
-              output: completions,
-              idealOutput: "",
-              status: "pending",
-              userEmail: trainBotData.email,
-              fileAddress: "",
-              Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
-            };
-            await makeTrainedBotEntry(entry);
-          }
-        } catch (err) {}
+      onStart: async () => {
+        const payload = {
+          id: headlineId,
+          headlineText: "",
+          generatedOnDate: new Date().toISOString(),
+          userEmail: email,
+        };
+        await postHeadlines(payload);
+        if (trainBotData) {
+          let entry: TrainBotEntryType = {
+            entryId: headlineId,
+            type: "linkedin.headlines",
+            input: inputPrompt,
+            output: "out",
+            idealOutput: "",
+            status: "pending",
+            userEmail: email,
+            fileAddress: "",
+            Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
+          };
+          await makeTrainedBotEntry(entry);
+        }
       },
     });
 

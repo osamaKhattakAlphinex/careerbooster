@@ -1,46 +1,8 @@
-"use client";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 const Footer = () => {
-  const pathname: any = usePathname();
-  const pagesArray = [
-    "/admin",
-    "/dashboard",
-    "/cover-letter-generator",
-    "/resume-builder",
-    "/linkedin-generator",
-    "/profile-review",
-    "/email-bot",
-    "/consulting-bids-bot",
-    "/subscribe",
-    "/subscribed",
-    "/career-coach",
-    "/linkedin-generator/headline",
-    "/linkedin-generator/about",
-    "/linkedin-generator/job-description",
-    "/linkedin-generator/keywords",
-    "/change-current-password",
-    "/review-resume-bot",
-  ];
-  if (
-    pathname === "/login" ||
-    pathname === "/register" ||
-    pagesArray?.includes(pathname)
-  )
-    return <></>;
-
-  // List of routes or folders where you want to exclude the layout
-  const excludedRoutes = ["/new-dashboard", "/resume-builder-2"];
-  // Check if the current route is in the excluded list
-  const excludeLayout = excludedRoutes.some((route) => pathname === route);
-  if (excludeLayout) {
-    // Return only the children without the layout
-    return <></>;
-  }
-
   return (
     <>
       <footer className="footer bg-striped pt-10 pt-lg-15">

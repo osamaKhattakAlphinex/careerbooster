@@ -1,14 +1,12 @@
-import Header from "@/components/layout/Header";
 import "./globals.css";
 import type { Metadata } from "next";
 import AuthProvider from "@/components/AuthProvider";
 import ReduxProvider from "@/components/ReduxProvider";
-import Footer from "@/components/layout/Footer";
-//check
 import ThemeProvider from "@/components/new-layout/ThemeProvider";
-
 import Head from "next/head";
 import Script from "next/script";
+import UserDataProvider from "@/components/UserDataProvider";
+import MainLoaderLayer from "@/components/new-layout/MainLoaderLayer";
 
 export const metadata: Metadata = {
   title: "AI Resume Bot",
@@ -42,10 +40,10 @@ export default function RootLayout({
       />
       <AuthProvider>
         <ReduxProvider>
-          {/* <MainLoaderLayer /> */}
-          {/* <Header /> */}
+          <MainLoaderLayer />
+          <UserDataProvider />
+
           {children}
-          {/* <Footer /> */}
         </ReduxProvider>
       </AuthProvider>
     </ThemeProvider>
