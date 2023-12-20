@@ -44,6 +44,9 @@ export default function RootLayout({
         <ReduxProvider>
           {/* <MainLoaderLayer /> */}
           {/* <Header /> */}
+          <div className="hidden">
+            <Header />
+          </div>
           {children}
           {/* <Footer /> */}
         </ReduxProvider>
