@@ -9,6 +9,7 @@ import ThemeProvider from "@/components/new-layout/ThemeProvider";
 
 import Head from "next/head";
 import Script from "next/script";
+import MainLoaderLayer from "@/components/new-layout/MainLoaderLayer";
 
 export const metadata: Metadata = {
   title: "AI Resume Bot",
@@ -42,7 +43,7 @@ export default function RootLayout({
       />
       <AuthProvider>
         <ReduxProvider>
-          {/* <MainLoaderLayer /> */}
+          <MainLoaderLayer />
           <Header />
           {children}
           <Footer />
