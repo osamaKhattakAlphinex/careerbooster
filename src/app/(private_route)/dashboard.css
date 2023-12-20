@@ -469,3 +469,7 @@
 .text-black {
   color: white;
 }
+
+.border-tl-0 {
+  border-top-left-radius: 0;
+}

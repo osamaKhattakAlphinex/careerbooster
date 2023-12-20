@@ -24,12 +24,15 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     "/email-bot": "Generate Emails Using AI",
     "/consulting-bids-bot": "Generate Bids Using AI",
     "/subscribe": `Welcome, ${userData.firstName + " " + userData.lastName}`,
-    "/chatAI": `Welcome to our latest Chat Bot`,
+    "/career-coach": `Welcome to our latest Chat Bot`,
     "/linkedin-generator/headline": "Headline Generator",
     "/linkedin-generator/about": "About Generator",
     "/linkedin-generator/job-description": "Job Description Generator",
     "/linkedin-generator/keywords": "Keyword Generator",
     "/change-current-password": "Change Password",
+  
+    "/review-resume-bot": "Review Your Resume By AI",
+
     // Add more routes as needed
   };
 
