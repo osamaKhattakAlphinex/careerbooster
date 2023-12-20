@@ -65,8 +65,8 @@ const LinkedInToolMain = () => {
   useEffect(() => {
     if (file && file.type === "application/pdf") {
       setFileUploading(true);
-      // router.push(`/linkedin/result`);
       setUploadComplete(true);
+      router.push(`/linkedin/result`);
     }
   }, [file, fileName]);
 
@@ -75,13 +75,13 @@ const LinkedInToolMain = () => {
       saveToLocalStorage(text, fileName);
     }
   }, [fileUploading, uploadComplete, text]);
-  useEffect(() => {
-    if (isVerified) {
-      router.push("/linkedin/result");
-    } else {
-      console.log("Captha failed");
-    }
-  }, [isVerified]);
+  // useEffect(() => {
+  //   if (isVerified) {
+  //     router.push("/linkedin/result");
+  //   } else {
+  //     console.log("Captha failed");
+  //   }
+  // }, [isVerified]);
   return (
     <div className="w-full ">
       {/* Hero Section */}

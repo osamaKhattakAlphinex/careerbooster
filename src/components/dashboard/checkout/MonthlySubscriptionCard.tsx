@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckoutSubscriptionBody } from "@/app/checkout-sessions/route";
+import { CheckoutSubscriptionBody } from "@/app/(public_route)/checkout-sessions/route";
 import { UserPackageData } from "@/db/schemas/UserPackage";
 import { setField, setUserData } from "@/store/userDataSlice";
 import { loadStripe } from "@stripe/stripe-js";
@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Stripe from "stripe";
 import { useRouter } from "next/navigation";
-import { CouponBody } from "@/app/stripe-coupon/route";
+import { CouponBody } from "@/app/(public_route)/stripe-coupon/route";
 import { infoSmallIcon } from "@/helpers/iconsProvider";
 
 interface Props {

@@ -21,6 +21,7 @@ import CoverLetterCardSingle from "@/components/new-dashboard/dashboard/cover-le
 import Image from "next/image";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
+import { makeid } from "@/helpers/makeid";
 
 export default function CoverLetterPage() {
   const componentRef = useRef<any>(null);
@@ -77,6 +78,21 @@ export default function CoverLetterPage() {
     //   dispatch(resetCoverLetter());
     // }
   }, [isEditing]);
+
+  const saveToDB = async (obj: any, text: any) => {
+    const id = obj?.coverletterId;
+    const email = obj?.email;
+    const payload: any = {
+      id,
+      email,
+      text,
+    };
+
+    await fetch("/api/coverLetterBot", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  };
 
   // Function to save the edited content and exit editing mode
   const handleSave = async () => {
@@ -140,8 +156,9 @@ export default function CoverLetterPage() {
       setMsgLoading(true);
       setShow(true);
       setStreamedData("");
-
+      const coverletterId = makeid();
       const obj: any = {
+        coverletterId: coverletterId,
         type: selectedOption,
         email: session?.user?.email,
         jobDescription,
@@ -170,7 +187,6 @@ export default function CoverLetterPage() {
       } else {
         obj.userData = aiInputUserData;
       }
-      console.log("obj", obj);
 
       // Fetch keywords
       fetch("/api/coverLetterBot/coverLetterGenerator", {
@@ -193,7 +209,7 @@ export default function CoverLetterPage() {
               tempText += text;
             }
 
-            // await saveToDB(tempText);
+            await saveToDB(obj, tempText);
 
             const limitUpdateResponse = await fetch(
               "/api/users/updateUserLimit",
@@ -308,7 +324,11 @@ export default function CoverLetterPage() {
   const historyProps = {
     dataSource: "coverLetters",
     Component: (card: any) => (
-      <CoverLetterCardSingle card={card} componentRef={componentRef} />
+      <CoverLetterCardSingle
+        card={card}
+        componentRef={componentRef}
+        source=""
+      />
     ),
   };
 

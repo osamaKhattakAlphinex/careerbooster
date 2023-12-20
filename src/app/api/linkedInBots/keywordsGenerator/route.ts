@@ -77,9 +77,10 @@ export async function POST(req: any) {
     // } catch (error) {}
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      onFinal(completions) {
+      async onFinal(completions) {
         try {
           if (trainBotData) {
+            await startDB();
             const keywordsId = makeid();
 
             const payload = {
@@ -89,7 +90,7 @@ export async function POST(req: any) {
               userEmail: trainBotData.userEmail,
             };
 
-            postKeywords(payload);
+            await postKeywords(payload);
 
             let entry: TrainBotEntryType = {
               entryId: keywordsId,
@@ -102,7 +103,7 @@ export async function POST(req: any) {
               fileAddress: "",
               Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
             };
-            makeTrainedBotEntry(entry);
+            await makeTrainedBotEntry(entry);
           }
         } catch (err) {}
       },

@@ -24,7 +24,7 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
   const router = useRouter();
   const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
-    if (source != "") {
+    if (source !== "") {
       router.replace("/email-bot");
     }
     return dispatch(setEmail(card));

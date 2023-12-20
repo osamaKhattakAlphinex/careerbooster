@@ -141,7 +141,26 @@ const ViewPackage = ({}) => {
         refresh={getPackages}
       />
 
-      <div className="pt-30">
+      <div className="flex flex-col justify-start items-start">
+        <h2 className=" text-xl text-white uppercase">Packages</h2>
+        <span className="text-white/70 text-base">
+          List of all the packages a user can choose from.
+        </span>
+        <div className="mt-4 flex flex-row justify-end items-center w-full">
+          <AddPackage getPackages={getPackages} />
+        </div>
+        <div className="w-full overflow-x-auto mt-4">
+          <DataTable
+            loading={loading}
+            columns={columns}
+            data={packages}
+            actions={actions}
+            source="packages"
+          />
+        </div>
+      </div>
+
+      {/* <div className="pt-30">
         <div className="my-5 ml-10">
           <Link
             href="/admin"
@@ -156,7 +175,6 @@ const ViewPackage = ({}) => {
           <div className=" p-8 flex flex-col gap-2 border w-11/12">
             <div className="w-100 flex flex-row justify-between">
               <h2 className="text-xl ">User Packages Management</h2>
-              {/* Add Button*/}
               <AddPackage getPackages={getPackages} />
             </div>
 
@@ -169,7 +187,7 @@ const ViewPackage = ({}) => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </>
     // <div>
     //   <div className="my-5 ml-10">

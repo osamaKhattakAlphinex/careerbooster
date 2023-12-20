@@ -66,31 +66,40 @@ const TrainedModel = () => {
   }, []);
 
   return (
-    <>
-      <div className="pt-30">
-        <div className="my-5 ml-10">
-          <Link
-            href="/admin"
-            className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
-          >
-            {leftArrowIcon}
-            Dashboard
-          </Link>
-        </div>
-
-        <div className="flex flex-col gap-2 items-center justify-center">
-          <div className=" p-8 flex flex-col gap-2 border w-11/12">
-            {/* Table */}
-            <DataTable
-              loading={loading}
-              columns={columns}
-              data={models}
-              source="trained_models"
-            />
-          </div>
-        </div>
+    <div className="flex flex-col justify-start items-start">
+      <h2 className=" text-xl text-white uppercase">Trained Models</h2>
+      <span className="text-white/70 text-base">
+        List of all the models you have trained.
+      </span>
+      <div className="w-full overflow-x-auto mt-4">
+        <DataTable
+          loading={loading}
+          columns={columns}
+          data={models}
+          source="trained_models"
+        />
       </div>
-    </>
+    </div>
+
+    // <>
+    //   <div className="pt-30">
+    //     <div className="my-5 ml-10">
+    //       <Link
+    //         href="/admin"
+    //         className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+    //       >
+    //         {leftArrowIcon}
+    //         Dashboard
+    //       </Link>
+    //     </div>
+
+    //     <div className="flex flex-col gap-2 items-center justify-center">
+    //       <div className=" p-8 flex flex-col gap-2 border w-11/12">
+    //         {/* Table */}
+    //       </div>
+    //     </div>
+    //   </div>
+    // </>
   );
 };
 

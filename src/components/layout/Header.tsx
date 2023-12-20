@@ -29,7 +29,6 @@ const Header = () => {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
-
   // when user is authenticated get userdata if not exists
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
@@ -78,6 +77,7 @@ const Header = () => {
     }
   };
   const pagesArray = [
+    "/admin",
     "/dashboard",
     "/cover-letter-generator",
     "/resume-builder",

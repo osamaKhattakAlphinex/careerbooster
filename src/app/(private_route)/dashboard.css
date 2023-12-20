@@ -367,6 +367,9 @@
 [data-bs-theme="dark"] .card-hover:hover {
   color: #fff;
 }
+[data-bs-theme="dark"] .text-input-black {
+  color: #000000;
+}
 
 /* Light Mode Rehamt Code */
 .tab-btn-text {
@@ -472,4 +475,7 @@
 
 .border-tl-0 {
   border-top-left-radius: 0;
+}
+.text-input-black {
+  color: white;
 }

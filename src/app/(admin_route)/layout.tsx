@@ -4,6 +4,8 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import "@/app/plugins.css";
 import "@/app/style.css";
+import AdminSidebar from "@/components/admin/sidebar/adminSidebar";
+import ThemeToggler from "@/components/Themetoggler";
 interface Props {
   children: ReactNode;
 }
@@ -16,5 +18,16 @@ export default async function AdminLayout({ children }: Props) {
 
   if (!isAdmin) redirect("/login");
 
-  return <> {children}</>;
+  return (
+    <div className="grid grid-cols-12 justify-start items-start w-screen overflow-y-hidden overflow-x-hidden">
+      <div className="col-span-3  max-h-screen">
+        <div className=" bg-gray-800 p-3 overflow-y-auto h-screen no-scrollbar">
+          <AdminSidebar />
+        </div>
+      </div>
+      <main className="col-span-9 p-10 overflow-y-scroll h-screen">
+        {children}
+      </main>
+    </div>
+  );
 }

@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 const Footer = () => {
   const pathname: any = usePathname();
   const pagesArray = [
+    "/admin",
     "/dashboard",
     "/cover-letter-generator",
     "/resume-builder",

@@ -49,27 +49,30 @@ export async function POST(req: any) {
           messages: [{ role: "user", content: input }],
         });
 
-        try {
-          if (trainBotData) {
-            await startDB();
-
-            // make a trainBot entry
-
-            const obj = {
-              type: "linkedinAiTool.about",
-              input: input,
-              output: response,
-              idealOutput: "",
-              status: "pending",
-              //  userEmail: trainBotData.userEmail,
-              // fileAddress: trainBotData.fileAddress,
-              Instructions: `Writing a detailed LinkedIn Summary awhich is engaging, impactful, have relevant industry jargon, highlight successes and services with call to action statement `,
-            };
-            await TrainBot.create({ ...obj });
-          }
-        } catch (error) {}
         // Convert the response into a friendly text-stream
-        const stream = OpenAIStream(response);
+        const stream = OpenAIStream(response, {
+          async onFinal(completions) {
+            try {
+              if (trainBotData) {
+                await startDB();
+
+                // make a trainBot entry
+
+                const obj = {
+                  type: "linkedinAiTool.about",
+                  input: input,
+                  output: response,
+                  idealOutput: "",
+                  status: "pending",
+                  //  userEmail: trainBotData.userEmail,
+                  // fileAddress: trainBotData.fileAddress,
+                  Instructions: `Writing a detailed LinkedIn Summary awhich is engaging, impactful, have relevant industry jargon, highlight successes and services with call to action statement `,
+                };
+                await TrainBot.create({ ...obj });
+              }
+            } catch (error) {}
+          },
+        });
         // Respond with the stream
         return new StreamingTextResponse(stream);
       }

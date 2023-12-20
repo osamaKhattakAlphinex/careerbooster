@@ -43,10 +43,10 @@ export default function RootLayout({
       />
       <AuthProvider>
         <ReduxProvider>
-          <MainLoaderLayer />
-          <Header />
+          {/* <MainLoaderLayer /> */}
+          {/* <Header /> */}
           {children}
-          <Footer />
+          {/* <Footer /> */}
         </ReduxProvider>
       </AuthProvider>
     </ThemeProvider>
