@@ -8,10 +8,10 @@ import EmailCardSingle from "@/components/new-dashboard/dashboard/email-generato
 import Button from "../Button";
 
 const tabOptions = [
-  { name: "Resumes", value: "resumemaker" ,},
+  { name: "Resumes", value: "resumemaker" },
   { name: "Cover Letter", value: "cover-letter" },
-  { name: "Consulting Bids", value: "consulting-bids" },
   { name: "Email Bot", value: "email-bot" },
+  { name: "Consulting Bids", value: "consulting-bids" },
 ];
 
 const CareerBoostingAiToolsCard = () => {
@@ -48,16 +48,13 @@ const CareerBoostingAiToolsCard = () => {
       <h1 className="pb-2 rounded-[14px] text-zinc-500 font-bold uppercase text-[14px] ">
         Recent ai generated documents
       </h1>
-      <div className="flex mt-3">
+      <div className="flex mt-3 flex-wrap gap-2">
         {tabOptions.map((option, index) => (
           <Button
             key={`tab-${index}`}
             btnText={option.name}
             isActive={activeTab === option.value}
-           
             onClick={() => setActiveTab(option.value)}
-           
-
           />
         ))}
       </div>

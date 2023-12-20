@@ -161,7 +161,26 @@ const ViewCoupons = ({}) => {
         api="/api/coupons"
         refresh={getCoupons}
       />
-      <div className="pt-30">
+
+      <div className="flex flex-col justify-start items-start">
+        <h2 className=" text-xl text-white uppercase">Packages</h2>
+        <span className="text-white/70 text-base">
+          List of all the packages a user can choose from.
+        </span>
+        <div className="mt-4 flex flex-row justify-end items-center w-full">
+          <AddCoupon getCoupons={getCoupons} />
+        </div>
+        <div className="w-full overflow-x-auto mt-4">
+          <DataTable
+            loading={loading}
+            columns={columns}
+            data={coupons}
+            actions={actions}
+            source="coupons"
+          />
+        </div>
+      </div>
+      {/* <div className="pt-30">
         <div className="my-5 ml-10">
           <Link
             href="/admin"
@@ -175,10 +194,8 @@ const ViewCoupons = ({}) => {
           <div className=" p-8 flex flex-col gap-2 border w-11/12">
             <div className="w-100 flex flex-row justify-between">
               <h2 className="text-xl ">Coupons Management</h2>
-              {/* Add Button*/}
               <AddCoupon getCoupons={getCoupons} />
             </div>
-            {/* Table */}
 
             <DataTable
               loading={loading}
@@ -189,7 +206,7 @@ const ViewCoupons = ({}) => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

@@ -78,6 +78,7 @@ const Header = () => {
     }
   };
   const pagesArray = [
+    "/admin",
     "/dashboard",
     "/cover-letter-generator",
     "/resume-builder",
@@ -87,12 +88,13 @@ const Header = () => {
     "/consulting-bids-bot",
     "/subscribe",
     "/subscribed",
-    "/chatAI",
+    "/career-coach",
     "/linkedin-generator/headline",
     "/linkedin-generator/about",
     "/linkedin-generator/job-description",
     "/linkedin-generator/keywords",
     "/change-current-password",
+    "/review-resume-bot",
   ];
 
   // when page (session) loads, fetch user data if not exists

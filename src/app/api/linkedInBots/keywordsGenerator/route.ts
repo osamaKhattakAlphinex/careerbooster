@@ -13,7 +13,7 @@ import {
 } from "@/helpers/makeTrainBotEntry";
 import { makeid } from "@/helpers/makeid";
 import { postKeywords } from "./linkedInKeywords/route";
-export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const maxDuration = 10; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -77,9 +77,10 @@ export async function POST(req: any) {
     // } catch (error) {}
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      onFinal(completions) {
+      async onFinal(completions) {
         try {
           if (trainBotData) {
+            await startDB();
             const keywordsId = makeid();
 
             const payload = {
@@ -89,7 +90,7 @@ export async function POST(req: any) {
               userEmail: trainBotData.userEmail,
             };
 
-            postKeywords(payload);
+            await postKeywords(payload);
 
             let entry: TrainBotEntryType = {
               entryId: keywordsId,
@@ -102,7 +103,7 @@ export async function POST(req: any) {
               fileAddress: "",
               Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
             };
-            makeTrainedBotEntry(entry);
+            await makeTrainedBotEntry(entry);
           }
         } catch (err) {}
       },

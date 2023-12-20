@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 const Footer = () => {
   const pathname: any = usePathname();
   const pagesArray = [
+    "/admin",
     "/dashboard",
     "/cover-letter-generator",
     "/resume-builder",
@@ -16,12 +17,13 @@ const Footer = () => {
     "/consulting-bids-bot",
     "/subscribe",
     "/subscribed",
-    "/chatAI",
+    "/career-coach",
     "/linkedin-generator/headline",
     "/linkedin-generator/about",
     "/linkedin-generator/job-description",
     "/linkedin-generator/keywords",
     "/change-current-password",
+    "/review-resume-bot",
   ];
   if (
     pathname === "/login" ||

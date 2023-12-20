@@ -4,10 +4,11 @@ import type { Metadata } from "next";
 import AuthProvider from "@/components/AuthProvider";
 import ReduxProvider from "@/components/ReduxProvider";
 import Footer from "@/components/layout/Footer";
-
+//check
 import ThemeProvider from "@/components/new-layout/ThemeProvider";
 
 import Head from "next/head";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "AI Resume Bot",
@@ -23,9 +24,11 @@ export default function RootLayout({
     <ThemeProvider>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* <script
-          dangerouslySetInnerHTML={{
-            __html: `
+      </Head>
+      <Script
+        id="hotjar-script"
+        dangerouslySetInnerHTML={{
+          __html: `
               (function(h,o,t,j,a,r){
                 h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
                 h._hjSettings={hjid:3796095,hjsv:6};
@@ -35,15 +38,14 @@ export default function RootLayout({
                 a.appendChild(r);
               })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
             `,
-          }}
-        /> */}
-      </Head>
+        }}
+      />
       <AuthProvider>
         <ReduxProvider>
           {/* <MainLoaderLayer /> */}
-          <Header />
+          {/* <Header /> */}
           {children}
-          <Footer />
+          {/* <Footer /> */}
         </ReduxProvider>
       </AuthProvider>
     </ThemeProvider>

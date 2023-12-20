@@ -4,7 +4,7 @@ import User from "@/db/schemas/User";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
-export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const maxDuration = 10; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 export async function POST(req: any) {
   const session = await getServerSession(authOptions);
@@ -58,8 +58,8 @@ export async function POST(req: any) {
     }
 
     // Add one to resumes_generation in userPackageUsed
-    if (user.userPackageUsed && user.userPackageUsed.resumes_generation < 5) {
-      user.userPackageUsed.resumes_generation = user.resumes.length;
+    if (user.userPackageUsed && user.userPackageUsed.resumes_generation) {
+      user.userPackageUsed.resumes_generation += 1;
     }
 
     // Save the updated user document

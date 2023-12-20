@@ -201,7 +201,7 @@ const DataTable = <C, D>({
 
   return (
     <>
-      <div className="p-2 overflow-x-auto">
+      <div className=" w-full">
         <div className="grid grid-cols-5  my-3">
           <div className=" col-span-1">
             <ColumnSelector table={table} columns={datacolumns} />
@@ -214,7 +214,6 @@ const DataTable = <C, D>({
             )}
           </div>
         </div>
-
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -233,14 +232,15 @@ const DataTable = <C, D>({
                         )}
                   </th>
                 ))}
-                {/* {actions.length > 0 ||
-              (conditionalTableAction && conditionalTableAction?.length > 0) ? ( */}
-                <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
-                  <span>Actions</span>
-                </th>
-                {/* ) : (
-                ""
-              )} */}
+                {actions.length > 0 ||
+                (conditionalTableAction &&
+                  conditionalTableAction?.length > 0) ? (
+                  <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
+                    <span>Actions</span>
+                  </th>
+                ) : (
+                  ""
+                )}
               </tr>
             ))}
           </thead>
@@ -279,14 +279,11 @@ const DataTable = <C, D>({
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
-                {actions.length > 0 ? (
-                  getActions(row.original, actions)
-                ) : conditionalTableAction &&
-                  conditionalTableAction?.length > 0 ? (
-                  getConditionalActions(row.original, conditionalTableAction)
-                ) : (
-                  <code>No Action</code>
-                )}
+                {actions.length > 0
+                  ? getActions(row.original, actions)
+                  : conditionalTableAction && conditionalTableAction?.length > 0
+                  ? getConditionalActions(row.original, conditionalTableAction)
+                  : ""}
               </tr>
             ))}
           </tbody>

@@ -1,6 +1,3 @@
-// "use client";
-
-// import { hotjar } from "react-hotjar";
 import type { Metadata } from "next";
 import CTASection from "@/components/new-layout/Homepage/CTASection";
 import FeaturesSecond from "@/components/new-layout/Homepage/FeaturesSecond";
@@ -11,8 +8,8 @@ import Reviews from "@/components/new-layout/Homepage/Reviews";
 import RewardsSection from "@/components/new-layout/Homepage/RewardsSection";
 import UseCases from "@/components/new-layout/Homepage/UseCases";
 import FAQList from "@/components/new-layout/Homepage/Faqs";
-import "./plugins.css";
-import "./style.css";
+import "../plugins.css";
+import "../style.css";
 
 export const metadata: Metadata = {
   title: "CareerBooster.AI",
@@ -47,9 +44,6 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  // useEffect(() => {
-  //   hotjar.initialize(3796095, 6);
-  // }, []);
   return (
     <>
       <main className="flex-grow-1 mb-20 ">

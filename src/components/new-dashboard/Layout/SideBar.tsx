@@ -16,11 +16,12 @@ import {
   keyIcon,
 } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
-import Button from "@/components/Button";
+
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
+import Button from "../Button";
 
 const items = [
   { icon: homeIcon, text: "Dashboard", url: "/dashboard" },
@@ -203,13 +204,14 @@ const SideBar = () => {
               <p className="text-white px-4 mb-4 text-[15px] text-center font-semibold">
                 Upgrade to Pro version to get hired faster
               </p>
-              <div className="items-center">
+              <div className="flex justify-center">
                 <Button
                   onClick={() => {
                     router.push("/subscribe");
                   }}
                   btnText="Upgrade"
                   textColor={`text-white`}
+                  // isActive={true}
                   bgColor="bg-zinc-900"
                 />
               </div>

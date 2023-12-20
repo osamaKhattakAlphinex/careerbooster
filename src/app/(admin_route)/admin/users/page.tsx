@@ -1,23 +1,16 @@
 "use client";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
-import {
-  IconCalendarclock,
-  IconUsersicon,
-  deleteIcon,
-  leftArrowIcon,
-  refreshIconRotating,
-} from "@/helpers/iconsProvider";
+import { deleteIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
-import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card";
 import { createColumnHelper } from "@tanstack/react-table";
 import DataTable, {
   BulkDataOperation,
   TableAction,
 } from "@/components/DataTable";
+import TablePagination from "@/components/TablePagination";
 
 type User = {
   alertConsent: any;
@@ -210,28 +203,6 @@ const UsersPage = () => {
       }
     }
   };
-  const showDeleteAllButton = () => {
-    if (selectAll) {
-      return true;
-    }
-    if (dataSelection.length > 1) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const onSelectAll = (e: any) => {
-    setSelectAll(e.target.checked);
-    if (e.target.checked) {
-      if (records.length >= 1) {
-        let _ids: string[] = [];
-        records.map((rec: any) => _ids.push(rec._id));
-        setDataSelection(_ids);
-      }
-    } else {
-      setDataSelection([]);
-    }
-  };
   const handleDeleteAll = async (ids: string[] | [] = []) => {
     setLoading(true);
 
@@ -262,14 +233,6 @@ const UsersPage = () => {
       // router.push("/admin/users");
     }
   };
-  const isChecked = (id: string) => {
-    if (selectAll) {
-      if (dataSelection.length === records.length) return true;
-    } else {
-      if (dataSelection.includes(id)) return true;
-      else return false;
-    }
-  };
   const checkingSubscription = (expirationDate: any) => {
     if (new Date(expirationDate).getTime() > Date.now()) {
       return true;
@@ -277,7 +240,6 @@ const UsersPage = () => {
       return false;
     }
   };
-
   const onSubscriptionChange = async (id: string, pckg: string) => {
     if (window.confirm("Are you sure to Change the subscription status")) {
       setSubscriptionId(id);
@@ -304,6 +266,37 @@ const UsersPage = () => {
         });
     }
   };
+
+  const isChecked = (id: string) => {
+    if (selectAll) {
+      if (dataSelection.length === records.length) return true;
+    } else {
+      if (dataSelection.includes(id)) return true;
+      else return false;
+    }
+  };
+  const showDeleteAllButton = () => {
+    if (selectAll) {
+      return true;
+    }
+    if (dataSelection.length > 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const onSelectAll = (e: any) => {
+    setSelectAll(e.target.checked);
+    if (e.target.checked) {
+      if (records.length >= 1) {
+        let _ids: string[] = [];
+        records.map((rec: any) => _ids.push(rec._id));
+        setDataSelection(_ids);
+      }
+    } else {
+      setDataSelection([]);
+    }
+  };
   const onSelecting = (checked: boolean, id: string) => {
     if (selectAll)
       if (checked) {
@@ -326,6 +319,11 @@ const UsersPage = () => {
       }
     }
   };
+  const selectUsersLimit = (e: any) => {
+    setCurrentPage(1);
+    setLimitOfUser(e.target.value);
+  };
+
   const getUserDeatils = () => {
     setshowTableLoader(true);
     setLoading(true);
@@ -350,7 +348,6 @@ const UsersPage = () => {
         });
     }
   };
-
   const getUsersCount = async () => {
     axios.get("/api/users/getCount").then((res) => {
       if (res.data.success) {
@@ -378,10 +375,6 @@ const UsersPage = () => {
     getUsersCount();
   }, []);
 
-  const selectUsersLimit = (e: any) => {
-    setCurrentPage(1);
-    setLimitOfUser(e.target.value);
-  };
   useEffect(() => {
     setRecords([]);
     getUserDeatils();
@@ -402,145 +395,42 @@ const UsersPage = () => {
   }, [searchParams?.get("r"), searchParams?.get("p")]);
 
   return (
-    <>
-      <div className="mx-10 pt-40">
-        <div className="flex justify-between">
-          <div className="my-5 ml-10">
-            <Link
-              href="/admin"
-              className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
-            >
-              {leftArrowIcon}
-              Dashboard
-            </Link>
-          </div>
-          <div className="flex flex-row gap-2 items-center ml-auto  pr-5">
-            <label htmlFor="userPerPage" className="text-sm font-medium">
-              Number of records per page:
-            </label>
-            <select
-              name="userPerPage"
-              id="userPerPage"
-              className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
-              onChange={selectUsersLimit}
-              value={limitOfUser}
-            >
-              <>
-                <option value={10}>10</option>
-                <option value={20}>20</option>
-                <option value={30}>30</option>
-                <option value={40}>40</option>
-                <option value={100}>100</option>
-                <option value={500}>500</option>
-              </>
-            </select>
-          </div>
+    <div className="flex flex-col justify-start items-start">
+      <h2 className=" text-xl text-white uppercase">Users</h2>
+      <span className="text-white/70 text-base">List of all the users</span>
+      <div className="w-full overflow-x-auto mt-4">
+        <DataTable
+          loading={loading}
+          data={records}
+          columns={columns}
+          actions={actions}
+          source="user"
+          enableRowSelection={true}
+          bulkDataOperations={bulkDataOperations}
+        />
+      </div>
+      <div className=" flex flex-row justify-between items-center w-full ">
+        <div className="flex flex-row gap-2 items-center">
+          <label htmlFor="userPerPage" className="text-sm font-medium">
+            Number of records per page:
+          </label>
+          <select
+            name="userPerPage"
+            id="userPerPage"
+            className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+            onChange={selectUsersLimit}
+            value={limitOfUser}
+          >
+            <>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={30}>30</option>
+              <option value={40}>40</option>
+              <option value={100}>100</option>
+              <option value={500}>500</option>
+            </>
+          </select>
         </div>
-
-        <div
-          key="1"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6"
-        >
-          <Card>
-            <CardHeader className="pb-2">
-              {/* <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium mb-0">
-                  Total Users
-                </CardTitle>
-                <IconUsersicon className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
-              </div> */}
-
-              <select
-                onChange={(e) => setUserStats(e.target.value)}
-                className="p-2"
-              >
-                <option value="total">Total Users</option>
-                <option value="thisWeek">Registered This Week</option>
-                <option value="thisMonth">Registered This Month</option>
-                <option value="thisYear">Registered This Year</option>
-              </select>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-3xl font-bold">
-                {/* {counts ? counts.total : 0} */}
-                {counts ? counts[userStats] : 0}
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-1">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium mb-0">
-                  {/* Registered This Week */}
-                  Free Users
-                </CardTitle>
-                <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
-              </div>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-3xl font-bold">
-                {counts ? counts.freeUser : 0}
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium mb-0">
-                  {/* Registered This Month */}
-                  Paid Users
-                </CardTitle>
-                <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
-              </div>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-3xl font-bold">
-                {counts ? counts.paidUser : 0}
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-0">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium mb-0">
-                  {/* Registered This Year */}
-                  Active Users
-                </CardTitle>
-                <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
-              </div>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-3xl font-bold">
-                {counts ? counts.activeUser : 0}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* {showDeleteAllButton() && (
-          <div className="flex justify-end">
-            <button
-              disabled={loading ? true : false}
-              onClick={handleDeleteAll}
-              className=" flex gap-2 mb-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 disabled:cursor-not-allowed"
-            >
-              Delete All
-            </button>
-          </div>
-        )} */}
-
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
-          <DataTable
-            loading={loading}
-            data={records}
-            columns={columns}
-            actions={actions}
-            source="user"
-            enableRowSelection={true}
-            bulkDataOperations={bulkDataOperations}
-          />
-        </div>
-        {/* Pagination Controls */}
         <div className=" flex justify-end mt-4">
           <nav aria-label="Page navigation example">
             <ul className="inline-flex -space-x-px">
@@ -593,8 +483,200 @@ const UsersPage = () => {
           </nav>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
 export default UsersPage;
+
+{
+  /* <div className="mx-10 pt-40">
+  <div className="flex justify-between">
+    <div className="my-5 ml-10">
+      <Link
+        href="/admin"
+        className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+      >
+        {leftArrowIcon}
+        Dashboard
+      </Link>
+    </div>
+    <div className="flex flex-row gap-2 items-center ml-auto  pr-5">
+      <label htmlFor="userPerPage" className="text-sm font-medium">
+        Number of records per page:
+      </label>
+      <select
+        name="userPerPage"
+        id="userPerPage"
+        className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+        onChange={selectUsersLimit}
+        value={limitOfUser}
+      >
+        <>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={30}>30</option>
+          <option value={40}>40</option>
+          <option value={100}>100</option>
+          <option value={500}>500</option>
+        </>
+      </select>
+    </div>
+  </div>
+
+  <div
+    key="1"
+    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6"
+  >
+    <Card>
+      <CardHeader className="pb-2">
+        {/* <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium mb-0">
+                  Total Users
+                </CardTitle>
+                <IconUsersicon className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+              </div> */
+}
+
+//       <select onChange={(e) => setUserStats(e.target.value)} className="p-2">
+//         <option value="total">Total Users</option>
+//         <option value="thisWeek">Registered This Week</option>
+//         <option value="thisMonth">Registered This Month</option>
+//         <option value="thisYear">Registered This Year</option>
+//       </select>
+//     </CardHeader>
+//     <CardContent className="pt-0">
+//       <div className="text-3xl font-bold">
+//         {/* {counts ? counts.total : 0} */}
+//         {counts ? counts[userStats] : 0}
+//       </div>
+//     </CardContent>
+//   </Card>
+//   <Card>
+//     <CardHeader className="pb-1">
+//       <div className="flex items-center justify-between">
+//         <CardTitle className="text-sm font-medium mb-0">
+//           {/* Registered This Week */}
+//           Free Users
+//         </CardTitle>
+//         <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+//       </div>
+//     </CardHeader>
+//     <CardContent className="pt-0">
+//       <div className="text-3xl font-bold">{counts ? counts.freeUser : 0}</div>
+//     </CardContent>
+//   </Card>
+//   <Card>
+//     <CardHeader className="pb-2">
+//       <div className="flex items-center justify-between">
+//         <CardTitle className="text-sm font-medium mb-0">
+//           {/* Registered This Month */}
+//           Paid Users
+//         </CardTitle>
+//         <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+//       </div>
+//     </CardHeader>
+//     <CardContent className="pt-0">
+//       <div className="text-3xl font-bold">{counts ? counts.paidUser : 0}</div>
+//     </CardContent>
+//   </Card>
+//   <Card>
+//     <CardHeader className="pb-0">
+//       <div className="flex items-center justify-between">
+//         <CardTitle className="text-sm font-medium mb-0">
+//           {/* Registered This Year */}
+//           Active Users
+//         </CardTitle>
+//         <IconCalendarclock className="w-54 h-54 text-zinc-500 dark:text-zinc-400" />
+//       </div>
+//     </CardHeader>
+//     <CardContent className="pt-0">
+//       <div className="text-3xl font-bold">
+//         {counts ? counts.activeUser : 0}
+//       </div>
+//     </CardContent>
+//   </Card>
+// </div>
+
+{
+  /* {showDeleteAllButton() && (
+          <div className="flex justify-end">
+            <button
+              disabled={loading ? true : false}
+              onClick={handleDeleteAll}
+              className=" flex gap-2 mb-2 items-center rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 disabled:cursor-not-allowed"
+            >
+              Delete All
+            </button>
+          </div>
+        )} */
+}
+
+// <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
+//   <DataTable
+//     loading={loading}
+//     data={records}
+//     columns={columns}
+//     actions={actions}
+//     source="user"
+//     enableRowSelection={true}
+//     bulkDataOperations={bulkDataOperations}
+//   />
+// </div>
+{
+  /* Pagination Controls */
+}
+{
+  /* <div className=" flex justify-end mt-4">
+  <nav aria-label="Page navigation example">
+    <ul className="inline-flex -space-x-px">
+      <li>
+        <button
+          className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+          onClick={() => {
+            setRecords([]);
+            setCurrentPage(currentPage - 1);
+          }}
+          disabled={currentPage == 1 ? true : false}
+        >
+          Previous
+        </button>
+      </li>
+      {[currentPage - 1, currentPage, currentPage + 1].map((number) => {
+        if (number < 1 || number > totalPages) return null;
+        return (
+          <li key={number}>
+            <button
+              onClick={(e) => {
+                setRecords([]);
+                setCurrentPage(number);
+              }}
+              className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+                currentPage === number
+                  ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
+                  : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+              }`}
+            >
+              {number}
+            </button>
+          </li>
+        );
+      })}
+
+      <li>
+        <button
+          className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          onClick={() => {
+            setRecords([]);
+            setCurrentPage(currentPage + 1);
+          }}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div> */
+}
+// </div>; */}

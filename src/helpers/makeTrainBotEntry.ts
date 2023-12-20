@@ -25,7 +25,7 @@ export const makeTrainedBotEntry = async (entry: TrainBotEntryType) => {
     // Getting the dataset model if trained previously
     // console.log(entry);
     const trainBotEntry = new TrainBot(entry);
-    trainBotEntry.save();
+    await trainBotEntry.save();
 
     // console.log(trainBotEntry);
   } catch (error) {
