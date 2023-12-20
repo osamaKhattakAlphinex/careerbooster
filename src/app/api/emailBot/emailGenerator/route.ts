@@ -44,6 +44,7 @@ export async function POST(req: any) {
     const type = reqBody?.type;
     const userData = reqBody?.userData;
     const email = reqBody?.email;
+    const emailId = reqBody?.emailId;
     const file = reqBody?.file;
     const jobDescription = reqBody?.jobDescription;
     const trainBotData = reqBody?.trainBotData;
@@ -109,39 +110,32 @@ export async function POST(req: any) {
     // } catch (error) {}
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      async onFinal(completions) {
-        try {
-          if (trainBotData) {
-            await startDB();
+      onStart: async () => {
+        await startDB();
 
-            const emailId = makeid();
+        const payload = {
+          id: emailId,
+          jobDescription: jobDescription,
+          emailText: "",
+          generatedOnDate: new Date().toISOString(),
+          generatedViaOption: type,
+          userEmail: email,
+        };
 
-            const payload = {
-              id: emailId,
-              jobDescription: jobDescription,
-              emailText: completions,
-              generatedOnDate: new Date().toISOString(),
-              generatedViaOption: type,
-              userEmail: email,
-            };
-
-            await postEmail(payload);
-
-            let entry: TrainBotEntryType = {
-              entryId: emailId,
-              type: "tool.email",
-              input: inputPrompt,
-              output: completions,
-              idealOutput: "",
-              status: "pending",
-              userEmail: email,
-              fileAddress: "",
-              Instructions: `Generate Email for ${trainBotData.userEmail}`,
-            };
-            await makeTrainedBotEntry(entry);
-          }
-        } catch {
-          console.log("error while saving Emails....");
+        await postEmail(payload);
+        if (trainBotData) {
+          let entry: TrainBotEntryType = {
+            entryId: emailId,
+            type: "tool.email",
+            input: inputPrompt,
+            output: "out",
+            idealOutput: "",
+            status: "pending",
+            userEmail: email,
+            fileAddress: "",
+            Instructions: `Generate Email for ${trainBotData.userEmail}`,
+          };
+          await makeTrainedBotEntry(entry);
         }
       },
     });
