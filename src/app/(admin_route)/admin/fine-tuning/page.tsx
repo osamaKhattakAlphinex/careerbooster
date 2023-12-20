@@ -250,35 +250,22 @@ const FineTuningModels = () => {
   };
 
   return (
-    <>
-      <div className="pt-30">
-        <div className="my-5 ml-10">
-          <Link
-            href="/admin"
-            className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
-          >
-            {leftArrowIcon}
-            Dashboard
-          </Link>
-        </div>
-
-        <div className="flex flex-col gap-2 items-center justify-center">
-          <div className=" p-8 flex flex-col gap-2 border w-11/12">
-            {/* Table */}
-            <div className="">
-              <DataTable
-                loading={loading}
-                columns={columns}
-                data={records}
-                source="finetuning"
-                actions={[]}
-                conditionalTableAction={rulesForActions}
-              />
-            </div>
-          </div>
-        </div>
+    <div className="flex flex-col justify-start items-start">
+      <h2 className=" text-xl text-white uppercase">Fine Tuning</h2>
+      <span className="text-white/70 text-base">
+        List of all the modle that are tuning.
+      </span>
+      <div className="w-full overflow-x-auto mt-4">
+        <DataTable
+          loading={loading}
+          columns={columns}
+          data={records}
+          source="finetuning"
+          actions={[]}
+          conditionalTableAction={rulesForActions}
+        />
       </div>
-    </>
+    </div>
   );
 };
 

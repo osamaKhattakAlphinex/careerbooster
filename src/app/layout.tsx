@@ -43,9 +43,9 @@ export default function RootLayout({
       <AuthProvider>
         <ReduxProvider>
           {/* <MainLoaderLayer /> */}
-          <Header />
+          {/* <Header /> */}
           {children}
-          <Footer />
+          {/* <Footer /> */}
         </ReduxProvider>
       </AuthProvider>
     </ThemeProvider>
