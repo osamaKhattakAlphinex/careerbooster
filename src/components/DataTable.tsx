@@ -203,7 +203,7 @@ const DataTable = <C, D>({
     <>
       <div className=" w-full">
         <div className="grid grid-cols-5  my-3">
-          <div className=" col-span-1">
+          <div className="col-span-1">
             <ColumnSelector table={table} columns={datacolumns} />
           </div>
           <div className="col-span-4">
@@ -394,12 +394,14 @@ const ColumnSelector = ({ table, columns }: ColumnSelectorType) => {
 
   return (
     <div className="w-full">
-      <div className="relative p-2 bg-[#1F2937]">
+      <div className="relative p-2 border-2 border-gray-200 dark:border-gray-800 bg-[#ffffff] dark:bg-[#1F2937]">
         <button
           className="w-full  flex flex-row justify-between items-center rounded-sm"
           onClick={() => setOpen(!open)}
         >
-          <span className="font-semibold text-xs">Columns Selector</span>
+          <span className="font-semibold text-xs dark:text-[#ffffff] text-[#000000]">
+            Columns Selector
+          </span>
 
           {open ? (
             <svg
@@ -433,12 +435,19 @@ const ColumnSelector = ({ table, columns }: ColumnSelectorType) => {
             </svg>
           )}
         </button>
-        <div className="z-10 absolute left-0 top-11 right-0 bottom-0 shadow-sm">
-          <div className={`${open ? "block" : "hidden"} bg-[#1F2937] `}>
+        <div className="z-10 absolute left-0 top-10 right-0 bottom-0 shadow-sm">
+          <div
+            className={`${
+              open ? "block" : "hidden"
+            } dark:bg-[#1F2937] bg-[#ffffff] `}
+          >
             {table.getAllLeafColumns().map((column: any, index: number) => {
               if (column.id !== "select") {
                 return (
-                  <div key={column.id} className="p-2 border border-[#232b38]">
+                  <div
+                    key={column.id}
+                    className="p-2 border-2 border-gray-200  dark:border-gray-800"
+                  >
                     <label className="w-full">
                       <input
                         {...{
@@ -465,3 +474,57 @@ const ColumnSelector = ({ table, columns }: ColumnSelectorType) => {
 };
 
 export default DataTable;
+
+//  <div className="w-full dark:bg-[#1F2937]">
+//    <div className="relative p-2 bg-white dark:bg-[#1F2937]">
+//      <button
+//        className="w-full flex flex-row justify-between items-center rounded-sm"
+//        onClick={() => setOpen(!open)}
+//      >
+//        <span className="font-semibold text-xs dark:text-white text-black">
+//          Columns Selector
+//        </span>
+
+//        {open ? (
+//          <svg
+//            xmlns="http://www.w3.org/2000/svg"
+//            fill="none"
+//            viewBox="0 0 24 24"
+//            strokeWidth={1.5}
+//            stroke="currentColor"
+//            className="w-4 h-4"
+//          >
+//            <path
+//              strokeLinecap="round"
+//              strokeLinejoin="round"
+//              d="M4.5 15.75l7.5-7.5 7.5 7.5"
+//            />
+//          </svg>
+//        ) : (
+//          <svg
+//            xmlns="http://www.w3.org/2000/svg"
+//            fill="none"
+//            viewBox="0 0 24 24"
+//            strokeWidth={1.5}
+//            stroke="currentColor"
+//            className="w-4 h-4"
+//          >
+//            <path
+//              strokeLinecap="round"
+//              strokeLinejoin="round"
+//              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+//            />
+//          </svg>
+//        )}
+//      </button>
+//      <div className="z-10 absolute left-0 top-11 right-0 bottom-0 shadow-sm">
+//        <div
+//          className={`${
+//            open ? "block" : "hidden"
+//          } bg-[#1F2937] dark:bg-[#1F2937]`}
+//        >
+//          {/* Rest of your code... */}
+//        </div>
+//      </div>
+//    </div>
+//  </div>;

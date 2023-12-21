@@ -9,6 +9,7 @@ import ThemeProvider from "@/components/new-layout/ThemeProvider";
 
 import Head from "next/head";
 import Script from "next/script";
+import NextThemeProvider from "@/components/NextThemeProvider";
 
 export const metadata: Metadata = {
   title: "AI Resume Bot",
@@ -21,14 +22,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ThemeProvider>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <Script
-        id="hotjar-script"
-        dangerouslySetInnerHTML={{
-          __html: `
+    <NextThemeProvider>
+      <ThemeProvider>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
+        <Script
+          id="hotjar-script"
+          dangerouslySetInnerHTML={{
+            __html: `
               (function(h,o,t,j,a,r){
                 h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
                 h._hjSettings={hjid:3796095,hjsv:6};
@@ -38,19 +40,20 @@ export default function RootLayout({
                 a.appendChild(r);
               })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
             `,
-        }}
-      />
-      <AuthProvider>
-        <ReduxProvider>
-          {/* <MainLoaderLayer /> */}
-          {/* <Header /> */}
-          <div className="hidden">
-            <Header />
-          </div>
-          {children}
-          {/* <Footer /> */}
-        </ReduxProvider>
-      </AuthProvider>
-    </ThemeProvider>
+          }}
+        />
+        <AuthProvider>
+          <ReduxProvider>
+            {/* <MainLoaderLayer /> */}
+            {/* <Header /> */}
+            <div className="hidden">
+              <Header />
+            </div>
+            {children}
+            {/* <Footer /> */}
+          </ReduxProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </NextThemeProvider>
   );
 }
