@@ -12,7 +12,9 @@ const ChatAI = () => {
   const [userData, setUserData] = useState<any>({});
   const [chat, setChat] = useState<any>([]);
   // const [input, setInput] = useState<string>("");
+  const [submitted, setSubmitted] = useState<boolean>(false);
   const messagesContainer: any = useRef(null);
+
   // const {stop } = useCompletion({
   //   api: "/api/chatCompletion",
   // });
@@ -41,6 +43,8 @@ const ChatAI = () => {
       },
     ],
   });
+  // console.log("handleInputChange",handleInputChange);
+  
 
   const { data: session, status } = useSession();
   const formRef = useRef<any>(null)
@@ -128,15 +132,28 @@ const ChatAI = () => {
     //   setChat([...messages]);
     // }
   }, [messages]);
- console.log("messages12",messages[1]?.content);
 const handleInteractiveSummaryClick = () => {
   const content = "Make me an interactive professional summary based on my resume.";
 };
-const sendJobTitle = () => {
-  setInput(" job title?");
-  
-  formRef.current.submit()
+const sendJobTitle = (e:any) => {
+  e.preventDefault();
+  setInput("my name ?");
+  setSubmitted(true); // Set a flag indicating that the user has provided input
+  setTimeout(()=>sendForm(e),5000)
 };
+
+const sendForm = (e:any) => {
+  e.preventDefault();
+  // Check if the user has provided input before calling handleSubmit
+  if (submitted) {
+    handleSubmit(e);
+  } else {
+    // Handle the case where input is not provided
+    console.error('Please provide input before submitting the form.');
+  }
+};
+
+
 
   return (
     <>
@@ -221,8 +238,11 @@ const sendJobTitle = () => {
       </div>
     </div>
             </section>
+          
+
+
             <form
-              ref={formRef}
+              // ref={formRef}
               className="space-x-4 px-3 w-full md:w-9/12 flex flex-row justify-between items-center"
               onSubmit={handleSubmit}
             >
@@ -241,6 +261,7 @@ const sendJobTitle = () => {
                 Stop
               </button> */}
               <button
+              ref={formRef}
                 className="border-solid border border-[#404044] h-10 text-btn p-2 rounded-md"
                 type="submit"
               >
