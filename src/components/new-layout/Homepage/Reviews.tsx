@@ -38,6 +38,23 @@ const Reviews = () => {
         autoplay={{ delay: 3500, disableOnInteraction: false }}
         modules={[Autoplay]}
         className=""
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+          },
+          640: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1080: {
+            slidesPerView: 3,
+          },
+          1280: {
+            slidesPerView: 3,
+          },
+        }}
       >
         <SwiperSlide>
           {" "}
