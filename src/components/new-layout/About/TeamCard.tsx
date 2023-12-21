@@ -31,8 +31,8 @@ const TeamCard = () => {
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
-              <h4 className="theme-text-2 mb-1">Moe Hassan</h4>
-              <p className="fs-sm mb-2">CEO & Founder</p>
+              <h4 className="theme-text-2 mb-1">Mubasher Hassan</h4>
+              <p className="fs-sm mb-2">CEO & Co-Founder</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
                   <Link
@@ -153,7 +153,7 @@ const TeamCard = () => {
               </ul>
             </div>
           </div>
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="150">
+          {/* <div className="col" data-aos="fade-up-sm" data-aos-delay="150">
             <div className="team-card text-center">
               <Image
                 width={200}
@@ -404,7 +404,7 @@ const TeamCard = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
