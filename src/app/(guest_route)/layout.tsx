@@ -16,9 +16,7 @@ export default async function GuestLayout({ children }: Props) {
 
   return (
     <>
-      <div className="hidden">
-        <Header />
-      </div>
+      
       {children}
     </>
   );

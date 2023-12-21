@@ -370,6 +370,9 @@
 [data-bs-theme="dark"] .text-input-black {
   color: #000000;
 }
+[data-bs-theme="dark"] .text-btn {
+  color: #ffffff;
+}
 
 /* Light Mode Rehamt Code */
 .tab-btn-text {
@@ -478,4 +481,7 @@
 }
 .text-input-black {
   color: white;
+}
+.text-btn {
+  color: #000000;
 }

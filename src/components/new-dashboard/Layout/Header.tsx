@@ -29,7 +29,6 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     "/linkedin-generator/job-description": "Job Description Generator",
     "/linkedin-generator/keywords": "Keyword Generator",
     "/change-current-password": "Change Password",
-
     "/review-resume-bot": "Review Your Resume By AI",
 
     // Add more routes as needed
