@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setUploadedFileName } from "@/store/resumeSlice";
+
 import { useSession } from "next-auth/react";
 // import { slugify } from "@/helpers/slugify";
 import { useRouter } from "next/navigation";
@@ -15,43 +14,10 @@ const UploadPDFResume = () => {
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [file, setFile] = useState<any>(null);
   const [fileError, setFileError] = useState<string>("");
-  const [successMsg, setSuccessMsg] = useState<string>("");
   const [text, setText] = useState("");
   // session
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
-
-  // Redux
-  const dispatch = useDispatch();
-
-  // const uploadFileToServer = async () => {
-  //   setFileError("");
-  //   setFileUploading(true);
-  //   if (file) {
-  //     const body = new FormData();
-  //     body.append("file", file);
-  //     fetch("/api/fileUpload", {
-  //       method: "POST",
-  //       body,
-  //     })
-  //       .then(async (resp: any) => {
-  //         const res = await resp.json();
-  //         if (res.success) {
-  //           const uploadedFileName = res.fileName + "_" + file.name;
-  //           dispatch(setUploadedFileName(uploadedFileName));
-  //           fetchRegistrationDataFromResume(uploadedFileName);
-  //           // router.replace("/welcome?step=1");
-  //           // router.replace("/register");
-  //           // setSuccessMsg("File has been uploaded!");
-  //         } else {
-  //           setFileError("Something went wrong");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         setFileError("Something went wrong");
-  //       });
-  //   }
-  // };
 
   const fetchRegistrationDataFromResume = async (content: string) => {
     setFileError("");
@@ -91,8 +57,6 @@ const UploadPDFResume = () => {
     if (file && file.type === "application/pdf") {
       //  file exists and is PDF
       setFileError("");
-      // upload it to server
-      // uploadFileToServer();
     } else if (file) {
       // if file exists but not PDf
       setFileError("only PDF file is allowed");
@@ -143,10 +107,6 @@ const UploadPDFResume = () => {
         />
       )}
 
-      {/* <p className="text-gray-400 mt-4 text-xs">
-        Your existing resume forms the basis for your new one, eliminating
-        manual data entry.
-      </p> */}
       {isAuth && (
         <Link
           href="/dashboard"
@@ -156,15 +116,6 @@ const UploadPDFResume = () => {
         >
           Dashboard
         </Link>
-      )}
-
-      {successMsg && (
-        <div
-          className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 my-2 !text-left w-[50%] m-auto"
-          role="alert"
-        >
-          <p className="m-0">{successMsg}</p>
-        </div>
       )}
 
       {fileError && (

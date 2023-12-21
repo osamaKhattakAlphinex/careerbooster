@@ -82,26 +82,6 @@ const TrainedModel = () => {
         />
       </div>
     </div>
-
-    // <>
-    //   <div className="pt-30">
-    //     <div className="my-5 ml-10">
-    //       <Link
-    //         href="/admin"
-    //         className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
-    //       >
-    //         {leftArrowIcon}
-    //         Dashboard
-    //       </Link>
-    //     </div>
-
-    //     <div className="flex flex-col gap-2 items-center justify-center">
-    //       <div className=" p-8 flex flex-col gap-2 border w-11/12">
-    //         {/* Table */}
-    //       </div>
-    //     </div>
-    //   </div>
-    // </>
   );
 };
 
