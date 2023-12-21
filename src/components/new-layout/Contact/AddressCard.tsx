@@ -20,9 +20,9 @@ const AddressCard = () => {
                   <path d="M10.5 4.75 9 4 3 7v13l6-3 6 3 6-3v-2M9 4v13m6-2v5" />
                 </svg>
               </div>
-              <h3 className="fw-medium mb-0">
-                2464 Royal Ln. Mesa, New Jersey 45463
-              </h3>
+              <h4 className="fw-medium mb-0">
+                23 The Atria 219 Bath Road Slough SL1 4BF, United Kingdom
+              </h4>
             </div>
           </div>
           <div className="col" data-aos="fade-up-sm" data-aos-delay="100">
@@ -41,10 +41,7 @@ const AddressCard = () => {
                   <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2m10 3a2 2 0 0 1 2 2m-2-6a6 6 0 0 1 6 6" />
                 </svg>
               </div>
-              <h3 className="fw-medium mb-0">
-                (603) 555-0123-4422 <br />
-                (600) 555-0124
-              </h3>
+              <h4 className="fw-medium mb-0">+44 7933 951034</h4>
             </div>
           </div>
         </div>

@@ -6,11 +6,7 @@ export const maxDuration = 10; // This function can run for a maximum of 5 secon
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  // const body = await req.json();
-  // console.log("body: " + body);
-  // const status = body?.status ?? "active";
   const status = "active";
-  // console.log("status: " + status);
   if (!status) {
     return NextResponse.json(
       { result: "Bad Request", success: false },
