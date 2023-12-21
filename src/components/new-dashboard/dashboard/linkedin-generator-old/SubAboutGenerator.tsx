@@ -13,6 +13,7 @@ import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
 import LinkedInAboutCardSingle from "./LinkedInAboutCardSingle";
+import { makeid } from "@/helpers/makeid";
 const SubAboutGenerator = () => {
   const componentRef = useRef<any>(null);
   const [about, setAbout] = useState<string>("");
@@ -87,15 +88,19 @@ const SubAboutGenerator = () => {
       availablePercentage !== 0
     ) {
       setMsgLoading(true);
+      const aboutId = makeid();
+      const obj: any = {
+        aboutId: aboutId,
+        email: session?.user?.email,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.uploadedResume.fileName,
+        },
+        userData: aiInputUserData,
+      };
       fetch("/api/linkedInBots/aboutGenerator", {
         method: "POST",
-        body: JSON.stringify({
-          userData: aiInputUserData,
-          trainBotData: {
-            userEmail: userData.email,
-            fileAddress: userData.defaultResumeFile,
-          },
-        }),
+        body: JSON.stringify(obj),
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -112,7 +117,7 @@ const SubAboutGenerator = () => {
               tempText += text;
               setStreamedData((prev) => prev + text);
             }
-            await saveToDB(tempText);
+            await saveToDB(obj, tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -163,24 +168,19 @@ const SubAboutGenerator = () => {
     }
   };
 
-  const saveToDB = async (tempText: string) => {
-    try {
-      const response: any = await axios.post("/api/users/updateUserData", {
-        data: {
-          email: session?.user?.email,
-          results: {
-            ...userData.results,
-            about: tempText,
-          },
-        },
-      });
-      const res = await response.json();
-      if (res.success) {
-        console.log("about saved to DB");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const saveToDB = async (obj: any, text: any) => {
+    const id = obj?.aboutId;
+    const email = obj?.email;
+    const payload: any = {
+      id,
+      email,
+      text,
+    };
+
+    await fetch("/api/linkedInBots/aboutGenerator/linkedInAbout", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
   };
 
   const getUserDataIfNotExists = async () => {

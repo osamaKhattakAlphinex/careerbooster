@@ -29,6 +29,7 @@ const items = [
   { icon: deviceTablet, text: "Cover Letters", url: "/cover-letter-generator" },
   { icon: userGroup, text: "LinkedIn Tool", url: "/linkedin-generator" },
   { icon: inboxArrowDown, text: "Email Bot", url: "/email-bot" },
+  { icon: dollarIcon, text: "Billing Detail", url: "/billing" },
   { icon: dollarIcon, text: "Consulting Bot", url: "/consulting-bids-bot" },
   { icon: userCircle, text: "Profile", url: "/profile-review" },
   { icon: keyIcon, text: "Change Password", url: "/change-current-password" },
@@ -58,26 +59,6 @@ const SideBar = () => {
     setHoveredItem(null);
   };
 
-  // useEffect(() => {
-  //   const fullURL = document.referrer; // Assuming document.referrer contains the full URL
-
-  //   // Create a URL object from the full URL
-  //   const urlObject = new URL(fullURL);
-
-  //   // Extract the pathname from the URL object
-  //   const pathName = urlObject.pathname; // This will give you '/subscribe' or any other path
-
-  //   // If you specifically want to remove the leading slash, you can do:
-  //   const trimmedPath = pathName.startsWith("/") ? pathName.slice(1) : pathName;
-
-  //   console.log(trimmedPath); // This will log 'subscribe' without the leading slash
-
-  //   if (trimmedPath === "subscribe") {
-  //     window.location.reload();
-  //   }
-  // }, []);
-  // const pathname: any = usePathname();
-  // if (!pagesArray?.includes(pathname)) return <></>;
   return (
     <>
       {/* Mobile Menu Button */}

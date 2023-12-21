@@ -1,4 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import TrainBot from "@/db/schemas/TrainBot";
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
@@ -20,7 +21,29 @@ export async function postJobDescriptions(payload: any) {
   const response = await user.save();
   return response;
 }
+async function updateJobDescriptions(payload: any) {
+  await startDB();
+  await User.findOneAndUpdate(
+    { email: payload.email, "linkedInJobDescriptions.id": payload.id },
+    {
+      $set: {
+        "linkedInJobDescriptions.$.jobDescriptionText": payload.text,
+      },
+    },
+    { new: true }
+  );
 
+  await TrainBot.findOneAndUpdate(
+    { entryId: payload.id, type: "linkedin.jobDescription" },
+    {
+      $set: {
+        output: payload.text,
+      },
+    },
+    { new: true }
+  );
+  return "ok";
+}
 export async function POST(request: any) {
   const session = await getServerSession(authOptions);
 
@@ -29,7 +52,7 @@ export async function POST(request: any) {
       await startDB();
       const payload = await request.json();
 
-      const response = await postJobDescriptions(payload);
+      const response = await updateJobDescriptions(payload);
 
       return NextResponse.json(
         { result: response, success: true },

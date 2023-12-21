@@ -11,7 +11,7 @@ import {
   TrainBotEntryType,
   makeTrainedBotEntry,
 } from "@/helpers/makeTrainBotEntry";
-import { makeid } from "@/helpers/makeid";
+
 import { postKeywords } from "./linkedInKeywords/route";
 export const maxDuration = 10; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -32,6 +32,8 @@ export async function POST(req: any) {
     const reqBody = await req.json();
     const userData = reqBody?.userData;
     const trainBotData = reqBody?.trainBotData;
+    const keywordsId = reqBody?.keywordsId;
+    const email = reqBody?.email;
     await startDB();
     // fetch prompt from db
     const promptRec = await Prompt.findOne({
@@ -56,62 +58,37 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-    // make a trainBot entry
-    // try {
-    //   if (trainBotData) {
-    //     await startDB();
 
-    //     const obj = {
-    //       type: "linkedin.keywords",
-    //       input: prompt,
-    //       output: response,
-    //       idealOutput: "",
-    //       status: "pending",
-    //       userEmail: trainBotData.userEmail,
-    //       fileAddress: trainBotData.fileAddress,
-    //       Instructions: `Generate Linkedin Keywords for ${trainBotData.userEmail}`,
-    //     };
-
-    //     await TrainBot.create({ ...obj });
-    //   }
-    // } catch (error) {}
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      async onFinal(completions) {
-        try {
-          if (trainBotData) {
-            await startDB();
-            const keywordsId = makeid();
+      onStart: async () => {
+        const payload = {
+          id: keywordsId,
+          keywordsText: "",
+          generatedOnDate: new Date().toISOString(),
+          userEmail: email,
+        };
 
-            const payload = {
-              id: keywordsId,
-              keywordsText: completions,
-              generatedOnDate: new Date().toISOString(),
-              userEmail: trainBotData.userEmail,
-            };
+        await postKeywords(payload);
 
-            await postKeywords(payload);
-
-            let entry: TrainBotEntryType = {
-              entryId: keywordsId,
-              type: "linkedin.keywords",
-              input: inputPrompt,
-              output: completions,
-              idealOutput: "",
-              status: "pending",
-              userEmail: trainBotData.email,
-              fileAddress: "",
-              Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
-            };
-            await makeTrainedBotEntry(entry);
-          }
-        } catch (err) {}
+        if (trainBotData) {
+          let entry: TrainBotEntryType = {
+            entryId: keywordsId,
+            type: "linkedin.keywords",
+            input: inputPrompt,
+            output: "out",
+            idealOutput: "",
+            status: "pending",
+            userEmail: email,
+            fileAddress: "",
+            Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
+          };
+          await makeTrainedBotEntry(entry);
+        }
       },
     });
     // Respond with the stream
     return new StreamingTextResponse(stream);
-    // res.end();
-    // res.end();
   } catch (error) {
     return NextResponse.json(
       { result: "something went wrong", success: false },

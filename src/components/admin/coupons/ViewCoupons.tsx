@@ -163,8 +163,10 @@ const ViewCoupons = ({}) => {
       />
 
       <div className="flex flex-col justify-start items-start">
-        <h2 className=" text-xl text-white uppercase">Packages</h2>
-        <span className="text-white/70 text-base">
+        <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+          Packages
+        </h2>
+        <span className="dark:text-white/70 text-black/70 text-base">
           List of all the packages a user can choose from.
         </span>
         <div className="mt-4 flex flex-row justify-end items-center w-full">

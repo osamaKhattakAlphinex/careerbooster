@@ -84,8 +84,10 @@ const Payments = () => {
       />
 
       <div className="flex flex-col justify-end items-start">
-        <h2 className=" text-xl text-white uppercase">Payments</h2>
-        <span className="text-white/70 text-base">
+        <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+          Payments
+        </h2>
+        <span className="dark:text-white/70 text-black/70 text-base">
           List of encrypted payments details you can decrypt them.
         </span>
 

@@ -67,8 +67,10 @@ const TrainedModel = () => {
 
   return (
     <div className="flex flex-col justify-start items-start">
-      <h2 className=" text-xl text-white uppercase">Trained Models</h2>
-      <span className="text-white/70 text-base">
+      <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+        Trained Models
+      </h2>
+      <span className="dark:text-white/70 text-black/70 text-base">
         List of all the models you have trained.
       </span>
       <div className="w-full overflow-x-auto mt-4">

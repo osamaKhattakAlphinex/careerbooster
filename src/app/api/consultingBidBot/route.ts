@@ -3,6 +3,7 @@ import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
+import { updateTrainedBotEntry } from "@/helpers/updateTrainBotEntry";
 
 export async function postConsultingBid(payload: any) {
   await startDB();
@@ -18,6 +19,25 @@ export async function postConsultingBid(payload: any) {
   return response;
 }
 
+async function updateConsultingBid(payload: any) {
+  await startDB();
+
+  await User.findOneAndUpdate(
+    { email: payload.email, "consultingBids.id": payload.id },
+    {
+      $set: {
+        "consultingBids.$.consultingBidText": payload.text,
+      },
+    },
+    { new: true }
+  );
+  await updateTrainedBotEntry({
+    entryId: payload.id,
+    type: "linkedin.genearteConsultingBid",
+    output: payload.text,
+  });
+  return "ok";
+}
 export async function POST(request: any) {
   const session = await getServerSession(authOptions);
 
@@ -26,21 +46,7 @@ export async function POST(request: any) {
       await startDB();
       const payload = await request.json();
 
-      // const user = await User.findOne({ email: payload.userEmail });
-
-      // if (!user) {
-      //   return NextResponse.json(
-      //     { result: "", success: false },
-      //     { status: 404 }
-      //   );
-      // } else if (!user.emails || user.consultingBids.length === 0) {
-      //   user.consultingBids = [payload];
-      // } else {
-      //   user.consultingBids.push(payload);
-      // }
-
-      // const response = await user.save();
-      const response = await postConsultingBid(payload);
+      const response = await updateConsultingBid(payload);
 
       return NextResponse.json(
         { result: response, success: true },

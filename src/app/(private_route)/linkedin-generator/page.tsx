@@ -1,7 +1,5 @@
 "use client";
-import Image from "next/image";
-import Svg1 from "@/../public/icon/headline-icon.svg";
-import LinkedinSingleTool from "@/components/new-dashboard/dashboard/linkedin-generator/LinkedinSingleTool";
+
 import HeadlineGenerator from "@/components/new-dashboard/dashboard/linkedin-generator-old/HeadlineGenerator";
 import { useState } from "react";
 import AboutGenerator from "@/components/new-dashboard/dashboard/linkedin-generator-old/AboutGenerator";
