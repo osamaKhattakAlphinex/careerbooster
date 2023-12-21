@@ -32,7 +32,8 @@ export async function POST(req: any) {
     const reqBody = await req.json();
     const experience = reqBody?.experience;
     const trainBotData = reqBody?.trainBotData;
-
+    const jobDescriptionId = reqBody?.jobDescriptionId;
+    const email = reqBody?.email;
     const dataset = "resume.writeJDSingle";
     const model = await getTrainedModel(dataset);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
@@ -89,35 +90,29 @@ export async function POST(req: any) {
     // } catch (error) {}
 
     const stream = OpenAIStream(response, {
-      async onFinal(completions) {
-        try {
-          if (trainBotData) {
-            await startDB();
-            const jobDescriptionId = makeid();
+      onStart: async () => {
+        const payload = {
+          id: jobDescriptionId,
+          jobDescriptionText: "",
+          generatedOnDate: new Date().toISOString(),
+          userEmail: email,
+        };
 
-            const payload = {
-              id: jobDescriptionId,
-              jobDescriptionText: completions,
-              generatedOnDate: new Date().toISOString(),
-              userEmail: trainBotData.userEmail,
-            };
-
-            await postJobDescriptions(payload);
-
-            let entry: TrainBotEntryType = {
-              entryId: jobDescriptionId,
-              type: "linkedin.jobDescription",
-              input: inputPrompt,
-              output: completions,
-              idealOutput: "",
-              status: "pending",
-              userEmail: trainBotData.email,
-              fileAddress: "",
-              Instructions: `Write Single Job Description for ${experience.jobTitle} at ${experience.company}`,
-            };
-            await makeTrainedBotEntry(entry);
-          }
-        } catch (err) {}
+        await postJobDescriptions(payload);
+        if (trainBotData) {
+          let entry: TrainBotEntryType = {
+            entryId: jobDescriptionId,
+            type: "linkedin.jobDescription",
+            input: inputPrompt,
+            output: "out",
+            idealOutput: "",
+            status: "pending",
+            userEmail: email,
+            fileAddress: "",
+            Instructions: `Write Single Job Description for ${experience.jobTitle} at ${experience.company}`,
+          };
+          await makeTrainedBotEntry(entry);
+        }
       },
     });
     // Respond with the stream

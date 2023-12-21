@@ -1,4 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import TrainBot from "@/db/schemas/TrainBot";
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
@@ -19,6 +20,29 @@ export async function postKeywords(payload: any) {
   return response;
 }
 
+async function updateKeywords(payload: any) {
+  await startDB();
+  await User.findOneAndUpdate(
+    { email: payload.email, "linkedInKeywords.id": payload.id },
+    {
+      $set: {
+        "linkedInKeywords.$.keywordsText": payload.text,
+      },
+    },
+    { new: true }
+  );
+
+  await TrainBot.findOneAndUpdate(
+    { entryId: payload.id, type: "linkedin.keywords" },
+    {
+      $set: {
+        output: payload.text,
+      },
+    },
+    { new: true }
+  );
+  return "ok";
+}
 export async function POST(request: any) {
   const session = await getServerSession(authOptions);
 
@@ -27,7 +51,7 @@ export async function POST(request: any) {
       await startDB();
       const payload = await request.json();
 
-      const response = await postKeywords(payload);
+      const response = await updateKeywords(payload);
 
       return NextResponse.json(
         { result: response, success: true },

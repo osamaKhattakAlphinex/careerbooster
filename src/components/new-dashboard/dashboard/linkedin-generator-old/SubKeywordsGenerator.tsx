@@ -15,6 +15,7 @@ import copy from "clipboard-copy";
 import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import LinkedInHKeywordsCardSingle from "./LinkedInKeywordsCardSingle";
+import { makeid } from "@/helpers/makeid";
 
 const SubKeywordsGenerator = () => {
   const [keywords, setKeywords] = useState<string>("");
@@ -90,15 +91,19 @@ const SubKeywordsGenerator = () => {
       availablePercentage !== 0
     ) {
       setMsgLoading(true);
+      const keywordsId = makeid();
+      const obj: any = {
+        keywordsId: keywordsId,
+        email: session?.user?.email,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.uploadedResume.fileName,
+        },
+        userData: aiInputUserData,
+      };
       fetch("/api/linkedInBots/keywordsGenerator", {
         method: "POST",
-        body: JSON.stringify({
-          userData: aiInputUserData,
-          trainBotData: {
-            userEmail: userData.email,
-            fileAddress: userData.defaultResumeFile,
-          },
-        }),
+        body: JSON.stringify(obj),
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -113,7 +118,8 @@ const SubKeywordsGenerator = () => {
               tempText += text;
               setStreamedData((prev) => prev + text);
             }
-            await saveToDB(tempText);
+            await saveToDB(obj, tempText);
+
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -165,24 +171,19 @@ const SubKeywordsGenerator = () => {
       }, 3000);
     }
   };
-  const saveToDB = async (tempText: string) => {
-    try {
-      const response: any = await axios.post("/api/users/updateUserData", {
-        data: {
-          email: session?.user?.email,
-          results: {
-            ...userData.results,
-            keywords: tempText,
-          },
-        },
-      });
-      const res = await response.json();
-      if (res.success) {
-        console.log("Keywords saved to DB");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const saveToDB = async (obj: any, text: any) => {
+    const id = obj?.keywordsId;
+    const email = obj?.email;
+    const payload: any = {
+      id,
+      email,
+      text,
+    };
+
+    await fetch("/api/linkedInBots/keywordsGenerator/linkedInKeywords", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
   };
 
   const getUserDataIfNotExists = async () => {
