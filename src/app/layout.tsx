@@ -20,15 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <NextThemeProvider>
-      <ThemeProvider>
-        <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-        </Head>
-        <Script
-          id="hotjar-script"
-          dangerouslySetInnerHTML={{
-            __html: `
+    <ThemeProvider>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <Script
+        id="hotjar-script"
+        dangerouslySetInnerHTML={{
+          __html: `
               (function(h,o,t,j,a,r){
                 h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
                 h._hjSettings={hjid:3796095,hjsv:6};
@@ -38,8 +37,9 @@ export default function RootLayout({
                 a.appendChild(r);
               })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
             `,
-          }}
-        />
+        }}
+      />
+      <NextThemeProvider>
         <AuthProvider>
           <ReduxProvider>
             <MainLoaderLayer />
@@ -47,7 +47,7 @@ export default function RootLayout({
             {children}
           </ReduxProvider>
         </AuthProvider>
-      </ThemeProvider>
-    </NextThemeProvider>
+      </NextThemeProvider>
+    </ThemeProvider>
   );
 }

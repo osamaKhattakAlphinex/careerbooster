@@ -21,17 +21,15 @@ export default async function AdminLayout({ children }: Props) {
   if (!isAdmin) redirect("/login");
 
   return (
-    <NextThemeProvider>
-      <div className="grid grid-cols-12 justify-start items-start w-screen overflow-y-hidden overflow-x-hidden">
-        <div className="col-span-3  max-h-screen">
-          <div className=" bg-gray-800 p-3 overflow-y-auto h-screen no-scrollbar">
-            <AdminSidebar />
-          </div>
+    <div className="grid grid-cols-12 justify-start items-start w-screen overflow-y-hidden overflow-x-hidden">
+      <div className="col-span-3  max-h-screen">
+        <div className=" bg-gray-800 p-3 overflow-y-auto h-screen no-scrollbar">
+          <AdminSidebar />
         </div>
-        <main className="col-span-9 p-10 overflow-y-scroll h-screen dark:bg-[#000000] bg-[#ffffff]">
-          {children}
-        </main>
       </div>
-    </NextThemeProvider>
+      <main className="col-span-9 p-10 overflow-y-scroll h-screen dark:bg-[#000000] bg-[#ffffff]">
+        {children}
+      </main>
+    </div>
   );
 }
