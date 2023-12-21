@@ -5,6 +5,7 @@ import ReduxProvider from "@/components/ReduxProvider";
 import ThemeProvider from "@/components/new-layout/ThemeProvider";
 import Head from "next/head";
 import Script from "next/script";
+import NextThemeProvider from "@/components/NextThemeProvider";
 import UserDataProvider from "@/components/UserDataProvider";
 import MainLoaderLayer from "@/components/new-layout/MainLoaderLayer";
 
@@ -38,13 +39,15 @@ export default function RootLayout({
             `,
         }}
       />
-      <AuthProvider>
-        <ReduxProvider>
-          <MainLoaderLayer />
-          <UserDataProvider />
-          {children}
-        </ReduxProvider>
-      </AuthProvider>
+      <NextThemeProvider>
+        <AuthProvider>
+          <ReduxProvider>
+            <MainLoaderLayer />
+            <UserDataProvider />
+            {children}
+          </ReduxProvider>
+        </AuthProvider>
+      </NextThemeProvider>
     </ThemeProvider>
   );
 }

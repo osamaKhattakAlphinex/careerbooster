@@ -5,6 +5,7 @@ import Modal from "@/components/Modal";
 import { bellIcon } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
 import { useSelector } from "react-redux";
+import ThemeChanger from "@/components/themeSwitcher";
 interface HeaderProps {
   children?: ReactNode;
 }
@@ -58,6 +59,9 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
           >
             {bellIcon}
           </button>
+          <div className="bg-black">
+            <ThemeChanger />
+          </div>
         </div>
       </div>
 

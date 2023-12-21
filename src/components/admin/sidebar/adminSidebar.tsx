@@ -1,5 +1,6 @@
 "use client";
 import ThemeToggler from "@/components/Themetoggler";
+import ThemeChanger from "@/components/themeSwitcher";
 import { IconUsersicon, antIcon } from "@/helpers/iconsProvider";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
@@ -44,9 +45,9 @@ const AdminSidebar = () => {
             </div>
           </Link>
           <div className="h-8 w-8 bg-green-700 rounded-md shadow-md grid place-content-center">
-            <ThemeToggler />
+            {/* <ThemeToggler /> */}
+            <ThemeChanger />
           </div>
-
           <div className="h-8 w-8 bg-rose-700 rounded-md shadow-md grid place-content-center">
             <button onClick={() => signOut()}>
               <span className="text-white">
