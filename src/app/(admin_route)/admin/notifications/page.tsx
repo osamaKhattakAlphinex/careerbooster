@@ -13,7 +13,6 @@ import { useEffect, useState } from "react";
 export default function NotificationsPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [updateModalVisible, setUpdateModalVisible] = useState(false);
   const [addModalVisible, setAddModalVisible] = useState(false);
   const [selectedNotificationId, setSelectedNotificationId] = useState(null);
   const [data, setData] = useState([]);
@@ -54,13 +53,12 @@ export default function NotificationsPage() {
     }
   };
   useEffect(() => {
-    setData([]);
     fetchData();
-  }, [addModalVisible]);
+  }, []);
 
   return (
     <>
-      <section className=" p-10 mb-40 pt-40">
+      <section className=" mb-10">
         <div className="my-5 ml-10">
           <Link
             href="/admin"
@@ -72,35 +70,36 @@ export default function NotificationsPage() {
         </div>
         <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
           {/* <!-- Start coding here --> */}
-          <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-            <div className="flex flex-row ml-auto">
-              <button
-                onClick={() => setAddModalVisible(true)}
-                type="button"
-                className="flex-row  btn  theme-outline-btn pb-[20px] ml-auto"
+          <div className="flex flex-row ml-auto">
+            <button
+              onClick={() => setAddModalVisible(true)}
+              type="button"
+              className="d-flex mb-4 btn  theme-outline-btn pb-[20px] ml-auto"
+            >
+              <svg
+                className="h-3.5 w-3.5 mr-2"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
               >
-                <svg
-                  className="h-3.5 w-3.5 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    clipRule="evenodd"
-                    fillRule="evenodd"
-                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                  />
-                </svg>
-                Add New Notification
-              </button>
-              {addModalVisible && (
-                <AddNotification
-                  setAddModalVisible={setAddModalVisible}
-                  onClick={() => setAddModalVisible(false)}
+                <path
+                  clipRule="evenodd"
+                  fillRule="evenodd"
+                  d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
                 />
-              )}
-            </div>
+              </svg>
+              Add New Notification
+            </button>
+            {addModalVisible && (
+              <AddNotification
+                fetchData={fetchData}
+                setAddModalVisible={setAddModalVisible}
+                onClick={() => setAddModalVisible(false)}
+              />
+            )}
+          </div>
+          <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -189,9 +188,11 @@ export default function NotificationsPage() {
                                 </button>
                                 {selectedNotificationId === item._id && (
                                   <UpdateNotification
+                                    fetchData={fetchData}
                                     // message={item.message}
                                     // title={item.title}
                                     // sender={item.sender}
+
                                     setSelectedNotificationId={
                                       setSelectedNotificationId
                                     }
@@ -204,7 +205,10 @@ export default function NotificationsPage() {
                               </li>
 
                               <li>
-                                <DeleteNotification notificationid={item._id} />
+                                <DeleteNotification
+                                  fetchData={fetchData}
+                                  notificationid={item._id}
+                                />
                                 {/* <button
                                   onClick={() => {
                                     deleteNotification(item._id);

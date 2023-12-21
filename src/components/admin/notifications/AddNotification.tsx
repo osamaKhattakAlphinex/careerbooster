@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-export default function AddNotification({ onClick, setAddModalVisible }: any) {
+export default function AddNotification({
+  onClick,
+  setAddModalVisible,
+  fetchData,
+}: any) {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -34,6 +38,7 @@ export default function AddNotification({ onClick, setAddModalVisible }: any) {
         }
         console.log("Notification added successfully");
         setAddModalVisible(false);
+        fetchData();
         // You might want to perform additional actions upon successful addition
       } catch (error) {
         console.error("Error adding notification:", error);

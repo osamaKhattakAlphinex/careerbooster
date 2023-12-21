@@ -3,7 +3,7 @@ import { trashIcon } from "@/helpers/iconsProvider";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function DeleteNotification({ notificationid }: any) {
+export default function DeleteNotification({ notificationid, fetchData }: any) {
   const router = useRouter();
   const [error, setError] = useState("");
   const [data, setData] = useState([]);
@@ -37,20 +37,7 @@ export default function DeleteNotification({ notificationid }: any) {
       router.push("/admin/notifications");
     }
   };
-  const fetchData = async () => {
-    try {
-      const response = await fetch("/api/notifications");
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const result = await response.json();
 
-      setData(result.result);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setError("Error fetching data. Please try again.");
-    }
-  };
   // console.log(data);
 
   return (

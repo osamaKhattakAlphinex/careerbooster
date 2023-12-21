@@ -5,6 +5,7 @@ export default function UpdateNotification({
   onClick,
   notificationid,
   setSelectedNotificationId,
+  fetchData,
 }: any) {
   const [formData, setFormData] = useState({
     sender: "",
@@ -12,34 +13,35 @@ export default function UpdateNotification({
     message: "",
   });
   const [error, setError] = useState("");
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response: any = await axios.get(`/api/notifications`, {
-          params: {
-            id: notificationid,
-          },
+
+  const notificationData = async () => {
+    try {
+      const response: any = await axios.get(`/api/notifications`, {
+        params: {
+          id: notificationid,
+        },
+      });
+
+      const result = response.data.result;
+      console.log(result);
+
+      // Check if the result is valid and contains necessary data
+      if (result) {
+        const { sender, title, message } = result;
+        setFormData({
+          sender: sender || "",
+          title: title || "",
+          message: message || "",
         });
-
-        const result = response.data.result;
-        console.log(result);
-
-        // Check if the result is valid and contains necessary data
-        if (result) {
-          const { sender, title, message } = result;
-          setFormData({
-            sender: sender || "",
-            title: title || "",
-            message: message || "",
-          });
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
       }
-    };
-
-    fetchData();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  useEffect(() => {
+    notificationData();
   }, [notificationid]);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -55,6 +57,7 @@ export default function UpdateNotification({
       if (response.ok) {
         console.log("Notification updated successfully");
         setSelectedNotificationId(null);
+        fetchData();
       }
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -171,8 +174,17 @@ export default function UpdateNotification({
                 </div>
               </div>
               <button
+                disabled={
+                  (formData.message && formData.title && formData.sender) === ""
+                    ? true
+                    : false
+                }
                 type="submit"
-                className="border border-gray-300 inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className={`border border-gray-300 inline-flex items-center  hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ${
+                  (formData.message && formData.title && formData.sender) === ""
+                    ? "bg-gray-400"
+                    : "bg-primary-700"
+                }`}
               >
                 <svg
                   className="mr-1 -ml-1 w-6 h-6"
