@@ -59,9 +59,9 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
           >
             {bellIcon}
           </button>
-          <div className="bg-black">
+          {/* <div className="bg-black">
             <ThemeChanger />
-          </div>
+          </div> */}
         </div>
       </div>
 
