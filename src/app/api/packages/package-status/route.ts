@@ -1,4 +1,5 @@
 import User from "@/db/schemas/User";
+import UserPackage from "@/db/schemas/UserPackage";
 import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
 
@@ -7,7 +8,7 @@ export async function GET(request: any) {
     await startDB();
     const url = new URL(request.url);
     const email = url?.searchParams.get("email");
-    if (email) {
+    if (email && email.length > 0) {
       const packages = await User.find({ email });
       const packageStatus = packages[0].userPackage ? true : false;
       if (!packageStatus) {
@@ -21,9 +22,12 @@ export async function GET(request: any) {
         { status: 200 }
       );
     } else {
+      const packages = await UserPackage.find({ status: "active" }).sort({
+        amount: 1,
+      });
       return NextResponse.json(
-        { success: false, result: "email is not present in query" },
-        { status: 404 }
+        { success: true, result: packages },
+        { status: 200 }
       );
     }
   } catch (error) {

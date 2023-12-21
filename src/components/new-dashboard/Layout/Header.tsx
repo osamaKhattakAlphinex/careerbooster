@@ -5,6 +5,7 @@ import Modal from "@/components/Modal";
 import { bellIcon } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
 import { useSelector } from "react-redux";
+import ThemeChanger from "@/components/themeSwitcher";
 interface HeaderProps {
   children?: ReactNode;
 }
@@ -29,6 +30,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     "/linkedin-generator/job-description": "Job Description Generator",
     "/linkedin-generator/keywords": "Keyword Generator",
     "/change-current-password": "Change Password",
+    "/billing": "Billing Detail",
     "/review-resume-bot": "Review Your Resume By AI",
 
     // Add more routes as needed
@@ -57,6 +59,9 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
           >
             {bellIcon}
           </button>
+          {/* <div className="bg-black">
+            <ThemeChanger />
+          </div> */}
         </div>
       </div>
 

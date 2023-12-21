@@ -1,46 +1,8 @@
-"use client";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 const Footer = () => {
-  const pathname: any = usePathname();
-  const pagesArray = [
-    "/admin",
-    "/dashboard",
-    "/cover-letter-generator",
-    "/resume-builder",
-    "/linkedin-generator",
-    "/profile-review",
-    "/email-bot",
-    "/consulting-bids-bot",
-    "/subscribe",
-    "/subscribed",
-    "/career-coach",
-    "/linkedin-generator/headline",
-    "/linkedin-generator/about",
-    "/linkedin-generator/job-description",
-    "/linkedin-generator/keywords",
-    "/change-current-password",
-    "/review-resume-bot",
-  ];
-  if (
-    pathname === "/login" ||
-    pathname === "/register" ||
-    pagesArray?.includes(pathname)
-  )
-    return <></>;
-
-  // List of routes or folders where you want to exclude the layout
-  const excludedRoutes = ["/new-dashboard", "/resume-builder-2"];
-  // Check if the current route is in the excluded list
-  const excludeLayout = excludedRoutes.some((route) => pathname === route);
-  if (excludeLayout) {
-    // Return only the children without the layout
-    return <></>;
-  }
-
   return (
     <>
       <footer className="footer bg-striped pt-10 pt-lg-15">
@@ -111,36 +73,21 @@ const Footer = () => {
                 </div>
                 <div className="col-md-4 col-lg-4">
                   <div className="footer-widget text-center text-md-start">
-                    <h6 className="theme-text-2 mb-4">Get connected</h6>
-                    {/* <form>
-                    <div className="input-group">
-                      <input
-                        type="email"
-                        className="form-control form-control-2"
-                        placeholder="Enter your email"
-                      />
-                      <button
-                        className="btn btn-primary-dark px-4"
-                        type="button"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          width="24"
-                          height="24"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1.5"
-                            d="m4.031 8.917 15.477-4.334a.5.5 0 0 1 .616.617l-4.333 15.476a.5.5 0 0 1-.94.067l-3.248-7.382a.5.5 0 0 0-.256-.257L3.965 9.856a.5.5 0 0 1 .066-.94v0Z"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </form> */}
+                    <h6 className="theme-text-2 mb-4">Contact Us</h6>
+                    <ul className="link-list list-unstyled mb-0">
+                      <li>
+                        <Link href="">
+                          23 The Atria 219 Bath Road Slough SL1 4BF, United
+                          Kingdom
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="">+44 7933 951034</Link>
+                      </li>
+                      <li>
+                        <Link href="">support@careerbooster.ai</Link>
+                      </li>
+                    </ul>
                     <ul className="list-unstyled d-flex flex-wrap align-center justify-center justify-md-start gap-3 social-list mb-0 mt-5">
                       <li>
                         <Link

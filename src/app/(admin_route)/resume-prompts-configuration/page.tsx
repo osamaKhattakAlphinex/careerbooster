@@ -13,7 +13,7 @@ const ResumePromptsConfiguration = () => {
   useEffect(() => {
     setPromptsLoading(true);
     // get all prompts
-    axios.get("/api/admin/prompts?type=resume").then((res) => {
+    axios.get("/api/prompts?type=resume").then((res) => {
       setPromptsLoading(false);
       setPrompts(res.data.prompts);
     });
@@ -22,7 +22,7 @@ const ResumePromptsConfiguration = () => {
     if (name) {
       setUpdating(name);
       axios
-        .post("/api/admin/prompts", {
+        .post("/api/prompts", {
           type: "resume",
           name: name,
           value: val,

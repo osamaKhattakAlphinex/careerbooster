@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import "@/app/plugins.css";
 import "@/app/style.css";
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 interface Props {
   children: ReactNode;
 }
@@ -16,8 +17,9 @@ export default async function GuestLayout({ children }: Props) {
 
   return (
     <>
-      
+      <Header />
       {children}
+      <Footer />
     </>
   );
 }

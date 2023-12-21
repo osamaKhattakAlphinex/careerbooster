@@ -11,18 +11,16 @@ import {
   setIsLoading,
   setUserData,
 } from "@/store/userDataSlice";
-import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "../LimitCard";
 import axios from "axios";
 import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
-import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
 import LinkedInJDCardSingle from "./LinkedInJDCardSingle";
+import { makeid } from "@/helpers/makeid";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
-  const [jobDesc, setJobDesc] = useState<string>("");
   // local States
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
@@ -89,6 +87,7 @@ const SubJDGenerator = () => {
 
       let tempText = "";
       for (const [index, experience] of experiences.entries()) {
+        let dataForSaving = "";
         let html = "";
         html += `<h4><strong>${experience?.jobTitle}</strong></h4>`;
         html += `<h5>${experience?.company} | ${experience?.cityState} ${experience?.country}</h5>`;
@@ -100,19 +99,23 @@ const SubJDGenerator = () => {
             : experience?.toMonth + " " + experience?.toYear
         }</p>`;
         html += `<p>`;
-
         setStreamedData((prev) => prev + html);
         tempText += html;
+        dataForSaving += html;
         setMsgLoading(true);
+        const jobDescriptionId = makeid();
+        const obj: any = {
+          jobDescriptionId: jobDescriptionId,
+          email: session?.user?.email,
+          trainBotData: {
+            userEmail: userData.email,
+            fileAddress: userData.uploadedResume.fileName,
+          },
+          experience: experience,
+        };
         const res: any = await fetch("/api/linkedInBots/jdGeneratorSingle", {
           method: "POST",
-          body: JSON.stringify({
-            experience: experience,
-            trainBotData: {
-              userEmail: userData.email,
-              fileAddress: userData.defaultResumeFile,
-            },
-          }),
+          body: JSON.stringify(obj),
         });
 
         if (res.ok) {
@@ -124,14 +127,15 @@ const SubJDGenerator = () => {
             }
             const text = new TextDecoder().decode(value);
             setStreamedData((prev) => prev + text);
+
             tempText += text;
+            dataForSaving += text;
           }
         }
         setStreamedData((prev) => prev + `</p> <br /> `);
         setMsgLoading(false);
+        await saveToDB(obj, dataForSaving);
       }
-
-      await saveToDB(tempText);
 
       fetch("/api/users/updateUserLimit", {
         method: "POST",
@@ -173,24 +177,19 @@ const SubJDGenerator = () => {
     }
   };
 
-  const saveToDB = async (tempText: string) => {
-    try {
-      const response: any = await axios.post("/api/users/updateUserData", {
-        data: {
-          email: session?.user?.email,
-          results: {
-            ...userData.results,
-            jobDescription: tempText,
-          },
-        },
-      });
-      const res = await response.json();
-      if (res.success) {
-        console.log("Keywords saved to DB");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const saveToDB = async (obj: any, text: any) => {
+    const id = obj?.jobDescriptionId;
+    const email = obj?.email;
+    const payload: any = {
+      id,
+      email,
+      text,
+    };
+
+    await fetch("/api/linkedInBots/jdGeneratorSingle/linkedInJobDescription", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
   };
 
   const getUserDataIfNotExists = async () => {

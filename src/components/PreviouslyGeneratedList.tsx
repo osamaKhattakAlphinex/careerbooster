@@ -3,8 +3,7 @@ import { searchIcon } from "@/helpers/iconsProvider";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, FreeMode } from "swiper/modules";
-// import './styles.css';
+import { Navigation } from "swiper/modules";
 
 type Props = {
   dataSource: string;
@@ -32,8 +31,7 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
           {dataSource === "resume" && "recent Resume"}
           {dataSource === "linkedInHeadlines" && "recent Headlines"}
           {dataSource === "linkedInAbouts" && "recent Abouts"}
-          {dataSource === "linkedInJobDescriptions" &&
-            "recent Descriptions"}
+          {dataSource === "linkedInJobDescriptions" && "recent Descriptions"}
           {dataSource === "linkedInKeywords" && "recent Keywords"}
         </h1>
         <div className="relative lg:w-[213px] w-[120px] flex">
@@ -87,18 +85,6 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
             })}
         </Swiper>
       </div>
-
-      {/* <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-        <SwiperSlide className="border-2">Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
-      </Swiper> */}
     </div>
   );
 };

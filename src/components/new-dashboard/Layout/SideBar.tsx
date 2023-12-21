@@ -29,6 +29,7 @@ const items = [
   { icon: deviceTablet, text: "Cover Letters", url: "/cover-letter-generator" },
   { icon: userGroup, text: "LinkedIn Tool", url: "/linkedin-generator" },
   { icon: inboxArrowDown, text: "Email Bot", url: "/email-bot" },
+  { icon: dollarIcon, text: "Billing Detail", url: "/billing" },
   { icon: dollarIcon, text: "Consulting Bot", url: "/consulting-bids-bot" },
   { icon: userCircle, text: "Profile", url: "/profile-review" },
   { icon: keyIcon, text: "Change Password", url: "/change-current-password" },
@@ -83,7 +84,7 @@ const SideBar = () => {
             : "-translate-x-full lg:translate-x-0 " // Apply opacity only on small screens
         }`}
       >
-        <div className="block">
+        <div className="overflow-auto ">
           <div>
             <div className="px-7 py-[6px] flex">
               <div className="mr-4">

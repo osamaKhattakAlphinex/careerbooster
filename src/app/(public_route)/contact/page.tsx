@@ -41,9 +41,10 @@ export default function ContactPage() {
 
         <section className="py-15 pt-lg-30">
           <div className="container">
-            {/* <AddressCard />
-          <MapCard /> */}
             <ContactForm />
+            <br />
+            <AddressCard />
+            <MapCard />
           </div>
         </section>
       </main>
