@@ -136,7 +136,7 @@ const ChatAI = () => {
             {leftArrowIcon}
             Back
           </Link> */}
-          <div className="w-full h-[76vh] py-2 flex flex-col items-center rounded-xl single-service-bg ">
+          <div className="w-full h-[76vh] py-2 flex flex-col items-center rounded-xl dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 ">
             <section
               ref={messagesContainer}
               className="flex h-20 px-3 py-3 md:px-0 w-full flex-col gap-6 md:w-9/12  flex-1 overflow-y-scroll no-scrollbar "

@@ -349,7 +349,7 @@
   border: 1px solid #312e37;
 }
 [data-bs-theme="dark"] .yellow-text {
-  color: rgb(254 240 138);
+  color: #fef08a;
 }
 [data-bs-theme="dark"] .card-dashboard {
   border: none;

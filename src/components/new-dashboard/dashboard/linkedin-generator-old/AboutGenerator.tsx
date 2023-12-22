@@ -205,7 +205,7 @@ const AboutGenerator = ({ setAbout }: Props) => {
   }, [session?.user?.email]);
   return (
     <>
-      <div className="headline-generator single-service-card-bg py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
+      <div className="headline-generator dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950  py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
         <div
           className={`icon hidden rounded-full bg-gradient-to-b from-[#26A5C1] to-[#84E1E7] md:flex justify-center items-center w-16 h-16`}
         >
@@ -219,7 +219,9 @@ const AboutGenerator = ({ setAbout }: Props) => {
         </div>
         <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
           <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
-            <h1 className="text-[16px] card-h2 font-bold">About Generator</h1>
+            <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
+              About Generator
+            </h1>
             <span
               className={`text-black rounded-full flex justify-center items-center px-[16px] py-[6px] md:mx-2  bg-[#02FF19] text-[12px] uppercase font-bold `}
             >

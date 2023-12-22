@@ -30,13 +30,13 @@ Props) => {
   const memoizedState = useMemo(() => state, [state]);
 
   return (
-    <div className=" single-service-bg rounded-[20px] py-9 px-4 md:px-[30px] flex flex-col gap-7 ">
+    <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] py-9 px-4 md:px-[30px] flex flex-col gap-7 ">
       {/* header */}
       <div className="flex gap-2 flex-col md:flex-row  justify-between items-center">
-        <h3 className=" text-[16px] md:text-sm uppercase card-h2 font-bold">
+        <h3 className=" text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
           generate new resume
         </h3>
-        <div className="card-h2 uppercase font-bold">
+        <div className="dark:text-gray-100 text-gray-950 uppercase font-bold">
           <LimitCard
             title="AvailableCredits : "
             limit={userData?.userPackageData?.limit?.resumes_generation}
@@ -71,8 +71,10 @@ Props) => {
       {showInstruction && (
         <div className=" flex flex-col justify-start gap-[10px]">
           <div className="flex flex-row gap-2">
-            <span className="block card-h2 font-bold text-base">1.</span>
-            <p className="card-h2 text-base">
+            <span className="block dark:text-gray-100 text-gray-950 font-bold text-base">
+              1.
+            </span>
+            <p className="dark:text-gray-100 text-gray-950 text-base">
               <span className=" font-bold">Crucial!</span> Review your profile,
               and update missing details for improved results
               <Link href="#" className="text-[#615DFF] font-bold">
@@ -81,16 +83,20 @@ Props) => {
             </p>
           </div>
           <div className="flex flex-row gap-2">
-            <span className="block card-h2 font-bold text-base">2.</span>
-            <p className="card-h2 text-base">
+            <span className="block dark:text-gray-100 text-gray-950 font-bold text-base">
+              2.
+            </span>
+            <p className="dark:text-gray-100 text-gray-950 text-base">
               To edit your new Resume! and make changes or corrections,
               double-click the text or paragraph you wish to edit. Any changes
               you make will be automatically saved.
             </p>
           </div>
           <div className="flex flex-row gap-2">
-            <span className="block card-h2 font-bold text-base">3.</span>
-            <p className="card-h2 text-base">
+            <span className="block dark:text-gray-100 text-gray-950 font-bold text-base">
+              3.
+            </span>
+            <p className="dark:text-gray-100 text-gray-950 text-base">
               If you{"'"}re unsatisfied with the results, please note that we
               create your new resume using your original resume data. If any of
               your experiences are missing,
@@ -109,7 +115,7 @@ Props) => {
         <div className="w-full flex flex-col gap-[30px]">
           <label
             htmlFor="targetedJobPosition"
-            className=" font-bold card-h2 text-md md:text-[24px] flex flex-row gap-[10px]"
+            className=" font-bold dark:text-gray-100 text-gray-950 text-md md:text-[24px] flex flex-row gap-[10px]"
           >
             <Image
               src="/icon/rocket.svg"
@@ -139,7 +145,7 @@ Props) => {
             !session?.user?.email
           }
           onClick={handleGenerate}
-          className={`dashboard-outline-btn flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${
+          className={` dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${
             memoizedState.jobPosition === "" ||
             memoizedState.resumeLoading ||
             !session?.user?.email
@@ -147,7 +153,7 @@ Props) => {
               : ""
           }`}
         >
-          <span className="card-h2 text-sm">
+          <span className="dark:text-gray-100 text-gray-950 text-sm">
             {memoizedState.resumeLoading ? (
               <div className="flex">
                 <svg
@@ -176,7 +182,7 @@ Props) => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-4 card-h2 h-4"
+                  className="w-4 dark:text-gray-100 text-gray-950 h-4"
                 >
                   <path
                     strokeLinecap="round"
@@ -186,7 +192,7 @@ Props) => {
                 </svg>
 
                 <span
-                  className={`card-h2 ml-3 text-[15px] font-semibold cursor-pointer`}
+                  className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
                 >
                   Generate Resume
                 </span>

@@ -219,7 +219,7 @@ const SubHeadlineGenerator = () => {
   return (
     <>
       <PreviouslyGeneratedList {...historyProps} />
-      <div className="headline-generator single-service-card-bg py-8 px-3 lg:px-6 flex flex-col md:flex-row md:align-center gap-5 justify-center items-center rounded-[10px] mb-[20px]">
+      <div className="headline-generator dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 lg:px-6 flex flex-col md:flex-row md:align-center gap-5 justify-center items-center rounded-[10px] mb-[20px]">
         <div
           className={`icon  hidden rounded-full  bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] md:flex justify-center items-center w-16 h-16`}
         >
@@ -233,7 +233,7 @@ const SubHeadlineGenerator = () => {
         </div>
         <div className="linkedintooltext flex  flex-col lg:w-[24.0625rem] gap-2 ml-2">
           <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
-            <h1 className="text-[16px] card-h2 font-bold">
+            <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
               Headline Generator
             </h1>
             <span
@@ -260,7 +260,9 @@ const SubHeadlineGenerator = () => {
           onClick={() => handleGenerate()}
           className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
         >
-          <span className={`card-h2 text-[15px] font-semibold`}>
+          <span
+            className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}
+          >
             {msgLoading ? (
               <div className="flex">
                 <svg
@@ -288,7 +290,7 @@ const SubHeadlineGenerator = () => {
                   width={18}
                 />
                 <span
-                  className={`card-h2 ml-3 text-[15px] font-semibold cursor-pointer`}
+                  className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
                 >
                   Generate Headline
                 </span>
@@ -306,7 +308,7 @@ const SubHeadlineGenerator = () => {
             </span>
           </h1>
           <div
-            className="font-sans whitespace-pre-wrap card-h2 break-words"
+            className="font-sans whitespace-pre-wrap dark:text-gray-100 text-gray-950 break-words"
             ref={componentRef}
             // style={{ textW: "auto" }}
           >
@@ -324,7 +326,7 @@ const SubHeadlineGenerator = () => {
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                className="w-4 h-4 card-h2"
+                className="w-4 h-4 dark:text-gray-100 text-gray-950"
               >
                 <path
                   stroke-linecap="round"
@@ -333,7 +335,7 @@ const SubHeadlineGenerator = () => {
                 />
               </svg>
 
-              <span className="card-h2 text-[15px] font-semibold">
+              <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                 {msgLoading
                   ? "Please wait..."
                   : isHeadlineCopied

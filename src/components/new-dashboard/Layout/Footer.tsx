@@ -41,25 +41,25 @@ const Footer = () => {
      `}
     >
       <div className="flex justify-between h-[52px] items-end border-t border-[#312E37]">
-        <div className="card-h2 h-7 flex items-center flex-wrap gap-[10px] lg:gap-[22px]  lg:text-[14px] text-[10px]">
+        <div className="dark:text-gray-100 text-gray-950 h-7 flex items-center flex-wrap gap-[10px] lg:gap-[22px]  lg:text-[14px] text-[10px]">
           2023 © CareerAi
         </div>
         <div className="flex lg:gap-[22px] gap-[10px] items-center">
           <Link
             href={"/terms-and-conditions"}
-            className="card-h2 no-underline lg:text-[14px] text-[10px]"
+            className="dark:text-gray-100 text-gray-950 no-underline lg:text-[14px] text-[10px]"
           >
             Terms use
           </Link>
           <Link
             href={"/privacy-policy"}
-            className="card-h2 no-underline lg:text-[14px] text-[10px]"
+            className="dark:text-gray-100 text-gray-950 no-underline lg:text-[14px] text-[10px]"
           >
             Privacy Policy
           </Link>
           <Link
             href={"/contact"}
-            className="card-h2 no-underline lg:text-[14px] text-[10px]"
+            className="dark:text-gray-100 text-gray-950 no-underline lg:text-[14px] text-[10px]"
           >
             Contact Us
           </Link>

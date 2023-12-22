@@ -188,7 +188,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
               </svg>
 
               <div className="flex flex-col gap-[3px]">
-                <h2 className="card-h2 text-[16px] font-semibold">
+                <h2 className="dark:text-gray-100 text-gray-950d text-[16px] font-semibold">
                   Drag and drop file here
                 </h2>
                 <p className="text-[#312E37] text-[14px]">
@@ -200,7 +200,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                   fileUploading && "!bg-black"
                 }`}
               >
-                <span className="card-h2 text-[15px] font-semibold">
+                <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                   {fileUploading ? "Uploading..." : "Browse Files"}
                 </span>
                 <input
@@ -227,7 +227,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
           />
         )}
         {loadingFiles ? (
-          <p className="card-h2">Loading Files...</p>
+          <p className="dark:text-gray-100 text-gray-950">Loading Files...</p>
         ) : (
           <div className="flex flex-col gap-4 mt-[30px]">
             <span className="text-sm text-[#615DFF]  uppercase font-bold">
@@ -238,7 +238,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                 fileList.map((file: string, i: number) => (
                   <li key={i} className="flex">
                     <label
-                      className="flex gap-3 mt-2   items-center rounded-full border-[1px] border-[#353672] px-3 lg:px-6 lg:py-3  cursor-pointer lg:text-[15px] text-[11px] card-h2"
+                      className="flex gap-3 mt-2   items-center rounded-full border-[1px] border-[#353672] px-3 lg:px-6 lg:py-3  cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950"
                       htmlFor={`file_${i}`}
                     >
                       <input

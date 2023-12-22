@@ -1036,7 +1036,7 @@ export const trashIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-4 h-4 trash-icon "
+    className="w-4 h-4 "
   >
     <path
       strokeLinecap="round"
@@ -1196,7 +1196,7 @@ export const eyeIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-4 h-4  eye-icon"
+    className="w-4 h-4  "
   >
     <path
       strokeLinecap="round"

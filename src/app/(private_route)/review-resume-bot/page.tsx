@@ -150,18 +150,18 @@ const ReviewResumeBot = () => {
       <div className="ml-0 mt-0 lg:ml-[234px] px-[15px] lg:mb-[72px] ">
         <Link
           href="/dashboard"
-          className="ml-2 my-4 no-underline back-btn-text flex flex-row gap-2 items-center hover:opacity-80 transition-all"
+          className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-gray-100 flex flex-row gap-2 items-center hover:opacity-80 transition-all"
         >
           {leftArrowIcon}
           Back
         </Link>
-        <div className=" single-service-bg rounded-[20px] px-4 lg:px-[30px] py-8 lg:py-[41px] flex flex-col gap-5 ">
+        <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] px-4 lg:px-[30px] py-8 lg:py-[41px] flex flex-col gap-5 ">
           {/* header */}
           <div className="flex flex-col gap-2 md:flex-row  justify-between items-center">
-            <h3 className=" text-[16px] md:text-sm uppercase card-h2 font-bold">
+            <h3 className=" text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
               Get Your Resume Reviewed by AI
             </h3>
-            <div className=" text-sm card-h2 uppercase font-bold">
+            <div className=" text-sm dark:text-gray-100 text-gray-950 uppercase font-bold">
               <LimitCard
                 title="Review Availble"
                 limit={userData?.userPackageData?.limit?.review_resume}
@@ -180,7 +180,7 @@ const ReviewResumeBot = () => {
           <div className="flex flex-col gap-5 lg:px-0 ">
             <label
               htmlFor="default-radio-2"
-              className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] card-h2 w-[220px] lg:w-[290px] ${
+              className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[220px] lg:w-[290px] ${
                 selectedOption === "file" ? "border-[1px] border-[#615DFF]" : ""
               } `}
             >
@@ -221,7 +221,7 @@ const ReviewResumeBot = () => {
                   (selectedOption === "aiResume" && setSelectedResumeId === "")
                 }
                 onClick={() => handleGenerate()}
-                className={`dashboard-outline-btn flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                   (msgLoading ||
                     !session?.user?.email ||
                     !aiInputUserData ||
@@ -233,7 +233,7 @@ const ReviewResumeBot = () => {
                 }`}
               >
                 <div className="flex flex-row gap-2">
-                  <span className="card-h2 text-[15px] font-semibold">
+                  <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                     {msgLoading ? (
                       <div className="flex">
                         <svg
@@ -262,7 +262,7 @@ const ReviewResumeBot = () => {
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="w-4 h-4 card-h2"
+                          className="w-4 h-4 dark:text-gray-100 text-gray-950"
                         >
                           <path
                             strokeLinecap="round"
@@ -272,7 +272,7 @@ const ReviewResumeBot = () => {
                         </svg>
 
                         <span
-                          className={`card-h2 ml-3 text-[15px] font-semibold cursor-pointer`}
+                          className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
                         >
                           Generate
                         </span>
@@ -285,7 +285,7 @@ const ReviewResumeBot = () => {
           </div>
           {show && (
             <div className="mt-[15px]">
-              <h1 className="uppercase card-h2 font-bold text-[18px] pb-5">
+              <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-5">
                 Get Your Resume Reviewed by AI
               </h1>
               <div
@@ -293,7 +293,10 @@ const ReviewResumeBot = () => {
                   msgLoading ? "animate-pulse" : ""
                 }`}
               >
-                <div className="card-h2" ref={componentRef}>
+                <div
+                  className="dark:text-gray-100 text-gray-950"
+                  ref={componentRef}
+                >
                   <div dangerouslySetInnerHTML={{ __html: streamedData }}></div>
                 </div>
               </div>
@@ -310,7 +313,7 @@ const ReviewResumeBot = () => {
                       setSelectedResumeId === "")
                   }
                   onClick={() => handleGenerate()}
-                  className={`dashboard-outline-btn flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                     (msgLoading ||
                       !session?.user?.email ||
                       !aiInputUserData ||
@@ -321,7 +324,7 @@ const ReviewResumeBot = () => {
                     "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
                   }`}
                 >
-                  <span className="card-h2 text-[15px] font-semibold">
+                  <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                     {msgLoading ? (
                       <div className="flex">
                         <svg
@@ -350,7 +353,7 @@ const ReviewResumeBot = () => {
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="w-4 h-4 card-h2"
+                          className="w-4 h-4 dark:text-gray-100 text-gray-950"
                         >
                           <path
                             strokeLinecap="round"
@@ -359,7 +362,7 @@ const ReviewResumeBot = () => {
                           />
                         </svg>
                         <span
-                          className={`card-h2 ml-3 text-[15px] font-semibold cursor-pointer`}
+                          className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
                         >
                           Re-generate
                         </span>
@@ -373,7 +376,7 @@ const ReviewResumeBot = () => {
                       <button
                         type="button"
                         disabled={!show || msgLoading || !session?.user?.email}
-                        className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] download-pdf-btn rounded-full ${
+                        className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#37b944] border-[#b324d7] border rounded-full ${
                           !show || msgLoading || !session?.user?.email
                             ? "opacity-50 cursor-not-allowed"
                             : ""
@@ -385,7 +388,7 @@ const ReviewResumeBot = () => {
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="currentColor"
-                          className="w-6 h-6 green-text"
+                          className="w-6 h-6 dark:text-[#37b944] text-gray-950"
                         >
                           <path
                             stroke-linecap="round"
@@ -394,7 +397,7 @@ const ReviewResumeBot = () => {
                           />
                         </svg>
 
-                        <span className="green-text text-[15px] font-semibold">
+                        <span className="dark:text-[#37b944] text-gray-950 text-[15px] font-semibold">
                           Download in PDF
                         </span>
                       </button>
@@ -414,7 +417,7 @@ const ReviewResumeBot = () => {
                         setSelectedResumeId === "")
                     }
                     onClick={() => copyCoverLetter(streamedData)}
-                    className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] copy-to-clip-board-btn rounded-full ${
+                    className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border border-[#b324d7] rounded-full ${
                       msgLoading ||
                       !session?.user?.email ||
                       !aiInputUserData ||
@@ -432,7 +435,7 @@ const ReviewResumeBot = () => {
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="currentColor"
-                      className="w-4 h-4 card-h2"
+                      className="w-4 h-4 dark:text-gray-100 text-gray-950"
                     >
                       <path
                         stroke-linecap="round"
@@ -441,7 +444,7 @@ const ReviewResumeBot = () => {
                       />
                     </svg>
 
-                    <span className="card-h2 text-[15px] font-semibold">
+                    <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                       {msgLoading
                         ? "Please wait..."
                         : isCoverLetterCopied
