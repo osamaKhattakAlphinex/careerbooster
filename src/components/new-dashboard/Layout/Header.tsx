@@ -41,27 +41,27 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
   return (
     <nav
-      className={`header-bg py-[12px] px-4 ml-0 sticky top-0   z-10     
+      className={`dark:bg-gradient-to-l from-[#340e53] to-[#000533]  bg-[#e4e9f7] py-[12px] px-4 ml-0 sticky top-0   z-10     
       ${pagesArray?.includes(pathname) ? "m-5" : "lg:ml-[234px]"} 
       ${pathname === "/subscribed" && "hidden"} 
       `}
     >
       <div className="w-full rounded-lg flex justify-between sm:justify-between items-center">
-        <h1 className="headText mb-0 rounded-[14px] text-[14px] card-h2 font-bold uppercase">
+        <h1 className="headText mb-0 rounded-[14px] text-[14px] dark:text-white text-gray-950 font-bold uppercase">
           {currentRouteDisplayName}
         </h1>
         <div className="flex">
           <button
             onClick={() => setIsModalOpen(!isModalOpen)}
-            className={` flex justify-center mr-3 items-center header-mode-btn w-[40px] h-[40px] rounded-full capitalize  ${
+            className={` dark:text-white text-gray-950 flex justify-center mr-3 items-center header-mode-btn w-[40px] h-[40px] rounded-full capitalize  ${
               pathname === "/subscribe" ? "hidden" : ""
             } ${isModalOpen && "header-mode-btn-click"} `}
           >
             {bellIcon}
           </button>
-          {/* <div className="bg-black">
+          <div className="flex justify-center items-center ">
             <ThemeChanger />
-          </div> */}
+          </div> 
         </div>
       </div>
 

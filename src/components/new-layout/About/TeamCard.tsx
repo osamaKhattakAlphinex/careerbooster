@@ -35,10 +35,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">CEO & Founder</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <Link
-                    href="https://www.facebook.com/mubasherhassan.k"
-                    target="_blank"
-                  >
+                  <Link href="https://www.facebook.com/mubasherhassan.k">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -62,10 +59,7 @@ const TeamCard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="https://www.linkedin.com/in/mubasherhassan/"
-                    target="_blank"
-                  >
+                  <Link href="https://www.linkedin.com/in/mubasherhassan/">
                     <svg
                       className="w-4 h-4    theme-text-2 "
                       aria-hidden="true"
@@ -103,10 +97,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">CTO & Co-Founder</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <Link
-                    href="https://www.facebook.com/m.suleman.ibrahim.k"
-                    target="_blank"
-                  >
+                  <Link href="https://www.facebook.com/m.suleman.ibrahim.k">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -130,10 +121,7 @@ const TeamCard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="https://www.linkedin.com/in/suleman-ibrahim/"
-                    target="_blank"
-                  >
+                  <Link href="https://www.linkedin.com/in/suleman-ibrahim/">
                     <svg
                       className="w-4 h-4    theme-text-2 "
                       aria-hidden="true"
@@ -166,10 +154,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">Team-Lead/Project Manager</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <Link
-                    href="https://www.facebook.com/profile.php?id=100086943660873"
-                    target="_blank"
-                  >
+                  <Link href="https://www.facebook.com/profile.php?id=100086943660873">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -193,10 +178,7 @@ const TeamCard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="https://www.linkedin.com/in/m-usama-butt-a9a536196/"
-                    target="_blank"
-                  >
+                  <Link href="https://www.linkedin.com/in/m-usama-butt-a9a536196/">
                     <svg
                       className="w-4 h-4    theme-text-2 "
                       aria-hidden="true"
@@ -229,10 +211,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">Full Stack Developer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <Link
-                    href="https://www.facebook.com/profile.php?id=100082069802083"
-                    target="_blank"
-                  >
+                  <Link href="https://www.facebook.com/profile.php?id=100082069802083">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -256,10 +235,7 @@ const TeamCard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="https://www.linkedin.com/in/muhammad-osama-a3210720b/"
-                    target="_blank"
-                  >
+                  <Link href="https://www.linkedin.com/in/muhammad-osama-a3210720b/">
                     <svg
                       className="w-4 h-4    theme-text-2 "
                       aria-hidden="true"
@@ -292,10 +268,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">Full Stack Developer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <Link
-                    href="https://www.facebook.com/rahmatullah.baheer.9"
-                    target="_blank"
-                  >
+                  <Link href="https://www.facebook.com/rahmatullah.baheer.9">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -315,27 +288,6 @@ const TeamCard = () => {
                         strokeWidth="1.5"
                         d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
-                    </svg>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="https://www.linkedin.com/in/rahmat-ullah-baheer-977986214/"
-                    target="_blank"
-                  >
-                    <svg
-                      className="w-4 h-4    theme-text-2 "
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      viewBox="0 0 15 15"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M7.979 5v1.586a3.5 3.5 0 0 1 3.082-1.574C14.3 5.012 15 7.03 15 9.655V15h-3v-4.738c0-1.13-.229-2.584-1.995-2.584-1.713 0-2.005 1.23-2.005 2.5V15H5.009V5h2.97ZM3 2.487a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
-                        clip-rule="evenodd"
-                      ></path>
-                      <path d="M3 5.012H0V15h3V5.012Z"></path>
                     </svg>
                   </Link>
                 </li>
@@ -355,10 +307,7 @@ const TeamCard = () => {
               <p className="fs-sm mb-2">Full Stack Developer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <Link
-                    href="https://www.facebook.com/raja.waqas.338"
-                    target="_blank"
-                  >
+                  <Link href="https://www.facebook.com/raja.waqas.338">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -382,10 +331,7 @@ const TeamCard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="https://www.linkedin.com/in/muhammad-waqas-shaukat-39b270a7/"
-                    target="_blank"
-                  >
+                  <Link href="https://www.linkedin.com/in/muhammad-waqas-shaukat-39b270a7/">
                     <svg
                       className="w-4 h-4    theme-text-2 "
                       aria-hidden="true"
