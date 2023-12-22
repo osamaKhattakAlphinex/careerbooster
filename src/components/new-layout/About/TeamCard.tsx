@@ -27,15 +27,15 @@ const TeamCard = () => {
               <Image
                 width={200}
                 height={200}
-                src="/assets/images/team/1.png"
+                src="/assets/images/team/team-1.jpg"
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
-              <h4 className="theme-text-2 mb-1">Annette Black</h4>
-              <p className="fs-sm mb-2">Digital Marketer</p>
+              <h4 className="theme-text-2 mb-1">Moe Hassan</h4>
+              <p className="fs-sm mb-2">CEO & Founder</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <Link href="#">
+                  <Link href="https://www.facebook.com/mubasherhassan.k">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -59,38 +59,28 @@ const TeamCard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#">
+                  <Link href="https://www.linkedin.com/in/mubasherhassan/">
                     <svg
+                      className="w-4 h-4    theme-text-2 "
+                      aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
-                    </svg>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 18 18"
+                      fill="currentColor"
+                      viewBox="0 0 15 15"
                     >
                       <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
-                      />
+                        fill-rule="evenodd"
+                        d="M7.979 5v1.586a3.5 3.5 0 0 1 3.082-1.574C14.3 5.012 15 7.03 15 9.655V15h-3v-4.738c0-1.13-.229-2.584-1.995-2.584-1.713 0-2.005 1.23-2.005 2.5V15H5.009V5h2.97ZM3 2.487a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
+                        clip-rule="evenodd"
+                      ></path>
+                      <path d="M3 5.012H0V15h3V5.012Z"></path>
                     </svg>
                   </Link>
                 </li>
+                {/* <li>
+                  <Link href="#">
+                  <svg className="theme-text-2 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6v0Z"></path><path stroke="currentColor" stroke-width="1.5" d="M2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12Z"></path></svg>
+                  </Link>
+                </li> */}
               </ul>
             </div>
           </div>
@@ -99,15 +89,15 @@ const TeamCard = () => {
               <Image
                 width={200}
                 height={200}
-                src="/assets/images/team/2.png"
+                src="/assets/images/team/team-2.jpg"
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
-              <h4 className="theme-text-2 mb-1">Jenny Wilson</h4>
-              <p className="fs-sm mb-2">Product Designer</p>
+              <h4 className="theme-text-2 mb-1">M. Suleman Ibrahim</h4>
+              <p className="fs-sm mb-2">CTO & Co-Founder</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <Link href="#">
+                  <Link href="https://www.facebook.com/m.suleman.ibrahim.k">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -131,35 +121,20 @@ const TeamCard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#">
+                  <Link href="https://www.linkedin.com/in/suleman-ibrahim/">
                     <svg
+                      className="w-4 h-4    theme-text-2 "
+                      aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
-                    </svg>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 18 18"
+                      fill="currentColor"
+                      viewBox="0 0 15 15"
                     >
                       <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
-                      />
+                        fill-rule="evenodd"
+                        d="M7.979 5v1.586a3.5 3.5 0 0 1 3.082-1.574C14.3 5.012 15 7.03 15 9.655V15h-3v-4.738c0-1.13-.229-2.584-1.995-2.584-1.713 0-2.005 1.23-2.005 2.5V15H5.009V5h2.97ZM3 2.487a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
+                        clip-rule="evenodd"
+                      ></path>
+                      <path d="M3 5.012H0V15h3V5.012Z"></path>
                     </svg>
                   </Link>
                 </li>
@@ -171,15 +146,15 @@ const TeamCard = () => {
               <Image
                 width={200}
                 height={200}
-                src="/assets/images/team/3.png"
+                src="/assets/images/team/team-3.jpg"
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
-              <h4 className="theme-text-2 mb-1">Guy Hawkins</h4>
-              <p className="fs-sm mb-2">Marketing Coordinator</p>
+              <h4 className="theme-text-2 mb-1">Usama Butt</h4>
+              <p className="fs-sm mb-2">Team-Lead/Project Manager</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <Link href="#">
+                  <Link href="https://www.facebook.com/profile.php?id=100086943660873">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -203,23 +178,40 @@ const TeamCard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#">
+                  <Link href="https://www.linkedin.com/in/m-usama-butt-a9a536196/">
                     <svg
+                      className="w-4 h-4    theme-text-2 "
+                      aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      viewBox="0 0 15 15"
                     >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
+                      <path
+                        fill-rule="evenodd"
+                        d="M7.979 5v1.586a3.5 3.5 0 0 1 3.082-1.574C14.3 5.012 15 7.03 15 9.655V15h-3v-4.738c0-1.13-.229-2.584-1.995-2.584-1.713 0-2.005 1.23-2.005 2.5V15H5.009V5h2.97ZM3 2.487a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
+                        clip-rule="evenodd"
+                      ></path>
+                      <path d="M3 5.012H0V15h3V5.012Z"></path>
                     </svg>
                   </Link>
                 </li>
+              </ul>
+            </div>
+          </div>
+          <div className="col" data-aos="fade-up-sm" data-aos-delay="200">
+            <div className="team-card text-center">
+              <Image
+                width={200}
+                height={200}
+                src="/assets/images/team/team-4.jpg"
+                alt=""
+                className="img-fluid team-member-img mb-6"
+              />
+              <h4 className="theme-text-2 mb-1">M. Osama Ahmad</h4>
+              <p className="fs-sm mb-2">Full Stack Developer</p>
+              <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <Link href="#">
+                  <Link href="https://www.facebook.com/profile.php?id=100082069802083">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -230,7 +222,71 @@ const TeamCard = () => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="1.5"
-                        d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
+                        d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
+                      />
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                        d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
+                      />
+                    </svg>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="https://www.linkedin.com/in/muhammad-osama-a3210720b/">
+                    <svg
+                      className="w-4 h-4    theme-text-2 "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 15 15"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M7.979 5v1.586a3.5 3.5 0 0 1 3.082-1.574C14.3 5.012 15 7.03 15 9.655V15h-3v-4.738c0-1.13-.229-2.584-1.995-2.584-1.713 0-2.005 1.23-2.005 2.5V15H5.009V5h2.97ZM3 2.487a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
+                        clip-rule="evenodd"
+                      ></path>
+                      <path d="M3 5.012H0V15h3V5.012Z"></path>
+                    </svg>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="col" data-aos="fade-up-sm" data-aos-delay="150">
+            <div className="team-card text-center">
+              <Image
+                width={200}
+                height={200}
+                src="/assets/images/team/team-5.png"
+                alt=""
+                className="img-fluid team-member-img mb-6"
+              />
+              <h4 className="theme-text-2 mb-1">Rehmat Ullah</h4>
+              <p className="fs-sm mb-2">Full Stack Developer</p>
+              <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
+                <li>
+                  <Link href="https://www.facebook.com/rahmatullah.baheer.9">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 18 18"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                        d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
+                      />
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                        d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
                       />
                     </svg>
                   </Link>
@@ -243,15 +299,15 @@ const TeamCard = () => {
               <Image
                 width={200}
                 height={200}
-                src="/assets/images/team/4.png"
+                src="/assets/images/team/team-6.jpeg"
                 alt=""
                 className="img-fluid team-member-img mb-6"
               />
-              <h4 className="theme-text-2 mb-1">Jane Cooper</h4>
-              <p className="fs-sm mb-2">Digital Creator</p>
+              <h4 className="theme-text-2 mb-1">Muhammad Waqas</h4>
+              <p className="fs-sm mb-2">Full Stack Developer</p>
               <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
                 <li>
-                  <Link href="#">
+                  <Link href="https://www.facebook.com/raja.waqas.338">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -275,323 +331,20 @@ const TeamCard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#">
+                  <Link href="https://www.linkedin.com/in/muhammad-waqas-shaukat-39b270a7/">
                     <svg
+                      className="w-4 h-4    theme-text-2 "
+                      aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
-                    </svg>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 18 18"
+                      fill="currentColor"
+                      viewBox="0 0 15 15"
                     >
                       <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
-                      />
-                    </svg>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="50">
-            <div className="team-card text-center">
-              <Image
-                width={200}
-                height={200}
-                src="/assets/images/team/5.png"
-                alt=""
-                className="img-fluid team-member-img mb-6"
-              />
-              <h4 className="theme-text-2 mb-1">Courtney Henry</h4>
-              <p className="fs-sm mb-2">Web Designer</p>
-              <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 18 18"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
-                      />
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
-                      />
-                    </svg>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
-                    </svg>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 18 18"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
-                      />
-                    </svg>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="100">
-            <div className="team-card text-center">
-              <Image
-                width={200}
-                height={200}
-                src="/assets/images/team/6.png"
-                alt=""
-                className="img-fluid team-member-img mb-6"
-              />
-              <h4 className="theme-text-2 mb-1">Ralph Edwards</h4>
-              <p className="fs-sm mb-2">Software Engineer</p>
-              <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 18 18"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
-                      />
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
-                      />
-                    </svg>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
-                    </svg>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 18 18"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
-                      />
-                    </svg>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="150">
-            <div className="team-card text-center">
-              <Image
-                width={200}
-                height={200}
-                src="/assets/images/team/7.png"
-                alt=""
-                className="img-fluid team-member-img mb-6"
-              />
-              <h4 className="theme-text-2 mb-1">Arlene McCoy</h4>
-              <p className="fs-sm mb-2">Lead Developer</p>
-              <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 18 18"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
-                      />
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
-                      />
-                    </svg>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
-                    </svg>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 18 18"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
-                      />
-                    </svg>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="200">
-            <div className="team-card text-center">
-              <Image
-                width={200}
-                height={200}
-                src="/assets/images/team/8.png"
-                alt=""
-                className="img-fluid team-member-img mb-6"
-              />
-              <h4 className="theme-text-2 mb-1">Devon Lane</h4>
-              <p className="fs-sm mb-2">President of Sales</p>
-              <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 18 18"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6Z"
-                      />
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M8.25 15.75V9c0-1.641.375-3 3-3m-4.5 3.75h4.5"
-                      />
-                    </svg>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
-                    </svg>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 18 18"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M17.25 2.258s-1.514.894-2.355 1.147A3.36 3.36 0 0 0 9 5.655v.75a7.995 7.995 0 0 1-6.75-3.397s-3 6.75 3.75 9.75a8.73 8.73 0 0 1-5.25 1.5c6.75 3.75 15 0 15-8.625a3.34 3.34 0 0 0-.06-.623c.765-.754 1.56-2.752 1.56-2.752Z"
-                      />
+                        fill-rule="evenodd"
+                        d="M7.979 5v1.586a3.5 3.5 0 0 1 3.082-1.574C14.3 5.012 15 7.03 15 9.655V15h-3v-4.738c0-1.13-.229-2.584-1.995-2.584-1.713 0-2.005 1.23-2.005 2.5V15H5.009V5h2.97ZM3 2.487a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
+                        clip-rule="evenodd"
+                      ></path>
+                      <path d="M3 5.012H0V15h3V5.012Z"></path>
                     </svg>
                   </Link>
                 </li>

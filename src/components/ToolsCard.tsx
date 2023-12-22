@@ -23,7 +23,7 @@ const ToolsCard = ({
   action: string;
 }) => {
   return (
-    <div className="lg:w-[32%] flex mb-8 card-dashboard p-3">
+    <div className="lg:w-[32%] flex mb-8 dark:bg-transparent dark:border-none dark:rounded-none rounded-[20px] bg-[#ffffff94] border-[#b6b8b6]  p-3">
       <Link href={link} className="flex no-underline text-white">
         <div className="mr-4">
           <div
@@ -51,10 +51,10 @@ const ToolsCard = ({
           </div>
         </div>
         <div className="">
-          <h2 className="text-[16px] card-dashboard-h1 font-semibold">
+          <h2 className="text-[16px] dark:text-white text-gray-950 font-semibold">
             {title}
           </h2>
-          <p className=" card-dashboard-p mt-[6px] font-normal text-[14px] pr-2">
+          <p className=" dark:text-[#959595]  text-gray-950 mt-[6px] font-normal text-[14px] pr-2">
             {description}
           </p>
           <Link

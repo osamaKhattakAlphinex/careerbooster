@@ -12,7 +12,7 @@ const ThemeChanger = () => {
       {theme === "dark" ? (
         <button
           onClick={() => setTheme("light")}
-          className="grid place-content-center text-white"
+          className="grid place-content-center dark:text-white text-gray-950"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +32,7 @@ const ThemeChanger = () => {
       ) : (
         <button
           onClick={() => setTheme("dark")}
-          className="grid place-content-center text-white"
+          className="grid place-content-center dark:text-white text-gray-950"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

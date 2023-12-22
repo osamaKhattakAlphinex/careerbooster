@@ -1,14 +1,22 @@
 "use client";
+import DataTable, { TableAction } from "@/components/DataTable";
 import AddNotification from "@/components/admin/notifications/AddNotification";
 import DeleteNotification from "@/components/admin/notifications/DeleteNotification";
 import ReadNotification from "@/components/admin/notifications/ReadNotification";
 import UpdateNotification from "@/components/admin/notifications/UpdateNotification";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
+import { createColumnHelper } from "@tanstack/react-table";
 import { fetchData } from "next-auth/client/_utils";
 import Link from "next/link";
 import { title } from "process";
 import { useEffect, useState } from "react";
+
+type Notification = {
+  sender: string;
+  title: string;
+  message: string;
+};
 
 export default function NotificationsPage() {
   const [error, setError] = useState("");
@@ -52,6 +60,48 @@ export default function NotificationsPage() {
         });
     }
   };
+
+  // const columnHelper = createColumnHelper<Notification>();
+
+  // const columns = [
+  //   columnHelper.accessor("sender", {
+  //     id: "sender",
+  //     header: () => "Sender Name",
+  //     cell: (info) => info.renderValue(),
+  //   }),
+  //   columnHelper.accessor("title", {
+  //     id: "title",
+  //     header: () => "Message Subject",
+  //     cell: (info) => info.renderValue(),
+  //   }),
+  //   columnHelper.accessor("message", {
+  //     id: "message",
+  //     header: () => "Message",
+  //     cell: (info) => info.renderValue(),
+  //   }),
+  // ];
+
+  // const actions: TableAction[] = [
+  //   {
+  //     name: "view",
+  //     type: "component",
+  //     element: (notificationid: any) => (
+  //       <UpdateNotification notificationid={notificationid} />
+  //     ),
+  //     styles:
+  //       "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline",
+  //     icon: "",
+  //     props: {
+  //       onClick: () => {
+  //         setSelectedNotificationId(null);
+  //       },
+
+  //       setSelectedNotificationId,
+  //       fetchData,
+  //     },
+  //   },
+  // ];
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -59,22 +109,21 @@ export default function NotificationsPage() {
   return (
     <>
       <section className=" mb-10">
-        <div className="my-5 ml-10">
-          <Link
-            href="/admin"
-            className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
-          >
-            {leftArrowIcon}
-            Dashboard
-          </Link>
-        </div>
+        {/* <DataTable
+          actions={actions}
+          data={data}
+          source="notifications"
+          loading={loading}
+          columns={columns}
+        /> */}
+
         <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
           {/* <!-- Start coding here --> */}
           <div className="flex flex-row ml-auto">
             <button
               onClick={() => setAddModalVisible(true)}
               type="button"
-              className="d-flex mb-4 btn  theme-outline-btn pb-[20px] ml-auto"
+              className="mb-4 flex dark:bg-[#11121c] dark:border-[#e6f85e] border-2 dark:text-[#e6f85e] border-[#6a4dff] text-[#6a4dff]  rounded-2 py-3 px-4 ml-auto"
             >
               <svg
                 className="h-3.5 w-3.5 mr-2"
