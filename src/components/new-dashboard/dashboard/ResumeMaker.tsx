@@ -76,11 +76,11 @@ const cardDetail = [
     title: "Career Coach",
     description:
       "Empower your career with AI-driven insights by our career coach for strategic moves.",
-    link: "/",
+    link: "/career-coach",
     icon: chatbot,
     bgColor1: "from-teal-600",
     bgColor2: "to-green-400",
-    action: "coming soon",
+    action: "launch",
   },
   {
     title: "AI Job Finder",
