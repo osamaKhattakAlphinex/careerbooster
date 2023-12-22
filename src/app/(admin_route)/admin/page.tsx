@@ -36,7 +36,7 @@ const AdminDashboard = () => {
   return (
     <>
       <div className="flex flex-col justify-start items-start gap-4">
-        <h1 className=" text-lg">Users</h1>
+        <h1 className="text-lg  dark:text-white/70 text-black/70">Users</h1>
         <div
           key="1"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
@@ -120,7 +120,9 @@ const AdminDashboard = () => {
       <div className="my-4"></div>
 
       <div className="flex flex-col justify-start items-start gap-4">
-        <h1 className=" text-lg">LinkedIn Users</h1>
+        <h1 className=" text-lg  dark:text-white/70 text-black/70">
+          LinkedIn Users
+        </h1>
         <div
           key="1"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
