@@ -59,13 +59,15 @@ const SideBar = () => {
       {/* Mobile Menu Button */}
 
       <div
-        className={`dark:bg-[#18181B] bg-gray-100 fixed px-6 top-0 w-[234px]       flex items-center transition-all duration-200   ${
-          isOpen ? "dark:bg-[#18181B] bg-gray-100" : ""
+        className={`dark:bg-[#18181B] bg-[e4E9F7] fixed px-6 top-0 w-[234px] z-[1000000000]       flex items-center transition-all duration-200    ${
+          isOpen
+            ? "dark:bg-[rgb(24,24,27)] bg-gray-100 "
+            : "dark:lg:bg-[#18181B] dark:bg-transparent lg:bg-gray-100 bg-[E4E9F7]"
         }`}
       >
         <Image src={logo} alt="" className="w-35 h-16" />
         <div
-          className="w-5 h-5 text-zinc-600 lg:hidden ml-4 cursor-pointer"
+          className="w-5 h-5 text-zinc-600 lg:hidden flex ml-4 cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
           {/* Use your icon here for mobile menu toggle */}
@@ -73,13 +75,13 @@ const SideBar = () => {
         </div>
       </div>
       <div
-        className={`fixed w-[234px]  top-0 flex justify-center dark:bg-[#18181B] bg-gray-100  mt-16 overflow-y-auto  transition-all ${
+        className={`fixed w-[234px] h-screen z-[1000000000]  top-0 flex justify-center dark:bg-[#18181B] bg-gray-100  mt-16  transition-all ${
           isOpen
             ? "translate-x-0 lg:translate-x-0"
             : "-translate-x-full lg:translate-x-0 " // Apply opacity only on small screens
         }`}
       >
-        <div className="overflow-auto ">
+        <div className=" ">
           <div>
             <div className="px-7 py-[6px] flex">
               <div className="mr-4">

@@ -322,7 +322,7 @@
   border: 2px solid #27272a;
 }
 [data-bs-theme="dark"] .card-download-btn {
-  background: rgb(24 24 27 / var(--tw-bg-opacity));
+  background: #18181b;
 }
 [data-bs-theme="dark"] .eye-icon {
   color: rgb(163 163 163);

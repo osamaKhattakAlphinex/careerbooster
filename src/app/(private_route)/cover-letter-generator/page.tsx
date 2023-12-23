@@ -322,7 +322,7 @@ export default function CoverLetterPage() {
           {/* <AiGeneratedCoverLetters /> */}
           <Link
             href="/dashboard"
-            className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-gray-100 flex flex-row gap-2 items-center hover:opacity-80 transition-all"
+            className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center hover:opacity-80 transition-all"
           >
             {leftArrowIcon}
             Back

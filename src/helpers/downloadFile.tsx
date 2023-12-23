@@ -67,7 +67,7 @@ const DownloadService = ({ componentRef, view, card, type, fileName }: any) => {
       <button
         onClick={templateCall}
         type="button"
-        className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full card-download-btn  text-green-500 border border-green-500"
+        className="lg:text-[14px] text-[12px]  lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b] bg-transparent text-green-500 border border-green-500"
       >
         Download
       </button>
