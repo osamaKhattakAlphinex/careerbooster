@@ -53,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
         <div className="flex">
           <button
             onClick={() => setIsModalOpen(!isModalOpen)}
-            className={` dark:text-white text-gray-950 flex justify-center mr-3 items-center header-mode-btn w-[40px] h-[40px] rounded-full capitalize  ${
+            className={` dark:text-gray-100 text-gray-950 flex justify-center mr-3 items-center  w-[40px] h-[40px] rounded-full capitalize  ${
               pathname === "/subscribe" ? "hidden" : ""
             } ${isModalOpen && "header-mode-btn-click"} `}
           >
