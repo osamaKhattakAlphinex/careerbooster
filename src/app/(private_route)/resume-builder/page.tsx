@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/template-1";
+import ResumeTemplate2 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_2";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -552,7 +553,13 @@ const ResumeBuilder = () => {
                   }`}
                   ref={componentRef}
                 >
-                  <ResumeTemplate1
+                  {/* <ResumeTemplate1
+                    streamedSummaryData={streamedSummaryData}
+                    streamedJDData={streamedJDData}
+                    saveResumeToDB={saveResumeToDB}
+                  /> */}
+                  <div className="my-2 h-1"></div>
+                  <ResumeTemplate2
                     streamedSummaryData={streamedSummaryData}
                     streamedJDData={streamedJDData}
                     saveResumeToDB={saveResumeToDB}
