@@ -33,6 +33,7 @@ import useTheme from "@/lib/useTheme";
 import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
 import GenerateResume from "@/components/new-dashboard/dashboard/resume-builder/GenerateNewResumeCard";
 import Link from "next/link";
+import template1 from "@/components/new-dashboard/dashboard/resume-templates/template-1";
 const ResumeBuilder = () => {
   const [theme] = useTheme();
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -66,6 +67,7 @@ const ResumeBuilder = () => {
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
+  const [template, setTemplate] = useState<string>("template-1");
 
   // Redux
   const dispatch = useDispatch();
@@ -546,26 +548,49 @@ const ResumeBuilder = () => {
             (resumeData?.name ||
               resumeData?.contact?.email ||
               resumeData?.summary) && (
-              <div className="my-10  w-[100%] bg-white border border-gray-200 rounded-lg shadow sm:p-6 ">
-                <div
-                  className={`w-full  ${
-                    resumeData.state.resumeLoading ? "animate-pulse" : ""
-                  }`}
-                  ref={componentRef}
-                >
-                  {/* <ResumeTemplate1
-                    streamedSummaryData={streamedSummaryData}
-                    streamedJDData={streamedJDData}
-                    saveResumeToDB={saveResumeToDB}
-                  /> */}
-                  <div className="my-2 h-1"></div>
-                  <ResumeTemplate2
-                    streamedSummaryData={streamedSummaryData}
-                    streamedJDData={streamedJDData}
-                    saveResumeToDB={saveResumeToDB}
-                  />
+              <>
+                <div className="mt-4 flex flex-row gap-3 justify-start items-center">
+                  <button
+                    className={`${
+                      template === "template-1" ? "bg-black text-white" : ""
+                    } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
+                    onClick={() => setTemplate("template-1")}
+                  >
+                    Template 1
+                  </button>
+                  <button
+                    className={`${
+                      template === "template-2" ? "bg-black text-white" : ""
+                    } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
+                    onClick={() => setTemplate("template-2")}
+                  >
+                    Template 2
+                  </button>
                 </div>
-              </div>
+                <div className="my-10  w-[100%] bg-white border border-gray-200 rounded-lg shadow sm:p-6 ">
+                  <div
+                    className={`w-full  ${
+                      resumeData.state.resumeLoading ? "animate-pulse" : ""
+                    }`}
+                    ref={componentRef}
+                  >
+                    {template === "template-1" && (
+                      <ResumeTemplate1
+                        streamedSummaryData={streamedSummaryData}
+                        streamedJDData={streamedJDData}
+                        saveResumeToDB={saveResumeToDB}
+                      />
+                    )}
+                    {template === "template-2" && (
+                      <ResumeTemplate2
+                        streamedSummaryData={streamedSummaryData}
+                        streamedJDData={streamedJDData}
+                        saveResumeToDB={saveResumeToDB}
+                      />
+                    )}
+                  </div>
+                </div>
+              </>
             )}
           {showPopup && (
             <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
