@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import puppeteer from "puppeteer";
+import * as puppeteerCore from "puppeteer-core";
 import chromium from "chrome-aws-lambda";
 export async function POST(req: any) {
   try {
@@ -6,7 +8,7 @@ export async function POST(req: any) {
 
     const html = formData.get("htmlToDoc");
 
-    const browser = await chromium.puppeteer.launch({
+    const browser = await puppeteerCore.launch({
       args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath,
