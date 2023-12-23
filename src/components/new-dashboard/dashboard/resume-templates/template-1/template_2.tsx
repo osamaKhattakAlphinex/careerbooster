@@ -328,7 +328,7 @@ const ResumeTemplate2 = ({
       </div>
       {/* contacts */}
       <div className="w-full">
-        <ul className="flex flex-row justify-around items-center p-4  bg-black rounded-2xl">
+        <ul className="flex flex-col md:flex-row justify-around items-center p-4  bg-black rounded-2xl">
           <li className="hover:shadow-md text-white hover:bg-gray-700 text-sm flex flex-row gap-1  items-center">
             {phoneIcon}
             <EditableField
@@ -856,14 +856,14 @@ const ResumeTemplate2 = ({
                   draggable
                 >
                   {/* start end */}
-                  <h2 className="hover:cursor-default col-span-1 text-sm font-semibold">
+                  <h2 className="hover:cursor-default text-center bg-slate-100 p-2 col-span-6 md:col-span-1 md:p-0 md:bg-transparent  text-sm font-semibold">
                     {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                     {rec?.isContinue
                       ? "Present"
                       : `${rec?.toMonth} ${rec?.toYear}`}{" "}
                   </h2>
 
-                  <div className=" col-span-5">
+                  <div className=" col-span-6 md:col-span-5">
                     {/* Title */}
                     <h2 className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-base font-bold">
                       <EditableField
@@ -1206,7 +1206,7 @@ const ResumeTemplate2 = ({
             </h3>
             {/* <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span> */}
             <ul
-              className="grid grid-cols-3 gap-2"
+              className="grid grid-cols-1 md:grid-cols-3 gap-2"
               onMouseEnter={() =>
                 !newEducation && setEducationAddButtonVisible(true)
               }
