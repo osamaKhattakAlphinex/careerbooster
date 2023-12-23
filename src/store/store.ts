@@ -1,8 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-
 import resumeReducer from "./resumeSlice";
 import registerSlice from "./registerSlice";
-import userDataSlice from "./userDataSlice";
+import userDataSlice  from "./userDataSlice";
 import coverLetterSlice from "./coverLetterSlice";
 import emailSlice from "./emailSlice";
 import consultingBidSlice from "./consultingBidSlice";
@@ -23,6 +22,7 @@ const store = configureStore({
     linkedinAbout: linkedInAboutSlice,
     linkedinJobDesc: linkedInJobDescriptionSlice,
     linkedinKeywords: linkedInKeywordsSlice,
+    
   },
 });
 

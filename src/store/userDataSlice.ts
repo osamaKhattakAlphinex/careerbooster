@@ -67,6 +67,8 @@ interface UserDataSlice {
   userPackage: "";
   userPackageData: {};
   userPackageUsed: limitObject | {};
+  
+ 
 }
 
 const initialState: UserDataSlice = {
@@ -97,6 +99,8 @@ const initialState: UserDataSlice = {
   userPackage: "",
   userPackageData: {},
   userPackageUsed: {},
+ 
+
 };
 
 const userDataSlice = createSlice({
@@ -129,10 +133,12 @@ const userDataSlice = createSlice({
         ...action.payload,
       };
     },
+  
+  
   },
 });
 
-export const { setIsLoading, setError, setField, setUserData } =
+export const { setIsLoading, setError, setField, setUserData  } =
   userDataSlice.actions;
 
 export default userDataSlice.reducer;
