@@ -14,6 +14,7 @@ import {
   clipboard,
   xMark,
   keyIcon,
+  bid,
 } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
 
@@ -30,7 +31,7 @@ const items = [
   { icon: userGroup, text: "LinkedIn Tool", url: "/linkedin-generator" },
   { icon: inboxArrowDown, text: "Email Bot", url: "/email-bot" },
   { icon: dollarIcon, text: "Billing Detail", url: "/billing" },
-  { icon: dollarIcon, text: "Consulting Bot", url: "/consulting-bids-bot" },
+  { icon: bid, text: "Consulting Bot", url: "/consulting-bids-bot" },
   { icon: userCircle, text: "Profile", url: "/profile-review" },
   { icon: keyIcon, text: "Change Password", url: "/change-current-password" },
   { icon: powerIcon, text: "Logout", url: "/dashboard" },
@@ -109,13 +110,6 @@ const SideBar = () => {
                   Edit Profile
                 </Link>
               </div>
-            </div>
-            <div className="px-7 py-[8px]">
-              <Button
-                btnText="Resume Review"
-                textColor={`btn-text`}
-                isActive={true}
-              />
             </div>
           </div>
           <div className="flex flex-col">

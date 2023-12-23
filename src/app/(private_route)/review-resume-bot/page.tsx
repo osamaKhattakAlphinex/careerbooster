@@ -2,16 +2,17 @@
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
-import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
-import ReactToPrint from "react-to-print";
+import { setUserData } from "@/store/userDataSlice";
+
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
-import Html2Pdf from "js-html2pdf";
+
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
 import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
+import DownloadService from "@/helpers/downloadFile";
 
 const ReviewResumeBot = () => {
   const componentRef = useRef<any>(null);
@@ -368,38 +369,10 @@ const ReviewResumeBot = () => {
                   </span>
                 </button>
                 {show && (
-                  <ReactToPrint
-                    trigger={() => (
-                      <button
-                        type="button"
-                        disabled={!show || msgLoading || !session?.user?.email}
-                        className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] download-pdf-btn rounded-full ${
-                          !show || msgLoading || !session?.user?.email
-                            ? "opacity-50 cursor-not-allowed"
-                            : ""
-                        } `}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="w-6 h-6 green-text"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                          />
-                        </svg>
-
-                        <span className="green-text text-[15px] font-semibold">
-                          Download in PDF
-                        </span>
-                      </button>
-                    )}
-                    content={() => componentRef.current}
+                  <DownloadService
+                    componentRef={componentRef}
+                    type="onPage"
+                    fileName="ai-review"
                   />
                 )}
                 {show && (

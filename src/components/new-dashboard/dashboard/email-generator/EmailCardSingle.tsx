@@ -4,12 +4,11 @@ import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
-import ReactToPrint from "react-to-print";
-import Html2Pdf from "js-html2pdf";
 
 import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
 import { useRouter, usePathname } from "next/navigation";
 import { resetEmail, setEmail } from "@/store/emailSlice";
+import DownloadService from "@/helpers/downloadFile";
 
 type EmailType = {
   card?: any;
@@ -102,45 +101,13 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
           {pathname == "/dashboard"
             ? ""
             : card && (
-                <>
-                  <ReactToPrint
-                    trigger={() => (
-                      <button
-                        type="button"
-                        // disabled={
-                        //   resume.state.jobPosition === "" ||
-                        //   resume.state.resumeLoading ||
-                        //   !session?.user?.email ||
-                        //   !resume?.name
-                        // }
-                        className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full card-download-btn  text-green-500 border border-green-500"
-                      >
-                        Download
-                        {/* <span>
-                              To download choose destination "save as PDF"
-                            </span> */}
-                      </button>
-                    )}
-                    onBeforeGetContent={async () => await handleOnView(card)}
-                    content={() => componentRef.current}
-                    print={async (printIframe: HTMLIFrameElement) => {
-                      const document = componentRef.current;
-                      let doc: any = document?.querySelector(".text-white");
-                      const clonedDoc = doc.cloneNode(true);
-                      clonedDoc.style.color = "black";
-
-                      if (document) {
-                        const exporter = new Html2Pdf(clonedDoc);
-                        exporter
-                          .getPdf(false)
-                          .then(async (pdf: any) => {
-                            await pdf.save("email.pdf");
-                          })
-                          .catch((error: any) => console.log(error));
-                      }
-                    }}
-                  />
-                </>
+                <DownloadService
+                  componentRef={componentRef}
+                  view={handleOnView}
+                  card={card}
+                  type="email"
+                  fileName="ai-email"
+                />
               )}
         </div>
       </div>

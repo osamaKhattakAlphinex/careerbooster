@@ -63,8 +63,6 @@ const ResumeBuilder = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
-  const [percentageCalculated, setPercentageCalculated] =
-    useState<boolean>(false);
 
   // Redux
   const dispatch = useDispatch();
