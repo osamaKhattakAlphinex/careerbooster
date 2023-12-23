@@ -68,12 +68,12 @@ const LinkedInHeadlineCardSingle = ({
 
   return (
     <div>
-      <div className="flex flex-col   single-service-card-bg rounded-xl mt-[20px] py-[20px] px-[14px] ">
+      <div className="flex flex-col   dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 rounded-xl mt-[20px] py-[20px] px-[14px] ">
         <div className="">
           <div className="mx-3 border-gray-600 leading-6 w-full">
             <h2
               title={card.headlineText}
-              className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize card-h2 font-semibold  "
+              className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize dark:text-gray-100 text-gray-950 font-semibold  "
             >
               {/* {card.headlineText.slice(0, 20)} */}
 
@@ -90,7 +90,7 @@ const LinkedInHeadlineCardSingle = ({
           <button
             type="button"
             onClick={() => handleOnView(card)}
-            className="px-2 flex justify-center items-center rounded-full h-[36px] card-btn"
+            className="px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
           >
             {eyeIcon}
             {pathname == "/dashboard" ? (
@@ -102,7 +102,7 @@ const LinkedInHeadlineCardSingle = ({
           <button
             type="button"
             onClick={() => handleOnDelete(card)}
-            className="px-2 flex justify-center items-center rounded-full h-[36px] card-btn"
+            className="px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
           >
             {trashIcon}
             {pathname == "/dashboard" ? (

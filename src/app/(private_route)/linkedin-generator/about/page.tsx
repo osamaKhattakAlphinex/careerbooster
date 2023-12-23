@@ -8,7 +8,7 @@ const AboutGenerator = () => {
       <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]  ">
         <Link
           href="/linkedin-generator"
-          className="ml-2 my-4 no-underline  flex flex-row gap-2 items-center back-btn-text hover:opacity-80 transition-all"
+          className="ml-2 my-4 no-underline  flex flex-row gap-2 items-center dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-gray-100 hover:opacity-80 transition-all"
         >
           {leftArrowIcon}
           Back

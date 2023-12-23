@@ -318,8 +318,8 @@
   color: white;
 }
 [data-bs-theme="dark"] .card-btn {
-  background: rgb(24 24 27 / var(--tw-bg-opacity));
-  border: 2px solid rgb(39 39 42);
+  background: #18181b;
+  border: 2px solid #27272a;
 }
 [data-bs-theme="dark"] .card-download-btn {
   background: rgb(24 24 27 / var(--tw-bg-opacity));
@@ -349,7 +349,7 @@
   border: 1px solid #312e37;
 }
 [data-bs-theme="dark"] .yellow-text {
-  color: rgb(254 240 138);
+  color: #fef08a;
 }
 [data-bs-theme="dark"] .card-dashboard {
   border: none;
@@ -416,11 +416,11 @@
   color: white;
 }
 .single-service-bg {
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: #00000014;
   color: black;
 }
 .single-service-card-bg {
-  background: rgba(255, 255, 255, 0.58);
+  background: #ffffff94;
   color: black;
 }
 .card-h2 {
@@ -428,8 +428,8 @@
 }
 .card-btn {
   background: none;
-  color: rgb(34 197 94);
-  border: 1px solid rgb(34 197 94);
+  color: #22c55e;
+  border: 1px solid #22c55e;
 }
 .eye-icon {
   color: rgb(34 197 94);

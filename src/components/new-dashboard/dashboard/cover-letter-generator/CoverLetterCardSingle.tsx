@@ -62,12 +62,12 @@ const CoverLetterCardSingle = ({
 
   return (
     <div>
-      <div className="flex flex-col single-service-card-bg rounded-xl mt-[20px] py-[20px] px-[14px] ">
+      <div className="flex flex-col dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 bg rounded-xl mt-[20px] py-[20px] px-[14px] ">
         <div className="">
           <div className="mx-3 border-gray-600 leading-6 w-full">
             <h2
               title={card.jobDescription}
-              className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize card-h2 font-semibold  "
+              className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize dark:text-gray-100 text-gray-950 font-semibold  "
             >
               {card.jobDescription}
               {/* {card.jobDescription.length < 20
@@ -83,7 +83,7 @@ const CoverLetterCardSingle = ({
           <button
             type="button"
             onClick={() => handleOnView(card)}
-            className="flex px-2 justify-center items-center rounded-full h-[36px] card-btn"
+            className="flex px-2 justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
           >
             {/* <Image src={PencilLine} alt="Image Not Found" /> */}
             {eyeIcon}
@@ -96,7 +96,7 @@ const CoverLetterCardSingle = ({
           <button
             type="button"
             onClick={() => handleOnDelete(card)}
-            className="flex px-2 justify-center items-center rounded-full h-[36px] card-btn"
+            className="flex px-2 justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
           >
             {trashIcon}
             {pathname == "/dashboard" ? (

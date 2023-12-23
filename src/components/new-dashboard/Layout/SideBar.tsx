@@ -44,12 +44,6 @@ const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(null);
   const router = useRouter();
-  // const pagesArray = [
-  //   "/dashboard",
-  //   "/cover-letter-generator",
-  //   "/resume-builder",
-  //   "/linkedin-generator",
-  // ];
 
   if (pagesArray?.includes(pathname)) return <></>;
   const handleMouseOver = (index: any) => {
@@ -65,8 +59,8 @@ const SideBar = () => {
       {/* Mobile Menu Button */}
 
       <div
-        className={`sidebarTop sidebar fixed px-6 top-0 w-[234px]       flex items-center transition-all duration-200   ${
-          isOpen ? "sideBar1" : "sideBar-bg-opacity"
+        className={`dark:bg-[#18181B] bg-gray-100 fixed px-6 top-0 w-[234px]       flex items-center transition-all duration-200   ${
+          isOpen ? "dark:bg-[#18181B] bg-gray-100" : ""
         }`}
       >
         <Image src={logo} alt="" className="w-35 h-16" />
@@ -79,7 +73,7 @@ const SideBar = () => {
         </div>
       </div>
       <div
-        className={`sidebar fixed w-[234px]  top-0 flex justify-center sideBar2  mt-16 h-[100%] overflow-y-auto  transition-all ${
+        className={`fixed w-[234px]  top-0 flex justify-center dark:bg-[#18181B] bg-gray-100  mt-16 overflow-y-auto  transition-all ${
           isOpen
             ? "translate-x-0 lg:translate-x-0"
             : "-translate-x-full lg:translate-x-0 " // Apply opacity only on small screens
@@ -89,18 +83,13 @@ const SideBar = () => {
           <div>
             <div className="px-7 py-[6px] flex">
               <div className="mr-4">
-                {/* <Image
-                  src={profile}
-                  alt=""
-                  className="w-10 h-10 object-cover border-[1px] border-fuchsia-600 rounded-full"
-                /> */}
                 <div className="w-10 h-10 uppercase flex items-center justify-center bg-gray-300 text-gray-600 rounded-full">
                   {userData.firstName[0]}
                   {userData.lastName[0]}
                 </div>
               </div>
               <div>
-                <h1 className="sideBar_text text-base gap-1 font-semibold mb-0 ">
+                <h1 className="dark:text-white text-gray-950 text-base gap-1 font-semibold mb-0 ">
                   {userData.firstName + " " + userData.lastName}
                 </h1>
                 <Link
@@ -136,14 +125,20 @@ const SideBar = () => {
                     >
                       <div
                         className={`w-6 h-6 inline-block pr-2 
-                        ${pathname === item.url ? "li-text-active" : "li-text"}
+                        ${
+                          pathname === item.url
+                            ? "dark:text-[#FFFFFF] text-[#b324d7] font-bold"
+                            : "dark:text-[#737373] text-gray-950"
+                        }
                          `}
                       >
                         {item.icon}
                       </div>
                       <h2
                         className={`text-base ml-3 mb-0 font-normal ${
-                          pathname === item.url ? "li-text-active" : "li-text"
+                          pathname === item.url
+                            ? "dark:text-[#FFFFFF] text-[#b324d7] font-bold"
+                            : "dark:text-[#737373] text-gray-950"
                         }`}
                       >
                         {item.text}
@@ -164,10 +159,10 @@ const SideBar = () => {
                         textDecoration: "none",
                       }}
                     >
-                      <div className="w-6 h-6 inline-block pr-2 li-text">
+                      <div className="w-6 h-6  pr-2 dark:text-[#737373] text-gray-950">
                         {item.icon}
                       </div>
-                      <h2 className="text-base ml-3 mb-0 font-normal li-text">
+                      <h2 className="text-[16px] ml-3 mb-0 dark:text-[#737373] text-gray-950">
                         {item.text}
                       </h2>
                     </button>

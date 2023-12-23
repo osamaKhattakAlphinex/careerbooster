@@ -66,12 +66,12 @@ const LinkedInAboutCardSingle = ({
 
   return (
     <div>
-      <div className="flex flex-col   single-service-card-bg rounded-xl mt-[20px] py-[20px] px-[14px] ">
+      <div className="flex flex-col   dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 rounded-xl mt-[20px] py-[20px] px-[14px] ">
         <div className="">
           <div className="mx-3 border-gray-600 leading-6 w-full">
             <h2
               title={card.aboutText}
-              className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize card-h2 font-semibold  "
+              className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize dark:text-gray-100 text-gray-950 font-semibold  "
             >
               {/* {card.jobDescription} */}
               {card.aboutText.length < 20

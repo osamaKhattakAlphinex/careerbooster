@@ -41,7 +41,7 @@ const LimitCard: React.FC<LimitCardProps> = ({
     return (
       <div className="">
         <div className="w-full flex mb-1">
-          <span className="text-[11px] md:text-sm card-h2 uppercase font-bold">
+          <span className="text-[11px] md:text-sm dark:text-gray-100 text-gray-950 uppercase font-bold">
             {title}
           </span>
           {!isNaN(limit) && !isNaN(used) && (

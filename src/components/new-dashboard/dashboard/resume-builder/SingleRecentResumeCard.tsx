@@ -61,10 +61,10 @@ const SingleRecentResumeCard = ({
   };
 
   return (
-    <div className="flex flex-col lg:w-[100%]   single-service-card-bg rounded-xl mt-[20px] py-[20px] px-[14px] ">
+    <div className="flex flex-col lg:w-[100%]   dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 rounded-xl mt-[20px] py-[20px] px-[14px] ">
       <div className="">
         <div className="mx-3 border-gray-600 leading-6">
-          <h2 className="lg:text-[15px] text-[13px]  capitalize card-h2 font-medium  ">
+          <h2 className="lg:text-[15px] text-[13px]  capitalize dark:text-gray-100 text-gray-950 font-medium  ">
             {resume?.state?.jobPosition}
           </h2>
           {/* <h2
@@ -82,7 +82,7 @@ const SingleRecentResumeCard = ({
       <div className="flex gap-3 ">
         <button
           onClick={handleOnView}
-          className="flex px-2 text-[16px] justify-center items-center rounded-full h-[36px] card-btn"
+          className="flex px-2 text-[16px] justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
         >
           {eyeIcon}
           {pathname == "/dashboard" ? (
@@ -94,7 +94,7 @@ const SingleRecentResumeCard = ({
         <button
           type="button"
           onClick={handleOnDelete}
-          className="flex px-2 justify-center items-center rounded-full h-[36px] card-btn"
+          className="flex px-2 justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
         >
           {trashIcon}{" "}
           {pathname == "/dashboard" ? (

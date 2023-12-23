@@ -5,13 +5,26 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: any) {
   try {
+    const url = new URL(req.url);
+    const queryParams = new URLSearchParams(url.search);
+    const id = queryParams?.get("id");
     await startDB();
-    const notification = await Notification.find();
-    return NextResponse.json({
-      result: notification,
-      success: true,
-      status: 200,
-    });
+    if (id) {
+      const singleNotification = await Notification.findById({ _id: id });
+
+      return NextResponse.json({
+        result: singleNotification,
+        success: true,
+        status: 200,
+      });
+    } else {
+      const notification = await Notification.find();
+      return NextResponse.json({
+        result: notification,
+        success: true,
+        status: 200,
+      });
+    }
   } catch {
     return NextResponse.json({
       result: "Something Went Wrong",
@@ -24,9 +37,11 @@ export async function GET(req: any) {
 export async function POST(req: any) {
   try {
     await startDB();
+
     const payload = await req.json();
-    const notification = new Notification(payload);
-    const response = await notification.save();
+
+    const notification = new Notification({ ...payload });
+    const response = notification.save();
 
     return NextResponse.json(
       { result: response, success: true },
