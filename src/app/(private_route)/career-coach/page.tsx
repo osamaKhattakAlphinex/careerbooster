@@ -11,7 +11,7 @@ import Image from "next/image";
 const ChatAI = () => {
   const [userData, setUserData] = useState<any>({});
   const [chat, setChat] = useState<any>([]);
-  // const [input, setInput] = useState<string>("");
+  const [exampleQuestions, setExampleQuestions] = useState<boolean>(true);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const messagesContainer: any = useRef(null);
 
@@ -127,16 +127,22 @@ const ChatAI = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
-  const handleInteractiveSummaryClick = () => {
-    const content =
-      "Make me an interactive professional summary based on my resume.";
+
+  const handleJobsClick = (e: any) => {
+    e.preventDefault();
+    const content = " Suggest me some jobs according to my resume.";
+    setInput(content);
+    setExampleQuestions(false);
+
+    // handleSubmit(e);
   };
-  const sendJobTitle = (e: any) => {
+  const handleInteractiveSummaryClick = (e: any) => {
     e.preventDefault();
     const content =
       "Make me an interactive professional summary based on my resume.";
     setInput(content);
-    handleSubmit(e);
+    setExampleQuestions(false);
+    // handleSubmit(e);
   };
 
   return (
@@ -210,19 +216,24 @@ const ChatAI = () => {
                   </div>
                 ))
               )}
-              <div className="w-full px-3 gap-2 flex flex-col md:flex-row cursor-pointer">
-                <div
-                  onClick={sendJobTitle}
-                  className="w-full rounded-md bg-transparent border border-[#404044] p-2 card-h2"
-                >
-                  Make me an interactive professional summary based on my
-                  resume.
-                </div>
+              {exampleQuestions && (
+                <div className="w-full px-3 gap-2 flex flex-col md:flex-row cursor-pointer">
+                  <div
+                    onClick={handleInteractiveSummaryClick}
+                    className="w-full rounded-md bg-transparent border border-[#404044] p-2 card-h2"
+                  >
+                    Make me an interactive professional summary based on my
+                    resume.
+                  </div>
 
-                <div className="w-full rounded-md bg-transparent mb-1 md:mb-0 border border-[#404044] p-2 card-h2">
-                  Suggest me some jobs according to my resume.
+                  <div
+                    className="w-full rounded-md bg-transparent mb-1 md:mb-0 border border-[#404044] p-2 card-h2"
+                    onClick={handleJobsClick}
+                  >
+                    Suggest me some jobs according to my resume.
+                  </div>
                 </div>
-              </div>
+              )}
             </section>
 
             <form
