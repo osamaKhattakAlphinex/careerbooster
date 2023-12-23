@@ -303,7 +303,7 @@ const ResumeTemplate2 = ({
   };
 
   return (
-    <div className="w-full first-page  text-gray-900 flex flex-col justify-start items-start space-y-6">
+    <div className="w-full first-page  text-gray-900 flex flex-col justify-start items-start space-y-6 px-6">
       {/* Name and Title */}
       <div className="flex flex-col w-full text-center bg-gray-100 rounded-3xl  p-8">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
