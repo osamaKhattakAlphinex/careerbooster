@@ -82,11 +82,6 @@ const TeamCard = () => {
                     </svg>
                   </Link>
                 </li>
-                {/* <li>
-                  <Link href="#">
-                  <svg className="theme-text-2 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6v0Z"></path><path stroke="currentColor" stroke-width="1.5" d="M2.25 12V6A3.75 3.75 0 0 1 6 2.25h6A3.75 3.75 0 0 1 15.75 6v6A3.75 3.75 0 0 1 12 15.75H6A3.75 3.75 0 0 1 2.25 12Z"></path></svg>
-                  </Link>
-                </li> */}
               </ul>
             </div>
           </div>

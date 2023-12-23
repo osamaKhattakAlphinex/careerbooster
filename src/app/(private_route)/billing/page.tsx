@@ -1,33 +1,9 @@
 "use client";
-
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-
+import {useSelector } from "react-redux";
 const Page = () => {
-  const [billing, setBilling] = useState<any>({});
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const fetchBillingRecord = async () => {
-    setLoading(true);
-    if (!loading) {
-      try {
-        const _billing = await axios.get("/api/billing");
-        if (_billing.data.success) {
-          setBilling(_billing.data.billingDetail);
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-  };
-  useEffect(() => {
-    fetchBillingRecord();
-  }, []);
-
-  if (loading) return <span>Loading...</span>;
+   const  userData = useSelector((state: any) => state.userData)
+  if (userData?.userPackageData === "") return <span>Loading...</span>;
   else
     return (
       <div className=" ml-[234px] p-10 ">
@@ -39,7 +15,7 @@ const Page = () => {
                 <strong>FirstName</strong>
               </div>
               <div className="flex-1">
-                <span>{billing.firstName}</span>
+                <span>{userData.firstName}</span>
               </div>
             </div>
             <div className=" flex flex-row  justify-between items-center">
@@ -47,7 +23,7 @@ const Page = () => {
                 <strong>LastName</strong>
               </div>
               <div className="flex-1">
-                <span>{billing.lastName}</span>
+                <span>{userData?.lastName}</span>
               </div>
             </div>
             <div className=" flex flex-row  justify-between items-center">
@@ -55,7 +31,7 @@ const Page = () => {
                 <strong>Email</strong>
               </div>
               <div className="flex-1">
-                <span>{billing.email}</span>
+                <span>{userData?.email}</span>
               </div>
             </div>
             <div className=" flex flex-row  justify-between items-center">
@@ -65,10 +41,10 @@ const Page = () => {
               <div className="flex-1">
                 <span
                   className={`${
-                    billing.status ? "text-green-500" : "text-red-500"
+                    userData?.userPackageData?.status ? "text-green-500" : "text-red-500"
                   }`}
                 >
-                  {billing.status ? "Active" : "In-Active"}
+                  {userData?.userPackageData?.status ? "Active" : "In-Active"}
                 </span>
               </div>
             </div>
@@ -78,7 +54,7 @@ const Page = () => {
               </div>
               <div className="flex-1">
                 <span>
-                  {getFormattedDate(billing.userPackageExpirationDate)}
+                  {getFormattedDate(userData?.userPackageExpirationDate)}
                 </span>
               </div>
             </div>
@@ -87,7 +63,7 @@ const Page = () => {
                 <strong>Package Name</strong>
               </div>
               <div className="flex-1">
-                <span>{billing.package?.title}</span>
+                <span>{userData?.userPackageData?.title}</span>
               </div>
             </div>
             <div className=" flex flex-row  justify-between items-center">
@@ -95,7 +71,7 @@ const Page = () => {
                 <strong>Package Type</strong>
               </div>
               <div className="flex-1">
-                <span>{billing.package?.type}</span>
+                <span>{userData?.userPackageData?.type}</span>
               </div>
             </div>
           </div>

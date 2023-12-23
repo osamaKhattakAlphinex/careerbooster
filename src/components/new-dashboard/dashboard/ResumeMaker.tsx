@@ -63,16 +63,6 @@ const cardDetail = [
     action: "launch",
   },
   {
-    title: "Review Resume by AI",
-    description:
-      "AI analyzes your resume, offering valuable suggestions for impactful improvements.",
-    link: "/",
-    icon: review,
-    bgColor1: "from-cyan-600",
-    bgColor2: "to-sky-300",
-    action: "coming soon",
-  },
-  {
     title: "Career Coach",
     description:
       "Empower your career with AI-driven insights by our career coach for strategic moves.",
@@ -80,6 +70,16 @@ const cardDetail = [
     icon: chatbot,
     bgColor1: "from-teal-600",
     bgColor2: "to-green-400",
+    action: "launch",
+  },
+  {
+    title: "Review Resume by AI",
+    description:
+      "AI analyzes your resume, offering valuable suggestions for impactful improvements.",
+    link: "/review-resume",
+    icon: review,
+    bgColor1: "from-cyan-600",
+    bgColor2: "to-sky-300",
     action: "launch",
   },
   {

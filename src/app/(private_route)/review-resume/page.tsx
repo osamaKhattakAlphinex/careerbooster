@@ -9,7 +9,7 @@ import { leftArrowIcon } from "@/helpers/iconsProvider";
 
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
-import Button from "@/components/utilities/form-elements/Button";
+
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
 import DownloadService from "@/helpers/downloadFile";

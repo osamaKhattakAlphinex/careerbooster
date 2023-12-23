@@ -15,7 +15,6 @@ import {
   setStepSix,
   setStepThree,
   setStepTwo,
-  setField,
 } from "@/store/registerSlice";
 import Link from "next/link";
 import { redirect } from "next/navigation";
