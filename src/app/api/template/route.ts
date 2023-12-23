@@ -1,20 +1,15 @@
 import { NextResponse } from "next/server";
 import puppeteer from "puppeteer";
-import * as puppeteerCore from "puppeteer-core";
-import chromium from "chrome-aws-lambda";
+
+// import chromium from "chrome-aws-lambda";
+// let puppeteerCore = require("puppeteer-core");
 export async function POST(req: any) {
   try {
     const formData = await req.formData();
 
     const html = formData.get("htmlToDoc");
 
-    const browser = await puppeteerCore.launch({
-      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
-      defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath,
-      headless: true,
-      ignoreHTTPSErrors: true,
-    });
+    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
 
     const widthInPixels = Math.floor(3.5 * 96);
