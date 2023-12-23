@@ -61,8 +61,8 @@ const SideBar = () => {
       <div
         className={`dark:bg-[#18181B] bg-[e4E9F7] fixed px-6 top-0 w-[234px] z-[1000000000]       flex items-center transition-all duration-200    ${
           isOpen
-            ? "dark:bg-[#18181B] bg-gray-100 "
-            : "dark:bg-transparent bg-[E4E9F7]"
+            ? "dark:bg-[rgb(24,24,27)] bg-gray-100 "
+            : "dark:lg:bg-[#18181B] dark:bg-transparent lg:bg-gray-100 bg-[E4E9F7]"
         }`}
       >
         <Image src={logo} alt="" className="w-35 h-16" />
