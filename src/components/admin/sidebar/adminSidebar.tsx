@@ -22,7 +22,7 @@ const AdminSidebar = () => {
   return (
     <div className="w-full">
       <div className="p-4 text-center">
-        <h1 className="text-2xl text-white">CareerBooster.AI</h1>
+        <h1 className="text-2xl  text-white">CareerBooster.AI</h1>
         <div className="flex flex-row justify-center items-center gap-2">
           <Link href="/">
             <div className="h-8 w-8 bg-indigo-700 rounded-md shadow-md grid place-content-center">
@@ -532,7 +532,7 @@ const AdminSidebar = () => {
       </ul>
       <div className="text-center">
         <hr />
-        <span>&copy; careerbooster.ai</span>
+        <span className="text-white/70">&copy; careerbooster.ai</span>
       </div>
     </div>
   );

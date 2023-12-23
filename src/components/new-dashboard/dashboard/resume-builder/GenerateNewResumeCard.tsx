@@ -3,13 +3,12 @@ import Image from "next/image";
 import { memo, useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
-// import ReactToPrint from "react-to-print";
-// import DownloadDocx from "../resume-templates/template-1/DownloadDocx";
+
 import { setState } from "@/store/resumeSlice";
-// import NewButton from "@/components/utilities/form-elements/Button";
+
 import Link from "next/link";
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
-import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
+
 interface Props {
   handleGenerate: () => Promise<void>;
   availablePercentage: number;

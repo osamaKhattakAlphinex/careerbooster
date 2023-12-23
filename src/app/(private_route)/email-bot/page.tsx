@@ -2,24 +2,22 @@
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
-import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
-import ReactToPrint from "react-to-print";
+import { setUserData } from "@/store/userDataSlice";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import copy from "clipboard-copy";
 import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
-import Button from "@/components/utilities/form-elements/Button";
+
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import { makeid } from "@/helpers/makeid";
 import { setEmail } from "@/store/emailSlice";
-import Html2Pdf from "js-html2pdf";
 
-import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import EmailCardSingle from "@/components/new-dashboard/dashboard/email-generator/EmailCardSingle";
-import Image from "next/image";
+
+import DownloadService from "@/helpers/downloadFile";
 
 const PersonalizedEmailBot = () => {
   const componentRef = useRef<any>(null);
@@ -79,43 +77,6 @@ const PersonalizedEmailBot = () => {
     // }
   }, [isEditing]);
 
-  // const handleSave = async () => {
-  //   let _coverLetterText = "";
-
-  //   if (componentRef.current) {
-  //     const editorElement = componentRef.current.querySelector("#editor");
-  //     if (editorElement) {
-  //       _coverLetterText = editorElement.innerHTML;
-  //       editorElement.innerHTML = "";
-  //     }
-  //   }
-
-  //   // setStreamedData(editedContent);
-  //   setIsEditing(false);
-  //   const payLoad = {
-  //     coverLetterText: _coverLetterText, //editedContent,
-  //     generatedOnDate: coverLetter.generatedOnDate,
-  //     generatedViaOption: coverLetter.generatedViaOption,
-  //     id: coverLetter.id,
-  //     jobDescription: coverLetter.jobDescription,
-  //     userEmail: coverLetter.userEmail,
-  //   };
-
-  //   const updatedCoverLetters = await axios.put(
-  //     `/api/coverLetterBot/${coverLetter.id}`,
-  //     payLoad,
-  //     { headers: { "Content-Type": "application/json" } }
-  //   );
-
-  //   console.table(updatedCoverLetters.data.results);
-
-  //   const updatedObject = {
-  //     ...userData,
-  //     coverLetters: updatedCoverLetters.data.results,
-  //   };
-  //   dispatch(setUserData({ ...updatedObject }));
-  //   dispatch(setCoverLetter(payLoad));
-  // };
   const handleGenerate = async () => {
     // await getUserDataIfNotExists();
     if (
@@ -546,82 +507,17 @@ const PersonalizedEmailBot = () => {
                   <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-5">
                     your ai generated email
                   </h1>
-                  {/* <div className="aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px]">
-                  <div
-                    className={`w-[100%] dark:text-gray-100 text-gray-950 ${
-                      msgLoading ? "animate-pulse" : ""
-                    }`}
-                  >
-                    <div ref={componentRef}>
-                      {isEditing ? (
-                        <div
-                          id="editor"
-                          contentEditable="true"
-                          // dangerouslySetInnerHTML={{ __html: editedContent }}
-                          // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                          //   setEditedContent(e.target.innerHTML);
-                          // }}
-                        ></div>
-                      ) : (
-                        <div onClick={handleClick}>
-                          <div
-                            className="dark:text-gray-100 text-gray-950 text-color"
-                            dangerouslySetInnerHTML={{ __html: streamedData }}
-                          ></div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div> */}
                   <div
                     className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] md:p-[30px] shadow ${
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >
-                    {/* <div className="p-12" ref={componentRef}>
-          {isEditing ? (
-            <div
-              contentEditable="true"
-              dangerouslySetInnerHTML={{ __html: editedContent }}
-              onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                setEditedContent(e.target.innerHTML);
-              }}
-            ></div>
-          ) : (
-            <div onClick={handleClick}>
-              <div dangerouslySetInnerHTML={{ __html: streamedData }}></div>
-            </div>
-          )}
-        </div> */}
-                    {/* <div ref={componentRef}>
-                    {isEditing ? (
-                      <div
-                        id="editor"
-                        contentEditable="true"
-                        // dangerouslySetInnerHTML={{ __html: editedContent }}
-                        // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                        //   setEditedContent(e.target.innerHTML);
-                        // }}
-                      ></div>
-                    ) : (
-                      <div>
-                        <div
-                          className="dark:text-gray-100 text-gray-950 "
-                          dangerouslySetInnerHTML={{ __html: streamedData }}
-                        ></div>
-                      </div>
-                    )}
-                  </div> */}
                     <div ref={componentRef}>
                       {isEditing ? (
                         <div
                           className="dark:text-gray-100 text-gray-950 "
                           id="editor"
                           contentEditable="true"
-                          // dangerouslySetInnerHTML={{ __html: streamedData }}
-                          // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                          //   setEditedContent(e.target.innerHTML);
-                          // }}
                         ></div>
                       ) : (
                         <div>
@@ -641,8 +537,6 @@ const PersonalizedEmailBot = () => {
                         !aiInputUserData ||
                         selectedOption === "" ||
                         (selectedOption === "file" && selectedFile === "") ||
-                        // (selectedOption === "aiResume" &&
-                        //   setSelectedResumeId === "") ||
                         jobDescription === ""
                       }
                       onClick={handleGenerate}
@@ -703,56 +597,10 @@ const PersonalizedEmailBot = () => {
                       </span>
                     </button>
 
-                    <ReactToPrint
-                      trigger={() => (
-                        <button
-                          type="submit"
-                          disabled={
-                            !show || msgLoading || !session?.user?.email
-                          }
-                          className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#37b944] border-[#b324d7] border rounded-full ${
-                            !show || msgLoading || !session?.user?.email
-                              ? "opacity-50 cursor-not-allowed"
-                              : ""
-                          } `}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="w-6 h-6 dark:text-[#37b944] text-gray-950"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                            />
-                          </svg>
-
-                          <span className="dark:text-[#37b944] text-gray-950 text-[15px] font-semibold">
-                            Download in PDF
-                          </span>
-                        </button>
-                      )}
-                      content={() => componentRef.current}
-                      print={async (printIframe: HTMLIFrameElement) => {
-                        const document = componentRef.current;
-                        let doc: any = document?.querySelector(".text-white");
-                        const clonedDoc = doc.cloneNode(true);
-                        clonedDoc.style.color = "black";
-
-                        if (document) {
-                          const exporter = new Html2Pdf(clonedDoc);
-                          exporter
-                            .getPdf(false)
-                            .then(async (pdf: any) => {
-                              await pdf.save("email.pdf");
-                            })
-                            .catch((error: any) => console.log(error));
-                        }
-                      }}
+                    <DownloadService
+                      componentRef={componentRef}
+                      type="onPage"
+                      fileName="ai-email"
                     />
                     {show && (
                       <button

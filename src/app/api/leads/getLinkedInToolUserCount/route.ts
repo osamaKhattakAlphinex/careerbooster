@@ -37,7 +37,6 @@ export async function GET(req: any) {
     const thisYear = await LinkedinToolEntrie.countDocuments({
       createdAt: { $gt: firstDayOfYear, $lt: currentDate },
     });
-    console.log(total);
     return NextResponse.json({
       total,
       thisMonth,

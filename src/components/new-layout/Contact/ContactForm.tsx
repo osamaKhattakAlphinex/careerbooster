@@ -44,7 +44,7 @@ const ContactForm = () => {
 
   return (
     <div
-      className="row justify-center mt-18"
+      className="row justify-center"
       data-aos="fade-up-sm"
       data-aos-delay="50"
     >

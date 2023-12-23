@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
-import ReactToPrint from "react-to-print";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import BiograpyFileUploader from "@/components/dashboard/biography-writer/BiograpyFileUploader";
 import Button from "@/components/utilities/form-elements/Button";
+import DownloadService from "@/helpers/downloadFile";
 
 const BiographyWriter = () => {
   const componentRef = useRef<any>(null);
@@ -196,36 +196,11 @@ const BiographyWriter = () => {
                 </div>
               </Button>
             </div>
-            <ReactToPrint
-              trigger={() => (
-                <Button
-                  type="button"
-                  disabled={!show || msgLoading || !session?.user?.email}
-                  className="btn theme-outline-btn"
-                >
-                  <div className="flex flex-row gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="w-4 h-4"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                      />
-                    </svg>
-                    <span>Print / Download in PDF</span>
-                    {/* <span>
-                            To download choose destination "save as PDF"
-                          </span> */}
-                  </div>
-                </Button>
-              )}
-              content={() => componentRef.current}
+
+            <DownloadService
+              componentRef={componentRef}
+              type="onPage"
+              fileName=""
             />
           </div>
           {/* <div className="">Download PDF</div> */}

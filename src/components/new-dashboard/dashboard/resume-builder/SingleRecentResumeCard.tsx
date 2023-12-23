@@ -1,14 +1,14 @@
-import { eyeIcon, rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
+import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { Resume, emptyResume, setResume } from "@/store/resumeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import { usePathname, useRouter } from "next/navigation";
-import ReactToPrint, { useReactToPrint } from "react-to-print";
-import { useSession } from "next-auth/react";
-import Html2Pdf from "js-html2pdf";
+
 import {} from "@/../public/icon/Vector.png";
+import DownloadService from "@/helpers/downloadFile";
+
 const SingleRecentResumeCard = ({
   resume,
   source,
@@ -19,7 +19,6 @@ const SingleRecentResumeCard = ({
   componentRef: any;
 }) => {
   const userData = useSelector((state: any) => state.userData);
-  const { data: session } = useSession();
   const { email, resumes } = userData;
   const router = useRouter();
   const pathname: any = usePathname();
@@ -38,8 +37,6 @@ const SingleRecentResumeCard = ({
       const updatedResumes = resumes.filter((r: Resume) => r.id !== resume.id);
       updateUser(updatedResumes);
       dispatch(emptyResume());
-
-      console.log(updatedResumes);
     }
   };
 
@@ -62,6 +59,7 @@ const SingleRecentResumeCard = ({
         });
     }
   };
+
   return (
     <div className="flex flex-col lg:w-[100%]   dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 rounded-xl mt-[20px] py-[20px] px-[14px] ">
       <div className="">
@@ -108,35 +106,11 @@ const SingleRecentResumeCard = ({
         {pathname == "/dashboard"
           ? ""
           : resume && (
-              <>
-                <ReactToPrint
-                  trigger={() => (
-                    <button
-                      type="button"
-                      disabled={
-                        resume.state.jobPosition === "" ||
-                        resume.state.resumeLoading ||
-                        !session?.user?.email ||
-                        !resume?.name
-                      }
-                      className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full card-download-btn  text-green-500 border border-green-500"
-                    >
-                      Download
-                    </button>
-                  )}
-                  onBeforeGetContent={async () => await handleOnView()}
-                  content={() => componentRef.current}
-                  print={async (printIframe: HTMLIFrameElement) => {
-                    const document = printIframe.contentDocument;
-                    if (document) {
-                      const exporter = new Html2Pdf(componentRef.current, {
-                        filename: `${resume.name}-${resume.jobTitle}.pdf`,
-                      });
-                      exporter.getPdf(true);
-                    }
-                  }}
-                />
-              </>
+              <DownloadService
+                componentRef={componentRef}
+                view={handleOnView}
+                fileName="ai-resume"
+              />
             )}
       </div>
     </div>

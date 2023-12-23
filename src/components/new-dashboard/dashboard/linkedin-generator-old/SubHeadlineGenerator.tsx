@@ -10,7 +10,6 @@ import LimitCard from "../LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
-import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import LinkedInHeadlineCardSingle from "./LinkedInHeadeLineCardSingle";
 import { makeid } from "@/helpers/makeid";

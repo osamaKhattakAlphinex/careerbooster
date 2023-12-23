@@ -1,14 +1,5 @@
-import Button from "@/components/Button";
-
 import ResumeMaker from "./ResumeMaker";
 import ProfileCompletionAlert from "@/components/dashboard/ProfileCompletionAlert";
-
-const tabOptions = [
-  { name: "Career", value: "career" },
-  { name: "Resume Maker", value: "resumeMaker" },
-  { name: "Proposals", value: "proposals" },
-  { name: "LinkedIn", value: "linkedin" },
-];
 
 const RecentDocumentsCard = () => {
   return (

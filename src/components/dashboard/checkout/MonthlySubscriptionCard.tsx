@@ -29,7 +29,7 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
   const [data, setData] = useState<any>();
   const [msgLoading, setMsgLoading] = useState<boolean>(false);
   const router = useRouter();
-
+  console.log(userPackage);
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
@@ -189,7 +189,7 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
     !msgLoading && (
       <div
         className={`col-md-6 col-lg-4 ${
-          userPackage.amount === 0 && data ? "hidden" : ""
+          userPackage.amount === 0 && data ? "" : ""
         } `}
         data-aos="fade-up-sm"
         data-aos-delay="50"
@@ -227,17 +227,6 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
                 <p className="text-red-500 text-sm mt-1">{couponError}</p>
               )}
 
-              {/* <button
-                onClick={handleClick}
-                disabled={subscribing}
-                className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9"
-              >
-                {subscribing
-                  ? "Please wait..."
-                  : userPackage.amount === 0
-                  ? "Select  Plan"
-                  : "Select  Plan"}
-              </button> */}
               <a
                 href="#"
                 onClick={(e) => {
@@ -272,57 +261,9 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
               </li>
             ))}
           </ul>
-          {/* <ul className="pricing-list d-flex flex-column gap-3 fs-lg mt-9 mb-0">
-            <hr />
-            <li className="theme-text">
-              <strong>Limitation</strong>
-            </li>
-            <li>Generate {userPackage?.limit?.resumes_generation} resumes</li>
-            {userPackage?.limit?.can_edit_resume && <li>Edit Resume</li>}
-            <li>
-              Generate {userPackage?.limit?.consulting_bids_generation} consulting
-              bids
-            </li>
-            <li>
-              Generate {userPackage?.limit?.cover_letter_generation} Cover Letter
-            </li>
-            <li>Generate {userPackage?.limit?.email_generation} Emails</li>
-            <li>
-              write {userPackage?.limit?.headline_generation} Headlines for
-              LinkedIn
-            </li>
-            <li>
-              write {userPackage?.limit?.job_desc_generation} Job Description for
-              LinkedIn
-            </li>
-            <li>
-              write {userPackage?.limit?.about_generation} About Description for
-              LinkedIn
-            </li>
-            <li>
-              write {userPackage?.limit?.keywords_generation} Keywords for
-              LinkedIn
-            </li>
-            <li>Upload {userPackage?.limit?.pdf_files_upload} Files / Resumes</li>
-            <li>Review {userPackage?.limit?.review_resume} Resumes by AI</li>
-          </ul> */}
         </div>
       </div>
     )
   );
-
-  // render a simple card
-  //   return (
-  //     <div className="border border-gray-100 rounded-md p-8 flex flex-col gap-2 items-start">
-  //       <h2 className="text-xl font-bold text-gray-700">Monthly Subscription</h2>
-  //       <p className="text-gray-400">$20 per month</p>
-  //       <button
-  //         onClick={() => handleClick()}
-  //         className="border border-violet-200 text-violet-500 rounded-md px-4 py-2 w-full hover:bg-violet-500 hover:text-violet-200 transition-colors"
-  //       >
-  //         Subscribe
-  //       </button>
-  //     </div>
-  //   );
 };
 export default MonthlySubscriptionCard;

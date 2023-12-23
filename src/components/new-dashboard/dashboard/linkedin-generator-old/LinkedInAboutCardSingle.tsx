@@ -4,8 +4,6 @@ import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
-import ReactToPrint from "react-to-print";
-import Html2Pdf from "js-html2pdf";
 
 import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
 import { useRouter, usePathname } from "next/navigation";
@@ -110,42 +108,6 @@ const LinkedInAboutCardSingle = ({
               ""
             )}
           </button>
-          {/* {pathname == "/dashboard"
-            ? ""
-            : card && (
-                <>
-                  <ReactToPrint
-                    trigger={() => (
-                      <button
-                        type="button"
-                      
-                        className="lg:text-[14px] text-[12px] lg:px-[32px] px-[22px] lg:py-2 py-0 rounded-full bg-zinc-900 text-green-500 border border-green-500"
-                      >
-                        Download
-                     
-                      </button>
-                    )}
-                    onBeforeGetContent={async () => await handleOnView(card)}
-                    content={() => componentRef.current}
-                    print={async (printIframe: HTMLIFrameElement) => {
-                      const document = componentRef.current;
-                      let doc: any = document?.querySelector(".text-white");
-                      const clonedDoc = doc.cloneNode(true);
-                      clonedDoc.style.color = "black";
-
-                      if (document) {
-                        const exporter = new Html2Pdf(clonedDoc);
-                        exporter
-                          .getPdf(false)
-                          .then(async (pdf: any) => {
-                            await pdf.save("linkedin-about.pdf");
-                          })
-                          .catch((error: any) => console.log(error));
-                      }
-                    }}
-                  />
-                </>
-              )} */}
         </div>
       </div>
     </div>

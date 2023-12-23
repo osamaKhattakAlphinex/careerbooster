@@ -13,16 +13,16 @@ const ConsultingBidPromptsConfiguration = () => {
   useEffect(() => {
     setPromptsLoading(true);
     // get all prompts
-    axios.get("/api/admin/prompts?type=bid").then((res) => {
+    axios.get("/api/prompts?type=bid").then((res) => {
       setPromptsLoading(false);
-      setPrompts(res.data.prompts);
+      setPrompts(res.data.result);
     });
   }, []);
   const handleSave = (name: string, val: string) => {
     if (name) {
       setUpdating(name);
       axios
-        .post("/api/admin/prompts", {
+        .post("/api/prompts", {
           type: "bid",
           name: name,
           value: val,

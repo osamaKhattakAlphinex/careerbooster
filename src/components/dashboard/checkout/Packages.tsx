@@ -5,14 +5,12 @@ import MonthlySubscriptionCard from "./MonthlySubscriptionCard";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { UserPackageData } from "@/db/schemas/UserPackage";
-import { useSession } from "next-auth/react";
 
 interface Props {
   viewOnly?: boolean;
 }
 
 const Packages = ({ viewOnly }: Props) => {
-  const { data: session, status } = useSession();
   const [packages, setPackages] = useState<UserPackageData[]>([]);
 
   const userData = useSelector((state: any) => state.userData);
@@ -38,6 +36,7 @@ const Packages = ({ viewOnly }: Props) => {
 
   return (
     <>
+      {console.log(packages)}
       {packages &&
         packages?.map((pkg: UserPackageData) => (
           <MonthlySubscriptionCard
@@ -47,9 +46,9 @@ const Packages = ({ viewOnly }: Props) => {
             customer={{
               metadata: {
                 packageId: pkg._id,
-                email: userData.email,
-                phone: userData.phone,
-                name: userData.firstName + " " + userData.lastName,
+                email: userData?.email,
+                phone: userData?.phone,
+                name: userData?.firstName + " " + userData?.lastName,
               },
             }}
           />

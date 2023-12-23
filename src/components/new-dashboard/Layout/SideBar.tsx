@@ -14,6 +14,7 @@ import {
   clipboard,
   xMark,
   keyIcon,
+  bid,
 } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
 
@@ -30,7 +31,7 @@ const items = [
   { icon: userGroup, text: "LinkedIn Tool", url: "/linkedin-generator" },
   { icon: inboxArrowDown, text: "Email Bot", url: "/email-bot" },
   { icon: dollarIcon, text: "Billing Detail", url: "/billing" },
-  { icon: dollarIcon, text: "Consulting Bot", url: "/consulting-bids-bot" },
+  { icon: bid, text: "Consulting Bot", url: "/consulting-bids-bot" },
   { icon: userCircle, text: "Profile", url: "/profile-review" },
   { icon: keyIcon, text: "Change Password", url: "/change-current-password" },
   { icon: powerIcon, text: "Logout", url: "/dashboard" },
@@ -43,12 +44,6 @@ const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(null);
   const router = useRouter();
-  // const pagesArray = [
-  //   "/dashboard",
-  //   "/cover-letter-generator",
-  //   "/resume-builder",
-  //   "/linkedin-generator",
-  // ];
 
   if (pagesArray?.includes(pathname)) return <></>;
   const handleMouseOver = (index: any) => {
@@ -84,15 +79,10 @@ const SideBar = () => {
             : "-translate-x-full lg:translate-x-0 " // Apply opacity only on small screens
         }`}
       >
-        <div className="block">
+        <div className="overflow-auto ">
           <div>
             <div className="px-7 py-[6px] flex">
               <div className="mr-4">
-                {/* <Image
-                  src={profile}
-                  alt=""
-                  className="w-10 h-10 object-cover border-[1px] border-fuchsia-600 rounded-full"
-                /> */}
                 <div className="w-10 h-10 uppercase flex items-center justify-center bg-gray-300 text-gray-600 rounded-full">
                   {userData.firstName[0]}
                   {userData.lastName[0]}
@@ -109,13 +99,6 @@ const SideBar = () => {
                   Edit Profile
                 </Link>
               </div>
-            </div>
-            <div className="px-7 py-[8px]">
-              <Button
-                btnText="Resume Review"
-                textColor={`dark:text-white border border-[#C026D3]`}
-                isActive={true}
-              />
             </div>
           </div>
           <div className="flex flex-col">

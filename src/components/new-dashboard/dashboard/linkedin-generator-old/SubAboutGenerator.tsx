@@ -11,7 +11,6 @@ import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
-import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
 import LinkedInAboutCardSingle from "./LinkedInAboutCardSingle";
 import { makeid } from "@/helpers/makeid";
 const SubAboutGenerator = () => {

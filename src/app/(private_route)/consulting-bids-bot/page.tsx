@@ -3,8 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "@/store/userDataSlice";
-import ReactToPrint from "react-to-print";
-import Html2Pdf from "js-html2pdf";
+
 import Link from "next/link";
 import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
@@ -19,6 +18,7 @@ import { setConsultingBid } from "@/store/consultingBidSlice";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 
 import Image from "next/image";
+import DownloadService from "@/helpers/downloadFile";
 
 const ConsultingBidsGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -610,56 +610,10 @@ const ConsultingBidsGenerator = () => {
                       </span>
                     </button>
 
-                    <ReactToPrint
-                      trigger={() => (
-                        <button
-                          type="submit"
-                          disabled={
-                            !show || msgLoading || !session?.user?.email
-                          }
-                          className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full dark:border-[#37b944] border-[#b324d7] border${
-                            !show || msgLoading || !session?.user?.email
-                              ? "opacity-50 cursor-not-allowed"
-                              : ""
-                          } `}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="w-6 h-6 dark:text-[#37b944] text-gray-950"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                            />
-                          </svg>
-
-                          <span className="text-[15px] font-semibold dark:text-[#37b944] text-gray-950">
-                            Download in PDF
-                          </span>
-                        </button>
-                      )}
-                      content={() => componentRef.current}
-                      print={async (printIframe: HTMLIFrameElement) => {
-                        const document = componentRef.current;
-                        let doc: any = document?.querySelector(".text-white");
-                        const clonedDoc = doc.cloneNode(true);
-                        clonedDoc.style.color = "black";
-
-                        if (document) {
-                          const exporter = new Html2Pdf(clonedDoc);
-                          exporter
-                            .getPdf(false)
-                            .then(async (pdf: any) => {
-                              await pdf.save("consulting_bid.pdf");
-                            })
-                            .catch((error: any) => console.log(error));
-                        }
-                      }}
+                    <DownloadService
+                      componentRef={componentRef}
+                      type="onPage"
+                      fileName="ai-consulting-bid"
                     />
                     {show && (
                       <button

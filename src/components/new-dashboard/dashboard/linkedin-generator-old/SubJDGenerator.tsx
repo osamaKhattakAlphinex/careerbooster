@@ -11,19 +11,16 @@ import {
   setIsLoading,
   setUserData,
 } from "@/store/userDataSlice";
-import Button from "@/components/utilities/form-elements/Button";
 import LimitCard from "../LimitCard";
 import axios from "axios";
 import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
-import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
 import LinkedInJDCardSingle from "./LinkedInJDCardSingle";
 import { makeid } from "@/helpers/makeid";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
-  const [jobDesc, setJobDesc] = useState<string>("");
   // local States
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
