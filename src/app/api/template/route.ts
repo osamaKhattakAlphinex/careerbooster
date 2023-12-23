@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import puppeteer from "puppeteer";
-
+export const runtime = "edge";
 // import chromium from "chrome-aws-lambda";
 // let puppeteerCore = require("puppeteer-core");
 export async function POST(req: any) {
