@@ -17,14 +17,18 @@ const ProfilePreview = () => {
 
   return (
     <div className="">
-      <h1 className="text-2xl font-semibold mb-2">Review your Resume</h1>
-      <p className=" mb-4">Review and make any changes below.</p>
-      <hr className="mb-4" />
+      <h1 className="text-2xl font-semibold mb-2 dark:text-gray-100 text-gray-950">
+        Review your Resume
+      </h1>
+      <p className=" mb-4 dark:text-gray-100 text-gray-950">
+        Review and make any changes below.
+      </p>
+      <hr className="mb-4 dark:text-gray-100 text-gray-950" />
 
       {/* Basic */}
       <section className="mb-8">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-medium">
+          <h3 className="text-lg font-medium dark:text-gray-100 text-gray-950">
             {data.stepOne.firstName === "" && data.stepOne.lastName === "" ? (
               "[Missing Name]"
             ) : (
@@ -42,7 +46,7 @@ const ProfilePreview = () => {
         </div>
         <div className="flex justify-between items-center mb-4">
           <div className="text-sm flex flex-col gap-1 ">
-            <p className="flex flex-row gap-2 items-center">
+            <p className="flex flex-row gap-2 items-center dark:text-gray-100 text-gray-950">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -63,7 +67,7 @@ const ProfilePreview = () => {
                   : "[Missing Phone Number]"}
               </span>
             </p>
-            <p className="flex flex-row gap-2 items-center">
+            <p className="flex flex-row gap-2 items-center dark:text-gray-100 text-gray-950">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -94,7 +98,7 @@ const ProfilePreview = () => {
         </div>
         <div className="flex justify-between items-center mb-4">
           <div className="text-sm flex flex-col gap-1 ">
-            <p className="flex flex-row gap-2 items-center">
+            <p className="flex flex-row gap-2 items-center dark:text-gray-100 text-gray-950">
               {addressIcon}
               {data.stepThree?.country === "" &&
               data.stepThree?.street &&
@@ -142,7 +146,7 @@ const ProfilePreview = () => {
 
       {/* Work Experience */}
       <section className="mb-8 ">
-        <h2 className="text-xl font-semibold mb-2 ">
+        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
           Work Experience
           <button
             type="button"
@@ -170,7 +174,7 @@ const ProfilePreview = () => {
 
       {/* Education */}
       <section className="mb-8 ">
-        <h2 className="text-xl font-semibold mb-2 ">
+        <h2 className="text-xl font-semibold mb-2 dark:text-gray-100 text-gray-950">
           Education
           <button
             type="button"
@@ -192,7 +196,7 @@ const ProfilePreview = () => {
 
       {/* Skills */}
       <section className="mb-8 ">
-        <h2 className="text-xl font-semibold mb-2 ">
+        <h2 className="text-xl font-semibold mb-2 dark:text-gray-100 text-gray-950 ">
           Skills
           <button
             type="button"
@@ -209,7 +213,7 @@ const ProfilePreview = () => {
             {data.stepSix.list.map((skill: string, index: number) => (
               <li
                 key={index}
-                className="flex items-center justify-between  rounded-md shadow-md border p-3"
+                className="flex items-center justify-between  rounded-md shadow-md border p-3 dark:text-gray-100 text-gray-950"
               >
                 <span>{skill}</span>
               </li>

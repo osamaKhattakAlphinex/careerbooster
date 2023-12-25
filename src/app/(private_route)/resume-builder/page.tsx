@@ -3,6 +3,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/template-1";
 import ResumeTemplate2 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_2";
+import ResumeTemplate3 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_3";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -565,6 +566,14 @@ const ResumeBuilder = () => {
                   >
                     Template 2
                   </button>
+                  <button
+                    className={`${
+                      template === "template-3" ? "bg-black text-white" : ""
+                    } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
+                    onClick={() => setTemplate("template-3")}
+                  >
+                    Template 3
+                  </button>
                 </div>
                 <div className="my-10  w-[100%] bg-white border border-gray-200 rounded-lg shadow sm:p-6 ">
                   <div
@@ -582,6 +591,13 @@ const ResumeBuilder = () => {
                     )}
                     {template === "template-2" && (
                       <ResumeTemplate2
+                        streamedSummaryData={streamedSummaryData}
+                        streamedJDData={streamedJDData}
+                        saveResumeToDB={saveResumeToDB}
+                      />
+                    )}
+                    {template === "template-3" && (
+                      <ResumeTemplate3
                         streamedSummaryData={streamedSummaryData}
                         streamedJDData={streamedJDData}
                         saveResumeToDB={saveResumeToDB}

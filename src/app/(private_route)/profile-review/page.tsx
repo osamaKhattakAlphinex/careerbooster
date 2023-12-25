@@ -140,7 +140,7 @@ const ProfileReview = () => {
                       {register.activeStep > 1 && (
                         <button
                           type="submit"
-                          className="btn btn-secondary-dark"
+                          className=" dark:text-gray-100 text-gray-950"
                           onClick={(e) => {
                             dispatch(setActiveStep(register.activeStep - 1));
                           }}

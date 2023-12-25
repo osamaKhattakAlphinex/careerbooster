@@ -23,7 +23,7 @@ const EducationCard = ({
   return (
     <div className="w-full  rounded-lg shadow-md p-6 border" key={rec?.id}>
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-base font-semibold w-[80%]">
+        <h2 className="text-base dark:text-gray-100 text-gray-950 font-semibold w-[80%]">
           {rec?.educationLevel || isShowing ? (
             rec?.educationLevel
           ) : (
@@ -65,7 +65,7 @@ const EducationCard = ({
           </div>
         )}
       </div>
-      <p className="text-md">
+      <p className="text-md dark:text-gray-100 text-gray-950">
         {rec?.schoolName || isShowing ? (
           rec?.schoolName
         ) : (
@@ -79,7 +79,7 @@ const EducationCard = ({
         )}
       </p>
       {/* <h3 className="text-sm text-gray-600">Islamabad, Pakistan</h3> */}
-      <h3 className="text-sm text-gray-600">
+      <h3 className="text-sm dark:text-gray-100 text-gray-950">
         {rec?.schoolLocation || isShowing ? (
           rec?.schoolLocation
         ) : (

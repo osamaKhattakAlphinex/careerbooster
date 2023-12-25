@@ -35,7 +35,10 @@ const StepThree = () => {
   return (
     <>
       <div className="">
-        <label htmlFor="name" className="form-label fs-lg fw-medium mb-4">
+        <label
+          htmlFor="name"
+          className="form-label dark:text-gray-100 text-gray-950 fs-lg fw-medium mb-4"
+        >
           {" "}
           Country{" "}
         </label>
@@ -64,14 +67,17 @@ const StepThree = () => {
             onChange={(e) => {
               dispatch(setStepThree({ country: e.target.value }));
             }}
-            className="form-control rounded-2"
+            className="form-control rounded-2 "
             placeholder=""
           />
         </div>
       </div>
 
       <div className="">
-        <label htmlFor="name" className="form-label fs-lg fw-medium mb-4">
+        <label
+          htmlFor="name"
+          className="form-label dark:text-gray-100 text-gray-950 fs-lg fw-medium mb-4"
+        >
           {" "}
           Street{" "}
         </label>
@@ -100,14 +106,17 @@ const StepThree = () => {
             onChange={(e) => {
               dispatch(setStepThree({ street: e.target.value }));
             }}
-            className="form-control rounded-2"
+            className="form-control rounded-2 "
             placeholder=""
           />
         </div>
       </div>
 
       <div className="">
-        <label htmlFor="name" className="form-label fs-lg fw-medium mb-4">
+        <label
+          htmlFor="name"
+          className="form-label dark:text-gray-100 text-gray-950 fs-lg fw-medium mb-4"
+        >
           {" "}
           City State{" "}
         </label>
@@ -136,14 +145,17 @@ const StepThree = () => {
             onChange={(e) => {
               dispatch(setStepThree({ cityState: e.target.value }));
             }}
-            className="form-control rounded-2"
+            className="form-control rounded-2 "
             placeholder=""
           />
         </div>
       </div>
 
       <div className="">
-        <label htmlFor="name" className="form-label fs-lg fw-medium mb-4">
+        <label
+          htmlFor="name"
+          className="form-label dark:text-gray-100 text-gray-950 fs-lg fw-medium mb-4"
+        >
           {" "}
           Postal Code{" "}
         </label>
@@ -177,7 +189,7 @@ const StepThree = () => {
             onChange={(e) => {
               dispatch(setStepThree({ postalCode: e.target.value }));
             }}
-            className="form-control rounded-2"
+            className="form-control rounded-2 "
             placeholder=""
           />
         </div>

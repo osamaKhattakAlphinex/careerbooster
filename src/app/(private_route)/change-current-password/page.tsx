@@ -62,7 +62,10 @@ const ChangePasswordPage = () => {
               <div className="col-lg-8 col-xl-6">
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
-                    <label htmlFor="password" className="form-label">
+                    <label
+                      htmlFor="password"
+                      className="dark:text-gray-100 text-gray-950 pb-3"
+                    >
                       Current Password
                     </label>
                     <input
@@ -73,12 +76,15 @@ const ChangePasswordPage = () => {
                       onChange={(event) => {
                         setCurrentPassword(event.target.value);
                       }}
-                      className="form-control"
+                      className="dark:bg-gray-100 bg-gray-950 form-control"
                       required
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="password" className="form-label">
+                    <label
+                      htmlFor="password"
+                      className="dark:text-gray-100 text-gray-950 pb-3"
+                    >
                       New Password
                     </label>
                     <input
@@ -87,12 +93,15 @@ const ChangePasswordPage = () => {
                       name="password"
                       value={password}
                       onChange={(event) => setPassword(event.target.value)}
-                      className="form-control"
+                      className="dark:bg-gray-100 bg-gray-950 form-control"
                       required
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="confirmPassword" className="form-label">
+                    <label
+                      htmlFor="confirmPassword"
+                      className="dark:text-gray-100 text-gray-950 pb-3"
+                    >
                       Confirm Password
                     </label>
                     <input
@@ -103,7 +112,7 @@ const ChangePasswordPage = () => {
                       onChange={(event) =>
                         setConfirmPassword(event.target.value)
                       }
-                      className="form-control"
+                      className="dark:bg-gray-100 bg-gray-950 form-control"
                       required
                     />
                   </div>
