@@ -59,7 +59,7 @@ const ToolsCard = ({
           </p>
           <Link
             href={link}
-            className={`no-underline text-[14px] mt-[11px] flex items-center uppercase text-[#959595] hover:text-white font-semibold`}
+            className={`no-underline text-[14px] mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-100 hover:text-gray-950 font-semibold`}
           >
             {action} <i className="ml-2">{chevronRight}</i>
           </Link>

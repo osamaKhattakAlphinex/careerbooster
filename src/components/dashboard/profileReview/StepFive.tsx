@@ -213,7 +213,7 @@ const StepFive = () => {
 
       {state === "show" && (
         <>
-          <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl ">
+          <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl dark:text-gray-100 text-gray-950 ">
             Work Experience
             <button
               type="button"

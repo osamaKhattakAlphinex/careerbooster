@@ -32,7 +32,10 @@ const StepOne = () => {
   return (
     <>
       <div className="">
-        <label htmlFor="name" className="form-label fs-lg fw-medium mb-4">
+        <label
+          htmlFor="name"
+          className="form-label dark:text-gray-100 text-gray-950 fs-lg fw-medium mb-4"
+        >
           {" "}
           First Name *{" "}
         </label>
@@ -56,7 +59,7 @@ const StepOne = () => {
             type="text"
             id="firstName"
             name="firstName"
-            className="form-control rounded-2"
+            className="form-control rounded-2 "
             placeholder=""
             value={firstName}
             onChange={(e) => {
@@ -66,7 +69,10 @@ const StepOne = () => {
         </div>
       </div>
       <div className="">
-        <label htmlFor="name" className="form-label fs-lg fw-medium mb-4">
+        <label
+          htmlFor="name"
+          className="form-label dark:text-gray-100 text-gray-950 fs-lg fw-medium mb-4"
+        >
           {" "}
           Last Name *{" "}
         </label>
@@ -94,7 +100,7 @@ const StepOne = () => {
             onChange={(e) => {
               dispatch(setStepOne({ lastName: e.target.value }));
             }}
-            className="form-control rounded-2"
+            className="form-control rounded-2 "
             placeholder=""
           />
         </div>

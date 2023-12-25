@@ -7,6 +7,7 @@ export async function POST(req: any) {
     const formData = await req.formData();
 
     const html = formData.get("htmlToDoc");
+
     let browser;
     chromium.setGraphicsMode = false;
 

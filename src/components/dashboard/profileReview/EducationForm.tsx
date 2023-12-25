@@ -10,7 +10,7 @@ const EducationForm = ({ formik }: any) => {
   return (
     <form className="space-y-4" onSubmit={formik.handleSubmit}>
       <div className="w-full">
-        <label className="block text-sm font-medium ">
+        <label className="block dark:text-gray-100 text-gray-950 text-sm font-medium ">
           Level of education <span className="text-red-500">*</span>
         </label>
         <input
@@ -32,7 +32,9 @@ const EducationForm = ({ formik }: any) => {
         )}
       </div>
       <div className="w-full">
-        <label className="block text-sm font-medium ">Field of study</label>
+        <label className="block dark:text-gray-100 text-gray-950 text-sm font-medium ">
+          Field of study
+        </label>
         <input
           type="text"
           name="fieldOfStudy"
@@ -43,7 +45,9 @@ const EducationForm = ({ formik }: any) => {
         />
       </div>
       <div className="w-full">
-        <label className="block text-sm font-medium ">School</label>
+        <label className="block dark:text-gray-100 text-gray-950 text-sm font-medium ">
+          School
+        </label>
         <input
           type="text"
           name="schoolName"
@@ -55,7 +59,9 @@ const EducationForm = ({ formik }: any) => {
       </div>
 
       <div className="w-full">
-        <label className="block text-sm font-medium ">School Location</label>
+        <label className="block dark:text-gray-100 text-gray-950 text-sm font-medium ">
+          School Location
+        </label>
         <input
           type="text"
           name="schoolLocation"
@@ -66,10 +72,14 @@ const EducationForm = ({ formik }: any) => {
         />
       </div>
       <div className="w-full">
-        <label className="block text-sm font-medium ">Time Period</label>
+        <label className="block dark:text-gray-100 text-gray-950 text-sm font-medium ">
+          Time Period
+        </label>
         <div className="flex space-x-4 mt-4">
           <div className="w-1/2">
-            <label className="block text-xs ">From Month</label>
+            <label className="block dark:text-gray-100 text-gray-950 text-xs ">
+              From Month
+            </label>
             <select
               className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               name="fromMonth"
@@ -86,7 +96,9 @@ const EducationForm = ({ formik }: any) => {
             </select>
           </div>
           <div className="w-1/2">
-            <label className="block text-xs ">From Year</label>
+            <label className="block dark:text-gray-100 text-gray-950 text-xs ">
+              From Year
+            </label>
             <select
               className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               name="fromYear"
@@ -106,7 +118,9 @@ const EducationForm = ({ formik }: any) => {
         {!formik.values.isContinue && (
           <div className="flex space-x-4 mt-4">
             <div className="w-1/2">
-              <label className="block text-xs ">To Month</label>
+              <label className="block dark:text-gray-100 text-gray-950 text-xs ">
+                To Month
+              </label>
               <select
                 className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
                 name="toMonth"
@@ -123,7 +137,9 @@ const EducationForm = ({ formik }: any) => {
               </select>
             </div>
             <div className="w-1/2">
-              <label className="block text-xs ">To Year</label>
+              <label className="block dark:text-gray-100 text-gray-950 text-xs ">
+                To Year
+              </label>
               <select
                 className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
                 name="toYear"

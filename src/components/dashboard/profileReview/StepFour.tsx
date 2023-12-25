@@ -59,7 +59,7 @@ const StepFour = () => {
 
       {state === "show" && (
         <>
-          <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl ">
+          <h1 className="text-xl font-bold leading-tight tracking-tight dark:text-gray-100 text-gray-950  md:text-2xl ">
             Your Education
             <button
               type="button"

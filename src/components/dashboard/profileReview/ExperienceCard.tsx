@@ -27,7 +27,7 @@ const ExperienceCard = ({
   return (
     <div className="w-full  rounded-lg shadow-md p-6 border" key={rec.id}>
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-base font-semibold w-[80%]">
+        <h2 className="text-base dark:text-gray-100 text-gray-950 font-semibold w-[80%]">
           {rec.jobTitle || isShowing ? (
             rec.jobTitle
           ) : (
@@ -69,7 +69,7 @@ const ExperienceCard = ({
           </div>
         )}
       </div>
-      <p className="text-md">
+      <p className="text-md dark:text-gray-100 text-gray-950">
         {rec.country || isShowing ? (
           rec.country
         ) : (
@@ -83,7 +83,7 @@ const ExperienceCard = ({
         )}
       </p>
       {/* <h3 className="text-sm text-gray-600">Islamabad, Pakistan</h3> */}
-      <h3 className="text-sm text-gray-600">
+      <h3 className="text-sm dark:text-gray-100 text-gray-950">
         {rec.cityState || isShowing ? (
           rec.cityState
         ) : (
@@ -96,7 +96,7 @@ const ExperienceCard = ({
           </button>
         )}
       </h3>
-      <p className="text-sm text-gray-400">
+      <p className="text-sm dark:text-gray-300 text-gray-950">
         {rec.fromMonth || isShowing ? (
           rec.fromMonth
         ) : (
@@ -149,7 +149,7 @@ const ExperienceCard = ({
           </>
         )}
       </p>
-      <p className="text-md">
+      <p className="text-md dark:text-gray-100 text-gray-950">
         {rec.description || isShowing ? (
           <>
             <span>

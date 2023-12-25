@@ -74,17 +74,21 @@ const StepSix = () => {
 
   return (
     <div className="w-full max-w-md mx-auto ">
-      <h2 className="text-2xl font-semibold mb-4">Your Skills</h2>
+      <h2 className="text-2xl font-semibold mb-4 dark:text-gray-100 text-gray-950">
+        Your Skills
+      </h2>
       <div className="mb-4">
         {list.length === 0 ? (
-          <p className="text-xs mb-2">No Skills Found</p>
+          <p className="text-xs mb-2 dark:text-gray-100 text-gray-950">
+            No Skills Found
+          </p>
         ) : (
           <>
             <ul className="space-y-2 pl-0">
               {list.map((skill: string, index: number) => (
                 <li
                   key={index}
-                  className="flex items-center justify-between  rounded-md shadow-md border p-3"
+                  className="flex items-center justify-between  rounded-md shadow-md border p-3 dark:text-gray-100 text-gray-950"
                 >
                   <span>{skill}</span>
                   <button
@@ -100,7 +104,9 @@ const StepSix = () => {
         )}
       </div>
       <div className="mb-4">
-        <h3 className="text-lg font-medium mb-2">Add New Skill</h3>
+        <h3 className="text-lg font-medium mb-2 dark:text-gray-100 text-gray-950">
+          Add New Skill
+        </h3>
         <div className="">
           <form onSubmit={addSkill} className="flex space-x-2">
             <input
@@ -121,8 +127,10 @@ const StepSix = () => {
         </div>
       </div>
       <div>
-        <h3 className="text-lg font-medium mb-2">Suggested Skills</h3>
-        <p className="text-xs mb-2">
+        <h3 className="text-lg font-medium mb-2 dark:text-gray-100 text-gray-950">
+          Suggested Skills
+        </h3>
+        <p className="text-xs mb-2 dark:text-gray-400 text-gray-950">
           Click on any of the suggested skills from below and add them to your
           profile
         </p>
