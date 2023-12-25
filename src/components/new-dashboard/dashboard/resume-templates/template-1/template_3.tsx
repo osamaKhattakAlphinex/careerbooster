@@ -306,7 +306,7 @@ const ResumeTemplate3 = ({
     <div className="first-page text-gray-900">
       <div className="flex">
         <div className="flex flex-col w-10/12 p-8">
-          <h2 className="text-4xl xs:text-2xl md:3xl lg:text-4xl hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-4xl xs:text-2xl md:4xl lg:text-6xl hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
