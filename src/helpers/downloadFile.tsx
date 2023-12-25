@@ -44,6 +44,7 @@ const DownloadService = ({ componentRef, view, card, type, fileName }: any) => {
       }</style>
       ${html}`;
     }
+
     const formData = new FormData();
     formData.append("htmlToDoc", htmlToDoc);
     await fetch(`/api/template`, {
