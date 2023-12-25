@@ -55,7 +55,6 @@ const DownloadService = ({ componentRef, view, card, type, fileName }: any) => {
       const arrayBufferView = new Uint8Array(res.result.data);
       const blob = new Blob([arrayBufferView], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
-      console.log(url);
       docRef.current.href = url;
       docRef.current.download = fileName;
       docRef.current.click();
@@ -64,7 +63,7 @@ const DownloadService = ({ componentRef, view, card, type, fileName }: any) => {
 
   return (
     <div>
-      <a className="hidden" href="#" ref={docRef} target="_blank"></a>
+      <a className="" href="#" ref={docRef} target="_blank"></a>
       <button
         onClick={templateCall}
         type="button"
