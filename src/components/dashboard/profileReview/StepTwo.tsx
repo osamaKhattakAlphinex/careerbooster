@@ -44,7 +44,10 @@ const StepTwo = () => {
   return (
     <>
       <div className="">
-        <label htmlFor="name" className="form-label fs-lg fw-medium mb-4">
+        <label
+          htmlFor="name"
+          className="form-label dark:text-gray-100 text-gray-950 fs-lg fw-medium mb-4"
+        >
           {" "}
           Phone Number *{" "}
         </label>
@@ -73,13 +76,16 @@ const StepTwo = () => {
             onChange={(e) => {
               dispatch(setStepTwo({ phoneNumber: e.target.value }));
             }}
-            className="form-control rounded-2"
+            className="form-control rounded-2 "
             placeholder=""
           />
         </div>
       </div>
       <div className="">
-        <label htmlFor="name" className="form-label fs-lg fw-medium mb-4">
+        <label
+          htmlFor="name"
+          className="form-label dark:text-gray-100 text-gray-950 fs-lg fw-medium mb-4"
+        >
           {" "}
           Email *{" "}
         </label>
@@ -109,7 +115,7 @@ const StepTwo = () => {
             onChange={(e) => {
               // dispatch(setStepTwo({ Email: e.target.value }));
             }}
-            className="form-control rounded-2"
+            className="form-control rounded-2 "
             placeholder=""
             title="Email can't be changed"
           />
