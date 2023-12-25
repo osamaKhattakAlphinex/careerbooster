@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import puppeteer from "puppeteer-core";
-import puppeteerD from "puppeteer";
+import puppeteerDev from "puppeteer";
 import chromium from "@sparticuz/chromium";
 export async function POST(req: any) {
   try {
@@ -11,7 +11,7 @@ export async function POST(req: any) {
     chromium.setGraphicsMode = false;
 
     if (process.env?.NEXT_APP_STATE === "Development") {
-      browser = await puppeteerD.launch();
+      browser = await puppeteerDev.launch();
     } else {
       browser = await puppeteer.launch({
         args: chromium.args,
