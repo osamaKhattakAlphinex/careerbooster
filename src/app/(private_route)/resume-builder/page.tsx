@@ -6,6 +6,7 @@ import ResumeTemplate2 from "@/components/new-dashboard/dashboard/resume-templat
 import ResumeTemplate3 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_3";
 import ResumeTemplate4 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_4";
 import ResumeTemplate5 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_5";
+import ResumeTemplate7 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_7";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -593,12 +594,21 @@ const ResumeBuilder = () => {
                   >
                     Template 5
                   </button>
+                  <button
+                    className={`${
+                      template === "template-7" ? "bg-black text-white" : ""
+                    } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
+                    onClick={() => setTemplate("template-7")}
+                  >
+                    Template 7
+                  </button>
                 </div>
 
                 <div
                   className={`my-10  w-[100%] bg-white  ${
-                    template !== "template-4" &&
-                    "border border-gray-200 rounded-lg shadow sm:p-6"
+                    template !== "template-4" && template !== "template-7"
+                      ? "border border-gray-200 rounded-lg shadow sm:p-6"
+                      : ""
                   }`}
                 >
                   <div
@@ -637,6 +647,13 @@ const ResumeBuilder = () => {
                     )}
                     {template === "template-5" && (
                       <ResumeTemplate5
+                        streamedSummaryData={streamedSummaryData}
+                        streamedJDData={streamedJDData}
+                        saveResumeToDB={saveResumeToDB}
+                      />
+                    )}
+                    {template === "template-7" && (
+                      <ResumeTemplate7
                         streamedSummaryData={streamedSummaryData}
                         streamedJDData={streamedJDData}
                         saveResumeToDB={saveResumeToDB}
