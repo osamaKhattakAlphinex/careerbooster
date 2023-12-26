@@ -288,8 +288,8 @@ const ResumeBuilder = () => {
         workExpArr.push(workExpArrObj);
       }
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
-      dispatch(setWorkExperience(temp));
       dispatch(setState({ name: "resumeLoading", value: false }));
+      dispatch(setWorkExperience(temp));
     }
     // });
   };
