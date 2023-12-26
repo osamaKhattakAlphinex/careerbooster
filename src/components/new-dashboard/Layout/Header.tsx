@@ -32,12 +32,13 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     "/change-current-password": "Change Password",
     "/billing": "Billing Detail",
     "/review-resume": "Get Your Resume Reviewed By AI",
-
+    "/resume-builder/templates": "Choose Design of Your Choice",
+    "/resume-builder/templates/template": "Let's start building resume",
     // Add more routes as needed
   };
 
   const currentRouteDisplayName: string =
-    routeNamesToDisplayNames[pathname] || "Unknown";
+    routeNamesToDisplayNames[pathname] || "";
 
   return (
     <nav

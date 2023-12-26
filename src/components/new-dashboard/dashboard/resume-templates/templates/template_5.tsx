@@ -306,7 +306,7 @@ const ResumeTemplate5 = ({
     <div className="w-full first-page  text-gray-900">
       <div className="flex ">
         <div className="flex flex-col w-full p-8 text-center">
-          <h2 className="text-4xl md:text-6xl hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-4xl xs:text-2xl md:text-6xl hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -316,7 +316,7 @@ const ResumeTemplate5 = ({
               }}
             />
           </h2>
-          <h3 className="text-[16px] md:text-2xl hover:shadow-md hover:bg-gray-100 mt-4">
+          <h3 className="text-2xl xs:text-[16px] md:text-2xl hover:shadow-md hover:bg-gray-100 mt-4">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -334,7 +334,7 @@ const ResumeTemplate5 = ({
 
           <h3 className="uppercase text-lg font-semibold">EXECUTIVE SUMMARY</h3>
 
-          <div className="text-sm hover:shadow-md hover:bg-gray-100 mt-4">
+          <div className="text-sm md:text-lg hover:shadow-md hover:bg-gray-100 mt-4">
             <EditableField
               type="textarea"
               value={
@@ -504,7 +504,7 @@ const ResumeTemplate5 = ({
                     </h2>
                     <div className="p-4">
                       {rec?.achievements && (
-                        <ul className="pl-0 flex flex-col gap-1 text-sm">
+                        <ul className="pl-0 flex flex-col gap-1 text-sm md:text-lg">
                           {rec?.achievements.map(
                             (achievement: any, ind: number) => (
                               <li
@@ -601,7 +601,7 @@ const ResumeTemplate5 = ({
                         <>
                           <div className="w-full gap-1 rounded-md flex flex-wrap h-9.5">
                             <textarea
-                              className="w-full md:w-9/12 rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
+                              className="w-full rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
                               onChange={(e) =>
                                 setNewAchievement(e.target.value)
                               }
@@ -722,7 +722,7 @@ const ResumeTemplate5 = ({
           )}
         </div>
         <div className="relative  border border-gray-500 "></div>
-        <div className=" w-5/12 md:w-1/3 flex flex-col pl-3 md:pl-8 pr-6 gap-4 ">
+        <div className=" w-4/12 xs:w-1/3 md:w-4/12 flex flex-col pl-3 md:pl-8 pr-6 gap-4 ">
           {/* contacts */}
 
           <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center mb-2">
@@ -730,7 +730,7 @@ const ResumeTemplate5 = ({
             Contact
           </h3>
 
-          <ul className=" flex flex-col gap-4 mb-4 text-sm break-all pl-0">
+          <ul className=" flex flex-col gap-4 mb-4 text-sm md:text-lg break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-100 text-xs flex flex-row gap-1  items-center">
               {phoneIcon}
               <EditableField
@@ -820,7 +820,7 @@ const ResumeTemplate5 = ({
               </h3>
 
               <ul
-                className="pl-0 flex  flex-col gap-1 mb-4 text-sm"
+                className="pl-0 flex  flex-col gap-1 mb-4 text-sm md:text-lg"
                 onMouseEnter={() =>
                   !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                 }
@@ -966,7 +966,7 @@ const ResumeTemplate5 = ({
                     <li
                       className=" hover:shadow-md hover:cursor-move 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
-                   hover:bg-gray-100 font-semibold flex uppercase text-md  justify-between items-center "
+                   hover:bg-gray-100 font-semibold flex uppercase text-sm md:text-lg  justify-between items-center "
                     >
                       <EditableField
                         type="textarea"
@@ -1046,7 +1046,7 @@ const ResumeTemplate5 = ({
                         }}
                       />{" "}
                     </li>
-                    <li className="hover:shadow-md hover:bg-gray-100 text-sm text-gray-800">
+                    <li className="hover:shadow-md hover:bg-gray-100 text-sm md:text-lg text-gray-800">
                       <EditableField
                         type="textarea"
                         rows={2}

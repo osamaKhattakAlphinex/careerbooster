@@ -12,16 +12,18 @@ const Template = () => {
   const templateId: number = parseInt(params.get("templateId") || "0");
   const componentRef = useRef(null);
   return (
-    <div className="ml-[234px] ">
-      <RecentResumeCard componentRef={componentRef} />
-      {resumeData &&
-        (resumeData?.name ||
-          resumeData?.contact?.email ||
-          resumeData?.summary) && (
-          <div ref={componentRef} className="bg-white">
-            {ALL_TEMPLATES[templateId - 1].template({})}
-          </div>
-        )}
+    <div className="lg:ml-[234px] ml-0 px-[15px]">
+      <RecentResumeCard componentRef={componentRef} templateId={templateId} />
+      <div className="my-10">
+        {resumeData &&
+          (resumeData?.name ||
+            resumeData?.contact?.email ||
+            resumeData?.summary) && (
+            <div ref={componentRef} className=" bg-white">
+              {ALL_TEMPLATES[templateId - 1].template({})}
+            </div>
+          )}
+      </div>
     </div>
   );
 };
