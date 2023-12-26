@@ -60,6 +60,7 @@ const ResumeBuilder = () => {
   const { data: session } = useSession();
 
   // Local States
+  const [finished, setFinished] = useState<boolean>(false);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [streamedJDData, setStreamedJDData] = useState("");
   const [aiInputUserData, setAiInputUserData] = useState<any>();
@@ -281,9 +282,10 @@ const ResumeBuilder = () => {
         workExpArrObj.achievements = achivementsArray;
         workExpArr.push(workExpArrObj);
       }
+      setFinished(true);
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
-      dispatch(setWorkExperience(temp));
       dispatch(setState({ name: "resumeLoading", value: false }));
+      dispatch(setWorkExperience(temp));
     }
     // });
   };
@@ -495,6 +497,7 @@ const ResumeBuilder = () => {
   useEffect(() => {
     if (!resumeData.state.resumeLoading && resumeData?.name) {
       saveResumeToDB();
+      setFinished(true);
     }
   }, [resumeData?.state?.resumeLoading]);
 
@@ -524,7 +527,11 @@ const ResumeBuilder = () => {
             {leftArrowIcon}
             Back
           </Link>
-          <RecentResumeCard source="dashboard" componentRef={componentRef} />
+          <RecentResumeCard
+            source="dashboard"
+            componentRef={componentRef}
+            setFinished={setFinished}
+          />
           {showAlert && (
             <div
               className="fixed bottom-10 right-10 flex flex-row gap-2 justify-center items-center bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white transition-opacity cursor-pointer"
@@ -541,6 +548,16 @@ const ResumeBuilder = () => {
           <div className="flex justify-center items-center">
             <Confetti active={confettingRunning} config={confettiConfig} />
           </div>
+          {finished && (
+            <div className="text-white">
+              <strong>Note:</strong>
+              <p>
+                We have generated free text basic resume for you for further
+                design templates click here
+              </p>
+              <Link href="/resume-builder/templates"> Explore More</Link>
+            </div>
+          )}
           {resumeData &&
             (resumeData?.name ||
               resumeData?.contact?.email ||

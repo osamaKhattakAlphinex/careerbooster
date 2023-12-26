@@ -5,6 +5,11 @@ import ResumeTemplate2 from "./templates/template_2";
 import ResumeTemplate3 from "./templates/template_3";
 import ResumeTemplate4 from "./templates/template_4";
 import ResumeTemplate5 from "./templates/template_5";
+import ResumeTemplate6 from "./templates/template_6";
+import ResumeTemplate7 from "./templates/template_7";
+import ResumeTemplate8 from "./templates/template_8";
+import ResumeTemplate9 from "./templates/template_9";
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -50,11 +55,11 @@ const tabs: Tabs[] = [
   },
 ];
 
-const ALL_TEMPLATES: Template[] = [
+export const ALL_TEMPLATES: Template[] = [
   {
     id: 1,
-    title: "",
-    tags: [],
+    title: "classic-executive",
+    tags: ["classic-executive"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate1 {...props} />,
@@ -62,15 +67,15 @@ const ALL_TEMPLATES: Template[] = [
   {
     id: 2,
     title: "",
-    tags: [],
+    tags: ["creative-colorful"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate2 {...props} />,
   },
   {
     id: 3,
-    title: "",
-    tags: [],
+    title: "classic-executive",
+    tags: ["classic-executive", "creative-colorful"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate3 {...props} />,
@@ -78,7 +83,7 @@ const ALL_TEMPLATES: Template[] = [
   {
     id: 4,
     title: "",
-    tags: [],
+    tags: ["classic-executive", "one-page"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate4 {...props} />,
@@ -86,21 +91,56 @@ const ALL_TEMPLATES: Template[] = [
   {
     id: 5,
     title: "",
-    tags: [],
+    tags: ["creative-colorful"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate5 {...props} />,
   },
+  {
+    id: 6,
+    title: "",
+    tags: ["creative-colorful"],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate6 {...props} />,
+  },
+  {
+    id: 7,
+    title: "",
+    tags: ["creative-colorful", "one-page"],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate7 {...props} />,
+  },
+  {
+    id: 8,
+    title: "",
+    tags: ["creative-colorful"],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate8 {...props} />,
+  },
+  {
+    id: 9,
+    title: "",
+    tags: ["one-page"],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate9 {...props} />,
+  },
 ];
 
-const Templates = () => {
+const Templates = ({ props }: any) => {
   const [activeTab, setActiveTab] = useState<Tabs>(tabs[0]);
   const [templates, setTemplates] = useState<Template[]>(ALL_TEMPLATES);
   const filterTemplates = () => {
     if (activeTab.tab === "all-templates") {
       setTemplates(ALL_TEMPLATES);
     } else {
-      setTemplates([...ALL_TEMPLATES].splice(0, 2));
+      let _templates: Template[] = ALL_TEMPLATES.filter((template) =>
+        template.tags.includes(activeTab.tab)
+      );
+      setTemplates(_templates);
     }
   };
 
@@ -115,7 +155,7 @@ const Templates = () => {
           <button
             key={index}
             className={`px-4 py-2 text-sm rounded-full border border-gray-600 ${
-              activeTab.tab === tab.tab ? "bg-black" : ""
+              activeTab.tab === tab.tab ? "dark:bg-black bg-white" : ""
             }`}
             onClick={() => setActiveTab(tab)}
           >

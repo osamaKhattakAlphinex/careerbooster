@@ -9,9 +9,11 @@ SwiperCore.use([Pagination]);
 const RecentResumeCard = ({
   source = "",
   componentRef,
+  setFinished,
 }: {
   source?: string;
   componentRef?: any;
+  setFinished?: any;
 }) => {
   // redux
   const userData = useSelector((state: any) => state.userData);
@@ -70,6 +72,7 @@ const RecentResumeCard = ({
                     resume={resume}
                     source={source}
                     componentRef={componentRef}
+                    setFinished={setFinished}
                   />
                 </SwiperSlide>
               ))}
