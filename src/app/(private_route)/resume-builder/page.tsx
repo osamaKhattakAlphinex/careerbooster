@@ -4,6 +4,8 @@ import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/template-1";
 import ResumeTemplate2 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_2";
 import ResumeTemplate3 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_3";
+import ResumeTemplate6 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_6";
+import ResumeTemplate8 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_8";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -574,8 +576,24 @@ const ResumeBuilder = () => {
                   >
                     Template 3
                   </button>
+                  <button
+                    className={`${
+                      template === "template-6" ? "bg-black text-white" : ""
+                    } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
+                    onClick={() => setTemplate("template-6")}
+                  >
+                    Template 6
+                  </button>
+                  <button
+                    className={`${
+                      template === "template-8" ? "bg-black text-white" : ""
+                    } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
+                    onClick={() => setTemplate("template-8")}
+                  >
+                    Template 8
+                  </button>
                 </div>
-                <div className="my-10  w-[100%] bg-white border border-gray-200 rounded-lg shadow sm:p-6 ">
+                <div className="my-10  w-[100%] bg-white  rounded-lg shadow sm:p-6 ">
                   <div
                     className={`w-full  ${
                       resumeData.state.resumeLoading ? "animate-pulse" : ""
@@ -598,6 +616,20 @@ const ResumeBuilder = () => {
                     )}
                     {template === "template-3" && (
                       <ResumeTemplate3
+                        streamedSummaryData={streamedSummaryData}
+                        streamedJDData={streamedJDData}
+                        saveResumeToDB={saveResumeToDB}
+                      />
+                    )}
+                    {template === "template-6" && (
+                      <ResumeTemplate6
+                        streamedSummaryData={streamedSummaryData}
+                        streamedJDData={streamedJDData}
+                        saveResumeToDB={saveResumeToDB}
+                      />
+                    )}
+                    {template === "template-8" && (
+                      <ResumeTemplate8
                         streamedSummaryData={streamedSummaryData}
                         streamedJDData={streamedJDData}
                         saveResumeToDB={saveResumeToDB}
