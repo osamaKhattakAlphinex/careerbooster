@@ -50,7 +50,7 @@ const tabs: Tabs[] = [
   },
 ];
 
-const ALL_TEMPLATES: Template[] = [
+export const ALL_TEMPLATES: Template[] = [
   {
     id: 1,
     title: "",
@@ -93,7 +93,7 @@ const ALL_TEMPLATES: Template[] = [
   },
 ];
 
-const Templates = () => {
+const Templates = ({ props }: any) => {
   const [activeTab, setActiveTab] = useState<Tabs>(tabs[0]);
   const [templates, setTemplates] = useState<Template[]>(ALL_TEMPLATES);
   const filterTemplates = () => {
