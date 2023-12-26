@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
-import ResumeTemplate10 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_10";
+import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_1";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -553,7 +553,7 @@ const ResumeBuilder = () => {
                     }`}
                     ref={componentRef}
                   >
-                    <ResumeTemplate10
+                    <ResumeTemplate1
                       streamedSummaryData={streamedSummaryData}
                       streamedJDData={streamedJDData}
                       saveResumeToDB={saveResumeToDB}
