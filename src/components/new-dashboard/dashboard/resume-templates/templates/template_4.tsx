@@ -1028,7 +1028,7 @@ const ResumeTemplate4 = ({
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
-                  <div className="flex justify-center items-center">
+                  <div key={i} className="flex justify-center items-center">
                     <div className="w-[5%] pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
                       {resume?.workExperienceArray.length - 1 !== i && (

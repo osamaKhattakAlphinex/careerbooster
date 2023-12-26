@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
-import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/template-1";
-import ResumeTemplate2 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_2";
-import ResumeTemplate3 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_3";
-import ResumeTemplate4 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_4";
-import ResumeTemplate5 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_5";
+import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates";
+import ResumeTemplate2 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_2";
+import ResumeTemplate3 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_3";
+import ResumeTemplate4 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_4";
+import ResumeTemplate5 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_5";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -36,8 +36,8 @@ import useTheme from "@/lib/useTheme";
 import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
 import GenerateResume from "@/components/new-dashboard/dashboard/resume-builder/GenerateNewResumeCard";
 import Link from "next/link";
-import template1 from "@/components/new-dashboard/dashboard/resume-templates/template-1";
-import template_4 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_4";
+import template1 from "@/components/new-dashboard/dashboard/resume-templates";
+import template_4 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_4";
 const ResumeBuilder = () => {
   const [theme] = useTheme();
   const [confettingRunning, setConfettiRunning] = useState(false);

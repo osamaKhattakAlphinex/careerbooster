@@ -1,8 +1,8 @@
-import TemplatePreviews from "@/components/new-dashboard/dashboard/resume-templates/previews/templates";
+import Templates from "@/components/new-dashboard/dashboard/resume-templates";
 import React from "react";
 
 const Page = () => {
-  return <TemplatePreviews />;
+  return <Templates />;
 };
 
 export default Page;
