@@ -13,10 +13,12 @@ const SingleRecentResumeCard = ({
   resume,
   source,
   componentRef,
+  setFinished,
 }: {
   resume: Resume;
   source?: string;
-  componentRef: any;
+  componentRef?: any;
+  setFinished?: any;
 }) => {
   const userData = useSelector((state: any) => state.userData);
   const { email, resumes } = userData;
@@ -26,6 +28,9 @@ const SingleRecentResumeCard = ({
   const handleOnView = async () => {
     if (source != "") {
       router.replace("/resume-builder");
+    }
+    if (setFinished) {
+      setFinished(true);
     }
     return dispatch(setResume(resume));
   };
