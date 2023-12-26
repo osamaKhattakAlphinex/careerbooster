@@ -33,8 +33,7 @@ import useTheme from "@/lib/useTheme";
 import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
 import GenerateResume from "@/components/new-dashboard/dashboard/resume-builder/GenerateNewResumeCard";
 import Link from "next/link";
-import template1 from "@/components/new-dashboard/dashboard/resume-templates";
-import template_4 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_4";
+
 const ResumeBuilder = () => {
   const [theme] = useTheme();
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -66,8 +65,6 @@ const ResumeBuilder = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
-
-  const [template, setTemplate] = useState<string>("template-1");
 
   // Redux
   const dispatch = useDispatch();
@@ -549,68 +546,18 @@ const ResumeBuilder = () => {
               resumeData?.contact?.email ||
               resumeData?.summary) && (
               <>
-                <div className="mt-4 flex flex-row gap-3 justify-start items-center">
-                  <button
-                    className={`${
-                      template === "template-1" ? "bg-black text-white" : ""
-                    } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
-                    onClick={() => setTemplate("template-1")}
-                  >
-                    Template 1
-                  </button>
-                  <button
-                    className={`${
-                      template === "template-2" ? "bg-black text-white" : ""
-                    } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
-                    onClick={() => setTemplate("template-2")}
-                  >
-                    Template 2
-                  </button>
-                  <button
-                    className={`${
-                      template === "template-3" ? "bg-black text-white" : ""
-                    } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
-                    onClick={() => setTemplate("template-3")}
-                  >
-                    Template 3
-                  </button>
-                  <button
-                    className={`${
-                      template === "template-4" ? "bg-black text-white" : ""
-                    } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
-                    onClick={() => setTemplate("template-4")}
-                  >
-                    Template 4
-                  </button>
-                  <button
-                    className={`${
-                      template === "template-5" ? "bg-black text-white" : ""
-                    } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
-                    onClick={() => setTemplate("template-5")}
-                  >
-                    Template 5
-                  </button>
-                </div>
-
-                <div
-                  className={`my-10  w-[100%] bg-white  ${
-                    template !== "template-4" &&
-                    "border border-gray-200 rounded-lg shadow sm:p-6"
-                  }`}
-                >
+                <div className={`my-10  w-[100%] bg-white`}>
                   <div
                     className={`w-full  ${
                       resumeData.state.resumeLoading ? "animate-pulse" : ""
                     }`}
                     ref={componentRef}
                   >
-                    {template === "template-1" && (
-                      <ResumeTemplate1
-                        streamedSummaryData={streamedSummaryData}
-                        streamedJDData={streamedJDData}
-                        saveResumeToDB={saveResumeToDB}
-                      />
-                    )}
+                    <ResumeTemplate1
+                      streamedSummaryData={streamedSummaryData}
+                      streamedJDData={streamedJDData}
+                      saveResumeToDB={saveResumeToDB}
+                    />
                   </div>
                 </div>
               </>
