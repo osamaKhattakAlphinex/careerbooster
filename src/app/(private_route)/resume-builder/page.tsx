@@ -32,7 +32,7 @@ import useTheme from "@/lib/useTheme";
 import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
 import GenerateResume from "@/components/new-dashboard/dashboard/resume-builder/GenerateNewResumeCard";
 import Link from "next/link";
-import { ALL_TEMPLATES } from "@/components/new-dashboard/dashboard/resume-templates";
+import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import Image from "next/image";
 import { crownIcon } from "@/helpers/newIconsProviders";
 
