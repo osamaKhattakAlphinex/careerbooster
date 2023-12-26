@@ -8,6 +8,7 @@ import ResumeTemplate6 from "@/components/new-dashboard/dashboard/resume-templat
 import ResumeTemplate8 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_8";
 import ResumeTemplate4 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_4";
 import ResumeTemplate5 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_5";
+import ResumeTemplate9 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_9";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -554,7 +555,7 @@ const ResumeBuilder = () => {
               resumeData?.contact?.email ||
               resumeData?.summary) && (
               <>
-                <div className="mt-4 flex flex-row gap-3 justify-start items-center">
+                <div className="mt-4 flex flex-row flex-wrap gap-3 justify-start items-center">
                   <button
                     className={`${
                       template === "template-1" ? "bg-black text-white" : ""
@@ -602,6 +603,14 @@ const ResumeBuilder = () => {
                     onClick={() => setTemplate("template-8")}
                   >
                     Template 8
+                  </button>
+                  <button
+                    className={`${
+                      template === "template-9" ? "bg-black text-white" : ""
+                    } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
+                    onClick={() => setTemplate("template-9")}
+                  >
+                    Template 9
                   </button>
                 </div>
                 <div
@@ -658,6 +667,13 @@ const ResumeBuilder = () => {
                     />)}
                     {template === "template-5" && (
                       <ResumeTemplate5
+                        streamedSummaryData={streamedSummaryData}
+                        streamedJDData={streamedJDData}
+                        saveResumeToDB={saveResumeToDB}
+                      />
+                    )}
+                    {template === "template-9" && (
+                      <ResumeTemplate9
                         streamedSummaryData={streamedSummaryData}
                         streamedJDData={streamedJDData}
                         saveResumeToDB={saveResumeToDB}

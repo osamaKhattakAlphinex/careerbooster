@@ -450,7 +450,7 @@ const ResumeTemplate8 = ({
                 {/* <li className="font-semibold  uppercase">primary :</li> */}
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
-                    className="hover:shadow-md  w-fit  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex  items-center"
+                    className="hover:shadow-md w-[30%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex  items-center"
                     key={i}
                     onDragStart={(e) =>
                       e.dataTransfer.setData("text/plain", i.toString())
@@ -459,53 +459,53 @@ const ResumeTemplate8 = ({
                     onDrop={(e) => handleDropPrimary(e, i)}
                     draggable
                   >
-                    {/* <span className="w-2 h-2 bg-black rounded-full mr-3"></span> */}
+                    <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
                     <div className="flex justify-between items-center w-full">
-                      <EditableField
-                        value={skill}
-                        onSave={(value: string) => {
-                          let updatedSkills = resume.primarySkills.map(
-                            (skill: string, index: number) => {
-                              if (index === i) {
-                                return value;
-                              }
-                              return skill;
+                       
+                    <EditableField
+                      value={skill}
+                      onSave={(value: string) => {
+                        let updatedSkills = resume.primarySkills.map(
+                          (skill: string, index: number) => {
+                            if (index === i) {
+                              return value;
                             }
-                          );
-                          dispatch(
-                            setPrimarySkills({
-                              ...resume,
-                              primarySkills: updatedSkills,
-                            })
-                          );
-                          saveResumeToDB({
+                            return skill;
+                          }
+                        );
+                        dispatch(
+                          setPrimarySkills({
                             ...resume,
                             primarySkills: updatedSkills,
-                          });
-                        }}
-                      />{" "}
-                      {"/"}
-                      <div
-                        onClick={() => {
-                          const removeSkill = resume.primarySkills.filter(
-                            (item: any) => item !== skill
-                          );
-                          dispatch(
-                            setPrimarySkills({
-                              ...resume,
-                              primarySkills: removeSkill,
-                            })
-                          );
-                          saveResumeToDB({
+                          })
+                        );
+                        saveResumeToDB({
+                          ...resume,
+                          primarySkills: updatedSkills,
+                        });
+                      }}
+                    />
+                    <div
+                      onClick={() => {
+                        const removeSkill = resume.primarySkills.filter(
+                          (item: any) => item !== skill
+                        );
+                        dispatch(
+                          setPrimarySkills({
                             ...resume,
                             primarySkills: removeSkill,
-                          });
-                        }}
-                        className="w-4 h-4  cursor-pointer child"
-                      >
-                        {crossIcon1}
-                      </div>
+                          })
+                        );
+                        saveResumeToDB({
+                          ...resume,
+                          primarySkills: removeSkill,
+                        });
+                      }}
+                      className="w-4 h-4  cursor-pointer child"
+                    >
+                      {crossIcon1}
                     </div>
+                   </div>
                   </li>
                 ))}
                 {newPrimarySkill ? (
