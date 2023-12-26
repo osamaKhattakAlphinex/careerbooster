@@ -15,6 +15,7 @@ import Image from "next/image";
 import iconOfPackageBadge from "@/../public/icon/crown.svg";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
+import { crownIcon } from "@/helpers/newIconsProviders";
 
 export type Template = {
   id: number;
@@ -62,7 +63,12 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 1,
     title: "classic-executive",
-    tags: ["classic-executive"],
+    tags: [
+      "all-templates",
+      "classic-executive",
+      "one-page",
+      "creative-colorful",
+    ],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate1 {...props} />,
@@ -79,7 +85,7 @@ export const ALL_TEMPLATES: Template[] = [
     id: 3,
     title: "classic-executive",
     tags: ["classic-executive", "creative-colorful"],
-    category: "freemium",
+    category: "premium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate3 {...props} />,
   },
@@ -87,7 +93,7 @@ export const ALL_TEMPLATES: Template[] = [
     id: 4,
     title: "",
     tags: ["classic-executive", "one-page"],
-    category: "freemium",
+    category: "premium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate4 {...props} />,
   },
@@ -95,7 +101,7 @@ export const ALL_TEMPLATES: Template[] = [
     id: 5,
     title: "",
     tags: ["creative-colorful"],
-    category: "freemium",
+    category: "premium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate5 {...props} />,
   },
@@ -111,7 +117,7 @@ export const ALL_TEMPLATES: Template[] = [
     id: 7,
     title: "",
     tags: ["creative-colorful", "one-page"],
-    category: "freemium",
+    category: "premium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate7 {...props} />,
   },
@@ -119,7 +125,7 @@ export const ALL_TEMPLATES: Template[] = [
     id: 8,
     title: "",
     tags: ["creative-colorful"],
-    category: "freemium",
+    category: "premium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate8 {...props} />,
   },
@@ -127,7 +133,7 @@ export const ALL_TEMPLATES: Template[] = [
     id: 9,
     title: "",
     tags: ["one-page"],
-    category: "freemium",
+    category: "premium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate9 {...props} />,
   },
@@ -186,13 +192,15 @@ const Templates = () => {
           >
             {template.category === "premium" && (
               <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
-                <Image
+                {/* <Image
                   src={iconOfPackageBadge}
                   alt="bold icon"
                   height={24}
                   width={24}
                   className=""
-                />
+                /> */}
+
+                {crownIcon}
               </div>
             )}
             <button className="" onClick={() => handleViewTemplate(template)}>
