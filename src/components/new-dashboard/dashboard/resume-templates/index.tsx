@@ -12,6 +12,9 @@ import ResumeTemplate9 from "./templates/template_9";
 
 import Link from "next/link";
 import Image from "next/image";
+import iconOfPackageBadge from "@/../public/icon/crown.svg";
+import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
 export type Template = {
   id: number;
@@ -68,7 +71,7 @@ export const ALL_TEMPLATES: Template[] = [
     id: 2,
     title: "",
     tags: ["creative-colorful"],
-    category: "freemium",
+    category: "premium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate2 {...props} />,
   },
@@ -100,7 +103,7 @@ export const ALL_TEMPLATES: Template[] = [
     id: 6,
     title: "",
     tags: ["creative-colorful"],
-    category: "freemium",
+    category: "premium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate6 {...props} />,
   },
@@ -130,9 +133,12 @@ export const ALL_TEMPLATES: Template[] = [
   },
 ];
 
-const Templates = ({ props }: any) => {
+const Templates = () => {
   const [activeTab, setActiveTab] = useState<Tabs>(tabs[0]);
   const [templates, setTemplates] = useState<Template[]>(ALL_TEMPLATES);
+
+  const userData = useSelector((state: any) => state.userData);
+
   const filterTemplates = () => {
     if (activeTab.tab === "all-templates") {
       setTemplates(ALL_TEMPLATES);
@@ -142,6 +148,12 @@ const Templates = ({ props }: any) => {
       );
       setTemplates(_templates);
     }
+  };
+
+  const router = useRouter();
+
+  const handleViewTemplate = (template: Template) => {
+    router.push(`/resume-builder/templates/template?templateId=${template.id}`);
   };
 
   useEffect(() => {
@@ -172,15 +184,18 @@ const Templates = ({ props }: any) => {
             key={`template-${index}`}
             className="box-border group relative rounded-lg overflow-hidden"
           >
-            <Link
-              className=""
-              href={{
-                pathname: "/resume-builder/templates/template",
-                query: {
-                  templateId: template.id,
-                },
-              }}
-            >
+            {template.category === "premium" && (
+              <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
+                <Image
+                  src={iconOfPackageBadge}
+                  alt="bold icon"
+                  height={24}
+                  width={24}
+                  className=""
+                />
+              </div>
+            )}
+            <button className="" onClick={() => handleViewTemplate(template)}>
               <div className=" group-hover:grid hidden bg-slate-600/60 text-white  absolute top-0 left-0 h-full w-full rounded-lg  overflow-hidden  place-content-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -203,7 +218,7 @@ const Templates = ({ props }: any) => {
                 height={400}
                 width={300}
               />
-            </Link>
+            </button>
           </div>
         ))}
       </div>

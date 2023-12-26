@@ -7,17 +7,16 @@ import { useSelector } from "react-redux";
 
 const Template = () => {
   const params = useSearchParams();
-  const resumeData = useSelector((state: any) => state.resume);
+  const { resume } = useSelector((state: any) => state);
 
   const templateId: number = parseInt(params.get("templateId") || "0");
   const componentRef = useRef(null);
+
   return (
-    <div className="ml-[234px] ">
+    <div className="ml-[234px]">
       <RecentResumeCard componentRef={componentRef} />
-      {resumeData &&
-        (resumeData?.name ||
-          resumeData?.contact?.email ||
-          resumeData?.summary) && (
+      {resume &&
+        (resume?.name || resume?.contact?.email || resume?.summary) && (
           <div ref={componentRef} className="bg-white">
             {ALL_TEMPLATES[templateId - 1].template({})}
           </div>
