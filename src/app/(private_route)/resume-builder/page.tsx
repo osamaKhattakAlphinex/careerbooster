@@ -66,6 +66,8 @@ const ResumeBuilder = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
+  const [quantifyingExperience, setQuantifyingExperience] =
+    useState<boolean>(true);
 
   // Redux
   const dispatch = useDispatch();
@@ -249,6 +251,7 @@ const ResumeBuilder = () => {
         const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
           method: "POST",
           body: JSON.stringify({
+            quantifyingExperience: quantifyingExperience,
             experience: experience,
             trainBotData: {
               userEmail: userData.email,
@@ -544,6 +547,8 @@ const ResumeBuilder = () => {
           <GenerateResume
             handleGenerate={handleGenerate}
             availablePercentage={availablePercentage}
+            quantifyingExperience={quantifyingExperience}
+            setQuantifyingExperience={setQuantifyingExperience}
           />
           <div className="flex justify-center items-center">
             <Confetti active={confettingRunning} config={confettiConfig} />

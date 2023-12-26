@@ -211,7 +211,7 @@ const Templates = () => {
   }, [activeTab]);
 
   return (
-    <div className="ml-[234px] ">
+    <div className="ml-0 lg:ml-[234px]  ">
       <div className="p-4 flex flex-row justify-center items-center gap-2">
         {tabs.map((tab, index) => (
           <button

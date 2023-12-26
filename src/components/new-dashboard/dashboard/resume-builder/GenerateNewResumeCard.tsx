@@ -12,9 +12,13 @@ import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 interface Props {
   handleGenerate: () => Promise<void>;
   availablePercentage: number;
+  quantifyingExperience: boolean;
+  setQuantifyingExperience: any;
 }
 const GenerateResume = ({
   handleGenerate,
+  quantifyingExperience,
+  setQuantifyingExperience,
 }: // availablePercentage,
 Props) => {
   const [showInstruction, setShowInstruction] = useState<boolean>(false);
@@ -137,6 +141,18 @@ Props) => {
           />
         </div>
 
+        <label className="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            checked={quantifyingExperience}
+            onChange={() => setQuantifyingExperience(!quantifyingExperience)}
+            className="sr-only peer"
+          />
+          <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full  after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-none peer-checked:bg-blue-600"></div>
+          <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+            Quantifying Experiences
+          </span>
+        </label>
         <button
           disabled={
             memoizedState.jobPosition === "" ||

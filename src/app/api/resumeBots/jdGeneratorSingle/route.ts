@@ -26,18 +26,25 @@ export async function POST(req: any) {
     const reqBody = await req.json();
     const experience = reqBody?.experience;
     const trainBotData = reqBody?.trainBotData;
-
+    const quantifyingExperience = reqBody?.quantifyingExperience;
     const dataset = "resume.writeJDSingle";
     const model = await getTrainedModel(dataset);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
-
+    let promptRec;
     await startDB();
-
-    const promptRec = await Prompt.findOne({
-      type: "resume",
-      name: "jdSingle",
-      active: true,
-    });
+    if (quantifyingExperience) {
+      promptRec = await Prompt.findOne({
+        type: "resume",
+        name: "jdSingle",
+        active: true,
+      });
+    } else {
+      promptRec = await Prompt.findOne({
+        type: "resume",
+        name: "jdSingle",
+        active: true,
+      });
+    }
     const prompt = promptRec.value;
 
     const inputPrompt = `You are a helpful assistant that helps Writing Individual Job Description for a person for his Resume.
