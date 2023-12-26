@@ -60,7 +60,7 @@ const ResumeBuilder = () => {
   const { data: session } = useSession();
 
   // Local States
-  const [finished, setFinished] = useState<boolean>(true);
+  const [finished, setFinished] = useState<boolean>(false);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [streamedJDData, setStreamedJDData] = useState("");
   const [aiInputUserData, setAiInputUserData] = useState<any>();
@@ -497,6 +497,7 @@ const ResumeBuilder = () => {
   useEffect(() => {
     if (!resumeData.state.resumeLoading && resumeData?.name) {
       saveResumeToDB();
+      setFinished(true);
     }
   }, [resumeData?.state?.resumeLoading]);
 
@@ -526,7 +527,11 @@ const ResumeBuilder = () => {
             {leftArrowIcon}
             Back
           </Link>
-          <RecentResumeCard source="dashboard" componentRef={componentRef} />
+          <RecentResumeCard
+            source="dashboard"
+            componentRef={componentRef}
+            setFinished={setFinished}
+          />
           {showAlert && (
             <div
               className="fixed bottom-10 right-10 flex flex-row gap-2 justify-center items-center bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white transition-opacity cursor-pointer"
