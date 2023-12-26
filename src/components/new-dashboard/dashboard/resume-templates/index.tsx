@@ -11,6 +11,7 @@ import ResumeTemplate8 from "./templates/template_8";
 import ResumeTemplate9 from "./templates/template_9";
 import ResumeTemplate14 from "./templates/template_14";
 import ResumeTemplate15 from "./templates/template_15";
+import ResumeTemplate17 from "./templates/template_17";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -177,6 +178,14 @@ export const ALL_TEMPLATES: Template[] = [
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate15 {...props} />,
+  },
+  {
+    id: 17,
+    title: "",
+    tags: ["creative-colorful"],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate17 {...props} />,
   },
 ];
 
