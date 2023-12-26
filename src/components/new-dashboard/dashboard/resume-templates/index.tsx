@@ -58,8 +58,8 @@ const tabs: Tabs[] = [
 export const ALL_TEMPLATES: Template[] = [
   {
     id: 1,
-    title: "",
-    tags: [],
+    title: "classic-executive",
+    tags: ["classic-executive"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate1 {...props} />,
@@ -67,15 +67,15 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 2,
     title: "",
-    tags: [],
+    tags: ["creative-colorful"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate2 {...props} />,
   },
   {
     id: 3,
-    title: "",
-    tags: [],
+    title: "classic-executive",
+    tags: ["classic-executive", "creative-colorful"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate3 {...props} />,
@@ -83,7 +83,7 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 4,
     title: "",
-    tags: [],
+    tags: ["classic-executive", "one-page"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate4 {...props} />,
@@ -91,7 +91,7 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 5,
     title: "",
-    tags: [],
+    tags: ["creative-colorful"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate5 {...props} />,
@@ -99,7 +99,7 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 6,
     title: "",
-    tags: [],
+    tags: ["creative-colorful"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate6 {...props} />,
@@ -107,7 +107,7 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 7,
     title: "",
-    tags: [],
+    tags: ["creative-colorful", "one-page"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate7 {...props} />,
@@ -115,7 +115,7 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 8,
     title: "",
-    tags: [],
+    tags: ["creative-colorful"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate8 {...props} />,
@@ -123,7 +123,7 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 9,
     title: "",
-    tags: [],
+    tags: ["one-page"],
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate9 {...props} />,
@@ -137,7 +137,10 @@ const Templates = ({ props }: any) => {
     if (activeTab.tab === "all-templates") {
       setTemplates(ALL_TEMPLATES);
     } else {
-      setTemplates([...ALL_TEMPLATES].splice(0, 2));
+      let _templates: Template[] = ALL_TEMPLATES.filter((template) =>
+        template.tags.includes(activeTab.tab)
+      );
+      setTemplates(_templates);
     }
   };
 
@@ -152,7 +155,7 @@ const Templates = ({ props }: any) => {
           <button
             key={index}
             className={`px-4 py-2 text-sm rounded-full border border-gray-600 ${
-              activeTab.tab === tab.tab ? "bg-black" : ""
+              activeTab.tab === tab.tab ? "dark:bg-black bg-white" : ""
             }`}
             onClick={() => setActiveTab(tab)}
           >
