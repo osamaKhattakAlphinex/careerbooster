@@ -9,6 +9,8 @@ import ResumeTemplate6 from "./templates/template_6";
 import ResumeTemplate7 from "./templates/template_7";
 import ResumeTemplate8 from "./templates/template_8";
 import ResumeTemplate9 from "./templates/template_9";
+import ResumeTemplate14 from "./templates/template_14";
+import ResumeTemplate15 from "./templates/template_15";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -130,6 +132,54 @@ export const ALL_TEMPLATES: Template[] = [
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate9 {...props} />,
+  },
+  {
+    id: 10,
+    title: "",
+    tags: ["creative-colorful"],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate9 {...props} />,
+  },
+  {
+    id: 11,
+    title: "",
+    tags: ["creative-colorful"],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate9 {...props} />,
+  },
+  {
+    id: 12,
+    title: "",
+    tags: ["creative-colorful"],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate9 {...props} />,
+  },
+  {
+    id: 13,
+    title: "",
+    tags: ["creative-colorful"],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate9 {...props} />,
+  },
+  {
+    id: 14,
+    title: "",
+    tags: ["creative-colorful"],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate14 {...props} />,
+  },
+  {
+    id: 15,
+    title: "",
+    tags: ["creative-colorful"],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate15 {...props} />,
   },
 ];
 
