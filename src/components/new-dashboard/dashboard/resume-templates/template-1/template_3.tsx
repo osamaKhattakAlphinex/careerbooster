@@ -738,7 +738,7 @@ const ResumeTemplate3 = ({
             ></div>
           )}
         </div>
-        <div className=" w-4/12 xs:3/12 md:w-4/12 flex flex-col  pl-2 m-2 h-fit border-red-  pr-2  ">
+        <div className=" w-3/12 xs:3/12 md:w-3/12 flex flex-col  pl-2 m-2 h-fit border-red-  pr-2  ">
           {/* contacts */}
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
           <h3 className="uppercase text-sm md:text-lg font-semibold flex flex-row gap-2 items-center">
