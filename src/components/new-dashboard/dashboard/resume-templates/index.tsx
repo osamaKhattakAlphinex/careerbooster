@@ -5,6 +5,11 @@ import ResumeTemplate2 from "./templates/template_2";
 import ResumeTemplate3 from "./templates/template_3";
 import ResumeTemplate4 from "./templates/template_4";
 import ResumeTemplate5 from "./templates/template_5";
+import ResumeTemplate6 from "./templates/template_6";
+import ResumeTemplate7 from "./templates/template_7";
+import ResumeTemplate8 from "./templates/template_8";
+import ResumeTemplate9 from "./templates/template_9";
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -90,6 +95,38 @@ export const ALL_TEMPLATES: Template[] = [
     category: "freemium",
     preview: "/assets/images/templates/resume-2.png",
     template: (props) => <ResumeTemplate5 {...props} />,
+  },
+  {
+    id: 6,
+    title: "",
+    tags: [],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate6 {...props} />,
+  },
+  {
+    id: 7,
+    title: "",
+    tags: [],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate7 {...props} />,
+  },
+  {
+    id: 8,
+    title: "",
+    tags: [],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate8 {...props} />,
+  },
+  {
+    id: 9,
+    title: "",
+    tags: [],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate9 {...props} />,
   },
 ];
 
