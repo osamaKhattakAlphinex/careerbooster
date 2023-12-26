@@ -307,7 +307,7 @@ const ResumeTemplate6 = ({
       <div className=" flex  w-[8%] bg-[#e04127]"></div>
       <div className="w-full pl-5">
         <div className="flex flex-col w-12/12 p-8">
-          <h2 className="text-2xl md:text-6xl font-bold hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-4xl xs:2xl md:text-5xl  font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -317,8 +317,8 @@ const ResumeTemplate6 = ({
               }}
             />
           </h2>
-          <ul className=" flex flex-row gap-3 my-4 text-sm break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-100 text-lg  flex flex-row gap-1  items-center">
+          <ul className=" flex flex-row xs:flex-col md:flex-row gap-3 my-4 justify-between text-sm md:text-lg break-all pl-0">
+            <li className="hover:shadow-md hover:bg-gray-100 text-sm md:text-lg  flex flex-row gap-1  items-center">
               {phoneIcon}
               <EditableField
                 value={
@@ -340,7 +340,7 @@ const ResumeTemplate6 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center text-lg">
+            <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center text-sm md:text-lg">
               {emailIcon}
               <EditableField
                 value={
@@ -362,16 +362,7 @@ const ResumeTemplate6 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 text-blue-600 flex flex-row gap-1  items-center text-lg">
-              {/* <a
-                href={
-                  resume?.contact?.linkedIn
-                    ? resume?.contact?.linkedIn
-                    : "https://www.linkedin.com/"
-                }
-                target="_blank"
-                className="text-blue-600"
-              > */}
+            <li className="hover:shadow-md hover:bg-gray-100 text-blue-600 flex flex-row gap-1  items-center text-sm md:text-lg">
               {linkedInIcon}
               <EditableField
                 value={
@@ -403,7 +394,7 @@ const ResumeTemplate6 = ({
             </h3>
             <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
-            <div className="text-sm hover:shadow-md hover:bg-gray-100">
+            <div className="text-sm md:text-lg hover:shadow-md hover:bg-gray-100">
               <EditableField
                 type="textarea"
                 value={
@@ -417,6 +408,143 @@ const ResumeTemplate6 = ({
                 }}
               />
             </div>
+            {/* Skills */}
+
+            {resume?.primarySkills && resume?.primarySkills.length > 0 && (
+              <>
+                <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+                <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
+                  {sparkleIcon}
+                  Skills
+                </h3>
+                <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+                <ul
+                  className="pl-0 flex flex-row  flex-wrap gap-1 h-[20%]  mb-4 text-sm md:text-lg"
+                  onMouseEnter={() =>
+                    !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
+                  }
+                  onMouseLeave={() =>
+                    !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
+                  }
+                >
+                  {/* <li className="font-semibold  uppercase">primary</li> */}
+                  {resume?.primarySkills.map((skill: string, i: number) => (
+                    <li
+                      className="hover:shadow-md  w-[45%] xs:w-full sm:w-[45%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex  items-center"
+                      key={i}
+                      onDragStart={(e) =>
+                        e.dataTransfer.setData("text/plain", i.toString())
+                      }
+                      onDragOver={(e) => e.preventDefault()}
+                      onDrop={(e) => handleDropPrimary(e, i)}
+                      draggable
+                    >
+                      <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                      <div className="flex justify-between items-center w-full">
+                        <EditableField
+                          value={skill}
+                          onSave={(value: string) => {
+                            let updatedSkills = resume.primarySkills.map(
+                              (skill: string, index: number) => {
+                                if (index === i) {
+                                  return value;
+                                }
+                                return skill;
+                              }
+                            );
+                            dispatch(
+                              setPrimarySkills({
+                                ...resume,
+                                primarySkills: updatedSkills,
+                              })
+                            );
+                            saveResumeToDB({
+                              ...resume,
+                              primarySkills: updatedSkills,
+                            });
+                          }}
+                        />
+                        <div
+                          onClick={() => {
+                            const removeSkill = resume.primarySkills.filter(
+                              (item: any) => item !== skill
+                            );
+                            dispatch(
+                              setPrimarySkills({
+                                ...resume,
+                                primarySkills: removeSkill,
+                              })
+                            );
+                            saveResumeToDB({
+                              ...resume,
+                              primarySkills: removeSkill,
+                            });
+                          }}
+                          className="w-4 h-4  cursor-pointer child"
+                        >
+                          {crossIcon1}
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                  {newPrimarySkill ? (
+                    <>
+                      <div className="w-full rounded-2xl border border-black flex h-9.5">
+                        <input
+                          type="text"
+                          value={primarySkill}
+                          placeholder="Please add Skill"
+                          className="bg-white outline-none rounded-2xl px-2 w-full"
+                          autoFocus
+                          onChange={(e) => setPrimarySkill(e.target.value)}
+                          onKeyPress={(e) => {
+                            if (e.key === "Enter") {
+                              if (primarySkill.trim() !== "") {
+                                addPrimarySkill();
+                                setPrimarySkill("");
+                              }
+                            }
+                          }}
+                        />
+                        <button
+                          className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
+                          onClick={() => {
+                            if (primarySkill.trim() !== "") {
+                              addPrimarySkill();
+                              setPrimarySkill(""); // Empty the input field
+                            }
+                          }}
+                        >
+                          save
+                        </button>
+                      </div>
+                      <button
+                        onClick={() => {
+                          setNewPrimarySkill(false);
+                          setPrimarySkillAddButtonVisible(false);
+                        }}
+                        className="bg-red-500 py-1 px-2 text-white rounded-full"
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    " "
+                  )}
+                  {primarySkillAddButtonVisible ? (
+                    <div
+                      className="border-2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                      onClick={() => {
+                        setNewPrimarySkill(true);
+                        setPrimarySkillAddButtonVisible(false);
+                      }}
+                    >
+                      + Add
+                    </div>
+                  ) : null}
+                </ul>
+              </>
+            )}
             {/* Work Experience */}
             <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
             <h3 className="uppercase text-lg font-semibold">WORK EXPERIENCE</h3>
@@ -571,7 +699,7 @@ const ResumeTemplate6 = ({
                       </h2>
                       <div className="p-4">
                         {rec?.achievements && (
-                          <ul className="pl-0 flex flex-col gap-1 text-sm">
+                          <ul className="pl-0 flex flex-col gap-1 text-sm md:text-lg">
                             {rec?.achievements.map(
                               (achievement: any, ind: number) => (
                                 <li
@@ -813,7 +941,7 @@ const ResumeTemplate6 = ({
                   {resume?.education.map(
                     (education: Education, ind: number) => (
                       <React.Fragment key={education?.id || ind}>
-                        <div className="w-[50%]">
+                        <div className="w-1/2 xs:w-full md:w-1/2 ">
                           <li
                             className=" hover:shadow-md hover:cursor-move 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
@@ -897,7 +1025,7 @@ const ResumeTemplate6 = ({
                               }}
                             />{" "}
                           </li>
-                          <li className="hover:shadow-md hover:bg-gray-100 text-lg xs:text-sm md:text-lg lg:text-lg text-gray-800">
+                          <li className="hover:shadow-md hover:bg-gray-100 text-sm md:text-lg text-gray-800">
                             <EditableField
                               type="textarea"
                               rows={2}
@@ -937,143 +1065,6 @@ const ResumeTemplate6 = ({
                       </React.Fragment>
                     )
                   )}
-                </ul>
-              </>
-            )}
-            {/* Skills */}
-
-            {resume?.primarySkills && resume?.primarySkills.length > 0 && (
-              <>
-                <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-                <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
-                  {sparkleIcon}
-                  Skills
-                </h3>
-                <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-                <ul
-                  className="pl-0 flex flex-row  flex-wrap gap-1 h-[20%]  mb-4 text-lg xs:text-sm md:text-lg lg:text-lg"
-                  onMouseEnter={() =>
-                    !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
-                  }
-                  onMouseLeave={() =>
-                    !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
-                  }
-                >
-                  {/* <li className="font-semibold  uppercase">primary</li> */}
-                  {resume?.primarySkills.map((skill: string, i: number) => (
-                    <li
-                      className="hover:shadow-md  w-[45%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex  items-center"
-                      key={i}
-                      onDragStart={(e) =>
-                        e.dataTransfer.setData("text/plain", i.toString())
-                      }
-                      onDragOver={(e) => e.preventDefault()}
-                      onDrop={(e) => handleDropPrimary(e, i)}
-                      draggable
-                    >
-                      <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
-                      <div className="flex justify-between items-center w-full">
-                        <EditableField
-                          value={skill}
-                          onSave={(value: string) => {
-                            let updatedSkills = resume.primarySkills.map(
-                              (skill: string, index: number) => {
-                                if (index === i) {
-                                  return value;
-                                }
-                                return skill;
-                              }
-                            );
-                            dispatch(
-                              setPrimarySkills({
-                                ...resume,
-                                primarySkills: updatedSkills,
-                              })
-                            );
-                            saveResumeToDB({
-                              ...resume,
-                              primarySkills: updatedSkills,
-                            });
-                          }}
-                        />
-                        <div
-                          onClick={() => {
-                            const removeSkill = resume.primarySkills.filter(
-                              (item: any) => item !== skill
-                            );
-                            dispatch(
-                              setPrimarySkills({
-                                ...resume,
-                                primarySkills: removeSkill,
-                              })
-                            );
-                            saveResumeToDB({
-                              ...resume,
-                              primarySkills: removeSkill,
-                            });
-                          }}
-                          className="w-4 h-4  cursor-pointer child"
-                        >
-                          {crossIcon1}
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                  {newPrimarySkill ? (
-                    <>
-                      <div className="w-full rounded-2xl border border-black flex h-9.5">
-                        <input
-                          type="text"
-                          value={primarySkill}
-                          placeholder="Please add Skill"
-                          className="bg-white outline-none rounded-2xl px-2 w-full"
-                          autoFocus
-                          onChange={(e) => setPrimarySkill(e.target.value)}
-                          onKeyPress={(e) => {
-                            if (e.key === "Enter") {
-                              if (primarySkill.trim() !== "") {
-                                addPrimarySkill();
-                                setPrimarySkill("");
-                              }
-                            }
-                          }}
-                        />
-                        <button
-                          className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
-                          onClick={() => {
-                            if (primarySkill.trim() !== "") {
-                              addPrimarySkill();
-                              setPrimarySkill(""); // Empty the input field
-                            }
-                          }}
-                        >
-                          save
-                        </button>
-                      </div>
-                      <button
-                        onClick={() => {
-                          setNewPrimarySkill(false);
-                          setPrimarySkillAddButtonVisible(false);
-                        }}
-                        className="bg-red-500 py-1 px-2 text-white rounded-full"
-                      >
-                        Cancel
-                      </button>
-                    </>
-                  ) : (
-                    " "
-                  )}
-                  {primarySkillAddButtonVisible ? (
-                    <div
-                      className="border-2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                      onClick={() => {
-                        setNewPrimarySkill(true);
-                        setPrimarySkillAddButtonVisible(false);
-                      }}
-                    >
-                      + Add
-                    </div>
-                  ) : null}
                 </ul>
               </>
             )}

@@ -1,11 +1,21 @@
 "use client";
 
+import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
 
-const DownloadService = ({ componentRef, view, card, type, fileName }: any) => {
+const DownloadService = ({
+  componentRef,
+  view,
+  card,
+  type,
+  fileName,
+  templateId,
+}: any) => {
   const docRef = useRef<any>(null);
-  let htmlToDoc: string;
 
+  let htmlToDoc: string;
+  const userData = useSelector((state: any) => state.userData);
   const templateCall = async () => {
     if (card && type) {
       if (type === "coverLetter") {
@@ -31,34 +41,46 @@ const DownloadService = ({ componentRef, view, card, type, fileName }: any) => {
       
       ${html}`;
     } else {
-      await view();
-      const html = componentRef.current.outerHTML;
-      htmlToDoc = `
-      <script src="https://cdn.tailwindcss.com"></script>
-      <style>
-      .parent .child {
-          display: none;
+      let category;
+      if (templateId) {
+        category = ALL_TEMPLATES[templateId - 1].category;
       }
-      .parent:hover .child {
-          display: block; 
-      }</style>
-      ${html}`;
+      if (
+        category === "premium" &&
+        userData.userPackage === "65144fcc17dd55f9a2e3ff6c"
+      ) {
+        alert("Please upgrade package");
+      } else {
+        await view();
+        const html = componentRef.current.outerHTML;
+        htmlToDoc = `
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+        .parent .child {
+            display: none;
+        }
+        .parent:hover .child {
+            display: block; 
+        }</style>
+        ${html}`;
+        const formData = new FormData();
+        formData.append("htmlToDoc", htmlToDoc);
+        await fetch(`/api/template`, {
+          method: "POST",
+          body: formData,
+        }).then(async (response: any) => {
+          const res = await response.json();
+          const arrayBufferView = new Uint8Array(res.result.data);
+          const blob = new Blob([arrayBufferView], {
+            type: "application/pdf",
+          });
+          const url = URL.createObjectURL(blob);
+          docRef.current.href = url;
+          docRef.current.download = fileName;
+          docRef.current.click();
+        });
+      }
     }
-
-    const formData = new FormData();
-    formData.append("htmlToDoc", htmlToDoc);
-    await fetch(`/api/template`, {
-      method: "POST",
-      body: formData,
-    }).then(async (response: any) => {
-      const res = await response.json();
-      const arrayBufferView = new Uint8Array(res.result.data);
-      const blob = new Blob([arrayBufferView], { type: "application/pdf" });
-      const url = URL.createObjectURL(blob);
-      docRef.current.href = url;
-      docRef.current.download = fileName;
-      docRef.current.click();
-    });
   };
 
   return (

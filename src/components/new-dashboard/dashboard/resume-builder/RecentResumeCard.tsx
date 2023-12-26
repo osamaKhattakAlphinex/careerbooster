@@ -10,10 +10,12 @@ const RecentResumeCard = ({
   source = "",
   componentRef,
   setFinished,
+  templateId,
 }: {
   source?: string;
   componentRef?: any;
   setFinished?: any;
+  templateId?: number;
 }) => {
   // redux
   const userData = useSelector((state: any) => state.userData);
@@ -73,6 +75,7 @@ const RecentResumeCard = ({
                     source={source}
                     componentRef={componentRef}
                     setFinished={setFinished}
+                    templateId={templateId}
                   />
                 </SwiperSlide>
               ))}

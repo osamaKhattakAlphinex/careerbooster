@@ -14,11 +14,13 @@ const SingleRecentResumeCard = ({
   source,
   componentRef,
   setFinished,
+  templateId,
 }: {
   resume: Resume;
   source?: string;
   componentRef?: any;
   setFinished?: any;
+  templateId?: number;
 }) => {
   const userData = useSelector((state: any) => state.userData);
   const { email, resumes } = userData;
@@ -114,6 +116,7 @@ const SingleRecentResumeCard = ({
               <DownloadService
                 componentRef={componentRef}
                 view={handleOnView}
+                templateId={templateId}
                 fileName="ai-resume"
               />
             )}

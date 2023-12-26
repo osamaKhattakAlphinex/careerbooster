@@ -2,9 +2,8 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_1";
-
+import iconOfPackageBadge from "@/../public/icon/crown.svg";
 import { useDispatch, useSelector } from "react-redux";
-
 import {
   WorkExperience,
   setField,
@@ -33,6 +32,9 @@ import useTheme from "@/lib/useTheme";
 import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
 import GenerateResume from "@/components/new-dashboard/dashboard/resume-builder/GenerateNewResumeCard";
 import Link from "next/link";
+import { ALL_TEMPLATES } from "@/helpers/templateProvider";
+import Image from "next/image";
+import { crownIcon } from "@/helpers/newIconsProviders";
 
 const ResumeBuilder = () => {
   const [theme] = useTheme();
@@ -66,6 +68,8 @@ const ResumeBuilder = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
+  const [quantifyingExperience, setQuantifyingExperience] =
+    useState<boolean>(true);
 
   // Redux
   const dispatch = useDispatch();
@@ -249,6 +253,7 @@ const ResumeBuilder = () => {
         const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
           method: "POST",
           body: JSON.stringify({
+            quantifyingExperience: quantifyingExperience,
             experience: experience,
             trainBotData: {
               userEmail: userData.email,
@@ -544,18 +549,83 @@ const ResumeBuilder = () => {
           <GenerateResume
             handleGenerate={handleGenerate}
             availablePercentage={availablePercentage}
+            quantifyingExperience={quantifyingExperience}
+            setQuantifyingExperience={setQuantifyingExperience}
           />
           <div className="flex justify-center items-center">
             <Confetti active={confettingRunning} config={confettiConfig} />
           </div>
           {finished && (
-            <div className="text-white">
-              <strong>Note:</strong>
-              <p>
+            <div className="text-white space-y-3">
+              {/* <p>
                 We have generated free text basic resume for you for further
                 design templates click here
-              </p>
-              <Link href="/resume-builder/templates"> Explore More</Link>
+              </p> */}
+
+              <h2 className=" text-base font-bold my-3">Design Templates</h2>
+
+              <div className="flex flex-row justify-start items-stretch gap-4">
+                {ALL_TEMPLATES.slice(0, 5).map((template, index) => (
+                  <div
+                    key={`template-${index}`}
+                    className="box-border group relative rounded-lg overflow-hidden"
+                  >
+                    {template.category === "premium" && (
+                      <div className="absolute rounded-full right-1 top-1 h-6 w-6 grid place-content-center bg-yellow-600">
+                        {crownIcon}
+                        {/* <Image
+                          src={iconOfPackageBadge}
+                          alt="bold icon"
+                          height={16}
+                          width={16}
+                          className=""
+                        /> */}
+                      </div>
+                    )}
+                    <Link
+                      className=""
+                      href={{
+                        pathname: "resume-builder/templates/template",
+                        query: { templateId: template.id },
+                      }}
+                    >
+                      <div className=" group-hover:grid hidden bg-slate-600/60 text-white  absolute top-0 left-0 h-full w-full rounded-lg  overflow-hidden  place-content-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-8 h-8"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
+                          />
+                        </svg>
+                      </div>
+                      <Image
+                        src={template.preview}
+                        alt={`template-${index}`}
+                        height={200}
+                        width={150}
+                      />
+                    </Link>
+                  </div>
+                ))}
+
+                <Link
+                  href="/resume-builder/templates"
+                  className="rounded-lg overflow-hidden"
+                >
+                  <div
+                    className={`text-center font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent grid gap-2  h-full w-full place-content-center`}
+                  >
+                    Explore More Templates
+                  </div>
+                </Link>
+              </div>
             </div>
           )}
           {resumeData &&
