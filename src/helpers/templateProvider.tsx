@@ -134,7 +134,7 @@ export const ALL_TEMPLATES: Template[] = [
     title: "",
     tags: ["creative-colorful"],
     category: "freemium",
-    preview: "/assets/images/templates/resume-2.png",
+    preview: "/assets/images/templates/resume-15.png",
     template: (props) => <ResumeTemplate15 {...props} />,
   },
 ];
