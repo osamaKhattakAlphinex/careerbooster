@@ -9,6 +9,7 @@ import ResumeTemplate8 from "@/components/new-dashboard/dashboard/resume-templat
 import ResumeTemplate9 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_9";
 import ResumeTemplate14 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_14";
 import ResumeTemplate15 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_15";
+import ResumeTemplate17 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_17";
 import { Template } from "@/components/new-dashboard/dashboard/resume-templates";
 
 export const ALL_TEMPLATES: Template[] = [
@@ -136,5 +137,21 @@ export const ALL_TEMPLATES: Template[] = [
     category: "freemium",
     preview: "/assets/images/templates/resume-15.png",
     template: (props) => <ResumeTemplate15 {...props} />,
+  },
+  {
+    id: 16,
+    title: "",
+    tags: ["creative-colorful"],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-15.png",
+    template: (props) => <ResumeTemplate15 {...props} />,
+  },
+  {
+    id: 17,
+    title: "",
+    tags: ["creative-colorful"],
+    category: "freemium",
+    preview: "/assets/images/templates/resume-15.png",
+    template: (props) => <ResumeTemplate17 {...props} />,
   },
 ];

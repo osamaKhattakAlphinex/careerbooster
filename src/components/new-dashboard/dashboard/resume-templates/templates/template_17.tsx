@@ -328,8 +328,8 @@ const ResumeTemplate17 = ({
         </div>
       </div>
       <div className="flex">
-        <div className=" w-3/12 md:w-1/3 flex flex-col  items-center   bg-[#F4F4F4]  px-9   pt-[2rem] ">
-          <div className=" w-24 h-24 md:w-44 border-[1rem] border-[#ffff]  md:h-44 text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full ">
+        <div className=" w-3/12 md:w-1/3 flex flex-col  items-center   bg-[#323b4c]  px-9   pt-[2rem] ">
+          <div className=" w-24 h-24 md:w-44 border-[.5rem] border-[#ffff]  md:h-44 text-white bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
             <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
               <EditableField
                 value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -343,13 +343,13 @@ const ResumeTemplate17 = ({
           </div>
           {/* contacts */}
           <span className="border-stylee w-full h-0 my-3"></span>
-          <h3 className="uppercase text-lg font-semibold text-white w-full py-1 rounded-sm flex justify-center bg-[#444440] flex-row gap-2 items-center">
+          <h3 className="uppercase text-lg font-semibold w-full border-b-2 border-white pb-2 text-white  py-1 rounded-sm flex items-center  flex-row gap-2 ">
             {contactIcon}
             Contact
           </h3>
           <span className="border-stylee w-full h-0 my-3"></span>
-          <ul className=" flex flex-col gap-3 w-full mb-4 text-sm break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-100 text-xs flex flex-row gap-1 ">
+          <ul className=" flex flex-col gap-3 w-full mb-4 text-sm text-gray-300 break-all pl-0">
+            <li className="hover:shadow-md hover:bg-gray-500 text-xs  flex flex-row gap-1 ">
               {phoneIcon}
               <EditableField
                 value={
@@ -394,7 +394,7 @@ const ResumeTemplate17 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 text-blue-600 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md hover:bg-gray-100 text-gray-400 flex flex-row gap-1  items-center text-xs">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -433,13 +433,13 @@ const ResumeTemplate17 = ({
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <span className="border-stylee w-full h-0  my-1"></span>
-              <h3 className="uppercase text-lg font-semibold text-white w-full px-2 py-1 rounded-sm flex justify-center bg-[#444440] flex-row gap-2 items-center">
+              <h3 className="uppercase text-lg font-semibold text-white pb-2 w-full border-b-2 border-white  py-1 rounded-sm flex  flex-row gap-2 items-center">
                 {sparkleIcon}
                 Skills
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
               <ul
-                className="pl-0 flex  flex-col gap-1 mb-4 w-full text-sm "
+                className="pl-0 flex  flex-col gap-1 mb-4 text-gray-300 w-full text-sm "
                 onMouseEnter={() =>
                   !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                 }
@@ -566,13 +566,13 @@ const ResumeTemplate17 = ({
           {resume?.education && (
             <>
               <span className="w-full h-0 my-1 page-break"></span>
-              <h3 className="uppercase text-lg font-semibold text-white w-full py-1 rounded-sm flex justify-center bg-[#444440] flex-row gap-2 items-center">
+              <h3 className="uppercase text-lg font-semibold  text-white w-full py-1 rounded-sm flex border-b-2 border-white flex-row gap-2 items-center">
                 {educationIcon}
                 Education
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
               <ul
-                className="pl-0 flex flex-col  w-full"
+                className="pl-0 flex flex-col text-gray-300  w-full"
                 onMouseEnter={() =>
                   !newEducation && setEducationAddButtonVisible(true)
                 }
@@ -585,59 +585,61 @@ const ResumeTemplate17 = ({
                     <li
                       className=" hover:shadow-md hover:cursor-move 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
-                   hover:bg-gray-100 font-semibold flex uppercase text-md   items-center "
+                   hover:bg-gray-100 font-semibold  hover:text-black flex uppercase text-md   items-center "
                     >
-                      <span className="w-2 h-2 bg-[#444440] rounded-full mr-3"></span>
-                      <EditableField
-                        type="textarea"
-                        rows={2}
-                        value={education?.educationLevel}
-                        onSave={(value: string) => {
-                          let updatedEducations = resume?.education.map(
-                            (edu: any, index: number) => {
-                              if (index === ind) {
-                                return {
-                                  ...edu,
-                                  educationLevel: value,
-                                };
+                      <span className="w-2 h-2 bg-gray-300 rounded-full mr-3"></span>
+                      <div className="flex flex-row justify-between">
+                        <EditableField
+                          type="textarea"
+                          rows={2}
+                          value={education?.educationLevel}
+                          onSave={(value: string) => {
+                            let updatedEducations = resume?.education.map(
+                              (edu: any, index: number) => {
+                                if (index === ind) {
+                                  return {
+                                    ...edu,
+                                    educationLevel: value,
+                                  };
+                                }
+                                return edu;
                               }
-                              return edu;
-                            }
-                          );
-                          dispatch(
-                            setField({
-                              name: "education",
-                              value: updatedEducations,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            education: updatedEducations,
-                          });
-                        }}
-                      />
-                      <div
-                        onClick={() => {
-                          const removeEducation = resume.education.filter(
-                            (item: any) => item !== education
-                          );
-                          dispatch(
-                            setField({
-                              name: "education",
-                              value: removeEducation,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            education: removeEducation,
-                          });
-                        }}
-                        className="w-4 h-4  cursor-pointer child"
-                      >
-                        {crossIcon1}
+                            );
+                            dispatch(
+                              setField({
+                                name: "education",
+                                value: updatedEducations,
+                              })
+                            );
+                            saveResumeToDB({
+                              ...resume,
+                              education: updatedEducations,
+                            });
+                          }}
+                        />
+                        <div
+                          onClick={() => {
+                            const removeEducation = resume.education.filter(
+                              (item: any) => item !== education
+                            );
+                            dispatch(
+                              setField({
+                                name: "education",
+                                value: removeEducation,
+                              })
+                            );
+                            saveResumeToDB({
+                              ...resume,
+                              education: removeEducation,
+                            });
+                          }}
+                          className="w-4 h-4  cursor-pointer child"
+                        >
+                          {crossIcon1}
+                        </div>
                       </div>
                     </li>
-                    <li className="hover:shadow-md uppercase hover:bg-gray-100 text-base">
+                    <li className="hover:shadow-md uppercase hover:text-black text-gray-300 hover:tet-black hover:bg-gray-100 text-base">
                       <EditableField
                         value={`${education?.fieldOfStudy}`}
                         style={{ width: "100%" }}
@@ -666,7 +668,7 @@ const ResumeTemplate17 = ({
                         }}
                       />{" "}
                     </li>
-                    <li className="hover:shadow-md hover:bg-gray-100 text-sm text-gray-800">
+                    <li className="hover:shadow-md text-gray-300 hover:text-black hover:bg-gray-100 text-sm ">
                       <EditableField
                         type="textarea"
                         rows={2}
@@ -696,7 +698,7 @@ const ResumeTemplate17 = ({
                         }}
                       />
                     </li>
-                    <li className="mb-4 text-xs text-gray-700 ">
+                    <li className="mb-4 text-xs text-gray-300 ">
                       {education?.fromMonth + " " + education.fromYear} -{" "}
                       {education?.isContinue
                         ? "Present"
