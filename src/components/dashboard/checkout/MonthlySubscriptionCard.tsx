@@ -168,29 +168,30 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
     return null;
   };
 
-  useEffect(() => {
-    setMsgLoading(true);
-    fetch(`/api/packages/package-status?email=${userData?.email}`)
-      .then(async (response) => {
-        const data = await response.json();
-        console.log("data", data);
-        if (data.success) {
-          setData(data.result);
-          setMsgLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.log("Error occurred", err);
-        setMsgLoading(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   setMsgLoading(true);
+  //   fetch(`/api/packages/package-status?email=${userData?.email}`)
+  //     .then(async (response) => {
+  //       const data = await response.json();
+  //       console.log("data", data);
+  //       if (data.success) {
+  //         setData(data.result);
+  //         setMsgLoading(false);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log("Error occurred", err);
+  //       setMsgLoading(false);
+  //     });
+  // }, []);
 
   return (
     !msgLoading && (
       <div
-        className={`col-md-6 col-lg-4 ${
-          userPackage.amount === 0 && data ? "" : ""
-        } `}
+        // className={`col-md-6 col-lg-4 ${
+        //   userPackage.amount === 0 && data ? "" : ""
+        // } `}
+        className="col-md-6 col-lg-4"
         data-aos="fade-up-sm"
         data-aos-delay="50"
       >
