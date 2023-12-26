@@ -354,3 +354,28 @@ export const sunIcon = (
     />
   </svg>
 );
+
+export const crownIcon = (
+  <svg
+    width="16"
+    height="17"
+    viewBox="0 0 16 17"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M3.00065 13.8337L1.33398 6.16699L4.66732 7.83366L8.00065 3.16699L11.334 7.83366L14.6673 6.16699L13.0007 13.8337H3.00065Z"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M7.99935 11.4997C8.73572 11.4997 9.33268 10.9027 9.33268 10.1663C9.33268 9.42997 8.73572 8.83301 7.99935 8.83301C7.26298 8.83301 6.66602 9.42997 6.66602 10.1663C6.66602 10.9027 7.26298 11.4997 7.99935 11.4997Z"
+      fill="#FEB602"
+      stroke="#FEB602"
+      strokeWidth="2"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
