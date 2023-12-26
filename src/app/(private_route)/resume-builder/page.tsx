@@ -60,6 +60,7 @@ const ResumeBuilder = () => {
   const { data: session } = useSession();
 
   // Local States
+  const [finished, setFinished] = useState<boolean>(true);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [streamedJDData, setStreamedJDData] = useState("");
   const [aiInputUserData, setAiInputUserData] = useState<any>();
@@ -281,9 +282,10 @@ const ResumeBuilder = () => {
         workExpArrObj.achievements = achivementsArray;
         workExpArr.push(workExpArrObj);
       }
+      setFinished(true);
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
-      dispatch(setWorkExperience(temp));
       dispatch(setState({ name: "resumeLoading", value: false }));
+      dispatch(setWorkExperience(temp));
     }
     // });
   };
@@ -541,6 +543,16 @@ const ResumeBuilder = () => {
           <div className="flex justify-center items-center">
             <Confetti active={confettingRunning} config={confettiConfig} />
           </div>
+          {finished && (
+            <div className="text-white">
+              <strong>Note:</strong>
+              <p>
+                We have generated free text basic resume for you for further
+                design templates click here
+              </p>
+              <Link href="/resume-builder/templates"> Explore More</Link>
+            </div>
+          )}
           {resumeData &&
             (resumeData?.name ||
               resumeData?.contact?.email ||
