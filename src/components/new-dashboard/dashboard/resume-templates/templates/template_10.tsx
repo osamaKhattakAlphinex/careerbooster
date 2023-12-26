@@ -102,7 +102,7 @@ const EditableField = ({
   );
 };
 
-const ResumeTemplate4 = ({
+const ResumeTemplate10 = ({
   streamedSummaryData,
   streamedJDData,
   saveResumeToDB,
@@ -303,32 +303,60 @@ const ResumeTemplate4 = ({
   };
 
   return (
-    <div className="first-page ">
-      <div className=" flex">
-        <div className=" w-4/12 xs:w-1/3 md:w-4/12 flex flex-col pl-3 md:pl-8 bg-[#323B4C] text-gray-100  pr-6  py-8 h-auto ">
-          <div className=" w-24 h-24 md:w-32 md:h-32 text-white bg-gray-800 text-center flex justify-center items-center  rounded-full mx-4 mt-4 mb-[45px] md:mt-0 md:mr-8">
-            <span className="text-4xl  hover:shadow-md hover:bg-gray-500">
-              <EditableField
-                value={resume?.shortName ? resume?.shortName : "CPH"}
-                style={{ width: "60px" }}
-                onSave={(value: string) => {
-                  dispatch(setField({ name: "shortName", value: value }));
-                  saveResumeToDB({ ...resume, shortName: value });
-                }}
-              />
-            </span>
-          </div>
-          {/* contacts */}
-
-          <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
-            {contactIcon}
-            Contact
+    <div className="first-page relative">
+      <div className="flex flex-row absolute top-[120px] h-40 z-30  bg-[#043382] items-center justify-center    w-full mx-auto mt-[]">
+        <div className="  z-50 w-56 h-56 border-2 border-[#042B6B]  text-white bg-gray-800 text-center flex justify-center   rounded-full mx-4  md:mt-0 md:mr-8 items-center ">
+          <span className="text-4xl  hover:shadow-md hover:bg-gray-500">
+            <EditableField
+              value={resume?.shortName ? resume?.shortName : "CPH"}
+              style={{ width: "60px" }}
+              onSave={(value: string) => {
+                dispatch(setField({ name: "shortName", value: value }));
+                saveResumeToDB({ ...resume, shortName: value });
+              }}
+            />
+          </span>
+        </div>
+        <div className="flex flex-col">
+          <h2 className="text-2xl md:text-6xl hover:shadow-md hover:bg-gray-100">
+            <EditableField
+              value={resume?.name ? resume?.name : "FULL NAME"}
+              style={{ width: "fit-content" }}
+              onSave={(value: string) => {
+                dispatch(setField({ name: "name", value: value }));
+                saveResumeToDB({ ...resume, name: value });
+              }}
+            />
+          </h2>
+          <h3 className="text-[16px] md:text-2xl hover:shadow-md hover:bg-gray-100">
+            <EditableField
+              value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
+              onSave={(value: string) => {
+                dispatch(setField({ name: "jobTitle", value: value }));
+                saveResumeToDB({ ...resume, jobTitle: value });
+              }}
+            />
           </h3>
-          <span className=" w-[112%] h-0 border !border-gray-100 my-3"></span>
-          <ul className=" flex flex-col gap-2 mb-4 text-sm md:text-lg break-all pl-0">
-            <h2 className="text-[16px] font-bold">Phone</h2>
+        </div>
+      </div>
+      <div className=" flex">
+        {/* sidebar */}
+        <div className="z-5 min-h-screen  ml-10 w-5/12 md:w-1/3 flex flex-col pl-3 md:pl-8 bg-gray-950 text-gray-100  pr-6  py-8 h-auto pt-[340px]">
+          {/* contacts */}
+          <div className="rounded-3xl border-2 border-blue-900 p-2">
+            <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
+              {contactIcon}
+              Contact
+            </h3>
+          </div>
+
+          <ul className=" flex flex-col gap-2 mb-4 text-sm break-all pl-0 mt-6">
             <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex flex-row gap-1  items-center">
-              {phoneIcon}
+              <div className="bg-[#043382] rounded-full p-2 mr-3">
+                {" "}
+                {phoneIcon}
+              </div>
+
               <EditableField
                 value={
                   resume?.contact?.phone
@@ -349,9 +377,12 @@ const ResumeTemplate4 = ({
                 }}
               />
             </li>
-            <h2 className="text-[16px] font-bold">Email</h2>
             <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 flex flex-row gap-1  items-center text-xs">
-              {emailIcon}
+              <div className="bg-[#043382] rounded-full p-2 mr-3">
+                {" "}
+                {emailIcon}
+              </div>
+
               <EditableField
                 value={
                   resume?.contact?.email
@@ -372,7 +403,7 @@ const ResumeTemplate4 = ({
                 }}
               />
             </li>
-            <h2 className="text-[16px] font-bold">Linkedin</h2>
+
             <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-blue-600 flex flex-row gap-1  items-center text-xs">
               {/* <a
                 href={
@@ -383,7 +414,10 @@ const ResumeTemplate4 = ({
                 target="_blank"
                 className="text-blue-600"
               > */}
-              {linkedInIcon}
+              <div className="bg-[#043382] rounded-full p-2 mr-3 text-white">
+                {linkedInIcon}
+              </div>
+
               <EditableField
                 value={
                   resume?.contact?.linkedIn
@@ -406,160 +440,20 @@ const ResumeTemplate4 = ({
               {/* </a> */}
             </li>
           </ul>
-          {/* Education */}
-          {resume?.education && (
-            <>
-              <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center mt-5">
-                {educationIcon}
-                Education
-              </h3>
-              <span className="border-stylee w-[112%] h-0 border !border-gray-100 my-3"></span>
-              <ul
-                className="pl-0 flex flex-col"
-                onMouseEnter={() =>
-                  !newEducation && setEducationAddButtonVisible(true)
-                }
-                onMouseLeave={() =>
-                  !newEducation && setEducationAddButtonVisible(false)
-                }
-              >
-                {resume?.education.map((education: Education, ind: number) => (
-                  <React.Fragment key={education?.id || ind}>
-                    <li
-                      className=" hover:shadow-md hover:cursor-move 
-                  parent hover:border-dashed hover:border-gray-500 hover:border-2 
-                   hover:bg-gray-500 font-semibold flex uppercase text-md  justify-between items-center "
-                    >
-                      <EditableField
-                        type="textarea"
-                        rows={2}
-                        value={education?.educationLevel}
-                        onSave={(value: string) => {
-                          let updatedEducations = resume?.education.map(
-                            (edu: any, index: number) => {
-                              if (index === ind) {
-                                return {
-                                  ...edu,
-                                  educationLevel: value,
-                                };
-                              }
-                              return edu;
-                            }
-                          );
-                          dispatch(
-                            setField({
-                              name: "education",
-                              value: updatedEducations,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            education: updatedEducations,
-                          });
-                        }}
-                      />
-                      <div
-                        onClick={() => {
-                          const removeEducation = resume.education.filter(
-                            (item: any) => item !== education
-                          );
-                          dispatch(
-                            setField({
-                              name: "education",
-                              value: removeEducation,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            education: removeEducation,
-                          });
-                        }}
-                        className="w-4 h-4  cursor-pointer child"
-                      >
-                        {crossIcon1}
-                      </div>
-                    </li>
-                    <li className="hover:shadow-md uppercase hover:bg-gray-500 text-base">
-                      <EditableField
-                        value={`${education?.fieldOfStudy}`}
-                        style={{ width: "100%" }}
-                        onSave={(value: string) => {
-                          let updatedEducations = resume?.education.map(
-                            (edu: any, index: number) => {
-                              if (index === ind) {
-                                return {
-                                  ...edu,
-                                  fieldOfStudy: value,
-                                };
-                              }
-                              return edu;
-                            }
-                          );
-                          dispatch(
-                            setField({
-                              name: "education",
-                              value: updatedEducations,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            education: updatedEducations,
-                          });
-                        }}
-                      />{" "}
-                    </li>
-                    <li className="hover:shadow-md hover:bg-gray-500 text-sm md:text-lg text-gray-100">
-                      <EditableField
-                        type="textarea"
-                        rows={2}
-                        value={`${education?.schoolName}`}
-                        onSave={(value: string) => {
-                          let updatedEducations = resume?.education.map(
-                            (edu: any, index: number) => {
-                              if (index === ind) {
-                                return {
-                                  ...edu,
-                                  schoolName: value,
-                                };
-                              }
-                              return edu;
-                            }
-                          );
-                          dispatch(
-                            setField({
-                              name: "education",
-                              value: updatedEducations,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            education: updatedEducations,
-                          });
-                        }}
-                      />
-                    </li>
-                    <li className="mb-4 text-xs text-gray-100 ">
-                      {education?.fromMonth + " " + education.fromYear} -{" "}
-                      {education?.isContinue
-                        ? "Present"
-                        : education?.toMonth + " " + education.toYear}
-                    </li>
-                  </React.Fragment>
-                ))}
-              </ul>
-            </>
-          )}
+
           {/* Skills */}
 
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
-              <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center mt-5">
-                {sparkleIcon}
-                Skills
-              </h3>
-              <span className="border-stylee w-[112%] h-0 border !border-gray-100 my-3"></span>
+              <div className="rounded-3xl border-2 border-blue-900 p-2 mt-4 mb-8">
+                <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center ">
+                  {sparkleIcon}
+                  Skills
+                </h3>
+              </div>
+
               <ul
-                className="pl-0 flex  flex-col gap-1 mb-4 text-sm md:text-lg"
+                className="pl-0 flex  flex-col gap-1 mb-4 text-sm"
                 onMouseEnter={() =>
                   !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                 }
@@ -567,10 +461,9 @@ const ResumeTemplate4 = ({
                   !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
                 }
               >
-                <li className="font-semibold  uppercase">primary</li>
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
-                    className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-500 flex justify-between items-center"
+                    className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-500 flex gap-2 items-center   "
                     key={i}
                     onDragStart={(e) =>
                       e.dataTransfer.setData("text/plain", i.toString())
@@ -579,6 +472,10 @@ const ResumeTemplate4 = ({
                     onDrop={(e) => handleDropPrimary(e, i)}
                     draggable
                   >
+                    <span
+                      className="bg-gray-100 w-1
+                     h-1 rounded-full"
+                    ></span>
                     <EditableField
                       value={skill}
                       onSave={(value: string) => {
@@ -972,28 +869,7 @@ const ResumeTemplate4 = ({
 
           {/* Skills */}
         </div>
-        <div className="w-full flex flex-wrap flex-col px-4 md:px-8 text-gray-950 pb-10 pt-16">
-          <div className="flex flex-col w-10/12 ">
-            <h2 className="text-2xl md:text-6xl hover:shadow-md hover:bg-gray-100">
-              <EditableField
-                value={resume?.name ? resume?.name : "FULL NAME"}
-                style={{ width: "fit-content" }}
-                onSave={(value: string) => {
-                  dispatch(setField({ name: "name", value: value }));
-                  saveResumeToDB({ ...resume, name: value });
-                }}
-              />
-            </h2>
-            <h3 className="text-[16px] md:text-2xl hover:shadow-md hover:bg-gray-100">
-              <EditableField
-                value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
-                onSave={(value: string) => {
-                  dispatch(setField({ name: "jobTitle", value: value }));
-                  saveResumeToDB({ ...resume, jobTitle: value });
-                }}
-              />
-            </h3>
-          </div>
+        <div className="w-full flex flex-wrap flex-col  text-gray-950 pb-10 pt-16">
           {/* Executive Summary */}
 
           <h3 className="uppercase text-lg font-semibold mt-12">
@@ -1001,7 +877,7 @@ const ResumeTemplate4 = ({
           </h3>
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
-          <div className="text-sm md:text-lg hover:shadow-md hover:bg-gray-100">
+          <div className="text-sm hover:shadow-md hover:bg-gray-100">
             <EditableField
               type="textarea"
               value={
@@ -1179,7 +1055,7 @@ const ResumeTemplate4 = ({
                       </h2>
                       <div className="p-4">
                         {rec?.achievements && (
-                          <ul className="pl-0 flex flex-col gap-1 text-sm md:text-lg">
+                          <ul className="pl-0 flex flex-col gap-1 text-sm">
                             {rec?.achievements.map(
                               (achievement: any, ind: number) => (
                                 <li
@@ -1401,12 +1277,157 @@ const ResumeTemplate4 = ({
               }}
             ></div>
           )}
+          {/* Education */}
+          {resume?.education && (
+            <>
+              <div className="rounded-3xl border-2 border-blue-900 p-2 mt-4 mb-8">
+                <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center ">
+                  {educationIcon}
+                  Education
+                </h3>
+              </div>
+
+              <ul
+                className="pl-0 flex flex-col "
+                onMouseEnter={() =>
+                  !newEducation && setEducationAddButtonVisible(true)
+                }
+                onMouseLeave={() =>
+                  !newEducation && setEducationAddButtonVisible(false)
+                }
+              >
+                {resume?.education.map((education: Education, ind: number) => (
+                  <React.Fragment key={education?.id || ind}>
+                    <li
+                      className=" hover:shadow-md hover:cursor-move 
+                  parent hover:border-dashed hover:border-gray-500 hover:border-2 
+                   hover:bg-gray-500 font-semibold flex uppercase text-md  justify-between items-center "
+                    >
+                      <EditableField
+                        type="textarea"
+                        rows={2}
+                        value={education?.educationLevel}
+                        onSave={(value: string) => {
+                          let updatedEducations = resume?.education.map(
+                            (edu: any, index: number) => {
+                              if (index === ind) {
+                                return {
+                                  ...edu,
+                                  educationLevel: value,
+                                };
+                              }
+                              return edu;
+                            }
+                          );
+                          dispatch(
+                            setField({
+                              name: "education",
+                              value: updatedEducations,
+                            })
+                          );
+                          saveResumeToDB({
+                            ...resume,
+                            education: updatedEducations,
+                          });
+                        }}
+                      />
+                      <div
+                        onClick={() => {
+                          const removeEducation = resume.education.filter(
+                            (item: any) => item !== education
+                          );
+                          dispatch(
+                            setField({
+                              name: "education",
+                              value: removeEducation,
+                            })
+                          );
+                          saveResumeToDB({
+                            ...resume,
+                            education: removeEducation,
+                          });
+                        }}
+                        className="w-4 h-4  cursor-pointer child"
+                      >
+                        {crossIcon1}
+                      </div>
+                    </li>
+                    <li className="hover:shadow-md uppercase hover:bg-gray-500 text-base">
+                      <EditableField
+                        value={`${education?.fieldOfStudy}`}
+                        style={{ width: "100%" }}
+                        onSave={(value: string) => {
+                          let updatedEducations = resume?.education.map(
+                            (edu: any, index: number) => {
+                              if (index === ind) {
+                                return {
+                                  ...edu,
+                                  fieldOfStudy: value,
+                                };
+                              }
+                              return edu;
+                            }
+                          );
+                          dispatch(
+                            setField({
+                              name: "education",
+                              value: updatedEducations,
+                            })
+                          );
+                          saveResumeToDB({
+                            ...resume,
+                            education: updatedEducations,
+                          });
+                        }}
+                      />{" "}
+                    </li>
+                    <li className="hover:shadow-md hover:bg-gray-500 text-sm text-gray-100">
+                      <EditableField
+                        type="textarea"
+                        rows={2}
+                        value={`${education?.schoolName}`}
+                        onSave={(value: string) => {
+                          let updatedEducations = resume?.education.map(
+                            (edu: any, index: number) => {
+                              if (index === ind) {
+                                return {
+                                  ...edu,
+                                  schoolName: value,
+                                };
+                              }
+                              return edu;
+                            }
+                          );
+                          dispatch(
+                            setField({
+                              name: "education",
+                              value: updatedEducations,
+                            })
+                          );
+                          saveResumeToDB({
+                            ...resume,
+                            education: updatedEducations,
+                          });
+                        }}
+                      />
+                    </li>
+                    <li className="mb-4 text-xs text-gray-100 ">
+                      {education?.fromMonth + " " + education.fromYear} -{" "}
+                      {education?.isContinue
+                        ? "Present"
+                        : education?.toMonth + " " + education.toYear}
+                    </li>
+                  </React.Fragment>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
       </div>
     </div>
   );
 };
-export default memo(ResumeTemplate4);
+export default memo(ResumeTemplate10);
 function addPrimary(): any {
   throw new Error("Function not implemented.");
 }
