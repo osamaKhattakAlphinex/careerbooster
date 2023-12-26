@@ -6,6 +6,8 @@ import ResumeTemplate2 from "@/components/new-dashboard/dashboard/resume-templat
 import ResumeTemplate3 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_3";
 import ResumeTemplate6 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_6";
 import ResumeTemplate8 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_8";
+import ResumeTemplate4 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_4";
+import ResumeTemplate5 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_5";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -37,6 +39,7 @@ import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builde
 import GenerateResume from "@/components/new-dashboard/dashboard/resume-builder/GenerateNewResumeCard";
 import Link from "next/link";
 import template1 from "@/components/new-dashboard/dashboard/resume-templates/template-1";
+import template_4 from "@/components/new-dashboard/dashboard/resume-templates/template-1/template_4";
 const ResumeBuilder = () => {
   const [theme] = useTheme();
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -578,6 +581,14 @@ const ResumeBuilder = () => {
                   </button>
                   <button
                     className={`${
+                      template === "template-4" ? "bg-black text-white" : ""
+                    } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
+                    onClick={() => setTemplate("template-4")}
+                  >
+                    Template 4
+                  </button>
+                  <button
+                    className={`${
                       template === "template-6" ? "bg-black text-white" : ""
                     } text-base font-bold px-8 py-2 border rounded-full border-gray-700`}
                     onClick={() => setTemplate("template-6")}
@@ -593,7 +604,12 @@ const ResumeBuilder = () => {
                     Template 8
                   </button>
                 </div>
-                <div className="my-10  w-[100%] bg-white  rounded-lg shadow sm:p-6 ">
+                <div
+                  className={`my-10  w-[100%] bg-white  ${
+                    template !== "template-4" &&
+                    "border border-gray-200 rounded-lg shadow sm:p-6"
+                  }`}
+                >
                   <div
                     className={`w-full  ${
                       resumeData.state.resumeLoading ? "animate-pulse" : ""
@@ -621,15 +637,27 @@ const ResumeBuilder = () => {
                         saveResumeToDB={saveResumeToDB}
                       />
                     )}
-                    {template === "template-6" && (
-                      <ResumeTemplate6
+                  {template === "template-6" && (
+                    <ResumeTemplate6
+                      streamedSummaryData={streamedSummaryData}
+                      streamedJDData={streamedJDData}
+                      saveResumeToDB={saveResumeToDB}
+                    />)}
+                    {template === "template-4" && (
+                      <ResumeTemplate4
                         streamedSummaryData={streamedSummaryData}
                         streamedJDData={streamedJDData}
                         saveResumeToDB={saveResumeToDB}
                       />
                     )}
-                    {template === "template-8" && (
-                      <ResumeTemplate8
+                  {template === "template-8" && (
+                    <ResumeTemplate8
+                      streamedSummaryData={streamedSummaryData}
+                      streamedJDData={streamedJDData}
+                      saveResumeToDB={saveResumeToDB}
+                    />)}
+                    {template === "template-5" && (
+                      <ResumeTemplate5
                         streamedSummaryData={streamedSummaryData}
                         streamedJDData={streamedJDData}
                         saveResumeToDB={saveResumeToDB}
