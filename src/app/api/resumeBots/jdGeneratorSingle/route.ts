@@ -113,7 +113,7 @@ let workId: any
                 fileAddress: trainBotData?.fileAddress,
                 Instructions: `Write Single Job Description for ${experience.jobTitle} at ${experience.company}`,
               };
-              makeTrainedBotEntry(entry);
+              makeTrainedBotEntry(entry);//
             }
           } catch {
             console.log("error while saving summary....");
