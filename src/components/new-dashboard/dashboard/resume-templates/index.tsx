@@ -78,11 +78,10 @@ const Templates = () => {
 
   useEffect(() => {
     if (swiper) {
-      console.log(swiper);
-      // swiper.params.navigation.prevel = prevref.current;
-      // swiper.params.navigation.nextel = nextref.current;
-      // swiper.navigation.init();
-      // swiper.navigation.update();
+      swiper.current.swiper.params.navigation.prevel = prevBtn.current;
+      swiper.current.swiper.params.navigation.nextel = nextBtn.current;
+      swiper.current.swiper.navigation.init();
+      swiper.current.swiper.navigation.update();
     }
   }, []);
 
