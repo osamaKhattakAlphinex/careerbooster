@@ -1,6 +1,6 @@
 "use client";
 
-import { ALL_TEMPLATES } from "@/components/new-dashboard/dashboard/resume-templates";
+import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 

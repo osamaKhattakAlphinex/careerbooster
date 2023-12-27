@@ -426,12 +426,6 @@ const ResumeTemplate2 = ({
         {/* Primary Skills */}
         {resume?.primarySkills && resume?.primarySkills.length > 0 && (
           <>
-            {/* <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span> */}
-            <h3 className="uppercase text-sm font-semibold flex flex-row gap-2 items-center">
-              {sparkleIcon}
-              Primary Skills
-            </h3>
-            {/* <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span> */}
             <ul
               className="flex flex-row flex-wrap gap-1 text-sm xs:text-sm md:text-lg lg:text-lg"
               onMouseEnter={() =>
@@ -441,7 +435,6 @@ const ResumeTemplate2 = ({
                 !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
               }
             >
-              {/* <li className="font-semibold  uppercase">primary</li> */}
               {resume?.primarySkills.map((skill: string, i: number) => (
                 <li
                   className=" px-4 py-2 bg-slate-100 rounded-full hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex justify-between items-center"
@@ -557,7 +550,7 @@ const ResumeTemplate2 = ({
           </>
         )}
         {/* Secondary Skills */}
-        {resume?.secondarySkills && resume?.secondarySkills.length > 0 && (
+        {/* {resume?.secondarySkills && resume?.secondarySkills.length > 0 && (
           <>
             <h3 className="uppercase text-sm md:text-lg font-semibold flex flex-row gap-2 items-center">
               {sparkleIcon}
@@ -572,7 +565,6 @@ const ResumeTemplate2 = ({
                 !newSecondarySkill && setSecondarySkillAddButtonVisible(false)
               }
             >
-              {/* <li className="font-semibold uppercase">Secondary</li> */}
               {resume?.secondarySkills.map((skill: string, i: number) => (
                 <li
                   key={i}
@@ -584,7 +576,6 @@ const ResumeTemplate2 = ({
                   onDrop={(e) => handleDropSecondary(e, i)}
                   draggable
                 >
-                  {/* {skill} */}
                   <EditableField
                     value={skill}
                     onSave={(value: string) => {
@@ -632,7 +623,7 @@ const ResumeTemplate2 = ({
                 </li>
               ))}
               {/* ADD New Secondary Skill  */}
-              {newSecondarySkill ? (
+        {/* {newSecondarySkill ? (
                 <>
                   <div className="w-full rounded-2xl border border-black flex h-9.5">
                     <input
@@ -689,18 +680,16 @@ const ResumeTemplate2 = ({
               ) : null}
             </ul>
           </>
-        )}
+        )} */}
 
-        {/*Professional Skills */}
-        {resume?.professionalSkills &&
+        {/* Professional Skills */}
+        {/* {resume?.professionalSkills &&
           resume?.professionalSkills.length > 0 && (
             <>
-              {/* <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span> */}
               <h3 className="uppercase text-sm md:text-lg font-semibold flex flex-row gap-2 items-center">
                 {sparkleIcon}
                 Professional Skills
               </h3>
-              {/* <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span> */}
               <ul
                 className="flex flex-row flex-wrap gap-1 text-sm xs:text-sm md:text-lg lg:text-lg"
                 onMouseEnter={() =>
@@ -712,7 +701,6 @@ const ResumeTemplate2 = ({
                   setProfessionalSkillAddButtonVisible(false)
                 }
               >
-                {/* <li className="font-semibold  uppercase ">Professional</li> */}
                 {resume?.professionalSkills.map((skill: string, i: number) => (
                   <li
                     key={i}
@@ -770,7 +758,6 @@ const ResumeTemplate2 = ({
                     </div>
                   </li>
                 ))}
-                {/* ADD New Professional Skill  */}
                 {newProfessionalSkill ? (
                   <>
                     <div className="w-full rounded-2xl border border-black flex h-9.5">
@@ -828,7 +815,7 @@ const ResumeTemplate2 = ({
                 ) : null}
               </ul>
             </>
-          )}
+          )} */}
       </div>
 
       {/* Work Experience */}

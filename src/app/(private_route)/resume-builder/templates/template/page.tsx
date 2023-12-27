@@ -1,5 +1,5 @@
 "use client";
-import { ALL_TEMPLATES } from "@/components/new-dashboard/dashboard/resume-templates";
+import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import { useSearchParams } from "next/navigation";
 import React, { useRef } from "react";
 import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
