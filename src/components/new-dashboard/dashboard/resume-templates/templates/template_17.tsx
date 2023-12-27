@@ -304,8 +304,8 @@ const ResumeTemplate17 = ({
 
   return (
     <div className="w-full first-page relative text-gray-900">
-      <div className="flex absolute w-10/12 top-0 left-1/3 py-8 ">
-        <div className="flex flex-col  w-10/12 py-8">
+      <div className="flex absolute w-8/12 items-center justify-center top-0 left-1/3 py-8 ">
+        <div className="flex flex-col   py-8">
           <h2 className="text-2xl md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
@@ -329,23 +329,23 @@ const ResumeTemplate17 = ({
       </div>
       <div className="flex">
         <div className=" w-3/12 md:w-1/3 flex flex-col  items-center   bg-[#323b4c]  px-9   pt-[2rem] ">
-        <div className=" w-24 h-24 md:w-48 md:h-48 border-[.5rem] border-[#ae9243]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
-        <div className=" w-24 h-24 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
-            <div className=" w-24 h-24 md:w-40 md:h-40 text-[#F1F1F1] flex justify-center items-center bg-[#ae9243]  rounded-full ">
-              <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
-                <EditableField
-                  value={resume?.shortName ? resume?.shortName : "CPH"}
-                  style={{ width: "60px" }}
-                  onSave={(value: string) => {
-                    dispatch(setField({ name: "shortName", value: value }));
-                    saveResumeToDB({ ...resume, shortName: value });
-                  }}
-                />
-              </span>
+          <div className=" w-24 h-24 md:w-48 md:h-48 border-[.5rem] border-[#ae9243]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
+            <div className=" w-24 h-24 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
+              <div className=" w-24 h-24 md:w-40 md:h-40 text-[#F1F1F1] flex justify-center items-center bg-[#ae9243]  rounded-full ">
+                <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
+                  <EditableField
+                    value={resume?.shortName ? resume?.shortName : "CPH"}
+                    style={{ width: "60px" }}
+                    onSave={(value: string) => {
+                      dispatch(setField({ name: "shortName", value: value }));
+                      saveResumeToDB({ ...resume, shortName: value });
+                    }}
+                  />
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-        
+
           {/* contacts */}
           <span className="border-stylee w-full h-0 my-3"></span>
           <h3 className="uppercase text-lg font-semibold w-full border-b-2 border-white pb-2 text-white  py-1 rounded-sm flex items-center  flex-row gap-2 ">
@@ -433,8 +433,8 @@ const ResumeTemplate17 = ({
               {/* </a> */}
             </li>
           </ul>
- {/* Skills */}
- {resume?.primarySkills && resume?.primarySkills.length > 0 && (
+          {/* Skills */}
+          {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <span className="border-stylee w-full h-0  my-1"></span>
               <h3 className="uppercase text-lg font-semibold text-white pb-2 w-full border-b-2 border-white  py-1 rounded-sm flex  flex-row gap-2 items-center">
