@@ -8,6 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import {} from "@/../public/icon/Vector.png";
 import DownloadService from "@/helpers/downloadFile";
+import { useEffect } from "react";
 
 const SingleRecentResumeCard = ({
   resume,
@@ -46,7 +47,6 @@ const SingleRecentResumeCard = ({
       dispatch(emptyResume());
     }
   };
-
   const updateUser = (updatedResumes: any) => {
     if (email) {
       return axios
