@@ -1,8 +1,10 @@
 "use client";
 
+import UpgradeModal from "@/components/upgradeModal";
 import { ALL_TEMPLATES } from "@/helpers/templateProvider";
+import { setUpgradeModal } from "@/store/appSlice";
 import { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const DownloadService = ({
   componentRef,
@@ -16,6 +18,8 @@ const DownloadService = ({
 
   let htmlToDoc: string;
   const userData = useSelector((state: any) => state.userData);
+  const dispatch = useDispatch();
+
   const templateCall = async () => {
     if (card && type) {
       if (type === "coverLetter") {
@@ -49,7 +53,7 @@ const DownloadService = ({
         category === "premium" &&
         userData.userPackage === "65144fcc17dd55f9a2e3ff6c"
       ) {
-        alert("Please upgrade package");
+        dispatch(setUpgradeModal(true));
       } else {
         await view();
         const html = componentRef.current.outerHTML;

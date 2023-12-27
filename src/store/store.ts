@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import resumeReducer from "./resumeSlice";
 import registerSlice from "./registerSlice";
-import userDataSlice  from "./userDataSlice";
+import userDataSlice from "./userDataSlice";
 import coverLetterSlice from "./coverLetterSlice";
 import emailSlice from "./emailSlice";
 import consultingBidSlice from "./consultingBidSlice";
@@ -9,6 +9,7 @@ import linkedInHeadLineSlice from "./linkedInHeadLineSlice";
 import linkedInJobDescriptionSlice from "./linkedInJobDescriptionSlice";
 import linkedInKeywordsSlice from "./linkedInKeywordsSlice";
 import linkedInAboutSlice from "./linkedInAboutSlice";
+import appSlice from "./appSlice";
 
 const store = configureStore({
   reducer: {
@@ -22,7 +23,7 @@ const store = configureStore({
     linkedinAbout: linkedInAboutSlice,
     linkedinJobDesc: linkedInJobDescriptionSlice,
     linkedinKeywords: linkedInKeywordsSlice,
-    
+    app: appSlice,
   },
 });
 
