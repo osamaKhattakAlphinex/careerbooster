@@ -564,11 +564,11 @@ const ResumeBuilder = () => {
 
               <h2 className=" text-base font-bold my-3">Design Templates</h2>
 
-              <div className="flex flex-row justify-start items-stretch gap-4">
+              <div className="flex flex-row justify-between items-center pl-5">
                 {ALL_TEMPLATES.slice(0, 5).map((template, index) => (
                   <div
                     key={`template-${index}`}
-                    className="box-border group relative rounded-lg overflow-hidden"
+                    className="box-border group relative  rounded-lg flex items-center overflow-hidden"
                   >
                     {template.category === "premium" && (
                       <div className="absolute rounded-full right-1 top-1 h-6 w-6 grid place-content-center bg-yellow-600">
@@ -583,7 +583,7 @@ const ResumeBuilder = () => {
                       </div>
                     )}
                     <Link
-                      className=""
+                      className="no-underline"
                       href={{
                         pathname: "resume-builder/templates/template",
                         query: { templateId: template.id },
@@ -620,7 +620,7 @@ const ResumeBuilder = () => {
                   className="rounded-lg overflow-hidden"
                 >
                   <div
-                    className={`text-center font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent grid gap-2  h-full w-full place-content-center`}
+                    className={` font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent grid gap-2 text-center p-4`}
                   >
                     Explore More Templates
                   </div>
