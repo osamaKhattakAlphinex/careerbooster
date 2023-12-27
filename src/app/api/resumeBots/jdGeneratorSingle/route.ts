@@ -48,6 +48,7 @@ export async function POST(req: any) {
       prompt = prompt.replaceAll("{{PersonName}}", personName)
       prompt = prompt.replaceAll("{{JobTitle}}", jobTitle)
     } else {
+      console.log("inside")
       promptRec = await Prompt.findOne({
         type: "resume",
         name: "jdSingle",
@@ -83,7 +84,6 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-
 let workId: any
     const stream = OpenAIStream(response,{
       onStart: async()=>{
