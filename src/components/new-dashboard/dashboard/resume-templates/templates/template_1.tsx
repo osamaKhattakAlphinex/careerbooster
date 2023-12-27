@@ -334,7 +334,7 @@ const ResumeTemplate1 = ({
             {contactIcon}
             Contact
           </h3>
-          <ul className=" flex justify-between mb-4 text-lg xs:text-sm md:text-lg lg:text-lg break-all pl-0">
+          <ul className=" flex flex-row xs:flex-col md:flex-row justify-between mb-4 text-lg xs:text-sm md:text-lg lg:text-lg break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-100 text-sm flex flex-row gap-1  items-center">
               {phoneIcon}
               <EditableField

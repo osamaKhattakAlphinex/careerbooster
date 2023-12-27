@@ -15,7 +15,7 @@ const ResumePromptsConfiguration = () => {
     // get all prompts
     axios.get("/api/prompts?type=resume").then((res) => {
       setPromptsLoading(false);
-      setPrompts(res.data.prompts);
+      setPrompts(res.data.result);
     });
   }, []);
   const handleSave = (name: string, val: string) => {
@@ -122,10 +122,22 @@ const ResumePromptsConfiguration = () => {
             />
           </div>
           <div className="flex gap-4">
-            {/* Professional Skills Generator */}
+            {/* Job Description Simple Generator */}
             <PromptEditor
               name="jdSingle"
-              title="Job Description Generator (for individual job)"
+              title="Job Description Generator (for rewriting work experience)"
+              type="resume"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+          </div>
+          <div className="flex gap-4">
+            {/* Job Description Quantifying Generator */}
+            <PromptEditor
+              name="QuantifyingjdSingle"
+              title="Job Description Generator (for quantifying work experience)"
               type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}

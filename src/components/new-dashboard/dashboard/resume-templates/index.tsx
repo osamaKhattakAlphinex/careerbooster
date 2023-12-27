@@ -88,7 +88,7 @@ const Templates = () => {
           <button
             key={index}
             className={`px-4 py-2 text-sm rounded-full border border-gray-600 ${
-              activeTab.tab === tab.tab ? "dark:bg-black bg-white" : ""
+              activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
             }`}
             onClick={() => setActiveTab(tab)}
           >
@@ -132,7 +132,7 @@ const Templates = () => {
             <SwiperSlide key={`template-${index}`}>
               <div className="box-border group relative rounded-lg overflow-hidden">
                 {template.category === "premium" && (
-                  <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
+                  <div className="absolute rounded-full right-1 top-1 h-6 w-6 grid place-content-center bg-yellow-600">
                     {crownIcon}
                   </div>
                 )}
@@ -160,7 +160,7 @@ const Templates = () => {
                     src={template.preview}
                     alt={`template-${index}`}
                     height={350}
-                    width={200}
+                    width={150}
                     className="bg-white h-full w-full"
                   />
                 </button>

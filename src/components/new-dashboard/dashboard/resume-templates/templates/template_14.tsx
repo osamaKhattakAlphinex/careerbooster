@@ -306,7 +306,7 @@ const ResumeTemplate14 = ({
     <div className="w-full first-page relative p-4  text-gray-900">
       <div className="flex absolute w-10/12 top-10 left-[13%] py-8 bg-[#FAF6F1]">
         <div>
-          <div className=" w-24 h-24 md:w-48  relative border-[.5rem] border-white -left-[6rem] md:h-48 text-white bg-[#745237] text-center flex justify-center items-center  rounded-full ">
+          <div className="  w-48 xs:w-24 md:w-48 relative border-[.5rem] border-white -left-[6rem] h-48 xs:h-24 md:h-48 text-white bg-[#745237] text-center flex justify-center items-center  rounded-full ">
             <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
               <EditableField
                 value={resume?.shortName ? resume?.shortName : "CPH"}

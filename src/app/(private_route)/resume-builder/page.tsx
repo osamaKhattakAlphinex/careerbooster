@@ -249,7 +249,6 @@ const ResumeBuilder = () => {
         temp += html;
         let achievementTemp = "";
         setStreamedJDData((prev) => prev + html);
-
         const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
           method: "POST",
           body: JSON.stringify({
@@ -260,6 +259,8 @@ const ResumeBuilder = () => {
               // fileAddress: userData.files[0].fileName,
               fileAddress: userData.uploadedResume.fileName,
             },
+            personName: userData.firstName + userData.lastName,
+            jobTitle: resumeData.state.jobPosition
           }),
         });
         // const response = await res.json();
@@ -617,10 +618,10 @@ const ResumeBuilder = () => {
 
                 <Link
                   href="/resume-builder/templates"
-                  className="rounded-lg overflow-hidden"
+                  className="no-underline text-white rounded-lg overflow-hidden"
                 >
                   <div
-                    className={` font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent grid gap-2 text-center p-4`}
+                    className={` font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent grid gap-2 text-center py-2 px-4`}
                   >
                     Explore More Templates
                   </div>

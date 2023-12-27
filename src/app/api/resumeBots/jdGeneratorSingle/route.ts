@@ -27,28 +27,45 @@ export async function POST(req: any) {
     const experience = reqBody?.experience;
     const trainBotData = reqBody?.trainBotData;
     const quantifyingExperience = reqBody?.quantifyingExperience;
+    const personName =  reqBody?.personName
+    const jobTitle =  reqBody?.jobTitle
     const dataset = "resume.writeJDSingle";
     const model = await getTrainedModel(dataset);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
     let promptRec;
+    let prompt
     await startDB();
     if (quantifyingExperience) {
       promptRec = await Prompt.findOne({
         type: "resume",
-        name: "jdSingle",
+        name: "QuantifyingjdSingle",
         active: true,
       });
+
+      prompt = promptRec.value;
+      prompt = prompt.replaceAll("{{PersonName}}", personName)
+      prompt = prompt.replaceAll("{{JobTitle}}", jobTitle)
     } else {
       promptRec = await Prompt.findOne({
         type: "resume",
         name: "jdSingle",
         active: true,
       });
-    }
-    const prompt = promptRec.value;
 
-    const inputPrompt = `You are a helpful assistant that helps Writing Individual Job Description for a person for his Resume.
-      The Resume Data is as follows:
+
+
+      prompt = promptRec.value;
+      prompt = prompt.replaceAll("{{PersonName}}", personName)
+      prompt = prompt.replaceAll("{{JobTitle}}", jobTitle)
+
+    }
+
+    const inputPrompt = `
+    ${prompt}
+
+    Here is the work experience: 
+    
+  
       Job Title: ${experience.jobTitle}
       Company Name: ${experience.company}
       From Month: ${experience.fromMonth}
@@ -59,10 +76,12 @@ export async function POST(req: any) {
       Job Description: ${experience.description}
       Company country: ${experience.country}
       Company city,State: ${experience.cityState}
-      
-      This is the prompt:
-      ${prompt}
+     
       `;
+
+
+
+      ///person name and job replace from prompt
     const response: any = await openai.chat.completions.create({
       model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg",
       stream: true,
