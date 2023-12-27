@@ -4,6 +4,8 @@ import { useSearchParams } from "next/navigation";
 import React, { useRef } from "react";
 import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
 import { useSelector } from "react-redux";
+import { crownIcon } from "@/helpers/newIconsProviders";
+import UpgradeModal from "@/components/upgradeModal";
 
 const Template = () => {
   const params = useSearchParams();
@@ -14,12 +16,22 @@ const Template = () => {
 
   return (
     <div className="lg:ml-[234px] ml-0 px-[15px]">
+      <UpgradeModal />
+
       <RecentResumeCard componentRef={componentRef} templateId={templateId} />
       <div className="my-10">
         {resume &&
           (resume?.name || resume?.contact?.email || resume?.summary) && (
-            <div ref={componentRef} className=" bg-white">
-              {ALL_TEMPLATES[templateId - 1].template({})}
+            <div className="relative">
+              {ALL_TEMPLATES[templateId - 1].category === "premium" && (
+                <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
+                  {crownIcon}
+                </div>
+              )}
+
+              <div ref={componentRef} className=" bg-white">
+                {ALL_TEMPLATES[templateId - 1].template({})}
+              </div>
             </div>
           )}
       </div>
