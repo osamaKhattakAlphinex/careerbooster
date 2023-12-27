@@ -2,10 +2,9 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-import { Pagination, Autoplay, Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -59,10 +58,6 @@ const Templates = () => {
   const [activeTab, setActiveTab] = useState<Tabs>(tabs[0]);
   const [templates, setTemplates] = useState<Template[]>(ALL_TEMPLATES);
 
-  const nextBtn = useRef<any>(null);
-  const prevBtn = useRef<any>(null);
-  const swiper = useRef<any>(null);
-
   const userData = useSelector((state: any) => state.userData);
 
   const filterTemplates = () => {
@@ -75,15 +70,6 @@ const Templates = () => {
       setTemplates(_templates);
     }
   };
-
-  useEffect(() => {
-    if (swiper) {
-      swiper.current.swiper.params.navigation.prevel = prevBtn.current;
-      swiper.current.swiper.params.navigation.nextel = nextBtn.current;
-      swiper.current.swiper.navigation.init();
-      swiper.current.swiper.navigation.update();
-    }
-  }, []);
 
   const router = useRouter();
 
@@ -115,15 +101,11 @@ const Templates = () => {
 
       <div className="p-4 flex flex-row items-start justify-start gap-6 flex-wrap box-border">
         <Swiper
-          ref={swiper}
           slidesPerView={5}
           spaceBetween={10}
           rewind={true}
           speed={1200}
-          navigation={{
-            prevEl: prevBtn?.current,
-            nextEl: nextBtn?.current,
-          }}
+          navigation={true}
           autoplay={{ delay: 3500, disableOnInteraction: false }}
           modules={[Autoplay, Navigation]}
           className=""
@@ -146,24 +128,6 @@ const Templates = () => {
             },
           }}
         >
-          <div className="flex flex-row justify-between items-center">
-            <div className="flex-1"></div>
-            <div className="self-end">
-              <button
-                ref={prevBtn}
-                className=" p-2 bg-black text-white rotate-180 hover:bg-white hover:text-black"
-              >
-                {chevronRight}
-              </button>
-              <button
-                ref={nextBtn}
-                className=" p-2 bg-black text-white hover:bg-white hover:text-black"
-              >
-                {chevronRight}
-              </button>
-            </div>
-          </div>
-
           {templates.map((template, index) => (
             <SwiperSlide key={`template-${index}`}>
               <div className="box-border group relative rounded-lg overflow-hidden">
