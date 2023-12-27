@@ -259,7 +259,7 @@ const ResumeBuilder = () => {
               // fileAddress: userData.files[0].fileName,
               fileAddress: userData.uploadedResume.fileName,
             },
-            personName: userData.firstName + userData.lastName,
+            personName: userData.firstName +" "+ userData.lastName,
             jobTitle: resumeData.state.jobPosition
           }),
         });

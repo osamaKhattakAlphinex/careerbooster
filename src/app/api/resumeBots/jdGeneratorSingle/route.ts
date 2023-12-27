@@ -7,6 +7,8 @@ import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
+import { makeid } from "@/helpers/makeid";
+import { TrainBotEntryType, makeTrainedBotEntry } from "@/helpers/makeTrainBotEntry";
 export const maxDuration = 10; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -51,9 +53,6 @@ export async function POST(req: any) {
         name: "jdSingle",
         active: true,
       });
-
-
-
       prompt = promptRec.value;
       prompt = prompt.replaceAll("{{PersonName}}", personName)
       prompt = prompt.replaceAll("{{JobTitle}}", jobTitle)
@@ -79,36 +78,68 @@ export async function POST(req: any) {
      
       `;
 
-
-
-      ///person name and job replace from prompt
     const response: any = await openai.chat.completions.create({
       model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg",
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
 
-    // make a trainBot entry
-    try {
-      if (trainBotData) {
-        await startDB();
-
-        const obj = {
-          type: "resume.writeJDSingle",
-          input: prompt,
-          output: response,
-          idealOutput: "",
-          status: "pending",
-          userEmail: trainBotData.userEmail,
-          fileAddress: trainBotData.fileAddress,
-          Instructions: `Write Single Job Description for ${experience.jobTitle} at ${experience.company}`,
+let workId: any
+    const stream = OpenAIStream(response,{
+      onStart: async()=>{
+        workId = makeid()
+        const payload = {
+          id: workId,
         };
+              // postConsultingBid(payload);
 
-        await TrainBot.create({ ...obj });
+      },
+      onFinal: async (completions)=>{
+        try {
+
+          try {
+            if (trainBotData) {
+              await startDB();
+  
+  
+              let entry: TrainBotEntryType = {
+                entryId: workId,
+                type: "resume.writeJDSingle",
+                input: inputPrompt,
+                output: completions,
+                idealOutput: "",
+                status: "pending",
+                userEmail: trainBotData.userEmail,
+                fileAddress: trainBotData?.fileAddress,
+                Instructions: `Write Single Job Description for ${experience.jobTitle} at ${experience.company}`,
+              };
+              makeTrainedBotEntry(entry);
+            }
+          } catch {
+            console.log("error while saving summary....");
+          }
+          if (trainBotData) {
+            await startDB();
+            
+    
+            const obj = {
+              type: "resume.writeJDSingle",
+              input: inputPrompt,
+              output: completions,
+              idealOutput: "",
+              status: "pending",
+              userEmail: trainBotData.userEmail,
+              // fileAddress: trainBotData.fileAddress,
+              Instructions: `Write Single Job Description for ${experience.jobTitle} at ${experience.company}`,
+            };
+    
+            await TrainBot.create({ ...obj });
+          }
+        } catch (error) {
+          
+        }
       }
-    } catch (error) {}
-
-    const stream = OpenAIStream(response);
+    });
     // Respond with the stream
     return new StreamingTextResponse(stream);
   } catch (error) {

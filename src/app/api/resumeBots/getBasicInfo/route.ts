@@ -12,6 +12,8 @@ import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
+import { makeid } from "@/helpers/makeid";
+import { TrainBotEntryType, makeTrainedBotEntry } from "@/helpers/makeTrainBotEntry";
 export const maxDuration = 10; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
@@ -153,32 +155,44 @@ export async function POST(req: any) {
 
         // make a trainBot entry
 
-        try {
-          if (trainBotData) {
-            await startDB();
-            const obj = {
-              type: "resume.writeSummary",
-              input: promptSummary,
-              output: response,
-              idealOutput: "",
-              status: "pending",
-              userEmail: trainBotData.userEmail,
-              fileAddress: trainBotData.fileAddress,
-              Instructions: `Write Summary for the resume`,
-            };
+       
 
-            await TrainBot.create({ ...obj });
-          }
-        } catch (error) {}
-
-        const stream = OpenAIStream(response);
+        const stream = OpenAIStream(response,{
+          onFinal: async (completions) =>{
+            try {
+              if (trainBotData) {
+                await startDB();
+                const summaryId = makeid();
+    
+                const payload = {
+                  id: summaryId,
+                  summaryText: completions,
+                };
+    
+                // postConsultingBid(payload);
+    
+                let entry: TrainBotEntryType = {
+                  entryId: summaryId,
+                  type: "resume.writeSummary",
+                  input: inputPrompt,
+                  output: completions,
+                  idealOutput: "",
+                  status: "pending",
+                  userEmail: trainBotData.userEmail,
+                  fileAddress: trainBotData?.fileAddress,
+                  Instructions: `Write Summary for the resume`,
+                };
+                makeTrainedBotEntry(entry);
+              }
+            } catch {
+              console.log("error while saving summary....");
+            }
+          },
+             
+        });
         // Respond with the stream
-        return new StreamingTextResponse(stream, {});
-        // return NextResponse.json(
-        //   { result: output, success: true },
-        //   { status: 200 }
-        // );
-        // res.end();
+        return new StreamingTextResponse(stream);
+       
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },
