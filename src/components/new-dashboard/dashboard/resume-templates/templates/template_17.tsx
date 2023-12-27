@@ -329,18 +329,23 @@ const ResumeTemplate17 = ({
       </div>
       <div className="flex">
         <div className=" w-3/12 md:w-1/3 flex flex-col  items-center   bg-[#323b4c]  px-9   pt-[2rem] ">
-          <div className=" w-24 h-24 md:w-44 border-[.5rem] border-[#ffff]  md:h-44 text-white bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
-            <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
-              <EditableField
-                value={resume?.shortName ? resume?.shortName : "CPH"}
-                style={{ width: "60px" }}
-                onSave={(value: string) => {
-                  dispatch(setField({ name: "shortName", value: value }));
-                  saveResumeToDB({ ...resume, shortName: value });
-                }}
-              />
-            </span>
+        <div className=" w-24 h-24 md:w-48 md:h-48 border-[.5rem] border-[#ae9243]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
+        <div className=" w-24 h-24 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
+            <div className=" w-24 h-24 md:w-40 md:h-40 text-[#F1F1F1] flex justify-center items-center bg-[#ae9243]  rounded-full ">
+              <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
+                <EditableField
+                  value={resume?.shortName ? resume?.shortName : "CPH"}
+                  style={{ width: "60px" }}
+                  onSave={(value: string) => {
+                    dispatch(setField({ name: "shortName", value: value }));
+                    saveResumeToDB({ ...resume, shortName: value });
+                  }}
+                />
+              </span>
+            </div>
           </div>
+        </div>
+        
           {/* contacts */}
           <span className="border-stylee w-full h-0 my-3"></span>
           <h3 className="uppercase text-lg font-semibold w-full border-b-2 border-white pb-2 text-white  py-1 rounded-sm flex items-center  flex-row gap-2 ">
@@ -349,7 +354,7 @@ const ResumeTemplate17 = ({
           </h3>
           <span className="border-stylee w-full h-0 my-3"></span>
           <ul className=" flex flex-col gap-3 w-full mb-4 text-sm text-gray-300 break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-500 text-xs  flex flex-row gap-1 ">
+            <li className="hover:shadow-md hover:bg-gray-500 hover:text-black text-xs  flex flex-row gap-1 ">
               {phoneIcon}
               <EditableField
                 value={
@@ -371,7 +376,7 @@ const ResumeTemplate17 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-1  items-center text-xs">
               {emailIcon}
 
               <EditableField
@@ -394,7 +399,7 @@ const ResumeTemplate17 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 text-gray-400 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 text-gray-400 flex flex-row gap-1  items-center text-xs">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -428,9 +433,8 @@ const ResumeTemplate17 = ({
               {/* </a> */}
             </li>
           </ul>
-
-          {/* Skills */}
-          {resume?.primarySkills && resume?.primarySkills.length > 0 && (
+ {/* Skills */}
+ {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <span className="border-stylee w-full h-0  my-1"></span>
               <h3 className="uppercase text-lg font-semibold text-white pb-2 w-full border-b-2 border-white  py-1 rounded-sm flex  flex-row gap-2 items-center">
@@ -450,7 +454,7 @@ const ResumeTemplate17 = ({
                 {/* <li className="font-semibold  uppercase">primary</li> */}
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
-                    className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex justify-between "
+                    className="hover:shadow-md hover:cursor-move parent hover:text-black hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex items-center  "
                     key={i}
                     onDragStart={(e) =>
                       e.dataTransfer.setData("text/plain", i.toString())
@@ -459,48 +463,51 @@ const ResumeTemplate17 = ({
                     onDrop={(e) => handleDropPrimary(e, i)}
                     draggable
                   >
-                    <EditableField
-                      value={skill}
-                      onSave={(value: string) => {
-                        let updatedSkills = resume.primarySkills.map(
-                          (skill: string, index: number) => {
-                            if (index === i) {
-                              return value;
+                    <span className="w-1.5 h-1.5 bg-gray-300 rounded-full mr-3"></span>
+                    <div className="flex flex-row w-full items-center justify-between">
+                      <EditableField
+                        value={skill}
+                        onSave={(value: string) => {
+                          let updatedSkills = resume.primarySkills.map(
+                            (skill: string, index: number) => {
+                              if (index === i) {
+                                return value;
+                              }
+                              return skill;
                             }
-                            return skill;
-                          }
-                        );
-                        dispatch(
-                          setPrimarySkills({
+                          );
+                          dispatch(
+                            setPrimarySkills({
+                              ...resume,
+                              primarySkills: updatedSkills,
+                            })
+                          );
+                          saveResumeToDB({
                             ...resume,
                             primarySkills: updatedSkills,
-                          })
-                        );
-                        saveResumeToDB({
-                          ...resume,
-                          primarySkills: updatedSkills,
-                        });
-                      }}
-                    />
-                    <div
-                      onClick={() => {
-                        const removeSkill = resume.primarySkills.filter(
-                          (item: any) => item !== skill
-                        );
-                        dispatch(
-                          setPrimarySkills({
+                          });
+                        }}
+                      />
+                      <div
+                        onClick={() => {
+                          const removeSkill = resume.primarySkills.filter(
+                            (item: any) => item !== skill
+                          );
+                          dispatch(
+                            setPrimarySkills({
+                              ...resume,
+                              primarySkills: removeSkill,
+                            })
+                          );
+                          saveResumeToDB({
                             ...resume,
                             primarySkills: removeSkill,
-                          })
-                        );
-                        saveResumeToDB({
-                          ...resume,
-                          primarySkills: removeSkill,
-                        });
-                      }}
-                      className="w-4 h-4  cursor-pointer child"
-                    >
-                      {crossIcon1}
+                          });
+                        }}
+                        className="w-4 h-4  cursor-pointer child"
+                      >
+                        {crossIcon1}
+                      </div>
                     </div>
                   </li>
                 ))}
@@ -562,11 +569,10 @@ const ResumeTemplate17 = ({
               </ul>
             </>
           )}
-
           {resume?.education && (
             <>
               <span className="w-full h-0 my-1 page-break"></span>
-              <h3 className="uppercase text-lg font-semibold  text-white w-full py-1 rounded-sm flex border-b-2 border-white flex-row gap-2 items-center">
+              <h3 className="uppercase text-lg font-semibold  text-white w-full py-1 rounded-sm flex border-b-2 border-white flex-row gap-2  items-center">
                 {educationIcon}
                 Education
               </h3>
@@ -587,8 +593,8 @@ const ResumeTemplate17 = ({
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
                    hover:bg-gray-100 font-semibold  hover:text-black flex uppercase text-md   items-center "
                     >
-                      <span className="w-2 h-2 bg-gray-300 rounded-full mr-3"></span>
-                      <div className="flex flex-row justify-between">
+                      <span className="w-1.5 h-1.5 bg-gray-300 rounded-full mr-3"></span>
+                      <div className="flex flex-row w-full items-center justify-between">
                         <EditableField
                           type="textarea"
                           rows={2}
@@ -713,7 +719,7 @@ const ResumeTemplate17 = ({
         <div className="w-full flex flex-col px-4 md:px-8 pt-[13rem] ">
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0  my-3"></span>
-          <h3 className="uppercase text-lg font-semibold bg-[#444440] px-4 rounded-sm text-white w-full py-1">
+          <h3 className="uppercase text-lg font-semibold border-[#444440] border-b-2  rounded-sm text-gray-900 w-full py-1">
             EXECUTIVE SUMMARY
           </h3>
           <span className="border-stylee w-full h-0  my-3"></span>
@@ -738,7 +744,7 @@ const ResumeTemplate17 = ({
             className="border-stylee w-full h-0 
            my-3"
           ></span>
-          <h3 className="uppercase text-lg font-semibold bg-[#444440] px-4 rounded-sm text-white w-full py-1">
+          <h3 className="uppercase text-lg font-semibold border-[#444440] border-b-2  rounded-sm text-gray-900 w-full py-1">
             WORK EXPERIENCE
           </h3>
           <span
