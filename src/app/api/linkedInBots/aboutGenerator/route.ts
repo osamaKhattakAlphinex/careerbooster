@@ -50,7 +50,6 @@ export async function POST(req: any) {
     });
     let prompt = promptRec.value;
     prompt = prompt.replaceAll("{{PersonName}}", personName);
-    console.log(personName)
     const inputPrompt = `Read ${personName}'s resume : ${JSON.stringify(userData)}
 
           and then:
