@@ -94,7 +94,21 @@ export async function POST(req: any) {
         // make a trainBot entry
         try {
           if (trainBotData) {
+
+
+            const basicInfoId = makeid();
+
+            const payload = {
+              id: basicInfoId,
+              primarySkillsText: response?.choices[0]?.message?.content?.replace(
+                /(\r\n|\n|\r)/gm,
+                ""
+              ),
+            };
+
             const obj = {
+              entryId: basicInfoId,
+          
               type: "resume.getBasicInfo",
               input: inputPrompt,
               output: response?.choices[0]?.message?.content?.replace(
@@ -320,8 +334,19 @@ export async function POST(req: any) {
         try {
           if (trainBotData) {
             await startDB();
+            await startDB();
+            const primarySkillsId = makeid();
+
+            const payload = {
+              id: primarySkillsId,
+              primarySkillsText: response?.choices[0]?.message?.content?.replace(
+                /(\r\n|\n|\r)/gm,
+                ""
+              ),
+            };
 
             const obj = {
+              entryId: primarySkillsId,
               type: "resume.writePrimarySkills",
               input: inputPrompt,
               output: response?.choices[0]?.message?.content?.replace(
@@ -331,7 +356,7 @@ export async function POST(req: any) {
               idealOutput: "",
               status: "pending",
               userEmail: trainBotData.userEmail,
-              fileAddress: trainBotData.fileAddress,
+              fileAddress: trainBotData?.fileAddress,
               Instructions: `Write Primary Skills for Resume`,
             };
 
