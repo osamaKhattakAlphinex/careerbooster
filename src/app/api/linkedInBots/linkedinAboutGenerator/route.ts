@@ -37,10 +37,10 @@ export async function POST(req: any) {
         const model = await getTrainedModel(dataset);
         //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
-        const input = `This is the User data:
+        const input = `Read {{PersonName}}'s resume :
                 ${linkedinContent}
     
-                This is the prompt:
+                and then:
                 ${prompt}`;
 
         const response: any = await openai.chat.completions.create({

@@ -174,6 +174,7 @@ const ResumeBuilder = () => {
       body: JSON.stringify({
         type: "summary",
         jobPosition: resumeData.state.jobPosition,
+        userData: aiInputUserData,
         trainBotData: {
           userEmail: userData.email,
           // fileAddress: userData.files[0].fileName,
@@ -229,11 +230,10 @@ const ResumeBuilder = () => {
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
         
-        ${experience?.fromMonth} ${experience?.fromYear} - ${
-          experience?.isContinue
+        ${experience?.fromMonth} ${experience?.fromYear} - ${experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
-        } | ${experience?.company} | 
+          } | ${experience?.company} | 
         ${experience?.cityState} ${experience?.country}
                   </h2>`;
         html += `<div>`;
@@ -259,7 +259,7 @@ const ResumeBuilder = () => {
               // fileAddress: userData.files[0].fileName,
               fileAddress: userData.uploadedResume.fileName,
             },
-            personName: userData.firstName +" "+ userData.lastName,
+            personName: userData.firstName + " " + userData.lastName,
             jobTitle: resumeData.state.jobPosition
           }),
         });
@@ -562,25 +562,30 @@ const ResumeBuilder = () => {
                 We have generated free text basic resume for you for further
                 design templates click here
               </p> */}
+              <div className="flex justify-between items-center">
 
-              <h2 className=" text-base font-bold my-3">Design Templates</h2>
-
-              <div className="flex flex-row justify-between items-center pl-5">
-                {ALL_TEMPLATES.slice(0, 5).map((template, index) => (
+                <h2 className=" text-base font-bold my-3">Design Templates</h2>
+                <Link
+                  href="/resume-builder/templates"
+                  className="no-underline  text-white rounded-lg overflow-hidden"
+                >
+                  <div
+                    className={` font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
+                  >
+                    All Templates
+                  </div>
+                </Link>
+              </div>
+              <div className="flex flex-wrap justify-center gap-4 items-center pl-5">
+                {ALL_TEMPLATES.slice(0, 6).map((template, index) => (
                   <div
                     key={`template-${index}`}
-                    className="box-border group relative  rounded-lg flex items-center overflow-hidden"
+                    className="box-border group relative  rounded-lg flex items-center overflow-hidden "
                   >
                     {template.category === "premium" && (
                       <div className="absolute rounded-full right-1 top-1 h-6 w-6 grid place-content-center bg-yellow-600">
                         {crownIcon}
-                        {/* <Image
-                          src={iconOfPackageBadge}
-                          alt="bold icon"
-                          height={16}
-                          width={16}
-                          className=""
-                        /> */}
+
                       </div>
                     )}
                     <Link
@@ -609,23 +614,14 @@ const ResumeBuilder = () => {
                       <Image
                         src={template.preview}
                         alt={`template-${index}`}
-                        height={800}
-                        width={850}
+                        height={200}
+                        width={150}
                       />
                     </Link>
                   </div>
                 ))}
 
-                <Link
-                  href="/resume-builder/templates"
-                  className="no-underline text-white rounded-lg overflow-hidden"
-                >
-                  <div
-                    className={` font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent grid gap-2 text-center py-2 px-4`}
-                  >
-                    Explore More Templates
-                  </div>
-                </Link>
+
               </div>
             </div>
           )}
@@ -636,9 +632,8 @@ const ResumeBuilder = () => {
               <>
                 <div className={`my-10  w-[100%] bg-white`}>
                   <div
-                    className={`w-full  ${
-                      resumeData.state.resumeLoading ? "animate-pulse" : ""
-                    }`}
+                    className={`w-full  ${resumeData.state.resumeLoading ? "animate-pulse" : ""
+                      }`}
                     ref={componentRef}
                   >
                     <ResumeTemplate1

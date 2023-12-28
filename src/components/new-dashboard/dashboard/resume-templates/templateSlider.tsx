@@ -35,6 +35,9 @@ const TemplateSlider = ({ templates }: Props) => {
           0: {
             slidesPerView: 1,
           },
+          425:{
+            slidesPerView: 2,
+          },
           640: {
             slidesPerView: 3,
           },
@@ -42,23 +45,24 @@ const TemplateSlider = ({ templates }: Props) => {
             slidesPerView: 3,
           },
           1080: {
-            slidesPerView: 5,
+            slidesPerView: 6,
           },
           1280: {
-            slidesPerView: 5,
+            slidesPerView: 6,
           },
         }}
       >
         {templates.map((template, index) => (
           
-          <SwiperSlide key={`template-${index}`} className="relative overflow-hidden group h-96">
+          <SwiperSlide key={`template-${index}`} className="bg-transparent relative overflow-hidden group h-48 xs:h-64 rounded-lg md:h-64">
             <Link href={`/resume-builder/templates/template?templateId=${template.id}`}>
             <Image
               src={template.preview}
               alt={`template-${index}`}
-              fill
+        fill
+      sizes="(min-width: 780px) 100vw, 33vw"
               className="bg-white "
-              style={{objectFit: "cover", aspectRatio: "auto"}}
+              style={{objectFit: "contain", aspectRatio: "auto"}}
             />
                 <div className=" object-cover group-hover:grid hidden bg-slate-600/60 text-white  absolute top-0 left-0 h-full w-full rounded-lg  overflow-hidden  place-content-center">
                   {template.category === "premium" && (

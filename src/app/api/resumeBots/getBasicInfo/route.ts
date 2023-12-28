@@ -140,9 +140,7 @@ export async function POST(req: any) {
 
         const promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
 
-        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
-          content
-        )}
+        const inputPrompt = `This is the Resume data: ${JSON.stringify(userData)}
         
         From the above resume data please:
                 ${promptSummary}`;
