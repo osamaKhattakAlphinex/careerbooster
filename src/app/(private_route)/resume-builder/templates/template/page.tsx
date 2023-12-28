@@ -6,6 +6,7 @@ import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builde
 import { useSelector } from "react-redux";
 import { crownIcon } from "@/helpers/newIconsProviders";
 import UpgradeModal from "@/components/upgradeModal";
+import TemplateSlider from "@/components/new-dashboard/dashboard/resume-templates/templateSlider";
 
 const Template = () => {
   const params = useSearchParams();
@@ -19,6 +20,14 @@ const Template = () => {
       <UpgradeModal />
 
       <RecentResumeCard componentRef={componentRef} templateId={templateId} />
+
+      <div>
+        <h2 className=" text-gray-900 dark:text-white font-bold uppercase text-sm">
+          Templates Designs
+        </h2>
+        <TemplateSlider templates={ALL_TEMPLATES} />
+      </div>
+
       <div className="my-10">
         {resume &&
           (resume?.name || resume?.contact?.email || resume?.summary) && (

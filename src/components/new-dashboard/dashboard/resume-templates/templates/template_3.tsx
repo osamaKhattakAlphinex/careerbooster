@@ -66,7 +66,7 @@ const EditableField = ({
       <span
         onClick={() => {
           setIsEditing(true);
-          showAlertpopupFun();
+          //showAlertpopupFun();
         }}
         onBlur={handleBlur}
         className=""

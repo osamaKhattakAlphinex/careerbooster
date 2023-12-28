@@ -51,8 +51,9 @@ const DownloadService = ({
       }
       if (
         category === "premium" &&
-        userData.userPackage === "65144fcc17dd55f9a2e3ff6c"
+        userData.userPackage === "65144e9817dd55f9a2e3ff6c"
       ) {
+        // alert("Upgrade to download")
         dispatch(setUpgradeModal(true));
       } else {
         await view();

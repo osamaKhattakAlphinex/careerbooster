@@ -32,12 +32,12 @@ const ReviewTrainBotRecord = ({ params }: { params: { recId: string } }) => {
 
   const handleSave = async () => {
     if (!saving) {
-      try {
-        JSON.parse(idealOutput);
-      } catch (err) {
-        alert("Error: The output is not a valid JSON");
-        return;
-      }
+      // try {
+      //   JSON.parse(idealOutput);
+      // } catch (err) {
+      //   alert("Error: The output is not a valid JSON");
+      //   return;
+      // }
 
       setSaving(true);
       // Save Record
