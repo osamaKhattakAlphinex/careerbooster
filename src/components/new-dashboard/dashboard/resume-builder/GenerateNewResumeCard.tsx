@@ -23,7 +23,7 @@ Props) => {
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
-    const [quantifyingExperience, setQuantifyingExperience] = useState<boolean>(false);
+    const [quantifyingExperience, setQuantifyingExperience] = useState<boolean>(true);
   // Redux
   const { data: session } = useSession();
   const dispatch = useDispatch();
