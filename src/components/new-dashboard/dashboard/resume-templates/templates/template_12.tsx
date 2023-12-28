@@ -66,7 +66,7 @@ const EditableField = ({
       <span
         onClick={() => {
           setIsEditing(true);
-          showAlertpopupFun();
+          //showAlertpopupFun();
         }}
         onBlur={handleBlur}
         className=""
@@ -305,8 +305,8 @@ const ResumeTemplate12 = ({
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="h-20 bg-[#F0CFC3]"></div>
-      <div className="flex absolute w-10/12 top-22 left-[27%] py-8 ">
-        <div className="flex flex-col w-10/12 border-gray-900 border-b-2 py-8">
+      <div className="flex absolute  top-22 left-[27%] py-8 ">
+        <div className="flex flex-col  border-gray-900 border-b-2 py-8">
           <h2 className="text-2xl md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
@@ -743,8 +743,8 @@ const ResumeTemplate12 = ({
             />
           </div>
 
-           {/* Work Experience */}
-           <div className="flex flex-col my-6">
+          {/* Work Experience */}
+          <div className="flex flex-col my-6">
             <h3 className="uppercase text-lg font-bold text-gray-950">
               WORK EXPERIENCE
             </h3>

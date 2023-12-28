@@ -66,7 +66,7 @@ const EditableField = ({
       <span
         onClick={() => {
           setIsEditing(true);
-          showAlertpopupFun();
+          //showAlertpopupFun();
         }}
         onBlur={handleBlur}
         className=""
@@ -304,8 +304,8 @@ const ResumeTemplate16 = ({
 
   return (
     <div className="w-full first-page relative text-gray-900">
-      <div className="flex absolute w-10/12 top-0 left-[27%] py-8 ">
-        <div className="flex flex-col items-center w-10/12 py-8">
+      <div className="flex absolute  top-0 left-[27%] py-8 ">
+        <div className="flex flex-col items-center  py-8">
           <h2 className="text-2xl md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
@@ -330,7 +330,7 @@ const ResumeTemplate16 = ({
       <div className="flex">
         <div className=" w-3/12 md:w-1/3 flex flex-col  items-center   bg-[#1F1E1E]  px-9   pt-[2rem] ">
           <div className=" w-24 h-24 md:w-48 md:h-48 border-[.5rem] border-[##F1F1F1]   text-gray-800 bg-[#FFFFFF]  text-center flex justify-center items-center  rounded-full ">
-            <div className=" w-24 h-24 md:w-44 md:h-44 text-[#F1F1F1] flex justify-center items-center bg-[#1F1E1E]   rounded-full ">
+            <div className=" w-24 h-24 md:w-44 md:h-44 text-[#F1F1F1] flex justify-center items-center bg-[#383636]   rounded-full ">
               <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
                 <EditableField
                   value={resume?.shortName ? resume?.shortName : "CPH"}

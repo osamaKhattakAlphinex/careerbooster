@@ -28,7 +28,7 @@ const SubAboutGenerator = () => {
   const [isAboutCopied, setIsAboutCopied] = useState<boolean>(false);
   const copyAbout = async (text: string) => {
     try {
-      const aboutData = await htmlToPlainText(text);
+      const aboutData =  htmlToPlainText(text);
       await copy(aboutData);
       setIsAboutCopied(true);
       // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)

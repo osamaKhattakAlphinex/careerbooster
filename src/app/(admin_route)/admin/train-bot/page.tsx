@@ -536,29 +536,29 @@ const TrainRegistrationBotAdminPage = () => {
                   <option value="resume.writePrimarySkills">
                     Resume {">"} Write Primary Skills
                   </option>
-                  <option value="resume.writeProfessionalSkills">
+                  {/* <option value="resume.writeProfessionalSkills">
                     Resume {">"} Write Professional Skills
                   </option>
                   <option value="resume.writeSecondarySkills">
                     Resume {">"} Write Secondary Skills
-                  </option>
+                  </option> */}
                   <option value="coverLetter.write">Write Cover Letter</option>
                   <option value="email.followupSequence">
                     Email {"> "} Followup Sequence
                   </option>
-                  <option value="linkedin.generateKeywords">
+                  <option value="linkedin.keywords">
                     LinkedIn {"> "} Generate Keywords
                   </option>
-                  <option value="linkedin.generateHeadling">
+                  <option value="linkedin.headlines">
                     LinkedIn {"> "} Generate Headline
                   </option>
-                  <option value="linkedin.generateAbout">
+                  <option value="linkedin.abouts">
                     LinkedIn {"> "} Generate About
                   </option>
-                  <option value="linkedin.generateJD">
+                  <option value="linkedin.jobDescription">
                     LinkedIn {"> "} Generate Job Description
                   </option>
-                  <option value="linkedin.genearteConsultingBid">
+                  <option value="write.genearteConsultingBid">
                     Write Consulting Bid
                   </option>
                 </>
@@ -634,7 +634,7 @@ const TrainRegistrationBotAdminPage = () => {
                 </p>
               </div>
             </div>
-            <div
+            {/* <div
               className="flex border rounded-sm p-2"
               onClick={() => setDataType("linkedinTool")}
             >
@@ -661,7 +661,7 @@ const TrainRegistrationBotAdminPage = () => {
                   Data for Prompts running on Linkedin Tool
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
           {/* Tabs */}
           <div>

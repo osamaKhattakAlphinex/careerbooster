@@ -126,7 +126,7 @@ export async function POST(req: any) {
         if (trainBotData) {
           let entry: TrainBotEntryType = {
             entryId: emailId,
-            type: "tool.email",
+            type: "email.followupSequence",
             input: inputPrompt,
             output: "out",
             idealOutput: "",
