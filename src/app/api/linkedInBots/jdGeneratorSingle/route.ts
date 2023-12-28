@@ -44,8 +44,9 @@ export async function POST(req: any) {
       active: true,
     });
     const prompt = promptRec.value;
-    const inputPrompt = `You are a helpful assistant that helps Writing Individual Job Description for a person for his Resume.
-      The Resume Data is as follows:
+    const inputPrompt = ` ${prompt}
+
+    Here is the work experience: 
       Job Title: ${experience.jobTitle}
       Company Name: ${experience.company}
       From Month: ${experience.fromMonth}
@@ -56,9 +57,7 @@ export async function POST(req: any) {
       Job Description: ${experience.description}
       Company country: ${experience.country}
       Company city,State: ${experience.cityState}
-      
-      This is the prompt:
-      ${prompt}
+     
       `;
     const response: any = await openai.chat.completions.create({
       model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg",

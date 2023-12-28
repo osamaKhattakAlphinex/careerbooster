@@ -40,9 +40,9 @@ export async function POST(req: any) {
         // CREATING LLM MODAL
 
         const input = `
-            This is the User data:
+        Read {{PersonName}}'s resume :
             ${content}
-            This is the prompt:
+            and then:
             ${prompt}
             `;
 

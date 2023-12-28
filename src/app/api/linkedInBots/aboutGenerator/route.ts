@@ -48,9 +48,9 @@ export async function POST(req: any) {
     });
     const prompt = promptRec.value;
 
-    const inputPrompt = `This is the User data: ${JSON.stringify(userData)}
+    const inputPrompt = `Read {{PersonName}}'s resume : ${JSON.stringify(userData)}
 
-          this is the prompt:
+          and then:
           ${prompt}
           `;
 

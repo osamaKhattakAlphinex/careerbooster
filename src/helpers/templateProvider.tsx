@@ -10,6 +10,7 @@ import ResumeTemplate9 from "@/components/new-dashboard/dashboard/resume-templat
 import ResumeTemplate10 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_10";
 import ResumeTemplate11 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_11";
 import ResumeTemplate12 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_12";
+import ResumeTemplate13 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_13";
 import ResumeTemplate14 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_14";
 import ResumeTemplate15 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_15";
 import ResumeTemplate16 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_16";
@@ -124,7 +125,7 @@ export const ALL_TEMPLATES: Template[] = [
     tags: ["creative-colorful"],
     category: "premium",
     preview: "/assets/images/templates/resume-2.png",
-    template: (props) => <ResumeTemplate9 {...props} />,
+    template: (props) => <ResumeTemplate13 {...props} />,
   },
   {
     id: 14,
