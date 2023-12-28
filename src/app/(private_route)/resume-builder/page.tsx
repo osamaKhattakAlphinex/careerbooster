@@ -86,8 +86,8 @@ const ResumeBuilder = () => {
       getBasicInfo();
       getSummary();
       getPrimarySkills();
-      getProfessionalSkills();
-      getSecondarySkills();
+      // getProfessionalSkills();
+      // getSecondarySkills();
       await getWorkExperienceNew();
       runConfetti();
     } else {

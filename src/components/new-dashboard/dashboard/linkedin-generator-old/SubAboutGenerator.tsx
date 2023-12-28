@@ -90,6 +90,7 @@ const SubAboutGenerator = () => {
       const aboutId = makeid();
       const obj: any = {
         aboutId: aboutId,
+        personName: userData.firstName + " " + userData.lastName,
         email: session?.user?.email,
         trainBotData: {
           userEmail: userData.email,

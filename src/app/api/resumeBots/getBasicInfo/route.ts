@@ -55,14 +55,18 @@ export async function POST(req: any) {
 
       try {
         const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
-          content
+          userData
         )}
         
         Please find the following details in above provided userdata:
         shortName, jobTitle, linkedIn
 
         the shortName means two letters from Name of the person.
+
+
         for the jobTitle write a one line catchy slogan that represents this person expertise in his/her Industry.
+
+        
         the linkedIn means the LinkedInUrl of the person.
 
         The output must be in this format. (following is an example)
@@ -76,7 +80,7 @@ export async function POST(req: any) {
 
 
         The output must be a valid JSON
-        Donot add anything if there is no value for a field. if there is no value leave that field blank donot add any extra labesls.
+        Do not add anything if there is no value for a field. if there is no value leave that field blank donot add any extra labesls.
 
         `;
         const response: any = await openai.chat.completions.create({
@@ -140,9 +144,9 @@ export async function POST(req: any) {
 
         const promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
 
-        const inputPrompt = `This is the Resume data: ${JSON.stringify(userData)}
+        const inputPrompt = `Read {{PersonName}}'s Resume data: ${JSON.stringify(userData)}
         
-        From the above resume data please:
+        and then:
                 ${promptSummary}`;
 
         const response: any = await openai.chat.completions.create({

@@ -34,6 +34,8 @@ export async function POST(req: any) {
     const trainBotData = reqBody?.trainBotData;
     const keywordsId = reqBody?.keywordsId;
     const email = reqBody?.email;
+    const personName = reqBody?.personName
+
     await startDB();
     // fetch prompt from db
     const promptRec = await Prompt.findOne({
@@ -41,9 +43,9 @@ export async function POST(req: any) {
       name: "keyword",
       active: true,
     });
-    const prompt = promptRec.value;
-
-    const inputPrompt = `Read {{PersonName}}'s resume : ${JSON.stringify(userData)}
+    let prompt = promptRec.value;
+    prompt = prompt.replaceAll("{{PersonName}}", personName);
+    const inputPrompt = `Read ${personName}'s resume :  : ${JSON.stringify(userData)}
 
           and then:
           ${prompt}
