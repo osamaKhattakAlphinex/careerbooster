@@ -13,7 +13,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
 import { makeid } from "@/helpers/makeid";
-import { TrainBotEntryType, makeTrainedBotEntry } from "@/helpers/makeTrainBotEntry";
+import {
+  TrainBotEntryType,
+  makeTrainedBotEntry,
+} from "@/helpers/makeTrainBotEntry";
 export const maxDuration = 10; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
@@ -38,6 +41,7 @@ export async function POST(req: any) {
     const inputType = reqBody?.inputType; // input type
     const jobPosition = reqBody?.jobPosition;
     const userData = reqBody?.userData;
+    const personName = reqBody?.personName
     // const email = reqBody?.email;
     const trainBotData = reqBody?.trainBotData;
 
@@ -54,19 +58,23 @@ export async function POST(req: any) {
       //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
       try {
+        const promptRec = await Prompt.findOne({
+          type: "resume",
+          name: "oneLineSlogan",
+          active: true,
+        });
+        let prompt = promptRec.value;
+        prompt = prompt.replaceAll("{{PersonName}}", personName);
+
         const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
           userData
         )}
         
         Please find the following details in above provided userdata:
         shortName, jobTitle, linkedIn
-
         the shortName means two letters from Name of the person.
+        ${prompt}
 
-
-        for the jobTitle write a one line catchy slogan that represents this person expertise in his/her Industry.
-
-        
         the linkedIn means the LinkedInUrl of the person.
 
         The output must be in this format. (following is an example)
@@ -157,22 +165,20 @@ export async function POST(req: any) {
 
         // make a trainBot entry
 
-       
-
-        const stream = OpenAIStream(response,{
-          onFinal: async (completions) =>{
+        const stream = OpenAIStream(response, {
+          onFinal: async (completions) => {
             try {
               if (trainBotData) {
                 await startDB();
                 const summaryId = makeid();
-    
+
                 const payload = {
                   id: summaryId,
                   summaryText: completions,
                 };
-    
+
                 // postConsultingBid(payload);
-    
+
                 let entry: TrainBotEntryType = {
                   entryId: summaryId,
                   type: "resume.writeSummary",
@@ -190,11 +196,9 @@ export async function POST(req: any) {
               console.log("error while saving summary....");
             }
           },
-             
         });
         // Respond with the stream
         return new StreamingTextResponse(stream);
-       
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },

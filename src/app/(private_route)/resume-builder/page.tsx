@@ -129,6 +129,8 @@ const ResumeBuilder = () => {
       body: JSON.stringify({
         type: "basicDetails",
         inputType: "userData",
+        personName: userData.firstName + " " + userData.lastName,
+
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
