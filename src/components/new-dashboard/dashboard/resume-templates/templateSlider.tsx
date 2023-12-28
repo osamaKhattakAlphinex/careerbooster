@@ -1,7 +1,6 @@
-"use client";
+
 import { crownIcon } from "@/helpers/newIconsProviders";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,12 +12,9 @@ type Props = {
 };
 
 const TemplateSlider = ({ templates }: Props) => {
-  const router = useRouter();
 
-  const handleViewTemplate = (template: Template) => {
-    router.push(`/resume-builder/templates/template?templateId=${template.id}`);
-  };
 
+console.log(templates)
   return (
     <div className="p-4 flex flex-row items-start justify-start gap-6 flex-wrap box-border">
       <Swiper
@@ -56,11 +52,13 @@ const TemplateSlider = ({ templates }: Props) => {
           
           <SwiperSlide key={`template-${index}`} className="bg-transparent relative overflow-hidden group h-48 xs:h-64 rounded-lg md:h-64">
             <Link href={`/resume-builder/templates/template?templateId=${template.id}`}>
+            
             <Image
               src={template.preview}
               alt={`template-${index}`}
-        fill
-      sizes="(min-width: 780px) 100vw, 33vw"
+       width={250}
+       height={150}
+    
               className="bg-white "
               style={{objectFit: "contain", aspectRatio: "auto"}}
             />

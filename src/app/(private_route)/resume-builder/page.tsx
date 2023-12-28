@@ -68,18 +68,16 @@ const ResumeBuilder = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
-  const [quantifyingExperience, setQuantifyingExperience] =
-    useState<boolean>(true);
+ 
 
   // Redux
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
-  const handleGenerate = useCallback(async () => {
+  const handleGenerate = useCallback(async (quantifyingExperience:boolean) => {
     await getUserDataIfNotExists();
     // reset resume
     dispatch(resetResume(resumeData.state));
-
     if (resumeData.state.jobPosition !== "" && session?.user?.email) {
       dispatch(setState({ name: "resumeLoading", value: true }));
       dispatch(setId(""));
@@ -88,7 +86,7 @@ const ResumeBuilder = () => {
       getPrimarySkills();
       // getProfessionalSkills();
       // getSecondarySkills();
-      await getWorkExperienceNew();
+      await getWorkExperienceNew(quantifyingExperience);
       runConfetti();
     } else {
       setShowPopup(true);
@@ -210,7 +208,7 @@ const ResumeBuilder = () => {
     // });
   };
 
-  const getWorkExperienceNew = async () => {
+  const getWorkExperienceNew = async (quantifyingExperience: boolean) => {
     // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("workExperience"));
     await getUserDataIfNotExists();
@@ -555,8 +553,7 @@ const ResumeBuilder = () => {
           <GenerateResume
             handleGenerate={handleGenerate}
             availablePercentage={availablePercentage}
-            quantifyingExperience={quantifyingExperience}
-            setQuantifyingExperience={setQuantifyingExperience}
+           
           />
           <div className="flex justify-center items-center">
             <Confetti active={confettingRunning} config={confettiConfig} />
