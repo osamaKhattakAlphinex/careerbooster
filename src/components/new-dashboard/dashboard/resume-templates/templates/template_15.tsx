@@ -304,8 +304,8 @@ const ResumeTemplate15 = ({
 
   return (
     <div className="w-full first-page relative text-gray-900">
-      <div className="flex absolute w-10/12 top-0 left-1/3 py-8 ">
-        <div className="flex flex-col  w-10/12 py-8">
+      <div className="flex absolute  top-0 left-1/3 py-8 ">
+        <div className="flex flex-col   py-8">
           <h2 className="text-2xl md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
