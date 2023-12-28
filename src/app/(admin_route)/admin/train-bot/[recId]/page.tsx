@@ -169,7 +169,7 @@ const ReviewTrainBotRecord = ({ params }: { params: { recId: string } }) => {
             //   }}
             // ></span>
             <span className=" whitespace-pre-wrap">
-              {rec.input.replaceAll("\n", "")}
+              {rec.input.replaceAll("\n", "").replaceAll(/"/g, " ")}
             </span>
           )}
         </div>
