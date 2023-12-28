@@ -5,6 +5,8 @@ import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import { setUpgradeModal } from "@/store/appSlice";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getPackageID } from "@/ServerActions";
+
 
 const DownloadService = ({
   componentRef,
@@ -51,9 +53,8 @@ const DownloadService = ({
       }
       if (
         category === "premium" &&
-        userData.userPackage === "65144e9817dd55f9a2e3ff6c"
+        userData.userPackage === await getPackageID()
       ) {
-        // alert("Upgrade to download")
         dispatch(setUpgradeModal(true));
       } else {
         await view();
