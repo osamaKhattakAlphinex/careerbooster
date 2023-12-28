@@ -813,13 +813,7 @@ const ResumeTemplate11 = ({
                           }}
                         />
                       </h2>
-                      <h2
-                        className="hover:cursor-default text-[1.1rem] xs:text-[0.8rem] sm:text[0.8rem] md:text-[1.1rem] lg:text-[1.1rem]"
-                        // style={{
-                        //   fontSize: "1.1rem",
-                        //   lineHeight: "1.5rem",
-                        // }}
-                      >
+                      <h2 className="hover:cursor-default text-[1.1rem] xs:text-[0.8rem] sm:text[0.8rem] md:text-[1.1rem] lg:text-[1.1rem]">
                         {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue
                           ? "Present"
