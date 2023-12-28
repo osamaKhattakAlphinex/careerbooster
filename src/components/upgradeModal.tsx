@@ -5,10 +5,19 @@ import { setUpgradeModal } from "@/store/appSlice";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useImperativeHandle, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { boolean } from "yup";
 
-const UpgradeModal = () => {
-  const [openUpgradationModal, setOpenUpgradationModal] =
-    useState<boolean>(false);
+type ModalProps = {
+  openUpgradationModal: boolean;
+  setOpenUpgradationModal: () => void;
+};
+
+const UpgradeModal = ({
+  openUpgradationModal,
+  setOpenUpgradationModal,
+}: ModalProps) => {
+  // const [openUpgradationModal, setOpenUpgradationModal] =
+  //   useState<boolean>(false);
   const app = useSelector((state: any) => state.app);
   const dispatch = useDispatch();
 
