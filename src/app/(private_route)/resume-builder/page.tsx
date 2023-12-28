@@ -609,8 +609,8 @@ const ResumeBuilder = () => {
                       <Image
                         src={template.preview}
                         alt={`template-${index}`}
-                        height={200}
-                        width={150}
+                        height={800}
+                        width={850}
                       />
                     </Link>
                   </div>
