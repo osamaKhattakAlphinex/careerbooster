@@ -175,6 +175,7 @@ const ResumeBuilder = () => {
       method: "POST",
       body: JSON.stringify({
         type: "summary",
+        personName: userData?.firstName + " " + userData?.lastName,
         jobPosition: resumeData.state.jobPosition,
         userData: aiInputUserData,
         trainBotData: {
@@ -359,6 +360,8 @@ const ResumeBuilder = () => {
       method: "POST",
       body: JSON.stringify({
         type: "primarySkills",
+        personName: userData?.firstName + " " + userData?.lastName,
+      
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {

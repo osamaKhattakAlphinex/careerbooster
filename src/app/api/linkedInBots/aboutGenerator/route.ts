@@ -44,7 +44,7 @@ export async function POST(req: any) {
     await startDB();
     // fetch prompt from db
     const promptRec = await Prompt.findOne({
-      type: "linkedinTool",
+      type: "linkedin",
       name: "about",
       active: true,
     });

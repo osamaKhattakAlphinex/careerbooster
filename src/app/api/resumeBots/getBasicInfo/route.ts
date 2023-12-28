@@ -45,13 +45,7 @@ export async function POST(req: any) {
     // const email = reqBody?.email;
     const trainBotData = reqBody?.trainBotData;
 
-    let content: any;
-
-    if (userData || inputType === "userData") {
-      // pass user data as it is
-      content = userData;
-    }
-
+   
     if (type === "basicDetails") {
       const dataset = "resume.getBasicInfo";
       const model = await getTrainedModel(dataset);
@@ -116,7 +110,7 @@ export async function POST(req: any) {
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) {}
+        } catch (error) { }
 
         return NextResponse.json(
           {
@@ -150,9 +144,9 @@ export async function POST(req: any) {
         });
         const prompt = promptRec.value;
 
-        const promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
-
-        const inputPrompt = `Read {{PersonName}}'s Resume data: ${JSON.stringify(userData)}
+        let promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
+        promptSummary = prompt.replaceAll("{{PersonName}}", personName);
+        const inputPrompt = `Read ${personName}'s Resume data: ${JSON.stringify(userData)}
         
         and then:
                 ${promptSummary}`;
@@ -257,7 +251,7 @@ export async function POST(req: any) {
       try {
         const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
         Following are the content of the resume (in JSON format): 
-        JSON user/resume data: ${JSON.stringify(content)}
+        JSON user/resume data: ${JSON.stringify(userData)}
 
         ${formatInstructions}`;
         // const resp = await chainB.call({
@@ -305,12 +299,12 @@ export async function POST(req: any) {
           jobPosition
         );
 
-        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
-          content
+        const inputPrompt = `Read ${personName}'s Resume data:: ${JSON.stringify(
+          userData
         )}
         
       
-        This is the prompt:
+        and then:
         ${promptRefined}
         
         the answer must be in a valid JSON array
@@ -343,7 +337,7 @@ export async function POST(req: any) {
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) {}
+        } catch (error) { }
 
         return NextResponse.json(
           {
@@ -384,10 +378,10 @@ export async function POST(req: any) {
         );
 
         const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
-          content
+          userData
         )}
         
-        This is the prompt:
+        and then:
         ${promptRefined}
 
         the answer must be in a valid JSON array
@@ -420,7 +414,7 @@ export async function POST(req: any) {
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) {}
+        } catch (error) { }
 
         return NextResponse.json(
           {
@@ -460,7 +454,7 @@ export async function POST(req: any) {
           jobPosition
         );
         const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
-          content
+          userData
         )}
         
         This is the prompt:
@@ -495,7 +489,7 @@ export async function POST(req: any) {
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) {}
+        } catch (error) { }
 
         return NextResponse.json(
           {

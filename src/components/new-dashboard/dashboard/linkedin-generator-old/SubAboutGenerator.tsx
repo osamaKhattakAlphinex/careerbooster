@@ -49,7 +49,7 @@ const SubAboutGenerator = () => {
       userData &&
       userData?.email &&
       !isNaN(availablePercentage) &&
-      availablePercentage !== 0
+      availablePercentage !== 0 
     ) {
       setAiInputUserData({
         contact: userData?.contact,
