@@ -46,7 +46,7 @@ const TrainRegistrationBotAdminPage = () => {
   const [limitOfRecords, setLimitOfRecords] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("pending");
-  const [dataType, setDataType] = useState<string>("registrationWizard"); // registrationWizard, aiTools
+  const [dataType, setDataType] = useState<string>("aiTools"); // registrationWizard, aiTools
   const [showRecordsType, setShowRecordsType] = useState<string>(
     "register.wizard.basicInfo"
   ); // register.wizard.basicInfo, register.wizard.listEducation etc
@@ -575,36 +575,7 @@ const TrainRegistrationBotAdminPage = () => {
               )}
             </select>
           </div>
-          <div className="grid grid-cols-3 gap-2">
-            <div
-              className="flex border rounded-sm  p-2"
-              onClick={() => setDataType("registrationWizard")}
-            >
-              <div className="flex items-center h-5">
-                <input
-                  name="dataType"
-                  type="radio"
-                  value="registrationWizard"
-                  checked={dataType === "registrationWizard"}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-              </div>
-              <div className="ml-2 text-sm">
-                <label
-                  htmlFor="helper-radio"
-                  className="font-medium text-gray-900 dark:text-gray-300"
-                >
-                  Registration Wizard
-                </label>
-                <p
-                  id="helper-radio-text"
-                  className="text-xs font-normal text-gray-500 dark:text-gray-300"
-                >
-                  Data for Prompts fetching basic information, educations,
-                  experiences skills etc
-                </p>
-              </div>
-            </div>
+          <div className="grid grid-cols-2 gap-2">
             <div
               className="flex border rounded-sm p-2"
               onClick={() => setDataType("aiTools")}
@@ -634,6 +605,36 @@ const TrainRegistrationBotAdminPage = () => {
                 </p>
               </div>
             </div>
+            <div
+              className="flex border rounded-sm  p-2"
+              onClick={() => setDataType("registrationWizard")}
+            >
+              <div className="flex items-center h-5">
+                <input
+                  name="dataType"
+                  type="radio"
+                  value="registrationWizard"
+                  checked={dataType === "registrationWizard"}
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+              </div>
+              <div className="ml-2 text-sm">
+                <label
+                  htmlFor="helper-radio"
+                  className="font-medium text-gray-900 dark:text-gray-300"
+                >
+                  Registration Wizard
+                </label>
+                <p
+                  id="helper-radio-text"
+                  className="text-xs font-normal text-gray-500 dark:text-gray-300"
+                >
+                  Data for Prompts fetching basic information, educations,
+                  experiences skills etc
+                </p>
+              </div>
+            </div>
+
             {/* <div
               className="flex border rounded-sm p-2"
               onClick={() => setDataType("linkedinTool")}
