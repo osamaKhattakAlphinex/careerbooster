@@ -304,7 +304,7 @@ const ResumeTemplate17 = ({
 
   return (
     <div className="w-full first-page relative text-gray-900">
-      <div className="flex absolute w-8/12 items-center justify-center top-0 left-1/3 py-8 ">
+      <div className="flex absolute  top-0 left-1/3 py-8 ">
         <div className="flex flex-col   py-8">
           <h2 className="text-2xl md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
