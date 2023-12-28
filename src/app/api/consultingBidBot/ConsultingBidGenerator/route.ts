@@ -99,7 +99,7 @@ export async function POST(req: any) {
         if (trainBotData) {
           let entry: TrainBotEntryType = {
             entryId: consultingBidId,
-            type: "linkedin.genearteConsultingBid",
+            type: "write.genearteConsultingBid",
             input: inputPrompt,
             output: "out",
             idealOutput: "",
