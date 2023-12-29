@@ -51,7 +51,6 @@ export async function POST(request: any) {
     try {
       await startDB();
       const payload = await request.json();
-
       const response = await updateJobDescriptions(payload);
 
       return NextResponse.json(

@@ -49,16 +49,16 @@ any) => {
       
       ${html}`;
     } else {
-      let category;
-      if (templateId) {
-        category = ALL_TEMPLATES[templateId - 1].category;
-      }
-      if (
-        category === "premium" &&
-        userData.userPackage === await getPackageID()
-      ) {
-        dispatch(setUpgradeModal(true));
-      } else {
+      // let category;
+      // if (templateId) {
+      //   category = ALL_TEMPLATES[templateId - 1].category;
+      // }
+      // if (
+      //   category === "premium" &&
+      //   userData.userPackage === await getPackageID()
+      // ) {
+      //   dispatch(setUpgradeModal(true));
+      // } else {
         await view();
         const html = componentRef.current.outerHTML;
         htmlToDoc = `
@@ -87,7 +87,7 @@ any) => {
           docRef.current.download = fileName;
           docRef.current.click();
         });
-      }
+      // }
     }
   };
 

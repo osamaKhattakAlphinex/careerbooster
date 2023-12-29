@@ -19,6 +19,7 @@ import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import LinkedInJDCardSingle from "./LinkedInJDCardSingle";
 import { makeid } from "@/helpers/makeid";
+import { makeJDentry } from "@/helpers/makeJDentry";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
   // local States
@@ -87,26 +88,20 @@ const SubJDGenerator = () => {
 
       let tempText = "";
       for (const [index, experience] of experiences.entries()) {
-        let dataForSaving = "";
         let html = "";
         html += `<h4><strong>${experience?.jobTitle}</strong></h4>`;
         html += `<h5>${experience?.company} | ${experience?.cityState} ${experience?.country}</h5>`;
-        html += `<p style=' margin-bottom: 10px'>${experience?.fromMonth} ${
-          experience?.fromYear
-        } to ${
-          experience?.isContinue
+        html += `<p style=' margin-bottom: 10px'>${experience?.fromMonth} ${experience?.fromYear
+          } to ${experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
-        }</p>`;
+          }</p>`;
         html += `<p>`;
         setStreamedData((prev) => prev + html);
         tempText += html;
-        dataForSaving += html;
         setMsgLoading(true);
-        const jobDescriptionId = makeid();
         const obj: any = {
-          jobDescriptionId: jobDescriptionId,
-        personName: userData.firstName + " " + userData.lastName,
+          personName: userData.firstName + " " + userData.lastName,
 
           email: session?.user?.email,
           trainBotData: {
@@ -128,18 +123,47 @@ const SubJDGenerator = () => {
               break;
             }
             const text = new TextDecoder().decode(value);
-            setStreamedData((prev) => prev + text);
 
+            setStreamedData((prev) => prev + text);
             tempText += text;
-            dataForSaving += text;
           }
         }
+        tempText += `
+        
+        /n
+
+        `
         setStreamedData((prev) => prev + `</p> <br /> `);
         setMsgLoading(false);
-        await saveToDB(obj, dataForSaving);
+        if (index === experiences.length - 1) {
+          const jobDescriptionId = makeid();
+          const jdObj = {
+
+            jobDescriptionId: jobDescriptionId,
+            personName: userData.firstName + " " + userData.lastName,
+
+            email: userData?.email,
+            trainBotData: {
+              userEmail: userData.email,
+              fileAddress: userData.uploadedResume.fileName,
+            },
+            experiences: experiences
+          }
+          await fetch("/api/linkedInBots/jdGeneratorSave", {
+            method: "POST",
+            body: JSON.stringify(jdObj),
+          }).then(async (response: any) => {
+            const res = await response.json();
+            if (res.success) {
+
+              await saveToDB(jdObj, tempText);
+            }
+          }
+          )
+        }
       }
 
-      fetch("/api/users/updateUserLimit", {
+      await fetch("/api/users/updateUserLimit", {
         method: "POST",
         body: JSON.stringify({
           email: session?.user?.email,
@@ -284,7 +308,7 @@ const SubJDGenerator = () => {
             onClick={() => handleGenerate()}
             className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
 
-            // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
+          // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
           >
             <span
               className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}
@@ -297,9 +321,8 @@ const SubJDGenerator = () => {
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke="currentColor"
-                    className={`w-4 h-4 mr-3 ${
-                      msgLoading ? "animate-spin" : ""
-                    }`}
+                    className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""
+                      }`}
                   >
                     <path
                       strokeLinecap="round"
@@ -326,15 +349,15 @@ const SubJDGenerator = () => {
           </button>
         </div>
         {streamedData && (
-          <div className="mb-4 border-gray-500  rounded border p-4">
+          <div className=" mb-4 border-gray-500  rounded border p-4">
             <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
               <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
                 AI Response{" "}
               </span>
             </h1>
             <div
-              className="font-sans text-gray-300 whitespace-pre-wrap break-words"
-              // style={{ textW: "auto" }}
+              className="ml-2 font-sans text-gray-300  break-words"
+            // style={{ textW: "auto" }}
             >
               <div
                 className="list-disc"
@@ -343,9 +366,8 @@ const SubJDGenerator = () => {
               <button
                 disabled={msgLoading}
                 onClick={() => copyJD(streamedData)}
-                className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${
-                  msgLoading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+                className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -366,8 +388,8 @@ const SubJDGenerator = () => {
                   {msgLoading
                     ? "Please wait..."
                     : isJDCopied
-                    ? "Copied"
-                    : "Copy to clipboard"}
+                      ? "Copied"
+                      : "Copy to clipboard"}
                 </span>
               </button>
             </div>
