@@ -50,7 +50,7 @@ const SubAboutGenerator = () => {
       userData &&
       userData?.email &&
       !isNaN(availablePercentage) &&
-      availablePercentage !== 0 
+      availablePercentage !== 0
     ) {
       setAiInputUserData({
         contact: userData?.contact,
@@ -92,6 +92,7 @@ const SubAboutGenerator = () => {
       const obj: any = {
         aboutId: aboutId,
         personName: userData.firstName + " " + userData.lastName,
+        option: option,
         email: session?.user?.email,
         trainBotData: {
           userEmail: userData.email,
@@ -310,15 +311,14 @@ const SubAboutGenerator = () => {
           </h1>
           <div
             className="font-sans dark:text-gray-100 text-gray-950 whitespace-pre-wrap break-words"
-            // style={{ textW: "auto" }}
+          // style={{ textW: "auto" }}
           >
             {streamedData}
             <button
               disabled={msgLoading}
               onClick={() => copyAbout(streamedData)}
-              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${
-                msgLoading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -339,8 +339,8 @@ const SubAboutGenerator = () => {
                 {msgLoading
                   ? "Please wait..."
                   : isAboutCopied
-                  ? "Copied"
-                  : "Copy to clipboard"}
+                    ? "Copied"
+                    : "Copy to clipboard"}
               </span>
             </button>
           </div>

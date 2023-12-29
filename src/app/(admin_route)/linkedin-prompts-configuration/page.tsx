@@ -122,20 +122,24 @@ const LinkedInPromptsConfiguration = () => {
             />
           </div>
 
+
+
+
+          <h2>For Frontend Tool (Without Signed In)</h2>
+
           <div className="flex gap-4 lg:!flex-row flex-col">
             <PromptEditor
-              name="headline"
-              title="Headline Prompt"
+              name="aboutInstructions"
+              title="About Prompt Default"
               type="linkedin"
               prompts={prompts}
               promptsLoading={promptsLoading}
               handleSave={handleSave}
               updating={updating}
             />
-
             <PromptEditor
-              name="aboutdefault"
-              title="About Prompt"
+              name="aboutStory"
+              title="About Prompt (Story)"
               type="linkedin"
               prompts={prompts}
               promptsLoading={promptsLoading}
@@ -147,7 +151,7 @@ const LinkedInPromptsConfiguration = () => {
             <PromptEditor
               name="aboutPersona"
               title="About Prompt (Persona)"
-              type="linkedinTool"
+              type="linkedin"
               prompts={prompts}
               promptsLoading={promptsLoading}
               handleSave={handleSave}
@@ -157,27 +161,7 @@ const LinkedInPromptsConfiguration = () => {
             <PromptEditor
               name="aboutShort"
               title="About Prompt (Short)"
-              type="linkedinTool"
-              prompts={prompts}
-              promptsLoading={promptsLoading}
-              handleSave={handleSave}
-              updating={updating}
-            />
-          </div>
-          <div className="flex gap-4 lg:!flex-row flex-col">
-            <PromptEditor
-              name="aboutInstructions"
-              title="About Prompt (Instructions)"
               type="linkedin"
-              prompts={prompts}
-              promptsLoading={promptsLoading}
-              handleSave={handleSave}
-              updating={updating}
-            />
-            <PromptEditor
-              name="aboutStory"
-              title="About Prompt (Story)"
-              type="linkedinTool"
               prompts={prompts}
               promptsLoading={promptsLoading}
               handleSave={handleSave}
