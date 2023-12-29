@@ -60,7 +60,6 @@ const TrainRegistrationBotAdminPage = () => {
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [dataSelection, setDataSelection] = useState<string[]>([]);
 
-  const settingModelRef: React.MutableRefObject<any> = useRef(null);
   const slidingPanelRef: React.MutableRefObject<any> = useRef(null);
   const refreshRef = useRef<any>();
 
@@ -437,7 +436,6 @@ const TrainRegistrationBotAdminPage = () => {
 
   return (
     <>
-      <FineTuningSettingModel ref={settingModelRef} />
       <SlidingPanel ref={slidingPanelRef} refresh={fetchRecords} />
 
       <div className="flex flex-col justify-start items-start">

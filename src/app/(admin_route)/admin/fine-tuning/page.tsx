@@ -3,6 +3,7 @@ import DataTable, {
   ConditionalTableAction,
   TableAction,
 } from "@/components/DataTable";
+import FineTuningSettingModel from "@/components/admin/fineTuning/fineTuningSettingModels";
 import StatusIndicator from "@/components/admin/fineTuning/statusIndicator";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 
@@ -10,13 +11,14 @@ import {
   cancelIcon,
   deleteIcon,
   leftArrowIcon,
+  settingIcon,
   startIcon,
   statusIcon,
 } from "@/helpers/iconsProvider";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 
 type FineTuningModelsType = {
@@ -31,6 +33,8 @@ type FineTuningModelsType = {
 const FineTuningModels = () => {
   const [records, setRecords] = useState<[] | any>([]);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const settingModelRef: React.MutableRefObject<any> = useRef(null);
 
   const columnHelper = createColumnHelper<FineTuningModelsType>();
 
@@ -250,24 +254,42 @@ const FineTuningModels = () => {
   };
 
   return (
-    <div className="flex flex-col justify-start items-start">
-      <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
-        Fine Tuning
-      </h2>
-      <span className="dark:text-white/70 text-black/70 text-base">
-        List of all the modle that are tuning.
-      </span>
-      <div className="w-full overflow-x-auto mt-4">
-        <DataTable
-          loading={loading}
-          columns={columns}
-          data={records}
-          source="finetuning"
-          actions={[]}
-          conditionalTableAction={rulesForActions}
-        />
+    <>
+      <FineTuningSettingModel ref={settingModelRef} />
+      <div className="flex flex-col justify-start items-start">
+        <div className="flex w-full flex-row justify-between items-start">
+          <div>
+            <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+              Fine Tuning
+            </h2>
+            <span className="dark:text-white/70 text-black/70 text-base">
+              List of all the modle that are tuning.
+            </span>
+          </div>
+          <button
+            onClick={() => {
+              if (settingModelRef) {
+                settingModelRef.current.openModal(true);
+              }
+            }}
+            className=" text-xs font-semibold uppercase flex flex-row justify-between items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-lg shadow-lg"
+          >
+            {settingIcon} Default Model For Tunning
+          </button>
+        </div>
+
+        <div className="w-full overflow-x-auto mt-4">
+          <DataTable
+            loading={loading}
+            columns={columns}
+            data={records}
+            source="finetuning"
+            actions={[]}
+            conditionalTableAction={rulesForActions}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
