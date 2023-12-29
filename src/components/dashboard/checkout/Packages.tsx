@@ -36,7 +36,6 @@ const Packages = ({ viewOnly }: Props) => {
 
   return (
     <>
-      {console.log(packages)}
       {packages &&
         packages?.map((pkg: UserPackageData) => (
           <MonthlySubscriptionCard

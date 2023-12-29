@@ -22,6 +22,7 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
+import Image from "next/image";
 
 const EditableField = ({
   value,
@@ -128,6 +129,8 @@ const ResumeTemplate1 = ({
     professionalSkillAddButtonVisible,
     setProfessionalSkillAddButtonVisible,
   ] = useState(false);
+  const imageRef = useRef<any>()
+
   const [workExperienceAddButtonVisible, setWorkExperienceAddButtonVisible] =
     useState<number>();
   const [educationAddButtonVisible, setEducationAddButtonVisible] =
@@ -228,6 +231,31 @@ const ResumeTemplate1 = ({
       professionalSkills: updatedItems,
     });
   };
+
+  const [image, setImage] = useState(null);
+
+  const handleImageChange = (e: any) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      if (selectedFile.size > 1048576) { // Check if file size is more than 1MB
+        alert('File size exceeds the limit of 1MB.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // Handle the image buffer (reader.result) here or upload it to the server
+        const imageBuffer: any = reader.result; // This contains the image as a buffer
+        // You can perform further actions like sending the buffer to the server
+        // Example: sendImageToServer(imageBuffer);
+
+
+
+        setImage(imageBuffer); // Set the image buffer in the state
+      };
+      reader.readAsArrayBuffer(selectedFile);
+    }
+  };
   //Reorder Redux handleDropExperience array with drag-drop
   const handleDropExperience = (e: any, i: number) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
@@ -251,27 +279,7 @@ const ResumeTemplate1 = ({
     }
   };
   //Reorder Redux handleDropEducation array with drag-drop
-  const handleDropEducation = (e: any, i: number) => {
-    // const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    // const updatedItems = [...resume?.educationArray];
-    // // Swap the positions of the dragged item and the target item.
-    // [updatedItems[draggedIndex], updatedItems[i]] = [
-    //   updatedItems[i],
-    //   updatedItems[draggedIndex],
-    // ];
-    // if (draggedIndex !== i) {
-    //   // dispatch(
-    //   //   setEducationArray({
-    //   //     ...resume,
-    //   //     educationArray: updatedItems,
-    //   //   })
-    //   // );
-    //   saveResumeToDB({
-    //     ...resume,
-    //     educationArray: updatedItems,
-    //   });
-    // }
-  };
+
   //Reorder Redux handleDropAchievement array with drag-drop
   const handleDropAchievement = (i: number, ind: number) => {
     let draggedIndex: number;
@@ -302,6 +310,12 @@ const ResumeTemplate1 = ({
     }
   };
 
+  const triggerInputClick = () => {
+    if (imageRef.current) {
+      imageRef.current.click();
+    }
+  };
+
   return (
     <div className="w-full first-page  text-gray-900">
       <div className="flex">
@@ -325,6 +339,15 @@ const ResumeTemplate1 = ({
               }}
             />
           </h3>
+        </div>
+        <div>
+          <div onClick={triggerInputClick} className="  w-32 h-32 xs:w-24 xs:h-24 md:w-32 md:h-32 text-white bg-gray-800 text-center flex justify-center items-center  rounded-full mx-4 my-4 mr-8 xs:mr-4 md:mr-8 ">
+            <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
+              <input ref={imageRef} className="hidden" type="file" accept="image/*" onChange={handleImageChange} />
+              {image && <Image src={URL.createObjectURL(new Blob([image]))} width={100} height={100} alt="Uploaded" />}
+
+            </span>
+          </div>
         </div>
       </div>
       <div className="">
@@ -715,7 +738,7 @@ const ResumeTemplate1 = ({
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
           {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+            resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
@@ -1053,7 +1076,7 @@ const ResumeTemplate1 = ({
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                      newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                         <div
                           className="border-2 w-2/12 xs:w-full md:2/12 lg:2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {

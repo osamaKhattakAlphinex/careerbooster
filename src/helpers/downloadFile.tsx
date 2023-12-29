@@ -16,7 +16,7 @@ const DownloadService = ({
   fileName,
   templateId,
 }: // setOpenUpgradModal,
-any) => {
+  any) => {
   const docRef = useRef<any>(null);
 
   let htmlToDoc: string;
@@ -59,9 +59,9 @@ any) => {
       // ) {
       //   dispatch(setUpgradeModal(true));
       // } else {
-        await view();
-        const html = componentRef.current.outerHTML;
-        htmlToDoc = `
+      await view();
+      const html = componentRef.current.outerHTML;
+      htmlToDoc = `
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
         .parent .child {
@@ -71,22 +71,23 @@ any) => {
             display: block; 
         }</style>
         ${html}`;
-        const formData = new FormData();
-        formData.append("htmlToDoc", htmlToDoc);
-        await fetch(`/api/template`, {
-          method: "POST",
-          body: formData,
-        }).then(async (response: any) => {
-          const res = await response.json();
-          const arrayBufferView = new Uint8Array(res.result.data);
-          const blob = new Blob([arrayBufferView], {
-            type: "application/pdf",
-          });
-          const url = URL.createObjectURL(blob);
-          docRef.current.href = url;
-          docRef.current.download = fileName;
-          docRef.current.click();
+      const formData = new FormData();
+      formData.append("htmlToDoc", htmlToDoc);
+      await fetch(`/api/template`, {
+        method: "POST",
+        body: formData,
+      }).then(async (response: any) => {
+        const res = await response.json();
+
+        const arrayBufferView = new Uint8Array(res.result.data);
+        const blob = new Blob([arrayBufferView], {
+          type: "application/pdf",
         });
+        const url = URL.createObjectURL(blob);
+        docRef.current.href = url;
+        docRef.current.download = fileName;
+        docRef.current.click();
+      });
       // }
     }
   };
@@ -98,7 +99,7 @@ any) => {
         setOpenUpgradationModal={setOpenUpgradModal}
       />
       <div>
-        <a className="" href="#" ref={docRef} target="_blank"></a>
+        <a className="hidden" href="#" ref={docRef} target="_blank"></a>
         <button
           onClick={templateCall}
           type="button"
