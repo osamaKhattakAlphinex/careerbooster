@@ -1,4 +1,4 @@
-
+"use client";
 import { crownIcon } from "@/helpers/newIconsProviders";
 import Image from "next/image";
 import React from "react";
@@ -6,13 +6,15 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Template } from ".";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 type Props = {
   templates: Template[];
 };
 
 const TemplateSlider = ({ templates }: Props) => {
-
+  const params = useSearchParams();
+  const templateId: number = parseInt(params.get("templateId") || "0");
 
   return (
     <div className="p-4 flex flex-row items-start justify-start gap-6 flex-wrap box-border">
@@ -48,16 +50,19 @@ const TemplateSlider = ({ templates }: Props) => {
         }}
       >
         {templates.map((template, index) => (
-
-          <SwiperSlide key={`template-${index}`} className="bg-transparent relative overflow-hidden group h-48 xs:h-64 rounded-lg md:h-64">
-            <Link href={`/resume-builder/templates/template?templateId=${template.id}`}>
-
+          <SwiperSlide
+            key={`template-${index}`}
+            className={`${templateId === index + 1 ? " border-2 p-2 border-indigo-600" : ""
+              } bg-transparent relative overflow-hidden group h-48 xs:h-64 rounded-lg md:h-64`}
+          >
+            <Link
+              href={`/resume-builder/templates/template?templateId=${template.id}`}
+            >
               <Image
                 src={template.preview}
                 alt={`template-${index}`}
                 width={250}
                 height={150}
-
                 className="bg-white "
                 style={{ objectFit: "contain", aspectRatio: "auto" }}
               />
@@ -82,7 +87,6 @@ const TemplateSlider = ({ templates }: Props) => {
                   />
                 </svg>
               </div>
-
             </Link>
           </SwiperSlide>
         ))}

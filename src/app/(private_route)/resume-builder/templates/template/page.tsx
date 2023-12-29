@@ -1,20 +1,43 @@
 "use client";
 import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import { useSearchParams } from "next/navigation";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { crownIcon } from "@/helpers/newIconsProviders";
 import UpgradeModal from "@/components/upgradeModal";
 import TemplateSlider from "@/components/new-dashboard/dashboard/resume-templates/templateSlider";
+import { useSession } from "next-auth/react";
+import { setUserData } from "@/store/userDataSlice";
+import { setResume } from "@/store/resumeSlice";
 
 const Template = () => {
   const params = useSearchParams();
   const { resume } = useSelector((state: any) => state);
   const [openUpgradeModal, setOpenUpgradModal] = useState<boolean>(false);
-
+  const { data: session } = useSession();
   const templateId: number = parseInt(params.get("templateId") || "0");
   const componentRef = useRef(null);
+  const dispatch = useDispatch();
+
+  const fetchDefaultResume = async () => {
+    const res = await fetch(
+      `/api/users/getOneByEmail?email=${session?.user?.email}`
+    );
+
+    const { result, success } = await res.json();
+
+    if (success) {
+      dispatch(setUserData(result));
+      dispatch(setResume(result.resumes[0]));
+    }
+  };
+
+  useEffect(() => {
+    if (!resume.id) {
+      fetchDefaultResume();
+    }
+  }, []);
 
   return (
     <div className="lg:ml-[234px] ml-0 px-[15px]">
