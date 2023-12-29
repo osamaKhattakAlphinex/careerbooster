@@ -328,11 +328,11 @@ const ResumeTemplate17 = ({
         </div>
       </div>
       <div className="flex">
-        <div className=" w-4/12 xs:w-4/12 md:w-1/3 flex flex-col  items-center   bg-[#323b4c]  px-9 xs:px-1 md:px-9  pt-[2rem] ">
-          <div className=" w-48 h-48 xs:w-24  xs:h-24 md:w-48 md:h-48 border-[.5rem] border-[#ae9243]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
-            <div className=" w-44 h-44 xs:w-24  xs:h-24 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
-              <div className=" w-40 h-40 xs:h-20 xs:w-20 md:w-40 md:h-40 text-[#F1F1F1] flex justify-center items-center bg-[#ae9243]  rounded-full ">
-                <span className="text-4xl xs:text-lg md:text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
+        <div className=" w-3/12 md:w-1/3 flex flex-col  items-center   bg-[#323b4c]  px-9   pt-[2rem] ">
+          <div className="border-[.5rem] border-[#ae9243]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
+            <div className=" w-24 h-24 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
+              <div className=" w-24 h-24 md:w-40 md:h-40 text-[#F1F1F1] flex justify-center items-center bg-[#ae9243]  rounded-full ">
+                <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
                   <EditableField
                     value={resume?.shortName ? resume?.shortName : "CPH"}
                     style={{ width: "60px" }}

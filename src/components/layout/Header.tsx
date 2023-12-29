@@ -24,7 +24,7 @@ const Header = () => {
       // className={`navbar navbar-expand-lg fixed-top ${
       //   theme === "dark" ? "bg-dark" : "bg-white"
       // }`}
-      className={`navbar navbar-expand-lg fixed-top  dark:!bg-[#11121C] bg-white on-over  headroom headroom--top headroom--not-bottom `}
+      className={`navbar navbar-expand-lg fixed-top  dark:bg-[#11121C] bg-gray-100 on-over  headroom headroom--top headroom--not-bottom `}
     >
       <div className="head_container container">
         {/* <!-- Logo --> */}

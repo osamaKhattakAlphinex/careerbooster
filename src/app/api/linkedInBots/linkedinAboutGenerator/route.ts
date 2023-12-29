@@ -23,14 +23,14 @@ export async function POST(req: any) {
       let prompt;
       await startDB();
       const promptRec = await Prompt?.findOne({
-        type: "linkedinTool",
-        name: "about",
+        type: "linkedin",
+        name: option,
         active: true,
       });
       prompt = promptRec ? promptRec.value : "";
-      // if (option === "aboutInstructions") {
-      //   prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
-      // }
+      if (option === "aboutInstructions") {
+        prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
+      }
 
       if (linkedinContent) {
         const dataset = "linkedinAiTool.about";
@@ -66,7 +66,7 @@ export async function POST(req: any) {
                 };
                 await TrainBot.create({ ...obj });
               }
-            } catch (error) {}
+            } catch (error) { }
           },
         });
         // Respond with the stream

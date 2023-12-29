@@ -49,7 +49,7 @@ const LinkedInUploadPDFResume = () => {
   // Define state variables to track API call statuses
   const [headlineComplete, setHeadlineComplete] = useState<boolean>(false);
   const [aboutComplete, setAboutComplete] = useState<boolean>(false);
-  const [aboutData, setAboutData] = useState<string>("aboutdefault");
+  const [aboutData, setAboutData] = useState<string>("aboutDefault");
   const [instruction, setInstruction] = useState<string>("");
   const [isHeadlineCopied, setIsHeadlineCopied] = useState(false);
   const [isSummaryCopied, setIsSummaryCopied] = useState(false);
@@ -387,9 +387,8 @@ const LinkedInUploadPDFResume = () => {
                             viewBox="0 0 24 24"
                             strokeWidth="1.5"
                             stroke="currentColor"
-                            className={`w-4 h-4 ${
-                              headlineMsgLoading ? "animate-spin" : ""
-                            }`}
+                            className={`w-4 h-4 ${headlineMsgLoading ? "animate-spin" : ""
+                              }`}
                           >
                             <path
                               strokeLinecap="round"
@@ -610,9 +609,8 @@ const LinkedInUploadPDFResume = () => {
               Yes, I Want to Explore More Career Boosting Tools!
             </h3>
             <button
-              className={`mx-1 mt-8 p-3  my-2 bg-yellow-400 hover:bg-yellow-600  lg:w-8/12 lg:h-14 lg:mt-8 text-center rounded-full font-bold lg:text-[20px] text-[16px] text-black lg:py-3 lg:px-9 no-underline  ${
-                buttonDisabled ? "bg-yellow-600" : "cursor-pointer"
-              } `}
+              className={`mx-1 mt-8 p-3  my-2 bg-yellow-400 hover:bg-yellow-600  lg:w-8/12 lg:h-14 lg:mt-8 text-center rounded-full font-bold lg:text-[20px] text-[16px] text-black lg:py-3 lg:px-9 no-underline  ${buttonDisabled ? "bg-yellow-600" : "cursor-pointer"
+                } `}
               onClick={moveToRegister}
               disabled={buttonDisabled}
             >

@@ -25,7 +25,7 @@ export async function POST(req: any) {
       let prompt;
       await startDB();
       const promptRec = await Prompt.findOne({
-        type: "linkedinTool",
+        type: "linkedin",
         name: "headline",
         active: true,
       });
@@ -81,7 +81,7 @@ export async function POST(req: any) {
 
                 await TrainBot.create({ ...obj });
               }
-            } catch (error) {}
+            } catch (error) { }
           },
         });
         // Respond with the stream

@@ -1,5 +1,4 @@
 import Prompt from "@/db/schemas/Prompt";
-import TrainBot from "@/db/schemas/TrainBot";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
@@ -7,12 +6,7 @@ import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
 import startDB from "@/lib/db";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
-import { makeid } from "@/helpers/makeid";
-import {
-  TrainBotEntryType,
-  makeTrainedBotEntry,
-} from "@/helpers/makeTrainBotEntry";
-import { postJobDescriptions } from "./linkedInJobDescription/route";
+
 export const maxDuration = 10; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -31,14 +25,11 @@ export async function POST(req: any) {
   try {
     const reqBody = await req.json();
     const experience = reqBody?.experience;
-    const trainBotData = reqBody?.trainBotData;
-    const jobDescriptionId = reqBody?.jobDescriptionId;
-    const email = reqBody?.email;
     const personName = reqBody?.personName;
     const dataset = "resume.writeJDSingle";
     const model = await getTrainedModel(dataset);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
-
+    await startDB()
     const promptRec = await Prompt.findOne({
       type: "linkedin",
       name: "jobDescription",
@@ -63,60 +54,14 @@ export async function POST(req: any) {
      
       `;
     const response: any = await openai.chat.completions.create({
-      model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg",
+      model: "gpt-3.5-turbo",
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
 
-    // make a trainBot entry
-    // try {
-    //   if (trainBotData) {
-    //     await startDB();
 
-    //     const obj = {
-    //       type: "linkedin.jobDescription",
-    //       input: prompt,
-    //       output: response?.choices[0]?.message?.content?.replace(
-    //         /(\r\n|\n|\r)/gm,
-    //         ""
-    //       ),
-    //       idealOutput: "",
-    //       status: "pending",
-    //       userEmail: trainBotData.userEmail,
-    //       fileAddress: trainBotData.fileAddress,
-    //       Instructions: `Write Single Job Description for ${experience.jobTitle} at ${experience.company}`,
-    //     };
 
-    //     await TrainBot.create({ ...obj });
-    //   }
-    // } catch (error) {}
-
-    const stream = OpenAIStream(response, {
-      onStart: async () => {
-        const payload = {
-          id: jobDescriptionId,
-          jobDescriptionText: "",
-          generatedOnDate: new Date().toISOString(),
-          userEmail: email,
-        };
-
-        await postJobDescriptions(payload);
-        if (trainBotData) {
-          let entry: TrainBotEntryType = {
-            entryId: jobDescriptionId,
-            type: "linkedin.jobDescription",
-            input: inputPrompt,
-            output: "out",
-            idealOutput: "",
-            status: "pending",
-            userEmail: email,
-            fileAddress: "",
-            Instructions: `Write Single Job Description for ${experience.jobTitle} at ${experience.company}`,
-          };
-          await makeTrainedBotEntry(entry);
-        }
-      },
-    });
+    const stream = OpenAIStream(response);
     // Respond with the stream
     return new StreamingTextResponse(stream);
   } catch (error) {
