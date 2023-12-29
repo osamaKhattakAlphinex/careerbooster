@@ -20,16 +20,17 @@ const SubAboutGenerator = () => {
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
   const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const [option, setOption] = useState<string>("about");
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [showPopup, setShowPopup] = useState(false);
-
+  const [instruction, setInstruction] = useState<string>("");
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
   const [isAboutCopied, setIsAboutCopied] = useState<boolean>(false);
   const copyAbout = async (text: string) => {
     try {
-      const aboutData =  htmlToPlainText(text);
-      await copy(aboutData);
+      const option = htmlToPlainText(text);
+      await copy(option);
       setIsAboutCopied(true);
       // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
       setTimeout(() => {
@@ -343,6 +344,73 @@ const SubAboutGenerator = () => {
               </span>
             </button>
           </div>
+        </div>
+      )}
+      {streamedData && (
+        <div className="lg:content-1 lg:mt-[36px] mt-[20px] flex flex-col justify-center items-center gap-2 ">
+          <h2 className="text-center lg:text-left text-red-600 lg:text-[46px] tex-[28px] lg:px-0 px-[15px]">
+            Don{"'"}t Like the results?
+          </h2>
+          <p className="text-[16px]  lg:text-[24px] lg:text-left text-center">
+            Change your preference and regenerate you summary
+          </p>
+          <div className="flex flex-col gap-4 lg:px-0 px-8">
+            <label
+              htmlFor="default-radio-2"
+              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 py-3 cursor-pointer lg:text-[16px] text-[11px]"
+            >
+              <input
+                id="default-radio-2"
+                type="radio"
+                value="aboutShort"
+                name="default-radio"
+                onChange={(e) => setOption(e.target.value)}
+                className="lg:w-5 lg:h-5 w-3 h-3 "
+              />
+              I need a shorter summary (Not Recommended)
+            </label>
+            <label
+              htmlFor="default-radio-3"
+              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 py-3 cursor-pointer lg:text-[16px] text-[11px]"
+            >
+              <input
+                id="default-radio-3"
+                type="radio"
+                value="aboutStory"
+                name="default-radio"
+                onChange={(e) => setOption(e.target.value)}
+                className="lg:w-5 lg:h-5 w-3 h-3 "
+              />
+              Add a captivating story to hook the visitiors
+            </label>
+          </div>
+          {/* <Button
+            type="button"
+            className="flex gap-2 justify-center items-center text-lg text-white mt-6 bg-gradient-to-r from-purple-700 hover:translate-y-[-4px] transition-all duration-200 to-blue-400 px-6 py-3 rounded-full border shadow-md hover:shadow-lg"
+            onClick={() => {
+              linkedinAbout(linkedinContent);
+              setInstruction("");
+              window.scrollTo({ top: 50, behavior: "smooth" });
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className={`w-4 h-4 ${headlineMsgLoading ? "animate-spin" : ""}`}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+              />
+            </svg>
+            <span className="lg:text-[20px] text-[16px] font-semibold">
+              Re-generate Summary
+            </span>
+          </Button> */}
         </div>
       )}
       {showPopup && (
