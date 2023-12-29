@@ -40,12 +40,12 @@ const SlidingPanel = forwardRef(({ refresh }: Props, ref: any) => {
 
   const handleSave = async () => {
     if (!saving) {
-      try {
-        JSON.parse(idealOutput);
-      } catch (err) {
-        alert("Error: The output is not a valid JSON");
-        return;
-      }
+      // try {
+      //   JSON.parse(idealOutput);
+      // } catch (err) {
+      //   alert("Error: The output is not a valid JSON");
+      //   return;
+      // }
 
       setSaving(true);
       // Save Record
@@ -80,9 +80,8 @@ const SlidingPanel = forwardRef(({ refresh }: Props, ref: any) => {
     <div
       tabIndex={-1}
       aria-hidden="true"
-      className={`overflow-y-auto overflow-x-hidden justify-center items-center  fixed -right-1 z-50  w-3/3 md:inset-0 h-screen  bg-white/50 ${
-        openTrainBotModal ? "flex" : "hidden"
-      }`}
+      className={`overflow-y-auto overflow-x-hidden justify-center items-center  fixed -right-1 z-50  w-3/3 md:inset-0 h-screen  bg-white/50 ${openTrainBotModal ? "flex" : "hidden"
+        }`}
     >
       <div className="relative  w-[80%]  max-h-screen">
         <div className="relative p-4 text-center rounded-lg shadow dark:bg-gray-800 sm:p-5">
