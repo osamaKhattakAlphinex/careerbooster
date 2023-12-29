@@ -35,20 +35,22 @@ export async function POST(req: any) {
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
     const reqBody = await req.json();
+
     const userData = reqBody?.userData;
+    const personName = reqBody?.personName
     const aboutId = reqBody?.aboutId;
     const email = reqBody?.email;
     const trainBotData = reqBody?.trainBotData;
     await startDB();
     // fetch prompt from db
     const promptRec = await Prompt.findOne({
-      type: "linkedinTool",
-      name: "aboutdefault",
+      type: "linkedin",
+      name: "about",
       active: true,
     });
-    const prompt = promptRec.value;
-
-    const inputPrompt = `Read {{PersonName}}'s resume : ${JSON.stringify(userData)}
+    let prompt = promptRec.value;
+    prompt = prompt.replaceAll("{{PersonName}}", personName);
+    const inputPrompt = `Read ${personName}'s resume : ${JSON.stringify(userData)}
 
           and then:
           ${prompt}

@@ -34,6 +34,7 @@ export async function POST(req: any) {
     const trainBotData = reqBody?.trainBotData;
     const jobDescriptionId = reqBody?.jobDescriptionId;
     const email = reqBody?.email;
+    const personName = reqBody?.personName;
     const dataset = "resume.writeJDSingle";
     const model = await getTrainedModel(dataset);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
@@ -43,9 +44,11 @@ export async function POST(req: any) {
       name: "jobDescription",
       active: true,
     });
-    const prompt = promptRec.value;
+    let prompt = promptRec.value;
+    prompt = prompt.replaceAll("{{PersonName}}", personName);
+    prompt = prompt.replaceAll("{{JobTitle}}", experience.jobTitle)
     const inputPrompt = ` ${prompt}
-
+    
     Here is the work experience: 
       Job Title: ${experience.jobTitle}
       Company Name: ${experience.company}

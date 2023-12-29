@@ -305,9 +305,9 @@ const ResumeTemplate12 = ({
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="h-20 bg-[#F0CFC3]"></div>
-      <div className="flex absolute  top-22 left-[27%] py-8 ">
+      <div className="flex absolute  top-22 left-[27%] py-8 xs:left-[37%] sm:left-[37%] md:left-[27%] lg:left[27%]">
         <div className="flex flex-col  border-gray-900 border-b-2 py-8">
-          <h2 className="text-2xl md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-2xl xs:text-xl sm:text-xl md:text-2xl lg:text-2xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -329,9 +329,9 @@ const ResumeTemplate12 = ({
         </div>
       </div>
       <div className="flex">
-        <div className=" w-3/12 md:w-1/3 flex flex-col  items-center   bg-[#FFFFFF]  px-9   pt-[1rem] ">
-          <div className="h-48 w-48 xs:w-24 xs:h-24 md:w-48 md:h-48 text-gray-800 bg-[#F0CFC3]  text-center flex justify-center items-center  rounded-full ">
-            <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
+        <div className=" w-5/12 md:w-1/3 flex flex-col  items-center   bg-[#FFFFFF]  px-9 xs:px-2 sm:px-2 md:px-9 lg:px-9    pt-[1rem] ">
+          <div className="h-48 w-48 xs:w-24 xs:h-24 md:w-48 md:h-48 text-gray-800 bg-[#F0CFC3]  text-center flex justify-center items-center  rounded-full xs:mb-[88px] sm:mb-[88px] xs:mt-[32px] sm:mt-[32px] md:mt-0 lg:mt-0 lg:mb-0 md:mb-0 ">
+            <span className="text-4xl  text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
               <EditableField
                 value={resume?.shortName ? resume?.shortName : "CPH"}
                 style={{ width: "60px" }}
@@ -345,7 +345,7 @@ const ResumeTemplate12 = ({
 
           {/* contacts */}
           <span className="border-stylee w-full h-0 my-2"></span>
-          <h3 className="uppercase text-lg font-bold w-full border-b-2 border-white text-[#000]  py-1 rounded-sm flex items-center  flex-row gap-2 ">
+          <h3 className="uppercase text-lg font-bold xs:text-sm sm:text-sm md:textlg lg:text-lg w-full border-b-2 border-white text-[#000]  py-1 rounded-sm flex items-center  flex-row gap-2 ">
             {contactIcon}
             Contact
           </h3>
@@ -440,7 +440,7 @@ const ResumeTemplate12 = ({
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <span className="border-stylee w-full h-0  my-1"></span>
-              <h3 className="uppercase text-lg font-bold text-[#000] pb-2 w-full border-b-2 border-white  py-1 rounded-sm flex  flex-row gap-2 items-center">
+              <h3 className="uppercase text-lg font-bold xs:text-sm sm:text-sm md:textlg lg:text-lg text-[#000] pb-2 w-full border-b-2 border-white  py-1 rounded-sm flex  flex-row gap-2 items-center">
                 {sparkleIcon}
                 Skills
               </h3>
@@ -720,10 +720,10 @@ const ResumeTemplate12 = ({
             </>
           )}
         </div>
-        <div className="w-full flex flex-col bg-[#FFFFFF] px-4 md:px-4 pt-[13rem]">
+        <div className="w-full flex flex-col bg-[#FFFFFF] px-4 md:px-4 pt-[13rem] xs:pt-[14rem] sm:pt-[14rem] md:pt-[13rem] lg:pt-[13rem] ">
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0  my-2"></span>
-          <h3 className="uppercase text-xl font-bold  mb-2 rounded-sm text-gray-900 w-full py-1">
+          <h3 className="uppercase text-xl font-bold xs:text-sm sm:text-sm md:text-xl lg:text-xl  mb-2 rounded-sm text-gray-900 w-full py-1">
             EXECUTIVE SUMMARY
           </h3>
           {/* <span className="border-stylee w-full h-0 border border-[#444440] mb-3"></span> */}
@@ -745,7 +745,7 @@ const ResumeTemplate12 = ({
 
           {/* Work Experience */}
           <div className="flex flex-col my-6">
-            <h3 className="uppercase text-lg font-bold text-gray-950">
+            <h3 className="uppercase text-lg font-bold xs:text-sm sm:text-sm md:textlg lg:text-lg text-gray-950">
               WORK EXPERIENCE
             </h3>
             {/* <span className="border border-[#F4D644]  mt-2"></span> */}
@@ -757,7 +757,7 @@ const ResumeTemplate12 = ({
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div key={i} className="flex justify-center items-center">
-                    <div className="w-[5%] pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
+                    <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5 lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
                       {resume?.workExperienceArray.length - 1 !== i && (
                         <div className="h-full w-[2px] bg-gray-500"></div>
@@ -776,12 +776,12 @@ const ResumeTemplate12 = ({
                       draggable
                     >
                       <h2
-                        className="hover:shadow-md hover:cursor-text hover:bg-gray-100"
-                        style={{
-                          fontSize: "1.3rem",
-                          fontWeight: "bold",
-                          lineHeight: "2rem",
-                        }}
+                        className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-[1.3rem] xs:text-[1rem] sm:text[1rem] md:text-[1.3rem] lg:text-[1.3rem] font-bold"
+                        // style={{
+                        //   fontSize: "1.3rem",
+                        //   fontWeight: "bold",
+                        //   lineHeight: "2rem",
+                        // }}
                       >
                         <EditableField
                           value={rec?.title}
@@ -811,11 +811,11 @@ const ResumeTemplate12 = ({
                         />
                       </h2>
                       <h2
-                        className="hover:cursor-default"
-                        style={{
-                          fontSize: "1.1rem",
-                          lineHeight: "1.5rem",
-                        }}
+                        className="hover:cursor-default text-[1.1rem] xs:text-[0.8rem] sm:text[0.8rem] md:text-[1.1rem] lg:text-[1.1rem]"
+                        // style={{
+                        //   fontSize: "1.1rem",
+                        //   lineHeight: "1.5rem",
+                        // }}
                       >
                         {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue

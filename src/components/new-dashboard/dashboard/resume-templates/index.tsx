@@ -2,15 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-import { Autoplay, Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
-import { crownIcon } from "@/helpers/newIconsProviders";
-import { chevronRight } from "@/helpers/iconsProvider";
-
 import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import TemplateSlider from "./templateSlider";
 export type Template = {
@@ -57,7 +48,7 @@ const tabs: Tabs[] = [
 
 const Templates = () => {
   const [activeTab, setActiveTab] = useState<Tabs>(tabs[0]);
-  const [templates, setTemplates] = useState<Template[]>(ALL_TEMPLATES);
+  const [templates, setTemplates] = useState<Template[]>([]);
 
   const filterTemplates = () => {
     if (activeTab.tab === "all-templates") {
@@ -69,7 +60,12 @@ const Templates = () => {
       setTemplates(_templates);
     }
   };
-
+  useEffect(() => {
+console.log("templates")
+  }, [templates]);
+  useEffect(() => {
+    setTemplates(ALL_TEMPLATES);
+  }, [])
   useEffect(() => {
     filterTemplates();
   }, [activeTab]);
@@ -80,9 +76,8 @@ const Templates = () => {
         {tabs.map((tab, index) => (
           <button
             key={index}
-            className={`px-4 py-2 text-sm rounded-full border border-gray-600 ${
-              activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
-            }`}
+            className={`px-4 py-2 text-sm rounded-full border border-gray-600 ${activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
+              }`}
             onClick={() => setActiveTab(tab)}
           >
             {tab.title}
@@ -91,7 +86,10 @@ const Templates = () => {
       </div>
 
       <div className=" text-center "> {activeTab.description}</div>
-      <TemplateSlider templates={templates} />
+      {templates &&
+
+        <TemplateSlider templates={templates} />
+      }
     </div>
   );
 };

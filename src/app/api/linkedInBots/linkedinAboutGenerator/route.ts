@@ -24,20 +24,20 @@ export async function POST(req: any) {
       await startDB();
       const promptRec = await Prompt?.findOne({
         type: "linkedinTool",
-        name: option,
+        name: "about",
         active: true,
       });
       prompt = promptRec ? promptRec.value : "";
-      if (option === "aboutInstructions") {
-        prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
-      }
+      // if (option === "aboutInstructions") {
+      //   prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
+      // }
 
       if (linkedinContent) {
         const dataset = "linkedinAiTool.about";
         const model = await getTrainedModel(dataset);
         //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
-        const input = `Read {{PersonName}}'s resume :
+        const input = `Read Person's resume :
                 ${linkedinContent}
     
                 and then:

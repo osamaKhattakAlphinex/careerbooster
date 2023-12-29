@@ -100,7 +100,7 @@ const ResumePromptsConfiguration = () => {
           <div className="flex gap-4"></div>
           <div className="flex gap-4">
             {/* Professional Skills Generator */}
-            <PromptEditor
+            {/* <PromptEditor
               name="professionalSkills"
               title="Professional skills"
               type="resume"
@@ -108,12 +108,12 @@ const ResumePromptsConfiguration = () => {
               promptsLoading={promptsLoading}
               handleSave={handleSave}
               updating={updating}
-            />
+            /> */}
 
             {/* Secondary Skills Generator */}
             <PromptEditor
-              name="secondarySkills"
-              title="Secondary skills"
+              name="oneLineSlogan"
+              title="One Line Slogan"
               type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}

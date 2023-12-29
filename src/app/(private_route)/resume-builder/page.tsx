@@ -68,27 +68,25 @@ const ResumeBuilder = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
-  const [quantifyingExperience, setQuantifyingExperience] =
-    useState<boolean>(true);
+ 
 
   // Redux
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
-  const handleGenerate = useCallback(async () => {
+  const handleGenerate = useCallback(async (quantifyingExperience:boolean) => {
     await getUserDataIfNotExists();
     // reset resume
     dispatch(resetResume(resumeData.state));
-
     if (resumeData.state.jobPosition !== "" && session?.user?.email) {
       dispatch(setState({ name: "resumeLoading", value: true }));
       dispatch(setId(""));
       getBasicInfo();
       getSummary();
       getPrimarySkills();
-      getProfessionalSkills();
-      getSecondarySkills();
-      await getWorkExperienceNew();
+      // getProfessionalSkills();
+      // getSecondarySkills();
+      await getWorkExperienceNew(quantifyingExperience);
       runConfetti();
     } else {
       setShowPopup(true);
@@ -129,6 +127,8 @@ const ResumeBuilder = () => {
       body: JSON.stringify({
         type: "basicDetails",
         inputType: "userData",
+        personName: userData.firstName + " " + userData.lastName,
+
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
@@ -173,6 +173,7 @@ const ResumeBuilder = () => {
       method: "POST",
       body: JSON.stringify({
         type: "summary",
+        personName: userData?.firstName + " " + userData?.lastName,
         jobPosition: resumeData.state.jobPosition,
         userData: aiInputUserData,
         trainBotData: {
@@ -207,7 +208,7 @@ const ResumeBuilder = () => {
     // });
   };
 
-  const getWorkExperienceNew = async () => {
+  const getWorkExperienceNew = async (quantifyingExperience: boolean) => {
     // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("workExperience"));
     await getUserDataIfNotExists();
@@ -357,6 +358,8 @@ const ResumeBuilder = () => {
       method: "POST",
       body: JSON.stringify({
         type: "primarySkills",
+        personName: userData?.firstName + " " + userData?.lastName,
+      
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
@@ -550,8 +553,7 @@ const ResumeBuilder = () => {
           <GenerateResume
             handleGenerate={handleGenerate}
             availablePercentage={availablePercentage}
-            quantifyingExperience={quantifyingExperience}
-            setQuantifyingExperience={setQuantifyingExperience}
+           
           />
           <div className="flex justify-center items-center">
             <Confetti active={confettingRunning} config={confettiConfig} />
