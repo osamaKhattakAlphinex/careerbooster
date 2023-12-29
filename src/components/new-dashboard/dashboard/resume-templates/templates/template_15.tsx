@@ -304,8 +304,8 @@ const ResumeTemplate15 = ({
 
   return (
     <div className="w-full first-page relative text-gray-900">
-      <div className="flex absolute  top-0 left-1/3 py-8 ">
-        <div className="flex flex-col   py-8">
+      <div className="flex absolute xs:px-3 top-0 left-1/3 py-8 xs:py-4 md:py-8 ">
+        <div className="flex flex-col py-8">
           <h2 className="text-2xl md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
@@ -316,7 +316,7 @@ const ResumeTemplate15 = ({
               }}
             />
           </h2>
-          <h3 className="text-[16px] md:text-xl hover:shadow-md mt-2 hover:bg-gray-100">
+          <h3 className="text-[16px] text-center md:text-xl hover:shadow-md mt-2 hover:bg-gray-100">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -328,8 +328,8 @@ const ResumeTemplate15 = ({
         </div>
       </div>
       <div className="flex">
-        <div className=" w-3/12 md:w-1/3 flex flex-col  items-center   bg-[#F4F4F4]  px-9   pt-[2rem] ">
-          <div className=" w-24 h-24 md:w-48 border-[.5rem] border-[#ffff]  md:h-48 text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full ">
+        <div className=" w-4/12 xs:w-4/12 md:w-4/12 flex flex-col  items-center   bg-[#F4F4F4]  px-9 xs:px-0  md:px-9 lg:px-9    pt-[2rem]  xs:pt-[3.5rem]">
+          <div className=" w-48 h-48 xs:w-24 xs:h-24   md:w-48 lg:h-48 lg:w-48 border-[.5rem] xs:border-[2px] md:border-[.5rem] border-[#ffff]  md:h-48 text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full ">
             <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
               <EditableField
                 value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -343,13 +343,13 @@ const ResumeTemplate15 = ({
           </div>
           {/* contacts */}
           <span className="border-stylee w-full h-0 my-3"></span>
-          <h3 className="uppercase text-lg font-semibold text-white w-full py-1 rounded-sm flex justify-center bg-[#444440] flex-row gap-2 items-center">
+          <h3 className="uppercase text-lg xs:text-[16px] xs:px-2 font-semibold text-white w-full xs:w-fit md:w-full lg:w-full py-1 rounded-sm flex justify-center bg-[#444440] flex-row gap-2 items-center ">
             {contactIcon}
             Contact
           </h3>
           <span className="border-stylee w-full h-0 my-3"></span>
           <ul className=" flex flex-col gap-3 w-full mb-4 text-sm break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-100 text-xs flex flex-row gap-1 ">
+            <li className="hover:shadow-md hover:bg-gray-100 text-xs px-0 md:px-0 xs:px-4 flex flex-row gap-1 ">
               {phoneIcon}
               <EditableField
                 value={
@@ -371,7 +371,7 @@ const ResumeTemplate15 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1 px-0 md:px-0 xs:px-4 items-center text-xs">
               {emailIcon}
 
               <EditableField
@@ -394,7 +394,7 @@ const ResumeTemplate15 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 text-blue-600 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md hover:bg-gray-100 text-blue-600 px-0 md:px-0 xs:px-4 flex flex-row gap-1  items-center text-xs">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -433,7 +433,7 @@ const ResumeTemplate15 = ({
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <span className="border-stylee w-full h-0  my-1"></span>
-              <h3 className="uppercase text-lg font-semibold text-white w-full px-2 py-1 rounded-sm flex justify-center bg-[#444440] flex-row gap-2 items-center">
+              <h3 className="uppercase text-lg xs:text-[16px] xs:px-2 font-semibold text-white w-full xs:w-full md:w-full lg:w-full py-1 rounded-sm flex justify-center xs:justify-center md:justify-center bg-[#444440] flex-row gap-2 items-center  ">
                 {sparkleIcon}
                 Skills
               </h3>
@@ -450,7 +450,7 @@ const ResumeTemplate15 = ({
                 {/* <li className="font-semibold  uppercase">primary</li> */}
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
-                    className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex justify-between "
+                    className="hover:shadow-md hover:cursor-move px-0 xs:px-2 md:px-0 parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex justify-between "
                     key={i}
                     onDragStart={(e) =>
                       e.dataTransfer.setData("text/plain", i.toString())
@@ -585,7 +585,7 @@ const ResumeTemplate15 = ({
                     <li
                       className=" hover:shadow-md hover:cursor-move 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
-                   hover:bg-gray-100 font-semibold flex uppercase text-md   items-center "
+                   hover:bg-gray-100 font-semibold flex uppercase text-md  px-0 xs:px-2 md:px-0  items-center "
                     >
                       <span className="w-2 h-2 bg-[#444440] rounded-full mr-3"></span>
                       <EditableField
@@ -637,7 +637,7 @@ const ResumeTemplate15 = ({
                         {crossIcon1}
                       </div>
                     </li>
-                    <li className="hover:shadow-md uppercase hover:bg-gray-100 text-base">
+                    <li className="hover:shadow-md uppercase hover:bg-gray-100 px-0 xs:px-2 md:px-0  text-base">
                       <EditableField
                         value={`${education?.fieldOfStudy}`}
                         style={{ width: "100%" }}
@@ -666,7 +666,7 @@ const ResumeTemplate15 = ({
                         }}
                       />{" "}
                     </li>
-                    <li className="hover:shadow-md hover:bg-gray-100 text-sm text-gray-800">
+                    <li className="hover:shadow-md hover:bg-gray-100 px-0 xs:px-2 md:px-0   text-sm text-gray-800">
                       <EditableField
                         type="textarea"
                         rows={2}
@@ -696,7 +696,7 @@ const ResumeTemplate15 = ({
                         }}
                       />
                     </li>
-                    <li className="mb-4 text-xs text-gray-700 ">
+                    <li className="mb-4 px-0 xs:px-2 md:px-0 text-xs text-gray-700 ">
                       {education?.fromMonth + " " + education.fromYear} -{" "}
                       {education?.isContinue
                         ? "Present"
@@ -708,13 +708,13 @@ const ResumeTemplate15 = ({
             </>
           )}
         </div>
-        <div className="w-full flex flex-col px-4 md:px-8 pt-[13rem] ">
+        <div className="w-full flex flex-col px-4 md:px-8 pt-[13rem] xs:pt-[10rem] md:pt-[13rem] ">
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0  my-3"></span>
-          <h3 className="uppercase text-lg font-semibold bg-[#444440] px-4 rounded-sm text-white w-full py-1">
+          <h3 className="uppercase text-lg xs:text-lg md:text-lg  font-semibold bg-[#444440] px-4 rounded-sm text-white w-full py-1">
             EXECUTIVE SUMMARY
           </h3>
-          <span className="border-stylee w-full h-0  my-3"></span>
+          <span className="border-stylee w-full h-0  my-3 xs:my-0 md:my-3"></span>
 
           <div className="text-sm hover:shadow-md hover:bg-gray-100">
             <EditableField

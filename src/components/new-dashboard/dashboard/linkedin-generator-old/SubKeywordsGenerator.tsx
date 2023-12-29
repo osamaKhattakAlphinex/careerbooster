@@ -94,6 +94,8 @@ const SubKeywordsGenerator = () => {
       const keywordsId = makeid();
       const obj: any = {
         keywordsId: keywordsId,
+        personName: userData.firstName + " " + userData.lastName,
+
         email: session?.user?.email,
         trainBotData: {
           userEmail: userData.email,

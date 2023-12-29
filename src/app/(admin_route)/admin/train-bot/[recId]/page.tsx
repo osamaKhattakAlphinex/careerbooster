@@ -88,100 +88,100 @@ const ReviewTrainBotRecord = ({ params }: { params: { recId: string } }) => {
   }, [rec]);
 
   return (
-    <div className="pt-30">
-      <div className="my-5 ml-10">
-        <Link
-          href="/admin/train-bot"
-          className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
-        >
-          {leftArrowIcon}
-          View All
-        </Link>
-      </div>
+    <div className="p-2">
+      <Link
+        href="/admin/train-bot"
+        className="flex flex-row gap-2 items-center hover:font-semibold transition-all no-underline"
+      >
+        {leftArrowIcon}
+        View All
+      </Link>
 
-      <div className=" p-8">
-        <div className="flex justify-between">
-          <div className="flex flex-col gap-0">
-            <p>Generated on: {getFormattedDate(rec.createdAt)}</p>
-            <p>User Email: {rec.userEmail}</p>
-            <p className="flex gap-1">
-              File:
-              <a
-                href={`/files/userResumes/${rec.userEmail}/${rec.fileAddress}`}
-                className="text-sm cursor-pointer flex gap-1 hover:font-bold"
-                target="_blank"
-              >
-                {rec.fileAddress} {exterLinkIconSmall}
-              </a>
-            </p>
-            <p>
-              Status:{" "}
-              {rec.status === "pending" && (
-                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                  Pending
-                </span>
-              )}
-              {rec.status === "reviewed" && (
-                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                  Reviewed
-                </span>
-              )}
-              {rec.status === "trained" && (
-                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                  Trained
-                </span>
-              )}
-            </p>
-            <div
-              className="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
-              role="alert"
+      <div className="flex justify-between">
+        <div className="flex flex-col gap-0">
+          <p>Generated on: {getFormattedDate(rec.createdAt)}</p>
+          <p>User Email: {rec.userEmail}</p>
+          <p className="flex gap-1">
+            File:
+            <a
+              href={`/files/userResumes/${rec.userEmail}/${rec.fileAddress}`}
+              className="text-sm cursor-pointer flex gap-1 hover:font-bold"
+              target="_blank"
             >
-              {infoSmallIcon}
-              <span className="sr-only">Info</span>
-              <div>
-                <span className="font-medium">
-                  {rec.Instructions || "No instructions provided"}
-                </span>
-              </div>
+              {rec.fileAddress} {exterLinkIconSmall}
+            </a>
+          </p>
+          <p>
+            Status:{" "}
+            {rec.status === "pending" && (
+              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                Pending
+              </span>
+            )}
+            {rec.status === "reviewed" && (
+              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                Reviewed
+              </span>
+            )}
+            {rec.status === "trained" && (
+              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                Trained
+              </span>
+            )}
+          </p>
+          <div
+            className="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+            role="alert"
+          >
+            {infoSmallIcon}
+            <span className="sr-only">Info</span>
+            <div>
+              <span className="font-medium">
+                {rec.Instructions || "No instructions provided"}
+              </span>
             </div>
           </div>
-          <div>
-            <button
-              disabled={saving}
-              onClick={handleSave}
-              className="btn btn-primary-dark !flex gap-2 mr-4 "
-            >
-              {saving ? (
-                "Saving..."
-              ) : (
-                <>
-                  {checkIconSmall}
-                  Save
-                </>
-              )}
-            </button>
-          </div>
         </div>
-        <div className="flex flex-row gap-4  justify-center">
-          {/* Card */}
-          <div className="w-1/2 border rounded-md text-gray-800 dark:text-gray-100 p-4">
-            {rec && rec.input && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: rec.input.replaceAll("\n", "<br />"),
-                }}
-              ></span>
+        <div>
+          <button
+            disabled={saving}
+            onClick={handleSave}
+            className="btn btn-primary-dark !flex gap-2 mr-4 "
+          >
+            {saving ? (
+              "Saving..."
+            ) : (
+              <>
+                {checkIconSmall}
+                Save
+              </>
             )}
-          </div>
-          <div className="w-1/2 border rounded-lg text-gray-800 dark:text-gray-100 p-4">
-            {/* <span dangerouslySetInnerHTML={{ __html: rec.output }}></span> */}
-            <textarea
-              name="idealOutput"
-              className="w-full h-full bg-transparent tracking-widest font-sans "
-              onChange={(e: any) => setIdealOutput(e.target.value)}
-              value={idealOutput}
-            ></textarea>
-          </div>
+          </button>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 gap-4  justify-center">
+        {/* Card */}
+        <div className="col-span-1 border rounded-md text-gray-800 dark:text-gray-100 p-4">
+          {rec && rec.input && (
+            // <span
+            //   dangerouslySetInnerHTML={{
+            //     __html: rec.input.replaceAll("\n", "<br />"),
+            //   }}
+            // ></span>
+            <span className=" whitespace-pre-wrap">
+              {rec.input.replaceAll("\n", "").replaceAll(/"/g, " ")}
+            </span>
+          )}
+        </div>
+        <div className="col-span-1 border rounded-lg text-gray-800 dark:text-gray-100 p-4">
+          {/* <span dangerouslySetInnerHTML={{ __html: rec.output }}></span> */}
+          <textarea
+            name="idealOutput"
+            rows={20}
+            className="  w-full  min-h-max bg-transparent tracking-widest font-sans "
+            onChange={(e: any) => setIdealOutput(e.target.value)}
+            value={idealOutput}
+          ></textarea>
         </div>
       </div>
     </div>

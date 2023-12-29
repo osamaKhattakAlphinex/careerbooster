@@ -1,23 +1,20 @@
-"use client";
+
 import { crownIcon } from "@/helpers/newIconsProviders";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Template } from ".";
+import Link from "next/link";
 
 type Props = {
   templates: Template[];
 };
 
 const TemplateSlider = ({ templates }: Props) => {
-  const router = useRouter();
 
-  const handleViewTemplate = (template: Template) => {
-    router.push(`/resume-builder/templates/template?templateId=${template.id}`);
-  };
 
+console.log(templates)
   return (
     <div className="p-4 flex flex-row items-start justify-start gap-6 flex-wrap box-border">
       <Swiper
@@ -34,30 +31,43 @@ const TemplateSlider = ({ templates }: Props) => {
           0: {
             slidesPerView: 1,
           },
+          425:{
+            slidesPerView: 2,
+          },
           640: {
-            slidesPerView: 1,
+            slidesPerView: 3,
           },
           768: {
             slidesPerView: 3,
           },
           1080: {
-            slidesPerView: 5,
+            slidesPerView: 6,
           },
           1280: {
-            slidesPerView: 5,
+            slidesPerView: 6,
           },
         }}
       >
         {templates.map((template, index) => (
-          <SwiperSlide key={`template-${index}`} className="h-48 w-48">
-            <div className="box-border group relative rounded-lg overflow-hidden">
-              {template.category === "premium" && (
-                <div className="absolute rounded-full right-1 top-1 h-6 w-6 grid place-content-center bg-yellow-600">
-                  {crownIcon}
-                </div>
-              )}
-              <button className="" onClick={() => handleViewTemplate(template)}>
+          
+          <SwiperSlide key={`template-${index}`} className="bg-transparent relative overflow-hidden group h-48 xs:h-64 rounded-lg md:h-64">
+            <Link href={`/resume-builder/templates/template?templateId=${template.id}`}>
+            
+            <Image
+              src={template.preview}
+              alt={`template-${index}`}
+       width={250}
+       height={150}
+    
+              className="bg-white "
+              style={{objectFit: "contain", aspectRatio: "auto"}}
+            />
                 <div className=" object-cover group-hover:grid hidden bg-slate-600/60 text-white  absolute top-0 left-0 h-full w-full rounded-lg  overflow-hidden  place-content-center">
+                  {template.category === "premium" && (
+                    <div className="absolute rounded-full right-1 top-1 h-6 w-6 grid place-content-center bg-yellow-600">
+                      {crownIcon}
+                    </div>
+                  )}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -73,15 +83,8 @@ const TemplateSlider = ({ templates }: Props) => {
                     />
                   </svg>
                 </div>
-                <Image
-                  src={template.preview}
-                  alt={`template-${index}`}
-                  height={250}
-                  width={150}
-                  className="bg-white "
-                />
-              </button>
-            </div>
+            
+          </Link>
           </SwiperSlide>
         ))}
       </Swiper>

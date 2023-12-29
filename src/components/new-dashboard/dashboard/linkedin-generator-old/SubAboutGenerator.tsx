@@ -49,7 +49,7 @@ const SubAboutGenerator = () => {
       userData &&
       userData?.email &&
       !isNaN(availablePercentage) &&
-      availablePercentage !== 0
+      availablePercentage !== 0 
     ) {
       setAiInputUserData({
         contact: userData?.contact,
@@ -90,6 +90,7 @@ const SubAboutGenerator = () => {
       const aboutId = makeid();
       const obj: any = {
         aboutId: aboutId,
+        personName: userData.firstName + " " + userData.lastName,
         email: session?.user?.email,
         trainBotData: {
           userEmail: userData.email,

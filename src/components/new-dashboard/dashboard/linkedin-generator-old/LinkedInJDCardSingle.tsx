@@ -65,7 +65,6 @@ const LinkedInJDCardSingle = ({
   };
 
   if (!card) return <h1>Loading </h1>;
-  console.log(card);
   return (
     <div>
       <div className="flex flex-col   dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950  rounded-xl mt-[20px] py-[20px] px-[14px] ">

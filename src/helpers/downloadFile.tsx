@@ -3,8 +3,10 @@
 import UpgradeModal from "@/components/upgradeModal";
 import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import { setUpgradeModal } from "@/store/appSlice";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getPackageID } from "@/ServerActions";
+
 
 const DownloadService = ({
   componentRef,
@@ -13,12 +15,14 @@ const DownloadService = ({
   type,
   fileName,
   templateId,
-}: any) => {
+}: // setOpenUpgradModal,
+any) => {
   const docRef = useRef<any>(null);
 
   let htmlToDoc: string;
   const userData = useSelector((state: any) => state.userData);
   const dispatch = useDispatch();
+  const [openUpgradeModal, setOpenUpgradModal] = useState<boolean>(false);
 
   const templateCall = async () => {
     if (card && type) {
@@ -51,9 +55,8 @@ const DownloadService = ({
       }
       if (
         category === "premium" &&
-        userData.userPackage === "65144e9817dd55f9a2e3ff6c"
+        userData.userPackage === await getPackageID()
       ) {
-        // alert("Upgrade to download")
         dispatch(setUpgradeModal(true));
       } else {
         await view();
@@ -89,16 +92,22 @@ const DownloadService = ({
   };
 
   return (
-    <div>
-      <a className="" href="#" ref={docRef} target="_blank"></a>
-      <button
-        onClick={templateCall}
-        type="button"
-        className="lg:text-[14px] text-[12px]  lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b] bg-transparent text-green-500 border border-green-500"
-      >
-        Download
-      </button>
-    </div>
+    <>
+      <UpgradeModal
+        openUpgradationModal={openUpgradeModal}
+        setOpenUpgradationModal={setOpenUpgradModal}
+      />
+      <div>
+        <a className="" href="#" ref={docRef} target="_blank"></a>
+        <button
+          onClick={templateCall}
+          type="button"
+          className="lg:text-[14px] text-[12px]  lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b] bg-transparent text-green-500 border border-green-500"
+        >
+          Download
+        </button>
+      </div>
+    </>
   );
 };
 

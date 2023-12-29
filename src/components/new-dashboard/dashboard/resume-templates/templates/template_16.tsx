@@ -304,8 +304,8 @@ const ResumeTemplate16 = ({
 
   return (
     <div className="w-full first-page relative text-gray-900">
-      <div className="flex absolute  top-0 left-[27%] py-8 ">
-        <div className="flex flex-col items-center  py-8">
+     <div className="flex absolute xs:px-3 top-0 left-1/3 py-8 xs:py-2 md:py-8">
+        <div className="flex flex-col   py-8">
           <h2 className="text-2xl md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
@@ -316,7 +316,7 @@ const ResumeTemplate16 = ({
               }}
             />
           </h2>
-          <h3 className="text-[16px] md:text-xl hover:shadow-md mt-2 hover:bg-gray-100">
+          <h3 className="text-[16px] md:text-xl xs:text-center  hover:shadow-md mt-2 hover:bg-gray-100">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -328,10 +328,10 @@ const ResumeTemplate16 = ({
         </div>
       </div>
       <div className="flex">
-        <div className=" w-3/12 md:w-1/3 flex flex-col  items-center   bg-[#1F1E1E]  px-9   pt-[2rem] ">
-          <div className=" w-24 h-24 md:w-48 md:h-48 border-[.5rem] border-[##F1F1F1]   text-gray-800 bg-[#FFFFFF]  text-center flex justify-center items-center  rounded-full ">
-            <div className=" w-24 h-24 md:w-44 md:h-44 text-[#F1F1F1] flex justify-center items-center bg-[#383636]   rounded-full ">
-              <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
+        <div className=" w-4/12 xs:w-4/12 md:w-1/3 flex flex-col  items-center   bg-[#1F1E1E]  px-9  xs:px-1 md:px-9 pt-[2rem] ">
+          <div className=" w-48 h-48 xs:w-24 xs:h-24 md:w-48 md:h-48 border-[.5rem] xs:border-[2px] md:border-[.5rem] border-[##F1F1F1]   text-gray-800 bg-[#FFFFFF]  text-center flex justify-center items-center  rounded-full ">
+            <div className=" w-44 h-44 xs:h-[88px] xs:w-[] md:w-44 md:h-44 text-[#F1F1F1] flex justify-center items-center bg-[#383636]   rounded-full ">
+              <span className="text-4xl xs:text-lg md:text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
                 <EditableField
                   value={resume?.shortName ? resume?.shortName : "CPH"}
                   style={{ width: "60px" }}
@@ -346,14 +346,14 @@ const ResumeTemplate16 = ({
 
           {/* contacts */}
           <span className="border-stylee w-full h-0 my-3"></span>
-          <h3 className="uppercase text-lg font-semibold w-full border-b-2 border-white pb-2 text-white  py-1 rounded-sm flex items-center  flex-row gap-2 ">
+          <h3 className="uppercase text-lg xs:text-[14px] md:text-lg font-semibold w-full  border-b-2 border-white pb-2 text-white  py-1 rounded-sm flex items-center  flex-row gap-2 ">
             {contactIcon}
             Contact
           </h3>
           <span className="border-stylee w-full h-0 my-3"></span>
           <ul className=" flex flex-col gap-3 w-full mb-4 text-sm text-gray-300 break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-500 items-center hover:text-black text-xs  flex flex-row gap-1 ">
-              <span className="w-7 h-7 flex items-center justify-center mr-2 border border-gray-300 rounded-full">
+              <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center mr-2 border border-gray-300 rounded-full">
                 {phoneIcon}
               </span>
               <EditableField
@@ -377,7 +377,7 @@ const ResumeTemplate16 = ({
               />
             </li>
             <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-1  items-center text-xs">
-              <span className="w-7 h-7 flex items-center justify-center mr-2 border border-gray-300 rounded-full">
+              <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center mr-2 border border-gray-300 rounded-full">
                 {emailIcon}
               </span>
               <EditableField
@@ -410,7 +410,7 @@ const ResumeTemplate16 = ({
                 target="_blank"
                 className="text-blue-600"
               > */}
-              <span className="w-7 h-7 flex items-center justify-center mr-2 border border-gray-300 rounded-full">
+              <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center mr-2 border border-gray-300 rounded-full">
                 {linkedInIcon}
               </span>
 
@@ -441,7 +441,7 @@ const ResumeTemplate16 = ({
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <span className="border-stylee w-full h-0  my-1"></span>
-              <h3 className="uppercase text-lg font-semibold text-white pb-2 w-full border-b-2 border-white  py-1 rounded-sm flex  flex-row gap-2 items-center">
+              <h3 className="uppercase text-lg xs:text-[14px] md:text-lg font-semibold text-white pb-2 w-full border-b-2 border-white  py-1 rounded-sm flex  flex-row gap-2 items-center">
                 {sparkleIcon}
                 Skills
               </h3>
@@ -577,7 +577,7 @@ const ResumeTemplate16 = ({
           {resume?.education && (
             <>
               <span className="w-full h-0 my-1 page-break"></span>
-              <h3 className="uppercase text-lg font-semibold  text-white w-full py-1 rounded-sm flex border-b-2 border-white flex-row gap-2  items-center">
+              <h3 className="uppercase text-lg xs:text-[14px] md:text-lg font-semibold  text-white w-full py-1 rounded-sm flex border-b-2 border-white flex-row gap-2  items-center">
                 {educationIcon}
                 Education
               </h3>
@@ -721,10 +721,10 @@ const ResumeTemplate16 = ({
             </>
           )}
         </div>
-        <div className="w-full flex flex-col bg-[#F1F1F1] px-4 md:px-8 pt-[11rem] ">
+        <div className="w-full flex flex-col bg-[#F1F1F1] px-4 md:px-8 pt-[13rem] xs:pt-[10rem] md:pt-[13rem] ">
           {/* Executive Summary */}
-          <span className="border-stylee w-full h-0  my-3"></span>
-          <h3 className="uppercase text-xl font-bold border-[#444440] border-b-2 mb-2 rounded-sm text-gray-900 w-full py-1">
+          <span className="border-stylee w-full h-0 my-3 xs:my-0 md:my-3"></span>
+          <h3 className="uppercase text-xl xs:text-lg  font-bold border-[#444440] border-b-2 mb-2 rounded-sm text-gray-900 w-full py-1">
             EXECUTIVE SUMMARY
           </h3>
           {/* <span className="border-stylee w-full h-0 border border-[#444440] mb-3"></span> */}
