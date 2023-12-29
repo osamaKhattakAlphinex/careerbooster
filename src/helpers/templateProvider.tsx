@@ -15,15 +15,14 @@ import ResumeTemplate14 from "@/components/new-dashboard/dashboard/resume-templa
 import ResumeTemplate15 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_15";
 import ResumeTemplate16 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_16";
 import ResumeTemplate17 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_17";
+import ResumeTemplate18 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_18";
 import { Template } from "@/components/new-dashboard/dashboard/resume-templates";
 
 export const ALL_TEMPLATES: Template[] = [
   {
     id: 1,
     title: "classic-executive",
-    tags: [
-      "one-page"
-    ],
+    tags: ["one-page"],
     category: "freemium",
     preview: "/assets/images/templates/resume-1.png",
     template: (props) => <ResumeTemplate1 {...props} />,
@@ -155,5 +154,21 @@ export const ALL_TEMPLATES: Template[] = [
     category: "premium",
     preview: "/assets/images/templates/resume-17.png",
     template: (props) => <ResumeTemplate17 {...props} />,
+  },
+  {
+    id: 18,
+    title: "",
+    tags: ["one-page"],
+    category: "premium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate18 {...props} />,
+  },
+  {
+    id: 19,
+    title: "",
+    tags: ["one-page"],
+    category: "premium",
+    preview: "/assets/images/templates/resume-2.png",
+    template: (props) => <ResumeTemplate2 {...props} />,
   },
 ];
