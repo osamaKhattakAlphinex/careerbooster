@@ -49,7 +49,7 @@ const LinkedInUploadPDFResume = () => {
   // Define state variables to track API call statuses
   const [headlineComplete, setHeadlineComplete] = useState<boolean>(false);
   const [aboutComplete, setAboutComplete] = useState<boolean>(false);
-  const [aboutData, setAboutData] = useState<string>("aboutdefault");
+  const [aboutData, setAboutData] = useState<string>("about");
   const [instruction, setInstruction] = useState<string>("");
   const [isHeadlineCopied, setIsHeadlineCopied] = useState(false);
   const [isSummaryCopied, setIsSummaryCopied] = useState(false);

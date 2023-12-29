@@ -33,17 +33,19 @@ export async function POST(req: any) {
     const dataset = "linkedin.about";
     const model = await getTrainedModel(dataset);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
-
+     
     const reqBody = await req.json();
     const userData = reqBody?.userData;
     const aboutId = reqBody?.aboutId;
     const email = reqBody?.email;
+    const option = reqBody?.option;
     const trainBotData = reqBody?.trainBotData;
     await startDB();
     // fetch prompt from db
+    
     const promptRec = await Prompt.findOne({
       type: "linkedinTool",
-      name: "aboutdefault",
+      name: option,
       active: true,
     });
     const prompt = promptRec.value;
