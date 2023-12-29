@@ -19,7 +19,6 @@ import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import LinkedInJDCardSingle from "./LinkedInJDCardSingle";
 import { makeid } from "@/helpers/makeid";
-import { makeJDentry } from "@/helpers/makeJDentry";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
   // local States
