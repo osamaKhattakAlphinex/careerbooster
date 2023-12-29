@@ -329,7 +329,7 @@ const ResumeTemplate17 = ({
       </div>
       <div className="flex">
         <div className=" w-3/12 md:w-1/3 flex flex-col  items-center   bg-[#323b4c]  px-9   pt-[2rem] ">
-          <div className=" w-24 h-24 md:w-48 md:h-48 border-[.5rem] border-[#ae9243]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
+          <div className="border-[.5rem] border-[#ae9243]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
             <div className=" w-24 h-24 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
               <div className=" w-24 h-24 md:w-40 md:h-40 text-[#F1F1F1] flex justify-center items-center bg-[#ae9243]  rounded-full ">
                 <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
