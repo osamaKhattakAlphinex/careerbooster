@@ -13,6 +13,7 @@ import {
 } from "@/helpers/makeTrainBotEntry";
 
 import { postKeywords } from "./linkedInKeywords/route";
+import { makeid } from "@/helpers/makeid";
 export const maxDuration = 10; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -63,30 +64,35 @@ export async function POST(req: any) {
 
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      onStart: async () => {
-        const payload = {
-          id: keywordsId,
-          keywordsText: "",
-          generatedOnDate: new Date().toISOString(),
-          userEmail: email,
-        };
+      onFinal: async (completions) => {
 
-        await postKeywords(payload);
+        try {
+          if (trainBotData) {
+            const keywordsId = makeid();
 
-        if (trainBotData) {
-          let entry: TrainBotEntryType = {
-            entryId: keywordsId,
-            type: "linkedin.keywords",
-            input: inputPrompt,
-            output: "out",
-            idealOutput: "",
-            status: "pending",
-            userEmail: email,
-            fileAddress: "",
-            Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
-          };
-          await makeTrainedBotEntry(entry);
-        }
+            const payload = {
+              id: keywordsId,
+              keywordsText: completions,
+              generatedOnDate: new Date().toISOString(),
+              userEmail: trainBotData.userEmail,
+            };
+
+            await postKeywords(payload);
+
+            let entry: TrainBotEntryType = {
+              entryId: keywordsId,
+              type: "linkedin.keywords",
+              input: inputPrompt,
+              output: completions,
+              idealOutput: "",
+              status: "pending",
+              userEmail: email,
+              fileAddress: "",
+              Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
+            };
+            await makeTrainedBotEntry(entry);
+          }
+        } catch (err) { }
       },
     });
     // Respond with the stream

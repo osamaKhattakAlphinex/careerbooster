@@ -48,9 +48,7 @@ const SubAboutGenerator = () => {
   useEffect(() => {
     if (
       userData &&
-      userData?.email &&
-      !isNaN(availablePercentage) &&
-      availablePercentage !== 0
+      userData?.email
     ) {
       setAiInputUserData({
         contact: userData?.contact,
@@ -88,17 +86,15 @@ const SubAboutGenerator = () => {
       availablePercentage !== 0
     ) {
       setMsgLoading(true);
-      const aboutId = makeid();
       const obj: any = {
-        aboutId: aboutId,
         personName: userData.firstName + " " + userData.lastName,
         option: option,
         email: session?.user?.email,
+        userData: aiInputUserData,
         trainBotData: {
           userEmail: userData.email,
           fileAddress: userData.uploadedResume.fileName,
         },
-        userData: aiInputUserData,
       };
       fetch("/api/linkedInBots/aboutGenerator", {
         method: "POST",
@@ -119,7 +115,6 @@ const SubAboutGenerator = () => {
               tempText += text;
               setStreamedData((prev) => prev + text);
             }
-            await saveToDB(obj, tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -170,20 +165,7 @@ const SubAboutGenerator = () => {
     }
   };
 
-  const saveToDB = async (obj: any, text: any) => {
-    const id = obj?.aboutId;
-    const email = obj?.email;
-    const payload: any = {
-      id,
-      email,
-      text,
-    };
 
-    await fetch("/api/linkedInBots/aboutGenerator/linkedInAbout", {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
-  };
 
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {

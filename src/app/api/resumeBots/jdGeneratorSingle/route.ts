@@ -29,8 +29,8 @@ export async function POST(req: any) {
     const experience = reqBody?.experience;
     const trainBotData = reqBody?.trainBotData;
     const quantifyingExperience = reqBody?.quantifyingExperience;
-    const personName =  reqBody?.personName
-    const jobTitle =  reqBody?.jobTitle
+    const personName = reqBody?.personName
+    const jobTitle = reqBody?.jobTitle
     const dataset = "resume.writeJDSingle";
     const model = await getTrainedModel(dataset);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
@@ -84,24 +84,22 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-let workId: any
-    const stream = OpenAIStream(response,{
-      onStart: async()=>{
+    let workId: any
+    const stream = OpenAIStream(response, {
+      onStart: async () => {
         workId = makeid()
         const payload = {
           id: workId,
         };
-              // postConsultingBid(payload);
+        // postConsultingBid(payload);
 
       },
-      onFinal: async (completions)=>{
+      onFinal: async (completions) => {
         try {
 
           try {
             if (trainBotData) {
-              await startDB();
-  
-  
+
               let entry: TrainBotEntryType = {
                 entryId: workId,
                 type: "resume.writeJDSingle",
@@ -113,30 +111,14 @@ let workId: any
                 fileAddress: trainBotData?.fileAddress,
                 Instructions: `Write Single Job Description for ${experience.jobTitle} at ${experience.company}`,
               };
-              makeTrainedBotEntry(entry);
+              await makeTrainedBotEntry(entry);
             }
           } catch {
             console.log("error while saving summary....");
           }
-          if (trainBotData) {
-            await startDB();
-            
-    
-            const obj = {
-              type: "resume.writeJDSingle",
-              input: inputPrompt,
-              output: completions,
-              idealOutput: "",
-              status: "pending",
-              userEmail: trainBotData.userEmail,
-              // fileAddress: trainBotData.fileAddress,
-              Instructions: `Write Single Job Description for ${experience.jobTitle} at ${experience.company}`,
-            };
-    
-            await TrainBot.create({ ...obj });
-          }
+
         } catch (error) {
-          
+
         }
       }
     });

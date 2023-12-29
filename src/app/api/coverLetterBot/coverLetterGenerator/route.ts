@@ -83,29 +83,37 @@ export async function POST(req: any) {
     });
 
     const stream = OpenAIStream(response, {
-      onStart: async () => {
-        const payload: any = {
-          id: coverletterId,
-          jobDescription: jobDescription,
-          coverLetterText: "",
-          generatedOnDate: new Date().toISOString(),
-          generatedViaOption: type,
-          userEmail: email,
-        };
-        await postCoverLetter(payload);
-        if (trainBotData) {
-          let entry: TrainBotEntryType = {
-            entryId: coverletterId,
-            type: "coverLetter.write",
-            input: inputPrompt,
-            output: "out",
-            idealOutput: "",
-            status: "pending",
-            userEmail: email,
-            fileAddress: "",
-            Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
-          };
-          await makeTrainedBotEntry(entry);
+      onFinal: async (completions) => {
+        try {
+          if (trainBotData) {
+            const coverletterId = makeid();
+
+            const payload = {
+              id: coverletterId,
+              jobDescription: jobDescription,
+              coverLetterText: completions,
+              generatedOnDate: new Date().toISOString(),
+              generatedViaOption: type,
+              userEmail: email,
+            };
+
+            await postCoverLetter(payload);
+
+            let entry: TrainBotEntryType = {
+              entryId: coverletterId,
+              type: "coverLetter.write",
+              input: inputPrompt,
+              output: completions,
+              idealOutput: "",
+              status: "pending",
+              userEmail: email,
+              fileAddress: "",
+              Instructions: `Generate Cover Letter ${trainBotData.userEmail}`,
+            };
+            await makeTrainedBotEntry(entry);
+          }
+        } catch {
+          console.log("error while saving coverletter....");
         }
       },
     });

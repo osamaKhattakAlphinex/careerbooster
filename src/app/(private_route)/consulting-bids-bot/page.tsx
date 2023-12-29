@@ -134,7 +134,6 @@ const ConsultingBidsGenerator = () => {
               setStreamedData((prev) => prev + text);
               tempText += text;
             }
-            await saveToDB(obj, tempText);
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -177,8 +176,8 @@ const ConsultingBidsGenerator = () => {
                 dispatch(
                   setConsultingBid(
                     consultingBidResponse.data.result.consultingBids[
-                      consultingBidResponse.data.result.consultingBids.length -
-                        1
+                    consultingBidResponse.data.result.consultingBids.length -
+                    1
                     ]
                   )
                 );
@@ -200,20 +199,7 @@ const ConsultingBidsGenerator = () => {
       }, 3000);
     }
   };
-  const saveToDB = async (obj: any, text: any) => {
-    const id = obj?.consultingBidId;
-    const email = obj?.email;
-    const payload: any = {
-      id,
-      email,
-      text,
-    };
 
-    await fetch("/api/coverLetterBot", {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
-  };
 
   const handleSave = async () => {
     let _consultingBidText = "";
@@ -350,11 +336,10 @@ const ConsultingBidsGenerator = () => {
               <div className="flex flex-col gap-5 lg:px-0">
                 <label
                   htmlFor="default-radio-1"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[290px] lg:w-[400px] ${
-                    selectedOption === "profile"
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[290px] lg:w-[400px] ${selectedOption === "profile"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
-                  }`}
+                    }`}
                 >
                   <input
                     style={{
@@ -377,11 +362,10 @@ const ConsultingBidsGenerator = () => {
                 </label>
                 <label
                   htmlFor="default-radio-2"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950  w-[220px] lg:w-[290px] ${
-                    selectedOption === "file"
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950  w-[220px] lg:w-[290px] ${selectedOption === "file"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
-                  } `}
+                    } `}
                 >
                   <input
                     id="default-radio-2"
@@ -443,15 +427,14 @@ const ConsultingBidsGenerator = () => {
                     jobDescription === ""
                   }
                   onClick={handleGenerate}
-                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent s flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
-                    (msgLoading ||
+                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent s flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
                       !session?.user?.email ||
                       !aiInputUserData ||
                       selectedOption === "" ||
                       (selectedOption === "file" && selectedFile === "") ||
                       jobDescription === "") &&
                     "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                  }`}
+                    }`}
                 >
                   {/* <Image
                   src="/icon/u_bolt-alt.svg"
@@ -468,9 +451,8 @@ const ConsultingBidsGenerator = () => {
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="currentColor"
-                          className={`w-4 h-4 mr-3 dark:text-gray-100 text-gray-950 ${
-                            msgLoading ? "animate-spin" : ""
-                          }`}
+                          className={`w-4 h-4 mr-3 dark:text-gray-100 text-gray-950 ${msgLoading ? "animate-spin" : ""
+                            }`}
                         >
                           <path
                             strokeLinecap="round"
@@ -515,9 +497,8 @@ const ConsultingBidsGenerator = () => {
                   </h1>
 
                   <div
-                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] md:p-[30px]  shadow ${
-                      msgLoading ? "animate-pulse" : ""
-                    }`}
+                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] md:p-[30px]  shadow ${msgLoading ? "animate-pulse" : ""
+                      }`}
                   >
                     <div ref={componentRef}>
                       {isEditing ? (
@@ -525,10 +506,10 @@ const ConsultingBidsGenerator = () => {
                           id="editor"
                           contentEditable="true"
                           className="dark:text-gray-100 text-gray-950 "
-                          // dangerouslySetInnerHTML={{ __html: streamedData }}
-                          // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                          //   setEditedContent(e.target.innerHTML);
-                          // }}
+                        // dangerouslySetInnerHTML={{ __html: streamedData }}
+                        // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
+                        //   setEditedContent(e.target.innerHTML);
+                        // }}
                         ></div>
                       ) : (
                         <div>
@@ -553,15 +534,14 @@ const ConsultingBidsGenerator = () => {
                         jobDescription === ""
                       }
                       onClick={handleGenerate}
-                      className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px]   rounded-full border border-[#b324d7] ${
-                        (msgLoading ||
+                      className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px]   rounded-full border border-[#b324d7] ${(msgLoading ||
                           !session?.user?.email ||
                           !aiInputUserData ||
                           selectedOption === "" ||
                           (selectedOption === "file" && selectedFile === "") ||
                           jobDescription === "") &&
                         "opacity-50 cursor-not-allowed" // Add this class when the button is disabled
-                      }`}
+                        }`}
                     >
                       <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                         {msgLoading ? (
@@ -572,9 +552,8 @@ const ConsultingBidsGenerator = () => {
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="currentColor"
-                              className={`w-4 h-4 mr-3 ${
-                                msgLoading ? "animate-spin" : ""
-                              }`}
+                              className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""
+                                }`}
                             >
                               <path
                                 strokeLinecap="round"
@@ -629,19 +608,18 @@ const ConsultingBidsGenerator = () => {
                           isBidCopied
                         }
                         onClick={() => copyBid(streamedData)}
-                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px]  border rounded-full dark:border-[#312e37]  border-[#b324d7] ${
-                          msgLoading ||
-                          !session?.user?.email ||
-                          !aiInputUserData ||
-                          selectedOption === "" ||
-                          (selectedOption === "file" && selectedFile === "") ||
-                          (selectedOption === "aiResume" &&
-                            setSelectedResumeId === "") ||
-                          !show ||
-                          isBidCopied
+                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px]  border rounded-full dark:border-[#312e37]  border-[#b324d7] ${msgLoading ||
+                            !session?.user?.email ||
+                            !aiInputUserData ||
+                            selectedOption === "" ||
+                            (selectedOption === "file" && selectedFile === "") ||
+                            (selectedOption === "aiResume" &&
+                              setSelectedResumeId === "") ||
+                            !show ||
+                            isBidCopied
                             ? "opacity-50 cursor-not-allowed"
                             : ""
-                        }`}
+                          }`}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -662,8 +640,8 @@ const ConsultingBidsGenerator = () => {
                           {msgLoading
                             ? "Please wait..."
                             : isBidCopied
-                            ? "Copied"
-                            : "Copy to clipboard"}
+                              ? "Copied"
+                              : "Copy to clipboard"}
                         </span>
                       </button>
                     )}
@@ -675,11 +653,10 @@ const ConsultingBidsGenerator = () => {
                             !show || msgLoading || !session?.user?.email
                           }
                           onClick={handleClick}
-                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px]  rounded-full edit-btn${
-                            !show || msgLoading || !session?.user?.email
+                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px]  rounded-full edit-btn${!show || msgLoading || !session?.user?.email
                               ? "opacity-50 cursor-not-allowed"
                               : ""
-                          }`}
+                            }`}
                         >
                           <div className="flex flex-row gap-2">
                             <svg

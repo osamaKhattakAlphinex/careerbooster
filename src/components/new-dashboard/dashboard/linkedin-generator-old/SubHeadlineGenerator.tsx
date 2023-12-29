@@ -78,9 +78,7 @@ const SubHeadlineGenerator = () => {
       availablePercentage !== 0
     ) {
       setMsgLoading(true);
-      const headlineId = makeid();
       const obj: any = {
-        headlineId: headlineId,
         personName: userData.firstName + " " + userData.lastName,
         email: session?.user?.email,
         trainBotData: {
@@ -107,7 +105,6 @@ const SubHeadlineGenerator = () => {
               tempText += text;
             }
 
-            await saveToDB(obj, tempText);
 
             fetch("/api/users/updateUserLimit", {
               method: "POST",
@@ -162,20 +159,7 @@ const SubHeadlineGenerator = () => {
     }
   };
 
-  const saveToDB = async (obj: any, text: any) => {
-    const id = obj?.headlineId;
-    const email = obj?.email;
-    const payload: any = {
-      id,
-      email,
-      text,
-    };
 
-    await fetch("/api/linkedInBots/headlineGenerator/linkedInHeadline", {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
-  };
 
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
@@ -310,15 +294,14 @@ const SubHeadlineGenerator = () => {
           <div
             className="font-sans whitespace-pre-wrap dark:text-gray-100 text-gray-950 break-words"
             ref={componentRef}
-            // style={{ textW: "auto" }}
+          // style={{ textW: "auto" }}
           >
             {streamedData}
             <button
               disabled={msgLoading}
               onClick={() => copyHeadline(streamedData)}
-              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${
-                msgLoading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -339,8 +322,8 @@ const SubHeadlineGenerator = () => {
                 {msgLoading
                   ? "Please wait..."
                   : isHeadlineCopied
-                  ? "Copied"
-                  : "Copy to clipboard"}
+                    ? "Copied"
+                    : "Copy to clipboard"}
               </span>
             </button>
           </div>

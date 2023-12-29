@@ -65,28 +65,34 @@ export async function POST(req: any) {
 
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
-      onStart: async () => {
-        const payload = {
-          id: headlineId,
-          headlineText: "",
-          generatedOnDate: new Date().toISOString(),
-          userEmail: email,
-        };
-        await postHeadlines(payload);
-        if (trainBotData) {
-          let entry: TrainBotEntryType = {
-            entryId: headlineId,
-            type: "linkedin.headlines",
-            input: inputPrompt,
-            output: "out",
-            idealOutput: "",
-            status: "pending",
-            userEmail: email,
-            fileAddress: "",
-            Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
-          };
-          await makeTrainedBotEntry(entry);
-        }
+      onFinal: async (completions) => {
+        try {
+          if (trainBotData) {
+            const headlineId = makeid();
+
+            const payload = {
+              id: headlineId,
+              headlineText: completions,
+              generatedOnDate: new Date().toISOString(),
+              userEmail: trainBotData.userEmail,
+            };
+
+            await postHeadlines(payload);
+
+            let entry: TrainBotEntryType = {
+              entryId: headlineId,
+              type: "linkedin.headlines",
+              input: inputPrompt,
+              output: completions,
+              idealOutput: "",
+              status: "pending",
+              userEmail: email,
+              fileAddress: "",
+              Instructions: `Generate Linkedin Headline for ${trainBotData.userEmail}`,
+            };
+            await makeTrainedBotEntry(entry);
+          }
+        } catch (err) { }
       },
     });
 

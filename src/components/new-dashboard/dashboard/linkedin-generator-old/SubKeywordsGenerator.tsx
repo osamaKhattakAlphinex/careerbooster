@@ -91,9 +91,7 @@ const SubKeywordsGenerator = () => {
       availablePercentage !== 0
     ) {
       setMsgLoading(true);
-      const keywordsId = makeid();
       const obj: any = {
-        keywordsId: keywordsId,
         personName: userData.firstName + " " + userData.lastName,
 
         email: session?.user?.email,
@@ -120,7 +118,6 @@ const SubKeywordsGenerator = () => {
               tempText += text;
               setStreamedData((prev) => prev + text);
             }
-            await saveToDB(obj, tempText);
 
             fetch("/api/users/updateUserLimit", {
               method: "POST",
@@ -172,20 +169,6 @@ const SubKeywordsGenerator = () => {
         setShowPopup(false);
       }, 3000);
     }
-  };
-  const saveToDB = async (obj: any, text: any) => {
-    const id = obj?.keywordsId;
-    const email = obj?.email;
-    const payload: any = {
-      id,
-      email,
-      text,
-    };
-
-    await fetch("/api/linkedInBots/keywordsGenerator/linkedInKeywords", {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
   };
 
   const getUserDataIfNotExists = async () => {
@@ -276,7 +259,7 @@ const SubKeywordsGenerator = () => {
           onClick={() => handleGenerate()}
           className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
 
-          // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
+        // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
         >
           <span className={`text-white text-[15px] font-semibold`}>
             {msgLoading ? (
@@ -307,7 +290,7 @@ const SubKeywordsGenerator = () => {
                 />
                 <span
                   className="text-white ml-3 text-[15px] font-semibold"
-                  // className={`text-black text-[15px] font-semibold`}
+                // className={`text-black text-[15px] font-semibold`}
                 >
                   {/* Upgrade Plan */}
                   Generate Keywords
@@ -329,9 +312,8 @@ const SubKeywordsGenerator = () => {
             <button
               disabled={msgLoading}
               onClick={() => copyKeyword(streamedData)}
-              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${
-                msgLoading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -352,8 +334,8 @@ const SubKeywordsGenerator = () => {
                 {msgLoading
                   ? "Please wait..."
                   : isKeywordsCopied
-                  ? "Copied"
-                  : "Copy to clipboard"}
+                    ? "Copied"
+                    : "Copy to clipboard"}
               </span>
             </button>
           </div>

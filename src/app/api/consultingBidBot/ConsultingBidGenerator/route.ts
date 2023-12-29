@@ -37,8 +37,7 @@ export async function POST(req: any) {
     const userData = reqBody?.userData;
     const email = reqBody?.email;
     const file = reqBody?.file;
-    const consultingBidId = reqBody?.consultingBidId;
-    const resumeId = reqBody?.resumeId;
+
     const jobDescription = reqBody?.jobDescription;
     const trainBotData = reqBody?.trainBotData;
     let fileContent;
@@ -85,31 +84,39 @@ export async function POST(req: any) {
     });
 
     const stream = OpenAIStream(response, {
-      onStart: async () => {
-        const payload = {
-          id: consultingBidId,
-          jobDescription: jobDescription,
-          consultingBidText: "",
-          generatedOnDate: new Date().toISOString(),
-          generatedViaOption: type,
-          userEmail: email,
-        };
+      onFinal: async (completions) => {
+        try {
+          if (trainBotData) {
+            const consultingBidId = makeid();
 
-        await postConsultingBid(payload);
-        if (trainBotData) {
-          let entry: TrainBotEntryType = {
-            entryId: consultingBidId,
-            type: "write.genearteConsultingBid",
-            input: inputPrompt,
-            output: "out",
-            idealOutput: "",
-            status: "pending",
-            userEmail: email,
-            fileAddress: "",
-            Instructions: `Generate Consulting Bid for ${trainBotData.userEmail}`,
-          };
-          await makeTrainedBotEntry(entry);
+            const payload = {
+              id: consultingBidId,
+              jobDescription: jobDescription,
+              coverLetterText: completions,
+              generatedOnDate: new Date().toISOString(),
+              generatedViaOption: type,
+              userEmail: email,
+            };
+
+            await postConsultingBid(payload);
+
+            let entry: TrainBotEntryType = {
+              entryId: consultingBidId,
+              type: "write.genearteConsultingBid",
+              input: inputPrompt,
+              output: completions,
+              idealOutput: "",
+              status: "pending",
+              userEmail: email,
+              fileAddress: "",
+              Instructions: `Generate Consulting Bid for ${trainBotData.userEmail}`,
+            };
+            await makeTrainedBotEntry(entry);
+          }
+        } catch {
+          console.log("error while saving consulting bids....");
         }
+
       },
     });
     // Respond with the stream
