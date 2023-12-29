@@ -29,7 +29,6 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
   const [data, setData] = useState<any>();
   const [msgLoading, setMsgLoading] = useState<boolean>(false);
   const router = useRouter();
-  console.log(userPackage);
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);

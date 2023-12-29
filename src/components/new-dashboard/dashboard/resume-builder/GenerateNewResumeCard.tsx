@@ -10,21 +10,20 @@ import Link from "next/link";
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 
 interface Props {
-  handleGenerate: () => Promise<void>;
+  handleGenerate: (value:any) => Promise<void>;
   availablePercentage: number;
-  quantifyingExperience: boolean;
-  setQuantifyingExperience: any;
+
 }
 const GenerateResume = ({
   handleGenerate,
-  quantifyingExperience,
-  setQuantifyingExperience,
+
 }: // availablePercentage,
 Props) => {
   const [showInstruction, setShowInstruction] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
+    const [quantifyingExperience, setQuantifyingExperience] = useState<boolean>(true);
   // Redux
   const { data: session } = useSession();
   const dispatch = useDispatch();
@@ -145,7 +144,7 @@ Props) => {
           <input
             type="checkbox"
             checked={quantifyingExperience}
-            onChange={() => setQuantifyingExperience(!quantifyingExperience)}
+            onChange={(e) => setQuantifyingExperience(e.target.checked)}
             className="sr-only peer"
           />
           <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full  after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-none peer-checked:bg-blue-600"></div>
@@ -159,7 +158,7 @@ Props) => {
             memoizedState.resumeLoading ||
             !session?.user?.email
           }
-          onClick={handleGenerate}
+          onClick={()=>handleGenerate(quantifyingExperience)}
           className={` dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${
             memoizedState.jobPosition === "" ||
             memoizedState.resumeLoading ||

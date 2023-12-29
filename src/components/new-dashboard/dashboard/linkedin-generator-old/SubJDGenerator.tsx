@@ -106,6 +106,8 @@ const SubJDGenerator = () => {
         const jobDescriptionId = makeid();
         const obj: any = {
           jobDescriptionId: jobDescriptionId,
+        personName: userData.firstName + " " + userData.lastName,
+
           email: session?.user?.email,
           trainBotData: {
             userEmail: userData.email,

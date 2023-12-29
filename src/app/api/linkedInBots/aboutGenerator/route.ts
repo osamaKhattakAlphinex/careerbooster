@@ -35,7 +35,9 @@ export async function POST(req: any) {
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
      
     const reqBody = await req.json();
+
     const userData = reqBody?.userData;
+    const personName = reqBody?.personName
     const aboutId = reqBody?.aboutId;
     const email = reqBody?.email;
     const option = reqBody?.option;
@@ -48,11 +50,11 @@ export async function POST(req: any) {
       name: option,
       active: true,
     });
-    const prompt = promptRec.value;
+    let prompt = promptRec.value;
+    prompt = prompt.replaceAll("{{PersonName}}", personName);
+    const inputPrompt = `Read ${personName}'s resume : ${JSON.stringify(userData)}
 
-    const inputPrompt = `This is the User data: ${JSON.stringify(userData)}
-
-          this is the prompt:
+          and then:
           ${prompt}
           `;
 

@@ -81,6 +81,7 @@ const SubHeadlineGenerator = () => {
       const headlineId = makeid();
       const obj: any = {
         headlineId: headlineId,
+        personName: userData.firstName + " " + userData.lastName,
         email: session?.user?.email,
         trainBotData: {
           userEmail: userData.email,

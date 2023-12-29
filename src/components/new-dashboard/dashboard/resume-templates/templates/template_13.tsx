@@ -304,9 +304,9 @@ const ResumeTemplate16 = ({
 
   return (
     <div className="w-full first-page relative text-gray-900">
-      <div className="flex absolute w-8/12  top-0 left-1/3 py-12 ">
+      <div className="flex absolute w-8/12 xs:w-[60%] sm:w-[60%] md:w-8/12 lg:w-8/12  top-0 left-1/3 xs:left-[42%] sm:left-[42%] md:left-1/3 lg:left-1/3  py-12 ">
         <div className="flex flex-col   py-8">
-          <h2 className="text-2xl md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-2xl xs:text-lg sm:text-lg md:text-2xl lg:text-2xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -316,7 +316,7 @@ const ResumeTemplate16 = ({
               }}
             />
           </h2>
-          <h3 className="text-[16px] md:text-xl hover:shadow-md mt-2 hover:bg-gray-100">
+          <h3 className="text-[16px] md:text-xl hover:shadow-md mt-2 hover:bg-gray-100 xs:text-sm sm:text-sm md:text-[16px] lg:text-[16px]">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -790,14 +790,7 @@ const ResumeTemplate16 = ({
                       </div> */}
 
                       <div>
-                        <h2
-                          className="hover:shadow-md hover:cursor-text hover:bg-gray-100"
-                          style={{
-                            fontSize: "1.3rem",
-                            fontWeight: "bold",
-                            lineHeight: "2rem",
-                          }}
-                        >
+                        <h2 className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-[1.3rem] xs:text-[1rem] sm:text[1rem] md:text-[1.3rem] lg:text-[1.3rem] font-bold">
                           <EditableField
                             value={rec?.title}
                             style={{ width: "100%" }}
@@ -825,13 +818,7 @@ const ResumeTemplate16 = ({
                             }}
                           />
                         </h2>
-                        <h2
-                          className="hover:cursor-default"
-                          style={{
-                            fontSize: "1.1rem",
-                            lineHeight: "1.5rem",
-                          }}
-                        >
+                        <h2 className="hover:cursor-default text-[1.1rem] xs:text-[0.8rem] sm:text[0.8rem] md:text-[1.1rem] lg:text-[1.1rem]">
                           {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                           {rec?.isContinue
                             ? "Present"

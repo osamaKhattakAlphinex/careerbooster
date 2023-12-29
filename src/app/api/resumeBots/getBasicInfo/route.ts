@@ -13,7 +13,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
 import { makeid } from "@/helpers/makeid";
-import { TrainBotEntryType, makeTrainedBotEntry } from "@/helpers/makeTrainBotEntry";
+import {
+  TrainBotEntryType,
+  makeTrainedBotEntry,
+} from "@/helpers/makeTrainBotEntry";
 export const maxDuration = 10; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
@@ -38,31 +41,34 @@ export async function POST(req: any) {
     const inputType = reqBody?.inputType; // input type
     const jobPosition = reqBody?.jobPosition;
     const userData = reqBody?.userData;
+    const personName = reqBody?.personName
     // const email = reqBody?.email;
     const trainBotData = reqBody?.trainBotData;
 
-    let content: any;
-
-    if (userData || inputType === "userData") {
-      // pass user data as it is
-      content = userData;
-    }
-
+   
     if (type === "basicDetails") {
       const dataset = "resume.getBasicInfo";
       const model = await getTrainedModel(dataset);
       //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
       try {
+        const promptRec = await Prompt.findOne({
+          type: "resume",
+          name: "oneLineSlogan",
+          active: true,
+        });
+        let prompt = promptRec.value;
+        prompt = prompt.replaceAll("{{PersonName}}", personName);
+
         const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
-          content
+          userData
         )}
         
         Please find the following details in above provided userdata:
         shortName, jobTitle, linkedIn
-
         the shortName means two letters from Name of the person.
-        for the jobTitle write a one line catchy slogan that represents this person expertise in his/her Industry.
+        ${prompt}
+
         the linkedIn means the LinkedInUrl of the person.
 
         The output must be in this format. (following is an example)
@@ -76,7 +82,7 @@ export async function POST(req: any) {
 
 
         The output must be a valid JSON
-        Donot add anything if there is no value for a field. if there is no value leave that field blank donot add any extra labesls.
+        Do not add anything if there is no value for a field. if there is no value leave that field blank donot add any extra labesls.
 
         `;
         const response: any = await openai.chat.completions.create({
@@ -88,7 +94,21 @@ export async function POST(req: any) {
         // make a trainBot entry
         try {
           if (trainBotData) {
+
+
+            const basicInfoId = makeid();
+
+            const payload = {
+              id: basicInfoId,
+              primarySkillsText: response?.choices[0]?.message?.content?.replace(
+                /(\r\n|\n|\r)/gm,
+                ""
+              ),
+            };
+
             const obj = {
+              entryId: basicInfoId,
+          
               type: "resume.getBasicInfo",
               input: inputPrompt,
               output: response?.choices[0]?.message?.content?.replace(
@@ -104,7 +124,7 @@ export async function POST(req: any) {
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) {}
+        } catch (error) { }
 
         return NextResponse.json(
           {
@@ -138,13 +158,11 @@ export async function POST(req: any) {
         });
         const prompt = promptRec.value;
 
-        const promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
-
-        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
-          content
-        )}
+        let promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
+        promptSummary = prompt.replaceAll("{{PersonName}}", personName);
+        const inputPrompt = `Read ${personName}'s Resume data: ${JSON.stringify(userData)}
         
-        From the above resume data please:
+        and then:
                 ${promptSummary}`;
 
         const response: any = await openai.chat.completions.create({
@@ -155,22 +173,20 @@ export async function POST(req: any) {
 
         // make a trainBot entry
 
-       
-
-        const stream = OpenAIStream(response,{
-          onFinal: async (completions) =>{
+        const stream = OpenAIStream(response, {
+          onFinal: async (completions) => {
             try {
               if (trainBotData) {
                 await startDB();
                 const summaryId = makeid();
-    
+
                 const payload = {
                   id: summaryId,
                   summaryText: completions,
                 };
-    
+
                 // postConsultingBid(payload);
-    
+
                 let entry: TrainBotEntryType = {
                   entryId: summaryId,
                   type: "resume.writeSummary",
@@ -188,11 +204,9 @@ export async function POST(req: any) {
               console.log("error while saving summary....");
             }
           },
-             
         });
         // Respond with the stream
         return new StreamingTextResponse(stream);
-       
       } catch (error) {
         return NextResponse.json(
           { result: error, success: false },
@@ -251,7 +265,7 @@ export async function POST(req: any) {
       try {
         const inputPrompt = `You are a helpful assistant that Reads the Resume data of a person and helps with creating a new Resume.
         Following are the content of the resume (in JSON format): 
-        JSON user/resume data: ${JSON.stringify(content)}
+        JSON user/resume data: ${JSON.stringify(userData)}
 
         ${formatInstructions}`;
         // const resp = await chainB.call({
@@ -299,12 +313,12 @@ export async function POST(req: any) {
           jobPosition
         );
 
-        const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
-          content
+        const inputPrompt = `Read ${personName}'s Resume data:: ${JSON.stringify(
+          userData
         )}
         
       
-        This is the prompt:
+        and then:
         ${promptRefined}
         
         the answer must be in a valid JSON array
@@ -320,8 +334,19 @@ export async function POST(req: any) {
         try {
           if (trainBotData) {
             await startDB();
+            await startDB();
+            const primarySkillsId = makeid();
+
+            const payload = {
+              id: primarySkillsId,
+              primarySkillsText: response?.choices[0]?.message?.content?.replace(
+                /(\r\n|\n|\r)/gm,
+                ""
+              ),
+            };
 
             const obj = {
+              entryId: primarySkillsId,
               type: "resume.writePrimarySkills",
               input: inputPrompt,
               output: response?.choices[0]?.message?.content?.replace(
@@ -331,13 +356,13 @@ export async function POST(req: any) {
               idealOutput: "",
               status: "pending",
               userEmail: trainBotData.userEmail,
-              fileAddress: trainBotData.fileAddress,
+              fileAddress: trainBotData?.fileAddress,
               Instructions: `Write Primary Skills for Resume`,
             };
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) {}
+        } catch (error) { }
 
         return NextResponse.json(
           {
@@ -378,10 +403,10 @@ export async function POST(req: any) {
         );
 
         const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
-          content
+          userData
         )}
         
-        This is the prompt:
+        and then:
         ${promptRefined}
 
         the answer must be in a valid JSON array
@@ -414,7 +439,7 @@ export async function POST(req: any) {
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) {}
+        } catch (error) { }
 
         return NextResponse.json(
           {
@@ -454,7 +479,7 @@ export async function POST(req: any) {
           jobPosition
         );
         const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
-          content
+          userData
         )}
         
         This is the prompt:
@@ -489,7 +514,7 @@ export async function POST(req: any) {
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) {}
+        } catch (error) { }
 
         return NextResponse.json(
           {

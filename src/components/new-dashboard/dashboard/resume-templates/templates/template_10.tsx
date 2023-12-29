@@ -304,8 +304,8 @@ const ResumeTemplate10 = ({
 
   return (
     <div className="first-page relative">
-      <div className="flex flex-row absolute top-[90px] h-36 z-30  bg-[#043382] items-center justify-center    w-full mx-auto mt-[]">
-        <div className="  z-50 w-48 h-48 border-2 border-[#042B6B]  text-white bg-gray-800 text-center flex justify-center   rounded-full mx-4  md:mt-0 md:mr-8 items-center ">
+      <div className="flex flex-row absolute top-[90px] h-36 z-30  bg-[#043382] items-center justify-center    w-full ">
+        <div className="  z-50 w-48 h-48 xs:w-[120px] xs:h-[80px] sm:w-[120px] sm:h-[80px] border-2 border-[#042B6B] md:w-48 md:h-48 lg:w-48 lg:h-48  text-white bg-gray-800 text-center flex justify-center   rounded-full mx-4  md:mt-0 md:mr-8 items-center ">
           <span className="text-4xl  hover:shadow-md hover:bg-gray-500">
             <EditableField
               value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -341,10 +341,10 @@ const ResumeTemplate10 = ({
       </div>
       <div className=" flex">
         {/* sidebar */}
-        <div className="z-5 min-h-screen  ml-10 w-5/12 md:w-1/3 flex flex-col pl-3 md:pl-8 bg-gray-950 text-gray-100  pr-6  py-8 h-auto pt-[300px]">
+        <div className="z-5 min-h-screen  ml-10 xs:ml-0 sm:ml-0 md:ml-10 lg:ml-10 w-5/12 md:w-1/3 flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6 bg-gray-950 text-gray-100  pr-6  py-8 h-auto pt-[300px]">
           {/* contacts */}
           <div className="rounded-3xl border-2 border-blue-900 p-2">
-            <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
+            <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold flex flex-row gap-2 items-center">
               {contactIcon}
               Contact
             </h3>
@@ -446,7 +446,7 @@ const ResumeTemplate10 = ({
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <div className="rounded-3xl border-2 border-blue-900 p-2 mt-4 mb-8">
-                <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center ">
+                <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold flex flex-row gap-2 items-center ">
                   {sparkleIcon}
                   Skills
                 </h3>
@@ -579,13 +579,11 @@ const ResumeTemplate10 = ({
               </ul>
             </>
           )}
-
-          {/* Skills */}
         </div>
-        <div className="w-full flex flex-wrap flex-col px-8  text-gray-950 pb-10 pt-[300px]">
+        <div className="w-full flex flex-wrap flex-col px-8 sm:px-2 xs:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[300px]">
           {/* Executive Summary */}
-          <div className="rounded-3xl  bg-blue-900 py-2 px-6 w-[250px] mb-6">
-            <h3 className="uppercase text-lg text-gray-100 font-semibold">
+          <div className="rounded-3xl  bg-blue-900 py-2 px-6 xs:px-2 sm:px-2 w-[250px] xs:w-[190px] sm:w-[190px] md:w-[250px] lg:w-[250px] md:w-[250px] lg:w-[250px] mb-6">
+            <h3 className="uppercase text-lg text-gray-100 font-semibold xs:text-sm sm:text-sm md:text-md lg:text-lg">
               EXECUTIVE SUMMARY
             </h3>
           </div>
@@ -606,8 +604,8 @@ const ResumeTemplate10 = ({
           </div>
 
           {/* Work Experience */}
-          <div className="rounded-3xl  bg-blue-900 py-2 px-6 w-[250px] my-6">
-            <h3 className="uppercase text-lg font-semibold text-gray-100">
+          <div className="rounded-3xl  bg-blue-900 py-2 px-6 my-6 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-[250px] xs:w-[190px] sm:w-[190px] md:w-[250px] lg:w-[250px]">
+            <h3 className="uppercase text-lg font-semibold text-gray-100 xs:text-sm sm:text-sm md:text-md lg:text-lg">
               WORK EXPERIENCE
             </h3>
           </div>
@@ -620,7 +618,7 @@ const ResumeTemplate10 = ({
                   <div key={i} className="flex justify-center items-center">
                     <div
                       key={i}
-                      className="hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2  flex flex-col w-full "
+                      className="hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2  flex flex-col w-full  "
                       onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                       onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                       onDragStart={(e) =>
@@ -631,9 +629,8 @@ const ResumeTemplate10 = ({
                       draggable
                     >
                       <h2
-                        className="hover:shadow-md hover:cursor-text hover:bg-gray-100"
+                        className="text-[1.3rem] xs:text-lg sm:text-lg md:text-[1.3rem] lg:text-[1.3rem] hover:shadow-md hover:cursor-text hover:bg-gray-100"
                         style={{
-                          fontSize: "1.3rem",
                           fontWeight: "bold",
                           lineHeight: "2rem",
                         }}
@@ -666,9 +663,8 @@ const ResumeTemplate10 = ({
                         />
                       </h2>
                       <h2
-                        className="hover:cursor-default"
+                        className="hover:cursor-default text-[1.1rem] xs:text-sm sm:text-sm md:text-[1.1rem] lg:text-[1.1rem]  "
                         style={{
-                          fontSize: "1.1rem",
                           lineHeight: "1.5rem",
                         }}
                       >
@@ -987,9 +983,8 @@ const ResumeTemplate10 = ({
           {/* Education */}
           {resume?.education && (
             <div className="">
-              <div className="rounded-3xl  bg-blue-900 py-2 px-6 w-[250px] my-6">
-                <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center text-gray-100 ">
-                  {educationIcon}
+              <div className="rounded-3xl  bg-blue-900 py-2 px-6 my-6 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-[250px] xs:w-[190px] sm:w-[190px] md:w-[250px] lg:w-[250px]">
+                <h3 className="uppercase text-lg font-semibold text-gray-100 xs:text-sm sm:text-sm md:text-md lg:text-lg ">
                   Education
                 </h3>
               </div>

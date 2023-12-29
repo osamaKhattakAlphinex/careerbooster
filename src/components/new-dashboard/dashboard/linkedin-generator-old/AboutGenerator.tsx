@@ -244,7 +244,7 @@ const AboutGenerator = ({ setAbout }: Props) => {
         <button
           type="button"
           disabled={msgLoading || !session?.user?.email}
-          onClick={() => handleGenerate()}
+          // onClick={() => handleGenerate()}
           className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
         >
           <span className={`text-white text-[15px] font-semibold`}>

@@ -7,11 +7,10 @@ export async function POST(req: any) {
     const formData = await req.formData();
 
     const html = formData.get("htmlToDoc");
-
     let browser;
     chromium.setGraphicsMode = false;
 
-    if (process.env?.NEXT_APP_STATE === "Development") {
+    if (process.env.NEXT_APP_STATE === "Development") {
       browser = await puppeteerDev.launch();
     } else {
       browser = await puppeteer.launch({
@@ -22,8 +21,7 @@ export async function POST(req: any) {
       });
     }
 
-    // const browser = await puppeteer.launch();
-    const page = await browser?.newPage();
+    const page = await browser.newPage();
 
     const widthInPixels = Math.floor(3.5 * 96);
     const heightInPixels = Math.floor(2 * 96);
