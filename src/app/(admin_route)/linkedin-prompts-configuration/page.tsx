@@ -121,6 +121,69 @@ const LinkedInPromptsConfiguration = () => {
               updating={updating}
             />
           </div>
+
+          <div className="flex gap-4 lg:!flex-row flex-col">
+            <PromptEditor
+              name="headline"
+              title="Headline Prompt"
+              type="linkedin"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+
+            <PromptEditor
+              name="aboutdefault"
+              title="About Prompt"
+              type="linkedin"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+          </div>
+          <div className="flex gap-4 lg:!flex-row flex-col">
+            <PromptEditor
+              name="aboutPersona"
+              title="About Prompt (Persona)"
+              type="linkedinTool"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+
+            <PromptEditor
+              name="aboutShort"
+              title="About Prompt (Short)"
+              type="linkedinTool"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+          </div>
+          <div className="flex gap-4 lg:!flex-row flex-col">
+            <PromptEditor
+              name="aboutInstructions"
+              title="About Prompt (Instructions)"
+              type="linkedin"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+            <PromptEditor
+              name="aboutStory"
+              title="About Prompt (Story)"
+              type="linkedinTool"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+          </div>
         </>
       )}
     </div>
