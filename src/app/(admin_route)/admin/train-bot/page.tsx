@@ -19,6 +19,9 @@ import DataTable, {
   BulkDataOperation,
   TableAction,
 } from "@/components/DataTable";
+import SlidingPanel from "@/components/slidingPanel";
+import useSWR from "swr";
+import { url } from "inspector";
 
 const activeCSS =
   "p-2 text-blue-600 bg-gray-100  active dark:bg-gray-800 dark:text-blue-500";
@@ -58,36 +61,40 @@ const TrainRegistrationBotAdminPage = () => {
   const [dataSelection, setDataSelection] = useState<string[]>([]);
 
   const settingModelRef: React.MutableRefObject<any> = useRef(null);
+  const slidingPanelRef: React.MutableRefObject<any> = useRef(null);
+  const refreshRef = useRef<any>();
 
   const fetchRecords = async () => {
     setLoading(true);
 
-    // if(!loading){
-    axios
-      .get(`/api/trainBot?limit=${limitOfRecords}&page=${currentPage}`, {
-        params: {
-          status: activeTab,
-          type: showRecordsType,
-          dataType: dataType,
-        },
-      })
-      .then((res: any) => {
-        if (res.data.success) {
-          const result = res.data;
-          setTotalPages(Math.ceil(result.totalRecs / limitOfRecords));
-          setRecords(result.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-    // }
+    if (!loading) {
+      axios
+        .get(`/api/trainBot?limit=${limitOfRecords}&page=${currentPage}`, {
+          params: {
+            status: activeTab,
+            type: showRecordsType,
+            dataType: dataType,
+          },
+        })
+        .then((res: any) => {
+          if (res.data.success) {
+            const result = res.data;
+            setTotalPages(Math.ceil(result.totalRecs / limitOfRecords));
+            setRecords(result.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   };
 
   const columnHelper = createColumnHelper<TrainBotEntryType>();
+
+  refreshRef.current = fetchRecords;
 
   const columns = [
     columnHelper.accessor("userEmail", {
@@ -137,10 +144,12 @@ const TrainRegistrationBotAdminPage = () => {
   const actions: TableAction[] = [
     {
       name: "review",
-      type: "component",
-      element: (rec: any) => <Review rec={rec} />,
-      styles: "",
-      icon: "",
+      type: "handler",
+      // element: (rec: any) => <Review rec={rec} />,
+      element: (rec: any) => handleViewClick(rec),
+      styles:
+        "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline",
+      icon: eyeIcon,
     },
 
     {
@@ -363,6 +372,12 @@ const TrainRegistrationBotAdminPage = () => {
     }
   };
 
+  const handleViewClick = (rec: any) => {
+    if (slidingPanelRef.current) {
+      slidingPanelRef.current.openModal(true, rec);
+    }
+  };
+
   // when tab changes fetch records for that tab
   //
   useEffect(() => {
@@ -410,62 +425,6 @@ const TrainRegistrationBotAdminPage = () => {
     }
   }, [searchParams?.get("r"), searchParams?.get("p")]);
 
-  const showDeleteAllButton = () => {
-    if (selectAll) {
-      return true;
-    }
-    if (dataSelection.length > 1) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const isChecked = (id: string) => {
-    if (selectAll) {
-      if (dataSelection.length === records.length) return true;
-    } else {
-      if (dataSelection.includes(id)) return true;
-      else return false;
-    }
-  };
-
-  const onSelecting = (checked: boolean, id: string) => {
-    if (selectAll)
-      if (checked) {
-        setDataSelection((prevSelection) => [...prevSelection, id]);
-      } else {
-        let newSelection = dataSelection.filter(
-          (selectedId) => selectedId !== id
-        );
-        setDataSelection(newSelection);
-        setSelectAll(false);
-      }
-    else {
-      if (checked) {
-        setDataSelection((prevSelection) => [...prevSelection, id]);
-      } else {
-        let newSelection = dataSelection.filter(
-          (selectedId) => selectedId !== id
-        );
-        setDataSelection(newSelection);
-      }
-    }
-  };
-
-  const onSelectAll = (e: any) => {
-    setSelectAll(e.target.checked);
-    if (e.target.checked) {
-      if (records.length >= 1) {
-        let _ids: string[] = [];
-        records.map((rec: any) => _ids.push(rec._id));
-        setDataSelection(_ids);
-      }
-    } else {
-      setDataSelection([]);
-    }
-  };
-
   // useEffect(() => {
   //   const startIndex = (currentPage - 1) * limitOfRecords;
   //   setStartingPage(startIndex);
@@ -479,6 +438,8 @@ const TrainRegistrationBotAdminPage = () => {
   return (
     <>
       <FineTuningSettingModel ref={settingModelRef} />
+      <SlidingPanel ref={slidingPanelRef} refresh={fetchRecords} />
+
       <div className="flex flex-col justify-start items-start">
         <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
           Train Bots

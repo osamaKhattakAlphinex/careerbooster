@@ -261,14 +261,14 @@ const AdminSidebar = () => {
                 linkedIn
               </Link>
             </li>
-            <li className="px-5 py-2">
+            {/* <li className="px-5 py-2">
               <Link
                 href="/linkedin-tools-prompts-configuration"
                 className=" text-white no-underline hover:no-underline  hover:text-white/80"
               >
                 linkedIn Tools
               </Link>
-            </li>
+            </li> */}
             <li className="px-5 py-2">
               <Link
                 href="/resume-prompts-configuration"
