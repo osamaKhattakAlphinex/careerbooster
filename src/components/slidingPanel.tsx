@@ -34,7 +34,9 @@ const SlidingPanel = forwardRef(({ refresh }: Props, ref: any) => {
 
   useEffect(() => {
     if (entry) {
-      setIdealOutput(entry.output);
+      const text = entry.idealOutput !== "" ? entry.idealOutput : entry.output;
+
+      setIdealOutput(text);
     }
   }, [entry]);
 
