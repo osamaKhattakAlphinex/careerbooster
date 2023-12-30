@@ -335,13 +335,18 @@ const ResumeTemplate1 = ({
           </h3>
         </div>
         <div>
-          <div onClick={triggerInputClick} className="  w-32 h-32 xs:w-24 xs:h-24 md:w-32 md:h-32 text-white bg-gray-800 text-center flex justify-center items-center  rounded-full mx-4 my-4 mr-8 xs:mr-4 md:mr-8 ">
+          {/* <div onClick={triggerInputClick} className="  w-32 h-32 xs:w-24 xs:h-24 md:w-32 md:h-32 text-white bg-gray-800 text-center flex justify-center items-center  rounded-full mx-4 my-4 mr-8 xs:mr-4 md:mr-8 ">
             <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
               <input ref={imageRef} className="hidden" type="file" accept="image/*" onChange={handleImageChange} />
               {image && <Image src={image} width={100} height={100} alt="Uploaded" />}
 
             </span>
-          </div>
+          </div> */}
+          {/* <button onClick={triggerInputClick} >
+            <input ref={imageRef} className="hidden" type="file" accept="image/*" onChange={handleImageChange} />
+            Uplaod
+          </button> */}
+
         </div>
       </div>
       <div className="">
