@@ -173,6 +173,26 @@ const TrainRegistrationBotAdminPage = () => {
       },
     ],
   };
+  const bulkDataOperationsTrained: BulkDataOperation = {
+    operations: [
+      {
+        name: "Delete All",
+        type: "handler",
+        element: (ids: string[] | []) => handleDeleteAll(ids),
+        styles:
+          "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-rose-700 rounded-lg hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800 no-underline",
+        icon: deleteIcon,
+      },
+      {
+        name: "Change Status To Pending",
+        type: "handler",
+        element: (ids: string[] | []) => handleChangeStatus(ids, "pending"),
+        styles:
+          "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 no-underline",
+        icon: "",
+      },
+    ],
+  };
   const bulkDataOperationsReviewd: BulkDataOperation = {
     operations: [
       {
@@ -194,11 +214,21 @@ const TrainRegistrationBotAdminPage = () => {
       {
         name: "Change Status To Trained",
         type: "handler",
-        element: (ids: string[] | []) => handleChangeStatus(ids),
+        element: (ids: string[] | []) => handleChangeStatus(ids, "trained"),
         styles:
           "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline",
         icon: "",
       },
+
+      {
+        name: "Change Status To Pending",
+        type: "handler",
+        element: (ids: string[] | []) => handleChangeStatus(ids, "pending"),
+        styles:
+          "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 no-underline",
+        icon: "",
+      },
+
       {
         name: "Send For Training",
         type: "handler",
@@ -257,7 +287,7 @@ const TrainRegistrationBotAdminPage = () => {
         );
 
         if (trainingResponse.data.success) {
-          handleChangeStatus(ids);
+          // handleChangeStatus(ids);
           fetchRecords();
         } else {
           console.log("Something went wrong");
@@ -270,13 +300,13 @@ const TrainRegistrationBotAdminPage = () => {
     }
   };
 
-  const handleChangeStatus = async (dataIds: string[] = []) => {
+  const handleChangeStatus = async (dataIds: string[] = [], status: string) => {
     setLoading(true);
 
     axios
       .put("/api/trainBot/bulkStatusUpdate", {
         ids: dataIds,
-        newStatus: "trained",
+        newStatus: status,
       })
       .then((res: any) => {
         if (res.data.success) {
@@ -680,6 +710,8 @@ const TrainRegistrationBotAdminPage = () => {
             bulkDataOperations={
               activeTab === "reviewed"
                 ? bulkDataOperationsReviewd
+                : activeTab === "trained"
+                ? bulkDataOperationsTrained
                 : bulkDataOperations
             }
           />
@@ -731,10 +763,11 @@ const TrainRegistrationBotAdminPage = () => {
                             setRecords([]);
                             setCurrentPage(number);
                           }}
-                          className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${currentPage === number
+                          className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+                            currentPage === number
                               ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
                               : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
-                            }`}
+                          }`}
                         >
                           {number}
                         </button>
