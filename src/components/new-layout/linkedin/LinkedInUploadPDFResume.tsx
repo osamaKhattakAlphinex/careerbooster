@@ -14,6 +14,7 @@ import LinkedInSummary from "./LinkedInSummary";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Avatar from "@/components/Avatar";
+import { makeid } from "@/helpers/makeid";
 
 //Editable
 const loadFromLocalStorage = () => {

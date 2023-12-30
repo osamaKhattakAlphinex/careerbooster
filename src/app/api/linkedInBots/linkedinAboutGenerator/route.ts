@@ -3,7 +3,6 @@ import Prompt from "@/db/schemas/Prompt";
 import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import { OpenAIStream, StreamingTextResponse } from "ai";
-import TrainBot from "@/db/schemas/TrainBot";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
 
 export const maxDuration = 10; // This function can run for a maximum of 5 seconds
@@ -19,7 +18,6 @@ export async function POST(req: any) {
     if (body) {
       const { option, aboutInstructions } = body;
       const linkedinContent = body.linkedinContent.substring(0, 8000);
-      const trainBotData = body?.trainBotData;
       let prompt;
       await startDB();
       const promptRec = await Prompt?.findOne({
@@ -33,7 +31,7 @@ export async function POST(req: any) {
       }
 
       if (linkedinContent) {
-        const dataset = "linkedinAiTool.about";
+        const dataset = "linkedin.abouts";
         const model = await getTrainedModel(dataset);
         //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
@@ -44,31 +42,13 @@ export async function POST(req: any) {
                 ${prompt}`;
 
         const response: any = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo",
+          model: model || "gpt-3.5-turbo",
           stream: true,
           messages: [{ role: "user", content: input }],
         });
 
         // Convert the response into a friendly text-stream
-        const stream = OpenAIStream(response, {
-          async onFinal(completions) {
-            try {
-              if (trainBotData) {
-                await startDB();
-
-                const obj = {
-                  type: "linkedinAiTool.about",
-                  input: input,
-                  output: completions,
-                  idealOutput: "",
-                  status: "pending",
-                  Instructions: `Writing a detailed LinkedIn Summary awhich is engaging, impactful, have relevant industry jargon, highlight successes and services with call to action statement `,
-                };
-                await TrainBot.create({ ...obj });
-              }
-            } catch (error) { }
-          },
-        });
+        const stream = OpenAIStream(response);
         // Respond with the stream
         return new StreamingTextResponse(stream);
       }

@@ -4,8 +4,6 @@ import Prompt from "@/db/schemas/Prompt";
 import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
 import { OpenAIStream, StreamingTextResponse } from "ai";
-import TrainBot from "@/db/schemas/TrainBot";
-import TrainedModel from "@/db/schemas/TrainedModel";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
 
 // This function can run for a maximum of 5 seconds
@@ -33,21 +31,21 @@ export async function POST(req: any) {
 
       // For LinkedIn Toll  if file is uploaded then load content from that fiel
       if (content) {
-        const dataset = "linkedinAiTool.headline";
+        const dataset = "linkedin.headlines";
         const model = await getTrainedModel(dataset);
         //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
         // CREATING LLM MODAL
 
         const input = `
-        Read {{PersonName}}'s resume :
+        Read Person's resume :
             ${content}
             and then:
             ${prompt}
             `;
 
         const response: any = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo", // v2
+          model: model || "gpt-3.5-turbo", // v2
           stream: true,
           messages: [
             {
@@ -57,33 +55,8 @@ export async function POST(req: any) {
           ],
         });
 
-        // const resp = await chain4.call({ query: input });
-        // return NextResponse.json(
-        //   { result: response.choices[0].message.content, success: true },
-        //   { status: 200 }
-        // );
         // Convert the response into a friendly text-stream
-        const stream = OpenAIStream(response, {
-          async onFinal(completions) {
-            try {
-              if (trainBotData) {
-                await startDB();
-
-                // make a trainBot entry
-                const obj = {
-                  type: "linkedinAiTool.headline",
-                  input: input,
-                  output: completions,
-                  idealOutput: "",
-                  status: "pending",
-                  Instructions: `Writing a LinkedIn headline as Job Title |Top Keyword 1 | Top Keyword 2 | Top Keyword 3 | Top Keyword 4 | Value proposition statement`,
-                };
-
-                await TrainBot.create({ ...obj });
-              }
-            } catch (error) { }
-          },
-        });
+        const stream = OpenAIStream(response);
         // Respond with the stream
         return new StreamingTextResponse(stream);
       }
