@@ -161,7 +161,7 @@ export const ALL_TEMPLATES: Template[] = [
     title: "",
     tags: ["one-page"],
     category: "premium",
-    preview: "/assets/images/templates/resume-2.png",
+    preview: "/assets/images/templates/resume-18.png",
     template: (props) => <ResumeTemplate18 {...props} />,
   },
   {
@@ -169,7 +169,7 @@ export const ALL_TEMPLATES: Template[] = [
     title: "",
     tags: ["one-page"],
     category: "premium",
-    preview: "/assets/images/templates/resume-2.png",
+    preview: "/assets/images/templates/resume-19.png",
     template: (props) => <ResumeTemplate19 {...props} />,
   },
 ];
