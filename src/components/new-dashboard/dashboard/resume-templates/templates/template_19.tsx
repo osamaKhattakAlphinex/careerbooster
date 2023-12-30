@@ -316,7 +316,7 @@ const ResumeTemplate19 = ({
               }}
             />
           </h2>
-          <h3 className="text-[16px] md:text-2xl text-gray-800  hover:shadow-md mt-2 w-12/12 hover:bg-gray-100">
+          <h3 className="text-[16px] md:text-2xl text-center text-gray-800  hover:shadow-md mt-2 w-12/12 hover:bg-gray-100">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -327,17 +327,17 @@ const ResumeTemplate19 = ({
           </h3>
         </div>
       </div>
-      <span className="border-stylee w-full h-0 border-2 border-gray-900 my-1"></span>
+      {/* <span className="border-stylee w-full h-0 border-2 border-gray-900 my-1"></span> */}
       <div className="flex border-t-2 border-gray-900">
-        <div className=" w-3/12 md:w-1/3 flex flex-col relative pt-3 inset-0 items-center md:px-6  bg-[#f8f8f8] ">
+        <div className=" w-4/12 xs:w-4/12 md:w-1/3 flex flex-col relative pt-3 inset-0 items-center md:px-6  bg-[#f8f8f8] ">
           {/* contacts */}
           <span className="border-stylee w-full h-0 my-1"></span>
-          <h3 className="uppercase text-lg xs:text-[14px]  md:text-lg font-semibold w-full   pb-2 text-gray-800 py-1 rounded-sm flex items-center  flex-row gap-2 ">
+          <h3 className="uppercase text-lg xs:text-[14px] xs:px-3 px-0 md:px-0  md:text-lg font-semibold w-full   pb-2 text-gray-800 py-1 rounded-sm flex items-center  flex-row gap-2 ">
             {contactIcon}
             Contact
           </h3>
           <span className="border-stylee w-full h-0 my-2"></span>
-          <ul className=" flex flex-col gap-3 w-full mb-4 text-sm text-gray-800 break-all pl-0">
+          <ul className=" flex flex-col px:-0 xs:px-3 md:px-0 gap-3 w-full mb-4 text-sm text-gray-800 break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-500 hover:text-black text-xs  flex flex-row gap-3 ">
               {phoneIcon}
               <EditableField
@@ -421,13 +421,13 @@ const ResumeTemplate19 = ({
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <span className="border-stylee w-full h-0  my-1"></span>
-              <h3 className="uppercase text-lg xs:text-[14px] md:text-lg font-semibold w-full  pb-2 text-gray-900  py-1 rounded-sm flex items-center  flex-row gap-2 ">
+              <h3 className="uppercase px-0 xs:px-3 md:px-0 text-lg xs:text-[14px] md:text-lg font-semibold w-full  pb-2 text-gray-900  py-1 rounded-sm flex items-center  flex-row gap-2 ">
                 {sparkleIcon}
                 Skills
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
               <ul
-                className="pl-0 flex  flex-col gap-1 mb-4 text-gray-800 w-full text-sm "
+                className="pl-0 flex  px-0 xs:px-3 md:px-0  flex-col gap-1 mb-4 text-gray-800 w-full text-sm "
                 onMouseEnter={() =>
                   !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                 }
@@ -556,13 +556,13 @@ const ResumeTemplate19 = ({
           {resume?.education && (
             <>
               <span className="w-full h-0 my-1 page-break"></span>
-              <h3 className="uppercase  text-lg xs:text-[14px] md:text-lg font-semibold w-full   pb-2 text-gray-900  py-1 rounded-sm flex items-center  flex-row gap-2 ">
+              <h3 className="uppercase px-0 xs:px-3 md:px-0   text-lg xs:text-[14px] md:text-lg font-semibold w-full   pb-2 text-gray-900  py-1 rounded-sm flex items-center  flex-row gap-2 ">
                 {educationIcon}
                 Education
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
               <ul
-                className="pl-0 flex flex-col text-gray-800  w-full"
+                className="pl-0 flex flex-col px-0 xs:px-3 md:px-0 text-gray-800  w-full"
                 onMouseEnter={() =>
                   !newEducation && setEducationAddButtonVisible(true)
                 }
@@ -701,12 +701,12 @@ const ResumeTemplate19 = ({
           )}
         </div>
 
-        <div className="w-full flex flex-col px-4 md:px-8 pt-6 ">
+        <div className="w-full flex flex-col px-4 md:px-8 pt-6 xs:pt-6 md:pt-6 ">
           {/* Executive Summary */}
 
-          <h3 className="uppercase text-xl xs:text-lg  font-semibold  rounded-sm text-gray-900 w-full py-1">
+          <h2 className="uppercase text-xl xs:text-lg md:text-xl font-bold  rounded-sm text-gray-900 w-full py-1">
             EXECUTIVE SUMMARY
-          </h3>
+          </h2>
           <span className="border-stylee w-full h-0  my-3"></span>
 
           <div className="text-sm hover:shadow-md hover:bg-gray-100">
@@ -729,9 +729,9 @@ const ResumeTemplate19 = ({
             className="border-stylee w-full h-0 
            my-3"
           ></span>
-          <h3 className="uppercase text-lg font-semibold   rounded-sm text-gray-900 w-full py-1">
+          <h2 className="uppercase text-xl font-bold   rounded-sm text-gray-900 w-full py-1">
             WORK EXPERIENCE
-          </h3>
+          </h2>
           <span
             className="border-stylee w-full h-0 
            my-3"
@@ -764,7 +764,7 @@ const ResumeTemplate19 = ({
                         <h2
                           className="hover:shadow-md hover:cursor-text hover:bg-gray-100"
                           style={{
-                            fontSize: "1.3rem",
+                            fontSize: "1rem",
                             fontWeight: "bold",
                             lineHeight: "2rem",
                           }}
