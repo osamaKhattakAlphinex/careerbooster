@@ -16,6 +16,7 @@ import ResumeTemplate15 from "@/components/new-dashboard/dashboard/resume-templa
 import ResumeTemplate16 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_16";
 import ResumeTemplate17 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_17";
 import ResumeTemplate18 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_18";
+import ResumeTemplate19 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_19";
 import { Template } from "@/components/new-dashboard/dashboard/resume-templates";
 
 export const ALL_TEMPLATES: Template[] = [
@@ -169,6 +170,6 @@ export const ALL_TEMPLATES: Template[] = [
     tags: ["one-page"],
     category: "premium",
     preview: "/assets/images/templates/resume-2.png",
-    template: (props) => <ResumeTemplate2 {...props} />,
+    template: (props) => <ResumeTemplate19 {...props} />,
   },
 ];

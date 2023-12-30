@@ -7,7 +7,6 @@ import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPackageID } from "@/ServerActions";
 
-
 const DownloadService = ({
   componentRef,
   view,
@@ -23,8 +22,10 @@ any) => {
   const userData = useSelector((state: any) => state.userData);
   const dispatch = useDispatch();
   const [openUpgradeModal, setOpenUpgradModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
 
   const templateCall = async () => {
+    setLoading(true);
     if (card && type) {
       if (type === "coverLetter") {
         htmlToDoc = `
@@ -59,9 +60,9 @@ any) => {
       // ) {
       //   dispatch(setUpgradeModal(true));
       // } else {
-        await view();
-        const html = componentRef.current.outerHTML;
-        htmlToDoc = `
+      await view();
+      const html = componentRef.current.outerHTML;
+      htmlToDoc = `
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
         .parent .child {
@@ -71,22 +72,24 @@ any) => {
             display: block; 
         }</style>
         ${html}`;
-        const formData = new FormData();
-        formData.append("htmlToDoc", htmlToDoc);
-        await fetch(`/api/template`, {
-          method: "POST",
-          body: formData,
-        }).then(async (response: any) => {
-          const res = await response.json();
-          const arrayBufferView = new Uint8Array(res.result.data);
-          const blob = new Blob([arrayBufferView], {
-            type: "application/pdf",
-          });
-          const url = URL.createObjectURL(blob);
-          docRef.current.href = url;
-          docRef.current.download = fileName;
-          docRef.current.click();
+      const formData = new FormData();
+      formData.append("htmlToDoc", htmlToDoc);
+      setLoading(true);
+      await fetch(`/api/template`, {
+        method: "POST",
+        body: formData,
+      }).then(async (response: any) => {
+        const res = await response.json();
+        const arrayBufferView = new Uint8Array(res.result.data);
+        const blob = new Blob([arrayBufferView], {
+          type: "application/pdf",
         });
+        const url = URL.createObjectURL(blob);
+        docRef.current.href = url;
+        docRef.current.download = fileName;
+        docRef.current.click();
+        setLoading(false);
+      });
       // }
     }
   };
@@ -102,9 +105,12 @@ any) => {
         <button
           onClick={templateCall}
           type="button"
-          className="lg:text-[14px] text-[12px]  lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b] bg-transparent text-green-500 border border-green-500"
+          disabled={loading}
+          className={`lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b] bg-transparent text-green-500 border border-green-500 ${
+            loading ? "cursor-not-allowed opacity-50" : ""
+          }`}
         >
-          Download
+          {loading ? "Downloading..." : "Download"}
         </button>
       </div>
     </>
