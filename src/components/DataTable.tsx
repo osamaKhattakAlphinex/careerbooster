@@ -208,7 +208,7 @@ const DataTable = <C, D>({
           </div>
           <div className="col-span-4">
             {Object.entries(rowSelection).length > 0 && (
-              <div className="flex flex-row justify-end items-center gap-2">
+              <div className="flex flex-row flex-wrap justify-end items-center gap-2">
                 {showBulkDataOperations(bulkDataOperations, rowSelectionIds)}
               </div>
             )}
