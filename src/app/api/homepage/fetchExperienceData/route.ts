@@ -24,10 +24,13 @@ export async function POST(req: any) {
     const body = await req.json();
     if (body) {
       const reqBody = body;
-      const content = removeSpecialChars(reqBody.content.substring(0, 12000));
+      const content = reqBody.content.substring(0, 12000);
+
+
       const trainBotData = reqBody.trainBotData;
 
       if (content) {
+
         const openai = new OpenAI({
           apiKey: process.env.OPENAI_API_KEY,
         });
@@ -41,6 +44,7 @@ export async function POST(req: any) {
               ${content}
     
               Now please give me a List of All Work Experiences of this person from the above provided content.
+              Experiences can be associated as person's career history, work experience, professional experience, previous work etc.
               jobTitle means the job title of the work experience
               company means the company name of the work experience
               
@@ -90,7 +94,7 @@ export async function POST(req: any) {
             await TrainBot.create({ ...obj });
           }
           // const resp = await chain4.call({ query: input });
-        } catch (error) {}
+        } catch (error) { }
 
         return NextResponse.json(
           { success: true, result: response.choices[0].message.content },
