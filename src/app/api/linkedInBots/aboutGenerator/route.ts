@@ -30,7 +30,7 @@ export async function POST(req: any) {
   }
 
   try {
-    const dataset = "linkedin.about";
+    const dataset = "linkedin.abouts";
     const model = await getTrainedModel(dataset);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 

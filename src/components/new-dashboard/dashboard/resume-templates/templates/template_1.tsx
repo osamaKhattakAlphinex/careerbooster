@@ -232,7 +232,7 @@ const ResumeTemplate1 = ({
     });
   };
 
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<any>(null);
 
   const handleImageChange = (e: any) => {
     const selectedFile = e.target.files[0];
@@ -244,16 +244,10 @@ const ResumeTemplate1 = ({
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        // Handle the image buffer (reader.result) here or upload it to the server
-        const imageBuffer: any = reader.result; // This contains the image as a buffer
-        // You can perform further actions like sending the buffer to the server
-        // Example: sendImageToServer(imageBuffer);
-
-
-
-        setImage(imageBuffer); // Set the image buffer in the state
+        const base64Image: any = reader.result; // Convert the image blob to base64
+        setImage(base64Image); // Set the base64 image in the state
       };
-      reader.readAsArrayBuffer(selectedFile);
+      reader.readAsDataURL(selectedFile); // Read the file as a data URL (base64)
     }
   };
   //Reorder Redux handleDropExperience array with drag-drop
@@ -340,15 +334,15 @@ const ResumeTemplate1 = ({
             />
           </h3>
         </div>
-        {/* <div>
+        <div>
           <div onClick={triggerInputClick} className="  w-32 h-32 xs:w-24 xs:h-24 md:w-32 md:h-32 text-white bg-gray-800 text-center flex justify-center items-center  rounded-full mx-4 my-4 mr-8 xs:mr-4 md:mr-8 ">
             <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
               <input ref={imageRef} className="hidden" type="file" accept="image/*" onChange={handleImageChange} />
-              {image && <Image src={URL.createObjectURL(new Blob([image]))} width={100} height={100} alt="Uploaded" />}
+              {image && <Image src={image} width={100} height={100} alt="Uploaded" />}
 
             </span>
           </div>
-        </div> */}
+        </div>
       </div>
       <div className="">
         <div className=" w-full flex flex-col pl-8 xs:pl-3 md:pl-8 lg:pl-8 pr-6">
