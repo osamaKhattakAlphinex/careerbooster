@@ -8,6 +8,7 @@ export const GET = async (req: any) => {
   try {
     await startDB();
     const trainedModels = await TrainedModel.find({});
+
     return NextResponse.json({
       success: true,
       data: trainedModels,

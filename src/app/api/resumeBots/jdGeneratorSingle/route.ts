@@ -48,7 +48,6 @@ export async function POST(req: any) {
       prompt = prompt.replaceAll("{{PersonName}}", personName)
       prompt = prompt.replaceAll("{{JobTitle}}", jobTitle)
     } else {
-      console.log("inside")
       promptRec = await Prompt.findOne({
         type: "resume",
         name: "jdSingle",
@@ -80,7 +79,7 @@ export async function POST(req: any) {
       `;
 
     const response: any = await openai.chat.completions.create({
-      model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IKUVjUg",
+      model: model || "gpt-3.5-turbo",
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
