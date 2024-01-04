@@ -26,7 +26,7 @@ export async function POST(req: any) {
     const reqBody = await req.json();
     const experience = reqBody?.experience;
     const personName = reqBody?.personName;
-    const dataset = "resume.writeJDSingle";
+    const dataset = "linkedin.jobDescription";
     const model = await getTrainedModel(dataset);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
     await startDB()
