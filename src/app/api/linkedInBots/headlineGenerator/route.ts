@@ -49,6 +49,8 @@ export async function POST(req: any) {
 
     const dataset = "linkedin.headlines";
     const model = await getTrainedModel(dataset);
+    console.log(model);
+
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
     const inputPrompt = `Read ${personName}'s resume : ${JSON.stringify(userData)}
@@ -58,7 +60,7 @@ export async function POST(req: any) {
           `;
 
     const response: any = await openai.chat.completions.create({
-      model: model || "gpt-3.5-turbo",
+      model: model ? model : "gpt-3.5-turbo",
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });

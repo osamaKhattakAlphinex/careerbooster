@@ -42,7 +42,7 @@ export async function POST(req: any) {
                 ${prompt}`;
 
         const response: any = await openai.chat.completions.create({
-          model: model || "gpt-3.5-turbo",
+          model: model ? model : "gpt-3.5-turbo",
           stream: true,
           messages: [{ role: "user", content: input }],
         });
