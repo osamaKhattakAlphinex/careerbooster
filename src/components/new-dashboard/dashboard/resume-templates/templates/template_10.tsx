@@ -647,7 +647,12 @@ const ResumeTemplate10 = ({
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
-                  <div key={i} className="flex justify-center items-center">
+                  <div
+                    key={i}
+                    className={`flex justify-center items-center ${
+                      i > 0 ? "w-[100vw] ml-[-234px] xs:ml-0 xs:w-full" : "mb-5"
+                    }`}
+                  >
                     <div
                       key={i}
                       className="hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2  flex flex-col w-full  "
