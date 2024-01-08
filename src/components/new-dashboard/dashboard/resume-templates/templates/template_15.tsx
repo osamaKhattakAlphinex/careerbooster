@@ -306,7 +306,7 @@ const ResumeTemplate15 = ({
     <div className="w-full first-page relative text-gray-900">
       <div className="flex absolute xs:px-3 top-0 left-1/3 py-8 xs:py-4 md:py-8 ">
         <div className="flex flex-col py-8">
-          <h2 className="text-2xl md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-2xl md:text-4xl border-2 font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -316,7 +316,7 @@ const ResumeTemplate15 = ({
               }}
             />
           </h2>
-          <h3 className="text-[16px] text-center md:text-xl hover:shadow-md mt-2 hover:bg-gray-100">
+          <h3 className="text-[16px] text-center md:text-xl hover:shadow-md my-2 hover:bg-gray-100">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
