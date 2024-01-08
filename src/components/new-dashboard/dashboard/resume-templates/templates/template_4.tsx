@@ -305,7 +305,7 @@ const ResumeTemplate4 = ({
   return (
     <div className="first-page ">
       <div className=" flex">
-        <div className=" w-4/12 xs:w-1/3 md:w-4/12 flex flex-col pl-3 md:pl-8 bg-[#323B4C] text-gray-100  pr-6  py-8 h-[1450px] ">
+        <div className=" w-4/12 xs:w-1/3 md:w-4/12 flex flex-col pl-3 md:pl-8 bg-[#323B4C] text-gray-100  pr-6  py-8 h-[1198px] ">
           <div className=" w-24 h-24 md:w-32 md:h-32 text-white bg-gray-800 text-center flex justify-center items-center  rounded-full mx-4 xs:mx-0 md:mx-4 mt-4 mb-[45px] md:mt-0 md:mr-8">
             <span className="text-4xl  hover:shadow-md hover:bg-gray-500">
               <EditableField
