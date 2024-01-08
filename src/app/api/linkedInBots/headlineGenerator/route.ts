@@ -49,7 +49,6 @@ export async function POST(req: any) {
 
     const dataset = "linkedin.headlines";
     const model = await getTrainedModel(dataset);
-    console.log(model);
 
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
