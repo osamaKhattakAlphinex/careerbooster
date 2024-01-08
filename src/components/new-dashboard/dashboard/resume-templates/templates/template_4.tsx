@@ -649,7 +649,7 @@ const ResumeTemplate4 = ({
                       onDrop={(e) => handleDropExperience(e, i)}
                       draggable
                     >
-                      <h2 className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-[1.3rem] xs:text-lg sm:text-lg md:text-[1.3rem] lg:text-[1.3rem]">
+                      <h2 className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-[1.3rem] xs:text-lg sm:text-lg md:text-[1.3rem] font-bold">
                         <EditableField
                           value={rec?.title}
                           style={{ width: "100%" }}
@@ -678,7 +678,7 @@ const ResumeTemplate4 = ({
                         />
                       </h2>
                       <h2
-                        className="hover:cursor-default text-[1.1rem] xs:text-sm sm:text-sm md:text-[1.1rem] lg:text-[1.1rem]"
+                        className="hover:cursor-default text-[1.1rem] font-medium xs:text-sm sm:text-sm md:text-[1.1rem]"
                         style={{
                           lineHeight: "1.5rem",
                         }}
