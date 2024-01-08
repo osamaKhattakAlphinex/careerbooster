@@ -325,7 +325,7 @@ const ResumeTemplate8 = ({
               }}
             />
           </h3>
-          <ul className="w-full flex flex-row xs:flex-col md:flex-row gap-3 my-4 text-sm md:text-lg break-all pl-0 justify-between">
+          <ul className="w-full flex flex-row xs:flex-col md:flex-row gap-3 mt-8 mb-4 text-sm md:text-lg break-all pl-0 justify-between">
             <li className="hover:shadow-md hover:bg-gray-100 text-sm  flex flex-row gap-1  items-center">
               {phoneIcon}
               <EditableField
@@ -947,7 +947,7 @@ const ResumeTemplate8 = ({
               </h3>
               <span className="border-stylee w-full h-0 border !border-gray-500 mb-3"></span>
               <ul
-                className="pl-0 flex flex-wrap "
+                className="flex xs:flex-col md:flex-row lg:flex-row w-full  flex-wrap pl-0 "
                 onMouseEnter={() =>
                   !newEducation && setEducationAddButtonVisible(true)
                 }
@@ -957,7 +957,7 @@ const ResumeTemplate8 = ({
               >
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="w-[50%]">
+                    <div className="w-[30%] xs:w-full md:w-[30%] md:m-2">
                       <li
                         className=" hover:shadow-md hover:cursor-move 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 

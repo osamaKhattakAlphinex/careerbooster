@@ -730,8 +730,8 @@ const ResumeTemplate7 = ({
 
           {/* Education */}
           {resume?.education && (
-            <div className="px-10 py-4">
-              <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center ">
+            <div className="px-10 py-6">
+              <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center mb-4 ">
                 {educationIcon}
                 Education
               </h3>
@@ -967,13 +967,13 @@ const ResumeTemplate7 = ({
 
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <div className="px-2 ">
-              <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center mt-4">
+              <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center my-4">
                 {sparkleIcon}
                 Skills
               </h3>
 
               <ul
-                className="pl-0 flex  flex-col gap-1 mb-4 text-sm md:text-lg"
+                className="pl-0 flex  flex-col gap-1 mb-4 text-[12px] md:text-lg"
                 onMouseEnter={() =>
                   !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                 }
@@ -983,7 +983,7 @@ const ResumeTemplate7 = ({
               >
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
-                    className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex gap-2 items-center"
+                    className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex gap-4 items-center"
                     key={i}
                     onDragStart={(e) =>
                       e.dataTransfer.setData("text/plain", i.toString())
