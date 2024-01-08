@@ -341,7 +341,7 @@ const ResumeTemplate10 = ({
       </div>
       <div className=" flex">
         {/* sidebar */}
-        <div className="z-5 min-h-screen  ml-10 xs:ml-0 sm:ml-0 md:ml-10 lg:ml-10 w-5/12 md:w-1/3 flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6 bg-gray-950 text-gray-100  pr-6  pb-8 h-auto pt-[300px]">
+        <div className="z-5    w-5/12  flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6 bg-gray-950 text-gray-100  pr-6  pb-8  pt-[300px] h-[1020px] xs:h-auto">
           {/* contacts */}
           <div className="rounded-3xl border-2 border-blue-900 p-2">
             <h3 className="uppercase text-lg mb-0 xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold flex flex-row gap-2 items-center">
@@ -647,7 +647,12 @@ const ResumeTemplate10 = ({
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
-                  <div key={i} className="flex justify-center items-center">
+                  <div
+                    key={i}
+                    className={`flex justify-center items-center ${
+                      i > 0 ? " ml-[-200px] xs:ml-0 " : "mb-5"
+                    }`}
+                  >
                     <div
                       key={i}
                       className="hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2  flex flex-col w-full  "
@@ -890,7 +895,7 @@ const ResumeTemplate10 = ({
                         )}
                         {newWorkExperience === i ? (
                           <>
-                            <div className="w-full gap-1 rounded-md flex flex-wrap h-9.5">
+                            <div className="w-full gap-1 rounded-md flex flex-wrap    xs:ml-0">
                               <textarea
                                 className="w-full md:w-9/12 rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
                                 onChange={(e) =>
@@ -1014,7 +1019,7 @@ const ResumeTemplate10 = ({
           )}
           {/* Education */}
           {resume?.education && (
-            <div className="">
+            <div className="ml-[-180px] xs:ml-0">
               <div className="rounded-3xl  bg-blue-900 py-2 px-6 my-6 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-[250px] xs:w-[190px] sm:w-[190px] md:w-[250px] lg:w-[250px]">
                 <h3 className="uppercase text-lg mb-0 font-semibold text-gray-100 xs:text-sm sm:text-sm md:text-md lg:text-lg ">
                   Education
@@ -1032,7 +1037,7 @@ const ResumeTemplate10 = ({
               >
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="flex flex-col w-[30%] xs:w-full md:w-[30%]">
+                    <div className="flex flex-col w-[28%] mr-4 xs:w-full md:w-[30%] md:m-2">
                       <li
                         className=" hover:shadow-md hover:cursor-move 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 

@@ -441,7 +441,8 @@ const ResumeTemplate17 = ({
                 {sparkleIcon}
                 Skills
               </h3>
-              <span className="border-stylee w-full h-0  my-1"></span>
+              <span className="border-stylee w-full h-0  my-3"></span>
+
               <ul
                 className="pl-0 flex  flex-col gap-1 mb-4 text-gray-300 w-full text-sm "
                 onMouseEnter={() =>
