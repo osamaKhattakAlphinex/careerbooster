@@ -305,7 +305,7 @@ const ResumeTemplate4 = ({
   return (
     <div className="first-page ">
       <div className=" flex">
-        <div className=" w-4/12 xs:w-1/3 md:w-4/12 flex flex-col pl-3 md:pl-8 bg-[#323B4C] text-gray-100  pr-6  py-8 h-[998px] ">
+        <div className=" w-4/12 xs:w-1/3 md:w-4/12 flex flex-col pl-3 md:pl-8 bg-[#323B4C] text-gray-100  pr-6  py-8 h-[1020px] xs:h-auto">
           <div className=" w-24 h-24 md:w-32 md:h-32 text-white bg-gray-800 text-center flex justify-center items-center  rounded-full mx-4 xs:mx-0 md:mx-4 mt-4 mb-[45px] md:mt-0 md:mr-8">
             <span className="text-4xl  hover:shadow-md hover:bg-gray-500">
               <EditableField
@@ -626,11 +626,16 @@ const ResumeTemplate4 = ({
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
-                  <div key={i} className={`flex justify-center items-center ${i > 0 ? 'w-[75vw] ml-[-234px] ' : 'mb-5'}`}>
+                  <div
+                    key={i}
+                    className={`flex justify-center items-center ${
+                      i > 0 ? "w-[100vw] ml-[-234px] xs:ml-0 xs:w-full" : "mb-5"
+                    }`}
+                  >
                     <div className="w-[5%] pr-5 xs:pr-0 md:pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
                       {resume?.workExperienceArray.length - 1 !== i && (
@@ -968,7 +973,7 @@ const ResumeTemplate4 = ({
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                           <div
                             className="border-2 w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
@@ -996,13 +1001,14 @@ const ResumeTemplate4 = ({
             ></div>
           )}
           {/* Education */}
+
           {resume?.education && (
-            <>
+            <div className=" ml-[-180px]  xs:ml-0">
               <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center mt-5">
                 {educationIcon}
                 Education
               </h3>
-              <span className="border-stylee  h-0 border !border-gray-100 my-3"></span>
+              <span className="border-stylee block h-0 border !border-gray-100 my-3"></span>
               <ul
                 className="pl-0 flex xs:flex-col md:flex-row lg:flex-row w-full  flex-wrap"
                 onMouseEnter={() =>
@@ -1014,7 +1020,7 @@ const ResumeTemplate4 = ({
               >
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="w-[30%] xs:w-full md:w-[30%] md:m-2">
+                    <div className="w-[28%] mr-4 xs:w-full md:w-[30%] md:m-2">
                       <li
                         className=" hover:shadow-md hover:cursor-move 
                 parent hover:border-dashed hover:border-gray-500 hover:border-2 
@@ -1138,7 +1144,7 @@ const ResumeTemplate4 = ({
                   </React.Fragment>
                 ))}
               </ul>
-            </>
+            </div>
           )}
         </div>
       </div>
