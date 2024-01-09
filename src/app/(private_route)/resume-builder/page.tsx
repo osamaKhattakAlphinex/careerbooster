@@ -234,11 +234,10 @@ const ResumeBuilder = () => {
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
         
-        ${experience?.fromMonth} ${experience?.fromYear} - ${
-          experience?.isContinue
+        ${experience?.fromMonth} ${experience?.fromYear} - ${experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
-        } | ${experience?.company} | 
+          } | ${experience?.company} | 
         ${experience?.cityState} ${experience?.country}
                   </h2>`;
         html += `<div>`;
@@ -661,16 +660,15 @@ const ResumeBuilder = () => {
               <div className={`my-10   `}>
                 {/* <Link href="#" className="text-black">Preview</Link> */}
                 <div
-                  className={`bg-white  ${
-                    resumeData.state.resumeLoading ? "animate-pulse" : ""
-                  }`}
+                  className={`bg-white  ${resumeData.state.resumeLoading ? "animate-pulse" : ""
+                    }`}
                   ref={componentRef}
-                  style={{
-                    height: `${sectionHeight}px`,
-                    transform: "scale(0.5)",
-                    width: `${sectionWidth}px`,
-                    overflowY: "hidden",
-                  }}
+                // style={{
+                //   height: `${sectionHeight}px`,
+                //   transform: "scale(0.5)",
+                //   width: `${sectionWidth}px`,
+                //   overflowY: "hidden",
+                // }}
                 >
                   <ResumeTemplate1
                     streamedSummaryData={streamedSummaryData}
@@ -687,12 +685,12 @@ const ResumeBuilder = () => {
             </div>
           )}
 
-          <button onClick={showPrevSection} className="text-white">
+          {/* <button onClick={showPrevSection} className="text-white">
             Prev
           </button>
           <button onClick={showNextSection} className="text-white">
             Next
-          </button>
+          </button> */}
         </div>
       </div>
     </>
