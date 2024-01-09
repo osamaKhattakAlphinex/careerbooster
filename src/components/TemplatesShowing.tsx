@@ -101,7 +101,9 @@ const TemplatesShowing = () => {
                         - Select Template
                     </button>
                     {selectedTemplate && (
-                        // Render the selected template
+                        // Render the selected 
+                        // {selectedTemplate.template({})}
+
                         <selectedTemplate.template />
                     )}
                 </div>

@@ -657,26 +657,40 @@ const ResumeBuilder = () => {
             (resumeData?.name ||
               resumeData?.contact?.email ||
               resumeData?.summary) && (
-              <div className={`my-10   `}>
-                {/* <Link href="#" className="text-black">Preview</Link> */}
-                <div
-                  className={`bg-white  ${resumeData.state.resumeLoading ? "animate-pulse" : ""
-                    }`}
-                  ref={componentRef}
-                // style={{
-                //   height: `${sectionHeight}px`,
-                //   transform: "scale(0.5)",
-                //   width: `${sectionWidth}px`,
-                //   overflowY: "hidden",
-                // }}
+              <>
+                <Link
+                  href="/resume-edit"
+                  className="no-underline  text-white rounded-lg overflow-hidden"
                 >
-                  <ResumeTemplate1
-                    streamedSummaryData={streamedSummaryData}
-                    streamedJDData={streamedJDData}
-                    saveResumeToDB={saveResumeToDB}
-                  />
+                  <div
+                    className={`rounded-lg font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 w-fit border border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
+                  >
+                    Preview/Edit Resume
+                  </div>
+                </Link>
+                <div className={`my-10   `}>
+                  {/* <Link href="#" className="text-black">Preview</Link> */}
+
+                  <div
+                    className={`bg-white  ${resumeData.state.resumeLoading ? "animate-pulse" : ""
+                      }`}
+                    ref={componentRef}
+                  // style={{
+                  //   height: `${sectionHeight}px`,
+                  //   transform: "scale(0.5)",
+                  //   width: `${sectionWidth}px`,
+                  //   overflowY: "hidden",
+                  // }}
+                  >
+                    <ResumeTemplate1
+                      streamedSummaryData={streamedSummaryData}
+                      streamedJDData={streamedJDData}
+                      saveResumeToDB={saveResumeToDB}
+                    />
+                  </div>
                 </div>
-              </div>
+              </>
+
             )}
           {showPopup && (
             <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
