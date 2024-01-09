@@ -2,6 +2,7 @@
 
 import { useFormik } from "formik";
 
+import ResumePreviews from "@/components/ResumePreviews";
 import React from "react";
 
 type Education = {
@@ -299,7 +300,7 @@ const Editor = () => {
 
   return (
     <div className="w-full flex flex-row justify-start items-start">
-      <div className="w-3/5 p-10 bg-gray-200 text-gray-900">
+      <div className="w-7/12 p-10 bg-gray-200 text-gray-900">
         <div className="w-full  grid grid-cols-2 gap-6">
           {/* Name and Short Name */}
           <div className="col-span-2 flex flex-row gap-2 ">
@@ -431,7 +432,10 @@ const Editor = () => {
         </div>
       </div>
 
-      <div className="w-2/5">2</div>
+
+      <div className="w-5/12 bg-slate-200 h-screen">
+        <ResumePreviews />
+      </div>
     </div>
   );
 };

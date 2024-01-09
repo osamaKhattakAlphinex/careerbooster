@@ -24,86 +24,87 @@ import {
 } from "@/helpers/iconsProvider";
 import useGetSummary from "@/helpers/useGetSummary";
 import Regenerate from "@/helpers/regenerate";
-import { EditableField } from "@/components/EditableField";
 
-// const EditableField = ({
-//   value,
-//   type,
-//   rows,
-//   onSave,
-//   style,
-// }: {
-//   value: string;
-//   type?: string;
-//   rows?: number;
-//   style?: any;
-//   onSave: (value: string) => void;
-// }) => {
-//   const [isEditing, setIsEditing] = useState(false);
-//   const [editedValue, setEditedValue] = useState(value);
-//   const [showPopup, setShowPopup] = useState(false);
-//   useEffect(() => {
-//     setTimeout(() => {
-//       setShowPopup(false);
-//     }, 5000);
-//     // Clean up the timeout to avoid memory leaks
-//   }, [showPopup]); // The empty dependency array ensures that this effect runs only once after the initial render
+const EditableField = ({
+  value,
+  type,
+  rows,
+  onSave,
+  style,
+}: {
+  value: string;
+  type?: string;
+  rows?: number;
+  style?: any;
+  onSave: (value: string) => void;
+}) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedValue, setEditedValue] = useState(value);
+  const [showPopup, setShowPopup] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 5000);
+    // Clean up the timeout to avoid memory leaks
+  }, [showPopup]); // The empty dependency array ensures that this effect runs only once after the initial render
 
-//   const userData = useSelector((state: any) => state.userData);
-//   const handleBlur = () => {
-//     setIsEditing(false);
-//     onSave(editedValue);
-//   };
+  const userData = useSelector((state: any) => state.userData);
+  const handleBlur = () => {
+    setIsEditing(false);
+    onSave(editedValue);
+  };
 
-//   useEffect(() => {
-//     if (value !== editedValue) {
-//       setEditedValue(value);
-//     }
-//   }, [value]);
-//   const showAlertpopupFun = () => {
-//     !userData?.userPackageData?.limit?.can_edit_resume &&
-//       alert("please upgrade to pro plan in order to edit !");
-//   };
-//   return (
-//     <>
-//       <span
-//         onClick={() => {
-//           setIsEditing(true);
-//           //showAlertpopupFun();
-//         }}
-//         onBlur={handleBlur}
-//         className=""
-//       >
-//         {userData?.userPackageData?.limit?.can_edit_resume && isEditing ? (
-//           <>
-//             {type === "textarea" ? (
-//               <textarea
-//                 value={editedValue}
-//                 className="bg-transparent pr-2 w-full hover:cursor-text  h-auto"
-//                 rows={rows ? rows : 15}
-//                 onChange={(e: any) => setEditedValue(e.target.value)}
-//                 autoFocus
-//                 onBlur={handleBlur}
-//               />
-//             ) : (
-//               <input
-//                 type="text"
-//                 value={editedValue}
-//                 className=" bg-transparent pr-2 hover:cursor-text"
-//                 style={style ? style : {}}
-//                 onChange={(e: any) => setEditedValue(e.target.value)}
-//                 autoFocus
-//                 onBlur={handleBlur}
-//               />
-//             )}
-//           </>
-//         ) : (
-//           <span className="hover:cursor-text">{value}</span>
-//         )}
-//       </span>
-//     </>
-//   );
-// };
+  useEffect(() => {
+    if (value !== editedValue) {
+      setEditedValue(value);
+    }
+  }, [value]);
+  const showAlertpopupFun = () => {
+    !userData?.userPackageData?.limit?.can_edit_resume &&
+      alert("please upgrade to pro plan in order to edit !");
+  };
+  return (
+    <>
+      <span
+        onClick={() => {
+          setIsEditing(true);
+          //showAlertpopupFun();
+        }}
+        onBlur={handleBlur}
+        className=""
+      >
+        {userData?.userPackageData?.limit?.can_edit_resume && isEditing ? (
+          <>
+            {type === "textarea" ? (
+              <textarea
+                value={editedValue}
+                className="bg-transparent pr-2 w-full hover:cursor-text  h-auto"
+                rows={rows ? rows : 15}
+                onChange={(e: any) => setEditedValue(e.target.value)}
+                autoFocus
+                onBlur={handleBlur}
+              />
+            ) : (
+              <input
+                type="text"
+                value={editedValue}
+                className=" bg-transparent pr-2 hover:cursor-text"
+                style={style ? style : {}}
+                onChange={(e: any) => setEditedValue(e.target.value)}
+                autoFocus
+                onBlur={handleBlur}
+              />
+            )}
+          </>
+        ) : (
+          <span className="hover:cursor-text" title="click to edit">
+            {value}
+          </span>
+        )}
+      </span>
+    </>
+  );
+};
 
 const ResumeTemplate2 = ({
   streamedSummaryData,
@@ -832,17 +833,16 @@ const ResumeTemplate2 = ({
           WORK EXPERIENCE
         </h3>
         {resume?.workExperienceArray &&
-        resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
           <>
             {resume?.workExperienceArray.map((rec: any, i: number) => {
               return (
                 <div
                   key={i}
-                  className={`${
-                    i === resume?.workExperienceArray.length - 1
+                  className={`${i === resume?.workExperienceArray.length - 1
                       ? ""
                       : "border-b border-gray-200"
-                  } grid grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
+                    } grid grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
                   onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                   onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                   onDragStart={(e) =>
@@ -1164,9 +1164,9 @@ const ResumeTemplate2 = ({
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                      newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                         <div
-                          className="border-2 w-2/12 xs:w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                          className="border-2 w-2/12 mt-3 xs:w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {
                             setNewWorkExperience(i);
                           }}

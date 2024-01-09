@@ -234,11 +234,10 @@ const ResumeBuilder = () => {
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
         
-        ${experience?.fromMonth} ${experience?.fromYear} - ${
-          experience?.isContinue
+        ${experience?.fromMonth} ${experience?.fromYear} - ${experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
-        } | ${experience?.company} | 
+          } | ${experience?.company} | 
         ${experience?.cityState} ${experience?.country}
                   </h2>`;
         html += `<div>`;
@@ -465,10 +464,11 @@ const ResumeBuilder = () => {
   };
 
   const [contentHeight, setContentHeight] = useState(0);
+  const [previewTemplate, setPreviewTemplate] = useState(true);
   const sectionHeight = 1123; // Define your section height in pixels
   const sectionWidth = 794; // Define your section width in pixels
   const numSections = Math.ceil(contentHeight / sectionHeight);
-  let currentSection = 0;
+  const [currentSection, setCurrentSection] = useState(1);
 
   useEffect(() => {
     if (componentRef.current) {
@@ -480,14 +480,16 @@ const ResumeBuilder = () => {
 
   const showNextSection = () => {
     if (currentSection < numSections - 1) {
-      currentSection++;
+      setCurrentSection(currentSection + 1);
+      console.log(currentSection);
       componentRef.current.scrollTop = currentSection * sectionHeight;
     }
   };
 
   const showPrevSection = () => {
     if (currentSection > 0) {
-      currentSection--;
+      setCurrentSection(currentSection - 1);
+      console.log(currentSection);
       componentRef.current.scrollTop = currentSection * sectionHeight;
     }
   };
@@ -658,27 +660,49 @@ const ResumeBuilder = () => {
             (resumeData?.name ||
               resumeData?.contact?.email ||
               resumeData?.summary) && (
-              <div className={`my-10   `}>
-                {/* <Link href="#" className="text-black">Preview</Link> */}
-                <div
-                  className={`bg-white  ${
-                    resumeData.state.resumeLoading ? "animate-pulse" : ""
-                  }`}
-                  ref={componentRef}
-                  style={{
-                    height: `${sectionHeight}px`,
-                    transform: "scale(0.5)",
-                    width: `${sectionWidth}px`,
-                    overflowY: "hidden",
-                  }}
-                >
-                  <ResumeTemplate1
-                    streamedSummaryData={streamedSummaryData}
-                    streamedJDData={streamedJDData}
-                    saveResumeToDB={saveResumeToDB}
-                  />
+              <>
+                <Link href="/resume-edit">
+                  <div
+                    className={`rounded-lg font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 w-fit border border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
+                  >
+                    Preview/Edit Resume
+                  </div>
+                </Link>
+                <div className={`my-10   `}>
+                  {/* <Link href="#" className="text-black">Preview</Link> */}
+                  <div
+                    className={`bg-white  ${resumeData.state.resumeLoading ? "animate-pulse" : ""
+                      }`}
+                    ref={componentRef}
+                    // style={{
+                    //   height: `${sectionHeight}px`,
+                    //   transform: "scale(0.5)",
+                    //   width: `${sectionWidth}px`,
+                    //   overflowY: "hidden",
+                    // }}
+
+                    style={{
+                      height: previewTemplate ? `${sectionHeight}px` : "auto",
+                      width: previewTemplate ? `${sectionWidth}px` : "auto",
+                      transform: previewTemplate ? "scale(0.5)" : "none",
+
+                      overflowY: previewTemplate ? "hidden" : "visible",
+                    }}
+                  >
+
+
+                    {/* <Link href="#" className="text-black">Preview</Link> */}
+
+
+                    <ResumeTemplate1
+                      streamedSummaryData={streamedSummaryData}
+                      streamedJDData={streamedJDData}
+                      saveResumeToDB={saveResumeToDB}
+                    />
+                  </div>
                 </div>
-              </div>
+              </>
+
             )}
           {showPopup && (
             <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
@@ -686,13 +710,44 @@ const ResumeBuilder = () => {
               Credit Limit Reached !
             </div>
           )}
+          {previewTemplate && (
+            <div className="flex items-center absolute left-[380px] top-[200px]">
+              <button onClick={showPrevSection} className="text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 19.5 8.25 12l7.5-7.5"
+                  />
+                </svg>
+              </button>
+              {currentSection}
 
-          <button onClick={showPrevSection} className="text-white">
-            Prev
-          </button>
-          <button onClick={showNextSection} className="text-white">
-            Next
-          </button>
+              <button onClick={showNextSection} className="text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                  />
+                </svg>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>
