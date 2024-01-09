@@ -121,6 +121,7 @@ const ResumeBuilder = () => {
   //     }
   //   }
   // };
+
   const getBasicInfo = async () => {
     // dispatch(setLoadingState("basicInfo"));
     // return makeAPICallWithRetry(async () => {
@@ -463,6 +464,34 @@ const ResumeBuilder = () => {
     // });
   };
 
+  const [contentHeight, setContentHeight] = useState(0);
+  const sectionHeight = 1123; // Define your section height in pixels
+  const sectionWidth = 794; // Define your section width in pixels
+  const numSections = Math.ceil(contentHeight / sectionHeight);
+  let currentSection = 0;
+
+  useEffect(() => {
+    if (componentRef.current) {
+      const height = componentRef.current.scrollHeight;
+
+      setContentHeight(height);
+    }
+  }, [componentRef.current]); // Recalculate contentHeight when it changes
+
+  const showNextSection = () => {
+    if (currentSection < numSections - 1) {
+      currentSection++;
+      componentRef.current.scrollTop = currentSection * sectionHeight;
+    }
+  };
+
+  const showPrevSection = () => {
+    if (currentSection > 0) {
+      currentSection--;
+      componentRef.current.scrollTop = currentSection * sectionHeight;
+    }
+  };
+
   const saveResumeToDB = async (data: any = "") => {
     // return makeAPICallWithRetry(async () => {
     const source = data === "" ? resumeData : data;
@@ -629,22 +658,27 @@ const ResumeBuilder = () => {
             (resumeData?.name ||
               resumeData?.contact?.email ||
               resumeData?.summary) && (
-              <>
-                <div className={`my-10  w-[100%] bg-white`}>
-                  <div
-                    className={`w-full  ${
-                      resumeData.state.resumeLoading ? "animate-pulse" : ""
-                    }`}
-                    ref={componentRef}
-                  >
-                    <ResumeTemplate1
-                      streamedSummaryData={streamedSummaryData}
-                      streamedJDData={streamedJDData}
-                      saveResumeToDB={saveResumeToDB}
-                    />
-                  </div>
+              <div className={`my-10   `}>
+                {/* <Link href="#" className="text-black">Preview</Link> */}
+                <div
+                  className={`bg-white  ${
+                    resumeData.state.resumeLoading ? "animate-pulse" : ""
+                  }`}
+                  ref={componentRef}
+                  style={{
+                    height: `${sectionHeight}px`,
+                    transform: "scale(0.5)",
+                    width: `${sectionWidth}px`,
+                    overflowY: "hidden",
+                  }}
+                >
+                  <ResumeTemplate1
+                    streamedSummaryData={streamedSummaryData}
+                    streamedJDData={streamedJDData}
+                    saveResumeToDB={saveResumeToDB}
+                  />
                 </div>
-              </>
+              </div>
             )}
           {showPopup && (
             <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
@@ -652,6 +686,13 @@ const ResumeBuilder = () => {
               Credit Limit Reached !
             </div>
           )}
+
+          <button onClick={showPrevSection} className="text-white">
+            Prev
+          </button>
+          <button onClick={showNextSection} className="text-white">
+            Next
+          </button>
         </div>
       </div>
     </>

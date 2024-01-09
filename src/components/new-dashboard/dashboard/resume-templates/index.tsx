@@ -23,25 +23,25 @@ const tabs: Tabs[] = [
   {
     tab: "all-templates",
     description:
-      "An excellent choice for those with an extensive work history and clear career trajectory",
+      "A comprehensive collection catering to various professional styles and preferences, ensuring there's something for everyone",
     title: "All Templates",
   },
   {
     tab: "classic-executive",
     description:
-      "An excellent choice for those with an extensive work history and clear career trajectory",
+      "Perfect for showcasing a traditional yet refined professional profile, emphasizing experience and leadership skills",
     title: "Classic Executive",
   },
   {
     tab: "creative-colorful",
     description:
-      "An excellent choice for those with an extensive work history and clear career trajectory",
+      "Unleash your creativity with vibrant designs, ideal for professions that value innovation and originality",
     title: "Creative/Colorful",
   },
   {
     tab: "one-page",
     description:
-      "An excellent choice for those with an extensive work history and clear career trajectory",
+      "A concise and impactful format for those looking to present their career succinctly, perfect for time-conscious industries",
     title: "One Page",
   },
 ];
@@ -61,7 +61,7 @@ const Templates = () => {
     }
   };
   useEffect(() => {
-console.log("templates")
+    console.log("templates")
   }, [templates]);
   useEffect(() => {
     setTemplates(ALL_TEMPLATES);
