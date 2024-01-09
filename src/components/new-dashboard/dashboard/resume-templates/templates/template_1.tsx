@@ -317,7 +317,7 @@ const ResumeTemplate1 = ({
   };
 
   return (
-    <div id="resumeContent" className="w-full first-page  text-gray-900">
+    <div className="w-full first-page  text-gray-900">
       <div className="flex">
         <div className="flex flex-col w-10/12 p-8">
           <h2 className="text-4xl xs:text-2xl md:4xl lg:text-6xl  hover:shadow-md hover:bg-gray-100">
@@ -742,7 +742,7 @@ const ResumeTemplate1 = ({
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
           {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+            resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
@@ -1080,7 +1080,7 @@ const ResumeTemplate1 = ({
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                      newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                         <div
                           className="border-2 w-2/12 mt-3 xs:w-full md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {

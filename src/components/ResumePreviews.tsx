@@ -4,7 +4,6 @@ import TemplatesShowing from "./TemplatesShowing";
 const ResumePreviews = () => {
     return <div >
         <TemplatesShowing />
-
     </div>;
 };
 
