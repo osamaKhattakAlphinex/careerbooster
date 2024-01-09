@@ -97,7 +97,9 @@ const EditableField = ({
             )}
           </>
         ) : (
-          <span className="hover:cursor-text">{value}</span>
+          <span className="hover:cursor-text" title="click to edit">
+            {value}
+          </span>
         )}
       </span>
     </>
@@ -613,7 +615,7 @@ const ResumeTemplate7 = ({
                           <>
                             <div className="w-full gap-1 rounded-md flex flex-wrap h-9.5">
                               <textarea
-                                className="w-full rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
+                                className="w-9/12 xs:w-full md:w-9/12 lg:w-9/12 rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
                                 onChange={(e) =>
                                   setNewAchievement(e.target.value)
                                 }
@@ -658,7 +660,7 @@ const ResumeTemplate7 = ({
                                 }}
                               />
                               <button
-                                className="bg-green-500 w-full md:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
+                                className="bg-green-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
                                 onClick={() => {
                                   // Save the new achievement to the state and possibly the database
                                   if (newAchievement !== "") {
@@ -699,7 +701,7 @@ const ResumeTemplate7 = ({
                                 setNewWorkExperience(-1);
                                 setWorkExperienceAddButtonVisible(-1);
                               }}
-                              className="bg-red-500 w-full md:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
+                              className="bg-red-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
                             >
                               Cancel
                             </button>
@@ -708,7 +710,7 @@ const ResumeTemplate7 = ({
                         {workExperienceAddButtonVisible === i &&
                         newWorkExperience !== i ? (
                           <div
-                            className="border-2 w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                            className="border-2 w-2/12 xs:w-full mt-3 md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
                               setNewWorkExperience(i);
                             }}

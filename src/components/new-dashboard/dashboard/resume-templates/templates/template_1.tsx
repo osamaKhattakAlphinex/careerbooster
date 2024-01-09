@@ -79,7 +79,7 @@ const EditableField = ({
             {type === "textarea" ? (
               <textarea
                 value={editedValue}
-                className="bg-transparent pr-2 w-full hover:cursor-text  h-auto"
+                className="bg-transparent pr-2 w-full hover:cursor-text h-auto"
                 rows={rows ? rows : 15}
                 onChange={(e: any) => setEditedValue(e.target.value)}
                 autoFocus
@@ -89,7 +89,7 @@ const EditableField = ({
               <input
                 type="text"
                 value={editedValue}
-                className=" bg-transparent pr-2 hover:cursor-text"
+                className="bg-transparent pr-2 hover:cursor-text"
                 style={style ? style : {}}
                 onChange={(e: any) => setEditedValue(e.target.value)}
                 autoFocus
@@ -98,7 +98,9 @@ const EditableField = ({
             )}
           </>
         ) : (
-          <span className="hover:cursor-text">{value}</span>
+          <span className="hover:cursor-text" title="click to edit">
+            {value}
+          </span>
         )}
       </span>
     </>
@@ -360,7 +362,7 @@ const ResumeTemplate1 = ({
             Contact
           </h3>
           <ul className=" flex flex-row xs:flex-col md:flex-row justify-between mb-4 text-lg xs:text-sm md:text-lg lg:text-lg break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-100 text-sm flex flex-row gap-1  items-center">
+            <li className="hover:shadow-md hover:bg-gray-100  text-sm flex flex-row gap-1  items-center">
               {phoneIcon}
               <EditableField
                 value={
@@ -1030,7 +1032,7 @@ const ResumeTemplate1 = ({
                               }}
                             />
                             <button
-                              className="bg-green-500 w-2/12 xs:w-full md:2/12 lg:2/12 uppercase h-9 px-2 text-white rounded-r-md"
+                              className="bg-green-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
                               onClick={() => {
                                 // Save the new achievement to the state and possibly the database
                                 if (newAchievement !== "") {
@@ -1071,7 +1073,7 @@ const ResumeTemplate1 = ({
                               setNewWorkExperience(-1);
                               setWorkExperienceAddButtonVisible(-1);
                             }}
-                            className="bg-red-500 w-2/12 xs:w-full md:2/12 lg:2/12 py-1 px-2 mt-2 text-white rounded-full"
+                            className="bg-red-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
                           >
                             Cancel
                           </button>
@@ -1080,7 +1082,7 @@ const ResumeTemplate1 = ({
                       {workExperienceAddButtonVisible === i &&
                       newWorkExperience !== i ? (
                         <div
-                          className="border-2 w-2/12 xs:w-full md:2/12 lg:2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                          className="border-2 w-2/12 mt-3 xs:w-full md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {
                             setNewWorkExperience(i);
                           }}
