@@ -68,35 +68,37 @@ const ResumeBuilder = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
- 
 
   // Redux
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
-  const handleGenerate = useCallback(async (quantifyingExperience:boolean) => {
-    await getUserDataIfNotExists();
-    // reset resume
-    dispatch(resetResume(resumeData.state));
-    if (resumeData.state.jobPosition !== "" && session?.user?.email) {
-      dispatch(setState({ name: "resumeLoading", value: true }));
-      dispatch(setId(""));
-      getBasicInfo();
-      getSummary();
-      getPrimarySkills();
-      // getProfessionalSkills();
-      // getSecondarySkills();
-      await getWorkExperienceNew(quantifyingExperience);
-      runConfetti();
-    } else {
-      setShowPopup(true);
+  const handleGenerate = useCallback(
+    async (quantifyingExperience: boolean) => {
+      await getUserDataIfNotExists();
+      // reset resume
+      dispatch(resetResume(resumeData.state));
+      if (resumeData.state.jobPosition !== "" && session?.user?.email) {
+        dispatch(setState({ name: "resumeLoading", value: true }));
+        dispatch(setId(""));
+        getBasicInfo();
+        getSummary();
+        getPrimarySkills();
+        // getProfessionalSkills();
+        // getSecondarySkills();
+        await getWorkExperienceNew(quantifyingExperience);
+        runConfetti();
+      } else {
+        setShowPopup(true);
 
-      // Hide the popup after 3 seconds
-      setTimeout(() => {
-        setShowPopup(false);
-      }, 3000);
-    }
-  }, [resumeData.state]);
+        // Hide the popup after 3 seconds
+        setTimeout(() => {
+          setShowPopup(false);
+        }, 3000);
+      }
+    },
+    [resumeData.state]
+  );
 
   // const makeAPICallWithRetry: any = async (
   //   apiFunction: any,
@@ -231,10 +233,11 @@ const ResumeBuilder = () => {
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
         
-        ${experience?.fromMonth} ${experience?.fromYear} - ${experience?.isContinue
+        ${experience?.fromMonth} ${experience?.fromYear} - ${
+          experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
-          } | ${experience?.company} | 
+        } | ${experience?.company} | 
         ${experience?.cityState} ${experience?.country}
                   </h2>`;
         html += `<div>`;
@@ -261,7 +264,7 @@ const ResumeBuilder = () => {
               fileAddress: userData.uploadedResume.fileName,
             },
             personName: userData.firstName + " " + userData.lastName,
-            jobTitle: resumeData.state.jobPosition
+            jobTitle: resumeData.state.jobPosition,
           }),
         });
         // const response = await res.json();
@@ -359,7 +362,7 @@ const ResumeBuilder = () => {
       body: JSON.stringify({
         type: "primarySkills",
         personName: userData?.firstName + " " + userData?.lastName,
-      
+
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
@@ -553,7 +556,6 @@ const ResumeBuilder = () => {
           <GenerateResume
             handleGenerate={handleGenerate}
             availablePercentage={availablePercentage}
-           
           />
           <div className="flex justify-center items-center">
             <Confetti active={confettingRunning} config={confettiConfig} />
@@ -565,7 +567,6 @@ const ResumeBuilder = () => {
                 design templates click here
               </p> */}
               <div className="flex justify-between items-center">
-
                 <h2 className=" text-base font-bold my-3">Design Templates</h2>
                 <Link
                   href="/resume-builder/templates"
@@ -587,7 +588,6 @@ const ResumeBuilder = () => {
                     {template.category === "premium" && (
                       <div className="absolute rounded-full right-1 top-1 h-6 w-6 grid place-content-center bg-yellow-600">
                         {crownIcon}
-
                       </div>
                     )}
                     <Link
@@ -622,8 +622,6 @@ const ResumeBuilder = () => {
                     </Link>
                   </div>
                 ))}
-
-
               </div>
             </div>
           )}
@@ -634,8 +632,9 @@ const ResumeBuilder = () => {
               <>
                 <div className={`my-10  w-[100%] bg-white`}>
                   <div
-                    className={`w-full  ${resumeData.state.resumeLoading ? "animate-pulse" : ""
-                      }`}
+                    className={`w-full  ${
+                      resumeData.state.resumeLoading ? "animate-pulse" : ""
+                    }`}
                     ref={componentRef}
                   >
                     <ResumeTemplate1
