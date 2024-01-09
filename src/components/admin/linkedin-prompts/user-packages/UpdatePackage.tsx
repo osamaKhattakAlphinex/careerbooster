@@ -130,7 +130,6 @@ const UpdatePackage = ({ userPackage, getPackages }: Props) => {
       }),
     }),
     onSubmit: async (values, action) => {
-      console.log(values);
       const res = await axios.put(`/api/packages/${packgeId}`, {
         type: values.type,
         title: values.title,
