@@ -95,7 +95,9 @@ const EditableField = ({
             )}
           </>
         ) : (
-          <span className="hover:cursor-text">{value}</span>
+          <span className="hover:cursor-text" title="click to edit">
+            {value}
+          </span>
         )}
       </span>
     </>
@@ -884,7 +886,7 @@ const ResumeTemplate9 = ({
                               }}
                             />
                             <button
-                              className="bg-green-500 w-2/12 xs:w-full md:2/12 lg:2/12 uppercase h-9 px-2 text-white rounded-r-md"
+                              className="bg-green-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
                               onClick={() => {
                                 // Save the new achievement to the state and possibly the database
                                 if (newAchievement !== "") {
@@ -925,7 +927,7 @@ const ResumeTemplate9 = ({
                               setNewWorkExperience(-1);
                               setWorkExperienceAddButtonVisible(-1);
                             }}
-                            className="bg-red-500 w-2/12 xs:w-full md:2/12 lg:2/12 py-1 px-2 mt-2 text-white rounded-full"
+                            className="bg-red-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
                           >
                             Cancel
                           </button>
@@ -934,7 +936,7 @@ const ResumeTemplate9 = ({
                       {workExperienceAddButtonVisible === i &&
                       newWorkExperience !== i ? (
                         <div
-                          className="border-2 w-2/12 xs:w-full md:2/12 lg:2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                          className="border-2 w-full xs:w-full mt-3 sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {
                             setNewWorkExperience(i);
                           }}

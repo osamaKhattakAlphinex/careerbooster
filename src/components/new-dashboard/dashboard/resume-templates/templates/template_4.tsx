@@ -95,7 +95,9 @@ const EditableField = ({
             )}
           </>
         ) : (
-          <span className="hover:cursor-text">{value}</span>
+          <span className="hover:cursor-text" title="click to edit">
+            {value}
+          </span>
         )}
       </span>
     </>
@@ -975,7 +977,7 @@ const ResumeTemplate4 = ({
                         {workExperienceAddButtonVisible === i &&
                         newWorkExperience !== i ? (
                           <div
-                            className="border-2 w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                            className="border-2 w-full mt-3 md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
                               setNewWorkExperience(i);
                             }}

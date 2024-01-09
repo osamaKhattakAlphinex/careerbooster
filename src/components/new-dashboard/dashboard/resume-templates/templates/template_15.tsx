@@ -95,7 +95,9 @@ const EditableField = ({
             )}
           </>
         ) : (
-          <span className="hover:cursor-text">{value}</span>
+          <span className="hover:cursor-text" title="click to edit">
+            {value}
+          </span>
         )}
       </span>
     </>
@@ -306,7 +308,7 @@ const ResumeTemplate15 = ({
     <div className="w-full first-page relative text-gray-900">
       <div className="flex absolute xs:px-3 top-0 left-1/3 py-8 xs:py-4 md:py-8 ">
         <div className="flex flex-col py-8">
-          <h2 className="text-2xl md:text-4xl border-2 font-bold hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-2xl md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -952,7 +954,7 @@ const ResumeTemplate15 = ({
                       {workExperienceAddButtonVisible === i &&
                       newWorkExperience !== i ? (
                         <div
-                          className="border-2 w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                          className="border-2 w-full xs:w-full mt-3 sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {
                             setNewWorkExperience(i);
                           }}
