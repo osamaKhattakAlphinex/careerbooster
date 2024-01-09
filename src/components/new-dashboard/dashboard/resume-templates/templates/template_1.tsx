@@ -23,6 +23,8 @@ import {
   sparkleIcon,
 } from "@/helpers/iconsProvider";
 import Image from "next/image";
+import Regenerate from "@/helpers/regenerate";
+import useGetSummary from "@/helpers/useGetSummary";
 
 const EditableField = ({
   value,
@@ -124,12 +126,13 @@ const ResumeTemplate1 = ({
     useState(false);
   const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
     useState(false);
+  const { getSummary } = useGetSummary();
 
   const [
     professionalSkillAddButtonVisible,
     setProfessionalSkillAddButtonVisible,
   ] = useState(false);
-  const imageRef = useRef<any>()
+  const imageRef = useRef<any>();
 
   const [workExperienceAddButtonVisible, setWorkExperienceAddButtonVisible] =
     useState<number>();
@@ -237,8 +240,9 @@ const ResumeTemplate1 = ({
   const handleImageChange = (e: any) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      if (selectedFile.size > 1048576) { // Check if file size is more than 1MB
-        alert('File size exceeds the limit of 1MB.');
+      if (selectedFile.size > 1048576) {
+        // Check if file size is more than 1MB
+        alert("File size exceeds the limit of 1MB.");
         return;
       }
 
@@ -311,7 +315,7 @@ const ResumeTemplate1 = ({
   };
 
   return (
-    <div className="w-full first-page  text-gray-900">
+    <div id="resumeContent" className="w-full first-page  text-gray-900">
       <div className="flex">
         <div className="flex flex-col w-10/12 p-8">
           <h2 className="text-4xl xs:text-2xl md:4xl lg:text-6xl  hover:shadow-md hover:bg-gray-100">
@@ -346,7 +350,6 @@ const ResumeTemplate1 = ({
             <input ref={imageRef} className="hidden" type="file" accept="image/*" onChange={handleImageChange} />
             Uplaod
           </button> */}
-
         </div>
       </div>
       <div className="">
@@ -712,24 +715,24 @@ const ResumeTemplate1 = ({
         </div>
         <div className="w-full flex flex-col px-8 xs:px-4 md:px-8 lg:px-8">
           {/* Executive Summary */}
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
           <h3 className="uppercase text-lg font-semibold">EXECUTIVE SUMMARY</h3>
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-
-          <div className="text-lg xs:text-sm md:text-lg lg:text-lg  hover:shadow-md hover:bg-gray-100">
-            <EditableField
-              type="textarea"
-              value={
-                resume?.summary !== ""
-                  ? resume?.summary
-                  : streamedSummaryData && streamedSummaryData
-              }
-              onSave={(value: string) => {
-                dispatch(setSummary(value));
-                saveResumeToDB({ ...resume, summary: value });
-              }}
-            />
-          </div>
+          <Regenerate handler={getSummary}>
+            <div className="text-lg xs:text-sm md:text-lg lg:text-lg  hover:shadow-md hover:bg-gray-100">
+              <EditableField
+                type="textarea"
+                value={
+                  resume?.summary !== ""
+                    ? resume?.summary
+                    : streamedSummaryData && streamedSummaryData
+                }
+                onSave={(value: string) => {
+                  dispatch(setSummary(value));
+                  saveResumeToDB({ ...resume, summary: value });
+                }}
+              />
+            </div>
+          </Regenerate>
 
           {/* Work Experience */}
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
@@ -737,7 +740,7 @@ const ResumeTemplate1 = ({
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
@@ -1075,7 +1078,7 @@ const ResumeTemplate1 = ({
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                      newWorkExperience !== i ? (
                         <div
                           className="border-2 w-2/12 xs:w-full md:2/12 lg:2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {

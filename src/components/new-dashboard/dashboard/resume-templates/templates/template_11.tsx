@@ -22,6 +22,8 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
+import useGetSummary from "@/helpers/useGetSummary";
+import Regenerate from "@/helpers/regenerate";
 
 const EditableField = ({
   value,
@@ -111,6 +113,8 @@ const ResumeTemplate11 = ({
   streamedJDData: string;
   saveResumeToDB: (data?: any) => Promise<void>;
 }) => {
+  const { getSummary } = useGetSummary();
+
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
@@ -585,20 +589,22 @@ const ResumeTemplate11 = ({
             <span className="border border-[#F4D644]  mt-2"></span>
           </div>
 
-          <div className="text-sm  hover:shadow-md hover:bg-gray-100">
-            <EditableField
-              type="textarea"
-              value={
-                resume?.summary !== ""
-                  ? resume?.summary
-                  : streamedSummaryData && streamedSummaryData
-              }
-              onSave={(value: string) => {
-                dispatch(setSummary(value));
-                saveResumeToDB({ ...resume, summary: value });
-              }}
-            />
-          </div>
+          <Regenerate handler={getSummary}>
+            <div className="text-sm  hover:shadow-md hover:bg-gray-100">
+              <EditableField
+                type="textarea"
+                value={
+                  resume?.summary !== ""
+                    ? resume?.summary
+                    : streamedSummaryData && streamedSummaryData
+                }
+                onSave={(value: string) => {
+                  dispatch(setSummary(value));
+                  saveResumeToDB({ ...resume, summary: value });
+                }}
+              />
+            </div>
+          </Regenerate>
 
           {/* Work Experience */}
           <div className="flex flex-col my-6 w-full">

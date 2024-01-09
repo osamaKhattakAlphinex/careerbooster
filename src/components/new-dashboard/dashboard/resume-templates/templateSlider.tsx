@@ -53,7 +53,7 @@ const TemplateSlider = ({ templates }: Props) => {
           <SwiperSlide
             key={`template-${index}`}
             className={`${templateId === index + 1 ? " border-2 p-2 border-indigo-600" : ""
-              } bg-transparent relative overflow-hidden group h-48 xs:h-64 rounded-lg md:h-64`}
+              } bg-transparent relative overflow-hidden group h-48 `}
           >
             <Link
               href={`/resume-builder/templates/template?templateId=${template.id}`}

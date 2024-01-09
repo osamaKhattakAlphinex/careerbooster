@@ -22,85 +22,88 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
+import useGetSummary from "@/helpers/useGetSummary";
+import Regenerate from "@/helpers/regenerate";
+import { EditableField } from "@/components/EditableField";
 
-const EditableField = ({
-  value,
-  type,
-  rows,
-  onSave,
-  style,
-}: {
-  value: string;
-  type?: string;
-  rows?: number;
-  style?: any;
-  onSave: (value: string) => void;
-}) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedValue, setEditedValue] = useState(value);
-  const [showPopup, setShowPopup] = useState(false);
-  useEffect(() => {
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 5000);
-    // Clean up the timeout to avoid memory leaks
-  }, [showPopup]); // The empty dependency array ensures that this effect runs only once after the initial render
+// const EditableField = ({
+//   value,
+//   type,
+//   rows,
+//   onSave,
+//   style,
+// }: {
+//   value: string;
+//   type?: string;
+//   rows?: number;
+//   style?: any;
+//   onSave: (value: string) => void;
+// }) => {
+//   const [isEditing, setIsEditing] = useState(false);
+//   const [editedValue, setEditedValue] = useState(value);
+//   const [showPopup, setShowPopup] = useState(false);
+//   useEffect(() => {
+//     setTimeout(() => {
+//       setShowPopup(false);
+//     }, 5000);
+//     // Clean up the timeout to avoid memory leaks
+//   }, [showPopup]); // The empty dependency array ensures that this effect runs only once after the initial render
 
-  const userData = useSelector((state: any) => state.userData);
-  const handleBlur = () => {
-    setIsEditing(false);
-    onSave(editedValue);
-  };
+//   const userData = useSelector((state: any) => state.userData);
+//   const handleBlur = () => {
+//     setIsEditing(false);
+//     onSave(editedValue);
+//   };
 
-  useEffect(() => {
-    if (value !== editedValue) {
-      setEditedValue(value);
-    }
-  }, [value]);
-  const showAlertpopupFun = () => {
-    !userData?.userPackageData?.limit?.can_edit_resume &&
-      alert("please upgrade to pro plan in order to edit !");
-  };
-  return (
-    <>
-      <span
-        onClick={() => {
-          setIsEditing(true);
-          //showAlertpopupFun();
-        }}
-        onBlur={handleBlur}
-        className=""
-      >
-        {userData?.userPackageData?.limit?.can_edit_resume && isEditing ? (
-          <>
-            {type === "textarea" ? (
-              <textarea
-                value={editedValue}
-                className="bg-transparent pr-2 w-full hover:cursor-text  h-auto"
-                rows={rows ? rows : 15}
-                onChange={(e: any) => setEditedValue(e.target.value)}
-                autoFocus
-                onBlur={handleBlur}
-              />
-            ) : (
-              <input
-                type="text"
-                value={editedValue}
-                className=" bg-transparent pr-2 hover:cursor-text"
-                style={style ? style : {}}
-                onChange={(e: any) => setEditedValue(e.target.value)}
-                autoFocus
-                onBlur={handleBlur}
-              />
-            )}
-          </>
-        ) : (
-          <span className="hover:cursor-text">{value}</span>
-        )}
-      </span>
-    </>
-  );
-};
+//   useEffect(() => {
+//     if (value !== editedValue) {
+//       setEditedValue(value);
+//     }
+//   }, [value]);
+//   const showAlertpopupFun = () => {
+//     !userData?.userPackageData?.limit?.can_edit_resume &&
+//       alert("please upgrade to pro plan in order to edit !");
+//   };
+//   return (
+//     <>
+//       <span
+//         onClick={() => {
+//           setIsEditing(true);
+//           //showAlertpopupFun();
+//         }}
+//         onBlur={handleBlur}
+//         className=""
+//       >
+//         {userData?.userPackageData?.limit?.can_edit_resume && isEditing ? (
+//           <>
+//             {type === "textarea" ? (
+//               <textarea
+//                 value={editedValue}
+//                 className="bg-transparent pr-2 w-full hover:cursor-text  h-auto"
+//                 rows={rows ? rows : 15}
+//                 onChange={(e: any) => setEditedValue(e.target.value)}
+//                 autoFocus
+//                 onBlur={handleBlur}
+//               />
+//             ) : (
+//               <input
+//                 type="text"
+//                 value={editedValue}
+//                 className=" bg-transparent pr-2 hover:cursor-text"
+//                 style={style ? style : {}}
+//                 onChange={(e: any) => setEditedValue(e.target.value)}
+//                 autoFocus
+//                 onBlur={handleBlur}
+//               />
+//             )}
+//           </>
+//         ) : (
+//           <span className="hover:cursor-text">{value}</span>
+//         )}
+//       </span>
+//     </>
+//   );
+// };
 
 const ResumeTemplate2 = ({
   streamedSummaryData,
@@ -147,27 +150,30 @@ const ResumeTemplate2 = ({
       primarySkills: updatedSkills,
     });
   };
-  const addSecondarySkill = () => {
-    const secondarySkills = resume?.secondarySkills;
-    const updatedSkills = [...secondarySkills];
-    updatedSkills.push(secondarySkill);
-    dispatch(setSecondarySkills({ secondarySkills: updatedSkills }));
-    saveResumeToDB({
-      ...resume,
-      secondarySkills: updatedSkills,
-    });
-  };
-  const addProfessionalSkill = () => {
-    const professionalSkills = resume?.professionalSkills;
-    const updatedSkills = [...professionalSkills];
-    updatedSkills.push(professionalSkill);
 
-    dispatch(setProfessionalSkills({ professionalSkills: updatedSkills }));
-    saveResumeToDB({
-      ...resume,
-      professionalSkills: updatedSkills,
-    });
-  };
+  const { getSummary } = useGetSummary();
+
+  // const addSecondarySkill = () => {
+  //   const secondarySkills = resume?.secondarySkills;
+  //   const updatedSkills = [...secondarySkills];
+  //   updatedSkills.push(secondarySkill);
+  //   dispatch(setSecondarySkills({ secondarySkills: updatedSkills }));
+  //   saveResumeToDB({
+  //     ...resume,
+  //     secondarySkills: updatedSkills,
+  //   });
+  // };
+  // const addProfessionalSkill = () => {
+  //   const professionalSkills = resume?.professionalSkills;
+  //   const updatedSkills = [...professionalSkills];
+  //   updatedSkills.push(professionalSkill);
+
+  //   dispatch(setProfessionalSkills({ professionalSkills: updatedSkills }));
+  //   saveResumeToDB({
+  //     ...resume,
+  //     professionalSkills: updatedSkills,
+  //   });
+  // };
   //Reorder Redux PrimarySkills array with drag-drop
   const handleDropPrimary = (e: any, i: number) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
@@ -189,45 +195,45 @@ const ResumeTemplate2 = ({
     });
   };
   //Reorder Redux SecondarySkills array with drag-drop
-  const handleDropSecondary = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text"));
-    const updatedItems = [...resume.secondarySkills];
-    // Swap the positions of the dragged item and the target item.
-    [updatedItems[draggedIndex], updatedItems[i]] = [
-      updatedItems[i],
-      updatedItems[draggedIndex],
-    ];
-    dispatch(
-      setSecondarySkills({
-        ...resume,
-        secondarySkills: updatedItems,
-      })
-    );
-    saveResumeToDB({
-      ...resume,
-      secondarySkills: updatedItems,
-    });
-  };
-  //Reorder Redux ProfessionalSkills array with drag-drop
-  const handleDropProfessional = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume.professionalSkills];
-    // Swap the positions of the dragged item and the target item.
-    [updatedItems[draggedIndex], updatedItems[i]] = [
-      updatedItems[i],
-      updatedItems[draggedIndex],
-    ];
-    dispatch(
-      setProfessionalSkills({
-        ...resume,
-        professionalSkills: updatedItems,
-      })
-    );
-    saveResumeToDB({
-      ...resume,
-      professionalSkills: updatedItems,
-    });
-  };
+  // const handleDropSecondary = (e: any, i: number) => {
+  //   const draggedIndex = parseInt(e.dataTransfer.getData("text"));
+  //   const updatedItems = [...resume.secondarySkills];
+  //   // Swap the positions of the dragged item and the target item.
+  //   [updatedItems[draggedIndex], updatedItems[i]] = [
+  //     updatedItems[i],
+  //     updatedItems[draggedIndex],
+  //   ];
+  //   dispatch(
+  //     setSecondarySkills({
+  //       ...resume,
+  //       secondarySkills: updatedItems,
+  //     })
+  //   );
+  //   saveResumeToDB({
+  //     ...resume,
+  //     secondarySkills: updatedItems,
+  //   });
+  // };
+  // //Reorder Redux ProfessionalSkills array with drag-drop
+  // const handleDropProfessional = (e: any, i: number) => {
+  //   const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+  //   const updatedItems = [...resume.professionalSkills];
+  //   // Swap the positions of the dragged item and the target item.
+  //   [updatedItems[draggedIndex], updatedItems[i]] = [
+  //     updatedItems[i],
+  //     updatedItems[draggedIndex],
+  //   ];
+  //   dispatch(
+  //     setProfessionalSkills({
+  //       ...resume,
+  //       professionalSkills: updatedItems,
+  //     })
+  //   );
+  //   saveResumeToDB({
+  //     ...resume,
+  //     professionalSkills: updatedItems,
+  //   });
+  // };
   //Reorder Redux handleDropExperience array with drag-drop
   const handleDropExperience = (e: any, i: number) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
@@ -251,27 +257,27 @@ const ResumeTemplate2 = ({
     }
   };
   //Reorder Redux handleDropEducation array with drag-drop
-  const handleDropEducation = (e: any, i: number) => {
-    // const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    // const updatedItems = [...resume?.educationArray];
-    // // Swap the positions of the dragged item and the target item.
-    // [updatedItems[draggedIndex], updatedItems[i]] = [
-    //   updatedItems[i],
-    //   updatedItems[draggedIndex],
-    // ];
-    // if (draggedIndex !== i) {
-    //   // dispatch(
-    //   //   setEducationArray({
-    //   //     ...resume,
-    //   //     educationArray: updatedItems,
-    //   //   })
-    //   // );
-    //   saveResumeToDB({
-    //     ...resume,
-    //     educationArray: updatedItems,
-    //   });
-    // }
-  };
+  // const handleDropEducation = (e: any, i: number) => {
+  // const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+  // const updatedItems = [...resume?.educationArray];
+  // // Swap the positions of the dragged item and the target item.
+  // [updatedItems[draggedIndex], updatedItems[i]] = [
+  //   updatedItems[i],
+  //   updatedItems[draggedIndex],
+  // ];
+  // if (draggedIndex !== i) {
+  //   // dispatch(
+  //   //   setEducationArray({
+  //   //     ...resume,
+  //   //     educationArray: updatedItems,
+  //   //   })
+  //   // );
+  //   saveResumeToDB({
+  //     ...resume,
+  //     educationArray: updatedItems,
+  //   });
+  // }
+  // };
   //Reorder Redux handleDropAchievement array with drag-drop
   const handleDropAchievement = (i: number, ind: number) => {
     let draggedIndex: number;
@@ -403,20 +409,22 @@ const ResumeTemplate2 = ({
         <h2 className="uppercase text-sm xs:text-sm md:text-lg lg:text-lg font-bold">
           About Me
         </h2>
-        <div className="text-sm xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:bg-gray-100">
-          <EditableField
-            type="textarea"
-            value={
-              resume?.summary !== ""
-                ? resume?.summary
-                : streamedSummaryData && streamedSummaryData
-            }
-            onSave={(value: string) => {
-              dispatch(setSummary(value));
-              saveResumeToDB({ ...resume, summary: value });
-            }}
-          />
-        </div>
+        <Regenerate handler={getSummary}>
+          <div className="text-sm xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:bg-gray-100">
+            <EditableField
+              type="textarea"
+              value={
+                resume?.summary !== ""
+                  ? resume?.summary
+                  : streamedSummaryData && streamedSummaryData
+              }
+              onSave={(value: string) => {
+                dispatch(setSummary(value));
+                saveResumeToDB({ ...resume, summary: value });
+              }}
+            />
+          </div>
+        </Regenerate>
       </div>
       {/* Skills  */}
       <div className="w-full space-y-3">

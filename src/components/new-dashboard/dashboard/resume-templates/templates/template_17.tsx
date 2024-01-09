@@ -22,6 +22,8 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
+import useGetSummary from "@/helpers/useGetSummary";
+import Regenerate from "@/helpers/regenerate";
 
 const EditableField = ({
   value,
@@ -123,6 +125,8 @@ const ResumeTemplate17 = ({
     useState(false);
   const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
     useState(false);
+
+  const { getSummary } = useGetSummary();
 
   const [
     professionalSkillAddButtonVisible,
@@ -608,17 +612,16 @@ const ResumeTemplate17 = ({
           ></span>
 
           {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+            resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-center items-center ${
-                      i > 0
+                    className={`flex justify-center items-center ${i > 0
                         ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
                         : "mb-5"
-                    }`}
+                      }`}
                   >
                     <div
                       key={i}
@@ -972,7 +975,7 @@ const ResumeTemplate17 = ({
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                          newWorkExperience !== i ? (
                           <div
                             className="border-2 w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
