@@ -7,7 +7,6 @@ const Editor = () => {
       <div className="w-7/12">1</div>
       <div className="w-5/12 bg-slate-200 h-screen">
         <ResumePreviews />
-
       </div>
     </div>
   );

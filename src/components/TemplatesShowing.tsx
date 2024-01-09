@@ -49,7 +49,8 @@ const tabs: Tabs[] = [
 const TemplatesShowing = () => {
     const [activeTab, setActiveTab] = useState<Tabs>(tabs[0]);
     const [templates, setTemplates] = useState<Template[]>([]);
-
+    const [showResume, setShowResume] = useState<boolean>(false);
+    const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
     const filterTemplates = () => {
         if (activeTab.tab === "all-templates") {
             setTemplates(ALL_TEMPLATES);
@@ -71,24 +72,39 @@ const TemplatesShowing = () => {
     }, [activeTab]);
 
     return (
+
         <div className="ml-0   ">
-            <div className="p-4 flex flex-row justify-center items-center gap-2">
-                {tabs.map((tab, index) => (
-                    <button
-                        key={index}
-                        className={`px-4 py-2 text-sm rounded-full border border-gray-600 text-[#000] ${activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
-                            }`}
-                        onClick={() => setActiveTab(tab)}
-                    >
-                        {tab.title}
+            {!showResume ? (
+                <>
+                    <div className="p-4 flex flex-row justify-center items-center gap-2">
+                        {tabs.map((tab, index) => (
+                            <button
+                                key={index}
+                                className={`px-4 py-2 text-sm rounded-full border border-gray-600 text-[#000] ${activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
+                                    }`}
+                                onClick={() => setActiveTab(tab)}
+                            >
+                                {tab.title}
+                            </button>
+                        ))}
+                    </div>
+
+                    <div className=" text-center  text-[#000]"> {activeTab.description}</div>
+                    {templates && !showResume &&
+
+                        <ResumeTemplateSlider templates={templates} setShowResume={setShowResume} setSelectedTemplate={setSelectedTemplate} />
+                    }
+                </>
+            ) :
+                <div className="p-4 flex flex-col justify-start items-center gap-2">
+                    <button onClick={() => setShowResume(false)} className="text-[#000]">
+                        - Select Template
                     </button>
-                ))}
-            </div>
-
-            <div className=" text-center  text-[#000]"> {activeTab.description}</div>
-            {templates &&
-
-                <ResumeTemplateSlider templates={templates} />
+                    {selectedTemplate && (
+                        // Render the selected template
+                        <selectedTemplate.template />
+                    )}
+                </div>
             }
         </div>
     );
