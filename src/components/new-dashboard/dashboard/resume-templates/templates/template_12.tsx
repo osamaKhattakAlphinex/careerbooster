@@ -305,7 +305,7 @@ const ResumeTemplate12 = ({
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="h-20 bg-[#F0CFC3]"></div>
-      <div className="flex absolute  top-22 left-[27%] py-8 xs:left-[37%] sm:left-[37%] md:left-[27%] lg:left[27%]">
+      <div className="flex absolute  top-22 left-[35%] py-8 xs:left-[37%] sm:left-[37%] md:left-[35%] lg:left-[27%] ">
         <div className="flex flex-col  border-gray-900 border-b-2 py-8">
           <h2 className="text-2xl xs:text-xl sm:text-xl md:text-2xl lg:text-2xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
@@ -329,7 +329,7 @@ const ResumeTemplate12 = ({
         </div>
       </div>
       <div className="flex">
-        <div className=" w-5/12 md:w-1/3 flex flex-col  items-center   bg-[#FFFFFF]  px-9 xs:px-2 sm:px-2 md:px-9 lg:px-9    pt-[1rem] ">
+        <div className=" w-5/12 md:w-1/3 flex flex-col  items-center   bg-[#FFFFFF]  px-9 xs:px-2 sm:px-2 md:px-9 lg:px-9    pt-[1rem] h-[1050px] xs:h-auto">
           <div className="h-48 w-48 xs:w-24 xs:h-24 md:w-48 md:h-48 text-gray-800 bg-[#F0CFC3]  text-center flex justify-center items-center  rounded-full xs:mb-[88px] sm:mb-[88px] xs:mt-[32px] sm:mt-[32px] md:mt-0 lg:mt-0 lg:mb-0 md:mb-0 ">
             <span className="text-4xl  text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
               <EditableField
@@ -609,7 +609,14 @@ const ResumeTemplate12 = ({
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
-                  <div key={i} className="flex justify-center items-center">
+                  <div
+                    key={i}
+                    className={`flex justify-center items-center ${
+                      i > 0
+                        ? "w-[100vw] ml-[-250px] xs:ml-0 xs:w-full mt-8"
+                        : "mb-5"
+                    }`}
+                  >
                     <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5 lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
                       {resume?.workExperienceArray.length - 1 !== i && (
@@ -984,8 +991,8 @@ const ResumeTemplate12 = ({
           )}
           {/* Education */}
           {resume?.education && (
-            <div className="">
-              <div className="flex flex-col my-6">
+            <div className=" ml-[-240px] xs:ml-0">
+              <div className="flex flex-col mb-6 mt-10">
                 <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center text-gray-950 ">
                   Education
                 </h3>
