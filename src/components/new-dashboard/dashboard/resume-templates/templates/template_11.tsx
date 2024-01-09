@@ -22,6 +22,8 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
+import useGetSummary from "@/helpers/useGetSummary";
+import Regenerate from "@/helpers/regenerate";
 
 const EditableField = ({
   value,
@@ -113,6 +115,8 @@ const ResumeTemplate11 = ({
   streamedJDData: string;
   saveResumeToDB: (data?: any) => Promise<void>;
 }) => {
+  const { getSummary } = useGetSummary();
+
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
@@ -332,7 +336,7 @@ const ResumeTemplate11 = ({
       <div className=" flex">
         {/* sidebar */}
 
-        <div className="min-h-screen   w-5/12 md:w-1/3 flex flex-col pl-3 md:pl-8 bg-[#2A2E36] text-gray-100  pr-6  py-8 h-auto pt-[40px] item">
+        <div className="  w-5/12 md:w-1/3 flex flex-col pl-3 md:pl-8 bg-[#2A2E36] text-gray-100  pr-6  py-8 h-[1130px] xs:h-auto  pt-[40px] item">
           <div className="  z-50 w-48 h-60 xs:w-[8rem] xs:h-[8rem] sm:w-[8rem] sm:h-[8rem] md:w-48 md:h-60  lg:w-48 lg:h-60 border-[8px] border-gray-100  text-white bg-gray-800 text-center flex justify-center   mx-4 xs:mx-0 sm:mx-0 md:mx-4 lg:mx-4  md:mt-0 md:mr-8 items-center mb-10">
             <span className="text-4xl  hover:shadow-md hover:bg-gray-500">
               <EditableField
@@ -587,20 +591,22 @@ const ResumeTemplate11 = ({
             <span className="border border-[#F4D644]  mt-2"></span>
           </div>
 
-          <div className="text-sm  hover:shadow-md hover:bg-gray-100">
-            <EditableField
-              type="textarea"
-              value={
-                resume?.summary !== ""
-                  ? resume?.summary
-                  : streamedSummaryData && streamedSummaryData
-              }
-              onSave={(value: string) => {
-                dispatch(setSummary(value));
-                saveResumeToDB({ ...resume, summary: value });
-              }}
-            />
-          </div>
+          <Regenerate handler={getSummary}>
+            <div className="text-sm  hover:shadow-md hover:bg-gray-100">
+              <EditableField
+                type="textarea"
+                value={
+                  resume?.summary !== ""
+                    ? resume?.summary
+                    : streamedSummaryData && streamedSummaryData
+                }
+                onSave={(value: string) => {
+                  dispatch(setSummary(value));
+                  saveResumeToDB({ ...resume, summary: value });
+                }}
+              />
+            </div>
+          </Regenerate>
 
           {/* Work Experience */}
           <div className="flex flex-col my-6 w-full">
@@ -615,7 +621,14 @@ const ResumeTemplate11 = ({
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
-                  <div key={i} className="flex justify-center items-center">
+                  <div
+                    key={i}
+                    className={`flex justify-center items-center ${
+                      i > 0
+                        ? "w-[100vw] ml-[-250px] xs:ml-0 xs:w-full mt-8"
+                        : "mb-5"
+                    }`}
+                  >
                     <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
                       {resume?.workExperienceArray.length - 1 !== i && (
@@ -984,7 +997,7 @@ const ResumeTemplate11 = ({
           )}
           {/* Education */}
           {resume?.education && (
-            <div className="">
+            <div className="ml-[-200px] xs:ml-0">
               <div className="flex flex-col my-6">
                 <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center text-gray-950 ">
                   Education

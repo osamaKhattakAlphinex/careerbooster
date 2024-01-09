@@ -23,6 +23,8 @@ import {
   sparkleIcon,
 } from "@/helpers/iconsProvider";
 import Image from "next/image";
+import Regenerate from "@/helpers/regenerate";
+import useGetSummary from "@/helpers/useGetSummary";
 
 const EditableField = ({
   value,
@@ -126,6 +128,7 @@ const ResumeTemplate1 = ({
     useState(false);
   const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
     useState(false);
+  const { getSummary } = useGetSummary();
 
   const [
     professionalSkillAddButtonVisible,
@@ -314,7 +317,7 @@ const ResumeTemplate1 = ({
   };
 
   return (
-    <div className="w-full first-page  text-gray-900">
+    <div id="resumeContent" className="w-full first-page  text-gray-900">
       <div className="flex">
         <div className="flex flex-col w-10/12 p-8">
           <h2 className="text-4xl xs:text-2xl md:4xl lg:text-6xl  hover:shadow-md hover:bg-gray-100">
@@ -714,24 +717,24 @@ const ResumeTemplate1 = ({
         </div>
         <div className="w-full flex flex-col px-8 xs:px-4 md:px-8 lg:px-8">
           {/* Executive Summary */}
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
           <h3 className="uppercase text-lg font-semibold">EXECUTIVE SUMMARY</h3>
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-
-          <div className="text-lg xs:text-sm md:text-lg lg:text-lg  hover:shadow-md hover:bg-gray-100">
-            <EditableField
-              type="textarea"
-              value={
-                resume?.summary !== ""
-                  ? resume?.summary
-                  : streamedSummaryData && streamedSummaryData
-              }
-              onSave={(value: string) => {
-                dispatch(setSummary(value));
-                saveResumeToDB({ ...resume, summary: value });
-              }}
-            />
-          </div>
+          <Regenerate handler={getSummary}>
+            <div className="text-lg xs:text-sm md:text-lg lg:text-lg  hover:shadow-md hover:bg-gray-100">
+              <EditableField
+                type="textarea"
+                value={
+                  resume?.summary !== ""
+                    ? resume?.summary
+                    : streamedSummaryData && streamedSummaryData
+                }
+                onSave={(value: string) => {
+                  dispatch(setSummary(value));
+                  saveResumeToDB({ ...resume, summary: value });
+                }}
+              />
+            </div>
+          </Regenerate>
 
           {/* Work Experience */}
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>

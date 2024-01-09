@@ -22,6 +22,8 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
+import useGetSummary from "@/helpers/useGetSummary";
+import Regenerate from "@/helpers/regenerate";
 
 const EditableField = ({
   value,
@@ -125,6 +127,8 @@ const ResumeTemplate8 = ({
     useState(false);
   const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
     useState(false);
+
+  const { getSummary } = useGetSummary();
 
   const [
     professionalSkillAddButtonVisible,
@@ -416,20 +420,22 @@ const ResumeTemplate8 = ({
           </h3>
           <span className="border-stylee w-full h-0 border !border-gray-500 mb-2"></span>
 
-          <div className="text-sm xs:text-sm md:text-lg lg:text-lg  hover:shadow-md hover:bg-gray-100">
-            <EditableField
-              type="textarea"
-              value={
-                resume?.summary !== ""
-                  ? resume?.summary
-                  : streamedSummaryData && streamedSummaryData
-              }
-              onSave={(value: string) => {
-                dispatch(setSummary(value));
-                saveResumeToDB({ ...resume, summary: value });
-              }}
-            />
-          </div>
+          <Regenerate handler={getSummary}>
+            <div className="text-sm xs:text-sm md:text-lg lg:text-lg  hover:shadow-md hover:bg-gray-100">
+              <EditableField
+                type="textarea"
+                value={
+                  resume?.summary !== ""
+                    ? resume?.summary
+                    : streamedSummaryData && streamedSummaryData
+                }
+                onSave={(value: string) => {
+                  dispatch(setSummary(value));
+                  saveResumeToDB({ ...resume, summary: value });
+                }}
+              />
+            </div>
+          </Regenerate>
           {/* Skills */}
 
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (

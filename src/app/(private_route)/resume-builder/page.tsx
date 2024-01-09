@@ -68,35 +68,37 @@ const ResumeBuilder = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
- 
 
   // Redux
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
-  const handleGenerate = useCallback(async (quantifyingExperience:boolean) => {
-    await getUserDataIfNotExists();
-    // reset resume
-    dispatch(resetResume(resumeData.state));
-    if (resumeData.state.jobPosition !== "" && session?.user?.email) {
-      dispatch(setState({ name: "resumeLoading", value: true }));
-      dispatch(setId(""));
-      getBasicInfo();
-      getSummary();
-      getPrimarySkills();
-      // getProfessionalSkills();
-      // getSecondarySkills();
-      await getWorkExperienceNew(quantifyingExperience);
-      runConfetti();
-    } else {
-      setShowPopup(true);
+  const handleGenerate = useCallback(
+    async (quantifyingExperience: boolean) => {
+      await getUserDataIfNotExists();
+      // reset resume
+      dispatch(resetResume(resumeData.state));
+      if (resumeData.state.jobPosition !== "" && session?.user?.email) {
+        dispatch(setState({ name: "resumeLoading", value: true }));
+        dispatch(setId(""));
+        getBasicInfo();
+        getSummary();
+        getPrimarySkills();
+        // getProfessionalSkills();
+        // getSecondarySkills();
+        await getWorkExperienceNew(quantifyingExperience);
+        runConfetti();
+      } else {
+        setShowPopup(true);
 
-      // Hide the popup after 3 seconds
-      setTimeout(() => {
-        setShowPopup(false);
-      }, 3000);
-    }
-  }, [resumeData.state]);
+        // Hide the popup after 3 seconds
+        setTimeout(() => {
+          setShowPopup(false);
+        }, 3000);
+      }
+    },
+    [resumeData.state]
+  );
 
   // const makeAPICallWithRetry: any = async (
   //   apiFunction: any,
@@ -119,6 +121,7 @@ const ResumeBuilder = () => {
   //     }
   //   }
   // };
+
   const getBasicInfo = async () => {
     // dispatch(setLoadingState("basicInfo"));
     // return makeAPICallWithRetry(async () => {
@@ -231,10 +234,11 @@ const ResumeBuilder = () => {
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
         
-        ${experience?.fromMonth} ${experience?.fromYear} - ${experience?.isContinue
+        ${experience?.fromMonth} ${experience?.fromYear} - ${
+          experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
-          } | ${experience?.company} | 
+        } | ${experience?.company} | 
         ${experience?.cityState} ${experience?.country}
                   </h2>`;
         html += `<div>`;
@@ -261,7 +265,7 @@ const ResumeBuilder = () => {
               fileAddress: userData.uploadedResume.fileName,
             },
             personName: userData.firstName + " " + userData.lastName,
-            jobTitle: resumeData.state.jobPosition
+            jobTitle: resumeData.state.jobPosition,
           }),
         });
         // const response = await res.json();
@@ -359,7 +363,7 @@ const ResumeBuilder = () => {
       body: JSON.stringify({
         type: "primarySkills",
         personName: userData?.firstName + " " + userData?.lastName,
-      
+
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
@@ -460,6 +464,37 @@ const ResumeBuilder = () => {
     // });
   };
 
+  const [contentHeight, setContentHeight] = useState(0);
+  const [previewTemplate, setPreviewTemplate] = useState(true);
+  const sectionHeight = 1123; // Define your section height in pixels
+  const sectionWidth = 794; // Define your section width in pixels
+  const numSections = Math.ceil(contentHeight / sectionHeight);
+  const [currentSection, setCurrentSection] = useState(1);
+
+  useEffect(() => {
+    if (componentRef.current) {
+      const height = componentRef.current.scrollHeight;
+
+      setContentHeight(height);
+    }
+  }, [componentRef.current]); // Recalculate contentHeight when it changes
+
+  const showNextSection = () => {
+    if (currentSection < numSections - 1) {
+      setCurrentSection(currentSection + 1);
+      console.log(currentSection);
+      componentRef.current.scrollTop = currentSection * sectionHeight;
+    }
+  };
+
+  const showPrevSection = () => {
+    if (currentSection > 0) {
+      setCurrentSection(currentSection - 1);
+      console.log(currentSection);
+      componentRef.current.scrollTop = currentSection * sectionHeight;
+    }
+  };
+
   const saveResumeToDB = async (data: any = "") => {
     // return makeAPICallWithRetry(async () => {
     const source = data === "" ? resumeData : data;
@@ -553,7 +588,6 @@ const ResumeBuilder = () => {
           <GenerateResume
             handleGenerate={handleGenerate}
             availablePercentage={availablePercentage}
-           
           />
           <div className="flex justify-center items-center">
             <Confetti active={confettingRunning} config={confettiConfig} />
@@ -565,7 +599,6 @@ const ResumeBuilder = () => {
                 design templates click here
               </p> */}
               <div className="flex justify-between items-center">
-
                 <h2 className=" text-base font-bold my-3">Design Templates</h2>
                 <Link
                   href="/resume-builder/templates"
@@ -587,7 +620,6 @@ const ResumeBuilder = () => {
                     {template.category === "premium" && (
                       <div className="absolute rounded-full right-1 top-1 h-6 w-6 grid place-content-center bg-yellow-600">
                         {crownIcon}
-
                       </div>
                     )}
                     <Link
@@ -622,8 +654,6 @@ const ResumeBuilder = () => {
                     </Link>
                   </div>
                 ))}
-
-
               </div>
             </div>
           )}
@@ -631,26 +661,78 @@ const ResumeBuilder = () => {
             (resumeData?.name ||
               resumeData?.contact?.email ||
               resumeData?.summary) && (
-              <>
-                <div className={`my-10  w-[100%] bg-white`}>
-                  <div
-                    className={`w-full  ${resumeData.state.resumeLoading ? "animate-pulse" : ""
-                      }`}
-                    ref={componentRef}
-                  >
-                    <ResumeTemplate1
-                      streamedSummaryData={streamedSummaryData}
-                      streamedJDData={streamedJDData}
-                      saveResumeToDB={saveResumeToDB}
-                    />
-                  </div>
+              <div className={`my-10   `}>
+                {/* <Link href="#" className="text-black">Preview</Link> */}
+                <div
+                  className={`bg-white  ${
+                    resumeData.state.resumeLoading ? "animate-pulse" : ""
+                  }`}
+                  ref={componentRef}
+                  // style={{
+                  //   height: `${sectionHeight}px`,
+                  //   transform: "scale(0.5)",
+                  //   width: `${sectionWidth}px`,
+                  //   overflowY: "hidden",
+                  // }}
+
+                  style={{
+                    height: previewTemplate ? `${sectionHeight}px` : "auto",
+                    width: previewTemplate ? `${sectionWidth}px` : "auto",
+                    transform: previewTemplate ? "scale(0.5)" : "none",
+
+                    overflowY: previewTemplate ? "hidden" : "visible",
+                  }}
+                >
+                  <ResumeTemplate1
+                    streamedSummaryData={streamedSummaryData}
+                    streamedJDData={streamedJDData}
+                    saveResumeToDB={saveResumeToDB}
+                  />
                 </div>
-              </>
+              </div>
             )}
           {showPopup && (
             <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
               {/* Popup content here */}
               Credit Limit Reached !
+            </div>
+          )}
+          {previewTemplate && (
+            <div className="flex items-center absolute left-[380px] top-[200px]">
+              <button onClick={showPrevSection} className="text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 19.5 8.25 12l7.5-7.5"
+                  />
+                </svg>
+              </button>
+              {currentSection}
+
+              <button onClick={showNextSection} className="text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                  />
+                </svg>
+              </button>
             </div>
           )}
         </div>

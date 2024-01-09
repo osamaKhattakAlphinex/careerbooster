@@ -22,6 +22,8 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
+import Regenerate from "@/helpers/regenerate";
+import useGetSummary from "@/helpers/useGetSummary";
 
 const EditableField = ({
   value,
@@ -51,6 +53,8 @@ const EditableField = ({
     setIsEditing(false);
     onSave(editedValue);
   };
+
+  const { getSummary } = useGetSummary();
 
   useEffect(() => {
     if (value !== editedValue) {
@@ -605,20 +609,22 @@ const ResumeTemplate4 = ({
           </h3>
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
-          <div className="text-sm md:text-lg hover:shadow-md hover:bg-gray-100">
-            <EditableField
-              type="textarea"
-              value={
-                resume?.summary !== ""
-                  ? resume?.summary
-                  : streamedSummaryData && streamedSummaryData
-              }
-              onSave={(value: string) => {
-                dispatch(setSummary(value));
-                saveResumeToDB({ ...resume, summary: value });
-              }}
-            />
-          </div>
+          <Regenerate handler={() => console.log("clicked")}>
+            <div className="text-sm md:text-lg hover:shadow-md hover:bg-gray-100">
+              <EditableField
+                type="textarea"
+                value={
+                  resume?.summary !== ""
+                    ? resume?.summary
+                    : streamedSummaryData && streamedSummaryData
+                }
+                onSave={(value: string) => {
+                  dispatch(setSummary(value));
+                  saveResumeToDB({ ...resume, summary: value });
+                }}
+              />
+            </div>
+          </Regenerate>
 
           {/* Work Experience */}
 

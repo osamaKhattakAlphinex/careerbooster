@@ -22,6 +22,8 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
+import Regenerate from "@/helpers/regenerate";
+import useGetSummary from "@/helpers/useGetSummary";
 
 const EditableField = ({
   value,
@@ -138,6 +140,8 @@ const ResumeTemplate3 = ({
   const [secondarySkill, setSecondarySkill] = useState<string>("");
   const [professionalSkill, setProfessionalSkill] = useState<string>("");
 
+  const { getSummary } = useGetSummary();
+
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const addPrimarySkill = () => {
     const primarySkills = resume?.primarySkills;
@@ -159,6 +163,7 @@ const ResumeTemplate3 = ({
       secondarySkills: updatedSkills,
     });
   };
+
   const addProfessionalSkill = () => {
     const professionalSkills = resume?.professionalSkills;
     const updatedSkills = [...professionalSkills];
@@ -353,20 +358,22 @@ const ResumeTemplate3 = ({
           </h3>
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
-          <div className="text-sm xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:bg-gray-100">
-            <EditableField
-              type="textarea"
-              value={
-                resume?.summary !== ""
-                  ? resume?.summary
-                  : streamedSummaryData && streamedSummaryData
-              }
-              onSave={(value: string) => {
-                dispatch(setSummary(value));
-                saveResumeToDB({ ...resume, summary: value });
-              }}
-            />
-          </div>
+          <Regenerate handler={getSummary}>
+            <div className="text-sm xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:bg-gray-100">
+              <EditableField
+                type="textarea"
+                value={
+                  resume?.summary !== ""
+                    ? resume?.summary
+                    : streamedSummaryData && streamedSummaryData
+                }
+                onSave={(value: string) => {
+                  dispatch(setSummary(value));
+                  saveResumeToDB({ ...resume, summary: value });
+                }}
+              />
+            </div>
+          </Regenerate>
 
           {/* Work Experience */}
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>

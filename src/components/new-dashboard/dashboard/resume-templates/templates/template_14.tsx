@@ -22,6 +22,8 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
+import useGetSummary from "@/helpers/useGetSummary";
+import Regenerate from "@/helpers/regenerate";
 
 const EditableField = ({
   value,
@@ -125,6 +127,8 @@ const ResumeTemplate14 = ({
     useState(false);
   const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
     useState(false);
+
+  const { getSummary } = useGetSummary();
 
   const [
     professionalSkillAddButtonVisible,
@@ -609,7 +613,7 @@ const ResumeTemplate14 = ({
                   <div
                     key={i}
                     className={`flex justify-center items-center ${
-                      i > 0 ? "w-[100vw] ml-[-234px] xs:ml-0 xs:w-full" : "mb-5"
+                      i > 0 ? "w-[100vw] ml-[-150px] xs:ml-0 xs:w-full" : "mb-5"
                     }`}
                   >
                     <div
@@ -979,7 +983,7 @@ const ResumeTemplate14 = ({
             ></div>
           )}
           {/* education */}
-          <div className=" ml-[-180px]  xs:ml-0">
+          <div className=" ml-[-150px]  xs:ml-0">
             <span className="w-full h-0 my-1 page-break"></span>
             <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
               {educationIcon}
@@ -997,7 +1001,7 @@ const ResumeTemplate14 = ({
             >
               {resume?.education.map((education: Education, ind: number) => (
                 <React.Fragment key={education?.id || ind}>
-                  <div className="w-[30%] xs:w-full md:w-[30%] md:m-2">
+                  <div className="w-[28%] mr-4 xs:w-full md:w-[28%] md:m-2">
                     <li
                       className=" hover:shadow-md hover:cursor-move 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
