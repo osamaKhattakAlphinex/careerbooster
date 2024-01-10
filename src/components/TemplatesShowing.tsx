@@ -1,13 +1,7 @@
 "use client";
-
 import React, { useEffect, useRef, useState } from "react";
-
 import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import ResumeTemplateSlider from "./ResumeTemplateSlider";
-import { useDispatch, useSelector } from "react-redux";
-import { setUserData } from "@/store/userDataSlice";
-import { setResume } from "@/store/resumeSlice";
-import { useSession } from "next-auth/react";
 import PreviewResume from "./PreviewResume";
 export type Template = {
   id: number;
@@ -38,16 +32,16 @@ const tabs: Tabs[] = [
     title: "Classic Executive",
   },
   {
-    tab: "creative-colorful",
-    description:
-      "Unleash your creativity with vibrant designs, ideal for professions that value innovation and originality",
-    title: "Creative/Colorful",
-  },
-  {
     tab: "one-page",
     description:
       "A concise and impactful format for those looking to present their career succinctly, perfect for time-conscious industries",
     title: "One Page",
+  },
+  {
+    tab: "creative-colorful",
+    description:
+      "Unleash your creativity with vibrant designs, ideal for professions that value innovation and originality",
+    title: "Creative/Colorful",
   },
 ];
 
@@ -77,15 +71,14 @@ const TemplatesShowing = () => {
 
   return (
     <div className="flex">
-
       <div className="w-4/12 border-r h-[100%]  bg-gray-700">
-
         <div className=" p-4 flex flex-row flex-wrap items-center gap-2">
           {tabs.map((tab, index) => (
             <button
               key={index}
-              className={`px-4 py-2 text-sm rounded-full border border-gray-600  ${activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
-                }`}
+              className={`px-4 py-2 text-sm rounded-full border border-gray-600  ${
+                activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
+              }`}
               onClick={() => setActiveTab(tab)}
             >
               {tab.title}
@@ -103,12 +96,10 @@ const TemplatesShowing = () => {
       </div>
 
       <div className="w-8/12 p-4  bg-gray-300 h-screen flex flex-col justify-start items-center gap-2">
-
         {selectedTemplate && (
           <PreviewResume selectedTemplate={selectedTemplate} />
         )}
       </div>
-
     </div>
   );
 };
