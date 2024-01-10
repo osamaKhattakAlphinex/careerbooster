@@ -13,12 +13,11 @@ export type Template = {
   category: "premium" | "freemium";
   preview: string;
 };
-
 const PreviewResume = ({ selectedTemplate }: any) => {
   const [previewTemplate, setPreviewTemplate] = useState(true);
   const { data: session } = useSession();
   const { resume } = useSelector((state: any) => state);
-  const componentRef = useRef(null);
+  const componentRef = useRef<any>(null);
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const fetchDefaultResume = async () => {
@@ -38,29 +37,97 @@ const PreviewResume = ({ selectedTemplate }: any) => {
       fetchDefaultResume();
     }
   }, []);
+
+  const sectionHeight = 1123; // Define your section height in pixels
+  const sectionWidth = 794; // Define your section width in pixels
+  const [numSections, setNumSections] = useState(0);
+
+  const [currentSection, setCurrentSection] = useState(0);
+  useEffect(() => {
+    if (componentRef.current) {
+      const height = componentRef.current.scrollHeight;
+      setNumSections(Math.ceil(height / 1123));
+    }
+  }, [componentRef.current]); // Recalculate contentHeight when it changes
+
+  useEffect(() => {
+    if (componentRef.current) {
+      componentRef.current.scrollTop = currentSection * sectionHeight;
+    }
+  }, [currentSection]);
+  const showNextSection = () => {
+    if (currentSection < numSections - 1) {
+      setCurrentSection((prev) => prev + 1);
+    }
+  };
+  const showPrevSection = () => {
+    if (currentSection > 0) {
+      setCurrentSection((prev) => prev - 1);
+    }
+  };
   return (
     <>
       {resume &&
         (resume?.name || resume?.contact?.email || resume?.summary) && (
-          <div className="">
-            {selectedTemplate.category === "premium" && (
-              <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
-                {crownIcon}
+          <>
+            <div className="transform scale-50 mt-[-285px]">
+              {selectedTemplate.category === "premium" && (
+                <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
+                  {crownIcon}
+                </div>
+              )}
+
+              <div
+                ref={componentRef}
+                className={` bg-white 
+                 
+               ${previewTemplate ? `h-[1123px]` : "h-auto"} ${
+                  previewTemplate ? `w-[794px]` : "w-auto"
+                } ${previewTemplate ? "overflow-hidden" : "overflow-visible"}
+                } ${resumeData.state.resumeLoading ? "animate-pulse" : ""}`}
+              >
+                {selectedTemplate.template({})}
+              </div>
+            </div>
+            {previewTemplate && (
+              <div className="flex items-center absolute right-20 bottom-0 ">
+                <button onClick={showPrevSection} className="text-white">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-4 h-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.75 19.5 8.25 12l7.5-7.5"
+                    />
+                  </svg>
+                </button>
+                <span className="text-xl">{currentSection + 1}</span>
+
+                <button onClick={showNextSection} className="text-white">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-4 h-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
+                </button>
               </div>
             )}
-
-            <div
-              ref={componentRef}
-              className={` bg-white 
-                    
-               ${previewTemplate ? `h-[1123px]` : "h-auto"} ${
-                previewTemplate ? `w-[794px]` : "w-auto"
-              } ${previewTemplate ? "overflow-hidden" : "overflow-visible"}
-                } ${resumeData.state.resumeLoading ? "animate-pulse" : ""}`}
-            >
-              {selectedTemplate.template({})}
-            </div>
-          </div>
+          </>
         )}
     </>
   );

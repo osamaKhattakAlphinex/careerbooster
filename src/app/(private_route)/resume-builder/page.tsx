@@ -327,33 +327,6 @@ const ResumeBuilder = () => {
     return [];
   };
 
-  // const getWorkExperience = async () => {
-  //   await getUserDataIfNotExists();
-  //   // dispatch(setLoadingState("workExperience"));
-  //   return fetch("/api/resumeBots/getBasicInfo", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       type: "workExperience",
-  //       jobPosition: resumeData.state.jobPosition,
-  //     }),
-  //   }).then(async (resp: any) => {
-  //     const res = await resp.json();
-  //     if (res.success) {
-  //       console.clear();
-  //       if (res?.data?.text) {
-  //         const tSon = JSON.stringify(res?.data?.text);
-  //         const myJSON = JSON.parse(tSon);
-  //         console.log("myJSON1: ", myJSON);
-  //         dispatch(setWorkExperience(myJSON));
-  //       } else if (res?.data) {
-  //         const myJSON = JSON.parse(res.data);
-  //         console.log("myJSON2: ", myJSON);
-  //         dispatch(setWorkExperience(myJSON));
-  //       }
-  //     }
-  //   });
-  // };
-
   const getPrimarySkills = async () => {
     // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("primarySkills"));
@@ -386,66 +359,6 @@ const ResumeBuilder = () => {
     // });
   };
 
-  const getProfessionalSkills = async () => {
-    // return makeAPICallWithRetry(async () => {
-    // dispatch(setLoadingState("professionalSkills"));
-    return fetch("/api/resumeBots/getBasicInfo", {
-      method: "POST",
-      body: JSON.stringify({
-        type: "professionalSkills",
-        email: session?.user?.email,
-        userData: aiInputUserData,
-        jobPosition: resumeData.state.jobPosition,
-        trainBotData: {
-          userEmail: userData.email,
-          // fileAddress: userData.files[0].fileName,
-          fileAddress: userData.uploadedResume.fileName,
-        },
-      }),
-    }).then(async (resp: any) => {
-      const res = await resp.json();
-      if (res.success) {
-        if (res?.result) {
-          let myJSON = JSON.parse(JSON.stringify(res.result));
-
-          myJSON = JSON.parse(myJSON);
-          dispatch(setProfessionalSkills({ professionalSkills: myJSON }));
-        }
-      }
-    });
-    // });
-  };
-
-  const getSecondarySkills = async () => {
-    // return makeAPICallWithRetry(async () => {
-    // dispatch(setLoadingState("secondarySkills"));
-    return fetch("/api/resumeBots/getBasicInfo", {
-      method: "POST",
-      body: JSON.stringify({
-        type: "secondarySkills",
-        email: session?.user?.email,
-        userData: aiInputUserData,
-        jobPosition: resumeData.state.jobPosition,
-        trainBotData: {
-          userEmail: userData.email,
-          // fileAddress: userData.files[0].fileName,
-          fileAddress: userData.uploadedResume.fileName,
-        },
-      }),
-    }).then(async (resp: any) => {
-      const res = await resp.json();
-      if (res.success) {
-        if (res?.result) {
-          let myJSON = JSON.parse(JSON.stringify(res.result));
-
-          myJSON = JSON.parse(myJSON);
-          dispatch(setSecondarySkills({ secondarySkills: myJSON }));
-        }
-      }
-    });
-    // });
-  };
-
   const getUserDataIfNotExists = async () => {
     // return makeAPICallWithRetry(async () => {
     if (!userData.isLoading && !userData.isFetched) {
@@ -463,48 +376,6 @@ const ResumeBuilder = () => {
     }
     // });
   };
-
-  const [contentHeight, setContentHeight] = useState(0);
-  const [previewTemplate, setPreviewTemplate] = useState(false);
-  const sectionHeight = 1123; // Define your section height in pixels
-  const sectionWidth = 794; // Define your section width in pixels
-  let numSections: number;
-  // console.log(numSections);
-  const [currentSection, setCurrentSection] = useState(1);
-
-  useEffect(() => {
-    if (componentRef.current) {
-      const height = componentRef.current.scrollHeight;
-      console.log(height);
-
-      numSections = Math.ceil(height / 1123);
-      // setContentHeight(height);
-      console.log(numSections);
-    }
-  }, [componentRef.current]); // Recalculate contentHeight when it changes
-
-  const showNextSection = () => {
-    if (currentSection < numSections) {
-      setCurrentSection((prev) => {
-        const nextSection = prev + 1;
-        console.log(nextSection);
-        componentRef.current.scrollTop = nextSection * sectionHeight;
-        return nextSection;
-      });
-    }
-  };
-
-  const showPrevSection = () => {
-    if (currentSection > 1) {
-      setCurrentSection((prev) => {
-        const prevSection = prev - 1;
-        console.log(prevSection);
-        componentRef.current.scrollTop = prevSection * sectionHeight;
-        return prevSection;
-      });
-    }
-  };
-
   const saveResumeToDB = async (data: any = "") => {
     // return makeAPICallWithRetry(async () => {
     const source = data === "" ? resumeData : data;
@@ -512,7 +383,6 @@ const ResumeBuilder = () => {
     if (!source.id || source.id === "") {
       obj = { ...source, id: makeid(), dateTime: new Date() };
     }
-
     axios
       .post("/api/resumeBots/saveResumeToDB", {
         email: session?.user?.email,
@@ -680,22 +550,15 @@ const ResumeBuilder = () => {
                   </div>
                 </Link>
                 <div
-                  className={`my-10 transform ${
-                    previewTemplate ? "scale-50" : ""
-                  } ${previewTemplate ? `h-[1193px]` : "h-auto"} ${
-                    previewTemplate ? `w-[794px]` : "w-auto"
-                  } ${previewTemplate ? "overflow-hidden" : "overflow-visible"} 
-              } ${resumeData.state.resumeLoading ? "animate-pulse" : ""}`}
+                  className={`my-10 ${
+                    resumeData.state.resumeLoading ? "animate-pulse" : ""
+                  }`}
                 >
                   {/* <Link href="#" className="text-black">Preview</Link> */}
                   <div
-                    className={`bg-white transform 
-                  ${previewTemplate ? "scale-10" : ""} ${
-                      previewTemplate ? `h-[1123px]` : "h-auto"
-                    } ${previewTemplate ? `w-[794px]` : "w-auto"} ${
-                      previewTemplate ? "overflow-hidden" : "overflow-visible"
-                    } 
-                  } ${resumeData.state.resumeLoading ? "animate-pulse" : ""}`}
+                    className={`bg-white ${
+                      resumeData.state.resumeLoading ? "animate-pulse" : ""
+                    }`}
                     ref={componentRef}
                   >
                     <ResumeTemplate1
@@ -704,45 +567,6 @@ const ResumeBuilder = () => {
                       saveResumeToDB={saveResumeToDB}
                     />
                   </div>
-
-                  {previewTemplate && (
-                    <div className="flex items-center absolute right-0 bottom-0 ">
-                      <button onClick={showPrevSection} className="text-white">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-11 h-11"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M15.75 19.5 8.25 12l7.5-7.5"
-                          />
-                        </svg>
-                      </button>
-                      <span className="text-4xl">{currentSection}</span>
-
-                      <button onClick={showNextSection} className="text-white">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-11 h-11"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  )}
                 </div>
               </>
             )}
