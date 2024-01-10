@@ -94,7 +94,7 @@ const PreviewResume = ({ selectedTemplate }: any) => {
                 } ${previewTemplate ? "overflow-hidden" : "overflow-visible"}
                 } ${resumeData.state.resumeLoading ? "animate-pulse" : ""}`}
               >
-                {selectedTemplate.template({})}
+                {selectedTemplate.template({ previewTemplate })}
               </div>
             </div>
             {previewTemplate && (

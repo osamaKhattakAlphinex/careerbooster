@@ -109,13 +109,16 @@ const EditableField = ({
 const ResumeTemplate6 = ({
   streamedSummaryData,
   streamedJDData,
+  previewTemplate,
   saveResumeToDB,
 }: {
   streamedSummaryData: string;
   streamedJDData: string;
+  previewTemplate?: any;
   saveResumeToDB: (data?: any) => Promise<void>;
 }) => {
   const dispatch = useDispatch();
+  console.log(previewTemplate, "por");
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newSecondarySkill, setNewSecondarySkill] = useState(false);
@@ -313,7 +316,11 @@ const ResumeTemplate6 = ({
       <div className=" flex  w-[8%] bg-[#e04127]"></div>
       <div className="w-full pl-5">
         <div className="flex flex-col w-12/12 p-8">
-          <h2 className="text-4xl xs:2xl md:text-5xl  font-bold hover:shadow-md hover:bg-gray-100">
+          <h2
+            className={`${
+              previewTemplate ? "text-4xl" : "xs:2xl md:text-5xl  "
+            } text-4xl font-bold hover:shadow-md hover:bg-gray-100`}
+          >
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
