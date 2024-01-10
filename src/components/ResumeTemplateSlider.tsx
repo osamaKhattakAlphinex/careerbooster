@@ -1,23 +1,28 @@
 "use client";
 import { crownIcon } from "@/helpers/newIconsProviders";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Template } from "./TemplatesShowing";
 
 type Props = {
     templates: Template[];
-    setShowResume: any
     setSelectedTemplate: any
 };
 
-const ResumeTemplateSlider = ({ templates, setShowResume, setSelectedTemplate }: Props) => {
+const ResumeTemplateSlider = ({ templates, setSelectedTemplate }: Props) => {
     const params = useSearchParams();
     const templateId: number = parseInt(params.get("templateId") || "0");
     const resumeId: string | null = params.get("resumeId");
-    console.log(resumeId);
 
+
+    useEffect(() => {
+        if (templateId) {
+            const currentTemplate = templates.find((template) => template.id === templateId)
+            setSelectedTemplate(currentTemplate)
+        }
+    }, [templateId])
     return (
         <div className="p-4 flex flex-row items-center justify-center gap-8 flex-wrap box-border h-[80vh] overflow-y-auto ">
             {templates.map((template, index) => (
@@ -28,11 +33,10 @@ const ResumeTemplateSlider = ({ templates, setShowResume, setSelectedTemplate }:
                 >
 
                     <button onClick={() => {
-                        setShowResume(true)
                         setSelectedTemplate(template)
                     }}>
                         <Link
-                            href={`/resume-edit?templateId=${template.id}&resumeid=${resumeId}`}
+                            href={`/resume-edit?templateId=${template.id}&resumeId=${resumeId}`}
                             className="text-white no-underline"
                         >
                             <Image

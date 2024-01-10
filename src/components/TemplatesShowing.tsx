@@ -55,7 +55,6 @@ const TemplatesShowing = () => {
   const [activeTab, setActiveTab] = useState<Tabs>(tabs[0]);
 
   const [templates, setTemplates] = useState<Template[]>([]);
-  const [showResume, setShowResume] = useState<boolean>(false);
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(
     null
   );
@@ -69,9 +68,6 @@ const TemplatesShowing = () => {
       setTemplates(_templates);
     }
   };
-  useEffect(() => {
-    console.log("templates");
-  }, [templates]);
   useEffect(() => {
     setTemplates(ALL_TEMPLATES);
   }, []);
@@ -98,10 +94,9 @@ const TemplatesShowing = () => {
         </div>
 
         <div className=" text-center "> {activeTab.description}</div>
-        {templates && (
+        {templates.length > 0 && (
           <ResumeTemplateSlider
             templates={templates}
-            setShowResume={setShowResume}
             setSelectedTemplate={setSelectedTemplate}
           />
         )}
