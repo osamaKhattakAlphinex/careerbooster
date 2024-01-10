@@ -86,31 +86,23 @@ const SingleRecentResumeCard = ({
           </h4>
         </div>
       </div>
-      <div className="flex gap-3 ">
-        <button
-          onClick={handleOnView}
-          className="flex px-2 text-[16px] justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
-        >
-          {eyeIcon}
-          {pathname == "/dashboard" ? (
-            <span className="text-[13px] mx-2 text-neutral-400">View</span>
-          ) : (
-            ""
-          )}
-        </button>
+      <div className="flex gap-3">
         <button
           type="button"
           onClick={handleOnDelete}
-          className="flex px-2 justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
+          className="flex px-2 dark:hover:bg-gray-700 dark:hover:border-[#5f5f5f] dark:hover:text-white text-neutral-400  justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
         >
-          {trashIcon}{" "}
-          {pathname == "/dashboard" ? (
-            <span className="text-[13px] mx-2 text-neutral-400">Delete</span>
-          ) : (
-            ""
-          )}
+          {trashIcon} <span className="text-[13px] mx-2 ">Delete</span>
         </button>
-        {pathname == "/dashboard"
+        <button
+          onClick={handleOnView}
+          className="flex px-2 text-[16px] dark:hover:border-[#5f5f5f] dark:hover:bg-gray-700 dark:hover:text-white justify-center text-neutral-400 items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
+        >
+          {eyeIcon}
+          <span className="text-[13px] mx-2 ">View</span>
+        </button>
+
+        {/* {pathname == "/dashboard"
           ? ""
           : resume && (
               <DownloadService
@@ -119,7 +111,7 @@ const SingleRecentResumeCard = ({
                 templateId={templateId}
                 fileName="ai-resume"
               />
-            )}
+            )} */}
       </div>
     </div>
   );

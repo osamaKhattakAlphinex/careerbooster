@@ -70,7 +70,7 @@ const PreviewResume = ({ selectedTemplate }: any) => {
       {resume &&
         (resume?.name || resume?.contact?.email || resume?.summary) && (
           <>
-            <div className="transform scale-50 mt-[-285px]">
+            <div className="transform scale-50 relative -mt-[280px]">
               {selectedTemplate.category === "premium" && (
                 <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
                   {crownIcon}
@@ -80,7 +80,6 @@ const PreviewResume = ({ selectedTemplate }: any) => {
               <div
                 ref={componentRef}
                 className={` bg-white 
-                 
                ${previewTemplate ? `h-[1123px]` : "h-auto"} ${
                   previewTemplate ? `w-[794px]` : "w-auto"
                 } ${previewTemplate ? "overflow-hidden" : "overflow-visible"}
@@ -88,45 +87,45 @@ const PreviewResume = ({ selectedTemplate }: any) => {
               >
                 {selectedTemplate.template({})}
               </div>
-            </div>
-            {previewTemplate && (
-              <div className="flex items-center absolute right-20 bottom-0 ">
-                <button onClick={showPrevSection} className="text-white">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-4 h-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15.75 19.5 8.25 12l7.5-7.5"
-                    />
-                  </svg>
-                </button>
-                <span className="text-xl">{currentSection + 1}</span>
+              {previewTemplate && (
+                <div className="flex text-[#000] mt-3 justify-center">
+                  <button onClick={showPrevSection} className="text-[#000]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-8 h-8"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 19.5 8.25 12l7.5-7.5"
+                      />
+                    </svg>
+                  </button>
+                  <p className="text-4xl text-[#000]">{currentSection + 1}</p>
 
-                <button onClick={showNextSection} className="text-white">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-4 h-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                    />
-                  </svg>
-                </button>
-              </div>
-            )}
+                  <button onClick={showNextSection} className="text-[#000]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-8 h-8 text-[#000]"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              )}
+            </div>
           </>
         )}
     </>
