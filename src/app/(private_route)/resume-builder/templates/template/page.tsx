@@ -21,6 +21,7 @@ const Template = () => {
   const componentRef = useRef(null);
   const dispatch = useDispatch();
 
+
   const fetchDefaultResume = async () => {
     const res = await fetch(
       `/api/users/getOneByEmail?email=${session?.user?.email}`
@@ -40,6 +41,7 @@ const Template = () => {
     }
   }, []);
 
+
   return (
     <div className="lg:ml-[234px] ml-0 px-[15px]">
       {/* <UpgradeModal
@@ -58,7 +60,7 @@ const Template = () => {
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
 
-              <Link href="/resume-edit" target="_blank">
+              <Link href={`/resume-edit?templateId=${templateId}&resumeId=${resume.id}`} target="_blank">
                 <div
                   className={`rounded-lg font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 w-fit border border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2 mb-2
               `}

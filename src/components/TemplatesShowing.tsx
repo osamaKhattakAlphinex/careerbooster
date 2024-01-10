@@ -1,13 +1,7 @@
 "use client";
-
 import React, { useEffect, useRef, useState } from "react";
-
 import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import ResumeTemplateSlider from "./ResumeTemplateSlider";
-import { useDispatch, useSelector } from "react-redux";
-import { setUserData } from "@/store/userDataSlice";
-import { setResume } from "@/store/resumeSlice";
-import { useSession } from "next-auth/react";
 import PreviewResume from "./PreviewResume";
 export type Template = {
   id: number;
