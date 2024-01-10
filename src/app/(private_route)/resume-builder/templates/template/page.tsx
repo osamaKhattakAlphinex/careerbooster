@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import { setUserData } from "@/store/userDataSlice";
 import { setResume } from "@/store/resumeSlice";
 import Link from "next/link";
+import DownloadService from "@/helpers/downloadFile";
 
 const Template = () => {
   const params = useSearchParams();
@@ -20,7 +21,6 @@ const Template = () => {
   const templateId: number = parseInt(params.get("templateId") || "0");
   const componentRef = useRef(null);
   const dispatch = useDispatch();
-
 
   const fetchDefaultResume = async () => {
     const res = await fetch(
@@ -41,7 +41,6 @@ const Template = () => {
     }
   }, []);
 
-
   return (
     <div className="lg:ml-[234px] ml-0 px-[15px]">
       {/* <UpgradeModal
@@ -59,15 +58,27 @@ const Template = () => {
         {resume &&
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
-
-              <Link className="no-underline" href={`/resume-edit?templateId=${templateId}&resumeId=${resume.id}`} target="_blank">
-                <div
-                  className={` text-white rounded-lg font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 w-fit border border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2 mb-2
-              `}
+              <div className="flex items-center justify-end gap-3 pb-4">
+                <Link
+                  className="no-underline"
+                  href={`/resume-edit?templateId=${templateId}&resumeId=${resume.id}`}
+                  target="_blank"
                 >
-                  Preview Resume
-                </div>
-              </Link>
+                  <div
+                    className={`lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b] bg-transparent text-green-500 border border-green-500`}
+                  >
+                    Preview Resume
+                  </div>
+                </Link>
+
+                <DownloadService
+                  componentRef={componentRef}
+                  // view={handleOnView}
+                  templateId={templateId}
+                  fileName="ai-resume"
+                />
+              </div>
+
               <div className="relative">
                 {ALL_TEMPLATES[templateId - 1].category === "premium" && (
                   <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
