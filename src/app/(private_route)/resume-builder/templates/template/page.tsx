@@ -60,9 +60,9 @@ const Template = () => {
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
 
-              <Link href={`/resume-edit?templateId=${templateId}&resumeId=${resume.id}`} target="_blank">
+              <Link className="no-underline" href={`/resume-edit?templateId=${templateId}&resumeId=${resume.id}`} target="_blank">
                 <div
-                  className={`rounded-lg font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 w-fit border border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2 mb-2
+                  className={` text-white rounded-lg font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 w-fit border border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2 mb-2
               `}
                 >
                   Preview Resume
