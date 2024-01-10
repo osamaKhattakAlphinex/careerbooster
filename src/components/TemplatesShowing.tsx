@@ -80,42 +80,40 @@ const TemplatesShowing = () => {
   }, [activeTab]);
 
   return (
-    <div className="">
-      {!showResume ? (
-        <>
-          <div className="p-4 flex flex-row justify-center items-center gap-2">
-            {tabs.map((tab, index) => (
-              <button
-                key={index}
-                className={`px-4 py-2 text-sm rounded-full border border-gray-600  ${
-                  activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
-                }`}
-                onClick={() => setActiveTab(tab)}
-              >
-                {tab.title}
-              </button>
-            ))}
-          </div>
+    <div className="flex">
 
-          <div className=" text-center "> {activeTab.description}</div>
-          {templates && !showResume && (
-            <ResumeTemplateSlider
-              templates={templates}
-              setShowResume={setShowResume}
-              setSelectedTemplate={setSelectedTemplate}
-            />
-          )}
-        </>
-      ) : (
-        <div className="p-4 flex flex-col justify-start items-center gap-2">
-          <button onClick={() => setShowResume(false)}>
-            - Select Template
-          </button>
-          {selectedTemplate && (
-            <PreviewResume selectedTemplate={selectedTemplate} />
-          )}
+      <div className="w-4/12 border-r h-screen  bg-gray-700">
+
+        <div className=" p-4 flex flex-row flex-wrap items-center gap-2">
+          {tabs.map((tab, index) => (
+            <button
+              key={index}
+              className={`px-4 py-2 text-sm rounded-full border border-gray-600  ${activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
+                }`}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab.title}
+            </button>
+          ))}
         </div>
-      )}
+
+        <div className=" text-center "> {activeTab.description}</div>
+        {templates && (
+          <ResumeTemplateSlider
+            templates={templates}
+            setShowResume={setShowResume}
+            setSelectedTemplate={setSelectedTemplate}
+          />
+        )}
+      </div>
+
+      <div className="w-8/12 p-4  bg-gray-300 h-screen flex flex-col justify-start items-center gap-2">
+
+        {selectedTemplate && (
+          <PreviewResume selectedTemplate={selectedTemplate} />
+        )}
+      </div>
+
     </div>
   );
 };
