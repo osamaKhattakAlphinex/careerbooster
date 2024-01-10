@@ -71,14 +71,13 @@ const TemplatesShowing = () => {
 
   return (
     <div className="flex">
-      <div className="w-4/12 border-r h-[100%]  bg-gray-700">
+      <div className="w-4/12 border-r h-screen  bg-gray-700">
         <div className=" p-4 flex flex-row flex-wrap items-center gap-2">
           {tabs.map((tab, index) => (
             <button
               key={index}
-              className={`px-4 py-2 text-sm rounded-full border border-gray-600  ${
-                activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
-              }`}
+              className={`px-4 py-2 text-sm rounded-full border border-gray-600  ${activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
+                }`}
               onClick={() => setActiveTab(tab)}
             >
               {tab.title}
@@ -86,7 +85,6 @@ const TemplatesShowing = () => {
           ))}
         </div>
 
-        <div className=" text-center "> {activeTab.description}</div>
         {templates.length > 0 && (
           <ResumeTemplateSlider
             templates={templates}
