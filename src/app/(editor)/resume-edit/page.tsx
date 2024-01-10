@@ -3,436 +3,129 @@
 import { useFormik } from "formik";
 
 import ResumePreviews from "@/components/ResumePreviews";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { WorkExperience } from "@/components/new-dashboard/dashboard/resume-editor/experience";
+import { Education } from "@/components/new-dashboard/dashboard/resume-editor/education";
+import { useSelector } from "react-redux";
+import { current } from "@reduxjs/toolkit";
 
-type Education = {
-  educationLevel: string;
-  fieldOfStudy: string;
-  schoolName: string;
-  schoolLocation: string;
-  fromMonth: string;
-  fromYear: string;
-  isContinue: boolean;
-  toMonth: string;
-  toYear: string;
+type Resume = {
+  id?: string;
+  name?: string;
+  contact: {
+    linkedIn?: string;
+    email?: string;
+    phone?: string;
+  };
+  shortName?: string;
+  workExperienceArray: [
+    {
+      title?: string;
+      cityState?: string;
+      country?: string;
+      company?: string;
+      fromMonth?: string;
+      fromYear?: string;
+      isContinue?: boolean;
+      toMonth?: string;
+      toYear?: string;
+      achivements?: string[];
+    }
+  ];
+  education: [
+    {
+      educationLevel?: string;
+      fieldOfStudy?: string;
+      schoolName?: string;
+      schoolLocation?: string;
+      fromMonth?: string;
+      fromYear?: string;
+      isContinue?: boolean;
+      toMonth?: string;
+      toYear?: string;
+    }
+  ];
+  summary?: string;
+  jobTitle?: string;
+  primarySkills?: string[];
 };
 
-const WorkExperience = ({ experience, handleChange }: any) => {
-  const [collapse, setCollapse] = useState<boolean>(true);
-
-  return (
-    <div className="rounded-lg">
-      <div className="flex flex-row justify-between items-center p-6 bg-gray-100 shadow-md">
-        <div className="flex flex-col justify-start items-start ">
-          <h1 className="text-base font-semibold uppercase">
-            {experience.title}
-          </h1>
-          <div className=" italic">
-            <span>{experience.fromYear}</span>
-            <span>&nbsp; - &nbsp;</span>
-            <span>{experience.toYear}</span>
-          </div>
-        </div>
-        <button
-          onClick={() => setCollapse(!collapse)}
-          className=" border-none outline-none"
-        >
-          {collapse ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m19.5 8.25-7.5 7.5-7.5-7.5"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m4.5 15.75 7.5-7.5 7.5 7.5"
-              />
-            </svg>
-          )}
-        </button>
-      </div>
-      {!collapse && (
-        <div className="flex flex-col gap-3 p-6 bg-gray-50 shadow-sm">
-          <div className="grid grid-cols-3 gap-2">
-            <div className="">
-              <label htmlFor={`workTitle_${experience.index}`}>
-                Job Title:
-              </label>
-              <input
-                type="text"
-                id={`workTitle_${experience.index}`}
-                name={`workExperiences[${experience.index}].title`}
-                value={experience.title}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-            <div>
-              <label htmlFor={`workCompany_${experience.index}`}>
-                Company:
-              </label>
-              <input
-                type="text"
-                id={`workCompany_${experience.index}`}
-                name={`workExperiences[${experience.index}].company`}
-                value={experience.company}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-            <div>
-              <label htmlFor={`workCountry_${experience.index}`}>
-                Country:
-              </label>
-              <input
-                type="text"
-                id={`workCountry_${experience.index}`}
-                name={`workExperiences[${experience.index}].country`}
-                value={experience.country}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-3 gap-2">
-            <div>
-              <label htmlFor={`workFromMonth_${experience.index}`}>
-                From Month:
-              </label>
-              <input
-                type="text"
-                id={`workFromMonth_${experience.index}`}
-                name={`workExperiences[${experience.index}].fromMonth`}
-                value={experience.fromMonth}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-
-            <div>
-              <label htmlFor={`workFromYear_${experience.index}`}>
-                From Year:
-              </label>
-              <input
-                type="text"
-                id={`workFromYear_${experience.index}`}
-                name={`workExperiences[${experience.index}].fromYear`}
-                value={experience.fromYear}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-            <div>
-              <label htmlFor={`workToMonth_${experience.index}`}>
-                To Month:
-              </label>
-              <input
-                type="text"
-                id={`workToMonth_${experience.index}`}
-                name={`workExperiences[${experience.index}].toMonth`}
-                value={experience.toMonth}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-            <div>
-              <label htmlFor={`workToYear_${experience.index}`}>To Year:</label>
-              <input
-                type="text"
-                id={`workToYear_${experience.index}`}
-                name={`workExperiences[${experience.index}].toYear`}
-                value={experience.toYear}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-            <div>
-              <label htmlFor={`isContinue_${experience.index}`}>
-                Currently Working:
-              </label>
-              <input
-                type="text"
-                id={`isContinue_${experience.index}`}
-                name={`workExperiences[${experience.index}].isContinue`}
-                value={experience.isContinue}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-          </div>
-
-          <div className="w-full flex flex-col gap-2">
-            {experience.achivements &&
-              experience.achivements.length > 0 &&
-              experience.achivements.map(
-                (achivement: string, index: number) => (
-                  <textarea
-                    key={index}
-                    className=" w-full p-1 rounded-md bg-gray-300"
-                  >
-                    {achivement}
-                  </textarea>
-                )
-              )}
-          </div>
-          {/* Add other fields as needed */}
-        </div>
-      )}
-    </div>
-  );
+const initialValues = {
+  name: "",
+  contact: {
+    linkedIn: "",
+    email: "",
+    phone: "",
+  },
+  shortName: "",
+  workExperiences: [
+    {
+      title: "",
+      cityState: "",
+      country: "",
+      company: "",
+      fromMonth: "",
+      fromYear: "",
+      isContinue: true,
+      toMonth: "",
+      toYear: "",
+      achivements: [],
+    },
+  ],
+  education: [
+    {
+      educationLevel: "",
+      fieldOfStudy: "",
+      schoolName: "",
+      schoolLocation: "",
+      fromMonth: "",
+      fromYear: "",
+      isContinue: false,
+      toMonth: "",
+      toYear: "",
+    },
+  ],
+  summary: "",
+  jobTitle: "",
+  primarySkills: [],
 };
 
-const Education = ({
-  education,
-  index,
-  handleChange,
-}: {
-  education: Education;
-  index: number;
-  handleChange: any;
-}) => {
-  const [collapse, setCollapse] = useState<boolean>(true);
-
-  return (
-    <div className="rounded-lg">
-      <div className="flex flex-row justify-between items-center p-6 bg-gray-100 shadow-md">
-        <div className="flex flex-col justify-start items-start ">
-          <h1 className="text-base font-semibold uppercase">
-            {education.educationLevel}
-          </h1>
-          <div className=" italic">
-            <span>{education.fromYear}</span>
-            <span>&nbsp; - &nbsp;</span>
-            <span>{education.toYear}</span>
-          </div>
-        </div>
-        <button
-          onClick={() => setCollapse(!collapse)}
-          className=" border-none outline-none"
-        >
-          {collapse ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m19.5 8.25-7.5 7.5-7.5-7.5"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m4.5 15.75 7.5-7.5 7.5 7.5"
-              />
-            </svg>
-          )}
-        </button>
-      </div>
-      {!collapse && (
-        <div className="flex flex-col gap-3 p-6 bg-gray-50 shadow-sm">
-          <div className="grid grid-cols-3 gap-2">
-            <div className="">
-              <label htmlFor={`educationLevel_${index}`}>
-                Education Level:
-              </label>
-              <input
-                type="text"
-                id={`educationLevel_${index}`}
-                name={`educationLevel[${index}].educationLevel`}
-                value={education.educationLevel}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-            <div>
-              <label htmlFor={`fieldOfStudy_${index}`}>Field Of Study:</label>
-              <input
-                type="text"
-                id={`fieldOfStudy_${index}`}
-                // name={`educations[${index}].fieldOfStudy`}
-                value={education.fieldOfStudy}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-            <div>
-              <label htmlFor={`institute_${index}`}>Institute:</label>
-              <input
-                type="text"
-                id={`institute_${index}`}
-                name={`educations[${index}].schoolName`}
-                value={education.schoolName}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-            <div>
-              <label htmlFor={`location_${index}`}>Location:</label>
-              <input
-                type="text"
-                id={`location_${index}`}
-                name={`educations[${index}].schoolLocation`}
-                value={education.schoolLocation}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <label htmlFor={`educationFromMonth_${index}`}>From Month:</label>
-              <input
-                type="text"
-                id={`educationFromMonth_${index}`}
-                name={`educations[${index}].toMonth`}
-                value={education.fromMonth}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-
-            <div>
-              <label htmlFor={`educationFromYear_${index}`}>From Year:</label>
-              <input
-                type="text"
-                id={`educationFromYear_${index}`}
-                name={`educations[${index}].fromYear`}
-                value={education.fromYear}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-            <div>
-              <label htmlFor={`educationToMonth_${index}`}>To Month:</label>
-              <input
-                type="text"
-                id={`educationToMonth_${index}`}
-                name={`educations[${index}].toMonth`}
-                value={education.toMonth}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-            <div>
-              <label htmlFor={`educationToYear_${index}`}>To Year:</label>
-              <input
-                type="text"
-                id={`educationToYear_${index}`}
-                name={`educations[${index}].toYear`}
-                value={education.toYear}
-                onChange={handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+const getCurrentResume = (resume: Resume, resumes: Resume[]) => {
+  if (resume.id !== "") {
+    return resume;
+  }
+  if (resumes?.length > 0) {
+    return resumes[0];
+  }
 };
 
 const Editor = () => {
+  const { resume, userData } = useSelector((state: any) => state);
+
+  const [currentResume, setCurrentResume] = useState<Resume | undefined>(
+    getCurrentResume(resume, userData.resumes)
+  );
+
+  console.log(currentResume);
+
+  useEffect(() => {}, [currentResume]);
+
   const formik = useFormik({
     initialValues: {
-      name: "Muhammad Waqas Shaukat",
+      name: currentResume?.name || "",
       contact: {
-        linkedIn: "dlsldsd/dkfkdkf/fkdlg",
-        email: "132323424",
-        phone: "132323424",
+        linkedIn: currentResume?.contact?.linkedIn || "",
+        email: currentResume?.contact?.email || "",
+        phone: currentResume?.contact?.phone || "",
       },
-      shortName: "WS",
-      workExperiences: [
-        {
-          title: "Sr Software Engineer",
-          cityState: "Rawalpindi",
-          country: "Paksiatan",
-          company: "Elysium Sols",
-          fromMonth: "Feb",
-          fromYear: "2023",
-          isContinue: true,
-          toMonth: "Sep",
-          toYear: "2023",
-          achivements: [
-            "Led the development and implementation of React-based solutions for client projects, resulting in a 20% increase in user engagement.",
-            "Collaborated with cross-functional teams to architect and design scalable and maintainable front-end systems, improving overall project delivery timelines by 15%.",
-            "Mentored and coached junior developers in React best practices, resulting in an improvement of code quality and a reduction in bug-related issues by 30%.",
-            "Conducted regular code reviews and provided constructive feedback, leading to a 25% increase in overall code quality and performance.",
-            "Successfully resolved complex technical challenges through effective problem-solving and decision-making, ensuring timely project delivery and client satisfaction.",
-          ],
-        },
-        {
-          title: "Sr Software Engineer",
-          cityState: "Rawalpindi",
-          country: "Paksiatan",
-          company: "Elysium Sols",
-          fromMonth: "Feb",
-          fromYear: "2023",
-          isContinue: true,
-          toMonth: "Sep",
-          toYear: "2023",
-          achivements: [
-            "Led the development and implementation of React-based solutions for client projects, resulting in a 20% increase in user engagement.",
-            "Collaborated with cross-functional teams to architect and design scalable and maintainable front-end systems, improving overall project delivery timelines by 15%.",
-            "Mentored and coached junior developers in React best practices, resulting in an improvement of code quality and a reduction in bug-related issues by 30%.",
-            "Conducted regular code reviews and provided constructive feedback, leading to a 25% increase in overall code quality and performance.",
-            "Successfully resolved complex technical challenges through effective problem-solving and decision-making, ensuring timely project delivery and client satisfaction.",
-          ],
-        },
-      ],
-      education: [
-        {
-          educationLevel: "MS",
-          fieldOfStudy: "Software Engineering",
-          schoolName: "Bahria University Islamabad",
-          schoolLocation: "",
-          fromMonth: "",
-          fromYear: "2018",
-          isContinue: false,
-          toMonth: "",
-          toYear: "2020",
-        },
-      ],
-      summary:
-        "MUHAMMAD WAQAS SHAUKAT is an experienced and accomplished Sr Software Engineer with a strong background in software engineering and development. With a Master's degree in Software Engineering and over 3 years of experience, he has consistently demonstrated exceptional leadership and strategic thinking skills. In his previous role as Sr Software Engineer at Elysium Sols, MUHAMMAD WAQAS SHAUKAT spearheaded successful software development projects, resulting in improved efficiency and client satisfaction. He possesses a deep understanding of various programming languages, frameworks, and databases, including JavaScript, React, Redux, MongoDB, and MySQL. He has a proven track record of delivering high-quality and scalable solutions using best practices and innovative technologies. MUHAMMAD WAQAS SHAUKAT's expertise extends to front-end development, with proficiency in HTML, CSS, and React, as well as strong knowledge of design patterns and REST APIs. He has a keen eye for detail and a passion for creating intuitive and user-friendly interfaces. With his strong vision and strategic mindset, MUHAMMAD WAQAS SHAUKAT is driven to deliver exceptional results in any challenging environment. His dedication, technical prowess, and ability to lead cross-functional teams make him a valuable asset to any organization. MUHAMMAD WAQAS SHAUKAT is ready to bring his expertise and unique services to a new role as a {{jobPosition}}. He is equipped with the skills, knowledge, and passion to drive innovation and achieve outstanding results for his clients or employers.",
-      jobTitle: "",
-      primarySkills: ["React", "Tailwindcss", "Node"],
+      shortName: currentResume?.shortName || "",
+      workExperiences: currentResume?.workExperienceArray || [],
+      education: currentResume?.education || [],
+      summary: currentResume?.summary || "",
+      jobTitle: currentResume?.jobTitle || "",
+      primarySkills: currentResume?.primarySkills || [],
     },
+
     onSubmit: async (values, action) => {
       action.resetForm();
     },
@@ -452,7 +145,7 @@ const Editor = () => {
                 name="name"
                 value={formik.values.name}
                 onChange={formik.handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300 bg-gray-300"
+                className="p-2 w-full rounded-md bg-gray-100 text-gray-600"
               />
             </div>
             <div className=" w-1/4 text-sm">
@@ -463,7 +156,7 @@ const Editor = () => {
                 name="shortName"
                 value={formik.values.shortName}
                 onChange={formik.handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
+                className="p-2 w-full rounded-md bg-gray-100 text-gray-600"
               />
             </div>
           </div>
@@ -477,7 +170,7 @@ const Editor = () => {
               name="jobTitle"
               value={formik.values.jobTitle}
               onChange={formik.handleChange}
-              className="border p-2 w-full rounded-md bg-gray-300"
+              className="p-2 w-full rounded-md bg-gray-100 text-gray-600"
             />
           </div>
 
@@ -489,9 +182,9 @@ const Editor = () => {
                 type="number"
                 id="contact"
                 name="contact.phone"
-                value={formik.values.contact.phone}
+                value={formik.values.contact?.phone}
                 onChange={formik.handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
+                className="p-2 w-full rounded-md bg-gray-100 text-gray-600"
               />
             </div>
             <div>
@@ -500,9 +193,9 @@ const Editor = () => {
                 type="email"
                 id="email"
                 name="contact.email"
-                value={formik.values.contact.email}
+                value={formik.values.contact?.email}
                 onChange={formik.handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
+                className="p-2 w-full rounded-md bg-gray-100 text-gray-600"
               />
             </div>
             <div>
@@ -511,9 +204,9 @@ const Editor = () => {
                 type="text"
                 id="linkedIn"
                 name="contact.linkedIn"
-                value={formik.values.contact.linkedIn}
+                value={formik.values.contact?.linkedIn}
                 onChange={formik.handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
+                className="p-2 w-full rounded-md bg-gray-100 text-gray-600"
               />
             </div>
           </div>
@@ -527,7 +220,7 @@ const Editor = () => {
               rows={10}
               value={formik.values.summary}
               onChange={formik.handleChange}
-              className="border p-2 w-full rounded-md bg-gray-300"
+              className="p-2 w-full rounded-md bg-gray-100 text-gray-600"
             ></textarea>
           </div>
 
@@ -536,7 +229,7 @@ const Editor = () => {
           <div className=" col-span-2 text-sm  space-y-2">
             <h2 className="text-base font-bold mb-2 ">Work Experience</h2>
 
-            {formik.values.workExperiences.map(
+            {formik.values.workExperiences?.map(
               (experience: any, index: number) => (
                 <WorkExperience
                   key={index}
@@ -549,7 +242,7 @@ const Editor = () => {
           {/* Educations */}
           <div className=" col-span-2 text-sm  space-y-2">
             <h2 className="text-base font-bold mb-2 ">Education</h2>
-            {formik.values.education.map((ed: any, index: number) => (
+            {formik.values.education?.map((ed: any, index: number) => (
               <Education
                 key={index}
                 index={index}
@@ -559,18 +252,23 @@ const Editor = () => {
             ))}
           </div>
           {/* Skills */}
-          <div className="col-span-2 text-sm">
-            {formik.values.primarySkills.map((skill: string, index: number) => (
-              <input
-                key={index}
-                type="text"
-                id={`skill-${index}`}
-                name="skill"
-                value={skill}
-                onChange={formik.handleChange}
-                className="border p-2 w-full rounded-md bg-gray-300"
-              />
-            ))}
+          <div className="col-span-2 text-sm  ">
+            <h2 className="text-base font-bold mb-2 ">Skills</h2>
+            <div className="grid grid-cols-2 gap-2">
+              {formik.values.primarySkills?.map(
+                (skill: string, index: number) => (
+                  <input
+                    key={index}
+                    type="text"
+                    id={`skill-${index}`}
+                    name="skill"
+                    value={skill}
+                    onChange={formik.handleChange}
+                    className="p-2 w-full rounded-sm text-sm  bg-gray-100 text-gray-600"
+                  />
+                )
+              )}
+            </div>
           </div>
         </div>
       </div>
