@@ -3,7 +3,7 @@
 import { useFormik } from "formik";
 
 import ResumePreviews from "@/components/ResumePreviews";
-import React from "react";
+import React, { useState } from "react";
 
 type Education = {
   educationLevel: string;
@@ -18,120 +18,186 @@ type Education = {
 };
 
 const WorkExperience = ({ experience, handleChange }: any) => {
+  const [collapse, setCollapse] = useState<boolean>(true);
+
   return (
-    <div className="flex flex-col gap-3">
-      <div className="grid grid-cols-3 gap-2">
-        <div className="">
-          <label htmlFor={`workTitle_${experience.index}`}>Job Title:</label>
-          <input
-            type="text"
-            id={`workTitle_${experience.index}`}
-            name={`workExperiences[${experience.index}].title`}
-            value={experience.title}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
+    <div className="rounded-lg">
+      <div className="flex flex-row justify-between items-center p-6 bg-gray-100 shadow-md">
+        <div className="flex flex-col justify-start items-start ">
+          <h1 className="text-base font-semibold uppercase">
+            {experience.title}
+          </h1>
+          <div className=" italic">
+            <span>{experience.fromYear}</span>
+            <span>&nbsp; - &nbsp;</span>
+            <span>{experience.toYear}</span>
+          </div>
         </div>
-        <div>
-          <label htmlFor={`workCompany_${experience.index}`}>Company:</label>
-          <input
-            type="text"
-            id={`workCompany_${experience.index}`}
-            name={`workExperiences[${experience.index}].company`}
-            value={experience.company}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
-        </div>
-        <div>
-          <label htmlFor={`workCountry_${experience.index}`}>Country:</label>
-          <input
-            type="text"
-            id={`workCountry_${experience.index}`}
-            name={`workExperiences[${experience.index}].country`}
-            value={experience.country}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-3 gap-2">
-        <div>
-          <label htmlFor={`workFromMonth_${experience.index}`}>
-            From Month:
-          </label>
-          <input
-            type="text"
-            id={`workFromMonth_${experience.index}`}
-            name={`workExperiences[${experience.index}].fromMonth`}
-            value={experience.fromMonth}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
-        </div>
-
-        <div>
-          <label htmlFor={`workFromYear_${experience.index}`}>From Year:</label>
-          <input
-            type="text"
-            id={`workFromYear_${experience.index}`}
-            name={`workExperiences[${experience.index}].fromYear`}
-            value={experience.fromYear}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
-        </div>
-        <div>
-          <label htmlFor={`workToMonth_${experience.index}`}>To Month:</label>
-          <input
-            type="text"
-            id={`workToMonth_${experience.index}`}
-            name={`workExperiences[${experience.index}].toMonth`}
-            value={experience.toMonth}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
-        </div>
-        <div>
-          <label htmlFor={`workToYear_${experience.index}`}>To Year:</label>
-          <input
-            type="text"
-            id={`workToYear_${experience.index}`}
-            name={`workExperiences[${experience.index}].toYear`}
-            value={experience.toYear}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
-        </div>
-        <div>
-          <label htmlFor={`isContinue_${experience.index}`}>
-            Currently Working:
-          </label>
-          <input
-            type="text"
-            id={`isContinue_${experience.index}`}
-            name={`workExperiences[${experience.index}].isContinue`}
-            value={experience.isContinue}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
-        </div>
-      </div>
-
-      <div className="w-full flex flex-col gap-2">
-        {experience.achivements &&
-          experience.achivements.length > 0 &&
-          experience.achivements.map((achivement: string, index: number) => (
-            <textarea
-              key={index}
-              className=" w-full p-1 rounded-md bg-gray-300"
+        <button
+          onClick={() => setCollapse(!collapse)}
+          className=" border-none outline-none"
+        >
+          {collapse ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
             >
-              {achivement}
-            </textarea>
-          ))}
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m19.5 8.25-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m4.5 15.75 7.5-7.5 7.5 7.5"
+              />
+            </svg>
+          )}
+        </button>
       </div>
-      {/* Add other fields as needed */}
+      {!collapse && (
+        <div className="flex flex-col gap-3 p-6 bg-gray-50 shadow-sm">
+          <div className="grid grid-cols-3 gap-2">
+            <div className="">
+              <label htmlFor={`workTitle_${experience.index}`}>
+                Job Title:
+              </label>
+              <input
+                type="text"
+                id={`workTitle_${experience.index}`}
+                name={`workExperiences[${experience.index}].title`}
+                value={experience.title}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+            <div>
+              <label htmlFor={`workCompany_${experience.index}`}>
+                Company:
+              </label>
+              <input
+                type="text"
+                id={`workCompany_${experience.index}`}
+                name={`workExperiences[${experience.index}].company`}
+                value={experience.company}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+            <div>
+              <label htmlFor={`workCountry_${experience.index}`}>
+                Country:
+              </label>
+              <input
+                type="text"
+                id={`workCountry_${experience.index}`}
+                name={`workExperiences[${experience.index}].country`}
+                value={experience.country}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-2">
+            <div>
+              <label htmlFor={`workFromMonth_${experience.index}`}>
+                From Month:
+              </label>
+              <input
+                type="text"
+                id={`workFromMonth_${experience.index}`}
+                name={`workExperiences[${experience.index}].fromMonth`}
+                value={experience.fromMonth}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+
+            <div>
+              <label htmlFor={`workFromYear_${experience.index}`}>
+                From Year:
+              </label>
+              <input
+                type="text"
+                id={`workFromYear_${experience.index}`}
+                name={`workExperiences[${experience.index}].fromYear`}
+                value={experience.fromYear}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+            <div>
+              <label htmlFor={`workToMonth_${experience.index}`}>
+                To Month:
+              </label>
+              <input
+                type="text"
+                id={`workToMonth_${experience.index}`}
+                name={`workExperiences[${experience.index}].toMonth`}
+                value={experience.toMonth}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+            <div>
+              <label htmlFor={`workToYear_${experience.index}`}>To Year:</label>
+              <input
+                type="text"
+                id={`workToYear_${experience.index}`}
+                name={`workExperiences[${experience.index}].toYear`}
+                value={experience.toYear}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+            <div>
+              <label htmlFor={`isContinue_${experience.index}`}>
+                Currently Working:
+              </label>
+              <input
+                type="text"
+                id={`isContinue_${experience.index}`}
+                name={`workExperiences[${experience.index}].isContinue`}
+                value={experience.isContinue}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+          </div>
+
+          <div className="w-full flex flex-col gap-2">
+            {experience.achivements &&
+              experience.achivements.length > 0 &&
+              experience.achivements.map(
+                (achivement: string, index: number) => (
+                  <textarea
+                    key={index}
+                    className=" w-full p-1 rounded-md bg-gray-300"
+                  >
+                    {achivement}
+                  </textarea>
+                )
+              )}
+          </div>
+          {/* Add other fields as needed */}
+        </div>
+      )}
     </div>
   );
 };
@@ -145,102 +211,158 @@ const Education = ({
   index: number;
   handleChange: any;
 }) => {
+  const [collapse, setCollapse] = useState<boolean>(true);
+
   return (
-    <div className="flex flex-col gap-3">
-      <div className="grid grid-cols-3 gap-2">
-        <div className="">
-          <label htmlFor={`educationLevel_${index}`}>Education Level:</label>
-          <input
-            type="text"
-            id={`educationLevel_${index}`}
-            name={`educationLevel[${index}].educationLevel`}
-            value={education.educationLevel}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
+    <div className="rounded-lg">
+      <div className="flex flex-row justify-between items-center p-6 bg-gray-100 shadow-md">
+        <div className="flex flex-col justify-start items-start ">
+          <h1 className="text-base font-semibold uppercase">
+            {education.educationLevel}
+          </h1>
+          <div className=" italic">
+            <span>{education.fromYear}</span>
+            <span>&nbsp; - &nbsp;</span>
+            <span>{education.toYear}</span>
+          </div>
         </div>
-        <div>
-          <label htmlFor={`fieldOfStudy_${index}`}>Field Of Study:</label>
-          <input
-            type="text"
-            id={`fieldOfStudy_${index}`}
-            // name={`educations[${index}].fieldOfStudy`}
-            value={education.fieldOfStudy}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
-        </div>
-        <div>
-          <label htmlFor={`institute_${index}`}>Institute:</label>
-          <input
-            type="text"
-            id={`institute_${index}`}
-            name={`educations[${index}].schoolName`}
-            value={education.schoolName}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
-        </div>
-        <div>
-          <label htmlFor={`location_${index}`}>Location:</label>
-          <input
-            type="text"
-            id={`location_${index}`}
-            name={`educations[${index}].schoolLocation`}
-            value={education.schoolLocation}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
-        </div>
+        <button
+          onClick={() => setCollapse(!collapse)}
+          className=" border-none outline-none"
+        >
+          {collapse ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m19.5 8.25-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m4.5 15.75 7.5-7.5 7.5 7.5"
+              />
+            </svg>
+          )}
+        </button>
       </div>
+      {!collapse && (
+        <div className="flex flex-col gap-3 p-6 bg-gray-50 shadow-sm">
+          <div className="grid grid-cols-3 gap-2">
+            <div className="">
+              <label htmlFor={`educationLevel_${index}`}>
+                Education Level:
+              </label>
+              <input
+                type="text"
+                id={`educationLevel_${index}`}
+                name={`educationLevel[${index}].educationLevel`}
+                value={education.educationLevel}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+            <div>
+              <label htmlFor={`fieldOfStudy_${index}`}>Field Of Study:</label>
+              <input
+                type="text"
+                id={`fieldOfStudy_${index}`}
+                // name={`educations[${index}].fieldOfStudy`}
+                value={education.fieldOfStudy}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+            <div>
+              <label htmlFor={`institute_${index}`}>Institute:</label>
+              <input
+                type="text"
+                id={`institute_${index}`}
+                name={`educations[${index}].schoolName`}
+                value={education.schoolName}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+            <div>
+              <label htmlFor={`location_${index}`}>Location:</label>
+              <input
+                type="text"
+                id={`location_${index}`}
+                name={`educations[${index}].schoolLocation`}
+                value={education.schoolLocation}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+          </div>
 
-      <div className="grid grid-cols-2 gap-2">
-        <div>
-          <label htmlFor={`educationFromMonth_${index}`}>From Month:</label>
-          <input
-            type="text"
-            id={`educationFromMonth_${index}`}
-            name={`educations[${index}].toMonth`}
-            value={education.fromMonth}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
-        </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label htmlFor={`educationFromMonth_${index}`}>From Month:</label>
+              <input
+                type="text"
+                id={`educationFromMonth_${index}`}
+                name={`educations[${index}].toMonth`}
+                value={education.fromMonth}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
 
-        <div>
-          <label htmlFor={`educationFromYear_${index}`}>From Year:</label>
-          <input
-            type="text"
-            id={`educationFromYear_${index}`}
-            name={`educations[${index}].fromYear`}
-            value={education.fromYear}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
+            <div>
+              <label htmlFor={`educationFromYear_${index}`}>From Year:</label>
+              <input
+                type="text"
+                id={`educationFromYear_${index}`}
+                name={`educations[${index}].fromYear`}
+                value={education.fromYear}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+            <div>
+              <label htmlFor={`educationToMonth_${index}`}>To Month:</label>
+              <input
+                type="text"
+                id={`educationToMonth_${index}`}
+                name={`educations[${index}].toMonth`}
+                value={education.toMonth}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+            <div>
+              <label htmlFor={`educationToYear_${index}`}>To Year:</label>
+              <input
+                type="text"
+                id={`educationToYear_${index}`}
+                name={`educations[${index}].toYear`}
+                value={education.toYear}
+                onChange={handleChange}
+                className="border p-2 w-full rounded-md bg-gray-300"
+              />
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor={`educationToMonth_${index}`}>To Month:</label>
-          <input
-            type="text"
-            id={`educationToMonth_${index}`}
-            name={`educations[${index}].toMonth`}
-            value={education.toMonth}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
-        </div>
-        <div>
-          <label htmlFor={`educationToYear_${index}`}>To Year:</label>
-          <input
-            type="text"
-            id={`educationToYear_${index}`}
-            name={`educations[${index}].toYear`}
-            value={education.toYear}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md bg-gray-300"
-          />
-        </div>
-      </div>
+      )}
     </div>
   );
 };
@@ -256,6 +378,24 @@ const Editor = () => {
       },
       shortName: "WS",
       workExperiences: [
+        {
+          title: "Sr Software Engineer",
+          cityState: "Rawalpindi",
+          country: "Paksiatan",
+          company: "Elysium Sols",
+          fromMonth: "Feb",
+          fromYear: "2023",
+          isContinue: true,
+          toMonth: "Sep",
+          toYear: "2023",
+          achivements: [
+            "Led the development and implementation of React-based solutions for client projects, resulting in a 20% increase in user engagement.",
+            "Collaborated with cross-functional teams to architect and design scalable and maintainable front-end systems, improving overall project delivery timelines by 15%.",
+            "Mentored and coached junior developers in React best practices, resulting in an improvement of code quality and a reduction in bug-related issues by 30%.",
+            "Conducted regular code reviews and provided constructive feedback, leading to a 25% increase in overall code quality and performance.",
+            "Successfully resolved complex technical challenges through effective problem-solving and decision-making, ensuring timely project delivery and client satisfaction.",
+          ],
+        },
         {
           title: "Sr Software Engineer",
           cityState: "Rawalpindi",
@@ -393,7 +533,9 @@ const Editor = () => {
 
           {/* Work Experience */}
 
-          <div className=" col-span-2 text-sm">
+          <div className=" col-span-2 text-sm  space-y-2">
+            <h2 className="text-base font-bold mb-2 ">Work Experience</h2>
+
             {formik.values.workExperiences.map(
               (experience: any, index: number) => (
                 <WorkExperience
@@ -405,7 +547,8 @@ const Editor = () => {
             )}
           </div>
           {/* Educations */}
-          <div className=" col-span-2 text-sm">
+          <div className=" col-span-2 text-sm  space-y-2">
+            <h2 className="text-base font-bold mb-2 ">Education</h2>
             {formik.values.education.map((ed: any, index: number) => (
               <Education
                 key={index}
@@ -431,7 +574,6 @@ const Editor = () => {
           </div>
         </div>
       </div>
-
 
       <div className="w-5/12 bg-slate-200 h-screen">
         <ResumePreviews />
