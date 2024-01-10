@@ -467,30 +467,40 @@ const ResumeBuilder = () => {
   const [previewTemplate, setPreviewTemplate] = useState(true);
   const sectionHeight = 1123; // Define your section height in pixels
   const sectionWidth = 794; // Define your section width in pixels
-  const numSections = Math.ceil(contentHeight / sectionHeight);
+  let numSections: number;
+  // console.log(numSections);
   const [currentSection, setCurrentSection] = useState(1);
 
   useEffect(() => {
     if (componentRef.current) {
       const height = componentRef.current.scrollHeight;
+      console.log(height);
 
-      setContentHeight(height);
+      numSections = Math.ceil(height / 1123);
+      // setContentHeight(height);
+      console.log(numSections);
     }
   }, [componentRef.current]); // Recalculate contentHeight when it changes
 
   const showNextSection = () => {
-    if (currentSection < numSections - 1) {
-      setCurrentSection(currentSection + 1);
-      console.log(currentSection);
-      componentRef.current.scrollTop = currentSection * sectionHeight;
+    if (currentSection < numSections) {
+      setCurrentSection((prev) => {
+        const nextSection = prev + 1;
+        console.log(nextSection);
+        componentRef.current.scrollTop = nextSection * sectionHeight;
+        return nextSection;
+      });
     }
   };
 
   const showPrevSection = () => {
-    if (currentSection > 0) {
-      setCurrentSection(currentSection - 1);
-      console.log(currentSection);
-      componentRef.current.scrollTop = currentSection * sectionHeight;
+    if (currentSection > 1) {
+      setCurrentSection((prev) => {
+        const prevSection = prev - 1;
+        console.log(prevSection);
+        componentRef.current.scrollTop = prevSection * sectionHeight;
+        return prevSection;
+      });
     }
   };
 
@@ -562,7 +572,7 @@ const ResumeBuilder = () => {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px] ">
+        <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]">
           <Link
             href="/dashboard"
             className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center hover:opacity-80 transition-all"
@@ -661,6 +671,7 @@ const ResumeBuilder = () => {
               resumeData?.contact?.email ||
               resumeData?.summary) && (
               <>
+
                 <Link href="/resume-edit">
                   <div
                     className={`rounded-lg font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 w-fit border border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
@@ -668,84 +679,73 @@ const ResumeBuilder = () => {
                     Preview/Edit Resume
                   </div>
                 </Link>
-                <div className={`my-10   `}>
+                <div
+                  className={`my-10 transform ${previewTemplate ? "scale-50" : ""
+                    } ${previewTemplate ? `h-[1193px]` : "h-auto"} ${previewTemplate ? `w-[794px]` : "w-auto"
+                    } ${previewTemplate ? "overflow-hidden" : "overflow-visible"} 
+              } ${resumeData.state.resumeLoading ? "animate-pulse" : ""}`}
+                >
                   {/* <Link href="#" className="text-black">Preview</Link> */}
                   <div
-                    className={`bg-white  ${resumeData.state.resumeLoading ? "animate-pulse" : ""
-                      }`}
+                    className={`bg-white transform 
+                  ${previewTemplate ? "scale-10" : ""} ${previewTemplate ? `h-[1123px]` : "h-auto"
+                      } ${previewTemplate ? `w-[794px]` : "w-auto"} ${previewTemplate ? "overflow-hidden" : "overflow-visible"
+                      } 
+                  } ${resumeData.state.resumeLoading ? "animate-pulse" : ""}`}
                     ref={componentRef}
-                    // style={{
-                    //   height: `${sectionHeight}px`,
-                    //   transform: "scale(0.5)",
-                    //   width: `${sectionWidth}px`,
-                    //   overflowY: "hidden",
-                    // }}
-
-                    style={{
-                      height: previewTemplate ? `${sectionHeight}px` : "auto",
-                      width: previewTemplate ? `${sectionWidth}px` : "auto",
-                      transform: previewTemplate ? "scale(0.5)" : "none",
-
-                      overflowY: previewTemplate ? "hidden" : "visible",
-                    }}
                   >
-
-
-                    {/* <Link href="#" className="text-black">Preview</Link> */}
-
-
                     <ResumeTemplate1
                       streamedSummaryData={streamedSummaryData}
                       streamedJDData={streamedJDData}
                       saveResumeToDB={saveResumeToDB}
                     />
                   </div>
+
+                  {previewTemplate && (
+                    <div className="flex items-center absolute right-0 bottom-0 ">
+                      <button onClick={showPrevSection} className="text-white">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-11 h-11"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15.75 19.5 8.25 12l7.5-7.5"
+                          />
+                        </svg>
+                      </button>
+                      <span className="text-4xl">{currentSection}</span>
+
+                      <button onClick={showNextSection} className="text-white">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-11 h-11"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
                 </div>
               </>
-
             )}
           {showPopup && (
             <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
               {/* Popup content here */}
               Credit Limit Reached !
-            </div>
-          )}
-          {previewTemplate && (
-            <div className="flex items-center absolute left-[380px] top-[200px]">
-              <button onClick={showPrevSection} className="text-white">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 19.5 8.25 12l7.5-7.5"
-                  />
-                </svg>
-              </button>
-              {currentSection}
-
-              <button onClick={showNextSection} className="text-white">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              </button>
             </div>
           )}
         </div>
