@@ -433,7 +433,7 @@ const Editor = () => {
       </div>
 
 
-      <div className="w-5/12 bg-slate-200 h-screen">
+      <div className="w-5/12 bg-gray-700 h-screen">
         <ResumePreviews />
       </div>
     </div>

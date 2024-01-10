@@ -40,7 +40,7 @@ const PreviewResume = ({ selectedTemplate }: any) => {
     return <div>
         {resume &&
             (resume?.name || resume?.contact?.email || resume?.summary) && (
-                <div className="relative">
+                <div className="relative p-4">
                     {selectedTemplate.category === "premium" && (
                         <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
                             {crownIcon}

@@ -90,7 +90,7 @@ const TemplatesShowing = () => {
                         {tabs.map((tab, index) => (
                             <button
                                 key={index}
-                                className={`px-4 py-2 text-sm rounded-full border border-gray-600 text-[#000] ${activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
+                                className={`px-4 py-2 text-sm rounded-full border border-gray-600  ${activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
                                     }`}
                                 onClick={() => setActiveTab(tab)}
                             >
@@ -99,7 +99,7 @@ const TemplatesShowing = () => {
                         ))}
                     </div>
 
-                    <div className=" text-center  text-[#000]"> {activeTab.description}</div>
+                    <div className=" text-center "> {activeTab.description}</div>
                     {templates && !showResume &&
 
                         <ResumeTemplateSlider templates={templates} setShowResume={setShowResume} setSelectedTemplate={setSelectedTemplate} />
@@ -107,7 +107,7 @@ const TemplatesShowing = () => {
                 </>
             ) :
                 <div className="p-4 flex flex-col justify-start items-center gap-2">
-                    <button onClick={() => setShowResume(false)} className="text-[#000]">
+                    <button onClick={() => setShowResume(false)} >
                         - Select Template
                     </button>
                     {selectedTemplate && (
