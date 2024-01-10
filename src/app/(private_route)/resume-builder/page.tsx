@@ -234,10 +234,11 @@ const ResumeBuilder = () => {
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
         
-        ${experience?.fromMonth} ${experience?.fromYear} - ${experience?.isContinue
+        ${experience?.fromMonth} ${experience?.fromYear} - ${
+          experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
-          } | ${experience?.company} | 
+        } | ${experience?.company} | 
         ${experience?.cityState} ${experience?.country}
                   </h2>`;
         html += `<div>`;
@@ -464,7 +465,7 @@ const ResumeBuilder = () => {
   };
 
   const [contentHeight, setContentHeight] = useState(0);
-  const [previewTemplate, setPreviewTemplate] = useState(true);
+  const [previewTemplate, setPreviewTemplate] = useState(false);
   const sectionHeight = 1123; // Define your section height in pixels
   const sectionWidth = 794; // Define your section width in pixels
   let numSections: number;
@@ -671,7 +672,6 @@ const ResumeBuilder = () => {
               resumeData?.contact?.email ||
               resumeData?.summary) && (
               <>
-
                 <Link href="/resume-edit">
                   <div
                     className={`rounded-lg font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 w-fit border border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
@@ -680,17 +680,21 @@ const ResumeBuilder = () => {
                   </div>
                 </Link>
                 <div
-                  className={`my-10 transform ${previewTemplate ? "scale-50" : ""
-                    } ${previewTemplate ? `h-[1193px]` : "h-auto"} ${previewTemplate ? `w-[794px]` : "w-auto"
-                    } ${previewTemplate ? "overflow-hidden" : "overflow-visible"} 
+                  className={`my-10 transform ${
+                    previewTemplate ? "scale-50" : ""
+                  } ${previewTemplate ? `h-[1193px]` : "h-auto"} ${
+                    previewTemplate ? `w-[794px]` : "w-auto"
+                  } ${previewTemplate ? "overflow-hidden" : "overflow-visible"} 
               } ${resumeData.state.resumeLoading ? "animate-pulse" : ""}`}
                 >
                   {/* <Link href="#" className="text-black">Preview</Link> */}
                   <div
                     className={`bg-white transform 
-                  ${previewTemplate ? "scale-10" : ""} ${previewTemplate ? `h-[1123px]` : "h-auto"
-                      } ${previewTemplate ? `w-[794px]` : "w-auto"} ${previewTemplate ? "overflow-hidden" : "overflow-visible"
-                      } 
+                  ${previewTemplate ? "scale-10" : ""} ${
+                      previewTemplate ? `h-[1123px]` : "h-auto"
+                    } ${previewTemplate ? `w-[794px]` : "w-auto"} ${
+                      previewTemplate ? "overflow-hidden" : "overflow-visible"
+                    } 
                   } ${resumeData.state.resumeLoading ? "animate-pulse" : ""}`}
                     ref={componentRef}
                   >
