@@ -108,7 +108,7 @@ const Editor = () => {
 
   console.log(currentResume);
 
-  useEffect(() => {}, [currentResume]);
+  useEffect(() => { }, [currentResume]);
 
   const formik = useFormik({
     initialValues: {
@@ -273,7 +273,8 @@ const Editor = () => {
         </div>
       </div>
 
-      <div className="w-5/12 bg-slate-200 h-screen">
+
+      <div className="w-5/12 bg-gray-700 h-screen">
         <ResumePreviews />
       </div>
     </div>

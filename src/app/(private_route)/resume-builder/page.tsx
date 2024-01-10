@@ -234,10 +234,11 @@ const ResumeBuilder = () => {
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
         
-        ${experience?.fromMonth} ${experience?.fromYear} - ${experience?.isContinue
+        ${experience?.fromMonth} ${experience?.fromYear} - ${
+          experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
-          } | ${experience?.company} | 
+        } | ${experience?.company} | 
         ${experience?.cityState} ${experience?.country}
                   </h2>`;
         html += `<div>`;
@@ -326,33 +327,6 @@ const ResumeBuilder = () => {
     return [];
   };
 
-  // const getWorkExperience = async () => {
-  //   await getUserDataIfNotExists();
-  //   // dispatch(setLoadingState("workExperience"));
-  //   return fetch("/api/resumeBots/getBasicInfo", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       type: "workExperience",
-  //       jobPosition: resumeData.state.jobPosition,
-  //     }),
-  //   }).then(async (resp: any) => {
-  //     const res = await resp.json();
-  //     if (res.success) {
-  //       console.clear();
-  //       if (res?.data?.text) {
-  //         const tSon = JSON.stringify(res?.data?.text);
-  //         const myJSON = JSON.parse(tSon);
-  //         console.log("myJSON1: ", myJSON);
-  //         dispatch(setWorkExperience(myJSON));
-  //       } else if (res?.data) {
-  //         const myJSON = JSON.parse(res.data);
-  //         console.log("myJSON2: ", myJSON);
-  //         dispatch(setWorkExperience(myJSON));
-  //       }
-  //     }
-  //   });
-  // };
-
   const getPrimarySkills = async () => {
     // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("primarySkills"));
@@ -385,66 +359,6 @@ const ResumeBuilder = () => {
     // });
   };
 
-  const getProfessionalSkills = async () => {
-    // return makeAPICallWithRetry(async () => {
-    // dispatch(setLoadingState("professionalSkills"));
-    return fetch("/api/resumeBots/getBasicInfo", {
-      method: "POST",
-      body: JSON.stringify({
-        type: "professionalSkills",
-        email: session?.user?.email,
-        userData: aiInputUserData,
-        jobPosition: resumeData.state.jobPosition,
-        trainBotData: {
-          userEmail: userData.email,
-          // fileAddress: userData.files[0].fileName,
-          fileAddress: userData.uploadedResume.fileName,
-        },
-      }),
-    }).then(async (resp: any) => {
-      const res = await resp.json();
-      if (res.success) {
-        if (res?.result) {
-          let myJSON = JSON.parse(JSON.stringify(res.result));
-
-          myJSON = JSON.parse(myJSON);
-          dispatch(setProfessionalSkills({ professionalSkills: myJSON }));
-        }
-      }
-    });
-    // });
-  };
-
-  const getSecondarySkills = async () => {
-    // return makeAPICallWithRetry(async () => {
-    // dispatch(setLoadingState("secondarySkills"));
-    return fetch("/api/resumeBots/getBasicInfo", {
-      method: "POST",
-      body: JSON.stringify({
-        type: "secondarySkills",
-        email: session?.user?.email,
-        userData: aiInputUserData,
-        jobPosition: resumeData.state.jobPosition,
-        trainBotData: {
-          userEmail: userData.email,
-          // fileAddress: userData.files[0].fileName,
-          fileAddress: userData.uploadedResume.fileName,
-        },
-      }),
-    }).then(async (resp: any) => {
-      const res = await resp.json();
-      if (res.success) {
-        if (res?.result) {
-          let myJSON = JSON.parse(JSON.stringify(res.result));
-
-          myJSON = JSON.parse(myJSON);
-          dispatch(setSecondarySkills({ secondarySkills: myJSON }));
-        }
-      }
-    });
-    // });
-  };
-
   const getUserDataIfNotExists = async () => {
     // return makeAPICallWithRetry(async () => {
     if (!userData.isLoading && !userData.isFetched) {
@@ -462,38 +376,6 @@ const ResumeBuilder = () => {
     }
     // });
   };
-
-  const [contentHeight, setContentHeight] = useState(0);
-  const [previewTemplate, setPreviewTemplate] = useState(true);
-  const sectionHeight = 1123; // Define your section height in pixels
-  const sectionWidth = 794; // Define your section width in pixels
-  const numSections = Math.ceil(contentHeight / sectionHeight);
-  const [currentSection, setCurrentSection] = useState(1);
-
-  useEffect(() => {
-    if (componentRef.current) {
-      const height = componentRef.current.scrollHeight;
-
-      setContentHeight(height);
-    }
-  }, [componentRef.current]); // Recalculate contentHeight when it changes
-
-  const showNextSection = () => {
-    if (currentSection < numSections - 1) {
-      setCurrentSection(currentSection + 1);
-      console.log(currentSection);
-      componentRef.current.scrollTop = currentSection * sectionHeight;
-    }
-  };
-
-  const showPrevSection = () => {
-    if (currentSection > 0) {
-      setCurrentSection(currentSection - 1);
-      console.log(currentSection);
-      componentRef.current.scrollTop = currentSection * sectionHeight;
-    }
-  };
-
   const saveResumeToDB = async (data: any = "") => {
     // return makeAPICallWithRetry(async () => {
     const source = data === "" ? resumeData : data;
@@ -501,7 +383,6 @@ const ResumeBuilder = () => {
     if (!source.id || source.id === "") {
       obj = { ...source, id: makeid(), dateTime: new Date() };
     }
-
     axios
       .post("/api/resumeBots/saveResumeToDB", {
         email: session?.user?.email,
@@ -562,7 +443,7 @@ const ResumeBuilder = () => {
   return (
     <>
       <div className="w-full sm:w-full z-1000 ">
-        <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px] ">
+        <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]">
           <Link
             href="/dashboard"
             className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center hover:opacity-80 transition-all"
@@ -668,32 +549,18 @@ const ResumeBuilder = () => {
                     Preview/Edit Resume
                   </div>
                 </Link>
-                <div className={`my-10   `}>
+                <div
+                  className={`my-10 ${
+                    resumeData.state.resumeLoading ? "animate-pulse" : ""
+                  }`}
+                >
                   {/* <Link href="#" className="text-black">Preview</Link> */}
                   <div
-                    className={`bg-white  ${resumeData.state.resumeLoading ? "animate-pulse" : ""
-                      }`}
+                    className={`bg-white ${
+                      resumeData.state.resumeLoading ? "animate-pulse" : ""
+                    }`}
                     ref={componentRef}
-                    // style={{
-                    //   height: `${sectionHeight}px`,
-                    //   transform: "scale(0.5)",
-                    //   width: `${sectionWidth}px`,
-                    //   overflowY: "hidden",
-                    // }}
-
-                    style={{
-                      height: previewTemplate ? `${sectionHeight}px` : "auto",
-                      width: previewTemplate ? `${sectionWidth}px` : "auto",
-                      transform: previewTemplate ? "scale(0.5)" : "none",
-
-                      overflowY: previewTemplate ? "hidden" : "visible",
-                    }}
                   >
-
-
-                    {/* <Link href="#" className="text-black">Preview</Link> */}
-
-
                     <ResumeTemplate1
                       streamedSummaryData={streamedSummaryData}
                       streamedJDData={streamedJDData}
@@ -702,50 +569,11 @@ const ResumeBuilder = () => {
                   </div>
                 </div>
               </>
-
             )}
           {showPopup && (
             <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
               {/* Popup content here */}
               Credit Limit Reached !
-            </div>
-          )}
-          {previewTemplate && (
-            <div className="flex items-center absolute left-[380px] top-[200px]">
-              <button onClick={showPrevSection} className="text-white">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 19.5 8.25 12l7.5-7.5"
-                  />
-                </svg>
-              </button>
-              {currentSection}
-
-              <button onClick={showNextSection} className="text-white">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              </button>
             </div>
           )}
         </div>
