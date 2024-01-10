@@ -82,7 +82,7 @@ const TemplatesShowing = () => {
   return (
     <div className="flex">
 
-      <div className="w-4/12 border-r h-screen  bg-gray-700">
+      <div className="w-4/12 border-r h-[100%]  bg-gray-700">
 
         <div className=" p-4 flex flex-row flex-wrap items-center gap-2">
           {tabs.map((tab, index) => (
