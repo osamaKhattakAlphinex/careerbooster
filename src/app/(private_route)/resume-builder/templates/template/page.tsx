@@ -73,8 +73,6 @@ const Template = () => {
 
                 <DownloadService
                   componentRef={componentRef}
-                  // view={handleOnView}
-                  templateId={templateId}
                   fileName="ai-resume"
                 />
               </div>

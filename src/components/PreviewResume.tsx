@@ -1,4 +1,5 @@
 "use client";
+import DownloadService from "@/helpers/downloadFile";
 import { crownIcon } from "@/helpers/newIconsProviders";
 import { setResume } from "@/store/resumeSlice";
 import { setUserData } from "@/store/userDataSlice";
@@ -21,6 +22,7 @@ const PreviewResume = ({ selectedTemplate }: any) => {
 
   const { resume } = useSelector((state: any) => state);
   const componentRef = useRef<any>(null);
+  const downloadRef = useRef<any>(null);
   const resumeId: string | null = params.get("resumeId");
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
@@ -49,7 +51,6 @@ const PreviewResume = ({ selectedTemplate }: any) => {
   const sectionHeight = 1123; // Define your section height in pixels
   const sectionWidth = 794; // Define your section width in pixels
   const [numSections, setNumSections] = useState(0);
-
   const [currentSection, setCurrentSection] = useState(0);
   useEffect(() => {
     if (componentRef.current) {
@@ -78,23 +79,31 @@ const PreviewResume = ({ selectedTemplate }: any) => {
       {resume &&
         (resume?.name || resume?.contact?.email || resume?.summary) && (
           <>
+            {downloadRef && (
+              <DownloadService
+                componentRef={downloadRef}
+                fileName="ai-resume"
+              />
+            )}
             <div className="transform scale-50 relative mt-[-265px]">
               {selectedTemplate.category === "premium" && (
                 <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
                   {crownIcon}
                 </div>
               )}
+              <div ref={downloadRef} className="bg-white xs:hidden">
+                {selectedTemplate.template({ previewTemplate })}
+              </div>
 
               <div
                 ref={componentRef}
                 className={` bg-white 
-                 
                ${previewTemplate ? `h-[1123px]` : "h-auto"} ${
                   previewTemplate ? `w-[794px]` : "w-auto"
                 } ${previewTemplate ? "overflow-hidden" : "overflow-visible"}
                 } ${resumeData.state.resumeLoading ? "animate-pulse" : ""}`}
               >
-                {selectedTemplate.template({})}
+                {selectedTemplate.template({ previewTemplate })}
               </div>
             </div>
             {previewTemplate && (
