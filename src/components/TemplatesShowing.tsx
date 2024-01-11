@@ -76,8 +76,9 @@ const TemplatesShowing = () => {
           {tabs.map((tab, index) => (
             <button
               key={index}
-              className={`px-4 py-2 text-sm rounded-full border border-gray-600  ${activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
-                }`}
+              className={`px-4 py-2 text-sm rounded-full border border-gray-600  ${
+                activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
+              }`}
               onClick={() => setActiveTab(tab)}
             >
               {tab.title}
@@ -93,7 +94,7 @@ const TemplatesShowing = () => {
         )}
       </div>
 
-      <div className="w-8/12 p-4  bg-gray-300 h-screen flex flex-col justify-start items-center gap-2">
+      <div className="w-8/12 p-4  bg-gray-300 h-screen flex flex-col justify-start items-center">
         {selectedTemplate && (
           <PreviewResume selectedTemplate={selectedTemplate} />
         )}
