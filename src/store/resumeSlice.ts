@@ -37,6 +37,7 @@ export interface Resume {
   ];
   summary: string;
   workExperienceArray: WorkExperience[];
+  quantifyingExperience: boolean;
   workExperience: "";
   primarySkills: [];
   professionalSkills: [];
@@ -70,6 +71,7 @@ const initialState: Resume = {
   ],
   summary: "",
   workExperienceArray: [],
+  quantifyingExperience: true,
   workExperience: "",
   primarySkills: [],
   professionalSkills: [],
@@ -103,7 +105,12 @@ const resumeSlice = createSlice({
         [action.payload.name]: action.payload.value,
       };
     },
-
+    setQuantifyingExperience(state, action) {
+      return {
+        ...state,
+        quantifyingExperience: action.payload,
+      };
+    },
     setState(state, action) {
       return {
         ...state,
@@ -199,6 +206,7 @@ export const {
   setWorkExperienceArray,
   resetResume,
   emptyResume,
+  setQuantifyingExperience
   // setLoadingState,
 } = resumeSlice.actions;
 

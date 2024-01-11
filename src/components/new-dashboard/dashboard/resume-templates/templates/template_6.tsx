@@ -22,100 +22,20 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
-import useGetSummary from "@/helpers/useGetSummary";
+import useGetSummary from "@/hooks/useGetSummary";
 import Regenerate from "@/helpers/regenerate";
-
-const EditableField = ({
-  value,
-  type,
-  rows,
-  onSave,
-  style,
-}: {
-  value: string;
-  type?: string;
-  rows?: number;
-  style?: any;
-  onSave: (value: string) => void;
-}) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedValue, setEditedValue] = useState(value);
-  const [showPopup, setShowPopup] = useState(false);
-  useEffect(() => {
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 5000);
-    // Clean up the timeout to avoid memory leaks
-  }, [showPopup]); // The empty dependency array ensures that this effect runs only once after the initial render
-
-  const userData = useSelector((state: any) => state.userData);
-  const handleBlur = () => {
-    setIsEditing(false);
-    onSave(editedValue);
-  };
-
-  useEffect(() => {
-    if (value !== editedValue) {
-      setEditedValue(value);
-    }
-  }, [value]);
-  const showAlertpopupFun = () => {
-    !userData?.userPackageData?.limit?.can_edit_resume &&
-      alert("please upgrade to pro plan in order to edit !");
-  };
-  return (
-    <>
-      <span
-        onClick={() => {
-          setIsEditing(true);
-          //showAlertpopupFun();
-        }}
-        onBlur={handleBlur}
-        className=""
-      >
-        {userData?.userPackageData?.limit?.can_edit_resume && isEditing ? (
-          <>
-            {type === "textarea" ? (
-              <textarea
-                value={editedValue}
-                className="bg-transparent pr-2 w-full hover:cursor-text  h-auto"
-                rows={rows ? rows : 15}
-                onChange={(e: any) => setEditedValue(e.target.value)}
-                autoFocus
-                onBlur={handleBlur}
-              />
-            ) : (
-              <input
-                type="text"
-                value={editedValue}
-                className=" bg-transparent pr-2 hover:cursor-text"
-                style={style ? style : {}}
-                onChange={(e: any) => setEditedValue(e.target.value)}
-                autoFocus
-                onBlur={handleBlur}
-              />
-            )}
-          </>
-        ) : (
-          <span className="hover:cursor-text" title="click to edit">
-            {value}
-          </span>
-        )}
-      </span>
-    </>
-  );
-};
-
+import EditableField from "@/components/new-dashboard/common/EditableField";
 const ResumeTemplate6 = ({
-  streamedSummaryData,
   streamedJDData,
+  previewTemplate,
   saveResumeToDB,
 }: {
-  streamedSummaryData: string;
   streamedJDData: string;
+  previewTemplate?: any;
   saveResumeToDB: (data?: any) => Promise<void>;
 }) => {
   const dispatch = useDispatch();
+  console.log(previewTemplate, "por");
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newSecondarySkill, setNewSecondarySkill] = useState(false);
@@ -128,7 +48,9 @@ const ResumeTemplate6 = ({
   const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
     useState(false);
 
-  const { getSummary } = useGetSummary();
+  const [streamedSummaryData, setStreamedSummaryData] = useState("")
+
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
 
   const [
     professionalSkillAddButtonVisible,
@@ -313,7 +235,10 @@ const ResumeTemplate6 = ({
       <div className=" flex  w-[8%] bg-[#e04127]"></div>
       <div className="w-full pl-5">
         <div className="flex flex-col w-12/12 p-8">
-          <h2 className="text-4xl xs:2xl md:text-5xl  font-bold hover:shadow-md hover:bg-gray-100">
+          <h2
+            className={`${previewTemplate ? "text-4xl" : "xs:2xl md:text-5xl  "
+              } text-4xl font-bold hover:shadow-md hover:bg-gray-100`}
+          >
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -559,7 +484,7 @@ const ResumeTemplate6 = ({
             <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
             {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+              resume?.workExperienceArray.length > 0 ? (
               <>
                 {resume?.workExperienceArray.map((rec: any, i: number) => {
                   return (
@@ -902,7 +827,7 @@ const ResumeTemplate6 = ({
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                          newWorkExperience !== i ? (
                           <div
                             className="border-2 w-full mt-3 md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {

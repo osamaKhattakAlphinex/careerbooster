@@ -13,23 +13,22 @@ import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import LinkedInHeadlineCardSingle from "./LinkedInHeadeLineCardSingle";
 import { makeid } from "@/helpers/makeid";
+import useGetUserData from "@/hooks/useGetUserData";
 
 const SubHeadlineGenerator = () => {
-  const [headline, setHeadline] = useState<string>("");
-  const componentRef = useRef<any>(null);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [streamedData, setStreamedData] = useState("");
-  const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const [aiInputUserData, setAiInputUserData] = useState<any>(null);
+  const [percentageCalculated, setPercentageCalculated] = useState<boolean>(false)
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [showPopup, setShowPopup] = useState(false);
+  const componentRef = useRef<any>();
 
-  const [percentageCalculated, setPercentageCalculated] =
-    useState<boolean>(false);
   const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
   const copyHeadline = async (text: string) => {
     try {
-      const headlineData = await htmlToPlainText(text);
+      const headlineData = htmlToPlainText(text);
       await copy(headlineData);
       setIsHeadlineCopied(true);
       // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
@@ -45,9 +44,7 @@ const SubHeadlineGenerator = () => {
   const userData = useSelector((state: any) => state.userData);
   const linkedinHeadline = useSelector((state: any) => state.linkedinHeadline);
 
-  // useEffect(() => {
-  //   setHeadline(streamedData);
-  // }, [streamedData]);
+  const { getUserDataIfNotExists: getUserData } = useGetUserData() //using hook function with different name/alias
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -160,22 +157,8 @@ const SubHeadlineGenerator = () => {
 
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
-      dispatch(setIsLoading(true));
       try {
-        // Fetch userdata if not exists in Redux
-        const res = await fetch(
-          `/api/users/getOneByEmail?email=${session?.user?.email}`
-        );
-        const response = await res.json();
-        console.log(
-          "first response: " + response.result,
-          typeof response.result
-        );
-
-        dispatch(setUserData(response.result));
-
-        dispatch(setIsLoading(false));
-        dispatch(setField({ name: "isFetched", value: true }));
+        await getUserData()
       } catch (err) {
         setStreamedData("Something went wrong!");
       }

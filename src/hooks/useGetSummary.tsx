@@ -3,12 +3,14 @@
 import { setSummary } from "@/store/resumeSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useGetUserData from "./useGetUserData";
 
-const useGetSummary = () => {
+const useGetSummary = (setStreamedSummaryData: any) => {
   const dispatch = useDispatch();
-  const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const userData = useSelector((state: any) => state.userData);
   const resumeData = useSelector((state: any) => state.resume);
+  const { getUserDataIfNotExists } = useGetUserData()
+
   const [aiInputUserData, setAiInputUserData] = useState<any>();
 
   useEffect(() => {
@@ -26,16 +28,14 @@ const useGetSummary = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   getSummary();
-  // }, []);
-
   const getSummary = async () => {
-    // return makeAPICallWithRetry(async () => {
-    // await getUserDataIfNotExists();
+    // return aiInputUserData
+    await getUserDataIfNotExists();
     setStreamedSummaryData("");
     dispatch(setSummary(""));
     // dispatch(setLoadingState("summary"));
+
+
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
@@ -63,7 +63,7 @@ const useGetSummary = () => {
           }
 
           const text = new TextDecoder().decode(value);
-          setStreamedSummaryData((prev) => prev + text);
+          setStreamedSummaryData((prev: any) => prev + text);
           summaryTemp += text;
         }
 
@@ -75,7 +75,7 @@ const useGetSummary = () => {
     // });
   };
 
-  return { setStreamedSummaryData, streamedSummaryData, getSummary };
+  return { getSummary };
 };
 
 export default useGetSummary;

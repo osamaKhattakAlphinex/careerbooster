@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 
 type RegenerateType = {
   children: ReactNode;
-  handler: () => void;
+  handler: (args: any) => void;
 };
 
 const Regenerate = ({ children, handler }: any) => {

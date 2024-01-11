@@ -10,6 +10,8 @@ import TemplateSlider from "@/components/new-dashboard/dashboard/resume-template
 import { useSession } from "next-auth/react";
 import { setUserData } from "@/store/userDataSlice";
 import { setResume } from "@/store/resumeSlice";
+import Link from "next/link";
+import DownloadService from "@/helpers/downloadFile";
 
 const Template = () => {
   const params = useSearchParams();
@@ -55,17 +57,38 @@ const Template = () => {
       <div className="my-10">
         {resume &&
           (resume?.name || resume?.contact?.email || resume?.summary) && (
-            <div className="relative">
-              {ALL_TEMPLATES[templateId - 1].category === "premium" && (
-                <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
-                  {crownIcon}
-                </div>
-              )}
+            <>
+              <div className="flex items-center justify-end gap-3 pb-4">
+                <Link
+                  className="no-underline"
+                  href={`/resume-edit?templateId=${templateId}&resumeId=${resume.id}`}
+                  target="_blank"
+                >
+                  <div
+                    className={`lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b] bg-transparent text-green-500 border border-green-500`}
+                  >
+                    Preview Resume
+                  </div>
+                </Link>
 
-              <div ref={componentRef} className=" bg-white">
-                {ALL_TEMPLATES[templateId - 1].template({})}
+                <DownloadService
+                  componentRef={componentRef}
+                  fileName="ai-resume"
+                />
               </div>
-            </div>
+
+              <div className="relative">
+                {ALL_TEMPLATES[templateId - 1].category === "premium" && (
+                  <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
+                    {crownIcon}
+                  </div>
+                )}
+
+                <div ref={componentRef} className=" bg-white">
+                  {ALL_TEMPLATES[templateId - 1].template({})}
+                </div>
+              </div>
+            </>
           )}
       </div>
     </div>
