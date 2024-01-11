@@ -14,6 +14,7 @@ const DownloadService = ({
   type,
   fileName,
   templateId,
+  preview,
 }: // setOpenUpgradModal,
 any) => {
   const docRef = useRef<any>(null);
@@ -87,7 +88,8 @@ any) => {
         });
         const url = URL.createObjectURL(blob);
         docRef.current.href = url;
-        docRef.current.download = fileName;
+        preview ? null : (docRef.current.download = fileName);
+        // docRef.current.download = fileName;
         docRef.current.click();
         setLoading(false);
       });
@@ -111,7 +113,7 @@ any) => {
             loading ? "cursor-not-allowed opacity-50" : ""
           }`}
         >
-          {loading ? "Downloading..." : "Download"}
+          {preview ? "Preview Resume" : loading ? "Downloading..." : "Download"}
         </button>
       </div>
     </>
