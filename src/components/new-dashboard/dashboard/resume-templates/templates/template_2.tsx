@@ -8,8 +8,7 @@ import {
   setBasicInfo,
   setField,
   setPrimarySkills,
-  setProfessionalSkills,
-  setSecondarySkills,
+
   setSummary,
   setWorkExperienceArray,
 } from "@/store/resumeSlice";
@@ -22,45 +21,40 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
-import useGetSummary from "@/helpers/useGetSummary";
+import useGetSummary from "@/hooks/useGetSummary";
 import Regenerate from "@/helpers/regenerate";
 import EditableField from "@/components/new-dashboard/common/EditableField";
+import useSaveResumeToDB from "@/hooks/useSaveToDB";
 
 const ResumeTemplate2 = ({
-  streamedSummaryData,
   streamedJDData,
-  saveResumeToDB,
 }: {
-  streamedSummaryData: string;
   streamedJDData: string;
-  saveResumeToDB: (data?: any) => Promise<void>;
 }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
-  const [newSecondarySkill, setNewSecondarySkill] = useState(false);
-  const [newProfessionalSkill, setNewProfessionalSkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
   const [newEducation, setNewEducation] = useState(false);
   const [primarySkillAddButtonVisible, setPrimarySkillAddButtonVisible] =
     useState(false);
-  const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
-    useState(false);
 
-  const [
-    professionalSkillAddButtonVisible,
-    setProfessionalSkillAddButtonVisible,
-  ] = useState(false);
   const [workExperienceAddButtonVisible, setWorkExperienceAddButtonVisible] =
     useState<number>();
   const [educationAddButtonVisible, setEducationAddButtonVisible] =
     useState(false);
   const [primarySkill, setPrimarySkill] = useState<string>("");
-  const [secondarySkill, setSecondarySkill] = useState<string>("");
-  const [professionalSkill, setProfessionalSkill] = useState<string>("");
+
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
+
+
+
+  const [streamedSummaryData, setStreamedSummaryData] = useState("")
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
+
+  const { saveResumeToDB } = useSaveResumeToDB()
   const addPrimarySkill = () => {
     const primarySkills = resume?.primarySkills;
     const updatedSkills = [...primarySkills];
@@ -72,29 +66,9 @@ const ResumeTemplate2 = ({
     });
   };
 
-  const { getSummary } = useGetSummary();
 
-  // const addSecondarySkill = () => {
-  //   const secondarySkills = resume?.secondarySkills;
-  //   const updatedSkills = [...secondarySkills];
-  //   updatedSkills.push(secondarySkill);
-  //   dispatch(setSecondarySkills({ secondarySkills: updatedSkills }));
-  //   saveResumeToDB({
-  //     ...resume,
-  //     secondarySkills: updatedSkills,
-  //   });
-  // };
-  // const addProfessionalSkill = () => {
-  //   const professionalSkills = resume?.professionalSkills;
-  //   const updatedSkills = [...professionalSkills];
-  //   updatedSkills.push(professionalSkill);
 
-  //   dispatch(setProfessionalSkills({ professionalSkills: updatedSkills }));
-  //   saveResumeToDB({
-  //     ...resume,
-  //     professionalSkills: updatedSkills,
-  //   });
-  // };
+
   //Reorder Redux PrimarySkills array with drag-drop
   const handleDropPrimary = (e: any, i: number) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
@@ -116,45 +90,7 @@ const ResumeTemplate2 = ({
     });
   };
   //Reorder Redux SecondarySkills array with drag-drop
-  // const handleDropSecondary = (e: any, i: number) => {
-  //   const draggedIndex = parseInt(e.dataTransfer.getData("text"));
-  //   const updatedItems = [...resume.secondarySkills];
-  //   // Swap the positions of the dragged item and the target item.
-  //   [updatedItems[draggedIndex], updatedItems[i]] = [
-  //     updatedItems[i],
-  //     updatedItems[draggedIndex],
-  //   ];
-  //   dispatch(
-  //     setSecondarySkills({
-  //       ...resume,
-  //       secondarySkills: updatedItems,
-  //     })
-  //   );
-  //   saveResumeToDB({
-  //     ...resume,
-  //     secondarySkills: updatedItems,
-  //   });
-  // };
-  // //Reorder Redux ProfessionalSkills array with drag-drop
-  // const handleDropProfessional = (e: any, i: number) => {
-  //   const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-  //   const updatedItems = [...resume.professionalSkills];
-  //   // Swap the positions of the dragged item and the target item.
-  //   [updatedItems[draggedIndex], updatedItems[i]] = [
-  //     updatedItems[i],
-  //     updatedItems[draggedIndex],
-  //   ];
-  //   dispatch(
-  //     setProfessionalSkills({
-  //       ...resume,
-  //       professionalSkills: updatedItems,
-  //     })
-  //   );
-  //   saveResumeToDB({
-  //     ...resume,
-  //     professionalSkills: updatedItems,
-  //   });
-  // };
+
   //Reorder Redux handleDropExperience array with drag-drop
   const handleDropExperience = (e: any, i: number) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
@@ -478,273 +414,7 @@ const ResumeTemplate2 = ({
             </ul>
           </>
         )}
-        {/* Secondary Skills */}
-        {/* {resume?.secondarySkills && resume?.secondarySkills.length > 0 && (
-          <>
-            <h3 className="uppercase text-sm md:text-lg font-semibold flex flex-row gap-2 items-center">
-              {sparkleIcon}
-              Secondary Skills
-            </h3>
-            <ul
-              className="flex flex-row flex-wrap gap-1 text-lg xs:text-sm md:text-lg lg:text-lg"
-              onMouseEnter={() =>
-                !newSecondarySkill && setSecondarySkillAddButtonVisible(true)
-              }
-              onMouseLeave={() =>
-                !newSecondarySkill && setSecondarySkillAddButtonVisible(false)
-              }
-            >
-              {resume?.secondarySkills.map((skill: string, i: number) => (
-                <li
-                  key={i}
-                  className=" px-4 py-2 bg-slate-100 rounded-full hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex justify-between items-center"
-                  onDragStart={(e) =>
-                    e.dataTransfer.setData("text", i.toString())
-                  }
-                  onDragOver={(e) => e.preventDefault()}
-                  onDrop={(e) => handleDropSecondary(e, i)}
-                  draggable
-                >
-                  <EditableField
-                    value={skill}
-                    onSave={(value: string) => {
-                      let updatedSkills = resume.secondarySkills.map(
-                        (skill: string, index: number) => {
-                          if (index === i) {
-                            return value;
-                          }
-                          return skill;
-                        }
-                      );
-                      dispatch(
-                        setSecondarySkills({
-                          ...resume,
-                          secondarySkills: updatedSkills,
-                        })
-                      );
-                      saveResumeToDB({
-                        ...resume,
-                        secondarySkills: updatedSkills,
-                      });
-                    }}
-                  />
-                  <div
-                    onClick={() => {
-                      const removeSecondarySkill =
-                        resume.secondarySkills.filter(
-                          (item: any) => item !== skill
-                        );
-                      dispatch(
-                        setSecondarySkills({
-                          ...resume,
-                          secondarySkills: removeSecondarySkill,
-                        })
-                      );
-                      saveResumeToDB({
-                        ...resume,
-                        secondarySkills: removeSecondarySkill,
-                      });
-                    }}
-                    className="w-4 h-4 text-red-500 cursor-pointer child"
-                  >
-                    {crossIcon1}
-                  </div>
-                </li>
-              ))}
-              {/* ADD New Secondary Skill  */}
-        {/* {newSecondarySkill ? (
-                <>
-                  <div className="w-full rounded-2xl border border-black flex h-9.5">
-                    <input
-                      type="text"
-                      value={secondarySkill}
-                      placeholder="Please add Skill"
-                      className="bg-white outline-none rounded-2xl px-2 w-full"
-                      autoFocus
-                      onChange={(e) => setSecondarySkill(e.target.value)}
-                      onKeyPress={(e) => {
-                        if (e.key === "Enter") {
-                          if (secondarySkill.trim() !== "") {
-                            addSecondarySkill();
-                            setSecondarySkill("");
-                          }
-                        }
-                      }}
-                    />
-                    <button
-                      className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
-                      onClick={() => {
-                        if (secondarySkill.trim() !== "") {
-                          addSecondarySkill();
-                          setSecondarySkill(""); // Empty the input field
-                        }
-                      }}
-                    >
-                      save
-                    </button>
-                  </div>
-                  <button
-                    onClick={() => {
-                      setNewSecondarySkill(false);
-                      setSecondarySkillAddButtonVisible(false);
-                    }}
-                    className="bg-red-500 py-1 px-2  text-white rounded-full"
-                  >
-                    Cancel
-                  </button>
-                </>
-              ) : (
-                " "
-              )}
-              {secondarySkillAddButtonVisible ? (
-                <div
-                  className="border-2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                  onClick={() => {
-                    setNewSecondarySkill(true);
-                    setSecondarySkillAddButtonVisible(false);
-                  }}
-                >
-                  + Add
-                </div>
-              ) : null}
-            </ul>
-          </>
-        )} */}
 
-        {/* Professional Skills */}
-        {/* {resume?.professionalSkills &&
-          resume?.professionalSkills.length > 0 && (
-            <>
-              <h3 className="uppercase text-sm md:text-lg font-semibold flex flex-row gap-2 items-center">
-                {sparkleIcon}
-                Professional Skills
-              </h3>
-              <ul
-                className="flex flex-row flex-wrap gap-1 text-sm xs:text-sm md:text-lg lg:text-lg"
-                onMouseEnter={() =>
-                  !newProfessionalSkill &&
-                  setProfessionalSkillAddButtonVisible(true)
-                }
-                onMouseLeave={() =>
-                  !newProfessionalSkill &&
-                  setProfessionalSkillAddButtonVisible(false)
-                }
-              >
-                {resume?.professionalSkills.map((skill: string, i: number) => (
-                  <li
-                    key={i}
-                    className=" px-4 py-2 bg-slate-100 rounded-full hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex justify-between items-center"
-                    onDragStart={(e) =>
-                      e.dataTransfer.setData("text/plain", i.toString())
-                    }
-                    onDragOver={(e) => e.preventDefault()}
-                    onDrop={(e) => handleDropProfessional(e, i)}
-                    draggable
-                  >
-                    <EditableField
-                      style={{ width: "100%" }}
-                      value={skill}
-                      onSave={(value: string) => {
-                        let updatedSkills = resume.professionalSkills.map(
-                          (skill: string, index: number) => {
-                            if (index === i) {
-                              return value;
-                            }
-                            return skill;
-                          }
-                        );
-                        dispatch(
-                          setProfessionalSkills({
-                            ...resume,
-                            professionalSkills: updatedSkills,
-                          })
-                        );
-                        saveResumeToDB({
-                          ...resume,
-                          professionalSkills: updatedSkills,
-                        });
-                      }}
-                    />
-                    <div
-                      onClick={() => {
-                        const removeProSkill = resume.professionalSkills.filter(
-                          (item: any) => item !== skill
-                        );
-                        dispatch(
-                          setProfessionalSkills({
-                            ...resume,
-                            professionalSkills: removeProSkill,
-                          })
-                        );
-                        saveResumeToDB({
-                          ...resume,
-                          professionalSkills: removeProSkill,
-                        });
-                      }}
-                      className="w-4 h-4 text-red-500 cursor-pointer child"
-                    >
-                      {crossIcon1}
-                    </div>
-                  </li>
-                ))}
-                {newProfessionalSkill ? (
-                  <>
-                    <div className="w-full rounded-2xl border border-black flex h-9.5">
-                      <input
-                        type="text"
-                        value={professionalSkill}
-                        placeholder="Please add Skill"
-                        className="bg-white outline-none rounded-2xl px-2 w-full"
-                        autoFocus
-                        onChange={(e) => setProfessionalSkill(e.target.value)}
-                        onKeyPress={(e) => {
-                          if (e.key === "Enter") {
-                            if (professionalSkill.trim() !== "") {
-                              addProfessionalSkill();
-                              setProfessionalSkill("");
-                            }
-                          }
-                        }}
-                      />
-                      <button
-                        className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
-                        onClick={() => {
-                          if (professionalSkill.trim() !== "") {
-                            addProfessionalSkill();
-                            setProfessionalSkill(""); // Empty the input field
-                          }
-                        }}
-                      >
-                        save
-                      </button>
-                    </div>
-                    <button
-                      onClick={() => {
-                        setNewProfessionalSkill(false);
-                        setPrimarySkillAddButtonVisible(false);
-                      }}
-                      className="bg-red-500 py-1 px-2 text-white rounded-full"
-                    >
-                      Cancel
-                    </button>
-                  </>
-                ) : (
-                  " "
-                )}
-                {professionalSkillAddButtonVisible ? (
-                  <div
-                    className="border-2 border-gray-400 text-center uppercase justify-center text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                    onClick={() => {
-                      setNewProfessionalSkill(true);
-                      setProfessionalSkillAddButtonVisible(false);
-                    }}
-                  >
-                    + Add
-                  </div>
-                ) : null}
-              </ul>
-            </>
-          )} */}
       </div>
 
       {/* Work Experience */}
@@ -753,17 +423,16 @@ const ResumeTemplate2 = ({
           WORK EXPERIENCE
         </h3>
         {resume?.workExperienceArray &&
-        resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
           <>
             {resume?.workExperienceArray.map((rec: any, i: number) => {
               return (
                 <div
                   key={i}
-                  className={`${
-                    i === resume?.workExperienceArray.length - 1
-                      ? ""
-                      : "border-b border-gray-200"
-                  } grid grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
+                  className={`${i === resume?.workExperienceArray.length - 1
+                    ? ""
+                    : "border-b border-gray-200"
+                    } grid grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
                   onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                   onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                   onDragStart={(e) =>
@@ -1085,7 +754,7 @@ const ResumeTemplate2 = ({
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                      newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                         <div
                           className="border-2 w-2/12 mt-3 xs:w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {

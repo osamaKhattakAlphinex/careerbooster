@@ -19,6 +19,7 @@ import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import LinkedInJDCardSingle from "./LinkedInJDCardSingle";
 import { makeid } from "@/helpers/makeid";
+import useGetUserData from "@/hooks/useGetUserData";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
   // local States
@@ -48,19 +49,10 @@ const SubJDGenerator = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const linkedinJD = useSelector((state: any) => state.linkedinJobDesc);
-
-  // useEffect(() => {
-  //   setJobDesc(streamedData);
-  // }, [streamedData]);
+  const { getUserDataIfNotExists: getUserData } = useGetUserData() //using hook function with different name/alias
 
   useEffect(() => {
-    // if (
-    //   userData.results &&
-    //   userData.results.jobDescription &&
-    //   userData.results.jobDescription !== ""
-    // ) {
-    //   setStreamedData(userData.results.jobDescription);
-    // }
+
     if (streamedData === "") {
       setStreamedData(linkedinJD.jobDescriptionText);
     }
@@ -219,22 +211,8 @@ const SubJDGenerator = () => {
 
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
-      dispatch(setIsLoading(true));
       try {
-        // Fetch userdata if not exists in Redux
-        const res: any = await fetch(
-          `/api/users/getOneByEmail?email=${session?.user?.email}`
-        );
-        let response;
-        if (typeof res?.result === "object") {
-          response = res;
-        } else {
-          response = await res.json();
-        }
-
-        dispatch(setUserData(response.result));
-        dispatch(setIsLoading(false));
-        dispatch(setField({ name: "isFetched", value: true }));
+        await getUserData()
       } catch (err) {
         setStreamedData("Something went wrong!");
       }
