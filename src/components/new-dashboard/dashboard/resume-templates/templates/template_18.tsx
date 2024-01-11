@@ -25,13 +25,9 @@ import {
 import useGetSummary from "@/hooks/useGetSummary";
 import Regenerate from "@/helpers/regenerate";
 import EditableField from "@/components/new-dashboard/common/EditableField";
-const ResumeTemplate18 = ({
-  streamedJDData,
-  saveResumeToDB,
-}: {
-  streamedJDData: string;
-  saveResumeToDB: (data?: any) => Promise<void>;
-}) => {
+import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
+import useSaveResumeToDB from "@/hooks/useSaveToDB";
+const ResumeTemplate18 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
@@ -46,8 +42,9 @@ const ResumeTemplate18 = ({
     useState(false);
 
   const [streamedSummaryData, setStreamedSummaryData] = useState("")
-
   const { getSummary } = useGetSummary(setStreamedSummaryData);
+  const [streamedJDData, setStreamedJDData] = useState<any>("")
+  const { saveResumeToDB } = useSaveResumeToDB()
 
   const [
     professionalSkillAddButtonVisible,
