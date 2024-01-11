@@ -27,6 +27,7 @@ import Regenerate from "@/helpers/regenerate";
 import EditableField from "@/components/new-dashboard/common/EditableField";
 const ResumeTemplate10 = ({
   streamedJDData,
+
   saveResumeToDB,
 }: {
   streamedJDData: string;
@@ -241,7 +242,7 @@ const ResumeTemplate10 = ({
           </span>
         </div>
         <div className="flex flex-col">
-          <h2 className="text-2xl text-gray-100 md:text-6xl hover:shadow-md hover:bg-gray-500">
+          <h2 className="text-4xl font-bold xs:font-medium text-gray-100 md:text-6xl hover:shadow-md hover:bg-gray-500">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -251,7 +252,7 @@ const ResumeTemplate10 = ({
               }}
             />
           </h2>
-          <h3 className="text-[16px] md:text-2xl text-gray-100 hover:shadow-md hover:bg-gray-500">
+          <h3 className="text-xl xs:text-[16px] md:text-2xl text-gray-100 hover:shadow-md hover:bg-gray-500">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -264,7 +265,7 @@ const ResumeTemplate10 = ({
       </div>
       <div className=" flex">
         {/* sidebar */}
-        <div className="z-5    w-5/12  flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6 bg-gray-950 text-gray-100  pr-6  pb-8  pt-[300px] h-[1020px] xs:h-auto">
+        <div className="z-5    w-5/12  flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6 bg-gray-950 text-gray-100  pr-6  pb-8  pt-[280px] xs:pt-[300px] h-[1030px] xs:h-auto">
           {/* contacts */}
           <div className="rounded-3xl border-2 border-blue-900 p-2">
             <h3 className="uppercase text-lg mb-0 xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold flex flex-row gap-2 items-center">
@@ -400,7 +401,7 @@ const ResumeTemplate10 = ({
 
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
-              <div className="rounded-3xl border-2 border-blue-900 p-2 mt-4 mb-8">
+              <div className="rounded-3xl border-2 border-blue-900 p-2 my-3 xs:my-8 md:my-8">
                 <h3 className="uppercase text-lg mb-0 xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold flex flex-row gap-2 items-center ">
                   {sparkleIcon}
                   Skills
@@ -535,7 +536,7 @@ const ResumeTemplate10 = ({
             </>
           )}
         </div>
-        <div className="w-full flex flex-wrap flex-col px-8 sm:px-2 xs:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[300px]">
+        <div className="w-full flex flex-wrap flex-col px-8 sm:px-2 xs:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[280px] xs:pt-[300px]">
           {/* Executive Summary */}
           <div className="rounded-3xl  bg-blue-900 py-2 px-6 xs:px-2 sm:px-2 w-[250px] xs:w-[190px] sm:w-[190px] md:w-[250px] lg:w-[250px] mb-6">
             <h3 className="uppercase text-lg mb-0 text-gray-100 font-semibold xs:text-sm sm:text-sm md:text-md lg:text-lg">
@@ -575,7 +576,8 @@ const ResumeTemplate10 = ({
                   <div
                     key={i}
                     className={`flex justify-center items-center ${i > 0 ? " ml-[-200px] xs:ml-0 " : "mb-5"
-                      }`}
+                      }
+                    `}
                   >
                     <div
                       key={i}
