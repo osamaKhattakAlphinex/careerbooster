@@ -22,15 +22,13 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
-import useGetSummary from "@/helpers/useGetSummary";
+import useGetSummary from "@/hooks/useGetSummary";
 import Regenerate from "@/helpers/regenerate";
 import EditableField from "@/components/new-dashboard/common/EditableField";
 const ResumeTemplate12 = ({
-  streamedSummaryData,
   streamedJDData,
   saveResumeToDB,
 }: {
-  streamedSummaryData: string;
   streamedJDData: string;
   saveResumeToDB: (data?: any) => Promise<void>;
 }) => {
@@ -47,7 +45,8 @@ const ResumeTemplate12 = ({
   const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
     useState(false);
 
-  const { getSummary } = useGetSummary();
+  const [streamedSummaryData, setStreamedSummaryData] = useState("")
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
 
   const [
     professionalSkillAddButtonVisible,
@@ -232,7 +231,7 @@ const ResumeTemplate12 = ({
       <div className="h-20 bg-[#F0CFC3]"></div>
       <div className="flex absolute  top-22 left-[35%] py-8 xs:left-[37%] sm:left-[37%] md:left-[35%] lg:left-[27%] ">
         <div className="flex flex-col  border-gray-900 border-b-2 py-8">
-          <h2 className="text-2xl xs:text-xl sm:text-xl md:text-2xl lg:text-2xl font-bold hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-4xl xs:text-xl sm:text-xl md:text-4xl lg:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -242,7 +241,7 @@ const ResumeTemplate12 = ({
               }}
             />
           </h2>
-          <h3 className="text-[16px] md:text-xl hover:shadow-md mt-2 hover:bg-gray-100">
+          <h3 className="text-2xl xs:text-[16px] md:text-2xl hover:shadow-md mt-2 hover:bg-gray-100">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -275,8 +274,8 @@ const ResumeTemplate12 = ({
             Contact
           </h3>
           <span className="border-stylee w-full h-0 my-1"></span>
-          <ul className=" flex flex-col gap-3 w-full mb-4 text-sm text-[#4A454B] break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-300 items-center hover:text-black text-xs  flex flex-row gap-1 ">
+          <ul className=" flex flex-col gap-3 w-full mb-4 text-[16px] text-[#4A454B] break-all pl-0">
+            <li className="hover:shadow-md hover:bg-gray-300 items-center hover:text-black text-[14px]  flex flex-row gap-1 ">
               <span className="w-7 h-7 flex items-center justify-center mr-2 border border-gray-300 rounded-full">
                 {phoneIcon}
               </span>
@@ -300,7 +299,7 @@ const ResumeTemplate12 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-1  items-center text-[14px]">
               <span className="w-7 h-7 flex items-center justify-center mr-2 border border-gray-300 rounded-full">
                 {emailIcon}
               </span>
@@ -324,7 +323,7 @@ const ResumeTemplate12 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 text-[#4A454B] flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 text-[#4A454B] flex flex-row gap-1  items-center text-[14px]">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -371,7 +370,7 @@ const ResumeTemplate12 = ({
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
               <ul
-                className="pl-0 flex  flex-col gap-1 mb-4 text-gray-800 w-full text-sm "
+                className="pl-0 flex  flex-col gap-1 mb-4 text-gray-800 w-full text-[16px] "
                 onMouseEnter={() =>
                   !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                 }
@@ -532,17 +531,16 @@ const ResumeTemplate12 = ({
           </div>
 
           {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+            resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-center items-center ${
-                      i > 0
-                        ? "w-[100vw] ml-[-250px] xs:ml-0 xs:w-full mt-8"
+                    className={`flex justify-center items-center ${i > 0
+                        ? "w-[100vw] ml-[-250px] xs:ml-0 xs:w-full "
                         : "mb-5"
-                    }`}
+                      }`}
                   >
                     <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5 lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
@@ -564,11 +562,11 @@ const ResumeTemplate12 = ({
                     >
                       <h2
                         className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-[1.3rem] xs:text-[1rem] sm:text[1rem] md:text-[1.3rem] lg:text-[1.3rem] font-bold"
-                        // style={{
-                        //   fontSize: "1.3rem",
-                        //   fontWeight: "bold",
-                        //   lineHeight: "2rem",
-                        // }}
+                      // style={{
+                      //   fontSize: "1.3rem",
+                      //   fontWeight: "bold",
+                      //   lineHeight: "2rem",
+                      // }}
                       >
                         <EditableField
                           value={rec?.title}
@@ -599,10 +597,10 @@ const ResumeTemplate12 = ({
                       </h2>
                       <h2
                         className="hover:cursor-default text-[1.1rem] xs:text-[0.8rem] sm:text[0.8rem] md:text-[1.1rem] lg:text-[1.1rem]"
-                        // style={{
-                        //   fontSize: "1.1rem",
-                        //   lineHeight: "1.5rem",
-                        // }}
+                      // style={{
+                      //   fontSize: "1.1rem",
+                      //   lineHeight: "1.5rem",
+                      // }}
                       >
                         {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue
@@ -889,7 +887,7 @@ const ResumeTemplate12 = ({
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                          newWorkExperience !== i ? (
                           <div
                             className="border-2 w-full xs:w-full mt-3 sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
@@ -918,8 +916,8 @@ const ResumeTemplate12 = ({
           )}
           {/* Education */}
           {resume?.education && (
-            <div className=" ml-[-240px] xs:ml-0">
-              <div className="flex flex-col mb-6 mt-10">
+            <div className=" ml-[-240px] xs:ml-0 mt-4">
+              <div className="flex flex-col mb-6 ">
                 <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center text-gray-950 ">
                   Education
                 </h3>

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { makeid } from "./makeid";
+import { makeid } from "../helpers/makeid";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
@@ -9,6 +9,7 @@ import { setId } from "@/store/resumeSlice";
 
 const useSaveResumeToDB = () => {
   const resumeData = useSelector((state: any) => state.resume);
+
   const { data: session } = useSession();
   const dispatch = useDispatch();
 
