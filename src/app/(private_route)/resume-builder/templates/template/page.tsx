@@ -59,7 +59,7 @@ const Template = () => {
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
               <div className="flex items-center justify-end gap-3 pb-4">
-                <Link
+                {/* <Link
                   className="no-underline"
                   href={`/resume-edit?templateId=${templateId}&resumeId=${resume.id}`}
                   target="_blank"
@@ -69,8 +69,12 @@ const Template = () => {
                   >
                     Preview Resume
                   </div>
-                </Link>
-
+                </Link> */}
+                <DownloadService
+                  componentRef={componentRef}
+                  fileName="ai-resume"
+                  preview={true}
+                />
                 <DownloadService
                   componentRef={componentRef}
                   fileName="ai-resume"
