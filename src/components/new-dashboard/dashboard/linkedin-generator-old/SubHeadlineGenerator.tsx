@@ -105,7 +105,6 @@ const SubHeadlineGenerator = () => {
               tempText += text;
             }
 
-
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -158,8 +157,6 @@ const SubHeadlineGenerator = () => {
       }, 3000);
     }
   };
-
-
 
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
@@ -294,14 +291,15 @@ const SubHeadlineGenerator = () => {
           <div
             className="font-sans whitespace-pre-wrap dark:text-gray-100 text-gray-950 break-words"
             ref={componentRef}
-          // style={{ textW: "auto" }}
+            // style={{ textW: "auto" }}
           >
             {streamedData}
             <button
               disabled={msgLoading}
               onClick={() => copyHeadline(streamedData)}
-              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${
+                msgLoading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -322,8 +320,8 @@ const SubHeadlineGenerator = () => {
                 {msgLoading
                   ? "Please wait..."
                   : isHeadlineCopied
-                    ? "Copied"
-                    : "Copy to clipboard"}
+                  ? "Copied"
+                  : "Copy to clipboard"}
               </span>
             </button>
           </div>
