@@ -25,31 +25,22 @@ import {
 import useGetSummary from "@/hooks/useGetSummary";
 import EditableField from "@/components/new-dashboard/common/EditableField";
 const ResumeTemplate15 = ({
-  streamedSummaryData,
   streamedJDData,
   saveResumeToDB,
 }: {
-  streamedSummaryData: string;
   streamedJDData: string;
   saveResumeToDB: (data?: any) => Promise<void>;
 }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
-  const [newSecondarySkill, setNewSecondarySkill] = useState(false);
-  const [newProfessionalSkill, setNewProfessionalSkill] = useState(false);
+
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
   const [newEducation, setNewEducation] = useState(false);
   const [primarySkillAddButtonVisible, setPrimarySkillAddButtonVisible] =
     useState(false);
-  const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
-    useState(false);
 
-  const [
-    professionalSkillAddButtonVisible,
-    setProfessionalSkillAddButtonVisible,
-  ] = useState(false);
   const [workExperienceAddButtonVisible, setWorkExperienceAddButtonVisible] =
     useState<number>();
   const [educationAddButtonVisible, setEducationAddButtonVisible] =
@@ -57,6 +48,8 @@ const ResumeTemplate15 = ({
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [secondarySkill, setSecondarySkill] = useState<string>("");
   const [professionalSkill, setProfessionalSkill] = useState<string>("");
+
+  const [streamedSummaryData, setStreamedSummaryData] = useState("")
 
   const { getSummary } = useGetSummary(setStreamedSummaryData);
 

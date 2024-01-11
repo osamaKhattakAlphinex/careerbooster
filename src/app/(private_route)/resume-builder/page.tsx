@@ -184,6 +184,7 @@ const ResumeBuilder = () => {
         let workExpArrObj: any = {};
         let html = "";
         html += `<h2 style="font-size: 1.3rem; font-weight: bold; line-height: 2rem; ">${experience?.jobTitle}</h2>`;
+        // workExpArrObj.experienceId = experience?.experienceId
         workExpArrObj.title = experience?.jobTitle;
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">

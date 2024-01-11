@@ -149,8 +149,6 @@ export async function POST(req: any) {
       const model = await getTrainedModel(dataset);
       //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
-      console.log("userData", userData, "job position", jobPosition, "personName", personName);
-
       try {
         await startDB();
         const promptRec = await Prompt.findOne({

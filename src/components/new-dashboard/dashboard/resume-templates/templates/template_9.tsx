@@ -26,11 +26,9 @@ import useGetSummary from "@/hooks/useGetSummary";
 import Regenerate from "@/helpers/regenerate";
 import EditableField from "@/components/new-dashboard/common/EditableField";
 const ResumeTemplate9 = ({
-  streamedSummaryData,
   streamedJDData,
   saveResumeToDB,
 }: {
-  streamedSummaryData: string;
   streamedJDData: string;
   saveResumeToDB: (data?: any) => Promise<void>;
 }) => {
@@ -44,6 +42,9 @@ const ResumeTemplate9 = ({
   const [newEducation, setNewEducation] = useState(false);
   const [primarySkillAddButtonVisible, setPrimarySkillAddButtonVisible] =
     useState(false);
+
+  const [streamedSummaryData, setStreamedSummaryData] = useState("")
+
   const { getSummary } = useGetSummary(setStreamedSummaryData);
 
   const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
