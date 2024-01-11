@@ -16,6 +16,7 @@ import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSing
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import LinkedInHKeywordsCardSingle from "./LinkedInKeywordsCardSingle";
 import { makeid } from "@/helpers/makeid";
+import useGetUserData from "@/hooks/useGetUserData";
 
 const SubKeywordsGenerator = () => {
   const [keywords, setKeywords] = useState<string>("");
@@ -31,6 +32,8 @@ const SubKeywordsGenerator = () => {
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
   const [isKeywordsCopied, setIsKeywordsCopied] = useState<boolean>(false);
+  const { getUserDataIfNotExists: getUserData } = useGetUserData() //using hook function with different name/alias
+
   const copyKeyword = async (text: string) => {
     try {
       const keywordData = await htmlToPlainText(text);
@@ -173,21 +176,9 @@ const SubKeywordsGenerator = () => {
 
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
-      dispatch(setIsLoading(true));
       try {
-        // Fetch userdata if not exists in Redux
-        const res = await fetch(
-          `/api/users/getOneByEmail?email=${session?.user?.email}`
-        );
-        const response = await res.json();
-        console.log(
-          "first response: " + response.result,
-          typeof response.result
-        );
+        await getUserData()
 
-        dispatch(setUserData(response.result));
-        dispatch(setIsLoading(false));
-        dispatch(setField({ name: "isFetched", value: true }));
       } catch (err) {
         setStreamedData("Something went wrong!");
       }

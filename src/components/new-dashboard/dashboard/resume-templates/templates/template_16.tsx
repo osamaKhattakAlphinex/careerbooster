@@ -22,14 +22,12 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
-import useGetSummary from "@/helpers/useGetSummary";
+import useGetSummary from "@/hooks/useGetSummary";
 import EditableField from "@/components/new-dashboard/common/EditableField";
 const ResumeTemplate16 = ({
-  streamedSummaryData,
   streamedJDData,
   saveResumeToDB,
 }: {
-  streamedSummaryData: string;
   streamedJDData: string;
   saveResumeToDB: (data?: any) => Promise<void>;
 }) => {
@@ -45,8 +43,9 @@ const ResumeTemplate16 = ({
     useState(false);
   const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
     useState(false);
+  const [streamedSummaryData, setStreamedSummaryData] = useState("")
 
-  const { getSummary } = useGetSummary();
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
 
   const [
     professionalSkillAddButtonVisible,
@@ -230,7 +229,7 @@ const ResumeTemplate16 = ({
     <div className="w-full first-page relative text-gray-900">
       <div className="flex absolute xs:px-3 top-0 left-1/3 py-8 xs:py-2 md:py-8">
         <div className="flex flex-col   py-8">
-          <h2 className="text-2xl md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-4xl xs:text-2xl md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -240,7 +239,7 @@ const ResumeTemplate16 = ({
               }}
             />
           </h2>
-          <h3 className="text-[16px] md:text-xl xs:text-center  hover:shadow-md mt-2 hover:bg-gray-100">
+          <h3 className="text-2xl xs:text-[16px] md:text-2xl   hover:shadow-md mt-2 hover:bg-gray-100">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -498,7 +497,7 @@ const ResumeTemplate16 = ({
             </>
           )}
         </div>
-        <div className="w-full flex flex-col xs:bg-[#F1F1F1] md:bg-[#F1F1F1] px-4 md:px-8 pt-[9rem] xs:pt-[10rem] md:pt-[13rem] ">
+        <div className="w-full flex flex-col xs:bg-[#F1F1F1] md:bg-[#F1F1F1] px-4 md:px-8 pt-[13rem] xs:pt-[13rem] md:pt-[13rem] ">
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0 my-3 xs:my-0 md:my-3"></span>
           <h3 className="uppercase text-xl  font-bold mb-2 border-[#444440] border-b-2  rounded-sm text-gray-900 w-full py-1">
@@ -540,8 +539,8 @@ const ResumeTemplate16 = ({
                     key={i}
                     className={`flex justify-center items-center ${
                       i > 0
-                        ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full mt-10 "
-                        : "mb-5"
+                        ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
+                        : "mb-[100px]"
                     }`}
                   >
                     <div
@@ -924,7 +923,7 @@ const ResumeTemplate16 = ({
           )}
           {/* education */}
           {resume?.education && (
-            <div className="ml-[-200px] xs:ml-0 mt-20 xs:mt-0 md:mt-0">
+            <div className="ml-[-200px] xs:ml-0 ">
               <span
                 className="border-stylee w-full h-0 
            my-3"

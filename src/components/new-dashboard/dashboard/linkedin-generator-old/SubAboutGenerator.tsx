@@ -13,9 +13,9 @@ import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import LinkedInAboutCardSingle from "./LinkedInAboutCardSingle";
 import { makeid } from "@/helpers/makeid";
+import useGetUserData from "@/hooks/useGetUserData";
 const SubAboutGenerator = () => {
   const componentRef = useRef<any>(null);
-  const [about, setAbout] = useState<string>("");
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
@@ -23,7 +23,6 @@ const SubAboutGenerator = () => {
   const [option, setOption] = useState<string>("about");
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [showPopup, setShowPopup] = useState(false);
-  const [instruction, setInstruction] = useState<string>("");
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
   const [isAboutCopied, setIsAboutCopied] = useState<boolean>(false);
@@ -44,6 +43,7 @@ const SubAboutGenerator = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const linkedinAbout = useSelector((state: any) => state.linkedinAbout);
+  const { getUserDataIfNotExists: getUserData } = useGetUserData() //using hook function with different name/alias
 
   useEffect(() => {
     if (
@@ -169,21 +169,8 @@ const SubAboutGenerator = () => {
 
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
-      dispatch(setIsLoading(true));
       try {
-        // Fetch userdata if not exists in Redux
-        const res = await fetch(
-          `/api/users/getOneByEmail?email=${session?.user?.email}`
-        );
-        const response = await res.json();
-        console.log(
-          "first response: " + response.result,
-          typeof response.result
-        );
-
-        dispatch(setUserData(response.result));
-        dispatch(setIsLoading(false));
-        dispatch(setField({ name: "isFetched", value: true }));
+        await getUserData()
       } catch (err) {
         setStreamedData("Something went wrong!");
       }

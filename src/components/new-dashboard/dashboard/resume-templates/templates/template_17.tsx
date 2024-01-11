@@ -22,14 +22,12 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
-import useGetSummary from "@/helpers/useGetSummary";
+import useGetSummary from "@/hooks/useGetSummary";
 import EditableField from "@/components/new-dashboard/common/EditableField";
 const ResumeTemplate17 = ({
-  streamedSummaryData,
   streamedJDData,
   saveResumeToDB,
 }: {
-  streamedSummaryData: string;
   streamedJDData: string;
   saveResumeToDB: (data?: any) => Promise<void>;
 }) => {
@@ -46,7 +44,9 @@ const ResumeTemplate17 = ({
   const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
     useState(false);
 
-  const { getSummary } = useGetSummary();
+  const [streamedSummaryData, setStreamedSummaryData] = useState("")
+
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
 
   const [
     professionalSkillAddButtonVisible,
@@ -240,7 +240,7 @@ const ResumeTemplate17 = ({
               }}
             />
           </h2>
-          <h3 className="text-2xl md:text-2xl xs:text-center hover:shadow-md mt-2 hover:bg-gray-100">
+          <h3 className="text-2xl md:text-2xl  hover:shadow-md mt-2 hover:bg-gray-100">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -541,7 +541,7 @@ const ResumeTemplate17 = ({
                     className={`flex justify-center items-center ${
                       i > 0
                         ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
-                        : "mb-5"
+                        : "mb-[60px]"
                     }`}
                   >
                     <div

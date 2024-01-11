@@ -22,34 +22,25 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
-import useGetSummary from "@/helpers/useGetSummary";
+import useGetSummary from "@/hooks/useGetSummary";
 import EditableField from "@/components/new-dashboard/common/EditableField";
 const ResumeTemplate15 = ({
-  streamedSummaryData,
   streamedJDData,
   saveResumeToDB,
 }: {
-  streamedSummaryData: string;
   streamedJDData: string;
   saveResumeToDB: (data?: any) => Promise<void>;
 }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
-  const [newSecondarySkill, setNewSecondarySkill] = useState(false);
-  const [newProfessionalSkill, setNewProfessionalSkill] = useState(false);
+
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
   const [newEducation, setNewEducation] = useState(false);
   const [primarySkillAddButtonVisible, setPrimarySkillAddButtonVisible] =
     useState(false);
-  const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
-    useState(false);
 
-  const [
-    professionalSkillAddButtonVisible,
-    setProfessionalSkillAddButtonVisible,
-  ] = useState(false);
   const [workExperienceAddButtonVisible, setWorkExperienceAddButtonVisible] =
     useState<number>();
   const [educationAddButtonVisible, setEducationAddButtonVisible] =
@@ -58,7 +49,9 @@ const ResumeTemplate15 = ({
   const [secondarySkill, setSecondarySkill] = useState<string>("");
   const [professionalSkill, setProfessionalSkill] = useState<string>("");
 
-  const { getSummary } = useGetSummary();
+  const [streamedSummaryData, setStreamedSummaryData] = useState("")
+
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const addPrimarySkill = () => {
@@ -532,8 +525,8 @@ const ResumeTemplate15 = ({
                     key={i}
                     className={`flex justify-center items-center ${
                       i > 0
-                        ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full mt-8"
-                        : "mb-5"
+                        ? "w-[100vw] ml-[-240px] xs:ml-0 xs:w-full"
+                        : "mb-[60px]"
                     }`}
                   >
                     <div
@@ -915,7 +908,7 @@ const ResumeTemplate15 = ({
           )}
           {/* education */}
           {resume?.education && (
-            <div className="ml-[-200px] xs:ml-0">
+            <div className="ml-[-240px] xs:ml-0">
               <span className="w-full h-0 my-1 page-break"></span>
               <h3 className="uppercase text-lg font-semibold text-white w-full px-4 py-1 rounded-sm flex  bg-[#444440] flex-row gap-2 items-center mb-4">
                 {educationIcon}

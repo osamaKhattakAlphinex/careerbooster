@@ -13,23 +13,22 @@ import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import LinkedInHeadlineCardSingle from "./LinkedInHeadeLineCardSingle";
 import { makeid } from "@/helpers/makeid";
+import useGetUserData from "@/hooks/useGetUserData";
 
 const SubHeadlineGenerator = () => {
-  const [headline, setHeadline] = useState<string>("");
-  const componentRef = useRef<any>(null);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [streamedData, setStreamedData] = useState("");
-  const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const [aiInputUserData, setAiInputUserData] = useState<any>(null);
+  const [percentageCalculated, setPercentageCalculated] = useState<boolean>(false)
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [showPopup, setShowPopup] = useState(false);
+  const componentRef = useRef<any>();
 
-  const [percentageCalculated, setPercentageCalculated] =
-    useState<boolean>(false);
   const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
   const copyHeadline = async (text: string) => {
     try {
-      const headlineData = await htmlToPlainText(text);
+      const headlineData = htmlToPlainText(text);
       await copy(headlineData);
       setIsHeadlineCopied(true);
       // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
@@ -45,9 +44,7 @@ const SubHeadlineGenerator = () => {
   const userData = useSelector((state: any) => state.userData);
   const linkedinHeadline = useSelector((state: any) => state.linkedinHeadline);
 
-  // useEffect(() => {
-  //   setHeadline(streamedData);
-  // }, [streamedData]);
+  const { getUserDataIfNotExists: getUserData } = useGetUserData() //using hook function with different name/alias
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -105,7 +102,6 @@ const SubHeadlineGenerator = () => {
               tempText += text;
             }
 
-
             fetch("/api/users/updateUserLimit", {
               method: "POST",
               body: JSON.stringify({
@@ -159,26 +155,10 @@ const SubHeadlineGenerator = () => {
     }
   };
 
-
-
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
-      dispatch(setIsLoading(true));
       try {
-        // Fetch userdata if not exists in Redux
-        const res = await fetch(
-          `/api/users/getOneByEmail?email=${session?.user?.email}`
-        );
-        const response = await res.json();
-        console.log(
-          "first response: " + response.result,
-          typeof response.result
-        );
-
-        dispatch(setUserData(response.result));
-
-        dispatch(setIsLoading(false));
-        dispatch(setField({ name: "isFetched", value: true }));
+        await getUserData()
       } catch (err) {
         setStreamedData("Something went wrong!");
       }
@@ -294,14 +274,15 @@ const SubHeadlineGenerator = () => {
           <div
             className="font-sans whitespace-pre-wrap dark:text-gray-100 text-gray-950 break-words"
             ref={componentRef}
-          // style={{ textW: "auto" }}
+            // style={{ textW: "auto" }}
           >
             {streamedData}
             <button
               disabled={msgLoading}
               onClick={() => copyHeadline(streamedData)}
-              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${
+                msgLoading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -322,8 +303,8 @@ const SubHeadlineGenerator = () => {
                 {msgLoading
                   ? "Please wait..."
                   : isHeadlineCopied
-                    ? "Copied"
-                    : "Copy to clipboard"}
+                  ? "Copied"
+                  : "Copy to clipboard"}
               </span>
             </button>
           </div>

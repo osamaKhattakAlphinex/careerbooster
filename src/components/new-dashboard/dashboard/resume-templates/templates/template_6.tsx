@@ -22,16 +22,14 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
-import useGetSummary from "@/helpers/useGetSummary";
+import useGetSummary from "@/hooks/useGetSummary";
 import Regenerate from "@/helpers/regenerate";
 import EditableField from "@/components/new-dashboard/common/EditableField";
 const ResumeTemplate6 = ({
-  streamedSummaryData,
   streamedJDData,
   previewTemplate,
   saveResumeToDB,
 }: {
-  streamedSummaryData: string;
   streamedJDData: string;
   previewTemplate?: any;
   saveResumeToDB: (data?: any) => Promise<void>;
@@ -50,7 +48,9 @@ const ResumeTemplate6 = ({
   const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
     useState(false);
 
-  const { getSummary } = useGetSummary();
+  const [streamedSummaryData, setStreamedSummaryData] = useState("")
+
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
 
   const [
     professionalSkillAddButtonVisible,
@@ -236,9 +236,8 @@ const ResumeTemplate6 = ({
       <div className="w-full pl-5">
         <div className="flex flex-col w-12/12 p-8">
           <h2
-            className={`${
-              previewTemplate ? "text-4xl" : "xs:2xl md:text-5xl  "
-            } text-4xl font-bold hover:shadow-md hover:bg-gray-100`}
+            className={`${previewTemplate ? "text-4xl" : "xs:2xl md:text-5xl  "
+              } text-4xl font-bold hover:shadow-md hover:bg-gray-100`}
           >
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
@@ -485,7 +484,7 @@ const ResumeTemplate6 = ({
             <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
             {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+              resume?.workExperienceArray.length > 0 ? (
               <>
                 {resume?.workExperienceArray.map((rec: any, i: number) => {
                   return (
@@ -828,7 +827,7 @@ const ResumeTemplate6 = ({
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                          newWorkExperience !== i ? (
                           <div
                             className="border-2 w-full mt-3 md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
