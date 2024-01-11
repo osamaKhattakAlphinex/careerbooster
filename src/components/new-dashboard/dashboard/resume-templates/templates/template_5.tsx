@@ -332,15 +332,14 @@ const ResumeTemplate5 = ({
             />
           </h3>
         </div>
-        <div></div>
       </div>
       <div className="flex border-t-2 border-b-2 border-gray-500 p-5">
-        <div className="w-full flex flex-col px-4 md:px-8">
+        <div className="w-9/12 xs:w-10/12  flex flex-col px-4 md:px-8">
           {/* Executive Summary */}
 
           <h3 className="uppercase text-lg font-semibold">EXECUTIVE SUMMARY</h3>
           <Regenerate handler={getSummary}>
-            <div className="text-sm md:text-lg hover:shadow-md hover:bg-gray-100 mt-4">
+            <div className="text-[16px] xs:text-lg hover:shadow-md hover:bg-gray-100 mt-4">
               <EditableField
                 type="textarea"
                 value={
@@ -367,7 +366,13 @@ const ResumeTemplate5 = ({
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
-                  <div key={i} className="flex justify-center items-center">
+                  <div
+                    key={i}
+                    className={`flex justify-center items-center ${
+                      i > 0 ? " w-[100vw] xs:w-auto" : "mb-5"
+                    }
+                  `}
+                  >
                     <div
                       key={i}
                       className="hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2  flex flex-col  "
@@ -504,7 +509,7 @@ const ResumeTemplate5 = ({
                       </h2>
                       <div className="p-4">
                         {rec?.achievements && (
-                          <ul className="pl-0 flex flex-col gap-1 text-sm md:text-lg">
+                          <ul className="pl-0 flex flex-col gap-1 text-[16px] md:text-lg">
                             {rec?.achievements.map(
                               (achievement: any, ind: number) => (
                                 <li
@@ -728,12 +733,12 @@ const ResumeTemplate5 = ({
           )}
           {/* Education */}
           {resume?.education && (
-            <>
-              <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center mt-5">
+            <div className="w-[100vw] xs:w-auto">
+              <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center mt-5 border-b-2 border-gray-500 my-3">
                 {educationIcon}
                 Education
               </h3>
-              <span className="border-stylee  h-0 border !border-gray-100 my-3"></span>
+
               <ul
                 className="pl-0 flex xs:flex-col md:flex-row lg:flex-row w-full  flex-wrap"
                 onMouseEnter={() =>
@@ -869,11 +874,10 @@ const ResumeTemplate5 = ({
                   </React.Fragment>
                 ))}
               </ul>
-            </>
+            </div>
           )}
         </div>
-        <div className="relative  border border-gray-500 "></div>
-        <div className=" w-4/12 xs:w-1/3 md:w-4/12 flex flex-col pl-3 md:pl-8 pr-6 gap-4 ">
+        <div className=" w-full xs:w-1/3 md:w-1/3 flex flex-col pl-3 md:pl-8 pr-6 gap-4  border-l-2 border-gray-500 h-[920px] xs:h-auto">
           {/* contacts */}
 
           <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center mb-2">
@@ -882,7 +886,7 @@ const ResumeTemplate5 = ({
           </h3>
 
           <ul className=" flex flex-col gap-4 mb-4 text-sm md:text-lg break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-100 text-xs flex flex-row gap-1  items-center">
+            <li className="hover:shadow-md hover:bg-gray-100 text-[14px] flex flex-row gap-1  items-center">
               {phoneIcon}
               <EditableField
                 value={
@@ -904,7 +908,7 @@ const ResumeTemplate5 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center text-[14px]">
               {emailIcon}
               <EditableField
                 value={
@@ -926,7 +930,7 @@ const ResumeTemplate5 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 text-blue-600 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md hover:bg-gray-100 text-blue-600 flex flex-row gap-1  items-center text-[14px]">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -971,7 +975,7 @@ const ResumeTemplate5 = ({
               </h3>
 
               <ul
-                className="pl-0 flex  flex-col gap-1 mb-4 text-sm md:text-lg"
+                className="pl-0 flex  flex-col gap-1 mb-4 text-[16px] md:text-lg"
                 onMouseEnter={() =>
                   !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                 }

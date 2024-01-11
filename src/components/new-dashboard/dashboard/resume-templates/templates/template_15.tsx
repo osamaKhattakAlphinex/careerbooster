@@ -606,16 +606,17 @@ const ResumeTemplate15 = ({
           ></span>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-center items-center ${i > 0
-                      ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full mt-8"
-                      : "mb-5"
-                      }`}
+                    className={`flex justify-center items-center ${
+                      i > 0
+                        ? "w-[100vw] ml-[-240px] xs:ml-0 xs:w-full"
+                        : "mb-[60px]"
+                    }`}
                   >
                     <div
                       key={i}
@@ -967,7 +968,7 @@ const ResumeTemplate15 = ({
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                           <div
                             className="border-2 w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
@@ -996,7 +997,7 @@ const ResumeTemplate15 = ({
           )}
           {/* education */}
           {resume?.education && (
-            <div className="ml-[-200px] xs:ml-0">
+            <div className="ml-[-240px] xs:ml-0">
               <span className="w-full h-0 my-1 page-break"></span>
               <h3 className="uppercase text-lg font-semibold text-white w-full px-4 py-1 rounded-sm flex  bg-[#444440] flex-row gap-2 items-center mb-4">
                 {educationIcon}
