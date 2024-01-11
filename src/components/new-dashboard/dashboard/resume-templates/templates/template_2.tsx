@@ -27,13 +27,10 @@ import EditableField from "@/components/new-dashboard/common/EditableField";
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 
-const ResumeTemplate2 = ({
-}: {
-  }) => {
+const ResumeTemplate2 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
-  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<number | null>(null);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
   const [newEducation, setNewEducation] = useState(false);
@@ -51,13 +48,17 @@ const ResumeTemplate2 = ({
 
 
 
+
+  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<number | null>(null);
   const [streamedSummaryData, setStreamedSummaryData] = useState("")
   const { getSummary } = useGetSummary(setStreamedSummaryData);
-
   const [streamedJDData, setStreamedJDData] = useState<any>("")
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
-
   const { saveResumeToDB } = useSaveResumeToDB()
+
+
+
+
   const addPrimarySkill = () => {
     const primarySkills = resume?.primarySkills;
     const updatedSkills = [...primarySkills];
