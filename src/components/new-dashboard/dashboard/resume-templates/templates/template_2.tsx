@@ -269,8 +269,11 @@ const ResumeTemplate2 = () => {
         <h2 className="uppercase text-sm xs:text-sm md:text-lg lg:text-lg font-bold">
           About Me
         </h2>
-        <Regenerate handler={getSummary}>
-          <div className="text-sm xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:bg-gray-100">
+        <Regenerate
+          handler={getSummary}
+          custom_style={"absolute bottom-3 right-2 "}
+        >
+          <div className="text-sm xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
             <EditableField
               type="textarea"
               value={
@@ -425,17 +428,16 @@ const ResumeTemplate2 = () => {
           WORK EXPERIENCE
         </h3>
         {resume?.workExperienceArray &&
-        resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
           <>
             {resume?.workExperienceArray.map((rec: any, i: number) => {
               return (
                 <div
                   key={i}
-                  className={`${
-                    i === resume?.workExperienceArray.length - 1
-                      ? ""
-                      : "border-b border-gray-200"
-                  } grid grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
+                  className={`${i === resume?.workExperienceArray.length - 1
+                    ? ""
+                    : "border-b border-gray-200"
+                    } grid grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
                   onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                   onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                   onDragStart={(e) =>
@@ -571,6 +573,7 @@ const ResumeTemplate2 = () => {
                           getOneWorkExperienceNew(rec);
                           setRegeneratedRecordIndex(i);
                         }}
+                        custom_style={"absolute mt-3 right-2"}
                       >
                         {rec?.achievements && i !== regeneratedRecordIndex ? (
                           <ul className="pl-0 flex flex-col gap-1 text-sm xs:text-sm md:text-lg lg:text-lg">
@@ -776,7 +779,7 @@ const ResumeTemplate2 = () => {
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                      newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                         <div
                           className="border-2 w-2/12 mt-3 xs:w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {
