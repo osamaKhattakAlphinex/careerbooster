@@ -104,16 +104,16 @@ const SingleRecentResumeCard = ({
           <span className="text-[13px] mx-2 ">View</span>
         </button>
 
-        {/* {pathname == "/dashboard"
+        {pathname == "/dashboard"
           ? ""
           : resume && (
-              <DownloadService
-                componentRef={componentRef}
-                view={handleOnView}
-                templateId={templateId}
-                fileName="ai-resume"
-              />
-            )} */}
+            <DownloadService
+              componentRef={componentRef}
+              view={handleOnView}
+              templateId={templateId}
+              fileName="ai-resume"
+            />
+          )}
       </div>
     </div>
   );
