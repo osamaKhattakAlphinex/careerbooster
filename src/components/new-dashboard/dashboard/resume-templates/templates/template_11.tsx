@@ -27,15 +27,16 @@ import Regenerate from "@/helpers/regenerate";
 import EditableField from "@/components/new-dashboard/common/EditableField";
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
+import useDragAndDrop from "@/hooks/useDragAndDrop";
 const ResumeTemplate11 = () => {
-
-
-  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<number | null>(null);
-  const [streamedSummaryData, setStreamedSummaryData] = useState("")
+  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
+    number | null
+  >(null);
+  const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
-  const [streamedJDData, setStreamedJDData] = useState<any>("")
+  const [streamedJDData, setStreamedJDData] = useState<any>("");
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
-  const { saveResumeToDB } = useSaveResumeToDB()
+  const { saveResumeToDB } = useSaveResumeToDB();
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
@@ -53,6 +54,9 @@ const ResumeTemplate11 = () => {
   const [secondarySkill, setSecondarySkill] = useState<string>("");
   const [professionalSkill, setProfessionalSkill] = useState<string>("");
 
+  const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
+    useDragAndDrop();
+
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const addPrimarySkill = () => {
     const primarySkills = resume?.primarySkills;
@@ -66,78 +70,138 @@ const ResumeTemplate11 = () => {
   };
 
   //Reorder Redux PrimarySkills array with drag-drop
-  const handleDropPrimary = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume.primarySkills];
+  // const handleDropPrimary = (e: any, i: number) => {
+  //   const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+  //   const updatedItems = [...resume.primarySkills];
+  //   // Swap the positions of the dragged item and the target item.
+  //   [updatedItems[draggedIndex], updatedItems[i]] = [
+  //     updatedItems[i],
+  //     updatedItems[draggedIndex],
+  //   ];
+  //   dispatch(
+  //     setPrimarySkills({
+  //       ...resume,
+  //       primarySkills: updatedItems,
+  //     })
+  //   );
+  //   saveResumeToDB({
+  //     ...resume,
+  //     primarySkills: updatedItems,
+  //   });
+  // };
+  //Reorder Redux SecondarySkills array with drag-drop
+  const handleDropSecondary = (e: any, i: number) => {
+    const draggedIndex = parseInt(e.dataTransfer.getData("text"));
+    const updatedItems = [...resume.secondarySkills];
     // Swap the positions of the dragged item and the target item.
     [updatedItems[draggedIndex], updatedItems[i]] = [
       updatedItems[i],
       updatedItems[draggedIndex],
     ];
     dispatch(
-      setPrimarySkills({
+      setSecondarySkills({
         ...resume,
-        primarySkills: updatedItems,
+        secondarySkills: updatedItems,
       })
     );
     saveResumeToDB({
       ...resume,
-      primarySkills: updatedItems,
+      secondarySkills: updatedItems,
     });
   };
-
-  //Reorder Redux handleDropExperience array with drag-drop
-  const handleDropExperience = (e: any, i: number) => {
+  //Reorder Redux ProfessionalSkills array with drag-drop
+  const handleDropProfessional = (e: any, i: number) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume?.workExperienceArray];
+    const updatedItems = [...resume.professionalSkills];
     // Swap the positions of the dragged item and the target item.
     [updatedItems[draggedIndex], updatedItems[i]] = [
       updatedItems[i],
       updatedItems[draggedIndex],
     ];
-    if (draggedIndex !== i) {
-      dispatch(
-        setWorkExperienceArray({
-          ...resume,
-          workExperienceArray: updatedItems,
-        })
-      );
-      saveResumeToDB({
+    dispatch(
+      setProfessionalSkills({
         ...resume,
-        workExperienceArray: updatedItems,
-      });
-    }
+        professionalSkills: updatedItems,
+      })
+    );
+    saveResumeToDB({
+      ...resume,
+      professionalSkills: updatedItems,
+    });
   };
-
+  //Reorder Redux handleDropExperience array with drag-drop
+  // const handleDropExperience = (e: any, i: number) => {
+  //   const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+  //   const updatedItems = [...resume?.workExperienceArray];
+  //   // Swap the positions of the dragged item and the target item.
+  //   [updatedItems[draggedIndex], updatedItems[i]] = [
+  //     updatedItems[i],
+  //     updatedItems[draggedIndex],
+  //   ];
+  //   if (draggedIndex !== i) {
+  //     dispatch(
+  //       setWorkExperienceArray({
+  //         ...resume,
+  //         workExperienceArray: updatedItems,
+  //       })
+  //     );
+  //     saveResumeToDB({
+  //       ...resume,
+  //       workExperienceArray: updatedItems,
+  //     });
+  //   }
+  // };
+  //Reorder Redux handleDropEducation array with drag-drop
+  const handleDropEducation = (e: any, i: number) => {
+    // const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+    // const updatedItems = [...resume?.educationArray];
+    // // Swap the positions of the dragged item and the target item.
+    // [updatedItems[draggedIndex], updatedItems[i]] = [
+    //   updatedItems[i],
+    //   updatedItems[draggedIndex],
+    // ];
+    // if (draggedIndex !== i) {
+    //   // dispatch(
+    //   //   setEducationArray({
+    //   //     ...resume,
+    //   //     educationArray: updatedItems,
+    //   //   })
+    //   // );
+    //   saveResumeToDB({
+    //     ...resume,
+    //     educationArray: updatedItems,
+    //   });
+    // }
+  };
   //Reorder Redux handleDropAchievement array with drag-drop
-  const handleDropAchievement = (i: number, ind: number) => {
-    let draggedIndex: number;
-    let updatedItems = [];
-    draggedIndex = insideIndex;
-    updatedItems = [...resume?.workExperienceArray];
-    let achievements = [...updatedItems[i].achievements];
-    const temp = achievements[draggedIndex];
-    achievements[draggedIndex] = achievements[ind];
-    achievements[ind] = temp;
-    let updatedWorkExperience = {
-      ...updatedItems[i],
-    };
-    updatedWorkExperience.achievements = achievements;
-    // Update the copy of the workExperience in the updatedItems array
-    updatedItems[i] = updatedWorkExperience;
-    if (draggedIndex !== ind) {
-      dispatch(
-        setWorkExperienceArray({
-          ...resume,
-          workExperienceArray: updatedItems,
-        })
-      );
-      saveResumeToDB({
-        ...resume,
-        workExperienceArray: updatedItems,
-      });
-    }
-  };
+  // const handleDropAchievement = (i: number, ind: number) => {
+  //   let draggedIndex: number;
+  //   let updatedItems = [];
+  //   draggedIndex = insideIndex;
+  //   updatedItems = [...resume?.workExperienceArray];
+  //   let achievements = [...updatedItems[i].achievements];
+  //   const temp = achievements[draggedIndex];
+  //   achievements[draggedIndex] = achievements[ind];
+  //   achievements[ind] = temp;
+  //   let updatedWorkExperience = {
+  //     ...updatedItems[i],
+  //   };
+  //   updatedWorkExperience.achievements = achievements;
+  //   // Update the copy of the workExperience in the updatedItems array
+  //   updatedItems[i] = updatedWorkExperience;
+  //   if (draggedIndex !== ind) {
+  //     dispatch(
+  //       setWorkExperienceArray({
+  //         ...resume,
+  //         workExperienceArray: updatedItems,
+  //       })
+  //     );
+  //     saveResumeToDB({
+  //       ...resume,
+  //       workExperienceArray: updatedItems,
+  //     });
+  //   }
+  // };
 
   return (
     <div className="first-page relative">
@@ -448,16 +512,17 @@ const ResumeTemplate11 = () => {
           </div>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-center items-center ${i > 0
-                      ? "w-[100vw] ml-[-250px] xs:ml-0 xs:w-full mt-8"
-                      : "mb-5"
-                      }`}
+                    className={`flex justify-center items-center ${
+                      i > 0
+                        ? "w-[100vw] ml-[-250px] xs:ml-0 xs:w-full mt-8"
+                        : "mb-5"
+                    }`}
                   >
                     <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
@@ -602,12 +667,11 @@ const ResumeTemplate11 = () => {
                         </span>
                       </h2>
                       <div className="p-4">
-                        <Regenerate handler={() => {
-                          getOneWorkExperienceNew(rec)
-                          setRegeneratedRecordIndex(i)
-                        }
-                        }
-
+                        <Regenerate
+                          handler={() => {
+                            getOneWorkExperienceNew(rec);
+                            setRegeneratedRecordIndex(i);
+                          }}
                         >
                           {rec?.achievements && (
                             <ul className="pl-0 flex flex-col gap-1 text-sm  xs:text-[12px] sm:text[12px] md:text-sm lg:text-sm">
@@ -619,7 +683,11 @@ const ResumeTemplate11 = () => {
                                     }}
                                     onDragOver={(e) => e.preventDefault()}
                                     onDrop={(e) => {
-                                      handleDropAchievement(i, ind);
+                                      handleDropAchievement(
+                                        i,
+                                        ind,
+                                        insideIndex
+                                      );
                                     }}
                                     draggable
                                     className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
@@ -806,7 +874,7 @@ const ResumeTemplate11 = () => {
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                           <div
                             className="border-2 w-full xs:w-full mt-3 sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
