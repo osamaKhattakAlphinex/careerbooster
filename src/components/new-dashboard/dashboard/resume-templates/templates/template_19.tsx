@@ -494,8 +494,11 @@ const ResumeTemplate19 = ({
           </h2>
           <span className="border-stylee w-full h-0  my-3"></span>
 
-          <Regenerate handler={getSummary}>
-            <div className="text-sm hover:shadow-md hover:bg-gray-100">
+          <Regenerate
+            handler={getSummary}
+            custom_style={"absolute bottom-3 right-2 "}
+          >
+            <div className="text-sm hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
               <EditableField
                 type="textarea"
                 value={

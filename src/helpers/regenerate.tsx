@@ -14,7 +14,7 @@ const Regenerate = ({ children, handler, custom_style }: any) => {
         className={`group-hover:grid justify-end ${custom_style} hidden w-full`}
       >
         <button
-          className="flex text-white mx-1 px-4 gap-2  w-fit justify-center items-center   h-10  bg-rose-700 rounded-full"
+          className="flex text-white mx-1 px-4 gap-2 mt-3 w-fit justify-center items-center h-10  bg-rose-700 rounded-full"
           onClick={() => handler()}
         >
           <span className="text-sm">Regenerate</span>
