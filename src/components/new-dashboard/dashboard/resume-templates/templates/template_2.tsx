@@ -8,7 +8,6 @@ import {
   setBasicInfo,
   setField,
   setPrimarySkills,
-
   setSummary,
   setWorkExperienceArray,
 } from "@/store/resumeSlice";
@@ -43,21 +42,16 @@ const ResumeTemplate2 = () => {
     useState(false);
   const [primarySkill, setPrimarySkill] = useState<string>("");
 
-
   const [insideIndex, setInsideIndex] = useState<number>(0);
 
-
-
-
-  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<number | null>(null);
-  const [streamedSummaryData, setStreamedSummaryData] = useState("")
+  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
+    number | null
+  >(null);
+  const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
-  const [streamedJDData, setStreamedJDData] = useState<any>("")
+  const [streamedJDData, setStreamedJDData] = useState<any>("");
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
-  const { saveResumeToDB } = useSaveResumeToDB()
-
-
-
+  const { saveResumeToDB } = useSaveResumeToDB();
 
   const addPrimarySkill = () => {
     const primarySkills = resume?.primarySkills;
@@ -71,11 +65,9 @@ const ResumeTemplate2 = () => {
   };
   useEffect(() => {
     if (streamedJDData === "") {
-      setRegeneratedRecordIndex(null)
+      setRegeneratedRecordIndex(null);
     }
-  }, [streamedJDData])
-
-
+  }, [streamedJDData]);
 
   //Reorder Redux PrimarySkills array with drag-drop
   const handleDropPrimary = (e: any, i: number) => {
@@ -274,8 +266,11 @@ const ResumeTemplate2 = () => {
         <h2 className="uppercase text-sm xs:text-sm md:text-lg lg:text-lg font-bold">
           About Me
         </h2>
-        <Regenerate handler={getSummary}>
-          <div className="text-sm xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:bg-gray-100">
+        <Regenerate
+          handler={getSummary}
+          custom_style={"absolute bottom-3 right-2 "}
+        >
+          <div className="text-sm xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
             <EditableField
               type="textarea"
               value={
@@ -422,7 +417,6 @@ const ResumeTemplate2 = () => {
             </ul>
           </>
         )}
-
       </div>
 
       {/* Work Experience */}
@@ -431,16 +425,17 @@ const ResumeTemplate2 = () => {
           WORK EXPERIENCE
         </h3>
         {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+        resume?.workExperienceArray.length > 0 ? (
           <>
             {resume?.workExperienceArray.map((rec: any, i: number) => {
               return (
                 <div
                   key={i}
-                  className={`${i === resume?.workExperienceArray.length - 1
-                    ? ""
-                    : "border-b border-gray-200"
-                    } grid grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
+                  className={`${
+                    i === resume?.workExperienceArray.length - 1
+                      ? ""
+                      : "border-b border-gray-200"
+                  } grid grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
                   onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                   onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                   onDragStart={(e) =>
@@ -571,17 +566,15 @@ const ResumeTemplate2 = () => {
                       />
                     </span>
                     <div className="p-4">
-                      <Regenerate handler={() => {
-                        getOneWorkExperienceNew(rec)
-                        setRegeneratedRecordIndex(i)
-                      }
-                      }
-
+                      <Regenerate
+                        handler={() => {
+                          getOneWorkExperienceNew(rec);
+                          setRegeneratedRecordIndex(i);
+                        }}
+                        custom_style={"absolute mt-3 right-2"}
                       >
-
                         {rec?.achievements && i !== regeneratedRecordIndex ? (
                           <ul className="pl-0 flex flex-col gap-1 text-sm xs:text-sm md:text-lg lg:text-lg">
-
                             {rec?.achievements.map(
                               (achievement: any, ind: number) => (
                                 <li
@@ -608,7 +601,10 @@ const ResumeTemplate2 = () => {
                                             if (index === i) {
                                               let updatedAchievements =
                                                 exp?.achievements?.map(
-                                                  (ach: any, achInd: number) => {
+                                                  (
+                                                    ach: any,
+                                                    achInd: number
+                                                  ) => {
                                                     if (achInd === ind) {
                                                       return value;
                                                     }
@@ -617,7 +613,8 @@ const ResumeTemplate2 = () => {
                                                 );
                                               return {
                                                 ...exp,
-                                                achievements: updatedAchievements,
+                                                achievements:
+                                                  updatedAchievements,
                                               };
                                             }
                                             return exp;
@@ -662,7 +659,8 @@ const ResumeTemplate2 = () => {
                                       );
                                       saveResumeToDB({
                                         ...resume,
-                                        workExperienceArray: workExperienceArray,
+                                        workExperienceArray:
+                                          workExperienceArray,
                                       });
                                     }}
                                     className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
@@ -673,16 +671,13 @@ const ResumeTemplate2 = () => {
                               )
                             )}
                           </ul>
-                        ) :
+                        ) : (
                           <div
                             dangerouslySetInnerHTML={{
-                              __html:
-                                streamedJDData,
+                              __html: streamedJDData,
                             }}
-                          >
-                          </div>
-
-                        }
+                          ></div>
+                        )}
                       </Regenerate>
 
                       {newWorkExperience === i ? (
@@ -782,7 +777,7 @@ const ResumeTemplate2 = () => {
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                      newWorkExperience !== i ? (
                         <div
                           className="border-2 w-2/12 mt-3 xs:w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {
