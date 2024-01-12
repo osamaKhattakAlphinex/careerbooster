@@ -17,7 +17,7 @@ import {
   TrainBotEntryType,
   makeTrainedBotEntry,
 } from "@/helpers/makeTrainBotEntry";
-export const maxDuration = 10; // This function can run for a maximum of 5 seconds
+export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
 const openai = new OpenAI({
@@ -45,7 +45,7 @@ export async function POST(req: any) {
     // const email = reqBody?.email;
     const trainBotData = reqBody?.trainBotData;
 
-   
+
     if (type === "basicDetails") {
       const dataset = "resume.getBasicInfo";
       const model = await getTrainedModel(dataset);
@@ -108,7 +108,7 @@ export async function POST(req: any) {
 
             const obj = {
               entryId: basicInfoId,
-          
+
               type: "resume.getBasicInfo",
               input: inputPrompt,
               output: response?.choices[0]?.message?.content?.replace(

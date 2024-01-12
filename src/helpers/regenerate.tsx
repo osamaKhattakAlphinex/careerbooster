@@ -3,22 +3,29 @@ import React, { ReactNode } from "react";
 
 type RegenerateType = {
   children: ReactNode;
-  handler: () => void;
+  handler: (args: any) => void;
 };
 
-const Regenerate = ({ children, handler }: any) => {
+const Regenerate = ({ children, handler, custom_style }: any) => {
   return (
     <div className="relative group">
       {children}
-      <div className=" group-hover:grid hidden absolute right-1 top-1 h-10 w-10 bg-rose-700 rounded  place-content-center ">
-        <button className=" text-white" onClick={() => handler()}>
+      <div
+        className={`group-hover:grid justify-end ${custom_style} hidden w-full`}
+      >
+        <button
+          className="flex text-white mx-1 px-4 gap-2  w-fit justify-center items-center   h-10  bg-rose-700 rounded-full"
+          onClick={() => handler()}
+        >
+          <span className="text-sm">Regenerate</span>
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-4 h-4"
           >
             <path
               strokeLinecap="round"

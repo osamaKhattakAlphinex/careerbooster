@@ -1,5 +1,5 @@
 "use client";
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,8 +8,6 @@ import {
   setBasicInfo,
   setField,
   setPrimarySkills,
-  setProfessionalSkills,
-  setSecondarySkills,
   setSummary,
   setWorkExperienceArray,
 } from "@/store/resumeSlice";
@@ -22,125 +20,38 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
-import useGetSummary from "@/helpers/useGetSummary";
+import useGetSummary from "@/hooks/useGetSummary";
 import Regenerate from "@/helpers/regenerate";
-
-const EditableField = ({
-  value,
-  type,
-  rows,
-  onSave,
-  style,
-}: {
-  value: string;
-  type?: string;
-  rows?: number;
-  style?: any;
-  onSave: (value: string) => void;
-}) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedValue, setEditedValue] = useState(value);
-  const [showPopup, setShowPopup] = useState(false);
-  useEffect(() => {
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 5000);
-    // Clean up the timeout to avoid memory leaks
-  }, [showPopup]); // The empty dependency array ensures that this effect runs only once after the initial render
-
-  const userData = useSelector((state: any) => state.userData);
-  const handleBlur = () => {
-    setIsEditing(false);
-    onSave(editedValue);
-  };
-
-  useEffect(() => {
-    if (value !== editedValue) {
-      setEditedValue(value);
-    }
-  }, [value]);
-  const showAlertpopupFun = () => {
-    !userData?.userPackageData?.limit?.can_edit_resume &&
-      alert("please upgrade to pro plan in order to edit !");
-  };
-  return (
-    <>
-      <span
-        onClick={() => {
-          setIsEditing(true);
-          //showAlertpopupFun();
-        }}
-        onBlur={handleBlur}
-        className=""
-      >
-        {userData?.userPackageData?.limit?.can_edit_resume && isEditing ? (
-          <>
-            {type === "textarea" ? (
-              <textarea
-                value={editedValue}
-                className="bg-transparent pr-2 w-full hover:cursor-text  h-auto"
-                rows={rows ? rows : 15}
-                onChange={(e: any) => setEditedValue(e.target.value)}
-                autoFocus
-                onBlur={handleBlur}
-              />
-            ) : (
-              <input
-                type="text"
-                value={editedValue}
-                className=" bg-transparent pr-2 hover:cursor-text"
-                style={style ? style : {}}
-                onChange={(e: any) => setEditedValue(e.target.value)}
-                autoFocus
-                onBlur={handleBlur}
-              />
-            )}
-          </>
-        ) : (
-          <span className="hover:cursor-text" title="click to edit">
-            {value}
-          </span>
-        )}
-      </span>
-    </>
-  );
-};
-
-const ResumeTemplate7 = ({
-  streamedSummaryData,
-  streamedJDData,
-  saveResumeToDB,
-}: {
-  streamedSummaryData: string;
-  streamedJDData: string;
-  saveResumeToDB: (data?: any) => Promise<void>;
-}) => {
+import EditableField from "@/components/new-dashboard/common/EditableField";
+import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
+import useSaveResumeToDB from "@/hooks/useSaveToDB";
+import useDragAndDrop from "@/hooks/useDragAndDrop";
+const ResumeTemplate7 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
-  const [newSecondarySkill, setNewSecondarySkill] = useState(false);
-  const [newProfessionalSkill, setNewProfessionalSkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
   const [newEducation, setNewEducation] = useState(false);
   const [primarySkillAddButtonVisible, setPrimarySkillAddButtonVisible] =
     useState(false);
-  const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
-    useState(false);
 
-  const { getSummary } = useGetSummary();
+  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
+    number | null
+  >(null);
+  const [streamedSummaryData, setStreamedSummaryData] = useState("");
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
+  const [streamedJDData, setStreamedJDData] = useState<any>("");
+  const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
+  const { saveResumeToDB } = useSaveResumeToDB();
+  const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
+    useDragAndDrop();
 
-  const [
-    professionalSkillAddButtonVisible,
-    setProfessionalSkillAddButtonVisible,
-  ] = useState(false);
   const [workExperienceAddButtonVisible, setWorkExperienceAddButtonVisible] =
     useState<number>();
   const [educationAddButtonVisible, setEducationAddButtonVisible] =
     useState(false);
   const [primarySkill, setPrimarySkill] = useState<string>("");
-  const [secondarySkill, setSecondarySkill] = useState<string>("");
-  const [professionalSkill, setProfessionalSkill] = useState<string>("");
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const addPrimarySkill = () => {
@@ -153,160 +64,86 @@ const ResumeTemplate7 = ({
       primarySkills: updatedSkills,
     });
   };
-  const addSecondarySkill = () => {
-    const secondarySkills = resume?.secondarySkills;
-    const updatedSkills = [...secondarySkills];
-    updatedSkills.push(secondarySkill);
-    dispatch(setSecondarySkills({ secondarySkills: updatedSkills }));
-    saveResumeToDB({
-      ...resume,
-      secondarySkills: updatedSkills,
-    });
-  };
-  const addProfessionalSkill = () => {
-    const professionalSkills = resume?.professionalSkills;
-    const updatedSkills = [...professionalSkills];
-    updatedSkills.push(professionalSkill);
 
-    dispatch(setProfessionalSkills({ professionalSkills: updatedSkills }));
-    saveResumeToDB({
-      ...resume,
-      professionalSkills: updatedSkills,
-    });
-  };
+  useEffect(() => {
+    if (streamedJDData === "") {
+      setRegeneratedRecordIndex(null);
+    }
+  }, [streamedJDData]);
+
   //Reorder Redux PrimarySkills array with drag-drop
-  const handleDropPrimary = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume.primarySkills];
-    // Swap the positions of the dragged item and the target item.
-    [updatedItems[draggedIndex], updatedItems[i]] = [
-      updatedItems[i],
-      updatedItems[draggedIndex],
-    ];
-    dispatch(
-      setPrimarySkills({
-        ...resume,
-        primarySkills: updatedItems,
-      })
-    );
-    saveResumeToDB({
-      ...resume,
-      primarySkills: updatedItems,
-    });
-  };
-  //Reorder Redux SecondarySkills array with drag-drop
-  const handleDropSecondary = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text"));
-    const updatedItems = [...resume.secondarySkills];
-    // Swap the positions of the dragged item and the target item.
-    [updatedItems[draggedIndex], updatedItems[i]] = [
-      updatedItems[i],
-      updatedItems[draggedIndex],
-    ];
-    dispatch(
-      setSecondarySkills({
-        ...resume,
-        secondarySkills: updatedItems,
-      })
-    );
-    saveResumeToDB({
-      ...resume,
-      secondarySkills: updatedItems,
-    });
-  };
-  //Reorder Redux ProfessionalSkills array with drag-drop
-  const handleDropProfessional = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume.professionalSkills];
-    // Swap the positions of the dragged item and the target item.
-    [updatedItems[draggedIndex], updatedItems[i]] = [
-      updatedItems[i],
-      updatedItems[draggedIndex],
-    ];
-    dispatch(
-      setProfessionalSkills({
-        ...resume,
-        professionalSkills: updatedItems,
-      })
-    );
-    saveResumeToDB({
-      ...resume,
-      professionalSkills: updatedItems,
-    });
-  };
+  // const handleDropPrimary = (e: any, i: number) => {
+  //   const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+  //   const updatedItems = [...resume.primarySkills];
+  //   // Swap the positions of the dragged item and the target item.
+  //   [updatedItems[draggedIndex], updatedItems[i]] = [
+  //     updatedItems[i],
+  //     updatedItems[draggedIndex],
+  //   ];
+  //   dispatch(
+  //     setPrimarySkills({
+  //       ...resume,
+  //       primarySkills: updatedItems,
+  //     })
+  //   );
+  //   saveResumeToDB({
+  //     ...resume,
+  //     primarySkills: updatedItems,
+  //   });
+  // };
+
   //Reorder Redux handleDropExperience array with drag-drop
-  const handleDropExperience = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume?.workExperienceArray];
-    // Swap the positions of the dragged item and the target item.
-    [updatedItems[draggedIndex], updatedItems[i]] = [
-      updatedItems[i],
-      updatedItems[draggedIndex],
-    ];
-    if (draggedIndex !== i) {
-      dispatch(
-        setWorkExperienceArray({
-          ...resume,
-          workExperienceArray: updatedItems,
-        })
-      );
-      saveResumeToDB({
-        ...resume,
-        workExperienceArray: updatedItems,
-      });
-    }
-  };
-  //Reorder Redux handleDropEducation array with drag-drop
-  const handleDropEducation = (e: any, i: number) => {
-    // const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    // const updatedItems = [...resume?.educationArray];
-    // // Swap the positions of the dragged item and the target item.
-    // [updatedItems[draggedIndex], updatedItems[i]] = [
-    //   updatedItems[i],
-    //   updatedItems[draggedIndex],
-    // ];
-    // if (draggedIndex !== i) {
-    //   // dispatch(
-    //   //   setEducationArray({
-    //   //     ...resume,
-    //   //     educationArray: updatedItems,
-    //   //   })
-    //   // );
-    //   saveResumeToDB({
-    //     ...resume,
-    //     educationArray: updatedItems,
-    //   });
-    // }
-  };
+  // const handleDropExperience = (e: any, i: number) => {
+  //   const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+  //   const updatedItems = [...resume?.workExperienceArray];
+  //   // Swap the positions of the dragged item and the target item.
+  //   [updatedItems[draggedIndex], updatedItems[i]] = [
+  //     updatedItems[i],
+  //     updatedItems[draggedIndex],
+  //   ];
+  //   if (draggedIndex !== i) {
+  //     dispatch(
+  //       setWorkExperienceArray({
+  //         ...resume,
+  //         workExperienceArray: updatedItems,
+  //       })
+  //     );
+  //     saveResumeToDB({
+  //       ...resume,
+  //       workExperienceArray: updatedItems,
+  //     });
+  //   }
+  // };
+
   //Reorder Redux handleDropAchievement array with drag-drop
-  const handleDropAchievement = (i: number, ind: number) => {
-    let draggedIndex: number;
-    let updatedItems = [];
-    draggedIndex = insideIndex;
-    updatedItems = [...resume?.workExperienceArray];
-    let achievements = [...updatedItems[i].achievements];
-    const temp = achievements[draggedIndex];
-    achievements[draggedIndex] = achievements[ind];
-    achievements[ind] = temp;
-    let updatedWorkExperience = {
-      ...updatedItems[i],
-    };
-    updatedWorkExperience.achievements = achievements;
-    // Update the copy of the workExperience in the updatedItems array
-    updatedItems[i] = updatedWorkExperience;
-    if (draggedIndex !== ind) {
-      dispatch(
-        setWorkExperienceArray({
-          ...resume,
-          workExperienceArray: updatedItems,
-        })
-      );
-      saveResumeToDB({
-        ...resume,
-        workExperienceArray: updatedItems,
-      });
-    }
-  };
+  // const handleDropAchievement = (i: number, ind: number) => {
+  //   let draggedIndex: number;
+  //   let updatedItems = [];
+  //   draggedIndex = insideIndex;
+  //   updatedItems = [...resume?.workExperienceArray];
+  //   let achievements = [...updatedItems[i].achievements];
+  //   const temp = achievements[draggedIndex];
+  //   achievements[draggedIndex] = achievements[ind];
+  //   achievements[ind] = temp;
+  //   let updatedWorkExperience = {
+  //     ...updatedItems[i],
+  //   };
+  //   updatedWorkExperience.achievements = achievements;
+  //   // Update the copy of the workExperience in the updatedItems array
+  //   updatedItems[i] = updatedWorkExperience;
+  //   if (draggedIndex !== ind) {
+  //     dispatch(
+  //       setWorkExperienceArray({
+  //         ...resume,
+  //         workExperienceArray: updatedItems,
+  //       })
+  //     );
+  //     saveResumeToDB({
+  //       ...resume,
+  //       workExperienceArray: updatedItems,
+  //     });
+  //   }
+  // };
 
   return (
     <div className="w-full first-page  text-gray-900">
@@ -536,7 +373,11 @@ const ResumeTemplate7 = ({
                                     }}
                                     onDragOver={(e) => e.preventDefault()}
                                     onDrop={(e) => {
-                                      handleDropAchievement(i, ind);
+                                      handleDropAchievement(
+                                        i,
+                                        ind,
+                                        insideIndex
+                                      );
                                     }}
                                     draggable
                                     className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"

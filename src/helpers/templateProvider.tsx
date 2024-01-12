@@ -20,16 +20,16 @@ import ResumeTemplate19 from "@/components/new-dashboard/dashboard/resume-templa
 import { Template } from "@/components/new-dashboard/dashboard/resume-templates";
 
 export const ALL_TEMPLATES: Template[] = [
+  // {
+  //   id: 1,
+  //   title: "classic-executive",
+  //   tags: ["one-page"],
+  //   category: "freemium",
+  //   preview: "/assets/images/templates/resume-1.png",
+  //   template: (props) => <ResumeTemplate1 {...props} />,
+  // },
   {
     id: 1,
-    title: "classic-executive",
-    tags: ["one-page"],
-    category: "freemium",
-    preview: "/assets/images/templates/resume-1.png",
-    template: (props) => <ResumeTemplate1 {...props} />,
-  },
-  {
-    id: 2,
     title: "",
     tags: ["one-page"],
     category: "premium",
@@ -37,7 +37,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate2 {...props} />,
   },
   {
-    id: 3,
+    id: 2,
     title: "classic-executive",
     tags: ["classic-executive"],
     category: "premium",
@@ -45,7 +45,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate3 {...props} />,
   },
   {
-    id: 4,
+    id: 3,
     title: "",
     tags: ["classic-executive"],
     category: "premium",
@@ -53,7 +53,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate4 {...props} />,
   },
   {
-    id: 5,
+    id: 4,
     title: "",
     tags: ["classic-executive"],
     category: "premium",
@@ -61,7 +61,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate5 {...props} />,
   },
   {
-    id: 6,
+    id: 5,
     title: "",
     tags: ["classic-executive"],
     category: "premium",
@@ -69,7 +69,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate6 {...props} />,
   },
   {
-    id: 7,
+    id: 6,
     title: "",
     tags: ["classic-executive"],
     category: "premium",
@@ -77,7 +77,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate7 {...props} />,
   },
   {
-    id: 8,
+    id: 7,
     title: "",
     tags: ["classic-executive"],
     category: "premium",
@@ -85,7 +85,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate8 {...props} />,
   },
   {
-    id: 9,
+    id: 8,
     title: "",
     tags: ["classic-executive"],
     category: "premium",
@@ -93,7 +93,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate9 {...props} />,
   },
   {
-    id: 10,
+    id: 9,
     title: "",
     tags: ["creative-colorful"],
     category: "premium",
@@ -101,7 +101,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate10 {...props} />,
   },
   {
-    id: 11,
+    id: 10,
     title: "",
     tags: ["creative-colorful"],
     category: "premium",
@@ -109,7 +109,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate11 {...props} />,
   },
   {
-    id: 12,
+    id: 11,
     title: "",
     tags: ["creative-colorful"],
     category: "premium",
@@ -117,7 +117,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate12 {...props} />,
   },
   {
-    id: 13,
+    id: 12,
     title: "",
     tags: ["creative-colorful"],
     category: "premium",
@@ -125,7 +125,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate13 {...props} />,
   },
   {
-    id: 14,
+    id: 13,
     title: "",
     tags: ["creative-colorful"],
     category: "premium",
@@ -133,7 +133,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate14 {...props} />,
   },
   {
-    id: 15,
+    id: 14,
     title: "",
     tags: ["creative-colorful"],
     category: "premium",
@@ -141,7 +141,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate15 {...props} />,
   },
   {
-    id: 16,
+    id: 15,
     title: "",
     tags: ["creative-colorful"],
     category: "premium",
@@ -149,7 +149,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate16 {...props} />,
   },
   {
-    id: 17,
+    id: 16,
     title: "",
     tags: ["creative-colorful"],
     category: "premium",
@@ -157,7 +157,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate17 {...props} />,
   },
   {
-    id: 18,
+    id: 17,
     title: "",
     tags: ["one-page"],
     category: "premium",
@@ -165,7 +165,7 @@ export const ALL_TEMPLATES: Template[] = [
     template: (props) => <ResumeTemplate18 {...props} />,
   },
   {
-    id: 19,
+    id: 18,
     title: "",
     tags: ["one-page"],
     category: "premium",

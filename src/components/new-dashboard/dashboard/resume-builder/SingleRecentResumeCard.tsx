@@ -6,7 +6,7 @@ import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import { usePathname, useRouter } from "next/navigation";
 
-import {} from "@/../public/icon/Vector.png";
+import { } from "@/../public/icon/Vector.png";
 import DownloadService from "@/helpers/downloadFile";
 import { useEffect } from "react";
 
@@ -105,13 +105,13 @@ const SingleRecentResumeCard = ({
         {/* {pathname == "/dashboard"
           ? ""
           : resume && (
-              <DownloadService
-                componentRef={componentRef}
-                view={handleOnView}
-                templateId={templateId}
-                fileName="ai-resume"
-              />
-            )} */}
+            <DownloadService
+              componentRef={componentRef}
+              view={handleOnView}
+              templateId={templateId}
+              fileName="ai-resume"
+            />
+          )} */}
       </div>
     </div>
   );

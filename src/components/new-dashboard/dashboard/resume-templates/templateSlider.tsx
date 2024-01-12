@@ -96,7 +96,7 @@ const TemplateSlider = ({ templates }: Props) => {
                 </div>
               )}
 
-              <div className="text-center h-full w-full border-2 absolute inset-0 flex justify-center items-center text-[#000] text-sm font-medium">
+              <div className="text-center h-full w-full absolute inset-0 flex justify-center items-center text-[#000] text-sm font-medium">
                 {templateId === index + 1 && (
                   <span className="flex justify-center items-center w-12 h-12 bg-blue-600 rounded-full">
                     <svg

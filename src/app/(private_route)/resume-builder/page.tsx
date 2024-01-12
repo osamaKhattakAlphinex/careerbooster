@@ -2,42 +2,34 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_1";
-import iconOfPackageBadge from "@/../public/icon/crown.svg";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  WorkExperience,
-  setField,
-  setIsLoading,
-  setUserData,
-} from "@/store/userDataSlice";
+import { WorkExperience } from "@/store/userDataSlice";
 import {
   setBasicInfo,
-  setSummary,
   setWorkExperience,
   setPrimarySkills,
-  setSecondarySkills,
-  setProfessionalSkills,
   setId,
   setState,
   setWorkExperienceArray,
   resetResume,
+  setQuantifyingExperience,
   // setLoadingState,
 } from "@/store/resumeSlice";
-// import { exitFullScreenIcon, fullScreenIcon } from "@/helpers/iconsProvider";
-import axios from "axios";
-import { makeid } from "@/helpers/makeid";
+
 import { checkIconSmall, leftArrowIcon } from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
-import useTheme from "@/lib/useTheme";
 import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
 import GenerateResume from "@/components/new-dashboard/dashboard/resume-builder/GenerateNewResumeCard";
 import Link from "next/link";
 import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import Image from "next/image";
 import { crownIcon } from "@/helpers/newIconsProviders";
+import useSaveResumeToDB from "@/hooks/useSaveToDB";
+import useGetUserData from "@/hooks/useGetUserData";
+import useGetSummary from "@/hooks/useGetSummary";
+import { fetchLIstOfStrings } from "@/helpers/fetchLIstOfStrings";
 
 const ResumeBuilder = () => {
-  const [theme] = useTheme();
   const [confettingRunning, setConfettiRunning] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const confettiConfig = {
@@ -50,7 +42,7 @@ const ResumeBuilder = () => {
     width: "25px",
     height: "25px",
   };
-
+  //
   const runConfetti = () => {
     setConfettiRunning(true);
     setTimeout(() => {
@@ -58,6 +50,7 @@ const ResumeBuilder = () => {
     }, 3000); // Adjust the duration as needed
   };
 
+  const { getUserDataIfNotExists } = useGetUserData();
   const componentRef = useRef<any>(null);
   const { data: session } = useSession();
 
@@ -68,11 +61,13 @@ const ResumeBuilder = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
-
+  const { saveResumeToDB } = useSaveResumeToDB();
   // Redux
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
+
   const handleGenerate = useCallback(
     async (quantifyingExperience: boolean) => {
       await getUserDataIfNotExists();
@@ -80,6 +75,7 @@ const ResumeBuilder = () => {
       dispatch(resetResume(resumeData.state));
       if (resumeData.state.jobPosition !== "" && session?.user?.email) {
         dispatch(setState({ name: "resumeLoading", value: true }));
+        dispatch(setQuantifyingExperience(quantifyingExperience));
         dispatch(setId(""));
         getBasicInfo();
         getSummary();
@@ -166,51 +162,6 @@ const ResumeBuilder = () => {
     // });
   };
 
-  const getSummary = async () => {
-    // return makeAPICallWithRetry(async () => {
-    await getUserDataIfNotExists();
-    setStreamedSummaryData("");
-    dispatch(setSummary(""));
-    // dispatch(setLoadingState("summary"));
-    return fetch("/api/resumeBots/getBasicInfo", {
-      method: "POST",
-      body: JSON.stringify({
-        type: "summary",
-        personName: userData?.firstName + " " + userData?.lastName,
-        jobPosition: resumeData.state.jobPosition,
-        userData: aiInputUserData,
-        trainBotData: {
-          userEmail: userData.email,
-          // fileAddress: userData.files[0].fileName,
-          fileAddress: userData.uploadedResume.fileName,
-        },
-      }),
-    }).then(async (resp: any) => {
-      // const res = await resp.json();
-
-      if (resp.ok) {
-        const reader = resp.body.getReader();
-        let summaryTemp = "";
-        while (true) {
-          const { done, value } = await reader.read();
-
-          if (done) {
-            break;
-          }
-
-          const text = new TextDecoder().decode(value);
-          setStreamedSummaryData((prev) => prev + text);
-          summaryTemp += text;
-        }
-
-        dispatch(setSummary(summaryTemp));
-      } else {
-        setStreamedSummaryData("Error! Something went wrong");
-      }
-    });
-    // });
-  };
-
   const getWorkExperienceNew = async (quantifyingExperience: boolean) => {
     // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("workExperience"));
@@ -230,6 +181,7 @@ const ResumeBuilder = () => {
         let workExpArrObj: any = {};
         let html = "";
         html += `<h2 style="font-size: 1.3rem; font-weight: bold; line-height: 2rem; ">${experience?.jobTitle}</h2>`;
+        // workExpArrObj.experienceId = experience?.experienceId
         workExpArrObj.title = experience?.jobTitle;
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
@@ -300,32 +252,6 @@ const ResumeBuilder = () => {
     // });
   };
 
-  const fetchLIstOfStrings = (text: string) => {
-    // Create a new DOMParser
-    const parser = new DOMParser();
-
-    // Parse the HTML string into a DOM document
-    const doc = parser.parseFromString(text, "text/html");
-
-    // Get the <ul> element
-    const ulElement = doc.querySelector("ul");
-    if (ulElement) {
-      // Get an array of <li> elements
-      const liElements = ulElement.querySelectorAll("li");
-
-      // Initialize an array to store the values of <li> elements
-      const valuesArray: any = [];
-
-      // Loop through the <li> elements and extract their text content
-      liElements.forEach((liElement: any) => {
-        valuesArray.push(liElement.textContent.trim());
-      });
-      return valuesArray;
-    }
-
-    return [];
-  };
-
   const getPrimarySkills = async () => {
     // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("primarySkills"));
@@ -355,65 +281,6 @@ const ResumeBuilder = () => {
         }
       }
     });
-    // });
-  };
-
-  const getUserDataIfNotExists = async () => {
-    // return makeAPICallWithRetry(async () => {
-    if (!userData.isLoading && !userData.isFetched) {
-      dispatch(setIsLoading(true));
-      // Fetch userdata if not exists in Redux
-      const res = await fetch(
-        `/api/users/getOneByEmail?email=${session?.user?.email}`
-      );
-
-      const response = await res.json();
-
-      dispatch(setUserData(response.result));
-      dispatch(setIsLoading(false));
-      dispatch(setField({ name: "isFetched", value: true }));
-    }
-    // });
-  };
-  const saveResumeToDB = async (data: any = "") => {
-    // return makeAPICallWithRetry(async () => {
-    const source = data === "" ? resumeData : data;
-    let obj = source;
-    if (!source.id || source.id === "") {
-      obj = { ...source, id: makeid(), dateTime: new Date() };
-    }
-    axios
-      .post("/api/resumeBots/saveResumeToDB", {
-        email: session?.user?.email,
-        resumeData: obj,
-      })
-      .then(async (resp) => {
-        dispatch(setId(obj.id));
-        // update user in redux
-        const res = await fetch(
-          `/api/users/getOneByEmail?email=${session?.user?.email}`
-        );
-
-        const response = await res.json();
-        const user = response.result;
-        dispatch(setUserData(user));
-        // get user package details
-        const res2 = await fetch(
-          `/api/users/getUserPackageDetails?id=${user?.userPackage}`
-        );
-        const data = await res2.json();
-        if (data.success) {
-          const userPackage = data.result;
-          // set user package details to redux
-          dispatch(setField({ name: "userPackageData", value: userPackage }));
-        }
-
-        // show alert for 2 seconds using setTimeout
-        setShowAlert(true);
-        setTimeout(() => {
-          setShowAlert(false);
-        }, 1000);
-      });
     // });
   };
 
@@ -540,7 +407,6 @@ const ResumeBuilder = () => {
             (resumeData?.name ||
               resumeData?.contact?.email ||
               resumeData?.summary) && (
-
               <div
                 className={`my-10 ${resumeData.state.resumeLoading ? "animate-pulse" : ""
                   }`}
@@ -555,10 +421,10 @@ const ResumeBuilder = () => {
                     streamedSummaryData={streamedSummaryData}
                     streamedJDData={streamedJDData}
                     saveResumeToDB={saveResumeToDB}
+                    setStreamedJDData={setStreamedJDData}
                   />
                 </div>
               </div>
-
             )}
           {showPopup && (
             <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
