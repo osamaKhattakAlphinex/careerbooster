@@ -12,7 +12,7 @@ export async function POST(req: any) {
     let browser;
     chromium.setGraphicsMode = false;
 
-    if (process.env.NEXT_APP_STATE === "Development") {
+    if (process.env?.NEXT_APP_STATE === "Development") {
       browser = await puppeteerDev.launch();
     } else {
       browser = await puppeteer.launch({

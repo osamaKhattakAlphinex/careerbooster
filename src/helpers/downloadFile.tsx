@@ -95,12 +95,12 @@ const DownloadService = ({
         console.log(url);
 
         docRef.current.href = url;
-        if (!preview) {
-          console.log("inside");
+        // if (!preview) {
+        //   console.log("inside");
 
-          docRef.current.download = fileName
-        }
-        // docRef.current.download = fileName;
+        //   docRef.current.download = fileName
+        // }
+        docRef.current.download = fileName;
         docRef.current.click();
         setLoading(false);
       });
