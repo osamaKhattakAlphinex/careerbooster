@@ -73,6 +73,12 @@ const ResumeTemplate16 = () => {
     });
   };
 
+  useEffect(() => {
+    if (streamedJDData === "") {
+      setRegeneratedRecordIndex(null);
+    }
+  }, [streamedJDData]);
+
   //Reorder Redux PrimarySkills array with drag-drop
   // const handleDropPrimary = (e: any, i: number) => {
   //   const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
@@ -684,7 +690,7 @@ const ResumeTemplate16 = () => {
                             setRegeneratedRecordIndex(i);
                           }}
                         >
-                          {rec?.achievements && (
+                          {rec?.achievements && i !== regeneratedRecordIndex ? (
                             <ul className="pl-0 flex flex-col gap-1 text-[16px]">
                               {rec?.achievements.map(
                                 (achievement: any, ind: number) => (
@@ -786,6 +792,12 @@ const ResumeTemplate16 = () => {
                                 )
                               )}
                             </ul>
+                          ) : (
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: streamedJDData,
+                              }}
+                            ></div>
                           )}
                         </Regenerate>
                         {newWorkExperience === i ? (

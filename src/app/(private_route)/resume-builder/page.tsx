@@ -3,12 +3,9 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_1";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  WorkExperience,
-} from "@/store/userDataSlice";
+import { WorkExperience } from "@/store/userDataSlice";
 import {
   setBasicInfo,
-
   setWorkExperience,
   setPrimarySkills,
   setId,
@@ -53,7 +50,7 @@ const ResumeBuilder = () => {
     }, 3000); // Adjust the duration as needed
   };
 
-  const { getUserDataIfNotExists } = useGetUserData()
+  const { getUserDataIfNotExists } = useGetUserData();
   const componentRef = useRef<any>(null);
   const { data: session } = useSession();
 
@@ -64,12 +61,12 @@ const ResumeBuilder = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
-  const { saveResumeToDB } = useSaveResumeToDB()
+  const { saveResumeToDB } = useSaveResumeToDB();
   // Redux
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
-  const { getSummary } = useGetSummary(setStreamedSummaryData)
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
 
   const handleGenerate = useCallback(
     async (quantifyingExperience: boolean) => {
@@ -189,10 +186,11 @@ const ResumeBuilder = () => {
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
         
-        ${experience?.fromMonth} ${experience?.fromYear} - ${experience?.isContinue
+        ${experience?.fromMonth} ${experience?.fromYear} - ${
+          experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
-          } | ${experience?.company} | 
+        } | ${experience?.company} | 
         ${experience?.cityState} ${experience?.country}
                   </h2>`;
         html += `<div>`;
@@ -255,8 +253,6 @@ const ResumeBuilder = () => {
     // });
   };
 
-
-
   const getPrimarySkills = async () => {
     // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("primarySkills"));
@@ -288,7 +284,6 @@ const ResumeBuilder = () => {
     });
     // });
   };
-
 
   useEffect(() => {
     if (!resumeData.state.resumeLoading && resumeData?.name) {
@@ -413,25 +408,26 @@ const ResumeBuilder = () => {
             (resumeData?.name ||
               resumeData?.contact?.email ||
               resumeData?.summary) && (
-
               <div
-                className={`my-10 ${resumeData.state.resumeLoading ? "animate-pulse" : ""
-                  }`}
+                className={`my-10 ${
+                  resumeData.state.resumeLoading ? "animate-pulse" : ""
+                }`}
               >
                 {/* <Link href="#" className="text-black">Preview</Link> */}
                 <div
-                  className={`bg-white ${resumeData.state.resumeLoading ? "animate-pulse" : ""
-                    }`}
+                  className={`bg-white ${
+                    resumeData.state.resumeLoading ? "animate-pulse" : ""
+                  }`}
                   ref={componentRef}
                 >
                   <ResumeTemplate1
                     streamedSummaryData={streamedSummaryData}
                     streamedJDData={streamedJDData}
                     saveResumeToDB={saveResumeToDB}
+                    setStreamedJDData={setStreamedJDData}
                   />
                 </div>
               </div>
-
             )}
           {showPopup && (
             <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">

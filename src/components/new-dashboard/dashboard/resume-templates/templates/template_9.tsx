@@ -1,5 +1,5 @@
 "use client";
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -55,6 +55,12 @@ const ResumeTemplate9 = () => {
 
   const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
     useDragAndDrop();
+
+  useEffect(() => {
+    if (streamedJDData === "") {
+      setRegeneratedRecordIndex(null);
+    }
+  }, [streamedJDData]);
 
   const addPrimarySkill = () => {
     const primarySkills = resume?.primarySkills;

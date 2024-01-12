@@ -77,6 +77,7 @@ const ResumeTemplate19 = ({
       primarySkills: updatedSkills,
     });
   };
+
   const addSecondarySkill = () => {
     const secondarySkills = resume?.secondarySkills;
     const updatedSkills = [...secondarySkills];

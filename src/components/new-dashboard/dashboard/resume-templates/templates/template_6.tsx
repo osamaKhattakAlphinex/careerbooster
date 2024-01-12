@@ -1,5 +1,5 @@
 "use client";
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -64,6 +64,12 @@ const ResumeTemplate6 = () => {
       primarySkills: updatedSkills,
     });
   };
+
+  useEffect(() => {
+    if (streamedJDData === "") {
+      setRegeneratedRecordIndex(null);
+    }
+  }, [streamedJDData]);
 
   //Reorder Redux PrimarySkills array with drag-drop
   // const handleDropPrimary = (e: any, i: number) => {

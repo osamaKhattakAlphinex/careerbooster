@@ -70,6 +70,13 @@ const ResumeTemplate12 = () => {
       primarySkills: updatedSkills,
     });
   };
+
+  useEffect(() => {
+    if (streamedJDData === "") {
+      setRegeneratedRecordIndex(null);
+    }
+  }, [streamedJDData]);
+
   const addSecondarySkill = () => {
     const secondarySkills = resume?.secondarySkills;
     const updatedSkills = [...secondarySkills];
@@ -697,7 +704,7 @@ const ResumeTemplate12 = () => {
                             setRegeneratedRecordIndex(i);
                           }}
                         >
-                          {rec?.achievements && (
+                          {rec?.achievements && i !== regeneratedRecordIndex ? (
                             <ul className="pl-0 flex flex-col gap-1 text-sm md:text-lg">
                               {rec?.achievements.map(
                                 (achievement: any, ind: number) => (
@@ -799,6 +806,12 @@ const ResumeTemplate12 = () => {
                                 )
                               )}
                             </ul>
+                          ) : (
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: streamedJDData,
+                              }}
+                            ></div>
                           )}
                         </Regenerate>
                         {newWorkExperience === i ? (
