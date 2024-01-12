@@ -72,6 +72,7 @@ const Template = () => {
                 </Link> */}
                 <DownloadService
                   componentRef={componentRef}
+
                   // text="Preview Resume"
                   fileName="ai-resume"
                 />

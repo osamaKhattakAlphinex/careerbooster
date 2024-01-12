@@ -16,17 +16,15 @@ const DownloadService = ({
   templateId,
 }: // setOpenUpgradModal,
   any) => {
-
   const docRef = useRef<any>(null);
+
   let htmlToDoc: string;
   const userData = useSelector((state: any) => state.userData);
   const dispatch = useDispatch();
   const [openUpgradeModal, setOpenUpgradModal] = useState<boolean>(false);
-  const [preview, setPreview] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
 
   const templateCall = async () => {
-
     setLoading(true);
     if (card && type) {
       if (type === "coverLetter") {
@@ -62,9 +60,7 @@ const DownloadService = ({
       // ) {
       //   dispatch(setUpgradeModal(true));
       // } else {
-      if (view) {
-        await view();
-      }
+      await view();
       const html = componentRef.current.outerHTML;
       htmlToDoc = `
         <script src="https://cdn.tailwindcss.com"></script>
@@ -89,14 +85,7 @@ const DownloadService = ({
           type: "application/pdf",
         });
         const url = URL.createObjectURL(blob);
-        console.log(url);
-
         docRef.current.href = url;
-        // if (!preview) {
-        //   console.log("inside");
-
-        //   docRef.current.download = fileName
-        // }
         docRef.current.download = fileName;
         docRef.current.click();
         setLoading(false);
@@ -120,8 +109,7 @@ const DownloadService = ({
           className={`lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b] bg-transparent text-green-500 border border-green-500 ${loading ? "cursor-not-allowed opacity-50" : ""
             }`}
         >
-          {/* {text ? text : "Download"} */}
-          Download
+          {loading ? "Downloading..." : "Download"}
         </button>
       </div>
     </>
