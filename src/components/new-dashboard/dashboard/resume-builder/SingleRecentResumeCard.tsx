@@ -6,9 +6,10 @@ import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import { usePathname, useRouter } from "next/navigation";
 
-import {} from "@/../public/icon/Vector.png";
+import { } from "@/../public/icon/Vector.png";
 import DownloadService from "@/helpers/downloadFile";
 import { useEffect } from "react";
+import useViewResume from "@/helpers/viewResume";
 
 const SingleRecentResumeCard = ({
   resume,
@@ -28,15 +29,16 @@ const SingleRecentResumeCard = ({
   const router = useRouter();
   const pathname: any = usePathname();
   const dispatch = useDispatch();
-  const handleOnView = async () => {
-    if (source != "") {
-      router.replace("/resume-builder");
-    }
-    if (setFinished) {
-      setFinished(true);
-    }
-    return dispatch(setResume(resume));
-  };
+  const { handleOnView } = useViewResume(source, setFinished, resume)
+  // const handleOnView = async () => {
+  //   if (source != "") {
+  //     router.replace("/resume-builder");
+  //   }
+  //   if (setFinished) {
+  //     setFinished(true);
+  //   }
+  //   return dispatch(setResume(resume));
+  // };
   const handleOnDelete = () => {
     // ask for confirmation
     const c = confirm("Are you sure you want to delete this resume?");

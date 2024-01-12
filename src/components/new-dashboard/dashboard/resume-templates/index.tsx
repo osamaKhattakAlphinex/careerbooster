@@ -1,5 +1,4 @@
 "use client";
-//latest v1
 import React, { useEffect, useRef, useState } from "react";
 
 import { ALL_TEMPLATES } from "@/helpers/templateProvider";
