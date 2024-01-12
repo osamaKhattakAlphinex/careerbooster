@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import path from "path";
 import { authOptions } from "../../auth/[...nextauth]/route";
-export const maxDuration = 10; // This function can run for a maximum of 5 seconds
+export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
 export async function POST(req: any) {
