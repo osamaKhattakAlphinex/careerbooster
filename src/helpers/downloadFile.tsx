@@ -77,9 +77,12 @@ const DownloadService = ({
       const formData = new FormData();
       formData.append("htmlToDoc", htmlToDoc);
       setLoading(true);
+      console.log('formData', formData.get('htmlToDoc'));
       await fetch(`/api/template`, {
         method: "POST",
-        body: formData,
+        body: JSON.stringify({
+          htmlToDoc
+        }),
       }).then(async (response: any) => {
         const res = await response.json();
         const arrayBufferView = new Uint8Array(res.result.data);

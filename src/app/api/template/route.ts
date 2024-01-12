@@ -4,9 +4,11 @@ import puppeteerDev from "puppeteer";
 import chromium from "@sparticuz/chromium";
 export async function POST(req: any) {
   try {
-    const formData = await req.formData();
+    const data = await req.json();
+    const html = data.htmlToDoc;
 
-    const html = formData.get("htmlToDoc");
+    console.log('html', html);
+
     let browser;
     chromium.setGraphicsMode = false;
 
@@ -16,7 +18,8 @@ export async function POST(req: any) {
       browser = await puppeteer.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
-        headless: true,
+        executablePath: await chromium.executablePath(),
+        headless: chromium.headless,
       });
     }
 
