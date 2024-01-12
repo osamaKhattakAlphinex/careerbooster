@@ -78,6 +78,7 @@ const Template = () => {
                 <DownloadService
                   componentRef={componentRef}
                   fileName="ai-resume"
+                  preview={false}
                 />
               </div>
 
