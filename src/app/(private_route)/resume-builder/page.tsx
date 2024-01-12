@@ -42,7 +42,7 @@ const ResumeBuilder = () => {
     width: "25px",
     height: "25px",
   };
-
+  //
   const runConfetti = () => {
     setConfettiRunning(true);
     setTimeout(() => {
@@ -186,11 +186,10 @@ const ResumeBuilder = () => {
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
         
-        ${experience?.fromMonth} ${experience?.fromYear} - ${
-          experience?.isContinue
+        ${experience?.fromMonth} ${experience?.fromYear} - ${experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
-        } | ${experience?.company} | 
+          } | ${experience?.company} | 
         ${experience?.cityState} ${experience?.country}
                   </h2>`;
         html += `<div>`;
@@ -409,15 +408,13 @@ const ResumeBuilder = () => {
               resumeData?.contact?.email ||
               resumeData?.summary) && (
               <div
-                className={`my-10 ${
-                  resumeData.state.resumeLoading ? "animate-pulse" : ""
-                }`}
+                className={`my-10 ${resumeData.state.resumeLoading ? "animate-pulse" : ""
+                  }`}
               >
                 {/* <Link href="#" className="text-black">Preview</Link> */}
                 <div
-                  className={`bg-white ${
-                    resumeData.state.resumeLoading ? "animate-pulse" : ""
-                  }`}
+                  className={`bg-white ${resumeData.state.resumeLoading ? "animate-pulse" : ""
+                    }`}
                   ref={componentRef}
                 >
                   <ResumeTemplate1
