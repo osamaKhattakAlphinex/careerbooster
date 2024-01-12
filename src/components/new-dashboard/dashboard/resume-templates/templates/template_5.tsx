@@ -334,7 +334,7 @@ const ResumeTemplate5 = ({
         </div>
       </div>
       <div className="flex border-t-2 border-b-2 border-gray-500 p-5">
-        <div className="w-9/12 xs:w-10/12  flex flex-col px-4 md:px-8">
+        <div className="w-9/12 xs:full  flex flex-col px-4 md:px-8">
           {/* Executive Summary */}
 
           <h3 className="uppercase text-lg font-semibold">EXECUTIVE SUMMARY</h3>
