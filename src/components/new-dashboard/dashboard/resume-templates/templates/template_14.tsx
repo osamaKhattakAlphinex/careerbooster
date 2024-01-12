@@ -510,8 +510,11 @@ const ResumeTemplate14 = () => {
           <span className="border-stylee w-full h-0 my-3"></span>
           <h3 className="uppercase text-lg font-semibold">EXECUTIVE SUMMARY</h3>
           <span className="border-stylee w-full h-0  my-3"></span>
-          <Regenerate handler={getSummary}>
-            <div className="text-sm hover:shadow-md hover:bg-gray-100">
+          <Regenerate
+            handler={getSummary}
+            custom_style={"absolute bottom-3 right-2 "}
+          >
+            <div className="text-sm hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
               <EditableField
                 type="textarea"
                 value={
@@ -697,6 +700,7 @@ const ResumeTemplate14 = () => {
                             getOneWorkExperienceNew(rec);
                             setRegeneratedRecordIndex(i);
                           }}
+                          custom_style={"absolute mt-0 right-2"}
                         >
                           {rec?.achievements && i !== regeneratedRecordIndex ? (
                             <ul className="pl-0 flex flex-col gap-1 text-sm">

@@ -650,9 +650,14 @@ const ResumeTemplate1 = ({
         </div>
         <div className="w-full flex flex-col px-8 xs:px-4 md:px-8 lg:px-8">
           {/* Executive Summary */}
-          <h3 className="uppercase text-lg font-semibold">EXECUTIVE SUMMARY</h3>
+          <h3 className="uppercase text-lg font-semibold">
+            EXECUTIVE SUMMARY123
+          </h3>
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-          <Regenerate handler={getSummary}>
+          <Regenerate
+            handler={getSummary}
+            custom_style={"absolute bottom-3 right-2"}
+          >
             <div className="text-lg xs:text-sm md:text-lg lg:text-lg  hover:shadow-md hover:bg-gray-100">
               <EditableField
                 type="textarea"
@@ -822,7 +827,7 @@ const ResumeTemplate1 = ({
                       </span>
                     </h2>
 
-                    <div className="p-4">
+                    <div className="p-4 border-2 border-blue-900">
                       <Regenerate
                         handler={() => {
                           getOneWorkExperienceNew(rec);
