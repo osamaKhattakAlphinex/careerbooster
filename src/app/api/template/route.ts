@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
 import puppeteer from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
-export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const maxDuration = 30; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 export async function POST(req: any) {
   try {
     const formData = await req.formData();
+
+    console.log("inside api");
 
     const html = formData.get("htmlToDoc");
     let browser;
