@@ -7,8 +7,6 @@ export async function POST(req: any) {
     const data = await req.json();
     const html = data.htmlToDoc;
 
-    console.log('html', html);
-
     let browser;
     chromium.setGraphicsMode = false;
 
