@@ -445,7 +445,7 @@ const ResumeTemplate4 = () => {
           </h3>
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
-          <Regenerate handler={() => console.log("clicked")}>
+          <Regenerate handler={getSummary}>
             <div className="text-sm md:text-lg hover:shadow-md hover:bg-gray-100">
               <EditableField
                 type="textarea"
