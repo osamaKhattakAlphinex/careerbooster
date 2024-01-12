@@ -13,7 +13,6 @@ const DownloadService = ({
   card,
   type,
   fileName,
-  text,
   templateId,
 }: // setOpenUpgradModal,
   any) => {
@@ -27,9 +26,7 @@ const DownloadService = ({
   const [loading, setLoading] = useState(false);
 
   const templateCall = async () => {
-    if (text === "Preview Resume") {
-      setPreview(true);
-    }
+
     setLoading(true);
     if (card && type) {
       if (type === "coverLetter") {
@@ -123,7 +120,8 @@ const DownloadService = ({
           className={`lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b] bg-transparent text-green-500 border border-green-500 ${loading ? "cursor-not-allowed opacity-50" : ""
             }`}
         >
-          {text ? text : "Download"}
+          {/* {text ? text : "Download"} */}
+          Download
         </button>
       </div>
     </>

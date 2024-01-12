@@ -72,14 +72,14 @@ const Template = () => {
                 </Link> */}
                 <DownloadService
                   componentRef={componentRef}
-                  text="Preview Resume"
+                  // text="Preview Resume"
                   fileName="ai-resume"
                 />
-                <DownloadService
+                {/* <DownloadService
                   componentRef={componentRef}
-                  text="Download Resume"
+                  // text="Download Resume"
                   fileName="ai-resume"
-                />
+                /> */}
               </div>
 
               <div className="relative">
