@@ -1,5 +1,5 @@
 "use client";
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,8 +8,6 @@ import {
   setBasicInfo,
   setField,
   setPrimarySkills,
-  setProfessionalSkills,
-  setSecondarySkills,
   setSummary,
   setWorkExperienceArray,
 } from "@/store/resumeSlice";
@@ -25,41 +23,33 @@ import {
 import useGetSummary from "@/hooks/useGetSummary";
 import Regenerate from "@/helpers/regenerate";
 import EditableField from "@/components/new-dashboard/common/EditableField";
-const ResumeTemplate5 = ({
-  streamedJDData,
-  saveResumeToDB,
-}: {
-  streamedJDData: string;
-  saveResumeToDB: (data?: any) => Promise<void>;
-}) => {
+import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
+import useSaveResumeToDB from "@/hooks/useSaveToDB";
+import useDragAndDrop from "@/hooks/useDragAndDrop";
+const ResumeTemplate5 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
-  const [newSecondarySkill, setNewSecondarySkill] = useState(false);
-  const [newProfessionalSkill, setNewProfessionalSkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
   const [newEducation, setNewEducation] = useState(false);
   const [primarySkillAddButtonVisible, setPrimarySkillAddButtonVisible] =
     useState(false);
-  const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
-    useState(false);
 
-
-  const [streamedSummaryData, setStreamedSummaryData] = useState("")
+  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
+    number | null
+  >(null);
+  const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
+  const [streamedJDData, setStreamedJDData] = useState<any>("");
+  const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
+  const { saveResumeToDB } = useSaveResumeToDB();
 
-  const [
-    professionalSkillAddButtonVisible,
-    setProfessionalSkillAddButtonVisible,
-  ] = useState(false);
   const [workExperienceAddButtonVisible, setWorkExperienceAddButtonVisible] =
     useState<number>();
   const [educationAddButtonVisible, setEducationAddButtonVisible] =
     useState(false);
   const [primarySkill, setPrimarySkill] = useState<string>("");
-  const [secondarySkill, setSecondarySkill] = useState<string>("");
-  const [professionalSkill, setProfessionalSkill] = useState<string>("");
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const addPrimarySkill = () => {
@@ -72,160 +62,83 @@ const ResumeTemplate5 = ({
       primarySkills: updatedSkills,
     });
   };
-  const addSecondarySkill = () => {
-    const secondarySkills = resume?.secondarySkills;
-    const updatedSkills = [...secondarySkills];
-    updatedSkills.push(secondarySkill);
-    dispatch(setSecondarySkills({ secondarySkills: updatedSkills }));
-    saveResumeToDB({
-      ...resume,
-      secondarySkills: updatedSkills,
-    });
-  };
-  const addProfessionalSkill = () => {
-    const professionalSkills = resume?.professionalSkills;
-    const updatedSkills = [...professionalSkills];
-    updatedSkills.push(professionalSkill);
 
-    dispatch(setProfessionalSkills({ professionalSkills: updatedSkills }));
-    saveResumeToDB({
-      ...resume,
-      professionalSkills: updatedSkills,
-    });
-  };
+  const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
+    useDragAndDrop();
+
   //Reorder Redux PrimarySkills array with drag-drop
-  const handleDropPrimary = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume.primarySkills];
-    // Swap the positions of the dragged item and the target item.
-    [updatedItems[draggedIndex], updatedItems[i]] = [
-      updatedItems[i],
-      updatedItems[draggedIndex],
-    ];
-    dispatch(
-      setPrimarySkills({
-        ...resume,
-        primarySkills: updatedItems,
-      })
-    );
-    saveResumeToDB({
-      ...resume,
-      primarySkills: updatedItems,
-    });
-  };
-  //Reorder Redux SecondarySkills array with drag-drop
-  const handleDropSecondary = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text"));
-    const updatedItems = [...resume.secondarySkills];
-    // Swap the positions of the dragged item and the target item.
-    [updatedItems[draggedIndex], updatedItems[i]] = [
-      updatedItems[i],
-      updatedItems[draggedIndex],
-    ];
-    dispatch(
-      setSecondarySkills({
-        ...resume,
-        secondarySkills: updatedItems,
-      })
-    );
-    saveResumeToDB({
-      ...resume,
-      secondarySkills: updatedItems,
-    });
-  };
-  //Reorder Redux ProfessionalSkills array with drag-drop
-  const handleDropProfessional = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume.professionalSkills];
-    // Swap the positions of the dragged item and the target item.
-    [updatedItems[draggedIndex], updatedItems[i]] = [
-      updatedItems[i],
-      updatedItems[draggedIndex],
-    ];
-    dispatch(
-      setProfessionalSkills({
-        ...resume,
-        professionalSkills: updatedItems,
-      })
-    );
-    saveResumeToDB({
-      ...resume,
-      professionalSkills: updatedItems,
-    });
-  };
+  // const handleDropPrimary = (e: any, i: number) => {
+  //   const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+  //   const updatedItems = [...resume.primarySkills];
+  //   // Swap the positions of the dragged item and the target item.
+  //   [updatedItems[draggedIndex], updatedItems[i]] = [
+  //     updatedItems[i],
+  //     updatedItems[draggedIndex],
+  //   ];
+  //   dispatch(
+  //     setPrimarySkills({
+  //       ...resume,
+  //       primarySkills: updatedItems,
+  //     })
+  //   );
+  //   saveResumeToDB({
+  //     ...resume,
+  //     primarySkills: updatedItems,
+  //   });
+  // };
+
   //Reorder Redux handleDropExperience array with drag-drop
-  const handleDropExperience = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume?.workExperienceArray];
-    // Swap the positions of the dragged item and the target item.
-    [updatedItems[draggedIndex], updatedItems[i]] = [
-      updatedItems[i],
-      updatedItems[draggedIndex],
-    ];
-    if (draggedIndex !== i) {
-      dispatch(
-        setWorkExperienceArray({
-          ...resume,
-          workExperienceArray: updatedItems,
-        })
-      );
-      saveResumeToDB({
-        ...resume,
-        workExperienceArray: updatedItems,
-      });
-    }
-  };
-  //Reorder Redux handleDropEducation array with drag-drop
-  const handleDropEducation = (e: any, i: number) => {
-    // const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    // const updatedItems = [...resume?.educationArray];
-    // // Swap the positions of the dragged item and the target item.
-    // [updatedItems[draggedIndex], updatedItems[i]] = [
-    //   updatedItems[i],
-    //   updatedItems[draggedIndex],
-    // ];
-    // if (draggedIndex !== i) {
-    //   // dispatch(
-    //   //   setEducationArray({
-    //   //     ...resume,
-    //   //     educationArray: updatedItems,
-    //   //   })
-    //   // );
-    //   saveResumeToDB({
-    //     ...resume,
-    //     educationArray: updatedItems,
-    //   });
-    // }
-  };
+  // const handleDropExperience = (e: any, i: number) => {
+  //   const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+  //   const updatedItems = [...resume?.workExperienceArray];
+  //   // Swap the positions of the dragged item and the target item.
+  //   [updatedItems[draggedIndex], updatedItems[i]] = [
+  //     updatedItems[i],
+  //     updatedItems[draggedIndex],
+  //   ];
+  //   if (draggedIndex !== i) {
+  //     dispatch(
+  //       setWorkExperienceArray({
+  //         ...resume,
+  //         workExperienceArray: updatedItems,
+  //       })
+  //     );
+  //     saveResumeToDB({
+  //       ...resume,
+  //       workExperienceArray: updatedItems,
+  //     });
+  //   }
+  // };
+
   //Reorder Redux handleDropAchievement array with drag-drop
-  const handleDropAchievement = (i: number, ind: number) => {
-    let draggedIndex: number;
-    let updatedItems = [];
-    draggedIndex = insideIndex;
-    updatedItems = [...resume?.workExperienceArray];
-    let achievements = [...updatedItems[i].achievements];
-    const temp = achievements[draggedIndex];
-    achievements[draggedIndex] = achievements[ind];
-    achievements[ind] = temp;
-    let updatedWorkExperience = {
-      ...updatedItems[i],
-    };
-    updatedWorkExperience.achievements = achievements;
-    // Update the copy of the workExperience in the updatedItems array
-    updatedItems[i] = updatedWorkExperience;
-    if (draggedIndex !== ind) {
-      dispatch(
-        setWorkExperienceArray({
-          ...resume,
-          workExperienceArray: updatedItems,
-        })
-      );
-      saveResumeToDB({
-        ...resume,
-        workExperienceArray: updatedItems,
-      });
-    }
-  };
+  // const handleDropAchievement = (i: number, ind: number) => {
+  //   let draggedIndex: number;
+  //   let updatedItems = [];
+  //   draggedIndex = insideIndex;
+  //   updatedItems = [...resume?.workExperienceArray];
+  //   let achievements = [...updatedItems[i].achievements];
+  //   const temp = achievements[draggedIndex];
+  //   achievements[draggedIndex] = achievements[ind];
+  //   achievements[ind] = temp;
+  //   let updatedWorkExperience = {
+  //     ...updatedItems[i],
+  //   };
+  //   updatedWorkExperience.achievements = achievements;
+  //   // Update the copy of the workExperience in the updatedItems array
+  //   updatedItems[i] = updatedWorkExperience;
+  //   if (draggedIndex !== ind) {
+  //     dispatch(
+  //       setWorkExperienceArray({
+  //         ...resume,
+  //         workExperienceArray: updatedItems,
+  //       })
+  //     );
+  //     saveResumeToDB({
+  //       ...resume,
+  //       workExperienceArray: updatedItems,
+  //     });
+  //   }
+  // };
 
   return (
     <div className="w-full first-page  text-gray-900">
@@ -282,7 +195,7 @@ const ResumeTemplate5 = ({
           </h3>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
@@ -422,105 +335,122 @@ const ResumeTemplate5 = ({
                         </span>
                       </h2>
                       <div className="p-4">
-                        {rec?.achievements && (
-                          <ul className="pl-0 flex flex-col gap-1 text-sm md:text-lg">
-                            {rec?.achievements.map(
-                              (achievement: any, ind: number) => (
-                                <li
-                                  onDragStart={(e) => {
-                                    setInsideIndex(ind);
-                                  }}
-                                  onDragOver={(e) => e.preventDefault()}
-                                  onDrop={(e) => {
-                                    handleDropAchievement(i, ind);
-                                  }}
-                                  draggable
-                                  className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
-                                  key={ind}
-                                >
-                                  <EditableField
-                                    type="textarea"
-                                    rows={2}
-                                    value={achievement}
-                                    onSave={(value: string) => {
-                                      let updatedExp =
-                                        resume?.workExperienceArray.map(
-                                          (exp: any, index: number) => {
-                                            // get the index of the work experience
-                                            if (index === i) {
-                                              let updatedAchievements =
-                                                exp?.achievements?.map(
-                                                  (
-                                                    ach: any,
-                                                    achInd: number
-                                                  ) => {
-                                                    if (achInd === ind) {
-                                                      return value;
-                                                    }
-                                                    return ach;
-                                                  }
-                                                );
-                                              return {
-                                                ...exp,
-                                                achievements:
-                                                  updatedAchievements,
-                                              };
-                                            }
-                                            return exp;
-                                          }
-                                        );
-                                      dispatch(
-                                        setWorkExperienceArray({
-                                          workExperienceArray: updatedExp,
-                                        })
-                                      );
-                                      saveResumeToDB({
-                                        ...resume,
-                                        workExperienceArray: updatedExp,
-                                      });
+                        <Regenerate
+                          handler={() => {
+                            getOneWorkExperienceNew(rec);
+                            setRegeneratedRecordIndex(i);
+                          }}
+                        >
+                          {rec?.achievements && i !== regeneratedRecordIndex ? (
+                            <ul className="pl-0 flex flex-col gap-1 text-sm md:text-lg">
+                              {rec?.achievements.map(
+                                (achievement: any, ind: number) => (
+                                  <li
+                                    onDragStart={(e) => {
+                                      setInsideIndex(ind);
                                     }}
-                                  />
-                                  <div
-                                    onClick={() => {
-                                      const workExperienceArray =
-                                        resume.workExperienceArray.map(
-                                          (rec: any, index: number) => {
-                                            if (index === i) {
-                                              return {
-                                                ...rec,
-                                                achievements:
-                                                  rec.achievements.filter(
+                                    onDragOver={(e) => e.preventDefault()}
+                                    onDrop={(e) => {
+                                      handleDropAchievement(
+                                        i,
+                                        ind,
+                                        insideIndex
+                                      );
+                                    }}
+                                    draggable
+                                    className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
+                                    key={ind}
+                                  >
+                                    <EditableField
+                                      type="textarea"
+                                      rows={2}
+                                      value={achievement}
+                                      onSave={(value: string) => {
+                                        let updatedExp =
+                                          resume?.workExperienceArray.map(
+                                            (exp: any, index: number) => {
+                                              // get the index of the work experience
+                                              if (index === i) {
+                                                let updatedAchievements =
+                                                  exp?.achievements?.map(
                                                     (
                                                       ach: any,
-                                                      achIndex: number
-                                                    ) => achIndex !== ind
-                                                  ),
-                                              };
+                                                      achInd: number
+                                                    ) => {
+                                                      if (achInd === ind) {
+                                                        return value;
+                                                      }
+                                                      return ach;
+                                                    }
+                                                  );
+                                                return {
+                                                  ...exp,
+                                                  achievements:
+                                                    updatedAchievements,
+                                                };
+                                              }
+                                              return exp;
                                             }
-                                            return rec;
-                                          }
+                                          );
+                                        dispatch(
+                                          setWorkExperienceArray({
+                                            workExperienceArray: updatedExp,
+                                          })
                                         );
-                                      dispatch(
-                                        setWorkExperienceArray({
+                                        saveResumeToDB({
+                                          ...resume,
+                                          workExperienceArray: updatedExp,
+                                        });
+                                      }}
+                                    />
+                                    <div
+                                      onClick={() => {
+                                        const workExperienceArray =
+                                          resume.workExperienceArray.map(
+                                            (rec: any, index: number) => {
+                                              if (index === i) {
+                                                return {
+                                                  ...rec,
+                                                  achievements:
+                                                    rec.achievements.filter(
+                                                      (
+                                                        ach: any,
+                                                        achIndex: number
+                                                      ) => achIndex !== ind
+                                                    ),
+                                                };
+                                              }
+                                              return rec;
+                                            }
+                                          );
+                                        dispatch(
+                                          setWorkExperienceArray({
+                                            workExperienceArray:
+                                              workExperienceArray,
+                                          })
+                                        );
+                                        saveResumeToDB({
+                                          ...resume,
                                           workExperienceArray:
                                             workExperienceArray,
-                                        })
-                                      );
-                                      saveResumeToDB({
-                                        ...resume,
-                                        workExperienceArray:
-                                          workExperienceArray,
-                                      });
-                                    }}
-                                    className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
-                                  >
-                                    {crossIcon1}
-                                  </div>
-                                </li>
-                              )
-                            )}
-                          </ul>
-                        )}
+                                        });
+                                      }}
+                                      className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
+                                    >
+                                      {crossIcon1}
+                                    </div>
+                                  </li>
+                                )
+                              )}
+                            </ul>
+                          ) : (
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: streamedJDData,
+                              }}
+                            ></div>
+                          )}
+                        </Regenerate>
                         {newWorkExperience === i ? (
                           <>
                             <div className="w-full gap-1 rounded-md flex flex-wrap h-9.5">
@@ -618,7 +548,7 @@ const ResumeTemplate5 = ({
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                           <div
                             className="border-2 w-full md:w-2/12 mt-3 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {

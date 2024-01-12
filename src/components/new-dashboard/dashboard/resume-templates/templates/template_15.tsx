@@ -24,6 +24,7 @@ import {
 } from "@/helpers/iconsProvider";
 import useGetSummary from "@/hooks/useGetSummary";
 import EditableField from "@/components/new-dashboard/common/EditableField";
+import useDragAndDrop from "@/hooks/useDragAndDrop";
 const ResumeTemplate15 = ({
   streamedJDData,
   saveResumeToDB,
@@ -49,9 +50,12 @@ const ResumeTemplate15 = ({
   const [secondarySkill, setSecondarySkill] = useState<string>("");
   const [professionalSkill, setProfessionalSkill] = useState<string>("");
 
-  const [streamedSummaryData, setStreamedSummaryData] = useState("")
+  const [streamedSummaryData, setStreamedSummaryData] = useState("");
 
   const { getSummary } = useGetSummary(setStreamedSummaryData);
+
+  const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
+    useDragAndDrop();
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const addPrimarySkill = () => {
@@ -86,25 +90,25 @@ const ResumeTemplate15 = ({
     });
   };
   //Reorder Redux PrimarySkills array with drag-drop
-  const handleDropPrimary = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume.primarySkills];
-    // Swap the positions of the dragged item and the target item.
-    [updatedItems[draggedIndex], updatedItems[i]] = [
-      updatedItems[i],
-      updatedItems[draggedIndex],
-    ];
-    dispatch(
-      setPrimarySkills({
-        ...resume,
-        primarySkills: updatedItems,
-      })
-    );
-    saveResumeToDB({
-      ...resume,
-      primarySkills: updatedItems,
-    });
-  };
+  // const handleDropPrimary = (e: any, i: number) => {
+  //   const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+  //   const updatedItems = [...resume.primarySkills];
+  //   // Swap the positions of the dragged item and the target item.
+  //   [updatedItems[draggedIndex], updatedItems[i]] = [
+  //     updatedItems[i],
+  //     updatedItems[draggedIndex],
+  //   ];
+  //   dispatch(
+  //     setPrimarySkills({
+  //       ...resume,
+  //       primarySkills: updatedItems,
+  //     })
+  //   );
+  //   saveResumeToDB({
+  //     ...resume,
+  //     primarySkills: updatedItems,
+  //   });
+  // };
   //Reorder Redux SecondarySkills array with drag-drop
   const handleDropSecondary = (e: any, i: number) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text"));
@@ -146,27 +150,27 @@ const ResumeTemplate15 = ({
     });
   };
   //Reorder Redux handleDropExperience array with drag-drop
-  const handleDropExperience = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const updatedItems = [...resume?.workExperienceArray];
-    // Swap the positions of the dragged item and the target item.
-    [updatedItems[draggedIndex], updatedItems[i]] = [
-      updatedItems[i],
-      updatedItems[draggedIndex],
-    ];
-    if (draggedIndex !== i) {
-      dispatch(
-        setWorkExperienceArray({
-          ...resume,
-          workExperienceArray: updatedItems,
-        })
-      );
-      saveResumeToDB({
-        ...resume,
-        workExperienceArray: updatedItems,
-      });
-    }
-  };
+  // const handleDropExperience = (e: any, i: number) => {
+  //   const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+  //   const updatedItems = [...resume?.workExperienceArray];
+  //   // Swap the positions of the dragged item and the target item.
+  //   [updatedItems[draggedIndex], updatedItems[i]] = [
+  //     updatedItems[i],
+  //     updatedItems[draggedIndex],
+  //   ];
+  //   if (draggedIndex !== i) {
+  //     dispatch(
+  //       setWorkExperienceArray({
+  //         ...resume,
+  //         workExperienceArray: updatedItems,
+  //       })
+  //     );
+  //     saveResumeToDB({
+  //       ...resume,
+  //       workExperienceArray: updatedItems,
+  //     });
+  //   }
+  // };
   //Reorder Redux handleDropEducation array with drag-drop
   const handleDropEducation = (e: any, i: number) => {
     // const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
@@ -190,34 +194,34 @@ const ResumeTemplate15 = ({
     // }
   };
   //Reorder Redux handleDropAchievement array with drag-drop
-  const handleDropAchievement = (i: number, ind: number) => {
-    let draggedIndex: number;
-    let updatedItems = [];
-    draggedIndex = insideIndex;
-    updatedItems = [...resume?.workExperienceArray];
-    let achievements = [...updatedItems[i].achievements];
-    const temp = achievements[draggedIndex];
-    achievements[draggedIndex] = achievements[ind];
-    achievements[ind] = temp;
-    let updatedWorkExperience = {
-      ...updatedItems[i],
-    };
-    updatedWorkExperience.achievements = achievements;
-    // Update the copy of the workExperience in the updatedItems array
-    updatedItems[i] = updatedWorkExperience;
-    if (draggedIndex !== ind) {
-      dispatch(
-        setWorkExperienceArray({
-          ...resume,
-          workExperienceArray: updatedItems,
-        })
-      );
-      saveResumeToDB({
-        ...resume,
-        workExperienceArray: updatedItems,
-      });
-    }
-  };
+  // const handleDropAchievement = (i: number, ind: number) => {
+  //   let draggedIndex: number;
+  //   let updatedItems = [];
+  //   draggedIndex = insideIndex;
+  //   updatedItems = [...resume?.workExperienceArray];
+  //   let achievements = [...updatedItems[i].achievements];
+  //   const temp = achievements[draggedIndex];
+  //   achievements[draggedIndex] = achievements[ind];
+  //   achievements[ind] = temp;
+  //   let updatedWorkExperience = {
+  //     ...updatedItems[i],
+  //   };
+  //   updatedWorkExperience.achievements = achievements;
+  //   // Update the copy of the workExperience in the updatedItems array
+  //   updatedItems[i] = updatedWorkExperience;
+  //   if (draggedIndex !== ind) {
+  //     dispatch(
+  //       setWorkExperienceArray({
+  //         ...resume,
+  //         workExperienceArray: updatedItems,
+  //       })
+  //     );
+  //     saveResumeToDB({
+  //       ...resume,
+  //       workExperienceArray: updatedItems,
+  //     });
+  //   }
+  // };
 
   return (
     <div className="w-full first-page relative text-gray-900">
@@ -517,16 +521,17 @@ const ResumeTemplate15 = ({
           ></span>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-center items-center ${i > 0
-                      ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full mt-8"
-                      : "mb-5"
-                      }`}
+                    className={`flex justify-center items-center ${
+                      i > 0
+                        ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full mt-8"
+                        : "mb-5"
+                    }`}
                   >
                     <div
                       key={i}
@@ -692,7 +697,7 @@ const ResumeTemplate15 = ({
                                   }}
                                   onDragOver={(e) => e.preventDefault()}
                                   onDrop={(e) => {
-                                    handleDropAchievement(i, ind);
+                                    handleDropAchievement(i, ind, insideIndex);
                                   }}
                                   draggable
                                   className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
@@ -878,7 +883,7 @@ const ResumeTemplate15 = ({
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                           <div
                             className="border-2 w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {

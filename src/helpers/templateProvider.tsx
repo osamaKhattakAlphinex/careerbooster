@@ -20,14 +20,14 @@ import ResumeTemplate19 from "@/components/new-dashboard/dashboard/resume-templa
 import { Template } from "@/components/new-dashboard/dashboard/resume-templates";
 
 export const ALL_TEMPLATES: Template[] = [
-  {
-    id: 1,
-    title: "classic-executive",
-    tags: ["one-page"],
-    category: "freemium",
-    preview: "/assets/images/templates/resume-1.png",
-    template: (props) => <ResumeTemplate1 {...props} />,
-  },
+  // {
+  //   id: 1,
+  //   title: "classic-executive",
+  //   tags: ["one-page"],
+  //   category: "freemium",
+  //   preview: "/assets/images/templates/resume-1.png",
+  //   template: (props) => <ResumeTemplate1 {...props} />,
+  // },
   {
     id: 1,
     title: "",
