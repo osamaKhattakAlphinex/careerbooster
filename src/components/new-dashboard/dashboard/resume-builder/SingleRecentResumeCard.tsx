@@ -9,7 +9,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { } from "@/../public/icon/Vector.png";
 import DownloadService from "@/helpers/downloadFile";
 import { useEffect } from "react";
-import useViewResume from "@/helpers/viewResume";
 
 const SingleRecentResumeCard = ({
   resume,
@@ -29,16 +28,15 @@ const SingleRecentResumeCard = ({
   const router = useRouter();
   const pathname: any = usePathname();
   const dispatch = useDispatch();
-  const { handleOnView } = useViewResume(source, setFinished, resume)
-  // const handleOnView = async () => {
-  //   if (source != "") {
-  //     router.replace("/resume-builder");
-  //   }
-  //   if (setFinished) {
-  //     setFinished(true);
-  //   }
-  //   return dispatch(setResume(resume));
-  // };
+  const handleOnView = async () => {
+    if (source != "") {
+      router.replace("/resume-builder");
+    }
+    if (setFinished) {
+      setFinished(true);
+    }
+    return dispatch(setResume(resume));
+  };
   const handleOnDelete = () => {
     // ask for confirmation
     const c = confirm("Are you sure you want to delete this resume?");
@@ -104,7 +102,7 @@ const SingleRecentResumeCard = ({
           <span className="text-[13px] mx-2 ">View</span>
         </button>
 
-        {pathname == "/dashboard"
+        {/* {pathname == "/dashboard"
           ? ""
           : resume && (
             <DownloadService
@@ -113,7 +111,7 @@ const SingleRecentResumeCard = ({
               templateId={templateId}
               fileName="ai-resume"
             />
-          )}
+          )} */}
       </div>
     </div>
   );

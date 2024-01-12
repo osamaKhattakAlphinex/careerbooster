@@ -3,7 +3,7 @@ const nextConfig = {
   externals: { canvas: {} },
 
   experimental: {
-    serverComponentsExternalPackages: ["puppeteer-core", "@sparticuz/chromium"],
+    serverComponentsExternalPackages: ["puppeteer-core", "@sparticuz/chromium", "puppeteer"],
     serverActions: true,
     runtime: "edge",
   },
