@@ -16,7 +16,7 @@ const DownloadService = ({
   templateId,
   preview,
 }: // setOpenUpgradModal,
-  any) => {
+any) => {
   const docRef = useRef<any>(null);
   let htmlToDoc: string;
   const userData = useSelector((state: any) => state.userData);
@@ -77,11 +77,11 @@ const DownloadService = ({
       const formData = new FormData();
       formData.append("htmlToDoc", htmlToDoc);
       setLoading(true);
-      console.log('formData', formData.get('htmlToDoc'));
+      console.log("formData", formData.get("htmlToDoc"));
       await fetch(`/api/template`, {
         method: "POST",
         body: JSON.stringify({
-          htmlToDoc
+          htmlToDoc,
         }),
       }).then(async (response: any) => {
         const res = await response.json();
@@ -92,7 +92,7 @@ const DownloadService = ({
         const url = URL.createObjectURL(blob);
         docRef.current.href = url;
         if (!preview) {
-          docRef.current.download = fileName
+          docRef.current.download = fileName;
         }
         // docRef.current.download = fileName;
         docRef.current.click();
@@ -114,8 +114,9 @@ const DownloadService = ({
           onClick={templateCall}
           type="button"
           disabled={loading}
-          className={`lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b] bg-transparent text-green-500 border border-green-500 ${loading ? "cursor-not-allowed opacity-50" : ""
-            }`}
+          className={`lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b]  text-green-500 border border-green-500 ${
+            loading ? "cursor-not-allowed opacity-50" : ""
+          }`}
         >
           {preview ? "Preview Resume" : loading ? "Downloading..." : "Download"}
         </button>
