@@ -166,7 +166,7 @@ const ResumeTemplate4 = () => {
             {contactIcon}
             Contact
           </h3>
-          <span className=" w-[112%] h-0 border !border-gray-100 my-3"></span>
+          <span className=" w-[110%] h-0 border !border-gray-100 my-3"></span>
           <ul className=" flex flex-col gap-2 mb-4 text-sm md:text-lg break-all pl-0">
             <h2 className="text-[16px] font-bold xs:text-[14px] md:text-[16px] xs:font-normal">
               Phone
@@ -295,7 +295,7 @@ const ResumeTemplate4 = () => {
                 {sparkleIcon}
                 Skills
               </h3>
-              <span className="border-stylee w-[112%] h-0 border !border-gray-100 my-3"></span>
+              <span className="border-stylee w-[110%] h-0 border !border-gray-100 my-3"></span>
               <ul
                 className="pl-0 flex  flex-col gap-2 mb-4 text-[16px] xs:text-[12px] md:text-lg"
                 onMouseEnter={() =>
