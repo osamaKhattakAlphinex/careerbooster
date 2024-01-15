@@ -172,7 +172,7 @@ const ResumeTemplate5 = () => {
         </div>
       </div>
       <div className="flex border-t-2 border-b-2 border-gray-500 p-5">
-        <div className="w-9/12 xs:full  flex flex-col px-4 md:px-8">
+        <div className="w-[75%] xs:w-full md:w-[75%] flex flex-col px-4 md:px-8">
           {/* Executive Summary */}
 
           <h3 className="uppercase text-lg font-semibold">EXECUTIVE SUMMARY</h3>
@@ -354,7 +354,7 @@ const ResumeTemplate5 = () => {
                             getOneWorkExperienceNew(rec);
                             setRegeneratedRecordIndex(i);
                           }}
-                          custom_style={"absolute mt-0 right-2"}
+                          custom_style={"absolute button-0 right-2"}
                         >
                           {rec?.achievements && i !== regeneratedRecordIndex ? (
                             <ul className="pl-0 flex flex-col gap-1 text-sm md:text-lg">
@@ -565,7 +565,7 @@ const ResumeTemplate5 = () => {
                         {workExperienceAddButtonVisible === i &&
                         newWorkExperience !== i ? (
                           <div
-                            className="border-2 w-full md:w-2/12 mt-3 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                            className="border-2 w-2/12 md:w-2/12 mt-3 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
                               setNewWorkExperience(i);
                             }}
@@ -736,7 +736,8 @@ const ResumeTemplate5 = () => {
             </div>
           )}
         </div>
-        <div className=" w-full xs:w-1/3 md:w-1/3 flex flex-col pl-3 md:pl-8 pr-6 gap-4  border-l-2 border-gray-500 h-[920px] xs:h-auto">
+
+        <div className="w-[25%] xs:w-1/3 md:w-[25%] flex flex-col pl-3 md:pl-8 pr-6 gap-4  border-l-2 border-gray-500 h-[920px] xs:h-auto">
           {/* contacts */}
 
           <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center mb-2">

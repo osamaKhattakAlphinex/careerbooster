@@ -213,7 +213,7 @@ const ResumeTemplate3 = () => {
           <h3 className="uppercase text-sm md:text-lg font-semibold">
             WORK EXPERIENCE
           </h3>
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border !border-gray-500 "></span>
 
           {resume?.workExperienceArray &&
           resume?.workExperienceArray.length > 0 ? (
@@ -362,16 +362,16 @@ const ResumeTemplate3 = () => {
                         />
                       </span>
                     </h2>
-                    <div className="p-4">
+                    <div className="px-4">
                       <Regenerate
                         handler={() => {
                           getOneWorkExperienceNew(rec);
                           setRegeneratedRecordIndex(i);
                         }}
-                        custom_style={"absolute mt-0 right-2"}
+                        custom_style={"absolute mt-0 -bottom-[2.5rem] right-2"}
                       >
                         {rec?.achievements && i !== regeneratedRecordIndex ? (
-                          <ul className="pl-0 flex flex-col gap-1 text-sm xs:text-sm md:text-lg lg:text-lg">
+                          <ul className="pl-0 flex flex-col gap-1 text-sm md:text-lg">
                             {rec?.achievements.map(
                               (achievement: any, ind: number) => (
                                 <li
@@ -575,7 +575,7 @@ const ResumeTemplate3 = () => {
                       {workExperienceAddButtonVisible === i &&
                       newWorkExperience !== i ? (
                         <div
-                          className="border-2 w-2/12 mt-3 xs:w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                          className="border-2 w-2/12 mt-3  xs:w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {
                             setNewWorkExperience(i);
                           }}
