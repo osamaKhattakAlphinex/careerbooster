@@ -128,7 +128,7 @@ const LinkedInToolMain = () => {
             $1000 if we waste your time with irrelevant outcomes.
           </h5>
 
-          <form onSubmit={formik.handleSubmit} className=" flex justify-center">
+          {/* <form onSubmit={formik.handleSubmit} className=" flex justify-center">
             <div className="flex flex-row justify-between items-center gap-3">
               <input
                 name="linkedInUrl"
@@ -148,7 +148,7 @@ const LinkedInToolMain = () => {
                 </p>
               )}
             </div>
-          </form>
+          </form> */}
 
           <div className="mt-11 flex justify-center md:mt-11">
             <label className=" pt-[12px] lg:pt-[20px]  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
@@ -191,7 +191,7 @@ const LinkedInToolMain = () => {
             file={file}
             text={text}
             setText={setText}
-            // fetchRegistrationDataFromResume={fetchRegistrationDataFromResume}
+          // fetchRegistrationDataFromResume={fetchRegistrationDataFromResume}
           />
         )}
         {fileError && (
