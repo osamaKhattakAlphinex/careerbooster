@@ -230,6 +230,7 @@ async function getTopProfile(handle) {
         headers: {
           accept: "application/vnd.linkedin.normalized+json+2.1",
           "accept-language": "en-US,en-CA;q=0.9,en-AU;q=0.8,en;q=0.7",
+          "csrf-token": "ajax:1690738384797705558",
           "sec-ch-ua":
             '"Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"',
           "sec-ch-ua-mobile": "?0",
@@ -237,16 +238,19 @@ async function getTopProfile(handle) {
           "sec-fetch-dest": "empty",
           "sec-fetch-mode": "cors",
           "sec-fetch-site": "same-origin",
-          cookie:
-            '',
-          Referer: "https://www.linkedin.com/in/adrianhorning/",
+          "cookie": '',
+          "Referer": "https://www.linkedin.com/in/adrianhorning/",
           "Referrer-Policy": "strict-origin-when-cross-origin",
         },
         body: null,
         method: "GET",
       }
     );
+
+    console.log("Response Content:", await res.text());
     const data = await res.json();
+
+    console.log(data);
 
     const entityWithAllTheData = data?.included?.find(
       (d) => d?.publicIdentifier && d?.publicIdentifier !== "adrianhorning"
@@ -272,17 +276,21 @@ async function getTopProfile(handle) {
 }
 
 export async function POST(req) {
-  const url = "https://www.linkedin.com/in/muhammad-waqas-shaukat-39b270a7/"
+  const url = "https://www.linkedin.com/in/m-usama-butt-a9a536196/"
   const handle = url.split("/in/")[1].split("/")[0];
   console.log("handle", handle);
 
   const topProfile = await getTopProfile(handle);
+  console.log(topProfile);
+
   const middle = await getMiddleProfile(topProfile?.profileId);
+  console.log(middle);
+
   // const recentActivity = await getRecentActivity(topProfile?.profileId);
-  const profile = {
-    ...topProfile,
-    ...middle,
-    // recentActivity,
-  };
-  return NextResponse.json(profile);
+  // const profile = {
+  //   ...topProfile,
+  //   ...middle,
+  //   recentActivity,
+  // };
+  return NextResponse.json("ok");
 }
