@@ -1,0 +1,68 @@
+"use client"
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import useGetUserData from "./useGetUserData";
+import { setPrimarySkills } from "@/store/resumeSlice";
+
+const useGetPrimarySkills = (setRegenerating: any) => {
+    const dispatch = useDispatch();
+    const userData = useSelector((state: any) => state.userData);
+    const resumeData = useSelector((state: any) => state.resume);
+    const { getUserDataIfNotExists } = useGetUserData()
+    const [aiInputUserData, setAiInputUserData] = useState<any>();
+
+    useEffect(() => {
+        if (userData && userData?.email) {
+            setAiInputUserData({
+                contact: userData?.contact,
+                education: userData?.education,
+                email: userData?.email,
+                experience: userData?.experience,
+                firstName: userData?.firstName,
+                lastName: userData?.lastName,
+                phone: userData?.phone,
+                skills: userData?.skills,
+            });
+        }
+    }, []);
+
+    const getPrimarySkills = async () => {
+        setRegenerating(true);
+        // return makeAPICallWithRetry(async () => {
+        // dispatch(setLoadingState("primarySkills"));
+        await getUserDataIfNotExists();
+        return fetch("/api/resumeBots/getBasicInfo", {
+            method: "POST",
+            body: JSON.stringify({
+                type: "primarySkills",
+                personName: userData?.firstName + " " + userData?.lastName,
+
+                userData: aiInputUserData,
+                jobPosition: resumeData.state.jobPosition,
+                trainBotData: {
+                    userEmail: userData.email,
+                    // fileAddress: userData.files[0].fileName,
+                    fileAddress: userData.uploadedResume.fileName,
+                },
+            }),
+        }).then(async (resp: any) => {
+            const res = await resp.json();
+            if (res.success) {
+                if (res?.result) {
+                    let myJSON = JSON.parse(JSON.stringify(res.result));
+
+                    myJSON = JSON.parse(myJSON);
+                    dispatch(setPrimarySkills({ primarySkills: myJSON }));
+                    setRegenerating(false)
+                }
+            }
+        });
+        // });
+    };
+
+    return { getPrimarySkills };
+};
+
+export default useGetPrimarySkills;
+
+

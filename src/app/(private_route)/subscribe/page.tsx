@@ -60,8 +60,8 @@ export default function SubscribePage() {
                 </div>
               </div>
               <div className="row g-6 pricing-table">
-                {/* <Packages /> */}
-                <CreditPackages />
+                <Packages />
+                {/* <CreditPackages /> */}
               </div>
             </div>
           </section>
