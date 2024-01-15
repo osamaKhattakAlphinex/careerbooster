@@ -162,11 +162,11 @@ const ResumeTemplate4 = () => {
           </div>
           {/* contacts */}
 
-          <h3 className="uppercase text-lg  xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold xs:font-medium flex flex-row gap-2 items-center">
+          <h3 className="uppercase text-lg border-white pb-5  -mr-6 md:-mr-6 border-b-2  xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold xs:font-medium flex flex-row gap-2 items-center">
             {contactIcon}
             Contact
           </h3>
-          <span className=" w-[110%] h-0 border !border-gray-100 my-3"></span>
+          <span className=" w-[110%] h-0 my-3"></span>
           <ul className=" flex flex-col gap-2 mb-4 text-sm md:text-lg break-all pl-0">
             <h2 className="text-[16px] font-bold xs:text-[14px] md:text-[16px] xs:font-normal">
               Phone
@@ -291,11 +291,11 @@ const ResumeTemplate4 = () => {
 
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
-              <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold flex flex-row gap-2 items-center mt-5">
+              <h3 className="uppercase text-lg xs:text-sm sm:text-sm -mr-6 md:-mr-6  md:text-md lg:text-lg border-b-2 pb-5 border-white font-semibold flex flex-row gap-2 items-center mt-5">
                 {sparkleIcon}
                 Skills
               </h3>
-              <span className="border-stylee w-[110%] h-0 border !border-gray-100 my-3"></span>
+              <span className="border-stylee w-full h-0  my-1"></span>
               <ul
                 className="pl-0 flex  flex-col gap-2 mb-4 text-[16px] xs:text-[12px] md:text-lg"
                 onMouseEnter={() =>
