@@ -1,7 +1,4 @@
-import { NextApiHandler } from "next";
 import { OpenAI } from "langchain/llms/openai";
-import { PDFLoader } from "langchain/document_loaders/fs/pdf";
-import path from "path";
 import LinkedinToolEntrie from "@/db/schemas/LinkedinToolEntrie";
 import startDB from "@/lib/db";
 import { NextResponse } from "next/server";

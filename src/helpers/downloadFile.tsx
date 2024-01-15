@@ -74,10 +74,8 @@ const DownloadService = ({
             display: block; 
         }</style>
         ${html}`;
-      const formData = new FormData();
-      formData.append("htmlToDoc", htmlToDoc);
       setLoading(true);
-      console.log('formData', formData.get('htmlToDoc'));
+
       await fetch(`/api/template`, {
         method: "POST",
         body: JSON.stringify({

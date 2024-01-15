@@ -75,6 +75,11 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    userCredits: Number,
+    creditPackage: {
+      type: Schema.Types.ObjectId,
+      ref: "CreditPackage",
+    },
     userPackage: {
       type: Schema.Types.ObjectId,
       ref: "UserPackage",

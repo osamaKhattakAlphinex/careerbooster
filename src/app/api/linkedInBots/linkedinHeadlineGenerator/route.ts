@@ -1,4 +1,3 @@
-// import { OpenAI } from "langchain/llms/openai";
 import OpenAI from "openai";
 import Prompt from "@/db/schemas/Prompt";
 import startDB from "@/lib/db";
