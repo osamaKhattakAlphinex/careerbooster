@@ -1,0 +1,16 @@
+export const crediLimitPackage = {
+    resume_summary_generation: 100,
+    resume_basicInfo: 30,
+    resume_skills: 40,
+    resume_individualWorkExperience: 60,
+    linkedin_keywords_generation: 50,
+    linkedin_headline_generation: 50,
+    linkedin_about_generation: 150,
+    linkedin_individualWorkExperience: 60,
+    cover_letter_generation: 120,
+    email_generation: 130,
+    pdf_files_upload: 20,
+    review_resume: 250,
+    consulting_bids_generation: 200,
+    download_resume: 50,
+};

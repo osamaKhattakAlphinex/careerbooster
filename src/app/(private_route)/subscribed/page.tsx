@@ -1,3 +1,4 @@
+import UpdateCreditPackage from "@/components/dashboard/checkout/UpdateCreditPackage";
 import UpdateUserPackage from "@/components/dashboard/checkout/UpdateUserPackage";
 import { stripe } from "@/lib/stripe";
 import { redirect } from "next/navigation";
@@ -52,7 +53,8 @@ export default async function SubscribedPage(props: Props) {
                       Thanks for your Subscription <br />
                       {customer.metadata.name}
                     </h1>
-                    <UpdateUserPackage customer={customer.metadata} />
+                    {/* <UpdateUserPackage customer={customer.metadata} /> */}
+                    <UpdateCreditPackage customer={customer.metadata} />
                   </div>
                 </div>
               </div>

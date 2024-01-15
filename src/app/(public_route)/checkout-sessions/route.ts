@@ -29,12 +29,15 @@ export interface CheckoutSubscriptionBody {
 //COUPON jIqH36bY
 export async function POST(req: Request) {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL;
-  const body = (await req.json()) as CheckoutSubscriptionBody;
+  // const body = (await req.json()) as CheckoutSubscriptionBody;
+  const body = await req.json()
+  console.log(body);
+
   const origin = req.headers.get("origin") || appUrl;
 
   // if coupon is provided add it otherwise leave it empty
   let discounts: any = [];
-  if (body.coupon !== "") {
+  if (body?.coupon !== "") {
     discounts = [
       {
         coupon: body.coupon,
@@ -51,23 +54,25 @@ export async function POST(req: Request) {
     const customer = await stripe.customers.create({
       metadata: body.customer.metadata,
     });
+    console.log("customer created", customer);
 
     const session = await stripe.checkout.sessions.create({
       // if user is logged in, stripe will set the email in the checkout page
       customer: customer.id,
-      mode: "subscription", // mode should be subscription
+      // mode: "subscription", // mode should be subscription
+      mode: "payment",
       line_items: [
         // generate inline price and product
         {
           price_data: {
             currency: "usd",
-            recurring: {
-              interval: body.interval,
-            },
+            // recurring: {
+            //   interval: body.interval,
+            // },
             unit_amount: body.amount,
             product_data: {
               name: body.plan,
-              description: `CareerBooster.AI ${body.plan} Plan Subscription`,
+              description: `CareerBooster.AI ${body.plan} Plan `,
             },
           },
           quantity: 1,

@@ -7,6 +7,7 @@ import "@/app/plugins.css";
 import "@/app/style.css";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import Link from "next/link";
+import CreditPackages from "@/components/dashboard/checkout/CreditPackages";
 export default function SubscribePage() {
   const [showExpiredAlert, setShowExpiredAlert] = useState(false);
   // check if there is ?expired=1 in the URL
@@ -60,6 +61,7 @@ export default function SubscribePage() {
               </div>
               <div className="row g-6 pricing-table">
                 <Packages />
+                {/* <CreditPackages /> */}
               </div>
             </div>
           </section>
