@@ -1,3 +1,4 @@
+import CreditPackages from "@/components/dashboard/checkout/CreditPackages";
 import Packages from "@/components/dashboard/checkout/Packages";
 const PricingSection = () => {
   return (
@@ -21,6 +22,7 @@ const PricingSection = () => {
         </div>
         <div className="row g-6 pricing-table">
           <Packages viewOnly={true} />
+          {/* <CreditPackages viewOnly={true} /> */}
         </div>
       </div>
     </section>

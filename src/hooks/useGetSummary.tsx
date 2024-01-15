@@ -4,12 +4,14 @@ import { setSummary } from "@/store/resumeSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useGetUserData from "./useGetUserData";
+import useSaveResumeToDB from "./useSaveToDB";
 
 const useGetSummary = (setStreamedSummaryData: any) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const resumeData = useSelector((state: any) => state.resume);
   const { getUserDataIfNotExists } = useGetUserData()
+  const { saveResumeToDB } = useSaveResumeToDB()
 
   const [aiInputUserData, setAiInputUserData] = useState<any>();
 
@@ -68,6 +70,10 @@ const useGetSummary = (setStreamedSummaryData: any) => {
         }
 
         dispatch(setSummary(summaryTemp));
+        saveResumeToDB({
+          ...resumeData,
+          summary: summaryTemp,
+        });
       } else {
         setStreamedSummaryData("Error! Something went wrong");
       }

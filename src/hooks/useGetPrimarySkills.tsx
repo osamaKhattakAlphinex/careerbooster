@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useGetUserData from "./useGetUserData";
 import { setPrimarySkills } from "@/store/resumeSlice";
+import useSaveResumeToDB from "./useSaveToDB";
 
 const useGetPrimarySkills = (setRegenerating: any) => {
     const dispatch = useDispatch();
@@ -10,6 +11,7 @@ const useGetPrimarySkills = (setRegenerating: any) => {
     const resumeData = useSelector((state: any) => state.resume);
     const { getUserDataIfNotExists } = useGetUserData()
     const [aiInputUserData, setAiInputUserData] = useState<any>();
+    const { saveResumeToDB } = useSaveResumeToDB()
 
     useEffect(() => {
         if (userData && userData?.email) {
@@ -54,6 +56,10 @@ const useGetPrimarySkills = (setRegenerating: any) => {
                     myJSON = JSON.parse(myJSON);
                     dispatch(setPrimarySkills({ primarySkills: myJSON }));
                     setRegenerating(false)
+                    saveResumeToDB({
+                        ...resumeData,
+                        primarySkills: myJSON,
+                    });
                 }
             }
         });
