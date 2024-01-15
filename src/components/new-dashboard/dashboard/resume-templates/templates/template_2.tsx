@@ -568,7 +568,7 @@ const ResumeTemplate2 = () => {
                         }}
                       />
                     </span>
-                    <div className="p-4 border-2 border-blue-900">
+                    <div className="p-4">
                       <Regenerate
                         handler={() => {
                           getOneWorkExperienceNew(rec);
@@ -577,7 +577,7 @@ const ResumeTemplate2 = () => {
                         custom_style={"absolute mt-0 right-2"}
                       >
                         {rec?.achievements && i !== regeneratedRecordIndex ? (
-                          <ul className="pl-0 flex flex-col gap-1 text-sm xs:text-sm md:text-lg border-2 border-red-900 lg:text-lg">
+                          <ul className="pl-0 flex flex-col gap-1 text-sm xs:text-sm md:text-lg lg:text-lg">
                             {rec?.achievements.map(
                               (achievement: any, ind: number) => (
                                 <li
