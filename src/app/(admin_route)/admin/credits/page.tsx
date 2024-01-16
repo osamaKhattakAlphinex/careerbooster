@@ -33,7 +33,8 @@ const ViewPackage = ({}) => {
   const columnHelper = createColumnHelper<Credit>();
 
   const handleCreditUpdate = (credit: Credit) => {
-    console.log(credit);
+    // console.log(credit);
+    console.log(Object.entries(credits[0]));
 
     if (creditModalRef.current) {
       creditModalRef.current.openModal(true, credit, "update");
