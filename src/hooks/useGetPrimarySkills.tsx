@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useGetUserData from "./useGetUserData";
 import { setPrimarySkills } from "@/store/resumeSlice";
 import useSaveResumeToDB from "./useSaveToDB";
+import useGetCreditLimits from "./useGetCreditLimits";
 
 const useGetPrimarySkills = (setRegenerating: any) => {
     const dispatch = useDispatch();
@@ -13,6 +14,8 @@ const useGetPrimarySkills = (setRegenerating: any) => {
     const [aiInputUserData, setAiInputUserData] = useState<any>();
     const { saveResumeToDB } = useSaveResumeToDB()
 
+    const creditLimits = useSelector((state: any) => state.creditLimits);
+    const { getCreditLimitsIfNotExists } = useGetCreditLimits()
     useEffect(() => {
         if (userData && userData?.email) {
             setAiInputUserData({
@@ -33,14 +36,16 @@ const useGetPrimarySkills = (setRegenerating: any) => {
         // return makeAPICallWithRetry(async () => {
         // dispatch(setLoadingState("primarySkills"));
         await getUserDataIfNotExists();
+        await getCreditLimitsIfNotExists()
         return fetch("/api/resumeBots/getBasicInfo", {
             method: "POST",
             body: JSON.stringify({
                 type: "primarySkills",
                 personName: userData?.firstName + " " + userData?.lastName,
-
                 userData: aiInputUserData,
                 jobPosition: resumeData.state.jobPosition,
+                creditsUsed: creditLimits.resume_skills,
+
                 trainBotData: {
                     userEmail: userData.email,
                     // fileAddress: userData.files[0].fileName,

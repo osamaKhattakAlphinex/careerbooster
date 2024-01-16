@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useGetUserData from "./useGetUserData";
 import useSaveResumeToDB from "./useSaveToDB";
+import useGetCreditLimits from "./useGetCreditLimits";
 
 const useGetSummary = (setStreamedSummaryData: any) => {
   const dispatch = useDispatch();
@@ -12,7 +13,8 @@ const useGetSummary = (setStreamedSummaryData: any) => {
   const resumeData = useSelector((state: any) => state.resume);
   const { getUserDataIfNotExists } = useGetUserData()
   const { saveResumeToDB } = useSaveResumeToDB()
-
+  const creditLimits = useSelector((state: any) => state.creditLimits);
+  const { getCreditLimitsIfNotExists } = useGetCreditLimits()
   const [aiInputUserData, setAiInputUserData] = useState<any>();
 
   useEffect(() => {
@@ -33,6 +35,7 @@ const useGetSummary = (setStreamedSummaryData: any) => {
   const getSummary = async () => {
     // return aiInputUserData
     await getUserDataIfNotExists();
+    await getCreditLimitsIfNotExists()
     setStreamedSummaryData("");
     dispatch(setSummary(""));
     // dispatch(setLoadingState("summary"));
@@ -44,6 +47,7 @@ const useGetSummary = (setStreamedSummaryData: any) => {
         type: "summary",
         personName: userData?.firstName + " " + userData?.lastName,
         jobPosition: resumeData.state.jobPosition,
+        creditsUsed: creditLimits.resume_summary_generation,
         userData: aiInputUserData,
         trainBotData: {
           userEmail: userData.email,

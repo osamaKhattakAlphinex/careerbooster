@@ -31,6 +31,7 @@ import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 
 const ResumeTemplate1 = ({
   streamedSummaryData,
+  setStreamedSummaryData,
   streamedJDData,
   saveResumeToDB,
   setStreamedJDData,
@@ -39,6 +40,7 @@ const ResumeTemplate1 = ({
   streamedJDData: string;
   saveResumeToDB: (data?: any) => Promise<void>;
   setStreamedJDData: any;
+  setStreamedSummaryData: any
 }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -49,7 +51,7 @@ const ResumeTemplate1 = ({
   const [primarySkillAddButtonVisible, setPrimarySkillAddButtonVisible] =
     useState(false);
 
-  const { getSummary } = useGetSummary({});
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
 
 
   const [regenerating, setRegenerating] = useState(false);

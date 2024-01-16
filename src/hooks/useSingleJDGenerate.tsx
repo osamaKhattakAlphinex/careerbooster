@@ -6,13 +6,15 @@ import { setState, setWorkExperience, setWorkExperienceArray } from "@/store/res
 import { WorkExperience } from "@/store/userDataSlice";
 import { fetchLIstOfStrings } from "@/helpers/fetchLIstOfStrings";
 import useSaveResumeToDB from "./useSaveToDB";
+import useGetCreditLimits from "./useGetCreditLimits";
 
 const useSingleJDGenerate = (setStreamedJDData: any) => {
     const { getUserDataIfNotExists } = useGetUserData()
     const dispatch = useDispatch();
     const userData = useSelector((state: any) => state.userData);
-    const [regeneration, setRegeneration] = useState<boolean>(false);
     const resumeData = useSelector((state: any) => state.resume);
+    const creditLimits = useSelector((state: any) => state.creditLimits);
+    const { getCreditLimitsIfNotExists } = useGetCreditLimits()
     let oneWorkExpIndex: number
     const { saveResumeToDB } = useSaveResumeToDB()
 
@@ -20,19 +22,14 @@ const useSingleJDGenerate = (setStreamedJDData: any) => {
         setStreamedJDData("");
         dispatch(setWorkExperience(""));
         let temp = "";
-        console.log(resumeData);
-        console.log(experience);
+
         let workExpArray = [...resumeData.workExperienceArray];
-        console.log(workExpArray, typeof workExpArray);
         if (experience && workExpArray.length) {
-            console.log("first");
             oneWorkExpIndex = workExpArray.findIndex((workExp: any) => JSON.stringify(workExp) === JSON.stringify(experience));
-            console.log(oneWorkExpIndex);
-
-
         }
 
         await getUserDataIfNotExists();
+        await getCreditLimitsIfNotExists()
         const { quantifyingExperience } = resumeData
         if (userData.isFetched) {
 
@@ -67,6 +64,7 @@ const useSingleJDGenerate = (setStreamedJDData: any) => {
                 body: JSON.stringify({
                     quantifyingExperience: quantifyingExperience,
                     experience: experience,
+                    creditsUsed: creditLimits.resume_individualWorkExperience,
                     trainBotData: {
                         userEmail: userData.email,
                         // fileAddress: userData.files[0].fileName,

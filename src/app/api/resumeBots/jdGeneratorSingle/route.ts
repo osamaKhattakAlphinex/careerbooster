@@ -9,6 +9,7 @@ import { authOptions } from "../../auth/[...nextauth]/route";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
 import { makeid } from "@/helpers/makeid";
 import { TrainBotEntryType, makeTrainedBotEntry } from "@/helpers/makeTrainBotEntry";
+import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -31,6 +32,7 @@ export async function POST(req: any) {
     const quantifyingExperience = reqBody?.quantifyingExperience;
     const personName = reqBody?.personName
     const jobTitle = reqBody?.jobTitle
+    const creditsUsed = reqBody?.creditsUsed;
     const dataset = "resume.writeJDSingle";
     const model = await getTrainedModel(dataset);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
@@ -91,7 +93,7 @@ export async function POST(req: any) {
           id: workId,
         };
         // postConsultingBid(payload);
-
+        await updateUserTotalCredits(session?.user?.email, creditsUsed)
       },
       onFinal: async (completions) => {
         try {

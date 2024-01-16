@@ -28,6 +28,7 @@ import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useGetUserData from "@/hooks/useGetUserData";
 import useGetSummary from "@/hooks/useGetSummary";
 import { fetchLIstOfStrings } from "@/helpers/fetchLIstOfStrings";
+import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -66,11 +67,17 @@ const ResumeBuilder = () => {
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
+
+  const creditLimits = useSelector((state: any) => state.creditLimits);
+  const { getCreditLimitsIfNotExists } = useGetCreditLimits()
+
+
   const { getSummary } = useGetSummary(setStreamedSummaryData);
 
   const handleGenerate = useCallback(
     async (quantifyingExperience: boolean) => {
       await getUserDataIfNotExists();
+      await getCreditLimitsIfNotExists()
       // reset resume
       dispatch(resetResume(resumeData.state));
       if (resumeData.state.jobPosition !== "" && session?.user?.email) {
@@ -127,7 +134,7 @@ const ResumeBuilder = () => {
         type: "basicDetails",
         inputType: "userData",
         personName: userData.firstName + " " + userData.lastName,
-
+        creditsUsed: creditLimits.resume_basicInfo,
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
@@ -165,6 +172,7 @@ const ResumeBuilder = () => {
   const getWorkExperienceNew = async (quantifyingExperience: boolean) => {
     // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("workExperience"));
+    await getCreditLimitsIfNotExists()
     await getUserDataIfNotExists();
 
     if (userData.isFetched) {
@@ -210,6 +218,7 @@ const ResumeBuilder = () => {
           body: JSON.stringify({
             quantifyingExperience: quantifyingExperience,
             experience: experience,
+            creditsUsed: creditLimits.resume_individualWorkExperience,
             trainBotData: {
               userEmail: userData.email,
               // fileAddress: userData.files[0].fileName,
@@ -256,12 +265,13 @@ const ResumeBuilder = () => {
     // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("primarySkills"));
     await getUserDataIfNotExists();
+    await getCreditLimitsIfNotExists()
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
         type: "primarySkills",
         personName: userData?.firstName + " " + userData?.lastName,
-
+        creditsUsed: creditLimits.resume_skills,
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
@@ -422,6 +432,7 @@ const ResumeBuilder = () => {
                     streamedJDData={streamedJDData}
                     saveResumeToDB={saveResumeToDB}
                     setStreamedJDData={setStreamedJDData}
+                    setStreamedSummaryData={setStreamedSummaryData}
                   />
                 </div>
               </div>
