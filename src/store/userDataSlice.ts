@@ -49,6 +49,7 @@ interface UserDataSlice {
   phone?: string;
   email?: string;
   role?: string;
+  totalCredits?: number;
   contact?: {
     country?: string;
     street?: string;
@@ -67,8 +68,8 @@ interface UserDataSlice {
   userPackage: "";
   userPackageData: {};
   userPackageUsed: limitObject | {};
-  
- 
+
+
 }
 
 const initialState: UserDataSlice = {
@@ -92,6 +93,7 @@ const initialState: UserDataSlice = {
   files: [],
   uploadedResume: {},
   chatThreads: {},
+  totalCredits: 0,
   skills: [],
   defaultResumeFile: "",
   wizardCompleted: false,
@@ -99,7 +101,7 @@ const initialState: UserDataSlice = {
   userPackage: "",
   userPackageData: {},
   userPackageUsed: {},
- 
+
 
 };
 
@@ -133,12 +135,12 @@ const userDataSlice = createSlice({
         ...action.payload,
       };
     },
-  
-  
+
+
   },
 });
 
-export const { setIsLoading, setError, setField, setUserData  } =
+export const { setIsLoading, setError, setField, setUserData } =
   userDataSlice.actions;
 
 export default userDataSlice.reducer;

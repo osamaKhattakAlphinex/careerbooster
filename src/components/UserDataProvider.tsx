@@ -27,9 +27,11 @@ const UserDataProvider = () => {
         );
         const response = await res.json();
         const user = response.result;
+
         dispatch(setUserData(user));
         dispatch(setIsLoading(false));
         dispatch(setField({ name: "isFetched", value: true }));
+
         // if there is a file in files array of a user then set it as defaultResumeFile
         // if (user?.files && user?.files?.length > 0) {
         dispatch(

@@ -10,6 +10,7 @@ import linkedInJobDescriptionSlice from "./linkedInJobDescriptionSlice";
 import linkedInKeywordsSlice from "./linkedInKeywordsSlice";
 import linkedInAboutSlice from "./linkedInAboutSlice";
 import appSlice from "./appSlice";
+import creditLimitsSlice from "./creditLimitsSlice";
 
 const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ const store = configureStore({
     linkedinAbout: linkedInAboutSlice,
     linkedinJobDesc: linkedInJobDescriptionSlice,
     linkedinKeywords: linkedInKeywordsSlice,
+    creditLimits: creditLimitsSlice,
     app: appSlice,
   },
 });

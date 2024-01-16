@@ -21,8 +21,8 @@ const PricingSection = () => {
           </div>
         </div>
         <div className="row g-6 pricing-table">
-          <Packages viewOnly={true} />
-          {/* <CreditPackages viewOnly={true} /> */}
+          {/* <Packages viewOnly={true} /> */}
+          <CreditPackages viewOnly={true} />
         </div>
       </div>
     </section>

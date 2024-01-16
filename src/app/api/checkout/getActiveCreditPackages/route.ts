@@ -17,7 +17,6 @@ export async function GET() {
     await startDB();
 
     const creditPackages = await CreditsPackage.find({ status }).sort({ amount: 1 });
-    console.log(creditPackages);
 
     if (!creditPackages) {
         return NextResponse.json(

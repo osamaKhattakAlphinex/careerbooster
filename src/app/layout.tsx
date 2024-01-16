@@ -8,6 +8,7 @@ import Script from "next/script";
 import NextThemeProvider from "@/components/NextThemeProvider";
 import UserDataProvider from "@/components/UserDataProvider";
 import MainLoaderLayer from "@/components/new-layout/MainLoaderLayer";
+import CreditLimitsProvider from "@/components/CreditLimitsProvider";
 
 export const metadata: Metadata = {
   title: "AI Resume Bot",
@@ -44,6 +45,7 @@ export default function RootLayout({
           <ReduxProvider>
             <MainLoaderLayer />
             <UserDataProvider />
+            <CreditLimitsProvider />
             {children}
           </ReduxProvider>
         </AuthProvider>
