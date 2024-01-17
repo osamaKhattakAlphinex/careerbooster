@@ -20,6 +20,7 @@ import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import LinkedInJDCardSingle from "./LinkedInJDCardSingle";
 import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
+import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
   // local States
@@ -28,9 +29,8 @@ const SubJDGenerator = () => {
   const [streamedData, setStreamedData] = useState("");
   const [showPopup, setShowPopup] = useState(false);
 
-  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
-  const [percentageCalculated, setPercentageCalculated] =
-    useState<boolean>(false);
+
+  useState<boolean>(false);
   const [isJDCopied, setIsJDCopied] = useState<boolean>(false);
   const copyJD = async (text: string) => {
     try {
@@ -47,9 +47,10 @@ const SubJDGenerator = () => {
   };
   // Redux
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
+  let userData = useSelector((state: any) => state.userData);
   const linkedinJD = useSelector((state: any) => state.linkedinJobDesc);
   const { getUserDataIfNotExists: getUserData } = useGetUserData() //using hook function with different name/alias
+  const { getCreditLimitsIfNotExists } = useGetCreditLimits()
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
 
@@ -64,14 +65,15 @@ const SubJDGenerator = () => {
     setStreamedData(linkedinJD.jobDescriptionText);
   }, [linkedinJD.jobDescriptionText]);
 
+
+
   const handleGenerate = async () => {
     setStreamedData("");
     await getUserDataIfNotExists();
     //change condition
     if (
-      userData.isFetched &&
-      !isNaN(availablePercentage) &&
-      availablePercentage !== 0
+      session?.user?.email &&
+      userData.isFetched
     ) {
       // remove ids from experiences
       const experiences = userData.experience.map((item: WorkExperience) => {
@@ -95,7 +97,8 @@ const SubJDGenerator = () => {
         setMsgLoading(true);
         const obj: any = {
           personName: userData.firstName + " " + userData.lastName,
-
+          userCredits: userData.userCredits,
+          creditsUsed: creditLimits.linkedin_individualWorkExperience,
           email: session?.user?.email,
           trainBotData: {
             userEmail: userData.email,
@@ -128,12 +131,13 @@ const SubJDGenerator = () => {
         `
         setStreamedData((prev) => prev + `</p> <br /> `);
         setMsgLoading(false);
-        const updatedObject = {
-          ...userData,
-          userCredits: userData.userCredits - creditLimits.linkedin_individualWorkExperience
-        };
-        dispatch(setUserData({ ...userData, ...updatedObject }));
+
         if (index === experiences.length - 1) {
+          const updatedObject = {
+            ...userData,
+            userCredits: userData.userCredits - (creditLimits.linkedin_individualWorkExperience * experiences.length)
+          };
+          dispatch(setUserData(updatedObject));
           const jobDescriptionId = makeid();
           const jdObj = {
 
@@ -161,32 +165,17 @@ const SubJDGenerator = () => {
         }
       }
 
-      await fetch("/api/users/updateUserLimit", {
-        method: "POST",
-        body: JSON.stringify({
-          email: session?.user?.email,
-          type: "job_desc_generation",
-        }),
-      }).then(async (resp: any) => {
-        const res = await resp.json();
-        let user;
-        if (typeof res?.result === "object") {
-          user = res.result;
-        } else {
-          user = await JSON.parse(res.result);
-        }
-        if (res.success) {
-          const JDResponse = await axios.get(
-            "/api/linkedInBots/jdGeneratorSingle/getAllJD"
-          );
-          const updatedObject = {
-            ...userData,
-            linkedInJobDescriptions:
-              JDResponse.data.result.linkedInJobDescriptions,
-          };
-          dispatch(setUserData({ ...userData, ...updatedObject }));
-        }
-      });
+
+      const JDResponse = await axios.get(
+        "/api/linkedInBots/jdGeneratorSingle/getAllJD"
+      );
+      const updatedObject = {
+        ...userData,
+        linkedInJobDescriptions:
+          JDResponse.data.result.linkedInJobDescriptions,
+      };
+      dispatch(setUserData({ ...userData, ...updatedObject }));
+
     } else {
       setShowPopup(true);
 

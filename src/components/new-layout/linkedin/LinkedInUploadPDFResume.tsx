@@ -6,15 +6,12 @@ import copy from "clipboard-copy";
 import {
   clipboardIcon,
   refreshIconRotating,
-  starIcon,
-  uploadIcon,
 } from "@/helpers/iconsProvider";
 import Button from "../../utilities/form-elements/Button";
 import LinkedInSummary from "./LinkedInSummary";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Avatar from "@/components/Avatar";
-import { makeid } from "@/helpers/makeid";
 
 //Editable
 const loadFromLocalStorage = () => {
@@ -61,8 +58,9 @@ const LinkedInUploadPDFResume = () => {
     setStreamedHeadlineData("");
     setFileError("");
     // setHeadlineMsgLoading(true);
+
     if (linkedinContent) {
-      fetch("/api/linkedInBots/linkedinHeadlineGenerator", {
+      await fetch("/api/linkedInBots/linkedinHeadlineGenerator", {
         method: "POST",
         body: JSON.stringify({
           linkedinContent,
@@ -100,6 +98,7 @@ const LinkedInUploadPDFResume = () => {
           setFileError("Something went wrong");
         });
     } else if (!linkedinFileName) {
+
       setFileError("PDF Resume / CV is Required");
     }
   };
@@ -110,7 +109,7 @@ const LinkedInUploadPDFResume = () => {
     setAboutMsgLoading(true);
 
     if (linkedinFileName) {
-      fetch("/api/linkedInBots/linkedinAboutGenerator", {
+      await fetch("/api/linkedInBots/linkedinAboutGenerator", {
         method: "POST",
         body: JSON.stringify({
           linkedinContent,
@@ -148,6 +147,7 @@ const LinkedInUploadPDFResume = () => {
           setFileError("Something went wrong");
         });
     } else if (!linkedinFileName) {
+
       setFileError("PDF Resume / CV is Required");
     }
   };
@@ -159,7 +159,7 @@ const LinkedInUploadPDFResume = () => {
   ) => {
     setFileError("");
     if (linkedinFileName) {
-      fetch("/api/linkedInBots/LinkedinToolEntries", {
+      await fetch("/api/linkedInBots/LinkedinToolEntries", {
         method: "POST",
         body: JSON.stringify({ linkedinFileName, linkedinContent }),
         headers: {
@@ -202,9 +202,11 @@ const LinkedInUploadPDFResume = () => {
           }
         })
         .catch((error) => {
+
           setFileError("Something went wrong");
         });
     } else if (!linkedinFileName) {
+
       setFileError("PDF Resume / CV is Required");
     }
   };

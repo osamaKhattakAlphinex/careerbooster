@@ -72,9 +72,7 @@ const SubHeadlineGenerator = () => {
     await getUserDataIfNotExists();
     //change condition
     if (
-      session?.user?.email &&
-      !isNaN(availablePercentage) &&
-      availablePercentage !== 0
+      session?.user?.email && aiInputUserData
     ) {
       setMsgLoading(true);
       const obj: any = {
@@ -106,37 +104,25 @@ const SubHeadlineGenerator = () => {
               tempText += text;
             }
 
-            fetch("/api/users/updateUserLimit", {
-              method: "POST",
-              body: JSON.stringify({
-                email: session?.user?.email,
-                type: "headline_generation",
-              }),
-            }).then(async (resp: any) => {
-              const res = await resp.json();
-              let user;
-              if (typeof res?.result === "object") {
-                user = res.result;
-              } else {
-                user = await JSON.parse(res.result);
-              }
-              if (res.success) {
-                const HeadlineResponse = await axios.get(
-                  "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines"
-                );
-                const updatedObject = {
-                  ...userData,
-                  linkedInHeadlines:
-                    HeadlineResponse.data.result.linkedInHeadlines,
-                  userCredits: userData.userCredits - creditLimits.linkedin_headline_generation
 
-                };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
-                // dispatch()
-              }
-            });
+
+            const HeadlineResponse = await axios.get(
+              "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines"
+            );
+            const updatedObject = {
+              ...userData,
+              linkedInHeadlines:
+                HeadlineResponse.data.result.linkedInHeadlines,
+              userCredits: userData.userCredits - creditLimits.linkedin_headline_generation
+
+            };
+            dispatch(setUserData({ ...userData, ...updatedObject }));
+            // dispatch()
+
+
           } else {
-            setStreamedData("Error! Something went wrong");
+            const res = await resp.json()
+            setStreamedData(res.result + "! You ran out of Credits");
           }
           setMsgLoading(false);
         })

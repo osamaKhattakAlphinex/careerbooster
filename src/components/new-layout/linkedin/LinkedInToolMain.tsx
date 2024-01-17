@@ -61,7 +61,6 @@ const LinkedInToolMain = () => {
 
       const fileInput = e.target;
       if (fileInput && fileInput.files && fileInput.files.length > 0) {
-        console.log(fileInput.files[0]);
 
         setFile(fileInput.files[0]);
         setFileName(fileInput.files[0].name);
@@ -70,19 +69,18 @@ const LinkedInToolMain = () => {
   };
   useEffect(() => {
     if (file && file.type === "application/pdf") {
-      console.log("inside");
 
       setFileUploading(true);
       setUploadComplete(true);
-      router.push(`/linkedin/result`);
     }
   }, [file, fileName]);
 
   useEffect(() => {
     if (uploadComplete && fileUploading && text !== "") {
-      console.log("here");
 
       saveToLocalStorage(text, fileName);
+      router.push(`/linkedin/result`);
+
     }
   }, [fileUploading, uploadComplete, text]);
   // useEffect(() => {

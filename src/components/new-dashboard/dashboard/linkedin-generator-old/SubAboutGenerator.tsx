@@ -83,8 +83,7 @@ const SubAboutGenerator = () => {
     await getUserDataIfNotExists();
     if (
       session?.user?.email &&
-      !isNaN(availablePercentage) &&
-      availablePercentage !== 0
+      aiInputUserData
     ) {
       setMsgLoading(true);
       const obj: any = {

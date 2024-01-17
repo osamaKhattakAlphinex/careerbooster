@@ -14,6 +14,7 @@ import {
 
 import { postKeywords } from "./linkedInKeywords/route";
 import { makeid } from "@/helpers/makeid";
+import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -36,7 +37,17 @@ export async function POST(req: any) {
     const keywordsId = reqBody?.keywordsId;
     const email = reqBody?.email;
     const personName = reqBody?.personName
+    const userCredits = reqBody?.userCredits;
+    const creditsUsed = reqBody?.creditsUsed;
 
+    if (userCredits) {
+      if (userCredits < creditsUsed) {
+        return NextResponse.json(
+          { result: "Insufficient Credits", success: false },
+          { status: 429 }
+        )
+      }
+    }
     await startDB();
     // fetch prompt from db
     const promptRec = await Prompt.findOne({
@@ -64,6 +75,9 @@ export async function POST(req: any) {
 
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
+      onStart: async () => {
+        await updateUserTotalCredits(email, creditsUsed)
+      },
       onFinal: async (completions) => {
 
         try {
