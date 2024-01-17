@@ -188,9 +188,12 @@ const ResumeTemplate3 = () => {
           <h3 className="uppercase text-sm md:text-lg font-bold py-3">
             EXECUTIVE SUMMARY
           </h3>
-          <span className="border-stylee w-full h-0 border !border-gray-500  "></span>
+          <span className="border-stylee w-full h-0 border !border-gray-500 "></span>
 
-          <Regenerate>
+          <Regenerate
+            handler={getSummary}
+            custom_style={"absolute bottom-3 right-2 "}
+          >
             <div className="text-sm xs:text-sm md:text-lg lg:text-lg my-2 hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
               <EditableField
                 type="textarea"

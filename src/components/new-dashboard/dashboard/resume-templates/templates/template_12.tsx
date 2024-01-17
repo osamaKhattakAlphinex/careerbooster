@@ -264,7 +264,7 @@ const ResumeTemplate12 = () => {
       </div>
       <div className="flex">
         <div className=" w-5/12 md:w-1/3 flex flex-col  items-center   bg-[#FFFFFF]  px-9 xs:px-2 sm:px-2 md:px-9 lg:px-9    pt-[1rem] h-[1050px] xs:h-auto">
-          <div className="h-48 w-48 xs:w-24 xs:h-24 md:w-48 md:h-48 text-gray-800 bg-[#F0CFC3]  text-center flex justify-center items-center  rounded-full xs:mb-[88px] sm:mb-[88px] xs:mt-[32px] sm:mt-[32px] md:mt-0 lg:mt-0 lg:mb-0 md:mb-0 ">
+          <div className="h-48 w-48 xs:w-20 xs:h-20 md:w-48 md:h-48 text-gray-800 bg-[#F0CFC3]  text-center flex justify-center items-center  rounded-full xs:mb-[88px] sm:mb-[88px] xs:mt-[32px] sm:mt-[32px] md:mt-0 lg:mt-0 lg:mb-0 md:mb-0 ">
             <span className="text-4xl  text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
               <EditableField
                 value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -503,7 +503,7 @@ const ResumeTemplate12 = () => {
                   )}
                   {primarySkillAddButtonVisible ? (
                     <div
-                      className="border-2 w-1/2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                      className="border-2 w-1/2 xs:w-full md:w-1/2 xs:mt-10 md:mt-0 mt-0 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                       onClick={() => {
                         setNewPrimarySkill(true);
                         setPrimarySkillAddButtonVisible(false);
@@ -521,7 +521,7 @@ const ResumeTemplate12 = () => {
             </>
           )}
         </div>
-        <div className="w-full flex flex-col bg-[#FFFFFF] px-4 md:px-4 pt-[13rem] xs:pt-[14rem] sm:pt-[14rem] md:pt-[13rem] lg:pt-[13rem] ">
+        <div className="w-full flex flex-col bg-[#FFFFFF] px-4 xs:px-2 md:px-4 pt-[13rem] xs:pt-[14rem] sm:pt-[14rem] md:pt-[13rem] lg:pt-[13rem] ">
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0  my-2"></span>
           <h3 className="uppercase text-xl font-bold xs:text-sm sm:text-sm md:text-xl lg:text-xl  mb-2 rounded-sm text-gray-900 w-full py-1">
@@ -935,7 +935,7 @@ const ResumeTemplate12 = () => {
                         {workExperienceAddButtonVisible === i &&
                         newWorkExperience !== i ? (
                           <div
-                            className="border-2 w-2/12 xs:w-full mt-3 sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                            className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3  sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
                               setNewWorkExperience(i);
                             }}

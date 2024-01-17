@@ -242,7 +242,7 @@ const ResumeTemplate16 = () => {
           </h3>
         </div>
       </div>
-      <div className="w-4/12 h-11 rounded-bl-full absolute right-0 bg-[#1F1E1E] "></div>
+      <div className="w-4/12 xs:w-2/12 h-11 rounded-bl-full absolute right-0 bg-[#1F1E1E] "></div>
       <div className="flex">
         <div className=" w-5/12 md:w-3/12 flex flex-col items-center bg-[#d9d9d9]  pl-9 pt-5 h-[1080px] xs:h-auto">
           <div className=" bg-[#1F1E1E] flex flex-col md:w-56 h-[100%] rounded-t-full items-center">
