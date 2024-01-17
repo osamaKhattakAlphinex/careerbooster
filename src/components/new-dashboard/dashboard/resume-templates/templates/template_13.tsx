@@ -220,7 +220,7 @@ const ResumeTemplate16 = () => {
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="flex absolute w-8/12 xs:w-[60%] sm:w-[60%] md:w-8/12 lg:w-8/12  top-0 left-1/3 xs:left-[42%] sm:left-[42%] md:left-1/3 lg:left-1/3  py-12 ">
-        <div className="flex flex-col   py-8">
+        <div className="flex flex-col py-8">
           <h2 className="text-4xl xs:text-lg sm:text-lg md:text-4xl lg:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
@@ -242,11 +242,11 @@ const ResumeTemplate16 = () => {
           </h3>
         </div>
       </div>
-      <div className="w-4/12 xs:w-2/12 h-11 rounded-bl-full absolute right-0 bg-[#1F1E1E] "></div>
+      <div className="w-4/12 h-11 rounded-bl-full absolute right-0 bg-[#1F1E1E] "></div>
       <div className="flex">
-        <div className=" w-5/12 md:w-3/12 flex flex-col items-center bg-[#d9d9d9]  pl-9 pt-5 h-[1080px] xs:h-auto">
+        <div className="w-5/12 md:w-3/12 flex flex-col items-center bg-[#d9d9d9] pl-9 pt-5 h-[1080px] xs:h-auto">
           <div className=" bg-[#1F1E1E] flex flex-col md:w-56 h-[100%] rounded-t-full items-center">
-            <div className=" w-48 h-48 xs:w-24 md:h-48 md:w-48 xs:h-24  m-3   text-gray-800 bg-[#d9d9d9]  text-center flex justify-center items-center  rounded-full ">
+            <div className=" w-48 h-48 xs:w-24 md:h-48 md:w-48 xs:h-24  m-3 text-gray-800 bg-[#d9d9d9]  text-center flex justify-center items-center  rounded-full ">
               <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
                 <EditableField
                   value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -489,7 +489,7 @@ const ResumeTemplate16 = () => {
                     )}
                     {primarySkillAddButtonVisible ? (
                       <div
-                        className="border-2 w-1/2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                        className="border-2 w-1/2 xs:w-full justify-center xs:mt-10 flex md:w-1/2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                         onClick={() => {
                           setNewPrimarySkill(true);
                           setPrimarySkillAddButtonVisible(false);
@@ -921,7 +921,7 @@ const ResumeTemplate16 = () => {
                         {workExperienceAddButtonVisible === i &&
                         newWorkExperience !== i ? (
                           <div
-                            className="border-2 w-2/12 xs:w-full mt-3 sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                            className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3 sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
                               setNewWorkExperience(i);
                             }}

@@ -271,10 +271,10 @@ const ResumeTemplate17 = () => {
         </div>
       </div>
       <div className="flex">
-        <div className=" w-[35%] md:w-1/3 flex flex-col  items-center   bg-[#323b4c]  px-9   pt-[2rem] h-[1130px] xs:h-auto ">
+        <div className=" w-[35%] md:w-1/3 flex flex-col  items-center   bg-[#323b4c] px-9 xs:px-2 md:px-9   pt-[2rem] h-[1130px] xs:h-auto ">
           <div className="border-[.5rem] border-[#ae9243]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
-            <div className=" w-44 h-44 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
-              <div className=" w-44 h-44 md:w-40 md:h-40 text-[#F1F1F1] flex justify-center items-center bg-[#ae9243]  rounded-full ">
+            <div className=" w-44 h-44 xs:w-20 xs:h-20 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
+              <div className=" w-40 h-40 xs:w-16 xs:h-16 md:w-40 md:h-40 text-[#F1F1F1] flex justify-center items-center bg-[#ae9243]  rounded-full ">
                 <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
                   <EditableField
                     value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -414,7 +414,7 @@ const ResumeTemplate17 = () => {
                         onDrop={(e) => handleDropPrimary(e, i)}
                         draggable
                       >
-                        <span className="w-1.5 h-1.5 bg-gray-300 rounded-full mr-3"></span>
+                        <span className="w-1.5 h-1.5 bg-gray-300 rounded-full xs:hidden flex md:flex mr-3"></span>
                         <div className="flex flex-row w-full items-center justify-between">
                           <EditableField
                             value={skill}
@@ -509,7 +509,7 @@ const ResumeTemplate17 = () => {
                   )}
                   {primarySkillAddButtonVisible ? (
                     <div
-                      className="border-2 w-1/2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                      className="border-2 w-1/2 xs:w-full justify-center xs:mt-10 flex md:w-1/2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                       onClick={() => {
                         setNewPrimarySkill(true);
                         setPrimarySkillAddButtonVisible(false);
@@ -527,7 +527,7 @@ const ResumeTemplate17 = () => {
             </>
           )}
         </div>
-        <div className="w-full flex flex-col px-4 md:px-8 pt-[11rem] xs:pt-[10rem] md:pt-[13rem] ">
+        <div className="w-full flex flex-col xs:mt-36 md:mt-1 px-4 md:px-8 pt-[11rem] xs:pt-[10rem] md:pt-[13rem] ">
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0 my-3 xs:my-0 md:my-3"></span>
           <h3 className="uppercase text-xl xs:text-lg  font-semibold border-[#444440] border-b-2  rounded-sm text-gray-900 w-full py-1">
@@ -952,7 +952,7 @@ const ResumeTemplate17 = () => {
                         {workExperienceAddButtonVisible === i &&
                         newWorkExperience !== i ? (
                           <div
-                            className="border-2 w-2/12 xs:w-full mt-3 md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                            className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3 sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
                               setNewWorkExperience(i);
                             }}
