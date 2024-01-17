@@ -65,9 +65,9 @@ interface UserDataSlice {
   defaultResumeFile: string;
   wizardCompleted: boolean;
   wizardReviewed: boolean;
-  userPackage: "";
-  userPackageData: {};
-  userPackageUsed: limitObject | {};
+  // userPackage: "";
+  // userPackageData: {};
+  // userPackageUsed: limitObject | {};
 
 
 }
@@ -98,9 +98,9 @@ const initialState: UserDataSlice = {
   defaultResumeFile: "",
   wizardCompleted: false,
   wizardReviewed: false,
-  userPackage: "",
-  userPackageData: {},
-  userPackageUsed: {},
+  // userPackage: "",
+  // userPackageData: {},
+  // userPackageUsed: {},
 
 
 };

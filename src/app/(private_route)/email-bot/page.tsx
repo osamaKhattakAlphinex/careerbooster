@@ -18,6 +18,8 @@ import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import EmailCardSingle from "@/components/new-dashboard/dashboard/email-generator/EmailCardSingle";
 
 import DownloadService from "@/helpers/downloadFile";
+import useGetCreditLimits from "@/hooks/useGetCreditLimits";
+import useGetUserData from "@/hooks/useGetUserData";
 
 const PersonalizedEmailBot = () => {
   const componentRef = useRef<any>(null);
@@ -44,6 +46,9 @@ const PersonalizedEmailBot = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const email = useSelector((state: any) => state.email);
+
+  const creditLimits = useSelector((state: any) => state.creditLimits);
+
   const { resumes } = userData;
   const copyEmail = async (text: string) => {
     try {
@@ -93,6 +98,9 @@ const PersonalizedEmailBot = () => {
         emailId: emailId,
         type: selectedOption,
         email: session?.user?.email,
+        userCredits: userData.userCredits,
+        creditsUsed: creditLimits.email_generation,
+
         jobDescription,
         trainBotData: {
           userEmail: userData.email,
@@ -328,8 +336,8 @@ const PersonalizedEmailBot = () => {
                 <label
                   htmlFor="default-radio-1"
                   className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[290px] lg:w-[400px] ${selectedOption === "profile"
-                      ? "border-[1px] border-[#615DFF]"
-                      : ""
+                    ? "border-[1px] border-[#615DFF]"
+                    : ""
                     }`}
                 >
                   <input
@@ -351,8 +359,8 @@ const PersonalizedEmailBot = () => {
                 <label
                   htmlFor="default-radio-2"
                   className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[220px] lg:w-[290px] ${selectedOption === "file"
-                      ? "border-[1px] border-[#615DFF]"
-                      : ""
+                    ? "border-[1px] border-[#615DFF]"
+                    : ""
                     } `}
                 >
                   <input
@@ -413,11 +421,11 @@ const PersonalizedEmailBot = () => {
                   }
                   onClick={handleGenerate}
                   className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
-                      !session?.user?.email ||
-                      !aiInputUserData ||
-                      selectedOption === "" ||
-                      (selectedOption === "file" && selectedFile === "") ||
-                      jobDescription === "") &&
+                    !session?.user?.email ||
+                    !aiInputUserData ||
+                    selectedOption === "" ||
+                    (selectedOption === "file" && selectedFile === "") ||
+                    jobDescription === "") &&
                     "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
                     }`}
                 >
@@ -513,11 +521,11 @@ const PersonalizedEmailBot = () => {
                       }
                       onClick={handleGenerate}
                       className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border border-[#b324d7]  rounded-full ${(msgLoading ||
-                          !session?.user?.email ||
-                          !aiInputUserData ||
-                          selectedOption === "" ||
-                          (selectedOption === "file" && selectedFile === "") ||
-                          jobDescription === "") &&
+                        !session?.user?.email ||
+                        !aiInputUserData ||
+                        selectedOption === "" ||
+                        (selectedOption === "file" && selectedFile === "") ||
+                        jobDescription === "") &&
                         "opacity-50 cursor-not-allowed" // Add this class when the button is disabled
                         }`}
                     >
@@ -587,16 +595,16 @@ const PersonalizedEmailBot = () => {
                         }
                         onClick={() => copyEmail(streamedData)}
                         className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border border-[#b324d7]rounded-full ${msgLoading ||
-                            !session?.user?.email ||
-                            !aiInputUserData ||
-                            selectedOption === "" ||
-                            (selectedOption === "file" && selectedFile === "") ||
-                            (selectedOption === "aiResume" &&
-                              setSelectedResumeId === "") ||
-                            !show ||
-                            isEmailCopied
-                            ? "opacity-50 cursor-not-allowed"
-                            : ""
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          (selectedOption === "aiResume" &&
+                            setSelectedResumeId === "") ||
+                          !show ||
+                          isEmailCopied
+                          ? "opacity-50 cursor-not-allowed"
+                          : ""
                           }`}
                       >
                         <svg
@@ -632,8 +640,8 @@ const PersonalizedEmailBot = () => {
                           }
                           onClick={handleClick}
                           className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border border-[#b324d7] rounded-full ${!show || msgLoading || !session?.user?.email
-                              ? "opacity-50 cursor-not-allowed"
-                              : ""
+                            ? "opacity-50 cursor-not-allowed"
+                            : ""
                             } `}
                         >
                           <div className="flex flex-row gap-2">

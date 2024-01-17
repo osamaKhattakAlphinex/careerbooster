@@ -64,6 +64,7 @@ const useSingleJDGenerate = (setStreamedJDData: any) => {
                 body: JSON.stringify({
                     quantifyingExperience: quantifyingExperience,
                     experience: experience,
+                    userCredits: userData.userCredits,
                     creditsUsed: creditLimits.resume_individualWorkExperience,
                     trainBotData: {
                         userEmail: userData.email,

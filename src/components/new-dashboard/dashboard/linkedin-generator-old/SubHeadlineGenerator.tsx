@@ -44,6 +44,8 @@ const SubHeadlineGenerator = () => {
   const userData = useSelector((state: any) => state.userData);
   const linkedinHeadline = useSelector((state: any) => state.linkedinHeadline);
 
+  const creditLimits = useSelector((state: any) => state.creditLimits);
+
   const { getUserDataIfNotExists: getUserData } = useGetUserData() //using hook function with different name/alias
 
   useEffect(() => {
@@ -78,6 +80,8 @@ const SubHeadlineGenerator = () => {
       const obj: any = {
         personName: userData.firstName + " " + userData.lastName,
         email: session?.user?.email,
+        userCredits: userData.userCredits,
+        creditsUsed: creditLimits.linkedin_headline_generation,
         trainBotData: {
           userEmail: userData.email,
           fileAddress: userData.uploadedResume.fileName,
@@ -129,6 +133,8 @@ const SubHeadlineGenerator = () => {
                   },
                   linkedInHeadlines:
                     HeadlineResponse.data.result.linkedInHeadlines,
+                  userCredits: userData.userCredits - creditLimits.linkedin_headline_generation
+
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
                 // dispatch()
@@ -274,15 +280,14 @@ const SubHeadlineGenerator = () => {
           <div
             className="font-sans whitespace-pre-wrap dark:text-gray-100 text-gray-950 break-words"
             ref={componentRef}
-            // style={{ textW: "auto" }}
+          // style={{ textW: "auto" }}
           >
             {streamedData}
             <button
               disabled={msgLoading}
               onClick={() => copyHeadline(streamedData)}
-              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${
-                msgLoading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -303,8 +308,8 @@ const SubHeadlineGenerator = () => {
                 {msgLoading
                   ? "Please wait..."
                   : isHeadlineCopied
-                  ? "Copied"
-                  : "Copy to clipboard"}
+                    ? "Copied"
+                    : "Copy to clipboard"}
               </span>
             </button>
           </div>

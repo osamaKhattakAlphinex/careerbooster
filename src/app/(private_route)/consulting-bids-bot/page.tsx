@@ -44,6 +44,8 @@ const ConsultingBidsGenerator = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const consultingBid = useSelector((state: any) => state.consultingBid);
+  const creditLimits = useSelector((state: any) => state.creditLimits);
+
   const { resumes } = userData;
   const copyBid = async (text: string) => {
     try {
@@ -92,6 +94,8 @@ const ConsultingBidsGenerator = () => {
         consultingBidId: consultingBidId,
         type: selectedOption,
         email: session?.user?.email,
+        userCredits: userData.userCredits,
+        creditsUsed: creditLimits.consulting_bids_generation,
         jobDescription,
         trainBotData: {
           userEmail: userData.email,
@@ -337,8 +341,8 @@ const ConsultingBidsGenerator = () => {
                 <label
                   htmlFor="default-radio-1"
                   className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[290px] lg:w-[400px] ${selectedOption === "profile"
-                      ? "border-[1px] border-[#615DFF]"
-                      : ""
+                    ? "border-[1px] border-[#615DFF]"
+                    : ""
                     }`}
                 >
                   <input
@@ -363,8 +367,8 @@ const ConsultingBidsGenerator = () => {
                 <label
                   htmlFor="default-radio-2"
                   className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950  w-[220px] lg:w-[290px] ${selectedOption === "file"
-                      ? "border-[1px] border-[#615DFF]"
-                      : ""
+                    ? "border-[1px] border-[#615DFF]"
+                    : ""
                     } `}
                 >
                   <input
@@ -428,11 +432,11 @@ const ConsultingBidsGenerator = () => {
                   }
                   onClick={handleGenerate}
                   className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent s flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
-                      !session?.user?.email ||
-                      !aiInputUserData ||
-                      selectedOption === "" ||
-                      (selectedOption === "file" && selectedFile === "") ||
-                      jobDescription === "") &&
+                    !session?.user?.email ||
+                    !aiInputUserData ||
+                    selectedOption === "" ||
+                    (selectedOption === "file" && selectedFile === "") ||
+                    jobDescription === "") &&
                     "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
                     }`}
                 >
@@ -535,11 +539,11 @@ const ConsultingBidsGenerator = () => {
                       }
                       onClick={handleGenerate}
                       className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px]   rounded-full border border-[#b324d7] ${(msgLoading ||
-                          !session?.user?.email ||
-                          !aiInputUserData ||
-                          selectedOption === "" ||
-                          (selectedOption === "file" && selectedFile === "") ||
-                          jobDescription === "") &&
+                        !session?.user?.email ||
+                        !aiInputUserData ||
+                        selectedOption === "" ||
+                        (selectedOption === "file" && selectedFile === "") ||
+                        jobDescription === "") &&
                         "opacity-50 cursor-not-allowed" // Add this class when the button is disabled
                         }`}
                     >
@@ -609,16 +613,16 @@ const ConsultingBidsGenerator = () => {
                         }
                         onClick={() => copyBid(streamedData)}
                         className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px]  border rounded-full dark:border-[#312e37]  border-[#b324d7] ${msgLoading ||
-                            !session?.user?.email ||
-                            !aiInputUserData ||
-                            selectedOption === "" ||
-                            (selectedOption === "file" && selectedFile === "") ||
-                            (selectedOption === "aiResume" &&
-                              setSelectedResumeId === "") ||
-                            !show ||
-                            isBidCopied
-                            ? "opacity-50 cursor-not-allowed"
-                            : ""
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          (selectedOption === "aiResume" &&
+                            setSelectedResumeId === "") ||
+                          !show ||
+                          isBidCopied
+                          ? "opacity-50 cursor-not-allowed"
+                          : ""
                           }`}
                       >
                         <svg
@@ -654,8 +658,8 @@ const ConsultingBidsGenerator = () => {
                           }
                           onClick={handleClick}
                           className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px]  rounded-full edit-btn${!show || msgLoading || !session?.user?.email
-                              ? "opacity-50 cursor-not-allowed"
-                              : ""
+                            ? "opacity-50 cursor-not-allowed"
+                            : ""
                             }`}
                         >
                           <div className="flex flex-row gap-2">

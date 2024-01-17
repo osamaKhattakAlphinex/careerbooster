@@ -1,6 +1,5 @@
 import Prompt from "@/db/schemas/Prompt";
 
-import TrainBot from "@/db/schemas/TrainBot";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
@@ -15,6 +14,7 @@ import {
   makeTrainedBotEntry,
 } from "@/helpers/makeTrainBotEntry";
 import { postConsultingBid } from "../route";
+import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -37,9 +37,20 @@ export async function POST(req: any) {
     const userData = reqBody?.userData;
     const email = reqBody?.email;
     const file = reqBody?.file;
-
+    const creditsUsed = reqBody?.creditsUsed;
+    const userCredits = reqBody?.userCredits;
     const jobDescription = reqBody?.jobDescription;
     const trainBotData = reqBody?.trainBotData;
+
+    if (userCredits) {
+      if (userCredits < creditsUsed) {
+        return NextResponse.json(
+          { result: "Insufficient Credits", success: false },
+          { status: 429 }
+        )
+      }
+    }
+
     let fileContent;
     await startDB();
 
@@ -71,11 +82,11 @@ export async function POST(req: any) {
     }
     // this will run for both TYPES aiResume and profile
     const inputPrompt = `Following are the content of the resume (in JSON format): 
-          JSON user/resume data: ${type === "file" ? fileContent : userData}
-
-          this is the prompt:
-          ${prompt}
-          `;
+            JSON user/resume data: ${type === "file" ? fileContent : userData}
+  
+            this is the prompt:
+            ${prompt}
+            `;
 
     const response: any = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -84,6 +95,9 @@ export async function POST(req: any) {
     });
 
     const stream = OpenAIStream(response, {
+      onStart: async () => {
+        await updateUserTotalCredits(email, creditsUsed)
+      },
       onFinal: async (completions) => {
         try {
           if (trainBotData) {
@@ -121,7 +135,7 @@ export async function POST(req: any) {
     });
     // Respond with the stream
     return new StreamingTextResponse(stream);
-    //   res.end();
+
   } catch (error) {
     return NextResponse.json(
       { result: "something went wrong", success: false },

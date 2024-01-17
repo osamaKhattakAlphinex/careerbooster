@@ -16,6 +16,7 @@ import {
   makeTrainedBotEntry,
 } from "@/helpers/makeTrainBotEntry";
 import { postEmail } from "../route";
+import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 
 // PROMPT
 // Here is the Job description:
@@ -44,11 +45,20 @@ export async function POST(req: any) {
     const type = reqBody?.type;
     const userData = reqBody?.userData;
     const email = reqBody?.email;
-    const emailId = reqBody?.emailId;
+    const creditsUsed = reqBody?.creditsUsed;
+    const userCredits = reqBody?.userCredits;
     const file = reqBody?.file;
     const jobDescription = reqBody?.jobDescription;
     const trainBotData = reqBody?.trainBotData;
 
+    if (userCredits) {
+      if (userCredits < creditsUsed) {
+        return NextResponse.json(
+          { result: "Insufficient Credits", success: false },
+          { status: 429 }
+        )
+      }
+    }
     const dataset = "linkedin.genearteConsultingBid";
     const model = await getTrainedModel(dataset);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
@@ -78,11 +88,11 @@ export async function POST(req: any) {
     }
     // this will run for both TYPES aiResume and profile
     const inputPrompt = `Following are the content of the resume (in JSON format): 
-          JSON user/resume data: ${type === "file" ? fileContent : userData}
-
-          this is the prompt:
-          ${prompt}
-          `;
+            JSON user/resume data: ${type === "file" ? fileContent : userData}
+  
+            this is the prompt:
+            ${prompt}
+            `;
 
     const response: any = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -91,6 +101,9 @@ export async function POST(req: any) {
     });
 
     const stream = OpenAIStream(response, {
+      onStart: async () => {
+        await updateUserTotalCredits(email, creditsUsed)
+      },
       onFinal: async (completions) => {
 
 
@@ -130,7 +143,8 @@ export async function POST(req: any) {
     });
     // Respond with the stream
     return new StreamingTextResponse(stream);
-    //   res.end();
+
+
   } catch (error) {
     return NextResponse.json(
       { result: "something went wrong", success: false },

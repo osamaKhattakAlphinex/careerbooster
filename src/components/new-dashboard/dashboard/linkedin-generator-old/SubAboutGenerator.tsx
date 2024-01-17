@@ -44,6 +44,7 @@ const SubAboutGenerator = () => {
   const userData = useSelector((state: any) => state.userData);
   const linkedinAbout = useSelector((state: any) => state.linkedinAbout);
   const { getUserDataIfNotExists: getUserData } = useGetUserData() //using hook function with different name/alias
+  const creditLimits = useSelector((state: any) => state.creditLimits);
 
   useEffect(() => {
     if (
@@ -90,6 +91,8 @@ const SubAboutGenerator = () => {
         personName: userData.firstName + " " + userData.lastName,
         option: option,
         email: session?.user?.email,
+        userCredits: userData.userCredits,
+        creditsUsed: creditLimits.linkedin_about_generation,
         userData: aiInputUserData,
         trainBotData: {
           userEmail: userData.email,
@@ -140,6 +143,7 @@ const SubAboutGenerator = () => {
                     about_generation: user.userPackageUsed.about_generation,
                   },
                   linkedInAbouts: AboutResponse.data.result.linkedInAbouts,
+                  userCredits: user.userCredits - user.creditsUsed
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
               }

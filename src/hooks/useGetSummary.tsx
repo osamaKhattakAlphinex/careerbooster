@@ -47,6 +47,7 @@ const useGetSummary = (setStreamedSummaryData: any) => {
         type: "summary",
         personName: userData?.firstName + " " + userData?.lastName,
         jobPosition: resumeData.state.jobPosition,
+        userCredits: userData.userCredits,
         creditsUsed: creditLimits.resume_summary_generation,
         userData: aiInputUserData,
         trainBotData: {

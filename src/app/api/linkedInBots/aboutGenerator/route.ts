@@ -13,6 +13,7 @@ import {
   makeTrainedBotEntry,
 } from "@/helpers/makeTrainBotEntry";
 import { postAbouts } from "./linkedInAbout/route";
+import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -35,13 +36,25 @@ export async function POST(req: any) {
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
     const reqBody = await req.json();
-
+    const creditsUsed = reqBody?.creditsUsed;
+    const userCredits = reqBody?.userCredits;
     const userData = reqBody?.userData;
     const personName = reqBody?.personName
     const aboutId = reqBody?.aboutId;
     const email = reqBody?.email;
     const option = reqBody?.option;
     const trainBotData = reqBody?.trainBotData;
+
+
+    if (userCredits) {
+      if (userCredits < creditsUsed) {
+        return NextResponse.json(
+          { result: "Insufficient Credits", success: false },
+          { status: 429 }
+        )
+      }
+    }
+
     await startDB();
     // fetch prompt from db
 
@@ -53,10 +66,10 @@ export async function POST(req: any) {
     let prompt = promptRec.value;
     prompt = prompt.replaceAll("{{PersonName}}", personName);
     const inputPrompt = `Read ${personName}'s resume : ${JSON.stringify(userData)}
-
-          and then:
-          ${prompt}
-          `;
+  
+            and then:
+            ${prompt}
+            `;
 
     const response: any = await openai.chat.completions.create({
       model: model ? model : "gpt-3.5-turbo",
@@ -66,6 +79,9 @@ export async function POST(req: any) {
 
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
+      onStart: async () => {
+        await updateUserTotalCredits(email, creditsUsed)
+      },
       onFinal: async (completions) => {
         try {
           if (trainBotData) {
@@ -98,7 +114,7 @@ export async function POST(req: any) {
     });
     // Respond with the stream
     return new StreamingTextResponse(stream);
-    // res.end();
+
   } catch (error) {
     return NextResponse.json(
       { result: "something went wrong", success: false },
