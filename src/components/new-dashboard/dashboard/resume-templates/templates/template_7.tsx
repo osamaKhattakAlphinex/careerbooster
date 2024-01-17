@@ -153,7 +153,7 @@ const ResumeTemplate7 = () => {
     <div className="w-full first-page  text-gray-900">
       <div className="flex">
         <div className="w-9/12 xs:w-full flex flex-col">
-          <div className="flex flex-col w-full h-44  bg-gray-200 py-9 px-12">
+          <div className="flex flex-col w-full h-44  bg-gray-200 py-9 px-12 xs:px-3 md:px-12">
             <h2 className="text-4xl xs:text-2xl md:text-5xl hover:shadow-md hover:bg-gray-100">
               <EditableField
                 value={resume?.name ? resume?.name : "FULL NAME"}
@@ -175,7 +175,7 @@ const ResumeTemplate7 = () => {
             </h3>
           </div>
           {/* Executive Summary */}
-          <div className="px-10 py-6">
+          <div className="px-10 xs:px-3 md:px-10 py-6">
             <h3 className="uppercase text-lg font-semibold">
               EXECUTIVE SUMMARY
             </h3>
@@ -202,7 +202,7 @@ const ResumeTemplate7 = () => {
           </div>
 
           {/* Work Experience */}
-          <div className="px-10 py-2 xs:py-6">
+          <div className="px-10 xs:px-3 md:px-10 py-2 xs:py-6">
             {" "}
             <h3 className="uppercase text-lg font-semibold mb-4">
               WORK EXPERIENCE
@@ -587,7 +587,7 @@ const ResumeTemplate7 = () => {
                           {workExperienceAddButtonVisible === i &&
                           newWorkExperience !== i ? (
                             <div
-                              className="border-2 w-2/12 xs:w-full mt-3 md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                              className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3 md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                               onClick={() => {
                                 setNewWorkExperience(i);
                               }}
@@ -992,7 +992,7 @@ const ResumeTemplate7 = () => {
                 )}
                 {primarySkillAddButtonVisible ? (
                   <div
-                    className="border-2 w-1/2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                    className="border-2 w-1/2 xs:w-full md:w-1/2 border-gray-400 mt-3 xs:mt-11 md:mt-3 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                     onClick={() => {
                       setNewPrimarySkill(true);
                       setPrimarySkillAddButtonVisible(false);

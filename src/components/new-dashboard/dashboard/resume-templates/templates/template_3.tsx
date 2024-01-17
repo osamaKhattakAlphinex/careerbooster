@@ -184,17 +184,14 @@ const ResumeTemplate3 = () => {
       <div className=" flex  ">
         <div className="w-full flex flex-wrap flex-col px-4 md:px-8  m-2">
           {/* Executive Summary */}
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-          <h3 className="uppercase text-sm md:text-lg font-semibold">
+          <span className="border-stylee w-full h-0 border !border-gray-500 mt-3"></span>
+          <h3 className="uppercase text-sm md:text-lg font-bold py-3">
             EXECUTIVE SUMMARY
           </h3>
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border !border-gray-500  "></span>
 
-          <Regenerate
-            handler={getSummary}
-            custom_style={"absolute bottom-3 right-2 "}
-          >
-            <div className="text-sm xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
+          <Regenerate>
+            <div className="text-sm xs:text-sm md:text-lg lg:text-lg my-2 hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
               <EditableField
                 type="textarea"
                 value={
@@ -211,11 +208,11 @@ const ResumeTemplate3 = () => {
           </Regenerate>
 
           {/* Work Experience */}
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-          <h3 className="uppercase text-sm md:text-lg font-semibold">
+          <span className="border-stylee w-full h-0 border !border-gray-500 mt-3"></span>
+          <h3 className="uppercase text-sm md:text-lg font-bold py-3">
             WORK EXPERIENCE
           </h3>
-          <span className="border-stylee w-full h-0 border !border-gray-500 "></span>
+          <span className="border-stylee w-full h-0 border !border-gray-500"></span>
 
           {resume?.workExperienceArray &&
           resume?.workExperienceArray.length > 0 ? (
@@ -224,7 +221,7 @@ const ResumeTemplate3 = () => {
                 return (
                   <div
                     key={i}
-                    className="hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2 w-full flex flex-col flex-wrap"
+                    className="hover:border-dashed hover:border-gray-500 my-2 hover:cursor-move hover:border-2 w-full flex flex-col flex-wrap"
                     onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                     onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                     onDragStart={(e) =>
@@ -234,13 +231,13 @@ const ResumeTemplate3 = () => {
                     onDrop={(e) => handleDropExperience(e, i)}
                     draggable
                   >
-                    <h2
-                      className="hover:shadow-md hover:cursor-text hover:bg-gray-100"
-                      style={{
-                        fontSize: "1.3rem",
-                        fontWeight: "bold",
-                        lineHeight: "2rem",
-                      }}
+                    <h4
+                      className="hover:shadow-md hover:cursor-text text-xl font-semibold hover:bg-gray-100"
+                      // style={{
+                      //   fontSize: "1.3rem",
+                      //   fontWeight: "bold",
+                      //   lineHeight: "2rem",
+                      // }}
                     >
                       <EditableField
                         value={rec?.title}
@@ -268,13 +265,13 @@ const ResumeTemplate3 = () => {
                           });
                         }}
                       />
-                    </h2>
+                    </h4>
                     <h2
-                      className="hover:cursor-default"
-                      style={{
-                        fontSize: "1.1rem",
-                        lineHeight: "1.5rem",
-                      }}
+                      className="hover:cursor-default text-lg"
+                      // style={{
+                      //   fontSize: "1.1rem",
+                      //   lineHeight: "1.5rem",
+                      // }}
                     >
                       {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                       {rec?.isContinue
@@ -602,7 +599,7 @@ const ResumeTemplate3 = () => {
             ></div>
           )}
         </div>
-        <div className=" w-4/12 xs:3/12 md:w-4/12 flex flex-col  pl-2 m-2 h-fit border-red-  pr-2  ">
+        <div className=" w-4/12 xs:4/12 md:w-4/12 flex flex-col  pl-2 xs:pl-0 md:pl-2 lg:pl-2 m-2 h-fit border-red-  pr-2  ">
           {/* contacts */}
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
           <h3 className="uppercase text-sm md:text-lg font-semibold flex flex-row gap-2 items-center">

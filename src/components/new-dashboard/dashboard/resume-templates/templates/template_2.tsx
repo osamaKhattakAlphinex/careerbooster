@@ -307,7 +307,7 @@ const ResumeTemplate2 = () => {
         !regenerating ? (
           <>
             <ul
-              className="flex flex-row pb-12 flex-wrap gap-1 text-sm xs:text-sm md:text-lg lg:text-lg"
+              className="flex flex-row flex-wrap gap-1 text-sm xs:text-sm md:text-lg lg:text-lg"
               onMouseEnter={() =>
                 !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
               }
@@ -442,7 +442,7 @@ const ResumeTemplate2 = () => {
       </div>
 
       {/* Work Experience */}
-      <div className="w-full flex flex-col">
+      <div className="w-full flex flex-col space-y-3">
         <h2 className="uppercase text-sm xs:text-sm md:text-lg lg:text-lg bp-2 font-bold">
           WORK EXPERIENCE
         </h2>
