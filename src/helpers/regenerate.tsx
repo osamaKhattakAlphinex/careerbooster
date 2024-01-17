@@ -6,19 +6,20 @@ type RegenerateType = {
   handler: (args: any) => void;
 };
 
-const Regenerate = ({ children, handler, custom_style }: any) => {
+const Regenerate = ({
+  children,
+  handler,
+  custom_style_li,
+  custom_style,
+}: any) => {
   return (
-    <div className="relative group">
+    <div className={`relative group ${custom_style_li}`}>
       {children}
-      <div
-        className={`group-hover:grid justify-end ${custom_style} hidden w-full`}
-      >
+      <div className={` group-hover:grid ${custom_style} hidden `}>
         <button
-          className="flex text-white mx-1 px-4 gap-2 w-fit justify-center items-center h-10  bg-rose-700 rounded-full"
+          className="flex text-white  gap-2 justify-center items-center p-3 bg-rose-700 rounded-full"
           onClick={() => handler()}
         >
-          <span className="text-sm">Regenerate</span>
-
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

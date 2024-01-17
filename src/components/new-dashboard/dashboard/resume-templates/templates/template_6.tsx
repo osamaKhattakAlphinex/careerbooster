@@ -25,6 +25,7 @@ import EditableField from "@/components/new-dashboard/common/EditableField";
 import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
+import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 const ResumeTemplate6 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -40,6 +41,9 @@ const ResumeTemplate6 = () => {
   const [educationAddButtonVisible, setEducationAddButtonVisible] =
     useState(false);
   const [primarySkill, setPrimarySkill] = useState<string>("");
+
+  const [regenerating, setRegenerating] = useState(false);
+  const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
 
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
@@ -239,7 +243,9 @@ const ResumeTemplate6 = () => {
 
             <Regenerate
               handler={getSummary}
-              custom_style={"absolute bottom-3 right-2 "}
+              custom_style={
+                "absolute  bottom-3 xs:bottom-0 md:bottom-3 lg:bottom-3 right-2 mt-2"
+              }
             >
               <div className="text-sm md:text-lg hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
                 <EditableField
@@ -266,131 +272,147 @@ const ResumeTemplate6 = () => {
                   Skills
                 </h3>
                 <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-                <ul
-                  className="pl-0 flex flex-row  flex-wrap gap-1 h-[20%]  mb-4 text-sm md:text-lg"
-                  onMouseEnter={() =>
-                    !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
-                  }
-                  onMouseLeave={() =>
-                    !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
-                  }
-                >
-                  {/* <li className="font-semibold  uppercase">primary</li> */}
-                  {resume?.primarySkills.map((skill: string, i: number) => (
-                    <li
-                      className="hover:shadow-md  w-[45%] xs:w-full sm:w-[45%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex  items-center"
-                      key={i}
-                      onDragStart={(e) =>
-                        e.dataTransfer.setData("text/plain", i.toString())
+                {resume?.primarySkills &&
+                resume?.primarySkills.length > 0 &&
+                !regenerating ? (
+                  <Regenerate
+                    handler={getPrimarySkills}
+                    custom_style={"absolute right-3 bottom-1"}
+                  >
+                    <ul
+                      className="pl-0 flex flex-row  flex-wrap gap-1 h-[20%]  mb-4 text-sm md:text-lg"
+                      onMouseEnter={() =>
+                        !newPrimarySkill &&
+                        setPrimarySkillAddButtonVisible(true)
                       }
-                      onDragOver={(e) => e.preventDefault()}
-                      onDrop={(e) => handleDropPrimary(e, i)}
-                      draggable
+                      onMouseLeave={() =>
+                        !newPrimarySkill &&
+                        setPrimarySkillAddButtonVisible(false)
+                      }
                     >
-                      <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
-                      <div className="flex justify-between items-center w-full">
-                        <EditableField
-                          value={skill}
-                          onSave={(value: string) => {
-                            let updatedSkills = resume.primarySkills.map(
-                              (skill: string, index: number) => {
-                                if (index === i) {
-                                  return value;
+                      {/* <li className="font-semibold  uppercase">primary</li> */}
+
+                      {resume?.primarySkills.map((skill: string, i: number) => (
+                        <li
+                          className="hover:shadow-md  w-[45%] xs:w-full sm:w-[45%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex  items-center"
+                          key={i}
+                          onDragStart={(e) =>
+                            e.dataTransfer.setData("text/plain", i.toString())
+                          }
+                          onDragOver={(e) => e.preventDefault()}
+                          onDrop={(e) => handleDropPrimary(e, i)}
+                          draggable
+                        >
+                          <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                          <div className="flex justify-between items-center w-full">
+                            <EditableField
+                              value={skill}
+                              onSave={(value: string) => {
+                                let updatedSkills = resume.primarySkills.map(
+                                  (skill: string, index: number) => {
+                                    if (index === i) {
+                                      return value;
+                                    }
+                                    return skill;
+                                  }
+                                );
+                                dispatch(
+                                  setPrimarySkills({
+                                    ...resume,
+                                    primarySkills: updatedSkills,
+                                  })
+                                );
+                                saveResumeToDB({
+                                  ...resume,
+                                  primarySkills: updatedSkills,
+                                });
+                              }}
+                            />
+                            <div
+                              onClick={() => {
+                                const removeSkill = resume.primarySkills.filter(
+                                  (item: any) => item !== skill
+                                );
+                                dispatch(
+                                  setPrimarySkills({
+                                    ...resume,
+                                    primarySkills: removeSkill,
+                                  })
+                                );
+                                saveResumeToDB({
+                                  ...resume,
+                                  primarySkills: removeSkill,
+                                });
+                              }}
+                              className="w-4 h-4  cursor-pointer child"
+                            >
+                              {crossIcon1}
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                      {newPrimarySkill ? (
+                        <>
+                          <div className="w-full rounded-2xl border border-black flex h-9.5">
+                            <input
+                              type="text"
+                              value={primarySkill}
+                              placeholder="Please add Skill"
+                              className="bg-white outline-none rounded-2xl px-2 w-full"
+                              autoFocus
+                              onChange={(e) => setPrimarySkill(e.target.value)}
+                              onKeyPress={(e) => {
+                                if (e.key === "Enter") {
+                                  if (primarySkill.trim() !== "") {
+                                    addPrimarySkill();
+                                    setPrimarySkill("");
+                                  }
                                 }
-                                return skill;
-                              }
-                            );
-                            dispatch(
-                              setPrimarySkills({
-                                ...resume,
-                                primarySkills: updatedSkills,
-                              })
-                            );
-                            saveResumeToDB({
-                              ...resume,
-                              primarySkills: updatedSkills,
-                            });
-                          }}
-                        />
+                              }}
+                            />
+                            <button
+                              className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
+                              onClick={() => {
+                                if (primarySkill.trim() !== "") {
+                                  addPrimarySkill();
+                                  setPrimarySkill(""); // Empty the input field
+                                }
+                              }}
+                            >
+                              save
+                            </button>
+                          </div>
+                          <button
+                            onClick={() => {
+                              setNewPrimarySkill(false);
+                              setPrimarySkillAddButtonVisible(false);
+                            }}
+                            className="bg-red-500 py-1 px-2 text-white rounded-full"
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      ) : (
+                        " "
+                      )}
+                      {primarySkillAddButtonVisible ? (
                         <div
+                          className="border-2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {
-                            const removeSkill = resume.primarySkills.filter(
-                              (item: any) => item !== skill
-                            );
-                            dispatch(
-                              setPrimarySkills({
-                                ...resume,
-                                primarySkills: removeSkill,
-                              })
-                            );
-                            saveResumeToDB({
-                              ...resume,
-                              primarySkills: removeSkill,
-                            });
+                            setNewPrimarySkill(true);
+                            setPrimarySkillAddButtonVisible(false);
                           }}
-                          className="w-4 h-4  cursor-pointer child"
                         >
-                          {crossIcon1}
+                          + Add
                         </div>
-                      </div>
-                    </li>
-                  ))}
-                  {newPrimarySkill ? (
-                    <>
-                      <div className="w-full rounded-2xl border border-black flex h-9.5">
-                        <input
-                          type="text"
-                          value={primarySkill}
-                          placeholder="Please add Skill"
-                          className="bg-white outline-none rounded-2xl px-2 w-full"
-                          autoFocus
-                          onChange={(e) => setPrimarySkill(e.target.value)}
-                          onKeyPress={(e) => {
-                            if (e.key === "Enter") {
-                              if (primarySkill.trim() !== "") {
-                                addPrimarySkill();
-                                setPrimarySkill("");
-                              }
-                            }
-                          }}
-                        />
-                        <button
-                          className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
-                          onClick={() => {
-                            if (primarySkill.trim() !== "") {
-                              addPrimarySkill();
-                              setPrimarySkill(""); // Empty the input field
-                            }
-                          }}
-                        >
-                          save
-                        </button>
-                      </div>
-                      <button
-                        onClick={() => {
-                          setNewPrimarySkill(false);
-                          setPrimarySkillAddButtonVisible(false);
-                        }}
-                        className="bg-red-500 py-1 px-2 text-white rounded-full"
-                      >
-                        Cancel
-                      </button>
-                    </>
-                  ) : (
-                    " "
-                  )}
-                  {primarySkillAddButtonVisible ? (
-                    <div
-                      className="border-2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                      onClick={() => {
-                        setNewPrimarySkill(true);
-                        setPrimarySkillAddButtonVisible(false);
-                      }}
-                    >
-                      + Add
-                    </div>
-                  ) : null}
-                </ul>
+                      ) : null}
+                    </ul>
+                  </Regenerate>
+                ) : (
+                  <span>
+                    Wait! We are regenerating your skills .... <br />
+                  </span>
+                )}
               </>
             )}
             {/* Work Experience */}
