@@ -151,7 +151,7 @@ const ResumeTemplate4 = () => {
   return (
     <div className="first-page ">
       <div className=" flex">
-        <div className=" w-4/12 xs:w-1/3 md:w-4/12 flex flex-col pl-3 md:pl-8 bg-[#323B4C] text-gray-100  pr-6  py-8 h-[1080px] xs:h-auto">
+        <div className=" w-4/12 xs:w-1/3 md:w-4/12 flex flex-col pl-3 md:pl-4 bg-[#323B4C] text-gray-100  pr-6 md:pr-4  py-8 h-[1080px] xs:h-auto">
           <div className=" w-32 h-32  xs:w-[72px] xs:h-[72px] sm:w-24 sm:h-24 md:w-32 md:h-32 text-white bg-gray-800 text-center flex justify-center items-center  rounded-full mx-4 xs:mx-0 md:mx-4 mt-4 mb-[45px] md:mt-0 md:mr-8">
             <span className="text-4xl xs:text-2xl md:text-4xl hover:shadow-md hover:bg-gray-500">
               <EditableField
@@ -166,16 +166,12 @@ const ResumeTemplate4 = () => {
           </div>
           {/* contacts */}
 
-          <h3 className="uppercase text-lg border-white pb-5  -mr-6 md:-mr-6 border-b-2  xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold xs:font-medium flex flex-row gap-2 items-center">
-            {contactIcon}
+          <h3 className="uppercase text-lg border-white pb-2  -mr-6 md:-mr-6 border-b-2  xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold xs:font-medium flex flex-row gap-2 items-center md:mt-4">
             Contact
           </h3>
-          <span className=" w-[110%] h-0 my-3"></span>
-          <ul className=" flex flex-col gap-2 mb-4 text-sm md:text-lg break-all pl-0">
-            <h2 className="text-[16px] font-bold xs:text-[14px] md:text-[16px] xs:font-normal">
-              Phone
-            </h2>
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs xs:text-[10px] md:text-xs flex flex-row gap-1  items-center">
+          <span className=" w-[110%] h-0 mb-3"></span>
+          <ul className=" flex flex-col gap-2 mb-4 text-4 break-all pl-0">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500  flex flex-row gap-2  items-center">
               {phoneIcon}
               <EditableField
                 value={
@@ -197,10 +193,8 @@ const ResumeTemplate4 = () => {
                 }}
               />
             </li>
-            <h2 className="text-[16px] font-bold xs:text-[14px] md:text-[16px] xs:font-normal">
-              Email
-            </h2>
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 flex flex-row gap-1  items-center text-xs xs:text-[10px] md:text-xs">
+
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 flex flex-row gap-2  items-center ">
               {emailIcon}
               <EditableField
                 value={
@@ -222,10 +216,8 @@ const ResumeTemplate4 = () => {
                 }}
               />
             </li>
-            <h2 className="text-[16px] font-bold xs:text-[14px] md:text-[16px] xs:font-normal">
-              Linkedin
-            </h2>
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row gap-1  items-center text-xs xs:text-[10px] md:text-xs">
+
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row gap-2  items-center ">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -296,18 +288,17 @@ const ResumeTemplate4 = () => {
             <>
               {resume?.primarySkills && resume?.primarySkills.length > 0 && (
                 <>
-                  <h3 className="uppercase text-lg xs:text-sm sm:text-sm -mr-6 md:-mr-6  md:text-md lg:text-lg border-b-2 pb-5 border-white font-semibold flex flex-row gap-2 items-center mt-5">
-                    {sparkleIcon}
+                  <h3 className="uppercase text-lg xs:text-sm sm:text-sm -mr-6 md:-mr-6  md:text-md lg:text-lg border-b-2 pb-2 border-white font-semibold flex flex-row gap-2 items-center ">
                     Skills
                   </h3>
-                  <span className="border-stylee w-full h-0  my-1"></span>
+                  <span className="border-stylee w-full h-0 mb-3"></span>
                 </>
               )}
               {resume?.primarySkills &&
               resume?.primarySkills.length > 0 &&
               !regenerating ? (
-                <ul
-                  className="pl-0 flex  flex-col gap-2 mb-4 text-[16px] xs:text-[12px] md:text-lg"
+                <ol
+                  className="pl-0 flex list-styled flex-col gap-3 mb-4 text-[16px] xs:text-[12px] md:text-[16px]"
                   onMouseEnter={() =>
                     !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                   }
@@ -318,6 +309,7 @@ const ResumeTemplate4 = () => {
                   <Regenerate
                     handler={getPrimarySkills}
                     custom_style={"absolute right-0 -bottom-10 mt-4 "}
+                    custom_style_li={"flex flex-col gap-3"}
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
@@ -432,7 +424,7 @@ const ResumeTemplate4 = () => {
                       + Add
                     </div>
                   ) : null}
-                </ul>
+                </ol>
               ) : (
                 <span>
                   Wait! We are regenerating your skills .... <br />
@@ -446,7 +438,7 @@ const ResumeTemplate4 = () => {
             <h2 className="text-4xl font-bold xs:text-xl md:text-6xl hover:shadow-md hover:bg-gray-100">
               <EditableField
                 value={resume?.name ? resume?.name : "FULL NAME"}
-                style={{ width: "fit-content" }}
+                style={{ width: "full" }}
                 onSave={(value: string) => {
                   dispatch(setField({ name: "name", value: value }));
                   saveResumeToDB({ ...resume, name: value });
@@ -465,10 +457,10 @@ const ResumeTemplate4 = () => {
           </div>
           {/* Executive Summary */}
 
-          <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold mt-12">
+          <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold mt-8">
             EXECUTIVE SUMMARY
           </h3>
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border !border-gray-500 my-2"></span>
 
           <Regenerate
             handler={getSummary}
@@ -950,10 +942,9 @@ const ResumeTemplate4 = () => {
           {resume?.education && (
             <div className=" ml-[-180px]  xs:ml-0">
               <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center mt-5">
-                {educationIcon}
                 Education
               </h3>
-              <span className="border-stylee block h-0 border !border-gray-100 my-3"></span>
+              <span className="border-stylee block h-0 border !border-gray-500 my-3"></span>
               <ul
                 className="pl-0 flex xs:flex-col md:flex-row lg:flex-row w-full  flex-wrap"
                 onMouseEnter={() =>
@@ -1049,7 +1040,7 @@ const ResumeTemplate4 = () => {
                           }}
                         />{" "}
                       </li>
-                      <li className="hover:shadow-md hover:bg-gray-100 text-sm md:text-lg text-gray-950">
+                      <li className="hover:shadow-md hover:bg-gray-100 text-sm  text-gray-950">
                         <EditableField
                           type="textarea"
                           rows={2}
