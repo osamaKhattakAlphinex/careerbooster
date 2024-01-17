@@ -719,6 +719,7 @@ const ResumeTemplate3 = () => {
                   <Regenerate
                     handler={getPrimarySkills}
                     custom_style={"absolute right-0 -bottom-10 mt-4 "}
+                    custom_style_li={"flex flex-col gap-1"}
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
