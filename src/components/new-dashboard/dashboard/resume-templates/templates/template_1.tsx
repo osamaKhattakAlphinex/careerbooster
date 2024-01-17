@@ -51,11 +51,8 @@ const ResumeTemplate1 = ({
 
   const { getSummary } = useGetSummary({});
 
-
   const [regenerating, setRegenerating] = useState(false);
-  const { getPrimarySkills } = useGetPrimarySkills(setRegenerating)
-
-
+  const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
 
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
@@ -66,7 +63,6 @@ const ResumeTemplate1 = ({
       setRegeneratedRecordIndex(null);
     }
   }, [streamedJDData]);
-
 
   const imageRef = useRef<any>();
 
@@ -129,7 +125,6 @@ const ResumeTemplate1 = ({
       secondarySkills: updatedItems,
     });
   };
-
 
   const [image, setImage] = useState<any>(null);
 
@@ -335,16 +330,22 @@ const ResumeTemplate1 = ({
           </ul>
 
           {/* Skills */}
-          <Regenerate handler={getPrimarySkills} >
-
-            {resume?.primarySkills && resume?.primarySkills.length > 0 && !regenerating ? (
-              <>
-                <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
-                  {sparkleIcon}
-                  Skills
-                </h3>
+          {resume?.primarySkills && resume?.primarySkills.length > 0 && (
+            <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
+              {sparkleIcon}
+              Skills
+            </h3>
+          )}
+          {resume?.primarySkills &&
+          resume?.primarySkills.length > 0 &&
+          !regenerating ? (
+            <>
+              <Regenerate
+                handler={getPrimarySkills}
+                custom_style={"absolute right-2 border-2"}
+              >
                 <ul
-                  className="pl-0 flex flex-col gap-1 mb-4 text-lg xs:text-sm md:text-lg lg:text-lg"
+                  className="pl-0 flex flex-col gap-1 text-lg xs:text-sm md:text-lg lg:text-lg"
                   onMouseEnter={() =>
                     !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                   }
@@ -454,7 +455,7 @@ const ResumeTemplate1 = ({
                   )}
                   {primarySkillAddButtonVisible ? (
                     <div
-                      className="border-2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                      className="border-2 w-[20px] xs:w-full md:w-2/13 lg:w-3/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                       onClick={() => {
                         setNewPrimarySkill(true);
                         setPrimarySkillAddButtonVisible(false);
@@ -464,9 +465,13 @@ const ResumeTemplate1 = ({
                     </div>
                   ) : null}
                 </ul>
-              </>
-            ) : <span >Wait! We are regenerating your skills .... <br /></span>}
-          </Regenerate>
+              </Regenerate>
+            </>
+          ) : (
+            <span>
+              Wait! We are regenerating your skills .... <br />
+            </span>
+          )}
 
           {/* Education */}
           {resume?.education && (
@@ -641,7 +646,7 @@ const ResumeTemplate1 = ({
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
@@ -998,7 +1003,7 @@ const ResumeTemplate1 = ({
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                      newWorkExperience !== i ? (
                         <div
                           className="border-2 w-2/12 mt-3 xs:w-full md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {
