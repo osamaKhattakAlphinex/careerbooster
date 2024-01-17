@@ -175,7 +175,7 @@ const ResumeTemplate5 = () => {
           </h3>
         </div>
       </div>
-      <div className="flex border-t-2 border-b-2 border-gray-500 p-5">
+      <div className="flex border-t-2 border-b-2 border-gray-500 p-5 xs:p-1 md:p-5">
         <div className="w-[75%] xs:w-full md:w-[75%] flex flex-col px-4 md:px-8">
           {/* Executive Summary */}
 
@@ -624,7 +624,7 @@ const ResumeTemplate5 = () => {
                         {workExperienceAddButtonVisible === i &&
                         newWorkExperience !== i ? (
                           <div
-                            className="border-2 w-2/12 xs:w-full md:w-2/12 mt-3 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                            className="border-2 w-2/12 xs:w-full flex md:w-2/12 mt-3 xs:mt-11 md:mt-3  justify-center  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
                               setNewWorkExperience(i);
                             }}
@@ -1021,7 +1021,7 @@ const ResumeTemplate5 = () => {
                       )}
                       {primarySkillAddButtonVisible ? (
                         <div
-                          className="border-2 w-1/2 border-gray-400  text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                          className="border-2 w-1/2 md:w-1/2 lg:w-1/2 border-gray-400 flex xs:mt-11 md:mt-0 xs:w-full text-center uppercase text-gray-400 cursor-pointer rounded-full py-1 px-4 xs:px-2 md:px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                           onClick={() => {
                             setNewPrimarySkill(true);
                             setPrimarySkillAddButtonVisible(false);

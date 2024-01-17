@@ -173,7 +173,7 @@ const ResumeTemplate2 = () => {
   // };
 
   return (
-    <div className="w-full first-page  text-gray-900 flex flex-col justify-start items-start px-6">
+    <div className="w-full first-page  text-gray-900 flex flex-col justify-start space-y-4 items-start px-6">
       {/* Name and Title */}
       <div className="flex flex-col w-full text-center bg-gray-100 rounded-3xl  p-8">
         <h2 className="text-4xl xs:text-2xl md:4xl lg:text-6xl font-bold hover:shadow-md hover:bg-gray-100">
@@ -270,7 +270,7 @@ const ResumeTemplate2 = () => {
       </div>
       {/* summary objective */}
       <div className="w-full space-y-3 ">
-        <h2 className="uppercase text-sm xs:text-sm md:text-lg lg:text-lg font-bold">
+        <h2 className="uppercase text-sm xs:text-sm md:text-lg pb-2 lg:text-lg font-bold">
           About Me
         </h2>
         <Regenerate
@@ -298,7 +298,7 @@ const ResumeTemplate2 = () => {
       {/* Skills  */}
       <div className="w-full space-y-3">
         {resume?.primarySkills && resume?.primarySkills.length > 0 && (
-          <h2 className="uppercase text-sm xs:text-sm md:text-lg lg:text-lg  font-bold">
+          <h2 className="uppercase text-sm xs:text-sm md:text-lg lg:text-lg pb-2 font-bold">
             Skills
           </h2>
         )}
@@ -306,18 +306,19 @@ const ResumeTemplate2 = () => {
         resume?.primarySkills.length > 0 &&
         !regenerating ? (
           <>
-            <Regenerate
-              handler={getPrimarySkills}
-              custom_style={"absolute right-0 bottom-1 pt-3"}
+            <ul
+              className="flex flex-row flex-wrap gap-1 text-sm xs:text-sm md:text-lg lg:text-lg"
+              onMouseEnter={() =>
+                !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
+              }
+              onMouseLeave={() =>
+                !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
+              }
             >
-              <ul
-                className="flex flex-row pb-12 flex-wrap gap-1 text-sm xs:text-sm md:text-lg lg:text-lg"
-                onMouseEnter={() =>
-                  !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
-                }
-                onMouseLeave={() =>
-                  !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
-                }
+              <Regenerate
+                handler={getPrimarySkills}
+                custom_style={"absolute right-0 bottom-0"}
+                custom_style_li={"flex flex-row  flex-wrap gap-1"}
               >
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
@@ -377,7 +378,7 @@ const ResumeTemplate2 = () => {
                 ))}
                 {newPrimarySkill ? (
                   <>
-                    <div className="w-full rounded-2xl border border-black flex h-9.5">
+                    <div className="w-full rounded-2xl  border border-black flex h-9.5">
                       <input
                         type="text"
                         value={primarySkill}
@@ -421,7 +422,7 @@ const ResumeTemplate2 = () => {
                 )}
                 {primarySkillAddButtonVisible ? (
                   <div
-                    className="border-2 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 h-10  border-gray-400 text-center uppercase text-gray-500 cursor-pointer items-center flex justify-center rounded-full hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                    className="border-2 w-2/12 xs:w-1/2 md:w-2/12 lg:w-2/12 h-10  border-gray-400 text-center uppercase text-gray-500 cursor-pointer items-center flex justify-center rounded-full hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                     onClick={() => {
                       setNewPrimarySkill(true);
                       setPrimarySkillAddButtonVisible(false);
@@ -430,8 +431,8 @@ const ResumeTemplate2 = () => {
                     + Add
                   </div>
                 ) : null}
-              </ul>
-            </Regenerate>
+              </Regenerate>
+            </ul>
           </>
         ) : (
           <span>
@@ -441,10 +442,10 @@ const ResumeTemplate2 = () => {
       </div>
 
       {/* Work Experience */}
-      <div className="w-full flex flex-col space-y-3 ">
-        <h3 className="uppercase text-sm md:text-lg font-semibold">
+      <div className="w-full flex flex-col space-y-3">
+        <h2 className="uppercase text-sm xs:text-sm md:text-lg lg:text-lg bp-2 font-bold">
           WORK EXPERIENCE
-        </h3>
+        </h2>
         {resume?.workExperienceArray &&
         resume?.workExperienceArray.length > 0 ? (
           <>

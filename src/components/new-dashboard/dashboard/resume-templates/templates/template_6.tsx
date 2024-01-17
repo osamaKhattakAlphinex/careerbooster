@@ -235,11 +235,11 @@ const ResumeTemplate6 = () => {
           </ul>
           {/* EXECUTIVE SUMMARY */}
           <div className="w-full flex flex-wrap flex-col ">
-            <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-            <h3 className="uppercase text-lg pb-3 font-semibold">
+            <span className="border-stylee w-full h-0 border !border-gray-500 mt-3"></span>
+            <h3 className="uppercase text-lg font-semibold my-3">
               EXECUTIVE SUMMARY
             </h3>
-            <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+            <span className="border-stylee w-full h-0 border !border-gray-500"></span>
 
             <Regenerate
               handler={getSummary}
@@ -247,7 +247,7 @@ const ResumeTemplate6 = () => {
                 "absolute  bottom-3 xs:bottom-0 md:bottom-3 lg:bottom-3 right-2 mt-2"
               }
             >
-              <div className="text-sm md:text-lg hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
+              <div className="text-sm md:text-lg hover:shadow-md my-2 hover:bg-gray-100 group-hover:pb-14">
                 <EditableField
                   type="textarea"
                   value={
@@ -266,32 +266,31 @@ const ResumeTemplate6 = () => {
 
             {resume?.primarySkills && resume?.primarySkills.length > 0 && (
               <>
-                <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-                <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
+                <span className="border-stylee w-full h-0 border !border-gray-500 mt-3"></span>
+                <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center py-3">
                   {sparkleIcon}
-                  Skills
+                  Skills123
                 </h3>
-                <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+                <span className="border-stylee w-full h-0 border !border-gray-500 mb-2"></span>
                 {resume?.primarySkills &&
                 resume?.primarySkills.length > 0 &&
                 !regenerating ? (
-                  <Regenerate
-                    handler={getPrimarySkills}
-                    custom_style={"absolute right-3 bottom-1"}
+                  <ul
+                    className="pl-0 flex flex-row  flex-wrap gap-1 h-[20%] text-sm md:text-lg"
+                    onMouseEnter={() =>
+                      !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
+                    }
+                    onMouseLeave={() =>
+                      !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
+                    }
                   >
-                    <ul
-                      className="pl-0 flex flex-row  flex-wrap gap-1 h-[20%]  mb-4 text-sm md:text-lg"
-                      onMouseEnter={() =>
-                        !newPrimarySkill &&
-                        setPrimarySkillAddButtonVisible(true)
-                      }
-                      onMouseLeave={() =>
-                        !newPrimarySkill &&
-                        setPrimarySkillAddButtonVisible(false)
-                      }
+                    <Regenerate
+                      handler={getPrimarySkills}
+                      custom_style={"absolute right-0 bottom-0"}
+                      custom_style_li={"flex flex-row  flex-wrap gap-1"}
                     >
+                      {" "}
                       {/* <li className="font-semibold  uppercase">primary</li> */}
-
                       {resume?.primarySkills.map((skill: string, i: number) => (
                         <li
                           className="hover:shadow-md  w-[45%] xs:w-full sm:w-[45%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex  items-center"
@@ -406,8 +405,8 @@ const ResumeTemplate6 = () => {
                           + Add
                         </div>
                       ) : null}
-                    </ul>
-                  </Regenerate>
+                    </Regenerate>
+                  </ul>
                 ) : (
                   <span>
                     Wait! We are regenerating your skills .... <br />
@@ -416,9 +415,11 @@ const ResumeTemplate6 = () => {
               </>
             )}
             {/* Work Experience */}
-            <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
-            <h3 className="uppercase text-lg font-semibold">WORK EXPERIENCE</h3>
-            <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+            <span className="border-stylee w-full h-0 border !border-gray-500 mt-3"></span>
+            <h3 className="uppercase text-lg font-semibold py-3">
+              WORK EXPERIENCE
+            </h3>
+            <span className="border-stylee w-full h-0 border !border-gray-500"></span>
 
             {resume?.workExperienceArray &&
             resume?.workExperienceArray.length > 0 ? (
@@ -839,7 +840,7 @@ const ResumeTemplate6 = () => {
                         {workExperienceAddButtonVisible === i &&
                         newWorkExperience !== i ? (
                           <div
-                            className="border-2 w-2/12 xs:w-full mt-3 md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                            className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3 md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
                               setNewWorkExperience(i);
                             }}
