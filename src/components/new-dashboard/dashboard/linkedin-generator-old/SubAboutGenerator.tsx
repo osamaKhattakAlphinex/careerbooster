@@ -118,34 +118,21 @@ const SubAboutGenerator = () => {
               tempText += text;
               setStreamedData((prev) => prev + text);
             }
-            fetch("/api/users/updateUserLimit", {
-              method: "POST",
-              body: JSON.stringify({
-                email: session?.user?.email,
-                type: "about_generation",
-              }),
-            }).then(async (resp: any) => {
-              const res = await resp.json();
-              let user;
-              if (typeof res?.result === "object") {
-                user = res.result;
-              } else {
-                user = await JSON.parse(res.result);
-              }
-              if (res.success) {
-                const AboutResponse = await axios.get(
-                  "/api/linkedInBots/linkedinAboutGenerator/getAllAbout"
-                );
-                const updatedObject = {
-                  ...userData,
-                  linkedInAbouts: AboutResponse.data.result.linkedInAbouts,
-                  userCredits: userData.userCredits - creditLimits.linkedin_about_generation
-                };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
-              }
-            });
+
+            const AboutResponse = await axios.get(
+              "/api/linkedInBots/linkedinAboutGenerator/getAllAbout"
+            );
+            const updatedObject = {
+              ...userData,
+              linkedInAbouts: AboutResponse.data.result.linkedInAbouts,
+              userCredits: userData.userCredits - creditLimits.linkedin_about_generation
+            };
+            dispatch(setUserData({ ...userData, ...updatedObject }));
+
+
           } else {
-            setStreamedData("Error! Something went wrong");
+            const res = await resp.json()
+            setStreamedData(res.result + "! You ran out of Credits");
           }
           setMsgLoading(false);
         })

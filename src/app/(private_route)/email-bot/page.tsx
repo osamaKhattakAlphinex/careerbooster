@@ -36,11 +36,6 @@ const PersonalizedEmailBot = () => {
   const [jobDescription, setJobDescription] = useState<string>("");
   const [showPopup, setShowPopup] = useState(false);
 
-  // limit bars
-  const [availablePercentageEmail, setAvailablePercentageEmail] =
-    useState<number>(0);
-  const [percentageCalculatedEmail, setPercentageCalculatedEmail] =
-    useState<boolean>(false);
 
   // Redux
   const dispatch = useDispatch();
@@ -86,9 +81,7 @@ const PersonalizedEmailBot = () => {
     // await getUserDataIfNotExists();
     if (
       session?.user?.email &&
-      aiInputUserData &&
-      !isNaN(availablePercentageEmail) &&
-      availablePercentageEmail !== 0
+      aiInputUserData
     ) {
       setMsgLoading(true);
       setShow(true);
@@ -144,48 +137,32 @@ const PersonalizedEmailBot = () => {
               tempText += text;
             }
 
-            fetch("/api/users/updateUserLimit", {
-              method: "POST",
-              body: JSON.stringify({
-                email: session?.user?.email,
-                type: "email_generation",
-              }),
-            }).then(async (resp: any) => {
-              const res = await resp.json();
-              let user;
-              if (typeof res.result === "object") {
-                user = res.result;
-              } else {
-                user = await JSON.parse(res.result);
-              }
-              if (res.success) {
+            const emailsResponse = await axios.get(
+              "/api/emailBot/getAllEmails"
+              // payload
+            );
+
+            if (emailsResponse.data.success) {
+              const updatedObject = {
+                ...userData,
+                userCredits: userData.userCredits - creditLimits.email_generation,
+                emails: emailsResponse.data.result.emails,
+              };
+
+              dispatch(setUserData({ ...userData, ...updatedObject }));
+              dispatch(
+                setEmail(
+                  emailsResponse.data.result.emails[
+                  emailsResponse.data.result.emails.length - 1
+                  ]
+                )
+              );
+            }
 
 
-                const emailsResponse = await axios.get(
-                  "/api/emailBot/getAllEmails"
-                  // payload
-                );
-
-                if (emailsResponse.data.success) {
-                  const updatedObject = {
-                    ...userData,
-                    userCredits: userData.userCredits - creditLimits.email_generation,
-                    emails: emailsResponse.data.result.emails,
-                  };
-
-                  dispatch(setUserData({ ...userData, ...updatedObject }));
-                  dispatch(
-                    setEmail(
-                      emailsResponse.data.result.emails[
-                      emailsResponse.data.result.emails.length - 1
-                      ]
-                    )
-                  );
-                }
-              }
-            });
           } else {
-            setStreamedData("Error! Something went wrong");
+            const res = await resp.json()
+            setStreamedData(res.result + "! You ran out of Credits");
           }
         })
         .finally(() => {

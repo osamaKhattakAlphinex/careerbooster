@@ -1,4 +1,5 @@
 import User from "@/db/schemas/User";
+import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
 
@@ -11,8 +12,18 @@ export async function POST(req: any) {
 
     const newFile = _body.newFile;
     const email = _body.email;
+    const creditsUsed = _body?.creditsUsed;
+    const userCredits = _body?.userCredits;
 
     if (newFile && email) {
+      if (userCredits) {
+        if (userCredits < creditsUsed) {
+          return NextResponse.json(
+            { result: "Insufficient Credits", success: false },
+            { status: 429 }
+          )
+        }
+      }
       await startDB();
 
       try {
@@ -23,6 +34,10 @@ export async function POST(req: any) {
         );
 
         if (updatedUser) {
+
+          await updateUserTotalCredits(email, creditsUsed)
+
+
           return NextResponse.json(
             {
               result: "Success Record Updated",

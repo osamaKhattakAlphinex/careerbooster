@@ -87,29 +87,15 @@ const ReviewResumeBot = () => {
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
             }
-            fetch("/api/users/updateUserLimit", {
-              method: "POST",
-              body: JSON.stringify({
-                email: session?.user?.email,
-                type: "review_resume",
-              }),
-            }).then(async (resp: any) => {
-              const res = await resp.json();
-              let user;
-              if (typeof res.result === "object") {
-                user = res.result;
-              } else {
-                user = await JSON.parse(res.result);
-              }
-              if (res.success) {
-                const updatedObject = {
-                  ...userData,
-                  userCredits: userData.userCredits - creditLimits.review_resume,
 
-                };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
-              }
-            });
+            const updatedObject = {
+              ...userData,
+              userCredits: userData.userCredits - creditLimits.review_resume,
+
+            };
+            dispatch(setUserData({ ...userData, ...updatedObject }));
+
+
           } else {
             setStreamedData("Error! Something went wrong");
           }
@@ -121,8 +107,8 @@ const ReviewResumeBot = () => {
   };
   const copyCoverLetter = async (text: string) => {
     try {
-      const coverLetterData = await htmlToPlainText(text);
-      await copy(coverLetterData);
+      const reviewResumeData = htmlToPlainText(text);
+      await copy(reviewResumeData);
       setIsCoverLetterCopied(true);
       // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
       setTimeout(() => {

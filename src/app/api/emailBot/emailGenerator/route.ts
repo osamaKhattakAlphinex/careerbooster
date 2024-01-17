@@ -114,7 +114,7 @@ export async function POST(req: any) {
             const payload = {
               id: emailId,
               jobDescription: jobDescription,
-              coverLetterText: completions,
+              emailText: completions,
               generatedOnDate: new Date().toISOString(),
               generatedViaOption: type,
               userEmail: email,

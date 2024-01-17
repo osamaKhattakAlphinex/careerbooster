@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "@/store/userDataSlice";
 import FileUploadHandler from "@/components/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
+import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 
 interface Props {
   selectedFile: string;
@@ -37,30 +38,13 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
   const updateLimits = async () => {
-    fetch("/api/users/updateUserLimit", {
-      method: "POST",
-      body: JSON.stringify({
-        email: data?.user?.email,
-        type: "pdf_files_upload",
-      }),
-    })
-      .then(async (resp: any) => {
-        const res = await resp.json();
-        let user;
-        if (typeof res?.result === "object") {
-          user = res.result;
-        } else {
-          user = await JSON.parse(res.result);
-        }
-        if (res.success) {
-          const updatedObject = {
-            ...userData,
-            userCredits: userData.userCredits - creditLimits.pdf_files_upload,
-          };
-          dispatch(setUserData({ ...userData, ...updatedObject }));
-        }
-      })
-      .catch((err) => console.log(err));
+
+    const updatedObject = {
+      ...userData,
+      userCredits: userData.userCredits - creditLimits.pdf_files_upload,
+    };
+    dispatch(setUserData({ ...userData, ...updatedObject }));
+
   };
 
   const uploadFilesToDb = async (newText: string) => {
@@ -77,7 +61,14 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
       body: JSON.stringify({
         newFile: file,
         email: userEmail,
+        userCredits: userData.userCredits,
+        creditsUsed: creditLimits.pdf_files_upload,
       }),
+    }).then(async response => {
+      if (response.ok) {
+
+        setNewFileText("")
+      }
     });
     fetchFiles();
   };
@@ -157,7 +148,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   return (
     <>
       <div className="py-4 lg:p-4 mb-4 rounded-lg">
-        <div className="w-full mb-8">
+        {/* <div className="w-full mb-8">
           <LimitCard
             title="File uploads available"
             limit={userData?.userPackageData?.limit?.pdf_files_upload}
@@ -166,55 +157,55 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
           />
-        </div>
-        {!isNaN(availablePercentage) && availablePercentage !== 0 && (
-          <div className="md:py-3">
-            <div className="py-[20px] lg:w-[480px] px-[30px] flex flex-col lg:flex-row  gap-4 border-2 rounded-[10px] mt-4 border-[#312E37] border-dashed	">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-[40px] h-[40px] text-[#B324D7] font-normal"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-                />
-              </svg>
+        </div> */}
 
-              <div className="flex flex-col gap-[3px]">
-                <h2 className="dark:text-gray-100 text-gray-950d text-[16px] font-semibold">
-                  Drag and drop file here
-                </h2>
-                <p className="text-[#312E37] text-[14px]">
-                  Limit 20mb per file
-                </p>
-              </div>
-              <label
-                className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border  border-[#312E37] rounded-full ml-auto ${fileUploading && "!bg-black"
-                  }`}
-              >
-                <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
-                  {fileUploading ? "Uploading..." : "Browse Files"}
-                </span>
-                <input
-                  type="file"
-                  className="hidden"
-                  disabled={fileUploading}
-                  onChange={(e) => {
-                    if (e.target.files) {
-                      setFile(e.target.files[0]);
-                      setFileName(e.target.files[0]?.name);
-                    }
-                  }}
-                />
-              </label>
+        <div className="md:py-3">
+          <div className="py-[20px] lg:w-[480px] px-[30px] flex flex-col lg:flex-row  gap-4 border-2 rounded-[10px] mt-4 border-[#312E37] border-dashed	">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-[40px] h-[40px] text-[#B324D7] font-normal"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+              />
+            </svg>
+
+            <div className="flex flex-col gap-[3px]">
+              <h2 className="dark:text-gray-100 text-gray-950d text-[16px] font-semibold">
+                Drag and drop file here
+              </h2>
+              <p className="text-[#312E37] text-[14px]">
+                Limit 20mb per file
+              </p>
             </div>
+            <label
+              className={` cursor-pointer flex flex-row justify-center items-center gap-2 py-3 px-[28px] border  border-[#312E37] rounded-full ml-auto ${fileUploading && "!bg-black"
+                }`}
+            >
+              <span className=" dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
+                {fileUploading ? "Uploading..." : "Browse Files"}
+              </span>
+              <input
+                type="file"
+                className="hidden"
+                disabled={fileUploading}
+                onChange={(e) => {
+                  if (e.target.files) {
+                    setFile(e.target.files[0]);
+                    setFileName(e.target.files[0]?.name);
+                  }
+                }}
+              />
+            </label>
           </div>
-        )}
+        </div>
+
 
         {file !== null && (
           <FileUploadHandler

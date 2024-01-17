@@ -100,8 +100,7 @@ export default function CoverLetterPage() {
   // limit bars
   const [availablePercentageCoverLetter, setAvailablePercentageCoverLetter] =
     useState<number>(0);
-  const [percentageCalculatedCoverLetter, setPercentageCalculatedCoverLetter] =
-    useState<boolean>(false);
+
 
   // Redux
   const dispatch = useDispatch();
@@ -114,9 +113,7 @@ export default function CoverLetterPage() {
   const handleGenerate = async () => {
     if (
       session?.user?.email &&
-      aiInputUserData &&
-      !isNaN(availablePercentageCoverLetter) &&
-      availablePercentageCoverLetter !== 0
+      aiInputUserData
     ) {
       setMsgLoading(true);
       setShow(true);
@@ -198,7 +195,8 @@ export default function CoverLetterPage() {
             }
 
           } else {
-            setStreamedData("Error! Something went wrong");
+            const res = await resp.json()
+            setStreamedData(res.result + "! You ran out of Credits");
           }
         })
         .finally(() => {
