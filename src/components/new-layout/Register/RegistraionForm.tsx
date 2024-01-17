@@ -89,14 +89,6 @@ const RegistrationForm = () => {
           lastName: values.lastName,
           email: values.email,
           password: values.password,
-          // files: [
-          //   {
-          //     id: makeid(),
-          //     fileName: fileName, //fileName,
-          //     fileContent: text,
-          //     uploadedDateTime: new Date(),
-          //   },
-          // ],
 
           uploadedResume: {
             id: makeid(),

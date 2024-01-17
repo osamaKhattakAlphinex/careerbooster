@@ -118,26 +118,33 @@ const CreditSubscriptionCard: React.FC<Props> = ({
                 };
                 // TODO!! move this code to backeND
 
-                return axios
+                await axios
                     .post("/api/users/updateUserData", {
                         data: obj,
                     })
                     .then(async (resp: any) => {
-                        dispatch(
-                            setUserData({
-                                ...userData,
-                                creditPackage: obj.creditPackage,
-                                userCredits: obj.userCredits
-                                // userPackageExpirationDate: obj.userPackageExpirationDate,
-                                // userPackageUsed: obj.userPackageUsed,
-                            })
-                        );
+                        console.log(resp);
+                        if (resp.data.success) {
+                            console.log("first", userData);
+
+                            dispatch(
+                                setUserData({
+                                    ...userData,
+                                    creditPackage: obj.creditPackage,
+                                    userCredits: obj.userCredits
+                                    // userPackageExpirationDate: obj.userPackageExpirationDate,
+                                    // userPackageUsed: obj.userPackageUsed,
+                                })
+                            );
+                            console.log(userData);
+
+                            router.push("/dashboard");
+                        }
                         // dispatch(setField({ name: "userPackageData", value: userPackage }));
                         // TODO!!! Add new user subsription to db
                         // TODO!! invalidate session on stripe 
-
-                        router.push("/dashboard");
                     });
+
             }
         }
     };
@@ -150,8 +157,8 @@ const CreditSubscriptionCard: React.FC<Props> = ({
         const data = await res2.json();
 
         if (data.success) {
-            const userPackage = data.result;
-            return userPackage;
+            const creditPackage = data.result;
+            return creditPackage;
             // set user package details to redux
         }
 
@@ -204,15 +211,19 @@ const CreditSubscriptionCard: React.FC<Props> = ({
                     {/* Apply coupon  */}
                     {!viewOnly && (
                         <>
-                            <div className="mt-4 ">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Apply coupon"
-                                    value={coupon}
-                                    onChange={(e) => setCoupon(e.target.value)}
-                                />
-                            </div>
+                            {creditPackage.amount !== 0 &&
+                                (
+                                    <div className="mt-4 ">
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="Apply coupon"
+                                            value={coupon}
+                                            onChange={(e) => setCoupon(e.target.value)}
+                                        />
+                                    </div>
+                                )
+                            }
                             {/* invalid coupon error */}
                             {couponError && couponError !== "" && (
                                 <p className="text-red-500 text-sm mt-1">{couponError}</p>

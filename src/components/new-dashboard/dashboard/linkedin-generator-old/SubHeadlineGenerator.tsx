@@ -126,11 +126,6 @@ const SubHeadlineGenerator = () => {
                 );
                 const updatedObject = {
                   ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    headline_generation:
-                      user.userPackageUsed.headline_generation,
-                  },
                   linkedInHeadlines:
                     HeadlineResponse.data.result.linkedInHeadlines,
                   userCredits: userData.userCredits - creditLimits.linkedin_headline_generation
@@ -212,14 +207,14 @@ const SubHeadlineGenerator = () => {
               free
             </span>
           </div>
-          <LimitCard
+          {/* <LimitCard
             title="Available"
             limit={userData?.userPackageData?.limit?.headline_generation}
             used={userData?.userPackageUsed?.headline_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          />
+          /> */}
           <p className="text-[14px] text-[#959595] pr-5">
             Generate headline for your linkedin in one click
           </p>

@@ -138,12 +138,8 @@ const SubAboutGenerator = () => {
                 );
                 const updatedObject = {
                   ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    about_generation: user.userPackageUsed.about_generation,
-                  },
                   linkedInAbouts: AboutResponse.data.result.linkedInAbouts,
-                  userCredits: user.userCredits - user.creditsUsed
+                  userCredits: userData.userCredits - creditLimits.linkedin_about_generation
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
               }
@@ -219,14 +215,14 @@ const SubAboutGenerator = () => {
               free
             </span>
           </div>
-          <LimitCard
+          {/* <LimitCard
             title="Available"
             limit={userData?.userPackageData?.limit?.about_generation}
             used={userData?.userPackageUsed?.about_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          />
+          /> */}
 
           <p className="text-[14px] text-[#959595] pr-5">
             Generate impressive about for your linkedin

@@ -51,6 +51,7 @@ const SubKeywordsGenerator = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const linkedinKeywords = useSelector((state: any) => state.linkedinKeywords);
+  const creditLimits = useSelector((state: any) => state.creditLimits);
 
   // useEffect(() => {
   //   setKeywords(streamedData);
@@ -142,13 +143,11 @@ const SubKeywordsGenerator = () => {
                 );
                 const updatedObject = {
                   ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    keywords_generation:
-                      user.userPackageUsed.keywords_generation,
-                  },
                   linkedInKeywords:
                     KeywordsResponse.data.result.linkedInKeywords,
+                  userCredits: userData.userCredits - creditLimits.
+                    linkedin_keywords_generation
+
                 };
                 dispatch(setUserData({ ...userData, ...updatedObject }));
               }
@@ -232,14 +231,14 @@ const SubKeywordsGenerator = () => {
               Premium
             </span>
           </div>
-          <LimitCard
+          {/* <LimitCard
             title="Available"
             limit={userData?.userPackageData?.limit?.keywords_generation}
             used={userData?.userPackageUsed?.keywords_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          />
+          /> */}
           <p className="text-[14px] text-[#959595] pr-5">
             Generator popular keywords for your linkedin profile
           </p>

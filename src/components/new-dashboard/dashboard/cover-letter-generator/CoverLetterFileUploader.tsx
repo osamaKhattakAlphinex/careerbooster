@@ -34,6 +34,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   // redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
+  const creditLimits = useSelector((state: any) => state.creditLimits);
 
   const updateLimits = async () => {
     fetch("/api/users/updateUserLimit", {
@@ -54,10 +55,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
         if (res.success) {
           const updatedObject = {
             ...userData,
-            userPackageUsed: {
-              ...userData.userPackageUsed,
-              pdf_files_upload: user.userPackageUsed.pdf_files_upload,
-            },
+            userCredits: userData.userCredits - creditLimits.pdf_files_upload,
           };
           dispatch(setUserData({ ...userData, ...updatedObject }));
         }
@@ -196,9 +194,8 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                 </p>
               </div>
               <label
-                className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border  border-[#312E37] rounded-full ml-auto ${
-                  fileUploading && "!bg-black"
-                }`}
+                className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border  border-[#312E37] rounded-full ml-auto ${fileUploading && "!bg-black"
+                  }`}
               >
                 <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                   {fileUploading ? "Uploading..." : "Browse Files"}

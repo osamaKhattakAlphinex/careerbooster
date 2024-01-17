@@ -176,47 +176,27 @@ export default function CoverLetterPage() {
               tempText += text;
             }
 
-
-            const limitUpdateResponse = await fetch(
-              "/api/users/updateUserLimit",
-              {
-                method: "POST",
-                body: JSON.stringify({
-                  email: session?.user?.email,
-                  type: "cover_letter_generation",
-                }),
-              }
+            const coverLetterResponse = await axios.get(
+              "/api/coverLetterBot/getAllCoverLetters"
             );
 
-            const limitUpdateData = await limitUpdateResponse.json();
-
-            if (limitUpdateData.success) {
-              const coverLetterResponse = await axios.get(
-                "/api/coverLetterBot/getAllCoverLetters"
+            if (coverLetterResponse.data.success) {
+              // Update Redux store
+              const updatedObject = {
+                ...userData,
+                userCredits: userData.userCredits - creditLimits.cover_letter_generation,
+                coverLetters: coverLetterResponse.data.result.coverLetters,
+              };
+              dispatch(setUserData({ ...userData, ...updatedObject }));
+              dispatch(
+                setCoverLetter(
+                  coverLetterResponse.data.result.coverLetters[
+                  coverLetterResponse.data.result.coverLetters.length - 1
+                  ]
+                )
               );
-
-              if (coverLetterResponse.data.success) {
-                // Update Redux store
-                const updatedObject = {
-                  ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    cover_letter_generation:
-                      limitUpdateData.result.userPackageUsed
-                        .cover_letter_generation,
-                  },
-                  coverLetters: coverLetterResponse.data.result.coverLetters,
-                };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
-                dispatch(
-                  setCoverLetter(
-                    coverLetterResponse.data.result.coverLetters[
-                    coverLetterResponse.data.result.coverLetters.length - 1
-                    ]
-                  )
-                );
-              }
             }
+
           } else {
             setStreamedData("Error! Something went wrong");
           }
@@ -326,7 +306,7 @@ export default function CoverLetterPage() {
                   Generate Cover Letter
                 </h3>
                 <div className=" text-sm dark:text-gray-100 text-gray-950 uppercase font-bold">
-                  <LimitCard
+                  {/* <LimitCard
                     title="Cover Letter Availble"
                     limit={
                       userData?.userPackageData?.limit?.cover_letter_generation
@@ -335,7 +315,7 @@ export default function CoverLetterPage() {
                     setPercentageCalculated={setPercentageCalculatedCoverLetter}
                     availablePercentage={availablePercentageCoverLetter}
                     setAvailablePercentage={setAvailablePercentageCoverLetter}
-                  />
+                  /> */}
                 </div>
               </div>
 

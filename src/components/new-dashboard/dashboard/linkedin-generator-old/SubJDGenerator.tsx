@@ -50,6 +50,8 @@ const SubJDGenerator = () => {
   const userData = useSelector((state: any) => state.userData);
   const linkedinJD = useSelector((state: any) => state.linkedinJobDesc);
   const { getUserDataIfNotExists: getUserData } = useGetUserData() //using hook function with different name/alias
+  const creditLimits = useSelector((state: any) => state.creditLimits);
+
 
   useEffect(() => {
 
@@ -126,6 +128,11 @@ const SubJDGenerator = () => {
         `
         setStreamedData((prev) => prev + `</p> <br /> `);
         setMsgLoading(false);
+        const updatedObject = {
+          ...userData,
+          userCredits: userData.userCredits - creditLimits.linkedin_individualWorkExperience
+        };
+        dispatch(setUserData({ ...userData, ...updatedObject }));
         if (index === experiences.length - 1) {
           const jobDescriptionId = makeid();
           const jdObj = {
@@ -174,10 +181,6 @@ const SubJDGenerator = () => {
           );
           const updatedObject = {
             ...userData,
-            userPackageUsed: {
-              ...userData.userPackageUsed,
-              job_desc_generation: user.userPackageUsed.job_desc_generation,
-            },
             linkedInJobDescriptions:
               JDResponse.data.result.linkedInJobDescriptions,
           };
@@ -267,14 +270,14 @@ const SubJDGenerator = () => {
                 Premium
               </span>
             </div>
-            <LimitCard
+            {/* <LimitCard
               title="Available"
               limit={userData?.userPackageData?.limit?.job_desc_generation}
               used={userData?.userPackageUsed?.job_desc_generation}
               setPercentageCalculated={setPercentageCalculated}
               availablePercentage={availablePercentage}
               setAvailablePercentage={setAvailablePercentage}
-            />
+            /> */}
             <p className="text-[14px] text-[#959595] pr-5">
               Get job descriptions with respect to each job
             </p>

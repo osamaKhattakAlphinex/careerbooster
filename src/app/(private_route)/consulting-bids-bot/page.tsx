@@ -28,7 +28,6 @@ const ConsultingBidsGenerator = () => {
   const [show, setShow] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("profile"); // type
   const [streamedData, setStreamedData] = useState<string>("");
-  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
@@ -36,21 +35,22 @@ const ConsultingBidsGenerator = () => {
   const [isBidCopied, setIsBidCopied] = useState<boolean>(false);
   const [showPopup, setShowPopup] = useState(false);
 
-  const [percentageCalculated, setPercentageCalculated] =
-    useState<boolean>(false);
+
   // limit bars
 
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const consultingBid = useSelector((state: any) => state.consultingBid);
+  console.log(consultingBid);
+
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
   const { resumes } = userData;
   const copyBid = async (text: string) => {
     try {
-      const coverLetterData = await htmlToPlainText(text);
-      await copy(coverLetterData);
+      const consultingBidData = htmlToPlainText(text);
+      await copy(consultingBidData);
       setIsBidCopied(true);
       setTimeout(() => {
         setIsBidCopied(false);
@@ -82,9 +82,7 @@ const ConsultingBidsGenerator = () => {
   const handleGenerate = async () => {
     if (
       session?.user?.email &&
-      aiInputUserData &&
-      !isNaN(availablePercentage) &&
-      availablePercentage !== 0
+      aiInputUserData
     ) {
       setMsgLoading(true);
       setShow(true);
@@ -138,57 +136,42 @@ const ConsultingBidsGenerator = () => {
               setStreamedData((prev) => prev + text);
               tempText += text;
             }
-            fetch("/api/users/updateUserLimit", {
-              method: "POST",
-              body: JSON.stringify({
-                email: session?.user?.email,
-                type: "consulting_bids_generation",
-              }),
-            }).then(async (resp: any) => {
-              const res = await resp.json();
-              let user;
-              if (typeof res.result === "object") {
-                user = res.result;
-              } else {
-                user = await JSON.parse(res.result);
-              }
-              if (res.success) {
-                // const payload = {
-                //   id: makeid(),
-                //   jobDescription: jobDescription,
-                //   consultingBidText: tempText,
-                //   generatedOnDate: new Date().toISOString(),
-                //   generatedViaOption: selectedOption,
-                //   userEmail: session?.user?.email,
-                // };
 
-                const consultingBidResponse = await axios.get(
-                  "/api/consultingBidBot/getAllConsultingBids"
-                );
+            // const payload = {
+            //   id: makeid(),
+            //   jobDescription: jobDescription,
+            //   consultingBidText: tempText,
+            //   generatedOnDate: new Date().toISOString(),
+            //   generatedViaOption: selectedOption,
+            //   userEmail: session?.user?.email,
+            // };
 
-                const updatedObject = {
-                  ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    consulting_bids_generation:
-                      user.userPackageUsed.consulting_bids_generation,
-                  },
-                  consultingBids:
-                    consultingBidResponse.data.result.consultingBids,
-                };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
-                dispatch(
-                  setConsultingBid(
-                    consultingBidResponse.data.result.consultingBids[
-                    consultingBidResponse.data.result.consultingBids.length -
-                    1
-                    ]
-                  )
-                );
-              }
-            });
+            const consultingBidResponse = await axios.get(
+              "/api/consultingBidBot/getAllConsultingBids"
+            );
+            console.log(consultingBidResponse);
+
+            const updatedObject = {
+              ...userData,
+              consultingBids:
+                consultingBidResponse.data.result.consultingBids,
+              userCredits: userData.userCredits - creditLimits.consulting_bids_generation
+
+            };
+            dispatch(setUserData({ ...userData, ...updatedObject }));
+            dispatch(
+              setConsultingBid(
+                consultingBidResponse.data.result.consultingBids[
+                consultingBidResponse.data.result.consultingBids.length -
+                1
+                ]
+              )
+            );
+
+
           } else {
-            setStreamedData("Error! Something went wrong");
+            const res = await resp.json()
+            setStreamedData(res.result + "! You ran out of Credits");
           }
         })
         .finally(() => {
@@ -299,9 +282,9 @@ const ConsultingBidsGenerator = () => {
             Back
           </Link>
 
-          {/* <AiGeneratedCoverLetters /> */}
+          {/* <AiGeneratedConsultingBids /> */}
           <PreviouslyGeneratedList {...historyProps} />
-          {/* <MainCoverLetterTool /> */}
+          {/* <MainConsultingBidTool /> */}
           <>
             <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4  lg:px-[30px] py-[41px] flex flex-col gap-5 ">
               {/* header */}
@@ -310,7 +293,7 @@ const ConsultingBidsGenerator = () => {
                   Consulting Bids Generator
                 </h3>
                 <div className=" text-sm dark:text-gray-100 text-gray-950 uppercase font-bold">
-                  <LimitCard
+                  {/* <LimitCard
                     title="Email Availble"
                     limit={
                       userData?.userPackageData?.limit
@@ -320,7 +303,7 @@ const ConsultingBidsGenerator = () => {
                     setPercentageCalculated={setPercentageCalculated}
                     availablePercentage={availablePercentage}
                     setAvailablePercentage={setAvailablePercentage}
-                  />
+                  /> */}
                 </div>
               </div>
 
@@ -415,7 +398,7 @@ const ConsultingBidsGenerator = () => {
                     name="jobTitle"
                     rows={6}
                     onChange={(e) => setJobDescription(e.target.value)}
-                    placeholder="Copy the job description for the position you are applying and paste it here to generate a tailor cover letter."
+                    placeholder="Copy the job description for the position you are applying and paste it here to generate a tailored consulting bid."
                     className="w-full px-3 lg:px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border pt-3"
                   />
                 </div>
@@ -501,7 +484,7 @@ const ConsultingBidsGenerator = () => {
                   </h1>
 
                   <div
-                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] md:p-[30px]  shadow ${msgLoading ? "animate-pulse" : ""
+                    className={`w-[100%] aigeneratedconsultingbid flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] md:p-[30px]  shadow ${msgLoading ? "animate-pulse" : ""
                       }`}
                   >
                     <div ref={componentRef}>

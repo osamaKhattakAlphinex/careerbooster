@@ -169,10 +169,7 @@ const PersonalizedEmailBot = () => {
                 if (emailsResponse.data.success) {
                   const updatedObject = {
                     ...userData,
-                    userPackageUsed: {
-                      ...userData.userPackageUsed,
-                      email_generation: user.userPackageUsed.email_generation,
-                    },
+                    userCredits: userData.userCredits - creditLimits.email_generation,
                     emails: emailsResponse.data.result.emails,
                   };
 
@@ -308,14 +305,14 @@ const PersonalizedEmailBot = () => {
                   Generate Emails
                 </h3>
                 <div className=" text-sm dark:text-gray-100 text-gray-950 uppercase font-bold">
-                  <LimitCard
+                  {/* <LimitCard
                     title="Email Availble"
                     limit={userData?.userPackageData?.limit?.email_generation}
                     used={userData?.userPackageUsed?.email_generation}
                     setPercentageCalculated={setPercentageCalculatedEmail}
                     availablePercentage={availablePercentageEmail}
                     setAvailablePercentage={setAvailablePercentageEmail}
-                  />
+                  /> */}
                 </div>
               </div>
 

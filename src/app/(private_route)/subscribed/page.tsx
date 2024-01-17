@@ -1,8 +1,6 @@
 import UpdateCreditPackage from "@/components/dashboard/checkout/UpdateCreditPackage";
-import UpdateUserPackage from "@/components/dashboard/checkout/UpdateUserPackage";
 import { stripe } from "@/lib/stripe";
 import { redirect } from "next/navigation";
-import { useEffect } from "react";
 import Stripe from "stripe";
 
 type Props = {

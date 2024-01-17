@@ -30,6 +30,8 @@ const ConsultingBidCardSingle = ({
   const router = useRouter();
   const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
+    console.log(card);
+
     if (source != "") {
       router.replace("/consulting-bids-bot");
     }
@@ -108,14 +110,14 @@ const ConsultingBidCardSingle = ({
           {pathname == "/dashboard"
             ? ""
             : card && (
-                <DownloadService
-                  componentRef={componentRef}
-                  view={handleOnView}
-                  card={card}
-                  type="consultingBid"
-                  fileName="ai-consulting-bid"
-                />
-              )}
+              <DownloadService
+                componentRef={componentRef}
+                view={handleOnView}
+                card={card}
+                type="consultingBid"
+                fileName="ai-consulting-bid"
+              />
+            )}
         </div>
       </div>
     </div>

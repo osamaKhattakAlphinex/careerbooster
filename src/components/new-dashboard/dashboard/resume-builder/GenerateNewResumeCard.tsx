@@ -10,7 +10,7 @@ import Link from "next/link";
 import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 
 interface Props {
-  handleGenerate: (value:any) => Promise<void>;
+  handleGenerate: (value: any) => Promise<void>;
   availablePercentage: number;
 
 }
@@ -18,12 +18,12 @@ const GenerateResume = ({
   handleGenerate,
 
 }: // availablePercentage,
-Props) => {
+  Props) => {
   const [showInstruction, setShowInstruction] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [percentageCalculated, setPercentageCalculated] =
     useState<boolean>(false);
-    const [quantifyingExperience, setQuantifyingExperience] = useState<boolean>(true);
+  const [quantifyingExperience, setQuantifyingExperience] = useState<boolean>(true);
   // Redux
   const { data: session } = useSession();
   const dispatch = useDispatch();
@@ -39,14 +39,14 @@ Props) => {
           generate new resume
         </h3>
         <div className="dark:text-gray-100 text-gray-950 uppercase font-bold">
-          <LimitCard
+          {/* <LimitCard
             title="AvailableCredits : "
             limit={userData?.userPackageData?.limit?.resumes_generation}
             used={userData?.userPackageUsed?.resumes_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          />
+          /> */}
         </div>
       </div>
 
@@ -158,14 +158,13 @@ Props) => {
             memoizedState.resumeLoading ||
             !session?.user?.email
           }
-          onClick={()=>handleGenerate(quantifyingExperience)}
-          className={` dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${
-            memoizedState.jobPosition === "" ||
-            memoizedState.resumeLoading ||
-            !session?.user?.email
+          onClick={() => handleGenerate(quantifyingExperience)}
+          className={` dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${memoizedState.jobPosition === "" ||
+              memoizedState.resumeLoading ||
+              !session?.user?.email
               ? "opacity-50 cursor-not-allowed"
               : ""
-          }`}
+            }`}
         >
           <span className="dark:text-gray-100 text-gray-950 text-sm">
             {memoizedState.resumeLoading ? (
@@ -176,9 +175,8 @@ Props) => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className={`w-4 h-4 mr-3 ${
-                    memoizedState.resumeLoading ? "animate-spin" : ""
-                  }`}
+                  className={`w-4 h-4 mr-3 ${memoizedState.resumeLoading ? "animate-spin" : ""
+                    }`}
                 >
                   <path
                     strokeLinecap="round"
