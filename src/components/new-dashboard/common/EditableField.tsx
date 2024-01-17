@@ -50,7 +50,7 @@ const EditableField = ({
         onBlur={handleBlur}
         className=""
       >
-        {userData?.userPackageData?.limit?.can_edit_resume && isEditing ? (
+        {userData?.creditPackage && isEditing ? (
           <>
             {type === "textarea" ? (
               <textarea

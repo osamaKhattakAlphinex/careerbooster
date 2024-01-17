@@ -236,7 +236,7 @@ const ResumeTemplate18 = () => {
 
   return (
     <div className="w-full first-page relative text-gray-900">
-      <div className="flex absolute text-center top-0 w-full xs:w-8/12 md:w-8/12 items-center  justify-center py-8 xs:py-2 md:py-8">
+      <div className="flex absolute text-center top-0 w-8/12 xs:w-8/12 xs:left-1 md:w-8/12 items-center  justify-center py-8 xs:py-2 md:py-8">
         <div className="flex flex-col px-1 py-8">
           <h2 className="text-2xl md:text-5xl font-serif text-center font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
@@ -262,7 +262,7 @@ const ResumeTemplate18 = () => {
       <div className="flex">
         <div className="w-full flex flex-col px-4 md:px-8 pt-[13rem] xs:pt-[10rem] md:pt-[13rem] ">
           {/* Executive Summary */}
-          <span className="border-stylee w-full h-0 my-3 xs:my-0 md:my-3"></span>
+          <span className="border-stylee w-full h-0  my-3  xs:my-3 md:my-3"></span>
           <h3 className="uppercase text-xl xs:text-lg  font-semibold border-[#444440] border-b-2  rounded-sm text-gray-900 w-full py-1">
             EXECUTIVE SUMMARY
           </h3>
@@ -630,7 +630,7 @@ const ResumeTemplate18 = () => {
             </>
           )}
         </div>
-        <div className=" w-4/12 md:w-1/3 flex flex-col relative inset-0 items-center md:px-6  bg-[#22405c]">
+        <div className=" w-4/12 xs:w-4/12 md:w-1/3 flex flex-col relative inset-0 items-center px-6 xs:px-0 md:px-6  bg-[#22405c]">
           <span className="w-full bg-[#182d40] absolute md:-mx-6 h-4"></span>
           <div className="border-[.5rem] xs:border-[2px] md:border-[.5rem] border-[#395168]   text-gray-800 mt-[3rem] bg-[#182d40] text-center flex justify-center items-center rounded-md">
             <div className=" w-36 h-36 xs:w-[5.5rem] xs:h-[5.5rem]   md:w-36 lg:h-36 lg:w-36 text-[#F1F1F1] flex justify-center items-center bg-[#182d40]  rounded-md ">
@@ -747,7 +747,7 @@ const ResumeTemplate18 = () => {
               resume?.primarySkills.length > 0 &&
               !regenerating ? (
                 <ul
-                  className="pl-0 flex  flex-col xs:px-2 md:px-0 gap-1 mb-4 text-gray-300 w-full text-sm "
+                  className="pl-0 flex  flex-col xs:px-1 md:px-0 gap-1 mb-4 text-gray-300 w-full text-sm "
                   onMouseEnter={() =>
                     !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                   }
@@ -763,7 +763,7 @@ const ResumeTemplate18 = () => {
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent xs:w-12/12 hover:text-black hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex items-center  "
+                        className="hover:shadow-md hover:cursor-move parent xs:w-full hover:text-black hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex items-center  "
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -867,7 +867,7 @@ const ResumeTemplate18 = () => {
                   )}
                   {primarySkillAddButtonVisible ? (
                     <div
-                      className="border-2 w-1/2 xs:w-3/12 mt-3 sm:w-full  md:w-1/2 lg:w-1/2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                      className="border-2 w-1/2 xs:w-full justify-center xs:mt-10 flex md:w-1/2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                       onClick={() => {
                         setNewPrimarySkill(true);
                         setPrimarySkillAddButtonVisible(false);
