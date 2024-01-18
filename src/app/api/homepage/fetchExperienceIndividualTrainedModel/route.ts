@@ -23,7 +23,7 @@ export async function POST(req: any) {
     const body = await req.json();
     if (body) {
       const reqBody = body;
-      const content = removeSpecialChars(reqBody.content);
+      const content = reqBody.content.substring(0, 12000);
       const jobTitle = reqBody.jobTitle;
       const company = reqBody.company;
       const trainBotData = reqBody.trainBotData;

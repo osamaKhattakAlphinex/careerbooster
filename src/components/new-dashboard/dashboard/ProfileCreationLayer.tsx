@@ -335,6 +335,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       })
         .then(async (resp: any) => {
           const res = await resp.json();
+
           if (res.success) {
             if (res?.result) {
               let data;
@@ -343,8 +344,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
               } else {
                 data = await JSON.parse(res.result);
               }
-              const experiencesWithTitle = data?.experiences;
 
+              const experiencesWithTitle = data?.experiences;
               // loop through this array and call an api for individual one
               // if the result of an api is not done donot make call to another api
 
