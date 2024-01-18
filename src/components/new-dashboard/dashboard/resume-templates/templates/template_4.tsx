@@ -297,7 +297,7 @@ const ResumeTemplate4 = () => {
               {resume?.primarySkills &&
               resume?.primarySkills.length > 0 &&
               !regenerating ? (
-                <ol
+                <ul
                   className="pl-0 flex list-styled flex-col gap-3 mb-4 text-[16px] xs:text-[12px] md:text-[16px]"
                   onMouseEnter={() =>
                     !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
@@ -424,7 +424,7 @@ const ResumeTemplate4 = () => {
                       + Add
                     </div>
                   ) : null}
-                </ol>
+                </ul>
               ) : (
                 <span>
                   Wait! We are regenerating your skills .... <br />
@@ -496,11 +496,11 @@ const ResumeTemplate4 = () => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-center items-center ${
-                      i > 0 ? "w-[100vw] ml-[-234px] xs:ml-0 xs:w-full" : "mb-5"
+                    className={`flex justify-start items-center ${
+                      i > 0 ? "w-[100vw] ml-[-234px] xs:ml-0 xs:w-full" : ""
                     }`}
                   >
-                    <div className="w-[5%] pr-5 xs:pr-0 md:pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
+                    <div className="w-[5%] px-5 xs:pr-0 md:pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
                       {resume?.workExperienceArray.length - 1 !== i && (
                         <div className="h-full w-[2px] bg-gray-500"></div>
@@ -647,6 +647,7 @@ const ResumeTemplate4 = () => {
                             setRegeneratedRecordIndex(i);
                           }}
                           custom_style={"absolute mt-0 right-2"}
+                          custom_style_li={"flex flex-col gap-2"}
                         >
                           {rec?.achievements && i !== regeneratedRecordIndex ? (
                             <ul className="pl-0 flex flex-col gap-1 text-sm md:text-lg">
@@ -937,6 +938,7 @@ const ResumeTemplate4 = () => {
               }}
             ></div>
           )}
+
           {/* Education */}
 
           {resume?.education && (
