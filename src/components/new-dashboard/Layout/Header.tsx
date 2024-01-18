@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
   return (
     <nav
-      className={`dark:bg-gradient-to-l from-[#340e53] to-[#000533]  bg-[#e4e9f7] py-[12px] px-4 ml-0 sticky top-0   z-10     
+      className={`dark:bg-gradient-to-l from-[#340e53] to-[#000533]  bg-[#e4e9f7] py-[12px] px-4 ml-0 sticky top-0   z-20     
       ${pagesArray?.includes(pathname) ? "m-5" : "lg:ml-[234px]"} 
       ${pathname === "/subscribed" && "hidden"} 
       `}
@@ -54,9 +54,8 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
         <div className="flex">
           <button
             onClick={() => setIsModalOpen(!isModalOpen)}
-            className={` dark:text-gray-100 text-gray-950 flex justify-center mr-3 items-center  w-[40px] h-[40px] rounded-full capitalize  ${
-              pathname === "/subscribe" ? "hidden" : ""
-            } ${isModalOpen && "header-mode-btn-click"} `}
+            className={` dark:text-gray-100 text-gray-950 flex justify-center mr-3 items-center  w-[40px] h-[40px] rounded-full capitalize  ${pathname === "/subscribe" ? "hidden" : ""
+              } ${isModalOpen && "header-mode-btn-click"} `}
           >
             {bellIcon}
           </button>

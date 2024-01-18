@@ -111,7 +111,7 @@ const Header = () => {
                   <div className="relative inline-block text-left">
                     {/* if the screen is on mobile */}
                     {typeof window !== "undefined" &&
-                    /Mobile/.test(navigator.userAgent) ? (
+                      /Mobile/.test(navigator.userAgent) ? (
                       <div>
                         {userData.firstName + " " + userData.lastName}
                         <Link
