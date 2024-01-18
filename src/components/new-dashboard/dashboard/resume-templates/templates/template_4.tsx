@@ -538,9 +538,9 @@ const ResumeTemplate4 = () => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-start items-center ${i > 0
-                        ? "w-[100vw] ml-[-218px] xs:ml-0 xs:w-full mt-2"
-                        : "mb-[60px] md:mb-0 h-[450px]"
+                    className={`flex justify-start items-start ${i > 0
+                      ? "w-[100vw] ml-[-218px] xs:ml-0 xs:w-full mt-2"
+                      : "mb-[60px] md:mb-0 min-h-[350px]"
                       }`}
                   >
                     <div className="w-[5%] pl-4 xs:pr-0 md:pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
