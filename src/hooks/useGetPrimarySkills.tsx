@@ -44,6 +44,7 @@ const useGetPrimarySkills = (setRegenerating: any) => {
                 personName: userData?.firstName + " " + userData?.lastName,
                 userData: aiInputUserData,
                 jobPosition: resumeData.state.jobPosition,
+                userCredits: userData.userCredits,
                 creditsUsed: creditLimits.resume_skills,
 
                 trainBotData: {

@@ -50,41 +50,41 @@ export async function POST(req: any) {
           );
         }
 
-        if (user.userPackageUsed) {
-          switch (_body?.type) {
-            case "resumes_generation":
-              user.userPackageUsed.resumes_generation += 1;
-              break;
-            case "keywords_generation":
-              user.userPackageUsed.keywords_generation += 1;
-              break;
-            case "cover_letter_generation":
-              user.userPackageUsed.cover_letter_generation += 1;
-              break;
-            case "pdf_files_upload":
-              user.userPackageUsed.pdf_files_upload += 1;
-              break;
-            case "job_desc_generation":
-              user.userPackageUsed.job_desc_generation += 1;
-              break;
-            case "headline_generation":
-              user.userPackageUsed.headline_generation += 1;
-              break;
-            case "about_generation":
-              user.userPackageUsed.about_generation += 1;
-              break;
-            case "consulting_bids_generation":
-              user.userPackageUsed.consulting_bids_generation += 1;
-              break;
-            case "email_generation":
-              user.userPackageUsed.email_generation += 1;
-              break;
-            case "review_resume":
-              user.userPackageUsed.review_resume += 1;
-              break;
-            // Add more cases for other types
-          }
-        }
+        // if (user.userPackageUsed) {
+        //   switch (_body?.type) {
+        //     case "resumes_generation":
+        //       user.userPackageUsed.resumes_generation += 1;
+        //       break;
+        //     case "keywords_generation":
+        //       user.userPackageUsed.keywords_generation += 1;
+        //       break;
+        //     case "cover_letter_generation":
+        //       user.userPackageUsed.cover_letter_generation += 1;
+        //       break;
+        //     case "pdf_files_upload":
+        //       user.userPackageUsed.pdf_files_upload += 1;
+        //       break;
+        //     case "job_desc_generation":
+        //       user.userPackageUsed.job_desc_generation += 1;
+        //       break;
+        //     case "headline_generation":
+        //       user.userPackageUsed.headline_generation += 1;
+        //       break;
+        //     case "about_generation":
+        //       user.userPackageUsed.about_generation += 1;
+        //       break;
+        //     case "consulting_bids_generation":
+        //       user.userPackageUsed.consulting_bids_generation += 1;
+        //       break;
+        //     case "email_generation":
+        //       user.userPackageUsed.email_generation += 1;
+        //       break;
+        //     case "review_resume":
+        //       user.userPackageUsed.review_resume += 1;
+        //       break;
+        //     // Add more cases for other types
+        //   }
+        // }
 
         await user.save();
 

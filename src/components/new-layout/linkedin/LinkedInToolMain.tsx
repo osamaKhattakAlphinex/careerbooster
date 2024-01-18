@@ -14,11 +14,11 @@ import { useRouter } from "next/navigation";
 import FileUploadHandler from "@/components/FileUploadHandler";
 import ReCAPTCHA from "react-google-recaptcha";
 import { verifyInvisibleCaptcha } from "@/ServerActions";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import axios from "axios";
+
 
 const saveToLocalStorage = (text: any, fileName: any) => {
+  console.log("first");
+
   localStorage.setItem("linkedin-content", text);
   localStorage.setItem("linkedin-fileName", fileName);
 };
@@ -34,26 +34,6 @@ const LinkedInToolMain = () => {
   const [uploadComplete, setUploadComplete] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
 
-  const formik = useFormik({
-    initialValues: {
-      linkedInUrl: "",
-    },
-    validationSchema: Yup.object({
-      linkedInUrl: Yup.string()
-        .matches(
-          /^(https?:\/\/)?([\w-]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/?$/,
-          "Invalid LinkedIn profile URL"
-        )
-        .required("LinkedIn profile URL is required"),
-    }),
-    onSubmit: async (values) => {
-      try {
-        await axios.post("/api/scrapper", { ...values });
-      } catch (err) {
-        console.log(err);
-      }
-    },
-  });
 
   useEffect(() => {
     if (file && file.type === "application/pdf") {
@@ -81,6 +61,7 @@ const LinkedInToolMain = () => {
 
       const fileInput = e.target;
       if (fileInput && fileInput.files && fileInput.files.length > 0) {
+
         setFile(fileInput.files[0]);
         setFileName(fileInput.files[0].name);
       }
@@ -88,15 +69,18 @@ const LinkedInToolMain = () => {
   };
   useEffect(() => {
     if (file && file.type === "application/pdf") {
+
       setFileUploading(true);
       setUploadComplete(true);
-      router.push(`/linkedin/result`);
     }
   }, [file, fileName]);
 
   useEffect(() => {
     if (uploadComplete && fileUploading && text !== "") {
+
       saveToLocalStorage(text, fileName);
+      router.push(`/linkedin/result`);
+
     }
   }, [fileUploading, uploadComplete, text]);
   // useEffect(() => {
@@ -128,27 +112,7 @@ const LinkedInToolMain = () => {
             $1000 if we waste your time with irrelevant outcomes.
           </h5>
 
-          {/* <form onSubmit={formik.handleSubmit} className=" flex justify-center">
-            <div className="flex flex-row justify-between items-center gap-3">
-              <input
-                name="linkedInUrl"
-                type="text"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.linkedInUrl}
-                placeholder="linkedin profile url"
-                className="p-2 rounded-md"
-              />
-              <button className="bg-gray-800 p-2 rounded-md" type="submit">
-                Go!
-              </button>
-              {formik.touched.linkedInUrl && formik.errors.linkedInUrl && (
-                <p className="form-text mb-0 !text-red-600">
-                  {formik.touched.linkedInUrl && formik.errors.linkedInUrl}
-                </p>
-              )}
-            </div>
-          </form> */}
+
 
           <div className="mt-11 flex justify-center md:mt-11">
             <label className=" pt-[12px] lg:pt-[20px]  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
@@ -186,7 +150,7 @@ const LinkedInToolMain = () => {
             theme="dark"
           />
         </div>
-        {file !== null && (
+        {file !== null && fileUploading && (
           <FileUploadHandler
             file={file}
             text={text}

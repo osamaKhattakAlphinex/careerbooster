@@ -38,7 +38,7 @@ const useSaveResumeToDB = () => {
         dispatch(setUserData(user));
         // get user package details
         const res2 = await fetch(
-          `/api/users/getUserPackageDetails?id=${user?.userPackage}`
+          `/api/users/getCreditPackageDetails?id=${user?.creditPackage}`
         );
         const data = await res2.json();
         if (data.success) {

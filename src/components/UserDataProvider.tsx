@@ -48,18 +48,18 @@ const UserDataProvider = () => {
           setField({ name: "wizardCompleted", value: user.wizardCompleted })
         );
 
-        if (user?.userPackage) {
-          // get user package details
-          const res2 = await fetch(
-            `/api/users/getUserPackageDetails?id=${user?.userPackage}`
-          );
-          const data = await res2.json();
-          if (data.success) {
-            const userPackage = data.result;
-            // set user package details to redux
-            dispatch(setField({ name: "userPackageData", value: userPackage }));
-          }
-        }
+        // if (user?.userPackage) {
+        //   // get user package details
+        //   const res2 = await fetch(
+        //     `/api/users/getCreditPackageDetails?id=${user?.creditPackage}`
+        //   );
+        //   const data = await res2.json();
+        //   if (data.success) {
+        //     const userPackage = data.result;
+        //     // set user package details to redux
+        //     dispatch(setField({ name: "userPackageData", value: userPackage }));
+        //   }
+        // }
       } catch (err) {
         console.log(err);
       }

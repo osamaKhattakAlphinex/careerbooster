@@ -14,6 +14,8 @@ const FileUploadHandler = ({
   text,
   setText,
 }: any) => {
+  console.log("inside file upload handler");
+
   const onDocumentLoadSuccess = async () => {
     if (file) {
       const reader = new FileReader();
@@ -44,8 +46,10 @@ const FileUploadHandler = ({
             //const content = removeSpecialChars(extractedText);
             setText(content);
             saveToLocalStorage(content);
+            if (fetchRegistrationDataFromResume !== undefined) {
 
-            fetchRegistrationDataFromResume(content);
+              fetchRegistrationDataFromResume(content);
+            }
           })
           .catch((error) =>
             console.error("Failed to extract PDF text:", error)

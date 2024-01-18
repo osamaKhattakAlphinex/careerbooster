@@ -43,13 +43,13 @@ interface UserDataSlice {
   isFetched: boolean;
   isLoading: boolean;
   error: string;
-  userId?: string;
+  // userId?: string;
   firstName?: string;
   lastName?: string;
   phone?: string;
   email?: string;
   role?: string;
-  totalCredits?: number;
+  userCredits?: number;
   contact?: {
     country?: string;
     street?: string;
@@ -65,9 +65,10 @@ interface UserDataSlice {
   defaultResumeFile: string;
   wizardCompleted: boolean;
   wizardReviewed: boolean;
-  userPackage: "";
-  userPackageData: {};
-  userPackageUsed: limitObject | {};
+  creditPackage?: ""
+  // userPackage: "";
+  // userPackageData: {};
+  // userPackageUsed: limitObject | {};
 
 
 }
@@ -76,7 +77,7 @@ const initialState: UserDataSlice = {
   isFetched: false,
   isLoading: false,
   error: "",
-  userId: "",
+  // userId: "",
   firstName: "",
   lastName: "",
   phone: "",
@@ -93,14 +94,16 @@ const initialState: UserDataSlice = {
   files: [],
   uploadedResume: {},
   chatThreads: {},
-  totalCredits: 0,
+  userCredits: 0,
   skills: [],
   defaultResumeFile: "",
   wizardCompleted: false,
   wizardReviewed: false,
-  userPackage: "",
-  userPackageData: {},
-  userPackageUsed: {},
+  creditPackage: ""
+
+  // userPackage: "",
+  // userPackageData: {},
+  // userPackageUsed: {},
 
 
 };

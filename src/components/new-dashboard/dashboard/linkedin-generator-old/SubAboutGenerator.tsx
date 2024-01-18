@@ -44,6 +44,7 @@ const SubAboutGenerator = () => {
   const userData = useSelector((state: any) => state.userData);
   const linkedinAbout = useSelector((state: any) => state.linkedinAbout);
   const { getUserDataIfNotExists: getUserData } = useGetUserData() //using hook function with different name/alias
+  const creditLimits = useSelector((state: any) => state.creditLimits);
 
   useEffect(() => {
     if (
@@ -82,14 +83,15 @@ const SubAboutGenerator = () => {
     await getUserDataIfNotExists();
     if (
       session?.user?.email &&
-      !isNaN(availablePercentage) &&
-      availablePercentage !== 0
+      aiInputUserData
     ) {
       setMsgLoading(true);
       const obj: any = {
         personName: userData.firstName + " " + userData.lastName,
         option: option,
         email: session?.user?.email,
+        userCredits: userData.userCredits,
+        creditsUsed: creditLimits.linkedin_about_generation,
         userData: aiInputUserData,
         trainBotData: {
           userEmail: userData.email,
@@ -115,37 +117,21 @@ const SubAboutGenerator = () => {
               tempText += text;
               setStreamedData((prev) => prev + text);
             }
-            fetch("/api/users/updateUserLimit", {
-              method: "POST",
-              body: JSON.stringify({
-                email: session?.user?.email,
-                type: "about_generation",
-              }),
-            }).then(async (resp: any) => {
-              const res = await resp.json();
-              let user;
-              if (typeof res?.result === "object") {
-                user = res.result;
-              } else {
-                user = await JSON.parse(res.result);
-              }
-              if (res.success) {
-                const AboutResponse = await axios.get(
-                  "/api/linkedInBots/linkedinAboutGenerator/getAllAbout"
-                );
-                const updatedObject = {
-                  ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    about_generation: user.userPackageUsed.about_generation,
-                  },
-                  linkedInAbouts: AboutResponse.data.result.linkedInAbouts,
-                };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
-              }
-            });
+
+            const AboutResponse = await axios.get(
+              "/api/linkedInBots/linkedinAboutGenerator/getAllAbout"
+            );
+            const updatedObject = {
+              ...userData,
+              linkedInAbouts: AboutResponse.data.result.linkedInAbouts,
+              userCredits: userData.userCredits - creditLimits.linkedin_about_generation
+            };
+            dispatch(setUserData({ ...userData, ...updatedObject }));
+
+
           } else {
-            setStreamedData("Error! Something went wrong");
+            const res = await resp.json()
+            setStreamedData(res.result + "! You ran out of Credits");
           }
           setMsgLoading(false);
         })
@@ -215,14 +201,14 @@ const SubAboutGenerator = () => {
               free
             </span>
           </div>
-          <LimitCard
+          {/* <LimitCard
             title="Available"
             limit={userData?.userPackageData?.limit?.about_generation}
             used={userData?.userPackageUsed?.about_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          />
+          /> */}
 
           <p className="text-[14px] text-[#959595] pr-5">
             Generate impressive about for your linkedin

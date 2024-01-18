@@ -58,9 +58,9 @@ export async function POST(req: any) {
     }
 
     // Add one to resumes_generation in userPackageUsed
-    if (user.userPackageUsed && user.userPackageUsed.resumes_generation) {
-      user.userPackageUsed.resumes_generation += 1;
-    }
+    // if (user.userPackageUsed && user.userPackageUsed.resumes_generation) {
+    //   user.userPackageUsed.resumes_generation += 1;
+    // }
 
     // Save the updated user document
     await user.save();

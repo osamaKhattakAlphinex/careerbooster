@@ -87,8 +87,6 @@ const ResumeBuilder = () => {
         getBasicInfo();
         getSummary();
         getPrimarySkills();
-        // getProfessionalSkills();
-        // getSecondarySkills();
         await getWorkExperienceNew(quantifyingExperience);
         runConfetti();
       } else {
@@ -134,6 +132,7 @@ const ResumeBuilder = () => {
         type: "basicDetails",
         inputType: "userData",
         personName: userData.firstName + " " + userData.lastName,
+        userCredits: userData.userCredits,
         creditsUsed: creditLimits.resume_basicInfo,
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
@@ -218,6 +217,7 @@ const ResumeBuilder = () => {
           body: JSON.stringify({
             quantifyingExperience: quantifyingExperience,
             experience: experience,
+            userCredits: userData.userCredits,
             creditsUsed: creditLimits.resume_individualWorkExperience,
             trainBotData: {
               userEmail: userData.email,
@@ -271,6 +271,7 @@ const ResumeBuilder = () => {
       body: JSON.stringify({
         type: "primarySkills",
         personName: userData?.firstName + " " + userData?.lastName,
+        userCredits: userData.userCredits,
         creditsUsed: creditLimits.resume_skills,
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,

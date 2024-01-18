@@ -5,8 +5,6 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import "@/app/plugins.css";
 import "@/app/style.css";
-import { leftArrowIcon } from "@/helpers/iconsProvider";
-import Link from "next/link";
 import CreditPackages from "@/components/dashboard/checkout/CreditPackages";
 export default function SubscribePage() {
   const [showExpiredAlert, setShowExpiredAlert] = useState(false);

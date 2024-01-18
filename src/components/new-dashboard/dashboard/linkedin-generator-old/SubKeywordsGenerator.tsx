@@ -51,6 +51,7 @@ const SubKeywordsGenerator = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const linkedinKeywords = useSelector((state: any) => state.linkedinKeywords);
+  const creditLimits = useSelector((state: any) => state.creditLimits);
 
   // useEffect(() => {
   //   setKeywords(streamedData);
@@ -90,13 +91,13 @@ const SubKeywordsGenerator = () => {
     //change condition
     if (
       session?.user?.email &&
-      !isNaN(availablePercentage) &&
-      availablePercentage !== 0
+      userData.isFetched
     ) {
       setMsgLoading(true);
       const obj: any = {
         personName: userData.firstName + " " + userData.lastName,
-
+        userCredits: userData.userCredits,
+        creditsUsed: creditLimits.linkedin_keywords_generation,
         email: session?.user?.email,
         trainBotData: {
           userEmail: userData.email,
@@ -122,39 +123,23 @@ const SubKeywordsGenerator = () => {
               setStreamedData((prev) => prev + text);
             }
 
-            fetch("/api/users/updateUserLimit", {
-              method: "POST",
-              body: JSON.stringify({
-                email: session?.user?.email,
-                type: "keywords_generation",
-              }),
-            }).then(async (resp: any) => {
-              const res = await resp.json();
-              let user;
-              if (typeof res?.result === "object") {
-                user = res.result;
-              } else {
-                user = await JSON.parse(res.result);
-              }
-              if (res.success) {
-                const KeywordsResponse = await axios.get(
-                  "/api/linkedInBots/keywordsGenerator/getAllLinkedInKeyword"
-                );
-                const updatedObject = {
-                  ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    keywords_generation:
-                      user.userPackageUsed.keywords_generation,
-                  },
-                  linkedInKeywords:
-                    KeywordsResponse.data.result.linkedInKeywords,
-                };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
-              }
-            });
+
+            const KeywordsResponse = await axios.get(
+              "/api/linkedInBots/keywordsGenerator/getAllLinkedInKeyword"
+            );
+            const updatedObject = {
+              ...userData,
+              linkedInKeywords:
+                KeywordsResponse.data.result.linkedInKeywords,
+              userCredits: userData.userCredits - creditLimits.
+                linkedin_keywords_generation
+            };
+            dispatch(setUserData({ ...userData, ...updatedObject }));
+
           } else {
-            setStreamedData("Error! Something went wrong");
+
+            const res = await resp.json()
+            setStreamedData(res.result + "! You ran out of Credits");
           }
           setMsgLoading(false);
         })
@@ -232,14 +217,14 @@ const SubKeywordsGenerator = () => {
               Premium
             </span>
           </div>
-          <LimitCard
+          {/* <LimitCard
             title="Available"
             limit={userData?.userPackageData?.limit?.keywords_generation}
             used={userData?.userPackageUsed?.keywords_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          />
+          /> */}
           <p className="text-[14px] text-[#959595] pr-5">
             Generator popular keywords for your linkedin profile
           </p>

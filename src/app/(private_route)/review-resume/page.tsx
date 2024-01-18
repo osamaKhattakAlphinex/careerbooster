@@ -34,6 +34,8 @@ const ReviewResumeBot = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const { resumes } = userData;
+  const creditLimits = useSelector((state: any) => state.creditLimits);
+
 
   const handleGenerate = async () => {
     if (
@@ -85,31 +87,15 @@ const ReviewResumeBot = () => {
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
             }
-            fetch("/api/users/updateUserLimit", {
-              method: "POST",
-              body: JSON.stringify({
-                email: session?.user?.email,
-                type: "review_resume",
-              }),
-            }).then(async (resp: any) => {
-              const res = await resp.json();
-              let user;
-              if (typeof res.result === "object") {
-                user = res.result;
-              } else {
-                user = await JSON.parse(res.result);
-              }
-              if (res.success) {
-                const updatedObject = {
-                  ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    review_resume: user.userPackageUsed.review_resume,
-                  },
-                };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
-              }
-            });
+
+            const updatedObject = {
+              ...userData,
+              userCredits: userData.userCredits - creditLimits.review_resume,
+
+            };
+            dispatch(setUserData({ ...userData, ...updatedObject }));
+
+
           } else {
             setStreamedData("Error! Something went wrong");
           }
@@ -121,8 +107,8 @@ const ReviewResumeBot = () => {
   };
   const copyCoverLetter = async (text: string) => {
     try {
-      const coverLetterData = await htmlToPlainText(text);
-      await copy(coverLetterData);
+      const reviewResumeData = htmlToPlainText(text);
+      await copy(reviewResumeData);
       setIsCoverLetterCopied(true);
       // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
       setTimeout(() => {
@@ -163,14 +149,14 @@ const ReviewResumeBot = () => {
               Get Your Resume Reviewed by AI
             </h3>
             <div className=" text-sm dark:text-gray-100 text-gray-950 uppercase font-bold">
-              <LimitCard
+              {/* <LimitCard
                 title="Review Availble"
                 limit={userData?.userPackageData?.limit?.review_resume}
                 used={userData?.userPackageUsed?.review_resume}
                 setPercentageCalculated={setPercentageCalculated}
                 availablePercentage={availablePercentage}
                 setAvailablePercentage={setAvailablePercentage}
-              />
+              /> */}
             </div>
           </div>
           <div className="text-sm text-[#615DFF] self-start">
@@ -181,9 +167,8 @@ const ReviewResumeBot = () => {
           <div className="flex flex-col gap-5 lg:px-0 ">
             <label
               htmlFor="default-radio-2"
-              className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[220px] lg:w-[290px] ${
-                selectedOption === "file" ? "border-[1px] border-[#615DFF]" : ""
-              } `}
+              className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[220px] lg:w-[290px] ${selectedOption === "file" ? "border-[1px] border-[#615DFF]" : ""
+                } `}
             >
               <input
                 id="default-radio-2"
@@ -222,16 +207,15 @@ const ReviewResumeBot = () => {
                   (selectedOption === "aiResume" && setSelectedResumeId === "")
                 }
                 onClick={() => handleGenerate()}
-                className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
-                  (msgLoading ||
-                    !session?.user?.email ||
-                    !aiInputUserData ||
-                    selectedOption === "" ||
-                    (selectedOption === "file" && selectedFile === "") ||
-                    (selectedOption === "aiResume" &&
-                      setSelectedResumeId === "")) &&
+                className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
+                  !session?.user?.email ||
+                  !aiInputUserData ||
+                  selectedOption === "" ||
+                  (selectedOption === "file" && selectedFile === "") ||
+                  (selectedOption === "aiResume" &&
+                    setSelectedResumeId === "")) &&
                   "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                }`}
+                  }`}
               >
                 <div className="flex flex-row gap-2">
                   <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
@@ -243,9 +227,8 @@ const ReviewResumeBot = () => {
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="currentColor"
-                          className={`w-4 h-4 mr-3 ${
-                            msgLoading ? "animate-spin" : ""
-                          }`}
+                          className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""
+                            }`}
                         >
                           <path
                             strokeLinecap="round"
@@ -290,9 +273,8 @@ const ReviewResumeBot = () => {
                 Get Your Resume Reviewed by AI
               </h1>
               <div
-                className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] md:[30px] shadow ${
-                  msgLoading ? "animate-pulse" : ""
-                }`}
+                className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] md:[30px] shadow ${msgLoading ? "animate-pulse" : ""
+                  }`}
               >
                 <div
                   className="dark:text-gray-100 text-gray-950"
@@ -314,16 +296,15 @@ const ReviewResumeBot = () => {
                       setSelectedResumeId === "")
                   }
                   onClick={() => handleGenerate()}
-                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
-                    (msgLoading ||
-                      !session?.user?.email ||
-                      !aiInputUserData ||
-                      selectedOption === "" ||
-                      (selectedOption === "file" && selectedFile === "") ||
-                      (selectedOption === "aiResume" &&
-                        setSelectedResumeId === "")) &&
+                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
+                    !session?.user?.email ||
+                    !aiInputUserData ||
+                    selectedOption === "" ||
+                    (selectedOption === "file" && selectedFile === "") ||
+                    (selectedOption === "aiResume" &&
+                      setSelectedResumeId === "")) &&
                     "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                  }`}
+                    }`}
                 >
                   <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                     {msgLoading ? (
@@ -334,9 +315,8 @@ const ReviewResumeBot = () => {
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="currentColor"
-                          className={`w-4 h-4 mr-3 ${
-                            msgLoading ? "animate-spin" : ""
-                          }`}
+                          className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""
+                            }`}
                         >
                           <path
                             strokeLinecap="round"
@@ -390,17 +370,16 @@ const ReviewResumeBot = () => {
                         setSelectedResumeId === "")
                     }
                     onClick={() => copyCoverLetter(streamedData)}
-                    className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border border-[#b324d7] rounded-full ${
-                      msgLoading ||
+                    className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border border-[#b324d7] rounded-full ${msgLoading ||
                       !session?.user?.email ||
                       !aiInputUserData ||
                       selectedOption === "" ||
                       (selectedOption === "file" && selectedFile === "") ||
                       (selectedOption === "aiResume" &&
                         setSelectedResumeId === "")
-                        ? "opacity-50 cursor-not-allowed"
-                        : ""
-                    }`}
+                      ? "opacity-50 cursor-not-allowed"
+                      : ""
+                      }`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -421,8 +400,8 @@ const ReviewResumeBot = () => {
                       {msgLoading
                         ? "Please wait..."
                         : isCoverLetterCopied
-                        ? "Copied"
-                        : "Copy to clipboard"}
+                          ? "Copied"
+                          : "Copy to clipboard"}
                     </span>
                   </button>
                 )}

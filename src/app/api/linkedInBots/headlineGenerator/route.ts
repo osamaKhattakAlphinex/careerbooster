@@ -13,6 +13,7 @@ import {
   makeTrainedBotEntry,
 } from "@/helpers/makeTrainBotEntry";
 import { postHeadlines } from "./linkedInHeadline/route";
+import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -32,10 +33,21 @@ export async function POST(req: any) {
     const reqBody = await req.json();
     const userData = reqBody?.userData;
     const personName = reqBody?.personName
-
+    const creditsUsed = reqBody?.creditsUsed;
+    const userCredits = reqBody?.userCredits;
     const trainBotData = reqBody?.trainBotData;
     const headlineId = reqBody?.headlineId;
     const email = reqBody?.email;
+    console.log(userCredits, creditsUsed);
+
+    if (userCredits) {
+      if (userCredits < creditsUsed) {
+        return NextResponse.json(
+          { result: "Insufficient Credits", success: false },
+          { status: 429 }
+        )
+      }
+    }
 
     await startDB();
     // fetch prompt from db
@@ -53,10 +65,10 @@ export async function POST(req: any) {
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
     const inputPrompt = `Read ${personName}'s resume : ${JSON.stringify(userData)}
-
-          and then:
-          ${prompt}
-          `;
+  
+            and then:
+            ${prompt}
+            `;
 
     const response: any = await openai.chat.completions.create({
       model: model ? model : "gpt-3.5-turbo",
@@ -66,6 +78,9 @@ export async function POST(req: any) {
 
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
+      onStart: async () => {
+        await updateUserTotalCredits(email, creditsUsed)
+      },
       onFinal: async (completions) => {
         try {
           if (trainBotData) {
@@ -99,7 +114,7 @@ export async function POST(req: any) {
 
     // Respond with the stream
     return new StreamingTextResponse(stream);
-    // res.end();
+
   } catch (error) {
     return NextResponse.json(
       { result: "something went wrong", success: false },

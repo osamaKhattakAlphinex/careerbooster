@@ -44,6 +44,8 @@ const SubHeadlineGenerator = () => {
   const userData = useSelector((state: any) => state.userData);
   const linkedinHeadline = useSelector((state: any) => state.linkedinHeadline);
 
+  const creditLimits = useSelector((state: any) => state.creditLimits);
+
   const { getUserDataIfNotExists: getUserData } = useGetUserData() //using hook function with different name/alias
 
   useEffect(() => {
@@ -70,14 +72,14 @@ const SubHeadlineGenerator = () => {
     await getUserDataIfNotExists();
     //change condition
     if (
-      session?.user?.email &&
-      !isNaN(availablePercentage) &&
-      availablePercentage !== 0
+      session?.user?.email && aiInputUserData
     ) {
       setMsgLoading(true);
       const obj: any = {
         personName: userData.firstName + " " + userData.lastName,
         email: session?.user?.email,
+        userCredits: userData.userCredits,
+        creditsUsed: creditLimits.linkedin_headline_generation,
         trainBotData: {
           userEmail: userData.email,
           fileAddress: userData.uploadedResume.fileName,
@@ -102,40 +104,25 @@ const SubHeadlineGenerator = () => {
               tempText += text;
             }
 
-            fetch("/api/users/updateUserLimit", {
-              method: "POST",
-              body: JSON.stringify({
-                email: session?.user?.email,
-                type: "headline_generation",
-              }),
-            }).then(async (resp: any) => {
-              const res = await resp.json();
-              let user;
-              if (typeof res?.result === "object") {
-                user = res.result;
-              } else {
-                user = await JSON.parse(res.result);
-              }
-              if (res.success) {
-                const HeadlineResponse = await axios.get(
-                  "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines"
-                );
-                const updatedObject = {
-                  ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    headline_generation:
-                      user.userPackageUsed.headline_generation,
-                  },
-                  linkedInHeadlines:
-                    HeadlineResponse.data.result.linkedInHeadlines,
-                };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
-                // dispatch()
-              }
-            });
+
+
+            const HeadlineResponse = await axios.get(
+              "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines"
+            );
+            const updatedObject = {
+              ...userData,
+              linkedInHeadlines:
+                HeadlineResponse.data.result.linkedInHeadlines,
+              userCredits: userData.userCredits - creditLimits.linkedin_headline_generation
+
+            };
+            dispatch(setUserData({ ...userData, ...updatedObject }));
+            // dispatch()
+
+
           } else {
-            setStreamedData("Error! Something went wrong");
+            const res = await resp.json()
+            setStreamedData(res.result + "! You ran out of Credits");
           }
           setMsgLoading(false);
         })
@@ -206,14 +193,14 @@ const SubHeadlineGenerator = () => {
               free
             </span>
           </div>
-          <LimitCard
+          {/* <LimitCard
             title="Available"
             limit={userData?.userPackageData?.limit?.headline_generation}
             used={userData?.userPackageUsed?.headline_generation}
             setPercentageCalculated={setPercentageCalculated}
             availablePercentage={availablePercentage}
             setAvailablePercentage={setAvailablePercentage}
-          />
+          /> */}
           <p className="text-[14px] text-[#959595] pr-5">
             Generate headline for your linkedin in one click
           </p>
@@ -274,15 +261,14 @@ const SubHeadlineGenerator = () => {
           <div
             className="font-sans whitespace-pre-wrap dark:text-gray-100 text-gray-950 break-words"
             ref={componentRef}
-            // style={{ textW: "auto" }}
+          // style={{ textW: "auto" }}
           >
             {streamedData}
             <button
               disabled={msgLoading}
               onClick={() => copyHeadline(streamedData)}
-              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${
-                msgLoading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -303,8 +289,8 @@ const SubHeadlineGenerator = () => {
                 {msgLoading
                   ? "Please wait..."
                   : isHeadlineCopied
-                  ? "Copied"
-                  : "Copy to clipboard"}
+                    ? "Copied"
+                    : "Copy to clipboard"}
               </span>
             </button>
           </div>

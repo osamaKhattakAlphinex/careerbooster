@@ -40,7 +40,6 @@ const UpdateCreditPackage = ({ customer }: any) => {
                                 userCredits: obj.userCredits
                             })
                         );
-                        dispatch(setField({ name: "userPackageData", value: creditPackage }));
 
                         makePaymentEntry(creditPackage);
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { cloneElement, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "@/store/userDataSlice";
@@ -14,13 +14,13 @@ import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
 import { setCoverLetter } from "@/store/coverLetterSlice";
 
-import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import CoverLetterCardSingle from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterCardSingle";
-import Image from "next/image";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import { makeid } from "@/helpers/makeid";
 import DownloadService from "@/helpers/downloadFile";
+import useGetCreditLimits from "@/hooks/useGetCreditLimits";
+import useGetUserData from "@/hooks/useGetUserData";
 
 export default function CoverLetterPage() {
   const componentRef = useRef<any>(null);
@@ -38,6 +38,7 @@ export default function CoverLetterPage() {
   const [isEditing, setIsEditing] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
+  const creditLimits = useSelector((state: any) => state.creditLimits);
   // Function to toggle editing mode on double-click
   const handleClick: any = () => {
     // setEditedContent(streamedData);
@@ -99,8 +100,7 @@ export default function CoverLetterPage() {
   // limit bars
   const [availablePercentageCoverLetter, setAvailablePercentageCoverLetter] =
     useState<number>(0);
-  const [percentageCalculatedCoverLetter, setPercentageCalculatedCoverLetter] =
-    useState<boolean>(false);
+
 
   // Redux
   const dispatch = useDispatch();
@@ -108,15 +108,12 @@ export default function CoverLetterPage() {
   const coverLetter = useSelector((state: any) => state.coverLetter);
 
   // console.clear();
-  const { resumes, coverLetters } = userData;
+  const { resumes } = userData;
 
   const handleGenerate = async () => {
-    // await getUserDataIfNotExists();
     if (
       session?.user?.email &&
-      aiInputUserData &&
-      !isNaN(availablePercentageCoverLetter) &&
-      availablePercentageCoverLetter !== 0
+      aiInputUserData
     ) {
       setMsgLoading(true);
       setShow(true);
@@ -126,6 +123,8 @@ export default function CoverLetterPage() {
         coverletterId: coverletterId,
         type: selectedOption,
         email: session?.user?.email,
+        userCredits: userData.userCredits,
+        creditsUsed: creditLimits.cover_letter_generation,
         jobDescription,
         trainBotData: {
           userEmail: userData.email,
@@ -174,49 +173,30 @@ export default function CoverLetterPage() {
               tempText += text;
             }
 
-
-            const limitUpdateResponse = await fetch(
-              "/api/users/updateUserLimit",
-              {
-                method: "POST",
-                body: JSON.stringify({
-                  email: session?.user?.email,
-                  type: "cover_letter_generation",
-                }),
-              }
+            const coverLetterResponse = await axios.get(
+              "/api/coverLetterBot/getAllCoverLetters"
             );
 
-            const limitUpdateData = await limitUpdateResponse.json();
-
-            if (limitUpdateData.success) {
-              const coverLetterResponse = await axios.get(
-                "/api/coverLetterBot/getAllCoverLetters"
+            if (coverLetterResponse.data.success) {
+              // Update Redux store
+              const updatedObject = {
+                ...userData,
+                userCredits: userData.userCredits - creditLimits.cover_letter_generation,
+                coverLetters: coverLetterResponse.data.result.coverLetters,
+              };
+              dispatch(setUserData({ ...userData, ...updatedObject }));
+              dispatch(
+                setCoverLetter(
+                  coverLetterResponse.data.result.coverLetters[
+                  coverLetterResponse.data.result.coverLetters.length - 1
+                  ]
+                )
               );
-
-              if (coverLetterResponse.data.success) {
-                // Update Redux store
-                const updatedObject = {
-                  ...userData,
-                  userPackageUsed: {
-                    ...userData.userPackageUsed,
-                    cover_letter_generation:
-                      limitUpdateData.result.userPackageUsed
-                        .cover_letter_generation,
-                  },
-                  coverLetters: coverLetterResponse.data.result.coverLetters,
-                };
-                dispatch(setUserData({ ...userData, ...updatedObject }));
-                dispatch(
-                  setCoverLetter(
-                    coverLetterResponse.data.result.coverLetters[
-                    coverLetterResponse.data.result.coverLetters.length - 1
-                    ]
-                  )
-                );
-              }
             }
+
           } else {
-            setStreamedData("Error! Something went wrong");
+            const res = await resp.json()
+            setStreamedData(res.result + "! You ran out of Credits");
           }
         })
         .finally(() => {
@@ -324,7 +304,7 @@ export default function CoverLetterPage() {
                   Generate Cover Letter
                 </h3>
                 <div className=" text-sm dark:text-gray-100 text-gray-950 uppercase font-bold">
-                  <LimitCard
+                  {/* <LimitCard
                     title="Cover Letter Availble"
                     limit={
                       userData?.userPackageData?.limit?.cover_letter_generation
@@ -333,7 +313,7 @@ export default function CoverLetterPage() {
                     setPercentageCalculated={setPercentageCalculatedCoverLetter}
                     availablePercentage={availablePercentageCoverLetter}
                     setAvailablePercentage={setAvailablePercentageCoverLetter}
-                  />
+                  /> */}
                 </div>
               </div>
 
@@ -354,8 +334,8 @@ export default function CoverLetterPage() {
                 <label
                   htmlFor="default-radio-1"
                   className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[290px] lg:w-[400px] ${selectedOption === "profile"
-                      ? "border-[1px] border-[#615DFF]"
-                      : ""
+                    ? "border-[1px] border-[#615DFF]"
+                    : ""
                     }`}
                 >
                   <input
@@ -380,8 +360,8 @@ export default function CoverLetterPage() {
                 <label
                   htmlFor="default-radio-2"
                   className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[220px] lg:w-[290px] ${selectedOption === "file"
-                      ? "border-[1px] border-[#615DFF]"
-                      : ""
+                    ? "border-[1px] border-[#615DFF]"
+                    : ""
                     } `}
                 >
                   <input
@@ -443,11 +423,11 @@ export default function CoverLetterPage() {
                   }
                   onClick={handleGenerate}
                   className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
-                      !session?.user?.email ||
-                      !aiInputUserData ||
-                      selectedOption === "" ||
-                      (selectedOption === "file" && selectedFile === "") ||
-                      jobDescription === "") &&
+                    !session?.user?.email ||
+                    !aiInputUserData ||
+                    selectedOption === "" ||
+                    (selectedOption === "file" && selectedFile === "") ||
+                    jobDescription === "") &&
                     "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
                     }`}
                 >
@@ -544,12 +524,12 @@ export default function CoverLetterPage() {
                           }
                           onClick={handleGenerate}
                           className={` border border-[#b324d7]  flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
-                              !session?.user?.email ||
-                              !aiInputUserData ||
-                              selectedOption === "" ||
-                              (selectedOption === "file" &&
-                                selectedFile === "") ||
-                              jobDescription === "") &&
+                            !session?.user?.email ||
+                            !aiInputUserData ||
+                            selectedOption === "" ||
+                            (selectedOption === "file" &&
+                              selectedFile === "") ||
+                            jobDescription === "") &&
                             "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
                             }`}
                         >
@@ -620,16 +600,16 @@ export default function CoverLetterPage() {
                         }
                         onClick={() => copyCoverLetter(streamedData)}
                         className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border border-[#b324d7] rounded-full ${msgLoading ||
-                            !session?.user?.email ||
-                            !aiInputUserData ||
-                            selectedOption === "" ||
-                            (selectedOption === "file" && selectedFile === "") ||
-                            (selectedOption === "aiResume" &&
-                              setSelectedResumeId === "") ||
-                            !show ||
-                            isCoverLetterCopied
-                            ? "opacity-50 cursor-not-allowed"
-                            : ""
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          (selectedOption === "aiResume" &&
+                            setSelectedResumeId === "") ||
+                          !show ||
+                          isCoverLetterCopied
+                          ? "opacity-50 cursor-not-allowed"
+                          : ""
                           }`}
                       >
                         <svg
@@ -665,8 +645,8 @@ export default function CoverLetterPage() {
                           }
                           onClick={handleClick}
                           className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border border-[#b324d7] rounded-full ${!show || msgLoading || !session?.user?.email
-                              ? "opacity-50 cursor-not-allowed"
-                              : ""
+                            ? "opacity-50 cursor-not-allowed"
+                            : ""
                             } `}
                         >
                           <div className="flex flex-row gap-2">
@@ -686,8 +666,8 @@ export default function CoverLetterPage() {
                             </svg>
                             <span
                               className={`dark:text-[#fef08a] text-gray-950 text-[15px] font-semibold ${!show || msgLoading || !session?.user?.email
-                                  ? "opacity-50 cursor-not-allowed"
-                                  : ""
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
                                 } `}
                             >
                               Edit

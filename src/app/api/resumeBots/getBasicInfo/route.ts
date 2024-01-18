@@ -43,10 +43,19 @@ export async function POST(req: any) {
     const jobPosition = reqBody?.jobPosition;
     const userData = reqBody?.userData;
     const personName = reqBody?.personName
+
+    const userCredits = reqBody?.userCredits;
     const creditsUsed = reqBody?.creditsUsed;
     // const email = reqBody?.email;
     const trainBotData = reqBody?.trainBotData;
-
+    if (userCredits) {
+      if (userCredits < creditsUsed) {
+        return NextResponse.json(
+          { result: "Insufficient Credits", success: false },
+          { status: 429 }
+        )
+      }
+    }
 
     if (type === "basicDetails") {
       const dataset = "resume.getBasicInfo";
@@ -65,28 +74,28 @@ export async function POST(req: any) {
         const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
           userData
         )}
-        
-        Please find the following details in above provided userdata:
-        shortName, jobTitle, linkedIn
-        the shortName means two letters from Name of the person.
-        ${prompt}
+      
+      Please find the following details in above provided userdata:
+      shortName, jobTitle, linkedIn
+      the shortName means two letters from Name of the person.
+      ${prompt}
 
-        the linkedIn means the LinkedInUrl of the person.
+      the linkedIn means the LinkedInUrl of the person.
 
-        The output must be in this format. (following is an example)
-        {
-          "shortName": "AB",
-          "jobTitle": "Software Engineer",
-          "contact": {
-            "linkedIn": "https://www.linkedin.com/in/abc/"
-          }
+      The output must be in this format. (following is an example)
+      {
+        "shortName": "AB",
+        "jobTitle": "Software Engineer",
+        "contact": {
+          "linkedIn": "https://www.linkedin.com/in/abc/"
         }
+      }
 
 
-        The output must be a valid JSON
-        Do not add anything if there is no value for a field. if there is no value leave that field blank donot add any extra labesls.
+      The output must be a valid JSON
+      Do not add anything if there is no value for a field. if there is no value leave that field blank donot add any extra labesls.
 
-        `;
+      `;
         const response: any = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
           // stream: true,
@@ -166,9 +175,9 @@ export async function POST(req: any) {
         let promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
         promptSummary = prompt.replaceAll("{{PersonName}}", personName);
         const inputPrompt = `Read ${personName}'s Resume data: ${JSON.stringify(userData)}
-        
-        and then:
-                ${promptSummary}`;
+      
+      and then:
+              ${promptSummary}`;
 
         const response: any = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
@@ -247,13 +256,13 @@ export async function POST(req: any) {
         const inputPrompt = `Read ${personName}'s Resume data:: ${JSON.stringify(
           userData
         )}
-        
       
-        and then:
-        ${promptRefined}
-        
-        the answer must be in a valid JSON array
-        `;
+    
+      and then:
+      ${promptRefined}
+      
+      the answer must be in a valid JSON array
+      `;
 
         const response: any = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
@@ -317,6 +326,7 @@ export async function POST(req: any) {
         );
       }
     }
+
 
   }
 }
