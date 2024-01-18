@@ -260,7 +260,7 @@ const ResumeTemplate18 = () => {
         </div>
       </div>
       <div className="flex">
-        <div className="w-full flex flex-col px-4 md:px-8 pt-[13rem] xs:pt-[10rem] md:pt-[13rem] ">
+        <div className="w-9/12 md:w-full flex flex-col px-4 md:px-8 pt-[8rem] xs:pt-[10rem] md:pt-[13rem] ">
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0  my-3  xs:my-3 md:my-3"></span>
           <h3 className="uppercase text-xl xs:text-lg  font-semibold border-[#444440] border-b-2  rounded-sm text-gray-900 w-full py-1">
@@ -500,7 +500,7 @@ const ResumeTemplate18 = () => {
             ></div>
           )}
           {resume?.education && (
-            <>
+            <div className="w-[100vw] xs:w-auto">
               <span
                 className="border-stylee w-full h-0 
            my-3"
@@ -530,7 +530,6 @@ const ResumeTemplate18 = () => {
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
                    hover:bg-gray-100 font-semibold  hover:text-black flex uppercase text-md   items-center "
                       >
-                        <span className="w-1.5 h-1.5 bg-gray-800 rounded-full mr-3"></span>
                         <div className="flex flex-row w-full items-center justify-between">
                           <EditableField
                             type="textarea"
@@ -651,10 +650,10 @@ const ResumeTemplate18 = () => {
                   </React.Fragment>
                 ))}
               </ul>
-            </>
+            </div>
           )}
         </div>
-        <div className=" w-4/12 xs:w-4/12 md:w-1/3 flex flex-col relative inset-0 items-center px-6 xs:px-0 md:px-6  bg-[#22405c]">
+        <div className=" w-full md:w-4/12 xs:w-4/12  flex flex-col relative inset-0 items-center px-6 xs:px-0 md:px-6  bg-[#22405c] h-[1080px] xs:h-auto">
           <span className="w-full bg-[#182d40] absolute md:-mx-6 h-4"></span>
           <div className="border-[.5rem] xs:border-[2px] md:border-[.5rem] border-[#395168]   text-gray-800 mt-[3rem] bg-[#182d40] text-center flex justify-center items-center rounded-md">
             <div className=" w-36 h-36 xs:w-[5.5rem] xs:h-[5.5rem]   md:w-36 lg:h-36 lg:w-36 text-[#F1F1F1] flex justify-center items-center bg-[#182d40]  rounded-md ">
@@ -674,7 +673,6 @@ const ResumeTemplate18 = () => {
           {/* contacts */}
           <span className="border-stylee w-full h-0 my-3"></span>
           <h3 className="uppercase xs:px-2 text-lg xs:text-[14px]  md:text-lg font-semibold w-full  border-b-2 border-white pb-2 text-white  py-1 rounded-sm flex items-center  flex-row gap-2 ">
-            {contactIcon}
             Contact
           </h3>
           <span className="border-stylee w-full h-0 my-3"></span>
@@ -763,7 +761,6 @@ const ResumeTemplate18 = () => {
             <>
               <span className="border-stylee w-full h-0  my-1"></span>
               <h3 className="uppercase text-lg xs:px-3 md:px-0  xs:text-[14px] md:text-lg font-semibold w-full  border-b-2 border-white pb-2 text-white  py-1 rounded-sm flex items-center  flex-row gap-2 ">
-                {sparkleIcon}
                 Skills
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>

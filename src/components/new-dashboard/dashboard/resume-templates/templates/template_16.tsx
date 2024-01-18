@@ -615,10 +615,10 @@ const ResumeTemplate16 = () => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-center items-center ${
+                    className={`flex justify-start items-center ${
                       i > 0
                         ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
-                        : "mb-[100px]"
+                        : "mb-[100px] md:mb-0"
                     }`}
                   >
                     <div
@@ -1181,7 +1181,7 @@ const ResumeTemplate16 = () => {
                           }}
                         />{" "}
                       </li>
-                      <li className="hover:shadow-md text-gray-800 hover:text-black hover:bg-gray-100 text-sm ">
+                      <li className="hover:shadow-md text-gray-800 hover:text-black italic hover:bg-gray-100 text-sm ">
                         <EditableField
                           type="textarea"
                           rows={2}
@@ -1211,7 +1211,7 @@ const ResumeTemplate16 = () => {
                           }}
                         />
                       </li>
-                      <li className="mb-4 text-xs text-gray-800 ">
+                      <li className="mb-4 text-xs text-gray-800 italic ">
                         {education?.fromMonth + " " + education.fromYear} -{" "}
                         {education?.isContinue
                           ? "Present"
