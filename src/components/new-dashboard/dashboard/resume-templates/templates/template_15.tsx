@@ -237,9 +237,9 @@ const ResumeTemplate15 = () => {
 
   return (
     <div className="w-full first-page relative text-gray-900">
-      <div className="flex absolute xs:px-3 xs:backdrop:pb-20 top-0 left-1/3  py-8 xs:py-4 md:py-8 ">
-        <div className="flex flex-col xs:px-4 md:px-0 py-8">
-          <h2 className="text-4xl xs:text-lg md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
+      <div className="flex absolute xs:px-3 xs:backdrop:pb-20 justify-center top-0 left-1/3  py-8 xs:py-4 md:py-8 ">
+        <div className="flex flex-col xs:px-4 md:px-0 justify-center py-8">
+          <h2 className="text-4xl xs:text-lg md:text-4xl text-center font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -249,7 +249,7 @@ const ResumeTemplate15 = () => {
               }}
             />
           </h2>
-          <h3 className="text-2xl xs:text-[16px] leading-none md:text-2xl hover:shadow-md my-2 hover:bg-gray-100">
+          <h3 className="text-2xl xs:text-[16px] leading-none text-center md:text-2xl hover:shadow-md my-2 hover:bg-gray-100">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -598,10 +598,10 @@ const ResumeTemplate15 = () => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-center items-center ${
+                    className={`flex justify-start items-center ${
                       i > 0
                         ? "w-[100vw] ml-[-240px] xs:ml-0 xs:w-full"
-                        : "mb-[60px]"
+                        : "mb-[20px]"
                     }`}
                   >
                     <div
