@@ -271,7 +271,7 @@ const ResumeTemplate17 = () => {
         </div>
       </div>
       <div className="flex">
-        <div className=" w-[35%] md:w-1/3 flex flex-col  items-center   bg-[#323b4c] px-9 xs:px-2 md:px-4   pt-[2rem] h-[1130px] xs:h-auto ">
+        <div className=" w-[35%] md:w-1/3 flex flex-col  items-center   bg-[#323b4c] px-9 xs:px-2 md:px-4   pt-[2rem] h-[1200px] xs:h-auto ">
           <div className="border-[.5rem] border-[#ae9243]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
             <div className=" w-44 h-44 xs:w-20 xs:h-20 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
               <div className=" w-40 h-40 xs:w-16 xs:h-16 md:w-40 md:h-40 text-[#F1F1F1] flex justify-center items-center bg-[#ae9243]  rounded-full ">
@@ -384,8 +384,8 @@ const ResumeTemplate17 = () => {
               </h3>
               <span className="border-stylee w-full h-0  my-3"></span>
               {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
+              resume?.primarySkills.length > 0 &&
+              !regenerating ? (
                 <ul
                   className="pl-0 flex  flex-col gap-1 mb-4 text-gray-300 w-full text-[16px] "
                   onMouseEnter={() =>
@@ -608,16 +608,17 @@ const ResumeTemplate17 = () => {
           ></span>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-start items-center ${i > 0
+                    className={`flex justify-start items-start ${
+                      i > 0
                         ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
-                        : "mb-[60px] md:mb-0"
-                      }`}
+                        : "min-h-[350px] xs:min-h-fit "
+                    }`}
                   >
                     <div
                       key={i}
@@ -1066,7 +1067,7 @@ const ResumeTemplate17 = () => {
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                           <>
                             <div
                               className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3 sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"

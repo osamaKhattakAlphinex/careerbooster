@@ -237,8 +237,10 @@ const ResumeTemplate5 = () => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-start items-center ${
-                      i > 0 ? " w-[100vw] xs:w-auto" : "mb-5"
+                    className={`flex justify-start items-start ${
+                      i > 0
+                        ? " w-[100vw] xs:w-auto"
+                        : "xs:min-h-fit min-h-[320px]"
                     }
                   `}
                   >

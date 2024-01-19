@@ -388,8 +388,8 @@ const ResumeTemplate16 = () => {
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
               {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
+              resume?.primarySkills.length > 0 &&
+              !regenerating ? (
                 <ul
                   className="pl-0 flex  flex-col gap-1 mb-4 text-gray-300 w-full text-[16px] "
                   onMouseEnter={() =>
@@ -609,16 +609,17 @@ const ResumeTemplate16 = () => {
           {/* <span className="border-stylee w-full h-0 border border-[#444440] relative -left-7 my-2"></span> */}
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-start items-center ${i > 0
-                      ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
-                      : "mb-[20px]"
-                      }`}
+                    className={`flex justify-start items-start ${
+                      i > 0
+                        ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
+                        : "xs:min-h-fit min-h-[350px]"
+                    }`}
                   >
                     <div
                       key={i}
@@ -1066,7 +1067,7 @@ const ResumeTemplate16 = () => {
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                           <>
                             <div
                               className="border-2 w-2/12 xs:w-full mt-3 md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
