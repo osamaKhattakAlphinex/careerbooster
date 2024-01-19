@@ -238,8 +238,8 @@ const ResumeTemplate19 = ({
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="flex w-full justify-center items-center py-7 xs:py-2 md:py-7">
-        <div className="flex flex-col  py-8">
-          <h2 className="text-2xl md:text-5xl font-serif text-center  font-bold hover:shadow-md hover:bg-gray-100">
+        <div className="flex flex-col py-3">
+          <h2 className="text-2xl md:text-4xl font-serif text-center  font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -266,12 +266,12 @@ const ResumeTemplate19 = ({
           {/* contacts */}
           <span className="border-stylee w-full h-0 my-1"></span>
           <h3 className="uppercase text-lg xs:text-[14px] xs:px-3 px-0 md:px-0  md:text-lg font-semibold w-full   pb-2 text-gray-800 py-1 rounded-sm flex items-center  flex-row gap-2 ">
-            {contactIcon}
+            {/* {contactIcon} */}
             Contact
           </h3>
           <span className="border-stylee w-full h-0 my-2"></span>
           <ul className=" flex flex-col px:-0 xs:px-3 md:px-0 gap-3 w-full mb-4 text-sm text-gray-800 break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-500 hover:text-black text-xs  flex flex-row gap-3 ">
+            <li className="hover:shadow-md hover:bg-gray-500 hover:text-black text-sm  flex flex-row gap-3 ">
               {phoneIcon}
               <EditableField
                 value={
@@ -293,7 +293,7 @@ const ResumeTemplate19 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-3  items-center text-xs">
+            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-3  items-center text-sm">
               {emailIcon}
 
               <EditableField
@@ -316,7 +316,7 @@ const ResumeTemplate19 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 text-gray-800 flex flex-row gap-3  items-center text-xs">
+            <li className="hover:shadow-md text-sm hover:text-black hover:bg-gray-100 text-gray-800 flex flex-row gap-3  items-center">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -355,7 +355,7 @@ const ResumeTemplate19 = ({
             <>
               <span className="border-stylee w-full h-0  my-1"></span>
               <h3 className="uppercase px-0 xs:px-3 md:px-0 text-lg xs:text-[14px] md:text-lg font-semibold w-full  pb-2 text-gray-900  py-1 rounded-sm flex items-center  flex-row gap-2 ">
-                {sparkleIcon}
+                {/* {sparkleIcon} */}
                 Skills
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
@@ -363,7 +363,7 @@ const ResumeTemplate19 = ({
               resume?.primarySkills.length > 0 &&
               !regenerating ? (
                 <ul
-                  className="pl-0 flex  px-0 xs:px-0 md:px-0  flex-col gap-1 mb-4 text-gray-800 w-full text-sm "
+                  className="pl-0 flex  px-0 xs:px-0 md:px-0  flex-col gap-1 mb-4 text-gray-800 w-full text-sm"
                   onMouseEnter={() =>
                     !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                   }
@@ -389,7 +389,7 @@ const ResumeTemplate19 = ({
                         draggable
                       >
                         <span className="w-1.5 h-1.5 bg-gray-800 rounded-full mr-3"></span>
-                        <div className="flex flex-row w-full items-center justify-between">
+                        <div className="flex flex-row w-full items-center justify-between text-sm ">
                           <EditableField
                             value={skill}
                             onSave={(value: string) => {
@@ -526,7 +526,7 @@ const ResumeTemplate19 = ({
           <h2 className="uppercase text-xl xs:text-lg md:text-xl font-bold  rounded-sm text-gray-900 w-full py-1">
             EXECUTIVE SUMMARY
           </h2>
-          <span className="border-stylee w-full h-0  my-3"></span>
+          <span className="border-stylee w-full h-0  my-2"></span>
 
           <Regenerate
             handler={getSummary}
@@ -577,10 +577,6 @@ const ResumeTemplate19 = ({
           <h2 className="uppercase text-xl font-bold   rounded-sm text-gray-900 w-full py-1">
             WORK EXPERIENCE
           </h2>
-          <span
-            className="border-stylee w-full h-0 
-           my-3"
-          ></span>
 
           {resume?.workExperienceArray &&
           resume?.workExperienceArray.length > 0 ? (
@@ -589,7 +585,7 @@ const ResumeTemplate19 = ({
                 return (
                   <div
                     key={i}
-                    className="hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
+                    className="hover:border-dashed hover:border-gray-500 my-2  hover:cursor-move hover:border-2"
                     onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                     onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                     onDragStart={(e) =>
@@ -599,31 +595,63 @@ const ResumeTemplate19 = ({
                     onDrop={(e) => handleDropExperience(e, i)}
                     draggable
                   >
-                    <div className="flex">
+                    <div className="flex flex-col">
                       {/* <div className="flex ">
                         <span className="w-4 h-4 bg-[#745237] rounded-full"></span>
                         <span className="h-13 border border-[#745237] mx-2 relative -left-[17px]"></span>
                       </div> */}
 
-                      <div>
-                        <h2
-                          className="hover:shadow-md hover:cursor-text hover:bg-gray-100"
-                          style={{
-                            fontSize: "1rem",
-                            fontWeight: "bold",
-                            lineHeight: "2rem",
+                      <h2
+                        className="hover:shadow-md hover:cursor-text hover:bg-gray-100"
+                        style={{
+                          fontSize: "1rem",
+                          fontWeight: "bold",
+                          lineHeight: "2rem",
+                        }}
+                      >
+                        <EditableField
+                          value={rec?.title}
+                          style={{ width: "100%" }}
+                          onSave={(value: string) => {
+                            let updatedExp = resume?.workExperienceArray.map(
+                              (exp: any, index: number) => {
+                                if (index === i) {
+                                  return {
+                                    ...exp,
+                                    title: value,
+                                  };
+                                }
+                                return exp;
+                              }
+                            );
+                            dispatch(
+                              setWorkExperienceArray({
+                                workExperienceArray: updatedExp,
+                              })
+                            );
+                            saveResumeToDB({
+                              ...resume,
+                              workExperienceArray: updatedExp,
+                            });
                           }}
-                        >
+                        />
+                      </h2>
+                      <h2 className="hover:cursor-default text-sm">
+                        {rec?.fromMonth + " " + rec?.fromYear} -{" "}
+                        {rec?.isContinue
+                          ? "Present"
+                          : `${rec?.toMonth} ${rec?.toYear}`}{" "}
+                        |{" "}
+                        <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
                           <EditableField
-                            value={rec?.title}
-                            style={{ width: "100%" }}
+                            value={rec?.company}
                             onSave={(value: string) => {
                               let updatedExp = resume?.workExperienceArray.map(
                                 (exp: any, index: number) => {
                                   if (index === i) {
                                     return {
                                       ...exp,
-                                      title: value,
+                                      company: value,
                                     };
                                   }
                                   return exp;
@@ -640,106 +668,63 @@ const ResumeTemplate19 = ({
                               });
                             }}
                           />
-                        </h2>
-                        <h2
-                          className="hover:cursor-default"
-                          style={{
-                            fontSize: "1.1rem",
-                            lineHeight: "1.5rem",
-                          }}
-                        >
-                          {rec?.fromMonth + " " + rec?.fromYear} -{" "}
-                          {rec?.isContinue
-                            ? "Present"
-                            : `${rec?.toMonth} ${rec?.toYear}`}{" "}
-                          |{" "}
-                          <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
-                            <EditableField
-                              value={rec?.company}
-                              onSave={(value: string) => {
-                                let updatedExp =
-                                  resume?.workExperienceArray.map(
-                                    (exp: any, index: number) => {
-                                      if (index === i) {
-                                        return {
-                                          ...exp,
-                                          company: value,
-                                        };
-                                      }
-                                      return exp;
-                                    }
-                                  );
-                                dispatch(
-                                  setWorkExperienceArray({
-                                    workExperienceArray: updatedExp,
-                                  })
-                                );
-                                saveResumeToDB({
-                                  ...resume,
+                        </span>{" "}
+                        |{" "}
+                        <span className="hover:shadow-md hover:bg-gray-100">
+                          <EditableField
+                            value={rec?.cityState}
+                            onSave={(value: string) => {
+                              let updatedExp = resume?.workExperienceArray.map(
+                                (exp: any, index: number) => {
+                                  if (index === i) {
+                                    return {
+                                      ...exp,
+                                      cityState: value,
+                                    };
+                                  }
+                                  return exp;
+                                }
+                              );
+                              dispatch(
+                                setWorkExperienceArray({
                                   workExperienceArray: updatedExp,
-                                });
-                              }}
-                            />
-                          </span>{" "}
-                          |{" "}
-                          <span className="hover:shadow-md hover:bg-gray-100">
-                            <EditableField
-                              value={rec?.cityState}
-                              onSave={(value: string) => {
-                                let updatedExp =
-                                  resume?.workExperienceArray.map(
-                                    (exp: any, index: number) => {
-                                      if (index === i) {
-                                        return {
-                                          ...exp,
-                                          cityState: value,
-                                        };
-                                      }
-                                      return exp;
-                                    }
-                                  );
-                                dispatch(
-                                  setWorkExperienceArray({
-                                    workExperienceArray: updatedExp,
-                                  })
-                                );
-                                saveResumeToDB({
-                                  ...resume,
+                                })
+                              );
+                              saveResumeToDB({
+                                ...resume,
+                                workExperienceArray: updatedExp,
+                              });
+                            }}
+                          />
+                        </span>{" "}
+                        <span className="hover:shadow-md hover:bg-gray-100">
+                          <EditableField
+                            value={rec?.country}
+                            onSave={(value: string) => {
+                              let updatedExp = resume?.workExperienceArray.map(
+                                (exp: any, index: number) => {
+                                  if (index === i) {
+                                    return {
+                                      ...exp,
+                                      country: value,
+                                    };
+                                  }
+                                  return exp;
+                                }
+                              );
+                              dispatch(
+                                setWorkExperienceArray({
                                   workExperienceArray: updatedExp,
-                                });
-                              }}
-                            />
-                          </span>{" "}
-                          <span className="hover:shadow-md hover:bg-gray-100">
-                            <EditableField
-                              value={rec?.country}
-                              onSave={(value: string) => {
-                                let updatedExp =
-                                  resume?.workExperienceArray.map(
-                                    (exp: any, index: number) => {
-                                      if (index === i) {
-                                        return {
-                                          ...exp,
-                                          country: value,
-                                        };
-                                      }
-                                      return exp;
-                                    }
-                                  );
-                                dispatch(
-                                  setWorkExperienceArray({
-                                    workExperienceArray: updatedExp,
-                                  })
-                                );
-                                saveResumeToDB({
-                                  ...resume,
-                                  workExperienceArray: updatedExp,
-                                });
-                              }}
-                            />
-                          </span>
-                        </h2>
-                      </div>
+                                })
+                              );
+                              saveResumeToDB({
+                                ...resume,
+                                workExperienceArray: updatedExp,
+                              });
+                            }}
+                          />
+                        </span>
+                      </h2>
                     </div>
                     {/* <div className="p-4">
                       {rec?.achievements && (
@@ -962,9 +947,9 @@ const ResumeTemplate19 = ({
           {/* education */}
           {resume?.education && (
             <>
-              <span className="w-full h-0 my-3 page-break"></span>
+              <span className="w-full h-0 my-2 page-break"></span>
               <h3 className="uppercase px-0 xs:px-3 md:px-0 text-lg xs:text-[14px] md:text-lg font-semibold w-full   pb-2 text-gray-900  py-1 rounded-sm flex items-center  flex-row gap-2 ">
-                {educationIcon}
+                {/* {educationIcon} */}
                 Education
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
