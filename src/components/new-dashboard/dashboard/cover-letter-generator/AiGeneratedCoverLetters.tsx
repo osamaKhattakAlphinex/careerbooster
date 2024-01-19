@@ -16,7 +16,7 @@ export default function AiGeneratedCoverLetters() {
           </h1>
           <div className="relative flex justify-end">
             <input
-              className="w-full pl-5 py-2 rounded-full border border-zinc-600 placeholder-gray-400 text-white focus:outline-none focus:border-zinc-600 bg-transparent text-[14px]"
+              className="w-full pl-5 py-2 rounded-full border-[1px] border-zinc-600 placeholder-gray-400 text-white focus:outline-none focus:border-zinc-600 bg-transparent text-[14px]"
               type="text"
               placeholder="Search Here"
             />

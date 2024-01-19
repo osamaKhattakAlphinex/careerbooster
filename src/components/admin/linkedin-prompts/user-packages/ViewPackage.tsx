@@ -38,7 +38,7 @@ type Package = {
   };
 };
 
-const ViewPackage = ({}) => {
+const ViewPackage = ({ }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [packages, setPackages] = useState<Package[]>([]);
   const confirmationModalRef: React.MutableRefObject<any> = useRef(null);
@@ -174,7 +174,7 @@ const ViewPackage = ({}) => {
         </div>
 
         <div className="flex flex-col gap-2 items-center justify-center">
-          <div className=" p-8 flex flex-col gap-2 border w-11/12">
+          <div className=" p-8 flex flex-col gap-2 border-[1px] w-11/12">
             <div className="w-100 flex flex-row justify-between">
               <h2 className="text-xl ">User Packages Management</h2>
               <AddPackage getPackages={getPackages} />
@@ -202,7 +202,7 @@ const ViewPackage = ({}) => {
     //     </Link>
     //   </div>
     //   <div className="flex m-10 gap-4">
-    //     <div className="w-full flex p-4 border border-gray-200 rounded-lg shadow sm:p-6">
+    //     <div className="w-full flex p-4 border-[1px] border-gray-200 rounded-lg shadow sm:p-6">
     //       <h2 className="text-2xl">
     //         <div className="flex flex-row gap-2">
     //           <svg
@@ -338,7 +338,7 @@ const ViewPackage = ({}) => {
     //             <li>
     //               <a
     //                 href="#"
-    //                 className="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+    //                 className="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 rounded-l-lg border-[1px] border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
     //               >
     //                 <span className="sr-only">Previous</span>
     //                 <svg
@@ -359,7 +359,7 @@ const ViewPackage = ({}) => {
     //             <li>
     //               <a
     //                 href="#"
-    //                 className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+    //                 className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 border-[1px] border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
     //               >
     //                 1
     //               </a>
@@ -367,7 +367,7 @@ const ViewPackage = ({}) => {
     //             <li>
     //               <a
     //                 href="#"
-    //                 className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+    //                 className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 border-[1px] border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
     //               >
     //                 2
     //               </a>
@@ -376,7 +376,7 @@ const ViewPackage = ({}) => {
     //               <a
     //                 href="#"
     //                 aria-current="page"
-    //                 className="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+    //                 className="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border-[1px] border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
     //               >
     //                 3
     //               </a>
@@ -384,7 +384,7 @@ const ViewPackage = ({}) => {
     //             <li>
     //               <a
     //                 href="#"
-    //                 className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+    //                 className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 border-[1px] border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
     //               >
     //                 ...
     //               </a>
@@ -392,7 +392,7 @@ const ViewPackage = ({}) => {
     //             <li>
     //               <a
     //                 href="#"
-    //                 className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+    //                 className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 border-[1px] border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
     //               >
     //                 100
     //               </a>
@@ -400,7 +400,7 @@ const ViewPackage = ({}) => {
     //             <li>
     //               <a
     //                 href="#"
-    //                 className="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+    //                 className="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 rounded-r-lg border-[1px] border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
     //               >
     //                 <span className="sr-only">Next</span>
     //                 <svg

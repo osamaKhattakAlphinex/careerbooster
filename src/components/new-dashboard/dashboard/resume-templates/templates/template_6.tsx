@@ -235,11 +235,11 @@ const ResumeTemplate6 = () => {
           </ul>
           {/* EXECUTIVE SUMMARY */}
           <div className="w-full flex flex-wrap flex-col ">
-            <span className="border-stylee w-full h-0 border !border-gray-500 mt-3"></span>
+            <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
             <h3 className="uppercase text-lg font-semibold my-3">
               EXECUTIVE SUMMARY
             </h3>
-            <span className="border-stylee w-full h-0 border !border-gray-500"></span>
+            <span className="border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
 
             <Regenerate
               handler={getSummary}
@@ -290,12 +290,12 @@ const ResumeTemplate6 = () => {
 
             {resume?.primarySkills && resume?.primarySkills.length > 0 && (
               <>
-                <span className="border-stylee w-full h-0 border !border-gray-500 mt-3"></span>
+                <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
                 <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center py-3">
                   {sparkleIcon}
                   Skills
                 </h3>
-                <span className="border-stylee w-full h-0 border !border-gray-500 mb-2"></span>
+                <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-2"></span>
                 {resume?.primarySkills &&
                   resume?.primarySkills.length > 0 &&
                   !regenerating ? (
@@ -317,7 +317,7 @@ const ResumeTemplate6 = () => {
                       {/* <li className="font-semibold  uppercase">primary</li> */}
                       {resume?.primarySkills.map((skill: string, i: number) => (
                         <li
-                          className="hover:shadow-md  w-[45%] xs:w-full sm:w-[45%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex  items-center"
+                          className="hover:shadow-md  w-[45%] xs:w-full sm:w-[45%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center"
                           key={i}
                           onDragStart={(e) =>
                             e.dataTransfer.setData("text/plain", i.toString())
@@ -376,7 +376,7 @@ const ResumeTemplate6 = () => {
                       ))}
                       {newPrimarySkill ? (
                         <>
-                          <div className="w-full rounded-2xl border border-black flex h-9.5">
+                          <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                             <input
                               type="text"
                               value={primarySkill}
@@ -457,11 +457,11 @@ const ResumeTemplate6 = () => {
               </>
             )}
             {/* Work Experience */}
-            <span className="border-stylee w-full h-0 border !border-gray-500 mt-3"></span>
+            <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
             <h3 className="uppercase text-lg font-semibold py-3">
               WORK EXPERIENCE
             </h3>
-            <span className="border-stylee w-full h-0 border !border-gray-500"></span>
+            <span className="border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
 
             {resume?.workExperienceArray &&
               resume?.workExperienceArray.length > 0 ? (
@@ -965,12 +965,12 @@ const ResumeTemplate6 = () => {
             {/* Education */}
             {resume?.education && (
               <>
-                <span className="w-full h-0 border border-gray-500 my-3 page-break"></span>
+                <span className="w-full h-0 border-[1px] border-gray-500 my-3 page-break"></span>
                 <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
                   {educationIcon}
                   Education
                 </h3>
-                <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+                <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
                 <ul
                   className="pl-0 flex flex-wrap "
                   onMouseEnter={() =>

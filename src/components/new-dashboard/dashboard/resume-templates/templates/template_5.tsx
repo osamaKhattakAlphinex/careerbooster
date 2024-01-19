@@ -223,7 +223,7 @@ const ResumeTemplate5 = () => {
               />
             </div>
           </Regenerate>
-          <span className="border-dashed border border-gray-500 my-6"></span>
+          <span className="border-dashed border-[1px] border-gray-500 my-6"></span>
           {/* Work Experience */}
 
           <h3 className="uppercase text-lg font-semibold mb-4">
@@ -238,8 +238,8 @@ const ResumeTemplate5 = () => {
                   <div
                     key={i}
                     className={`flex justify-start items-start ${i > 0
-                        ? " w-[100vw] xs:w-auto"
-                        : "xs:min-h-fit min-h-[320px]"
+                      ? " w-[100vw] xs:w-auto"
+                      : "xs:min-h-fit min-h-[320px]"
                       }
                   `}
                   >
@@ -994,7 +994,7 @@ const ResumeTemplate5 = () => {
                         {resume?.primarySkills.map(
                           (skill: string, i: number) => (
                             <li
-                              className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex justify-between items-center"
+                              className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex justify-between items-center"
                               key={i}
                               onDragStart={(e) =>
                                 e.dataTransfer.setData(
@@ -1056,7 +1056,7 @@ const ResumeTemplate5 = () => {
                       </Regenerate>
                       {newPrimarySkill ? (
                         <>
-                          <div className="w-full rounded-2xl border border-black flex h-9.5">
+                          <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                             <input
                               type="text"
                               value={primarySkill}

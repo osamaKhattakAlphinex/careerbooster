@@ -285,7 +285,7 @@ const ResumeTemplate14 = () => {
         </div>
       </div>
       <div className="flex">
-        <div className="w-3/12 xs:w-3/12 md:w-3/12 flex flex-col bg-[#E3DBCC] pl-3 md:pl-8 pr-6 pt-[15rem]  xs:pt-[14rem] md:pt-[15rem]  h-[1020px] xs:h-auto lg:pt-[15rem]  ">
+        <div className="w-3/12 xs:w-3/12 md:w-3/12 flex flex-col bg-[#E3DBCC] pl-3 md:pl-8 pr-6 pt-[15rem]  xs:pt-[14rem] md:pt-[15rem]  h-[1140px] xs:h-auto lg:pt-[15rem]  ">
           {/* contacts */}
           <span className="border-stylee w-full h-0  my-3"></span>
           <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
@@ -295,7 +295,7 @@ const ResumeTemplate14 = () => {
           <ul className=" flex flex-col gap-3 mb-4 text-sm break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-100 text-xs flex flex-row gap-1  items-center">
               {phoneIcon}
-              <span className="h-6 xs:hidden md:block border border-[#745237] bg-black  mx-3"></span>
+              <span className="h-6 xs:hidden md:block border-[1px] border-[#745237] bg-black  mx-3"></span>
               <EditableField
                 value={
                   resume?.contact?.phone
@@ -318,7 +318,7 @@ const ResumeTemplate14 = () => {
             </li>
             <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center text-xs">
               {emailIcon}
-              <span className="h-6 border xs:hidden md:block border-[#745237] bg-black  mx-3"></span>
+              <span className="h-6 border-[1px] xs:hidden md:block border-[#745237] bg-black  mx-3"></span>
               <EditableField
                 value={
                   resume?.contact?.email
@@ -350,7 +350,7 @@ const ResumeTemplate14 = () => {
                 className="text-blue-600"
               > */}
               {linkedInIcon}
-              <span className="h-6 border xs:hidden md:block  border-[#745237] bg-black  mx-1.5"></span>
+              <span className="h-6 border-[1px] xs:hidden md:block  border-[#745237] bg-black  mx-1.5"></span>
               <EditableField
                 value={
                   resume?.contact?.linkedIn
@@ -402,7 +402,7 @@ const ResumeTemplate14 = () => {
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex justify-between items-center"
+                        className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex justify-between items-center"
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -459,7 +459,7 @@ const ResumeTemplate14 = () => {
                   </Regenerate>
                   {newPrimarySkill ? (
                     <>
-                      <div className="w-full rounded-2xl border border-black flex h-9.5">
+                      <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                         <input
                           type="text"
                           value={primarySkill}
@@ -609,7 +609,7 @@ const ResumeTemplate14 = () => {
                     className={`flex justify-start items-start ${
                       i > 0
                         ? "w-[100vw] ml-[-150px] xs:ml-0 xs:w-full"
-                        : "xs:min-h-fit  min-h-[300px]"
+                        : "xs:min-h-fit  min-h-[350px]"
                     }`}
                   >
                     <div

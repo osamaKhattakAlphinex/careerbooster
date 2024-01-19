@@ -101,9 +101,9 @@ const ProfilePreview = () => {
             <p className="flex flex-row gap-2 items-center dark:text-gray-100 text-gray-950">
               {addressIcon}
               {data.stepThree?.country === "" &&
-              data.stepThree?.street &&
-              data.stepThree?.cityState &&
-              data.stepThree?.postalCode ? (
+                data.stepThree?.street &&
+                data.stepThree?.cityState &&
+                data.stepThree?.postalCode ? (
                 <span>[Address Missing]</span>
               ) : (
                 <span>
@@ -213,7 +213,7 @@ const ProfilePreview = () => {
             {data.stepSix.list.map((skill: string, index: number) => (
               <li
                 key={index}
-                className="flex items-center justify-between  rounded-md shadow-md border p-3 dark:text-gray-100 text-gray-950"
+                className="flex items-center justify-between  rounded-md shadow-md border-[1px] p-3 dark:text-gray-100 text-gray-950"
               >
                 <span>{skill}</span>
               </li>

@@ -380,7 +380,7 @@ const ResumeTemplate17 = () => {
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent xs:w-12/12 hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex items-center  "
+                        className="hover:shadow-md hover:cursor-move parent xs:w-12/12 hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center  "
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -440,7 +440,7 @@ const ResumeTemplate17 = () => {
                   </Regenerate>
                   {newPrimarySkill ? (
                     <>
-                      <div className="w-full rounded-2xl border border-black flex h-9.5">
+                      <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                         <input
                           type="text"
                           value={primarySkill}
@@ -617,7 +617,7 @@ const ResumeTemplate17 = () => {
                     className={`flex justify-start items-start ${
                       i > 0
                         ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
-                        : "min-h-[370px] xs:min-h-fit "
+                        : "min-h-[390px] xs:min-h-fit "
                     }`}
                   >
                     <div
@@ -635,7 +635,7 @@ const ResumeTemplate17 = () => {
                       <div className="flex flex-col">
                         {/* <div className="flex ">
                         <span className="w-4 h-4 bg-[#745237] rounded-full"></span>
-                        <span className="h-13 border border-[#745237] mx-2 relative -left-[17px]"></span>
+                        <span className="h-13 border-[1px] border-[#745237] mx-2 relative -left-[17px]"></span>
                       </div> */}
 
                         <h2

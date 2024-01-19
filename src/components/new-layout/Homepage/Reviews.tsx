@@ -59,7 +59,7 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border theme-rating-card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] theme-rating-card border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-circle overflow-hidden">
                   <Image
@@ -131,7 +131,7 @@ const Reviews = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-circle overflow-hidden">
                   <Image
@@ -203,7 +203,7 @@ const Reviews = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-circle overflow-hidden">
                   <Image
@@ -276,7 +276,7 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-circle overflow-hidden">
                   <Image
@@ -349,7 +349,7 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-circle overflow-hidden">
                   <Image
@@ -422,7 +422,7 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-circle overflow-hidden">
                   <Image
@@ -494,7 +494,7 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-circle overflow-hidden">
                   <Image
@@ -565,7 +565,7 @@ const Reviews = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-circle overflow-hidden">
                   <Image
@@ -637,7 +637,7 @@ const Reviews = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-circle overflow-hidden">
                   <Image

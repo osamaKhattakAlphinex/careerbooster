@@ -239,8 +239,8 @@ const ResumeTemplate7 = () => {
                     <div
                       key={i}
                       className={`flex justify-start items-start ${i > 0
-                          ? " w-[100vw] xs:w-auto"
-                          : "xs:min-h-fit min-h-[280px]"
+                        ? " w-[100vw] xs:w-auto"
+                        : "xs:min-h-fit min-h-[280px]"
                         }
                   `}
                     >
@@ -896,7 +896,7 @@ const ResumeTemplate7 = () => {
             </div>
           )}
         </div>
-        {/* <div className="relative  border border-gray-300 "></div> */}
+        {/* <div className="relative  border-[1px] border-gray-300 "></div> */}
         <div className="w-[33%] xs:w-1/3 md:w-[33%] flex flex-col gap-4 border-l-2 border-gray-300 h-[1120px] xs:h-auto ">
           {/* contacts */}
           <div className="bg-gray-200 px-4 py-4 h-44">
@@ -1012,7 +1012,7 @@ const ResumeTemplate7 = () => {
                 >
                   {resume?.primarySkills.map((skill: string, i: number) => (
                     <li
-                      className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex gap-4 items-center"
+                      className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex gap-4 items-center"
                       key={i}
                       onDragStart={(e) =>
                         e.dataTransfer.setData("text/plain", i.toString())
@@ -1084,7 +1084,7 @@ const ResumeTemplate7 = () => {
                 </Regenerate>
                 {newPrimarySkill ? (
                   <>
-                    <div className="w-full rounded-2xl border border-black flex h-9.5">
+                    <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                       <input
                         type="text"
                         value={primarySkill}

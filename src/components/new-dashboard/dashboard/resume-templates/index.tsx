@@ -75,7 +75,7 @@ const Templates = () => {
         {tabs.map((tab, index) => (
           <button
             key={index}
-            className={`px-4 py-2 text-sm rounded-full border border-gray-600 ${activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
+            className={`px-4 py-2 text-sm rounded-full border-[1px] border-gray-600 ${activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
               }`}
             onClick={() => setActiveTab(tab)}
           >

@@ -65,7 +65,7 @@ const Template = () => {
                   target="_blank"
                 >
                   <div
-                    className={`lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b] bg-transparent text-green-500 border border-green-500`}
+                    className={`lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b] bg-transparent text-green-500 border-[1px] border-green-500`}
                   >
                     Preview Resume
                   </div>

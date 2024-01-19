@@ -19,11 +19,10 @@ const EducationForm = ({ formik }: any) => {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.educationLevel}
-          className={`w-full border border-gray-300 ${
-            formik.touched.educationLevel &&
+          className={`w-full border-[1px] border-gray-300 ${formik.touched.educationLevel &&
             formik.errors.educationLevel &&
             "border-red-500 outline-red-500"
-          } rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent`}
+            } rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent`}
         />
         {formik.touched.educationLevel && formik.errors.educationLevel && (
           <p className="text-red-600">
@@ -41,7 +40,7 @@ const EducationForm = ({ formik }: any) => {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.fieldOfStudy}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+          className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
         />
       </div>
       <div className="w-full">
@@ -54,7 +53,7 @@ const EducationForm = ({ formik }: any) => {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.schoolName}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+          className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
         />
       </div>
 
@@ -68,7 +67,7 @@ const EducationForm = ({ formik }: any) => {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.schoolLocation}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+          className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
         />
       </div>
       <div className="w-full">
@@ -81,7 +80,7 @@ const EducationForm = ({ formik }: any) => {
               From Month
             </label>
             <select
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+              className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               name="fromMonth"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -100,7 +99,7 @@ const EducationForm = ({ formik }: any) => {
               From Year
             </label>
             <select
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+              className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               name="fromYear"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -122,7 +121,7 @@ const EducationForm = ({ formik }: any) => {
                 To Month
               </label>
               <select
-                className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+                className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
                 name="toMonth"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -141,7 +140,7 @@ const EducationForm = ({ formik }: any) => {
                 To Year
               </label>
               <select
-                className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+                className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
                 name="toYear"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}

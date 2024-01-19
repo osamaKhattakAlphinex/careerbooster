@@ -189,12 +189,12 @@ const ResumeTemplate9 = () => {
       <div className="flex">
         <div className=" w-full flex flex-col pl-3 md:pl-8 pr-6 ">
           {/* contacts */}
-          {/* <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span> */}
+          {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
           <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 mt-2 pb-2 items-center">
             {contactIcon}
             Contact
           </h3>
-          {/* <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span> */}
+          {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
           <ul className="flex flex-row xs:flex-col md:flex-row w-full justify-between gap-3 mb-4 text-sm break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-100 text-sm flex flex-row gap-1  items-center">
               {phoneIcon}
@@ -278,9 +278,9 @@ const ResumeTemplate9 = () => {
       <div className="flex">
         <div className="w-full flex flex-col px-8 xs:px-4 md:px-8 lg:px-8">
           {/* Executive Summary */}
-          {/* <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span> */}
+          {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
           <h3 className="uppercase text-lg font-bold my-3">SUMMARY</h3>
-          {/* <span className="border-stylee w-full h-0 border !border-gray-500 mb-2"></span> */}
+          {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-2"></span> */}
           <Regenerate
             handler={getSummary}
             custom_style={"absolute bottom-3 right-2 "}
@@ -328,7 +328,7 @@ const ResumeTemplate9 = () => {
 
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
-              {/* <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span> */}
+              {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
               <h3 className="uppercase text-lg font-semibold flex  items-center   mt-6 gap-2">
                 {sparkleIcon}
                 Skills
@@ -353,7 +353,7 @@ const ResumeTemplate9 = () => {
                     {/* <li className="font-semibold  uppercase">primary :</li> */}
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md w-[30%] xs:w-full md:w-[30%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex  items-center"
+                        className="hover:shadow-md w-[30%] xs:w-full md:w-[30%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center"
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -413,7 +413,7 @@ const ResumeTemplate9 = () => {
 
                     {newPrimarySkill ? (
                       <>
-                        <div className="w-full rounded-2xl border border-black flex h-9.5">
+                        <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                           <input
                             type="text"
                             value={primarySkill}
@@ -494,7 +494,7 @@ const ResumeTemplate9 = () => {
             </>
           )}
           {/* Work Experience */}
-          {/* <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span> */}
+          {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
           <h3 className="uppercase text-lg font-semibold flex  items-center   mt-6 gap-2">
             WORK EXPERIENCE
           </h3>
@@ -1001,7 +1001,7 @@ const ResumeTemplate9 = () => {
           {/* Education */}
           {resume?.education && (
             <>
-              {/* <span className="w-full h-0 border border-gray-500 my-3 page-break"></span> */}
+              {/* <span className="w-full h-0 border-[1px] border-gray-500 my-3 page-break"></span> */}
               <h3 className="uppercase text-lg font-semibold flex  items-center   mt-6 gap-2">
                 {educationIcon}
                 Education

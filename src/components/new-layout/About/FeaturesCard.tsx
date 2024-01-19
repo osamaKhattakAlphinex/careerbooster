@@ -19,7 +19,7 @@ const FeaturesCard = () => {
         <div className="row row-cols-1 row-cols-lg-3 g-6 g-xl-14">
           <div className="col" data-aos="fade-up-sm" data-aos-delay="50">
             <div className="d-flex flex-column gap-6 flex-lg-row">
-              <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10">
+              <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
                 <svg
                   className="w-full h-full"
                   xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +48,7 @@ const FeaturesCard = () => {
           </div>
           <div className="col" data-aos="fade-up-sm" data-aos-delay="100">
             <div className="d-flex flex-column gap-6 flex-lg-row">
-              <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10">
+              <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
                 <svg
                   className="w-full h-full"
                   xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +77,7 @@ const FeaturesCard = () => {
           </div>
           <div className="col" data-aos="fade-up-sm" data-aos-delay="150">
             <div className="d-flex flex-column gap-6 flex-lg-row">
-              <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border bg-gradient-3 text-primary-dark border-white border-opacity-10">
+              <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
                 <svg
                   className="w-full h-full"
                   xmlns="http://www.w3.org/2000/svg"

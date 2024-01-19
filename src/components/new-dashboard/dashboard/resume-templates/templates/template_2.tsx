@@ -223,7 +223,7 @@ const ResumeTemplate2 = () => {
         </Regenerate>
       </div>
       {/* Skills  */}
-      <div className="w-full space-y-3">
+      <div className=" w-full space-y-3">
         {resume?.primarySkills && resume?.primarySkills.length > 0 && (
           <h2 className="uppercase text-sm xs:text-sm md:text-lg lg:text-lg pb-2 font-bold">
             Skills
@@ -249,7 +249,7 @@ const ResumeTemplate2 = () => {
               >
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
-                    className=" px-4 py-2 bg-slate-100 border-transparent border rounded-full hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
+                    className=" px-4 py-2 bg-slate-100 border-transparent border-[1px] rounded-full hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
                     key={i}
                     onDragStart={(e) =>
                       e.dataTransfer.setData("text/plain", i.toString())
@@ -305,7 +305,7 @@ const ResumeTemplate2 = () => {
                 ))}
                 {newPrimarySkill ? (
                   <>
-                    <div className="w-full rounded-2xl  border border-black flex h-9.5">
+                    <div className="w-full rounded-2xl  border-[1px] border-black flex h-9.5">
                       <input
                         type="text"
                         value={primarySkill}
@@ -890,12 +890,12 @@ const ResumeTemplate2 = () => {
       <div className="w-full space-y-3">
         {resume?.education && (
           <>
-            {/* <span className="w-full h-0 border border-gray-500 my-3 page-break"></span> */}
+            {/* <span className="w-full h-0 border-[1px] border-gray-500 my-3 page-break"></span> */}
             <h3 className="uppercase text-sm md:text-lg font-semibold flex flex-row gap-2 items-center">
               {educationIcon}
               Education
             </h3>
-            {/* <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span> */}
+            {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
             <ul
               className="grid grid-cols-3 xs:grid-cols-1 md:grid-cols-3 gap-2"
               onMouseEnter={() =>

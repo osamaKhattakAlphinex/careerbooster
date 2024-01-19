@@ -379,7 +379,7 @@ const PersonalizedEmailBot = () => {
                     rows={6}
                     onChange={(e) => setJobDescription(e.target.value)}
                     placeholder="Copy the job description for the position you are applying and paste it here to generate a tailor cover letter."
-                    className="w-full px-3 lg:px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border pt-3"
+                    className="w-full px-3 lg:px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px] pt-3"
                   />
                 </div>
 
@@ -394,7 +394,7 @@ const PersonalizedEmailBot = () => {
                     jobDescription === ""
                   }
                   onClick={handleGenerate}
-                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
+                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
                     !session?.user?.email ||
                     !aiInputUserData ||
                     selectedOption === "" ||
@@ -463,7 +463,7 @@ const PersonalizedEmailBot = () => {
                     your ai generated email
                   </h1>
                   <div
-                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] md:p-[30px] shadow ${msgLoading ? "animate-pulse" : ""
+                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border-[1px] rounded-[8px] p-[10px] md:p-[30px] shadow ${msgLoading ? "animate-pulse" : ""
                       }`}
                   >
                     <div ref={componentRef}>
@@ -494,7 +494,7 @@ const PersonalizedEmailBot = () => {
                         jobDescription === ""
                       }
                       onClick={handleGenerate}
-                      className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border border-[#b324d7]  rounded-full ${(msgLoading ||
+                      className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[1px] border-[#b324d7]  rounded-full ${(msgLoading ||
                         !session?.user?.email ||
                         !aiInputUserData ||
                         selectedOption === "" ||
@@ -568,7 +568,7 @@ const PersonalizedEmailBot = () => {
                           isEmailCopied
                         }
                         onClick={() => copyEmail(streamedData)}
-                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border border-[#b324d7]rounded-full ${msgLoading ||
+                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border-[1px] border-[#b324d7]rounded-full ${msgLoading ||
                           !session?.user?.email ||
                           !aiInputUserData ||
                           selectedOption === "" ||
@@ -613,7 +613,7 @@ const PersonalizedEmailBot = () => {
                             !show || msgLoading || !session?.user?.email
                           }
                           onClick={handleClick}
-                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border border-[#b324d7] rounded-full ${!show || msgLoading || !session?.user?.email
+                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border-[1px] border-[#b324d7] rounded-full ${!show || msgLoading || !session?.user?.email
                             ? "opacity-50 cursor-not-allowed"
                             : ""
                             } `}
@@ -646,7 +646,7 @@ const PersonalizedEmailBot = () => {
                       <button
                         type="button"
                         onClick={handleSave}
-                        className="flex flex-row justify-center ml-auto items-center gap-2 py-3 px-3 border-[#312E37] border rounded-full"
+                        className="flex flex-row justify-center ml-auto items-center gap-2 py-3 px-3 border-[#312E37] border-[1px] rounded-full"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

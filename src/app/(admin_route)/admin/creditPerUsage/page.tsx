@@ -88,7 +88,7 @@ const CreditPerUsagePage = () => {
               ) : (
                 <div
                   key={index}
-                  className="flex items-center justify-between p-3 rounded-sm border dark:border-gray-600"
+                  className="flex items-center justify-between p-3 rounded-sm border-[1px] dark:border-gray-600"
                 >
                   <span className=" capitalize font-semibold">
                     {nameFormatter(key)}

@@ -35,7 +35,7 @@ const PromptEditor = ({
   }, prompts);
 
   return (
-    <div className="lg:!w-1/2 w-full p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
+    <div className="lg:!w-1/2 w-full p-4  border-[1px] border-gray-200 rounded-lg shadow sm:p-6 ">
       <div className="w-full ">
         <div className="space-y-4 md:space-y-6">
           <h2 className="text-2xl">

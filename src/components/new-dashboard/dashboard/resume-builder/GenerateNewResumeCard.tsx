@@ -159,11 +159,11 @@ const GenerateResume = ({
             !session?.user?.email
           }
           onClick={() => handleGenerate(quantifyingExperience)}
-          className={` dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${memoizedState.jobPosition === "" ||
-              memoizedState.resumeLoading ||
-              !session?.user?.email
-              ? "opacity-50 cursor-not-allowed"
-              : ""
+          className={` dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${memoizedState.jobPosition === "" ||
+            memoizedState.resumeLoading ||
+            !session?.user?.email
+            ? "opacity-50 cursor-not-allowed"
+            : ""
             }`}
         >
           <span className="dark:text-gray-100 text-gray-950 text-sm">

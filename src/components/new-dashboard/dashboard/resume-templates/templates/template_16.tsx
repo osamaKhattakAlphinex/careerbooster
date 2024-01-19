@@ -270,7 +270,7 @@ const ResumeTemplate16 = () => {
           <span className="border-stylee w-full h-0 my-3"></span>
           <ul className=" flex flex-col gap-3 w-full mb-4 text-sm text-gray-300 break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-500 items-center hover:text-black text-[16px]  flex flex-row gap-1 ">
-              <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center mr-2 border border-gray-300 rounded-full">
+              <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
                 {phoneIcon}
               </span>
               <EditableField
@@ -294,7 +294,7 @@ const ResumeTemplate16 = () => {
               />
             </li>
             <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-1  items-center text-[16px]">
-              <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center mr-2 border border-gray-300 rounded-full">
+              <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
                 {emailIcon}
               </span>
               <EditableField
@@ -384,7 +384,7 @@ const ResumeTemplate16 = () => {
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex items-center  "
+                        className="hover:shadow-md hover:cursor-move parent hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center  "
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -444,7 +444,7 @@ const ResumeTemplate16 = () => {
                   </Regenerate>
                   {newPrimarySkill ? (
                     <>
-                      <div className="w-full rounded-2xl border border-black flex h-9.5">
+                      <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                         <input
                           type="text"
                           value={primarySkill}
@@ -553,7 +553,7 @@ const ResumeTemplate16 = () => {
           <h3 className="uppercase text-xl font-bold mb-3 border-[#444440] border-b-2  rounded-sm text-gray-900 w-full py-1">
             EXECUTIVE SUMMARY
           </h3>
-          {/* <span className="border-stylee w-full h-0 border border-[#444440] mb-3"></span> */}
+          {/* <span className="border-stylee w-full h-0 border-[1px] border-[#444440] mb-3"></span> */}
           <Regenerate
             handler={getSummary}
             custom_style={"absolute bottom-3 right-2 "}
@@ -606,7 +606,7 @@ const ResumeTemplate16 = () => {
           <h3 className="uppercase text-xl  font-bold mb-3 border-[#444440] border-b-2  rounded-sm text-gray-900 w-full py-1">
             WORK EXPERIENCE
           </h3>
-          {/* <span className="border-stylee w-full h-0 border border-[#444440] relative -left-7 my-2"></span> */}
+          {/* <span className="border-stylee w-full h-0 border-[1px] border-[#444440] relative -left-7 my-2"></span> */}
 
           {resume?.workExperienceArray &&
           resume?.workExperienceArray.length > 0 ? (
@@ -617,8 +617,8 @@ const ResumeTemplate16 = () => {
                     key={i}
                     className={`flex justify-start items-start ${
                       i > 0
-                        ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
-                        : "xs:min-h-fit min-h-[370px]"
+                        ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
+                        : "xs:min-h-fit min-h-[420px]"
                     }`}
                   >
                     <div
@@ -636,7 +636,7 @@ const ResumeTemplate16 = () => {
                       <div className="flex">
                         {/* <div className="flex ">
                         <span className="w-4 h-4 bg-[#745237] rounded-full"></span>
-                        <span className="h-13 border border-[#745237] mx-2 relative -left-[17px]"></span>
+                        <span className="h-13 border-[1px] border-[#745237] mx-2 relative -left-[17px]"></span>
                       </div> */}
 
                         <div>

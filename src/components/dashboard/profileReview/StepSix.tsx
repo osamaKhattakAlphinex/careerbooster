@@ -88,7 +88,7 @@ const StepSix = () => {
               {list.map((skill: string, index: number) => (
                 <li
                   key={index}
-                  className="flex items-center justify-between  rounded-md shadow-md border p-3 dark:text-gray-100 text-gray-950"
+                  className="flex items-center justify-between  rounded-md shadow-md border-[1px] p-3 dark:text-gray-100 text-gray-950"
                 >
                   <span>{skill}</span>
                   <button
@@ -113,7 +113,7 @@ const StepSix = () => {
               type="text"
               value={newSkill}
               onChange={(e) => setNewSkill(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+              className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               placeholder="Enter a skill..."
             />
             <button
@@ -139,7 +139,7 @@ const StepSix = () => {
             <li
               key={index}
               onClick={() => addSuggestedSkill(suggestedSkill)}
-              className="cursor-pointer text-gray-800 rounded-full bg-gray-100 hover:bg-gray-200 border px-3 py-1 m-1"
+              className="cursor-pointer text-gray-800 rounded-full bg-gray-100 hover:bg-gray-200 border-[1px] px-3 py-1 m-1"
             >
               {suggestedSkill}
             </li>

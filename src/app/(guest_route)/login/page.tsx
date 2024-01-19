@@ -22,7 +22,7 @@ const Login = () => {
                 <div className="close-btn d-none">
                   <Link
                     href="/"
-                    className="icon bg-gradient-3 text-white w-12 h-12 rounded p-3 border border-white border-opacity-10 d-flex align-center justify-center ms-auto"
+                    className="icon bg-gradient-3 text-white w-12 h-12 rounded p-3 border-[1px] border-white border-opacity-10 d-flex align-center justify-center ms-auto"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

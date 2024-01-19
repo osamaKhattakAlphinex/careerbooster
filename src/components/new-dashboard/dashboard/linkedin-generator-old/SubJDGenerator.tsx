@@ -318,7 +318,7 @@ const SubJDGenerator = () => {
           </button>
         </div>
         {streamedData && (
-          <div className=" mb-4 border-gray-500  rounded border p-4">
+          <div className=" mb-4 border-gray-500  rounded border-[1px] p-4">
             <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
               <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
                 AI Response{" "}
@@ -335,7 +335,7 @@ const SubJDGenerator = () => {
               <button
                 disabled={msgLoading}
                 onClick={() => copyJD(streamedData)}
-                className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
+                className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border-[1px] rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
               >
                 <svg

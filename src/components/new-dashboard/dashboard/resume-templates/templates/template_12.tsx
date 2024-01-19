@@ -285,7 +285,7 @@ const ResumeTemplate12 = () => {
           <span className="border-stylee w-full h-0 my-1"></span>
           <ul className=" flex flex-col gap-3 w-full mb-4 text-[16px] text-[#4A454B] break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-300 items-center hover:text-black text-[14px]  flex flex-row gap-1 ">
-              <span className="w-7 h-7 flex items-center justify-center mr-2 border border-gray-300 rounded-full">
+              <span className="w-7 h-7 flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
                 {phoneIcon}
               </span>
               <EditableField
@@ -309,7 +309,7 @@ const ResumeTemplate12 = () => {
               />
             </li>
             <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-1  items-center text-[14px]">
-              <span className="w-7 h-7 flex items-center justify-center mr-2 border border-gray-300 rounded-full">
+              <span className="w-7 h-7 flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
                 {emailIcon}
               </span>
               <EditableField
@@ -342,7 +342,7 @@ const ResumeTemplate12 = () => {
                 target="_blank"
                 className="text-blue-600"
               > */}
-              <span className="w-7 h-7 flex items-center justify-center mr-2 border border-gray-300 rounded-full">
+              <span className="w-7 h-7 flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
                 {linkedInIcon}
               </span>
 
@@ -397,7 +397,7 @@ const ResumeTemplate12 = () => {
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex items-center  "
+                        className="hover:shadow-md hover:cursor-move parent hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center  "
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -457,7 +457,7 @@ const ResumeTemplate12 = () => {
                   </Regenerate>
                   {newPrimarySkill ? (
                     <>
-                      <div className="w-full rounded-2xl border border-black flex h-9.5">
+                      <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                         <input
                           type="text"
                           value={primarySkill}
