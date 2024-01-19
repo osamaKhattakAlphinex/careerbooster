@@ -295,9 +295,9 @@ const ResumeTemplate4 = () => {
                 </>
               )}
               {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
-                <ul
+              resume?.primarySkills.length > 0 &&
+              !regenerating ? (
+                <ol
                   className="pl-0 flex list-styled flex-col gap-3 mb-4 text-[16px] xs:text-[12px] md:text-[16px]"
                   onMouseEnter={() =>
                     !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
@@ -424,7 +424,7 @@ const ResumeTemplate4 = () => {
                       + Add
                     </div>
                   ) : null}
-                </ul>
+                </ol>
               ) : (
                 <div className="text-center">
                   <div role="status">
@@ -475,7 +475,7 @@ const ResumeTemplate4 = () => {
           </div>
           {/* Executive Summary */}
 
-          <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold mt-12 xs:mt-8">
+          <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold mt-8">
             EXECUTIVE SUMMARY
           </h3>
           <span className="border-stylee w-full h-0 border !border-gray-500 my-2"></span>
@@ -532,18 +532,17 @@ const ResumeTemplate4 = () => {
           <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-start items-start ${i > 0
-                      ? "w-[100vw] ml-[-218px] xs:ml-0 xs:w-full mt-2"
-                      : "mb-[60px] md:mb-0 min-h-[350px]"
-                      }`}
+                    className={`flex justify-center items-center ${
+                      i > 0 ? "w-[100vw] ml-[-234px] xs:ml-0 xs:w-full" : "mb-5"
+                    }`}
                   >
-                    <div className="w-[5%] pl-4 xs:pr-0 md:pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
+                    <div className="w-[5%] pr-5 xs:pr-0 md:pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
                       {resume?.workExperienceArray.length - 1 !== i && (
                         <div className="h-full w-[2px] bg-gray-500"></div>
@@ -690,7 +689,6 @@ const ResumeTemplate4 = () => {
                             setRegeneratedRecordIndex(i);
                           }}
                           custom_style={"absolute mt-0 right-2"}
-                          custom_style_li={"flex flex-col gap-2"}
                         >
                           {rec?.achievements && i !== regeneratedRecordIndex ? (
                             <ul className="pl-0 flex flex-col gap-1 text-sm md:text-lg">
@@ -976,49 +974,15 @@ const ResumeTemplate4 = () => {
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
-                          <>
-                            <div
-                              className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3 lg:mt-3 md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                              onClick={() => {
-                                setNewWorkExperience(i);
-                              }}
-                            >
-                              + Add
-                            </div>
-                            <button
-                              className="border-2 h-10 w-auto px-3  mb-2 mt-3    xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                              onClick={() => {
-                                let updatedExp =
-                                  resume?.workExperienceArray.map(
-                                    (exp: any, index: number) => {
-                                      if (index === i) {
-                                        return {
-                                          ...exp,
-                                          achievements: [
-                                            ...exp?.achievements,
-                                            newAchievement,
-                                          ],
-                                        };
-                                      }
-                                      return exp;
-                                    }
-                                  );
-                                dispatch(
-                                  setWorkExperienceArray({
-                                    workExperienceArray: updatedExp,
-                                  })
-                                );
-                                saveResumeToDB({
-                                  ...resume,
-                                  workExperienceArray: updatedExp,
-                                });
-                                setNewAchievement("");
-                              }}
-                            >
-                              Add Space
-                            </button>
-                          </>
+                        newWorkExperience !== i ? (
+                          <div
+                            className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3 lg:mt-3 md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                            onClick={() => {
+                              setNewWorkExperience(i);
+                            }}
+                          >
+                            + Add
+                          </div>
                         ) : null}
                       </div>
                     </div>
@@ -1037,7 +1001,6 @@ const ResumeTemplate4 = () => {
               }}
             ></div>
           )}
-
           {/* Education */}
 
           {resume?.education && (
@@ -1112,7 +1075,7 @@ const ResumeTemplate4 = () => {
                           {crossIcon1}
                         </div>
                       </li>
-                      <li className="hover:shadow-md font-medium hover:bg-gray-100 text-base">
+                      <li className="hover:shadow-md uppercase hover:bg-gray-100 text-base">
                         <EditableField
                           value={`${education?.fieldOfStudy}`}
                           style={{ width: "100%" }}
@@ -1141,7 +1104,7 @@ const ResumeTemplate4 = () => {
                           }}
                         />{" "}
                       </li>
-                      <li className="hover:shadow-md hover:bg-gray-100 text-sm italic text-gray-950">
+                      <li className="hover:shadow-md hover:bg-gray-100 text-sm  text-gray-950">
                         <EditableField
                           type="textarea"
                           rows={2}
@@ -1171,7 +1134,7 @@ const ResumeTemplate4 = () => {
                           }}
                         />
                       </li>
-                      <li className="mb-4 text-xs text-gray-950 italic">
+                      <li className="mb-4 text-xs text-gray-950 ">
                         {education?.fromMonth + " " + education.fromYear} -{" "}
                         {education?.isContinue
                           ? "Present"
