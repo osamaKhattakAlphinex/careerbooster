@@ -6,6 +6,7 @@ const EditableField = ({
   value,
   type,
   rows,
+  className,
   onSave,
   style,
 }: {
@@ -13,6 +14,7 @@ const EditableField = ({
   type?: string;
   rows?: number;
   style?: any;
+  className?: any;
   onSave: (value: string) => void;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -55,7 +57,7 @@ const EditableField = ({
             {type === "textarea" ? (
               <textarea
                 value={editedValue}
-                className="bg-transparent pr-2 w-full hover:cursor-text h-auto"
+                className={`bg-transparent pr-2 w-full hover:cursor-text h-auto ${className}`}
                 rows={rows ? rows : 15}
                 onChange={(e: any) => setEditedValue(e.target.value)}
                 autoFocus
@@ -65,7 +67,7 @@ const EditableField = ({
               <input
                 type="text"
                 value={editedValue}
-                className="bg-transparent pr-2 hover:cursor-text"
+                className={`bg-transparent pr-2 hover:cursor-text ${className}`}
                 style={style ? style : {}}
                 onChange={(e: any) => setEditedValue(e.target.value)}
                 autoFocus
