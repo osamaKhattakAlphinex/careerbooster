@@ -245,7 +245,7 @@ const ResumeTemplate16 = () => {
 
   return (
     <div className="w-full first-page relative text-gray-900">
-      <div className="flex absolute xs:px-3 top-0 justify-center left-1/3 py-8 xs:py-2 md:py-8">
+      {/* <div className="flex absolute xs:px-3 top-0 justify-center left-1/3 py-8 xs:py-2 md:py-8">
         <div className="flex flex-col justify-start py-8 ">
           <h2 className="text-4xl xs:text-2xl text-center md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
@@ -267,7 +267,7 @@ const ResumeTemplate16 = () => {
             />
           </h3>
         </div>
-      </div>
+      </div> */}
       <div className="flex">
         <div className=" w-4/12 xs:w-4/12 md:w-1/3 flex flex-col  items-center   bg-[#1F1E1E]  px-9  xs:px-1 md:px-9 pt-[2rem] h-[1200px] xs:h-auto">
           <div className=" w-48 h-48 xs:w-24 xs:h-24 md:w-48 md:h-48 border-[.5rem] xs:border-[2px] md:border-[.5rem] border-[##F1F1F1]   text-gray-800 bg-[#FFFFFF]  text-center flex justify-center items-center  rounded-full ">
@@ -288,7 +288,6 @@ const ResumeTemplate16 = () => {
           {/* contacts */}
           <span className="border-stylee w-full h-0 my-3"></span>
           <h3 className="uppercase text-lg xs:text-[14px] md:text-lg font-semibold w-full  border-b-2 border-white pb-2 text-white  py-1 rounded-sm flex items-center  flex-row gap-2 ">
-            {contactIcon}
             Contact
           </h3>
           <span className="border-stylee w-full h-0 my-3"></span>
@@ -382,11 +381,10 @@ const ResumeTemplate16 = () => {
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <span className="border-stylee w-full h-0  my-1"></span>
-              <h3 className="uppercase text-lg xs:text-[14px] md:text-lg font-semibold text-white pb-2 w-full border-b-2 border-white  py-1 rounded-sm flex  flex-row gap-2 items-center">
-                {sparkleIcon}
+              <h3 className="uppercase text-lg xs:text-[14px] md:text-lg font-semibold text-white pb-2 w-full border-b-2 border-white  rounded-sm flex  flex-row gap-2 items-center">
                 Skills
               </h3>
-              <span className="border-stylee w-full h-0  my-1"></span>
+              <span className="border-stylee w-full h-0  my-3"></span>
               {resume?.primarySkills &&
               resume?.primarySkills.length > 0 &&
               !regenerating ? (
@@ -547,8 +545,32 @@ const ResumeTemplate16 = () => {
             </>
           )}
         </div>
-        <div className="w-full flex flex-col xs:bg-[#F1F1F1] md:bg-[#F1F1F1] px-4 md:px-8 pt-[13rem] xs:pt-[13rem] md:pt-[13rem] ">
+        <div className="w-full flex flex-col xs:bg-[#F1F1F1] md:bg-[#F1F1F1] px-4 md:px-8 pt-[1rem] xs:pt-[13rem] md:pt-[1rem] ">
+          <div className="flex  xs:px-3 top-0 justify-center left-1/3 py-4 xs:py-2 md:py-4">
+            <div className="flex flex-col justify-start py-8 ">
+              <h2 className="text-4xl xs:text-2xl text-center md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
+                <EditableField
+                  value={resume?.name ? resume?.name : "FULL NAME"}
+                  style={{ width: "fit-content" }}
+                  onSave={(value: string) => {
+                    dispatch(setField({ name: "name", value: value }));
+                    saveResumeToDB({ ...resume, name: value });
+                  }}
+                />
+              </h2>
+              <h3 className="text-2xl xs:text-[16px] md:text-2xl text-center   hover:shadow-md mt-2 hover:bg-gray-100">
+                <EditableField
+                  value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
+                  onSave={(value: string) => {
+                    dispatch(setField({ name: "jobTitle", value: value }));
+                    saveResumeToDB({ ...resume, jobTitle: value });
+                  }}
+                />
+              </h3>
+            </div>
+          </div>
           {/* Executive Summary */}
+
           <span className="border-stylee w-full h-0 my-3 xs:my-0 md:my-3"></span>
           <h3 className="uppercase text-xl  font-bold mb-2 border-[#444440] border-b-2  rounded-sm text-gray-900 w-full py-1">
             EXECUTIVE SUMMARY
