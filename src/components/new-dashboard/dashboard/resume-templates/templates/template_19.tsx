@@ -260,7 +260,7 @@ const ResumeTemplate19 = ({
           </h3>
         </div>
       </div>
-      {/* <span className="border-stylee w-full h-0 border-2 border-gray-900 my-1"></span> */}
+
       <div className="flex border-t-2 border-gray-900">
         <div className=" w-4/12 xs:w-4/12 md:w-1/3 flex flex-col relative pt-3 inset-0 items-center px-6 xs:px-0 md:px-6  bg-[#f8f8f8] ">
           {/* contacts */}
@@ -270,7 +270,7 @@ const ResumeTemplate19 = ({
             Contact
           </h3>
           <span className="border-stylee w-full h-0 my-2"></span>
-          <ul className=" flex flex-col px:-0 xs:px-3 md:px-0 gap-3 w-full mb-4 text-sm text-gray-800 break-all pl-0">
+          <ul className=" flex flex-col px-0 xs:px-3 md:px-0 gap-3 w-full mb-4 text-sm text-gray-800 break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-500 hover:text-black text-sm  flex flex-row gap-3 ">
               {phoneIcon}
               <EditableField
@@ -388,7 +388,7 @@ const ResumeTemplate19 = ({
                         onDrop={(e) => handleDropPrimary(e, i)}
                         draggable
                       >
-                        <span className="w-1.5 h-1.5 bg-gray-800 rounded-full mr-3"></span>
+                        <span className="w-1.5 h-1.5 xs:hidden md:block   xs bg-gray-800 rounded-full mr-3 xs:mr-0 md:mr-3"></span>
                         <div className="flex flex-row w-full items-center justify-between text-sm ">
                           <EditableField
                             value={skill}
@@ -521,8 +521,6 @@ const ResumeTemplate19 = ({
         </div>
 
         <div className="w-full flex flex-col px-4 md:px-8 pt-6 xs:pt-6 md:pt-6 ">
-          {/* Executive Summary */}
-
           <h2 className="uppercase text-xl xs:text-lg md:text-xl font-bold  rounded-sm text-gray-900 w-full py-1">
             EXECUTIVE SUMMARY
           </h2>
