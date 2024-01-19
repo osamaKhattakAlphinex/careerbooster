@@ -380,8 +380,8 @@ const ResumeTemplate12 = () => {
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
               {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
+              resume?.primarySkills.length > 0 &&
+              !regenerating ? (
                 <ul
                   className="pl-0 flex  flex-col gap-1 mb-4 text-gray-800 w-full text-[16px] "
                   onMouseEnter={() =>
@@ -558,16 +558,17 @@ const ResumeTemplate12 = () => {
           </div>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-center items-center ${i > 0
+                    className={`flex justify-center items-center ${
+                      i > 0
                         ? "w-[100vw] ml-[-250px] xs:ml-0 xs:w-full "
                         : "mb-5"
-                      }`}
+                    }`}
                   >
                     <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5 lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
@@ -589,11 +590,11 @@ const ResumeTemplate12 = () => {
                     >
                       <h2
                         className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-[1.3rem] xs:text-[1rem] sm:text[1rem] md:text-[1.3rem] lg:text-[1.3rem] font-bold"
-                      // style={{
-                      //   fontSize: "1.3rem",
-                      //   fontWeight: "bold",
-                      //   lineHeight: "2rem",
-                      // }}
+                        // style={{
+                        //   fontSize: "1.3rem",
+                        //   fontWeight: "bold",
+                        //   lineHeight: "2rem",
+                        // }}
                       >
                         <EditableField
                           value={rec?.title}
@@ -624,10 +625,10 @@ const ResumeTemplate12 = () => {
                       </h2>
                       <h2
                         className="hover:cursor-default text-[1.1rem] xs:text-[0.8rem] sm:text[0.8rem] md:text-[1.1rem] lg:text-[1.1rem]"
-                      // style={{
-                      //   fontSize: "1.1rem",
-                      //   lineHeight: "1.5rem",
-                      // }}
+                        // style={{
+                        //   fontSize: "1.1rem",
+                        //   lineHeight: "1.5rem",
+                        // }}
                       >
                         {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue
@@ -987,15 +988,49 @@ const ResumeTemplate12 = () => {
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
-                          <div
-                            className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3  sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                            onClick={() => {
-                              setNewWorkExperience(i);
-                            }}
-                          >
-                            + Add
-                          </div>
+                        newWorkExperience !== i ? (
+                          <>
+                            <div
+                              className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3  sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                              onClick={() => {
+                                setNewWorkExperience(i);
+                              }}
+                            >
+                              + Add
+                            </div>
+                            <button
+                              className="border-2 h-10 w-auto px-3  mb-2 mt-3    xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                              onClick={() => {
+                                let updatedExp =
+                                  resume?.workExperienceArray.map(
+                                    (exp: any, index: number) => {
+                                      if (index === i) {
+                                        return {
+                                          ...exp,
+                                          achievements: [
+                                            ...exp?.achievements,
+                                            newAchievement,
+                                          ],
+                                        };
+                                      }
+                                      return exp;
+                                    }
+                                  );
+                                dispatch(
+                                  setWorkExperienceArray({
+                                    workExperienceArray: updatedExp,
+                                  })
+                                );
+                                saveResumeToDB({
+                                  ...resume,
+                                  workExperienceArray: updatedExp,
+                                });
+                                setNewAchievement("");
+                              }}
+                            >
+                              Add Space
+                            </button>
+                          </>
                         ) : null}
                       </div>
                     </div>
