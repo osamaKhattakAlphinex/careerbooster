@@ -326,8 +326,8 @@ const ResumeTemplate2 = () => {
           </h2>
         )}
         {resume?.primarySkills &&
-        resume?.primarySkills.length > 0 &&
-        !regenerating ? (
+          resume?.primarySkills.length > 0 &&
+          !regenerating ? (
           <>
             <ul
               className="flex flex-row flex-wrap gap-1 text-sm xs:text-sm md:text-lg lg:text-lg"
@@ -345,7 +345,7 @@ const ResumeTemplate2 = () => {
               >
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
-                    className=" px-4 py-2 bg-slate-100 rounded-full hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex justify-between items-center"
+                    className=" px-4 py-2 bg-slate-100 border-transparent border rounded-full hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
                     key={i}
                     onDragStart={(e) =>
                       e.dataTransfer.setData("text/plain", i.toString())
@@ -488,17 +488,16 @@ const ResumeTemplate2 = () => {
           WORK EXPERIENCE
         </h2>
         {resume?.workExperienceArray &&
-        resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
           <>
             {resume?.workExperienceArray.map((rec: any, i: number) => {
               return (
                 <div
                   key={i}
-                  className={`${
-                    i === resume?.workExperienceArray.length - 1
-                      ? ""
-                      : "border-b border-gray-200"
-                  } grid grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
+                  className={`${i === resume?.workExperienceArray.length - 1
+                    ? ""
+                    : "border-b border-gray-200"
+                    } grid border-transparent border-2 grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
                   onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                   onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                   onDragStart={(e) =>
@@ -708,7 +707,7 @@ const ResumeTemplate2 = () => {
                                       );
                                     }}
                                     draggable
-                                    className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
+                                    className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
                                     key={ind}
                                   >
                                     <EditableField
@@ -921,7 +920,7 @@ const ResumeTemplate2 = () => {
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                      newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                         <>
                           {" "}
                           <div
@@ -1006,7 +1005,7 @@ const ResumeTemplate2 = () => {
                 <React.Fragment key={education?.id || ind}>
                   <div className="bg-gray-100 px-4 py-2">
                     <li
-                      className=" hover:shadow-md hover:cursor-move 
+                      className=" hover:shadow-md hover:cursor-move border-transparent border-2 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
                    hover:bg-gray-100 font-semibold flex uppercase text-sm xs:text-sm md:text-lg lg:text-lg  justify-between items-center "
                     >

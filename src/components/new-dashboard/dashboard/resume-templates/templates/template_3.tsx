@@ -246,13 +246,13 @@ const ResumeTemplate3 = () => {
           <span className="border-stylee w-full h-0 border !border-gray-500"></span>
 
           {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+            resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className="hover:border-dashed hover:border-gray-500 my-2 hover:cursor-move hover:border-2 w-full flex flex-col flex-wrap"
+                    className="hover:border-dashed hover:border-gray-500  border-transparent border-2 my-2 hover:cursor-move hover:border-2 w-full flex flex-col flex-wrap"
                     onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                     onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                     onDragStart={(e) =>
@@ -264,11 +264,11 @@ const ResumeTemplate3 = () => {
                   >
                     <h4
                       className="hover:shadow-md hover:cursor-text text-xl font-semibold hover:bg-gray-100"
-                      // style={{
-                      //   fontSize: "1.3rem",
-                      //   fontWeight: "bold",
-                      //   lineHeight: "2rem",
-                      // }}
+                    // style={{
+                    //   fontSize: "1.3rem",
+                    //   fontWeight: "bold",
+                    //   lineHeight: "2rem",
+                    // }}
                     >
                       <EditableField
                         value={rec?.title}
@@ -299,10 +299,10 @@ const ResumeTemplate3 = () => {
                     </h4>
                     <h2
                       className="hover:cursor-default text-lg"
-                      // style={{
-                      //   fontSize: "1.1rem",
-                      //   lineHeight: "1.5rem",
-                      // }}
+                    // style={{
+                    //   fontSize: "1.1rem",
+                    //   lineHeight: "1.5rem",
+                    // }}
                     >
                       {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                       {rec?.isContinue
@@ -472,7 +472,7 @@ const ResumeTemplate3 = () => {
                                       );
                                     }}
                                     draggable
-                                    className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
+                                    className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
                                     key={ind}
                                   >
                                     <EditableField
@@ -684,7 +684,7 @@ const ResumeTemplate3 = () => {
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                      newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                         <>
                           <div
                             className="border-2 w-2/12 mt-3 xs:mt-12 md:mt-2 lg:mt-2  xs:w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
@@ -764,7 +764,7 @@ const ResumeTemplate3 = () => {
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[30%] xs:w-full md:w-[30%] md:m-2">
                       <li
-                        className=" hover:shadow-md hover:cursor-move 
+                        className=" hover:shadow-md hover:cursor-move border-transparent border-2 
                 parent hover:border-dashed hover:border-gray-500 hover:border-2 
                  hover:bg-gray-100 font-semibold flex uppercase text-md  justify-between items-center "
                       >
@@ -991,8 +991,8 @@ const ResumeTemplate3 = () => {
                 </>
               )}
               {resume?.primarySkills &&
-              resume?.primarySkills.length > 0 &&
-              !regenerating ? (
+                resume?.primarySkills.length > 0 &&
+                !regenerating ? (
                 <ul
                   className="pl-0  pb-10 flex  flex-col gap-1  text-sm xs:text-sm md:text-lg lg:text-lg"
                   onMouseEnter={() =>
@@ -1010,7 +1010,7 @@ const ResumeTemplate3 = () => {
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex justify-between items-center"
+                        className="hover:shadow-md hover:cursor-move parent hover:border-dashed border-transparent border hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())

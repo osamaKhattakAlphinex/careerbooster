@@ -360,8 +360,8 @@ const ResumeTemplate19 = ({
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
               {resume?.primarySkills &&
-              resume?.primarySkills.length > 0 &&
-              !regenerating ? (
+                resume?.primarySkills.length > 0 &&
+                !regenerating ? (
                 <ul
                   className="pl-0 flex  px-0 xs:px-0 md:px-0  flex-col gap-1 mb-4 text-gray-800 w-full text-sm "
                   onMouseEnter={() =>
@@ -379,7 +379,7 @@ const ResumeTemplate19 = ({
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent xs:w-12/12 hover:text-black hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex items-center  "
+                        className="hover:shadow-md hover:cursor-move parent xs:w-12/12 hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex items-center  "
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -583,13 +583,13 @@ const ResumeTemplate19 = ({
           ></span>
 
           {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+            resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className="hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
+                    className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2"
                     onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                     onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                     onDragStart={(e) =>
@@ -755,7 +755,7 @@ const ResumeTemplate19 = ({
                                   handleDropAchievement(i, ind);
                                 }}
                                 draggable
-                                className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
+                                className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
                                 key={ind}
                               >
                                 <EditableField
@@ -981,7 +981,7 @@ const ResumeTemplate19 = ({
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[30%] xs:w-full md:w-[30%] lg:w-[30%] md:m-2 ">
                       <li
-                        className=" hover:shadow-md hover:cursor-move 
+                        className=" hover:shadow-md hover:cursor-move border-transparent border-2 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
                    hover:bg-gray-100 font-semibold  hover:text-black flex uppercase text-md   items-center "
                       >

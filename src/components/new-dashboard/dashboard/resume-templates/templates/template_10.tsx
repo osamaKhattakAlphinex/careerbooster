@@ -330,8 +330,8 @@ const ResumeTemplate10 = () => {
                 </h3>
               </div>
               {resume?.primarySkills &&
-              resume?.primarySkills.length > 0 &&
-              !regenerating ? (
+                resume?.primarySkills.length > 0 &&
+                !regenerating ? (
                 <ul
                   className="pl-4 flex  flex-col gap-2 mb-4 text-[16px]"
                   onMouseEnter={() =>
@@ -348,7 +348,7 @@ const ResumeTemplate10 = () => {
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-500 flex gap-2 items-center   "
+                        className="hover:shadow-md hover:cursor-move parent border-transparent border hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex gap-2 items-center   "
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -549,19 +549,18 @@ const ResumeTemplate10 = () => {
           </div>
 
           {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+            resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-center items-center ${
-                      i > 0 ? " ml-[-200px] xs:ml-0 " : "mb-5"
-                    }`}
+                    className={`flex justify-center items-center ${i > 0 ? " ml-[-200px] xs:ml-0 " : "mb-5"
+                      }`}
                   >
                     <div
                       key={i}
-                      className="hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2  flex flex-col w-full  "
+                      className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2  flex flex-col w-full  "
                       onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                       onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                       onDragStart={(e) =>
@@ -779,7 +778,7 @@ const ResumeTemplate10 = () => {
                                         );
                                       }}
                                       draggable
-                                      className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
+                                      className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
                                       key={ind}
                                     >
                                       <EditableField
@@ -991,7 +990,7 @@ const ResumeTemplate10 = () => {
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                          newWorkExperience !== i ? (
                           <>
                             <div
                               className="border-2 w-2/12 xs:w-1/2 mt-3 xs:mt-11 sm:w-2/12 md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
@@ -1074,7 +1073,7 @@ const ResumeTemplate10 = () => {
                   <React.Fragment key={education?.id || ind}>
                     <div className="flex flex-col w-[28%] mr-4 xs:w-full md:w-[30%] md:m-2">
                       <li
-                        className=" hover:shadow-md hover:cursor-move 
+                        className=" hover:shadow-md hover:cursor-move border-transparent border-2 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
                    hover:bg-gray-100 font-semibold flex uppercase text-sm xs:text-sm md:text-lg justify-between items-center "
                       >

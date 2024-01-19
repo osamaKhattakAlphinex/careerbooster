@@ -385,7 +385,7 @@ const ResumeTemplate16 = () => {
                     >
                       {resume?.primarySkills.map((skill: string, i: number) => (
                         <li
-                          className="hover:shadow-md hover:cursor-move parent hover:text-black hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex items-center  "
+                          className="hover:shadow-md hover:cursor-move parent hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex items-center  "
                           key={i}
                           onDragStart={(e) =>
                             e.dataTransfer.setData("text/plain", i.toString())
@@ -599,13 +599,13 @@ const ResumeTemplate16 = () => {
                   <div
                     key={i}
                     className={`flex justify-center items-center ${i > 0
-                        ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
-                        : "mb-[0px]"
+                      ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
+                      : "mb-[0px]"
                       }`}
                   >
                     <div
                       key={i}
-                      className="hover:border-dashed mx-4 md:mx-8 hover:border-gray-500 hover:cursor-move hover:border-2"
+                      className="border-transparent border-2 hover:border-dashed mx-4 md:mx-8 hover:border-gray-500 hover:cursor-move hover:border-2"
                       onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                       onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                       onDragStart={(e) =>
@@ -825,7 +825,7 @@ const ResumeTemplate16 = () => {
                                         );
                                       }}
                                       draggable
-                                      className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
+                                      className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
                                       key={ind}
                                     >
                                       <EditableField
@@ -1119,7 +1119,7 @@ const ResumeTemplate16 = () => {
                   <React.Fragment key={education?.id || ind}>
                     <div className="flex flex-col w-[30%] xs:w-full md:w-[30%]">
                       <li
-                        className=" hover:shadow-md hover:cursor-move 
+                        className=" hover:shadow-md hover:cursor-move border-transparent border-2 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
                    hover:bg-gray-100 font-semibold flex uppercase text-sm xs:text-sm md:text-lg justify-between items-center "
                       >

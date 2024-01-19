@@ -231,20 +231,19 @@ const ResumeTemplate5 = () => {
           </h3>
 
           {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+            resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-start items-center ${
-                      i > 0 ? " w-[100vw] xs:w-auto" : "mb-5"
-                    }
+                    className={`flex justify-start items-center ${i > 0 ? " w-[100vw] xs:w-auto" : "mb-5"
+                      }
                   `}
                   >
                     <div
                       key={i}
-                      className="hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2  flex flex-col  "
+                      className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2  flex flex-col  "
                       onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                       onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                       onDragStart={(e) =>
@@ -456,7 +455,7 @@ const ResumeTemplate5 = () => {
                                         );
                                       }}
                                       draggable
-                                      className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
+                                      className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
                                       key={ind}
                                     >
                                       <EditableField
@@ -668,7 +667,7 @@ const ResumeTemplate5 = () => {
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                          newWorkExperience !== i ? (
                           <>
                             <div
                               className="border-2 w-2/12 xs:w-full flex md:w-2/12 mt-3 xs:mt-11 md:mt-3  justify-center  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
@@ -749,7 +748,7 @@ const ResumeTemplate5 = () => {
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[30%] xs:w-full md:w-[30%] md:m-2">
                       <li
-                        className=" hover:shadow-md hover:cursor-move 
+                        className=" hover:shadow-md hover:cursor-move border-transparent border-2 
                 parent hover:border-dashed hover:border-gray-500 hover:border-2 
                  hover:bg-gray-100 font-semibold flex uppercase text-md  justify-between items-center "
                       >
@@ -972,8 +971,8 @@ const ResumeTemplate5 = () => {
                     Skills
                   </h3>
                   {resume?.primarySkills &&
-                  resume?.primarySkills.length > 0 &&
-                  !regenerating ? (
+                    resume?.primarySkills.length > 0 &&
+                    !regenerating ? (
                     <ul
                       className="pl-0 flex  flex-col gap-1 mb-4 text-[16px] md:text-[16px]"
                       onMouseEnter={() =>
@@ -993,7 +992,7 @@ const ResumeTemplate5 = () => {
                         {resume?.primarySkills.map(
                           (skill: string, i: number) => (
                             <li
-                              className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex justify-between items-center"
+                              className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex justify-between items-center"
                               key={i}
                               onDragStart={(e) =>
                                 e.dataTransfer.setData(

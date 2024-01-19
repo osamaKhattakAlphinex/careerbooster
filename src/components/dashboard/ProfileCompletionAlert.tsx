@@ -40,7 +40,7 @@ const ProfileCompletionAlert = () => {
             <span className=" text-white mr-2 font-bold lg:text-[14px] text-[12px] ">
               Important!
             </span>
-            Complete your profile to get butter result
+            Complete your profile to get better results
           </p>
         </div>
 

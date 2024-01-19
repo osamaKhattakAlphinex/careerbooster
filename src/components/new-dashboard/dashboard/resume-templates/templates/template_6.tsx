@@ -297,8 +297,8 @@ const ResumeTemplate6 = () => {
                 </h3>
                 <span className="border-stylee w-full h-0 border !border-gray-500 mb-2"></span>
                 {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
+                  resume?.primarySkills.length > 0 &&
+                  !regenerating ? (
                   <ul
                     className="pl-0 flex flex-row  flex-wrap gap-1 h-[20%] text-sm md:text-lg"
                     onMouseEnter={() =>
@@ -317,7 +317,7 @@ const ResumeTemplate6 = () => {
                       {/* <li className="font-semibold  uppercase">primary</li> */}
                       {resume?.primarySkills.map((skill: string, i: number) => (
                         <li
-                          className="hover:shadow-md  w-[45%] xs:w-full sm:w-[45%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-100 flex  items-center"
+                          className="hover:shadow-md  w-[45%] xs:w-full sm:w-[45%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex  items-center"
                           key={i}
                           onDragStart={(e) =>
                             e.dataTransfer.setData("text/plain", i.toString())
@@ -464,13 +464,13 @@ const ResumeTemplate6 = () => {
             <span className="border-stylee w-full h-0 border !border-gray-500"></span>
 
             {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+              resume?.workExperienceArray.length > 0 ? (
               <>
                 {resume?.workExperienceArray.map((rec: any, i: number) => {
                   return (
                     <div
                       key={i}
-                      className="hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2 w-full flex flex-col"
+                      className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2 w-full flex flex-col"
                       onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                       onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                       onDragStart={(e) =>
@@ -690,7 +690,7 @@ const ResumeTemplate6 = () => {
                                         );
                                       }}
                                       draggable
-                                      className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
+                                      className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
                                       key={ind}
                                     >
                                       <EditableField
@@ -902,7 +902,7 @@ const ResumeTemplate6 = () => {
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                          newWorkExperience !== i ? (
                           <>
                             <div
                               className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3 md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
@@ -985,7 +985,7 @@ const ResumeTemplate6 = () => {
                       <React.Fragment key={education?.id || ind}>
                         <div className="w-1/2 xs:w-full md:w-1/2 ">
                           <li
-                            className=" hover:shadow-md hover:cursor-move 
+                            className=" hover:shadow-md hover:cursor-move border-transparent border-2 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
                    hover:bg-gray-100 font-semibold flex uppercase text-md  justify-between items-center "
                           >

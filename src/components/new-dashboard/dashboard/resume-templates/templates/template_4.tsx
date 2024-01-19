@@ -313,7 +313,7 @@ const ResumeTemplate4 = () => {
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border-2  hover:bg-gray-500 flex justify-between items-center"
+                        className="hover:shadow-md hover:cursor-move parent border-transparent border hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex justify-between items-center"
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -551,7 +551,7 @@ const ResumeTemplate4 = () => {
                     </div>
                     <div
                       key={i}
-                      className="hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2  flex flex-col w-[95%] ml-[16px] xs:ml-2 md:ml-4"
+                      className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2 flex flex-col w-[95%] ml-[16px] xs:ml-2 md:ml-4"
                       onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                       onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                       onDragStart={(e) =>
@@ -714,7 +714,7 @@ const ResumeTemplate4 = () => {
                                       className="h-8 hover:bg-slate-200 group flex flex-row justify-center items-center"
                                     >
                                       <div
-                                        className="group-hover:block hidden font-medium text-xs uppercase   text-gray-500 cursor-pointer"
+                                        className="group-hover:block hidden font-medium text-xs uppercase text-gray-500 cursor-pointer"
                                         onClick={() => {
                                           const workExperienceArray =
                                             resume.workExperienceArray.map(
@@ -764,7 +764,7 @@ const ResumeTemplate4 = () => {
                                         );
                                       }}
                                       draggable
-                                      className="list-disc empty:list-none hover:border-dashed hover:cursor-move hover:border-gray-500 hover:border-[1px] hover:shadow-md relative parent hover:bg-gray-100"
+                                      className="list-disc empty:list-none hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
                                       key={ind}
                                     >
                                       <EditableField
@@ -1059,7 +1059,7 @@ const ResumeTemplate4 = () => {
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[28%] mr-4 xs:w-full md:w-[30%] md:m-2">
                       <li
-                        className=" hover:shadow-md hover:cursor-move 
+                        className=" hover:shadow-md hover:cursor-move border-transparent border-2 
                 parent hover:border-dashed hover:border-gray-500 hover:border-2 
                  hover:bg-gray-100 font-semibold flex uppercase text-md  justify-between items-center "
                       >
