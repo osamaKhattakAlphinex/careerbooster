@@ -360,8 +360,8 @@ const ResumeTemplate19 = ({
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
               {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
+              resume?.primarySkills.length > 0 &&
+              !regenerating ? (
                 <ul
                   className="pl-0 flex  px-0 xs:px-0 md:px-0  flex-col gap-1 mb-4 text-gray-800 w-full text-sm"
                   onMouseEnter={() =>
@@ -577,13 +577,13 @@ const ResumeTemplate19 = ({
           </h2>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2"
+                    className="hover:border-dashed hover:border-gray-500 my-2  border-transparent border-2 hover:cursor-move hover:border-2"
                     onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                     onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                     onDragStart={(e) =>

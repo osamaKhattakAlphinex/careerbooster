@@ -236,7 +236,7 @@ const ResumeTemplate18 = () => {
 
   return (
     <div className="w-full first-page relative text-gray-900">
-      <div className="flex absolute top-0 w-8/12 xs:w-8/12 px-4 md:px-8 xs:left-1 md:w-8/12 items-center  justify-start py-3 xs:py-2 md:py-8">
+      <div className="flex absolute top-0 w-8/12 xs:w-8/12 px-4 md:px-8 xs:left-1 border-2 md:w-8/12 items-center  justify-start py-3 xs:py-2 md:py-8">
         <div className="flex flex-col px-1 py-8">
           <h2 className="text-2xl md:text-5xl font-serif  font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
@@ -323,13 +323,13 @@ const ResumeTemplate18 = () => {
           <span className="border-stylee w-full h-0 my-3"></span>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2"
+                    className="hover:border-dashed hover:border-gray-500 my-2 border-transparent border-2 hover:cursor-move hover:border-2"
                     onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                     onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                     onDragStart={(e) =>
@@ -742,8 +742,8 @@ const ResumeTemplate18 = () => {
 
               <span className="border-stylee w-full h-0 my-3"></span>
               {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
+              resume?.primarySkills.length > 0 &&
+              !regenerating ? (
                 <ul
                   className="pl-0 flex  flex-col xs:px-1 md:px-0 gap-1 mb-4 text-gray-300 w-full text-sm "
                   onMouseEnter={() =>
