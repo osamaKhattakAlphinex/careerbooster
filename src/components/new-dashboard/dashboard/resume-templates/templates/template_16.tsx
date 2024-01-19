@@ -617,7 +617,7 @@ const ResumeTemplate16 = () => {
                     key={i}
                     className={`flex justify-start items-start ${
                       i > 0
-                        ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
+                        ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
                         : "xs:min-h-fit min-h-[370px]"
                     }`}
                   >
