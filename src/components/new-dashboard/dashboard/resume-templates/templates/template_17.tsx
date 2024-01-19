@@ -271,7 +271,7 @@ const ResumeTemplate17 = () => {
         </div>
       </div>
       <div className="flex">
-        <div className=" w-[35%] md:w-1/3 flex flex-col  items-center   bg-[#323b4c] px-9 xs:px-2 md:px-4   pt-[2rem] h-[1130px] xs:h-auto ">
+        <div className=" w-[35%] md:w-1/3 flex flex-col  items-center   bg-[#323b4c] px-9 xs:px-2 md:px-4   pt-[2rem] h-[1200px] xs:h-auto ">
           <div className="border-[.5rem] border-[#ae9243]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
             <div className=" w-44 h-44 xs:w-20 xs:h-20 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
               <div className=" w-40 h-40 xs:w-16 xs:h-16 md:w-40 md:h-40 text-[#F1F1F1] flex justify-center items-center bg-[#ae9243]  rounded-full ">
@@ -614,9 +614,9 @@ const ResumeTemplate17 = () => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-start items-center ${i > 0
-                      ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
-                      : "mb-[60px] md:mb-0"
+                    className={`flex justify-start items-start ${i > 0
+                        ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
+                        : "min-h-[350px] xs:min-h-fit "
                       }`}
                   >
                     <div

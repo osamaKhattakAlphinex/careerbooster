@@ -244,7 +244,7 @@ const ResumeTemplate16 = () => {
       </div>
       <div className="w-4/12 h-11 rounded-bl-full absolute right-0 bg-[#1F1E1E] "></div>
       <div className="flex">
-        <div className="w-5/12 md:w-3/12 flex flex-col items-center bg-[#d9d9d9] pl-9 pt-5 h-[1080px] xs:h-auto">
+        <div className="w-5/12 md:w-3/12 flex flex-col items-center bg-[#d9d9d9] pl-9 pt-5 h-[1150px] xs:h-auto">
           <div className=" bg-[#1F1E1E] flex flex-col md:w-56 h-[100%] rounded-t-full items-center">
             <div className=" w-48 h-48 xs:w-24 md:h-48 md:w-48 xs:h-24  m-3 text-gray-800 bg-[#d9d9d9]  text-center flex justify-center items-center  rounded-full ">
               <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
@@ -598,9 +598,9 @@ const ResumeTemplate16 = () => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-center items-center ${i > 0
-                      ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
-                      : "mb-[0px]"
+                    className={`flex justify-start items-start ${i > 0
+                        ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
+                        : "xs:min-h-fit  min-h-[270px]"
                       }`}
                   >
                     <div

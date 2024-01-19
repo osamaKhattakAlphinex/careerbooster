@@ -238,7 +238,9 @@ const ResumeTemplate7 = () => {
                   return (
                     <div
                       key={i}
-                      className={`flex justify-center items-center ${i > 0 ? " w-[100vw] xs:w-auto" : "mb-5"
+                      className={`flex justify-start items-start ${i > 0
+                          ? " w-[100vw] xs:w-auto"
+                          : "xs:min-h-fit min-h-[280px]"
                         }
                   `}
                     >
@@ -895,7 +897,7 @@ const ResumeTemplate7 = () => {
           )}
         </div>
         {/* <div className="relative  border border-gray-300 "></div> */}
-        <div className="w-[33%] xs:w-1/3 md:w-[33%] flex flex-col gap-4 border-l-2 border-gray-300 h-[1030px] xs:h-auto ">
+        <div className="w-[33%] xs:w-1/3 md:w-[33%] flex flex-col gap-4 border-l-2 border-gray-300 h-[1120px] xs:h-auto ">
           {/* contacts */}
           <div className="bg-gray-200 px-4 py-4 h-44">
             <h3 className="uppercase text-lg font-semibold flex flex-row gap-1 items-center mb-2">
