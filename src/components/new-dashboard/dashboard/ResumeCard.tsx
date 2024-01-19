@@ -26,7 +26,7 @@ const ResumeCard = () => {
         <button className="w-[36px] flex justify-center items-center rounded-full h-[36px] bg-zinc-900 border-[2px] border-zinc-800">
           {trashIcon}
         </button>
-        <button className="text-[14px] w-[217px] h-[32px] rounded-full bg-zinc-900 text-green-500 border border-green-500">
+        <button className="text-[14px] w-[217px] h-[32px] rounded-full bg-zinc-900 text-green-500 border-[1px] border-green-500">
           Download
         </button>
       </div>

@@ -391,7 +391,7 @@ const ResumeTemplate15 = () => {
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move px-0 xs:px-2 md:px-0 parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex justify-between "
+                        className="hover:shadow-md hover:cursor-move px-0 xs:px-2 md:px-0 parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex justify-between "
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -448,7 +448,7 @@ const ResumeTemplate15 = () => {
                   </Regenerate>
                   {newPrimarySkill ? (
                     <>
-                      <div className="w-full rounded-2xl border border-black flex h-9.5">
+                      <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                         <input
                           type="text"
                           value={primarySkill}
@@ -599,8 +599,8 @@ const ResumeTemplate15 = () => {
                   <div
                     key={i}
                     className={`flex justify-start items-start ${i > 0
-                        ? "w-[100vw] ml-[-240px] xs:ml-0 xs:w-full"
-                        : "xs:min-h-fit  min-h-[300px]"
+                      ? "w-[100vw] ml-[-240px] xs:ml-0 xs:w-full"
+                      : "xs:min-h-fit  min-h-[300px]"
                       }`}
                   >
                     <div
@@ -618,7 +618,7 @@ const ResumeTemplate15 = () => {
                       <div className="flex">
                         {/* <div className="flex ">
                         <span className="w-4 h-4 bg-[#745237] rounded-full"></span>
-                        <span className="h-13 border border-[#745237] mx-2 relative -left-[17px]"></span>
+                        <span className="h-13 border-[1px] border-[#745237] mx-2 relative -left-[17px]"></span>
                       </div> */}
 
                         <div>

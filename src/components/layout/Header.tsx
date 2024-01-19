@@ -137,7 +137,7 @@ const Header = () => {
                         <div>
                           <button
                             type="button"
-                            className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-1 border py-2  font-semibold   text-xs"
+                            className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-1 border-[1px] py-2  font-semibold   text-xs"
                             id="menu-button"
                             onMouseOver={() => setDropdownOpen(true)}
                             onMouseLeave={() => setDropdownOpen(false)}

@@ -252,7 +252,7 @@ const SubHeadlineGenerator = () => {
       </div>
 
       {streamedData !== "" && (
-        <div className="rounded border border-gray-500 p-4 mb-4">
+        <div className="rounded border-[1px] border-gray-500 p-4 mb-4">
           <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
               AI Response{" "}
@@ -267,7 +267,7 @@ const SubHeadlineGenerator = () => {
             <button
               disabled={msgLoading}
               onClick={() => copyHeadline(streamedData)}
-              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
+              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border-[1px] rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
             >
               <svg

@@ -26,7 +26,7 @@ const DidYouKnowCard = () => {
   }, []);
 
   return (
-    <div className="w-full p-6  border border-gray-200 rounded-lg shadow ">
+    <div className="w-full p-6  border-[1px] border-gray-200 rounded-lg shadow ">
       <div className="inline-flex gap-2 ">
         <span className="pt-1">{bulbIcon}</span>
         <h5 className="mb-2 text-2xl font-semibold tracking-tight ">

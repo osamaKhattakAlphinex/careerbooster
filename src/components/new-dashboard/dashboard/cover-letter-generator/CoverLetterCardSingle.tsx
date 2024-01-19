@@ -83,7 +83,7 @@ const CoverLetterCardSingle = ({
           <button
             type="button"
             onClick={() => handleOnView(card)}
-            className="flex px-2 justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
+            className="flex px-2 justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
           >
             {/* <Image src={PencilLine} alt="Image Not Found" /> */}
             {eyeIcon}
@@ -96,7 +96,7 @@ const CoverLetterCardSingle = ({
           <button
             type="button"
             onClick={() => handleOnDelete(card)}
-            className="flex px-2 justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
+            className="flex px-2 justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
           >
             {trashIcon}
             {pathname == "/dashboard" ? (
@@ -108,14 +108,14 @@ const CoverLetterCardSingle = ({
           {pathname == "/dashboard"
             ? ""
             : card && (
-                <DownloadService
-                  componentRef={componentRef}
-                  view={handleOnView}
-                  card={card}
-                  type="coverLetter"
-                  fileName="ai-cover-letter"
-                />
-              )}
+              <DownloadService
+                componentRef={componentRef}
+                view={handleOnView}
+                card={card}
+                type="coverLetter"
+                fileName="ai-cover-letter"
+              />
+            )}
         </div>
       </div>
     </div>

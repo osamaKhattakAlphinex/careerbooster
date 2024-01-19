@@ -161,7 +161,7 @@ const ReviewTrainBotRecord = ({ params }: { params: { recId: string } }) => {
       </div>
       <div className="grid grid-cols-1 gap-4  justify-center">
         {/* Card */}
-        <div className="col-span-1 border rounded-md text-gray-800 dark:text-gray-100 p-4">
+        <div className="col-span-1 border-[1px] rounded-md text-gray-800 dark:text-gray-100 p-4">
           {rec && rec.input && (
             // <span
             //   dangerouslySetInnerHTML={{
@@ -173,7 +173,7 @@ const ReviewTrainBotRecord = ({ params }: { params: { recId: string } }) => {
             </span>
           )}
         </div>
-        <div className="col-span-1 border rounded-lg text-gray-800 dark:text-gray-100 p-4">
+        <div className="col-span-1 border-[1px] rounded-lg text-gray-800 dark:text-gray-100 p-4">
           {/* <span dangerouslySetInnerHTML={{ __html: rec.output }}></span> */}
           <textarea
             name="idealOutput"

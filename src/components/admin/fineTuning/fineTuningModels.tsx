@@ -64,15 +64,14 @@ const FineTuningModel = forwardRef((props: FineTuningModelType, ref: any) => {
   useEffect(() => {
     console.log("values", formik.values);
   }, [openFineTuneModel]);
-  const handleDeletionOk = async () => {};
+  const handleDeletionOk = async () => { };
 
   return (
     <div
       tabIndex={-1}
       aria-hidden="true"
-      className={`overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ${
-        openFineTuneModel ? "flex" : "hidden"
-      }`}
+      className={`overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ${openFineTuneModel ? "flex" : "hidden"
+        }`}
     >
       <div className="relative p-4 w-full max-w-xl max-h-full">
         <div className="relative p-4 text-center rounded-lg shadow dark:bg-gray-800 sm:p-5">
@@ -196,13 +195,13 @@ const FineTuningModel = forwardRef((props: FineTuningModelType, ref: any) => {
                 <button
                   type="button"
                   onClick={() => setOpenFineTuneModel(false)}
-                  className="py-2 px-3 text-sm font-medium text-gray-500 rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                  className="py-2 px-3 text-sm font-medium text-gray-500 rounded-lg border-[1px] border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                 >
                   No, cancel
                 </button>
                 <button
                   type="submit"
-                  className="py-2 px-3 text-sm font-medium text-gray-500 rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                  className="py-2 px-3 text-sm font-medium text-gray-500 rounded-lg border-[1px] border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                 >
                   Tune Modal
                 </button>

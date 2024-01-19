@@ -8,7 +8,7 @@ const ResumesListCard = () => {
         <h1 className="uppercase text-sm">Your Resumes</h1>
         <div className="relative w-48">
           <input
-            className="w-full pl-10 py-2 rounded-full border border-zinc-600 placeholder-gray-400 text-white focus:outline-none focus:border-zinc-600 bg-transparent"
+            className="w-full pl-10 py-2 rounded-full border-[1px] border-zinc-600 placeholder-gray-400 text-white focus:outline-none focus:border-zinc-600 bg-transparent"
             type="text"
             placeholder="search..."
           />

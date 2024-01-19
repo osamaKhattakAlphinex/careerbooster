@@ -45,7 +45,7 @@ const AddNewExperienceCard = () => {
   });
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 border rounded-lg">
+    <div className="w-full max-w-md mx-auto p-6 border-[1px] rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">
         Add Experience
         <button

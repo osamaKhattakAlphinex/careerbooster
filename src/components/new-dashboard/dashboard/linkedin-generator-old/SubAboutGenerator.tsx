@@ -258,7 +258,7 @@ const SubAboutGenerator = () => {
         </button>
       </div>
       {streamedData && (
-        <div className="rounded border border-gray-500 mb-4 p-4">
+        <div className="rounded border-[1px] border-gray-500 mb-4 p-4">
           <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
               AI Response{" "}
@@ -273,7 +273,7 @@ const SubAboutGenerator = () => {
               <button
                 disabled={msgLoading}
                 onClick={() => copyAbout(streamedData)}
-                className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
+                className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border-[1px] rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
               >
                 <svg
@@ -391,7 +391,7 @@ const SubAboutGenerator = () => {
 
           {/* <Button
             type="button"
-            className="flex gap-2 justify-center items-center text-lg text-white mt-6 bg-gradient-to-r from-purple-700 hover:translate-y-[-4px] transition-all duration-200 to-blue-400 px-6 py-3 rounded-full border shadow-md hover:shadow-lg"
+            className="flex gap-2 justify-center items-center text-lg text-white mt-6 bg-gradient-to-r from-purple-700 hover:translate-y-[-4px] transition-all duration-200 to-blue-400 px-6 py-3 rounded-full border-[1px] shadow-md hover:shadow-lg"
             onClick={() => {
               linkedinAbout(linkedinContent);
               setInstruction("");

@@ -488,7 +488,7 @@ const TrainRegistrationBotAdminPage = () => {
             <select
               name="status"
               id="status"
-              className="rounded-sm text-sm px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+              className="rounded-sm text-sm px-2 py-1 border-[1px] border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
               onChange={(e) => setShowRecordsType(e.target.value)}
               value={showRecordsType}
             >
@@ -566,7 +566,7 @@ const TrainRegistrationBotAdminPage = () => {
           </div>
           <div className="grid grid-cols-2 gap-2">
             <div
-              className="flex border rounded-sm p-2"
+              className="flex border-[1px] rounded-sm p-2"
               onClick={() => setDataType("aiTools")}
             >
               <div className="flex items-center h-5">
@@ -595,7 +595,7 @@ const TrainRegistrationBotAdminPage = () => {
               </div>
             </div>
             <div
-              className="flex border rounded-sm  p-2"
+              className="flex border-[1px] rounded-sm  p-2"
               onClick={() => setDataType("registrationWizard")}
             >
               <div className="flex items-center h-5">
@@ -625,7 +625,7 @@ const TrainRegistrationBotAdminPage = () => {
             </div>
 
             {/* <div
-              className="flex border rounded-sm p-2"
+              className="flex border-[1px] rounded-sm p-2"
               onClick={() => setDataType("linkedinTool")}
             >
               <div className="flex items-center h-5">
@@ -711,8 +711,8 @@ const TrainRegistrationBotAdminPage = () => {
               activeTab === "reviewed"
                 ? bulkDataOperationsReviewd
                 : activeTab === "trained"
-                ? bulkDataOperationsTrained
-                : bulkDataOperations
+                  ? bulkDataOperationsTrained
+                  : bulkDataOperations
             }
           />
         </div>
@@ -724,7 +724,7 @@ const TrainRegistrationBotAdminPage = () => {
             <select
               name="userPerPage"
               id="userPerPage"
-              className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+              className="rounded-md px-2 py-1 border-[1px] border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
               onChange={selectUsersLimit}
               value={limitOfRecords}
             >
@@ -763,11 +763,10 @@ const TrainRegistrationBotAdminPage = () => {
                             setRecords([]);
                             setCurrentPage(number);
                           }}
-                          className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
-                            currentPage === number
+                          className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${currentPage === number
                               ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
                               : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
-                          }`}
+                            }`}
                         >
                           {number}
                         </button>

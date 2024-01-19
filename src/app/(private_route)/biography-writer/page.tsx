@@ -117,7 +117,7 @@ const BiographyWriter = () => {
         </Link>
       </div>
       <div className="flex m-10 mt-2 gap-4">
-        <div className="w-full flex flex-col p-4  border border-gray-200 rounded-lg shadow sm:p-6 ">
+        <div className="w-full flex flex-col p-4  border-[1px] border-gray-200 rounded-lg shadow sm:p-6 ">
           <h2 className="text-2xl mr-10 mb-6">Biography Generator</h2>
           <div className="mb-6">
             <div className="flex items-center mb-4">
@@ -209,9 +209,8 @@ const BiographyWriter = () => {
 
       {show && (
         <div
-          className={`w-[95%]  bg-white border border-gray-200 rounded-lg shadow  m-10 ${
-            msgLoading ? "animate-pulse" : ""
-          }`}
+          className={`w-[95%]  bg-white border-[1px] border-gray-200 rounded-lg shadow  m-10 ${msgLoading ? "animate-pulse" : ""
+            }`}
         >
           <div className="p-12" ref={componentRef}>
             <div dangerouslySetInnerHTML={{ __html: streamedData }}></div>

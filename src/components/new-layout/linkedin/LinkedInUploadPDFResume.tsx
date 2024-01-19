@@ -574,7 +574,7 @@ const LinkedInUploadPDFResume = () => {
           </div>
           <Button
             type="button"
-            className="flex gap-2 justify-center items-center text-lg text-white mt-6 bg-gradient-to-r from-purple-700 hover:translate-y-[-4px] transition-all duration-200 to-blue-400 px-6 py-3 rounded-full border shadow-md hover:shadow-lg"
+            className="flex gap-2 justify-center items-center text-lg text-white mt-6 bg-gradient-to-r from-purple-700 hover:translate-y-[-4px] transition-all duration-200 to-blue-400 px-6 py-3 rounded-full border-[1px] shadow-md hover:shadow-lg"
             onClick={() => {
               linkedinAbout(linkedinContent);
               setInstruction("");

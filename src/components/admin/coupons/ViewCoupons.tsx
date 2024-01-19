@@ -32,7 +32,7 @@ type Coupon = {
   metadata: {};
 };
 
-const ViewCoupons = ({}) => {
+const ViewCoupons = ({ }) => {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const confirmationModalRef: React.MutableRefObject<any> = useRef(null);
@@ -193,7 +193,7 @@ const ViewCoupons = ({}) => {
           </Link>
         </div>
         <div className="flex flex-col gap-2 items-center justify-center">
-          <div className=" p-8 flex flex-col gap-2 border w-11/12">
+          <div className=" p-8 flex flex-col gap-2 border-[1px] w-11/12">
             <div className="w-100 flex flex-row justify-between">
               <h2 className="text-xl ">Coupons Management</h2>
               <AddCoupon getCoupons={getCoupons} />

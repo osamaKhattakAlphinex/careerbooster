@@ -185,7 +185,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
               </p>
             </div>
             <label
-              className={` cursor-pointer flex flex-row justify-center items-center gap-2 py-3 px-[28px] border  border-[#312E37] rounded-full ml-auto ${fileUploading && "!bg-black"
+              className={` cursor-pointer flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[1px]  border-[#312E37] rounded-full ml-auto ${fileUploading && "!bg-black"
                 }`}
             >
               <span className=" dark:text-gray-100 text-gray-950 text-[15px] font-semibold">

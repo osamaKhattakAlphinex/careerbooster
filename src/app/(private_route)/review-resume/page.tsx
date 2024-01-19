@@ -207,7 +207,7 @@ const ReviewResumeBot = () => {
                   (selectedOption === "aiResume" && setSelectedResumeId === "")
                 }
                 onClick={() => handleGenerate()}
-                className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
+                className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
                   !session?.user?.email ||
                   !aiInputUserData ||
                   selectedOption === "" ||
@@ -273,7 +273,7 @@ const ReviewResumeBot = () => {
                 Get Your Resume Reviewed by AI
               </h1>
               <div
-                className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[10px] md:[30px] shadow ${msgLoading ? "animate-pulse" : ""
+                className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border-[1px] rounded-[8px] p-[10px] md:[30px] shadow ${msgLoading ? "animate-pulse" : ""
                   }`}
               >
                 <div
@@ -296,7 +296,7 @@ const ReviewResumeBot = () => {
                       setSelectedResumeId === "")
                   }
                   onClick={() => handleGenerate()}
-                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
+                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
                     !session?.user?.email ||
                     !aiInputUserData ||
                     selectedOption === "" ||
@@ -370,7 +370,7 @@ const ReviewResumeBot = () => {
                         setSelectedResumeId === "")
                     }
                     onClick={() => copyCoverLetter(streamedData)}
-                    className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border border-[#b324d7] rounded-full ${msgLoading ||
+                    className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border-[1px] border-[#b324d7] rounded-full ${msgLoading ||
                       !session?.user?.email ||
                       !aiInputUserData ||
                       selectedOption === "" ||

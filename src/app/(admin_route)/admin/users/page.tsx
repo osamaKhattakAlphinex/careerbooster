@@ -149,7 +149,7 @@ const UsersPage = () => {
               />
               <span className=" text-sm font-medium text-gray-900 dark:text-gray-300">
                 {new Date(userPackageExpirationDate).getTime() < Date.now() ||
-                userPackageExpirationDate === undefined
+                  userPackageExpirationDate === undefined
                   ? "Off"
                   : "On"}
               </span>
@@ -217,7 +217,7 @@ const UsersPage = () => {
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => {});
+      .finally(() => { });
   };
   const handleChange = async (id: string, status: boolean) => {
     if (window.confirm("Are you sure to Change the status")) {
@@ -421,7 +421,7 @@ const UsersPage = () => {
           <select
             name="userPerPage"
             id="userPerPage"
-            className="rounded-md px-2 py-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+            className="rounded-md px-2 py-1 border-[1px] border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
             onChange={selectUsersLimit}
             value={limitOfUser}
           >
@@ -459,11 +459,10 @@ const UsersPage = () => {
                         setRecords([]);
                         setCurrentPage(number);
                       }}
-                      className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
-                        currentPage === number
+                      className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${currentPage === number
                           ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
                           : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
-                      }`}
+                        }`}
                     >
                       {number}
                     </button>
