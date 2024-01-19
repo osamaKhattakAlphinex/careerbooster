@@ -16,6 +16,7 @@ import {
   makeTrainedBotEntry,
 } from "@/helpers/makeTrainBotEntry";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
+import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 export const maxDuration = 300; // This function can run for a maximum of 5 minutes
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -39,7 +40,7 @@ export async function POST(req: any) {
     const file = reqBody?.file;
     const jobDescription = reqBody?.jobDescription;
     const creditsUsed = reqBody?.creditsUsed;
-    const userCredits = reqBody?.userCredits;
+    const userCredits = await getUserCreditsByEmail(email);
     const trainBotData = reqBody?.trainBotData;
     let fileContent;
     if (userCredits) {

@@ -28,17 +28,16 @@ import useGetSummary from "@/hooks/useGetSummary";
 import EditableField from "@/components/new-dashboard/common/EditableField";
 import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
+import useSaveResumeToDB from "@/hooks/useSaveToDB";
 
 const ResumeTemplate1 = ({
   streamedSummaryData,
   setStreamedSummaryData,
   streamedJDData,
-  saveResumeToDB,
   setStreamedJDData,
 }: {
   streamedSummaryData: string;
   streamedJDData: string;
-  saveResumeToDB: (data?: any) => Promise<void>;
   setStreamedJDData: any;
   setStreamedSummaryData: any;
 }) => {
@@ -52,6 +51,7 @@ const ResumeTemplate1 = ({
     useState(false);
 
   const { getSummary } = useGetSummary(setStreamedSummaryData);
+  const { saveResumeToDB } = useSaveResumeToDB();
 
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
@@ -107,26 +107,7 @@ const ResumeTemplate1 = ({
       primarySkills: updatedItems,
     });
   };
-  //Reorder Redux SecondarySkills array with drag-drop
-  const handleDropSecondary = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text"));
-    const updatedItems = [...resume.secondarySkills];
-    // Swap the positions of the dragged item and the target item.
-    [updatedItems[draggedIndex], updatedItems[i]] = [
-      updatedItems[i],
-      updatedItems[draggedIndex],
-    ];
-    dispatch(
-      setSecondarySkills({
-        ...resume,
-        secondarySkills: updatedItems,
-      })
-    );
-    saveResumeToDB({
-      ...resume,
-      secondarySkills: updatedItems,
-    });
-  };
+
 
   const [image, setImage] = useState<any>(null);
 

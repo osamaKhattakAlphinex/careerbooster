@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import useGetUserData from "./useGetUserData";
 import { useDispatch, useSelector } from "react-redux";
 import { setState, setWorkExperience, setWorkExperienceArray } from "@/store/resumeSlice";
-import { WorkExperience } from "@/store/userDataSlice";
+import { WorkExperience, setUserData } from "@/store/userDataSlice";
 import { fetchLIstOfStrings } from "@/helpers/fetchLIstOfStrings";
 import useSaveResumeToDB from "./useSaveToDB";
 import useGetCreditLimits from "./useGetCreditLimits";
@@ -64,7 +64,7 @@ const useSingleJDGenerate = (setStreamedJDData: any) => {
                 body: JSON.stringify({
                     quantifyingExperience: quantifyingExperience,
                     experience: experience,
-                    userCredits: userData.userCredits,
+
                     creditsUsed: creditLimits.resume_individualWorkExperience,
                     trainBotData: {
                         userEmail: userData.email,

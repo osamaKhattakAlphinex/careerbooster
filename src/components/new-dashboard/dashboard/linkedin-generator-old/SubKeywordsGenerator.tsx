@@ -96,7 +96,7 @@ const SubKeywordsGenerator = () => {
       setMsgLoading(true);
       const obj: any = {
         personName: userData.firstName + " " + userData.lastName,
-        userCredits: userData.userCredits,
+
         creditsUsed: creditLimits.linkedin_keywords_generation,
         email: session?.user?.email,
         trainBotData: {
@@ -131,8 +131,6 @@ const SubKeywordsGenerator = () => {
               ...userData,
               linkedInKeywords:
                 KeywordsResponse.data.result.linkedInKeywords,
-              userCredits: userData.userCredits - creditLimits.
-                linkedin_keywords_generation
             };
             dispatch(setUserData({ ...userData, ...updatedObject }));
 

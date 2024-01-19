@@ -88,12 +88,6 @@ const ReviewResumeBot = () => {
               setStreamedData((prev) => prev + text);
             }
 
-            const updatedObject = {
-              ...userData,
-              userCredits: userData.userCredits - creditLimits.review_resume,
-
-            };
-            dispatch(setUserData({ ...userData, ...updatedObject }));
 
 
           } else {

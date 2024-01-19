@@ -17,6 +17,7 @@ import {
 } from "@/helpers/makeTrainBotEntry";
 import { postEmail } from "../route";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
+import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 
 // PROMPT
 // Here is the Job description:
@@ -46,7 +47,7 @@ export async function POST(req: any) {
     const userData = reqBody?.userData;
     const email = reqBody?.email;
     const creditsUsed = reqBody?.creditsUsed;
-    const userCredits = reqBody?.userCredits;
+    const userCredits = await getUserCreditsByEmail(email);
     const file = reqBody?.file;
     const jobDescription = reqBody?.jobDescription;
     const trainBotData = reqBody?.trainBotData;

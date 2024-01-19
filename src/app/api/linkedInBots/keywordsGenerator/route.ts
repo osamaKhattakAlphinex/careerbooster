@@ -15,6 +15,7 @@ import {
 import { postKeywords } from "./linkedInKeywords/route";
 import { makeid } from "@/helpers/makeid";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
+import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -37,7 +38,7 @@ export async function POST(req: any) {
     const keywordsId = reqBody?.keywordsId;
     const email = reqBody?.email;
     const personName = reqBody?.personName
-    const userCredits = reqBody?.userCredits;
+    const userCredits = await getUserCreditsByEmail(email);
     const creditsUsed = reqBody?.creditsUsed;
 
     if (userCredits) {

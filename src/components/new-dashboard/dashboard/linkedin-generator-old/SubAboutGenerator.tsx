@@ -90,7 +90,7 @@ const SubAboutGenerator = () => {
         personName: userData.firstName + " " + userData.lastName,
         option: option,
         email: session?.user?.email,
-        userCredits: userData.userCredits,
+
         creditsUsed: creditLimits.linkedin_about_generation,
         userData: aiInputUserData,
         trainBotData: {
@@ -124,7 +124,6 @@ const SubAboutGenerator = () => {
             const updatedObject = {
               ...userData,
               linkedInAbouts: AboutResponse.data.result.linkedInAbouts,
-              userCredits: userData.userCredits - creditLimits.linkedin_about_generation
             };
             dispatch(setUserData({ ...userData, ...updatedObject }));
 

@@ -1,4 +1,5 @@
 import User from "@/db/schemas/User";
+import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
@@ -13,7 +14,7 @@ export async function POST(req: any) {
     const newFile = _body.newFile;
     const email = _body.email;
     const creditsUsed = _body?.creditsUsed;
-    const userCredits = _body?.userCredits;
+    const userCredits = await getUserCreditsByEmail(email);
 
     if (newFile && email) {
       if (userCredits) {

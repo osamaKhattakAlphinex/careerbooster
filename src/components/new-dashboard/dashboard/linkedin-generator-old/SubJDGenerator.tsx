@@ -97,7 +97,7 @@ const SubJDGenerator = () => {
         setMsgLoading(true);
         const obj: any = {
           personName: userData.firstName + " " + userData.lastName,
-          userCredits: userData.userCredits,
+
           creditsUsed: creditLimits.linkedin_individualWorkExperience,
           email: session?.user?.email,
           trainBotData: {
@@ -133,11 +133,7 @@ const SubJDGenerator = () => {
         setMsgLoading(false);
 
         if (index === experiences.length - 1) {
-          const updatedObject = {
-            ...userData,
-            userCredits: userData.userCredits - (creditLimits.linkedin_individualWorkExperience * experiences.length)
-          };
-          dispatch(setUserData(updatedObject));
+
           const jobDescriptionId = makeid();
           const jdObj = {
 

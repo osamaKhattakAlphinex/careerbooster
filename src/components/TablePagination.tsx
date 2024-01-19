@@ -14,8 +14,6 @@ const TablePagination = ({ total }: Props) => {
 
   const params = useSearchParams();
 
-  console.log(params?.get("p"));
-
   const getPagesCount = (total: number, page: number) => {
     let _pages = [];
     let _count = total / page;

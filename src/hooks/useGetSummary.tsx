@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useGetUserData from "./useGetUserData";
 import useSaveResumeToDB from "./useSaveToDB";
 import useGetCreditLimits from "./useGetCreditLimits";
+import { usePathname } from "next/navigation";
 
 const useGetSummary = (setStreamedSummaryData: any) => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const useGetSummary = (setStreamedSummaryData: any) => {
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits()
   const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const path = usePathname()
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -47,7 +49,7 @@ const useGetSummary = (setStreamedSummaryData: any) => {
         type: "summary",
         personName: userData?.firstName + " " + userData?.lastName,
         jobPosition: resumeData.state.jobPosition,
-        userCredits: userData.userCredits,
+
         creditsUsed: creditLimits.resume_summary_generation,
         userData: aiInputUserData,
         trainBotData: {
@@ -75,10 +77,12 @@ const useGetSummary = (setStreamedSummaryData: any) => {
         }
 
         dispatch(setSummary(summaryTemp));
-        saveResumeToDB({
-          ...resumeData,
-          summary: summaryTemp,
-        });
+        if (path !== "/resume-builder") {
+          saveResumeToDB({
+            ...resumeData,
+            summary: summaryTemp,
+          });
+        }
       } else {
         setStreamedSummaryData("Error! Something went wrong");
       }

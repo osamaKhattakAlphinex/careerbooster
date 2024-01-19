@@ -5,7 +5,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import { setField, setUserData } from "@/store/userDataSlice";
-import { setId } from "@/store/resumeSlice";
+import { setId, setResume } from "@/store/resumeSlice";
 
 const useSaveResumeToDB = () => {
   const resumeData = useSelector((state: any) => state.resume);
@@ -17,9 +17,11 @@ const useSaveResumeToDB = () => {
     // return makeAPICallWithRetry(async () => {
     const source = data === "" ? resumeData : data;
     let obj = source;
+
     if (!source.id || source.id === "") {
       obj = { ...source, id: makeid(), dateTime: new Date() };
     }
+    dispatch(setResume(obj));
 
     axios
       .post("/api/resumeBots/saveResumeToDB", {

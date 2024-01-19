@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_1";
 import { useDispatch, useSelector } from "react-redux";
-import { WorkExperience } from "@/store/userDataSlice";
+import { WorkExperience, setUserData } from "@/store/userDataSlice";
 import {
   setBasicInfo,
   setWorkExperience,
@@ -132,7 +132,7 @@ const ResumeBuilder = () => {
         type: "basicDetails",
         inputType: "userData",
         personName: userData.firstName + " " + userData.lastName,
-        userCredits: userData.userCredits,
+
         creditsUsed: creditLimits.resume_basicInfo,
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
@@ -167,6 +167,8 @@ const ResumeBuilder = () => {
     });
     // });
   };
+
+
 
   const getWorkExperienceNew = async (quantifyingExperience: boolean) => {
     // return makeAPICallWithRetry(async () => {
@@ -212,12 +214,13 @@ const ResumeBuilder = () => {
         temp += html;
         let achievementTemp = "";
         setStreamedJDData((prev) => prev + html);
+
         const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
           method: "POST",
           body: JSON.stringify({
             quantifyingExperience: quantifyingExperience,
             experience: experience,
-            userCredits: userData.userCredits,
+
             creditsUsed: creditLimits.resume_individualWorkExperience,
             trainBotData: {
               userEmail: userData.email,
@@ -245,16 +248,22 @@ const ResumeBuilder = () => {
             temp += text;
             achievementTemp += text;
           }
+
+
+          setStreamedJDData((prev) => prev + `</div> <br /> `);
+          temp += `</div> <br /> `;
+          const achivementsArray = fetchLIstOfStrings(achievementTemp);
+          workExpArrObj.achievements = achivementsArray;
+          workExpArr.push(workExpArrObj);
+        }
+        else {
+          setStreamedJDData("You ran out of credits!")
         }
 
-        setStreamedJDData((prev) => prev + `</div> <br /> `);
-        temp += `</div> <br /> `;
-        const achivementsArray = fetchLIstOfStrings(achievementTemp);
-        workExpArrObj.achievements = achivementsArray;
-        workExpArr.push(workExpArrObj);
       }
       setFinished(true);
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
+
       dispatch(setState({ name: "resumeLoading", value: false }));
       dispatch(setWorkExperience(temp));
     }
@@ -271,7 +280,7 @@ const ResumeBuilder = () => {
       body: JSON.stringify({
         type: "primarySkills",
         personName: userData?.firstName + " " + userData?.lastName,
-        userCredits: userData.userCredits,
+
         creditsUsed: creditLimits.resume_skills,
         userData: aiInputUserData,
         jobPosition: resumeData.state.jobPosition,
@@ -286,17 +295,19 @@ const ResumeBuilder = () => {
       if (res.success) {
         if (res?.result) {
           let myJSON = JSON.parse(JSON.stringify(res.result));
-
           myJSON = JSON.parse(myJSON);
           dispatch(setPrimarySkills({ primarySkills: myJSON }));
         }
       }
+
     });
     // });
   };
 
   useEffect(() => {
+
     if (!resumeData.state.resumeLoading && resumeData?.name) {
+
       saveResumeToDB();
       setFinished(true);
     }
@@ -431,7 +442,6 @@ const ResumeBuilder = () => {
                   <ResumeTemplate1
                     streamedSummaryData={streamedSummaryData}
                     streamedJDData={streamedJDData}
-                    saveResumeToDB={saveResumeToDB}
                     setStreamedJDData={setStreamedJDData}
                     setStreamedSummaryData={setStreamedSummaryData}
                   />

@@ -7,6 +7,7 @@ import OpenAI from "openai";
 import startDB from "@/lib/db";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
+import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -29,9 +30,9 @@ export async function POST(req: any) {
     const personName = reqBody?.personName;
     const dataset = "linkedin.jobDescription";
     const model = await getTrainedModel(dataset);
-    const userCredits = reqBody?.userCredits;
     const creditsUsed = reqBody?.creditsUsed;
     const email = reqBody?.email;
+    const userCredits = await getUserCreditsByEmail(email);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
     if (userCredits) {

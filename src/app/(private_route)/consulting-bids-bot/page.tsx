@@ -92,7 +92,7 @@ const ConsultingBidsGenerator = () => {
         consultingBidId: consultingBidId,
         type: selectedOption,
         email: session?.user?.email,
-        userCredits: userData.userCredits,
+
         creditsUsed: creditLimits.consulting_bids_generation,
         jobDescription,
         trainBotData: {
@@ -155,8 +155,6 @@ const ConsultingBidsGenerator = () => {
               ...userData,
               consultingBids:
                 consultingBidResponse.data.result.consultingBids,
-              userCredits: userData.userCredits - creditLimits.consulting_bids_generation
-
             };
             dispatch(setUserData({ ...userData, ...updatedObject }));
             dispatch(

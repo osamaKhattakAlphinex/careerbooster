@@ -10,6 +10,7 @@ import { getTrainedModel } from "@/helpers/getTrainedModel";
 import { makeid } from "@/helpers/makeid";
 import { TrainBotEntryType, makeTrainedBotEntry } from "@/helpers/makeTrainBotEntry";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
+import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -32,10 +33,20 @@ export async function POST(req: any) {
     const quantifyingExperience = reqBody?.quantifyingExperience;
     const personName = reqBody?.personName
     const jobTitle = reqBody?.jobTitle
+    const userCredits = await getUserCreditsByEmail(session?.user?.email);
     const creditsUsed = reqBody?.creditsUsed;
     const dataset = "resume.writeJDSingle";
     const model = await getTrainedModel(dataset);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+
+    if (userCredits) {
+      if (userCredits < creditsUsed) {
+        return NextResponse.json(
+          { result: "Insufficient Credits", success: false },
+          { status: 429 }
+        )
+      }
+    }
     let promptRec;
     let prompt
     await startDB();

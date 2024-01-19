@@ -18,6 +18,8 @@ import {
   makeTrainedBotEntry,
 } from "@/helpers/makeTrainBotEntry";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
+import User from "@/db/schemas/User";
+import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
@@ -44,7 +46,7 @@ export async function POST(req: any) {
     const userData = reqBody?.userData;
     const personName = reqBody?.personName
 
-    const userCredits = reqBody?.userCredits;
+    const userCredits = await getUserCreditsByEmail(session?.user?.email);
     const creditsUsed = reqBody?.creditsUsed;
     // const email = reqBody?.email;
     const trainBotData = reqBody?.trainBotData;

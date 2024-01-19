@@ -91,7 +91,7 @@ const PersonalizedEmailBot = () => {
         emailId: emailId,
         type: selectedOption,
         email: session?.user?.email,
-        userCredits: userData.userCredits,
+
         creditsUsed: creditLimits.email_generation,
 
         jobDescription,
@@ -145,7 +145,6 @@ const PersonalizedEmailBot = () => {
             if (emailsResponse.data.success) {
               const updatedObject = {
                 ...userData,
-                userCredits: userData.userCredits - creditLimits.email_generation,
                 emails: emailsResponse.data.result.emails,
               };
 

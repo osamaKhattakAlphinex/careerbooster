@@ -14,6 +14,7 @@ import {
 } from "@/helpers/makeTrainBotEntry";
 import { postHeadlines } from "./linkedInHeadline/route";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
+import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -34,10 +35,10 @@ export async function POST(req: any) {
     const userData = reqBody?.userData;
     const personName = reqBody?.personName
     const creditsUsed = reqBody?.creditsUsed;
-    const userCredits = reqBody?.userCredits;
     const trainBotData = reqBody?.trainBotData;
     const headlineId = reqBody?.headlineId;
     const email = reqBody?.email;
+    const userCredits = await getUserCreditsByEmail(email);
     console.log(userCredits, creditsUsed);
 
     if (userCredits) {

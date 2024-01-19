@@ -37,15 +37,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   const userData = useSelector((state: any) => state.userData);
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
-  const updateLimits = async () => {
 
-    const updatedObject = {
-      ...userData,
-      userCredits: userData.userCredits - creditLimits.pdf_files_upload,
-    };
-    dispatch(setUserData({ ...userData, ...updatedObject }));
-
-  };
 
   const uploadFilesToDb = async (newText: string) => {
     const userEmail = userData.email;
@@ -61,7 +53,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
       body: JSON.stringify({
         newFile: file,
         email: userEmail,
-        userCredits: userData.userCredits,
+
         creditsUsed: creditLimits.pdf_files_upload,
       }),
     }).then(async response => {
@@ -127,8 +119,6 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
       //  file exists and is PDF
       setFileError("");
       // upload it to server
-      updateLimits();
-      // uploadFileToServer();
     } else if (file) {
       // if file exists but not PDf
       setFileError("only PDF file is allowed");

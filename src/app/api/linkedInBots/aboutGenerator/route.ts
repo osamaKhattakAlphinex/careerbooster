@@ -14,6 +14,7 @@ import {
 } from "@/helpers/makeTrainBotEntry";
 import { postAbouts } from "./linkedInAbout/route";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
+import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -37,13 +38,13 @@ export async function POST(req: any) {
 
     const reqBody = await req.json();
     const creditsUsed = reqBody?.creditsUsed;
-    const userCredits = reqBody?.userCredits;
     const userData = reqBody?.userData;
     const personName = reqBody?.personName
     const aboutId = reqBody?.aboutId;
     const email = reqBody?.email;
     const option = reqBody?.option;
     const trainBotData = reqBody?.trainBotData;
+    const userCredits = await getUserCreditsByEmail(email);
 
 
     if (userCredits) {

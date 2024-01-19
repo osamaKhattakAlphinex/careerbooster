@@ -123,7 +123,7 @@ export default function CoverLetterPage() {
         coverletterId: coverletterId,
         type: selectedOption,
         email: session?.user?.email,
-        userCredits: userData.userCredits,
+
         creditsUsed: creditLimits.cover_letter_generation,
         jobDescription,
         trainBotData: {
@@ -181,7 +181,6 @@ export default function CoverLetterPage() {
               // Update Redux store
               const updatedObject = {
                 ...userData,
-                userCredits: userData.userCredits - creditLimits.cover_letter_generation,
                 coverLetters: coverLetterResponse.data.result.coverLetters,
               };
               dispatch(setUserData({ ...userData, ...updatedObject }));

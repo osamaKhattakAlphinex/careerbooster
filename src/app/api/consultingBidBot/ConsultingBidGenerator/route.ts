@@ -15,6 +15,7 @@ import {
 } from "@/helpers/makeTrainBotEntry";
 import { postConsultingBid } from "../route";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
+import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -38,7 +39,7 @@ export async function POST(req: any) {
     const email = reqBody?.email;
     const file = reqBody?.file;
     const creditsUsed = reqBody?.creditsUsed;
-    const userCredits = reqBody?.userCredits;
+    const userCredits = await getUserCreditsByEmail(email)
     const jobDescription = reqBody?.jobDescription;
     const trainBotData = reqBody?.trainBotData;
 

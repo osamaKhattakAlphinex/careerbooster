@@ -78,7 +78,7 @@ const SubHeadlineGenerator = () => {
       const obj: any = {
         personName: userData.firstName + " " + userData.lastName,
         email: session?.user?.email,
-        userCredits: userData.userCredits,
+
         creditsUsed: creditLimits.linkedin_headline_generation,
         trainBotData: {
           userEmail: userData.email,
@@ -113,7 +113,6 @@ const SubHeadlineGenerator = () => {
               ...userData,
               linkedInHeadlines:
                 HeadlineResponse.data.result.linkedInHeadlines,
-              userCredits: userData.userCredits - creditLimits.linkedin_headline_generation
 
             };
             dispatch(setUserData({ ...userData, ...updatedObject }));
