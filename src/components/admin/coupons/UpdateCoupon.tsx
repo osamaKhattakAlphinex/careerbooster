@@ -148,9 +148,8 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
         id="updateProductModal"
         tabIndex={-1}
         aria-hidden="true"
-        className={`overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] z-[10000] max-h-full ${
-          !editPopUpModel ? "hidden" : "flex"
-        }`}
+        className={`overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] z-[10000] max-h-full ${!editPopUpModel ? "hidden" : "flex"
+          }`}
       >
         <div className="relative p-4 w-full max-w-2xl max-h-full">
           {/* <!-- Modal content --> */}
@@ -202,7 +201,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                     type="text"
                     name="name"
                     id="name"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border-[1px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Coupon Code"
                   />
                   {formik.touched.name && formik.errors.name && (
@@ -222,7 +221,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                     value={formik.values.category}
                     id="category"
                     name="category"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border-[1px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   >
                     <option value="standard" selected>
                       Standard
@@ -249,7 +248,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                     type="number"
                     name="amount_off"
                     id="amount_off"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border-[1px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="0"
                   />
                   {formik.touched.amount_off && formik.errors.amount_off && (
@@ -272,7 +271,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                     value={formik.values.status}
                     id="status"
                     name="status"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border-[1px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   >
                     <option value="active" selected>
                       Active
@@ -299,7 +298,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                     value={formik.values.duration}
                     id="duration"
                     name="duration"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border-[1px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   >
                     <option value="once" selected>
                       Once
@@ -327,7 +326,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                     type="number"
                     name="duration_in_months"
                     id="duration_in_months"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border-[1px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="0"
                   />
                   {formik.touched.duration_in_months &&
@@ -350,7 +349,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                     value={formik.values.currency}
                     id="currency"
                     name="currency"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border-[1px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   >
                     <option value="usd" selected>
                       USD
@@ -376,7 +375,7 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                     type="text"
                     name="expiryDate"
                     id="expiryDate"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border-[1px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="DD/MM/YYYY"
                   />
                   {formik.touched.expiryDate && formik.errors.expiryDate && (
@@ -391,9 +390,9 @@ const UpdatePackage = ({ userCoupon, getCoupons }: Props) => {
                 type="submit"
                 className="btn theme-outline-btn "
                 style={{ display: "flex" }}
-                // onClick={() => {
-                //   alert("clicked");
-                // }}
+              // onClick={() => {
+              //   alert("clicked");
+              // }}
               >
                 <svg
                   className="mr-1 -ml-1 w-6 h-6"

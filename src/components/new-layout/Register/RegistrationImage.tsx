@@ -7,7 +7,7 @@ const RegistrationImage = () => {
       data-aos="fade-up-sm"
       data-aos-delay="50"
     >
-      <div className="bg-dark-blue-4 border rounded-4  p-6 p-md-20 text-center d-flex flex-column justify-center">
+      <div className="bg-dark-blue-4 border-[1px] rounded-4  p-6 p-md-20 text-center d-flex flex-column justify-center">
         <h2 className="text-white mb-12">
           Unlock the Power of <br className="d-none d-xl-block" />
           <span className="text-primary-dark">Career Booster</span>{" "}

@@ -599,7 +599,7 @@ const RegistrationForm = () => {
                   type="checkbox"
                   onChange={formik.handleChange}
                   checked={formik.values.terms ? true : false}
-                  className="w-4 mr-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
+                  className="w-4 mr-4 h-4 border-[1px] border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
                 />
 
                 <label htmlFor="terms" className="font-light mr-1">
@@ -631,7 +631,7 @@ const RegistrationForm = () => {
                   type="checkbox"
                   onChange={formik.handleChange}
                   checked={formik.values.alertConsent ? true : false}
-                  className="w-4 mr-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
+                  className="w-4 mr-4 h-4 border-[1px] border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
                 />
                 By checking this box, you consent to receiving SMS, Calls and
                 Emails including important alerts and notifications, from

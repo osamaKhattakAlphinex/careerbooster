@@ -163,7 +163,7 @@ const ChatAI = () => {
             >
               {/* {m.role === "user" ? "User: " : "AI Resume Bot: "} */}
               {messages[1]?.content === undefined ||
-              messages[1]?.content === "" ? (
+                messages[1]?.content === "" ? (
                 <div className="flex flex-col justify-center items-center  w-full h-full">
                   <Image src={logo} alt="" className="h-24 w-24 " />
                   <div className="mb-5 text-lg card-h2 md:text-2xl font-medium">
@@ -220,14 +220,14 @@ const ChatAI = () => {
                 <div className="w-full px-3 gap-2 flex flex-col md:flex-row cursor-pointer">
                   <div
                     onClick={handleInteractiveSummaryClick}
-                    className="w-full rounded-md bg-transparent border border-[#404044] p-2 card-h2"
+                    className="w-full rounded-md bg-transparent border-[1px] border-[#404044] p-2 card-h2"
                   >
                     Make me an interactive professional summary based on my
                     resume.
                   </div>
 
                   <div
-                    className="w-full rounded-md bg-transparent mb-1 md:mb-0 border border-[#404044] p-2 card-h2"
+                    className="w-full rounded-md bg-transparent mb-1 md:mb-0 border-[1px] border-[#404044] p-2 card-h2"
                     onClick={handleJobsClick}
                   >
                     Suggest me some jobs according to my resume.
@@ -242,7 +242,7 @@ const ChatAI = () => {
               onSubmit={handleSubmit}
             >
               <input
-                className="w-full rounded-md bg-transparent  outline-none border border-[#404044]  p-2 h-10 card-h2"
+                className="w-full rounded-md bg-transparent  outline-none border-[1px] border-[#404044]  p-2 h-10 card-h2"
                 value={input}
                 // onChange={(e) => {
                 //   e.preventDefault();
@@ -257,7 +257,7 @@ const ChatAI = () => {
               </button> */}
               <button
                 ref={formRef}
-                className="border-solid border border-[#404044] h-10 text-btn p-2 rounded-md"
+                className="border-solid border-[1px] border-[#404044] h-10 text-btn p-2 rounded-md"
                 type="submit"
               >
                 <svg

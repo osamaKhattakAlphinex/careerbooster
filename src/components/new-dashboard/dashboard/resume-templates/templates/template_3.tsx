@@ -116,11 +116,11 @@ const ResumeTemplate3 = () => {
       <div className=" flex  ">
         <div className="w-full flex flex-wrap flex-col px-4 md:px-8  m-2">
           {/* Executive Summary */}
-          <span className="border-stylee w-full h-0 border !border-gray-500 mt-3"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
           <h3 className="uppercase text-sm md:text-lg font-bold py-3">
             EXECUTIVE SUMMARY
           </h3>
-          <span className="border-stylee w-full h-0 border !border-gray-500 "></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 "></span>
 
           <Regenerate
             handler={getSummary}
@@ -167,11 +167,11 @@ const ResumeTemplate3 = () => {
           </Regenerate>
 
           {/* Work Experience */}
-          <span className="border-stylee w-full h-0 border !border-gray-500 mt-3"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
           <h3 className="uppercase text-sm md:text-lg font-bold py-3">
             WORK EXPERIENCE
           </h3>
-          <span className="border-stylee w-full h-0 border !border-gray-500"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
 
           {resume?.workExperienceArray &&
             resume?.workExperienceArray.length > 0 ? (
@@ -673,11 +673,11 @@ const ResumeTemplate3 = () => {
           )}
           {resume?.education && (
             <>
-              <span className="border-stylee w-full h-0 border !border-gray-500 mt-3"></span>
+              <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
               <h3 className="uppercase text-sm md:text-lg font-bold py-3">
                 Education
               </h3>
-              <span className="border-stylee w-full h-0 border !border-gray-500"></span>
+              <span className="border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
 
               <ul
                 className="pl-0 flex xs:flex-col md:flex-row lg:flex-row w-full  flex-wrap"
@@ -819,12 +819,12 @@ const ResumeTemplate3 = () => {
         </div>
         <div className=" w-4/12 xs:4/12 md:w-4/12 flex flex-col  pl-2 xs:pl-0 md:pl-2 lg:pl-2 m-2 h-fit border-red-  pr-2  ">
           {/* contacts */}
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
           <h3 className="uppercase text-sm md:text-lg font-semibold flex flex-row gap-2 items-center">
             {contactIcon}
             Contact
           </h3>
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
           <ul className=" flex flex-col gap-3 mb-4 text-sm xs:text-sm md:text-lg lg:text-lg break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-100 text-sm flex flex-row gap-1  items-center">
               {phoneIcon}
@@ -910,12 +910,12 @@ const ResumeTemplate3 = () => {
             <>
               {resume?.primarySkills && resume?.primarySkills.length > 0 && (
                 <>
-                  <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+                  <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
                   <h3 className="uppercase text-sm md:text-lg font-semibold flex flex-row gap-2 items-center">
                     {sparkleIcon}
                     Skills
                   </h3>
-                  <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+                  <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
                 </>
               )}
               {resume?.primarySkills &&
@@ -938,7 +938,7 @@ const ResumeTemplate3 = () => {
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent hover:border-dashed border-transparent border hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
+                        className="hover:shadow-md hover:cursor-move parent hover:border-dashed border-transparent border-[1px] hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -996,7 +996,7 @@ const ResumeTemplate3 = () => {
 
                   {newPrimarySkill ? (
                     <>
-                      <div className="w-full rounded-2xl border border-black flex h-9.5">
+                      <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                         <input
                           type="text"
                           value={primarySkill}

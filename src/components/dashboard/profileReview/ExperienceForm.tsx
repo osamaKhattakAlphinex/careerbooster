@@ -18,11 +18,10 @@ const ExperienceForm = ({ formik }: any) => {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.jobTitle}
-          className={`w-full border border-gray-300 ${
-            formik.touched.jobTitle &&
+          className={`w-full border-[1px] border-gray-300 ${formik.touched.jobTitle &&
             formik.errors.jobTitle &&
             "border-red-500 outline-red-500"
-          } rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent`}
+            } rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent`}
         />
         {formik.touched.jobTitle && formik.errors.jobTitle && (
           <p className="text-red-600">
@@ -38,7 +37,7 @@ const ExperienceForm = ({ formik }: any) => {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.company}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+          className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
         />
       </div>
       <div className="w-full">
@@ -49,10 +48,10 @@ const ExperienceForm = ({ formik }: any) => {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.country}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+          className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
         />
         {/* <select
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+          className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
           name="country"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -75,7 +74,7 @@ const ExperienceForm = ({ formik }: any) => {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.cityState}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+          className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
         />
       </div>
       <div className="w-full">
@@ -84,7 +83,7 @@ const ExperienceForm = ({ formik }: any) => {
           <div className="w-1/2">
             <label className="block text-xs text-gray-500">From Month</label>
             <select
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+              className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               name="fromMonth"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -102,7 +101,7 @@ const ExperienceForm = ({ formik }: any) => {
             <label className="block text-xs text-gray-500">From Year</label>
 
             <select
-              className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+              className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               name="fromYear"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -122,7 +121,7 @@ const ExperienceForm = ({ formik }: any) => {
             <div className="w-1/2">
               <label className="block text-xs text-gray-500">To Month</label>
               <select
-                className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+                className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
                 name="toMonth"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -139,7 +138,7 @@ const ExperienceForm = ({ formik }: any) => {
             <div className="w-1/2">
               <label className="block text-xs text-gray-500">To Year</label>
               <select
-                className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+                className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
                 name="toYear"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -182,7 +181,7 @@ const ExperienceForm = ({ formik }: any) => {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.description}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+          className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
         />
       </div>
       <div className="w-full">

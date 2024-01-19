@@ -98,7 +98,7 @@ export default function MainCoverLetterTool() {
                 </div>
                 <button
                   type="submit"
-                  className="flex flex-row justify-center items-center gap-2 py-3 px-[28px] border  border-[#312E37] rounded-full ml-auto"
+                  className="flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[1px]  border-[#312E37] rounded-full ml-auto"
                 >
                   <span className="text-white text-[15px] font-semibold">
                     Browse Files
@@ -144,7 +144,7 @@ export default function MainCoverLetterTool() {
               name="jobTitle"
               rows={6}
               placeholder="Copy the job description for the position you are applying and paste it here to generate a tailor cover letter."
-              className="w-full  px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border pt-3"
+              className="w-full  px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px] pt-3"
             />
           </div>
           <button
@@ -167,7 +167,7 @@ export default function MainCoverLetterTool() {
           <h1 className="uppercase text-white font-bold text-[18px] pb-5">
             your ai generated cover letter
           </h1>
-          <div className="aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border rounded-[8px] p-[30px]">
+          <div className="aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border-[1px] rounded-[8px] p-[30px]">
             <h2 className="text-white font-bold text-[22px]">
               Job Bid as a Consultant
             </h2>
@@ -207,7 +207,7 @@ export default function MainCoverLetterTool() {
           <div className="buttons mt-5 flex gap-3">
             <button
               type="submit"
-              className="flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#B324D7] border rounded-full"
+              className="flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#B324D7] border-[1px] rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -229,7 +229,7 @@ export default function MainCoverLetterTool() {
             </button>
             <button
               type="submit"
-              className="flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#37B944] border rounded-full"
+              className="flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#37B944] border-[1px] rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -252,7 +252,7 @@ export default function MainCoverLetterTool() {
             </button>
             <button
               type="submit"
-              className="flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border rounded-full"
+              className="flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[#312E37] border-[1px] rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -275,7 +275,7 @@ export default function MainCoverLetterTool() {
             </button>
             <button
               type="submit"
-              className="flex flex-row justify-center ml-auto items-center gap-2 py-3 px-3 border-[#312E37] border rounded-full"
+              className="flex flex-row justify-center ml-auto items-center gap-2 py-3 px-3 border-[#312E37] border-[1px] rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -357,7 +357,7 @@ const ResumeTemplate1 = ({
                 >
                   {resume?.primarySkills.map((skill: string, i: number) => (
                     <li
-                      className="hover:shadow-md hover:cursor-move parent hover:border-dashed border-transparent border hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
+                      className="hover:shadow-md hover:cursor-move parent hover:border-dashed border-transparent border-[1px] hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
                       key={i}
                       onDragStart={(e) =>
                         e.dataTransfer.setData("text/plain", i.toString())
@@ -413,7 +413,7 @@ const ResumeTemplate1 = ({
                   ))}
                   {newPrimarySkill ? (
                     <>
-                      <div className="w-full rounded-2xl border border-black flex h-9.5">
+                      <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                         <input
                           type="text"
                           value={primarySkill}
@@ -639,7 +639,7 @@ const ResumeTemplate1 = ({
         <div className="w-full flex flex-col px-8 xs:px-4 md:px-8 lg:px-8">
           {/* Executive Summary */}
           <h3 className="uppercase text-lg font-semibold">EXECUTIVE SUMMARY</h3>
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
           <Regenerate
             handler={getSummary}
             custom_style={"absolute bottom-3 right-2"}
@@ -685,9 +685,9 @@ const ResumeTemplate1 = ({
           </Regenerate>
 
           {/* Work Experience */}
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
           <h3 className="uppercase text-lg font-semibold">WORK EXPERIENCE</h3>
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
 
           {resume?.workExperienceArray &&
             resume?.workExperienceArray.length > 0 ? (

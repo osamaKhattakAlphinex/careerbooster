@@ -115,11 +115,10 @@ const BiograpyFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
 
   return (
     <>
-      <div className="py-4 border p-4 mb-4 rounded-lg">
+      <div className="py-4 border-[1px] p-4 mb-4 rounded-lg">
         <label
-          className={`bg-black text-white text-sm rounded-full relative flex py-2   items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max cursor-pointer ${
-            fileUploading && "!bg-black"
-          }
+          className={`bg-black text-white text-sm rounded-full relative flex py-2   items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max cursor-pointer ${fileUploading && "!bg-black"
+            }
           `}
         >
           {fileUploading && (

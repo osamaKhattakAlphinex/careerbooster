@@ -167,7 +167,7 @@ const SlidingPanel = forwardRef(({ refresh }: Props, ref: any) => {
             {/* Card */}
             <div className="col-span-1">
               <span>Input</span>
-              <div className=" text-left border rounded-md text-gray-800 dark:text-gray-100 p-4 overflow-y-scroll">
+              <div className=" text-left border-[1px] rounded-md text-gray-800 dark:text-gray-100 p-4 overflow-y-scroll">
                 {entry && entry.input && (
                   // <span
                   //   dangerouslySetInnerHTML={{
@@ -184,7 +184,7 @@ const SlidingPanel = forwardRef(({ refresh }: Props, ref: any) => {
             <div>
               <span>Output</span>
 
-              <div className="col-span-1 border rounded-lg text-gray-800 dark:text-gray-100 p-4">
+              <div className="col-span-1 border-[1px] rounded-lg text-gray-800 dark:text-gray-100 p-4">
                 {/* <span dangerouslySetInnerHTML={{ __html: rec.output }}></span> */}
                 <textarea
                   name="idealOutput"

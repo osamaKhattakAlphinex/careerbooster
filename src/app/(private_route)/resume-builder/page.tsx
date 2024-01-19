@@ -362,7 +362,7 @@ const ResumeBuilder = () => {
                   className="no-underline  text-white rounded-lg overflow-hidden"
                 >
                   <div
-                    className={` font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
+                    className={` font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
                   >
                     All Templates
                   </div>

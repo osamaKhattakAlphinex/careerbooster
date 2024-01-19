@@ -295,8 +295,8 @@ const ResumeTemplate4 = () => {
                 </>
               )}
               {resume?.primarySkills &&
-              resume?.primarySkills.length > 0 &&
-              !regenerating ? (
+                resume?.primarySkills.length > 0 &&
+                !regenerating ? (
                 <ol
                   className="pl-0 flex list-styled flex-col gap-3 mb-4 text-[16px] xs:text-[12px] md:text-[16px]"
                   onMouseEnter={() =>
@@ -313,7 +313,7 @@ const ResumeTemplate4 = () => {
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent border-transparent border hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex justify-between items-center"
+                        className="hover:shadow-md hover:cursor-move parent border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex justify-between items-center"
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -371,7 +371,7 @@ const ResumeTemplate4 = () => {
 
                   {newPrimarySkill ? (
                     <>
-                      <div className="w-full rounded-2xl border border-black flex h-9.5">
+                      <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                         <input
                           type="text"
                           value={primarySkill}
@@ -478,7 +478,7 @@ const ResumeTemplate4 = () => {
           <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold mt-8">
             EXECUTIVE SUMMARY
           </h3>
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-2"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-2"></span>
 
           <Regenerate
             handler={getSummary}
@@ -529,18 +529,17 @@ const ResumeTemplate4 = () => {
           <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold mt-12">
             WORK EXPERIENCE
           </h3>
-          <span className="border-stylee w-full h-0 border !border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
 
           {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+            resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-center items-center ${
-                      i > 0 ? "w-[100vw] ml-[-234px] xs:ml-0 xs:w-full" : "mb-5"
-                    }`}
+                    className={`flex justify-center items-center ${i > 0 ? "w-[100vw] ml-[-234px] xs:ml-0 xs:w-full" : "mb-5"
+                      }`}
                   >
                     <div className="w-[5%] pr-5 xs:pr-0 md:pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
@@ -974,7 +973,7 @@ const ResumeTemplate4 = () => {
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                          newWorkExperience !== i ? (
                           <div
                             className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3 lg:mt-3 md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {
@@ -1008,7 +1007,7 @@ const ResumeTemplate4 = () => {
               <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center mt-5">
                 Education
               </h3>
-              <span className="border-stylee block h-0 border !border-gray-500 my-3"></span>
+              <span className="border-stylee block h-0 border-[1px] !border-gray-500 my-3"></span>
               <ul
                 className="pl-0 flex xs:flex-col md:flex-row lg:flex-row w-full  flex-wrap"
                 onMouseEnter={() =>

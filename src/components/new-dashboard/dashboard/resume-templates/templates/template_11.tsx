@@ -382,7 +382,7 @@ const ResumeTemplate11 = () => {
                     {" "}
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md   hover:cursor-move parent border-transparent border hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex  items-center   "
+                        className="hover:shadow-md   hover:cursor-move parent border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex  items-center   "
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -440,7 +440,7 @@ const ResumeTemplate11 = () => {
 
                   {newPrimarySkill ? (
                     <>
-                      <div className="w-full rounded-2xl border border-black flex h-9.5">
+                      <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                         <input
                           type="text"
                           value={primarySkill}
@@ -589,8 +589,8 @@ const ResumeTemplate11 = () => {
                   <div
                     key={i}
                     className={`flex justify-start items-start ${i > 0
-                        ? "w-[100vw] ml-[-250px] xs:ml-0 xs:w-full mt-8"
-                        : "xs:min-h-fit min-h-[250px]"
+                      ? "w-[100vw] ml-[-250px] xs:ml-0 xs:w-full mt-8"
+                      : "xs:min-h-fit min-h-[250px]"
                       }`}
                   >
                     <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">

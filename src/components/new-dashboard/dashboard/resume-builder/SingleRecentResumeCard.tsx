@@ -90,13 +90,13 @@ const SingleRecentResumeCard = ({
         <button
           type="button"
           onClick={handleOnDelete}
-          className="flex px-2 dark:hover:bg-gray-700 dark:hover:border-[#5f5f5f] dark:hover:text-white text-neutral-400  justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
+          className="flex px-2 dark:hover:bg-gray-700 dark:hover:border-[#5f5f5f] dark:hover:text-white text-neutral-400  justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
         >
           {trashIcon} <span className="text-[13px] mx-2 ">Delete</span>
         </button>
         <button
           onClick={handleOnView}
-          className="flex px-2 text-[16px] dark:hover:border-[#5f5f5f] dark:hover:bg-gray-700 dark:hover:text-white justify-center text-neutral-400 items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border dark:border-[#27272a] bg-transparent border-[#22c55e]"
+          className="flex px-2 text-[16px] dark:hover:border-[#5f5f5f] dark:hover:bg-gray-700 dark:hover:text-white justify-center text-neutral-400 items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
         >
           {eyeIcon}
           <span className="text-[13px] mx-2 ">View</span>

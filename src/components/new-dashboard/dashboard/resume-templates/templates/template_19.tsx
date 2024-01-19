@@ -360,8 +360,8 @@ const ResumeTemplate19 = ({
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
               {resume?.primarySkills &&
-              resume?.primarySkills.length > 0 &&
-              !regenerating ? (
+                resume?.primarySkills.length > 0 &&
+                !regenerating ? (
                 <ul
                   className="pl-0 flex  px-0 xs:px-0 md:px-0  flex-col gap-1 mb-4 text-gray-800 w-full text-sm"
                   onMouseEnter={() =>
@@ -379,7 +379,7 @@ const ResumeTemplate19 = ({
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent xs:w-12/12 hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border flex items-center  "
+                        className="hover:shadow-md hover:cursor-move parent xs:w-12/12 hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center  "
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -439,7 +439,7 @@ const ResumeTemplate19 = ({
                   </Regenerate>
                   {newPrimarySkill ? (
                     <>
-                      <div className="w-full rounded-2xl border border-black flex h-9.5">
+                      <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
                         <input
                           type="text"
                           value={primarySkill}
@@ -577,7 +577,7 @@ const ResumeTemplate19 = ({
           </h2>
 
           {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+            resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
@@ -596,7 +596,7 @@ const ResumeTemplate19 = ({
                     <div className="flex flex-col">
                       {/* <div className="flex ">
                         <span className="w-4 h-4 bg-[#745237] rounded-full"></span>
-                        <span className="h-13 border border-[#745237] mx-2 relative -left-[17px]"></span>
+                        <span className="h-13 border-[1px] border-[#745237] mx-2 relative -left-[17px]"></span>
                       </div> */}
 
                       <h2

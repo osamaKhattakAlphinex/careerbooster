@@ -8,7 +8,7 @@ const CTASection = () => {
       data-aos-offset="150"
     >
       <div className="container">
-        <div className="rounded-5 border position-relative z-1 cta">
+        <div className="rounded-5 border-[1px] position-relative z-1 cta">
           <div className="animate-scale position-absolute w-full h-full z-n1">
             <Image
               width={927}
