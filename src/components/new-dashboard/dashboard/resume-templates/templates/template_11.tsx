@@ -215,8 +215,8 @@ const ResumeTemplate11 = () => {
 
   return (
     <div className="first-page relative">
-      <div className="flex flex-row absolute top-[90px] xs:top-[50px] sm:top-[50px] md:top-[90px] lg:top-[90px]  h-[168px] xs:h-[114px] sm:h-[114px] md:h-[168px] lg:h-[168px]  bg-[#F4D644] items-center justify-center    w-[85%]  left-[150px] xs:left-[141px] sm:left-[141px] md:left-[150px] lg:left-[150px] xs:w-[58%] sm:w-[58%] md:w-[85%] lg:w-[85%]">
-        <div className="flex flex-col">
+      <div className="flex flex-row absolute top-[90px] xs:top-[50px] sm:top-[50px] md:top-[90px] lg:top-[90px]  h-[168px] xs:h-[114px] sm:h-[114px] md:h-[168px] lg:h-[168px]  bg-[#F4D644] justify-center   w-[100%] items-center">
+        <div className="flex flex-col justify-center">
           <h2 className="text-4xl xs:text-lg sm:text-lg md:text-4xl   hover:shadow-md font-bold pb-2 text-gray-950 hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
@@ -241,19 +241,7 @@ const ResumeTemplate11 = () => {
       <div className=" flex">
         {/* sidebar */}
 
-        <div className="  w-5/12 md:w-1/3 flex flex-col pl-3 md:pl-8 bg-[#2A2E36] text-gray-100  pr-6  py-8 h-[1180px] xs:h-auto  pt-[40px] item">
-          <div className="  z-50 w-48 h-60 xs:w-[8rem] xs:h-[8rem] sm:w-[8rem] sm:h-[8rem] md:w-48 md:h-60  lg:w-48 lg:h-60 border-[8px] border-gray-100  text-white bg-gray-800 text-center flex justify-center   mx-4 xs:mx-0 sm:mx-0 md:mx-4 lg:mx-4  md:mt-0 md:mr-8 items-center mb-10">
-            <span className="text-4xl  hover:shadow-md hover:bg-gray-500">
-              <EditableField
-                value={resume?.shortName ? resume?.shortName : "CPH"}
-                style={{ width: "60px" }}
-                onSave={(value: string) => {
-                  dispatch(setField({ name: "shortName", value: value }));
-                  saveResumeToDB({ ...resume, shortName: value });
-                }}
-              />
-            </span>
-          </div>
+        <div className="  w-5/12 md:w-1/3 flex flex-col pl-3 md:pl-8 bg-[#2A2E36] text-gray-100  pr-6  py-8 h-[1180px] xs:h-auto  pt-[290px] item">
           {/* contacts */}
 
           <h3 className="uppercase text-lg font-bold flex flex-row gap-2 items-center">
@@ -315,7 +303,7 @@ const ResumeTemplate11 = () => {
               />
             </li>
 
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-blue-600 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500  flex flex-row gap-1  items-center text-xs">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -522,7 +510,7 @@ const ResumeTemplate11 = () => {
         </div>
         <div className="w-full flex flex-wrap flex-col px-8 xs:px-2 sm:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[300px] xs:pt-[154px] sm:pt-[154px] md:pt-[300px] lg:pt-[300px]  ">
           {/* Executive Summary */}
-          <div className=" flex flex-col w-full  my-6">
+          <div className=" flex flex-col w-full">
             <h3 className="uppercase text-lg xs:text-[14px] sm:text[14px] md:text-lg lg:text-lg font-bold">
               EXECUTIVE SUMMARY
             </h3>

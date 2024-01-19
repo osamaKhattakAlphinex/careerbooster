@@ -150,7 +150,7 @@ const ResumeTemplate8 = () => {
     <div className="w-full first-page  text-gray-900">
       <div className="flex">
         <div className="flex flex-col items-center w-full pt-4 px-8">
-          <h2 className="text-4xl xs:text-2xl md:text-6xl lg:text-6xl  hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-4xl xs:text-2xl md:text-4xl lg:text-4xl  hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -171,7 +171,9 @@ const ResumeTemplate8 = () => {
           </h3>
           <ul className="w-full flex flex-row xs:flex-col md:flex-row gap-3 mt-8 mb-4 text-sm md:text-lg break-all pl-0 justify-between">
             <li className="hover:shadow-md hover:bg-gray-100 text-sm  flex flex-row gap-1  items-center">
-              {phoneIcon}
+              <span className="text-gray-950  py-[2px] px-1 font-bold  border border-gray-950">
+                {phoneIcon}
+              </span>
               <EditableField
                 value={
                   resume?.contact?.phone
@@ -193,7 +195,9 @@ const ResumeTemplate8 = () => {
               />
             </li>
             <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center text-sm">
-              {emailIcon}
+              <span className="text-gray-950  py-[2px] px-1 font-bold  border border-gray-950">
+                {emailIcon}
+              </span>
               <EditableField
                 value={
                   resume?.contact?.email
@@ -214,17 +218,10 @@ const ResumeTemplate8 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 text-blue-600 flex flex-row gap-1  items-center text-sm">
-              {/* <a
-                href={
-                  resume?.contact?.linkedIn
-                    ? resume?.contact?.linkedIn
-                    : "https://www.linkedin.com/"
-                }
-                target="_blank"
-                className="text-blue-600"
-              > */}
-              {linkedInIcon}
+            <li className="hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center text-sm">
+              <span className="text-gray-950  px-1 font-bold  border border-gray-950">
+                in
+              </span>
               <EditableField
                 value={
                   resume?.contact?.linkedIn
@@ -262,7 +259,7 @@ const ResumeTemplate8 = () => {
             handler={getSummary}
             custom_style={"absolute bottom-3 right-2 "}
           >
-            <div className="text-sm xs:text-sm md:text-lg lg:text-lg  hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
+            <div className="text-sm  hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
               <EditableField
                 type="textarea"
                 value={
@@ -307,19 +304,18 @@ const ResumeTemplate8 = () => {
             <>
               {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
               <h3 className="uppercase text-lg font-bold flex justify-center mt-6 font-serif items-center gap-2 wl-full ">
-                {sparkleIcon}
                 Skills
               </h3>
               <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-3"></span>
               {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
+              resume?.primarySkills.length > 0 &&
+              !regenerating ? (
                 <Regenerate
                   handler={getPrimarySkills}
                   custom_style={"absolute right-3 bottom-0"}
                 >
                   <ul
-                    className="pl-0 flex flex-row  flex-wrap gap-1 h-[20%]  mb-4 text-sm xs:text-sm md:text-lg lg:text-lg"
+                    className="pl-0 flex flex-row  flex-wrap gap-1 h-[20%]  mb-4 text-sm "
                     onMouseEnter={() =>
                       !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                     }
@@ -339,7 +335,7 @@ const ResumeTemplate8 = () => {
                         onDrop={(e) => handleDropPrimary(e, i)}
                         draggable
                       >
-                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                        <span className="w-1 h-1 bg-black rounded-full mr-3"></span>
                         <div className="flex justify-between items-center w-full">
                           <EditableField
                             value={skill}
@@ -477,7 +473,7 @@ const ResumeTemplate8 = () => {
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-3"></span>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
@@ -493,14 +489,7 @@ const ResumeTemplate8 = () => {
                     onDrop={(e) => handleDropExperience(e, i)}
                     draggable
                   >
-                    <h2
-                      className="hover:shadow-md hover:cursor-text text-lg font-bold leading-8 hover:bg-gray-100"
-                    // style={{
-                    //   fontSize: "1.3rem",
-                    //   fontWeight: "bold",
-                    //   lineHeight: "2rem",
-                    // }}
-                    >
+                    <h2 className="hover:shadow-md hover:cursor-text text-[1rem] font-bold leading-8 hover:bg-gray-100">
                       <EditableField
                         value={rec?.title}
                         style={{ width: "100%" }}
@@ -528,13 +517,7 @@ const ResumeTemplate8 = () => {
                         }}
                       />
                     </h2>
-                    <h2
-                      className="hover:cursor-default text-base leading-relaxed  xs:text-sm md:text-lg"
-                    // style={{
-                    //   fontSize: "1.1rem",
-                    //   lineHeight: "1.5rem",
-                    // }}
-                    >
+                    <h2 className="hover:cursor-default text-[15px] leading-relaxed  ">
                       {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                       {rec?.isContinue
                         ? "Present"
@@ -632,7 +615,7 @@ const ResumeTemplate8 = () => {
                         custom_style={"absolute mt-0 right-2"}
                       >
                         {rec?.achievements && i !== regeneratedRecordIndex ? (
-                          <ul className="pl-0 flex flex-col gap-1 text-sm xs:text-sm md:text-lg lg:text-lg">
+                          <ul className="pl-0 flex flex-col gap-1 text-sm">
                             {rec?.achievements.map(
                               (achievement: any, ind: number) =>
                                 achievement === "" ? (
@@ -915,7 +898,7 @@ const ResumeTemplate8 = () => {
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                      newWorkExperience !== i ? (
                         <>
                           <div
                             className="border-2 w-2/12 xs:w-full mt-3 md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
@@ -979,7 +962,6 @@ const ResumeTemplate8 = () => {
             <>
               {/* <span className="w-full h-0 border-[1px] border-gray-500 my-3 page-break"></span> */}
               <h3 className="uppercase text-lg font-semibold  justify-center items-center font-serif flex mt-6 gap-2 text-center">
-                {educationIcon}
                 Education
               </h3>
               <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-3"></span>
@@ -998,7 +980,7 @@ const ResumeTemplate8 = () => {
                       <li
                         className=" hover:shadow-md hover:cursor-move border-transparent border-2 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
-                   hover:bg-gray-100 font-semibold flex uppercase text-md  justify-between items-center "
+                   hover:bg-gray-100 font-bold flex uppercase text-[15px]  justify-between items-center "
                       >
                         <EditableField
                           type="textarea"
@@ -1049,7 +1031,7 @@ const ResumeTemplate8 = () => {
                           {crossIcon1}
                         </div>
                       </li>
-                      <li className="hover:shadow-md uppercase hover:bg-gray-100 text-base">
+                      <li className="hover:shadow-md  hover:bg-gray-100 text-[15px] font-medium">
                         <EditableField
                           value={`${education?.fieldOfStudy}`}
                           style={{ width: "100%" }}
@@ -1078,7 +1060,7 @@ const ResumeTemplate8 = () => {
                           }}
                         />{" "}
                       </li>
-                      <li className="hover:shadow-md hover:bg-gray-100 text-sm xs:text-sm md:text-lg lg:text-lg text-gray-800">
+                      <li className="hover:shadow-md hover:bg-gray-100 text-sm italic text-gray-800">
                         <EditableField
                           type="textarea"
                           rows={2}
@@ -1108,7 +1090,7 @@ const ResumeTemplate8 = () => {
                           }}
                         />
                       </li>
-                      <li className="mb-4 text-xs text-gray-700 ">
+                      <li className="mb-4 italic text-xs text-gray-700 ">
                         {education?.fromMonth + " " + education.fromYear} -{" "}
                         {education?.isContinue
                           ? "Present"

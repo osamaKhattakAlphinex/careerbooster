@@ -154,7 +154,7 @@ const ResumeTemplate5 = () => {
     <div className="w-full first-page  text-gray-900">
       <div className="flex ">
         <div className="flex flex-col w-full p-8 text-center">
-          <h2 className="text-4xl xs:text-2xl md:text-6xl hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-2xl font-bold xs:text-xl md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -164,7 +164,7 @@ const ResumeTemplate5 = () => {
               }}
             />
           </h2>
-          <h3 className="text-2xl xs:text-[16px] md:text-2xl hover:shadow-md hover:bg-gray-100 mt-4">
+          <h3 className="text-xl xs:text-[14px] md:text-xl hover:shadow-md hover:bg-gray-100 ">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -184,7 +184,7 @@ const ResumeTemplate5 = () => {
             handler={getSummary}
             custom_style={"absolute bottom-3 right-2 "}
           >
-            <div className="text-[16px] xs:text-lg hover:shadow-md hover:bg-gray-100 mt-4 group-hover:pb-14">
+            <div className="text-sm hover:shadow-md hover:bg-gray-100 mt-4 group-hover:pb-14">
               <EditableField
                 type="textarea"
                 value={
@@ -231,21 +231,22 @@ const ResumeTemplate5 = () => {
           </h3>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-start items-start ${i > 0
-                      ? " w-[100vw] xs:w-auto"
-                      : "xs:min-h-fit min-h-[320px]"
-                      }
+                    className={`flex justify-start items-start ${
+                      i > 0
+                        ? " w-[100vw] xs:w-auto"
+                        : "xs:min-h-fit min-h-[320px]"
+                    }
                   `}
                   >
                     <div
                       key={i}
-                      className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2  flex flex-col  "
+                      className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2"
                       onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                       onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                       onDragStart={(e) =>
@@ -255,7 +256,7 @@ const ResumeTemplate5 = () => {
                       onDrop={(e) => handleDropExperience(e, i)}
                       draggable
                     >
-                      <h2 className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-[1.3rem] xs:text-lg sm:text-lg md:text-[1.3rem] lg:text-[1.3rem] font-bold">
+                      <h2 className="hover:shadow-md hover:cursor-text text-[1rem] font-bold leading-8 hover:bg-gray-100">
                         <EditableField
                           value={rec?.title}
                           style={{ width: "100%" }}
@@ -283,12 +284,7 @@ const ResumeTemplate5 = () => {
                           }}
                         />
                       </h2>
-                      <h2
-                        className="hover:cursor-default text-[1.1rem] xs:text-sm sm:text-sm md:text-[1.1rem] lg:text-[1.1rem]"
-                        style={{
-                          lineHeight: "1.5rem",
-                        }}
-                      >
+                      <h2 className="hover:cursor-default text-[15px] leading-relaxed  ">
                         {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue
                           ? "Present"
@@ -383,10 +379,10 @@ const ResumeTemplate5 = () => {
                             getOneWorkExperienceNew(rec);
                             setRegeneratedRecordIndex(i);
                           }}
-                          custom_style={"absolute button-0 right-2"}
+                          custom_style={"absolute mt-0 right-2"}
                         >
                           {rec?.achievements && i !== regeneratedRecordIndex ? (
-                            <ul className="pl-0 flex flex-col gap-1 text-sm md:text-lg">
+                            <ul className="pl-0 flex flex-col gap-1 text-sm">
                               {rec?.achievements.map(
                                 (achievement: any, ind: number) =>
                                   achievement === "" ? (
@@ -576,7 +572,7 @@ const ResumeTemplate5 = () => {
                           <>
                             <div className="w-full gap-1 rounded-md flex flex-wrap h-9.5">
                               <textarea
-                                className="w-full md:w-9/12 rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
+                                className="w-9/12 xs:w-full md:w-9/12 lg:w-9/12 rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
                                 onChange={(e) =>
                                   setNewAchievement(e.target.value)
                                 }
@@ -621,7 +617,7 @@ const ResumeTemplate5 = () => {
                                 }}
                               />
                               <button
-                                className="bg-green-500 w-full md:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
+                                className="bg-green-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
                                 onClick={() => {
                                   // Save the new achievement to the state and possibly the database
                                   if (newAchievement !== "") {
@@ -662,17 +658,17 @@ const ResumeTemplate5 = () => {
                                 setNewWorkExperience(-1);
                                 setWorkExperienceAddButtonVisible(-1);
                               }}
-                              className="bg-red-500 w-full md:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
+                              className="bg-red-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
                             >
                               Cancel
                             </button>
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                           <>
                             <div
-                              className="border-2 w-2/12 xs:w-full flex md:w-2/12 mt-3 xs:mt-11 md:mt-3  justify-center  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                              className="border-2 w-2/12 xs:w-full mt-3 md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                               onClick={() => {
                                 setNewWorkExperience(i);
                               }}
@@ -876,14 +872,14 @@ const ResumeTemplate5 = () => {
           )}
         </div>
 
-        <div className="w-[25%] xs:w-1/3 md:w-[25%] flex flex-col pl-3 md:pl-4 pr-6 gap-4  border-l-2 border-gray-500 h-[920px] xs:h-auto">
+        <div className="w-[25%] xs:w-1/3 md:w-[25%] flex flex-col pl-3 md:pl-4 pr-3 gap-4  border-l-2 border-gray-500 h-[920px] xs:h-auto">
           {/* contacts */}
 
           <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center mb-2">
             Contact
           </h3>
 
-          <ul className=" flex flex-col gap-4 mb-4 text-[16px] md:text-[16px] break-all pl-0">
+          <ul className=" flex flex-col gap-4 mb-4 text-sm break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center">
               {phoneIcon}
               <EditableField
@@ -928,17 +924,10 @@ const ResumeTemplate5 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 text-blue-600 flex flex-row gap-1  items-center ">
-              {/* <a
-                href={
-                  resume?.contact?.linkedIn
-                    ? resume?.contact?.linkedIn
-                    : "https://www.linkedin.com/"
-                }
-                target="_blank"
-                className="text-blue-600"
-              > */}
-              {linkedInIcon}
+            <li className="hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center ">
+              <span className="text-gray-950  px-1 font-bold  border border-gray-950">
+                in
+              </span>
               <EditableField
                 value={
                   resume?.contact?.linkedIn
@@ -973,10 +962,10 @@ const ResumeTemplate5 = () => {
                     Skills
                   </h3>
                   {resume?.primarySkills &&
-                    resume?.primarySkills.length > 0 &&
-                    !regenerating ? (
+                  resume?.primarySkills.length > 0 &&
+                  !regenerating ? (
                     <ul
-                      className="pl-0 flex  flex-col gap-1 mb-4 text-[16px] md:text-[16px]"
+                      className="pl-0 flex  flex-col gap-1 mb-4 text-sm"
                       onMouseEnter={() =>
                         !newPrimarySkill &&
                         setPrimarySkillAddButtonVisible(true)

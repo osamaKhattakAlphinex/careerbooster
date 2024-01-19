@@ -150,9 +150,9 @@ const ResumeTemplate10 = () => {
 
   return (
     <div className="first-page relative">
-      <div className="flex flex-row absolute top-[90px] h-36 z-30  bg-[#043382] items-center justify-center    w-full ">
-        <div className="  z-50 w-48 h-48 xs:w-[120px] xs:h-[80px] sm:w-[120px] sm:h-[80px] border-2 border-[#042B6B] md:w-48 md:h-48 lg:w-48 lg:h-48  text-white bg-gray-800 text-center flex justify-center   rounded-full mx-4  md:mt-0 md:mr-8 items-center ">
-          <span className="text-4xl  hover:shadow-md hover:bg-gray-500">
+      <div className="flex flex-row absolute top-[50px] h-36 z-30  bg-[#043382] items-center justify-center    w-full ">
+        <div className="  z-50 w-40 h-40 xs:w-[120px] xs:h-[80px] sm:w-[120px] sm:h-[80px] border-2 border-[#042B6B] md:w-48 md:h-48 lg:w-48 lg:h-48  text-white bg-gray-800 text-center flex justify-center   rounded-full mx-4  md:mt-0 md:mr-8 items-center ">
+          <span className="text-4xl md:text-3xl  hover:shadow-md hover:bg-gray-500">
             <EditableField
               value={resume?.shortName ? resume?.shortName : "CPH"}
               style={{ width: "60px" }}
@@ -164,18 +164,21 @@ const ResumeTemplate10 = () => {
           </span>
         </div>
         <div className="flex flex-col">
-          <h2 className="text-4xl font-bold xs:font-medium text-gray-100 md:text-6xl hover:shadow-md hover:bg-gray-500">
+          <h2 className="text-2xl font-bold xs:font-medium text-gray-100 md:text-4xl hover:shadow-md hover:bg-gray-500">
             <EditableField
+              className={`md:w-auto xs:w-fit`}
               value={resume?.name ? resume?.name : "FULL NAME"}
-              style={{ width: "fit-content" }}
+              // style={{ width: "fit-content" }}
               onSave={(value: string) => {
                 dispatch(setField({ name: "name", value: value }));
                 saveResumeToDB({ ...resume, name: value });
               }}
             />
           </h2>
-          <h3 className="text-xl xs:text-[16px] md:text-2xl text-gray-100 hover:shadow-md hover:bg-gray-500">
+          <h3 className="text-lg xs:text-[16px] md:text-xl text-gray-100 hover:shadow-md hover:bg-gray-500">
             <EditableField
+              className={` xs:w-fit md:w-[600px] lg:w-[600px]`}
+              // style={{ width: "600px" }}
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
                 dispatch(setField({ name: "jobTitle", value: value }));
@@ -187,16 +190,15 @@ const ResumeTemplate10 = () => {
       </div>
       <div className=" flex">
         {/* sidebar */}
-        <div className="z-5    w-5/12  flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6 bg-gray-950 text-gray-100  pr-6  pb-8  pt-[280px] xs:pt-[300px] h-[1080px] xs:h-auto">
+        <div className="z-5    w-5/12  flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6 bg-gray-950 text-gray-100  pr-6  pb-8  pt-[240px] xs:pt-[240] h-[1080px] xs:h-auto">
           {/* contacts */}
-          <div className="rounded-3xl border-2 border-blue-900 p-2">
-            <h3 className="uppercase text-lg mb-0 xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold flex flex-row gap-2 items-center">
-              {contactIcon}
+          <div className="rounded-3xl border-2 border-blue-900 py-2 flex justify-center ">
+            <h3 className="uppercase text-[16px] text-center mb-0 xs:text-sm sm:text-sm md:text-md lg:text-[16px] font-semibold flex flex-row gap-2 items-center">
               Contact
             </h3>
           </div>
 
-          <ul className=" flex flex-col gap-2 mb-4 text-sm break-all pl-0 mt-6">
+          <ul className=" flex flex-col gap-2 text-sm break-all pl-0 mt-4">
             <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex flex-row gap-1  items-center">
               <div className="bg-[#043382] rounded-full p-2 mr-3">
                 {" "}
@@ -323,17 +325,16 @@ const ResumeTemplate10 = () => {
 
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
-              <div className="rounded-3xl border-2 border-blue-900 p-2 my-3 xs:my-8 md:my-8">
-                <h3 className="uppercase text-lg mb-0 xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold flex flex-row gap-2 items-center ">
-                  {sparkleIcon}
+              <div className="rounded-3xl border-2 border-blue-900 p-2 my-3  flex justify-center">
+                <h3 className="uppercase text-[16px] mb-0 xs:text-sm sm:text-sm md:text-md lg:text-[16px] font-semibold flex flex-row gap-2 items-center ">
                   Skills
                 </h3>
               </div>
               {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
+              resume?.primarySkills.length > 0 &&
+              !regenerating ? (
                 <ul
-                  className="pl-4 flex  flex-col gap-2 mb-4 text-[16px]"
+                  className="pl-4 flex  flex-col gap-1 mb-4 text-[14px]"
                   onMouseEnter={() =>
                     !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                   }
@@ -344,7 +345,7 @@ const ResumeTemplate10 = () => {
                   <Regenerate
                     handler={getPrimarySkills}
                     custom_style={"absolute right-0 -bottom-10 mt-4"}
-                    custom_style_li={"flex flex-col gap-4"}
+                    custom_style_li={"flex flex-col gap-2"}
                   >
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
@@ -489,10 +490,10 @@ const ResumeTemplate10 = () => {
             </>
           )}
         </div>
-        <div className="w-full flex flex-wrap flex-col px-8 sm:px-2 xs:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[280px] xs:pt-[300px]">
+        <div className="w-full flex flex-wrap flex-col px-4 sm:px-2 xs:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[210px] xs:pt-[210px]">
           {/* Executive Summary */}
-          <div className="rounded-3xl xs:-mx-1 md:mx-0 bg-blue-900 py-2 px-6 my-6 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-[270px] xs:w-[190px] sm:w-[190px] md:w-[270px] lg:w-[270px]">
-            <h3 className="uppercase text-lg mb-0 font-semibold text-gray-100 xs:text-sm sm:text-sm md:text-md lg:text-lg">
+          <div className="rounded-3xl xs:-mx-1 md:mx-0 bg-blue-900 py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-[230px] xs:w-auto md:w-[230px] lg:w-[230px]">
+            <h3 className="uppercase text-[16px] mb-0 font-semibold text-gray-100 xs:text-sm sm:text-sm md:text-md lg:text-[16px]">
               EXECUTIVE SUMMARY
             </h3>
           </div>
@@ -542,23 +543,24 @@ const ResumeTemplate10 = () => {
           </Regenerate>
 
           {/* Work Experience */}
-          <div className="rounded-3xl  bg-blue-900 xs:-mx-1  md:mx-0 py-2 px-6 my-6 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-[260px] xs:w-[190px] sm:w-[190px] md:w-[260px] lg:w-[260px]">
-            <h3 className="uppercase text-lg mb-0 font-semibold text-gray-100 xs:text-sm sm:text-sm md:text-md lg:text-lg">
+          <div className="rounded-3xl  bg-blue-900 xs:-mx-1  md:mx-0 py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-[200px] xs:w-auto md:w-[200px] lg:w-[200px]">
+            <h3 className="uppercase text-[16px] mb-0 font-semibold text-gray-100 xs:text-sm sm:text-sm md:text-md lg:text-[16px]">
               WORK EXPERIENCE
             </h3>
           </div>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-start items-start ${i > 0
-                      ? " ml-[-200px] xs:ml-0 "
-                      : "xs:min-h-fit min-h-[350px]"
-                      }`}
+                    className={`flex justify-start items-start ${
+                      i > 0
+                        ? " ml-[-200px] xs:ml-0 "
+                        : "xs:min-h-fit min-h-[350px]"
+                    }`}
                   >
                     <div
                       key={i}
@@ -572,13 +574,7 @@ const ResumeTemplate10 = () => {
                       onDrop={(e) => handleDropExperience(e, i)}
                       draggable
                     >
-                      <h2
-                        className="text-[1.3rem] xs:text-lg sm:text-lg md:text-[1.3rem] lg:text-[1.3rem] hover:shadow-md hover:cursor-text hover:bg-gray-100"
-                        style={{
-                          fontWeight: "bold",
-                          lineHeight: "2rem",
-                        }}
-                      >
+                      <h2 className="text-[1rem] font-bold xs:text-lg sm:text-lg md:text-[1rem] lg:text-[1rem] hover:shadow-md hover:cursor-text hover:bg-gray-100 ">
                         <EditableField
                           value={rec?.title}
                           style={{ width: "100%" }}
@@ -606,12 +602,7 @@ const ResumeTemplate10 = () => {
                           }}
                         />
                       </h2>
-                      <h2
-                        className="hover:cursor-default text-[1.1rem] xs:text-sm sm:text-sm md:text-[1.1rem] lg:text-[1.1rem]  "
-                        style={{
-                          lineHeight: "1.5rem",
-                        }}
-                      >
+                      <h2 className="hover:cursor-default text-[15px] xs:text-sm sm:text-sm md:text-[15px] lg:text-[15px]  ">
                         {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue
                           ? "Present"
@@ -700,7 +691,7 @@ const ResumeTemplate10 = () => {
                           />
                         </span>
                       </h2>
-                      <div className="p-4">
+                      <div className="px-4 py-2">
                         <Regenerate
                           handler={() => {
                             getOneWorkExperienceNew(rec);
@@ -992,7 +983,7 @@ const ResumeTemplate10 = () => {
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                           <>
                             <div
                               className="border-2 w-2/12 xs:w-1/2 mt-3 xs:mt-11 sm:w-2/12 md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
@@ -1056,8 +1047,8 @@ const ResumeTemplate10 = () => {
           {/* Education */}
           {resume?.education && (
             <div className="ml-[-180px] xs:ml-0">
-              <div className="rounded-3xl  bg-blue-900 py-2 px-6 my-6 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-[250px] xs:w-[190px] sm:w-[190px] md:w-[250px] lg:w-[250px]">
-                <h3 className="uppercase text-lg mb-0 font-semibold text-gray-100 xs:text-sm sm:text-sm md:text-md lg:text-lg ">
+              <div className="rounded-3xl  bg-blue-900 py-2 px-4 my-6  w-[140px]">
+                <h3 className="uppercase text-[16px] mb-0 font-semibold text-gray-100 xs:text-sm sm:text-sm md:text-[16px] lg:text-[16px] ">
                   Education
                 </h3>
               </div>
@@ -1077,7 +1068,7 @@ const ResumeTemplate10 = () => {
                       <li
                         className=" hover:shadow-md hover:cursor-move border-transparent border-2 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
-                   hover:bg-gray-100 font-semibold flex uppercase text-sm xs:text-sm md:text-lg justify-between items-center "
+                   hover:bg-gray-100 font-extrabold flex uppercase text-sm xs:text-sm md:text-lg justify-between items-center "
                       >
                         <EditableField
                           type="textarea"
@@ -1128,7 +1119,7 @@ const ResumeTemplate10 = () => {
                           {crossIcon1}
                         </div>
                       </li>
-                      <li className="hover:shadow-md uppercase hover:bg-gray-100 text-base">
+                      <li className="hover:shadow-md font-semibold  hover:bg-gray-100 text-base">
                         <EditableField
                           value={`${education?.fieldOfStudy}`}
                           style={{ width: "100%" }}
@@ -1157,7 +1148,7 @@ const ResumeTemplate10 = () => {
                           }}
                         />{" "}
                       </li>
-                      <li className="hover:shadow-md hover:bg-gray-100 text-sm md:text-lg text-gray-800">
+                      <li className="hover:shadow-md hover:bg-gray-100 italic ">
                         <EditableField
                           type="textarea"
                           rows={2}
@@ -1187,7 +1178,7 @@ const ResumeTemplate10 = () => {
                           }}
                         />
                       </li>
-                      <li className="mb-4 text-xs text-gray-700 ">
+                      <li className="mb-4 text-xs text-gray-700 italic ">
                         {education?.fromMonth + " " + education.fromYear} -{" "}
                         {education?.isContinue
                           ? "Present"
