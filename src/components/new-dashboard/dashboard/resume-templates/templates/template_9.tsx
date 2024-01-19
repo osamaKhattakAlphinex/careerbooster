@@ -940,14 +940,47 @@ const ResumeTemplate9 = () => {
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
                       newWorkExperience !== i ? (
-                        <div
-                          className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3 sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                          onClick={() => {
-                            setNewWorkExperience(i);
-                          }}
-                        >
-                          + Add
-                        </div>
+                        <>
+                          <div
+                            className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3 sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                            onClick={() => {
+                              setNewWorkExperience(i);
+                            }}
+                          >
+                            + Add
+                          </div>
+                          <button
+                            className="border-2 h-10 w-auto px-3  mb-2 mt-3    xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                            onClick={() => {
+                              let updatedExp = resume?.workExperienceArray.map(
+                                (exp: any, index: number) => {
+                                  if (index === i) {
+                                    return {
+                                      ...exp,
+                                      achievements: [
+                                        ...exp?.achievements,
+                                        newAchievement,
+                                      ],
+                                    };
+                                  }
+                                  return exp;
+                                }
+                              );
+                              dispatch(
+                                setWorkExperienceArray({
+                                  workExperienceArray: updatedExp,
+                                })
+                              );
+                              saveResumeToDB({
+                                ...resume,
+                                workExperienceArray: updatedExp,
+                              });
+                              setNewAchievement("");
+                            }}
+                          >
+                            Add Space
+                          </button>
+                        </>
                       ) : null}
                     </div>
                   </div>
