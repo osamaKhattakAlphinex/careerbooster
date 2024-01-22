@@ -65,12 +65,15 @@ const ResumeTemplate11 = () => {
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
-  const { updateAndSaveSkill,
+  const {
+    updateAndSaveSkill,
     updateAndSaveSummary,
     updateAndSaveWorkExperienceArray,
     updateAndSaveBasicInfo,
-    updateAndSaveEducation, updateAndSaveName, updateAndSaveJobTitle } = useUpdateAndSave()
-
+    updateAndSaveEducation,
+    updateAndSaveName,
+    updateAndSaveJobTitle,
+  } = useUpdateAndSave();
 
   useEffect(() => {
     if (streamedJDData === "") {
@@ -87,8 +90,9 @@ const ResumeTemplate11 = () => {
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
               onSave={(value: string) => {
-                dispatch(setField({ name: "name", value: value }));
-                saveResumeToDB({ ...resume, name: value });
+                if (value !== resume?.name) {
+                  updateAndSaveName(value);
+                }
               }}
             />
           </h2>
@@ -96,8 +100,9 @@ const ResumeTemplate11 = () => {
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
-                dispatch(setField({ name: "jobTitle", value: value }));
-                saveResumeToDB({ ...resume, jobTitle: value });
+                if (value !== resume?.jobTitle) {
+                  updateAndSaveJobTitle(value);
+                }
               }}
             />
           </h3>
@@ -128,16 +133,9 @@ const ResumeTemplate11 = () => {
                     : "(555) 555-1234"
                 }
                 onSave={(value: string) => {
-                  dispatch(
-                    setBasicInfo({
-                      ...resume,
-                      contact: { ...resume.contact, phone: value },
-                    })
-                  );
-                  saveResumeToDB({
-                    ...resume,
-                    contact: { ...resume.contact, phone: value },
-                  });
+                  if (value !== resume?.contact?.phone) {
+                    updateAndSaveBasicInfo({ phone: value });
+                  }
                 }}
               />
             </li>
@@ -154,16 +152,9 @@ const ResumeTemplate11 = () => {
                     : "your@email.com"
                 }
                 onSave={(value: string) => {
-                  dispatch(
-                    setBasicInfo({
-                      ...resume,
-                      contact: { ...resume.contact, email: value },
-                    })
-                  );
-                  saveResumeToDB({
-                    ...resume,
-                    contact: { ...resume.contact, email: value },
-                  });
+                  if (value !== resume?.contact?.email) {
+                    updateAndSaveBasicInfo({ email: value });
+                  }
                 }}
               />
             </li>
@@ -189,16 +180,9 @@ const ResumeTemplate11 = () => {
                     : "https://www.linkedin.com/"
                 }
                 onSave={(value: string) => {
-                  dispatch(
-                    setBasicInfo({
-                      ...resume,
-                      contact: { ...resume.contact, linkedIn: value },
-                    })
-                  );
-                  saveResumeToDB({
-                    ...resume,
-                    contact: { ...resume.contact, linkedIn: value },
-                  });
+                  if (value !== resume.contact.linkedIn) {
+                    updateAndSaveBasicInfo({ linkedIn: value });
+                  }
                 }}
               />
               {/* </a> */}
@@ -216,8 +200,8 @@ const ResumeTemplate11 = () => {
                 <span className="border border-[#F4D644] w-[110%] mt-2"></span>
               </div>
               {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
+              resume?.primarySkills.length > 0 &&
+              !regenerating ? (
                 <ul
                   className="pl-0 flex  flex-col gap-4 mb-4 text-sm"
                   onMouseEnter={() =>
@@ -248,17 +232,17 @@ const ResumeTemplate11 = () => {
                           value={skill}
                           onSave={(value: string) => {
                             if (value !== resume?.primarySkills[i]) {
-                              let updatedSkills = [...resume.primarySkills]
-                              updatedSkills.splice(i, 1, value)
-                              updateAndSaveSkill(updatedSkills)
+                              let updatedSkills = [...resume.primarySkills];
+                              updatedSkills.splice(i, 1, value);
+                              updateAndSaveSkill(updatedSkills);
                             }
                           }}
                         />
                         <div
                           onClick={() => {
-                            const removeSkill = [...resume.primarySkills]
-                            removeSkill.splice(i, 1)
-                            updateAndSaveSkill(removeSkill)
+                            const removeSkill = [...resume.primarySkills];
+                            removeSkill.splice(i, 1);
+                            updateAndSaveSkill(removeSkill);
                           }}
                           className="w-4 h-4  cursor-pointer child"
                         >
@@ -396,7 +380,7 @@ const ResumeTemplate11 = () => {
                   )
                 }
                 onSave={(value: string) => {
-                  updateAndSaveSummary(value)
+                  updateAndSaveSummary(value);
                 }}
               />
             </div>
@@ -411,16 +395,17 @@ const ResumeTemplate11 = () => {
           </div>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-start items-start ${i > 0
-                      ? "w-[100vw] ml-[-250px] xs:ml-0 xs:w-full mt-8"
-                      : "xs:min-h-fit min-h-[250px]"
-                      }`}
+                    className={`flex justify-start items-start ${
+                      i > 0
+                        ? "w-[100vw] ml-[-250px] xs:ml-0 xs:w-full mt-8"
+                        : "xs:min-h-fit min-h-[250px]"
+                    }`}
                   >
                     <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
@@ -856,7 +841,7 @@ const ResumeTemplate11 = () => {
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                           <>
                             <div
                               className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3 sm:w-full  md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
@@ -949,27 +934,16 @@ const ResumeTemplate11 = () => {
                           rows={2}
                           value={education?.educationLevel}
                           onSave={(value: string) => {
-                            let updatedEducations = resume?.education.map(
-                              (edu: any, index: number) => {
-                                if (index === ind) {
-                                  return {
-                                    ...edu,
-                                    educationLevel: value,
-                                  };
-                                }
-                                return edu;
-                              }
-                            );
-                            dispatch(
-                              setField({
-                                name: "education",
-                                value: updatedEducations,
-                              })
-                            );
-                            saveResumeToDB({
-                              ...resume,
-                              education: updatedEducations,
-                            });
+                            if (
+                              value !== resume?.education[ind].educationLevel
+                            ) {
+                              let updatedEducations = [...resume.education];
+                              updatedEducations[ind] = {
+                                ...updatedEducations[ind],
+                                educationLevel: value,
+                              };
+                              updateAndSaveEducation(updatedEducations);
+                            }
                           }}
                         />
                         <div
@@ -998,27 +972,14 @@ const ResumeTemplate11 = () => {
                           value={`${education?.fieldOfStudy}`}
                           style={{ width: "100%" }}
                           onSave={(value: string) => {
-                            let updatedEducations = resume?.education.map(
-                              (edu: any, index: number) => {
-                                if (index === ind) {
-                                  return {
-                                    ...edu,
-                                    fieldOfStudy: value,
-                                  };
-                                }
-                                return edu;
-                              }
-                            );
-                            dispatch(
-                              setField({
-                                name: "education",
-                                value: updatedEducations,
-                              })
-                            );
-                            saveResumeToDB({
-                              ...resume,
-                              education: updatedEducations,
-                            });
+                            if (value !== resume?.education[ind].fieldOfStudy) {
+                              let updatedEducations = [...resume.education];
+                              updatedEducations[ind] = {
+                                ...updatedEducations[ind],
+                                fieldOfStudy: value,
+                              };
+                              updateAndSaveEducation(updatedEducations);
+                            }
                           }}
                         />{" "}
                       </li>
@@ -1028,27 +989,14 @@ const ResumeTemplate11 = () => {
                           rows={2}
                           value={`${education?.schoolName}`}
                           onSave={(value: string) => {
-                            let updatedEducations = resume?.education.map(
-                              (edu: any, index: number) => {
-                                if (index === ind) {
-                                  return {
-                                    ...edu,
-                                    schoolName: value,
-                                  };
-                                }
-                                return edu;
-                              }
-                            );
-                            dispatch(
-                              setField({
-                                name: "education",
-                                value: updatedEducations,
-                              })
-                            );
-                            saveResumeToDB({
-                              ...resume,
-                              education: updatedEducations,
-                            });
+                            if (value !== resume?.education[ind].schoolName) {
+                              let updatedEducations = [...resume.education];
+                              updatedEducations[ind] = {
+                                ...updatedEducations[ind],
+                                schoolName: value,
+                              };
+                              updateAndSaveEducation(updatedEducations);
+                            }
                           }}
                         />
                       </li>
