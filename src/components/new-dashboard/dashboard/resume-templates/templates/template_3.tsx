@@ -206,13 +206,6 @@ const ResumeTemplate3 = () => {
                     </h4>
                     <h2
                       className="hover:cursor-default text-lg"
-<<<<<<< HEAD
-=======
-                      // style={{
-                      //   fontSize: "1.1rem",
-                      //   lineHeight: "1.5rem",
-                      // }}
->>>>>>> waqas
                     >
                       {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                       {rec?.isContinue
