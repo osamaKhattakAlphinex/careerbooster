@@ -4,22 +4,8 @@ import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  setBasicInfo,
-  setField,
-  setPrimarySkills,
-  setSummary,
-  setWorkExperienceArray,
-} from "@/store/resumeSlice";
-import {
-  contactIcon,
-  crossIcon1,
-  educationIcon,
-  emailIcon,
-  linkedInIcon,
-  phoneIcon,
-  sparkleIcon,
-} from "@/helpers/iconsProvider";
+import { setField, setWorkExperienceArray } from "@/store/resumeSlice";
+import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
 import useGetSummary from "@/hooks/useGetSummary";
 import Regenerate from "@/helpers/regenerate";
 import EditableField from "@/components/new-dashboard/common/EditableField";
@@ -913,19 +899,9 @@ const ResumeTemplate9 = () => {
                         />
                         <div
                           onClick={() => {
-                            const removeEducation = resume.education.filter(
-                              (item: any) => item !== education
-                            );
-                            dispatch(
-                              setField({
-                                name: "education",
-                                value: removeEducation,
-                              })
-                            );
-                            saveResumeToDB({
-                              ...resume,
-                              education: removeEducation,
-                            });
+                            let updatedEducations = [...resume?.education];
+                            updatedEducations.splice(ind, 1);
+                            updateAndSaveEducation(updatedEducations);
                           }}
                           className="w-4 h-4  cursor-pointer child"
                         >

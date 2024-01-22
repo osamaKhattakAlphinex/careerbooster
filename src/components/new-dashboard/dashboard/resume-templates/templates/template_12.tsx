@@ -947,19 +947,9 @@ const ResumeTemplate12 = () => {
                         />
                         <div
                           onClick={() => {
-                            const removeEducation = resume.education.filter(
-                              (item: any) => item !== education
-                            );
-                            dispatch(
-                              setField({
-                                name: "education",
-                                value: removeEducation,
-                              })
-                            );
-                            saveResumeToDB({
-                              ...resume,
-                              education: removeEducation,
-                            });
+                            let updatedEducations = [...resume?.education];
+                            updatedEducations.splice(ind, 1);
+                            updateAndSaveEducation(updatedEducations);
                           }}
                           className="w-4 h-4  cursor-pointer child"
                         >
