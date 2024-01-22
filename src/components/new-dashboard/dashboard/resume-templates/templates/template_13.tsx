@@ -83,9 +83,9 @@ const ResumeTemplate16 = () => {
     <div className="w-full first-page relative text-gray-900">
       <div className="w-4/12 h-11 rounded-bl-full absolute right-0 bg-[#1F1E1E] "></div>
       <div className="flex">
-        <div className="w-5/12 md:w-3/12 flex flex-col items-center bg-[#d9d9d9] pl-9 pt-5 h-[1150px] xs:h-auto">
+        <div className="w-5/12 md:w-3/12 flex flex-col items-center md:bg-[#d9d9d9] pl-9 pt-5 h-[1150px] xs:h-auto">
           <div className=" bg-[#1F1E1E] flex  flex-col md:w-56 h-[100%] rounded-t-full items-center">
-            <div className=" w-48 h-48 xs:w-24 md:h-48 md:w-48 xs:h-24  m-3 text-gray-800 bg-[#d9d9d9]  text-center flex justify-center items-center  rounded-full ">
+            <div className=" w-48 h-48 xs:w-24 md:h-48 md:w-48 xs:h-24  m-3 text-gray-800 bg-[#fff] md:bg-[#d9d9d9]  text-center flex justify-center items-center  rounded-full ">
               <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
                 <EditableField
                   value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -101,7 +101,7 @@ const ResumeTemplate16 = () => {
             {/* contacts */}
             <span className="border-stylee w-full h-0 my-3"></span>
             <div className="w-full  bg-[#1F1E1E] pb-2 text-white  py-1 flex   flex-row">
-              <h3 className="uppercase text-lg font-semibold py-1 pl-2 rounded-r-full pr-3  gap-2 bg-[#d9d9d9] text-[#1F1E1E] flex justify-center items-center flex-row">
+              <h3 className="uppercase text-lg font-semibold py-1 pl-2 rounded-r-full pr-3  gap-2 bg-[#fff] md:bg-[#d9d9d9] text-[#1F1E1E] flex justify-center items-center flex-row">
                 Contact
               </h3>
             </div>
@@ -141,7 +141,7 @@ const ResumeTemplate16 = () => {
                   }}
                 />
               </li>
-              <li className="hover:shadow-md hover:text-black hover:bg-gray-100 text-gray-400 flex flex-row gap-1  items-center text-[14px]">
+              <li className="hover:shadow-md hover:text-black group hover:bg-gray-100 flex flex-row gap-1  items-center text-[14px]">
                 {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -151,9 +151,11 @@ const ResumeTemplate16 = () => {
                 target="_blank"
                 className="text-blue-600"
               > */}
-                <span className="w-7 h-7 flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
-                  {linkedInIcon}
-                </span>
+                <div className="w-7 h-7 flex items-center justify-center mr-2 border-[1px] border-gray-300 group-hover:border-[#000] rounded-full">
+                  <span className=" text-[#fff] font-thin group-hover:text-[#000] text-[14px]">
+                    in
+                  </span>
+                </div>
 
                 <EditableField
                   value={
@@ -176,7 +178,7 @@ const ResumeTemplate16 = () => {
               <>
                 <span className="border-stylee w-full h-0 my-3"></span>
                 <div className="w-full  bg-[#1F1E1E] pb-2 text-white  py-1 flex   flex-row">
-                  <h3 className="uppercase text-lg font-semibold py-1 pl-2 rounded-r-full pr-3  gap-2 bg-[#d9d9d9] text-[#1F1E1E] flex justify-center items-center flex-row">
+                  <h3 className="uppercase text-lg font-semibold py-1 pl-2 rounded-r-full pr-3  gap-2 bg-[#fff] md:bg-[#d9d9d9] text-[#1F1E1E] flex justify-center items-center flex-row">
                     Skills
                   </h3>
                 </div>
@@ -185,7 +187,7 @@ const ResumeTemplate16 = () => {
                   resume?.primarySkills.length > 0 &&
                   !regenerating ? (
                   <ul
-                    className="px-3 flex  flex-col gap-1 mb-4 text-gray-300 w-full text-[16px] "
+                    className="px-3 flex  flex-col gap-1 mb-4 text-gray-300 w-full text-[14px] "
                     onMouseEnter={() =>
                       !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                     }
@@ -319,7 +321,7 @@ const ResumeTemplate16 = () => {
             )}
           </div>
         </div>
-        <div className="w-9/12 flex flex-col bg-transparent xs:bg-[#d9d9d9] pt-20 ">
+        <div className="w-9/12 flex flex-col md:bg-[#d9d9d9] pt-20 ">
           <div className="flex w-8/12 xs:w-[60%] sm:w-[60%] md:w-8/12 lg:w-8/12">
             <div className="flex flex-col px-8">
               <h2 className="text-2xl xs:text-lg sm:text-lg md:text-2xl lg:text-2xl font-bold hover:shadow-md hover:bg-gray-100">
@@ -356,7 +358,7 @@ const ResumeTemplate16 = () => {
             handler={getSummary}
             custom_style={"absolute bottom-3 right-2"}
           >
-            <div className="text-[16px] hover:shadow-md  px-4 md:px-8 hover:bg-gray-100 group-hover:pb-14 ">
+            <div className="text-[14px] hover:shadow-md  px-4 md:px-8 hover:bg-gray-100 group-hover:pb-14 ">
               <EditableField
                 type="textarea"
                 value={

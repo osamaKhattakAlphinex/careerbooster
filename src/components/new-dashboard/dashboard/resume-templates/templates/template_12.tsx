@@ -127,7 +127,7 @@ const ResumeTemplate12 = () => {
           </h3>
           <span className="border-stylee w-full h-0 my-1"></span>
           <ul className=" flex flex-col gap-3 w-full mb-4 text-[16px] text-[#4A454B] break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-300 items-center hover:text-black text-[14px]  flex flex-row gap-1 ">
+            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-1  items-center text-[14px]">
               <span className="w-7 h-7 flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
                 {phoneIcon}
               </span>
@@ -161,7 +161,7 @@ const ResumeTemplate12 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 text-[#4A454B] flex flex-row gap-1  items-center text-[14px]">
+            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-1  items-center text-[14px]">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -171,9 +171,9 @@ const ResumeTemplate12 = () => {
                 target="_blank"
                 className="text-blue-600"
               > */}
-              <span className="w-7 h-7 flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
-                {linkedInIcon}
-              </span>
+              <div className="w-7 h-7 flex items-center justify-center mr-2 border-[1px] border-gray-300 group-hover:border-[#000] rounded-full">
+                <span className=" text-[#000] font-thin text-[14px]">in</span>
+              </div>
 
               <EditableField
                 value={

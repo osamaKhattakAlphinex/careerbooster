@@ -164,7 +164,7 @@ const ResumeTemplate18 = () => {
           <span className="border-stylee w-full h-0 my-3"></span>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
@@ -181,14 +181,7 @@ const ResumeTemplate18 = () => {
                     draggable
                   >
                     <div className="flex flex-col">
-                      <h2
-                        className="hover:shadow-md hover:cursor-text hover:bg-gray-100"
-                        style={{
-                          fontSize: "1rem",
-                          fontWeight: "bold",
-                          lineHeight: "2rem",
-                        }}
-                      >
+                      <span className="hover:shadow-md hover:cursor-text text-lg hover:bg-gray-100">
                         <EditableField
                           value={rec?.title}
                           style={{ width: "100%" }}
@@ -200,8 +193,8 @@ const ResumeTemplate18 = () => {
                             }
                           }}
                         />
-                      </h2>
-                      <h2 className="hover:cursor-default text-sm">
+                      </span>
+                      <span className="hover:cursor-default text-[14px] font-thin">
                         {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue
                           ? "Present"
@@ -244,7 +237,7 @@ const ResumeTemplate18 = () => {
                             }}
                           />
                         </span>
-                      </h2>
+                      </span>
                     </div>
                   </div>
                 );
@@ -362,10 +355,10 @@ const ResumeTemplate18 = () => {
             </div>
           )}
         </div>
-        <div className=" w-full md:w-4/12 xs:w-4/12  flex flex-col relative inset-0 items-center px-6 xs:px-0 md:px-6  bg-[#22405c] h-[1080px] xs:h-auto">
+        <div className=" w-4/12 md:w-4/12 xs:w-4/12  flex flex-col relative inset-0 items-center px-6 xs:px-0 md:px-6  bg-[#22405c] h-[1080px] xs:h-auto">
           <span className="w-full bg-[#182d40] absolute md:-mx-6 h-4"></span>
           <div className="border-[.5rem] xs:border-[2px] md:border-[.5rem] border-[#395168]   text-gray-800 mt-[3rem] bg-[#182d40] text-center flex justify-center items-center rounded-md">
-            <div className=" w-36 h-36 xs:w-[5.5rem] xs:h-[5.5rem]   md:w-36 lg:h-36 lg:w-36 text-[#F1F1F1] flex justify-center items-center bg-[#182d40]  rounded-md ">
+            <div className=" w-[9rem] h-[9rem] xs:w-[5.5rem] xs:h-[5.5rem]   md:w-[9rem] lg:h-[9rem] lg:w-[9rem] text-[#F1F1F1] flex justify-center items-center bg-[#182d40]  rounded-md ">
               <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
                 <EditableField
                   value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -386,8 +379,8 @@ const ResumeTemplate18 = () => {
             Contact
           </h3>
           <span className="border-stylee w-full h-0 my-3"></span>
-          <ul className=" flex flex-col xs:px-2 gap-3 w-full mb-4 text-sm text-gray-300 break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-500 hover:text-black text-sm  flex flex-row gap-1 ">
+          <ul className=" flex flex-col xs:px-2 gap-3  w-full mb-4 text-sm text-gray-300 break-all pl-0">
+            <li className="hover:shadow-md hover:bg-gray-100 hover:text-black text-sm  flex flex-row gap-2 ">
               {phoneIcon}
               <EditableField
                 value={
@@ -402,7 +395,7 @@ const ResumeTemplate18 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-1  items-center text-sm">
+            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-2  items-center text-sm">
               {emailIcon}
 
               <EditableField
@@ -418,7 +411,7 @@ const ResumeTemplate18 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 text-gray-400 flex flex-row gap-1  items-center text-sm">
+            <li className="hover:shadow-md hover:bg-gray-100 group hover:text-black hover text-gray-300 flex flex-row gap-2  items-center text-sm">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -428,7 +421,11 @@ const ResumeTemplate18 = () => {
                 target="_blank"
                 className="text-blue-600"
               > */}
-              {linkedInIcon}
+              <span className="w-[20px] h-[20px] xs:w-[20px] xs:p-[2px] group-hover:text-black md:px-0 group-hover:border-[#000]  xs:h-[20px] md:w-[20px] md:h-[20px]  flex items-center justify-center border-[1px] border-[#fff] rounded-full">
+                <span className=" w-[20px] h-[20px] flex justify-center items-center text-gray-300 font-thin text-sm group-hover:text-[#000]">
+                  in
+                </span>
+              </span>
 
               <EditableField
                 value={
@@ -455,8 +452,8 @@ const ResumeTemplate18 = () => {
 
               <span className="border-stylee w-full h-0 my-3"></span>
               {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
+              resume?.primarySkills.length > 0 &&
+              !regenerating ? (
                 <ul
                   className="pl-0 flex  flex-col xs:px-1 md:px-0 gap-1 mb-4 text-gray-300 w-full text-sm "
                   onMouseEnter={() =>
