@@ -30,6 +30,7 @@ import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
+import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 
 const ResumeTemplate1 = ({
   streamedSummaryData,
@@ -77,19 +78,9 @@ const ResumeTemplate1 = ({
 
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
   const [insideIndex, setInsideIndex] = useState<number>(0);
-  const addPrimarySkill = () => {
-    const primarySkills = resume?.primarySkills;
-    const updatedSkills = [...primarySkills];
-    updatedSkills.push(primarySkill);
-    dispatch(setPrimarySkills({ primarySkills: updatedSkills }));
-    saveResumeToDB({
-      ...resume,
-      primarySkills: updatedSkills,
-    });
-  };
+  const { addPrimarySkill } = useAddPrimarySkill();
 
   //Reorder Redux PrimarySkills array with drag-drop
-
 
 
   const [image, setImage] = useState<any>(null);
@@ -339,7 +330,7 @@ const ResumeTemplate1 = ({
                           onKeyPress={(e) => {
                             if (e.key === "Enter") {
                               if (primarySkill.trim() !== "") {
-                                addPrimarySkill();
+                                addPrimarySkill(primarySkill);
                                 setPrimarySkill("");
                               }
                             }
@@ -349,7 +340,7 @@ const ResumeTemplate1 = ({
                           className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
                           onClick={() => {
                             if (primarySkill.trim() !== "") {
-                              addPrimarySkill();
+                              addPrimarySkill(primarySkill);
                               setPrimarySkill(""); // Empty the input field
                             }
                           }}

@@ -28,6 +28,7 @@ import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import WorkExperience from "@/components/WorkExperience";
+import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 
 const ResumeTemplate2 = () => {
   const dispatch = useDispatch();
@@ -59,18 +60,7 @@ const ResumeTemplate2 = () => {
   const { saveResumeToDB } = useSaveResumeToDB();
   const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
     useDragAndDrop();
-
-  const addPrimarySkill = () => {
-    const primarySkills = resume?.primarySkills;
-    const updatedSkills = [...primarySkills];
-    updatedSkills.push(primarySkill);
-    dispatch(setPrimarySkills({ primarySkills: updatedSkills }));
-    saveResumeToDB({
-      ...resume,
-      primarySkills: updatedSkills,
-    });
-  };
-
+  const { addPrimarySkill } = useAddPrimarySkill();
 
   useEffect(() => {
     if (streamedJDData === "") {
@@ -324,7 +314,7 @@ const ResumeTemplate2 = () => {
                         onKeyPress={(e) => {
                           if (e.key === "Enter") {
                             if (primarySkill.trim() !== "") {
-                              addPrimarySkill();
+                              addPrimarySkill(primarySkill);
                               setPrimarySkill("");
                             }
                           }
@@ -334,7 +324,7 @@ const ResumeTemplate2 = () => {
                         className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
                         onClick={() => {
                           if (primarySkill.trim() !== "") {
-                            addPrimarySkill();
+                            addPrimarySkill(primarySkill);
                             setPrimarySkill(""); // Empty the input field
                           }
                         }}
@@ -407,8 +397,8 @@ const ResumeTemplate2 = () => {
                 <div
                   key={i}
                   className={`${i === resume?.workExperienceArray.length - 1
-                    ? ""
-                    : "border-b border-gray-200"
+                      ? ""
+                      : "border-b border-gray-200"
                     } grid border-transparent border-2 grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
                   onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                   onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
