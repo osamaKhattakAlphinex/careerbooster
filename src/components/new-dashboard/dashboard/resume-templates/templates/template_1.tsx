@@ -29,6 +29,7 @@ import EditableField from "@/components/new-dashboard/common/EditableField";
 import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
+import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 
 const ResumeTemplate1 = ({
   streamedSummaryData,
@@ -76,16 +77,7 @@ const ResumeTemplate1 = ({
 
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
   const [insideIndex, setInsideIndex] = useState<number>(0);
-  const addPrimarySkill = () => {
-    const primarySkills = resume?.primarySkills;
-    const updatedSkills = [...primarySkills];
-    updatedSkills.push(primarySkill);
-    dispatch(setPrimarySkills({ primarySkills: updatedSkills }));
-    saveResumeToDB({
-      ...resume,
-      primarySkills: updatedSkills,
-    });
-  };
+  const { addPrimarySkill } = useAddPrimarySkill();
 
   //Reorder Redux PrimarySkills array with drag-drop
   const handleDropPrimary = (e: any, i: number) => {
@@ -107,7 +99,6 @@ const ResumeTemplate1 = ({
       primarySkills: updatedItems,
     });
   };
-
 
   const [image, setImage] = useState<any>(null);
 
@@ -320,8 +311,8 @@ const ResumeTemplate1 = ({
             </h3>
           )}
           {resume?.primarySkills &&
-            resume?.primarySkills.length > 0 &&
-            !regenerating ? (
+          resume?.primarySkills.length > 0 &&
+          !regenerating ? (
             <>
               <Regenerate
                 handler={getPrimarySkills}
@@ -405,7 +396,7 @@ const ResumeTemplate1 = ({
                           onKeyPress={(e) => {
                             if (e.key === "Enter") {
                               if (primarySkill.trim() !== "") {
-                                addPrimarySkill();
+                                addPrimarySkill(primarySkill);
                                 setPrimarySkill("");
                               }
                             }
@@ -415,7 +406,7 @@ const ResumeTemplate1 = ({
                           className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
                           onClick={() => {
                             if (primarySkill.trim() !== "") {
-                              addPrimarySkill();
+                              addPrimarySkill(primarySkill);
                               setPrimarySkill(""); // Empty the input field
                             }
                           }}
@@ -671,7 +662,7 @@ const ResumeTemplate1 = ({
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
@@ -1029,7 +1020,7 @@ const ResumeTemplate1 = ({
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                      newWorkExperience !== i ? (
                         <>
                           <div
                             className="border-2 w-2/12 mt-3 xs:w-full md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"

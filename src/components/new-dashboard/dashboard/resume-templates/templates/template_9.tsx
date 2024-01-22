@@ -27,6 +27,7 @@ import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
+import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 const ResumeTemplate9 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -66,88 +67,7 @@ const ResumeTemplate9 = () => {
     }
   }, [streamedJDData]);
 
-  const addPrimarySkill = () => {
-    const primarySkills = resume?.primarySkills;
-    const updatedSkills = [...primarySkills];
-    updatedSkills.push(primarySkill);
-    dispatch(setPrimarySkills({ primarySkills: updatedSkills }));
-    saveResumeToDB({
-      ...resume,
-      primarySkills: updatedSkills,
-    });
-  };
-
-  //Reorder Redux PrimarySkills array with drag-drop
-  // const handleDropPrimary = (e: any, i: number) => {
-  //   const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-  //   const updatedItems = [...resume.primarySkills];
-  //   // Swap the positions of the dragged item and the target item.
-  //   [updatedItems[draggedIndex], updatedItems[i]] = [
-  //     updatedItems[i],
-  //     updatedItems[draggedIndex],
-  //   ];
-  //   dispatch(
-  //     setPrimarySkills({
-  //       ...resume,
-  //       primarySkills: updatedItems,
-  //     })
-  //   );
-  //   saveResumeToDB({
-  //     ...resume,
-  //     primarySkills: updatedItems,
-  //   });
-  // };
-  //Reorder Redux handleDropExperience array with drag-drop
-  // const handleDropExperience = (e: any, i: number) => {
-  //   const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-  //   const updatedItems = [...resume?.workExperienceArray];
-  //   // Swap the positions of the dragged item and the target item.
-  //   [updatedItems[draggedIndex], updatedItems[i]] = [
-  //     updatedItems[i],
-  //     updatedItems[draggedIndex],
-  //   ];
-  //   if (draggedIndex !== i) {
-  //     dispatch(
-  //       setWorkExperienceArray({
-  //         ...resume,
-  //         workExperienceArray: updatedItems,
-  //       })
-  //     );
-  //     saveResumeToDB({
-  //       ...resume,
-  //       workExperienceArray: updatedItems,
-  //     });
-  //   }
-  // };
-  //Reorder Redux handleDropAchievement array with drag-drop
-  // const handleDropAchievement = (i: number, ind: number) => {
-  //   let draggedIndex: number;
-  //   let updatedItems = [];
-  //   draggedIndex = insideIndex;
-  //   updatedItems = [...resume?.workExperienceArray];
-  //   let achievements = [...updatedItems[i].achievements];
-  //   const temp = achievements[draggedIndex];
-  //   achievements[draggedIndex] = achievements[ind];
-  //   achievements[ind] = temp;
-  //   let updatedWorkExperience = {
-  //     ...updatedItems[i],
-  //   };
-  //   updatedWorkExperience.achievements = achievements;
-  //   // Update the copy of the workExperience in the updatedItems array
-  //   updatedItems[i] = updatedWorkExperience;
-  //   if (draggedIndex !== ind) {
-  //     dispatch(
-  //       setWorkExperienceArray({
-  //         ...resume,
-  //         workExperienceArray: updatedItems,
-  //       })
-  //     );
-  //     saveResumeToDB({
-  //       ...resume,
-  //       workExperienceArray: updatedItems,
-  //     });
-  //   }
-  // };
+  const { addPrimarySkill } = useAddPrimarySkill();
 
   return (
     <div className="w-full first-page  text-gray-900">
@@ -421,7 +341,7 @@ const ResumeTemplate9 = () => {
                             onKeyPress={(e) => {
                               if (e.key === "Enter") {
                                 if (primarySkill.trim() !== "") {
-                                  addPrimarySkill();
+                                  addPrimarySkill(primarySkill);
                                   setPrimarySkill("");
                                 }
                               }
@@ -431,7 +351,7 @@ const ResumeTemplate9 = () => {
                             className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
                             onClick={() => {
                               if (primarySkill.trim() !== "") {
-                                addPrimarySkill();
+                                addPrimarySkill(primarySkill);
                                 setPrimarySkill(""); // Empty the input field
                               }
                             }}

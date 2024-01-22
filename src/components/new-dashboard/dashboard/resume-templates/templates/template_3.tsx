@@ -26,6 +26,7 @@ import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
+import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 const ResumeTemplate3 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -57,16 +58,7 @@ const ResumeTemplate3 = () => {
     useDragAndDrop();
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
-  const addPrimarySkill = () => {
-    const primarySkills = resume?.primarySkills;
-    const updatedSkills = [...primarySkills];
-    updatedSkills.push(primarySkill);
-    dispatch(setPrimarySkills({ primarySkills: updatedSkills }));
-    saveResumeToDB({
-      ...resume,
-      primarySkills: updatedSkills,
-    });
-  };
+  const { addPrimarySkill } = useAddPrimarySkill();
 
   useEffect(() => {
     if (streamedJDData === "") {
@@ -174,7 +166,7 @@ const ResumeTemplate3 = () => {
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
@@ -192,11 +184,11 @@ const ResumeTemplate3 = () => {
                   >
                     <h4
                       className="hover:shadow-md hover:cursor-text text-xl font-semibold hover:bg-gray-100"
-                    // style={{
-                    //   fontSize: "1.3rem",
-                    //   fontWeight: "bold",
-                    //   lineHeight: "2rem",
-                    // }}
+                      // style={{
+                      //   fontSize: "1.3rem",
+                      //   fontWeight: "bold",
+                      //   lineHeight: "2rem",
+                      // }}
                     >
                       <EditableField
                         value={rec?.title}
@@ -227,10 +219,10 @@ const ResumeTemplate3 = () => {
                     </h4>
                     <h2
                       className="hover:cursor-default text-lg"
-                    // style={{
-                    //   fontSize: "1.1rem",
-                    //   lineHeight: "1.5rem",
-                    // }}
+                      // style={{
+                      //   fontSize: "1.1rem",
+                      //   lineHeight: "1.5rem",
+                      // }}
                     >
                       {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                       {rec?.isContinue
@@ -612,7 +604,7 @@ const ResumeTemplate3 = () => {
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                      newWorkExperience !== i ? (
                         <>
                           <div
                             className="border-2 w-2/12 mt-3 xs:mt-12 md:mt-2 lg:mt-2  xs:w-full md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
@@ -919,8 +911,8 @@ const ResumeTemplate3 = () => {
                 </>
               )}
               {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
+              resume?.primarySkills.length > 0 &&
+              !regenerating ? (
                 <ul
                   className="pl-0  pb-10 flex  flex-col gap-1  text-sm xs:text-sm md:text-lg lg:text-lg"
                   onMouseEnter={() =>
@@ -1007,7 +999,7 @@ const ResumeTemplate3 = () => {
                           onKeyPress={(e) => {
                             if (e.key === "Enter") {
                               if (primarySkill.trim() !== "") {
-                                addPrimarySkill();
+                                addPrimarySkill(primarySkill);
                                 setPrimarySkill("");
                               }
                             }
@@ -1017,7 +1009,7 @@ const ResumeTemplate3 = () => {
                           className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
                           onClick={() => {
                             if (primarySkill.trim() !== "") {
-                              addPrimarySkill();
+                              addPrimarySkill(primarySkill);
                               setPrimarySkill(""); // Empty the input field
                             }
                           }}
