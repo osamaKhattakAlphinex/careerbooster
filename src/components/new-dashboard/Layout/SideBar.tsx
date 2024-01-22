@@ -114,23 +114,23 @@ const SideBar = () => {
                     <Link
                       href={item.url}
                       className={`px-7 text-base flex capitalize items-center 
-                        `}
+                      dark:hover:text-[#b324d7] hover:text-[#b324d7]  `}
                       onMouseOver={() => handleMouseOver(index)}
                       onMouseOut={handleMouseOut}
                       onClick={() => setIsOpen(!isOpen)}
-                      style={{
-                        opacity: hoveredItem === index ? 1 : 0.7,
-                        color:
-                          hoveredItem === index ? "red" : "rgb(115, 115, 115)",
-                        textDecoration: "none",
-                      }}
+                      // style={{
+                      //   opacity: hoveredItem === index ? 1 : 0.7,
+                      //   color:
+                      //     hoveredItem === index ? "red" : "rgb(115, 115, 115)",
+                      //   textDecoration: "none",
+                      // }}
                     >
                       <div
                         className={`w-6 h-6 inline-block pr-2 
                         ${
                           pathname === item.url
-                            ? "dark:text-[#FFFFFF] text-[#b324d7] font-bold"
-                            : "dark:text-[#737373] text-gray-950"
+                            ? "dark:text-[#b324d7] text-[#b324d7] font-bold dark:hover:text-[#b324d7] hover:text-[#b324d7]"
+                            : "dark:text-[#d9d6d6] text-gray-950 hover:text-[#b324d7] dark:hover:text-[#b324d7]"
                         }
                          `}
                       >
@@ -139,8 +139,8 @@ const SideBar = () => {
                       <h2
                         className={`text-base ml-3 mb-0 font-normal ${
                           pathname === item.url
-                            ? "dark:text-[#FFFFFF] text-[#b324d7] font-bold"
-                            : "dark:text-[#737373] text-gray-950"
+                            ? "dark:text-[#b324d7] text-[#b324d7] font-bold hover:text-[#b324d7] dark:hover:text-[#b324d7]"
+                            : "dark:text-[#d9d6d6] text-gray-950 hover:text-[#b324d7] dark:hover:text-[#b324d7]"
                         }`}
                       >
                         {item.text}
@@ -152,19 +152,19 @@ const SideBar = () => {
                       onMouseOver={() => handleMouseOver(index)}
                       onMouseOut={handleMouseOut}
                       onClick={() => signOut()}
-                      style={{
-                        opacity: hoveredItem === index ? 1 : 0.7,
-                        color:
-                          hoveredItem === index
-                            ? "white"
-                            : "rgb(115, 115, 115)",
-                        textDecoration: "none",
-                      }}
+                      // style={{
+                      //   opacity: hoveredItem === index ? 1 : 0.7,
+                      //   color:
+                      //     hoveredItem === index
+                      //       ? "purple"
+                      //       : "rgb(115, 115, 115)",
+                      //   textDecoration: "none",
+                      // }}
                     >
-                      <div className="w-6 h-6  pr-2 dark:text-[#737373] text-gray-950">
+                      <div className="w-6 h-6  pr-2 dark:text-[#737373] text-gray-950 dark:hover:text-[#b324d7] hover:text-[#b324d7]">
                         {item.icon}
                       </div>
-                      <h2 className="text-[16px] ml-3 mb-0 dark:text-[#737373] text-gray-950">
+                      <h2 className="text-[16px] ml-3 mb-0 dark:text-[#737373] text-gray-950 dark:hover:text-[#b324d7] hover:text-[#b324d7]">
                         {item.text}
                       </h2>
                     </button>
