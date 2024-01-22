@@ -27,6 +27,7 @@ import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
+import WorkExperience from "@/components/WorkExperience";
 
 const ResumeTemplate2 = () => {
   const dispatch = useDispatch();
@@ -69,6 +70,8 @@ const ResumeTemplate2 = () => {
       primarySkills: updatedSkills,
     });
   };
+
+
   useEffect(() => {
     if (streamedJDData === "") {
       setRegeneratedRecordIndex(null);
@@ -154,6 +157,7 @@ const ResumeTemplate2 = () => {
                   ? resume?.contact?.linkedIn
                   : "https://www.linkedin.com/"
               }
+
               onSave={(value: string) => {
                 dispatch(
                   setBasicInfo({
@@ -260,6 +264,8 @@ const ResumeTemplate2 = () => {
                   >
                     <EditableField
                       value={skill}
+                      //this needs to be outside
+
                       onSave={(value: string) => {
                         let updatedSkills = resume.primarySkills.map(
                           (skill: string, index: number) => {
@@ -282,6 +288,8 @@ const ResumeTemplate2 = () => {
                       }}
                     />
                     <div
+                      //this needs to be outside
+
                       onClick={() => {
                         const removeSkill = resume.primarySkills.filter(
                           (item: any) => item !== skill
@@ -425,6 +433,8 @@ const ResumeTemplate2 = () => {
                       <EditableField
                         value={rec?.title}
                         style={{ width: "100%" }}
+                        //this needs to be outside
+
                         onSave={(value: string) => {
                           let updatedExp = resume?.workExperienceArray.map(
                             (exp: any, index: number) => {
@@ -452,6 +462,8 @@ const ResumeTemplate2 = () => {
                     <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-sm xs:text-sm md:text-lg lg:text-lg">
                       <EditableField
                         value={rec?.company}
+                        //this needs to be outside
+
                         onSave={(value: string) => {
                           let updatedExp = resume?.workExperienceArray.map(
                             (exp: any, index: number) => {
@@ -480,6 +492,8 @@ const ResumeTemplate2 = () => {
                     <span className="hover:shadow-md hover:bg-gray-100">
                       <EditableField
                         value={rec?.cityState}
+                        //this needs to be outside
+
                         onSave={(value: string) => {
                           let updatedExp = resume?.workExperienceArray.map(
                             (exp: any, index: number) => {
@@ -507,6 +521,8 @@ const ResumeTemplate2 = () => {
                     <span className="hover:shadow-md hover:bg-gray-100">
                       <EditableField
                         value={rec?.country}
+                        //this needs to be outside
+
                         onSave={(value: string) => {
                           let updatedExp = resume?.workExperienceArray.map(
                             (exp: any, index: number) => {
@@ -562,6 +578,7 @@ const ResumeTemplate2 = () => {
                                   >
                                     <div
                                       className="group-hover:block hidden font-medium text-xs uppercase   text-gray-500 cursor-pointer"
+                                      //this needs to be outside
                                       onClick={() => {
                                         const workExperienceArray =
                                           resume.workExperienceArray.map(
@@ -618,6 +635,7 @@ const ResumeTemplate2 = () => {
                                       type="textarea"
                                       rows={2}
                                       value={achievement}
+                                      //this needs to be outside
                                       onSave={(value: string) => {
                                         let updatedExp =
                                           resume?.workExperienceArray.map(
@@ -657,6 +675,7 @@ const ResumeTemplate2 = () => {
                                       }}
                                     />
                                     <div
+                                      //this needs to be outside
                                       onClick={() => {
                                         const workExperienceArray =
                                           resume.workExperienceArray.map(
@@ -741,6 +760,8 @@ const ResumeTemplate2 = () => {
                               name="newAchievement"
                               id="newAchievement"
                               autoComplete="off"
+                              //this needs to be outside
+
                               onKeyDown={(e) => {
                                 if (e.key === "Enter") {
                                   e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
@@ -777,6 +798,8 @@ const ResumeTemplate2 = () => {
                             />
                             <button
                               className="bg-green-500 w-2/12 xs:w-full md:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
+                              //this needs to be outside
+
                               onClick={() => {
                                 // Save the new achievement to the state and possibly the database
                                 if (newAchievement !== "") {
@@ -837,6 +860,8 @@ const ResumeTemplate2 = () => {
                           </div>
                           <button
                             className="border-2 h-10 w-auto px-3  mb-2 mt-3    xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                            //this needs to be outside
+
                             onClick={() => {
                               let updatedExp = resume?.workExperienceArray.map(
                                 (exp: any, index: number) => {
@@ -917,6 +942,8 @@ const ResumeTemplate2 = () => {
                         type="textarea"
                         rows={2}
                         value={education?.educationLevel}
+                        //this needs to be outside
+
                         onSave={(value: string) => {
                           let updatedEducations = resume?.education.map(
                             (edu: any, index: number) => {
@@ -966,6 +993,8 @@ const ResumeTemplate2 = () => {
                       <EditableField
                         value={`${education?.fieldOfStudy}`}
                         style={{ width: "100%" }}
+                        //this needs to be outside
+
                         onSave={(value: string) => {
                           let updatedEducations = resume?.education.map(
                             (edu: any, index: number) => {
@@ -996,6 +1025,8 @@ const ResumeTemplate2 = () => {
                         type="textarea"
                         rows={2}
                         value={`${education?.schoolName}`}
+                        //this needs to be outside
+
                         onSave={(value: string) => {
                           let updatedEducations = resume?.education.map(
                             (edu: any, index: number) => {

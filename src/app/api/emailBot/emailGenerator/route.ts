@@ -73,7 +73,7 @@ export async function POST(req: any) {
     });
     const promptDB = promptRec.value;
 
-    const prompt = promptDB.replace("{{jobDescription}}", jobDescription);
+    const prompt = await promptDB.replaceAll("{{jobDescription}}", jobDescription);
     let fileContent;
     // CREATING LLM MODAL
 
