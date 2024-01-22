@@ -258,7 +258,7 @@ const ResumeTemplate15 = () => {
           </h3>
           <span className="border-stylee w-full h-0 my-3"></span>
           <ul className=" flex flex-col gap-3 w-full mb-4 text-sm break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-100 text-sm px-0 md:px-0 xs:px-4 flex flex-row gap-1 ">
+            <li className="hover:shadow-md hover:bg-gray-100 text-sm px-0 md:px-0 xs:px-4 flex flex-row gap-2">
               {phoneIcon}
               <EditableField
                 value={
@@ -280,7 +280,7 @@ const ResumeTemplate15 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1 px-0 md:px-0 xs:px-4 items-center text-sm">
+            <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-2 px-0 md:px-0 xs:px-4 items-center text-sm">
               {emailIcon}
 
               <EditableField
@@ -303,7 +303,7 @@ const ResumeTemplate15 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 text-blue-600 px-0 md:px-0 xs:px-4 flex flex-row gap-1  items-center text-sm">
+            <li className="hover:shadow-md hover:bg-gray-100 text-black px-0 md:px-0 xs:px-4 flex flex-row gap-2  items-center text-sm">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -313,7 +313,9 @@ const ResumeTemplate15 = () => {
                 target="_blank"
                 className="text-blue-600"
               > */}
-              {linkedInIcon}
+              <div className="w-4 h-4 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-4 md:h-4  flex items-center justify-center border border-black rounded-full">
+                <span className=" text-black font-thin text-[10px]">in</span>
+              </div>
 
               <EditableField
                 value={

@@ -268,9 +268,9 @@ const ResumeTemplate16 = () => {
             Contact
           </h3>
           <span className="border-stylee w-full h-0 my-3"></span>
-          <ul className=" flex flex-col gap-3 w-full mb-4 text-sm text-gray-300 break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-500 items-center hover:text-black text-[16px]  flex flex-row gap-1 ">
-              <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
+          <ul className=" flex flex-col gap-3 w-full mb-4 text-[16px] text-gray-300 break-all pl-0">
+            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-2  items-center text-[16px]">
+              <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
                 {phoneIcon}
               </span>
               <EditableField
@@ -293,8 +293,8 @@ const ResumeTemplate16 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-1  items-center text-[16px]">
-              <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
+            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-2  items-center text-[16px]">
+              <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
                 {emailIcon}
               </span>
               <EditableField
@@ -317,7 +317,7 @@ const ResumeTemplate16 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 text-gray-400 flex flex-row gap-1  items-center text-[16px]">
+            <li className="hover:shadow-md hover:text-black group hover:bg-gray-100 text-gray-300 flex flex-row gap-2  items-center text-[16px]">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -327,8 +327,8 @@ const ResumeTemplate16 = () => {
                 target="_blank"
                 className="text-blue-600"
               > */}
-              <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 p-1  xs:h-5 md:w-7 md:h-7  flex items-center justify-center mr-2 border border-gray-300 rounded-full">
-                <span className="flex w-7 h-7 justify-center items-center text-gray-3400 font-thin text-base  ">
+              <span className="w-[28px] h-[28px] xs:w-[20px] xs:p-[2px] group-hover:text-black md:px-0 group-hover:border-[#000]  xs:h-[20px] md:w-[28px] md:h-[28px]  flex items-center justify-center border-[1px] border-[#fff] rounded-full">
+                <span className="flex w-[28px] h-[28px] justify-center items-center text-gray-300 font-thin text-sm group-hover:text-[#000]">
                   in
                 </span>
               </span>

@@ -293,7 +293,7 @@ const ResumeTemplate14 = () => {
           </h3>
           <span className="border-stylee w-full h-0 my-3"></span>
           <ul className=" flex flex-col gap-3 mb-4 text-sm break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-100 text-xs flex flex-row gap-1  items-center">
+            <li className="hover:shadow-md hover:bg-gray-100 text-sm flex flex-row gap-1  items-center">
               {phoneIcon}
               <span className="h-6 xs:hidden md:block border-[1px] border-[#745237] bg-black  mx-3"></span>
               <EditableField
@@ -316,7 +316,7 @@ const ResumeTemplate14 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center text-sm">
               {emailIcon}
               <span className="h-6 border-[1px] xs:hidden md:block border-[#745237] bg-black  mx-3"></span>
               <EditableField
@@ -339,7 +339,7 @@ const ResumeTemplate14 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 text-blue-600 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md w-12/12  hover:bg-gray-100 flex flex-row gap-1  items-center text-sm">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -349,7 +349,11 @@ const ResumeTemplate14 = () => {
                 target="_blank"
                 className="text-blue-600"
               > */}
-              {linkedInIcon}
+              <div className="w-[20px] h-[20px] xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-[20px] md:h-[20px]  flex items-center justify-center border border-black rounded-full">
+                <span className=" text-[#000] font-thin text-[12px] text-center">
+                  in
+                </span>
+              </div>
               <span className="h-6 border-[1px] xs:hidden md:block  border-[#745237] bg-black  mx-1.5"></span>
               <EditableField
                 value={
