@@ -257,33 +257,29 @@ const ResumeTemplate2 = () => {
                       //this needs to be outside
 
                       onSave={(value: string) => {
-                        let updatedSkills = resume.primarySkills.map(
-                          (skill: string, index: number) => {
-                            if (index === i) {
-                              return value;
-                            }
-                            return skill;
-                          }
-                        );
-                        dispatch(
-                          setPrimarySkills({
+                        if (value !== resume?.primarySkills[i]) {
+                          let updatedSkills = [...resume.primarySkills]
+                          updatedSkills.splice(i, 1, value)
+                          dispatch(
+                            setPrimarySkills({
+                              ...resume,
+                              primarySkills: updatedSkills,
+                            })
+                          );
+                          saveResumeToDB({
                             ...resume,
                             primarySkills: updatedSkills,
-                          })
-                        );
-                        saveResumeToDB({
-                          ...resume,
-                          primarySkills: updatedSkills,
-                        });
+                          });
+                        }
                       }}
                     />
                     <div
                       //this needs to be outside
 
                       onClick={() => {
-                        const removeSkill = resume.primarySkills.filter(
-                          (item: any) => item !== skill
-                        );
+                        const removeSkill = [...resume.primarySkills]
+                        removeSkill.splice(i, 1)
+
                         dispatch(
                           setPrimarySkills({
                             ...resume,
@@ -397,8 +393,8 @@ const ResumeTemplate2 = () => {
                 <div
                   key={i}
                   className={`${i === resume?.workExperienceArray.length - 1
-                      ? ""
-                      : "border-b border-gray-200"
+                    ? ""
+                    : "border-b border-gray-200"
                     } grid border-transparent border-2 grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
                   onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
                   onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
@@ -437,6 +433,9 @@ const ResumeTemplate2 = () => {
                               return exp;
                             }
                           );
+
+                          // let updatedExp = [...resume.workExperienceArray]
+                          // updatedExp.splice(i, 1, value)
                           dispatch(
                             setWorkExperienceArray({
                               workExperienceArray: updatedExp,
