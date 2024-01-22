@@ -4,7 +4,6 @@ import {
   setSummary,
   setWorkExperienceArray,
 } from "@/store/resumeSlice";
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useSaveResumeToDB from "./useSaveToDB";
 import { setField } from "@/store/userDataSlice";
@@ -48,16 +47,18 @@ const useUpdateAndSave = () => {
   };
 
   //   update and save the Basic Info
-  const updateAndSaveBasicInfo = (value: any) => {
+  const updateAndSaveBasicInfo = (obj: any) => {
+    const [[key, value]] = Object.entries(obj);
+
     dispatch(
       setBasicInfo({
         ...resume,
-        contact: { ...resume.contact, phone: value },
+        contact: { ...resume.contact, [key]: value },
       })
     );
     saveResumeToDB({
       ...resume,
-      contact: { ...resume.contact, phone: value },
+      contact: { ...resume.contact, [key]: value },
     });
   };
 
@@ -74,8 +75,18 @@ const useUpdateAndSave = () => {
       education: updatedEducations,
     });
   };
+  const updateAndSaveJobTitle = (value: any) => {
+    dispatch(setField({ name: "jobTitle", value: value }));
+    saveResumeToDB({ ...resume, jobTitle: value });
+  };
+  const updateAndSaveName = (value: any) => {
+    dispatch(setField({ name: "name", value: value }));
+    saveResumeToDB({ ...resume, name: value });
+  };
 
   return {
+    updateAndSaveJobTitle,
+    updateAndSaveName,
     updateAndSaveSkill,
     updateAndSaveSummary,
     updateAndSaveWorkExperienceArray,

@@ -27,6 +27,7 @@ import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
+import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 const ResumeTemplate8 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -59,6 +60,12 @@ const ResumeTemplate8 = () => {
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
+  const { updateAndSaveSkill,
+    updateAndSaveSummary,
+    updateAndSaveWorkExperienceArray,
+    updateAndSaveBasicInfo,
+    updateAndSaveEducation, updateAndSaveName, updateAndSaveJobTitle } = useUpdateAndSave()
+
 
   useEffect(() => {
     if (streamedJDData === "") {
@@ -212,8 +219,7 @@ const ResumeTemplate8 = () => {
                   )
                 }
                 onSave={(value: string) => {
-                  dispatch(setSummary(value));
-                  saveResumeToDB({ ...resume, summary: value });
+                  updateAndSaveSummary(value)
                 }}
               />
             </div>
@@ -228,8 +234,8 @@ const ResumeTemplate8 = () => {
               </h3>
               <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-3"></span>
               {resume?.primarySkills &&
-              resume?.primarySkills.length > 0 &&
-              !regenerating ? (
+                resume?.primarySkills.length > 0 &&
+                !regenerating ? (
                 <Regenerate
                   handler={getPrimarySkills}
                   custom_style={"absolute right-3 bottom-0"}
@@ -260,41 +266,18 @@ const ResumeTemplate8 = () => {
                           <EditableField
                             value={skill}
                             onSave={(value: string) => {
-                              let updatedSkills = resume.primarySkills.map(
-                                (skill: string, index: number) => {
-                                  if (index === i) {
-                                    return value;
-                                  }
-                                  return skill;
-                                }
-                              );
-                              dispatch(
-                                setPrimarySkills({
-                                  ...resume,
-                                  primarySkills: updatedSkills,
-                                })
-                              );
-                              saveResumeToDB({
-                                ...resume,
-                                primarySkills: updatedSkills,
-                              });
+                              if (value !== resume?.primarySkills[i]) {
+                                let updatedSkills = [...resume.primarySkills]
+                                updatedSkills.splice(i, 1, value)
+                                updateAndSaveSkill(updatedSkills)
+                              }
                             }}
                           />
                           <div
                             onClick={() => {
-                              const removeSkill = resume.primarySkills.filter(
-                                (item: any) => item !== skill
-                              );
-                              dispatch(
-                                setPrimarySkills({
-                                  ...resume,
-                                  primarySkills: removeSkill,
-                                })
-                              );
-                              saveResumeToDB({
-                                ...resume,
-                                primarySkills: removeSkill,
-                              });
+                              const removeSkill = [...resume.primarySkills]
+                              removeSkill.splice(i, 1)
+                              updateAndSaveSkill(removeSkill)
                             }}
                             className="w-4 h-4  cursor-pointer child"
                           >
@@ -393,7 +376,7 @@ const ResumeTemplate8 = () => {
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-3"></span>
 
           {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+            resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
@@ -818,7 +801,7 @@ const ResumeTemplate8 = () => {
                         </>
                       ) : null}
                       {workExperienceAddButtonVisible === i &&
-                      newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                         <>
                           <div
                             className="border-2 w-2/12 xs:w-full mt-3 md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"

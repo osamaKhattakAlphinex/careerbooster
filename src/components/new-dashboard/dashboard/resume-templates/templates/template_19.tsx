@@ -28,6 +28,7 @@ import EditableField from "@/components/new-dashboard/common/EditableField";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
+import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 const ResumeTemplate19 = ({
   streamedJDData,
   saveResumeToDB,
@@ -71,6 +72,12 @@ const ResumeTemplate19 = ({
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
+  const { updateAndSaveSkill,
+    updateAndSaveSummary,
+    updateAndSaveWorkExperienceArray,
+    updateAndSaveBasicInfo,
+    updateAndSaveEducation, updateAndSaveName, updateAndSaveJobTitle } = useUpdateAndSave()
+
 
   return (
     <div className="w-full first-page relative text-gray-900">
@@ -197,8 +204,8 @@ const ResumeTemplate19 = ({
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
               {resume?.primarySkills &&
-              resume?.primarySkills.length > 0 &&
-              !regenerating ? (
+                resume?.primarySkills.length > 0 &&
+                !regenerating ? (
                 <ul
                   className="pl-0 flex  px-0 xs:px-0 md:px-0  flex-col gap-1 mb-4 text-gray-800 w-full text-sm"
                   onMouseEnter={() =>
@@ -230,42 +237,18 @@ const ResumeTemplate19 = ({
                           <EditableField
                             value={skill}
                             onSave={(value: string) => {
-                              let updatedSkills = resume.primarySkills.map(
-                                (skill: string, index: number) => {
-                                  if (index === i) {
-                                    return value;
-                                  }
-                                  return skill;
-                                }
-                              );
-                              dispatch(
-                                setPrimarySkills({
-                                  ...resume,
-                                  primarySkills: updatedSkills,
-                                })
-                              );
-                              debugger;
-                              saveResumeToDB({
-                                ...resume,
-                                primarySkills: updatedSkills,
-                              });
+                              if (value !== resume?.primarySkills[i]) {
+                                let updatedSkills = [...resume.primarySkills]
+                                updatedSkills.splice(i, 1, value)
+                                updateAndSaveSkill(updatedSkills)
+                              }
                             }}
                           />
                           <div
                             onClick={() => {
-                              const removeSkill = resume.primarySkills.filter(
-                                (item: any) => item !== skill
-                              );
-                              dispatch(
-                                setPrimarySkills({
-                                  ...resume,
-                                  primarySkills: removeSkill,
-                                })
-                              );
-                              saveResumeToDB({
-                                ...resume,
-                                primarySkills: removeSkill,
-                              });
+                              const removeSkill = [...resume.primarySkills]
+                              removeSkill.splice(i, 1)
+                              updateAndSaveSkill(removeSkill)
                             }}
                             className="w-4 h-4  cursor-pointer child"
                           >
@@ -401,8 +384,7 @@ const ResumeTemplate19 = ({
                   )
                 }
                 onSave={(value: string) => {
-                  dispatch(setSummary(value));
-                  saveResumeToDB({ ...resume, summary: value });
+                  updateAndSaveSummary(value)
                 }}
               />
             </div>
@@ -415,7 +397,7 @@ const ResumeTemplate19 = ({
           </h2>
 
           {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+            resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (

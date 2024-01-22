@@ -31,6 +31,7 @@ import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
+import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 
 const ResumeTemplate1 = ({
   streamedSummaryData,
@@ -79,6 +80,12 @@ const ResumeTemplate1 = ({
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
+  const { updateAndSaveSkill,
+    updateAndSaveSummary,
+    updateAndSaveWorkExperienceArray,
+    updateAndSaveBasicInfo,
+    updateAndSaveEducation, updateAndSaveName, updateAndSaveJobTitle } = useUpdateAndSave()
+
 
   //Reorder Redux PrimarySkills array with drag-drop
 
@@ -275,41 +282,19 @@ const ResumeTemplate1 = ({
                       <EditableField
                         value={skill}
                         onSave={(value: string) => {
-                          let updatedSkills = resume.primarySkills.map(
-                            (skill: string, index: number) => {
-                              if (index === i) {
-                                return value;
-                              }
-                              return skill;
-                            }
-                          );
-                          dispatch(
-                            setPrimarySkills({
-                              ...resume,
-                              primarySkills: updatedSkills,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            primarySkills: updatedSkills,
-                          });
+                          if (value !== resume?.primarySkills[i]) {
+                            let updatedSkills = [...resume.primarySkills]
+                            updatedSkills.splice(i, 1, value)
+                            updateAndSaveSkill(updatedSkills)
+
+                          }
                         }}
                       />
                       <div
                         onClick={() => {
-                          const removeSkill = resume.primarySkills.filter(
-                            (item: any) => item !== skill
-                          );
-                          dispatch(
-                            setPrimarySkills({
-                              ...resume,
-                              primarySkills: removeSkill,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            primarySkills: removeSkill,
-                          });
+                          const removeSkill = [...resume.primarySkills]
+                          removeSkill.splice(i, 1)
+                          updateAndSaveSkill(removeSkill)
                         }}
                         className="w-4 h-4  cursor-pointer child"
                       >
@@ -583,8 +568,7 @@ const ResumeTemplate1 = ({
                   )
                 }
                 onSave={(value: string) => {
-                  dispatch(setSummary(value));
-                  saveResumeToDB({ ...resume, summary: value });
+                  updateAndSaveSummary(value)
                 }}
               />
             </div>
@@ -624,26 +608,11 @@ const ResumeTemplate1 = ({
                         value={rec?.title}
                         style={{ width: "100%" }}
                         onSave={(value: string) => {
-                          let updatedExp = resume?.workExperienceArray.map(
-                            (exp: any, index: number) => {
-                              if (index === i) {
-                                return {
-                                  ...exp,
-                                  title: value,
-                                };
-                              }
-                              return exp;
-                            }
-                          );
-                          dispatch(
-                            setWorkExperienceArray({
-                              workExperienceArray: updatedExp,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            workExperienceArray: updatedExp,
-                          });
+                          if (value !== resume?.workExperienceArray[i].title) {
+                            let updatedExp = [...resume.workExperienceArray];
+                            updatedExp[i] = { ...updatedExp[i], title: value };
+                            updateAndSaveWorkExperienceArray(updatedExp)
+                          }
                         }}
                       />
                     </h2>

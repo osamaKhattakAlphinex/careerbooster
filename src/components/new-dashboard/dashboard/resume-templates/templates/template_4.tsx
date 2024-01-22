@@ -27,6 +27,7 @@ import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
+import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 const ResumeTemplate4 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -60,6 +61,12 @@ const ResumeTemplate4 = () => {
   const [insideIndex, setInsideIndex] = useState<number>(0);
 
   const { addPrimarySkill } = useAddPrimarySkill();
+  const { updateAndSaveSkill,
+    updateAndSaveSummary,
+    updateAndSaveWorkExperienceArray,
+    updateAndSaveBasicInfo,
+    updateAndSaveEducation, updateAndSaveName, updateAndSaveJobTitle } = useUpdateAndSave()
+
 
   useEffect(() => {
     if (streamedJDData === "") {
@@ -288,8 +295,8 @@ const ResumeTemplate4 = () => {
                 </>
               )}
               {resume?.primarySkills &&
-              resume?.primarySkills.length > 0 &&
-              !regenerating ? (
+                resume?.primarySkills.length > 0 &&
+                !regenerating ? (
                 <ol
                   className="pl-0 flex list-styled flex-col gap-3 mb-4 text-[16px] xs:text-[12px] md:text-[16px]"
                   onMouseEnter={() =>
@@ -318,41 +325,18 @@ const ResumeTemplate4 = () => {
                         <EditableField
                           value={skill}
                           onSave={(value: string) => {
-                            let updatedSkills = resume.primarySkills.map(
-                              (skill: string, index: number) => {
-                                if (index === i) {
-                                  return value;
-                                }
-                                return skill;
-                              }
-                            );
-                            dispatch(
-                              setPrimarySkills({
-                                ...resume,
-                                primarySkills: updatedSkills,
-                              })
-                            );
-                            saveResumeToDB({
-                              ...resume,
-                              primarySkills: updatedSkills,
-                            });
+                            if (value !== resume?.primarySkills[i]) {
+                              let updatedSkills = [...resume.primarySkills]
+                              updatedSkills.splice(i, 1, value)
+                              updateAndSaveSkill(updatedSkills)
+                            }
                           }}
                         />
                         <div
                           onClick={() => {
-                            const removeSkill = resume.primarySkills.filter(
-                              (item: any) => item !== skill
-                            );
-                            dispatch(
-                              setPrimarySkills({
-                                ...resume,
-                                primarySkills: removeSkill,
-                              })
-                            );
-                            saveResumeToDB({
-                              ...resume,
-                              primarySkills: removeSkill,
-                            });
+                            const removeSkill = [...resume.primarySkills]
+                            removeSkill.splice(i, 1)
+                            updateAndSaveSkill(removeSkill)
                           }}
                           className="w-4 h-4  cursor-pointer child"
                         >
@@ -510,8 +494,7 @@ const ResumeTemplate4 = () => {
                   )
                 }
                 onSave={(value: string) => {
-                  dispatch(setSummary(value));
-                  saveResumeToDB({ ...resume, summary: value });
+                  updateAndSaveSummary(value)
                 }}
               />
             </div>
@@ -525,15 +508,14 @@ const ResumeTemplate4 = () => {
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
 
           {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+            resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-center items-center ${
-                      i > 0 ? "w-[100vw] ml-[-234px] xs:ml-0 xs:w-full" : "mb-5"
-                    }`}
+                    className={`flex justify-center items-center ${i > 0 ? "w-[100vw] ml-[-234px] xs:ml-0 xs:w-full" : "mb-5"
+                      }`}
                   >
                     <div className="w-[5%] pr-5 xs:pr-0 md:pr-5  lg:-mx-5 pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
@@ -967,7 +949,7 @@ const ResumeTemplate4 = () => {
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
+                          newWorkExperience !== i ? (
                           <div
                             className="border-2 w-2/12 xs:w-full mt-3 xs:mt-11 md:mt-3 lg:mt-3 md:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                             onClick={() => {

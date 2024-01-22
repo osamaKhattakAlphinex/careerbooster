@@ -5,13 +5,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  setBasicInfo,
-  setField,
-  setPrimarySkills,
-  setSummary,
-  setWorkExperienceArray,
-} from "@/store/resumeSlice";
-import {
   contactIcon,
   crossIcon1,
   educationIcon,
@@ -27,8 +20,8 @@ import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
-import WorkExperience from "@/components/WorkExperience";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
+import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 
 const ResumeTemplate2 = () => {
   const dispatch = useDispatch();
@@ -61,12 +54,17 @@ const ResumeTemplate2 = () => {
   const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
     useDragAndDrop();
   const { addPrimarySkill } = useAddPrimarySkill();
-
+  const { updateAndSaveSkill,
+    updateAndSaveSummary,
+    updateAndSaveWorkExperienceArray,
+    updateAndSaveBasicInfo,
+    updateAndSaveEducation, updateAndSaveName, updateAndSaveJobTitle } = useUpdateAndSave()
   useEffect(() => {
     if (streamedJDData === "") {
       setRegeneratedRecordIndex(null);
     }
   }, [streamedJDData]);
+
 
   return (
     <div className="w-full first-page  text-gray-900 flex flex-col justify-start space-y-4 items-start px-6">
@@ -77,8 +75,9 @@ const ResumeTemplate2 = () => {
             value={resume?.name ? resume?.name : "FULL NAME"}
             style={{ width: "fit-content" }}
             onSave={(value: string) => {
-              dispatch(setField({ name: "name", value: value }));
-              saveResumeToDB({ ...resume, name: value });
+              if (value !== resume?.name) {
+                updateAndSaveName(value)
+              }
             }}
           />
         </h2>
@@ -86,8 +85,9 @@ const ResumeTemplate2 = () => {
           <EditableField
             value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
             onSave={(value: string) => {
-              dispatch(setField({ name: "jobTitle", value: value }));
-              saveResumeToDB({ ...resume, jobTitle: value });
+              if (value !== resume?.jobTitle) {
+                updateAndSaveJobTitle(value)
+              }
             }}
           />
         </h3>
@@ -104,16 +104,9 @@ const ResumeTemplate2 = () => {
                   : "(555) 555-1234"
               }
               onSave={(value: string) => {
-                dispatch(
-                  setBasicInfo({
-                    ...resume,
-                    contact: { ...resume.contact, phone: value },
-                  })
-                );
-                saveResumeToDB({
-                  ...resume,
-                  contact: { ...resume.contact, phone: value },
-                });
+                if (value !== resume?.contact?.phone) {
+                  updateAndSaveBasicInfo({ phone: value })
+                }
               }}
             />
           </li>
@@ -126,16 +119,9 @@ const ResumeTemplate2 = () => {
                   : "your@email.com"
               }
               onSave={(value: string) => {
-                dispatch(
-                  setBasicInfo({
-                    ...resume,
-                    contact: { ...resume.contact, email: value },
-                  })
-                );
-                saveResumeToDB({
-                  ...resume,
-                  contact: { ...resume.contact, email: value },
-                });
+                if (value !== resume?.contact?.email) {
+                  updateAndSaveBasicInfo({ email: value })
+                }
               }}
             />
           </li>
@@ -147,18 +133,10 @@ const ResumeTemplate2 = () => {
                   ? resume?.contact?.linkedIn
                   : "https://www.linkedin.com/"
               }
-
               onSave={(value: string) => {
-                dispatch(
-                  setBasicInfo({
-                    ...resume,
-                    contact: { ...resume.contact, linkedIn: value },
-                  })
-                );
-                saveResumeToDB({
-                  ...resume,
-                  contact: { ...resume.contact, linkedIn: value },
-                });
+                if (value !== resume.contact.linkedIn) {
+                  updateAndSaveBasicInfo({ linkedIn: value })
+                }
               }}
             />
             {/* </a> */}
@@ -209,8 +187,7 @@ const ResumeTemplate2 = () => {
                 )
               }
               onSave={(value: string) => {
-                dispatch(setSummary(value));
-                saveResumeToDB({ ...resume, summary: value });
+                updateAndSaveSummary(value)
               }}
             />
           </div>
@@ -254,42 +231,20 @@ const ResumeTemplate2 = () => {
                   >
                     <EditableField
                       value={skill}
-                      //this needs to be outside
-
                       onSave={(value: string) => {
                         if (value !== resume?.primarySkills[i]) {
                           let updatedSkills = [...resume.primarySkills]
                           updatedSkills.splice(i, 1, value)
-                          dispatch(
-                            setPrimarySkills({
-                              ...resume,
-                              primarySkills: updatedSkills,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            primarySkills: updatedSkills,
-                          });
+                          updateAndSaveSkill(updatedSkills)
+
                         }
                       }}
                     />
                     <div
-                      //this needs to be outside
-
                       onClick={() => {
                         const removeSkill = [...resume.primarySkills]
                         removeSkill.splice(i, 1)
-
-                        dispatch(
-                          setPrimarySkills({
-                            ...resume,
-                            primarySkills: removeSkill,
-                          })
-                        );
-                        saveResumeToDB({
-                          ...resume,
-                          primarySkills: removeSkill,
-                        });
+                        updateAndSaveSkill(removeSkill)
                       }}
                       className="w-4 h-4  cursor-pointer child"
                     >
@@ -419,61 +374,27 @@ const ResumeTemplate2 = () => {
                       <EditableField
                         value={rec?.title}
                         style={{ width: "100%" }}
-                        //this needs to be outside
 
                         onSave={(value: string) => {
-                          let updatedExp = resume?.workExperienceArray.map(
-                            (exp: any, index: number) => {
-                              if (index === i) {
-                                return {
-                                  ...exp,
-                                  title: value,
-                                };
-                              }
-                              return exp;
-                            }
-                          );
-
-                          // let updatedExp = [...resume.workExperienceArray]
-                          // updatedExp.splice(i, 1, value)
-                          dispatch(
-                            setWorkExperienceArray({
-                              workExperienceArray: updatedExp,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            workExperienceArray: updatedExp,
-                          });
+                          if (value !== resume?.workExperienceArray[i].title) {
+                            let updatedExp = [...resume.workExperienceArray];
+                            updatedExp[i] = { ...updatedExp[i], title: value };
+                            updateAndSaveWorkExperienceArray(updatedExp)
+                          }
                         }}
                       />
                     </h2>
                     <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-sm xs:text-sm md:text-lg lg:text-lg">
                       <EditableField
                         value={rec?.company}
-                        //this needs to be outside
 
                         onSave={(value: string) => {
-                          let updatedExp = resume?.workExperienceArray.map(
-                            (exp: any, index: number) => {
-                              if (index === i) {
-                                return {
-                                  ...exp,
-                                  company: value,
-                                };
-                              }
-                              return exp;
-                            }
-                          );
-                          dispatch(
-                            setWorkExperienceArray({
-                              workExperienceArray: updatedExp,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            workExperienceArray: updatedExp,
-                          });
+                          if (value !== resume?.workExperienceArray[i].company) {
+                            let updatedExp = [...resume.workExperienceArray];
+                            updatedExp[i] = { ...updatedExp[i], company: value };
+                            updateAndSaveWorkExperienceArray(updatedExp)
+                          }
+
                         }}
                       />
                     </span>{" "}
@@ -481,58 +402,28 @@ const ResumeTemplate2 = () => {
                     <span className="hover:shadow-md hover:bg-gray-100">
                       <EditableField
                         value={rec?.cityState}
-                        //this needs to be outside
 
                         onSave={(value: string) => {
-                          let updatedExp = resume?.workExperienceArray.map(
-                            (exp: any, index: number) => {
-                              if (index === i) {
-                                return {
-                                  ...exp,
-                                  cityState: value,
-                                };
-                              }
-                              return exp;
-                            }
-                          );
-                          dispatch(
-                            setWorkExperienceArray({
-                              workExperienceArray: updatedExp,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            workExperienceArray: updatedExp,
-                          });
+                          if (value !== resume?.workExperienceArray[i].cityState) {
+                            let updatedExp = [...resume.workExperienceArray];
+                            updatedExp[i] = { ...updatedExp[i], cityState: value };
+                            updateAndSaveWorkExperienceArray(updatedExp)
+                          }
                         }}
                       />
                     </span>{" "}
                     <span className="hover:shadow-md hover:bg-gray-100">
                       <EditableField
                         value={rec?.country}
-                        //this needs to be outside
 
                         onSave={(value: string) => {
-                          let updatedExp = resume?.workExperienceArray.map(
-                            (exp: any, index: number) => {
-                              if (index === i) {
-                                return {
-                                  ...exp,
-                                  country: value,
-                                };
-                              }
-                              return exp;
-                            }
-                          );
-                          dispatch(
-                            setWorkExperienceArray({
-                              workExperienceArray: updatedExp,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            workExperienceArray: updatedExp,
-                          });
+
+                          if (value !== resume?.workExperienceArray[i].country) {
+                            let updatedExp = [...resume.workExperienceArray];
+                            updatedExp[i] = { ...updatedExp[i], country: value };
+                            updateAndSaveWorkExperienceArray(updatedExp)
+                          }
+
                         }}
                       />
                     </span>
@@ -567,37 +458,13 @@ const ResumeTemplate2 = () => {
                                   >
                                     <div
                                       className="group-hover:block hidden font-medium text-xs uppercase   text-gray-500 cursor-pointer"
-                                      //this needs to be outside
                                       onClick={() => {
-                                        const workExperienceArray =
-                                          resume.workExperienceArray.map(
-                                            (rec: any, index: number) => {
-                                              if (index === i) {
-                                                return {
-                                                  ...rec,
-                                                  achievements:
-                                                    rec.achievements.filter(
-                                                      (
-                                                        ach: any,
-                                                        achIndex: number
-                                                      ) => achIndex !== ind
-                                                    ),
-                                                };
-                                              }
-                                              return rec;
-                                            }
-                                          );
-                                        dispatch(
-                                          setWorkExperienceArray({
-                                            workExperienceArray:
-                                              workExperienceArray,
-                                          })
-                                        );
-                                        saveResumeToDB({
-                                          ...resume,
-                                          workExperienceArray:
-                                            workExperienceArray,
-                                        });
+                                        let updatedExp: any = [...resume.workExperienceArray];
+                                        let updatedAchievements = [...updatedExp[i].achievements];
+                                        updatedAchievements.splice(ind, 1)
+                                        updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
+                                        updateAndSaveWorkExperienceArray(updatedExp)
+
                                       }}
                                     >
                                       Remove This Extra Space
@@ -624,77 +491,23 @@ const ResumeTemplate2 = () => {
                                       type="textarea"
                                       rows={2}
                                       value={achievement}
-                                      //this needs to be outside
                                       onSave={(value: string) => {
-                                        let updatedExp =
-                                          resume?.workExperienceArray.map(
-                                            (exp: any, index: number) => {
-                                              // get the index of the work experience
-                                              if (index === i) {
-                                                let updatedAchievements =
-                                                  exp?.achievements?.map(
-                                                    (
-                                                      ach: any,
-                                                      achInd: number
-                                                    ) => {
-                                                      if (achInd === ind) {
-                                                        return value;
-                                                      }
-                                                      return ach;
-                                                    }
-                                                  );
-                                                return {
-                                                  ...exp,
-                                                  achievements:
-                                                    updatedAchievements,
-                                                };
-                                              }
-                                              return exp;
-                                            }
-                                          );
-                                        dispatch(
-                                          setWorkExperienceArray({
-                                            workExperienceArray: updatedExp,
-                                          })
-                                        );
-                                        saveResumeToDB({
-                                          ...resume,
-                                          workExperienceArray: updatedExp,
-                                        });
+                                        if (value !== resume?.workExperienceArray[i]?.achievements[ind]) {
+                                          let updatedExp: any = [...resume.workExperienceArray];
+                                          let updatedAchievements = [...updatedExp[i].achievements];
+                                          updatedAchievements.splice(ind, 1, value)
+                                          updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
+                                          updateAndSaveWorkExperienceArray(updatedExp)
+                                        }
                                       }}
                                     />
                                     <div
-                                      //this needs to be outside
                                       onClick={() => {
-                                        const workExperienceArray =
-                                          resume.workExperienceArray.map(
-                                            (rec: any, index: number) => {
-                                              if (index === i) {
-                                                return {
-                                                  ...rec,
-                                                  achievements:
-                                                    rec.achievements.filter(
-                                                      (
-                                                        ach: any,
-                                                        achIndex: number
-                                                      ) => achIndex !== ind
-                                                    ),
-                                                };
-                                              }
-                                              return rec;
-                                            }
-                                          );
-                                        dispatch(
-                                          setWorkExperienceArray({
-                                            workExperienceArray:
-                                              workExperienceArray,
-                                          })
-                                        );
-                                        saveResumeToDB({
-                                          ...resume,
-                                          workExperienceArray:
-                                            workExperienceArray,
-                                        });
+                                        let updatedExp: any = [...resume.workExperienceArray];
+                                        let updatedAchievements = [...updatedExp[i].achievements];
+                                        updatedAchievements.splice(ind, 1)
+                                        updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
+                                        updateAndSaveWorkExperienceArray(updatedExp)
                                       }}
                                       className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
                                     >
@@ -749,73 +562,33 @@ const ResumeTemplate2 = () => {
                               name="newAchievement"
                               id="newAchievement"
                               autoComplete="off"
-                              //this needs to be outside
 
                               onKeyDown={(e) => {
                                 if (e.key === "Enter") {
                                   e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
                                   // Save the new achievement to the state and possibly the database
-                                  // if (newAchievement !== "") {
-                                  let updatedExp =
-                                    resume?.workExperienceArray.map(
-                                      (exp: any, index: number) => {
-                                        if (index === i) {
-                                          return {
-                                            ...exp,
-                                            achievements: [
-                                              ...exp?.achievements,
-                                              newAchievement,
-                                            ],
-                                          };
-                                        }
-                                        return exp;
-                                      }
-                                    );
-                                  dispatch(
-                                    setWorkExperienceArray({
-                                      workExperienceArray: updatedExp,
-                                    })
-                                  );
-                                  saveResumeToDB({
-                                    ...resume,
-                                    workExperienceArray: updatedExp,
-                                  });
-                                  setNewAchievement("");
+                                  if (newAchievement !== "") {
+                                    let updatedExp: any = [...resume.workExperienceArray];
+                                    let updatedAchievements = [...updatedExp[i].achievements];
+                                    updatedAchievements.push(newAchievement)
+                                    updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
+                                    updateAndSaveWorkExperienceArray(updatedExp)
+                                    setNewAchievement("");
+                                  }
                                 }
-                                // }
                               }}
                             />
                             <button
                               className="bg-green-500 w-2/12 xs:w-full md:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
-                              //this needs to be outside
 
                               onClick={() => {
                                 // Save the new achievement to the state and possibly the database
                                 if (newAchievement !== "") {
-                                  let updatedExp =
-                                    resume?.workExperienceArray.map(
-                                      (exp: any, index: number) => {
-                                        if (index === i) {
-                                          return {
-                                            ...exp,
-                                            achievements: [
-                                              ...exp?.achievements,
-                                              newAchievement,
-                                            ],
-                                          };
-                                        }
-                                        return exp;
-                                      }
-                                    );
-                                  dispatch(
-                                    setWorkExperienceArray({
-                                      workExperienceArray: updatedExp,
-                                    })
-                                  );
-                                  saveResumeToDB({
-                                    ...resume,
-                                    workExperienceArray: updatedExp,
-                                  });
+                                  let updatedExp: any = [...resume.workExperienceArray];
+                                  let updatedAchievements = [...updatedExp[i].achievements];
+                                  updatedAchievements.push(newAchievement)
+                                  updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
+                                  updateAndSaveWorkExperienceArray(updatedExp)
                                   setNewAchievement("");
                                 }
                               }}
@@ -849,32 +622,13 @@ const ResumeTemplate2 = () => {
                           </div>
                           <button
                             className="border-2 h-10 w-auto px-3  mb-2 mt-3    xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                            //this needs to be outside
 
                             onClick={() => {
-                              let updatedExp = resume?.workExperienceArray.map(
-                                (exp: any, index: number) => {
-                                  if (index === i) {
-                                    return {
-                                      ...exp,
-                                      achievements: [
-                                        ...exp?.achievements,
-                                        newAchievement,
-                                      ],
-                                    };
-                                  }
-                                  return exp;
-                                }
-                              );
-                              dispatch(
-                                setWorkExperienceArray({
-                                  workExperienceArray: updatedExp,
-                                })
-                              );
-                              saveResumeToDB({
-                                ...resume,
-                                workExperienceArray: updatedExp,
-                              });
+                              let updatedExp: any = [...resume.workExperienceArray];
+                              let updatedAchievements = [...updatedExp[i].achievements];
+                              updatedAchievements.push(newAchievement)
+                              updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
+                              updateAndSaveWorkExperienceArray(updatedExp)
                               setNewAchievement("");
                             }}
                           >
@@ -928,50 +682,24 @@ const ResumeTemplate2 = () => {
                    hover:bg-gray-100 font-semibold flex uppercase text-sm xs:text-sm md:text-lg lg:text-lg  justify-between items-center "
                     >
                       <EditableField
-                        type="textarea"
                         rows={2}
                         value={education?.educationLevel}
-                        //this needs to be outside
 
                         onSave={(value: string) => {
-                          let updatedEducations = resume?.education.map(
-                            (edu: any, index: number) => {
-                              if (index === ind) {
-                                return {
-                                  ...edu,
-                                  educationLevel: value,
-                                };
-                              }
-                              return edu;
-                            }
-                          );
-                          dispatch(
-                            setField({
-                              name: "education",
-                              value: updatedEducations,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            education: updatedEducations,
-                          });
+
+                          if (value !== resume?.education[ind].educationLevel) {
+                            let updatedEducations = [...resume.education]
+                            updatedEducations[ind] = { ...updatedEducations[ind], educationLevel: value, }
+                            updateAndSaveEducation(updatedEducations)
+                          }
                         }}
                       />
                       <div
                         onClick={() => {
-                          const removeEducation = resume.education.filter(
-                            (item: any) => item !== education
-                          );
-                          dispatch(
-                            setField({
-                              name: "education",
-                              value: removeEducation,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            education: removeEducation,
-                          });
+
+                          let updatedEducations = [...resume?.education]
+                          updatedEducations.splice(ind, 1)
+                          updateAndSaveEducation(updatedEducations)
                         }}
                         className="w-4 h-4  cursor-pointer child"
                       >
@@ -982,62 +710,28 @@ const ResumeTemplate2 = () => {
                       <EditableField
                         value={`${education?.fieldOfStudy}`}
                         style={{ width: "100%" }}
-                        //this needs to be outside
-
                         onSave={(value: string) => {
-                          let updatedEducations = resume?.education.map(
-                            (edu: any, index: number) => {
-                              if (index === ind) {
-                                return {
-                                  ...edu,
-                                  fieldOfStudy: value,
-                                };
-                              }
-                              return edu;
-                            }
-                          );
-                          dispatch(
-                            setField({
-                              name: "education",
-                              value: updatedEducations,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            education: updatedEducations,
-                          });
+
+                          if (value !== resume?.education[ind].fieldOfStudy) {
+                            let updatedEducations = [...resume.education]
+                            updatedEducations[ind] = { ...updatedEducations[ind], fieldOfStudy: value, }
+                            updateAndSaveEducation(updatedEducations)
+                          }
                         }}
                       />{" "}
                     </li>
                     <li className="hover:shadow-md hover:bg-gray-100 text-sm xs:text-sm md:text-lg lg:text-lg text-gray-800">
                       <EditableField
-                        type="textarea"
                         rows={2}
                         value={`${education?.schoolName}`}
-                        //this needs to be outside
-
                         onSave={(value: string) => {
-                          let updatedEducations = resume?.education.map(
-                            (edu: any, index: number) => {
-                              if (index === ind) {
-                                return {
-                                  ...edu,
-                                  schoolName: value,
-                                };
-                              }
-                              return edu;
-                            }
-                          );
-                          dispatch(
-                            setField({
-                              name: "education",
-                              value: updatedEducations,
-                            })
-                          );
-                          saveResumeToDB({
-                            ...resume,
-                            education: updatedEducations,
-                          });
+
+                          if (value !== resume?.education[ind].schoolName) {
+                            let updatedEducations = [...resume.education]
+                            updatedEducations[ind] = { ...updatedEducations[ind], schoolName: value, }
+                            updateAndSaveEducation(updatedEducations)
+                          }
+
                         }}
                       />
                     </li>
