@@ -49,7 +49,7 @@ const EditableField = ({
           setIsEditing(true);
           //showAlertpopupFun();
         }}
-        onBlur={handleBlur}
+        // onBlur={handleBlur}
         className=""
       >
         {userData?.creditPackage && isEditing ? (

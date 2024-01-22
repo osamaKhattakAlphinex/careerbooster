@@ -244,6 +244,7 @@ const ResumeTemplate19 = ({
                                   primarySkills: updatedSkills,
                                 })
                               );
+                              debugger;
                               saveResumeToDB({
                                 ...resume,
                                 primarySkills: updatedSkills,
