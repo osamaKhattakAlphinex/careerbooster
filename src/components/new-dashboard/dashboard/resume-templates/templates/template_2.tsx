@@ -387,14 +387,12 @@ const ResumeTemplate2 = () => {
                     <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-sm xs:text-sm md:text-lg lg:text-lg">
                       <EditableField
                         value={rec?.company}
-
                         onSave={(value: string) => {
                           if (value !== resume?.workExperienceArray[i].company) {
                             let updatedExp = [...resume.workExperienceArray];
                             updatedExp[i] = { ...updatedExp[i], company: value };
                             updateAndSaveWorkExperienceArray(updatedExp)
                           }
-
                         }}
                       />
                     </span>{" "}
@@ -402,7 +400,6 @@ const ResumeTemplate2 = () => {
                     <span className="hover:shadow-md hover:bg-gray-100">
                       <EditableField
                         value={rec?.cityState}
-
                         onSave={(value: string) => {
                           if (value !== resume?.workExperienceArray[i].cityState) {
                             let updatedExp = [...resume.workExperienceArray];
@@ -415,15 +412,12 @@ const ResumeTemplate2 = () => {
                     <span className="hover:shadow-md hover:bg-gray-100">
                       <EditableField
                         value={rec?.country}
-
                         onSave={(value: string) => {
-
                           if (value !== resume?.workExperienceArray[i].country) {
                             let updatedExp = [...resume.workExperienceArray];
                             updatedExp[i] = { ...updatedExp[i], country: value };
                             updateAndSaveWorkExperienceArray(updatedExp)
                           }
-
                         }}
                       />
                     </span>
@@ -562,7 +556,6 @@ const ResumeTemplate2 = () => {
                               name="newAchievement"
                               id="newAchievement"
                               autoComplete="off"
-
                               onKeyDown={(e) => {
                                 if (e.key === "Enter") {
                                   e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
@@ -580,7 +573,6 @@ const ResumeTemplate2 = () => {
                             />
                             <button
                               className="bg-green-500 w-2/12 xs:w-full md:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
-
                               onClick={() => {
                                 // Save the new achievement to the state and possibly the database
                                 if (newAchievement !== "") {
@@ -622,7 +614,6 @@ const ResumeTemplate2 = () => {
                           </div>
                           <button
                             className="border-2 h-10 w-auto px-3  mb-2 mt-3    xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-
                             onClick={() => {
                               let updatedExp: any = [...resume.workExperienceArray];
                               let updatedAchievements = [...updatedExp[i].achievements];

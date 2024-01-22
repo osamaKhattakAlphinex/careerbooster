@@ -195,26 +195,11 @@ const ResumeTemplate18 = () => {
                           value={rec?.title}
                           style={{ width: "100%" }}
                           onSave={(value: string) => {
-                            let updatedExp = resume?.workExperienceArray.map(
-                              (exp: any, index: number) => {
-                                if (index === i) {
-                                  return {
-                                    ...exp,
-                                    title: value,
-                                  };
-                                }
-                                return exp;
-                              }
-                            );
-                            dispatch(
-                              setWorkExperienceArray({
-                                workExperienceArray: updatedExp,
-                              })
-                            );
-                            saveResumeToDB({
-                              ...resume,
-                              workExperienceArray: updatedExp,
-                            });
+                            if (value !== resume?.workExperienceArray[i].title) {
+                              let updatedExp = [...resume.workExperienceArray];
+                              updatedExp[i] = { ...updatedExp[i], title: value };
+                              updateAndSaveWorkExperienceArray(updatedExp)
+                            }
                           }}
                         />
                       </h2>
@@ -228,26 +213,11 @@ const ResumeTemplate18 = () => {
                           <EditableField
                             value={rec?.company}
                             onSave={(value: string) => {
-                              let updatedExp = resume?.workExperienceArray.map(
-                                (exp: any, index: number) => {
-                                  if (index === i) {
-                                    return {
-                                      ...exp,
-                                      company: value,
-                                    };
-                                  }
-                                  return exp;
-                                }
-                              );
-                              dispatch(
-                                setWorkExperienceArray({
-                                  workExperienceArray: updatedExp,
-                                })
-                              );
-                              saveResumeToDB({
-                                ...resume,
-                                workExperienceArray: updatedExp,
-                              });
+                              if (value !== resume?.workExperienceArray[i].company) {
+                                let updatedExp = [...resume.workExperienceArray];
+                                updatedExp[i] = { ...updatedExp[i], company: value };
+                                updateAndSaveWorkExperienceArray(updatedExp)
+                              }
                             }}
                           />
                         </span>{" "}
@@ -256,26 +226,11 @@ const ResumeTemplate18 = () => {
                           <EditableField
                             value={rec?.cityState}
                             onSave={(value: string) => {
-                              let updatedExp = resume?.workExperienceArray.map(
-                                (exp: any, index: number) => {
-                                  if (index === i) {
-                                    return {
-                                      ...exp,
-                                      cityState: value,
-                                    };
-                                  }
-                                  return exp;
-                                }
-                              );
-                              dispatch(
-                                setWorkExperienceArray({
-                                  workExperienceArray: updatedExp,
-                                })
-                              );
-                              saveResumeToDB({
-                                ...resume,
-                                workExperienceArray: updatedExp,
-                              });
+                              if (value !== resume?.workExperienceArray[i].cityState) {
+                                let updatedExp = [...resume.workExperienceArray];
+                                updatedExp[i] = { ...updatedExp[i], cityState: value };
+                                updateAndSaveWorkExperienceArray(updatedExp)
+                              }
                             }}
                           />
                         </span>{" "}
@@ -283,26 +238,11 @@ const ResumeTemplate18 = () => {
                           <EditableField
                             value={rec?.country}
                             onSave={(value: string) => {
-                              let updatedExp = resume?.workExperienceArray.map(
-                                (exp: any, index: number) => {
-                                  if (index === i) {
-                                    return {
-                                      ...exp,
-                                      country: value,
-                                    };
-                                  }
-                                  return exp;
-                                }
-                              );
-                              dispatch(
-                                setWorkExperienceArray({
-                                  workExperienceArray: updatedExp,
-                                })
-                              );
-                              saveResumeToDB({
-                                ...resume,
-                                workExperienceArray: updatedExp,
-                              });
+                              if (value !== resume?.workExperienceArray[i].country) {
+                                let updatedExp = [...resume.workExperienceArray];
+                                updatedExp[i] = { ...updatedExp[i], country: value };
+                                updateAndSaveWorkExperienceArray(updatedExp)
+                              }
                             }}
                           />
                         </span>
