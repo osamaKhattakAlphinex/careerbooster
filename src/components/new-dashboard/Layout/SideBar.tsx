@@ -108,13 +108,13 @@ const SideBar = () => {
               {items?.map((item, index) => (
                 <li
                   key={index}
-                  className="py-[3px] inline-block cursor-pointer transition-all"
+                  className="py-[3px] group inline-block cursor-pointer transition-all"
                 >
                   {item.text !== "Logout" ? (
                     <Link
                       href={item.url}
                       className={`px-7 text-base flex capitalize items-center 
-                      dark:hover:text-[#b324d7] hover:text-[#b324d7]  `}
+                      dark:group-hover:text-[#b324d7] group-hover:text-[#b324d7] no-underline	 `}
                       onMouseOver={() => handleMouseOver(index)}
                       onMouseOut={handleMouseOut}
                       onClick={() => setIsOpen(!isOpen)}
@@ -129,8 +129,8 @@ const SideBar = () => {
                         className={`w-6 h-6 inline-block pr-2 
                         ${
                           pathname === item.url
-                            ? "dark:text-[#b324d7] text-[#b324d7] font-bold dark:hover:text-[#b324d7] hover:text-[#b324d7]"
-                            : "dark:text-[#d9d6d6] text-gray-950 hover:text-[#b324d7] dark:hover:text-[#b324d7]"
+                            ? "dark:text-[#b324d7] text-[#b324d7] font-bold dark:group-hover:text-[#b324d7] group-hover:text-[#b324d7] no-underline	"
+                            : "dark:text-[#d9d6d6] text-gray-950 group-hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline	"
                         }
                          `}
                       >
@@ -139,8 +139,8 @@ const SideBar = () => {
                       <h2
                         className={`text-base ml-3 mb-0 font-normal ${
                           pathname === item.url
-                            ? "dark:text-[#b324d7] text-[#b324d7] font-bold hover:text-[#b324d7] dark:hover:text-[#b324d7]"
-                            : "dark:text-[#d9d6d6] text-gray-950 hover:text-[#b324d7] dark:hover:text-[#b324d7]"
+                            ? "dark:text-[#b324d7] text-[#b324d7] font-bold group-hover:text-[#b324d7] dark:hover:text-[#b324d7] no-underline	"
+                            : "dark:text-[#d9d6d6] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline	"
                         }`}
                       >
                         {item.text}
@@ -148,7 +148,7 @@ const SideBar = () => {
                     </Link>
                   ) : (
                     <button
-                      className="px-7 text-base flex capitalize items-center "
+                      className="px-7 text-base flex capitalize items-center dark:group-hover:text-[#b324d7] group-hover:text-[#b324d7]"
                       onMouseOver={() => handleMouseOver(index)}
                       onMouseOut={handleMouseOut}
                       onClick={() => signOut()}
@@ -161,10 +161,10 @@ const SideBar = () => {
                       //   textDecoration: "none",
                       // }}
                     >
-                      <div className="w-6 h-6  pr-2 dark:text-[#737373] text-gray-950 dark:hover:text-[#b324d7] hover:text-[#b324d7]">
+                      <div className="w-6 h-6  pr-2 dark:text-[#d9d6d6] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline		">
                         {item.icon}
                       </div>
-                      <h2 className="text-[16px] ml-3 mb-0 dark:text-[#737373] text-gray-950 dark:hover:text-[#b324d7] hover:text-[#b324d7]">
+                      <h2 className="text-[16px] ml-3 mb-0 dark:text-[#d9d6d6] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline		">
                         {item.text}
                       </h2>
                     </button>
