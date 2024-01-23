@@ -58,8 +58,8 @@ export async function POST(req: any) {
       });
 
       prompt = promptRec.value;
-      prompt = prompt.replaceAll("{{PersonName}}", personName)
-      prompt = prompt.replaceAll("{{JobTitle}}", jobTitle)
+      prompt = await prompt.replaceAll("{{PersonName}}", personName)
+      prompt = await prompt.replaceAll("{{JobTitle}}", jobTitle)
     } else {
       promptRec = await Prompt.findOne({
         type: "resume",
@@ -67,8 +67,8 @@ export async function POST(req: any) {
         active: true,
       });
       prompt = promptRec.value;
-      prompt = prompt.replaceAll("{{PersonName}}", personName)
-      prompt = prompt.replaceAll("{{JobTitle}}", jobTitle)
+      prompt = await prompt.replaceAll("{{PersonName}}", personName)
+      prompt = await prompt.replaceAll("{{JobTitle}}", jobTitle)
 
     }
 

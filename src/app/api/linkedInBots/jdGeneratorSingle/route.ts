@@ -50,8 +50,8 @@ export async function POST(req: any) {
       active: true,
     });
     let prompt = promptRec.value;
-    prompt = prompt.replaceAll("{{PersonName}}", personName);
-    prompt = prompt.replaceAll("{{JobTitle}}", experience.jobTitle)
+    prompt = await prompt.replaceAll("{{PersonName}}", personName);
+    prompt = await prompt.replaceAll("{{JobTitle}}", experience.jobTitle)
 
     const inputPrompt = ` ${prompt}
     

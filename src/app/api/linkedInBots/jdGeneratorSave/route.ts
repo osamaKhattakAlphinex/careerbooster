@@ -23,8 +23,8 @@ export async function POST(req: any) {
         let prompt = promptRec.value;
         for (const [index, experience] of experiences.entries()) {
 
-            prompt = prompt.replaceAll("{{PersonName}}", personName);
-            prompt = prompt.replaceAll("{{JobTitle}}", experience.jobTitle)
+            prompt = await prompt.replaceAll("{{PersonName}}", personName);
+            prompt = await prompt.replaceAll("{{JobTitle}}", experience.jobTitle)
 
             inputPrompt += ` ${prompt} 
     Here is the work experience: 

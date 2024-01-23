@@ -71,7 +71,7 @@ export async function POST(req: any) {
           active: true,
         });
         let prompt = promptRec.value;
-        prompt = prompt.replaceAll("{{PersonName}}", personName);
+        prompt = await prompt.replaceAll("{{PersonName}}", personName);
 
         const inputPrompt = `This is the Resume data (IN JSON): ${JSON.stringify(
           userData
@@ -173,13 +173,15 @@ export async function POST(req: any) {
           active: true,
         });
         const prompt = promptRec.value;
+        console.log(jobPosition);
 
-        let promptSummary = prompt.replace("{{jobPosition}}", jobPosition);
-        promptSummary = prompt.replaceAll("{{PersonName}}", personName);
+        let promptSummary = await prompt.replaceAll("{{jobPosition}}", jobPosition);
+        promptSummary = await promptSummary.replaceAll("{{PersonName}}", personName);
         const inputPrompt = `Read ${personName}'s Resume data: ${JSON.stringify(userData)}
       
       and then:
               ${promptSummary}`;
+
 
         const response: any = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
@@ -250,7 +252,7 @@ export async function POST(req: any) {
         });
         const promptDB = promptRec.value;
 
-        const promptRefined = await promptDB.replace(
+        const promptRefined = await promptDB.replaceAll(
           "{{jobPosition}}",
           jobPosition
         );

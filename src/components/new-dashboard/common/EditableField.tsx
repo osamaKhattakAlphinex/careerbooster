@@ -19,13 +19,6 @@ const EditableField = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedValue, setEditedValue] = useState(value);
-  const [showPopup, setShowPopup] = useState(false);
-  useEffect(() => {
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 5000);
-    // Clean up the timeout to avoid memory leaks
-  }, [showPopup]); // The empty dependency array ensures that this effect runs only once after the initial render
 
   const userData = useSelector((state: any) => state.userData);
   const handleBlur = () => {
@@ -38,18 +31,13 @@ const EditableField = ({
       setEditedValue(value);
     }
   }, [value]);
-  const showAlertpopupFun = () => {
-    !userData?.userPackageData?.limit?.can_edit_resume &&
-      alert("please upgrade to pro plan in order to edit !");
-  };
+
   return (
     <>
       <span
         onClick={() => {
           setIsEditing(true);
-          //showAlertpopupFun();
         }}
-        onBlur={handleBlur}
         className=""
       >
         {userData?.creditPackage && isEditing ? (

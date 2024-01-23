@@ -27,7 +27,7 @@ export async function POST(req: any) {
       });
       prompt = promptRec ? promptRec.value : "";
       if (option === "aboutInstructions") {
-        prompt = prompt.replaceAll("{{instructions}}", aboutInstructions);
+        prompt = await prompt.replaceAll("{{instructions}}", aboutInstructions);
       }
 
       if (linkedinContent) {

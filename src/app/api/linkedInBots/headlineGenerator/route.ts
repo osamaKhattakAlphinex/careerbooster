@@ -58,7 +58,7 @@ export async function POST(req: any) {
       active: true,
     });
     let prompt = promptRec.value;
-    prompt = prompt.replaceAll("{{PersonName}}", personName);
+    prompt = await prompt.replaceAll("{{PersonName}}", personName);
 
     const dataset = "linkedin.headlines";
     const model = await getTrainedModel(dataset);
