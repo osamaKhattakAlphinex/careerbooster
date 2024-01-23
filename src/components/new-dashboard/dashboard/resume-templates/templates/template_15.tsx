@@ -129,7 +129,7 @@ const ResumeTemplate15 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 flex gap-2 flex-row  items-center text-sm">
+            <li className="hover:shadow-md hover:bg-gray-100 text-gray-950 flex gap-2 flex-row  items-center text-sm">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
