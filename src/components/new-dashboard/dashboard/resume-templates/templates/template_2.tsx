@@ -5,16 +5,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import {
-  contactIcon,
+  Loader,
   crossIcon1,
   educationIcon,
   emailIcon,
   linkedInIcon,
   phoneIcon,
-  sparkleIcon,
 } from "@/helpers/iconsProvider";
 import useGetSummary from "@/hooks/useGetSummary";
-import Regenerate from "@/helpers/regenerate";
 import EditableField from "@/components/new-dashboard/common/EditableField";
 import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
@@ -22,45 +20,31 @@ import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import Toolbar from "@/components/new-dashboard/common/Toolbar";
+import useHandler from "@/hooks/useHandler";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
-  const [newEducation, setNewEducation] = useState(false);
-  const [primarySkillAddButtonVisible, setPrimarySkillAddButtonVisible] =
-    useState(false);
-  const [workExperienceAddButtonVisible, setWorkExperienceAddButtonVisible] =
-    useState<number>();
-  const [educationAddButtonVisible, setEducationAddButtonVisible] =
-    useState(false);
   const [primarySkill, setPrimarySkill] = useState<string>("");
-
   const [regenerating, setRegenerating] = useState(false);
-  const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
-
   const [insideIndex, setInsideIndex] = useState<number>(0);
-
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
-  const [streamedSummaryData, setStreamedSummaryData] = useState("");
-  const { getSummary } = useGetSummary(setStreamedSummaryData);
   const [streamedJDData, setStreamedJDData] = useState<any>("");
+  const [streamedSummaryData, setStreamedSummaryData] = useState("");
+
+  const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
   const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
     useDragAndDrop();
   const { addPrimarySkill } = useAddPrimarySkill();
-  const {
-    updateAndSaveSkill,
-    updateAndSaveSummary,
-    updateAndSaveWorkExperienceArray,
-    updateAndSaveBasicInfo,
-    updateAndSaveEducation,
-    updateAndSaveName,
-    updateAndSaveJobTitle,
-  } = useUpdateAndSave();
+  const { updateSaveHook } = useUpdateAndSave();
+  const { handlers } = useHandler();
+
   useEffect(() => {
     if (streamedJDData === "") {
       setRegeneratedRecordIndex(null);
@@ -73,98 +57,19 @@ const ResumeTemplate2 = () => {
     setRegeneratedRecordIndex(i);
   };
 
-  // add the space
-  const handleAddSpace = (i: number) => {
-    let updatedExp: any = [...resume.workExperienceArray];
-    let updatedAchievements = [...updatedExp[i].achievements];
-    updatedAchievements.push(newAchievement);
-    updatedExp[i] = {
-      ...updatedExp[i],
-      achievements: updatedAchievements,
-    };
-    updateAndSaveWorkExperienceArray(updatedExp);
-    setNewAchievement("");
+  //add Skills
+  const handleAddSkills = () => {
+    setNewPrimarySkill(true);
   };
 
-  // handle Add achivements
-  const handleAddAchivement = (i: number) => {
-    if (newAchievement !== "") {
-      let updatedExp: any = [...resume.workExperienceArray];
-      let updatedAchievements = [...updatedExp[i].achievements];
-      updatedAchievements.push(newAchievement);
-      updatedExp[i] = {
-        ...updatedExp[i],
-        achievements: updatedAchievements,
-      };
-      updateAndSaveWorkExperienceArray(updatedExp);
-      setNewAchievement("");
+  //save skills
+  const handleSaveSkills = () => {
+    if (primarySkill.trim() !== "") {
+      addPrimarySkill(primarySkill);
+      setPrimarySkill("");
     }
   };
 
-  const handleDeleteAchivement = (expInd: number, achiveInd: number) => {
-    let updatedExp: any = [...resume.workExperienceArray];
-    let updatedAchievements = [...updatedExp[expInd].achievements];
-    updatedAchievements.splice(achiveInd, 1);
-    updatedExp[expInd] = {
-      ...updatedExp[expInd],
-      achievements: updatedAchievements,
-    };
-    updateAndSaveWorkExperienceArray(updatedExp);
-  };
-
-  const handleUpdateAchivement = (
-    expInd: number,
-    achiveInd: number,
-    value: string
-  ) => {
-    if (
-      value !== resume?.workExperienceArray[expInd]?.achievements[achiveInd]
-    ) {
-      let updatedExp: any = [...resume.workExperienceArray];
-      let updatedAchievements = [...updatedExp[expInd].achievements];
-      updatedAchievements.splice(achiveInd, 1, value);
-      updatedExp[expInd] = {
-        ...updatedExp[expInd],
-        achievements: updatedAchievements,
-      };
-      updateAndSaveWorkExperienceArray(updatedExp);
-    }
-  };
-
-  const handleRemoveExtraSpace = (expInd: number, achiveInd: number) => {
-    let updatedExp: any = [...resume.workExperienceArray];
-    let updatedAchievements = [...updatedExp[expInd].achievements];
-    updatedAchievements.splice(achiveInd, 1);
-    updatedExp[expInd] = {
-      ...updatedExp[expInd],
-      achievements: updatedAchievements,
-    };
-    updateAndSaveWorkExperienceArray(updatedExp);
-  };
-
-  const handleSaveExperienceDetail = (obj: {}, expInd: number) => {
-    const [[key, value]] = Object.entries(obj);
-    if (value !== resume?.workExperienceArray[expInd][key]) {
-      let updatedExp = [...resume.workExperienceArray];
-      updatedExp[expInd] = {
-        ...updatedExp[expInd],
-        [key]: value,
-      };
-      updateAndSaveWorkExperienceArray(updatedExp);
-    }
-  };
-
-  const handleSaveEductionDetail = (obj: {}, ind: number) => {
-    const [[key, value]] = Object.entries(obj);
-    if (value !== resume?.education[ind][key]) {
-      let updatedEducations = [...resume.education];
-      updatedEducations[ind] = {
-        ...updatedEducations[ind],
-        [key]: value,
-      };
-      updateAndSaveEducation(updatedEducations);
-    }
-  };
   return (
     <div className="w-full first-page  text-gray-900 flex flex-col justify-start space-y-4 items-start px-6">
       {/* Name and Title */}
@@ -175,7 +80,7 @@ const ResumeTemplate2 = () => {
             style={{ width: "fit-content" }}
             onSave={(value: string) => {
               if (value !== resume?.name) {
-                updateAndSaveName(value);
+                updateSaveHook.updateAndSaveName(value);
               }
             }}
           />
@@ -185,7 +90,7 @@ const ResumeTemplate2 = () => {
             value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
             onSave={(value: string) => {
               if (value !== resume?.jobTitle) {
-                updateAndSaveJobTitle(value);
+                updateSaveHook.updateAndSaveJobTitle(value);
               }
             }}
           />
@@ -204,7 +109,7 @@ const ResumeTemplate2 = () => {
               }
               onSave={(value: string) => {
                 if (value !== resume?.contact?.phone) {
-                  updateAndSaveBasicInfo({ phone: value });
+                  updateSaveHook.updateAndSaveBasicInfo({ phone: value });
                 }
               }}
             />
@@ -219,7 +124,7 @@ const ResumeTemplate2 = () => {
               }
               onSave={(value: string) => {
                 if (value !== resume?.contact?.email) {
-                  updateAndSaveBasicInfo({ email: value });
+                  updateSaveHook.updateAndSaveBasicInfo({ email: value });
                 }
               }}
             />
@@ -234,11 +139,10 @@ const ResumeTemplate2 = () => {
               }
               onSave={(value: string) => {
                 if (value !== resume.contact.linkedIn) {
-                  updateAndSaveBasicInfo({ linkedIn: value });
+                  updateSaveHook.updateAndSaveBasicInfo({ linkedIn: value });
                 }
               }}
             />
-            {/* </a> */}
           </li>
         </ul>
       </div>
@@ -247,12 +151,7 @@ const ResumeTemplate2 = () => {
         <h2 className="uppercase text-sm xs:text-sm md:text-lg pb-2 lg:text-lg font-bold">
           About Me
         </h2>
-        <Regenerate
-          handler={getSummary}
-          custom_style={
-            "absolute  bottom-3 xs:bottom-0 md:bottom-3 lg:bottom-3 right-2 mt-2"
-          }
-        >
+        <Toolbar regenrateSummary={getSummary}>
           <div className="text-sm xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
             <EditableField
               type="textarea"
@@ -263,34 +162,16 @@ const ResumeTemplate2 = () => {
                   streamedSummaryData
                 ) : (
                   <div className="text-center">
-                    <div role="status">
-                      <svg
-                        aria-hidden="true"
-                        className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-pink-600"
-                        viewBox="0 0 100 101"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                          fill="currentColor"
-                        />
-                        <path
-                          d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                          fill="currentFill"
-                        />
-                      </svg>
-                      <span className="sr-only">Loading...</span>
-                    </div>
+                    <div role="status">{Loader}</div>
                   </div>
                 )
               }
               onSave={(value: string) => {
-                updateAndSaveSummary(value);
+                updateSaveHook.updateAndSaveSummary(value);
               }}
             />
           </div>
-        </Regenerate>
+        </Toolbar>
       </div>
       {/* Skills  */}
       <div className=" w-full space-y-3">
@@ -303,20 +184,11 @@ const ResumeTemplate2 = () => {
         resume?.primarySkills.length > 0 &&
         !regenerating ? (
           <>
-            <ul
-              className="flex flex-row flex-wrap gap-1 text-sm xs:text-sm md:text-lg lg:text-lg"
-              onMouseEnter={() =>
-                !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
-              }
-              onMouseLeave={() =>
-                !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
-              }
+            <Toolbar
+              addSkill={handleAddSkills}
+              regenerateSkills={getPrimarySkills}
             >
-              <Regenerate
-                handler={getPrimarySkills}
-                custom_style={"absolute right-0 bottom-0"}
-                custom_style_li={"flex flex-row  flex-wrap gap-1"}
-              >
+              <ul className="flex border-2 border-transparent hover:border-dashed hover:border-gray-500 flex-row flex-wrap gap-1 text-sm xs:text-sm md:text-lg lg:text-lg">
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
                     className=" px-4 py-2 bg-slate-100 border-transparent border-[1px] rounded-full hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
@@ -331,19 +203,11 @@ const ResumeTemplate2 = () => {
                     <EditableField
                       value={skill}
                       onSave={(value: string) => {
-                        if (value !== resume?.primarySkills[i]) {
-                          let updatedSkills = [...resume.primarySkills];
-                          updatedSkills.splice(i, 1, value);
-                          updateAndSaveSkill(updatedSkills);
-                        }
+                        handlers.handleUpdateSkill(value, i);
                       }}
                     />
                     <div
-                      onClick={() => {
-                        const removeSkill = [...resume.primarySkills];
-                        removeSkill.splice(i, 1);
-                        updateAndSaveSkill(removeSkill);
-                      }}
+                      onClick={() => handlers.handleDeleteSkill(i)}
                       className="w-4 h-4   cursor-pointer child"
                     >
                       {crossIcon1}
@@ -362,21 +226,13 @@ const ResumeTemplate2 = () => {
                         onChange={(e) => setPrimarySkill(e.target.value)}
                         onKeyPress={(e) => {
                           if (e.key === "Enter") {
-                            if (primarySkill.trim() !== "") {
-                              addPrimarySkill(primarySkill);
-                              setPrimarySkill("");
-                            }
+                            handleSaveSkills();
                           }
                         }}
                       />
                       <button
                         className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
-                        onClick={() => {
-                          if (primarySkill.trim() !== "") {
-                            addPrimarySkill(primarySkill);
-                            setPrimarySkill(""); // Empty the input field
-                          }
-                        }}
+                        onClick={handleSaveSkills}
                       >
                         save
                       </button>
@@ -384,7 +240,6 @@ const ResumeTemplate2 = () => {
                     <button
                       onClick={() => {
                         setNewPrimarySkill(false);
-                        setPrimarySkillAddButtonVisible(false);
                       }}
                       className="bg-red-500 py-1 px-2 text-white rounded-full"
                     >
@@ -394,41 +249,12 @@ const ResumeTemplate2 = () => {
                 ) : (
                   " "
                 )}
-                {primarySkillAddButtonVisible ? (
-                  <div
-                    className="border-2 w-2/12 xs:w-1/2 md:w-2/12 lg:w-2/12 h-10  border-gray-400 text-center uppercase text-gray-500 cursor-pointer items-center flex justify-center rounded-full hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                    onClick={() => {
-                      setNewPrimarySkill(true);
-                      setPrimarySkillAddButtonVisible(false);
-                    }}
-                  >
-                    + Add
-                  </div>
-                ) : null}
-              </Regenerate>
-            </ul>
+              </ul>
+            </Toolbar>
           </>
         ) : (
           <div className="text-center">
-            <div role="status">
-              <svg
-                aria-hidden="true"
-                className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-pink-600"
-                viewBox="0 0 100 101"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                  fill="currentFill"
-                />
-              </svg>
-              <span className="sr-only">Loading...</span>
-            </div>
+            <div role="status">{Loader}</div>
           </div>
         )}
       </div>
@@ -448,7 +274,7 @@ const ResumeTemplate2 = () => {
                   addAchivement={() => setNewWorkExperience(i)}
                   regenrateAchivements={() => handleRegenrate(rec, i)}
                   addNewLine={() => {
-                    handleAddSpace(i);
+                    handlers.handleAddSpace(i, newAchievement);
                     setNewAchievement("");
                   }}
                 >
@@ -459,8 +285,6 @@ const ResumeTemplate2 = () => {
                         ? ""
                         : "border-b border-gray-200"
                     } grid border-transparent border-2 grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
-                    onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
-                    onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                     onDragStart={(e) =>
                       e.dataTransfer.setData("text/plain", i.toString())
                     }
@@ -483,17 +307,10 @@ const ResumeTemplate2 = () => {
                           value={rec?.title}
                           style={{ width: "100%" }}
                           onSave={(value: string) => {
-                            handleSaveExperienceDetail({ title: value }, i);
-                            // if (
-                            //   value !== resume?.workExperienceArray[i].title
-                            // ) {
-                            //   let updatedExp = [...resume.workExperienceArray];
-                            //   updatedExp[i] = {
-                            //     ...updatedExp[i],
-                            //     title: value,
-                            //   };
-                            //   updateAndSaveWorkExperienceArray(updatedExp);
-                            // }
+                            handlers.handleSaveExperienceDetail(
+                              { title: value },
+                              i
+                            );
                           }}
                         />
                       </h2>
@@ -501,17 +318,10 @@ const ResumeTemplate2 = () => {
                         <EditableField
                           value={rec?.company}
                           onSave={(value: string) => {
-                            handleSaveExperienceDetail({ company: value }, i);
-                            // if (
-                            //   value !== resume?.workExperienceArray[i].company
-                            // ) {
-                            //   let updatedExp = [...resume.workExperienceArray];
-                            //   updatedExp[i] = {
-                            //     ...updatedExp[i],
-                            //     company: value,
-                            //   };
-                            //   updateAndSaveWorkExperienceArray(updatedExp);
-                            // }
+                            handlers.handleSaveExperienceDetail(
+                              { company: value },
+                              i
+                            );
                           }}
                         />
                       </span>{" "}
@@ -520,17 +330,10 @@ const ResumeTemplate2 = () => {
                         <EditableField
                           value={rec?.cityState}
                           onSave={(value: string) => {
-                            handleSaveExperienceDetail({ cityState: value }, i);
-                            // if (
-                            //   value !== resume?.workExperienceArray[i].cityState
-                            // ) {
-                            //   let updatedExp = [...resume.workExperienceArray];
-                            //   updatedExp[i] = {
-                            //     ...updatedExp[i],
-                            //     cityState: value,
-                            //   };
-                            //   updateAndSaveWorkExperienceArray(updatedExp);
-                            // }
+                            handlers.handleSaveExperienceDetail(
+                              { cityState: value },
+                              i
+                            );
                           }}
                         />
                       </span>{" "}
@@ -538,28 +341,14 @@ const ResumeTemplate2 = () => {
                         <EditableField
                           value={rec?.country}
                           onSave={(value: string) => {
-                            handleSaveExperienceDetail({ country: value }, i);
-
-                            // if (
-                            //   value !== resume?.workExperienceArray[i].country
-                            // ) {
-                            //   let updatedExp = [...resume.workExperienceArray];
-                            //   updatedExp[i] = {
-                            //     ...updatedExp[i],
-                            //     country: value,
-                            //   };
-                            //   updateAndSaveWorkExperienceArray(updatedExp);
-                            // }
+                            handlers.handleSaveExperienceDetail(
+                              { country: value },
+                              i
+                            );
                           }}
                         />
                       </span>
                       <div className="p-4">
-                        {/* <Regenerate
-                          handler={(i: number, rec: any) => {
-                            handleRegenrate(rec, i);
-                          }}
-                          custom_style={"absolute mt-0 right-0"}
-                        > */}
                         {rec?.achievements && i !== regeneratedRecordIndex ? (
                           <ul className="pl-0 flex flex-col gap-1 text-sm xs:text-sm md:text-lg lg:text-lg">
                             {rec?.achievements.map(
@@ -584,21 +373,7 @@ const ResumeTemplate2 = () => {
                                     <div
                                       className="group-hover:block hidden font-medium text-xs uppercase   text-gray-500 cursor-pointer"
                                       onClick={() => {
-                                        handleRemoveExtraSpace(i, ind);
-                                        // let updatedExp: any = [
-                                        //   ...resume.workExperienceArray,
-                                        // ];
-                                        // let updatedAchievements = [
-                                        //   ...updatedExp[i].achievements,
-                                        // ];
-                                        // updatedAchievements.splice(ind, 1);
-                                        // updatedExp[i] = {
-                                        //   ...updatedExp[i],
-                                        //   achievements: updatedAchievements,
-                                        // };
-                                        // updateAndSaveWorkExperienceArray(
-                                        //   updatedExp
-                                        // );
+                                        handlers.handleRemoveExtraSpace(i, ind);
                                       }}
                                     >
                                       Remove This Extra Space
@@ -626,12 +401,16 @@ const ResumeTemplate2 = () => {
                                       rows={2}
                                       value={achievement}
                                       onSave={(value: string) => {
-                                        handleUpdateAchivement(i, ind, value);
+                                        handlers.handleUpdateAchivement(
+                                          i,
+                                          ind,
+                                          value
+                                        );
                                       }}
                                     />
                                     <div
                                       onClick={() =>
-                                        handleDeleteAchivement(i, ind)
+                                        handlers.handleDeleteAchivement(i, ind)
                                       }
                                       className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
                                     >
@@ -649,29 +428,9 @@ const ResumeTemplate2 = () => {
                           ></div>
                         ) : (
                           <div className="text-center">
-                            <div role="status">
-                              <svg
-                                aria-hidden="true"
-                                className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-pink-600"
-                                viewBox="0 0 100 101"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                  fill="currentColor"
-                                />
-                                <path
-                                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                  fill="currentFill"
-                                />
-                              </svg>
-                              <span className="sr-only">Loading...</span>
-                            </div>
+                            <div role="status">{Loader}</div>
                           </div>
                         )}
-                        {/* </Regenerate> */}
-
                         {newWorkExperience === i ? (
                           <>
                             <div className="w-full gap-1 rounded-md flex flex-wrap h-9.5">
@@ -690,7 +449,10 @@ const ResumeTemplate2 = () => {
                                   if (e.key === "Enter") {
                                     e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
                                     // Save the new achievement to the state and possibly the database
-                                    handleAddAchivement(i);
+                                    handlers.handleAddAchivement(
+                                      i,
+                                      newAchievement
+                                    );
                                     setNewAchievement("");
                                   }
                                 }}
@@ -699,7 +461,11 @@ const ResumeTemplate2 = () => {
                                 className="bg-green-500 w-2/12 xs:w-full md:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
                                 onClick={() => {
                                   // Save the new achievement to the state and possibly the database
-                                  handleAddAchivement(i);
+                                  handlers.handleAddAchivement(
+                                    i,
+                                    newAchievement
+                                  );
+                                  setNewAchievement("");
                                 }}
                               >
                                 Save
@@ -709,7 +475,6 @@ const ResumeTemplate2 = () => {
                               onClick={() => {
                                 setNewAchievement("");
                                 setNewWorkExperience(-1);
-                                setWorkExperienceAddButtonVisible(-1);
                               }}
                               className="bg-red-500 w-2/12 xs:w-full md:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
                             >
@@ -717,26 +482,6 @@ const ResumeTemplate2 = () => {
                             </button>
                           </>
                         ) : null}
-                        {/* {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
-                          <>
-                            {" "}
-                            <div
-                              className="border-2 h-10 w-2/12 mb-2 mt-3 xs:w-full md:w-2/12 lg:2/12 xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                              onClick={() => {
-                                setNewWorkExperience(i);
-                              }}
-                            >
-                              + Add
-                            </div>
-                            <button
-                              className="border-2 h-10 w-auto px-3  mb-2 mt-3    xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                              onClick={() => handleAddSpace(i)}
-                            >
-                              Add Space
-                            </button>
-                          </>
-                        ) : null} */}
                       </div>
                     </div>
                   </div>
@@ -758,55 +503,29 @@ const ResumeTemplate2 = () => {
       </div>
       {/* Education */}
       <div className="w-full space-y-3">
-        {resume?.education && (
+        {resume?.education.lenghth > 0 && (
           <>
-            {/* <span className="w-full h-0 border-[1px] border-gray-500 my-3 page-break"></span> */}
             <h3 className="uppercase text-sm md:text-lg font-semibold flex flex-row gap-2 items-center">
               {educationIcon}
               Education
             </h3>
-            {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
-            <ul
-              className="grid grid-cols-3 xs:grid-cols-1 md:grid-cols-3 gap-2"
-              onMouseEnter={() =>
-                !newEducation && setEducationAddButtonVisible(true)
-              }
-              onMouseLeave={() =>
-                !newEducation && setEducationAddButtonVisible(false)
-              }
-            >
+            <ul className="grid grid-cols-3 xs:grid-cols-1 md:grid-cols-3 gap-2">
               {resume?.education.map((education: Education, ind: number) => (
                 <React.Fragment key={education?.id || ind}>
                   <div className="bg-gray-100 px-4 py-2">
-                    <li
-                      className=" hover:shadow-md hover:cursor-move border-transparent border-2 
-                  parent hover:border-dashed hover:border-gray-500 hover:border-2 
-                   hover:bg-gray-100 font-semibold flex uppercase text-sm xs:text-sm md:text-lg lg:text-lg  justify-between items-center "
-                    >
+                    <li className="hover:shadow-md hover:cursor-move border-transparent border-2 parent hover:border-dashed hover:border-gray-500 hover:border-2 hover:bg-gray-100 font-semibold flex uppercase text-sm xs:text-sm md:text-lg lg:text-lg  justify-between items-center ">
                       <EditableField
                         rows={2}
                         value={education?.educationLevel}
                         onSave={(value: string) => {
-                          handleSaveEductionDetail(
+                          handlers.handleSaveEductionDetail(
                             { educationLevel: value },
                             ind
                           );
-                          // if (value !== resume?.education[ind].educationLevel) {
-                          //   let updatedEducations = [...resume.education];
-                          //   updatedEducations[ind] = {
-                          //     ...updatedEducations[ind],
-                          //     educationLevel: value,
-                          //   };
-                          //   updateAndSaveEducation(updatedEducations);
-                          // }
                         }}
                       />
                       <div
-                        onClick={() => {
-                          let updatedEducations = [...resume?.education];
-                          updatedEducations.splice(ind, 1);
-                          updateAndSaveEducation(updatedEducations);
-                        }}
+                        onClick={() => handlers.handleDeleteEductionDetail(ind)}
                         className="w-4 h-4  cursor-pointer child"
                       >
                         {crossIcon1}
@@ -817,18 +536,10 @@ const ResumeTemplate2 = () => {
                         value={`${education?.fieldOfStudy}`}
                         style={{ width: "100%" }}
                         onSave={(value: string) => {
-                          handleSaveEductionDetail(
+                          handlers.handleSaveEductionDetail(
                             { fieldOfStudy: value },
                             ind
                           );
-                          // if (value !== resume?.education[ind].fieldOfStudy) {
-                          //   let updatedEducations = [...resume.education];
-                          //   updatedEducations[ind] = {
-                          //     ...updatedEducations[ind],
-                          //     fieldOfStudy: value,
-                          //   };
-                          //   updateAndSaveEducation(updatedEducations);
-                          // }
                         }}
                       />{" "}
                     </li>
@@ -837,16 +548,10 @@ const ResumeTemplate2 = () => {
                         rows={2}
                         value={`${education?.schoolName}`}
                         onSave={(value: string) => {
-                          handleSaveEductionDetail({ schoolName: value }, ind);
-
-                          // if (value !== resume?.education[ind].schoolName) {
-                          //   let updatedEducations = [...resume.education];
-                          //   updatedEducations[ind] = {
-                          //     ...updatedEducations[ind],
-                          //     schoolName: value,
-                          //   };
-                          //   updateAndSaveEducation(updatedEducations);
-                          // }
+                          handlers.handleSaveEductionDetail(
+                            { schoolName: value },
+                            ind
+                          );
                         }}
                       />
                     </li>
@@ -867,6 +572,3 @@ const ResumeTemplate2 = () => {
   );
 };
 export default memo(ResumeTemplate2);
-function addPrimary(): any {
-  throw new Error("Function not implemented.");
-}

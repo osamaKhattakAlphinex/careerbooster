@@ -1,3 +1,7 @@
 {
-  "cSpell.words": ["discoverability"]
+  "cSpell.words": [
+    "discoverability"
+  ],
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true
 }

@@ -75,23 +75,27 @@ const useUpdateAndSave = () => {
       education: updatedEducations,
     });
   };
+
   const updateAndSaveJobTitle = (value: any) => {
     dispatch(setField({ name: "jobTitle", value: value }));
     saveResumeToDB({ ...resume, jobTitle: value });
   };
+
   const updateAndSaveName = (value: any) => {
     dispatch(setField({ name: "name", value: value }));
     saveResumeToDB({ ...resume, name: value });
   };
 
   return {
-    updateAndSaveJobTitle,
-    updateAndSaveName,
-    updateAndSaveSkill,
-    updateAndSaveSummary,
-    updateAndSaveWorkExperienceArray,
-    updateAndSaveBasicInfo,
-    updateAndSaveEducation,
+    updateSaveHook: {
+      updateAndSaveSkill,
+      updateAndSaveJobTitle,
+      updateAndSaveName,
+      updateAndSaveSummary,
+      updateAndSaveWorkExperienceArray,
+      updateAndSaveBasicInfo,
+      updateAndSaveEducation,
+    }
   };
 };
 

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const useHandler = () => {
   const resume = useSelector((state: any) => state.resume);
 
-  const { updateAndSaveWorkExperienceArray, updateAndSaveEducation } =
+  const { updateSaveHook } =
     useUpdateAndSave();
 
   // add the space
@@ -17,8 +17,7 @@ const useHandler = () => {
       ...updatedExp[i],
       achievements: updatedAchievements,
     };
-    updateAndSaveWorkExperienceArray(updatedExp);
-    // setNewAchievement("");
+    updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
   };
 
   // handle Add achivements
@@ -31,8 +30,7 @@ const useHandler = () => {
         ...updatedExp[i],
         achievements: updatedAchievements,
       };
-      updateAndSaveWorkExperienceArray(updatedExp);
-      //   setNewAchievement("");
+      updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
     }
   };
 
@@ -44,7 +42,7 @@ const useHandler = () => {
       ...updatedExp[expInd],
       achievements: updatedAchievements,
     };
-    updateAndSaveWorkExperienceArray(updatedExp);
+    updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
   };
 
   const handleUpdateAchivement = (
@@ -62,7 +60,7 @@ const useHandler = () => {
         ...updatedExp[expInd],
         achievements: updatedAchievements,
       };
-      updateAndSaveWorkExperienceArray(updatedExp);
+      updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
     }
   };
 
@@ -74,7 +72,7 @@ const useHandler = () => {
       ...updatedExp[expInd],
       achievements: updatedAchievements,
     };
-    updateAndSaveWorkExperienceArray(updatedExp);
+    updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
   };
 
   const handleSaveExperienceDetail = (obj: {}, expInd: number) => {
@@ -85,7 +83,7 @@ const useHandler = () => {
         ...updatedExp[expInd],
         [key]: value,
       };
-      updateAndSaveWorkExperienceArray(updatedExp);
+      updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
     }
   };
 
@@ -97,18 +95,42 @@ const useHandler = () => {
         ...updatedEducations[ind],
         [key]: value,
       };
-      updateAndSaveEducation(updatedEducations);
+      updateSaveHook.updateAndSaveEducation(updatedEducations);
     }
   };
 
+  const handleDeleteEductionDetail = (ind: number) => {
+    let updatedEducations = [...resume?.education];
+    updatedEducations.splice(ind, 1);
+    updateSaveHook.updateAndSaveEducation(updatedEducations);
+  }
+
+  const handleDeleteSkill = (i: number) => {
+    const removeSkill = [...resume.primarySkills];
+    removeSkill.splice(i, 1);
+    updateSaveHook.updateAndSaveSkill(removeSkill);
+  }
+
+  const handleUpdateSkill = (value: string, i: number) => {
+    if (value !== resume?.primarySkills[i]) {
+      let updatedSkills = [...resume.primarySkills];
+      updatedSkills.splice(i, 1, value);
+      updateSaveHook.updateAndSaveSkill(updatedSkills);
+    }
+  }
   return {
-    handleAddAchivement,
-    handleAddSpace,
-    handleRemoveExtraSpace,
-    handleUpdateAchivement,
-    handleSaveEductionDetail,
-    handleDeleteAchivement,
-    handleSaveExperienceDetail,
+    handlers: {
+      handleDeleteSkill,
+      handleUpdateSkill,
+      handleAddAchivement,
+      handleAddSpace,
+      handleRemoveExtraSpace,
+      handleUpdateAchivement,
+      handleDeleteAchivement,
+      handleSaveExperienceDetail,
+      handleSaveEductionDetail,
+      handleDeleteEductionDetail
+    }
   };
 };
 

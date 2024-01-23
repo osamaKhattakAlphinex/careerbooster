@@ -15,12 +15,13 @@ import {
   sparkleIcon,
 } from "@/helpers/iconsProvider";
 import useGetSummary from "@/hooks/useGetSummary";
-import Regenerate from "@/helpers/regenerate";
+import Toolbar from "@/components/new-dashboard/common/Toolbar";
 import EditableField from "@/components/new-dashboard/common/EditableField";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
+import useHandler from "@/hooks/useHandler";
 const ResumeTemplate19 = ({
   streamedJDData,
   saveResumeToDB,
@@ -64,16 +65,21 @@ const ResumeTemplate19 = ({
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
-  const {
-    updateAndSaveSkill,
-    updateAndSaveSummary,
-    updateAndSaveWorkExperienceArray,
-    updateAndSaveBasicInfo,
-    updateAndSaveEducation,
-    updateAndSaveName,
-    updateAndSaveJobTitle,
-  } = useUpdateAndSave();
+  const { updateSaveHook } = useUpdateAndSave();
+  const { handlers } = useHandler();
 
+  //add Skills
+  const handleAddSkills = () => {
+    setNewPrimarySkill(true);
+  };
+
+  //save skills
+  const handleSaveSkills = () => {
+    if (primarySkill.trim() !== "") {
+      addPrimarySkill(primarySkill);
+      setPrimarySkill("");
+    }
+  };
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="flex w-full justify-center items-center py-7 xs:py-2 md:py-7">
@@ -84,7 +90,7 @@ const ResumeTemplate19 = ({
               style={{ width: "fit-content" }}
               onSave={(value: string) => {
                 if (value !== resume?.name) {
-                  updateAndSaveName(value);
+                  updateSaveHook.updateAndSaveName(value);
                 }
               }}
             />
@@ -121,7 +127,7 @@ const ResumeTemplate19 = ({
                 }
                 onSave={(value: string) => {
                   if (value !== resume?.contact?.phone) {
-                    updateAndSaveBasicInfo({ phone: value });
+                    updateSaveHook.updateAndSaveBasicInfo({ phone: value });
                   }
                 }}
               />
@@ -137,7 +143,7 @@ const ResumeTemplate19 = ({
                 }
                 onSave={(value: string) => {
                   if (value !== resume?.contact?.email) {
-                    updateAndSaveBasicInfo({ email: value });
+                    updateSaveHook.updateAndSaveBasicInfo({ email: value });
                   }
                 }}
               />
@@ -183,7 +189,7 @@ const ResumeTemplate19 = ({
                 }
                 onSave={(value: string) => {
                   if (value !== resume.contact.linkedIn) {
-                    updateAndSaveBasicInfo({ linkedIn: value });
+                    updateSaveHook.updateAndSaveBasicInfo({ linkedIn: value });
                   }
                 }}
               />
@@ -202,21 +208,21 @@ const ResumeTemplate19 = ({
               {resume?.primarySkills &&
               resume?.primarySkills.length > 0 &&
               !regenerating ? (
-                <ul
-                  className="pl-0 flex  px-0 xs:px-0 md:px-0  flex-col gap-1 mb-4 text-gray-800 w-full text-sm"
-                  onMouseEnter={() =>
-                    !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
-                  }
-                  onMouseLeave={() =>
-                    !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
-                  }
+                <Toolbar
+                  addSkill={handleAddSkills}
+                  regenerateSkills={getPrimarySkills}
                 >
-                  {/* <li className="font-semibold  uppercase">primary</li> */}
-                  <Regenerate
-                    handler={getPrimarySkills}
-                    custom_style={"absolute right-0 -bottom-10 "}
-                    custom_style_li={"flex flex-col gap-3"}
+                  <ul
+                    className="pl-0 flex  px-0 xs:px-0 md:px-0  flex-col gap-1 mb-4 text-gray-800 w-full text-sm"
+                    onMouseEnter={() =>
+                      !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
+                    }
+                    onMouseLeave={() =>
+                      !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
+                    }
                   >
+                    {/* <li className="font-semibold  uppercase">primary</li> */}
+
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
                         className="hover:shadow-md hover:cursor-move parent xs:w-12/12 hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center  "
@@ -233,19 +239,11 @@ const ResumeTemplate19 = ({
                           <EditableField
                             value={skill}
                             onSave={(value: string) => {
-                              if (value !== resume?.primarySkills[i]) {
-                                let updatedSkills = [...resume.primarySkills];
-                                updatedSkills.splice(i, 1, value);
-                                updateAndSaveSkill(updatedSkills);
-                              }
+                              handlers.handleUpdateSkill(value, i);
                             }}
                           />
                           <div
-                            onClick={() => {
-                              const removeSkill = [...resume.primarySkills];
-                              removeSkill.splice(i, 1);
-                              updateAndSaveSkill(removeSkill);
-                            }}
+                            onClick={() => handlers.handleDeleteSkill(i)}
                             className="w-4 h-4  cursor-pointer child"
                           >
                             {crossIcon1}
@@ -253,63 +251,63 @@ const ResumeTemplate19 = ({
                         </div>
                       </li>
                     ))}
-                  </Regenerate>
-                  {newPrimarySkill ? (
-                    <>
-                      <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
-                        <input
-                          type="text"
-                          value={primarySkill}
-                          placeholder="Please add Skill"
-                          className="bg-white outline-none rounded-2xl px-2 w-full"
-                          autoFocus
-                          onChange={(e) => setPrimarySkill(e.target.value)}
-                          onKeyPress={(e) => {
-                            if (e.key === "Enter") {
+                    {newPrimarySkill ? (
+                      <>
+                        <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
+                          <input
+                            type="text"
+                            value={primarySkill}
+                            placeholder="Please add Skill"
+                            className="bg-white outline-none rounded-2xl px-2 w-full"
+                            autoFocus
+                            onChange={(e) => setPrimarySkill(e.target.value)}
+                            onKeyPress={(e) => {
+                              if (e.key === "Enter") {
+                                if (primarySkill.trim() !== "") {
+                                  addPrimarySkill(primarySkill);
+                                  setPrimarySkill("");
+                                }
+                              }
+                            }}
+                          />
+                          <button
+                            className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
+                            onClick={() => {
                               if (primarySkill.trim() !== "") {
                                 addPrimarySkill(primarySkill);
-                                setPrimarySkill("");
+                                setPrimarySkill(""); // Empty the input field
                               }
-                            }
-                          }}
-                        />
+                            }}
+                          >
+                            save
+                          </button>
+                        </div>
                         <button
-                          className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
                           onClick={() => {
-                            if (primarySkill.trim() !== "") {
-                              addPrimarySkill(primarySkill);
-                              setPrimarySkill(""); // Empty the input field
-                            }
+                            setNewPrimarySkill(false);
+                            setPrimarySkillAddButtonVisible(false);
                           }}
+                          className="bg-red-500 py-1 px-2 text-white rounded-full"
                         >
-                          save
+                          Cancel
                         </button>
-                      </div>
-                      <button
+                      </>
+                    ) : (
+                      " "
+                    )}
+                    {primarySkillAddButtonVisible ? (
+                      <div
+                        className="border-2 w-1/2 xs:w-full justify-center xs:mt-10 flex md:w-1/2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                         onClick={() => {
-                          setNewPrimarySkill(false);
+                          setNewPrimarySkill(true);
                           setPrimarySkillAddButtonVisible(false);
                         }}
-                        className="bg-red-500 py-1 px-2 text-white rounded-full"
                       >
-                        Cancel
-                      </button>
-                    </>
-                  ) : (
-                    " "
-                  )}
-                  {primarySkillAddButtonVisible ? (
-                    <div
-                      className="border-2 w-1/2 xs:w-full justify-center xs:mt-10 flex md:w-1/2 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                      onClick={() => {
-                        setNewPrimarySkill(true);
-                        setPrimarySkillAddButtonVisible(false);
-                      }}
-                    >
-                      + Add
-                    </div>
-                  ) : null}
-                </ul>
+                        + Add
+                      </div>
+                    ) : null}
+                  </ul>
+                </Toolbar>
               ) : (
                 <div className="text-center">
                   <div role="status">
@@ -343,10 +341,7 @@ const ResumeTemplate19 = ({
           </h2>
           <span className="border-stylee w-full h-0  my-2"></span>
 
-          <Regenerate
-            handler={getSummary}
-            custom_style={"absolute bottom-3 right-2 "}
-          >
+          <Toolbar regenrateSummary={getSummary}>
             <div className="text-sm hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
               <EditableField
                 type="textarea"
@@ -380,11 +375,11 @@ const ResumeTemplate19 = ({
                   )
                 }
                 onSave={(value: string) => {
-                  updateAndSaveSummary(value);
+                  updateSaveHook.updateAndSaveSummary(value);
                 }}
               />
             </div>
-          </Regenerate>
+          </Toolbar>
 
           {/* Work Experience */}
           <span className="border-stylee w-full h-0 my-3"></span>
@@ -420,16 +415,10 @@ const ResumeTemplate19 = ({
                           value={rec?.title}
                           style={{ width: "100%" }}
                           onSave={(value: string) => {
-                            if (
-                              value !== resume?.workExperienceArray[i].title
-                            ) {
-                              let updatedExp = [...resume.workExperienceArray];
-                              updatedExp[i] = {
-                                ...updatedExp[i],
-                                title: value,
-                              };
-                              updateAndSaveWorkExperienceArray(updatedExp);
-                            }
+                            handlers.handleSaveExperienceDetail(
+                              { title: value },
+                              i
+                            );
                           }}
                         />
                       </span>
@@ -443,18 +432,10 @@ const ResumeTemplate19 = ({
                           <EditableField
                             value={rec?.company}
                             onSave={(value: string) => {
-                              if (
-                                value !== resume?.workExperienceArray[i].company
-                              ) {
-                                let updatedExp = [
-                                  ...resume.workExperienceArray,
-                                ];
-                                updatedExp[i] = {
-                                  ...updatedExp[i],
-                                  company: value,
-                                };
-                                updateAndSaveWorkExperienceArray(updatedExp);
-                              }
+                              handlers.handleSaveExperienceDetail(
+                                { company: value },
+                                i
+                              );
                             }}
                           />
                         </span>{" "}
@@ -463,19 +444,10 @@ const ResumeTemplate19 = ({
                           <EditableField
                             value={rec?.cityState}
                             onSave={(value: string) => {
-                              if (
-                                value !==
-                                resume?.workExperienceArray[i].cityState
-                              ) {
-                                let updatedExp = [
-                                  ...resume.workExperienceArray,
-                                ];
-                                updatedExp[i] = {
-                                  ...updatedExp[i],
-                                  cityState: value,
-                                };
-                                updateAndSaveWorkExperienceArray(updatedExp);
-                              }
+                              handlers.handleSaveExperienceDetail(
+                                { cityState: value },
+                                i
+                              );
                             }}
                           />
                         </span>{" "}
@@ -483,18 +455,10 @@ const ResumeTemplate19 = ({
                           <EditableField
                             value={rec?.country}
                             onSave={(value: string) => {
-                              if (
-                                value !== resume?.workExperienceArray[i].country
-                              ) {
-                                let updatedExp = [
-                                  ...resume.workExperienceArray,
-                                ];
-                                updatedExp[i] = {
-                                  ...updatedExp[i],
-                                  country: value,
-                                };
-                                updateAndSaveWorkExperienceArray(updatedExp);
-                              }
+                              handlers.handleSaveExperienceDetail(
+                                { country: value },
+                                i
+                              );
                             }}
                           />
                         </span>
@@ -516,7 +480,7 @@ const ResumeTemplate19 = ({
             ></div>
           )}
           {/* education */}
-          {resume?.education && (
+          {resume?.education.length > 0 && (
             <>
               <span className="w-full h-0 my-2 page-break"></span>
               <h3 className="uppercase px-0 xs:px-3 md:px-0 text-lg xs:text-[14px] md:text-lg font-semibold w-full   pb-2 text-gray-900  py-1 rounded-sm flex items-center  flex-row gap-2 ">
@@ -548,24 +512,16 @@ const ResumeTemplate19 = ({
                             rows={2}
                             value={education?.educationLevel}
                             onSave={(value: string) => {
-                              if (
-                                value !== resume?.education[ind].educationLevel
-                              ) {
-                                let updatedEducations = [...resume.education];
-                                updatedEducations[ind] = {
-                                  ...updatedEducations[ind],
-                                  educationLevel: value,
-                                };
-                                updateAndSaveEducation(updatedEducations);
-                              }
+                              handlers.handleSaveEductionDetail(
+                                { educationLevel: value },
+                                ind
+                              );
                             }}
                           />
                           <div
-                            onClick={() => {
-                              let updatedEducations = [...resume?.education];
-                              updatedEducations.splice(ind, 1);
-                              updateAndSaveEducation(updatedEducations);
-                            }}
+                            onClick={() =>
+                              handlers.handleDeleteEductionDetail(ind)
+                            }
                             className="w-4 h-4  cursor-pointer child"
                           >
                             {crossIcon1}
@@ -577,14 +533,10 @@ const ResumeTemplate19 = ({
                           value={`${education?.fieldOfStudy}`}
                           style={{ width: "100%" }}
                           onSave={(value: string) => {
-                            if (value !== resume?.education[ind].fieldOfStudy) {
-                              let updatedEducations = [...resume.education];
-                              updatedEducations[ind] = {
-                                ...updatedEducations[ind],
-                                fieldOfStudy: value,
-                              };
-                              updateAndSaveEducation(updatedEducations);
-                            }
+                            handlers.handleSaveEductionDetail(
+                              { fieldOfStudy: value },
+                              ind
+                            );
                           }}
                         />{" "}
                       </li>
@@ -594,14 +546,10 @@ const ResumeTemplate19 = ({
                           rows={2}
                           value={`${education?.schoolName}`}
                           onSave={(value: string) => {
-                            if (value !== resume?.education[ind].schoolName) {
-                              let updatedEducations = [...resume.education];
-                              updatedEducations[ind] = {
-                                ...updatedEducations[ind],
-                                schoolName: value,
-                              };
-                              updateAndSaveEducation(updatedEducations);
-                            }
+                            handlers.handleSaveEductionDetail(
+                              { schoolName: value },
+                              ind
+                            );
                           }}
                         />
                       </li>
@@ -623,6 +571,3 @@ const ResumeTemplate19 = ({
   );
 };
 export default memo(ResumeTemplate19);
-function addPrimary(): any {
-  throw new Error("Function not implemented.");
-}

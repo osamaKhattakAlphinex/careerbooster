@@ -14,13 +14,14 @@ import {
   sparkleIcon,
 } from "@/helpers/iconsProvider";
 import useGetSummary from "@/hooks/useGetSummary";
-import Regenerate from "@/helpers/regenerate";
+import Toolbar from "@/components/new-dashboard/common/Toolbar";
 import EditableField from "@/components/new-dashboard/common/EditableField";
 import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
+import useHandler from "@/hooks/useHandler";
 const ResumeTemplate11 = () => {
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
@@ -53,21 +54,33 @@ const ResumeTemplate11 = () => {
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
-  const {
-    updateAndSaveSkill,
-    updateAndSaveSummary,
-    updateAndSaveWorkExperienceArray,
-    updateAndSaveBasicInfo,
-    updateAndSaveEducation,
-    updateAndSaveName,
-    updateAndSaveJobTitle,
-  } = useUpdateAndSave();
+  const { updateSaveHook } = useUpdateAndSave();
+  const { handlers } = useHandler();
 
   useEffect(() => {
     if (streamedJDData === "") {
       setRegeneratedRecordIndex(null);
     }
   }, [streamedJDData]);
+
+  // handle regenrate
+  const handleRegenrate = (rec: any, i: number) => {
+    getOneWorkExperienceNew(rec);
+    setRegeneratedRecordIndex(i);
+  };
+
+  //add Skills
+  const handleAddSkills = () => {
+    setNewPrimarySkill(true);
+  };
+
+  //save skills
+  const handleSaveSkills = () => {
+    if (primarySkill.trim() !== "") {
+      addPrimarySkill(primarySkill);
+      setPrimarySkill("");
+    }
+  };
 
   return (
     <div className="first-page relative">
@@ -79,7 +92,7 @@ const ResumeTemplate11 = () => {
               style={{ width: "fit-content" }}
               onSave={(value: string) => {
                 if (value !== resume?.name) {
-                  updateAndSaveName(value);
+                  updateSaveHook.updateAndSaveName(value);
                 }
               }}
             />
@@ -89,7 +102,7 @@ const ResumeTemplate11 = () => {
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
                 if (value !== resume?.jobTitle) {
-                  updateAndSaveJobTitle(value);
+                  updateSaveHook.updateAndSaveJobTitle(value);
                 }
               }}
             />
@@ -122,7 +135,7 @@ const ResumeTemplate11 = () => {
                 }
                 onSave={(value: string) => {
                   if (value !== resume?.contact?.phone) {
-                    updateAndSaveBasicInfo({ phone: value });
+                    updateSaveHook.updateAndSaveBasicInfo({ phone: value });
                   }
                 }}
               />
@@ -141,7 +154,7 @@ const ResumeTemplate11 = () => {
                 }
                 onSave={(value: string) => {
                   if (value !== resume?.contact?.email) {
-                    updateAndSaveBasicInfo({ email: value });
+                    updateSaveHook.updateAndSaveBasicInfo({ email: value });
                   }
                 }}
               />
@@ -170,7 +183,7 @@ const ResumeTemplate11 = () => {
                 }
                 onSave={(value: string) => {
                   if (value !== resume.contact.linkedIn) {
-                    updateAndSaveBasicInfo({ linkedIn: value });
+                    updateSaveHook.updateAndSaveBasicInfo({ linkedIn: value });
                   }
                 }}
               />
@@ -189,21 +202,20 @@ const ResumeTemplate11 = () => {
                 <span className="border border-[#F4D644] w-[110%] mt-2"></span>
               </div>
               {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
-                <ul
-                  className="pl-0 flex  flex-col gap-4 mb-4 text-sm"
-                  onMouseEnter={() =>
-                    !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
-                  }
-                  onMouseLeave={() =>
-                    !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
-                  }
+              resume?.primarySkills.length > 0 &&
+              !regenerating ? (
+                <Toolbar
+                  addSkill={handleAddSkills}
+                  regenerateSkills={getPrimarySkills}
                 >
-                  <Regenerate
-                    handler={getPrimarySkills}
-                    custom_style={"absolute right-0 -bottom-10 "}
-                    custom_style_li={"flex flex-col gap-4"}
+                  <ul
+                    className="pl-0 flex  flex-col gap-4 mb-4 text-sm"
+                    onMouseEnter={() =>
+                      !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
+                    }
+                    onMouseLeave={() =>
+                      !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
+                    }
                   >
                     {" "}
                     {resume?.primarySkills.map((skill: string, i: number) => (
@@ -220,83 +232,74 @@ const ResumeTemplate11 = () => {
                         <EditableField
                           value={skill}
                           onSave={(value: string) => {
-                            if (value !== resume?.primarySkills[i]) {
-                              let updatedSkills = [...resume.primarySkills];
-                              updatedSkills.splice(i, 1, value);
-                              updateAndSaveSkill(updatedSkills);
-                            }
+                            handlers.handleUpdateSkill(value, i);
                           }}
                         />
                         <div
-                          onClick={() => {
-                            const removeSkill = [...resume.primarySkills];
-                            removeSkill.splice(i, 1);
-                            updateAndSaveSkill(removeSkill);
-                          }}
+                          onClick={() => handlers.handleDeleteSkill(i)}
                           className="w-4 h-4  cursor-pointer child"
                         >
                           {crossIcon1}
                         </div>
                       </li>
                     ))}
-                  </Regenerate>
-
-                  {newPrimarySkill ? (
-                    <>
-                      <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
-                        <input
-                          type="text"
-                          value={primarySkill}
-                          placeholder="Please add Skill"
-                          className="bg-white outline-none rounded-2xl px-2 w-full"
-                          autoFocus
-                          onChange={(e) => setPrimarySkill(e.target.value)}
-                          onKeyPress={(e) => {
-                            if (e.key === "Enter") {
+                    {newPrimarySkill ? (
+                      <>
+                        <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
+                          <input
+                            type="text"
+                            value={primarySkill}
+                            placeholder="Please add Skill"
+                            className="bg-white outline-none rounded-2xl px-2 w-full"
+                            autoFocus
+                            onChange={(e) => setPrimarySkill(e.target.value)}
+                            onKeyPress={(e) => {
+                              if (e.key === "Enter") {
+                                if (primarySkill.trim() !== "") {
+                                  addPrimarySkill(primarySkill);
+                                  setPrimarySkill("");
+                                }
+                              }
+                            }}
+                          />
+                          <button
+                            className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
+                            onClick={() => {
                               if (primarySkill.trim() !== "") {
                                 addPrimarySkill(primarySkill);
-                                setPrimarySkill("");
+                                setPrimarySkill(""); // Empty the input field
                               }
-                            }
-                          }}
-                        />
+                            }}
+                          >
+                            save
+                          </button>
+                        </div>
                         <button
-                          className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
                           onClick={() => {
-                            if (primarySkill.trim() !== "") {
-                              addPrimarySkill(primarySkill);
-                              setPrimarySkill(""); // Empty the input field
-                            }
+                            setNewPrimarySkill(false);
+                            setPrimarySkillAddButtonVisible(false);
                           }}
+                          className="bg-red-500 py-1 px-2 text-white rounded-full"
                         >
-                          save
+                          Cancel
                         </button>
-                      </div>
-                      <button
+                      </>
+                    ) : (
+                      " "
+                    )}
+                    {primarySkillAddButtonVisible ? (
+                      <div
+                        className="border-2 w-1/2 xs:w-full mt-0 md:w-1/2 lg:w-1/2 md:mt-0  xs:mt-7  border-gray-400 text-center uppercase text-gray-400 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                         onClick={() => {
-                          setNewPrimarySkill(false);
+                          setNewPrimarySkill(true);
                           setPrimarySkillAddButtonVisible(false);
                         }}
-                        className="bg-red-500 py-1 px-2 text-white rounded-full"
                       >
-                        Cancel
-                      </button>
-                    </>
-                  ) : (
-                    " "
-                  )}
-                  {primarySkillAddButtonVisible ? (
-                    <div
-                      className="border-2 w-1/2 xs:w-full mt-0 md:w-1/2 lg:w-1/2 md:mt-0  xs:mt-7  border-gray-400 text-center uppercase text-gray-400 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                      onClick={() => {
-                        setNewPrimarySkill(true);
-                        setPrimarySkillAddButtonVisible(false);
-                      }}
-                    >
-                      + Add
-                    </div>
-                  ) : null}
-                </ul>
+                        + Add
+                      </div>
+                    ) : null}
+                  </ul>
+                </Toolbar>
               ) : (
                 <div className="text-center">
                   <div role="status">
@@ -332,10 +335,7 @@ const ResumeTemplate11 = () => {
             <span className="border border-[#F4D644]  mt-2"></span>
           </div>
 
-          <Regenerate
-            handler={getSummary}
-            custom_style={"absolute bottom-3 right-2  "}
-          >
+          <Toolbar regenrateSummary={getSummary}>
             <div className="text-sm  hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
               <EditableField
                 type="textarea"
@@ -369,11 +369,11 @@ const ResumeTemplate11 = () => {
                   )
                 }
                 onSave={(value: string) => {
-                  updateAndSaveSummary(value);
+                  updateSaveHook.updateAndSaveSummary(value);
                 }}
               />
             </div>
-          </Regenerate>
+          </Toolbar>
 
           {/* Work Experience */}
           <div className="flex flex-col my-6 w-full">
@@ -384,100 +384,103 @@ const ResumeTemplate11 = () => {
           </div>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
-                  <div
+                  <Toolbar
                     key={i}
-                    className={`flex justify-start items-start ${i > 0
-                        ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
-                        : "xs:min-h-fit min-h-[500px]"
-                      }`}
+                    addAchivement={() => setNewWorkExperience(i)}
+                    regenrateAchivements={() => handleRegenrate(rec, i)}
+                    addNewLine={() => {
+                      handlers.handleAddSpace(i, newAchievement);
+                      setNewAchievement("");
+                    }}
                   >
-                    <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
-                      <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
-                      {resume?.workExperienceArray.length - 1 !== i && (
-                        <div className="h-full w-[2px] bg-gray-500"></div>
-                      )}
-                    </div>
                     <div
                       key={i}
-                      className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2"
-                      onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
-                      onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
-                      onDragStart={(e) =>
-                        e.dataTransfer.setData("text/plain", i.toString())
-                      }
-                      onDragOver={(e) => e.preventDefault()}
-                      onDrop={(e) => handleDropExperience(e, i)}
-                      draggable
+                      className={`flex justify-start items-start ${
+                        i > 0
+                          ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
+                          : "xs:min-h-fit min-h-[500px]"
+                      }`}
                     >
-                      <h2 className="hover:shadow-md hover:cursor-text text-[1rem] font-bold leading-8 hover:bg-gray-100">
-                        <EditableField
-                          value={rec?.title}
-                          style={{ width: "100%" }}
-                          onSave={(value: string) => {
-                            if (value !== resume?.workExperienceArray[i].title) {
-                              let updatedExp = [...resume.workExperienceArray];
-                              updatedExp[i] = { ...updatedExp[i], title: value };
-                              updateAndSaveWorkExperienceArray(updatedExp)
-                            }
-                          }}
-                        />
-                      </h2>
-                      <h2 className="hover:cursor-default text-[15px] leading-relaxed  ">
-                        {rec?.fromMonth + " " + rec?.fromYear} -{" "}
-                        {rec?.isContinue
-                          ? "Present"
-                          : `${rec?.toMonth} ${rec?.toYear}`}{" "}
-                        |{" "}
-                        <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
+                      <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
+                        <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
+                        {resume?.workExperienceArray.length - 1 !== i && (
+                          <div className="h-full w-[2px] bg-gray-500"></div>
+                        )}
+                      </div>
+                      <div
+                        key={i}
+                        className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2"
+                        onMouseEnter={() =>
+                          setWorkExperienceAddButtonVisible(i)
+                        }
+                        onMouseLeave={() =>
+                          setWorkExperienceAddButtonVisible(-1)
+                        }
+                        onDragStart={(e) =>
+                          e.dataTransfer.setData("text/plain", i.toString())
+                        }
+                        onDragOver={(e) => e.preventDefault()}
+                        onDrop={(e) => handleDropExperience(e, i)}
+                        draggable
+                      >
+                        <h2 className="hover:shadow-md hover:cursor-text text-[1rem] font-bold leading-8 hover:bg-gray-100">
                           <EditableField
-                            value={rec?.company}
+                            value={rec?.title}
+                            style={{ width: "100%" }}
                             onSave={(value: string) => {
-                              if (value !== resume?.workExperienceArray[i].company) {
-                                let updatedExp = [...resume.workExperienceArray];
-                                updatedExp[i] = { ...updatedExp[i], company: value };
-                                updateAndSaveWorkExperienceArray(updatedExp)
-                              }
+                              handlers.handleSaveExperienceDetail(
+                                { title: value },
+                                i
+                              );
                             }}
                           />
-                        </span>{" "}
-                        |{" "}
-                        <span className="hover:shadow-md hover:bg-gray-100">
-                          <EditableField
-                            value={rec?.cityState}
-                            onSave={(value: string) => {
-                              if (value !== resume?.workExperienceArray[i].cityState) {
-                                let updatedExp = [...resume.workExperienceArray];
-                                updatedExp[i] = { ...updatedExp[i], cityState: value };
-                                updateAndSaveWorkExperienceArray(updatedExp)
-                              }
-                            }}
-                          />
-                        </span>{" "}
-                        <span className="hover:shadow-md hover:bg-gray-100">
-                          <EditableField
-                            value={rec?.country}
-                            onSave={(value: string) => {
-                              if (value !== resume?.workExperienceArray[i].country) {
-                                let updatedExp = [...resume.workExperienceArray];
-                                updatedExp[i] = { ...updatedExp[i], country: value };
-                                updateAndSaveWorkExperienceArray(updatedExp)
-                              }
-                            }}
-                          />
-                        </span>
-                      </h2>
-                      <div className="p-4">
-                        <Regenerate
-                          handler={() => {
-                            getOneWorkExperienceNew(rec);
-                            setRegeneratedRecordIndex(i);
-                          }}
-                          custom_style={"absolute mt-0 right-2"}
-                        >
+                        </h2>
+                        <h2 className="hover:cursor-default text-[15px] leading-relaxed  ">
+                          {rec?.fromMonth + " " + rec?.fromYear} -{" "}
+                          {rec?.isContinue
+                            ? "Present"
+                            : `${rec?.toMonth} ${rec?.toYear}`}{" "}
+                          |{" "}
+                          <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
+                            <EditableField
+                              value={rec?.company}
+                              onSave={(value: string) => {
+                                handlers.handleSaveExperienceDetail(
+                                  { company: value },
+                                  i
+                                );
+                              }}
+                            />
+                          </span>{" "}
+                          |{" "}
+                          <span className="hover:shadow-md hover:bg-gray-100">
+                            <EditableField
+                              value={rec?.cityState}
+                              onSave={(value: string) => {
+                                handlers.handleSaveExperienceDetail(
+                                  { cityState: value },
+                                  i
+                                );
+                              }}
+                            />
+                          </span>{" "}
+                          <span className="hover:shadow-md hover:bg-gray-100">
+                            <EditableField
+                              value={rec?.country}
+                              onSave={(value: string) => {
+                                handlers.handleSaveExperienceDetail(
+                                  { country: value },
+                                  i
+                                );
+                              }}
+                            />
+                          </span>
+                        </h2>
+                        <div className="p-4">
                           {rec?.achievements && i !== regeneratedRecordIndex ? (
                             <ul className="pl-0 flex flex-col gap-1 text-sm">
                               {rec?.achievements.map(
@@ -502,11 +505,10 @@ const ResumeTemplate11 = () => {
                                       <div
                                         className="group-hover:block hidden font-medium text-xs uppercase   text-gray-500 cursor-pointer"
                                         onClick={() => {
-                                          let updatedExp: any = [...resume.workExperienceArray];
-                                          let updatedAchievements = [...updatedExp[i].achievements];
-                                          updatedAchievements.splice(ind, 1)
-                                          updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
-                                          updateAndSaveWorkExperienceArray(updatedExp)
+                                          handlers.handleRemoveExtraSpace(
+                                            i,
+                                            ind
+                                          );
                                         }}
                                       >
                                         Remove This Extra Space
@@ -534,23 +536,20 @@ const ResumeTemplate11 = () => {
                                         rows={2}
                                         value={achievement}
                                         onSave={(value: string) => {
-                                          if (value !== resume?.workExperienceArray[i]?.achievements[ind]) {
-                                            let updatedExp: any = [...resume.workExperienceArray];
-                                            let updatedAchievements = [...updatedExp[i].achievements];
-                                            updatedAchievements.splice(ind, 1, value)
-                                            updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
-                                            updateAndSaveWorkExperienceArray(updatedExp)
-                                          }
+                                          handlers.handleUpdateAchivement(
+                                            i,
+                                            ind,
+                                            value
+                                          );
                                         }}
                                       />
                                       <div
-                                        onClick={() => {
-                                          let updatedExp: any = [...resume.workExperienceArray];
-                                          let updatedAchievements = [...updatedExp[i].achievements];
-                                          updatedAchievements.splice(ind, 1)
-                                          updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
-                                          updateAndSaveWorkExperienceArray(updatedExp)
-                                        }}
+                                        onClick={() =>
+                                          handlers.handleDeleteAchivement(
+                                            i,
+                                            ind
+                                          )
+                                        }
                                         className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
                                       >
                                         {crossIcon1}
@@ -588,94 +587,63 @@ const ResumeTemplate11 = () => {
                               </div>
                             </div>
                           )}
-                        </Regenerate>
-                        {newWorkExperience === i ? (
-                          <>
-                            <div className="w-full gap-1 rounded-md flex flex-wrap h-9.5">
-                              <textarea
-                                className="w-9/12 xs:w-full md:w-9/12 lg:w-9/12 rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
-                                onChange={(e) =>
-                                  setNewAchievement(e.target.value)
-                                }
-                                value={newAchievement}
-                                rows={1}
-                                cols={1}
-                                name="newAchievement"
-                                id="newAchievement"
-                                autoComplete="off"
-                                onKeyDown={(e) => {
-                                  if (e.key === "Enter") {
-                                    e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
-                                    // Save the new achievement to the state and possibly the database
-                                    if (newAchievement !== "") {
-                                      let updatedExp: any = [...resume.workExperienceArray];
-                                      let updatedAchievements = [...updatedExp[i].achievements];
-                                      updatedAchievements.push(newAchievement)
-                                      updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
-                                      updateAndSaveWorkExperienceArray(updatedExp)
+
+                          {newWorkExperience === i ? (
+                            <>
+                              <div className="w-full gap-1 rounded-md flex flex-wrap h-9.5">
+                                <textarea
+                                  className="w-9/12 xs:w-full md:w-9/12 lg:w-9/12 rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
+                                  onChange={(e) =>
+                                    setNewAchievement(e.target.value)
+                                  }
+                                  value={newAchievement}
+                                  rows={1}
+                                  cols={1}
+                                  name="newAchievement"
+                                  id="newAchievement"
+                                  autoComplete="off"
+                                  onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                      e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
+                                      // Save the new achievement to the state and possibly the database
+                                      handlers.handleAddAchivement(
+                                        i,
+                                        newAchievement
+                                      );
                                       setNewAchievement("");
                                     }
-                                  }
-                                }}
-                              />
-                              <button
-                                className="bg-green-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
-                                onClick={() => {
-                                  // Save the new achievement to the state and possibly the database
-                                  if (newAchievement !== "") {
-                                    let updatedExp: any = [...resume.workExperienceArray];
-                                    let updatedAchievements = [...updatedExp[i].achievements];
-                                    updatedAchievements.push(newAchievement)
-                                    updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
-                                    updateAndSaveWorkExperienceArray(updatedExp)
+                                  }}
+                                />
+                                <button
+                                  className="bg-green-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
+                                  onClick={() => {
+                                    // Save the new achievement to the state and possibly the database
+                                    handlers.handleAddAchivement(
+                                      i,
+                                      newAchievement
+                                    );
                                     setNewAchievement("");
-                                  }
+                                  }}
+                                >
+                                  Save
+                                </button>
+                              </div>
+                              <button
+                                onClick={() => {
+                                  setNewAchievement("");
+                                  setNewWorkExperience(-1);
+                                  setWorkExperienceAddButtonVisible(-1);
                                 }}
+                                className="bg-red-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
                               >
-                                Save
+                                Cancel
                               </button>
-                            </div>
-                            <button
-                              onClick={() => {
-                                setNewAchievement("");
-                                setNewWorkExperience(-1);
-                                setWorkExperienceAddButtonVisible(-1);
-                              }}
-                              className="bg-red-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
-                            >
-                              Cancel
-                            </button>
-                          </>
-                        ) : null}
-                        {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
-                          <>
-                            <div
-                              className="border-2 w-2/12 xs:w-full mt-3 md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                              onClick={() => {
-                                setNewWorkExperience(i);
-                              }}
-                            >
-                              + Add
-                            </div>
-                            <button
-                              className="border-2 h-10 w-auto px-3  mb-2 mt-3    xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                              onClick={() => {
-                                let updatedExp: any = [...resume.workExperienceArray];
-                                let updatedAchievements = [...updatedExp[i].achievements];
-                                updatedAchievements.push(newAchievement)
-                                updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
-                                updateAndSaveWorkExperienceArray(updatedExp)
-                                setNewAchievement("");
-                              }}
-                            >
-                              Add Space
-                            </button>
-                          </>
-                        ) : null}
+                            </>
+                          ) : null}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Toolbar>
                 );
               })}
             </>
@@ -691,7 +659,7 @@ const ResumeTemplate11 = () => {
             ></div>
           )}
           {/* Education */}
-          {resume?.education && (
+          {resume?.education.length > 0 && (
             <div className="ml-[-200px] xs:ml-0">
               <div className="flex flex-col my-6">
                 <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center text-gray-950 ">
@@ -722,24 +690,16 @@ const ResumeTemplate11 = () => {
                           rows={2}
                           value={education?.educationLevel}
                           onSave={(value: string) => {
-                            if (
-                              value !== resume?.education[ind].educationLevel
-                            ) {
-                              let updatedEducations = [...resume.education];
-                              updatedEducations[ind] = {
-                                ...updatedEducations[ind],
-                                educationLevel: value,
-                              };
-                              updateAndSaveEducation(updatedEducations);
-                            }
+                            handlers.handleSaveEductionDetail(
+                              { educationLevel: value },
+                              ind
+                            );
                           }}
                         />
                         <div
-                          onClick={() => {
-                            let updatedEducations = [...resume?.education];
-                            updatedEducations.splice(ind, 1);
-                            updateAndSaveEducation(updatedEducations);
-                          }}
+                          onClick={() =>
+                            handlers.handleDeleteEductionDetail(ind)
+                          }
                           className="w-4 h-4  cursor-pointer child"
                         >
                           {crossIcon1}
@@ -750,14 +710,10 @@ const ResumeTemplate11 = () => {
                           value={`${education?.fieldOfStudy}`}
                           style={{ width: "100%" }}
                           onSave={(value: string) => {
-                            if (value !== resume?.education[ind].fieldOfStudy) {
-                              let updatedEducations = [...resume.education];
-                              updatedEducations[ind] = {
-                                ...updatedEducations[ind],
-                                fieldOfStudy: value,
-                              };
-                              updateAndSaveEducation(updatedEducations);
-                            }
+                            handlers.handleSaveEductionDetail(
+                              { fieldOfStudy: value },
+                              ind
+                            );
                           }}
                         />{" "}
                       </li>
@@ -767,14 +723,10 @@ const ResumeTemplate11 = () => {
                           rows={2}
                           value={`${education?.schoolName}`}
                           onSave={(value: string) => {
-                            if (value !== resume?.education[ind].schoolName) {
-                              let updatedEducations = [...resume.education];
-                              updatedEducations[ind] = {
-                                ...updatedEducations[ind],
-                                schoolName: value,
-                              };
-                              updateAndSaveEducation(updatedEducations);
-                            }
+                            handlers.handleSaveEductionDetail(
+                              { schoolName: value },
+                              ind
+                            );
                           }}
                         />
                       </li>
@@ -796,6 +748,3 @@ const ResumeTemplate11 = () => {
   );
 };
 export default memo(ResumeTemplate11);
-function addPrimary(): any {
-  throw new Error("Function not implemented.");
-}
