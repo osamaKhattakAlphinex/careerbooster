@@ -317,17 +317,6 @@ const ResumeTemplate12 = () => {
                     ) : (
                       " "
                     )}
-                    {primarySkillAddButtonVisible ? (
-                      <div
-                        className="border-2 w-1/2 xs:w-full md:w-1/2 xs:mt-10 md:mt-0 mt-0 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1 px-4 hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                        onClick={() => {
-                          setNewPrimarySkill(true);
-                          setPrimarySkillAddButtonVisible(false);
-                        }}
-                      >
-                        + Add
-                      </div>
-                    ) : null}
                   </ul>
                 </Toolbar>
               ) : (
