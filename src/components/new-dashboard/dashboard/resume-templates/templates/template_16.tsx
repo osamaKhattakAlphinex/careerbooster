@@ -153,7 +153,7 @@ const ResumeTemplate16 = () => {
                 className="text-blue-600"
               > */}
               <span className="w-[28px] h-[28px] xs:w-[20px] xs:p-[2px] group-hover:text-black md:px-0 group-hover:border-[#000]  xs:h-[20px] md:w-[28px] md:h-[28px]  flex items-center justify-center border-[1px] border-[#fff] rounded-full">
-                <span className="flex w-[28px] h-[28px] justify-center items-center text-gray-300 font-thin text-sm group-hover:text-[#000]">
+                <span className="flex w-[28px] h-[28px]  justify-center items-center text-[#fff]  text-sm group-hover:text-[#000]">
                   in
                 </span>
               </span>
