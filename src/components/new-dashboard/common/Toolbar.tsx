@@ -17,6 +17,7 @@ const Toolbar = ({
     <div className=" relative group">
       <div className="group-hover:flex hidden flex-row justify-center items-center rounded-md absolute right-0  -top-8 transition-opacity ease-in duration-300">
         <button
+          title="Add New Achievement"
           onClick={addAchivement}
           className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
         >
@@ -36,6 +37,7 @@ const Toolbar = ({
           </svg>
         </button>
         <button
+          title="Regenerate Achievement"
           onClick={regenrateAchivements}
           className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
         >
@@ -55,6 +57,7 @@ const Toolbar = ({
           </svg>
         </button>
         <button
+          title="Add Extra Space"
           onClick={addNewLine}
           className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
         >

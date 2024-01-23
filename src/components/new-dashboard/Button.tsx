@@ -6,8 +6,10 @@ const Button = ({
   bgColor,
   onClick,
   textColor,
+  className,
 }: {
   isActive?: Boolean;
+  className?: any;
   btnText: String;
   bgColor?: String;
   onClick?: any;
@@ -18,11 +20,11 @@ const Button = ({
   return (
     <div>
       <button
-        className={`border ${
+        className={`border-[1px] ${
           isActive
             ? `text-fuchsia-600 font-semibold `
-            : `dark:text-[#A3A3A3] text-gray-950`
-        } ${textColor}  ${buttonClasses} ${bgColor} rounded-full px-[28px] py-[9px] text-[14px] mr-[5px]`}
+            : `dark:text-[#A3A3A3] dark:hover:text-fuchsia-600 text-gray-950`
+        }  ${className}  ${buttonClasses} ${bgColor} rounded-full px-[28px] py-[9px] text-[14px] mr-[5px]`}
         onClick={onClick}
       >
         {btnText}
