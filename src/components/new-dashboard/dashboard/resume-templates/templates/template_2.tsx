@@ -21,6 +21,7 @@ import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
+import Toolbar from "@/components/new-dashboard/common/Toolbar";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
@@ -66,6 +67,69 @@ const ResumeTemplate2 = () => {
     }
   }, [streamedJDData]);
 
+  // handle regenrate
+  const handleRegenrate = (rec: any, i: number) => {
+    getOneWorkExperienceNew(rec);
+    setRegeneratedRecordIndex(i);
+  };
+
+  // add the space
+  const handleAddSpace = (i: number) => {
+    let updatedExp: any = [...resume.workExperienceArray];
+    let updatedAchievements = [...updatedExp[i].achievements];
+    updatedAchievements.push(newAchievement);
+    updatedExp[i] = {
+      ...updatedExp[i],
+      achievements: updatedAchievements,
+    };
+    updateAndSaveWorkExperienceArray(updatedExp);
+    setNewAchievement("");
+  };
+
+  // handle Add achivements
+  const handleAddAchivement = (i: number) => {
+    if (newAchievement !== "") {
+      let updatedExp: any = [...resume.workExperienceArray];
+      let updatedAchievements = [...updatedExp[i].achievements];
+      updatedAchievements.push(newAchievement);
+      updatedExp[i] = {
+        ...updatedExp[i],
+        achievements: updatedAchievements,
+      };
+      updateAndSaveWorkExperienceArray(updatedExp);
+      setNewAchievement("");
+    }
+  };
+
+  const handleDeleteAchivement = (expInd: number, achiveInd: number) => {
+    let updatedExp: any = [...resume.workExperienceArray];
+    let updatedAchievements = [...updatedExp[expInd].achievements];
+    updatedAchievements.splice(achiveInd, 1);
+    updatedExp[expInd] = {
+      ...updatedExp[expInd],
+      achievements: updatedAchievements,
+    };
+    updateAndSaveWorkExperienceArray(updatedExp);
+  };
+
+  const handleUpdateAchivement = (
+    expInd: number,
+    achiveInd: number,
+    value: string
+  ) => {
+    if (
+      value !== resume?.workExperienceArray[expInd]?.achievements[achiveInd]
+    ) {
+      let updatedExp: any = [...resume.workExperienceArray];
+      let updatedAchievements = [...updatedExp[expInd].achievements];
+      updatedAchievements.splice(achiveInd, 1, value);
+      updatedExp[expInd] = {
+        ...updatedExp[expInd],
+        achievements: updatedAchievements,
+      };
+      updateAndSaveWorkExperienceArray(updatedExp);
+    }
+  };
   return (
     <div className="w-full first-page  text-gray-900 flex flex-col justify-start space-y-4 items-start px-6">
       {/* Name and Title */}
@@ -201,8 +265,8 @@ const ResumeTemplate2 = () => {
           </h2>
         )}
         {resume?.primarySkills &&
-          resume?.primarySkills.length > 0 &&
-          !regenerating ? (
+        resume?.primarySkills.length > 0 &&
+        !regenerating ? (
           <>
             <ul
               className="flex flex-row flex-wrap gap-1 text-sm xs:text-sm md:text-lg lg:text-lg"
@@ -245,7 +309,7 @@ const ResumeTemplate2 = () => {
                         removeSkill.splice(i, 1);
                         updateAndSaveSkill(removeSkill);
                       }}
-                      className="w-4 h-4  cursor-pointer child"
+                      className="w-4 h-4   cursor-pointer child"
                     >
                       {crossIcon1}
                     </div>
@@ -340,106 +404,119 @@ const ResumeTemplate2 = () => {
           WORK EXPERIENCE
         </h2>
         {resume?.workExperienceArray &&
-          resume?.workExperienceArray.length > 0 ? (
+        resume?.workExperienceArray.length > 0 ? (
           <>
             {resume?.workExperienceArray.map((rec: any, i: number) => {
               return (
-                <div
+                <Toolbar
                   key={i}
-                  className={`${i === resume?.workExperienceArray.length - 1
-                    ? ""
-                    : "border-b border-gray-200"
-                    } grid border-transparent border-2 grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
-                  onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
-                  onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
-                  onDragStart={(e) =>
-                    e.dataTransfer.setData("text/plain", i.toString())
-                  }
-                  onDragOver={(e) => e.preventDefault()}
-                  onDrop={(e) => handleDropExperience(e, i)}
-                  draggable
+                  addAchivement={() => setNewWorkExperience(i)}
+                  regenrateAchivements={() => handleRegenrate(rec, i)}
+                  addNewLine={() => handleAddSpace(i)}
                 >
-                  {/* start end */}
-                  <h2 className="hover:cursor-default text-center bg-transparent xs:bg-slate-100 p-0 col-span-1 xs:col-span-6 md:col-span-1 xs:p-2 md:p-0 md:bg-transparent  text-sm xs:text-sm md:text-lg lg:text-lg font-semibold">
-                    {rec?.fromMonth + " " + rec?.fromYear} -{" "}
-                    {rec?.isContinue
-                      ? "Present"
-                      : `${rec?.toMonth} ${rec?.toYear}`}{" "}
-                  </h2>
-
-                  <div className=" col-span-5 xs:col-span-6 md:col-span-5">
-                    {/* Title */}
-                    <h2 className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-base font-bold">
-                      <EditableField
-                        value={rec?.title}
-                        style={{ width: "100%" }}
-                        onSave={(value: string) => {
-                          if (value !== resume?.workExperienceArray[i].title) {
-                            let updatedExp = [...resume.workExperienceArray];
-                            updatedExp[i] = { ...updatedExp[i], title: value };
-                            updateAndSaveWorkExperienceArray(updatedExp);
-                          }
-                        }}
-                      />
+                  <div
+                    key={i}
+                    className={`${
+                      i === resume?.workExperienceArray.length - 1
+                        ? ""
+                        : "border-b border-gray-200"
+                    } grid border-transparent border-2 grid-cols-6 gap-6  hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2`}
+                    onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
+                    onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
+                    onDragStart={(e) =>
+                      e.dataTransfer.setData("text/plain", i.toString())
+                    }
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => handleDropExperience(e, i)}
+                    draggable
+                  >
+                    {/* start end */}
+                    <h2 className="hover:cursor-default text-center bg-transparent xs:bg-slate-100 p-0 col-span-1 xs:col-span-6 md:col-span-1 xs:p-2 md:p-0 md:bg-transparent  text-sm xs:text-sm md:text-lg lg:text-lg font-semibold">
+                      {rec?.fromMonth + " " + rec?.fromYear} -{" "}
+                      {rec?.isContinue
+                        ? "Present"
+                        : `${rec?.toMonth} ${rec?.toYear}`}{" "}
                     </h2>
-                    <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-sm xs:text-sm md:text-lg lg:text-lg">
-                      <EditableField
-                        value={rec?.company}
-                        onSave={(value: string) => {
-                          if (
-                            value !== resume?.workExperienceArray[i].company
-                          ) {
-                            let updatedExp = [...resume.workExperienceArray];
-                            updatedExp[i] = {
-                              ...updatedExp[i],
-                              company: value,
-                            };
-                            updateAndSaveWorkExperienceArray(updatedExp);
-                          }
-                        }}
-                      />
-                    </span>{" "}
-                    |{" "}
-                    <span className="hover:shadow-md hover:bg-gray-100">
-                      <EditableField
-                        value={rec?.cityState}
-                        onSave={(value: string) => {
-                          if (
-                            value !== resume?.workExperienceArray[i].cityState
-                          ) {
-                            let updatedExp = [...resume.workExperienceArray];
-                            updatedExp[i] = {
-                              ...updatedExp[i],
-                              cityState: value,
-                            };
-                            updateAndSaveWorkExperienceArray(updatedExp);
-                          }
-                        }}
-                      />
-                    </span>{" "}
-                    <span className="hover:shadow-md hover:bg-gray-100">
-                      <EditableField
-                        value={rec?.country}
-                        onSave={(value: string) => {
-                          if (value !== resume?.workExperienceArray[i].country) {
-                            let updatedExp = [...resume.workExperienceArray];
-                            updatedExp[i] = {
-                              ...updatedExp[i],
-                              country: value,
-                            };
-                            updateAndSaveWorkExperienceArray(updatedExp);
-                          }
-                        }}
-                      />
-                    </span>
-                    <div className="p-4">
-                      <Regenerate
-                        handler={() => {
-                          getOneWorkExperienceNew(rec);
-                          setRegeneratedRecordIndex(i);
-                        }}
-                        custom_style={"absolute mt-0 right-0"}
-                      >
+
+                    <div className=" col-span-5 xs:col-span-6 md:col-span-5">
+                      {/* Title */}
+                      <h2 className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-base font-bold">
+                        <EditableField
+                          value={rec?.title}
+                          style={{ width: "100%" }}
+                          onSave={(value: string) => {
+                            if (
+                              value !== resume?.workExperienceArray[i].title
+                            ) {
+                              let updatedExp = [...resume.workExperienceArray];
+                              updatedExp[i] = {
+                                ...updatedExp[i],
+                                title: value,
+                              };
+                              updateAndSaveWorkExperienceArray(updatedExp);
+                            }
+                          }}
+                        />
+                      </h2>
+                      <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-sm xs:text-sm md:text-lg lg:text-lg">
+                        <EditableField
+                          value={rec?.company}
+                          onSave={(value: string) => {
+                            if (
+                              value !== resume?.workExperienceArray[i].company
+                            ) {
+                              let updatedExp = [...resume.workExperienceArray];
+                              updatedExp[i] = {
+                                ...updatedExp[i],
+                                company: value,
+                              };
+                              updateAndSaveWorkExperienceArray(updatedExp);
+                            }
+                          }}
+                        />
+                      </span>{" "}
+                      |{" "}
+                      <span className="hover:shadow-md hover:bg-gray-100">
+                        <EditableField
+                          value={rec?.cityState}
+                          onSave={(value: string) => {
+                            if (
+                              value !== resume?.workExperienceArray[i].cityState
+                            ) {
+                              let updatedExp = [...resume.workExperienceArray];
+                              updatedExp[i] = {
+                                ...updatedExp[i],
+                                cityState: value,
+                              };
+                              updateAndSaveWorkExperienceArray(updatedExp);
+                            }
+                          }}
+                        />
+                      </span>{" "}
+                      <span className="hover:shadow-md hover:bg-gray-100">
+                        <EditableField
+                          value={rec?.country}
+                          onSave={(value: string) => {
+                            if (
+                              value !== resume?.workExperienceArray[i].country
+                            ) {
+                              let updatedExp = [...resume.workExperienceArray];
+                              updatedExp[i] = {
+                                ...updatedExp[i],
+                                country: value,
+                              };
+                              updateAndSaveWorkExperienceArray(updatedExp);
+                            }
+                          }}
+                        />
+                      </span>
+                      <div className="p-4">
+                        {/* <Regenerate
+                          handler={(i: number, rec: any) => {
+                            handleRegenrate(rec, i);
+                          }}
+                          custom_style={"absolute mt-0 right-0"}
+                        > */}
                         {rec?.achievements && i !== regeneratedRecordIndex ? (
                           <ul className="pl-0 flex flex-col gap-1 text-sm xs:text-sm md:text-lg lg:text-lg">
                             {rec?.achievements.map(
@@ -505,49 +582,13 @@ const ResumeTemplate2 = () => {
                                       rows={2}
                                       value={achievement}
                                       onSave={(value: string) => {
-                                        if (
-                                          value !==
-                                          resume?.workExperienceArray[i]
-                                            ?.achievements[ind]
-                                        ) {
-                                          let updatedExp: any = [
-                                            ...resume.workExperienceArray,
-                                          ];
-                                          let updatedAchievements = [
-                                            ...updatedExp[i].achievements,
-                                          ];
-                                          updatedAchievements.splice(
-                                            ind,
-                                            1,
-                                            value
-                                          );
-                                          updatedExp[i] = {
-                                            ...updatedExp[i],
-                                            achievements: updatedAchievements,
-                                          };
-                                          updateAndSaveWorkExperienceArray(
-                                            updatedExp
-                                          );
-                                        }
+                                        handleUpdateAchivement(i, ind, value);
                                       }}
                                     />
                                     <div
-                                      onClick={() => {
-                                        let updatedExp: any = [
-                                          ...resume.workExperienceArray,
-                                        ];
-                                        let updatedAchievements = [
-                                          ...updatedExp[i].achievements,
-                                        ];
-                                        updatedAchievements.splice(ind, 1);
-                                        updatedExp[i] = {
-                                          ...updatedExp[i],
-                                          achievements: updatedAchievements,
-                                        };
-                                        updateAndSaveWorkExperienceArray(
-                                          updatedExp
-                                        );
-                                      }}
+                                      onClick={() =>
+                                        handleDeleteAchivement(i, ind)
+                                      }
                                       className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
                                     >
                                       {crossIcon1}
@@ -585,119 +626,76 @@ const ResumeTemplate2 = () => {
                             </div>
                           </div>
                         )}
-                      </Regenerate>
+                        {/* </Regenerate> */}
 
-                      {newWorkExperience === i ? (
-                        <>
-                          <div className="w-full gap-1 rounded-md flex flex-wrap h-9.5">
-                            <textarea
-                              className="w-9/12 xs:w-full md:w-9/12 rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
-                              onChange={(e) =>
-                                setNewAchievement(e.target.value)
-                              }
-                              value={newAchievement}
-                              rows={1}
-                              cols={1}
-                              name="newAchievement"
-                              id="newAchievement"
-                              autoComplete="off"
-                              onKeyDown={(e) => {
-                                if (e.key === "Enter") {
-                                  e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
-                                  // Save the new achievement to the state and possibly the database
-                                  if (newAchievement !== "") {
-                                    let updatedExp: any = [
-                                      ...resume.workExperienceArray,
-                                    ];
-                                    let updatedAchievements = [
-                                      ...updatedExp[i].achievements,
-                                    ];
-                                    updatedAchievements.push(newAchievement);
-                                    updatedExp[i] = {
-                                      ...updatedExp[i],
-                                      achievements: updatedAchievements,
-                                    };
-                                    updateAndSaveWorkExperienceArray(
-                                      updatedExp
-                                    );
-                                    setNewAchievement("");
+                        {newWorkExperience === i ? (
+                          <>
+                            <div className="w-full gap-1 rounded-md flex flex-wrap h-9.5">
+                              <textarea
+                                className="w-9/12 xs:w-full md:w-9/12 rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
+                                onChange={(e) =>
+                                  setNewAchievement(e.target.value)
+                                }
+                                value={newAchievement}
+                                rows={1}
+                                cols={1}
+                                name="newAchievement"
+                                id="newAchievement"
+                                autoComplete="off"
+                                onKeyDown={(e) => {
+                                  if (e.key === "Enter") {
+                                    e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
+                                    // Save the new achievement to the state and possibly the database
+                                    handleAddAchivement(i);
                                   }
-                                }
-                              }}
-                            />
+                                }}
+                              />
+                              <button
+                                className="bg-green-500 w-2/12 xs:w-full md:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
+                                onClick={() => {
+                                  // Save the new achievement to the state and possibly the database
+                                  handleAddAchivement(i);
+                                }}
+                              >
+                                Save
+                              </button>
+                            </div>
                             <button
-                              className="bg-green-500 w-2/12 xs:w-full md:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
                               onClick={() => {
-                                // Save the new achievement to the state and possibly the database
-                                if (newAchievement !== "") {
-                                  let updatedExp: any = [
-                                    ...resume.workExperienceArray,
-                                  ];
-                                  let updatedAchievements = [
-                                    ...updatedExp[i].achievements,
-                                  ];
-                                  updatedAchievements.push(newAchievement);
-                                  updatedExp[i] = {
-                                    ...updatedExp[i],
-                                    achievements: updatedAchievements,
-                                  };
-                                  updateAndSaveWorkExperienceArray(updatedExp);
-                                  setNewAchievement("");
-                                }
+                                setNewAchievement("");
+                                setNewWorkExperience(-1);
+                                setWorkExperienceAddButtonVisible(-1);
+                              }}
+                              className="bg-red-500 w-2/12 xs:w-full md:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
+                            >
+                              Cancel
+                            </button>
+                          </>
+                        ) : null}
+                        {/* {workExperienceAddButtonVisible === i &&
+                        newWorkExperience !== i ? (
+                          <>
+                            {" "}
+                            <div
+                              className="border-2 h-10 w-2/12 mb-2 mt-3 xs:w-full md:w-2/12 lg:2/12 xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                              onClick={() => {
+                                setNewWorkExperience(i);
                               }}
                             >
-                              Save
+                              + Add
+                            </div>
+                            <button
+                              className="border-2 h-10 w-auto px-3  mb-2 mt-3    xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
+                              onClick={() => handleAddSpace(i)}
+                            >
+                              Add Space
                             </button>
-                          </div>
-                          <button
-                            onClick={() => {
-                              setNewAchievement("");
-                              setNewWorkExperience(-1);
-                              setWorkExperienceAddButtonVisible(-1);
-                            }}
-                            className="bg-red-500 w-2/12 xs:w-full md:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
-                          >
-                            Cancel
-                          </button>
-                        </>
-                      ) : null}
-                      {workExperienceAddButtonVisible === i &&
-                        newWorkExperience !== i ? (
-                        <>
-                          {" "}
-                          <div
-                            className="border-2 h-10 w-2/12 mb-2 mt-3 xs:w-full md:w-2/12 lg:2/12 xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                            onClick={() => {
-                              setNewWorkExperience(i);
-                            }}
-                          >
-                            + Add
-                          </div>
-                          <button
-                            className="border-2 h-10 w-auto px-3  mb-2 mt-3    xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
-                            onClick={() => {
-                              let updatedExp: any = [
-                                ...resume.workExperienceArray,
-                              ];
-                              let updatedAchievements = [
-                                ...updatedExp[i].achievements,
-                              ];
-                              updatedAchievements.push(newAchievement);
-                              updatedExp[i] = {
-                                ...updatedExp[i],
-                                achievements: updatedAchievements,
-                              };
-                              updateAndSaveWorkExperienceArray(updatedExp);
-                              setNewAchievement("");
-                            }}
-                          >
-                            Add Space
-                          </button>
-                        </>
-                      ) : null}
+                          </>
+                        ) : null} */}
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Toolbar>
               );
             })}
           </>
