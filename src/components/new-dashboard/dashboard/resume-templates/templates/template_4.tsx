@@ -4,10 +4,7 @@ import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  setField,
-
-} from "@/store/resumeSlice";
+import { setField } from "@/store/resumeSlice";
 import {
   contactIcon,
   crossIcon1,
@@ -78,7 +75,7 @@ const ResumeTemplate4 = () => {
     <div className="first-page ">
       <div className=" flex">
         <div className=" w-4/12 xs:w-1/3 md:w-4/12 flex flex-col pl-3 md:pl-4 bg-[#323B4C] text-gray-100  pr-6 md:pr-4  py-8 h-[1080px] xs:h-auto">
-          <div className=" w-32 h-32  xs:w-[72px] xs:h-[72px] sm:w-24 sm:h-24 md:w-32 md:h-32 text-white bg-gray-800 text-center flex justify-center items-center  rounded-full mx-4 xs:mx-0 md:mx-4 mt-4  md:mt-0 md:mr-8 mb-4 md:mb-2">
+          <div className=" w-32 h-32  xs:w-[72px] xs:h-[72px] sm:w-24 sm:h-24 md:w-32 md:h-32 text-white bg-gray-800 text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-0  md:mt-0 mb-4 justify-center md:mb-2">
             <span className="text-3xl xs:text-2xl md:text-3xl hover:shadow-md hover:bg-gray-500">
               <EditableField
                 value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -135,9 +132,23 @@ const ResumeTemplate4 = () => {
             </li>
 
             <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row gap-2  items-center ">
-              <span className="text-gray-100 border border-gray-100 md:w-8 md:h-8 h-6 w-7 flex justify-center items-center">
-                in
-              </span>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 19 19"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9.5 18.4C14.4153 18.4 18.4 14.4153 18.4 9.5C18.4 4.58467 14.4153 0.6 9.5 0.6C4.58467 0.6 0.6 4.58467 0.6 9.5C0.6 14.4153 4.58467 18.4 9.5 18.4Z"
+                  stroke="black"
+                  stroke-width="0.8"
+                />
+                <path
+                  d="M6.15572 13V7.54545H6.99379V13H6.15572ZM6.58185 6.63636C6.4185 6.63636 6.27764 6.58073 6.15927 6.46946C6.04326 6.35819 5.98526 6.22443 5.98526 6.06818C5.98526 5.91193 6.04326 5.77817 6.15927 5.6669C6.27764 5.55563 6.4185 5.5 6.58185 5.5C6.74521 5.5 6.88488 5.55563 7.00089 5.6669C7.11926 5.77817 7.17844 5.91193 7.17844 6.06818C7.17844 6.22443 7.11926 6.35819 7.00089 6.46946C6.88488 6.58073 6.74521 6.63636 6.58185 6.63636ZM9.36683 9.71875V13H8.52876V7.54545H9.33842V8.39773H9.40945C9.53729 8.12074 9.73142 7.8982 9.99183 7.73011C10.2522 7.55966 10.5884 7.47443 11.0004 7.47443C11.3697 7.47443 11.6928 7.55019 11.9698 7.7017C12.2468 7.85085 12.4622 8.07812 12.6161 8.38352C12.77 8.68655 12.8469 9.07008 12.8469 9.53409V13H12.0089V9.59091C12.0089 9.16241 11.8976 8.8286 11.6751 8.58949C11.4525 8.34801 11.1471 8.22727 10.7589 8.22727C10.4914 8.22727 10.2522 8.28527 10.0415 8.40128C9.83321 8.51728 9.66868 8.68655 9.54794 8.90909C9.4272 9.13163 9.36683 9.40152 9.36683 9.71875Z"
+                  fill="black"
+                />
+              </svg>
               <EditableField
                 value={
                   resume?.contact?.linkedIn
@@ -166,8 +177,8 @@ const ResumeTemplate4 = () => {
                 </>
               )}
               {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
+              resume?.primarySkills.length > 0 &&
+              !regenerating ? (
                 <ol
                   className="pl-0 flex list-styled flex-col gap-3 mb-4 text-sm xs:text-[12px] md:text-sm"
                   onMouseEnter={() =>
@@ -325,7 +336,7 @@ const ResumeTemplate4 = () => {
           </div>
           {/* Executive Summary */}
 
-          <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold mt-8 md:mt-14">
+          <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold mt-6 md:mt-14">
             EXECUTIVE SUMMARY
           </h3>
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-2 mb-4"></span>
@@ -334,7 +345,7 @@ const ResumeTemplate4 = () => {
             handler={getSummary}
             custom_style={"absolute bottom-3 right-2 "}
           >
-            <div className="text-sm  hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
+            <div className="text-[16px] hover:shadow-md min-h-[380px] xs:min-h-fit hover:bg-gray-100 group-hover:pb-14">
               <EditableField
                 type="textarea"
                 value={
@@ -381,16 +392,17 @@ const ResumeTemplate4 = () => {
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
 
           {resume?.workExperienceArray &&
-            resume?.workExperienceArray.length > 0 ? (
+          resume?.workExperienceArray.length > 0 ? (
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div
                     key={i}
-                    className={`flex justify-start  ${i > 0
-                      ? "w-[100vw] ml-[-234px] xs:ml-0 xs:w-full"
-                      : "xs:min-h-fit min-h-[500px]"
-                      }`}
+                    className={`flex justify-start  ${
+                      i > 0
+                        ? "w-[100vw] ml-[-234px] xs:ml-0 xs:w-full"
+                        : "xs:min-h-fit min-h-[380px]"
+                    }`}
                   >
                     <div className="w-[5%] pr-5 xs:pr-0 md:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
@@ -415,10 +427,15 @@ const ResumeTemplate4 = () => {
                           value={rec?.title}
                           style={{ width: "100%" }}
                           onSave={(value: string) => {
-                            if (value !== resume?.workExperienceArray[i].title) {
+                            if (
+                              value !== resume?.workExperienceArray[i].title
+                            ) {
                               let updatedExp = [...resume.workExperienceArray];
-                              updatedExp[i] = { ...updatedExp[i], title: value };
-                              updateAndSaveWorkExperienceArray(updatedExp)
+                              updatedExp[i] = {
+                                ...updatedExp[i],
+                                title: value,
+                              };
+                              updateAndSaveWorkExperienceArray(updatedExp);
                             }
                           }}
                         />
@@ -433,10 +450,17 @@ const ResumeTemplate4 = () => {
                           <EditableField
                             value={rec?.company}
                             onSave={(value: string) => {
-                              if (value !== resume?.workExperienceArray[i].company) {
-                                let updatedExp = [...resume.workExperienceArray];
-                                updatedExp[i] = { ...updatedExp[i], company: value };
-                                updateAndSaveWorkExperienceArray(updatedExp)
+                              if (
+                                value !== resume?.workExperienceArray[i].company
+                              ) {
+                                let updatedExp = [
+                                  ...resume.workExperienceArray,
+                                ];
+                                updatedExp[i] = {
+                                  ...updatedExp[i],
+                                  company: value,
+                                };
+                                updateAndSaveWorkExperienceArray(updatedExp);
                               }
                             }}
                           />
@@ -446,10 +470,18 @@ const ResumeTemplate4 = () => {
                           <EditableField
                             value={rec?.cityState}
                             onSave={(value: string) => {
-                              if (value !== resume?.workExperienceArray[i].cityState) {
-                                let updatedExp = [...resume.workExperienceArray];
-                                updatedExp[i] = { ...updatedExp[i], cityState: value };
-                                updateAndSaveWorkExperienceArray(updatedExp)
+                              if (
+                                value !==
+                                resume?.workExperienceArray[i].cityState
+                              ) {
+                                let updatedExp = [
+                                  ...resume.workExperienceArray,
+                                ];
+                                updatedExp[i] = {
+                                  ...updatedExp[i],
+                                  cityState: value,
+                                };
+                                updateAndSaveWorkExperienceArray(updatedExp);
                               }
                             }}
                           />
@@ -458,10 +490,17 @@ const ResumeTemplate4 = () => {
                           <EditableField
                             value={rec?.country}
                             onSave={(value: string) => {
-                              if (value !== resume?.workExperienceArray[i].country) {
-                                let updatedExp = [...resume.workExperienceArray];
-                                updatedExp[i] = { ...updatedExp[i], country: value };
-                                updateAndSaveWorkExperienceArray(updatedExp)
+                              if (
+                                value !== resume?.workExperienceArray[i].country
+                              ) {
+                                let updatedExp = [
+                                  ...resume.workExperienceArray,
+                                ];
+                                updatedExp[i] = {
+                                  ...updatedExp[i],
+                                  country: value,
+                                };
+                                updateAndSaveWorkExperienceArray(updatedExp);
                               }
                             }}
                           />
@@ -499,11 +538,20 @@ const ResumeTemplate4 = () => {
                                       <div
                                         className="group-hover:block hidden font-medium text-xs uppercase   text-gray-500 cursor-pointer"
                                         onClick={() => {
-                                          let updatedExp: any = [...resume.workExperienceArray];
-                                          let updatedAchievements = [...updatedExp[i].achievements];
-                                          updatedAchievements.splice(ind, 1)
-                                          updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
-                                          updateAndSaveWorkExperienceArray(updatedExp)
+                                          let updatedExp: any = [
+                                            ...resume.workExperienceArray,
+                                          ];
+                                          let updatedAchievements = [
+                                            ...updatedExp[i].achievements,
+                                          ];
+                                          updatedAchievements.splice(ind, 1);
+                                          updatedExp[i] = {
+                                            ...updatedExp[i],
+                                            achievements: updatedAchievements,
+                                          };
+                                          updateAndSaveWorkExperienceArray(
+                                            updatedExp
+                                          );
                                         }}
                                       >
                                         Remove This Extra Space
@@ -531,22 +579,48 @@ const ResumeTemplate4 = () => {
                                         rows={2}
                                         value={achievement}
                                         onSave={(value: string) => {
-                                          if (value !== resume?.workExperienceArray[i]?.achievements[ind]) {
-                                            let updatedExp: any = [...resume.workExperienceArray];
-                                            let updatedAchievements = [...updatedExp[i].achievements];
-                                            updatedAchievements.splice(ind, 1, value)
-                                            updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
-                                            updateAndSaveWorkExperienceArray(updatedExp)
+                                          if (
+                                            value !==
+                                            resume?.workExperienceArray[i]
+                                              ?.achievements[ind]
+                                          ) {
+                                            let updatedExp: any = [
+                                              ...resume.workExperienceArray,
+                                            ];
+                                            let updatedAchievements = [
+                                              ...updatedExp[i].achievements,
+                                            ];
+                                            updatedAchievements.splice(
+                                              ind,
+                                              1,
+                                              value
+                                            );
+                                            updatedExp[i] = {
+                                              ...updatedExp[i],
+                                              achievements: updatedAchievements,
+                                            };
+                                            updateAndSaveWorkExperienceArray(
+                                              updatedExp
+                                            );
                                           }
                                         }}
                                       />
                                       <div
                                         onClick={() => {
-                                          let updatedExp: any = [...resume.workExperienceArray];
-                                          let updatedAchievements = [...updatedExp[i].achievements];
-                                          updatedAchievements.splice(ind, 1)
-                                          updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
-                                          updateAndSaveWorkExperienceArray(updatedExp)
+                                          let updatedExp: any = [
+                                            ...resume.workExperienceArray,
+                                          ];
+                                          let updatedAchievements = [
+                                            ...updatedExp[i].achievements,
+                                          ];
+                                          updatedAchievements.splice(ind, 1);
+                                          updatedExp[i] = {
+                                            ...updatedExp[i],
+                                            achievements: updatedAchievements,
+                                          };
+                                          updateAndSaveWorkExperienceArray(
+                                            updatedExp
+                                          );
                                         }}
                                         className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
                                       >
@@ -605,11 +679,20 @@ const ResumeTemplate4 = () => {
                                     e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
                                     // Save the new achievement to the state and possibly the database
                                     if (newAchievement !== "") {
-                                      let updatedExp: any = [...resume.workExperienceArray];
-                                      let updatedAchievements = [...updatedExp[i].achievements];
-                                      updatedAchievements.push(newAchievement)
-                                      updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
-                                      updateAndSaveWorkExperienceArray(updatedExp)
+                                      let updatedExp: any = [
+                                        ...resume.workExperienceArray,
+                                      ];
+                                      let updatedAchievements = [
+                                        ...updatedExp[i].achievements,
+                                      ];
+                                      updatedAchievements.push(newAchievement);
+                                      updatedExp[i] = {
+                                        ...updatedExp[i],
+                                        achievements: updatedAchievements,
+                                      };
+                                      updateAndSaveWorkExperienceArray(
+                                        updatedExp
+                                      );
                                       setNewAchievement("");
                                     }
                                   }
@@ -620,11 +703,20 @@ const ResumeTemplate4 = () => {
                                 onClick={() => {
                                   // Save the new achievement to the state and possibly the database
                                   if (newAchievement !== "") {
-                                    let updatedExp: any = [...resume.workExperienceArray];
-                                    let updatedAchievements = [...updatedExp[i].achievements];
-                                    updatedAchievements.push(newAchievement)
-                                    updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
-                                    updateAndSaveWorkExperienceArray(updatedExp)
+                                    let updatedExp: any = [
+                                      ...resume.workExperienceArray,
+                                    ];
+                                    let updatedAchievements = [
+                                      ...updatedExp[i].achievements,
+                                    ];
+                                    updatedAchievements.push(newAchievement);
+                                    updatedExp[i] = {
+                                      ...updatedExp[i],
+                                      achievements: updatedAchievements,
+                                    };
+                                    updateAndSaveWorkExperienceArray(
+                                      updatedExp
+                                    );
                                     setNewAchievement("");
                                   }
                                 }}
@@ -645,7 +737,7 @@ const ResumeTemplate4 = () => {
                           </>
                         ) : null}
                         {workExperienceAddButtonVisible === i &&
-                          newWorkExperience !== i ? (
+                        newWorkExperience !== i ? (
                           <>
                             <div
                               className="border-2 w-2/12 xs:w-full mt-3 md:w-2/12 lg:w-2/12 border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full py-1  hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
@@ -658,11 +750,18 @@ const ResumeTemplate4 = () => {
                             <button
                               className="border-2 h-10 w-auto px-3  mb-2 mt-3    xs:mt-12 md:mt-2 lg:mt-2  border-gray-400 text-center uppercase text-gray-500 cursor-pointer rounded-full flex items-center justify-center hover:bg-gray-400 hover:text-white transition duration-300 ease-in-out"
                               onClick={() => {
-                                let updatedExp: any = [...resume.workExperienceArray];
-                                let updatedAchievements = [...updatedExp[i].achievements];
-                                updatedAchievements.push(newAchievement)
-                                updatedExp[i] = { ...updatedExp[i], achievements: updatedAchievements };
-                                updateAndSaveWorkExperienceArray(updatedExp)
+                                let updatedExp: any = [
+                                  ...resume.workExperienceArray,
+                                ];
+                                let updatedAchievements = [
+                                  ...updatedExp[i].achievements,
+                                ];
+                                updatedAchievements.push(newAchievement);
+                                updatedExp[i] = {
+                                  ...updatedExp[i],
+                                  achievements: updatedAchievements,
+                                };
+                                updateAndSaveWorkExperienceArray(updatedExp);
                                 setNewAchievement("");
                               }}
                             >
