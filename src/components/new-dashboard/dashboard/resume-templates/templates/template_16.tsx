@@ -355,7 +355,7 @@ const ResumeTemplate16 = () => {
             handler={getSummary}
             custom_style={"absolute bottom-3 right-2 "}
           >
-            <div className="text-[16px] hover:shadow-md min-h-[450px] xs:min-h-fit  hover:bg-gray-100 group-hover:pb-14">
+            <div className="text-[16px] hover:shadow-md min-h-[450px] xs:min-h-fit  hover:bg-gray-100 group-hover:pb-14 ">
               <EditableField
                 type="textarea"
                 value={
@@ -414,7 +414,7 @@ const ResumeTemplate16 = () => {
                     className={`flex justify-start items-start ${
                       i > 0
                         ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
-                        : "xs:min-h-fit min-h-[420px]"
+                        : "xs:min-h-fit min-h-[500px]"
                     }`}
                   >
                     <div
@@ -840,7 +840,7 @@ const ResumeTemplate16 = () => {
                       <li
                         className=" hover:shadow-md hover:cursor-move border-transparent border-2 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
-                   hover:bg-gray-100 font-semibold  hover:text-black flex uppercase text-md   items-center "
+                   hover:bg-gray-100 font-bold  hover:text-black flex uppercase text-[16px]   items-center "
                       >
                         <span className="w-1.5 h-1.5 bg-gray-800 rounded-full mr-3"></span>
                         <div className="flex flex-row w-full items-center justify-between">
@@ -873,7 +873,7 @@ const ResumeTemplate16 = () => {
                           </div>
                         </div>
                       </li>
-                      <li className="hover:shadow-md uppercase hover:text-black text-gray-800 hover:tet-black hover:bg-gray-100 text-base">
+                      <li className="hover:shadow-md text-[15px] font-medium hover:text-black text-gray-800 hover:tet-black hover:bg-gray-100 text-base">
                         <EditableField
                           value={`${education?.fieldOfStudy}`}
                           style={{ width: "100%" }}
