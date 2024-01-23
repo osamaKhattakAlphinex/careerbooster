@@ -36,7 +36,6 @@ const ReviewResumeBot = () => {
   const { resumes } = userData;
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
-
   const handleGenerate = async () => {
     if (
       session?.user?.email &&
@@ -87,9 +86,6 @@ const ReviewResumeBot = () => {
               const text = new TextDecoder().decode(value);
               setStreamedData((prev) => prev + text);
             }
-
-
-
           } else {
             setStreamedData("Error! Something went wrong");
           }
@@ -161,8 +157,9 @@ const ReviewResumeBot = () => {
           <div className="flex flex-col gap-5 lg:px-0 ">
             <label
               htmlFor="default-radio-2"
-              className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[220px] lg:w-[290px] ${selectedOption === "file" ? "border-[1px] border-[#615DFF]" : ""
-                } `}
+              className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[220px] lg:w-[290px] ${
+                selectedOption === "file" ? "border-[1px] border-[#615DFF]" : ""
+              } `}
             >
               <input
                 id="default-radio-2"
@@ -201,15 +198,16 @@ const ReviewResumeBot = () => {
                   (selectedOption === "aiResume" && setSelectedResumeId === "")
                 }
                 onClick={() => handleGenerate()}
-                className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
-                  !session?.user?.email ||
-                  !aiInputUserData ||
-                  selectedOption === "" ||
-                  (selectedOption === "file" && selectedFile === "") ||
-                  (selectedOption === "aiResume" &&
-                    setSelectedResumeId === "")) &&
+                className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                  (msgLoading ||
+                    !session?.user?.email ||
+                    !aiInputUserData ||
+                    selectedOption === "" ||
+                    (selectedOption === "file" && selectedFile === "") ||
+                    (selectedOption === "aiResume" &&
+                      setSelectedResumeId === "")) &&
                   "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                  }`}
+                }`}
               >
                 <div className="flex flex-row gap-2">
                   <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
@@ -221,8 +219,9 @@ const ReviewResumeBot = () => {
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="currentColor"
-                          className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""
-                            }`}
+                          className={`w-4 h-4 mr-3 ${
+                            msgLoading ? "animate-spin" : ""
+                          }`}
                         >
                           <path
                             strokeLinecap="round"
@@ -267,8 +266,9 @@ const ReviewResumeBot = () => {
                 Get Your Resume Reviewed by AI
               </h1>
               <div
-                className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border-[1px] rounded-[8px] p-[10px] md:[30px] shadow ${msgLoading ? "animate-pulse" : ""
-                  }`}
+                className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border-[1px] rounded-[8px] p-[10px] md:[30px] shadow ${
+                  msgLoading ? "animate-pulse" : ""
+                }`}
               >
                 <div
                   className="dark:text-gray-100 text-gray-950"
@@ -290,15 +290,16 @@ const ReviewResumeBot = () => {
                       setSelectedResumeId === "")
                   }
                   onClick={() => handleGenerate()}
-                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
-                    !session?.user?.email ||
-                    !aiInputUserData ||
-                    selectedOption === "" ||
-                    (selectedOption === "file" && selectedFile === "") ||
-                    (selectedOption === "aiResume" &&
-                      setSelectedResumeId === "")) &&
+                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                    (msgLoading ||
+                      !session?.user?.email ||
+                      !aiInputUserData ||
+                      selectedOption === "" ||
+                      (selectedOption === "file" && selectedFile === "") ||
+                      (selectedOption === "aiResume" &&
+                        setSelectedResumeId === "")) &&
                     "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                    }`}
+                  }`}
                 >
                   <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                     {msgLoading ? (
@@ -309,8 +310,9 @@ const ReviewResumeBot = () => {
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="currentColor"
-                          className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""
-                            }`}
+                          className={`w-4 h-4 mr-3 ${
+                            msgLoading ? "animate-spin" : ""
+                          }`}
                         >
                           <path
                             strokeLinecap="round"
@@ -364,16 +366,17 @@ const ReviewResumeBot = () => {
                         setSelectedResumeId === "")
                     }
                     onClick={() => copyCoverLetter(streamedData)}
-                    className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border-[1px] border-[#b324d7] rounded-full ${msgLoading ||
+                    className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border-[1px] border-[#b324d7] rounded-full ${
+                      msgLoading ||
                       !session?.user?.email ||
                       !aiInputUserData ||
                       selectedOption === "" ||
                       (selectedOption === "file" && selectedFile === "") ||
                       (selectedOption === "aiResume" &&
                         setSelectedResumeId === "")
-                      ? "opacity-50 cursor-not-allowed"
-                      : ""
-                      }`}
+                        ? "opacity-50 cursor-not-allowed"
+                        : ""
+                    }`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -384,8 +387,8 @@ const ReviewResumeBot = () => {
                       className="w-4 h-4 dark:text-gray-100 text-gray-950"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
                       />
                     </svg>
@@ -394,8 +397,8 @@ const ReviewResumeBot = () => {
                       {msgLoading
                         ? "Please wait..."
                         : isCoverLetterCopied
-                          ? "Copied"
-                          : "Copy to clipboard"}
+                        ? "Copied"
+                        : "Copy to clipboard"}
                     </span>
                   </button>
                 )}

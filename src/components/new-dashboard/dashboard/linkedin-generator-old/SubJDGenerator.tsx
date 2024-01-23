@@ -29,7 +29,6 @@ const SubJDGenerator = () => {
   const [streamedData, setStreamedData] = useState("");
   const [showPopup, setShowPopup] = useState(false);
 
-
   useState<boolean>(false);
   const [isJDCopied, setIsJDCopied] = useState<boolean>(false);
   const copyJD = async (text: string) => {
@@ -49,13 +48,11 @@ const SubJDGenerator = () => {
   const dispatch = useDispatch();
   let userData = useSelector((state: any) => state.userData);
   const linkedinJD = useSelector((state: any) => state.linkedinJobDesc);
-  const { getUserDataIfNotExists: getUserData } = useGetUserData() //using hook function with different name/alias
-  const { getCreditLimitsIfNotExists } = useGetCreditLimits()
+  const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
+  const { getCreditLimitsIfNotExists } = useGetCreditLimits();
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
-
   useEffect(() => {
-
     if (streamedData === "") {
       setStreamedData(linkedinJD.jobDescriptionText);
     }
@@ -65,16 +62,11 @@ const SubJDGenerator = () => {
     setStreamedData(linkedinJD.jobDescriptionText);
   }, [linkedinJD.jobDescriptionText]);
 
-
-
   const handleGenerate = async () => {
     setStreamedData("");
     await getUserDataIfNotExists();
     //change condition
-    if (
-      session?.user?.email &&
-      userData.isFetched
-    ) {
+    if (session?.user?.email && userData.isFetched) {
       // remove ids from experiences
       const experiences = userData.experience.map((item: WorkExperience) => {
         const { id, ...rest } = item;
@@ -86,11 +78,13 @@ const SubJDGenerator = () => {
         let html = "";
         html += `<h4><strong>${experience?.jobTitle}</strong></h4>`;
         html += `<h5>${experience?.company} | ${experience?.cityState} ${experience?.country}</h5>`;
-        html += `<p style=' margin-bottom: 10px'>${experience?.fromMonth} ${experience?.fromYear
-          } to ${experience?.isContinue
+        html += `<p style=' margin-bottom: 10px'>${experience?.fromMonth} ${
+          experience?.fromYear
+        } to ${
+          experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
-          }</p>`;
+        }</p>`;
         html += `<p>`;
         setStreamedData((prev) => prev + html);
         tempText += html;
@@ -128,15 +122,13 @@ const SubJDGenerator = () => {
         
         /n
 
-        `
+        `;
         setStreamedData((prev) => prev + `</p> <br /> `);
         setMsgLoading(false);
 
         if (index === experiences.length - 1) {
-
           const jobDescriptionId = makeid();
           const jdObj = {
-
             jobDescriptionId: jobDescriptionId,
             personName: userData.firstName + " " + userData.lastName,
 
@@ -145,33 +137,28 @@ const SubJDGenerator = () => {
               userEmail: userData.email,
               fileAddress: userData.uploadedResume.fileName,
             },
-            experiences: experiences
-          }
+            experiences: experiences,
+          };
           await fetch("/api/linkedInBots/jdGeneratorSave", {
             method: "POST",
             body: JSON.stringify(jdObj),
           }).then(async (response: any) => {
             const res = await response.json();
             if (res.success) {
-
               await saveToDB(jdObj, tempText);
             }
-          }
-          )
+          });
         }
       }
-
 
       const JDResponse = await axios.get(
         "/api/linkedInBots/jdGeneratorSingle/getAllJD"
       );
       const updatedObject = {
         ...userData,
-        linkedInJobDescriptions:
-          JDResponse.data.result.linkedInJobDescriptions,
+        linkedInJobDescriptions: JDResponse.data.result.linkedInJobDescriptions,
       };
       dispatch(setUserData({ ...userData, ...updatedObject }));
-
     } else {
       setShowPopup(true);
 
@@ -200,7 +187,7 @@ const SubJDGenerator = () => {
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
       try {
-        await getUserData()
+        await getUserData();
       } catch (err) {
         setStreamedData("Something went wrong!");
       }
@@ -273,7 +260,7 @@ const SubJDGenerator = () => {
             onClick={() => handleGenerate()}
             className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
 
-          // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
+            // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
           >
             <span
               className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}
@@ -284,10 +271,11 @@ const SubJDGenerator = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
-                    className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""
-                      }`}
+                    className={`w-4 h-4 mr-3 ${
+                      msgLoading ? "animate-spin" : ""
+                    }`}
                   >
                     <path
                       strokeLinecap="round"
@@ -322,7 +310,7 @@ const SubJDGenerator = () => {
             </h1>
             <div
               className="ml-2 font-sans text-gray-300  break-words"
-            // style={{ textW: "auto" }}
+              // style={{ textW: "auto" }}
             >
               <div
                 className="list-disc"
@@ -331,20 +319,21 @@ const SubJDGenerator = () => {
               <button
                 disabled={msgLoading}
                 onClick={() => copyJD(streamedData)}
-                className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border-[1px] rounded-full ${msgLoading ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
+                className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border-[1px] rounded-full ${
+                  msgLoading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   className="w-4 h-4 dark:text-gray-100 text-gray-950"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
                   />
                 </svg>
@@ -353,8 +342,8 @@ const SubJDGenerator = () => {
                   {msgLoading
                     ? "Please wait..."
                     : isJDCopied
-                      ? "Copied"
-                      : "Copy to clipboard"}
+                    ? "Copied"
+                    : "Copy to clipboard"}
                 </span>
               </button>
             </div>

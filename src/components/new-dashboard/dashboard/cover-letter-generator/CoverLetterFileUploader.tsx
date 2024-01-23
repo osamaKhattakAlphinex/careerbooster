@@ -37,8 +37,6 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   const userData = useSelector((state: any) => state.userData);
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
-
-
   const uploadFilesToDb = async (newText: string) => {
     const userEmail = userData.email;
     const file = {
@@ -56,10 +54,9 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
 
         creditsUsed: creditLimits.pdf_files_upload,
       }),
-    }).then(async response => {
+    }).then(async (response) => {
       if (response.ok) {
-
-        setNewFileText("")
+        setNewFileText("");
       }
     });
     fetchFiles();
@@ -160,8 +157,8 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
               className="w-[40px] h-[40px] text-[#B324D7] font-normal"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
               />
             </svg>
@@ -170,13 +167,12 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
               <h2 className="dark:text-gray-100 text-gray-950d text-[16px] font-semibold">
                 Drag and drop file here
               </h2>
-              <p className="text-[#312E37] text-[14px]">
-                Limit 20mb per file
-              </p>
+              <p className="text-[#312E37] text-[14px]">Limit 20mb per file</p>
             </div>
             <label
-              className={` cursor-pointer flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[1px]  border-[#312E37] rounded-full ml-auto ${fileUploading && "!bg-black"
-                }`}
+              className={` cursor-pointer flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[1px]  border-[#312E37] rounded-full ml-auto ${
+                fileUploading && "!bg-black"
+              }`}
             >
               <span className=" dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                 {fileUploading ? "Uploading..." : "Browse Files"}
@@ -195,7 +191,6 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
             </label>
           </div>
         </div>
-
 
         {file !== null && (
           <FileUploadHandler

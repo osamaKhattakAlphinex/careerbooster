@@ -35,7 +35,6 @@ const ConsultingBidsGenerator = () => {
   const [isBidCopied, setIsBidCopied] = useState<boolean>(false);
   const [showPopup, setShowPopup] = useState(false);
 
-
   // limit bars
 
   // Redux
@@ -80,10 +79,7 @@ const ConsultingBidsGenerator = () => {
   }, [isEditing]);
 
   const handleGenerate = async () => {
-    if (
-      session?.user?.email &&
-      aiInputUserData
-    ) {
+    if (session?.user?.email && aiInputUserData) {
       setMsgLoading(true);
       setShow(true);
       setStreamedData("");
@@ -153,22 +149,18 @@ const ConsultingBidsGenerator = () => {
 
             const updatedObject = {
               ...userData,
-              consultingBids:
-                consultingBidResponse.data.result.consultingBids,
+              consultingBids: consultingBidResponse.data.result.consultingBids,
             };
             dispatch(setUserData({ ...userData, ...updatedObject }));
             dispatch(
               setConsultingBid(
                 consultingBidResponse.data.result.consultingBids[
-                consultingBidResponse.data.result.consultingBids.length -
-                1
+                  consultingBidResponse.data.result.consultingBids.length - 1
                 ]
               )
             );
-
-
           } else {
-            const res = await resp.json()
+            const res = await resp.json();
             setStreamedData(res.result + "! You ran out of Credits");
           }
         })
@@ -184,7 +176,6 @@ const ConsultingBidsGenerator = () => {
       }, 3000);
     }
   };
-
 
   const handleSave = async () => {
     let _consultingBidText = "";
@@ -321,10 +312,11 @@ const ConsultingBidsGenerator = () => {
               <div className="flex flex-col gap-5 lg:px-0">
                 <label
                   htmlFor="default-radio-1"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[290px] lg:w-[400px] ${selectedOption === "profile"
-                    ? "border-[1px] border-[#615DFF]"
-                    : ""
-                    }`}
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[290px] lg:w-[400px] ${
+                    selectedOption === "profile"
+                      ? "border-[1px] border-[#615DFF]"
+                      : ""
+                  }`}
                 >
                   <input
                     style={{
@@ -347,10 +339,11 @@ const ConsultingBidsGenerator = () => {
                 </label>
                 <label
                   htmlFor="default-radio-2"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950  w-[220px] lg:w-[290px] ${selectedOption === "file"
-                    ? "border-[1px] border-[#615DFF]"
-                    : ""
-                    } `}
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950  w-[220px] lg:w-[290px] ${
+                    selectedOption === "file"
+                      ? "border-[1px] border-[#615DFF]"
+                      : ""
+                  } `}
                 >
                   <input
                     id="default-radio-2"
@@ -412,14 +405,15 @@ const ConsultingBidsGenerator = () => {
                     jobDescription === ""
                   }
                   onClick={handleGenerate}
-                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent s flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${(msgLoading ||
-                    !session?.user?.email ||
-                    !aiInputUserData ||
-                    selectedOption === "" ||
-                    (selectedOption === "file" && selectedFile === "") ||
-                    jobDescription === "") &&
+                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent s flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                    (msgLoading ||
+                      !session?.user?.email ||
+                      !aiInputUserData ||
+                      selectedOption === "" ||
+                      (selectedOption === "file" && selectedFile === "") ||
+                      jobDescription === "") &&
                     "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                    }`}
+                  }`}
                 >
                   {/* <Image
                   src="/icon/u_bolt-alt.svg"
@@ -436,8 +430,9 @@ const ConsultingBidsGenerator = () => {
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
                           stroke="currentColor"
-                          className={`w-4 h-4 mr-3 dark:text-gray-100 text-gray-950 ${msgLoading ? "animate-spin" : ""
-                            }`}
+                          className={`w-4 h-4 mr-3 dark:text-gray-100 text-gray-950 ${
+                            msgLoading ? "animate-spin" : ""
+                          }`}
                         >
                           <path
                             strokeLinecap="round"
@@ -482,8 +477,9 @@ const ConsultingBidsGenerator = () => {
                   </h1>
 
                   <div
-                    className={`w-[100%] aigeneratedconsultingbid flex flex-col gap-4 border-[#312E37] border-[1px] rounded-[8px] p-[10px] md:p-[30px]  shadow ${msgLoading ? "animate-pulse" : ""
-                      }`}
+                    className={`w-[100%] aigeneratedconsultingbid flex flex-col gap-4 border-[#312E37] border-[1px] rounded-[8px] p-[10px] md:p-[30px]  shadow ${
+                      msgLoading ? "animate-pulse" : ""
+                    }`}
                   >
                     <div ref={componentRef}>
                       {isEditing ? (
@@ -491,10 +487,10 @@ const ConsultingBidsGenerator = () => {
                           id="editor"
                           contentEditable="true"
                           className="dark:text-gray-100 text-gray-950 "
-                        // dangerouslySetInnerHTML={{ __html: streamedData }}
-                        // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                        //   setEditedContent(e.target.innerHTML);
-                        // }}
+                          // dangerouslySetInnerHTML={{ __html: streamedData }}
+                          // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
+                          //   setEditedContent(e.target.innerHTML);
+                          // }}
                         ></div>
                       ) : (
                         <div>
@@ -519,14 +515,15 @@ const ConsultingBidsGenerator = () => {
                         jobDescription === ""
                       }
                       onClick={handleGenerate}
-                      className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px]   rounded-full border-[1px] border-[#b324d7] ${(msgLoading ||
-                        !session?.user?.email ||
-                        !aiInputUserData ||
-                        selectedOption === "" ||
-                        (selectedOption === "file" && selectedFile === "") ||
-                        jobDescription === "") &&
+                      className={`flex flex-row justify-center items-center gap-2 py-3 px-[28px]   rounded-full border-[1px] border-[#b324d7] ${
+                        (msgLoading ||
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          jobDescription === "") &&
                         "opacity-50 cursor-not-allowed" // Add this class when the button is disabled
-                        }`}
+                      }`}
                     >
                       <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                         {msgLoading ? (
@@ -537,8 +534,9 @@ const ConsultingBidsGenerator = () => {
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="currentColor"
-                              className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""
-                                }`}
+                              className={`w-4 h-4 mr-3 ${
+                                msgLoading ? "animate-spin" : ""
+                              }`}
                             >
                               <path
                                 strokeLinecap="round"
@@ -593,7 +591,8 @@ const ConsultingBidsGenerator = () => {
                           isBidCopied
                         }
                         onClick={() => copyBid(streamedData)}
-                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px]  border-[1px] rounded-full dark:border-[#312e37]  border-[#b324d7] ${msgLoading ||
+                        className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px]  border-[1px] rounded-full dark:border-[#312e37]  border-[#b324d7] ${
+                          msgLoading ||
                           !session?.user?.email ||
                           !aiInputUserData ||
                           selectedOption === "" ||
@@ -602,9 +601,9 @@ const ConsultingBidsGenerator = () => {
                             setSelectedResumeId === "") ||
                           !show ||
                           isBidCopied
-                          ? "opacity-50 cursor-not-allowed"
-                          : ""
-                          }`}
+                            ? "opacity-50 cursor-not-allowed"
+                            : ""
+                        }`}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -615,8 +614,8 @@ const ConsultingBidsGenerator = () => {
                           className="w-4 h-4 dark:text-gray-100 text-gray-950"
                         >
                           <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
                           />
                         </svg>
@@ -625,8 +624,8 @@ const ConsultingBidsGenerator = () => {
                           {msgLoading
                             ? "Please wait..."
                             : isBidCopied
-                              ? "Copied"
-                              : "Copy to clipboard"}
+                            ? "Copied"
+                            : "Copy to clipboard"}
                         </span>
                       </button>
                     )}
@@ -638,10 +637,11 @@ const ConsultingBidsGenerator = () => {
                             !show || msgLoading || !session?.user?.email
                           }
                           onClick={handleClick}
-                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px]  rounded-full edit-btn${!show || msgLoading || !session?.user?.email
-                            ? "opacity-50 cursor-not-allowed"
-                            : ""
-                            }`}
+                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px]  rounded-full edit-btn${
+                            !show || msgLoading || !session?.user?.email
+                              ? "opacity-50 cursor-not-allowed"
+                              : ""
+                          }`}
                         >
                           <div className="flex flex-row gap-2">
                             <svg
@@ -653,8 +653,8 @@ const ConsultingBidsGenerator = () => {
                               className="w-6 h-6  dark:text-[#fef08a] text-gray-950"
                             >
                               <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
                               />
                             </svg>

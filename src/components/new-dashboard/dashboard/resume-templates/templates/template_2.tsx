@@ -142,7 +142,7 @@ const ResumeTemplate2 = () => {
     updateAndSaveWorkExperienceArray(updatedExp);
   };
 
-  const handleSaveExperienceDetail = (obj: any, expInd: number) => {
+  const handleSaveExperienceDetail = (obj: {}, expInd: number) => {
     const [[key, value]] = Object.entries(obj);
     if (value !== resume?.workExperienceArray[expInd][key]) {
       let updatedExp = [...resume.workExperienceArray];
@@ -447,7 +447,10 @@ const ResumeTemplate2 = () => {
                   key={i}
                   addAchivement={() => setNewWorkExperience(i)}
                   regenrateAchivements={() => handleRegenrate(rec, i)}
-                  addNewLine={() => handleAddSpace(i)}
+                  addNewLine={() => {
+                    handleAddSpace(i);
+                    setNewAchievement("");
+                  }}
                 >
                   <div
                     key={i}
@@ -688,6 +691,7 @@ const ResumeTemplate2 = () => {
                                     e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
                                     // Save the new achievement to the state and possibly the database
                                     handleAddAchivement(i);
+                                    setNewAchievement("");
                                   }
                                 }}
                               />
