@@ -712,7 +712,7 @@ const ResumeTemplate17 = () => {
                       <li
                         className=" hover:shadow-md hover:cursor-move border-transparent border-2 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
-                   hover:bg-gray-100 font-semibold  hover:text-black flex uppercase text-md   items-center "
+                   hover:bg-gray-100 font-bold  hover:text-black flex uppercase text-[16px]   items-center "
                       >
                         <div className="flex flex-row w-full items-center justify-between">
                           <EditableField
@@ -736,7 +736,7 @@ const ResumeTemplate17 = () => {
                           </div>
                         </div>
                       </li>
-                      <li className="hover:shadow-md uppercase hover:text-black text-gray-800 hover:tet-black hover:bg-gray-100 text-base">
+                      <li className="hover:shadow-md font-medium hover:text-black text-gray-800 hover:tet-black hover:bg-gray-100 text-[15px]">
                         <EditableField
                           value={`${education?.fieldOfStudy}`}
                           style={{ width: "100%" }}
@@ -748,7 +748,7 @@ const ResumeTemplate17 = () => {
                           }}
                         />{" "}
                       </li>
-                      <li className="hover:shadow-md text-gray-800 hover:text-black hover:bg-gray-100 text-sm ">
+                      <li className="hover:shadow-md italic text-gray-800 hover:text-black hover:bg-gray-100 text-sm ">
                         <EditableField
                           type="textarea"
                           rows={2}
@@ -761,7 +761,7 @@ const ResumeTemplate17 = () => {
                           }}
                         />
                       </li>
-                      <li className="mb-4 text-xs text-gray-800 ">
+                      <li className="mb-4 text-xs text-gray-800 italic">
                         {education?.fromMonth + " " + education.fromYear} -{" "}
                         {education?.isContinue
                           ? "Present"

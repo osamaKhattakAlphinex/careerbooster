@@ -51,6 +51,7 @@ const CareerBoostingAiToolsCard = () => {
       <div className="flex mt-3 flex-wrap gap-2">
         {tabOptions.map((option, index) => (
           <Button
+            className={`hover:border-fuchsia-600`}
             key={`tab-${index}`}
             btnText={option.name}
             isActive={activeTab === option.value}

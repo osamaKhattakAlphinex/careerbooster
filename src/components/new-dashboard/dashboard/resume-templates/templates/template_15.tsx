@@ -400,7 +400,7 @@ const ResumeTemplate15 = () => {
                       className={`flex justify-start items-start ${
                         i > 0
                           ? "w-[100vw] ml-[-240px] xs:ml-0 xs:w-full"
-                          : "xs:min-h-fit  min-h-[370px]"
+                          : "xs:min-h-fit  min-h-[420px]"
                       }`}
                     >
                       <div

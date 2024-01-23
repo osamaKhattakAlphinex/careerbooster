@@ -22,7 +22,7 @@ const Toolbar = ({
   return (
     <div className=" relative group">
       <div className="group-hover:flex hidden flex-row justify-center items-center rounded-md absolute right-0  -top-8 transition-opacity ease-in duration-300">
-        {addAchivement &&
+        {addAchivement && (
           <button
             onClick={addAchivement}
             className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
@@ -42,9 +42,8 @@ const Toolbar = ({
               />
             </svg>
           </button>
-        }
-        {
-          regenrateAchivements &&
+        )}
+        {regenrateAchivements && (
           <button
             onClick={regenrateAchivements}
             className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
@@ -64,8 +63,8 @@ const Toolbar = ({
               />
             </svg>
           </button>
-        }
-        {addNewLine &&
+        )}
+        {addNewLine && (
           <button
             onClick={addNewLine}
             className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
@@ -85,9 +84,9 @@ const Toolbar = ({
               />
             </svg>
           </button>
-        }
-        {
-          addSkill && <button
+        )}
+        {addSkill && (
+          <button
             onClick={addSkill}
             className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
           >
@@ -106,9 +105,8 @@ const Toolbar = ({
               />
             </svg>
           </button>
-        }
-        {
-          regenerateSkills &&
+        )}
+        {regenerateSkills && (
           <button
             onClick={regenerateSkills}
             className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
@@ -128,9 +126,8 @@ const Toolbar = ({
               />
             </svg>
           </button>
-        }
-        {
-          regenrateSummary &&
+        )}
+        {regenrateSummary && (
           <button
             onClick={regenrateSummary}
             className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
@@ -150,7 +147,7 @@ const Toolbar = ({
               />
             </svg>
           </button>
-        }
+        )}
       </div>
       <div>{children}</div>
     </div>

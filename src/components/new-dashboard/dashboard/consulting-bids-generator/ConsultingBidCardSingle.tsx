@@ -86,7 +86,7 @@ const ConsultingBidCardSingle = ({
           <button
             type="button"
             onClick={() => handleOnView(card)}
-            className="px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e] "
+            className="dark:hover:bg-gray-700 dark:hover:border-[#5f5f5f] dark:hover:text-gray-100 px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e] "
           >
             {eyeIcon}
             {pathname == "/dashboard" ? (
@@ -98,7 +98,7 @@ const ConsultingBidCardSingle = ({
           <button
             type="button"
             onClick={() => handleOnDelete(card)}
-            className="px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
+            className="dark:hover:bg-gray-700 dark:hover:border-[#5f5f5f] dark:hover:text-gray-100 px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
           >
             {trashIcon}
             {pathname == "/dashboard" ? (
@@ -110,14 +110,14 @@ const ConsultingBidCardSingle = ({
           {pathname == "/dashboard"
             ? ""
             : card && (
-              <DownloadService
-                componentRef={componentRef}
-                view={handleOnView}
-                card={card}
-                type="consultingBid"
-                fileName="ai-consulting-bid"
-              />
-            )}
+                <DownloadService
+                  componentRef={componentRef}
+                  view={handleOnView}
+                  card={card}
+                  type="consultingBid"
+                  fileName="ai-consulting-bid"
+                />
+              )}
         </div>
       </div>
     </div>
