@@ -585,9 +585,9 @@ const ResumeTemplate14 = () => {
                     <li
                       className=" hover:shadow-md hover:cursor-move border-transparent border-2 
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
-                   hover:bg-gray-100 font-bold flex text-[16px] items-center "
+                   hover:bg-gray-100 font-bold flex text-[16px] items-center capitalize"
                     >
-                      <span className="w-2.5 h-2.5 xs:hidden md:block bg-[#745237] rounded-full mr-3"></span>
+                      {/* <span className="w-2.5 h-2.5 xs:hidden md:block bg-[#745237] rounded-full mr-3"></span> */}
                       <EditableField
                         type="textarea"
                         rows={2}

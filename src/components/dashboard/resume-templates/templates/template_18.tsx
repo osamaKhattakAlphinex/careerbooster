@@ -137,7 +137,7 @@ const ResumeTemplate18 = () => {
                     onDrop={(e) => handleDropExperience(e, i)}
                     draggable
                   >
-                    <div className="flex flex-col">
+                    <div className="flex flex-col text-[#000]">
                       <span className="hover:shadow-md hover:cursor-text text-lg hover:bg-gray-100">
                         <EditableField
                           value={rec?.title}
@@ -150,7 +150,7 @@ const ResumeTemplate18 = () => {
                           }}
                         />
                       </span>
-                      <span className="hover:cursor-default text-[14px] font-thin">
+                      <span className="hover:cursor-default text-[14px] text-[#242424] font-medium">
                         {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue
                           ? "Present"

@@ -190,7 +190,7 @@ const ResumeTemplate16 = () => {
                     addSkill={handleAddSkills}
                     regenerateSkills={getPrimarySkills}
                   >
-                    <ul className="border-2 border-transparent hover:border-dashed hover:border-gray-500  spx-3 flex  flex-col gap-1 mb-4 text-gray-300 w-full text-[14px] ">
+                    <ul className="border-2 px-2 border-transparent hover:border-dashed hover:border-gray-500  spx-3 flex  flex-col gap-1 mb-4 text-gray-300 w-full text-[14px] ">
                       {/* <li className="font-semibold  uppercase">primary</li> */}
 
                       {resume?.primarySkills.map((skill: string, i: number) => (
@@ -303,7 +303,7 @@ const ResumeTemplate16 = () => {
           {/* <span className="border-stylee w-full h-0 border border-[#444440] mb-3"></span> */}
           <span className="border-stylee w-full h-0  my-2"></span>
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-[14px] hover:shadow-md xs:min-h-fit min-h-[350px] px-4 md:px-8 hover:bg-gray-100 group-hover:pb-14 ">
+            <div className="text-[14px] hover:shadow-md xs:min-h-fit min-h-[380px] px-4 md:px-8 hover:bg-gray-100 group-hover:pb-14 ">
               <EditableField
                 type="textarea"
                 value={
@@ -354,7 +354,7 @@ const ResumeTemplate16 = () => {
                       className={`flex justify-start items-start ${
                         i > 0
                           ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
-                          : "xs:min-h-fit  min-h-[430px]"
+                          : "xs:min-h-fit  min-h-[450px]"
                       }`}
                     >
                       <div
