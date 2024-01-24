@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import RecentResumeCard from "@/components/dashboard/resume-builder/RecentResumeCard";
 import { useDispatch, useSelector } from "react-redux";
-import { crownIcon } from "@/helpers/newIconsProviders";
+import { crownIcon } from "@/helpers/iconsProvider";
 import TemplateSlider from "@/components/dashboard/resume-templates/templateSlider";
 import { useSession } from "next-auth/react";
 import { setUserData } from "@/store/userDataSlice";

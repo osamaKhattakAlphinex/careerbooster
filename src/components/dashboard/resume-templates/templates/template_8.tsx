@@ -4,12 +4,9 @@ import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useSelector } from "react-redux";
 
-import {
-  Loader,
-  crossIcon1,
-  emailIcon,
-  phoneIcon,
-} from "@/helpers/iconsProvider";
+import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
+import Loader from "@/components/common/Loader";
+
 import useGetSummary from "@/hooks/useGetSummary";
 import Toolbar from "@/components/dashboard/Toolbar";
 import EditableField from "@/components/dashboard/EditableField";
@@ -183,7 +180,9 @@ const ResumeTemplate8 = () => {
                     streamedSummaryData
                   ) : (
                     <div className="text-center">
-                      <div role="status">{Loader}</div>
+                      <div role="status">
+                        <Loader />
+                      </div>
                     </div>
                   )
                 }
@@ -278,7 +277,9 @@ const ResumeTemplate8 = () => {
                 </Toolbar>
               ) : (
                 <div className="text-center">
-                  <div role="status">{Loader}</div>
+                  <div role="status">
+                    <Loader />
+                  </div>
                 </div>
               )}
             </>
@@ -447,7 +448,9 @@ const ResumeTemplate8 = () => {
                           ></div>
                         ) : (
                           <div className="text-center">
-                            <div role="status">{Loader}</div>
+                            <div role="status">
+                              <Loader />
+                            </div>
                           </div>
                         )}
                         {newWorkExperience === i ? (

@@ -4,7 +4,6 @@ import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useSelector } from "react-redux";
 import {
-  Loader,
   contactIcon,
   crossIcon1,
   educationIcon,
@@ -13,7 +12,6 @@ import {
   phoneIcon,
   sparkleIcon,
 } from "@/helpers/iconsProvider";
-import Image from "next/image";
 import Toolbar from "@/components/dashboard/Toolbar";
 import useGetSummary from "@/hooks/useGetSummary";
 import EditableField from "@/components/dashboard/EditableField";
@@ -23,6 +21,7 @@ import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
+import Loader from "@/components/common/Loader";
 
 const ResumeTemplate1 = ({
   streamedSummaryData,
@@ -307,8 +306,7 @@ const ResumeTemplate1 = ({
           ) : (
             <div className="text-center">
               <div role="status">
-                {Loader}
-                <span className="sr-only">Loading...</span>
+                <Loader />
               </div>
             </div>
           )}
@@ -398,7 +396,9 @@ const ResumeTemplate1 = ({
                     streamedSummaryData
                   ) : (
                     <div className="text-center">
-                      <div role="status">{Loader}</div>
+                      <div role="status">
+                        <Loader />
+                      </div>
                     </div>
                   )
                 }
@@ -610,16 +610,18 @@ const ResumeTemplate1 = ({
                 );
               })}
             </>
-          ) : (
+          ) : streamedJDData ? (
             <div
-              className="list-disc "
               dangerouslySetInnerHTML={{
-                __html:
-                  resume?.workExperience !== ""
-                    ? resume?.workExperience
-                    : streamedJDData,
+                __html: streamedJDData,
               }}
             ></div>
+          ) : (
+            <div className="text-center">
+              <div role="status">
+                <Loader />
+              </div>
+            </div>
           )}
         </div>
       </div>

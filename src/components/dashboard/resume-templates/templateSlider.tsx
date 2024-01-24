@@ -1,5 +1,5 @@
 "use client";
-import { crownIcon } from "@/helpers/newIconsProviders";
+import { crownIcon } from "@/helpers/iconsProvider";
 import Image from "next/image";
 import React from "react";
 import { Autoplay, Navigation } from "swiper/modules";

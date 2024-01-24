@@ -5,12 +5,9 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setField } from "@/store/resumeSlice";
-import {
-  Loader,
-  crossIcon1,
-  emailIcon,
-  phoneIcon,
-} from "@/helpers/iconsProvider";
+import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
+import Loader from "@/components/common/Loader";
+
 import useGetSummary from "@/hooks/useGetSummary";
 import EditableField from "@/components/dashboard/EditableField";
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
@@ -243,7 +240,9 @@ const ResumeTemplate15 = () => {
                 </Toolbar>
               ) : (
                 <div className="text-center">
-                  <div role="status">{Loader}</div>
+                  <div role="status">
+                    <Loader />
+                  </div>
                 </div>
               )}
             </>
@@ -291,7 +290,9 @@ const ResumeTemplate15 = () => {
                     streamedSummaryData
                   ) : (
                     <div className="text-center">
-                      <div role="status">{Loader}</div>
+                      <div role="status">
+                        <Loader />
+                      </div>
                     </div>
                   )
                 }
@@ -487,7 +488,9 @@ const ResumeTemplate15 = () => {
                             ></div>
                           ) : (
                             <div className="text-center">
-                              <div role="status">{Loader}</div>
+                              <div role="status">
+                                <Loader />
+                              </div>
                             </div>
                           )}
 
