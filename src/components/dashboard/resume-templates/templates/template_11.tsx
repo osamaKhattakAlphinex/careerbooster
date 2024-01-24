@@ -146,7 +146,7 @@ const ResumeTemplate11 = () => {
             </li>
 
             <li className="hover:shadow-md mb-[8px] hover:bg-gray-500  flex flex-row gap-1  items-center text-xs">
-              <div className="bg-[#F4D644] flex justify-center items-center w-9 h-8 mr-3 text-white">
+              <div className="bg-[#F4D644] flex justify-center items-center w-8 h-8 mr-3 text-white">
                 {/* {linkedInIcon} */}
                 <span className="text-sm text-gray-950">in</span>
               </div>
