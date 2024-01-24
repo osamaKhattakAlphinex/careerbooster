@@ -101,7 +101,7 @@ const ResumeTemplate16 = () => {
             </div>
             <span className="border-stylee w-full h-0 my-3"></span>
             <ul className=" flex flex-col gap-3 w-full mb-4 mx-2 text-sm text-gray-300 break-all pl-0">
-              <li className="hover:shadow-md hover:bg-gray-300  hover:text-black text-[14px] mr-2 flex flex-row gap-1 items-start justify-start ">
+              <li className="hover:shadow-md hover:bg-gray-300  hover:text-black text-[14px] mr-2 xs:mr-3 flex flex-row gap-1 items-start justify-start ">
                 <span className="w-7 h-7 flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
                   {phoneIcon}
                 </span>
@@ -118,7 +118,7 @@ const ResumeTemplate16 = () => {
                   }}
                 />
               </li>
-              <li className="hover:shadow-md hover:text-black hover:bg-gray-100 mr-2 flex flex-row gap-1  items-start justify-start text-[14px]">
+              <li className="hover:shadow-md hover:text-black hover:bg-gray-100 mr-2 xs:mr-3 flex flex-row gap-1  items-start justify-start text-[14px]">
                 <span className="w-7 h-7 flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
                   {emailIcon}
                 </span>
@@ -135,7 +135,7 @@ const ResumeTemplate16 = () => {
                   }}
                 />
               </li>
-              <li className="hover:shadow-md hover:text-black group hover:bg-gray-100 flex flex-row gap-1  items-start justify-start text-[14px]">
+              <li className="hover:shadow-md hover:text-black group hover:bg-gray-100 flex flex-row gap-1 mr-3 xs:mr-3  items-start justify-start text-[14px]">
                 <div>
                   <svg
                     fill="none"
