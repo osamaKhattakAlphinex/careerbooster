@@ -95,7 +95,7 @@ const ResumeTemplate16 = () => {
       <div className="w-4/12 h-11 rounded-bl-full absolute right-0 bg-[#1F1E1E] "></div>
       <div className="flex">
         <div className="w-5/12 md:w-3/12 flex flex-col items-center md:bg-[#d9d9d9] pl-9 pt-5 h-[1150px] xs:h-auto">
-          <div className=" bg-[#1F1E1E] flex  flex-col md:w-56 h-[100%] rounded-t-full items-center">
+          <div className=" bg-[#1F1E1E] flex  flex-col md:w-56 h-[100%] rounded-t-full ">
             <div className=" w-48 h-48 xs:w-24 md:h-48 md:w-48 xs:h-24  m-3 text-gray-800 bg-[#fff] md:bg-[#d9d9d9]  text-center flex justify-center items-center  rounded-full ">
               <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
                 <EditableField
@@ -117,8 +117,8 @@ const ResumeTemplate16 = () => {
               </h3>
             </div>
             <span className="border-stylee w-full h-0 my-3"></span>
-            <ul className=" flex flex-col gap-3 w-full mb-4 ml-3 text-sm text-gray-300 break-all pl-0">
-              <li className="hover:shadow-md hover:bg-gray-300 items-center hover:text-black text-[14px]  flex flex-row gap-1 ">
+            <ul className=" flex flex-col gap-3 w-full mb-4 mx-2 text-sm text-gray-300 break-all pl-0">
+              <li className="hover:shadow-md hover:bg-gray-300 items-center hover:text-black text-[14px] mr-2 flex flex-row gap-1 ">
                 <span className="w-7 h-7 flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
                   {phoneIcon}
                 </span>
@@ -135,7 +135,7 @@ const ResumeTemplate16 = () => {
                   }}
                 />
               </li>
-              <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-1  items-center text-[14px]">
+              <li className="hover:shadow-md hover:text-black hover:bg-gray-100 mr-2 flex flex-row gap-1  items-center text-[14px]">
                 <span className="w-7 h-7 flex items-center justify-center mr-2 border-[1px] border-gray-300 rounded-full">
                   {emailIcon}
                 </span>
@@ -152,7 +152,7 @@ const ResumeTemplate16 = () => {
                   }}
                 />
               </li>
-              <li className="hover:shadow-md hover:text-black group hover:bg-gray-100 flex flex-row gap-1  items-center text-[14px]">
+              <li className="hover:shadow-md hover:text-black mr-2 group hover:bg-gray-100 flex flex-row gap-1  items-center text-[14px]">
                 {/* <a
                 href={
                   resume?.contact?.linkedIn

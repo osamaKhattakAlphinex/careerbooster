@@ -338,20 +338,22 @@ const ResumeTemplate18 = () => {
             </div>
           )}
         </div>
-        <div className=" w-4/12 md:w-4/12 xs:w-4/12  flex flex-col relative inset-0 items-center px-6 xs:px-0 md:px-6  bg-[#22405c] h-[1080px] xs:h-auto">
+        <div className=" w-4/12 md:w-4/12 xs:w-4/12  flex flex-col relative inset-0  px-6 xs:px-0 md:px-6  bg-[#22405c] h-[1080px] xs:h-auto">
           <span className="w-full bg-[#182d40] absolute md:-mx-6 h-4"></span>
-          <div className="border-[.5rem] xs:border-[2px] md:border-[.5rem] border-[#395168]   text-gray-800 mt-[3rem] bg-[#182d40] text-center flex justify-center items-center rounded-md">
-            <div className=" w-[9rem] h-[9rem] xs:w-[5.5rem] xs:h-[5.5rem]   md:w-[9rem] lg:h-[9rem] lg:w-[9rem] text-[#F1F1F1] flex justify-center items-center bg-[#182d40]  rounded-md ">
-              <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
-                <EditableField
-                  value={resume?.shortName ? resume?.shortName : "CPH"}
-                  style={{ width: "60px" }}
-                  onSave={(value: string) => {
-                    dispatch(setField({ name: "shortName", value: value }));
-                    saveResumeToDB({ ...resume, shortName: value });
-                  }}
-                />
-              </span>
+          <div className="flex justify-center">
+            <div className="border-[.5rem] xs:border-[2px] md:border-[.5rem] border-[#395168]   text-gray-800 mt-[3rem] bg-[#182d40] text-center flex justify-center items-center rounded-md">
+              <div className=" w-[9rem] h-[9rem] xs:w-[5.5rem] xs:h-[5.5rem]   md:w-[9rem] lg:h-[9rem] lg:w-[9rem] text-[#F1F1F1] flex justify-center items-center bg-[#182d40]  rounded-md ">
+                <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
+                  <EditableField
+                    value={resume?.shortName ? resume?.shortName : "CPH"}
+                    style={{ width: "60px" }}
+                    onSave={(value: string) => {
+                      dispatch(setField({ name: "shortName", value: value }));
+                      saveResumeToDB({ ...resume, shortName: value });
+                    }}
+                  />
+                </span>
+              </div>
             </div>
           </div>
 

@@ -98,22 +98,23 @@ const ResumeTemplate16 = () => {
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="flex">
-        <div className=" w-4/12 xs:w-4/12 md:w-1/3 flex flex-col  items-center   bg-[#1F1E1E]  px-9  xs:px-1 md:px-9 pt-[2rem] h-[1200px] xs:h-auto">
-          <div className=" w-48 h-48 xs:w-24 xs:h-24 md:w-48 md:h-48 border-[.5rem] xs:border-[2px] md:border-[.5rem] border-[##F1F1F1]   text-gray-800 bg-[#FFFFFF]  text-center flex justify-center items-center  rounded-full ">
-            <div className=" w-44 h-44 xs:h-[88px] xs:w-[] md:w-44 md:h-44 text-[#F1F1F1] flex justify-center items-center bg-[#383636]   rounded-full ">
-              <span className="text-4xl xs:text-lg md:text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
-                <EditableField
-                  value={resume?.shortName ? resume?.shortName : "CPH"}
-                  style={{ width: "60px" }}
-                  onSave={(value: string) => {
-                    dispatch(setField({ name: "shortName", value: value }));
-                    saveResumeToDB({ ...resume, shortName: value });
-                  }}
-                />
-              </span>
+        <div className=" w-4/12 xs:w-4/12 md:w-1/3 flex flex-col   bg-[#1F1E1E]  px-9  xs:px-1 md:px-9 pt-[2rem] h-[1200px] xs:h-auto">
+          <div className="flex justify-center">
+            <div className=" w-48 h-48 xs:w-24 xs:h-24 md:w-48 md:h-48 border-[.5rem] xs:border-[2px] md:border-[.5rem] border-[##F1F1F1]   text-gray-800 bg-[#FFFFFF]  text-center flex justify-center items-center  rounded-full ">
+              <div className=" w-44 h-44 xs:h-[88px] xs:w-[] md:w-44 md:h-44 text-[#F1F1F1] flex justify-center items-center bg-[#383636]   rounded-full ">
+                <span className="text-4xl xs:text-lg md:text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
+                  <EditableField
+                    value={resume?.shortName ? resume?.shortName : "CPH"}
+                    style={{ width: "60px" }}
+                    onSave={(value: string) => {
+                      dispatch(setField({ name: "shortName", value: value }));
+                      saveResumeToDB({ ...resume, shortName: value });
+                    }}
+                  />
+                </span>
+              </div>
             </div>
           </div>
-
           {/* contacts */}
           <span className="border-stylee w-full h-0 my-3"></span>
           <h3 className="uppercase text-xl  font-bold w-full  border-b-2 border-white pb-2 text-white  py-1 rounded-sm flex items-center  flex-row gap-2 ">
