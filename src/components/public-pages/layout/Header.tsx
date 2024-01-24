@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import { setField as setFieldRegister } from "@/store/registerSlice";
 import { useEffect, useState } from "react";
-import ThemeToggler from "../Themetoggler";
+import ThemeToggler from "../../Themetoggler";
 
 import Image from "next/image";
 import "@/app/(private_route)/dashboard.css";
@@ -111,7 +111,7 @@ const Header = () => {
                   <div className="relative inline-block text-left">
                     {/* if the screen is on mobile */}
                     {typeof window !== "undefined" &&
-                      /Mobile/.test(navigator.userAgent) ? (
+                    /Mobile/.test(navigator.userAgent) ? (
                       <div>
                         {userData.firstName + " " + userData.lastName}
                         <Link

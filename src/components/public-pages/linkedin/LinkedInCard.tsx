@@ -1,4 +1,4 @@
-import LinkedInUploadPDFResume from "@/components/linkedin/LinkedInUploadPDFResume";
+import LinkedInUploadPDFResume from "@/components/public-pages/linkedin/LinkedInUploadPDFResume";
 
 const LinkedInCard = () => {
   return (

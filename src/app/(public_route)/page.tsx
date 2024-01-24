@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import CTASection from "@/components/Homepage/CTASection";
-import FeaturesSecond from "@/components/Homepage/FeaturesSecond";
-import FeaturesSection from "@/components/Homepage/FeaturesSection";
-import HeroArea from "@/components/Homepage/HeroArea";
-import PricingSection from "@/components/Homepage/PricingSection";
-import Reviews from "@/components/Homepage/Reviews";
-import RewardsSection from "@/components/Homepage/RewardsSection";
-import UseCases from "@/components/Homepage/UseCases";
-import FAQList from "@/components/Homepage/Faqs";
+import CTASection from "@/components/public-pages/Homepage/CTASection";
+import FeaturesSecond from "@/components/public-pages/Homepage/FeaturesSecond";
+import FeaturesSection from "@/components/public-pages/Homepage/FeaturesSection";
+import HeroArea from "@/components/public-pages/Homepage/HeroArea";
+import PricingSection from "@/components/public-pages/Homepage/PricingSection";
+import Reviews from "@/components/public-pages/Homepage/Reviews";
+import RewardsSection from "@/components/public-pages/Homepage/RewardsSection";
+import UseCases from "@/components/public-pages/Homepage/UseCases";
+import FAQList from "@/components/public-pages/Homepage/Faqs";
 import "../plugins.css";
 import "../style.css";
 

@@ -1,8 +1,8 @@
-import Header from "@/components/layout/Header";
+import Header from "@/components/public-pages/layout/Header";
 
 import type { Metadata } from "next";
 
-import Footer from "@/components/layout/Footer";
+import Footer from "@/components/public-pages/layout/Footer";
 import "../plugins.css";
 import "../style.css";
 export const metadata: Metadata = {

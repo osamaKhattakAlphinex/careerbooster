@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 // import { slugify } from "@/helpers/slugify";
 import copy from "clipboard-copy";
 import { clipboardIcon, refreshIconRotating } from "@/helpers/iconsProvider";
-import Button from "../Button";
+import Button from "../../Button";
 import LinkedInSummary from "./LinkedInSummary";
 import axios from "axios";
 import { useRouter } from "next/navigation";

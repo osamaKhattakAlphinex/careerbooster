@@ -1,7 +1,7 @@
 "use client";
 import useTheme from "@/lib/useTheme";
 import Link from "next/link";
-import SVGProvider from "../../helpers/SVGProvider";
+import SVGProvider from "../../../helpers/SVGProvider";
 const FeaturesSecond = () => {
   const [theme] = useTheme();
   return (

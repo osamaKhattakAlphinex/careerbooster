@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import LinkedInUploadPDFResume from "@/components/linkedin/LinkedInUploadPDFResume";
+import LinkedInUploadPDFResume from "@/components/public-pages/linkedin/LinkedInUploadPDFResume";
 import "@/app/plugins.css";
 import "@/app/style.css";
 export const metadata: Metadata = {

@@ -1,9 +1,9 @@
-import Blog from "@/components/Blogs/blog";
-import BlogPagination from "@/components/Blogs/blogpagination";
-import AddressCard from "@/components/Contact/AddressCard";
-import ContactForm from "@/components/Contact/ContactForm";
-import MapCard from "@/components/Contact/MapCard";
-import CTASection from "@/components/Homepage/CTASection";
+import Blog from "@/components/public-pages/Blogs/blog";
+import BlogPagination from "@/components/public-pages/Blogs/blogpagination";
+import AddressCard from "@/components/public-pages/Contact/AddressCard";
+import ContactForm from "@/components/public-pages/Contact/ContactForm";
+import MapCard from "@/components/public-pages/Contact/MapCard";
+import CTASection from "@/components/public-pages/Homepage/CTASection";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
 import "@/app/plugins.css";

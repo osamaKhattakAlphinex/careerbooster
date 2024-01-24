@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SVGProvider from "../../helpers/SVGProvider";
+import SVGProvider from "../../../helpers/SVGProvider";
 
 const AboutCard = () => {
   return (
