@@ -26,7 +26,6 @@ const Tooltip: React.FC<TooltipProps> = ({
   const toggleTooltip = () => {
     setShowTooltip(!showTooltip);
   };
-  console.log(text, audioPlayed, showTooltip);
   return (
     <div onClick={toggleTooltip} className="relative inline-block">
       {children}
@@ -121,7 +120,6 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
       }
       // if (response && tooltipText !== "If yes than click me !") {
       if (!listeningUser && tooltipText !== "If yes than click me !") {
-        // console.log(response);
         setIsGif(!isGif);
         setAudioPlayed(true);
         // const audioData = response.data.data;
@@ -158,8 +156,6 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
       }
 
       if (tooltipText === "If yes than click me !" && !listeningUser) {
-        console.log("inside");
-
         SpeechRecognition.startListening({
           continuous: true,
           language: "en-US",
@@ -175,7 +171,6 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
         return;
       }
       if (listeningUser) {
-        console.log("inside last");
         SpeechRecognition.stopListening();
         setSpeechText(transcript);
         setListeningUser(false);
@@ -211,7 +206,6 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
           input: speechText,
         })
         .then((res) => {
-          console.log(res);
           setResponse(res);
         });
     }
