@@ -125,7 +125,7 @@ const ResumeTemplate10 = () => {
           </div>
 
           <ul className=" flex flex-col gap-2 text-sm break-all pl-0 mt-4">
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex flex-row gap-1  items-center">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex flex-row gap-1  items-start">
               <div className="bg-[#043382] rounded-full p-2 mr-3">
                 {" "}
                 {phoneIcon}
@@ -144,7 +144,7 @@ const ResumeTemplate10 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 flex flex-row gap-1  items-start text-xs">
               <div className="bg-[#043382] rounded-full p-2 mr-3">
                 {" "}
                 {emailIcon}
@@ -164,7 +164,7 @@ const ResumeTemplate10 = () => {
               />
             </li>
 
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row gap-1  items-start text-xs">
               <div className="bg-[#043382] rounded-full p-2 mr-3 text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

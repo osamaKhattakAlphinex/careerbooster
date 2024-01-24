@@ -119,7 +119,7 @@ const ResumeTemplate17 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-3  items-center ">
+            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-3  items-start ">
               {emailIcon}
 
               <EditableField
@@ -135,7 +135,7 @@ const ResumeTemplate17 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md group hover:text-black hover:bg-gray-100 text-gray-300 flex flex-row gap-2  items-center ">
+            <li className="hover:shadow-md group hover:text-black hover:bg-gray-100 text-gray-300 flex flex-row gap-2  items-start ">
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
@@ -346,7 +346,7 @@ const ResumeTemplate17 = () => {
                       className={`flex justify-start items-start ${
                         i > 0
                           ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
-                          : "min-h-[470px] xs:min-h-fit "
+                          : "min-h-[370px] xs:min-h-fit "
                       }`}
                     >
                       <div
