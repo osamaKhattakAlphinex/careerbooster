@@ -118,7 +118,7 @@ const ResumeTemplate14 = () => {
         </div>
       </div>
       <div className="flex">
-        <div className="w-3/12 xs:w-3/12 md:w-3/12 flex flex-col bg-[#E3DBCC] pl-3 md:pl-8 pr-6 pt-[15rem]  xs:pt-[14rem] md:pt-[15rem]  h-[1140px] xs:h-auto lg:pt-[15rem]  ">
+        <div className="w-3/12 xs:w-3/12 md:w-3/12 flex flex-col bg-[#E3DBCC] pl-3 md:pl-8 pr-6 pt-[15rem]  xs:pt-[14rem] md:pt-[15rem]  h-[1070px] xs:h-auto lg:pt-[15rem]  ">
           {/* contacts */}
           <span className="border-stylee w-full h-0  my-3"></span>
           <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
@@ -208,7 +208,7 @@ const ResumeTemplate14 = () => {
                   <ul className="border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex  flex-col gap-1 mb-4 text-sm">
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex justify-between items-center"
+                        className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex justify-start items-center"
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -217,6 +217,7 @@ const ResumeTemplate14 = () => {
                         onDrop={(e) => handleDropPrimary(e, i)}
                         draggable
                       >
+                        <span className="w-1 h-1 xs:hidden md:block bg-[#745237] rounded-full mr-3"></span>
                         <EditableField
                           value={skill}
                           onSave={(value: string) => {
@@ -276,7 +277,7 @@ const ResumeTemplate14 = () => {
             </>
           )}
         </div>
-        <div className="w-2/3 md:w-2/3 flex flex-col px-4 xs:px-2 md:px-8 pt-[15rem] xs:pt-[14rem] md:pt-[15rem] lg:pt-[15rem] ">
+        <div className="w-9/12 md:w-9/12  flex flex-col px-4 xs:px-2 md:px-8 pt-[15rem] xs:pt-[14rem] md:pt-[15rem] lg:pt-[15rem] ">
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0 my-3"></span>
           <h3 className="uppercase text-lg font-semibold">EXECUTIVE SUMMARY</h3>
@@ -332,8 +333,8 @@ const ResumeTemplate14 = () => {
                       key={i}
                       className={`flex justify-start items-start ${
                         i > 0
-                          ? "w-[100vw] ml-[-150px] xs:ml-0 xs:w-full"
-                          : "xs:min-h-fit  min-h-[430px]"
+                          ? "w-[100vw] ml-[-210px] xs:ml-0 xs:w-full"
+                          : "xs:min-h-fit  min-h-[420px]"
                       }`}
                     >
                       <div
@@ -349,7 +350,7 @@ const ResumeTemplate14 = () => {
                         <div className="flex">
                           <div className="flex xs:flex md:flex lg:flex ">
                             <span className="w-4 h-4 bg-[#745237] rounded-full"></span>
-                            <span className="h-13 w-[2.5px] bg-[#745237] mx-2 relative -left-[17px]"></span>
+                            <span className="h-13 w-[2.5px] bg-[#745237] mx-2 mt-1 relative -left-[17px]"></span>
                           </div>
 
                           <div>
