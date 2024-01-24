@@ -76,7 +76,7 @@ const ResumeTemplate15 = () => {
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="flex">
-        <div className=" w-5/12 xs:w-5/12 md:w-5/12 flex flex-col    bg-[#F4F4F4]  px-9 xs:px-0  md:px-9 lg:px-9    pt-[2rem]  xs:pt-[3.5rem] h-[1080px] xs:h-auto ">
+        <div className=" w-5/12 xs:w-5/12 md:w-5/12 flex flex-col bg-[#F4F4F4]  px-9 xs:px-0  md:px-9 lg:px-9 pt-[2rem]  xs:pt-[3.5rem] h-[1200px] xs:h-auto ">
           <div className="flex justify-center">
             <div className=" w-48 h-48 xs:w-24 xs:h-24   md:w-48 lg:h-48 lg:w-48 border-[.5rem] xs:border-[2px] md:border-[.5rem] border-[#ffff]  md:h-48 text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full ">
               <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
@@ -280,7 +280,7 @@ const ResumeTemplate15 = () => {
           </h3>
           <span className="border-stylee w-full h-0  my-3 xs:my-0 md:my-3"></span>
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-[16px] hover:shadow-md min-h-[350px] xs:min-h-fit  border-2 border-transparent hover:border-gray-500 hover:border-dashed  ">
+            <div className="text-[16px] hover:shadow-md min-h-[460px] xs:min-h-fit  border-2 border-transparent hover:border-gray-500 hover:border-dashed  ">
               <EditableField
                 type="textarea"
                 value={

@@ -223,7 +223,7 @@ const ResumeTemplate14 = () => {
                         />
                         <div
                           onClick={() => handlers.handleDeleteSkill(i)}
-                          className="w-4 h-4  cursor-pointer child"
+                          className="w-4 h-4 ml-auto cursor-pointer child"
                         >
                           {crossIcon1}
                         </div>
@@ -572,7 +572,7 @@ const ResumeTemplate14 = () => {
             ></div>
           )}
           {/* education */}
-          <div className=" ml-[-150px]  xs:ml-0">
+          <div className=" ml-[-210px]  xs:ml-0">
             <span className="w-full h-0 my-1 page-break"></span>
             <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
               Education

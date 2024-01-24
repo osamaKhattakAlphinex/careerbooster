@@ -338,10 +338,10 @@ const ResumeTemplate12 = () => {
                     className={`flex justify-start ${
                       i > 0
                         ? "w-[100vw] ml-[-250px] mt-1 xs:ml-0 xs:w-full "
-                        : "xs:min-h-fit  min-h-[350px]"
+                        : "xs:min-h-fit  min-h-[400px]"
                     }`}
                   >
-                    <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5 lg:-mx-5    h-full flex flex-col items-center  gap-1">
+                    <div className="w-[5%] mt-2 pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5 lg:-mx-5    h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
                       {resume?.workExperienceArray.length - 1 !== i && (
                         <div className="h-full w-[2px] bg-gray-500"></div>
