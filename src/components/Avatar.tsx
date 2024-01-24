@@ -101,7 +101,6 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
         return; // If firstName and lastName haven't changed, don't make the request again
       }
       if (response) {
-        console.log(response);
         setIsGif(!isGif);
         setAudioPlayed(true);
         const audioData = response.data.data;
@@ -112,7 +111,6 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
           fetchAudio(audioFileUrl2),
         ])
           .then((audioBuffers) => {
-            console.log(audioBuffers);
             // Concatenate the two audio buffers
             const concatenatedBuffer = concatenateBuffers(audioBuffers);
             // Create a new buffer that will contain all audio files

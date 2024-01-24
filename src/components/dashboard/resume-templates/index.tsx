@@ -60,11 +60,11 @@ const Templates = () => {
     }
   };
   useEffect(() => {
-    console.log("templates")
+    // console.log("templates")
   }, [templates]);
   useEffect(() => {
     setTemplates(ALL_TEMPLATES);
-  }, [])
+  }, []);
   useEffect(() => {
     filterTemplates();
   }, [activeTab]);
@@ -75,8 +75,9 @@ const Templates = () => {
         {tabs.map((tab, index) => (
           <button
             key={index}
-            className={`px-4 py-2 text-sm rounded-full border-[1px] border-gray-600 ${activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
-              }`}
+            className={`px-4 py-2 text-sm rounded-full border-[1px] border-gray-600 ${
+              activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
+            }`}
             onClick={() => setActiveTab(tab)}
           >
             {tab.title}
@@ -85,10 +86,7 @@ const Templates = () => {
       </div>
 
       <div className=" text-center "> {activeTab.description}</div>
-      {templates &&
-
-        <TemplateSlider templates={templates} />
-      }
+      {templates && <TemplateSlider templates={templates} />}
     </div>
   );
 };
