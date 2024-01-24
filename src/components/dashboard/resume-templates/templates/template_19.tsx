@@ -376,7 +376,7 @@ const ResumeTemplate19 = ({
                 Education
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
-              <ul className="pl-0 flex xs:flex-col md:flex-row lg:flex-row flex-wrap px-0 xs:px-3 md:px-0 text-gray-800  w-full">
+              <ul className="pl-0  flex xs:flex-col md:flex-row lg:flex-row flex-wrap px-0 xs:px-3 md:px-0 text-gray-800  w-full">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[30%] xs:w-full md:w-[30%] lg:w-[30%] md:m-2 ">
