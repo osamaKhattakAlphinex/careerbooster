@@ -6,19 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { setField } from "@/store/resumeSlice";
 import {
-  contactIcon,
+  Loader,
   crossIcon1,
-  educationIcon,
   emailIcon,
-  linkedInIcon,
-  newLinkedInIcon,
   phoneIcon,
-  sparkleIcon,
 } from "@/helpers/iconsProvider";
 import useGetSummary from "@/hooks/useGetSummary";
 import Toolbar from "@/components/new-dashboard/common/Toolbar";
 import EditableField from "@/components/new-dashboard/common/EditableField";
-import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
@@ -29,15 +24,6 @@ const ResumeTemplate18 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
-  const [newSecondarySkill, setNewSecondarySkill] = useState(false);
-  const [newProfessionalSkill, setNewProfessionalSkill] = useState(false);
-  const [newWorkExperience, setNewWorkExperience] = useState<number>();
-  const [newAchievement, setNewAchievement] = useState("");
-  const [newEducation, setNewEducation] = useState(false);
-  const [primarySkillAddButtonVisible, setPrimarySkillAddButtonVisible] =
-    useState(false);
-  const [secondarySkillAddButtonVisible, setSecondarySkillAddButtonVisible] =
-    useState(false);
 
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
@@ -51,19 +37,8 @@ const ResumeTemplate18 = () => {
   const [streamedJDData, setStreamedJDData] = useState<any>("");
   const { saveResumeToDB } = useSaveResumeToDB();
 
-  const [
-    professionalSkillAddButtonVisible,
-    setProfessionalSkillAddButtonVisible,
-  ] = useState(false);
-  const [workExperienceAddButtonVisible, setWorkExperienceAddButtonVisible] =
-    useState<number>();
-  const [educationAddButtonVisible, setEducationAddButtonVisible] =
-    useState(false);
   const [primarySkill, setPrimarySkill] = useState<string>("");
-  const [secondarySkill, setSecondarySkill] = useState<string>("");
-  const [professionalSkill, setProfessionalSkill] = useState<string>("");
 
-  const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
@@ -127,25 +102,7 @@ const ResumeTemplate18 = () => {
                     streamedSummaryData
                   ) : (
                     <div className="text-center">
-                      <div role="status">
-                        <svg
-                          aria-hidden="true"
-                          className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-pink-600"
-                          viewBox="0 0 100 101"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                            fill="currentColor"
-                          />
-                          <path
-                            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                            fill="currentFill"
-                          />
-                        </svg>
-                        <span className="sr-only">Loading...</span>
-                      </div>
+                      <div role="status">{Loader}</div>
                     </div>
                   )
                 }
@@ -174,8 +131,6 @@ const ResumeTemplate18 = () => {
                   <div
                     key={i}
                     className="hover:border-dashed hover:border-gray-500 my-2 border-transparent border-2 hover:cursor-move hover:border-2"
-                    onMouseEnter={() => setWorkExperienceAddButtonVisible(i)}
-                    onMouseLeave={() => setWorkExperienceAddButtonVisible(-1)}
                     onDragStart={(e) =>
                       e.dataTransfer.setData("text/plain", i.toString())
                     }
@@ -261,15 +216,7 @@ const ResumeTemplate18 = () => {
                 Education
               </h3>
               <span className="border-stylee w-full h-0 my-3"></span>
-              <ul
-                className="pl-0 flex xs:flex-col my-3 md:flex-row lg:flex-row flex-wrap xs:px-2 md:px-0 text-gray-800  w-full"
-                onMouseEnter={() =>
-                  !newEducation && setEducationAddButtonVisible(true)
-                }
-                onMouseLeave={() =>
-                  !newEducation && setEducationAddButtonVisible(false)
-                }
-              >
+              <ul className="pl-0 flex xs:flex-col my-3 md:flex-row lg:flex-row flex-wrap xs:px-2 md:px-0 text-gray-800  w-full">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[30%] xs:w-full md:w-[30%] lg:w-[30%] md:m-2  ">
@@ -338,20 +285,22 @@ const ResumeTemplate18 = () => {
             </div>
           )}
         </div>
-        <div className=" w-4/12 md:w-4/12 xs:w-4/12  flex flex-col relative inset-0 items-center px-6 xs:px-0 md:px-6  bg-[#22405c] h-[1080px] xs:h-auto">
+        <div className=" w-4/12 md:w-4/12 xs:w-4/12  flex flex-col relative inset-0  px-6 xs:px-0 md:px-6  bg-[#22405c] h-[1080px] xs:h-auto">
           <span className="w-full bg-[#182d40] absolute md:-mx-6 h-4"></span>
-          <div className="border-[.5rem] xs:border-[2px] md:border-[.5rem] border-[#395168]   text-gray-800 mt-[3rem] bg-[#182d40] text-center flex justify-center items-center rounded-md">
-            <div className=" w-[9rem] h-[9rem] xs:w-[5.5rem] xs:h-[5.5rem]   md:w-[9rem] lg:h-[9rem] lg:w-[9rem] text-[#F1F1F1] flex justify-center items-center bg-[#182d40]  rounded-md ">
-              <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
-                <EditableField
-                  value={resume?.shortName ? resume?.shortName : "CPH"}
-                  style={{ width: "60px" }}
-                  onSave={(value: string) => {
-                    dispatch(setField({ name: "shortName", value: value }));
-                    saveResumeToDB({ ...resume, shortName: value });
-                  }}
-                />
-              </span>
+          <div className="flex justify-center">
+            <div className="border-[.5rem] xs:border-[2px] md:border-[.5rem] border-[#395168]   text-gray-800 mt-[3rem] bg-[#182d40] text-center flex justify-center items-center rounded-md">
+              <div className=" w-[9rem] h-[9rem] xs:w-[5.5rem] xs:h-[5.5rem]   md:w-[9rem] lg:h-[9rem] lg:w-[9rem] text-[#F1F1F1] flex justify-center items-center bg-[#182d40]  rounded-md ">
+                <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
+                  <EditableField
+                    value={resume?.shortName ? resume?.shortName : "CPH"}
+                    style={{ width: "60px" }}
+                    onSave={(value: string) => {
+                      dispatch(setField({ name: "shortName", value: value }));
+                      saveResumeToDB({ ...resume, shortName: value });
+                    }}
+                  />
+                </span>
+              </div>
             </div>
           </div>
 
@@ -395,21 +344,6 @@ const ResumeTemplate18 = () => {
               />
             </li>
             <li className="hover:shadow-md  hover:bg-gray-100 group hover:text-black hover text-gray-300 flex flex-row gap-2  items-center text-sm">
-              {/* <a
-                href={
-                  resume?.contact?.linkedIn
-                    ? resume?.contact?.linkedIn
-                    : "https://www.linkedin.com/"
-                }
-                target="_blank"
-                className="text-blue-600"
-              > */}
-              {/* <span className="w-[20px] h-[20px] xs:w-[20px] xs:p-[2px] group-hover:text-black md:px-0 group-hover:border-[#000]  xs:h-[20px] md:w-[20px] md:h-[20px]  flex items-center justify-center border-[1px] border-[#fff] rounded-full">
-                <span className=" w-[20px] h-[20px] flex justify-center items-center text-gray-300 font-thin text-sm group-hover:text-[#000]">
-                  in
-                </span>
-              </span> */}
-
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
@@ -438,7 +372,6 @@ const ResumeTemplate18 = () => {
                   }
                 }}
               />
-              {/* </a> */}
             </li>
           </ul>
           {/* Skills */}
@@ -457,15 +390,7 @@ const ResumeTemplate18 = () => {
                   addSkill={handleAddSkills}
                   regenerateSkills={getPrimarySkills}
                 >
-                  <ul
-                    className="pl-0 flex  flex-col xs:px-1 md:px-0 gap-1 mb-4 text-gray-300 w-full text-sm "
-                    onMouseEnter={() =>
-                      !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
-                    }
-                    onMouseLeave={() =>
-                      !newPrimarySkill && setPrimarySkillAddButtonVisible(false)
-                    }
-                  >
+                  <ul className="border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex  flex-col xs:px-1 md:px-0 gap-1 mb-4 text-gray-300 w-full text-sm ">
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
                         className="hover:shadow-md hover:cursor-move parent xs:w-full hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center  "
@@ -506,21 +431,13 @@ const ResumeTemplate18 = () => {
                             onChange={(e) => setPrimarySkill(e.target.value)}
                             onKeyPress={(e) => {
                               if (e.key === "Enter") {
-                                if (primarySkill.trim() !== "") {
-                                  addPrimarySkill(primarySkill);
-                                  setPrimarySkill("");
-                                }
+                                handleSaveSkills();
                               }
                             }}
                           />
                           <button
                             className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
-                            onClick={() => {
-                              if (primarySkill.trim() !== "") {
-                                addPrimarySkill(primarySkill);
-                                setPrimarySkill(""); // Empty the input field
-                              }
-                            }}
+                            onClick={handleSaveSkills}
                           >
                             save
                           </button>
@@ -528,7 +445,6 @@ const ResumeTemplate18 = () => {
                         <button
                           onClick={() => {
                             setNewPrimarySkill(false);
-                            setPrimarySkillAddButtonVisible(false);
                           }}
                           className="bg-red-500 py-1 px-2 text-white rounded-full"
                         >
@@ -542,25 +458,7 @@ const ResumeTemplate18 = () => {
                 </Toolbar>
               ) : (
                 <div className="text-center">
-                  <div role="status">
-                    <svg
-                      aria-hidden="true"
-                      className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-pink-600"
-                      viewBox="0 0 100 101"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                        fill="currentColor"
-                      />
-                      <path
-                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                        fill="currentFill"
-                      />
-                    </svg>
-                    <span className="sr-only">Loading...</span>
-                  </div>
+                  <div role="status">{Loader}</div>
                 </div>
               )}
             </>
