@@ -74,8 +74,8 @@ const ResumeTemplate10 = () => {
 
   return (
     <div className="first-page relative">
-      <div className="flex flex-row absolute top-[50px] h-36 z-30  bg-[#043382] items-center justify-center    w-full ">
-        <div className="  z-50 w-40 h-40 xs:w-[120px] xs:h-[80px] sm:w-[120px] sm:h-[80px] border-2 border-[#042B6B] md:w-48 md:h-48 lg:w-48 lg:h-48  text-white bg-gray-800 text-center flex justify-center   rounded-full mx-4  md:mt-0 md:mr-8 items-center ">
+      <div className="flex flex-row absolute top-[50px] h-36 z-10  bg-[#043382] items-center justify-center    w-full ">
+        {/* <div className="  z-50 w-40 h-40 xs:w-[120px] xs:h-[80px] sm:w-[120px] sm:h-[80px] border-2 border-[#042B6B] md:w-48 md:h-48 lg:w-48 lg:h-48  text-white bg-gray-800 text-center flex justify-center   rounded-full mx-4  md:mt-0 md:mr-8 items-center ">
           <span className="text-4xl md:text-3xl  hover:shadow-md hover:bg-gray-500">
             <EditableField
               value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -86,7 +86,7 @@ const ResumeTemplate10 = () => {
               }}
             />
           </span>
-        </div>
+        </div> */}
         <div className="flex flex-col">
           <h2 className="text-2xl font-bold xs:font-medium text-gray-100 md:text-4xl hover:shadow-md hover:bg-gray-500">
             <EditableField

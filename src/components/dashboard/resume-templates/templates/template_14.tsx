@@ -115,7 +115,7 @@ const ResumeTemplate14 = () => {
         </div>
       </div>
       <div className="flex">
-        <div className="w-3/12 xs:w-3/12 md:w-3/12 flex flex-col bg-[#E3DBCC] pl-3 md:pl-8 pr-6 pt-[15rem]  xs:pt-[14rem] md:pt-[15rem]  h-[1070px] xs:h-auto lg:pt-[15rem]  ">
+        <div className="w-3/12 xs:w-3/12 md:w-3/12 flex flex-col bg-[#E3DBCC] pl-3 md:pl-8 pr-6 pt-[15rem]  xs:pt-[14rem] md:pt-[15rem]  h-[1068px] xs:h-auto lg:pt-[15rem]  ">
           {/* contacts */}
           <span className="border-stylee w-full h-0  my-3"></span>
           <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
@@ -335,7 +335,7 @@ const ResumeTemplate14 = () => {
                       className={`flex justify-start items-start ${
                         i > 0
                           ? "w-[100vw] ml-[-210px] xs:ml-0 xs:w-full"
-                          : "xs:min-h-fit  min-h-[420px]"
+                          : "xs:min-h-fit  min-h-[350px]"
                       }`}
                     >
                       <div

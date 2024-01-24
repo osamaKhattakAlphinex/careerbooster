@@ -75,7 +75,7 @@ const ResumeTemplate4 = () => {
   return (
     <div className="first-page ">
       <div className=" flex">
-        <div className=" w-3/12 xs:w-1/3 md:w-4/12 flex flex-col pl-3 md:pl-4 bg-[#323B4C] text-gray-100  pr-6 md:pr-4  py-8 h-[1080px] xs:h-auto">
+        <div className=" w-3/12 xs:w-1/3 md:w-3/12 flex flex-col pl-3 md:pl-4 bg-[#323B4C] text-gray-100  pr-6 md:pr-4  py-8 h-[1080px] xs:h-auto">
           <div className=" w-32 h-32  xs:w-[72px] xs:h-[72px] sm:w-24 sm:h-24 md:w-32 md:h-32 text-white bg-gray-800 text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-0  md:mt-0 mb-4 justify-center md:mb-2">
             <span className="text-3xl xs:text-2xl md:text-3xl hover:shadow-md hover:bg-gray-500">
               <EditableField
@@ -331,7 +331,7 @@ const ResumeTemplate4 = () => {
                           : "xs:min-h-fit min-h-[380px]"
                       }`}
                     >
-                      <div className="w-[5%] pr-5 xs:pr-0 md:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
+                      <div className="w-[5%] pr-5 mt-1 xs:pr-0 md:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
                         <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
                         {resume?.workExperienceArray.length - 1 !== i && (
                           <span className="h-full w-[2px] bg-gray-500 border-b border-gray-500"></span>

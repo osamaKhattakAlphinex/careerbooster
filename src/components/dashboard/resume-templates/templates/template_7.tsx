@@ -5,8 +5,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
-import Loader from "@/components/common/Loader";
-
 import useGetSummary from "@/hooks/useGetSummary";
 import Toolbar from "@/components/dashboard/Toolbar";
 import EditableField from "@/components/dashboard/EditableField";
@@ -16,6 +14,7 @@ import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
+import Loader from "@/components/common/Loader";
 const ResumeTemplate7 = () => {
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
@@ -102,7 +101,7 @@ const ResumeTemplate7 = () => {
             </h3>
 
             <Toolbar regenrateSummary={getSummary}>
-              <div className="text-sm  hover:shadow-md border-2 border-transparent hover:border-gray-500 hover:border-dashed mt-4 xs:min-h-fit min-h-[420px]">
+              <div className="text-sm  hover:shadow-md mt-4 border-2 border-transparent hover:border-gray-500 hover:border-dashed xs:min-h-fit min-h-[380px]">
                 <EditableField
                   type="textarea"
                   value={
@@ -455,7 +454,7 @@ const ResumeTemplate7 = () => {
           )}
         </div>
         {/* <div className="relative  border-[1px] border-gray-300 "></div> */}
-        <div className="w-[33%] xs:w-1/3 md:w-[33%] flex flex-col gap-4 border-l-2 border-gray-300 h-[1120px] xs:h-auto ">
+        <div className="w-[33%] xs:w-1/3 md:w-[33%] flex flex-col gap-4 border-l-2 border-gray-300 h-[1080px] xs:h-auto ">
           {/* contacts */}
           <div className="bg-gray-200 px-4 py-4 h-44">
             <h3 className="uppercase text-lg font-semibold flex flex-row gap-1 items-center mb-2">
@@ -463,7 +462,7 @@ const ResumeTemplate7 = () => {
             </h3>
 
             <ul className=" flex flex-col gap-4  xs:gap-2 md:gap-4 mb-4 text-sm md:text-lg break-all pl-0">
-              <li className="hover:shadow-md hover:bg-gray-100 text-xs flex flex-row gap-1  items-start">
+              <li className="hover:shadow-md hover:bg-gray-100 text-xs flex flex-row gap-1  items-center">
                 {phoneIcon}
                 <EditableField
                   value={
@@ -478,7 +477,7 @@ const ResumeTemplate7 = () => {
                   }}
                 />
               </li>
-              <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-start text-xs">
+              <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center text-xs">
                 {emailIcon}
                 <EditableField
                   value={
@@ -493,7 +492,7 @@ const ResumeTemplate7 = () => {
                   }}
                 />
               </li>
-              <li className="hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-start text-xs">
+              <li className="hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center text-xs">
                 <svg
                   width="20"
                   height="20"

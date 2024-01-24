@@ -77,7 +77,7 @@ const ResumeTemplate17 = () => {
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="flex">
-        <div className=" w-[35%] md:w-1/3 flex flex-col  bg-[#323b4c] px-4 xs:px-2 md:px-4   pt-[2rem] h-[1150px] xs:h-auto ">
+        <div className=" w-[35%] md:w-1/3 flex flex-col  bg-[#323b4c] px-4 xs:px-2 md:px-4   pt-[2rem] h-[1080px] xs:h-auto ">
           <div className="flex justify-center">
             <div className="border-[.5rem] border-[#ae9243]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
               <div className=" w-44 h-44 xs:w-20 xs:h-20 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
@@ -291,7 +291,7 @@ const ResumeTemplate17 = () => {
           </h3>
           <span className="border-stylee w-full h-0  my-3"></span>
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-[16px] hover:shadow-md min-h-[450px] xs:min-h-fit border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
+            <div className="text-[16px] hover:shadow-md min-h-[400px] xs:min-h-fit border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
               <EditableField
                 type="textarea"
                 value={
@@ -346,7 +346,7 @@ const ResumeTemplate17 = () => {
                       className={`flex justify-start items-start ${
                         i > 0
                           ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
-                          : "min-h-[370px] xs:min-h-fit "
+                          : "min-h-[350px] xs:min-h-fit "
                       }`}
                     >
                       <div
