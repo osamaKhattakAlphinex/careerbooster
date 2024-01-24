@@ -162,7 +162,9 @@ const ResumeTemplate2 = () => {
                   streamedSummaryData
                 ) : (
                   <div className="text-center">
-                    <div role="status">{Loader}</div>
+                    <div role="status">
+                      <Loader />
+                    </div>
                   </div>
                 )
               }
@@ -254,7 +256,9 @@ const ResumeTemplate2 = () => {
           </>
         ) : (
           <div className="text-center">
-            <div role="status">{Loader}</div>
+            <div role="status">
+              <Loader />
+            </div>
           </div>
         )}
       </div>
@@ -428,7 +432,9 @@ const ResumeTemplate2 = () => {
                           ></div>
                         ) : (
                           <div className="text-center">
-                            <div role="status">{Loader}</div>
+                            <div role="status">
+                              <Loader />
+                            </div>
                           </div>
                         )}
                         {newWorkExperience === i ? (

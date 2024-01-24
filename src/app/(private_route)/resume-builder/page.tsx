@@ -23,7 +23,7 @@ import GenerateResume from "@/components/dashboard/resume-builder/GenerateNewRes
 import Link from "next/link";
 import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import Image from "next/image";
-import { crownIcon } from "@/helpers/newIconsProviders";
+import { crownIcon } from "@/helpers/iconsProvider";
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useGetUserData from "@/hooks/useGetUserData";
 import useGetSummary from "@/hooks/useGetSummary";

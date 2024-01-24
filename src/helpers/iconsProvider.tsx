@@ -32,8 +32,7 @@ export const Loader = (
       fill="currentFill"
     />
   </svg>
-
-)
+);
 
 export const bid = (
   <svg
@@ -300,7 +299,7 @@ export const linkedInIcon = (
     width="50px"
     height="50px"
     className="w-5 h-5"
-  // stroke="currentColor"
+    // stroke="currentColor"
   >
     <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
   </svg>
@@ -908,6 +907,30 @@ export const settingIcon = (
       strokeLinecap="round"
       strokeLinejoin="round"
       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+    />
+  </svg>
+);
+export const crownIcon = (
+  <svg
+    width="16"
+    height="17"
+    viewBox="0 0 16 17"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M3.00065 13.8337L1.33398 6.16699L4.66732 7.83366L8.00065 3.16699L11.334 7.83366L14.6673 6.16699L13.0007 13.8337H3.00065Z"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M7.99935 11.4997C8.73572 11.4997 9.33268 10.9027 9.33268 10.1663C9.33268 9.42997 8.73572 8.83301 7.99935 8.83301C7.26298 8.83301 6.66602 9.42997 6.66602 10.1663C6.66602 10.9027 7.26298 11.4997 7.99935 11.4997Z"
+      fill="#FEB602"
+      stroke="#FEB602"
+      strokeWidth="2"
+      strokeLinejoin="round"
     />
   </svg>
 );
