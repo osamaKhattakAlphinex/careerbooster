@@ -24,6 +24,7 @@ const Toolbar = ({
       <div className="group-hover:flex hidden flex-row justify-center items-center rounded-md absolute right-0  -top-8 transition-opacity ease-in duration-300">
         {addAchivement && (
           <button
+            title="Add New Achivement"
             onClick={addAchivement}
             className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
           >
@@ -45,6 +46,7 @@ const Toolbar = ({
         )}
         {regenrateAchivements && (
           <button
+            title="Regenerate Achivemenet"
             onClick={regenrateAchivements}
             className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
           >
@@ -66,6 +68,7 @@ const Toolbar = ({
         )}
         {addNewLine && (
           <button
+            title="Add New Line"
             onClick={addNewLine}
             className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
           >
@@ -87,6 +90,7 @@ const Toolbar = ({
         )}
         {addSkill && (
           <button
+            title="Add New Skill"
             onClick={addSkill}
             className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
           >
@@ -108,6 +112,7 @@ const Toolbar = ({
         )}
         {regenerateSkills && (
           <button
+            title="Regenerate Skills"
             onClick={regenerateSkills}
             className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
           >
@@ -129,6 +134,7 @@ const Toolbar = ({
         )}
         {regenrateSummary && (
           <button
+            title="Regenerate Summary"
             onClick={regenrateSummary}
             className=" hover:bg-gray-500 p-2 bg-gray-600 text-white overflow-hidden"
           >
