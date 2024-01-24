@@ -106,9 +106,8 @@ const ResumeTemplate11 = () => {
           <span className="border border-[#F4D644] w-[110%] mt-2"></span>
 
           <ul className=" flex flex-col gap-2 mb-4 text-sm break-all pl-0 mt-6">
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex flex-row gap-1  items-center">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex flex-row gap-1  items-start justify-start">
               <div className="bg-[#F4D644]  p-2 mr-3 text-gray-950">
-                {" "}
                 {phoneIcon}
               </div>
 
@@ -125,7 +124,7 @@ const ResumeTemplate11 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 flex flex-row gap-1  items-center text-xs">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 flex flex-row gap-1  text-xs items-start justify-start">
               <div className="bg-[#F4D644] text-gray-950  p-2 mr-3">
                 {" "}
                 {emailIcon}
@@ -145,10 +144,12 @@ const ResumeTemplate11 = () => {
               />
             </li>
 
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500  flex flex-row gap-1  items-center text-xs">
-              <div className="bg-[#F4D644] flex justify-center items-center w-8 h-8 mr-3 text-white">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500  flex flex-row gap-1 items-start justify-start text-xs">
+              <div className="bg-[#F4D644]   mr-3  text-white">
                 {/* {linkedInIcon} */}
-                <span className="text-sm text-gray-950">in</span>
+                <span className="text-sm text-gray-950 w-8 h-8 grid place-content-center">
+                  in
+                </span>
               </div>
 
               <EditableField

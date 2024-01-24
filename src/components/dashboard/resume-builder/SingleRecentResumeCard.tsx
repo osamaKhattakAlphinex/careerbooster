@@ -4,18 +4,12 @@ import { Resume, emptyResume, setResume } from "@/store/resumeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
-import { usePathname, useRouter } from "next/navigation";
-
-import {} from "@/../public/icon/Vector.png";
-import DownloadService from "@/helpers/downloadFile";
-import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const SingleRecentResumeCard = ({
   resume,
   source,
-  componentRef,
   setFinished,
-  templateId,
 }: {
   resume: Resume;
   source?: string;
@@ -26,7 +20,6 @@ const SingleRecentResumeCard = ({
   const userData = useSelector((state: any) => state.userData);
   const { email, resumes } = userData;
   const router = useRouter();
-  const pathname: any = usePathname();
   const dispatch = useDispatch();
   const handleOnView = async () => {
     if (source != "") {
@@ -38,7 +31,6 @@ const SingleRecentResumeCard = ({
     return dispatch(setResume(resume));
   };
   const handleOnDelete = () => {
-    // ask for confirmation
     const c = confirm("Are you sure you want to delete this resume?");
     if (c) {
       // delete resume
@@ -56,10 +48,7 @@ const SingleRecentResumeCard = ({
         })
         .then(async (res: any) => {
           if (res.data.success) {
-            // update user in redux
-            // resumeCardDeleteHandler();
             const res = await fetch(`/api/users/getOneByEmail?email=${email}`);
-
             const response = await res.json();
             dispatch(setUserData(response.result));
           }
@@ -71,16 +60,9 @@ const SingleRecentResumeCard = ({
     <div className="flex flex-col lg:w-[100%]   dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 rounded-xl mt-[20px] py-[20px] px-[14px] ">
       <div className="">
         <div className="mx-3 border-gray-600 leading-6">
-          <h2 className="lg:text-[15px] text-[13px]  capitalize dark:text-gray-100 text-gray-950 font-medium  ">
+          <h2 className="lg:text-[15px] text-[13px]  capitalize dark:text-gray-100 text-gray-950 font-medium   w-full truncate">
             {resume?.state?.jobPosition}
           </h2>
-          {/* <h2
-            className="lg:text-[13px] text-[10px] truncate uppercase font-semibold text-[#959595] flex items-center pt-[8px] "
-            title={resume?.jobTitle}
-          >
-            {" "}
-            <i className="mr-2">{rocketLaunch}</i> {resume?.jobTitle}
-          </h2> */}
           <h4 className="uppercase text-[#959595] font-medium  lg:text-[12px] text-[10px] pt-[8px] pb-[12px]">
             Created on: {getFormattedDate(resume?.dateTime)}
           </h4>
@@ -101,16 +83,6 @@ const SingleRecentResumeCard = ({
         >
           {trashIcon} <span className="text-[13px] mx-2 ">Delete</span>
         </button>
-        {/* {pathname == "/dashboard"
-          ? ""
-          : resume && (
-            <DownloadService
-              componentRef={componentRef}
-              view={handleOnView}
-              templateId={templateId}
-              fileName="ai-resume"
-            />
-          )} */}
       </div>
     </div>
   );
