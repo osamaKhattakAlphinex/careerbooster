@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
-import FileUploadHandler from "./FileUploadHandler";
+import FileUploadHandler from "./dashboard/FileUploadHandler";
 
 const UploadPDFResume = () => {
   const router = useRouter();

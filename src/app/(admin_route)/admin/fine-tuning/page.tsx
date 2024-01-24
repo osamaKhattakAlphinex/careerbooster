@@ -2,7 +2,7 @@
 import DataTable, {
   ConditionalTableAction,
   TableAction,
-} from "@/components/DataTable";
+} from "@/components/admin/DataTable";
 import FineTuningSettingModel from "@/components/admin/fineTuning/fineTuningSettingModels";
 import StatusIndicator from "@/components/admin/fineTuning/statusIndicator";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";

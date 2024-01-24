@@ -1,8 +1,8 @@
-import CTASection from "@/components/new-layout/Homepage/CTASection";
-import FAQSection from "@/components/new-layout/Homepage/FAQSection";
-import FAQList from "@/components/new-layout/Homepage/Faqs";
-import UseCases from "@/components/new-layout/Homepage/UseCases";
-import PageHeader from "@/components/new-layout/PageHeader";
+import CTASection from "@/components/Homepage/CTASection";
+import FAQSection from "@/components/Homepage/FAQSection";
+import FAQList from "@/components/Homepage/Faqs";
+import UseCases from "@/components/Homepage/UseCases";
+import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
 import "@/app/plugins.css";
 import "@/app/style.css";

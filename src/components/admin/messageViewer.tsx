@@ -20,8 +20,6 @@ const MessageViewer = forwardRef((props: MessageViewerType, ref: any) => {
     openModal,
   }));
 
-  console.log(props);
-
   return (
     <div
       tabIndex={-1}

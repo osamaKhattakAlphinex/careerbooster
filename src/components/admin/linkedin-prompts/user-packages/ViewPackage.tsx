@@ -10,9 +10,9 @@ import ReadPackage from "./ReadPackage";
 // import AddProduct from './AddProduct'; // Import the AddProduct component
 import axios from "axios";
 import UpdatePackage from "./UpdatePackage";
-import ConfirmationModal from "@/components/utilities/form-elements/ConfirmationModal";
+import ConfirmationModal from "@/components/admin/ConfirmationModal";
 import { createColumnHelper } from "@tanstack/react-table";
-import DataTable, { TableAction } from "@/components/DataTable";
+import DataTable, { TableAction } from "@/components/admin/DataTable";
 
 type Package = {
   _id?: string;
@@ -38,7 +38,7 @@ type Package = {
   };
 };
 
-const ViewPackage = ({ }) => {
+const ViewPackage = ({}) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [packages, setPackages] = useState<Package[]>([]);
   const confirmationModalRef: React.MutableRefObject<any> = useRef(null);

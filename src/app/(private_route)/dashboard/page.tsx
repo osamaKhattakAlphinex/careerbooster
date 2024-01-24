@@ -1,5 +1,5 @@
-import AiToolsCard from "@/components/new-dashboard/dashboard/CareerBoostingAiToolsCard";
-import RecentDocumentsCard from "@/components/new-dashboard/dashboard/RecentDocumentsCard";
+import AiToolsCard from "@/components/dashboard/CareerBoostingAiToolsCard";
+import RecentDocumentsCard from "@/components/dashboard/RecentDocumentsCard";
 import Avatar from "@/components/Avatar";
 // new version (dashboard design)
 

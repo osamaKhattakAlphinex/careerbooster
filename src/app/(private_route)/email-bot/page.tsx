@@ -6,16 +6,15 @@ import { setUserData } from "@/store/userDataSlice";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import copy from "clipboard-copy";
-import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
+import CoverLetterFileUploader from "@/components/dashboard/cover-letter-generator/CoverLetterFileUploader";
 
-import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import { makeid } from "@/helpers/makeid";
 import { setEmail } from "@/store/emailSlice";
 
-import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
-import EmailCardSingle from "@/components/new-dashboard/dashboard/email-generator/EmailCardSingle";
+import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedList";
+import EmailCardSingle from "@/components/dashboard/email-generator/EmailCardSingle";
 
 import DownloadService from "@/helpers/downloadFile";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";

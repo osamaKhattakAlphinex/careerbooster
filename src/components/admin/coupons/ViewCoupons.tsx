@@ -10,9 +10,9 @@ import ReadCoupon from "./ReadCoupon";
 // import AddProduct from './AddProduct'; // Import the AddProduct component
 import axios from "axios";
 import UpdateCoupon from "./UpdateCoupon";
-import ConfirmationModal from "@/components/utilities/form-elements/ConfirmationModal";
+import ConfirmationModal from "@/components/admin/ConfirmationModal";
 import { createColumnHelper } from "@tanstack/react-table";
-import DataTable, { TableAction } from "@/components/DataTable";
+import DataTable, { TableAction } from "@/components/admin/DataTable";
 
 type Coupon = {
   id: string;
@@ -32,7 +32,7 @@ type Coupon = {
   metadata: {};
 };
 
-const ViewCoupons = ({ }) => {
+const ViewCoupons = ({}) => {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const confirmationModalRef: React.MutableRefObject<any> = useRef(null);

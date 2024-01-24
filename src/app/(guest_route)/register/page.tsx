@@ -1,4 +1,4 @@
-import RegistrationForm from "@/components/new-layout/Register/RegistraionForm";
+import RegistrationForm from "@/components/Register/RegistraionForm";
 
 import { Metadata } from "next";
 export const metadata: Metadata = {

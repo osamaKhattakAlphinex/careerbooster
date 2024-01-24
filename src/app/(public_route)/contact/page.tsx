@@ -1,7 +1,7 @@
-import AddressCard from "@/components/new-layout/Contact/AddressCard";
-import ContactForm from "@/components/new-layout/Contact/ContactForm";
-import MapCard from "@/components/new-layout/Contact/MapCard";
-import PageHeader from "@/components/new-layout/PageHeader";
+import AddressCard from "@/components/Contact/AddressCard";
+import ContactForm from "@/components/Contact/ContactForm";
+import MapCard from "@/components/Contact/MapCard";
+import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
 import "@/app/plugins.css";
 import "@/app/style.css";

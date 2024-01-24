@@ -1,5 +1,5 @@
 "use client";
-import DataTable from "@/components/DataTable";
+import DataTable from "@/components/admin/DataTable";
 import StatusIndicator from "@/components/admin/fineTuning/statusIndicator";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { leftArrowIcon } from "@/helpers/iconsProvider";

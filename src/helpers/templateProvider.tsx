@@ -1,23 +1,23 @@
-import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_1";
-import ResumeTemplate2 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_2";
-import ResumeTemplate3 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_3";
-import ResumeTemplate4 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_4";
-import ResumeTemplate5 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_5";
-import ResumeTemplate6 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_6";
-import ResumeTemplate7 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_7";
-import ResumeTemplate8 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_8";
-import ResumeTemplate9 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_9";
-import ResumeTemplate10 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_10";
-import ResumeTemplate11 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_11";
-import ResumeTemplate12 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_12";
-import ResumeTemplate13 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_13";
-import ResumeTemplate14 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_14";
-import ResumeTemplate15 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_15";
-import ResumeTemplate16 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_16";
-import ResumeTemplate17 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_17";
-import ResumeTemplate18 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_18";
-import ResumeTemplate19 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_19";
-import { Template } from "@/components/new-dashboard/dashboard/resume-templates";
+import ResumeTemplate1 from "@/components/dashboard/resume-templates/templates/template_1";
+import ResumeTemplate2 from "@/components/dashboard/resume-templates/templates/template_2";
+import ResumeTemplate3 from "@/components/dashboard/resume-templates/templates/template_3";
+import ResumeTemplate4 from "@/components/dashboard/resume-templates/templates/template_4";
+import ResumeTemplate5 from "@/components/dashboard/resume-templates/templates/template_5";
+import ResumeTemplate6 from "@/components/dashboard/resume-templates/templates/template_6";
+import ResumeTemplate7 from "@/components/dashboard/resume-templates/templates/template_7";
+import ResumeTemplate8 from "@/components/dashboard/resume-templates/templates/template_8";
+import ResumeTemplate9 from "@/components/dashboard/resume-templates/templates/template_9";
+import ResumeTemplate10 from "@/components/dashboard/resume-templates/templates/template_10";
+import ResumeTemplate11 from "@/components/dashboard/resume-templates/templates/template_11";
+import ResumeTemplate12 from "@/components/dashboard/resume-templates/templates/template_12";
+import ResumeTemplate13 from "@/components/dashboard/resume-templates/templates/template_13";
+import ResumeTemplate14 from "@/components/dashboard/resume-templates/templates/template_14";
+import ResumeTemplate15 from "@/components/dashboard/resume-templates/templates/template_15";
+import ResumeTemplate16 from "@/components/dashboard/resume-templates/templates/template_16";
+import ResumeTemplate17 from "@/components/dashboard/resume-templates/templates/template_17";
+import ResumeTemplate18 from "@/components/dashboard/resume-templates/templates/template_18";
+import ResumeTemplate19 from "@/components/dashboard/resume-templates/templates/template_19";
+import { Template } from "@/components/dashboard/resume-templates";
 
 export const ALL_TEMPLATES: Template[] = [
   // {

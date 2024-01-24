@@ -7,7 +7,7 @@ import "@/app/plugins.css";
 import "@/app/style.css";
 import AdminSidebar from "@/components/admin/sidebar/adminSidebar";
 import ThemeToggler from "@/components/Themetoggler";
-import NextThemeProvider from "@/components/NextThemeProvider";
+import NextThemeProvider from "@/components/data-providers/NextThemeProvider";
 interface Props {
   children: ReactNode;
 }

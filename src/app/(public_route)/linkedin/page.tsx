@@ -1,4 +1,4 @@
-import LinkedInToolMain from "@/components/new-layout/linkedin/LinkedInToolMain";
+import LinkedInToolMain from "@/components/linkedin/LinkedInToolMain";
 import { Metadata } from "next";
 import "@/app/plugins.css";
 import "@/app/style.css";

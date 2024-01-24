@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
-import ResumeTemplate1 from "@/components/new-dashboard/dashboard/resume-templates/templates/template_1";
+import ResumeTemplate1 from "@/components/dashboard/resume-templates/templates/template_1";
 import { useDispatch, useSelector } from "react-redux";
 import { WorkExperience, setUserData } from "@/store/userDataSlice";
 import {
@@ -18,8 +18,8 @@ import {
 
 import { checkIconSmall, leftArrowIcon } from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
-import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
-import GenerateResume from "@/components/new-dashboard/dashboard/resume-builder/GenerateNewResumeCard";
+import RecentResumeCard from "@/components/dashboard/resume-builder/RecentResumeCard";
+import GenerateResume from "@/components/dashboard/resume-builder/GenerateNewResumeCard";
 import Link from "next/link";
 import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import Image from "next/image";
@@ -69,15 +69,14 @@ const ResumeBuilder = () => {
   const userData = useSelector((state: any) => state.userData);
 
   const creditLimits = useSelector((state: any) => state.creditLimits);
-  const { getCreditLimitsIfNotExists } = useGetCreditLimits()
-
+  const { getCreditLimitsIfNotExists } = useGetCreditLimits();
 
   const { getSummary } = useGetSummary(setStreamedSummaryData);
 
   const handleGenerate = useCallback(
     async (quantifyingExperience: boolean) => {
       await getUserDataIfNotExists();
-      await getCreditLimitsIfNotExists()
+      await getCreditLimitsIfNotExists();
       // reset resume
       dispatch(resetResume(resumeData.state));
       if (resumeData.state.jobPosition !== "" && session?.user?.email) {
@@ -168,12 +167,10 @@ const ResumeBuilder = () => {
     // });
   };
 
-
-
   const getWorkExperienceNew = async (quantifyingExperience: boolean) => {
     // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("workExperience"));
-    await getCreditLimitsIfNotExists()
+    await getCreditLimitsIfNotExists();
     await getUserDataIfNotExists();
 
     if (userData.isFetched) {
@@ -195,10 +192,11 @@ const ResumeBuilder = () => {
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
         
-        ${experience?.fromMonth} ${experience?.fromYear} - ${experience?.isContinue
+        ${experience?.fromMonth} ${experience?.fromYear} - ${
+          experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
-          } | ${experience?.company} | 
+        } | ${experience?.company} | 
         ${experience?.cityState} ${experience?.country}
                   </h2>`;
         html += `<div>`;
@@ -249,17 +247,14 @@ const ResumeBuilder = () => {
             achievementTemp += text;
           }
 
-
           setStreamedJDData((prev) => prev + `</div> <br /> `);
           temp += `</div> <br /> `;
           const achivementsArray = fetchLIstOfStrings(achievementTemp);
           workExpArrObj.achievements = achivementsArray;
           workExpArr.push(workExpArrObj);
+        } else {
+          setStreamedJDData("You ran out of credits!");
         }
-        else {
-          setStreamedJDData("You ran out of credits!")
-        }
-
       }
       setFinished(true);
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
@@ -274,7 +269,7 @@ const ResumeBuilder = () => {
     // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("primarySkills"));
     await getUserDataIfNotExists();
-    await getCreditLimitsIfNotExists()
+    await getCreditLimitsIfNotExists();
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
@@ -299,15 +294,12 @@ const ResumeBuilder = () => {
           dispatch(setPrimarySkills({ primarySkills: myJSON }));
         }
       }
-
     });
     // });
   };
 
   useEffect(() => {
-
     if (!resumeData.state.resumeLoading && resumeData?.name) {
-
       saveResumeToDB();
       setFinished(true);
     }
@@ -430,13 +422,15 @@ const ResumeBuilder = () => {
               resumeData?.contact?.email ||
               resumeData?.summary) && (
               <div
-                className={`my-10 ${resumeData.state.resumeLoading ? "animate-pulse" : ""
-                  }`}
+                className={`my-10 ${
+                  resumeData.state.resumeLoading ? "animate-pulse" : ""
+                }`}
               >
                 {/* <Link href="#" className="text-black">Preview</Link> */}
                 <div
-                  className={`bg-white ${resumeData.state.resumeLoading ? "animate-pulse" : ""
-                    }`}
+                  className={`bg-white ${
+                    resumeData.state.resumeLoading ? "animate-pulse" : ""
+                  }`}
                   ref={componentRef}
                 >
                   <ResumeTemplate1

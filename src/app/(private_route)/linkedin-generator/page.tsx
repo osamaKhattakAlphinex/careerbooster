@@ -1,10 +1,10 @@
 "use client";
 
-import HeadlineGenerator from "@/components/new-dashboard/dashboard/linkedin-generator-old/HeadlineGenerator";
+import HeadlineGenerator from "@/components/dashboard/linkedin-generator-old/HeadlineGenerator";
 import { useState } from "react";
-import AboutGenerator from "@/components/new-dashboard/dashboard/linkedin-generator-old/AboutGenerator";
-import JDGenerator from "@/components/new-dashboard/dashboard/linkedin-generator-old/JDGenerator";
-import KeywordsGenerator from "@/components/new-dashboard/dashboard/linkedin-generator-old/KeywordsGenerator";
+import AboutGenerator from "@/components/dashboard/linkedin-generator-old/AboutGenerator";
+import JDGenerator from "@/components/dashboard/linkedin-generator-old/JDGenerator";
+import KeywordsGenerator from "@/components/dashboard/linkedin-generator-old/KeywordsGenerator";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import Link from "next/link";
 

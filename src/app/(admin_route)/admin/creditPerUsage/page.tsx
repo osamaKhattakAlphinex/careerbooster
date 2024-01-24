@@ -5,9 +5,9 @@ import React, { useEffect, useRef, useState } from "react";
 
 import axios from "axios";
 import { createColumnHelper } from "@tanstack/react-table";
-import DataTable, { TableAction } from "@/components/DataTable";
-import CreditsModal from "@/components/utilities/form-elements/creditsModal";
-import CreditsPerUsageModal from "@/components/utilities/form-elements/creditsPerUsageModal";
+import DataTable, { TableAction } from "@/components/admin/DataTable";
+import CreditsModal from "@/components/admin/creditsModal";
+import CreditsPerUsageModal from "@/components/admin/creditsPerUsageModal";
 
 const nameFormatter = (key: string) => {
   return key.replaceAll("_", " ");

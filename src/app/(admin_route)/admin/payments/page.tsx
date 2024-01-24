@@ -1,5 +1,5 @@
 "use client";
-import DataTable from "@/components/DataTable";
+import DataTable from "@/components/admin/DataTable";
 import FineTuningSettingModel from "@/components/admin/fineTuning/fineTuningSettingModels";
 import PaymentsDecryptionModal from "@/components/admin/payments/paymentsDecryptionModal";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";

@@ -1,11 +1,7 @@
 "use client";
 
-import UpgradeModal from "@/components/upgradeModal";
-import { ALL_TEMPLATES } from "@/helpers/templateProvider";
-import { setUpgradeModal } from "@/store/appSlice";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPackageID } from "@/ServerActions";
 
 const DownloadService = ({
   componentRef,
@@ -13,15 +9,11 @@ const DownloadService = ({
   card,
   type,
   fileName,
-  templateId,
   preview,
 }: // setOpenUpgradModal,
-  any) => {
+any) => {
   const docRef = useRef<any>(null);
   let htmlToDoc: string;
-  const userData = useSelector((state: any) => state.userData);
-  const dispatch = useDispatch();
-  const [openUpgradeModal, setOpenUpgradModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
 
   const templateCall = async () => {
@@ -50,16 +42,6 @@ const DownloadService = ({
       
       ${html}`;
     } else {
-      // let category;
-      // if (templateId) {
-      //   category = ALL_TEMPLATES[templateId - 1].category;
-      // }
-      // if (
-      //   category === "premium" &&
-      //   userData.userPackage === await getPackageID()
-      // ) {
-      //   dispatch(setUpgradeModal(true));
-      // } else {
       if (view) {
         await view();
       }
@@ -96,24 +78,20 @@ const DownloadService = ({
         docRef.current.click();
         setLoading(false);
       });
-      // }
     }
   };
 
   return (
     <>
-      <UpgradeModal
-        openUpgradationModal={openUpgradeModal}
-        setOpenUpgradationModal={setOpenUpgradModal}
-      />
       <div>
         <a className="hidden" href="#" ref={docRef} target="_blank"></a>
         <button
           onClick={templateCall}
           type="button"
           disabled={loading}
-          className={`lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b]  text-green-500 border-[1px] border-green-500 ${loading ? "cursor-not-allowed opacity-50" : ""
-            }`}
+          className={`lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b]  text-green-500 border-[1px] border-green-500 ${
+            loading ? "cursor-not-allowed opacity-50" : ""
+          }`}
         >
           {preview ? "Preview Resume" : loading ? "Downloading..." : "Download"}
         </button>

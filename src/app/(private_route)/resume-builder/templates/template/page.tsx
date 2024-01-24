@@ -2,11 +2,10 @@
 import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import RecentResumeCard from "@/components/new-dashboard/dashboard/resume-builder/RecentResumeCard";
+import RecentResumeCard from "@/components/dashboard/resume-builder/RecentResumeCard";
 import { useDispatch, useSelector } from "react-redux";
 import { crownIcon } from "@/helpers/newIconsProviders";
-import UpgradeModal from "@/components/upgradeModal";
-import TemplateSlider from "@/components/new-dashboard/dashboard/resume-templates/templateSlider";
+import TemplateSlider from "@/components/dashboard/resume-templates/templateSlider";
 import { useSession } from "next-auth/react";
 import { setUserData } from "@/store/userDataSlice";
 import { setResume } from "@/store/resumeSlice";

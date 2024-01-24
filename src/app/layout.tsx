@@ -1,14 +1,14 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import AuthProvider from "@/components/AuthProvider";
-import ReduxProvider from "@/components/ReduxProvider";
-import ThemeProvider from "@/components/new-layout/ThemeProvider";
+import AuthProvider from "@/components/data-providers/AuthProvider";
+import ReduxProvider from "@/components/data-providers/ReduxProvider";
+import ThemeProvider from "@/components/data-providers/ThemeProvider";
 import Head from "next/head";
 import Script from "next/script";
-import NextThemeProvider from "@/components/NextThemeProvider";
-import UserDataProvider from "@/components/UserDataProvider";
-import MainLoaderLayer from "@/components/new-layout/MainLoaderLayer";
-import CreditLimitsProvider from "@/components/CreditLimitsProvider";
+import NextThemeProvider from "@/components/data-providers/NextThemeProvider";
+import UserDataProvider from "@/components/data-providers/UserDataProvider";
+import MainLoaderLayer from "@/components/MainLoaderLayer";
+import CreditLimitsProvider from "@/components/data-providers/CreditLimitsProvider";
 
 export const metadata: Metadata = {
   title: "AI Resume Bot",

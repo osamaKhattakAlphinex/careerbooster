@@ -5,16 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "@/store/userDataSlice";
 
 import copy from "clipboard-copy";
-import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
+import CoverLetterFileUploader from "@/components/dashboard/cover-letter-generator/CoverLetterFileUploader";
 import "@/app/(private_route)/dashboard.css";
 
-import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
-import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
+import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedList";
 import { setCoverLetter } from "@/store/coverLetterSlice";
 
-import CoverLetterCardSingle from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterCardSingle";
+import CoverLetterCardSingle from "@/components/dashboard/cover-letter-generator/CoverLetterCardSingle";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import { makeid } from "@/helpers/makeid";

@@ -1,4 +1,4 @@
-import SubAboutGenerator from "@/components/new-dashboard/dashboard/linkedin-generator-old/SubAboutGenerator";
+import SubAboutGenerator from "@/components/dashboard/linkedin-generator-old/SubAboutGenerator";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import Link from "next/link";
 

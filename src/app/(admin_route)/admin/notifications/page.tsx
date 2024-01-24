@@ -1,5 +1,5 @@
 "use client";
-import DataTable, { TableAction } from "@/components/DataTable";
+import DataTable, { TableAction } from "@/components/admin/DataTable";
 import AddNotification from "@/components/admin/notifications/AddNotification";
 import DeleteNotification from "@/components/admin/notifications/DeleteNotification";
 import ReadNotification from "@/components/admin/notifications/ReadNotification";

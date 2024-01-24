@@ -5,14 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "@/store/userDataSlice";
 
 import Link from "next/link";
-import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
-import CoverLetterFileUploader from "@/components/new-dashboard/dashboard/cover-letter-generator/CoverLetterFileUploader";
-import LimitCard from "@/components/new-dashboard/dashboard/LimitCard";
+import CoverLetterFileUploader from "@/components/dashboard/cover-letter-generator/CoverLetterFileUploader";
+
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
-import ConsultingBidCardSingle from "@/components/new-dashboard/dashboard/consulting-bids-generator/ConsultingBidCardSingle";
-import PreviouslyGeneratedList from "@/components/PreviouslyGeneratedList";
+import ConsultingBidCardSingle from "@/components/dashboard/consulting-bids-generator/ConsultingBidCardSingle";
+import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedList";
 import { makeid } from "@/helpers/makeid";
 import { setConsultingBid } from "@/store/consultingBidSlice";
 import { leftArrowIcon } from "@/helpers/iconsProvider";

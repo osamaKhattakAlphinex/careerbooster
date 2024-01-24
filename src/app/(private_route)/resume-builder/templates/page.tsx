@@ -1,4 +1,4 @@
-import Templates from "@/components/new-dashboard/dashboard/resume-templates";
+import Templates from "@/components/dashboard/resume-templates";
 import React from "react";
 
 const Page = () => {

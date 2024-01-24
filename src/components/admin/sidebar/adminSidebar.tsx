@@ -1,6 +1,6 @@
 "use client";
 import ThemeToggler from "@/components/Themetoggler";
-import ThemeChanger from "@/components/themeSwitcher";
+import ThemeChanger from "@/components/common/themeSwitcher";
 import { IconUsersicon, antIcon } from "@/helpers/iconsProvider";
 import { signOut } from "next-auth/react";
 import Link from "next/link";

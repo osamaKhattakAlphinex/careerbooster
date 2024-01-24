@@ -1,6 +1,6 @@
 "use client";
 
-import DataTable, { TableAction } from "@/components/DataTable";
+import DataTable, { TableAction } from "@/components/admin/DataTable";
 import MessageViewer from "@/components/admin/messageViewer";
 import { eyeIcon, leftArrowIcon } from "@/helpers/iconsProvider";
 import { createColumnHelper } from "@tanstack/react-table";

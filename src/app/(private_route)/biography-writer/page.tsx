@@ -6,7 +6,7 @@ import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import BiograpyFileUploader from "@/components/dashboard/biography-writer/BiograpyFileUploader";
-import Button from "@/components/utilities/form-elements/Button";
+import Button from "@/components/Button";
 import DownloadService from "@/helpers/downloadFile";
 
 const BiographyWriter = () => {
@@ -209,8 +209,9 @@ const BiographyWriter = () => {
 
       {show && (
         <div
-          className={`w-[95%]  bg-white border-[1px] border-gray-200 rounded-lg shadow  m-10 ${msgLoading ? "animate-pulse" : ""
-            }`}
+          className={`w-[95%]  bg-white border-[1px] border-gray-200 rounded-lg shadow  m-10 ${
+            msgLoading ? "animate-pulse" : ""
+          }`}
         >
           <div className="p-12" ref={componentRef}>
             <div dangerouslySetInnerHTML={{ __html: streamedData }}></div>
