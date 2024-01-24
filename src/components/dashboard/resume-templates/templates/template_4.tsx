@@ -75,7 +75,7 @@ const ResumeTemplate4 = () => {
   return (
     <div className="first-page ">
       <div className=" flex">
-        <div className=" w-4/12 xs:w-1/3 md:w-4/12 flex flex-col pl-3 md:pl-4 bg-[#323B4C] text-gray-100  pr-6 md:pr-4  py-8 h-[1080px] xs:h-auto">
+        <div className=" w-3/12 xs:w-1/3 md:w-4/12 flex flex-col pl-3 md:pl-4 bg-[#323B4C] text-gray-100  pr-6 md:pr-4  py-8 h-[1080px] xs:h-auto">
           <div className=" w-32 h-32  xs:w-[72px] xs:h-[72px] sm:w-24 sm:h-24 md:w-32 md:h-32 text-white bg-gray-800 text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-0  md:mt-0 mb-4 justify-center md:mb-2">
             <span className="text-3xl xs:text-2xl md:text-3xl hover:shadow-md hover:bg-gray-500">
               <EditableField
@@ -255,8 +255,8 @@ const ResumeTemplate4 = () => {
             </>
           )}
         </div>
-        <div className="w-full flex flex-wrap flex-col px-4 md:px-8 text-gray-950 pb-10 pt-16">
-          <div className="flex flex-col w-10/12 ">
+        <div className="w-9/12 flex flex-wrap flex-col px-4 md:px-8 text-gray-950 pb-10 pt-16">
+          <div className="flex flex-col ">
             <h2 className="text-2xl font-bold xs:text-xl md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100">
               <EditableField
                 value={resume?.name ? resume?.name : "FULL NAME"}
@@ -284,10 +284,10 @@ const ResumeTemplate4 = () => {
           <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold mt-6 md:mt-14">
             EXECUTIVE SUMMARY
           </h3>
-          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-2 mb-4"></span>
+          <span className="w-full h-0 border-[1px] !border-gray-500 mt-2 mb-4"></span>
 
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-sm hover:shadow-md min-h-[380px] xs:min-h-fit hover:bg-gray-100 group-hover:pb-14">
+            <div className="text-sm hover:shadow-md min-h-[380px] pr-4 xs:min-h-fit border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
               <EditableField
                 type="textarea"
                 value={
@@ -327,7 +327,7 @@ const ResumeTemplate4 = () => {
                       key={i}
                       className={`flex justify-start  ${
                         i > 0
-                          ? "w-[100vw] ml-[-234px] xs:ml-0 xs:w-full"
+                          ? "w-[100vw] ml-[-204px] xs:ml-0 xs:w-full"
                           : "xs:min-h-fit min-h-[380px]"
                       }`}
                     >

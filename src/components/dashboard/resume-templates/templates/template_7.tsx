@@ -102,7 +102,7 @@ const ResumeTemplate7 = () => {
             </h3>
 
             <Toolbar regenrateSummary={getSummary}>
-              <div className="text-sm  hover:shadow-md hover:bg-gray-100 mt-4 group-hover:pb-14 xs:min-h-fit min-h-[420px]">
+              <div className="text-sm  hover:shadow-md border-2 border-transparent hover:border-gray-500 hover:border-dashed mt-4 xs:min-h-fit min-h-[420px]">
                 <EditableField
                   type="textarea"
                   value={

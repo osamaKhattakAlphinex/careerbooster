@@ -167,7 +167,7 @@ const ResumeTemplate6 = () => {
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
 
             <Toolbar regenrateSummary={getSummary}>
-              <div className="text-sm  hover:shadow-md my-2 hover:bg-gray-100 group-hover:pb-14">
+              <div className="text-sm  hover:shadow-md my-2 border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
                 <EditableField
                   type="textarea"
                   value={

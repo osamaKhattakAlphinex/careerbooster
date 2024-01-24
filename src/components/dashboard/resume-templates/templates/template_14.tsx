@@ -282,7 +282,7 @@ const ResumeTemplate14 = () => {
           <h3 className="uppercase text-lg font-semibold">EXECUTIVE SUMMARY</h3>
           <span className="border-stylee w-full h-0  my-2"></span>
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-sm hover:shadow-md min-h-[350px] xs:min-h-fit hover:bg-gray-100 group-hover:pb-14">
+            <div className="text-sm hover:shadow-md min-h-[350px] xs:min-h-fit border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
               <EditableField
                 type="textarea"
                 value={

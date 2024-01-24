@@ -5,13 +5,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import {
-  Loader,
   crossIcon1,
   educationIcon,
   emailIcon,
   linkedInIcon,
   phoneIcon,
 } from "@/helpers/iconsProvider";
+import Loader from "@/components/common/Loader";
 import useGetSummary from "@/hooks/useGetSummary";
 import EditableField from "@/components/dashboard/EditableField";
 import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
@@ -152,7 +152,7 @@ const ResumeTemplate2 = () => {
           About Me
         </h2>
         <Toolbar regenrateSummary={getSummary}>
-          <div className="text-sm xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
+          <div className="text-sm xs:text-sm md:text-lg lg:text-lg hover:shadow-md border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
             <EditableField
               type="textarea"
               value={
