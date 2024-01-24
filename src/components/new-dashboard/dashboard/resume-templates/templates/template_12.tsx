@@ -117,7 +117,7 @@ const ResumeTemplate12 = () => {
         </div>
       </div>
       <div className="flex">
-        <div className=" w-5/12 md:w-1/3 flex flex-col  items-center   bg-[#FFFFFF]  px-9 xs:px-2 sm:px-2 md:px-9 lg:px-9    pt-[1rem] h-[1050px] xs:h-auto">
+        <div className=" w-5/12 md:w-1/3 flex flex-col  bg-[#FFFFFF]  px-9 xs:px-2 sm:px-2 md:px-9 lg:px-9    pt-[1rem] h-[1050px] xs:h-auto">
           <div className="h-48 w-48 xs:w-20 xs:h-20 md:w-48 md:h-48 text-gray-800 bg-[#F0CFC3]  text-center flex justify-center items-center  rounded-full xs:mb-[88px] sm:mb-[88px] xs:mt-[32px] sm:mt-[32px] md:mt-0 lg:mt-0 lg:mb-0 md:mb-0 ">
             <span className="text-4xl  text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
               <EditableField
@@ -235,7 +235,7 @@ const ResumeTemplate12 = () => {
                   regenerateSkills={getPrimarySkills}
                 >
                   <ul
-                    className="pl-0 flex  flex-col gap-1 mb-4 text-gray-800 w-full text-[16px] "
+                    className="border-2 border-transparent hover:border-dashed hover:border-gray-500 pl-0 flex flex-col gap-1 mb-4 text-gray-800 w-full text-[16px] "
                     onMouseEnter={() =>
                       !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                     }
@@ -247,7 +247,7 @@ const ResumeTemplate12 = () => {
 
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent text-sm hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center  "
+                        className="hover:shadow-md hover:cursor-move parent text-sm hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center "
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -285,21 +285,13 @@ const ResumeTemplate12 = () => {
                             onChange={(e) => setPrimarySkill(e.target.value)}
                             onKeyPress={(e) => {
                               if (e.key === "Enter") {
-                                if (primarySkill.trim() !== "") {
-                                  addPrimarySkill(primarySkill);
-                                  setPrimarySkill("");
-                                }
+                                handleSaveSkills();
                               }
                             }}
                           />
                           <button
                             className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
-                            onClick={() => {
-                              if (primarySkill.trim() !== "") {
-                                addPrimarySkill(primarySkill);
-                                setPrimarySkill(""); // Empty the input field
-                              }
-                            }}
+                            onClick={handleSaveSkills}
                           >
                             save
                           </button>

@@ -602,7 +602,7 @@ const ResumeTemplate5 = () => {
                       regenerateSkills={getPrimarySkills}
                     >
                       <ul
-                        className="pl-0 flex  flex-col gap-1 mb-4 text-sm"
+                        className="border-2 border-transparent hover:border-dashed hover:border-gray-500 pl-0 flex flex-col w-full gap-1 mb-4 text-sm"
                         onMouseEnter={() =>
                           !newPrimarySkill &&
                           setPrimarySkillAddButtonVisible(true)
@@ -615,7 +615,7 @@ const ResumeTemplate5 = () => {
                         {resume?.primarySkills.map(
                           (skill: string, i: number) => (
                             <li
-                              className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex justify-between items-center"
+                              className="hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex justify-between "
                               key={i}
                               onDragStart={(e) =>
                                 e.dataTransfer.setData(
@@ -656,21 +656,13 @@ const ResumeTemplate5 = () => {
                                 }
                                 onKeyPress={(e) => {
                                   if (e.key === "Enter") {
-                                    if (primarySkill.trim() !== "") {
-                                      addPrimarySkill(primarySkill);
-                                      setPrimarySkill("");
-                                    }
+                                    handleSaveSkills();
                                   }
                                 }}
                               />
                               <button
                                 className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
-                                onClick={() => {
-                                  if (primarySkill.trim() !== "") {
-                                    addPrimarySkill(primarySkill);
-                                    setPrimarySkill(""); // Empty the input field
-                                  }
-                                }}
+                                onClick={handleSaveSkills}
                               >
                                 save
                               </button>

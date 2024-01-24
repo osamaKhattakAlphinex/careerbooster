@@ -197,7 +197,7 @@ const ResumeTemplate4 = () => {
                   regenerateSkills={getPrimarySkills}
                 >
                   <ol
-                    className="pl-0 flex list-styled flex-col gap-3 mb-4 text-sm xs:text-[12px] md:text-sm"
+                    className="border-2 border-transparent hover:border-dashed hover:border-gray-500 pl-0 flex list-styled flex-col gap-3 mb-4 text-sm xs:text-[12px] md:text-sm"
                     onMouseEnter={() =>
                       !newPrimarySkill && setPrimarySkillAddButtonVisible(true)
                     }
@@ -243,21 +243,13 @@ const ResumeTemplate4 = () => {
                             onChange={(e) => setPrimarySkill(e.target.value)}
                             onKeyPress={(e) => {
                               if (e.key === "Enter") {
-                                if (primarySkill.trim() !== "") {
-                                  addPrimarySkill(primarySkill);
-                                  setPrimarySkill("");
-                                }
+                                handleSaveSkills();
                               }
                             }}
                           />
                           <button
                             className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
-                            onClick={() => {
-                              if (primarySkill.trim() !== "") {
-                                addPrimarySkill(primarySkill);
-                                setPrimarySkill(""); // Empty the input field
-                              }
-                            }}
+                            onClick={handleSaveSkills}
                           >
                             save
                           </button>

@@ -295,21 +295,13 @@ const ResumeTemplate1 = ({
                           onChange={(e) => setPrimarySkill(e.target.value)}
                           onKeyPress={(e) => {
                             if (e.key === "Enter") {
-                              if (primarySkill.trim() !== "") {
-                                addPrimarySkill(primarySkill);
-                                setPrimarySkill("");
-                              }
+                              handleSaveSkills();
                             }
                           }}
                         />
                         <button
                           className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
-                          onClick={() => {
-                            if (primarySkill.trim() !== "") {
-                              addPrimarySkill(primarySkill);
-                              setPrimarySkill(""); // Empty the input field
-                            }
-                          }}
+                          onClick={handleSaveSkills}
                         >
                           save
                         </button>
