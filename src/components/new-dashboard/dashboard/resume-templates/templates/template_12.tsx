@@ -332,29 +332,29 @@ const ResumeTemplate12 = () => {
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
-                  <Toolbar
+                  <div
                     key={i}
-                    addAchivement={() => setNewWorkExperience(i)}
-                    regenrateAchivements={() => handleRegenrate(rec, i)}
-                    addNewLine={() => {
-                      handlers.handleAddSpace(i, newAchievement);
-                      setNewAchievement("");
-                    }}
+                    className={`flex justify-start ${
+                      i > 0
+                        ? "w-[100vw] ml-[-250px] mt-1 xs:ml-0 xs:w-full "
+                        : "xs:min-h-fit  min-h-[395px]"
+                    }`}
                   >
-                    <div
+                    <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5 lg:-mx-5    h-full flex flex-col items-center  gap-1">
+                      <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
+                      {resume?.workExperienceArray.length - 1 !== i && (
+                        <div className="h-full w-[2px] bg-gray-500"></div>
+                      )}
+                    </div>
+                    <Toolbar
                       key={i}
-                      className={`flex justify-start ${
-                        i > 0
-                          ? "w-[100vw] ml-[-250px] mt-1 xs:ml-0 xs:w-full "
-                          : "xs:min-h-fit  min-h-[395px]"
-                      }`}
+                      addAchivement={() => setNewWorkExperience(i)}
+                      regenrateAchivements={() => handleRegenrate(rec, i)}
+                      addNewLine={() => {
+                        handlers.handleAddSpace(i, newAchievement);
+                        setNewAchievement("");
+                      }}
                     >
-                      <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5 lg:-mx-5    h-full flex flex-col items-center  gap-1">
-                        <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
-                        {resume?.workExperienceArray.length - 1 !== i && (
-                          <div className="h-full w-[2px] bg-gray-500"></div>
-                        )}
-                      </div>
                       <div
                         key={i}
                         className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2  flex flex-col w-[95%] ml-[16px]"
@@ -561,8 +561,8 @@ const ResumeTemplate12 = () => {
                           ) : null}
                         </div>
                       </div>
-                    </div>
-                  </Toolbar>
+                    </Toolbar>
+                  </div>
                 );
               })}
             </>
