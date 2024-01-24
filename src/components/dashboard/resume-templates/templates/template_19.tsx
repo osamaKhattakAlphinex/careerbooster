@@ -83,7 +83,7 @@ const ResumeTemplate19 = ({
       </div>
 
       <div className="flex border-t-2 border-gray-900">
-        <div className=" w-4/12 xs:w-4/12 md:w-1/3 flex flex-col relative pt-3 inset-0 items-center px-6 xs:px-0 md:px-6  bg-[#f8f8f8] ">
+        <div className=" w-4/12 xs:w-4/12 md:w-1/3 flex flex-col relative pt-3 inset-0  px-6 xs:px-0 md:px-6  bg-[#f8f8f8] ">
           {/* contacts */}
           <span className="border-stylee w-full h-0 my-1"></span>
           <h3 className="uppercase text-lg xs:text-[14px] xs:px-3 px-0 md:px-0  md:text-lg font-semibold w-full   pb-2 text-gray-800 py-1 rounded-sm flex items-center  flex-row gap-2 ">
@@ -376,7 +376,7 @@ const ResumeTemplate19 = ({
                 Education
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
-              <ul className="pl-0 flex xs:flex-col md:flex-row lg:flex-row flex-wrap px-0 xs:px-3 md:px-0 text-gray-800  w-full">
+              <ul className="pl-0  flex xs:flex-col md:flex-row lg:flex-row flex-wrap px-0 xs:px-3 md:px-0 text-gray-800  w-full">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[30%] xs:w-full md:w-[30%] lg:w-[30%] md:m-2 ">
@@ -385,7 +385,7 @@ const ResumeTemplate19 = ({
                   parent hover:border-dashed hover:border-gray-500 hover:border-2 
                    hover:bg-gray-100 font-semibold  hover:text-black flex uppercase text-md   items-center "
                       >
-                        <span className="w-1.5 h-1.5 bg-gray-800 rounded-full mr-3"></span>
+                        {/* <span className="w-1.5 h-1.5 bg-gray-800 rounded-full mr-3"></span> */}
                         <div className="flex flex-row w-full items-center justify-between">
                           <EditableField
                             type="textarea"

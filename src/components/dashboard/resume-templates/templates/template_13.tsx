@@ -190,7 +190,7 @@ const ResumeTemplate16 = () => {
                     addSkill={handleAddSkills}
                     regenerateSkills={getPrimarySkills}
                   >
-                    <ul className="border-2 border-transparent hover:border-dashed hover:border-gray-500  spx-3 flex  flex-col gap-1 mb-4 text-gray-300 w-full text-[14px] ">
+                    <ul className="border-2 px-2 border-transparent hover:border-dashed hover:border-gray-500  spx-3 flex  flex-col gap-1 mb-4 text-gray-300 w-full text-[14px] ">
                       {/* <li className="font-semibold  uppercase">primary</li> */}
 
                       {resume?.primarySkills.map((skill: string, i: number) => (
@@ -354,7 +354,7 @@ const ResumeTemplate16 = () => {
                       className={`flex justify-start items-start ${
                         i > 0
                           ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
-                          : "xs:min-h-fit  min-h-[430px]"
+                          : "xs:min-h-fit  min-h-[450px]"
                       }`}
                     >
                       <div
