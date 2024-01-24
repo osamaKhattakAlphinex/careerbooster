@@ -127,7 +127,7 @@ const ResumeTemplate3 = () => {
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 "></span>
 
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-sm  my-2 hover:shadow-md hover:bg-gray-100 group-hover:pb-14">
+            <div className="text-sm  my-2 hover:shadow-md hover:bg-gray-100 group-hover:pb-14 min-h-[400px] xs:min-h-fit">
               <EditableField
                 type="textarea"
                 value={
@@ -192,7 +192,7 @@ const ResumeTemplate3 = () => {
                       className={`flex justify-start  ${
                         i > 0
                           ? "w-[100vw]  xs:w-auto"
-                          : "xs:min-h-fit min-h-[550px]"
+                          : "xs:min-h-fit min-h-[400px]"
                       }`}
                     >
                       <div
