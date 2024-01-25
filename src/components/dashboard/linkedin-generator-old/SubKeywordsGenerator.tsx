@@ -196,7 +196,7 @@ const SubKeywordsGenerator = () => {
             >
               {creditLimits?.linkedin_keywords_generation}
               <p className="pl-1"> Credits</p>
-              <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium text-[12px] px-2 absolute  -top-14 hidden group-hover:block rounded-bl-none text-gray-100 left-10 mb-6 shadow-xl rounded-xl py-2  transition-all">
+              <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium text-[12px] px-2 absolute xs:-left-32 md:left-10  -top-14  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                 50 credits will Be used for Keyword Generation
               </div>
             </div>
