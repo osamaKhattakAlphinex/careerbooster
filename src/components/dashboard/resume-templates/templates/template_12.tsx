@@ -103,7 +103,7 @@ const ResumeTemplate12 = () => {
         </div>
       </div>
       <div className="flex">
-        <div className=" w-5/12 md:w-1/3 flex flex-col  bg-[#FFFFFF]  px-9 xs:px-2 sm:px-2 md:px-9 lg:px-9    pt-[1rem] h-[1050px] xs:h-auto">
+        <div className=" w-5/12 md:w-1/3 flex flex-col  bg-[#FFFFFF]  px-9 xs:px-2 sm:px-2 md:px-9 lg:px-9    pt-[1rem] h-[1080px] xs:h-auto">
           <div className="h-48 w-48 xs:w-20 xs:h-20 md:w-48 md:h-48 text-gray-800 bg-[#F0CFC3]  text-center flex justify-center items-center  rounded-full xs:mb-[88px] sm:mb-[88px] xs:mt-[32px] sm:mt-[32px] md:mt-0 lg:mt-0 lg:mb-0 md:mb-0 ">
             <span className="text-4xl  text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
               <EditableField
@@ -342,7 +342,7 @@ const ResumeTemplate12 = () => {
                         : "xs:min-h-fit  min-h-[400px]"
                     }`}
                   >
-                    <div className="w-[5%] mt-2 pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5 lg:-mx-5    h-full flex flex-col items-center  gap-1">
+                    <div className="w-[5%] mt-2 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5 lg:-mx-5    h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
                       {resume?.workExperienceArray.length - 1 !== i && (
                         <div className="h-full w-[2px] bg-gray-500"></div>
