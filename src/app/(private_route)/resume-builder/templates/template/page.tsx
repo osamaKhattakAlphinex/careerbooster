@@ -57,7 +57,7 @@ const Template = () => {
         {resume &&
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
-              <div className="flex items-center justify-end gap-3 pb-4">
+              <div className="flex items-center justify-end gap-3 pb-4 sticky top-3 z-50">
                 {/* <Link
                   className="no-underline"
                   href={`/resume-edit?templateId=${templateId}&resumeId=${resume.id}`}
@@ -82,11 +82,11 @@ const Template = () => {
               </div>
 
               <div className="relative">
-                {ALL_TEMPLATES[templateId - 1].category === "premium" && (
+                {/* {ALL_TEMPLATES[templateId - 1].category === "premium" && (
                   <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
                     {crownIcon}
                   </div>
-                )}
+                )} */}
 
                 <div ref={componentRef} className=" bg-white">
                   {ALL_TEMPLATES[templateId - 1].template({})}
