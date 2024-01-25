@@ -23,7 +23,7 @@ const useSingleJDGenerate = (setStreamedJDData: any) => {
   const { saveResumeToDB } = useSaveResumeToDB();
 
   const getOneWorkExperienceNew = async (experience: any) => {
-    // setStreamedJDData("");
+    setStreamedJDData("");
     dispatch(setWorkExperience(""));
     let temp = "";
 
@@ -85,13 +85,13 @@ const useSingleJDGenerate = (setStreamedJDData: any) => {
           achievementTemp += text;
         }
       } else {
-        console.log("in else");
-
         dispatch(setWorkExperienceArray({ workExperienceArray: workExpArray }));
         dispatch(setState({ name: "resumeLoading", value: false }));
       }
 
       if (achievementTemp.length > 0) {
+        console.log(" inside");
+
         setStreamedJDData((prev: any) => prev + `</div> <br /> `);
         temp += `</div> <br /> `;
         const achivementsArray = fetchLIstOfStrings(achievementTemp);

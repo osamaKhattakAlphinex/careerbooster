@@ -60,7 +60,7 @@ const ResumeBuilder = () => {
   // Local States
   const [finished, setFinished] = useState<boolean>(false);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
-  const [streamedJDData, setStreamedJDData] = useState("");
+  const [streamedJDData, setStreamedJDData] = useState<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
@@ -213,7 +213,7 @@ const ResumeBuilder = () => {
 
         temp += html;
         let achievementTemp = "";
-        setStreamedJDData((prev) => prev + html);
+        setStreamedJDData((prev: any) => prev + html);
 
         const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
           method: "POST",
@@ -244,12 +244,12 @@ const ResumeBuilder = () => {
 
             const text = new TextDecoder().decode(value);
             // const text = response.result;
-            setStreamedJDData((prev) => prev + text);
+            setStreamedJDData((prev: any) => prev + text);
             temp += text;
             achievementTemp += text;
           }
 
-          setStreamedJDData((prev) => prev + `</div> <br /> `);
+          setStreamedJDData((prev: any) => prev + `</div> <br /> `);
           temp += `</div> <br /> `;
           const achivementsArray = fetchLIstOfStrings(achievementTemp);
           workExpArrObj.achievements = achivementsArray;
