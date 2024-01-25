@@ -22,6 +22,7 @@ import useGetUserData from "@/hooks/useGetUserData";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
+  const creditLimits = useSelector((state: any) => state.creditLimits);
   // local States
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
@@ -49,7 +50,6 @@ const SubJDGenerator = () => {
   const linkedinJD = useSelector((state: any) => state.linkedinJobDesc);
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
-  const creditLimits = useSelector((state: any) => state.creditLimits);
 
   useEffect(() => {
     if (streamedData === "") {
@@ -226,20 +226,15 @@ const SubJDGenerator = () => {
               <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
                 Job Description Generator
               </h1>
-              <span
-                className={`text-black rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
+              <div
+                className={`text-[#000] rounded-full group relative h-8 md:ml-3 cursor-pointer flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
               >
-                {iconOfPackageBadge ? (
-                  <Image
-                    src={iconOfPackageBadge}
-                    alt="bold icon"
-                    height={18}
-                    width={18}
-                    className="mr-2"
-                  />
-                ) : null}
-                Premium
-              </span>
+                {creditLimits?.linkedin_individualWorkExperience}
+                <p className="pl-1"> Credits</p>
+                <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium text-[12px] px-2 absolute  -top-14 hidden group-hover:block rounded-bl-none text-gray-100 left-10 mb-6 shadow-xl rounded-xl py-2  transition-all">
+                  60 credits will Be used for Job Description
+                </div>
+              </div>
             </div>
             {/* <LimitCard
               title="Available"

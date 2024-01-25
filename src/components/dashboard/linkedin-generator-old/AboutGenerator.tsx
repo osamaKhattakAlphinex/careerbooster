@@ -4,7 +4,7 @@ import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 
 import Link from "next/link";
 
-const AboutGenerator = () => {
+const AboutGenerator = ({ creditLimits }: { creditLimits: any }) => {
   return (
     <>
       <Link href="/linkedin-generator/about" className="no-underline">
@@ -25,11 +25,14 @@ const AboutGenerator = () => {
               <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
                 About Generator
               </h1>
-              <span
-                className={`text-black rounded-full flex justify-center items-center px-[16px] py-[6px] md:mx-2  bg-[#02FF19] text-[12px] uppercase font-bold `}
+              <div
+                className={`text-[#000] rounded-full group relative h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
               >
-                free
-              </span>
+                {creditLimits?.linkedin_about_generation} Credits
+                <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium text-[12px] px-2 absolute  -top-14 hidden group-hover:block rounded-bl-none text-gray-100 left-10 mb-6 shadow-xl rounded-xl py-2  transition-all">
+                  150 credits will Be used for About Generation
+                </div>
+              </div>
             </div>
 
             <p className="text-[14px] text-[#959595] pr-5">
