@@ -9,11 +9,11 @@ import { setState } from "@/store/resumeSlice";
 import Link from "next/link";
 
 interface Props {
-  handleGenerate: (value: any) => Promise<void>;
+  getConsent: (value: any) => void;
   availablePercentage: number;
 }
 const GenerateResume = ({
-  handleGenerate,
+  getConsent,
 }: // availablePercentage,
 Props) => {
   const [showInstruction, setShowInstruction] = useState<boolean>(false);
@@ -156,7 +156,7 @@ Props) => {
             memoizedState.resumeLoading ||
             !session?.user?.email
           }
-          onClick={() => handleGenerate(quantifyingExperience)}
+          onClick={() => getConsent(quantifyingExperience)}
           className={` dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${
             memoizedState.jobPosition === "" ||
             memoizedState.resumeLoading ||
