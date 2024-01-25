@@ -77,9 +77,9 @@ const useGetSummary = (setStreamedSummaryData: any) => {
         }
 
         dispatch(setSummary(summaryTemp));
-        showSuccessToast("Generated Successfully");
 
         if (path !== "/resume-builder") {
+          showSuccessToast("Generated Successfully");
           saveResumeToDB({
             ...resumeData,
             summary: summaryTemp,
