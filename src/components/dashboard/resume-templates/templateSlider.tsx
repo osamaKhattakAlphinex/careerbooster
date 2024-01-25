@@ -17,7 +17,7 @@ const TemplateSlider = ({ templates }: Props) => {
   const templateId: number = parseInt(params.get("templateId") || "0");
 
   return (
-    <div className="p-4 flex flex-row items-start justify-start gap-6 flex-wrap box-border">
+    <div className="p-4 flex flex-row items-start justify-start gap-6 flex-wrap box-border ">
       <Swiper
         slidesPerView={5}
         spaceBetween={10}
@@ -30,7 +30,7 @@ const TemplateSlider = ({ templates }: Props) => {
         loop={true}
         breakpoints={{
           0: {
-            slidesPerView: 1,
+            slidesPerView: 2,
           },
           425: {
             slidesPerView: 2,
@@ -55,7 +55,7 @@ const TemplateSlider = ({ templates }: Props) => {
             className={`${
               templateId === index + 1
                 ? " border-2 rounded-md p-2 border-indigo-600"
-                : ""
+                : " "
             } bg-transparent relative overflow-hidden group h-48 `}
           >
             <Link
@@ -65,7 +65,7 @@ const TemplateSlider = ({ templates }: Props) => {
               <Image
                 src={template.preview}
                 alt={`template-${index}`}
-                width={250}
+                width={281}
                 height={150}
                 className="bg-white "
                 style={{ objectFit: "contain", aspectRatio: "auto" }}
