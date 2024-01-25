@@ -23,17 +23,16 @@ import GenerateResume from "@/components/dashboard/resume-builder/GenerateNewRes
 import Link from "next/link";
 import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import Image from "next/image";
-import { crownIcon } from "@/helpers/iconsProvider";
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useGetUserData from "@/hooks/useGetUserData";
 import useGetSummary from "@/hooks/useGetSummary";
 import { fetchLIstOfStrings } from "@/helpers/fetchLIstOfStrings";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import { showSuccessToast } from "@/helpers/toast";
+import CreditInfoModal from "@/components/dashboard/resume-builder/CreditsInfoModal";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
-  const windowSize = useRef([window.innerWidth, window.innerHeight]);
   const [showPopup, setShowPopup] = useState(false);
   const confettiConfig = {
     angle: 90,
@@ -45,6 +44,8 @@ const ResumeBuilder = () => {
     width: "25px",
     height: "25px",
   };
+
+  const creditsInfoRef: React.MutableRefObject<any> = useRef(null);
 
   const runConfetti = () => {
     showSuccessToast("Generated Successfully");
@@ -77,12 +78,21 @@ const ResumeBuilder = () => {
 
   const { getSummary } = useGetSummary(setStreamedSummaryData);
 
+  const getConsent = (quantifyingExp: boolean) => {
+    if (creditsInfoRef.current) {
+      creditsInfoRef.current.openModal(true, quantifyingExp);
+    }
+  };
+
   const handleGenerate = useCallback(
     async (quantifyingExperience: boolean) => {
       await getUserDataIfNotExists();
       await getCreditLimitsIfNotExists();
+
       // reset resume
+
       dispatch(resetResume(resumeData.state));
+
       if (resumeData.state.jobPosition !== "" && session?.user?.email) {
         dispatch(setState({ name: "resumeLoading", value: true }));
         dispatch(setQuantifyingExperience(quantifyingExperience));
@@ -326,6 +336,8 @@ const ResumeBuilder = () => {
 
   return (
     <>
+      <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} />
+
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]">
           <Link
@@ -350,7 +362,7 @@ const ResumeBuilder = () => {
             </div>
           )}
           <GenerateResume
-            handleGenerate={handleGenerate}
+            getConsent={getConsent}
             availablePercentage={availablePercentage}
           />
           <div className="flex justify-center items-center fixed bottom-0">
