@@ -14,6 +14,7 @@ import Image from "next/image";
 import FileUploadHandler from "@/components/dashboard/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import WordFileHandler from "@/components/dashboard/WordFileHandler";
 
 // export const metadata: Metadata = {
 //   title: "CareerBooster.AI-Register",
@@ -164,16 +165,6 @@ const RegistrationForm = () => {
       });
   };
 
-  // const moveResumeToUserFolder = async (fileName: string, email: string) => {
-  //   if (fileName && email) {
-  //     const obj = {
-  //       fileName: fileName,
-  //       email: email,
-  //     };
-  //     return axios.post(`/api/users/moveResumeToUserFolder`, obj);
-  //   }
-  // };
-
   const updateUser = (file: string, email: string) => {
     if (file && email) {
       return axios.post("/api/users/updateUser", {
@@ -186,32 +177,6 @@ const RegistrationForm = () => {
   const removeDashesFromString = (str: string) => {
     return str.replace(/-/g, " ");
   };
-
-  // const uploadFileToServer = async () => {
-  //   setFileError("");
-  //   setFileUploading(true);
-  //   if (file) {
-  //     const body = new FormData();
-  //     body.append("file", file);
-  //     fetch("/api/fileUpload", {
-  //       method: "POST",
-  //       body,
-  //     })
-  //       .then(async (resp: any) => {
-  //         const res = await resp.json();
-  //         if (res.success) {
-  //           const uploadedFileName = res.fileName + ".pdf";
-  //           dispatch(setUploadedFileName(uploadedFileName));
-  //           fetchRegistrationDataFromResume(uploadedFileName);
-  //         } else {
-  //           setFileError("Something went wrong");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         setFileError("Something went wrong");
-  //       });
-  //   }
-  // };
 
   const fetchRegistrationDataFromResume = async (content: string) => {
     setFileError("");
@@ -305,16 +270,18 @@ const RegistrationForm = () => {
 
   // check file is correct
   useEffect(() => {
-    if (file && file.type === "application/pdf") {
+    if (
+      file &&
+      (file.type === "application/pdf" ||
+        file.type === "application/msword" ||
+        file.type ===
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+    ) {
       //  file exists and is PDF
       setFileError("");
-
-      // upload it to server
-      //uploadFileToServer();
-      // getContentFromResume(file);
     } else if (file) {
       // if file exists but not PDf
-      setFileError("only PDF file is allowed");
+      setFileError("only PDF and Word Doc file is allowed");
     }
   }, [file]);
 
@@ -366,7 +333,7 @@ const RegistrationForm = () => {
                         : "Upload Your Existing Resume"}
                     </label>
                   )}
-                  {file !== null && (
+                  {file !== null && file.type === "application/pdf" ? (
                     <FileUploadHandler
                       file={file}
                       text={text}
@@ -375,6 +342,17 @@ const RegistrationForm = () => {
                         fetchRegistrationDataFromResume
                       }
                     />
+                  ) : (
+                    file !== null && (
+                      <WordFileHandler
+                        file={file}
+                        text={text}
+                        setText={setText}
+                        fetchRegistrationDataFromResume={
+                          fetchRegistrationDataFromResume
+                        }
+                      />
+                    )
                   )}
                   <p className="text-gray-700 mt-4 text-sm">
                     Your existing resume forms the basis for your new one,

@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import FileUploadHandler from "@/components/dashboard/FileUploadHandler";
 import ReCAPTCHA from "react-google-recaptcha";
 import { verifyInvisibleCaptcha } from "@/ServerActions";
+import WordFileHandler from "@/components/dashboard/WordFileHandler";
 
 const saveToLocalStorage = (text: any, fileName: any) => {
   console.log("first");
@@ -34,14 +35,18 @@ const LinkedInToolMain = () => {
   const [text, setText] = useState<string>("");
 
   useEffect(() => {
-    if (file && file.type === "application/pdf") {
+    if (
+      file &&
+      (file.type === "application/pdf" ||
+        file.type === "application/msword" ||
+        file.type ===
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+    ) {
       //  file exists and is PDF
       setFileError("");
-      // upload it to server
-      // uploadFileToServer();
     } else if (file) {
       // if file exists but not PDf
-      setFileError("only PDF file is allowed");
+      setFileError("only PDF or Word file is allowed");
     }
   }, [file]);
   async function handleCaptchaSubmission(token: string | null) {
@@ -65,7 +70,13 @@ const LinkedInToolMain = () => {
     }
   };
   useEffect(() => {
-    if (file && file.type === "application/pdf") {
+    if (
+      file &&
+      (file.type === "application/pdf" ||
+        file.type === "application/msword" ||
+        file.type ===
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+    ) {
       setFileUploading(true);
       setUploadComplete(true);
     }
@@ -77,13 +88,13 @@ const LinkedInToolMain = () => {
       router.push(`/linkedin/result`);
     }
   }, [fileUploading, uploadComplete, text]);
-  // useEffect(() => {
-  //   if (isVerified) {
-  //     router.push("/linkedin/result");
-  //   } else {
-  //     console.log("Captha failed");
-  //   }
-  // }, [isVerified]);
+  useEffect(() => {
+    if (isVerified) {
+      router.push("/linkedin/result");
+    } else {
+      console.log("Captha failed");
+    }
+  }, [isVerified]);
   return (
     <div className="w-full ">
       {/* Hero Section */}
@@ -142,14 +153,15 @@ const LinkedInToolMain = () => {
             theme="dark"
           />
         </div>
-        {file !== null && fileUploading && (
-          <FileUploadHandler
-            file={file}
-            text={text}
-            setText={setText}
-            // fetchRegistrationDataFromResume={fetchRegistrationDataFromResume}
-          />
+        {file !== null && file.type === "application/pdf" && fileUploading ? (
+          <FileUploadHandler file={file} text={text} setText={setText} />
+        ) : (
+          file !== null &&
+          fileUploading && (
+            <WordFileHandler file={file} text={text} setText={setText} />
+          )
         )}
+
         {fileError && (
           <div
             className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2 !text-left w-[50%] m-auto"
