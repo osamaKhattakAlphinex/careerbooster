@@ -29,9 +29,11 @@ import useGetUserData from "@/hooks/useGetUserData";
 import useGetSummary from "@/hooks/useGetSummary";
 import { fetchLIstOfStrings } from "@/helpers/fetchLIstOfStrings";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
+import { showInfoToast } from "@/helpers/toast";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
+  const windowSize = useRef([window.innerWidth, window.innerHeight]);
   const [showPopup, setShowPopup] = useState(false);
   const confettiConfig = {
     angle: 90,
@@ -43,6 +45,8 @@ const ResumeBuilder = () => {
     width: "25px",
     height: "25px",
   };
+
+  showInfoToast("Resume Genereted");
   //
   const runConfetti = () => {
     setConfettiRunning(true);
@@ -58,7 +62,7 @@ const ResumeBuilder = () => {
   // Local States
   const [finished, setFinished] = useState<boolean>(false);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
-  const [streamedJDData, setStreamedJDData] = useState("");
+  const [streamedJDData, setStreamedJDData] = useState<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
@@ -211,7 +215,7 @@ const ResumeBuilder = () => {
 
         temp += html;
         let achievementTemp = "";
-        setStreamedJDData((prev) => prev + html);
+        setStreamedJDData((prev: any) => prev + html);
 
         const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
           method: "POST",
@@ -242,12 +246,12 @@ const ResumeBuilder = () => {
 
             const text = new TextDecoder().decode(value);
             // const text = response.result;
-            setStreamedJDData((prev) => prev + text);
+            setStreamedJDData((prev: any) => prev + text);
             temp += text;
             achievementTemp += text;
           }
 
-          setStreamedJDData((prev) => prev + `</div> <br /> `);
+          setStreamedJDData((prev: any) => prev + `</div> <br /> `);
           temp += `</div> <br /> `;
           const achivementsArray = fetchLIstOfStrings(achievementTemp);
           workExpArrObj.achievements = achivementsArray;
@@ -349,7 +353,7 @@ const ResumeBuilder = () => {
             handleGenerate={handleGenerate}
             availablePercentage={availablePercentage}
           />
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center fixed bottom-0">
             <Confetti active={confettingRunning} config={confettiConfig} />
           </div>
           {finished && (
@@ -377,11 +381,11 @@ const ResumeBuilder = () => {
                     key={`template-${index}`}
                     className="box-border group relative  rounded-lg flex items-center overflow-hidden "
                   >
-                    {template.category === "premium" && (
+                    {/* {template.category === "premium" && (
                       <div className="absolute rounded-full right-1 top-1 h-6 w-6 grid place-content-center bg-yellow-600">
                         {crownIcon}
                       </div>
-                    )}
+                    )} */}
                     <Link
                       className="no-underline"
                       href={{

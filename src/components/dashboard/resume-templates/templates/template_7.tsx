@@ -5,8 +5,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
-import Loader from "@/components/common/Loader";
-
 import useGetSummary from "@/hooks/useGetSummary";
 import Toolbar from "@/components/dashboard/Toolbar";
 import EditableField from "@/components/dashboard/EditableField";
@@ -16,6 +14,7 @@ import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
+import Loader from "@/components/common/Loader";
 const ResumeTemplate7 = () => {
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
@@ -45,6 +44,7 @@ const ResumeTemplate7 = () => {
 
   useEffect(() => {
     if (streamedJDData === "") {
+      setStreamedJDData(null);
       setRegeneratedRecordIndex(null);
     }
   }, [streamedJDData]);
@@ -102,7 +102,7 @@ const ResumeTemplate7 = () => {
             </h3>
 
             <Toolbar regenrateSummary={getSummary}>
-              <div className="text-sm  hover:shadow-md border-2 border-transparent hover:border-gray-500 hover:border-dashed mt-4 xs:min-h-fit min-h-[420px]">
+              <div className="text-sm  hover:shadow-md mt-4 border-2 border-transparent hover:border-gray-500 hover:border-dashed xs:min-h-fit min-h-[380px]">
                 <EditableField
                   type="textarea"
                   value={
@@ -390,10 +390,10 @@ const ResumeTemplate7 = () => {
               <ul className="flex xs:flex-col md:flex-row lg:flex-row w-full  flex-wrap pl-0 ">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="w-[28%] xs:w-full md:w-[30%] m-2">
+                    <div className="w-[28%] xs:w-full md:w-[30%] m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                       <li
-                        className=" hover:shadow-md hover:cursor-move border-transparent border-2 
-                  parent hover:border-dashed hover:border-gray-500 hover:border-2 
+                        className=" hover:shadow-md hover:cursor-move 
+                  parent  
                    hover:bg-gray-100 font-bold flex uppercase text-[15px]  justify-between items-center "
                       >
                         <EditableField
@@ -407,15 +407,13 @@ const ResumeTemplate7 = () => {
                             );
                           }}
                         />
-                        <div
-                          onClick={() =>
-                            handlers.handleDeleteEductionDetail(ind)
-                          }
-                          className="w-4 h-4  cursor-pointer child"
-                        >
-                          {crossIcon1}
-                        </div>
                       </li>
+                      <div
+                        onClick={() => handlers.handleDeleteEductionDetail(ind)}
+                        className="w-4 hidden h-4 group-hover:block absolute right-2 top-2 z-10  cursor-pointer child"
+                      >
+                        {crossIcon1}
+                      </div>
                       <li className="hover:shadow-md  hover:bg-gray-100 text-[15px] font-medium">
                         <EditableField
                           value={`${education?.fieldOfStudy}`}
@@ -441,12 +439,84 @@ const ResumeTemplate7 = () => {
                           }}
                         />
                       </li>
-                      <li className="mb-4 italic text-xs text-gray-700 ">
+                      {(education.fromYear !== "" ||
+                        education.toYear !== "") && (
+                        <li className="mb-4 italic text-xs text-gray-700">
+                          {education.fromMonth && (
+                            <EditableField
+                              rows={2}
+                              value={`${education?.fromMonth}`}
+                              onSave={(value: string) => {
+                                handlers.handleSaveEductionDetail(
+                                  { fromMonth: value },
+                                  ind
+                                );
+                              }}
+                            />
+                          )}
+                          {education.fromYear && (
+                            <EditableField
+                              rows={2}
+                              value={`${education?.fromYear}`}
+                              onSave={(value: string) => {
+                                handlers.handleSaveEductionDetail(
+                                  { fromYear: value },
+                                  ind
+                                );
+                              }}
+                            />
+                          )}
+                          {(education.toMonth || education.toYear) && (
+                            <span>&nbsp; - &nbsp;</span>
+                          )}
+                          {education.toMonth && !education.isContinue && (
+                            <EditableField
+                              rows={2}
+                              value={`${education?.toMonth}`}
+                              onSave={(value: string) => {
+                                handlers.handleSaveEductionDetail(
+                                  { toMonth: value },
+                                  ind
+                                );
+                              }}
+                            />
+                          )}
+                          {education.toYear && !education.isContinue && (
+                            <EditableField
+                              rows={2}
+                              value={`${education?.toYear}`}
+                              onSave={(value: string) => {
+                                handlers.handleSaveEductionDetail(
+                                  { toYear: value },
+                                  ind
+                                );
+                              }}
+                            />
+                          )}
+                          {education.isContinue && (
+                            <EditableField
+                              rows={2}
+                              value={`${education?.isContinue && "Present"}`}
+                              onSave={(value: string) => {
+                                handlers.handleSaveEductionDetail(
+                                  { toYear: value },
+                                  ind
+                                );
+                                handlers.handleSaveEductionDetail(
+                                  { isContinue: false },
+                                  ind
+                                );
+                              }}
+                            />
+                          )}
+                        </li>
+                      )}
+                      {/* <li className="mb-4 italic text-xs text-gray-700 ">
                         {education?.fromMonth + " " + education.fromYear} -{" "}
                         {education?.isContinue
                           ? "Present"
                           : education?.toMonth + " " + education.toYear}
-                      </li>
+                      </li> */}
                     </div>
                   </React.Fragment>
                 ))}
@@ -455,7 +525,7 @@ const ResumeTemplate7 = () => {
           )}
         </div>
         {/* <div className="relative  border-[1px] border-gray-300 "></div> */}
-        <div className="w-[33%] xs:w-1/3 md:w-[33%] flex flex-col gap-4 border-l-2 border-gray-300 h-[1120px] xs:h-auto ">
+        <div className="w-[33%] xs:w-1/3 md:w-[33%] flex flex-col gap-4 border-l-2 border-gray-300 h-[1080px] xs:h-auto ">
           {/* contacts */}
           <div className="bg-gray-200 px-4 py-4 h-44">
             <h3 className="uppercase text-lg font-semibold flex flex-row gap-1 items-center mb-2">

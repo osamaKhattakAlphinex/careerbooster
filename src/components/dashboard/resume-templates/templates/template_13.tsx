@@ -50,6 +50,7 @@ const ResumeTemplate16 = () => {
 
   useEffect(() => {
     if (streamedJDData === "") {
+      setStreamedJDData(null);
       setRegeneratedRecordIndex(null);
     }
   }, [streamedJDData]);
@@ -77,7 +78,7 @@ const ResumeTemplate16 = () => {
     <div className="w-full first-page relative text-gray-900">
       <div className="w-4/12 h-11 rounded-bl-full absolute right-0 bg-[#1F1E1E] "></div>
       <div className="flex">
-        <div className="w-5/12 md:w-3/12 flex flex-col items-center md:bg-[#d9d9d9] pl-9 pt-5 h-[1150px] xs:h-auto">
+        <div className="w-5/12 md:w-3/12 flex flex-col items-center md:bg-[#d9d9d9] pl-9 pt-5 h-[1120px] xs:h-auto">
           <div className=" bg-[#1F1E1E] flex  flex-col md:w-56 h-[100%] rounded-t-full ">
             <div className=" w-48 h-48 xs:w-24 md:h-48 md:w-48 xs:h-24  m-3 text-gray-800 bg-[#fff] md:bg-[#d9d9d9]  text-center flex justify-center items-center  rounded-full ">
               <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
@@ -305,7 +306,7 @@ const ResumeTemplate16 = () => {
           {/* <span className="border-stylee w-full h-0 border border-[#444440] mb-3"></span> */}
           <span className="border-stylee w-full h-0  my-2"></span>
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-[14px] hover:shadow-md xs:min-h-fit min-h-[350px] px-4 md:px-8 border-2 border-transparent hover:border-gray-500 hover:border-dashed  ">
+            <div className="text-[14px] hover:shadow-md xs:min-h-fit min-h-[430px] px-4 md:px-8 border-2 border-transparent hover:border-gray-500 hover:border-dashed  ">
               <EditableField
                 type="textarea"
                 value={
@@ -356,7 +357,7 @@ const ResumeTemplate16 = () => {
                       className={`flex justify-start items-start ${
                         i > 0
                           ? "w-[100vw] ml-[-200px]  xs:ml-0 xs:w-full "
-                          : "xs:min-h-fit  min-h-[450px]"
+                          : "xs:min-h-fit  min-h-[400px]"
                       }`}
                     >
                       <div
@@ -598,10 +599,10 @@ const ResumeTemplate16 = () => {
               <ul className="flex xs:flex-col md:flex-row lg:flex-row w-full  flex-wrap pl-0">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="flex flex-col w-[30%] xs:w-full md:w-[30%]">
+                    <div className="flex flex-col w-[30%] xs:w-full md:w-[30%] relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                       <li
-                        className=" hover:shadow-md hover:cursor-move border-transparent border-2 
-                  parent hover:border-dashed hover:border-gray-500 hover:border-2 
+                        className=" hover:shadow-md hover:cursor-move 
+                  parent  
                    hover:bg-gray-100 font-bold flex uppercase text-[16px] justify-between items-center "
                       >
                         <EditableField
@@ -615,15 +616,13 @@ const ResumeTemplate16 = () => {
                             );
                           }}
                         />
-                        <div
-                          onClick={() =>
-                            handlers.handleDeleteEductionDetail(ind)
-                          }
-                          className="w-4 h-4  cursor-pointer child"
-                        >
-                          {crossIcon1}
-                        </div>
                       </li>
+                      <div
+                        onClick={() => handlers.handleDeleteEductionDetail(ind)}
+                        className="w-4 hidden h-4 group-hover:block absolute right-2 top-2 z-10  cursor-pointer child"
+                      >
+                        {crossIcon1}
+                      </div>
                       <li className="hover:shadow-md hover:bg-gray-100  text-[15px] font-medium ">
                         <EditableField
                           value={`${education?.fieldOfStudy}`}
@@ -649,12 +648,84 @@ const ResumeTemplate16 = () => {
                           }}
                         />
                       </li>
-                      <li className="mb-4 text-xs italic text-gray-500 ">
+                      {(education.fromYear !== "" ||
+                        education.toYear !== "") && (
+                        <li className="mb-4 text-xs italic text-gray-500">
+                          {education.fromMonth && (
+                            <EditableField
+                              rows={2}
+                              value={`${education?.fromMonth}`}
+                              onSave={(value: string) => {
+                                handlers.handleSaveEductionDetail(
+                                  { fromMonth: value },
+                                  ind
+                                );
+                              }}
+                            />
+                          )}
+                          {education.fromYear && (
+                            <EditableField
+                              rows={2}
+                              value={`${education?.fromYear}`}
+                              onSave={(value: string) => {
+                                handlers.handleSaveEductionDetail(
+                                  { fromYear: value },
+                                  ind
+                                );
+                              }}
+                            />
+                          )}
+                          {(education.toMonth || education.toYear) && (
+                            <span>&nbsp; - &nbsp;</span>
+                          )}
+                          {education.toMonth && !education.isContinue && (
+                            <EditableField
+                              rows={2}
+                              value={`${education?.toMonth}`}
+                              onSave={(value: string) => {
+                                handlers.handleSaveEductionDetail(
+                                  { toMonth: value },
+                                  ind
+                                );
+                              }}
+                            />
+                          )}
+                          {education.toYear && !education.isContinue && (
+                            <EditableField
+                              rows={2}
+                              value={`${education?.toYear}`}
+                              onSave={(value: string) => {
+                                handlers.handleSaveEductionDetail(
+                                  { toYear: value },
+                                  ind
+                                );
+                              }}
+                            />
+                          )}
+                          {education.isContinue && (
+                            <EditableField
+                              rows={2}
+                              value={`${education?.isContinue && "Present"}`}
+                              onSave={(value: string) => {
+                                handlers.handleSaveEductionDetail(
+                                  { toYear: value },
+                                  ind
+                                );
+                                handlers.handleSaveEductionDetail(
+                                  { isContinue: false },
+                                  ind
+                                );
+                              }}
+                            />
+                          )}
+                        </li>
+                      )}
+                      {/* <li className="mb-4 text-xs italic text-gray-500 ">
                         {education?.fromMonth + " " + education.fromYear} -{" "}
                         {education?.isContinue
                           ? "Present"
                           : education?.toMonth + " " + education.toYear}
-                      </li>
+                      </li> */}
                     </div>
                   </React.Fragment>
                 ))}

@@ -12,12 +12,12 @@ const useGetSummary = (setStreamedSummaryData: any) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const resumeData = useSelector((state: any) => state.resume);
-  const { getUserDataIfNotExists } = useGetUserData()
-  const { saveResumeToDB } = useSaveResumeToDB()
+  const { getUserDataIfNotExists } = useGetUserData();
+  const { saveResumeToDB } = useSaveResumeToDB();
   const creditLimits = useSelector((state: any) => state.creditLimits);
-  const { getCreditLimitsIfNotExists } = useGetCreditLimits()
+  const { getCreditLimitsIfNotExists } = useGetCreditLimits();
   const [aiInputUserData, setAiInputUserData] = useState<any>();
-  const path = usePathname()
+  const path = usePathname();
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -37,11 +37,10 @@ const useGetSummary = (setStreamedSummaryData: any) => {
   const getSummary = async () => {
     // return aiInputUserData
     await getUserDataIfNotExists();
-    await getCreditLimitsIfNotExists()
+    await getCreditLimitsIfNotExists();
     setStreamedSummaryData("");
     dispatch(setSummary(""));
     // dispatch(setLoadingState("summary"));
-
 
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
@@ -84,7 +83,7 @@ const useGetSummary = (setStreamedSummaryData: any) => {
           });
         }
       } else {
-        setStreamedSummaryData("Error! Something went wrong");
+        setStreamedSummaryData(resumeData?.summary);
       }
     });
     // });
