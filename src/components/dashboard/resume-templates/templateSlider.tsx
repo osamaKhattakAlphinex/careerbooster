@@ -74,11 +74,11 @@ const TemplateSlider = ({ templates }: Props) => {
                 ""
               ) : (
                 <div className=" object-cover group-hover:grid hidden bg-slate-600/60 text-white  absolute top-0 left-0 h-full w-full  overflow-hidden  place-content-center">
-                  {template.category === "premium" && (
+                  {/* {template.category === "premium" && (
                     <div className="absolute rounded-full right-1 top-1 h-6 w-6 grid place-content-center bg-yellow-600">
                       {crownIcon}
                     </div>
-                  )}
+                  )} */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
