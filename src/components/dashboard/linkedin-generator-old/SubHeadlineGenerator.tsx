@@ -179,9 +179,10 @@ const SubHeadlineGenerator = () => {
               Headline Generator
             </h1>
             <span
-              className={`text-black rounded-full flex justify-center items-center px-[16px] py-[6px] md:mx-2  bg-[#02FF19] text-[12px] uppercase font-bold `}
+              className={`text-[#000] rounded-full cursor-pointer flex justify-center items-center px-[16px] py-[6px] md:mx-2  bg-[#FEB602] text-[12px]  font-bold `}
+              title={"50 credits will Be used for Headline Generation "}
             >
-              free
+              {creditLimits?.linkedin_headline_generation} Credits
             </span>
           </div>
           {/* <LimitCard

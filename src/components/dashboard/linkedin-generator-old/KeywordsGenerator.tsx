@@ -8,10 +8,7 @@ import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
-const KeywordsGenerator = () => {
-  const creditLimits = useSelector((state: any) => state.creditLimits);
-  console.log(creditLimits);
-
+const KeywordsGenerator = ({ creditLimits }: { creditLimits: any }) => {
   return (
     <>
       <Link href="/linkedin-generator/keywords" className="no-underline">
@@ -33,9 +30,10 @@ const KeywordsGenerator = () => {
                 Keywords Generator
               </h1>
               <span
-                className={`text-black rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
+                className={`text-[#000] rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
+                title={"50 credits will Be used for Keyword Generation "}
               >
-                {creditLimits.linkedin_keywords_generation} Credits
+                {creditLimits?.linkedin_keywords_generation} Credits
               </span>
             </div>
 

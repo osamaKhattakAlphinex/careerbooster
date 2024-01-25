@@ -1,10 +1,12 @@
+"use client ";
 import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
 import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 
 import Link from "next/link";
+import { useState } from "react";
 
-const HeadlineGenerator = () => {
+const HeadlineGenerator = ({ creditLimits }: { creditLimits: any }) => {
   return (
     <>
       <Link className="no-underline" href="/linkedin-generator/headline">
@@ -26,28 +28,12 @@ const HeadlineGenerator = () => {
                 Headline Generator
               </h1>
               <span
-                className={`text-black rounded-full flex justify-center items-center px-[16px] py-[6px] md:mx-2  bg-[#02FF19] text-[12px] uppercase font-bold `}
+                className={`text-[#000] rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
+                title={"50 credits will Be used for Headline Generation "}
               >
-                {/* {iconOfPackageBadge ? (
-                <Image
-                  src={`${iconOfPackageBadge}`}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                  className="mr-2"
-                />
-              ) : null} */}
-                free
+                {creditLimits?.linkedin_headline_generation} Credits
               </span>
             </div>
-            {/* <LimitCard
-            title="Available"
-            limit={userData?.userPackageData?.limit?.headline_generation}
-            used={userData?.userPackageUsed?.headline_generation}
-            setPercentageCalculated={setPercentageCalculated}
-            availablePercentage={availablePercentage}
-            setAvailablePercentage={setAvailablePercentage}
-          /> */}
             <p className="text-[14px] text-[#959595] pr-5">
               Generate headline for your linkedin in one click
             </p>

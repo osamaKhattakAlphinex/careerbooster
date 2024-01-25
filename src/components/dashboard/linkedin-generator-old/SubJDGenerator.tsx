@@ -22,6 +22,7 @@ import useGetUserData from "@/hooks/useGetUserData";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
+  const creditLimits = useSelector((state: any) => state.creditLimits);
   // local States
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
@@ -49,7 +50,6 @@ const SubJDGenerator = () => {
   const linkedinJD = useSelector((state: any) => state.linkedinJobDesc);
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
-  const creditLimits = useSelector((state: any) => state.creditLimits);
 
   useEffect(() => {
     if (streamedData === "") {
@@ -227,18 +227,11 @@ const SubJDGenerator = () => {
                 Job Description Generator
               </h1>
               <span
-                className={`text-black rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
+                className={`text-[#000] rounded-full h-8 md:ml-3 cursor-pointer flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
+                title={"60 credits will Be used for Job Description "}
               >
-                {iconOfPackageBadge ? (
-                  <Image
-                    src={iconOfPackageBadge}
-                    alt="bold icon"
-                    height={18}
-                    width={18}
-                    className="mr-2"
-                  />
-                ) : null}
-                Premium
+                {creditLimits?.linkedin_individualWorkExperience}
+                <p className="pl-1"> Credits</p>
               </span>
             </div>
             {/* <LimitCard

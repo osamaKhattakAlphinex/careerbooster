@@ -6,7 +6,7 @@ import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 
 import Link from "next/link";
 
-const JDGenerator = () => {
+const JDGenerator = ({ creditLimits }: { creditLimits: any }) => {
   // local States
 
   return (
@@ -25,23 +25,16 @@ const JDGenerator = () => {
             />
           </div>
           <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
-            <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row ">
+            <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
               <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
                 Job Description Generator
               </h1>
               <span
-                className={`text-black rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
+                className={`text-[#000] rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
+                title={"60 credits will Be used for Job Description "}
               >
-                {iconOfPackageBadge ? (
-                  <Image
-                    src={iconOfPackageBadge}
-                    alt="bold icon"
-                    height={18}
-                    width={18}
-                    className="mr-2"
-                  />
-                ) : null}
-                Premium
+                {creditLimits?.linkedin_individualWorkExperience}
+                <p className="pl-1"> Credits</p>
               </span>
             </div>
 

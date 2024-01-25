@@ -4,7 +4,7 @@ import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 
 import Link from "next/link";
 
-const AboutGenerator = () => {
+const AboutGenerator = ({ creditLimits }: { creditLimits: any }) => {
   return (
     <>
       <Link href="/linkedin-generator/about" className="no-underline">
@@ -26,9 +26,10 @@ const AboutGenerator = () => {
                 About Generator
               </h1>
               <span
-                className={`text-black rounded-full flex justify-center items-center px-[16px] py-[6px] md:mx-2  bg-[#02FF19] text-[12px] uppercase font-bold `}
+                className={`text-[#000] rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
+                title={"150 credits will Be used for About Generation "}
               >
-                free
+                {creditLimits?.linkedin_about_generation} Credits
               </span>
             </div>
 

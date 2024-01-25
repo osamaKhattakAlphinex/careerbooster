@@ -192,18 +192,11 @@ const SubKeywordsGenerator = () => {
               Keywords Generator
             </h1>
             <span
-              className={`text-black rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
+              className={`text-[#000] rounded-full h-8 md:ml-3 cursor-pointer flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
+              title={"50 credits will Be used for Keyword Generation "}
             >
-              {iconOfPackageBadge ? (
-                <Image
-                  src={iconOfPackageBadge}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                  className="mr-2"
-                />
-              ) : null}
-              Premium
+              {creditLimits?.linkedin_keywords_generation}
+              <p className="pl-1"> Credits</p>
             </span>
           </div>
           {/* <LimitCard
