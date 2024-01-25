@@ -29,7 +29,7 @@ import useGetUserData from "@/hooks/useGetUserData";
 import useGetSummary from "@/hooks/useGetSummary";
 import { fetchLIstOfStrings } from "@/helpers/fetchLIstOfStrings";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
-import { showInfoToast } from "@/helpers/toast";
+import { showSuccessToast } from "@/helpers/toast";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -46,9 +46,9 @@ const ResumeBuilder = () => {
     height: "25px",
   };
 
-  showInfoToast("Resume Genereted");
-  //
   const runConfetti = () => {
+    showSuccessToast("Generated Successfully");
+
     setConfettiRunning(true);
     setTimeout(() => {
       setConfettiRunning(false);

@@ -1,5 +1,3 @@
-"use client";
-
 import HeadlineGenerator from "@/components/dashboard/linkedin-generator-old/HeadlineGenerator";
 import { useState } from "react";
 import AboutGenerator from "@/components/dashboard/linkedin-generator-old/AboutGenerator";
@@ -9,10 +7,6 @@ import { leftArrowIcon } from "@/helpers/iconsProvider";
 import Link from "next/link";
 
 export default function LinkedInPage() {
-  const [keywords, setKeywords] = useState<string>("");
-  const [headline, setHeadline] = useState<string>("");
-  const [about, setAbout] = useState<string>("");
-  const [jobDesc, setJobDesc] = useState<string>("");
   return (
     <div className="w-full sm:w-full z-1000 ">
       <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]  ">
@@ -30,11 +24,11 @@ export default function LinkedInPage() {
             </h1>
           </div>
           <div className="mt-5">
-            <HeadlineGenerator setHeadline={setHeadline} />
+            <HeadlineGenerator />
 
-            <AboutGenerator setAbout={setAbout} />
-            <JDGenerator setJobDesc={setJobDesc} />
-            <KeywordsGenerator setKeywords={setKeywords} />
+            <AboutGenerator />
+            <JDGenerator />
+            <KeywordsGenerator />
           </div>
         </div>
       </div>

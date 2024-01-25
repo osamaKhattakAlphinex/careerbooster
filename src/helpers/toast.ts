@@ -4,7 +4,7 @@ const showSuccessToast = (message: string) => {
   toast.dismiss();
   toast.success(message, {
     position: "bottom-right",
-    autoClose: 1000,
+    autoClose: 1500,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: false,
@@ -17,7 +17,7 @@ const showInfoToast = (message: string) => {
   toast.dismiss();
   toast.info(message, {
     position: "bottom-right",
-    autoClose: 1000,
+    autoClose: 1500,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: false,
@@ -30,7 +30,7 @@ const showWarningToast = (message: string) => {
   toast.dismiss();
   toast.warning(message, {
     position: "bottom-right",
-    autoClose: 1000,
+    autoClose: 1500,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: false,
@@ -43,7 +43,7 @@ const showErrorToast = (message: string = "Some error occured.") => {
   toast.dismiss();
   toast.error(message, {
     position: "bottom-right",
-    autoClose: 1000,
+    autoClose: 1500,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: false,

@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
 import iconOfPackageBadge from "@/../public/icon/crown.svg";
@@ -6,18 +5,13 @@ import iconOfPackageBadge from "@/../public/icon/crown.svg";
 import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 
 import Link from "next/link";
-interface Props {
-  setJobDesc: React.Dispatch<React.SetStateAction<string>>;
-}
-const JDGenerator = ({ setJobDesc }: Props) => {
+
+const JDGenerator = () => {
   // local States
 
   return (
     <>
-      <Link
-        href="/linkedin-generator/job-description"
-        className="no-underline"
-      >
+      <Link href="/linkedin-generator/job-description" className="no-underline">
         <div className="headline-generator dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
           <div
             className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16`}
@@ -56,13 +50,11 @@ const JDGenerator = ({ setJobDesc }: Props) => {
             </p>
           </div>
           <div
-
             className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
 
-          // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
+            // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
           >
             <span className={`text-white text-[15px] font-semibold`}>
-
               <div className="flex">
                 <Image
                   src={buttonIconSrc}
@@ -71,13 +63,11 @@ const JDGenerator = ({ setJobDesc }: Props) => {
                   width={18}
                 />
                 <span
-
                   className={`text-white ml-3 text-[15px] font-semibold cursor-pointer no-underline`}
                 >
                   Generate Description
                 </span>
               </div>
-
             </span>
           </div>
         </div>

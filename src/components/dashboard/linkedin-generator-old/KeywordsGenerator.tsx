@@ -1,4 +1,4 @@
-
+"use client";
 import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
 import iconOfPackageBadge from "@/../public/icon/crown.svg";
@@ -6,18 +6,15 @@ import iconOfPackageBadge from "@/../public/icon/crown.svg";
 import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 
 import Link from "next/link";
-interface Props {
-  setKeywords: React.Dispatch<React.SetStateAction<string>>;
-}
-const KeywordsGenerator = ({ setKeywords }: Props) => {
+import { useSelector } from "react-redux";
+
+const KeywordsGenerator = () => {
+  const creditLimits = useSelector((state: any) => state.creditLimits);
+  console.log(creditLimits);
 
   return (
     <>
-      <Link
-        href="/linkedin-generator/keywords"
-
-        className="no-underline"
-      >
+      <Link href="/linkedin-generator/keywords" className="no-underline">
         <div className="headline-generator dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
           <div
             className={`icon hidden rounded-full  bg-gradient-to-b from-[#20AA89] to-[#65D4AC]  md:flex justify-center items-center w-16 h-16`}
@@ -36,18 +33,9 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
                 Keywords Generator
               </h1>
               <span
-                className={`text-black rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px] uppercase font-bold `}
+                className={`text-black rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
               >
-                {iconOfPackageBadge ? (
-                  <Image
-                    src={iconOfPackageBadge}
-                    alt="bold icon"
-                    height={18}
-                    width={18}
-                    className="mr-2"
-                  />
-                ) : null}
-                Premium
+                {creditLimits.linkedin_keywords_generation} Credits
               </span>
             </div>
 
@@ -56,13 +44,11 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
             </p>
           </div>
           <div
-
             className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
 
-          // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
+            // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
           >
             <span className={`text-white text-[15px] font-semibold`}>
-
               <div className="flex">
                 <Image
                   src={buttonIconSrc}
@@ -77,7 +63,6 @@ const KeywordsGenerator = ({ setKeywords }: Props) => {
                   Generate Keywords
                 </span>
               </div>
-
             </span>
           </div>
         </div>
