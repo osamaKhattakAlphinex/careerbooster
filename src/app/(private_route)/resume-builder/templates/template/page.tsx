@@ -15,10 +15,9 @@ import DownloadService from "@/helpers/downloadFile";
 const Template = () => {
   const params = useSearchParams();
   const { resume } = useSelector((state: any) => state);
-  const [openUpgradeModal, setOpenUpgradModal] = useState<boolean>(false);
   const { data: session } = useSession();
   const templateId: number = parseInt(params.get("templateId") || "0");
-  const componentRef = useRef(null);
+  const componentRef = useRef<any>(null);
   const dispatch = useDispatch();
 
   const fetchDefaultResume = async () => {
@@ -39,6 +38,13 @@ const Template = () => {
       fetchDefaultResume();
     }
   }, []);
+  useEffect(() => {
+    if (componentRef.current) {
+      const height = componentRef.current.offsetHeight * 0.5 + 80;
+      const element: any = document.getElementById("outerScaleDiv");
+      element.style.height = height + "px";
+    }
+  }, [componentRef.current, templateId]);
 
   return (
     <div className="lg:ml-[234px] ml-0 px-[15px]">
@@ -53,7 +59,7 @@ const Template = () => {
         </h2>
         <TemplateSlider templates={ALL_TEMPLATES} />
       </div>
-      <div className="my-10">
+      <div id="outerScaleDiv" className="my-10">
         {resume &&
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
@@ -81,11 +87,13 @@ const Template = () => {
                 />
               </div>
 
-              <div
-                ref={componentRef}
-                className=" bg-white xs:scale-50  xs:w-[200%] xs:relative xs:-left-[165px] xs:-top-[516px] md:w-[100%]  w-[100%] md:top-[0px] md:left-[0px] md:scale-100 scale-100"
-              >
-                {ALL_TEMPLATES[templateId - 1].template({})}
+              <div className="relative">
+                <div
+                  ref={componentRef}
+                  className=" bg-white xs:scale-50  xs:w-[200%] xs:absolute xs:-left-[165px] xs:-top-[516px] md:w-[100%]  w-[100%] md:top-[0px] md:left-[0px] md:scale-100 scale-100"
+                >
+                  {ALL_TEMPLATES[templateId - 1].template({})}
+                </div>
               </div>
             </>
           )}
