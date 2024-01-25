@@ -509,18 +509,18 @@ const ResumeTemplate2 = () => {
         )}
       </div>
       {/* Education */}
-      <div className="w-full space-y-3">
-        {resume?.education.lenghth > 0 && (
+      <div className="w-full space-y-3 ">
+        {resume?.education.length > 0 && (
           <>
             <h3 className="uppercase text-sm md:text-lg font-semibold flex flex-row gap-2 items-center">
               {educationIcon}
               Education
             </h3>
-            <ul className="grid grid-cols-3 xs:grid-cols-1 md:grid-cols-3 gap-2">
+            <ul className="grid grid-cols-3 xs:grid-cols-1 md:grid-cols-3 gap-2 ">
               {resume?.education.map((education: Education, ind: number) => (
                 <React.Fragment key={education?.id || ind}>
-                  <div className="bg-gray-100 px-4 py-2">
-                    <li className="hover:shadow-md hover:cursor-move border-transparent border-2 parent hover:border-dashed hover:border-gray-500 hover:border-2 hover:bg-gray-100 font-semibold flex uppercase text-sm xs:text-sm md:text-lg lg:text-lg  justify-between items-center ">
+                  <div className=" bg-gray-100 px-4 py-2 relative  group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                    <li className="hover:shadow-md hover:cursor-move  parent  hover:border-2 hover:bg-gray-100 font-semibold flex uppercase text-sm xs:text-sm md:text-lg lg:text-lg  justify-between items-center ">
                       <EditableField
                         rows={2}
                         value={education?.educationLevel}
@@ -531,13 +531,13 @@ const ResumeTemplate2 = () => {
                           );
                         }}
                       />
-                      <div
-                        onClick={() => handlers.handleDeleteEductionDetail(ind)}
-                        className="w-4 h-4  cursor-pointer child"
-                      >
-                        {crossIcon1}
-                      </div>
                     </li>
+                    <div
+                      onClick={() => handlers.handleDeleteEductionDetail(ind)}
+                      className="w-4 hidden h-4 group-hover:block absolute right-2 top-2 z-10  cursor-pointer child"
+                    >
+                      {crossIcon1}
+                    </div>
                     <li className="hover:shadow-md uppercase hover:bg-gray-100 text-base">
                       <EditableField
                         value={`${education?.fieldOfStudy}`}
@@ -562,12 +562,77 @@ const ResumeTemplate2 = () => {
                         }}
                       />
                     </li>
-                    <li className="mb-4 text-xs text-gray-700 ">
-                      {education?.fromMonth + " " + education.fromYear} -{" "}
-                      {education?.isContinue
-                        ? "Present"
-                        : education?.toMonth + " " + education.toYear}
-                    </li>
+                    {(education.fromYear !== "" || education.toYear !== "") && (
+                      <li className="mb-4 text-xs text-gray-700 ">
+                        {education.fromMonth && (
+                          <EditableField
+                            rows={2}
+                            value={`${education?.fromMonth}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveEductionDetail(
+                                { fromMonth: value },
+                                ind
+                              );
+                            }}
+                          />
+                        )}
+                        {education.fromYear && (
+                          <EditableField
+                            rows={2}
+                            value={`${education?.fromYear}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveEductionDetail(
+                                { fromYear: value },
+                                ind
+                              );
+                            }}
+                          />
+                        )}
+                        {(education.toMonth || education.toYear) && (
+                          <span>&nbsp; - &nbsp;</span>
+                        )}
+                        {education.toMonth && !education.isContinue && (
+                          <EditableField
+                            rows={2}
+                            value={`${education?.toMonth}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveEductionDetail(
+                                { toMonth: value },
+                                ind
+                              );
+                            }}
+                          />
+                        )}
+                        {education.toYear && !education.isContinue && (
+                          <EditableField
+                            rows={2}
+                            value={`${education?.toYear}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveEductionDetail(
+                                { toYear: value },
+                                ind
+                              );
+                            }}
+                          />
+                        )}
+                        {education.isContinue && (
+                          <EditableField
+                            rows={2}
+                            value={`${education?.isContinue && "Present"}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveEductionDetail(
+                                { toYear: value },
+                                ind
+                              );
+                              handlers.handleSaveEductionDetail(
+                                { isContinue: false },
+                                ind
+                              );
+                            }}
+                          />
+                        )}
+                      </li>
+                    )}
                   </div>
                 </React.Fragment>
               ))}
