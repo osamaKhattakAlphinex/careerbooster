@@ -51,6 +51,7 @@ const ResumeTemplate17 = () => {
 
   useEffect(() => {
     if (streamedJDData === "") {
+      setStreamedJDData(null);
       setRegeneratedRecordIndex(null);
     }
   }, [streamedJDData]);
@@ -77,7 +78,7 @@ const ResumeTemplate17 = () => {
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="flex">
-        <div className=" w-[35%] md:w-1/3 flex flex-col  bg-[#323b4c] px-4 xs:px-2 md:px-4   pt-[2rem] h-[1150px] xs:h-auto ">
+        <div className=" w-[35%] md:w-1/3 flex flex-col  bg-[#323b4c] px-4 xs:px-2 md:px-4   pt-[2rem] h-[1150px] ">
           <div className="flex justify-center">
             <div className="border-[.5rem] border-[#ae9243]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
               <div className=" w-44 h-44 xs:w-20 xs:h-20 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
@@ -292,7 +293,7 @@ const ResumeTemplate17 = () => {
           </h3>
           <span className="border-stylee w-full h-0  my-3"></span>
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-[16px] hover:shadow-md min-h-[450px] xs:min-h-fit border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
+            <div className="text-[16px] hover:shadow-md min-h-[410px] xs:min-h-fit border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
               <EditableField
                 type="textarea"
                 value={
@@ -347,7 +348,7 @@ const ResumeTemplate17 = () => {
                       className={`flex justify-start items-start ${
                         i > 0
                           ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
-                          : "min-h-[370px] xs:min-h-fit "
+                          : "min-h-[420px] xs:min-h-fit "
                       }`}
                     >
                       <div
@@ -590,10 +591,10 @@ const ResumeTemplate17 = () => {
                 education
               </h3>
               <span className="border-stylee w-full h-0 my-3"></span>
-              <ul className="pl-0 flex flex-row xs:flex-col pt-2 md:flex-row lg:flex-row flex-wrap text-gray-800  w-full">
+              <ul className="pl-0 flex flex-row  pt-2 lg:flex-row flex-wrap text-gray-800  w-full">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className=" md:m-2 w-[30%] xs:w-full md:w-[30%] lg:w-[30%] relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                    <div className=" md:m-2 w-[30%] xs:w-[50%] md:w-[30%] lg:w-[30%] border-transparent border-2 hover:border-dashed hover:border-gray-500">
                       <li
                         className=" hover:shadow-md hover:cursor-move 
                   parent  

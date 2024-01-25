@@ -10,6 +10,8 @@ import "./dashboard.css";
 import "./plugins.css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 interface Props {
   children: ReactNode;
 }
@@ -31,6 +33,7 @@ export default async function Privatelayout({ children }: Props) {
         <SideBar />
         <div className="">{children}</div>
         <Footer />
+        <ToastContainer />
       </ProfileCreationLayer>
     </div>
   );

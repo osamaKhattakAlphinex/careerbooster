@@ -44,6 +44,7 @@ const ResumeTemplate11 = () => {
 
   useEffect(() => {
     if (streamedJDData === "") {
+      setStreamedJDData(null);
       setRegeneratedRecordIndex(null);
     }
   }, [streamedJDData]);
@@ -97,7 +98,7 @@ const ResumeTemplate11 = () => {
       <div className=" flex">
         {/* sidebar */}
 
-        <div className="  w-3/12 xs:w-3/12 md:w-3/12 flex flex-col pl-3 md:pl-8 bg-[#2A2E36] text-gray-100  pr-6  pb-8 h-[1100px] xs:h-auto  pt-[220px] xs:pt-[250px] ">
+        <div className="  w-3/12 xs:w-3/12 md:w-3/12 flex flex-col pl-3 md:pl-8 bg-[#2A2E36] text-gray-100  pr-6  pb-8 h-[1120px] xs:h-auto  pt-[220px] xs:pt-[250px] ">
           {/* contacts */}
 
           <h3 className="uppercase text-lg font-bold flex flex-row gap-2 items-center">
@@ -309,10 +310,10 @@ const ResumeTemplate11 = () => {
                     className={`flex justify-start items-start ${
                       i > 0
                         ? "w-[100vw] ml-[-200px] xs:ml-0 xs:w-full "
-                        : "xs:min-h-fit min-h-[320px]"
+                        : "xs:min-h-fit min-h-[350px]"
                     }`}
                   >
-                    <div className="w-[5%] pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
+                    <div className="w-[5%] mt-1 pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
                       {resume?.workExperienceArray.length - 1 !== i && (
                         <div className="h-full w-[2px] bg-gray-500"></div>

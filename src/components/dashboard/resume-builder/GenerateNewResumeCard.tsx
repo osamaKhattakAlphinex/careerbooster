@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setState } from "@/store/resumeSlice";
 
 import Link from "next/link";
+import { infoSmallIcon } from "@/helpers/iconsProvider";
 
 interface Props {
   handleGenerate: (value: any) => Promise<void>;
@@ -148,6 +149,19 @@ Props) => {
           <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full  after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-none peer-checked:bg-blue-600"></div>
           <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
             Quantifying Experiences
+          </span>
+          <span className=" ml-2 cursor-pointer text-gray-600 relative group">
+            {infoSmallIcon}
+            <div
+              role="tooltip"
+              className="hidden absolute bg-gray-600 text-gray-100 p-2 rounded-md text-xs md:-top-6 xs:top-0 xs:left-0 md:left-28 transform -translate-x-1/2 w-48 group-hover:block"
+            >
+              Quantifying experiences refers to assigning numerical or
+              measurable values to experiences or achievements to make them more
+              tangible or comparable.
+              {/* {creditPackage.featuresToolTips[i]} */}
+              <div className="tooltip-arrow" data-popper-arrow></div>
+            </div>
           </span>
         </label>
         <button
