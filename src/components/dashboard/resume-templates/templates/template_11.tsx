@@ -98,7 +98,7 @@ const ResumeTemplate11 = () => {
       <div className=" flex">
         {/* sidebar */}
 
-        <div className="  w-3/12 xs:w-3/12 md:w-3/12 flex flex-col pl-3 md:pl-8 bg-[#2A2E36] text-gray-100  pr-6  pb-8 h-[1120px] xs:h-auto  pt-[220px] xs:pt-[250px] ">
+        <div className="  w-3/12 xs:w-3/12 md:w-3/12 flex flex-col pl-3 md:pl-8 bg-[#2A2E36] text-gray-100  pr-6  pb-8 h-[1120px] xs:h-auto  pt-[220px] md:pt-[250px]">
           {/* contacts */}
 
           <h3 className="uppercase text-lg font-bold flex flex-row gap-2 items-center">
@@ -259,7 +259,7 @@ const ResumeTemplate11 = () => {
             </>
           )}
         </div>
-        <div className="w-9/12 flex  flex-col px-8 xs:px-2 sm:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[230px] xs:pt-[154px] sm:pt-[154px] md:pt-[230px] lg:pt-[250px]  ">
+        <div className="w-9/12 flex  flex-col px-8 xs:px-2 sm:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[230px]  md:pt-[220px] lg:pt-[250px]  ">
           {/* Executive Summary */}
           <div className=" flex flex-col w-full mb-6">
             <h3 className="uppercase text-lg xs:text-[14px] sm:text[14px] md:text-lg lg:text-lg font-bold">
@@ -313,7 +313,7 @@ const ResumeTemplate11 = () => {
                         : "xs:min-h-fit min-h-[350px]"
                     }`}
                   >
-                    <div className="w-[5%] mt-1 pr-5 xs:pr-0 sm:pr-0 md:pr-5 lg:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
+                    <div className="w-[5%] mt-1 pr-5  md:pr-5 lg:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
                       {resume?.workExperienceArray.length - 1 !== i && (
                         <div className="h-full w-[2px] bg-gray-500"></div>

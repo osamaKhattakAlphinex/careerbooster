@@ -171,7 +171,7 @@ const SideBar = () => {
                 </li>
               ))}
             </ul>
-            <div className="w-[160px] p-2 md:w-[170px] mb-10  mx-7 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
+            <div className="w-[160px] px-2 py-6 md:w-[170px] mb-10  mx-7 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
               <p className="text-white px-2  text-[15px] text-center font-semibold">
                 Buy more credits
               </p>
