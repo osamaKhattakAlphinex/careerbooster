@@ -82,13 +82,16 @@ const Template = () => {
               </div>
 
               <div className="relative">
-                {ALL_TEMPLATES[templateId - 1].category === "premium" && (
-                  <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600">
+                {/* {ALL_TEMPLATES[templateId - 1].category === "premium" && (
+                  <div className="absolute rounded-full right-1 top-1 h-10 w-10 grid place-content-center bg-yellow-600 z-10">
                     {crownIcon}
                   </div>
-                )}
+                )} */}
 
-                <div ref={componentRef} className=" bg-white">
+                <div
+                  ref={componentRef}
+                  className=" bg-white xs:scale-50  xs:w-[200%] xs:relative xs:-left-[165px] xs:-top-[516px] md:w-full  w-full md:top-[0px] md:left-[0px] md:scale-100 scale-100"
+                >
                   {ALL_TEMPLATES[templateId - 1].template({})}
                 </div>
               </div>
