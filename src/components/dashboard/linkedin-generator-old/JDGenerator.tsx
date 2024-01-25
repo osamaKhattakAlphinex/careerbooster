@@ -25,17 +25,19 @@ const JDGenerator = ({ creditLimits }: { creditLimits: any }) => {
             />
           </div>
           <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
-            <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
+            <div className=" flex items-center  xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
               <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
                 Job Description Generator
               </h1>
-              <span
-                className={`text-[#000] rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
-                title={"60 credits will Be used for Job Description "}
+              <div
+                className={`text-[#000] relative group rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
               >
                 {creditLimits?.linkedin_individualWorkExperience}
                 <p className="pl-1"> Credits</p>
-              </span>
+                <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium text-[12px] px-2 absolute  -top-14 hidden group-hover:block rounded-bl-none text-gray-100 left-10 mb-6 shadow-xl rounded-xl py-2  transition-all">
+                  60 credits will Be used for Job Description
+                </div>
+              </div>
             </div>
 
             <p className="text-[14px] text-[#959595] pr-5">
