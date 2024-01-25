@@ -32,6 +32,7 @@ import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
+  const windowSize = useRef([window.innerWidth, window.innerHeight]);
   const [showPopup, setShowPopup] = useState(false);
   const confettiConfig = {
     angle: 90,
@@ -43,6 +44,7 @@ const ResumeBuilder = () => {
     width: "25px",
     height: "25px",
   };
+
   //
   const runConfetti = () => {
     setConfettiRunning(true);
@@ -349,7 +351,7 @@ const ResumeBuilder = () => {
             handleGenerate={handleGenerate}
             availablePercentage={availablePercentage}
           />
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center fixed bottom-0">
             <Confetti active={confettingRunning} config={confettiConfig} />
           </div>
           {finished && (
@@ -377,11 +379,11 @@ const ResumeBuilder = () => {
                     key={`template-${index}`}
                     className="box-border group relative  rounded-lg flex items-center overflow-hidden "
                   >
-                    {template.category === "premium" && (
+                    {/* {template.category === "premium" && (
                       <div className="absolute rounded-full right-1 top-1 h-6 w-6 grid place-content-center bg-yellow-600">
                         {crownIcon}
                       </div>
-                    )}
+                    )} */}
                     <Link
                       className="no-underline"
                       href={{

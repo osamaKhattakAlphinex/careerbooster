@@ -75,34 +75,33 @@ const SideBar = () => {
         </div>
       </div>
       <div
-        className={`fixed w-[234px] h-screen z-[1000000000]  top-0 flex justify-center dark:bg-[#18181B] bg-gray-100  mt-16  transition-all ${
+        className={`fixed w-[234px] h-screen z-[1000000000]  top-0 flex justify-center dark:bg-[#18181B] bg-gray-100  mt-16  transition-all  ${
           isOpen
             ? "translate-x-0 lg:translate-x-0"
             : "-translate-x-full lg:translate-x-0 " // Apply opacity only on small screens
         }`}
       >
-        <div className=" ">
-          <div>
-            <div className="px-7 py-[6px] flex">
-              <div className="mr-4">
-                <div className="w-10 h-10 uppercase flex items-center justify-center bg-gray-300 text-gray-600 rounded-full">
-                  {userData.firstName[0]}
-                  {userData.lastName[0]}
-                </div>
-              </div>
-              <div>
-                <h1 className="dark:text-white text-gray-950 text-base gap-1 font-semibold mb-0 ">
-                  {userData.firstName + " " + userData.lastName}
-                </h1>
-                <Link
-                  href="/profile-review"
-                  className="text-[14px] no-underline text-[#B324D7] p-.5 sideBar_p_text"
-                >
-                  Edit Profile
-                </Link>
+        <div className=" overflow-scroll pb-4 ">
+          <div className="px-7 py-[6px] flex">
+            <div className="mr-4">
+              <div className="w-10 h-10 uppercase flex items-center justify-center bg-gray-300 text-gray-600 rounded-full">
+                {userData.firstName[0]}
+                {userData.lastName[0]}
               </div>
             </div>
+            <div>
+              <h1 className="dark:text-white text-gray-950 text-base gap-1 font-semibold mb-0 ">
+                {userData.firstName + " " + userData.lastName}
+              </h1>
+              <Link
+                href="/profile-review"
+                className="text-[14px] no-underline text-[#B324D7] p-.5 sideBar_p_text"
+              >
+                Edit Profile
+              </Link>
+            </div>
           </div>
+
           <div className="flex flex-col">
             <ul className="pb-3 pt-[8px] pl-0 mb-0">
               {items?.map((item, index) => (
@@ -172,16 +171,16 @@ const SideBar = () => {
                 </li>
               ))}
             </ul>
-            <div className="w-[160px] md:w-[170px] h-[170px] mt-3  mx-7 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
-              <p className="text-white px-4 mb-4 text-[15px] text-center font-semibold">
-                Upgrade to Pro version to get hired faster
+            <div className="w-[160px] p-2 md:w-[170px] mb-10  mx-7 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
+              <p className="text-white px-2  text-[15px] text-center font-semibold">
+                Buy more credits
               </p>
               <div className="flex justify-center">
                 <Button
                   onClick={() => {
                     router.push("/subscribe");
                   }}
-                  btnText="Upgrade"
+                  btnText="Buy Credits"
                   textColor={`text-white`}
                   // isActive={true}
                   bgColor="bg-zinc-900"
