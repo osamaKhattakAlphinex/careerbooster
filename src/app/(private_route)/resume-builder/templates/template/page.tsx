@@ -16,6 +16,9 @@ const Template = () => {
   const params = useSearchParams();
   const { resume } = useSelector((state: any) => state);
   const { data: session } = useSession();
+  const [refTop, setRefTop] = useState<number | null>(null);
+  const [refLeft, setRefLeft] = useState<number | null>(null);
+  const [scaleHeight, setScaleHeight] = useState<number | null>(null);
   const templateId: number = parseInt(params.get("templateId") || "0");
   const componentRef = useRef<any>(null);
   const dispatch = useDispatch();
@@ -38,20 +41,23 @@ const Template = () => {
       fetchDefaultResume();
     }
   }, []);
+
   useEffect(() => {
     if (componentRef.current) {
-      const height = componentRef.current.offsetHeight * 0.5 + 80;
-      const element: any = document.getElementById("outerScaleDiv");
-      element.style.height = height + "px";
+      const height = Math.floor(componentRef.current.offsetHeight * 0.5 + 90);
+      setScaleHeight(height);
+      const refTop = Math.floor(
+        (516 / 2275) * componentRef.current.offsetHeight
+      );
+      setRefTop(refTop);
+      const width = Math.floor((175 / 390) * window.innerWidth);
+      setRefLeft(width);
     }
   }, [componentRef.current, templateId]);
+  let isMobile = window.innerWidth <= 480;
 
   return (
     <div className="lg:ml-[234px] ml-0 px-[15px]">
-      {/* <UpgradeModal
-        openUpgradationModal={openUpgradeModal}
-        setOpenUpgradationModal={setOpenUpgradModal}
-      /> */}
       <RecentResumeCard componentRef={componentRef} templateId={templateId} />
       <div>
         <h2 className=" text-gray-900 dark:text-white font-bold uppercase text-sm">
@@ -59,11 +65,18 @@ const Template = () => {
         </h2>
         <TemplateSlider templates={ALL_TEMPLATES} />
       </div>
-      <div id="outerScaleDiv" className="my-10">
+
+      <div
+        id="outerScaleDiv"
+        className="my-10"
+        style={{
+          height: isMobile ? scaleHeight + "px" : undefined,
+        }}
+      >
         {resume &&
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
-              <div className="flex items-center justify-end xs:justify-center md:justify-end gap-3 pb-4 sticky top-3 z-[10555555555]">
+              <div className="flex items-center justify-end xs:justify-center md:justify-end gap-3 xs:pb-0 md:pb-4 sticky top-3 z-[10555555555]">
                 {/* <Link
                   className="no-underline"
                   href={`/resume-edit?templateId=${templateId}&resumeId=${resume.id}`}
@@ -87,10 +100,14 @@ const Template = () => {
                 />
               </div>
 
-              <div className="relative">
+              <div className="xs:relative">
                 <div
                   ref={componentRef}
-                  className=" bg-white xs:scale-50  xs:w-[200%] xs:absolute xs:-left-[165px] xs:-top-[516px] md:w-[100%]  w-[100%] md:top-[0px] md:left-[0px] md:scale-100 scale-100"
+                  className={` bg-white xs:scale-50  xs:w-[200%] xs:absolute md:relative  md:w-[100%]  w-[100%] md:top-[0px] md:left-[0px] md:scale-100 scale-100`}
+                  style={{
+                    top: isMobile ? "-" + refTop + "px" : undefined,
+                    left: isMobile ? "-" + refLeft + "px" : undefined,
+                  }}
                 >
                   {ALL_TEMPLATES[templateId - 1].template({})}
                 </div>
