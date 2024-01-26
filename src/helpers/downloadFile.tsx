@@ -105,11 +105,7 @@ any) => {
           onClick={templateCall}
           type="button"
           disabled={loading}
-<<<<<<< HEAD
           className={`xs:flex-1 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px]  ${
-=======
-          className={`xs:flex-1 lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b]  text-green-500 border-[1px] border-green-500 ${className} ${
->>>>>>> f3e7376734d6fa2b25ba94614b5715b67e0f6e99
             loading ? "cursor-not-allowed opacity-50" : ""
           }`}
         >
