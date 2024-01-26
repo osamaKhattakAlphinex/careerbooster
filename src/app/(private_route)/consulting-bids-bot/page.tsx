@@ -262,13 +262,13 @@ const ConsultingBidsGenerator = () => {
     <>
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px] ">
-          <Link
+          {/* <Link
             href="/dashboard"
             className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center ] hover:opacity-80 transition-all"
           >
             {leftArrowIcon}
             Back
-          </Link>
+          </Link> */}
 
           {/* <AiGeneratedConsultingBids /> */}
           <PreviouslyGeneratedList {...historyProps} />
@@ -374,14 +374,24 @@ const ConsultingBidsGenerator = () => {
               {/* form */}
               <div className="flex flex-col gap-5 justify-between items-start">
                 <div className="w-full flex flex-col">
-                  <label
-                    htmlFor="job-title"
-                    className=" font-bold text-md md:text-[24px] dark:text-gray-100 text-gray-950 flex py-[20px] gap-[3px]"
-                  >
-                    Paste Your Job Description
-                    <span className="text-[#F04248] text-md md:text-[24px]">
-                      *
-                    </span>
+                  <label className=" font-bold justify-between items-center text-md md:text-[24px] dark:text-gray-100 text-gray-950 flex py-[20px] gap-[3px]">
+                    <div>
+                      Paste Your Job Description
+                      <span className="text-[#F04248] text-md md:text-[24px]">
+                        *
+                      </span>
+                    </div>
+                    <div
+                      className={`text-[#000] cursor-pointer group relative rounded-full h-8 md:ml-3 flex  items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
+                    >
+                      <div className="pl-1">
+                        {creditLimits?.consulting_bids_generation}{" "}
+                      </div>
+                      Credits
+                      <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32 xs:-top-12  md:-top-14  hidden group-hover:block  xs:rounded-br-none  text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+                        300 credits will Be used for Bid Generation
+                      </div>
+                    </div>
                   </label>
                   <textarea
                     id="job-title"

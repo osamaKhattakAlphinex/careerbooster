@@ -227,11 +227,13 @@ const SubJDGenerator = () => {
                 Job Description Generator
               </h1>
               <div
-                className={`text-[#000] rounded-full group relative h-8 md:ml-3 cursor-pointer flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
+                className={`text-[#000] rounded-full group relative h-8 md:ml-3 cursor-pointer flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
               >
-                {creditLimits?.linkedin_individualWorkExperience}
-                <p className="pl-1"> Credits</p>
-                <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium text-[12px] px-2 absolute xs:-left-32 md:left-10  -top-14  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+                <div className="mr-1">
+                  {creditLimits?.linkedin_individualWorkExperience}
+                </div>{" "}
+                Credits
+                <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32 md:left-10 xs:-top-12 md:-top-14  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                   60 credits will Be used for Job Description
                 </div>
               </div>

@@ -24,7 +24,7 @@ const Button = ({
           isActive
             ? `text-fuchsia-600 font-semibold `
             : `dark:text-[#A3A3A3] dark:hover:text-fuchsia-600 text-gray-950`
-        }  ${className}  ${buttonClasses} ${bgColor} rounded-full px-[28px] py-[9px] text-[14px] mr-[5px]`}
+        }  ${className}  ${buttonClasses} ${bgColor} rounded-full md:px-[28px] md:py-[9px] md:text-[14px] md:mr-[5px]`}
         onClick={onClick}
       >
         {btnText}

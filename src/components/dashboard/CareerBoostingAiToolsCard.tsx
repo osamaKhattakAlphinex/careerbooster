@@ -46,12 +46,12 @@ const CareerBoostingAiToolsCard = () => {
   return (
     <div className="mt-6 mb-[20px]">
       <h1 className="pb-2 rounded-[14px] text-zinc-500 font-bold uppercase text-[14px] ">
-        Recent ai generated documents
+        Recent ai generated documents1111
       </h1>
       <div className="flex mt-3 flex-wrap gap-2">
         {tabOptions.map((option, index) => (
           <Button
-            className={`hover:border-fuchsia-600`}
+            className={`hover:border-fuchsia-600 xs:px-[20px] xs:py-[6px] xs:text-[10px] xs:mr-[3px]`}
             key={`tab-${index}`}
             btnText={option.name}
             isActive={activeTab === option.value}
