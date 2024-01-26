@@ -214,7 +214,7 @@ const ResumeTemplate6 = () => {
                       {/* <li className="font-semibold  uppercase">primary</li> */}
                       {resume?.primarySkills.map((skill: string, i: number) => (
                         <li
-                          className="hover:shadow-md  w-[45%] xs:w-full sm:w-[45%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center"
+                          className="hover:shadow-md  w-[45%]  sm:w-[45%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center"
                           key={i}
                           onDragStart={(e) =>
                             e.dataTransfer.setData("text/plain", i.toString())
@@ -538,11 +538,11 @@ const ResumeTemplate6 = () => {
                   Education
                 </h3>
                 <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
-                <ul className="flex  md:flex-row lg:flex-row w-full  flex-wrap pl-0 ">
+                <ul className="flex  md:flex-row lg:flex-row w-full  flex-wrap pl-0 xs:gap-2">
                   {resume?.education.map(
                     (education: Education, ind: number) => (
                       <React.Fragment key={education?.id || ind}>
-                        <div className="w-[28%]  md:w-[30%] m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                        <div className="w-[28%]  xs:w-[33%] m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                           <li
                             className=" hover:shadow-md hover:cursor-move  
                   parent  
