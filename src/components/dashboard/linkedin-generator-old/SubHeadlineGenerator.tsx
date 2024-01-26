@@ -235,7 +235,7 @@ const SubHeadlineGenerator = () => {
                   width={18}
                 />
                 <span
-                  className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer`}
                 >
                   Generate Headline
                 </span>

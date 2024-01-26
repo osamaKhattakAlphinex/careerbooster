@@ -75,11 +75,7 @@ const LinkedInHeadlineCardSingle = ({
               title={card.headlineText}
               className="w-full pr-3 truncate lg:text-[15px] text-[13px] capitalize dark:text-gray-100 text-gray-950 font-semibold  "
             >
-              {/* {card.headlineText.slice(0, 20)} */}
-
-              {card.headlineText.length < 20
-                ? card.headlineText
-                : card.headlineText.slice(0, 20) + "..."}
+              {card.headlineText}
             </h2>
             <h4 className="uppercase text-[#959595] font-medium  lg:text-[12px] text-[10px] pt-[8px] pb-[12px]">
               Generated on {getFormattedDate(card.generatedOnDate)}
