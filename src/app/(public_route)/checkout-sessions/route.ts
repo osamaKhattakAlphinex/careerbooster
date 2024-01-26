@@ -31,7 +31,6 @@ export async function POST(req: Request) {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL;
   // const body = (await req.json()) as CheckoutSubscriptionBody;
   const body = await req.json()
-  console.log(body);
 
   const origin = req.headers.get("origin") || appUrl;
 
@@ -54,7 +53,6 @@ export async function POST(req: Request) {
     const customer = await stripe.customers.create({
       metadata: body.customer.metadata,
     });
-    console.log("customer created", customer);
 
     const session = await stripe.checkout.sessions.create({
       // if user is logged in, stripe will set the email in the checkout page

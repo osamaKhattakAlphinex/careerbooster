@@ -78,7 +78,6 @@ const CreditSubscriptionCard: React.FC<Props> = ({
       updateUserWithFreePackage(creditPackage._id);
     } else if (creditPackage) {
       // paid pacakge checkout to stripe
-      console.log(creditPackage);
 
       // step 3: make a post fetch api call to /checkout-session handler
       const result = await fetch("/checkout-sessions", {
@@ -91,10 +90,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
 
       // step 4: get the data and redirect to checkout using the sessionId
       const data = (await result.json()) as Stripe.Checkout.Session;
-      console.log("data: " + JSON.stringify(data));
-
       const sessionId = data.id!;
-      console.log("sessionId: " + sessionId);
 
       stripe?.redirectToCheckout({ sessionId });
     }
@@ -107,7 +103,6 @@ const CreditSubscriptionCard: React.FC<Props> = ({
 
     if (!subscribing && creditPackageId) {
       const creditPackage = await getCreditPackageDetails(creditPackageId);
-      console.log("free package", creditPackage);
 
       if (creditPackage) {
         const obj = {
@@ -122,10 +117,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
             data: obj,
           })
           .then(async (resp: any) => {
-            console.log(resp);
             if (resp.data.success) {
-              console.log("first", userData);
-
               dispatch(
                 setUserData({
                   ...userData,
@@ -135,7 +127,6 @@ const CreditSubscriptionCard: React.FC<Props> = ({
                   // userPackageUsed: obj.userPackageUsed,
                 })
               );
-              console.log(userData);
 
               router.push("/dashboard");
             }
