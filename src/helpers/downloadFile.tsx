@@ -98,7 +98,7 @@ any) => {
 
   return (
     <>
-      <div className="">
+      <div>
         <a className="hidden" href="#" ref={docRef} target="_blank"></a>
 
         <button
