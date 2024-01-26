@@ -89,22 +89,22 @@ const Page = () => {
                   <span>{creditsData?.category}</span>
                 </div>
               </div>
-              <div className=" flex flex-row  justify-between items-center">
+              {/* <div className=" flex flex-row  justify-between items-center">
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
                   <strong>Total Credits</strong>
                 </div>
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
                   <span>{creditsData?.totalCredits}</span>
                 </div>
-              </div>
-              {/* <div className=" flex flex-row  justify-between items-center">
+              </div> */}
+              <div className=" flex flex-row  justify-between items-center">
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
                   <strong>Remaining Credits</strong>
                 </div>
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
                   <span>{remainingCredits}</span>
                 </div>
-              </div> */}
+              </div>
             </>
           )}
         </div>

@@ -10,7 +10,6 @@ export async function GET(req: any) {
     try {
       await startDB();
       const usages = await Usage.find({});
-      console.log(usages);
       return NextResponse.json(
         { usages: usages, success: true },
         { status: 200 }

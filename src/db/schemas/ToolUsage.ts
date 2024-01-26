@@ -5,7 +5,7 @@ const ToolUsageSchema = new Schema(
   {
     toolName: {
       type: String,
-    },  
+    },
     creditsUsed: {
         type: Number,
     },
@@ -14,5 +14,5 @@ const ToolUsageSchema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.ToolUsageSchema ||
+export default mongoose.models.ToolUsage ||
   mongoose.model("ToolUsage", ToolUsageSchema);

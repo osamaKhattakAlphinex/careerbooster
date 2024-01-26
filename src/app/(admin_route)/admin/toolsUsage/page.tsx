@@ -22,7 +22,7 @@ const Page = () => {
     }),
     columnHelper.accessor("creditsUsed", {
       id: "creditsUsed",
-      header: () => "Credit Used",
+      header: () => "Total Credits Used",
       cell: (info) => info.renderValue(),
     }),
   ];
