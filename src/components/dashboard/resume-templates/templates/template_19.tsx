@@ -171,7 +171,7 @@ const ResumeTemplate19 = ({
                   addSkill={handleAddSkills}
                   regenerateSkills={getPrimarySkills}
                 >
-                  <ul className="border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex  px-0 xs:px-0 md:px-0  flex-col gap-1 mb-4 text-gray-800 w-full text-sm">
+                  <ul className="border-2 border-transparent  hover:border-dashed hover:border-gray-500   flex  xs:px-3 md:px-0   flex-col gap-1 mb-4 text-gray-800 w-full text-sm">
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
                         className="hover:shadow-md hover:cursor-move parent xs:w-12/12 hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center  "
@@ -378,10 +378,10 @@ const ResumeTemplate19 = ({
                 Education
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
-              <ul className="pl-0  flex xs:flex-col md:flex-row lg:flex-row flex-wrap px-0 xs:px-3 md:px-0 text-gray-800  w-full">
+              <ul className="pl-0  flex  flex-wrap px-0 xs:px-3 md:px-0 text-gray-800  w-full">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="w-[30%] xs:w-full md:w-[30%] lg:w-[30%] md:m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                    <div className="w-[30%] xs:w-[50%] md:w-[30%] lg:w-[30%] md:m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                       <li
                         className=" hover:shadow-md hover:cursor-move 
                   parent  
