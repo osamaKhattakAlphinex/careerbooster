@@ -77,28 +77,21 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
           <button
             type="button"
             onClick={() => handleOnView(card)}
-            className="dark:hover:bg-gray-700 dark:hover:border-[#5f5f5f] dark:hover:text-gray-100 px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
+            className="flex px-2 text-[16px] dark:hover:border-[#5f5f5f] dark:hover:bg-gray-700 dark:hover:text-white justify-center dark:text-gray-100 text-[#27272a] items-center rounded-full h-[36px] dark:bg-[#18181b] hover:!bg-[#00000015] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#27272a] dark:focus:border-[#5f5f5f] hover:border-[#00000015] focus:bg-[#00000015] focus:border-[#00000015]"
           >
             {eyeIcon}
-            {pathname == "/dashboard" ? (
-              <span className="text-[13px] mx-2 text-neutral-400">View</span>
-            ) : (
-              ""
-            )}
+            <span className="text-[13px] mx-2 text-neutral-400">View</span>
           </button>
           <button
             type="button"
             onClick={() => handleOnDelete(card)}
-            className="dark:hover:bg-gray-700 dark:hover:border-[#5f5f5f] dark:hover:text-gray-100 px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
+            className="flex px-2 text-[16px] dark:hover:border-[#5f5f5f] dark:hover:bg-gray-700 dark:hover:text-white justify-center dark:text-gray-100 text-[#27272a] items-center rounded-full h-[36px] dark:bg-[#18181b] hover:!bg-[#00000015] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#27272a] dark:focus:border-[#5f5f5f] hover:border-[#00000015] focus:bg-[#00000015] focus:border-[#00000015]"
           >
             {trashIcon}
-            {pathname == "/dashboard" ? (
-              <span className="text-[13px] mx-2 text-neutral-400">Delete</span>
-            ) : (
-              ""
-            )}
+
+            <span className="text-[13px] mx-2 text-neutral-400">Delete</span>
           </button>
-          {pathname == "/dashboard"
+          {/* {pathname == "/dashboard"
             ? ""
             : card && (
                 <DownloadService
@@ -108,7 +101,7 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
                   type="email"
                   fileName="ai-email"
                 />
-              )}
+              )} */}
         </div>
       </div>
     </div>
