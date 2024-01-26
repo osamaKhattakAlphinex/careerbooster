@@ -289,7 +289,7 @@ const SubJDGenerator = () => {
                     height={18}
                     width={18}
                   />
-                  <span className="dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold">
+                  <span className="text-white ml-3 text-[15px] font-semibold">
                     Generate Description
                   </span>
                 </div>
