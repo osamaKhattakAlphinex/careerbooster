@@ -94,7 +94,7 @@ const ResumeTemplate8 = () => {
             />
           </h3>
           <ul className="w-full flex flex-row xs:flex-col md:flex-row gap-3 mt-8 mb-4 text-sm md:text-lg break-all pl-0 justify-between">
-            <li className="hover:shadow-md hover:bg-gray-100 text-sm  flex flex-row gap-1  items-center justify-start">
+            <li className="w-[30%] hover:shadow-md hover:bg-gray-100 text-sm  flex flex-row gap-1  items-center justify-start">
               <div className="p-1">{phoneIcon}</div>
 
               <EditableField
@@ -110,7 +110,7 @@ const ResumeTemplate8 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-sm">
+            <li className="w-[30%] hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-sm">
               <div className="p-1">{emailIcon}</div>
 
               <EditableField
@@ -126,7 +126,7 @@ const ResumeTemplate8 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center justify-start text-sm">
+            <li className="w-[30%] hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center justify-start text-sm">
               <div className="p-1">
                 <svg
                   width="20"

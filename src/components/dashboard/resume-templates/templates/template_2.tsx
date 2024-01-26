@@ -535,7 +535,7 @@ const ResumeTemplate2 = () => {
               {educationIcon}
               Education
             </h3>
-            <ul className="grid grid-cols-3 xs:grid-cols-1 md:grid-cols-3 gap-2 ">
+            <ul className="grid grid-cols-3 xs:grid-cols-3 md:grid-cols-3 gap-2 ">
               {resume?.education.map((education: Education, ind: number) => (
                 <React.Fragment key={education?.id || ind}>
                   <div className=" bg-gray-100 px-4 py-2 relative  group border-transparent border-2 hover:border-dashed hover:border-gray-500">

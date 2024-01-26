@@ -135,7 +135,7 @@ Props) => {
               dispatch(setState({ name: "jobPosition", value: e.target.value }))
             }
             placeholder="e.g. Sales Associates"
-            className="w-full py-4 px-[26px] rounded-full text-sm text-[#959595] bg-transparent border-[#312E37] border"
+            className="w-full py-4 px-[26px] rounded-full text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px]"
           />
         </div>
 
@@ -201,7 +201,7 @@ Props) => {
                 Please wait...
               </div>
             ) : (
-              <div className="flex">
+              <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
