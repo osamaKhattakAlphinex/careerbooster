@@ -163,7 +163,7 @@ const SideBar = () => {
                       <div className="w-6 h-6  pr-2 dark:text-[#d9d6d6] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline		">
                         {item.icon}
                       </div>
-                      <h2 className="text-[16px] ml-3 mb-0 dark:text-[#d9d6d6] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline		">
+                      <h2 className="text-base ml-3 mb-0 dark:text-[#d9d6d6] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline	 font-normal	">
                         {item.text}
                       </h2>
                     </button>
@@ -172,7 +172,7 @@ const SideBar = () => {
               ))}
             </ul>
             <div className="w-[160px] px-2 py-6 md:w-[170px] mb-10  mx-7 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
-              <p className="text-white px-2  text-[15px] text-center font-semibold">
+              <p className="text-white px-2 mb-3 text-[15px] text-center font-semibold ">
                 Buy more credits
               </p>
               <div className="flex justify-center">
@@ -181,9 +181,7 @@ const SideBar = () => {
                     router.push("/subscribe");
                   }}
                   btnText="Buy Credits"
-                  textColor={`text-white`}
-                  // isActive={true}
-                  bgColor="bg-zinc-900"
+                  className={`dark:bg-gray-950 bg-gray-100 dark:text-gray-100 text-gray-950`}
                 />
               </div>
             </div>

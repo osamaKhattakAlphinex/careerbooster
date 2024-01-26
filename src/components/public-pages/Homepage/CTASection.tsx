@@ -70,11 +70,20 @@ const CTASection = () => {
                       d="M22.85 71.546c-.873 5.764-1.778 11.525-2.588 17.298-.462-.304-.922-.605-1.384-.91 2.439-1.254 4.864-2.527 7.207-3.954 2.158-1.317 4.212-3.127 6.536-4.109.733-.31 1.331.688.841 1.25-1.713 1.972-4.396 3.318-6.619 4.634-2.326 1.378-4.712 2.663-7.172 3.78-.633.287-1.294-.395-1.174-1.015 1.098-5.725 2.104-11.464 3.137-17.2.137-.79 1.337-.563 1.215.226Z"
                     />
                   </svg>
-                  <div className="cta-img rounded-top-4">
+                  <div className="cta-img rounded-top-4 dark:block hidden">
                     <Image
                       width={758}
                       height={712}
                       src="/assets/images/screens/cover-letter.png"
+                      alt=""
+                      className="img-fluid w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="cta-img rounded-top-4 dark:hidden block">
+                    <Image
+                      width={758}
+                      height={712}
+                      src="/assets/images/screens/cover-letter-light.png"
                       alt=""
                       className="img-fluid w-full h-full object-cover"
                     />
