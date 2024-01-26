@@ -99,7 +99,7 @@ const ResumeTemplate2 = () => {
       </div>
       {/* contacts */}
       <div className="w-full py-3">
-        <ul className="flex flex-row xs:flex-col md:flex-row justify-around items-center p-4  bg-black rounded-2xl">
+        <ul className="flex flex-row  md:flex-row justify-around items-center p-4  bg-black rounded-2xl">
           <li className="hover:shadow-md text-white hover:bg-gray-700 text-sm xs:text-sm md:text-lg lg:text-lg flex flex-row gap-1  items-center">
             {phoneIcon}
             <EditableField
@@ -317,14 +317,14 @@ const ResumeTemplate2 = () => {
                     draggable
                   >
                     {/* start end */}
-                    <h2 className="hover:cursor-default text-center bg-transparent xs:bg-slate-100 p-0 col-span-1 xs:col-span-6 md:col-span-1 xs:p-2 md:p-0 md:bg-transparent  text-sm xs:text-sm md:text-lg lg:text-lg font-semibold">
+                    <h2 className="hover:cursor-default text-center bg-transparent  p-0 col-span-1   text-sm  font-semibold">
                       {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                       {rec?.isContinue
                         ? "Present"
                         : `${rec?.toMonth} ${rec?.toYear}`}{" "}
                     </h2>
 
-                    <div className=" col-span-5 xs:col-span-6 md:col-span-5">
+                    <div className=" col-span-5 ">
                       {/* Title */}
                       <h2 className="hover:shadow-md hover:cursor-text hover:bg-gray-100 text-base font-bold">
                         <EditableField
