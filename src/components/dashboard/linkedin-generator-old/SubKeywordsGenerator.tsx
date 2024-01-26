@@ -193,7 +193,7 @@ const SubKeywordsGenerator = () => {
             </h1>
 
             <div
-              className={`text-[#000] rounded-full group relative h-8 md:ml-3 cursor-pointer flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
+              className={`text-[#000] rounded-full group relative h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
             >
               <div className="mr-1">
                 {creditLimits?.linkedin_keywords_generation}

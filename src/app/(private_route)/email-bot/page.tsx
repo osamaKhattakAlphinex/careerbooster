@@ -365,7 +365,7 @@ const PersonalizedEmailBot = () => {
                       </span>
                     </div>
                     <div
-                      className={`text-[#000] cursor-pointer group relative rounded-full h-8 md:ml-3 flex  items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
+                      className={`text-[#000]  group relative rounded-full h-8 md:ml-3 flex  items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
                     >
                       {creditLimits?.email_generation}
                       <div className="pl-1"> Credits</div>

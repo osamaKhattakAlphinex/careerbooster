@@ -99,36 +99,36 @@ const CoverLetterCardSingle = ({
 
             <span className="text-[13px] mx-2 ">Delete</span>
           </button>
-          {pathname == "/dashboard"
-            ? ""
-            : card && (
-                <>
-                  <DownloadService
-                    icon={
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6 pr-2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
-                        />
-                      </svg>
-                    }
-                    className={`flex !px-3 dark:hover:bg-gray-700 dark:hover:border-[#5f5f5f] dark:hover:text-white text-[#27272a]  justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-[1px] border-[1px] dark:border-green-500 hover:!bg-[#00000015] dark:text-green-500 hover:border-[#00000015] bg-transparent border-[#27272a] dark:focus:border-green-500 focus:bg-[#00000015] focus:border-[#00000015] `}
-                    componentRef={componentRef}
-                    view={handleOnView}
-                    card={card}
-                    type="coverLetter"
-                    fileName="ai-cover-letter"
-                  />
-                </>
-              )}
+          {/* {pathname == "/dashboard"
+              ? ""
+              : card && (
+                  <>
+                    <DownloadService
+                      icon={
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6 pr-2"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+                          />
+                        </svg>
+                      }
+                      className={`flex !px-3 dark:hover:bg-gray-700 dark:hover:border-[#5f5f5f] dark:hover:text-white text-[#27272a]  justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-[1px] border-[1px] dark:border-green-500 hover:!bg-[#00000015] dark:text-green-500 hover:border-[#00000015] bg-transparent border-[#27272a] dark:focus:border-green-500 focus:bg-[#00000015] focus:border-[#00000015] `}
+                      componentRef={componentRef}
+                      view={handleOnView}
+                      card={card}
+                      type="coverLetter"
+                      fileName="ai-cover-letter"
+                    />
+                  </>
+                )} */}
         </div>
       </div>
     </div>
