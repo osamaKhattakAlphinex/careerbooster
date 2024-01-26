@@ -374,10 +374,7 @@ const ConsultingBidsGenerator = () => {
               {/* form */}
               <div className="flex flex-col gap-5 justify-between items-start">
                 <div className="w-full flex flex-col">
-                  <label
-                    htmlFor="job-title"
-                    className=" font-bold justify-between text-md md:text-[24px] dark:text-gray-100 text-gray-950 flex py-[20px] gap-[3px]"
-                  >
+                  <label className=" font-bold justify-between items-center text-md md:text-[24px] dark:text-gray-100 text-gray-950 flex py-[20px] gap-[3px]">
                     <div>
                       Paste Your Job Description
                       <span className="text-[#F04248] text-md md:text-[24px]">
@@ -385,11 +382,13 @@ const ConsultingBidsGenerator = () => {
                       </span>
                     </div>
                     <div
-                      className={`text-[#000] cursor-pointer group relative rounded-full h-8 md:ml-3 flex  items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
+                      className={`text-[#000] cursor-pointer group relative rounded-full h-8 md:ml-3 flex  items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
                     >
-                      {creditLimits?.consulting_bids_generation}
-                      <div className="pl-1"> Credits</div>
-                      <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium text-[12px] px-2 absolute xs:-left-32   -top-14  hidden group-hover:block  xs:rounded-br-none  text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+                      <div className="pl-1">
+                        {creditLimits?.consulting_bids_generation}{" "}
+                      </div>
+                      Credits
+                      <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32 xs:-top-12  md:-top-14  hidden group-hover:block  xs:rounded-br-none  text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                         300 credits will Be used for Bid Generation
                       </div>
                     </div>

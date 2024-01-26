@@ -52,15 +52,15 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
           {currentRouteDisplayName}
         </h1>
         <div className="flex">
-          <button
+          {/* <button
             onClick={() => setIsModalOpen(!isModalOpen)}
             className={` dark:text-gray-100 text-gray-950 flex justify-center mr-3 items-center  w-[40px] h-[40px] rounded-full capitalize  ${
               pathname === "/subscribe" ? "hidden" : ""
             } ${isModalOpen && "header-mode-btn-click"} `}
           >
             {bellIcon}
-          </button>
-          <div className="flex justify-center items-center ">
+          </button> */}
+          <div className="flex justify-center items-center h-[40px] ">
             <ThemeChanger />
           </div>
         </div>

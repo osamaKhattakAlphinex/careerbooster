@@ -28,11 +28,13 @@ const HeadlineGenerator = ({ creditLimits }: { creditLimits: any }) => {
                 Headline Generator
               </h1>
               <div
-                className={`text-[#000] group relative rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
+                className={`text-[#000] group relative rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
               >
-                {creditLimits?.linkedin_headline_generation}
-                <div className="pl-1"> Credits</div>
-                <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium text-[12px] px-2 absolute xs:-left-32 md:left-10  -top-14  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+                <div className="mr-1">
+                  {creditLimits?.linkedin_headline_generation}{" "}
+                </div>
+                Credits
+                <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32 md:left-10 xs:-top-12  md:-top-14  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                   50 credits will Be used for Headline Generation
                 </div>
               </div>
