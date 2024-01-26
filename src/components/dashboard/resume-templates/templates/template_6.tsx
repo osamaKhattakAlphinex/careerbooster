@@ -95,7 +95,7 @@ const ResumeTemplate6 = () => {
               }}
             />
           </h3>
-          <ul className=" flex flex-row xs:flex-col md:flex-row gap-3 my-4 justify-between text-sm  break-all pl-0">
+          <ul className=" flex flex-row  md:flex-row gap-3 my-4 justify-between text-sm  break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-100 text-sm   flex flex-row gap-1  items-center justify-start w-[30%]">
               <div className="p-1">{phoneIcon}</div>
               <EditableField
@@ -538,11 +538,11 @@ const ResumeTemplate6 = () => {
                   Education
                 </h3>
                 <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
-                <ul className="flex xs:flex-col md:flex-row lg:flex-row w-full  flex-wrap pl-0 ">
+                <ul className="flex  md:flex-row lg:flex-row w-full  flex-wrap pl-0 ">
                   {resume?.education.map(
                     (education: Education, ind: number) => (
                       <React.Fragment key={education?.id || ind}>
-                        <div className="w-[28%] xs:w-full md:w-[30%] m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                        <div className="w-[28%]  md:w-[30%] m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                           <li
                             className=" hover:shadow-md hover:cursor-move  
                   parent  
