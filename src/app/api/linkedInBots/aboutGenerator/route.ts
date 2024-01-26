@@ -1,5 +1,4 @@
 import Prompt from "@/db/schemas/Prompt";
-import TrainBot from "@/db/schemas/TrainBot";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
@@ -15,6 +14,7 @@ import {
 import { postAbouts } from "./linkedInAbout/route";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
+import { updateToolUsage } from "@/helpers/updateToolUsage";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -82,6 +82,8 @@ export async function POST(req: any) {
     const stream = OpenAIStream(response, {
       onStart: async () => {
         await updateUserTotalCredits(email, creditsUsed)
+        await updateToolUsage("Linkedin Tool", creditsUsed)
+
       },
       onFinal: async (completions) => {
         try {

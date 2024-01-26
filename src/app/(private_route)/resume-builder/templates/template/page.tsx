@@ -43,7 +43,7 @@ const Template = () => {
   }, []);
 
   useEffect(() => {
-    if (componentRef.current) {
+    if (componentRef.current && isMobile) {
       const height = Math.floor(componentRef.current.offsetHeight * 0.5 + 90);
       setScaleHeight(height);
       const refTop = Math.floor(
@@ -54,8 +54,19 @@ const Template = () => {
       setRefLeft(width);
     }
   }, [componentRef.current, templateId]);
-  let isMobile = window.innerWidth <= 480;
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div className="lg:ml-[234px] ml-0 px-[15px]">
       <RecentResumeCard componentRef={componentRef} templateId={templateId} />

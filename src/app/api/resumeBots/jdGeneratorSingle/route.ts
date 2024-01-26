@@ -11,6 +11,7 @@ import { makeid } from "@/helpers/makeid";
 import { TrainBotEntryType, makeTrainedBotEntry } from "@/helpers/makeTrainBotEntry";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
+import { updateToolUsage } from "@/helpers/updateToolUsage";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -105,6 +106,8 @@ export async function POST(req: any) {
         };
         // postConsultingBid(payload);
         await updateUserTotalCredits(session?.user?.email, creditsUsed)
+        await updateToolUsage("Resume Tool", creditsUsed)
+
       },
       onFinal: async (completions) => {
         try {

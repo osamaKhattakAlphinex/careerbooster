@@ -18,8 +18,8 @@ import {
   makeTrainedBotEntry,
 } from "@/helpers/makeTrainBotEntry";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
-import User from "@/db/schemas/User";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
+import { updateToolUsage } from "@/helpers/updateToolUsage";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
@@ -106,7 +106,7 @@ export async function POST(req: any) {
 
         //update total user credits
         await updateUserTotalCredits(session?.user?.email, creditsUsed)
-
+        await updateToolUsage("Resume Builder", creditsUsed)
         // make a trainBot entry
         try {
           if (trainBotData) {
@@ -194,6 +194,8 @@ export async function POST(req: any) {
         const stream = OpenAIStream(response, {
           onStart: async () => {
             await updateUserTotalCredits(session?.user?.email, creditsUsed)
+            await updateToolUsage("Resume Builder", creditsUsed)
+
           },
           onFinal: async (completions) => {
             try {
@@ -277,6 +279,7 @@ export async function POST(req: any) {
 
         //update total records of user
         await updateUserTotalCredits(session?.user?.email, creditsUsed)
+await updateToolUsage("Resume Builder", creditsUsed)
 
         // make a trainBot entry
 

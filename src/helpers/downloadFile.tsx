@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 const DownloadService = ({
   componentRef,
@@ -22,16 +21,28 @@ any) => {
       if (type === "coverLetter") {
         htmlToDoc = `
         <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+        body {
+          padding: 24px;
+        }</style>
         ${card.coverLetterText}
         `;
       } else if (type === "email") {
         htmlToDoc = `
         <script src="https://cdn.tailwindcss.com"></script>
+         <style>
+        body {
+          padding: 24px;
+        }</style>
         ${card.emailText}
         `;
       } else if (type === "consultingBid") {
         htmlToDoc = `
-        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.tailwindcss.com"></script>\
+         <style>
+        body {
+          padding: 24px;
+        }</style>
         ${card.consultingBidText}
         `;
       }
@@ -39,7 +50,10 @@ any) => {
       const html = componentRef.current.outerHTML;
       htmlToDoc = `
       <script src="https://cdn.tailwindcss.com"></script>
-      
+       <style>
+        body {
+          padding: 24px;
+        }</style>      
       ${html}`;
     } else {
       if (view) {
@@ -56,29 +70,28 @@ any) => {
             display: block; 
         }</style>
         ${html}`;
-
-      setLoading(true);
-      await fetch(`/api/template`, {
-        method: "POST",
-        body: JSON.stringify({
-          htmlToDoc,
-        }),
-      }).then(async (response: any) => {
-        const res = await response.json();
-        const arrayBufferView = new Uint8Array(res.result.data);
-        const blob = new Blob([arrayBufferView], {
-          type: "application/pdf",
-        });
-        const url = URL.createObjectURL(blob);
-        docRef.current.href = url;
-        if (!preview) {
-          docRef.current.download = fileName;
-        }
-        // docRef.current.download = fileName;
-        docRef.current.click();
-        setLoading(false);
-      });
     }
+    setLoading(true);
+    await fetch(`/api/template`, {
+      method: "POST",
+      body: JSON.stringify({
+        htmlToDoc,
+      }),
+    }).then(async (response: any) => {
+      const res = await response.json();
+      const arrayBufferView = new Uint8Array(res.result.data);
+      const blob = new Blob([arrayBufferView], {
+        type: "application/pdf",
+      });
+      const url = URL.createObjectURL(blob);
+      docRef.current.href = url;
+      if (!preview) {
+        docRef.current.download = fileName;
+      }
+      // docRef.current.download = fileName;
+      docRef.current.click();
+      setLoading(false);
+    });
   };
 
   return (

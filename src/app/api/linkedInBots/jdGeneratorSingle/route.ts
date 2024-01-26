@@ -8,6 +8,7 @@ import startDB from "@/lib/db";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
+import { updateToolUsage } from "@/helpers/updateToolUsage";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -79,6 +80,8 @@ export async function POST(req: any) {
     const stream = OpenAIStream(response, {
       onStart: async () => {
         await updateUserTotalCredits(email, creditsUsed)
+        await updateToolUsage("Linkedin Tool", creditsUsed)
+
       },
     });
     // Respond with the stream

@@ -16,6 +16,7 @@ import { postKeywords } from "./linkedInKeywords/route";
 import { makeid } from "@/helpers/makeid";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
+import { updateToolUsage } from "@/helpers/updateToolUsage";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -78,6 +79,7 @@ export async function POST(req: any) {
     const stream = OpenAIStream(response, {
       onStart: async () => {
         await updateUserTotalCredits(email, creditsUsed)
+        await updateToolUsage("Linkedin Tool", creditsUsed)
       },
       onFinal: async (completions) => {
 

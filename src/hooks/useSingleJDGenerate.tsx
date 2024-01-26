@@ -71,6 +71,8 @@ const useSingleJDGenerate = (setStreamedJDData: any) => {
 
       if (res.ok) {
         const reader = res.body.getReader();
+        setStreamedJDData(" ");
+
         while (true) {
           const { done, value } = await reader.read();
 
@@ -80,6 +82,7 @@ const useSingleJDGenerate = (setStreamedJDData: any) => {
 
           const text = new TextDecoder().decode(value);
           // const text = response.result;
+
           setStreamedJDData((prev: any) => prev + text);
           // temp += text;
           achievementTemp += text;
@@ -93,8 +96,6 @@ const useSingleJDGenerate = (setStreamedJDData: any) => {
       }
 
       if (achievementTemp.length > 0) {
-        console.log(" inside");
-
         setStreamedJDData((prev: any) => prev + `</div> <br /> `);
         temp += `</div> <br /> `;
         const achivementsArray = fetchLIstOfStrings(achievementTemp);

@@ -18,6 +18,7 @@ import {
 import { postEmail } from "../route";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
+import { updateToolUsage } from "@/helpers/updateToolUsage";
 
 // PROMPT
 // Here is the Job description:
@@ -104,6 +105,7 @@ export async function POST(req: any) {
     const stream = OpenAIStream(response, {
       onStart: async () => {
         await updateUserTotalCredits(email, creditsUsed)
+        await updateToolUsage("Email Generation Tool", creditsUsed)
       },
       onFinal: async (completions) => {
 
