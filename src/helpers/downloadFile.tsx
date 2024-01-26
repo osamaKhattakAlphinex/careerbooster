@@ -105,9 +105,12 @@ any) => {
           onClick={templateCall}
           type="button"
           disabled={loading}
-          className={`xs:flex-1 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px]  ${
+          className={`xs:flex-1 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full  bg-[#e4e9f7]  dark:bg-[#18181b] text-gray-900  dark:text-gray-300 border-[1px] border-[#f0f0f0]  ${
             loading ? "cursor-not-allowed opacity-50" : ""
           }`}
+          style={{
+            borderColor: "white",
+          }}
         >
           <div>{icon}</div>
           {preview ? "Preview " : loading ? "Downloading..." : "Download"}
