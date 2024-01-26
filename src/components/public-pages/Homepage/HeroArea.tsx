@@ -44,12 +44,21 @@ const HeroArea = () => {
                     alt=""
                     className="shape animate-scale"
                   />
-                  <div className="mt-12 p-4 rounded-5 border-[1px] border-primary-dark shadow-lg overflow-hidden position-relative z-1">
+                  <div className="mt-12 p-4 rounded-5 border-[1px] border-primary-dark shadow-lg overflow-hidden position-relative z-1 dark:block hidden">
                     <Image
                       width={810}
                       height={793}
                       className="img-fluid d-inline-block rounded-md"
                       src="/assets/images/screens/dashboard.png"
+                      alt=""
+                    />
+                  </div>
+                  <div className="mt-12 p-4 rounded-5 border-[1px] border-primary-dark shadow-lg overflow-hidden position-relative z-1 dark:hidden block">
+                    <Image
+                      width={810}
+                      height={793}
+                      className="img-fluid d-inline-block rounded-md"
+                      src="/assets/images/screens/dashboard-lite-2.png"
                       alt=""
                     />
                   </div>
