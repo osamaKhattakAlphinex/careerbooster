@@ -55,7 +55,7 @@ const ResumeTemplate18 = () => {
 
   return (
     <div className="w-full first-page relative text-gray-900">
-      <div className="flex absolute top-0 w-8/12 xs:w-8/12 px-4 md:px-8 xs:left-1  md:w-8/12 items-center  justify-start py-3 xs:py-2 md:py-8">
+      <div className="flex absolute top-0 w-8/12 xs:w-8/12 px-4 md:px-8   md:w-8/12 items-center  justify-start py-3 md:py-8">
         <div className="flex flex-col px-1 py-8">
           <h2 className="text-2xl md:text-5xl font-serif  font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
@@ -80,7 +80,7 @@ const ResumeTemplate18 = () => {
         </div>
       </div>
       <div className="flex">
-        <div className="w-9/12 md:w-full flex flex-col px-4 md:px-8 pt-[8rem] xs:pt-[10rem] md:pt-[13rem] ">
+        <div className="w-9/12 md:w-full flex flex-col px-4 md:px-8 pt-[8rem] md:pt-[13rem] ">
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0  my-3  xs:my-3 md:my-3"></span>
           <h3 className="uppercase text-xl xs:text-lg  font-semibold border-[#444440] border-b-2  rounded-sm text-gray-900 w-full py-1">
@@ -215,10 +215,10 @@ const ResumeTemplate18 = () => {
                 Education
               </h3>
               <span className="border-stylee w-full h-0 my-3"></span>
-              <ul className="pl-0 flex xs:flex-col my-3 md:flex-row lg:flex-row flex-wrap xs:px-2 md:px-0 text-gray-800  w-full">
+              <ul className="pl-0 flex flex-wrap xs:px-2 md:px-0 text-gray-800  w-full">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="w-[30%] xs:w-full md:w-[30%] lg:w-[30%] md:m-2  relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                    <div className="w-[30%] xs:w-[50%] md:w-[30%] lg:w-[30%] md:m-2  relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                       <li
                         className=" hover:shadow-md hover:cursor-move 
                   parent  
@@ -284,6 +284,7 @@ const ResumeTemplate18 = () => {
                               }}
                             />
                           )}
+                          {education.fromMonth && <span>&nbsp;</span>}
                           {education.fromYear && (
                             <EditableField
                               rows={2}
@@ -296,9 +297,7 @@ const ResumeTemplate18 = () => {
                               }}
                             />
                           )}
-                          {(education.toMonth || education.toYear) && (
-                            <span>&nbsp; - &nbsp;</span>
-                          )}
+                          {education.fromYear && <span>&nbsp; - &nbsp;</span>}
                           {education.toMonth && !education.isContinue && (
                             <EditableField
                               rows={2}
@@ -311,6 +310,7 @@ const ResumeTemplate18 = () => {
                               }}
                             />
                           )}
+                          {education.toMonth && <span>&nbsp;</span>}
                           {education.toYear && !education.isContinue && (
                             <EditableField
                               rows={2}

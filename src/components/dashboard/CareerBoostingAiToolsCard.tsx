@@ -46,7 +46,7 @@ const CareerBoostingAiToolsCard = () => {
   return (
     <div className="mt-6 mb-[20px]">
       <h1 className="pb-2 rounded-[14px] text-zinc-500 font-bold uppercase text-[14px] ">
-        Recent ai generated documents1111
+        Recent ai generated documents
       </h1>
       <div className="flex mt-3 flex-wrap gap-2">
         {tabOptions.map((option, index) => (

@@ -102,7 +102,7 @@ const ResumeTemplate7 = () => {
             </h3>
 
             <Toolbar regenrateSummary={getSummary}>
-              <div className="text-sm  hover:shadow-md mt-4 border-2 border-transparent hover:border-gray-500 hover:border-dashed xs:min-h-fit min-h-[380px]">
+              <div className="text-sm  hover:shadow-md mt-4 border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
                 <EditableField
                   type="textarea"
                   value={
@@ -454,6 +454,7 @@ const ResumeTemplate7 = () => {
                               }}
                             />
                           )}
+                          {education.fromMonth && <span>&nbsp;</span>}
                           {education.fromYear && (
                             <EditableField
                               rows={2}
@@ -466,9 +467,7 @@ const ResumeTemplate7 = () => {
                               }}
                             />
                           )}
-                          {(education.toMonth || education.toYear) && (
-                            <span>&nbsp; - &nbsp;</span>
-                          )}
+                          {education.fromYear && <span>&nbsp; - &nbsp;</span>}
                           {education.toMonth && !education.isContinue && (
                             <EditableField
                               rows={2}
@@ -481,6 +480,7 @@ const ResumeTemplate7 = () => {
                               }}
                             />
                           )}
+                          {education.toMonth && <span>&nbsp;</span>}
                           {education.toYear && !education.isContinue && (
                             <EditableField
                               rows={2}

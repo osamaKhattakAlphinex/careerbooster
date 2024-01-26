@@ -78,11 +78,11 @@ const ResumeTemplate17 = () => {
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="flex">
-        <div className=" w-[35%] md:w-1/3 flex flex-col  bg-[#323b4c] px-4 xs:px-2 md:px-4   pt-[2rem] h-[1150px] ">
+        <div className=" w-[35%] md:w-1/3 flex flex-col  bg-[#323b4c] px-4 xs:px-2 md:px-4   pt-[2rem] h-[1150px] xs:h-auto">
           <div className="flex justify-center">
             <div className="border-[.5rem] border-[#ae9243]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
-              <div className=" w-44 h-44 xs:w-20 xs:h-20 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
-                <div className=" w-40 h-40 xs:w-16 xs:h-16 md:w-40 md:h-40 text-[#F1F1F1] flex justify-center items-center bg-[#ae9243]  rounded-full ">
+              <div className=" w-44 h-44 md:w-44 md:h-44 border-[.5rem] border-[#323b4c]   text-gray-800 bg-[#ae9243]  text-center flex justify-center items-center  rounded-full ">
+                <div className=" w-40 h-40  md:w-40 md:h-40 text-[#F1F1F1] flex justify-center items-center bg-[#ae9243]  rounded-full ">
                   <span className="text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
                     <EditableField
                       value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -260,7 +260,7 @@ const ResumeTemplate17 = () => {
             </>
           )}
         </div>
-        <div className="w-full flex flex-col xs:mt-36 md:mt-1 px-4 md:px-8 pt-[1rem] xs:pt-[10rem] md:pt-[2rem] ">
+        <div className="w-full flex flex-col  md:mt-1 px-4 md:px-8 pt-[1rem]  md:pt-[2rem] ">
           {/* Executive Summary */}
           <div className="flex ">
             <div className="flex flex-col  py-8">
@@ -287,13 +287,13 @@ const ResumeTemplate17 = () => {
               </h3>
             </div>
           </div>
-          <span className="border-stylee w-full h-0 my-1 xs:my-0 md:my-1"></span>
+          <span className="border-stylee w-full h-0 my-1 md:my-1"></span>
           <h3 className="uppercase text-xl xs:text-lg  font-semibold border-[#444440] border-b-2  rounded-sm text-gray-900 w-full py-1">
             EXECUTIVE SUMMARY
           </h3>
           <span className="border-stylee w-full h-0  my-3"></span>
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-[16px] hover:shadow-md min-h-[410px] xs:min-h-fit border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
+            <div className="text-[16px] hover:shadow-md  border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
               <EditableField
                 type="textarea"
                 value={
@@ -660,6 +660,7 @@ const ResumeTemplate17 = () => {
                               }}
                             />
                           )}
+                          {education.fromMonth && <span>&nbsp;</span>}
                           {education.fromYear && (
                             <EditableField
                               rows={2}
@@ -672,9 +673,7 @@ const ResumeTemplate17 = () => {
                               }}
                             />
                           )}
-                          {(education.toMonth || education.toYear) && (
-                            <span>&nbsp; - &nbsp;</span>
-                          )}
+                          {education.fromYear && <span>&nbsp; - &nbsp;</span>}
                           {education.toMonth && !education.isContinue && (
                             <EditableField
                               rows={2}
@@ -687,6 +686,7 @@ const ResumeTemplate17 = () => {
                               }}
                             />
                           )}
+                          {education.toMonth && <span>&nbsp;</span>}
                           {education.toYear && !education.isContinue && (
                             <EditableField
                               rows={2}

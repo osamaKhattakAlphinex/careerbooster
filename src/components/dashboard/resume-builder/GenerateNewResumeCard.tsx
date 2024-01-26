@@ -77,8 +77,8 @@ Props) => {
             </span>
             <p className="dark:text-gray-100 text-gray-950 text-base">
               <span className=" font-bold">Crucial!</span> Review your profile,
-              and update missing details for improved results
-              <Link href="#" className="text-[#615DFF] font-bold">
+              and update missing details for improved results. &nbsp;
+              <Link href="/profile-review" className="text-[#615DFF] font-bold">
                 Click here
               </Link>
             </p>
@@ -100,9 +100,9 @@ Props) => {
             <p className="dark:text-gray-100 text-gray-950 text-base">
               If you{"'"}re unsatisfied with the results, please note that we
               create your new resume using your original resume data. If any of
-              your experiences are missing,
-              <Link href="#" className="text-[#615DFF] font-bold">
-                &nbsp; Edit your profile
+              your experiences are missing, &nbsp;
+              <Link href="/profile-review" className="text-[#615DFF] font-bold">
+                Edit your profile
               </Link>
               , add any missing work experience with a brief description, and
               then generate your resume again.

@@ -306,7 +306,7 @@ const ResumeTemplate16 = () => {
           {/* <span className="border-stylee w-full h-0 border border-[#444440] mb-3"></span> */}
           <span className="border-stylee w-full h-0  my-2"></span>
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-[14px] hover:shadow-md xs:min-h-fit min-h-[430px] px-4 md:px-8 border-2 border-transparent hover:border-gray-500 hover:border-dashed  ">
+            <div className="text-[14px] hover:shadow-md  px-4 md:px-8 border-2 border-transparent hover:border-gray-500 hover:border-dashed  ">
               <EditableField
                 type="textarea"
                 value={
@@ -596,10 +596,10 @@ const ResumeTemplate16 = () => {
           </div>
           {resume?.education.length > 0 && (
             <div className="px-8 ml-[-200px] xs:ml-0">
-              <ul className="flex xs:flex-col md:flex-row lg:flex-row w-full  flex-wrap pl-0">
+              <ul className="flex gap-2 w-full  flex-wrap pl-0">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="flex flex-col w-[30%] xs:w-full md:w-[30%] relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                    <div className="flex flex-col w-[30%] xs:w-[45%] md:w-[30%] relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                       <li
                         className=" hover:shadow-md hover:cursor-move 
                   parent  
@@ -663,6 +663,7 @@ const ResumeTemplate16 = () => {
                               }}
                             />
                           )}
+                          {education.fromMonth && <span>&nbsp;</span>}
                           {education.fromYear && (
                             <EditableField
                               rows={2}
@@ -675,9 +676,7 @@ const ResumeTemplate16 = () => {
                               }}
                             />
                           )}
-                          {(education.toMonth || education.toYear) && (
-                            <span>&nbsp; - &nbsp;</span>
-                          )}
+                          {education.fromYear && <span>&nbsp; - &nbsp;</span>}
                           {education.toMonth && !education.isContinue && (
                             <EditableField
                               rows={2}
@@ -690,6 +689,7 @@ const ResumeTemplate16 = () => {
                               }}
                             />
                           )}
+                          {education.toMonth && <span>&nbsp;</span>}
                           {education.toYear && !education.isContinue && (
                             <EditableField
                               rows={2}
