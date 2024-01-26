@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
 import FileUploadHandler from "./dashboard/FileUploadHandler";
+import WordFileHandler from "./dashboard/WordFileHandler";
 
 const UploadPDFResume = () => {
   const router = useRouter();
@@ -54,12 +55,18 @@ const UploadPDFResume = () => {
 
   // check file is correct
   useEffect(() => {
-    if (file && file.type === "application/pdf") {
+    if (
+      file &&
+      (file.type === "application/pdf" ||
+        file.type === "application/msword" ||
+        file.type ===
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+    ) {
       //  file exists and is PDF
       setFileError("");
     } else if (file) {
       // if file exists but not PDf
-      setFileError("only PDF file is allowed");
+      setFileError("only PDF and Word Doc file is allowed");
     }
   }, [file]);
 
@@ -98,13 +105,22 @@ const UploadPDFResume = () => {
           )}
         </label>
       )}
-      {file !== null && (
+      {file !== null && file.type === "application/pdf" ? (
         <FileUploadHandler
           file={file}
           text={text}
           setText={setText}
           fetchRegistrationDataFromResume={fetchRegistrationDataFromResume}
         />
+      ) : (
+        file !== null && (
+          <WordFileHandler
+            file={file}
+            text={text}
+            setText={setText}
+            fetchRegistrationDataFromResume={fetchRegistrationDataFromResume}
+          />
+        )
       )}
 
       {isAuth && (

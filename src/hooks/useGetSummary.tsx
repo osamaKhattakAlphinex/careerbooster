@@ -7,6 +7,7 @@ import useGetUserData from "./useGetUserData";
 import useSaveResumeToDB from "./useSaveToDB";
 import useGetCreditLimits from "./useGetCreditLimits";
 import { usePathname } from "next/navigation";
+import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
 const useGetSummary = (setStreamedSummaryData: any) => {
   const dispatch = useDispatch();
@@ -76,13 +77,16 @@ const useGetSummary = (setStreamedSummaryData: any) => {
         }
 
         dispatch(setSummary(summaryTemp));
+
         if (path !== "/resume-builder") {
+          showSuccessToast("Generated Successfully");
           saveResumeToDB({
             ...resumeData,
             summary: summaryTemp,
           });
         }
       } else {
+        showErrorToast("You ran out of credits!");
         setStreamedSummaryData(resumeData?.summary);
       }
     });

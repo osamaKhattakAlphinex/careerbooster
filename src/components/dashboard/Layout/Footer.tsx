@@ -34,7 +34,7 @@ const Footer = () => {
   // if (pagesArray?.includes(pathname)) return <></>;
   return (
     <div
-      className={`pb-7  px-3 text-center ${
+      className={`pb-7  px-3 text-center  ${
         pagesArray?.includes(pathname) ? "" : "lg:ml-[234px]"
       }
     ${pathname === "/subscribed" ? "hidden" : ""}

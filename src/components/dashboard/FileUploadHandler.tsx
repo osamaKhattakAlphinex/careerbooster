@@ -14,8 +14,6 @@ const FileUploadHandler = ({
   text,
   setText,
 }: any) => {
-  console.log("inside file upload handler");
-
   const onDocumentLoadSuccess = async () => {
     if (file) {
       const reader = new FileReader();
@@ -47,7 +45,6 @@ const FileUploadHandler = ({
             setText(content);
             saveToLocalStorage(content);
             if (fetchRegistrationDataFromResume !== undefined) {
-
               fetchRegistrationDataFromResume(content);
             }
           })
@@ -67,7 +64,6 @@ const FileUploadHandler = ({
     >
       {file && (
         <div>
-          TEST
           <Document file={file} onLoadSuccess={onDocumentLoadSuccess} />
           <div>{text}</div>
         </div>

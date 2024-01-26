@@ -6,6 +6,7 @@ import { deleteIcon } from "@/helpers/iconsProvider";
 import { useSelector } from "react-redux";
 import FileUploadHandler from "@/components/dashboard/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
+import WordFileHandler from "../WordFileHandler";
 
 interface Props {
   selectedFile: string;
@@ -105,13 +106,19 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
 
   // check file is correct
   useEffect(() => {
-    if (file && file.type === "application/pdf") {
+    if (
+      file &&
+      (file.type === "application/pdf" ||
+        file.type === "application/msword" ||
+        file.type ===
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+    ) {
       //  file exists and is PDF
       setFileError("");
       // upload it to server
     } else if (file) {
       // if file exists but not PDf
-      setFileError("only PDF file is allowed");
+      setFileError("only PDF and Word Doc file is allowed");
     }
   }, [file]);
 
@@ -174,13 +181,22 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
           </div>
         </div>
 
-        {file !== null && (
+        {file !== null && file.type === "application/pdf" ? (
           <FileUploadHandler
             file={file}
             text={newFileText}
             setText={setNewFileText}
           />
+        ) : (
+          file !== null && (
+            <WordFileHandler
+              file={file}
+              text={newFileText}
+              setText={setNewFileText}
+            />
+          )
         )}
+
         {loadingFiles ? (
           <p className="dark:text-gray-100 text-gray-950">Loading Files...</p>
         ) : (

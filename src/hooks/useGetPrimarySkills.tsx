@@ -5,6 +5,7 @@ import useGetUserData from "./useGetUserData";
 import { setPrimarySkills } from "@/store/resumeSlice";
 import useSaveResumeToDB from "./useSaveToDB";
 import useGetCreditLimits from "./useGetCreditLimits";
+import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
 const useGetPrimarySkills = (setRegenerating: any) => {
   const dispatch = useDispatch();
@@ -67,7 +68,9 @@ const useGetPrimarySkills = (setRegenerating: any) => {
             primarySkills: myJSON,
           });
         }
+        showSuccessToast("Generated Successfully");
       } else {
+        showErrorToast("You ran out of credits!");
         setRegenerating(false);
       }
     });
