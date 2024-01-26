@@ -117,7 +117,7 @@ const ResumeTemplate9 = () => {
         <div className=" w-full flex flex-col  md:pl-8 px-8 mt-4">
           {/* contacts */}
 
-          <ul className="flex mt-2 flex-row xs:flex-col md:flex-row w-full justify-between gap-3 mb-4 text-sm break-all pl-0">
+          <ul className="flex mt-2 flex-row  md:flex-row w-full justify-between gap-3 mb-4 text-sm break-all pl-0">
             <li className="w-[30%] hover:shadow-md hover:bg-gray-100 text-sm flex flex-row gap-1  items-center justify-start">
               <div className="p-1">{phoneIcon}</div>
               <EditableField

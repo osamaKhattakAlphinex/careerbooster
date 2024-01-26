@@ -98,7 +98,7 @@ const ResumeTemplate11 = () => {
       <div className=" flex">
         {/* sidebar */}
 
-        <div className="  w-3/12 xs:w-3/12 md:w-3/12 flex flex-col pl-3 md:pl-8 bg-[#2A2E36] text-gray-100  pr-6  pb-8 h-[1120px] xs:h-auto  pt-[220px] md:pt-[250px]">
+        <div className="  w-3/12 xs:w-3/12 md:w-3/12 flex flex-col pl-3 md:pl-8 bg-[#2A2E36] text-gray-100  pr-6  pb-8 h-[1120px] xs:h-auto  pt-[220px] xs:pt-[180px] md:pt-[250px]">
           {/* contacts */}
 
           <h3 className="uppercase text-lg font-bold flex flex-row gap-2 items-center">
@@ -259,7 +259,7 @@ const ResumeTemplate11 = () => {
             </>
           )}
         </div>
-        <div className="w-9/12 flex  flex-col px-8 xs:px-2 sm:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[230px]  md:pt-[220px] lg:pt-[250px]  ">
+        <div className="w-9/12 flex  flex-col px-8 xs:px-2 sm:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[230px] xs:pt-[180px]  md:pt-[220px] lg:pt-[250px]  ">
           {/* Executive Summary */}
           <div className=" flex flex-col w-full mb-6">
             <h3 className="uppercase text-lg xs:text-[14px] sm:text[14px] md:text-lg lg:text-lg font-bold">
@@ -562,10 +562,10 @@ const ResumeTemplate11 = () => {
                 <span className="border border-[#F4D644] mt-2"></span>
               </div>
 
-              <ul className="flex xs:flex-col md:flex-row lg:flex-row w-full  flex-wrap pl-0 ">
+              <ul className="flex  md:flex-row lg:flex-row w-full  flex-wrap pl-0 ">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="w-[28%] xs:w-full md:w-[30%] m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                    <div className="w-[28%]  md:w-[30%] m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                       <li
                         className=" hover:shadow-md hover:cursor-move  
                   parent  
