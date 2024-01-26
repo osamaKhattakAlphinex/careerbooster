@@ -400,7 +400,8 @@ export default function CoverLetterPage() {
                       {creditLimits?.cover_letter_generation}
                       <div className="pl-1"> Credits</div>
                       <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32 xs:-top-12  md:-top-14  hidden group-hover:block  xs:rounded-br-none  text-gray-100 xs:mb-7 md:mb-6 shadow-xl rounded-xl py-2  transition-all">
-                        120 credits will Be used for Cover Letter Generation
+                        {creditLimits?.cover_letter_generation} credits will be
+                        used for Cover Letter Generation
                       </div>
                     </div>
                   </label>
@@ -594,55 +595,60 @@ export default function CoverLetterPage() {
                       fileName="ai-cover-letter"
                     />
                     {show && (
-                      <button
-                        disabled={
-                          msgLoading ||
-                          !session?.user?.email ||
-                          !aiInputUserData ||
-                          selectedOption === "" ||
-                          (selectedOption === "file" && selectedFile === "") ||
-                          (selectedOption === "aiResume" &&
-                            setSelectedResumeId === "") ||
-                          !show ||
-                          isCoverLetterCopied
-                        }
-                        type="button"
-                        onClick={() => copyCoverLetter(streamedData)}
-                        className={` text-sm lg:px-6 dark:border-[#312e37] border-[1px] border-[#b324d7] rounded-full ${
-                          msgLoading ||
-                          !session?.user?.email ||
-                          !aiInputUserData ||
-                          selectedOption === "" ||
-                          (selectedOption === "file" && selectedFile === "") ||
-                          (selectedOption === "aiResume" &&
-                            setSelectedResumeId === "") ||
-                          !show ||
-                          isCoverLetterCopied
-                            ? "opacity-50 cursor-not-allowed"
-                            : ""
-                        }`}
-                      >
-                        {/* <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                      <div>
+                        <button
+                          disabled={
+                            msgLoading ||
+                            !session?.user?.email ||
+                            !aiInputUserData ||
+                            selectedOption === "" ||
+                            (selectedOption === "file" &&
+                              selectedFile === "") ||
+                            (selectedOption === "aiResume" &&
+                              setSelectedResumeId === "") ||
+                            !show ||
+                            isCoverLetterCopied
+                          }
+                          onClick={() => copyCoverLetter(streamedData)}
+                          className={`xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                            msgLoading ||
+                            !session?.user?.email ||
+                            !aiInputUserData ||
+                            selectedOption === "" ||
+                            (selectedOption === "file" &&
+                              selectedFile === "") ||
+                            (selectedOption === "aiResume" &&
+                              setSelectedResumeId === "") ||
+                            !show ||
+                            isCoverLetterCopied
+                              ? "opacity-50 cursor-not-allowed"
+                              : ""
+                          }`}
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
-                          />
-                        </svg> */}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
+                            />
+                          </svg>
 
-                        {msgLoading
-                          ? "Please wait..."
-                          : isCoverLetterCopied
-                          ? "Copied"
-                          : "Copy to clipboard"}
-                      </button>
+                          <span className="dark:text-gray-100 text-gray-950 text-sm">
+                            {msgLoading
+                              ? "Please wait..."
+                              : isCoverLetterCopied
+                              ? "Copied"
+                              : "Copy to clipboard"}
+                          </span>
+                        </button>
+                      </div>
                     )}
                     {show && (
                       <div>
@@ -652,7 +658,7 @@ export default function CoverLetterPage() {
                             !show || msgLoading || !session?.user?.email
                           }
                           onClick={handleClick}
-                          className={` flex flex-row justify-center items-center gap-2 py-3 px-[28px] dark:border-[#312e37] border-[1px] border-[#b324d7] rounded-full ${
+                          className={` xs:flex-1 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                             !show || msgLoading || !session?.user?.email
                               ? "opacity-50 cursor-not-allowed"
                               : ""
@@ -665,7 +671,7 @@ export default function CoverLetterPage() {
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="currentColor"
-                              className="w-6 h-6 dark:text-[#fef08a] text-gray-950"
+                              className="w-4 h-4 dark:text-gray-100 text-gray-950"
                             >
                               <path
                                 strokeLinecap="round"
@@ -674,7 +680,7 @@ export default function CoverLetterPage() {
                               />
                             </svg>
                             <span
-                              className={`dark:text-[#fef08a] text-gray-950 text-[15px] font-semibold ${
+                              className={`dark:text-gray-100 text-gray-950 text-sm ${
                                 !show || msgLoading || !session?.user?.email
                                   ? "opacity-50 cursor-not-allowed"
                                   : ""
@@ -699,7 +705,7 @@ export default function CoverLetterPage() {
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="w-6 h-6 text-white"
+                          className="w-4 h-4 dark:text-gray-100 text-gray-950"
                         >
                           <path
                             strokeLinecap="round"

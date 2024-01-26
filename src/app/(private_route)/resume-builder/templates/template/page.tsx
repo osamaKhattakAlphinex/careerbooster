@@ -4,12 +4,10 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import RecentResumeCard from "@/components/dashboard/resume-builder/RecentResumeCard";
 import { useDispatch, useSelector } from "react-redux";
-import { crownIcon } from "@/helpers/iconsProvider";
 import TemplateSlider from "@/components/dashboard/resume-templates/templateSlider";
 import { useSession } from "next-auth/react";
 import { setUserData } from "@/store/userDataSlice";
 import { setResume } from "@/store/resumeSlice";
-import Link from "next/link";
 import DownloadService from "@/helpers/downloadFile";
 
 const Template = () => {
@@ -47,7 +45,7 @@ const Template = () => {
       const height = Math.floor(componentRef.current.offsetHeight * 0.5 + 90);
       setScaleHeight(height);
       const refTop = Math.floor(
-        (516 / 2275) * componentRef.current.offsetHeight
+        (540 / 2275) * componentRef.current.offsetHeight
       );
       setRefTop(refTop);
       const width = Math.floor((175 / 390) * window.innerWidth);
