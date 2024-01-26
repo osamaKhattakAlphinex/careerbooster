@@ -375,13 +375,15 @@ const ResumeBuilder = () => {
                 design templates click here
               </p> */}
               <div className="flex justify-between items-center">
-                <h2 className=" text-base font-bold my-3">Design Templates</h2>
+                <h2 className=" text-base font-bold my-3 dark:text-gray-100 text-gray-950">
+                  Design Templates
+                </h2>
                 <Link
                   href="/resume-builder/templates"
                   className="no-underline  text-white rounded-lg overflow-hidden"
                 >
                   <div
-                    className={` font-bold dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
+                    className={` font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
                   >
                     All Templates
                   </div>

@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 
 const DownloadService = ({
+  icon,
+  className,
   componentRef,
   view,
   card,
@@ -98,14 +100,16 @@ any) => {
     <>
       <div className="">
         <a className="hidden" href="#" ref={docRef} target="_blank"></a>
+
         <button
           onClick={templateCall}
           type="button"
           disabled={loading}
-          className={`xs:flex-1 lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b]  text-green-500 border-[1px] border-green-500 ${
+          className={`xs:flex-1 lg:text-[14px] text-[12px] lg:px-8 px-5 py-2 rounded-full dark:bg-[#18181b]  text-green-500 border-[1px] border-green-500 ${className} ${
             loading ? "cursor-not-allowed opacity-50" : ""
           }`}
         >
+          <div>{icon}</div>
           {preview ? "Preview " : loading ? "Downloading..." : "Download"}
         </button>
       </div>

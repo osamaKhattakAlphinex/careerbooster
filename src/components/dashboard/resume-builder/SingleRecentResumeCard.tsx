@@ -71,7 +71,7 @@ const SingleRecentResumeCard = ({
       <div className="flex gap-3">
         <button
           onClick={handleOnView}
-          className="flex px-2 text-[16px] dark:hover:border-[#5f5f5f] dark:hover:bg-gray-700 dark:hover:text-white justify-center text-neutral-400 items-center rounded-full h-[36px] dark:bg-[#18181b] hover:!bg-[#00000015] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e] hover:border-[#00000015]"
+          className="flex px-2 text-[16px] dark:hover:border-[#5f5f5f] dark:hover:bg-gray-700 dark:hover:text-white justify-center dark:text-gray-100 text-[#27272a] items-center rounded-full h-[36px] dark:bg-[#18181b] hover:!bg-[#00000015] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#27272a] dark:focus:border-[#5f5f5f] hover:border-[#00000015] focus:bg-[#00000015] focus:border-[#00000015]"
         >
           {eyeIcon}
           <span className="text-[13px] mx-2 ">View</span>
@@ -79,7 +79,7 @@ const SingleRecentResumeCard = ({
         <button
           type="button"
           onClick={handleOnDelete}
-          className="flex px-2 dark:hover:bg-gray-700 dark:hover:border-[#5f5f5f] dark:hover:text-white text-neutral-400  justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] hover:!bg-[#00000015] hover:border-[#00000015] bg-transparent border-[#22c55e]"
+          className="flex px-2 dark:hover:bg-gray-700 dark:hover:border-[#5f5f5f] dark:hover:text-white text-[#27272a]  justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] hover:!bg-[#00000015] dark:text-gray-100 hover:border-[#00000015] bg-transparent border-[#27272a] dark:focus:border-[#5f5f5f]"
         >
           {trashIcon} <span className="text-[13px] mx-2 ">Delete</span>
         </button>

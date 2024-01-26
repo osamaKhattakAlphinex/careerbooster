@@ -437,7 +437,7 @@ export default function CoverLetterPage() {
                 >
                   <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                     {msgLoading ? (
-                      <div className="flex">
+                      <div className="flex items-center justify-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -457,7 +457,7 @@ export default function CoverLetterPage() {
                         Please wait...
                       </div>
                     ) : (
-                      <div className="flex">
+                      <div className="flex items-center justify-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
