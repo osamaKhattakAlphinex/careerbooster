@@ -20,6 +20,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { delay } from "@reduxjs/toolkit/dist/utils";
+import VirtualBot from "./VirtualBot";
 
 interface Props {
   children: React.ReactNode;
@@ -43,6 +44,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const pathname = usePathname();
   // Redux
   const userData = useSelector((state: any) => state.userData);
+  console.log(userData);
+
   const dispatch = useDispatch();
   const register = useSelector((state: any) => state.register);
   const resume = useSelector((state: any) => state.resume);
@@ -633,6 +636,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         <div className="w-1/3">
           <DidYouKnowCard />
         </div>
+        {/* <VirtualBot/> */}
       </div>
     );
   }
