@@ -18,7 +18,7 @@ export default function PublicLayout({
   return (
     <>
       <Header />
-      {children}
+      <div className="max-w-7xl mx-auto">{children}</div>
       <Footer />
     </>
   );

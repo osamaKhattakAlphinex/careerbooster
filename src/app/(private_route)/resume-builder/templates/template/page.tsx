@@ -85,7 +85,7 @@ const Template = () => {
         {resume &&
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
-              <div className="flex items-center justify-end md:justify-end gap-3 xs:pb-0 md:pb-4 sticky top-4 z-[25]">
+              <div className="flex items-center justify-end md:justify-end gap-3 xs:pb-0 md:pb-4 sticky top-4 z-[35]">
                 {/* <Link
                   className="no-underline"
                   href={`/resume-edit?templateId=${templateId}&resumeId=${resume.id}`}

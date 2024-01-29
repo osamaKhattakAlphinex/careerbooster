@@ -18,7 +18,7 @@ export default async function GuestLayout({ children }: Props) {
   return (
     <>
       <Header />
-      {children}
+      <div className="max-w-7xl mx-auto">{children}</div>
       <Footer />
     </>
   );
