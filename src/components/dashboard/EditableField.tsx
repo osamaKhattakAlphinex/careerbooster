@@ -1,7 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
+const normalizeValue = (value: string) => {
+  // Remove line breaks and multiple whitespaces
+  return value.replace(/\n/g, " ").replace(/\s\s+/g, " ").trim();
+};
 const EditableField = ({
   value,
   type,
@@ -18,8 +22,10 @@ const EditableField = ({
   onSave: (value: string) => void;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedValue, setEditedValue] = useState(value);
-
+  let new_value: string = normalizeValue(value);
+  const [editedValue, setEditedValue] = useState(new_value);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const userData = useSelector((state: any) => state.userData);
   const handleBlur = () => {
     setIsEditing(false);
@@ -28,9 +34,19 @@ const EditableField = ({
 
   useEffect(() => {
     if (value !== editedValue) {
-      setEditedValue(value);
+      setEditedValue(normalizeValue(value));
     }
-  }, [value]);
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + "px";
+    }
+    if (inputRef.current) {
+      inputRef.current.style.width = "auto"; // Reset width to auto
+      inputRef.current.style.width = `${inputRef.current.scrollWidth - 30}px`; // Set width to scrollWidth
+    }
+  }, [value, isEditing]);
 
   return (
     <>
@@ -38,21 +54,23 @@ const EditableField = ({
         onClick={() => {
           setIsEditing(true);
         }}
-        className=""
       >
         {userData?.creditPackage && isEditing ? (
           <>
             {type === "textarea" ? (
               <textarea
+                ref={textareaRef}
                 value={editedValue}
-                className={`bg-transparent pr-2 w-full hover:cursor-text h-auto ${className}`}
-                rows={rows ? rows : 15}
-                onChange={(e: any) => setEditedValue(e.target.value)}
+                className={`bg-transparent w-full hover:cursor-text ${className} resize-none overflow-y-hidden`}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  setEditedValue(e.target.value)
+                }
                 autoFocus
                 onBlur={handleBlur}
               />
             ) : (
               <input
+                ref={inputRef}
                 type="text"
                 value={editedValue}
                 className={`bg-transparent pr-2 hover:cursor-text ${className}`}

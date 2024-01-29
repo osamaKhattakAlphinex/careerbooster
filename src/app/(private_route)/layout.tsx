@@ -31,7 +31,7 @@ export default async function Privatelayout({ children }: Props) {
       <ProfileCreationLayer>
         <Header />
         <SideBar />
-        <div className="">{children}</div>
+        <div className="max-w-7xl mx-auto">{children}</div>
         <Footer />
         <ToastContainer />
       </ProfileCreationLayer>
