@@ -10,6 +10,9 @@ import ThemeToggler from "../../Themetoggler";
 
 import Image from "next/image";
 import "@/app/(private_route)/dashboard.css";
+import { ThemeProvider } from "next-themes";
+import NextThemeProvider from "@/components/data-providers/NextThemeProvider";
+import ThemeChanger from "@/components/common/themeSwitcher";
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -24,7 +27,7 @@ const Header = () => {
       // className={`navbar navbar-expand-lg fixed-top ${
       //   theme === "dark" ? "bg-dark" : "bg-white"
       // }`}
-      className={`navbar navbar-expand-lg fixed-top  dark:bg-[#11121C] bg-gray-100 on-over  headroom headroom--top headroom--not-bottom `}
+      className={`navbar navbar-expand-lg fixed-top  dark:bg-[#11121C] bg-gray-100 on-over  headroom headroom--top headroom--not-bottom dark:text-gray-100 text-gray-900`}
     >
       <div className="head_container container">
         {/* <!-- Logo --> */}
@@ -65,42 +68,46 @@ const Header = () => {
         </Link>
 
         {/* <!-- Navbar content --> */}
-        <div className="collapse navbar-collapse" id="navbarContent">
-          <div className="navbar-content-inner mt-2 ms-lg-auto d-flex justify-around  flex-lg-row align-lg-center gap-[100px]  gap-lg-10 p-2 p-lg-0">
-            <ul className="navbar-nav gap-lg-2 gap-xl-5 visible ">
-              <li className="nav-item dropdown mt-0">
-                <Link className="nav-link " href="/">
+        <div className="ml-auto">
+          <div className=" mt-2 flex    flex-row items-center gap-10  p-2 ">
+            <ul className="flex lg:gap-2 xl:gap-5  dark:text-[#fff] text-gray-900">
+              <li className="  mt-0  ">
+                <Link
+                  className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]"
+                  href="/"
+                >
                   Home
                 </Link>
               </li>
-
-              {/* <li className="nav-item">
-                <Link className={`nav-link`} href="/about">
-                  About
-                </Link>
-              </li> */}
-              {/* <li className="nav-item">
-                <Link className={`nav-link`} href="/blogs">
-                  Blog
-                </Link>
-              </li> */}
-              <li className="nav-item mt-0">
-                <Link className="nav-link " href="/use-cases">
+              <li className=" mt-0 ">
+                <Link
+                  className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
+                  href="/use-cases"
+                >
                   Use cases
                 </Link>
               </li>
-              <li className="nav-item mt-0">
-                <Link className="nav-link " href="/pricing">
+              <li className=" mt-0 ">
+                <Link
+                  className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
+                  href="/pricing"
+                >
                   Pricing
                 </Link>
               </li>
-              <li className="nav-item mt-0">
-                <Link className="nav-link " href="/contact">
+              <li className=" mt-0 ">
+                <Link
+                  className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
+                  href="/contact"
+                >
                   Contact
                 </Link>
               </li>
               {!isAuth && (
-                <Link className="nav-link " href="/login">
+                <Link
+                  className="dark:text-gray-100 text-gray-900 no-underline hover:text-[0#000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]"
+                  href="/login"
+                >
                   Login
                 </Link>
               )}
@@ -116,7 +123,7 @@ const Header = () => {
                         {userData.firstName + " " + userData.lastName}
                         <Link
                           href={role === "admin" ? "/admin" : "/dashboard"}
-                          className=" block px-4 py-2 text-sm no-underline theme-text-2 dark:hover:bg-gray-600 hover:bg-blue-100"
+                          className=" block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-0"
                         >
@@ -145,7 +152,7 @@ const Header = () => {
                           >
                             {userData.firstName + " " + userData.lastName}
                             <svg
-                              className="-mr-1 h-5 w-5 theme-text-2"
+                              className="-mr-1 h-5 w-5 dark:text-gray-100 text-gray-950"
                               viewBox="0 0 20 20"
                               fill="currentColor"
                               aria-hidden="true"
@@ -160,7 +167,7 @@ const Header = () => {
                         </div>
                         {dropdownOpen && (
                           <div
-                            className="absolute right-0 z-10 mt-0  menu-dropdown w-56 origin-top-right rounded-md  shadow-lg "
+                            className="absolute right-0 z-10 mt-0 bg-gray-100  dark:bg-gray-950 w-56 origin-top-right rounded-md  shadow-lg "
                             role="menu"
                             onMouseOver={() => setDropdownOpen(true)}
                             onMouseLeave={() => setDropdownOpen(false)}
@@ -171,7 +178,7 @@ const Header = () => {
                                 href={
                                   role === "admin" ? "/admin" : "/dashboard"
                                 }
-                                className=" block px-4 py-2 text-sm no-underline theme-text-2"
+                                className=" block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
                                 role="menuitem"
                                 id="menu-item-0"
                               >
@@ -179,7 +186,7 @@ const Header = () => {
                               </Link>
                               <Link
                                 href="/profile-review"
-                                className=" block px-4 py-2 text-sm no-underline theme-text-2"
+                                className=" block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
                                 role="menuitem"
                                 id="menu-item-1"
                               >
@@ -187,7 +194,7 @@ const Header = () => {
                               </Link>
                               <button
                                 type="button"
-                                className=" block w-full px-4 py-2 text-left text-sm"
+                                className=" block w-full px-4 py-2 text-left text-sm dark:text-gray-100 text-gray-950"
                                 role="menuitem"
                                 id="menu-item-3"
                                 onClick={() => signOut()}
@@ -202,7 +209,7 @@ const Header = () => {
 
                     {dropdownOpen && (
                       <div
-                        className="absolute  right-0 z-10 mt-0 menu-dropdown w-56 origin-top-right rounded-md  shadow-lg "
+                        className="absolute border-2 border-gray-100 dark:border-gray-950 bg-gray-100 text-gray-950  right-0 z-10 mt-0 dark:bg-gray-950 w-56 origin-top-right rounded-md  shadow-lg "
                         role="menu"
                         onMouseOver={() => setDropdownOpen(true)}
                         onMouseLeave={() => setDropdownOpen(false)}
@@ -211,7 +218,7 @@ const Header = () => {
                           {/* <!-- Active: "bg-gray-100 ", Not Active: "text-gray-700" --> */}
                           <Link
                             href={role === "admin" ? "/admin" : "/dashboard"}
-                            className=" block px-4 py-2 text-sm no-underline theme-text-2 dark:hover:bg-gray-600 hover:bg-blue-100"
+                            className=" block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-0"
                           >
@@ -219,7 +226,7 @@ const Header = () => {
                           </Link>
                           <Link
                             href="/profile-review"
-                            className=" block px-4 py-2 text-sm no-underline theme-text-2 dark:hover:bg-gray-600 hover:bg-blue-100"
+                            className=" block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-1"
                           >
@@ -227,7 +234,7 @@ const Header = () => {
                           </Link>
                           <button
                             type="button"
-                            className=" block w-full px-4 py-2 text-left text-sm dark:hover:bg-gray-600 hover:bg-blue-100"
+                            className=" block w-full px-4 py-2 text-left text-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-3"
                             onClick={() => signOut()}
@@ -251,8 +258,8 @@ const Header = () => {
         </div>
         <div>
           {/* <!-- Navbar toggler button --> */}
-          <span className="hidden lg:block xl:block">
-            <ThemeToggler />
+          <span className="hidden lg:block xl:block ml-2">
+            <ThemeChanger />
           </span>
         </div>
       </div>
