@@ -44,7 +44,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const pathname = usePathname();
   // Redux
   const userData = useSelector((state: any) => state.userData);
-  console.log(userData);
 
   const dispatch = useDispatch();
   const register = useSelector((state: any) => state.register);
@@ -619,6 +618,11 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         <h2 className="text-3xl font-bold text-center">
           Welcome {userData?.firstName + " " + userData?.lastName}
         </h2>
+
+        <VirtualBot
+          firstName={userData.firstName}
+          lastName={userData.lastName}
+        />
         <div className="my-10">{refreshBigIconRotating}</div>
         <p className="text-center mb-4">
           Please wait! We are scanning your resume.
@@ -636,7 +640,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         <div className="w-1/3">
           <DidYouKnowCard />
         </div>
-        {/* <VirtualBot/> */}
       </div>
     );
   }

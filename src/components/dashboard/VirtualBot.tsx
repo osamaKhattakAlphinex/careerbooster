@@ -29,19 +29,20 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
   );
 };
 
-interface AvatarProps {
+interface VirtualBotProps {
   firstName: string;
   lastName: string;
 }
 
-const VirtualBot: React.FC<AvatarProps> = ({ firstName, lastName }) => {
-  const [isGif, setIsGif] = useState(false);
-  const [audioPlayed, setAudioPlayed] = useState(false);
+const VirtualBot: React.FC<VirtualBotProps> = ({ firstName, lastName }) => {
+  // const [isGif, setIsGif] = useState(false);
+  // const [audioPlayed, setAudioPlayed] = useState(false);
+  const [audioPrepared, setAudioPrepared] = useState(false);
   const [response, setResponse] = useState<any>({});
   const componentRef: any = useRef(null);
   const audioFileUrl1 = "/speech1.mp3";
-  const audioFileUrl2 = "/speech2.mp3";
-  const userData = useSelector((state: any) => state.userData);
+  const audioFileUrl2 = "/speech_scan_resume.mp3";
+  // const userData = useSelector((state: any) => state.userData);
 
   const [prevUserData, setPrevUserData] = useState<{
     firstName: string;
@@ -85,24 +86,31 @@ const VirtualBot: React.FC<AvatarProps> = ({ firstName, lastName }) => {
         setResponse(res);
       });
   }, [firstName, lastName]);
+
+  useEffect(() => {
+    if (Object.keys(response).length !== 0) {
+      handleClick();
+    }
+  }, [response]);
+
   const handleClick = async () => {
     try {
-      if (isGif) {
-        setIsGif(!isGif);
-        componentRef.current.pause();
-        return;
-      }
+      // if (isGif) {
+      //   setIsGif(!isGif);
+      //   componentRef.current.pause();
+      //   return;
+      // }
       if (
         firstName === prevUserData.firstName &&
         lastName === prevUserData.lastName
       ) {
-        setIsGif(!isGif);
+        // setIsGif(!isGif);
         componentRef.current.play();
         return; // If firstName and lastName haven't changed, don't make the request again
       }
       if (response) {
-        setIsGif(!isGif);
-        setAudioPlayed(true);
+        // setIsGif(!isGif);
+        // setAudioPlayed(true);
         const audioData = response.data.data;
         const arrayBufferView = new Uint8Array(audioData);
         Promise.all([
@@ -117,14 +125,16 @@ const VirtualBot: React.FC<AvatarProps> = ({ firstName, lastName }) => {
             const audioBlob = new Blob([concatenatedBuffer], {
               type: "audio/mpeg",
             });
-
+            setAudioPrepared(true);
             const url = URL.createObjectURL(audioBlob);
             componentRef.current.src = url;
           })
           .catch((error) => {
             console.error("Error fetching or decoding audio:", error);
           });
+
         componentRef.current.load();
+        componentRef.current.playbackRate = 1.75;
         componentRef.current.play();
         // setPrevUserData({
         //   firstName: userData.firstName,
@@ -140,36 +150,41 @@ const VirtualBot: React.FC<AvatarProps> = ({ firstName, lastName }) => {
     }
   };
 
-  useEffect(() => {
-    const audio = componentRef.current;
+  // useEffect(() => {
+  //   const audio = componentRef.current;
 
-    const handleAudioEnded = () => {
-      setIsGif(false); // Set isGif to false when the audio ends
-    };
+  //   const handleAudioEnded = () => {
+  //     setIsGif(false); // Set isGif to false when the audio ends
+  //   };
 
-    audio.addEventListener("ended", handleAudioEnded);
+  //   audio.addEventListener("ended", handleAudioEnded);
 
-    return () => {
-      audio.removeEventListener("ended", handleAudioEnded);
-    };
-  }, []);
+  //   return () => {
+  //     audio.removeEventListener("ended", handleAudioEnded);
+  //   };
+  // }, []);
 
   return (
-    <div
-      className={`fixed bottom-4 right-4 mr-4 mb-4 w-20 h-20 cursor-pointer z-10 avatar-animate`}
-      onClick={handleClick}
-    >
-      <Tooltip text="Hey! Click me" audioPlayed={audioPlayed}>
-        <Image
-          src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
-          alt="GIF"
-          width={150}
-          height={150}
-          className="botImage"
-        />
-      </Tooltip>
+    <>
+      {audioPrepared && (
+        <div
+          className={`fixed bottom-4 right-4 mr-4 mb-4 w-20 h-20 cursor-pointer z-10 avatar-animate`}
+          // onClick={handleClick}
+        >
+          {/* <Tooltip text="Hey! Click me" audioPlayed={audioPlayed}> */}
+          <Image
+            // src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
+            src="/serviceBot.gif"
+            alt="GIF"
+            width={150}
+            height={150}
+            className="botImage"
+          />
+          {/* </Tooltip> */}
+        </div>
+      )}
       <audio className="hidden" ref={componentRef} controls />
-    </div>
+    </>
   );
 };
 
