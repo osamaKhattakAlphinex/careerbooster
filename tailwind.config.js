@@ -14,6 +14,8 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "light-screen-bg": "url('/assets/images/bg/1.png')",
+        "bg-striped": "url('/assets/images/shapes/stripe-light.svg')",
+        "bg-striped-dark": "url('/assets/images/shapes/stripe-dark.svg')",
       },
       screens: {
         xs: "320px",

@@ -9,7 +9,7 @@ import NextThemeProvider from "@/components/data-providers/NextThemeProvider";
 import UserDataProvider from "@/components/data-providers/UserDataProvider";
 import MainLoaderLayer from "@/components/MainLoaderLayer";
 import CreditLimitsProvider from "@/components/data-providers/CreditLimitsProvider";
-
+import "./index.css";
 export const metadata: Metadata = {
   title: "AI Resume Bot",
   description: "AI Resume Bot | Developed by NausalTech",

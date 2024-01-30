@@ -5,7 +5,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <>
-      <footer className="footer bg-striped pt-10 pt-lg-15">
+      <footer className="bg-[url('/assets/images/shapes/stripe-light.svg')] bg-[#fff] dark:bg-[#171825] bg-no-repeat dark:bg-[url('/assets/images/shapes/stripe-dark.svg')] bg-cover  no-repeat   pt-10 ">
         <Head>
           <script
             dangerouslySetInnerHTML={{
@@ -28,9 +28,11 @@ const Footer = () => {
             <div className="col-lg-9 col-xl-8 order-lg-2">
               <div className="row g-6">
                 <div className="col-md-4 col-lg-4">
-                  <div className="footer-widget text-center text-md-start">
-                    <h6 className="theme-text-2 mb-2">CareerBooster.AI</h6>
-                    <ul className="link-list list-unstyled mb-0">
+                  <div className="footer-widget text-center text-md-start text-gray-950 mb-2 dark:text-gray-100">
+                    <h6 className="text-gray-950 mb-2 dark:text-gray-100 ">
+                      CareerBooster.AI
+                    </h6>
+                    <ul className="link-list-t mb-0 pl-0 list-none">
                       <li>
                         <Link href="/about">About</Link>
                       </li>
@@ -51,8 +53,10 @@ const Footer = () => {
                 </div>
                 <div className="col-md-4 col-lg-4">
                   <div className="footer-widget text-center text-md-start">
-                    <h6 className="theme-text-2 mb-2">Use Cases</h6>
-                    <ul className="link-list list-unstyled mb-0">
+                    <h6 className=" mb-2 text-gray-950 dark:text-gray-100">
+                      Use Cases
+                    </h6>
+                    <ul className="link-list-t mb-0 pl-0 list-none">
                       <li>
                         <Link href="/use-cases">Generate Resumes</Link>
                       </li>
@@ -73,29 +77,31 @@ const Footer = () => {
                 </div>
                 <div className="col-md-4 col-lg-4">
                   <div className="footer-widget text-center text-md-start">
-                    <h6 className="theme-text-2 mb-4">Contact Us</h6>
-                    <ul className="link-list list-unstyled mb-0">
-                      <li>
+                    <h6 className="text-gray-950 dark:text-gray-100 mb-4">
+                      Contact Us
+                    </h6>
+                    <ul className=" mb-0 pl-0">
+                      <li className="hover:pl-[5px] hover:text-[#6a4dff] dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-100 inline-block text-[0.875rem] pl-0 py-2 no-underline">
                         <Link href="">
                           23 The Atria 219 Bath Road Slough SL1 4BF, United
                           Kingdom
                         </Link>
                       </li>
-                      <li>
+                      <li className="hover:pl-[5px] hover:text-[#6a4dff] dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-100 inline-block text-[0.875rem] py-2 no-underline">
                         <Link href="">+44 7933 951034</Link>
                       </li>
-                      <li>
+                      <li className="hover:pl-[5px] hover:text-[#6a4dff] dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-100 inline-block text-[0.875rem] py-2 no-underline">
                         <Link href="">support@careerbooster.ai</Link>
                       </li>
                     </ul>
-                    <ul className="list-unstyled d-flex flex-wrap align-center justify-center justify-md-start gap-3 social-list mb-0 mt-5">
+                    <ul className="list-unstyled  d-flex flex-wrap align-center justify-center justify-md-start gap-3 mb-0 mt-5">
                       <li>
                         <Link
                           href="https://www.facebook.com/careerboosterai"
                           target="_blank"
                         >
                           <svg
-                            className="theme-text-2 "
+                            className="text-[#000] dark:text-[#fff] w-4 h-4 "
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 18 18"
@@ -123,8 +129,8 @@ const Footer = () => {
                           target="_blank"
                         >
                           <svg
-                            className="w-4 h-4 
-                          theme-text-2 "
+                            className=" 
+                          text-[#000] dark:text-[#fff] w-4 h-4 "
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor"
@@ -145,7 +151,7 @@ const Footer = () => {
                           target="_blank"
                         >
                           <svg
-                            className="theme-text-2 "
+                            className="text-[#000] dark:text-[#fff] w-4 h-4"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 18 18"
@@ -180,11 +186,11 @@ const Footer = () => {
                     alt="icon"
                     className="w-20 m-0"
                   />
-                  <span className="ml-[-15px] logo-text font-semibold">
+                  <span className="ml-[-15px] text-gray-950 dark:text-[#e6f85e]  logo-text font-semibold">
                     CareerBooster
                   </span>
                 </div>
-                <p className="fs-sm mb-0 mt-4">
+                <p className="fs-sm mb-0 mt-4 text-gray-950 dark:text-gray-100">
                   We specialize in turbocharging your career by harnessing the
                   power of cutting-edge AI-infused tools, ensuring you achieve
                   peak professional excellence. Our innovative solutions are
@@ -196,7 +202,7 @@ const Footer = () => {
           </div>
 
           <div className="py-6 mt-8 mx-auto ">
-            <p className="text-center text-xs ">
+            <p className="text-center text-xs text-gray-950 dark:text-gray-100 ">
               Copyright <span> &copy; CareerBooster 2023</span>.{" "}
               <Link href="/privacy-policy" className="theme-text-2">
                 Privacy Policy
