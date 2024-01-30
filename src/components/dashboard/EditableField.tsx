@@ -3,8 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
 const normalizeValue = (value: string) => {
+  if (typeof value === "string") {
+    return value.replace(/\n/g, " ").replace(/\s\s+/g, " ").trim();
+  } else {
+    return "";
+  }
   // Remove line breaks and multiple whitespaces
-  return value.replace(/\n/g, " ").replace(/\s\s+/g, " ").trim();
 };
 const EditableField = ({
   value,
@@ -22,8 +26,8 @@ const EditableField = ({
   onSave: (value: string) => void;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  let new_value: string = normalizeValue(value);
-  const [editedValue, setEditedValue] = useState(new_value);
+  let new_value: any = normalizeValue(value);
+  const [editedValue, setEditedValue] = useState<any>(new_value);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const userData = useSelector((state: any) => state.userData);

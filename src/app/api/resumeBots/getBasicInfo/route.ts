@@ -189,6 +189,7 @@ export async function POST(req: any) {
           messages: [{ role: "user", content: inputPrompt }],
         });
 
+        console.log(response)
         // make a trainBot entry
 
         const stream = OpenAIStream(response, {
