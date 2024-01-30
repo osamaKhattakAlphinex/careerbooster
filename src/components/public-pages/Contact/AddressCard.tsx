@@ -1,11 +1,11 @@
 const AddressCard = () => {
   return (
-    <div className="row justify-center">
-      <div className="col-lg-10">
-        <div className="row row-cols-1 row-cols-md-2 gy-20 gx-lg-20">
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="50">
+    <div className="flex flex-row justify-center items-center">
+      <div className="w-10/12">
+        <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-20 lg:gap-x-20">
+          <div className="col">
             <div className="text-center">
-              <div className="icon w-18 h-18 rounded-3 p-4 d-inline-flex align-center justify-center bg-primary-dark text-dark mb-8">
+              <div className="w-18 h-18 rounded-md p-4 inline-flex items-center justify-center bg-[#E6F85E] text-[#11121c] mb-8">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -20,14 +20,14 @@ const AddressCard = () => {
                   <path d="M10.5 4.75 9 4 3 7v13l6-3 6 3 6-3v-2M9 4v13m6-2v5" />
                 </svg>
               </div>
-              <h4 className="fw-medium mb-0">
+              <h4 className=" font-medium mb-0">
                 23 The Atria 219 Bath Road Slough SL1 4BF, United Kingdom
               </h4>
             </div>
           </div>
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="100">
+          <div className="col">
             <div className="text-center">
-              <div className="icon w-18 h-18 rounded-3 p-4 d-inline-flex align-center justify-center bg-primary-dark text-dark mb-8">
+              <div className="w-18 h-18 rounded-md p-4 inline-flex items-center justify-center bg-[#E6F85E] text-[#11121c] mb-8">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -41,7 +41,7 @@ const AddressCard = () => {
                   <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2m10 3a2 2 0 0 1 2 2m-2-6a6 6 0 0 1 6 6" />
                 </svg>
               </div>
-              <h4 className="fw-medium mb-0">+44 7933 951034</h4>
+              <h4 className="font-medium mb-0">+44 7933 951034</h4>
             </div>
           </div>
         </div>
