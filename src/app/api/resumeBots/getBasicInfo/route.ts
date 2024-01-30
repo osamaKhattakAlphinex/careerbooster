@@ -20,6 +20,8 @@ import {
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 import { updateToolUsage } from "@/helpers/updateToolUsage";
+import { encodingForModel } from "js-tiktoken";
+import { updateUserTokens } from "@/helpers/updateUserTokens";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
@@ -44,7 +46,7 @@ export async function POST(req: any) {
     const inputType = reqBody?.inputType; // input type
     const jobPosition = reqBody?.jobPosition;
     const userData = reqBody?.userData;
-    const personName = reqBody?.personName
+    const personName = reqBody?.personName;
 
     const userCredits = await getUserCreditsByEmail(session?.user?.email);
     const creditsUsed = reqBody?.creditsUsed;
@@ -55,7 +57,7 @@ export async function POST(req: any) {
         return NextResponse.json(
           { result: "Insufficient Credits", success: false },
           { status: 429 }
-        )
+        );
       }
     }
 
@@ -70,6 +72,7 @@ export async function POST(req: any) {
           name: "oneLineSlogan",
           active: true,
         });
+
         let prompt = promptRec.value;
         prompt = await prompt.replaceAll("{{PersonName}}", personName);
 
@@ -105,21 +108,20 @@ export async function POST(req: any) {
         });
 
         //update total user credits
-        await updateUserTotalCredits(session?.user?.email, creditsUsed)
-        await updateToolUsage("Resume Builder", creditsUsed)
+        await updateUserTotalCredits(session?.user?.email, creditsUsed);
+        await updateToolUsage("Resume Builder", creditsUsed);
         // make a trainBot entry
         try {
           if (trainBotData) {
-
-
             const basicInfoId = makeid();
 
             const payload = {
               id: basicInfoId,
-              primarySkillsText: response?.choices[0]?.message?.content?.replace(
-                /(\r\n|\n|\r)/gm,
-                ""
-              ),
+              primarySkillsText:
+                response?.choices[0]?.message?.content?.replace(
+                  /(\r\n|\n|\r)/gm,
+                  ""
+                ),
             };
 
             const obj = {
@@ -140,7 +142,7 @@ export async function POST(req: any) {
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) { }
+        } catch (error) {}
 
         return NextResponse.json(
           {
@@ -173,33 +175,45 @@ export async function POST(req: any) {
           active: true,
         });
         const prompt = promptRec.value;
-        console.log(jobPosition);
 
-        let promptSummary = await prompt.replaceAll("{{jobPosition}}", jobPosition);
-        promptSummary = await promptSummary.replaceAll("{{PersonName}}", personName);
-        const inputPrompt = `Read ${personName}'s Resume data: ${JSON.stringify(userData)}
+        let promptSummary = await prompt.replaceAll(
+          "{{jobPosition}}",
+          jobPosition
+        );
+        promptSummary = await promptSummary.replaceAll(
+          "{{PersonName}}",
+          personName
+        );
+        const inputPrompt = `Read ${personName}'s Resume data: ${JSON.stringify(
+          userData
+        )}
       
       and then:
               ${promptSummary}`;
-
 
         const response: any = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
           stream: true,
           messages: [{ role: "user", content: inputPrompt }],
         });
-
-        console.log(response)
-        // make a trainBot entry
+        const enc = encodingForModel("gpt-3.5-turbo"); // js-tiktoken
+        let completionTokens = 0;
 
         const stream = OpenAIStream(response, {
           onStart: async () => {
-            await updateUserTotalCredits(session?.user?.email, creditsUsed)
-            await updateToolUsage("Resume Builder", creditsUsed)
-
+            await updateUserTotalCredits(session?.user?.email, creditsUsed);
+            await updateToolUsage("Resume Builder", creditsUsed);
           },
+          onToken: async (content) => {
+            const tokenList = enc.encode(content);
+            completionTokens += tokenList.length;
+          },
+          // make a trainBot entry
           onFinal: async (completions) => {
             try {
+              if (completionTokens > 0) {
+                await updateUserTokens(session?.user?.email, completionTokens);
+              }
               if (trainBotData) {
                 await startDB();
                 const summaryId = makeid();
@@ -277,10 +291,9 @@ export async function POST(req: any) {
           messages: [{ role: "user", content: inputPrompt }],
         });
 
-
         //update total records of user
-        await updateUserTotalCredits(session?.user?.email, creditsUsed)
-await updateToolUsage("Resume Builder", creditsUsed)
+        await updateUserTotalCredits(session?.user?.email, creditsUsed);
+        await updateToolUsage("Resume Builder", creditsUsed);
 
         // make a trainBot entry
 
@@ -292,10 +305,11 @@ await updateToolUsage("Resume Builder", creditsUsed)
 
             const payload = {
               id: primarySkillsId,
-              primarySkillsText: response?.choices[0]?.message?.content?.replace(
-                /(\r\n|\n|\r)/gm,
-                ""
-              ),
+              primarySkillsText:
+                response?.choices[0]?.message?.content?.replace(
+                  /(\r\n|\n|\r)/gm,
+                  ""
+                ),
             };
 
             const obj = {
@@ -315,7 +329,7 @@ await updateToolUsage("Resume Builder", creditsUsed)
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) { }
+        } catch (error) {}
 
         return NextResponse.json(
           {
@@ -334,7 +348,5 @@ await updateToolUsage("Resume Builder", creditsUsed)
         );
       }
     }
-
-
   }
 }

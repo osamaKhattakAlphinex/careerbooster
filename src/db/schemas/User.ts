@@ -41,6 +41,7 @@ const UserSchema = new Schema(
     education: [],
     experience: [],
     skills: [],
+
     role: {
       type: String,
       default: "user",
@@ -75,39 +76,18 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    userCredits: Number,
+    userCredits: {
+      type: Number,
+      default: 0,
+    },
+    OpenAiTokensUsed: {
+      type: Number,
+      default: 0,
+    },
     creditPackage: {
       type: Schema.Types.ObjectId,
       ref: "CreditPackage",
     },
-    // userPackage: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "UserPackage",
-    // },
-    // userPackageExpirationDate: {
-    //   type: Date,
-    // },
-    // userPackageUsed: {
-    //   resumes_generation: Number,
-    //   keywords_generation: Number,
-    //   headline_generation: Number,
-    //   about_generation: Number,
-    //   job_desc_generation: Number,
-    //   cover_letter_generation: Number,
-    //   email_generation: Number,
-    //   pdf_files_upload: Number,
-    //   review_resume: Number,
-    //   consulting_bids_generation: Number,
-    // },
-    // results: {
-    //   keywords: String,
-    //   headline: String,
-    //   about: String,
-    //   jobDescription: String,
-    //   coverLetter: String,
-    //   emailGeneration: String,
-    //   consultingBidsGeneration: String,
-    // },
   },
 
   { timestamps: true }
