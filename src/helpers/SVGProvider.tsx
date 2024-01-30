@@ -8,7 +8,7 @@ const SVGProvider = ({ type }: { type: string }) => {
     return (
       <>
         {theme === "dark" ? (
-          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
+          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] dark:bg-gradient-to-l dark:from-rgba-50-51-55-0.4 dark:via-transparent dark:to-rgba-70-79-111-0.2 text-[#0000ff9c] bg-[#0d6efd] dark:text-[#e6f85e] dark:border-white dark:border-opacity-10 border-opacity-25">
             <svg
               className="w-full h-full"
               xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ const SVGProvider = ({ type }: { type: string }) => {
     return (
       <>
         {theme === "dark" ? (
-          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
+          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-[#0000ff9c] dark:text-[#e6f85e] border-white border-opacity-10">
             <svg
               className="w-full h-full"
               xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +98,7 @@ const SVGProvider = ({ type }: { type: string }) => {
     return (
       <>
         {theme === "dark" ? (
-          <div className="  icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
+          <div className="  icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-[#0000ff9c] dark:text-[#e6f85e] border-white border-opacity-10">
             <svg
               className="w-full h-full"
               xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +116,7 @@ const SVGProvider = ({ type }: { type: string }) => {
             </svg>
           </div>
         ) : (
-          <div className="  icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-primary text-primary border-primary bg-opacity-10 dark:bg-gradient-3   dark:text-primary-dark  dark:border-white border-opacity-25">
+          <div className="  icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-primary text-primary border-primary bg-opacity-10 dark:bg-gradient-3   dark:text-[#0000ff9c] dark:text-[#e6f85e]  dark:border-white border-opacity-25">
             <svg
               className="w-full h-full"
               xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +141,7 @@ const SVGProvider = ({ type }: { type: string }) => {
     return (
       <>
         {theme === "dark" ? (
-          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
+          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-[#0000ff9c] dark:text-[#e6f85e] border-white border-opacity-10">
             <svg
               className="w-full h-full"
               xmlns="http://www.w3.org/2000/svg"
@@ -321,7 +321,7 @@ const SVGProvider = ({ type }: { type: string }) => {
     return (
       <>
         {theme === "dark" ? (
-          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
+          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-[#0000ff9c] dark:text-[#e6f85e] border-white border-opacity-10">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -364,7 +364,7 @@ const SVGProvider = ({ type }: { type: string }) => {
     return (
       <>
         {theme === "dark" ? (
-          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
+          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-[#0000ff9c] dark:text-[#e6f85e] border-white border-opacity-10">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -407,7 +407,7 @@ const SVGProvider = ({ type }: { type: string }) => {
     return (
       <>
         {theme === "dark" ? (
-          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
+          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-[#0000ff9c] dark:text-[#e6f85e] border-white border-opacity-10">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -448,7 +448,7 @@ const SVGProvider = ({ type }: { type: string }) => {
     return (
       <>
         {theme === "dark" ? (
-          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
+          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-[#0000ff9c] dark:text-[#e6f85e] border-white border-opacity-10">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -491,7 +491,7 @@ const SVGProvider = ({ type }: { type: string }) => {
     return (
       <>
         {theme === "dark" ? (
-          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
+          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-[#0000ff9c] dark:text-[#e6f85e] border-white border-opacity-10">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -532,7 +532,7 @@ const SVGProvider = ({ type }: { type: string }) => {
     return (
       <>
         {theme === "dark" ? (
-          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
+          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-[#0000ff9c] dark:text-[#e6f85e] border-white border-opacity-10">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -573,7 +573,7 @@ const SVGProvider = ({ type }: { type: string }) => {
     return (
       <>
         {theme === "dark" ? (
-          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
+          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-[#0000ff9c] dark:text-[#e6f85e] border-white border-opacity-10">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -616,7 +616,7 @@ const SVGProvider = ({ type }: { type: string }) => {
     return (
       <>
         {theme === "dark" ? (
-          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
+          <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-[#0000ff9c] dark:text-[#e6f85e] border-white border-opacity-10">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

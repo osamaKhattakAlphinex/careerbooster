@@ -41,7 +41,7 @@ const Header = () => {
               alt="icon"
               className="w-[42px] lg:w-[80px]  sm:m-0"
             />
-            <span className="lg:ml-[-15px] logo-text lg:font-semibold">
+            <span className="lg:ml-[-15px] logo-text lg:font-semibold dark:text-[#e6f85e] text-gray-950">
               CareerBooster
             </span>
           </div>

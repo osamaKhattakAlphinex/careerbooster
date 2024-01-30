@@ -13,7 +13,8 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "light-screen-bg": "url('/assets/images/bg/1.png')",
+        "light-screen-bg": "url('/assets/images/bg/1.jpg')",
+        "dark-screen-bg": "url('/assets/images/bg/3.png')",
       },
       screens: {
         xs: "320px",

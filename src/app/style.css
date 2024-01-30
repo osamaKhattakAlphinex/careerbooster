@@ -36711,7 +36711,7 @@ article img {
   color: #fff;
 }
 [data-bs-theme="dark"] .pricing-card {
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255);
 }
 [data-bs-theme="dark"] .pricing-card:hover,
 [data-bs-theme="dark"] .pricing-card.active {

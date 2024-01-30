@@ -5,17 +5,15 @@ import { Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 const Reviews = () => {
   return (
-    <section className="overflow-hidden  pb-10  pb-lg-15  z-[2000000] ">
+    <section className="overflow-hidden  pb-10  pb-lg-15  z-[2000000]  dark:bg-gray-950 bg-gray-100">
       <div className="container">
         <div className="row justify-center mb-18">
           <div className="col-lg-9">
             <div className="text-center">
-              <h1
-                className="theme-hero-heading md:text-[40px] text-[24px]"
-                data-aos="fade-up-sm"
-                data-aos-delay="50"
-              >
-                <span className="theme-text">CareerBooster.AI </span>
+              <h1 className="dark:text-gray-100 text-gray-950 md:text-[40px] text-[24px]">
+                <span className="text-[#6a4dff] dark:text-[#e6f85e]">
+                  CareerBooster.AI{" "}
+                </span>
                 Received
                 <Image
                   width={48}
@@ -24,7 +22,7 @@ const Reviews = () => {
                   alt=""
                   className="m-auto"
                 />{" "}
-                4.8/5 Stars in Over 1,000+ Reviews.
+                4.8/5 in Over 1,000+ Reviews.
               </h1>
             </div>
           </div>
@@ -59,9 +57,9 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] theme-rating-card border-opacity-10">
+            <div className=" rounded h-full p-6 border-[1px]  bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-circle overflow-hidden">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
                     height={48}
@@ -72,16 +70,16 @@ const Reviews = () => {
                 </div>
                 <div className="">
                   <h6 className=" mb-1">John Smith</h6>
-                  <p className="mb-0 fs-sm">Chief Executive Officer</p>
+                  <p className="mb-0 text-sm">Chief Executive Officer</p>
                 </div>
               </div>
               <div className="">
-                <div className="stars d-flex items-center gap-1 mb-3">
+                <div className=" flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -89,7 +87,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -97,7 +95,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -105,7 +103,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -113,7 +111,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -131,9 +129,9 @@ const Reviews = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-circle overflow-hidden">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
                     height={48}
@@ -144,16 +142,16 @@ const Reviews = () => {
                 </div>
                 <div className="">
                   <h6 className=" mb-1">Sarah Johnson</h6>
-                  <p className="mb-0 fs-sm">Senior Financial Analyst</p>
+                  <p className="mb-0 text-sm">Senior Financial Analyst</p>
                 </div>
               </div>
               <div className="">
-                <div className="stars d-flex items-center gap-1 mb-3">
+                <div className=" d-flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -161,7 +159,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -169,7 +167,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -177,7 +175,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -185,7 +183,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -203,9 +201,9 @@ const Reviews = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-circle overflow-hidden">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
                     height={48}
@@ -216,16 +214,16 @@ const Reviews = () => {
                 </div>
                 <div className="">
                   <h6 className=" mb-1">David Thompson</h6>
-                  <p className="mb-0 fs-sm">VP of Marketing</p>
+                  <p className="mb-0 text-sm">VP of Marketing</p>
                 </div>
               </div>
               <div className="">
-                <div className="stars d-flex items-center gap-1 mb-3">
+                <div className=" d-flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -233,7 +231,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -241,7 +239,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -249,7 +247,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -257,7 +255,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -276,9 +274,9 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-circle overflow-hidden">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
                     height={48}
@@ -289,16 +287,16 @@ const Reviews = () => {
                 </div>
                 <div className="">
                   <h6 className=" mb-1">Lisa Martinez</h6>
-                  <p className="mb-0 fs-sm">Chief Technology Officer</p>
+                  <p className="mb-0 text-sm">Chief Technology Officer</p>
                 </div>
               </div>
               <div className="">
-                <div className="stars d-flex items-center gap-1 mb-3">
+                <div className=" d-flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -306,7 +304,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -314,7 +312,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -322,7 +320,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -330,7 +328,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -349,9 +347,9 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-circle overflow-hidden">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
                     height={48}
@@ -362,16 +360,16 @@ const Reviews = () => {
                 </div>
                 <div className="">
                   <h6 className=" mb-1">Michael Anderson</h6>
-                  <p className="mb-0 fs-sm">Director of Operations</p>
+                  <p className="mb-0 text-sm">Director of Operations</p>
                 </div>
               </div>
               <div className="">
-                <div className="stars d-flex items-center gap-1 mb-3">
+                <div className=" d-flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -379,7 +377,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -387,7 +385,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -395,7 +393,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -403,7 +401,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -422,9 +420,9 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-circle overflow-hidden">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
                     height={48}
@@ -435,16 +433,16 @@ const Reviews = () => {
                 </div>
                 <div className="">
                   <h6 className=" mb-1">Jennifer Lewis</h6>
-                  <p className="mb-0 fs-sm">Senior Legal Counsel</p>
+                  <p className="mb-0 text-sm">Senior Legal Counsel</p>
                 </div>
               </div>
               <div className="">
-                <div className="stars d-flex items-center gap-1 mb-3">
+                <div className=" d-flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -452,7 +450,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -460,7 +458,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -468,7 +466,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -476,7 +474,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -494,9 +492,9 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-circle overflow-hidden">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
                     height={48}
@@ -507,16 +505,16 @@ const Reviews = () => {
                 </div>
                 <div className="">
                   <h6 className=" mb-1">Robert Turner</h6>
-                  <p className="mb-0 fs-sm">Chief Human Resources Officer</p>
+                  <p className="mb-0 text-sm">Chief Human Resources Officer</p>
                 </div>
               </div>
               <div className="">
-                <div className="stars d-flex items-center gap-1 mb-3">
+                <div className=" d-flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -524,7 +522,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -532,7 +530,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -540,7 +538,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -548,7 +546,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -565,9 +563,9 @@ const Reviews = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-circle overflow-hidden">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
                     height={48}
@@ -578,16 +576,16 @@ const Reviews = () => {
                 </div>
                 <div className="">
                   <h6 className=" mb-1">Emily Clark*</h6>
-                  <p className="mb-0 fs-sm">Director of Sales</p>
+                  <p className="mb-0 text-sm">Director of Sales</p>
                 </div>
               </div>
               <div className="">
-                <div className="stars d-flex items-center gap-1 mb-3">
+                <div className=" d-flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -595,7 +593,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -603,7 +601,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -611,7 +609,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -619,7 +617,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -637,9 +635,9 @@ const Reviews = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] theme-rating card border-opacity-10">
+            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
               <div className="d-flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-circle overflow-hidden">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
                     height={48}
@@ -650,16 +648,16 @@ const Reviews = () => {
                 </div>
                 <div className="">
                   <h6 className=" mb-1">Daniel White</h6>
-                  <p className="mb-0 fs-sm">Chief Financial Officer</p>
+                  <p className="mb-0 text-sm">Chief Financial Officer</p>
                 </div>
               </div>
               <div className="">
-                <div className="stars d-flex items-center gap-1 mb-3">
+                <div className=" d-flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -667,7 +665,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -675,7 +673,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -683,7 +681,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>
@@ -691,7 +689,7 @@ const Reviews = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 15 14"
-                    className="w-4 h-4 theme-text"
+                    className="w-4 h-4 text-[#6a4dff] dark:text-[#e6f85e]"
                   >
                     <path d="m4.824 4.225-4.253.617-.075.015A.667.667 0 0 0 .202 5.98l3.082 3-.727 4.236-.009.073a.667.667 0 0 0 .976.63l3.804-2 3.796 2 .066.03a.666.666 0 0 0 .902-.733l-.728-4.237 3.083-3 .052-.056a.667.667 0 0 0-.422-1.08l-4.253-.618L7.922.372a.667.667 0 0 0-1.196 0L4.824 4.225Z" />
                   </svg>

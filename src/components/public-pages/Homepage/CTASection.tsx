@@ -2,13 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 const CTASection = () => {
   return (
-    <section
-      className="cta-section py-10 py-lg-15"
-      data-aos="fade-up-sm"
-      data-aos-offset="150"
-    >
+    <section className="dark:bg-gray-950 bg-gray-100 py-10 py-lg-15 ">
       <div className="container">
-        <div className="rounded-5 border-[1px] position-relative z-1 cta">
+        <div className="rounded-5 border-[1px] relative z-1 dark:bg-[url('/assets/images/bg/3.png')] bg-[url('/assets/images/bg/1.jpg')]">
           <div className="animate-scale position-absolute w-full h-full z-n1">
             <Image
               width={927}
@@ -21,17 +17,22 @@ const CTASection = () => {
           <div className="row justify-center">
             <div className="col-lg-10">
               <div className="text-center pt-6 px-6 pt-md-10 px-md-10 pt-lg-18 px-lg-18">
-                <h5 className="theme-text">Revolutionize Your Job Hunt</h5>
-                <h2 className="mb-6 theme-hero-heading md:text-[40px] text-[24px]">
+                <h5 className="text-[#6a4dff] dark:text-[#e6f85e]">
+                  Revolutionize Your Job Hunt
+                </h5>
+                <h2 className="mb-6 dark:text-gray-100 text-gray-950  md:text-[40px] text-[24px]">
                   Discover the Game-Changing
-                  <span className="theme-text"> Resume Strategy </span>
+                  <span className="text-[#6a4dff] dark:text-[#e6f85e]">
+                    {" "}
+                    Resume Strategy{" "}
+                  </span>
                   You{"'"}ve Been Missing!
                 </h2>
-                <h5 className="theme-hero-heading mb-6 ">
+                <h5 className="dark:text-gray-100 text-gray-950  mb-6 ">
                   Unlock Success: Tailor Resumes for Each Job in Mere Minutes
                 </h5>
 
-                <p>
+                <p className="dark:text-gray-100 text-gray-950 pb-5">
                   Are you stuck in the resume rut of using a single generic
                   document for every job application? Break free from old-school
                   methods and learn the secret to crafting job-specific resumes
@@ -39,7 +40,10 @@ const CTASection = () => {
                   dream job - embrace the future of job hunting now!
                 </p>
 
-                <Link href="/register" className="btn theme-btn">
+                <Link
+                  href="/register"
+                  className="rounded-2 dark:text-gray-950 no-underline px-6 py-3 bg-[#6a4dff] text-gray-100 dark:bg-[#e6f85e]"
+                >
                   Get Started Free
                 </Link>
                 <div className="cta-image-container mt-10">
@@ -47,7 +51,7 @@ const CTASection = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 34 90"
-                    className="theme-text arrow-shape"
+                    className="text-[#6a4dff] dark:text-[#e6f85e] arrow-shape"
                   >
                     <path
                       fill="currentColor"

@@ -2,25 +2,25 @@ import Link from "next/link";
 
 const RewardsSection = () => {
   return (
-    <section className="reward pb-10">
+    <section className="dark:bg-[#11121C] bg-gray-100 pb-10">
       <div
-        className="row g-6 gx-lg-14 gx-xl-20 align-center mt-10"
+        className="row g-6 gx-lg-14 gx-xl-20 align-center pt-5"
         style={{ width: "100%" }}
       >
         <div className="col-md-10 mx-auto">
           <div className="reward-content text-center">
-            <h1 className=" md:text-[40px] text-[24px] px-5">
+            <h1 className=" md:text-[40px] text-[24px] px-5 dark:text-gray-100 text-gray-950">
               Get Ready for a $10k Reward - Prove Us Wrong!
             </h1>
-            <h4 className="py-3 md:px-0 px-5">
+            <h4 className="py-3 md:px-0 px-5 dark:text-gray-100 text-gray-950">
               We{"'"}re so confident in our AI tool that we dare you to find a
               better one. If you do, We{"'"}ll hand you $10,000. Challenge
               accepted?
             </h4>
-            <h4 className="pb-3 md:px-0 px-5">
+            <h4 className="pb-3 md:px-0 px-5 dark:text-gray-100 text-gray-950">
               Why CareerBooster is better than GPT and Other Tools?
             </h4>
-            <h4 className="md:px-0 px-5">
+            <h4 className="md:px-0 px-5 dark:text-gray-100 text-gray-950">
               At CareerBooster, we understand the value of AI, including GPT, in
               crafting exceptional resumes. However, here{"'"}s why our AI
               stands out
@@ -28,12 +28,12 @@ const RewardsSection = () => {
           </div>
           <div className="reward-list col-md-10 mx-auto">
             <ul className="list-unstyled list-check mb-8 mt-10 md:px-0 px-5">
-              <li className="font-16 mb-5">
+              <li className="font-16 mb-5 dark:text-gray-100 text-gray-950">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 18 18"
-                  className="icon text-primary-dark"
+                  className="icon text-[#0000ff9c] dark:text-[#e6f85e]"
                 >
                   <g>
                     <path
@@ -52,12 +52,12 @@ const RewardsSection = () => {
                   senior-level resumes, following a research-based framework.
                 </span>
               </li>
-              <li className="font-16 mb-5">
+              <li className="font-16 mb-5 dark:text-gray-100 text-gray-950">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 18 18"
-                  className="icon text-primary-dark"
+                  className="icon text-[#0000ff9c] dark:text-[#e6f85e]"
                 >
                   <g>
                     <path
@@ -76,12 +76,12 @@ const RewardsSection = () => {
                   for intricate prompts.
                 </span>
               </li>
-              <li className="font-16 mb-5">
+              <li className="font-16 mb-5 dark:text-gray-100 text-gray-950">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 18 18"
-                  className="icon text-primary-dark"
+                  className="icon text-[#0000ff9c] dark:text-[#e6f85e]"
                 >
                   <g>
                     <path
@@ -101,14 +101,17 @@ const RewardsSection = () => {
                 </span>
               </li>
             </ul>
-            <p className="text-center md:px-0 px-5 font-16">
+            <p className="text-center md:px-0 px-5 font-16 dark:text-gray-100 text-gray-950">
               Choose CareerBooster for AI-powered resume excellence tailored to
               your senior-level career goals. Say goodbye to complex prompts and
               slow processes—experience efficiency and quality with us.
             </p>
           </div>
           <div className="col-md-12 text-center my-10">
-            <Link href="/register" className="btn theme-outline-btn">
+            <Link
+              href="/register"
+              className="no-underline px-5 py-3 rounded-md text-[#6a4dff] dark:text-[#e6f85e] border-[1px] border-[#6a4dff] hover:bg-[#6a4dff] hover:border-none hover:text-gray-100 dark:bg-[#11121c] dark:border-[#e6f85e]  dark:hover:bg-[#e6f85e] dark:hover:border-none dark:hover:text-[#11121c] "
+            >
               Get started
             </Link>
           </div>

@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 export default function PricingPage() {
   return (
     <>
-      <main className="flex-grow-1 mb-20">
+      <main className="flex-grow-1 pb-20 dark:bg-gray-950 bg-gray-100">
         {/* <!-- Page header --> */}
         <PageHeader secondTitle="Pricing" />
 

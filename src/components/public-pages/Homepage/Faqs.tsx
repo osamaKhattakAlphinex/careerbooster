@@ -67,15 +67,12 @@ function FAQItem(props: any) {
   };
 
   return (
-    <>
-      <div
-        className="accordion accordion-flush d-flex flex-column gap-6  "
-        id="faqAccordion"
-      >
-        <div className="accordion-item lg:mb-[48px] mb-[24px]">
-          <h2 className="accordion-header ">
+    <section className="dark:bg-gray-950 bg-gray-100">
+      <div className=" flex flex-col gap-6 ">
+        <div className=" lg:mb-[48px] mb-[24px]">
+          <h2 className=" ">
             <button
-              className="theme-text-2 accordion-btn flex flex-row text-left justify-center  items-center lg:text-[30px] text-[18px]"
+              className="dark:text-gray-100 text-gray-950 hover:text-[#6a4dff] dark:hover:text-[#e6f85e] flex flex-row text-left justify-center  items-center lg:text-[30px] text-[18px] focus:text-[#6a4dff] dark:focus:text-[#e6f85e]"
               onClick={toggleFAQ}
               type="button"
               //   data-bs-toggle="collapse"
@@ -120,32 +117,29 @@ function FAQItem(props: any) {
           </h2>
           {isOpen && (
             <div
-              id="faq-collapseOne"
-              className="accordion-collapse"
+              className=""
               // data-bs-parent="#faqAccordion"
             >
-              <div className="accordion-body ">{props.answer}</div>
+              <div className=" dark:text-gray-100 text-gray-950 pt-2">
+                {props.answer}
+              </div>
             </div>
           )}
-          <hr />
+          <hr className=" dark:text-gray-100 text-gray-950" />
         </div>
       </div>
-    </>
+    </section>
   );
 }
 
 function FAQList() {
   return (
-    <section className="py-10 py-lg-15">
+    <section className="py-10 lg:py-15 dark:bg-gray-950 bg-gray-100">
       <div className="container">
-        <div className="row justify-center mb-18">
-          <div className="col-lg-10">
+        <div className="flex justify-center mb-18">
+          <div className="flex flex-col w-10/12">
             <div className="text-center">
-              <h1
-                className="mb-0 theme-text-2 md:text-[48px] text-[24px]"
-                data-aos="fade-up-sm"
-                data-aos-delay="50"
-              >
+              <h1 className="mb-0 dark:text-gray-100 text-gray-950 md:text-[48px] text-[24px]">
                 Questions About CareerBooster.AI?
                 <br className="d-none d-md-block" />
                 We have Answers!
@@ -155,7 +149,7 @@ function FAQList() {
         </div>
         <div className="faq-list">
           {faqs.map((faq, index) => (
-            <div className="col-md-8 mx-auto" key={index}>
+            <div className="flex flex-col w-8/12 mx-auto" key={index}>
               <FAQItem
                 isOpen={index === 0}
                 question={faq.question}
