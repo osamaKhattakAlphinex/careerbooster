@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 export default function UseCasesPage() {
   return (
     <>
-      <main className="flex-grow-1 mb-20">
+      <main className="flex-grow-1 mb-20 bg-[#fff] dark:bg-[#171825]">
         {/* <!-- Page header --> */}
         <PageHeader title="Use Cases" />
 
