@@ -14,10 +14,12 @@ type Props = {
 
 const TemplateSlider = ({ templates }: Props) => {
   const params = useSearchParams();
+
+  console.log(templates, "template slider");
   const templateId: number = parseInt(params.get("templateId") || "0");
 
   return (
-    <div className="p-4 flex flex-row items-start justify-start gap-6 flex-wrap box-border ">
+    <div className="box-border flex flex-row flex-wrap items-start justify-start gap-6 p-4 ">
       <Swiper
         slidesPerView={5}
         spaceBetween={10}
@@ -73,9 +75,9 @@ const TemplateSlider = ({ templates }: Props) => {
               {templateId === index + 1 ? (
                 ""
               ) : (
-                <div className=" object-cover group-hover:grid hidden bg-slate-600/60 text-white  absolute top-0 left-0 h-full w-full  overflow-hidden  place-content-center">
+                <div className="absolute top-0 left-0 hidden object-cover w-full h-full overflow-hidden text-white group-hover:grid bg-slate-600/60 place-content-center">
                   {/* {template.category === "premium" && (
-                    <div className="absolute rounded-full right-1 top-1 h-6 w-6 grid place-content-center bg-yellow-600">
+                    <div className="absolute grid w-6 h-6 bg-yellow-600 rounded-full right-1 top-1 place-content-center">
                       {crownIcon}
                     </div>
                   )} */}
@@ -98,7 +100,7 @@ const TemplateSlider = ({ templates }: Props) => {
 
               <div className="text-center h-full w-full absolute inset-0 flex justify-center items-center text-[#000] text-sm font-medium">
                 {templateId === index + 1 && (
-                  <span className="flex justify-center items-center w-12 h-12 bg-blue-600 rounded-full">
+                  <span className="flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 
 const normalizeValue = (value: string) => {
   if (typeof value === "string") {
+    // Remove line breaks and multiple whitespaces
     return value.replace(/\n/g, " ").replace(/\s\s+/g, " ").trim();
   } else {
     return "";
   }
-  // Remove line breaks and multiple whitespaces
 };
 const EditableField = ({
   value,

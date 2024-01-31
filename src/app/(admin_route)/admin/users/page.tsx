@@ -28,6 +28,7 @@ type User = {
   userPackageUsed: any;
   usedPackage: any;
   _id: any;
+  OpenAiTokensUsed: any;
 };
 
 const UsersPage = () => {
@@ -63,6 +64,13 @@ const UsersPage = () => {
       header: () => "Email",
       cell: (info) => info.renderValue(),
     }),
+
+    columnHelper.accessor("OpenAiTokensUsed", {
+      id: "OpenAiTokensUsed",
+      header: () => "Open AI Tokens Used",
+      cell: (info) => info.renderValue(),
+    }),
+
     columnHelper.accessor("contact.country", {
       id: "contact_country",
       header: () => "Country",

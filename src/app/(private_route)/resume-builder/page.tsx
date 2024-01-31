@@ -354,7 +354,7 @@ const ResumeBuilder = () => {
           />
           {showAlert && (
             <div
-              className="fixed bottom-10 right-10 flex flex-row gap-2 justify-center items-center bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white transition-opacity cursor-pointer"
+              className="fixed flex flex-row items-center justify-center gap-2 px-4 py-2 text-white transition-opacity bg-green-600 rounded-lg cursor-pointer bottom-10 right-10 hover:bg-green-700"
               onClick={() => setShowAlert(false)}
             >
               {checkIconSmall}
@@ -365,22 +365,22 @@ const ResumeBuilder = () => {
             getConsent={getConsent}
             availablePercentage={availablePercentage}
           />
-          <div className="flex justify-center items-center fixed bottom-0">
+          <div className="fixed bottom-0 flex items-center justify-center">
             <Confetti active={confettingRunning} config={confettiConfig} />
           </div>
           {finished && (
-            <div className="text-white space-y-3">
+            <div className="space-y-3 text-white">
               {/* <p>
                 We have generated free text basic resume for you for further
                 design templates click here
               </p> */}
-              <div className="flex justify-between items-center">
-                <h2 className=" text-base font-bold my-3 dark:text-gray-100 text-gray-950">
+              <div className="flex items-center justify-between">
+                <h2 className="my-3 text-base font-bold dark:text-gray-100 text-gray-950">
                   Design Templates
                 </h2>
                 <Link
                   href="/resume-builder/templates"
-                  className="no-underline  text-white rounded-lg overflow-hidden"
+                  className="overflow-hidden text-white no-underline rounded-lg"
                 >
                   <div
                     className={` font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
@@ -389,49 +389,52 @@ const ResumeBuilder = () => {
                   </div>
                 </Link>
               </div>
-              <div className="flex flex-wrap justify-center gap-4 items-center pl-5">
-                {ALL_TEMPLATES.slice(0, 6).map((template, index) => (
-                  <div
-                    key={`template-${index}`}
-                    className="box-border group relative  rounded-lg flex items-center overflow-hidden "
-                  >
-                    {/* {template.category === "premium" && (
-                      <div className="absolute rounded-full right-1 top-1 h-6 w-6 grid place-content-center bg-yellow-600">
+              <div className="flex flex-wrap items-center justify-center gap-4 pl-5">
+                {ALL_TEMPLATES.slice(0, 6).map((template, index) => {
+                  if (!template.active) return "";
+                  return (
+                    <div
+                      key={`template-${index}`}
+                      className="box-border relative flex items-center overflow-hidden rounded-lg group "
+                    >
+                      {/* {template.category === "premium" && (
+                      <div className="absolute grid w-6 h-6 bg-yellow-600 rounded-full right-1 top-1 place-content-center">
                         {crownIcon}
                       </div>
                     )} */}
-                    <Link
-                      className="no-underline"
-                      href={{
-                        pathname: "resume-builder/templates/template",
-                        query: { templateId: template.id },
-                      }}
-                    >
-                      <div className=" group-hover:grid hidden bg-slate-600/60 text-white  absolute top-0 left-0 h-full w-full rounded-lg  overflow-hidden  place-content-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-8 h-8"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
-                          />
-                        </svg>
-                      </div>
-                      <Image
-                        src={template.preview}
-                        alt={`template-${index}`}
-                        height={200}
-                        width={150}
-                      />
-                    </Link>
-                  </div>
-                ))}
+                      <Link
+                        className="no-underline"
+                        href={{
+                          pathname: "resume-builder/templates/template",
+                          query: { templateId: template.id },
+                        }}
+                      >
+                        <div className="absolute top-0 left-0 hidden w-full h-full overflow-hidden text-white rounded-lg group-hover:grid bg-slate-600/60 place-content-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-8 h-8"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
+                            />
+                          </svg>
+                        </div>
+                        <Image
+                          src={template.preview}
+                          alt={`template-${index}`}
+                          height={200}
+                          width={150}
+                        />
+                      </Link>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
