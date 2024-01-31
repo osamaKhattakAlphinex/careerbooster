@@ -16,7 +16,7 @@ const ToolUsage: React.FC<ToolUsageProps> = ({
 }) => {
   return (
     <div className="w-3/12 xs:w-full  sm:w-full md:w-4/12 lg:w-3/12 xl:w-3/12 px-4 py-3 h-full">
-      <div className=" w-[3.9rem] h-[3.9rem] my-5  flex-shrink-0 align-center justify-center rounded-xl border-[1px] p-2  dark:text-[#e6f85e] text-[#6a4dff] dark:border-gray-600 border-gray-700 border-opacity-10 bg-[#464f6f] bg-opacity-[0.1] dark:bg-opacity-[0.2] ">
+      <div className=" w-14 h-14 my-5  flex-shrink-0 align-center justify-center rounded-xl border-[1px] p-2  dark:text-[#e6f85e] text-[#6a4dff] dark:border-gray-600 border-gray-700 border-opacity-10 bg-[#464f6f] bg-opacity-[0.1] dark:bg-opacity-[0.2] ">
         {icon}
       </div>
       <div className="">
