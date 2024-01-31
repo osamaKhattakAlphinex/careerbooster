@@ -3,9 +3,13 @@
 @import "./styles/buttons.css";
 @layer components {
     .link-list-t a {
-            @apply text-[#11121c] dark:text-gray-100 inline-block text-[0.875rem] py-2 px-0 no-underline;
-        }
-        .link-list-t a:hover {
+            @apply text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] py-1 px-0 no-underline;
+    }
+    .link-list-t a:hover {
             @apply pl-[5px] text-[#6a4dff] dark:text-[#e6f85e];
+    }
+        .h3-t {
+            @apply font-semibold text-[#000] dark:text-[#fff]  text-center leading-5 text-4xl ;
         }
+        
 }
