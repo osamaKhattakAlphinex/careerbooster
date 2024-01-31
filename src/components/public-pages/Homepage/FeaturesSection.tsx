@@ -99,32 +99,20 @@ const FeaturesSection = () => {
     },
   ];
   return (
-    <section className="pb-15 dark:pt-0 pt-8 dark:bg-[#11121C] bg-gray-100">
+    <section className="pb-15 dark:pt-0 pt-8 dark:bg-gray-950 bg-gray-100">
       <div className="container">
         <div className="text-center mb-18">
-          <h4
-            className="mb-5 dark:text-gray-100 text-gray-950 md:text-[24px] text-[17px]"
-            data-aos="fade-up-sm"
-            data-aos-delay="50"
-          >
+          <h4 className="mb-5 dark:text-gray-100 text-gray-950 font-bold md:text-[24px] text-[17px]">
             Uncover the Secret to Superior Resumes
           </h4>
-          <h1
-            className="mb-5  dark:text-gray-100 text-gray-950 md:text-[40px] text-[24px]"
-            data-aos="fade-up-sm"
-            data-aos-delay="50"
-          >
+          <h1 className="mb-5  dark:text-gray-100 text-gray-950 font-bold md:text-[40px] text-[24px]">
             Why Trust AI for Your Executive Resume?
             <br className="d-none d-lg-block" />
           </h1>
-          <h4
-            className="mb-0 dark:text-gray-100 text-gray-950 md:text-[24px] text-[17px]"
-            data-aos="fade-up-sm"
-            data-aos-delay="50"
-          >
+          <h4 className="mb-0 dark:text-gray-100 text-gray-950 font-bold md:text-[24px] text-[17px]">
             The Game-Changing Advantages You Never Knew About
           </h4>
-          <p className="py-10 w-md-3quarter mx-auto dark:text-gray-100 text-gray-950">
+          <p className="py-10 w-[75%] mx-auto dark:text-gray-100 text-gray-950 pb-10">
             In today{"'"}s competitive job market, landing your dream role isn
             {"'"}t just about qualifications and experience; It{"'"}s about
             making sure your resume stands out. But here{"'"}s the catch: before
@@ -137,13 +125,13 @@ const FeaturesSection = () => {
         <div className="grid grid-cols-2 mr-6">
           {singleFeatureData.map((item) => {
             return (
-              <div className="flex col-span-1 mb-6 px-4">
+              <div className="flex col-span-1 mb-6 px-4 pt-10">
                 <div className="flex gap-5">
-                  <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] dark:bg-[#1E1F27] text-[#0000ff9c] bg-[#E5E3F7] dark:text-[#e6f85e] dark:border-white border-[#c7bef9] dark:border-opacity-10 border-opacity-25">
+                  <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-lg p-2 border-[1px] dark:bg-[#1E1F27] text-[#0000ff9c] bg-[#E5E3F7] dark:text-[#e6f85e] dark:border-white border-[#c7bef9] dark:border-opacity-10 border-opacity-25">
                     {item.svg}
                   </div>
                   <div className="content">
-                    <h4 className="mb-4  dark:text-gray-100 text-gray-950 ">
+                    <h4 className="mb-4  text-[1.5rem] font-[600] dark:text-gray-100 text-gray-950 ">
                       {item.heading}
                     </h4>
                     <p className="w-md-3quarter pr-lg-5 dark:text-gray-100 text-gray-950">
@@ -157,10 +145,13 @@ const FeaturesSection = () => {
         </div>
 
         <div className="text-center ">
-          <h5 className="my-10">
+          <h5 className="my-10 dark:text-gray-100 text-gray-950 font-[600] text-[1.25rem]">
             Ready to craft a resume that impresses both bots and humans?
           </h5>
-          <Link href="/register" className="btn theme-btn">
+          <Link
+            href="/register"
+            className="dark:bg-[#e6f85e] dark:text-gray-950  text-[16px] font-[500] px-[1.5rem] py-[.85rem] bg-[#6a4dff] text-gray-100 rounded-md "
+          >
             Let{"'"}s get started!
           </Link>
         </div>

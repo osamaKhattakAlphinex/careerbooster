@@ -195,7 +195,10 @@ const Footer = () => {
           <div className="py-6 mt-8 mx-auto ">
             <p className="text-center text-xs text-gray-950 dark:text-gray-100 ">
               Copyright <span> &copy; CareerBooster 2023</span>.{" "}
-              <Link href="/privacy-policy" className="theme-text-2">
+              <Link
+                href="/privacy-policy"
+                className="text-[#6a4dff] dark:text-[#e6f85e] mx-4 no-underline hover:text-blue-400 dark:hover:text-blue-400"
+              >
                 Privacy Policy
               </Link>{" "}
               &nbsp;

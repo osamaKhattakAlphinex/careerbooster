@@ -17,7 +17,7 @@ export default function PublicLayout({
   return (
     <>
       <Header />
-      <div className="max-w-full bg-[#fff] dark:bg-[#171825]">{children}</div>
+      <div className="max-w-full bg-gray-100 dark:bg-gray-950">{children}</div>
       <Footer />
     </>
   );

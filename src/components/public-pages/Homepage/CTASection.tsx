@@ -4,23 +4,23 @@ const CTASection = () => {
   return (
     <section className="dark:bg-gray-950 bg-gray-100 py-10 py-lg-15 ">
       <div className="container">
-        <div className="rounded-5 border-[1px] relative z-1 dark:bg-[url('/assets/images/bg/3.png')] bg-[url('/assets/images/bg/1.jpg')]">
-          <div className="animate-scale position-absolute w-full h-full z-n1">
+        <div className="rounded-2xl border-[1px] relative z-1 dark:bg-[url('/assets/images/bg/bg-4.png')] bg-[url('/assets/images/bg/1.jpg')] overflow-hidden">
+          <div className="animate-scale absolute w-full h-full z-[1]  m-auto">
             <Image
               width={927}
               height={445}
               src="assets/images/shapes/blurry-shape-4.svg"
               alt=""
-              className="bg-shape img-fluid"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-auto opacity-50 z-[-1] "
             />
           </div>
-          <div className="row justify-center">
-            <div className="col-lg-10">
-              <div className="text-center pt-6 px-6 pt-md-10 px-md-10 pt-lg-18 px-lg-18">
-                <h5 className="text-[#6a4dff] dark:text-[#e6f85e]">
+          <div className="flex justify-center">
+            <div className="flex flex-col w-10/12">
+              <div className="text-center pt-6 px-10 md:pt-10 md:px-10 lg:pt-20 lg:px-20">
+                <h5 className="text-[#6a4dff] dark:text-[#e6f85e] text-[1.25rem] font-semibold">
                   Revolutionize Your Job Hunt
                 </h5>
-                <h2 className="mb-6 dark:text-gray-100 text-gray-950  md:text-[40px] text-[24px]">
+                <h2 className="mb-6 dark:text-gray-100 text-gray-950  md:text-[40px] text-[24px] font-semibold">
                   Discover the Game-Changing
                   <span className="text-[#6a4dff] dark:text-[#e6f85e]">
                     {" "}
@@ -28,11 +28,11 @@ const CTASection = () => {
                   </span>
                   You{"'"}ve Been Missing!
                 </h2>
-                <h5 className="dark:text-gray-100 text-gray-950  mb-6 ">
+                <h5 className="dark:text-gray-100 text-gray-950  mb-6 font-semibold text-[1.25rem] ">
                   Unlock Success: Tailor Resumes for Each Job in Mere Minutes
                 </h5>
 
-                <p className="dark:text-gray-100 text-gray-950 pb-5">
+                <p className="dark:text-gray-100 text-gray-950 pb-5 text-base mb-6">
                   Are you stuck in the resume rut of using a single generic
                   document for every job application? Break free from old-school
                   methods and learn the secret to crafting job-specific resumes
@@ -42,16 +42,16 @@ const CTASection = () => {
 
                 <Link
                   href="/register"
-                  className="rounded-2 dark:text-gray-950 no-underline px-6 py-3 bg-[#6a4dff] text-gray-100 dark:bg-[#e6f85e]"
+                  className="rounded-lg dark:text-gray-950 no-underline px-6 py-4 bg-[#6a4dff] text-gray-100 dark:bg-[#e6f85e]"
                 >
                   Get Started Free
                 </Link>
-                <div className="cta-image-container mt-10">
+                <div className="relative  mt-10 rounded-2xl border-[1px] border-[#6a4dff] dark:border-[#e6f85e]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 34 90"
-                    className="text-[#6a4dff] dark:text-[#e6f85e] arrow-shape"
+                    className="text-[#6a4dff] dark:text-[#e6f85e] absolute top-[-3rem] left-[60%] transform[-translate-x-1/2] w-[33px] h-[90px]"
                   >
                     <path
                       fill="currentColor"
@@ -80,7 +80,7 @@ const CTASection = () => {
                       height={712}
                       src="/assets/images/screens/cover-letter.png"
                       alt=""
-                      className="img-fluid w-full h-full object-cover"
+                      className="img-fluid w-full h-full object-cover rounded-2xl p-2"
                     />
                   </div>
                   <div className="cta-img rounded-top-4 dark:hidden block">
@@ -89,7 +89,7 @@ const CTASection = () => {
                       height={712}
                       src="/assets/images/screens/cover-letter-light.png"
                       alt=""
-                      className="img-fluid w-full h-full object-cover"
+                      className="img-fluid w-full h-full object-cover rounded-2xl p-2"
                     />
                   </div>
                 </div>

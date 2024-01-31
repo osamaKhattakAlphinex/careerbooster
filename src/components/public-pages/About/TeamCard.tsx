@@ -3,33 +3,31 @@ import Link from "next/link";
 
 const TeamCard = () => {
   return (
-    <section className="py-10 py-lg-15">
+    <section className="py-10 lg:py-16">
       <div className="container">
-        <div className="row justify-center mb-18">
-          <div className="col-lg-9">
-            <div
-              className="text-center"
-              data-aos="fade-up-sm"
-              data-aos-delay="50"
-            >
-              <h1 className="theme-text-2 md:text-[48px] text-[24px]">
-                <span className="theme-text">CareerBooster.AI </span> is Powered
-                by a <br className="d-none d-xl-block" />
+        <div className="flex justify-center mb-18">
+          <div className="flex flex-col w-9/12">
+            <div>
+              <h1 className="text-center md:text-[48px] text-[24px] dark:text-gray-100 text-gray-950 font-semibold">
+                <span className="text-[#6a4dff] dark:text-[#e6f85e]">
+                  CareerBooster.AI{" "}
+                </span>{" "}
+                is Powered by a <br className="xl:block hidden" />
                 Dynamic Team.
               </h1>
             </div>
           </div>
         </div>
 
-        <div className="row justify-center row-cols-1 row-cols-md-3 row-cols-xl-4 gy-10 gy-md-12 gy-lg-18">
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="50">
+        <div className="grid justify-center mx-auto grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-y-10 md:gap-y-12 lg:gap-y-18">
+          <div className="flex flex-col">
             <div className="team-card text-center">
               <Image
                 width={200}
                 height={200}
                 src="/assets/images/team/team-1.jpg"
                 alt=""
-                className="img-fluid team-member-img mb-6"
+                className="w-[200px] h-[200px] object-cover rounded-full inline-block mb-6"
               />
               <h4 className="theme-text-2 mb-1">Mubasher Hassan</h4>
               <p className="fs-sm mb-2">CEO & Co-Founder</p>
@@ -92,7 +90,7 @@ const TeamCard = () => {
                 height={200}
                 src="/assets/images/team/team-2.jpg"
                 alt=""
-                className="img-fluid team-member-img mb-6"
+                className="w-[200px] h-[200px] object-cover rounded-full inline-block mb-6"
               />
               <h4 className="theme-text-2 mb-1">M. Suleman Ibrahim</h4>
               <p className="fs-sm mb-2">CTO & Co-Founder</p>

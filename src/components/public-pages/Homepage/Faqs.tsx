@@ -72,7 +72,7 @@ function FAQItem(props: any) {
         <div className=" lg:mb-[48px] mb-[24px]">
           <h2 className=" ">
             <button
-              className="dark:text-gray-100 text-gray-950 hover:text-[#6a4dff] dark:hover:text-[#e6f85e] flex flex-row text-left justify-center  items-center lg:text-[30px] text-[18px] focus:text-[#6a4dff] dark:focus:text-[#e6f85e]"
+              className="dark:text-gray-100 text-gray-950 hover:text-[#6a4dff] dark:hover:text-[#e6f85e] flex flex-row text-left justify-center  items-center lg:text-[30px] text-[18px] focus:text-[#6a4dff] dark:focus:text-[#e6f85e] font-semibold"
               onClick={toggleFAQ}
               type="button"
               //   data-bs-toggle="collapse"
@@ -120,12 +120,12 @@ function FAQItem(props: any) {
               className=""
               // data-bs-parent="#faqAccordion"
             >
-              <div className=" dark:text-gray-100 text-gray-950 pt-2">
+              <div className=" dark:text-gray-100 text-gray-950 pt-2 text-base">
                 {props.answer}
               </div>
             </div>
           )}
-          <hr className=" dark:text-gray-100 text-gray-950" />
+          <hr className=" dark:text-gray-100 text-gray-950 mt-4" />
         </div>
       </div>
     </section>
@@ -139,7 +139,7 @@ function FAQList() {
         <div className="flex justify-center mb-18">
           <div className="flex flex-col w-10/12">
             <div className="text-center">
-              <h1 className="mb-0 dark:text-gray-100 text-gray-950 md:text-[48px] text-[24px]">
+              <h1 className=" dark:text-gray-100 text-gray-950 md:text-[48px] text-[24px] font-semibold mb-14">
                 Questions About CareerBooster.AI?
                 <br className="d-none d-md-block" />
                 We have Answers!

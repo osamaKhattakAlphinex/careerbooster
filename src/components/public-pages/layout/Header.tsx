@@ -23,9 +23,9 @@ const Header = () => {
       // className={`navbar navbar-expand-lg fixed-top ${
       //   theme === "dark" ? "bg-dark" : "bg-white"
       // }`}
-      className={`navbar navbar-expand-lg fixed-top  dark:bg-[#11121C] bg-gray-100 on-over  headroom headroom--top headroom--not-bottom dark:text-gray-100 text-gray-900`}
+      className={`py-5 translate-y-[0%] opacity-[1] fixed top-0 left-0 right-0 z-50 dark:bg-gray-950 bg-gray-100 on-over  headroom headroom--top headroom--not-bottom dark:text-gray-100 text-gray-900`}
     >
-      <div className="head_container container">
+      <div className="container flex justify-between items-center">
         {/* <!-- Logo --> */}
 
         <Link className="navbar-brand flex justify-between m-0" href="/">
@@ -43,7 +43,7 @@ const Header = () => {
           </div>
           <div>
             <span className="lg:hidden">
-              <ThemeToggler />
+              <ThemeChanger />
             </span>
             <button
               className="navbar-toggler "
@@ -67,7 +67,7 @@ const Header = () => {
         <div className="ml-auto">
           <div className=" mt-2 flex    flex-row items-center gap-10  p-2 ">
             <ul className="flex lg:gap-2 xl:gap-5  dark:text-[#fff] text-gray-900">
-              <li className="  mt-0  ">
+              <li className="  mt-0 px-3 ">
                 <Link
                   className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]"
                   href="/"
@@ -75,7 +75,7 @@ const Header = () => {
                   Home
                 </Link>
               </li>
-              <li className=" mt-0 ">
+              <li className=" mt-0 px-3 ">
                 <Link
                   className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
                   href="/use-cases"
@@ -83,7 +83,7 @@ const Header = () => {
                   Use cases
                 </Link>
               </li>
-              <li className=" mt-0 ">
+              <li className=" mt-0 px-3 ">
                 <Link
                   className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
                   href="/pricing"
@@ -91,7 +91,7 @@ const Header = () => {
                   Pricing
                 </Link>
               </li>
-              <li className=" mt-0 ">
+              <li className=" mt-0 px-3 ">
                 <Link
                   className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
                   href="/contact"
@@ -101,7 +101,7 @@ const Header = () => {
               </li>
               {!isAuth && (
                 <Link
-                  className="dark:text-gray-100 text-gray-900 no-underline hover:text-[0#000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]"
+                  className="dark:text-gray-100 text-gray-900 no-underline hover:text-[0#000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3"
                   href="/login"
                 >
                   Login
@@ -244,7 +244,10 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <Link href="/register" className="btn theme-outline-btn">
+                  <Link
+                    href="/register"
+                    className="px-[1rem] py-[.85rem] border-[1px] bg-transparent border-[#6a4dff] text-[#6a4dff] text-4 rounded-md"
+                  >
                     Get started
                   </Link>
                 </>

@@ -180,7 +180,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
         className="flex flex-col md:w-6/12 lg:w-4/12  "
       >
         <div
-          className={`p-6  lg:px-8 lg:py-8 rounded-4 h-full border-[1px] hover:bg-gray-50 hover:shadow-2xl dark:hover:border-[#e6f85e] dark:hover:bg-black  transition-all duration-200 ease-in-out relative hover:border-blue-600 active:border-blue-600`}
+          className={`p-6  lg:px-8 lg:py-8 rounded-2xl h-full border-[1px] hover:bg-gray-50 hover:shadow-2xl dark:hover:border-[#e6f85e] dark:hover:bg-black  transition-all duration-200 ease-in-out relative hover:border-blue-600 active:border-blue-600`}
         >
           <h1 className=" font-semibold text-[#6a4dff] dark:text-[#e6f85e] mb-0 mt-4 !text-4xl">
             {creditPackage.title}

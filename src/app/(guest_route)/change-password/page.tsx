@@ -4,7 +4,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { changePassword } from "@/lib/api";
 import axios from "axios";
 import "@/app/plugins.css";
-import "@/app/style.css";
 
 const ChangePasswordPage = () => {
   const router = useRouter();
