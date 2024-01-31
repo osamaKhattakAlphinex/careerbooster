@@ -19,7 +19,7 @@ const TeamCard = () => {
           </div>
         </div>
 
-        <div className="grid justify-center mx-auto grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-y-10 md:gap-y-12 lg:gap-y-18">
+        <div className="flex flex-wrap justify-center mx-auto w-full md:w-4/12 xl:w-3/12 gap-y-10 md:gap-y-12 lg:gap-y-18">
           <div className="flex flex-col">
             <div className="team-card text-center">
               <Image
