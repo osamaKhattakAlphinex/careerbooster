@@ -157,7 +157,7 @@ const FeaturesSecond = () => {
   ];
 
   return (
-    <section className="pb-10  dark:bg-[#11121C] bg-gray-100">
+    <section className="pb-10  dark:bg-gray-950 bg-gray-100">
       <div className="container">
         {SecondFeatureSingleData.map((item) => {
           return (
@@ -167,16 +167,16 @@ const FeaturesSecond = () => {
               >
                 <div className="flex flex-col w-[50%] px-[8px] pt-8">
                   <div className="content" key={item.id}>
-                    <p className="text-[#6a4dff] dark:text-[#e6f85e]">
+                    <p className="text-[#6a4dff] dark:text-[#e6f85e] text-[1rem] mb-[1rem]">
                       {item.featureNo}
                     </p>
-                    <h4 className="dark:text-gray-100 text-gray-950 md:text-[24px] text-[17px]">
+                    <h4 className="dark:text-gray-100 text-gray-950 font-[600] md:text-[24px] text-[17px]">
                       {item.headingTwo}
                     </h4>
-                    <h1 className="dark:text-gray-100 text-gray-950 md:text-[40px] my-5 text-[24px]">
+                    <h1 className="dark:text-gray-100 text-gray-950 font-[600] md:text-[40px] my-5 text-[24px]">
                       {item.mainHeading}
                     </h1>
-                    <h4 className="dark:text-gray-100 text-gray-950 mb-8 md:text-[24px] text-[17px]">
+                    <h4 className="dark:text-gray-100 text-gray-950 font-[600] mb-8 md:text-[24px] text-[17px]">
                       {item.subHeading}
                     </h4>
                     <p className="mb-6 dark:text-gray-100 text-gray-950">

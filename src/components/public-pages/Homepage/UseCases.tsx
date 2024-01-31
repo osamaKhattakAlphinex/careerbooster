@@ -11,7 +11,7 @@ import {
 import ToolUsage from "./ToolUsage";
 const useCaseDetails = [
   {
-    title: "Write a Winning Executive Resume :",
+    title: "Write a Winning Executive Resume ",
     description:
       "With CareerBooster.AI, you can effortlessly craft a compelling executive resume that grabs the attention of recruiters and showcases your unique skills and achievements.",
     linkText: "Elevate Your Resume!",
@@ -19,7 +19,7 @@ const useCaseDetails = [
     link: "/use-cases",
   },
   {
-    title: "Keyword Optimize Your LinkedIn: ",
+    title: "Keyword Optimize Your LinkedIn ",
     description:
       "Ensure your LinkedIn profile ranks high in recruiter searches. Our AI system will optimize your profile with relevant keywords, making it more likely to be seen by potential employers.",
     linkText: "Boost Your LinkedIn Now!",
@@ -77,7 +77,7 @@ const useCaseDetails = [
 ];
 const UseCases = () => {
   return (
-    <section className="bg-[#fff] dark:bg-[#171825] py-20 py-lg-30 ">
+    <section className="bg-gray-100 dark:bg-gray-950 py-20 py-lg-30 ">
       <div className="xs:px-5 md:px-20 ">
         <div className="row justify-center mb-18">
           <div className="col-lg-9">

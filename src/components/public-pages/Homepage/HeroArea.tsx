@@ -5,17 +5,17 @@ import Image from "next/image";
 const HeroArea = () => {
   return (
     <section
-      className={`dark:bg-[url('/assets/images/bg/3.png')] bg-[url('/assets/images/bg/1.jpg')]  style-1   pt-40 pb-15 pb-lg-20 bg-auto bg-no-repeat bg-center overflow-hidden `}
+      className={`dark:bg-[url('/assets/images/bg/bg-4.png')] bg-[url('/assets/images/bg/1.jpg')]  style-1   pt-40 pb-15 lg:pb-20 bg-auto bg-no-repeat bg-center overflow-hidden `}
     >
       <div className="container ">
         <div className="flex justify-center ">
           <div className="flex flex-col w-9/12">
             <div className="text-center">
-              <div className="relative z-1">
-                <p className=" text-[#0000ff9c] dark:text-[#e6f85e]">
+              <div className="relative z-1 animate-in slide-in duration-300">
+                <p className=" text-[#0000ff9c] dark:text-[#e6f85e] text-4 ">
                   Unlock Your Career Potential
                 </p>
-                <h1 className="text-gray-950 dark:text-gray-100 mb-8 md:text-[40px] text-[24px]">
+                <h1 className="text-gray-950 dark:text-gray-100 mb-8 md:text-[40px] text-[24px] font-semibold">
                   Your Free AI Resume Writer & LinkedIn Optimization Tool to
                   Turbocharge Your Career!
                   <br />
@@ -31,15 +31,15 @@ const HeroArea = () => {
                 <UploadPDFResume />
               </div>
               <div>
-                <div className="image-with-shape relative">
+                <div className="relative  ">
                   <Image
                     width={811}
                     height={341}
                     src="/assets/images/shapes/blurry-shape-1.svg"
                     alt=""
-                    className="shape animate-scale absolute lg:top-[-12rem] lg:left-[-9rem] lg:w-[700px] h-auto z-[-1] sm:w-[1000px] sm:-top-[25rem] sm:-left-[18rem]"
+                    className=" animate-scale absolute lg:top-[-12rem] lg:left-[-9rem] lg:w-[700px] h-auto z-[-1] sm:w-[1000px] sm:-top-[25rem] sm:-left-[18rem]"
                   />
-                  <div className="mt-12 p-4 rounded-5 border-[1px] border-primary-dark shadow-lg overflow-hidden position-relative z-1 dark:block hidden">
+                  <div className="mt-12 p-4 rounded-2xl border-[1px] border-[#E6F85E] shadow-lg overflow-hidden relative z-1 dark:block hidden ">
                     <Image
                       width={810}
                       height={793}
@@ -48,7 +48,7 @@ const HeroArea = () => {
                       alt=""
                     />
                   </div>
-                  <div className="mt-12 p-4 rounded-5 border-[1px] border-primary-dark shadow-lg overflow-hidden position-relative z-1 dark:hidden block">
+                  <div className="mt-12 p-4 rounded-2xl border-[1px] border-[#E6F85E] shadow-lg overflow-hidden position-relative z-1 dark:hidden block lg:hover:animate-shake motion-reduce:animate-none">
                     <Image
                       width={810}
                       height={793}

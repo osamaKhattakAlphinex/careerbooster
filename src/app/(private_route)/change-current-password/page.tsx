@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import "@/app/plugins.css";
-import "@/app/style.css";
+
 import { useSelector } from "react-redux";
 const ChangePasswordPage = () => {
   const router = useRouter();

@@ -15,12 +15,12 @@ const ToolUsage: React.FC<ToolUsageProps> = ({
   link,
 }) => {
   return (
-    <div className="w-3/12 xs:w-full sm:w-full md:w-4/12 lg:w-3/12 xl:w-3/12 px-4 h-full">
+    <div className="w-3/12 xs:w-full sm:w-full md:w-4/12 lg:w-3/12 xl:w-3/12 px-4 h-full flex flex-col gap-6">
       <div className=" w-[3.4rem] h-[3.4rem] my-5 flex-shrink-0 align-center justify-center rounded-3 p-2 border-[1px]  dark:text-[#e6f85e] text-[#6a4dff] dark:border-gray-500 border-gray-700 border-opacity-10 bg-[#464f6f] bg-opacity-[0.1] dark:bg-opacity-[0.2] ">
         {icon}
       </div>
       <div className="content flex-grow-1 ">
-        <h5 className=" mb-4 text-gray-950 font-semibold dark:text-gray-100 text-lg">
+        <h5 className=" mb-4 text-gray-950 font-semibold dark:text-gray-100 ">
           {title}
         </h5>
         <p className="mb-0 text-gray-950 dark:text-gray-400 text-sm ">

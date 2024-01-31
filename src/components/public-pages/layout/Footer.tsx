@@ -5,7 +5,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-[url('/assets/images/shapes/stripe-light.svg')] bg-[#fff] dark:bg-[#171825] bg-no-repeat dark:bg-[url('/assets/images/shapes/stripe-dark.svg')] bg-cover  no-repeat   pt-10 ">
+      <footer className="bg-[url('/assets/images/shapes/stripe-light.svg')] bg-gray-100 dark:bg-gray-950 bg-no-repeat dark:bg-[url('/assets/images/shapes/stripe-dark.svg')] bg-cover  no-repeat   pt-10 ">
         <Head>
           <script
             dangerouslySetInnerHTML={{
@@ -204,11 +204,17 @@ const Footer = () => {
           <div className="py-6 mt-8 mx-auto ">
             <p className="text-center text-xs text-gray-950 dark:text-gray-100 ">
               Copyright <span> &copy; CareerBooster 2023</span>.{" "}
-              <Link href="/privacy-policy" className="theme-text-2">
+              <Link
+                href="/privacy-policy"
+                className="text-[#6a4dff] dark:text-[#e6f85e] mx-4 no-underline hover:text-blue-400 dark:hover:text-blue-400"
+              >
                 Privacy Policy
               </Link>{" "}
               &nbsp;
-              <Link href="/terms-and-conditions" className="theme-text-2">
+              <Link
+                href="/terms-and-conditions"
+                className="text-[#6a4dff] dark:text-[#e6f85e]  no-underline hover:text-blue-400 dark:hover:text-blue-400"
+              >
                 Terms And Conditions
               </Link>
             </p>

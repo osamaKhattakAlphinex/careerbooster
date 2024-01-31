@@ -10,7 +10,7 @@ const Reviews = () => {
         <div className="row justify-center mb-18">
           <div className="col-lg-9">
             <div className="text-center">
-              <h1 className="dark:text-gray-100 text-gray-950 md:text-[40px] text-[24px]">
+              <h1 className="dark:text-gray-100 text-gray-950 md:text-[40px] text-[24px] font-semibold mb-20">
                 <span className="text-[#6a4dff] dark:text-[#e6f85e]">
                   CareerBooster.AI{" "}
                 </span>
@@ -58,7 +58,7 @@ const Reviews = () => {
           {" "}
           <div className="h-auto">
             <div className=" rounded h-full p-6 border-[1px]  bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
-              <div className="d-flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
@@ -129,8 +129,8 @@ const Reviews = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
-              <div className="d-flex items-center gap-4 mb-6">
+            <div className=" rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
@@ -146,7 +146,7 @@ const Reviews = () => {
                 </div>
               </div>
               <div className="">
-                <div className=" d-flex items-center gap-1 mb-3">
+                <div className=" flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -201,8 +201,8 @@ const Reviews = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
-              <div className="d-flex items-center gap-4 mb-6">
+            <div className=" rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
@@ -218,7 +218,7 @@ const Reviews = () => {
                 </div>
               </div>
               <div className="">
-                <div className=" d-flex items-center gap-1 mb-3">
+                <div className=" flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -274,8 +274,8 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
-              <div className="d-flex items-center gap-4 mb-6">
+            <div className=" rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
@@ -291,7 +291,7 @@ const Reviews = () => {
                 </div>
               </div>
               <div className="">
-                <div className=" d-flex items-center gap-1 mb-3">
+                <div className=" flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -347,8 +347,8 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
-              <div className="d-flex items-center gap-4 mb-6">
+            <div className=" rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
@@ -364,7 +364,7 @@ const Reviews = () => {
                 </div>
               </div>
               <div className="">
-                <div className=" d-flex items-center gap-1 mb-3">
+                <div className=" flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -420,8 +420,8 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
-              <div className="d-flex items-center gap-4 mb-6">
+            <div className=" rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
@@ -437,7 +437,7 @@ const Reviews = () => {
                 </div>
               </div>
               <div className="">
-                <div className=" d-flex items-center gap-1 mb-3">
+                <div className=" flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -492,8 +492,8 @@ const Reviews = () => {
         <SwiperSlide>
           {" "}
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
-              <div className="d-flex items-center gap-4 mb-6">
+            <div className=" rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
@@ -509,7 +509,7 @@ const Reviews = () => {
                 </div>
               </div>
               <div className="">
-                <div className=" d-flex items-center gap-1 mb-3">
+                <div className=" flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -563,8 +563,8 @@ const Reviews = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
-              <div className="d-flex items-center gap-4 mb-6">
+            <div className=" rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
@@ -580,7 +580,7 @@ const Reviews = () => {
                 </div>
               </div>
               <div className="">
-                <div className=" d-flex items-center gap-1 mb-3">
+                <div className=" flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -635,8 +635,8 @@ const Reviews = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-auto">
-            <div className="review-card rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
-              <div className="d-flex items-center gap-4 mb-6">
+            <div className=" rounded h-full p-6 border-[1px] bg-gray-100 text-gray-950 border-gray-500 dark:bg-transparent dark:text-gray-100 dark:border-gray-500 border-opacity-10">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <Image
                     width={48}
@@ -652,7 +652,7 @@ const Reviews = () => {
                 </div>
               </div>
               <div className="">
-                <div className=" d-flex items-center gap-1 mb-3">
+                <div className=" flex items-center gap-1 mb-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"

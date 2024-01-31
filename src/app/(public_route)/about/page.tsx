@@ -8,7 +8,6 @@ import Reviews from "@/components/public-pages/Homepage/Reviews";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
 import "@/app/plugins.css";
-import "@/app/style.css";
 
 export const metadata: Metadata = {
   title: "CareerBooster.AI-About",

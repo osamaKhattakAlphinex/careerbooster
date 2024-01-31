@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 import Footer from "@/components/public-pages/layout/Footer";
 import "../plugins.css";
-import "../style.css";
+
 export const metadata: Metadata = {
   title: "AI Resume Bot",
   description: "AI Resume Bot | Developed by NausalTech",
@@ -18,7 +18,7 @@ export default function PublicLayout({
   return (
     <>
       <Header />
-      <div className="max-w-full bg-[#fff] dark:bg-[#171825]">{children}</div>
+      <div className="max-w-full bg-gray-100 dark:bg-gray-950">{children}</div>
       <Footer />
     </>
   );

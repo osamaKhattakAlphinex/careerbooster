@@ -7,16 +7,16 @@ const PricingSection = () => {
         <div className="flex justify-center mb-18">
           <div className="flex flex-col w-10/12">
             <div className="text-center">
-              <h1 className="dark:text-gray-100 text-gray-950 mb-5 md:text-[40px] text-[24px]">
+              <h1 className="dark:text-gray-100 text-gray-950 mb-5 md:text-[40px] text-[24px] font-semibold">
                 All Plans Include a 30-Day Money Back Guarantee
               </h1>
-              <p className="mb-0 dark:text-gray-100 text-gray-950">
+              <p className="mb-4 dark:text-gray-100 text-gray-950 py-4 text-base">
                 Your Path to More Interviews and Better Opportunities
               </p>
             </div>
           </div>
         </div>
-        <div className="flex gap-6 pricing-table">
+        <div className="flex gap-6 pricing-table pt-6">
           {/* <Packages viewOnly={true} /> */}
           <CreditPackages viewOnly={true} />
         </div>
