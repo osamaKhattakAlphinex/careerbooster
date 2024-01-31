@@ -2,16 +2,12 @@
 import Link from "next/link";
 
 import { signOut, useSession } from "next-auth/react";
-import { useDispatch, useSelector } from "react-redux";
-import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
-import { setField as setFieldRegister } from "@/store/registerSlice";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 import ThemeToggler from "../../Themetoggler";
 
 import Image from "next/image";
 import "@/app/(private_route)/dashboard.css";
-import { ThemeProvider } from "next-themes";
-import NextThemeProvider from "@/components/data-providers/NextThemeProvider";
 import ThemeChanger from "@/components/common/themeSwitcher";
 
 const Header = () => {

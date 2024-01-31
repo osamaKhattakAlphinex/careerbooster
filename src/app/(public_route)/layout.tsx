@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 
 import Footer from "@/components/public-pages/layout/Footer";
 import "../plugins.css";
-import "../style.css";
 export const metadata: Metadata = {
   title: "AI Resume Bot",
   description: "AI Resume Bot | Developed by NausalTech",

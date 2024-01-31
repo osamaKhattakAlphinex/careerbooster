@@ -1,11 +1,9 @@
 import CTASection from "@/components/public-pages/Homepage/CTASection";
-import FAQSection from "@/components/public-pages/Homepage/FAQSection";
 import FAQList from "@/components/public-pages/Homepage/Faqs";
 import UseCases from "@/components/public-pages/Homepage/UseCases";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
 import "@/app/plugins.css";
-import "@/app/style.css";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-UseCases",
   description:
@@ -38,7 +36,7 @@ export const metadata: Metadata = {
 export default function UseCasesPage() {
   return (
     <>
-      <main className="flex-grow-1 mb-20 bg-[#fff] dark:bg-[#171825]">
+      <main className="mb-20 bg-[#fff] dark:bg-[#171825]">
         {/* <!-- Page header --> */}
         <PageHeader title="Use Cases" />
 

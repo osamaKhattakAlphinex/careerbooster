@@ -77,21 +77,21 @@ const useCaseDetails = [
 ];
 const UseCases = () => {
   return (
-    <section className="bg-[#fff] dark:bg-[#171825] py-20 py-lg-30 ">
+    <section className="bg-[#fff] dark:bg-[#171825] py-20 ">
       <div className="xs:px-5 md:px-20 ">
         <div className="row justify-center mb-18">
           <div className="col-lg-9">
-            <div className="text-center">
-              <p className="dark:text-[#e6f85e] text-[#0000ff] text-opacity-[0.6] text-md ">
+            <div className="text-center py-10">
+              <p className="dark:text-[#e6f85e] text-[#0000ff] text-opacity-[0.6] text-lg">
                 CareerBooster.AI Use Cases
               </p>
-              <h1 className="text-[#000] dark:text-[#fff] mb-0  md:text-[40px] text-[24px]">
+              <h1 className="text-[#000] pt-3 dark:text-[#fff] text-center xs:px-14  mb-0  md:px-44 md:text-[40px] text-[25px] font-semibold">
                 Leverage our AI-Powered Tools for your Professional Excellence
               </h1>
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap px-14">
           {useCaseDetails.map((item, index) => (
             <ToolUsage
               key={index}
