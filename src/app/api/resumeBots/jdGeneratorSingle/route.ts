@@ -8,10 +8,15 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
 import { makeid } from "@/helpers/makeid";
-import { TrainBotEntryType, makeTrainedBotEntry } from "@/helpers/makeTrainBotEntry";
+import {
+  TrainBotEntryType,
+  makeTrainedBotEntry,
+} from "@/helpers/makeTrainBotEntry";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 import { updateToolUsage } from "@/helpers/updateToolUsage";
+import { updateUserTokens } from "@/helpers/updateUserTokens";
+import { encodingForModel } from "js-tiktoken";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -32,8 +37,8 @@ export async function POST(req: any) {
     const experience = reqBody?.experience;
     const trainBotData = reqBody?.trainBotData;
     const quantifyingExperience = reqBody?.quantifyingExperience;
-    const personName = reqBody?.personName
-    const jobTitle = reqBody?.jobTitle
+    const personName = reqBody?.personName;
+    const jobTitle = reqBody?.jobTitle;
     const userCredits = await getUserCreditsByEmail(session?.user?.email);
     const creditsUsed = reqBody?.creditsUsed;
     const dataset = "resume.writeJDSingle";
@@ -45,11 +50,11 @@ export async function POST(req: any) {
         return NextResponse.json(
           { result: "Insufficient Credits", success: false },
           { status: 429 }
-        )
+        );
       }
     }
     let promptRec;
-    let prompt
+    let prompt;
     await startDB();
     if (quantifyingExperience) {
       promptRec = await Prompt.findOne({
@@ -59,8 +64,8 @@ export async function POST(req: any) {
       });
 
       prompt = promptRec.value;
-      prompt = await prompt.replaceAll("{{PersonName}}", personName)
-      prompt = await prompt.replaceAll("{{JobTitle}}", jobTitle)
+      prompt = await prompt.replaceAll("{{PersonName}}", personName);
+      prompt = await prompt.replaceAll("{{JobTitle}}", jobTitle);
     } else {
       promptRec = await Prompt.findOne({
         type: "resume",
@@ -68,9 +73,8 @@ export async function POST(req: any) {
         active: true,
       });
       prompt = promptRec.value;
-      prompt = await prompt.replaceAll("{{PersonName}}", personName)
-      prompt = await prompt.replaceAll("{{JobTitle}}", jobTitle)
-
+      prompt = await prompt.replaceAll("{{PersonName}}", personName);
+      prompt = await prompt.replaceAll("{{JobTitle}}", jobTitle);
     }
 
     const inputPrompt = `
@@ -97,24 +101,30 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-    let workId: any
+    let workId: any;
+    const enc = encodingForModel("gpt-3.5-turbo"); // js-tiktoken
+    let completionTokens = 0;
     const stream = OpenAIStream(response, {
       onStart: async () => {
-        workId = makeid()
+        workId = makeid();
         const payload = {
           id: workId,
         };
         // postConsultingBid(payload);
-        await updateUserTotalCredits(session?.user?.email, creditsUsed)
-        await updateToolUsage("Resume Tool", creditsUsed)
-
+        await updateUserTotalCredits(session?.user?.email, creditsUsed);
+        await updateToolUsage("Resume Tool", creditsUsed);
+      },
+      onToken: async (content) => {
+        const tokenList = enc.encode(content);
+        completionTokens += tokenList.length;
       },
       onFinal: async (completions) => {
         try {
-
+          if (completionTokens > 0) {
+            await updateUserTokens(session?.user?.email, completionTokens);
+          }
           try {
             if (trainBotData) {
-
               let entry: TrainBotEntryType = {
                 entryId: workId,
                 type: "resume.writeJDSingle",
@@ -131,11 +141,8 @@ export async function POST(req: any) {
           } catch {
             console.log("error while saving summary....");
           }
-
-        } catch (error) {
-
-        }
-      }
+        } catch (error) {}
+      },
     });
     // Respond with the stream
     return new StreamingTextResponse(stream);

@@ -15,6 +15,8 @@ import { postAbouts } from "./linkedInAbout/route";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 import { updateToolUsage } from "@/helpers/updateToolUsage";
+import { encodingForModel } from "js-tiktoken";
+import { updateUserTokens } from "@/helpers/updateUserTokens";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -39,20 +41,19 @@ export async function POST(req: any) {
     const reqBody = await req.json();
     const creditsUsed = reqBody?.creditsUsed;
     const userData = reqBody?.userData;
-    const personName = reqBody?.personName
+    const personName = reqBody?.personName;
     const aboutId = reqBody?.aboutId;
     const email = reqBody?.email;
     const option = reqBody?.option;
     const trainBotData = reqBody?.trainBotData;
     const userCredits = await getUserCreditsByEmail(email);
 
-
     if (userCredits) {
       if (userCredits < creditsUsed) {
         return NextResponse.json(
           { result: "Insufficient Credits", success: false },
           { status: 429 }
-        )
+        );
       }
     }
 
@@ -66,7 +67,9 @@ export async function POST(req: any) {
     });
     let prompt = promptRec.value;
     prompt = prompt.replaceAll("{{PersonName}}", personName);
-    const inputPrompt = `Read ${personName}'s resume : ${JSON.stringify(userData)}
+    const inputPrompt = `Read ${personName}'s resume : ${JSON.stringify(
+      userData
+    )}
   
             and then:
             ${prompt}
@@ -77,16 +80,23 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-
+    const enc = encodingForModel("gpt-3.5-turbo"); // js-tiktoken
+    let completionTokens = 0;
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response, {
       onStart: async () => {
-        await updateUserTotalCredits(email, creditsUsed)
-        await updateToolUsage("Linkedin Tool", creditsUsed)
-
+        await updateUserTotalCredits(email, creditsUsed);
+        await updateToolUsage("Linkedin Tool", creditsUsed);
+      },
+      onToken: async (content) => {
+        const tokenList = enc.encode(content);
+        completionTokens += tokenList.length;
       },
       onFinal: async (completions) => {
         try {
+          if (completionTokens > 0) {
+            await updateUserTokens(email, completionTokens);
+          }
           if (trainBotData) {
             const aboutId = makeid();
 
@@ -112,12 +122,11 @@ export async function POST(req: any) {
             };
             await makeTrainedBotEntry(entry);
           }
-        } catch (err) { }
+        } catch (err) {}
       },
     });
     // Respond with the stream
     return new StreamingTextResponse(stream);
-
   } catch (error) {
     return NextResponse.json(
       { result: "something went wrong", success: false },

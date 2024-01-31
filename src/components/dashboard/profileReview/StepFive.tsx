@@ -31,22 +31,22 @@ const StepFive = () => {
   }, [userData]);
 
   // Fetch Text from CV if not already fetched
-  const scrappResumeIfNotExist = async () => {
-    if (register.scrappedContent === "" && userData.defaultResumeFile) {
-      const resp = await fetch("/api/homepage/fetchTextFromCV", {
-        method: "POST",
-        body: JSON.stringify({
-          file: userData.defaultResumeFile,
-          folder: "resumes",
-          email: userData.email,
-        }),
-      });
-      const res = await resp.json();
-      dispatch(setField({ name: "scrappedContent", value: res.text }));
+  // const scrappResumeIfNotExist = async () => {
+  //   if (register.scrappedContent === "" && userData.defaultResumeFile) {
+  //     const resp = await fetch("/api/homepage/fetchTextFromCV", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         file: userData.defaultResumeFile,
+  //         folder: "resumes",
+  //         email: userData.email,
+  //       }),
+  //     });
+  //     const res = await resp.json();
+  //     dispatch(setField({ name: "scrappedContent", value: res.text }));
 
-      return res;
-    }
-  };
+  //     return res;
+  //   }
+  // };
 
   const fetchExperienceDataFromResume = async (refetch = false) => {
     if (
@@ -162,9 +162,9 @@ const StepFive = () => {
     }
   };
 
-  useEffect(() => {
-    scrappResumeIfNotExist();
-  }, [userData.email]);
+  // useEffect(() => {
+  //   scrappResumeIfNotExist();
+  // }, [userData.email]);
 
   if (register.scrapping.workExperience) {
     return (

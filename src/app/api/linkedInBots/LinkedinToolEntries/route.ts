@@ -1,7 +1,7 @@
-import { OpenAI } from "langchain/llms/openai";
 import LinkedinToolEntrie from "@/db/schemas/LinkedinToolEntrie";
 import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
+import OpenAI from "openai";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -14,6 +14,9 @@ export async function POST(req: any) {
       const linkedinContent = body.linkedinContent.substring(0, 12000);
       // For Registration if file is uploaded then load content from that fiel
       if (linkedinFileName) {
+        const openai = new OpenAI({
+          apiKey: process.env.OPENAI_API_KEY,
+        });
         // load file
         // const dir = path.join(
         //   process.cwd() + "/public",
@@ -26,10 +29,10 @@ export async function POST(req: any) {
         // let contentTxt = docs.map((doc: any) => doc.pageContent);
         // const content = contentTxt.join(" ");
         // CREATING LLM MODAL
-        const model = new OpenAI({
-          modelName: "gpt-3.5-turbo",
-          temperature: 0.5,
-        });
+        // const model = new OpenAI({
+        //   modelName: "gpt-3.5-turbo",
+        //   temperature: 0.5,
+        // });
 
         const input = `
           This is the User Data:
@@ -59,11 +62,21 @@ export async function POST(req: any) {
 
           If there is no value Leave that field blank
       `;
+        const response: any = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "user",
+              content: input,
+            },
+          ],
+          temperature: 0.5,
+        });
 
+        console.log(response);
         try {
           await startDB();
 
-          const resp = await model.call(input);
           const {
             fullName,
             firstName,
@@ -72,7 +85,7 @@ export async function POST(req: any) {
             phone,
             location,
             recentJob,
-          } = JSON.parse(resp);
+          } = JSON.parse(response.choices[0].message.content);
 
           //Create user in DB
 

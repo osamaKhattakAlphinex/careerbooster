@@ -9,6 +9,8 @@ import { getTrainedModel } from "@/helpers/getTrainedModel";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 import { updateToolUsage } from "@/helpers/updateToolUsage";
+import { encodingForModel } from "js-tiktoken";
+import { updateUserTokens } from "@/helpers/updateUserTokens";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -41,10 +43,10 @@ export async function POST(req: any) {
         return NextResponse.json(
           { result: "Insufficient Credits", success: false },
           { status: 429 }
-        )
+        );
       }
     }
-    await startDB()
+    await startDB();
     const promptRec = await Prompt.findOne({
       type: "linkedin",
       name: "jobDescription",
@@ -52,7 +54,7 @@ export async function POST(req: any) {
     });
     let prompt = promptRec.value;
     prompt = await prompt.replaceAll("{{PersonName}}", personName);
-    prompt = await prompt.replaceAll("{{JobTitle}}", experience.jobTitle)
+    prompt = await prompt.replaceAll("{{JobTitle}}", experience.jobTitle);
 
     const inputPrompt = ` ${prompt}
     
@@ -75,13 +77,21 @@ export async function POST(req: any) {
       messages: [{ role: "user", content: inputPrompt }],
     });
 
-
-
+    const enc = encodingForModel("gpt-3.5-turbo"); // js-tiktoken
+    let completionTokens = 0;
     const stream = OpenAIStream(response, {
       onStart: async () => {
-        await updateUserTotalCredits(email, creditsUsed)
-        await updateToolUsage("Linkedin Tool", creditsUsed)
-
+        await updateUserTotalCredits(email, creditsUsed);
+        await updateToolUsage("Linkedin Tool", creditsUsed);
+      },
+      onToken: async (content) => {
+        const tokenList = enc.encode(content);
+        completionTokens += tokenList.length;
+      },
+      onFinal: async (completions) => {
+        if (completionTokens > 0) {
+          await updateUserTokens(email, completionTokens);
+        }
       },
     });
     // Respond with the stream

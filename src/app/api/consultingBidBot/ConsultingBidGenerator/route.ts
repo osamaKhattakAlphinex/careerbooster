@@ -17,6 +17,8 @@ import { postConsultingBid } from "../route";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 import { updateToolUsage } from "@/helpers/updateToolUsage";
+import { encodingForModel } from "js-tiktoken";
+import { updateUserTokens } from "@/helpers/updateUserTokens";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -40,7 +42,7 @@ export async function POST(req: any) {
     const email = reqBody?.email;
     const file = reqBody?.file;
     const creditsUsed = reqBody?.creditsUsed;
-    const userCredits = await getUserCreditsByEmail(email)
+    const userCredits = await getUserCreditsByEmail(email);
     const jobDescription = reqBody?.jobDescription;
     const trainBotData = reqBody?.trainBotData;
 
@@ -49,7 +51,7 @@ export async function POST(req: any) {
         return NextResponse.json(
           { result: "Insufficient Credits", success: false },
           { status: 429 }
-        )
+        );
       }
     }
 
@@ -64,7 +66,10 @@ export async function POST(req: any) {
     });
     const promptDB = promptRec.value;
 
-    const prompt = await promptDB.replaceAll("{{jobDescription}}", jobDescription);
+    const prompt = await promptDB.replaceAll(
+      "{{jobDescription}}",
+      jobDescription
+    );
 
     // CREATING LLM MODAL
 
@@ -95,15 +100,23 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
+    const enc = encodingForModel("gpt-3.5-turbo"); // js-tiktoken
+    let completionTokens = 0;
 
     const stream = OpenAIStream(response, {
       onStart: async () => {
-        await updateUserTotalCredits(email, creditsUsed)
-        await updateToolUsage("Consulting Bid Generator", creditsUsed)
-
+        await updateUserTotalCredits(email, creditsUsed);
+        await updateToolUsage("Consulting Bid Generator", creditsUsed);
+      },
+      onToken: async (content) => {
+        const tokenList = enc.encode(content);
+        completionTokens += tokenList.length;
       },
       onFinal: async (completions) => {
         try {
+          if (completionTokens > 0) {
+            await updateUserTokens(email, completionTokens);
+          }
           if (trainBotData) {
             const consultingBidId = makeid();
 
@@ -134,12 +147,10 @@ export async function POST(req: any) {
         } catch {
           console.log("error while saving consulting bids....");
         }
-
       },
     });
     // Respond with the stream
     return new StreamingTextResponse(stream);
-
   } catch (error) {
     return NextResponse.json(
       { result: "something went wrong", success: false },

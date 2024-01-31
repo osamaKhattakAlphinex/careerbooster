@@ -133,8 +133,8 @@ const VirtualBot: React.FC<VirtualBotProps> = ({ firstName, lastName }) => {
             console.error("Error fetching or decoding audio:", error);
           });
 
+        componentRef.current.playbackRate = 2.0;
         componentRef.current.load();
-        componentRef.current.playbackRate = 1.75;
         componentRef.current.play();
         // setPrevUserData({
         //   firstName: userData.firstName,

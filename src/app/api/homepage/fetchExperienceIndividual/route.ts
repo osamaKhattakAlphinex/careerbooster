@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { OpenAI } from "langchain/llms/openai";
-
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
+import OpenAI from "openai";
+
 function removeSpecialChars(str: string) {
   // Remove new lines
   str = str.replace(/[\r\n]+/gm, "");
@@ -20,16 +20,19 @@ export async function POST(req: any) {
     const body = await req.json();
     if (body) {
       const reqBody = body;
-      const content = removeSpecialChars(reqBody.content);
+      const content = reqBody.content.substring(0, 12000);
       const jobTitle = reqBody.jobTitle;
       const company = reqBody.company;
       const personName = reqBody.personName;
 
       if (content) {
         // CREATING LLM MODAL
-        const model = new OpenAI({
-          modelName: "gpt-3.5-turbo",
-          temperature: 0.5,
+        // const model = new OpenAI({
+        //   modelName: "gpt-3.5-turbo",
+        //   temperature: 0.5,
+        // });
+        const openai = new OpenAI({
+          apiKey: process.env.OPENAI_API_KEY,
         });
 
         const input = `
@@ -68,14 +71,24 @@ export async function POST(req: any) {
                 description: VALUE_HERE
               }
     
-              If there is no value for any field Leave that field blank(empty) string and do not add labels like N/A or Not Available etc.
-              If there is only starting Year when person started working and no month for an experience record put the year in the fromYear field and leave the fromMonth field blank.
-              If there is only ending Year when person stopped working and no month for an experience record put the year in the toYear field and leave the toMonth field blank.`;
+              If there is no value for any field Leave that field blank(empty) string and do not add labels like N/A or Not Available etc.`;
 
-        const resp = await model.call(input);
-
+        const response = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo-1106",
+          messages: [
+            {
+              role: "user",
+              content: input,
+            },
+          ],
+          temperature: 0.5,
+        });
         return NextResponse.json(
-          { success: true, result: resp, input: input },
+          {
+            success: true,
+            result: response.choices[0].message.content,
+            input: input,
+          },
           { status: 200 }
         );
       }

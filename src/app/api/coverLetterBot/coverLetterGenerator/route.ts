@@ -18,6 +18,8 @@ import {
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 import { updateToolUsage } from "@/helpers/updateToolUsage";
+import { encodingForModel } from "js-tiktoken";
+import { updateUserTokens } from "@/helpers/updateUserTokens";
 export const maxDuration = 300; // This function can run for a maximum of 5 minutes
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
@@ -49,10 +51,9 @@ export async function POST(req: any) {
         return NextResponse.json(
           { result: "Insufficient Credits", success: false },
           { status: 429 }
-        )
+        );
       }
     }
-
 
     // const dataset = "linkedin.genearteConsultingBid";
     const dataset = "coverLetter.write";
@@ -69,7 +70,10 @@ export async function POST(req: any) {
     });
     const promptDB = promptRec.value;
 
-    const prompt = await promptDB.replaceAll("{{jobDescription}}", jobDescription);
+    const prompt = await promptDB.replaceAll(
+      "{{jobDescription}}",
+      jobDescription
+    );
 
     if (type === "file") {
       const user = await User.findOne({ email: email }, { files: 1 });
@@ -92,15 +96,22 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-
+    const enc = encodingForModel("gpt-3.5-turbo"); // js-tiktoken
+    let completionTokens = 0;
     const stream = OpenAIStream(response, {
       onStart: async () => {
-        await updateUserTotalCredits(email, creditsUsed)
-        await updateToolUsage("Cover Letter Generator", creditsUsed)
-
+        await updateUserTotalCredits(email, creditsUsed);
+        await updateToolUsage("Cover Letter Generator", creditsUsed);
+      },
+      onToken: async (content) => {
+        const tokenList = enc.encode(content);
+        completionTokens += tokenList.length;
       },
       onFinal: async (completions) => {
         try {
+          if (completionTokens > 0) {
+            await updateUserTokens(email, completionTokens);
+          }
           if (trainBotData) {
             const coverletterId = makeid();
 
@@ -135,7 +146,6 @@ export async function POST(req: any) {
     });
     // Respond with the stream
     return new StreamingTextResponse(stream);
-
   } catch (error) {
     return NextResponse.json(
       { result: "something went wrong", success: false },

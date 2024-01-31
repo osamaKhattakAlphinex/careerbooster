@@ -19,6 +19,8 @@ import { postEmail } from "../route";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 import { updateToolUsage } from "@/helpers/updateToolUsage";
+import { encodingForModel } from "js-tiktoken";
+import { updateUserTokens } from "@/helpers/updateUserTokens";
 
 // PROMPT
 // Here is the Job description:
@@ -58,7 +60,7 @@ export async function POST(req: any) {
         return NextResponse.json(
           { result: "Insufficient Credits", success: false },
           { status: 429 }
-        )
+        );
       }
     }
     const dataset = "linkedin.genearteConsultingBid";
@@ -74,7 +76,10 @@ export async function POST(req: any) {
     });
     const promptDB = promptRec.value;
 
-    const prompt = await promptDB.replaceAll("{{jobDescription}}", jobDescription);
+    const prompt = await promptDB.replaceAll(
+      "{{jobDescription}}",
+      jobDescription
+    );
     let fileContent;
     // CREATING LLM MODAL
 
@@ -101,16 +106,22 @@ export async function POST(req: any) {
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-
+    const enc = encodingForModel("gpt-3.5-turbo"); // js-tiktoken
+    let completionTokens = 0;
     const stream = OpenAIStream(response, {
       onStart: async () => {
-        await updateUserTotalCredits(email, creditsUsed)
-        await updateToolUsage("Email Generation Tool", creditsUsed)
+        await updateUserTotalCredits(email, creditsUsed);
+        await updateToolUsage("Email Generation Tool", creditsUsed);
+      },
+      onToken: async (content) => {
+        const tokenList = enc.encode(content);
+        completionTokens += tokenList.length;
       },
       onFinal: async (completions) => {
-
-
         try {
+          if (completionTokens > 0) {
+            await updateUserTokens(email, completionTokens);
+          }
           if (trainBotData) {
             const emailId = makeid();
 
@@ -142,12 +153,9 @@ export async function POST(req: any) {
           console.log("error while saving Emails....");
         }
       },
-
     });
     // Respond with the stream
     return new StreamingTextResponse(stream);
-
-
   } catch (error) {
     return NextResponse.json(
       { result: "something went wrong", success: false },
