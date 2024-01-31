@@ -69,10 +69,12 @@ const Template = () => {
     <div className="lg:ml-[234px] ml-0 px-[15px]">
       <RecentResumeCard componentRef={componentRef} templateId={templateId} />
       <div>
-        <h2 className=" text-gray-900 dark:text-white font-bold uppercase text-sm">
+        <h2 className="text-sm font-bold text-gray-900 uppercase dark:text-white">
           Templates Designs
         </h2>
-        <TemplateSlider templates={ALL_TEMPLATES} />
+        <TemplateSlider
+          templates={ALL_TEMPLATES.filter((template) => template.active)}
+        />
       </div>
 
       <div
@@ -118,7 +120,15 @@ const Template = () => {
                     left: isMobile ? "-" + refLeft + "px" : undefined,
                   }}
                 >
-                  {ALL_TEMPLATES[templateId - 1].template({})}
+                  {ALL_TEMPLATES[templateId - 1].active ? (
+                    ALL_TEMPLATES[templateId - 1].template({})
+                  ) : (
+                    <div className="grid w-full text-gray-700 place-content-center h-28">
+                      <span className="block p-4 font-semibold uppercase border">
+                        Template is In-Active
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </>

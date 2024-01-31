@@ -10,6 +10,7 @@ export type Template = {
   template: (props: any) => React.ReactNode;
   category: "premium" | "freemium";
   preview: string;
+  active: boolean;
 };
 
 type Tabs = {
@@ -51,19 +52,27 @@ const Templates = () => {
 
   const filterTemplates = () => {
     if (activeTab.tab === "all-templates") {
-      setTemplates(ALL_TEMPLATES);
-    } else {
-      let _templates: Template[] = ALL_TEMPLATES.filter((template) =>
-        template.tags.includes(activeTab.tab)
+      const activeTemplate = ALL_TEMPLATES.filter(
+        (template) => template.active === true
       );
+
+      console.log(activeTemplate);
+
+      setTemplates(activeTemplate);
+    } else {
+      let _templates: Template[] = ALL_TEMPLATES.filter((template) => {
+        if (template.tags.includes(activeTab.tab) && template.active) {
+          return template;
+        }
+      });
       setTemplates(_templates);
     }
   };
   useEffect(() => {
-    // console.log("templates")
+    console.log("templates");
   }, [templates]);
   useEffect(() => {
-    setTemplates(ALL_TEMPLATES);
+    filterTemplates();
   }, []);
   useEffect(() => {
     filterTemplates();
@@ -71,7 +80,7 @@ const Templates = () => {
 
   return (
     <div className="ml-0 lg:ml-[234px]  ">
-      <div className="p-4 flex flex-row justify-center items-center gap-2">
+      <div className="flex flex-row items-center justify-center gap-2 p-4">
         {tabs.map((tab, index) => (
           <button
             key={index}
@@ -85,7 +94,7 @@ const Templates = () => {
         ))}
       </div>
 
-      <div className=" text-center "> {activeTab.description}</div>
+      <div className="text-center "> {activeTab.description}</div>
       {templates && <TemplateSlider templates={templates} />}
     </div>
   );
