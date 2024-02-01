@@ -45,8 +45,14 @@ const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(null);
   const router = useRouter();
+  const imageRef = useRef<any>();
+  const [image, setImage] = useState<any>(null);
 
   const imageCroperRef = useRef<any>();
+
+  useEffect(() => {
+    console.log(image);
+  }, [image]);
 
   if (pagesArray?.includes(pathname)) return <></>;
   const handleMouseOver = (index: any) => {
@@ -56,9 +62,6 @@ const SideBar = () => {
   const handleMouseOut = () => {
     setHoveredItem(null);
   };
-
-  const imageRef = useRef<any>();
-  const [image, setImage] = useState<any>(null);
 
   const handleImageChange = (e: any) => {
     const selectedFile = e.target.files[0];
@@ -86,18 +89,11 @@ const SideBar = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("first", image);
-  }, [image]);
   return (
     <>
       {/* Mobile Menu Button */}
 
-      <ProfileImageModal
-        ref={imageCroperRef}
-        image={image}
-        setImage={setImage}
-      />
+      <ProfileImageModal ref={imageCroperRef} image={image} />
 
       <div
         className={`dark:bg-[#18181B] bg-[e4E9F7] fixed px-2 top-0 w-[234px] z-30 flex items-center transition-all duration-200    ${
@@ -107,13 +103,13 @@ const SideBar = () => {
         }`}
       >
         <div
-          className="w-5 h-5 text-zinc-600 lg:hidden flex cursor-pointer"
+          className="flex w-5 h-5 cursor-pointer text-zinc-600 lg:hidden"
           onClick={() => setIsOpen(!isOpen)}
         >
           {/* Use your icon here for mobile menu toggle */}
           {isOpen ? xMark : menuIcon}
         </div>
-        <Image src={logo} alt="" className="w-35 h-16 md:ml-4" />
+        <Image src={logo} alt="" className="h-16 w-35 md:ml-4" />
       </div>
       <div
         className={`fixed w-[234px] h-screen z-30 top-0 flex justify-center dark:bg-[#18181B] bg-gray-100  mt-16  transition-all  ${
@@ -122,13 +118,33 @@ const SideBar = () => {
             : "-translate-x-full lg:translate-x-0 " // Apply opacity only on small screens
         }`}
       >
-        <div className=" overflow-scroll pb-4 ">
+        <div className="pb-4 overflow-scroll ">
           <div className="px-7 py-[6px] flex">
             <div className="mr-4">
               <div
                 onClick={triggerInputClick}
-                className="  w-10 h-10 text-white bg-gray-800 text-center flex justify-center items-center  rounded-full "
+                className="flex items-center justify-center w-10 h-10 text-center text-white bg-gray-800 rounded-full "
               >
+                {userData.profileImage ? (
+                  <div className="flex items-center justify-center w-10 h-10 overflow-hidden text-base text-gray-600 uppercase bg-gray-300 rounded-full">
+                    <Image
+                      src={
+                        userData.profileImage !== ""
+                          ? userData.profileImage
+                          : image
+                      }
+                      width={100}
+                      height={100}
+                      alt="Uploaded"
+                      className="overflow-hidden "
+                    />
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center w-10 h-10 text-base text-gray-600 uppercase bg-gray-300 rounded-full">
+                    {userData.firstName[0]}
+                    {userData.lastName[0]}
+                  </div>
+                )}
                 <span className="text-4xl rounded-full cursor-pointer hover:shadow-md hover:bg-gray-100">
                   <input
                     ref={imageRef}
@@ -137,20 +153,6 @@ const SideBar = () => {
                     accept="image/*"
                     onChange={handleImageChange}
                   />
-                  {image && (
-                    <Image
-                      src={image}
-                      width={100}
-                      height={100}
-                      alt="Uploaded"
-                    />
-                  )}
-                  {!image && (
-                    <div className="w-10 h-10 uppercase flex items-center text-base justify-center bg-gray-300 text-gray-600 rounded-full">
-                      {userData.firstName[0]}
-                      {userData.lastName[0]}
-                    </div>
-                  )}
                 </span>
               </div>
               <button onClick={triggerInputClick}>
@@ -167,7 +169,7 @@ const SideBar = () => {
               </button>
             </div>
             <div>
-              <h1 className="dark:text-white text-gray-950 text-base gap-1 font-semibold mb-0 ">
+              <h1 className="gap-1 mb-0 text-base font-semibold dark:text-white text-gray-950 ">
                 {userData.firstName + " " + userData.lastName}
               </h1>
               <Link

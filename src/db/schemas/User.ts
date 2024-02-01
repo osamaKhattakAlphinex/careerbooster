@@ -25,10 +25,7 @@ const UserSchema = new Schema(
       unique: true,
       required: true,
     },
-    profileImage: {
-      type: String,
-      default: "",
-    },
+    profileImage: String,
     phone: {
       type: String,
     },
