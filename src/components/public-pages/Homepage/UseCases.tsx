@@ -78,7 +78,7 @@ const useCaseDetails = [
 const UseCases = () => {
   return (
     <section className="bg-gray-100 dark:bg-gray-950 py-20 py-lg-30 ">
-      <div className="xs:px-5 md:px-20 ">
+      <div className="xs:px-5 md:container">
         <div className="row justify-center mb-18">
           <div className="col-lg-9">
             <div className="text-center py-10">

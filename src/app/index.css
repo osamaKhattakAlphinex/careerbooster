@@ -9,7 +9,7 @@
             @apply pl-[5px] text-[#6a4dff] dark:text-[#e6f85e];
     }
         .h3-t {
-            @apply font-semibold text-[#000] dark:text-[#fff]  text-center leading-5 text-4xl ;
+            @apply font-semibold text-[#000] dark:text-[#fff]  text-center leading-5 text-3xl ;
         }
         
 }
