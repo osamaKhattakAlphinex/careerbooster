@@ -7,11 +7,11 @@ export const metadata: Metadata = {
 const RegisterNew = () => {
   return (
     <>
-      <div className=" d-flex flex-column justify-between ">
+      <div className=" flex flex-col justify-between ">
         <main className="flex-grow-1">
-          <section className="account-section login-page pb-6 pt-40 ">
-            <div className="container-fluid ">
-              <div className="row ">
+          <section className=" pb-10 pt-40 dark:bg-gray-950 bg-gray-100">
+            <div className="container ">
+              <div className="flex ">
                 <RegistrationForm />
               </div>
             </div>

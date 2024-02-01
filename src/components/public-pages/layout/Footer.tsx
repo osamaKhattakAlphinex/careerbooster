@@ -24,9 +24,9 @@ const Footer = () => {
           ></script>
         </Head>
         <div className="">
-          <div className=" flex justify-between px-32 gap-8  py-8">
-            <div className="w-4/12">
-              <div className="flex  items-center">
+          <div className=" flex lg:flex-row xs:flex-col justify-between md:px-20 xs:px-10 xs:text-center  md:gap-8 gap-4 py-8 md:text-left">
+            <div className="lg:w-4/12 xs:w-full">
+              <div className="flex  items-center xs:text-center md:text-left xs:justify-center md:justify-start">
                 <Image
                   width={80}
                   height={74}
@@ -38,7 +38,7 @@ const Footer = () => {
                   CareerBooster
                 </span>
               </div>
-              <p className="mb-0 text-gray-950 text-sm pr-4 dark:text-gray-300">
+              <p className="mb-0 text-gray-950 text-sm lg:pr-4 dark:text-gray-300">
                 We specialize in turbocharging your career by harnessing the
                 power of cutting-edge AI-infused tools, ensuring you achieve
                 peak professional excellence. Our innovative solutions are
@@ -47,8 +47,8 @@ const Footer = () => {
               </p>
             </div>
 
-            <div className="flex justify-between gap-4 py-6 w-full">
-              <div className="px-5  text-gray-950 mb-2 dark:text-gray-100">
+            <div className="flex lg:flex-row flex-col justify-between gap-4 lg:py-6 w-full">
+              <div className="lg:px-5  text-gray-950 mb-2 dark:text-gray-100">
                 <h6 className="text-gray-950 mb-2 text-xl font-semibold dark:text-gray-100 ">
                   CareerBooster.AI
                 </h6>
@@ -70,7 +70,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div className="px-5 ">
+              <div className="lg:px-5 ">
                 <h6 className=" mb-2 text-gray-950 dark:text-gray-100 text-xl font-semibold">
                   Use Cases
                 </h6>
@@ -92,7 +92,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div className="px-5">
+              <div className="lg:px-5">
                 <h6 className="text-gray-950 text-xl font-semibold dark:text-gray-100 mb-4">
                   Contact Us
                 </h6>
@@ -192,7 +192,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="py-6 mt-8 mx-auto ">
+          <div className="py-6 lg:mt-8 mx-auto xs:container ">
             <p className="text-center text-xs text-gray-950 dark:text-gray-100 ">
               Copyright <span> &copy; CareerBooster 2023</span>.{" "}
               <Link
@@ -202,7 +202,10 @@ const Footer = () => {
                 Privacy Policy
               </Link>{" "}
               &nbsp;
-              <Link href="/terms-and-conditions" className="">
+              <Link
+                href="/terms-and-conditions"
+                className="text-[#6a4dff] dark:text-[#e6f85e] mx-4 no-underline hover:text-blue-400 dark:hover:text-blue-400"
+              >
                 Terms And Conditions
               </Link>
             </p>

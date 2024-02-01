@@ -1,9 +1,10 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { resetPassword } from "@/lib/api";
 import ReCAPTCHA from "react-google-recaptcha";
 import { verifyCaptcha } from "@/ServerActions";
+import { useTheme } from "next-themes";
 
 const ResetPasswordPage = () => {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -39,27 +40,29 @@ const ResetPasswordPage = () => {
 
   return (
     <>
-      <main className="flex-grow-1 mb-20">
-        <section className="py-15 pt-lg-30">
+      <main className="flex-grow-1 pb-20">
+        <section className="py-16 lg:pt-40 dark:bg-gray-950 bg-gray-100">
           <div className="container">
-            <div className="row justify-center">
-              <div className="col-lg-8 col-xl-6">
+            <div className="flex justify-center">
+              <div className="flex flex-col gap-4 lg:w-8/12 xl:w-6/12 ">
+                <h1 className="dark:text-gray-100 text-gray-950 font-semibold text-[2rem] ">
+                  Resest Your Password
+                </h1>
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
-                    <label htmlFor="email" className="form-label">
+                    <label htmlFor="email" className="">
                       Email Address
                     </label>
                     <input
                       type="email"
-                      id="email"
                       name="email"
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
-                      className="form-control"
+                      className="my-4 block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-3 pl-4 text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
                       required
                     />
                   </div>
-                  <div className="mb-6">
+                  <div className="mb-6 dark:block hidden">
                     <ReCAPTCHA
                       sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
                       ref={recaptchaRef}
@@ -67,10 +70,18 @@ const ResetPasswordPage = () => {
                       theme="dark"
                     />
                   </div>
+                  <div className="mb-6 dark:hidden block">
+                    <ReCAPTCHA
+                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                      ref={recaptchaRef}
+                      onChange={handleCaptchaSubmission}
+                      theme="light"
+                    />
+                  </div>
                   {error && <p className="text-danger">{error}</p>}
                   <button
                     type="submit"
-                    className="btn theme-outline-btn"
+                    className="no-underline px-[1rem] font-[500] text-[1rem] py-[.85rem] rounded-md text-[#6a4dff] dark:text-[#e6f85e] border-[1px] border-[#6a4dff] hover:border-[#6a4dff] hover:bg-[#6a4dff] hover:border-none hover:text-gray-100 dark:bg-[#11121c] dark:border-[#e6f85e]  dark:hover:bg-[#e6f85e] dark:hover:border-none dark:hover:text-[#11121c] disabled:opacity-[.65] "
                     disabled={isLoading || !isVerified}
                   >
                     {isLoading ? "Loading..." : "Send Reset Link"}

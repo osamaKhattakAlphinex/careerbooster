@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 export default function BlogsPage() {
   return (
     <>
-      <main className="flex-grow-1 mb-20">
+      <main className="flex-grow-1 pb-20">
         {/* <!-- Page header --> */}
         <PageHeader title="Blog Posts" />
         <Blog

@@ -73,7 +73,7 @@ const UploadPDFResume = () => {
   return (
     <>
       {!isAuth && data === null && (
-        <label className="btn btn-lg ">
+        <label className=" ">
           <input
             type="file"
             className="hidden"
@@ -87,7 +87,7 @@ const UploadPDFResume = () => {
           {fileUploading ? (
             refreshIconRotating
           ) : (
-            <div className="flex justify-center items-center gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg w-[33%] mx-auto">
+            <div className="flex justify-center items-center gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg lg:w-[33%] sm:w-[50%] md:w-[50%] xs:w-full mx-auto">
               <div>{uploadIcon}</div>
               <div>
                 <p className="m-0 text-sm [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] capitalize text-center">

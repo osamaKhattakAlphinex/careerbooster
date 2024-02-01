@@ -59,7 +59,7 @@ const FeaturesSecond = () => {
           />
         </svg>
       ),
-      className: " flex-row-reverse",
+      className: " md:flex-row-reverse",
       imageSrc1: "assets/images/illustrations/feature-illustration-1-dark.svg",
       imageSrc2: "assets/images/illustrations/feature-illustration-1-blue.svg",
     },
@@ -119,7 +119,7 @@ const FeaturesSecond = () => {
           />
         </svg>
       ),
-      className: " flex-row-reverse",
+      className: " md:flex-row-reverse",
       imageSrc1: "	/assets/images/illustrations/feature-illustration-3-dark.svg",
       imageSrc2: "	/assets/images/illustrations/feature-illustration-3-blue.svg",
     },
@@ -158,14 +158,14 @@ const FeaturesSecond = () => {
 
   return (
     <section className="pb-10  dark:bg-gray-950 bg-gray-100">
-      <div className="container">
+      <div className="lg:container md:container xs:px-5">
         {SecondFeatureSingleData.map((item) => {
           return (
             <>
               <div
-                className={` flex flex-row w-[100%]  gap-20 pt-15 justify-center  items-center ${item.className}`}
+                className={` flex md:flex-row xs:flex-col w-[100%]  gap-20 xs:gap-5 pt-15 justify-center  items-center ${item.className}`}
               >
-                <div className="flex flex-col w-[50%] px-[8px] pt-8">
+                <div className="flex flex-col lg:w-[50%] md:w-[50%] xs:w-[100%] px-[8px] xs:px-0 pt-8 xs:pt-2">
                   <div className="content" key={item.id}>
                     <p className="text-[#6a4dff] dark:text-[#e6f85e] text-[1rem] mb-[1rem]">
                       {item.featureNo}
@@ -191,7 +191,7 @@ const FeaturesSecond = () => {
                     </Link>
                   </div>
                 </div>
-                <div className="flex flex-col w-[50%] px-[8px]">
+                <div className="flex flex-col lg:w-[50%] md:w-[50%] px-[8px] xs:px-0 xs:w-[100%]">
                   <div className=" dark:block hidden">
                     <Image
                       width={506}

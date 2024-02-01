@@ -100,8 +100,8 @@ const FeaturesSection = () => {
   ];
   return (
     <section className="pb-15 dark:pt-0 pt-8 dark:bg-gray-950 bg-gray-100">
-      <div className="container">
-        <div className="text-center mb-18">
+      <div className="lg:container md:container">
+        <div className="flex flex-col justify-center text-center mb-18 xs:px-10">
           <h4 className="mb-5 dark:text-gray-100 text-gray-950 font-bold md:text-[24px] text-[17px]">
             Uncover the Secret to Superior Resumes
           </h4>
@@ -112,7 +112,7 @@ const FeaturesSection = () => {
           <h4 className="mb-0 dark:text-gray-100 text-gray-950 font-bold md:text-[24px] text-[17px]">
             The Game-Changing Advantages You Never Knew About
           </h4>
-          <p className="py-10 w-[75%] mx-auto dark:text-gray-100 text-gray-950 pb-10">
+          <p className="py-10 lg:w-[75%] md:w-[75%] xs:w-full mx-auto dark:text-gray-100 text-gray-950 pb-10">
             In today{"'"}s competitive job market, landing your dream role isn
             {"'"}t just about qualifications and experience; It{"'"}s about
             making sure your resume stands out. But here{"'"}s the catch: before
@@ -122,10 +122,10 @@ const FeaturesSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 mr-6">
+        <div className="grid lg:grid-cols-2 md:grid-cols-2 xs:grid-cols-1 mr-6 xs:mr-0">
           {singleFeatureData.map((item) => {
             return (
-              <div className="flex col-span-1 mb-6 px-4 pt-10">
+              <div className="flex col-span-1 mb-6 px-4 lg:pt-10 md:pt-10 xs:pt-0">
                 <div className="flex gap-5">
                   <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-lg p-2 border-[1px] dark:bg-[#1E1F27] text-[#0000ff9c] bg-[#E5E3F7] dark:text-[#e6f85e] dark:border-white border-[#c7bef9] dark:border-opacity-10 border-opacity-25">
                     {item.svg}
@@ -145,7 +145,7 @@ const FeaturesSection = () => {
         </div>
 
         <div className="text-center ">
-          <h5 className="my-10 dark:text-gray-100 text-gray-950 font-[600] text-[1.25rem]">
+          <h5 className="lg:my-10 md:my-10 xs:mb-10 xs:mt-0 dark:text-gray-100 text-gray-950 font-[600] text-[1.25rem]">
             Ready to craft a resume that impresses both bots and humans?
           </h5>
           <Link

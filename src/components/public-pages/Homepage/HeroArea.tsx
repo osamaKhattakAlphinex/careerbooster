@@ -5,9 +5,9 @@ import Image from "next/image";
 const HeroArea = () => {
   return (
     <section
-      className={`dark:bg-[url('/assets/images/bg/bg-4.png')] bg-[url('/assets/images/bg/1.jpg')]  style-1   pt-40 pb-15 lg:pb-20 bg-auto bg-no-repeat bg-center overflow-hidden `}
+      className={`dark:bg-[url('/assets/images/bg/bg-4.png')] bg-[url('/assets/images/bg/1.jpg')]  style-1   lg:pt-40 md:pt-40 xs:pt-[120px] xs:pb-[80px] pb-15 lg:pb-20 md:pb-20 bg-auto bg-no-repeat bg-center overflow-hidden `}
     >
-      <div className="container ">
+      <div className="lg:container md:container ">
         <div className="flex justify-center ">
           <div className="flex flex-col w-9/12">
             <div className="text-center">
@@ -20,7 +20,7 @@ const HeroArea = () => {
                   Turbocharge Your Career!
                   <br />
                   <span
-                    className="font-bold md:text-[40px] mt-8 text-[24px] theme-features-text  typed-animation text-wrap"
+                    className="font-bold md:text-[40px] mt-8 text-[24px] text-transparent bg-clip-text bg-gradient-to-r from-[#b324d7] to-[#fe577f] dark:bg-gradient-to-r dark:from-[#58ebff] dark:to-[#e6f85e] typed-animation text-wrap"
                     data-strings='["Find Your Dream Job Faster.", "Get More Interviews.", 
                         "Access Confidential Opportunities with the Right Keywords.", "Get the Attention You Deserve from Recruiters.",
                         "Get Past the ATS and Increase Your Visibility.",
@@ -63,7 +63,7 @@ const HeroArea = () => {
                 <li>Write Resumes 100x Faster</li>
                 <li>Write Keyword-Optimized LinkedIn Profile</li>
               </ul>
-              <div className="dark:flex hidden gap-8 items-center justify-center mt-12 review-badges">
+              <div className="dark:flex dark:lg:flex-row dark:md:flex-row dark:xs:flex-col hidden gap-8 items-center justify-center mt-12 review-badges">
                 <Image
                   width={185}
                   height={38}
@@ -79,7 +79,7 @@ const HeroArea = () => {
                   alt=""
                 />
               </div>
-              <div className="dark:hidden flex  gap-8 items-center justify-center mt-12 review-badges">
+              <div className="dark:hidden flex lg:flex-row md:flex-row xs:flex-col gap-8 items-center justify-center mt-12 review-badges">
                 <Image
                   width={185}
                   height={38}

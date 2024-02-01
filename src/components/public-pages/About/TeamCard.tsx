@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const TeamCard = () => {
   return (
-    <section className="py-10 lg:py-16">
+    <section className="py-10 lg:py-20">
       <div className="container">
-        <div className="flex justify-center mb-18">
+        <div className="flex justify-center pb-16">
           <div className="flex flex-col w-9/12">
             <div>
               <h1 className="text-center md:text-[48px] text-[24px] dark:text-gray-100 text-gray-950 font-semibold">
@@ -19,9 +19,9 @@ const TeamCard = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center mx-auto w-full md:w-4/12 xl:w-3/12 gap-y-10 md:gap-y-12 lg:gap-y-18">
-          <div className="flex flex-col">
-            <div className="team-card text-center">
+        <div className="flex flex-wrap justify-center mx-auto  gap-y-10 md:gap-y-12 lg:gap-y-18">
+          <div className="flex flex-col w-full md:w-4/12 xl:w-3/12">
+            <div className="text-center">
               <Image
                 width={200}
                 height={200}
@@ -29,9 +29,13 @@ const TeamCard = () => {
                 alt=""
                 className="w-[200px] h-[200px] object-cover rounded-full inline-block mb-6"
               />
-              <h4 className="theme-text-2 mb-1">Mubasher Hassan</h4>
-              <p className="fs-sm mb-2">CEO & Co-Founder</p>
-              <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
+              <h4 className="dark:text-gray-100 text-gray-950 font-semibold mb-1 text-[1.5rem]">
+                Mubasher Hassan
+              </h4>
+              <p className="text-sm mb-2 dark:text-gray-100 text-gray-950">
+                CEO & Co-Founder
+              </p>
+              <ul className="flex flex-wrap justify-center items-center gap-3  mb-0">
                 <li>
                   <Link
                     href="https://www.facebook.com/mubasherhassan.k"
@@ -41,6 +45,7 @@ const TeamCard = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 18 18"
+                      className="w-6 h-6 dark:text-gray-100 text-gray-950"
                     >
                       <path
                         stroke="currentColor"
@@ -65,7 +70,7 @@ const TeamCard = () => {
                     target="_blank"
                   >
                     <svg
-                      className="w-4 h-4    theme-text-2 "
+                      className="w-4 h-4    dark:text-gray-100 text-gray-950 "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -83,8 +88,8 @@ const TeamCard = () => {
               </ul>
             </div>
           </div>
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="100">
-            <div className="team-card text-center">
+          <div className="flex flex-col md:w-4/12 xl:w-3/12">
+            <div className="text-center">
               <Image
                 width={200}
                 height={200}
@@ -92,9 +97,11 @@ const TeamCard = () => {
                 alt=""
                 className="w-[200px] h-[200px] object-cover rounded-full inline-block mb-6"
               />
-              <h4 className="theme-text-2 mb-1">M. Suleman Ibrahim</h4>
-              <p className="fs-sm mb-2">CTO & Co-Founder</p>
-              <ul className="list-unstyled d-flex flex-wrap justify-center align-center gap-3 social-list mb-0">
+              <h4 className="text-gray-950 font-semibold dark:text-gray-100 mb-1 text-[1.5rem]">
+                M. Suleman Ibrahim
+              </h4>
+              <p className="text-sm mb-2">CTO & Co-Founder</p>
+              <ul className="flex flex-wrap justify-center items-center gap-3  mb-0">
                 <li>
                   <Link
                     href="https://www.facebook.com/m.suleman.ibrahim.k"
@@ -103,7 +110,8 @@ const TeamCard = () => {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
-                      viewBox="0 0 18 18"
+                      viewBox="0 0 18 18 "
+                      className="w-6 h-6 dark:text-gray-100 text-gray-950"
                     >
                       <path
                         stroke="currentColor"
@@ -128,7 +136,7 @@ const TeamCard = () => {
                     target="_blank"
                   >
                     <svg
-                      className="w-4 h-4    theme-text-2 "
+                      className="w-4 h-4    dark:text-gray-100 text-gray-950"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"

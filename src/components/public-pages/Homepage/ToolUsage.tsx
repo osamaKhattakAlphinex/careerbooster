@@ -20,10 +20,10 @@ const ToolUsage: React.FC<ToolUsageProps> = ({
         {icon}
       </div>
       <div className="">
-        <h5 className="mb-4 text-gray-950 font-bold dark:text-gray-100 text-[1.40rem]">
+        <h5 className="mb-4 text-gray-950 font-bold dark:text-gray-100 lg:text-[1.40rem] md:text-[1.40rem] xs:text[1.25rem]">
           {title}
         </h5>
-        <p className="mb-0 text-gray-950 dark:text-gray-400 text-[18px] ">
+        <p className="mb-0 text-gray-950 dark:text-gray-400 lg:text-[18px] md:text-[18px] xs:text-[16px]">
           {description}
         </p>
       </div>
@@ -32,7 +32,7 @@ const ToolUsage: React.FC<ToolUsageProps> = ({
           href={link}
           className="inline-flex no-underline justify-center group items-center relative  text-[#6a4dff] dark:text-[#e6f85e] gap-3 dark:after:bg-[#e6f85e] after:bg-[#0000ff9c] hover:text-[#6a4dff] after:content[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[1px] after:ease-in-out after:duration-300  hover:after:w-[100%]"
         >
-          <span className="group-hover:text-[#6a4dff] text-[16px]">
+          <span className="group-hover:text-[#6a4dff] md:text-[16px] xs:text-sm">
             {linkText}
           </span>
           <svg

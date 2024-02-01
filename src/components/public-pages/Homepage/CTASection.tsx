@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 const CTASection = () => {
   return (
-    <section className="dark:bg-gray-950 bg-gray-100 py-10 py-lg-15 ">
-      <div className="container">
+    <section className="dark:bg-gray-950 bg-gray-100 py-10 xs:px-6 ">
+      <div className="md:container">
         <div className="rounded-2xl border-[1px] relative z-1 dark:bg-[url('/assets/images/bg/bg-4.png')] bg-[url('/assets/images/bg/1.jpg')] overflow-hidden">
           <div className="animate-scale absolute w-full h-full z-[1]  m-auto">
             <Image
@@ -15,7 +15,7 @@ const CTASection = () => {
             />
           </div>
           <div className="flex justify-center">
-            <div className="flex flex-col w-10/12">
+            <div className="flex flex-col md:w-10/12 xs:w-full">
               <div className="text-center pt-6 px-10 md:pt-10 md:px-10 lg:pt-20 lg:px-20">
                 <h5 className="text-[#6a4dff] dark:text-[#e6f85e] text-[1.25rem] font-semibold">
                   Revolutionize Your Job Hunt

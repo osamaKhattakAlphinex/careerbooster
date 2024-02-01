@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const AboutCard = () => {
   return (
-    <section className="pt-14 pb-16">
+    <section className="pt-10 pb-16">
       <div className="container">
         <div className="flex items-center pb-8">
           <div className="flex flex-col w-6/12 px-[2rem]">

@@ -4,7 +4,7 @@ import MapCard from "@/components/public-pages/Contact/MapCard";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
 import "@/app/plugins.css";
-import "@/app/style.css";
+
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Contact",
   description:
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <main className="flex-grow-1 mb-20">
+      <main className="flex-grow-1 pb-20">
         {/* <!-- Page header --> */}
         <PageHeader title="Contact With Us" secondTitle="Contact" />
 

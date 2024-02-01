@@ -6,7 +6,7 @@ interface Props {
 }
 const PageHeader: React.FC<Props> = ({ title, secondTitle }) => {
   return (
-    <section className="pb-10 bg-[url('/assets/images/shapes/stripe-light.svg')] bg-no-repeat dark:bg-[url('/assets/images/shapes/stripe-dark.svg')] flex  justify-center items-center  bg-cover bg-start py-16">
+    <section className="pb-10 lg:pb-16 bg-[url('/assets/images/shapes/stripe-light.svg')] bg-no-repeat dark:bg-[url('/assets/images/shapes/stripe-dark.svg')] flex  justify-center items-center  bg-cover bg-start pt-40">
       <div className="flex flex-col gap-6 pb-6">
         <h1 className="h3-t">{title}</h1>
         <nav>

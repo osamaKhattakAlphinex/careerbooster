@@ -55,7 +55,7 @@ const ChangePasswordPage = () => {
 
   return (
     <>
-      <main className="flex-grow-1 mb-20  lg:ml-[234px] ">
+      <main className="flex-grow-1 pb-20  lg:ml-[234px] ">
         <section className="py-15 pt-lg-30">
           <div className="container">
             <div className="row justify-center">
