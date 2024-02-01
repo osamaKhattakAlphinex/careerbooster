@@ -19,10 +19,11 @@ import {
 import "@/app/(private_route)/dashboard.css";
 
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import Button from "../Button";
+import ProfileImageModal from "../ProfileImageModal";
 
 const items = [
   { icon: homeIcon, text: "Dashboard", url: "/dashboard" },
@@ -45,6 +46,8 @@ const SideBar = () => {
   const [activeTab, setActiveTab] = useState(null);
   const router = useRouter();
 
+  const imageCroperRef = useRef<any>();
+
   if (pagesArray?.includes(pathname)) return <></>;
   const handleMouseOver = (index: any) => {
     setHoveredItem(index);
@@ -54,9 +57,47 @@ const SideBar = () => {
     setHoveredItem(null);
   };
 
+  const imageRef = useRef<any>();
+  const [image, setImage] = useState<any>(null);
+
+  const handleImageChange = (e: any) => {
+    const selectedFile = e.target.files[0];
+    console.log(selectedFile);
+    if (selectedFile) {
+      if (selectedFile.size > 1048576) {
+        // Check if file size is more than 1MB
+        alert("File size exceeds the limit of 1MB.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64Image: any = reader.result; // Convert the image blob to base64
+        setImage(base64Image); // Set the base64 image in the state
+      };
+      reader.readAsDataURL(selectedFile); // Read the file as a data URL (base64)
+      imageCroperRef.current.openModal(true);
+    }
+  };
+
+  const triggerInputClick = () => {
+    if (imageRef.current) {
+      imageRef.current.click();
+    }
+  };
+
+  useEffect(() => {
+    console.log("first", image);
+  }, [image]);
   return (
     <>
       {/* Mobile Menu Button */}
+
+      <ProfileImageModal
+        ref={imageCroperRef}
+        image={image}
+        setImage={setImage}
+      />
 
       <div
         className={`dark:bg-[#18181B] bg-[e4E9F7] fixed px-2 top-0 w-[234px] z-30 flex items-center transition-all duration-200    ${
@@ -84,10 +125,46 @@ const SideBar = () => {
         <div className=" overflow-scroll pb-4 ">
           <div className="px-7 py-[6px] flex">
             <div className="mr-4">
-              <div className="w-10 h-10 uppercase flex items-center justify-center bg-gray-300 text-gray-600 rounded-full">
-                {userData.firstName[0]}
-                {userData.lastName[0]}
+              <div
+                onClick={triggerInputClick}
+                className="  w-10 h-10 text-white bg-gray-800 text-center flex justify-center items-center  rounded-full "
+              >
+                <span className="text-4xl rounded-full cursor-pointer hover:shadow-md hover:bg-gray-100">
+                  <input
+                    ref={imageRef}
+                    className="hidden"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                  />
+                  {image && (
+                    <Image
+                      src={image}
+                      width={100}
+                      height={100}
+                      alt="Uploaded"
+                    />
+                  )}
+                  {!image && (
+                    <div className="w-10 h-10 uppercase flex items-center text-base justify-center bg-gray-300 text-gray-600 rounded-full">
+                      {userData.firstName[0]}
+                      {userData.lastName[0]}
+                    </div>
+                  )}
+                </span>
               </div>
+              <button onClick={triggerInputClick}>
+                <input
+                  ref={imageRef}
+                  className="hidden"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  onClick={(e: any) => {
+                    e.target.value = null; // Reset file input value when clicked
+                  }}
+                />
+              </button>
             </div>
             <div>
               <h1 className="dark:text-white text-gray-950 text-base gap-1 font-semibold mb-0 ">
