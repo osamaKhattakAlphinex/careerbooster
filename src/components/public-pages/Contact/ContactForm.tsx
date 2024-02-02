@@ -44,7 +44,7 @@ const ContactForm = () => {
 
   return (
     <div className="flex flex-row justify-center">
-      <div className="flex flex-col w-[44%] ">
+      <div className="flex flex-col md:w-[44%] ">
         <form className="flex flex-col gap-8" onSubmit={formik.handleSubmit}>
           <div className=" flex flex-col justify-start items-start">
             <label

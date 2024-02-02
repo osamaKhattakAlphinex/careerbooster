@@ -31,11 +31,11 @@ const StepOne = () => {
 
   return (
     <>
-      <div className="flex flex-col w-full gap-8">
+      <div className="flex flex-col w-full xs:gap-3 md:gap-8 ">
         <div className="">
           <label
             htmlFor="name"
-            className="dark:text-gray-100  text-gray-950 text-lg"
+            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
           >
             {" "}
             First Name *{" "}
@@ -61,7 +61,7 @@ const StepOne = () => {
               type="text"
               id="firstName"
               name="firstName"
-              className="rounded-md text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              className="rounded-md xs:text-sm md:text-lg text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
               placeholder=""
               value={firstName}
               onChange={(e) => {
@@ -73,7 +73,7 @@ const StepOne = () => {
         <div className="">
           <label
             htmlFor="name"
-            className="dark:text-gray-100  text-gray-950 text-lg"
+            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
           >
             {" "}
             Last Name *{" "}
@@ -103,7 +103,7 @@ const StepOne = () => {
               onChange={(e) => {
                 dispatch(setStepOne({ lastName: e.target.value }));
               }}
-              className="rounded-md text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              className="rounded-md md:text-lg xs:text-sm text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
               placeholder=""
             />
           </div>

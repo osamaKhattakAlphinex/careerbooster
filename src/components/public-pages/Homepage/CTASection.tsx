@@ -3,7 +3,7 @@ import Link from "next/link";
 const CTASection = () => {
   return (
     <section className="dark:bg-gray-950 bg-gray-100 py-10 xs:px-6 ">
-      <div className="md:container">
+      <div className="md:container mx-auto ">
         <div className="rounded-2xl border-[1px] relative z-1 dark:bg-[url('/assets/images/bg/bg-4.png')] bg-[url('/assets/images/bg/1.jpg')] overflow-hidden">
           <div className="animate-scale absolute w-full h-full z-[1]  m-auto">
             <Image

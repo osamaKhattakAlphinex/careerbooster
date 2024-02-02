@@ -122,7 +122,7 @@ const UploadPDFResume = () => {
       {isAuth && (
         <Link
           href="/dashboard"
-          className="btn btn-lg bg-gradient-to-r from-purple-700 via-pink-500 to-pink-200 text-white p-4 rounded "
+          className="bg-gradient-to-r  from-purple-700  to-pink-500 text-white px-[2rem] py-[1rem] rounded-xl "
         >
           Dashboard
         </Link>

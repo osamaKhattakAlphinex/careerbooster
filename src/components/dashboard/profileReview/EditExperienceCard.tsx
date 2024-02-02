@@ -60,7 +60,7 @@ const EditExperienceCard = () => {
   }, [list]);
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 border-[1px] rounded-lg">
+    <div className="w-full max-w-md mx-auto p-6 xs:mt-4 md:mt-10 !border-[1px] dark:!border-[#2e2f45] border-gray-700 rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">
         Update Experience
         <button

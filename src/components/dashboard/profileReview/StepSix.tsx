@@ -74,7 +74,7 @@ const StepSix = () => {
 
   return (
     <div className="w-full max-w-md mx-auto ">
-      <h2 className="text-2xl font-semibold mb-4 my-8 dark:text-gray-100 text-gray-950">
+      <h2 className="text-2xl font-semibold mb-4 my-3 md:my-8 dark:text-gray-100 text-gray-950">
         Your Skills
       </h2>
       <div className="mb-4">
