@@ -1,7 +1,9 @@
+"use client";
+import { useTourContext } from "@/context/TourContext";
 import { chevronRight } from "@/helpers/iconsProvider";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 const ToolsCard = ({
   title,
@@ -22,8 +24,50 @@ const ToolsCard = ({
   isActive: boolean;
   action: string;
 }) => {
+  const {
+    resumeElementRef,
+    coverLetterElementRef,
+    linkedinElementRef,
+    emailElementRef,
+    bidElementRef,
+    coachElementRef,
+    reviewElementRef,
+    finderElementRef,
+    atsElementRef,
+  } = useTourContext();
+
+  useEffect(() => {
+    console.log(resumeElementRef.current);
+  }, [resumeElementRef.current]);
+  const getRef = (title: any) => {
+    switch (title) {
+      case "Resume Builder":
+        return resumeElementRef;
+      case "Generator Cover Letters":
+        return coverLetterElementRef;
+      case "Keyword Optimize Your LinkedIn":
+        return linkedinElementRef;
+      case "Personalized Email Generator":
+        return emailElementRef;
+      case "Consulting Bids Generator":
+        return bidElementRef;
+      case "Career Coach":
+        return coachElementRef;
+      case "Review Resume by AI":
+        return reviewElementRef;
+      case "AI Job Finder":
+        return finderElementRef;
+      case "ATS Scan Your Resume":
+        return atsElementRef;
+      default:
+        return null;
+    }
+  };
   return (
-    <div className="lg:w-[32%] flex mb-8 dark:bg-transparent dark:border-none dark:rounded-none rounded-[20px] bg-[#ffffff94] border-[#b6b8b6]  p-3">
+    <div
+      ref={() => getRef(title)}
+      className="lg:w-[32%] flex mb-8 dark:bg-transparent dark:border-none dark:rounded-none rounded-[20px] bg-[#ffffff94] border-[#b6b8b6]  p-3"
+    >
       <Link href={link} className="flex no-underline text-white">
         <div className="mr-4">
           <div

@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import "@/app/(private_route)/dashboard.css";
+import { useTourContext } from "@/context/TourContext";
 interface TooltipProps {
   text: string;
   children: React.ReactNode;
@@ -38,6 +39,18 @@ const DashboardBot = () => {
   const audioFileUrl3 = "/speech_cover_letter_card.mp3";
   const audioFileUrl4 = "/speech_linkedin_card.mp3";
   const audioFileUrl5 = "/speech_other_cards.mp3";
+
+  const {
+    resumeElementRef,
+    coverLetterElementRef,
+    linkedinElementRef,
+    emailElementRef,
+    bidElementRef,
+    coachElementRef,
+    reviewElementRef,
+    finderElementRef,
+    atsElementRef,
+  } = useTourContext();
 
   const concatenateBuffers = (buffers: any) => {
     const totalLength = buffers.reduce(
