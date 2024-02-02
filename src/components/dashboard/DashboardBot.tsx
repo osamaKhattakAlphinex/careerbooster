@@ -20,7 +20,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
     <div onClick={toggleTooltip} className="relative inline-block">
       {children}
       {showTooltip && !audioPlayed && (
-        <div className="absolute bottom-full left-1/2 transform w-max -translate-x-1/2 bg-black bg-opacity-80 text-white px-2 py-1 rounded">
+        <div className="absolute px-2 py-1 text-white transform -translate-x-1/2 bg-black rounded bottom-full left-1/2 w-max bg-opacity-80">
           {text}
         </div>
       )}
@@ -41,6 +41,7 @@ const DashboardBot = () => {
   const audioFileUrl5 = "/speech_other_cards.mp3";
 
   const {
+    dashboardRef,
     resumeElementRef,
     coverLetterElementRef,
     linkedinElementRef,
@@ -51,8 +52,24 @@ const DashboardBot = () => {
     finderElementRef,
     atsElementRef,
   } = useTourContext();
+  const componentRefs = [
+    resumeElementRef,
+    coverLetterElementRef,
+    linkedinElementRef,
+    emailElementRef,
+    bidElementRef,
+    coachElementRef,
+    reviewElementRef,
+    finderElementRef,
+    atsElementRef,
+  ];
 
-  console.log(resumeElementRef.current, coverLetterElementRef.current);
+  const applyStyles = () => {
+    componentRefs.map((componentRef) => {
+      componentRef.current?.classList.add("un-focused-tool");
+    });
+  };
+
   const concatenateBuffers = (buffers: any) => {
     const totalLength = buffers.reduce(
       (acc: any, buffer: any) => acc + buffer.length,
@@ -66,16 +83,63 @@ const DashboardBot = () => {
     });
     return concatenated;
   };
-  const fetchAudio = async (audioFileUrl: any) => {
+  const fetchAudio = async (audioFileUrl: any, explanationFor: string) => {
     try {
       const response = await fetch(audioFileUrl);
       const audioBlob = await response.blob();
       const audioData = await audioBlob.arrayBuffer();
       const arrayBufferView = new Uint8Array(audioData);
-      return arrayBufferView; // Return the Blob
+      return {
+        arrayBufferView,
+        explanationFor,
+      }; // Return the Blob
     } catch (error) {
       console.error("Error fetching the audio file:", error);
     }
+  };
+
+  const focusTool = (audio: any, focusedElement: string) => {
+    const audioBlob = new Blob([audio], {
+      type: "audio/mpeg",
+    });
+    switch (focusedElement) {
+      case "dashboard":
+        if (dashboardRef.current) {
+          dashboardRef.current.classList.add("focused-tool");
+          console.log(dashboardRef.current);
+        }
+        break;
+      case "resume":
+        applyStyles();
+        if (resumeElementRef.current) {
+          resumeElementRef.current.classList.remove("un-focused-tool");
+          resumeElementRef.current.classList.add("focused-tool");
+        }
+        break;
+      case "cover-letter":
+        applyStyles();
+        if (coverLetterElementRef.current) {
+          coverLetterElementRef.current.classList.remove("un-focused-tool");
+          coverLetterElementRef.current.classList.add("focused-tool");
+        }
+        break;
+      case "linkedin":
+        applyStyles();
+        if (linkedinElementRef.current) {
+          linkedinElementRef.current.classList.remove("un-focused-tool");
+          linkedinElementRef.current.classList.add("focused-tool");
+        }
+        // case "overall":
+        //   applyStyles();
+        //   if (linkedinElementRef.current) {
+        //     resumeElementRef.current.classList.remove("un-focused-tool");
+        //     resumeElementRef.current.classList.add("focused-tool");
+        //   }
+        break;
+      default:
+    }
+    const url = URL.createObjectURL(audioBlob);
+    console.log(url);
   };
 
   const handleClick = async () => {
@@ -103,19 +167,22 @@ const DashboardBot = () => {
         setAudioPlayed(true);
 
         Promise.all([
-          fetchAudio(audioFileUrl1),
-          fetchAudio(audioFileUrl2),
-          fetchAudio(audioFileUrl3),
-          fetchAudio(audioFileUrl4),
-          fetchAudio(audioFileUrl5),
+          fetchAudio(audioFileUrl1, "dashboard"),
+          fetchAudio(audioFileUrl2, "resume"),
+          fetchAudio(audioFileUrl3, "cover-letter"),
+          fetchAudio(audioFileUrl4, "linkedin"),
+          fetchAudio(audioFileUrl5, "overall"),
         ])
           .then((audioBuffers) => {
-            const concatenatedBuffer = concatenateBuffers(audioBuffers);
-            const audioBlob = new Blob([concatenatedBuffer], {
-              type: "audio/mpeg",
+            audioBuffers.map((audio: any) => {
+              focusTool(audio.arrayBufferView, audio.explanationFor);
             });
-            const url = URL.createObjectURL(audioBlob);
-            componentRef.current.src = url;
+            // const concatenatedBuffer = concatenateBuffers(audioBuffers);
+            // const audioBlob = new Blob([concatenatedBuffer], {
+            //   type: "audio/mpeg",
+            // });
+            // const url = URL.createObjectURL(audioBlob);
+            // componentRef.current.src = url;
           })
           .catch((error) => {
             console.error("Error fetching or decoding audio:", error);

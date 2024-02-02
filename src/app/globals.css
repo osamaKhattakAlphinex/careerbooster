@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.focused-tool {
+  border: 2px solid #fe577f;
+}
+
+.un-focused-tool {
+  opacity: 0.4;
+}
+
 @layer utilities {
   @variants responsive {
     .no-scrollbar::-webkit-scrollbar {

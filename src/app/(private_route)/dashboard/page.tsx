@@ -36,12 +36,16 @@ const Dashboard = () => {
   //     console.log(newDiv);
   //   }
   // }, []);
+  const { dashboardRef } = useTourContext();
   return (
     <div className="w-full sm:w-full z-1000 ">
-      <div className="ml-0 mt-0 lg:ml-[234px] px-[15px] lg:mb-[72px] ">
+      <div
+        ref={(ref: any) => (dashboardRef.current = ref)}
+        className="ml-0 mt-0 lg:ml-[234px] px-[15px] lg:mb-[72px] "
+      >
         {/* <div
           id="overlay"
-          className="w-screen h-screen z-10 bg-black/90  fixed pointer-events-none"
+          className="fixed z-10 w-screen h-screen pointer-events-none bg-black/90"
         >
           <div id="overlayInner" className="relative"></div>
         </div> */}
