@@ -9,7 +9,6 @@ import RewardsSection from "@/components/public-pages/Homepage/RewardsSection";
 import UseCases from "@/components/public-pages/Homepage/UseCases";
 import FAQList from "@/components/public-pages/Homepage/Faqs";
 import "../plugins.css";
-import "../style.css";
 
 export const metadata: Metadata = {
   title: "CareerBooster.AI",
@@ -46,7 +45,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <main className="flex-grow-1 mb-20 ">
+      <main className="flex-grow-1 pb-20 overflow-x-hidden">
         {/* <!-- Hero --> */}
 
         <HeroArea />

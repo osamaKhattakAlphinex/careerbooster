@@ -27,7 +27,7 @@ export default async function AdminLayout({ children }: Props) {
           <AdminSidebar />
         </div>
       </div>
-      <main className="max-w-7xl mx-auto col-span-9 p-10 overflow-y-scroll h-screen dark:bg-[#000000] bg-[#ffffff]">
+      <main className="max-w-7xl  col-span-9 p-10 overflow-y-scroll h-screen dark:bg-gray-950 bg-gray-100">
         {children}
       </main>
     </div>

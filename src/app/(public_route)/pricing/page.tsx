@@ -1,13 +1,10 @@
 import CTASection from "@/components/public-pages/Homepage/CTASection";
-import FAQSection from "@/components/public-pages/Homepage/FAQSection";
 import FAQList from "@/components/public-pages/Homepage/Faqs";
 import PricingSection from "@/components/public-pages/Homepage/PricingSection";
-import UseCases from "@/components/public-pages/Homepage/UseCases";
 import PageHeader from "@/components/PageHeader";
 
 import { Metadata } from "next";
 import "@/app/plugins.css";
-import "@/app/style.css";
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Pricing",
   description:
@@ -43,7 +40,7 @@ export const metadata: Metadata = {
 export default function PricingPage() {
   return (
     <>
-      <main className="flex-grow-1 mb-20">
+      <main className="flex-grow-1 pb-20 dark:bg-gray-950 bg-gray-100">
         {/* <!-- Page header --> */}
         <PageHeader secondTitle="Pricing" />
 

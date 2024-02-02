@@ -6,25 +6,25 @@ interface Props {
 }
 const PageHeader: React.FC<Props> = ({ title, secondTitle }) => {
   return (
-    <section
-      className="pb-10 pb-lg-15 bg-striped pt-40"
-      data-aos="fade-up-sm"
-      data-aos-delay="50"
-    >
-      <div className="container">
-        <div className="text-center">
-          <h3 className="theme-text-2 mb-2">{title}</h3>
-          <nav aria-label="breadcrumb">
-            <ol className="breadcrumb justify-center fs-sm">
-              <li className="breadcrumb-item">
-                <Link href="/">Home</Link>
-              </li>
-              <li className="breadcrumb-item active" aria-current="page">
-                {secondTitle ? secondTitle : title}
-              </li>
-            </ol>
-          </nav>
-        </div>
+    <section className="pb-10 lg:pb-16 bg-[url('/assets/images/shapes/stripe-light.svg')] bg-no-repeat dark:bg-[url('/assets/images/shapes/stripe-dark.svg')] flex  justify-center items-center  bg-cover bg-start pt-40">
+      <div className="flex flex-col gap-6 pb-6">
+        <h1 className="h3-t">{title}</h1>
+        <nav>
+          <ol className="flex justify-center gap-4 text-sm">
+            <li>
+              <Link
+                href="/"
+                className="no-underline text-[16px] dark:text-gray-400 dark:hover:text-[#6a4dff] text-[#000]"
+              >
+                Home
+              </Link>
+            </li>
+            <li className="dark:text-gray-400 text-[16px] text-[#000]">
+              <span className="mr-3">/</span>
+              {secondTitle ? secondTitle : title}
+            </li>
+          </ol>
+        </nav>
       </div>
     </section>
   );

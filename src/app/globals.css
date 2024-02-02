@@ -75,7 +75,7 @@
 }
 
 .theme-text {
-  color: rgba(0, 0, 255, 0.61) !important;
+  color: #0000ff9c !important;
 }
 
 .theme-text-2 {
@@ -97,7 +97,7 @@
 }
 
 .theme-arrow-link::after {
-  background: rgba(0, 0, 255, 0.61) !important;
+  background: #0000ff9c !important;
 }
 
 .theme-features-text {
@@ -194,7 +194,7 @@
   color: white;
 }
 
-[data-bs-theme="dark"] .theme-features-text {
+.theme-features-text-dark {
   background: linear-gradient(90.22deg, #58ebff 0.19%, #e6f85e 101.84%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -229,14 +229,18 @@
 
 [data-bs-theme="dark"] .theme-use-cases-bg {
   --gen-bg-opacity: 1;
-  background-color: rgba(var(--gen-dark-blue-4-rgb),
-      var(--gen-bg-opacity)) !important;
+  background-color: rgba(
+    var(--gen-dark-blue-4-rgb),
+    var(--gen-bg-opacity)
+  ) !important;
 }
 
 [data-bs-theme="dark"] .theme-rating-card {
   --gen-bg-opacity: 1;
-  background-color: rgba(var(--gen-dark-blue-3-rgb),
-      var(--gen-bg-opacity)) !important;
+  background-color: rgba(
+    var(--gen-dark-blue-3-rgb),
+    var(--gen-bg-opacity)
+  ) !important;
   color: var(--gen-body-color);
   border-color: var(--gen-body-color);
 }
@@ -295,7 +299,6 @@
 
 /* Styles for mobile devices (up to 767px wide) */
 @media (max-width: 767px) {
-
   /* Your mobile-specific CSS styles go here */
   .navbar-toggler .navbar-toggler-icon {
     width: 1em !important;
@@ -518,5 +521,4 @@
   shape-outside: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   height: 1080px;
   width: 30%;
-
 }

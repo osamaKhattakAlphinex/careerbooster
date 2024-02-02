@@ -67,15 +67,12 @@ function FAQItem(props: any) {
   };
 
   return (
-    <>
-      <div
-        className="accordion accordion-flush d-flex flex-column gap-6  "
-        id="faqAccordion"
-      >
-        <div className="accordion-item lg:mb-[48px] mb-[24px]">
-          <h2 className="accordion-header ">
+    <section className="dark:bg-gray-950 bg-gray-100">
+      <div className=" flex flex-col gap-6 ">
+        <div className=" lg:mb-[48px] mb-[24px]">
+          <h2 className=" ">
             <button
-              className="theme-text-2 accordion-btn flex flex-row text-left justify-center  items-center lg:text-[30px] text-[18px]"
+              className="dark:text-gray-100 text-gray-950 hover:text-[#6a4dff] dark:hover:text-[#e6f85e] flex flex-row text-left justify-start  items-start lg:text-[30px] text-[18px] focus:text-[#6a4dff] dark:focus:text-[#e6f85e] font-semibold"
               onClick={toggleFAQ}
               type="button"
               //   data-bs-toggle="collapse"
@@ -84,68 +81,68 @@ function FAQItem(props: any) {
               //   aria-controls="faq-collapseOne"
             >
               {!isOpen ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6 mr-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 6v12m6-6H6"
-                  />
-                </svg>
+                <div className="flex justify-start items-start">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6 mr-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 6v12m6-6H6"
+                    />
+                  </svg>
+                </div>
               ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6 mr-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19.5 12h-15"
-                  />
-                </svg>
+                <div className="flex justify-start items-start">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6 mr-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19.5 12h-15"
+                    />
+                  </svg>
+                </div>
               )}
-
-              {props.question}
+              <div className="flex"> {props.question}</div>
             </button>
           </h2>
           {isOpen && (
             <div
-              id="faq-collapseOne"
-              className="accordion-collapse"
+              className=""
               // data-bs-parent="#faqAccordion"
             >
-              <div className="accordion-body ">{props.answer}</div>
+              <div className=" dark:text-gray-100 text-gray-950 pt-2 xs:pt-4 md:text-base xs:text-sm">
+                {props.answer}
+              </div>
             </div>
           )}
-          <hr />
+          <hr className=" dark:text-gray-100 text-gray-950 mt-4" />
         </div>
       </div>
-    </>
+    </section>
   );
 }
 
 function FAQList() {
   return (
-    <section className="py-10 py-lg-15">
-      <div className="container">
-        <div className="row justify-center mb-18">
-          <div className="col-lg-10">
+    <section className="py-10 lg:py-16 dark:bg-gray-950 bg-gray-100">
+      <div className="md:container">
+        <div className="flex justify-center mb-18">
+          <div className="flex flex-col md:w-10/12 xs:w-full">
             <div className="text-center">
-              <h1
-                className="mb-0 theme-text-2 md:text-[48px] text-[24px]"
-                data-aos="fade-up-sm"
-                data-aos-delay="50"
-              >
+              <h1 className=" dark:text-gray-100 text-gray-950 md:text-[48px] xs:text-[30px] font-semibold md:mb-14 xs:mb-8">
                 Questions About CareerBooster.AI?
                 <br className="d-none d-md-block" />
                 We have Answers!
@@ -155,7 +152,10 @@ function FAQList() {
         </div>
         <div className="faq-list">
           {faqs.map((faq, index) => (
-            <div className="col-md-8 mx-auto" key={index}>
+            <div
+              className="flex flex-col md:w-8/12 mx-auto xs:w-10/12"
+              key={index}
+            >
               <FAQItem
                 isOpen={index === 0}
                 question={faq.question}

@@ -8,7 +8,6 @@ import Reviews from "@/components/public-pages/Homepage/Reviews";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
 import "@/app/plugins.css";
-import "@/app/style.css";
 
 export const metadata: Metadata = {
   title: "CareerBooster.AI-About",
@@ -38,7 +37,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <main className="flex-grow-1 mb-20">
+      <main className="flex-grow-1 pb-20">
         {/* <!-- Page header --> */}
         <PageHeader title="About CareerBooster.AI" secondTitle="About us" />
 

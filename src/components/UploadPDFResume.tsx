@@ -73,11 +73,7 @@ const UploadPDFResume = () => {
   return (
     <>
       {!isAuth && data === null && (
-        <label
-          className="btn btn-lg btn-gradient-1"
-          data-aos="fade-up-sm"
-          data-aos-delay="200"
-        >
+        <label className=" ">
           <input
             type="file"
             className="hidden"
@@ -91,13 +87,13 @@ const UploadPDFResume = () => {
           {fileUploading ? (
             refreshIconRotating
           ) : (
-            <div className="flex gap-2 ">
+            <div className="flex justify-center items-center gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg lg:w-[33%] sm:w-[50%] md:w-[50%] xs:w-full mx-auto">
               <div>{uploadIcon}</div>
               <div>
-                <p className="m-0 text-sm [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                <p className="m-0 text-sm [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] capitalize text-center">
                   Upload Your Existing Resume
                 </p>
-                <p className="text-[10px] text-gray-300 m-0">
+                <p className="text-[10px] text-gray-300 m-0 capitalize text-center">
                   To eliminate manual data entry
                 </p>
               </div>
@@ -126,9 +122,7 @@ const UploadPDFResume = () => {
       {isAuth && (
         <Link
           href="/dashboard"
-          className="btn btn-lg btn-gradient-1"
-          data-aos="fade-up-sm"
-          data-aos-delay="200"
+          className="btn btn-lg bg-gradient-to-r from-purple-700 via-pink-500 to-pink-200 text-white p-4 rounded "
         >
           Dashboard
         </Link>

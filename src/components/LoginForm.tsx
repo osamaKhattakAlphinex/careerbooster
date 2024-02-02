@@ -40,15 +40,18 @@ const LoginForm = () => {
     },
   });
   return (
-    <form onSubmit={formik.handleSubmit} className="vstack gap-4">
+    <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
       <div className="text-start">
-        <h2 className="pb-5">Login to your Account</h2>
-        <div className="input-group with-icon">
-          <span className="icon">
+        <h2 className="pb-5 font-semibold text-[2.5rem]">
+          Login to your Account
+        </h2>
+        <div className="flex flex-wrap relative items-stretch  w-full">
+          <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 18 18"
+              className="w-[16px] block align-middle "
             >
               <g
                 stroke="currentColor"
@@ -64,7 +67,7 @@ const LoginForm = () => {
           <input
             type="email"
             name="email"
-            className="form-control rounded-2 py-4"
+            className="block outline-none focus:border-blue-400 rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-[#E8F0FE] dark:bg-transparent bg-clip"
             placeholder="Enter Your Email"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
@@ -72,14 +75,14 @@ const LoginForm = () => {
           />
         </div>
         {formik.touched.email && formik.errors.email && (
-          <p className="form-text mb-0 !text-red-600">
+          <p className="form-text mb-0 !text-red-600  my-4">
             {formik.touched.email && formik.errors.email}
           </p>
         )}
       </div>
       <div className="text-start">
-        <div className="input-group with-icon">
-          <span className="icon">
+        <div className="flex flex-wrap relative items-stretch  w-full">
+          <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -88,6 +91,7 @@ const LoginForm = () => {
               strokeLinejoin="round"
               strokeWidth="1.5"
               viewBox="0 0 24 24"
+              className="w-[16px]"
             >
               <path stroke="none" d="M0 0h24v24H0z" />
               <path d="M12 3a12 12 0 0 0 8.5 3A12 12 0 0 1 12 21 12 12 0 0 1 3.5 6 12 12 0 0 0 12 3" />
@@ -98,7 +102,7 @@ const LoginForm = () => {
           <input
             type="password"
             name="password"
-            className="form-control rounded-2 py-4"
+            className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-[#E8F0FE] bg-clip"
             placeholder="Password"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
@@ -106,12 +110,15 @@ const LoginForm = () => {
           />
         </div>
         {formik.touched.password && formik.errors.password && (
-          <p className="form-text !text-red-600 mb-0">
+          <p className="form-text !text-red-600 my-4">
             {formik.touched.password && formik.errors.password}
           </p>
         )}
         <div className="form-text mt-2">
-          <Link href="/reset-password" className="text-decoration-none">
+          <Link
+            href="/reset-password"
+            className="no-underline text-[#6a4dff] dark:text-[#e6f85e] "
+          >
             Forgot Password?
           </Link>
         </div>
@@ -128,7 +135,7 @@ const LoginForm = () => {
         <button
           disabled={submitting}
           type="submit"
-          className="btn theme-btn w-full py-4"
+          className=" w-full py-4 rounded-md !bg-[#6a4dff]  dark:!bg-[#e6f85e] text-gray-100 dark:text-gray-950  disabled:opacity-[.65]"
         >
           {submitting ? (
             <span className="flex items-center justify-center">
@@ -142,7 +149,10 @@ const LoginForm = () => {
       <div className="text-center">
         <p>
           Don{"'"}t have an account?{" "}
-          <Link href="/register" className="text-decoration-none">
+          <Link
+            href="/register"
+            className="no-underline  text-[#6a4dff] dark:text-[#e6f85e]"
+          >
             Sign Up for Free
           </Link>
         </p>
