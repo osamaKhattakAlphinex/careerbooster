@@ -43,11 +43,11 @@ const StepTwo = () => {
 
   return (
     <>
-      <div className="flex flex-col w-full gap-8 mt-8">
+      <div className="flex flex-col w-full xs:gap-3 md:gap-8 mt-3 md:mt-8">
         <div>
           <label
             htmlFor="name"
-            className="dark:text-gray-100  text-gray-950 text-lg"
+            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
           >
             {" "}
             Phone Number *{" "}
@@ -77,7 +77,7 @@ const StepTwo = () => {
               onChange={(e) => {
                 dispatch(setStepTwo({ phoneNumber: e.target.value }));
               }}
-              className="rounded-md text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              className="rounded-md xs:text-sm md:text-lg  text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
               placeholder=""
             />
           </div>
@@ -86,7 +86,7 @@ const StepTwo = () => {
         <div className="">
           <label
             htmlFor="name"
-            className="dark:text-gray-100  text-gray-950 text-lg"
+            className="dark:text-gray-100 xs:text-sm text-gray-950 ms:text-lg"
           >
             {" "}
             Email *{" "}
@@ -117,7 +117,7 @@ const StepTwo = () => {
               onChange={(e) => {
                 // dispatch(setStepTwo({ Email: e.target.value }));
               }}
-              className="rounded-md text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              className="rounded-md xs:text-sm md:text-lg  text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
               placeholder=""
               title="Email can't be changed"
             />
@@ -129,7 +129,7 @@ const StepTwo = () => {
           )}
         </div>
       </div>
-      <p className="text-gray-500 mt-8">
+      <p className="text-gray-500 xs:mt-3 md:mt-8">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

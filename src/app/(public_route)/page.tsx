@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <main className="flex-grow-1 pb-20 overflow-x-hidden">
+      <main className="flex-grow-1 overflow-x-hidden">
         {/* <!-- Hero --> */}
 
         <HeroArea />

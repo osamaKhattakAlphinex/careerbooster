@@ -77,11 +77,11 @@ const useCaseDetails = [
 ];
 const UseCases = () => {
   return (
-    <section className="bg-gray-100 dark:bg-gray-950 py-20 xs:pt-0 xs:pb-6 py-lg-30 ">
-      <div className="lg:container md:container ">
-        <div className="flex justify-center mb-18">
+    <section className="bg-gray-100 dark:bg-gray-950  py-20 xs:pt-0 xs:pb-6  ">
+      <div className="lg:container mx-auto md:container ">
+        <div className="flex justify-center">
           <div className="flex flex-col w-9/12 xs:w-full">
-            <div className="text-center py-10 xs:py-0">
+            <div className="text-center py-10 xs:py-3 px-4">
               <p className="dark:text-[#e6f85e] text-[#0000ff] text-opacity-[0.6] text-lg">
                 CareerBooster.AI Use Cases
               </p>

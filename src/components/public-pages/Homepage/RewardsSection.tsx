@@ -2,8 +2,8 @@ import Link from "next/link";
 
 const RewardsSection = () => {
   return (
-    <section className="dark:bg-gray-950 bg-gray-100 pb-10 xs:pb-0 lg:pt-20 md:pt:20 xs:pt-10">
-      <div className="flex gap-6 lg:gap-14 xl:gap-20 items-center pt-5 w-[100%]">
+    <section className="dark:bg-gray-950 bg-gray-100 pb-10 xs:pb-0  lg:pt-20 md:pt:20 xs:pt-10">
+      <div className="flex gap-6 lg:gap-14 xl:gap-20 mx-auto container items-center pt-5 w-[100%]">
         <div className="flex flex-col w-10/12 mx-auto lg:px-[4rem] md:px-[4rem]">
           <div className="reward-content text-center">
             <h1 className=" md:text-[40px] text-[24px]  dark:text-gray-100 text-gray-950 font-[600]">

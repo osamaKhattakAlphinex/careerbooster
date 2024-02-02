@@ -20,41 +20,49 @@ const StepEight = () => {
 
   return (
     <>
-      <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl ">
+      <h1 className="text-xl font-bold leading-tight tracking-tight mt-3  md:text-2xl ">
         Enter password to create your account
       </h1>
       {/* Input */}
-      <div>
-        <label htmlFor="password" className="block mb-2 text-sm font-medium  ">
-          Password <span className="text-red-500">*</span>
-        </label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={password}
-          onChange={(e) => {
-            dispatch(setStepEight({ password: e.target.value }));
-          }}
-          className="bg-transparent border-[1px] border-gray-300  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-        />
-      </div>
+      <div className="flex flex-col gap-4 mt-5">
+        <div>
+          <label
+            htmlFor="password"
+            className="block mb-2 text-sm font-medium  "
+          >
+            Password <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={password}
+            onChange={(e) => {
+              dispatch(setStepEight({ password: e.target.value }));
+            }}
+            className="bg-transparent  border border-[#2e2f45] dark:focus-within:border-[#e6f85e] outline-none  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+          />
+        </div>
 
-      {/* Input */}
-      <div>
-        <label htmlFor="cPassword" className="block mb-2 text-sm font-medium  ">
-          Confirm Password <span className="text-red-500">*</span>
-        </label>
-        <input
-          type="password"
-          name="cPassword"
-          id="cPassword"
-          value={cPassword}
-          onChange={(e) => {
-            dispatch(setStepEight({ cPassword: e.target.value }));
-          }}
-          className="bg-transparent border-[1px] border-gray-300  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-        />
+        {/* Input */}
+        <div>
+          <label
+            htmlFor="cPassword"
+            className="block mb-2 text-sm font-medium  "
+          >
+            Confirm Password <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="password"
+            name="cPassword"
+            id="cPassword"
+            value={cPassword}
+            onChange={(e) => {
+              dispatch(setStepEight({ cPassword: e.target.value }));
+            }}
+            className="bg-transparent border border-[#2e2f45] dark:focus-within:border-[#e6f85e] outline-none  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+          />
+        </div>
       </div>
       {!isValid && (
         <p className="text-red-500 text-sm mt-2">

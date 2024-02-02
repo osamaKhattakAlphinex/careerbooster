@@ -158,7 +158,7 @@ const FeaturesSecond = () => {
 
   return (
     <section className="pb-10  dark:bg-gray-950 bg-gray-100">
-      <div className="lg:container md:container xs:px-5">
+      <div className="lg:container md:container mx-auto xs:px-5">
         {SecondFeatureSingleData.map((item) => {
           return (
             <>

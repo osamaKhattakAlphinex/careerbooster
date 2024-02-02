@@ -99,8 +99,8 @@ const FeaturesSection = () => {
     },
   ];
   return (
-    <section className="pb-15 dark:pt-0 pt-8 dark:bg-gray-950 bg-gray-100">
-      <div className="lg:container md:container">
+    <section className="pb-15 dark:pt-0 pt-8  dark:bg-gray-950 bg-gray-100">
+      <div className="md:container mx-auto">
         <div className="flex flex-col justify-center text-center mb-18 xs:px-10">
           <h4 className="mb-5 dark:text-gray-100 text-gray-950 font-bold md:text-[24px] text-[17px]">
             Uncover the Secret to Superior Resumes

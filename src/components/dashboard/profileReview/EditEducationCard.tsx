@@ -59,8 +59,8 @@ const EditEducationCard = () => {
   }, [list]);
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 mt-10 shadow-md dark:border-[1px] dark:border-[#2e2f45] rounded-lg">
-      <h2 className="text-2xl font-semibold mb-4">
+    <div className="w-full max-w-md mx-auto p-6 xs:mt-4 md:mt-10 shadow-md dark:border-[1px] dark:border-[#2e2f45] rounded-lg">
+      <h2 className="text-lg md:text-2xl items-center flex justify-between font-semibold mb-4 dark:text-gray-100 text-gray-950">
         Update Education
         <button
           type="button"

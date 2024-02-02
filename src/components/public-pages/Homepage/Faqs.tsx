@@ -138,7 +138,7 @@ function FAQItem(props: any) {
 function FAQList() {
   return (
     <section className="py-10 lg:py-16 dark:bg-gray-950 bg-gray-100">
-      <div className="md:container">
+      <div className="md:container mx-auto">
         <div className="flex justify-center mb-18">
           <div className="flex flex-col md:w-10/12 xs:w-full">
             <div className="text-center">

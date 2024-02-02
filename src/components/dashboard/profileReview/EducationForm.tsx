@@ -177,7 +177,7 @@ const EducationForm = ({ formik }: any) => {
         <button
           type="submit"
           disabled={String(formik.errors.educationLevel) !== "undefined"}
-          className=" px-4 !bg-blue-500 text-white rounded-md py-2 hover:!bg-blue-600 mr-4 disabled:bg-blue-300"
+          className=" px-4 !bg-blue-500 text-white rounded-md py-2  xs:my-2 md:my-0 hover:!bg-blue-600 mr-4 disabled:bg-blue-300"
         >
           Save Education
         </button>
