@@ -25,6 +25,7 @@ const ToolsCard = ({
   action: string;
 }) => {
   const {
+    num,
     resumeElementRef,
     coverLetterElementRef,
     linkedinElementRef,
@@ -36,39 +37,45 @@ const ToolsCard = ({
     atsElementRef,
   } = useTourContext();
 
-  useEffect(() => {
-    console.log(resumeElementRef.current);
-  }, [resumeElementRef.current]);
-  const getRef = (title: any) => {
+  const getRef = (title: any, ref: any) => {
     switch (title) {
       case "Resume Builder":
-        return resumeElementRef;
+        resumeElementRef.current = ref;
+        break;
       case "Generator Cover Letters":
-        return coverLetterElementRef;
+        coverLetterElementRef.current = ref;
+        break;
       case "Keyword Optimize Your LinkedIn":
-        return linkedinElementRef;
+        linkedinElementRef.current = ref;
+        break;
       case "Personalized Email Generator":
-        return emailElementRef;
+        emailElementRef.current = ref;
+        break;
       case "Consulting Bids Generator":
-        return bidElementRef;
+        bidElementRef.current = ref;
+        break;
       case "Career Coach":
-        return coachElementRef;
+        coachElementRef.current = ref;
+        break;
       case "Review Resume by AI":
-        return reviewElementRef;
+        reviewElementRef.current = ref;
+        break;
       case "AI Job Finder":
-        return finderElementRef;
+        finderElementRef.current = ref;
+        break;
       case "ATS Scan Your Resume":
-        return atsElementRef;
+        atsElementRef.current = ref;
+        break;
       default:
         return null;
     }
   };
   return (
     <div
-      ref={() => getRef(title)}
+      ref={(ref) => getRef(title, ref)}
       className="lg:w-[32%] flex mb-8 dark:bg-transparent dark:border-none dark:rounded-none rounded-[20px] bg-[#ffffff94] border-[#b6b8b6]  p-3"
     >
-      <Link href={link} className="flex no-underline text-white">
+      <Link href={link} className="flex text-white no-underline">
         <div className="mr-4">
           <div
             className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-[60px] h-[60px] `}
