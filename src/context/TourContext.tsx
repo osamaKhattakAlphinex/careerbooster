@@ -3,7 +3,6 @@ import React, { createContext, useContext, useRef, ReactNode } from "react";
 
 // Define a type for your references
 interface TourRefs {
-  num: number;
   resumeElementRef: React.MutableRefObject<HTMLInputElement | null>;
   coverLetterElementRef: React.MutableRefObject<HTMLInputElement | null>;
   linkedinElementRef: React.MutableRefObject<HTMLInputElement | null>;
@@ -29,7 +28,7 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
   children,
 }) => {
   // Create refs for each reference
-  const num = 1000;
+
   const resumeElementRef = useRef<HTMLInputElement | null>(null);
   const coverLetterElementRef = useRef<HTMLInputElement | null>(null);
   const linkedinElementRef = useRef<HTMLInputElement | null>(null);
@@ -41,7 +40,6 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
   const atsElementRef = useRef<HTMLInputElement | null>(null);
   // Define the context value
   const contextValue: TourRefs = {
-    num,
     resumeElementRef,
     coverLetterElementRef,
     linkedinElementRef,

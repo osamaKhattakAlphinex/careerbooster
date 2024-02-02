@@ -52,6 +52,7 @@ const DashboardBot = () => {
     atsElementRef,
   } = useTourContext();
 
+  console.log(resumeElementRef.current, coverLetterElementRef.current);
   const concatenateBuffers = (buffers: any) => {
     const totalLength = buffers.reduce(
       (acc: any, buffer: any) => acc + buffer.length,

@@ -25,7 +25,6 @@ const ToolsCard = ({
   action: string;
 }) => {
   const {
-    num,
     resumeElementRef,
     coverLetterElementRef,
     linkedinElementRef,
