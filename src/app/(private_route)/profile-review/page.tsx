@@ -15,7 +15,6 @@ import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import "@/app/plugins.css";
-import "@/app/style.css";
 import Link from "next/link";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.Ai-Welcome",
@@ -128,14 +127,10 @@ const ProfileReview = () => {
         </Link>
         <main className="flex-grow-1">
           <section className="pb-15 ">
-            <div className="container">
-              <div
-                className="row justify-center mt-18 w-full "
-                data-aos="fade-up-sm"
-                data-aos-delay="50"
-              >
-                <div className="col-lg-8 col-xl-6">
-                  <div className="vstack gap-8" id="contact-form">
+            <div className="container flex justify-center ">
+              <div className=" justify-center mt-18 w-[53%]">
+                <div className="">
+                  <div className="gap-8">
                     <div>
                       {register.activeStep > 1 && (
                         <button
@@ -153,7 +148,7 @@ const ProfileReview = () => {
                         <button
                           type="submit"
                           disabled={isNextDisabled()}
-                          className="btn btn-primary-dark float-right"
+                          className="py-3 px-6 font-medium text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
                           onClick={(e) => {
                             dispatch(setActiveStep(register.activeStep + 1));
                           }}
@@ -183,11 +178,11 @@ const ProfileReview = () => {
                     {register.activeStep === 5 && <ProfilePreview />}
                     {register.activeStep === 6 && <StepEight />}
 
-                    <div className="">
+                    <div className="my-6">
                       {register.activeStep > 1 && (
                         <button
                           type="submit"
-                          className="btn btn-secondary-dark"
+                          className=""
                           onClick={(e) => {
                             dispatch(setActiveStep(register.activeStep - 1));
                           }}
@@ -200,7 +195,7 @@ const ProfileReview = () => {
                         <button
                           type="submit"
                           disabled={isNextDisabled()}
-                          className="btn btn-primary-dark float-right"
+                          className="py-3 px-6 font-medium text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
                           onClick={(e) => {
                             dispatch(setActiveStep(register.activeStep + 1));
                           }}
@@ -212,14 +207,14 @@ const ProfileReview = () => {
                       {register.activeStep === 5 && (
                         <button
                           type="submit"
-                          className="btn btn-primary-dark float-right"
+                          className="py-3 px-6 mb-5 font-medium text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
                           onClick={handleSaveDetails}
                         >
                           {register.isSubmitting ? refreshIconRotating : "Save"}
                         </button>
                       )}
                     </div>
-                    <div className="status alert mb-0 d-none"></div>
+                    <div className="  mb-0 "></div>
                   </div>
                 </div>
               </div>

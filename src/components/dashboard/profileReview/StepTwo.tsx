@@ -43,90 +43,93 @@ const StepTwo = () => {
 
   return (
     <>
-      <div className="">
-        <label
-          htmlFor="name"
-          className="form-label dark:text-gray-100 text-gray-950 fs-lg fw-medium mb-4"
-        >
-          {" "}
-          Phone Number *{" "}
-        </label>
-        <div className="input-group with-icon">
-          <span className="icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-4 h-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
-              />
-            </svg>
-          </span>
-          <input
-            type="text"
-            name="phone"
-            id="phone"
-            value={stepTwo.phoneNumber}
-            onChange={(e) => {
-              dispatch(setStepTwo({ phoneNumber: e.target.value }));
-            }}
-            className="form-control rounded-2 "
-            placeholder=""
-          />
+      <div className="flex flex-col w-full gap-8 mt-8">
+        <div>
+          <label
+            htmlFor="name"
+            className="dark:text-gray-100  text-gray-950 text-lg"
+          >
+            {" "}
+            Phone Number *{" "}
+          </label>
+          <div className="flex px-4 gap-3 mt-4 dark:bg-[#11121c] bg-white border border-[#2e2f45] rounded-lg items-center py-3 group dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff]">
+            <span className="text-gray-900 dark:text-gray-100 ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+                />
+              </svg>
+            </span>
+            <input
+              type="text"
+              name="phone"
+              id="phone"
+              value={stepTwo.phoneNumber}
+              onChange={(e) => {
+                dispatch(setStepTwo({ phoneNumber: e.target.value }));
+              }}
+              className="rounded-md text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              placeholder=""
+            />
+          </div>
+        </div>
+
+        <div className="">
+          <label
+            htmlFor="name"
+            className="dark:text-gray-100  text-gray-950 text-lg"
+          >
+            {" "}
+            Email *{" "}
+          </label>
+          <div className="flex px-4 gap-3 mt-4 bg-white group dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] dark:bg-[#11121c]  border border-[#2e2f45] rounded-lg items-center py-3">
+            <span className="text-gray-900 dark:text-gray-100 ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                />
+              </svg>
+            </span>
+            <input
+              type="text"
+              name="Email"
+              disabled={true}
+              id="Email"
+              value={stepTwo.Email}
+              onChange={(e) => {
+                // dispatch(setStepTwo({ Email: e.target.value }));
+              }}
+              className="rounded-md text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              placeholder=""
+              title="Email can't be changed"
+            />
+          </div>
+          {stepTwo.emailInvalid && (
+            <p className="text-red-500 text-sm">
+              Please enter a valid email address
+            </p>
+          )}
         </div>
       </div>
-      <div className="">
-        <label
-          htmlFor="name"
-          className="form-label dark:text-gray-100 text-gray-950 fs-lg fw-medium mb-4"
-        >
-          {" "}
-          Email *{" "}
-        </label>
-        <div className="input-group with-icon">
-          <span className="icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-4 h-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-              />
-            </svg>
-          </span>
-          <input
-            type="text"
-            name="Email"
-            disabled={true}
-            id="Email"
-            value={stepTwo.Email}
-            onChange={(e) => {
-              // dispatch(setStepTwo({ Email: e.target.value }));
-            }}
-            className="form-control rounded-2 "
-            placeholder=""
-            title="Email can't be changed"
-          />
-        </div>
-        {stepTwo.emailInvalid && (
-          <p className="text-red-500 text-sm">
-            Please enter a valid email address
-          </p>
-        )}
-      </div>
-      <p className="text-gray-500 ">
+      <p className="text-gray-500 mt-8">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
