@@ -179,7 +179,7 @@ const StepFive = () => {
     <>
       {state === "show" && register.scrappedContent !== "" && (
         <div
-          className="flex items-center bg-blue-500 text-gray-100  text-sm  px-4 py-3"
+          className="flex items-center bg-blue-500 text-gray-100  text-sm mt-12 px-4 py-3"
           role="alert"
         >
           <svg
@@ -213,7 +213,7 @@ const StepFive = () => {
 
       {state === "show" && (
         <>
-          <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl dark:text-gray-100 text-gray-950 ">
+          <h1 className="text-xl my-6 font-bold leading-tight tracking-tight  md:text-2xl dark:text-gray-100 text-gray-950 ">
             Work Experience
             <button
               type="button"

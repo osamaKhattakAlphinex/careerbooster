@@ -14,12 +14,12 @@ const PageHeader: React.FC<Props> = ({ title, secondTitle }) => {
             <li>
               <Link
                 href="/"
-                className="no-underline text-[16px] dark:text-gray-400 dark:hover:text-[#6a4dff] text-[#000]"
+                className="no-underline text-sm dark:text-gray-400 dark:hover:text-[#6a4dff] text-[#000]"
               >
                 Home
               </Link>
             </li>
-            <li className="dark:text-gray-400 text-[16px] text-[#000]">
+            <li className="dark:text-gray-400 text-sm text-[#000]">
               <span className="mr-3">/</span>
               {secondTitle ? secondTitle : title}
             </li>

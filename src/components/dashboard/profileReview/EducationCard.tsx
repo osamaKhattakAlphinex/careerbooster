@@ -21,7 +21,10 @@ const EducationCard = ({
     dispatch(setStepFour({ list: newList }));
   };
   return (
-    <div className="w-full  rounded-lg shadow-md p-6 border" key={rec?.id}>
+    <div
+      className="w-full  rounded-lg shadow-md p-6 dark:border-[1px] my-3 dark:border-[#2e2f45]"
+      key={rec?.id}
+    >
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-base dark:text-gray-100 text-gray-950 font-semibold w-[80%]">
           {rec?.educationLevel || isShowing ? (

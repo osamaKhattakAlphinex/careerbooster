@@ -31,78 +31,82 @@ const StepOne = () => {
 
   return (
     <>
-      <div className="">
-        <label
-          htmlFor="name"
-          className="form-label dark:text-gray-100 text-gray-950 fs-lg fw-medium mb-4"
-        >
-          {" "}
-          First Name *{" "}
-        </label>
-        <div className="input-group with-icon">
-          <span className="icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              viewBox="0 0 24 24"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <circle cx="12" cy="7" r="4" />
-              <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
-            </svg>
-          </span>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            className="form-control rounded-2 "
-            placeholder=""
-            value={firstName}
-            onChange={(e) => {
-              dispatch(setStepOne({ firstName: e.target.value }));
-            }}
-          />
+      <div className="flex flex-col w-full gap-8">
+        <div className="">
+          <label
+            htmlFor="name"
+            className="dark:text-gray-100  text-gray-950 text-lg"
+          >
+            {" "}
+            First Name *{" "}
+          </label>
+          <div className="flex px-4 group dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] gap-3 mt-4 bg-white dark:bg-[#11121c] border border-[#2e2f45] rounded-lg items-center py-3">
+            <span className="text-gray-900 dark:text-slate-100">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                viewBox="0 0 24 24"
+                className="h-5 w-5"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <circle cx="12" cy="7" r="4" />
+                <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+              </svg>
+            </span>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              className="rounded-md text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              placeholder=""
+              value={firstName}
+              onChange={(e) => {
+                dispatch(setStepOne({ firstName: e.target.value }));
+              }}
+            />
+          </div>
         </div>
-      </div>
-      <div className="">
-        <label
-          htmlFor="name"
-          className="form-label dark:text-gray-100 text-gray-950 fs-lg fw-medium mb-4"
-        >
-          {" "}
-          Last Name *{" "}
-        </label>
-        <div className="input-group with-icon">
-          <span className="icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              viewBox="0 0 24 24"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <circle cx="12" cy="7" r="4" />
-              <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
-            </svg>
-          </span>
-          <input
-            type="text"
-            name="lastName"
-            id="lastName"
-            value={lastName}
-            onChange={(e) => {
-              dispatch(setStepOne({ lastName: e.target.value }));
-            }}
-            className="form-control rounded-2 "
-            placeholder=""
-          />
+        <div className="">
+          <label
+            htmlFor="name"
+            className="dark:text-gray-100  text-gray-950 text-lg"
+          >
+            {" "}
+            Last Name *{" "}
+          </label>
+          <div className="flex group dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] px-4 gap-3 mt-4 bg-white border dark:bg-[#11121c] border-[#2e2f45] rounded-lg items-center py-3">
+            <span className="text-gray-900 dark:text-gray-100">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                viewBox="0 0 24 24"
+                className="w-5 h-5"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <circle cx="12" cy="7" r="4" />
+                <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+              </svg>
+            </span>
+            <input
+              type="text"
+              name="lastName"
+              id="lastName"
+              value={lastName}
+              onChange={(e) => {
+                dispatch(setStepOne({ lastName: e.target.value }));
+              }}
+              className="rounded-md text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              placeholder=""
+            />
+          </div>
         </div>
       </div>
     </>
