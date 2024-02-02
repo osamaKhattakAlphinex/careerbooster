@@ -33,6 +33,8 @@ const DashboardBot = () => {
   const [isGif, setIsGif] = useState(false);
   const [audioPlayed, setAudioPlayed] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [audioBuffers, setAudioBuffers] = useState<any>([]);
+  const [audioCounter, setAudioCounter] = useState<number>(0);
   const componentRef: any = useRef(null);
   const audioFileUrl1 = "/speech_dashboard.mp3";
   const audioFileUrl2 = "/speech_resume_card.mp3";
@@ -111,7 +113,8 @@ const DashboardBot = () => {
         break;
       case "resume":
         applyStyles();
-        if (resumeElementRef.current) {
+        if (resumeElementRef.current && dashboardRef.current) {
+          dashboardRef.current.classList.remove("focused-tool");
           resumeElementRef.current.classList.remove("un-focused-tool");
           resumeElementRef.current.classList.add("focused-tool");
         }
@@ -131,15 +134,16 @@ const DashboardBot = () => {
         }
         // case "overall":
         //   applyStyles();
-        //   if (linkedinElementRef.current) {
-        //     resumeElementRef.current.classList.remove("un-focused-tool");
-        //     resumeElementRef.current.classList.add("focused-tool");
-        //   }
+        // if (linkedinElementRef.current) {
+        //   resumeElementRef.current.classList.remove("un-focused-tool");
+        //   resumeElementRef.current.classList.add("focused-tool");
+        // }
         break;
       default:
     }
     const url = URL.createObjectURL(audioBlob);
     console.log(url);
+    return url;
   };
 
   const handleClick = async () => {
@@ -149,7 +153,6 @@ const DashboardBot = () => {
         setIsGif(!isGif);
         if (isAudioPlaying) {
           componentRef.current.pause();
-          // componentRef.current.stop();
           setIsAudioPlaying(false);
         }
         return;
@@ -158,7 +161,7 @@ const DashboardBot = () => {
         setIsGif(!isGif);
         setIsAudioPlaying(true);
         componentRef.current.play();
-        return; // If firstName and lastName haven't changed, don't make the request again
+        return;
       }
 
       if (!isAudioPlaying && componentRef.current.src === "") {
@@ -173,16 +176,8 @@ const DashboardBot = () => {
           fetchAudio(audioFileUrl4, "linkedin"),
           fetchAudio(audioFileUrl5, "overall"),
         ])
-          .then((audioBuffers) => {
-            audioBuffers.map((audio: any) => {
-              focusTool(audio.arrayBufferView, audio.explanationFor);
-            });
-            // const concatenatedBuffer = concatenateBuffers(audioBuffers);
-            // const audioBlob = new Blob([concatenatedBuffer], {
-            //   type: "audio/mpeg",
-            // });
-            // const url = URL.createObjectURL(audioBlob);
-            // componentRef.current.src = url;
+          .then((audios: any) => {
+            setAudioBuffers(audios);
           })
           .catch((error) => {
             console.error("Error fetching or decoding audio:", error);
@@ -197,10 +192,22 @@ const DashboardBot = () => {
   };
 
   useEffect(() => {
+    if (audioBuffers.length > 0 && audioCounter < audioBuffers.length) {
+      const audioUrl = focusTool(
+        audioBuffers[audioCounter].arrayBufferView,
+        audioBuffers[audioCounter].explanationFor
+      );
+      componentRef.current.src = audioUrl;
+      componentRef.current.play();
+    }
+  }, [audioBuffers, audioCounter]);
+
+  useEffect(() => {
     const audio = componentRef.current;
 
     const handleAudioEnded = () => {
       setIsGif(false); // Set isGif to false when the audio ends
+      setAudioCounter((prev) => prev + 1);
     };
 
     audio.addEventListener("ended", handleAudioEnded);
