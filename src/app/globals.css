@@ -3,6 +3,23 @@
 @tailwind components;
 @tailwind utilities;
 
+.un-focused-tool {
+  opacity: 0.2;
+  transition: all 0.5s ease-in-out;
+}
+
+.add-inner {
+  background: #11121c;
+}
+
+.dashboard-focused {
+  z-index: -1;
+  background: -webkit-linear-gradient(to right, #3494e6, #ec6ead);
+  box-shadow: 0px 0px 18px 10px rgba(221, 112, 112, 0.3);
+  background: linear-gradient(#171a1c, #ec6ead);
+  transition: all 0.5s ease-in-out;
+}
+
 @layer utilities {
   @variants responsive {
     .no-scrollbar::-webkit-scrollbar {

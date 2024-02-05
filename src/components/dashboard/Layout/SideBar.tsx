@@ -118,7 +118,7 @@ const SideBar = () => {
             : "-translate-x-full lg:translate-x-0 " // Apply opacity only on small screens
         }`}
       >
-        <div className="pb-4 overflow-scroll ">
+        <div className="pb-4 overflow-auto ">
           <div className="px-7 py-[6px] flex">
             <div className="mr-4">
               <div
