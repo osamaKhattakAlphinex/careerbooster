@@ -44,6 +44,7 @@ const DashboardBot = () => {
 
   const {
     dashboardRef,
+    innerToolsRef,
     resumeElementRef,
     coverLetterElementRef,
     linkedinElementRef,
@@ -65,6 +66,16 @@ const DashboardBot = () => {
     finderElementRef,
     atsElementRef,
   ];
+
+  const removeStyles = () => {
+    componentRefs.map((componentRef) => {
+      componentRef.current?.classList.remove("un-focused-tool");
+    });
+    if (dashboardRef.current && innerToolsRef.current) {
+      dashboardRef.current.classList.remove("dashboard-focused");
+      innerToolsRef.current.classList.remove("add-inner");
+    }
+  };
 
   const applyStyles = () => {
     componentRefs.map((componentRef) => {
@@ -106,69 +117,78 @@ const DashboardBot = () => {
     });
     switch (focusedElement) {
       case "dashboard":
-        if (dashboardRef.current) {
-          dashboardRef.current.classList.add("focused-tool");
-          console.log(dashboardRef.current);
+        if (dashboardRef.current && innerToolsRef.current) {
+          dashboardRef.current.classList.add("dashboard-focused");
+          innerToolsRef.current.classList.add("add-inner");
         }
         break;
       case "resume":
         applyStyles();
-        if (resumeElementRef.current && dashboardRef.current) {
-          dashboardRef.current.classList.remove("focused-tool");
+        if (resumeElementRef.current) {
           resumeElementRef.current.classList.remove("un-focused-tool");
-          resumeElementRef.current.classList.add("focused-tool");
         }
         break;
       case "cover-letter":
         applyStyles();
         if (coverLetterElementRef.current) {
           coverLetterElementRef.current.classList.remove("un-focused-tool");
-          coverLetterElementRef.current.classList.add("focused-tool");
         }
         break;
       case "linkedin":
         applyStyles();
         if (linkedinElementRef.current) {
           linkedinElementRef.current.classList.remove("un-focused-tool");
-          linkedinElementRef.current.classList.add("focused-tool");
         }
-        // case "overall":
-        //   applyStyles();
-        // if (linkedinElementRef.current) {
-        //   resumeElementRef.current.classList.remove("un-focused-tool");
-        //   resumeElementRef.current.classList.add("focused-tool");
-        // }
+        break;
+      case "overall":
+        applyStyles();
+        if (
+          emailElementRef.current &&
+          bidElementRef.current &&
+          coachElementRef.current &&
+          reviewElementRef.current &&
+          finderElementRef.current &&
+          atsElementRef.current
+        ) {
+          emailElementRef.current.classList.remove("un-focused-tool");
+          bidElementRef.current.classList.remove("un-focused-tool");
+          coachElementRef.current.classList.remove("un-focused-tool");
+          reviewElementRef.current.classList.remove("un-focused-tool");
+          finderElementRef.current.classList.remove("un-focused-tool");
+          atsElementRef.current.classList.remove("un-focused-tool");
+        }
         break;
       default:
     }
     const url = URL.createObjectURL(audioBlob);
-    console.log(url);
     return url;
   };
 
   const handleClick = async () => {
     try {
-      console.log(isAudioPlaying);
       if (isGif) {
-        setIsGif(!isGif);
+        setIsGif(false);
         if (isAudioPlaying) {
           componentRef.current.pause();
+          setAudioCounter(0);
+          removeStyles();
           setIsAudioPlaying(false);
         }
         return;
       }
-      if (componentRef.current.src !== "") {
-        setIsGif(!isGif);
-        setIsAudioPlaying(true);
-        componentRef.current.play();
-        return;
-      }
+      // if (componentRef.current.src !== "") {
+      //   setIsGif(!isGif);
+      //   setIsAudioPlaying(true);
+      //   componentRef.current.play();
+      //   return;
+      // }
+      // console.log(componentRef.current.src);
 
-      if (!isAudioPlaying && componentRef.current.src === "") {
+      if (!isAudioPlaying) {
         // If audio is not playing, load and play it
-        setIsGif(!isGif);
+        setIsGif(true);
+        setIsAudioPlaying(true);
         setAudioPlayed(true);
-
         Promise.all([
           fetchAudio(audioFileUrl1, "dashboard"),
           fetchAudio(audioFileUrl2, "resume"),
@@ -182,9 +202,6 @@ const DashboardBot = () => {
           .catch((error) => {
             console.error("Error fetching or decoding audio:", error);
           });
-
-        componentRef.current.play();
-        setIsAudioPlaying(true);
       }
     } catch (error) {
       console.log("Error: ", error);
@@ -200,13 +217,21 @@ const DashboardBot = () => {
       componentRef.current.src = audioUrl;
       componentRef.current.play();
     }
+
+    if (audioCounter !== 0 && audioCounter === audioBuffers.length) {
+      componentRef.current.pause();
+      removeStyles();
+      setAudioCounter(0);
+      setAudioBuffers([]);
+      setIsGif(false);
+      setIsAudioPlaying(false);
+    }
   }, [audioBuffers, audioCounter]);
 
   useEffect(() => {
     const audio = componentRef.current;
 
     const handleAudioEnded = () => {
-      setIsGif(false); // Set isGif to false when the audio ends
       setAudioCounter((prev) => prev + 1);
     };
 
