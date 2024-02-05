@@ -158,7 +158,7 @@ const ProfilePreview = () => {
             {EditIcon}
           </button>
         </h2>
-        <div className="flex flex-col">
+        <div className="w-[100%] grid md:grid-cols-2 gap-4">
           {data.stepFive.list.map(
             (workExperience: WorkExperience, index: number) => (
               <ExperienceCard
@@ -186,7 +186,7 @@ const ProfilePreview = () => {
             {EditIcon}
           </button>
         </h2>
-        <div className="flex flex-col">
+        <div className="w-[100%] grid md:grid-cols-2 gap-4 mt-3">
           {data.stepFour.list.map((education: Education, index: number) => (
             <EducationCard key={index} rec={education} isShowing={true} />
           ))}
@@ -209,7 +209,7 @@ const ProfilePreview = () => {
           </button>
         </h2>
         <div className="flex flex-col gap-3">
-          <ul className="space-y-2 pl-0">
+          <ul className="w-[100%] grid md:grid-cols-2 gap-4">
             {data.stepSix.list.map((skill: string, index: number) => (
               <li
                 key={index}

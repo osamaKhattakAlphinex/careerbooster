@@ -116,7 +116,7 @@ const ProfileReview = () => {
 
   return (
     <>
-      <div className="ml-0 lg:ml-[234px] lg:mb-[72px]">
+      <div className="ml-0 lg:ml-[284px] lg:mb-[72px]">
         {/* </script> */}
         {/* <Link
           href="/dashboard"
@@ -125,10 +125,10 @@ const ProfileReview = () => {
           {leftArrowIcon}
           Back
         </Link> */}
-        <main className="flex justify-center">
+        <main className="w-full">
           <section className="pb-15 ">
-            <div className="container flex justify-center ">
-              <div className=" md:justify-center  w-[53%] mt-4 xs:w-[100%] md:w-[53%]">
+            <div className="xs:px-3 md:container ">
+              <div className="mt-4 w-full">
                 <div className="">
                   <div className="gap-8">
                     <div

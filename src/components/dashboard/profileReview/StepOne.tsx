@@ -31,7 +31,7 @@ const StepOne = () => {
 
   return (
     <>
-      <div className="flex flex-col w-full xs:gap-3 md:gap-8 ">
+      <div className="flex xs:flex-col md:flex-row w-full xs:gap-3 md:gap-8 ">
         <div className="">
           <label
             htmlFor="name"

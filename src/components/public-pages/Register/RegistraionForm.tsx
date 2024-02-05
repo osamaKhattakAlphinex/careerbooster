@@ -296,7 +296,7 @@ const RegistrationForm = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-5/12 mx-auto">
+    <div className="flex flex-col w-full md:w-5/12 mx-auto">
       <div className="flex flex-col justify-center">
         <div className="text-center">
           <a>
@@ -308,11 +308,14 @@ const RegistrationForm = () => {
               height={40}
             /> */}
           </a>
-          <h3 className="pb-4 font-semibold text-[2rem] dark:text-gray-100 text-gray-950">
+          <h3 className="pb-4 font-semibold text-lg md:text-2xl lg:text-[2rem] dark:text-gray-100 text-gray-950">
             Register your Account
           </h3>
 
-          <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
+          <form
+            className="flex flex-col  md:gap-4"
+            onSubmit={formik.handleSubmit}
+          >
             <div className={`upload-resume-btn mt-5 mb-10`}>
               {!params?.get("file") && (
                 <>

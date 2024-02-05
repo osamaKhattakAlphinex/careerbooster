@@ -12,9 +12,9 @@ const Login = () => {
     <>
       <main className="flex-grow-1">
         <section className=" pb-10 pt-[140px] h-full dark:bg-gray-950 bg-gray-100 ">
-          <div className=" container h-full">
+          <div className=" lg:container h-full">
             <div className="flex h-full">
-              <div className="flex  w-5/12 mx-auto">
+              <div className="flex w-full md:w-5/12 mx-auto">
                 <div className=" hidden">
                   <Link
                     href="/"

@@ -73,7 +73,7 @@ const StepSix = () => {
   }, [userData]);
 
   return (
-    <div className="w-full max-w-md mx-auto ">
+    <div className="w-full ">
       <h2 className="text-2xl font-semibold mb-4 my-3 md:my-8 dark:text-gray-100 text-gray-950">
         Your Skills
       </h2>
@@ -84,11 +84,11 @@ const StepSix = () => {
           </p>
         ) : (
           <>
-            <ul className="space-y-2 pl-0">
+            <ul className="w-[100%] grid grid-cols-2 gap-4">
               {list.map((skill: string, index: number) => (
                 <li
                   key={index}
-                  className="flex items-center justify-between  rounded-md shadow-md dark:border-[1px] dark:border-[#2e2f45] p-3 dark:text-gray-100 text-gray-950"
+                  className="flex mx-2 w-full items-center justify-between  rounded-md shadow-md dark:border-[1px] dark:border-[#2e2f45] p-3 dark:text-gray-100 text-gray-950"
                 >
                   <span>{skill}</span>
                   <button

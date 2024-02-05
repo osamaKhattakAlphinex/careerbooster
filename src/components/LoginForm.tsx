@@ -40,9 +40,12 @@ const LoginForm = () => {
     },
   });
   return (
-    <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
+    <form
+      onSubmit={formik.handleSubmit}
+      className="flex flex-col justify-center gap-4"
+    >
       <div className="text-start">
-        <h2 className="pb-5 font-semibold text-[2.5rem]">
+        <h2 className="pb-5 font-semibold text-lg md:text-2xl lg:text-[2.5rem]">
           Login to your Account
         </h2>
         <div className="flex flex-wrap relative items-stretch  w-full">
