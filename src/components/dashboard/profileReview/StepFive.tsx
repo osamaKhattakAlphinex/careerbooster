@@ -179,7 +179,7 @@ const StepFive = () => {
     <>
       {state === "show" && register.scrappedContent !== "" && (
         <div
-          className="flex items-center bg-blue-500 text-gray-100  text-sm  px-4 py-3"
+          className="flex items-center bg-blue-500 text-gray-100  text-sm md:mt-12 mt-3 px-4 py-3"
           role="alert"
         >
           <svg
@@ -213,7 +213,7 @@ const StepFive = () => {
 
       {state === "show" && (
         <>
-          <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl dark:text-gray-100 text-gray-950 ">
+          <h1 className="text-lg xs:my-5 justify-between items-center flex md:mt-2  font-bold leading-tight tracking-tight  md:text-2xl dark:text-gray-100 text-gray-950 ">
             Work Experience
             <button
               type="button"
@@ -226,15 +226,17 @@ const StepFive = () => {
           </h1>
 
           {list.length === 0 && <p>No Experiences Found</p>}
-          {list.map((rec: WorkExperience) => (
-            <div key={rec.id}>
-              <ExperienceCard rec={rec} />
-            </div>
-          ))}
+          <div className="w-[100%] grid grid-cols-2 gap-4">
+            {list.map((rec: WorkExperience) => (
+              <div key={rec.id}>
+                <ExperienceCard rec={rec} />
+              </div>
+            ))}
+          </div>
           <button
             type="button"
             onClick={(e) => dispatch(setStepFive({ state: "add" }))}
-            className="w-full flex flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
           >
             {plusSimpleIcon}
             Add New Experience

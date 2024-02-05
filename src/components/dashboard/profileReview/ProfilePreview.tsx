@@ -17,18 +17,18 @@ const ProfilePreview = () => {
 
   return (
     <div className="">
-      <h1 className="text-2xl font-semibold mb-2 dark:text-gray-100 text-gray-950">
+      <h1 className="text-2xl mt-6 font-semibold mb-2 dark:text-gray-100 text-gray-950">
         Review your Resume
       </h1>
       <p className=" mb-4 dark:text-gray-100 text-gray-950">
         Review and make any changes below.
       </p>
-      <hr className="mb-4 dark:text-gray-100 text-gray-950" />
+      <hr className="mb-4 dark:text-[#2e2f45] text-gray-950" />
 
       {/* Basic */}
       <section className="mb-8">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-medium dark:text-gray-100 text-gray-950">
+          <h3 className="text-lg font-medium dark:text-gray-100  text-gray-950">
             {data.stepOne.firstName === "" && data.stepOne.lastName === "" ? (
               "[Missing Name]"
             ) : (
@@ -45,7 +45,7 @@ const ProfilePreview = () => {
           </div>
         </div>
         <div className="flex justify-between items-center mb-4">
-          <div className="text-sm flex flex-col gap-1 ">
+          <div className="text-sm flex flex-col gap-3 ">
             <p className="flex flex-row gap-2 items-center dark:text-gray-100 text-gray-950">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -101,9 +101,9 @@ const ProfilePreview = () => {
             <p className="flex flex-row gap-2 items-center dark:text-gray-100 text-gray-950">
               {addressIcon}
               {data.stepThree?.country === "" &&
-                data.stepThree?.street &&
-                data.stepThree?.cityState &&
-                data.stepThree?.postalCode ? (
+              data.stepThree?.street &&
+              data.stepThree?.cityState &&
+              data.stepThree?.postalCode ? (
                 <span>[Address Missing]</span>
               ) : (
                 <span>
@@ -145,7 +145,7 @@ const ProfilePreview = () => {
       </section> */}
 
       {/* Work Experience */}
-      <section className="mb-8 ">
+      <section className="mb-8">
         <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
           Work Experience
           <button
@@ -158,7 +158,7 @@ const ProfilePreview = () => {
             {EditIcon}
           </button>
         </h2>
-        <div className="flex flex-col gap-3">
+        <div className="w-[100%] grid md:grid-cols-2 gap-4">
           {data.stepFive.list.map(
             (workExperience: WorkExperience, index: number) => (
               <ExperienceCard
@@ -174,7 +174,7 @@ const ProfilePreview = () => {
 
       {/* Education */}
       <section className="mb-8 ">
-        <h2 className="text-xl font-semibold mb-2 dark:text-gray-100 text-gray-950">
+        <h2 className="text-xl font-semibold  dark:text-gray-100 text-gray-950">
           Education
           <button
             type="button"
@@ -186,7 +186,7 @@ const ProfilePreview = () => {
             {EditIcon}
           </button>
         </h2>
-        <div className="flex flex-col gap-3">
+        <div className="w-[100%] grid md:grid-cols-2 gap-4 mt-3">
           {data.stepFour.list.map((education: Education, index: number) => (
             <EducationCard key={index} rec={education} isShowing={true} />
           ))}
@@ -195,8 +195,8 @@ const ProfilePreview = () => {
       </section>
 
       {/* Skills */}
-      <section className="mb-8 ">
-        <h2 className="text-xl font-semibold mb-2 dark:text-gray-100 text-gray-950 ">
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950 ">
           Skills
           <button
             type="button"
@@ -209,11 +209,11 @@ const ProfilePreview = () => {
           </button>
         </h2>
         <div className="flex flex-col gap-3">
-          <ul className="space-y-2 pl-0">
+          <ul className="w-[100%] grid md:grid-cols-2 gap-4">
             {data.stepSix.list.map((skill: string, index: number) => (
               <li
                 key={index}
-                className="flex items-center justify-between  rounded-md shadow-md border-[1px] p-3 dark:text-gray-100 text-gray-950"
+                className="flex items-center justify-between  rounded-md shadow-md dark:border-[1px] dark:border-[#2e2f45] p-3 dark:text-gray-100 text-gray-950"
               >
                 <span>{skill}</span>
               </li>

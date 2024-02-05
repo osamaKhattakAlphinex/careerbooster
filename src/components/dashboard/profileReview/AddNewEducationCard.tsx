@@ -44,13 +44,13 @@ const AddNewEducationCard = () => {
   });
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 border-[1px] rounded-lg">
-      <h2 className="text-2xl font-semibold mb-4 dark:text-gray-100 text-gray-950">
+    <div className="w-full max-w-md mx-auto p-6 xs:mt-3 md:mt-10 !border-[1px] dark:!border-[#2e2f45] border-gray-700  rounded-lg">
+      <h2 className="text-lg md:text-2xl items-center flex justify-between font-semibold mb-4 dark:text-gray-100 text-gray-950">
         Add Education
         <button
           type="button"
           onClick={(e) => dispatch(setStepFour({ state: "show" }))}
-          className="text-xs float-right flex flex-row gap-1 items-center hover:font-extrabold mt-2 dark:text-gray-100 text-gray-950"
+          className="text-xs  float-right flex flex-row gap-1 items-center hover:font-extrabold mt-2 dark:text-gray-100 text-gray-950"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

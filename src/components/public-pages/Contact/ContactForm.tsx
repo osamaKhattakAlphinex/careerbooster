@@ -44,14 +44,17 @@ const ContactForm = () => {
 
   return (
     <div className="flex flex-row justify-center">
-      <div className="flex flex-col lg:columns-8 xl:columns-6">
+      <div className="flex flex-col md:w-[44%] ">
         <form className="flex flex-col gap-8" onSubmit={formik.handleSubmit}>
           <div className=" flex flex-col justify-start items-start">
-            <label htmlFor="name" className=" text-lg font-medium mb-4">
+            <label
+              htmlFor="name"
+              className=" text-lg font-medium mb-4 text-gray-900 dark:text-gray-400"
+            >
               Your name*
             </label>
-            <div className="flex flex-row justify-start items-center gap-3 p-3 border rounded-lg w-full ">
-              <span className="text-[#11121c]">
+            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg w-full dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff]">
+              <span className="text-gray-800 dark:text-gray-100">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -71,7 +74,7 @@ const ContactForm = () => {
                 type="text"
                 id="name"
                 name="name"
-                className=" text-[#11121c] border-none focus:outline-none"
+                className="text-gray-900 dark:text-gray-100 w-full text-base bg-transparent outline-none"
                 placeholder="What's your name?"
                 value={formik.values.name}
                 onChange={formik.handleChange}
@@ -79,11 +82,14 @@ const ContactForm = () => {
             </div>
           </div>
           <div className="flex flex-col stify-start items-start">
-            <label htmlFor="email" className=" text-lg font-medium mb-4">
+            <label
+              htmlFor="email"
+              className=" text-lg font-medium text-gray-900 dark:text-gray-400 mb-4"
+            >
               Email Address*
             </label>
-            <div className="flex flex-row justify-start items-center gap-3 p-3 border rounded-lg w-full ">
-              <span className="text-[#11121c]">
+            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg w-full dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff]">
+              <span className="text-gray-800 dark:text-gray-100">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -105,7 +111,7 @@ const ContactForm = () => {
                 type="email"
                 id="email"
                 name="email"
-                className=" text-[#11121c] border-none focus:outline-none"
+                className=" text-gray-900 dark:text-gray-100 w-full text-base bg-transparent outline-none"
                 placeholder="Enter Your Email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
@@ -113,11 +119,14 @@ const ContactForm = () => {
             </div>
           </div>
           <div className="flex flex-col justify-start items-start">
-            <label htmlFor="phone" className="text-lg font-medium mb-4">
+            <label
+              htmlFor="phone"
+              className="text-lg font-medium text-gray-900 dark:text-gray-400 mb-4"
+            >
               Phone Number
             </label>
-            <div className="flex flex-row justify-start items-center gap-3 p-3 border rounded-lg w-full ">
-              <span className="text-[#11121c]">
+            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg w-full dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff]">
+              <span className="text-gray-800 dark:text-gray-100">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -133,24 +142,28 @@ const ContactForm = () => {
                 </svg>
               </span>
               <input
-                type="tel"
+                type="number"
                 id="phone"
                 name="phone"
-                className=" text-[#11121c] border-none focus:outline-none"
+                className=" text-gray-900 dark:text-gray-100 w-full text-base bg-transparent outline-none"
                 placeholder="Phone Number"
                 value={formik.values.phone}
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 onChange={formik.handleChange}
               />
             </div>
           </div>
           <div className="flex flex-col justify-start items-start">
-            <label htmlFor="message" className="text-lg font-medium mb-4">
+            <label
+              htmlFor="message"
+              className="text-lg text-gray-900 font-medium dark:text-gray-400 mb-4"
+            >
               Your Message*
             </label>
             <textarea
               id="message"
               name="message"
-              className="text-[#11121c] border-none focus:outline-none border w-full p-2 rounded-md"
+              className="text-gray-900 dark:text-gray-100 group  bg-transparent dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] focus:outline-none  border-gray-600  border-[1px] w-full p-2 rounded-md"
               placeholder="Write here your details message"
               rows={4}
               value={formik.values.message}
@@ -176,7 +189,7 @@ const ContactForm = () => {
             <button
               type="submit"
               disabled={submitting || !isVerified}
-              className="px-6 py-3 text-base font-bold rounded-md bg-[#9E8BFF] text-white disabled:bg-[#4e4868]"
+              className="px-6 py-3 text-base rounded-md dark:bg-[#e6f85e]  bg-[#6a4dff]  text-gray-950 dark:disabled:bg-[#bcc76d] disabled:bg-[#9580ff]"
             >
               {submitting ? "Submitting..." : "Send Message"}
             </button>

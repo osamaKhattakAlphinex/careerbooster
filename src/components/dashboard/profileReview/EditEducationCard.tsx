@@ -59,13 +59,13 @@ const EditEducationCard = () => {
   }, [list]);
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 border-[1px] rounded-lg">
-      <h2 className="text-2xl font-semibold mb-4">
+    <div className="w-full max-w-md mx-auto p-6 xs:mt-4 md:mt-10 shadow-md dark:border-[1px] dark:border-[#2e2f45] rounded-lg">
+      <h2 className="text-lg md:text-2xl items-center flex justify-between font-semibold mb-4 dark:text-gray-100 text-gray-950">
         Update Education
         <button
           type="button"
           onClick={(e) => dispatch(setStepFour({ state: "show" }))}
-          className="text-xs float-right flex flex-row gap-1 items-center hover:font-extrabold mt-2"
+          className="text-xs float-right flex flex-row gap-1 items-center mt-2 transition-all duration-300 ease-in-out hover:font-extrabold hover:text-blue-500 dark:hover:text-yellow-300"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

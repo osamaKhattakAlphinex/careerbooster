@@ -25,6 +25,7 @@ const UserSchema = new Schema(
       unique: true,
       required: true,
     },
+    profileImage: String,
     phone: {
       type: String,
     },

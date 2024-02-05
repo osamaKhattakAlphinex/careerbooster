@@ -177,18 +177,16 @@ const CreditSubscriptionCard: React.FC<Props> = ({
         // className={`col-md-6 col-lg-4 ${
         //   userPackage.amount === 0 && data ? "" : ""
         // } `}
-        className="col-md-6 col-lg-4"
-        data-aos="fade-up-sm"
-        data-aos-delay="50"
+        className="flex flex-col md:w-4/12  xs:w-full   "
       >
         <div
-          className={`p-6 pricing-card px-lg-8 py-lg-8 rounded-4 h-full bg- `}
+          className={`p-6  lg:px-8 lg:py-8 rounded-2xl h-full border-[1px] hover:bg-gray-50 hover:shadow-2xl dark:hover:border-[#e6f85e] dark:hover:bg-black  transition-all duration-200 ease-in-out relative hover:border-blue-600 active:border-blue-600 xs:mx-6 md:mx-0`}
         >
-          <h1 className="display-3 fw-semibold theme-text mb-0 mt-4 !text-4xl">
+          <h1 className=" font-semibold text-[#6a4dff] dark:text-[#e6f85e] mb-0 mt-4 md:!text-4xl xs:text-2xl">
             {creditPackage.title}
           </h1>
-          <div className="price flex align-center">
-            <h3 className="theme-text-2 fw-medium mb-0">
+          <div className="flex items-center">
+            <h3 className="text-gray-950 dark:text-gray-100 font-medium mt-4 mb-6 text-xl">
               ${creditPackage.amount}
             </h3>
             {/* <span className="text-2xl theme-text-2">
@@ -201,10 +199,10 @@ const CreditSubscriptionCard: React.FC<Props> = ({
           {!viewOnly && (
             <>
               {creditPackage.amount !== 0 && (
-                <div className="mt-4 ">
+                <div className="mb-6">
                   <input
                     type="text"
-                    className="form-control"
+                    className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-2 pl-[2rem] text-base  border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
                     placeholder="Apply coupon"
                     value={coupon}
                     onChange={(e) => setCoupon(e.target.value)}
@@ -222,7 +220,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
                   e.preventDefault(); // Prevent default anchor behavior
                   handleClick(); // Call handleAnchorClick function
                 }}
-                className="pricing-btn btn btn-md w-full fs-4 lh-sm mt-9"
+                className=" no-underline px-[1rem] font-[500] text-[1rem] py-[.75rem] rounded-md text-[#6a4dff] dark:text-[#e6f85e] border-[1px] border-[#6a4dff] hover:border-[#6a4dff] hover:bg-[#6a4dff] hover:border-none hover:text-gray-100 dark:bg-[#11121c] dark:border-[#e6f85e]  dark:hover:bg-[#e6f85e] dark:hover:border-none dark:hover:text-[#11121c]"
               >
                 {subscribing
                   ? "Please wait..."
@@ -233,11 +231,14 @@ const CreditSubscriptionCard: React.FC<Props> = ({
             </>
           )}
 
-          <ul className="d-flex flex-column gap-5 text-sm pl-0 mt-9 mb-0">
+          <ul className="flex flex-col md:gap-5 xs:gap-2 text-sm pl-0 md:mt-9 xs:mt-0 mb-0">
             {creditPackage.features.map((feature: string, i: number) => (
-              <li key={i} className="flex gap-1 items-center">
+              <li
+                key={i}
+                className="flex gap-1 items-center text-gray-950 dark:text-gray-100"
+              >
                 {feature}{" "}
-                <span className="cursor-pointer text-gray-600 relative group">
+                <span className="cursor-pointer text-gray-950 dark:text-gray-100 relative group">
                   {infoSmallIcon}
                   <div
                     role="tooltip"

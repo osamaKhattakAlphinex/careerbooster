@@ -296,8 +296,8 @@ const RegistrationForm = () => {
   }, []);
 
   return (
-    <div className="col-lg-12" data-aos="fade-up-sm" data-aos-delay="100">
-      <div className="account-wrapper d-flex flex-column justify-center">
+    <div className="flex flex-col w-full md:w-5/12 mx-auto">
+      <div className="flex flex-col justify-center">
         <div className="text-center">
           <a>
             {/* <Image
@@ -308,18 +308,19 @@ const RegistrationForm = () => {
               height={40}
             /> */}
           </a>
-          <h3 className="pb-4">Register your Account</h3>
+          <h3 className="pb-4 font-semibold text-lg md:text-2xl lg:text-[2rem] dark:text-gray-100 text-gray-950">
+            Register your Account
+          </h3>
 
-          <form className="vstack gap-4" onSubmit={formik.handleSubmit}>
+          <form
+            className="flex flex-col  md:gap-4"
+            onSubmit={formik.handleSubmit}
+          >
             <div className={`upload-resume-btn mt-5 mb-10`}>
               {!params?.get("file") && (
                 <>
                   {!isAuth && data === null && !content && (
-                    <label
-                      className="btn btn-lg btn-gradient-1 aos-init aos-animate"
-                      data-aos="fade-up-sm"
-                      data-aos-delay="200"
-                    >
+                    <label className="items-center gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg w-auto px-[2rem] py-[1rem] text-[1.125rem] font-medium mt-4  aos-animate">
                       <input
                         className="hidden"
                         type="file"
@@ -354,7 +355,7 @@ const RegistrationForm = () => {
                       />
                     )
                   )}
-                  <p className="text-gray-700 mt-4 text-sm">
+                  <p className="dark:text-gray-100 text-gray-950 mt-8 text-sm">
                     Your existing resume forms the basis for your new one,
                     eliminating manual data entry.
                   </p>
@@ -367,8 +368,8 @@ const RegistrationForm = () => {
               )}
             </div>
             <div className="text-start mb-4">
-              <div className="input-group with-icon">
-                <span className="icon">
+              <div className="flex flex-wrap relative items-stretch  w-full">
+                <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -393,7 +394,7 @@ const RegistrationForm = () => {
                 <input
                   type="text"
                   name="firstName"
-                  className="form-control rounded-2 py-4"
+                  className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
                   placeholder="First Name"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -407,8 +408,8 @@ const RegistrationForm = () => {
               )}
             </div>
             <div className="text-start my-4">
-              <div className="input-group with-icon ">
-                <span className="icon">
+              <div className="flex flex-wrap relative items-stretch  w-full ">
+                <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -433,7 +434,7 @@ const RegistrationForm = () => {
                 <input
                   type="text"
                   name="lastName"
-                  className="form-control rounded-2 py-4"
+                  className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
                   placeholder="Last Name"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -447,8 +448,8 @@ const RegistrationForm = () => {
               )}
             </div>
             <div className="text-start my-4">
-              <div className="input-group with-icon">
-                <span className="icon">
+              <div className="flex flex-wrap relative items-stretch  w-full">
+                <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -474,7 +475,7 @@ const RegistrationForm = () => {
                 <input
                   type="email"
                   name="email"
-                  className="form-control rounded-2 py-4"
+                  className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
                   placeholder="Enter Your Email"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -488,8 +489,8 @@ const RegistrationForm = () => {
               )}
             </div>
             <div className="text-start my-4">
-              <div className="input-group with-icon">
-                <span className="icon">
+              <div className="flex flex-wrap relative items-stretch  w-full">
+                <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -514,7 +515,7 @@ const RegistrationForm = () => {
                 <input
                   type="password"
                   name="password"
-                  className="form-control rounded-2 py-4"
+                  className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
                   placeholder="Enter Password"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -528,8 +529,8 @@ const RegistrationForm = () => {
               )}
             </div>
             <div className="text-start my-4">
-              <div className="input-group with-icon">
-                <span className="icon">
+              <div className="flex flex-wrap relative items-stretch  w-full">
+                <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -554,7 +555,7 @@ const RegistrationForm = () => {
                 <input
                   type="password"
                   name="confirmpassword"
-                  className="form-control rounded-2 py-4"
+                  className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
                   placeholder="Confirm Password"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -628,7 +629,7 @@ const RegistrationForm = () => {
               <button
                 type="submit"
                 disabled={!formik.values.terms || submitting}
-                className="btn theme-btn w-full py-4"
+                className={`w-full py-4 rounded-md !bg-[#6a4dff]  dark:!bg-[#e6f85e] text-gray-100 dark:text-gray-950 disabled:opacity-[.65] `}
               >
                 {submitting ? (
                   <span className="flex items-center justify-center">
@@ -642,7 +643,10 @@ const RegistrationForm = () => {
             <div className="text-center">
               <p>
                 Already have an account?
-                <Link href="/login" className="text-decoration-none">
+                <Link
+                  href="/login"
+                  className="text-[#6a4dff]  no-underline dark:!text-[#e6f85e]"
+                >
                   {" "}
                   Log in{" "}
                 </Link>

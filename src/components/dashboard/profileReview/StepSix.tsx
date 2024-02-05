@@ -73,8 +73,8 @@ const StepSix = () => {
   }, [userData]);
 
   return (
-    <div className="w-full max-w-md mx-auto ">
-      <h2 className="text-2xl font-semibold mb-4 dark:text-gray-100 text-gray-950">
+    <div className="w-full ">
+      <h2 className="text-2xl font-semibold mb-4 my-3 md:my-8 dark:text-gray-100 text-gray-950">
         Your Skills
       </h2>
       <div className="mb-4">
@@ -84,11 +84,11 @@ const StepSix = () => {
           </p>
         ) : (
           <>
-            <ul className="space-y-2 pl-0">
+            <ul className="w-[100%] grid grid-cols-2 gap-4">
               {list.map((skill: string, index: number) => (
                 <li
                   key={index}
-                  className="flex items-center justify-between  rounded-md shadow-md border-[1px] p-3 dark:text-gray-100 text-gray-950"
+                  className="flex mx-2 w-full items-center justify-between  rounded-md shadow-md dark:border-[1px] dark:border-[#2e2f45] p-3 dark:text-gray-100 text-gray-950"
                 >
                   <span>{skill}</span>
                   <button
@@ -113,13 +113,13 @@ const StepSix = () => {
               type="text"
               value={newSkill}
               onChange={(e) => setNewSkill(e.target.value)}
-              className="w-full border-[1px] border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+              className="w-full border-[1px] border-[#2e2f45] outline-none group dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               placeholder="Enter a skill..."
             />
             <button
               type="submit"
               onClick={addSkill}
-              className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600"
+              className="!bg-blue-500 text-white rounded-md px-4 py-2 hover:!bg-blue-600"
             >
               Add
             </button>

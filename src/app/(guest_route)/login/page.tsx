@@ -11,15 +11,11 @@ const Login = () => {
   return (
     <>
       <main className="flex-grow-1">
-        <section className="account-section login-page pb-6 pt-30 h-full">
-          <div className="container-fluid h-full">
-            <div className="row h-full">
-              <div
-                className="col-lg-12"
-                data-aos="fade-up-sm"
-                data-aos-delay="100"
-              >
-                <div className="close-btn d-none">
+        <section className=" pb-10 pt-[140px] h-full dark:bg-gray-950 bg-gray-100 ">
+          <div className=" lg:container h-full">
+            <div className="flex h-full">
+              <div className="flex w-full md:w-5/12 mx-auto">
+                <div className=" hidden">
                   <Link
                     href="/"
                     className="icon bg-gradient-3 text-white w-12 h-12 rounded p-3 border-[1px] border-white border-opacity-10 d-flex align-center justify-center ms-auto"
@@ -40,7 +36,7 @@ const Login = () => {
                     </svg>
                   </Link>
                 </div>
-                <div className="account-wrapper h-full d-flex flex-column justify-center">
+                <div className="flex flex-col justify-center mx-auto">
                   <div className="text-center">
                     <LoginForm />
                   </div>

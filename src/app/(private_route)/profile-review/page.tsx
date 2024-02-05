@@ -15,7 +15,6 @@ import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import "@/app/plugins.css";
-import "@/app/style.css";
 import Link from "next/link";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.Ai-Welcome",
@@ -117,34 +116,39 @@ const ProfileReview = () => {
 
   return (
     <>
-      <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]">
+      <div className="ml-0 lg:ml-[284px] lg:mb-[72px]">
         {/* </script> */}
-        <Link
+        {/* <Link
           href="/dashboard"
           className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
         >
           {leftArrowIcon}
           Back
-        </Link>
-        <main className="flex-grow-1">
+        </Link> */}
+        <main className="w-full">
           <section className="pb-15 ">
-            <div className="container">
-              <div
-                className="row justify-center mt-18 w-full "
-                data-aos="fade-up-sm"
-                data-aos-delay="50"
-              >
-                <div className="col-lg-8 col-xl-6">
-                  <div className="vstack gap-8" id="contact-form">
-                    <div>
+            <div className="xs:px-3 md:container ">
+              <div className="mt-4 w-full">
+                <div className="">
+                  <div className="gap-8">
+                    <div
+                      className={`md:my-6 flex ${
+                        register.activeStep > 1
+                          ? "xs:justify-between"
+                          : "xs:justify-end "
+                      } items-center`}
+                    >
                       {register.activeStep > 1 && (
                         <button
                           type="submit"
-                          className=" dark:text-gray-100 text-gray-950"
+                          className=" dark:text-gray-100 flex items-center gap-2 xs:scale-75 md:scale-100 text-base  text-gray-950"
                           onClick={(e) => {
                             dispatch(setActiveStep(register.activeStep - 1));
                           }}
                         >
+                          <span className="xs:scale-75 md:scale-100">
+                            {leftArrowIcon}
+                          </span>{" "}
                           Back
                         </button>
                       )}
@@ -153,7 +157,7 @@ const ProfileReview = () => {
                         <button
                           type="submit"
                           disabled={isNextDisabled()}
-                          className="btn btn-primary-dark float-right"
+                          className="py-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
                           onClick={(e) => {
                             dispatch(setActiveStep(register.activeStep + 1));
                           }}
@@ -183,15 +187,24 @@ const ProfileReview = () => {
                     {register.activeStep === 5 && <ProfilePreview />}
                     {register.activeStep === 6 && <StepEight />}
 
-                    <div className="">
+                    <div
+                      className={`my-6 flex ${
+                        register.activeStep > 1
+                          ? "xs:justify-between"
+                          : "xs:justify-end "
+                      } items-center`}
+                    >
                       {register.activeStep > 1 && (
                         <button
                           type="submit"
-                          className="btn btn-secondary-dark"
+                          className=" dark:text-gray-100 flex items-center gap-2 xs:scale-75 md:scale-100 text-base  text-gray-950"
                           onClick={(e) => {
                             dispatch(setActiveStep(register.activeStep - 1));
                           }}
                         >
+                          <span className="xs:scale-75 md:scale-100">
+                            {leftArrowIcon}
+                          </span>{" "}
                           Back
                         </button>
                       )}
@@ -200,7 +213,7 @@ const ProfileReview = () => {
                         <button
                           type="submit"
                           disabled={isNextDisabled()}
-                          className="btn btn-primary-dark float-right"
+                          className="py-3 md:mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
                           onClick={(e) => {
                             dispatch(setActiveStep(register.activeStep + 1));
                           }}
@@ -212,14 +225,14 @@ const ProfileReview = () => {
                       {register.activeStep === 5 && (
                         <button
                           type="submit"
-                          className="btn btn-primary-dark float-right"
+                          className="py-3 mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
                           onClick={handleSaveDetails}
                         >
                           {register.isSubmitting ? refreshIconRotating : "Save"}
                         </button>
                       )}
                     </div>
-                    <div className="status alert mb-0 d-none"></div>
+                    <div className="  mb-0 "></div>
                   </div>
                 </div>
               </div>

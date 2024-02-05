@@ -4,7 +4,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { changePassword } from "@/lib/api";
 import axios from "axios";
 import "@/app/plugins.css";
-import "@/app/style.css";
 
 const ChangePasswordPage = () => {
   const router = useRouter();
@@ -71,13 +70,15 @@ const ChangePasswordPage = () => {
   }, [token]);
   return (
     <>
-      <main className="flex-grow-1 mb-20 ">
-        <section className="py-15 pt-lg-30">
+      <main className="flex-grow-1 pb-20 ">
+        <section className="py-16 lg:pt-40 dark:bg-gray-950 bg-gray-100">
           <div className="container">
-            <div className="row justify-center">
-              <div className="col-lg-8 col-xl-6">
+            <div className="flex justify-center">
+              <div className="flex-col lg:w-8/12 xl:w-6/12 ">
                 {verifyingToken ? (
-                  <p>Verifying token...</p>
+                  <p className="dark:text-gray-100 text-gray-950 font-bold text-[1rem]">
+                    Verifying token...
+                  </p>
                 ) : (
                   <>
                     {tokenError ? (
@@ -87,7 +88,10 @@ const ChangePasswordPage = () => {
                     ) : (
                       <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                          <label htmlFor="password" className="form-label">
+                          <label
+                            htmlFor="password"
+                            className="form-label dark:text-gray-100 text-gray-950 font-bold"
+                          >
                             New Password
                           </label>
                           <input
@@ -98,14 +102,14 @@ const ChangePasswordPage = () => {
                             onChange={(event) =>
                               setPassword(event.target.value)
                             }
-                            className="form-control"
+                            className="my-4 block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-3 pl-4 text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
                             required
                           />
                         </div>
                         <div className="mb-3">
                           <label
                             htmlFor="confirmPassword"
-                            className="form-label"
+                            className="form-label dark:text-gray-100 text-gray-950 font-bold"
                           >
                             Confirm Password
                           </label>
@@ -117,14 +121,14 @@ const ChangePasswordPage = () => {
                             onChange={(event) =>
                               setConfirmPassword(event.target.value)
                             }
-                            className="form-control"
+                            className="my-4 block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-3 pl-4 text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
                             required
                           />
                         </div>
                         {error && <p className="text-danger">{error}</p>}
                         <button
                           type="submit"
-                          className="btn btn-primary"
+                          className="dark:bg-[#e6f85e] dark:text-gray-950  text-[16px] font-[500] px-[1.5rem] py-[.85rem] bg-[#6a4dff] text-gray-100 rounded-md disabled:opacity-[.65] mt-6"
                           disabled={
                             password !== confirmPassword || !password || loading
                           }

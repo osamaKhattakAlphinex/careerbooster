@@ -1,7 +1,9 @@
+"use client";
+import { useTourContext } from "@/context/TourContext";
 import { chevronRight } from "@/helpers/iconsProvider";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 const ToolsCard = ({
   title,
@@ -22,9 +24,57 @@ const ToolsCard = ({
   isActive: boolean;
   action: string;
 }) => {
+  const {
+    resumeElementRef,
+    coverLetterElementRef,
+    linkedinElementRef,
+    emailElementRef,
+    bidElementRef,
+    coachElementRef,
+    reviewElementRef,
+    finderElementRef,
+    atsElementRef,
+  } = useTourContext();
+
+  const getRef = (title: any, ref: any) => {
+    switch (title) {
+      case "Resume Builder":
+        resumeElementRef.current = ref;
+        break;
+      case "Generator Cover Letters":
+        coverLetterElementRef.current = ref;
+        break;
+      case "Keyword Optimize Your LinkedIn":
+        linkedinElementRef.current = ref;
+        break;
+      case "Personalized Email Generator":
+        emailElementRef.current = ref;
+        break;
+      case "Consulting Bids Generator":
+        bidElementRef.current = ref;
+        break;
+      case "Career Coach":
+        coachElementRef.current = ref;
+        break;
+      case "Review Resume by AI":
+        reviewElementRef.current = ref;
+        break;
+      case "AI Job Finder":
+        finderElementRef.current = ref;
+        break;
+      case "ATS Scan Your Resume":
+        atsElementRef.current = ref;
+        break;
+      default:
+        return null;
+    }
+  };
   return (
-    <div className="lg:w-[32%] flex mb-8 dark:bg-transparent dark:border-none dark:rounded-none rounded-[20px] bg-[#ffffff94] border-[#b6b8b6]  p-3">
-      <Link href={link} className="flex no-underline text-white">
+    <div
+      ref={(ref) => getRef(title, ref)}
+      className="lg:w-[32%] flex mb-8 dark:bg-transparent dark:border-none dark:rounded-none rounded-[20px] bg-[#ffffff94] border-[#b6b8b6]  p-3"
+    >
+      <Link href={link} className="flex text-white no-underline">
         <div className="mr-4">
           <div
             className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-[60px] h-[60px] `}

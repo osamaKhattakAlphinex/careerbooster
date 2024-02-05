@@ -65,12 +65,12 @@ interface UserDataSlice {
   defaultResumeFile: string;
   wizardCompleted: boolean;
   wizardReviewed: boolean;
-  creditPackage?: ""
+  creditPackage?: "";
+  profileImage?: string;
+
   // userPackage: "";
   // userPackageData: {};
   // userPackageUsed: limitObject | {};
-
-
 }
 
 const initialState: UserDataSlice = {
@@ -99,13 +99,13 @@ const initialState: UserDataSlice = {
   defaultResumeFile: "",
   wizardCompleted: false,
   wizardReviewed: false,
-  creditPackage: ""
+  creditPackage: "",
+
+  profileImage: "",
 
   // userPackage: "",
   // userPackageData: {},
   // userPackageUsed: {},
-
-
 };
 
 const userDataSlice = createSlice({
@@ -139,11 +139,21 @@ const userDataSlice = createSlice({
       };
     },
 
-
+    setUserProfileImage(state, action) {
+      return {
+        ...state,
+        profileImage: action.payload,
+      };
+    },
   },
 });
 
-export const { setIsLoading, setError, setField, setUserData } =
-  userDataSlice.actions;
+export const {
+  setIsLoading,
+  setError,
+  setField,
+  setUserData,
+  setUserProfileImage,
+} = userDataSlice.actions;
 
 export default userDataSlice.reducer;
