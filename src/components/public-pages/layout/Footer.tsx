@@ -24,9 +24,9 @@ const Footer = () => {
           ></script>
         </Head>
         <div className="">
-          <div className=" flex lg:flex-row xs:flex-col justify-between md:px-20 xs:px-10 xs:text-center  md:gap-8 gap-4 py-8 md:text-left">
+          <div className="flex justify-between gap-4 py-8 lg:flex-row xs:flex-col md:px-20 xs:px-10 xs:text-center md:gap-8 md:text-left">
             <div className="lg:w-4/12 xs:w-full">
-              <div className="flex  items-center xs:text-center md:text-left xs:justify-center md:justify-start">
+              <div className="flex items-center xs:text-center md:text-left xs:justify-center md:justify-start">
                 <Image
                   width={80}
                   height={74}
@@ -38,7 +38,7 @@ const Footer = () => {
                   CareerBooster
                 </span>
               </div>
-              <p className="mb-0 text-gray-950 text-sm lg:pr-4 dark:text-gray-300">
+              <p className="mb-0 text-sm text-gray-950 lg:pr-4 dark:text-gray-300">
                 We specialize in turbocharging your career by harnessing the
                 power of cutting-edge AI-infused tools, ensuring you achieve
                 peak professional excellence. Our innovative solutions are
@@ -47,12 +47,12 @@ const Footer = () => {
               </p>
             </div>
 
-            <div className="flex lg:flex-row flex-col justify-between gap-4 lg:py-6 w-full">
-              <div className="lg:px-5  text-gray-950 mb-2 dark:text-gray-100">
-                <h6 className="text-gray-950 mb-2 text-xl font-semibold dark:text-gray-100 ">
+            <div className="flex flex-col justify-between w-full gap-4 lg:flex-row lg:py-6">
+              <div className="mb-2 lg:px-5 text-gray-950 dark:text-gray-100">
+                <h6 className="mb-2 text-xl font-semibold text-gray-950 dark:text-gray-100 ">
                   CareerBooster.AI
                 </h6>
-                <ul className="link-list-t mb-0 pl-0 list-none ">
+                <ul className="pl-0 mb-0 list-none link-list-t ">
                   <li>
                     <Link href="/about">About</Link>
                   </li>
@@ -71,10 +71,10 @@ const Footer = () => {
                 </ul>
               </div>
               <div className="lg:px-5 ">
-                <h6 className=" mb-2 text-gray-950 dark:text-gray-100 text-xl font-semibold">
+                <h6 className="mb-2 text-xl font-semibold text-gray-950 dark:text-gray-100">
                   Use Cases
                 </h6>
-                <ul className="link-list-t mb-0 pl-0 list-none">
+                <ul className="pl-0 mb-0 list-none link-list-t">
                   <li>
                     <Link href="/use-cases">Generate Resumes</Link>
                   </li>
@@ -93,10 +93,10 @@ const Footer = () => {
                 </ul>
               </div>
               <div className="lg:px-5">
-                <h6 className="text-gray-950 text-xl font-semibold dark:text-gray-100 mb-4">
+                <h6 className="mb-4 text-xl font-semibold text-gray-950 dark:text-gray-100">
                   Contact Us
                 </h6>
-                <ul className=" flex flex-col mb-0 pl-0">
+                <ul className="flex flex-col pl-0 mb-0 ">
                   <li className="hover:pl-[5px] hover:text-[#6a4dff]  dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] pl-0 py-2 no-underline">
                     <Link href="">
                       23 The Atria 219 Bath Road <br /> Slough SL1 4BF, United
@@ -110,7 +110,7 @@ const Footer = () => {
                     <Link href="">support@careerbooster.ai</Link>
                   </li>
                 </ul>
-                <ul className="flex flex-wrap align-center justify-center justify-md-start gap-3 mb-0 mt-5">
+                <ul className="flex flex-wrap justify-center gap-3 mt-5 mb-0 align-center justify-md-start">
                   <li>
                     <Link
                       href="https://www.facebook.com/careerboosterai"
@@ -192,23 +192,25 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="py-6 lg:mt-8 mx-auto xs:container ">
-            <p className="text-center text-xs text-gray-950 dark:text-gray-100 ">
+          <div className="py-6 mx-auto lg:mt-8 xs:container ">
+            <p className="text-xs text-center text-gray-950 dark:text-gray-100 ">
               Copyright <span> &copy; CareerBooster 2023</span>.{" "}
+            </p>
+            <div className="flex flex-row items-center justify-between py-4">
               <Link
                 href="/privacy-policy"
-                className="text-[#6a4dff] dark:text-[#e6f85e] mx-4 no-underline hover:text-blue-400 dark:hover:text-blue-400"
+                className="text-[#6a4dff] dark:text-[#e6f85e] mx-1 no-underline hover:text-blue-400 dark:hover:text-blue-400 xs:text-sm"
               >
                 Privacy Policy
-              </Link>{" "}
-              &nbsp;
+              </Link>
+
               <Link
                 href="/terms-and-conditions"
-                className="text-[#6a4dff] dark:text-[#e6f85e] mx-4 no-underline hover:text-blue-400 dark:hover:text-blue-400"
+                className="text-[#6a4dff] dark:text-[#e6f85e] mx-1 no-underline hover:text-blue-400 dark:hover:text-blue-400 xs:text-sm"
               >
                 Terms And Conditions
               </Link>
-            </p>
+            </div>
           </div>
         </div>
       </footer>

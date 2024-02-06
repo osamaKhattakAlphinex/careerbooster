@@ -27,14 +27,14 @@ const Header = () => {
       // }`}
       className={`py-5 translate-y-[0%] opacity-[1] fixed top-0 left-0 right-0 z-50 dark:bg-gray-950 bg-gray-100 on-over shadow-lg  dark:text-gray-100 text-gray-900`}
     >
-      <div className="container flex justify-between xs:w-full items-center xs:mx-auto">
+      <div className="container flex items-center justify-between xs:w-full xs:mx-auto">
         {/* <!-- Logo --> */}
 
         <Link
-          className="xs:flex xs:justify-between  xs:w-full  m-0 xs:ease-in-out xs:duration-300 xs:transition-all "
-          href="/"
+          className="m-0 xs:flex xs:justify-between xs:w-full xs:ease-in-out xs:duration-300 xs:transition-all "
+          href="#"
         >
-          <div className="flex justify-center items-center ">
+          <div className="flex items-center justify-center ">
             <Image
               width={80}
               height={74}
@@ -46,7 +46,7 @@ const Header = () => {
               CareerBooster
             </span>
           </div>
-          <div className="flex xs:flex-row  xs:justify-between items-center gap-4">
+          <div className="flex items-center gap-4 xs:flex-row xs:justify-between">
             <span className="lg:hidden">
               <ThemeChanger />
             </span>
@@ -99,11 +99,11 @@ const Header = () => {
 
         {/* <!-- Navbar content --> */}
         <div className="ml-auto lg:block xs:hidden">
-          <div className=" mt-2 flex flex-row items-center gap-10  p-2 ">
+          <div className="flex flex-row items-center gap-10 p-2 mt-2 ">
             <ul
               className={`flex lg:gap-2 xl:gap-5  dark:text-[#fff] text-gray-900 `}
             >
-              <li className="  mt-0 px-3 ">
+              <li className="px-3 mt-0 ">
                 <Link
                   className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]"
                   href="/"
@@ -111,7 +111,7 @@ const Header = () => {
                   Home
                 </Link>
               </li>
-              <li className=" mt-0 px-3 ">
+              <li className="px-3 mt-0 ">
                 <Link
                   className=" dark:text-gray-100 whitespace-nowrap text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
                   href="/use-cases"
@@ -119,7 +119,7 @@ const Header = () => {
                   Use cases
                 </Link>
               </li>
-              <li className=" mt-0 px-3 ">
+              <li className="px-3 mt-0 ">
                 <Link
                   className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
                   href="/pricing"
@@ -127,7 +127,7 @@ const Header = () => {
                   Pricing
                 </Link>
               </li>
-              <li className=" mt-0 px-3 ">
+              <li className="px-3 mt-0 ">
                 <Link
                   className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
                   href="/contact"
@@ -155,7 +155,7 @@ const Header = () => {
                         {userData.firstName + " " + userData.lastName}
                         <Link
                           href={role === "admin" ? "/admin" : "/dashboard"}
-                          className=" block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
+                          className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-0"
                         >
@@ -163,7 +163,7 @@ const Header = () => {
                         </Link>
                         <button
                           type="button"
-                          className=" block w-full px-4 py-2 text-left text-sm dark:hover:bg-gray-600 hover:bg-blue-100"
+                          className="block w-full px-4 py-2 text-sm text-left dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-3"
                           onClick={() => signOut()}
@@ -183,7 +183,7 @@ const Header = () => {
                             onClick={() => setDropdownOpen(!dropdownOpen)}
                           >
                             {/* <svg
-                              className="-mr-1 h-5 w-5 dark:text-gray-100 text-gray-950"
+                              className="w-5 h-5 -mr-1 dark:text-gray-100 text-gray-950"
                               viewBox="0 0 20 20"
                               fill="currentColor"
                               aria-hidden="true"
@@ -212,7 +212,7 @@ const Header = () => {
                         </div>
                         {/* {dropdownOpen && (
                           <div
-                            className="absolute right-0 z-10 mt-0 bg-gray-100  dark:bg-gray-950 w-56 origin-top-right rounded-md  shadow-lg "
+                            className="absolute right-0 z-10 w-56 mt-0 origin-top-right bg-gray-100 rounded-md shadow-lg dark:bg-gray-950 "
                             role="menu"
                             onMouseOver={() => setDropdownOpen(true)}
                             onMouseLeave={() => setDropdownOpen(false)}
@@ -222,7 +222,7 @@ const Header = () => {
                                 href={
                                   role === "admin" ? "/admin" : "/dashboard"
                                 }
-                                className=" block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
+                                className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
                                 role="menuitem"
                                 id="menu-item-0"
                               >
@@ -230,7 +230,7 @@ const Header = () => {
                               </Link>
                               <Link
                                 href="/profile-review"
-                                className=" block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
+                                className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
                                 role="menuitem"
                                 id="menu-item-1"
                               >
@@ -238,7 +238,7 @@ const Header = () => {
                               </Link>
                               <button
                                 type="button"
-                                className=" block w-full px-4 py-2 text-left text-sm dark:text-gray-100 text-gray-950"
+                                className="block w-full px-4 py-2 text-sm text-left dark:text-gray-100 text-gray-950"
                                 role="menuitem"
                                 id="menu-item-3"
                                 onClick={() => signOut()}
@@ -258,10 +258,10 @@ const Header = () => {
                         onMouseOver={() => setDropdownOpen(true)}
                         onMouseLeave={() => setDropdownOpen(false)}
                       >
-                        <div className="py-1 px-1 rounded-lg" role="none">
+                        <div className="px-1 py-1 rounded-lg" role="none">
                           <Link
                             href="#"
-                            className=" block px-2 py-2 cursor-default text-sm no-underline rounded-sm dark:text-gray-400 text-gray-400 "
+                            className="block px-2 py-2 text-sm text-gray-400 no-underline rounded-sm cursor-default dark:text-gray-400"
                             role="menuitem"
                             id="menu-item-0"
                           >
@@ -269,7 +269,7 @@ const Header = () => {
                           </Link>
                           <Link
                             href={role === "admin" ? "/admin" : "/dashboard"}
-                            className="block px-2 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 rounded-sm hover:bg-blue-100"
+                            className="block px-2 py-2 text-sm no-underline rounded-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-0"
                           >
@@ -277,7 +277,7 @@ const Header = () => {
                           </Link>
                           <Link
                             href="/profile-review"
-                            className=" block px-2 py-2 text-sm no-underline rounded-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
+                            className="block px-2 py-2 text-sm no-underline rounded-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-1"
                           >
@@ -285,7 +285,7 @@ const Header = () => {
                           </Link>
                           <button
                             type="button"
-                            className=" block w-full px-2 py-2 text-left rounded-sm text-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
+                            className="block w-full px-2 py-2 text-sm text-left rounded-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-3"
                             onClick={() => signOut()}
@@ -312,7 +312,7 @@ const Header = () => {
         </div>
         <div>
           {/* <!-- Navbar toggler button --> */}
-          <span className="hidden lg:block xl:block ml-2">
+          <span className="hidden ml-2 lg:block xl:block">
             <ThemeChanger />
           </span>
         </div>
@@ -326,11 +326,14 @@ const Header = () => {
       >
         {/* <!-- Navbar content --> */}
         <div className="p-0">
-          <div className="  flex    py-4 px-2 items-start  gap-10 mt-6">
+          <div className="flex items-start gap-10 px-2 py-4 mt-6 ">
             <ul
               className={`flex flex-col gap-4   dark:text-[#fff] text-gray-900`}
             >
-              <li className="  mt-0 px-3 ">
+              <li
+                className="px-3 mt-0 "
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 <Link
                   className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]"
                   href="/"
@@ -338,7 +341,10 @@ const Header = () => {
                   Home
                 </Link>
               </li>
-              <li className=" mt-0 px-3 ">
+              <li
+                className="px-3 mt-0 "
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 <Link
                   className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
                   href="/use-cases"
@@ -346,7 +352,10 @@ const Header = () => {
                   Use cases
                 </Link>
               </li>
-              <li className=" mt-0 px-3 ">
+              <li
+                className="px-3 mt-0 "
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 <Link
                   className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
                   href="/pricing"
@@ -354,7 +363,10 @@ const Header = () => {
                   Pricing
                 </Link>
               </li>
-              <li className=" mt-0 px-3 ">
+              <li
+                className="px-3 mt-0 "
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 <Link
                   className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
                   href="/contact"
@@ -382,7 +394,7 @@ const Header = () => {
                         {userData.firstName + " " + userData.lastName}
                         <Link
                           href={role === "admin" ? "/admin" : "/dashboard"}
-                          className=" block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
+                          className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-0"
                         >
@@ -390,7 +402,7 @@ const Header = () => {
                         </Link>
                         <button
                           type="button"
-                          className=" block w-full px-4 py-2 text-left text-sm dark:hover:bg-gray-600 hover:bg-blue-100"
+                          className="block w-full px-4 py-2 text-sm text-left dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-3"
                           onClick={() => signOut()}
@@ -411,7 +423,7 @@ const Header = () => {
                           >
                             {userData.firstName + " " + userData.lastName}
                             <svg
-                              className="-mr-1 h-5 w-5 dark:text-gray-100 text-gray-950"
+                              className="w-5 h-5 -mr-1 dark:text-gray-100 text-gray-950"
                               viewBox="0 0 20 20"
                               fill="currentColor"
                               aria-hidden="true"
@@ -426,7 +438,7 @@ const Header = () => {
                         </div>
                         {dropdownOpen && (
                           <div
-                            className="absolute right-0 z-10 mt-0 bg-gray-100  dark:bg-gray-950 w-56 origin-top-right rounded-md  shadow-lg "
+                            className="absolute right-0 z-10 w-56 mt-0 origin-top-right bg-gray-100 rounded-md shadow-lg dark:bg-gray-950 "
                             role="menu"
                             onMouseOver={() => setDropdownOpen(true)}
                             onMouseLeave={() => setDropdownOpen(false)}
@@ -437,7 +449,7 @@ const Header = () => {
                                 href={
                                   role === "admin" ? "/admin" : "/dashboard"
                                 }
-                                className=" block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
+                                className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
                                 role="menuitem"
                                 id="menu-item-0"
                               >
@@ -445,7 +457,7 @@ const Header = () => {
                               </Link>
                               <Link
                                 href="/profile-review"
-                                className=" block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
+                                className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
                                 role="menuitem"
                                 id="menu-item-1"
                               >
@@ -453,7 +465,7 @@ const Header = () => {
                               </Link>
                               <button
                                 type="button"
-                                className=" block w-full px-4 py-2 text-left text-sm dark:text-gray-100 text-gray-950"
+                                className="block w-full px-4 py-2 text-sm text-left dark:text-gray-100 text-gray-950"
                                 role="menuitem"
                                 id="menu-item-3"
                                 onClick={() => signOut()}
@@ -468,7 +480,7 @@ const Header = () => {
 
                     {dropdownOpen && (
                       <div
-                        className="absolute border-2 border-gray-100 dark:border-gray-950 bg-gray-100 text-gray-950  right-0 z-10 mt-0 dark:bg-gray-950 w-56 origin-top-right rounded-md  shadow-lg "
+                        className="absolute right-0 z-10 w-56 mt-0 origin-top-right bg-gray-100 border-2 border-gray-100 rounded-md shadow-lg dark:border-gray-950 text-gray-950 dark:bg-gray-950 "
                         role="menu"
                         onMouseOver={() => setDropdownOpen(true)}
                         onMouseLeave={() => setDropdownOpen(false)}
@@ -477,7 +489,7 @@ const Header = () => {
                           {/* <!-- Active: "bg-gray-100 ", Not Active: "text-gray-700" --> */}
                           <Link
                             href={role === "admin" ? "/admin" : "/dashboard"}
-                            className=" block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
+                            className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-0"
                           >
@@ -485,7 +497,7 @@ const Header = () => {
                           </Link>
                           <Link
                             href="/profile-review"
-                            className=" block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
+                            className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-1"
                           >
@@ -493,7 +505,7 @@ const Header = () => {
                           </Link>
                           <button
                             type="button"
-                            className=" block w-full px-4 py-2 text-left text-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
+                            className="block w-full px-4 py-2 text-sm text-left dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                             role="menuitem"
                             id="menu-item-3"
                             onClick={() => signOut()}
