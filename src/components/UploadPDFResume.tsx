@@ -8,9 +8,12 @@ import Link from "next/link";
 import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
 import FileUploadHandler from "./dashboard/FileUploadHandler";
 import WordFileHandler from "./dashboard/WordFileHandler";
+import { useSelector } from "react-redux";
 
 const UploadPDFResume = () => {
   const router = useRouter();
+  const userData = useSelector((state: any) => state.userData);
+
   // local states
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [file, setFile] = useState<any>(null);
@@ -119,7 +122,7 @@ const UploadPDFResume = () => {
         )
       )}
 
-      {isAuth && (
+      {isAuth && userData.isFetched && (
         <Link
           href="/dashboard"
           className="bg-gradient-to-r  from-purple-700  to-pink-500 text-white px-[2rem] py-[1rem] text-lg font-semibold rounded-xl "
