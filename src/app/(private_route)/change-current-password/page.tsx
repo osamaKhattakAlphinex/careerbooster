@@ -54,7 +54,7 @@ const ChangePasswordPage = () => {
   };
 
   return (
-    <div className="flex flex-row items-center justify-between w-full h-full pb-20">
+    <div className="w-full h-full pb-20 ">
       <form onSubmit={handleSubmit} className="">
         <div className="grid items-center justify-start grid-cols-3 gap-2 space-y-4">
           <label
