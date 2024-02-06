@@ -39,7 +39,7 @@ export default function ContactPage() {
         <PageHeader title="Contact With Us" secondTitle="Contact" />
 
         <section className="">
-          <div className="xs:p-[2rem] border-2 md:p-[4rem] xl:p-[5rem] ">
+          <div className="xs:p-[2rem] md:p-[4rem] xl:p-[5rem] ">
             <ContactForm />
             <br />
             <AddressCard />

@@ -1,7 +1,7 @@
 //v1.1
 "use client";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import "@/app/(private_route)/dashboard.css";
 import { useTourContext } from "@/context/TourContext";
 interface TooltipProps {
@@ -68,6 +68,27 @@ const DashboardBot = () => {
     atsElementRef,
   ];
 
+  const [isOnScreen, setIsOnScreen] = useState(false);
+  const [currentPlayingRef, setCurrentPlayingRef] = useState<any>(null);
+  const observerRef = useRef<any>(null);
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(([entry]) =>
+      setIsOnScreen(entry.isIntersecting)
+    );
+  }, []);
+  useEffect(() => {
+    if (currentPlayingRef !== null) {
+      observerRef.current.observe(currentPlayingRef.current);
+    }
+
+    return () => {
+      observerRef.current.disconnect();
+    };
+  }, [currentPlayingRef]);
+  const useOnScreen = (ref: any) => {
+    setCurrentPlayingRef(ref);
+  };
+
   const removeStyles = () => {
     componentRefs.map((componentRef) => {
       componentRef.current?.classList.remove("un-focused-tool");
@@ -84,19 +105,6 @@ const DashboardBot = () => {
     });
   };
 
-  const concatenateBuffers = (buffers: any) => {
-    const totalLength = buffers.reduce(
-      (acc: any, buffer: any) => acc + buffer.length,
-      0
-    );
-    const concatenated = new Uint8Array(totalLength);
-    let offset = 0;
-    buffers.forEach((buffer: any) => {
-      concatenated.set(buffer, offset);
-      offset += buffer.length;
-    });
-    return concatenated;
-  };
   const fetchAudio = async (audioFileUrl: any, explanationFor: string) => {
     try {
       const response = await fetch(audioFileUrl);
@@ -121,18 +129,31 @@ const DashboardBot = () => {
         if (dashboardRef.current && innerToolsRef.current) {
           dashboardRef.current.classList.add("dashboard-focused");
           innerToolsRef.current.classList.add("add-inner");
+          // console.log(dashboardRef.current.offsetTop);
+          // dashboardRef.current.scrollIntoView({
+          //   behavior: "smooth",
+          // });
+          // console.log(window.screenX, dashboardRef.current.offsetTop);
+          // console.log(dashboardRef.current);
         }
         break;
       case "resume":
         applyStyles();
         if (resumeElementRef.current) {
           resumeElementRef.current.classList.remove("un-focused-tool");
+
+          // resumeElementRef.current.scrollIntoView({
+          //   behavior: "smooth",
+          // });
         }
         break;
       case "cover-letter":
         applyStyles();
         if (coverLetterElementRef.current) {
           coverLetterElementRef.current.classList.remove("un-focused-tool");
+          // coverLetterElementRef.current.scrollIntoView({
+          //   behavior: "smooth",
+          // });
         }
         break;
       case "linkedin":
@@ -160,6 +181,7 @@ const DashboardBot = () => {
         }
         break;
       default:
+        return null;
     }
     const url = URL.createObjectURL(audioBlob);
     return url;
