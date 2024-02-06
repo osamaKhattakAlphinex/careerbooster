@@ -123,9 +123,12 @@ const FeaturesSection = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 md:grid-cols-2 xs:grid-cols-1 mr-6 xs:mr-0">
-          {singleFeatureData.map((item) => {
+          {singleFeatureData.map((item, i) => {
             return (
-              <div className="flex col-span-1 mb-6 px-4 lg:pt-10 md:pt-10 xs:pt-0">
+              <div
+                key={i}
+                className="flex col-span-1 mb-6 px-4 lg:pt-10 md:pt-10 xs:pt-0"
+              >
                 <div className="flex gap-5">
                   <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-lg p-2 border-[1px] dark:bg-[#1E1F27] text-[#0000ff9c] bg-[#E5E3F7] dark:text-[#e6f85e] dark:border-white border-[#c7bef9] dark:border-opacity-10 border-opacity-25">
                     {item.svg}

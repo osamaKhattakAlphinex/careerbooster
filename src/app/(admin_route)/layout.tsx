@@ -2,12 +2,9 @@ import React, { ReactNode } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-import { ThemeProvider } from "next-themes";
 import "@/app/plugins.css";
-import "@/app/style.css";
 import AdminSidebar from "@/components/admin/sidebar/adminSidebar";
-import ThemeToggler from "@/components/Themetoggler";
-import NextThemeProvider from "@/components/data-providers/NextThemeProvider";
+
 interface Props {
   children: ReactNode;
 }

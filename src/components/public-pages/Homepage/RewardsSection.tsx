@@ -115,8 +115,8 @@ const RewardsSection = () => {
                     <span className="xs:text-base md:text-[18px]">
                       Speed and Efficiency: Unlike GPT and other tools that
                       often require manual input for each section, our system
-                      delivers results with a single click. It's faster and more
-                      efficient, saving you valuable time.
+                      delivers results with a single click. It{"'"}s faster and
+                      more efficient, saving you valuable time.
                     </span>
                   </div>
                 </div>
