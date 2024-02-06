@@ -54,85 +54,77 @@ const ChangePasswordPage = () => {
   };
 
   return (
-    <>
-      <main className="flex-grow-1 pb-20  lg:ml-[234px] ">
-        <section className="py-15 pt-lg-30">
-          <div className="container">
-            <div className="row justify-center">
-              <div className="col-lg-8 col-xl-6">
-                <form onSubmit={handleSubmit}>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="password"
-                      className="dark:text-gray-100 text-gray-950 pb-3"
-                    >
-                      Current Password
-                    </label>
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      value={currentPassword}
-                      onChange={(event) => {
-                        setCurrentPassword(event.target.value);
-                      }}
-                      className="dark:bg-gray-100 bg-gray-950 form-control"
-                      required
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="password"
-                      className="dark:text-gray-100 text-gray-950 pb-3"
-                    >
-                      New Password
-                    </label>
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      value={password}
-                      onChange={(event) => setPassword(event.target.value)}
-                      className="dark:bg-gray-100 bg-gray-950 form-control"
-                      required
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="confirmPassword"
-                      className="dark:text-gray-100 text-gray-950 pb-3"
-                    >
-                      Confirm Password
-                    </label>
-                    <input
-                      type="password"
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      value={confirmPassword}
-                      onChange={(event) =>
-                        setConfirmPassword(event.target.value)
-                      }
-                      className="dark:bg-gray-100 bg-gray-950 form-control"
-                      required
-                    />
-                  </div>
-                  {error && <p className="text-danger">{error}</p>}
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={
-                      password !== confirmPassword || !password || loading
-                    }
-                  >
-                    Change Password
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </>
+    <div className="flex flex-row items-center justify-between w-full h-full pb-20">
+      <form onSubmit={handleSubmit} className="">
+        <div className="grid items-center justify-start grid-cols-3 gap-2 space-y-4">
+          <label
+            htmlFor="password"
+            className="col-span-1 text-sm dark:text-gray-100 text-gray-950"
+          >
+            Current Password
+            <sup>*</sup>
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={currentPassword}
+            onChange={(event) => {
+              setCurrentPassword(event.target.value);
+            }}
+            className="col-span-2 text-gray-900 rounded-sm outline-none xs:text-sm md:text-lg dark:text-gray-100"
+            required
+          />
+        </div>
+        <div className="grid items-center justify-start grid-cols-3 gap-3 space-y-4">
+          <label
+            htmlFor="password"
+            className="col-span-1 text-sm dark:text-gray-100 text-gray-950 "
+          >
+            New Password
+            <sup>*</sup>
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            className="col-span-2 text-gray-900 rounded-sm outline-none xs:text-sm md:text-lg dark:text-gray-100"
+            required
+          />
+        </div>
+        <div className="grid items-center justify-start grid-cols-3 gap-3 space-y-4">
+          <label
+            htmlFor="confirmPassword"
+            className="col-span-1 text-sm dark:text-gray-100 text-gray-950"
+          >
+            Confirm Password
+            <sup>*</sup>
+          </label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            value={confirmPassword}
+            onChange={(event) => setConfirmPassword(event.target.value)}
+            className="col-span-2 text-gray-900 rounded-sm outline-none xs:text-sm md:text-lg dark:text-gray-100"
+            required
+          />
+        </div>
+        {error && <p className="text-danger">{error}</p>}
+        <div className="grid grid-cols-2">
+          <div className="col-span-1" />
+          <button
+            type="submit"
+            className="`w-full   py-1 px-6 rounded-sm !bg-[#6a4dff]  dark:!bg-[#e6f85e] text-gray-100 dark:text-gray-950 disabled:opacity-[.65]"
+            disabled={password !== confirmPassword || !password || loading}
+          >
+            Change Password
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
