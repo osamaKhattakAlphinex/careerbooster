@@ -17,8 +17,6 @@ import { verifyInvisibleCaptcha } from "@/ServerActions";
 import WordFileHandler from "@/components/dashboard/WordFileHandler";
 
 const saveToLocalStorage = (text: any, fileName: any) => {
-  console.log("first");
-
   localStorage.setItem("linkedin-content", text);
   localStorage.setItem("linkedin-fileName", fileName);
 };
