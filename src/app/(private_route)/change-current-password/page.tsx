@@ -54,85 +54,88 @@ const ChangePasswordPage = () => {
   };
 
   return (
-    <>
-      <main className="flex-grow-1 pb-20  lg:ml-[234px] ">
-        <section className="py-15 pt-lg-30">
-          <div className="container">
-            <div className="row justify-center">
-              <div className="col-lg-8 col-xl-6">
-                <form onSubmit={handleSubmit}>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="password"
-                      className="dark:text-gray-100 text-gray-950 pb-3"
-                    >
-                      Current Password
-                    </label>
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      value={currentPassword}
-                      onChange={(event) => {
-                        setCurrentPassword(event.target.value);
-                      }}
-                      className="dark:bg-gray-100 bg-gray-950 form-control"
-                      required
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="password"
-                      className="dark:text-gray-100 text-gray-950 pb-3"
-                    >
-                      New Password
-                    </label>
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      value={password}
-                      onChange={(event) => setPassword(event.target.value)}
-                      className="dark:bg-gray-100 bg-gray-950 form-control"
-                      required
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="confirmPassword"
-                      className="dark:text-gray-100 text-gray-950 pb-3"
-                    >
-                      Confirm Password
-                    </label>
-                    <input
-                      type="password"
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      value={confirmPassword}
-                      onChange={(event) =>
-                        setConfirmPassword(event.target.value)
-                      }
-                      className="dark:bg-gray-100 bg-gray-950 form-control"
-                      required
-                    />
-                  </div>
-                  {error && <p className="text-danger">{error}</p>}
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={
-                      password !== confirmPassword || !password || loading
-                    }
-                  >
-                    Change Password
-                  </button>
-                </form>
-              </div>
-            </div>
+    <div className="h-full pb-20 ml-0 lg:ml-[234px]  flex my-4 justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col w-5/12 gap-4 justify-center"
+      >
+        <div className="">
+          <label
+            htmlFor="name"
+            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
+          >
+            {" "}
+            Current Password *{" "}
+          </label>
+          <div className="flex group dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] px-4 gap-3 mt-4 bg-white border dark:bg-[#11121c] border-[#2e2f45] rounded-lg items-center py-3">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={currentPassword}
+              onChange={(event) => {
+                setCurrentPassword(event.target.value);
+              }}
+              className="rounded-md md:text-lg xs:text-sm text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              placeholder=""
+              required
+            />
           </div>
-        </section>
-      </main>
-    </>
+        </div>
+        <div className="">
+          <label
+            htmlFor="name"
+            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
+          >
+            {" "}
+            New Password *{" "}
+          </label>
+          <div className="flex group dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] px-4 gap-3 mt-4 bg-white border dark:bg-[#11121c] border-[#2e2f45] rounded-lg items-center py-3">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              className="rounded-md md:text-lg xs:text-sm text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              placeholder=""
+              required
+            />
+          </div>
+        </div>
+        <div className="">
+          <label
+            htmlFor="name"
+            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
+          >
+            {" "}
+            Confirm Password *{" "}
+          </label>
+          <div className="flex group dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] px-4 gap-3 mt-4 bg-white border dark:bg-[#11121c] border-[#2e2f45] rounded-lg items-center py-3">
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
+              className="rounded-md md:text-lg xs:text-sm text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              placeholder=""
+              required
+            />
+          </div>
+        </div>
+        {error && <p className="text-danger">{error}</p>}
+        <div className="flex ">
+          <button
+            type="submit"
+            className="py-3 md:mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
+            disabled={password !== confirmPassword || !password || loading}
+          >
+            Change Password
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

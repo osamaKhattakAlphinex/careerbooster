@@ -12,7 +12,7 @@ const HeroArea = () => {
           <div className="flex flex-col w-9/12">
             <div className="text-center">
               <div className="relative z-1 animate-in slide-in duration-300">
-                <p className=" text-[#0000ff9c] dark:text-[#e6f85e] text-4 ">
+                <p className=" text-[#0000ff9c] dark:text-[#e6f85e] text-xl ">
                   Unlock Your Career Potential
                 </p>
                 <h1 className="text-gray-950 dark:text-gray-100 mb-8 md:text-[40px] text-[24px] font-semibold">

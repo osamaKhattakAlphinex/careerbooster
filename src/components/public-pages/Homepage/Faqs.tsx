@@ -72,7 +72,7 @@ function FAQItem(props: any) {
         <div className=" lg:mb-[48px] mb-[24px]">
           <h2 className=" ">
             <button
-              className="dark:text-gray-100 text-gray-950 hover:text-[#6a4dff] dark:hover:text-[#e6f85e] flex flex-row text-left justify-start  items-start lg:text-[30px] text-[18px] focus:text-[#6a4dff] dark:focus:text-[#e6f85e] font-semibold"
+              className="dark:text-gray-100 text-gray-950 hover:text-[#6a4dff] dark:hover:text-[#e6f85e] flex flex-row text-left justify-start  items-start lg:text-[25px] text-[18px] focus:text-[#6a4dff] dark:focus:text-[#e6f85e] font-semibold"
               onClick={toggleFAQ}
               type="button"
               //   data-bs-toggle="collapse"
@@ -142,7 +142,7 @@ function FAQList() {
         <div className="flex justify-center mb-18">
           <div className="flex flex-col md:w-10/12 xs:w-full">
             <div className="text-center">
-              <h1 className=" dark:text-gray-100 text-gray-950 md:text-[48px] xs:text-[30px] font-semibold md:mb-14 xs:mb-8">
+              <h1 className=" dark:text-gray-100 text-gray-950 md:text-[35px] xs:text-[24px] font-semibold md:mb-14 xs:mb-8">
                 Questions About CareerBooster.AI?
                 <br className="d-none d-md-block" />
                 We have Answers!

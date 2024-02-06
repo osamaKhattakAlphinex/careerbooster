@@ -10,7 +10,7 @@ const Reviews = () => {
         <div className="flex justify-center mb-18">
           <div className="flex flex-col lg:w-9/12 md:w-9/12 xs:w-full">
             <div className="text-center">
-              <h1 className="dark:text-gray-100 text-gray-950 md:text-[40px] text-[24px] font-semibold lg:mb-20 md:mb-20 xs:mb-10">
+              <h1 className="dark:text-gray-100 text-gray-950 md:text-[35px] text-[24px] font-semibold lg:mb-20 md:mb-20 xs:mb-10">
                 <span className="text-[#6a4dff] dark:text-[#e6f85e]">
                   CareerBooster.AI{" "}
                 </span>

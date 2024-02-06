@@ -168,7 +168,7 @@ export const refreshIconRotating = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-5 h-5 animate-spin"
+    className="w-7 h-7 animate-spin"
   >
     <path
       strokeLinecap="round"
