@@ -315,9 +315,11 @@ const LinkedInUploadPDFResume = () => {
   return (
     <>
       {!aboutComplete || aboutMsgLoading ? (
-        refreshIconRotating
+        <div className="flex gap-2 text-[#33FF00] font-extrabold text-5xl lg:pt-[60px] my-[10px]">
+          {refreshIconRotating}
+        </div>
       ) : (
-        <div className="flex gap-2 text-[#33FF00] font-extrabold text-5xl lg:my-[40px] my-[10px]">
+        <div className="flex gap-2 text-[#79ff57] font-extrabold xs:text-2xl md:text-4xl lg:mt-[60px] my-[10px]">
           Success!
         </div>
       )}
@@ -331,13 +333,13 @@ const LinkedInUploadPDFResume = () => {
       )}
 
       {streamedHeadlineData || streamedAboutData ? (
-        <div className=" my-3 w-full flex flex-col items-center lg:px-[100px] px-[10px]">
-          <div className="padding-t sm:p-2 md:p-4 lg:p-6 border-2 border-purple-600 rounded-2xl w-11/12 ">
+        <div className=" my-3 w-full flex flex-col items-center lg:px-[100px] px-[1px]">
+          <div className="padding-t xs:p-2 md:p-4  border-2  border-purple-600 rounded-2xl w-11/12 ">
             <div className=" flex flex-col  md:py-4  gap-4 bg-black div-m lg:p-12 rounded-2xl">
               {/* Headline */}
               <h1 className="  flex items-center font-normal mb-4 text-white">
                 {/* <span className="text-yellow-400">{starIcon}</span> */}
-                <span className="text-center lg:text-[36px] text-[20px] sm:ml-4 md:ml-4 lg:text-left  uppercase font-bold">
+                <span className="text-center lg:text-xl text-lg sm:ml-4 md:ml-4 lg:text-left  uppercase font-bold">
                   Your New LinkedIn Headline
                 </span>
               </h1>
@@ -370,7 +372,7 @@ const LinkedInUploadPDFResume = () => {
                   )}
 
                   {streamedHeadlineData && (
-                    <div className="flex flex-col md:flex-row md:mx-2 div-1 lg:flex-row  gap-4 lg:text-left text-center">
+                    <div className="flex xs:flex-col md:flex-row md:mx-2 div-1 lg:flex-row  gap-4 lg:text-left text-center">
                       <Button
                         type="button"
                         className="border-2 border-purple-600 rounded-full headline-btn  hover:bg-purple-600 hover:text-white"
@@ -422,7 +424,7 @@ const LinkedInUploadPDFResume = () => {
               {/* Summary */}
               <h1 className=" flex items-center font-normal mb-4 mt-8 text-white">
                 {/* <span className="text-yellow-400">{starIcon}</span> */}
-                <span className="lg:text-[36px] text-[20px] text-center sm:ml-4 md:ml-4 lg:text-left  uppercase font-bold">
+                <span className="lg:text-xl text-lg text-center sm:ml-4 md:ml-4 lg:text-left  uppercase font-bold">
                   Your Keyword Optimized LinkedIn Summary
                 </span>
               </h1>
@@ -490,7 +492,7 @@ const LinkedInUploadPDFResume = () => {
       )}
       {streamedAboutData && (
         <div className="lg:content-1 lg:mt-[36px] mt-[20px] flex flex-col justify-center items-center gap-2 ">
-          <h2 className="text-center lg:text-left text-red-600 lg:text-[46px] tex-[28px] lg:px-0 px-[15px]">
+          <h2 className="text-center lg:text-left text-red-600 lg:text-2xl tex-lg lg:px-0 px-[15px]">
             Don{"'"}t Like the results?
           </h2>
           <p className="text-[16px]  lg:text-[24px] lg:text-left text-center">
@@ -499,7 +501,7 @@ const LinkedInUploadPDFResume = () => {
           <div className="flex flex-col gap-4 lg:px-0 px-8">
             <label
               htmlFor="default-radio-1"
-              className="flex gap-3 redio-btn items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 py-3 cursor-pointer lg:text-[16px] text-[11px]"
+              className="flex gap-3 redio-btn items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 !py-4 cursor-pointer lg:text-[16px] text-[11px]"
             >
               <input
                 id="default-radio-1"
@@ -513,7 +515,7 @@ const LinkedInUploadPDFResume = () => {
             </label>
             <label
               htmlFor="default-radio-2"
-              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 py-3 cursor-pointer lg:text-[16px] text-[11px]"
+              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 !py-4 cursor-pointer lg:text-[16px] text-[11px]"
             >
               <input
                 id="default-radio-2"
@@ -527,7 +529,7 @@ const LinkedInUploadPDFResume = () => {
             </label>
             <label
               htmlFor="default-radio-3"
-              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 py-3 cursor-pointer lg:text-[16px] text-[11px]"
+              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 !py-4 cursor-pointer lg:text-[16px] text-[11px]"
             >
               <input
                 id="default-radio-3"
@@ -537,11 +539,11 @@ const LinkedInUploadPDFResume = () => {
                 onChange={(e) => setAboutData(e.target.value)}
                 className="lg:w-5 lg:h-5 w-3 h-3 "
               />
-              Add a captivating story to hook the visitiors
+              Add a captivating story to hook the visitors
             </label>
             <label
               htmlFor="default-radio-4"
-              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 py-3 cursor-pointer lg:text-[16px] text-[11px]"
+              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 lg:py-4 !py-4 cursor-pointer lg:text-[16px] text-[11px]"
             >
               <input
                 id="default-radio-4"
@@ -600,7 +602,7 @@ const LinkedInUploadPDFResume = () => {
         </div>
       )}
       {aboutComplete && (
-        <div className="w-11/12 h-80 flex flex-col justify-center lg:items-center rounded-2xl mt-14 bg-gradient-to-r to-fuchsia-600 from-indigo-600  border-gray-800">
+        <div className="w-11/12 h-80 mb-6 flex flex-col justify-center lg:items-center rounded-2xl mt-14 bg-gradient-to-r to-fuchsia-600 from-indigo-600  border-gray-800">
           <div className=" lg:w-6/12  flex items-center flex-col">
             <h3 className="lg:text-[36px] text-[20] text-normal  lg:leading-normal text-white text-center lg:font-bold ">
               Yes, I Want to Explore More Career Boosting Tools!

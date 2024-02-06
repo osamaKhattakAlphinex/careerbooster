@@ -29,9 +29,9 @@ export const metadata: Metadata = {
 //leinked in result page
 export default function LinkedInPage() {
   return (
-    <main className="flex-grow-1 mt-24 mb-20 bg-gradient-to-r from-gray-950 via-blue-950 to-purple-900">
+    <main className="flex-grow-1 bg-gradient-to-r from-gray-950 via-blue-950 to-purple-900">
       {/* LinkedIn Tool Card */}
-      <section className="py-15">
+      <section className="pt-24">
         <div className=" flex flex-col items-center">
           <LinkedInUploadPDFResume />
         </div>

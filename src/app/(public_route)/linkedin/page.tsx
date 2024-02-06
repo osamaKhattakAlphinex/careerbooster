@@ -32,9 +32,9 @@ export const metadata: Metadata = {
 
 export default function LinkedInNewPage() {
   return (
-    <div className="flex-grow-1 pb-20 w-full">
+    <div className="flex-grow-1  w-full">
       {/* LinkedIn Tool Card */}
-      <section className="mt-24 lg:mt-[110px]">
+      <section className="">
         <div className="flex flex-col text-white">
           <LinkedInToolMain />
         </div>

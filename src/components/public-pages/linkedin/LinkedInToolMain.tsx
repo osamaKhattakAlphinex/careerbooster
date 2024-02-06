@@ -98,12 +98,12 @@ const LinkedInToolMain = () => {
   return (
     <div className="w-full ">
       {/* Hero Section */}
-      <section className="hero bg-gradient-to-r from-[#01010D80] via-[#000A6380] to-purple-900 overflow-x-hidden lg:px-0	px-5 lg:npt-10">
+      <section className="hero bg-gradient-to-r from-[#01010D80] via-[#000A6380] to-purple-900 overflow-x-hidden lg:px-0 pt-24  lg:pt-[110px]	px-5 lg:npt-10">
         <div className="lg:px-[120px] text-center lg:pt-12 lg:pb-8 pt-15 ">
-          <p className="lg:text-[24px] text-[16px] lg:px-0 	">
+          <p className="lg:text-[20px] text-base lg:px-0 	">
             Keyword-Optimized, Captivating & Under 30 Seconds!
           </p>
-          <h3 className="py-2 lg:text-[50px] text-[32px] text-center font-semibold mt-3 lg:leading-[66px]  lg:mx-17">
+          <h3 className="py-2 lg:text-[40px] text-[27px] text-center font-semibold mt-3 lg:leading-[66px]  lg:mx-17">
             Free{" "}
             <span className="py-2  font-semibold bg-clip-text text-transparent bg-gradient-to-r to-violet-500 from-fuchsia-500">
               AI LinkedIn
@@ -111,14 +111,14 @@ const LinkedInToolMain = () => {
             Summary Generator To Achieve Top Rankings In Recruiter Searches And
             Secure More Interviews!
           </h3>
-          <h5 className="mt-2  padding-m lg:text-[24px] text-lg text-center lg:mt-3 lg:leading-10 leading-7 font-normal">
+          <h5 className="mt-2  padding-m xs:px-2 md:px-0 lg:text-[20px] text-sm text-center lg:mt-3 lg:leading-10 leading-7 font-normal">
             Simply Upload your Resume or LinkedIn Profile in PDF. Receive
             results perfectly tailored for you — or we{"'"}ll compensate you
             $1000 if we waste your time with irrelevant outcomes.
           </h5>
 
           <div className="mt-11 flex justify-center md:mt-11">
-            <label className=" pt-[12px] lg:pt-[20px]  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
+            <label className=" py-[12px] lg:py-[20px]  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
               <input
                 type="file"
                 className="hidden "
@@ -185,12 +185,12 @@ const LinkedInToolMain = () => {
         </div>
       </section>
       {/* Why Ulpoad Resume */}
-      <section className="bg-gradient-to-r from-[#01010D80] via-[#000A6380] to-[#4C019180]  py-15 px-5 overflow-x-hidden">
+      <section className="bg-gradient-to-r xs:px-4 m:px-0 from-[#01010D80] via-[#000A6380] to-[#4C019180]  py-15 md:px-10 overflow-x-hidden">
         <div className="flex flex-col justify-center">
-          <h3 className="text-center lg:px-10 lg:text-[44px] text-[24px] font-semibold leading-normal lg:mt-3">
+          <h3 className="text-center lg:px-10 lg:text-[35px] text-[25px] font-semibold leading-normal lg:mt-3">
             Why Upload a Resume or LinkedIn Profile?
           </h3>
-          <h5 className="text-center lg:leading-[38px] font-normal lg:text-[24px] text-[18px] leading-[32px]">
+          <h5 className="text-center lg:leading-[38px] font-normal lg:text-[20px] text-[18px] leading-[32px]">
             Our AI scans your existing resume or LinkedIn profile to comprehend
             your career journey, previous work experiences, background, and
             targeted job position. This allows it to craft a tailormade,
@@ -201,24 +201,25 @@ const LinkedInToolMain = () => {
         {/*Vide  Card */}
         <div className="md:flex lg:mt-20 mt-10">
           <div className="md:my-2 lg:m-0 md:w-6/12 lg:w-6/12">
-            <h3 className="lg:text-[32px] text-[22px] lg:leading-[48px]  leading-[32px] font-semibold lg:pr-[10px] lg:text-left ">
+            <h3 className="lg:text-[27px] text-[20px] lg:leading-[48px]  leading-[32px] font-semibold lg:pr-[10px] lg:text-left ">
               I don{"'"}t have a resume. How can I upload my LinkedIn profile in
               PDF format?
             </h3>
-            <div className="flex">
-              <div className="w-[10%] -mx-1 lg:-mx-5 pt-5 h-full flex flex-col items-center  gap-1">
+            <div className="flex ">
+              <div className="w-[10%] mx-1 lg:-mx-5 pt-5 h-full flex flex-col items-center  gap-1">
                 {/* dot */}
                 <div className="w-6 h-6 rounded-full bg-gradient-to-t to-fuchsia-500 from-violet-500 border-4 border-gray-800"></div>
                 {/* line */}
-                <div className="h-11 md:h-3 w-[2px] bg-fuchsia-500"></div>
+                <div className="h-19 md:h-12 w-[2px] bg-fuchsia-500"></div>
                 {/* dot */}
                 <div className="w-6 h-6 rounded-full bg-gradient-to-t to-fuchsia-500 from-violet-500 border-4 border-gray-800"></div>
                 {/* line */}
-                <div className="h-19 lg:h-10 w-[2px] bg-fuchsia-500"></div>
+                <div className="h-19 lg:h-[70px] w-[2px] bg-fuchsia-500"></div>
                 {/* dot */}
                 <div className="w-6 h-6 rounded-full bg-gradient-to-t to-fuchsia-500 from-violet-500 border-4 border-gray-800"></div>
               </div>
-              <div className="w-[90%]  h-full pt-4">
+
+              <div className="w-[90%]  h-full mr-2 pt-4">
                 <ul className="text-lg text-gray-200 flex flex-col gap-0 ">
                   <li className="lg:text-[22px] text-[16px] ">
                     Click here to navigate to your LinkedIn profile.
@@ -244,10 +245,10 @@ const LinkedInToolMain = () => {
         {/* Card */}
         <div className="w-full md:8/12 lg:flex rounded-2xl mt-14 bg-gradient-to-r from-[#B324D7] to-[#615DFF]">
           <div className="text lg:w-6/12 lg:mt-8 lg:mb-12 lg:mx-[56px] mx-[12px]  md:text-left">
-            <h3 className="pt-6 pb-3 lg:text-[48px] text-[24px] text-normal font-semibold  lg:mr-4 lg:mt-5">
+            <h3 className="pt-6 pb-3 lg:text-[35px] text-[24px] text-normal font-semibold  lg:mr-4 lg:mt-5">
               Challenge us, prove us wrong, and earn a $1000 reward!
             </h3>
-            <p className="px-2 lg:text-[22px] text-[16px] font-normal lg:leading-[38px]  tracking-normal ">
+            <p className="px-2 lg:text-[20px] text-[16px] font-normal lg:leading-[38px]  tracking-normal ">
               We take immense pride in the accuracy and relevance of our AI
               tool, which consistently delivers results that our users adore.
               Yet, if you pinpoint a discrepancy and show that our tool produced
@@ -262,24 +263,24 @@ const LinkedInToolMain = () => {
           </div>
         </div>
         <div className="lg:mt-20 mt-15 lg:px-[46px]">
-          <h3 className="text-center lg:text-[44px] text-[24px] lg:px-10 pb-1 text-gray-100 font-semibold leading-normal mt-3">
+          <h3 className="text-center lg:text-[35px] text-[24px] lg:px-10 pb-1 text-gray-100 font-semibold leading-normal mt-3">
             Game-Changer for LinkedIn Job Seekers!{" "}
           </h3>
-          <p className="lg:text-[22px] text-[16px] lg:leading-[40px] leading-[30px] lg:px-12  font-normal text-center text-gray-300 mb-5 ">
+          <p className="lg:text-[20px] text-[16px] lg:leading-[40px] leading-[30px] lg:px-12  font-normal text-center text-gray-300 mb-5 ">
             Most professionals miss out on valuable opportunities due to
             non-optimized profiles, lacking the vital keywords and engaging
             content that recruiters actively seek.
           </p>
-          <h3 className="text-center pt-1 lg:px-10 lg:text-[37px] text-[20px] text-gray-100 font-semibold leading-normal mt-10 bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-fuchsia-500">
+          <h3 className="text-center pt-1 lg:px-10 lg:text-[35px] text-[24px] text-gray-100 font-semibold leading-normal mt-10 bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-fuchsia-500">
             Why is keyword optimization crucial?{" "}
           </h3>
-          <p className="lg:text-[22px] text-[16px] lg:leading-[40px] leading-[30px] lg:px-12  font-normal text-center text-gray-300 mb-5 ">
+          <p className="lg:text-[20px] text-[16px] lg:leading-[40px] leading-[30px] lg:px-12  font-normal text-center text-gray-300 mb-5 ">
             Recruiters often use LinkedIn{"'"}s search engine to find potential
             candidates. If your profile isn{"'"}t optimized with relevant
             keywords for your industry and role, you{"'"}re likely to be left
             out of these searches, no matter how qualified you might be.
           </p>
-          <h3 className="text-center pt-1 lg:px-10  lg:text-[37px] text-[20px] text-gray-100 font-semibold leading-normal mt-10 bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-fuchsia-500">
+          <h3 className="text-center pt-1 lg:px-10  lg:text-[35px] text-[24px] text-gray-100 font-semibold leading-normal mt-10 bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-fuchsia-500">
             Personalized to Perfection{" "}
           </h3>
           <p className="lg:text-[22px] text-[16px] lg:leading-[40px] leading-[30px] lg:px-12  font-normal text-center text-gray-300 mb-5 ">
@@ -293,14 +294,14 @@ const LinkedInToolMain = () => {
           <h3 className="text-center pt-1 lg:px-10  lg:text-[37px] text-[20px] text-gray-100 font-semibold leading-normal mt-10 bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-fuchsia-500">
             Speedy and Effortless Transformation{" "}
           </h3>
-          <p className="lg:text-[22px] text-[16px] lg:leading-[40px] leading-[30px] lg:px-12  font-normal text-center text-gray-300 mb-5 ">
+          <p className="lg:text-[20px] text-[16px] lg:leading-[40px] leading-[30px] lg:px-12  font-normal text-center text-gray-300 mb-5 ">
             We understand the value of time. Hence, our tool is designed to
             overhaul your LinkedIn summary and headline in under 30 seconds,
             offering you an instantaneous upgrade.
           </p>
         </div>
         <div className="lg:my-[30px] ">
-          <h3 className="text-center lg:px-16 lg:leading-[60px] lg:text-[44px] text-[24px] leading-[36px] font-semibold  lg:mt-10 px-[10px]">
+          <h3 className="text-center lg:px-16 lg:leading-[60px] lg:text-[35px] text-[24px] leading-[36px] font-semibold  lg:mt-10 px-[10px]">
             Don{"'"}t let your LinkedIn profile be just another face in the
             crowd. Use{" "}
             <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r to-violet-500 from-fuchsia-500">
@@ -314,22 +315,24 @@ const LinkedInToolMain = () => {
       <div className="lg-mt-10">
         <FAQList />
       </div>
-      <section className="px-8 bg-gradient-to-r from-[#01010D80] via-[#000A6380] to-[#4C019180] py-20">
+      <section className=" bg-gradient-to-r from-[#01010D80] via-[#000A6380] to-[#4C019180] py-20">
         <Reviews />
-        <div className="w-full mb-3 lg:h-80 flex flex-col justify-center items-center rounded-2xl mt-14 bg-gradient-to-r to-fuchsia-600 from-indigo-500  border-gray-800 lg:px-10">
-          <div className="lg:w-10/12 flex justify-center items-center flex-col lg:my-4 my-[28px] lg:mx-0 mx-5 ">
-            <h3 className="lg:text-[44px] text-[24px] text-normal text-center font-bold mt-3">
-              Free AI LinkedIn Summary Generator
-            </h3>
-            <p className="text-xl text-normal text-center mt-4">
-              Simply Upload your Resume or LinkedIn Profile in PDF
-            </p>
-            <button
-              className="bg-yellow-400 mt-4 h-14 w-56 text-center rounded-full font-bold text-xl text-black py-3 px-9"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
-              Get Started
-            </button>
+        <div className="md:px-10  xs:px-4 ">
+          <div className="w-full mb-3 lg:h-80 flex flex-col justify-center items-center rounded-2xl mt-14 bg-gradient-to-r to-fuchsia-600 from-indigo-500  border-gray-800 lg:px-10">
+            <div className="lg:w-10/12 flex justify-center items-center flex-col lg:my-4 my-[28px] lg:mx-0 mx-5 ">
+              <h3 className="lg:text-[35px] text-[24px] text-normal text-center font-bold mt-3">
+                Free AI LinkedIn Summary Generator
+              </h3>
+              <p className="text-xl text-normal text-center mt-4">
+                Simply Upload your Resume or LinkedIn Profile in PDF
+              </p>
+              <button
+                className="bg-yellow-400 mt-4 h-14 w-56 text-center rounded-full font-bold text-xl text-black py-3 px-9"
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              >
+                Get Started
+              </button>
+            </div>
           </div>
         </div>
       </section>

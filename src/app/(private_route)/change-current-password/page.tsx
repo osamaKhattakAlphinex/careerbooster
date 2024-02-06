@@ -54,70 +54,81 @@ const ChangePasswordPage = () => {
   };
 
   return (
-    <div className="w-full h-full pb-20 ">
-      <form onSubmit={handleSubmit} className="">
-        <div className="grid items-center justify-start grid-cols-3 gap-2 space-y-4">
+    <div className="h-full pb-20 ml-0 lg:ml-[234px]  flex my-4 justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col w-5/12 gap-4 justify-center"
+      >
+        <div className="">
           <label
-            htmlFor="password"
-            className="col-span-1 text-sm dark:text-gray-100 text-gray-950"
+            htmlFor="name"
+            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
           >
-            Current Password
-            <sup>*</sup>
+            {" "}
+            Current Password *{" "}
           </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={currentPassword}
-            onChange={(event) => {
-              setCurrentPassword(event.target.value);
-            }}
-            className="col-span-2 text-gray-900 rounded-sm outline-none xs:text-sm md:text-lg dark:text-gray-100"
-            required
-          />
+          <div className="flex group dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] px-4 gap-3 mt-4 bg-white border dark:bg-[#11121c] border-[#2e2f45] rounded-lg items-center py-3">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={currentPassword}
+              onChange={(event) => {
+                setCurrentPassword(event.target.value);
+              }}
+              className="rounded-md md:text-lg xs:text-sm text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              placeholder=""
+              required
+            />
+          </div>
         </div>
-        <div className="grid items-center justify-start grid-cols-3 gap-3 space-y-4">
+        <div className="">
           <label
-            htmlFor="password"
-            className="col-span-1 text-sm dark:text-gray-100 text-gray-950 "
+            htmlFor="name"
+            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
           >
-            New Password
-            <sup>*</sup>
+            {" "}
+            New Password *{" "}
           </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            className="col-span-2 text-gray-900 rounded-sm outline-none xs:text-sm md:text-lg dark:text-gray-100"
-            required
-          />
+          <div className="flex group dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] px-4 gap-3 mt-4 bg-white border dark:bg-[#11121c] border-[#2e2f45] rounded-lg items-center py-3">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              className="rounded-md md:text-lg xs:text-sm text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              placeholder=""
+              required
+            />
+          </div>
         </div>
-        <div className="grid items-center justify-start grid-cols-3 gap-3 space-y-4">
+        <div className="">
           <label
-            htmlFor="confirmPassword"
-            className="col-span-1 text-sm dark:text-gray-100 text-gray-950"
+            htmlFor="name"
+            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
           >
-            Confirm Password
-            <sup>*</sup>
+            {" "}
+            Confirm Password *{" "}
           </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={confirmPassword}
-            onChange={(event) => setConfirmPassword(event.target.value)}
-            className="col-span-2 text-gray-900 rounded-sm outline-none xs:text-sm md:text-lg dark:text-gray-100"
-            required
-          />
+          <div className="flex group dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] px-4 gap-3 mt-4 bg-white border dark:bg-[#11121c] border-[#2e2f45] rounded-lg items-center py-3">
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
+              className="rounded-md md:text-lg xs:text-sm text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              placeholder=""
+              required
+            />
+          </div>
         </div>
         {error && <p className="text-danger">{error}</p>}
-        <div className="grid grid-cols-2">
-          <div className="col-span-1" />
+        <div className="flex ">
           <button
             type="submit"
-            className="`w-full   py-1 px-6 rounded-sm !bg-[#6a4dff]  dark:!bg-[#e6f85e] text-gray-100 dark:text-gray-950 disabled:opacity-[.65]"
+            className="py-3 md:mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
             disabled={password !== confirmPassword || !password || loading}
           >
             Change Password

@@ -9,7 +9,7 @@ const LinkedInSummary = ({
     <div className="lg:mt-[40px] mt-[20px]">
       <div className="w-full lg:content-2 bg-black lg:pt-20 flex flex-col  pt-[40px] justify-center items-center font-sans px-10">
         <div className=" lg:w-5/6 text-center flex flex-col gap-2 pb-16">
-          <h2 className=" text-white font-semibold lg:text-[46px] text-[28px]">
+          <h2 className=" text-white font-semibold lg:text-[35px] text-[24px]">
             How does the new summary make me a <br /> preferred candidate on
             LinkedIn?
           </h2>
@@ -18,10 +18,10 @@ const LinkedInSummary = ({
             non-optimized profiles, lacking the vital keywords and engaging
             content that recruiters actively seek.
           </p>
-          <h4 className="lg:text-[38px] text-[24px] font-bold mt-5 text-gray-200  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
+          <h4 className="lg:text-[35px] text-[24px] font-bold  text-gray-200  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
             Understanding Your New LinkedIn Summary:
           </h4>
-          <p className="lg:text-[22px] text-[18px] font-thin   text-gray-200 ">
+          <p className="lg:text-[20px] text-[18px] font-thin   text-gray-200 ">
             You might find the new summary extensive and consider opting for a
             shorter version. While you can click the button above for a more
             concise summary, we recommend the lengthier version for specific
@@ -31,57 +31,57 @@ const LinkedInSummary = ({
             discoverability and reach on the platform.
           </p>
 
-          <h4 className="lg:text-[38px] text-[24px] font-bold mt-5 text-gray-200  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
+          <h4 className="lg:text-[35px] text-[24px] font-bold mt-5 text-gray-200  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
             Boosted Recommendations:
           </h4>
-          <p className="lg:text-[22px] text-[18px] font-thin  text-gray-200 ">
+          <p className="lg:text-[20px] text-[18px] font-thin  text-gray-200 ">
             When you apply for jobs on LinkedIn, the platform your profile
             content in relation to the job{"'"}s requirements. A
             keyword-optimized summary increases the chances of LinkedIn
             recommending you as a top candidate to potential employers.
           </p>
-          <h4 className="lg:text-[38px] text-[24px] font-bold mt-5 text-gray-200  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
+          <h4 className="lg:text-[35px] text-[24px] font-bold mt-5 text-gray-200  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
             Enhanced Engagement
           </h4>
-          <p className="lg:text-[22px] text-[18px] font-thin  text-gray-200 ">
+          <p className="lg:text-[20px] text-[18px] font-thin  text-gray-200 ">
             A captivating summary ensures that once a recruiter lands on your
             profile, they stay there. This longer engagement signals to Linkedin
             that your profile is valuable, which in turn boosts your profile
             {"'"}s ranking in search results.
           </p>
-          <h4 className="lg:text-[38px] text-[24px] font-bold mt-5 text-gray-200  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
+          <h4 className="lg:text-[35px] text-[24px] font-bold mt-5 text-gray-200  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
             Showcasing Achievements
           </h4>
-          <p className="lg:text-[22px] text-[18px] font-thin  text-gray-200 ">
+          <p className="lg:text-[20px] text-[18px] font-thin  text-gray-200 ">
             Your summary isn{"'"}t just about the roles you{"'"}ve held- it{"'"}
             s about the impact you{"'"}ve made. A detailed summary allows you to
             highlight significant achievements, providing tangible evidence of
             your expertise and skills.
           </p>
-          <h4 className="lg:text-[38px] text-[24px] font-bold mt-5 text-gray-200  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
+          <h4 className="lg:text-[35px] text-[24px] font-bold mt-5 text-gray-200  bg-gradient-to-r from-indigo-500 to-purple-800 bg-clip-text text-transparent ">
             Personal Branding
           </h4>
-          <p className="lg:text-[22px] text-[18px] font-thin  text-gray-200 ">
+          <p className="lg:text-[20px] text-[18px] font-thin  text-gray-200 ">
             Your LinkedIn summary is a reflection of your professional brand. A
             well-crafted, lengthy summary sets you apart and establishes your
             position as a thought leader or industry expert.
           </p>
         </div>
       </div>
-      <div className="lg:content-3 lg:mt-3 mt-5 lg:p-16 pb-4 font-sans text-center lg:px-0 px-10">
-        <h1 className="text-[30px] lg:text-[48px] text-bold text-gray-100 mb-6">
+      <div className="lg:content-3 lg:mt-3 mt-5 lg:py-16 pb-4 font-sans text-center lg:px-8 px-10">
+        <h1 className="text-[24px] lg:text-[35px] text-bold text-gray-100 mb-6">
           <span className="text-yellow-600">
             Attention, {fullName ? fullName : "..."} !
           </span>{" "}
           To become a Linkedin pro and secure your ideal position ASAP, read the
           following carefully.
         </h1>
-        <p className=" lg:text-[22px] text-[18px] font-normal italic  text-gray-200 mb-0">
+        <p className=" lg:text-[20px] text-[18px] font-normal italic  text-gray-200 mb-0">
           Don{"'"}t skim over this! You might miss critical insights and
           essential information that could cost you your dream job.
         </p>
       </div>
-      <div className="lg:content-4  lg:mx-0 mx-8 px-4 border-2 mt-9 py-5 border-indigo-900 rounded-lg lg:px-8 lg:py-9 bg-transparent lg:backdrop-blur">
+      <div className="lg:content-4  lg:mx-8 mx-8 px-4 border-2 mt-9 py-5 border-indigo-900 rounded-lg lg:px-8 lg:py-9 bg-transparent lg:backdrop-blur">
         <h3 className="font-semibold lg:text-[18px] text-[14px] text-gray-100">
           Dear{" "}
           <span className="text-yellow-500">
