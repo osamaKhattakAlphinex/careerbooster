@@ -78,7 +78,7 @@ const HeroArea = () => {
                 <UploadPDFResume />
               </div>
               <div>
-                <div className="relative  ">
+                <div className="relative flex justify-center">
                   <Image
                     width={811}
                     height={341}

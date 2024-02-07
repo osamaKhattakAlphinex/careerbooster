@@ -24,6 +24,9 @@ const NextThemeProvider = ({ children }: any) => {
           }}
         />
 
+        {/* <Script src="assets/js/plugins.js" />
+        <Script src="assets/js/main.js" /> */}
+
         <ThemeProvider attribute="class" enableSystem={true}>
           {children}
         </ThemeProvider>
