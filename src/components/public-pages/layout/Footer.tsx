@@ -24,7 +24,7 @@ const Footer = () => {
           ></script>
         </Head>
         <div className="">
-          <div className=" flex lg:flex-row xs:flex-col justify-between md:px-20 xs:px-10 xs:text-center  md:gap-8 gap-4 py-8 md:text-left">
+          <div className=" flex lg:flex-row xs:flex-col  md:px-20 xs:px-10 xs:text-center  md:gap-8 gap-4 py-8 md:text-left">
             <div className="lg:w-4/12 xs:w-full">
               <div className="flex  items-center xs:text-center md:text-left xs:justify-center md:justify-start">
                 <Image
@@ -38,7 +38,7 @@ const Footer = () => {
                   CareerBooster
                 </span>
               </div>
-              <p className="mb-0 text-gray-950 text-sm lg:pr-4 dark:text-gray-300">
+              <p className="mb-0 text-gray-950 text-sm w-fit lg:pr-4 dark:text-gray-300">
                 We specialize in turbocharging your career by harnessing the
                 power of cutting-edge AI-infused tools, ensuring you achieve
                 peak professional excellence. Our innovative solutions are
@@ -49,32 +49,40 @@ const Footer = () => {
 
             <div className="flex lg:flex-row flex-col justify-between gap-4 lg:py-6 w-full">
               <div className="lg:px-5  text-gray-950 mb-2 dark:text-gray-100">
-                <h6 className="text-gray-950 mb-2 text-xl font-semibold dark:text-gray-100 ">
+                <h6 className="text-gray-950 mb-2 text-center text-xl font-semibold dark:text-gray-100 ">
                   CareerBooster.AI
                 </h6>
-                <ul className="link-list-t mb-0 pl-0 list-none ">
+                <ul className="link-list-t flex flex-col gap-3 mb-0 pl-0 text-center list-none ">
                   <li>
-                    <Link href="/about">About</Link>
+                    <Link href="/about" className="font-semibold">
+                      About
+                    </Link>
                   </li>
                   {/* <li>
                       <Link href="/blog">Blog</Link>
                     </li> */}
                   <li>
-                    <Link href="/login">Sign in</Link>
+                    <Link href="/login" className="font-semibold">
+                      Sign in
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/register">Register</Link>
+                    <Link href="/register" className="font-semibold">
+                      Register
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/contact">Contact</Link>
+                    <Link href="/contact" className="font-semibold">
+                      Contact
+                    </Link>
                   </li>
                 </ul>
               </div>
               <div className="lg:px-5 ">
-                <h6 className=" mb-2 text-gray-950 dark:text-gray-100 text-xl font-semibold">
+                <h6 className=" mb-2 text-center text-gray-950 dark:text-gray-100 text-xl font-semibold">
                   Use Cases
                 </h6>
-                <ul className="link-list-t mb-0 pl-0 list-none">
+                <ul className="link-list-t mb-0 text-center pl-0 list-none">
                   <li>
                     <Link href="/use-cases">Generate Resumes</Link>
                   </li>
@@ -92,21 +100,21 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div className="lg:px-5">
-                <h6 className="text-gray-950 text-xl font-semibold dark:text-gray-100 mb-4">
+              <div className="">
+                <h6 className="text-gray-950 text-center text-xl font-semibold dark:text-gray-100 mb-4">
                   Contact Us
                 </h6>
-                <ul className=" flex flex-col mb-0 pl-0">
-                  <li className="hover:pl-[5px] hover:text-[#6a4dff]  dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] pl-0 py-2 no-underline">
+                <ul className=" flex flex-col mb-0 text-center pl-0">
+                  <li className=" hover:text-[#6a4dff]  dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] pl-0 py-2 no-underline">
                     <Link href="">
                       23 The Atria 219 Bath Road <br /> Slough SL1 4BF, United
                       Kingdom
                     </Link>
                   </li>
-                  <li className="hover:pl-[5px] hover:text-[#6a4dff] dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] py-2 no-underline">
+                  <li className=" hover:text-[#6a4dff] dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] py-2 no-underline">
                     <Link href="">+44 7933 951034</Link>
                   </li>
-                  <li className="hover:pl-[5px] hover:text-[#6a4dff] dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] py-2 no-underline">
+                  <li className=" hover:text-[#6a4dff] dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] py-2 no-underline">
                     <Link href="">support@careerbooster.ai</Link>
                   </li>
                 </ul>

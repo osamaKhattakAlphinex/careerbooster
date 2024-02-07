@@ -34,12 +34,12 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <main className="flex-grow-1 pb-20">
+      <main className="flex-grow-1 bg-[#fff] dark:bg-[#171825]">
         {/* <!-- Page header --> */}
         <PageHeader title="Contact With Us" secondTitle="Contact" />
 
         <section className="">
-          <div className="xs:p-[2rem] border-2 md:p-[4rem] xl:p-[5rem] ">
+          <div className="xs:p-[2rem] md:p-[4rem] xl:p-[5rem] ">
             <ContactForm />
             <br />
             <AddressCard />
