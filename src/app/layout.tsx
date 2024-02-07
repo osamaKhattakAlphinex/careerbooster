@@ -27,8 +27,8 @@ export default function RootLayout({
 
       <AuthProvider>
         <ReduxProvider>
-          <MainLoaderLayer />
           <UserDataProvider />
+          <MainLoaderLayer />
           <CreditLimitsProvider />
           {children}
         </ReduxProvider>

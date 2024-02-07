@@ -75,10 +75,6 @@ function FAQItem(props: any) {
               className="dark:text-gray-100 text-gray-950 hover:text-[#6a4dff] dark:hover:text-[#e6f85e] flex flex-row text-left justify-start  items-start lg:text-[25px] text-[18px] focus:text-[#6a4dff] dark:focus:text-[#e6f85e] font-semibold"
               onClick={toggleFAQ}
               type="button"
-              //   data-bs-toggle="collapse"
-              //   data-bs-target="#faq-collapseOne"
-              //   aria-expanded="false"
-              //   aria-controls="faq-collapseOne"
             >
               {!isOpen ? (
                 <div className="flex justify-start items-start">
@@ -119,10 +115,7 @@ function FAQItem(props: any) {
             </button>
           </h2>
           {isOpen && (
-            <div
-              className=""
-              // data-bs-parent="#faqAccordion"
-            >
+            <div className="">
               <div className=" dark:text-gray-100 text-gray-950 pt-2 xs:pt-4 md:text-base xs:text-sm">
                 {props.answer}
               </div>
