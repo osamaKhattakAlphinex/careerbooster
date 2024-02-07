@@ -105,7 +105,7 @@ const LinkedInToolMain = () => {
           </p>
           <h3 className="py-2 lg:text-[40px] text-[27px] text-center font-semibold mt-3 lg:leading-[66px]  lg:mx-17">
             Free{" "}
-            <span className="py-2  font-semibold bg-clip-text text-transparent bg-gradient-to-r to-violet-500 from-fuchsia-500">
+            <span className="py-2 font-semibold text-transparent bg-clip-text bg-gradient-to-r to-violet-500 from-fuchsia-500">
               AI LinkedIn
             </span>{" "}
             Summary Generator To Achieve Top Rankings In Recruiter Searches And
@@ -117,8 +117,8 @@ const LinkedInToolMain = () => {
             $1000 if we waste your time with irrelevant outcomes.
           </h5>
 
-          <div className="mt-11 flex justify-center md:mt-11">
-            <label className=" py-[12px] lg:py-[20px]  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
+          <div className="flex justify-center mt-11 md:mt-11">
+            <label className=" pt-[12px] lg:pt-[20px]  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
               <input
                 type="file"
                 className="hidden "
@@ -171,7 +171,7 @@ const LinkedInToolMain = () => {
           </div>
         )}
         <div
-          className="pb-14 lg:pb-20 flex justify-center pt-10"
+          className="flex justify-center pt-10 pb-14 lg:pb-20"
           onClick={() =>
             window.scrollTo({
               top: document.documentElement.scrollHeight,
@@ -179,7 +179,7 @@ const LinkedInToolMain = () => {
             })
           }
         >
-          <span className="text-center lg:mt-4 py-2 text-indigo-500 border-indigo-500  rounded-t-2xl rounded-b-2xl border-1 animate-bounce">
+          <span className="py-2 text-center text-indigo-500 border-indigo-500 lg:mt-4 rounded-t-2xl rounded-b-2xl border-1 animate-bounce">
             {ArrowDownIcon}
           </span>
         </div>
@@ -199,45 +199,41 @@ const LinkedInToolMain = () => {
           </h5>
         </div>
         {/*Vide  Card */}
-        <div className="md:flex lg:mt-20 mt-10">
+        <div className="mt-10 md:flex lg:mt-20">
           <div className="md:my-2 lg:m-0 md:w-6/12 lg:w-6/12">
             <h3 className="lg:text-[27px] text-[20px] lg:leading-[48px]  leading-[32px] font-semibold lg:pr-[10px] lg:text-left ">
               I don{"'"}t have a resume. How can I upload my LinkedIn profile in
               PDF format?
             </h3>
-            <div className="flex ">
-              <div className="w-[10%] mx-1 lg:-mx-5 pt-5 h-full flex flex-col items-center  gap-1">
-                {/* dot */}
-                <div className="w-6 h-6 rounded-full bg-gradient-to-t to-fuchsia-500 from-violet-500 border-4 border-gray-800"></div>
-                {/* line */}
-                <div className="h-19 md:h-12 w-[2px] bg-fuchsia-500"></div>
-                {/* dot */}
-                <div className="w-6 h-6 rounded-full bg-gradient-to-t to-fuchsia-500 from-violet-500 border-4 border-gray-800"></div>
-                {/* line */}
-                <div className="h-19 lg:h-[70px] w-[2px] bg-fuchsia-500"></div>
-                {/* dot */}
-                <div className="w-6 h-6 rounded-full bg-gradient-to-t to-fuchsia-500 from-violet-500 border-4 border-gray-800"></div>
-              </div>
-
-              <div className="w-[90%]  h-full mr-2 pt-4">
-                <ul className="text-lg text-gray-200 flex flex-col gap-0 ">
-                  <li className="lg:text-[22px] text-[16px] ">
-                    Click here to navigate to your LinkedIn profile.
+            <div className="flex">
+              <div className="w-[90%]  h-full pt-4">
+                <ul className="flex flex-col gap-0 text-lg text-gray-200 ">
+                  <li className="lg:text-[22px] text-[16px] relative">
+                    <div className="absolute left-0 w-6 h-6 border-4 border-gray-800 rounded-full bg-gradient-to-t to-fuchsia-500 from-violet-500"></div>
+                    <span className="block pl-8">
+                      Click here to navigate to your LinkedIn profile.
+                    </span>
                   </li>
-                  <li className=" bullet-1 lg:text-[22px] text-[16px]">
-                    On your profile page, click on the ellipsis (three dots) and
-                    select {"'"}Save to PDF{"'"}
+                  <li className=" bullet-1 lg:text-[22px] text-[16px] relative">
+                    <div className="absolute left-0 w-6 h-6 border-4 border-gray-800 rounded-full bg-gradient-to-t to-fuchsia-500 from-violet-500"></div>
+                    <span className="block pl-8">
+                      On your profile page, click on the ellipsis (three dots)
+                      and select {"'"}Save to PDF{"'"}
+                    </span>
                   </li>
-                  <li className="bullet-2 lg:text-[22px] text-[16px]">
-                    This will allow you to download and save your LinkedIn
-                    profile as a PDF document.
+                  <li className="bullet-2 lg:text-[22px] text-[16px] relative">
+                    <div className="absolute left-0 w-6 h-6 border-4 border-gray-800 rounded-full bg-gradient-to-t to-fuchsia-500 from-violet-500"></div>
+                    <span className="block pl-8">
+                      This will allow you to download and save your LinkedIn
+                      profile as a PDF document.
+                    </span>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-          <div className="md:w-6/12 flex md:items-center lg:m-0 mt-5 lg:w-6/12">
-            <div className="h-64 md:h-64 lg:h-96 w-full flex justify-center items-center rounded-xl border-1 bg-gradient-to-r from-fuchsia-500 to-violet-500  border-gray-800 ">
+          <div className="flex mt-5 md:w-6/12 md:items-center lg:m-0 lg:w-6/12">
+            <div className="flex items-center justify-center w-full h-64 border-gray-800 md:h-64 lg:h-96 rounded-xl border-1 bg-gradient-to-r from-fuchsia-500 to-violet-500 ">
               Video
             </div>
           </div>
@@ -258,7 +254,7 @@ const LinkedInToolMain = () => {
               to surpass them, guaranteeing your complete satisfaction.
             </p>
           </div>
-          <div className="lg:w-6/12 md:flex md:justify-center mx-5 md:mx-5">
+          <div className="mx-5 lg:w-6/12 md:flex md:justify-center md:mx-5">
             <Image src={manyImage} alt="Not Found" />
           </div>
         </div>
@@ -304,7 +300,7 @@ const LinkedInToolMain = () => {
           <h3 className="text-center lg:px-16 lg:leading-[60px] lg:text-[35px] text-[24px] leading-[36px] font-semibold  lg:mt-10 px-[10px]">
             Don{"'"}t let your LinkedIn profile be just another face in the
             crowd. Use{" "}
-            <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r to-violet-500 from-fuchsia-500">
+            <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r to-violet-500 from-fuchsia-500">
               CareerBooster.AI
             </span>{" "}
             and ensure you stand out, get noticed, and advance in your career

@@ -1,8 +1,52 @@
+"use client";
 import UploadPDFResume from "@/components/UploadPDFResume";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const HeroArea = () => {
+  const [currentStringIndex, setCurrentStringIndex] = useState(0);
+  const [currentString, setCurrentString] = useState("");
+  const strings = [
+    "Find Your Dream Job Faster.",
+    "Get More Interviews.",
+    "Access Confidential Opportunities with the Right Keywords.",
+    "Get the Attention You Deserve from Recruiters.",
+    "Get Past the ATS and Increase Your Visibility.",
+    "A Top-Notch Resume Will Boost Your Confidence.",
+    "Expect a Document That Stands Out from the Competition",
+  ];
+
+  useEffect(() => {
+    const typeString = () => {
+      setCurrentString(
+        strings[currentStringIndex].substring(0, currentString.length + 1)
+      );
+    };
+
+    const deleteString = () => {
+      setCurrentString(
+        strings[currentStringIndex].substring(0, currentString.length - 1)
+      );
+    };
+
+    const typingTimeout = setTimeout(() => {
+      if (currentString === strings[currentStringIndex]) {
+        setTimeout(() => {
+          setCurrentString("");
+          setCurrentStringIndex((currentStringIndex + 1) % strings.length);
+        }, 1500); // Pause before next string starts typing
+      } else if (currentString.length === 0) {
+        typeString();
+      } else if (currentString.length < strings[currentStringIndex].length) {
+        typeString();
+      } else {
+        deleteString();
+      }
+    }, 100);
+
+    return () => clearTimeout(typingTimeout);
+  }, [currentString, currentStringIndex, strings]);
   return (
     <section
       className={`dark:bg-[url('/assets/images/bg/bg-4.png')] bg-[url('/assets/images/bg/1.jpg')]  style-1   lg:pt-40 md:pt-40 xs:pt-[120px] xs:pb-[80px] pb-15 lg:pb-20 md:pb-20 bg-auto bg-no-repeat bg-center overflow-hidden `}
@@ -19,14 +63,17 @@ const HeroArea = () => {
                   Your Free AI Resume Writer & LinkedIn Optimization Tool to
                   Turbocharge Your Career!
                   <br />
-                  <span
+                  {/* <span
                     className="font-bold md:text-[40px] mt-8 text-[24px] text-transparent bg-clip-text bg-gradient-to-r from-[#b324d7] to-[#fe577f] dark:bg-gradient-to-r dark:from-[#58ebff] dark:to-[#e6f85e] typed-animation text-wrap"
                     data-strings='["Find Your Dream Job Faster.", "Get More Interviews.", 
                         "Access Confidential Opportunities with the Right Keywords.", "Get the Attention You Deserve from Recruiters.",
                         "Get Past the ATS and Increase Your Visibility.",
                         "A Top-Notch Resume Will Boost Your Confidence.",
                         "Expect a Document That Stands Out from the Competition"]'
-                  ></span>
+                  ></span> */}
+                  <span className=" flex justify-center items-center font-bold md:text-3xl min-h-[56px]   text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#b324d7] to-[#fe577f] dark:bg-gradient-to-r dark:from-[#58ebff] dark:to-[#e6f85e] typed-animation ">
+                    <p>{currentString}</p>
+                  </span>
                 </h1>
                 <UploadPDFResume />
               </div>
