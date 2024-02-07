@@ -24,11 +24,7 @@ const Footer = () => {
           ></script>
         </Head>
         <div className="">
-<<<<<<< HEAD
-          <div className=" flex lg:flex-row xs:flex-col  md:px-20 xs:px-10 xs:text-center  md:gap-8 gap-4 py-8 md:text-left">
-=======
           <div className="flex justify-between gap-4 py-8 lg:flex-row xs:flex-col md:px-20 xs:px-10 xs:text-center md:gap-8 md:text-left">
->>>>>>> 62de84f23c8da324e4e1b6432e5032f5e234c8b0
             <div className="lg:w-4/12 xs:w-full">
               <div className="flex items-center xs:text-center md:text-left xs:justify-center md:justify-start">
                 <Image
@@ -42,11 +38,7 @@ const Footer = () => {
                   CareerBooster
                 </span>
               </div>
-<<<<<<< HEAD
-              <p className="mb-0 text-gray-950 text-sm w-fit lg:pr-4 dark:text-gray-300">
-=======
               <p className="mb-0 text-sm text-gray-950 lg:pr-4 dark:text-gray-300">
->>>>>>> 62de84f23c8da324e4e1b6432e5032f5e234c8b0
                 We specialize in turbocharging your career by harnessing the
                 power of cutting-edge AI-infused tools, ensuring you achieve
                 peak professional excellence. Our innovative solutions are
@@ -55,21 +47,12 @@ const Footer = () => {
               </p>
             </div>
 
-<<<<<<< HEAD
-            <div className="flex lg:flex-row flex-col justify-between gap-4 lg:py-6 w-full">
-              <div className="lg:px-5  text-gray-950 mb-2 dark:text-gray-100">
-                <h6 className="text-gray-950 mb-2 text-center text-xl font-semibold dark:text-gray-100 ">
-                  CareerBooster.AI
-                </h6>
-                <ul className="link-list-t flex flex-col gap-3 mb-0 pl-0 text-center list-none ">
-=======
             <div className="flex flex-col justify-between w-full gap-4 lg:flex-row lg:py-6">
               <div className="mb-2 lg:px-5 text-gray-950 dark:text-gray-100">
                 <h6 className="mb-2 text-xl font-semibold text-gray-950 dark:text-gray-100 ">
                   CareerBooster.AI
                 </h6>
                 <ul className="pl-0 mb-0 list-none link-list-t ">
->>>>>>> 62de84f23c8da324e4e1b6432e5032f5e234c8b0
                   <li>
                     <Link href="/about" className="font-semibold">
                       About
@@ -96,17 +79,10 @@ const Footer = () => {
                 </ul>
               </div>
               <div className="lg:px-5 ">
-<<<<<<< HEAD
-                <h6 className=" mb-2 text-center text-gray-950 dark:text-gray-100 text-xl font-semibold">
-                  Use Cases
-                </h6>
-                <ul className="link-list-t mb-0 text-center pl-0 list-none">
-=======
                 <h6 className="mb-2 text-xl font-semibold text-gray-950 dark:text-gray-100">
                   Use Cases
                 </h6>
                 <ul className="pl-0 mb-0 list-none link-list-t">
->>>>>>> 62de84f23c8da324e4e1b6432e5032f5e234c8b0
                   <li>
                     <Link href="/use-cases">Generate Resumes</Link>
                   </li>
@@ -124,21 +100,12 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-<<<<<<< HEAD
-              <div className="">
-                <h6 className="text-gray-950 text-center text-xl font-semibold dark:text-gray-100 mb-4">
-                  Contact Us
-                </h6>
-                <ul className=" flex flex-col mb-0 text-center pl-0">
-                  <li className=" hover:text-[#6a4dff]  dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] pl-0 py-2 no-underline">
-=======
               <div className="lg:px-5">
                 <h6 className="mb-4 text-xl font-semibold text-gray-950 dark:text-gray-100">
                   Contact Us
                 </h6>
                 <ul className="flex flex-col pl-0 mb-0 ">
                   <li className="hover:pl-[5px] hover:text-[#6a4dff]  dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] pl-0 py-2 no-underline">
->>>>>>> 62de84f23c8da324e4e1b6432e5032f5e234c8b0
                     <Link href="">
                       23 The Atria 219 Bath Road <br /> Slough SL1 4BF, United
                       Kingdom
