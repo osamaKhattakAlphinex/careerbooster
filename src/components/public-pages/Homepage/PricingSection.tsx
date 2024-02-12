@@ -18,7 +18,7 @@ const PricingSection = () => {
               </div>
             </div>
           </div>
-          <Zoom duration={800}>
+          <Zoom duration={1200}>
             <div className="flex md:flex-row md:justify-center xs:flex-col gap-6 pricing-table pt-6 md:mx-0 xs:mx-4">
               {/* <Packages viewOnly={true} /> */}
               <CreditPackages viewOnly={true} />

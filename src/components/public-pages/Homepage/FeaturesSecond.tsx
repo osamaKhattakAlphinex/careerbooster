@@ -170,7 +170,7 @@ const FeaturesSecond = () => {
                 >
                   <div className="flex flex-col lg:w-[50%] md:w-[50%] xs:w-[100%] px-[8px] xs:px-0 pt-8 xs:pt-2">
                     <Slide
-                      duration={800}
+                      duration={1200}
                       direction={i % 2 === 0 ? "left" : "right"}
                     >
                       <div className="content" key={item.id}>
@@ -201,7 +201,7 @@ const FeaturesSecond = () => {
                   </div>
 
                   <div className="flex flex-col lg:w-[50%] md:w-[50%] px-[8px] xs:px-0 xs:w-[100%]">
-                    <Zoom duration={1000}>
+                    <Zoom duration={1200}>
                       <div className=" dark:block hidden">
                         <Image
                           width={506}

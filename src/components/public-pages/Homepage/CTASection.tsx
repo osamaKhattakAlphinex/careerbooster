@@ -51,7 +51,7 @@ const CTASection = () => {
                     Get Started Free
                   </Link>
 
-                  <Zoom duration={800}>
+                  <Zoom duration={1200}>
                     <div className="relative  mt-10 rounded-2xl border-[1px] border-[#6a4dff] dark:border-[#e6f85e]">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

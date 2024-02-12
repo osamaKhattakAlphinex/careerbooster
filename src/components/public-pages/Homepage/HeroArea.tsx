@@ -87,7 +87,7 @@ const HeroArea = () => {
                       alt=""
                       className=" animate-scale absolute lg:top-[-12rem] lg:left-[-9rem] lg:w-[700px] h-auto z-[-1] sm:w-[1000px] sm:-top-[25rem] sm:-left-[18rem]"
                     />
-                    <Zoom duration={500}>
+                    <Zoom duration={1200}>
                       <div className="mt-12 p-4 rounded-2xl border-[1px] border-[#E6F85E] shadow-lg overflow-hidden relative z-1 dark:block hidden ">
                         <Image
                           width={810}

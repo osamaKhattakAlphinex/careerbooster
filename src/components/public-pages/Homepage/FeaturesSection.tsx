@@ -129,7 +129,7 @@ const FeaturesSection = () => {
             {singleFeatureData.map((item, i) => {
               return (
                 <Slide
-                  duration={800}
+                  duration={1200}
                   direction={i % 2 === 0 ? "left" : "right"}
                 >
                   <div
