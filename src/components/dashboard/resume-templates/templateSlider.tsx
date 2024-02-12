@@ -15,7 +15,6 @@ type Props = {
 const TemplateSlider = ({ templates }: Props) => {
   const params = useSearchParams();
 
-  console.log(templates, "template slider");
   const templateId: number = parseInt(params.get("templateId") || "0");
 
   return (

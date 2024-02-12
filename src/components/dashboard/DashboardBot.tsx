@@ -124,11 +124,20 @@ const DashboardBot = () => {
     const audioBlob = new Blob([audio], {
       type: "audio/mpeg",
     });
+    // let offset = -140;
     switch (focusedElement) {
       case "dashboard":
         if (dashboardRef.current && innerToolsRef.current) {
           dashboardRef.current.classList.add("dashboard-focused");
           innerToolsRef.current.classList.add("add-inner");
+
+          // const topPos = dashboardRef.current.offsetTop;
+          // console.log(topPos);
+          // console.log(window.pageYOffset);
+          // window.scrollTo({
+          //   top: 84,
+          //   behavior: "smooth",
+          // });
           // console.log(dashboardRef.current.offsetTop);
           // dashboardRef.current.scrollIntoView({
           //   behavior: "smooth",

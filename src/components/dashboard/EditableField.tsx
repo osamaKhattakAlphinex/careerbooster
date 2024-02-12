@@ -86,7 +86,7 @@ const EditableField = ({
             )}
           </>
         ) : (
-          <span className="hover:cursor-text" title="click to edit">
+          <span className="hover:cursor-text" title="Click to Edit">
             {value}
           </span>
         )}
