@@ -199,7 +199,7 @@ const FeaturesSecond = () => {
                       </div>
                     </Slide>
                   </div>
-
+                  {/* test */}
                   <div className="flex flex-col lg:w-[50%] md:w-[50%] px-[8px] xs:px-0 xs:w-[100%]">
                     <Zoom duration={1200}>
                       <div className=" dark:block hidden">
