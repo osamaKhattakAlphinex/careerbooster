@@ -24,31 +24,30 @@ const Footer = () => {
           ></script>
         </Head>
         <div className="">
-          <div className="flex justify-between gap-4 md:py-8 lg:flex-row xs:flex-col md:px-20 xs:px-6 xs:text-center md:gap-8 md:text-left">
-            <div className="lg:w-4/12 xs:w-full">
-              <div className="flex items-center xs:text-center md:text-left xs:justify-center md:justify-start">
-                <Image
-                  width={80}
-                  height={74}
-                  src="/trans-icon1.png"
-                  alt="icon"
-                  className="w-20 m-0"
-                />
-                <span className=" text-gray-950 dark:text-[#e6f85e] font-semibold">
-                  CareerBooster
-                </span>
+          <div className=" justify-between gap-4 md:py-8  md:px-20 xs:px-6 xs:text-center sm:text-start md:gap-8 md:text-left">
+            <div className="flex xs:flex-col sm:flex-row flex-wrap sm:justify-between xs:justify-center items-start w-full gap-4 lg:py-6">
+              <div className="sm:w-1/2 md:w-4/12 xs:w-full">
+                <div className="flex items-center xs:text-center sm:text-left xs:justify-center sm:justify-start">
+                  <Image
+                    width={40}
+                    height={40}
+                    src="/trans-icon1.png"
+                    alt="icon"
+                    className="m-0"
+                  />
+                  <span className=" text-gray-950 dark:text-[#e6f85e] font-semibold">
+                    CareerBooster
+                  </span>
+                </div>
+                <p className="mb-0 text-sm text-gray-950 lg:pr-4 dark:text-gray-300">
+                  We specialize in turbocharging your career by harnessing the
+                  power of cutting-edge AI-infused tools, ensuring you achieve
+                  peak professional excellence. Our innovative solutions are
+                  designed to elevate your skills, enhance your professional
+                  profile, and propel your career to unprecedented success.
+                </p>
               </div>
-              <p className="mb-0 text-sm text-gray-950 lg:pr-4 dark:text-gray-300">
-                We specialize in turbocharging your career by harnessing the
-                power of cutting-edge AI-infused tools, ensuring you achieve
-                peak professional excellence. Our innovative solutions are
-                designed to elevate your skills, enhance your professional
-                profile, and propel your career to unprecedented success.
-              </p>
-            </div>
-
-            <div className="flex flex-col justify-between w-full gap-4 lg:flex-row lg:py-6">
-              <div className="mb-2 lg:px-5 text-gray-950 dark:text-gray-100">
+              <div className="mb-2 flex flex-col xs:justify-center sm:justify-start xs:w-full sm:w-fit lg:px-5 text-gray-950 dark:text-gray-100">
                 <h6 className="mb-2 text-xl font-semibold text-gray-950 dark:text-gray-100 ">
                   CareerBooster.AI
                 </h6>
@@ -78,7 +77,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div className="lg:px-5 ">
+              <div className="lg:px-5 flex flex-col xs:justify-center sm:justify-start  xs:w-full sm:w-fit ">
                 <h6 className="mb-2 text-xl font-semibold text-gray-950 dark:text-gray-100">
                   Use Cases
                 </h6>
@@ -100,7 +99,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div className="lg:px-5">
+              <div className="lg:px-5 flex flex-col xs:justify-center sm:justify-start  xs:w-full sm:w-fit">
                 <h6 className="mb-4 text-xl font-semibold text-gray-950 dark:text-gray-100">
                   Contact Us
                 </h6>
@@ -118,7 +117,7 @@ const Footer = () => {
                     <Link href="">support@careerbooster.ai</Link>
                   </li>
                 </ul>
-                <ul className="flex flex-wrap justify-center gap-3 mt-5 mb-0 align-center justify-md-start">
+                <ul className="flex flex-wrap justify-center items-center gap-3 mt-5 mb-0 align-center justify-md-start">
                   <li>
                     <Link
                       href="https://www.facebook.com/careerboosterai"
@@ -154,7 +153,7 @@ const Footer = () => {
                     >
                       <svg
                         className=" 
-                          text-[#000] dark:text-gray-300 w-4 h-4 "
+                          text-[#000] dark:text-gray-300 w-3.5 h-3.5 border border-gray-100 p-0.5 rounded "
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
@@ -200,11 +199,11 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="py-6 mx-auto lg:mt-8 xs:container ">
+          <div className="py-4 mx-auto xs:container xs:flex xs:flex-col sm:gap-4 sm:flex-row items-center justify-center ">
             <p className="text-xs text-center text-gray-950 dark:text-gray-100 ">
               Copyright <span> &copy; CareerBooster 2023</span>.{" "}
             </p>
-            <div className="flex flex-row items-center justify-between py-4">
+            <div className="flex flex-row items-center gap-2 justify-between xs:py-4 sm:py-0">
               <Link
                 href="/privacy-policy"
                 className="text-[#6a4dff] dark:text-[#e6f85e] mx-1 no-underline hover:text-blue-400 dark:hover:text-blue-400 xs:text-sm"
