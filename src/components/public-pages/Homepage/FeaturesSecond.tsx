@@ -1,4 +1,5 @@
 "use client";
+//v1.2
 import Image from "next/image";
 import Link from "next/link";
 import { Fade, Slide, Zoom } from "react-awesome-reveal";
