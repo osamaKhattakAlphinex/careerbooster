@@ -24,7 +24,7 @@ const Footer = () => {
           ></script>
         </Head>
         <div className="">
-          <div className="flex justify-between gap-4 py-8 lg:flex-row xs:flex-col md:px-20 xs:px-10 xs:text-center md:gap-8 md:text-left">
+          <div className="flex justify-between gap-4 md:py-8 lg:flex-row xs:flex-col md:px-20 xs:px-6 xs:text-center md:gap-8 md:text-left">
             <div className="lg:w-4/12 xs:w-full">
               <div className="flex items-center xs:text-center md:text-left xs:justify-center md:justify-start">
                 <Image

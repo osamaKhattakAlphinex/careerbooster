@@ -1,7 +1,5 @@
 "use client";
-import { memo } from "react";
-import AppleLogo from "@/../public/icon/AppleLogo.svg";
-import AndroidLogo from "@/../public/icon/AndroidLogo.svg";
+
 import FacebookIcon from "@/../public/icon/FacebookLogo.svg";
 import LinkedinLogo from "@/../public/icon/LinkedinLogo.svg";
 
@@ -12,12 +10,22 @@ const tabOption = [
   {
     href: "https://www.facebook.com/careerboosterai",
     icon: (
-      <Image src={FacebookIcon} alt="FacebookIcon" width={26} height={26} />
+      <Image
+        src={FacebookIcon}
+        alt="FacebookIcon"
+        className="xs:h-6 xs:w-6 md:w-8 md:h-8"
+      />
     ),
   },
   {
     href: "https://www.linkedin.com/company/careerboosterai/",
-    icon: <Image src={LinkedinLogo} alt="linkIcon" width={26} height={26} />,
+    icon: (
+      <Image
+        src={LinkedinLogo}
+        alt="linkIcon"
+        className="xs:w-6 xs:h-6 md:w-8 md:h-8"
+      />
+    ),
   },
   // {
   //   href: "/",
@@ -40,30 +48,32 @@ const Footer = () => {
     ${pathname === "/subscribed" ? "hidden" : ""}
      `}
     >
-      <div className="flex justify-between h-[52px] items-end border-t border-[#312E37]">
-        <div className="dark:text-gray-100 text-gray-950 h-7 flex items-center flex-wrap gap-[10px] lg:gap-[22px]  lg:text-[14px] text-[10px]">
+      <div className="flex justify-between xs:h-[60px] md:h-[52px] items-end border-t border-[#312E37]">
+        <div className="dark:text-gray-100 xs:hidden md:flex whitespace-nowrap text-gray-950 h-7 flex items-center flex-wrap gap-[10px] lg:gap-[22px]  md:text-[14px] text-[10px]">
           2023 © CareerAi
         </div>
-        <div className="flex lg:gap-[22px] gap-[10px] items-center">
-          <Link
-            href={"/terms-and-conditions"}
-            className="dark:text-gray-100 text-gray-950 no-underline lg:text-[14px] text-[10px]"
-          >
-            Terms use
-          </Link>
-          <Link
-            href={"/privacy-policy"}
-            className="dark:text-gray-100 text-gray-950 no-underline lg:text-[14px] text-[10px]"
-          >
-            Privacy Policy
-          </Link>
-          <Link
-            href={"/contact"}
-            className="dark:text-gray-100 text-gray-950 no-underline lg:text-[14px] text-[10px]"
-          >
-            Contact Us
-          </Link>
-          <div className="flex lg:gap-[21px] gap-[8px]">
+        <div className="flex xs:flex-wrap  md:flex-nowrap md:gap-[22px]  items-center">
+          <div className="flex gap-4">
+            <Link
+              href={"/terms-and-conditions"}
+              className="dark:text-gray-100 whitespace-nowrap text-gray-950 no-underline md:text-[14px] text-[10px]"
+            >
+              Terms use
+            </Link>
+            <Link
+              href={"/privacy-policy"}
+              className="dark:text-gray-100 whitespace-nowrap text-gray-950 no-underline md:text-[14px] text-[10px]"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href={"/contact"}
+              className="dark:text-gray-100 whitespace-nowrap text-gray-950 no-underline md:text-[14px] text-[10px]"
+            >
+              Contact Us
+            </Link>
+          </div>
+          <div className="xs:hidden md:flex lg:gap-[21px] gap-[8px]">
             {tabOption.map((item, i) => (
               <a
                 href={item.href}
@@ -79,6 +89,28 @@ const Footer = () => {
                 {item.icon}
               </a>
             ))}
+          </div>
+          <div className="xs:flex w-full justify-between md:hidden">
+            <div className="dark:text-gray-100 whitespace-nowrap text-gray-950 h-7 flex flex-row items-center flex-wrap gap-[10px] lg:gap-[22px]  md:text-[14px] text-[10px]">
+              2023 © CareerAi
+            </div>
+            <div className="flex lg:gap-[21px] gap-[8px]">
+              {tabOption.map((item, i) => (
+                <a
+                  href={item.href}
+                  key={i}
+                  target={
+                    item.href === "https://www.facebook.com/careerboosterai" ||
+                    item.href ===
+                      "https://www.linkedin.com/company/careerboosterai/"
+                      ? "_blank"
+                      : ""
+                  }
+                >
+                  {item.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -49,7 +49,7 @@ export default function SubscribePage() {
                   </div>
                 </div>
               </div>
-              <div className="flex  gap-6 pricing-table">
+              <div className="flex md:justify-center gap-6 pricing-table">
                 {/* <Packages /> */}
                 <CreditPackages />
               </div>
