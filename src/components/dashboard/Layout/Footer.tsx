@@ -52,7 +52,7 @@ const Footer = () => {
         <div className="dark:text-gray-100 xs:hidden md:flex whitespace-nowrap text-gray-950 h-7 flex items-center flex-wrap gap-[10px] lg:gap-[22px]  md:text-[14px] text-[10px]">
           2023 © CareerAi
         </div>
-        <div className="flex xs:flex-wrap  md:flex-nowrap md:gap-[22px]  items-center">
+        <div className="flex xs:flex-wrap xs:w-full md:w-fit md:flex-nowrap md:gap-[22px]  items-center">
           <div className="flex gap-4">
             <Link
               href={"/terms-and-conditions"}
@@ -90,7 +90,7 @@ const Footer = () => {
               </a>
             ))}
           </div>
-          <div className="xs:flex w-full justify-between md:hidden">
+          <div className="flex w-full justify-between md:hidden">
             <div className="dark:text-gray-100 whitespace-nowrap text-gray-950 h-7 flex flex-row items-center flex-wrap gap-[10px] lg:gap-[22px]  md:text-[14px] text-[10px]">
               2023 © CareerAi
             </div>

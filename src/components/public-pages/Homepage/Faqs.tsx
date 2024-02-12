@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { Fade } from "react-awesome-reveal";
 const faqs = [
   {
     question: "What is CareerBooster.AI?",
@@ -131,33 +132,35 @@ function FAQItem(props: any) {
 function FAQList() {
   return (
     <section className="py-10 lg:py-16 dark:bg-gray-950 bg-gray-100">
-      <div className="md:container mx-auto">
-        <div className="flex justify-center mb-18">
-          <div className="flex flex-col md:w-10/12 xs:w-full">
-            <div className="text-center">
-              <h1 className=" dark:text-gray-100 text-gray-950 md:text-[35px] xs:text-[24px] font-semibold md:mb-14 xs:mb-8">
-                Questions About CareerBooster.AI?
-                <br className="d-none d-md-block" />
-                We have Answers!
-              </h1>
+      <Fade duration={2000}>
+        <div className="md:container mx-auto">
+          <div className="flex justify-center mb-18">
+            <div className="flex flex-col md:w-10/12 xs:w-full">
+              <div className="text-center">
+                <h1 className=" dark:text-gray-100 text-gray-950 md:text-[35px] xs:text-[24px] font-semibold md:mb-14 xs:mb-8">
+                  Questions About CareerBooster.AI?
+                  <br className="d-none d-md-block" />
+                  We have Answers!
+                </h1>
+              </div>
             </div>
           </div>
+          <div className="faq-list">
+            {faqs.map((faq, index) => (
+              <div
+                className="flex flex-col md:w-8/12 mx-auto xs:w-10/12"
+                key={index}
+              >
+                <FAQItem
+                  isOpen={index === 0}
+                  question={faq.question}
+                  answer={faq.answer}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="faq-list">
-          {faqs.map((faq, index) => (
-            <div
-              className="flex flex-col md:w-8/12 mx-auto xs:w-10/12"
-              key={index}
-            >
-              <FAQItem
-                isOpen={index === 0}
-                question={faq.question}
-                answer={faq.answer}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+      </Fade>
     </section>
   );
 }

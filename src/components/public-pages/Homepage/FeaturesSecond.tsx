@@ -1,5 +1,7 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { Fade, Slide, Zoom } from "react-awesome-reveal";
 const FeaturesSecond = () => {
   const SecondFeatureSingleData = [
     {
@@ -159,57 +161,67 @@ const FeaturesSecond = () => {
   return (
     <section className="pb-10  dark:bg-gray-950 bg-gray-100">
       <div className="lg:container md:container mx-auto xs:px-5">
-        {SecondFeatureSingleData.map((item) => {
+        {SecondFeatureSingleData.map((item, i) => {
           return (
             <>
-              <div
-                className={` flex md:flex-row xs:flex-col w-[100%]  gap-20 xs:gap-5 pt-15 justify-center  items-center ${item.className}`}
-              >
-                <div className="flex flex-col lg:w-[50%] md:w-[50%] xs:w-[100%] px-[8px] xs:px-0 pt-8 xs:pt-2">
-                  <div className="content" key={item.id}>
-                    <p className="text-[#6a4dff] dark:text-[#e6f85e] text-[1rem] mb-[1rem]">
-                      {item.featureNo}
-                    </p>
-                    <h4 className="dark:text-gray-100 text-gray-950 font-[600] md:text-[24px] text-[17px]">
-                      {item.headingTwo}
-                    </h4>
-                    <h1 className="dark:text-gray-100 text-gray-950 font-[600] md:text-[40px] my-5 text-[24px]">
-                      {item.mainHeading}
-                    </h1>
-                    <h4 className="dark:text-gray-100 text-gray-950 font-[600] mb-8 md:text-[24px] text-[17px]">
-                      {item.subHeading}
-                    </h4>
-                    <p className="mb-6 dark:text-gray-100 text-gray-950">
-                      {item.content}
-                    </p>
-                    <Link
-                      href="/register"
-                      className="inline-flex no-underline justify-center items-center relative text-[#6a4dff] dark:text-[#e6f85e] gap-3 dark:after:bg-[#e6f85e] after:bg-[#0000ff9c] after:content[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[1px] after:ease-in-out after:duration-300 hover:text-[#6a4dff] hover:after:w-[100%]"
+              <Fade duration={2000}>
+                <div
+                  className={` flex md:flex-row xs:flex-col w-[100%]  gap-20 xs:gap-5 pt-15 justify-center  items-center ${item.className}`}
+                >
+                  <div className="flex flex-col lg:w-[50%] md:w-[50%] xs:w-[100%] px-[8px] xs:px-0 pt-8 xs:pt-2">
+                    <Slide
+                      duration={800}
+                      direction={i % 2 === 0 ? "left" : "right"}
                     >
-                      <span>{item.buttonText}</span>
-                      {item.buttonSvg}
-                    </Link>
+                      <div className="content" key={item.id}>
+                        <p className="text-[#6a4dff] dark:text-[#e6f85e] text-[1rem] mb-[1rem]">
+                          {item.featureNo}
+                        </p>
+                        <h4 className="dark:text-gray-100 text-gray-950 font-[600] md:text-[24px] text-[17px]">
+                          {item.headingTwo}
+                        </h4>
+                        <h1 className="dark:text-gray-100 text-gray-950 font-[600] md:text-[40px] my-5 text-[24px]">
+                          {item.mainHeading}
+                        </h1>
+                        <h4 className="dark:text-gray-100 text-gray-950 font-[600] mb-8 md:text-[24px] text-[17px]">
+                          {item.subHeading}
+                        </h4>
+                        <p className="mb-6 dark:text-gray-100 text-gray-950">
+                          {item.content}
+                        </p>
+                        <Link
+                          href="/register"
+                          className="inline-flex no-underline justify-center items-center relative text-[#6a4dff] dark:text-[#e6f85e] gap-3 dark:after:bg-[#e6f85e] after:bg-[#0000ff9c] after:content[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[1px] after:ease-in-out after:duration-300 hover:text-[#6a4dff] hover:after:w-[100%]"
+                        >
+                          <span>{item.buttonText}</span>
+                          {item.buttonSvg}
+                        </Link>
+                      </div>
+                    </Slide>
+                  </div>
+
+                  <div className="flex flex-col lg:w-[50%] md:w-[50%] px-[8px] xs:px-0 xs:w-[100%]">
+                    <Zoom duration={1000}>
+                      <div className=" dark:block hidden">
+                        <Image
+                          width={506}
+                          height={555}
+                          src={item.imageSrc1}
+                          alt=""
+                        />
+                      </div>
+                      <div className=" block dark:hidden">
+                        <Image
+                          src={item.imageSrc2}
+                          alt=""
+                          width={506}
+                          height={555}
+                        />
+                      </div>
+                    </Zoom>
                   </div>
                 </div>
-                <div className="flex flex-col lg:w-[50%] md:w-[50%] px-[8px] xs:px-0 xs:w-[100%]">
-                  <div className=" dark:block hidden">
-                    <Image
-                      width={506}
-                      height={555}
-                      src={item.imageSrc1}
-                      alt=""
-                    />
-                  </div>
-                  <div className=" block dark:hidden">
-                    <Image
-                      src={item.imageSrc2}
-                      alt=""
-                      width={506}
-                      height={555}
-                    />
-                  </div>
-                </div>
-              </div>
+              </Fade>
             </>
           );
         })}
