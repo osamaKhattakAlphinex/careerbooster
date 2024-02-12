@@ -16,7 +16,7 @@ const PricingSection = () => {
             </div>
           </div>
         </div>
-        <div className="flex md:flex-row xs:flex-col gap-6 pricing-table pt-6 md:mx-0 xs:mx-4">
+        <div className="flex md:flex-row md:justify-center xs:flex-col gap-6 pricing-table pt-6 md:mx-0 xs:mx-4">
           {/* <Packages viewOnly={true} /> */}
           <CreditPackages viewOnly={true} />
         </div>
