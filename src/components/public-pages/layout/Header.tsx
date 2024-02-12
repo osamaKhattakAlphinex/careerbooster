@@ -341,7 +341,7 @@ const Header = () => {
                     </div>
                     {dropdownOpen && (
                       <div
-                        className="absolute right-0 z-10 w-56 mt-0 origin-top-right bg-gray-100 rounded-md shadow-lg dark:bg-gray-950 "
+                        className="absolute !border dark:!border-gray-500  !border-gray-300 bg-gray-100 text-gray-950 right-0 z-10 w-56 mt-0 origin-top-right  rounded-md shadow-lg dark:bg-gray-950 "
                         role="menu"
                         onMouseOver={() => setDropdownOpen(true)}
                         onMouseLeave={() => setDropdownOpen(false)}
