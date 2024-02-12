@@ -18,7 +18,6 @@ const Header = () => {
   const role = data?.user?.role;
 
   const userData = useSelector((state: any) => state.userData);
-  console.log("userData", userData);
 
   return (
     <nav
@@ -27,11 +26,11 @@ const Header = () => {
       // }`}
       className={`py-5 translate-y-[0%] opacity-[1] fixed top-0 left-0 right-0 z-50 dark:bg-gray-950 bg-gray-100 on-over shadow-lg  dark:text-gray-100 text-gray-900`}
     >
-      <div className="container flex items-center justify-between xs:w-full xs:mx-auto">
+      <div className="container flex items-center justify-between xs:w-full max-w-full xs:mx-auto">
         {/* <!-- Logo --> */}
 
         <Link
-          className="m-0 xs:flex xs:justify-between xs:w-full xs:ease-in-out xs:duration-300 xs:transition-all "
+          className="m-0 xs:flex xs:justify-between xs:w-full  xs:ease-in-out xs:duration-300 xs:transition-all "
           href="#"
         >
           <div className="flex items-center justify-center ">
@@ -46,7 +45,7 @@ const Header = () => {
               CareerBooster
             </span>
           </div>
-          <div className="flex items-center gap-4 xs:flex-row xs:justify-between">
+          <div className="flex lg:hidden items-center gap-4 xs:flex-row xs:justify-between">
             <span className="lg:hidden">
               <ThemeChanger />
             </span>
@@ -98,7 +97,8 @@ const Header = () => {
         </Link>
 
         {/* <!-- Navbar content --> */}
-        <div className="ml-auto lg:block xs:hidden">
+        {/* For desktop */}
+        <div className="ml-auto lg:block hidden">
           <div className="flex flex-row items-center gap-10 p-2 mt-2 ">
             <ul
               className={`flex lg:gap-2 xl:gap-5  dark:text-[#fff] text-gray-900 `}
@@ -147,109 +147,32 @@ const Header = () => {
             <div className="visible">
               {isAuth ? (
                 <>
-                  <div className="relative inline-block text-left">
-                    {/* if the screen is on mobile */}
-                    {typeof window !== "undefined" &&
-                    /Mobile/.test(navigator.userAgent) ? (
-                      <div>
-                        {userData.firstName + " " + userData.lastName}
-                        <Link
-                          href={role === "admin" ? "/admin" : "/dashboard"}
-                          className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
-                          role="menuitem"
-                          id="menu-item-0"
+                  <div className="relative inline-block text-left lg:block xs:hidden">
+                    <div>
+                      <button
+                        type="button"
+                        className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-1   font-semibold   text-xs"
+                        id="menu-button"
+                        // onMouseOver={() => setDropdownOpen(true)}
+                        // onMouseLeave={() => setDropdownOpen(false)}
+                        onClick={() => setDropdownOpen(!dropdownOpen)}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          className="w-6 h-6"
                         >
-                          Dashboard
-                        </Link>
-                        <button
-                          type="button"
-                          className="block w-full px-4 py-2 text-sm text-left dark:hover:bg-gray-600 hover:bg-blue-100"
-                          role="menuitem"
-                          id="menu-item-3"
-                          onClick={() => signOut()}
-                        >
-                          Log out
-                        </button>
-                      </div>
-                    ) : (
-                      <>
-                        <div>
-                          <button
-                            type="button"
-                            className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-1   font-semibold   text-xs"
-                            id="menu-button"
-                            // onMouseOver={() => setDropdownOpen(true)}
-                            // onMouseLeave={() => setDropdownOpen(false)}
-                            onClick={() => setDropdownOpen(!dropdownOpen)}
-                          >
-                            {/* <svg
-                              className="w-5 h-5 -mr-1 dark:text-gray-100 text-gray-950"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              aria-hidden="true"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                                clipRule="evenodd"
-                              />
-                            </svg> */}
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke-width="1.5"
-                              stroke="currentColor"
-                              className="w-6 h-6"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                              />
-                            </svg>
-                          </button>
-                        </div>
-                        {/* {dropdownOpen && (
-                          <div
-                            className="absolute right-0 z-10 w-56 mt-0 origin-top-right bg-gray-100 rounded-md shadow-lg dark:bg-gray-950 "
-                            role="menu"
-                            onMouseOver={() => setDropdownOpen(true)}
-                            onMouseLeave={() => setDropdownOpen(false)}
-                          >
-                            <div className="py-1" role="none">
-                              <Link
-                                href={
-                                  role === "admin" ? "/admin" : "/dashboard"
-                                }
-                                className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
-                                role="menuitem"
-                                id="menu-item-0"
-                              >
-                                Dashboard
-                              </Link>
-                              <Link
-                                href="/profile-review"
-                                className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
-                                role="menuitem"
-                                id="menu-item-1"
-                              >
-                                Edit Profile
-                              </Link>
-                              <button
-                                type="button"
-                                className="block w-full px-4 py-2 text-sm text-left dark:text-gray-100 text-gray-950"
-                                role="menuitem"
-                                id="menu-item-3"
-                                onClick={() => signOut()}
-                              >
-                                Log out
-                              </button>
-                            </div>
-                          </div>
-                        )} */}
-                      </>
-                    )}
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
 
                     {dropdownOpen && (
                       <div
@@ -310,6 +233,7 @@ const Header = () => {
             </div>
           </div>
         </div>
+
         <div>
           {/* <!-- Navbar toggler button --> */}
           <span className="hidden ml-2 lg:block xl:block">
@@ -320,13 +244,13 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <div
-        className={` container  lg:hidden  mx-auto   justify-between xs:w-full items-center     w-full ${
+        className={` container  lg:hidden  mx-auto max-w-full justify-between xs:w-full items-center     w-full ${
           mobileMenuOpen ? "xs:flex  " : "hidden"
         }`}
       >
         {/* <!-- Navbar content --> */}
-        <div className="p-0">
-          <div className="flex items-start gap-10 px-2 py-4 mt-6 ">
+        <div className="p-0 w-full">
+          <div className="flex items-start justify-between gap-10 px-2 py-4 mt-6 ">
             <ul
               className={`flex flex-col gap-4   dark:text-[#fff] text-gray-900`}
             >
@@ -386,110 +310,43 @@ const Header = () => {
             <div className="visible">
               {isAuth ? (
                 <>
-                  <div className="relative inline-block text-left">
-                    {/* if the screen is on mobile */}
-                    {typeof window !== "undefined" &&
-                    /Mobile/.test(navigator.userAgent) ? (
-                      <div>
+                  <div className="relative inline-block text-left lg:hidden">
+                    <div>
+                      <button
+                        type="button"
+                        className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-1 border-[1px] py-2  font-semibold   text-xs"
+                        id="menu-button"
+                        onMouseOver={() => setDropdownOpen(true)}
+                        onMouseLeave={() => setDropdownOpen(false)}
+                        onClick={() => setDropdownOpen(!dropdownOpen)}
+                      >
                         {userData.firstName + " " + userData.lastName}
-                        <Link
-                          href={role === "admin" ? "/admin" : "/dashboard"}
-                          className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
-                          role="menuitem"
-                          id="menu-item-0"
+                        <svg
+                          className="w-5 h-5 -mr-1 dark:text-gray-100 text-gray-950"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
                         >
-                          Dashboard
-                        </Link>
-                        <button
-                          type="button"
-                          className="block w-full px-4 py-2 text-sm text-left dark:hover:bg-gray-600 hover:bg-blue-100"
-                          role="menuitem"
-                          id="menu-item-3"
-                          onClick={() => signOut()}
-                        >
-                          Log out
-                        </button>
-                      </div>
-                    ) : (
-                      <>
-                        <div>
-                          <button
-                            type="button"
-                            className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-1 border-[1px] py-2  font-semibold   text-xs"
-                            id="menu-button"
-                            onMouseOver={() => setDropdownOpen(true)}
-                            onMouseLeave={() => setDropdownOpen(false)}
-                            onClick={() => setDropdownOpen(!dropdownOpen)}
-                          >
-                            {userData.firstName + " " + userData.lastName}
-                            <svg
-                              className="w-5 h-5 -mr-1 dark:text-gray-100 text-gray-950"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              aria-hidden="true"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </button>
-                        </div>
-                        {dropdownOpen && (
-                          <div
-                            className="absolute right-0 z-10 w-56 mt-0 origin-top-right bg-gray-100 rounded-md shadow-lg dark:bg-gray-950 "
-                            role="menu"
-                            onMouseOver={() => setDropdownOpen(true)}
-                            onMouseLeave={() => setDropdownOpen(false)}
-                          >
-                            <div className="py-1" role="none">
-                              {/* <!-- Active: "bg-gray-100 ", Not Active: "text-gray-700" --> */}
-                              <Link
-                                href={
-                                  role === "admin" ? "/admin" : "/dashboard"
-                                }
-                                className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
-                                role="menuitem"
-                                id="menu-item-0"
-                              >
-                                Dashboard
-                              </Link>
-                              <Link
-                                href="/profile-review"
-                                className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
-                                role="menuitem"
-                                id="menu-item-1"
-                              >
-                                Edit Profile
-                              </Link>
-                              <button
-                                type="button"
-                                className="block w-full px-4 py-2 text-sm text-left dark:text-gray-100 text-gray-950"
-                                role="menuitem"
-                                id="menu-item-3"
-                                onClick={() => signOut()}
-                              >
-                                Log out
-                              </button>
-                            </div>
-                          </div>
-                        )}
-                      </>
-                    )}
-
+                          <path
+                            fillRule="evenodd"
+                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                    </div>
                     {dropdownOpen && (
                       <div
-                        className="absolute right-0 z-10 w-56 mt-0 origin-top-right bg-gray-100 border-2 border-gray-100 rounded-md shadow-lg dark:border-gray-950 text-gray-950 dark:bg-gray-950 "
+                        className="absolute right-0 z-10 w-56 mt-0 origin-top-right bg-gray-100 rounded-md shadow-lg dark:bg-gray-950 "
                         role="menu"
                         onMouseOver={() => setDropdownOpen(true)}
                         onMouseLeave={() => setDropdownOpen(false)}
                       >
-                        <div className="py-1 " role="none">
+                        <div className="py-1" role="none">
                           {/* <!-- Active: "bg-gray-100 ", Not Active: "text-gray-700" --> */}
                           <Link
                             href={role === "admin" ? "/admin" : "/dashboard"}
-                            className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
+                            className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
                             role="menuitem"
                             id="menu-item-0"
                           >
@@ -497,7 +354,7 @@ const Header = () => {
                           </Link>
                           <Link
                             href="/profile-review"
-                            className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
+                            className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
                             role="menuitem"
                             id="menu-item-1"
                           >
@@ -505,7 +362,7 @@ const Header = () => {
                           </Link>
                           <button
                             type="button"
-                            className="block w-full px-4 py-2 text-sm text-left dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
+                            className="block w-full px-4 py-2 text-sm text-left dark:text-gray-100 text-gray-950"
                             role="menuitem"
                             id="menu-item-3"
                             onClick={() => signOut()}
