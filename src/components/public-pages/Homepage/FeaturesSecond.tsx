@@ -161,15 +161,15 @@ const FeaturesSecond = () => {
 
   return (
     <section className="pb-10  dark:bg-gray-950 bg-gray-100">
-      <div className="lg:container md:container mx-auto xs:px-5">
+      <div className="mx-auto w-full sm:container xs:max-w-full xs:px-2  ">
         {SecondFeatureSingleData.map((item, i) => {
           return (
             <>
               <Fade duration={2000}>
                 <div
-                  className={` flex md:flex-row xs:flex-col w-[100%]  gap-20 xs:gap-5 pt-15 justify-center  items-center ${item.className}`}
+                  className={` flex md:flex-row xs:flex-col w-[100%] px-2 gap-20 xs:gap-5 pt-15 justify-center  items-center ${item.className}`}
                 >
-                  <div className="flex flex-col lg:w-[50%] md:w-[50%] xs:w-[100%] px-[8px] xs:px-0 pt-8 xs:pt-2">
+                  <div className="flex flex-col  md:w-[50%] xs:text-center md:text-start xs:w-[100%] px-[8px] xs:px-0 pt-8 xs:pt-2">
                     <Slide
                       duration={1200}
                       direction={i % 2 === 0 ? "left" : "right"}
@@ -178,16 +178,16 @@ const FeaturesSecond = () => {
                         <p className="text-[#6a4dff] dark:text-[#e6f85e] text-[1rem] mb-[1rem]">
                           {item.featureNo}
                         </p>
-                        <h4 className="dark:text-gray-100 text-gray-950 font-[600] md:text-[24px] text-[17px]">
+                        <h4 className="dark:text-gray-100 text-gray-950 font-[600] md:text-lg text-base">
                           {item.headingTwo}
                         </h4>
-                        <h1 className="dark:text-gray-100 text-gray-950 font-[600] md:text-[40px] my-5 text-[24px]">
+                        <h1 className="dark:text-gray-100 text-gray-950 font-[600] md:text-2xl my-5 text-xl">
                           {item.mainHeading}
                         </h1>
-                        <h4 className="dark:text-gray-100 text-gray-950 font-[600] mb-8 md:text-[24px] text-[17px]">
+                        <h4 className="dark:text-gray-100 text-gray-950 font-[600] mb-8 md:text-lg text-base">
                           {item.subHeading}
                         </h4>
-                        <p className="mb-6 dark:text-gray-100 text-gray-950">
+                        <p className="mb-6 text-gray-950 dark:text-gray-400 ">
                           {item.content}
                         </p>
                         <Link

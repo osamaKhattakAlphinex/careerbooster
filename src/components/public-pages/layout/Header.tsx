@@ -26,7 +26,6 @@ const Header = () => {
       setActive("");
     } else {
       const segments = pathname.split("/");
-      console.log(segments);
       if (segments) {
         setActive(segments[1]);
       }

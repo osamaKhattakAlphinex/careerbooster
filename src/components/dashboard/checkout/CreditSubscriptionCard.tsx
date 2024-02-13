@@ -177,16 +177,16 @@ const CreditSubscriptionCard: React.FC<Props> = ({
         // className={`col-md-6 col-lg-4 ${
         //   userPackage.amount === 0 && data ? "" : ""
         // } `}
-        className="flex flex-col md:w-4/12  xs:w-full   "
+        className="flex flex-col lg:w-4/12 md:w-6/12  xs:w-full   "
       >
         <div
-          className={`p-6  lg:px-8 lg:py-8 rounded-2xl h-full border-[1px] hover:bg-gray-50 hover:shadow-2xl dark:hover:border-[#e6f85e] dark:hover:bg-black  transition-all duration-200 ease-in-out relative hover:border-blue-600 active:border-blue-600 xs:mx-6 md:mx-0`}
+          className={`p-6  lg:px-8 lg:py-8 rounded-2xl h-full border-[1px] hover:bg-gray-50 hover:shadow-2xl dark:hover:border-[#e6f85e] dark:hover:bg-black  transition-all duration-200 ease-in-out relative hover:border-blue-600 active:border-blue-600 xs:mx-2 md:mx-0`}
         >
-          <h1 className=" font-semibold text-[#6a4dff] dark:text-[#e6f85e] mb-0 mt-4 md:!text-4xl xs:text-2xl">
+          <h1 className=" font-semibold text-[#6a4dff] dark:text-[#e6f85e] mb-0 mt-4 md:!text-3xl xs:text-2xl">
             {creditPackage.title}
           </h1>
           <div className="flex items-center">
-            <h3 className="text-gray-950 dark:text-gray-100 font-medium mt-4 mb-6 text-xl">
+            <h3 className="text-gray-950 dark:text-gray-100 font-normal mt-4 mb-4 text-3xl">
               ${creditPackage.amount}
             </h3>
             {/* <span className="text-2xl theme-text-2">

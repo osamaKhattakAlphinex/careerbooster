@@ -8,11 +8,11 @@ const Reviews = () => {
   return (
     <section className="overflow-hidden  pb-10  md:pb-16 xs:pb-4   z-[2000000]  dark:bg-gray-950 bg-gray-100">
       <Fade duration={2000}>
-        <div className="lg:container md:container ">
+        <div className="mx-auto w-full sm:container xs:max-w-full xs:px-2  ">
           <div className="flex justify-center mb-18">
             <div className="flex flex-col lg:w-9/12 md:w-9/12 xs:w-full">
               <div className="text-center">
-                <h1 className="dark:text-gray-100 text-gray-950 md:text-[35px] text-[24px] font-semibold lg:mb-20 md:mb-20 xs:mb-10">
+                <h1 className="dark:text-gray-100 text-gray-950 md:text-3xl text-xl font-semibold lg:mb-20 md:mb-20 xs:mb-10">
                   <span className="text-[#6a4dff] dark:text-[#e6f85e]">
                     CareerBooster.AI{" "}
                   </span>

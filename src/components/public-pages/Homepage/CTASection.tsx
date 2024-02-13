@@ -4,9 +4,9 @@ import Link from "next/link";
 import { Fade, Zoom } from "react-awesome-reveal";
 const CTASection = () => {
   return (
-    <section className="dark:bg-gray-950 bg-gray-100 py-10 xs:px-6 ">
+    <section className="dark:bg-gray-950 bg-gray-100 py-10 xs:px-2 md:px-6 ">
       <Fade duration={2000}>
-        <div className="md:container mx-auto ">
+        <div className="mx-auto w-full sm:container xs:max-w-full xs:px-2 ">
           <div className="rounded-2xl border-[1px] relative z-1 dark:bg-[url('/assets/images/bg/bg-4.png')] bg-[url('/assets/images/bg/1.jpg')] overflow-hidden">
             <div className="animate-scale absolute w-full h-full z-[1]  m-auto">
               <Image
@@ -18,12 +18,12 @@ const CTASection = () => {
               />
             </div>
             <div className="flex justify-center">
-              <div className="flex flex-col md:w-10/12 xs:w-full">
-                <div className="text-center pt-6 px-10 md:pt-10 md:px-10 lg:pt-20 lg:px-20">
-                  <h5 className="text-[#6a4dff] dark:text-[#e6f85e] text-[1.25rem] font-semibold">
+              <div className="flex flex-col px-4">
+                <div className="text-center pt-6 px-2 md:pt-10 lg:pt-20 lg:px-20">
+                  <p className="text-[#6a4dff] dark:text-[#e6f85e] text-xl ">
                     Revolutionize Your Job Hunt
-                  </h5>
-                  <h2 className="mb-6 dark:text-gray-100 text-gray-950  md:text-[40px] text-[24px] font-semibold">
+                  </p>
+                  <h2 className="mb-3 dark:text-gray-100 text-gray-950  md:text-3xl text-xl font-semibold">
                     Discover the Game-Changing
                     <span className="text-[#6a4dff] dark:text-[#e6f85e]">
                       {" "}
@@ -31,9 +31,9 @@ const CTASection = () => {
                     </span>
                     You{"'"}ve Been Missing!
                   </h2>
-                  <h5 className="dark:text-gray-100 text-gray-950  mb-6 font-semibold text-[1.25rem] ">
+                  <p className="dark:text-gray-100 text-gray-950  mb-3  text-xl ">
                     Unlock Success: Tailor Resumes for Each Job in Mere Minutes
-                  </h5>
+                  </p>
 
                   <p className="dark:text-gray-100 text-gray-950 pb-5 text-base mb-6">
                     Are you stuck in the resume rut of using a single generic
@@ -52,7 +52,7 @@ const CTASection = () => {
                   </Link>
 
                   <Zoom duration={1200}>
-                    <div className="relative  mt-10 rounded-2xl border-[1px] border-[#6a4dff] dark:border-[#e6f85e]">
+                    <div className="relative  mt-10 mb-2 rounded-2xl border-[1px] border-[#6a4dff] dark:border-[#e6f85e]">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
