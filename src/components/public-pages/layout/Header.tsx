@@ -4,7 +4,6 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import ThemeToggler from "../../Themetoggler";
 
 import Image from "next/image";
 import "@/app/(private_route)/dashboard.css";

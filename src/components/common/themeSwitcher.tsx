@@ -11,7 +11,10 @@ const ThemeChanger = () => {
     <div>
       {theme === "dark" ? (
         <button
-          onClick={() => setTheme("light")}
+          onClick={(e) =>{
+            e.preventDefault();
+            setTheme("light")
+          } }
           className="grid place-content-center dark:text-white text-gray-950"
         >
           <svg
@@ -31,7 +34,12 @@ const ThemeChanger = () => {
         </button>
       ) : (
         <button
-          onClick={() => setTheme("dark")}
+          onClick={(e) =>
+            {
+              e.preventDefault();
+              setTheme("dark")
+            }
+            }
           className="grid place-content-center dark:text-white text-gray-950"
         >
           <svg

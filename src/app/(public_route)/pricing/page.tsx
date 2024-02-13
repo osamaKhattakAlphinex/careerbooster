@@ -4,7 +4,7 @@ import PricingSection from "@/components/public-pages/Homepage/PricingSection";
 import PageHeader from "@/components/PageHeader";
 
 import { Metadata } from "next";
-import "@/app/plugins.css";
+ 
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Pricing",
   description:

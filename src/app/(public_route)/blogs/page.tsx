@@ -3,7 +3,7 @@ import BlogPagination from "@/components/public-pages/Blogs/blogpagination";
 import CTASection from "@/components/public-pages/Homepage/CTASection";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
-import "@/app/plugins.css";
+ 
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Blogs",
   description:

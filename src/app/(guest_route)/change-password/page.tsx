@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { changePassword } from "@/lib/api";
 import axios from "axios";
-import "@/app/plugins.css";
+ 
 
 const ChangePasswordPage = () => {
   const router = useRouter();

@@ -3,7 +3,7 @@ import Header from "@/components/public-pages/layout/Header";
 import type { Metadata } from "next";
 
 import Footer from "@/components/public-pages/layout/Footer";
-import "../plugins.css";
+import "@/app/(private_route)/plugins.css"
 export const metadata: Metadata = {
   title: "AI Resume Bot",
   description: "AI Resume Bot | Developed by NausalTech",

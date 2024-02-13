@@ -7,7 +7,7 @@ import FeaturesSection from "@/components/public-pages/Homepage/FeaturesSection"
 import Reviews from "@/components/public-pages/Homepage/Reviews";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
-import "@/app/plugins.css";
+ 
 
 export const metadata: Metadata = {
   title: "CareerBooster.AI-About",

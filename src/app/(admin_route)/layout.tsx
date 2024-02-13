@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-import "@/app/plugins.css";
+ 
 import AdminSidebar from "@/components/admin/sidebar/adminSidebar";
 
 interface Props {
