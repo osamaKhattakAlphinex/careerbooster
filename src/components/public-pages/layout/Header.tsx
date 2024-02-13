@@ -8,6 +8,7 @@ import { useState } from "react";
 import Image from "next/image";
 import "@/app/(private_route)/dashboard.css";
 import ThemeChanger from "@/components/common/themeSwitcher";
+import { Fade, Slide } from "react-awesome-reveal";
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -20,16 +21,13 @@ const Header = () => {
 
   return (
     <nav
-      // className={`navbar navbar-expand-lg fixed-top ${
-      //   theme === "dark" ? "bg-dark" : "bg-white"
-      // }`}
-      className={`py-5 translate-y-[0%] opacity-[1] fixed top-0 left-0 right-0 z-50 dark:bg-gray-950 bg-gray-100 on-over shadow-lg  dark:text-gray-100 text-gray-900`}
+      className={`md:py-5 py-2  translate-y-[0%] opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950 bg-gray-100 on-over shadow-lg  dark:text-gray-100 text-gray-900`}
     >
-      <div className=" flex items-center justify-between xs:w-full max-w-full xs:mx-auto">
+      <div className="flex items-center justify-between mx-auto sm:container xs:max-w-full xs:px-2">
         {/* <!-- Logo --> */}
 
         <Link
-          className="m-0 xs:flex xs:justify-between xs:w-full  xs:ease-in-out xs:duration-300 xs:transition-all "
+          className="m-0 xs:flex xs:justify-between xs:w-full xs:ease-in-out xs:duration-300 xs:transition-all "
           href="#"
         >
           <div className="flex items-center justify-center ">
@@ -44,7 +42,7 @@ const Header = () => {
               CareerBooster
             </span>
           </div>
-          <div className="flex lg:hidden items-center gap-4 xs:flex-row xs:justify-between">
+          <div className="flex items-center gap-4 lg:hidden xs:flex-row xs:justify-between">
             <span className="lg:hidden">
               <ThemeChanger />
             </span>
@@ -101,7 +99,7 @@ const Header = () => {
 
         {/* <!-- Navbar content --> */}
         {/* For desktop */}
-        <div className="ml-auto lg:block hidden">
+        <div className="hidden ml-auto lg:block">
           <div className="flex flex-row items-center gap-10 p-2 mt-2 ">
             <ul
               className={`flex lg:gap-2 xl:gap-5  dark:text-[#fff] text-gray-900 `}
@@ -247,33 +245,47 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <div
-        className={` container  lg:hidden  mx-auto max-w-full justify-between xs:w-full items-center     w-full ${
+        className={` max-h-fit min-h-screen xs:overflow-y-auto container  lg:hidden  mx-auto max-w-full justify-between xs:w-full items-center  w-full ${
           mobileMenuOpen ? "xs:flex  " : "hidden"
         }`}
       >
         {/* <!-- Navbar content --> */}
-        <div className="p-0 w-full">
-          <div className="flex items-start justify-between gap-10 px-2 py-4 mt-6 ">
+        <div className="w-full p-0">
+          <Slide duration={800} direction="right">
             <ul
-              className={`flex flex-col gap-4   dark:text-[#fff] text-gray-900`}
+              className={`flex flex-col gap-8 justify-center items-center   dark:text-[#fff] text-gray-900`}
             >
               <li
                 className="px-3 mt-0 "
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Link
-                  className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]"
+                  className=" dark:text-gray-100 text-2xl capitalize text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]"
                   href="/"
                 >
                   Home
                 </Link>
               </li>
+              {isAuth && (
+                <li
+                  className="px-3 mt-0 "
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Link
+                    className=" dark:text-gray-100 text-2xl capitalize text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]"
+                    href={role === "admin" ? "/admin" : "/dashboard"}
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              )}
+
               <li
                 className="px-3 mt-0 "
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Link
-                  className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
+                  className=" dark:text-gray-100 text-gray-900 text-2xl  capitalize no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
                   href="/use-cases"
                 >
                   Use cases
@@ -284,7 +296,7 @@ const Header = () => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Link
-                  className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
+                  className=" dark:text-gray-100 text-gray-900 capitalize text-2xl no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
                   href="/pricing"
                 >
                   Pricing
@@ -295,100 +307,46 @@ const Header = () => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Link
-                  className=" dark:text-gray-100 text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
+                  className=" dark:text-gray-100 text-gray-900 capitalize no-underline text-2xl hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	"
                   href="/contact"
                 >
                   Contact
                 </Link>
               </li>
-              {!isAuth && (
-                <Link
-                  className="dark:text-gray-100 text-gray-900 no-underline hover:text-[0#000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3"
-                  href="/login"
-                >
-                  Login
-                </Link>
-              )}
-            </ul>
-            <div className="visible">
               {isAuth ? (
-                <>
-                  <div className="relative inline-block text-left lg:hidden">
-                    <div>
-                      <button
-                        type="button"
-                        className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-1 border-[1px] py-2  font-semibold   text-xs"
-                        id="menu-button"
-                        onMouseOver={() => setDropdownOpen(true)}
-                        onMouseLeave={() => setDropdownOpen(false)}
-                        onClick={() => setDropdownOpen(!dropdownOpen)}
-                      >
-                        {userData.firstName + " " + userData.lastName}
-                        <svg
-                          className="w-5 h-5 -mr-1 dark:text-gray-100 text-gray-950"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          aria-hidden="true"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                    {dropdownOpen && (
-                      <div
-                        className="absolute !border dark:!border-gray-500  !border-gray-300 bg-gray-100 text-gray-950 right-0 z-10 w-56 mt-0 origin-top-right  rounded-md shadow-lg dark:bg-gray-950 "
-                        role="menu"
-                        onMouseOver={() => setDropdownOpen(true)}
-                        onMouseLeave={() => setDropdownOpen(false)}
-                      >
-                        <div className="py-1" role="none">
-                          {/* <!-- Active: "bg-gray-100 ", Not Active: "text-gray-700" --> */}
-                          <Link
-                            href={role === "admin" ? "/admin" : "/dashboard"}
-                            className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
-                            role="menuitem"
-                            id="menu-item-0"
-                          >
-                            Dashboard
-                          </Link>
-                          <Link
-                            href="/profile-review"
-                            className="block px-4 py-2 text-sm no-underline dark:text-gray-100 text-gray-950"
-                            role="menuitem"
-                            id="menu-item-1"
-                          >
-                            Edit Profile
-                          </Link>
-                          <button
-                            type="button"
-                            className="block w-full px-4 py-2 text-sm text-left dark:text-gray-100 text-gray-950"
-                            role="menuitem"
-                            id="menu-item-3"
-                            onClick={() => signOut()}
-                          >
-                            Log out
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </>
+                <li
+                  className="px-3 mt-0 "
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <button
+                    type="button"
+                    className="block w-full px-4 py-2 text-2xl text-left capitalize dark:text-gray-100 text-gray-950"
+                    role="menuitem"
+                    id="menu-item-3"
+                    onClick={() => signOut()}
+                  >
+                    Log out
+                  </button>
+                </li>
               ) : (
                 <>
                   <Link
+                    className="dark:text-gray-100 text-gray-900 capitalize no-underline text-2xl hover:text-[0#000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3"
+                    href="/login"
+                  >
+                    login
+                  </Link>
+                  <Link
                     href="/register"
-                    className="no-underline px-[.85rem] font-[500] text-[.75rem] py-[.6rem] rounded-md text-[#6a4dff] dark:text-[#e6f85e] border-[1px] border-[#6a4dff] hover:border-[#6a4dff] hover:bg-[#6a4dff] hover:border-none hover:text-gray-100 dark:bg-[#11121c] dark:border-[#e6f85e]  dark:hover:bg-[#e6f85e] dark:hover:border-none dark:hover:text-[#11121c]"
+                    // className="no-underline  capitalize font-[500] text-[.75rem] py-[.6rem] rounded-md text-[#6a4dff] dark:text-[#e6f85e] border-[1px] border-[#6a4dff] hover:border-[#6a4dff] hover:bg-[#6a4dff] hover:border-none hover:text-gray-100 dark:bg-[#11121c] dark:border-[#e6f85e]  dark:hover:bg-[#e6f85e] dark:hover:border-none dark:hover:text-[#11121c]"
+                    className="dark:text-gray-100 text-gray-900 capitalize no-underline text-2xl hover:text-[0#000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3"
                   >
                     Get started
                   </Link>
                 </>
               )}
-            </div>
-          </div>
+            </ul>
+          </Slide>
         </div>
       </div>
     </nav>
