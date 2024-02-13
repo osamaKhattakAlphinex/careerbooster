@@ -25,7 +25,7 @@ const Header = () => {
       // }`}
       className={`py-5 translate-y-[0%] opacity-[1] fixed top-0 left-0 right-0 z-50 dark:bg-gray-950 bg-gray-100 on-over shadow-lg  dark:text-gray-100 text-gray-900`}
     >
-      <div className="container flex items-center justify-between xs:w-full max-w-full xs:mx-auto">
+      <div className=" flex items-center justify-between xs:w-full max-w-full xs:mx-auto">
         {/* <!-- Logo --> */}
 
         <Link
