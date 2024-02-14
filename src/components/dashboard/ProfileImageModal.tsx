@@ -51,13 +51,13 @@ const ProfileImageModal = forwardRef(({ image }: ModalProps, ref: any) => {
   return (
     <div
       aria-hidden="true"
-      className={`overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50  justify-center  items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ${
+      className={`overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50  mx-1  justify-center  items-center w-full md:inset-0 h-screen bg-black/50 max-h-full ${
         openProfileImgModal ? "flex" : "hidden"
       }`}
     >
       <div className="relative w-full max-w-xl max-h-full p-8 bg-gray-300 rounded shadow-md dark:bg-gray-800">
         {/* <div className="relative p-4 text-center rounded-lg shadow sm:p-5"> */}
-        <h1 className="text-xl font-bold text-center dark:text-white text-gray-950">
+        <h1 className="text-base font-bold text-center md:text-lg dark:text-white text-gray-950">
           Crop Your Image to Fit
         </h1>
 
@@ -83,7 +83,7 @@ const ProfileImageModal = forwardRef(({ image }: ModalProps, ref: any) => {
           <span className="sr-only">Close modal</span>
         </button>
 
-        <div className="relative m-2 h-96">
+        <div className="relative m-2 h-80">
           <Cropper
             image={image}
             crop={crop}
@@ -96,7 +96,7 @@ const ProfileImageModal = forwardRef(({ image }: ModalProps, ref: any) => {
           />
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col items-center justify-between gap-5 md:flex-row">
           <input
             type="range"
             value={zoom}
