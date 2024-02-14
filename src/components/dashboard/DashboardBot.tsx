@@ -95,7 +95,8 @@ const DashboardBot = () => {
     });
     if (dashboardRef.current && innerToolsRef.current) {
       dashboardRef.current.classList.remove("dashboard-focused");
-      innerToolsRef.current.classList.remove("add-inner");
+      innerToolsRef.current.classList.remove("dark:bg-[#11121c]");
+      innerToolsRef.current.classList.remove("bg-[#F3F4F6]");
     }
   };
 
@@ -129,7 +130,8 @@ const DashboardBot = () => {
       case "dashboard":
         if (dashboardRef.current && innerToolsRef.current) {
           dashboardRef.current.classList.add("dashboard-focused");
-          innerToolsRef.current.classList.add("add-inner");
+          innerToolsRef.current.classList.add("dark:bg-[#11121c]");
+          innerToolsRef.current.classList.add("bg-[#F3F4F6]");
 
           // const topPos = dashboardRef.current.offsetTop;
           // console.log(topPos);
