@@ -18,8 +18,8 @@ const PricingSection = () => {
               </div>
             </div>
           </div>
-          <Zoom duration={1200}>
-            <div className="flex md:flex-row md:justify-center xs:flex-col gap-6 pricing-table pt-6 ">
+          <Zoom duration={1200} className="flex justify-center">
+            <div className=" grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:justify-center self-center xs:flex-col gap-6  pt-6 ">
               {/* <Packages viewOnly={true} /> */}
               <CreditPackages viewOnly={true} />
             </div>

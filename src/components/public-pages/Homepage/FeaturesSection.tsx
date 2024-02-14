@@ -139,12 +139,12 @@ const FeaturesSection = () => {
                         duration={2000}
                         className="flex xs:justify-center md:justify-start"
                       >
-                        <div className="icon md:hidden w-14 h-14 lg:flex lg:flex-shrink-0  align-center justify-center rounded-lg border-[1px] dark:bg-[#1E1F27] text-[#0000ff9c] bg-[#E5E3F7] dark:text-[#e6f85e] dark:border-white border-[#c7bef9] dark:border-opacity-10 border-opacity-25">
+                        <div className="icon hidden xs:flex md:hidden w-14 h-14 lg:flex lg:flex-shrink-0  align-center justify-center rounded-lg border-[1px] dark:bg-[#1E1F27] text-[#0000ff9c] bg-[#E5E3F7] dark:text-[#e6f85e] dark:border-white border-[#c7bef9] dark:border-opacity-10 border-opacity-25">
                           {item.svg}
                         </div>
                         <div className="content">
-                          <h4 className="mb-4 font-semibold xs:flex xs:gap-2 text-xl dark:text-gray-100 text-gray-950 ">
-                            <div className="icon xs:hidden md:flex mb-2 lg:hidden w-14 h-14 md:flex-shrink-0  align-center justify-center rounded-lg border-[1px] dark:bg-[#1E1F27] text-[#0000ff9c] bg-[#E5E3F7] dark:text-[#e6f85e] dark:border-white border-[#c7bef9] dark:border-opacity-10 border-opacity-25">
+                          <h4 className="mb-4 font-semibold xs:flex xs:justify-center xs:gap-2  text-xl dark:text-gray-100 text-gray-950 ">
+                            <div className="icon  xs:hidden  md:flex mb-2 lg:hidden w-14 h-14 md:flex-shrink-0  align-center justify-center rounded-lg border-[1px] dark:bg-[#1E1F27] text-[#0000ff9c] bg-[#E5E3F7] dark:text-[#e6f85e] dark:border-white border-[#c7bef9] dark:border-opacity-10 border-opacity-25">
                               {item.svg}
                             </div>
                             {item.heading}
