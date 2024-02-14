@@ -72,47 +72,52 @@ const ToolsCard = ({
   return (
     <div
       ref={(ref) => getRef(title, ref)}
-      className="lg:w-[32%] flex mb-8 dark:bg-transparent dark:border-none dark:rounded-none rounded-[20px] bg-[#ffffff94] border-[#b6b8b6]  p-3"
+      className="dark:bg-transparent dark:border-none dark:rounded-none rounded-md bg-[#ffffff94] border-[#b6b8b6]"
     >
-      <Link href={link} className="flex text-white no-underline">
-        <div className="mr-4">
+      <Link
+        href={link}
+        className="flex flex-row items-start justify-between gap-2 p-3 text-white no-underline"
+      >
+        <div className="">
           <div
-            className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-[60px] h-[60px] `}
+            className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-12 h-12 `}
           >
             <Image
               width={
                 title !== "Resume Builder" &&
                 title !== "AI Job Finder" &&
                 title !== "ATS Scan Your Resume"
-                  ? 55
-                  : 35
+                  ? 48
+                  : 36
               }
               height={
                 title !== "Resume Builder" &&
                 title !== "AI Job Finder" &&
                 title !== "ATS Scan Your Resume"
-                  ? 55
-                  : 35
+                  ? 48
+                  : 36
               }
-              className="text-white"
+              className="p-1 text-white"
               src={icon}
               alt="Not Found"
             />
           </div>
         </div>
-        <div className="">
-          <h2 className="text-[16px] dark:text-white text-gray-950 font-semibold">
+        <div className="flex flex-col items-start justify-start">
+          <h2 className="text-base font-semibold dark:text-white text-gray-950">
             {title}
           </h2>
-          <p className=" dark:text-[#959595]  text-gray-950 mt-[6px] font-normal text-[14px] pr-2">
+          <p className=" flex-1 dark:text-[#959595]  text-gray-950 mt-[6px] font-normal text-sm ">
             {description}
           </p>
-          <Link
-            href={link}
-            className={`no-underline text-[14px] mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-100 hover:text-gray-950 font-semibold`}
-          >
-            {action} <i className="ml-2">{chevronRight}</i>
-          </Link>
+          <div className="align-bottom ">
+            <Link
+              href={link}
+              className={`no-underline text-sm mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-300 hover:text-gray-950 font-semibold`}
+            >
+              {action} <i className="ml-2">{chevronRight}</i>
+            </Link>
+          </div>
         </div>
       </Link>
     </div>

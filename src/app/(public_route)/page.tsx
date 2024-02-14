@@ -8,7 +8,7 @@ import Reviews from "@/components/public-pages/Homepage/Reviews";
 import RewardsSection from "@/components/public-pages/Homepage/RewardsSection";
 import UseCases from "@/components/public-pages/Homepage/UseCases";
 import FAQList from "@/components/public-pages/Homepage/Faqs";
-import "../plugins.css";
+ 
 
 export const metadata: Metadata = {
   title: "CareerBooster.AI",

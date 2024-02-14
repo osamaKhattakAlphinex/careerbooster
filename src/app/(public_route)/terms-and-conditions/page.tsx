@@ -1,4 +1,4 @@
-import "@/app/plugins.css";
+ 
 
 export default function TermsAndConditionPage() {
   return (

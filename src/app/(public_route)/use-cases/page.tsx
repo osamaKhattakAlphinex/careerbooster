@@ -3,7 +3,7 @@ import FAQList from "@/components/public-pages/Homepage/Faqs";
 import UseCases from "@/components/public-pages/Homepage/UseCases";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
-import "@/app/plugins.css";
+ 
 export const metadata: Metadata = {
   title: "CareerBooster.AI-UseCases",
   description:

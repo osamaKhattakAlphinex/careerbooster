@@ -3,7 +3,7 @@ import Packages from "@/components/dashboard/checkout/Packages";
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import "@/app/plugins.css";
+ 
 
 import CreditPackages from "@/components/dashboard/checkout/CreditPackages";
 export default function SubscribePage() {

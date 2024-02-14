@@ -101,21 +101,21 @@ const FeaturesSection = () => {
     },
   ];
   return (
-    <section className="pb-15 dark:pt-0 pt-8  dark:bg-gray-950 bg-gray-100">
+    <section className="pb-15 px-2 dark:bg-gray-950 bg-gray-100">
       <Fade duration={2000}>
-        <div className="md:container mx-auto">
-          <div className="flex flex-col justify-center text-center mb-18 xs:px-10">
-            <h4 className="mb-5 dark:text-gray-100 text-gray-950 font-bold md:text-[24px] text-[17px]">
+        <div className="mx-auto w-full sm:container xs:max-w-full xs:px-2  ">
+          <div className="flex flex-col justify-center text-center mb-18">
+            <p className="mb-5 dark:text-gray-100  xs:text-base md:text-xl text-gray-950  ">
               Uncover the Secret to Superior Resumes
-            </h4>
-            <h1 className="mb-5  dark:text-gray-100 text-gray-950 font-bold md:text-[40px] text-[24px]">
+            </p>
+            <h1 className="mb-5  dark:text-gray-100 text-gray-950 font-semibold md:text-3xl text-[20px]">
               Why Trust AI for Your Executive Resume?
               <br className="d-none d-lg-block" />
             </h1>
-            <h4 className="mb-0 dark:text-gray-100 text-gray-950 font-bold md:text-[24px] text-[17px]">
+            <h4 className="mb-0 dark:text-gray-100 text-gray-950  md:text-[20px] text-[17px]">
               The Game-Changing Advantages You Never Knew About
             </h4>
-            <p className="py-10 lg:w-[75%] md:w-[75%] xs:w-full mx-auto dark:text-gray-100 text-gray-950 pb-10">
+            <p className="py-10 md:w-[75%] xs:w-full mx-auto dark:text-gray-100 text-gray-950 pb-10">
               In today{"'"}s competitive job market, landing your dream role isn
               {"'"}t just about qualifications and experience; It{"'"}s about
               making sure your resume stands out. But here{"'"}s the catch:
@@ -133,17 +133,23 @@ const FeaturesSection = () => {
                   duration={1200}
                   direction={i % 2 === 0 ? "left" : "right"}
                 >
-                  <div className="flex col-span-1 mb-6 px-4 lg:pt-10 md:pt-10 xs:pt-0">
-                    <div className="flex gap-5">
-                      <Fade duration={2000}>
-                        <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-lg p-2 border-[1px] dark:bg-[#1E1F27] text-[#0000ff9c] bg-[#E5E3F7] dark:text-[#e6f85e] dark:border-white border-[#c7bef9] dark:border-opacity-10 border-opacity-25">
+                  <div className="flex col-span-1 mb-6 lg:px-4 lg:pt-10 md:pt-10 xs:pt-0">
+                    <div className="flex xs:flex-col md:flex-row xs:text-center md:text-start gap-5">
+                      <Fade
+                        duration={2000}
+                        className="flex xs:justify-center md:justify-start"
+                      >
+                        <div className="icon hidden xs:flex md:hidden w-14 h-14 lg:flex lg:flex-shrink-0  align-center justify-center rounded-lg border-[1px] dark:bg-[#1E1F27] text-[#0000ff9c] bg-[#E5E3F7] dark:text-[#e6f85e] dark:border-white border-[#c7bef9] dark:border-opacity-10 border-opacity-25">
                           {item.svg}
                         </div>
                         <div className="content">
-                          <h4 className="mb-4  text-[1.5rem] font-[600] dark:text-gray-100 text-gray-950 ">
+                          <h4 className="mb-4 font-semibold xs:flex xs:justify-center xs:gap-2  text-xl dark:text-gray-100 text-gray-950 ">
+                            <div className="icon  xs:hidden  md:flex mb-2 lg:hidden w-14 h-14 md:flex-shrink-0  align-center justify-center rounded-lg border-[1px] dark:bg-[#1E1F27] text-[#0000ff9c] bg-[#E5E3F7] dark:text-[#e6f85e] dark:border-white border-[#c7bef9] dark:border-opacity-10 border-opacity-25">
+                              {item.svg}
+                            </div>
                             {item.heading}
                           </h4>
-                          <p className="w-md-3quarter pr-lg-5 dark:text-gray-100 text-gray-950">
+                          <p className=" font-normal dark:text-gray-100 text-gray-950">
                             {item.content}
                           </p>
                         </div>
