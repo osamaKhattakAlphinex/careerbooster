@@ -7,7 +7,7 @@ export default function Blog(props: any) {
       <section className="pt-20 pb-10 pt-lg-30 pb-lg-15">
         <div className="container">
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-6 gy-10 gy-lg-16">
-            <div className="col-md-4" data-aos="fade-up-sm" data-aos-delay="50">
+            <div className="col-md-4">
               <div className="blog-card card border-0">
                 <div className="card-header border-0 bg-transparent ratio ratio-6x4 rounded overflow-hidden">
                   <Link href="article.html" className="d-block">

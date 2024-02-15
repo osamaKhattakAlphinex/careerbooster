@@ -78,9 +78,9 @@ const ResumeBuilder = () => {
 
   const { getSummary } = useGetSummary(setStreamedSummaryData);
 
-  const getConsent = (quantifyingExp: boolean) => {
+  const getConsent = () => {
     if (creditsInfoRef.current) {
-      creditsInfoRef.current.openModal(true, quantifyingExp);
+      creditsInfoRef.current.openModal(true);
     }
   };
 

@@ -49,18 +49,18 @@ const HeroArea = () => {
   }, [currentString, currentStringIndex, strings]);
   return (
     <section
-      className={`dark:bg-[url('/assets/images/bg/bg-4.png')] bg-[url('/assets/images/bg/1.jpg')]  style-1   lg:pt-40 md:pt-40 xs:pt-[120px] xs:pb-[80px] pb-15 lg:pb-20 md:pb-20 bg-auto bg-no-repeat bg-center overflow-hidden `}
+      className={`dark:bg-[url('/assets/images/bg/bg-4.png')] bg-[url('/assets/images/bg/1.jpg')] md:pt-40 xs:pt-[120px] xs:pb-[50px] pb-10  md:pb-18 bg-auto bg-no-repeat bg-center overflow-hidden `}
     >
       <Fade duration={2000}>
-        <div className="lg:container mx-auto md:container ">
-          <div className="flex justify-center ">
-            <div className="flex flex-col w-9/12">
+        <div className="mx-auto w-full sm:container xs:max-w-full xs:px-2  ">
+          <div className="flex justify-center px-2">
+            <div className="flex flex-col lg:w-9/12">
               <div className="text-center">
-                <div className="relative z-1 animate-in slide-in duration-300">
-                  <p className=" text-[#0000ff9c] dark:text-[#e6f85e] text-xl ">
+                <div className="relative z-1 animate-in duration-300">
+                  <p className=" text-[#0000ff9c] dark:text-[#e6f85e] xs:text-base md:text-xl ">
                     Unlock Your Career Potential
                   </p>
-                  <h1 className="text-gray-950 dark:text-gray-100 mb-8 md:text-[40px] text-[24px] font-semibold">
+                  <h1 className="text-gray-950 dark:text-gray-100 mb-8 md:text-4xl text-[24px] font-semibold">
                     Your Free AI Resume Writer & LinkedIn Optimization Tool to
                     Turbocharge Your Career!
                     <br />

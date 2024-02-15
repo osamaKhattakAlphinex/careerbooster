@@ -4,30 +4,30 @@ import { Fade } from "react-awesome-reveal";
 
 const RewardsSection = () => {
   return (
-    <section className="dark:bg-gray-950 bg-gray-100 pb-10 xs:pb-0  lg:pt-20 md:pt:20 xs:pt-10">
+    <section className="dark:bg-gray-950 bg-gray-100 pb-10 xs:pb-0  md:pt-14 xs:pt-10">
       <Fade duration={2000}>
-        <div className="flex gap-6 lg:gap-14 xl:gap-20 mx-auto md:container items-center pt-5 w-[100%]">
-          <div className="flex flex-col w-10/12 mx-auto lg:px-[4rem] md:px-[4rem]">
+        <div className="flex gap-6 lg:gap-14 xl:gap-20 mx-auto md:container items-center  w-[100%]">
+          <div className="mx-auto w-full sm:container xs:max-w-full xs:px-2 ">
             <div className="reward-content text-center">
-              <h1 className=" md:text-[40px] text-[24px]  dark:text-gray-100 text-gray-950 font-[600]">
+              <h1 className=" md:text-3xl text-[24px]  dark:text-gray-100 text-gray-950 font-[600]">
                 Get Ready for a $10k Reward - Prove Us Wrong!
               </h1>
-              <h4 className="py-3  px-5 dark:text-gray-100 text-gray-950 font-[600] md:text-[1.5rem] xs:text-[1rem]">
+              <h4 className="py-3  px-2 dark:text-gray-100 text-gray-950 font-normal md:text-xl xs:text-[1rem]">
                 We{"'"}re so confident in our AI tool that we dare you to find a
                 better one. If you do, We{"'"}ll hand you $10,000. Challenge
                 accepted?
               </h4>
-              <h4 className="lg:py-3 md:py-3 xs:py-1  px-5 dark:text-gray-100 text-gray-950 font-[600] md:text-[1.5rem] xs:text-[1rem]">
+              <h4 className="lg:py-3 md:py-3 xs:py-1  px-2 dark:text-gray-100 text-gray-950 font-normal md:text-xl xs:text-[1rem]">
                 Why CareerBooster is better than GPT and Other Tools?
               </h4>
-              <h4 className=" px-5 dark:text-gray-100 text-gray-950 font-[600] md:text-[1.5rem]  xs:text-[1rem]">
+              <h4 className=" px-2 dark:text-gray-100 text-gray-950 font-normal md:text-xl xs:text-[1rem]">
                 At CareerBooster, we understand the value of AI, including GPT,
                 in crafting exceptional resumes. However, here{"'"}s why our AI
                 stands out
               </h4>
             </div>
-            <div className="flex flex-col lg:w-10/12 md:w-10/12 xs:w-full lg:mx-auto md:mx-auto">
-              <ul className="flex flex-col mb-8 xs:mb-4 mt-10 md:px-0 px-5 xs:px-0">
+            <div className="flex flex-col md:w-12/12 xs:w-full  px-2 md:mx-auto">
+              <ul className="flex flex-col mb-8 xs:mb-4 mt-10 md:px-0 px-2 xs:px-0">
                 <li className="flex flex-col text-[20px] mb-5 dark:text-gray-100 text-gray-950">
                   <div className="flex  justify-start items-start gap-6">
                     <div className="w-20 xs:pt-2">
