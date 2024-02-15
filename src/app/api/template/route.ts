@@ -10,16 +10,17 @@ export async function POST(req: any) {
     let browser;
     chromium.setGraphicsMode = false;
 
-    if (process.env.NEXT_APP_STATE === "Development") {
-      browser = await puppeteerDev.launch();
-    } else {
+    // if (process.env.NEXT_APP_STATE === "Development") {
+    //   browser = await puppeteerDev.launch();
+    // } else {
       browser = await puppeteer.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
         executablePath: await chromium.executablePath(),
         headless: chromium.headless,
+        ignoreHTTPSErrors: true,
       });
-    }
+    // }
 
     const page = await browser.newPage();
 
