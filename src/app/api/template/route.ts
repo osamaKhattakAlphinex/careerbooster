@@ -10,9 +10,9 @@ export async function POST(req: any) {
     let browser;
     chromium.setGraphicsMode = false;
 
-    // if (process.env.NEXT_APP_STATE === "Development") {
-    //   browser = await puppeteerDev.launch();
-    // } else {
+    if (process.env.NEXT_APP_STATE === "Development") {
+      browser = await puppeteerDev.launch();
+    } else {
       browser = await puppeteer.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
@@ -20,7 +20,7 @@ export async function POST(req: any) {
         headless: chromium.headless,
         ignoreHTTPSErrors: true,
       });
-    // }
+    }
 
     const page = await browser.newPage();
 
