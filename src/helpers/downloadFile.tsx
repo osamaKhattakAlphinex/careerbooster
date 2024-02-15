@@ -74,7 +74,6 @@ any) => {
         ${html}`;
     }
     setLoading(true);
-    console.log(htmlToDoc);
     await fetch(`/api/template`, {
       method: "POST",
       body: JSON.stringify({
