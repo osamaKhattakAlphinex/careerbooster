@@ -191,8 +191,6 @@ const MonthlySubscriptionCard: React.FC<Props> = ({
         //   userPackage.amount === 0 && data ? "" : ""
         // } `}
         className="col-md-6 col-lg-4"
-        data-aos="fade-up-sm"
-        data-aos-delay="50"
       >
         <div
           className={`p-6 pricing-card px-lg-8 py-lg-8 rounded-4 h-full bg- `}

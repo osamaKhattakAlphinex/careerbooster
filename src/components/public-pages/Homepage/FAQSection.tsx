@@ -6,14 +6,10 @@ const FAQSection = () => {
     <section className="py-10 py-lg-15">
       <Fade duration={2000}>
         <div className="container">
-          <div className="row justify-center mb-18">
+          <div className="justify-center row mb-18">
             <div className="col-lg-10">
               <div className="text-center">
-                <h1
-                  className="mb-0 theme-hero-heading md:text-[48px] text-[24px]"
-                  data-aos="fade-up-sm"
-                  data-aos-delay="50"
-                >
+                <h1 className="mb-0 theme-hero-heading md:text-[48px] text-[24px]">
                   Questions About our Career Booster?
                   <br className="d-none d-md-block" />
                   We have Answers!
@@ -22,14 +18,10 @@ const FAQSection = () => {
             </div>
           </div>
 
-          <div className="row justify-center">
-            <div
-              className="col-lg-8"
-              data-aos="fade-up-sm"
-              data-aos-delay="100"
-            >
+          <div className="justify-center row">
+            <div className="col-lg-8" data-aos-delay="100">
               <div
-                className="accordion accordion-flush d-flex flex-column gap-6"
+                className="gap-6 accordion accordion-flush d-flex flex-column"
                 id="faqAccordion"
               >
                 <div className="accordion-item">
@@ -37,8 +29,6 @@ const FAQSection = () => {
                     <button
                       className="accordion-button"
                       type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#faq-collapseOne"
                       aria-expanded="false"
                       aria-controls="faq-collapseOne"
                     >
@@ -46,11 +36,7 @@ const FAQSection = () => {
                       1. What is CareerBooster?
                     </button>
                   </h2>
-                  <div
-                    id="faq-collapseOne"
-                    className="accordion-collapse show"
-                    // data-bs-parent="#faqAccordion"
-                  >
+                  <div id="faq-collapseOne" className="accordion-collapse show">
                     <div className="accordion-body">
                       CareerBooster is an AI-powered platform designed to
                       enhance your professional presentation and improve your
@@ -66,8 +52,6 @@ const FAQSection = () => {
                     <button
                       className="accordion-button collapsed"
                       type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#faq-collapseTwo"
                       aria-expanded="false"
                       aria-controls="faq-collapseTwo"
                     >
@@ -78,7 +62,6 @@ const FAQSection = () => {
                   <div
                     id="faq-collapseTwo"
                     className="accordion-collapse collapse"
-                    data-bs-parent="#faqAccordion"
                   >
                     <div className="accordion-body">
                       CareerBooster uses advanced AI algorithms to analyze your
@@ -96,8 +79,6 @@ const FAQSection = () => {
                     <button
                       className="accordion-button collapsed"
                       type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#faq-collapseThree"
                       aria-expanded="false"
                       aria-controls="faq-collapseThree"
                     >
@@ -108,7 +89,6 @@ const FAQSection = () => {
                   <div
                     id="faq-collapseThree"
                     className="accordion-collapse collapse"
-                    data-bs-parent="#faqAccordion"
                   >
                     <div className="accordion-body">
                       CareerBooster stands out because It{"'"}s specifically
@@ -125,8 +105,6 @@ const FAQSection = () => {
                     <button
                       className="accordion-button collapsed"
                       type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#faq-collapseFour"
                       aria-expanded="false"
                       aria-controls="faq-collapseFour"
                     >
@@ -138,7 +116,6 @@ const FAQSection = () => {
                   <div
                     id="faq-collapseFour"
                     className="accordion-collapse collapse"
-                    data-bs-parent="#faqAccordion"
                   >
                     <div className="accordion-body">
                       Yes, CareerBooster is designed to be versatile and
@@ -154,8 +131,6 @@ const FAQSection = () => {
                     <button
                       className="accordion-button collapsed"
                       type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#faq-collapseFive"
                       aria-expanded="false"
                       aria-controls="faq-collapseFive"
                     >
@@ -166,7 +141,6 @@ const FAQSection = () => {
                   <div
                     id="faq-collapseFive"
                     className="accordion-collapse collapse"
-                    data-bs-parent="#faqAccordion"
                   >
                     <div className="accordion-body">
                       Yes, we offer a free package that includes services like
@@ -181,14 +155,10 @@ const FAQSection = () => {
           </div>
         </div>
         <div className="container">
-          <div className="row justify-center">
-            <div
-              className="col-lg-8"
-              data-aos="fade-up-sm"
-              data-aos-delay="100"
-            >
+          <div className="justify-center row">
+            <div className="col-lg-8" data-aos-delay="100">
               <div
-                className="accordion accordion-flush d-flex flex-column gap-6"
+                className="gap-6 accordion accordion-flush d-flex flex-column"
                 id="faqAccordion"
               >
                 <div className="accordion-item">
@@ -196,8 +166,6 @@ const FAQSection = () => {
                     <button
                       className="accordion-button collapsed"
                       type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#faq-collapseTwo"
                       aria-expanded="false"
                       aria-controls="faq-collapseTwo"
                     >
@@ -208,7 +176,6 @@ const FAQSection = () => {
                   <div
                     id="faq-collapseTwo"
                     className="accordion-collapse collapse"
-                    data-bs-parent="#faqAccordion"
                   >
                     <div className="accordion-body">
                       We take data security seriously. Your personal and
@@ -224,8 +191,6 @@ const FAQSection = () => {
                     <button
                       className="accordion-button collapsed"
                       type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#faq-collapseTwo"
                       aria-expanded="false"
                       aria-controls="faq-collapseTwo"
                     >
@@ -236,7 +201,6 @@ const FAQSection = () => {
                   <div
                     id="faq-collapseTwo"
                     className="accordion-collapse collapse"
-                    data-bs-parent="#faqAccordion"
                   >
                     <div className="accordion-body">
                       Our premium packages offer additional benefits, such as
@@ -254,8 +218,6 @@ const FAQSection = () => {
                     <button
                       className="accordion-button collapsed"
                       type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#faq-collapseThree"
                       aria-expanded="false"
                       aria-controls="faq-collapseThree"
                     >
@@ -266,7 +228,6 @@ const FAQSection = () => {
                   <div
                     id="faq-collapseThree"
                     className="accordion-collapse collapse"
-                    data-bs-parent="#faqAccordion"
                   >
                     <div className="accordion-body">
                       The frequency of service usage depends on your chosen
@@ -282,8 +243,6 @@ const FAQSection = () => {
                     <button
                       className="accordion-button collapsed"
                       type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#faq-collapseFour"
                       aria-expanded="false"
                       aria-controls="faq-collapseFour"
                     >
@@ -295,7 +254,6 @@ const FAQSection = () => {
                   <div
                     id="faq-collapseFour"
                     className="accordion-collapse collapse"
-                    data-bs-parent="#faqAccordion"
                   >
                     <div className="accordion-body">
                       Yes, CareerBooster is designed to assist job seekers
@@ -311,8 +269,6 @@ const FAQSection = () => {
                     <button
                       className="accordion-button collapsed"
                       type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#faq-collapseFive"
                       aria-expanded="false"
                       aria-controls="faq-collapseFive"
                     >
@@ -324,7 +280,6 @@ const FAQSection = () => {
                   <div
                     id="faq-collapseFive"
                     className="accordion-collapse collapse"
-                    data-bs-parent="#faqAccordion"
                   >
                     <div className="accordion-body">
                       No, CareerBooster is designed to be user-friendly and

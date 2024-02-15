@@ -154,7 +154,7 @@ const TeamCard = () => {
               </ul>
             </div>
           </div>
-          {/* <div className="col" data-aos="fade-up-sm" data-aos-delay="150">
+          {/* <div className="col"  data-aos-delay="150">
             <div className="team-card text-center">
               <Image
                 width={200}
@@ -217,7 +217,7 @@ const TeamCard = () => {
               </ul>
             </div>
           </div>
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="200">
+          <div className="col"  data-aos-delay="200">
             <div className="team-card text-center">
               <Image
                 width={200}
@@ -280,7 +280,7 @@ const TeamCard = () => {
               </ul>
             </div>
           </div>
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="150">
+          <div className="col"  data-aos-delay="150">
             <div className="team-card text-center">
               <Image
                 width={200}
@@ -343,7 +343,7 @@ const TeamCard = () => {
               </ul>
             </div>
           </div>
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="200">
+          <div className="col"  data-aos-delay="200">
             <div className="team-card text-center">
               <Image
                 width={200}
