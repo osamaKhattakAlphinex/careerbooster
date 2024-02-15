@@ -43,11 +43,7 @@ export default async function SubscribedPage(props: Props) {
               <div className="row justify-center">
                 <div className="col-lg-10">
                   <div className="text-center ">
-                    <h1
-                      className="text-white text-4xl"
-                      data-aos="fade-up-sm"
-                      data-aos-delay="100"
-                    >
+                    <h1 className="text-white text-4xl" data-aos-delay="100">
                       Thanks for your Subscription <br />
                       {customer.metadata.name}
                     </h1>
