@@ -4,6 +4,8 @@ import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/dashboard/resume-templates/templates/template_1";
 import { useDispatch, useSelector } from "react-redux";
 import { WorkExperience, setUserData } from "@/store/userDataSlice";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
 import {
   setBasicInfo,
   setWorkExperience,
@@ -333,7 +335,6 @@ const ResumeBuilder = () => {
       });
     }
   }, [userData]);
-
   return (
     <>
       <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} />
@@ -389,52 +390,86 @@ const ResumeBuilder = () => {
                   </div>
                 </Link>
               </div>
-              <div className="flex flex-wrap items-center justify-center gap-4 pl-5">
-                {ALL_TEMPLATES.slice(0, 6).map((template, index) => {
-                  if (!template.active) return "";
-                  return (
-                    <div
-                      key={`template-${index}`}
-                      className="box-border relative flex items-center overflow-hidden rounded-lg group "
-                    >
-                      {/* {template.category === "premium" && (
-                      <div className="absolute grid w-6 h-6 bg-yellow-600 rounded-full right-1 top-1 place-content-center">
-                        {crownIcon}
-                      </div>
-                    )} */}
-                      <Link
-                        className="no-underline"
-                        href={{
-                          pathname: "resume-builder/templates/template",
-                          query: { templateId: template.id },
-                        }}
-                      >
-                        <div className="absolute top-0 left-0 hidden w-full h-full overflow-hidden text-white rounded-lg group-hover:grid bg-slate-600/60 place-content-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-8 h-8"
+              <div className="flex flex-wrap items-center justify-center gap-4 ">
+                <Swiper
+                  slidesPerView={5}
+                  spaceBetween={10}
+                  rewind={true}
+                  speed={1200}
+                  navigation={true}
+                  autoplay={{ delay: 8500, disableOnInteraction: false }}
+                  modules={[Autoplay, Navigation]}
+                  className=""
+                  loop={true}
+                  breakpoints={{
+                    0: {
+                      slidesPerView: 2,
+                    },
+                    425: {
+                      slidesPerView: 3,
+                    },
+                    640: {
+                      slidesPerView: 4,
+                    },
+                    768: {
+                      slidesPerView: 5,
+                    },
+                    1080: {
+                      slidesPerView: 6,
+                    },
+                    1280: {
+                      slidesPerView: 6,
+                    },
+                  }}
+                >
+                  {ALL_TEMPLATES.filter((template) => template.active)
+                    .slice(0, 6)
+                    .map((template, index) => (
+                      <SwiperSlide key={`template-${index}`}>
+                        <div
+                          key={`template-${index}`}
+                          className="box-border relative flex items-center overflow-hidden rounded-lg group"
+                        >
+                          {/* {template.category === "premium" && (
+        <div className="absolute grid w-6 h-6 bg-yellow-600 rounded-full right-1 top-1 place-content-center">
+          {crownIcon}
+        </div>
+      )} */}
+                          <Link
+                            className="no-underline"
+                            href={{
+                              pathname: "resume-builder/templates/template",
+                              query: { templateId: template.id },
+                            }}
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
+                            <div className="absolute top-0 left-0 hidden w-full h-full overflow-hidden text-white rounded-lg group-hover:grid bg-slate-600/60 place-content-center">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-8 h-8"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
+                                />
+                              </svg>
+                            </div>
+                            <Image
+                              src={template.preview}
+                              alt={`template-${index}`}
+                              height={200}
+                              width={150}
+                              className=" rounded-lg"
                             />
-                          </svg>
+                          </Link>
                         </div>
-                        <Image
-                          src={template.preview}
-                          alt={`template-${index}`}
-                          height={200}
-                          width={150}
-                        />
-                      </Link>
-                    </div>
-                  );
-                })}
+                      </SwiperSlide>
+                    ))}
+                </Swiper>
               </div>
             </div>
           )}
