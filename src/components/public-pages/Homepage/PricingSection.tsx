@@ -1,7 +1,9 @@
 "use client";
 import CreditPackages from "@/components/dashboard/checkout/CreditPackages";
 import { Fade, Zoom } from "react-awesome-reveal";
+import { useSelector } from "react-redux";
 const PricingSection = () => {
+  const userData = useSelector((state: any) => state.userData);
   return (
     <section className="py-4 lg:py-15 dark:bg-gray-950 bg-gray-100 ">
       <Fade duration={2000}>
@@ -19,8 +21,11 @@ const PricingSection = () => {
             </div>
           </div>
           <Zoom duration={1200} className="flex justify-center">
-            <div className=" grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:justify-center self-center xs:flex-col gap-6  pt-6 ">
-              {/* <Packages viewOnly={true} /> */}
+            <div
+              className={`grid grid-cols-1 md:grid-cols-2 ${
+                userData.creditPackage ? "lg:grid-cols-2" : "lg:grid-cols-3"
+              } w-fit xs:flex-col gap-6 pt-6`}
+            >
               <CreditPackages viewOnly={true} />
             </div>
           </Zoom>

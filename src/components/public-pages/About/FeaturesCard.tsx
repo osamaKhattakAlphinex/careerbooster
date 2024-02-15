@@ -5,11 +5,7 @@ const FeaturesCard = () => {
     <section className="py-10 py-lg-15">
       <div className="container">
         <div className="text-center mb-18">
-          <h2
-            className="text-white mb-0"
-            data-aos="fade-up-sm"
-            data-aos-delay="50"
-          >
+          <h2 className="text-white mb-0">
             Generate Creative AI Copy On-The-Spot,
             <br className="d-none d-lg-block" />
             Across Your Favorite Tools
@@ -17,7 +13,7 @@ const FeaturesCard = () => {
         </div>
 
         <div className="row row-cols-1 row-cols-lg-3 g-6 g-xl-14">
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="50">
+          <div className="col">
             <div className="d-flex flex-column gap-6 flex-lg-row">
               <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
                 <svg
@@ -46,7 +42,7 @@ const FeaturesCard = () => {
               </div>
             </div>
           </div>
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="100">
+          <div className="col" data-aos-delay="100">
             <div className="d-flex flex-column gap-6 flex-lg-row">
               <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
                 <svg
@@ -75,7 +71,7 @@ const FeaturesCard = () => {
               </div>
             </div>
           </div>
-          <div className="col" data-aos="fade-up-sm" data-aos-delay="150">
+          <div className="col" data-aos-delay="150">
             <div className="d-flex flex-column gap-6 flex-lg-row">
               <div className="icon w-14 h-14 flex-shrink-0 d-flex align-center justify-center rounded-3 p-2 border-[1px] bg-gradient-3 text-primary-dark border-white border-opacity-10">
                 <svg
@@ -107,11 +103,7 @@ const FeaturesCard = () => {
           </div>
         </div>
 
-        <div
-          className="video-popup-container position-relative"
-          data-aos="fade-up-sm"
-          data-aos-delay="50"
-        >
+        <div className="video-popup-container position-relative">
           <div className="ratio ratio-16x9 rounded-4 overflow-hidden mt-16">
             <Image
               src="assets/images/thumbnails/video-thumb.jpg"

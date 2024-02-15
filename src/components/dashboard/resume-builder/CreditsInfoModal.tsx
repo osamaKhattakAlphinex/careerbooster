@@ -1,5 +1,6 @@
 /* eslint-disable react/display-name */
 "use client";
+import { infoSmallIcon } from "@/helpers/iconsProvider";
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -12,11 +13,10 @@ const CreditInfoModal = forwardRef(
     const [openCreditInfoModal, setOpenCreditInfoModal] =
       useState<boolean>(false);
     const [quantifyingExperience, setQuantifyingExperience] =
-      useState<boolean>(true);
+      useState<boolean>(false);
 
-    const openModal = (open: boolean, quantifyingExp: boolean) => {
+    const openModal = (open: boolean) => {
       setOpenCreditInfoModal(open);
-      setQuantifyingExperience(quantifyingExp);
     };
 
     useImperativeHandle(ref, () => ({
@@ -38,11 +38,17 @@ const CreditInfoModal = forwardRef(
           openCreditInfoModal ? "flex" : "hidden"
         }`}
       >
-        <div className="rounded relative p-8 w-full max-w-xl max-h-full shadow-md dark:bg-gray-800 bg-gray-300">
+        <div className="relative w-full max-w-xl max-h-full p-8 bg-gray-300 rounded shadow-md dark:bg-gray-800">
           {/* <div className="relative p-4 text-center rounded-lg shadow sm:p-5"> */}
-          <h1 className="text-xl font-bold dark:text-white text-center text-gray-950">
-            Credits Usage Info
+          <h1 className="text-lg font-bold text-center dark:text-white text-gray-950">
+            {/* Credits Usage Info */}
+            Quanitifying Experience
           </h1>
+          <p className="my-4 text-sm">
+            Quantifying experiences refers to assigning numerical or measurable
+            values to experiences or achievements to make them more tangible or
+            comparable.
+          </p>
 
           <button
             onClick={() => setOpenCreditInfoModal(false)}
@@ -67,44 +73,70 @@ const CreditInfoModal = forwardRef(
           </button>
           {/* </div> */}
 
-          <ul className=" list-decimal px-4 py-6">
-            <li className=" py-1 px-3 text-sm">
+          {/* <ul className="px-4 py-6 list-decimal ">
+            <li className="px-3 py-1 text-sm ">
               You will be cost <strong>{creditLimits.resume_basicInfo}</strong>{" "}
               credits for Basic Info and Job Title Generation.
             </li>
-            <li className=" py-1 px-3 text-sm">
+            <li className="px-3 py-1 text-sm ">
               You will be cost <strong>{creditLimits.resume_skills}</strong>{" "}
               credits for Skills Generation.
             </li>
-            <li className=" py-1 px-3 text-sm">
+            <li className="px-3 py-1 text-sm ">
               You will be cost{" "}
               <strong>{creditLimits.resume_summary_generation}</strong> credits
               for Summary Generation.
             </li>
-            <li className="py-1 px-3 text-sm">
+            <li className="px-3 py-1 text-sm">
               You will be cost{" "}
               <strong>{creditLimits.resume_individualWorkExperience}</strong>{" "}
               credits for Individual Work Experience.
             </li>
-          </ul>
-          <div className=" flex flex-col justify-center items-center space-y-2">
-            <div className="w-full text-center">
+          </ul> */}
+
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              checked={quantifyingExperience}
+              onChange={(e) => setQuantifyingExperience(e.target.checked)}
+              className="sr-only peer"
+            />
+            <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full  after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-none peer-checked:bg-blue-600"></div>
+            <span className="text-sm font-medium text-gray-900 ms-3 dark:text-gray-300">
+              Quantifying Experiences
+            </span>
+            {/* <span className="relative ml-2 text-gray-600 cursor-pointer group">
+              {infoSmallIcon}
+              <div
+                role="tooltip"
+                className="absolute hidden w-48 p-2 text-xs text-gray-100 transform -translate-x-1/2 bg-gray-600 rounded-md md:-top-6 xs:top-0 xs:left-0 md:left-28 group-hover:block"
+              >
+                Quantifying experiences refers to assigning numerical or
+                measurable values to experiences or achievements to make them
+                more tangible or comparable.
+                <div className="tooltip-arrow" data-popper-arrow></div>
+              </div>
+            </span> */}
+          </label>
+
+          <div className="flex flex-col items-center justify-center space-y-2 ">
+            {/* <div className="w-full text-center">
               <strong>Are you sure you want to continue?</strong>
-            </div>
+            </div> */}
             <div className="flex justify-end gap-4 mt-4">
               <button
                 onClick={handleOk}
-                className="bg-blue-600 p-2 rounded text-sm  text-white"
+                className="p-2 text-sm text-white bg-blue-600 rounded"
               >
-                Yes, Continue
+                Generate
               </button>
               <button
-                className="bg-red-600 p-2 rounded text-sm  text-white"
+                className="p-2 text-sm text-white bg-red-600 rounded"
                 onClick={() => {
                   setOpenCreditInfoModal(false);
                 }}
               >
-                No, Cancel
+                Cancel
               </button>
             </div>
           </div>

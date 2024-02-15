@@ -83,7 +83,7 @@ const LinkedInToolMain = () => {
   useEffect(() => {
     if (uploadComplete && fileUploading && text !== "") {
       saveToLocalStorage(text, fileName);
-      router.push(`/linkedin/result`);
+      // router.push(`/linkedin/result`);
     }
   }, [fileUploading, uploadComplete, text]);
   useEffect(() => {

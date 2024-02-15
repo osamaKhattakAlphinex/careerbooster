@@ -1,7 +1,7 @@
 //v1.1
 "use client";
 import Image from "next/image";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "@/app/(private_route)/dashboard.css";
 import { useTourContext } from "@/context/TourContext";
 interface TooltipProps {
@@ -55,6 +55,7 @@ const DashboardBot = () => {
     reviewElementRef,
     finderElementRef,
     atsElementRef,
+    contentScrollRef,
   } = useTourContext();
   const componentRefs = [
     resumeElementRef,
@@ -67,27 +68,7 @@ const DashboardBot = () => {
     finderElementRef,
     atsElementRef,
   ];
-
-  const [isOnScreen, setIsOnScreen] = useState(false);
-  const [currentPlayingRef, setCurrentPlayingRef] = useState<any>(null);
-  const observerRef = useRef<any>(null);
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(([entry]) =>
-      setIsOnScreen(entry.isIntersecting)
-    );
-  }, []);
-  useEffect(() => {
-    if (currentPlayingRef !== null) {
-      observerRef.current.observe(currentPlayingRef.current);
-    }
-
-    return () => {
-      observerRef.current.disconnect();
-    };
-  }, [currentPlayingRef]);
-  const useOnScreen = (ref: any) => {
-    setCurrentPlayingRef(ref);
-  };
+  
 
   const removeStyles = () => {
     componentRefs.map((componentRef) => {
@@ -132,20 +113,7 @@ const DashboardBot = () => {
           dashboardRef.current.classList.add("dashboard-focused");
           innerToolsRef.current.classList.add("dark:bg-[#11121c]");
           innerToolsRef.current.classList.add("bg-[#F3F4F6]");
-
-          // const topPos = dashboardRef.current.offsetTop;
-          // console.log(topPos);
-          // console.log(window.pageYOffset);
-          // window.scrollTo({
-          //   top: 84,
-          //   behavior: "smooth",
-          // });
-          // console.log(dashboardRef.current.offsetTop);
-          // dashboardRef.current.scrollIntoView({
-          //   behavior: "smooth",
-          // });
-          // console.log(window.screenX, dashboardRef.current.offsetTop);
-          // console.log(dashboardRef.current);
+        
         }
         break;
       case "resume":
