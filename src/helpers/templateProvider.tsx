@@ -39,7 +39,7 @@ export const ALL_TEMPLATES: Template[] = [
   },
   {
     id: 2,
-    active: true,
+    active: false,
     title: "classic-executive",
     tags: ["classic-executive"],
     category: "premium",
@@ -58,7 +58,7 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 4,
     title: "",
-    active: true,
+    active: false,
     tags: ["classic-executive"],
     category: "premium",
     preview: "/assets/images/templates/resume-5.png",
@@ -76,7 +76,7 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 6,
     title: "",
-    active: true,
+    active: false,
     tags: ["classic-executive"],
     category: "premium",
     preview: "/assets/images/templates/resume-7.png",
@@ -112,7 +112,7 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 10,
     title: "",
-    active: true,
+    active: false,
     tags: ["creative-colorful"],
     category: "premium",
     preview: "/assets/images/templates/resume-11.png",
@@ -121,7 +121,7 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 11,
     title: "",
-    active: true,
+    active: false,
     tags: ["creative-colorful"],
     category: "premium",
     preview: "/assets/images/templates/resume-12.png",
@@ -166,7 +166,7 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 16,
     title: "",
-    active: true,
+    active: false,
     tags: ["creative-colorful"],
     category: "premium",
     preview: "/assets/images/templates/resume-17.png",
@@ -175,7 +175,7 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 17,
     title: "",
-    active: true,
+    active: false,
     tags: ["one-page"],
     category: "premium",
     preview: "/assets/images/templates/resume-18.png",
@@ -184,7 +184,7 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 18,
     title: "",
-    active: true,
+    active: false,
     tags: ["one-page"],
     category: "premium",
     preview: "/assets/images/templates/resume-19.png",
