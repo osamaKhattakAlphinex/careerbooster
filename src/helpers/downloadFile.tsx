@@ -113,7 +113,7 @@ any) => {
           }}
         >
           <div>{icon}</div>
-          {preview ? "Preview " : loading ? "Downloading..." : "Download"}
+          {preview ? "Print Preview " : loading ? "Downloading..." : "Download"}
         </button>
       </div>
     </>

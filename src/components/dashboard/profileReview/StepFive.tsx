@@ -191,7 +191,7 @@ const StepFive = () => {
           </svg>
           <p>
             Don{"'"}t see all your Work Experience? <br />{" "}
-            <button
+            {/* <button
               type="button"
               className="font-bold text-blue-950 "
               onClick={() => {
@@ -201,8 +201,8 @@ const StepFive = () => {
             >
               {" "}
               Click here{" "}
-            </button>{" "}
-            to refetch Experience List from your Resume.
+            </button>{" "} */}
+            You can add missing experiences manually to get better results.
           </p>
         </div>
       )}
@@ -215,18 +215,10 @@ const StepFive = () => {
         <>
           <h1 className="text-lg xs:my-5 justify-between items-center flex md:mt-2  font-bold leading-tight tracking-tight  md:text-2xl dark:text-gray-100 text-gray-950 ">
             Work Experience
-            <button
-              type="button"
-              onClick={(e) => dispatch(setStepFive({ state: "add" }))}
-              className="text-xs float-right flex flex-row gap-1 items-center font-normal hover:font-extrabold"
-            >
-              {plusSimpleIcon}
-              Add New Experience
-            </button>
           </h1>
 
           {list.length === 0 && <p>No Experiences Found</p>}
-          <div className="w-[100%] grid grid-cols-2 gap-4">
+          <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
             {list.map((rec: WorkExperience) => (
               <div key={rec.id}>
                 <ExperienceCard rec={rec} />
@@ -239,7 +231,7 @@ const StepFive = () => {
             className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
           >
             {plusSimpleIcon}
-            Add New Experience
+            Add Experience
           </button>
         </>
       )}
