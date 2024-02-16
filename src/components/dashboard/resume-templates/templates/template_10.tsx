@@ -75,7 +75,7 @@ const ResumeTemplate10 = () => {
 
   return (
     <div className="first-page relative">
-      <div className="flex flex-row absolute top-[50px] h-36 z-10  bg-[#043382] items-center justify-center    w-full ">
+      <div className="flex flex-row absolute top-[30px] h-28 z-10  bg-[#043382] items-center justify-center    w-full ">
         {/* <div className="  z-50 w-40 h-40 xs:w-[120px] xs:h-[80px] sm:w-[120px] sm:h-[80px] border-2 border-[#042B6B] md:w-48 md:h-48 lg:w-48 lg:h-48  text-white bg-gray-800 text-center flex justify-center   rounded-full mx-4  md:mt-0 md:mr-8 items-center ">
           <span className="text-4xl md:text-3xl  hover:shadow-md hover:bg-gray-500">
             <EditableField
@@ -117,9 +117,9 @@ const ResumeTemplate10 = () => {
       </div>
       <div className=" flex">
         {/* sidebar */}
-        <div className="z-5    w-5/12  flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6 bg-gray-950 text-gray-100  pr-6  pb-8  pt-[240px] xs:pt-[240] h-[1080px] xs:h-auto">
+        <div className="z-5    xs:w-4/12 w-3.5/12 flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6 bg-gray-950 text-gray-100  pr-6  pb-8  pt-[160px]  h-[1080px] xs:h-auto">
           {/* contacts */}
-          <div className="rounded-3xl border-2 border-blue-900 py-2 flex justify-center ">
+          <div className="rounded-3xl border-2 border-blue-900 xs:py-2 py-[6px] flex justify-center ">
             <h3 className="uppercase text-[16px] text-center mb-0 xs:text-sm sm:text-sm md:text-md lg:text-[16px] font-semibold flex flex-row gap-2 items-center">
               Contact
             </h3>
@@ -221,7 +221,7 @@ const ResumeTemplate10 = () => {
 
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
-              <div className="rounded-3xl border-2 border-blue-900 p-2 my-3  flex justify-center">
+              <div className="rounded-3xl border-2 border-blue-900 xs:py-2 py-[6px] my-3  flex justify-center">
                 <h3 className="uppercase text-[16px] mb-0 xs:text-sm sm:text-sm md:text-md lg:text-[16px] font-semibold flex flex-row gap-2 items-center ">
                   Skills
                 </h3>
@@ -310,7 +310,7 @@ const ResumeTemplate10 = () => {
             </>
           )}
         </div>
-        <div className="w-full flex flex-wrap flex-col px-4 sm:px-2 xs:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[210px] xs:pt-[210px]">
+        <div className="w-full flex flex-wrap flex-col px-4 sm:px-2 xs:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[140px] ">
           {/* Executive Summary */}
           <div className="rounded-3xl xs:-mx-1 md:mx-0 bg-blue-900 py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-[230px] xs:w-auto md:w-[230px] lg:w-[230px]">
             <h3 className="uppercase text-[16px] mb-0 font-semibold text-gray-100 xs:text-sm sm:text-sm md:text-md lg:text-[16px]">
@@ -367,7 +367,7 @@ const ResumeTemplate10 = () => {
                       key={i}
                       className={`flex justify-start items-start ${
                         i > 0
-                          ? " ml-[-200px] xs:ml-0 "
+                          ? " ml-[-170px] xs:ml-0 "
                           : "xs:min-h-fit min-h-[340px]"
                       }`}
                     >

@@ -71,7 +71,7 @@ const ResumeTemplate6 = () => {
 
   return (
     <div className=" text-gray-900  flex flex-row">
-      <div className=" flex  w-[8%] bg-[#e04127]"></div>
+      <div className=" flex  w-[5%] bg-[#e04127]"></div>
       <div className="w-full pl-5">
         <div className="flex flex-col w-12/12 p-8">
           <h2 className="text-2xl font-bold xs:text-xl md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100">
