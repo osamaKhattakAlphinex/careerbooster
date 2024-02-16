@@ -22,7 +22,8 @@ const UpdateCreditPackage = ({ customer }: any) => {
         `/api/users/getCreditLimits/?email=${userData.email}`
       );
       const response = await res.json();
-      const userCurrentCredits = response.result;
+      const userCurrentCredits = response.result.userCredits;
+      const userCurrentTotalCredits = response.result.totalCtredits;
 
       const creditPackage = await getCreditPackageDetails(customer.packageId);
 
@@ -33,6 +34,10 @@ const UpdateCreditPackage = ({ customer }: any) => {
           userCredits:
             (userCurrentCredits ? userCurrentCredits : 0) +
             creditPackage.totalCredits,
+          totalCredits:
+            (userCurrentTotalCredits ? userCurrentTotalCredits : 0) +
+            creditPackage.totalCredits,
+            
         };
 
         // TODO!! move this code to backeND

@@ -37,7 +37,10 @@ export async function GET(req: any) {
     } else {
       return NextResponse.json(
         {
-          result: user.userCredits,
+          result: {
+  userCredits:user.userCredits,
+  totalCredits:user.totalCredits        
+          },
           success: true,
         },
         { status: 200 }

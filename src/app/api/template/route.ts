@@ -8,7 +8,7 @@ export async function POST(req: any) {
     const html = data.htmlToDoc;
     // console.log(html);
     let browser;
-    chromium.setGraphicsMode = false;
+
 
     if (process.env.NEXT_APP_STATE === "Development") {
       browser = await puppeteerDev.launch();
