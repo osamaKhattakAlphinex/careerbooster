@@ -308,19 +308,16 @@ const RegistrationForm = () => {
               height={40}
             /> */}
           </a>
-          <h3 className="pb-4 font-semibold text-lg md:text-2xl lg:text-[2rem] dark:text-gray-100 text-gray-950">
+          <h3 className=" font-semibold  text-lg md:text-2xl lg:text-[2rem] dark:text-gray-100 text-gray-950">
             Register your Account
           </h3>
 
-          <form
-            className="flex flex-col  md:gap-4"
-            onSubmit={formik.handleSubmit}
-          >
-            <div className={`upload-resume-btn mt-5 mb-10`}>
+          <form className="flex flex-col my-2" onSubmit={formik.handleSubmit}>
+            <div className={`mb-5`}>
               {!params?.get("file") && (
                 <>
                   {!isAuth && data === null && !content && (
-                    <label className="items-center gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg w-auto px-[2rem] py-[1rem] text-[1.125rem] font-medium mt-4  aos-animate">
+                    <label className="flex justify-center md:my-6">
                       <input
                         className="hidden"
                         type="file"
@@ -329,9 +326,15 @@ const RegistrationForm = () => {
                           handleFileChange(e);
                         }}
                       />
-                      {fileUploading
-                        ? refreshIconRotating
-                        : "Upload Your Existing Resume"}
+                      {fileUploading ? (
+                        <div className="flex w-fit  justify-center items-center cursor-pointer gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-3 rounded-lg  mx-auto">
+                          {refreshIconRotating}
+                        </div>
+                      ) : (
+                        <div className="items-center w-fit xs:scale-75 md:scale-100 gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg text-[1.125rem] font-medium ">
+                          Upload Your Existing Resume
+                        </div>
+                      )}
                     </label>
                   )}
                   {file !== null && file.type === "application/pdf" ? (
@@ -355,7 +358,7 @@ const RegistrationForm = () => {
                       />
                     )
                   )}
-                  <p className="dark:text-gray-100 text-gray-950 mt-8 text-sm">
+                  <p className="dark:text-gray-100 text-gray-950 mt-2 text-sm">
                     Your existing resume forms the basis for your new one,
                     eliminating manual data entry.
                   </p>
@@ -367,7 +370,7 @@ const RegistrationForm = () => {
                 </>
               )}
             </div>
-            <div className="text-start mb-4">
+            <div className="text-start mb-2">
               <div className="flex flex-wrap relative items-stretch  w-full">
                 <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
                   <svg
@@ -407,7 +410,7 @@ const RegistrationForm = () => {
                 </p>
               )}
             </div>
-            <div className="text-start my-4">
+            <div className="text-start my-2">
               <div className="flex flex-wrap relative items-stretch  w-full ">
                 <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
                   <svg
@@ -447,7 +450,7 @@ const RegistrationForm = () => {
                 </p>
               )}
             </div>
-            <div className="text-start my-4">
+            <div className="text-start my-2">
               <div className="flex flex-wrap relative items-stretch  w-full">
                 <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
                   <svg
@@ -488,7 +491,7 @@ const RegistrationForm = () => {
                 </p>
               )}
             </div>
-            <div className="text-start my-4">
+            <div className="text-start my-2">
               <div className="flex flex-wrap relative items-stretch  w-full">
                 <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
                   <svg
@@ -528,7 +531,7 @@ const RegistrationForm = () => {
                 </p>
               )}
             </div>
-            <div className="text-start my-4">
+            <div className="text-start my-2">
               <div className="flex flex-wrap relative items-stretch  w-full">
                 <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
                   <svg

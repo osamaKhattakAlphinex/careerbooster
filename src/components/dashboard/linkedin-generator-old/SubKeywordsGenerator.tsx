@@ -257,7 +257,7 @@ const SubKeywordsGenerator = () => {
                   width={18}
                 />
                 <span
-                  className="text-white ml-3 text-[15px] font-semibold"
+                  className="text-white ml-3 text-[15px] font-semibold whitespace-nowrap"
                   // className={`text-black text-[15px] font-semibold`}
                 >
                   {/* Upgrade Plan */}

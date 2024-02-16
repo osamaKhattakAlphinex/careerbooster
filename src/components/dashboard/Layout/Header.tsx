@@ -48,7 +48,13 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
       `}
     >
       <div className="w-full rounded-lg flex justify-between sm:justify-between items-center">
-        <h1 className="headText mb-0 rounded-[14px] text-[14px] dark:text-white text-gray-950 font-bold uppercase">
+        <h1
+          className={` mb-0   ${
+            pathname === "/subscribe"
+              ? " w-full flex justify-center "
+              : "headText"
+          }  justify-center rounded-[14px] text-[14px] dark:text-white text-gray-950 font-bold uppercase`}
+        >
           {currentRouteDisplayName}
         </h1>
         <div className="flex">
@@ -60,7 +66,11 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
           >
             {bellIcon}
           </button> */}
-          <div className="flex justify-center items-center h-[40px] ">
+          <div
+            className={`flex justify-center items-center  h-[40px] ${
+              pathname === "/subscribe" && "hidden"
+            }`}
+          >
             <ThemeChanger />
           </div>
         </div>

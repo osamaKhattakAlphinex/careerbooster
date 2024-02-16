@@ -3,14 +3,14 @@ import Packages from "@/components/dashboard/checkout/Packages";
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
- 
 
 import CreditPackages from "@/components/dashboard/checkout/CreditPackages";
+import { useSelector } from "react-redux";
 export default function SubscribePage() {
   const [showExpiredAlert, setShowExpiredAlert] = useState(false);
   // check if there is ?expired=1 in the URL
   const params = useSearchParams();
-
+  const userData = useSelector((state: any) => state.userData);
   useEffect(() => {
     const expired = params?.get("expired");
     if (expired) {
@@ -20,10 +20,10 @@ export default function SubscribePage() {
 
   return (
     <>
-      <div className="ml-0 px-[15px] pb-[72px] dark:bg-gradient-to-l from-[#340e53] to-[#000533] bg-gray-100">
+      <div className="ml-0  md:px-[15px] pb-[72px]">
         <main className="flex-grow-1 pb-20">
-          <section className=" pt-10 dark:bg-gradient-to-l from-[#340e53] to-[#000533] bg-gray-100">
-            <div className="container">
+          <section className="pt-4 w-full">
+            <div className="">
               {showExpiredAlert && (
                 <div className="row justify-center mb-8">
                   <div
@@ -40,18 +40,24 @@ export default function SubscribePage() {
               <div className="flex justify-center mb-8">
                 <div className="flex flex-col lg:w-10/12">
                   <div className="text-center">
-                    <h1 className="dark:text-gray-100 text-gray-950 text-4xl font-semibold mb-6">
+                    <h1 className="dark:text-gray-100 text-gray-950 xs:text-2xl md:text-4xl font-semibold mb-6">
                       All Plans Include a 30-Day Money Back Guarantee
                     </h1>
-                    <p className="mb-0 dark:text-gray-100 text-gray-950 text base ">
+                    <p className="mb-0 dark:text-gray-100 text-gray-950 text-base ">
                       Your Path to More Interviews and Better Opportunities
                     </p>
                   </div>
                 </div>
               </div>
-              <div className="flex md:justify-center gap-6 pricing-table">
-                {/* <Packages /> */}
-                <CreditPackages />
+              <div className="flex justify-center">
+                <div
+                  className={`grid grid-cols w-fit xs:flex-col-1 md:grid-cols-2 gap-6 pt-6 ${
+                    userData.creditPackage ? "lg:grid-cols-2" : "lg:grid-cols-3"
+                  }`}
+                >
+                  {/* <Packages /> */}
+                  <CreditPackages />
+                </div>
               </div>
             </div>
           </section>

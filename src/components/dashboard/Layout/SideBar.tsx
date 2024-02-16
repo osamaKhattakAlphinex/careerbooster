@@ -32,7 +32,7 @@ const items = [
   { icon: userGroup, text: "LinkedIn Tool", url: "/linkedin-generator" },
   { icon: inboxArrowDown, text: "Email Bot", url: "/email-bot" },
   { icon: dollarIcon, text: "Billing Detail", url: "/billing" },
-  { icon: bid, text: "Consulting Bot", url: "/consulting-bids-bot" },
+  // { icon: bid, text: "Consulting Bot", url: "/consulting-bids-bot" },
   { icon: userCircle, text: "Profile", url: "/profile-review" },
   { icon: keyIcon, text: "Change Password", url: "/change-current-password" },
   { icon: powerIcon, text: "Logout", url: "/dashboard" },
@@ -267,7 +267,7 @@ const SideBar = () => {
                     router.push("/subscribe");
                   }}
                   btnText="Buy Credits"
-                  className={`bg-gradient-to-b from-fuchsia-600 to-indigo-500 !text-gray-100 `}
+                  className={`bg-gradient-to-r from-fuchsia-600 to-indigo-500 !text-gray-100 `}
                 />
               </div>
             </div>

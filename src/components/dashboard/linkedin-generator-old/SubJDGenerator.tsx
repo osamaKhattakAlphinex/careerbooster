@@ -294,7 +294,7 @@ const SubJDGenerator = () => {
                     height={18}
                     width={18}
                   />
-                  <span className="text-white ml-3 text-[15px] font-semibold">
+                  <span className="text-white ml-3 text-[15px] font-semibold whitespace-nowrap">
                     Generate Description
                   </span>
                 </div>
@@ -310,7 +310,7 @@ const SubJDGenerator = () => {
               </span>
             </h1>
             <div
-              className="ml-2 font-sans text-gray-300  break-words"
+              className="ml-2 font-sans dark:text-gray-300  text-gray-800 break-words"
               // style={{ textW: "auto" }}
             >
               <div

@@ -6,11 +6,13 @@ interface Props {
 }
 const PageHeader: React.FC<Props> = ({ title, secondTitle }) => {
   return (
-    <section className="pb-10 lg:pb-16 bg-[url('/assets/images/shapes/stripe-light.svg')] bg-no-repeat dark:bg-[url('/assets/images/shapes/stripe-dark.svg')] flex  justify-center items-center  bg-cover bg-start pt-40">
-      <div className="flex flex-col gap-6 pb-6">
-        <h1 className="h3-t">{title}</h1>
+    <div className="py-8 mt-[54.88px] mb-4 lg:mt-[90.06px] bg-[url('/assets/images/shapes/stripe-light.svg')] bg-no-repeat dark:bg-[url('/assets/images/shapes/stripe-dark.svg')] flex  justify-center items-center  bg-cover bg-start">
+      <div className="flex flex-col gap-3 ">
+        <h1 className="font-semibold text-[#000] dark:text-[#fff]  text-center leading-5 text-xl">
+          {title}
+        </h1>
         <nav>
-          <ol className="flex justify-center gap-4 text-sm">
+          <ol className="flex justify-center gap-3 text-sm">
             <li>
               <Link
                 href="/"
@@ -26,7 +28,7 @@ const PageHeader: React.FC<Props> = ({ title, secondTitle }) => {
           </ol>
         </nav>
       </div>
-    </section>
+    </div>
   );
 };
 export default PageHeader;

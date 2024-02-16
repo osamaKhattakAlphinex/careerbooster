@@ -36,7 +36,7 @@ const Header = () => {
 
   return (
     <nav
-      className={`translate-y-[0%] opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950/90 bg-gray-100/95  on-over shadow-lg  dark:text-gray-100 text-gray-900`}
+      className={`translate-y-[0%] xs:h-[54.88px] lg:h-[90.06px] opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950/90 bg-gray-100/95  on-over shadow-lg  dark:text-gray-100 text-gray-900`}
     >
       <div className="flex items-center justify-between mx-auto shadow-sm xs:py-2 sm:container xs:max-w-full xs:px-2">
         {/* <!-- Logo --> */}
@@ -263,7 +263,7 @@ const Header = () => {
               ) : (
                 <Link
                   href="/register"
-                  className="no-underline whitespace-nowrap px-2 py-2 text-sm leading-none rounded-md text-[#6a4dff]  dark:text-[#e6f85e] border capitalize border-[#6a4dff] hover:border-[#6a4dff] hover:bg-[#6a4dff] hover:border-none hover:text-gray-100 dark:bg-[#11121c] dark:border-[#e6f85e]  dark:hover:bg-[#e6f85e] dark:hover:border-none dark:hover:text-[#11121c]"
+                  className="no-underline whitespace-nowrap px-2 py-2 text-sm leading-none rounded-md text-[#6a4dff]  dark:text-[#e6f85e] border capitalize border-[#6a4dff] hover:border-[#6a4dff] hover:bg-[#6a4dff]  hover:text-gray-100 dark:bg-[#11121c] dark:border-[#e6f85e]  dark:hover:bg-[#e6f85e]  dark:hover:text-[#11121c]"
                 >
                   Get started
                 </Link>

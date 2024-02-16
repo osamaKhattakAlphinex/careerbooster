@@ -125,8 +125,9 @@ const LinkedInToolMain = () => {
                   handleFileChange(e);
                 }}
               />
+              {/* fileUploading || uploadComplete */}
               {fileUploading || uploadComplete ? (
-                <p className="p-2">{refreshIconRotating}</p>
+                <p className="">{refreshIconRotating}</p>
               ) : (
                 <div className="flex gap-2 ">
                   <div>{uploadIcon}</div>
@@ -321,7 +322,7 @@ const LinkedInToolMain = () => {
                 Simply Upload your Resume or LinkedIn Profile in PDF
               </p>
               <button
-                className="bg-yellow-400 mt-4 h-14 w-56 text-center rounded-full font-bold text-xl text-black py-3 px-9"
+                className="bg-yellow-400 bg-opacity-80 mt-4 h-14 w-56 text-center rounded-full font-bold text-xl hover:bg-yellow-600 text-gray-800 py-3 px-9"
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               >
                 Get Started
