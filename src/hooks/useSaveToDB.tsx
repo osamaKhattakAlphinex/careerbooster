@@ -12,7 +12,6 @@ import useGetUserData from "./useGetUserData";
 const useSaveResumeToDB = () => {
   const {resume:resumeData, userData} = useSelector((state: any) => state);
   const {setAvailableCredits} = useAppContext()
-  const {getUserDataIfNotExists} = useGetUserData()
   const { data: session } = useSession();
   const dispatch = useDispatch();
 
