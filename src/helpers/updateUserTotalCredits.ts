@@ -9,7 +9,7 @@ export const updateUserTotalCredits = async (email: string | null | undefined, c
 
             // Update the user document with the new totalCredits
             await User.findOneAndUpdate(
-                { email: email },
+                { email: email, trialResume: true },
                 { $inc: { userCredits: -credits } }, // Using $inc to decrement the totalCredits
                 { new: true }
             );

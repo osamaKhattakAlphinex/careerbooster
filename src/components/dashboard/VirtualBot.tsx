@@ -132,7 +132,6 @@ const VirtualBot: React.FC<VirtualBotProps> = ({ firstName, lastName }) => {
           .catch((error) => {
             console.error("Error fetching or decoding audio:", error);
           });
-        debugger
         componentRef.current.playbackRate = 2.0;
         componentRef.current.load();
         componentRef.current.play();

@@ -39,6 +39,7 @@ const ProfileReview = () => {
       firstName: register.stepOne.firstName,
       lastName: register.stepOne.lastName,
       email: userData.email,
+      linkedin: userData.linkedin,
       file: resume.uploadedFileName,
       phone: register.stepTwo.phoneNumber,
 

@@ -63,7 +63,7 @@ const UserSchema = new Schema(
     ],
     trialResume: {
       type: Boolean,
-      required: true,
+      default: false,
     },
     emails: [],
     resumes: [],

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setStepTwo } from "@/store/registerSlice";
 import { useEffect } from "react";
 import { linkedInIcon, newLinkedInIcon } from "@/helpers/iconsProvider";
+import { setUserData } from "@/store/userDataSlice";
 
 const StepTwo = () => {
   // Redux
@@ -37,6 +38,7 @@ const StepTwo = () => {
           ...stepTwo,
           Email: userData.email,
           phoneNumber: userData.phone,
+          linkedin: userData.linkedin
         })
       );
     }
@@ -77,6 +79,8 @@ const StepTwo = () => {
               value={stepTwo.phoneNumber}
               onChange={(e) => {
                 dispatch(setStepTwo({ phoneNumber: e.target.value }));
+                dispatch(setUserData({ phone: e.target.value }));
+
               }}
               className="rounded-md xs:text-sm md:text-lg  text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
               placeholder=""
@@ -116,7 +120,8 @@ const StepTwo = () => {
               id="Email"
               value={stepTwo.Email}
               onChange={(e) => {
-                // dispatch(setStepTwo({ Email: e.target.value }));
+                dispatch(setStepTwo({ Email: e.target.value }));
+                dispatch(setUserData({ email: e.target.value }));
               }}
               className="rounded-md xs:text-sm md:text-lg  text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
               placeholder=""
@@ -161,10 +166,11 @@ const StepTwo = () => {
               type="text"
               name="linkedin"
               id="linkedin"
-              // value={stepTwo.phoneNumber}
-              // onChange={(e) => {
-              //   dispatch(setStepTwo({ phoneNumber: e.target.value }));
-              // }}
+              value={stepTwo.linkedin}
+              onChange={(e) => {
+                dispatch(setStepTwo({ linkedin: e.target.value }));
+                dispatch(setUserData({ linkedin: e.target.value }));
+              }}
               className="rounded-md xs:text-sm md:text-lg  text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
               placeholder=""
             />
