@@ -42,7 +42,7 @@ export default function ContactPage() {
           <div className="xs:p-[2rem] md:p-[4rem] xl:p-[5rem] ">
             <ContactForm />
             <br />
-            <AddressCard />
+            {/* <AddressCard /> */}
             {/* <MapCard /> */}
           </div>
         </section>

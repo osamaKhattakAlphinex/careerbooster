@@ -41,6 +41,7 @@ const ProfileReview = () => {
       email: userData.email,
       file: resume.uploadedFileName,
       phone: register.stepTwo.phoneNumber,
+
       contact: {
         country: register.stepThree.country,
         street: register.stepThree.street,
@@ -128,7 +129,7 @@ const ProfileReview = () => {
         <main className="w-full">
           <section className="pb-15 ">
             <div className="xs:px-3 md:container ">
-              <div className="mt-4 w-full">
+              <div className="w-full mt-4">
                 <div className="">
                   <div className="gap-8">
                     <div
@@ -141,7 +142,7 @@ const ProfileReview = () => {
                       {/* {register.activeStep > 1 && (
                         <button
                           type="submit"
-                          className=" dark:text-gray-100 flex items-center gap-2 xs:scale-75 md:scale-100 text-base  text-gray-950"
+                          className="flex items-center gap-2 text-base  dark:text-gray-100 xs:scale-75 md:scale-100 text-gray-950"
                           onClick={(e) => {
                             dispatch(setActiveStep(register.activeStep - 1));
                           }}
@@ -237,7 +238,7 @@ const ProfileReview = () => {
                         </button>
                       )}
                     </div>
-                    <div className="  mb-0 "></div>
+                    <div className="mb-0 "></div>
                   </div>
                 </div>
               </div>
