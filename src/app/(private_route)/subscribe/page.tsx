@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 
 import CreditPackages from "@/components/dashboard/checkout/CreditPackages";
 import { useSelector } from "react-redux";
+import Link from "next/link";
+import { leftArrowIcon } from "@/helpers/iconsProvider";
 export default function SubscribePage() {
   const [showExpiredAlert, setShowExpiredAlert] = useState(false);
   // check if there is ?expired=1 in the URL
@@ -21,6 +23,13 @@ export default function SubscribePage() {
   return (
     <>
       <div className="ml-0  md:px-[15px] pb-[72px]">
+        <Link
+          href="/dashboard"
+          className="ml-2 my-4 w-fit  no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center  hover:opacity-80 transition-all"
+        >
+          {leftArrowIcon}
+          Back
+        </Link>
         <main className="flex-grow-1 pb-20">
           <section className="pt-4 w-full">
             <div className="">

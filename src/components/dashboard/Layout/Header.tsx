@@ -51,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
         <h1
           className={` mb-0   ${
             pathname === "/subscribe"
-              ? " w-full flex justify-center "
+              ? " w-full flex  justify-center "
               : "headText"
           }  justify-center rounded-[14px] text-[14px] dark:text-white text-gray-950 font-bold uppercase`}
         >
