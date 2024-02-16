@@ -23,9 +23,9 @@ const Footer = () => {
             src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
           ></script>
         </Head>
-        <div className="">
-          <div className=" justify-between gap-4 md:py-2  md:px-4 xs:px-2 xs:text-center sm:text-start md:gap-8 md:text-left">
-            <div className="grid grid-cols-1  lg:grid-cols-3  sm:justify-between xs:justify-center items-start w-full gap-8 lg:py-6">
+        <div className="container mx-auto ">
+          <div className="justify-between gap-4 md:py-2 md:px-4 xs:px-2 xs:text-center sm:text-start md:gap-8 md:text-left">
+            <div className="grid items-start w-full grid-cols-1 gap-8 lg:grid-cols-3 sm:justify-between xs:justify-center lg:py-6">
               <div className="lg:col-span-1">
                 <div className="flex items-center xs:text-center sm:text-left xs:justify-center sm:justify-start">
                   <Image
@@ -47,9 +47,9 @@ const Footer = () => {
                   profile, and propel your career to unprecedented success.
                 </p>
               </div>
-              <div className="grid xs:grid-cols-1 sm:grid-cols-3  lg:col-span-2 ">
-                <div className="mb-2 flex flex-col xs:justify-center sm:justify-start xs:w-full sm:w-fit lg:px-5 text-gray-950 dark:text-gray-100">
-                  <h6 className="mb-2 text-lg font-semibold text-gray-950 dark:text-gray-100 ">
+              <div className="grid xs:grid-cols-1 sm:grid-cols-3 lg:col-span-2 ">
+                <div className="flex flex-col mb-2 xs:justify-center sm:justify-start xs:w-full sm:w-fit lg:px-5 text-gray-950 dark:text-gray-100">
+                  <h6 className="my-2 font-semibold text-gray-950 dark:text-gray-100 ">
                     CareerBooster.AI
                   </h6>
                   <ul className="pl-0 mb-0 list-none link-list-t ">
@@ -78,8 +78,8 @@ const Footer = () => {
                     </li>
                   </ul>
                 </div>
-                <div className="lg:px-5 flex flex-col xs:justify-center sm:justify-start  xs:w-full sm:w-fit ">
-                  <h6 className="mb-2 text-lg font-semibold text-gray-950 dark:text-gray-100">
+                <div className="flex flex-col lg:px-5 xs:justify-center sm:justify-start xs:w-full sm:w-fit ">
+                  <h6 className="my-2 font-semibold text-gray-950 dark:text-gray-100">
                     Use Cases
                   </h6>
                   <ul className="pl-0 mb-0 list-none link-list-t">
@@ -100,8 +100,8 @@ const Footer = () => {
                     </li>
                   </ul>
                 </div>
-                <div className="lg:px-5 flex flex-col xs:justify-center sm:justify-start  xs:w-full sm:w-fit">
-                  <h6 className="mb-2 text-lg font-semibold text-gray-950 dark:text-gray-100">
+                <div className="flex flex-col lg:px-5 xs:justify-center sm:justify-start xs:w-full sm:w-fit">
+                  <h6 className="my-2 font-semibold text-gray-950 dark:text-gray-100">
                     Contact Us
                   </h6>
                   <ul className="flex flex-col pl-0 mb-0 list-none link-list-t ">
@@ -118,7 +118,7 @@ const Footer = () => {
                       <Link href="">support@careerbooster.ai</Link>
                     </li>
                   </ul>
-                  <ul className="flex flex-wrap xs:justify-center sm:justify-start  items-center gap-3  mb-0 align-center justify-md-start">
+                  <ul className="flex flex-wrap items-center gap-3 mb-0 xs:justify-center sm:justify-start align-center justify-md-start">
                     <li>
                       <Link
                         href="https://www.facebook.com/careerboosterai"
@@ -201,11 +201,11 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="py-2 xs:py-4 md:py-2 mx-auto xs:container xs:flex xs:flex-col sm:gap-4 sm:flex-row items-center justify-center ">
+          <div className="items-center justify-center py-2 mx-auto xs:py-4 md:py-2 xs:container xs:flex xs:flex-col sm:gap-4 sm:flex-row ">
             <p className="text-xs text-center text-gray-950 dark:text-gray-100 ">
               Copyright <span> &copy; CareerBooster 2023</span>.{" "}
             </p>
-            <div className="flex flex-row items-center gap-2 justify-between xs:py-4 sm:py-0">
+            <div className="flex flex-row items-center justify-between gap-2 xs:py-4 sm:py-0">
               <Link
                 href="/privacy-policy"
                 className="text-[#6a4dff] dark:text-[#e6f85e] mx-1 no-underline hover:text-blue-400 dark:hover:text-blue-400 xs:text-sm"
