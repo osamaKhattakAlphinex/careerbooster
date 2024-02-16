@@ -7,6 +7,7 @@ import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import { chevronRight } from "@/helpers/iconsProvider";
 
 const KeywordsGenerator = ({ creditLimits }: { creditLimits: any }) => {
   return (
@@ -30,11 +31,11 @@ const KeywordsGenerator = ({ creditLimits }: { creditLimits: any }) => {
                 Keywords Generator
               </h1>
               <div
-                className={`text-[#000] group  relative rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
+                className={`text-gray-900 group  relative rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602]  bg-opacity-50 xs:text-[10px] md:text-[12px]  font-bold `}
               >
                 {creditLimits?.linkedin_keywords_generation}
                 <div className="pl-1"> Credits</div>
-                <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32 md:left-10 xs:-top-12 md:-top-14  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+                <div className="w-44 bg-gradient-to-r from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32 md:left-10 xs:-top-12 md:-top-14  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                   {creditLimits?.linkedin_keywords_generation} credits will be
                   used for Keyword Generation
                 </div>
@@ -46,25 +47,23 @@ const KeywordsGenerator = ({ creditLimits }: { creditLimits: any }) => {
             </p>
           </div>
           <div
-            className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
-
-            // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
+            // onClick={() => handleGenerate()}
+            className={`flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
           >
             <span className={`text-white text-[15px] font-semibold`}>
-              <div className="flex">
-                <Image
+              {/* <div className="flex"> */}
+              {/* <Image
                   src={buttonIconSrc}
                   alt="bold icon"
                   height={18}
                   width={18}
-                />
-                <span
-                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer no-underline`}
-                >
-                  {/* Upgrade Plan */}
-                  Generate Keywords
-                </span>
-              </div>
+                /> */}
+              <span
+                className={`no-underline text-sm mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-300 hover:text-gray-950 font-semibold`}
+              >
+                Launch <i className="ml-2">{chevronRight}</i>
+              </span>
+              {/* </div> */}
             </span>
           </div>
         </div>

@@ -34,7 +34,7 @@ const StepThree = () => {
 
   return (
     <>
-      <div className="flex xs:flex-col md:flex-row flex-wrap w-full xs:gap-3 md:gap-8 xs:mt-3 md:mt-8">
+      <div className="w-full grid  grid-cols-2 xs:grid-cols-1 md:grid-cols-2 gap-3">
         <div>
           <label
             htmlFor="name"

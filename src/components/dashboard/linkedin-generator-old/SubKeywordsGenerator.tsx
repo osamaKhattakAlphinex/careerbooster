@@ -192,7 +192,7 @@ const SubKeywordsGenerator = () => {
               Keywords Generator
             </h1>
 
-            <div
+            {/* <div
               className={`text-[#000] rounded-full group relative h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
             >
               <div className="mr-1">
@@ -203,7 +203,7 @@ const SubKeywordsGenerator = () => {
                 {creditLimits?.linkedin_keywords_generation} credits will be
                 used for Keyword Generation
               </div>
-            </div>
+            </div> */}
           </div>
           {/* <LimitCard
             title="Available"
@@ -227,7 +227,9 @@ const SubKeywordsGenerator = () => {
         >
           <span className={`text-white text-[15px] font-semibold`}>
             {msgLoading ? (
-              <div className="flex">
+              <div
+                className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-44 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[20px] py-[12px] md:ml-auto`}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -245,7 +247,9 @@ const SubKeywordsGenerator = () => {
                 Please wait...
               </div>
             ) : (
-              <div className="flex">
+              <div
+                className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
+              >
                 <Image
                   src={buttonIconSrc}
                   alt="bold icon"

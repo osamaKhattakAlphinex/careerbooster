@@ -131,7 +131,7 @@ const LinkedInToolMain = () => {
                 <div className="flex gap-2 ">
                   <div>{uploadIcon}</div>
                   <div className="text-center ">
-                    <p className="m-0 font-semibold lg:text-[20px] text-[14px] lg:leading-6 leading-4[text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                    <p className="m-0 font-semibold lg:text-[20px] cursor-pointer text-[14px] lg:leading-6 leading-4[text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
                       Upload Resume or LinkedIn in PDF
                     </p>
                     <p className="lg:text-[14px] text-[10px] lg:leading-[17px] leading-[14px] pt-2">

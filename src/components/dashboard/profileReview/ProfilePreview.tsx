@@ -195,7 +195,7 @@ const ProfilePreview = () => {
       </section>
 
       {/* Skills */}
-      <section className="mb-8">
+      {/* <section className="mb-8">
         <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950 ">
           Skills
           <button
@@ -221,7 +221,7 @@ const ProfilePreview = () => {
           </ul>
           {data.stepSix.list.length === 0 && <p>No Skills Found</p>}
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
