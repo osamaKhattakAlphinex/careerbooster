@@ -124,7 +124,6 @@ const CreditSubscriptionCard: React.FC<Props> = ({
                   ...userData,
                   creditPackage: obj.creditPackage,
                   userCredits: obj.userCredits,
-                  totalCredits: obj.totalCredits,
                   // userPackageExpirationDate: obj.userPackageExpirationDate,
                   // userPackageUsed: obj.userPackageUsed,
                 })

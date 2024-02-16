@@ -1,10 +1,10 @@
 "use client";
-import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 const Page = () => {
   const userData = useSelector((state: any) => state.userData);
   const [remainingCredits, setRemainingCredits] = useState<number | null>(null);
+  const [totalCredits, setTotalCredits] = useState<number | null>(null);
   const [creditsData, setCreditsData] = useState<any>(null);
   const getCredits = async () => {
     const res: any = await fetch(
@@ -13,6 +13,7 @@ const Page = () => {
     const response = await res.json();
     if (response.success) {
       setRemainingCredits(response.result.userCredits);
+      setTotalCredits(response.result.totalCredits);
     }
     const creditPackageDetails = await fetch(
       `/api/users/getCreditPackageDetails?id=${userData.creditPackage}`
@@ -97,6 +98,14 @@ const Page = () => {
                   <span>{creditsData?.totalCredits}</span>
                 </div>
               </div> */}
+              <div className=" flex flex-row  justify-between items-center">
+                <div className="flex-1 dark:text-gray-100 text-gray-950">
+                  <strong>Total Credits</strong>
+                </div>
+                <div className="flex-1 dark:text-gray-100 text-gray-950">
+                  <span>{totalCredits}</span>
+                </div>
+              </div>
               <div className=" flex flex-row  justify-between items-center">
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
                   <strong>Remaining Credits</strong>
