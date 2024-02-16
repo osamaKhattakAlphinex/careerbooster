@@ -226,7 +226,7 @@ const SubJDGenerator = () => {
               <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
                 Job Description Generator
               </h1>
-              <div
+              {/* <div
                 className={`text-[#000] rounded-full group relative h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
               >
                 <div className="mr-1">
@@ -237,7 +237,7 @@ const SubJDGenerator = () => {
                   {creditLimits?.linkedin_individualWorkExperience} credits will
                   be used for Job Description
                 </div>
-              </div>
+              </div> */}
             </div>
             {/* <LimitCard
               title="Available"
@@ -263,7 +263,9 @@ const SubJDGenerator = () => {
               className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}
             >
               {msgLoading ? (
-                <div className="flex">
+                <div
+                  className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-44 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[20px] py-[12px] md:ml-auto`}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -283,7 +285,9 @@ const SubJDGenerator = () => {
                   Please wait...
                 </div>
               ) : (
-                <div className="flex">
+                <div
+                  className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
+                >
                   <Image
                     src={buttonIconSrc}
                     alt="bold icon"

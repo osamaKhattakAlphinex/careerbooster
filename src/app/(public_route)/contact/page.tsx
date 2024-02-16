@@ -3,7 +3,7 @@ import ContactForm from "@/components/public-pages/Contact/ContactForm";
 import MapCard from "@/components/public-pages/Contact/MapCard";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
- 
+
 export const metadata: Metadata = {
   title: "CareerBooster.AI-Contact",
   description:
@@ -43,7 +43,7 @@ export default function ContactPage() {
             <ContactForm />
             <br />
             <AddressCard />
-            <MapCard />
+            {/* <MapCard /> */}
           </div>
         </section>
       </main>

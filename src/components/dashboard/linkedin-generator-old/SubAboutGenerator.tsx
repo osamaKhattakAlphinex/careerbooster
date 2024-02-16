@@ -180,7 +180,7 @@ const SubAboutGenerator = () => {
             <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
               About Generator
             </h1>
-            <div
+            {/* <div
               className={`text-[#000] group relative  rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
             >
               {creditLimits?.linkedin_about_generation} Credits
@@ -188,7 +188,7 @@ const SubAboutGenerator = () => {
                 {creditLimits?.linkedin_about_generation} credits will be used
                 for About Generation
               </div>
-            </div>
+            </div> */}
           </div>
           {/* <LimitCard
             title="Available"
@@ -213,7 +213,9 @@ const SubAboutGenerator = () => {
             className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}
           >
             {msgLoading ? (
-              <div className="flex">
+              <div
+                className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-44 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[20px] py-[12px] md:ml-auto`}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -231,7 +233,9 @@ const SubAboutGenerator = () => {
                 Please wait...
               </div>
             ) : (
-              <div className="flex">
+              <div
+                className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
+              >
                 <Image
                   src={buttonIconSrc}
                   alt="bold icon"

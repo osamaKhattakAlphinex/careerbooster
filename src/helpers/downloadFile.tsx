@@ -74,7 +74,6 @@ any) => {
         ${html}`;
     }
     setLoading(true);
-    console.log(htmlToDoc);
     await fetch(`/api/template`, {
       method: "POST",
       body: JSON.stringify({
@@ -114,7 +113,7 @@ any) => {
           }}
         >
           <div>{icon}</div>
-          {preview ? "Preview " : loading ? "Downloading..." : "Download"}
+          {preview ? "Print Preview " : loading ? "Downloading..." : "Download"}
         </button>
       </div>
     </>

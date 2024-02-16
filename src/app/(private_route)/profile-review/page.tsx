@@ -14,7 +14,7 @@ import StepEight from "@/components/dashboard/profileReview/StepEight";
 import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
- 
+
 import Link from "next/link";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.Ai-Welcome",
@@ -138,7 +138,7 @@ const ProfileReview = () => {
                           : "xs:justify-end "
                       } items-center`}
                     >
-                      {register.activeStep > 1 && (
+                      {/* {register.activeStep > 1 && (
                         <button
                           type="submit"
                           className=" dark:text-gray-100 flex items-center gap-2 xs:scale-75 md:scale-100 text-base  text-gray-950"
@@ -164,7 +164,7 @@ const ProfileReview = () => {
                         >
                           Next
                         </button>
-                      )}
+                      )} */}
                     </div>
                     {register.activeStep === 1 && (
                       <>
@@ -182,10 +182,10 @@ const ProfileReview = () => {
                     {register.activeStep === 2 && <StepFour />}
                     {register.activeStep === 3 && <StepFive />}
 
-                    {register.activeStep === 4 && <StepSix />}
+                    {/* {register.activeStep === 4 && <StepSix />} */}
 
-                    {register.activeStep === 5 && <ProfilePreview />}
-                    {register.activeStep === 6 && <StepEight />}
+                    {register.activeStep === 4 && <ProfilePreview />}
+                    {register.activeStep === 5 && <StepEight />}
 
                     <div
                       className={`my-6 flex ${
@@ -197,10 +197,15 @@ const ProfileReview = () => {
                       {register.activeStep > 1 && (
                         <button
                           type="submit"
-                          className=" dark:text-gray-100 flex items-center gap-2 xs:scale-75 md:scale-100 text-base  text-gray-950"
+                          className={`  ${
+                            register.isSubmitting
+                              ? "dark:text-gray-400"
+                              : "dark:text-gray-100"
+                          } flex items-center gap-2 xs:scale-75 md:scale-100 text-base text-gray-950 `}
                           onClick={(e) => {
                             dispatch(setActiveStep(register.activeStep - 1));
                           }}
+                          disabled={register.isSubmitting}
                         >
                           <span className="xs:scale-75 md:scale-100">
                             {leftArrowIcon}
@@ -209,7 +214,7 @@ const ProfileReview = () => {
                         </button>
                       )}
 
-                      {register.activeStep < 5 && (
+                      {register.activeStep < 4 && (
                         <button
                           type="submit"
                           disabled={isNextDisabled()}
@@ -222,7 +227,7 @@ const ProfileReview = () => {
                         </button>
                       )}
 
-                      {register.activeStep === 5 && (
+                      {register.activeStep === 4 && (
                         <button
                           type="submit"
                           className="py-3 mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"

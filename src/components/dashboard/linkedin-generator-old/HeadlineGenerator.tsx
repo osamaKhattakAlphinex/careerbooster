@@ -5,6 +5,7 @@ import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 
 import Link from "next/link";
 import { useState } from "react";
+import { chevronRight } from "@/helpers/iconsProvider";
 
 const HeadlineGenerator = ({ creditLimits }: { creditLimits: any }) => {
   return (
@@ -14,13 +15,7 @@ const HeadlineGenerator = ({ creditLimits }: { creditLimits: any }) => {
           <div
             className={`icon  hidden rounded-full  bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] md:flex justify-center items-center w-16 h-16`}
           >
-            <Image
-              alt="Svg1"
-              src={Svg1}
-              width={32}
-              height={32}
-              className="z-[10000px] "
-            />
+            <Image alt="Svg1" src={Svg1} width={32} height={32} />
           </div>
           <div className="linkedintooltext flex  flex-col lg:w-[24.0625rem] gap-2 ml-2">
             <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
@@ -28,7 +23,7 @@ const HeadlineGenerator = ({ creditLimits }: { creditLimits: any }) => {
                 Headline Generator
               </h1>
               <div
-                className={`text-[#000] group relative rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
+                className={`text-gray-900 group relative rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] bg-opacity-50 xs:text-[10px] md:text-[12px]  font-bold `}
               >
                 <div className="mr-1">
                   {creditLimits?.linkedin_headline_generation}{" "}
@@ -47,22 +42,22 @@ const HeadlineGenerator = ({ creditLimits }: { creditLimits: any }) => {
 
           <div
             // onClick={() => handleGenerate()}
-            className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
+            className={`flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
           >
             <span className={`text-white text-[15px] font-semibold`}>
-              <div className="flex">
-                <Image
+              {/* <div className="flex"> */}
+              {/* <Image
                   src={buttonIconSrc}
                   alt="bold icon"
                   height={18}
                   width={18}
-                />
-                <span
-                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer no-underline`}
-                >
-                  Generate Headline
-                </span>
-              </div>
+                /> */}
+              <span
+                className={`no-underline text-sm mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-300 hover:text-gray-950 font-semibold`}
+              >
+                Launch <i className="ml-2">{chevronRight}</i>
+              </span>
+              {/* </div> */}
             </span>
           </div>
         </div>
