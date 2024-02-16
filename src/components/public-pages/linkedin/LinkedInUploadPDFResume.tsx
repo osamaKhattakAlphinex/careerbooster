@@ -496,7 +496,7 @@ const LinkedInUploadPDFResume = () => {
             Don{"'"}t Like the results?
           </h2>
           <p className="text-[16px]  lg:text-[24px] lg:text-left text-center">
-            Change your preference and regenerate you summary
+            Change your preference and regenerate your summary
           </p>
           <div className="flex flex-col gap-4 lg:px-0 px-8">
             <label

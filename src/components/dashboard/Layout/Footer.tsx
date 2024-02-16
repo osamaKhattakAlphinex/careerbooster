@@ -1,5 +1,5 @@
 "use client";
-
+//v1.3
 import FacebookIcon from "@/../public/icon/FacebookLogo.svg";
 import LinkedinLogo from "@/../public/icon/LinkedinLogo.svg";
 
@@ -50,7 +50,7 @@ const Footer = () => {
     >
       <div className="flex justify-between xs:h-[60px] md:h-[52px] items-end border-t border-[#312E37]">
         <div className="dark:text-gray-100 xs:hidden md:flex whitespace-nowrap text-gray-950 h-7 flex items-center flex-wrap gap-[10px] lg:gap-[22px]  md:text-[14px] text-[10px]">
-          2023 © CareerAi
+          2023 © CareerBooster.Ai
         </div>
         <div className="flex xs:flex-wrap xs:w-full md:w-fit md:flex-nowrap md:gap-[22px]  items-center">
           <div className="flex gap-4">
@@ -58,7 +58,7 @@ const Footer = () => {
               href={"/terms-and-conditions"}
               className="dark:text-gray-100 whitespace-nowrap text-gray-950 no-underline md:text-[14px] text-[10px]"
             >
-              Terms use
+              Terms Of Use
             </Link>
             <Link
               href={"/privacy-policy"}
@@ -92,7 +92,7 @@ const Footer = () => {
           </div>
           <div className="flex w-full justify-between md:hidden">
             <div className="dark:text-gray-100 whitespace-nowrap text-gray-950 h-7 flex flex-row items-center flex-wrap gap-[10px] lg:gap-[22px]  md:text-[14px] text-[10px]">
-              2023 © CareerAi
+              2023 © CareerBooster.Ai
             </div>
             <div className="flex lg:gap-[21px] gap-[8px]">
               {tabOption.map((item, i) => (

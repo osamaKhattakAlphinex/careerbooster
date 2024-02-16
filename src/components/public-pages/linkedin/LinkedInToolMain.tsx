@@ -116,7 +116,7 @@ const LinkedInToolMain = () => {
           </h5>
 
           <div className="flex justify-center mt-11 md:mt-11">
-            <label className=" pt-[12px] lg:pt-[20px]  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
+            <label className=" py-[12px] lg:py-[20px]  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
               <input
                 type="file"
                 className="hidden "
@@ -131,7 +131,7 @@ const LinkedInToolMain = () => {
                 <div className="flex gap-2 ">
                   <div>{uploadIcon}</div>
                   <div className="text-center ">
-                    <p className="m-0 font-semibold lg:text-[20px] text-[14px] lg:leading-6 leading-4[text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                    <p className="m-0 font-semibold lg:text-[20px] cursor-pointer text-[14px] lg:leading-6 leading-4[text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
                       Upload Resume or LinkedIn in PDF
                     </p>
                     <p className="lg:text-[14px] text-[10px] lg:leading-[17px] leading-[14px] pt-2">

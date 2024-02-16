@@ -71,8 +71,9 @@ const ReadCoupon = ({ userCoupon }: Props) => {
         id="readProductModal"
         tabIndex={-1}
         aria-hidden="true"
-        className={` z-50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ${!previewPopUpModel ? "hidden" : "flex"
-          }`}
+        className={` z-50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ${
+          !previewPopUpModel ? "hidden" : "flex"
+        }`}
       >
         <div className="relative p-4 w-full max-h-full max-w-2xl">
           {/* <!-- Modal content --> */}

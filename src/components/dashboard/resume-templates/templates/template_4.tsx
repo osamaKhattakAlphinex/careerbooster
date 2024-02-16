@@ -325,7 +325,7 @@ const ResumeTemplate4 = () => {
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
-                  <>
+                
                     <div
                       key={i}
                       className={`flex justify-start  ${
@@ -559,7 +559,7 @@ const ResumeTemplate4 = () => {
                         </div>
                       </Toolbar>
                     </div>
-                  </>
+                  
                 );
               })}
             </>

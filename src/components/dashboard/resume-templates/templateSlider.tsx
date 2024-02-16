@@ -10,9 +10,10 @@ import { useSearchParams } from "next/navigation";
 
 type Props = {
   templates: Template[];
+  size?: number[];
 };
 
-const TemplateSlider = ({ templates }: Props) => {
+const TemplateSlider = ({ templates, size }: Props) => {
   const params = useSearchParams();
 
   const [activeTemplate, setActiveTemplate] = useState<number>(0);
@@ -44,22 +45,22 @@ const TemplateSlider = ({ templates }: Props) => {
         loop={true}
         breakpoints={{
           0: {
-            slidesPerView: 2,
+            slidesPerView: size ? size[0] : 2,
           },
           425: {
-            slidesPerView: 2,
+            slidesPerView: size ? size[1] : 2,
           },
           640: {
-            slidesPerView: 3,
+            slidesPerView: size ? size[3] : 3,
           },
           768: {
-            slidesPerView: 3,
+            slidesPerView: size ? size[4] : 2,
           },
           1080: {
-            slidesPerView: 6,
+            slidesPerView: size ? size[5] : 6,
           },
           1280: {
-            slidesPerView: 6,
+            slidesPerView: size ? size[6] : 6,
           },
         }}
       >

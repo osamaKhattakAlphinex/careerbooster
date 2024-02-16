@@ -1,7 +1,7 @@
 "use client";
 import { ALL_TEMPLATES } from "@/helpers/templateProvider";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import RecentResumeCard from "@/components/dashboard/resume-builder/RecentResumeCard";
 import { useDispatch, useSelector } from "react-redux";
 import TemplateSlider from "@/components/dashboard/resume-templates/templateSlider";
@@ -17,6 +17,8 @@ const Template = () => {
   const [refTop, setRefTop] = useState<number | null>(null);
   const [refLeft, setRefLeft] = useState<number | null>(null);
   const [scaleHeight, setScaleHeight] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+
   const templateId: number = parseInt(params.get("templateId") || "0");
   const componentRef = useRef<any>(null);
   const dispatch = useDispatch();
@@ -40,7 +42,7 @@ const Template = () => {
     }
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (componentRef.current && isMobile) {
       const height = Math.floor(componentRef.current.offsetHeight * 0.5 + 90);
       setScaleHeight(height);
@@ -52,9 +54,9 @@ const Template = () => {
       setRefLeft(width);
     }
   }, [componentRef.current, templateId]);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+  
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 480);
     };
@@ -111,14 +113,14 @@ const Template = () => {
                 />
               </div>
 
-              <div className="xs:relative">
+              <div className="xs:relative"  style={{
+                    top: isMobile ? "-" + refTop + "px" : undefined,
+                    left: isMobile ? "-" + refLeft + "px" : undefined,
+                  }}>
                 <div
                   ref={componentRef}
                   className={` bg-white xs:scale-50  xs:w-[200%] xs:absolute md:relative  md:w-[100%]  w-[100%] md:top-[0px] md:left-[0px] md:scale-100 scale-100`}
-                  style={{
-                    top: isMobile ? "-" + refTop + "px" : undefined,
-                    left: isMobile ? "-" + refLeft + "px" : undefined,
-                  }}
+                 
                 >
                   {ALL_TEMPLATES[templateId - 1].active ? (
                     ALL_TEMPLATES[templateId - 1].template({})

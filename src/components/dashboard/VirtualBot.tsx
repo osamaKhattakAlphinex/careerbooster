@@ -168,7 +168,7 @@ const VirtualBot: React.FC<VirtualBotProps> = ({ firstName, lastName }) => {
     <>
       {audioPrepared && (
         <div
-          className={`fixed top-1/3 left-1/2 w-20 h-20 cursor-pointer z-10 avatar-animate`}
+          className={`fixed top-2/5 right-1/2 w-20 h-20 cursor-pointer z-10 avatar-animate`}
           // onClick={handleClick}
         >
           {/* <Tooltip text="Hey! Click me" audioPlayed={audioPlayed}> */}

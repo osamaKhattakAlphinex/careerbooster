@@ -5,6 +5,7 @@ import iconOfPackageBadge from "@/../public/icon/crown.svg";
 import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 
 import Link from "next/link";
+import { chevronRight } from "@/helpers/iconsProvider";
 
 const JDGenerator = ({ creditLimits }: { creditLimits: any }) => {
   // local States
@@ -30,7 +31,7 @@ const JDGenerator = ({ creditLimits }: { creditLimits: any }) => {
                 Job Description Generator
               </h1>
               <div
-                className={`text-[#000] relative group rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
+                className={`text-gray-900 relative group rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602]   bg-opacity-50 xs:text-[10px] md:text-[12px]  font-bold `}
               >
                 {creditLimits?.linkedin_individualWorkExperience}
                 <div className="pl-1"> Credits</div>
@@ -46,24 +47,23 @@ const JDGenerator = ({ creditLimits }: { creditLimits: any }) => {
             </p>
           </div>
           <div
-            className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
-
-            // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
+            // onClick={() => handleGenerate()}
+            className={`flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
           >
             <span className={`text-white text-[15px] font-semibold`}>
-              <div className="flex">
-                <Image
+              {/* <div className="flex"> */}
+              {/* <Image
                   src={buttonIconSrc}
                   alt="bold icon"
                   height={18}
                   width={18}
-                />
-                <span
-                  className={`text-white ml-3 text-[15px] font-semibold cursor-pointer no-underline`}
-                >
-                  Generate Description
-                </span>
-              </div>
+                /> */}
+              <span
+                className={`no-underline text-sm mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-300 hover:text-gray-950 font-semibold`}
+              >
+                Launch <i className="ml-2">{chevronRight}</i>
+              </span>
+              {/* </div> */}
             </span>
           </div>
         </div>

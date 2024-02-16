@@ -250,17 +250,24 @@ const SideBar = () => {
                 </li>
               ))}
             </ul>
-            <div className="w-[160px] px-2 py-6 md:w-[170px] mb-10  mx-7 flex flex-col justify-center items-center rounded-xl bg-gradient-to-b from-fuchsia-600 to-indigo-500">
-              <p className="text-white px-2 mb-3 text-[15px] text-center font-semibold ">
-                Buy more credits
-              </p>
-              <div className="flex justify-center">
+
+            <div className="flex  flex-col justify-center mx-auto mt-6">
+              <div className="flex ">
+                <div className=" flex justify-between text-gray-950 dark:text-gray-100 mb-2">
+                  <h2 className=" text-sm font-semibold">Avalible Credit:</h2>
+                  <h3 className=" text-sm italic ml-2">700/1000</h3>
+                </div>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700 mb-6">
+                <div className="bg-blue-600 h-1.5 rounded-full w-[45%]"></div>
+              </div>
+              <div className="flex items-center justify-center">
                 <Button
                   onClick={() => {
                     router.push("/subscribe");
                   }}
                   btnText="Buy Credits"
-                  className={`dark:bg-gray-950 bg-gray-100 dark:text-gray-100 text-gray-950`}
+                  className={`bg-gradient-to-b from-fuchsia-600 to-indigo-500 !text-gray-100 `}
                 />
               </div>
             </div>
