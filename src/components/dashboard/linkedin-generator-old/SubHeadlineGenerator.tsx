@@ -13,17 +13,16 @@ import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedL
 import LinkedInHeadlineCardSingle from "./LinkedInHeadeLineCardSingle";
 import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
+import { useAppContext } from "@/context/AppContext";
 
 const SubHeadlineGenerator = () => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
   const [streamedData, setStreamedData] = useState("");
   const [aiInputUserData, setAiInputUserData] = useState<any>(null);
-  const [percentageCalculated, setPercentageCalculated] =
-    useState<boolean>(false);
-  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const [showPopup, setShowPopup] = useState(false);
   const componentRef = useRef<any>();
+  const {setAvailableCredits} = useAppContext();
 
   const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
   const copyHeadline = async (text: string) => {
@@ -90,6 +89,8 @@ const SubHeadlineGenerator = () => {
       })
         .then(async (resp: any) => {
           if (resp.ok) {
+            setAvailableCredits(true)
+
             const reader = resp.body.getReader();
             let tempText = "";
             while (true) {

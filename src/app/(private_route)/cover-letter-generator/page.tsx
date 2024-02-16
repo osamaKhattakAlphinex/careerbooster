@@ -20,6 +20,7 @@ import { makeid } from "@/helpers/makeid";
 import DownloadService from "@/helpers/downloadFile";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import useGetUserData from "@/hooks/useGetUserData";
+import { useAppContext } from "@/context/AppContext";
 
 export default function CoverLetterPage() {
   const componentRef = useRef<any>(null);
@@ -36,7 +37,7 @@ export default function CoverLetterPage() {
   const [jobDescription, setJobDescription] = useState<string>("");
   const [isEditing, setIsEditing] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-
+  const {setAvailableCredits} = useAppContext();
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
   // Function to toggle editing mode on double-click
@@ -155,6 +156,7 @@ export default function CoverLetterPage() {
         .then(async (resp: any) => {
           // const response = await resp.json();
           if (resp.ok) {
+            setAvailableCredits(true)
             const reader = resp.body.getReader();
             let tempText = "";
             while (true) {

@@ -7,8 +7,6 @@ import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   WorkExperience,
-  setField,
-  setIsLoading,
   setUserData,
 } from "@/store/userDataSlice";
 import axios from "axios";
@@ -20,6 +18,7 @@ import LinkedInJDCardSingle from "./LinkedInJDCardSingle";
 import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
+import { useAppContext } from "@/context/AppContext";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
   const creditLimits = useSelector((state: any) => state.creditLimits);
@@ -28,6 +27,7 @@ const SubJDGenerator = () => {
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const {setAvailableCredits} = useAppContext();
 
   useState<boolean>(false);
   const [isJDCopied, setIsJDCopied] = useState<boolean>(false);
@@ -105,6 +105,8 @@ const SubJDGenerator = () => {
         });
 
         if (res.ok) {
+          setAvailableCredits(true)
+
           const reader = res.body.getReader();
           while (true) {
             const { done, value } = await reader.read();

@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "@/store/userDataSlice";
 
-import Link from "next/link";
 import CoverLetterFileUploader from "@/components/dashboard/cover-letter-generator/CoverLetterFileUploader";
 
 import axios from "axios";
@@ -14,10 +13,9 @@ import ConsultingBidCardSingle from "@/components/dashboard/consulting-bids-gene
 import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedList";
 import { makeid } from "@/helpers/makeid";
 import { setConsultingBid } from "@/store/consultingBidSlice";
-import { leftArrowIcon } from "@/helpers/iconsProvider";
 
-import Image from "next/image";
 import DownloadService from "@/helpers/downloadFile";
+import { useAppContext } from "@/context/AppContext";
 
 const ConsultingBidsGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -33,6 +31,7 @@ const ConsultingBidsGenerator = () => {
   const [jobDescription, setJobDescription] = useState<string>("");
   const [isBidCopied, setIsBidCopied] = useState<boolean>(false);
   const [showPopup, setShowPopup] = useState(false);
+  const {setAvailableCredits} = useAppContext();
 
   // limit bars
 
@@ -120,6 +119,8 @@ const ConsultingBidsGenerator = () => {
       })
         .then(async (resp: any) => {
           if (resp.ok) {
+            setAvailableCredits(true)
+
             const reader = resp.body.getReader();
             let tempText = "";
             while (true) {

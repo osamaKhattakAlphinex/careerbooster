@@ -19,6 +19,7 @@ import EmailCardSingle from "@/components/dashboard/email-generator/EmailCardSin
 import DownloadService from "@/helpers/downloadFile";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import useGetUserData from "@/hooks/useGetUserData";
+import { useAppContext } from "@/context/AppContext";
 
 const PersonalizedEmailBot = () => {
   const componentRef = useRef<any>(null);
@@ -34,6 +35,7 @@ const PersonalizedEmailBot = () => {
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
   const [showPopup, setShowPopup] = useState(false);
+  const {setAvailableCredits} = useAppContext();
 
   // Redux
   const dispatch = useDispatch();
@@ -45,7 +47,7 @@ const PersonalizedEmailBot = () => {
   const { resumes } = userData;
   const copyEmail = async (text: string) => {
     try {
-      const coverLetterData = await htmlToPlainText(text);
+      const coverLetterData = htmlToPlainText(text);
       await copy(coverLetterData);
       setIsEmailCopied(true);
       // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
@@ -120,6 +122,8 @@ const PersonalizedEmailBot = () => {
       })
         .then(async (resp: any) => {
           if (resp.ok) {
+            setAvailableCredits(true)
+
             const reader = resp.body.getReader();
             let tempText = "";
             while (true) {

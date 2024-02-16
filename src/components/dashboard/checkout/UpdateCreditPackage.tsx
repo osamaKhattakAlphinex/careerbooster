@@ -23,7 +23,7 @@ const UpdateCreditPackage = ({ customer }: any) => {
       );
       const response = await res.json();
       const userCurrentCredits = response.result.userCredits;
-      const userCurrentTotalCredits = response.result.totalCtredits;
+      const userCurrentTotalCredits = response.result.totalCredits;
 
       const creditPackage = await getCreditPackageDetails(customer.packageId);
 

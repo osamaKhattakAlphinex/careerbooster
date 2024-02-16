@@ -109,7 +109,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
           email: userData.email,
           creditPackage: creditPackage._id,
           userCredits: creditPackage.totalCredits,
-          totalCredits: creditPackage.totalCredit
+          totalCredits: creditPackage.totalCredits
         };
         // TODO!! move this code to backeND
 
