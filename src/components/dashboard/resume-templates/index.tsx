@@ -56,8 +56,6 @@ const Templates = () => {
         (template) => template.active === true
       );
 
-      console.log(activeTemplate);
-
       setTemplates(activeTemplate);
     } else {
       let _templates: Template[] = ALL_TEMPLATES.filter((template) => {

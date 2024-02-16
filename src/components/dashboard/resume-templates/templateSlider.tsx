@@ -1,7 +1,7 @@
 "use client";
 import { crownIcon } from "@/helpers/iconsProvider";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Template } from ".";
@@ -16,7 +16,20 @@ type Props = {
 const TemplateSlider = ({ templates, size }: Props) => {
   const params = useSearchParams();
 
+  const [activeTemplate, setActiveTemplate] = useState<number>(0);
+
   const templateId: number = parseInt(params.get("templateId") || "0");
+  useEffect(() => {
+    if (templateId) {
+      const activeIndex = templates.findIndex(
+        (template) => template.id == templateId
+      );
+
+      if (activeIndex !== -1) {
+        setActiveTemplate(activeIndex);
+      }
+    }
+  }, [templateId]);
 
   return (
     <div className="box-border flex flex-row flex-wrap items-start justify-start gap-6 p-4 ">
@@ -76,11 +89,6 @@ const TemplateSlider = ({ templates, size }: Props) => {
                 ""
               ) : (
                 <div className="absolute top-0 left-0 hidden object-cover w-full h-full overflow-hidden text-white group-hover:grid bg-slate-600/60 place-content-center">
-                  {/* {template.category === "premium" && (
-                    <div className="absolute grid w-6 h-6 bg-yellow-600 rounded-full right-1 top-1 place-content-center">
-                      {crownIcon}
-                    </div>
-                  )} */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -99,7 +107,7 @@ const TemplateSlider = ({ templates, size }: Props) => {
               )}
 
               <div className="text-center h-full w-full absolute inset-0 flex justify-center items-center text-[#000] text-sm font-medium">
-                {templateId === index + 1 && (
+                {index === activeTemplate && (
                   <span className="flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
