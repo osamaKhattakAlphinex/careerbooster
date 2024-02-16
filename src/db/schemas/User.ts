@@ -81,6 +81,10 @@ const UserSchema = new Schema(
       type: Number,
       default: 0,
     },
+    totalCredits: {
+      type: Number,
+      default: 0,
+    },
     OpenAiTokensUsed: {
       type: Number,
       default: 0,
