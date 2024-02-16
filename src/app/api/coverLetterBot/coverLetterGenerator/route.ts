@@ -89,6 +89,9 @@ export async function POST(req: any) {
   
             this is the prompt:
             ${prompt}
+            Name: ${userData.firstName} ${userData.lastName}
+            Email : ${userData.email}
+            Phone : ${userData.phone}
             `;
 
     const response: any = await openai.chat.completions.create({

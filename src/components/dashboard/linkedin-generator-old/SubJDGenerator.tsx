@@ -1,14 +1,10 @@
 "use client";
 import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
-import iconOfPackageBadge from "@/../public/icon/crown.svg";
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  WorkExperience,
-  setUserData,
-} from "@/store/userDataSlice";
+import { WorkExperience, setUserData } from "@/store/userDataSlice";
 import axios from "axios";
 import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
@@ -77,14 +73,12 @@ const SubJDGenerator = () => {
         let html = "";
         html += `<h4><strong>${experience?.jobTitle}</strong></h4>`;
         html += `<h5>${experience?.company} | ${experience?.cityState} ${experience?.country}</h5>`;
-        html += `<p style=' margin-bottom: 10px'>${experience?.fromMonth} ${
-          experience?.fromYear
-        } to ${
+        html += `<p>${experience?.fromMonth} ${experience?.fromYear} to ${
           experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
         }</p>`;
-        html += `<p>`;
+        html += `<br/><p>`;
         setStreamedData((prev) => prev + html);
         tempText += html;
         setMsgLoading(true);
@@ -119,11 +113,7 @@ const SubJDGenerator = () => {
             tempText += text;
           }
         }
-        tempText += `
-        
-        /n
-
-        `;
+        tempText += `<br/>`;
         setStreamedData((prev) => prev + `</p> <br /> `);
         setMsgLoading(false);
 
@@ -224,7 +214,7 @@ const SubJDGenerator = () => {
             />
           </div>
           <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
-            <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row ">
+            <div className="flex flex-row items-center gap-4 xs:justify-between sm:justify-between md:justify-start">
               <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
                 Job Description Generator
               </h1>
@@ -306,13 +296,13 @@ const SubJDGenerator = () => {
         </div>
         {streamedData && (
           <div className=" mb-4 border-gray-500  rounded border-[1px] p-4">
-            <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
+            <h1 className="mb-4 text-4xl font-extrabold text-gray-900">
               <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
                 AI Response{" "}
               </span>
             </h1>
             <div
-              className="ml-2 font-sans text-gray-300  break-words"
+              className="ml-2 font-sans text-gray-300 break-words"
               // style={{ textW: "auto" }}
             >
               <div
