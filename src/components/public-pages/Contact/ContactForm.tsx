@@ -46,10 +46,10 @@ const ContactForm = () => {
     <div className="flex flex-row justify-center">
       <div className="flex flex-col md:w-[44%] ">
         <form className="flex flex-col gap-8" onSubmit={formik.handleSubmit}>
-          <div className=" flex flex-col justify-start items-start">
+          <div className="flex flex-col items-start justify-start ">
             <label
               htmlFor="name"
-              className=" text-lg font-medium mb-4 text-gray-900 dark:text-gray-400"
+              className="mb-4 text-lg font-medium text-gray-900 dark:text-gray-400"
             >
               Your name*
             </label>
@@ -63,7 +63,7 @@ const ContactForm = () => {
                   strokeLinejoin="round"
                   strokeWidth="1.5"
                   viewBox="0 0 24 24"
-                  className="h-5 w-5"
+                  className="w-5 h-5"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" />
                   <circle cx="12" cy="7" r="4" />
@@ -74,17 +74,17 @@ const ContactForm = () => {
                 type="text"
                 id="name"
                 name="name"
-                className="text-gray-900 dark:text-gray-100 w-full text-base bg-transparent outline-none"
+                className="w-full text-base text-gray-900 bg-transparent outline-none dark:text-gray-100"
                 placeholder="What's your name?"
                 value={formik.values.name}
                 onChange={formik.handleChange}
               />
             </div>
           </div>
-          <div className="flex flex-col stify-start items-start">
+          <div className="flex flex-col items-start stify-start">
             <label
               htmlFor="email"
-              className=" text-lg font-medium text-gray-900 dark:text-gray-400 mb-4"
+              className="mb-4 text-lg font-medium text-gray-900 dark:text-gray-400"
             >
               Email Address*
             </label>
@@ -94,7 +94,7 @@ const ContactForm = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 18 18"
-                  className="h-5 w-5"
+                  className="w-5 h-5"
                 >
                   <g
                     stroke="currentColor"
@@ -111,17 +111,17 @@ const ContactForm = () => {
                 type="email"
                 id="email"
                 name="email"
-                className=" text-gray-900 dark:text-gray-100 w-full text-base bg-transparent outline-none"
+                className="w-full text-base text-gray-900 bg-transparent outline-none dark:text-gray-100"
                 placeholder="Enter Your Email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
               />
             </div>
           </div>
-          <div className="flex flex-col justify-start items-start">
+          <div className="flex flex-col items-start justify-start">
             <label
               htmlFor="phone"
-              className="text-lg font-medium text-gray-900 dark:text-gray-400 mb-4"
+              className="mb-4 text-lg font-medium text-gray-900 dark:text-gray-400"
             >
               Phone Number
             </label>
@@ -135,7 +135,7 @@ const ContactForm = () => {
                   strokeLinejoin="round"
                   strokeWidth="1.5"
                   viewBox="0 0 24 24"
-                  className="h-5 w-5"
+                  className="w-5 h-5"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" />
                   <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2m10 3a2 2 0 0 1 2 2m-2-6a6 6 0 0 1 6 6" />
@@ -145,7 +145,7 @@ const ContactForm = () => {
                 type="number"
                 id="phone"
                 name="phone"
-                className=" text-gray-900 dark:text-gray-100 w-full text-base bg-transparent outline-none"
+                className="w-full text-base text-gray-900 bg-transparent outline-none dark:text-gray-100"
                 placeholder="Phone Number"
                 value={formik.values.phone}
                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -153,10 +153,10 @@ const ContactForm = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col justify-start items-start">
+          <div className="flex flex-col items-start justify-start">
             <label
               htmlFor="message"
-              className="text-lg text-gray-900 font-medium dark:text-gray-400 mb-4"
+              className="mb-4 text-lg font-medium text-gray-900 dark:text-gray-400"
             >
               Your Message*
             </label>
@@ -194,7 +194,7 @@ const ContactForm = () => {
               {submitting ? "Submitting..." : "Send Message"}
             </button>
           </div>
-          <div className="p-4 rounded-md  mb-0 hidden"></div>
+          <div className="hidden p-4 mb-0 rounded-md"></div>
         </form>
       </div>
     </div>

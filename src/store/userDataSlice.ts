@@ -56,6 +56,10 @@ interface UserDataSlice {
     cityState?: string;
     postalCode?: string;
   };
+
+  trialResume?: boolean;
+
+  linkedin?: string;
   education?: Education[];
   experience?: WorkExperience[];
   files?: string[];
@@ -82,6 +86,7 @@ const initialState: UserDataSlice = {
   lastName: "",
   phone: "",
   email: "",
+  linkedin: "",
   role: "",
   contact: {
     country: "",
@@ -100,7 +105,7 @@ const initialState: UserDataSlice = {
   wizardCompleted: false,
   wizardReviewed: false,
   creditPackage: "",
-
+  trialResume: false,
   profileImage: "",
 
   // userPackage: "",
