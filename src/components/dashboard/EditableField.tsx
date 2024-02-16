@@ -11,6 +11,7 @@ const normalizeValue = (value: string) => {
   }
 };
 const EditableField = ({
+  overrideValue,
   value,
   type,
   rows,
@@ -19,6 +20,7 @@ const EditableField = ({
   style,
 }: {
   value: string;
+  overrideValue?: string;
   type?: string;
   rows?: number;
   style?: any;
@@ -28,6 +30,7 @@ const EditableField = ({
   const [isEditing, setIsEditing] = useState(false);
   let new_value: any = normalizeValue(value);
   const [editedValue, setEditedValue] = useState<any>(new_value);
+
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const userData = useSelector((state: any) => state.userData);
@@ -86,9 +89,15 @@ const EditableField = ({
             )}
           </>
         ) : (
-          <span className="hover:cursor-text" title="Click to Edit">
-            {value}
-          </span>
+          <>
+            {/* {overrideValue ? (
+              <a href={value}>{overrideValue}</a>
+            ) : ( */}
+            <span className="hover:cursor-text" title="Click to Edit">
+              {overrideValue ? overrideValue : value}
+            </span>
+            {/* // )} */}
+          </>
         )}
       </span>
     </>

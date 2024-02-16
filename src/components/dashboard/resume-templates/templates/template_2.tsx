@@ -99,8 +99,8 @@ const ResumeTemplate2 = () => {
       </div>
       {/* contacts */}
       <div className="w-full py-3">
-        <ul className="flex flex-row  md:flex-row justify-around items-center p-4  bg-black rounded-2xl">
-          <li className="hover:shadow-md text-white hover:bg-gray-700 text-sm xs:text-sm md:text-lg lg:text-lg flex flex-row gap-1  items-center">
+        <ul className="flex flex-row  md:flex-row justify-around items-center p-4  rounded-2xl bg-gray-100">
+          <li className="hover:shadow-md text-gray-950  hover:bg-gray-100 text-sm xs:text-sm md:text-lg lg:text-lg flex flex-row gap-1  items-center">
             {phoneIcon}
             <EditableField
               value={
@@ -115,7 +115,7 @@ const ResumeTemplate2 = () => {
               }}
             />
           </li>
-          <li className="hover:shadow-md text-sm xs:text-sm md:text-lg lg:text-lg text-white hover:bg-gray-700 flex flex-row gap-1  items-center">
+          <li className=" text-sm xs:text-sm md:text-lg lg:text-lg text-gray-950 hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center">
             {emailIcon}
             <EditableField
               value={
@@ -130,8 +130,8 @@ const ResumeTemplate2 = () => {
               }}
             />
           </li>
-          <li className="hover:shadow-md text-white text-sm xs:text-sm md:text-lg lg:text-lg hover:bg-gray-700 flex flex-row gap-1  items-center">
-            <div>
+          <li className=" text-gray-950 text-sm xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:bg-gray-100 flex flex-row gap-1 justify-center items-center">
+            <div className="pt-2">
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
@@ -140,6 +140,7 @@ const ResumeTemplate2 = () => {
                 width="25"
                 height="25"
                 xmlns="http://www.w3.org/2000/svg"
+                className="!align-middle"
               >
                 <path
                   d="M9.5 18.4C14.4153 18.4 18.4 14.4153 18.4 9.5C18.4 4.58467 14.4153 0.6 9.5 0.6C4.58467 0.6 0.6 4.58467 0.6 9.5C0.6 14.4153 4.58467 18.4 9.5 18.4Z"
@@ -157,6 +158,7 @@ const ResumeTemplate2 = () => {
                   ? resume?.contact?.linkedIn
                   : "https://www.linkedin.com/"
               }
+              overrideValue={resume?.name ? resume?.name : "Full Name"}
               onSave={(value: string) => {
                 if (value !== resume.contact.linkedIn) {
                   updateSaveHook.updateAndSaveBasicInfo({ linkedIn: value });
@@ -557,7 +559,7 @@ const ResumeTemplate2 = () => {
                     >
                       {crossIcon1}
                     </div>
-                    <li className="hover:shadow-md uppercase hover:bg-gray-100 text-base">
+                    <li className="hover:shadow-md font-semibold hover:bg-gray-100 text-base">
                       <EditableField
                         value={`${education?.fieldOfStudy}`}
                         style={{ width: "100%" }}
@@ -569,7 +571,7 @@ const ResumeTemplate2 = () => {
                         }}
                       />{" "}
                     </li>
-                    <li className="hover:shadow-md hover:bg-gray-100 text-sm xs:text-sm md:text-lg lg:text-lg text-gray-800">
+                    <li className="hover:shadow-md hover:bg-gray-100 text-sm italic text-gray-800">
                       <EditableField
                         rows={2}
                         value={`${education?.schoolName}`}
@@ -582,7 +584,7 @@ const ResumeTemplate2 = () => {
                       />
                     </li>
                     {(education.fromYear !== "" || education.toYear !== "") && (
-                      <li className="mb-4 text-xs text-gray-700 ">
+                      <li className="mb-4 text-xs text-gray-700 italic">
                         {education.fromMonth && (
                           <EditableField
                             rows={2}

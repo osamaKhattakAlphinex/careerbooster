@@ -72,95 +72,103 @@ const ResumeTemplate8 = () => {
     <div className="w-full first-page  text-gray-900">
       <div className="flex">
         <div className="flex flex-col items-center w-full pt-4 px-8">
-          <h2 className="text-4xl xs:text-2xl md:text-4xl lg:text-4xl  hover:shadow-md hover:bg-gray-100">
-            <EditableField
-              value={resume?.name ? resume?.name : "FULL NAME"}
-              style={{ width: "fit-content" }}
-              onSave={(value: string) => {
-                if (value !== resume?.name) {
-                  updateSaveHook.updateAndSaveName(value);
-                }
-              }}
-            />
-          </h2>
-          <h3 className="text-2xl xs:text-[16px] md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100">
-            <EditableField
-              value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
-              onSave={(value: string) => {
-                if (value !== resume?.jobTitle) {
-                  updateSaveHook.updateAndSaveJobTitle(value);
-                }
-              }}
-            />
-          </h3>
-          <ul className="w-full flex flex-row md:flex-row gap-3 mt-8 mb-4 text-sm md:text-lg break-all pl-0 justify-between">
-            <li className="w-[30%] hover:shadow-md hover:bg-gray-100 text-sm  flex flex-row gap-1  items-center justify-start">
-              <div className="p-1">{phoneIcon}</div>
+          <div className="flex w-[100%] justify-between items-center">
+            <div className="flex flex-col w-[65%] ">
+              <h2 className="text-4xl xs:text-2xl md:text-4xl lg:text-4xl  hover:shadow-md hover:bg-gray-100">
+                <EditableField
+                  value={resume?.name ? resume?.name : "FULL NAME"}
+                  style={{ width: "fit-content" }}
+                  onSave={(value: string) => {
+                    if (value !== resume?.name) {
+                      updateSaveHook.updateAndSaveName(value);
+                    }
+                  }}
+                />
+              </h2>
+              <h3 className="text-2xl xs:text-[16px] md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100">
+                <EditableField
+                  value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
+                  onSave={(value: string) => {
+                    if (value !== resume?.jobTitle) {
+                      updateSaveHook.updateAndSaveJobTitle(value);
+                    }
+                  }}
+                />
+              </h3>
+            </div>
+            <div className="flex flex-col w-[25%]">
+              <ul className="w-full flex flex-col md:flex-col gap-3 mt-8 mb-4 text-sm md:text-lg break-all pl-0 justify-between">
+                <li className=" hover:shadow-md hover:bg-gray-100 text-sm  flex flex-row gap-1  items-center justify-start">
+                  <div className="p-1">{phoneIcon}</div>
 
-              <EditableField
-                value={
-                  resume?.contact?.phone
-                    ? resume?.contact?.phone
-                    : "(555) 555-1234"
-                }
-                onSave={(value: string) => {
-                  if (value !== resume?.contact?.phone) {
-                    updateSaveHook.updateAndSaveBasicInfo({ phone: value });
-                  }
-                }}
-              />
-            </li>
-            <li className="w-[30%] hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-sm">
-              <div className="p-1">{emailIcon}</div>
+                  <EditableField
+                    value={
+                      resume?.contact?.phone
+                        ? resume?.contact?.phone
+                        : "(555) 555-1234"
+                    }
+                    onSave={(value: string) => {
+                      if (value !== resume?.contact?.phone) {
+                        updateSaveHook.updateAndSaveBasicInfo({ phone: value });
+                      }
+                    }}
+                  />
+                </li>
+                <li className=" hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-sm">
+                  <div className="p-1">{emailIcon}</div>
 
-              <EditableField
-                value={
-                  resume?.contact?.email
-                    ? resume?.contact?.email
-                    : "your@email.com"
-                }
-                onSave={(value: string) => {
-                  if (value !== resume?.contact?.email) {
-                    updateSaveHook.updateAndSaveBasicInfo({ email: value });
-                  }
-                }}
-              />
-            </li>
-            <li className="w-[30%] hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center justify-start text-sm">
-              <div className="p-1">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 19 19"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9.5 18.4C14.4153 18.4 18.4 14.4153 18.4 9.5C18.4 4.58467 14.4153 0.6 9.5 0.6C4.58467 0.6 0.6 4.58467 0.6 9.5C0.6 14.4153 4.58467 18.4 9.5 18.4Z"
-                    stroke="black"
-                    strokeWidth="0.8"
+                  <EditableField
+                    value={
+                      resume?.contact?.email
+                        ? resume?.contact?.email
+                        : "your@email.com"
+                    }
+                    onSave={(value: string) => {
+                      if (value !== resume?.contact?.email) {
+                        updateSaveHook.updateAndSaveBasicInfo({ email: value });
+                      }
+                    }}
                   />
-                  <path
-                    d="M6.15572 13V7.54545H6.99379V13H6.15572ZM6.58185 6.63636C6.4185 6.63636 6.27764 6.58073 6.15927 6.46946C6.04326 6.35819 5.98526 6.22443 5.98526 6.06818C5.98526 5.91193 6.04326 5.77817 6.15927 5.6669C6.27764 5.55563 6.4185 5.5 6.58185 5.5C6.74521 5.5 6.88488 5.55563 7.00089 5.6669C7.11926 5.77817 7.17844 5.91193 7.17844 6.06818C7.17844 6.22443 7.11926 6.35819 7.00089 6.46946C6.88488 6.58073 6.74521 6.63636 6.58185 6.63636ZM9.36683 9.71875V13H8.52876V7.54545H9.33842V8.39773H9.40945C9.53729 8.12074 9.73142 7.8982 9.99183 7.73011C10.2522 7.55966 10.5884 7.47443 11.0004 7.47443C11.3697 7.47443 11.6928 7.55019 11.9698 7.7017C12.2468 7.85085 12.4622 8.07812 12.6161 8.38352C12.77 8.68655 12.8469 9.07008 12.8469 9.53409V13H12.0089V9.59091C12.0089 9.16241 11.8976 8.8286 11.6751 8.58949C11.4525 8.34801 11.1471 8.22727 10.7589 8.22727C10.4914 8.22727 10.2522 8.28527 10.0415 8.40128C9.83321 8.51728 9.66868 8.68655 9.54794 8.90909C9.4272 9.13163 9.36683 9.40152 9.36683 9.71875Z"
-                    fill="black"
+                </li>
+                <li className=" hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center justify-start text-sm">
+                  <div className="p-1">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 19 19"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9.5 18.4C14.4153 18.4 18.4 14.4153 18.4 9.5C18.4 4.58467 14.4153 0.6 9.5 0.6C4.58467 0.6 0.6 4.58467 0.6 9.5C0.6 14.4153 4.58467 18.4 9.5 18.4Z"
+                        stroke="black"
+                        strokeWidth="0.8"
+                      />
+                      <path
+                        d="M6.15572 13V7.54545H6.99379V13H6.15572ZM6.58185 6.63636C6.4185 6.63636 6.27764 6.58073 6.15927 6.46946C6.04326 6.35819 5.98526 6.22443 5.98526 6.06818C5.98526 5.91193 6.04326 5.77817 6.15927 5.6669C6.27764 5.55563 6.4185 5.5 6.58185 5.5C6.74521 5.5 6.88488 5.55563 7.00089 5.6669C7.11926 5.77817 7.17844 5.91193 7.17844 6.06818C7.17844 6.22443 7.11926 6.35819 7.00089 6.46946C6.88488 6.58073 6.74521 6.63636 6.58185 6.63636ZM9.36683 9.71875V13H8.52876V7.54545H9.33842V8.39773H9.40945C9.53729 8.12074 9.73142 7.8982 9.99183 7.73011C10.2522 7.55966 10.5884 7.47443 11.0004 7.47443C11.3697 7.47443 11.6928 7.55019 11.9698 7.7017C12.2468 7.85085 12.4622 8.07812 12.6161 8.38352C12.77 8.68655 12.8469 9.07008 12.8469 9.53409V13H12.0089V9.59091C12.0089 9.16241 11.8976 8.8286 11.6751 8.58949C11.4525 8.34801 11.1471 8.22727 10.7589 8.22727C10.4914 8.22727 10.2522 8.28527 10.0415 8.40128C9.83321 8.51728 9.66868 8.68655 9.54794 8.90909C9.4272 9.13163 9.36683 9.40152 9.36683 9.71875Z"
+                        fill="black"
+                      />
+                    </svg>
+                  </div>
+                  <EditableField
+                    value={
+                      resume?.contact?.linkedIn
+                        ? resume?.contact?.linkedIn
+                        : "https://www.linkedin.com/"
+                    }
+                    onSave={(value: string) => {
+                      if (value !== resume.contact.linkedIn) {
+                        updateSaveHook.updateAndSaveBasicInfo({
+                          linkedIn: value,
+                        });
+                      }
+                    }}
                   />
-                </svg>
-              </div>
-              <EditableField
-                value={
-                  resume?.contact?.linkedIn
-                    ? resume?.contact?.linkedIn
-                    : "https://www.linkedin.com/"
-                }
-                onSave={(value: string) => {
-                  if (value !== resume.contact.linkedIn) {
-                    updateSaveHook.updateAndSaveBasicInfo({ linkedIn: value });
-                  }
-                }}
-              />
-              {/* </a> */}
-            </li>
-          </ul>
+                  {/* </a> */}
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
       <div className="flex">
@@ -289,7 +297,7 @@ const ResumeTemplate8 = () => {
           )}
           {/* Work Experience */}
           {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
-          <h3 className="uppercase text-lg font-bold text-center font-serif mt-6 ">
+          <h3 className="uppercase text-lg font-bold text-center font-serif xs:mt-6 ">
             WORK EXPERIENCE
           </h3>
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-3"></span>

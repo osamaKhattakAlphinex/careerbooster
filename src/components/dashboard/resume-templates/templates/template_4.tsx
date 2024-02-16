@@ -315,7 +315,7 @@ const ResumeTemplate4 = () => {
 
           {/* Work Experience */}
 
-          <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold mt-7">
+          <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold lg:mt-4">
             WORK EXPERIENCE
           </h3>
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
@@ -325,241 +325,238 @@ const ResumeTemplate4 = () => {
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
-                
-                    <div
+                  <div
+                    key={i}
+                    className={`flex justify-start  ${
+                      i > 0
+                        ? "w-[100vw] ml-[-204px] xs:ml-0 xs:w-full"
+                        : "xs:min-h-fit min-h-[340px]"
+                    }`}
+                  >
+                    <div className="w-[5%] pr-5 mt-1 xs:pr-0 md:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
+                      <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
+                      {resume?.workExperienceArray.length - 1 !== i && (
+                        <span className="h-full w-[2px] bg-gray-500 border-b border-gray-500"></span>
+                      )}
+                    </div>
+                    <Toolbar
                       key={i}
-                      className={`flex justify-start  ${
-                        i > 0
-                          ? "w-[100vw] ml-[-204px] xs:ml-0 xs:w-full"
-                          : "xs:min-h-fit min-h-[380px]"
-                      }`}
+                      addAchivement={() => setNewWorkExperience(i)}
+                      regenrateAchivements={() => handleRegenrate(rec, i)}
+                      addNewLine={() => {
+                        handlers.handleAddSpace(i, newAchievement);
+                        setNewAchievement("");
+                      }}
                     >
-                      <div className="w-[5%] pr-5 mt-1 xs:pr-0 md:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
-                        <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
-                        {resume?.workExperienceArray.length - 1 !== i && (
-                          <span className="h-full w-[2px] bg-gray-500 border-b border-gray-500"></span>
-                        )}
-                      </div>
-                      <Toolbar
+                      <div
                         key={i}
-                        addAchivement={() => setNewWorkExperience(i)}
-                        regenrateAchivements={() => handleRegenrate(rec, i)}
-                        addNewLine={() => {
-                          handlers.handleAddSpace(i, newAchievement);
-                          setNewAchievement("");
-                        }}
+                        className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2"
+                        onDragStart={(e) =>
+                          e.dataTransfer.setData("text/plain", i.toString())
+                        }
+                        onDragOver={(e) => e.preventDefault()}
+                        onDrop={(e) => handleDropExperience(e, i)}
+                        draggable
                       >
-                        <div
-                          key={i}
-                          className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2"
-                          onDragStart={(e) =>
-                            e.dataTransfer.setData("text/plain", i.toString())
-                          }
-                          onDragOver={(e) => e.preventDefault()}
-                          onDrop={(e) => handleDropExperience(e, i)}
-                          draggable
-                        >
-                          <h2 className="hover:shadow-md hover:cursor-text text-[1rem] font-bold leading-8 hover:bg-gray-100">
+                        <h2 className="hover:shadow-md hover:cursor-text text-[1rem] font-bold leading-8 hover:bg-gray-100">
+                          <EditableField
+                            value={rec?.title}
+                            style={{ width: "100%" }}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { title: value },
+                                i
+                              );
+                            }}
+                          />
+                        </h2>
+                        <h2 className="hover:cursor-default text-[15px] leading-relaxed  ">
+                          {rec?.fromMonth + " " + rec?.fromYear} -{" "}
+                          {rec?.isContinue
+                            ? "Present"
+                            : `${rec?.toMonth} ${rec?.toYear}`}{" "}
+                          |{" "}
+                          <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
                             <EditableField
-                              value={rec?.title}
-                              style={{ width: "100%" }}
+                              value={rec?.company}
                               onSave={(value: string) => {
                                 handlers.handleSaveExperienceDetail(
-                                  { title: value },
+                                  { company: value },
                                   i
                                 );
                               }}
                             />
-                          </h2>
-                          <h2 className="hover:cursor-default text-[15px] leading-relaxed  ">
-                            {rec?.fromMonth + " " + rec?.fromYear} -{" "}
-                            {rec?.isContinue
-                              ? "Present"
-                              : `${rec?.toMonth} ${rec?.toYear}`}{" "}
-                            |{" "}
-                            <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
-                              <EditableField
-                                value={rec?.company}
-                                onSave={(value: string) => {
-                                  handlers.handleSaveExperienceDetail(
-                                    { company: value },
-                                    i
-                                  );
-                                }}
-                              />
-                            </span>{" "}
-                            |{" "}
-                            <span className="hover:shadow-md hover:bg-gray-100">
-                              <EditableField
-                                value={rec?.cityState}
-                                onSave={(value: string) => {
-                                  handlers.handleSaveExperienceDetail(
-                                    { cityState: value },
-                                    i
-                                  );
-                                }}
-                              />
-                            </span>{" "}
-                            <span className="hover:shadow-md hover:bg-gray-100">
-                              <EditableField
-                                value={rec?.country}
-                                onSave={(value: string) => {
-                                  handlers.handleSaveExperienceDetail(
-                                    { country: value },
-                                    i
-                                  );
-                                }}
-                              />
-                            </span>
-                          </h2>
-                          <div className="p-4">
-                            {rec?.achievements &&
-                            i !== regeneratedRecordIndex ? (
-                              <ul className="pl-0 flex flex-col gap-1 text-sm">
-                                {rec?.achievements.map(
-                                  (achievement: any, ind: number) =>
-                                    achievement === "" ? (
-                                      <li
-                                        key={ind}
-                                        onDragStart={(e) => {
-                                          setInsideIndex(ind);
-                                        }}
-                                        onDragOver={(e) => e.preventDefault()}
-                                        onDrop={(e) => {
-                                          handleDropAchievement(
-                                            i,
-                                            ind,
-                                            insideIndex
-                                          );
-                                        }}
-                                        draggable
-                                        className="h-8 hover:bg-slate-200 group flex flex-row justify-center items-center"
-                                      >
-                                        <div
-                                          className="group-hover:block hidden font-medium text-xs uppercase   text-gray-500 cursor-pointer"
-                                          onClick={() => {
-                                            handlers.handleRemoveExtraSpace(
-                                              i,
-                                              ind
-                                            );
-                                          }}
-                                        >
-                                          Remove This Extra Space
-                                        </div>
-                                      </li>
-                                    ) : (
-                                      <li
-                                        onDragStart={(e) => {
-                                          setInsideIndex(ind);
-                                        }}
-                                        onDragOver={(e) => e.preventDefault()}
-                                        onDrop={(e) => {
-                                          handleDropAchievement(
-                                            i,
-                                            ind,
-                                            insideIndex
-                                          );
-                                        }}
-                                        draggable
-                                        className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
-                                        key={ind}
-                                      >
-                                        <EditableField
-                                          type="textarea"
-                                          rows={2}
-                                          value={achievement}
-                                          onSave={(value: string) => {
-                                            handlers.handleUpdateAchivement(
-                                              i,
-                                              ind,
-                                              value
-                                            );
-                                          }}
-                                        />
-                                        <div
-                                          onClick={() =>
-                                            handlers.handleDeleteAchivement(
-                                              i,
-                                              ind
-                                            )
-                                          }
-                                          className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
-                                        >
-                                          {crossIcon1}
-                                        </div>
-                                      </li>
-                                    )
-                                )}
-                              </ul>
-                            ) : streamedJDData ? (
-                              <div
-                                dangerouslySetInnerHTML={{
-                                  __html: streamedJDData,
-                                }}
-                              ></div>
-                            ) : (
-                              <div className="text-center">
-                                <div role="status">
-                                  <Loader />
-                                </div>
-                              </div>
-                            )}
-                            {newWorkExperience === i ? (
-                              <>
-                                <div className="w-full gap-1 rounded-md flex flex-wrap h-9.5">
-                                  <textarea
-                                    className="w-9/12 xs:w-full md:w-9/12 lg:w-9/12 rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
-                                    onChange={(e) =>
-                                      setNewAchievement(e.target.value)
-                                    }
-                                    value={newAchievement}
-                                    rows={1}
-                                    cols={1}
-                                    name="newAchievement"
-                                    id="newAchievement"
-                                    autoComplete="off"
-                                    onKeyDown={(e) => {
-                                      if (e.key === "Enter") {
-                                        e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
-                                        // Save the new achievement to the state and possibly the database
-                                        handlers.handleAddAchivement(
+                          </span>{" "}
+                          |{" "}
+                          <span className="hover:shadow-md hover:bg-gray-100">
+                            <EditableField
+                              value={rec?.cityState}
+                              onSave={(value: string) => {
+                                handlers.handleSaveExperienceDetail(
+                                  { cityState: value },
+                                  i
+                                );
+                              }}
+                            />
+                          </span>{" "}
+                          <span className="hover:shadow-md hover:bg-gray-100">
+                            <EditableField
+                              value={rec?.country}
+                              onSave={(value: string) => {
+                                handlers.handleSaveExperienceDetail(
+                                  { country: value },
+                                  i
+                                );
+                              }}
+                            />
+                          </span>
+                        </h2>
+                        <div className="p-4">
+                          {rec?.achievements && i !== regeneratedRecordIndex ? (
+                            <ul className="pl-0 flex flex-col gap-1 text-sm">
+                              {rec?.achievements.map(
+                                (achievement: any, ind: number) =>
+                                  achievement === "" ? (
+                                    <li
+                                      key={ind}
+                                      onDragStart={(e) => {
+                                        setInsideIndex(ind);
+                                      }}
+                                      onDragOver={(e) => e.preventDefault()}
+                                      onDrop={(e) => {
+                                        handleDropAchievement(
                                           i,
-                                          newAchievement
+                                          ind,
+                                          insideIndex
                                         );
-                                        setNewAchievement("");
-                                      }
-                                    }}
-                                  />
-                                  <button
-                                    className="bg-green-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
-                                    onClick={() => {
+                                      }}
+                                      draggable
+                                      className="h-8 hover:bg-slate-200 group flex flex-row justify-center items-center"
+                                    >
+                                      <div
+                                        className="group-hover:block hidden font-medium text-xs uppercase   text-gray-500 cursor-pointer"
+                                        onClick={() => {
+                                          handlers.handleRemoveExtraSpace(
+                                            i,
+                                            ind
+                                          );
+                                        }}
+                                      >
+                                        Remove This Extra Space
+                                      </div>
+                                    </li>
+                                  ) : (
+                                    <li
+                                      onDragStart={(e) => {
+                                        setInsideIndex(ind);
+                                      }}
+                                      onDragOver={(e) => e.preventDefault()}
+                                      onDrop={(e) => {
+                                        handleDropAchievement(
+                                          i,
+                                          ind,
+                                          insideIndex
+                                        );
+                                      }}
+                                      draggable
+                                      className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
+                                      key={ind}
+                                    >
+                                      <EditableField
+                                        type="textarea"
+                                        rows={2}
+                                        value={achievement}
+                                        onSave={(value: string) => {
+                                          handlers.handleUpdateAchivement(
+                                            i,
+                                            ind,
+                                            value
+                                          );
+                                        }}
+                                      />
+                                      <div
+                                        onClick={() =>
+                                          handlers.handleDeleteAchivement(
+                                            i,
+                                            ind
+                                          )
+                                        }
+                                        className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
+                                      >
+                                        {crossIcon1}
+                                      </div>
+                                    </li>
+                                  )
+                              )}
+                            </ul>
+                          ) : streamedJDData ? (
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: streamedJDData,
+                              }}
+                            ></div>
+                          ) : (
+                            <div className="text-center">
+                              <div role="status">
+                                <Loader />
+                              </div>
+                            </div>
+                          )}
+                          {newWorkExperience === i ? (
+                            <>
+                              <div className="w-full gap-1 rounded-md flex flex-wrap h-9.5">
+                                <textarea
+                                  className="w-9/12 xs:w-full md:w-9/12 lg:w-9/12 rounded-l-md border-2  text bg-transparent p-2" // Apply Tailwind CSS classes
+                                  onChange={(e) =>
+                                    setNewAchievement(e.target.value)
+                                  }
+                                  value={newAchievement}
+                                  rows={1}
+                                  cols={1}
+                                  name="newAchievement"
+                                  id="newAchievement"
+                                  autoComplete="off"
+                                  onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                      e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
                                       // Save the new achievement to the state and possibly the database
                                       handlers.handleAddAchivement(
                                         i,
                                         newAchievement
                                       );
                                       setNewAchievement("");
-                                    }}
-                                  >
-                                    Save
-                                  </button>
-                                </div>
-                                <button
-                                  onClick={() => {
-                                    setNewAchievement("");
-                                    setNewWorkExperience(-1);
+                                    }
                                   }}
-                                  className="bg-red-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
+                                />
+                                <button
+                                  className="bg-green-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 uppercase h-9 px-2 text-white rounded-r-md"
+                                  onClick={() => {
+                                    // Save the new achievement to the state and possibly the database
+                                    handlers.handleAddAchivement(
+                                      i,
+                                      newAchievement
+                                    );
+                                    setNewAchievement("");
+                                  }}
                                 >
-                                  Cancel
+                                  Save
                                 </button>
-                              </>
-                            ) : null}
-                          </div>
+                              </div>
+                              <button
+                                onClick={() => {
+                                  setNewAchievement("");
+                                  setNewWorkExperience(-1);
+                                }}
+                                className="bg-red-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 py-1 px-2 mt-2 text-white rounded-full"
+                              >
+                                Cancel
+                              </button>
+                            </>
+                          ) : null}
                         </div>
-                      </Toolbar>
-                    </div>
-                  
+                      </div>
+                    </Toolbar>
+                  </div>
                 );
               })}
             </>
