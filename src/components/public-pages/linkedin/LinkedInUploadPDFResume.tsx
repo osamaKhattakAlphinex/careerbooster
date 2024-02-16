@@ -608,7 +608,7 @@ const LinkedInUploadPDFResume = () => {
               Yes, I Want to Explore More Career Boosting Tools!
             </h3>
             <button
-              className={`mx-1 mt-8 p-3  my-2 bg-yellow-400 hover:bg-yellow-600  lg:w-8/12 lg:h-14 lg:mt-8 text-center rounded-full font-bold lg:text-[20px] text-[16px] text-black lg:py-3 lg:px-9 no-underline  ${
+              className={`mx-1 mt-8 p-3  my-2 bg-yellow-500 bg-opacity-80 hover:bg-yellow-600  lg:w-8/12 lg:h-14 lg:mt-8 text-center rounded-full font-bold lg:text-[20px] text-[16px] text-gray-800 lg:py-3 lg:px-9 no-underline  ${
                 buttonDisabled ? "bg-yellow-600" : "cursor-pointer"
               } `}
               onClick={moveToRegister}

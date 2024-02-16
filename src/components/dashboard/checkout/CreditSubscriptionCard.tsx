@@ -232,7 +232,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
             </>
           )}
 
-          <ul className="flex flex-col md:gap-5 xs:gap-2 text-sm pl-0 md:mt-9 xs:mt-0 mb-0">
+          <ul className="flex flex-col md:gap-5 xs:gap-2 text-sm pl-0 md:mt-9 xs:mt-4 mb-0">
             {creditPackage.features.map((feature: string, i: number) => (
               <li
                 key={i}

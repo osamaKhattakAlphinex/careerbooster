@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import LinkedInUploadPDFResume from "@/components/public-pages/linkedin/LinkedInUploadPDFResume";
- 
+
 export const metadata: Metadata = {
   title: "CareerBooster.AI-linkedin",
   description:
@@ -31,7 +31,7 @@ export default function LinkedInPage() {
   return (
     <main className="flex-grow-1 bg-gradient-to-r from-gray-950 via-blue-950 to-purple-900">
       {/* LinkedIn Tool Card */}
-      <section className="pt-24">
+      <section className="pt-14">
         <div className=" flex flex-col items-center">
           <LinkedInUploadPDFResume />
         </div>

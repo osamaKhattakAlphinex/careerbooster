@@ -246,7 +246,9 @@ const SubAboutGenerator = () => {
                   height={18}
                   width={18}
                 />
-                <span className={`text-white ml-3 text-[15px] font-semibold`}>
+                <span
+                  className={`text-white ml-3 text-[15px] font-semibold whitespace-nowrap`}
+                >
                   Generate About
                 </span>
               </div>

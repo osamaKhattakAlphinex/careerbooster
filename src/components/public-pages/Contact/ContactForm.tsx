@@ -44,12 +44,15 @@ const ContactForm = () => {
 
   return (
     <div className="flex flex-row justify-center">
-      <div className="flex flex-col md:w-[44%] ">
-        <form className="flex flex-col gap-8" onSubmit={formik.handleSubmit}>
-          <div className="flex flex-col items-start justify-start ">
+      <div className="flex flex-col">
+        <form
+          className="grid xs:grid-cols-1 md:grid-cols-2 gap-4"
+          onSubmit={formik.handleSubmit}
+        >
+          <div className=" flex flex-col justify-start items-start md:col-span-2">
             <label
               htmlFor="name"
-              className="mb-4 text-lg font-medium text-gray-900 dark:text-gray-400"
+              className="text-lg font-medium mb-2 text-gray-900 dark:text-gray-400"
             >
               Your name*
             </label>
@@ -81,10 +84,45 @@ const ContactForm = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col items-start stify-start">
+          <div className="flex flex-col stify-start items-start ">
+            <label
+              htmlFor="phone"
+              className="text-lg font-medium text-gray-900 dark:text-gray-400 mb-2"
+            >
+              Phone Number
+            </label>
+            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg w-full dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff]">
+              <span className="text-gray-800 dark:text-gray-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                  viewBox="0 0 24 24"
+                  className="h-5 w-5"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2m10 3a2 2 0 0 1 2 2m-2-6a6 6 0 0 1 6 6" />
+                </svg>
+              </span>
+              <input
+                type="number"
+                id="phone"
+                name="phone"
+                className="text-gray-900 dark:text-gray-100 w-full text-base bg-transparent outline-none"
+                placeholder="Phone Number"
+                value={formik.values.phone}
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                onChange={formik.handleChange}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col stify-start items-start ">
             <label
               htmlFor="email"
-              className="mb-4 text-lg font-medium text-gray-900 dark:text-gray-400"
+              className="text-lg font-medium text-gray-900 dark:text-gray-400 mb-2"
             >
               Email Address*
             </label>
@@ -111,52 +149,18 @@ const ContactForm = () => {
                 type="email"
                 id="email"
                 name="email"
-                className="w-full text-base text-gray-900 bg-transparent outline-none dark:text-gray-100"
+                className="text-gray-900 dark:text-gray-100 w-full text-base bg-transparent outline-none"
                 placeholder="Enter Your Email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
               />
             </div>
           </div>
-          <div className="flex flex-col items-start justify-start">
-            <label
-              htmlFor="phone"
-              className="mb-4 text-lg font-medium text-gray-900 dark:text-gray-400"
-            >
-              Phone Number
-            </label>
-            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg w-full dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff]">
-              <span className="text-gray-800 dark:text-gray-100">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  viewBox="0 0 24 24"
-                  className="w-5 h-5"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2m10 3a2 2 0 0 1 2 2m-2-6a6 6 0 0 1 6 6" />
-                </svg>
-              </span>
-              <input
-                type="number"
-                id="phone"
-                name="phone"
-                className="w-full text-base text-gray-900 bg-transparent outline-none dark:text-gray-100"
-                placeholder="Phone Number"
-                value={formik.values.phone}
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                onChange={formik.handleChange}
-              />
-            </div>
-          </div>
-          <div className="flex flex-col items-start justify-start">
+
+          <div className="flex flex-col justify-start items-start md:col-span-2">
             <label
               htmlFor="message"
-              className="mb-4 text-lg font-medium text-gray-900 dark:text-gray-400"
+              className="text-lg text-gray-900 font-medium dark:text-gray-400 mb-2"
             >
               Your Message*
             </label>
@@ -179,20 +183,22 @@ const ContactForm = () => {
               {successAlert}
             </div>
           )}
-          <ReCAPTCHA
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-            ref={recaptchaRef}
-            onChange={handleCaptchaSubmission}
-            theme={theme}
-          />
-          <div className="">
-            <button
-              type="submit"
-              disabled={submitting || !isVerified}
-              className="px-6 py-3 text-base rounded-md dark:bg-[#e6f85e]  bg-[#6a4dff]  text-gray-950 dark:disabled:bg-[#bcc76d] disabled:bg-[#9580ff]"
-            >
-              {submitting ? "Submitting..." : "Send Message"}
-            </button>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 justify-between items-start md:col-span-2">
+            <ReCAPTCHA
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+              ref={recaptchaRef}
+              onChange={handleCaptchaSubmission}
+              theme={theme}
+            />
+            <div className="flex  md:justify-end">
+              <button
+                type="submit"
+                disabled={submitting || !isVerified}
+                className="px-6 py-3 text-base rounded-md dark:bg-[#e6f85e]  bg-[#6a4dff]  text-gray-950 dark:disabled:bg-[#bcc76d] disabled:bg-[#9580ff]"
+              >
+                {submitting ? "Submitting..." : "Send Message"}
+              </button>
+            </div>
           </div>
           <div className="hidden p-4 mb-0 rounded-md"></div>
         </form>
