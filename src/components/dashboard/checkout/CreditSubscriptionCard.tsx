@@ -1,9 +1,10 @@
 "use client";
 import { CreditsPackageData } from "@/db/schemas/CreditsPackage";
-import { infoSmallIcon } from "@/helpers/iconsProvider";
+import { infoSmallIcon, leftArrowIcon } from "@/helpers/iconsProvider";
 import { setUserData } from "@/store/userDataSlice";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -181,7 +182,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
         className="flex flex-col "
       >
         <div
-          className={`p-6  lg:px-8 w-fit  lg:py-8 rounded-2xl h-full border-[1px] hover:bg-gray-50 hover:shadow-2xl dark:hover:border-[#e6f85e] dark:hover:bg-black  transition-all duration-200 ease-in-out relative hover:border-blue-600 active:border-blue-600 xs:mx-2 md:mx-0`}
+          className={`p-6  lg:px-8 w-fit  lg:py-8 rounded-xl h-full border-[1px] dark:border-gray-700 border-gray-500  hover:shadow-xl dark:hover:border-[#e6f85e]   transition-all duration-200 ease-in-out relative hover:border-blue-600 active:border-blue-600 xs:mx-2 md:mx-0`}
         >
           <h1 className=" font-semibold text-[#6a4dff] dark:text-[#e6f85e] mb-0 mt-4 md:!text-3xl xs:text-2xl">
             {creditPackage.title}
