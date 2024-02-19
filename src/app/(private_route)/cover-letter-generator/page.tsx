@@ -486,7 +486,7 @@ export default function CoverLetterPage() {
                   </span>
                 </button>
               </div>
-              <div className="bg-white  w-full rounded-2xl flex flex-col py-6 px-8 ">
+              {/* <div className="bg-white  w-full rounded-2xl flex flex-col py-6 px-8 ">
                 <div>
                   <h1 className="uppercase text-[24px] text-gray-950 border-b border-gray-950 pb-2 font-semibold">
                     richard williams
@@ -540,16 +540,35 @@ export default function CoverLetterPage() {
                 <h1 className=" text-[24px] text-gray-950 ">
                   Richard Williams
                 </h1>
-              </div>
+              </div> */}
 
-              {show && (
-                <div className="mt-[40px] hidden">
-                  <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-5">
+                  <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-2">
                     your ai generated cover letter
                   </h1>
-
+              {show && (
+                <div className=" bg-white w-full rounded-2xl py-6 px-8 ">
+                  <div>
+                  <h1 className="uppercase text-[24px] text-gray-950 border-b border-gray-950 pb-2 font-semibold">
+                    {userData.firstName + ' ' + userData.lastName}
+                  </h1>
+                </div>
+                <div className="flex flex-col text-gray-950  pt-6  text-sm">
+                  <ul className="flex mb-8 d:gap-10 xs:gap-4 xs:flex-col md:flex-row">
+                    <li>
+                      <h2>{userData.contact.street + userData.contact.street ? ", ": "" + userData.contact.cityState + ", "+ userData.contact.country+ ", "+ userData.contact.postalCode}</h2>
+                    </li>
+                    <li>
+                      {" "}
+                      <h2>{userData.email} </h2>
+                    </li>
+                    <li>
+                      <h2>{userData.phone}</h2>
+                    </li>
+                  </ul>
+                  {/* <h4 className="mt-16 mb-8 ">[Today{"'"}s Date]</h4> */}
+                </div>
                   <div
-                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border-[1px] rounded-[8px] p-[10px] md:[30px] shadow ${
+                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4  ${
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >
@@ -558,7 +577,7 @@ export default function CoverLetterPage() {
                         <div
                           id="editor"
                           contentEditable="true"
-                          className="dark:text-gray-100 text-gray-950 "
+                          className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-[10px] "
                           // dangerouslySetInnerHTML={{ __html: editedContent }}
                           // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
                           //   setEditedContent(e.target.innerHTML);
@@ -566,7 +585,7 @@ export default function CoverLetterPage() {
                         ></div>
                       ) : (
                         <div
-                          className="dark:text-gray-100 text-gray-950"
+                          className=" text-gray-950"
                           dangerouslySetInnerHTML={{ __html: streamedData }}
                         ></div>
                       )}
@@ -598,7 +617,7 @@ export default function CoverLetterPage() {
                             "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
                           }`}
                         >
-                          <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
+                          <span className=" text-gray-950 text-[15px] font-semibold">
                             {msgLoading ? (
                               <div className="flex">
                                 <svg
@@ -627,7 +646,7 @@ export default function CoverLetterPage() {
                                   viewBox="0 0 24 24"
                                   strokeWidth={1.5}
                                   stroke="currentColor"
-                                  className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                                  className="w-4 h-4  text-gray-950"
                                 >
                                   <path
                                     strokeLinecap="round"
@@ -636,7 +655,7 @@ export default function CoverLetterPage() {
                                   />
                                 </svg>
                                 <span
-                                  className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                                  className={` text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
                                 >
                                   Re-generate Cover Letter
                                 </span>
@@ -758,11 +777,11 @@ export default function CoverLetterPage() {
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
+                          fill="balck"
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                          className="w-4 h-4  text-gray-950"
                         >
                           <path
                             strokeLinecap="round"
@@ -774,7 +793,7 @@ export default function CoverLetterPage() {
                     )}
                   </div>
                 </div>
-              )}
+               )} 
               {showPopup && (
                 <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
                   {/* Popup content here */}
