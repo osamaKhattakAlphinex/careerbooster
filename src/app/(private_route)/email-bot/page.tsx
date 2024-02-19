@@ -355,7 +355,7 @@ const PersonalizedEmailBot = () => {
               </div>
 
               {/* form */}
-              <div className="flex flex-col gap-5 justify-between items-start">
+              <div className="flex flex-col gap-5 justify-between items-start ">
                 <div className="w-full flex flex-col">
                   <label className=" font-bold text-md justify-between items-center md:text-[24px] dark:text-gray-100 text-gray-950 flex py-[20px] gap-[3px]">
                     <div>
@@ -460,9 +460,159 @@ const PersonalizedEmailBot = () => {
                   </span>
                 </button>
               </div>
+              <div className="bg-white  w-full rounded-2xl flex flex-col py-6 md:px-8 xs:px-3 ">
+                <div className="card_1 shadow-md bg-gray-200 rounded-2xl py-4 md:px-8 xs:px-3 md:text-base xs:text-sm">
+                  <div className="flex flex-col text-gray-950">
+                    <div className="flex">
+                      <h4 className="mb-2">1{")"}. Generate Email</h4>
+                      <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                          />
+                        </svg>
+
+                        <div className="w-44  bg-white font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-40  xs:-top-12 md:-top-18  hidden group-hover:block  xs:rounded-br-none    mb-6 shadow-xl rounded-xl py-2  transition-all">
+                          Important Alert: This Email Will Follow Your
+                          Application Directly
+                        </div>
+                      </div>
+                    </div>
+
+                    <h4 className="capitalize mb-4">dear hiring manager,</h4>
+                    <p>
+                      I am writing to apply for the Web Developer position at
+                      [Company Name]. With [X years] of experience in web
+                      development and expertise in languages such as HTML, CSS,
+                      JavaScript, and frameworks like React, I am excited about
+                      the opportunity to contribute to your team. I recently led
+                      a team in building a responsive e-commerce website from
+                      scratch, showcasing my ability to deliver high-quality
+                      solutions on time. I am drawn to your company's commitment
+                      to innovation and look forward to the possibility of
+                      contributing to your projects.
+                    </p>
+                    <p className="my-4">
+                      Thank you for considering my application. I have attached
+                      my resume for your review and am available for further
+                      discussion at your convenience.
+                    </p>
+                    <h4 className="">Best Regards,</h4>
+                    <h4>[Person Name]</h4>
+                  </div>
+                </div>
+                <div className="card_2 my-8 shadow-md bg-gray-200 rounded-2xl py-4 md:px-8 xs:px-3 md:text-base xs:text-sm">
+                  <div className="flex flex-col text-gray-950">
+                    <div className="flex">
+                      <h4 className="mb-2"> 2{")"}. First Follow Up</h4>
+                      <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                          />
+                        </svg>
+
+                        <div className="w-44  bg-white font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-40  xs:-top-12 md:-top-18  hidden group-hover:block  xs:rounded-br-none    mb-6 shadow-xl rounded-xl py-2  transition-all">
+                          Important Alert: You will send the second email after
+                          a week. You can schedule this email in advance in
+                          google.
+                        </div>
+                      </div>
+                    </div>
+
+                    <h4 className="capitalize mb-4">dear hiring manager,</h4>
+                    <p>
+                      I am writing to apply for the Web Developer position at
+                      [Company Name]. With [X years] of experience in web
+                      development and expertise in languages such as HTML, CSS,
+                      JavaScript, and frameworks like React, I am excited about
+                      the opportunity to contribute to your team. I recently led
+                      a team in building a responsive e-commerce website from
+                      scratch, showcasing my ability to deliver high-quality
+                      solutions on time. I am drawn to your company's commitment
+                      to innovation and look forward to the possibility of
+                      contributing to your projects.
+                    </p>
+                    <p className="my-4">
+                      Thank you for considering my application. I have attached
+                      my resume for your review and am available for further
+                      discussion at your convenience.
+                    </p>
+                    <h4 className="">Best Regards,</h4>
+                    <h4>[Person Name]</h4>
+                  </div>
+                </div>
+                <div className="card_3 shadow-md bg-gray-200 rounded-2xl py-4 md:px-8 xs:px-3 md:text-base xs:text-sm">
+                  <div className="flex flex-col text-gray-950">
+                    <div className="flex">
+                      <h4 className="mb-2">1{")"}. Second Follow Up</h4>
+                      <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                          />
+                        </svg>
+
+                        <div className="w-44  bg-white font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-40  xs:-top-12 md:-top-18  hidden group-hover:block  xs:rounded-br-none    mb-6 shadow-xl rounded-xl py-2  transition-all">
+                          Important Alert: This Email Will Follow Your
+                          Application Directly
+                        </div>
+                      </div>
+                    </div>
+
+                    <h4 className="capitalize mb-4">dear hiring manager,</h4>
+                    <p>
+                      I am writing to apply for the Web Developer position at
+                      [Company Name]. With [X years] of experience in web
+                      development and expertise in languages such as HTML, CSS,
+                      JavaScript, and frameworks like React, I am excited about
+                      the opportunity to contribute to your team. I recently led
+                      a team in building a responsive e-commerce website from
+                      scratch, showcasing my ability to deliver high-quality
+                      solutions on time. I am drawn to your company's commitment
+                      to innovation and look forward to the possibility of
+                      contributing to your projects.
+                    </p>
+                    <p className="my-4">
+                      Thank you for considering my application. I have attached
+                      my resume for your review and am available for further
+                      discussion at your convenience.
+                    </p>
+                    <h4 className="">Best Regards,</h4>
+                    <h4>[Person Name]</h4>
+                  </div>
+                </div>
+              </div>
 
               {show && (
-                <div className="mt-[40px] ">
+                <div className="mt-[40px] hidden ">
                   <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-5">
                     your ai generated email
                   </h1>
