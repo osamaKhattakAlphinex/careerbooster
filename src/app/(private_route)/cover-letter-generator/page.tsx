@@ -546,14 +546,14 @@ export default function CoverLetterPage() {
                     your ai generated cover letter
                   </h1>
               {show && (
-                <div className=" bg-white w-full rounded-2xl py-6 px-8 ">
+                <div ref={componentRef} className=" bg-white w-full rounded-2xl py-6 px-8 ">
                   <div>
                   <h1 className="uppercase text-[24px] text-gray-950 border-b border-gray-950 pb-2 font-semibold">
                     {userData.firstName + ' ' + userData.lastName}
                   </h1>
                 </div>
                 <div className="flex flex-col text-gray-950  pt-6  text-sm">
-                  <ul className="flex mb-8 d:gap-10 xs:gap-4 xs:flex-col md:flex-row">
+                  <ul className="flex mb-8 gap-10 md:gap-10 xs:gap-4 xs:flex-col md:flex-row">
                     <li>
                       <h2>{userData.contact.street + userData.contact.street ? ", ": "" + userData.contact.cityState + ", "+ userData.contact.country+ ", "+ userData.contact.postalCode}</h2>
                     </li>
@@ -572,7 +572,7 @@ export default function CoverLetterPage() {
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >
-                    <div ref={componentRef}>
+                    <div >
                       {isEditing ? (
                         <div
                           id="editor"
@@ -671,7 +671,7 @@ export default function CoverLetterPage() {
                       fileName="ai-cover-letter"
                     />
                     {show && (
-                      <div>
+                      <div className="hidden xs:block md:block">
                         <button
                           disabled={
                             msgLoading ||
@@ -727,7 +727,7 @@ export default function CoverLetterPage() {
                       </div>
                     )}
                     {show && (
-                      <div>
+                      <div className="hidden xs:block md:block">
                         <button
                           type="button"
                           disabled={
