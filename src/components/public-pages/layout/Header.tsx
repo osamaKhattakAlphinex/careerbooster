@@ -281,7 +281,11 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <div
+<<<<<<< HEAD
         className={` max-h-fit min-h-screen xs:overflow-y-auto lg:hidden   dark:bg-gray-950 bg-gray-100  justify-between  items-center  w-full ${
+=======
+        className={` max-h-fit min-h-screen xs:overflow-y-auto container  lg:hidden  mx-auto max-w-full justify-between xs:w-full items-center dark:bg-gray-950/95 bg-gray-100/95  w-full ${
+>>>>>>> ff57ad4813c5d435367935906037e743470cb46b
           mobileMenuOpen ? "xs:flex  " : "hidden"
         }`}
       >
