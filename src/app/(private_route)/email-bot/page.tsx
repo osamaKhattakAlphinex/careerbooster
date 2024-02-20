@@ -3,22 +3,15 @@ import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "@/store/userDataSlice";
-import Link from "next/link";
-import { leftArrowIcon } from "@/helpers/iconsProvider";
+
 import copy from "clipboard-copy";
 import CoverLetterFileUploader from "@/components/dashboard/cover-letter-generator/CoverLetterFileUploader";
-
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
-import { makeid } from "@/helpers/makeid";
 import { resetEmail, setEmail } from "@/store/emailSlice";
-
 import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedList";
 import EmailCardSingle from "@/components/dashboard/email-generator/EmailCardSingle";
-
 import DownloadService from "@/helpers/downloadFile";
-import useGetCreditLimits from "@/hooks/useGetCreditLimits";
-import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
 
 const PersonalizedEmailBot = () => {
@@ -203,7 +196,7 @@ const PersonalizedEmailBot = () => {
     } else if (emailType === "firstFollowUp") {
       if (session?.user?.email && aiInputUserData) {
         setMsgLoading(true);
-        setShow({ ...show, firstFollowUpShow: true });
+        setFirstShow( true);
         setStreamedFirstFollowUpEmailText("");
         const obj: any = {
           emailId: email.id,
@@ -281,7 +274,7 @@ const PersonalizedEmailBot = () => {
     } else if (emailType === "secondFollowUp") {
       if (session?.user?.email && aiInputUserData) {
         setMsgLoading(true);
-        setShow(true);
+        setSecondShow(true);
         setStreamedSecondFollowUpEmailText("");
         const obj: any = {
           emailId: email.id,
