@@ -167,10 +167,7 @@ const PersonalizedEmailBot = () => {
                 tempText += text;
               }
 
-              const emailsResponse = await axios.get(
-                "/api/emailBot/getAllEmails"
-                // payload
-              );
+              const emailsResponse = await axios.get("/api/emailBot/getAllEmails");
 
               if (emailsResponse.data.success) {
                 const updatedObject = {
