@@ -124,7 +124,6 @@ const PersonalizedEmailBot = () => {
           emailId: emailId,
           type: selectedOption,
           email: session?.user?.email,
-
           creditsUsed: creditLimits.email_generation,
 
           jobDescription,
