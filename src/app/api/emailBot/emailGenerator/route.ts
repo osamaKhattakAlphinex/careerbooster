@@ -44,6 +44,40 @@ export async function POST(req: any) {
     );
   }
 
+  const getPromptName = (generationType: string) => {
+    if (generationType === "email") {
+      return "emailWriter";
+    }
+    if (generationType === "firstFollowUp") {
+      return "emailWriterFirstFollowUp";
+    }
+    if (generationType === "secondFollowUp") {
+      return "emailWriterSecondFollowUp";
+    }
+  };
+
+  const replacePromptData = async (
+    generationType: string,
+    promptDB: any,
+    args: any
+  ) => {
+    if (generationType === "email") {
+      return await promptDB.replaceAll(
+        "{{jobDescription}}",
+        args.jobDescription
+      );
+    } else if (generationType === "firstFollowUp") {
+      return await promptDB.replaceAll("{{emailText}}", args.emailText);
+    } else if (generationType === "secondFollowUp") {
+      await promptDB.replaceAll("{{emailText}}", args.emailText);
+      await promptDB.replaceAll(
+        "{{firstFollowUpEmailText}}",
+        args.firstFollowUpText
+      );
+      return promptDB;
+    }
+  };
+
   try {
     const reqBody = await req.json();
     const type = reqBody?.type;
@@ -54,6 +88,10 @@ export async function POST(req: any) {
     const file = reqBody?.file;
     const jobDescription = reqBody?.jobDescription;
     const trainBotData = reqBody?.trainBotData;
+
+    const generationType = reqBody?.generationType;
+    const emailText = reqBody?.emailText;
+    const firstFollowUpText = reqBody?.firstFollowUpText;
 
     if (userCredits) {
       if (userCredits < creditsUsed) {
@@ -66,20 +104,26 @@ export async function POST(req: any) {
     const dataset = "linkedin.genearteConsultingBid";
     const model = await getTrainedModel(dataset);
     //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
-
     // fetch prompt from db
     await startDB();
     const promptRec = await Prompt.findOne({
       type: "email",
-      name: "emailWriter",
+      name: getPromptName(generationType),
       active: true,
     });
     const promptDB = promptRec.value;
 
-    const prompt = await promptDB.replaceAll(
-      "{{jobDescription}}",
-      jobDescription
-    );
+    const prompt = replacePromptData(generationType, promptDB, {
+      jobDescription,
+      emailText,
+      firstFollowUpText,
+    });
+
+    //promptDB.replaceAll(
+    //"{{jobDescription}}",
+    //jobDescription
+    //);
+
     let fileContent;
     // CREATING LLM MODAL
 
