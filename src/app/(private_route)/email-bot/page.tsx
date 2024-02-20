@@ -35,7 +35,7 @@ const PersonalizedEmailBot = () => {
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
   const [showPopup, setShowPopup] = useState(false);
-  const {setAvailableCredits} = useAppContext();
+  const { setAvailableCredits } = useAppContext();
 
   // Redux
   const dispatch = useDispatch();
@@ -122,7 +122,7 @@ const PersonalizedEmailBot = () => {
       })
         .then(async (resp: any) => {
           if (resp.ok) {
-            setAvailableCredits(true)
+            setAvailableCredits(true);
 
             const reader = resp.body.getReader();
             let tempText = "";
@@ -468,7 +468,9 @@ const PersonalizedEmailBot = () => {
                 <div className="card_1 shadow-md bg-gray-200 rounded-2xl py-4 md:px-8 xs:px-3 md:text-base xs:text-sm">
                   <div className="flex flex-col text-gray-950">
                     <div className="flex">
-                      <h4 className="mb-2">1{")"}. Generate Email</h4>
+                      <h2 className="mb-2 text-xl">
+                        <strong>Generate Email</strong>
+                      </h2>
                       <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -486,8 +488,7 @@ const PersonalizedEmailBot = () => {
                         </svg>
 
                         <div className="w-44  bg-white font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-40  xs:-top-12 md:-top-18  hidden group-hover:block  xs:rounded-br-none    mb-6 shadow-xl rounded-xl py-2  transition-all">
-                          Important Alert: This Email Will Follow Your
-                          Application Directly
+                          This Email Will Follow Your Application Directly
                         </div>
                       </div>
                     </div>
@@ -615,27 +616,54 @@ const PersonalizedEmailBot = () => {
                 </div>
               </div>
 
+              <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-5">
+                your ai generated email
+              </h1>
               {show && (
-                <div className="mt-[40px] hidden ">
-                  <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-5">
-                    your ai generated email
-                  </h1>
+                 <div className="bg-white  w-full rounded-2xl flex flex-col py-6 md:px-8 xs:px-3 ">
+                    <div className="card_1 shadow-md text-gray-950 bg-gray-200 rounded-2xl py-4 md:px-8 xs:px-3 md:text-base xs:text-sm">
+                    <div className="flex">
+
+                  <h2 className="mb-2 text-xl">
+                    <strong>Generate Email</strong>
+                  </h2>
+                  <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                      />
+                    </svg>{" "}
+                    <div className="w-44  bg-white font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-40  xs:-top-12 md:-top-18  hidden group-hover:block  xs:rounded-br-none    mb-6 shadow-xl rounded-xl py-2  transition-all">
+                      This Email Will Follow Your Application Directly
+                    </div>
+                  </div>
+                  </div>
+
                   <div
-                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 border-[#312E37] border-[1px] rounded-[8px] p-[10px] md:p-[30px] shadow ${
+                    className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 ${
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >
                     <div ref={componentRef}>
                       {isEditing ? (
                         <div
-                          className="dark:text-gray-100 text-gray-950 "
+                          className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-[10px]"
                           id="editor"
                           contentEditable="true"
                         ></div>
                       ) : (
                         <div>
                           <div
-                            className="dark:text-gray-100 text-gray-950 "
+                            className=" text-gray-950 "
                             dangerouslySetInnerHTML={{ __html: streamedData }}
                           ></div>
                         </div>
@@ -815,11 +843,11 @@ const PersonalizedEmailBot = () => {
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
+                          fill="black"
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="w-6 h-6 dark:text-gray-100 text-gray-950"
+                          className="w-4 h-4 dark:text-gray-100 text-gray-950"
                         >
                           <path
                             strokeLinecap="round"
@@ -830,6 +858,7 @@ const PersonalizedEmailBot = () => {
                       </button>
                     )}
                   </div>
+                </div>
                 </div>
               )}
               {showPopup && (
