@@ -15,7 +15,7 @@ import {
   TrainBotEntryType,
   makeTrainedBotEntry,
 } from "@/helpers/makeTrainBotEntry";
-import { postEmail } from "../route";
+import { postEmail, putEmail } from "../route";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 import { updateToolUsage } from "@/helpers/updateToolUsage";
@@ -88,7 +88,8 @@ export async function POST(req: any) {
     const file = reqBody?.file;
     const jobDescription = reqBody?.jobDescription;
     const trainBotData = reqBody?.trainBotData;
-
+    const savedId = reqBody?.emailId;
+    console.log(savedId)
     const generationType = reqBody?.generationType;
     const emailText = reqBody?.emailText;
     const firstFollowUpText = reqBody?.firstFollowUpText;
@@ -113,7 +114,7 @@ export async function POST(req: any) {
     });
     const promptDB = promptRec.value;
 
-    const prompt = replacePromptData(generationType, promptDB, {
+    const prompt = await replacePromptData(generationType, promptDB, {
       jobDescription,
       emailText,
       firstFollowUpText,
@@ -138,8 +139,11 @@ export async function POST(req: any) {
       //   res.end();
     }
     // this will run for both TYPES aiResume and profile
-    const inputPrompt = `Following are the content of the resume (in JSON format): 
-            JSON user/resume data: ${type === "file" ? fileContent : userData}
+    const inputPrompt = `${
+      generationType === "email" &&
+      `Following are the content of the resume (in JSON format): 
+    JSON user/resume data: ${type === "file" ? fileContent : JSON.stringify(userData)}`
+    } 
   
             this is the prompt:
             ${prompt}
@@ -166,9 +170,8 @@ export async function POST(req: any) {
           if (completionTokens > 0) {
             await updateUserTokens(email, completionTokens);
           }
-          if (trainBotData) {
+          if (trainBotData && generationType === "email") {
             const emailId = makeid();
-
             const payload = {
               id: emailId,
               jobDescription: jobDescription,
@@ -192,6 +195,14 @@ export async function POST(req: any) {
               Instructions: `Generate Email for ${trainBotData.userEmail}`,
             };
             await makeTrainedBotEntry(entry);
+          } else if(generationType === "firstFollowUp" || generationType === "secondFollowUp"){
+            const payload = {
+              id: savedId,
+              generationType: generationType,
+              emailText: completions,
+              userEmail: email,
+            };
+            await putEmail(payload)
           }
         } catch {
           console.log("error while saving Emails....");

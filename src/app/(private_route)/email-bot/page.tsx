@@ -11,7 +11,7 @@ import CoverLetterFileUploader from "@/components/dashboard/cover-letter-generat
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import { makeid } from "@/helpers/makeid";
-import { setEmail } from "@/store/emailSlice";
+import { resetEmail, setEmail } from "@/store/emailSlice";
 
 import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedList";
 import EmailCardSingle from "@/components/dashboard/email-generator/EmailCardSingle";
@@ -28,17 +28,15 @@ const PersonalizedEmailBot = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
-  const [show, setShow] = useState<any>({
-    emailShow: false,
-    firstFollowUpShow: false,
-    secondFollowUpShow: false,
-  });
+  const [show, setShow] = useState<boolean>(false);
+  const [firstShow, setFirstShow] = useState<boolean>(false);
+  const [secondShow, setSecondShow] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("profile"); // type
-  const [streamedData, setStreamedData] = useState<any>({
-    emailText: "",
-    firstFollowUpEmailText: "",
-    secondFollowUpEmailText: "",
-  });
+  const [streamedData, setStreamedData] = useState<string>("");
+  const [streamedFirstFollowUpEmailText, setStreamedFirstFollowUpEmailText] =
+    useState<string>("");
+  const [streamedSecondFollowUpEmailText, setStreamedSecondFollowUpEmailText] =
+    useState<string>("");
   const [isEditing, setIsEditing] = useState(false);
   const [isFirstEditing, setIsFirstEditing] = useState(false);
   const [isSecondEditing, setIsSecondEditing] = useState(false);
@@ -92,7 +90,7 @@ const PersonalizedEmailBot = () => {
     } else if (isFirstEditing) {
       if (componentFirstRef.current) {
         const editorElement =
-          componentFirstRef.current.querySelector("#editor");
+          componentFirstRef.current.querySelector("#first_editor");
         if (editorElement) {
           editorElement.innerHTML = email.emailText;
         }
@@ -100,7 +98,7 @@ const PersonalizedEmailBot = () => {
     } else if (isSecondEditing) {
       if (componentSecondRef.current) {
         const editorElement =
-          componentSecondRef.current.querySelector("#editor");
+          componentSecondRef.current.querySelector("#second_editor");
         if (editorElement) {
           editorElement.innerHTML = email.emailText;
         }
@@ -117,11 +115,9 @@ const PersonalizedEmailBot = () => {
     if (emailType === "email") {
       if (session?.user?.email && aiInputUserData) {
         setMsgLoading(true);
-        setShow({ ...show, emailShow: true });
-        setStreamedData({ ...streamedData, emailText: "" });
-        const emailId = makeid();
+        setShow(true);
+        setStreamedData("");
         const obj: any = {
-          emailId: emailId,
           type: selectedOption,
           email: session?.user?.email,
           generationType: "email",
@@ -167,10 +163,7 @@ const PersonalizedEmailBot = () => {
                   break;
                 }
                 const text = new TextDecoder().decode(value);
-                setStreamedData({
-                  ...streamedData,
-                  emailText: (prev: any) => prev + text,
-                });
+                setStreamedData((prev: any) => prev + text);
                 tempText += text;
               }
 
@@ -196,10 +189,7 @@ const PersonalizedEmailBot = () => {
               }
             } else {
               const res = await resp.json();
-              setStreamedData({
-                ...streamedData,
-                emailText: res.result + "! You ran out of Credits",
-              });
+              setStreamedData(res.result + "! You ran out of Credits");
             }
           })
           .finally(() => {
@@ -217,40 +207,21 @@ const PersonalizedEmailBot = () => {
       if (session?.user?.email && aiInputUserData) {
         setMsgLoading(true);
         setShow({ ...show, firstFollowUpShow: true });
-        setStreamedData({ ...streamedData, firstFollowUpEmailText: "" });
-        const emailId = makeid();
+        setStreamedFirstFollowUpEmailText("");
         const obj: any = {
-          emailId: emailId,
+          emailId: email.id,
           type: selectedOption,
           email: session?.user?.email,
           generationType: "firstFollowUp",
-          emailText: streamedData.emailText,
+          emailText: htmlToPlainText(streamedData),
           creditsUsed: creditLimits.email_generation,
-
-          jobDescription,
           trainBotData: {
             userEmail: userData.email,
             fileAddress: userData.defaultResumeFile,
           },
         };
-        if (selectedOption === "file") {
-          obj.file = selectedFile;
-        } else if (selectedOption === "aiResume") {
-          const foundResume = resumes.find(
-            (resume: any) => resume.id === setSelectedResumeId
-          );
-          obj.userData = {
-            jobTitle: foundResume.jobTitle,
-            name: foundResume.name,
-            primarySkills: foundResume.primarySkills,
-            professionalSkills: foundResume.professionalSkills,
-            secondarySkills: foundResume.secondarySkills,
-            education: foundResume.secondarySkills,
-            workExperienceArray: foundResume.workExperienceArray,
-          };
-        } else {
-          obj.userData = aiInputUserData;
-        }
+        obj.userData = aiInputUserData;
+
         // Fetch keywords
         fetch("/api/emailBot/emailGenerator", {
           method: "POST",
@@ -268,10 +239,7 @@ const PersonalizedEmailBot = () => {
                   break;
                 }
                 const text = new TextDecoder().decode(value);
-                setStreamedData({
-                  ...streamedData,
-                  firstFollowUpEmailText: (prev: any) => prev + text,
-                });
+                setStreamedFirstFollowUpEmailText((prev: any) => prev + text);
                 tempText += text;
               }
 
@@ -297,10 +265,9 @@ const PersonalizedEmailBot = () => {
               }
             } else {
               const res = await resp.json();
-              setStreamedData({
-                ...streamedData,
-                firstFollowUpEmailText: res.result + "! You ran out of Credits",
-              });
+              setStreamedFirstFollowUpEmailText(
+                res.result + "! You ran out of Credits"
+              );
             }
           })
           .finally(() => {
@@ -317,42 +284,23 @@ const PersonalizedEmailBot = () => {
     } else if (emailType === "secondFollowUp") {
       if (session?.user?.email && aiInputUserData) {
         setMsgLoading(true);
-        setShow({ ...show, secondFollowUpShow: true });
-        setStreamedData({ ...streamedData, secondFollowUpEmailText: "" });
-        const emailId = makeid();
+        setShow(true);
+        setStreamedSecondFollowUpEmailText("");
         const obj: any = {
-          emailId: emailId,
+          emailId: email.id,
           type: selectedOption,
           email: session?.user?.email,
           generationType: "secondFollowUp",
-          emailText: streamedData.emailText,
-          firstFollowUpText: streamedData.firstFollowUpEmailText,
+          emailText: htmlToPlainText(streamedData),
+          firstFollowUpText: htmlToPlainText(streamedFirstFollowUpEmailText),
           creditsUsed: creditLimits.email_generation,
-
-          jobDescription,
           trainBotData: {
             userEmail: userData.email,
             fileAddress: userData.defaultResumeFile,
           },
         };
-        if (selectedOption === "file") {
-          obj.file = selectedFile;
-        } else if (selectedOption === "aiResume") {
-          const foundResume = resumes.find(
-            (resume: any) => resume.id === setSelectedResumeId
-          );
-          obj.userData = {
-            jobTitle: foundResume.jobTitle,
-            name: foundResume.name,
-            primarySkills: foundResume.primarySkills,
-            professionalSkills: foundResume.professionalSkills,
-            secondarySkills: foundResume.secondarySkills,
-            education: foundResume.secondarySkills,
-            workExperienceArray: foundResume.workExperienceArray,
-          };
-        } else {
-          obj.userData = aiInputUserData;
-        }
+        obj.userData = aiInputUserData;
+
         // Fetch keywords
         fetch("/api/emailBot/emailGenerator", {
           method: "POST",
@@ -370,10 +318,7 @@ const PersonalizedEmailBot = () => {
                   break;
                 }
                 const text = new TextDecoder().decode(value);
-                setStreamedData({
-                  ...streamedData,
-                  secondFollowUpEmailText: (prev: any) => prev + text,
-                });
+                setStreamedSecondFollowUpEmailText((prev: any) => prev + text);
                 tempText += text;
               }
 
@@ -399,11 +344,9 @@ const PersonalizedEmailBot = () => {
               }
             } else {
               const res = await resp.json();
-              setStreamedData({
-                ...streamedData,
-                secondFollowUpEmailText:
-                  res.result + "! You ran out of Credits",
-              });
+              setStreamedSecondFollowUpEmailText(
+                res.result + "! You ran out of Credits"
+              );
             }
           })
           .finally(() => {
@@ -436,7 +379,8 @@ const PersonalizedEmailBot = () => {
       setIsEditing(false);
       const payLoad = {
         emailText: _emailText, //editedContent,
-
+        emailFirstFollowUpText: email.emailFirstFollowUpText,
+        emailSecondFollowUpText: email.emailSecondFollowUpText,
         generatedOnDate: email.generatedOnDate,
         generatedViaOption: email.generatedViaOption,
         id: email.id,
@@ -469,7 +413,9 @@ const PersonalizedEmailBot = () => {
       // setStreamedData(editedContent);
       setIsEditing(false);
       const payLoad = {
+        emailText: email.emailText,
         emailFirstFollowUpText: _emailText, //editedContent,
+        emailSecondFollowUpText: email.emailSecondFollowUpText,
         generatedOnDate: email.generatedOnDate,
         generatedViaOption: email.generatedViaOption,
         id: email.id,
@@ -502,8 +448,9 @@ const PersonalizedEmailBot = () => {
       // setStreamedData(editedContent);
       setIsEditing(false);
       const payLoad = {
+        emailText: email.emailText,
+        emailFirstFollowUpText: email.emailFirstFollowUpText,
         emailSecondFollowUpText: _emailText, //editedContent,
-
         generatedOnDate: email.generatedOnDate,
         generatedViaOption: email.generatedViaOption,
         id: email.id,
@@ -526,6 +473,15 @@ const PersonalizedEmailBot = () => {
     }
   };
 
+  const resetStatesAndRedux = () => {
+    dispatch(resetEmail());
+    setStreamedData("");
+    setStreamedFirstFollowUpEmailText("");
+    setStreamedSecondFollowUpEmailText("");
+    setShow(false);
+    setFirstShow(false);
+    setSecondShow(false);
+  };
   useEffect(() => {
     if (userData && userData?.email) {
       setAiInputUserData({
@@ -541,55 +497,41 @@ const PersonalizedEmailBot = () => {
     }
 
     if (!streamedData) {
-      setStreamedData({ ...streamedData, emailText: email.emailText });
-      setStreamedData({
-        ...streamedData,
-        firstFollowUpEmailText: email.emailFirstFollowUpText,
-      });
-      setStreamedData({
-        ...streamedData,
-        secondFollowUpEmailText: email.emailSecondFollowUpText,
-      });
+      setStreamedData(email.emailText);
+      setStreamedFirstFollowUpEmailText(email.emailFirstFollowUpText);
+      setStreamedSecondFollowUpEmailText(email.emailSecondFollowUpText);
     }
   }, [userData]);
 
   useEffect(() => {
     if (email.id !== "") {
-      console.log(email);
-      setShow({ ...show, emailShow: true });
+      setShow(true);
       if (email.emailFirstFollowUpText && email.emailFirstFollowUpText !== "") {
-        setShow({ ...show, firstFollowUpShow: true });
+        setFirstShow(true);
       }
       if (
         email.emailSecondFollowUpText &&
         email.emailSecondFollowUpText !== ""
       ) {
-        setShow({ ...show, secondFollowUpShow: true });
+        setSecondShow(true);
       }
     } else {
-      setShow({
-        emailShow: false,
-        firstFollowUpShow: false,
-        secondFollowUpShow: false,
-      });
+      setShow(false);
+      setFirstShow(false);
+      setSecondShow(false);
     }
   }, [email]);
 
   useEffect(() => {
     if (email.emailText !== "") {
-      setStreamedData({ ...streamedData, emailText: email.emailText });
+      console.log("insert");
+      setStreamedData(email.emailText);
     }
     if (email.emailFirstFollowUpText && email.emailFirstFollowUpText !== "") {
-      setStreamedData({
-        ...streamedData,
-        firstFollowUpEmailText: email.emailFirstFollowUpText,
-      });
+      setStreamedFirstFollowUpEmailText(email.emailFirstFollowUpText);
     }
     if (email.emailSecondFollowUpText && email.emailSecondFollowUpText !== "") {
-      setStreamedData({
-        ...streamedData,
-        secondFollowUpEmailText: email.emailSecondFollowUpText,
-      });
+      setStreamedSecondFollowUpEmailText(email.emailSecondFollowUpText);
     }
   }, [
     email.emailText,
@@ -605,7 +547,7 @@ const PersonalizedEmailBot = () => {
 
   return (
     <>
-      <div className="w-full sm:w-full z-1000 ">
+      <div className="w-full sm:w-full ">
         <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]  ">
           <PreviouslyGeneratedList {...historyProps} />
           <>
@@ -713,81 +655,44 @@ const PersonalizedEmailBot = () => {
                     className="w-full px-3 lg:px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px] pt-3"
                   />
                 </div>
-                {show.emailShow && (
+                {show && (
                   <button
                     type="button"
-                    disabled={
-                      msgLoading ||
-                      !session?.user?.email ||
-                      !aiInputUserData ||
-                      selectedOption === "" ||
-                      (selectedOption === "file" && selectedFile === "") ||
-                      jobDescription === ""
-                    }
-                    onClick={() => handleGenerate()}
-                    className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
-                      (msgLoading ||
-                        !session?.user?.email ||
-                        !aiInputUserData ||
-                        selectedOption === "" ||
-                        (selectedOption === "file" && selectedFile === "") ||
-                        jobDescription === "") &&
-                      "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                    }`}
+                    onClick={resetStatesAndRedux}
+                    className="dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full"
                   >
                     <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
-                      {msgLoading ? (
-                        <div className="flex">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className={`w-4 h-4 mr-3 ${
-                              msgLoading ? "animate-spin" : ""
-                            }`}
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                            />
-                          </svg>
-                          Please wait...
-                        </div>
-                      ) : (
-                        <div className="flex">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-4 h-4 dark:text-gray-100 text-gray-950"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-                            />
-                          </svg>
-                          <span
-                            className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
-                          >
-                            Generate Email
-                          </span>
-                        </div>
-                      )}
+                      <div className="flex">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                          />
+                        </svg>
+                        <span
+                          className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                        >
+                          Generate New Email
+                        </span>
+                      </div>
                     </span>
                   </button>
                 )}
               </div>
-              <div className="flex flex-col w-full py-6 bg-white rounded-2xl md:px-8 xs:px-3 ">
+
+              <div className="flex flex-col gap-4 w-full py-6 bg-white rounded-2xl md:px-8 xs:px-3 ">
                 <h1 className="uppercase text-gray-950 font-bold text-[18px] pb-5">
                   your ai generated email
                 </h1>
-                {show.emailShow ? (
+                {show ? (
                   <div className="py-4 bg-gray-200 shadow-md card_1 text-gray-950 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
                     <div className="flex">
                       <h2 className="mb-2 text-xl">
@@ -823,7 +728,7 @@ const PersonalizedEmailBot = () => {
                         {isEditing ? (
                           <div
                             className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-[10px]"
-                            id="first_editor"
+                            id="editor"
                             contentEditable="true"
                           ></div>
                         ) : (
@@ -831,7 +736,7 @@ const PersonalizedEmailBot = () => {
                             <div
                               className=" text-gray-950"
                               dangerouslySetInnerHTML={{
-                                __html: streamedData.emailText,
+                                __html: streamedData,
                               }}
                             ></div>
                           </div>
@@ -845,8 +750,7 @@ const PersonalizedEmailBot = () => {
                           !session?.user?.email ||
                           !aiInputUserData ||
                           selectedOption === "" ||
-                          (selectedOption === "file" && selectedFile === "") ||
-                          jobDescription === ""
+                          (selectedOption === "file" && selectedFile === "")
                         }
                         onClick={() => handleGenerate()}
                         className={` flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
@@ -912,7 +816,7 @@ const PersonalizedEmailBot = () => {
                         type="onPage"
                         fileName="ai-email"
                       />
-                      {show.emailShow && (
+                      {show && (
                         <div>
                           <button
                             disabled={
@@ -924,10 +828,10 @@ const PersonalizedEmailBot = () => {
                                 selectedFile === "") ||
                               (selectedOption === "aiResume" &&
                                 setSelectedResumeId === "") ||
-                              !show.emailShow ||
+                              !show ||
                               isEmailCopied
                             }
-                            onClick={() => copyEmail(streamedData.emailText)}
+                            onClick={() => copyEmail(streamedData)}
                             className={`xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                               msgLoading ||
                               !session?.user?.email ||
@@ -937,9 +841,9 @@ const PersonalizedEmailBot = () => {
                                 selectedFile === "") ||
                               (selectedOption === "aiResume" &&
                                 setSelectedResumeId === "") ||
-                              !show.emailShow ||
+                              !show ||
                               isEmailCopied
-                                ? "opacity-50 cursor-not-allowed"
+                                ? "  cursor-not-allowed"
                                 : ""
                             }`}
                           >
@@ -968,21 +872,17 @@ const PersonalizedEmailBot = () => {
                           </button>
                         </div>
                       )}
-                      {show.emailShow && (
+                      {show && (
                         <div>
                           <button
                             type="button"
                             disabled={
-                              !show.emailShow ||
-                              msgLoading ||
-                              !session?.user?.email
+                              !show || msgLoading || !session?.user?.email
                             }
                             onClick={() => handleClick("email")}
                             className={` xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
-                              !show.emailShow ||
-                              msgLoading ||
-                              !session?.user?.email
-                                ? "opacity-50 cursor-not-allowed"
+                              !show || msgLoading || !session?.user?.email
+                                ? "  cursor-not-allowed"
                                 : ""
                             } `}
                           >
@@ -1045,14 +945,14 @@ const PersonalizedEmailBot = () => {
                         jobDescription === ""
                       }
                       onClick={() => handleGenerate()}
-                      className={`dark:bg-gradient-to-r absolute top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                      className={`dark:bg-gradient-to-r absolute z-10 top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                         (msgLoading ||
                           !session?.user?.email ||
                           !aiInputUserData ||
                           selectedOption === "" ||
                           (selectedOption === "file" && selectedFile === "") ||
                           jobDescription === "") &&
-                        "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
+                        "  cursor-not-allowed" // Apply these styles when the button is disabled
                       }`}
                     >
                       <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
@@ -1077,7 +977,7 @@ const PersonalizedEmailBot = () => {
                             Please wait...
                           </div>
                         ) : (
-                          <div className="flex">
+                          <div className="flex items-center">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
@@ -1152,7 +1052,7 @@ const PersonalizedEmailBot = () => {
                   </div>
                 )}
 
-                {show.firstFollowUpShow ? (
+                {firstShow ? (
                   <div className="py-4 bg-gray-200 shadow-md card_1 text-gray-950 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
                     <div className="flex">
                       <h2 className="mb-2 text-lg"> First Follow Up</h2>
@@ -1188,7 +1088,7 @@ const PersonalizedEmailBot = () => {
                         {isFirstEditing ? (
                           <div
                             className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-[10px]"
-                            id="second_editor"
+                            id="first_editor"
                             contentEditable="true"
                           ></div>
                         ) : (
@@ -1196,7 +1096,7 @@ const PersonalizedEmailBot = () => {
                             <div
                               className=" text-gray-950"
                               dangerouslySetInnerHTML={{
-                                __html: streamedData.firstFollowUpEmailText,
+                                __html: streamedFirstFollowUpEmailText,
                               }}
                             ></div>
                           </div>
@@ -1210,18 +1110,16 @@ const PersonalizedEmailBot = () => {
                           !session?.user?.email ||
                           !aiInputUserData ||
                           selectedOption === "" ||
-                          (selectedOption === "file" && selectedFile === "") ||
-                          jobDescription === ""
+                          (selectedOption === "file" && selectedFile === "")
                         }
                         onClick={() => handleGenerate("firstFollowUp")}
-                        className={` flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                        className={` flex gap-2 items-center lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                           (msgLoading ||
                             !session?.user?.email ||
                             !aiInputUserData ||
                             selectedOption === "" ||
                             (selectedOption === "file" &&
-                              selectedFile === "") ||
-                            jobDescription === "") &&
+                              selectedFile === "")) &&
                           "cursor-not-allowed" // Add this class when the button is disabled
                         }`}
                       >
@@ -1277,7 +1175,7 @@ const PersonalizedEmailBot = () => {
                         type="onPage"
                         fileName="ai-email"
                       />
-                      {show.firstFollowUpShow && (
+                      {firstShow && (
                         <div>
                           <button
                             disabled={
@@ -1289,11 +1187,11 @@ const PersonalizedEmailBot = () => {
                                 selectedFile === "") ||
                               (selectedOption === "aiResume" &&
                                 setSelectedResumeId === "") ||
-                              !show.firstFollowUpShow ||
+                              !firstShow ||
                               isEmailCopied
                             }
                             onClick={() =>
-                              copyEmail(streamedData.firstFollowUpEmailText)
+                              copyEmail(streamedFirstFollowUpEmailText)
                             }
                             className={`xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                               msgLoading ||
@@ -1304,9 +1202,9 @@ const PersonalizedEmailBot = () => {
                                 selectedFile === "") ||
                               (selectedOption === "aiResume" &&
                                 setSelectedResumeId === "") ||
-                              !show.firstFollowUpShow ||
+                              !firstShow ||
                               isEmailCopied
-                                ? "opacity-50 cursor-not-allowed"
+                                ? "  cursor-not-allowed"
                                 : ""
                             }`}
                           >
@@ -1335,21 +1233,17 @@ const PersonalizedEmailBot = () => {
                           </button>
                         </div>
                       )}
-                      {show.firstFollowUpShow && (
+                      {firstShow && (
                         <div>
                           <button
                             type="button"
                             disabled={
-                              !show.firstFollowUpShow ||
-                              msgLoading ||
-                              !session?.user?.email
+                              !firstShow || msgLoading || !session?.user?.email
                             }
                             onClick={() => handleClick("firstFollowUp")}
                             className={` xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
-                              !show.firstFollowUpShow ||
-                              msgLoading ||
-                              !session?.user?.email
-                                ? "opacity-50 cursor-not-allowed"
+                              !firstShow || msgLoading || !session?.user?.email
+                                ? "  cursor-not-allowed"
                                 : ""
                             } `}
                           >
@@ -1408,27 +1302,19 @@ const PersonalizedEmailBot = () => {
                         !session?.user?.email ||
                         !aiInputUserData ||
                         selectedOption === "" ||
-                        (selectedOption === "file" && selectedFile === "") ||
-                        jobDescription === ""
+                        (selectedOption === "file" && selectedFile === "")
                       }
                       onClick={() => handleGenerate("firstFollowUp")}
-                      className={`dark:bg-gradient-to-r absolute top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                      className={`dark:bg-gradient-to-r z-10 absolute top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                         (msgLoading ||
                           !session?.user?.email ||
                           !aiInputUserData ||
                           selectedOption === "" ||
                           (selectedOption === "file" && selectedFile === "") ||
                           jobDescription === "") &&
-                        "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
+                        "  cursor-not-allowed" // Apply these styles when the button is disabled
                       }`}
                     >
-                      {/* <Image
-                  src="/icon/u_bolt-alt.svg"
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                /> */}
-
                       <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                         {msgLoading ? (
                           <div className="flex">
@@ -1451,7 +1337,7 @@ const PersonalizedEmailBot = () => {
                             Please wait...
                           </div>
                         ) : (
-                          <div className="flex">
+                          <div className="flex items-center">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
@@ -1525,7 +1411,7 @@ const PersonalizedEmailBot = () => {
                   </div>
                 )}
 
-                {show.secondFollowUpShow ? (
+                {secondShow ? (
                   <div className="py-4 bg-gray-200 shadow-md card_1 text-gray-950 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
                     <div className="flex">
                       <h2 className="mb-2 text-lg"> Second Follow Up</h2>
@@ -1561,7 +1447,7 @@ const PersonalizedEmailBot = () => {
                         {isSecondEditing ? (
                           <div
                             className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-[10px]"
-                            id="editor"
+                            id="second_editor"
                             contentEditable="true"
                           ></div>
                         ) : (
@@ -1569,7 +1455,7 @@ const PersonalizedEmailBot = () => {
                             <div
                               className=" text-gray-950"
                               dangerouslySetInnerHTML={{
-                                __html: streamedData.secondFollowUpEmailText,
+                                __html: streamedSecondFollowUpEmailText,
                               }}
                             ></div>
                           </div>
@@ -1583,8 +1469,7 @@ const PersonalizedEmailBot = () => {
                           !session?.user?.email ||
                           !aiInputUserData ||
                           selectedOption === "" ||
-                          (selectedOption === "file" && selectedFile === "") ||
-                          jobDescription === ""
+                          (selectedOption === "file" && selectedFile === "")
                         }
                         onClick={() => handleGenerate("secondFollowUp")}
                         className={` flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
@@ -1593,8 +1478,7 @@ const PersonalizedEmailBot = () => {
                             !aiInputUserData ||
                             selectedOption === "" ||
                             (selectedOption === "file" &&
-                              selectedFile === "") ||
-                            jobDescription === "") &&
+                              selectedFile === "")) &&
                           "cursor-not-allowed" // Add this class when the button is disabled
                         }`}
                       >
@@ -1650,7 +1534,7 @@ const PersonalizedEmailBot = () => {
                         type="onPage"
                         fileName="ai-email"
                       />
-                      {show.secondFollowUpShow && (
+                      {secondShow && (
                         <div>
                           <button
                             disabled={
@@ -1662,11 +1546,11 @@ const PersonalizedEmailBot = () => {
                                 selectedFile === "") ||
                               (selectedOption === "aiResume" &&
                                 setSelectedResumeId === "") ||
-                              !show.secondFollowUpShow ||
+                              !secondShow ||
                               isEmailCopied
                             }
                             onClick={() =>
-                              copyEmail(streamedData.secondFollowUpEmailText)
+                              copyEmail(streamedSecondFollowUpEmailText)
                             }
                             className={`xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                               msgLoading ||
@@ -1677,9 +1561,9 @@ const PersonalizedEmailBot = () => {
                                 selectedFile === "") ||
                               (selectedOption === "aiResume" &&
                                 setSelectedResumeId === "") ||
-                              !show.secondFollowUpShow ||
+                              !secondShow ||
                               isEmailCopied
-                                ? "opacity-50 cursor-not-allowed"
+                                ? "  cursor-not-allowed"
                                 : ""
                             }`}
                           >
@@ -1708,21 +1592,17 @@ const PersonalizedEmailBot = () => {
                           </button>
                         </div>
                       )}
-                      {show.secondFollowUpShow && (
+                      {secondShow && (
                         <div>
                           <button
                             type="button"
                             disabled={
-                              !show.secondFollowUpShow ||
-                              msgLoading ||
-                              !session?.user?.email
+                              !secondShow || msgLoading || !session?.user?.email
                             }
                             onClick={() => handleClick("secondFollowUp")}
                             className={` xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
-                              !show.secondFollowUpShow ||
-                              msgLoading ||
-                              !session?.user?.email
-                                ? "opacity-50 cursor-not-allowed"
+                              !secondShow || msgLoading || !session?.user?.email
+                                ? "  cursor-not-allowed"
                                 : ""
                             } `}
                           >
@@ -1785,23 +1665,16 @@ const PersonalizedEmailBot = () => {
                         jobDescription === ""
                       }
                       onClick={() => handleGenerate("secondFollowUp")}
-                      className={`dark:bg-gradient-to-r absolute top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                      className={`dark:bg-gradient-to-r absolute z-10 top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                         (msgLoading ||
                           !session?.user?.email ||
                           !aiInputUserData ||
                           selectedOption === "" ||
                           (selectedOption === "file" && selectedFile === "") ||
                           jobDescription === "") &&
-                        "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
+                        "  cursor-not-allowed" // Apply these styles when the button is disabled
                       }`}
                     >
-                      {/* <Image
-                  src="/icon/u_bolt-alt.svg"
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                /> */}
-
                       <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                         {msgLoading ? (
                           <div className="flex">
@@ -1824,7 +1697,7 @@ const PersonalizedEmailBot = () => {
                             Please wait...
                           </div>
                         ) : (
-                          <div className="flex">
+                          <div className="flex items-center">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
@@ -1849,7 +1722,7 @@ const PersonalizedEmailBot = () => {
                       </span>
                     </button>
 
-                    <div className="flex flex-col text-gray-950 blur">
+                    <div className="flex flex-col text-gray-950 blur ">
                       <div className="flex">
                         <h4 className="mb-2">Second Follow Up</h4>
                         <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
