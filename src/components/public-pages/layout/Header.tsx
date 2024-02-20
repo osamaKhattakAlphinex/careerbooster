@@ -36,7 +36,7 @@ const Header = () => {
 
   return (
     <nav
-      className={`translate-y-[0%] xs:h-[54.88px] lg:h-[90.06px] opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950/90 bg-gray-100/95  on-over shadow-lg  dark:text-gray-100 text-gray-900`}
+      className={`translate-y-[0%] xs:h-[54.88px] lg:h-[90.06px] opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950 bg-gray-100  on-over shadow-lg  dark:text-gray-100 text-gray-900`}
     >
       <div className="flex items-center justify-between mx-auto shadow-sm xs:py-2 sm:container xs:max-w-full xs:px-2">
         {/* <!-- Logo --> */}
@@ -281,7 +281,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <div
-        className={` max-h-fit min-h-screen xs:overflow-y-auto container  lg:hidden  mx-auto max-w-full justify-between xs:w-full items-center  w-full ${
+        className={` max-h-fit min-h-screen xs:overflow-y-auto lg:hidden   dark:bg-gray-950 bg-gray-100  justify-between  items-center  w-full ${
           mobileMenuOpen ? "xs:flex  " : "hidden"
         }`}
       >

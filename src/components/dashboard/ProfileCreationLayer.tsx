@@ -639,7 +639,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           </p>
         )}
 
-        <div className="w-1/3">
+        <div className="md:w-1/3 mx-2">
           <DidYouKnowCard />
         </div>
       </div>
