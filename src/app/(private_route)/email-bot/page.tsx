@@ -23,6 +23,8 @@ import { useAppContext } from "@/context/AppContext";
 
 const PersonalizedEmailBot = () => {
   const componentRef = useRef<any>(null);
+  const componentFirstRef = useRef<any>(null);
+  const componentSecondRef = useRef<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
@@ -38,6 +40,8 @@ const PersonalizedEmailBot = () => {
     secondFollowUpEmailText: "",
   });
   const [isEditing, setIsEditing] = useState(false);
+  const [isFirstEditing, setIsFirstEditing] = useState(false);
+  const [isSecondEditing, setIsSecondEditing] = useState(false);
   const [isEmailCopied, setIsEmailCopied] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
@@ -66,15 +70,37 @@ const PersonalizedEmailBot = () => {
       console.error("Failed to copy text: ", error);
     }
   };
-  const handleClick = () => {
+  const handleClick = (type:string) => {
     // setEditedContent(streamedData);
-    setIsEditing(true);
+    if(type === "email") {
+      setIsEditing(true);
+    } else if (type==="firstFollowUp") {
+      setIsFirstEditing(true);
+    } else if (type === "secondFollowUp"){
+      setIsSecondEditing(true);
+    }
   };
 
   useEffect(() => {
     if (isEditing) {
       if (componentRef.current) {
         const editorElement = componentRef.current.querySelector("#editor");
+        if (editorElement) {
+          editorElement.innerHTML = email.emailText;
+        }
+      }
+    }
+    else if (isFirstEditing) {
+      if (componentFirstRef.current) {
+        const editorElement = componentFirstRef.current.querySelector("#editor");
+        if (editorElement) {
+          editorElement.innerHTML = email.emailText;
+        }
+      }
+    }
+    else if (isSecondEditing) {
+      if (componentSecondRef.current) {
+        const editorElement = componentSecondRef.current.querySelector("#editor");
         if (editorElement) {
           editorElement.innerHTML = email.emailText;
         }
@@ -289,43 +315,213 @@ const PersonalizedEmailBot = () => {
         }, 3000);
       }
     } else if (emailType === "secondFollowUp") {
+      if (session?.user?.email && aiInputUserData) {
+        setMsgLoading(true);
+        setShow({ ...show, secondFollowUpShow: true });
+        setStreamedData({ ...streamedData, secondFollowUpEmailText: "" });
+        const emailId = makeid();
+        const obj: any = {
+          emailId: emailId,
+          type: selectedOption,
+          email: session?.user?.email,
+
+          creditsUsed: creditLimits.email_generation,
+
+          jobDescription,
+          trainBotData: {
+            userEmail: userData.email,
+            fileAddress: userData.defaultResumeFile,
+          },
+        };
+        if (selectedOption === "file") {
+          obj.file = selectedFile;
+        } else if (selectedOption === "aiResume") {
+          const foundResume = resumes.find(
+            (resume: any) => resume.id === setSelectedResumeId
+          );
+          obj.userData = {
+            jobTitle: foundResume.jobTitle,
+            name: foundResume.name,
+            primarySkills: foundResume.primarySkills,
+            professionalSkills: foundResume.professionalSkills,
+            secondarySkills: foundResume.secondarySkills,
+            education: foundResume.secondarySkills,
+            workExperienceArray: foundResume.workExperienceArray,
+          };
+        } else {
+          obj.userData = aiInputUserData;
+        }
+        // Fetch keywords
+        fetch("/api/emailBot/emailGenerator", {
+          method: "POST",
+          body: JSON.stringify(obj),
+        })
+          .then(async (resp: any) => {
+            if (resp.ok) {
+              setAvailableCredits(true);
+
+              const reader = resp.body.getReader();
+              let tempText = "";
+              while (true) {
+                const { done, value } = await reader.read();
+                if (done) {
+                  break;
+                }
+                const text = new TextDecoder().decode(value);
+                setStreamedData({
+                  ...streamedData,
+                  secondFollowUpEmailText: (prev: any) => prev + text,
+                });
+                tempText += text;
+              }
+
+              const emailsResponse = await axios.get(
+                "/api/emailBot/getAllEmails"
+                // payload
+              );
+
+              if (emailsResponse.data.success) {
+                const updatedObject = {
+                  ...userData,
+                  emails: emailsResponse.data.result.emails,
+                };
+
+                dispatch(setUserData({ ...userData, ...updatedObject }));
+                dispatch(
+                  setEmail(
+                    emailsResponse.data.result.emails[
+                      emailsResponse.data.result.emails.length - 1
+                    ]
+                  )
+                );
+              }
+            } else {
+              const res = await resp.json();
+              setStreamedData({
+                ...streamedData,
+                secondFollowUpEmailText:
+                  res.result + "! You ran out of Credits",
+              });
+            }
+          })
+          .finally(() => {
+            setMsgLoading(false);
+          });
+      } else {
+        setShowPopup(true);
+
+        // Hide the popup after 3 seconds
+        setTimeout(() => {
+          setShowPopup(false);
+        }, 3000);
+      }
     }
   };
 
-  const handleSave = async () => {
+  const handleSave = async (type: string) => {
     let _emailText = "";
 
-    if (componentRef.current) {
-      const editorElement = componentRef.current.querySelector("#editor");
-      if (editorElement) {
-        _emailText = editorElement.innerHTML;
-        editorElement.innerHTML = "";
+    if (type === "email") {
+      if (componentRef.current) {
+        const editorElement = componentRef.current.querySelector("#editor");
+        if (editorElement) {
+          _emailText = editorElement.innerHTML;
+          editorElement.innerHTML = "";
+        }
       }
+
+      // setStreamedData(editedContent);
+      setIsEditing(false);
+      const payLoad = {
+        emailText: _emailText, //editedContent,
+
+        generatedOnDate: email.generatedOnDate,
+        generatedViaOption: email.generatedViaOption,
+        id: email.id,
+        jobDescription: email.jobDescription,
+        userEmail: email.userEmail,
+      };
+
+      const updatedEmails = await axios.put(
+        `/api/emailBot/${email.id}`,
+        payLoad,
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      const updatedObject = {
+        ...userData,
+        emails: updatedEmails.data.results,
+      };
+      dispatch(setUserData({ ...updatedObject }));
+      dispatch(setEmail(payLoad));
+    } else if (type === "firstFollowUp") {
+      if (componentFirstRef.current) {
+        const editorElement =
+          componentFirstRef.current.querySelector("#first_editor");
+        if (editorElement) {
+          _emailText = editorElement.innerHTML;
+          editorElement.innerHTML = "";
+        }
+      }
+
+      // setStreamedData(editedContent);
+      setIsEditing(false);
+      const payLoad = {
+        emailFirstFollowUpText: _emailText, //editedContent,
+        generatedOnDate: email.generatedOnDate,
+        generatedViaOption: email.generatedViaOption,
+        id: email.id,
+        jobDescription: email.jobDescription,
+        userEmail: email.userEmail,
+      };
+
+      const updatedEmails = await axios.put(
+        `/api/emailBot/${email.id}`,
+        payLoad,
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      const updatedObject = {
+        ...userData,
+        emails: updatedEmails.data.results,
+      };
+      dispatch(setUserData({ ...updatedObject }));
+      dispatch(setEmail(payLoad));
+    } else if (type === "secondFollowUp") {
+      if (componentSecondRef.current) {
+        const editorElement =
+          componentSecondRef.current.querySelector("#second_editor");
+        if (editorElement) {
+          _emailText = editorElement.innerHTML;
+          editorElement.innerHTML = "";
+        }
+      }
+
+      // setStreamedData(editedContent);
+      setIsEditing(false);
+      const payLoad = {
+        emailSecondFollowUpText: _emailText, //editedContent,
+
+        generatedOnDate: email.generatedOnDate,
+        generatedViaOption: email.generatedViaOption,
+        id: email.id,
+        jobDescription: email.jobDescription,
+        userEmail: email.userEmail,
+      };
+
+      const updatedEmails = await axios.put(
+        `/api/emailBot/${email.id}`,
+        payLoad,
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      const updatedObject = {
+        ...userData,
+        emails: updatedEmails.data.results,
+      };
+      dispatch(setUserData({ ...updatedObject }));
+      dispatch(setEmail(payLoad));
     }
-
-    // setStreamedData(editedContent);
-    setIsEditing(false);
-    const payLoad = {
-      emailText: _emailText, //editedContent,
-      generatedOnDate: email.generatedOnDate,
-      generatedViaOption: email.generatedViaOption,
-      id: email.id,
-      jobDescription: email.jobDescription,
-      userEmail: email.userEmail,
-    };
-
-    const updatedEmails = await axios.put(
-      `/api/emailBot/${email.id}`,
-      payLoad,
-      { headers: { "Content-Type": "application/json" } }
-    );
-
-    const updatedObject = {
-      ...userData,
-      emails: updatedEmails.data.results,
-    };
-    dispatch(setUserData({ ...updatedObject }));
-    dispatch(setEmail(payLoad));
   };
 
   useEffect(() => {
@@ -342,25 +538,59 @@ const PersonalizedEmailBot = () => {
       });
     }
 
-    console.log(streamedData, email);
     if (!streamedData) {
       setStreamedData({ ...streamedData, emailText: email.emailText });
+      setStreamedData({
+        ...streamedData,
+        firstFollowUpEmailText: email.emailFirstFollowUpText,
+      });
+      setStreamedData({
+        ...streamedData,
+        secondFollowUpEmailText: email.emailSecondFollowUpText,
+      });
     }
   }, [userData]);
 
   useEffect(() => {
     if (email.id !== "") {
+      console.log(email)
       setShow({ ...show, emailShow: true });
+      if (email.emailFirstFollowUpText && email.emailFirstFollowUpText !== "") {
+        setShow({ ...show, firstFollowUpShow: true });
+      }
+      if (email.emailSecondFollowUpText && email.emailSecondFollowUpText !== "") {
+        setShow({ ...show, secondFollowUpShow: true });
+      }
     } else {
-      setShow({ ...show, emailShow: false });
+      setShow({
+        emailShow: false,
+        firstFollowUpShow: false,
+        secondFollowUpShow: false,
+      });
     }
   }, [email]);
 
   useEffect(() => {
-    /// saara kaam
-
-    setStreamedData({ ...streamedData, emailText: email.emailText });
-  }, [email.emailText]);
+    if (email.emailText !== "") {
+      setStreamedData({ ...streamedData, emailText: email.emailText });
+    }
+    if (email.emailFirstFollowUpText && email.emailFirstFollowUpText !== "") {
+      setStreamedData({
+        ...streamedData,
+        firstFollowUpEmailText: email.emailFirstFollowUpText,
+      });
+    }
+    if (email.emailSecondFollowUpText && email.emailSecondFollowUpText !== "") {
+      setStreamedData({
+        ...streamedData,
+        secondFollowUpEmailText: email.emailSecondFollowUpText,
+      });
+    }
+  }, [
+    email.emailText,
+    email.emailFirstFollowUpText,
+    email.emailSecondFollowUpText,
+  ]);
   const historyProps = {
     dataSource: "emails",
     Component: (card: any) => (
@@ -489,7 +719,7 @@ const PersonalizedEmailBot = () => {
                       (selectedOption === "file" && selectedFile === "") ||
                       jobDescription === ""
                     }
-                    onClick={handleGenerate}
+                    onClick={() => handleGenerate()}
                     className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                       (msgLoading ||
                         !session?.user?.email ||
@@ -549,7 +779,7 @@ const PersonalizedEmailBot = () => {
                 )}
               </div>
               <div className="flex flex-col w-full py-6 bg-white rounded-2xl md:px-8 xs:px-3 ">
-                <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-5">
+                <h1 className="uppercase text-gray-950 font-bold text-[18px] pb-5">
                   your ai generated email
                 </h1>
                 {show.emailShow ? (
@@ -588,7 +818,7 @@ const PersonalizedEmailBot = () => {
                         {isEditing ? (
                           <div
                             className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-[10px]"
-                            id="editor"
+                            id="first_editor"
                             contentEditable="true"
                           ></div>
                         ) : (
@@ -613,7 +843,7 @@ const PersonalizedEmailBot = () => {
                           (selectedOption === "file" && selectedFile === "") ||
                           jobDescription === ""
                         }
-                        onClick={handleGenerate}
+                        onClick={() => handleGenerate()}
                         className={` flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                           (msgLoading ||
                             !session?.user?.email ||
@@ -742,7 +972,7 @@ const PersonalizedEmailBot = () => {
                               msgLoading ||
                               !session?.user?.email
                             }
-                            onClick={handleClick}
+                            onClick={()=>handleClick("email")}
                             className={` xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                               !show.emailShow ||
                               msgLoading ||
@@ -776,7 +1006,7 @@ const PersonalizedEmailBot = () => {
                       {isEditing && (
                         <button
                           type="button"
-                          onClick={handleSave}
+                          onClick={() => handleSave("email")}
                           className="flex flex-row justify-center ml-auto items-center gap-2 py-3 px-3 border-[#312E37] border-[1px] rounded-full"
                         >
                           <svg
@@ -809,7 +1039,7 @@ const PersonalizedEmailBot = () => {
                         (selectedOption === "file" && selectedFile === "") ||
                         jobDescription === ""
                       }
-                      onClick={handleGenerate}
+                      onClick={() => handleGenerate()}
                       className={`dark:bg-gradient-to-r absolute top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                         (msgLoading ||
                           !session?.user?.email ||
@@ -820,13 +1050,6 @@ const PersonalizedEmailBot = () => {
                         "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
                       }`}
                     >
-                      {/* <Image
-                  src="/icon/u_bolt-alt.svg"
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                /> */}
-
                       <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                         {msgLoading ? (
                           <div className="flex">
@@ -924,84 +1147,10 @@ const PersonalizedEmailBot = () => {
                   </div>
                 )}
 
-                <div className="relative py-4 my-8 bg-gray-200 shadow-md card_2 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
-                  <button
-                    type="button"
-                    disabled={
-                      msgLoading ||
-                      !session?.user?.email ||
-                      !aiInputUserData ||
-                      selectedOption === "" ||
-                      (selectedOption === "file" && selectedFile === "") ||
-                      jobDescription === ""
-                    }
-                    onClick={handleGenerate}
-                    className={`dark:bg-gradient-to-r absolute top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
-                      (msgLoading ||
-                        !session?.user?.email ||
-                        !aiInputUserData ||
-                        selectedOption === "" ||
-                        (selectedOption === "file" && selectedFile === "") ||
-                        jobDescription === "") &&
-                      "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                    }`}
-                  >
-                    {/* <Image
-                  src="/icon/u_bolt-alt.svg"
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                /> */}
-
-                    <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
-                      {msgLoading ? (
-                        <div className="flex">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className={`w-4 h-4 mr-3 ${
-                              msgLoading ? "animate-spin" : ""
-                            }`}
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                            />
-                          </svg>
-                          Please wait...
-                        </div>
-                      ) : (
-                        <div className="flex">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-4 h-4 dark:text-gray-100 text-gray-950"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-                            />
-                          </svg>
-                          <span
-                            className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
-                          >
-                            Generate First Follow Up Email
-                          </span>
-                        </div>
-                      )}
-                    </span>
-                  </button>
-                  <div className="flex flex-col text-gray-950 blur">
+                {show.firstFollowUpShow ? (
+                  <div className="py-4 bg-gray-200 shadow-md card_1 text-gray-950 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
                     <div className="flex">
-                      <h4 className="mb-2"> 2{")"}. First Follow Up</h4>
+                      <h2 className="text-lg mb-2"> First Follow Up</h2>
                       <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -1019,90 +1168,217 @@ const PersonalizedEmailBot = () => {
                         </svg>
 
                         <div className="w-44  bg-white font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-40  xs:-top-12 md:-top-18  hidden group-hover:block  xs:rounded-br-none    mb-6 shadow-xl rounded-xl py-2  transition-all">
-                          Important Alert: You will send the second email after
-                          a week. You can schedule this email in advance in
-                          google.
+                          You will send the second email after a week. You can
+                          schedule this email in advance in google.
                         </div>
                       </div>
                     </div>
 
-                    <h4 className="mb-4 capitalize">dear hiring manager,</h4>
-                    <p>
-                      I am writing to apply for the Web Developer position at
-                      [Company Name]. With [X years] of experience in web
-                      development and expertise in languages such as HTML, CSS,
-                      JavaScript, and frameworks like React, I am excited about
-                      the opportunity to contribute to your team. I recently led
-                      a team in building a responsive e-commerce website from
-                      scratch, showcasing my ability to deliver high-quality
-                      solutions on time. I am drawn to your company{"'"}s
-                      commitment to innovation and look forward to the
-                      possibility of contributing to your projects.
-                    </p>
-                    <p className="my-4">
-                      Thank you for considering my application. I have attached
-                      my resume for your review and am available for further
-                      discussion at your convenience.
-                    </p>
-                    <h4 className="">Best Regards,</h4>
-                    <h4>[Person Name]</h4>
-                  </div>
-                </div>
-                <div className="relative py-4 bg-gray-200 shadow-md card_3 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
-                  <button
-                    type="button"
-                    disabled={
-                      msgLoading ||
-                      !session?.user?.email ||
-                      !aiInputUserData ||
-                      selectedOption === "" ||
-                      (selectedOption === "file" && selectedFile === "") ||
-                      jobDescription === ""
-                    }
-                    onClick={handleGenerate}
-                    className={`dark:bg-gradient-to-r absolute top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
-                      (msgLoading ||
-                        !session?.user?.email ||
-                        !aiInputUserData ||
-                        selectedOption === "" ||
-                        (selectedOption === "file" && selectedFile === "") ||
-                        jobDescription === "") &&
-                      "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                    }`}
-                  >
-                    {/* <Image
-                  src="/icon/u_bolt-alt.svg"
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                /> */}
+                    <div
+                      className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 ${
+                        msgLoading ? "animate-pulse" : ""
+                      }`}
+                    >
+                      <div ref={componentFirstRef}>
+                        {isFirstEditing ? (
+                          <div
+                            className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-[10px]"
+                            id="second_editor"
+                            contentEditable="true"
+                          ></div>
+                        ) : (
+                          <div>
+                            <div
+                              className=" text-gray-950"
+                              dangerouslySetInnerHTML={{
+                                __html: streamedData.firstFollowUpEmailText,
+                              }}
+                            ></div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-3 mt-5 buttons md:flex-row">
+                      <button
+                        disabled={
+                          msgLoading ||
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          jobDescription === ""
+                        }
+                        onClick={() => handleGenerate("firstFollowUp")}
+                        className={` flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                          (msgLoading ||
+                            !session?.user?.email ||
+                            !aiInputUserData ||
+                            selectedOption === "" ||
+                            (selectedOption === "file" &&
+                              selectedFile === "") ||
+                            jobDescription === "") &&
+                          "cursor-not-allowed" // Add this class when the button is disabled
+                        }`}
+                      >
+                        <span className="text-sm dark:text-gray-300 text-gray-950">
+                          {msgLoading ? (
+                            <div className="flex">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth="1.5"
+                                stroke="currentColor"
+                                className={`w-4 h-4 mr-3 ${
+                                  msgLoading ? "animate-spin" : ""
+                                }`}
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                                />
+                              </svg>
+                              Please wait...
+                            </div>
+                          ) : (
+                            <div className="flex items-center">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                                />
+                              </svg>
+                              <span
+                                className={`dark:text-gray-300 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                              >
+                                Re-generate
+                              </span>
+                            </div>
+                          )}
+                        </span>
+                      </button>
 
-                    <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
-                      {msgLoading ? (
-                        <div className="flex">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className={`w-4 h-4 mr-3 ${
-                              msgLoading ? "animate-spin" : ""
+                      <DownloadService
+                        componentRef={componentFirstRef}
+                        type="onPage"
+                        fileName="ai-email"
+                      />
+                      {show.firstFollowUpShow && (
+                        <div>
+                          <button
+                            disabled={
+                              msgLoading ||
+                              !session?.user?.email ||
+                              !aiInputUserData ||
+                              selectedOption === "" ||
+                              (selectedOption === "file" &&
+                                selectedFile === "") ||
+                              (selectedOption === "aiResume" &&
+                                setSelectedResumeId === "") ||
+                              !show.firstFollowUpShow ||
+                              isEmailCopied
+                            }
+                            onClick={() =>
+                              copyEmail(streamedData.firstFollowUpEmailText)
+                            }
+                            className={`xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                              msgLoading ||
+                              !session?.user?.email ||
+                              !aiInputUserData ||
+                              selectedOption === "" ||
+                              (selectedOption === "file" &&
+                                selectedFile === "") ||
+                              (selectedOption === "aiResume" &&
+                                setSelectedResumeId === "") ||
+                              !show.firstFollowUpShow ||
+                              isEmailCopied
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
                             }`}
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                            />
-                          </svg>
-                          Please wait...
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
+                              />
+                            </svg>
+
+                            <span className="text-sm dark:text-gray-100 text-gray-950">
+                              {msgLoading
+                                ? "Please wait..."
+                                : isEmailCopied
+                                ? "Copied"
+                                : "Copy to clipboard"}
+                            </span>
+                          </button>
                         </div>
-                      ) : (
-                        <div className="flex">
+                      )}
+                      {show.firstFollowUpShow && (
+                        <div>
+                          <button
+                            type="button"
+                            disabled={
+                              !show.firstFollowUpShow ||
+                              msgLoading ||
+                              !session?.user?.email
+                            }
+                            onClick={()=>handleClick("firstFollowUp")}
+                            className={` xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                              !show.firstFollowUpShow ||
+                              msgLoading ||
+                              !session?.user?.email
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            } `}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className={`w-4 h-4 dark:text-gray-300 text-gray-950  `}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
+                              />
+                            </svg>
+                            <span
+                              className={`dark:text-gray-300 text-gray-950 text-sm `}
+                            >
+                              Edit
+                            </span>
+                          </button>
+                        </div>
+                      )}
+                      {isFirstEditing && (
+                        <button
+                          type="button"
+                          onClick={() => handleSave("firstFollowUp")}
+                          className="flex flex-row justify-center ml-auto items-center gap-2 py-3 px-3 border-[#312E37] border-[1px] rounded-full"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
+                            fill="black"
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
@@ -1111,22 +1387,143 @@ const PersonalizedEmailBot = () => {
                             <path
                               strokeLinecap="round"
                               strokeLinejoin="round"
-                              d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                              d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
                             />
                           </svg>
-                          <span
-                            className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
-                          >
-                            Generate Second Follow Up Email
-                          </span>
-                        </div>
+                        </button>
                       )}
-                    </span>
-                  </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative py-4 my-8 bg-gray-200 shadow-md card_2 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
+                    <button
+                      type="button"
+                      disabled={
+                        msgLoading ||
+                        !session?.user?.email ||
+                        !aiInputUserData ||
+                        selectedOption === "" ||
+                        (selectedOption === "file" && selectedFile === "") ||
+                        jobDescription === ""
+                      }
+                      onClick={() => handleGenerate("firstFollowUp")}
+                      className={`dark:bg-gradient-to-r absolute top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                        (msgLoading ||
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          jobDescription === "") &&
+                        "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
+                      }`}
+                    >
+                      {/* <Image
+                  src="/icon/u_bolt-alt.svg"
+                  alt="bold icon"
+                  height={18}
+                  width={18}
+                /> */}
 
-                  <div className="flex flex-col text-gray-950 blur">
+                      <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
+                        {msgLoading ? (
+                          <div className="flex">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className={`w-4 h-4 mr-3 ${
+                                msgLoading ? "animate-spin" : ""
+                              }`}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                              />
+                            </svg>
+                            Please wait...
+                          </div>
+                        ) : (
+                          <div className="flex">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={1.5}
+                              stroke="currentColor"
+                              className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                              />
+                            </svg>
+                            <span
+                              className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                            >
+                              Generate First Follow Up Email
+                            </span>
+                          </div>
+                        )}
+                      </span>
+                    </button>
+                    <div className="flex flex-col text-gray-950 blur">
+                      <div className="flex">
+                        <h2 className="text-lg mb-2"> First Follow Up</h2>
+                        <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                            />
+                          </svg>
+
+                          <div className="w-44  bg-white font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-40  xs:-top-12 md:-top-18  hidden group-hover:block  xs:rounded-br-none    mb-6 shadow-xl rounded-xl py-2  transition-all">
+                            You will send the second email after a week. You can
+                            schedule this email in advance in google.
+                          </div>
+                        </div>
+                      </div>
+
+                      <h4 className="mb-4 capitalize">dear hiring manager,</h4>
+                      <p>
+                        I am writing to apply for the Web Developer position at
+                        [Company Name]. With [X years] of experience in web
+                        development and expertise in languages such as HTML,
+                        CSS, JavaScript, and frameworks like React, I am excited
+                        about the opportunity to contribute to your team. I
+                        recently led a team in building a responsive e-commerce
+                        website from scratch, showcasing my ability to deliver
+                        high-quality solutions on time. I am drawn to your
+                        company{"'"}s commitment to innovation and look forward
+                        to the possibility of contributing to your projects.
+                      </p>
+                      <p className="my-4">
+                        Thank you for considering my application. I have
+                        attached my resume for your review and am available for
+                        further discussion at your convenience.
+                      </p>
+                      <h4 className="">Best Regards,</h4>
+                      <h4>[Person Name]</h4>
+                    </div>
+                  </div>
+                )}
+
+                {show.secondFollowUpShow ? (
+                  <div className="py-4 bg-gray-200 shadow-md card_1 text-gray-950 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
                     <div className="flex">
-                      <h4 className="mb-2">1{")"}. Second Follow Up</h4>
+                      <h2 className="text-lg mb-2"> Second Follow Up</h2>
                       <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -1144,34 +1541,358 @@ const PersonalizedEmailBot = () => {
                         </svg>
 
                         <div className="w-44  bg-white font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-40  xs:-top-12 md:-top-18  hidden group-hover:block  xs:rounded-br-none    mb-6 shadow-xl rounded-xl py-2  transition-all">
-                          Important Alert: This Email Will Follow Your
-                          Application Directly
+                          You will send the second email after a week. You can
+                          schedule this email in advance in google.
                         </div>
                       </div>
                     </div>
 
-                    <h4 className="mb-4 capitalize">dear hiring manager,</h4>
-                    <p>
-                      I am writing to apply for the Web Developer position at
-                      [Company Name]. With [X years] of experience in web
-                      development and expertise in languages such as HTML, CSS,
-                      JavaScript, and frameworks like React, I am excited about
-                      the opportunity to contribute to your team. I recently led
-                      a team in building a responsive e-commerce website from
-                      scratch, showcasing my ability to deliver high-quality
-                      solutions on time. I am drawn to your company{"'"}s
-                      commitment to innovation and look forward to the
-                      possibility of contributing to your projects.
-                    </p>
-                    <p className="my-4">
-                      Thank you for considering my application. I have attached
-                      my resume for your review and am available for further
-                      discussion at your convenience.
-                    </p>
-                    <h4 className="">Best Regards,</h4>
-                    <h4>[Person Name]</h4>
+                    <div
+                      className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4 ${
+                        msgLoading ? "animate-pulse" : ""
+                      }`}
+                    >
+                      <div ref={componentSecondRef}>
+                        {isSecondEditing ? (
+                          <div
+                            className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-[10px]"
+                            id="editor"
+                            contentEditable="true"
+                          ></div>
+                        ) : (
+                          <div>
+                            <div
+                              className=" text-gray-950"
+                              dangerouslySetInnerHTML={{
+                                __html: streamedData.secondFollowUpEmailText,
+                              }}
+                            ></div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-3 mt-5 buttons md:flex-row">
+                      <button
+                        disabled={
+                          msgLoading ||
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          jobDescription === ""
+                        }
+                        onClick={() => handleGenerate("secondFollowUp")}
+                        className={` flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                          (msgLoading ||
+                            !session?.user?.email ||
+                            !aiInputUserData ||
+                            selectedOption === "" ||
+                            (selectedOption === "file" &&
+                              selectedFile === "") ||
+                            jobDescription === "") &&
+                          "cursor-not-allowed" // Add this class when the button is disabled
+                        }`}
+                      >
+                        <span className="text-sm dark:text-gray-300 text-gray-950">
+                          {msgLoading ? (
+                            <div className="flex">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth="1.5"
+                                stroke="currentColor"
+                                className={`w-4 h-4 mr-3 ${
+                                  msgLoading ? "animate-spin" : ""
+                                }`}
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                                />
+                              </svg>
+                              Please wait...
+                            </div>
+                          ) : (
+                            <div className="flex items-center">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                                />
+                              </svg>
+                              <span
+                                className={`dark:text-gray-300 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                              >
+                                Re-generate
+                              </span>
+                            </div>
+                          )}
+                        </span>
+                      </button>
+
+                      <DownloadService
+                        componentRef={componentSecondRef}
+                        type="onPage"
+                        fileName="ai-email"
+                      />
+                      {show.secondFollowUpShow && (
+                        <div>
+                          <button
+                            disabled={
+                              msgLoading ||
+                              !session?.user?.email ||
+                              !aiInputUserData ||
+                              selectedOption === "" ||
+                              (selectedOption === "file" &&
+                                selectedFile === "") ||
+                              (selectedOption === "aiResume" &&
+                                setSelectedResumeId === "") ||
+                              !show.secondFollowUpShow ||
+                              isEmailCopied
+                            }
+                            onClick={() =>
+                              copyEmail(streamedData.secondFollowUpEmailText)
+                            }
+                            className={`xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                              msgLoading ||
+                              !session?.user?.email ||
+                              !aiInputUserData ||
+                              selectedOption === "" ||
+                              (selectedOption === "file" &&
+                                selectedFile === "") ||
+                              (selectedOption === "aiResume" &&
+                                setSelectedResumeId === "") ||
+                              !show.secondFollowUpShow ||
+                              isEmailCopied
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            }`}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
+                              />
+                            </svg>
+
+                            <span className="text-sm dark:text-gray-100 text-gray-950">
+                              {msgLoading
+                                ? "Please wait..."
+                                : isEmailCopied
+                                ? "Copied"
+                                : "Copy to clipboard"}
+                            </span>
+                          </button>
+                        </div>
+                      )}
+                      {show.secondFollowUpShow && (
+                        <div>
+                          <button
+                            type="button"
+                            disabled={
+                              !show.secondFollowUpShow ||
+                              msgLoading ||
+                              !session?.user?.email
+                            }
+                            onClick={()=>handleClick("secondFollowUp")}
+                            className={` xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                              !show.secondFollowUpShow ||
+                              msgLoading ||
+                              !session?.user?.email
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            } `}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className={`w-4 h-4 dark:text-gray-300 text-gray-950  `}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
+                              />
+                            </svg>
+                            <span
+                              className={`dark:text-gray-300 text-gray-950 text-sm `}
+                            >
+                              Edit
+                            </span>
+                          </button>
+                        </div>
+                      )}
+                      {isSecondEditing && (
+                        <button
+                          type="button"
+                          onClick={() => handleSave("secondFollowUp")}
+                          className="flex flex-row justify-center ml-auto items-center gap-2 py-3 px-3 border-[#312E37] border-[1px] rounded-full"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="black"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                            />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="relative py-4 bg-gray-200 shadow-md card_3 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
+                    <button
+                      type="button"
+                      disabled={
+                        msgLoading ||
+                        !session?.user?.email ||
+                        !aiInputUserData ||
+                        selectedOption === "" ||
+                        (selectedOption === "file" && selectedFile === "") ||
+                        jobDescription === ""
+                      }
+                      onClick={() => handleGenerate("secondFollowUp")}
+                      className={`dark:bg-gradient-to-r absolute top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                        (msgLoading ||
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          jobDescription === "") &&
+                        "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
+                      }`}
+                    >
+                      {/* <Image
+                  src="/icon/u_bolt-alt.svg"
+                  alt="bold icon"
+                  height={18}
+                  width={18}
+                /> */}
+
+                      <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
+                        {msgLoading ? (
+                          <div className="flex">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className={`w-4 h-4 mr-3 ${
+                                msgLoading ? "animate-spin" : ""
+                              }`}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                              />
+                            </svg>
+                            Please wait...
+                          </div>
+                        ) : (
+                          <div className="flex">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={1.5}
+                              stroke="currentColor"
+                              className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                              />
+                            </svg>
+                            <span
+                              className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                            >
+                              Generate Second Follow Up Email
+                            </span>
+                          </div>
+                        )}
+                      </span>
+                    </button>
+
+                    <div className="flex flex-col text-gray-950 blur">
+                      <div className="flex">
+                        <h4 className="mb-2">Second Follow Up</h4>
+                        <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                            />
+                          </svg>
+
+                          <div className="w-44  bg-white font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-40  xs:-top-12 md:-top-18  hidden group-hover:block  xs:rounded-br-none    mb-6 shadow-xl rounded-xl py-2  transition-all">
+                            You will send the second email after a week. You can
+                            schedule this email in advance in google.
+                          </div>
+                        </div>
+                      </div>
+
+                      <h4 className="mb-4 capitalize">dear hiring manager,</h4>
+                      <p>
+                        I am writing to apply for the Web Developer position at
+                        [Company Name]. With [X years] of experience in web
+                        development and expertise in languages such as HTML,
+                        CSS, JavaScript, and frameworks like React, I am excited
+                        about the opportunity to contribute to your team. I
+                        recently led a team in building a responsive e-commerce
+                        website from scratch, showcasing my ability to deliver
+                        high-quality solutions on time. I am drawn to your
+                        company{"'"}s commitment to innovation and look forward
+                        to the possibility of contributing to your projects.
+                      </p>
+                      <p className="my-4">
+                        Thank you for considering my application. I have
+                        attached my resume for your review and am available for
+                        further discussion at your convenience.
+                      </p>
+                      <h4 className="">Best Regards,</h4>
+                      <h4>[Person Name]</h4>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {showPopup && (
