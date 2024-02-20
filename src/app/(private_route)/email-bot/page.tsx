@@ -35,7 +35,7 @@ const PersonalizedEmailBot = () => {
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
   const [showPopup, setShowPopup] = useState(false);
-  const {setAvailableCredits} = useAppContext();
+  const { setAvailableCredits } = useAppContext();
 
   // Redux
   const dispatch = useDispatch();
@@ -122,7 +122,7 @@ const PersonalizedEmailBot = () => {
       })
         .then(async (resp: any) => {
           if (resp.ok) {
-            setAvailableCredits(true)
+            setAvailableCredits(true);
 
             const reader = resp.body.getReader();
             let tempText = "";
@@ -259,43 +259,20 @@ const PersonalizedEmailBot = () => {
     <>
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]  ">
-          {/* <AiGeneratedCoverLetters /> */}
-          {/* <Link
-            href="/dashboard"
-            className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center  hover:opacity-80 transition-all"
-          >
-            {leftArrowIcon}
-            Back
-          </Link> */}
           <PreviouslyGeneratedList {...historyProps} />
-          {/* <MainCoverLetterTool /> */}
           <>
             <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4 lg:px-[30px] py-[41px] flex flex-col gap-5 ">
               {/* header */}
-              <div className="flex gap-2 flex-col md:flex-row  justify-between items-center">
+              <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
                 <h3 className="text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
                   Generate Emails
                 </h3>
-                <div className=" text-sm dark:text-gray-100 text-gray-950 uppercase font-bold">
-                  {/* <LimitCard
-                    title="Email Availble"
-                    limit={userData?.userPackageData?.limit?.email_generation}
-                    used={userData?.userPackageUsed?.email_generation}
-                    setPercentageCalculated={setPercentageCalculatedEmail}
-                    availablePercentage={availablePercentageEmail}
-                    setAvailablePercentage={setAvailablePercentageEmail}
-                  /> */}
-                </div>
+                <div className="text-sm font-bold uppercase dark:text-gray-100 text-gray-950"></div>
               </div>
 
               {/* option */}
 
               <div className="text-sm text-[#615DFF] self-start">
-                {/* <button
-              className="flex flex-row justify-start items-center gap-[10px]"
-              type="button"
-              onClick={() => setShowInstruction(!showInstruction)}
-            > */}
                 <span className="uppercase text-[11px] md:text-sm font-bold block gro">
                   select options
                 </span>
@@ -359,8 +336,8 @@ const PersonalizedEmailBot = () => {
               </div>
 
               {/* form */}
-              <div className="flex flex-col gap-5 justify-between items-start ">
-                <div className="w-full flex flex-col">
+              <div className="flex flex-col items-start justify-between gap-5 ">
+                <div className="flex flex-col w-full">
                   <label className=" font-bold text-md justify-between items-center md:text-[24px] dark:text-gray-100 text-gray-950 flex py-[20px] gap-[3px]">
                     <div>
                       Paste Your Job Description
@@ -389,7 +366,7 @@ const PersonalizedEmailBot = () => {
                   />
                 </div>
 
-                <button
+                {/* <button
                   type="button"
                   disabled={
                     msgLoading ||
@@ -410,13 +387,6 @@ const PersonalizedEmailBot = () => {
                     "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
                   }`}
                 >
-                  {/* <Image
-                  src="/icon/u_bolt-alt.svg"
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                /> */}
-
                   <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
                     {msgLoading ? (
                       <div className="flex">
@@ -462,11 +432,85 @@ const PersonalizedEmailBot = () => {
                       </div>
                     )}
                   </span>
-                </button>
+                </button> */}
               </div>
-              <div className="bg-white  w-full rounded-2xl flex flex-col py-6 md:px-8 xs:px-3 ">
-                <div className="card_1 shadow-md bg-gray-200 rounded-2xl py-4 md:px-8 xs:px-3 md:text-base xs:text-sm">
-                  <div className="flex flex-col text-gray-950">
+              <div className="flex flex-col w-full py-6 bg-white rounded-2xl md:px-8 xs:px-3 ">
+                <div className="relative py-4 bg-gray-200 shadow-md card_1 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
+                  <button
+                    type="button"
+                    disabled={
+                      msgLoading ||
+                      !session?.user?.email ||
+                      !aiInputUserData ||
+                      selectedOption === "" ||
+                      (selectedOption === "file" && selectedFile === "") ||
+                      jobDescription === ""
+                    }
+                    onClick={handleGenerate}
+                    className={`dark:bg-gradient-to-r absolute top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                      (msgLoading ||
+                        !session?.user?.email ||
+                        !aiInputUserData ||
+                        selectedOption === "" ||
+                        (selectedOption === "file" && selectedFile === "") ||
+                        jobDescription === "") &&
+                      "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
+                    }`}
+                  >
+                    {/* <Image
+                  src="/icon/u_bolt-alt.svg"
+                  alt="bold icon"
+                  height={18}
+                  width={18}
+                /> */}
+
+                    <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
+                      {msgLoading ? (
+                        <div className="flex">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className={`w-4 h-4 mr-3 ${
+                              msgLoading ? "animate-spin" : ""
+                            }`}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                            />
+                          </svg>
+                          Please wait...
+                        </div>
+                      ) : (
+                        <div className="flex">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                            />
+                          </svg>
+                          <span
+                            className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                          >
+                            Generate Email
+                          </span>
+                        </div>
+                      )}
+                    </span>
+                  </button>
+                  <div className="flex flex-col text-gray-950 blur">
                     <div className="flex">
                       <h4 className="mb-2">1{")"}. Generate Email</h4>
                       <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
@@ -492,7 +536,7 @@ const PersonalizedEmailBot = () => {
                       </div>
                     </div>
 
-                    <h4 className="capitalize mb-4">dear hiring manager,</h4>
+                    <h4 className="mb-4 capitalize">dear hiring manager,</h4>
                     <p>
                       I am writing to apply for the Web Developer position at
                       [Company Name]. With [X years] of experience in web
@@ -514,8 +558,82 @@ const PersonalizedEmailBot = () => {
                     <h4>[Person Name]</h4>
                   </div>
                 </div>
-                <div className="card_2 my-8 shadow-md bg-gray-200 rounded-2xl py-4 md:px-8 xs:px-3 md:text-base xs:text-sm">
-                  <div className="flex flex-col text-gray-950">
+                <div className="relative py-4 my-8 bg-gray-200 shadow-md card_2 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
+                  <button
+                    type="button"
+                    disabled={
+                      msgLoading ||
+                      !session?.user?.email ||
+                      !aiInputUserData ||
+                      selectedOption === "" ||
+                      (selectedOption === "file" && selectedFile === "") ||
+                      jobDescription === ""
+                    }
+                    onClick={handleGenerate}
+                    className={`dark:bg-gradient-to-r absolute top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                      (msgLoading ||
+                        !session?.user?.email ||
+                        !aiInputUserData ||
+                        selectedOption === "" ||
+                        (selectedOption === "file" && selectedFile === "") ||
+                        jobDescription === "") &&
+                      "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
+                    }`}
+                  >
+                    {/* <Image
+                  src="/icon/u_bolt-alt.svg"
+                  alt="bold icon"
+                  height={18}
+                  width={18}
+                /> */}
+
+                    <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
+                      {msgLoading ? (
+                        <div className="flex">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className={`w-4 h-4 mr-3 ${
+                              msgLoading ? "animate-spin" : ""
+                            }`}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                            />
+                          </svg>
+                          Please wait...
+                        </div>
+                      ) : (
+                        <div className="flex">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                            />
+                          </svg>
+                          <span
+                            className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                          >
+                            Generate First Follow Up Email
+                          </span>
+                        </div>
+                      )}
+                    </span>
+                  </button>
+                  <div className="flex flex-col text-gray-950 blur">
                     <div className="flex">
                       <h4 className="mb-2"> 2{")"}. First Follow Up</h4>
                       <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
@@ -542,7 +660,7 @@ const PersonalizedEmailBot = () => {
                       </div>
                     </div>
 
-                    <h4 className="capitalize mb-4">dear hiring manager,</h4>
+                    <h4 className="mb-4 capitalize">dear hiring manager,</h4>
                     <p>
                       I am writing to apply for the Web Developer position at
                       [Company Name]. With [X years] of experience in web
@@ -564,8 +682,83 @@ const PersonalizedEmailBot = () => {
                     <h4>[Person Name]</h4>
                   </div>
                 </div>
-                <div className="card_3 shadow-md bg-gray-200 rounded-2xl py-4 md:px-8 xs:px-3 md:text-base xs:text-sm">
-                  <div className="flex flex-col text-gray-950">
+                <div className="relative py-4 bg-gray-200 shadow-md card_3 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
+                  <button
+                    type="button"
+                    disabled={
+                      msgLoading ||
+                      !session?.user?.email ||
+                      !aiInputUserData ||
+                      selectedOption === "" ||
+                      (selectedOption === "file" && selectedFile === "") ||
+                      jobDescription === ""
+                    }
+                    onClick={handleGenerate}
+                    className={`dark:bg-gradient-to-r absolute top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                      (msgLoading ||
+                        !session?.user?.email ||
+                        !aiInputUserData ||
+                        selectedOption === "" ||
+                        (selectedOption === "file" && selectedFile === "") ||
+                        jobDescription === "") &&
+                      "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
+                    }`}
+                  >
+                    {/* <Image
+                  src="/icon/u_bolt-alt.svg"
+                  alt="bold icon"
+                  height={18}
+                  width={18}
+                /> */}
+
+                    <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
+                      {msgLoading ? (
+                        <div className="flex">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className={`w-4 h-4 mr-3 ${
+                              msgLoading ? "animate-spin" : ""
+                            }`}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                            />
+                          </svg>
+                          Please wait...
+                        </div>
+                      ) : (
+                        <div className="flex">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                            />
+                          </svg>
+                          <span
+                            className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                          >
+                            Generate Second Follow Up Email
+                          </span>
+                        </div>
+                      )}
+                    </span>
+                  </button>
+
+                  <div className="flex flex-col text-gray-950 blur">
                     <div className="flex">
                       <h4 className="mb-2">1{")"}. Second Follow Up</h4>
                       <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
@@ -591,7 +784,7 @@ const PersonalizedEmailBot = () => {
                       </div>
                     </div>
 
-                    <h4 className="capitalize mb-4">dear hiring manager,</h4>
+                    <h4 className="mb-4 capitalize">dear hiring manager,</h4>
                     <p>
                       I am writing to apply for the Web Developer position at
                       [Company Name]. With [X years] of experience in web
@@ -616,7 +809,7 @@ const PersonalizedEmailBot = () => {
               </div>
 
               {show && (
-                <div className="mt-[40px] hidden ">
+                <div className="mt-[40px]  ">
                   <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-5">
                     your ai generated email
                   </h1>
@@ -642,7 +835,7 @@ const PersonalizedEmailBot = () => {
                       )}
                     </div>
                   </div>
-                  <div className="buttons mt-5 flex flex-col md:flex-row gap-3">
+                  <div className="flex flex-col gap-3 mt-5 buttons md:flex-row">
                     <button
                       disabled={
                         msgLoading ||
@@ -663,7 +856,7 @@ const PersonalizedEmailBot = () => {
                         "cursor-not-allowed" // Add this class when the button is disabled
                       }`}
                     >
-                      <span className="dark:text-gray-300 text-gray-950 text-sm">
+                      <span className="text-sm dark:text-gray-300 text-gray-950">
                         {msgLoading ? (
                           <div className="flex">
                             <svg
@@ -761,7 +954,7 @@ const PersonalizedEmailBot = () => {
                             />
                           </svg>
 
-                          <span className="dark:text-gray-100 text-gray-950 text-sm">
+                          <span className="text-sm dark:text-gray-100 text-gray-950">
                             {msgLoading
                               ? "Please wait..."
                               : isEmailCopied

@@ -6,6 +6,8 @@ interface IEmail {
   id: string;
   jobDescription: string;
   emailText: string;
+  emailFirstFollowUpText: string;
+  emailSecondFollowUpText: string;
   generatedOnDate: any;
   generatedViaOption: string;
   userEmail: string;
@@ -18,6 +20,8 @@ const initialState: IEmail = {
   generatedOnDate: "",
   generatedViaOption: "",
   userEmail: "",
+  emailFirstFollowUpText: "",
+  emailSecondFollowUpText: "",
 };
 
 const emailSlice = createSlice({
