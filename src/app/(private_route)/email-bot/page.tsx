@@ -70,13 +70,13 @@ const PersonalizedEmailBot = () => {
       console.error("Failed to copy text: ", error);
     }
   };
-  const handleClick = (type:string) => {
+  const handleClick = (type: string) => {
     // setEditedContent(streamedData);
-    if(type === "email") {
+    if (type === "email") {
       setIsEditing(true);
-    } else if (type==="firstFollowUp") {
+    } else if (type === "firstFollowUp") {
       setIsFirstEditing(true);
-    } else if (type === "secondFollowUp"){
+    } else if (type === "secondFollowUp") {
       setIsSecondEditing(true);
     }
   };
@@ -89,18 +89,18 @@ const PersonalizedEmailBot = () => {
           editorElement.innerHTML = email.emailText;
         }
       }
-    }
-    else if (isFirstEditing) {
+    } else if (isFirstEditing) {
       if (componentFirstRef.current) {
-        const editorElement = componentFirstRef.current.querySelector("#editor");
+        const editorElement =
+          componentFirstRef.current.querySelector("#editor");
         if (editorElement) {
           editorElement.innerHTML = email.emailText;
         }
       }
-    }
-    else if (isSecondEditing) {
+    } else if (isSecondEditing) {
       if (componentSecondRef.current) {
-        const editorElement = componentSecondRef.current.querySelector("#editor");
+        const editorElement =
+          componentSecondRef.current.querySelector("#editor");
         if (editorElement) {
           editorElement.innerHTML = email.emailText;
         }
@@ -124,9 +124,8 @@ const PersonalizedEmailBot = () => {
           emailId: emailId,
           type: selectedOption,
           email: session?.user?.email,
-
+          generationType: "email",
           creditsUsed: creditLimits.email_generation,
-
           jobDescription,
           trainBotData: {
             userEmail: userData.email,
@@ -224,7 +223,8 @@ const PersonalizedEmailBot = () => {
           emailId: emailId,
           type: selectedOption,
           email: session?.user?.email,
-
+          generationType: "firstFollowUp",
+          emailText: streamedData.emailText,
           creditsUsed: creditLimits.email_generation,
 
           jobDescription,
@@ -324,7 +324,9 @@ const PersonalizedEmailBot = () => {
           emailId: emailId,
           type: selectedOption,
           email: session?.user?.email,
-
+          generationType: "secondFollowUp",
+          emailText: streamedData.emailText,
+          firstFollowUpText: streamedData.firstFollowUpEmailText,
           creditsUsed: creditLimits.email_generation,
 
           jobDescription,
@@ -553,12 +555,15 @@ const PersonalizedEmailBot = () => {
 
   useEffect(() => {
     if (email.id !== "") {
-      console.log(email)
+      console.log(email);
       setShow({ ...show, emailShow: true });
       if (email.emailFirstFollowUpText && email.emailFirstFollowUpText !== "") {
         setShow({ ...show, firstFollowUpShow: true });
       }
-      if (email.emailSecondFollowUpText && email.emailSecondFollowUpText !== "") {
+      if (
+        email.emailSecondFollowUpText &&
+        email.emailSecondFollowUpText !== ""
+      ) {
         setShow({ ...show, secondFollowUpShow: true });
       }
     } else {
@@ -972,7 +977,7 @@ const PersonalizedEmailBot = () => {
                               msgLoading ||
                               !session?.user?.email
                             }
-                            onClick={()=>handleClick("email")}
+                            onClick={() => handleClick("email")}
                             className={` xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                               !show.emailShow ||
                               msgLoading ||
@@ -1150,7 +1155,7 @@ const PersonalizedEmailBot = () => {
                 {show.firstFollowUpShow ? (
                   <div className="py-4 bg-gray-200 shadow-md card_1 text-gray-950 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
                     <div className="flex">
-                      <h2 className="text-lg mb-2"> First Follow Up</h2>
+                      <h2 className="mb-2 text-lg"> First Follow Up</h2>
                       <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -1339,7 +1344,7 @@ const PersonalizedEmailBot = () => {
                               msgLoading ||
                               !session?.user?.email
                             }
-                            onClick={()=>handleClick("firstFollowUp")}
+                            onClick={() => handleClick("firstFollowUp")}
                             className={` xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                               !show.firstFollowUpShow ||
                               msgLoading ||
@@ -1472,7 +1477,7 @@ const PersonalizedEmailBot = () => {
                     </button>
                     <div className="flex flex-col text-gray-950 blur">
                       <div className="flex">
-                        <h2 className="text-lg mb-2"> First Follow Up</h2>
+                        <h2 className="mb-2 text-lg"> First Follow Up</h2>
                         <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -1523,7 +1528,7 @@ const PersonalizedEmailBot = () => {
                 {show.secondFollowUpShow ? (
                   <div className="py-4 bg-gray-200 shadow-md card_1 text-gray-950 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
                     <div className="flex">
-                      <h2 className="text-lg mb-2"> Second Follow Up</h2>
+                      <h2 className="mb-2 text-lg"> Second Follow Up</h2>
                       <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -1712,7 +1717,7 @@ const PersonalizedEmailBot = () => {
                               msgLoading ||
                               !session?.user?.email
                             }
-                            onClick={()=>handleClick("secondFollowUp")}
+                            onClick={() => handleClick("secondFollowUp")}
                             className={` xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                               !show.secondFollowUpShow ||
                               msgLoading ||
