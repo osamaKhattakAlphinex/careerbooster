@@ -37,7 +37,7 @@ export default function CoverLetterPage() {
   const [jobDescription, setJobDescription] = useState<string>("");
   const [isEditing, setIsEditing] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const {setAvailableCredits} = useAppContext();
+  const { setAvailableCredits } = useAppContext();
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
   // Function to toggle editing mode on double-click
@@ -156,7 +156,7 @@ export default function CoverLetterPage() {
         .then(async (resp: any) => {
           // const response = await resp.json();
           if (resp.ok) {
-            setAvailableCredits(true)
+            setAvailableCredits(true);
             const reader = resp.body.getReader();
             let tempText = "";
             while (true) {
@@ -328,7 +328,7 @@ export default function CoverLetterPage() {
               <div className="flex flex-col gap-5 lg:px-0 ">
                 <label
                   htmlFor="default-radio-1"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[290px] lg:w-[400px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[260px] lg:w-[400px] ${
                     selectedOption === "profile"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -349,7 +349,7 @@ export default function CoverLetterPage() {
                     //   setUploadPdfFile(e.target.value);
                     // }}
                     checked={selectedOption === "profile"}
-                    className="w-5 h-4"
+                    className="w-fit h-4"
                   />
                   Use My Persona to write the Cover Letter
                 </label>
@@ -542,37 +542,49 @@ export default function CoverLetterPage() {
                 </h1>
               </div> */}
 
-                  <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-2">
-                    your ai generated cover letter
-                  </h1>
+              <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-2">
+                your ai generated cover letter
+              </h1>
               {show && (
-                <div ref={componentRef} className=" bg-white w-full rounded-2xl py-6 px-8 ">
+                <div
+                  ref={componentRef}
+                  className=" bg-white w-full rounded-2xl py-6 px-8 "
+                >
                   <div>
-                  <h1 className="uppercase text-[24px] text-gray-950 border-b border-gray-950 pb-2 font-semibold">
-                    {userData.firstName + ' ' + userData.lastName}
-                  </h1>
-                </div>
-                <div className="flex flex-col text-gray-950  pt-6  text-sm">
-                  <ul className="flex mb-8 gap-10 md:gap-10 xs:gap-4 xs:flex-col md:flex-row">
-                    <li>
-                      <h2>{userData.contact.street + userData.contact.street ? ", ": "" + userData.contact.cityState + ", "+ userData.contact.country+ ", "+ userData.contact.postalCode}</h2>
-                    </li>
-                    <li>
-                      {" "}
-                      <h2>{userData.email} </h2>
-                    </li>
-                    <li>
-                      <h2>{userData.phone}</h2>
-                    </li>
-                  </ul>
-                  {/* <h4 className="mt-16 mb-8 ">[Today{"'"}s Date]</h4> */}
-                </div>
+                    <h1 className="uppercase text-[24px] text-gray-950 border-b border-gray-950 pb-2 font-semibold">
+                      {userData.firstName + " " + userData.lastName}
+                    </h1>
+                  </div>
+                  <div className="flex flex-col text-gray-950  pt-6  text-sm">
+                    <ul className="flex mb-8 gap-10 md:gap-10 xs:gap-4 xs:flex-col md:flex-row">
+                      <li>
+                        <h2>
+                          {userData.contact.street + userData.contact.street
+                            ? ", "
+                            : "" +
+                              userData.contact.cityState +
+                              ", " +
+                              userData.contact.country +
+                              ", " +
+                              userData.contact.postalCode}
+                        </h2>
+                      </li>
+                      <li>
+                        {" "}
+                        <h2>{userData.email} </h2>
+                      </li>
+                      <li>
+                        <h2>{userData.phone}</h2>
+                      </li>
+                    </ul>
+                    {/* <h4 className="mt-16 mb-8 ">[Today{"'"}s Date]</h4> */}
+                  </div>
                   <div
                     className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4  ${
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >
-                    <div >
+                    <div>
                       {isEditing ? (
                         <div
                           id="editor"
@@ -793,7 +805,7 @@ export default function CoverLetterPage() {
                     )}
                   </div>
                 </div>
-               )} 
+              )}
               {showPopup && (
                 <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
                   {/* Popup content here */}

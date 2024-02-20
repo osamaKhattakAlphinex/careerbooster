@@ -3,7 +3,7 @@ import { memo, useEffect, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { TwitterPicker, ColorResult } from "react-color";
 import { setField } from "@/store/resumeSlice";
 import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
@@ -46,6 +46,8 @@ const ResumeTemplate4 = () => {
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
+  const [color, setColor] = useState("#323B4C");
+  const [color_second, setColor_second] = useState("#1b1f27");
 
   useEffect(() => {
     if (streamedJDData === "") {
@@ -72,12 +74,64 @@ const ResumeTemplate4 = () => {
       setPrimarySkill("");
     }
   };
+  const saveColor = (color: ColorResult) => {
+    // Access the selected color value from the 'color' parameter
+    setColor(color.hex);
 
+    // You can do whatever you need with the selected color here
+  };
+  const saveColor_second = (color: ColorResult) => {
+    // Access the selected color value from the 'color' parameter
+    setColor_second(color.hex);
+
+    // You can do whatever you need with the selected color here
+  };
   return (
     <div className="first-page  ">
       <div className=" flex">
-        <div className=" w-3/12 xs:w-1/3 md:w-3/12 flex flex-col pl-3 md:pl-4 bg-[#323B4C] text-gray-100  pr-6 md:pr-4  py-8 h-[1080px] xs:h-auto">
-          <div className=" w-32 h-32  xs:w-[72px] xs:h-[72px] sm:w-24 sm:h-24 md:w-28 md:h-28 text-white bg-gray-800 text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-0  md:mt-0 mb-4 justify-center md:mb-2">
+        <div
+          className=" w-3/12 xs:w-1/3 md:w-3/12 flex flex-col pl-3 md:pl-4  text-gray-100  pr-6 md:pr-4  py-8 h-[1080px] xs:h-auto"
+          style={{ backgroundColor: color }}
+        >
+          <div className="relative flex justify-end -top-6 right-0 group">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"
+              />
+            </svg>
+            {/* <div className="text-white  absolute hidden xs:block  top-0 right-0 hover:cursor-pointer">
+             
+            </div> */}
+            <div className="absolute  hidden  group-hover:block text-white top-7 left-48">
+              <div className="relative">
+                <span
+                  className="bg-[#323B4C] z-10 w-6 cursor-pointer h-6 rounded-full absolute -top-4 right-2"
+                  title="Reset"
+                  onClick={() => {
+                    setColor("#323B4C");
+                    setColor_second("#1b1f27");
+                  }}
+                ></span>
+                <TwitterPicker
+                  onChangeComplete={saveColor}
+                  className=" bg-red-900 "
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            style={{ backgroundColor: color_second }}
+            className=" w-32 h-32 xs:w-[72px] relative xs:h-[72px] sm:w-24 sm:h-24 md:w-28 md:h-28 text-white  text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-0  md:mt-0 mb-4 justify-center md:mb-2"
+          >
             <span className="text-3xl xs:text-2xl md:text-3xl hover:shadow-md hover:bg-gray-500">
               <EditableField
                 value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -88,6 +142,38 @@ const ResumeTemplate4 = () => {
                 }}
               />
             </span>
+            <div className="absolute top-1 group right-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="w-6 h-6 cursor-pointer"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"
+                />
+              </svg>
+              <div className="absolute  hidden  group-hover:block text-white top-7">
+                <div className="relative">
+                  <span
+                    className="bg-[#1b1f27] z-10 w-6 cursor-pointer h-6 rounded-full absolute -top-4 right-2"
+                    title="Reset"
+                    onClick={() => {
+                      setColor("#323B4C");
+                      setColor_second("#1b1f27");
+                    }}
+                  ></span>
+                  <TwitterPicker
+                    onChangeComplete={saveColor_second}
+                    className=" bg-red-900 "
+                  />
+                </div>
+              </div>
+            </div>
           </div>
           {/* contacts */}
 

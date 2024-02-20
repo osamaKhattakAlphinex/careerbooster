@@ -407,7 +407,7 @@ const ResumeTemplate15 = () => {
                         </div>
                         <div className="p-4">
                           {rec?.achievements && i !== regeneratedRecordIndex ? (
-                            <ul className="pl-0 flex flex-col gap-1 text-sm">
+                            <ul className="pl-0 flex flex-col gap-1 text-base">
                               {rec?.achievements.map(
                                 (achievement: any, ind: number) =>
                                   achievement === "" ? (

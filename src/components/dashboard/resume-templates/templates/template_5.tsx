@@ -71,7 +71,7 @@ const ResumeTemplate5 = () => {
     useDragAndDrop();
 
   return (
-    <div className="w-full first-page  text-gray-900">
+    <div className="w-full first-page  text-gray-900 border">
       <div className="flex ">
         <div className="flex flex-col w-full p-8 text-center">
           <h2 className="text-2xl font-bold xs:text-xl md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100">
