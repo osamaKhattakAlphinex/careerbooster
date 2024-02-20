@@ -15,9 +15,11 @@ const PersonalizedEmailPromptsConfiguration = () => {
     // get all prompts
     axios.get("/api/prompts?type=email").then((res) => {
       setPromptsLoading(false);
+
       setPrompts(res.data.result);
     });
   }, []);
+
   const handleSave = (name: string, val: string) => {
     if (name) {
       setUpdating(name);
@@ -38,14 +40,14 @@ const PersonalizedEmailPromptsConfiguration = () => {
       {/* <div className="my-5 ml-10">
         <Link
           href="/admin"
-          className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+          className="flex flex-row items-center gap-2 transition-all hover:font-semibold"
         >
           {leftArrowIcon}
           Dashboard
         </Link>
       </div> */}
       <div className="flex gap-4">
-        <div className="w-full flex">
+        <div className="flex w-full">
           <h2 className="text-lg">
             <div className="flex flex-row gap-2 mb-3">
               {/* <svg
@@ -71,13 +73,33 @@ const PersonalizedEmailPromptsConfiguration = () => {
         </div>
       </div>
       {promptsLoading ? (
-        <h1 className="text-center text-2xl ">Loading...</h1>
+        <h1 className="text-2xl text-center ">Loading...</h1>
       ) : (
         <>
           <div className="flex gap-4">
             <PromptEditor
               name="emailWriter"
               title="Personalized Email Prompt"
+              type="email"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+            <PromptEditor
+              name="emailWriterFirstFollowUp"
+              title="Personalized Email First Follow Up Prompt"
+              type="email"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+          </div>
+          <div className="flex gap-4 mt-4">
+            <PromptEditor
+              name="emailWriterSecondFollowUp"
+              title="Personalized Email Second Follow Up Prompt"
               type="email"
               prompts={prompts}
               promptsLoading={promptsLoading}
