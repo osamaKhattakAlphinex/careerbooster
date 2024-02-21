@@ -1,18 +1,25 @@
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 
-export const updateUserTotalCredits = async (email: string | null | undefined, credits: number) => {
+export const updateUserTotalCredits = async (email: string | null | undefined, credits: number, type?: string ) => {
     try {
         await startDB();
         // Fetch the user document by email
         if (email) {
-
             // Update the user document with the new totalCredits
-            await User.findOneAndUpdate(
-                { email: email, trialResume: true },
-                { $inc: { userCredits: -credits } }, // Using $inc to decrement the totalCredits
-                { new: true }
-            );
+            if(type === "resume"){
+                await User.findOneAndUpdate(
+                    { email: email, trialResume: true },
+                    { $inc: { userCredits: -credits } }, // Using $inc to decrement the totalCredits
+                    { new: true }
+                );
+            } else {
+                await User.findOneAndUpdate(
+                    { email: email },
+                    { $inc: { userCredits: -credits } }, // Using $inc to decrement the totalCredits
+                    { new: true }
+                );
+            }
 
             console.log(`Updated totalCredits for ${email} `);
         }

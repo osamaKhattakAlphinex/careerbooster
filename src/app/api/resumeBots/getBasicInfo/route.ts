@@ -106,7 +106,7 @@ export async function POST(req: any) {
         });
 
         //update total user credits
-        await updateUserTotalCredits(session?.user?.email, creditsUsed);
+        await updateUserTotalCredits(session?.user?.email, creditsUsed,"resume");
         await updateToolUsage("Resume Builder", creditsUsed);
         // make a trainBot entry
         try {
@@ -199,7 +199,7 @@ export async function POST(req: any) {
 
         const stream = OpenAIStream(response, {
           onStart: async () => {
-            await updateUserTotalCredits(session?.user?.email, creditsUsed);
+            await updateUserTotalCredits(session?.user?.email, creditsUsed,"resume");
             await updateToolUsage("Resume Builder", creditsUsed);
           },
           onToken: async (content) => {
@@ -290,7 +290,7 @@ export async function POST(req: any) {
         });
 
         //update total records of user
-        await updateUserTotalCredits(session?.user?.email, creditsUsed);
+        await updateUserTotalCredits(session?.user?.email, creditsUsed,"resume");
         await updateToolUsage("Resume Builder", creditsUsed);
 
         // make a trainBot entry

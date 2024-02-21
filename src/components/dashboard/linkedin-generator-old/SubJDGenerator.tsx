@@ -78,7 +78,7 @@ const SubJDGenerator = () => {
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
         }</p>`;
-        html += `<br/><p>`;
+        html += `<br/><div>`;
         setStreamedData((prev) => prev + html);
         tempText += html;
         setMsgLoading(true);
@@ -113,8 +113,12 @@ const SubJDGenerator = () => {
             tempText += text;
           }
         }
-        tempText += `<br/>`;
-        setStreamedData((prev) => prev + `</p> <br /> `);
+        setStreamedData((prev) => prev + `</div> <br /> `);
+        setStreamedData((prev) => prev.replace("```html", ""))
+        setStreamedData((prev) => prev.replace("```", ""))
+        tempText += `</div><br/>`;
+        tempText = tempText.replace("```html", "")
+        tempText = tempText.replace("```", "")
         setMsgLoading(false);
 
         if (index === experiences.length - 1) {
