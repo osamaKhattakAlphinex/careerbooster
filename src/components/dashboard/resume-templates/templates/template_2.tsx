@@ -75,7 +75,7 @@ const ResumeTemplate2 = () => {
     <div className="w-full first-page  text-gray-900 flex flex-col justify-start space-y-4 items-start px-6">
       {/* Name and Title */}
       <div className="flex flex-col w-full text-center bg-gray-100 rounded-3xl  p-8">
-        <h2 className="text-4xl xs:text-2xl md:4xl lg:text-6xl font-bold hover:shadow-md hover:bg-gray-100">
+        <h2 className="text-4xl xs:text-2xl md:4xl lg:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
           <EditableField
             value={resume?.name ? resume?.name : "FULL NAME"}
             style={{ width: "fit-content" }}
@@ -86,7 +86,7 @@ const ResumeTemplate2 = () => {
             }}
           />
         </h2>
-        <h3 className="text-sm xs:text-sm md:text-lg lg:text-lg  hover:shadow-md hover:bg-gray-100">
+        <h3 className="text-lg xs:text-sm md:text-2xl lg:text-2xl  hover:shadow-md hover:bg-gray-100">
           <EditableField
             value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
             onSave={(value: string) => {

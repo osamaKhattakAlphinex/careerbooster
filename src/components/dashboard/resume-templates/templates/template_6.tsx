@@ -74,7 +74,7 @@ const ResumeTemplate6 = () => {
       <div className=" flex  w-[5%] bg-[#e04127]"></div>
       <div className="w-full pl-5">
         <div className="flex flex-col w-12/12 p-8">
-          <h2 className="text-2xl font-bold xs:text-xl md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-4xl xs:text-2xl md:4xl lg:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -85,7 +85,7 @@ const ResumeTemplate6 = () => {
               }}
             />
           </h2>
-          <h3 className="text-xl xs:text-[14px] md:text-xl xs:leading-none w-full font-medium  hover:shadow-md hover:bg-gray-100 ">
+          <h3 className="text-lg xs:text-sm md:text-2xl lg:text-2xl xs:leading-none w-full   hover:shadow-md hover:bg-gray-100 ">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -317,7 +317,7 @@ const ResumeTemplate6 = () => {
                         onDrop={(e) => handleDropExperience(e, i)}
                         draggable
                       >
-                        <h2 className="hover:shadow-md hover:cursor-text text-[1rem] font-bold leading-8 hover:bg-gray-100">
+                        <h2 className="hover:shadow-md hover:cursor-text text-base font-bold leading-8 hover:bg-gray-100">
                           <EditableField
                             value={rec?.title}
                             style={{ width: "100%" }}
@@ -329,7 +329,7 @@ const ResumeTemplate6 = () => {
                             }}
                           />
                         </h2>
-                        <h2 className="hover:cursor-default text-[15px] leading-relaxed  ">
+                        <h2 className="hover:cursor-default text-sm font-semibold leading-relaxed  ">
                           {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                           {rec?.isContinue
                             ? "Present"
@@ -546,7 +546,7 @@ const ResumeTemplate6 = () => {
                           <li
                             className=" hover:shadow-md hover:cursor-move  
                   parent  
-                   hover:bg-gray-100 font-bold flex uppercase text-[15px]  justify-between items-center "
+                   hover:bg-gray-100 font-semibold flex uppercase text-base  justify-between items-center "
                           >
                             <EditableField
                               type="textarea"
@@ -568,7 +568,7 @@ const ResumeTemplate6 = () => {
                           >
                             {crossIcon1}
                           </div>
-                          <li className="hover:shadow-md  hover:bg-gray-100 text-[15px] font-medium">
+                          <li className="hover:shadow-md  hover:bg-gray-100 text-sm font-semibold">
                             <EditableField
                               value={`${education?.fieldOfStudy}`}
                               style={{ width: "100%" }}

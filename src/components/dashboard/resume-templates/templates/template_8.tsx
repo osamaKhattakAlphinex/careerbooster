@@ -74,7 +74,7 @@ const ResumeTemplate8 = () => {
         <div className="flex flex-col items-center w-full pt-4 px-8">
           <div className="flex w-[100%] justify-between items-center">
             <div className="flex flex-col w-[65%] ">
-              <h2 className="text-4xl xs:text-2xl md:text-4xl lg:text-4xl  hover:shadow-md hover:bg-gray-100">
+              <h2 className="text-4xl xs:text-2xl md:4xl lg:text-4xl font-bold  hover:shadow-md hover:bg-gray-100">
                 <EditableField
                   value={resume?.name ? resume?.name : "FULL NAME"}
                   style={{ width: "fit-content" }}
@@ -85,7 +85,7 @@ const ResumeTemplate8 = () => {
                   }}
                 />
               </h2>
-              <h3 className="text-2xl xs:text-[16px] md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100">
+              <h3 className="text-lg xs:text-sm md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100">
                 <EditableField
                   value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
                   onSave={(value: string) => {
@@ -97,8 +97,8 @@ const ResumeTemplate8 = () => {
               </h3>
             </div>
             <div className="flex flex-col w-[25%]">
-              <ul className="w-full flex flex-col md:flex-col gap-3 mt-8 mb-4 text-sm md:text-lg break-all pl-0 justify-between">
-                <li className=" hover:shadow-md hover:bg-gray-100 text-sm  flex flex-row gap-1  items-center justify-start">
+              <ul className="w-full flex flex-col md:flex-col gap-3 mt-8 mb-4 text-sm  break-all pl-0 justify-between">
+                <li className=" hover:shadow-md hover:bg-gray-100   flex flex-row gap-1  items-center justify-start">
                   <div className="p-1">{phoneIcon}</div>
 
                   <EditableField
@@ -114,7 +114,7 @@ const ResumeTemplate8 = () => {
                     }}
                   />
                 </li>
-                <li className=" hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-sm">
+                <li className=" hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start ">
                   <div className="p-1">{emailIcon}</div>
 
                   <EditableField
@@ -130,7 +130,7 @@ const ResumeTemplate8 = () => {
                     }}
                   />
                 </li>
-                <li className=" hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center justify-start text-sm">
+                <li className=" hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center justify-start ">
                   <div className="p-1">
                     <svg
                       width="20"
@@ -326,7 +326,7 @@ const ResumeTemplate8 = () => {
                       onDrop={(e) => handleDropExperience(e, i)}
                       draggable
                     >
-                      <h2 className="hover:shadow-md hover:cursor-text text-[1rem] font-bold leading-8 hover:bg-gray-100">
+                      <h2 className="hover:shadow-md hover:cursor-text text-base font-bold leading-8 hover:bg-gray-100">
                         <EditableField
                           value={rec?.title}
                           style={{ width: "100%" }}
@@ -338,7 +338,7 @@ const ResumeTemplate8 = () => {
                           }}
                         />
                       </h2>
-                      <h2 className="hover:cursor-default text-[15px] leading-relaxed  ">
+                      <h2 className="hover:cursor-default text-sm font-semibold leading-relaxed  ">
                         {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue
                           ? "Present"
@@ -547,7 +547,7 @@ const ResumeTemplate8 = () => {
                       <li
                         className=" hover:shadow-md hover:cursor-move  
                   parent  
-                   hover:bg-gray-100 font-bold flex uppercase text-[15px]  justify-between items-center "
+                   hover:bg-gray-100 font-semibold flex uppercase text-base  justify-between items-center "
                       >
                         <EditableField
                           type="textarea"
