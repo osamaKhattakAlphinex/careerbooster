@@ -13,7 +13,7 @@ import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedL
 import EmailCardSingle from "@/components/dashboard/email-generator/EmailCardSingle";
 import DownloadService from "@/helpers/downloadFile";
 import { useAppContext } from "@/context/AppContext";
-
+//
 const PersonalizedEmailBot = () => {
   const componentRef = useRef<any>(null);
   const componentFirstRef = useRef<any>(null);
