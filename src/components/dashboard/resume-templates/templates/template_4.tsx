@@ -260,7 +260,7 @@ const ResumeTemplate4 = () => {
         </div>
         <div className="w-9/12 flex flex-wrap flex-col px-4 md:px-8 text-gray-950 pb-10 pt-16">
           <div className="flex flex-col ">
-            <h2 className="text-2xl font-bold xs:text-xl md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100">
+            <h2 className="text-4xl font-bold xs:text-xl md:text-4xl lg:text-4xl hover:shadow-md hover:bg-gray-100">
               <EditableField
                 value={resume?.name ? resume?.name : "FULL NAME"}
                 style={{ width: "full" }}
@@ -358,7 +358,7 @@ const ResumeTemplate4 = () => {
                         onDrop={(e) => handleDropExperience(e, i)}
                         draggable
                       >
-                        <h2 className="hover:shadow-md hover:cursor-text text-[1rem] font-bold leading-8 hover:bg-gray-100">
+                        <h2 className="hover:shadow-md hover:cursor-text text-base font-bold leading-8 hover:bg-gray-100">
                           <EditableField
                             value={rec?.title}
                             style={{ width: "100%" }}
@@ -370,7 +370,7 @@ const ResumeTemplate4 = () => {
                             }}
                           />
                         </h2>
-                        <h2 className="hover:cursor-default text-[15px] leading-relaxed  ">
+                        <h2 className="hover:cursor-default text-sm  font-semibold leading-relaxed  ">
                           {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                           {rec?.isContinue
                             ? "Present"
@@ -586,7 +586,7 @@ const ResumeTemplate4 = () => {
                       <li
                         className=" hover:shadow-md hover:cursor-move 
                   parent  
-                   hover:bg-gray-100 font-bold flex uppercase text-[15px]  justify-between items-center "
+                   hover:bg-gray-100 font-semibold flex uppercase text-sm  justify-between items-center "
                       >
                         <EditableField
                           type="textarea"

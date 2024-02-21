@@ -90,7 +90,7 @@ const ResumeTemplate9 = () => {
           </span>
         </div>
         <div className="flex flex-col w-10/12 py-2 justify-center items-center">
-          <h2 className="text-2xl font-bold xs:font-medium md:text-4xl hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-4xl font-bold xs:font-medium md:text-4xl hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -101,7 +101,7 @@ const ResumeTemplate9 = () => {
               }}
             />
           </h2>
-          <h3 className="text-lg xs:text-[16px] md:text-xl font-medium hover:shadow-md hover:bg-gray-100">
+          <h3 className="text-lg xs:text-sm md:text-2xl lg:text-2xl font-medium hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -338,7 +338,7 @@ const ResumeTemplate9 = () => {
                       onDrop={(e) => handleDropExperience(e, i)}
                       draggable
                     >
-                      <h2 className="text-[1rem] font-bold xs:text-lg sm:text-lg md:text-[1rem] lg:text-[1rem] hover:shadow-md hover:cursor-text hover:bg-gray-100 ">
+                      <h2 className="text-base font-bold  hover:shadow-md hover:cursor-text hover:bg-gray-100 ">
                         <EditableField
                           value={rec?.title}
                           style={{ width: "100%" }}
@@ -350,7 +350,7 @@ const ResumeTemplate9 = () => {
                           }}
                         />
                       </h2>
-                      <h2 className="hover:cursor-default text-[15px] xs:text-sm sm:text-sm md:text-[15px] lg:text-[15px] ">
+                      <h2 className="hover:cursor-default text-sm font-semibold">
                         {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue
                           ? "Present"
@@ -560,7 +560,7 @@ const ResumeTemplate9 = () => {
                       <li
                         className=" hover:shadow-md hover:cursor-move 
                   parent  
-                   hover:bg-gray-100 font-bold flex uppercase text-[1rem] xs:text-sm md:text-[1rem] justify-between items-center "
+                   hover:bg-gray-100  flex uppercase text-base font-semibold justify-between items-center "
                       >
                         <EditableField
                           type="textarea"
@@ -580,7 +580,7 @@ const ResumeTemplate9 = () => {
                       >
                         {crossIcon1}
                       </div>
-                      <li className="hover:shadow-md font-medium  hover:bg-gray-100 text-[15px]">
+                      <li className="hover:shadow-md font-medium  hover:bg-gray-100 text-sm">
                         <EditableField
                           value={`${education?.fieldOfStudy}`}
                           style={{ width: "100%" }}
