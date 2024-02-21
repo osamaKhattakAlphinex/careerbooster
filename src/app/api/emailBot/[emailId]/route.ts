@@ -26,6 +26,9 @@ export async function PUT(
         {
           $set: {
             "emails.$.emailText": requestBody.emailText,
+            "emails.$.emailFirstFollowUpText": requestBody.emailFirstFollowUpText,
+            "emails.$.emailSecondFollowUpText": requestBody.emailSecondFollowUpText,
+
           },
         },
         { new: true }
