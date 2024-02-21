@@ -215,7 +215,7 @@ export default function CoverLetterPage() {
       // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
       setTimeout(() => {
         setIsCoverLetterCopied(false);
-      }, 2000);
+      }, 1500);
     } catch (error) {
       console.error("Failed to copy text: ", error);
     }
@@ -732,7 +732,7 @@ export default function CoverLetterPage() {
                               setSelectedResumeId === "") ||
                             !show ||
                             isCoverLetterCopied
-                              ? "opacity-50 cursor-not-allowed"
+                              ? " cursor-not-allowed"
                               : ""
                           }`}
                         >
