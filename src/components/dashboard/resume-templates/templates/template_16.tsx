@@ -164,7 +164,7 @@ const ResumeTemplate16 = () => {
               />
             </li>
             <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-3  items-start justify-start ">
-              <span className="w-8 h-8 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-10 md:h-8  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
+              <span className="w-8 h-8 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-8 md:h-8  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
                 {emailIcon}
               </span>
               <EditableField
@@ -308,7 +308,7 @@ const ResumeTemplate16 = () => {
             </>
           )}
         </div>
-        <div className="xs:w-full w-8/12 flex flex-col xs:bg-[#F1F1F1] md:bg-[#F1F1F1] px-4 md:px-8 pt-[1rem] md:pt-[1rem] ">
+        <div className="xs:w-full w-9/12 flex flex-col xs:bg-[#F1F1F1] md:bg-[#F1F1F1] px-4 md:px-8 pt-[1rem] md:pt-[1rem] ">
           <div className="flex flex-col justify-start pb-6 ">
             <h2 className="text-4xl xs:text-2xl text-center md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
               <EditableField
@@ -391,7 +391,7 @@ const ResumeTemplate16 = () => {
                       key={i}
                       className={`flex justify-start items-start ${
                         i > 0
-                          ? "w-[100vw] ml-[-170px]  xs:ml-0 xs:w-full "
+                          ? "w-[97vw] ml-[-200px]  xs:ml-0 xs:w-full "
                           : "xs:min-h-fit min-h-[460px]"
                       }`}
                     >
@@ -407,13 +407,7 @@ const ResumeTemplate16 = () => {
                       >
                         <div className="flex">
                           <div>
-                            <h2
-                              className="hover:shadow-md hover:cursor-text hover:bg-gray-100"
-                              style={{
-                                fontSize: "1rem",
-                                fontWeight: "bold",
-                              }}
-                            >
+                            <h2 className="text-base font-bold hover:shadow-md hover:cursor-text hover:bg-gray-100">
                               <EditableField
                                 value={rec?.title}
                                 style={{ width: "100%" }}
@@ -425,7 +419,7 @@ const ResumeTemplate16 = () => {
                                 }}
                               />
                             </h2>
-                            <h2 className="hover:cursor-default text-base">
+                            <h2 className="hover:cursor-default text-[15px] font-semibold">
                               {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                               {rec?.isContinue
                                 ? "Present"

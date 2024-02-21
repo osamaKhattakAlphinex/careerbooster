@@ -88,11 +88,8 @@ const ResumeTemplate2 = () => {
   return (
     <div className="w-full first-page  text-gray-900 flex flex-col justify-start space-y-4 items-start px-6">
       {/* Name and Title */}
-      <div
-        className="flex flex-col w-full text-center relative rounded-3xl  p-8"
-        style={{ backgroundColor: color }}
-      >
-        <h2 className="text-4xl xs:text-2xl md:4xl lg:text-6xl font-bold hover:shadow-md hover:bg-gray-100">
+      <div className="flex flex-col w-full text-center bg-gray-100 rounded-3xl  p-8" style={{ backgroundColor: color }}>
+        <h2 className="text-4xl xs:text-2xl md:4xl lg:text-xl font-bold hover:shadow-md hover:bg-gray-100">
           <EditableField
             value={resume?.name ? resume?.name : "FULL NAME"}
             style={{ width: "fit-content" }}
