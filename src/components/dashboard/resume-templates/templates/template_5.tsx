@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
-
+import { TwitterPicker, ColorResult } from "react-color";
 import useGetSummary from "@/hooks/useGetSummary";
 import Toolbar from "@/components/dashboard/Toolbar";
 import EditableField from "@/components/dashboard/EditableField";
@@ -66,12 +66,18 @@ const ResumeTemplate5 = () => {
       setPrimarySkill("");
     }
   };
+  const [color, setColor] = useState("#e04127");
+  const saveColor = (color: ColorResult) => {
+    // Access the selected color value from the 'color' parameter
+    setColor(color.hex);
 
+    // You can do whatever you need with the selected color here
+  };
   const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
     useDragAndDrop();
 
   return (
-    <div className="w-full first-page  text-gray-900 border">
+    <div className="w-full first-page  text-gray-900">
       <div className="flex ">
         <div className="flex flex-col w-full p-8 text-center">
           <h2 className="text-2xl font-bold xs:text-xl md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100">

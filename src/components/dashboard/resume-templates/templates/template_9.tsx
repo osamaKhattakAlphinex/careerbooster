@@ -18,6 +18,8 @@ import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
+import ColorPicker from "../colorPicker";
+import { ColorResult } from "react-color";
 const ResumeTemplate9 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -40,7 +42,6 @@ const ResumeTemplate9 = () => {
   const [streamedJDData, setStreamedJDData] = useState<any>("");
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
   const { saveResumeToDB } = useSaveResumeToDB();
-
   const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
     useDragAndDrop();
 
@@ -77,8 +78,11 @@ const ResumeTemplate9 = () => {
   return (
     <div className="w-full first-page  text-gray-900">
       <div className="flex flex-row justify-center pt-4 items-center">
-        <div className=" w-28 h-28 xs:w-20 xs:h-20 md:w-32 md:h-32 text-white bg-gray-800 text-center flex justify-center items-center  rounded-full mx-4 my-2 md:my-0 ">
-          <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
+        {/* <div
+          className=" w-28 h-28 xs:w-20n relative xs:h-20 md:w-32 md:h-32 text-whitetext-center flex justify-center items-center  rounded-full mx-4 my-2 md:my-0 "
+          style={{ backgroundColor: color }}
+        >
+          <span className="text-4xl text-gray-100  hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.shortName ? resume?.shortName : "CPH"}
               style={{ width: "60px" }}
@@ -88,7 +92,13 @@ const ResumeTemplate9 = () => {
               }}
             />
           </span>
-        </div>
+          <ColorPicker
+            defaultColor="#2d3748"
+            styles_pin="absolute   top-1 right-1"
+            styles_div="absolute top-3 -left-1"
+            setColor={setColor}
+          />
+        </div> */}
         <div className="flex flex-col w-10/12 py-2 justify-center items-center">
           <h2 className="text-2xl font-bold xs:font-medium md:text-4xl hover:shadow-md hover:bg-gray-100">
             <EditableField
