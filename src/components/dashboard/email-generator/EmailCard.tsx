@@ -1,7 +1,5 @@
 import DownloadService from "@/helpers/downloadFile";
 
-
-
 type EmailCardProps = {
     componentRef: any;
     msgLoading: boolean;

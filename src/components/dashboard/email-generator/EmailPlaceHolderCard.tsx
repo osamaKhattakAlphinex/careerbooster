@@ -27,7 +27,7 @@ const GenerateEmailsButton = ({
           jobDescription === ""
         }
         onClick={handleGenerate}
-        className={`dark:bg-gradient-to-r absolute z-10 top-1/2 left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+        className={`dark:bg-gradient-to-r absolute z-10 top-[45%] left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
           (msgLoading ||
             selectedOption === "" ||
             (selectedOption === "file" && selectedFile === "") ||
@@ -126,11 +126,8 @@ const GenerateEmailsButton = ({
           <p>
             I am writing to apply for the Web Developer position at [Company
             Name]. With [X years] of experience in web development and expertise
-            in languages such as HTML, CSS, JavaScript, and frameworks like React,
-            I am excited about the opportunity to contribute to your team. I
-            recently led a team in building a responsive e-commerce website from
-            scratch, showcasing my ability to deliver high-quality solutions on
-            time. I am drawn to your company{"'"}s commitment to innovation and
+            in languages such as HTML, CSS, JavaScript, and frameworks like React.
+            I am drawn to your company{"'"}s commitment to innovation and
             look forward to the possibility of contributing to your projects.
           </p>
           <p className="my-4">
