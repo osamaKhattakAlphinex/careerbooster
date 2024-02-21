@@ -67,7 +67,7 @@ const TemplateSlider = ({ templates }: Props) => {
           <SwiperSlide
             key={`template-${index}`}
             className={`${
-              templateId === index + 1
+              index === activeTemplate
                 ? " border-2 rounded-md p-2 border-indigo-600"
                 : " "
             } bg-transparent relative overflow-hidden group h-48 `}
