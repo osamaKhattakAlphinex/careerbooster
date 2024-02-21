@@ -79,11 +79,11 @@ const ResumeTemplate15 = () => {
       <div className="flex">
         <div className=" w-5/12 xs:w-5/12  flex flex-col    bg-[#F4F4F4]  px-9  md:px-9    pt-[2rem] h-[1190px] xs:h-auto ">
           <div className="flex justify-center">
-            <div className=" w-48 h-48 md:w-48 lg:h-48 lg:w-48 border-[.5rem]  md:border-[.5rem] border-[#ffff]  md:h-48 text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full ">
-              <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
+            <div className=" w-[120px] h-[120px] md:w-40 lg:h-40 lg:w-40 border-[.5rem]  md:border-[.5rem] border-[#ffff]  md:h-40 text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full ">
+              <span className="text-4xl  hover:shadow-md hover:bg-gray-400 ">
                 <EditableField
                   value={resume?.shortName ? resume?.shortName : "CPH"}
-                  style={{ width: "60px" }}
+                  style={{ width: "fit-content" }}
                   onSave={(value: string) => {
                     dispatch(setField({ name: "shortName", value: value }));
                     saveResumeToDB({ ...resume, shortName: value });
@@ -178,7 +178,7 @@ const ResumeTemplate15 = () => {
                   addSkill={handleAddSkills}
                   regenerateSkills={getPrimarySkills}
                 >
-                  <ul className="border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex  flex-col gap-1 mb-4 w-full text-[16px] ">
+                  <ul className="border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex  flex-col gap-1 mb-4 w-full text-sm ">
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
                         className="hover:shadow-md hover:cursor-move px-0 xs:px-2 md:px-0 parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex justify-between "
@@ -283,7 +283,7 @@ const ResumeTemplate15 = () => {
           </h3>
           <span className="border-stylee w-full h-0  my-3 xs:my-3"></span>
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-[16px] hover:shadow-md border-2 border-transparent hover:border-gray-500 hover:border-dashed  ">
+            <div className="text-sm hover:shadow-md border-2 border-transparent hover:border-gray-500 hover:border-dashed  ">
               <EditableField
                 type="textarea"
                 value={
@@ -345,13 +345,7 @@ const ResumeTemplate15 = () => {
                         draggable
                       >
                         <div className="flex flex-col">
-                          <h2
-                            className="text-[16px] font-bold hover:shadow-md hover:cursor-text hover:bg-gray-100"
-                            style={{
-                              fontWeight: "bold",
-                              lineHeight: "2rem",
-                            }}
-                          >
+                          <h2 className="text-base font-bold hover:shadow-md hover:cursor-text hover:bg-gray-100">
                             <EditableField
                               value={rec?.title}
                               style={{ width: "100%" }}
@@ -363,7 +357,7 @@ const ResumeTemplate15 = () => {
                               }}
                             />
                           </h2>
-                          <h2 className="hover:cursor-default text-sm">
+                          <h2 className="hover:cursor-default text-[15px] font-semibold">
                             {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                             {rec?.isContinue
                               ? "Present"
@@ -574,7 +568,7 @@ const ResumeTemplate15 = () => {
                 Education
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
-              <ul className="pl-0 flex  md:flex-row flex-wrap  xs:justify-between w-full">
+              <ul className="pl-0 flex  md:flex-row flex-wrap  xs:justify-between md:justify-normal w-full">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[30%] xs:w-[45%] md:w-[30%] md:m-2">
