@@ -3,7 +3,7 @@ import { memo, useEffect, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { TwitterPicker, ColorResult } from "react-color";
 import { setField } from "@/store/resumeSlice";
 import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
@@ -18,6 +18,7 @@ import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
+import ColorPicker from "../colorPicker";
 const ResumeTemplate4 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -46,6 +47,8 @@ const ResumeTemplate4 = () => {
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
+  const [color, setColor] = useState("#323B4C");
+  const [color_second, setColor_second] = useState("#1b1f27");
 
   useEffect(() => {
     if (streamedJDData === "") {
@@ -72,12 +75,41 @@ const ResumeTemplate4 = () => {
       setPrimarySkill("");
     }
   };
+  const saveColor = (color: ColorResult) => {
+    // Access the selected color value from the 'color' parameter
+    setColor(color.hex);
 
+    // You can do whatever you need with the selected color here
+  };
+  const saveColor_second = (color: ColorResult) => {
+    // Access the selected color value from the 'color' parameter
+    setColor_second(color.hex);
+
+    // You can do whatever you need with the selected color here
+  };
   return (
     <div className="first-page  ">
       <div className=" flex">
-        <div className=" w-3/12 xs:w-1/3 md:w-3/12 flex flex-col pl-3 md:pl-4 bg-[#323B4C] text-gray-100  pr-6 md:pr-4  py-8 h-[1080px] xs:h-auto">
-          <div className=" w-32 h-32  xs:w-[72px] xs:h-[72px] sm:w-24 sm:h-24 md:w-28 md:h-28 text-white bg-gray-800 text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-0  md:mt-0 mb-4 justify-center md:mb-2">
+        <div
+          className=" w-3/12 xs:w-1/3 md:w-3/12 flex flex-col pl-3 md:pl-4  text-gray-100  pr-6 md:pr-4  pb-8 pt-1 h-[1080px] xs:h-auto"
+          style={{ backgroundColor: color }}
+        >
+          <div className="w-full">
+            <ColorPicker
+              defaultColor="#323B4C"
+              resetColor="#323B4C"
+              setColor={setColor}
+              styles_pin=" relative  right-0"
+              styles_div="absolute top-4 left-48"
+              secondDefaultColor="#1b1f27"
+              setColor_second={setColor_second}
+              saveColor={saveColor}
+            />
+          </div>
+          <div
+            style={{ backgroundColor: color_second }}
+            className=" w-32 h-32 xs:w-[72px] relative xs:h-[72px] sm:w-24 sm:h-24 md:w-28 md:h-28 text-white  text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-0  md:mt-5 mb-4 justify-center md:mb-2"
+          >
             <span className="text-3xl xs:text-2xl md:text-3xl hover:shadow-md hover:bg-gray-500">
               <EditableField
                 value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -88,6 +120,16 @@ const ResumeTemplate4 = () => {
                 }}
               />
             </span>
+            <ColorPicker
+              defaultColor="#323B4C"
+              resetColor="#1b1f27"
+              styles_pin="absolute  top-1 right-1"
+              styles_div="absolute top-3 -left-1"
+              setColor={setColor}
+              secondDefaultColor="#1b1f27"
+              setColor_second={setColor_second}
+              saveColor={saveColor_second}
+            />
           </div>
           {/* contacts */}
 

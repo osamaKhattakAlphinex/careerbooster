@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import { setUserData } from "@/store/userDataSlice";
 import { setResume } from "@/store/resumeSlice";
 import DownloadService from "@/helpers/downloadFile";
+import Link from "next/link";
 
 const Template = () => {
   const params = useSearchParams();
@@ -54,7 +55,6 @@ const Template = () => {
       setRefLeft(width);
     }
   }, [componentRef.current, templateId]);
-  
 
   useLayoutEffect(() => {
     const handleResize = () => {
@@ -71,9 +71,21 @@ const Template = () => {
     <div className="lg:ml-[234px] ml-0 px-[15px]">
       <RecentResumeCard componentRef={componentRef} templateId={templateId} />
       <div>
-        <h2 className="text-sm font-bold text-gray-900 uppercase dark:text-white">
-          Templates Designs
-        </h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-sm font-bold text-gray-900 uppercase dark:text-white">
+            Templates Designs
+          </h2>
+          <Link
+            href="/resume-builder/templates"
+            className="overflow-hidden text-white no-underline rounded-lg"
+          >
+            <div
+              className={` font-bold bg-gradient-to-r w-fit from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
+            >
+              All Templates
+            </div>
+          </Link>
+        </div>
         <TemplateSlider
           templates={ALL_TEMPLATES.filter((template) => template.active)}
         />
@@ -113,14 +125,16 @@ const Template = () => {
                 />
               </div>
 
-              <div className="xs:relative"  style={{
-                    top: isMobile ? "-" + refTop + "px" : undefined,
-                    left: isMobile ? "-" + refLeft + "px" : undefined,
-                  }}>
+              <div
+                className="xs:relative"
+                style={{
+                  top: isMobile ? "-" + refTop + "px" : undefined,
+                  left: isMobile ? "-" + refLeft + "px" : undefined,
+                }}
+              >
                 <div
                   ref={componentRef}
-                  className={` bg-white xs:scale-50  xs:w-[200%] xs:absolute md:relative  md:w-[100%]  w-[100%] md:top-[0px] md:left-[0px] md:scale-100 scale-100`}
-                 
+                  className={` bg-white xs:scale-50 xs:w-[200%] xs:absolute md:relative  md:w-[100%]  w-[100%] md:top-[0px] md:left-[0px] md:scale-100 scale-100`}
                 >
                   {ALL_TEMPLATES[templateId - 1].active ? (
                     ALL_TEMPLATES[templateId - 1].template({})
@@ -132,6 +146,18 @@ const Template = () => {
                     </div>
                   )}
                 </div>
+              </div>
+              <div className="xs:hidden md:flex justify-end py-3">
+                <Link
+                  href="/resume-builder/templates"
+                  className="overflow-hidden text-white no-underline rounded-lg"
+                >
+                  <div
+                    className={` font-bold bg-gradient-to-r w-fit from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
+                  >
+                    All Templates
+                  </div>
+                </Link>
               </div>
             </>
           )}
