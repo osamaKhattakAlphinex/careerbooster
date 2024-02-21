@@ -77,13 +77,13 @@ const ResumeTemplate15 = () => {
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="flex">
-        <div className=" w-5/12 xs:w-5/12  flex flex-col    bg-[#F4F4F4]  px-9  md:px-9    pt-[2rem] h-[1190px] xs:h-auto ">
+        <div className=" w-5/12 xs:w-5/12  flex flex-col    bg-[#F4F4F4]  px-4  md:px-9    pt-[2rem] h-[1120px] xs:h-auto ">
           <div className="flex justify-center">
-            <div className=" w-[120px] h-[120px] md:w-40 lg:h-40 lg:w-40 border-[.5rem]  md:border-[.5rem] border-[#ffff]  md:h-40 text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full ">
-              <span className="text-4xl  hover:shadow-md hover:bg-gray-400 ">
+            <div className=" w-48 h-48 md:w-48 lg:h-48 lg:w-48 border-[.5rem]  md:border-[.5rem] border-[#ffff]  md:h-48 text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full ">
+              <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
                 <EditableField
                   value={resume?.shortName ? resume?.shortName : "CPH"}
-                  style={{ width: "fit-content" }}
+                  style={{ width: "60px" }}
                   onSave={(value: string) => {
                     dispatch(setField({ name: "shortName", value: value }));
                     saveResumeToDB({ ...resume, shortName: value });
@@ -345,7 +345,7 @@ const ResumeTemplate15 = () => {
                         draggable
                       >
                         <div className="flex flex-col">
-                          <h2 className="text-base font-bold hover:shadow-md hover:cursor-text hover:bg-gray-100">
+                          <h2 className="text-[16px] font-bold hover:shadow-md hover:cursor-text hover:bg-gray-100">
                             <EditableField
                               value={rec?.title}
                               style={{ width: "100%" }}
@@ -357,7 +357,7 @@ const ResumeTemplate15 = () => {
                               }}
                             />
                           </h2>
-                          <h2 className="hover:cursor-default text-[15px] font-semibold">
+                          <h2 className="hover:cursor-default text-[15px] font-semibold w-full">
                             {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                             {rec?.isContinue
                               ? "Present"
@@ -568,7 +568,7 @@ const ResumeTemplate15 = () => {
                 Education
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
-              <ul className="pl-0 flex  md:flex-row flex-wrap  xs:justify-between md:justify-normal w-full">
+              <ul className="pl-0 flex  md:flex-row flex-wrap  xs:justify-between justify-normal w-full">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[30%] xs:w-[45%] md:w-[30%] md:m-2">

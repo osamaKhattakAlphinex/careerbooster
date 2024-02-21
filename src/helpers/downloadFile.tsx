@@ -70,7 +70,9 @@ any) => {
         }
         .parent:hover .child {
             display: block; 
-        }</style>
+        }
+       
+        </style>
         ${html}`;
     }
     setLoading(true);
