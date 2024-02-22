@@ -189,7 +189,7 @@ const ResumeTemplate2 = () => {
                   ? resume?.contact?.linkedIn
                   : "https://www.linkedin.com/"
               }
-              overrideValue={resume?.name ? resume?.name : "Full Name"}
+              // overrideValue={resume?.name ? resume?.name : "Full Name"}
               onSave={(value: string) => {
                 if (value !== resume.contact.linkedIn) {
                   updateSaveHook.updateAndSaveBasicInfo({ linkedIn: value });
