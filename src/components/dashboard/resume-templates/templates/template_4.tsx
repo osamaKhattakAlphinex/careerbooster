@@ -91,7 +91,7 @@ const ResumeTemplate4 = () => {
     <div className="first-page  ">
       <div className=" flex">
         <div
-          className=" w-3/12 xs:w-1/3 md:w-3/12 flex flex-col pl-3 md:pl-4  text-gray-100  pr-6 md:pr-4  pb-8 pt-1 h-[1080px] xs:h-auto"
+          className=" w-3/12 xs:w-1/3 md:w-3/12 flex flex-col pl-3 md:pl-4  text-gray-100  pr-6 md:pr-4  pb-8 xs:pt-2 pt-6 h-auto "
           style={{ backgroundColor: color }}
         >
           <div className="w-full">
@@ -300,7 +300,7 @@ const ResumeTemplate4 = () => {
             </>
           )}
         </div>
-        <div className="w-9/12 flex flex-wrap flex-col px-4 md:px-8 text-gray-950 pb-10 pt-6">
+        <div className="w-9/12 flex flex-wrap flex-col px-4 md:px-8 text-gray-950 pb-10 xs:pt-16 pt-10">
           <div className="flex flex-col ">
             <h2 className="text-4xl font-bold xs:text-xl md:text-4xl lg:text-4xl hover:shadow-md hover:bg-gray-100">
               <EditableField
@@ -367,14 +367,7 @@ const ResumeTemplate4 = () => {
             <>
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
-                  <div
-                    key={i}
-                    className={`flex justify-start  ${
-                      i > 0
-                        ? "w-[100vw] ml-[-204px] xs:ml-0 xs:w-full"
-                        : "xs:min-h-fit min-h-[340px]"
-                    }`}
-                  >
+                  <div key={i} className={`flex justify-start `}>
                     <div className="w-[5%] pr-5 mt-1 xs:pr-0 md:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 rounded-full bg-gray-100 border-2 border-gray-500 "></div>
                       {resume?.workExperienceArray.length - 1 !== i && (
@@ -616,7 +609,7 @@ const ResumeTemplate4 = () => {
           {/* Education */}
 
           {resume?.education.length > 0 && (
-            <div className=" ml-[-180px]  xs:ml-0">
+            <>
               <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center ">
                 Education
               </h3>
@@ -757,7 +750,7 @@ const ResumeTemplate4 = () => {
                   </React.Fragment>
                 ))}
               </ul>
-            </div>
+            </>
           )}
         </div>
       </div>

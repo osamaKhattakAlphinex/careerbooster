@@ -92,7 +92,7 @@ const ResumeTemplate15 = () => {
     <div className="w-full first-page relative text-gray-900">
       <div className="flex">
         <div
-          className=" w-5/12 xs:w-5/12  flex flex-col    bg-[#F4F4F4]  px-4  md:px-9    pt-[2rem] h-[1120px] xs:h-auto "
+          className=" w-5/12 xs:w-5/12  flex flex-col    bg-[#F4F4F4]  px-4  md:px-9    pt-[2rem]  "
           style={{ backgroundColor: color }}
         >
           <div className="absolute top-0 left-0 xs:w-4/12">
@@ -385,14 +385,7 @@ const ResumeTemplate15 = () => {
                       setNewAchievement("");
                     }}
                   >
-                    <div
-                      key={i}
-                      className={`flex justify-start items-start ${
-                        i > 0
-                          ? "w-[100vw] ml-[-240px] xs:ml-0 xs:w-full"
-                          : "xs:min-h-fit  min-h-[430px]"
-                      }`}
-                    >
+                    <div key={i} className={`flex justify-start items-start `}>
                       <div
                         key={i}
                         className="hover:border-dashed hover:border-gray-500 border-transparent border-2 hover:cursor-move hover:border-2"
@@ -621,7 +614,7 @@ const ResumeTemplate15 = () => {
           )}
           {/* education */}
           {resume?.education.length > 0 && (
-            <div className="ml-[-240px] xs:ml-0">
+            <>
               <span className="w-full h-0 my-1 page-break"></span>
               <h3
                 className="uppercase text-lg font-semibold text-white w-full px-4 py-1 rounded-sm flex   flex-row gap-2 items-center mb-4"
@@ -634,7 +627,7 @@ const ResumeTemplate15 = () => {
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[30%] xs:w-[45%] md:w-[30%] md:m-2">
-                      <li className=" hover:shadow-md hover:cursor-move  parent hover:border-dashed hover:border-gray-500 hover:border hover:bg-gray-100 font-bold flex uppercase text-[16px]  px-0 xs:px-4 md:px-0  items-center ">
+                      <li className=" hover:shadow-md hover:cursor-move  parent hover:border-dashed hover:border-gray-500 hover:border hover:bg-gray-100 font-semibold flex uppercase text-[16px]  px-0 xs:px-4 md:px-0  items-center ">
                         {/* <span className="w-2 h-2 bg-[#444440] rounded-full mr-3"></span> */}
                         <EditableField
                           type="textarea"
@@ -762,7 +755,7 @@ const ResumeTemplate15 = () => {
                   </React.Fragment>
                 ))}
               </ul>
-            </div>
+            </>
           )}
         </div>
       </div>

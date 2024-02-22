@@ -93,7 +93,7 @@ const ResumeTemplate16 = () => {
     <div className="w-full first-page relative text-gray-900">
       <div className="flex">
         <div
-          className=" w-3/12 xs:w-4/12 md:w-4/12 flex flex-col    px-4  xs:px-1 md:px-9 pt-[2rem] h-[1080px] xs:h-auto"
+          className=" w-3/12 xs:w-4/12 md:w-4/12 flex flex-col    px-4  xs:px-1 md:px-9 pt-[2rem] "
           style={{ backgroundColor: color }}
         >
           <div className="flex justify-center">
@@ -389,11 +389,8 @@ const ResumeTemplate16 = () => {
                   >
                     <div
                       key={i}
-                      className={`flex justify-start items-start ${
-                        i > 0
-                          ? "w-[97vw] ml-[-200px]  xs:ml-0 xs:w-full "
-                          : "xs:min-h-fit min-h-[460px]"
-                      }`}
+                      className={`flex justify-start items-start 
+                        `}
                     >
                       <div
                         key={i}
@@ -625,7 +622,7 @@ const ResumeTemplate16 = () => {
           )}
           {/* education */}
           {resume?.education.length > 0 && (
-            <div className="ml-[-200px] xs:ml-0 ">
+            <>
               <span className="border-stylee w-full h-0 my-3"></span>
               <h3 className="uppercase text-xl  font-bold flex items-center gap-2 mb-3 border-[#444440] border-b-2  rounded-sm text-gray-900 w-full py-1">
                 Education
@@ -637,7 +634,7 @@ const ResumeTemplate16 = () => {
                       <li
                         className=" hover:shadow-md hover:cursor-move 
                   parent 
-                   hover:bg-gray-100 font-bold  hover:text-black flex uppercase text-[16px]   items-center "
+                   hover:bg-gray-100 font-semibold  hover:text-black flex uppercase text-[16px]   items-center "
                       >
                         {/* <span className="w-1.5 h-1.5 bg-gray-800 rounded-full mr-3"></span> */}
                         <div className="flex flex-row w-full items-center justify-between">
@@ -767,7 +764,7 @@ const ResumeTemplate16 = () => {
                   </React.Fragment>
                 ))}
               </ul>
-            </div>
+            </>
           )}
         </div>
       </div>
