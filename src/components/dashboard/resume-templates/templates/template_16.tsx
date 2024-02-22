@@ -102,7 +102,7 @@ const ResumeTemplate16 = () => {
                 className=" w-28 relative h-28 xs:h-[88px] xs:w-[] md:w-36 md:h-36 text-[#F1F1F1] flex justify-center items-center    rounded-full "
                 style={{ backgroundColor: color_second }}
               >
-                <span className="text-4xl xs:text-lg md:text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
+                <span className="text-4xl xs:text-lg font-semibold md:text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
                   <EditableField
                     value={resume?.shortName ? resume?.shortName : "CPH"}
                     style={{ width: "60px" }}

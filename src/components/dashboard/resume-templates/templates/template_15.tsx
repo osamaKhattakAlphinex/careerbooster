@@ -111,10 +111,10 @@ const ResumeTemplate15 = () => {
           </div>
           <div className="flex justify-center">
             <div
-              className=" w-48 h-48 md:w-48 relative lg:h-48 lg:w-48 border-[.5rem]  md:border-[.5rem] border-[#ffff]  md:h-48 text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full "
+              className=" w-36 h-36 md:w-36 md:h-36 relative lg:h-36 lg:w-36 border-[.5rem]  md:border-[.5rem] border-[#ffff]   text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full "
               style={{ backgroundColor: color_second }}
             >
-              <span className="text-4xl  hover:shadow-md  hover:bg-gray-400">
+              <span className="text-4xl font-semibold  hover:shadow-md  hover:bg-gray-400">
                 <EditableField
                   value={resume?.shortName ? resume?.shortName : "CPH"}
                   style={{ width: "60px" }}
@@ -126,7 +126,7 @@ const ResumeTemplate15 = () => {
                 <ColorPicker
                   defaultColor="#F4F4F4"
                   resetColor="#444440"
-                  styles_pin="absolute  top-7 right-7"
+                  styles_pin="absolute  top-4 right-7"
                   styles_div="absolute top-3 -left-1"
                   setColor={setColor}
                   secondDefaultColor="#444440"
@@ -306,7 +306,7 @@ const ResumeTemplate15 = () => {
         </div>
         <div className="w-full flex flex-col  px-8 xs:mt-[25px]  xs:px-8 lg:px-8 pt-[1rem] xs:pt-[1rem] ">
           <div className="flex flex-col  xs:px-0 justify-center py-4">
-            <h2 className="text-4xl xs:text-4xl text-center font-bold hover:shadow-md hover:bg-gray-100">
+            <h2 className="text-4xl  xs:text-4xl text-center font-bold hover:shadow-md hover:bg-gray-100">
               <EditableField
                 value={resume?.name ? resume?.name : "FULL NAME"}
                 style={{ width: "fit-content" }}
