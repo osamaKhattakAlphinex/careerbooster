@@ -12,6 +12,7 @@ import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedList";
 import LinkedInAboutCardSingle from "./LinkedInAboutCardSingle";
 import useGetUserData from "@/hooks/useGetUserData";
+import { useAppContext } from "@/context/AppContext";
 const SubAboutGenerator = () => {
   const componentRef = useRef<any>(null);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
@@ -20,6 +21,7 @@ const SubAboutGenerator = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [option, setOption] = useState<string>("about");
   const [showPopup, setShowPopup] = useState(false);
+  const {setAvailableCredits} = useAppContext();
 
   const [isAboutCopied, setIsAboutCopied] = useState<boolean>(false);
   const copyAbout = async (text: string) => {
@@ -94,6 +96,8 @@ const SubAboutGenerator = () => {
       })
         .then(async (resp: any) => {
           if (resp.ok) {
+            setAvailableCredits(true)
+
             const reader = resp.body.getReader();
             let tempText = "";
             while (true) {
@@ -242,7 +246,9 @@ const SubAboutGenerator = () => {
                   height={18}
                   width={18}
                 />
-                <span className={`text-white ml-3 text-[15px] font-semibold`}>
+                <span
+                  className={`text-white ml-3 text-[15px] font-semibold whitespace-nowrap`}
+                >
                   Generate About
                 </span>
               </div>

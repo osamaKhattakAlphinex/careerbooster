@@ -88,7 +88,9 @@ const UploadPDFResume = () => {
             }}
           />
           {fileUploading ? (
-            refreshIconRotating
+            <div className="flex w-fit justify-center items-center cursor-pointer gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-3 rounded-lg  mx-auto">
+              {refreshIconRotating}
+            </div>
           ) : (
             <div className="flex justify-center items-center cursor-pointer gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg lg:w-[36%] sm:w-[50%] md:w-[38%] xs:w-full mx-auto">
               <div>{uploadIcon}</div>
@@ -133,7 +135,7 @@ const UploadPDFResume = () => {
 
       {fileError && (
         <div
-          className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2 !text-left w-[50%] m-auto"
+          className="bg-orange-100 border-l-4 border-orange-500  text-orange-700 p-4 my-2 !text-left w-[50%] m-auto"
           role="alert"
         >
           <p className="m-0">{fileError}</p>

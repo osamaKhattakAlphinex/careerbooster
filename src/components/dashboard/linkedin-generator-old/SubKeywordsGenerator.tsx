@@ -16,9 +16,9 @@ import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedL
 import LinkedInHKeywordsCardSingle from "./LinkedInKeywordsCardSingle";
 import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
+import { useAppContext } from "@/context/AppContext";
 
 const SubKeywordsGenerator = () => {
-  const [keywords, setKeywords] = useState<string>("");
   const componentRef = useRef<any>(null);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session, status } = useSession();
@@ -26,10 +26,8 @@ const SubKeywordsGenerator = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const {setAvailableCredits} = useAppContext();
 
-  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
-  const [percentageCalculated, setPercentageCalculated] =
-    useState<boolean>(false);
   const [isKeywordsCopied, setIsKeywordsCopied] = useState<boolean>(false);
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
 
@@ -107,6 +105,8 @@ const SubKeywordsGenerator = () => {
       })
         .then(async (resp: any) => {
           if (resp.ok) {
+            setAvailableCredits(true)
+
             const reader = resp.body.getReader();
             let tempText = "";
             while (true) {
@@ -257,7 +257,7 @@ const SubKeywordsGenerator = () => {
                   width={18}
                 />
                 <span
-                  className="text-white ml-3 text-[15px] font-semibold"
+                  className="text-white ml-3 text-[15px] font-semibold whitespace-nowrap"
                   // className={`text-black text-[15px] font-semibold`}
                 >
                   {/* Upgrade Plan */}

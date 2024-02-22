@@ -24,6 +24,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import Button from "../Button";
 import ProfileImageModal from "../ProfileImageModal";
+import AvailableCredits from "../AvailableCredits";
 
 const items = [
   { icon: homeIcon, text: "Dashboard", url: "/dashboard" },
@@ -32,7 +33,7 @@ const items = [
   { icon: userGroup, text: "LinkedIn Tool", url: "/linkedin-generator" },
   { icon: inboxArrowDown, text: "Email Bot", url: "/email-bot" },
   { icon: dollarIcon, text: "Billing Detail", url: "/billing" },
-  { icon: bid, text: "Consulting Bot", url: "/consulting-bids-bot" },
+  // { icon: bid, text: "Consulting Bot", url: "/consulting-bids-bot" },
   { icon: userCircle, text: "Profile", url: "/profile-review" },
   { icon: keyIcon, text: "Change Password", url: "/change-current-password" },
   { icon: powerIcon, text: "Logout", url: "/dashboard" },
@@ -252,22 +253,15 @@ const SideBar = () => {
             </ul>
 
             <div className="flex  flex-col justify-center mx-auto mt-6">
-              <div className="flex ">
-                <div className=" flex justify-between text-gray-950 dark:text-gray-100 mb-2">
-                  <h2 className=" text-sm font-semibold">Avalible Credit:</h2>
-                  <h3 className=" text-sm italic ml-2">700/1000</h3>
-                </div>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700 mb-6">
-                <div className="bg-blue-600 h-1.5 rounded-full w-[45%]"></div>
-              </div>
+              <AvailableCredits/>
+              
               <div className="flex items-center justify-center">
                 <Button
                   onClick={() => {
                     router.push("/subscribe");
                   }}
                   btnText="Buy Credits"
-                  className={`bg-gradient-to-b from-fuchsia-600 to-indigo-500 !text-gray-100 `}
+                  className={`bg-gradient-to-r from-fuchsia-600 to-indigo-500 !text-gray-100 `}
                 />
               </div>
             </div>

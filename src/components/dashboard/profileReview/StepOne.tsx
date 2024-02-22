@@ -31,7 +31,7 @@ const StepOne = () => {
 
   return (
     <>
-      <div className="w-full grid  grid-cols-2 xs:grid-cols-1 md:grid-cols-2 gap-3">
+      <div className="w-full grid  grid-cols-2 xs:grid-cols-1 sm:grid-cols-2 gap-3">
         <div className="">
           <label
             htmlFor="name"

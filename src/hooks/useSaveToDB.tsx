@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import { setField, setUserData } from "@/store/userDataSlice";
 import { setId, setResume } from "@/store/resumeSlice";
+import { useAppContext } from "@/context/AppContext";
+import useGetUserData from "./useGetUserData";
 
 const useSaveResumeToDB = () => {
-  const resumeData = useSelector((state: any) => state.resume);
-
+  const {resume:resumeData, userData} = useSelector((state: any) => state);
+  const {setAvailableCredits} = useAppContext()
   const { data: session } = useSession();
   const dispatch = useDispatch();
 
@@ -25,10 +27,26 @@ const useSaveResumeToDB = () => {
 
     axios
       .post("/api/resumeBots/saveResumeToDB", {
-        email: session?.user?.email,
+        email: userData.email,
         resumeData: obj,
       })
       .then(async (resp) => {
+        if(userData.trialResume === false){
+          dispatch(setUserData({trialResume: true}));
+          axios.post("/api/users/updateUserData", {
+            data: {
+              email: userData.email,
+              trialResume: true
+            },
+          }
+          ).then(()=>{
+           setAvailableCredits(true)
+
+          })
+
+        } else{
+          setAvailableCredits(true)
+        }
         dispatch(setId(obj.id));
         // update user in redux
         const res = await fetch(

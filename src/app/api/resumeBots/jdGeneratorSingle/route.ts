@@ -111,7 +111,7 @@ export async function POST(req: any) {
           id: workId,
         };
         // postConsultingBid(payload);
-        await updateUserTotalCredits(session?.user?.email, creditsUsed);
+        await updateUserTotalCredits(session?.user?.email, creditsUsed,"resume");
         await updateToolUsage("Resume Tool", creditsUsed);
       },
       onToken: async (content) => {

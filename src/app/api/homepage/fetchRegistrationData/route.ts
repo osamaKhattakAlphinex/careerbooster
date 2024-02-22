@@ -32,6 +32,7 @@ export async function POST(req: any) {
                 First Name:
                 Last Name:
                 Email Address:
+                Linkedin URL:
                 Phone / Mobile Number:
                 Country Name:
                 Street Address:
@@ -45,6 +46,7 @@ export async function POST(req: any) {
                   firstName: VALUE_HERE,
                   lastName: VALUE_HERE,
                   email: VALUE_HERE,
+                  linkedin: VALUE_HERE,
                   phone: VALUE_HERE,
                   country: VALUE_HERE,
                   street: VALUE_HERE,

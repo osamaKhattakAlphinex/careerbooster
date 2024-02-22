@@ -21,6 +21,34 @@ export async function postEmail(payload: any) {
   const response = await user.save();
   return response;
 }
+export async function putEmail(payload: any) {
+  await startDB();
+  
+    if(payload.generationType === "firstFollowUp"){
+
+      await User.findOneAndUpdate(
+        { email: payload.userEmail, "emails.id": payload.id },
+        {
+          $set: {
+            "emails.$.emailFirstFollowUpText": payload.emailText,
+          },
+        },
+        { new: true }
+      );
+    } else if (payload.generationType === "secondFollowUp"){
+      await User.findOneAndUpdate(
+        { email: payload.userEmail, "emails.id": payload.id },
+        {
+          $set: {
+            "emails.$.emailSecondFollowUpText": payload.emailText,
+          },
+        },
+        { new: true }
+      );
+    }
+  
+  return "ok";
+}
 async function updateEmail(payload: any) {
   await startDB();
 

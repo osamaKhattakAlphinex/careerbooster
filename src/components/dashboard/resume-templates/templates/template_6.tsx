@@ -2,11 +2,10 @@
 import { memo, useEffect, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
+import { TwitterPicker, ColorResult } from "react-color";
 import { useDispatch, useSelector } from "react-redux";
-
 import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
-
 import useGetSummary from "@/hooks/useGetSummary";
 import Toolbar from "@/components/dashboard/Toolbar";
 import EditableField from "@/components/dashboard/EditableField";
@@ -16,11 +15,13 @@ import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
+import ColorPicker from "../colorPicker";
 const ResumeTemplate6 = () => {
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
+  const [color, setColor] = useState("#e04127");
 
   const [primarySkill, setPrimarySkill] = useState<string>("");
 
@@ -69,9 +70,29 @@ const ResumeTemplate6 = () => {
     }
   };
 
+  const saveColor = (color: ColorResult) => {
+    // Access the selected color value from the 'color' parameter
+    setColor(color.hex);
+
+    // You can do whatever you need with the selected color here
+  };
+
   return (
     <div className=" text-gray-900  flex flex-row">
-      <div className=" flex  w-[5%] bg-[#e04127]"></div>
+      <div
+        className={`relative flex  w-[5%]`}
+        style={{ backgroundColor: color }}
+      >
+        <ColorPicker
+          defaultColor="#e04127"
+          resetColor="#e04127"
+          setColor={setColor}
+          styles_pin="absolute text-white top-0 right-0 "
+          styles_div="absolute top-3 -left-1"
+          saveColor={saveColor}
+        />
+      </div>
+
       <div className="w-full pl-5">
         <div className="flex flex-col w-12/12 p-8">
           <h2 className="text-4xl xs:text-2xl md:4xl lg:text-4xl font-bold hover:shadow-md hover:bg-gray-100">

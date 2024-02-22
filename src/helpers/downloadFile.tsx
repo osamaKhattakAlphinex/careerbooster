@@ -100,7 +100,7 @@ any) => {
 
   return (
     <>
-      <div>
+      <div className="hidden xs:block md:block">
         <a className="hidden" href="#" ref={docRef} target="_blank"></a>
 
         <button

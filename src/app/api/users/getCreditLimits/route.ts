@@ -25,7 +25,7 @@ export async function GET(req: any) {
     await startDB();
 
     const user = await User.findOne({ email: email });
-    
+
     if (!user) {
       return NextResponse.json(
         {
@@ -38,8 +38,8 @@ export async function GET(req: any) {
       return NextResponse.json(
         {
           result: {
-  userCredits:user.userCredits,
-  totalCredits:user.totalCredits        
+            userCredits: user.userCredits,
+            totalCredits: user.totalCredits,
           },
           success: true,
         },

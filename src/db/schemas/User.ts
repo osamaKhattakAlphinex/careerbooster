@@ -25,6 +25,12 @@ const UserSchema = new Schema(
       unique: true,
       required: true,
     },
+
+    linkedin: {
+      type: String,
+      unique: true,
+    },
+
     profileImage: String,
     phone: {
       type: String,
@@ -55,6 +61,10 @@ const UserSchema = new Schema(
         uploadedDateTime: String,
       },
     ],
+    trialResume: {
+      type: Boolean,
+      default: false,
+    },
     emails: [],
     resumes: [],
     coverLetters: [],

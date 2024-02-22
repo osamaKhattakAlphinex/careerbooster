@@ -113,6 +113,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                   setStepTwo({
                     phoneNumber: data?.phone,
                     Email: data?.email,
+                    linkedin: data?.linkedin
                   })
                 );
                 dispatch(
@@ -521,6 +522,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       firstName: register.stepOne.firstName,
       lastName: register.stepOne.lastName,
       email: userData.email,
+      linkedin: userData.linkedin,
       file: resume.uploadedFileName,
       phone: register.stepTwo.phoneNumber,
       contact: {
@@ -637,7 +639,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           </p>
         )}
 
-        <div className="w-1/3">
+        <div className="md:w-1/3 mx-2">
           <DidYouKnowCard />
         </div>
       </div>

@@ -29,6 +29,7 @@ interface RegisterSlice {
     Email?: string;
     isValid: boolean;
     emailInvalid: boolean;
+    linkedin?: string;
   };
   stepThree: {
     country?: string;

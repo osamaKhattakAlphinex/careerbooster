@@ -18,6 +18,8 @@ import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
+import ColorPicker from "../colorPicker";
+import { ColorResult } from "react-color";
 const ResumeTemplate15 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -47,7 +49,8 @@ const ResumeTemplate15 = () => {
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
-
+  const [color, setColor] = useState("#F4F4F4");
+  const [color_second, setColor_second] = useState("#444440");
   useEffect(() => {
     if (streamedJDData === "") {
       setStreamedJDData(null);
@@ -73,13 +76,44 @@ const ResumeTemplate15 = () => {
       setPrimarySkill("");
     }
   };
+  const saveColor = (color: ColorResult) => {
+    // Access the selected color value from the 'color' parameter
+    setColor(color.hex);
 
+    // You can do whatever you need with the selected color here
+  };
+  const saveColor_second = (color: ColorResult) => {
+    // Access the selected color value from the 'color' parameter
+    setColor_second(color.hex);
+
+    // You can do whatever you need with the selected color here
+  };
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="flex">
-        <div className=" w-5/12 xs:w-5/12  flex flex-col    bg-[#F4F4F4]  px-4  md:px-9    pt-[2rem] h-[1120px] xs:h-auto ">
+        <div
+          className=" w-5/12 xs:w-5/12  flex flex-col    bg-[#F4F4F4]  px-4  md:px-9    pt-[2rem] h-[1120px] xs:h-auto "
+          style={{ backgroundColor: color }}
+        >
+          <div className="absolute top-0 left-0 xs:w-4/12">
+            <div className="flex justify-end">
+              <ColorPicker
+                defaultColor="#F4F4F4"
+                resetColor="#F4F4F4"
+                setColor={setColor}
+                styles_pin="relative top-[6px]  -left-9"
+                styles_div="absolute top-3 left-0"
+                secondDefaultColor="#444440"
+                setColor_second={setColor_second}
+                saveColor={saveColor}
+              />
+            </div>
+          </div>
           <div className="flex justify-center">
-            <div className=" w-48 h-48 md:w-48 lg:h-48 lg:w-48 border-[.5rem]  md:border-[.5rem] border-[#ffff]  md:h-48 text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full ">
+            <div
+              className=" w-48 h-48 md:w-48 lg:h-48 lg:w-48 border-[.5rem]  md:border-[.5rem] border-[#ffff]  md:h-48 text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full "
+              style={{ backgroundColor: color_second }}
+            >
               <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
                 <EditableField
                   value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -90,11 +124,25 @@ const ResumeTemplate15 = () => {
                   }}
                 />
               </span>
+              <ColorPicker
+                defaultColor="#F4F4F4"
+                resetColor="#444440"
+                styles_pin="absolute text-white top-5 right-5"
+                styles_div="absolute top-3 -left-1"
+                setColor={setColor}
+                secondDefaultColor="#444440"
+                setColor_second={setColor_second}
+                saveColor={saveColor_second}
+              />
             </div>
           </div>
           {/* contacts */}
+
           <span className="border-stylee w-full h-0 my-3"></span>
-          <h3 className="uppercase text-lg xs:text-[16px] xs:px-2 font-semibold text-white w-full xs:w-full md:w-full lg:w-full py-1 rounded-sm flex justify-center xs:justify-center md:justify-center bg-[#444440] flex-row gap-2 items-center  ">
+          <h3
+            className="uppercase text-lg xs:text-[16px] xs:px-2 font-semibold text-white w-full xs:w-full md:w-full lg:w-full py-1 rounded-sm flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center  "
+            style={{ backgroundColor: color_second }}
+          >
             Contact
           </h3>
           <span className="border-stylee w-full h-0 my-3"></span>
@@ -167,7 +215,10 @@ const ResumeTemplate15 = () => {
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <span className="border-stylee w-full h-0  my-1"></span>
-              <h3 className="uppercase text-lg xs:text-[16px] xs:px-2 font-semibold text-white w-full xs:w-full md:w-full lg:w-full py-1 rounded-sm flex justify-center xs:justify-center md:justify-center bg-[#444440] flex-row gap-2 items-center  ">
+              <h3
+                className="uppercase text-lg xs:text-[16px] xs:px-2 font-semibold text-white w-full xs:w-full md:w-full lg:w-full py-1 rounded-sm flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center  "
+                style={{ backgroundColor: color_second }}
+              >
                 Skills
               </h3>
               <span className="border-stylee w-full h-0 my-3"></span>
@@ -278,7 +329,10 @@ const ResumeTemplate15 = () => {
 
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0  my-3"></span>
-          <h3 className="uppercase text-lg  font-semibold bg-[#444440] px-4 rounded-sm text-white w-full py-1">
+          <h3
+            className="uppercase text-lg  font-semibold px-4 rounded-sm text-white w-full py-1"
+            style={{ backgroundColor: color_second }}
+          >
             EXECUTIVE SUMMARY
           </h3>
           <span className="border-stylee w-full h-0  my-3 xs:my-3"></span>
@@ -307,7 +361,10 @@ const ResumeTemplate15 = () => {
           </Toolbar>
           {/* Work Experience */}
           <span className="border-stylee w-full h-0 my-3"></span>
-          <h3 className="uppercase text-lg font-semibold bg-[#444440] px-4 rounded-sm text-white w-full py-1">
+          <h3
+            className="uppercase text-lg font-semibold  px-4 rounded-sm text-white w-full py-1"
+            style={{ backgroundColor: color_second }}
+          >
             WORK EXPERIENCE
           </h3>
           <span className="border-stylee w-full h-0 my-2"></span>
@@ -401,7 +458,7 @@ const ResumeTemplate15 = () => {
                         </div>
                         <div className="p-4">
                           {rec?.achievements && i !== regeneratedRecordIndex ? (
-                            <ul className="pl-0 flex flex-col gap-1 text-sm">
+                            <ul className="pl-0 flex flex-col gap-1 text-base">
                               {rec?.achievements.map(
                                 (achievement: any, ind: number) =>
                                   achievement === "" ? (
@@ -564,7 +621,10 @@ const ResumeTemplate15 = () => {
           {resume?.education.length > 0 && (
             <div className="ml-[-240px] xs:ml-0">
               <span className="w-full h-0 my-1 page-break"></span>
-              <h3 className="uppercase text-lg font-semibold text-white w-full px-4 py-1 rounded-sm flex  bg-[#444440] flex-row gap-2 items-center mb-4">
+              <h3
+                className="uppercase text-lg font-semibold text-white w-full px-4 py-1 rounded-sm flex   flex-row gap-2 items-center mb-4"
+                style={{ backgroundColor: color_second }}
+              >
                 Education
               </h3>
               <span className="border-stylee w-full h-0  my-1"></span>
