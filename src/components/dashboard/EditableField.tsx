@@ -93,7 +93,10 @@ const EditableField = ({
             {/* {overrideValue ? (
               <a href={value}>{overrideValue}</a>
             ) : ( */}
-            <span className="hover:cursor-text" title="Click to Edit">
+            <span
+              className="hover:cursor-text text-justify"
+              title="Click to Edit"
+            >
               {overrideValue ? overrideValue : value}
             </span>
             {/* // )} */}

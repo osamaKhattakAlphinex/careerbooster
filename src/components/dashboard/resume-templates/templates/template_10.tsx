@@ -379,7 +379,7 @@ const ResumeTemplate10 = () => {
           </div>
 
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-sm hover:shadow-md border-2 border-transparent hover:border-gray-500 hover:border-dashed">
+            <div className="text-sm hover:shadow-md border-2 text-justify border-transparent hover:border-gray-500 hover:border-dashed">
               <EditableField
                 type="textarea"
                 value={
@@ -517,7 +517,7 @@ const ResumeTemplate10 = () => {
                                         );
                                       }}
                                       draggable
-                                      className="h-8 hover:bg-slate-200 group flex flex-row justify-center items-center"
+                                      className="h-8 hover:bg-slate-200 border group flex flex-row justify-center items-center"
                                     >
                                       <div
                                         className="group-hover:block hidden font-medium text-xs uppercase   text-gray-500 cursor-pointer"
