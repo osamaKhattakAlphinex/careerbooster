@@ -209,7 +209,7 @@ const SideBar = () => {
                         ${
                           pathname === item.url
                             ? "dark:text-[#b324d7] text-[#b324d7] font-bold dark:group-hover:text-[#b324d7] group-hover:text-[#b324d7] no-underline	"
-                            : "dark:text-[#d9d6d6] text-gray-950 group-hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline	"
+                            : "dark:text-[#959595] text-gray-950 group-hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline	"
                         }
                          `}
                       >
@@ -219,7 +219,7 @@ const SideBar = () => {
                         className={`text-base ml-3 mb-0 font-normal ${
                           pathname === item.url
                             ? "dark:text-[#b324d7] text-[#b324d7] font-bold group-hover:text-[#b324d7] dark:hover:text-[#b324d7] no-underline	"
-                            : "dark:text-[#d9d6d6] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline	"
+                            : "dark:text-[#959595] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline	"
                         }`}
                       >
                         {item.text}
@@ -240,10 +240,10 @@ const SideBar = () => {
                       //   textDecoration: "none",
                       // }}
                     >
-                      <div className="w-6 h-6  pr-2 dark:text-[#d9d6d6] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline		">
+                      <div className="w-6 h-6  pr-2 dark:text-[#959595] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline		">
                         {item.icon}
                       </div>
-                      <h2 className="text-base ml-3 mb-0 dark:text-[#d9d6d6] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline	 font-normal	">
+                      <h2 className="text-base ml-3 mb-0 dark:text-[#959595] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline	 font-normal	">
                         {item.text}
                       </h2>
                     </button>
@@ -253,8 +253,8 @@ const SideBar = () => {
             </ul>
 
             <div className="flex  flex-col justify-center mx-auto mt-6">
-              <AvailableCredits/>
-              
+              <AvailableCredits />
+
               <div className="flex items-center justify-center">
                 <Button
                   onClick={() => {

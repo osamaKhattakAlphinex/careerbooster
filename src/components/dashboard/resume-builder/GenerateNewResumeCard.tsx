@@ -31,7 +31,7 @@ Props) => {
   const memoizedState = useMemo(() => state, [state]);
 
   return (
-    <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] py-9 px-4 md:px-[30px] flex flex-col gap-7 ">
+    <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] py-6 px-4 md:px-[30px] flex flex-col gap-4 ">
       {/* header */}
       <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
         <h3 className=" text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
@@ -113,7 +113,7 @@ Props) => {
 
       {/* form */}
       <div className="flex flex-col items-start justify-between gap-5">
-        <div className="w-full flex flex-col gap-[30px]">
+        <div className="w-full flex flex-col gap-4">
           <label
             htmlFor="targetedJobPosition"
             className=" font-bold dark:text-gray-100 text-gray-950 text-md md:text-[24px] flex flex-row gap-[10px]"

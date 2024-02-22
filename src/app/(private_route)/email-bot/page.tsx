@@ -33,18 +33,20 @@ const PersonalizedEmailBot = () => {
   const [isFirstEditing, setIsFirstEditing] = useState(false);
   const [isSecondEditing, setIsSecondEditing] = useState(false);
   const [isEmailCopied, setIsEmailCopied] = useState<any>({
-    emailCopied: false, 
+    emailCopied: false,
     firstFollowUpCopied: false,
-    secondFollowUpCopied: false 
+    secondFollowUpCopied: false,
   });
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
   const [showPopup, setShowPopup] = useState(false);
   const { setAvailableCredits } = useAppContext();
-  const[emailLoading,setEmailLoading] = useState<boolean>(false);
-  const[firstFollowUpLoading,setFirstFollowUpLoading] = useState<boolean>(false);
-  const[secondFollowUpLoading,setSecondFollowUpLoading] = useState<boolean>(false);
+  const [emailLoading, setEmailLoading] = useState<boolean>(false);
+  const [firstFollowUpLoading, setFirstFollowUpLoading] =
+    useState<boolean>(false);
+  const [secondFollowUpLoading, setSecondFollowUpLoading] =
+    useState<boolean>(false);
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
@@ -53,27 +55,27 @@ const PersonalizedEmailBot = () => {
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
   const { resumes } = userData;
-  const copyEmail = async (text: string, type:string) => {
+  const copyEmail = async (text: string, type: string) => {
     try {
       const coverLetterData = htmlToPlainText(text);
       await copy(coverLetterData);
-      if(type === "email") {
+      if (type === "email") {
         setIsEmailCopied({
           emailCopied: true,
           firstFollowUpCopied: false,
-          secondFollowUpCopied: false
+          secondFollowUpCopied: false,
         });
-      } else if (type === "firstFollowUp"){
+      } else if (type === "firstFollowUp") {
         setIsEmailCopied({
           emailCopied: false,
           firstFollowUpCopied: true,
-          secondFollowUpCopied: false
+          secondFollowUpCopied: false,
         });
-      } else if (type === "secondFollowUp"){
+      } else if (type === "secondFollowUp") {
         setIsEmailCopied({
           emailCopied: false,
           firstFollowUpCopied: false,
-          secondFollowUpCopied: true
+          secondFollowUpCopied: true,
         });
       }
       // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
@@ -81,7 +83,7 @@ const PersonalizedEmailBot = () => {
         setIsEmailCopied({
           emailCopied: false,
           firstFollowUpCopied: false,
-          secondFollowUpCopied: false
+          secondFollowUpCopied: false,
         });
       }, 1500);
     } catch (error) {
@@ -122,11 +124,11 @@ const PersonalizedEmailBot = () => {
         const editorElement =
           componentSecondRef.current.querySelector("#second_editor");
         if (editorElement) {
-          editorElement.innerHTML = email.emailSecondFollowUpText;;
+          editorElement.innerHTML = email.emailSecondFollowUpText;
         }
       }
     }
-  }, [isEditing,isFirstEditing,isSecondEditing]);
+  }, [isEditing, isFirstEditing, isSecondEditing]);
 
   const handleGenerate = async (emailType: string = "email") => {
     // await getUserDataIfNotExists();
@@ -211,7 +213,7 @@ const PersonalizedEmailBot = () => {
             }
           })
           .finally(() => {
-            setEmailLoading(false)
+            setEmailLoading(false);
           });
       } else {
         setShowPopup(true);
@@ -563,7 +565,6 @@ const PersonalizedEmailBot = () => {
   };
 
   const EmailPlaceholderCardProps = {
-    
     selectedFile: selectedFile,
     selectedOption: selectedOption,
     jobDescription: jobDescription,
@@ -573,7 +574,7 @@ const PersonalizedEmailBot = () => {
     <div className="w-full sm:w-full ">
       <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]  ">
         <PreviouslyGeneratedList {...historyProps} />
-        <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4 lg:px-[30px] py-[41px] flex flex-col gap-5 ">
+        <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 ">
           {/* header */}
           <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
             <h3 className="text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
@@ -593,7 +594,7 @@ const PersonalizedEmailBot = () => {
           <div className="flex flex-col gap-5 lg:px-0 ">
             <label
               htmlFor="default-radio-1"
-              className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[290px] lg:w-[400px] ${
+              className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-fit ${
                 selectedOption === "profile"
                   ? "border-[1px] border-[#615DFF]"
                   : ""
@@ -617,7 +618,7 @@ const PersonalizedEmailBot = () => {
             </label>
             <label
               htmlFor="default-radio-2"
-              className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[220px] lg:w-[290px] ${
+              className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-fit ${
                 selectedOption === "file" ? "border-[1px] border-[#615DFF]" : ""
               } `}
             >
@@ -648,7 +649,7 @@ const PersonalizedEmailBot = () => {
           {/* form */}
           <div className="flex flex-col items-start justify-between gap-5 ">
             <div className="flex flex-col w-full">
-              <label className=" font-bold text-md justify-between items-center md:text-[24px] dark:text-gray-100 text-gray-950 flex py-[20px] gap-[3px]">
+              <label className=" font-bold text-md justify-between items-center md:text-[24px] dark:text-gray-100 text-gray-950 flex pb-[20px] gap-[3px]">
                 <div>
                   Paste Your Job Description
                   <span className="text-[#F04248] text-md md:text-[24px]">
@@ -707,61 +708,61 @@ const PersonalizedEmailBot = () => {
               </button>
             )}
           </div>
-         
-            {show ? (
-              <EmailCard
-                isEmailCopied = {isEmailCopied.emailCopied}
-                copyEmail={(text:string)=>copyEmail(text ,"email")}
-                msgLoading={emailLoading}
-                handleGenerate={() => handleGenerate()}
-                handleClick={() => handleClick("email")}
-                handleSave={() => handleSave("email")}
-                isEditing={isEditing}
-                componentRef={componentRef}
-                streamedData={streamedData}
-                show={show}
-                editorId="editor"
-                cardHeading="Your AI Generated Email"
-                cardInstructions="This Email will follow your application directly"
-              />
-            ) : (
-              <EmailPlaceHolderCard
+
+          {show ? (
+            <EmailCard
+              isEmailCopied={isEmailCopied.emailCopied}
+              copyEmail={(text: string) => copyEmail(text, "email")}
+              msgLoading={emailLoading}
+              handleGenerate={() => handleGenerate()}
+              handleClick={() => handleClick("email")}
+              handleSave={() => handleSave("email")}
+              isEditing={isEditing}
+              componentRef={componentRef}
+              streamedData={streamedData}
+              show={show}
+              editorId="editor"
+              cardHeading="Your AI Generated Email"
+              cardInstructions="This Email will follow your application directly"
+            />
+          ) : (
+            <EmailPlaceHolderCard
               {...EmailPlaceholderCardProps}
               msgLoading={emailLoading}
-                handleGenerate={()=> handleGenerate()}
-                generateButtonText="Generate Email"
-              />
-            )}
+              handleGenerate={() => handleGenerate()}
+              generateButtonText="Generate Email"
+            />
+          )}
 
-            {firstShow ? (
-               <EmailCard
-               isEmailCopied = {isEmailCopied.firstFollowUpCopied}
-               copyEmail={(text:string)=>copyEmail(text ,"firstFollowUp")}
-               msgLoading={firstFollowUpLoading}
-               handleGenerate={() => handleGenerate("firstFollowUp")}
-               handleClick={() => handleClick("firstFollowUp")}
-               handleSave={() => handleSave("firstFollowUp")}
-               isEditing={isFirstEditing}
-               componentRef={componentFirstRef}
-               streamedData={streamedFirstFollowUpEmailText}
-               show={firstShow}
-               editorId="first_editor"
-               cardHeading="First Follow Up Email"
-               cardInstructions="You can send the second email after a week. You can schedule this email in advance"
-             />
-            ) : (
-              <EmailPlaceHolderCard
-                {...EmailPlaceholderCardProps}
-               msgLoading={firstFollowUpLoading}
-                handleGenerate={()=>handleGenerate("firstFollowUp")}
-                generateButtonText="Generate First Follow Up Email"
-              />
-            )}
+          {firstShow ? (
+            <EmailCard
+              isEmailCopied={isEmailCopied.firstFollowUpCopied}
+              copyEmail={(text: string) => copyEmail(text, "firstFollowUp")}
+              msgLoading={firstFollowUpLoading}
+              handleGenerate={() => handleGenerate("firstFollowUp")}
+              handleClick={() => handleClick("firstFollowUp")}
+              handleSave={() => handleSave("firstFollowUp")}
+              isEditing={isFirstEditing}
+              componentRef={componentFirstRef}
+              streamedData={streamedFirstFollowUpEmailText}
+              show={firstShow}
+              editorId="first_editor"
+              cardHeading="First Follow Up Email"
+              cardInstructions="You can send the second email after a week. You can schedule this email in advance"
+            />
+          ) : (
+            <EmailPlaceHolderCard
+              {...EmailPlaceholderCardProps}
+              msgLoading={firstFollowUpLoading}
+              handleGenerate={() => handleGenerate("firstFollowUp")}
+              generateButtonText="Generate First Follow Up Email"
+            />
+          )}
 
-            {secondShow ? (
-              <EmailCard
-              isEmailCopied = {isEmailCopied.secondFollowUpCopied}
-              copyEmail={(text:string)=>copyEmail(text ,"secondFollowUp")}
+          {secondShow ? (
+            <EmailCard
+              isEmailCopied={isEmailCopied.secondFollowUpCopied}
+              copyEmail={(text: string) => copyEmail(text, "secondFollowUp")}
               msgLoading={secondFollowUpLoading}
               handleGenerate={() => handleGenerate("secondFollowUp")}
               handleClick={() => handleClick("secondFollowUp")}
@@ -774,14 +775,14 @@ const PersonalizedEmailBot = () => {
               cardHeading="Second Follow Up Email"
               cardInstructions="You can send another email if second email is not responded. You can schedule this email in advance"
             />
-            ) : (
-              <EmailPlaceHolderCard
-                {...EmailPlaceholderCardProps}
-                msgLoading={secondFollowUpLoading}
-                handleGenerate={()=>handleGenerate("secondFollowUp")}
-                generateButtonText="Generate Second Follow Up Email"
-              />
-            )}
+          ) : (
+            <EmailPlaceHolderCard
+              {...EmailPlaceholderCardProps}
+              msgLoading={secondFollowUpLoading}
+              handleGenerate={() => handleGenerate("secondFollowUp")}
+              generateButtonText="Generate Second Follow Up Email"
+            />
+          )}
 
           {showPopup && (
             <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
