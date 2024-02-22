@@ -164,7 +164,7 @@ const ResumeTemplate16 = () => {
               />
             </li>
             <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-3  items-start justify-start ">
-              <span className="w-8 h-8 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-8 md:h-8  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
+              <span className="w-9 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-8 md:h-7  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
                 {emailIcon}
               </span>
               <EditableField
@@ -187,8 +187,7 @@ const ResumeTemplate16 = () => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth="0.8"
-                  width="36"
-                  height="36"
+                  className="w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
