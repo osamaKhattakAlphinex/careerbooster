@@ -93,8 +93,8 @@ const ResumeTemplate6 = () => {
         />
       </div>
 
-      <div className="w-full pl-5">
-        <div className="flex flex-col w-12/12 p-8">
+      <div className="w-full">
+        <div className="flex flex-col w-12/12 pl-6 pr-8 py-8">
           <h2 className="text-4xl xs:text-2xl md:4xl lg:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
@@ -116,7 +116,7 @@ const ResumeTemplate6 = () => {
               }}
             />
           </h3>
-          <ul className=" flex flex-row  md:flex-row gap-3 my-4 justify-between text-sm  break-all pl-0">
+          <ul className=" flex flex-row  md:flex-row gap-3 my-2 justify-between text-sm  break-all pl-0">
             <li className="hover:shadow-md hover:bg-gray-100 text-sm   flex flex-row gap-1  items-center justify-start w-[30%]">
               <div className="p-1">{phoneIcon}</div>
               <EditableField
@@ -150,8 +150,8 @@ const ResumeTemplate6 = () => {
             <li className="w-[30%] hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center justify-start text-sm ">
               <div className="p-1">
                 <svg
-                  width="20"
-                  height="20"
+                  width="16"
+                  height="16"
                   viewBox="0 0 19 19"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -186,13 +186,13 @@ const ResumeTemplate6 = () => {
           {/* EXECUTIVE SUMMARY */}
           <div className="w-full flex flex-wrap flex-col ">
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-            <h3 className="uppercase text-lg font-semibold my-3">
+            <h3 className="uppercase text-lg font-semibold my-1">
               EXECUTIVE SUMMARY
             </h3>
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
 
             <Toolbar regenrateSummary={getSummary}>
-              <div className="text-sm  hover:shadow-md my-2 border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
+              <div className="text-sm  hover:shadow-md my-2 text-justify border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
                 <EditableField
                   type="textarea"
                   value={
@@ -219,7 +219,7 @@ const ResumeTemplate6 = () => {
             {resume?.primarySkills && resume?.primarySkills.length > 0 && (
               <>
                 <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-                <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center py-3">
+                <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center py-1">
                   Skills
                 </h3>
                 <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-2"></span>
@@ -309,7 +309,7 @@ const ResumeTemplate6 = () => {
             )}
             {/* Work Experience */}
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-            <h3 className="uppercase text-lg font-semibold py-3">
+            <h3 className="uppercase text-lg font-semibold py-1">
               WORK EXPERIENCE
             </h3>
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
@@ -554,11 +554,11 @@ const ResumeTemplate6 = () => {
             {/* Education */}
             {resume?.education.length > 0 && (
               <>
-                <span className="w-full h-0 border-[1px] border-gray-500 my-3 page-break"></span>
-                <h3 className="uppercase text-lg font-semibold flex flex-row gap-2 items-center">
+                <span className="w-full h-0 border-[1px] border-gray-500 my-t page-break"></span>
+                <h3 className="uppercase text-lg font-semibold py-1 flex flex-row gap-2 items-center">
                   Education
                 </h3>
-                <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
+                <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-b"></span>
                 <ul className="flex  md:flex-row lg:flex-row w-full  flex-wrap pl-0 ">
                   {resume?.education.map(
                     (education: Education, ind: number) => (

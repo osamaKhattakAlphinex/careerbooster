@@ -74,32 +74,17 @@ const ResumeTemplate9 = () => {
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
+  const [color, setColor] = useState("#1a202c");
+  const saveColor = (color: ColorResult) => {
+    // Access the selected color value from the 'color' parameter
+    setColor(color.hex);
 
+    // You can do whatever you need with the selected color here
+  };
   return (
     <div className="w-full first-page  text-gray-900">
-      <div className="flex flex-row justify-center pt-4 items-center">
-        {/* <div
-          className=" w-28 h-28 xs:w-20n relative xs:h-20 md:w-32 md:h-32 text-whitetext-center flex justify-center items-center  rounded-full mx-4 my-2 md:my-0 "
-          style={{ backgroundColor: color }}
-        >
-          <span className="text-4xl text-gray-100  hover:shadow-md hover:bg-gray-100">
-            <EditableField
-              value={resume?.shortName ? resume?.shortName : "CPH"}
-              style={{ width: "60px" }}
-              onSave={(value: string) => {
-                dispatch(setField({ name: "shortName", value: value }));
-                saveResumeToDB({ ...resume, shortName: value });
-              }}
-            />
-          </span>
-          <ColorPicker
-            defaultColor="#2d3748"
-            styles_pin="absolute   top-1 right-1"
-            styles_div="absolute top-3 -left-1"
-            setColor={setColor}
-          />
-        </div> */}
-        <div className="flex flex-col w-10/12 py-2 justify-center items-center">
+      <div className="flex flex-row px-8 justify-between pt-2 xs:pt-4 items-center">
+        <div className="flex flex-col py-2">
           <h2 className="text-4xl font-bold xs:font-medium md:text-4xl hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
@@ -122,12 +107,35 @@ const ResumeTemplate9 = () => {
             />
           </h3>
         </div>
+        <div
+          className=" w-28 h-28 xs:w-20n relative xs:h-20 md:w-32 md:h-32 text-white text-center flex justify-center items-center  rounded-full mx-4 my-2 md:my-0 "
+          style={{ backgroundColor: color }}
+        >
+          <span className="text-4xl text-gray-100  hover:shadow-md hover:bg-gray-100">
+            <EditableField
+              value={resume?.shortName ? resume?.shortName : "CPH"}
+              style={{ width: "60px" }}
+              onSave={(value: string) => {
+                dispatch(setField({ name: "shortName", value: value }));
+                saveResumeToDB({ ...resume, shortName: value });
+              }}
+            />
+          </span>
+          <ColorPicker
+            defaultColor="#1a202c"
+            resetColor="#1a202c"
+            styles_pin="absolute   top-4 right-5"
+            styles_div="absolute top-3 -left-1"
+            setColor={setColor}
+            saveColor={saveColor}
+          />
+        </div>
       </div>
       <div className="flex">
-        <div className=" w-full flex flex-col  md:pl-8 px-8 mt-4">
+        <div className=" w-full flex flex-col  md:pl-8 px-8 xs:mt-4 ">
           {/* contacts */}
 
-          <ul className="flex mt-2 flex-row  md:flex-row w-full justify-between gap-3 mb-4 text-sm break-all pl-0">
+          <ul className="flex flex-row  md:flex-row w-full justify-between gap-3  text-sm break-all pl-0">
             <li className="w-[30%] hover:shadow-md hover:bg-gray-100 text-sm flex flex-row gap-1  items-center justify-start">
               <div className="p-1">{phoneIcon}</div>
               <EditableField
@@ -161,8 +169,8 @@ const ResumeTemplate9 = () => {
             <li className="w-[30%] hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center justify-start text-sm">
               <div className="p-1">
                 <svg
-                  width="20"
-                  height="20"
+                  width="16"
+                  height="16"
                   viewBox="0 0 19 19"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -199,10 +207,10 @@ const ResumeTemplate9 = () => {
         <div className="w-full flex flex-col px-8 xs:px-4 md:px-8 lg:px-8">
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0 border !border-gray-500 mt-4"></span>
-          <h3 className="uppercase text-lg font-bold my-2">SUMMARY</h3>
+          <h3 className="uppercase text-lg font-bold my-1">SUMMARY</h3>
           <span className="border w-full !border-gray-500 mb-4"></span>
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-sm  hover:shadow-md border-2 border-transparent hover:border-gray-500 hover:border-dashed  ">
+            <div className="text-sm  hover:shadow-md border-2 text-justify border-transparent hover:border-gray-500 hover:border-dashed  ">
               <EditableField
                 type="textarea"
                 value={
@@ -229,7 +237,7 @@ const ResumeTemplate9 = () => {
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <span className="border-stylee w-full h-0 border !border-gray-500 mt-4"></span>
-              <h3 className="uppercase text-lg font-semibold flex  items-center   py-2 gap-2">
+              <h3 className="uppercase text-lg font-bold flex  items-center   py-1 gap-2">
                 Skills
               </h3>
               <span className="border w-full !border-gray-500 mb-4"></span>
@@ -319,7 +327,7 @@ const ResumeTemplate9 = () => {
           )}
           {/* Work Experience */}
           <span className="border-stylee w-full h-0 border !border-gray-500 mt-4"></span>
-          <h3 className="uppercase text-lg font-bold flex  items-center  py-2  gap-2">
+          <h3 className="uppercase text-lg font-bold flex  items-center  py-1  gap-2">
             WORK EXPERIENCE
           </h3>
           <span className="border w-full !border-gray-500 mb-4"></span>

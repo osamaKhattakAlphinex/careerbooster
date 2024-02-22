@@ -504,7 +504,7 @@ const ResumeTemplate10 = () => {
                                         );
                                       }}
                                       draggable
-                                      className="h-8 hover:bg-slate-200 group flex flex-row justify-center items-center"
+                                      className="h-8 hover:bg-slate-200 border group flex flex-row justify-center items-center"
                                     >
                                       <div
                                         className="group-hover:block hidden font-medium text-xs uppercase   text-gray-500 cursor-pointer"

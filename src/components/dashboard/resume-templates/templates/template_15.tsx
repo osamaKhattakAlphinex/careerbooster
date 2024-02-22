@@ -111,10 +111,10 @@ const ResumeTemplate15 = () => {
           </div>
           <div className="flex justify-center">
             <div
-              className=" w-48 h-48 md:w-48 lg:h-48 lg:w-48 border-[.5rem]  md:border-[.5rem] border-[#ffff]  md:h-48 text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full "
+              className=" w-48 h-48 md:w-48 relative lg:h-48 lg:w-48 border-[.5rem]  md:border-[.5rem] border-[#ffff]  md:h-48 text-white bg-[#444440]  text-center flex justify-center items-center  rounded-full "
               style={{ backgroundColor: color_second }}
             >
-              <span className="text-4xl  hover:shadow-md hover:bg-gray-100">
+              <span className="text-4xl  hover:shadow-md  hover:bg-gray-400">
                 <EditableField
                   value={resume?.shortName ? resume?.shortName : "CPH"}
                   style={{ width: "60px" }}
@@ -123,17 +123,17 @@ const ResumeTemplate15 = () => {
                     saveResumeToDB({ ...resume, shortName: value });
                   }}
                 />
+                <ColorPicker
+                  defaultColor="#F4F4F4"
+                  resetColor="#444440"
+                  styles_pin="absolute  top-7 right-7"
+                  styles_div="absolute top-3 -left-1"
+                  setColor={setColor}
+                  secondDefaultColor="#444440"
+                  setColor_second={setColor_second}
+                  saveColor={saveColor_second}
+                />
               </span>
-              <ColorPicker
-                defaultColor="#F4F4F4"
-                resetColor="#444440"
-                styles_pin="absolute text-white top-5 right-5"
-                styles_div="absolute top-3 -left-1"
-                setColor={setColor}
-                secondDefaultColor="#444440"
-                setColor_second={setColor_second}
-                saveColor={saveColor_second}
-              />
             </div>
           </div>
           {/* contacts */}
@@ -337,7 +337,7 @@ const ResumeTemplate15 = () => {
           </h3>
           <span className="border-stylee w-full h-0  my-3 xs:my-3"></span>
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-sm hover:shadow-md border-2 border-transparent hover:border-gray-500 hover:border-dashed  ">
+            <div className="text-sm hover:shadow-md text-justify border-2 border-transparent hover:border-gray-500 hover:border-dashed  ">
               <EditableField
                 type="textarea"
                 value={

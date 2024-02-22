@@ -123,7 +123,7 @@ const ResumeTemplate3 = () => {
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 "></span>
 
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-sm  my-2 hover:shadow-md border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
+            <div className="text-sm  my-2 hover:shadow-md text-justify border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
               <EditableField
                 type="textarea"
                 value={
