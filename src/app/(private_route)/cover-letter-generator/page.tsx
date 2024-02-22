@@ -294,11 +294,11 @@ export default function CoverLetterPage() {
           <>
             <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] px-4 lg:px-[30px] py-8 lg:py-[41px] flex flex-col gap-5 ">
               {/* header */}
-              <div className="flex flex-col gap-2 md:flex-row  justify-between items-center">
+              <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
                 <h3 className=" text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
                   Generate Cover Letter
                 </h3>
-                <div className=" text-sm dark:text-gray-100 text-gray-950 uppercase font-bold">
+                <div className="text-sm font-bold uppercase dark:text-gray-100 text-gray-950">
                   {/* <LimitCard
                     title="Cover Letter Availble"
                     limit={
@@ -389,8 +389,8 @@ export default function CoverLetterPage() {
               </div>
 
               {/* form */}
-              <div className="flex flex-col gap-5 justify-between items-start">
-                <div className="w-full flex flex-col">
+              <div className="flex flex-col items-start justify-between gap-5">
+                <div className="flex flex-col w-full">
                   <label className=" font-bold justify-between  items-center text-md md:text-[24px] dark:text-gray-100 text-gray-950 flex lg:py-[20px] gap-[3px]">
                     <div>
                       Paste Your Job Description
@@ -486,13 +486,13 @@ export default function CoverLetterPage() {
                   </span>
                 </button>
               </div>
-              {/* <div className="bg-white  w-full rounded-2xl flex flex-col py-6 px-8 ">
+              {/* <div className="flex flex-col w-full px-8 py-6 bg-white rounded-2xl ">
                 <div>
                   <h1 className="uppercase text-[24px] text-gray-950 border-b border-gray-950 pb-2 font-semibold">
                     richard williams
                   </h1>
                 </div>
-                <div className="flex flex-col text-gray-950  pt-6  text-sm">
+                <div className="flex flex-col pt-6 text-sm text-gray-950">
                   <ul className="flex d:gap-10 xs:gap-4 xs:flex-col md:flex-row">
                     <li>
                       <h2>3665 Margaret Street, Houston, TX 47587</h2>
@@ -507,17 +507,17 @@ export default function CoverLetterPage() {
                   </ul>
                   <h4 className="mt-16 mb-8 ">[Today{"'"}s Date]</h4>
                 </div>
-                <ul className="flex flex-col text-gray-950 text-sm gap-2">
+                <ul className="flex flex-col gap-2 text-sm text-gray-950">
                   <li>[Hiring Manager{"’"}s Name]</li>
                   <li>123 Company Address</li>
                   <li>Company{"’"}s City, State, Zip Code</li>
                   <li>(xxx) xxx-xxxx</li>
                   <li>hiring.manager@gmail.com</li>
                 </ul>
-                <h3 className="py-8 text-gray-950 text-sm">
+                <h3 className="py-8 text-sm text-gray-950">
                   Dear [Mr./Ms./Mx.] [Hiring Manager{"’"}s Last Name],
                 </h3>
-                <p className="text-gray-950 text-sm pb-8 leading-5">
+                <p className="pb-8 text-sm leading-5 text-gray-950">
                   The first paragraph should contain a self-introduction. Write
                   who you are, where your expertise lies, where you found the
                   job posting (or who referred you), and why you want to apply.
@@ -536,7 +536,7 @@ export default function CoverLetterPage() {
                   {"’"}ll reach out again next week if you don{"’"}t hear back.
                   Thank them for their time.
                 </p>
-                <h3 className="text-gray-950 text-base pb-4">Sincerely, </h3>
+                <h3 className="pb-4 text-base text-gray-950">Sincerely, </h3>
                 <h1 className=" text-[24px] text-gray-950 ">
                   Richard Williams
                 </h1>
@@ -548,33 +548,56 @@ export default function CoverLetterPage() {
               {show && (
                 <div
                   ref={componentRef}
-                  className=" bg-white w-full rounded-2xl py-6 px-8 "
+                  className="w-full px-8 py-6 bg-white rounded-2xl"
                 >
                   <div>
                     <h1 className="uppercase text-[24px] text-gray-950 border-b border-gray-950 pb-2 font-semibold">
                       {userData.firstName + " " + userData.lastName}
                     </h1>
                   </div>
-                  <div className="flex flex-col text-gray-950  pt-6  text-sm">
-                    <ul className="flex mb-8 gap-10 md:gap-10 xs:gap-4 xs:flex-col md:flex-row">
+                  <div className="flex flex-col pt-6 text-sm text-gray-950">
+                    <ul className="flex flex-col gap-2 mb-8">
                       <li>
-                        <h2>
-                          {userData.contact.street + userData.contact.street
-                            ? ", "
-                            : "" +
-                              userData.contact.cityState +
-                              ", " +
-                              userData.contact.country +
-                              ", " +
-                              userData.contact.postalCode}
+                        <h2 className="text-base font-semibold">
+                          {`${userData.firstName} ${userData.lastName}`}
                         </h2>
                       </li>
                       <li>
-                        {" "}
-                        <h2>{userData.email} </h2>
+                        <h2 className="text-base font-semibold">
+                          {userData.email}{" "}
+                        </h2>
                       </li>
                       <li>
-                        <h2>{userData.phone}</h2>
+                        <h2 className="text-base font-semibold">
+                          {userData.phone}
+                        </h2>
+                      </li>
+                      <li>
+                        <h2 className="text-base font-semibold">
+                          {`${
+                            userData.contact.street === ""
+                              ? ""
+                              : userData.contact.street
+                          }  
+                            ${
+                              userData.contact.cityState === ""
+                                ? ""
+                                : ", " + userData.contact.cityState
+                            }
+
+                            ${
+                              userData.contact.country === ""
+                                ? ""
+                                : ", " + userData.contact.country
+                            }
+
+                            ${
+                              userData.contact.postalCode === ""
+                                ? ""
+                                : ", " + userData.contact.postalCode
+                            }
+                            `}
+                        </h2>
                       </li>
                     </ul>
                     {/* <h4 className="mt-16 mb-8 ">[Today{"'"}s Date]</h4> */}
@@ -603,7 +626,7 @@ export default function CoverLetterPage() {
                       )}
                     </div>
                   </div>
-                  <div className="buttons mt-5 flex flex-col flex-wrap md:flex-row gap-3">
+                  <div className="flex flex-col flex-wrap gap-3 mt-5 buttons md:flex-row">
                     {!isNaN(availablePercentageCoverLetter) &&
                       availablePercentageCoverLetter !== 0 && (
                         <button
@@ -658,7 +681,7 @@ export default function CoverLetterPage() {
                                   viewBox="0 0 24 24"
                                   strokeWidth={1.5}
                                   stroke="currentColor"
-                                  className="w-4 h-4  text-gray-950"
+                                  className="w-4 h-4 text-gray-950"
                                 >
                                   <path
                                     strokeLinecap="round"
@@ -728,7 +751,7 @@ export default function CoverLetterPage() {
                             />
                           </svg>
 
-                          <span className="dark:text-gray-100 text-gray-950 text-sm">
+                          <span className="text-sm dark:text-gray-100 text-gray-950">
                             {msgLoading
                               ? "Please wait..."
                               : isCoverLetterCopied
@@ -793,7 +816,7 @@ export default function CoverLetterPage() {
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="w-4 h-4  text-gray-950"
+                          className="w-4 h-4 text-gray-950"
                         >
                           <path
                             strokeLinecap="round"
