@@ -18,6 +18,8 @@ import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
+import { ColorResult } from "react-color";
+import ColorPicker from "../colorPicker";
 const ResumeTemplate16 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -38,7 +40,8 @@ const ResumeTemplate16 = () => {
   const [streamedJDData, setStreamedJDData] = useState<any>("");
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
   const { saveResumeToDB } = useSaveResumeToDB();
-
+  const [color, setColor] = useState("#1F1E1E");
+  const [color_second, setColor_second] = useState("#383636");
   const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
     useDragAndDrop();
 
@@ -74,14 +77,31 @@ const ResumeTemplate16 = () => {
       setPrimarySkill("");
     }
   };
+  const saveColor = (color: ColorResult) => {
+    // Access the selected color value from the 'color' parameter
+    setColor(color.hex);
 
+    // You can do whatever you need with the selected color here
+  };
+  const saveColor_second = (color: ColorResult) => {
+    // Access the selected color value from the 'color' parameter
+    setColor_second(color.hex);
+
+    // You can do whatever you need with the selected color here
+  };
   return (
     <div className="w-full first-page relative text-gray-900">
       <div className="flex">
-        <div className=" w-3/12 xs:w-4/12 md:w-4/12 flex flex-col   bg-[#1F1E1E]  px-4  xs:px-1 md:px-9 pt-[2rem] h-[1080px] xs:h-auto">
+        <div
+          className=" w-3/12 xs:w-4/12 md:w-4/12 flex flex-col    px-4  xs:px-1 md:px-9 pt-[2rem] h-[1080px] xs:h-auto"
+          style={{ backgroundColor: color }}
+        >
           <div className="flex justify-center">
-            <div className=" w-32 h-32 xs:w-24 xs:h-24 md:w-44 md:h-44 border-[2px] xs:border-[2px] md:border-[.5rem] border-[##F1F1F1]   text-gray-800 bg-[#FFFFFF]  text-center flex justify-center items-center  rounded-full ">
-              <div className=" w-28 h-28 xs:h-[88px] xs:w-[] md:w-40 md:h-40 text-[#F1F1F1] flex justify-center items-center bg-[#383636]   rounded-full ">
+            <div className=" w-32 h-32 xs:w-24 xs:h-24 md:w-40 md:h-40 border-[2px] xs:border-[2px] md:border-[.5rem] border-[##F1F1F1]   text-gray-800 bg-[#FFFFFF]  text-center flex justify-center items-center  rounded-full ">
+              <div
+                className=" w-28 relative h-28 xs:h-[88px] xs:w-[] md:w-36 md:h-36 text-[#F1F1F1] flex justify-center items-center    rounded-full "
+                style={{ backgroundColor: color_second }}
+              >
                 <span className="text-4xl xs:text-lg md:text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
                   <EditableField
                     value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -92,7 +112,31 @@ const ResumeTemplate16 = () => {
                     }}
                   />
                 </span>
+                <ColorPicker
+                  defaultColor="#1F1E1E"
+                  resetColor="#383636"
+                  styles_pin="absolute text-white top-5 right-5"
+                  styles_div="absolute top-3 -left-1"
+                  setColor={setColor}
+                  secondDefaultColor="#383636"
+                  setColor_second={setColor_second}
+                  saveColor={saveColor_second}
+                />
               </div>
+            </div>
+          </div>
+          <div className="absolute top-0 -left-12 xs:w-4/12">
+            <div className="flex justify-end">
+              <ColorPicker
+                defaultColor="#1F1E1E"
+                resetColor="#1F1E1E"
+                setColor={setColor}
+                styles_pin="relative text-white top-[6px]  -left-9"
+                styles_div="absolute top-3 left-0"
+                secondDefaultColor="#383636"
+                setColor_second={setColor_second}
+                saveColor={saveColor}
+              />
             </div>
           </div>
           {/* contacts */}
@@ -120,7 +164,7 @@ const ResumeTemplate16 = () => {
               />
             </li>
             <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-3  items-start justify-start ">
-              <span className="w-8 h-8 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-10 md:h-8  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
+              <span className="w-8 h-8 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-8 md:h-8  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
                 {emailIcon}
               </span>
               <EditableField
@@ -264,7 +308,7 @@ const ResumeTemplate16 = () => {
             </>
           )}
         </div>
-        <div className="xs:w-full w-8/12 flex flex-col xs:bg-[#F1F1F1] md:bg-[#F1F1F1] px-4 md:px-8 pt-[1rem] md:pt-[1rem] ">
+        <div className="xs:w-full w-9/12 flex flex-col xs:bg-[#F1F1F1] md:bg-[#F1F1F1] px-4 md:px-8 pt-[1rem] md:pt-[1rem] ">
           <div className="flex flex-col justify-start pb-6 ">
             <h2 className="text-4xl xs:text-2xl text-center md:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
               <EditableField
@@ -347,7 +391,7 @@ const ResumeTemplate16 = () => {
                       key={i}
                       className={`flex justify-start items-start ${
                         i > 0
-                          ? "w-[100vw] ml-[-170px]  xs:ml-0 xs:w-full "
+                          ? "w-[97vw] ml-[-200px]  xs:ml-0 xs:w-full "
                           : "xs:min-h-fit min-h-[460px]"
                       }`}
                     >
@@ -363,13 +407,7 @@ const ResumeTemplate16 = () => {
                       >
                         <div className="flex">
                           <div>
-                            <h2
-                              className="hover:shadow-md hover:cursor-text hover:bg-gray-100"
-                              style={{
-                                fontSize: "1rem",
-                                fontWeight: "bold",
-                              }}
-                            >
+                            <h2 className="text-base font-bold hover:shadow-md hover:cursor-text hover:bg-gray-100">
                               <EditableField
                                 value={rec?.title}
                                 style={{ width: "100%" }}
@@ -381,7 +419,7 @@ const ResumeTemplate16 = () => {
                                 }}
                               />
                             </h2>
-                            <h2 className="hover:cursor-default text-base">
+                            <h2 className="hover:cursor-default text-[15px] font-semibold">
                               {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                               {rec?.isContinue
                                 ? "Present"

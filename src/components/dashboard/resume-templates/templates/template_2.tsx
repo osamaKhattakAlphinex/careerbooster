@@ -21,6 +21,8 @@ import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import Toolbar from "@/components/dashboard/Toolbar";
 import useHandler from "@/hooks/useHandler";
+import ColorPicker from "../colorPicker";
+import { ColorResult } from "react-color";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
@@ -35,7 +37,8 @@ const ResumeTemplate2 = () => {
   >(null);
   const [streamedJDData, setStreamedJDData] = useState<any>("");
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
-
+  const [color, setColor] = useState("#f7fafc");
+  const [color_second, setColor_second] = useState("#f7fafc");
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
   const { getSummary } = useGetSummary(setStreamedSummaryData);
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
@@ -70,12 +73,23 @@ const ResumeTemplate2 = () => {
       setPrimarySkill("");
     }
   };
+  const saveColor = (color: ColorResult) => {
+    // Access the selected color value from the 'color' parameter
+    setColor(color.hex);
 
+    // You can do whatever you need with the selected color here
+  };
+  const saveColor_second = (color: ColorResult) => {
+    // Access the selected color value from the 'color' parameter
+    setColor_second(color.hex);
+
+    // You can do whatever you need with the selected color here
+  };
   return (
     <div className="w-full first-page  text-gray-900 flex flex-col justify-start space-y-4 items-start px-6">
       {/* Name and Title */}
-      <div className="flex flex-col w-full text-center bg-gray-100 rounded-3xl  p-8">
-        <h2 className="text-4xl xs:text-2xl md:4xl lg:text-4xl font-bold hover:shadow-md hover:bg-gray-100">
+      <div className="flex flex-col w-full text-center bg-gray-100 rounded-3xl  p-8" style={{ backgroundColor: color }}>
+        <h2 className="text-4xl xs:text-2xl md:4xl lg:text-xl font-bold hover:shadow-md hover:bg-gray-100">
           <EditableField
             value={resume?.name ? resume?.name : "FULL NAME"}
             style={{ width: "fit-content" }}
@@ -96,10 +110,25 @@ const ResumeTemplate2 = () => {
             }}
           />
         </h3>
+        <div className="absolute top-0 left-12">
+          <ColorPicker
+            defaultColor="#f7fafc"
+            resetColor="#f7fafc"
+            setColor={setColor}
+            styles_pin="relative top-[6px]  -left-9"
+            styles_div="absolute top-3 left-0"
+            secondDefaultColor="#f7fafc"
+            setColor_second={setColor_second}
+            saveColor={saveColor}
+          />
+        </div>
       </div>
       {/* contacts */}
-      <div className="w-full py-3">
-        <ul className="flex flex-row  md:flex-row justify-around items-center p-4  rounded-2xl bg-gray-100">
+      <div className="w-full py-3 relative">
+        <ul
+          className="flex flex-row  md:flex-row justify-around items-center p-4  rounded-2xl "
+          style={{ backgroundColor: color_second }}
+        >
           <li className="hover:shadow-md text-gray-950  hover:bg-gray-100 text-sm xs:text-sm md:text-lg lg:text-lg flex flex-row gap-1  items-center">
             {phoneIcon}
             <EditableField
@@ -167,6 +196,18 @@ const ResumeTemplate2 = () => {
             />
           </li>
         </ul>
+        <div className="absolute top-0 left-12">
+          <ColorPicker
+            defaultColor="#f7fafc"
+            resetColor="#f7fafc"
+            setColor={setColor}
+            styles_pin="relative top-[18px]  -left-9"
+            styles_div="absolute top-3 left-0"
+            secondDefaultColor="#f7fafc"
+            setColor_second={setColor_second}
+            saveColor={saveColor_second}
+          />
+        </div>
       </div>
       {/* summary objective */}
       <div className="w-full space-y-3 ">

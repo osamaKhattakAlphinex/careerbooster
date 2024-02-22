@@ -73,7 +73,7 @@ const ResumeTemplate8 = () => {
       <div className="flex">
         <div className="flex flex-col items-center w-full pt-4 px-8">
           <div className="flex w-[100%] justify-between items-center">
-            <div className="flex flex-col w-[65%] ">
+            <div className="flex flex-col w-[55%] ">
               <h2 className="text-4xl xs:text-2xl md:4xl lg:text-4xl font-bold  hover:shadow-md hover:bg-gray-100">
                 <EditableField
                   value={resume?.name ? resume?.name : "FULL NAME"}
@@ -96,9 +96,9 @@ const ResumeTemplate8 = () => {
                 />
               </h3>
             </div>
-            <div className="flex flex-col w-[25%]">
+            <div className="flex flex-col w-[35%]">
               <ul className="w-full flex flex-col md:flex-col gap-3 mt-8 mb-4 text-sm  break-all pl-0 justify-between">
-                <li className=" hover:shadow-md hover:bg-gray-100   flex flex-row gap-1  items-center justify-start">
+                <li className=" hover:shadow-md hover:bg-gray-100   flex flex-row gap-1  items-start justify-start">
                   <div className="p-1">{phoneIcon}</div>
 
                   <EditableField
@@ -114,7 +114,7 @@ const ResumeTemplate8 = () => {
                     }}
                   />
                 </li>
-                <li className=" hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start ">
+                <li className=" hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-start justify-start ">
                   <div className="p-1">{emailIcon}</div>
 
                   <EditableField
@@ -130,7 +130,7 @@ const ResumeTemplate8 = () => {
                     }}
                   />
                 </li>
-                <li className=" hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center justify-start ">
+                <li className=" hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-start justify-start ">
                   <div className="p-1">
                     <svg
                       width="20"
@@ -175,7 +175,7 @@ const ResumeTemplate8 = () => {
         <div className="w-full flex flex-col px-8 xs:px-4 md:px-8 lg:px-8">
           {/* Executive Summary */}
           {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
-          <h3 className="uppercase text-lg font-bold text-center font-serif mt-3">
+          <h3 className="uppercase text-lg font-bold text-center  mt-3">
             EXECUTIVE SUMMARY
           </h3>
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-2"></span>
@@ -208,7 +208,7 @@ const ResumeTemplate8 = () => {
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
-              <h3 className="uppercase text-lg font-bold flex justify-center mt-6 font-serif items-center gap-2 wl-full ">
+              <h3 className="uppercase text-lg font-bold flex justify-center mt-6  items-center gap-2 wl-full ">
                 Skills
               </h3>
               <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-3"></span>
@@ -297,7 +297,7 @@ const ResumeTemplate8 = () => {
           )}
           {/* Work Experience */}
           {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
-          <h3 className="uppercase text-lg font-bold text-center font-serif xs:mt-6 ">
+          <h3 className="uppercase text-lg font-bold text-center  xs:mt-6 ">
             WORK EXPERIENCE
           </h3>
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-3"></span>
@@ -536,7 +536,7 @@ const ResumeTemplate8 = () => {
           {resume?.education.length > 0 && (
             <>
               {/* <span className="w-full h-0 border-[1px] border-gray-500 my-3 page-break"></span> */}
-              <h3 className="uppercase text-lg font-semibold  justify-center items-center font-serif flex mt-6 gap-2 text-center">
+              <h3 className="uppercase text-lg font-semibold  justify-center items-center  flex mt-6 gap-2 text-center">
                 Education
               </h3>
               <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-3"></span>

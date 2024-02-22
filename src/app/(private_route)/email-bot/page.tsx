@@ -707,11 +707,7 @@ const PersonalizedEmailBot = () => {
               </button>
             )}
           </div>
-
-          <div className="flex flex-col gap-4 w-full py-6 bg-white rounded-2xl md:px-8 xs:px-3 ">
-            <h1 className="uppercase text-gray-950 font-bold text-[18px] pb-5">
-              your ai generated email
-            </h1>
+         
             {show ? (
               <EmailCard
                 isEmailCopied = {isEmailCopied.emailCopied}
@@ -725,7 +721,7 @@ const PersonalizedEmailBot = () => {
                 streamedData={streamedData}
                 show={show}
                 editorId="editor"
-                cardHeading="Generate Email"
+                cardHeading="Your AI Generated Email"
                 cardInstructions="This Email will follow your application directly"
               />
             ) : (
@@ -786,7 +782,6 @@ const PersonalizedEmailBot = () => {
                 generateButtonText="Generate Second Follow Up Email"
               />
             )}
-          </div>
 
           {showPopup && (
             <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
