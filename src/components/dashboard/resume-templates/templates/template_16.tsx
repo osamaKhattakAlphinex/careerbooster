@@ -162,7 +162,6 @@ const ResumeTemplate16 = () => {
                   }
                 }}
               />
-              {/* latest */}
             </li>
             <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-3  items-start justify-start ">
               <span className="w-9 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-8 md:h-7  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
