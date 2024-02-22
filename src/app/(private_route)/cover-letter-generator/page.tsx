@@ -292,34 +292,18 @@ export default function CoverLetterPage() {
 
           {/* <MainCoverLetterTool /> */}
           <>
-            <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] px-4 lg:px-[30px] py-8 lg:py-[41px] flex flex-col gap-5 ">
+            <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] px-4 lg:px-[30px] py-6  flex flex-col gap-3 ">
               {/* header */}
               <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
                 <h3 className=" text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
                   Generate Cover Letter
                 </h3>
-                <div className="text-sm font-bold uppercase dark:text-gray-100 text-gray-950">
-                  {/* <LimitCard
-                    title="Cover Letter Availble"
-                    limit={
-                      userData?.userPackageData?.limit?.cover_letter_generation
-                    }
-                    used={userData?.userPackageUsed?.cover_letter_generation}
-                    setPercentageCalculated={setPercentageCalculatedCoverLetter}
-                    availablePercentage={availablePercentageCoverLetter}
-                    setAvailablePercentage={setAvailablePercentageCoverLetter}
-                  /> */}
-                </div>
+                <div className="text-sm font-bold uppercase dark:text-gray-100 text-gray-950"></div>
               </div>
 
               {/* option */}
 
               <div className="text-sm text-[#615DFF] self-start">
-                {/* <button
-                className="flex flex-row justify-start items-center gap-[10px]"
-                type="button"
-                onClick={() => setShowInstruction(!showInstruction)}
-              > */}
                 <span className="uppercase text-[11px] md:text-sm font-bold block gro">
                   select options
                 </span>
@@ -328,7 +312,7 @@ export default function CoverLetterPage() {
               <div className="flex flex-col gap-5 lg:px-0 ">
                 <label
                   htmlFor="default-radio-1"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[260px] lg:w-[400px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-[#959595] text-gray-950 w-[260px] lg:w-[400px] ${
                     selectedOption === "profile"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -355,7 +339,7 @@ export default function CoverLetterPage() {
                 </label>
                 <label
                   htmlFor="default-radio-2"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-[220px] lg:w-[290px] ${
+                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-[#959595] text-gray-950 w-[260px] lg:w-[400px] ${
                     selectedOption === "file"
                       ? "border-[1px] border-[#615DFF]"
                       : ""
@@ -373,7 +357,7 @@ export default function CoverLetterPage() {
                       setSelectedOption(e.target.value);
                     }}
                     name="default-radio"
-                    className="w-4 h-4 border-[1px]"
+                    className="w-fit h-4 border-[1px]"
                     checked={selectedOption === "file"}
                   />
                   Upload a new PDF Resume
@@ -391,7 +375,7 @@ export default function CoverLetterPage() {
               {/* form */}
               <div className="flex flex-col items-start justify-between gap-5">
                 <div className="flex flex-col w-full">
-                  <label className=" font-bold justify-between  items-center text-md md:text-[24px] dark:text-gray-100 text-gray-950 flex lg:py-[20px] gap-[3px]">
+                  <label className=" font-bold justify-between  items-center text-md md:text-[24px] dark:text-gray-100 text-gray-950 flex lg:pb-[16px] gap-[3px]">
                     <div>
                       Paste Your Job Description
                       <span className="text-[#F04248] text-[24px]">*</span>
@@ -486,61 +470,6 @@ export default function CoverLetterPage() {
                   </span>
                 </button>
               </div>
-              {/* <div className="flex flex-col w-full px-8 py-6 bg-white rounded-2xl ">
-                <div>
-                  <h1 className="uppercase text-[24px] text-gray-950 border-b border-gray-950 pb-2 font-semibold">
-                    richard williams
-                  </h1>
-                </div>
-                <div className="flex flex-col pt-6 text-sm text-gray-950">
-                  <ul className="flex d:gap-10 xs:gap-4 xs:flex-col md:flex-row">
-                    <li>
-                      <h2>3665 Margaret Street, Houston, TX 47587</h2>
-                    </li>
-                    <li>
-                      {" "}
-                      <h2>RichardWilliams@gmail.com </h2>
-                    </li>
-                    <li>
-                      <h2>(770) 625-9669</h2>
-                    </li>
-                  </ul>
-                  <h4 className="mt-16 mb-8 ">[Today{"'"}s Date]</h4>
-                </div>
-                <ul className="flex flex-col gap-2 text-sm text-gray-950">
-                  <li>[Hiring Manager{"’"}s Name]</li>
-                  <li>123 Company Address</li>
-                  <li>Company{"’"}s City, State, Zip Code</li>
-                  <li>(xxx) xxx-xxxx</li>
-                  <li>hiring.manager@gmail.com</li>
-                </ul>
-                <h3 className="py-8 text-sm text-gray-950">
-                  Dear [Mr./Ms./Mx.] [Hiring Manager{"’"}s Last Name],
-                </h3>
-                <p className="pb-8 text-sm leading-5 text-gray-950">
-                  The first paragraph should contain a self-introduction. Write
-                  who you are, where your expertise lies, where you found the
-                  job posting (or who referred you), and why you want to apply.
-                  The second paragraph should respond directly to the job
-                  description. Describe how your relevant experiences, skills,
-                  and abilities help you meet the company{"’"}s needs. To make
-                  that easier, you can (and should) literally include words and
-                  phrases from the job description here.To go the extra mile,
-                  research the company and try to find out what they are doing —
-                  and why — given the current state of their industry. Explain
-                  how you can fit into that framework, and help push the company
-                  forward and achieve any goals you suspect they have. The final
-                  paragraph is the “call to action” portion of your cover
-                  letter. Inform the hiring manager that you{"’"}d love to get
-                  interviewed. Give them your contact information. Tell them you
-                  {"’"}ll reach out again next week if you don{"’"}t hear back.
-                  Thank them for their time.
-                </p>
-                <h3 className="pb-4 text-base text-gray-950">Sincerely, </h3>
-                <h1 className=" text-[24px] text-gray-950 ">
-                  Richard Williams
-                </h1>
-              </div> */}
 
               <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-2">
                 your ai generated cover letter

@@ -22,7 +22,7 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
   };
 
   return (
-    <div className="dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px]  mb-7 px-4 lg:px-[24px] pt-[35px] pb-[20px] z-0">
+    <div className="dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px]  mb-7 px-4 lg:px-[24px] pt-[20px] pb-[20px] z-0">
       <div className="flex justify-between items-center ">
         <h1 className="uppercase text-[14px] md:text-sm font-semibold lg:pr-0 pr-4">
           {dataSource === "coverLetters" && "recent Cover Letters"}
