@@ -108,7 +108,7 @@ const ResumeTemplate4 = () => {
           </div>
           <div
             style={{ backgroundColor: color_second }}
-            className=" w-32 h-32 xs:w-[72px] relative xs:h-[72px] sm:w-24 sm:h-24 md:w-28 md:h-28 text-white  text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-0  md:mt-5 mb-4 justify-center md:mb-2"
+            className=" w-28 h-28 xs:w-[72px] relative xs:h-[72px] sm:w-24 sm:h-24 md:w-28 md:h-28 text-white  text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-4  md:mt-5 mb-4 justify-center md:mb-2"
           >
             <span className="text-3xl xs:text-2xl md:text-3xl hover:shadow-md hover:bg-gray-500">
               <EditableField
@@ -133,7 +133,7 @@ const ResumeTemplate4 = () => {
           </div>
           {/* contacts */}
 
-          <h3 className="uppercase text-lg border-white pb-2  -mr-6 md:-mr-6 border-b-2  xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold xs:font-medium flex flex-row gap-2 items-center md:mt-4">
+          <h3 className="uppercase text-lg border-white pb-2  -mr-6 md:-mr-6 border-b-2  xs:text-sm md:text-md lg:text-lg font-semibold xs:font-medium flex flex-row gap-2 items-center md:mt-4">
             Contact
           </h3>
           <span className=" w-[110%] h-0 mb-3"></span>
@@ -300,7 +300,7 @@ const ResumeTemplate4 = () => {
             </>
           )}
         </div>
-        <div className="w-9/12 flex flex-wrap flex-col px-4 md:px-8 text-gray-950 pb-10 pt-16">
+        <div className="w-9/12 flex flex-wrap flex-col px-4 md:px-8 text-gray-950 pb-10 pt-6">
           <div className="flex flex-col ">
             <h2 className="text-4xl font-bold xs:text-xl md:text-4xl lg:text-4xl hover:shadow-md hover:bg-gray-100">
               <EditableField
@@ -326,7 +326,7 @@ const ResumeTemplate4 = () => {
           </div>
           {/* Executive Summary */}
 
-          <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold mt-4 md:mt-11 ">
+          <h3 className="uppercase text-lg xs:text-sm sm:text-sm md:text-md lg:text-lg font-semibold mt-4 md:mt-5 ">
             EXECUTIVE SUMMARY
           </h3>
           <span className="w-full h-0 border-[1px] !border-gray-500 mt-2 mb-4"></span>
