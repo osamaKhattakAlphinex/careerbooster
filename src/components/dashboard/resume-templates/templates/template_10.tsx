@@ -145,7 +145,7 @@ const ResumeTemplate10 = () => {
       <div className=" flex">
         {/* sidebar */}
         <div
-          className="z-5    xs:w-4/12 w-3.5/12 flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6  text-gray-100  pr-6  pb-8  pt-[160px]  h-[1080px] xs:h-auto"
+          className="z-5    xs:w-4/12 w-3.5/12 flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6  text-gray-100  pr-6  pb-8  pt-[160px]  "
           style={{ backgroundColor: color_second }}
         >
           <div className="absolute top-0 left-0 xs:w-3/12 z-20 ">
@@ -171,7 +171,7 @@ const ResumeTemplate10 = () => {
           </div>
 
           <ul className=" flex flex-col gap-2 text-sm break-all pl-0 mt-4">
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex flex-row gap-1  items-start justify-start">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-sm xs:items-center flex flex-row gap-1  items-start justify-start">
               <div
                 className="bg-[#043382] rounded-full p-2 mr-3"
                 style={{ backgroundColor: color }}
@@ -192,7 +192,7 @@ const ResumeTemplate10 = () => {
                 }}
               />
             </li>
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 flex flex-row gap-1 justify-start  items-start text-xs">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 flex flex-row gap-1 justify-start  items-start text-sm xs:items-center">
               <div
                 className=" rounded-full p-2 mr-3"
                 style={{ backgroundColor: color }}
@@ -420,14 +420,7 @@ const ResumeTemplate10 = () => {
                       setNewAchievement("");
                     }}
                   >
-                    <div
-                      key={i}
-                      className={`flex justify-start items-start ${
-                        i > 0
-                          ? " ml-[-170px] xs:ml-0 "
-                          : "xs:min-h-fit min-h-[340px]"
-                      }`}
-                    >
+                    <div key={i} className={`flex justify-start items-start `}>
                       <div
                         key={i}
                         className="hover:border-dashed hover:border-gray-500  border-transparent border-2 hover:cursor-move hover:border-2  flex flex-col w-full  "
@@ -654,7 +647,7 @@ const ResumeTemplate10 = () => {
           )}
           {/* Education */}
           {resume?.education.length > 0 && (
-            <div className="ml-[-180px] xs:ml-0">
+            <>
               <div className="rounded-3xl xs:-mx-1 md:mx-0 bg-blue-900 py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 !w-fit xs:w-auto">
                 <h3 className="uppercase text-[16px] mb-0 font-semibold text-gray-100 xs:text-sm sm:text-sm md:text-[16px] lg:text-[16px] ">
                   Education
@@ -795,7 +788,7 @@ const ResumeTemplate10 = () => {
                   </React.Fragment>
                 ))}
               </ul>
-            </div>
+            </>
           )}
         </div>
       </div>
