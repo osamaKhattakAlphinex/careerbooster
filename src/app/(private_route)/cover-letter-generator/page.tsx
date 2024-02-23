@@ -345,13 +345,12 @@ export default function CoverLetterPage() {
                       : ""
                   } `}
                 >
+
                   <input
                     id="default-radio-2"
                     type="radio"
                     value="file"
-                    // onChange={(e) => {
-                    //   setUploadPdfFile(e.target.value);
-                    // }}
+                    
                     onChange={(e) => {
                       setSelectedFile("");
                       setSelectedOption(e.target.value);
