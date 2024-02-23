@@ -493,6 +493,16 @@ const PersonalizedEmailBot = () => {
     }
   };
 
+  const removeEdit = (type: string)=>{
+    // if (type === "email") {
+    //   setIsEditing(false);
+    // } else if (type === "firstFollowUp") {
+    //   setIsFirstEditing(false);
+    // } else if (type === "secondFollowUp") {
+    //   setIsSecondEditing(false);
+    // }
+  }
+
   const resetStatesAndRedux = () => {
     dispatch(resetEmail());
     setStreamedData("");
@@ -724,6 +734,8 @@ const PersonalizedEmailBot = () => {
               editorId="editor"
               cardHeading="Your AI Generated Email"
               cardInstructions="This Email will follow your application directly"
+              removeEdit={()=> removeEdit("email")}
+              
             />
           ) : (
             <EmailPlaceHolderCard
@@ -749,6 +761,7 @@ const PersonalizedEmailBot = () => {
               editorId="first_editor"
               cardHeading="First Follow Up Email"
               cardInstructions="You can send the second email after a week. You can schedule this email in advance"
+              removeEdit={()=> removeEdit("firstFollowUp")}
             />
           ) : (
             <EmailPlaceHolderCard
@@ -774,7 +787,9 @@ const PersonalizedEmailBot = () => {
               editorId="second_editor"
               cardHeading="Second Follow Up Email"
               cardInstructions="You can send another email if second email is not responded. You can schedule this email in advance"
-            />
+              removeEdit={()=> removeEdit("secondFollowUp")}
+
+              />
           ) : (
             <EmailPlaceHolderCard
               {...EmailPlaceholderCardProps}

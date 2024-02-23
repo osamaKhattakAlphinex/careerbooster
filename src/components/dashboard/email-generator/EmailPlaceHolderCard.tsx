@@ -24,7 +24,7 @@ const GenerateEmailsButton = ({
           msgLoading ||
           selectedOption === "" ||
           (selectedOption === "file" && selectedFile === "") ||
-          jobDescription === ""
+          (generateButtonText === "Generate Email" &&  jobDescription === "")
         }
         onClick={handleGenerate}
         className={`dark:bg-gradient-to-r absolute z-10 top-[45%] left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
@@ -32,7 +32,7 @@ const GenerateEmailsButton = ({
             selectedOption === "" ||
             (selectedOption === "file" && selectedFile === "") ||
             jobDescription === "") &&
-          "  cursor-not-allowed" // Apply these styles when the button is disabled
+          "cursor-not-allowed" // Apply these styles when the button is disabled
         }`}
       >
         <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
