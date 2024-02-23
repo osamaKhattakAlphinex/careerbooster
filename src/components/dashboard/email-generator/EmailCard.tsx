@@ -60,14 +60,12 @@ export const EmailCard = (props: EmailCardProps) => {
               contentEditable="true"
             ></div>
           ) : (
-            <div>
-              <div
-                className=" text-gray-950"
-                dangerouslySetInnerHTML={{
-                  __html: props.streamedData,
-                }}
-              ></div>
-            </div>
+            <div
+              className=" text-gray-950"
+              dangerouslySetInnerHTML={{
+                __html: props.streamedData,
+              }}
+            ></div>
           )}
         </div>
       </div>

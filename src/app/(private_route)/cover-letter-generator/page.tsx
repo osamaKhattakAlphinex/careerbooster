@@ -41,9 +41,8 @@ export default function CoverLetterPage() {
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
   // Function to toggle editing mode on double-click
-  const handleClick: any = () => {
-    // setEditedContent(streamedData);
-    setIsEditing(true);
+  const handleClick = () => {
+    setIsEditing((prevState) => !prevState);
   };
 
   useEffect(() => {
@@ -52,6 +51,7 @@ export default function CoverLetterPage() {
         const editorElement = componentRef.current.querySelector("#editor");
         if (editorElement) {
           editorElement.innerHTML = coverLetter.coverLetterText;
+          editorElement.focus(); // Focus on the editable area
         }
       }
     }
@@ -478,6 +478,7 @@ export default function CoverLetterPage() {
                 <div
                   ref={componentRef}
                   className="w-full px-8 py-6 bg-white rounded-2xl"
+                  // onBlur={() => setIsEditing(false)}
                 >
                   <div>
                     <h1 className="uppercase text-[24px] text-gray-950 border-b border-gray-950 pb-2 font-semibold">
@@ -540,12 +541,13 @@ export default function CoverLetterPage() {
                       {isEditing ? (
                         <div
                           id="editor"
-                          contentEditable="true"
+                          contentEditable={isEditing}
                           className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-[10px] "
                           // dangerouslySetInnerHTML={{ __html: editedContent }}
                           // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
                           //   setEditedContent(e.target.innerHTML);
                           // }}
+                          onBlur={() => setIsEditing(false)}
                         ></div>
                       ) : (
                         <div
