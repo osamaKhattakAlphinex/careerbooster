@@ -5,8 +5,7 @@ import { useSelector } from "react-redux";
 const useHandler = () => {
   const resume = useSelector((state: any) => state.resume);
 
-  const { updateSaveHook } =
-    useUpdateAndSave();
+  const { updateSaveHook } = useUpdateAndSave();
 
   // add the space
   const handleAddSpace = (i: number, newAchievement: string) => {
@@ -42,6 +41,12 @@ const useHandler = () => {
       ...updatedExp[expInd],
       achievements: updatedAchievements,
     };
+    updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
+  };
+
+  const handleDeleteExperience = (expInd: number) => {
+    let updatedExp: any = [...resume.workExperienceArray];
+    updatedExp.splice(expInd, 1);
     updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
   };
 
@@ -103,13 +108,13 @@ const useHandler = () => {
     let updatedEducations = [...resume?.education];
     updatedEducations.splice(ind, 1);
     updateSaveHook.updateAndSaveEducation(updatedEducations);
-  }
+  };
 
   const handleDeleteSkill = (i: number) => {
     const removeSkill = [...resume.primarySkills];
     removeSkill.splice(i, 1);
     updateSaveHook.updateAndSaveSkill(removeSkill);
-  }
+  };
 
   const handleUpdateSkill = (value: string, i: number) => {
     if (value !== resume?.primarySkills[i]) {
@@ -117,7 +122,7 @@ const useHandler = () => {
       updatedSkills.splice(i, 1, value);
       updateSaveHook.updateAndSaveSkill(updatedSkills);
     }
-  }
+  };
   return {
     handlers: {
       handleDeleteSkill,
@@ -129,8 +134,9 @@ const useHandler = () => {
       handleDeleteAchivement,
       handleSaveExperienceDetail,
       handleSaveEductionDetail,
-      handleDeleteEductionDetail
-    }
+      handleDeleteEductionDetail,
+      handleDeleteExperience,
+    },
   };
 };
 

@@ -354,6 +354,9 @@ const ResumeTemplate12 = () => {
                     <Toolbar
                       key={i}
                       addAchivement={() => setNewWorkExperience(i)}
+                      deleteExperience={() =>
+                        handleDeleteExperience(i, resume.id, userData.email)
+                      }
                       regenrateAchivements={() => handleRegenrate(rec, i)}
                       addNewLine={() => {
                         handlers.handleAddSpace(i, newAchievement);
