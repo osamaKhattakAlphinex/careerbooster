@@ -22,7 +22,7 @@ const SubHeadlineGenerator = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>(null);
   const [showPopup, setShowPopup] = useState(false);
   const componentRef = useRef<any>();
-  const {setAvailableCredits} = useAppContext();
+  const { setAvailableCredits } = useAppContext();
 
   const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
   const copyHeadline = async (text: string) => {
@@ -89,7 +89,7 @@ const SubHeadlineGenerator = () => {
       })
         .then(async (resp: any) => {
           if (resp.ok) {
-            setAvailableCredits(true)
+            setAvailableCredits(true);
 
             const reader = resp.body.getReader();
             let tempText = "";

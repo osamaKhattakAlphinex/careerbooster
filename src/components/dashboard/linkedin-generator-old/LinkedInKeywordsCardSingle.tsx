@@ -12,6 +12,8 @@ import {
   resetLinkedKeywords,
   setLinkedKeywords,
 } from "@/store/linkedInKeywordsSlice";
+import { useState } from "react";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 
 type LinkedInHeadlineType = {
   card?: any;
@@ -35,32 +37,30 @@ const LinkedInHKeywordsCardSingle = ({
     }
     return dispatch(setLinkedKeywords(card));
   };
-
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const handleOnDelete = async (card: any) => {
-    const c = confirm(
-      "Are you sure you want to delete this Linked In Keywords?"
-    );
-    if (c) {
-      try {
-        await axios.delete(`/api/linkedInBots/keywordsGenerator/${card.id}`);
-        dispatch(resetLinkedKeywords());
-        // updated cover letters
-        const updatedKeyword = userData.linkedInKeywords.filter(
-          (keyword: any) => keyword.id !== card.id
-        );
+    setConfirmationModal(false);
+    try {
+      await axios.delete(`/api/linkedInBots/keywordsGenerator/${card.id}`);
+      dispatch(resetLinkedKeywords());
+      // updated cover letters
+      const updatedKeyword = userData.linkedInKeywords.filter(
+        (keyword: any) => keyword.id !== card.id
+      );
 
-        const updatedObject = {
-          ...userData,
-          linkedInKeywords: updatedKeyword,
-        };
+      const updatedObject = {
+        ...userData,
+        linkedInKeywords: updatedKeyword,
+      };
 
-        dispatch(setUserData({ ...userData, ...updatedObject }));
-      } catch (error) {
-        console.log(error);
-      }
+      dispatch(setUserData({ ...userData, ...updatedObject }));
+    } catch (error) {
+      console.log(error);
     }
   };
-
+  const handleOpenConfirmationModal = () => {
+    setConfirmationModal(true);
+  };
   if (!card) return <h1>Loading </h1>;
 
   return (
@@ -97,7 +97,7 @@ const LinkedInHKeywordsCardSingle = ({
           </button>
           <button
             type="button"
-            onClick={() => handleOnDelete(card)}
+            onClick={handleOpenConfirmationModal}
             className="px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
           >
             {trashIcon}
@@ -108,6 +108,12 @@ const LinkedInHKeywordsCardSingle = ({
             )}
           </button>
         </div>
+        {confirmationModal && (
+          <DeleteConfirmationModal
+            message="Are you sure you want to delete ?"
+            onConfirm={() => handleOnDelete(card)}
+          />
+        )}
       </div>
     </div>
   );

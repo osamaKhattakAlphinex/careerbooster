@@ -12,6 +12,8 @@ import {
   resetLinkedInHeadline,
   setLinkedInHeadline,
 } from "@/store/linkedInHeadLineSlice";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { useState } from "react";
 
 type LinkedInHeadlineType = {
   card?: any;
@@ -29,6 +31,7 @@ const LinkedInHeadlineCardSingle = ({
   const userData = useSelector((state: any) => state.userData);
   const router = useRouter();
   const pathname: any = usePathname();
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const handleOnView = async (card: any) => {
     console.log("source", source);
     if (source != "") {
@@ -38,30 +41,28 @@ const LinkedInHeadlineCardSingle = ({
   };
 
   const handleOnDelete = async (card: any) => {
-    const c = confirm(
-      "Are you sure you want to delete this Linked In Headline?"
-    );
-    if (c) {
-      try {
-        const res = await axios.delete(
-          `/api/linkedInBots/linkedinHeadlineGenerator/${card.id}`
-        );
+    try {
+      const res = await axios.delete(
+        `/api/linkedInBots/linkedinHeadlineGenerator/${card.id}`
+      );
 
-        dispatch(resetLinkedInHeadline());
-        // updated cover letters
-        const updatedLinkedInHeadlines = userData.linkedInHeadlines.filter(
-          (letter: any) => letter.id !== card.id
-          // letter.id !== card.id
-        );
-        const updatedObject = {
-          ...userData,
-          linkedInHeadlines: updatedLinkedInHeadlines,
-        };
-        dispatch(setUserData({ ...userData, ...updatedObject }));
-      } catch (error) {
-        console.log(error);
-      }
+      dispatch(resetLinkedInHeadline());
+      // updated cover letters
+      const updatedLinkedInHeadlines = userData.linkedInHeadlines.filter(
+        (letter: any) => letter.id !== card.id
+        // letter.id !== card.id
+      );
+      const updatedObject = {
+        ...userData,
+        linkedInHeadlines: updatedLinkedInHeadlines,
+      };
+      dispatch(setUserData({ ...userData, ...updatedObject }));
+    } catch (error) {
+      console.log(error);
     }
+  };
+  const handleOpenConfirmationModal = () => {
+    setConfirmationModal(true);
   };
 
   if (!card) return <h1>Loading </h1>;
@@ -97,7 +98,7 @@ const LinkedInHeadlineCardSingle = ({
           </button>
           <button
             type="button"
-            onClick={() => handleOnDelete(card)}
+            onClick={handleOpenConfirmationModal}
             className="px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
           >
             {trashIcon}
@@ -109,6 +110,12 @@ const LinkedInHeadlineCardSingle = ({
           </button>
         </div>
       </div>
+      {confirmationModal && (
+        <DeleteConfirmationModal
+          message="Are you sure you want to delete ?"
+          onConfirm={() => handleOnDelete(card)}
+        />
+      )}
     </div>
   );
 };

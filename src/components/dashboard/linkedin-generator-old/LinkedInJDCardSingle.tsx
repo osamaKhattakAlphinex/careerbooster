@@ -13,6 +13,8 @@ import {
   setLinkedInJobDescription,
 } from "@/store/linkedInJobDescriptionSlice";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
+import { useState } from "react";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 
 type LinkedInHeadlineType = {
   card?: any;
@@ -28,7 +30,7 @@ const LinkedInJDCardSingle = ({
   // redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
-
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const router = useRouter();
   const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
@@ -40,30 +42,28 @@ const LinkedInJDCardSingle = ({
   };
 
   const handleOnDelete = async (card: any) => {
-    const c = confirm(
-      "Are you sure you want to delete this Linked In Job Description?"
-    );
-    if (c) {
-      try {
-        await axios.delete(`/api/linkedInBots/jdGeneratorSingle/${card.id}`);
-        dispatch(resetLinkedInJobDescription());
-        // updated cover letters
-        const updatedDescriptions = userData.linkedInJobDescriptions.filter(
-          (jd: any) => jd.id !== card.id
-        );
+    setConfirmationModal(false);
+    try {
+      await axios.delete(`/api/linkedInBots/jdGeneratorSingle/${card.id}`);
+      dispatch(resetLinkedInJobDescription());
+      // updated cover letters
+      const updatedDescriptions = userData.linkedInJobDescriptions.filter(
+        (jd: any) => jd.id !== card.id
+      );
 
-        const updatedObject = {
-          ...userData,
-          linkedInJobDescriptions: updatedDescriptions,
-        };
+      const updatedObject = {
+        ...userData,
+        linkedInJobDescriptions: updatedDescriptions,
+      };
 
-        dispatch(setUserData({ ...userData, ...updatedObject }));
-      } catch (error) {
-        console.log(error);
-      }
+      dispatch(setUserData({ ...userData, ...updatedObject }));
+    } catch (error) {
+      console.log(error);
     }
   };
-
+  const handleOpenConfirmationModal = () => {
+    setConfirmationModal(true);
+  };
   if (!card) return <h1>Loading </h1>;
   return (
     <div>
@@ -96,7 +96,7 @@ const LinkedInJDCardSingle = ({
           </button>
           <button
             type="button"
-            onClick={() => handleOnDelete(card)}
+            onClick={handleOpenConfirmationModal}
             className="px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
           >
             {trashIcon}
@@ -107,6 +107,12 @@ const LinkedInJDCardSingle = ({
             )}
           </button>
         </div>
+        {confirmationModal && (
+          <DeleteConfirmationModal
+            message="Are you sure you want to delete ?"
+            onConfirm={() => handleOnDelete(card)}
+          />
+        )}
       </div>
     </div>
   );
