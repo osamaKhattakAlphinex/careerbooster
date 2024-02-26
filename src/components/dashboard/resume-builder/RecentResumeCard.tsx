@@ -22,8 +22,6 @@ const RecentResumeCard = ({
   // redux
   const userData = useSelector((state: any) => state.userData);
   const { resumes } = userData;
-  const [openModal, setOpenModal] = useState(false);
-  const [deleteAction, setDeleteAction] = useState(false);
   return (
     <>
       <div className="dark:bg-[#17151b] dark:text-white border bg-[#00000015] text-gray-950 rounded-[20px]  mb-4 px-4 md:px-[24px] pt-[20px] pb-[20px] ">
@@ -80,25 +78,9 @@ const RecentResumeCard = ({
                     componentRef={componentRef}
                     setFinished={setFinished}
                     templateId={templateId}
-                    deleteAction={deleteAction}
-                    setOpenModal={() => setOpenModal(true)}
                   />
                 </SwiperSlide>
               ))}
-            {openModal ? (
-              <GeneralAlert
-                openModal={openModal}
-                close={() => {
-                  setOpenModal(false);
-                  setDeleteAction(false);
-                }}
-                deleteResume={() => {
-                  setDeleteAction(true);
-                }}
-              />
-            ) : (
-              ""
-            )}
           </Swiper>
         </div>
       </div>

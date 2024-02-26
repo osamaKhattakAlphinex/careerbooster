@@ -12,16 +12,13 @@ const SingleRecentResumeCard = ({
   resume,
   source,
   setFinished,
-  setOpenModal,
-  deleteAction,
 }: {
   resume: Resume;
   source?: string;
   componentRef?: any;
   setFinished?: any;
-  deleteAction?: any;
+
   templateId?: number;
-  setOpenModal?: any;
 }) => {
   const userData = useSelector((state: any) => state.userData);
   const { email, resumes } = userData;
