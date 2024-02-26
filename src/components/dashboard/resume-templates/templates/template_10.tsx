@@ -594,15 +594,13 @@ const ResumeTemplate10 = () => {
 
                           {newWorkExperience === i ? (
                             <>
-                              <div className="flex flex-wrap w-full gap-1 rounded-md xs:ml-0">
-                                <textarea
-                                  className="w-full p-2 bg-transparent border-2 md:w-9/12 rounded-l-md text" // Apply Tailwind CSS classes
+                              <div className="w-full gap-1  flex flex-wrap mt-4">
+                                <input
+                                  className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
                                   onChange={(e) =>
                                     setNewAchievement(e.target.value)
                                   }
                                   value={newAchievement}
-                                  rows={1}
-                                  cols={1}
                                   name="newAchievement"
                                   id="newAchievement"
                                   autoComplete="off"
@@ -618,29 +616,31 @@ const ResumeTemplate10 = () => {
                                     }
                                   }}
                                 />
-                                <button
-                                  className="w-full px-2 text-white uppercase bg-green-500 md:w-2/12 h-9 rounded-r-md"
-                                  onClick={() => {
-                                    // Save the new achievement to the state and possibly the database
-                                    handlers.handleAddAchivement(
-                                      i,
-                                      newAchievement
-                                    );
-                                    setNewAchievement("");
-                                  }}
-                                >
-                                  Save
-                                </button>
+                                <div className="my-2 w-full flex gap-2">
+                                  <button
+                                    className="bg-green-500  w-2/12 xs:w-full md:w-2/12 lg:w-2/12 rounded-md  h-9 text-white "
+                                    onClick={() => {
+                                      // Save the new achievement to the state and possibly the database
+                                      handlers.handleAddAchivement(
+                                        i,
+                                        newAchievement
+                                      );
+                                      setNewAchievement("");
+                                    }}
+                                  >
+                                    Save
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setNewAchievement("");
+                                      setNewWorkExperience(-1);
+                                    }}
+                                    className="bg-red-500  w-2/12 xs:w-full md:w-2/12 lg:w-2/12 rounded-md py-1 text-white"
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
                               </div>
-                              <button
-                                onClick={() => {
-                                  setNewAchievement("");
-                                  setNewWorkExperience(-1);
-                                }}
-                                className="w-full px-2 py-1 mt-2 text-white bg-red-500 rounded-full md:w-2/12"
-                              >
-                                Cancel
-                              </button>
                             </>
                           ) : null}
                         </div>
