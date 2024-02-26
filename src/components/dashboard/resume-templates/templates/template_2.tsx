@@ -385,39 +385,42 @@ const ResumeTemplate2 = () => {
                           }}
                         />
                       </h2>
-                      <span className="text-sm hover:shadow-md hover:cursor-text hover:bg-gray-100 xs:text-sm md:text-lg lg:text-lg">
-                        <EditableField
-                          value={rec?.company}
-                          onSave={(value: string) => {
-                            handlers.handleSaveExperienceDetail(
-                              { company: value },
-                              i
-                            );
-                          }}
-                        />
-                      </span>{" "}
-                      |{" "}
-                      <span className="hover:shadow-md hover:bg-gray-100">
-                        <EditableField
-                          value={rec?.cityState}
-                          onSave={(value: string) => {
-                            handlers.handleSaveExperienceDetail(
-                              { cityState: value },
-                              i
-                            );
-                          }}
-                        />
-                      </span>{" "}
-                      <span className="hover:shadow-md hover:bg-gray-100">
-                        <EditableField
-                          value={rec?.country}
-                          onSave={(value: string) => {
-                            handlers.handleSaveExperienceDetail(
-                              { country: value },
-                              i
-                            );
-                          }}
-                        />
+                      <span className="flex flex-row gap-2 items-center">
+                        <span className="text-sm hover:shadow-md hover:cursor-text hover:bg-gray-100 xs:text-sm md:text-lg lg:text-lg">
+                          <EditableField
+                            value={rec?.company}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { company: value },
+                                i
+                              );
+                            }}
+                          />
+                        </span>{" "}
+                        |{" "}
+                        <span className="hover:shadow-md hover:bg-gray-100">
+                          <EditableField
+                            value={rec?.cityState}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { cityState: value },
+                                i
+                              );
+                            }}
+                          />
+                        </span>
+                        ,{" "}
+                        <span className="hover:shadow-md hover:bg-gray-100">
+                          <EditableField
+                            value={rec?.country}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { country: value },
+                                i
+                              );
+                            }}
+                          />
+                        </span>
                       </span>
                       <div className="p-4">
                         {rec?.achievements && i !== regeneratedRecordIndex ? (

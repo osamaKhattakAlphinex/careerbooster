@@ -377,9 +377,7 @@ const ResumeTemplate16 = () => {
                   <Toolbar
                     key={i}
                     addAchivement={() => setNewWorkExperience(i)}
-                    deleteExperience={() =>
-                      handlers.handleDeleteExperience(i)
-                    }
+                    deleteExperience={() => handlers.handleDeleteExperience(i)}
                     regenrateAchivements={() => handleRegenrate(rec, i)}
                     addNewLine={() => {
                       handlers.handleAddSpace(i, newAchievement);
@@ -415,7 +413,7 @@ const ResumeTemplate16 = () => {
                                 }}
                               />
                             </h2>
-                            <h2 className="hover:cursor-default text-[15px] font-semibold">
+                            <h2 className="hover:cursor-default text-[15px] font-semibold flex gap-2">
                               {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                               {rec?.isContinue
                                 ? "Present"
@@ -444,6 +442,7 @@ const ResumeTemplate16 = () => {
                                   }}
                                 />
                               </span>{" "}
+                              ,
                               <span className="hover:shadow-md hover:bg-gray-100">
                                 <EditableField
                                   value={rec?.country}

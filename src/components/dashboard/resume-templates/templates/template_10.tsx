@@ -420,9 +420,7 @@ const ResumeTemplate10 = () => {
                   <Toolbar
                     key={i}
                     addAchivement={() => setNewWorkExperience(i)}
-                    deleteExperience={() =>
-                      handlers.handleDeleteExperience(i)
-                    }
+                    deleteExperience={() => handlers.handleDeleteExperience(i)}
                     regenrateAchivements={() => handleRegenrate(rec, i)}
                     addNewLine={() => {
                       handlers.handleAddSpace(i, newAchievement);
@@ -447,7 +445,7 @@ const ResumeTemplate10 = () => {
                         onDrop={(e) => handleDropExperience(e, i)}
                         draggable
                       >
-                        <h2 className="text-base font-bold hover:shadow-md hover:cursor-text hover:bg-gray-100 ">
+                        <h2 className="text-base font-bold hover:shadow-md hover:cursor-text hover:bg-gray-100 flex gap-2">
                           <EditableField
                             value={rec?.title}
                             style={{ width: "100%" }}
@@ -488,6 +486,7 @@ const ResumeTemplate10 = () => {
                               }}
                             />
                           </span>{" "}
+                          ,
                           <span className="hover:shadow-md hover:bg-gray-100">
                             <EditableField
                               value={rec?.country}
