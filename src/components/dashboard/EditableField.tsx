@@ -90,17 +90,20 @@ const EditableField = ({
           </>
         ) : (
           <>
-            {/* {overrideValue ? (
-              <a href={value}>{overrideValue}</a>
-            ) : ( */}
-            <span
-              className="hover:cursor-text text-justify"
+            <a
+              href={value}
+              className=" xs:hidden md:hidden hover:cursor-text text-justify"
               title="Click to Edit"
             >
-              {overrideValue ? overrideValue : value}
+              {value}
+            </a>
+            <span
+              className="hidden xs:block md:block hover:cursor-text text-justify"
+              title="Click to Edit"
+            >
+              {value}
             </span>
-            {/* // )} */}
-          </>
+            </>
         )}
       </span>
     </>
