@@ -450,7 +450,7 @@ const ResumeTemplate10 = () => {
                             }}
                           />
                         </h2>
-                        <h2 className="font-semibold hover:cursor-default text-15 ">
+                        <h2 className="font-semibold hover:cursor-default text-15 flex gap-2 ">
                           {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                           {rec?.isContinue
                             ? "Present"
