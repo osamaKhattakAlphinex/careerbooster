@@ -1,9 +1,11 @@
-import { searchIcon } from "@/helpers/iconsProvider";
+"use client";
 import SingleRecentResumeCard from "./SingleRecentResumeCard";
 import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import SwiperCore from "swiper/core";
+import { useState } from "react";
+import GeneralAlert from "@/components/common/GeneralAlert";
 SwiperCore.use([Pagination]);
 
 const RecentResumeCard = ({
@@ -20,11 +22,12 @@ const RecentResumeCard = ({
   // redux
   const userData = useSelector((state: any) => state.userData);
   const { resumes } = userData;
-
+  const [openModal, setOpenModal] = useState(false);
+  const [deleteAction, setDeleteAction] = useState(false);
   return (
     <>
-      <div className="dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px]  mb-4 px-4 md:px-[24px] pt-[20px] pb-[20px] ">
-        <div className="flex justify-between items-center  ">
+      <div className="dark:bg-[#17151b] dark:text-white border bg-[#00000015] text-gray-950 rounded-[20px]  mb-4 px-4 md:px-[24px] pt-[20px] pb-[20px] ">
+        <div className="flex justify-between items-center ">
           <h1 className="uppercase font-semibold text-[16px] md:text-sm">
             Your Resumes
           </h1>
@@ -42,7 +45,7 @@ const RecentResumeCard = ({
         </div>
         {!resumes && <p>Loading Resumes...</p>}
         {/* <div className="flex flex-wrap lg:flex-row flex-col  gap-4"> */}
-        <div className="flex flex-row">
+        <div className="flex flex-row ">
           <Swiper
             slidesPerView={3}
             spaceBetween={15}
@@ -77,9 +80,25 @@ const RecentResumeCard = ({
                     componentRef={componentRef}
                     setFinished={setFinished}
                     templateId={templateId}
+                    deleteAction={deleteAction}
+                    setOpenModal={() => setOpenModal(true)}
                   />
                 </SwiperSlide>
               ))}
+            {openModal ? (
+              <GeneralAlert
+                openModal={openModal}
+                close={() => {
+                  setOpenModal(false);
+                  setDeleteAction(false);
+                }}
+                deleteResume={() => {
+                  setDeleteAction(true);
+                }}
+              />
+            ) : (
+              ""
+            )}
           </Swiper>
         </div>
       </div>
