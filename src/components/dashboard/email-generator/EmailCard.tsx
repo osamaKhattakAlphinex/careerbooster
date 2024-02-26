@@ -15,6 +15,7 @@ type EmailCardProps = {
   editorId: string;
   cardHeading: string;
   cardInstructions: string;
+  removeEdit: any;
 };
 
 export const EmailCard = (props: EmailCardProps) => {
@@ -53,19 +54,18 @@ export const EmailCard = (props: EmailCardProps) => {
         <div ref={props.componentRef}>
           {props.isEditing ? (
             <div
+              onBlur={props.removeEdit}
               className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-[10px]"
               id={props.editorId}
               contentEditable="true"
             ></div>
           ) : (
-            <div>
-              <div
-                className=" text-gray-950"
-                dangerouslySetInnerHTML={{
-                  __html: props.streamedData,
-                }}
-              ></div>
-            </div>
+            <div
+              className=" text-gray-950"
+              dangerouslySetInnerHTML={{
+                __html: props.streamedData,
+              }}
+            ></div>
           )}
         </div>
       </div>

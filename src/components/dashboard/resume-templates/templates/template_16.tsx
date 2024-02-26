@@ -102,7 +102,7 @@ const ResumeTemplate16 = () => {
                 className=" w-28 relative h-28 xs:h-[88px] xs:w-[] md:w-36 md:h-36 text-[#F1F1F1] flex justify-center items-center    rounded-full "
                 style={{ backgroundColor: color_second }}
               >
-                <span className="text-4xl xs:text-lg md:text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
+                <span className="text-4xl xs:text-lg font-semibold md:text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
                   <EditableField
                     value={resume?.shortName ? resume?.shortName : "CPH"}
                     style={{ width: "60px" }}
@@ -164,7 +164,7 @@ const ResumeTemplate16 = () => {
               />
             </li>
             <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex flex-row gap-3  items-start justify-start ">
-              <span className="w-8 h-8 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-8 md:h-8  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
+              <span className="w-9 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-8 md:h-7  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
                 {emailIcon}
               </span>
               <EditableField
@@ -187,8 +187,7 @@ const ResumeTemplate16 = () => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth="0.8"
-                  width="36"
-                  height="36"
+                  className="w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path

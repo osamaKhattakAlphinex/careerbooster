@@ -570,8 +570,8 @@ const ResumeTemplate5 = () => {
             <li className="hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-start justify-start ">
               <div className="p-1">
                 <svg
-                  width="20"
-                  height="20"
+                  width="16"
+                  height="16"
                   viewBox="0 0 19 19"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"

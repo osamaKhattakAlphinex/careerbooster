@@ -110,7 +110,7 @@ const ResumeTemplate4 = () => {
             style={{ backgroundColor: color_second }}
             className=" w-28 h-28 xs:w-[72px] relative xs:h-[72px] sm:w-24 sm:h-24 md:w-28 md:h-28 text-white  text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-4  md:mt-5 mb-4 justify-center md:mb-2"
           >
-            <span className="text-3xl xs:text-2xl md:text-3xl hover:shadow-md hover:bg-gray-500">
+            <span className="text-3xl font-semibold xs:text-2xl md:text-3xl hover:shadow-md hover:bg-gray-500">
               <EditableField
                 value={resume?.shortName ? resume?.shortName : "CPH"}
                 style={{ width: "60px" }}
@@ -175,8 +175,8 @@ const ResumeTemplate4 = () => {
             <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row gap-2  justify-start items-start ">
               <div className="p-1">
                 <svg
-                  width="20"
-                  height="20"
+                  width="16"
+                  height="16"
                   viewBox="0 0 19 19"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
