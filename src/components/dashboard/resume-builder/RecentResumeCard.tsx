@@ -4,8 +4,6 @@ import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import SwiperCore from "swiper/core";
-import { useState } from "react";
-import GeneralAlert from "@/components/common/GeneralAlert";
 SwiperCore.use([Pagination]);
 
 const RecentResumeCard = ({

@@ -8,7 +8,8 @@ import { setUserData } from "@/store/userDataSlice";
 import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
 import { useRouter, usePathname } from "next/navigation";
 import { resetEmail, setEmail } from "@/store/emailSlice";
-import DownloadService from "@/helpers/downloadFile";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { useState } from "react";
 
 type EmailType = {
   card?: any;
@@ -21,7 +22,7 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const router = useRouter();
-  const pathname: any = usePathname();
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const handleOnView = async (card: any) => {
     if (source !== "") {
       router.replace("/email-bot");
@@ -30,8 +31,7 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
   };
 
   const handleOnDelete = async (card: any) => {
-    const c = confirm("Are you sure you want to delete this Emails?");
-    if (c) {
+
       try {
         await axios.delete(`/api/emailBot/${card.id}`);
         dispatch(resetEmail());
@@ -49,7 +49,10 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
       } catch (error) {
         console.log(error);
       }
-    }
+    
+  };
+  const handleOpenConfirmationModal = () => {
+    setConfirmationModal(true);
   };
 
   if (!card) return <h1>Loading </h1>;
@@ -84,7 +87,7 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
           </button>
           <button
             type="button"
-            onClick={() => handleOnDelete(card)}
+            onClick={handleOpenConfirmationModal}
             className="flex px-2 text-[16px] dark:hover:border-[#5f5f5f] dark:hover:bg-gray-700 dark:hover:text-white justify-center dark:text-gray-100 text-[#27272a] items-center rounded-full h-[36px] dark:bg-[#18181b] hover:!bg-[#00000015] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#27272a] dark:focus:border-[#5f5f5f] hover:border-[#00000015] focus:bg-[#00000015] focus:border-[#00000015]"
           >
             {trashIcon}
@@ -104,6 +107,12 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
               )} */}
         </div>
       </div>
+      {confirmationModal && (
+        <DeleteConfirmationModal
+          message="Are you sure you want to delete ?"
+          onConfirm={()=>handleOnDelete(card)}
+        />
+      )}
     </div>
   );
 };

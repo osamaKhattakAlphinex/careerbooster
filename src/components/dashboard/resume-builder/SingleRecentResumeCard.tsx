@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import { useRouter } from "next/navigation";
-import GeneralAlert from "@/components/common/GeneralAlert";
 import { useEffect, useRef, useState } from "react";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 const SingleRecentResumeCard = ({
@@ -22,7 +21,6 @@ const SingleRecentResumeCard = ({
 }) => {
   const userData = useSelector((state: any) => state.userData);
   const { email, resumes } = userData;
-  // const [openModal, setOpenModal] = useState(false);
   const [confirmationModal, setConfirmationModal] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -59,7 +57,6 @@ const SingleRecentResumeCard = ({
     }
   };
 
-  const confirmationModalRef: React.MutableRefObject<any> = useRef(null);
 
   const handleOpenConfirmationModal = () => {
     setConfirmationModal(true);
