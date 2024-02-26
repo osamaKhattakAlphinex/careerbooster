@@ -145,7 +145,7 @@ const ResumeTemplate10 = () => {
       <div className="flex ">
         {/* sidebar */}
         <div
-          className="z-5    xs:w-4/12 w-3.5/12 flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6  text-gray-100  pr-6  pb-8  pt-[160px]  h-[1080px] xs:h-auto"
+          className="z-5    xs:w-4/12 w-3.5/12 flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6  text-gray-100  pr-6  pb-8  pt-[160px] h-auto"
           style={{ backgroundColor: color_second }}
         >
           <div className="absolute top-0 left-0 z-20 xs:w-3/12 ">
@@ -427,14 +427,7 @@ const ResumeTemplate10 = () => {
                       setNewAchievement("");
                     }}
                   >
-                    <div
-                      key={i}
-                      className={`flex justify-start items-start ${
-                        i > 0
-                          ? " ml-[-170px] xs:ml-0 "
-                          : "xs:min-h-fit min-h-[340px]"
-                      }`}
-                    >
+                    <div key={i} className={`flex justify-start items-start `}>
                       <div
                         key={i}
                         className="flex flex-col w-full border-2 border-transparent hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2 "
@@ -662,7 +655,7 @@ const ResumeTemplate10 = () => {
           )}
           {/* Education */}
           {resume?.education.length > 0 && (
-            <div className="ml-[-180px] xs:ml-0">
+            <div className="">
               <div
                 className="rounded-3xl  py-2 px-4 my-6  w-[140px]"
                 style={{ backgroundColor: color }}
