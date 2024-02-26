@@ -312,9 +312,7 @@ const ResumeTemplate8 = () => {
                     addAchivement={() => setNewWorkExperience(i)}
                     deleteExperience={() =>
                       handlers.handleDeleteExperience(
-                        i,
-                        resume.id,
-                        userData.email
+                        i
                       )
                     }
                     regenrateAchivements={() => handleRegenrate(rec, i)}
