@@ -513,9 +513,7 @@ const ResumeTemplate1 = ({
                     key={i}
                     addAchivement={() => setNewWorkExperience(i)}
                     deleteExperience={() => {
-                      handlers.handleDeleteExperience(
-                        i
-                      );
+                      handlers.handleDeleteExperience(i);
                     }}
                     regenrateAchivements={() => handleRegenrate(rec, i)}
                     addNewLine={() => {
@@ -553,7 +551,7 @@ const ResumeTemplate1 = ({
                         />
                       </h2>
                       <h2
-                        className="hover:cursor-default"
+                        className="hover:cursor-default flex gap-2"
                         style={{
                           fontSize: "1.1rem",
                           lineHeight: "1.5rem",
@@ -587,6 +585,7 @@ const ResumeTemplate1 = ({
                             }}
                           />
                         </span>{" "}
+                        ,
                         <span className="hover:shadow-md hover:bg-gray-100">
                           <EditableField
                             value={rec?.country}

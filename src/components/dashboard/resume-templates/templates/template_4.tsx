@@ -408,7 +408,7 @@ const ResumeTemplate4 = () => {
                             }}
                           />
                         </h2>
-                        <h2 className="text-sm font-semibold leading-relaxed hover:cursor-default ">
+                        <h2 className="text-sm font-semibold leading-relaxed hover:cursor-default flex gap-2 ">
                           {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                           {rec?.isContinue
                             ? "Present"
@@ -437,6 +437,7 @@ const ResumeTemplate4 = () => {
                               }}
                             />
                           </span>{" "}
+                          ,
                           <span className="hover:shadow-md hover:bg-gray-100">
                             <EditableField
                               value={rec?.country}

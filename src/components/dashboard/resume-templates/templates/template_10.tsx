@@ -438,7 +438,7 @@ const ResumeTemplate10 = () => {
                         onDrop={(e) => handleDropExperience(e, i)}
                         draggable
                       >
-                        <h2 className="text-base font-bold hover:shadow-md hover:cursor-text hover:bg-gray-100 ">
+                        <h2 className="text-base font-bold hover:shadow-md hover:cursor-text hover:bg-gray-100 flex gap-2">
                           <EditableField
                             value={rec?.title}
                             style={{ width: "100%" }}
@@ -450,7 +450,7 @@ const ResumeTemplate10 = () => {
                             }}
                           />
                         </h2>
-                        <h2 className="font-semibold hover:cursor-default text-15 ">
+                        <h2 className="font-semibold hover:cursor-default text-15 flex gap-2 ">
                           {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                           {rec?.isContinue
                             ? "Present"
@@ -479,6 +479,7 @@ const ResumeTemplate10 = () => {
                               }}
                             />
                           </span>{" "}
+                          ,
                           <span className="hover:shadow-md hover:bg-gray-100">
                             <EditableField
                               value={rec?.country}
