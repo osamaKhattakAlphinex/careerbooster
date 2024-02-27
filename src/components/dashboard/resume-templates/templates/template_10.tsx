@@ -20,6 +20,7 @@ import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
 import { ColorResult } from "react-color";
 import ColorPicker from "../colorPicker";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 const ResumeTemplate10 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -32,7 +33,7 @@ const ResumeTemplate10 = () => {
   const userData = useSelector((state: any) => state.userData);
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
-
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
@@ -683,7 +684,7 @@ const ResumeTemplate10 = () => {
                         />
                       </li>
                       <div
-                        onClick={() => handlers.handleDeleteEductionDetail(ind)}
+                        onClick={() => setConfirmationModal(true)}
                         className="absolute z-10 hidden w-4 h-4 cursor-pointer group-hover:block right-2 top-2 child"
                       >
                         {crossIcon1}
@@ -792,6 +793,15 @@ const ResumeTemplate10 = () => {
                           : education?.toMonth + " " + education.toYear}
                       </li> */}
                     </div>
+                    {confirmationModal && (
+                      <DeleteConfirmationModal
+                        message="Are you sure you want to delete ?"
+                        onConfirm={() => {
+                          setConfirmationModal(false);
+                          handlers.handleDeleteEductionDetail(ind);
+                        }}
+                      />
+                    )}
                   </React.Fragment>
                 ))}
               </ul>

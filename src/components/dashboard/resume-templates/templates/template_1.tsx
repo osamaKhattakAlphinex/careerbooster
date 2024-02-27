@@ -22,6 +22,7 @@ import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
 import Loader from "@/components/common/Loader";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 
 const ResumeTemplate1 = ({
   streamedSummaryData,
@@ -68,7 +69,7 @@ const ResumeTemplate1 = ({
   //Reorder Redux PrimarySkills array with drag-drop
 
   const [image, setImage] = useState<any>(null);
-
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const handleImageChange = (e: any) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -356,7 +357,7 @@ const ResumeTemplate1 = ({
                         />
                       </li>
                       <div
-                        onClick={() => handlers.handleDeleteEductionDetail(ind)}
+                        onClick={() => setConfirmationModal(true)}
                         className="absolute z-10 hidden w-4 h-4 cursor-pointer group-hover:block right-2 top-2 child"
                       >
                         {crossIcon1}
@@ -465,6 +466,15 @@ const ResumeTemplate1 = ({
                         : education?.toMonth + " " + education.toYear}
                     </li> */}
                     </div>
+                    {confirmationModal && (
+                      <DeleteConfirmationModal
+                        message="Are you sure you want to delete ?"
+                        onConfirm={() => {
+                          setConfirmationModal(false);
+                          handlers.handleDeleteEductionDetail(ind);
+                        }}
+                      />
+                    )}
                   </React.Fragment>
                 ))}
               </ul>
