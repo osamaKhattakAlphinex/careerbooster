@@ -16,6 +16,7 @@ import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
 import ColorPicker from "../colorPicker";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 const ResumeTemplate6 = () => {
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
@@ -24,7 +25,7 @@ const ResumeTemplate6 = () => {
   const [color, setColor] = useState("#e04127");
   const userData = useSelector((state: any) => state.userData);
   const [primarySkill, setPrimarySkill] = useState<string>("");
-
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
 
@@ -582,9 +583,7 @@ const ResumeTemplate6 = () => {
                             />
                           </li>
                           <div
-                            onClick={() =>
-                              handlers.handleDeleteEductionDetail(ind)
-                            }
+                            onClick={() => setConfirmationModal(true)}
                             className="absolute z-10 hidden w-4 h-4 cursor-pointer group-hover:block right-2 top-2 child"
                           >
                             {crossIcon1}
@@ -697,6 +696,15 @@ const ResumeTemplate6 = () => {
                               : education?.toMonth + " " + education.toYear}
                           </li> */}
                         </div>
+                        {confirmationModal && (
+                          <DeleteConfirmationModal
+                            message="Are you sure you want to delete ?"
+                            onConfirm={() => {
+                              setConfirmationModal(false);
+                              handlers.handleDeleteEductionDetail(ind);
+                            }}
+                          />
+                        )}
                       </React.Fragment>
                     )
                   )}

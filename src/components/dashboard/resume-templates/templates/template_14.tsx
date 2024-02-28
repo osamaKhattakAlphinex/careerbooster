@@ -18,6 +18,7 @@ import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 const ResumeTemplate14 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -25,7 +26,7 @@ const ResumeTemplate14 = () => {
 
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
-
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
 
@@ -602,7 +603,7 @@ const ResumeTemplate14 = () => {
                       />
                     </li>
                     <div
-                      onClick={() => handlers.handleDeleteEductionDetail(ind)}
+                      onClick={() => setConfirmationModal(true)}
                       className="w-4 hidden h-4 group-hover:block absolute right-2 top-2 z-10  cursor-pointer child"
                     >
                       {crossIcon1}
@@ -710,6 +711,15 @@ const ResumeTemplate14 = () => {
                         : education?.toMonth + " " + education.toYear}
                     </li> */}
                   </div>
+                  {confirmationModal && (
+                    <DeleteConfirmationModal
+                      message="Are you sure you want to delete ?"
+                      onConfirm={() => {
+                        setConfirmationModal(false);
+                        handlers.handleDeleteEductionDetail(ind);
+                      }}
+                    />
+                  )}
                 </React.Fragment>
               ))}
             </ul>

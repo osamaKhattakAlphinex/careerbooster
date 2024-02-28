@@ -19,6 +19,7 @@ import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
 import ColorPicker from "../colorPicker";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 const ResumeTemplate4 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -62,7 +63,7 @@ const ResumeTemplate4 = () => {
     getOneWorkExperienceNew(rec);
     setRegeneratedRecordIndex(i);
   };
-
+  const [confirmationModal, setConfirmationModal] = useState(false);
   //add Skills
   const handleAddSkills = () => {
     setNewPrimarySkill(true);
@@ -636,7 +637,7 @@ const ResumeTemplate4 = () => {
                         />
                       </li>
                       <div
-                        onClick={() => handlers.handleDeleteEductionDetail(ind)}
+                        onClick={() => setConfirmationModal(true)}
                         className="absolute z-10 hidden w-4 h-4 cursor-pointer group-hover:block right-2 top-2 child"
                       >
                         {crossIcon1}
@@ -747,6 +748,15 @@ const ResumeTemplate4 = () => {
                           : education?.toMonth + " " + education.toYear}
                       </li> */}
                     </div>
+                    {confirmationModal && (
+                      <DeleteConfirmationModal
+                        message="Are you sure you want to delete ?"
+                        onConfirm={() => {
+                          setConfirmationModal(false);
+                          handlers.handleDeleteEductionDetail(ind);
+                        }}
+                      />
+                    )}
                   </React.Fragment>
                 ))}
               </ul>

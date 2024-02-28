@@ -23,6 +23,7 @@ import Toolbar from "@/components/dashboard/Toolbar";
 import useHandler from "@/hooks/useHandler";
 import ColorPicker from "../colorPicker";
 import { ColorResult } from "react-color";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
@@ -35,6 +36,7 @@ const ResumeTemplate2 = () => {
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const [streamedJDData, setStreamedJDData] = useState<any>("");
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [color, setColor] = useState("#e9e8e8");
@@ -602,7 +604,7 @@ const ResumeTemplate2 = () => {
                       />
                     </li>
                     <div
-                      onClick={() => handlers.handleDeleteEductionDetail(ind)}
+                      onClick={() => setConfirmationModal(true)}
                       className="absolute z-10 hidden w-4 h-4 cursor-pointer group-hover:block right-2 top-2 child"
                     >
                       {crossIcon1}
@@ -704,6 +706,15 @@ const ResumeTemplate2 = () => {
                       </li>
                     )}
                   </div>
+                  {confirmationModal && (
+                    <DeleteConfirmationModal
+                      message="Are you sure you want to delete ?"
+                      onConfirm={() => {
+                        setConfirmationModal(false);
+                        handlers.handleDeleteEductionDetail(ind);
+                      }}
+                    />
+                  )}
                 </React.Fragment>
               ))}
             </ul>
