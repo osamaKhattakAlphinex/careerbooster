@@ -512,6 +512,7 @@ const ResumeTemplate6 = () => {
                                     }
                                   }}
                                 />
+                                //new
                                 <div className="my-2 w-full flex gap-2">
                                   <button
                                     className="bg-green-500 w-1/12 xs:w-full md:w-1/12 lg:w-1/12 rounded-md  h-9 text-white "
