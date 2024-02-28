@@ -15,6 +15,8 @@ import {
   xMark,
   keyIcon,
   bid,
+  emailBotSidebarIcon,
+  coverLetterSidebarIcon,
 } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
 
@@ -29,9 +31,13 @@ import AvailableCredits from "../AvailableCredits";
 const items = [
   { icon: homeIcon, text: "Dashboard", url: "/dashboard" },
   { icon: clipboard, text: "Resumes", url: "/resume-builder" },
-  { icon: deviceTablet, text: "Cover Letters", url: "/cover-letter-generator" },
+  {
+    icon: coverLetterSidebarIcon,
+    text: "Cover Letters",
+    url: "/cover-letter-generator",
+  },
   { icon: userGroup, text: "LinkedIn Tool", url: "/linkedin-generator" },
-  { icon: inboxArrowDown, text: "Email Bot", url: "/email-bot" },
+  { icon: emailBotSidebarIcon, text: "Email Bot", url: "/email-bot" },
   { icon: dollarIcon, text: "Billing Detail", url: "/billing" },
   // { icon: bid, text: "Consulting Bot", url: "/consulting-bids-bot" },
   { icon: userCircle, text: "Profile", url: "/profile-review" },
