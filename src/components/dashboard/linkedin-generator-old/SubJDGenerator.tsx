@@ -15,6 +15,7 @@ import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import { useAppContext } from "@/context/AppContext";
+import { showSuccessToast } from "@/helpers/toast";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
   const creditLimits = useSelector((state: any) => state.creditLimits);
@@ -23,7 +24,7 @@ const SubJDGenerator = () => {
   const { data: session, status } = useSession();
   const [streamedData, setStreamedData] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-  const {setAvailableCredits} = useAppContext();
+  const { setAvailableCredits } = useAppContext();
 
   useState<boolean>(false);
   const [isJDCopied, setIsJDCopied] = useState<boolean>(false);
@@ -99,7 +100,7 @@ const SubJDGenerator = () => {
         });
 
         if (res.ok) {
-          setAvailableCredits(true)
+          setAvailableCredits(true);
 
           const reader = res.body.getReader();
           while (true) {
@@ -114,14 +115,16 @@ const SubJDGenerator = () => {
           }
         }
         setStreamedData((prev) => prev + `</div> <br /> `);
-        setStreamedData((prev) => prev.replace("```html", ""))
-        setStreamedData((prev) => prev.replace("```", ""))
+        setStreamedData((prev) => prev.replace("```html", ""));
+        setStreamedData((prev) => prev.replace("```", ""));
         tempText += `</div><br/>`;
-        tempText = tempText.replace("```html", "")
-        tempText = tempText.replace("```", "")
+        tempText = tempText.replace("```html", "");
+        tempText = tempText.replace("```", "");
         setMsgLoading(false);
 
         if (index === experiences.length - 1) {
+          showSuccessToast("Job Description generated successfully");
+
           const jobDescriptionId = makeid();
           const jdObj = {
             jobDescriptionId: jobDescriptionId,

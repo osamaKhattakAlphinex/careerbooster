@@ -13,6 +13,7 @@ import EmailCardSingle from "@/components/dashboard/email-generator/EmailCardSin
 import { useAppContext } from "@/context/AppContext";
 import { EmailPlaceHolderCard } from "@/components/dashboard/email-generator/EmailPlaceHolderCard";
 import { EmailCard } from "@/components/dashboard/email-generator/EmailCard";
+import { showSuccessToast } from "@/helpers/toast";
 
 const PersonalizedEmailBot = () => {
   const componentRef = useRef<any>(null);
@@ -190,6 +191,8 @@ const PersonalizedEmailBot = () => {
               while (true) {
                 const { done, value } = await reader.read();
                 if (done) {
+                  showSuccessToast("Email generated successfully");
+
                   break;
                 }
                 const text = new TextDecoder().decode(value);
@@ -265,6 +268,8 @@ const PersonalizedEmailBot = () => {
               while (true) {
                 const { done, value } = await reader.read();
                 if (done) {
+                  showSuccessToast("Email generated successfully");
+
                   break;
                 }
                 const text = new TextDecoder().decode(value);
@@ -344,6 +349,8 @@ const PersonalizedEmailBot = () => {
               while (true) {
                 const { done, value } = await reader.read();
                 if (done) {
+                  showSuccessToast("Email generated successfully");
+
                   break;
                 }
                 const text = new TextDecoder().decode(value);

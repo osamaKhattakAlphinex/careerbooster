@@ -14,6 +14,7 @@ import {
 } from "@/store/linkedInHeadLineSlice";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { useState } from "react";
+import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
 type LinkedInHeadlineType = {
   card?: any;
@@ -42,9 +43,15 @@ const LinkedInHeadlineCardSingle = ({
 
   const handleOnDelete = async (card: any) => {
     try {
-      const res = await axios.delete(
-        `/api/linkedInBots/linkedinHeadlineGenerator/${card.id}`
-      );
+      const res = await axios
+        .delete(`/api/linkedInBots/linkedinHeadlineGenerator/${card.id}`)
+        .then((res) => {
+          if (res.data.success) {
+            showSuccessToast("Headline deleted Successfully");
+          } else {
+            showErrorToast("Something went wrong");
+          }
+        });
 
       dispatch(resetLinkedInHeadline());
       // updated cover letters

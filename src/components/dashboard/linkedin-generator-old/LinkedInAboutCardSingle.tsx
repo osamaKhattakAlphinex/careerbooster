@@ -14,6 +14,7 @@ import {
 } from "@/store/linkedInAboutSlice";
 import { useState } from "react";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
 type LinkedInAboutType = {
   card?: any;
@@ -42,7 +43,15 @@ const LinkedInAboutCardSingle = ({
   const handleOnDelete = async (card: any) => {
     setConfirmationModal(false);
     try {
-      await axios.delete(`/api/linkedInBots/linkedinAboutGenerator/${card.id}`);
+      await axios
+        .delete(`/api/linkedInBots/linkedinAboutGenerator/${card.id}`)
+        .then((res) => {
+          if (res.data.success) {
+            showSuccessToast("About deleted Successfully");
+          } else {
+            showErrorToast("Something went wrong");
+          }
+        });
       dispatch(resetLinkedInAbout());
       // updated cover letters
       const updatedAbouts = userData.linkedInAbouts.filter(
