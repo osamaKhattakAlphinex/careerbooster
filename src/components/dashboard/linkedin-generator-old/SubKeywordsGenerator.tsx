@@ -17,6 +17,7 @@ import LinkedInHKeywordsCardSingle from "./LinkedInKeywordsCardSingle";
 import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
+import { showSuccessToast } from "@/helpers/toast";
 
 const SubKeywordsGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -26,7 +27,7 @@ const SubKeywordsGenerator = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   const [aiInputUserData, setAiInputUserData] = useState<any>();
-  const {setAvailableCredits} = useAppContext();
+  const { setAvailableCredits } = useAppContext();
 
   const [isKeywordsCopied, setIsKeywordsCopied] = useState<boolean>(false);
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
@@ -105,13 +106,14 @@ const SubKeywordsGenerator = () => {
       })
         .then(async (resp: any) => {
           if (resp.ok) {
-            setAvailableCredits(true)
+            setAvailableCredits(true);
 
             const reader = resp.body.getReader();
             let tempText = "";
             while (true) {
               const { done, value } = await reader.read();
               if (done) {
+                showSuccessToast("Keywords generated successfully");
                 break;
               }
               const text = new TextDecoder().decode(value);

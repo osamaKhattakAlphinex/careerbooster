@@ -331,7 +331,7 @@ const RegistrationForm = () => {
                           {refreshIconRotating}
                         </div>
                       ) : (
-                        <div className="items-center w-fit xs:scale-75 md:scale-100 gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg text-[1.125rem] font-medium ">
+                        <div className="items-center w-fit cursor-pointer xs:scale-75 md:scale-100 gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg text-[1.125rem] font-medium ">
                           Upload Your Existing Resume
                         </div>
                       )}

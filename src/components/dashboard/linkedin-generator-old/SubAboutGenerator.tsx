@@ -13,6 +13,7 @@ import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedL
 import LinkedInAboutCardSingle from "./LinkedInAboutCardSingle";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
+import { showSuccessToast } from "@/helpers/toast";
 const SubAboutGenerator = () => {
   const componentRef = useRef<any>(null);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
@@ -21,7 +22,7 @@ const SubAboutGenerator = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [option, setOption] = useState<string>("about");
   const [showPopup, setShowPopup] = useState(false);
-  const {setAvailableCredits} = useAppContext();
+  const { setAvailableCredits } = useAppContext();
 
   const [isAboutCopied, setIsAboutCopied] = useState<boolean>(false);
   const copyAbout = async (text: string) => {
@@ -96,7 +97,7 @@ const SubAboutGenerator = () => {
       })
         .then(async (resp: any) => {
           if (resp.ok) {
-            setAvailableCredits(true)
+            setAvailableCredits(true);
 
             const reader = resp.body.getReader();
             let tempText = "";
@@ -104,6 +105,7 @@ const SubAboutGenerator = () => {
               const { done, value } = await reader.read();
 
               if (done) {
+                showSuccessToast("About generated successfully");
                 break;
               }
 

@@ -16,6 +16,7 @@ import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 
 import Link from "next/link";
+import { showSuccessToast } from "@/helpers/toast";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.Ai-Welcome",
 // };
@@ -61,6 +62,10 @@ const ProfileReview = () => {
         data: obj,
       })
       .then(async (resp: any) => {
+        if (resp?.data?.success) {
+          showSuccessToast("Profile updated successfully");
+        }
+
         // Update user data in redux
         dispatch(setUserData(obj));
         dispatch(setActiveStep(1));

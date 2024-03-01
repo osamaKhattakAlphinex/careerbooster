@@ -15,6 +15,7 @@ import {
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import { useState } from "react";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
 type LinkedInHeadlineType = {
   card?: any;
@@ -44,7 +45,15 @@ const LinkedInJDCardSingle = ({
   const handleOnDelete = async (card: any) => {
     setConfirmationModal(false);
     try {
-      await axios.delete(`/api/linkedInBots/jdGeneratorSingle/${card.id}`);
+      await axios
+        .delete(`/api/linkedInBots/jdGeneratorSingle/${card.id}`)
+        .then((res) => {
+          if (res.data.success) {
+            showSuccessToast("Job Description deleted Successfully");
+          } else {
+            showErrorToast("Something went wrong");
+          }
+        });
       dispatch(resetLinkedInJobDescription());
       // updated cover letters
       const updatedDescriptions = userData.linkedInJobDescriptions.filter(

@@ -12,6 +12,7 @@ import { usePathname, useRouter } from "next/navigation";
 import DownloadService from "@/helpers/downloadFile";
 import { useState } from "react";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { showSuccessToast } from "@/helpers/toast";
 
 type CoverLetterType = {
   card?: any;
@@ -44,7 +45,11 @@ const CoverLetterCardSingle = ({
 
     // if (c) {
     try {
-      await axios.delete(`/api/coverLetterBot/${card.id}`);
+      await axios.delete(`/api/coverLetterBot/${card.id}`).then((res) => {
+        if (res.data.success) {
+          showSuccessToast("Cover Letter deleted Successfully");
+        }
+      });
       dispatch(resetCoverLetter());
       // updated cover letters
       const updatedCoverLetters = userData.coverLetters.filter(

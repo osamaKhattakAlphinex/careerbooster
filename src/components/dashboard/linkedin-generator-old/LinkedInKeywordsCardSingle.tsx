@@ -14,6 +14,7 @@ import {
 } from "@/store/linkedInKeywordsSlice";
 import { useState } from "react";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
 type LinkedInHeadlineType = {
   card?: any;
@@ -41,7 +42,15 @@ const LinkedInHKeywordsCardSingle = ({
   const handleOnDelete = async (card: any) => {
     setConfirmationModal(false);
     try {
-      await axios.delete(`/api/linkedInBots/keywordsGenerator/${card.id}`);
+      await axios
+        .delete(`/api/linkedInBots/keywordsGenerator/${card.id}`)
+        .then((res) => {
+          if (res.data.success) {
+            showSuccessToast("Keyword deleted Successfully");
+          } else {
+            showErrorToast("Something went wrong");
+          }
+        });
       dispatch(resetLinkedKeywords());
       // updated cover letters
       const updatedKeyword = userData.linkedInKeywords.filter(
