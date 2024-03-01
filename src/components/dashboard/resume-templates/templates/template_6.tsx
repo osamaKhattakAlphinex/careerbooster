@@ -117,13 +117,8 @@ const ResumeTemplate6 = () => {
               }}
             />
           </h3>
-<<<<<<< HEAD
-          <ul className="flex flex-row justify-between gap-3 pl-0 my-2 text-sm break-all md:flex-row">
-            <li className="hover:shadow-md hover:bg-gray-100   flex flex-row gap-1  items-center justify-start w-[30%]">
-=======
           <ul className="flex flex-row justify-between gap-3 pl-0 my-2 text-xs break-all md:flex-row">
             <li className="hover:shadow-md hover:bg-gray-100 text-xs   flex flex-row gap-1  items-center justify-start w-[30%]">
->>>>>>> e5f0233c0749dbbee1448ea8f26f1b912004a88d
               <div className="p-1">{phoneIcon}</div>
               <EditableField
                 value={
@@ -138,11 +133,7 @@ const ResumeTemplate6 = () => {
                 }}
               />
             </li>
-<<<<<<< HEAD
-            <li className="w-[35%] hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start ">
-=======
             <li className="w-[35%] hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-xs ">
->>>>>>> e5f0233c0749dbbee1448ea8f26f1b912004a88d
               <div className="p-1">{emailIcon}</div>
               <EditableField
                 value={
@@ -157,11 +148,7 @@ const ResumeTemplate6 = () => {
                 }}
               />
             </li>
-<<<<<<< HEAD
-            <li className=" hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center justify-start ">
-=======
             <li className=" hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center justify-start text-xs ">
->>>>>>> e5f0233c0749dbbee1448ea8f26f1b912004a88d
               <div className="p-1">
                 <svg
                   width="16"
@@ -524,7 +511,7 @@ const ResumeTemplate6 = () => {
                                       setNewAchievement("");
                                     }
                                   }}
-                                />                           
+                                />
                                 <div className="my-2 w-full flex gap-2">
                                   <button
                                     className="bg-green-500 w-1/12 xs:w-full md:w-1/12 lg:w-1/12 rounded-md  h-9 text-white "
@@ -628,7 +615,7 @@ const ResumeTemplate6 = () => {
                           </li>
                           {(education.fromYear !== "" ||
                             education.toYear !== "") && (
-                            <li className="mb-4 text-xs italic text-gray-700">
+                            <li className="mb-4 flex text-xs italic text-gray-700">
                               {education.fromMonth && (
                                 <EditableField
                                   rows={2}

@@ -107,7 +107,7 @@ const ResumeTemplate2 = () => {
             }}
           />
         </h2>
-        <h3 className="text-lg xs:text-sm md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100">
+        <h3 className="text-lg xs:text-xs md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100">
           <EditableField
             value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
             onSave={(value: string) => {
@@ -136,7 +136,7 @@ const ResumeTemplate2 = () => {
           className="flex flex-row items-center justify-around px-4 py-2 md:flex-row rounded-xl "
           style={{ backgroundColor: color_second }}
         >
-          <li className="flex flex-row items-center gap-1 text-sm hover:shadow-md text-gray-950 hover:bg-gray-100 ">
+          <li className="flex flex-row items-center gap-1 text-xs hover:shadow-md text-gray-950 hover:bg-gray-100 ">
             {phoneIcon}
             <EditableField
               value={
@@ -151,7 +151,7 @@ const ResumeTemplate2 = () => {
               }}
             />
           </li>
-          <li className="flex flex-row items-center gap-1 text-sm  text-gray-950 hover:shadow-md hover:bg-gray-100">
+          <li className="flex flex-row items-center gap-1 text-xs  text-gray-950 hover:shadow-md hover:bg-gray-100">
             {emailIcon}
             <EditableField
               value={
@@ -166,7 +166,7 @@ const ResumeTemplate2 = () => {
               }}
             />
           </li>
-          <li className="flex flex-row items-center justify-center gap-1 text-sm text-gray-950  hover:shadow-md hover:bg-gray-100">
+          <li className="flex flex-row items-center justify-center gap-1 text-xs text-gray-950  hover:shadow-md hover:bg-gray-100">
             <div className="">
               <svg
                 width="16"
@@ -216,9 +216,9 @@ const ResumeTemplate2 = () => {
       </div>
       {/* summary objective */}
       <div className="w-full space-y-3 ">
-        <h2 className="text-lg font-semibold uppercase ">About Me</h2>
+        <h2 className="text-base font-semibold uppercase ">About Me</h2>
         <Toolbar regenrateSummary={getSummary}>
-          <div className="text-sm text-justify border-2 border-transparent  hover:shadow-md hover:border-gray-500 hover:border-dashed ">
+          <div className="text-xs text-justify border-2 border-transparent  hover:shadow-md hover:border-gray-500 hover:border-dashed ">
             <EditableField
               type="textarea"
               value={
@@ -244,7 +244,7 @@ const ResumeTemplate2 = () => {
       {/* Skills  */}
       <div className="w-full space-y-3 ">
         {resume?.primarySkills && resume?.primarySkills.length > 0 && (
-          <h2 className="pb-2 text-lg font-semibold uppercase ">Skills</h2>
+          <h2 className="pb-2 text-base font-semibold uppercase ">Skills</h2>
         )}
         {resume?.primarySkills &&
         resume?.primarySkills.length > 0 &&
@@ -254,7 +254,7 @@ const ResumeTemplate2 = () => {
               addSkill={handleAddSkills}
               regenerateSkills={getPrimarySkills}
             >
-              <ul className="flex flex-row flex-wrap gap-1 text-sm border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+              <ul className="flex flex-row flex-wrap gap-1 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
                     className=" px-4 py-2 bg-[#e9e8e8] border-transparent border-[1px] rounded-full hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
@@ -329,9 +329,7 @@ const ResumeTemplate2 = () => {
 
       {/* Work Experience */}
       <div className="flex flex-col w-full space-y-3">
-        <h2 className="text-sm font-bold uppercase xs:text-sm md:text-lg lg:text-lg bp-2">
-          WORK EXPERIENCE
-        </h2>
+        <h2 className="text-base font-semibold uppercase ">WORK EXPERIENCE</h2>
         {resume?.workExperienceArray &&
         resume?.workExperienceArray.length > 0 ? (
           <>
@@ -362,7 +360,7 @@ const ResumeTemplate2 = () => {
                     draggable
                   >
                     {/* start end */}
-                    <h2 className="col-span-1 p-0 text-sm font-semibold text-center bg-transparent hover:cursor-default">
+                    <h2 className="col-span-1 p-0 text-xs font-semibold text-center bg-transparent hover:cursor-default">
                       {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                       {rec?.isContinue
                         ? "Present"
@@ -383,8 +381,8 @@ const ResumeTemplate2 = () => {
                           }}
                         />
                       </h2>
-                      <span className="flex flex-row gap-2 items-center">
-                        <span className="text-sm hover:shadow-md hover:cursor-text hover:bg-gray-100 xs:text-sm md:text-lg lg:text-lg">
+                      <span className="text-xs font-semibold flex flex-row gap-2 items-center">
+                        <span className=" hover:shadow-md hover:cursor-text hover:bg-gray-100 ">
                           <EditableField
                             value={rec?.company}
                             onSave={(value: string) => {
@@ -422,7 +420,7 @@ const ResumeTemplate2 = () => {
                       </span>
                       <div className="p-4">
                         {rec?.achievements && i !== regeneratedRecordIndex ? (
-                          <ul className="flex flex-col gap-1 pl-0 text-sm xs:text-sm md:text-lg lg:text-lg">
+                          <ul className="flex flex-col gap-1 pl-0 text-xs ">
                             {rec?.achievements.map(
                               (achievement: any, ind: number) =>
                                 achievement === "" ? (
@@ -579,7 +577,7 @@ const ResumeTemplate2 = () => {
       <div className="w-full space-y-3 ">
         {resume?.education.length > 0 && (
           <>
-            <h3 className="flex flex-row items-center gap-2 text-sm font-semibold uppercase md:text-lg">
+            <h3 className="flex flex-row items-center gap-2 text-base font-semibold uppercase">
               {educationIcon}
               Education
             </h3>
@@ -587,7 +585,7 @@ const ResumeTemplate2 = () => {
               {resume?.education.map((education: Education, ind: number) => (
                 <React.Fragment key={education?.id || ind}>
                   <div className=" bg-[#e9e8e8] px-4 py-2 relative  group border-transparent border-2 hover:border-dashed hover:border-gray-500">
-                    <li className="flex items-center justify-between text-sm font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:border-2 hover:bg-gray-100 xs:text-sm md:text-lg lg:text-lg ">
+                    <li className="flex items-center justify-between text-base font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:border-2 hover:bg-gray-100  ">
                       <EditableField
                         rows={2}
                         value={education?.educationLevel}
@@ -605,7 +603,7 @@ const ResumeTemplate2 = () => {
                     >
                       {crossIcon1}
                     </div>
-                    <li className="text-base font-semibold hover:shadow-md hover:bg-gray-100">
+                    <li className="text-xs font-semibold hover:shadow-md hover:bg-gray-100">
                       <EditableField
                         value={`${education?.fieldOfStudy}`}
                         style={{ width: "100%" }}
@@ -617,7 +615,7 @@ const ResumeTemplate2 = () => {
                         }}
                       />{" "}
                     </li>
-                    <li className="text-sm italic text-gray-800 hover:shadow-md hover:bg-gray-100">
+                    <li className="text-xs italic text-gray-800 hover:shadow-md hover:bg-gray-100">
                       <EditableField
                         rows={2}
                         value={`${education?.schoolName}`}
@@ -630,7 +628,7 @@ const ResumeTemplate2 = () => {
                       />
                     </li>
                     {(education.fromYear !== "" || education.toYear !== "") && (
-                      <li className="mb-4 text-xs italic text-gray-700">
+                      <li className="mb-4 flex text-xs italic text-gray-700">
                         {education.fromMonth && (
                           <EditableField
                             rows={2}

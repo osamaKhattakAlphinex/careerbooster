@@ -164,6 +164,7 @@ export default function CoverLetterPage() {
               const { done, value } = await reader.read();
               if (done) {
                 showSuccessToast("Cover letter generated successfully");
+
                 break;
               }
               const text = new TextDecoder().decode(value);
