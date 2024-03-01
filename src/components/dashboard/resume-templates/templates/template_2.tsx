@@ -96,7 +96,7 @@ const ResumeTemplate2 = () => {
         className="flex flex-col w-full px-8 py-4 mt-1 text-center bg-gray-100 rounded-xl"
         style={{ backgroundColor: color }}
       >
-        <h2 className="text-4xl font-bold xs:text-2xl md:4xl lg:text-xl hover:shadow-md hover:bg-gray-100">
+        <h2 className="text-4xl font-bold xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100">
           <EditableField
             value={resume?.name ? resume?.name : "FULL NAME"}
             style={{ width: "fit-content" }}
@@ -136,7 +136,7 @@ const ResumeTemplate2 = () => {
           className="flex flex-row items-center justify-around px-4 py-2 md:flex-row rounded-xl "
           style={{ backgroundColor: color_second }}
         >
-          <li className="flex flex-row items-center gap-1 text-sm hover:shadow-md text-gray-950 hover:bg-gray-100 xs:text-sm md:text-lg lg:text-lg">
+          <li className="flex flex-row items-center gap-1 text-sm hover:shadow-md text-gray-950 hover:bg-gray-100 ">
             {phoneIcon}
             <EditableField
               value={
@@ -151,7 +151,7 @@ const ResumeTemplate2 = () => {
               }}
             />
           </li>
-          <li className="flex flex-row items-center gap-1 text-sm xs:text-sm md:text-lg lg:text-lg text-gray-950 hover:shadow-md hover:bg-gray-100">
+          <li className="flex flex-row items-center gap-1 text-sm  text-gray-950 hover:shadow-md hover:bg-gray-100">
             {emailIcon}
             <EditableField
               value={
@@ -166,7 +166,7 @@ const ResumeTemplate2 = () => {
               }}
             />
           </li>
-          <li className="flex flex-row items-center justify-center gap-1 text-sm text-gray-950 xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:bg-gray-100">
+          <li className="flex flex-row items-center justify-center gap-1 text-sm text-gray-950  hover:shadow-md hover:bg-gray-100">
             <div className="">
               <svg
                 width="16"
@@ -216,11 +216,9 @@ const ResumeTemplate2 = () => {
       </div>
       {/* summary objective */}
       <div className="w-full space-y-3 ">
-        <h2 className="text-sm font-bold uppercase xs:text-sm md:text-lg lg:text-lg">
-          About Me
-        </h2>
+        <h2 className="text-lg font-semibold uppercase ">About Me</h2>
         <Toolbar regenrateSummary={getSummary}>
-          <div className="text-sm text-justify border-2 border-transparent xs:text-sm md:text-lg lg:text-lg hover:shadow-md hover:border-gray-500 hover:border-dashed ">
+          <div className="text-sm text-justify border-2 border-transparent  hover:shadow-md hover:border-gray-500 hover:border-dashed ">
             <EditableField
               type="textarea"
               value={
@@ -246,9 +244,7 @@ const ResumeTemplate2 = () => {
       {/* Skills  */}
       <div className="w-full space-y-3 ">
         {resume?.primarySkills && resume?.primarySkills.length > 0 && (
-          <h2 className="pb-2 text-sm font-bold uppercase xs:text-sm md:text-lg lg:text-lg">
-            Skills
-          </h2>
+          <h2 className="pb-2 text-lg font-semibold uppercase ">Skills</h2>
         )}
         {resume?.primarySkills &&
         resume?.primarySkills.length > 0 &&
@@ -258,7 +254,7 @@ const ResumeTemplate2 = () => {
               addSkill={handleAddSkills}
               regenerateSkills={getPrimarySkills}
             >
-              <ul className="flex flex-row flex-wrap gap-1 text-sm border-2 border-transparent hover:border-dashed hover:border-gray-500 xs:text-sm md:text-lg lg:text-lg">
+              <ul className="flex flex-row flex-wrap gap-1 text-sm border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
                     className=" px-4 py-2 bg-[#e9e8e8] border-transparent border-[1px] rounded-full hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
