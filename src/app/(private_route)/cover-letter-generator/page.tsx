@@ -21,6 +21,7 @@ import DownloadService from "@/helpers/downloadFile";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
+import { showSuccessToast } from "@/helpers/toast";
 
 export default function CoverLetterPage() {
   const componentRef = useRef<any>(null);
@@ -162,6 +163,7 @@ export default function CoverLetterPage() {
             while (true) {
               const { done, value } = await reader.read();
               if (done) {
+                showSuccessToast("Cover letter generated successfully");
                 break;
               }
               const text = new TextDecoder().decode(value);

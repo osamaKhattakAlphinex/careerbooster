@@ -619,10 +619,10 @@ const ResumeTemplate4 = () => {
                 Education
               </h3>
               <span className="border-stylee block h-0 border-[1px] !border-gray-500 my-3"></span>
-              <ul className="flex flex-wrap w-full pl-0 md:flex-row lg:flex-row ">
+              <ul className="flex flex-wrap w-full justify-between pl-0 md:flex-row lg:flex-row ">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="w-[28%] xs:w-[45%] md:w-[28%] mx-2 xs:mx-0 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                    <div className="w-[28%] xs:w-[45%] n mx-2 xs:mx-0 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                       <li className="flex items-center justify-between text-sm font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:bg-gray-100">
                         <EditableField
                           type="textarea"

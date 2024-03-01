@@ -10,6 +10,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { resetEmail, setEmail } from "@/store/emailSlice";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { useState } from "react";
+import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
 type EmailType = {
   card?: any;
@@ -31,25 +32,29 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
   };
 
   const handleOnDelete = async (card: any) => {
+    try {
+      await axios.delete(`/api/emailBot/${card.id}`).then((res) => {
+        if (res.data.success) {
+          showSuccessToast("Email deleted Successfully");
+        } else {
+          showErrorToast("Something went wrong");
+        }
+      });
+      dispatch(resetEmail());
+      // updated cover letters
+      const updatedEmails = userData.emails.filter(
+        (email: any) => email.id !== card.id
+      );
 
-      try {
-        await axios.delete(`/api/emailBot/${card.id}`);
-        dispatch(resetEmail());
-        // updated cover letters
-        const updatedEmails = userData.emails.filter(
-          (email: any) => email.id !== card.id
-        );
+      const updatedObject = {
+        ...userData,
+        emails: updatedEmails,
+      };
 
-        const updatedObject = {
-          ...userData,
-          emails: updatedEmails,
-        };
-
-        dispatch(setUserData({ ...userData, ...updatedObject }));
-      } catch (error) {
-        console.log(error);
-      }
-    
+      dispatch(setUserData({ ...userData, ...updatedObject }));
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleOpenConfirmationModal = () => {
     setConfirmationModal(true);
@@ -110,7 +115,7 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
       {confirmationModal && (
         <DeleteConfirmationModal
           message="Are you sure you want to delete ?"
-          onConfirm={()=>handleOnDelete(card)}
+          onConfirm={() => handleOnDelete(card)}
         />
       )}
     </div>

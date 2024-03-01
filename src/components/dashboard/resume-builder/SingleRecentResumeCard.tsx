@@ -7,6 +7,7 @@ import { setUserData } from "@/store/userDataSlice";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { showSuccessToast } from "@/helpers/toast";
 const SingleRecentResumeCard = ({
   resume,
   source,
@@ -49,6 +50,7 @@ const SingleRecentResumeCard = ({
         })
         .then(async (res: any) => {
           if (res.data.success) {
+            showSuccessToast("Resume deleted successfully");
             const res = await fetch(`/api/users/getOneByEmail?email=${email}`);
             const response = await res.json();
             dispatch(setUserData(response.result));
@@ -56,7 +58,6 @@ const SingleRecentResumeCard = ({
         });
     }
   };
-
 
   const handleOpenConfirmationModal = () => {
     setConfirmationModal(true);

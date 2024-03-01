@@ -14,6 +14,7 @@ import LinkedInHeadlineCardSingle from "./LinkedInHeadeLineCardSingle";
 import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
+import { showSuccessToast } from "@/helpers/toast";
 
 const SubHeadlineGenerator = () => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
@@ -96,6 +97,7 @@ const SubHeadlineGenerator = () => {
             while (true) {
               const { done, value } = await reader.read();
               if (done) {
+                showSuccessToast("Headline generated successfully");
                 break;
               }
               const text = new TextDecoder().decode(value);

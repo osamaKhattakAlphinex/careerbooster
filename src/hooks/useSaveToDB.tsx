@@ -8,10 +8,11 @@ import { setField, setUserData } from "@/store/userDataSlice";
 import { setId, setResume } from "@/store/resumeSlice";
 import { useAppContext } from "@/context/AppContext";
 import useGetUserData from "./useGetUserData";
+import { showSuccessToast } from "@/helpers/toast";
 
 const useSaveResumeToDB = () => {
-  const {resume:resumeData, userData} = useSelector((state: any) => state);
-  const {setAvailableCredits} = useAppContext()
+  const { resume: resumeData, userData } = useSelector((state: any) => state);
+  const { setAvailableCredits } = useAppContext();
   const { data: session } = useSession();
   const dispatch = useDispatch();
 
@@ -31,21 +32,21 @@ const useSaveResumeToDB = () => {
         resumeData: obj,
       })
       .then(async (resp) => {
-        if(userData.trialResume === false){
-          dispatch(setUserData({trialResume: true}));
-          axios.post("/api/users/updateUserData", {
-            data: {
-              email: userData.email,
-              trialResume: true
-            },
-          }
-          ).then(()=>{
-           setAvailableCredits(true)
-
-          })
-
-        } else{
-          setAvailableCredits(true)
+        showSuccessToast("Resume Update Successfully");
+        if (userData.trialResume === false) {
+          dispatch(setUserData({ trialResume: true }));
+          axios
+            .post("/api/users/updateUserData", {
+              data: {
+                email: userData.email,
+                trialResume: true,
+              },
+            })
+            .then(() => {
+              setAvailableCredits(true);
+            });
+        } else {
+          setAvailableCredits(true);
         }
         dispatch(setId(obj.id));
         // update user in redux

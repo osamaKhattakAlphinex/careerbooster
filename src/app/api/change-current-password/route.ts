@@ -14,6 +14,7 @@ export async function POST(req: any) {
     const user = await User.findOne({ email: userEmail });
     if (user) {
       const passwordMatch = await user.comparePassword(currentPassword);
+      console.log(passwordMatch)
       if (passwordMatch) {
         user.password = newPassword;
         await user.save();
