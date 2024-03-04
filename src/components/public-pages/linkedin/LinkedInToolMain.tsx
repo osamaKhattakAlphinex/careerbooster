@@ -96,7 +96,7 @@ const LinkedInToolMain = () => {
   return (
     <div className="w-full ">
       {/* Hero Section */}
-      <section className="hero bg-gradient-to-r from-[#01010D80] via-[#000A6380] to-purple-900 overflow-x-hidden lg:px-0 pt-24  lg:pt-[110px]	px-5 lg:npt-10">
+      <section className="hero bg-gradient-to-r from-[#01010D80] via-[#000A6380] to-purple-900 overflow-x-hidden lg:px-0 pt-7  lg:pt-[30px]	px-5 lg:npt-10">
         <div className="lg:px-[120px] text-center lg:pt-12 lg:pb-8 pt-15 ">
           <p className="lg:text-[20px] text-base lg:px-0 	">
             Keyword-Optimized, Captivating & Under 30 Seconds!
@@ -132,7 +132,7 @@ const LinkedInToolMain = () => {
                 <div className="flex gap-2 ">
                   <div>{uploadIcon}</div>
                   <div className="text-center ">
-                    <p className="m-0 font-semibold lg:text-[20px] cursor-pointer text-[14px] lg:leading-6 leading-4[text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                    <p className="m-0 font-semibold whitespace-nowrap lg:text-[20px] cursor-pointer text-[14px] lg:leading-6 leading-4[text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
                       Upload Resume or LinkedIn in PDF
                     </p>
                     <p className="lg:text-[14px] text-[10px] lg:leading-[17px] leading-[14px] pt-2">
