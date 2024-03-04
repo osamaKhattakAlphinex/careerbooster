@@ -27,6 +27,7 @@ import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
+  console.log(resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
@@ -387,7 +388,7 @@ const ResumeTemplate2 = () => {
                           }}
                         />
                       </h2>
-                      <span className="flex flex-row gap-2 items-center">
+                      <span className="flex flex-row items-center gap-2">
                         <span className="text-sm hover:shadow-md hover:cursor-text hover:bg-gray-100 xs:text-sm md:text-lg lg:text-lg">
                           <EditableField
                             value={rec?.company}
@@ -511,7 +512,7 @@ const ResumeTemplate2 = () => {
                         )}
                         {newWorkExperience === i ? (
                           <>
-                            <div className="w-full gap-1  flex flex-wrap mt-4">
+                            <div className="flex flex-wrap w-full gap-1 mt-4">
                               <input
                                 className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
                                 onChange={(e) =>
@@ -533,9 +534,9 @@ const ResumeTemplate2 = () => {
                                   }
                                 }}
                               />
-                              <div className="my-2 w-full flex gap-2">
+                              <div className="flex w-full gap-2 my-2">
                                 <button
-                                  className="bg-green-500 w-1/12 xs:w-full md:w-1/12 lg:w-1/12 rounded-md  h-9 text-white "
+                                  className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
                                   onClick={() => {
                                     // Save the new achievement to the state and possibly the database
                                     handlers.handleAddAchivement(
@@ -552,7 +553,7 @@ const ResumeTemplate2 = () => {
                                     setNewAchievement("");
                                     setNewWorkExperience(-1);
                                   }}
-                                  className="bg-red-500 w-1/12 xs:w-full md:w-1/12 lg:w-1/12 rounded-md py-1 text-white"
+                                  className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
                                 >
                                   Cancel
                                 </button>

@@ -561,7 +561,7 @@ const ResumeTemplate1 = ({
                         />
                       </h2>
                       <h2
-                        className="hover:cursor-default flex gap-2"
+                        className="flex gap-2 hover:cursor-default"
                         style={{
                           fontSize: "1.1rem",
                           lineHeight: "1.5rem",
