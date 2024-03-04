@@ -13,7 +13,7 @@ import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedL
 import LinkedInAboutCardSingle from "./LinkedInAboutCardSingle";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
-import { showSuccessToast } from "@/helpers/toast";
+import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 const SubAboutGenerator = () => {
   const componentRef = useRef<any>(null);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
@@ -125,6 +125,7 @@ const SubAboutGenerator = () => {
           } else {
             const res = await resp.json();
             setStreamedData(res.result + "! You ran out of Credits");
+            showErrorToast("Failed to generate linkedin About");
           }
           setMsgLoading(false);
         })

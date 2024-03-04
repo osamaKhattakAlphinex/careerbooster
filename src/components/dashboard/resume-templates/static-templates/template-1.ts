@@ -157,7 +157,7 @@ const templateLayout: any = {
   fragment: {
     styles: "flex flex-row bg-white fragment",
     sideBar: {
-      styles: "bg-[#e2e2e2] w-3/12 flex flex-col justify-start px-6",
+      styles: "bg-[#e2e2e2] w-[30%] flex flex-col justify-start px-6",
       elements: [
         {
           id: "shortName",
@@ -179,7 +179,7 @@ const templateLayout: any = {
 
     body: {
       styles:
-        "text-black w-9/12 flex-1 flex flex-col justify-start items-start px-6 my-6",
+        "text-black w-[70%] flex-1 flex flex-col justify-start items-start px-6 my-6",
       elements: [
         {
           id: "name",

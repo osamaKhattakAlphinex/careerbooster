@@ -17,7 +17,7 @@ import LinkedInHKeywordsCardSingle from "./LinkedInKeywordsCardSingle";
 import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
-import { showSuccessToast } from "@/helpers/toast";
+import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 
 const SubKeywordsGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -132,6 +132,7 @@ const SubKeywordsGenerator = () => {
           } else {
             const res = await resp.json();
             setStreamedData(res.result + "! You ran out of Credits");
+            showErrorToast("Failed to generate Linkedin Keywords");
           }
           setMsgLoading(false);
         })
