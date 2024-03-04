@@ -1,3 +1,4 @@
+import HeroArea from "@/components/public-pages/linkedin/HeroArea";
 import LinkedInToolMain from "@/components/public-pages/linkedin/LinkedInToolMain";
 import { Metadata } from "next";
 
@@ -36,6 +37,7 @@ export default function LinkedInNewPage() {
       {/* LinkedIn Tool Card */}
       <section className="">
         <div className="flex flex-col text-white">
+          <HeroArea />
           <LinkedInToolMain />
         </div>
         {/* <Avatar1 firstName="one" lastName="any" /> */}
