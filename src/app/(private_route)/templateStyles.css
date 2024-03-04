@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+[data-name="phone"]::before {
+  content: "\260E";
+  font-family: "YourIconFontFamily", sans-serif;
+  font-size: var(--text);
+  color: #333;
+  position: relative;
+  top: 2px;
+  margin-right: 10px;
+}
+[data-name="email"]::before {
+  content: "\2709";
+  font-family: "YourIconFontFamily", sans-serif;
+  font-size: var(--text);
+  color: #333;
+  position: relative;
+  top: 2px;
+  margin-right: 10px;
+}
+body {
+  background-color: rgb(236, 236, 236);
+  margin: 0 auto;
+}
+
+.cv-container {
+  color: black;
+  width: fit-content;
+  margin: 0 auto;
+}
+.page div:empty {
+  display: none;
+}
+.page {
+  height: 29.62cm !important;
+  width: 21.01cm !important;
+  background-color: #fff;
+  margin: 10px;
+}
+span:empty {
+  display: none;
+}
