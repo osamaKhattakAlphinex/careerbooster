@@ -1,8 +1,9 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { template } from "@/components/dashboard/resume-templates/static-templates/template-2";
+import { template } from "@/components/dashboard/resume-templates/static-templates/template-1";
 import "../../templateStyles.css";
+import DownloadService from "@/helpers/downloadFile";
 const Page = () => {
   const resumeData = useSelector((state: any) => state.resume);
   const cvRef = useRef<any>(null);
@@ -498,6 +499,11 @@ const Page = () => {
   }, [resumeData]);
   return (
     <div className="ml-[234px]">
+      <DownloadService
+        componentRef={cvRef}
+        fileName="ai-resume"
+        preview={true}
+      />
       <div ref={cvRef} className="cv-container text-[#000]"></div>
     </div>
   );

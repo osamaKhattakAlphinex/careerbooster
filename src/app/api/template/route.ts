@@ -36,11 +36,6 @@ export async function POST(req: any) {
       printBackground: true,
       width: "8.27in",
       height: "11.69in",
-      margin: {
-        top: "0.5cm",
-        bottom: "0.5cm",
-      },
-      preferCSSPageSize: true,
     });
     await browser.close();
     return NextResponse.json({ result: pdf, success: true }, { status: 200 });

@@ -65,12 +65,26 @@ any) => {
       htmlToDoc = `
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
-        .parent .child {
-            display: none;
+       
+        [data-name="phone"]::before {
+          content: "\\260E";
+          font-family: "YourIconFontFamily", sans-serif;
+          font-size: var(--text);
+          color: #333;
+          position: relative;
+          top: 2px;
+          margin-right: 10px;
         }
-        .parent:hover .child {
-            display: block; 
+        [data-name="email"]::before {
+          content: "\\2709";
+          font-family: "YourIconFontFamily", sans-serif;
+          font-size: var(--text);
+          color: #333;
+          position: relative;
+          top: 2px;
+          margin-right: 10px;
         }
+        
        
         </style>
         ${html}`;
