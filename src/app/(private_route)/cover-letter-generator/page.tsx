@@ -21,7 +21,9 @@ import DownloadService from "@/helpers/downloadFile";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
-import { showSuccessToast } from "@/helpers/toast";
+import { showSuccessToast, showErrorToast } from "@/helpers/toast";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { useRouter } from "next/navigation";
 
 export default function CoverLetterPage() {
   const componentRef = useRef<any>(null);
@@ -39,8 +41,9 @@ export default function CoverLetterPage() {
   const [isEditing, setIsEditing] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const { setAvailableCredits } = useAppContext();
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const creditLimits = useSelector((state: any) => state.creditLimits);
-
+  const router = useRouter();
   // Function to toggle editing mode on double-click
   const handleClick = () => {
     setIsEditing((prevState) => !prevState);
@@ -164,7 +167,6 @@ export default function CoverLetterPage() {
               const { done, value } = await reader.read();
               if (done) {
                 showSuccessToast("Cover letter generated successfully");
-
                 break;
               }
               const text = new TextDecoder().decode(value);
@@ -195,6 +197,8 @@ export default function CoverLetterPage() {
           } else {
             const res = await resp.json();
             setStreamedData(res.result + "! You ran out of Credits");
+            setConfirmationModal(true);
+            // showErrorToast("Failed to generate cover letter");
           }
         })
         .finally(() => {
@@ -210,6 +214,10 @@ export default function CoverLetterPage() {
     }
   };
 
+  const onConfirm = () => {
+    console.log("console");
+    router.push("/subscribe");
+  };
   const copyCoverLetter = async (text: string) => {
     try {
       const coverLetterData = await htmlToPlainText(text);
@@ -774,6 +782,14 @@ export default function CoverLetterPage() {
           </>
         </div>
       </div>
+      {confirmationModal && (
+        <DeleteConfirmationModal
+          upgrade={true}
+          onCancel={() => setConfirmationModal(false)}
+          message="Insufficent Credits! you Ran out of the credit."
+          onConfirm={() => onConfirm()}
+        />
+      )}
     </>
   );
 }

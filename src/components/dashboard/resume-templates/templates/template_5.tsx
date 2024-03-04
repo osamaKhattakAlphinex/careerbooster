@@ -523,6 +523,7 @@ const ResumeTemplate5 = () => {
                     {confirmationModal && (
                       <DeleteConfirmationModal
                         message="Are you sure you want to delete ?"
+                        onCancel={() => setConfirmationModal(false)}
                         onConfirm={() => {
                           setConfirmationModal(false);
                           handlers.handleDeleteEductionDetail(ind);

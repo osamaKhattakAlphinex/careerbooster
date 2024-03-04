@@ -30,7 +30,7 @@ import useGetUserData from "@/hooks/useGetUserData";
 import useGetSummary from "@/hooks/useGetSummary";
 import { fetchLIstOfStrings } from "@/helpers/fetchLIstOfStrings";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
-import { showSuccessToast } from "@/helpers/toast";
+import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import CreditInfoModal from "@/components/dashboard/resume-builder/CreditsInfoModal";
 
 const ResumeBuilder = () => {
@@ -178,6 +178,8 @@ const ResumeBuilder = () => {
           education: userData?.education,
         };
         dispatch(setBasicInfo(basicObj));
+      } else {
+        showErrorToast("Something Went Wrong");
       }
     });
     // });

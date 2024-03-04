@@ -116,6 +116,7 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
         <DeleteConfirmationModal
           message="Are you sure you want to delete ?"
           onConfirm={() => handleOnDelete(card)}
+          onCancel={() => setConfirmationModal(false)}
         />
       )}
     </div>

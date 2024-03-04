@@ -13,7 +13,7 @@ import EmailCardSingle from "@/components/dashboard/email-generator/EmailCardSin
 import { useAppContext } from "@/context/AppContext";
 import { EmailPlaceHolderCard } from "@/components/dashboard/email-generator/EmailPlaceHolderCard";
 import { EmailCard } from "@/components/dashboard/email-generator/EmailCard";
-import { showSuccessToast } from "@/helpers/toast";
+import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 
 const PersonalizedEmailBot = () => {
   const componentRef = useRef<any>(null);
@@ -222,6 +222,7 @@ const PersonalizedEmailBot = () => {
             } else {
               const res = await resp.json();
               setStreamedData(res.result + "! You ran out of Credits");
+              showErrorToast("Failed to generate Email");
             }
           })
           .finally(() => {

@@ -15,7 +15,7 @@ import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import { useAppContext } from "@/context/AppContext";
-import { showSuccessToast } from "@/helpers/toast";
+import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
   const creditLimits = useSelector((state: any) => state.creditLimits);
@@ -188,6 +188,7 @@ const SubJDGenerator = () => {
         await getUserData();
       } catch (err) {
         setStreamedData("Something went wrong!");
+        showErrorToast("Fauled to generate Linkedin Job Description");
       }
     }
   };

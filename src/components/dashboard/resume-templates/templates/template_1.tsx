@@ -36,7 +36,7 @@ const ResumeTemplate1 = ({
   setStreamedSummaryData: any;
 }) => {
   const resume = useSelector((state: any) => state.resume);
-  console.log(resume)
+  console.log(resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
@@ -470,6 +470,7 @@ const ResumeTemplate1 = ({
                     {confirmationModal && (
                       <DeleteConfirmationModal
                         message="Are you sure you want to delete ?"
+                        onCancel={() => setConfirmationModal(false)}
                         onConfirm={() => {
                           setConfirmationModal(false);
                           handlers.handleDeleteEductionDetail(ind);

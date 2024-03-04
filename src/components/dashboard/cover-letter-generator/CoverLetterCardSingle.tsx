@@ -146,6 +146,7 @@ const CoverLetterCardSingle = ({
         <DeleteConfirmationModal
           message="Are you sure you want to delete ?"
           onConfirm={() => handleOnDelete(card)}
+          onCancel={() => setConfirmationModal(false)}
         />
       )}
     </div>

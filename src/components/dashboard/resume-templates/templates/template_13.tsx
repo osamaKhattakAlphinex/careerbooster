@@ -731,6 +731,7 @@ const ResumeTemplate16 = () => {
                     </div>
                     {confirmationModal && (
                       <DeleteConfirmationModal
+                        onCancel={() => setConfirmationModal(false)}
                         message="Are you sure you want to delete ?"
                         onConfirm={() => {
                           setConfirmationModal(false);

@@ -14,7 +14,7 @@ import LinkedInHeadlineCardSingle from "./LinkedInHeadeLineCardSingle";
 import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
-import { showSuccessToast } from "@/helpers/toast";
+import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 
 const SubHeadlineGenerator = () => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
@@ -117,6 +117,7 @@ const SubHeadlineGenerator = () => {
           } else {
             const res = await resp.json();
             setStreamedData(res.result + "! You ran out of Credits");
+            showErrorToast("Failed to generate linkedin Headline");
           }
           setMsgLoading(false);
         })

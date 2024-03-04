@@ -105,6 +105,7 @@ const SingleRecentResumeCard = ({
         <DeleteConfirmationModal
           message="Are you sure you want to delete ?"
           onConfirm={handleOnDelete}
+          onCancel={() => setConfirmationModal(false)}
         />
       )}
     </>

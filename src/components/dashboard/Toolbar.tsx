@@ -189,6 +189,7 @@ const Toolbar = ({
       {confirmationModal && (
         <DeleteConfirmationModal
           message="Are you sure you want to delete ?"
+          onCancel={() => setConfirmationModal(false)}
           onConfirm={() => {
             deleteExperience();
             setConfirmationModal(false);
