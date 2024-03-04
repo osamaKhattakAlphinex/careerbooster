@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/dashboard/resume-templates/templates/template_1";
+import ResumeTemplate6 from "@/components/dashboard/resume-templates/templates/template_6";
 import { useDispatch, useSelector } from "react-redux";
 import { WorkExperience, setUserData } from "@/store/userDataSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -341,13 +342,13 @@ const ResumeBuilder = () => {
 
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]">
-          <Link
+          {/* <Link
             href="/resume-builder/test-preview"
             className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center hover:opacity-80 transition-all"
           >
             {leftArrowIcon}
             Back
-          </Link>
+          </Link> */}
           <RecentResumeCard
             source="dashboard"
             componentRef={componentRef}
