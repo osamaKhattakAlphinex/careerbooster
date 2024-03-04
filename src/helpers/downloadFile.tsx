@@ -66,24 +66,76 @@ any) => {
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
        
-        [data-name="phone"]::before {
-          content: "\\260E";
-          font-family: "YourIconFontFamily", sans-serif;
-          font-size: var(--text);
-          color: #333;
-          position: relative;
-          top: 2px;
-          margin-right: 10px;
-        }
-        [data-name="email"]::before {
-          content: "\\2709";
-          font-family: "YourIconFontFamily", sans-serif;
-          font-size: var(--text);
-          color: #333;
-          position: relative;
-          top: 2px;
-          margin-right: 10px;
-        }
+       
+h2[data-name="phone"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJtMy44NTUgNy4yODYgMS4wNjctLjUzNGExIDEgMCAwIDAgLjU0Mi0xLjA0NmwtLjQ0LTIuODU4QTEgMSAwIDAgMCA0LjAzNiAySDNhMSAxIDAgMCAwLTEgMXYyYzAgLjcwOS4wODIgMS40LjIzOCAyLjA2MmE5LjAxMiA5LjAxMiAwIDAgMCA2LjcgNi43QTkuMDI0IDkuMDI0IDAgMCAwIDExIDE0aDJhMSAxIDAgMCAwIDEtMXYtMS4wMzZhMSAxIDAgMCAwLS44NDgtLjk4OGwtMi44NTgtLjQ0YTEgMSAwIDAgMC0xLjA0Ni41NDJsLS41MzQgMS4wNjdhNy41MiA3LjUyIDAgMCAxLTQuODYtNC44NTlaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIC8+Cjwvc3ZnPgo=");
+  font-family: "YourIconFontFamily", sans-serif;
+  font-size: 16px; /* Make sure --text is defined */
+  color: #333;
+  display: inline-block;
+  height: 16px !important;
+  width: 16px !important;
+  margin-right: 6px;
+}
+h2[data-name="summary"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZD0iTTggOGEzIDMgMCAxIDAgMC02IDMgMyAwIDAgMCAwIDZaTTEyLjczNSAxNGMuNjE4IDAgMS4wOTMtLjU2MS44NzItMS4xMzlhNi4wMDIgNi4wMDIgMCAwIDAtMTEuMjE1IDBjLS4yMi41NzguMjU0IDEuMTM5Ljg3MiAxLjEzOWg5LjQ3WiIgLz4KPC9zdmc+Cg==");
+  font-family: "YourIconFontFamily", sans-serif;
+  font-size: 16px; /* Make sure --text is defined */
+  color: #333;
+  display: inline-block;
+  height: 16px !important;
+  width: 16px !important;
+  margin-right: 6px;
+}
+h2[data-name="primarySkills"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMTUgNC41QTMuNSAzLjUgMCAwIDEgMTEuNDM1IDhjLS45OS0uMDE5LTIuMDkzLjEzMi0yLjcuOTEzbC00LjEzIDUuMzFhMi4wMTUgMi4wMTUgMCAxIDEtMi44MjctMi44MjhsNS4zMDktNC4xM2MuNzgtLjYwNy45MzItMS43MS45MTQtMi43TDggNC41YTMuNSAzLjUgMCAwIDEgNC40NzctMy4zNjJjLjMyNS4wOTQuMzkuNDk3LjE1LjczNkwxMC42IDMuOTAyYS40OC40OCAwIDAgMC0uMDMzLjY1M2MuMjcxLjMxNC41NjUuNjA4Ljg3OS44NzlhLjQ4LjQ4IDAgMCAwIC42NTMtLjAzM2wyLjAyNy0yLjAyN2MuMjM5LS4yNC42NDItLjE3NS43MzYuMTUuMDkuMzEuMTM4LjYzNy4xMzguOTc2Wk0zLjc1IDEzYS43NS43NSAwIDEgMS0xLjUgMCAuNzUuNzUgMCAwIDEgMS41IDBaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIC8+CiAgPHBhdGggZD0iTTExLjUgOS41Yy4zMTMgMCAuNjItLjAyOS45MTctLjA4NGwxLjk2MiAxLjk2MmEyLjEyMSAyLjEyMSAwIDAgMS0zIDNsLTIuODEtMi44MSAxLjM1LTEuNzM0Yy4wNS0uMDY0LjE1OC0uMTU4LjQyNi0uMjMzLjI3OC0uMDc4LjYzOS0uMTEgMS4wNjItLjEwMmwuMDkzLjAwMVpNNSA0bDEuNDQ2IDEuNDQ1YTIuMjU2IDIuMjU2IDAgMCAxLS4wNDcuMjFjLS4wNzUuMjY4LS4xNjkuMzc3LS4yMzMuNDI3bC0uNjEuNDc0TDQgNUgyLjY1NWEuMjUuMjUgMCAwIDEtLjIyNC0uMTM5bC0xLjM1LTIuN2EuMjUuMjUgMCAwIDEgLjA0Ny0uMjg5bC43NDUtLjc0NWEuMjUuMjUgMCAwIDEgLjI4OS0uMDQ3bDIuNyAxLjM1QS4yNS4yNSAwIDAgMSA1IDIuNjU0VjRaIiAvPgo8L3N2Zz4K");
+  font-family: "YourIconFontFamily", sans-serif;
+  font-size: 16px; /* Make sure --text is defined */
+  color: #333;
+  display: inline-block;
+  height: 16px !important;
+  width: 16px !important;
+  margin-right: 6px;
+}
+h2[data-name="education"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZD0iTTcuNzAyIDEuMzY4YS43NS43NSAwIDAgMSAuNTk3IDBjMi4wOTguOTEgNC4xMDUgMS45OSA2LjAwNCAzLjIyM2EuNzUuNzUgMCAwIDEtLjE5NCAxLjM0OEEzNC4yNyAzNC4yNyAwIDAgMCA4LjM0MSA4LjI1YS43NS43NSAwIDAgMS0uNjgyIDBjLS42MjUtLjMyLTEuMjYyLS42Mi0xLjkwOS0uOTAxdi0uNTQyYTM2Ljg3OCAzNi44NzggMCAwIDEgMi41NjgtMS4zMy43NS43NSAwIDAgMC0uNjM2LTEuMzU3IDM4LjM5IDM4LjM5IDAgMCAwLTMuMDYgMS42MDUuNzUuNzUgMCAwIDAtLjM3Mi42NDh2LjM2NWMtLjc3My0uMjk0LTEuNTYtLjU2LTIuMzU5LS44YS43NS43NSAwIDAgMS0uMTk0LTEuMzQ3IDQwLjkwMSA0MC45MDEgMCAwIDEgNi4wMDUtMy4yMjNaTTQuMjUgOC4zNDhjLS41My0uMjEyLTEuMDY3LS40MTEtMS42MTEtLjU5NmE0MC45NzMgNDAuOTczIDAgMCAwLS40MTggMi45Ny43NS43NSAwIDAgMCAuNDc0Ljc3NmMuMTc1LjA2OC4zNS4xMzguNTI0LjIxYTUuNTQ0IDUuNTQ0IDAgMCAxLS41OC42ODEuNzUuNzUgMCAxIDAgMS4wNiAxLjA2Yy4zNS0uMzQ5LjY1NS0uNzI2LjkxNS0xLjEyNGEyOS4yODIgMjkuMjgyIDAgMCAwLTEuMzk1LS42MTdBNS40ODMgNS40ODMgMCAwIDAgNC4yNSA4LjV2LS4xNTJaIiAvPgogIDxwYXRoIGQ9Ik03LjYwMyAxMy45NmMtLjk2LS42LTEuOTU4LTEuMTQ3LTIuOTg5LTEuNjM1YTYuOTgxIDYuOTgxIDAgMCAwIDEuMTItMy4zNDFjLjQxOS4xOTIuODM0LjM5MyAxLjI0NC42MDJhMi4yNSAyLjI1IDAgMCAwIDIuMDQ1IDAgMzIuNzg3IDMyLjc4NyAwIDAgMSA0LjMzOC0xLjgzNGMuMTc1Ljk3OC4zMTUgMS45NjkuNDE5IDIuOTdhLjc1Ljc1IDAgMCAxLS40NzQuNzc2IDI5LjM4NSAyOS4zODUgMCAwIDAtNC45MDkgMi40NjEuNzUuNzUgMCAwIDEtLjc5NCAwWiIgLz4KPC9zdmc+Cg==");
+  font-family: "YourIconFontFamily", sans-serif;
+  font-size: 16px; /* Make sure --text is defined */
+  color: #333;
+  display: inline-block;
+  height: 16px !important;
+  width: 16px !important;
+  margin-right: 6px;
+}
+h2[data-name="workExperienceArray"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMTEgNFYzYTIgMiAwIDAgMC0yLTJIN2EyIDIgMCAwIDAtMiAydjFINGEyIDIgMCAwIDAtMiAydjNhMiAyIDAgMCAwIDIgMmg4YTIgMiAwIDAgMCAyLTJWNmEyIDIgMCAwIDAtMi0yaC0xWk05IDIuNUg3YS41LjUgMCAwIDAtLjUuNXYxaDNWM2EuNS41IDAgMCAwLS41LS41Wk05IDlhMSAxIDAgMSAxLTIgMCAxIDEgMCAwIDEgMiAwWiIgY2xpcC1ydWxlPSJldmVub2RkIiAvPgogIDxwYXRoIGQ9Ik0zIDExLjgzVjEyYTIgMiAwIDAgMCAyIDJoNmEyIDIgMCAwIDAgMi0ydi0uMTdjLS4zMTMuMTEtLjY1LjE3LTEgLjE3SDRjLS4zNSAwLS42ODctLjA2LTEtLjE3WiIgLz4KPC9zdmc+Cg==");
+  font-family: "YourIconFontFamily", sans-serif;
+  font-size: 16px; /* Make sure --text is defined */
+  color: #333;
+  display: inline-block;
+  height: 16px !important;
+  width: 16px !important;
+  margin-right: 6px;
+}
+
+[data-primarySkills-index]::before {
+  content: "\\2022";
+  font-family: "YourIconFontFamily", sans-serif;
+  font-size: var(--text);
+  color: #333;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+[data-achievements-index]::before {
+  content: "\\2022";
+  font-family: "YourIconFontFamily", sans-serif;
+  font-size: var(--text);
+  color: #333;
+  position: relative;
+  top: 2px;
+  margin-right: 10px;
+}
         
        
         </style>

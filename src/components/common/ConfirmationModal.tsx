@@ -3,11 +3,13 @@ import Swal from "sweetalert2";
 type ConfirmationModalProps = {
   message: string;
   onConfirm: () => void;
+  onCancel?: () => void
 };
 
 const DeleteConfirmationModal = ({
   message,
   onConfirm,
+  onCancel
 }: ConfirmationModalProps) => {
   const handleConfirm = () => {
     Swal.fire({
@@ -21,6 +23,11 @@ const DeleteConfirmationModal = ({
     }).then((result) => {
       if (result.isConfirmed) {
         onConfirm();
+      }else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Check if the modal was dismissed by cancel action
+        if (onCancel) {
+          onCancel(); // Call onCancel callback
+        }
       }
     });
   };

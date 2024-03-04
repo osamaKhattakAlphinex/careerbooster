@@ -7,11 +7,8 @@ import DownloadService from "@/helpers/downloadFile";
 const Page = () => {
   const resumeData = useSelector((state: any) => state.resume);
   const cvRef = useRef<any>(null);
-  const { components, templateLayout } = template;
-  const pageSize = {
-    height: "29.62cm",
-    width: "21.01cm",
-  };
+  const { components, templateLayout, cvHeadings } = template;
+  
 
   const GenerationOrder = [
     "shortName",
@@ -24,16 +21,12 @@ const Page = () => {
     "education",
   ];
 
-  let elements = [];
-  let data = {};
   let spans: any = [];
   let currentPageIndex = 0;
   let pages: any = [];
   let parts: any = [];
   let fragment: any = [];
   let leftSpan: any = [];
-
-  const ignoreList = ["styles"];
 
   const cleanUpHTML = (page: any) => {
     const cleanUpIds = [
@@ -414,7 +407,7 @@ const Page = () => {
       const [[key, value]]: any = Object.entries(p);
 
       const findChild = value.children[attribute];
-
+      const isHeading = span.getAttribute("data-type-heading");
       if (findChild) {
         if (
           attribute === "primarySkills" ||
@@ -423,7 +416,12 @@ const Page = () => {
         ) {
           value.appendChild(span);
           findChild.textContent = "";
-        } else value.replaceChild(span, value.children[attribute]);
+        } else {
+          if (isHeading) {
+            findChild.parentNode.insertBefore(span, findChild);
+            findChild.textContent = "";
+          } else value.replaceChild(span, value.children[attribute]);
+        }
       } else {
       }
     }
@@ -464,6 +462,29 @@ const Page = () => {
 
     const firstPage = newPage();
     generateLayout(firstPage);
+    cvHeadings.forEach((item: any) => {
+      let found = false; // Flag to track if the condition is met
+      spans.forEach((singleSpan: any, index: any) => {
+        if (found) return; // If the condition is already met, exit the loop
+        const getSpan = singleSpan.getAttribute("data-name");
+        if (getSpan === item.section) {
+          const heading = document.createElement("h2");
+          heading.textContent = item.text;
+          setAttributesToElem(
+            [{ name: item.section }, { "type-heading": true }],
+            heading
+          );
+          setStylesToElement(
+            heading,
+            "font-semibold uppercase text-gray-950 flex items-center text-md border-t-2 border-b-2 py-0.5 w-full"
+          );
+
+          spans.splice(index, 0, heading);
+          found = true; // Set the flag to true when the condition is met
+          // You can perform other actions here if needed
+        }
+      });
+    });
     spans.forEach((span: any) => {
       setTimeout(() => {
         const gen = FinalizeGeneration(span, pages[currentPageIndex]);

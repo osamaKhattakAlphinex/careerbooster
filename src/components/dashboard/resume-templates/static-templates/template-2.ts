@@ -1,3 +1,25 @@
+const cvHeadings:any = [
+  {
+    text: "contact",
+    section: "phone",
+  },
+  {
+    text: "executive summary",
+    section: "summary",
+  },
+  {
+    text: "work experience",
+    section: "workExperienceArray",
+  },
+  {
+    text: "education",
+    section: "education",
+  },
+  {
+    text: "skills",
+    section: "primarySkills",
+  },
+];
 const components: any = {
   shortName: {
     styles:
@@ -204,4 +226,5 @@ const templateLayout: any = {
 export const template = {
   components,
   templateLayout,
+  cvHeadings
 };

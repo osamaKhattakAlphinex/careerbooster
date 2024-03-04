@@ -2,33 +2,66 @@
   box-sizing: border-box;
 }
 
-[data-name="phone"]::before {
-  content: "\260E";
+h2[data-name="phone"][data-type-heading="true"]::before {
+  content: url("/resume-icons/phone-icon.svg");
   font-family: "YourIconFontFamily", sans-serif;
-  font-size: var(--text);
+  font-size: 16px; /* Make sure --text is defined */
   color: #333;
-  position: relative;
-  top: 2px;
-  margin-right: 10px;
+  display: inline-block;
+  height: 16px !important;
+  width: 16px !important;
+  margin-right: 6px;
 }
-[data-name="email"]::before {
-  content: "\2709";
+h2[data-name="summary"][data-type-heading="true"]::before {
+  content: url("/resume-icons/summary-icon.svg");
   font-family: "YourIconFontFamily", sans-serif;
-  font-size: var(--text);
+  font-size: 16px; /* Make sure --text is defined */
   color: #333;
-  position: relative;
-  top: 2px;
-  margin-right: 10px;
+  display: inline-block;
+  height: 16px !important;
+  width: 16px !important;
+  margin-right: 6px;
 }
+h2[data-name="primarySkills"][data-type-heading="true"]::before {
+  content: url("/resume-icons/skills-icon.svg");
+  font-family: "YourIconFontFamily", sans-serif;
+  font-size: 16px; /* Make sure --text is defined */
+  color: #333;
+  display: inline-block;
+  height: 16px !important;
+  width: 16px !important;
+  margin-right: 6px;
+}
+h2[data-name="education"][data-type-heading="true"]::before {
+  content: url("/resume-icons/education-icon.svg");
+  font-family: "YourIconFontFamily", sans-serif;
+  font-size: 16px; /* Make sure --text is defined */
+  color: #333;
+  display: inline-block;
+  height: 16px !important;
+  width: 16px !important;
+  margin-right: 6px;
+}
+h2[data-name="workExperienceArray"][data-type-heading="true"]::before {
+  content: url("/resume-icons/work-experience-icon.svg");
+  font-family: "YourIconFontFamily", sans-serif;
+  font-size: 16px; /* Make sure --text is defined */
+  color: #333;
+  display: inline-block;
+  height: 16px !important;
+  width: 16px !important;
+  margin-right: 6px;
+}
+
 [data-primarySkills-index]::before {
   content: "\2022";
   font-family: "YourIconFontFamily", sans-serif;
   font-size: var(--text);
   color: #333;
-  position: relative;
-  top: 2px;
-  margin-right: 10px;
+  display: inline-block;
+  margin-right: 6px;
 }
+
 [data-achievements-index]::before {
   content: "\2022";
   font-family: "YourIconFontFamily", sans-serif;
