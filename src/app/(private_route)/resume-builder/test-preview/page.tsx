@@ -498,7 +498,7 @@ const Page = () => {
   }, [resumeData]);
   return (
     <div className="ml-[234px]">
-      <div ref={cvRef} className="cv-container text-[#000]"></div>
+      <div ref={cvRef} className="cv-container"></div>;
     </div>
   );
 };
