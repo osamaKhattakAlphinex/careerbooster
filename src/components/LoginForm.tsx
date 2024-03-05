@@ -154,7 +154,7 @@ const LoginForm = () => {
           Don{"'"}t have an account?{" "}
           <Link
             href="/register"
-            className="no-underline  text-[#6a4dff] dark:text-[#e6f85e]"
+            className="no-underline hover:underline text-[#6a4dff] dark:text-[#e6f85e]"
           >
             Sign Up for Free
           </Link>

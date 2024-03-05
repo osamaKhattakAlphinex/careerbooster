@@ -317,7 +317,7 @@ const RegistrationForm = () => {
               {!params?.get("file") && (
                 <>
                   {!isAuth && data === null && !content && (
-                    <label className="flex justify-center md:my-6">
+                    <label className="flex justify-center md:my-6 ">
                       <input
                         className="hidden"
                         type="file"
@@ -331,7 +331,7 @@ const RegistrationForm = () => {
                           {refreshIconRotating}
                         </div>
                       ) : (
-                        <div className="items-center w-fit cursor-pointer xs:scale-75 md:scale-100 gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg text-[1.125rem] font-medium ">
+                        <div className="items-center w-fit cursor-pointer xs:scale-75 md:scale-100 gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg text-[1.125rem] font-medium hover:bg-pink-600 hover:from-purple-800 hover:to-pink-600">
                           Upload Your Existing Resume
                         </div>
                       )}
@@ -648,7 +648,7 @@ const RegistrationForm = () => {
                 Already have an account?
                 <Link
                   href="/login"
-                  className="text-[#6a4dff]  no-underline dark:!text-[#e6f85e]"
+                  className="text-[#6a4dff]  no-underline hover:underline dark:!text-[#e6f85e]"
                 >
                   {" "}
                   Log in{" "}
