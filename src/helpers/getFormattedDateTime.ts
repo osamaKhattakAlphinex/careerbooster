@@ -33,4 +33,15 @@ export const getFormattedDate = (date: any, format: string = "") => {
       .join("  ");
     return formatted;
   }
+  if (format === "MM DD, YYYY") {
+    let a = [{ month: "long" }, { day: "2-digit" }, { year: "numeric" }];
+    let t = new Date(date);
+    let formatted = a
+      .map((m: any, index) => {
+        let f = new Intl.DateTimeFormat("en", m);
+        return f.format(t) + (index == 1 ? ", " : "");
+      })
+      .join(" ");
+    return formatted;
+  }
 };

@@ -33,7 +33,6 @@ const ResumeTemplate6 = ({
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
   const [color, setColor] = useState("#e04127");
-  const userData = useSelector((state: any) => state.userData);
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [regenerating, setRegenerating] = useState(false);
@@ -84,7 +83,6 @@ const ResumeTemplate6 = ({
   const saveColor = (color: ColorResult) => {
     // Access the selected color value from the 'color' parameter
     setColor(color.hex);
-
     // You can do whatever you need with the selected color here
   };
 
