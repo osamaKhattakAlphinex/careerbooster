@@ -3,35 +3,33 @@ const cvHeadings: any = [
     text: "contact",
     section: "phone",
     styles:
-      "font-semibold uppercase text-gray-950 flex items-center text-md border-t-2 border-b-2 py-0.5 w-full",
+      "font-semibold uppercase text-gray-100 bg-gray-950 flex items-center text-base py-0.5 w-full",
   },
   {
     text: "executive summary",
     section: "summary",
-
     styles:
-      "font-semibold uppercase text-gray-950 flex items-center text-md border-t-2 border-b-2 py-0.5 w-full",
+      "font-semibold uppercase text-gray-100 bg-gray-950 flex items-center text-base py-0.5 w-full",
   },
   {
     text: "work experience",
     section: "workExperienceArray",
-
     styles:
-      "font-semibold uppercase text-gray-950 flex items-center text-md border-t-2 border-b-2 py-0.5 w-full",
+      "font-semibold uppercase text-gray-100 bg-gray-950 flex items-center text-base py-0.5 w-full",
   },
   {
     text: "education",
     section: "education",
 
     styles:
-      "font-semibold uppercase text-gray-950 flex items-center text-md border-t-2 border-b-2 py-0.5 w-full",
+      "font-semibold uppercase text-gray-100 bg-gray-950 flex items-center text-base border-t-2 border-b-2 py-0.5 w-full",
   },
   {
     text: "skills",
     section: "primarySkills",
 
     styles:
-      "font-semibold uppercase text-gray-950 flex items-center text-md border-t-2 border-b-2 py-0.5 w-full",
+      "font-semibold uppercase text-gray-100 bg-gray-950 flex items-center text-md border-t-2 border-b-2 py-0.5 w-full",
   },
 ];
 const components: any = {
