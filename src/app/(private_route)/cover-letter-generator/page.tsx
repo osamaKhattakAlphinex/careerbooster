@@ -24,12 +24,14 @@ import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { useRouter } from "next/navigation";
+import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 
 export default function CoverLetterPage() {
   const componentRef = useRef<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
+
   const [show, setShow] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("profile"); // type
   const [streamedData, setStreamedData] = useState<string>("");
@@ -48,6 +50,8 @@ export default function CoverLetterPage() {
   const handleClick = () => {
     setIsEditing((prevState) => !prevState);
   };
+
+  let date = new Date();
 
   useEffect(() => {
     if (isEditing) {
@@ -344,7 +348,7 @@ export default function CoverLetterPage() {
                     //   setUploadPdfFile(e.target.value);
                     // }}
                     checked={selectedOption === "profile"}
-                    className="w-fit h-4"
+                    className="h-4 w-fit"
                   />
                   Use My Persona to write the Cover Letter
                 </label>
@@ -488,58 +492,55 @@ export default function CoverLetterPage() {
                   className="w-full px-8 py-6 bg-white rounded-2xl"
                   // onBlur={() => setIsEditing(false)}
                 >
-                  <div>
-                    <h1 className="uppercase text-[24px] text-gray-950 border-b border-gray-950 pb-2 font-semibold">
+                  <div className="pb-2 text-center border-b border-gray-950">
+                    <h1 className="uppercase text-[24px] text-gray-950 font-bold">
                       {userData.firstName + " " + userData.lastName}
                     </h1>
+                    <div className="flex flex-col text-sm text-gray-950">
+                      <ul className="flex flex-col gap-2">
+                        <li className="flex flex-row justify-center gap-2">
+                          <h2 className="font-semibold before:content-['Ph:'] before:mr-1 text-sm">
+                            {userData.phone}
+                          </h2>
+                          <h2 className="text-sm font-semibold before:content-['\2022'] before:mr-1">
+                            {userData.email}
+                          </h2>
+                        </li>
+                        <li>
+                          {userData.contact.street && (
+                            <span className="text-sm font-semibold">
+                              {userData.contact.street}
+                            </span>
+                          )}
+                          {userData.contact.cityState && (
+                            <span className="text-sm font-semibold before:content-[','] before:mr-1">
+                              {userData.contact.cityState}
+                            </span>
+                          )}
+                          {userData.contact.country && (
+                            <span className="text-sm font-semibold before:content-[','] before:mr-1">
+                              {userData.contact.country}
+                            </span>
+                          )}
+                          {userData.contact.postalCode && (
+                            <span className="text-sm font-semibold before:content-[','] before:mr-1">
+                              {userData.contact.postalCode}
+                            </span>
+                          )}
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                  <div className="flex flex-col pt-6 text-sm text-gray-950">
-                    <ul className="flex flex-col gap-2 mb-8">
-                      <li>
-                        <h2 className="text-base font-semibold">
-                          {`${userData.firstName} ${userData.lastName}`}
-                        </h2>
-                      </li>
-                      <li>
-                        <h2 className="text-base font-semibold">
-                          {userData.email}{" "}
-                        </h2>
-                      </li>
-                      <li>
-                        <h2 className="text-base font-semibold">
-                          {userData.phone}
-                        </h2>
-                      </li>
-                      <li>
-                        <h2 className="text-base font-semibold">
-                          {`${
-                            userData.contact.street === ""
-                              ? ""
-                              : userData.contact.street
-                          }  
-                            ${
-                              userData.contact.cityState === ""
-                                ? ""
-                                : ", " + userData.contact.cityState
-                            }
 
-                            ${
-                              userData.contact.country === ""
-                                ? ""
-                                : ", " + userData.contact.country
-                            }
-
-                            ${
-                              userData.contact.postalCode === ""
-                                ? ""
-                                : ", " + userData.contact.postalCode
-                            }
-                            `}
-                        </h2>
-                      </li>
-                    </ul>
-                    {/* <h4 className="mt-16 mb-8 ">[Today{"'"}s Date]</h4> */}
+                  <br />
+                  <div className="mt-4">
+                    <span className="text-sm font-semibold text-gray-950">
+                      {getFormattedDate(date, "MM DD, YYYY")}
+                    </span>
                   </div>
+                  <br />
+                  <br />
+
                   <div
                     className={`w-[100%] aigeneratedcoverletter flex flex-col gap-4  ${
                       msgLoading ? "animate-pulse" : ""
