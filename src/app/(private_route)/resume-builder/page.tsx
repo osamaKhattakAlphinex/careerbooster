@@ -342,7 +342,7 @@ const ResumeBuilder = () => {
   return (
     <>
       <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} />
-      <div className="fixed top-0 left-0 w-screen h-screen z-50 flex gap-4 flex-col bg-black/80 items-center justify-center">
+      {/* <div className="fixed top-0 left-0 w-screen h-screen z-50 flex gap-4 flex-col bg-black/80 items-center justify-center">
         <h1 className="xs:text-xl md:text-2xl font-semibold ">
           Choose your template
         </h1>
@@ -351,7 +351,7 @@ const ResumeBuilder = () => {
             templates={ALL_TEMPLATES.filter((template) => template.active)}
           />
         </div>
-      </div>
+      </div> */}
 
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]">

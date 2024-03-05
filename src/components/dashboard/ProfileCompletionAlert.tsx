@@ -45,7 +45,7 @@ const ProfileCompletionAlert = () => {
         </div>
 
         <Link
-          className="bg-yellow-400 cursor-pointer ml-4 font-bold text-stone-950 no-underline rounded-full lg:px-[28px] px-[20px] lg:py-[7px] py-[5px] lg:text-[14px] text-[12px] mx-[13px] flex flex-col mt-[10px] lg:mt-[0px] `"
+          className="bg-yellow-400 cursor-pointer ml-4 font-bold text-stone-950 no-underline rounded-full lg:px-[28px] px-[20px] lg:py-[7px] py-[5px] lg:text-[14px] text-[12px] mx-[13px] flex flex-col mt-[10px] lg:mt-[0px] hover:bg-yellow-500"
           href="/profile-review"
         >
           Complete now
