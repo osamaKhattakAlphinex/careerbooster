@@ -8,7 +8,6 @@ const Page = () => {
   const resumeData = useSelector((state: any) => state.resume);
   const cvRef = useRef<any>(null);
   const { components, templateLayout, cvHeadings } = template;
-  
 
   const GenerationOrder = [
     "shortName",
