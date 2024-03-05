@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { makeid } from "../helpers/makeid";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +6,6 @@ import { useSession } from "next-auth/react";
 import { setField, setUserData } from "@/store/userDataSlice";
 import { setId, setResume } from "@/store/resumeSlice";
 import { useAppContext } from "@/context/AppContext";
-import useGetUserData from "./useGetUserData";
 import { showSuccessToast } from "@/helpers/toast";
 
 const useSaveResumeToDB = () => {
@@ -32,17 +30,18 @@ const useSaveResumeToDB = () => {
         resumeData: obj,
       })
       .then(async (resp) => {
-        showSuccessToast("Resume Update Successfully");
+        showSuccessToast("Resume Updated Successfully");
+
         if (userData.trialResume === false) {
           dispatch(setUserData({ trialResume: true }));
           axios
-            .post("/api/users/updateUserData", {
-              data: {
-                email: userData.email,
-                trialResume: true,
-              },
-            })
-            .then(() => {
+          .post("/api/users/updateUserData", {
+            data: {
+              email: userData.email,
+              trialResume: true,
+            },
+          })
+          .then(() => {
               setAvailableCredits(true);
             });
         } else {
@@ -68,13 +67,9 @@ const useSaveResumeToDB = () => {
           dispatch(setField({ name: "userPackageData", value: userPackage }));
         }
 
-        // show alert for 2 seconds using setTimeout
-        // setShowAlert(true);
-        setTimeout(() => {
-          // setShowAlert(false);
-        }, 1000);
+
       });
-    // });
+  
   };
 
   return { saveResumeToDB };

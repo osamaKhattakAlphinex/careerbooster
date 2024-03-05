@@ -98,11 +98,7 @@ const LinkedInAboutCardSingle = ({
           className="px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
         >
           {eyeIcon}
-          {pathname == "/dashboard" ? (
-            <span className="text-[13px] mx-2 text-neutral-400">View</span>
-          ) : (
-            ""
-          )}
+          <span className="text-[13px] mx-2 text-neutral-400">View</span>
         </button>
         <button
           type="button"
@@ -110,11 +106,7 @@ const LinkedInAboutCardSingle = ({
           className="px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
         >
           {trashIcon}
-          {pathname == "/dashboard" ? (
-            <span className="text-[13px] mx-2 text-neutral-400">Delete</span>
-          ) : (
-            ""
-          )}
+          <span className="text-[13px] mx-2 text-neutral-400">Delete</span>
         </button>
       </div>
       {confirmationModal && (

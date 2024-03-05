@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
-import ResumeTemplate1 from "@/components/dashboard/resume-templates/templates/template_1";
 import ResumeTemplate6 from "@/components/dashboard/resume-templates/templates/template_6";
 import { useDispatch, useSelector } from "react-redux";
 import { WorkExperience, setUserData } from "@/store/userDataSlice";
@@ -19,7 +18,7 @@ import {
   // setLoadingState,
 } from "@/store/resumeSlice";
 
-import { checkIconSmall, leftArrowIcon } from "@/helpers/iconsProvider";
+import { checkIconSmall, crossIcon, leftArrowIcon } from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
 import RecentResumeCard from "@/components/dashboard/resume-builder/RecentResumeCard";
 import GenerateResume from "@/components/dashboard/resume-builder/GenerateNewResumeCard";
@@ -33,10 +32,13 @@ import { fetchLIstOfStrings } from "@/helpers/fetchLIstOfStrings";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import CreditInfoModal from "@/components/dashboard/resume-builder/CreditsInfoModal";
+import Templates from "@/components/dashboard/resume-templates";
+import TemplateSlider from "@/components/dashboard/resume-templates/templateSlider";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [showTemplatePopup,setShowTemplatePopup] = useState(false);
   const confettiConfig = {
     angle: 90,
     spread: 360,
@@ -55,6 +57,7 @@ const ResumeBuilder = () => {
     setConfettiRunning(true);
     setTimeout(() => {
       setConfettiRunning(false);
+      setShowTemplatePopup(true);
     }, 3000); // Adjust the duration as needed
   };
 
@@ -68,6 +71,7 @@ const ResumeBuilder = () => {
   const [streamedJDData, setStreamedJDData] = useState<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [firstLoad,setFirstLoad] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const { saveResumeToDB } = useSaveResumeToDB();
   // Redux
@@ -318,8 +322,11 @@ const ResumeBuilder = () => {
 
   useEffect(() => {
     if (!resumeData.state.resumeLoading && resumeData?.name) {
-      // saveResumeToDB();
+      if(firstLoad){
+        saveResumeToDB();
+      }
       setFinished(true);
+      setFirstLoad(true)
     }
   }, [resumeData?.state?.resumeLoading]);
 
@@ -340,6 +347,33 @@ const ResumeBuilder = () => {
   return (
     <>
       <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} />
+      {showTemplatePopup && 
+      
+      <div className="fixed top-0 left-0 flex w-screen h-screen z-50 bg-black/90 items-center justify-center">
+       <div className="flex gap-4 flex-col bg-gray-800 py-4 rounded-lg">
+
+       <div className="flex items-center justify-between px-4 w-full">
+
+        <h1 className="xs:text-xl md:text-2xl font-semibold ">
+          Choose Your Template
+        </h1>
+        <h1 className="xs:text-xl md:text-2xl font-semibold cursor-pointer" onClick={()=>setShowTemplatePopup(false)}>
+          {crossIcon}
+        </h1>
+       </div>
+       <div className="px-4">
+        <p>
+          You can explore our templates and choose accordingly
+        </p>
+       </div>
+        <div className=" xs:w-[300px] md:w-[44rem] lg:w-[55rem] xl:w-[55rem] rounded-xl z-50">
+          <TemplateSlider
+            templates={ALL_TEMPLATES.filter((template) => template.active)}
+          />
+        </div>
+       </div>
+      </div>
+      }
 
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]">
