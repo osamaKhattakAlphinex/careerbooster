@@ -47,24 +47,11 @@ export async function POST(req: any) {
             userEmail: email,
         };
         await postJobDescriptions(payload);
-        if (trainBotData) {
-            let entry: TrainBotEntryType = {
-                entryId: jobDescriptionId,
-                type: "linkedin.jobDescription",
-                input: inputPrompt,
-                output: "out",
-                idealOutput: "",
-                status: "pending",
-                userEmail: email,
-                fileAddress: "",
-                Instructions: `Write Job Descriptions for ${personName} at different companies`,
-            };
-            await makeTrainedBotEntry(entry);
-            return NextResponse.json(
-                { success: true },
-                { status: 200 }
-            );
-        }
+       
+        return NextResponse.json(
+            { success: true },
+            { status: 200 }
+        );
     } catch (err) {
         return NextResponse.json(
             { result: "something went wrong", success: false },
