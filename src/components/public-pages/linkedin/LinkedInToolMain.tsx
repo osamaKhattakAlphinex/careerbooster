@@ -170,15 +170,17 @@ const LinkedInToolMain = () => {
           </div>
         )}
         <div
-          className="flex justify-center pt-10 pb-14 lg:pb-20"
-          onClick={() =>
+          className=" flex justify-center pt-10 pb-14 lg:pb-20"
+         
+        >
+          <span
+           onClick={() =>
             window.scrollTo({
               top: document.documentElement.scrollHeight,
               behavior: "smooth",
             })
           }
-        >
-          <span className="py-2 text-center text-indigo-500 border-indigo-500 lg:mt-4 rounded-t-2xl rounded-b-2xl border-1 animate-bounce">
+          className="cursor-pointer w-20 py-2 flex justify-center text-indigo-500 border-indigo-500 lg:mt-4 rounded-t-2xl rounded-b-2xl border-1 animate-bounce">
             {ArrowDownIcon}
           </span>
         </div>

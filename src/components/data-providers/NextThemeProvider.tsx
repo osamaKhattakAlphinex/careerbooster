@@ -24,7 +24,7 @@ const NextThemeProvider = ({ children }: any) => {
           }}
         />
 
-        <ThemeProvider attribute="class" enableSystem={true}>
+        <ThemeProvider attribute="class" defaultTheme="dark">
           {children}
         </ThemeProvider>
       </body>

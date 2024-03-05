@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import { slugify } from "@/helpers/slugify";
 import copy from "clipboard-copy";
 import { clipboardIcon, refreshIconRotating } from "@/helpers/iconsProvider";
@@ -50,6 +50,22 @@ const LinkedInUploadPDFResume = () => {
   const [isSummaryCopied, setIsSummaryCopied] = useState(false);
   const [isHeadlineEditing, setIsHeadlineEditing] = useState(false);
   const [isSummaryEditing, setIsSummaryEditing] = useState(false);
+const textareaRef = useRef<any>(null);
+  useEffect(() => {
+    // if (value !== editedValue) {
+    //   setEditedValue(normalizeValue(value));
+    // }
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + "px";
+    }
+    // if (inputRef.current) {
+    //   inputRef.current.style.width = "auto"; // Reset width to auto
+    //   inputRef.current.style.width = `${inputRef.current.scrollWidth - 30}px`; // Set width to scrollWidth
+    // }
+  }, [ isSummaryEditing]);
 
   const linkedinHeadline = async (linkedinContent: string) => {
     setStreamedHeadlineData("");
@@ -351,7 +367,8 @@ const LinkedInUploadPDFResume = () => {
                 <>
                   {isHeadlineEditing ? (
                     <textarea
-                      className="tracking-wider md:p-3 border-2 box lg:p-8 rounded-2xl border-gray-700 text-white"
+                      ref={textareaRef}
+                      className="bg-gray-950 tracking-wider md:p-3 border-2 box lg:p-8 rounded-2xl border-gray-700 text-white"
                       value={streamedHeadlineData}
                       onChange={(e) => {
                         setStreamedHeadlineData(e.target.value);
@@ -410,7 +427,7 @@ const LinkedInUploadPDFResume = () => {
                       </Button>
                       <Button
                         type="button"
-                        className="border-2 border-gray-700   rounded-full headlin-copy-btn px-6 py-2 hover:bg-gray-700 hover:text-white flex gap-2"
+                        className="border-2 flex justify-center items-center border-gray-700   rounded-full headlin-copy-btn px-6 py-2 hover:bg-gray-700 hover:text-white gap-2"
                         onClick={copyText}
                       >
                         {clipboardIcon}
@@ -437,15 +454,14 @@ const LinkedInUploadPDFResume = () => {
                 <>
                   {isSummaryEditing ? (
                     <textarea
-                      className="tracking-wider border-2 box lg:p-8 rounded-2xl border-gray-700 text-white"
+                    ref={textareaRef}
+                      className="bg-gray-950 tracking-wider border-2 lg:p-8 rounded-2xl border-gray-900 text-white"
                       value={streamedAboutData}
                       onChange={(e) => {
                         setStreamedAboutData(e.target.value);
                         setIsSummaryCopied(false);
                       }}
                       autoFocus
-                      rows={10}
-                      cols={50}
                       onBlur={() => {
                         setIsSummaryEditing(false);
                         setIsSummaryCopied(false);

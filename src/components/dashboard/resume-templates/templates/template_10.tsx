@@ -146,7 +146,7 @@ const ResumeTemplate10 = () => {
       <div className="flex ">
         {/* sidebar */}
         <div
-          className="z-5    xs:w-4/12 w-3.5/12 flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6  text-gray-100  pr-6  pb-8  pt-[160px] h-auto"
+          className="z-5 xs:w-4/12 w-3.5/12 flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6  text-gray-100  pr-6  pb-8  pt-[160px] h-auto"
           style={{ backgroundColor: color_second }}
         >
           <div className="absolute top-0 left-0 z-20 xs:w-3/12 ">

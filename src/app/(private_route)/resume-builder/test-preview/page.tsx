@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { template } from "@/components/dashboard/resume-templates/static-templates/template-1";
+import { template } from "@/components/dashboard/resume-templates/static-templates/template-3";
 import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
 const Page = () => {
@@ -140,7 +140,7 @@ const Page = () => {
     let height = 0;
     let margins = 0;
     if (checking === "before") {
-      height = 40;
+      height = 50;
     }
     let getBody = page.querySelector('div[data-container-name="body"]');
     if (getBody) {
@@ -474,10 +474,8 @@ const Page = () => {
             [{ name: item.section }, { "type-heading": true }],
             heading
           );
-          setStylesToElement(
-            heading,
-            "font-semibold uppercase text-gray-950 flex items-center text-md border-t-2 border-b-2 py-0.5 w-full"
-          );
+          const style = item.styles;
+          setStylesToElement(heading, style);
 
           spans.splice(index, 0, heading);
           found = true; // Set the flag to true when the condition is met

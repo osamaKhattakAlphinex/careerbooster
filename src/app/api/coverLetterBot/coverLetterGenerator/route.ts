@@ -85,7 +85,7 @@ export async function POST(req: any) {
       }
     }
     const inputPrompt = `Following are the content of the resume (in JSON format): 
-            JSON user/resume data: ${type === "file" ? fileContent : userData}
+            JSON user/resume data: ${type === "file" ? fileContent : JSON.stringify(userData)}
   
             this is the prompt:
             ${prompt}

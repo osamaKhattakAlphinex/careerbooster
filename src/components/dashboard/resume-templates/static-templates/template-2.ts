@@ -2,22 +2,27 @@ const cvHeadings:any = [
   {
     text: "contact",
     section: "phone",
+    styles:""
   },
   {
     text: "executive summary",
     section: "summary",
+    styles:""
   },
   {
     text: "work experience",
     section: "workExperienceArray",
+    styles:""
   },
   {
     text: "education",
     section: "education",
+    styles:""
   },
   {
     text: "skills",
     section: "primarySkills",
+    styles:""
   },
 ];
 const components: any = {
