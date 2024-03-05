@@ -166,12 +166,12 @@ const HeroArea = () => {
                     moves.
                   </li>
                   <li>
-                    Companies wait for the perfect moment to shout 'checkmate'
+                    Companies wait for the perfect moment to shout {"'"}checkmate{"'"}
                     before revealing their next big move.
                   </li>
                   <li>
-                    This hushhush approach keeps the market's prying eyes at bay
-                    and the company's cards close to its chest.
+                    This hushhush approach keeps the market{"'"}s prying eyes at bay
+                    and the company{"'"}s cards close to its chest.
                   </li>
                   <li>
                     The recent success of OpenAI is a great example; they hired
@@ -224,13 +224,13 @@ const HeroArea = () => {
             className={`flex text-[10px] md:text-[13px] lg:text-[18px]  flex-col text-gray-800 dark:text-gray-300  gap-4 xs:px-5 md:px-3 lg:px-4 my-4 `}
           >
             <li className={`  ${roboto.className}`}>
-              It's reported by <strong>Forbes</strong> that a whopping 90% of
+              It{"'"}s reported by <strong>Forbes</strong> that a whopping 90% of
               recruiters use LinkedIn not just to peek into a candidate’s career
               window, but to invite them into exclusive job opportunities.
             </li>
             <li className={` ${roboto.className}`}>
               The LinkedIn that headhunters navigate is not the one we know.
-              It's turbocharged with features designed for the eagle-eyed
+              It{"'"}s turbocharged with features designed for the eagle-eyed
               recruiter:
             </li>
           </ul>
@@ -292,24 +292,24 @@ const HeroArea = () => {
             <h1
               className={`xs:text-[17px] md:text-[27px] lg:text-[40px] text-center xs:px-[5px]   text-[#fdb34b] ${montserrat_thin.className}`}
             >
-              <strong>Why Your LinkedIn Profile Isn't </strong>
+              <strong>Why Your LinkedIn Profile Isn{"'"}t </strong>
             </h1>
             <h1
               className={`xs:text-[17px]  md:text-[27px] lg:text-[40px] text-center xs:px-[5px]  text-[#fdb34b] ${montserrat_thin.className}`}
             >
-              <strong>Catching Recruiters' Attention?</strong>
+              <strong>Catching Recruiters{"'"} Attention?</strong>
             </h1>
           </div>
           <div
             className={`xs:text-[12px]  md:text-[13px] dark:text-gray-300 text-gray-800 lg:text-[18px] container mx-auto flex flex-col xs:gap-2 pt-5 md:pt-10 px-5 ${roboto.className}`}
           >
             <p className="xs:px-0 md:px-3 lg:px-4">
-              You've climbed the career ladder, your LinkedIn profile chronicles
+              You{"'"}ve climbed the career ladder, your LinkedIn profile chronicles
               a decade or more of success, yet the offers from headhunters are
-              scarce—or they don't match the stature of the roles you aspire to.
+              scarce—or they don{"'"}t match the stature of the roles you aspire to.
             </p>
             <p className="xs:px-0 md:px-3 lg:px-4">
-              If your digital presence isn't generating the right buzz, it boils
+              If your digital presence isn{"'"}t generating the right buzz, it boils
               down to two critical factors:
             </p>
           </div>
@@ -325,7 +325,7 @@ const HeroArea = () => {
           >
             <p className="xs:px-0 md:px-3 lg:px-4">
               Your profile might lack the keyword optimization that acts as a
-              beacon for recruiters. Without this, you're similar to a stealth
+              beacon for recruiters. Without this, you{"'"}re similar to a stealth
               jet on LinkedIn— impressive, but undetectable.
             </p>
             <p className="xs:px-0 md:px-3 lg:px-4">
@@ -358,15 +358,15 @@ const HeroArea = () => {
             </strong>
             <p className="xs:px-0 md:px-3 lg:px-4">
               You become just another face in the crowd. To truly stand out,
-              it's essential to dive deeper. The goal is to identify and
+              it{"'"}s essential to dive deeper. The goal is to identify and
               incorporate unique, role-specific keywords that not only resonate
               with your personal brand but also align precisely with the
               positions you aspire to.
             </p>
             <p className="xs:px-0 md:px-3 lg:px-4">
               Adopting this strategy can greatly increase your chances of
-              attracting recruiters' attention and distinctly position you for
-              the roles you're seeking.
+              attracting recruiters{"'"} attention and distinctly position you for
+              the roles you{"'"}re seeking.
             </p>
           </div>
         </div>
