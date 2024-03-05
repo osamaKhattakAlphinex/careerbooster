@@ -260,22 +260,23 @@ const SubAboutGenerator = () => {
         </button>
       </div>
       {streamedData && (
-        <div className="rounded border-[1px] border-gray-500 mb-4 p-4">
-          <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
+        <div className="bg-white text-gray-900 rounded border-[1px] border-gray-500 mb-4 p-4">
+          <h1 className="text-4xl font-bold text-gray-900  mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
               AI Response{" "}
             </span>
           </h1>
           <div
-            className="font-sans dark:text-gray-100 text-gray-950 whitespace-pre-wrap break-words"
+            className="font-sans text-gray-950 whitespace-pre-wrap break-words"
             // style={{ textW: "auto" }}
           >
             {streamedData}
-            <div className="flex flex-row xs:flex-col md:flex-row">
+           
+
               <button
                 disabled={msgLoading}
                 onClick={() => copyAbout(streamedData)}
-                className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border-[1px] rounded-full ${
+                className={`xs:flex-1 flex gap-2 items-center mt-4 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                   msgLoading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
@@ -302,6 +303,8 @@ const SubAboutGenerator = () => {
                     : "Copy to clipboard"}
                 </span>
               </button>
+            
+            <div className="flex flex-row xs:flex-col md:flex-row">
               {option !== "about" && (
                 <button
                   type="button"

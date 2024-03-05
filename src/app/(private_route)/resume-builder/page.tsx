@@ -38,7 +38,7 @@ import TemplateSlider from "@/components/dashboard/resume-templates/templateSlid
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [showTemplatePopup,setShowTemplatePopup] = useState(true);
+  const [showTemplatePopup,setShowTemplatePopup] = useState(false);
   const confettiConfig = {
     angle: 90,
     spread: 360,

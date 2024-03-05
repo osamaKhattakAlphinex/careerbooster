@@ -508,17 +508,17 @@ export default function CoverLetterPage() {
                         </li>
                         <li>
                           {userData.contact.street && (
-                            <span className="text-sm font-semibold">
+                            <span className="text-sm font-semibold after:content-[','] after:mr-1">
                               {userData.contact.street}
                             </span>
                           )}
                           {userData.contact.cityState && (
-                            <span className="text-sm font-semibold before:content-[','] before:mr-1">
+                            <span className="text-sm font-semibold after:content-[','] after:mr-1">
                               {userData.contact.cityState}
                             </span>
                           )}
                           {userData.contact.country && (
-                            <span className="text-sm font-semibold before:content-[','] before:mr-1">
+                            <span className="text-sm font-semibold">
                               {userData.contact.country}
                             </span>
                           )}
