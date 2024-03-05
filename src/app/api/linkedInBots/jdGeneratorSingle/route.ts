@@ -11,6 +11,7 @@ import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 import { updateToolUsage } from "@/helpers/updateToolUsage";
 import { encodingForModel } from "js-tiktoken";
 import { updateUserTokens } from "@/helpers/updateUserTokens";
+import { TrainBotEntryType, makeTrainedBotEntry } from "@/helpers/makeTrainBotEntry";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -30,6 +31,8 @@ export async function POST(req: any) {
   try {
     const reqBody = await req.json();
     const experience = reqBody?.experience;
+    const trainBotData = reqBody?.trainBotData;
+    const jobDescriptionId = reqBody?.jobDescriptionId;
     const personName = reqBody?.personName;
     const dataset = "linkedin.jobDescription";
     const model = await getTrainedModel(dataset);
@@ -89,6 +92,20 @@ export async function POST(req: any) {
         completionTokens += tokenList.length;
       },
       onFinal: async (completions) => {
+        if (trainBotData) {
+          let entry: TrainBotEntryType = {
+              entryId: jobDescriptionId,
+              type: "linkedin.jobDescription",
+              input: inputPrompt,
+              output: completions,
+              idealOutput: "",
+              status: "pending",
+              userEmail: email,
+              fileAddress: "",
+              Instructions: `Write Job Descriptions for ${personName} at different companies`,
+          };
+          await makeTrainedBotEntry(entry);
+      }
         if (completionTokens > 0) {
           await updateUserTokens(email, completionTokens);
         }

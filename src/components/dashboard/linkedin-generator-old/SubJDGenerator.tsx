@@ -72,9 +72,9 @@ const SubJDGenerator = () => {
       let tempText = "";
       for (const [index, experience] of experiences.entries()) {
         let html = "";
-        html += `<h4><strong>${experience?.jobTitle}</strong></h4>`;
-        html += `<h5>${experience?.company} | ${experience?.cityState} ${experience?.country}</h5>`;
-        html += `<p>${experience?.fromMonth} ${experience?.fromYear} to ${
+        html += `<h2 class="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">${experience?.jobTitle}</h2>`;
+        html += `<h3 class="text-base font-semibold">${experience?.company} | ${experience?.cityState} ${experience?.country}</h3>`;
+        html += `<p class="text-sm font-semibold">${experience?.fromMonth} ${experience?.fromYear} to ${
           experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
@@ -83,7 +83,10 @@ const SubJDGenerator = () => {
         setStreamedData((prev) => prev + html);
         tempText += html;
         setMsgLoading(true);
+        const jobDescriptionId = makeid();
         const obj: any = {
+          jobDescriptionId: jobDescriptionId,
+
           personName: userData.firstName + " " + userData.lastName,
 
           creditsUsed: creditLimits.linkedin_individualWorkExperience,
@@ -113,6 +116,16 @@ const SubJDGenerator = () => {
             setStreamedData((prev) => prev + text);
             tempText += text;
           }
+          
+        if (index === experiences.length - 1) {
+          showSuccessToast("Job Description generated successfully");
+        }
+        } else {
+          setStreamedData("You ran out of Credits!");
+          showErrorToast("You ran out of credits!")
+          setMsgLoading(false)
+          break
+          
         }
         setStreamedData((prev) => prev + `</div> <br /> `);
         setStreamedData((prev) => prev.replace("```html", ""));
@@ -123,9 +136,8 @@ const SubJDGenerator = () => {
         setMsgLoading(false);
 
         if (index === experiences.length - 1) {
-          showSuccessToast("Job Description generated successfully");
+          
 
-          const jobDescriptionId = makeid();
           const jdObj = {
             jobDescriptionId: jobDescriptionId,
             personName: userData.firstName + " " + userData.lastName,
@@ -303,24 +315,26 @@ const SubJDGenerator = () => {
           </button>
         </div>
         {streamedData && (
-          <div className=" mb-4 border-gray-500  rounded border-[1px] p-4">
-            <h1 className="mb-4 text-4xl font-extrabold text-gray-900">
+          <div  className=" bg-white text-gray-900 mb-4 border-gray-500  rounded border-[1px] p-8">
+            <h1 className="mb-4 text-4xl font-bold text-gray-900">
               <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
                 AI Response{" "}
               </span>
             </h1>
             <div
-              className="ml-2 font-sans dark:text-gray-300  text-gray-800 break-words"
+              className="ml-2 font-sansbreak-words"
               // style={{ textW: "auto" }}
             >
               <div
                 className="list-disc"
                 dangerouslySetInnerHTML={{ __html: streamedData }}
               ></div>
+
+              {msgLoading && 
               <button
                 disabled={msgLoading}
                 onClick={() => copyJD(streamedData)}
-                className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border-[1px] rounded-full ${
+                className={`xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                   msgLoading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
@@ -339,7 +353,7 @@ const SubJDGenerator = () => {
                   />
                 </svg>
 
-                <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
+                <span className="text-sm dark:text-gray-100 text-gray-950">
                   {msgLoading
                     ? "Please wait..."
                     : isJDCopied
@@ -347,6 +361,7 @@ const SubJDGenerator = () => {
                     : "Copy to clipboard"}
                 </span>
               </button>
+              }
             </div>
           </div>
         )}
