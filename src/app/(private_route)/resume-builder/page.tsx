@@ -52,7 +52,6 @@ const ResumeBuilder = () => {
 
   const runConfetti = () => {
     showSuccessToast("Generated Successfully");
-
     setConfettiRunning(true);
     setTimeout(() => {
       setConfettiRunning(false);
@@ -319,7 +318,7 @@ const ResumeBuilder = () => {
 
   useEffect(() => {
     if (!resumeData.state.resumeLoading && resumeData?.name) {
-      saveResumeToDB();
+      // saveResumeToDB();
       setFinished(true);
     }
   }, [resumeData?.state?.resumeLoading]);
@@ -492,7 +491,7 @@ const ResumeBuilder = () => {
                   }`}
                   ref={componentRef}
                 >
-                  <ResumeTemplate1
+                  <ResumeTemplate6
                     streamedSummaryData={streamedSummaryData}
                     streamedJDData={streamedJDData}
                     setStreamedJDData={setStreamedJDData}

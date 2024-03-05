@@ -204,5 +204,5 @@ const templateLayout: any = {
 export const template = {
   components,
   templateLayout,
-  cvHeadings
+  cvHeadings,
 };

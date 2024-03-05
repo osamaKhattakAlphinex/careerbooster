@@ -172,8 +172,8 @@ const ResumeTemplate1 = ({
             {contactIcon}
             Contact
           </h3>
-          <ul className="flex flex-row justify-between pl-0 mb-4  break-all xs:flex-col md:flex-row text-sm ">
-            <li className="flex flex-row items-center gap-1  hover:shadow-md hover:bg-gray-100">
+          <ul className="flex flex-row justify-between pl-0 mb-4 text-sm break-all xs:flex-col md:flex-row ">
+            <li className="flex flex-row items-center gap-1 hover:shadow-md hover:bg-gray-100">
               {phoneIcon}
               <EditableField
                 value={
@@ -188,7 +188,7 @@ const ResumeTemplate1 = ({
                 }}
               />
             </li>
-            <li className="flex flex-row items-center gap-1  hover:shadow-md hover:bg-gray-100">
+            <li className="flex flex-row items-center gap-1 hover:shadow-md hover:bg-gray-100">
               {emailIcon}
               <EditableField
                 value={
@@ -203,7 +203,7 @@ const ResumeTemplate1 = ({
                 }}
               />
             </li>
-            <li className="flex flex-row items-center gap-1  text-blue-600 hover:shadow-md hover:bg-gray-100">
+            <li className="flex flex-row items-center gap-1 text-blue-600 hover:shadow-md hover:bg-gray-100">
               {/* <a
                 href={
                   resume?.contact?.linkedIn
@@ -344,7 +344,7 @@ const ResumeTemplate1 = ({
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
                     <div className="relative border-2 border-transparent group hover:border-dashed hover:border-gray-500">
-                      <li className="flex items-center justify-between font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:bg-gray-100 text-base">
+                      <li className="flex items-center justify-between text-base font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:bg-gray-100">
                         <EditableField
                           type="textarea"
                           rows={2}
@@ -555,7 +555,7 @@ const ResumeTemplate1 = ({
                           }}
                         />
                       </h2>
-                      <h2 className="text-sm font-semibold hover:cursor-default flex gap-2">
+                      <h2 className="flex gap-2 text-sm font-semibold hover:cursor-default">
                         {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue
                           ? "Present"

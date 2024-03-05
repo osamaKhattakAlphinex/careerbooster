@@ -17,7 +17,17 @@ import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
 import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
-const ResumeTemplate6 = () => {
+const ResumeTemplate6 = ({
+  streamedSummaryData,
+  setStreamedSummaryData,
+  streamedJDData,
+  setStreamedJDData,
+}: {
+  streamedSummaryData: string;
+  streamedJDData: string;
+  setStreamedJDData: any;
+  setStreamedSummaryData: any;
+}) => {
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
@@ -32,9 +42,9 @@ const ResumeTemplate6 = () => {
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
-  const [streamedSummaryData, setStreamedSummaryData] = useState("");
+  // const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
-  const [streamedJDData, setStreamedJDData] = useState<any>("");
+  // const [streamedJDData, setStreamedJDData] = useState<any>("");
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
 
   const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
@@ -148,7 +158,7 @@ const ResumeTemplate6 = () => {
                 }}
               />
             </li>
-            <li className=" hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center justify-start text-xs ">
+            <li className="flex flex-row items-center justify-start gap-1 text-xs hover:shadow-md hover:bg-gray-100">
               <div className="p-1">
                 <svg
                   width="16"
@@ -354,7 +364,7 @@ const ResumeTemplate6 = () => {
                             }}
                           />
                         </h2>
-                        <h2 className="text-xs font-semibold leading-relaxed hover:cursor-default flex gap-2 ">
+                        <h2 className="flex gap-2 text-xs font-semibold leading-relaxed hover:cursor-default ">
                           {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                           {rec?.isContinue
                             ? "Present"
@@ -490,7 +500,7 @@ const ResumeTemplate6 = () => {
 
                           {newWorkExperience === i ? (
                             <>
-                              <div className="w-full gap-1  flex flex-wrap mt-4">
+                              <div className="flex flex-wrap w-full gap-1 mt-4">
                                 <input
                                   className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
                                   onChange={(e) =>
@@ -512,9 +522,9 @@ const ResumeTemplate6 = () => {
                                     }
                                   }}
                                 />
-                                <div className="my-2 w-full flex gap-2">
+                                <div className="flex w-full gap-2 my-2">
                                   <button
-                                    className="bg-green-500 w-1/12 xs:w-full md:w-1/12 lg:w-1/12 rounded-md  h-9 text-white "
+                                    className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
                                     onClick={() => {
                                       // Save the new achievement to the state and possibly the database
                                       handlers.handleAddAchivement(
@@ -531,7 +541,7 @@ const ResumeTemplate6 = () => {
                                       setNewAchievement("");
                                       setNewWorkExperience(-1);
                                     }}
-                                    className="bg-red-500 w-1/12 xs:w-full md:w-1/12 lg:w-1/12 rounded-md py-1 text-white"
+                                    className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
                                   >
                                     Cancel
                                   </button>
@@ -615,7 +625,7 @@ const ResumeTemplate6 = () => {
                           </li>
                           {(education.fromYear !== "" ||
                             education.toYear !== "") && (
-                            <li className="mb-4 flex text-xs italic text-gray-700">
+                            <li className="flex mb-4 text-xs italic text-gray-700">
                               {education.fromMonth && (
                                 <EditableField
                                   rows={2}
