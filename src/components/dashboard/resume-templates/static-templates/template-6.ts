@@ -3,27 +3,36 @@ const cvHeadings: any = [
       text: "",
       section: "phone",
       styles: "",
+      attributes: [],
     },
     {
       text: "executive summary",
       section: "summary",
       styles: "font-semibold border-t-2 border-b-2 border-gray-950 mt-2 uppercase text-base text-gray-950 py-0.5",
+      attributes: [],
+
     },
     {
       text: "work experience",
       section: "workExperienceArray",
       styles: "font-semibold uppercase border-t-2 border-b-2 border-gray-950 text-md text-gray-950 py-0.5",
+      attributes: [],
+
     },
     {
       text: "education",
       section: "education",
       styles: "font-semibold border-t-2 border-b-2 border-gray-950 mt-2 w-full uppercase text-md text-gray-950 py-0.5",
+      attributes: [],
+
     },
     {
       text: "skills",
       section: "primarySkills",
       styles:
         "font-semibold uppercase border-t-2 border-b-2 border-gray-950 text-base py-0.5 w-full text-gray-950 before:block",
+      attributes: [],
+
     },
   ];
 
@@ -140,7 +149,7 @@ const cvHeadings: any = [
       ],
     },
     primarySkills: {
-      styles: "text-xs inline-block w-1/3",
+      styles: "text-xs text-gray-950 inline-block w-1/3",
       tag: "span",
     },
     summary: { styles: "text-justify mb-4 text-xs text-gray-950", tag: "span" },
@@ -178,7 +187,7 @@ const cvHeadings: any = [
         {
           id: "achievements",
           styles:
-            "text-sm text-justify text-gray-950 pb-1 before:content-['\\2022'] before:mr-2",
+            "text-sm flex text-justify text-gray-950 pb-1 before:content-['\\2022'] before:mr-2",
           tag: "span",
         },
       ],
