@@ -1,12 +1,26 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { template } from "@/components/dashboard/resume-templates/static-templates/template-3";
 import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
+import { useSearchParams } from "next/navigation";
+import { getTemplates } from "@/components/dashboard/resume-templates/static-templates";
 const Page = () => {
-  const resumeData = useSelector((state: any) => state.resume);
+  const params = useSearchParams();
+  const templateId: number = parseInt(params.get("templateId") || "0");
+  const resumeId: string = params.get("resumeId") || "";
+  let resumeData = useSelector((state: any) => state.resume);
+  const userData = useSelector((state: any) => state.userData);
   const cvRef = useRef<any>(null);
+  let template: any;
+  template = getTemplates(templateId);
+  useEffect(() => {
+    if (resumeData.id === "") {
+      resumeData = userData.resumes.find(
+        (resume: any) => resume.id === resumeId
+      );
+    }
+  }, [templateId, resumeId]);
   const { components, templateLayout, cvHeadings } = template;
 
   const GenerationOrder = [
