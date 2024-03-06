@@ -3,21 +3,21 @@ const cvHeadings: any = [
     text: "contact",
     section: "phone",
     styles:
-      "font-semibold uppercase text-gray-100 px-3 flex items-center text-base py-0.5 w-full border-b-2 border-white",
+      "font-semibold uppercase text-gray-100 flex items-center text-base py-0.5 w-full border-b-2 border-white",
     attributes: [{ "icon-color": "white" }],
   },
   {
     text: "executive summary",
     section: "summary",
     styles:
-      "font-semibold uppercase text-gray-950 px-3 flex items-center text-base py-0.5 w-full",
+      "font-semibold uppercase text-gray-950 flex items-center text-base py-0.5 w-full",
     attributes: [{ "icon-color": "black" }],
   },
   {
     text: "work experience",
     section: "workExperienceArray",
     styles:
-      "font-semibold uppercase text-gray-950 px-3 flex items-center text-base py-0.5 w-full",
+      "font-semibold uppercase text-gray-950 flex items-center text-base py-0.5 w-full",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -25,14 +25,14 @@ const cvHeadings: any = [
     section: "education",
     attributes: [{ "icon-color": "black" }],
     styles:
-      "font-semibold uppercase text-gray-950 px-3 flex items-center text-base py-0.5 w-full",
+      "font-semibold uppercase text-gray-950 flex items-center text-base py-0.5 w-full",
   },
   {
     text: "skills",
     section: "primarySkills",
-    attributes: [{ "icon-color": "black" }],
+    attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-gray-100 px-3 flex items-center text-md border-b-2 border-white py-0.5 w-full",
+      "font-semibold uppercase text-gray-100 flex items-center text-md border-b-2 border-white py-0.5 w-full",
   },
 ];
 
@@ -111,7 +111,7 @@ const components: any = {
       {
         id: "achievements",
         styles:
-          "text-xs text-justify pb-1 text-gray-950 before:content-['\\2022'] before:mr-2",
+          "text-xs flex text-justify pb-1 text-gray-950 before:content-['\\2022'] before:mr-2",
         tag: "span",
       },
     ],

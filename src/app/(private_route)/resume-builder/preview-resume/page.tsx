@@ -534,11 +534,13 @@ const Page = () => {
   }, [resumeData]);
   return (
     <div className="ml-[234px]">
-      <DownloadService
-        componentRef={cvRef}
-        fileName="ai-resume"
-        preview={true}
-      />
+      <div className="flex items-center justify-start md:justify-start gap-3 xs:pb-0 md:pb-4 sticky top-4 z-[35]">
+        <DownloadService
+          componentRef={cvRef}
+          fileName="ai-resume"
+          preview={true}
+        />
+      </div>
       <div ref={cvRef} className="cv-container text-[#000]"></div>
     </div>
   );

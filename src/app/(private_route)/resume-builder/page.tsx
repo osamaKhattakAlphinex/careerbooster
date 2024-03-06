@@ -42,7 +42,7 @@ import TemplateSlider from "@/components/dashboard/resume-templates/templateSlid
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [showTemplatePopup, setShowTemplatePopup] = useState(false);
+  const [showTemplatePopup, setShowTemplatePopup] = useState(true);
   const confettiConfig = {
     angle: 90,
     spread: 360,
@@ -326,11 +326,11 @@ const ResumeBuilder = () => {
 
   useEffect(() => {
     if (!resumeData.state.resumeLoading && resumeData?.name) {
-      if (firstLoad) {
+      // if (firstLoad) {
         saveResumeToDB();
-      }
+      // }
       setFinished(true);
-      setFirstLoad(true);
+      // setFirstLoad(true);
     }
   }, [resumeData?.state?.resumeLoading]);
 

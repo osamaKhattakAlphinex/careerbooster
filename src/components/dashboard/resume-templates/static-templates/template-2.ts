@@ -105,7 +105,7 @@ const components: any = {
       {
         id: "achievements",
         styles:
-          "text-sm text-justify pb-1 before:content-['\\2022'] before:mr-2 text-gray-950",
+          "text-sm flex text-justify pb-1 before:content-['\\2022'] before:mr-2 text-gray-950",
         tag: "span",
       },
     ],

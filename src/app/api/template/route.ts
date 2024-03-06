@@ -35,7 +35,7 @@ export async function POST(req: any) {
     const pdf = await page.pdf({
       printBackground: true,
       width: "8.27in",
-      height: "11.69in",
+      height: "11.66in",
     });
     await browser.close();
     return NextResponse.json({ result: pdf, success: true }, { status: 200 });

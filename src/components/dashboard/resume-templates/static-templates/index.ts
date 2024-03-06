@@ -1,9 +1,7 @@
 import {template as template1} from "./template-1"
 import {template as template2} from "./template-2"
 import {template as template3} from "./template-3"
-// import {template as template4} from "./template-4"
-// import {template as template3} from "./template-3"
-// import {template as template3} from "./template-3"
+import {template as template4} from "./template-4"
 
 export const getTemplates = (tempId: number) =>{
     switch(tempId){
@@ -13,8 +11,8 @@ export const getTemplates = (tempId: number) =>{
             return template2
         case 3:
             return template3
-        // case 4:
-        //     return template4
+        case 4:
+            return template4
         default:
             return template1
     }

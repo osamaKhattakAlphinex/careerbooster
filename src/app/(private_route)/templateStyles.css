@@ -107,7 +107,7 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
   content: "\2022";
   font-family: "YourIconFontFamily", sans-serif;
   font-size: var(--text);
-  color: #333;
+  color: currentColor;
   display: inline-block;
   margin-right: 6px;
 }
