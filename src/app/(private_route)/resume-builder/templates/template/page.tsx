@@ -115,7 +115,7 @@ const Template = () => {
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
               <div className="flex items-center justify-end md:justify-end gap-3 xs:pb-0 md:pb-4 sticky top-4 z-[35]">
-                {/* <Link
+                <Link
                   className="no-underline"
                   href={`/resume-builder/preview-resume?templateId=${templateId}&resumeId=${resume.id}`}
                   >
@@ -144,8 +144,8 @@ const Template = () => {
               </svg>
                     Preview Resume
                   </div>
-                </Link> */}
-                <DownloadService
+                </Link>
+                {/* <DownloadService
                   componentRef={componentRef}
                   fileName={fileName}
                   preview={true}
@@ -154,7 +154,7 @@ const Template = () => {
                   componentRef={componentRef}
                   fileName={fileName}
                   preview={false}
-                />
+                /> */}
               </div>
 
               <div

@@ -37,9 +37,9 @@ export async function POST(req: any) {
       width: "8.27in",
       height: "11.67in",
       margin: {
-        top: "10px",
+        top: "0",
         right: "0",
-        bottom: "10px",
+        bottom: "0",
         left: "0",
       },
       preferCSSPageSize: true,
