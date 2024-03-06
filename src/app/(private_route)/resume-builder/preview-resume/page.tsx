@@ -483,6 +483,9 @@ const Page = () => {
         if (getSpan === item.section) {
           const heading = document.createElement("h2");
           heading.textContent = item.text;
+          if (item.attributes.length > 0) {
+            setAttributesToElem(item.attributes, heading);
+          }
           setAttributesToElem(
             [{ name: item.section }, { "type-heading": true }],
             heading

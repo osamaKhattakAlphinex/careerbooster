@@ -2,30 +2,35 @@ const cvHeadings: any = [
   {
     text: "contact",
     section: "phone",
+    attributes: [{ "icon-color": "white" }],
     styles:
       "font-semibold uppercase text-md py-0.5 w-full text-white text-center border-2 rounded-full border-[#043382] mt-[166px]",
   },
   {
     text: "executive summary",
     section: "summary",
+    attributes: [{ "icon-color": "white" }],
     styles:
       "font-semibold uppercase text-md text-white text-white bg-[#043382] px-4 rounded-full mt-[150px] py-0.5 mb-1",
   },
   {
     text: "work experience",
     section: "workExperienceArray",
+    attributes: [{ "icon-color": "white" }],
     styles:
       "font-semibold uppercase text-md text-white text-white bg-[#043382] px-4 rounded-full py-0.5 mb-1",
   },
   {
     text: "education",
     section: "education",
+    attributes: [{ "icon-color": "white" }],
     styles:
       "font-semibold uppercase text-md text-white text-white bg-[#043382] border-2 px-4 rounded-full py-0.5",
   },
   {
     text: "skills",
     section: "primarySkills",
+    attributes: [{ "icon-color": "white" }],
     styles:
       "font-semibold uppercase text-md py-0.5 w-full text-white text-center border-2 rounded-full border-[#043382] mt-6",
   },

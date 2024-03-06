@@ -1,28 +1,33 @@
-const cvHeadings:any = [
+const cvHeadings: any = [
   {
     text: "contact",
     section: "phone",
-    styles:""
+    styles: "",
+    attributes: [{ "icon-color": "black" }],
   },
   {
     text: "executive summary",
     section: "summary",
-    styles:""
+    styles: "",
+    attributes: [{ "icon-color": "black" }],
   },
   {
     text: "work experience",
     section: "workExperienceArray",
-    styles:""
+    styles: "",
+    attributes: [{ "icon-color": "black" }],
   },
   {
     text: "education",
     section: "education",
-    styles:""
+    styles: "",
+    attributes: [{ "icon-color": "black" }],
   },
   {
     text: "skills",
     section: "primarySkills",
-    styles:""
+    styles: "",
+    attributes: [{ "icon-color": "black" }],
   },
 ];
 const components: any = {
@@ -231,5 +236,5 @@ const templateLayout: any = {
 export const template = {
   components,
   templateLayout,
-  cvHeadings
+  cvHeadings,
 };
