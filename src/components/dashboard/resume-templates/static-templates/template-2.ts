@@ -1,6 +1,6 @@
 const cvHeadings: any = [
   {
-    text: "contact",
+    text: "",
     section: "phone",
     styles: "",
     attributes: [{ "icon-color": "black" }],
@@ -20,13 +20,14 @@ const cvHeadings: any = [
   {
     text: "education",
     section: "education",
-    styles: "",
+    styles: "font-semibold mt-2 w-full uppercase text-md text-gray-950 py-0.5",
     attributes: [{ "icon-color": "black" }],
   },
   {
     text: "skills",
     section: "primarySkills",
-    styles: "",
+    styles:
+      "font-semibold uppercase text-base py-0.5 w-full text-gray-950 before:block",
     attributes: [{ "icon-color": "black" }],
   },
 ];
