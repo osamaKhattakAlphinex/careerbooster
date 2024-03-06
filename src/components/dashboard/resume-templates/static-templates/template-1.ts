@@ -3,33 +3,36 @@ const cvHeadings: any = [
     text: "contact",
     section: "phone",
     styles:
-      "font-semibold uppercase text-gray-100 bg-gray-950 flex items-center text-base py-0.5 w-full",
+      "font-semibold uppercase text-gray-100 px-3 bg-gray-950 flex items-center text-base py-0.5 w-full",
+    attributes: [{ "icon-color": "white" }],
   },
   {
     text: "executive summary",
     section: "summary",
     styles:
-      "font-semibold uppercase text-gray-100 bg-gray-950 flex items-center text-base py-0.5 w-full",
+      "font-semibold uppercase text-gray-100 px-3 bg-gray-950 flex items-center text-base py-0.5 w-full",
+    attributes: [{ "icon-color": "white" }],
   },
   {
     text: "work experience",
     section: "workExperienceArray",
     styles:
-      "font-semibold uppercase text-gray-100 bg-gray-950 flex items-center text-base py-0.5 w-full",
+      "font-semibold uppercase text-gray-100 px-3 bg-gray-950 flex items-center text-base py-0.5 w-full",
+    attributes: [{ "icon-color": "white" }],
   },
   {
     text: "education",
     section: "education",
-
+    attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-gray-100 bg-gray-950 flex items-center text-base border-t-2 border-b-2 py-0.5 w-full",
+      "font-semibold uppercase text-gray-100 px-3 bg-gray-950 flex items-center text-base border-t-2 border-b-2 py-0.5 w-full",
   },
   {
     text: "skills",
     section: "primarySkills",
-
+    attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-gray-100 bg-gray-950 flex items-center text-md border-t-2 border-b-2 py-0.5 w-full",
+      "font-semibold uppercase text-gray-100 px-3 bg-gray-950 flex items-center text-md border-t-2 border-b-2 py-0.5 w-full",
   },
 ];
 const components: any = {

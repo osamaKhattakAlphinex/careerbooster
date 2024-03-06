@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { template } from "@/components/dashboard/resume-templates/static-templates/template-3";
+import { template } from "@/components/dashboard/resume-templates/static-templates/template-1";
 import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
 const Page = () => {
@@ -469,6 +469,9 @@ const Page = () => {
         if (getSpan === item.section) {
           const heading = document.createElement("h2");
           heading.textContent = item.text;
+          if (item.attributes.length > 0) {
+            setAttributesToElem(item.attributes, heading);
+          }
           setAttributesToElem(
             [{ name: item.section }, { "type-heading": true }],
             heading
