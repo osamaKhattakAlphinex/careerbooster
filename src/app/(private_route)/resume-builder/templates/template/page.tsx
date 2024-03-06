@@ -19,11 +19,24 @@ const Template = () => {
   const [refLeft, setRefLeft] = useState<number | null>(null);
   const [scaleHeight, setScaleHeight] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
-
+  const [fileName,setFileName] = useState<string>("");
   const templateId: number = parseInt(params.get("templateId") || "0");
   const componentRef = useRef<any>(null);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    setFileName(
+      `${resume?.name
+        ?.replaceAll(" ", "-")
+        .replaceAll("/", "")}-${resume?.jobTitle
+        ?.replaceAll(" ", "-")
+        .replaceAll("/", "")}`
+    );
+;
+  }, [resume]);
+  useEffect(() => {
+    console.log(fileName);
+  }, [fileName]);
   const fetchDefaultResume = async () => {
     const res = await fetch(
       `/api/users/getOneByEmail?email=${session?.user?.email}`
@@ -102,7 +115,7 @@ const Template = () => {
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
               <div className="flex items-center justify-end md:justify-end gap-3 xs:pb-0 md:pb-4 sticky top-4 z-[35]">
-                <Link
+                {/* <Link
                   className="no-underline"
                   href={`/resume-builder/preview-resume?templateId=${templateId}&resumeId=${resume.id}`}
                   >
@@ -131,17 +144,17 @@ const Template = () => {
               </svg>
                     Preview Resume
                   </div>
-                </Link>
-                {/* <DownloadService
+                </Link> */}
+                <DownloadService
                   componentRef={componentRef}
-                  fileName="ai-resume"
+                  fileName={fileName}
                   preview={true}
                 />
                 <DownloadService
                   componentRef={componentRef}
-                  fileName="ai-resume"
+                  fileName={fileName}
                   preview={false}
-                /> */}
+                />
               </div>
 
               <div

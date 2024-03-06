@@ -29,6 +29,7 @@ const ResumeTemplate6 = ({
   setStreamedSummaryData: any;
 }) => {
   const resume = useSelector((state: any) => state.resume);
+  const userData = useSelector((state: any) => state.userData);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
@@ -53,6 +54,7 @@ const ResumeTemplate6 = ({
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
+  console.log(resume);
 
   useEffect(() => {
     if (streamedJDData === "") {
@@ -179,9 +181,9 @@ const ResumeTemplate6 = ({
 
               <EditableField
                 value={
-                  resume?.contact?.linkedIn
+                  resume?.contact?.linkedIn !== ""
                     ? resume?.contact?.linkedIn
-                    : "https://www.linkedin.com/"
+                    : userData?.linkedin ? userData?.linkedin: "https://www.linkedin.com/"
                 }
                 onSave={(value: string) => {
                   if (value !== resume.contact.linkedIn) {

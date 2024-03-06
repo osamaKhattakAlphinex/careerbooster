@@ -56,25 +56,23 @@ export async function POST(req: any) {
     }
   };
 
-  const replacePromptData = async (
+  const replacePromptData = (
     generationType: string,
     promptDB: any,
     args: any
   ) => {
+    const { jobDescription, emailText, firstFollowUpText} = args
     if (generationType === "email") {
-      return await promptDB.replaceAll(
+      return promptDB.replaceAll(
         "{{jobDescription}}",
-        args.jobDescription
+        jobDescription
       );
     } else if (generationType === "firstFollowUp") {
-      return await promptDB.replaceAll("{{emailText}}", args.emailText);
+      return promptDB.replaceAll("{{emailText}}",emailText);
     } else if (generationType === "secondFollowUp") {
-      await promptDB.replaceAll("{{emailText}}", args.emailText);
-      await promptDB.replaceAll(
-        "{{firstFollowUpEmailText}}",
-        args.firstFollowUpText
-      );
-      return promptDB;
+      promptDB =  promptDB.replaceAll("{{emailText}}", emailText);
+      promptDB = promptDB.replaceAll("{{firstFollowUpEmailText}}", firstFollowUpText)
+      return promptDB    
     }
   };
 
@@ -89,7 +87,6 @@ export async function POST(req: any) {
     const jobDescription = reqBody?.jobDescription;
     const trainBotData = reqBody?.trainBotData;
     const savedId = reqBody?.emailId;
-    console.log(savedId)
     const generationType = reqBody?.generationType;
     const emailText = reqBody?.emailText;
     const firstFollowUpText = reqBody?.firstFollowUpText;
@@ -119,11 +116,9 @@ export async function POST(req: any) {
       emailText,
       firstFollowUpText,
     });
+    console.log(prompt)
 
-    //promptDB.replaceAll(
-    //"{{jobDescription}}",
-    //jobDescription
-    //);
+
 
     let fileContent;
     // CREATING LLM MODAL
@@ -140,12 +135,11 @@ export async function POST(req: any) {
     }
     // this will run for both TYPES aiResume and profile
     const inputPrompt = `${
-      generationType === "email" &&
+      generationType === "email" ?
       `Following are the content of the resume (in JSON format): 
     JSON user/resume data: ${type === "file" ? fileContent : JSON.stringify(userData)}`
-    } 
+    : ''} 
   
-            this is the prompt:
             ${prompt}
             `;
 
@@ -167,6 +161,7 @@ export async function POST(req: any) {
       },
       onFinal: async (completions) => {
         try {
+
           if (completionTokens > 0) {
             await updateUserTokens(email, completionTokens);
           }
@@ -182,7 +177,6 @@ export async function POST(req: any) {
             };
 
             await postEmail(payload);
-
             let entry: TrainBotEntryType = {
               entryId: emailId,
               type: "email.followupSequence",
@@ -196,6 +190,7 @@ export async function POST(req: any) {
             };
             await makeTrainedBotEntry(entry);
           } else if(generationType === "firstFollowUp" || generationType === "secondFollowUp"){
+            
             const payload = {
               id: savedId,
               generationType: generationType,
@@ -203,6 +198,18 @@ export async function POST(req: any) {
               userEmail: email,
             };
             await putEmail(payload)
+            let entry: TrainBotEntryType = {
+              entryId: savedId,
+              type: `email.${generationType}Sequence`,
+              input: inputPrompt,
+              output: completions,
+              idealOutput: "",
+              status: "pending",
+              userEmail: email,
+              fileAddress: "",
+              Instructions: `Generate Email for ${trainBotData.userEmail}`,
+            };
+            await makeTrainedBotEntry(entry);
           }
         } catch {
           console.log("error while saving Emails....");

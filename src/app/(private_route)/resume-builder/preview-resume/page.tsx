@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { getTemplates } from "@/components/dashboard/resume-templates/static-templates";
 const Page = () => {
   const params = useSearchParams();
+  const [fileName, setFileName] = useState<string>("");
   const templateId: number = parseInt(params.get("templateId") || "0");
   const resumeId: string = params.get("resumeId") || "";
   let resumeData = useSelector((state: any) => state.resume);
@@ -457,8 +458,6 @@ const Page = () => {
   }
 
   const generate = (jsonData: any) => {
-    console.log(jsonData);
-
     const newJsonObject: any = {};
 
     GenerationOrder.forEach((key) => {
@@ -466,8 +465,6 @@ const Page = () => {
         newJsonObject[key] = jsonData[key];
       }
     });
-
-    console.log(newJsonObject);
 
     for (const item of Object.entries(newJsonObject)) {
       createElements(item);
@@ -530,15 +527,26 @@ const Page = () => {
   };
 
   useEffect(() => {
+    setFileName(
+      `${resumeData?.name
+        ?.replaceAll(" ", "-")
+        .replaceAll("/", "")}-${resumeData?.jobTitle
+        ?.replaceAll(" ", "-")
+        .replaceAll("/", "")}`
+    );
     generate(resumeData);
   }, [resumeData]);
+  useEffect(() => {
+    console.log(fileName);
+  }, [fileName]);
+
   return (
     <div className="ml-[234px]">
       <div className="flex items-center justify-start md:justify-start gap-3 xs:pb-0 md:pb-4 sticky top-4 z-[35]">
         <DownloadService
           componentRef={cvRef}
-          fileName="ai-resume"
-          preview={true}
+          fileName={fileName}
+          preview={false}
         />
       </div>
       <div ref={cvRef} className="cv-container text-[#000]"></div>

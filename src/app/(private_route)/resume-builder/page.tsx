@@ -42,7 +42,7 @@ import TemplateSlider from "@/components/dashboard/resume-templates/templateSlid
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [showTemplatePopup, setShowTemplatePopup] = useState(true);
+  const [showTemplatePopup, setShowTemplatePopup] = useState(false);
   const confettiConfig = {
     angle: 90,
     spread: 360,
@@ -82,7 +82,6 @@ const ResumeBuilder = () => {
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
-
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
 
@@ -338,6 +337,7 @@ const ResumeBuilder = () => {
     if (userData && userData?.email) {
       setAiInputUserData({
         contact: userData?.contact,
+        linkedin: userData?.linkedin,
         education: userData?.education,
         email: userData?.email,
         experience: userData?.experience,
