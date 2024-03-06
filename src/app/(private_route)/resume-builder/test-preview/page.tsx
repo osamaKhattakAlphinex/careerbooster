@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { template } from "@/components/dashboard/resume-templates/static-templates/template-4";
+import { template } from "@/components/dashboard/resume-templates/static-templates/template-5";
 import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
 const Page = () => {
