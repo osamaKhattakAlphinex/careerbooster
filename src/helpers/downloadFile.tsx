@@ -173,6 +173,15 @@ any) => {
 //   width: 16px !important;
 //   margin-right: 6px;
 // }
+// .fragmentDecor::before{
+//   content: " ";
+//   position: absolute;
+//   top: 0;
+//   bottom:-20;
+//   height: 100%;
+//   width: 20px;
+//   background-color: #e04127;
+// }
 
 // [data-primarySkills-index]::before {
 //   content: "\\2022";
