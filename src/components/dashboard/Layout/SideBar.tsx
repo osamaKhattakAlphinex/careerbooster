@@ -143,7 +143,7 @@ const SideBar = () => {
                       width={100}
                       height={100}
                       alt="Uploaded"
-                      className="overflow-hidden "
+                      className="overflow-hidden cursor-pointer "
                     />
                   </div>
                 ) : (

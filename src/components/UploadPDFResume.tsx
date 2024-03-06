@@ -92,7 +92,7 @@ const UploadPDFResume = () => {
               {refreshIconRotating}
             </div>
           ) : (
-            <div className="flex justify-center items-center cursor-pointer gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg lg:w-[36%] sm:w-[50%] md:w-[38%] xs:w-full mx-auto">
+            <div className="flex justify-center items-center cursor-pointer gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg lg:w-[36%] sm:w-[50%] md:w-[38%] xs:w-full mx-auto hover:from-purple-800 hover:to-pink-600 transition-all duration-300 ease-in-out">
               <div>{uploadIcon}</div>
               <div>
                 <p className="m-0 whitespace-nowrap cursor-pointer text-sm [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] capitalize text-center">
