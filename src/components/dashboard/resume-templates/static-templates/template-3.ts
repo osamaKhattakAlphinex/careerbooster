@@ -4,49 +4,47 @@ const cvHeadings: any = [
     section: "phone",
     attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-md py-0.5 w-full text-white text-center border-2 rounded-full border-[#043382] mt-[166px]",
+      "font-semibold uppercase text-sm py-1 px-4 w-full text-center border-2 rounded-full flex items-center justify-center border-[#043382] mt-[166px] mb-2",
   },
   {
     text: "executive summary",
     section: "summary",
     attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-md text-white text-white bg-[#043382] px-4 rounded-full mt-[150px] py-0.5 mb-1",
+      "font-semibold uppercase text-sm py-1 text-white bg-[#043382] px-4 border-2 flex items-center justify-center rounded-full mt-[150px] py-0.5 mb-1",
   },
   {
     text: "work experience",
     section: "workExperienceArray",
     attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-md text-white text-white bg-[#043382] px-4 rounded-full py-0.5 mb-1",
+      "font-semibold uppercase text-sm py-1 text-white bg-[#043382] px-4 border-2 flex items-center justify-center rounded-full py-0.5 mb-1",
   },
   {
     text: "education",
     section: "education",
     attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-md text-white text-white bg-[#043382] border-2 px-4 rounded-full py-0.5",
+      "font-semibold uppercase text-sm py-1 text-white bg-[#043382] border-2 px-4 flex items-center justify-center rounded-full",
   },
   {
     text: "skills",
     section: "primarySkills",
     attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-md py-0.5 w-full text-white text-center border-2 rounded-full border-[#043382] mt-6",
+      "font-semibold uppercase text-sm py-1 text-white text-center border-2 flex flex-row justify-center items-center rounded-full border-[#043382] mt-6 mb-2",
   },
 ];
 
 const templateLayout: any = {
   styles: "w-full",
+  attributes: [{ "template-no": "3" }],
   fragment: {
     styles: "flex flex-row relative bg-white fragment",
     header: {
       styles:
         "text-gray-100 absolute h-28 top-5 z-10 bg-[#043382] flex flex-col w-full justify-center items-start my-6",
       elements: [
-        // {
-        //   id: "shortName",
-        // },
         {
           id: "name",
         },
@@ -56,13 +54,8 @@ const templateLayout: any = {
       ],
     },
     sideBar: {
-      styles: "bg-gray-950 text-white w-3/12 flex flex-col justify-start px-6",
+      styles: "bg-gray-950 text-white w-3/12 flex flex-col justify-start px-4",
       elements: [
-        // {
-        //   heading: false,
-        //   headingText: "",
-        //   id: "shortName",
-        // },
         {
           id: "phone",
         },
@@ -70,7 +63,7 @@ const templateLayout: any = {
           id: "email",
         },
         {
-          id: "linkedin",
+          id: "linkedIn",
         },
         {
           id: "primarySkills",
@@ -109,36 +102,36 @@ const components: any = {
   },
   name: {
     styles:
-      "text-4xl text-gray-100 font-bold flex justify-center items-center w-full mb-2",
+      "text-2xl text-gray-100 font-bold flex justify-center items-center w-full mb-2",
     tag: "span",
   },
   jobTitle: {
     tag: "span",
     styles:
-      "text-lg flex text-gray-100 justify-center items-center w-full mb-2",
+      "text-base flex text-gray-100 justify-center items-center w-full mb-2",
   },
   contact: {
     styles: "flex-row text-gray-100 justify-center items-center w-full",
     elements: [
       {
         id: "phone",
-        styles: "text-xs mt-2 text-gray-100",
+        styles: "text-xs flex break-all before:break-normal mt-2 text-gray-100",
         tag: "span",
       },
       {
         id: "email",
-        styles: "text-xs mt-2 text-gray-100",
+        styles: "text-xs flex break-all before:break-normal mt-2 text-gray-100",
         tag: "span",
       },
       {
         id: "linkedIn",
-        styles: "text-xs mt-2 text-gray-100",
+        styles: "text-xs flex break-all before:break-normal mt-2 text-gray-100",
         tag: "span",
       },
     ],
   },
   primarySkills: {
-    styles: "text-xs py-2 text-gray-100",
+    styles: "text-xs py-2 text-gray-100 flex",
     tag: "span",
   },
   summary: { styles: "text-justify mb-4 text-gray-950 text-xs", tag: "span" },
@@ -147,7 +140,7 @@ const components: any = {
     elements: [
       {
         id: "title",
-        styles: "text-lg font-bold text-gray-950",
+        styles: "text-base font-bold text-gray-950",
         tag: "span",
       },
       {

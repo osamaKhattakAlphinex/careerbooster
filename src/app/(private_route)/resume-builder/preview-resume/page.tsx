@@ -46,7 +46,7 @@ const Page = () => {
     const cleanUpIds = [
       "shortName",
       "email",
-      "linkedin",
+      "linkedIn",
       "phone",
       "primarySkills",
       "education",
@@ -146,7 +146,7 @@ const Page = () => {
     for (const singleEducation of Array.from(educationDivs)) {
       newDiv.appendChild(singleEducation);
     }
-    setStylesToElement(newDiv, "flex flex-row gap-4 px-6 flex-wrap");
+    setStylesToElement(newDiv, "flex flex-row gap-2 px-6 flex-wrap");
     page.append(newDiv);
   };
 
@@ -184,7 +184,7 @@ const Page = () => {
 
   const setStylesToElement = (elem: any, styles: any) => {
     if (styles) {
-      styles.split(" ").map((cls: any) => elem.classList.add(cls));
+      styles.split(/\s+/).map((cls: any) => elem.classList.add(cls));
     }
   };
   const newPage = () => {
@@ -353,8 +353,12 @@ const Page = () => {
 
   const generateLayout = (page: any) => {
     const currentPage = page.getAttribute("id").split("-").pop();
+
     for (let templatepart in templateLayout) {
       if (templatepart === "styles") {
+        setStylesToElement(page, templateLayout[templatepart]);
+      } else if (templatepart === "attributes") {
+        setAttributesToElem(templateLayout[templatepart], page);
       } else if (templatepart === "fragment") {
         for (let fragmentpart in templateLayout[templatepart]) {
           if (fragmentpart === "styles") {
