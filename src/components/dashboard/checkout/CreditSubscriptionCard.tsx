@@ -1,15 +1,19 @@
 "use client";
 import { CreditsPackageData } from "@/db/schemas/CreditsPackage";
-import { infoSmallIcon, leftArrowIcon } from "@/helpers/iconsProvider";
+import {
+  crossIcon,
+  infoSmallIcon,
+  leftArrowIcon,
+} from "@/helpers/iconsProvider";
 import { setUserData } from "@/store/userDataSlice";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-import Link from "next/link";
+
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Stripe from "stripe";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalButton } from "react-paypal-button-v2";
 
 interface Props {
   creditPackage: CreditsPackageData;
@@ -25,9 +29,9 @@ const CreditSubscriptionCard: React.FC<Props> = ({
   const [showPaymentDialog, setShowPaymentDialog] = useState(false);
   const [coupon, setCoupon] = useState("");
   const [couponError, setCouponError] = useState("");
-  const [data, setData] = useState<any>();
   const [msgLoading, setMsgLoading] = useState<boolean>(false);
   const router = useRouter();
+  const paypalRef = useRef<any>(null);
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
@@ -37,12 +41,28 @@ const CreditSubscriptionCard: React.FC<Props> = ({
   const handlePaymentChange = (event: any) => {
     setSelectedPayment(event.target.value);
   };
+  const [showPaypalPopup, setShowPaypalPopup] = useState(false);
+  useEffect(() => {
+    const addPaypalScript = () => {
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "https://www.paypal.com/sdk/js?client-id=AV4R8goafRZiY27ePTNRqCINe0C12EtQBk9bKeNuF7go3KYTv9NJqlkbjmqf4lAajJ0AfCEsdQ3ntWgt";
+      script.async = true;
 
+
+      document.body.appendChild(script);
+    };
+    addPaypalScript();
+  }, []);
   const handlePayment = () => {
-    if (selectedPayment === "stripe") {
-      handleStripePayment();
-    } else if (selectedPayment === "paypal") {
-      handlePaypalPayment();
+    if (creditPackage && creditPackage.amount === 0) {
+      updateUserWithFreePackage(creditPackage._id);
+    }else {
+      if (selectedPayment === "stripe") {
+        handleStripePayment();
+      } else if (selectedPayment === "paypal") {
+        setShowPaypalPopup(true);
+      }
     }
   };
 
@@ -51,54 +71,15 @@ const CreditSubscriptionCard: React.FC<Props> = ({
     setShowPaymentDialog(true);
   };
 
-  const [show, setShow] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [ErrorMessage, setErrorMessage] = useState("");
-  const [orderID, setOrderID] = useState(false);
-
-  // creates a paypal order
-  const createOrder = (data: any, actions: any) => {
-    return actions.order
-      .create({
-        purchase_units: [
-          {
-            description: "Sunflower",
-            amount: {
-              currency_code: "USD",
-              value: 20,
-            },
-          },
-        ],
-      })
-      .then((orderID: any) => {
-        setOrderID(orderID);
-        return orderID;
-      });
-  };
-
-  // check Approval
-  const onApprove = (data: any, actions: any) => {
-    return actions.order.capture().then(function (details: any) {
-      const { payer } = details;
-      setSuccess(true);
-    });
-  };
-
-  //capture likely error
-  const onError = (data: any, actions: any) => {
-    setErrorMessage("An Error occured with your payment ");
-  };
-
   useEffect(() => {
-    if (success) {
-      alert("Payment successful!!");
-      console.log("Order successful . Your order id is--", orderID);
+    if (paypalRef.current) {
+      const getPaypalDiv = paypalRef.current.children[0];
+      getPaypalDiv.style.maxHeight = "500px";
+      getPaypalDiv.style.overflowY= "scroll";
+      getPaypalDiv.style.scrollbarWidth = "none";
     }
-  }, [success]);
+  }, [showPaypalPopup, paypalRef.current]);
 
-  const handlePaypalPayment = async () => {
-    // router.push('/subscribe/paypal-checkout');
-  };
   const handleStripePayment = async () => {
     // Set subscribing to true
     setSubscribing(true);
@@ -225,23 +206,6 @@ const CreditSubscriptionCard: React.FC<Props> = ({
     return null;
   };
 
-  // useEffect(() => {
-  //   setMsgLoading(true);
-  //   fetch(`/api/packages/package-status?email=${userData?.email}`)
-  //     .then(async (response) => {
-  //       const data = await response.json();
-  //       console.log("data", data);
-  //       if (data.success) {
-  //         setData(data.result);
-  //         setMsgLoading(false);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log("Error occurred", err);
-  //       setMsgLoading(false);
-  //     });
-  // }, []);
-
   return (
     <>
       {!msgLoading && (
@@ -327,15 +291,18 @@ const CreditSubscriptionCard: React.FC<Props> = ({
         </div>
       )}
       {showPaymentDialog && (
-        <div className="fixed flex justify-center items-center bg-black/50 inset-0 z-40 h-screen w-screen">
-          <div className="flex flex-col justify-between bg-gray-800 h-1/4 w-1/3 rounded-lg z-50 px-10 py-5">
+        <div className="fixed flex flex-col justify-center items-center bg-black/50 inset-0 z-40 h-screen w-screen">
+          <div className="flex flex-col justify-between bg-gray-800 h-1/3 w-1/3 rounded-lg z-50 px-10 py-5">
             <h3 className="text-center font-semibold text-xl">
               Choose Payment Method
             </h3>
 
             <div className="flex gap-4">
               <div className="w-1/2 flex gap-4">
-                <div className="flex justify-around px-2 border-gray-400 rounded-lg border-2 w-full ">
+                <div
+                  onClick={() => setSelectedPayment("paypal")}
+                  className="cursor-pointer flex justify-around px-2 border-gray-400 rounded-lg border-2 w-full "
+                >
                   <input
                     id="paypal"
                     value="paypal"
@@ -379,7 +346,10 @@ const CreditSubscriptionCard: React.FC<Props> = ({
               </div>
 
               <div className="w-1/2 flex gap-4">
-                <div className="flex justify-around px-2 border-gray-400 rounded-lg border-2 w-full  ">
+                <div
+                  onClick={() => setSelectedPayment("stripe")}
+                  className="cursor-pointer flex justify-around px-2 border-gray-400 rounded-lg border-2 w-full  "
+                >
                   <input
                     id="stripe"
                     value="stripe"
@@ -459,17 +429,34 @@ const CreditSubscriptionCard: React.FC<Props> = ({
               >
                 Cancel
               </button>
-              {/* <PayPalScriptProvider
-                options={{ clientId: process.env.PAYPAL_CLIENT_ID }}
-              >
-                <PayPalButtons
-                  style={{ layout: "vertical" }}
-                  createOrder={createOrder}
-                  onApprove={onApprove}
-                />
-              </PayPalScriptProvider> */}
             </div>
           </div>
+          {showPaypalPopup && (
+            <div className="absolute z-[100] bg-gray-900 p-10 w-1/2 rounded-lg">
+              <span
+                className="cursor-pointer absolute right-2 top-2"
+                onClick={() => setShowPaypalPopup(false)}
+              >
+                {crossIcon}
+              </span>
+              <div
+                ref={paypalRef}
+                className="bg-white p-10 rounded-lg"
+              >
+                <PayPalButton
+                  amount={creditPackage.amount}
+                  shippingPreference="NO_SHIPPING"
+                  currency="USD"
+                  onSuccess={(details: any, data: any) => {
+                    alert(
+                      "Transaction completed by " +
+                        details.payer.name.given_name
+                    );
+                  }}
+                />
+              </div>
+            </div>
+          )}
         </div>
       )}
     </>
