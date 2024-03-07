@@ -10,7 +10,6 @@ import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
 import { makeid } from "@/helpers/makeid";
-import { postCoverLetter } from "../../coverLetterBot/route";
 import {
   TrainBotEntryType,
   makeTrainedBotEntry,
@@ -99,10 +98,19 @@ export async function POST(req: any) {
         );
       }
     }
-    const dataset = "linkedin.genearteConsultingBid";
+    let dataset:string ="" 
+
+    if (generationType === "email") {
+      dataset = "email.followupSequence";
+    }
+    if (generationType === "firstFollowUp") {
+      dataset = "email.firstFollowUpSequence";
+    }
+    if (generationType === "secondFollowUp") {
+      dataset = "email.secondFollowUpSequence";
+    }
     const model = await getTrainedModel(dataset);
-    //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
-    // fetch prompt from db
+  
     await startDB();
     const promptRec = await Prompt.findOne({
       type: "email",
@@ -116,7 +124,6 @@ export async function POST(req: any) {
       emailText,
       firstFollowUpText,
     });
-    console.log(prompt)
 
 
 
@@ -143,8 +150,9 @@ export async function POST(req: any) {
             ${prompt}
             `;
 
+            console.log("model------------ ", model);
     const response: any = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: model? model : "gpt-3.5-turbo",
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
