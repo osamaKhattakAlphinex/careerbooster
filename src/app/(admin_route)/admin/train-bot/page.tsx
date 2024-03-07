@@ -535,6 +535,12 @@ const TrainRegistrationBotAdminPage = () => {
                   <option value="email.followupSequence">
                     Email {"> "} Followup Sequence
                   </option>
+                  <option value="email.firstFollowUpSequence">
+                    Email {"> "} First Followup Sequence
+                  </option>
+                  <option value="email.secondFollowUpSequence">
+                    Email {"> "} Second Followup Sequence
+                  </option>
                   <option value="linkedin.keywords">
                     LinkedIn {"> "} Generate Keywords
                   </option>

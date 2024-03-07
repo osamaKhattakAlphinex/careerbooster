@@ -1,28 +1,34 @@
-const cvHeadings:any = [
+const cvHeadings: any = [
   {
-    text: "contact",
+    text: "",
     section: "phone",
-    styles:""
+    styles: "",
+    attributes: [{ "icon-color": "black" }],
   },
   {
     text: "executive summary",
     section: "summary",
-    styles:""
+    styles: "",
+    attributes: [{ "icon-color": "black" }],
   },
   {
     text: "work experience",
     section: "workExperienceArray",
-    styles:""
+    styles: "",
+    attributes: [{ "icon-color": "black" }],
   },
   {
     text: "education",
     section: "education",
-    styles:""
+    styles: "font-semibold mt-2 w-full uppercase text-md text-gray-950 py-0.5",
+    attributes: [{ "icon-color": "black" }],
   },
   {
     text: "skills",
     section: "primarySkills",
-    styles:""
+    styles:
+      "font-semibold uppercase text-base py-0.5 w-full text-gray-950 before:block",
+    attributes: [{ "icon-color": "black" }],
   },
 ];
 const components: any = {
@@ -100,7 +106,7 @@ const components: any = {
       {
         id: "achievements",
         styles:
-          "text-sm text-justify pb-1 before:content-['\\2022'] before:mr-2 text-gray-950",
+          "text-sm flex text-justify pb-1 before:content-['\\2022'] before:mr-2 text-gray-950",
         tag: "span",
       },
     ],
@@ -231,5 +237,5 @@ const templateLayout: any = {
 export const template = {
   components,
   templateLayout,
-  cvHeadings
+  cvHeadings,
 };

@@ -1,12 +1,27 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { template } from "@/components/dashboard/resume-templates/static-templates/template-3";
 import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
+import { useSearchParams } from "next/navigation";
+import { getTemplates } from "@/components/dashboard/resume-templates/static-templates";
 const Page = () => {
-  const resumeData = useSelector((state: any) => state.resume);
+  const params = useSearchParams();
+  const [fileName, setFileName] = useState<string>("");
+  const templateId: number = parseInt(params.get("templateId") || "0");
+  const resumeId: string = params.get("resumeId") || "";
+  let resumeData = useSelector((state: any) => state.resume);
+  const userData = useSelector((state: any) => state.userData);
   const cvRef = useRef<any>(null);
+  let template: any;
+  template = getTemplates(templateId);
+  useEffect(() => {
+    if (resumeData.id === "") {
+      resumeData = userData.resumes.find(
+        (resume: any) => resume.id === resumeId
+      );
+    }
+  }, [templateId, resumeId]);
   const { components, templateLayout, cvHeadings } = template;
 
   const GenerationOrder = [
@@ -443,8 +458,6 @@ const Page = () => {
   }
 
   const generate = (jsonData: any) => {
-    console.log(jsonData);
-
     const newJsonObject: any = {};
 
     GenerationOrder.forEach((key) => {
@@ -452,8 +465,6 @@ const Page = () => {
         newJsonObject[key] = jsonData[key];
       }
     });
-
-    console.log(newJsonObject);
 
     for (const item of Object.entries(newJsonObject)) {
       createElements(item);
@@ -469,6 +480,9 @@ const Page = () => {
         if (getSpan === item.section) {
           const heading = document.createElement("h2");
           heading.textContent = item.text;
+          if (item.attributes.length > 0) {
+            setAttributesToElem(item.attributes, heading);
+          }
           setAttributesToElem(
             [{ name: item.section }, { "type-heading": true }],
             heading
@@ -513,15 +527,28 @@ const Page = () => {
   };
 
   useEffect(() => {
+    setFileName(
+      `${resumeData?.name
+        ?.replaceAll(" ", "-")
+        .replaceAll("/", "")}-${resumeData?.jobTitle
+        ?.replaceAll(" ", "-")
+        .replaceAll("/", "")}`
+    );
     generate(resumeData);
   }, [resumeData]);
+  useEffect(() => {
+    console.log(fileName);
+  }, [fileName]);
+
   return (
     <div className="ml-[234px]">
-      <DownloadService
-        componentRef={cvRef}
-        fileName="ai-resume"
-        preview={true}
-      />
+      <div className="flex items-center justify-start md:justify-start gap-3 xs:pb-0 md:pb-4 sticky top-4 z-[35]">
+        <DownloadService
+          componentRef={cvRef}
+          fileName={fileName}
+          preview={false}
+        />
+      </div>
       <div ref={cvRef} className="cv-container text-[#000]"></div>
     </div>
   );

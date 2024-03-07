@@ -23,6 +23,7 @@ const UploadPDFResume = () => {
   const { data, status }: { data: any; status: any } = useSession();
   const isAuth = status === "authenticated";
 
+  //reading pdf
   const fetchRegistrationDataFromResume = async (content: string) => {
     setFileError("");
     setFileUploading(true);

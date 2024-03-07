@@ -36,7 +36,6 @@ const ResumeTemplate1 = ({
   setStreamedSummaryData: any;
 }) => {
   const resume = useSelector((state: any) => state.resume);
-  console.log(resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
@@ -48,8 +47,6 @@ const ResumeTemplate1 = ({
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
-
-  const userData = useSelector((state: any) => state.userData);
 
   useEffect(() => {
     if (streamedJDData === "") {

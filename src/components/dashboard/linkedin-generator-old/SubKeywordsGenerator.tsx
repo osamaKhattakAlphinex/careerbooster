@@ -272,18 +272,18 @@ const SubKeywordsGenerator = () => {
         </button>
       </div>
       {streamedData && (
-        <div className="mb-4  rounded border-gray-500 border-[1px] p-4">
-          <h1 className="text-4xl font-extrabold text-gray-900  mb-4">
+        <div className="mb-4 bg-white text-gray-900 rounded border-gray-500 border-[1px] p-4">
+          <h1 className="text-4xl font-bold text-gray-900  mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
               AI Response{" "}
             </span>
           </h1>
-          <div className="font-sans dark:text-gray-100 text-gray-950 whitespace-pre-wrap break-words">
+          <div className="font-sans text-gray-950 whitespace-pre-wrap break-words">
             {streamedData}
             <button
               disabled={msgLoading}
               onClick={() => copyKeyword(streamedData)}
-              className={` flex flex-row justify-center items-center gap-2 p-2.5 mt-4 px-[28px] border-[#312E37] border-[1px] rounded-full ${
+              className={`xs:flex-1 flex gap-2 items-center mt-4 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                 msgLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
