@@ -267,7 +267,7 @@ const SideBar = () => {
                     router.push("/subscribe");
                   }}
                   btnText="Buy Credits"
-                  className={`bg-gradient-to-r from-fuchsia-600 to-indigo-500 !text-gray-100 hover:from-fuchsia-700 hover:to-indigo-600`}
+                  className={`bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-fuchsia-600 to-indigo-500 !text-gray-100 `}
                 />
               </div>
             </div>

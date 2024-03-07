@@ -241,7 +241,7 @@ const SubAboutGenerator = () => {
               </div>
             ) : (
               <div
-                className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
+                className={` bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
               >
                 <Image
                   src={buttonIconSrc}
@@ -307,7 +307,7 @@ const SubAboutGenerator = () => {
                   type="button"
                   disabled={msgLoading || !session?.user?.email}
                   onClick={() => handleGenerate()}
-                  className={` bg-gradient-to-r from-[#B324D7] h-11 xs:py-2  mx-2 mt-4 to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[22px]`}
+                  className={` bg-gradient-to-r from-[#B324D7] hover:from-purple-800 hover:to-pink-600 h-11 xs:py-2  mx-2 mt-4 to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[22px]`}
                 >
                   <span
                     className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}
