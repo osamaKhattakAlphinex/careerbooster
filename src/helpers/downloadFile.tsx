@@ -150,12 +150,12 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
 .page {
   position: relative;
 }
-.fragmentDecor::before{
+.fragmentDecor::before {
   content: " ";
   position: absolute;
   top: 0;
-  bottom:-20;
-  height: 100%;
+  bottom: -20;
+  height: 1119px;
   width: 20px;
   background-color: #e04127;
 }

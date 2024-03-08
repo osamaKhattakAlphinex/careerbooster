@@ -138,8 +138,6 @@ const Page = () => {
     newHeading("education", "education");
   };
 
-
-
   const canFitEducation = (page: any, educationHeading: any) => {
     return educationHeading.offsetTop + 140 < page.clientHeight;
   };
@@ -169,7 +167,6 @@ const Page = () => {
       let isSpaceAvailable = canFitEducation(page, indicatorDiv);
       let rowItemCount = 1;
       for (const singleEducation of Array.from(educationDivs)) {
-        
         if (isSpaceAvailable && rowItemCount <= 3) {
           newDiv.appendChild(singleEducation);
           getEducationHeading.parentNode.insertBefore(
@@ -181,16 +178,16 @@ const Page = () => {
           isSpaceAvailable = canFitEducation(page, indicatorDiv);
           if (isSpaceAvailable) {
             rowItemCount = 1;
-            console.log(newDiv)
-            newDiv.appendChild(singleEducation)
+            console.log(newDiv);
+            newDiv.appendChild(singleEducation);
             getEducationHeading.parentNode.insertBefore(
               newDiv,
               getEducationHeading.nextSibling
             );
-           
+
             rowItemCount++;
           } else {
-            if(nextPage){
+            if (nextPage) {
               newNextDiv.appendChild(singleEducation);
               nextPage.append(newNextDiv);
             }
@@ -324,7 +321,6 @@ const Page = () => {
                 if (element.container) {
                   const container_element = document.createElement(element.tag);
                   setAttributesToElem(attr, container_element);
-
                   setAttributesToElem(
                     [{ [`${key}-container-index`]: i }],
                     container_element
@@ -337,6 +333,7 @@ const Page = () => {
                       const singlespan = document.createElement(item.tag);
                       setAttributesToElem(attr, singlespan);
                       const styles = item.styles;
+                      //
                       setStylesToElement(singlespan, styles);
                       singlespan.textContent = singleItem[item.id];
                       container_element.append(singlespan);
@@ -346,7 +343,6 @@ const Page = () => {
                         item.tag
                       );
                       setAttributesToElem(attr, inner_container_element);
-
                       setAttributesToElem(
                         [{ [`${key}-inner-container-index`]: i }],
                         inner_container_element
@@ -359,6 +355,7 @@ const Page = () => {
                           const singlespan = document.createElement(one.tag);
                           setAttributesToElem(attr, singlespan);
                           const styles = one.styles;
+                          console.log("container styles:", styles);
                           setStylesToElement(singlespan, styles);
                           singlespan.textContent = singleItem[one.id];
                           inner_container_element.append(singlespan);

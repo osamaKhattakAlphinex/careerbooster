@@ -200,7 +200,7 @@ const components: any = {
     elements: [
       {
         tag: "div",
-        styles: "bg-gray-200 flex flex-col w-[30%] p-4 rounded-md",
+        styles: "bg-gray-200 flex flex-col w-[40%] p-4 rounded-md",
         container: [
           {
             id: "educationLevel",

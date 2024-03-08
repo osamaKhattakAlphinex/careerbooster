@@ -181,7 +181,7 @@ const components: any = {
       {
         tag: "div",
         styles:
-          "bg-gray-200 flex flex-col w-[30%] text-gray-950 p-4 rounded-md",
+          "bg-gray-200 flex flex-col w-[40%] text-gray-950 p-4 rounded-md",
         container: [
           {
             id: "educationLevel",

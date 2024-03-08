@@ -190,7 +190,7 @@ const components: any = {
     elements: [
       {
         tag: "div",
-        styles: "flex flex-col w-[30%] p-2 rounded-md",
+        styles: "flex flex-col w-[40%] p-2 rounded-md",
         container: [
           {
             id: "educationLevel",
