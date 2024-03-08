@@ -51,10 +51,10 @@ const CreditInfoModal = forwardRef(
           </h1>
           <p className="my-4 text-sm">
             If you wish to quantify your achievements by assigning numbers or
-            percentages, please select the "Quantify Experiences" option below.
+            percentages, please select the {`"`}Quantify Experiences{`"`} option below.
             This is considered a best practice for presenting tangible results
             in your resume. However, if you do not have specific metrics to
-            include, select "Don{"'"}t Quantify Experiences".
+            include, select {`"`}Don{"'"}t Quantify Experiences{`"`}.
           </p>
 
           <button

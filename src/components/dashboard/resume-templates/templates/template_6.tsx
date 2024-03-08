@@ -217,7 +217,7 @@ const ResumeTemplate6 = ({
                       <>
                         <p className="text-gray-950 flex gap-2">
                           Oops! Generating an Executive Summary requires 200
-                          credits, but it seems you've run out. Click here to
+                          credits, but it seems you{"'"}ve run out. Click here to
                           upgrade your package.
                           <Link
                             href="/subscribe"

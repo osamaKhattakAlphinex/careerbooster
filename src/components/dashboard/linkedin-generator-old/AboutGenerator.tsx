@@ -39,8 +39,8 @@ const AboutGenerator = ({ creditLimits }: { creditLimits: any }) => {
 
             <p className="text-[14px] text-[#959595] pr-5">
               Transform your career journey into a compelling story that
-              captures recruiters' attention and enhances your LinkedIn
-              profile's visibility.
+              captures recruiters{"'"} attention and enhances your LinkedIn
+              profile{"'"}s visibility.
             </p>
           </div>
           <div
