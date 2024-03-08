@@ -9,8 +9,8 @@ import Button from "./Button";
 
 const tabOptions = [
   { name: "Resumes", value: "resumemaker" },
-  { name: "Cover Letter", value: "cover-letter" },
-  { name: "Email Bot", value: "email-bot" },
+  { name: "Cover Letters", value: "cover-letter" },
+  { name: "Emails", value: "email-bot" },
   { name: "Consulting Bids", value: "consulting-bids" },
 ];
 

@@ -20,7 +20,9 @@ import {
 
 import {
   checkIconSmall,
+  chevronRight,
   crossIcon,
+  infoSmallIcon,
   leftArrowIcon,
 } from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
@@ -38,6 +40,8 @@ import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import CreditInfoModal from "@/components/dashboard/resume-builder/CreditsInfoModal";
 import Templates from "@/components/dashboard/resume-templates";
 import TemplateSlider from "@/components/dashboard/resume-templates/templateSlider";
+import { Metadata } from "next";
+import Head from "next/head";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -326,7 +330,7 @@ const ResumeBuilder = () => {
   useEffect(() => {
     if (!resumeData.state.resumeLoading && resumeData?.name) {
       // if (firstLoad) {
-        saveResumeToDB();
+      saveResumeToDB();
       // }
       setFinished(true);
       // setFirstLoad(true);
@@ -414,17 +418,24 @@ const ResumeBuilder = () => {
                 design templates click here
               </p> */}
               <div className="flex items-center justify-between">
-                <h2 className="my-3 text-base font-bold dark:text-gray-100 text-gray-950">
-                  Design Templates
+                <h2 className="my-3 flex items-center text-base font-bold dark:text-gray-100 text-gray-950">
+                  Template Selection :{" "}
+                  <div className="group md:ml-1 cursor-pointer relative inset-0">
+                    {infoSmallIcon}
+                    <div className="w-40 md:w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:left-1 md:left-4 xs:-top-[92px]  md:-top-[5.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-bl-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+                      Select any template below to instantly update your resume
+                      design.
+                    </div>
+                  </div>
                 </h2>
                 <Link
                   href="/resume-builder/templates"
                   className="overflow-hidden text-white no-underline rounded-lg"
                 >
                   <div
-                    className={` font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
+                    className={` font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center py-1 px-2`}
                   >
-                    All Templates
+                    View All Templates<i className="">{chevronRight}</i>
                   </div>
                 </Link>
               </div>

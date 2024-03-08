@@ -18,7 +18,7 @@ const useCaseDetails = [
       "With CareerBooster.AI, you can effortlessly craft a compelling executive resume that grabs the attention of recruiters and showcases your unique skills and achievements.",
     linkText: "Elevate Your Resume!",
     icon: usecasesvg1,
-    link: "/use-cases",
+    link: "/register",
   },
   {
     title: "Keyword Optimize Your LinkedIn",
@@ -26,15 +26,15 @@ const useCaseDetails = [
       "Ensure your LinkedIn profile ranks high in recruiter searches. Our AI system will optimize your profile with relevant keywords, making it more likely to be seen by potential employers.",
     linkText: "Boost Your LinkedIn Now!",
     icon: usecasesvg2,
-    link: "/use-cases",
+    link: "/register",
   },
   {
     title: "Tailor Cover Letter for Each Job",
     description:
-      "Create customized cover letters for every job application in just a few minutes. Tailoring your cover letter to each specific position greatly increases your chances of landing interviews.",
+      "Create customized cover letters for every job application in just a few seconds. Tailoring your cover letter to each specific position greatly increases your chances of landing interviews.",
     linkText: "Craft Your Winning Letter!",
     icon: usecasesvg3,
-    link: "/use-cases",
+    link: "/register",
   },
   {
     title: "Get Your Resume Reviewed",
@@ -42,7 +42,7 @@ const useCaseDetails = [
       "Receive valuable feedback on your resume to identify areas for improvement. Our AI tool analyzes your document and provides actionable suggestions to enhance its impact.",
     linkText: "Unlock Your Full Potential!",
     icon: usecasesvg4,
-    link: "/use-cases",
+    link: "/register",
   },
   {
     title: "ATS Scan Your Resume",
@@ -50,7 +50,7 @@ const useCaseDetails = [
       "Avoid the pitfalls of Applicant Tracking Systems (ATS) with our ATS scanning feature. Ensure your resume is ATS-friendly, increasing your chances of making it to the recruiter's desk.",
     linkText: "Beat the ATS",
     icon: usecasesvg5,
-    link: "/use-cases",
+    link: "/register",
   },
   {
     title: "Personalized Email for Each Job",
@@ -58,7 +58,7 @@ const useCaseDetails = [
       "Craft personalized emails to recruiters quickly and easily. Our AI-generated emails help you make a memorable first impression and increase your chances of getting noticed.",
     linkText: "Stand Out Now!",
     icon: usecasesvg6,
-    link: "/use-cases",
+    link: "/register",
   },
   {
     title: "Tailor Resume for Each Job",
@@ -66,7 +66,7 @@ const useCaseDetails = [
       "Ditch the one-size-fits-all approach. CareerBooster.AI lets you create customized resumes for each job opening, highlighting the skills and experiences most relevant to the position.",
     linkText: "Personalize Your Pitch!",
     icon: usecasesvg7,
-    link: "/use-cases",
+    link: "/register",
   },
   {
     title: "Make Your Resume ATS Optimized",
@@ -74,7 +74,7 @@ const useCaseDetails = [
       "Our AI ensures that your resume is not only tailored for human readers but also optimized for ATS, so it passes through the initial screening and reaches recruiters.",
     linkText: "ATS-Proof Your Resume!",
     icon: usecasesvg8,
-    link: "/use-cases",
+    link: "/register",
   },
 ];
 const UseCases = () => {

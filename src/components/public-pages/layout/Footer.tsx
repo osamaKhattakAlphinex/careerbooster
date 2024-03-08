@@ -203,7 +203,7 @@ const Footer = () => {
 
           <div className="items-center justify-center py-2 mx-auto xs:py-4 md:py-2 xs:container xs:flex xs:flex-col sm:gap-4 sm:flex-row ">
             <p className="text-xs text-center text-gray-950 dark:text-gray-100 ">
-              Copyright <span> &copy; CareerBooster 2023</span>.{" "}
+              Copyright <span> &copy; CareerBooster 2024</span>.{" "}
             </p>
             <div className="flex flex-row items-center justify-between gap-2 xs:py-4 sm:py-0">
               <Link

@@ -128,7 +128,7 @@ const UploadPDFResume = () => {
       {isAuth && userData.isFetched && (
         <Link
           href="/dashboard"
-          className="bg-gradient-to-r  from-purple-700 cursor-pointer  to-pink-500 text-white md:px-[2rem] px-4 py-3 md:py-[1rem] text-sm md:text-lg font-semibold rounded-md "
+          className="bg-gradient-to-r hover:from-purple-800 hover:to-pink-600  from-purple-700 cursor-pointer  to-pink-500 text-white md:px-[2rem] px-4 py-3 md:py-[1rem] text-sm md:text-lg font-semibold rounded-md "
         >
           Dashboard
         </Link>

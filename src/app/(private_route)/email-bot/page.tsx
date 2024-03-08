@@ -641,7 +641,7 @@ const PersonalizedEmailBot = () => {
                 checked={selectedOption === "profile"}
                 className="w-5 h-4"
               />
-              Use My Persona to write Email
+              Use my existing resume/data
             </label>
             <label
               htmlFor="default-radio-2"
@@ -661,7 +661,7 @@ const PersonalizedEmailBot = () => {
                 className="w-4 h-4 border-[1px]"
                 checked={selectedOption === "file"}
               />
-              Upload a new PDF Resume
+              Upload a new resume
             </label>
             {selectedOption == "file" ? (
               <CoverLetterFileUploader
@@ -678,7 +678,7 @@ const PersonalizedEmailBot = () => {
             <div className="flex flex-col w-full">
               <label className=" font-bold text-md justify-between items-center md:text-[24px] dark:text-gray-100 text-gray-950 flex pb-[20px] gap-[3px]">
                 <div>
-                  Paste Your Job Description
+                  Paste Job Description
                   <span className="text-[#F04248] text-md md:text-[24px]">
                     *
                   </span>
@@ -688,7 +688,7 @@ const PersonalizedEmailBot = () => {
                 >
                   {creditLimits?.email_generation}
                   <div className="pl-1"> Credits</div>
-                  <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32  xs:-top-12 md:-top-14  hidden group-hover:block  xs:rounded-br-none  text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+                  <div className="w-44 bg-gradient-to-r  hover:from-purple-800 hover:to-pink-600  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32  xs:-top-12 md:-top-14  hidden group-hover:block  xs:rounded-br-none  text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                     {creditLimits?.email_generation} credits will be used for
                     Email Generation
                   </div>
@@ -699,7 +699,7 @@ const PersonalizedEmailBot = () => {
                 name="jobTitle"
                 rows={6}
                 onChange={(e) => setJobDescription(e.target.value)}
-                placeholder="Copy the job description for the position you are applying and paste it here to generate a tailor cover letter."
+                placeholder="Copy the job description for the position you are applying and paste it here to generate post application follow up emails to the hiring managers."
                 className="w-full px-3 lg:px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px] pt-3"
               />
             </div>

@@ -350,7 +350,7 @@ export default function CoverLetterPage() {
                     checked={selectedOption === "profile"}
                     className="h-4 w-fit"
                   />
-                  Use My Persona to write the Cover Letter
+                  Use my existing resume/data
                 </label>
                 <label
                   htmlFor="default-radio-2"
@@ -372,7 +372,7 @@ export default function CoverLetterPage() {
                     className="w-fit h-4 border-[1px]"
                     checked={selectedOption === "file"}
                   />
-                  Upload a new PDF Resume
+                  Upload a new resume
                 </label>
                 {selectedOption == "file" ? (
                   <CoverLetterFileUploader
@@ -389,7 +389,7 @@ export default function CoverLetterPage() {
                 <div className="flex flex-col w-full">
                   <label className=" font-bold justify-between  items-center text-md md:text-[24px] dark:text-gray-100 text-gray-950 flex lg:pb-[16px] gap-[3px]">
                     <div>
-                      Paste Your Job Description
+                      Paste Job Description
                       <span className="text-[#F04248] text-[24px]">*</span>
                     </div>
                     <div
@@ -424,7 +424,7 @@ export default function CoverLetterPage() {
                     jobDescription === ""
                   }
                   onClick={handleGenerate}
-                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                  className={`dark:bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                     (msgLoading ||
                       !session?.user?.email ||
                       !aiInputUserData ||
@@ -473,7 +473,7 @@ export default function CoverLetterPage() {
                         </svg>
 
                         <span
-                          className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                          className={`dark:text-gray-100  text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
                         >
                           Generate Cover Letter
                         </span>
@@ -483,9 +483,9 @@ export default function CoverLetterPage() {
                 </button>
               </div>
 
-              <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-2">
+              {/* <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-2">
                 your ai generated cover letter
-              </h1>
+              </h1> */}
               {show && (
                 <div
                   ref={componentRef}
@@ -646,7 +646,7 @@ export default function CoverLetterPage() {
                       fileName="ai-cover-letter"
                     />
                     {show && (
-                      <div className="hidden xs:block md:block">
+                      <div className="hidden xs:block group md:block">
                         <button
                           disabled={
                             msgLoading ||
@@ -661,7 +661,7 @@ export default function CoverLetterPage() {
                             isCoverLetterCopied
                           }
                           onClick={() => copyCoverLetter(streamedData)}
-                          className={`xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                          className={`xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b] group-hover:opacity-80 text-gray-300 border-[1px] ${
                             msgLoading ||
                             !session?.user?.email ||
                             !aiInputUserData ||
@@ -702,14 +702,14 @@ export default function CoverLetterPage() {
                       </div>
                     )}
                     {show && (
-                      <div className="hidden xs:block md:block">
+                      <div className="hidden xs:block md:block group">
                         <button
                           type="button"
                           disabled={
                             !show || msgLoading || !session?.user?.email
                           }
                           onClick={handleClick}
-                          className={` xs:flex-1 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                          className={` xs:flex-1 lg:text-sm text-xs lg:px-6 group-hover:opacity-80 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                             !show || msgLoading || !session?.user?.email
                               ? "opacity-50 cursor-not-allowed"
                               : ""
@@ -735,7 +735,7 @@ export default function CoverLetterPage() {
                       <button
                         type="submit"
                         onClick={handleSave}
-                        className="flex flex-row justify-center ml-auto items-center gap-2 py-[4] text-sm px-3 border-[#312E37] border-[1px] rounded-full text-gray-100 !bg-gray-950"
+                        className="flex flex-row hover:opacity-80 justify-center ml-auto items-center gap-2 py-[4] text-sm px-3 border-[#312E37] border-[1px] rounded-full text-gray-100 !bg-gray-950"
                       >
                         <svg
                           width="16"

@@ -10,8 +10,8 @@ import MainLoaderLayer from "@/components/MainLoaderLayer";
 import CreditLimitsProvider from "@/components/data-providers/CreditLimitsProvider";
 import "./index.css";
 export const metadata: Metadata = {
-  title: "AI Resume Bot",
-  description: "AI Resume Bot | Developed by NausalTech",
+  title: "Dashboard - CareerBooster.ai",
+  description: "Dashboard - CareerBooster.ai | Developed by NausalTech",
 };
 
 export default function RootLayout({

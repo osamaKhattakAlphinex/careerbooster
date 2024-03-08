@@ -241,7 +241,7 @@ const SubAboutGenerator = () => {
               </div>
             ) : (
               <div
-                className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
+                className={` bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
               >
                 <Image
                   src={buttonIconSrc}
@@ -271,46 +271,45 @@ const SubAboutGenerator = () => {
             // style={{ textW: "auto" }}
           >
             {streamedData}
-           
 
-              <button
-                disabled={msgLoading}
-                onClick={() => copyAbout(streamedData)}
-                className={`xs:flex-1 flex gap-2 items-center mt-4 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
-                  msgLoading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+            <button
+              disabled={msgLoading}
+              onClick={() => copyAbout(streamedData)}
+              className={`xs:flex-1 flex gap-2 items-center mt-4 hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                msgLoading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-4 h-4 dark:text-gray-100 text-gray-950"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-4 h-4 dark:text-gray-100 text-gray-950"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
-                  />
-                </svg>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
+                />
+              </svg>
 
-                <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
-                  {msgLoading
-                    ? "Please wait..."
-                    : isAboutCopied
-                    ? "Copied"
-                    : "Copy to clipboard"}
-                </span>
-              </button>
-            
+              <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
+                {msgLoading
+                  ? "Please wait..."
+                  : isAboutCopied
+                  ? "Copied"
+                  : "Copy to clipboard"}
+              </span>
+            </button>
+
             <div className="flex flex-row xs:flex-col md:flex-row">
               {option !== "about" && (
                 <button
                   type="button"
                   disabled={msgLoading || !session?.user?.email}
                   onClick={() => handleGenerate()}
-                  className={` bg-gradient-to-r from-[#B324D7] h-11 xs:py-2  mx-2 mt-4 to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[22px]`}
+                  className={` bg-gradient-to-r from-[#B324D7] hover:from-purple-800 hover:to-pink-600 h-11 xs:py-2  mx-2 mt-4 to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[22px]`}
                 >
                   <span
                     className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}

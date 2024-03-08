@@ -235,7 +235,7 @@ const SubHeadlineGenerator = () => {
               </div>
             ) : (
               <div
-                className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
+                className={` bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
               >
                 <Image
                   src={buttonIconSrc}
@@ -270,7 +270,7 @@ const SubHeadlineGenerator = () => {
             <button
               disabled={msgLoading}
               onClick={() => copyHeadline(streamedData)}
-               className={`xs:flex-1 mt-4 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+              className={`xs:flex-1 mt-4 flex gap-2 items-center hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                 msgLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
@@ -289,7 +289,7 @@ const SubHeadlineGenerator = () => {
                 />
               </svg>
 
-              <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
+              <span className="dark:text-gray-100  text-gray-950 text-[15px] font-semibold">
                 {msgLoading
                   ? "Please wait..."
                   : isHeadlineCopied
