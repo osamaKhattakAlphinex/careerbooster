@@ -40,7 +40,7 @@ const ProfileCompletionAlert = () => {
             <span className=" text-white mr-2 font-bold lg:text-[14px] text-[12px] ">
               Important!
             </span>
-            Complete your profile to get better results
+            Please review your profile to ensure accurate results.
           </p>
         </div>
 
@@ -48,7 +48,7 @@ const ProfileCompletionAlert = () => {
           className="bg-yellow-400 cursor-pointer ml-4 font-bold text-stone-950 no-underline rounded-full lg:px-[28px] px-[20px] lg:py-[7px] py-[5px] lg:text-[14px] text-[12px] mx-[13px] flex flex-col mt-[10px] lg:mt-[0px] hover:bg-yellow-500"
           href="/profile-review"
         >
-          Complete now
+          Review Now
         </Link>
       </div>
     );

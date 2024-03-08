@@ -59,8 +59,8 @@ const RegistrationForm = () => {
       password: "",
       confirmpassword: "",
       // status: "pending",
-      terms: false,
-      alertConsent: false,
+      terms: true,
+      alertConsent: true,
       file: "",
     },
 
@@ -309,7 +309,7 @@ const RegistrationForm = () => {
             /> */}
           </a>
           <h3 className=" font-semibold  text-lg md:text-2xl lg:text-[2rem] dark:text-gray-100 text-gray-950">
-            Register your Account
+            Get Started Free: Unlock Powerful Tools for Your Career
           </h3>
 
           <form className="flex flex-col my-2" onSubmit={formik.handleSubmit}>
@@ -643,7 +643,7 @@ const RegistrationForm = () => {
                 )}
               </button>
             </div>
-            <div className="text-center">
+            <div className="text-center mt-2">
               <p>
                 Already have an account?
                 <Link

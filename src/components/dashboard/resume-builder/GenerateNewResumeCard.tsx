@@ -116,7 +116,7 @@ Props) => {
         <div className="w-full flex flex-col gap-4">
           <label
             htmlFor="targetedJobPosition"
-            className=" font-bold dark:text-gray-100 text-gray-950 text-md md:text-[24px] flex flex-row gap-[10px]"
+            className=" font-bold items-center dark:text-gray-100 text-gray-950 text-md md:text-[24px] flex flex-row gap-[10px]"
           >
             <Image
               src="/icon/rocket.svg"
@@ -124,8 +124,18 @@ Props) => {
               height={16}
               width={16}
             />
-            Targeted Job Position
+            Enter Your Targeted Job Position:{" "}
+            <div className="group cursor-pointer relative inset-0">
+              {infoSmallIcon}
+              <div className="w-48 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[14px] px-2 absolute xs:-left-48 md:left-4 xs:-top-28  md:-top-[11.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+                Customize your resume for the specific roles you're applying
+                for. A tailored resume significantly boosts your chances of
+                securing more interviews by highlighting your suitability for
+                the position.
+              </div>
+            </div>
           </label>
+
           <input
             type="targetedJobPosition"
             name="targetedJobPosition"
@@ -134,7 +144,7 @@ Props) => {
             onChange={(e) =>
               dispatch(setState({ name: "jobPosition", value: e.target.value }))
             }
-            placeholder="e.g. Sales Associates"
+            placeholder="e.g. Vice President of Sales"
             className="w-full py-4 px-[26px] rounded-full text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px]"
           />
         </div>

@@ -332,7 +332,7 @@ const SubJDGenerator = () => {
               <button
                 disabled={msgLoading}
                 onClick={() => copyJD(streamedData)}
-                className={`xs:flex-1 mt-4 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                className={`xs:flex-1 mt-4 flex gap-2 items-center hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                   msgLoading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >

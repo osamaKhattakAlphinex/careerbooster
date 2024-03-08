@@ -29,20 +29,20 @@ import ProfileImageModal from "../ProfileImageModal";
 import AvailableCredits from "../AvailableCredits";
 
 const items = [
-  { icon: homeIcon, text: "Dashboard", url: "/dashboard" },
-  { icon: clipboard, text: "Resumes", url: "/resume-builder" },
+  { icon: homeIcon, text: "My Dashboard", url: "/dashboard" },
+  { icon: clipboard, text: "My Resumes", url: "/resume-builder" },
   {
     icon: coverLetterSidebarIcon,
     text: "Cover Letters",
     url: "/cover-letter-generator",
   },
-  { icon: userGroup, text: "LinkedIn Tool", url: "/linkedin-generator" },
-  { icon: emailBotSidebarIcon, text: "Email Bot", url: "/email-bot" },
-  { icon: dollarIcon, text: "Billing Detail", url: "/billing" },
+  { icon: userGroup, text: "LinkedIn Optimizer", url: "/linkedin-generator" },
+  { icon: emailBotSidebarIcon, text: "Email Assistant", url: "/email-bot" },
+  { icon: dollarIcon, text: "Billing Details", url: "/billing" },
   // { icon: bid, text: "Consulting Bot", url: "/consulting-bids-bot" },
-  { icon: userCircle, text: "Profile", url: "/profile-review" },
+  { icon: userCircle, text: "Profile Settings ", url: "/profile-review" },
   { icon: keyIcon, text: "Change Password", url: "/change-current-password" },
-  { icon: powerIcon, text: "Logout", url: "/dashboard" },
+  { icon: powerIcon, text: "Sign Out", url: "/dashboard" },
 ];
 const pagesArray = ["/subscribe", "/subscribed"];
 const SideBar = () => {
@@ -116,7 +116,9 @@ const SideBar = () => {
           {/* Use your icon here for mobile menu toggle */}
           {isOpen ? xMark : menuIcon}
         </div>
-        <Image src={logo} alt="" className="h-16 w-35 md:ml-4" />
+        <Link href="/">
+          <Image src={logo} alt="" className="h-16 w-35 md:ml-4" />
+        </Link>
       </div>
       <div
         className={`fixed w-[234px] h-screen z-30 top-0 flex justify-center dark:bg-[#18181B] bg-gray-100  mt-16  transition-all  ${

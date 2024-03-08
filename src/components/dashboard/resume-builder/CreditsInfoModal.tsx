@@ -23,8 +23,13 @@ const CreditInfoModal = forwardRef(
       openModal,
     }));
 
-    const handleOk = () => {
-      handleGenerate(quantifyingExperience);
+    const quantifyExperience = () => {
+      handleGenerate(true);
+      setOpenCreditInfoModal(false);
+    };
+
+    const dontQuanitfyExperence = () => {
+      handleGenerate(false);
       setOpenCreditInfoModal(false);
     };
 
@@ -42,12 +47,14 @@ const CreditInfoModal = forwardRef(
           {/* <div className="relative p-4 text-center rounded-lg shadow sm:p-5"> */}
           <h1 className="text-lg font-bold text-center dark:text-white text-gray-950">
             {/* Credits Usage Info */}
-            Quanitifying Experience
+            Select Your Work Experience Preference:
           </h1>
           <p className="my-4 text-sm">
-            Quantifying experiences refers to assigning numerical or measurable
-            values to experiences or achievements to make them more tangible or
-            comparable.
+            If you wish to quantify your achievements by assigning numbers or
+            percentages, please select the "Quantify Experiences" option below.
+            This is considered a best practice for presenting tangible results
+            in your resume. However, if you do not have specific metrics to
+            include, select "Don{"'"}t Quantify Experiences".
           </p>
 
           <button
@@ -94,7 +101,7 @@ const CreditInfoModal = forwardRef(
             </li>
           </ul> */}
 
-          <label className="relative inline-flex items-center cursor-pointer">
+          {/* <label className="relative inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
               checked={quantifyingExperience}
@@ -104,8 +111,8 @@ const CreditInfoModal = forwardRef(
             <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full  after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-none peer-checked:bg-blue-600"></div>
             <span className="text-sm font-medium text-gray-900 ms-3 dark:text-gray-300">
               Quantifying Experiences
-            </span>
-            {/* <span className="relative ml-2 text-gray-600 cursor-pointer group">
+            </span> */}
+          {/* <span className="relative ml-2 text-gray-600 cursor-pointer group">
               {infoSmallIcon}
               <div
                 role="tooltip"
@@ -117,7 +124,7 @@ const CreditInfoModal = forwardRef(
                 <div className="tooltip-arrow" data-popper-arrow></div>
               </div>
             </span> */}
-          </label>
+          {/* </label> */}
 
           <div className="flex flex-col items-center justify-center space-y-2 ">
             {/* <div className="w-full text-center">
@@ -125,19 +132,26 @@ const CreditInfoModal = forwardRef(
             </div> */}
             <div className="flex justify-end gap-4 mt-4">
               <button
-                onClick={handleOk}
-                className="p-2 text-sm text-white bg-blue-600 rounded"
+                onClick={dontQuanitfyExperence}
+                className="p-2 text-sm text-white bg-green-600 rounded"
               >
-                Generate
+                Don{"'"}t Quantify Experiences
               </button>
               <button
+                onClick={quantifyExperience}
+                className="p-2 text-sm text-white bg-blue-600 rounded"
+              >
+                Quantify Experiences
+              </button>
+
+              {/* <button
                 className="p-2 text-sm text-white bg-red-600 rounded"
                 onClick={() => {
                   setOpenCreditInfoModal(false);
                 }}
               >
                 Cancel
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
