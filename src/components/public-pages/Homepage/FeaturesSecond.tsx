@@ -45,7 +45,7 @@ const FeaturesSecond = () => {
         "Don't Miss Out on Lucrative Unadvertised Opportunities Anymore!",
       content:
         "Discover the power of LinkedIn optimization! Senior-level jobs are often concealed, and recruiters prefer to hunt for talent on LinkedIn. If your profile isn't optimized, you're invisible to them, missing out on exclusive career opportunities. Our proven strategies will transform your LinkedIn presence, ensuring you're front and center when those lucrative, unadvertised positions become available. Take control of your future today",
-      buttonText: "Request A Demo",
+      buttonText: "Get Started Free",
       buttonSvg: (
         <svg
           className="w-4 h-4"
@@ -70,9 +70,9 @@ const FeaturesSecond = () => {
       id: 3,
       featureNo: "Feature 3",
       headingTwo: "Stop Wasting Hours on Tailored Cover Letters!",
-      mainHeading:
+      subHeading:
         "Unlock the Future of Job Applications with AI-Powered Cover Letters",
-      subHeading: "Craft Tailor-Made Cover Letters for Every Job in Seconds!",
+      mainHeading: "Craft Tailor-Made Cover Letters for Every Job in Seconds!",
       content:
         "Are you tired of spending hours each day crafting individual cover letters for job applications? Our AI-powered system streamlines the process, allowing you to create customized cover letters in mere seconds. Say goodbye to the time-consuming grind and embrace a more efficient way to land your dream job!",
       buttonText: "Get Started Free",
@@ -105,7 +105,7 @@ const FeaturesSecond = () => {
         "Ensure Your Resume Navigates Robots and Recruiters Effortlessly",
       content:
         "DTake control of your job search by uncovering whether your resume passes the ATS screening. Our free ATS Scan service provides insights to optimize your resume for success. Don't let the ATS stand in your way - assess your resume now!",
-      buttonText: "Request A Demo",
+      buttonText: "Get Started Free",
       buttonSvg: (
         <svg
           className="w-4 h-4"

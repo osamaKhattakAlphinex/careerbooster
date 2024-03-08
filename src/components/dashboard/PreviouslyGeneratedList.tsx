@@ -1,5 +1,5 @@
 "use client";
-import { searchIcon } from "@/helpers/iconsProvider";
+import { infoSmallIcon, searchIcon } from "@/helpers/iconsProvider";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -23,17 +23,27 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
 
   return (
     <div className="dark:bg-[#17151b] dark:text-white  bg-[#00000015] text-gray-950  rounded-[20px]  mb-7 px-4 lg:px-[24px] pt-[20px] pb-[20px] z-0">
-      <div className="flex justify-between items-center ">
-        <h1 className="uppercase text-[14px] md:text-sm font-semibold lg:pr-0 pr-4">
-          {dataSource === "coverLetters" && "recent Cover Letters"}
-          {dataSource === "emails" && "recent Emails"}
-          {dataSource === "consultingBids" && "recent Bids"}
-          {dataSource === "resume" && "recent Resume"}
-          {dataSource === "linkedInHeadlines" && "recent Headlines"}
-          {dataSource === "linkedInAbouts" && "recent Abouts"}
-          {dataSource === "linkedInJobDescriptions" && "recent Descriptions"}
-          {dataSource === "linkedInKeywords" && "recent Keywords"}
+      <div className="flex gap-3 items-center ">
+        <h1 className=" flex justify-center text-[14px] md:text-sm font-semibold lg:pr-0 pr-4">
+          {dataSource === "coverLetters" && "RECENT COVER LETTERS"}
+          {dataSource === "emails" && "RECENT EMAILS"}
+          {dataSource === "consultingBids" && "RECENT BIDS"}
+          {dataSource === "resume" && "RECENT RESUME"}
+          {dataSource === "linkedInHeadlines" && "RECENT HEADLINES"}
+          {dataSource === "linkedInAbouts" && "RECENT ABOUTS"}
+          {dataSource === "linkedInJobDescriptions" && "RECENT DESCRIPTIONS"}
+          {dataSource === "linkedInKeywords" && "RECENT KEYWORDS"}
         </h1>
+          <div className="group flex md:ml-1 cursor-pointer relative inset-0">
+            {infoSmallIcon}
+            <div className="w-40 md:w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:left-1 md:left-4 xs:-top-[92px]  z-[2000]  md:-top-[5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-bl-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+              {dataSource === "coverLetters" &&
+                "Every cover letter you generate is stored here for easy future access."}
+              {dataSource === "emails" &&
+                "Every Email you generate is stored here for easy future access."}
+            </div>
+          </div>
+
         {/* <div className="relative lg:w-[213px] w-[120px] flex">
           <input
             className="w-full pl-4 lg:h-[38px] lg:py-[8px] py-[6px]

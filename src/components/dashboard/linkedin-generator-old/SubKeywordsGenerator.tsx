@@ -217,7 +217,9 @@ const SubKeywordsGenerator = () => {
             setAvailablePercentage={setAvailablePercentage}
           /> */}
           <p className="text-[14px] text-[#959595] pr-5">
-            Generator popular keywords for your linkedin profile
+            Generate the top skills and industry specific keywords that align
+            with your desired job position to rank higher and stand out to
+            potential employers.
           </p>
         </div>
         <button
@@ -251,7 +253,7 @@ const SubKeywordsGenerator = () => {
               </div>
             ) : (
               <div
-                className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
+                className={` bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
               >
                 <Image
                   src={buttonIconSrc}
@@ -283,7 +285,7 @@ const SubKeywordsGenerator = () => {
             <button
               disabled={msgLoading}
               onClick={() => copyKeyword(streamedData)}
-              className={`xs:flex-1 flex gap-2 items-center mt-4 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+              className={`xs:flex-1 flex gap-2 items-center mt-4 hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                 msgLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >

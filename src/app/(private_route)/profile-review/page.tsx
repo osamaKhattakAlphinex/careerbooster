@@ -32,7 +32,7 @@ const ProfileReview = () => {
   const userData = useSelector((state: any) => state.userData);
 
   const reduxStep = register.activeStep;
-
+  console.log(reduxStep)
   const handleSaveDetails = async () => {
     dispatch(setField({ name: "isSubmitting", value: true }));
     // make an object
@@ -79,6 +79,7 @@ const ProfileReview = () => {
 
   // function to return true, false based for next button
   const isNextDisabled = () => {
+    console.log(register.activeStep, register.stepTwo.isValid)
     if (register.activeStep === 1 && register.stepOne.isValid === false) {
       return true;
     } else if (
@@ -145,33 +146,7 @@ const ProfileReview = () => {
                           : "xs:justify-end "
                       } items-center`}
                     >
-                      {/* {register.activeStep > 1 && (
-                        <button
-                          type="submit"
-                          className="flex items-center gap-2 text-base  dark:text-gray-100 xs:scale-75 md:scale-100 text-gray-950"
-                          onClick={(e) => {
-                            dispatch(setActiveStep(register.activeStep - 1));
-                          }}
-                        >
-                          <span className="xs:scale-75 md:scale-100">
-                            {leftArrowIcon}
-                          </span>{" "}
-                          Back
-                        </button>
-                      )}
-
-                      {register.activeStep < 5 && (
-                        <button
-                          type="submit"
-                          disabled={isNextDisabled()}
-                          className="py-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
-                          onClick={(e) => {
-                            dispatch(setActiveStep(register.activeStep + 1));
-                          }}
-                        >
-                          Next
-                        </button>
-                      )} */}
+                      
                     </div>
                     {register.activeStep === 1 && (
                       <>
@@ -224,7 +199,7 @@ const ProfileReview = () => {
                       {register.activeStep < 4 && (
                         <button
                           type="submit"
-                          disabled={isNextDisabled()}
+                          // disabled={isNextDisabled()}
                           className="py-3 md:mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
                           onClick={(e) => {
                             dispatch(setActiveStep(register.activeStep + 1));

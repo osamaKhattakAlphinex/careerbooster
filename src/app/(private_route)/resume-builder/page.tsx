@@ -18,7 +18,13 @@ import {
   // setLoadingState,
 } from "@/store/resumeSlice";
 
-import { checkIconSmall, crossIcon, leftArrowIcon } from "@/helpers/iconsProvider";
+import {
+  checkIconSmall,
+  chevronRight,
+  crossIcon,
+  infoSmallIcon,
+  leftArrowIcon,
+} from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
 import RecentResumeCard from "@/components/dashboard/resume-builder/RecentResumeCard";
 import GenerateResume from "@/components/dashboard/resume-builder/GenerateNewResumeCard";
@@ -34,11 +40,13 @@ import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import CreditInfoModal from "@/components/dashboard/resume-builder/CreditsInfoModal";
 import Templates from "@/components/dashboard/resume-templates";
 import TemplateSlider from "@/components/dashboard/resume-templates/templateSlider";
+import { Metadata } from "next";
+import Head from "next/head";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [showTemplatePopup,setShowTemplatePopup] = useState(false);
+  const [showTemplatePopup, setShowTemplatePopup] = useState(false);
   const confettiConfig = {
     angle: 90,
     spread: 360,
@@ -71,14 +79,13 @@ const ResumeBuilder = () => {
   const [streamedJDData, setStreamedJDData] = useState<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
-  const [firstLoad,setFirstLoad] = useState<boolean>(false);
+  const [firstLoad, setFirstLoad] = useState<boolean>(false);
   const [availablePercentage, setAvailablePercentage] = useState<number>(0);
   const { saveResumeToDB } = useSaveResumeToDB();
   // Redux
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
-
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
 
@@ -103,9 +110,9 @@ const ResumeBuilder = () => {
         dispatch(setState({ name: "resumeLoading", value: true }));
         dispatch(setQuantifyingExperience(quantifyingExperience));
         dispatch(setId(""));
-        getBasicInfo();
-        getSummary();
-        getPrimarySkills();
+        await getBasicInfo();
+        await getSummary();
+        await getPrimarySkills();
         await getWorkExperienceNew(quantifyingExperience);
         runConfetti();
       } else {
@@ -322,11 +329,11 @@ const ResumeBuilder = () => {
 
   useEffect(() => {
     if (!resumeData.state.resumeLoading && resumeData?.name) {
-      if(firstLoad){
-        saveResumeToDB();
-      }
+      // if (firstLoad) {
+      saveResumeToDB();
+      // }
       setFinished(true);
-      setFirstLoad(true)
+      // setFirstLoad(true);
     }
   }, [resumeData?.state?.resumeLoading]);
 
@@ -334,6 +341,7 @@ const ResumeBuilder = () => {
     if (userData && userData?.email) {
       setAiInputUserData({
         contact: userData?.contact,
+        linkedin: userData?.linkedin,
         education: userData?.education,
         email: userData?.email,
         experience: userData?.experience,
@@ -347,33 +355,31 @@ const ResumeBuilder = () => {
   return (
     <>
       <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} />
-      {showTemplatePopup && 
-      
-      <div className="fixed top-0 left-0 flex w-screen h-screen z-50 bg-black/90 items-center justify-center">
-       <div className="flex gap-4 flex-col bg-gray-800 py-4 rounded-lg">
-
-       <div className="flex items-center justify-between px-4 w-full">
-
-        <h1 className="xs:text-xl md:text-2xl font-semibold ">
-          Choose Your Template
-        </h1>
-        <h1 className="xs:text-xl md:text-2xl font-semibold cursor-pointer" onClick={()=>setShowTemplatePopup(false)}>
-          {crossIcon}
-        </h1>
-       </div>
-       <div className="px-4">
-        <p>
-          You can explore our templates and choose accordingly
-        </p>
-       </div>
-        <div className=" xs:w-[300px] md:w-[44rem] lg:w-[55rem] xl:w-[55rem] rounded-xl z-50">
-          <TemplateSlider
-            templates={ALL_TEMPLATES.filter((template) => template.active)}
-          />
+      {showTemplatePopup && (
+        <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black/90">
+          <div className="flex flex-col gap-4 py-4 bg-gray-800 rounded-lg">
+            <div className="flex items-center justify-between w-full px-4">
+              <h1 className="font-semibold xs:text-xl md:text-2xl ">
+                Select a Design for your Resume
+              </h1>
+              <h1
+                className="font-semibold cursor-pointer xs:text-xl md:text-2xl"
+                onClick={() => setShowTemplatePopup(false)}
+              >
+                {crossIcon}
+              </h1>
+            </div>
+            <div className="px-4">
+              <p>Pick a template that aligns with your professional image.</p>
+            </div>
+            <div className=" xs:w-[300px] md:w-[44rem] lg:w-[55rem] xl:w-[55rem] rounded-xl z-50">
+              <TemplateSlider
+                templates={ALL_TEMPLATES.filter((template) => template.active)}
+              />
+            </div>
+          </div>
         </div>
-       </div>
-      </div>
-      }
+      )}
 
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]">
@@ -411,18 +417,29 @@ const ResumeBuilder = () => {
                 We have generated free text basic resume for you for further
                 design templates click here
               </p> */}
-              <div className="flex items-center justify-between">
-                <h2 className="my-3 text-base font-bold dark:text-gray-100 text-gray-950">
-                  Design Templates
+              <div className="flex items-center gap-3 justify-between">
+               <div className="flex items-center gaap-3">
+
+                <h2 className="my-3 flex items-center text-base font-bold dark:text-gray-100 text-gray-950">
+                  Template Selection{" "}
                 </h2>
+                  <div className="group md:ml-1 cursor-pointer relative inset-0">
+                    {infoSmallIcon}
+                    <div className="w-40 md:w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:left-1 md:left-4 xs:-top-[92px]  md:-top-[5.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-bl-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+                      Select any template below to instantly update your resume
+                      design.
+                    </div>
+                  </div>
+               </div>
+                  
                 <Link
                   href="/resume-builder/templates"
                   className="overflow-hidden text-white no-underline rounded-lg"
                 >
                   <div
-                    className={` font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
+                    className={` font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center py-1 px-2`}
                   >
-                    All Templates
+                    View All Templates<i className="">{chevronRight}</i>
                   </div>
                 </Link>
               </div>

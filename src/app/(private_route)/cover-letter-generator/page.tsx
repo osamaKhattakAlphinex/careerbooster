@@ -350,7 +350,7 @@ export default function CoverLetterPage() {
                     checked={selectedOption === "profile"}
                     className="h-4 w-fit"
                   />
-                  Use My Persona to write the Cover Letter
+                  Use my existing resume/data
                 </label>
                 <label
                   htmlFor="default-radio-2"
@@ -372,7 +372,7 @@ export default function CoverLetterPage() {
                     className="w-fit h-4 border-[1px]"
                     checked={selectedOption === "file"}
                   />
-                  Upload a new PDF Resume
+                  Upload a new resume
                 </label>
                 {selectedOption == "file" ? (
                   <CoverLetterFileUploader
@@ -389,7 +389,7 @@ export default function CoverLetterPage() {
                 <div className="flex flex-col w-full">
                   <label className=" font-bold justify-between  items-center text-md md:text-[24px] dark:text-gray-100 text-gray-950 flex lg:pb-[16px] gap-[3px]">
                     <div>
-                      Paste Your Job Description
+                      Paste Job Description
                       <span className="text-[#F04248] text-[24px]">*</span>
                     </div>
                     <div
@@ -424,7 +424,7 @@ export default function CoverLetterPage() {
                     jobDescription === ""
                   }
                   onClick={handleGenerate}
-                  className={`dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                  className={`dark:bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
                     (msgLoading ||
                       !session?.user?.email ||
                       !aiInputUserData ||
@@ -473,7 +473,7 @@ export default function CoverLetterPage() {
                         </svg>
 
                         <span
-                          className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                          className={`dark:text-gray-100  text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
                         >
                           Generate Cover Letter
                         </span>
@@ -483,9 +483,9 @@ export default function CoverLetterPage() {
                 </button>
               </div>
 
-              <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-2">
+              {/* <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-2">
                 your ai generated cover letter
-              </h1>
+              </h1> */}
               {show && (
                 <div
                   ref={componentRef}
@@ -499,10 +499,10 @@ export default function CoverLetterPage() {
                     <div className="flex flex-col text-sm text-gray-950">
                       <ul className="flex flex-col gap-2">
                         <li className="flex flex-row justify-center gap-2">
-                          <h2 className="font-semibold before:content-['Ph:'] before:mr-1 text-sm">
+                          <h2 className="text-sm font-semibold before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMi4yNSA2Ljc1YzAgOC4yODQgNi43MTYgMTUgMTUgMTVoMi4yNWEyLjI1IDIuMjUgMCAwIDAgMi4yNS0yLjI1di0xLjM3MmMwLS41MTYtLjM1MS0uOTY2LS44NTItMS4wOTFsLTQuNDIzLTEuMTA2Yy0uNDQtLjExLS45MDIuMDU1LTEuMTczLjQxN2wtLjk3IDEuMjkzYy0uMjgyLjM3Ni0uNzY5LjU0Mi0xLjIxLjM4YTEyLjAzNSAxMi4wMzUgMCAwIDEtNy4xNDMtNy4xNDNjLS4xNjItLjQ0MS4wMDQtLjkyOC4zOC0xLjIxbDEuMjkzLS45N2MuMzYzLS4yNzEuNTI3LS43MzQuNDE3LTEuMTczTDYuOTYzIDMuMTAyYTEuMTI1IDEuMTI1IDAgMCAwLTEuMDkxLS44NTJINC41QTIuMjUgMi4yNSAwIDAgMCAyLjI1IDQuNXYyLjI1WiIgLz4KPC9zdmc+Cg==')] before:w-3 before:h-3 flex before:mr-2">
                             {userData.phone}
                           </h2>
-                          <h2 className="text-sm font-semibold before:content-['\2022'] before:mr-1">
+                          <h2 className="text-sm font-semibold before:w-3 before:h-3 before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMjEuNzUgNi43NXYxMC41YTIuMjUgMi4yNSAwIDAgMS0yLjI1IDIuMjVoLTE1YTIuMjUgMi4yNSAwIDAgMS0yLjI1LTIuMjVWNi43NW0xOS41IDBBMi4yNSAyLjI1IDAgMCAwIDE5LjUgNC41aC0xNWEyLjI1IDIuMjUgMCAwIDAtMi4yNSAyLjI1bTE5LjUgMHYuMjQzYTIuMjUgMi4yNSAwIDAgMS0xLjA3IDEuOTE2bC03LjUgNC42MTVhMi4yNSAyLjI1IDAgMCAxLTIuMzYgMEwzLjMyIDguOTFhMi4yNSAyLjI1IDAgMCAxLTEuMDctMS45MTZWNi43NSIgLz4KPC9zdmc+Cg==')] flex before:mr-2">
                             {userData.email}
                           </h2>
                         </li>
@@ -646,7 +646,7 @@ export default function CoverLetterPage() {
                       fileName="ai-cover-letter"
                     />
                     {show && (
-                      <div className="hidden xs:block md:block">
+                      <div className="hidden xs:block group md:block">
                         <button
                           disabled={
                             msgLoading ||
@@ -661,7 +661,7 @@ export default function CoverLetterPage() {
                             isCoverLetterCopied
                           }
                           onClick={() => copyCoverLetter(streamedData)}
-                          className={`xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                          className={`xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b] group-hover:opacity-80 text-gray-300 border-[1px] ${
                             msgLoading ||
                             !session?.user?.email ||
                             !aiInputUserData ||
@@ -702,14 +702,14 @@ export default function CoverLetterPage() {
                       </div>
                     )}
                     {show && (
-                      <div className="hidden xs:block md:block">
+                      <div className="hidden xs:block md:block group">
                         <button
                           type="button"
                           disabled={
                             !show || msgLoading || !session?.user?.email
                           }
                           onClick={handleClick}
-                          className={` xs:flex-1 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                          className={` xs:flex-1 lg:text-sm text-xs lg:px-6 group-hover:opacity-80 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                             !show || msgLoading || !session?.user?.email
                               ? "opacity-50 cursor-not-allowed"
                               : ""
@@ -735,7 +735,7 @@ export default function CoverLetterPage() {
                       <button
                         type="submit"
                         onClick={handleSave}
-                        className="flex flex-row justify-center ml-auto items-center gap-2 py-[4] text-sm px-3 border-[#312E37] border-[1px] rounded-full text-gray-100 !bg-gray-950"
+                        className="flex flex-row hover:opacity-80 justify-center ml-auto items-center gap-2 py-[4] text-sm px-3 border-[#312E37] border-[1px] rounded-full text-gray-100 !bg-gray-950"
                       >
                         <svg
                           width="16"

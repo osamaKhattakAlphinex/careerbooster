@@ -10,7 +10,7 @@ import UseCases from "@/components/public-pages/Homepage/UseCases";
 import FAQList from "@/components/public-pages/Homepage/Faqs";
 
 export const metadata: Metadata = {
-  title: "CareerBooster.AI",
+  title: "CareerBooster.ai",
   description:
     "Your Free AI Resume Writer & LinkedIn Optimization Tool to Turbocharge Your Career!",
   keywords: [
@@ -65,7 +65,7 @@ export default function Home() {
         <Reviews />
 
         {/* <!-- Pricing --> */}
-        <PricingSection />
+        {/* <PricingSection /> */}
 
         {/* <!-- FAQ --> */}
         <FAQList />

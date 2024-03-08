@@ -23,7 +23,7 @@ const cardDetail = [
     action: "launch",
   },
   {
-    title: "Generator Cover Letters",
+    title: "Cover Letters Generator",
     description:
       "Tailor cover letters for each application, skyrocketing your interview chances.",
     link: "/cover-letter-generator",
@@ -33,7 +33,7 @@ const cardDetail = [
     action: "launch",
   },
   {
-    title: "Keyword Optimize Your LinkedIn",
+    title: "LinkedIn Optimizer",
     description:
       "Boost LinkedIn visibility by optimizing your linkedin for recruiters.",
     link: "/linkedin-generator",
@@ -43,9 +43,9 @@ const cardDetail = [
     action: "launch",
   },
   {
-    title: "Personalized Email Generator",
+    title: "Email Assistant",
     description:
-      "Boost chances with AI-crafted emails and follow-ups for a standout impression.",
+      "Secure more interviews with AI-powered follow-up emails to recruiters.",
     link: "/email-bot",
     icon: email,
     bgColor1: "from-pink-600",
@@ -75,7 +75,7 @@ const cardDetail = [
     action: "coming soon",
   },
   {
-    title: "Review Resume by AI",
+    title: "Resume Review by AI",
     description:
       "AI analyzes your resume, offering valuable suggestions for impactful improvements.",
     link: "#",

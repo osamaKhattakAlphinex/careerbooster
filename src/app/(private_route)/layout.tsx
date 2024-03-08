@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
@@ -14,11 +14,19 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { TourContextProvider } from "@/context/TourContext";
 import { AppContextsProvider } from "@/context/AppContext";
+import { Metadata } from "next";
 interface Props {
   children: ReactNode;
 }
 
+export const metadata: Metadata = {
+  title: "CareerBooster.AI",
+  description: "Dashboard - CareerBooster.ai | Developed by NausalTech",
+};
+
+
 export default async function Privatelayout({ children }: Props) {
+  
   const session = await getServerSession(authOptions);
 
   const user = session?.user as { role: string } | undefined;
@@ -32,15 +40,14 @@ export default async function Privatelayout({ children }: Props) {
     <div className="dark:bg-gradient-to-bl from-[#340e53] via-[#000533] to-[#010111] bg-[#e4e9f7] w-screen h-screen overflow-y-scroll">
       <TourContextProvider>
         <AppContextsProvider>
+          <ProfileCreationLayer>
+            <Header />
+            <SideBar />
 
-        <ProfileCreationLayer>
-          <Header />
-          <SideBar />
-
-          <div className="max-w-7xl mx-auto ">{children}</div>
-          <Footer />
-          <ToastContainer />
-        </ProfileCreationLayer>
+            <div className="max-w-7xl mx-auto ">{children}</div>
+            <Footer />
+            <ToastContainer />
+          </ProfileCreationLayer>
         </AppContextsProvider>
       </TourContextProvider>
     </div>

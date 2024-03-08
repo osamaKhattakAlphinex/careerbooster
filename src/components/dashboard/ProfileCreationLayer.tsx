@@ -113,7 +113,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                   setStepTwo({
                     phoneNumber: data?.phone,
                     Email: data?.email,
-                    linkedin: data?.linkedin
+                    linkedin: data?.linkedin,
                   })
                 );
                 dispatch(
@@ -621,10 +621,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           Welcome {userData?.firstName + " " + userData?.lastName}
         </h2>
 
-        <VirtualBot
-          firstName={userData.firstName}
-          lastName={userData.lastName}
-        />
         <div className="my-10">{refreshBigIconRotating}</div>
         <p className="text-center mb-4">
           Please wait! We are scanning your resume.
@@ -641,6 +637,12 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
 
         <div className="md:w-1/3 mx-2">
           <DidYouKnowCard />
+        </div>
+        <div className="w-full ml-auto">
+          <VirtualBot
+            firstName={userData.firstName}
+            lastName={userData.lastName}
+          />
         </div>
       </div>
     );

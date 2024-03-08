@@ -68,7 +68,6 @@ const DashboardBot = () => {
     finderElementRef,
     atsElementRef,
   ];
-  
 
   const removeStyles = () => {
     componentRefs.map((componentRef) => {
@@ -113,7 +112,6 @@ const DashboardBot = () => {
           dashboardRef.current.classList.add("dashboard-focused");
           innerToolsRef.current.classList.add("dark:bg-[#11121c]");
           innerToolsRef.current.classList.add("bg-[#F3F4F6]");
-        
         }
         break;
       case "resume":
@@ -246,15 +244,15 @@ const DashboardBot = () => {
 
   return (
     <div
-      className={`fixed bottom-4 right-4 mr-4 mb-4 w-20 h-20 cursor-pointer z-10 avatar-animate`}
+      className={`fixed bottom-4 right-4 mr-4 mb-4 cursor-pointer z-10 avatar-animate`}
       onClick={handleClick}
     >
-      <Tooltip text="Hey! Click me" audioPlayed={audioPlayed}>
+      <Tooltip text="Need Help? Click me" audioPlayed={audioPlayed}>
         <Image
           src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
           alt="GIF"
-          width={150}
-          height={150}
+          width={200}
+          height={200}
           className="botImage"
         />
       </Tooltip>

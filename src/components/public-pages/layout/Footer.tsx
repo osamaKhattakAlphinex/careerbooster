@@ -29,15 +29,19 @@ const Footer = () => {
               <div className="lg:col-span-1">
                 <div className="flex items-center xs:text-center sm:text-left xs:justify-center sm:justify-start">
                   <Image
-                    width={40}
-                    height={40}
-                    src="/trans-icon1.png"
+                    width={200}
+                    height={200}
+                    src="/dark_logo.png"
                     alt="icon"
-                    className="m-0"
+                    className="sm:m-0  dark:block hidden"
                   />
-                  <span className=" text-gray-950 dark:text-[#e6f85e] font-semibold">
-                    CareerBooster
-                  </span>
+                  <Image
+                    width={200}
+                    height={200}
+                    src="/white_logo.png"
+                    alt="icon"
+                    className="sm:m-0  dark:hidden block"
+                  />
                 </div>
                 <p className="mb-0 text-sm text-gray-950 lg:pr-4 dark:text-gray-300">
                   We specialize in turbocharging your career by harnessing the
@@ -203,7 +207,7 @@ const Footer = () => {
 
           <div className="items-center justify-center py-2 mx-auto xs:py-4 md:py-2 xs:container xs:flex xs:flex-col sm:gap-4 sm:flex-row ">
             <p className="text-xs text-center text-gray-950 dark:text-gray-100 ">
-              Copyright <span> &copy; CareerBooster 2023</span>.{" "}
+              Copyright <span> &copy; CareerBooster 2024</span>.{" "}
             </p>
             <div className="flex flex-row items-center justify-between gap-2 xs:py-4 sm:py-0">
               <Link

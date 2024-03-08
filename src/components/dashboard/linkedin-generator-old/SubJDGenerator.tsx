@@ -74,7 +74,9 @@ const SubJDGenerator = () => {
         let html = "";
         html += `<h2 class="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">${experience?.jobTitle}</h2>`;
         html += `<h3 class="text-base font-semibold">${experience?.company} | ${experience?.cityState} ${experience?.country}</h3>`;
-        html += `<p class="text-sm font-semibold">${experience?.fromMonth} ${experience?.fromYear} to ${
+        html += `<p class="text-sm font-semibold">${experience?.fromMonth} ${
+          experience?.fromYear
+        } to ${
           experience?.isContinue
             ? "Present"
             : experience?.toMonth + " " + experience?.toYear
@@ -116,16 +118,15 @@ const SubJDGenerator = () => {
             setStreamedData((prev) => prev + text);
             tempText += text;
           }
-          
-        if (index === experiences.length - 1) {
-          showSuccessToast("Job Description generated successfully");
-        }
+
+          if (index === experiences.length - 1) {
+            showSuccessToast("Job Description generated successfully");
+          }
         } else {
           setStreamedData("You ran out of Credits!");
-          showErrorToast("You ran out of credits!")
-          setMsgLoading(false)
-          break
-          
+          showErrorToast("You ran out of credits!");
+          setMsgLoading(false);
+          break;
         }
         setStreamedData((prev) => prev + `</div> <br /> `);
         setStreamedData((prev) => prev.replace("```html", ""));
@@ -136,8 +137,6 @@ const SubJDGenerator = () => {
         setMsgLoading(false);
 
         if (index === experiences.length - 1) {
-          
-
           const jdObj = {
             jobDescriptionId: jobDescriptionId,
             personName: userData.firstName + " " + userData.lastName,
@@ -260,7 +259,8 @@ const SubJDGenerator = () => {
               setAvailablePercentage={setAvailablePercentage}
             /> */}
             <p className="text-[14px] text-[#959595] pr-5">
-              Get job descriptions with respect to each job
+              Transform your existing work experience into an impactful
+              narrative that highlights your key achievements.
             </p>
           </div>
           <button
@@ -298,7 +298,7 @@ const SubJDGenerator = () => {
                 </div>
               ) : (
                 <div
-                  className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
+                  className={` bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
                 >
                   <Image
                     src={buttonIconSrc}
@@ -315,7 +315,7 @@ const SubJDGenerator = () => {
           </button>
         </div>
         {streamedData && (
-          <div  className=" bg-white text-gray-900 mb-4 border-gray-500  rounded border-[1px] p-8">
+          <div className=" bg-white text-gray-900 mb-4 border-gray-500  rounded border-[1px] p-8">
             <h1 className="mb-4 text-4xl font-bold text-gray-900">
               <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
                 AI Response{" "}
@@ -330,11 +330,10 @@ const SubJDGenerator = () => {
                 dangerouslySetInnerHTML={{ __html: streamedData }}
               ></div>
 
-            
               <button
                 disabled={msgLoading}
                 onClick={() => copyJD(streamedData)}
-                className={`xs:flex-1 mt-4 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+                className={`xs:flex-1 mt-4 flex gap-2 items-center hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                   msgLoading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
@@ -361,7 +360,6 @@ const SubJDGenerator = () => {
                     : "Copy to clipboard"}
                 </span>
               </button>
-              
             </div>
           </div>
         )}

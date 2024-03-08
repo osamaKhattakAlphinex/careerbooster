@@ -64,7 +64,7 @@ const Page = () => {
                   <strong>Amount</strong>
                 </div>
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <span>{creditsData?.amount} $</span>
+                  <span>$ {creditsData?.amount} </span>
                 </div>
               </div>
               <div className=" flex flex-row  justify-between items-center">

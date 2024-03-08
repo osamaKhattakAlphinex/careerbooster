@@ -17,6 +17,7 @@ import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
 import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import Link from "next/link";
 const ResumeTemplate6 = ({
   streamedSummaryData,
   setStreamedSummaryData,
@@ -29,6 +30,7 @@ const ResumeTemplate6 = ({
   setStreamedSummaryData: any;
 }) => {
   const resume = useSelector((state: any) => state.resume);
+  const userData = useSelector((state: any) => state.userData);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
@@ -53,7 +55,11 @@ const ResumeTemplate6 = ({
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
+  console.log(resume);
 
+  // useEffect(() => {
+  //   console.log(streamedSummaryData);
+  // });
   useEffect(() => {
     if (streamedJDData === "") {
       setStreamedJDData(null);
@@ -179,9 +185,9 @@ const ResumeTemplate6 = ({
 
               <EditableField
                 value={
-                  resume?.contact?.linkedIn
+                  resume?.contact?.linkedIn !== ""
                     ? resume?.contact?.linkedIn
-                    : "https://www.linkedin.com/"
+                    : userData?.linkedin ? userData?.linkedin: "https://www.linkedin.com/"
                 }
                 onSave={(value: string) => {
                   if (value !== resume.contact.linkedIn) {
@@ -207,6 +213,21 @@ const ResumeTemplate6 = ({
                   value={
                     resume?.summary !== "" ? (
                       resume?.summary
+                    ) : streamedSummaryData == "You ran out of Credits!" ? (
+                      <>
+                        <p className="text-gray-950 flex gap-2">
+                          Oops! Generating an Executive Summary requires 200
+                          credits, but it seems you{"'"}ve run out. Click here to
+                          upgrade your package.
+                          <Link
+                            href="/subscribe"
+                            className="px-4 py-1 bg-blue-400 text-gray-950"
+                          >
+                            {" "}
+                            Upgrade
+                          </Link>
+                        </p>
+                      </>
                     ) : streamedSummaryData ? (
                       streamedSummaryData
                     ) : (
