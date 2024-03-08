@@ -27,7 +27,6 @@ import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
-  console.log(resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
@@ -51,7 +50,6 @@ const ResumeTemplate2 = () => {
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
 
-  const userData = useSelector((state: any) => state.userData);
   useEffect(() => {
     if (streamedJDData === "") {
       setStreamedJDData(null);

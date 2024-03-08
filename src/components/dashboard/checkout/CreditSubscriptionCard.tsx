@@ -1,8 +1,8 @@
+"use client"
 import { CreditsPackageData } from "@/db/schemas/CreditsPackage";
 import {
   crossIcon,
   infoSmallIcon,
-  leftArrowIcon,
 } from "@/helpers/iconsProvider";
 import { setUserData } from "@/store/userDataSlice";
 import { loadStripe } from "@stripe/stripe-js";
@@ -84,6 +84,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
 
   const handleStripePayment = async () => {
     // Set subscribing to true
+    setShowPaymentDialog(false)
     setSubscribing(true);
     setCouponError("");
 
