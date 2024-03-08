@@ -16,6 +16,7 @@ const useSaveResumeToDB = () => {
 
   const saveResumeToDB = async (data: any = "") => {
     // return makeAPICallWithRetry(async () => {
+    showSuccessToast("Resume Updated Successfully");
     const source = data === "" ? resumeData : data;
     let obj = source;
 
@@ -30,18 +31,16 @@ const useSaveResumeToDB = () => {
         resumeData: obj,
       })
       .then(async (resp) => {
-        showSuccessToast("Resume Updated Successfully");
-
         if (userData.trialResume === false) {
           dispatch(setUserData({ trialResume: true }));
           axios
-          .post("/api/users/updateUserData", {
-            data: {
-              email: userData.email,
-              trialResume: true,
-            },
-          })
-          .then(() => {
+            .post("/api/users/updateUserData", {
+              data: {
+                email: userData.email,
+                trialResume: true,
+              },
+            })
+            .then(() => {
               setAvailableCredits(true);
             });
         } else {
@@ -63,13 +62,11 @@ const useSaveResumeToDB = () => {
         const data = await res2.json();
         if (data.success) {
           const userPackage = data.result;
+          // showSuccessToast("Resume Updated Successfully");
           // set user package details to redux
           dispatch(setField({ name: "userPackageData", value: userPackage }));
         }
-
-
       });
-  
   };
 
   return { saveResumeToDB };

@@ -43,7 +43,8 @@ const JDGenerator = ({ creditLimits }: { creditLimits: any }) => {
             </div>
 
             <p className="text-[14px] text-[#959595] pr-5">
-              Get job descriptions with respect to each job
+              Transform your existing work experience into an impactful
+              narrative that highlights your key achievements.
             </p>
           </div>
           <div

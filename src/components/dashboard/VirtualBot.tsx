@@ -167,7 +167,7 @@ const VirtualBot: React.FC<VirtualBotProps> = ({ firstName, lastName }) => {
     <>
       {audioPrepared && (
         <div
-          className={`fixed bottom-1 right-1  md:top-2/5 md:right-1/2 w-20 h-20 cursor-pointer z-10 avatar-animate`}
+          className={`fixed bottom-4 right-4 mr-4 mb-4 cursor-pointer z-10 avatar-animate`}
           // onClick={handleClick}
         >
           {/* <Tooltip text="Hey! Click me" audioPlayed={audioPlayed}> */}
@@ -175,8 +175,8 @@ const VirtualBot: React.FC<VirtualBotProps> = ({ firstName, lastName }) => {
             // src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
             src="/serviceBot.gif"
             alt="GIF"
-            width={150}
-            height={150}
+            width={200}
+            height={200}
             className="botImage"
           />
           {/* </Tooltip> */}

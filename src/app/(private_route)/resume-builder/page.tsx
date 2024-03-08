@@ -110,9 +110,9 @@ const ResumeBuilder = () => {
         dispatch(setState({ name: "resumeLoading", value: true }));
         dispatch(setQuantifyingExperience(quantifyingExperience));
         dispatch(setId(""));
-        getBasicInfo();
-        getSummary();
-        getPrimarySkills();
+        await getBasicInfo();
+        await getSummary();
+        await getPrimarySkills();
         await getWorkExperienceNew(quantifyingExperience);
         runConfetti();
       } else {
@@ -360,7 +360,7 @@ const ResumeBuilder = () => {
           <div className="flex flex-col gap-4 py-4 bg-gray-800 rounded-lg">
             <div className="flex items-center justify-between w-full px-4">
               <h1 className="font-semibold xs:text-xl md:text-2xl ">
-                Choose Your Template
+                Select a Design for your Resume
               </h1>
               <h1
                 className="font-semibold cursor-pointer xs:text-xl md:text-2xl"
@@ -370,7 +370,7 @@ const ResumeBuilder = () => {
               </h1>
             </div>
             <div className="px-4">
-              <p>You can explore our templates and choose accordingly</p>
+              <p>Pick a template that aligns with your professional image.</p>
             </div>
             <div className=" xs:w-[300px] md:w-[44rem] lg:w-[55rem] xl:w-[55rem] rounded-xl z-50">
               <TemplateSlider

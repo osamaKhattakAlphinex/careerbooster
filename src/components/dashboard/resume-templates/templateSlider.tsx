@@ -33,8 +33,8 @@ const TemplateSlider = ({ templates }: Props) => {
   return (
     <div className="box-border flex flex-row flex-wrap items-start justify-start gap-6 p-4 ">
       <Swiper
-        slidesPerView={5}
-        spaceBetween={10}
+        slidesPerView={2}
+        spaceBetween={20}
         rewind={true}
         speed={1200}
         navigation={true}
@@ -56,10 +56,10 @@ const TemplateSlider = ({ templates }: Props) => {
             slidesPerView: 3,
           },
           1080: {
-            slidesPerView: 6,
+            slidesPerView: 2,
           },
           1280: {
-            slidesPerView: 6,
+            slidesPerView: 2,
           },
         }}
       >
@@ -70,7 +70,7 @@ const TemplateSlider = ({ templates }: Props) => {
               index === activeTemplate
                 ? " border-2 rounded-md p-2 border-indigo-600"
                 : " "
-            } bg-transparent relative overflow-hidden group h-48 `}
+            } px-[40px] bg-transparent relative py-[20px] overflow-hidden `}
           >
             <Link
               href={`/resume-builder/templates/template?templateId=${template.id}`}
@@ -79,15 +79,15 @@ const TemplateSlider = ({ templates }: Props) => {
               <Image
                 src={template.preview}
                 alt={`template-${index}`}
-                width={281}
-                height={150}
+                width={450}
+                height={450}
                 className="bg-white "
-                style={{ objectFit: "contain", aspectRatio: "auto" }}
+                // style={{ objectFit: "contain", aspectRatio: "auto" }}
               />
               {templateId === index + 1 ? (
                 ""
               ) : (
-                <div className="absolute top-0 left-0 hidden object-cover w-full h-full overflow-hidden text-white group-hover:grid bg-slate-600/60 place-content-center">
+                <div className="absolute top-0 left-0 hidden w-full h-full overflow-hidden text-white group-hover:grid bg-slate-600/60 place-content-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -105,7 +105,7 @@ const TemplateSlider = ({ templates }: Props) => {
                 </div>
               )}
 
-              <div className="text-center h-full w-full absolute inset-0 flex justify-center items-center text-[#000] text-sm font-medium">
+              <div className="text-center h-full  absolute inset-0 flex justify-center items-center text-[#000] text-sm font-medium">
                 {index === activeTemplate && (
                   <span className="flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full">
                     <svg

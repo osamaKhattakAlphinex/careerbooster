@@ -201,7 +201,8 @@ const SubHeadlineGenerator = () => {
             setAvailablePercentage={setAvailablePercentage}
           /> */}
           <p className="text-[14px] text-[#959595] pr-5">
-            Generate headline for your linkedin in one click
+            Generate keyword-rich headline for your LinkedIn to elevate your
+            ranking in recruiter searches.
           </p>
         </div>
         <button

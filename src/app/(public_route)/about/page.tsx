@@ -7,10 +7,9 @@ import FeaturesSection from "@/components/public-pages/Homepage/FeaturesSection"
 import Reviews from "@/components/public-pages/Homepage/Reviews";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
- 
 
 export const metadata: Metadata = {
-  title: "CareerBooster.AI-About",
+  title: "CareerBooster.aI-About",
   description:
     "Elevate your career with CareerBooster.AI – Your go-to destination for AI-powered tools that transform your professional image. In today's competitive job market, trust our expertise in crafting ATS-friendly resumes and captivating executive resumes. Join over 20,000 professionals who've revolutionized their job hunt with CareerBooster.",
   keywords: [

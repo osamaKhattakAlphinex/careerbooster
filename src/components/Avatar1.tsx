@@ -213,7 +213,7 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
 
   return (
     <div
-      className={`fixed bottom-4 right-4 mr-4 mb-4 w-20 h-20 cursor-pointer z-10 avatar-animate`}
+      className={`fixed bottom-4 right-4 mr-4 mb-4  cursor-pointer z-10 avatar-animate`}
       onClick={handleClick}
     >
       <Tooltip
@@ -225,8 +225,8 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
         <Image
           src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
           alt="GIF"
-          width={150}
-          height={150}
+          width={300}
+          height={300}
           className="botImage"
         />
       </Tooltip>

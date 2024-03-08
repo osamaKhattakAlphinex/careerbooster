@@ -1,9 +1,9 @@
 import LinkedInToolMain from "@/components/public-pages/linkedin/LinkedInToolMain";
 import { Metadata } from "next";
- 
+
 //latest code
 export const metadata: Metadata = {
-  title: "CareerBooster.AI-linkedin",
+  title: "CareerBooster.ai-linkedin",
   description:
     "Free AI LinkedIn Summary Generator To Achieve Top Rankings In Recruiter Searches And Secure More Interviews!",
   keywords: [

@@ -29,15 +29,19 @@ const Footer = () => {
               <div className="lg:col-span-1">
                 <div className="flex items-center xs:text-center sm:text-left xs:justify-center sm:justify-start">
                   <Image
-                    width={40}
-                    height={40}
-                    src="/trans-icon1.png"
+                    width={200}
+                    height={200}
+                    src="/dark_logo.png"
                     alt="icon"
-                    className="m-0"
+                    className="sm:m-0  dark:block hidden"
                   />
-                  <span className=" text-gray-950 dark:text-[#e6f85e] font-semibold">
-                    CareerBooster
-                  </span>
+                  <Image
+                    width={200}
+                    height={200}
+                    src="/white_logo.png"
+                    alt="icon"
+                    className="sm:m-0  dark:hidden block"
+                  />
                 </div>
                 <p className="mb-0 text-sm text-gray-950 lg:pr-4 dark:text-gray-300">
                   We specialize in turbocharging your career by harnessing the

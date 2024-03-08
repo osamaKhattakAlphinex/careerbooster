@@ -7,7 +7,7 @@ import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Metadata } from "next";
 import { signIn, useSession } from "next-auth/react";
-import { refreshIconRotating } from "@/helpers/iconsProvider";
+import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
 import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
 import Image from "next/image";
@@ -331,8 +331,8 @@ const RegistrationForm = () => {
                           {refreshIconRotating}
                         </div>
                       ) : (
-                        <div className="items-center w-fit cursor-pointer xs:scale-75 md:scale-100 gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg text-[1.125rem] font-medium hover:bg-pink-600 hover:from-purple-800 hover:to-pink-600">
-                          Upload Your Existing Resume
+                        <div className="flex items-center w-fit cursor-pointer xs:scale-75 md:scale-100 gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg text-[1.125rem] font-medium hover:bg-pink-600 hover:from-purple-800 hover:to-pink-600">
+                          {uploadIcon} Upload Your Existing Resume
                         </div>
                       )}
                     </label>

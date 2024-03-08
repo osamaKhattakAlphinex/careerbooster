@@ -38,7 +38,7 @@ const Header = () => {
     <nav
       className={`translate-y-[0%] xs:h-[54.88px] lg:h-[90.06px] opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950 bg-gray-100  on-over shadow-lg  dark:text-gray-100 text-gray-900`}
     >
-      <div className="flex items-center justify-between mx-auto shadow-sm xs:py-2 sm:container xs:max-w-full xs:px-2">
+      <div className="flex items-center justify-between mx-auto pt-4 dark:shadow-sm xs:pb-2 sm:container xs:max-w-full xs:px-2">
         {/* <!-- Logo --> */}
 
         <Link
@@ -47,70 +47,74 @@ const Header = () => {
         >
           <div className="flex items-center justify-center ">
             <Image
-              width={80}
-              height={74}
-              src="/trans-icon1.png"
+              width={200}
+              height={200}
+              src="/dark_logo.png"
               alt="icon"
-              className="w-[42px] lg:w-[80px]  sm:m-0"
+              className="sm:m-0  dark:block hidden"
             />
-            <span className="lg:ml-[-15px] logo-text lg:font-semibold dark:text-[#e6f85e] text-gray-950">
-              CareerBooster
-            </span>
-          </div>
-          <div className="flex items-center gap-4 lg:hidden xs:flex-row xs:justify-between">
-            <span className="lg:hidden">
-              <ThemeChanger />
-            </span>
-            {!mobileMenuOpen ? (
-              <button
-                className={`lg:hidden block xs:ease-in-out xs:duration-300 xs:transition-all`}
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setMobileMenuOpen(!mobileMenuOpen);
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
-                  />
-                </svg>
-              </button>
-            ) : (
-              <button
-                className="xs:ease-in-out xs:duration-300 xs:transition-all"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setMobileMenuOpen(!mobileMenuOpen);
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18 18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            )}
+            <Image
+              width={200}
+              height={200}
+              src="/white_logo.png"
+              alt="icon"
+              className="sm:m-0  dark:hidden block"
+            />
           </div>
         </Link>
+        <div className="flex items-center gap-4 lg:hidden xs:flex-row xs:justify-between">
+          <span className="lg:hidden">
+            <ThemeChanger />
+          </span>
+          {!mobileMenuOpen ? (
+            <button
+              className={`lg:hidden block xs:ease-in-out xs:duration-300 xs:transition-all`}
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(!mobileMenuOpen);
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+                />
+              </svg>
+            </button>
+          ) : (
+            <button
+              className="xs:ease-in-out xs:duration-300 xs:transition-all"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(!mobileMenuOpen);
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          )}
+        </div>
 
         {/* <!-- Navbar content --> */}
         {/* For desktop */}

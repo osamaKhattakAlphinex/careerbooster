@@ -36,6 +36,10 @@ const useGetSummary = (setStreamedSummaryData: any) => {
   }, []);
 
   const getSummary = async () => {
+    if (creditLimits.resume_summary_generation < 200) {
+      showErrorToast("You are out of credits!");
+      return;
+    }
     // return aiInputUserData
     await getUserDataIfNotExists();
     await getCreditLimitsIfNotExists();
@@ -59,7 +63,11 @@ const useGetSummary = (setStreamedSummaryData: any) => {
         },
       }),
     }).then(async (resp: any) => {
-      // const res = await resp.json();
+      const res = await resp.json();
+      console.log("response", res);
+      if (res?.result === "Insufficient Credits") {
+        console.log("Loading of");
+      }
 
       if (resp.ok) {
         const reader = resp.body.getReader();
@@ -85,8 +93,10 @@ const useGetSummary = (setStreamedSummaryData: any) => {
             summary: summaryTemp,
           });
         }
+      } else if (creditLimits.resume_summary_generation < 200) {
+        // showErrorToast("You ran out of credits!");
+        setStreamedSummaryData("You ran out of credits!");
       } else {
-        showErrorToast("You ran out of credits!");
         setStreamedSummaryData(resumeData?.summary);
       }
     });

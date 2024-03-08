@@ -207,7 +207,9 @@ const SubAboutGenerator = () => {
           /> */}
 
           <p className="text-[14px] text-[#959595] pr-5">
-            Generate impressive about for your linkedin
+            Transform your career journey into a compelling story that captures
+            recruiters' attention and enhances your LinkedIn profile's
+            visibility.
           </p>
         </div>
         <button

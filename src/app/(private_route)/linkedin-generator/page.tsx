@@ -22,8 +22,8 @@ export default function LinkedInPage() {
         </Link> */}
         <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px]   mb-7 px-4 lg:px-[24px] py-4">
           <div className="flex justify-between items-center lg:h-[38px] ">
-            <h1 className="uppercase text-[12px] lg:text-[14px] font-semibold dark:text-gray-100 text-gray-950">
-              AI LinkedIn Optimization tools
+            <h1 className="capitalize text-[12px] lg:text-[14px] font-semibold dark:text-gray-100 text-gray-950">
+              Revolutionize Your LinkedIn with the Ultimate AI Tool
             </h1>
           </div>
           <div className="mt-5">
