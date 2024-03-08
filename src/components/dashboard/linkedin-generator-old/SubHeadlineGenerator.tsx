@@ -201,7 +201,8 @@ const SubHeadlineGenerator = () => {
             setAvailablePercentage={setAvailablePercentage}
           /> */}
           <p className="text-[14px] text-[#959595] pr-5">
-            Generate headline for your linkedin in one click
+            Generate keyword-rich headline for your LinkedIn to elevate your
+            ranking in recruiter searches.
           </p>
         </div>
         <button
@@ -270,7 +271,7 @@ const SubHeadlineGenerator = () => {
             <button
               disabled={msgLoading}
               onClick={() => copyHeadline(streamedData)}
-               className={`xs:flex-1 mt-4 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+              className={`xs:flex-1 mt-4 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                 msgLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >

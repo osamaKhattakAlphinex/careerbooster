@@ -16,33 +16,23 @@ export type Template = {
 type Tabs = {
   tab: string;
   title: string;
-  description: string;
 };
 
 const tabs: Tabs[] = [
   {
     tab: "all-templates",
-    description:
-      "A comprehensive collection catering to various professional styles and preferences, ensuring there's something for everyone",
+
     title: "All Templates",
   },
   {
     tab: "classic-executive",
-    description:
-      "Perfect for showcasing a traditional yet refined professional profile, emphasizing experience and leadership skills",
+
     title: "Classic Executive",
   },
   {
     tab: "creative-colorful",
-    description:
-      "Unleash your creativity with vibrant designs, ideal for professions that value innovation and originality",
+
     title: "Creative/Colorful",
-  },
-  {
-    tab: "one-page",
-    description:
-      "A concise and impactful format for those looking to present their career succinctly, perfect for time-conscious industries",
-    title: "One Page",
   },
 ];
 
@@ -92,7 +82,6 @@ const Templates = () => {
         ))}
       </div>
 
-      <div className="text-center "> {activeTab.description}</div>
       {templates && <TemplateSlider templates={templates} />}
     </div>
   );

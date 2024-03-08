@@ -325,16 +325,11 @@ const ResumeBuilder = () => {
 
   useEffect(() => {
     if (!resumeData.state.resumeLoading && resumeData?.name) {
-<<<<<<< HEAD
-      saveResumeToDB();
-      setFinished(true);
-=======
       // if (firstLoad) {
-        saveResumeToDB();
+      saveResumeToDB();
       // }
       setFinished(true);
       // setFirstLoad(true);
->>>>>>> a30dbc5424cdbf8e547d99d32bb84d7fdda283ba
     }
   }, [resumeData?.state?.resumeLoading]);
 
@@ -357,32 +352,21 @@ const ResumeBuilder = () => {
     <>
       <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} />
       {showTemplatePopup && (
-<<<<<<< HEAD
-        <div className="fixed top-0 left-0 flex w-screen h-screen z-50 bg-black/90 items-center justify-center">
-          <div className="flex gap-4 flex-col bg-gray-800 py-4 rounded-lg">
-            <div className="flex items-center justify-between px-4 w-full">
-              <h1 className="xs:text-xl md:text-2xl font-semibold ">
-                Choose Your Template
-              </h1>
-              <h1
-                className="xs:text-xl md:text-2xl font-semibold cursor-pointer"
-=======
         <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black/90">
           <div className="flex flex-col gap-4 py-4 bg-gray-800 rounded-lg">
             <div className="flex items-center justify-between w-full px-4">
               <h1 className="font-semibold xs:text-xl md:text-2xl ">
-                Choose Your Template
+                Select a Design for your Resume
               </h1>
               <h1
                 className="font-semibold cursor-pointer xs:text-xl md:text-2xl"
->>>>>>> a30dbc5424cdbf8e547d99d32bb84d7fdda283ba
                 onClick={() => setShowTemplatePopup(false)}
               >
                 {crossIcon}
               </h1>
             </div>
             <div className="px-4">
-              <p>You can explore our templates and choose accordingly</p>
+              <p>Pick a template that aligns with your professional image.</p>
             </div>
             <div className=" xs:w-[300px] md:w-[44rem] lg:w-[55rem] xl:w-[55rem] rounded-xl z-50">
               <TemplateSlider

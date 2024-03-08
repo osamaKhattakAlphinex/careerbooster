@@ -17,36 +17,36 @@ const faqs = [
     answer:
       "CareerBooster.AI stands out because it's specifically designed for senior-level professionals. It's been developed by top executive resume writers and AI engineers to cater to the unique needs and expectations of experienced job seekers.",
   },
+  // {
+  //   question: "Is CareerBooster.AI suitable for all industries and job levels?",
+  //   answer:
+  //     "Yes, CareerBooster.AI is designed to be versatile and adaptable to various industries and career levels. Whether you're a seasoned executive or a recent graduate, our tools can help you improve your professional presentation.",
+  // },
   {
-    question: "Is CareerBooster.AI suitable for all industries and job levels?",
+    question: "Can I try CareerBooster.AI without any cost?",
     answer:
-      "Yes, CareerBooster.AI is designed to be versatile and adaptable to various industries and career levels. Whether you're a seasoned executive or a recent graduate, our tools can help you improve your professional presentation.",
-  },
-  {
-    question: "Can I try CareerBooster.AI for free?",
-    answer:
-      "Yes, we offer a free package that includes services like ATS resume scanning, resume optimization, and a resume review. You can get a taste of our services before deciding to upgrade to our premium packages.",
+      "Absolutely! We offer complimentary credits, allowing you to experience our services firsthand and explore what CareerBooster.AI has to offer—all without spending a dime.",
   },
   {
     question: "How secure is my data on CareerBooster.AI?",
     answer:
       "We take data security seriously. Your personal and professional information is protected with the highest level of encryption and security protocols. We do not share your data with third parties.",
   },
-  {
-    question: "What do the premium packages include?",
-    answer:
-      "Our premium packages offer additional benefits, such as unlimited resume tailoring, cover letter customization, personalized emails to recruiters, and more. Please refer to our pricing section for a detailed breakdown of each package's features.",
-  },
-  {
-    question: "How often can I use CareerBooster.AI's services?",
-    answer:
-      "The frequency of service usage depends on your chosen package. Free users have access to limited credits, while premium users can enjoy unlimited access to our tools and services.",
-  },
-  {
-    question: "Is CareerBooster.AI suitable for international job seekers?",
-    answer:
-      "Yes, CareerBooster.AI is designed to assist job seekers globally. Our tools are adaptable to various job markets and industries, making them useful for international job searches.",
-  },
+  // {
+  //   question: "What do the premium packages include?",
+  //   answer:
+  //     "Our premium packages offer additional benefits, such as unlimited resume tailoring, cover letter customization, personalized emails to recruiters, and more. Please refer to our pricing section for a detailed breakdown of each package's features.",
+  // },
+  // {
+  //   question: "How often can I use CareerBooster.AI's services?",
+  //   answer:
+  //     "The frequency of service usage depends on your chosen package. Free users have access to limited credits, while premium users can enjoy unlimited access to our tools and services.",
+  // },
+  // {
+  //   question: "Is CareerBooster.AI suitable for international job seekers?",
+  //   answer:
+  //     "Yes, CareerBooster.AI is designed to assist job seekers globally. Our tools are adaptable to various job markets and industries, making them useful for international job searches.",
+  // },
   {
     question:
       "Do I need any special software or technical skills to use CareerBooster.AI?",

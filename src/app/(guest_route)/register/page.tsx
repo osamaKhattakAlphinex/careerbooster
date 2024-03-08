@@ -2,7 +2,7 @@ import RegistrationForm from "@/components/public-pages/Register/RegistraionForm
 
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "CareerBooster.AI-Register",
+  title: "CareerBooster.ai-Register",
 };
 const RegisterNew = () => {
   return (

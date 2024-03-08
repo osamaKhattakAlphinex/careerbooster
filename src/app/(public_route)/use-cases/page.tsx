@@ -3,9 +3,9 @@ import FAQList from "@/components/public-pages/Homepage/Faqs";
 import UseCases from "@/components/public-pages/Homepage/UseCases";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
- 
+
 export const metadata: Metadata = {
-  title: "CareerBooster.AI-UseCases",
+  title: "CareerBooster.ai-UseCases",
   description:
     "Explore real-world applications of CareerBooster's AI-powered tools in our Use Cases section. Discover how professionals across industries achieve career success through tailored resumes, LinkedIn optimization, and more. See how CareerBooster can elevate your unique career path.",
   keywords: [

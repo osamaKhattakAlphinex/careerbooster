@@ -54,7 +54,7 @@ const ContactForm = () => {
               htmlFor="name"
               className="text-lg font-medium mb-2 text-gray-900 dark:text-gray-400"
             >
-              Your name*
+              Your Name*
             </label>
             <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg w-full dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff]">
               <span className="text-gray-800 dark:text-gray-100">
@@ -168,7 +168,7 @@ const ContactForm = () => {
               id="message"
               name="message"
               className="text-gray-900 dark:text-gray-100 group  bg-transparent dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] focus:outline-none  border-gray-600  border-[1px] w-full p-2 rounded-md"
-              placeholder="Write here your details message"
+              placeholder="Write your message here"
               rows={4}
               value={formik.values.message}
               onChange={formik.handleChange}

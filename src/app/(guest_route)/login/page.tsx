@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import LoginForm from "@/components/LoginForm";
 
 export const metadata: Metadata = {
-  title: "CareerBooster.AI-Login",
+  title: "CareerBooster.ai-Login",
 };
 
 const Login = () => {
