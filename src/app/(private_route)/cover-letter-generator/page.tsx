@@ -630,7 +630,7 @@ export default function CoverLetterPage() {
                                   />
                                 </svg>
                                 <span
-                                  className={` text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                                  className={` text-gray-950 ml-3 text-[15px] font-semibold hover:opacity-60 cursor-pointer`}
                                 >
                                   Re-generate Cover Letter
                                 </span>

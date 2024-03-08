@@ -688,7 +688,7 @@ const PersonalizedEmailBot = () => {
                 >
                   {creditLimits?.email_generation}
                   <div className="pl-1"> Credits</div>
-                  <div className="w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32  xs:-top-12 md:-top-14  hidden group-hover:block  xs:rounded-br-none  text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+                  <div className="w-44 bg-gradient-to-r  hover:from-purple-800 hover:to-pink-600  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32  xs:-top-12 md:-top-14  hidden group-hover:block  xs:rounded-br-none  text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                     {creditLimits?.email_generation} credits will be used for
                     Email Generation
                   </div>

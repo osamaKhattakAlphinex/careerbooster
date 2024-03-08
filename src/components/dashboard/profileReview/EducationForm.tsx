@@ -81,15 +81,17 @@ const EducationForm = ({ formik }: any) => {
               From Month
             </label>
             <select
-              className="w-full border border-[#2e2f45] outline-none  rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
+              className="w-full border text-gray-950  border-[#2e2f45] dark:text-gray-100 dark:focus-within:border-[#e6f85e] outline-none rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 bg-transparent"
               name="fromMonth"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               value={formik.values.fromMonth}
             >
-              <option value="">-- select --</option>
+              <option value="" className="text-gray-950">
+                -- select --
+              </option>
               {months.map((month: string) => (
-                <option key={month} value={month}>
+                <option key={month} className="text-gray-950" value={month}>
                   {month}
                 </option>
               ))}
@@ -106,9 +108,11 @@ const EducationForm = ({ formik }: any) => {
               onChange={formik.handleChange}
               value={formik.values.fromYear}
             >
-              <option value="">-- select --</option>
+              <option value="" className="text-gray-950">
+                -- select --
+              </option>
               {years.map((year: number) => (
-                <option key={year} value={year}>
+                <option key={year} value={year} className="text-gray-950">
                   {year}
                 </option>
               ))}
@@ -128,9 +132,11 @@ const EducationForm = ({ formik }: any) => {
                 onChange={formik.handleChange}
                 value={formik.values.toMonth}
               >
-                <option value="">-- select --</option>
+                <option value="" className="text-gray-950">
+                  -- select --
+                </option>
                 {months.map((month: string) => (
-                  <option key={month} value={month}>
+                  <option key={month} value={month} className="text-gray-950">
                     {month}
                   </option>
                 ))}
@@ -147,9 +153,11 @@ const EducationForm = ({ formik }: any) => {
                 onChange={formik.handleChange}
                 value={formik.values.toYear}
               >
-                <option value="">-- select --</option>
+                <option value="" className="text-gray-950">
+                  -- select --
+                </option>
                 {years.map((year: number) => (
-                  <option key={year} value={year}>
+                  <option key={year} value={year} className="text-gray-950">
                     {year}
                   </option>
                 ))}
