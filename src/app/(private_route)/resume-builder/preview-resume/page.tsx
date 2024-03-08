@@ -138,43 +138,75 @@ const Page = () => {
     newHeading("education", "education");
   };
 
-  const canFitEducation= (page:any,educationHeading:any) =>{
-    return educationHeading.offsetTop + 200 < page.clientHeight
-  }
-  const educationDivs = (page: any) => {
+
+
+  const canFitEducation = (page: any, educationHeading: any) => {
+    return educationHeading.offsetTop + 140 < page.clientHeight;
+  };
+  const educationDivs = (page: any, nextPage?: any) => {
     const educationDivs = document.querySelectorAll(
       "[data-education-container-index]"
     );
-    let newDiv 
-    const getEducationHeading = page.querySelector("h2[data-name='education']")
-    let indicatorDiv = document.createElement("div")
-    getEducationHeading.parentNode.insertAfter()
-    console.log(getEducationHeading)
-    if(getEducationHeading){
-      
-      const isSpaceAvailable= canFitEducation(page,getEducationHeading);
-      
+    let newDiv;
+    newDiv = document.createElement("div");
+    newDiv.setAttribute("data-container-name", "education");
+    setStylesToElement(newDiv, "m-2 flex gap-4 flex-wrap w-full");
+    let newNextDiv;
+    newNextDiv = document.createElement("div");
+    newNextDiv.setAttribute("data-container-name", "education");
+    setStylesToElement(newNextDiv, "px-6 m-2 flex flex-wrap gap-4 w-full");
+    const getEducationHeading = page.querySelector("h2[data-name='education']");
+    if (getEducationHeading) {
+      console.log(nextPage);
+      let indicatorDiv = document.createElement("span");
+      indicatorDiv.setAttribute("data-container-name", "education-indicator");
+      indicatorDiv.textContent = "indicator";
+      setStylesToElement(indicatorDiv, "w-full h-2 bg-red-600");
+      getEducationHeading.parentNode.insertBefore(
+        indicatorDiv,
+        getEducationHeading.nextSibling
+      );
+      let isSpaceAvailable = canFitEducation(page, indicatorDiv);
+      let rowItemCount = 1;
       for (const singleEducation of Array.from(educationDivs)) {
         
-        newDiv = document.createElement("div")
-        newDiv.appendChild(singleEducation);
-        newDiv.setAttribute("data-container-name", "education");    
-        setStylesToElement(newDiv, "inline-block m-2 w-[30%]");
-        
-        // if(getEducationHeading){
-        //   // debugger
-        //   getEducationHeading.parentNode.append(newDiv);
-        // } else {
-          if(isSpaceAvailable) {
-            page.append(newDiv);
+        if (isSpaceAvailable && rowItemCount <= 3) {
+          newDiv.appendChild(singleEducation);
+          getEducationHeading.parentNode.insertBefore(
+            newDiv,
+            getEducationHeading.nextSibling
+          );
+          rowItemCount++;
         } else {
-          console.log("no space available")
+          isSpaceAvailable = canFitEducation(page, indicatorDiv);
+          if (isSpaceAvailable) {
+            rowItemCount = 1;
+            console.log(newDiv)
+            newDiv.appendChild(singleEducation)
+            getEducationHeading.parentNode.insertBefore(
+              newDiv,
+              getEducationHeading.nextSibling
+            );
+           
+            rowItemCount++;
+          } else {
+            if(nextPage){
+              newNextDiv.appendChild(singleEducation);
+              nextPage.append(newNextDiv);
+            }
           }
-          // cleanUpHTML(page)
-        // }
+        }
       }
+
+      let elementsToRemove = document.querySelectorAll(
+        '[data-container-name="education-indicator"]'
+      );
+
+      // Loop through each matching element and remove it from the DOM
+      elementsToRemove.forEach((element: any) => {
+        element.parentNode.removeChild(element);
+      });
     }
-    
   };
 
   const isContentBleeding = (page: any, checking: any) => {
@@ -190,7 +222,8 @@ const Page = () => {
     } else {
       getBody = page.children[0];
     }
-    let isOverflowingVertically =  getBody.clientHeight + height > 1119 - margins;
+    let isOverflowingVertically =
+      getBody.clientHeight + height > 1119 - margins;
     if (isOverflowingVertically) {
       cleanUpHTML(page);
       isOverflowingVertically = getBody.clientHeight + height > 1119 - margins;
@@ -546,11 +579,12 @@ const Page = () => {
     }, 1000);
     setTimeout(() => {
       pages.map((page: any, index: any) => {
-        educationDivs(pages[index]);
+        educationDivs(pages[index], pages[index + 1]);
         setSidebarHeight(pages[index]);
         checkOverflow(index);
         cleanUpHTML(page);
       });
+      // cleanUpHTML(pages[pages.length - 1]);
       // addHeadings()
     }, 100);
   };
