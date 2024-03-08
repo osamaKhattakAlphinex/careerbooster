@@ -17,10 +17,12 @@ import {
   setStepTwo,
 } from "@/store/registerSlice";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { delay } from "@reduxjs/toolkit/dist/utils";
 import VirtualBot from "./VirtualBot";
+import { getPackageID } from "@/ServerActions";
+import { setUserData } from "@/store/userDataSlice";
 
 interface Props {
   children: React.ReactNode;
@@ -43,8 +45,9 @@ function removeSpecialChars(str: string) {
 const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const pathname = usePathname();
   // Redux
+  const router = useRouter();
   const userData = useSelector((state: any) => state.userData);
-
+  const [subscribing, setSubscribing] = useState(false);
   const dispatch = useDispatch();
   const register = useSelector((state: any) => state.register);
   const resume = useSelector((state: any) => state.resume);
@@ -580,6 +583,65 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     // };
   }, [userData.email]);
 
+
+  const updateUserWithFreePackage = async (
+   
+  ) => {
+    console.log("Updating user with free package...");
+    const  creditPackageId: string | undefined =await getPackageID()
+    if (!subscribing && creditPackageId) {
+      const creditPackage = await getCreditPackageDetails(creditPackageId);
+
+      if (creditPackage) {
+        const obj = {
+          email: userData.email,
+          creditPackage: creditPackage._id,
+          userCredits: creditPackage.totalCredits,
+          totalCredits: creditPackage.totalCredits,
+        };
+        // TODO!! move this code to backeND
+
+        await axios
+          .post("/api/users/updateUserData", {
+            data: obj,
+          })
+          .then(async (resp: any) => {
+            if (resp.data.success) {
+              dispatch(
+                setUserData({
+                  ...userData,
+                  creditPackage: obj.creditPackage,
+                  userCredits: obj.userCredits,
+                  // userPackageExpirationDate: obj.userPackageExpirationDate,
+                  // userPackageUsed: obj.userPackageUsed,
+                })
+              );
+
+              router.push("/dashboard");
+            }
+            // dispatch(setField({ name: "userPackageData", value: userPackage }));
+            // TODO!!! Add new user subsription to db
+            // TODO!! invalidate session on stripe
+          });
+      }
+    }
+  };
+
+  const getCreditPackageDetails = async (creditPackageId: string) => {
+    // get user package details
+    const res2 = await fetch(
+      `/api/users/getCreditPackageDetails?id=${creditPackageId}`
+    );
+    const data = await res2.json();
+
+    if (data.success) {
+      const creditPackage = data.result;
+      return creditPackage;
+      // set user package details to redux
+    }
+
+    return null;
+  };
   // RENDERING LOGIC BLOW !!!!!!
 
   // if the user data is still loading
@@ -608,7 +670,9 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       pathname !== "/subscribed" &&
       (userData.creditPackage === "" || userData.userCredits === 0)
     ) {
-      redirect("/subscribe");
+
+      // redirect("/subscribe");
+      updateUserWithFreePackage()
     } else {
       // return <div className="pt-30">{children}</div>;
       return <>{children}</>;
