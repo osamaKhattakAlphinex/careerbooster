@@ -126,7 +126,7 @@ const components: any = {
     elements: [
       {
         tag: "div",
-        styles: "flex flex-col w-[30%] p-4 rounded-md",
+        styles: "flex text-gray-950/80 flex-col w-[30%] p-4 rounded-md",
         container: [
           {
             id: "educationLevel",

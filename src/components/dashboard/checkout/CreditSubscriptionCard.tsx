@@ -1,4 +1,3 @@
-"use client";
 import { CreditsPackageData } from "@/db/schemas/CreditsPackage";
 import {
   crossIcon,
@@ -33,6 +32,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
   const router = useRouter();
   const paypalRef = useRef<any>(null);
   // Redux
+
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
 
@@ -55,20 +55,22 @@ const CreditSubscriptionCard: React.FC<Props> = ({
     addPaypalScript();
   }, []);
   const handlePayment = () => {
-    if (creditPackage && creditPackage.amount === 0) {
-      updateUserWithFreePackage(creditPackage._id);
-    }else {
       if (selectedPayment === "stripe") {
         handleStripePayment();
       } else if (selectedPayment === "paypal") {
         setShowPaypalPopup(true);
       }
-    }
+    
   };
 
   const handleClick = () => {
     // Set subscribing to true
-    setShowPaymentDialog(true);
+    
+    if (creditPackage && creditPackage.amount === 0) {
+      updateUserWithFreePackage(creditPackage._id);
+    }else {
+      setShowPaymentDialog(true);
+    }
   };
 
   useEffect(() => {
@@ -448,10 +450,9 @@ const CreditSubscriptionCard: React.FC<Props> = ({
                   shippingPreference="NO_SHIPPING"
                   currency="USD"
                   onSuccess={(details: any, data: any) => {
-                    alert(
-                      "Transaction completed by " +
-                        details.payer.name.given_name
-                    );
+                    if(data?.orderID){
+                      router.push(`/subscribed?type=paypal&firstname=${userData.firstName}&lastname=${userData.lastName}&email=${userData.email}&pkgId=${creditPackage._id}`)
+                    }
                   }}
                 />
               </div>

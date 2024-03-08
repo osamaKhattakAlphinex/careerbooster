@@ -49,7 +49,7 @@ const Page = () => {
       "linkedIn",
       "phone",
       "primarySkills",
-      "education",
+      // "education",
       "name",
       "jobTitle",
       "summary",
@@ -137,17 +137,44 @@ const Page = () => {
     newHeading("primarySkills", "Skills");
     newHeading("education", "education");
   };
+
+  const canFitEducation= (page:any,educationHeading:any) =>{
+    return educationHeading.offsetTop + 200 < page.clientHeight
+  }
   const educationDivs = (page: any) => {
     const educationDivs = document.querySelectorAll(
       "[data-education-container-index]"
     );
-    let newDiv = document.createElement("div");
-    newDiv.setAttribute("data-container-name", "education");
-    for (const singleEducation of Array.from(educationDivs)) {
-      newDiv.appendChild(singleEducation);
+    let newDiv 
+    const getEducationHeading = page.querySelector("h2[data-name='education']")
+    let indicatorDiv = document.createElement("div")
+    getEducationHeading.parentNode.insertAfter()
+    console.log(getEducationHeading)
+    if(getEducationHeading){
+      
+      const isSpaceAvailable= canFitEducation(page,getEducationHeading);
+      
+      for (const singleEducation of Array.from(educationDivs)) {
+        
+        newDiv = document.createElement("div")
+        newDiv.appendChild(singleEducation);
+        newDiv.setAttribute("data-container-name", "education");    
+        setStylesToElement(newDiv, "inline-block m-2 w-[30%]");
+        
+        // if(getEducationHeading){
+        //   // debugger
+        //   getEducationHeading.parentNode.append(newDiv);
+        // } else {
+          if(isSpaceAvailable) {
+            page.append(newDiv);
+        } else {
+          console.log("no space available")
+          }
+          // cleanUpHTML(page)
+        // }
+      }
     }
-    setStylesToElement(newDiv, "flex flex-row gap-2 px-6 flex-wrap");
-    page.append(newDiv);
+    
   };
 
   const isContentBleeding = (page: any, checking: any) => {
@@ -163,8 +190,7 @@ const Page = () => {
     } else {
       getBody = page.children[0];
     }
-    let isOverflowingVertically =
-      getBody.clientHeight + height > 1119 - margins;
+    let isOverflowingVertically =  getBody.clientHeight + height > 1119 - margins;
     if (isOverflowingVertically) {
       cleanUpHTML(page);
       isOverflowingVertically = getBody.clientHeight + height > 1119 - margins;
@@ -447,7 +473,6 @@ const Page = () => {
 
   function FinalizeGeneration(span: any, page: any) {
     const attribute = span.getAttribute("data-name");
-
     const isItBefore = isContentBleeding(page, "before");
     if (attribute && !isItBefore) {
       getToNode(span, attribute, page);

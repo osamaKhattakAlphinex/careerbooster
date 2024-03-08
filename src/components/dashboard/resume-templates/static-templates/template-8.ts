@@ -93,7 +93,7 @@ const templateLayout: any = {
     },
     education: {
       styles:
-        "bg-red text-black flex flex-col justify-start items-start px-8 w-full",
+        "text-gray-950/80 flex flex-row flex-wrap justify-start items-start px-8 w-full",
       elements: [
         {
           id: "education",
