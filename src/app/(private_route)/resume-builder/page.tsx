@@ -417,9 +417,12 @@ const ResumeBuilder = () => {
                 We have generated free text basic resume for you for further
                 design templates click here
               </p> */}
-              <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3 justify-between">
+               <div className="flex items-center gaap-3">
+
                 <h2 className="my-3 flex items-center text-base font-bold dark:text-gray-100 text-gray-950">
-                  Template Selection :{" "}
+                  Template Selection{" "}
+                </h2>
                   <div className="group md:ml-1 cursor-pointer relative inset-0">
                     {infoSmallIcon}
                     <div className="w-40 md:w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:left-1 md:left-4 xs:-top-[92px]  md:-top-[5.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-bl-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
@@ -427,7 +430,8 @@ const ResumeBuilder = () => {
                       design.
                     </div>
                   </div>
-                </h2>
+               </div>
+                  
                 <Link
                   href="/resume-builder/templates"
                   className="overflow-hidden text-white no-underline rounded-lg"

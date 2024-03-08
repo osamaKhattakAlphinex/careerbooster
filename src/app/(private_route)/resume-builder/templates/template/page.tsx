@@ -8,7 +8,6 @@ import TemplateSlider from "@/components/dashboard/resume-templates/templateSlid
 import { useSession } from "next-auth/react";
 import { setUserData } from "@/store/userDataSlice";
 import { setResume } from "@/store/resumeSlice";
-import DownloadService from "@/helpers/downloadFile";
 import Link from "next/link";
 
 const Template = () => {
@@ -19,23 +18,10 @@ const Template = () => {
   const [refLeft, setRefLeft] = useState<number | null>(null);
   const [scaleHeight, setScaleHeight] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
-  const [fileName, setFileName] = useState<string>("");
   const templateId: number = parseInt(params.get("templateId") || "0");
   const componentRef = useRef<any>(null);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setFileName(
-      `${resume?.name
-        ?.replaceAll(" ", "-")
-        .replaceAll("/", "")}-${resume?.jobTitle
-        ?.replaceAll(" ", "-")
-        .replaceAll("/", "")}`
-    );
-  }, [resume]);
-  useEffect(() => {
-    console.log(fileName);
-  }, [fileName]);
   const fetchDefaultResume = async () => {
     const res = await fetch(
       `/api/users/getOneByEmail?email=${session?.user?.email}`
@@ -114,7 +100,7 @@ const Template = () => {
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
 
-              <div className="w-[82%] md:inline-block xs:flex xs:items-center xs:justify-between gap-3 xs:pb-0 md:pb-4 ">
+              <div className="md:w-[82%] xs:w-full xs:flex xs:justify-center md:inline-block xs:pb-0 md:pb-4 ">
                 <Link
                   href="/resume-builder"
                   className="overflow-hidden text-white no-underline rounded-lg"
@@ -126,7 +112,7 @@ const Template = () => {
                   </div>
                 </Link>
               </div>
-              <div className="w-[18%] inline-block gap-3 xs:pb-0 md:pb-4 sticky top-4 right-2 z-[35]">
+              <div className="md:w-[18%] xs:w-full xs:mt-4 xs:flex xs:justify-center md:inline-block gap-3 xs:pb-0 md:pb-4 md:sticky top-4 right-2 z-[35]">
                 <Link
                   className="no-underline"
                   href={`/resume-builder/preview-resume?templateId=${templateId}&resumeId=${resume.id}`}

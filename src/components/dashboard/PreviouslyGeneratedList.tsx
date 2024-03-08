@@ -23,17 +23,18 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
 
   return (
     <div className="dark:bg-[#17151b] dark:text-white  bg-[#00000015] text-gray-950  rounded-[20px]  mb-7 px-4 lg:px-[24px] pt-[20px] pb-[20px] z-0">
-      <div className="flex justify-between items-center ">
+      <div className="flex gap-3 items-center ">
         <h1 className=" flex justify-center text-[14px] md:text-sm font-semibold lg:pr-0 pr-4">
-          {dataSource === "coverLetters" && "RECENT COVER LETTERS:"}
-          {dataSource === "emails" && "RECENT EMAILS:"}
+          {dataSource === "coverLetters" && "RECENT COVER LETTERS"}
+          {dataSource === "emails" && "RECENT EMAILS"}
           {dataSource === "consultingBids" && "RECENT BIDS"}
           {dataSource === "resume" && "RECENT RESUME"}
           {dataSource === "linkedInHeadlines" && "RECENT HEADLINES"}
           {dataSource === "linkedInAbouts" && "RECENT ABOUTS"}
           {dataSource === "linkedInJobDescriptions" && "RECENT DESCRIPTIONS"}
           {dataSource === "linkedInKeywords" && "RECENT KEYWORDS"}
-          <div className="group flex md:ml-1 cursor-pointer relative z-50 inset-0">
+        </h1>
+          <div className="group flex md:ml-1 cursor-pointer relative inset-0">
             {infoSmallIcon}
             <div className="w-40 md:w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:left-1 md:left-4 xs:-top-[92px]  z-[2000]  md:-top-[5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-bl-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
               {dataSource === "coverLetters" &&
@@ -42,7 +43,6 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
                 "Every Email you generate is stored here for easy future access."}
             </div>
           </div>
-        </h1>
 
         {/* <div className="relative lg:w-[213px] w-[120px] flex">
           <input

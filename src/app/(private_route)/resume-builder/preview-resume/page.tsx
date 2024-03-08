@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
@@ -7,6 +7,10 @@ import { useSearchParams } from "next/navigation";
 import { getTemplates } from "@/components/dashboard/resume-templates/static-templates";
 const Page = () => {
   const params = useSearchParams();
+  const [refTop, setRefTop] = useState<number | null>(null);
+  const [refLeft, setRefLeft] = useState<number | null>(null);
+  const [scaleHeight, setScaleHeight] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const [fileName, setFileName] = useState<string>("");
   const templateId: number = parseInt(params.get("templateId") || "0");
   const resumeId: string = params.get("resumeId") || "";
@@ -15,6 +19,30 @@ const Page = () => {
   const cvRef = useRef<any>(null);
   let template: any;
   template = getTemplates(templateId);
+
+  useLayoutEffect(() => {
+    if (cvRef.current && isMobile) {
+      const height = Math.floor(cvRef.current.offsetHeight * 0.5 + 90);
+      setScaleHeight(height);
+      const refTop = Math.floor((540 / 2275) * cvRef.current.offsetHeight);
+      setRefTop(refTop);
+      const width = Math.floor((175 / 390) * window.innerWidth);
+      setRefLeft(width);
+    }
+  }, [cvRef.current, templateId]);
+
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     if (resumeData.id === "") {
       resumeData = userData.resumes.find(
@@ -601,15 +629,34 @@ const Page = () => {
   }, [fileName]);
 
   return (
-    <div className="ml-[234px]">
-      <div className="flex items-center justify-start md:justify-start gap-3 xs:pb-0 md:pb-4 sticky top-4 z-[35]">
-        <DownloadService
-          componentRef={cvRef}
-          fileName={fileName}
-          preview={false}
-        />
+    <div className="lg:ml-[234px] ml-0">
+      <div
+        id="outerScaleDiv"
+        className="my-10"
+        style={{
+          height: isMobile ? scaleHeight + "px" : undefined,
+        }}
+      >
+        <div className="flex items-center justify-center gap-3 xs:pb-0 md:pb-4">
+          <DownloadService
+            componentRef={cvRef}
+            fileName={fileName}
+            preview={false}
+          />
+        </div>
+        <div
+          className="xs:relative"
+          style={{
+            top: isMobile ? "-" + refTop + "px" : undefined,
+            left: isMobile ? "-" + refLeft + "px" : undefined,
+          }}
+        >
+          <div
+            ref={cvRef}
+            className={`cv-container text-[#000] xs:scale-50 xs:w-[200%] xs:absolute md:relative  md:w-[100%]  w-[100%] md:top-[0px] md:left-[0px] md:scale-100 scale-100`}
+          ></div>
+        </div>
       </div>
-      <div ref={cvRef} className="cv-container text-[#000]"></div>
     </div>
   );
 };

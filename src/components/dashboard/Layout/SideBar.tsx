@@ -197,7 +197,7 @@ const SideBar = () => {
                   key={index}
                   className="py-[3px] group inline-block cursor-pointer transition-all"
                 >
-                  {item.text !== "Logout" ? (
+                  {item.text !== "Sign Out" ? (
                     <Link
                       href={item.url}
                       className={`px-7 text-base flex capitalize items-center 

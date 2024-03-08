@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
@@ -18,12 +18,15 @@ import { Metadata } from "next";
 interface Props {
   children: ReactNode;
 }
+
 export const metadata: Metadata = {
-  title: "Dashboard - CareerBooster.ai",
+  title: "CareerBooster.AI",
   description: "Dashboard - CareerBooster.ai | Developed by NausalTech",
 };
 
+
 export default async function Privatelayout({ children }: Props) {
+  
   const session = await getServerSession(authOptions);
 
   const user = session?.user as { role: string } | undefined;

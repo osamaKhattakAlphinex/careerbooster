@@ -124,7 +124,7 @@ Props) => {
               height={16}
               width={16}
             />
-            Enter Your Targeted Job Position:{" "}
+            Enter Your Targeted Job Position{" "}
             <div className="group cursor-pointer relative inset-0">
               {infoSmallIcon}
               <div className="w-48 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[14px] px-2 absolute xs:-left-48 md:left-4 xs:-top-28  md:-top-[11.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">

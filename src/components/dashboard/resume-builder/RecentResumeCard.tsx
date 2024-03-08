@@ -24,16 +24,16 @@ const RecentResumeCard = ({
   return (
     <>
       <div className="dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px]  mb-4 px-4 md:px-[24px] pt-[20px] pb-[20px] ">
-        <div className="flex justify-between items-center ">
+        <div className="flex items-center gap-3">
           <h1 className=" flex gap-2 font-semibold text-[16px] md:text-sm">
             YOUR RESUMES
+          </h1>
             <div className="group cursor-pointer relative inset-0">
               {infoSmallIcon}
               <div className="w-36 md:w-40  bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:left-1 md:left-3.5 xs:-top-12  md:-top-[60px]  hidden group-hover:block md:rounded-bl-none xs:rounded-bl-none  text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                 The different resumes you create will be saved here.
               </div>
             </div>
-          </h1>
 
           {/* <div className="relative lg:w-[213px] w-[120px]">
             <input
