@@ -1,4 +1,4 @@
-const cvHeadings: any = [
+const cvHeadings = [
   {
     text: "",
     section: "phone",
@@ -8,47 +8,117 @@ const cvHeadings: any = [
   {
     text: "executive summary",
     section: "summary",
+    attributes: [],
     styles:
-      "text-gray-950/80 text-base font-bold w-full uppercase flex flex-row items-center my-2",
-    attributes: [{ "icon-color": "black" }],
+      "font-bold mt-4 uppercase text-base text-center text-gray-950/80 border-y-2 border-gray-950/80 py-0.5",
   },
   {
+    attributes: [],
     text: "work experience",
     section: "workExperienceArray",
     styles:
-      "text-gray-950/80 text-base font-bold w-full uppercase flex flex-row items-center my-2",
-    attributes: [{ "icon-color": "black" }],
+      "font-bold uppercase text-center text-md text-gray-950/80 border-y-2 border-gray-950/80 py-0.5",
   },
   {
+    attributes: [],
     text: "education",
     section: "education",
     styles:
-      "text-gray-950/80 text-base font-bold w-full uppercase flex flex-row items-center my-2",
-    attributes: [{ "icon-color": "black" }],
+      "font-bold text-center mt-2 w-full uppercase text-md text-gray-950/80 border-y-2 border-gray-950/80 py-0.5",
   },
   {
+    attributes: [],
     text: "skills",
     section: "primarySkills",
     styles:
-      "font-bold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
-    attributes: [{ "icon-color": "black" }],
+      "font-bold uppercase text-center text-base py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
   },
 ];
-const components: any = {
+const templateLayout = {
+  styles: "w-full",
+  attributes: [{ "template-no": "7" }],
+
+  fragment: {
+    styles: "flex flex-col bg-white fragment py-5 relative",
+
+    header: {
+      styles:
+        "text-black relative m-2 flex flex-col w-3/4 justify-start items-start",
+      elements: [
+        {
+          id: "name",
+        },
+        {
+          id: "jobTitle",
+        },
+      ],
+    },
+
+    contact: {
+      styles:
+        "flex flex-col absolute text-base w-1/4 justify-between items-start top-0 right-10 m-2 p-3 gap-1",
+      elements: [
+        {
+          id: "phone",
+        },
+        {
+          id: "email",
+        },
+        {
+          id: "linkedIn",
+        },
+      ],
+    },
+    summary: {
+      styles: "bg-red text-black text-junstify px-8 pt-8",
+      elements: [
+        {
+          id: "summary",
+        },
+      ],
+    },
+    skills: {
+      styles:
+        "text-black w-full flex-1 gap-2 flex flex-row flex-wrap justify-start items-start px-8 my-6",
+      elements: [
+        {
+          id: "primarySkills",
+        },
+      ],
+    },
+    workExperienceArray: {
+      styles: "flex flex-col px-8 w-full",
+
+      elements: [
+        {
+          id: "workExperienceArray",
+        },
+      ],
+    },
+    education: {
+      styles:
+        "text-gray-950/80 flex flex-row flex-wrap justify-start items-start px-6 w-full",
+      elements: [
+        {
+          id: "education",
+        },
+      ],
+    },
+  },
+};
+const components = {
   shortName: {
     styles:
-      "h-8 w-8 my-8 border text-xl p-10 -ml-2 translate-x-2/4 font-semibold flex justify-center items-center rounded-full bg-gray-900 text-white text-center",
+      "h-8 w-8 absolute right-16 border text-xl p-10 -ml-2 translate-x-2/4 font-semibold flex justify-center items-center rounded-full bg-gray-900 text-white text-center",
     tag: "span",
   },
   name: {
-    styles:
-      "text-2xl font-bold flex justify-center items-center w-full mb-2 text-gray-950/80",
+    styles: "text-2xl font-bold flex text-gray-950/80 items-center w-full mx-6",
     tag: "span",
   },
   jobTitle: {
     tag: "span",
-    styles:
-      "text-base flex justify-center items-center w-full mb-2 text-gray-950/80",
+    styles: "text-base flex text-gray-950/80 w-full mb-2 px-6",
   },
   contact: {
     styles: "w-full",
@@ -74,38 +144,35 @@ const components: any = {
     ],
   },
   primarySkills: {
-    styles: "text-xs px-3 py-2 bg-gray-300 rounded-full text-gray-950/80",
+    styles:
+      "text-xs inline-block w-[32%] before:content-['\\2022'] text-gray-950/80 flex before:mr-2",
     tag: "span",
   },
-  summary: {
-    styles: "text-justify my-2 text-xs text-gray-950/80",
-    tag: "span",
-  },
+  summary: { styles: "text-center mb-4 text-xs text-gray-950/80", tag: "span" },
   workExperienceArray: {
     styles: "my-2",
     elements: [
       {
         id: "title",
-        styles: "text-base mt-2 font-bold text-gray-950/80",
+        styles: "text-base mt-2 text-gray-950/80 font-bold",
         tag: "span",
       },
       {
-        styles:
-          "flex gap-1 font-semibold pb-2 text-xs flex-wrap text-gray-950/80",
+        styles: "flex gap-1 font-semibold pb-2 text-xs flex-wrap",
         tag: "div",
         container: [
           { id: "fromMonth", styles: "text-gray-950/80", tag: "span" },
           { id: "fromYear", styles: "text-gray-950/80", tag: "span" },
           {
             id: "toMonth",
-            styles: "before:content-['\\268A'] before:mr-1 text-gray-950/80",
+            styles: "before:content-['\\268A'] text-gray-950/80 before:mr-1",
             tag: "span",
           },
           { id: "toYear", styles: "text-gray-950/80", tag: "span" },
           {
             id: "company",
             styles:
-              "before:content-['\\2758'] before:mr-2 after:content-['\\2758'] after:ml-2 text-gray-950/80",
+              "before:content-['\\2758'] before:mr-2 text-gray-950/80 after:content-['\\2758'] after:ml-2",
             tag: "span",
           },
           { id: "cityState", styles: "text-gray-950/80", tag: "span" },
@@ -116,7 +183,7 @@ const components: any = {
       {
         id: "achievements",
         styles:
-          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:mr-2 text-gray-950/80",
+          "text-xs text-justify text-gray-950/80 flex pb-1 before:content-['\\2022'] before:mr-2",
         tag: "span",
       },
     ],
@@ -127,50 +194,36 @@ const components: any = {
     elements: [
       {
         tag: "div",
-        styles:
-          "bg-gray-200 flex flex-col w-[30%] p-4 rounded-md text-gray-950/80",
+        styles: "flex flex-col w-[30%] p-2 rounded-md",
         container: [
           {
             id: "educationLevel",
-            styles: "font-semibold text-base text-gray-950/80",
+            styles: "font-semibold text-base",
             tag: "span",
           },
-          {
-            id: "fieldOfStudy",
-            styles: "text-xs font-semibold text-gray-950/80",
-            tag: "span",
-          },
+          { id: "fieldOfStudy", styles: "text-xs font-semibold", tag: "span" },
           {
             id: "schoolName",
-            styles: "italic text-xs font-normal text-gray-950/80",
+            styles: "italic text-xs font-normal",
             tag: "span",
           },
           {
             id: "schoolLocation",
-            styles: "text-xs italic font-normal text-gray-950/80",
+            styles: "text-xs italic font-normal",
             tag: "span",
           },
           {
-            styles: "flex flex-row gap-2 italic text-gray-950/80",
+            styles: "flex flex-row gap-2 italic",
             tag: "div",
             container: [
-              {
-                id: "fromMonth",
-                styles: "text-xs text-gray-950/80",
-                tag: "span",
-              },
-              {
-                id: "fromYear",
-                styles: "text-xs text-gray-950/80",
-                tag: "span",
-              },
+              { id: "fromMonth", styles: "text-xs", tag: "span" },
+              { id: "fromYear", styles: "text-xs", tag: "span" },
               {
                 id: "toMonth",
-                styles:
-                  "text-xs before:content-['\\268A'] before:mr-2 text-gray-950/80",
+                styles: "text-xs before:content-['\\268A'] before:mr-2",
                 tag: "span",
               },
-              { id: "toYear", styles: "text-xs text-gray-950/80", tag: "span" },
+              { id: "toYear", styles: "text-xs", tag: "span" },
               // { id: "isContinue", styles: "", tag: "span" },
             ],
           },
@@ -180,78 +233,4 @@ const components: any = {
   },
 };
 
-const templateLayout: any = {
-  styles: "w-full",
-  attributes: [{ "template-no": "2" }],
-  fragment: {
-    styles: "flex flex-col bg-white fragment py-5 text-gray-950/80",
-    header: {
-      styles:
-        "text-black m-2 p-3 flex flex-col w-[98%] justify-start rounded-md bg-gray-300 items-start text-gray-950/80",
-      elements: [
-        {
-          id: "name",
-        },
-        {
-          id: "jobTitle",
-        },
-      ],
-    },
-
-    contact: {
-      styles:
-        "flex flex-row text-base w-[98%] justify-center items-center m-2 p-3 rounded-md gap-4 bg-gray-300 text-gray-950/80",
-      elements: [
-        {
-          id: "phone",
-        },
-        {
-          id: "email",
-        },
-        {
-          id: "linkedIn",
-        },
-      ],
-    },
-    summary: {
-      styles: "bg-red text-black text-justify px-8 text-gray-950/80",
-      elements: [
-        {
-          id: "summary",
-        },
-      ],
-    },
-    skills: {
-      styles:
-        "bg-red text-black w-full flex-1 gap-2 flex flex-row flex-wrap justify-start items-start px-6 my-6 text-gray-950/80",
-      elements: [
-        {
-          id: "primarySkills",
-        },
-      ],
-    },
-    workExperienceArray: {
-      styles: "flex flex-col px-8 w-full text-gray-950/80",
-      elements: [
-        {
-          id: "workExperienceArray",
-        },
-      ],
-    },
-    education: {
-      styles:
-        "bg-red text-black flex flex-col justify-start items-start px-6 text-gray-950/80",
-      elements: [
-        {
-          id: "education",
-        },
-      ],
-    },
-  },
-};
-
-export const template = {
-  components,
-  templateLayout,
-  cvHeadings,
-};
+export const template = { components, cvHeadings, templateLayout };

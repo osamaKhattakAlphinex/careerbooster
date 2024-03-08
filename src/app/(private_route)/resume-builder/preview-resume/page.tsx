@@ -1,12 +1,27 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { template } from "@/components/dashboard/resume-templates/static-templates/template-3";
 import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
+import { useSearchParams } from "next/navigation";
+import { getTemplates } from "@/components/dashboard/resume-templates/static-templates";
 const Page = () => {
-  const resumeData = useSelector((state: any) => state.resume);
+  const params = useSearchParams();
+  const [fileName, setFileName] = useState<string>("");
+  const templateId: number = parseInt(params.get("templateId") || "0");
+  const resumeId: string = params.get("resumeId") || "";
+  let resumeData = useSelector((state: any) => state.resume);
+  const userData = useSelector((state: any) => state.userData);
   const cvRef = useRef<any>(null);
+  let template: any;
+  template = getTemplates(templateId);
+  useEffect(() => {
+    if (resumeData.id === "") {
+      resumeData = userData.resumes.find(
+        (resume: any) => resume.id === resumeId
+      );
+    }
+  }, [templateId, resumeId]);
   const { components, templateLayout, cvHeadings } = template;
 
   const GenerationOrder = [
@@ -31,10 +46,10 @@ const Page = () => {
     const cleanUpIds = [
       "shortName",
       "email",
-      "linkedin",
+      "linkedIn",
       "phone",
       "primarySkills",
-      "education",
+      // "education",
       "name",
       "jobTitle",
       "summary",
@@ -122,17 +137,44 @@ const Page = () => {
     newHeading("primarySkills", "Skills");
     newHeading("education", "education");
   };
+
+  const canFitEducation= (page:any,educationHeading:any) =>{
+    return educationHeading.offsetTop + 200 < page.clientHeight
+  }
   const educationDivs = (page: any) => {
     const educationDivs = document.querySelectorAll(
       "[data-education-container-index]"
     );
-    let newDiv = document.createElement("div");
-    newDiv.setAttribute("data-container-name", "education");
-    for (const singleEducation of Array.from(educationDivs)) {
-      newDiv.appendChild(singleEducation);
+    let newDiv 
+    const getEducationHeading = page.querySelector("h2[data-name='education']")
+    let indicatorDiv = document.createElement("div")
+    getEducationHeading.parentNode.insertAfter()
+    console.log(getEducationHeading)
+    if(getEducationHeading){
+      
+      const isSpaceAvailable= canFitEducation(page,getEducationHeading);
+      
+      for (const singleEducation of Array.from(educationDivs)) {
+        
+        newDiv = document.createElement("div")
+        newDiv.appendChild(singleEducation);
+        newDiv.setAttribute("data-container-name", "education");    
+        setStylesToElement(newDiv, "inline-block m-2 w-[30%]");
+        
+        // if(getEducationHeading){
+        //   // debugger
+        //   getEducationHeading.parentNode.append(newDiv);
+        // } else {
+          if(isSpaceAvailable) {
+            page.append(newDiv);
+        } else {
+          console.log("no space available")
+          }
+          // cleanUpHTML(page)
+        // }
+      }
     }
-    setStylesToElement(newDiv, "flex flex-row gap-4 px-6 flex-wrap");
-    page.append(newDiv);
+    
   };
 
   const isContentBleeding = (page: any, checking: any) => {
@@ -148,8 +190,7 @@ const Page = () => {
     } else {
       getBody = page.children[0];
     }
-    let isOverflowingVertically =
-      getBody.clientHeight + height > 1119 - margins;
+    let isOverflowingVertically =  getBody.clientHeight + height > 1119 - margins;
     if (isOverflowingVertically) {
       cleanUpHTML(page);
       isOverflowingVertically = getBody.clientHeight + height > 1119 - margins;
@@ -169,7 +210,7 @@ const Page = () => {
 
   const setStylesToElement = (elem: any, styles: any) => {
     if (styles) {
-      styles.split(" ").map((cls: any) => elem.classList.add(cls));
+      styles.split(/\s+/).map((cls: any) => elem.classList.add(cls));
     }
   };
   const newPage = () => {
@@ -338,8 +379,12 @@ const Page = () => {
 
   const generateLayout = (page: any) => {
     const currentPage = page.getAttribute("id").split("-").pop();
+
     for (let templatepart in templateLayout) {
       if (templatepart === "styles") {
+        setStylesToElement(page, templateLayout[templatepart]);
+      } else if (templatepart === "attributes") {
+        setAttributesToElem(templateLayout[templatepart], page);
       } else if (templatepart === "fragment") {
         for (let fragmentpart in templateLayout[templatepart]) {
           if (fragmentpart === "styles") {
@@ -428,7 +473,6 @@ const Page = () => {
 
   function FinalizeGeneration(span: any, page: any) {
     const attribute = span.getAttribute("data-name");
-
     const isItBefore = isContentBleeding(page, "before");
     if (attribute && !isItBefore) {
       getToNode(span, attribute, page);
@@ -443,8 +487,6 @@ const Page = () => {
   }
 
   const generate = (jsonData: any) => {
-    console.log(jsonData);
-
     const newJsonObject: any = {};
 
     GenerationOrder.forEach((key) => {
@@ -452,8 +494,6 @@ const Page = () => {
         newJsonObject[key] = jsonData[key];
       }
     });
-
-    console.log(newJsonObject);
 
     for (const item of Object.entries(newJsonObject)) {
       createElements(item);
@@ -469,6 +509,9 @@ const Page = () => {
         if (getSpan === item.section) {
           const heading = document.createElement("h2");
           heading.textContent = item.text;
+          if (item.attributes.length > 0) {
+            setAttributesToElem(item.attributes, heading);
+          }
           setAttributesToElem(
             [{ name: item.section }, { "type-heading": true }],
             heading
@@ -513,15 +556,28 @@ const Page = () => {
   };
 
   useEffect(() => {
+    setFileName(
+      `${resumeData?.name
+        ?.replaceAll(" ", "-")
+        .replaceAll("/", "")}-${resumeData?.jobTitle
+        ?.replaceAll(" ", "-")
+        .replaceAll("/", "")}`
+    );
     generate(resumeData);
   }, [resumeData]);
+  useEffect(() => {
+    console.log(fileName);
+  }, [fileName]);
+
   return (
     <div className="ml-[234px]">
-      <DownloadService
-        componentRef={cvRef}
-        fileName="ai-resume"
-        preview={true}
-      />
+      <div className="flex items-center justify-start md:justify-start gap-3 xs:pb-0 md:pb-4 sticky top-4 z-[35]">
+        <DownloadService
+          componentRef={cvRef}
+          fileName={fileName}
+          preview={false}
+        />
+      </div>
       <div ref={cvRef} className="cv-container text-[#000]"></div>
     </div>
   );

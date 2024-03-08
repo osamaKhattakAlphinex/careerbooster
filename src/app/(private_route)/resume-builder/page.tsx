@@ -82,7 +82,6 @@ const ResumeBuilder = () => {
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
-
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
 
@@ -326,8 +325,16 @@ const ResumeBuilder = () => {
 
   useEffect(() => {
     if (!resumeData.state.resumeLoading && resumeData?.name) {
+<<<<<<< HEAD
       saveResumeToDB();
       setFinished(true);
+=======
+      // if (firstLoad) {
+        saveResumeToDB();
+      // }
+      setFinished(true);
+      // setFirstLoad(true);
+>>>>>>> a30dbc5424cdbf8e547d99d32bb84d7fdda283ba
     }
   }, [resumeData?.state?.resumeLoading]);
 
@@ -335,6 +342,7 @@ const ResumeBuilder = () => {
     if (userData && userData?.email) {
       setAiInputUserData({
         contact: userData?.contact,
+        linkedin: userData?.linkedin,
         education: userData?.education,
         email: userData?.email,
         experience: userData?.experience,
@@ -349,6 +357,7 @@ const ResumeBuilder = () => {
     <>
       <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} />
       {showTemplatePopup && (
+<<<<<<< HEAD
         <div className="fixed top-0 left-0 flex w-screen h-screen z-50 bg-black/90 items-center justify-center">
           <div className="flex gap-4 flex-col bg-gray-800 py-4 rounded-lg">
             <div className="flex items-center justify-between px-4 w-full">
@@ -357,6 +366,16 @@ const ResumeBuilder = () => {
               </h1>
               <h1
                 className="xs:text-xl md:text-2xl font-semibold cursor-pointer"
+=======
+        <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black/90">
+          <div className="flex flex-col gap-4 py-4 bg-gray-800 rounded-lg">
+            <div className="flex items-center justify-between w-full px-4">
+              <h1 className="font-semibold xs:text-xl md:text-2xl ">
+                Choose Your Template
+              </h1>
+              <h1
+                className="font-semibold cursor-pointer xs:text-xl md:text-2xl"
+>>>>>>> a30dbc5424cdbf8e547d99d32bb84d7fdda283ba
                 onClick={() => setShowTemplatePopup(false)}
               >
                 {crossIcon}
@@ -376,13 +395,13 @@ const ResumeBuilder = () => {
 
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]">
-          {/* <Link
+          <Link
             href="/resume-builder/test-preview"
             className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center hover:opacity-80 transition-all"
           >
             {leftArrowIcon}
             Back
-          </Link> */}
+          </Link>
           <RecentResumeCard
             source="dashboard"
             componentRef={componentRef}

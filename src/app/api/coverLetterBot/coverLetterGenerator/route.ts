@@ -93,9 +93,9 @@ export async function POST(req: any) {
             Email : ${userData.email}
             Phone : ${userData.phone}
             `;
-
+console.log(model)
     const response: any = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model:model? model: "gpt-3.5-turbo",
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });

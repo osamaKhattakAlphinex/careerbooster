@@ -2,74 +2,95 @@
   box-sizing: border-box;
 }
 
-h2[data-name="phone"][data-type-heading="true"]::before {
-  content: url("/resume-icons/phone-icon.svg");
-  font-family: "YourIconFontFamily", sans-serif;
-  font-size: 16px; /* Make sure --text is defined */
-  color: #333;
+h2[data-name="phone"][data-icon-color="black"][data-type-heading="true"]::before,
+h2[data-name="phone"][data-icon-color="white"][data-type-heading="true"]::before,
+h2[data-name="summary"][data-icon-color="black"][data-type-heading="true"]::before,
+h2[data-name="summary"][data-icon-color="white"][data-type-heading="true"]::before,
+h2[data-name="primarySkills"][data-icon-color="black"][data-type-heading="true"]::before,
+h2[data-name="primarySkills"][data-icon-color="white"][data-type-heading="true"]::before,
+h2[data-name="education"][data-icon-color="black"][data-type-heading="true"]::before,
+h2[data-name="education"][data-icon-color="white"][data-type-heading="true"]::before,
+h2[data-name="workExperienceArray"][data-icon-color="black"][data-type-heading="true"]::before,
+h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="true"]::before,
+[data-primarySkills-index]::before,
+[data-achievements-index]::before {
+  font-family: sans-serif;
+  font-size: 16px;
+  color: currentColor;
   display: inline-block;
   height: 16px !important;
   width: 16px !important;
-  margin-right: 6px;
-}
-h2[data-name="summary"][data-type-heading="true"]::before {
-  content: url("/resume-icons/summary-icon.svg");
-  font-family: "YourIconFontFamily", sans-serif;
-  font-size: 16px; /* Make sure --text is defined */
-  color: #333;
-  display: inline-block;
-  height: 16px !important;
-  width: 16px !important;
-  margin-right: 6px;
-}
-h2[data-name="primarySkills"][data-type-heading="true"]::before {
-  content: url("/resume-icons/skills-icon.svg");
-  font-family: "YourIconFontFamily", sans-serif;
-  font-size: 16px; /* Make sure --text is defined */
-  color: #333;
-  display: inline-block;
-  height: 16px !important;
-  width: 16px !important;
-  margin-right: 6px;
-}
-h2[data-name="education"][data-type-heading="true"]::before {
-  content: url("/resume-icons/education-icon.svg");
-  font-family: "YourIconFontFamily", sans-serif;
-  font-size: 16px; /* Make sure --text is defined */
-  color: #333;
-  display: inline-block;
-  height: 16px !important;
-  width: 16px !important;
-  margin-right: 6px;
-}
-h2[data-name="workExperienceArray"][data-type-heading="true"]::before {
-  content: url("/resume-icons/work-experience-icon.svg");
-  font-family: "YourIconFontFamily", sans-serif;
-  font-size: 16px; /* Make sure --text is defined */
-  color: #333;
-  display: inline-block;
-  height: 16px !important;
-  width: 16px !important;
-  margin-right: 6px;
+  margin-right: 4px;
 }
 
-[data-primarySkills-index]::before {
-  content: "\2022";
-  font-family: "YourIconFontFamily", sans-serif;
-  font-size: var(--text);
-  color: #333;
-  display: inline-block;
-  margin-right: 6px;
+h2:empty {
+  display: none;
 }
 
+h2[data-name="phone"][data-icon-color="black"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJtMy44NTUgNy4yODYgMS4wNjctLjUzNGExIDEgMCAwIDAgLjU0Mi0xLjA0NmwtLjQ0LTIuODU4QTEgMSAwIDAgMCA0LjAzNiAySDNhMSAxIDAgMCAwLTEgMXYyYzAgLjcwOS4wODIgMS40LjIzOCAyLjA2MmE5LjAxMiA5LjAxMiAwIDAgMCA2LjcgNi43QTkuMDI0IDkuMDI0IDAgMCAwIDExIDE0aDJhMSAxIDAgMCAwIDEtMXYtMS4wMzZhMSAxIDAgMCAwLS44NDgtLjk4OGwtMi44NTgtLjQ0YTEgMSAwIDAgMC0xLjA0Ni41NDJsLS41MzQgMS4wNjdhNy41MiA3LjUyIDAgMCAxLTQuODYtNC44NTlaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIC8+Cjwvc3ZnPgo=");
+}
+h2[data-name="phone"][data-icon-color="white"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9InctNCBoLTQiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0ibTMuODU1IDcuMjg2IDEuMDY3LS41MzRhMSAxIDAgMCAwIC41NDItMS4wNDZsLS40NC0yLjg1OEExIDEgMCAwIDAgNC4wMzYgMkgzYTEgMSAwIDAgMC0xIDF2MmMwIC43MDkuMDgyIDEuNC4yMzggMi4wNjJhOS4wMTIgOS4wMTIgMCAwIDAgNi43IDYuN0E5LjAyNCA5LjAyNCAwIDAgMCAxMSAxNGgyYTEgMSAwIDAgMCAxLTF2LTEuMDM2YTEgMSAwIDAgMC0uODQ4LS45ODhsLTIuODU4LS40NGExIDEgMCAwIDAtMS4wNDYuNTQybC0uNTM0IDEuMDY3YTcuNTIgNy41MiAwIDAgMS00Ljg2LTQuODU5WiIgY2xpcC1ydWxlPSJldmVub2RkIiAvPgo8L3N2Zz4=");
+}
+h2[data-name="summary"][data-icon-color="black"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZD0iTTggOGEzIDMgMCAxIDAgMC02IDMgMyAwIDAgMCAwIDZaTTEyLjczNSAxNGMuNjE4IDAgMS4wOTMtLjU2MS44NzItMS4xMzlhNi4wMDIgNi4wMDIgMCAwIDAtMTEuMjE1IDBjLS4yMi41NzguMjU0IDEuMTM5Ljg3MiAxLjEzOWg5LjQ3WiIgLz4KPC9zdmc+Cg==");
+}
+h2[data-name="summary"][data-icon-color="white"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9InctNCBoLTQiPgogIDxwYXRoIGQ9Ik04IDhhMyAzIDAgMSAwIDAtNiAzIDMgMCAwIDAgMCA2Wk0xMi43MzUgMTRjLjYxOCAwIDEuMDkzLS41NjEuODcyLTEuMTM5YTYuMDAyIDYuMDAyIDAgMCAwLTExLjIxNSAwYy0uMjIuNTc4LjI1NCAxLjEzOS44NzIgMS4xMzloOS40N1oiIC8+Cjwvc3ZnPg==");
+}
+h2[data-name="primarySkills"][data-icon-color="black"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMTUgNC41QTMuNSAzLjUgMCAwIDEgMTEuNDM1IDhjLS45OS0uMDE5LTIuMDkzLjEzMi0yLjcuOTEzbC00LjEzIDUuMzFhMi4wMTUgMi4wMTUgMCAxIDEtMi44MjctMi44MjhsNS4zMDktNC4xM2MuNzgtLjYwNy45MzItMS43MS45MTQtMi43TDggNC41YTMuNSAzLjUgMCAwIDEgNC40NzctMy4zNjJjLjMyNS4wOTQuMzkuNDk3LjE1LjczNkwxMC42IDMuOTAyYS40OC40OCAwIDAgMC0uMDMzLjY1M2MuMjcxLjMxNC41NjUuNjA4Ljg3OS44NzlhLjQ4LjQ4IDAgMCAwIC42NTMtLjAzM2wyLjAyNy0yLjAyN2MuMjM5LS4yNC42NDItLjE3NS43MzYuMTUuMDkuMzEuMTM4LjYzNy4xMzguOTc2Wk0zLjc1IDEzYS43NS43NSAwIDEgMS0xLjUgMCAuNzUuNzUgMCAwIDEgMS41IDBaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIC8+CiAgPHBhdGggZD0iTTExLjUgOS41Yy4zMTMgMCAuNjItLjAyOS45MTctLjA4NGwxLjk2MiAxLjk2MmEyLjEyMSAyLjEyMSAwIDAgMS0zIDNsLTIuODEtMi44MSAxLjM1LTEuNzM0Yy4wNS0uMDY0LjE1OC0uMTU4LjQyNi0uMjMzLjI3OC0uMDc4LjYzOS0uMTEgMS4wNjItLjEwMmwuMDkzLjAwMVpNNSA0bDEuNDQ2IDEuNDQ1YTIuMjU2IDIuMjU2IDAgMCAxLS4wNDcuMjFjLS4wNzUuMjY4LS4xNjkuMzc3LS4yMzMuNDI3bC0uNjEuNDc0TDQgNUgyLjY1NWEuMjUuMjUgMCAwIDEtLjIyNC0uMTM5bC0xLjM1LTIuN2EuMjUuMjUgMCAwIDEgLjA0Ny0uMjg5bC43NDUtLjc0NWEuMjUuMjUgMCAwIDEgLjI4OS0uMDQ3bDIuNyAxLjM1QS4yNS4yNSAwIDAgMSA1IDIuNjU0VjRaIiAvPgo8L3N2Zz4K");
+}
+h2[data-name="primarySkills"][data-icon-color="white"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9InctNCBoLTQiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIKICAgIGQ9Ik0xNSA0LjVBMy41IDMuNSAwIDAgMSAxMS40MzUgOGMtLjk5LS4wMTktMi4wOTMuMTMyLTIuNy45MTNsLTQuMTMgNS4zMWEyLjAxNSAyLjAxNSAwIDEgMS0yLjgyNy0yLjgyOGw1LjMwOS00LjEzYy43OC0uNjA3LjkzMi0xLjcxLjkxNC0yLjdMOCA0LjVhMy41IDMuNSAwIDAgMSA0LjQ3Ny0zLjM2MmMuMzI1LjA5NC4zOS40OTcuMTUuNzM2TDEwLjYgMy45MDJhLjQ4LjQ4IDAgMCAwLS4wMzMuNjUzYy4yNzEuMzE0LjU2NS42MDguODc5Ljg3OWEuNDguNDggMCAwIDAgLjY1My0uMDMzbDIuMDI3LTIuMDI3Yy4yMzktLjI0LjY0Mi0uMTc1LjczNi4xNS4wOS4zMS4xMzguNjM3LjEzOC45NzZaTTMuNzUgMTNhLjc1Ljc1IDAgMSAxLTEuNSAwIC43NS43NSAwIDAgMSAxLjUgMFoiCiAgICBjbGlwLXJ1bGU9ImV2ZW5vZGQiIC8+CiAgPHBhdGgKICAgIGQ9Ik0xMS41IDkuNWMuMzEzIDAgLjYyLS4wMjkuOTE3LS4wODRsMS45NjIgMS45NjJhMi4xMjEgMi4xMjEgMCAwIDEtMyAzbC0yLjgxLTIuODEgMS4zNS0xLjczNGMuMDUtLjA2NC4xNTgtLjE1OC40MjYtLjIzMy4yNzgtLjA3OC42MzktLjExIDEuMDYyLS4xMDJsLjA5My4wMDFaTTUgNGwxLjQ0NiAxLjQ0NWEyLjI1NiAyLjI1NiAwIDAgMS0uMDQ3LjIxYy0uMDc1LjI2OC0uMTY5LjM3Ny0uMjMzLjQyN2wtLjYxLjQ3NEw0IDVIMi42NTVhLjI1LjI1IDAgMCAxLS4yMjQtLjEzOWwtMS4zNS0yLjdhLjI1LjI1IDAgMCAxIC4wNDctLjI4OWwuNzQ1LS43NDVhLjI1LjI1IDAgMCAxIC4yODktLjA0N2wyLjcgMS4zNUEuMjUuMjUgMCAwIDEgNSAyLjY1NFY0WiIgLz4KPC9zdmc+");
+}
+h2[data-name="education"][data-icon-color="black"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZD0iTTcuNzAyIDEuMzY4YS43NS43NSAwIDAgMSAuNTk3IDBjMi4wOTguOTEgNC4xMDUgMS45OSA2LjAwNCAzLjIyM2EuNzUuNzUgMCAwIDEtLjE5NCAxLjM0OEEzNC4yNyAzNC4yNyAwIDAgMCA4LjM0MSA4LjI1YS43NS43NSAwIDAgMS0uNjgyIDBjLS42MjUtLjMyLTEuMjYyLS42Mi0xLjkwOS0uOTAxdi0uNTQyYTM2Ljg3OCAzNi44NzggMCAwIDEgMi41NjgtMS4zMy43NS43NSAwIDAgMC0uNjM2LTEuMzU3IDM4LjM5IDM4LjM5IDAgMCAwLTMuMDYgMS42MDUuNzUuNzUgMCAwIDAtLjM3Mi42NDh2LjM2NWMtLjc3My0uMjk0LTEuNTYtLjU2LTIuMzU5LS44YS43NS43NSAwIDAgMS0uMTk0LTEuMzQ3IDQwLjkwMSA0MC45MDEgMCAwIDEgNi4wMDUtMy4yMjNaTTQuMjUgOC4zNDhjLS41My0uMjEyLTEuMDY3LS40MTEtMS42MTEtLjU5NmE0MC45NzMgNDAuOTczIDAgMCAwLS40MTggMi45Ny43NS43NSAwIDAgMCAuNDc0Ljc3NmMuMTc1LjA2OC4zNS4xMzguNTI0LjIxYTUuNTQ0IDUuNTQ0IDAgMCAxLS41OC42ODEuNzUuNzUgMCAxIDAgMS4wNiAxLjA2Yy4zNS0uMzQ5LjY1NS0uNzI2LjkxNS0xLjEyNGEyOS4yODIgMjkuMjgyIDAgMCAwLTEuMzk1LS42MTdBNS40ODMgNS40ODMgMCAwIDAgNC4yNSA4LjV2LS4xNTJaIiAvPgogIDxwYXRoIGQ9Ik03LjYwMyAxMy45NmMtLjk2LS42LTEuOTU4LTEuMTQ3LTIuOTg5LTEuNjM1YTYuOTgxIDYuOTgxIDAgMCAwIDEuMTItMy4zNDFjLjQxOS4xOTIuODM0LjM5MyAxLjI0NC42MDJhMi4yNSAyLjI1IDAgMCAwIDIuMDQ1IDAgMzIuNzg3IDMyLjc4NyAwIDAgMSA0LjMzOC0xLjgzNGMuMTc1Ljk3OC4zMTUgMS45NjkuNDE5IDIuOTdhLjc1Ljc1IDAgMCAxLS40NzQuNzc2IDI5LjM4NSAyOS4zODUgMCAwIDAtNC45MDkgMi40NjEuNzUuNzUgMCAwIDEtLjc5NCAwWiIgLz4KPC9zdmc+Cg==");
+}
+h2[data-name="education"][data-icon-color="white"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9InctNCBoLTQiPgogIDxwYXRoIGQ9Ik03LjcwMiAxLjM2OGEuNzUuNzUgMCAwIDEgLjU5NyAwYzIuMDk4LjkxIDQuMTA1IDEuOTkgNi4wMDQgMy4yMjNhLjc1Ljc1IDAgMCAxLS4xOTQgMS4zNDhBMzQuMjcgMzQuMjcgMCAwIDAgOC4zNDEgOC4yNWEuNzUuNzUgMCAwIDEtLjY4MiAwYy0uNjI1LS4zMi0xLjI2Mi0uNjItMS45MDktLjkwMXYtLjU0MmEzNi44NzggMzYuODc4IDAgMCAxIDIuNTY4LTEuMzMuNzUuNzUgMCAwIDAtLjYzNi0xLjM1NyAzOC4zOSAzOC4zOSAwIDAgMC0zLjA2IDEuNjA1Ljc1Ljc1IDAgMCAwLS4zNzIuNjQ4di4zNjVjLS43NzMtLjI5NC0xLjU2LS41Ni0yLjM1OS0uOGEuNzUuNzUgMCAwIDEtLjE5NC0xLjM0NyA0MC45MDEgNDAuOTAxIDAgMCAxIDYuMDA1LTMuMjIzWk00LjI1IDguMzQ4Yy0uNTMtLjIxMi0xLjA2Ny0uNDExLTEuNjExLS41OTZhNDAuOTczIDQwLjk3MyAwIDAgMC0uNDE4IDIuOTcuNzUuNzUgMCAwIDAgLjQ3NC43NzZjLjE3NS4wNjguMzUuMTM4LjUyNC4yMWE1LjU0NCA1LjU0NCAwIDAgMS0uNTguNjgxLjc1Ljc1IDAgMSAwIDEuMDYgMS4wNmMuMzUtLjM0OS42NTUtLjcyNi45MTUtMS4xMjRhMjkuMjgyIDI5LjI4MiAwIDAgMC0xLjM5NS0uNjE3QTUuNDgzIDUuNDgzIDAgMCAwIDQuMjUgOC41di0uMTUyWiIgLz4KICA8cGF0aCBkPSJNNy42MDMgMTMuOTZjLS45Ni0uNi0xLjk1OC0xLjE0Ny0yLjk4OS0xLjYzNWE2Ljk4MSA2Ljk4MSAwIDAgMCAxLjEyLTMuMzQxYy40MTkuMTkyLjgzNC4zOTMgMS4yNDQuNjAyYTIuMjUgMi4yNSAwIDAgMCAyLjA0NSAwIDMyLjc4NyAzMi43ODcgMCAwIDEgNC4zMzgtMS44MzRjLjE3NS45NzguMzE1IDEuOTY5LjQxOSAyLjk3YS43NS43NSAwIDAgMS0uNDc0Ljc3NiAyOS4zODUgMjkuMzg1IDAgMCAwLTQuOTA5IDIuNDYxLjc1Ljc1IDAgMCAxLS43OTQgMFoiIC8+Cjwvc3ZnPg==");
+}
+h2[data-name="workExperienceArray"][data-icon-color="black"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMTEgNFYzYTIgMiAwIDAgMC0yLTJIN2EyIDIgMCAwIDAtMiAydjFINGEyIDIgMCAwIDAtMiAydjNhMiAyIDAgMCAwIDIgMmg4YTIgMiAwIDAgMCAyLTJWNmEyIDIgMCAwIDAtMi0yaC0xWk05IDIuNUg3YS41LjUgMCAwIDAtLjUuNXYxaDNWM2EuNS41IDAgMCAwLS41LS41Wk05IDlhMSAxIDAgMSAxLTIgMCAxIDEgMCAwIDEgMiAwWiIgY2xpcC1ydWxlPSJldmVub2RkIiAvPgogIDxwYXRoIGQ9Ik0zIDExLjgzVjEyYTIgMiAwIDAgMCAyIDJoNmEyIDIgMCAwIDAgMi0ydi0uMTdjLS4zMTMuMTEtLjY1LjE3LTEgLjE3SDRjLS4zNSAwLS42ODctLjA2LTEtLjE3WiIgLz4KPC9zdmc+Cg==");
+}
+h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9InctNCBoLTQiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTExIDRWM2EyIDIgMCAwIDAtMi0ySDdhMiAyIDAgMCAwLTIgMnYxSDRhMiAyIDAgMCAwLTIgMnYzYTIgMiAwIDAgMCAyIDJoOGEyIDIgMCAwIDAgMi0yVjZhMiAyIDAgMCAwLTItMmgtMVpNOSAyLjVIN2EuNS41IDAgMCAwLS41LjV2MWgzVjNhLjUuNSAwIDAgMC0uNS0uNVpNOSA5YTEgMSAwIDEgMS0yIDAgMSAxIDAgMCAxIDIgMFoiIGNsaXAtcnVsZT0iZXZlbm9kZCIgLz4KICA8cGF0aCBkPSJNMyAxMS44M1YxMmEyIDIgMCAwIDAgMiAyaDZhMiAyIDAgMCAwIDItMnYtLjE3Yy0uMzEzLjExLS42NS4xNy0xIC4xN0g0Yy0uMzUgMC0uNjg3LS4wNi0xLS4xN1oiIC8+Cjwvc3ZnPgo=");
+}
+.fragmentDecor::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  bottom: -20;
+  height: 100%;
+  width: 20px;
+  background-color: #e04127;
+}
+
+[data-primarySkills-index]::before,
 [data-achievements-index]::before {
   content: "\2022";
-  font-family: "YourIconFontFamily", sans-serif;
-  font-size: var(--text);
-  color: #333;
-  position: relative;
-  top: 2px;
+}
+
+[data-template-no="5"] [data-name="phone"]::before,
+[data-template-no="5"] [data-name="email"]::before,
+[data-template-no="5"] [data-name="linkedIn"]::before,
+[data-template-no="4"] [data-name="phone"]::before,
+[data-template-no="4"] [data-name="email"]::before,
+[data-template-no="4"] [data-name="linkedIn"]::before,
+[data-template-no="3"] [data-name="phone"]::before,
+[data-template-no="3"] [data-name="email"]::before,
+[data-template-no="3"] [data-name="linkedIn"]::before,
+[data-template-no="1"] [data-name="phone"]::before,
+[data-template-no="1"] [data-name="email"]::before,
+[data-template-no="1"] [data-name="linkedIn"]::before {
+  content: "\2022";
   margin-right: 10px;
+  font-size: 1rem;
+}
+
+[data-template-no="2"] [data-primarySkills-index]::before {
+  content: none;
 }
 body {
   background-color: rgb(236, 236, 236);
@@ -85,6 +106,8 @@ body {
   display: none;
 }
 .page {
+  border: 2px solid red;
+  position: relative;
   height: 29.62cm !important;
   width: 21.01cm !important;
   background-color: #fff;
