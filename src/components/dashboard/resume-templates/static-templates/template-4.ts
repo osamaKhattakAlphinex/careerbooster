@@ -130,32 +130,45 @@ const components: any = {
         container: [
           {
             id: "educationLevel",
-            styles: "font-semibold text-base",
+            styles: "font-semibold text-base text-gray-950/80",
             tag: "span",
           },
-          { id: "fieldOfStudy", styles: "text-xs font-semibold", tag: "span" },
+          {
+            id: "fieldOfStudy",
+            styles: "text-xs font-semibold text-gray-950/80",
+            tag: "span",
+          },
           {
             id: "schoolName",
-            styles: "italic text-xs font-normal",
+            styles: "italic text-xs font-normal text-gray-950/80",
             tag: "span",
           },
           {
             id: "schoolLocation",
-            styles: "text-xs italic font-normal",
+            styles: "text-xs italic font-normal text-gray-950/80",
             tag: "span",
           },
           {
             styles: "flex flex-row gap-2 italic",
             tag: "div",
             container: [
-              { id: "fromMonth", styles: "text-xs", tag: "span" },
-              { id: "fromYear", styles: "text-xs", tag: "span" },
               {
-                id: "toMonth",
-                styles: "text-xs before:content-['\\268A'] before:mr-2",
+                id: "fromMonth",
+                styles: "text-xs text-gray-950/80",
                 tag: "span",
               },
-              { id: "toYear", styles: "text-xs", tag: "span" },
+              {
+                id: "fromYear",
+                styles: "text-xs text-gray-950/80",
+                tag: "span",
+              },
+              {
+                id: "toMonth",
+                styles:
+                  "text-xs before:content-['\\268A'] text-gray-950/80 before:mr-2",
+                tag: "span",
+              },
+              { id: "toYear", styles: "text-xs text-gray-950/80", tag: "span" },
               // { id: "isContinue", styles: "", tag: "span" },
             ],
           },
@@ -196,28 +209,18 @@ const templateLayout: any = {
         "text-black w-9/12 flex-1 flex flex-col justify-start items-start px-6 my-6",
       elements: [
         {
-          heading: false,
-          headingText: "",
           id: "name",
         },
         {
-          heading: false,
-          headingText: "",
           id: "jobTitle",
         },
         {
-          heading: true,
-          headingText: "Exective Summary",
           id: "summary",
         },
         {
-          heading: true,
-          headingText: "Work Experience",
           id: "workExperienceArray",
         },
         {
-          heading: true,
-          headingText: "Education",
           id: "education",
         },
       ],
