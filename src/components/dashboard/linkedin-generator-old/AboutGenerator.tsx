@@ -44,23 +44,15 @@ const AboutGenerator = ({ creditLimits }: { creditLimits: any }) => {
             </p>
           </div>
           <div
-            // onClick={() => handleGenerate()}
             className={`flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
           >
             <span className={`text-white text-[15px] font-semibold`}>
-              {/* <div className="flex"> */}
-              {/* <Image
-                  src={buttonIconSrc}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                /> */}
+             
               <span
                 className={`no-underline text-sm mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-300 hover:text-gray-950 font-semibold`}
               >
                 Launch <i className="ml-2">{chevronRight}</i>
               </span>
-              {/* </div> */}
             </span>
           </div>
         </div>
