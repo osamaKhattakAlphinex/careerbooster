@@ -10,14 +10,14 @@ const cvHeadings: any = [
     text: "executive summary",
     section: "summary",
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full",
+      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
     attributes: [{ "icon-color": "black" }],
   },
   {
     text: "work experience",
     section: "workExperienceArray",
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full",
+      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -25,7 +25,7 @@ const cvHeadings: any = [
     section: "education",
     attributes: [{ "icon-color": "black" }],
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full",
+      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
   },
   {
     text: "skills",
@@ -39,7 +39,7 @@ const cvHeadings: any = [
 const components: any = {
   shortName: {
     styles:
-      "h-8 w-8 my-8 border text-xl p-10 -ml-2 translate-x-2/4 font-semibold flex justify-center items-center rounded-full bg-gray-900 text-white text-center",
+      "h-8 w-8 my-8 border-8 text-xl p-10 -ml-5 translate-x-1/2 font-semibold flex justify-center items-center rounded-full bg-gray-[#1F1E1E] text-white text-center",
     tag: "span",
   },
   name: {
@@ -50,7 +50,7 @@ const components: any = {
   jobTitle: {
     tag: "span",
     styles:
-      "text-base flex justify-left items-center text-gray-950/80 w-full mb-2",
+      "text-base flex justify-left text-gray-950/80 items-center w-full mb-2",
   },
   contact: {
     styles: "",
@@ -74,11 +74,11 @@ const components: any = {
   },
   primarySkills: {
     styles:
-      "text-xs flex mt-2 text-gray-100 before:content-['\\2022'] before:mr-2",
+      "text-xs mt-2 flex text-gray-100 before:content-['\\2022'] before:mr-2",
     tag: "span",
   },
   summary: {
-    styles: "text-justify mb-4 text-xs text-gray-950/80",
+    styles: "text-justify text-gray-950/80 my-2 text-xs",
     tag: "span",
   },
   workExperienceArray: {
@@ -86,7 +86,7 @@ const components: any = {
     elements: [
       {
         id: "title",
-        styles: "text-base mt-2 text-gray-950/80 font-bold w-full",
+        styles: "text-base font-bold w-full text-gray-950/80 mt-2",
         tag: "span",
       },
       {
@@ -104,7 +104,7 @@ const components: any = {
           {
             id: "company",
             styles:
-              "before:content-['\\2758'] before:mr-2 text-gray-950/80 after:content-['\\2758'] after:ml-2",
+              "before:content-['\\2758'] text-gray-950/80 before:mr-2 after:content-['\\2758'] after:ml-2",
             tag: "span",
           },
           { id: "cityState", styles: "text-gray-950/80", tag: "span" },
@@ -115,7 +115,7 @@ const components: any = {
       {
         id: "achievements",
         styles:
-          "text-xs flex text-justify pb-1 text-gray-950/80 before:content-['\\2022'] before:mr-2",
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] text-gray-950/80 before:mr-2",
         tag: "span",
       },
     ],
@@ -126,49 +126,36 @@ const components: any = {
     elements: [
       {
         tag: "div",
-        styles: "bg-gray-200 flex flex-col w-[40%] p-4 rounded-md",
+        styles: "flex text-gray-950/80 flex-col w-[30%] p-4 rounded-md",
         container: [
           {
             id: "educationLevel",
-            styles: "font-semibold text-base text-gray-950/80",
+            styles: "font-semibold text-base",
             tag: "span",
           },
-          {
-            id: "fieldOfStudy",
-            styles: "text-xs font-semibold text-gray-950/80",
-            tag: "span",
-          },
+          { id: "fieldOfStudy", styles: "text-xs font-semibold", tag: "span" },
           {
             id: "schoolName",
-            styles: "italic text-xs font-normal text-gray-950/80",
+            styles: "italic text-xs font-normal",
             tag: "span",
           },
           {
             id: "schoolLocation",
-            styles: "text-xs italic font-normal text-gray-950/80",
+            styles: "text-xs italic font-normal",
             tag: "span",
           },
           {
             styles: "flex flex-row gap-2 italic",
             tag: "div",
             container: [
-              {
-                id: "fromMonth",
-                styles: "text-xs text-gray-950/80",
-                tag: "span",
-              },
-              {
-                id: "fromYear",
-                styles: "text-xs text-gray-950/80",
-                tag: "span",
-              },
+              { id: "fromMonth", styles: "text-xs", tag: "span" },
+              { id: "fromYear", styles: "text-xs", tag: "span" },
               {
                 id: "toMonth",
-                styles:
-                  "text-xs before:content-['\\268A'] text-gray-950/80 before:mr-2",
+                styles: "text-xs before:content-['\\268A'] before:mr-2",
                 tag: "span",
               },
-              { id: "toYear", styles: "text-xs text-gray-950/80", tag: "span" },
+              { id: "toYear", styles: "text-xs", tag: "span" },
               // { id: "isContinue", styles: "", tag: "span" },
             ],
           },
@@ -180,11 +167,11 @@ const components: any = {
 
 const templateLayout: any = {
   styles: "w-full",
-  attributes: [{ "template-no": "4" }],
+  attributes: [{ "template-no": "5" }],
   fragment: {
     styles: "flex flex-row bg-white fragment",
     sideBar: {
-      styles: "bg-[#323B4C] w-3/12 flex flex-col justify-start px-4",
+      styles: "bg-[#1F1E1E] w-3/12 flex flex-col justify-start px-4",
       elements: [
         {
           id: "shortName",
@@ -209,18 +196,28 @@ const templateLayout: any = {
         "text-black w-9/12 flex-1 flex flex-col justify-start items-start px-6 my-6",
       elements: [
         {
+          heading: false,
+          headingText: "",
           id: "name",
         },
         {
+          heading: false,
+          headingText: "",
           id: "jobTitle",
         },
         {
+          heading: true,
+          headingText: "Exective Summary",
           id: "summary",
         },
         {
+          heading: true,
+          headingText: "Work Experience",
           id: "workExperienceArray",
         },
         {
+          heading: true,
+          headingText: "Education",
           id: "education",
         },
       ],
