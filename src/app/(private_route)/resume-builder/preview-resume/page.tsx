@@ -130,19 +130,16 @@ const Page = () => {
     const elem: any = document.querySelectorAll(`[data-name='${name}']`);
     elem[0]?.parentNode.insertBefore(elemHeading, elem[0]);
   };
-  const addHeadings = () => {
-    newHeading("summary", "executive summary");
-    newHeading("phone", "contact");
-    newHeading("workExperienceArray", "work experience");
-    newHeading("primarySkills", "Skills");
-    newHeading("education", "education");
-  };
+
   const educationDivs = (page: any) => {
     const educationDivs = document.querySelectorAll(
       "[data-education-container-index]"
     );
     let newDiv = document.createElement("div");
     newDiv.setAttribute("data-container-name", "education");
+
+    console.log("Education Array Length", Array.from(educationDivs).length);
+
     for (const singleEducation of Array.from(educationDivs)) {
       newDiv.appendChild(singleEducation);
     }
