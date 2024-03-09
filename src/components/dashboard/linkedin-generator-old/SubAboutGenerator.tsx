@@ -364,9 +364,24 @@ const SubAboutGenerator = () => {
             Don{"'"}t Like the results?
           </h2>
           <p className="text-[16px]  lg:text-[24px] lg:text-left text-center">
-            Change your preference and regenerate you summary
+            Change your preference and regenerate your summary
           </p>
           <div className="flex flex-col gap-4 lg:px-0 px-8">
+            <label
+              htmlFor="default-radio-3"
+              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 md:py-4 xs:py-3 py-3 cursor-pointer md:text-[16px] xs:text-[11px]"
+            >
+              <input
+                id="default-radio-3"
+                type="radio"
+                value="about"
+                name="default-radio"
+                onChange={(e) => setOption(e.target.value)}
+                className="lg:w-5 lg:h-5 w-3 h-3 "
+                checked={option === "about"}
+              />
+              Regenerate about again to get more results
+            </label>
             <label
               htmlFor="default-radio-2"
               className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 xs:py-3 py-3 md:py-4 cursor-pointer md:text-[16px] xs:text-[11px]"
@@ -380,20 +395,6 @@ const SubAboutGenerator = () => {
                 className="lg:w-5 lg:h-5 w-3 h-3 "
               />
               I need a shorter summary (Not Recommended)
-            </label>
-            <label
-              htmlFor="default-radio-3"
-              className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 md:py-4 xs:py-3 py-3 cursor-pointer md:text-[16px] xs:text-[11px]"
-            >
-              <input
-                id="default-radio-3"
-                type="radio"
-                value="aboutStory"
-                name="default-radio"
-                onChange={(e) => setOption(e.target.value)}
-                className="lg:w-5 lg:h-5 w-3 h-3 "
-              />
-              Add a captivating story to hook the visitors
             </label>
           </div>
 
@@ -421,9 +422,59 @@ const SubAboutGenerator = () => {
               />
             </svg>
             <span className="lg:text-[20px] text-[16px] font-semibold">
-              Re-generate Summary
+              Re-generate
             </span>
           </Button> */}
+          <button
+            type="button"
+            disabled={msgLoading || !session?.user?.email}
+            onClick={() => handleGenerate()}
+            className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] `}
+          >
+            <span
+              className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}
+            >
+              {msgLoading ? (
+                <div
+                  className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-44 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[20px] py-[12px] md:ml-auto`}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className={`w-4 h-4 mr-3 ${
+                      msgLoading ? "animate-spin" : ""
+                    }`}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                    />
+                  </svg>
+                  Please wait...
+                </div>
+              ) : (
+                <div
+                  className={` bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#B324D7] to-[#615DFF] flex md:w-44 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
+                >
+                  <Image
+                    src={buttonIconSrc}
+                    alt="bold icon"
+                    height={18}
+                    width={18}
+                  />
+                  <span
+                    className={`text-white text-[15px] font-semibold whitespace-nowrap`}
+                  >
+                    Generate
+                  </span>
+                </div>
+              )}
+            </span>
+          </button>
         </div>
       )}
       {showPopup && (
