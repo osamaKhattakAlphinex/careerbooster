@@ -253,7 +253,14 @@ const DashboardBot = () => {
           alt="GIF"
           width={200}
           height={200}
-          className="botImage"
+          className="botImage xs:hidden md:hidden lg:block"
+        />
+        <Image
+          src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
+          alt="GIF"
+          width={100}
+          height={100}
+          className="botImage xs:block md:block lg:hidden"
         />
       </Tooltip>
       <audio className="hidden" ref={componentRef} controls />
