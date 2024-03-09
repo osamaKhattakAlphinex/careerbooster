@@ -480,11 +480,7 @@ const ResumeBuilder = () => {
                           key={`template-${index}`}
                           className="box-border relative flex items-center overflow-hidden rounded-lg group"
                         >
-                          {/* {template.category === "premium" && (
-        <div className="absolute grid w-6 h-6 bg-yellow-600 rounded-full right-1 top-1 place-content-center">
-          {crownIcon}
-        </div>
-      )} */}
+         
                           <Link
                             className="no-underline"
                             href={{

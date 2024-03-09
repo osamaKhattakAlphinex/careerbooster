@@ -63,11 +63,6 @@ const useGetSummary = (setStreamedSummaryData: any) => {
         },
       }),
     }).then(async (resp: any) => {
-      const res = await resp.json();
-      console.log("response", res);
-      if (res?.result === "Insufficient Credits") {
-        console.log("Loading of");
-      }
 
       if (resp.ok) {
         const reader = resp.body.getReader();
