@@ -179,7 +179,8 @@ const Template = () => {
         {resume &&
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
-              <div className="md:w-[82%] xs:w-full xs:flex xs:justify-center md:inline-block xs:pb-0 md:pb-4 ">
+
+              <div className="xl:w-[82%] lg:w-[75%] md:w-[80%] xs:w-full xs:flex xs:justify-center md:inline-block xs:pb-0 md:pb-4 ">
                 <Link
                   href="/resume-builder"
                   className="overflow-hidden text-white no-underline rounded-lg"
@@ -191,7 +192,7 @@ const Template = () => {
                   </div>
                 </Link>
               </div>
-              <div className="md:w-[18%] xs:w-full xs:mt-4 xs:flex xs:justify-center md:inline-block gap-3 xs:pb-0 md:pb-4 md:sticky top-4 right-2 z-[35]">
+              <div className="xl:w-[18%] lg:w-[25%] md:w-[20%] xs:w-full xs:mt-4 xs:flex xs:justify-center md:inline-block gap-3 xs:pb-0 md:pb-4 md:sticky top-4 right-2 z-[35]">
                 <Link
                   className="no-underline"
                   href={`/resume-builder/preview-resume?templateId=${templateId}&resumeId=${resume.id}`}
