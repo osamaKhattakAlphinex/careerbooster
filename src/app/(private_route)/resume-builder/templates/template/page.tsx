@@ -12,6 +12,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
+import { chevronRight } from "@/helpers/iconsProvider";
 
 const Template = () => {
   const params = useSearchParams();
@@ -82,9 +83,9 @@ const Template = () => {
             className="overflow-hidden text-white no-underline rounded-lg"
           >
             <div
-              className={` font-bold bg-gradient-to-r w-fit from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
+              className={` font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center py-1 px-2`}
             >
-              All Templates
+              View All Templates<i className="">{chevronRight}</i>
             </div>
           </Link>
         </div>
@@ -252,9 +253,9 @@ const Template = () => {
                   className="overflow-hidden text-white no-underline rounded-lg"
                 >
                   <div
-                    className={` font-bold bg-gradient-to-r w-fit from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent grid gap-2 text-center py-1 px-2`}
+                    className={` font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center py-1 px-2`}
                   >
-                    All Templates
+                    View All Templates<i className="">{chevronRight}</i>
                   </div>
                 </Link>
               </div>
