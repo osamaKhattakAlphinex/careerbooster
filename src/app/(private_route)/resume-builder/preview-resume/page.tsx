@@ -630,21 +630,19 @@ const Page = () => {
 
   return (
     <div className="lg:ml-[234px] ml-0">
-     
-        <div className="flex items-center justify-center gap-3 xs:pb-0 md:pb-4">
-          <DownloadService
-            componentRef={cvRef}
-            fileName={fileName}
-            preview={false}
-          />
-        </div>
-      
-          <div
-            ref={cvRef}
-            className={`cv-container text-[#000] xs:scale-50 md:scale-80 lg:scale-100 scale-100`}
-          ></div>
-        </div>
-   
+      <div className="flex items-center justify-center gap-3 xs:pb-0 md:pb-4">
+        <DownloadService
+          componentRef={cvRef}
+          fileName={fileName}
+          preview={false}
+        />
+      </div>
+
+      <div
+        ref={cvRef}
+        className={`cv-container text-[#000] xs:scale-50 md:scale-80 lg:scale-100 scale-100`}
+      ></div>
+    </div>
   );
 };
 
