@@ -655,7 +655,7 @@ const Page = () => {
       
           <div
             ref={cvRef}
-            className={`cv-container text-[#000] xs:scale-50 md:scale-80 lg:scale-100 scale-100`}
+            className={`cv-container mx-auto text-[#000]`}
           ></div>
         </div>
    
