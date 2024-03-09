@@ -165,6 +165,14 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
 h2:empty {
   display: none;
 }
+
+.page {
+  position: relative;
+  height: 29.62cm !important;
+  width: 21.01cm !important;
+  background-color: #fff;
+  margin: 10px;
+}
         
        
         </style>
