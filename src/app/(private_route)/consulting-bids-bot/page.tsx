@@ -278,11 +278,11 @@ const ConsultingBidsGenerator = () => {
           <>
             <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4  lg:px-[30px] py-[41px] flex flex-col gap-5 ">
               {/* header */}
-              <div className="flex flex-col  md:flex-row justify-between items-center">
+              <div className="flex flex-col items-center justify-between md:flex-row">
                 <h3 className="text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
                   Consulting Bids Generator
                 </h3>
-                <div className=" text-sm dark:text-gray-100 text-gray-950 uppercase font-bold">
+                <div className="text-sm font-bold uppercase  dark:text-gray-100 text-gray-950">
                   {/* <LimitCard
                     title="Email Availble"
                     limit={
@@ -374,8 +374,8 @@ const ConsultingBidsGenerator = () => {
               </div>
 
               {/* form */}
-              <div className="flex flex-col gap-5 justify-between items-start">
-                <div className="w-full flex flex-col">
+              <div className="flex flex-col items-start justify-between gap-5">
+                <div className="flex flex-col w-full">
                   <label className=" font-bold justify-between items-center text-md md:text-[24px] dark:text-gray-100 text-gray-950 flex py-[20px] gap-[3px]">
                     <div>
                       Paste Your Job Description
@@ -511,7 +511,7 @@ const ConsultingBidsGenerator = () => {
                       )}
                     </div>
                   </div>
-                  <div className="buttons mt-5 flex flex-col md:flex-row gap-3">
+                  <div className="flex flex-col gap-3 mt-5 buttons md:flex-row">
                     <div>
                       <button
                         disabled={
@@ -536,7 +536,7 @@ const ConsultingBidsGenerator = () => {
                           "cursor-not-allowed" // Add this class when the button is disabled
                         }`}
                       >
-                        <span className="dark:text-gray-300 text-gray-950 text-sm ">
+                        <span className="text-sm dark:text-gray-300 text-gray-950 ">
                           {msgLoading ? (
                             <div className="flex">
                               <svg
@@ -682,21 +682,21 @@ const ConsultingBidsGenerator = () => {
                           <path
                             d="M15.7895 21H4.15512C3.71432 21 3.29157 20.7893 2.97988 20.4142C2.66818 20.0391 2.49307 19.5304 2.49307 19V5C2.49307 4.46957 2.66818 3.96086 2.97988 3.58579C3.29157 3.21071 3.71432 3 4.15512 3H13.2964L17.4515 8V19C17.4515 19.5304 17.2764 20.0391 16.9647 20.4142C16.653 20.7893 16.2303 21 15.7895 21Z"
                             stroke="black"
-                            stroke-width="2"
+                            strokeWidth="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
                           />
                           <path
                             d="M14.1274 21V13H5.81717V21"
                             stroke="black"
-                            stroke-width="2"
+                            strokeWidth="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
                           />
                           <path
                             d="M5.81717 3V8H12.4654"
                             stroke="black"
-                            stroke-width="2"
+                            strokeWidth="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
                           />

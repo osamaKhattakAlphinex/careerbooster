@@ -91,7 +91,7 @@ const Page = () => {
       "workExperienceArray",
       "education",
       "sideBar",
-      "body"
+      "body",
     ];
 
     for (const cleanUpId of cleanUpIds) {
@@ -112,33 +112,33 @@ const Page = () => {
     }
   };
 
-  const cleanUpLastPageHTML = (page:any) => {
+  const cleanUpLastPageHTML = (page: any) => {
     // Function to check if an element has text content
-    const hasTextContent = (element:any) => {
-        return element.textContent.trim().length > 0;
+    const hasTextContent = (element: any) => {
+      return element.textContent.trim().length > 0;
     };
 
     // Function to recursively check if any child element has text content
-    const hasChildWithTextContent = (element:any) => {
-        // Check if the current element has text content
-        if (hasTextContent(element)) {
-            return true; // Found text content, no need to check further
+    const hasChildWithTextContent = (element: any) => {
+      // Check if the current element has text content
+      if (hasTextContent(element)) {
+        return true; // Found text content, no need to check further
+      }
+      // Check text content of child elements recursively
+      for (const child of element.children) {
+        if (hasChildWithTextContent(child)) {
+          return true; // Found text content in child, no need to check further
         }
-        // Check text content of child elements recursively
-        for (const child of element.children) {
-            if (hasChildWithTextContent(child)) {
-                return true; // Found text content in child, no need to check further
-            }
-        }
-        return false; // No child has text content
+      }
+      return false; // No child has text content
     };
 
     // Check if the page has any child with text content
     if (!hasChildWithTextContent(page)) {
-        // Remove the page if no child has text content
-        page.remove();
+      // Remove the page if no child has text content
+      page.remove();
     }
-};
+  };
 
   function checkOverflow(id: any) {
     var element = document.getElementById(`page-${id}`);
@@ -177,7 +177,6 @@ const Page = () => {
       getSideBar.style.height = "29.62cm";
     }
   };
- 
 
   const canFitEducation = (page: any, educationHeading: any) => {
     return educationHeading.offsetTop + 140 < page.clientHeight;
@@ -238,7 +237,7 @@ const Page = () => {
         '[data-container-name="education-indicator"]'
       );
 
-      if(nextPage){
+      if (nextPage) {
         cleanUpLastPageHTML(nextPage);
       }
       // Loop through each matching element and remove it from the DOM
@@ -644,21 +643,19 @@ const Page = () => {
 
   return (
     <div className="lg:ml-[234px] ml-0">
-     
-        <div className="flex items-center justify-center gap-3 xs:pb-0 md:pb-4">
-          <DownloadService
-            componentRef={cvRef}
-            fileName={fileName}
-            preview={false}
-          />
-        </div>
-      
-          <div
-            ref={cvRef}
-            className={`cv-container text-[#000] xs:scale-50 md:scale-80 lg:scale-100 scale-100`}
-          ></div>
-        </div>
-   
+      <div className="flex items-center justify-center gap-3 xs:pb-0 md:pb-4">
+        <DownloadService
+          componentRef={cvRef}
+          fileName={fileName}
+          preview={false}
+        />
+      </div>
+
+      <div
+        ref={cvRef}
+        className={`cv-container text-[#000] xs:scale-50 md:scale-80 lg:scale-100 scale-100`}
+      ></div>
+    </div>
   );
 };
 
