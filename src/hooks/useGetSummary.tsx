@@ -58,7 +58,6 @@ const useGetSummary = (setStreamedSummaryData: any) => {
         userData: aiInputUserData,
         trainBotData: {
           userEmail: userData.email,
-          // fileAddress: userData.files[0].fileName,
           fileAddress: userData.uploadedResume.fileName,
         },
       }),

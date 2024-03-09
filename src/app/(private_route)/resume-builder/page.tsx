@@ -255,8 +255,7 @@ const ResumeBuilder = () => {
             jobTitle: resumeData.state.jobPosition,
           }),
         });
-        // const response = await res.json();
-        // console.log("result", result, typeof result);
+ 
         if (res.ok) {
           const reader = res.body.getReader();
           while (true) {

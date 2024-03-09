@@ -326,9 +326,9 @@ const TrainRegistrationBotAdminPage = () => {
     const c = confirm("Are you sure you want to delete these Records?");
     if (c) {
       setLoading(true);
-      console.log("train-bot ids ", ids);
+
       try {
-        // console.log("all data deleted");
+
         axios
           .post("/api/trainBot/bulkDelete", { dataSelection: ids })
           .then((res: any) => {

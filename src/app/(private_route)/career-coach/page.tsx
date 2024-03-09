@@ -95,13 +95,11 @@ const ChatAI = () => {
     const obj: any = {
       email: userData.email,
     };
-    console.log(obj);
     await fetch("/api/chatCompletion", {
       method: "POST",
       body: JSON.stringify(obj),
     }).then(async (res) => {
       const response = await res.json();
-      console.log(response);
       setChat(response.result);
     });
   };

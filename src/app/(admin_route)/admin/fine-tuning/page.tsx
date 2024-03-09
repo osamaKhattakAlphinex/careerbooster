@@ -184,7 +184,7 @@ const FineTuningModels = () => {
       })
       .then((res: any) => {
         if (res.data.success) {
-          console.log(res.data.content);
+       
         }
       })
       .catch((err) => {
@@ -203,7 +203,7 @@ const FineTuningModels = () => {
       .get(`/api/trainBot/tuneModel/tuningJobsStatus/${jobId}`)
       .then((res: any) => {
         if (res.data.success) {
-          console.log(res.data.content);
+          
         }
       })
       .catch((err) => {
@@ -223,7 +223,7 @@ const FineTuningModels = () => {
       })
       .then((res: any) => {
         if (res.data.success) {
-          console.log(res.data.content);
+      
         }
       })
       .catch((err) => {
