@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
@@ -7,6 +7,8 @@ import { useSearchParams } from "next/navigation";
 import { getTemplates } from "@/components/dashboard/resume-templates/static-templates";
 const Page = () => {
   const params = useSearchParams();
+  const [scale, setScale] = useState<number>(1);
+  const [cvMaxHeight, setCvMaxHeight] = useState<any>(null);
   const [fileName, setFileName] = useState<string>("");
   const templateId: number = parseInt(params.get("templateId") || "0");
   const resumeId: string = params.get("resumeId") || "";
@@ -15,8 +17,10 @@ const Page = () => {
   const cvRef = useRef<any>(null);
   let template: any;
   template = getTemplates(templateId);
-  const [maxCvHeight,setMaxCvHeight] = useState();
+
  
+
+
 
   useEffect(() => {
     if (resumeData.id === "") {
@@ -45,6 +49,19 @@ const Page = () => {
   let fragment: any = [];
   let leftSpan: any = [];
 
+
+ 
+  const getAllSettings = () =>{
+    if (cvRef.current) {
+      const scaling = window.innerWidth < 1024 ? (window.innerWidth*0.38)/320 : (((window.innerWidth - 212) * 0.38)/320)
+      const roundedScale = Math.floor(scaling * 100) /100
+      setScale(roundedScale)
+      const scaledHeight = cvRef.current.offsetHeight; // Get the actual height of the scaled element      
+      const unscaledHeight = scaledHeight * roundedScale; // Calculate the unscaled height
+      setCvMaxHeight(unscaledHeight + 100); // Set the scaled down height plus 100 (adjust as needed)
+  }
+  
+  }
   const cleanUpHTML = (page: any) => {
     const cleanUpIds = [
       "shortName",
@@ -66,7 +83,9 @@ const Page = () => {
       "workExperienceArray",
       "education",
       "sideBar",
+      "body"
     ];
+
     for (const cleanUpId of cleanUpIds) {
       let emptyIds = page.querySelectorAll(`#${cleanUpId}`);
       for (const emptyId of emptyIds) {
@@ -84,6 +103,34 @@ const Page = () => {
       }
     }
   };
+
+  const cleanUpLastPageHTML = (page:any) => {
+    // Function to check if an element has text content
+    const hasTextContent = (element:any) => {
+        return element.textContent.trim().length > 0;
+    };
+
+    // Function to recursively check if any child element has text content
+    const hasChildWithTextContent = (element:any) => {
+        // Check if the current element has text content
+        if (hasTextContent(element)) {
+            return true; // Found text content, no need to check further
+        }
+        // Check text content of child elements recursively
+        for (const child of element.children) {
+            if (hasChildWithTextContent(child)) {
+                return true; // Found text content in child, no need to check further
+            }
+        }
+        return false; // No child has text content
+    };
+
+    // Check if the page has any child with text content
+    if (!hasChildWithTextContent(page)) {
+        // Remove the page if no child has text content
+        page.remove();
+    }
+};
 
   function checkOverflow(id: any) {
     var element = document.getElementById(`page-${id}`);
@@ -122,24 +169,7 @@ const Page = () => {
       getSideBar.style.height = "29.62cm";
     }
   };
-  const newHeading = (name: any, content: any) => {
-    console.log("inside");
-    let elemHeading = document.createElement("h2");
-    elemHeading.textContent = content;
-    setStylesToElement(
-      elemHeading,
-      "font-bold text-base uppercase border-t-2 border-b-2 py-0.5 w-full"
-    );
-    const elem: any = document.querySelectorAll(`[data-name='${name}']`);
-    elem[0]?.parentNode.insertBefore(elemHeading, elem[0]);
-  };
-  const addHeadings = () => {
-    newHeading("summary", "executive summary");
-    newHeading("phone", "contact");
-    newHeading("workExperienceArray", "work experience");
-    newHeading("primarySkills", "Skills");
-    newHeading("education", "education");
-  };
+ 
 
   const canFitEducation = (page: any, educationHeading: any) => {
     return educationHeading.offsetTop + 140 < page.clientHeight;
@@ -158,7 +188,6 @@ const Page = () => {
     setStylesToElement(newNextDiv, "px-6 m-2 flex flex-wrap gap-4 w-full");
     const getEducationHeading = page.querySelector("h2[data-name='education']");
     if (getEducationHeading) {
-      console.log(nextPage);
       let indicatorDiv = document.createElement("span");
       indicatorDiv.setAttribute("data-container-name", "education-indicator");
       indicatorDiv.textContent = "indicator";
@@ -181,7 +210,6 @@ const Page = () => {
           isSpaceAvailable = canFitEducation(page, indicatorDiv);
           if (isSpaceAvailable) {
             rowItemCount = 1;
-            console.log(newDiv);
             newDiv.appendChild(singleEducation);
             getEducationHeading.parentNode.insertBefore(
               newDiv,
@@ -202,6 +230,9 @@ const Page = () => {
         '[data-container-name="education-indicator"]'
       );
 
+      if(nextPage){
+        cleanUpLastPageHTML(nextPage);
+      }
       // Loop through each matching element and remove it from the DOM
       elementsToRemove.forEach((element: any) => {
         element.parentNode.removeChild(element);
@@ -584,6 +615,7 @@ const Page = () => {
         checkOverflow(index);
         cleanUpHTML(page);
       });
+      getAllSettings();
       // cleanUpHTML(pages[pages.length - 1]);
       // addHeadings()
     }, 100);
@@ -604,7 +636,7 @@ const Page = () => {
   }, [fileName]);
 
   return (
-    <div className="lg:ml-[234px] ml-0">
+    <div className="lg:ml-[234px] ml-0" style={{maxHeight: `${cvMaxHeight}px`}}>
      
         <div className="flex items-center justify-center gap-3 xs:pb-0 md:pb-4">
           <DownloadService
@@ -616,7 +648,9 @@ const Page = () => {
       
           <div
             ref={cvRef}
-            className={`cv-container text-[#000] xs:scale-[.38] origin-top-left sm:scale-[.9] md:scale-[.92] lg:scale-100 scale-100`}
+            className="cv-container text-[#000] origin-top-left"
+            style={{scale: scale < 1 ? scale : 1}}
+
           ></div>
         </div>
    
