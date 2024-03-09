@@ -133,17 +133,9 @@ const Template = () => {
                       key={`template-${index}`}
                       className="box-border relative flex items-center overflow-hidden rounded-lg group"
                     >
-                      {/* {template.category === "premium" && (
-        <div className="absolute grid w-6 h-6 bg-yellow-600 rounded-full right-1 top-1 place-content-center">
-          {crownIcon}
-        </div>
-      )} */}
                       <Link
                         className="no-underline"
-                        href={{
-                          pathname: "resume-builder/templates/template",
-                          query: { templateId: template.id },
-                        }}
+                        href={`/resume-builder/templates/template?templateId=${template.id}`}
                       >
                         <div className="absolute top-0 left-0 hidden w-full h-full overflow-hidden text-white rounded-lg group-hover:grid bg-slate-600/60 place-content-center">
                           <svg

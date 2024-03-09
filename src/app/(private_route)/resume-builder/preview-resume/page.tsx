@@ -630,13 +630,7 @@ const Page = () => {
 
   return (
     <div className="lg:ml-[234px] ml-0">
-      <div
-        id="outerScaleDiv"
-        className="my-10"
-        style={{
-          height: isMobile ? scaleHeight + "px" : undefined,
-        }}
-      >
+     
         <div className="flex items-center justify-center gap-3 xs:pb-0 md:pb-4">
           <DownloadService
             componentRef={cvRef}
@@ -644,20 +638,13 @@ const Page = () => {
             preview={false}
           />
         </div>
-        <div
-          className="xs:relative"
-          style={{
-            top: isMobile ? "-" + refTop + "px" : undefined,
-            left: isMobile ? "-" + refLeft + "px" : undefined,
-          }}
-        >
+      
           <div
             ref={cvRef}
-            className={`cv-container text-[#000] xs:scale-50 xs:w-[200%] xs:absolute md:relative  md:w-[100%]  w-[100%] md:top-[0px] md:left-[0px] md:scale-100 scale-100`}
+            className={`cv-container text-[#000] xs:scale-50 md:scale-80 lg:scale-100 scale-100`}
           ></div>
         </div>
-      </div>
-    </div>
+   
   );
 };
 

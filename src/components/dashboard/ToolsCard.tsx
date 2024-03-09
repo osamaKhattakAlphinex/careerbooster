@@ -42,13 +42,13 @@ const ToolsCard = ({
       case "Resume Builder":
         resumeElementRef.current = ref;
         break;
-      case "Generator Cover Letters":
+      case "Cover Letters Generator":
         coverLetterElementRef.current = ref;
         break;
-      case "Keyword Optimize Your LinkedIn":
+      case "LinkedIn Optimizer":
         linkedinElementRef.current = ref;
         break;
-      case "Personalized Email Generator":
+      case "Email Assistant":
         emailElementRef.current = ref;
         break;
       case "Consulting Bids Generator":
@@ -57,7 +57,7 @@ const ToolsCard = ({
       case "Career Coach":
         coachElementRef.current = ref;
         break;
-      case "Review Resume by AI":
+      case "Resume Review by AI":
         reviewElementRef.current = ref;
         break;
       case "AI Job Finder":

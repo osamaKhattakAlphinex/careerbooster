@@ -38,10 +38,7 @@ import { fetchLIstOfStrings } from "@/helpers/fetchLIstOfStrings";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import CreditInfoModal from "@/components/dashboard/resume-builder/CreditsInfoModal";
-import Templates from "@/components/dashboard/resume-templates";
 import TemplateSlider from "@/components/dashboard/resume-templates/templateSlider";
-import { Metadata } from "next";
-import Head from "next/head";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);

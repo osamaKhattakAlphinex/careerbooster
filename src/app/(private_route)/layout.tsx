@@ -19,6 +19,8 @@ interface Props {
   children: ReactNode;
 }
 
+
+
 export const metadata: Metadata = {
   title: "CareerBooster.AI",
   description: "Dashboard - CareerBooster.ai | Developed by NausalTech",
