@@ -73,7 +73,7 @@ const Template = () => {
     <div className="lg:ml-[234px] ml-0 px-[15px]">
       <RecentResumeCard componentRef={componentRef} templateId={templateId} />
       <div>
-        <div className="flex justify-between items-center pb-6 pt-4">
+        <div className="flex items-center justify-between pt-4 pb-6">
           <h2 className="text-sm font-bold text-gray-900 uppercase dark:text-white">
             Templates Designs
           </h2>
@@ -125,9 +125,8 @@ const Template = () => {
                 },
               }}
             >
-              {ALL_TEMPLATES.filter((template) => template.active)
-                .slice(0, 6)
-                .map((template, index) => (
+              {ALL_TEMPLATES.filter((template) => template.active).map(
+                (template, index) => (
                   <SwiperSlide key={`template-${index}`}>
                     <div
                       key={`template-${index}`}
@@ -163,7 +162,8 @@ const Template = () => {
                       </Link>
                     </div>
                   </SwiperSlide>
-                ))}
+                )
+              )}
             </Swiper>
           </div>
         )}
@@ -179,7 +179,6 @@ const Template = () => {
         {resume &&
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
-
               <div className="md:w-[82%] xs:w-full xs:flex xs:justify-center md:inline-block xs:pb-0 md:pb-4 ">
                 <Link
                   href="/resume-builder"
@@ -246,7 +245,7 @@ const Template = () => {
                   )}
                 </div>
               </div>
-              <div className="xs:hidden md:flex justify-end py-3">
+              <div className="justify-end py-3 xs:hidden md:flex">
                 <Link
                   href="/resume-builder/templates"
                   className="overflow-hidden text-white no-underline rounded-lg"
