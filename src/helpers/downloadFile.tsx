@@ -3,8 +3,6 @@
 import { useRef, useState } from "react";
 
 const DownloadService = ({
-  icon,
-  className,
   componentRef,
   view,
   card,
@@ -126,6 +124,10 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
   content: "\\2022";
 }
 
+.cv-container {
+  scale:1 !important;
+}
+
 [data-template-no="2"] [data-primarySkills-index]::before {
   content: none;
 }
@@ -158,6 +160,17 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
   height: 1119px;
   width: 20px;
   background-color: #e04127;
+}
+
+h2:empty {
+  display: none;
+}
+
+.page {
+  position: relative;
+  height: 29.62cm !important;
+  background-color: #fff;
+  margin: 10px;
 }
         
        

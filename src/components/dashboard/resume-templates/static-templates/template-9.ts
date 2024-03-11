@@ -2,6 +2,8 @@ const cvHeadings: any = [
   {
     text: "contact",
     section: "phone",
+    headingKey: "contact",
+
     attributes: [{ "icon-color": "white" }],
     styles:
       "font-semibold uppercase text-sm py-1 px-4 w-full text-center border-2 rounded-full flex items-center justify-center border-[#043382] mt-[166px] mb-2",
@@ -9,6 +11,8 @@ const cvHeadings: any = [
   {
     text: "executive summary",
     section: "summary",
+    headingKey: "summary",
+
     attributes: [{ "icon-color": "white" }],
     styles:
       "font-semibold uppercase text-sm py-1 text-white bg-[#043382] px-4 border-2 flex items-center justify-center rounded-full mt-[150px] py-0.5 mb-1",
@@ -16,6 +20,8 @@ const cvHeadings: any = [
   {
     text: "work experience",
     section: "workExperienceArray",
+    headingKey: "workExperienceArray",
+
     attributes: [{ "icon-color": "white" }],
     styles:
       "font-semibold uppercase text-sm py-1 text-white bg-[#043382] px-4 border-2 flex items-center justify-center rounded-full py-0.5 mb-1",
@@ -23,6 +29,8 @@ const cvHeadings: any = [
   {
     text: "education",
     section: "education",
+    headingKey: "education",
+
     attributes: [{ "icon-color": "white" }],
     styles:
       "font-semibold uppercase text-sm py-1 text-white bg-[#043382] border-2 px-4 flex items-center justify-center rounded-full",
@@ -30,6 +38,8 @@ const cvHeadings: any = [
   {
     text: "skills",
     section: "primarySkills",
+    headingKey: "primarySkills",
+
     attributes: [{ "icon-color": "white" }],
     styles:
       "font-semibold uppercase text-sm py-1 text-white text-center border-2 flex flex-row justify-center items-center rounded-full border-[#043382] mt-6 mb-2",

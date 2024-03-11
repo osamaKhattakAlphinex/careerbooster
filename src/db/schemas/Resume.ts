@@ -36,6 +36,13 @@ const UserSchema = new Schema(
       cityState: String,
       postalCode: String,
     },
+    headings :{
+      education: String,
+      primarySkills: String,
+      workExperienceArray: String,
+      summary: String,
+      contact: String,
+    },
     education: [],
     experience: [],
     skills: [],

@@ -34,15 +34,23 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
           {dataSource === "linkedInJobDescriptions" && "RECENT DESCRIPTIONS"}
           {dataSource === "linkedInKeywords" && "RECENT KEYWORDS"}
         </h1>
+        {dataSource === "coverLetters" && (
           <div className="group flex md:ml-1 cursor-pointer relative inset-0">
             {infoSmallIcon}
-            <div className="w-40 md:w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:left-1 md:left-4 xs:-top-[92px]  z-[2000]  md:-top-[5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-bl-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
-              {dataSource === "coverLetters" &&
-                "Every cover letter you generate is stored here for easy future access."}
-              {dataSource === "emails" &&
-                "Every Email you generate is stored here for easy future access."}
+            <div className="w-40 md:w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-[9.75rem] md:left-[14px] xs:-top-[64px]  z-[2000]  md:-top-[4.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+              Every cover letter you generate is stored here for easy future
+              access.
             </div>
           </div>
+        )}
+        {dataSource === "emails" && (
+          <div className="group flex md:ml-1 cursor-pointer relative inset-0">
+            {infoSmallIcon}
+            <div className="w-40 md:w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-[9.75rem] md:left-[14px] xs:-top-[64px]  z-[2000]  md:-top-[4.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+              Every Email you generate is stored here for easy future access.
+            </div>
+          </div>
+        )}
 
         {/* <div className="relative lg:w-[213px] w-[120px] flex">
           <input

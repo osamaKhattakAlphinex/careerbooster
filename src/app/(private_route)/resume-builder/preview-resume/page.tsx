@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
@@ -7,10 +7,8 @@ import { useSearchParams } from "next/navigation";
 import { getTemplates } from "@/components/dashboard/resume-templates/static-templates";
 const Page = () => {
   const params = useSearchParams();
-  const [refTop, setRefTop] = useState<number | null>(null);
-  const [refLeft, setRefLeft] = useState<number | null>(null);
-  const [scaleHeight, setScaleHeight] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+  const [scale, setScale] = useState<number>(1);
+  const [cvMaxHeight, setCvMaxHeight] = useState<any>(null);
   const [fileName, setFileName] = useState<string>("");
   const templateId: number = parseInt(params.get("templateId") || "0");
   const resumeId: string = params.get("resumeId") || "";
@@ -20,28 +18,9 @@ const Page = () => {
   let template: any;
   template = getTemplates(templateId);
 
-  useLayoutEffect(() => {
-    if (cvRef.current && isMobile) {
-      const height = Math.floor(cvRef.current.offsetHeight * 0.5 + 90);
-      setScaleHeight(height);
-      const refTop = Math.floor((540 / 2275) * cvRef.current.offsetHeight);
-      setRefTop(refTop);
-      const width = Math.floor((175 / 390) * window.innerWidth);
-      setRefLeft(width);
-    }
-  }, [cvRef.current, templateId]);
+ 
 
-  useLayoutEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 480);
-    };
 
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     if (resumeData.id === "") {
@@ -52,6 +31,18 @@ const Page = () => {
   }, [templateId, resumeId]);
   const { components, templateLayout, cvHeadings } = template;
 
+
+  let newCvHeadings:any = []
+  console.log(resumeData.headings)
+  for ( const singleHeading of Object.entries(resumeData.headings)){
+    const [key, value] = singleHeading
+
+    let singleValue =  cvHeadings.find((heading:any)=>heading.headingKey === key)
+    if(singleValue && singleValue.text !== "") {
+      singleValue.text = value
+      newCvHeadings.push(singleValue)
+    }
+  }
   const GenerationOrder = [
     "shortName",
     "name",
@@ -70,6 +61,19 @@ const Page = () => {
   let fragment: any = [];
   let leftSpan: any = [];
 
+
+ 
+  const getAllSettings = () =>{
+    if (cvRef.current) {
+      const scaling = window.innerWidth < 1024 ? (window.innerWidth*0.38)/320 : (((window.innerWidth - 212) * 0.38)/320)
+      const roundedScale = Math.floor(scaling * 100) /100
+      setScale(roundedScale)
+      const scaledHeight = cvRef.current.offsetHeight; // Get the actual height of the scaled element      
+      const unscaledHeight = scaledHeight * roundedScale; // Calculate the unscaled height
+      setCvMaxHeight(unscaledHeight + 100); // Set the scaled down height plus 100 (adjust as needed)
+  }
+  
+  }
   const cleanUpHTML = (page: any) => {
     const cleanUpIds = [
       "shortName",
@@ -572,7 +576,7 @@ const Page = () => {
 
     const firstPage = newPage();
     generateLayout(firstPage);
-    cvHeadings.forEach((item: any) => {
+    newCvHeadings.forEach((item: any) => {
       let found = false; // Flag to track if the condition is met
       spans.forEach((singleSpan: any, index: any) => {
         if (found) return; // If the condition is already met, exit the loop
@@ -622,6 +626,7 @@ const Page = () => {
         checkOverflow(index);
         cleanUpHTML(page);
       });
+      getAllSettings();
       // cleanUpHTML(pages[pages.length - 1]);
       // addHeadings()
     }, 100);
@@ -642,20 +647,24 @@ const Page = () => {
   }, [fileName]);
 
   return (
-    <div className="lg:ml-[234px] ml-0">
-      <div className="flex items-center justify-center gap-3 xs:pb-0 md:pb-4">
-        <DownloadService
-          componentRef={cvRef}
-          fileName={fileName}
-          preview={false}
-        />
-      </div>
+    <div className="lg:ml-[234px] ml-0" style={{maxHeight: `${cvMaxHeight}px`}}>
+     
+        <div className="flex items-center justify-center gap-3 xs:pb-0 md:pb-4">
+          <DownloadService
+            componentRef={cvRef}
+            fileName={fileName}
+            preview={false}
+          />
+        </div>
+      
+          <div
+            ref={cvRef}
+            className="cv-container text-[#000] origin-top-left"
+            style={{scale: scale < 1 ? scale : 1}}
 
-      <div
-        ref={cvRef}
-        className={`cv-container text-[#000] xs:scale-50 md:scale-80 lg:scale-100 scale-100`}
-      ></div>
-    </div>
+          ></div>
+        </div>
+   
   );
 };
 

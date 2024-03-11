@@ -58,16 +58,10 @@ const useGetSummary = (setStreamedSummaryData: any) => {
         userData: aiInputUserData,
         trainBotData: {
           userEmail: userData.email,
-          // fileAddress: userData.files[0].fileName,
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
     }).then(async (resp: any) => {
-      const res = await resp.json();
-      console.log("response", res);
-      if (res?.result === "Insufficient Credits") {
-        console.log("Loading of");
-      }
 
       if (resp.ok) {
         const reader = resp.body.getReader();

@@ -2,30 +2,39 @@ const cvHeadings: any = [
   {
     text: "",
     section: "phone",
+    headingKey: "contact",
     styles: "",
     attributes: [],
   },
   {
     text: "executive summary",
     section: "summary",
+    headingKey: "summary",
+
     attributes: [],
     styles: "font-bold uppercase w-full text-base text-gray-950/80 mt-4 mb-2",
   },
   {
     attributes: [],
     text: "work experience",
+    headingKey: "workExperienceArray",
+
     section: "workExperienceArray",
     styles: "font-bold uppercase w-full text-base text-gray-950/80 my-2",
   },
   {
     attributes: [],
     text: "education",
+    headingKey: "education",
+
     section: "education",
     styles: "font-bold w-full uppercase text-base text-gray-950/80 my-2",
   },
   {
     attributes: [],
     text: "skills",
+    headingKey: "primarySkills",
+
     section: "primarySkills",
     styles: "font-bold uppercase text-base my-2 w-full text-gray-950/80",
   },

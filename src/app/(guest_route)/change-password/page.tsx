@@ -54,7 +54,7 @@ const ChangePasswordPage = () => {
           token,
         })
         .then((resp) => {
-          console.log(resp);
+    
           if (resp.data.success) {
             setDecodedEmail(resp?.data?.result?.email);
             setVerifyingToken(false);
