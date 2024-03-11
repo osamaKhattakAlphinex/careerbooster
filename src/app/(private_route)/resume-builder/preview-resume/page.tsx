@@ -31,6 +31,15 @@ const Page = () => {
   }, [templateId, resumeId]);
   const { components, templateLayout, cvHeadings } = template;
 
+
+  let newCvHeadings:any = []
+  for ( const singleHeading of Object.entries(resumeData.headings)){
+    const [key, value] = singleHeading
+    let singleValue =  cvHeadings.find((heading:any)=>heading.headingKey === key)
+    singleValue.text = value
+    newCvHeadings.push(singleValue)
+  }
+  console.log(newCvHeadings)
   const GenerationOrder = [
     "shortName",
     "name",
@@ -565,7 +574,7 @@ const Page = () => {
 
     const firstPage = newPage();
     generateLayout(firstPage);
-    cvHeadings.forEach((item: any) => {
+    newCvHeadings.forEach((item: any) => {
       let found = false; // Flag to track if the condition is met
       spans.forEach((singleSpan: any, index: any) => {
         if (found) return; // If the condition is already met, exit the loop

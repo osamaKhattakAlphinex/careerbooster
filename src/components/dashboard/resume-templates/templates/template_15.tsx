@@ -144,7 +144,21 @@ const ResumeTemplate15 = () => {
             className="uppercase text-base  xs:px-2 font-semibold text-white w-full xs:w-full md:w-full lg:w-full py-1 rounded-sm flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center  "
             style={{ backgroundColor: color_second }}
           >
-            Contact
+             <EditableField
+                value={
+                  resume?.headings?.contact
+                    ? resume.headings.contact
+                    : "work experience"
+                }
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== resume?.headings?.contact) {
+                    updateSaveHook.updateAndSaveHeadings({
+                      contact: value,
+                    });
+                  }
+                }}
+              />
           </h3>
           <span className="w-full h-0 my-3 border-stylee"></span>
           <ul className="flex flex-col w-full gap-3 pl-0 mb-4 text-xs break-all ">
@@ -222,7 +236,21 @@ const ResumeTemplate15 = () => {
                 className="uppercase text-base  xs:px-2 font-semibold text-white w-full xs:w-full md:w-full lg:w-full py-1 rounded-sm flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center  "
                 style={{ backgroundColor: color_second }}
               >
-                Skills
+                 <EditableField
+                value={
+                  resume?.headings?.primarySkills
+                    ? resume.headings.primarySkills
+                    : "work experience"
+                }
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== resume?.headings?.primarySkills) {
+                    updateSaveHook.updateAndSaveHeadings({
+                      primarySkills: value,
+                    });
+                  }
+                }}
+              />
               </h3>
               <span className="w-full h-0 my-3 border-stylee"></span>
               {resume?.primarySkills &&
@@ -336,7 +364,21 @@ const ResumeTemplate15 = () => {
             className="w-full px-4 py-1 text-base font-semibold text-white uppercase rounded-sm"
             style={{ backgroundColor: color_second }}
           >
-            EXECUTIVE SUMMARY
+             <EditableField
+                value={
+                  resume?.headings?.summary
+                    ? resume.headings.summary
+                    : "work experience"
+                }
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== resume?.headings?.summary) {
+                    updateSaveHook.updateAndSaveHeadings({
+                      summary: value,
+                    });
+                  }
+                }}
+              />
           </h3>
           <span className="w-full h-0 my-3 border-stylee xs:my-3"></span>
           <Toolbar regenrateSummary={getSummary}>
@@ -368,7 +410,21 @@ const ResumeTemplate15 = () => {
             className="w-full px-4 py-1 text-base font-semibold text-white uppercase rounded-sm"
             style={{ backgroundColor: color_second }}
           >
-            WORK EXPERIENCE
+             <EditableField
+                value={
+                  resume?.headings?.workExperienceArray
+                    ? resume.headings.workExperienceArray
+                    : "work experience"
+                }
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== resume?.headings?.workExperienceArray) {
+                    updateSaveHook.updateAndSaveHeadings({
+                      workExperienceArray: value,
+                    });
+                  }
+                }}
+              />
           </h3>
           <span className="w-full h-0 my-2 border-stylee"></span>
 
@@ -623,7 +679,21 @@ const ResumeTemplate15 = () => {
                 className="flex flex-row items-center w-full gap-2 px-4 py-1 mb-4 text-base font-semibold text-white uppercase rounded-sm"
                 style={{ backgroundColor: color_second }}
               >
-                Education
+                 <EditableField
+                value={
+                  resume?.headings?.workExperienceArray
+                    ? resume.headings.workExperienceArray
+                    : "work experience"
+                }
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== resume?.headings?.workExperienceArray) {
+                    updateSaveHook.updateAndSaveHeadings({
+                      workExperienceArray: value,
+                    });
+                  }
+                }}
+              />
               </h3>
               <span className="w-full h-0 my-1 border-stylee"></span>
               <ul className="flex  flex-wrap w-full pl-0 md:flex-row justify-between">

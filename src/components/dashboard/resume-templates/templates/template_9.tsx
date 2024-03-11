@@ -209,7 +209,23 @@ const ResumeTemplate9 = () => {
         <div className="flex flex-col w-full px-8 xs:px-4 md:px-8 lg:px-8">
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0 border !border-gray-500 mt-4"></span>
-          <h3 className="my-1 text-base font-semibold uppercase">SUMMARY</h3>
+          <h3 className="my-1 text-base font-semibold uppercase">
+          <EditableField
+                value={
+                  resume?.headings?.summary
+                    ? resume.headings.summary
+                    : "work experience"
+                }
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== resume?.headings?.summary) {
+                    updateSaveHook.updateAndSaveHeadings({
+                      summary: value,
+                    });
+                  }
+                }}
+              />
+          </h3>
           <span className="border w-full !border-gray-500 mb-4"></span>
           <Toolbar regenrateSummary={getSummary}>
             <div className="text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed ">
@@ -240,7 +256,21 @@ const ResumeTemplate9 = () => {
             <>
               <span className="border-stylee w-full h-0 border !border-gray-500 mt-4"></span>
               <h3 className="flex items-center gap-2 py-1 text-base font-semibold uppercase">
-                Skills
+              <EditableField
+                value={
+                  resume?.headings?.primarySkills
+                    ? resume.headings.primarySkills
+                    : "work experience"
+                }
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== resume?.headings?.primarySkills) {
+                    updateSaveHook.updateAndSaveHeadings({
+                      primarySkills: value,
+                    });
+                  }
+                }}
+              />
               </h3>
               <span className="border w-full !border-gray-500 mb-4"></span>
               {resume?.primarySkills &&
@@ -330,7 +360,21 @@ const ResumeTemplate9 = () => {
           {/* Work Experience */}
           <span className="border-stylee w-full h-0 border !border-gray-500 mt-4"></span>
           <h3 className="flex items-center gap-2 py-1 text-base font-semibold uppercase">
-            WORK EXPERIENCE
+          <EditableField
+                value={
+                  resume?.headings?.workExperienceArray
+                    ? resume.headings.workExperienceArray
+                    : "work experience"
+                }
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== resume?.headings?.workExperienceArray) {
+                    updateSaveHook.updateAndSaveHeadings({
+                      workExperienceArray: value,
+                    });
+                  }
+                }}
+              />
           </h3>
           <span className="border w-full !border-gray-500 mb-4"></span>
 
@@ -572,7 +616,21 @@ const ResumeTemplate9 = () => {
             <>
               <span className="border-stylee w-full h-0 border !border-gray-500 mt-4"></span>
               <h3 className="flex items-center gap-2 my-3 text-base font-semibold uppercase">
-                Education
+              <EditableField
+                value={
+                  resume?.headings?.education
+                    ? resume.headings.education
+                    : "work experience"
+                }
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== resume?.headings?.education) {
+                    updateSaveHook.updateAndSaveHeadings({
+                      education: value,
+                    });
+                  }
+                }}
+              />
               </h3>
               <span className="border w-full !border-gray-500 mb-4"></span>
               <ul className="flex flex-wrap w-full pl-0 md:flex-row lg:flex-row xs:gap-2">
