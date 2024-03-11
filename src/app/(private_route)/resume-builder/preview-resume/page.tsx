@@ -18,10 +18,6 @@ const Page = () => {
   let template: any;
   template = getTemplates(templateId);
 
- 
-
-
-
   useEffect(() => {
     if (resumeData.id === "") {
       resumeData = userData.resumes.find(
