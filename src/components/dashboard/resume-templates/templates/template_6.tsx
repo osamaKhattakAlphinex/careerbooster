@@ -187,7 +187,9 @@ const ResumeTemplate6 = ({
                 value={
                   resume?.contact?.linkedIn !== ""
                     ? resume?.contact?.linkedIn
-                    : userData?.linkedin ? userData?.linkedin: "https://www.linkedin.com/"
+                    : userData?.linkedin
+                    ? userData?.linkedin
+                    : "https://www.linkedin.com/"
                 }
                 onSave={(value: string) => {
                   if (value !== resume.contact.linkedIn) {
@@ -217,8 +219,8 @@ const ResumeTemplate6 = ({
                       <>
                         <p className="text-gray-950 flex gap-2">
                           Oops! Generating an Executive Summary requires 200
-                          credits, but it seems you{"'"}ve run out. Click here to
-                          upgrade your package.
+                          credits, but it seems you{"'"}ve run out. Click here
+                          to upgrade your package.
                           <Link
                             href="/subscribe"
                             className="px-4 py-1 bg-blue-400 text-gray-950"
