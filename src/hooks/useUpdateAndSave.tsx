@@ -1,5 +1,6 @@
 import {
   setBasicInfo,
+  setHeadings,
   setPrimarySkills,
   setSummary,
   setWorkExperienceArray,
@@ -80,6 +81,23 @@ const useUpdateAndSave = () => {
     dispatch(setField({ name: "jobTitle", value: value }));
     saveResumeToDB({ ...resume, jobTitle: value });
   };
+  const updateAndSaveHeadings = (obj: any) => {
+    const [[key, value]] = Object.entries(obj);
+
+    dispatch(
+      setHeadings({
+        ...resume,
+        headings: { ...resume.headings, [key]: value },
+      })
+    );
+    saveResumeToDB({
+      ...resume,
+      headings: { ...resume.headings, [key]: value },
+    });
+    
+  };
+
+
 
   const updateAndSaveName = (value: any) => {
     dispatch(setField({ name: "name", value: value }));
@@ -95,6 +113,7 @@ const useUpdateAndSave = () => {
       updateAndSaveWorkExperienceArray,
       updateAndSaveBasicInfo,
       updateAndSaveEducation,
+      updateAndSaveHeadings
     }
   };
 };

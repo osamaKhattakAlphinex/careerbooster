@@ -16,6 +16,13 @@ export interface Resume {
     resumeLoading: boolean;
     componentRef: any;
   };
+  headings :{
+    education: string;
+    primarySkills: string;
+    workExperienceArray: string;
+    summary: string;
+    contact: string;
+  };
   dateTime?: string;
   id?: string;
   uploadedFileName: string;
@@ -50,6 +57,14 @@ const initialState: Resume = {
     resumeLoading: false,
     componentRef: null,
   },
+  headings :{
+    education: "education",
+    primarySkills: "skills",
+    workExperienceArray: "work experience",
+    summary: "executive summary",
+    contact: "contact",
+  },
+
   dateTime: "",
   id: "",
   uploadedFileName: "",
@@ -145,6 +160,16 @@ const resumeSlice = createSlice({
         education: action.payload.education,
       };
     },
+    setHeadings(state, action) {
+      return {
+        ...state,
+        education: action.payload.education,
+        primarySkills: action.payload.primarySkills,
+        workExperienceArray: action.payload.workExperienceArray,
+        summary: action.payload.summary,
+        contact:  action.payload.contact,
+      };
+    },
     setSummary(state, action) {
       return {
         ...state,
@@ -203,6 +228,7 @@ export const {
   setState,
   setResume,
   setField,
+  setHeadings,
   setWorkExperienceArray,
   resetResume,
   emptyResume,

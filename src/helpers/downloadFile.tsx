@@ -169,7 +169,6 @@ h2:empty {
 .page {
   position: relative;
   height: 29.62cm !important;
-  width: 21.01cm !important;
   background-color: #fff;
   margin: 10px;
 }
