@@ -38,7 +38,6 @@ const LinkedInJDCardSingle = ({
     if (source != "") {
       router.replace("/linkedin-generator/job-description");
     }
-    console.log("card", card);
     return dispatch(setLinkedInJobDescription(card));
   };
 
