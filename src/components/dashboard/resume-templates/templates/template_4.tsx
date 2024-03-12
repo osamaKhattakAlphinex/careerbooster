@@ -135,21 +135,21 @@ const ResumeTemplate4 = () => {
           {/* contacts */}
 
           <h3 className="flex flex-row items-center gap-2 pb-2 -mr-6 text-base font-semibold uppercase border-b-2 border-white md:-mr-6  md:mt-4">
-          <EditableField
-                value={
-                  resume?.headings?.contact
-                    ? resume.headings.contact
-                    : "work experience"
+            <EditableField
+              value={
+                resume?.headings?.contact
+                  ? resume.headings.contact
+                  : "work experience"
+              }
+              style={{ width: "fit-content" }}
+              onSave={(value: string) => {
+                if (value !== resume?.headings?.contact) {
+                  updateSaveHook.updateAndSaveHeadings({
+                    contact: value,
+                  });
                 }
-                style={{ width: "fit-content" }}
-                onSave={(value: string) => {
-                  if (value !== resume?.headings?.contact) {
-                    updateSaveHook.updateAndSaveHeadings({
-                      contact: value,
-                    });
-                  }
-                }}
-              />
+              }}
+            />
           </h3>
           <span className=" w-[110%] h-0 mb-3"></span>
           <ul className="flex flex-col gap-2 pl-0 mb-4 text-xs break-all ">
@@ -229,21 +229,21 @@ const ResumeTemplate4 = () => {
               {resume?.primarySkills && resume?.primarySkills.length > 0 && (
                 <>
                   <h3 className="flex flex-row items-center gap-2 pb-2 -mr-6 text-base font-semibold uppercase border-b-2 border-white md:-mr-6 md:text-md  ">
-                  <EditableField
-                value={
-                  resume?.headings?.primarySkills
-                    ? resume.headings.primarySkills
-                    : "work experience"
-                }
-                style={{ width: "fit-content" }}
-                onSave={(value: string) => {
-                  if (value !== resume?.headings?.primarySkills) {
-                    updateSaveHook.updateAndSaveHeadings({
-                      primarySkills: value,
-                    });
-                  }
-                }}
-              />
+                    <EditableField
+                      value={
+                        resume?.headings?.primarySkills
+                          ? resume.headings.primarySkills
+                          : "work experience"
+                      }
+                      style={{ width: "fit-content" }}
+                      onSave={(value: string) => {
+                        if (value !== resume?.headings?.primarySkills) {
+                          updateSaveHook.updateAndSaveHeadings({
+                            primarySkills: value,
+                          });
+                        }
+                      }}
+                    />
                   </h3>
                   <span className="w-full h-0 mb-3 border-stylee"></span>
                 </>
@@ -356,21 +356,21 @@ const ResumeTemplate4 = () => {
           {/* Executive Summary */}
 
           <h3 className="mt-4 text-base font-semibold md:mt-5 uppercase">
-          <EditableField
-                value={
-                  resume?.headings?.summary
-                    ? resume.headings.summary
-                    : "work experience"
+            <EditableField
+              value={
+                resume?.headings?.summary
+                  ? resume.headings.summary
+                  : "work experience"
+              }
+              style={{ width: "fit-content" }}
+              onSave={(value: string) => {
+                if (value !== resume?.headings?.summary) {
+                  updateSaveHook.updateAndSaveHeadings({
+                    summary: value,
+                  });
                 }
-                style={{ width: "fit-content" }}
-                onSave={(value: string) => {
-                  if (value !== resume?.headings?.summary) {
-                    updateSaveHook.updateAndSaveHeadings({
-                      summary: value,
-                    });
-                  }
-                }}
-              />
+              }}
+            />
           </h3>
           <span className="w-full h-0 border-[1px] !border-gray-500 mt-2 mb-4"></span>
 
@@ -401,22 +401,21 @@ const ResumeTemplate4 = () => {
           {/* Work Experience */}
 
           <h3 className="text-base font-semibold lg:mt-4 uppercase">
-          <EditableField
-                value={
-                  resume?.headings?.workExperienceArray
-                    ? resume.headings.workExperienceArray
-                    : "work experience"
+            <EditableField
+              value={
+                resume?.headings?.workExperienceArray
+                  ? resume.headings.workExperienceArray
+                  : "work experience"
+              }
+              style={{ width: "fit-content" }}
+              onSave={(value: string) => {
+                if (value !== resume?.headings?.workExperienceArray) {
+                  updateSaveHook.updateAndSaveHeadings({
+                    workExperienceArray: value,
+                  });
                 }
-                style={{ width: "fit-content" }}
-                onSave={(value: string) => {
-                  if (value !== resume?.headings?.workExperienceArray) {
-                    updateSaveHook.updateAndSaveHeadings({
-                      workExperienceArray: value,
-                    });
-                  }
-                }}
-              />
-
+              }}
+            />
           </h3>
           <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
 
@@ -495,7 +494,7 @@ const ResumeTemplate4 = () => {
                               }}
                             />
                           </span>{" "}
-                          ,
+                          {rec?.cityState?.length > 0 && ","}
                           <span className="hover:shadow-md hover:bg-gray-100">
                             <EditableField
                               value={rec?.country}
@@ -673,21 +672,21 @@ const ResumeTemplate4 = () => {
           {resume?.education.length > 0 && (
             <>
               <h3 className="flex flex-row items-center gap-2 text-base font-semibold uppercase ">
-              <EditableField
-                value={
-                  resume?.headings?.education
-                    ? resume.headings.education
-                    : "work experience"
-                }
-                style={{ width: "fit-content" }}
-                onSave={(value: string) => {
-                  if (value !== resume?.headings?.education) {
-                    updateSaveHook.updateAndSaveHeadings({
-                      education: value,
-                    });
+                <EditableField
+                  value={
+                    resume?.headings?.education
+                      ? resume.headings.education
+                      : "work experience"
                   }
-                }}
-              />
+                  style={{ width: "fit-content" }}
+                  onSave={(value: string) => {
+                    if (value !== resume?.headings?.education) {
+                      updateSaveHook.updateAndSaveHeadings({
+                        education: value,
+                      });
+                    }
+                  }}
+                />
               </h3>
               <span className="border-stylee block h-0 border-[1px] !border-gray-500 my-3"></span>
               <ul className="flex flex-wrap w-full justify-between pl-0 md:flex-row lg:flex-row ">
