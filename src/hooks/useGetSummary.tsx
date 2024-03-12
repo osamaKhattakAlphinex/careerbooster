@@ -36,17 +36,11 @@ const useGetSummary = (setStreamedSummaryData: any) => {
   }, []);
 
   const getSummary = async () => {
-    if (creditLimits.resume_summary_generation < 200) {
-      showErrorToast("You are out of credits!");
-      return;
-    }
     // return aiInputUserData
-    await getUserDataIfNotExists();
-    await getCreditLimitsIfNotExists();
+
+    // dispatch(setLoadingState("summary"));
     setStreamedSummaryData("");
     dispatch(setSummary(""));
-    // dispatch(setLoadingState("summary"));
-
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
@@ -62,7 +56,6 @@ const useGetSummary = (setStreamedSummaryData: any) => {
         },
       }),
     }).then(async (resp: any) => {
-
       if (resp.ok) {
         const reader = resp.body.getReader();
         let summaryTemp = "";
@@ -87,14 +80,13 @@ const useGetSummary = (setStreamedSummaryData: any) => {
             summary: summaryTemp,
           });
         }
-      } else if (creditLimits.resume_summary_generation < 200) {
-        // showErrorToast("You ran out of credits!");
-        setStreamedSummaryData("You ran out of credits!");
       } else {
         setStreamedSummaryData(resumeData?.summary);
+        dispatch(setSummary(resumeData?.summary));
+        showErrorToast("You ran out of credits!");
       }
     });
-    // });
+    
   };
 
   return { getSummary };

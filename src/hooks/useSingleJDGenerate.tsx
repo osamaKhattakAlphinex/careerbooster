@@ -75,7 +75,6 @@ const useSingleJDGenerate = (setStreamedJDData: any) => {
 
         while (true) {
           const { done, value } = await reader.read();
-
           if (done) {
             break;
           }
@@ -89,7 +88,6 @@ const useSingleJDGenerate = (setStreamedJDData: any) => {
         }
       } else {
         setStreamedJDData("");
-
         showErrorToast("You ran out of credits!");
         dispatch(setWorkExperienceArray({ workExperienceArray: workExpArray }));
         dispatch(setState({ name: "resumeLoading", value: false }));

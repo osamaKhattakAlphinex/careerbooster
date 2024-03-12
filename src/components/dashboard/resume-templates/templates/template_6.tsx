@@ -221,36 +221,21 @@ const ResumeTemplate6 = ({
 
             <Toolbar regenrateSummary={getSummary}>
               <div className="my-2 text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed ">
-                <EditableField
-                  type="textarea"
-                  value={
-                    resume?.summary !== "" ? (
-                      resume?.summary
-                    ) : streamedSummaryData == "You ran out of Credits!" ? (
-                      <>
-                        <p className="text-gray-950 flex gap-2">
-                          Oops! Generating an Executive Summary requires 200
-                          credits, but it seems you{"'"}ve run out. Click here
-                          to upgrade your package.
-                          <Link
-                            href="/subscribe"
-                            className="px-4 py-1 bg-blue-400 text-gray-950"
-                          >
-                            {" "}
-                            Upgrade
-                          </Link>
-                        </p>
-                      </>
-                    ) : streamedSummaryData ? (
-                      streamedSummaryData
-                    ) : (
-                      <div className="text-center">
-                        <div role="status">
-                          <Loader />
-                        </div>
+              <EditableField
+                type="textarea"
+                value={
+                  resume?.summary !== "" ? (
+                    resume?.summary
+                  ) : streamedSummaryData ? (
+                    streamedSummaryData
+                  ) : (
+                    <div className="text-center">
+                      <div role="status">
+                        <Loader />
                       </div>
-                    )
-                  }
+                    </div>
+                  )
+                }
                   onSave={(value: string) => {
                     updateSaveHook.updateAndSaveSummary(value);
                   }}
