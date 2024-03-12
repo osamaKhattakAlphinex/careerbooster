@@ -169,7 +169,7 @@ const DashboardBot = () => {
         setIsGif(false);
         if (isAudioPlaying) {
           componentRef.current.pause();
-          setAudioCounter(0);
+          // setAudioCounter(0);
           removeStyles();
           setIsAudioPlaying(false);
         }
@@ -231,6 +231,7 @@ const DashboardBot = () => {
     const audio = componentRef.current;
 
     const handleAudioEnded = () => {
+
       setAudioCounter((prev) => prev + 1);
     };
 
