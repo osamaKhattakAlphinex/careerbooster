@@ -39,7 +39,7 @@ const ResumeTemplate6 = ({
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
-  console.log(resume)
+  console.log(resume);
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
@@ -109,7 +109,7 @@ const ResumeTemplate6 = ({
 
       <div className="w-full">
         <div className="flex flex-col py-8 pl-6 pr-8 w-12/12">
-          <h2 className="text-4xl font-bold xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100">
+          <h2 className="text-4xl font-bold xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500  ">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -120,7 +120,7 @@ const ResumeTemplate6 = ({
               }}
             />
           </h2>
-          <h3 className="w-full text-lg xs:text-xs md:text-2xl lg:text-2xl xs:leading-none hover:shadow-md hover:bg-gray-100 ">
+          <h3 className="w-full text-lg xs:text-xs md:text-2xl lg:text-2xl xs:leading-none hover:shadow-md hover:bg-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500  ">
             <EditableField
               value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
               onSave={(value: string) => {
@@ -221,21 +221,21 @@ const ResumeTemplate6 = ({
 
             <Toolbar regenrateSummary={getSummary}>
               <div className="my-2 text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed ">
-              <EditableField
-                type="textarea"
-                value={
-                  resume?.summary !== "" ? (
-                    resume?.summary
-                  ) : streamedSummaryData ? (
-                    streamedSummaryData
-                  ) : (
-                    <div className="text-center">
-                      <div role="status">
-                        <Loader />
+                <EditableField
+                  type="textarea"
+                  value={
+                    resume?.summary !== "" ? (
+                      resume?.summary
+                    ) : streamedSummaryData ? (
+                      streamedSummaryData
+                    ) : (
+                      <div className="text-center">
+                        <div role="status">
+                          <Loader />
+                        </div>
                       </div>
-                    </div>
-                  )
-                }
+                    )
+                  }
                   onSave={(value: string) => {
                     updateSaveHook.updateAndSaveSummary(value);
                   }}
@@ -247,7 +247,7 @@ const ResumeTemplate6 = ({
             {resume?.primarySkills && resume?.primarySkills.length > 0 && (
               <>
                 <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-                <h3 className="flex flex-row items-center gap-2 py-1 border-2 border-transparent hover:border-dashed hover:border-gray-500 text-base font-semibold uppercase">
+                <h3 className="flex flex-row items-center gap-2 my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500 text-base font-semibold uppercase">
                   <EditableField
                     value={
                       resume?.headings?.primarySkills
@@ -351,7 +351,7 @@ const ResumeTemplate6 = ({
             )}
             {/* Work Experience */}
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-            <h3 className="py-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+            <h3 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
               <EditableField
                 value={
                   resume?.headings?.workExperienceArray
@@ -615,7 +615,7 @@ const ResumeTemplate6 = ({
             {resume?.education.length > 0 && (
               <>
                 <span className="w-full h-0 border-[1px] border-gray-500 my-t page-break"></span>
-                <h3 className="flex flex-row items-center gap-2 py-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+                <h3 className="flex flex-row items-center gap-2 my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
                   <EditableField
                     value={
                       resume?.headings?.education
