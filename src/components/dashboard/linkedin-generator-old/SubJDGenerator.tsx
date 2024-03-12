@@ -26,6 +26,10 @@ const SubJDGenerator = () => {
   const [showPopup, setShowPopup] = useState(false);
   const { setAvailableCredits } = useAppContext();
 
+  const [generatedWorkExperience, setGeneratedWorkExperience] = useState<
+    string[]
+  >([]);
+
   useState<boolean>(false);
   const [isJDCopied, setIsJDCopied] = useState<boolean>(false);
   const copyJD = async (text: string) => {
@@ -71,6 +75,7 @@ const SubJDGenerator = () => {
 
       let tempText = "";
       for (const [index, experience] of experiences.entries()) {
+        let singleGenerated = "";
         let html = "";
         html += `<h2 class="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">${experience?.jobTitle}</h2>`;
         html += `<h3 class="text-base font-semibold">${experience?.company} | ${experience?.cityState} ${experience?.country}</h3>`;
@@ -84,6 +89,7 @@ const SubJDGenerator = () => {
         html += `<br/><div>`;
         setStreamedData((prev) => prev + html);
         tempText += html;
+        singleGenerated += html;
         setMsgLoading(true);
         const jobDescriptionId = makeid();
         const obj: any = {
@@ -117,6 +123,7 @@ const SubJDGenerator = () => {
 
             setStreamedData((prev) => prev + text);
             tempText += text;
+            singleGenerated += text;
           }
 
           if (index === experiences.length - 1) {
@@ -128,12 +135,22 @@ const SubJDGenerator = () => {
           setMsgLoading(false);
           break;
         }
+
         setStreamedData((prev) => prev + `</div> <br /> `);
         setStreamedData((prev) => prev.replace("```html", ""));
         setStreamedData((prev) => prev.replace("```", ""));
         tempText += `</div><br/>`;
         tempText = tempText.replace("```html", "");
         tempText = tempText.replace("```", "");
+
+        singleGenerated += `</div><br/>`;
+        singleGenerated += singleGenerated.replace("```html", "");
+        singleGenerated += singleGenerated.replace("```", "");
+
+        setGeneratedWorkExperience([
+          ...generatedWorkExperience,
+          singleGenerated,
+        ]);
         setMsgLoading(false);
 
         if (index === experiences.length - 1) {
@@ -163,6 +180,7 @@ const SubJDGenerator = () => {
       const JDResponse = await axios.get(
         "/api/linkedInBots/jdGeneratorSingle/getAllJD"
       );
+
       const updatedObject = {
         ...userData,
         linkedInJobDescriptions: JDResponse.data.result.linkedInJobDescriptions,
@@ -177,6 +195,10 @@ const SubJDGenerator = () => {
       }, 3000);
     }
   };
+
+  useEffect(() => {
+    console.log("--------------------------------", generatedWorkExperience);
+  }, [generatedWorkExperience]);
 
   const saveToDB = async (obj: any, text: any) => {
     const id = obj?.jobDescriptionId;
