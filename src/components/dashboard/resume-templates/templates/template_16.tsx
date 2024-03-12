@@ -41,8 +41,8 @@ const ResumeTemplate16 = () => {
   const [streamedJDData, setStreamedJDData] = useState<any>("");
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
   const { saveResumeToDB } = useSaveResumeToDB();
-  const [color, setColor] = useState("#1F1E1E");
-  const [color_second, setColor_second] = useState("#383636");
+  // const [color, setColor] = useState("#1F1E1E");
+  // const [color_second, setColor_second] = useState("#383636");
   const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
     useDragAndDrop();
   const userData = useSelector((state: any) => state.userData);
@@ -78,30 +78,26 @@ const ResumeTemplate16 = () => {
       setPrimarySkill("");
     }
   };
-  const saveColor = (color: ColorResult) => {
-    // Access the selected color value from the 'color' parameter
-    setColor(color.hex);
+  // const saveColor = (color: ColorResult) => {
+  //   setColor(color.hex);
 
-    // You can do whatever you need with the selected color here
-  };
-  const saveColor_second = (color: ColorResult) => {
-    // Access the selected color value from the 'color' parameter
-    setColor_second(color.hex);
+  // };
+  // const saveColor_second = (color: ColorResult) => {
+  //   setColor_second(color.hex);
 
-    // You can do whatever you need with the selected color here
-  };
+  // };
   return (
     <div className="relative w-full text-gray-900 first-page">
       <div className="flex">
         <div
-          className=" w-3/12 xs:w-4/12 md:w-4/12 flex flex-col    px-4  xs:px-1 md:px-9 pt-[2rem] "
-          style={{ backgroundColor: color }}
+          className=" w-3/12 xs:w-4/12 md:w-4/12 flex flex-col  bg-[#1F1E1E]  px-4  xs:px-1 md:px-9 pt-[2rem] "
+          // style={{ backgroundColor: color }}
         >
           <div className="flex justify-center">
             <div className=" w-32 h-32 xs:w-24 xs:h-24 md:w-40 md:h-40 border-[2px] xs:border-[2px] md:border-[.5rem] border-[##F1F1F1]   text-gray-800 bg-[#FFFFFF]  text-center flex justify-center items-center  rounded-full ">
               <div
-                className=" w-28 relative h-28 xs:h-[88px] xs:w-[] md:w-36 md:h-36 text-[#F1F1F1] flex justify-center items-center    rounded-full "
-                style={{ backgroundColor: color_second }}
+                className=" w-28 relative h-28 xs:h-[88px] xs:w-[] bg-[#383636] md:w-36 md:h-36 text-[#F1F1F1] flex justify-center items-center    rounded-full "
+                // style={{ backgroundColor: color_second }}
               >
                 <span className="text-4xl font-semibold xs:text-lg md:text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
                   <EditableField
@@ -113,7 +109,7 @@ const ResumeTemplate16 = () => {
                     }}
                   />
                 </span>
-                <ColorPicker
+                {/* <ColorPicker
                   defaultColor="#1F1E1E"
                   resetColor="#383636"
                   styles_pin="absolute text-white top-5 right-5"
@@ -122,11 +118,11 @@ const ResumeTemplate16 = () => {
                   secondDefaultColor="#383636"
                   setColor_second={setColor_second}
                   saveColor={saveColor_second}
-                />
+                /> */}
               </div>
             </div>
           </div>
-          <div className="absolute top-0 -left-12 xs:w-4/12">
+          {/* <div className="absolute top-0 -left-12 xs:w-4/12">
             <div className="flex justify-end">
               <ColorPicker
                 defaultColor="#1F1E1E"
@@ -139,7 +135,7 @@ const ResumeTemplate16 = () => {
                 saveColor={saveColor}
               />
             </div>
-          </div>
+          </div> */}
           {/* contacts */}
           <span className="w-full h-0 my-3 border-stylee"></span>
           <h3 className="flex flex-row items-center w-full gap-2 py-1 pb-2 text-base font-semibold text-white uppercase border-b-2 border-white rounded-sm ">
@@ -699,7 +695,7 @@ const ResumeTemplate16 = () => {
               <ul className="pl-0 flex justify-between  flex-wrap  text-gray-800  w-[100%]">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="w-[45%] xs:w-[45%]  md:m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                    <div className="w-[45%] xs:w-[45%]  bg-gray-200 p-2 rounded-md md:m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                       <li
                         className=" hover:shadow-md hover:cursor-move 
                   parent 

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 
-import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
+import { eyeIcon, newViewIcon, trashIcon } from "@/helpers/iconsProvider";
 import { useRouter, usePathname } from "next/navigation";
 import { resetEmail, setEmail } from "@/store/emailSlice";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
@@ -87,7 +87,7 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
             onClick={() => handleOnView(card)}
             className="flex px-2 text-[16px] dark:hover:border-[#5f5f5f] dark:hover:bg-gray-700 dark:hover:text-white justify-center dark:text-gray-100 text-[#27272a] items-center rounded-full h-[36px] dark:bg-[#18181b] hover:!bg-[#00000015] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#27272a] dark:focus:border-[#5f5f5f] hover:border-[#00000015] focus:bg-[#00000015] focus:border-[#00000015]"
           >
-            {eyeIcon}
+            {newViewIcon}
             <span className="text-[13px] mx-2 text-neutral-400">View</span>
           </button>
           <button
