@@ -131,7 +131,7 @@ const ResumeTemplate6 = ({
             />
           </h3>
           <ul className="flex flex-row justify-between gap-3 pl-0 my-2 text-xs break-all md:flex-row">
-            <li className="hover:shadow-md hover:bg-gray-100 text-xs   flex flex-row gap-1  items-center justify-start w-[30%]">
+            <li className="hover:shadow-md hover:bg-gray-100 text-xs   flex flex-row gap-1  items-center justify-start w-[20%]">
               <div className="p-1">{phoneIcon}</div>
               <EditableField
                 value={
@@ -146,7 +146,7 @@ const ResumeTemplate6 = ({
                 }}
               />
             </li>
-            <li className="w-[35%] hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-xs ">
+            <li className="w-[25%] hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-xs ">
               <div className="p-1">{emailIcon}</div>
               <EditableField
                 value={
@@ -161,7 +161,7 @@ const ResumeTemplate6 = ({
                 }}
               />
             </li>
-            <li className="flex flex-row items-center justify-start gap-1 text-xs hover:shadow-md hover:bg-gray-100">
+            <li className="w-[25%] flex flex-row items-center justify-start gap-1 text-xs hover:shadow-md hover:bg-gray-100">
               <div className="p-1">
                 <svg
                   width="16"
@@ -197,6 +197,65 @@ const ResumeTemplate6 = ({
                 }}
               />
               {/* </a> */}
+            </li>
+            <li className="w-[25%] flex flex-row items-center justify-center gap-1 text-xs text-gray-950  hover:shadow-md hover:bg-gray-100 w-25%">
+              <div className="">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                  />
+                </svg>
+              </div>
+              <EditableField
+                value={
+                  resume?.contact?.country ? resume?.contact?.country : "abc"
+                }
+                // overrideValue={resume?.name ? resume?.name : "Full Name"}
+                onSave={(value: string) => {
+                  if (value !== resume.contact.country) {
+                    updateSaveHook.updateAndSaveBasicInfo({ country: value });
+                  }
+                }}
+              />
+              {resume?.contact?.country ? "," : ""}
+              <EditableField
+                value={
+                  resume?.contact?.cityState
+                    ? resume?.contact?.cityState
+                    : "https://www.linkedin.com/"
+                }
+                // overrideValue={resume?.name ? resume?.name : "Full Name"}
+                onSave={(value: string) => {
+                  if (value !== resume.contact.cityState) {
+                    updateSaveHook.updateAndSaveBasicInfo({ cityState: value });
+                  }
+                }}
+              />
+              {resume.contact.postalCode ? "," : ""}
+              <EditableField
+                value={
+                  resume?.contact?.postalCode
+                    ? resume?.contact?.postalCode
+                    : "1122"
+                }
+                // overrideValue={resume?.name ? resume?.name : "Full Name"}
+                onSave={(value: string) => {
+                  if (value !== resume.contact.postalCode) {
+                    updateSaveHook.updateAndSaveBasicInfo({
+                      postalCode: value,
+                    });
+                  }
+                }}
+              />
             </li>
           </ul>
           {/* EXECUTIVE SUMMARY */}
