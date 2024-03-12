@@ -34,6 +34,10 @@ export interface Resume {
     email: string;
     phone: string;
     linkedIn: string;
+    country: string;
+    street: string;
+    cityState: string;
+    postalCode: string;
   };
   education: [
     {
@@ -68,7 +72,6 @@ const initialState: Resume = {
   dateTime: "",
   id: "",
   uploadedFileName: "",
-  // loadingState: "",
   shortName: "",
   name: "",
   jobTitle: "",
@@ -76,6 +79,10 @@ const initialState: Resume = {
     email: "",
     phone: "",
     linkedIn: "",
+    country: "",
+    street: "",
+    cityState: "",
+    postalCode: "",
   },
   education: [
     {
@@ -207,12 +214,6 @@ const resumeSlice = createSlice({
       };
     },
 
-    // setLoadingState(state, action) {
-    //   return {
-    //     ...state,
-    //     loadingState: action.payload,
-    //   };
-    // },
   },
 });
 
