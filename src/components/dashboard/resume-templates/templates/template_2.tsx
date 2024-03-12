@@ -91,10 +91,7 @@ const ResumeTemplate2 = () => {
   return (
     <div className="flex flex-col items-start justify-start w-full px-6 space-y-4 text-gray-900 first-page">
       {/* Name and Title */}
-      <div
-        className="flex flex-col w-full px-8 py-4 mt-1 text-center bg-gray-100 rounded-xl"
-        style={{ backgroundColor: color }}
-      >
+      <div className="flex flex-col w-full px-8 py-4 mt-1 text-center bg-[#e9e8e8] rounded-xl">
         <h2 className="text-4xl font-bold xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100">
           <EditableField
             value={resume?.name ? resume?.name : "FULL NAME"}
@@ -116,7 +113,7 @@ const ResumeTemplate2 = () => {
             }}
           />
         </h3>
-        <div className="absolute top-0 left-12">
+        {/* <div className="absolute top-0 left-12">
           <ColorPicker
             defaultColor="#e9e8e8"
             resetColor="#e9e8e8"
@@ -127,7 +124,7 @@ const ResumeTemplate2 = () => {
             setColor_second={setColor_second}
             saveColor={saveColor}
           />
-        </div>
+        </div> */}
       </div>
       {/* contacts */}
       <div className="relative w-full py-1">
@@ -201,7 +198,7 @@ const ResumeTemplate2 = () => {
             />
           </li>
         </ul>
-        <div className="absolute top-0 left-12">
+        {/* <div className="absolute top-0 left-12">
           <ColorPicker
             defaultColor="#e9e8e8"
             resetColor="#e9e8e8"
@@ -212,7 +209,7 @@ const ResumeTemplate2 = () => {
             setColor_second={setColor_second}
             saveColor={saveColor_second}
           />
-        </div>
+        </div> */}
       </div>
       {/* summary objective */}
       <div className="w-full space-y-3 ">

@@ -34,12 +34,12 @@ const ResumeTemplate6 = ({
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
-  const [color, setColor] = useState("#e04127");
+  // const [color, setColor] = useState("#e04127");
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
-
+  console.log(resume)
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
@@ -85,26 +85,26 @@ const ResumeTemplate6 = ({
     }
   };
 
-  const saveColor = (color: ColorResult) => {
-    // Access the selected color value from the 'color' parameter
-    setColor(color.hex);
-    // You can do whatever you need with the selected color here
-  };
+  // const saveColor = (color: ColorResult) => {
+  // Access the selected color value from the 'color' parameter
+  // setColor(color.hex);
+  // You can do whatever you need with the selected color here
+  // };
 
   return (
     <div className="flex flex-row text-gray-900 ">
       <div
-        className={`relative flex  w-[5%]`}
-        style={{ backgroundColor: color }}
+        className={`relative flex bg-[#e04127]  w-[5%]`}
+        // style={{ backgroundColor: color }}
       >
-        <ColorPicker
+        {/* <ColorPicker
           defaultColor="#e04127"
           resetColor="#e04127"
           setColor={setColor}
           styles_pin="absolute text-white top-0 right-0 "
           styles_div="absolute top-3 -left-1"
           saveColor={saveColor}
-        />
+        /> */}
       </div>
 
       <div className="w-full">
@@ -202,7 +202,7 @@ const ResumeTemplate6 = ({
           {/* EXECUTIVE SUMMARY */}
           <div className="flex flex-col flex-wrap w-full ">
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-            <h3 className="my-1 text-base font-semibold uppercase">
+            <h3 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
               <EditableField
                 value={
                   resume?.headings?.summary
@@ -247,7 +247,7 @@ const ResumeTemplate6 = ({
             {resume?.primarySkills && resume?.primarySkills.length > 0 && (
               <>
                 <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-                <h3 className="flex flex-row items-center gap-2 py-1 text-base font-semibold uppercase">
+                <h3 className="flex flex-row items-center gap-2 py-1 border-2 border-transparent hover:border-dashed hover:border-gray-500 text-base font-semibold uppercase">
                   <EditableField
                     value={
                       resume?.headings?.primarySkills
@@ -351,7 +351,7 @@ const ResumeTemplate6 = ({
             )}
             {/* Work Experience */}
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-            <h3 className="py-1 text-base font-semibold uppercase">
+            <h3 className="py-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
               <EditableField
                 value={
                   resume?.headings?.workExperienceArray
@@ -615,7 +615,7 @@ const ResumeTemplate6 = ({
             {resume?.education.length > 0 && (
               <>
                 <span className="w-full h-0 border-[1px] border-gray-500 my-t page-break"></span>
-                <h3 className="flex flex-row items-center gap-2 py-1 text-base font-semibold uppercase">
+                <h3 className="flex flex-row items-center gap-2 py-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
                   <EditableField
                     value={
                       resume?.headings?.education

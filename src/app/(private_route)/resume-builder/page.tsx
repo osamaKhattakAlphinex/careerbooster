@@ -175,6 +175,7 @@ const ResumeBuilder = () => {
         } else {
           myJSON = await JSON.parse(res.result);
         }
+        
         const basicObj = {
           ...myJSON,
           name: userData?.firstName + " " + userData?.lastName,
@@ -182,6 +183,10 @@ const ResumeBuilder = () => {
             ...myJSON?.contact,
             email: userData?.email,
             phone: userData?.phone,
+            country: userData?.contact?.country,
+            street: userData?.contact?.street,
+            cityState: userData?.contact?.cityState,
+            postalCode: userData?.contact?.postalCode,
           },
           education: userData?.education,
         };
@@ -255,7 +260,7 @@ const ResumeBuilder = () => {
             jobTitle: resumeData.state.jobPosition,
           }),
         });
- 
+
         if (res.ok) {
           const reader = res.body.getReader();
           while (true) {
@@ -478,7 +483,6 @@ const ResumeBuilder = () => {
                           key={`template-${index}`}
                           className="box-border relative flex items-center overflow-hidden rounded-lg group"
                         >
-         
                           <Link
                             className="no-underline"
                             href={{

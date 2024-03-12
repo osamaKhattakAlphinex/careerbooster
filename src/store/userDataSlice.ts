@@ -81,7 +81,6 @@ const initialState: UserDataSlice = {
   isFetched: false,
   isLoading: false,
   error: "",
-  // userId: "",
   firstName: "",
   lastName: "",
   phone: "",

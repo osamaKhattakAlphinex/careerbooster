@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 
-import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
+import { eyeIcon, newViewIcon, trashIcon } from "@/helpers/iconsProvider";
 import { useRouter, usePathname } from "next/navigation";
 
 import {
@@ -97,7 +97,7 @@ const LinkedInHKeywordsCardSingle = ({
             onClick={() => handleOnView(card)}
             className="px-2 flex justify-center items-center rounded-full h-[36px] dark:bg-[#18181b] dark:border-2 border-[1px] dark:border-[#27272a] bg-transparent border-[#22c55e]"
           >
-            {eyeIcon}
+            {newViewIcon}
             <span className="text-[13px] mx-2 text-neutral-400">View</span>
           </button>
           <button
