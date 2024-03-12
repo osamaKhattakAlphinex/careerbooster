@@ -219,7 +219,7 @@ const SubJDGenerator = () => {
         await getUserData();
       } catch (err) {
         setStreamedData("Something went wrong!");
-        showErrorToast("Fauled to generate Linkedin Job Description");
+        showErrorToast("Failed to generate Linkedin Job Description");
       }
     }
   };
