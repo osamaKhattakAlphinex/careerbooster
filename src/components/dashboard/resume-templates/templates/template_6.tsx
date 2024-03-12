@@ -39,7 +39,7 @@ const ResumeTemplate6 = ({
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
-  console.log(resume)
+  console.log(resume);
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
@@ -221,21 +221,21 @@ const ResumeTemplate6 = ({
 
             <Toolbar regenrateSummary={getSummary}>
               <div className="my-2 text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed ">
-              <EditableField
-                type="textarea"
-                value={
-                  resume?.summary !== "" ? (
-                    resume?.summary
-                  ) : streamedSummaryData ? (
-                    streamedSummaryData
-                  ) : (
-                    <div className="text-center">
-                      <div role="status">
-                        <Loader />
+                <EditableField
+                  type="textarea"
+                  value={
+                    resume?.summary !== "" ? (
+                      resume?.summary
+                    ) : streamedSummaryData ? (
+                      streamedSummaryData
+                    ) : (
+                      <div className="text-center">
+                        <div role="status">
+                          <Loader />
+                        </div>
                       </div>
-                    </div>
-                  )
-                }
+                    )
+                  }
                   onSave={(value: string) => {
                     updateSaveHook.updateAndSaveSummary(value);
                   }}
@@ -438,7 +438,7 @@ const ResumeTemplate6 = ({
                               }}
                             />
                           </span>{" "}
-                          ,
+                          {rec?.cityState?.length > 0 && ","}
                           <span className="hover:shadow-md hover:bg-gray-100">
                             <EditableField
                               value={rec?.country}

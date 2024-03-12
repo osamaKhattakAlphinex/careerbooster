@@ -167,7 +167,7 @@ const ResumeTemplate10 = () => {
             // style={{ borderColor: color }}
           >
             <h3 className="uppercase text-base text-center mb-0 font-semibold flex flex-row gap-2 items-center">
-            <EditableField
+              <EditableField
                 value={
                   resume?.headings?.contact
                     ? resume.headings.contact
@@ -295,21 +295,21 @@ const ResumeTemplate10 = () => {
                 // style={{ borderColor: color }}
               >
                 <h3 className="uppercase text-base mb-0 font-semibold flex flex-row gap-2 items-center ">
-                <EditableField
-                value={
-                  resume?.headings?.primarySkills
-                    ? resume.headings.primarySkills
-                    : "work experience"
-                }
-                style={{ width: "fit-content" }}
-                onSave={(value: string) => {
-                  if (value !== resume?.headings?.primarySkills) {
-                    updateSaveHook.updateAndSaveHeadings({
-                      primarySkills: value,
-                    });
-                  }
-                }}
-              />
+                  <EditableField
+                    value={
+                      resume?.headings?.primarySkills
+                        ? resume.headings.primarySkills
+                        : "work experience"
+                    }
+                    style={{ width: "fit-content" }}
+                    onSave={(value: string) => {
+                      if (value !== resume?.headings?.primarySkills) {
+                        updateSaveHook.updateAndSaveHeadings({
+                          primarySkills: value,
+                        });
+                      }
+                    }}
+                  />
                 </h3>
               </div>
               {resume?.primarySkills &&
@@ -403,7 +403,7 @@ const ResumeTemplate10 = () => {
             // style={{ backgroundColor: color }}
           >
             <h3 className="uppercase text-base mb-0 font-semibold text-gray-100 xs:text-xs sm:text-xs md:text-md lg:text-base">
-            <EditableField
+              <EditableField
                 value={
                   resume?.headings?.summary
                     ? resume.headings.summary
@@ -451,7 +451,7 @@ const ResumeTemplate10 = () => {
             // style={{ backgroundColor: color }}
           >
             <h3 className="uppercase text-base mb-0 font-semibold text-gray-100 xs:text-xs sm:text-xs md:text-md lg:text-base">
-            <EditableField
+              <EditableField
                 value={
                   resume?.headings?.workExperienceArray
                     ? resume.headings.workExperienceArray
@@ -536,7 +536,7 @@ const ResumeTemplate10 = () => {
                               }}
                             />
                           </span>{" "}
-                          ,
+                          {rec?.cityState?.length > 0 && ","}
                           <span className="hover:shadow-md hover:bg-gray-100">
                             <EditableField
                               value={rec?.country}
@@ -718,21 +718,21 @@ const ResumeTemplate10 = () => {
                 // style={{ backgroundColor: color }}
               >
                 <h3 className="uppercase text-base mb-0 font-semibold text-gray-100 ">
-                <EditableField
-                value={
-                  resume?.headings?.education
-                    ? resume.headings.education
-                    : "work experience"
-                }
-                style={{ width: "fit-content" }}
-                onSave={(value: string) => {
-                  if (value !== resume?.headings?.education) {
-                    updateSaveHook.updateAndSaveHeadings({
-                      education: value,
-                    });
-                  }
-                }}
-              />
+                  <EditableField
+                    value={
+                      resume?.headings?.education
+                        ? resume.headings.education
+                        : "work experience"
+                    }
+                    style={{ width: "fit-content" }}
+                    onSave={(value: string) => {
+                      if (value !== resume?.headings?.education) {
+                        updateSaveHook.updateAndSaveHeadings({
+                          education: value,
+                        });
+                      }
+                    }}
+                  />
                 </h3>
               </div>
 

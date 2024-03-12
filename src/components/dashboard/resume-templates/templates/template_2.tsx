@@ -212,22 +212,22 @@ const ResumeTemplate2 = () => {
       </div>
       {/* summary objective */}
       <div className="w-full space-y-3 ">
-        <h2 className="text-base font-semibold uppercase "> 
-        <EditableField
-                value={
-                  resume?.headings?.summary
-                    ? resume.headings.summary
-                    : "work experience"
-                }
-                style={{ width: "fit-content" }}
-                onSave={(value: string) => {
-                  if (value !== resume?.headings?.summary) {
-                    updateSaveHook.updateAndSaveHeadings({
-                      summary: value,
-                    });
-                  }
-                }}
-              />
+        <h2 className="text-base font-semibold uppercase ">
+          <EditableField
+            value={
+              resume?.headings?.summary
+                ? resume.headings.summary
+                : "work experience"
+            }
+            style={{ width: "fit-content" }}
+            onSave={(value: string) => {
+              if (value !== resume?.headings?.summary) {
+                updateSaveHook.updateAndSaveHeadings({
+                  summary: value,
+                });
+              }
+            }}
+          />
         </h2>
         <Toolbar regenrateSummary={getSummary}>
           <div className="text-xs text-justify border-2 border-transparent  hover:shadow-md hover:border-gray-500 hover:border-dashed ">
@@ -257,22 +257,21 @@ const ResumeTemplate2 = () => {
       <div className="w-full space-y-3 ">
         {resume?.primarySkills && resume?.primarySkills.length > 0 && (
           <h2 className="pb-2 text-base font-semibold uppercase ">
- <EditableField
-                value={
-                  resume?.headings?.primarySkills
-                    ? resume.headings.primarySkills
-                    : "work experience"
+            <EditableField
+              value={
+                resume?.headings?.primarySkills
+                  ? resume.headings.primarySkills
+                  : "work experience"
+              }
+              style={{ width: "fit-content" }}
+              onSave={(value: string) => {
+                if (value !== resume?.headings?.primarySkills) {
+                  updateSaveHook.updateAndSaveHeadings({
+                    primarySkills: value,
+                  });
                 }
-                style={{ width: "fit-content" }}
-                onSave={(value: string) => {
-                  if (value !== resume?.headings?.primarySkills) {
-                    updateSaveHook.updateAndSaveHeadings({
-                      primarySkills: value,
-                    });
-                  }
-                }}
-              />
-
+              }}
+            />
           </h2>
         )}
         {resume?.primarySkills &&
@@ -359,22 +358,21 @@ const ResumeTemplate2 = () => {
       {/* Work Experience */}
       <div className="flex flex-col w-full space-y-3">
         <h2 className="text-base font-semibold uppercase">
-        <EditableField
-                value={
-                  resume?.headings?.workExperienceArray
-                    ? resume.headings.workExperienceArray
-                    : "work experience"
-                }
-                style={{ width: "fit-content" }}
-                onSave={(value: string) => {
-                  if (value !== resume?.headings?.workExperienceArray) {
-                    updateSaveHook.updateAndSaveHeadings({
-                      workExperienceArray: value,
-                    });
-                  }
-                }}
-              />
-          
+          <EditableField
+            value={
+              resume?.headings?.workExperienceArray
+                ? resume.headings.workExperienceArray
+                : "work experience"
+            }
+            style={{ width: "fit-content" }}
+            onSave={(value: string) => {
+              if (value !== resume?.headings?.workExperienceArray) {
+                updateSaveHook.updateAndSaveHeadings({
+                  workExperienceArray: value,
+                });
+              }
+            }}
+          />
         </h2>
         {resume?.workExperienceArray &&
         resume?.workExperienceArray.length > 0 ? (
@@ -451,7 +449,7 @@ const ResumeTemplate2 = () => {
                             }}
                           />
                         </span>
-                        ,{" "}
+                        {rec?.cityState?.length > 0 && ","}
                         <span className="hover:shadow-md hover:bg-gray-100">
                           <EditableField
                             value={rec?.country}
@@ -714,7 +712,6 @@ const ResumeTemplate2 = () => {
                             }}
                           />
                         )}
-
                         {education.fromYear && <span>&nbsp; - &nbsp;</span>}
                         {education.toMonth && !education.isContinue && (
                           <EditableField
