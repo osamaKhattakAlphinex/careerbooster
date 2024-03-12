@@ -180,30 +180,27 @@ const Template = () => {
         {resume &&
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
-              <div className="md:w-[82%] xs:w-full xs:flex xs:justify-center md:inline-block xs:pb-0 md:pb-4 ">
+              <div className="md:w-[82%] xs:w-full xs:flex xs:justify-center md:inline-block xs:pb-0 ">
                 <Link
                   href="/resume-builder"
-                  className="overflow-hidden text-white no-underline rounded-lg"
+                  // className="overflow-hidden w-2 text-white no-underline rounded-lg"
+                  className={` dark:bg-gradient-to-r no-underline w-fit hover:from-purple-800 hover:to-pink-600 from-[#b324d7]  to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-2 px-[26px]  rounded-full`}
                 >
-                  <div
-                    className={` dark:bg-gradient-to-r no-underline w-fit hover:from-purple-800 hover:to-pink-600 from-[#b324d7]  to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-2 px-[26px]  rounded-full`}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-4 h-4 dark:text-gray-100 text-gray-950"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-4 h-4 dark:text-gray-100 text-gray-950"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-                      />
-                    </svg>
-                    Generate New Resume
-                  </div>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                    />
+                  </svg>
+                  Generate New Resume
                 </Link>
               </div>
               <div className="md:w-fit whitespace-nowrap xs:w-full xs:mt-4 xs:flex xs:justify-center md:inline-block gap-3 xs:pb-0 md:pb-4 md:sticky top-4 right-0 z-[35]">

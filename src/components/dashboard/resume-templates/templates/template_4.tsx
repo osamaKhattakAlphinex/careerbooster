@@ -48,8 +48,8 @@ const ResumeTemplate4 = () => {
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
-  const [color, setColor] = useState("#323B4C");
-  const [color_second, setColor_second] = useState("#1b1f27");
+  // const [color, setColor] = useState("#323B4C");
+  // const [color_second, setColor_second] = useState("#1b1f27");
 
   useEffect(() => {
     if (streamedJDData === "") {
@@ -76,26 +76,26 @@ const ResumeTemplate4 = () => {
       setPrimarySkill("");
     }
   };
-  const saveColor = (color: ColorResult) => {
-    // Access the selected color value from the 'color' parameter
-    setColor(color.hex);
+  // const saveColor = (color: ColorResult) => {
+  // Access the selected color value from the 'color' parameter
+  // setColor(color.hex);
 
-    // You can do whatever you need with the selected color here
-  };
-  const saveColor_second = (color: ColorResult) => {
-    // Access the selected color value from the 'color' parameter
-    setColor_second(color.hex);
+  // You can do whatever you need with the selected color here
+  // };
+  // const saveColor_second = (color: ColorResult) => {
+  // Access the selected color value from the 'color' parameter
+  // setColor_second(color.hex);
 
-    // You can do whatever you need with the selected color here
-  };
+  // You can do whatever you need with the selected color here
+  // };
   return (
     <div className="first-page ">
       <div className="flex ">
         <div
-          className="flex flex-col w-3/12 h-auto pt-6 pb-8 pl-3 pr-6 text-gray-100 xs:w-1/3 md:w-3/12 md:pl-4 md:pr-4 xs:pt-2"
-          style={{ backgroundColor: color }}
+          className="flex flex-col w-3/12 bg-[#323B4C] h-auto pt-6 pb-8 pl-3 pr-6 text-gray-100 xs:w-1/3 md:w-3/12 md:pl-4 md:pr-4 xs:pt-2"
+          // style={{ backgroundColor: color }}
         >
-          <div className="w-full">
+          {/* <div className="w-full">
             <ColorPicker
               defaultColor="#323B4C"
               resetColor="#323B4C"
@@ -106,10 +106,10 @@ const ResumeTemplate4 = () => {
               setColor_second={setColor_second}
               saveColor={saveColor}
             />
-          </div>
+          </div> */}
           <div
-            style={{ backgroundColor: color_second }}
-            className=" w-28 h-28 xs:w-[72px] relative xs:h-[72px] sm:w-24 sm:h-24 md:w-28 md:h-28 text-white  text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-4  md:mt-5 mb-4 justify-center md:mb-2"
+            // style={{ backgroundColor: color_second }}
+            className=" w-28 h-28 xs:w-[72px] bg-[#1b1f27] relative xs:h-[72px] sm:w-24 sm:h-24 md:w-28 md:h-28 text-white  text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-4  md:mt-5 mb-4 justify-center md:mb-2"
           >
             <span className="text-3xl font-semibold xs:text-2xl md:text-3xl hover:shadow-md hover:bg-gray-500">
               <EditableField
@@ -121,7 +121,7 @@ const ResumeTemplate4 = () => {
                 }}
               />
             </span>
-            <ColorPicker
+            {/* <ColorPicker
               defaultColor="#323B4C"
               resetColor="#1b1f27"
               styles_pin="absolute  top-1 right-1"
@@ -130,7 +130,7 @@ const ResumeTemplate4 = () => {
               secondDefaultColor="#1b1f27"
               setColor_second={setColor_second}
               saveColor={saveColor_second}
-            />
+            /> */}
           </div>
           {/* contacts */}
 
@@ -620,7 +620,7 @@ const ResumeTemplate4 = () => {
               <ul className="flex flex-wrap w-full justify-between pl-0 md:flex-row lg:flex-row ">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="w-[28%] xs:w-[45%] n mx-2 xs:mx-0 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                    <div className="w-[28%] xs:w-[45%] bg-gray-200 rounded-md p-2 mx-2 xs:mx-0 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                       <li className="flex items-center justify-between text-base font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:bg-gray-100">
                         <EditableField
                           type="textarea"

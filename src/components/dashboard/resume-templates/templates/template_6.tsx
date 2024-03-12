@@ -34,7 +34,7 @@ const ResumeTemplate6 = ({
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
-  const [color, setColor] = useState("#e04127");
+  // const [color, setColor] = useState("#e04127");
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [regenerating, setRegenerating] = useState(false);
@@ -86,26 +86,26 @@ const ResumeTemplate6 = ({
     }
   };
 
-  const saveColor = (color: ColorResult) => {
-    // Access the selected color value from the 'color' parameter
-    setColor(color.hex);
-    // You can do whatever you need with the selected color here
-  };
+  // const saveColor = (color: ColorResult) => {
+  // Access the selected color value from the 'color' parameter
+  // setColor(color.hex);
+  // You can do whatever you need with the selected color here
+  // };
 
   return (
     <div className="flex flex-row text-gray-900 ">
       <div
-        className={`relative flex  w-[5%]`}
-        style={{ backgroundColor: color }}
+        className={`relative flex bg-[#e04127]  w-[5%]`}
+        // style={{ backgroundColor: color }}
       >
-        <ColorPicker
+        {/* <ColorPicker
           defaultColor="#e04127"
           resetColor="#e04127"
           setColor={setColor}
           styles_pin="absolute text-white top-0 right-0 "
           styles_div="absolute top-3 -left-1"
           saveColor={saveColor}
-        />
+        /> */}
       </div>
 
       <div className="w-full">

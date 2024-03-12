@@ -27,8 +27,8 @@ const ResumeTemplate10 = () => {
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
-  const [color, setColor] = useState("#043382");
-  const [color_second, setColor_second] = useState("#1a202c");
+  // const [color, setColor] = useState("#043382");
+  // const [color_second, setColor_second] = useState("#1a202c");
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const userData = useSelector((state: any) => state.userData);
   const [regenerating, setRegenerating] = useState(false);
@@ -50,7 +50,7 @@ const ResumeTemplate10 = () => {
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
-  useEffect(() => {}, [color, color_second]);
+  // useEffect(() => {}, [color, color_second]);
   useEffect(() => {
     if (streamedJDData === "") {
       setStreamedJDData(null);
@@ -76,25 +76,25 @@ const ResumeTemplate10 = () => {
       setPrimarySkill("");
     }
   };
-  const saveColor = (color: ColorResult) => {
-    // Access the selected color value from the 'color' parameter
-    setColor(color.hex);
+  // const saveColor = (color: ColorResult) => {
+  // Access the selected color value from the 'color' parameter
+  // setColor(color.hex);
 
-    // You can do whatever you need with the selected color here
-  };
-  const saveColor_second = (color: ColorResult) => {
-    // Access the selected color value from the 'color' parameter
-    setColor_second(color.hex);
+  // You can do whatever you need with the selected color here
+  // };
+  // const saveColor_second = (color: ColorResult) => {
+  // Access the selected color value from the 'color' parameter
+  // setColor_second(color.hex);
 
-    // You can do whatever you need with the selected color here
-  };
+  // You can do whatever you need with the selected color here
+  // };
   return (
     <div className="relative first-page">
       <div
-        className="flex  flex-row absolute top-[30px] h-28 z-10 items-center justify-center w-full "
-        style={{ backgroundColor: color }}
+        className="flex  flex-row absolute top-[30px] bg-[#043382] h-28 z-10 items-center justify-center w-full "
+        // style={{ backgroundColor: color }}
       >
-        <ColorPicker
+        {/* <ColorPicker
           defaultColor="#043382"
           setColor={setColor}
           resetColor="#043382"
@@ -103,7 +103,7 @@ const ResumeTemplate10 = () => {
           secondDefaultColor="#1a202c"
           setColor_second={setColor_second}
           saveColor={saveColor}
-        />
+        /> */}
         {/* <div className="  z-50 w-40 h-40 xs:w-[120px] xs:h-[80px] sm:w-[120px] sm:h-[80px] border-2 border-[#042B6B] md:w-48 md:h-48 lg:w-48 lg:h-48  text-white bg-gray-800 text-center flex justify-center   rounded-full mx-4  md:mt-0 md:mr-8 items-center ">
           <span className="text-4xl md:text-3xl hover:shadow-md hover:bg-gray-500">
             <EditableField
@@ -146,10 +146,10 @@ const ResumeTemplate10 = () => {
       <div className="flex ">
         {/* sidebar */}
         <div
-          className="z-5 xs:w-4/12 w-3.5/12 flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6  text-gray-100  pr-6  pb-8  pt-[160px] h-auto"
-          style={{ backgroundColor: color_second }}
+          className="z-5 xs:w-4/12 w-3.5/12 bg-[#1a202c] flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6  text-gray-100  pr-6  pb-8  pt-[160px] h-auto"
+          // style={{ backgroundColor: color_second }}
         >
-          <div className="absolute top-0 left-0 z-20 xs:w-3/12 ">
+          {/* <div className="absolute top-0 left-0 z-20 xs:w-3/12 ">
             <ColorPicker
               defaultColor="#043382"
               resetColor="#1a202c"
@@ -160,11 +160,11 @@ const ResumeTemplate10 = () => {
               setColor_second={setColor_second}
               saveColor={saveColor_second}
             />
-          </div>
+          </div> */}
           {/* contacts */}
           <div
-            className="rounded-3xl border-2  xs:py-2 py-[6px] flex justify-center "
-            style={{ borderColor: color }}
+            className="rounded-3xl border-2  bg-[#043382] xs:py-2 py-[6px] flex justify-center "
+            // style={{ borderColor: color }}
           >
             <h3 className="uppercase text-base text-center mb-0 font-semibold flex flex-row gap-2 items-center">
               Contact
@@ -175,7 +175,7 @@ const ResumeTemplate10 = () => {
             <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex flex-row gap-1  items-start justify-start">
               <div
                 className="bg-[#043382] rounded-full p-2 mr-3"
-                style={{ backgroundColor: color }}
+                // style={{ backgroundColor: color }}
               >
                 {phoneIcon}
               </div>
@@ -195,8 +195,8 @@ const ResumeTemplate10 = () => {
             </li>
             <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 flex flex-row gap-1 justify-start  items-start text-xs">
               <div
-                className="p-2 mr-3 rounded-full "
-                style={{ backgroundColor: color }}
+                className="p-2 mr-3 bg-[#043382] rounded-full "
+                // style={{ backgroundColor: color }}
               >
                 {" "}
                 {emailIcon}
@@ -218,8 +218,8 @@ const ResumeTemplate10 = () => {
 
             <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row justify-start gap-1  items-start text-xs">
               <div
-                className="p-2 mr-3 text-white rounded-full"
-                style={{ backgroundColor: color }}
+                className="p-2 mr-3 text-white bg-[#043382] rounded-full"
+                // style={{ backgroundColor: color }}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -277,8 +277,8 @@ const ResumeTemplate10 = () => {
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <div
-                className="rounded-3xl border-2  xs:py-2 py-[6px] my-3  flex justify-center"
-                style={{ borderColor: color }}
+                className="rounded-3xl border-2 bg-[#043382] xs:py-2 py-[6px] my-3  flex justify-center"
+                // style={{ borderColor: color }}
               >
                 <h3 className="uppercase text-base mb-0 font-semibold flex flex-row gap-2 items-center ">
                   Skills
@@ -371,8 +371,8 @@ const ResumeTemplate10 = () => {
         <div className="w-full flex flex-wrap flex-col px-4 sm:px-2 xs:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[140px] ">
           {/* Executive Summary */}
           <div
-            className="rounded-3xl xs:-mx-1 md:mx-0  py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
-            style={{ backgroundColor: color }}
+            className="rounded-3xl xs:-mx-1 md:mx-0 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
+            // style={{ backgroundColor: color }}
           >
             <h3 className="uppercase text-base mb-0 font-semibold text-gray-100 xs:text-xs sm:text-xs md:text-md lg:text-base">
               EXECUTIVE SUMMARY
@@ -405,8 +405,8 @@ const ResumeTemplate10 = () => {
 
           {/* Work Experience */}
           <div
-            className="rounded-3xl xs:-mx-1  md:mx-0 py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
-            style={{ backgroundColor: color }}
+            className="rounded-3xl xs:-mx-1 bg-[#043382] md:mx-0 py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
+            // style={{ backgroundColor: color }}
           >
             <h3 className="uppercase text-base mb-0 font-semibold text-gray-100 xs:text-xs sm:text-xs md:text-md lg:text-base">
               WORK EXPERIENCE
@@ -658,8 +658,8 @@ const ResumeTemplate10 = () => {
           {resume?.education.length > 0 && (
             <div className="">
               <div
-                className="rounded-3xl  py-2 px-4 my-6  w-fit"
-                style={{ backgroundColor: color }}
+                className="rounded-3xl bg-[#043382] py-2 px-4 my-6  w-fit"
+                // style={{ backgroundColor: color }}
               >
                 <h3 className="uppercase text-base mb-0 font-semibold text-gray-100 ">
                   Education
@@ -669,7 +669,7 @@ const ResumeTemplate10 = () => {
               <ul className="flex flex-row w-full justify-between pl-0 md:flex-row lg:flex-row xs:flex-wrap xs:gap-2">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="flex flex-col mr-4 w-[45%] md:m-2 xs:m-0 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                    <div className="flex flex-col mr-4 w-[45%] bg-gray-200 p-2 md:m-2 xs:m-0 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                       <li className="flex items-center justify-between text-base font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:bg-gray-100 ">
                         <EditableField
                           type="textarea"
