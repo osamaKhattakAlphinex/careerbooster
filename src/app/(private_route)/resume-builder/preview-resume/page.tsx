@@ -77,6 +77,7 @@ const Page = () => {
       "email",
       "linkedIn",
       "phone",
+      "address",
       "primarySkills",
       "name",
       "jobTitle",
