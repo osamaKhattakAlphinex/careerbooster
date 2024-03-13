@@ -138,7 +138,7 @@ const SubJDGenerator = () => {
       linkedInJobDescriptions: JDResponse.data.result.linkedInJobDescriptions,
     };
     dispatch(setUserData({ ...userData, ...updatedObject }));
-    // dispatch(setLinkedInJobDescription(tempText));
+    dispatch(setLinkedInJobDescription({...linkedinJD,jobDescriptionText: tempText}));
   };
 
   const handleGenerate = async () => {

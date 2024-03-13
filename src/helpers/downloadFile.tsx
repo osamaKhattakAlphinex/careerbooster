@@ -1,5 +1,4 @@
 "use client";
-//v1.0
 import { useRef, useState } from "react";
 
 const DownloadService = ({
@@ -135,18 +134,26 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
 [data-template-no="5"] [data-name="phone"]::before,
 [data-template-no="5"] [data-name="email"]::before,
 [data-template-no="5"] [data-name="linkedIn"]::before,
+[data-template-no="5"] [data-name="address"]::before,
 [data-template-no="4"] [data-name="phone"]::before,
 [data-template-no="4"] [data-name="email"]::before,
 [data-template-no="4"] [data-name="linkedIn"]::before,
+[data-template-no="4"] [data-name="address"]::before,
 [data-template-no="3"] [data-name="phone"]::before,
 [data-template-no="3"] [data-name="email"]::before,
 [data-template-no="3"] [data-name="linkedIn"]::before,
+[data-template-no="3"] [data-name="address"]::before,
 [data-template-no="1"] [data-name="phone"]::before,
 [data-template-no="1"] [data-name="email"]::before,
-[data-template-no="1"] [data-name="linkedIn"]::before {
+[data-template-no="1"] [data-name="linkedIn"]::before,
+[data-template-no="1"] [data-name="address"]::before {
   content: "\\2022";
   margin-right: 10px;
   font-size: 1rem;
+}
+
+span:empty {
+  display: none;
 }
 
 .page {
@@ -168,27 +175,17 @@ h2:empty {
 
 .page {
   position: relative;
-  height: 29.62cm !important;
+  height: 29.6cm !important;
   background-color: #fff;
-  margin: 10px;
+}        
+
+.page div:empty {
+  display: none;
 }
-        
        
         </style>
         ${html}`;
 
-      // htmlToDoc = `
-      // <script src="https://cdn.tailwindcss.com"></script>
-      // <style>
-      // .parent .child {
-      //     display: none;
-      // }
-      // .parent:hover .child {
-      //     display: block;
-      // }
-
-      // </style>
-      // ${html}`;
     }
     setLoading(true);
     await fetch(`/api/template`, {
