@@ -137,14 +137,12 @@ const ResumeTemplate15 = () => {
 
           <span className="w-full h-0 my-3 border-stylee"></span>
           <h3
-            className="uppercase text-base  xs:px-2 font-semibold bg-[#444440] text-white w-full xs:w-full md:w-full lg:w-full py-1 rounded-sm flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center  "
+            className="uppercase text-base  xs:px-2 font-semibold bg-[#444440] text-white w-full xs:w-full md:w-full lg:w-full py-1 rounded-sm flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center border-2 border-transparent hover:border-dashed hover:border-gray-500 "
             // style={{ backgroundColor: color_second }}
           >
             <EditableField
               value={
-                resume?.headings?.contact
-                  ? resume.headings.contact
-                  : "work experience"
+                resume?.headings?.contact ? resume.headings.contact : "Contact"
               }
               style={{ width: "fit-content" }}
               onSave={(value: string) => {
@@ -222,6 +220,65 @@ const ResumeTemplate15 = () => {
                 }}
               />
             </li>
+            <li className="flex flex-row items-start justify-start gap-2 text-xs hover:shadow-md hover:bg-gray-100 text-gray-950 ">
+              <div className="">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                  />
+                </svg>
+              </div>
+              <EditableField
+                value={
+                  resume?.contact?.country ? resume?.contact?.country : "abc"
+                }
+                // overrideValue={resume?.name ? resume?.name : "Full Name"}
+                onSave={(value: string) => {
+                  if (value !== resume.contact.country) {
+                    updateSaveHook.updateAndSaveBasicInfo({ country: value });
+                  }
+                }}
+              />
+              {resume?.contact?.country ? "," : ""}
+              <EditableField
+                value={
+                  resume?.contact?.cityState
+                    ? resume?.contact?.cityState
+                    : "https://www.linkedin.com/"
+                }
+                // overrideValue={resume?.name ? resume?.name : "Full Name"}
+                onSave={(value: string) => {
+                  if (value !== resume.contact.cityState) {
+                    updateSaveHook.updateAndSaveBasicInfo({ cityState: value });
+                  }
+                }}
+              />
+              {resume.contact.postalCode ? "," : ""}
+              <EditableField
+                value={
+                  resume?.contact?.postalCode
+                    ? resume?.contact?.postalCode
+                    : "1122"
+                }
+                // overrideValue={resume?.name ? resume?.name : "Full Name"}
+                onSave={(value: string) => {
+                  if (value !== resume.contact.postalCode) {
+                    updateSaveHook.updateAndSaveBasicInfo({
+                      postalCode: value,
+                    });
+                  }
+                }}
+              />
+            </li>
           </ul>
 
           {/* Skills */}
@@ -229,14 +286,14 @@ const ResumeTemplate15 = () => {
             <>
               <span className="w-full h-0 my-1 border-stylee"></span>
               <h3
-                className="uppercase text-base bg-[#444440] xs:px-2 font-semibold text-white w-full xs:w-full md:w-full lg:w-full py-1 rounded-sm flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center  "
+                className="uppercase text-base bg-[#444440] xs:px-2 font-semibold text-white w-full xs:w-full md:w-full lg:w-full py-1 rounded-sm flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center border-2 border-transparent hover:border-dashed hover:border-gray-500  "
                 // style={{ backgroundColor: color_second }}
               >
                 <EditableField
                   value={
                     resume?.headings?.primarySkills
                       ? resume.headings.primarySkills
-                      : "work experience"
+                      : "Skills"
                   }
                   style={{ width: "fit-content" }}
                   onSave={(value: string) => {
@@ -331,7 +388,7 @@ const ResumeTemplate15 = () => {
         </div>
         <div className="w-full flex flex-col  px-8 xs:mt-[25px]  xs:px-8 lg:px-8 pt-[1rem] xs:pt-[1rem] ">
           <div className="flex flex-col justify-center py-4 xs:px-0">
-            <h2 className="text-4xl font-bold text-center xs:text-4xl hover:shadow-md hover:bg-gray-100">
+            <h2 className="text-4xl font-bold text-center xs:text-4xl hover:shadow-md hover:bg-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500">
               <EditableField
                 value={resume?.name ? resume?.name : "FULL NAME"}
                 style={{ width: "fit-content" }}
@@ -342,7 +399,7 @@ const ResumeTemplate15 = () => {
                 }}
               />
             </h2>
-            <h3 className="my-2 text-xl leading-none text-center hover:shadow-md hover:bg-gray-100">
+            <h3 className="my-2 text-xl leading-none text-center hover:shadow-md hover:bg-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500">
               <EditableField
                 value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
                 onSave={(value: string) => {
@@ -357,14 +414,14 @@ const ResumeTemplate15 = () => {
           {/* Executive Summary */}
           <span className="w-full h-0 my-3 border-stylee"></span>
           <h3
-            className="w-full px-4 py-1 text-base bg-[#444440] font-semibold text-white uppercase rounded-sm"
+            className="border-2 border-transparent hover:border-dashed hover:border-gray-500 w-full px-4 py-1 text-base bg-[#444440] font-semibold text-white uppercase rounded-sm "
             // style={{ backgroundColor: color_second }}
           >
             <EditableField
               value={
                 resume?.headings?.summary
                   ? resume.headings.summary
-                  : "work experience"
+                  : "executive summary"
               }
               style={{ width: "fit-content" }}
               onSave={(value: string) => {
@@ -403,7 +460,7 @@ const ResumeTemplate15 = () => {
           {/* Work Experience */}
           <span className="w-full h-0 my-3 border-stylee"></span>
           <h3
-            className="w-full px-4 py-1 text-base bg-[#444440] font-semibold text-white uppercase rounded-sm"
+            className=" border-2 border-transparent hover:border-dashed hover:border-gray-500 w-full px-4 py-1 text-base bg-[#444440] font-semibold text-white uppercase rounded-sm"
             // style={{ backgroundColor: color_second }}
           >
             <EditableField
@@ -672,14 +729,14 @@ const ResumeTemplate15 = () => {
             <>
               <span className="w-full h-0 my-1 page-break"></span>
               <h3
-                className="flex flex-row items-center w-full bg-[#444440] gap-2 px-4 py-1 mb-4 text-base font-semibold text-white uppercase rounded-sm"
+                className="flex flex-row items-center w-full bg-[#444440] gap-2 px-4 py-1 mb-4 text-base font-semibold text-white uppercase rounded-sm border-2 border-transparent hover:border-dashed hover:border-gray-500"
                 // style={{ backgroundColor: color_second }}
               >
                 <EditableField
                   value={
-                    resume?.headings?.workExperienceArray
-                      ? resume.headings.workExperienceArray
-                      : "work experience"
+                    resume?.headings?.education
+                      ? resume.headings.education
+                      : "Education"
                   }
                   style={{ width: "fit-content" }}
                   onSave={(value: string) => {
