@@ -75,6 +75,11 @@ const components: any = {
         styles: "text-xs mt-2 flex break-all before:break-normal text-gray-100",
         tag: "span",
       },
+      {
+        id: "address",
+        styles: "text-xs mt-2 flex break-all before:break-normal text-gray-100",
+        tag: "span",
+      },
     ],
   },
   primarySkills: {
@@ -131,7 +136,8 @@ const components: any = {
     elements: [
       {
         tag: "div",
-        styles: "flex bg-gray-200 text-gray-950/80 flex-col w-[30%] p-4 rounded-md",
+        styles:
+          "flex bg-gray-200 text-gray-950/80 flex-col w-[30%] p-4 rounded-md",
         container: [
           {
             id: "educationLevel",
@@ -189,6 +195,9 @@ const templateLayout: any = {
         },
         {
           id: "linkedIn",
+        },
+        {
+          id: "address",
         },
         {
           id: "primarySkills",

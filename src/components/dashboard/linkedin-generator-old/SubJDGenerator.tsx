@@ -17,8 +17,6 @@ import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import Toolbar from "../Toolbar";
-import exp from "constants";
-import { assert } from "console";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
   const creditLimits = useSelector((state: any) => state.creditLimits);
@@ -71,9 +69,6 @@ const SubJDGenerator = () => {
 
   const workExperienceGenerator = async (experienceIndex: any) => {
     let experience = userData.experience[experienceIndex];
-
-    // let tempText = "";
-    // for () {
 
     let singleGenerated = "";
     let html = "";
@@ -380,7 +375,7 @@ const SubJDGenerator = () => {
               src={Svg1}
               width={32}
               height={32}
-              className="z-[10000]"
+              className="z-[10000px]"
             />
           </div>
           <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
@@ -389,6 +384,7 @@ const SubJDGenerator = () => {
                 Job Description Generator
               </h1>
             </div>
+
             <p className="text-[14px] text-[#959595] pr-5">
               Transform your existing work experience into an impactful
               narrative that highlights your key achievements.
@@ -399,6 +395,8 @@ const SubJDGenerator = () => {
             disabled={msgLoading || !session?.user?.email}
             onClick={() => handleGenerate()}
             className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
+
+            // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
           >
             <span
               className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}

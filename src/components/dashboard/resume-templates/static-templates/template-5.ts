@@ -61,7 +61,7 @@ const templateLayout: any = {
 
     contact: {
       styles:
-        "flex flex-row text-base w-full justify-between items-start px-8 gap-3",
+        "flex flex-row flex-wrap text-base w-full justify-between items-start px-8 gap-3",
       elements: [
         {
           id: "phone",
@@ -69,20 +69,11 @@ const templateLayout: any = {
         {
           id: "email",
         },
-        // {
-        //   id: "street",
-        // },
-        // {
-        //   id: "cityState",
-        // },
-        // {
-        //   id: "country",
-        // },
-        // {
-        //   id: "postalCode",
-        // },
         {
           id: "linkedIn",
+        },
+        {
+          id: "address",
         },
       ],
     },
@@ -152,44 +143,16 @@ const components: any = {
           "text-xs whitespace-nowrap break-all before:break-normal text-gray-950/80 mt-2 before:w-4 before:h-4 before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMjEuNzUgNi43NXYxMC41YTIuMjUgMi4yNSAwIDAgMS0yLjI1IDIuMjVoLTE1YTIuMjUgMi4yNSAwIDAgMS0yLjI1LTIuMjVWNi43NW0xOS41IDBBMi4yNSAyLjI1IDAgMCAwIDE5LjUgNC41aC0xNWEyLjI1IDIuMjUgMCAwIDAtMi4yNSAyLjI1bTE5LjUgMHYuMjQzYTIuMjUgMi4yNSAwIDAgMS0xLjA3IDEuOTE2bC03LjUgNC42MTVhMi4yNSAyLjI1IDAgMCAxLTIuMzYgMEwzLjMyIDguOTFhMi4yNSAyLjI1IDAgMCAxLTEuMDctMS45MTZWNi43NSIgLz4KPC9zdmc+Cg==')] flex before:mr-2",
         tag: "span",
       },
-      // {
-      //   id: "street",
-      //   styles:
-      //     "text-xs whitespace-nowrap text-gray-950/80 mt-2 flex break-all flex after:content-[','] after:mr-2",
-      //   tag: "span",
-      // },
-      // {
-      //   id: "cityState",
-      //   styles:
-      //     "text-xs whitespace-nowrap text-gray-950/80 mt-2 flex break-all flex",
-      //   tag: "span",
-      // },
-      // {
-      //   id: "country",
-      //   styles:
-      //     "text-xs whitespace-nowrap before:content-[','] before:mr-2 text-gray-950/80 mt-2 flex break-all flex",
-      //   tag: "span",
-      // },
-      // {
-      //   id: "postalCode",
-      //   styles:
-      //     "text-xs whitespace-nowrap before:content-[','] before:mr-2 text-gray-950/80 mt-2 flex break-all flex",
-      //   tag: "span",
-      // },
-      // {
-      //   styles: "flex gap-1 pb-2 text-xs flex-wrap",
-      //   tag: "div",
-      //   container: [
-      //     { id: "street", styles: "text-gray-950/80", tag: "span" },
-      //     { id: "cityState", styles: "text-gray-950/80", tag: "span" },
-      //     { id: "country", styles: "text-gray-950/80", tag: "span" },
-      //     { id: "postalCode", styles: "text-gray-950/80", tag: "span" },
-      //   ],
-      // },
       {
         id: "linkedIn",
         styles:
           "text-xs break-all before:break-normal before:p-1 text-gray-950/80 mt-2 before:w-4 before:h-4 before:font-semibold flex before:text-xs before:content-['in'] before:border-[1.5px] before:border-[#333333] break-all before:break-normal before:flex before:justify-center before:rounded-sm before:items-center flex before:mr-2",
+        tag: "span",
+      },
+      {
+        id: "address",
+        styles:
+          "text-xs whitespace-nowrap break-all before:break-normal text-gray-950/80 mt-2 before:w-4 before:h-4 before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJtMi4yNSAxMiA4Ljk1NC04Ljk1NWMuNDQtLjQzOSAxLjE1Mi0uNDM5IDEuNTkxIDBMMjEuNzUgMTJNNC41IDkuNzV2MTAuMTI1YzAgLjYyMS41MDQgMS4xMjUgMS4xMjUgMS4xMjVIOS43NXYtNC44NzVjMC0uNjIxLjUwNC0xLjEyNSAxLjEyNS0xLjEyNWgyLjI1Yy42MjEgMCAxLjEyNS41MDQgMS4xMjUgMS4xMjVWMjFoNC4xMjVjLjYyMSAwIDEuMTI1LS41MDQgMS4xMjUtMS4xMjVWOS43NU04LjI1IDIxaDguMjUiIC8+Cjwvc3ZnPgo=')] flex before:mr-2",
         tag: "span",
       },
     ],
