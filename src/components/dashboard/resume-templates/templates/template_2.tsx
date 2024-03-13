@@ -463,12 +463,6 @@ const ResumeTemplate2 = () => {
                     draggable
                   >
                     {/* start end */}
-                    <h2 className="col-span-1 p-0 text-xs font-semibold text-center bg-transparent hover:cursor-default">
-                      {rec?.fromMonth + " " + rec?.fromYear} -{" "}
-                      {rec?.isContinue
-                        ? "Present"
-                        : `${rec?.toMonth} ${rec?.toYear}`}{" "}
-                    </h2>
 
                     <div className="col-span-5 ">
                       {/* Title */}
@@ -485,6 +479,15 @@ const ResumeTemplate2 = () => {
                         />
                       </h2>
                       <span className="text-xs font-semibold flex flex-row gap-2 items-center">
+                        <span className=" hover:shadow-md hover:cursor-text hover:bg-gray-100 ">
+                          <h2 className="col-span-1 p-0 text-xs font-semibold text-center bg-transparent hover:cursor-default">
+                            {rec?.fromMonth + " " + rec?.fromYear} -{" "}
+                            {rec?.isContinue
+                              ? "Present"
+                              : `${rec?.toMonth} ${rec?.toYear}`}{" "}
+                          </h2>
+                        </span>{" "}
+                        |{" "}
                         <span className=" hover:shadow-md hover:cursor-text hover:bg-gray-100 ">
                           <EditableField
                             value={rec?.company}
