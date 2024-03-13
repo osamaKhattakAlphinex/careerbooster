@@ -27,16 +27,17 @@ const Page = () => {
   }, [templateId, resumeId]);
   const { components, templateLayout, cvHeadings } = template;
 
+  let newCvHeadings: any = [];
+  console.log(resumeData);
+  for (const singleHeading of Object.entries(resumeData.headings)) {
+    const [key, value] = singleHeading;
 
-  let newCvHeadings:any = []
-  console.log(resumeData.headings)
-  for ( const singleHeading of Object.entries(resumeData.headings)){
-    const [key, value] = singleHeading
-
-    let singleValue =  cvHeadings.find((heading:any)=>heading.headingKey === key)
-    if(singleValue && singleValue.text !== "") {
-      singleValue.text = value
-      newCvHeadings.push(singleValue)
+    let singleValue = cvHeadings.find(
+      (heading: any) => heading.headingKey === key
+    );
+    if (singleValue && singleValue.text !== "") {
+      singleValue.text = value;
+      newCvHeadings.push(singleValue);
     }
   }
   const GenerationOrder = [
@@ -57,19 +58,19 @@ const Page = () => {
   let fragment: any = [];
   let leftSpan: any = [];
 
-
- 
-  const getAllSettings = () =>{
+  const getAllSettings = () => {
     if (cvRef.current) {
-      const scaling = window.innerWidth < 1024 ? (window.innerWidth*0.38)/320 : (((window.innerWidth - 212) * 0.38)/320)
-      const roundedScale = Math.floor(scaling * 100) /100
-      setScale(roundedScale)
-      const scaledHeight = cvRef.current.offsetHeight; // Get the actual height of the scaled element      
+      const scaling =
+        window.innerWidth < 1024
+          ? (window.innerWidth * 0.38) / 320
+          : ((window.innerWidth - 212) * 0.38) / 320;
+      const roundedScale = Math.floor(scaling * 100) / 100;
+      setScale(roundedScale);
+      const scaledHeight = cvRef.current.offsetHeight; // Get the actual height of the scaled element
       const unscaledHeight = scaledHeight * roundedScale; // Calculate the unscaled height
       setCvMaxHeight(unscaledHeight + 100); // Set the scaled down height plus 100 (adjust as needed)
-  }
-  
-  }
+    }
+  };
   const cleanUpHTML = (page: any) => {
     const cleanUpIds = [
       "shortName",
@@ -77,7 +78,6 @@ const Page = () => {
       "linkedIn",
       "phone",
       "primarySkills",
-      // "education",
       "name",
       "jobTitle",
       "summary",
@@ -163,10 +163,8 @@ const Page = () => {
 
     // Check if total height exceeds viewport height
     if (totalHeight > element.clientHeight) {
-      console.log("Overflow detected!");
       return true;
     } else {
-      console.log("No overflow detected.");
       return false;
     }
   }
@@ -396,7 +394,6 @@ const Page = () => {
                           const singlespan = document.createElement(one.tag);
                           setAttributesToElem(attr, singlespan);
                           const styles = one.styles;
-                          console.log("container styles:", styles);
                           setStylesToElement(singlespan, styles);
                           singlespan.textContent = singleItem[one.id];
                           inner_container_element.append(singlespan);
@@ -638,29 +635,25 @@ const Page = () => {
     );
     generate(resumeData);
   }, [resumeData]);
-  useEffect(() => {
-    console.log(fileName);
-  }, [fileName]);
 
   return (
-    <div className="lg:ml-[234px] ml-0" style={{maxHeight: `${cvMaxHeight}px`}}>
-     
-        <div className="flex items-center justify-center gap-3 xs:pb-0 md:pb-4">
-          <DownloadService
-            componentRef={cvRef}
-            fileName={fileName}
-            preview={false}
-          />
-        </div>
-      
-          <div
-            ref={cvRef}
-            className="cv-container text-[#000] origin-top-left"
-            style={{scale: scale < 1 ? scale : 1}}
-
-          ></div>
-        </div>
-   
+    <div
+      className="lg:ml-[234px] ml-0"
+      style={{ maxHeight: `${cvMaxHeight}px` }}
+    >
+      <div className="flex items-center justify-center gap-3 xs:pb-0 md:pb-4">
+        <DownloadService
+          componentRef={cvRef}
+          fileName={fileName}
+          preview={false}
+        />
+      </div>
+      <div
+        ref={cvRef}
+        className="cv-container text-[#000] origin-top-left"
+        style={{ scale: scale < 1 ? scale : 1 }}
+      ></div>
+    </div>
   );
 };
 
