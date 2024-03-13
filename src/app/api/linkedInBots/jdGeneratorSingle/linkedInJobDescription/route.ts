@@ -33,15 +33,6 @@ async function updateJobDescriptions(payload: any) {
     { new: true }
   );
 
-  await TrainBot.findOneAndUpdate(
-    { entryId: payload.id, type: "linkedin.jobDescription" },
-    {
-      $set: {
-        output: payload.text,
-      },
-    },
-    { new: true }
-  );
   return "ok";
 }
 export async function POST(request: any) {

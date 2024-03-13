@@ -13,41 +13,29 @@ import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedL
 import LinkedInJDCardSingle from "./LinkedInJDCardSingle";
 import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
-import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import Toolbar from "../Toolbar";
-import exp from "constants";
-import { assert } from "console";
+import Loader from "@/components/common/Loader";
+import { setLinkedInJobDescription } from "@/store/linkedInJobDescriptionSlice";
+
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
   const creditLimits = useSelector((state: any) => state.creditLimits);
-  // local States
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
-  const [
-    workExperienceGeneartionCompleted,
-    setWorkExperienceGeneartionCompleted,
-  ] = useState<boolean>(false);
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [streamedData, setStreamedData] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const { setAvailableCredits } = useAppContext();
-
+  const [existingJDId, setExistingJDId] = useState("");
   const [generatedWorkExperience, setGeneratedWorkExperience] = useState<
     string[]
   >([]);
 
-  useState<boolean>(false);
-  const [isJDCopied, setIsJDCopied] = useState<boolean>(false);
   const copyJD = async (text: string) => {
     try {
       const jD_Data = await htmlToPlainText(text);
       await copy(jD_Data);
-      setIsJDCopied(true);
-      // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
-      setTimeout(() => {
-        setIsJDCopied(false);
-      }, 2000);
     } catch (error) {
       console.error("Failed to copy text: ", error);
     }
@@ -57,25 +45,25 @@ const SubJDGenerator = () => {
   let userData = useSelector((state: any) => state.userData);
   const linkedinJD = useSelector((state: any) => state.linkedinJobDesc);
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
-  const { getCreditLimitsIfNotExists } = useGetCreditLimits();
 
   useEffect(() => {
     if (streamedData === "") {
-      setStreamedData(linkedinJD.jobDescriptionText);
+      setExistingJDId(linkedinJD.id);
+      setGeneratedWorkExperience(linkedinJD.jobDescriptionText);
     }
   }, [userData]);
 
   useEffect(() => {
-    setStreamedData(linkedinJD.jobDescriptionText);
+    setExistingJDId(linkedinJD.id);
+    setGeneratedWorkExperience(linkedinJD.jobDescriptionText);
   }, [linkedinJD.jobDescriptionText]);
 
   const workExperienceGenerator = async (experienceIndex: any) => {
     let experience = userData.experience[experienceIndex];
-
-    // let tempText = "";
-    // for () {
-
+    let tempText = [...generatedWorkExperience];
     let singleGenerated = "";
+    tempText[experienceIndex] = singleGenerated;
+    setGeneratedWorkExperience(tempText)
     let html = "";
     html += `<h2 class="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">${experience?.jobTitle}</h2>`;
     html += `<h3 class="text-base font-semibold">${experience?.company} | ${experience?.cityState} ${experience?.country}</h3>`;
@@ -87,8 +75,7 @@ const SubJDGenerator = () => {
         : experience?.toMonth + " " + experience?.toYear
     }</p>`;
     html += `<br/><div>`;
-    // setStreamedData((prev) => prev + html);
-    // tempText += html;
+
     singleGenerated += html;
     setMsgLoading(true);
     const jobDescriptionId = makeid();
@@ -109,6 +96,8 @@ const SubJDGenerator = () => {
     });
 
     if (res.ok) {
+      tempText[experienceIndex] = singleGenerated;
+      setGeneratedWorkExperience(tempText);
       setAvailableCredits(true);
 
       const reader = res.body.getReader();
@@ -119,83 +108,41 @@ const SubJDGenerator = () => {
         }
         const text = new TextDecoder().decode(value);
 
-        // setStreamedData((prev) => prev + text);
-        // tempText += text;
         singleGenerated += text;
       }
-      //   if (index === experiences.length - 1) {
-      //     showSuccessToast("Job Description generated successfully");
-      //   }
-      // } else {
-      //   setStreamedData("You ran out of Credits!");
-      //   showErrorToast("You ran out of credits!");
-      //   setMsgLoading(false);
-      //   break;
-      // // }
-
-      // setStreamedData((prev) => prev + `</div> <br /> `);
-      // setStreamedData((prev) => prev.replace("```html", ""));
-      // setStreamedData((prev) => prev.replace("```", ""));
-      // tempText += `</div><br/>`;
-      // tempText = tempText.replace("```html", "");
-      // tempText = tempText.replace("```", "");
 
       singleGenerated += `</div><br/>`;
       singleGenerated = singleGenerated.replace("```html", "");
       singleGenerated = singleGenerated.replace("```", "");
-
-      console.log(
-        "--------------- single generaterd ----------------",
-        singleGenerated
-      );
-
       setGeneratedWorkExperience((prevExperience) => {
         // Predefined index to insert the new item
         const newArray = [...prevExperience];
         newArray.splice(experienceIndex, 1, singleGenerated);
         return newArray;
       });
+      tempText[experienceIndex] = singleGenerated;
 
       setMsgLoading(false);
+      const jdObj = {
+        jobDescriptionId: existingJDId,
+        email: userData?.email,
+      };
 
-      // if (index === experiences.length - 1) {
-      // const jdObj = {
-      //   jobDescriptionId: jobDescriptionId,
-      //   personName: userData.firstName + " " + userData.lastName,
-
-      //   email: userData?.email,
-      //   trainBotData: {
-      //     userEmail: userData.email,
-      //     fileAddress: userData.uploadedResume.fileName,
-      //   },
-      //   experiences: experiences,
-      // };
-      // setWorkExperienceGeneartionCompleted(true);
-      // await fetch("/api/linkedInBots/jdGeneratorSave", {
-      //   method: "POST",
-      //   body: JSON.stringify(jdObj),
-      // }).then(async (response: any) => {
-      //   const res = await response.json();
-      //   if (res.success) {
-      //     await saveToDB(jdObj, tempText);
-      //   }
-      // });
-      // }
+      await saveToDB(jdObj, tempText);
     }
-
     const JDResponse = await axios.get(
       "/api/linkedInBots/jdGeneratorSingle/getAllJD"
     );
-
     const updatedObject = {
       ...userData,
       linkedInJobDescriptions: JDResponse.data.result.linkedInJobDescriptions,
     };
     dispatch(setUserData({ ...userData, ...updatedObject }));
+    // dispatch(setLinkedInJobDescription(tempText));
   };
 
   const handleGenerate = async () => {
-    setStreamedData("");
+    setGeneratedWorkExperience([]);
     await getUserDataIfNotExists();
     //change condition
     if (session?.user?.email && userData.isFetched) {
@@ -205,8 +152,9 @@ const SubJDGenerator = () => {
         return rest;
       });
 
-      let tempText = "";
+      let tempText: any = [];
       for (const [index, experience] of experiences.entries()) {
+        setStreamedData("");
         let singleGenerated = "";
         let html = "";
         html += `<h2 class="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">${experience?.jobTitle}</h2>`;
@@ -220,7 +168,7 @@ const SubJDGenerator = () => {
         }</p>`;
         html += `<br/><div>`;
         setStreamedData((prev) => prev + html);
-        tempText += html;
+
         singleGenerated += html;
         setMsgLoading(true);
         const jobDescriptionId = makeid();
@@ -254,7 +202,7 @@ const SubJDGenerator = () => {
             const text = new TextDecoder().decode(value);
 
             setStreamedData((prev) => prev + text);
-            tempText += text;
+            // tempText += text;
             singleGenerated += text;
           }
 
@@ -262,7 +210,6 @@ const SubJDGenerator = () => {
             showSuccessToast("Job Description generated successfully");
           }
         } else {
-          setStreamedData("You ran out of Credits!");
           showErrorToast("You ran out of credits!");
           setMsgLoading(false);
           break;
@@ -271,13 +218,11 @@ const SubJDGenerator = () => {
         setStreamedData((prev) => prev + `</div> <br /> `);
         setStreamedData((prev) => prev.replace("```html", ""));
         setStreamedData((prev) => prev.replace("```", ""));
-        tempText += `</div><br/>`;
-        tempText = tempText.replace("```html", "");
-        tempText = tempText.replace("```", "");
 
         singleGenerated += `</div><br/>`;
         singleGenerated = singleGenerated.replace("```html", "");
         singleGenerated = singleGenerated.replace("```", "");
+        tempText.push(singleGenerated);
 
         setGeneratedWorkExperience((prevExperience) => [
           ...prevExperience,
@@ -286,6 +231,7 @@ const SubJDGenerator = () => {
         setMsgLoading(false);
 
         if (index === experiences.length - 1) {
+          setStreamedData("");
           const jdObj = {
             jobDescriptionId: jobDescriptionId,
             personName: userData.firstName + " " + userData.lastName,
@@ -297,7 +243,6 @@ const SubJDGenerator = () => {
             },
             experiences: experiences,
           };
-          setWorkExperienceGeneartionCompleted(true);
           await fetch("/api/linkedInBots/jdGeneratorSave", {
             method: "POST",
             body: JSON.stringify(jdObj),
@@ -367,6 +312,7 @@ const SubJDGenerator = () => {
       <LinkedInJDCardSingle card={card} componentRef={componentRef} />
     ),
   };
+
   return (
     <>
       <PreviouslyGeneratedList {...historyProps} />
@@ -380,7 +326,7 @@ const SubJDGenerator = () => {
               src={Svg1}
               width={32}
               height={32}
-              className="z-[10000]"
+              className="z-[10000px]"
             />
           </div>
           <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
@@ -389,6 +335,7 @@ const SubJDGenerator = () => {
                 Job Description Generator
               </h1>
             </div>
+
             <p className="text-[14px] text-[#959595] pr-5">
               Transform your existing work experience into an impactful
               narrative that highlights your key achievements.
@@ -399,6 +346,8 @@ const SubJDGenerator = () => {
             disabled={msgLoading || !session?.user?.email}
             onClick={() => handleGenerate()}
             className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
+
+            // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
           >
             <span
               className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}
@@ -443,113 +392,55 @@ const SubJDGenerator = () => {
             </span>
           </button>
         </div>
-        {workExperienceGeneartionCompleted && (
+        {(generatedWorkExperience?.length > 0 || streamedData !== "") && (
           <div className=" bg-white text-gray-900 mb-4 border-gray-500  rounded border-[1px] p-8">
             <h1 className="mb-4 text-4xl font-bold text-gray-900">
               <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
                 AI Response{" "}
               </span>
             </h1>
-            <div
-              className="ml-2 font-sansbreak-words"
-              // style={{ textW: "auto" }}
-            >
+            <div className="ml-2 font-sansbreak-words">
               {generatedWorkExperience.map((workExperience, index) => {
                 return (
-                  <Toolbar
-                    key={index}
-                    regenrateAchivements={() => workExperienceGenerator(index)}
-                    copyToClipBoard={() => copyJD(workExperience)}
-                  >
-                    <div
-                      className="list-disc border-2 border-transparent hover:border-dashed hover:border-gray-500"
-                      dangerouslySetInnerHTML={{ __html: workExperience }}
-                    ></div>
-                  </Toolbar>
+                  <>
+                    {workExperience === "" ? (
+                      <div className="text-center">
+                        <div role="status">
+                          <Loader />
+                        </div>
+                      </div>
+                    ) : (
+                      <Toolbar
+                        key={index}
+                        regenrateAchivements={() =>
+                          workExperienceGenerator(index)
+                        }
+                        copyToClipBoard={() => copyJD(workExperience)}
+                      >
+                        <div
+                          className="list-disc border-2 border-transparent hover:border-dashed hover:border-gray-500"
+                          dangerouslySetInnerHTML={{ __html: workExperience }}
+                        ></div>
+                      </Toolbar>
+                    )}
+                  </>
                 );
               })}
-              <button
-                disabled={msgLoading}
-                onClick={() => copyJD(streamedData)}
-                className={`xs:flex-1 mt-4 flex gap-2 items-center hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
-                  msgLoading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-4 h-4 dark:text-gray-100 text-gray-950"
+              {streamedData !== "" && (
+                <div
+                  className="ml-2 font-sansbreak-words"
+                  // style={{ textW: "auto" }}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
-                  />
-                </svg>
-
-                <span className="text-sm dark:text-gray-100 text-gray-950">
-                  {msgLoading
-                    ? "Please wait..."
-                    : isJDCopied
-                    ? "Copied"
-                    : "Copy to clipboard"}
-                </span>
-              </button>
+                  <div
+                    className="list-disc"
+                    dangerouslySetInnerHTML={{ __html: streamedData }}
+                  ></div>
+                </div>
+              )}
             </div>
           </div>
         )}
-        {streamedData && !workExperienceGeneartionCompleted && (
-          <div className=" bg-white text-gray-900 mb-4 border-gray-500  rounded border-[1px] p-8">
-            <h1 className="mb-4 text-4xl font-bold text-gray-900">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
-                AI Response{" "}
-              </span>
-            </h1>
-            <div
-              className="ml-2 font-sansbreak-words"
-              // style={{ textW: "auto" }}
-            >
-              <div
-                className="list-disc"
-                dangerouslySetInnerHTML={{ __html: streamedData }}
-              ></div>
 
-              <button
-                disabled={msgLoading}
-                onClick={() => copyJD(streamedData)}
-                className={`xs:flex-1 mt-4 flex gap-2 items-center hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
-                  msgLoading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-4 h-4 dark:text-gray-100 text-gray-950"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
-                  />
-                </svg>
-
-                <span className="text-sm dark:text-gray-100 text-gray-950">
-                  {msgLoading
-                    ? "Please wait..."
-                    : isJDCopied
-                    ? "Copied"
-                    : "Copy to clipboard"}
-                </span>
-              </button>
-            </div>
-          </div>
-        )}
         {showPopup && (
           <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
             {/* Popup content here */}

@@ -76,6 +76,9 @@ const templateLayout: any = {
           id: "linkedIn",
         },
         {
+          id: "address",
+        },
+        {
           id: "primarySkills",
         },
       ],
@@ -135,6 +138,11 @@ const components: any = {
       },
       {
         id: "linkedIn",
+        styles: "text-xs flex break-all before:break-normal mt-2 text-gray-100",
+        tag: "span",
+      },
+      {
+        id: "address",
         styles: "text-xs flex break-all before:break-normal mt-2 text-gray-100",
         tag: "span",
       },

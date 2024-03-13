@@ -28,7 +28,7 @@ const Page = () => {
   const { components, templateLayout, cvHeadings } = template;
 
   let newCvHeadings: any = [];
-  console.log(resumeData);
+
   for (const singleHeading of Object.entries(resumeData.headings)) {
     const [key, value] = singleHeading;
 
@@ -77,6 +77,7 @@ const Page = () => {
       "email",
       "linkedIn",
       "phone",
+      "address",
       "primarySkills",
       "name",
       "jobTitle",
@@ -460,7 +461,8 @@ const Page = () => {
             const styles = templateLayout[templatepart][fragmentpart].styles;
             let div = document.createElement("div");
             setAttributesToElem([{ "container-name": fragmentpart }], div);
-            styles.split(" ").map((cls: any) => div.classList.add(cls));
+            setStylesToElement(div, styles);
+            // styles.split(" ").map((cls: any) => div.classList.add(cls));
             const _elements = templateLayout[templatepart][
               fragmentpart
             ].elements.map((element: any) => {
@@ -482,7 +484,8 @@ const Page = () => {
       } else {
         let div = document.createElement("div");
         const styles = templateLayout[templatepart].styles;
-        styles.split(" ").map((cls: any) => div.classList.add(cls));
+        setStylesToElement(div, styles);
+        // styles.split(" ").map((cls: any) => div.classList.add(cls));
 
         const _elements = templateLayout[templatepart].elements.map(
           (element: any) => generateElements(element, "span")
@@ -557,11 +560,18 @@ const Page = () => {
   const generate = (jsonData: any) => {
     const newJsonObject: any = {};
 
+    let address = `${jsonData.contact["street"]} ${jsonData.contact["cityState"]} ${jsonData.contact["country"]} ${jsonData.contact["postalCode"]}`;
+
     GenerationOrder.forEach((key) => {
       if (jsonData.hasOwnProperty(key)) {
         newJsonObject[key] = jsonData[key];
       }
     });
+
+    newJsonObject.contact = {
+      ...newJsonObject.contact,
+      address,
+    };
 
     for (const item of Object.entries(newJsonObject)) {
       createElements(item);
