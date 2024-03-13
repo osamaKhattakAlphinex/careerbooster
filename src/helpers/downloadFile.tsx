@@ -175,7 +175,7 @@ h2:empty {
 
 .page {
   position: relative;
-  height: 29.6cm !important;
+  height: 29.62cm !important;
   background-color: #fff;
 }        
 
