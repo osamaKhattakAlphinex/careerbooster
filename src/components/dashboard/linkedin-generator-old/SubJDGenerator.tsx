@@ -16,6 +16,9 @@ import useGetUserData from "@/hooks/useGetUserData";
 import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
+import Toolbar from "../Toolbar";
+import exp from "constants";
+import { assert } from "console";
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
   const creditLimits = useSelector((state: any) => state.creditLimits);
@@ -65,6 +68,131 @@ const SubJDGenerator = () => {
   useEffect(() => {
     setStreamedData(linkedinJD.jobDescriptionText);
   }, [linkedinJD.jobDescriptionText]);
+
+  const workExperienceGenerator = async (experienceIndex: any) => {
+    let experience = userData.experience[experienceIndex];
+
+    // let tempText = "";
+    // for () {
+
+    let singleGenerated = "";
+    let html = "";
+    html += `<h2 class="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">${experience?.jobTitle}</h2>`;
+    html += `<h3 class="text-base font-semibold">${experience?.company} | ${experience?.cityState} ${experience?.country}</h3>`;
+    html += `<p class="text-sm font-semibold">${experience?.fromMonth} ${
+      experience?.fromYear
+    } to ${
+      experience?.isContinue
+        ? "Present"
+        : experience?.toMonth + " " + experience?.toYear
+    }</p>`;
+    html += `<br/><div>`;
+    // setStreamedData((prev) => prev + html);
+    // tempText += html;
+    singleGenerated += html;
+    setMsgLoading(true);
+    const jobDescriptionId = makeid();
+    const obj: any = {
+      jobDescriptionId: jobDescriptionId,
+      personName: userData.firstName + " " + userData.lastName,
+      creditsUsed: creditLimits.linkedin_individualWorkExperience,
+      email: session?.user?.email,
+      trainBotData: {
+        userEmail: userData.email,
+        fileAddress: userData.uploadedResume.fileName,
+      },
+      experience: experience,
+    };
+    const res: any = await fetch("/api/linkedInBots/jdGeneratorSingle", {
+      method: "POST",
+      body: JSON.stringify(obj),
+    });
+
+    if (res.ok) {
+      setAvailableCredits(true);
+
+      const reader = res.body.getReader();
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+          break;
+        }
+        const text = new TextDecoder().decode(value);
+
+        // setStreamedData((prev) => prev + text);
+        // tempText += text;
+        singleGenerated += text;
+      }
+      //   if (index === experiences.length - 1) {
+      //     showSuccessToast("Job Description generated successfully");
+      //   }
+      // } else {
+      //   setStreamedData("You ran out of Credits!");
+      //   showErrorToast("You ran out of credits!");
+      //   setMsgLoading(false);
+      //   break;
+      // // }
+
+      // setStreamedData((prev) => prev + `</div> <br /> `);
+      // setStreamedData((prev) => prev.replace("```html", ""));
+      // setStreamedData((prev) => prev.replace("```", ""));
+      // tempText += `</div><br/>`;
+      // tempText = tempText.replace("```html", "");
+      // tempText = tempText.replace("```", "");
+
+      singleGenerated += `</div><br/>`;
+      singleGenerated = singleGenerated.replace("```html", "");
+      singleGenerated = singleGenerated.replace("```", "");
+
+      console.log(
+        "--------------- single generaterd ----------------",
+        singleGenerated
+      );
+
+      setGeneratedWorkExperience((prevExperience) => {
+        // Predefined index to insert the new item
+        const newArray = [...prevExperience];
+        newArray.splice(experienceIndex, 1, singleGenerated);
+        return newArray;
+      });
+
+      setMsgLoading(false);
+
+      // if (index === experiences.length - 1) {
+      // const jdObj = {
+      //   jobDescriptionId: jobDescriptionId,
+      //   personName: userData.firstName + " " + userData.lastName,
+
+      //   email: userData?.email,
+      //   trainBotData: {
+      //     userEmail: userData.email,
+      //     fileAddress: userData.uploadedResume.fileName,
+      //   },
+      //   experiences: experiences,
+      // };
+      // setWorkExperienceGeneartionCompleted(true);
+      // await fetch("/api/linkedInBots/jdGeneratorSave", {
+      //   method: "POST",
+      //   body: JSON.stringify(jdObj),
+      // }).then(async (response: any) => {
+      //   const res = await response.json();
+      //   if (res.success) {
+      //     await saveToDB(jdObj, tempText);
+      //   }
+      // });
+      // }
+    }
+
+    const JDResponse = await axios.get(
+      "/api/linkedInBots/jdGeneratorSingle/getAllJD"
+    );
+
+    const updatedObject = {
+      ...userData,
+      linkedInJobDescriptions: JDResponse.data.result.linkedInJobDescriptions,
+    };
+    dispatch(setUserData({ ...userData, ...updatedObject }));
+  };
 
   const handleGenerate = async () => {
     setStreamedData("");
@@ -328,11 +456,16 @@ const SubJDGenerator = () => {
             >
               {generatedWorkExperience.map((workExperience, index) => {
                 return (
-                  <div
+                  <Toolbar
                     key={index}
-                    className="list-disc"
-                    dangerouslySetInnerHTML={{ __html: workExperience }}
-                  ></div>
+                    regenrateAchivements={() => workExperienceGenerator(index)}
+                    copyToClipBoard={() => copyJD(workExperience)}
+                  >
+                    <div
+                      className="list-disc border-2 border-transparent hover:border-dashed hover:border-gray-500"
+                      dangerouslySetInnerHTML={{ __html: workExperience }}
+                    ></div>
+                  </Toolbar>
                 );
               })}
               <button
