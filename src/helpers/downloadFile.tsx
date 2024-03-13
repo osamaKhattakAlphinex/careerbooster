@@ -52,7 +52,7 @@ any) => {
       <script src="https://cdn.tailwindcss.com"></script>
        <style>
         body {
-          padding: 24px;
+           padding: 0px;
         }</style>      
       ${html}`;
     } else {
@@ -169,9 +169,7 @@ h2:empty {
 .page {
   position: relative;
   height: 29.62cm !important;
-  background-color: #fff;
-  margin: 10px;
-}
+  }
         
        
         </style>

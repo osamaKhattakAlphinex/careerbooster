@@ -200,7 +200,7 @@ const templateLayout: any = {
     styles: "flex flex-col bg-white fragment py-5 text-gray-950/80",
     header: {
       styles:
-        "text-black m-2 p-3 flex flex-col w-[98%] justify-start  rounded-md bg-gray-300 items-start text-gray-950/80",
+        "text-black my-2 mx-auto p-3 flex flex-col w-[94%]  justify-start  rounded-md bg-gray-300 items-start text-gray-950/80",
       elements: [
         {
           id: "name",
@@ -213,7 +213,7 @@ const templateLayout: any = {
 
     contact: {
       styles:
-        "flex flex-row flex-wrap text-base w-[98%] justify-center items-center m-2 p-3 rounded-md gap-4 bg-gray-300 text-gray-950/80",
+        "flex flex-row flex-wrap text-base w-[94%] justify-center items-center my-2 mx-auto p-3 rounded-md gap-4 bg-gray-300 text-gray-950/80",
       elements: [
         {
           id: "phone",
