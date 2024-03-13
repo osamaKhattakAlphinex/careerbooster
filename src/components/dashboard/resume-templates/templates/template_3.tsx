@@ -100,7 +100,7 @@ const ResumeTemplate3 = () => {
           </h3>
         </div>
         <div>
-          <div className="flex items-center justify-center w-32 h-32 mx-4 my-4 mr-8 text-center text-white bg-gray-800 rounded-full  xs:w-24 xs:h-24 md:w-32 md:h-32 xs:mr-4 md:mr-8">
+          <div className="flex items-center justify-center w-32 h-32 mx-4 my-4 mr-8 text-center text-white bg-gray-800 rounded-full xs:w-24 xs:h-24 md:w-32 md:h-32 xs:mr-4 md:mr-8">
             <span className="text-4xl font-semibold hover:shadow-md hover:bg-gray-100">
               <EditableField
                 value={resume?.shortName ? resume?.shortName : "CPH"}
@@ -225,7 +225,7 @@ const ResumeTemplate3 = () => {
                               }}
                             />
                           )}
-                          {rec.fromYear && <span>&nbsp; - &nbsp;</span>}
+                          {rec.fromYear && <span>-</span>}
                           {rec.toMonth && !rec.isContinue && (
                             <EditableField
                               rows={2}
@@ -238,7 +238,6 @@ const ResumeTemplate3 = () => {
                               }}
                             />
                           )}
-                          {rec.toMonth && <span>&nbsp;</span>}
                           {rec.toYear && !rec.isContinue && (
                             <EditableField
                               rows={2}
