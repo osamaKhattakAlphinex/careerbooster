@@ -240,8 +240,8 @@ const ResumeTemplate8 = () => {
       <div className="flex">
         <div className="flex flex-col w-full px-8 xs:px-4 md:px-8 lg:px-8">
           {/* Executive Summary */}
-          {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
-          <h3 className="mt-3 text-base font-semibold flex justify-center text-center uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500  mb-2">
+          <span className="border-stylee w-full mt-3 h-0 border-[1px] !border-gray-900"></span>
+          <h3 className=" text-base font-semibold my-1 flex justify-center text-center uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
             <EditableField
               value={
                 resume?.headings?.summary
@@ -258,7 +258,7 @@ const ResumeTemplate8 = () => {
               }}
             />
           </h3>
-          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-2"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-900 mb-2"></span>
 
           <Toolbar regenrateSummary={getSummary}>
             <div className="text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed ">
@@ -287,8 +287,8 @@ const ResumeTemplate8 = () => {
 
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
-              {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
-              <h3 className="flex items-center justify-center gap-2 mt-6 text-base font-semibold uppercase wl-full border-2 border-transparent hover:border-dashed hover:border-gray-500  mb-2 ">
+              <span className="border-stylee w-full h-0 border-[1px] mt-6 !border-gray-900"></span>
+              <h3 className="flex items-center my-1 justify-center gap-2  text-base font-semibold uppercase wl-full border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
                 <EditableField
                   value={
                     resume?.headings?.primarySkills
@@ -305,7 +305,7 @@ const ResumeTemplate8 = () => {
                   }}
                 />
               </h3>
-              <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-3"></span>
+              <span className="border-stylee w-full h-0 border-[1px] !border-gray-900 mb-3"></span>
               {resume?.primarySkills &&
               resume?.primarySkills.length > 0 &&
               !regenerating ? (
@@ -390,8 +390,8 @@ const ResumeTemplate8 = () => {
             </>
           )}
           {/* Work Experience */}
-          {/* <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span> */}
-          <h3 className="text-base font-semibold flex justify-center text-center uppercase xs:mt-6 border-2 border-transparent hover:border-dashed hover:border-gray-500  mb-2">
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-900  xs:mt-6"></span>
+          <h3 className="text-base font-semibold my-1 flex justify-center text-center uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
             <EditableField
               value={
                 resume?.headings?.workExperienceArray
@@ -408,7 +408,7 @@ const ResumeTemplate8 = () => {
               }}
             />
           </h3>
-          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-3"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-900 mb-3"></span>
 
           {resume?.workExperienceArray &&
           resume?.workExperienceArray.length > 0 ? (
@@ -645,8 +645,8 @@ const ResumeTemplate8 = () => {
           {/* Education */}
           {resume?.education.length > 0 && (
             <>
-              {/* <span className="w-full h-0 border-[1px] border-gray-500 my-3 page-break"></span> */}
-              <h3 className="flex items-center justify-center gap-2 mt-6 text-base font-semibold text-center uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500  mb-2">
+              <span className="w-full h-0 border-[1px] border-gray-900 mt-6 page-break"></span>
+              <h3 className="flex items-center justify-center gap-2 my-1  text-base font-semibold text-center uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
                 <EditableField
                   value={
                     resume?.headings?.education
@@ -663,7 +663,7 @@ const ResumeTemplate8 = () => {
                   }}
                 />
               </h3>
-              <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-3"></span>
+              <span className="border-stylee w-full h-0 border-[1px] !border-gray-900 mb-3"></span>
               <ul className="flex flex-wrap w-full pl-0 md:flex-row lg:flex-row ">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>

@@ -335,7 +335,7 @@ const ResumeTemplate6 = ({
                       {/* <li className="font-semibold uppercase">primary</li> */}
                       {resume?.primarySkills.map((skill: string, i: number) => (
                         <li
-                          className="hover:shadow-md  w-[45%]  sm:w-[45%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center"
+                          className="hover:shadow-md  w-[32%]  sm:w-[32%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center"
                           key={i}
                           onDragStart={(e) =>
                             e.dataTransfer.setData("text/plain", i.toString())

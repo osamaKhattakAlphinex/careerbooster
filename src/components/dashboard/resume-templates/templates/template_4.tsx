@@ -302,7 +302,7 @@ const ResumeTemplate4 = () => {
                       }}
                     />
                   </h3>
-                  <span className="border-b-2 border-white w-full mb-2"></span>
+                  <span className="border-b-2 border-white w-full h-2 mb-2"></span>
                 </>
               )}
               {resume?.primarySkills &&
@@ -315,7 +315,7 @@ const ResumeTemplate4 = () => {
                   <ol className="border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex list-styled flex-col gap-3 mb-4 text-xs xs:text-[12px] md:text-xs">
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex justify-between items-center"
+                        className="hover:shadow-md hover:cursor-move parent border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex  items-center gap-3"
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -324,17 +324,20 @@ const ResumeTemplate4 = () => {
                         onDrop={(e) => handleDropPrimary(e, i)}
                         draggable
                       >
-                        <EditableField
-                          value={skill}
-                          onSave={(value: string) => {
-                            handlers.handleUpdateSkill(value, i);
-                          }}
-                        />
-                        <div
-                          onClick={() => handlers.handleDeleteSkill(i)}
-                          className="w-4 h-4 cursor-pointer child"
-                        >
-                          {crossIcon1}
+                        <div className="border border-gray-100 w-1.5 h-1.5 rounded-full bg-gray-100"></div>
+                        <div className="w-full flex justify-between">
+                          <EditableField
+                            value={skill}
+                            onSave={(value: string) => {
+                              handlers.handleUpdateSkill(value, i);
+                            }}
+                          />
+                          <div
+                            onClick={() => handlers.handleDeleteSkill(i)}
+                            className="w-4 h-4 cursor-pointer child"
+                          >
+                            {crossIcon1}
+                          </div>
                         </div>
                       </li>
                     ))}
@@ -482,12 +485,12 @@ const ResumeTemplate4 = () => {
               {resume?.workExperienceArray.map((rec: any, i: number) => {
                 return (
                   <div key={i} className={`flex justify-start `}>
-                    <div className="w-[5%] pr-5 mt-1 xs:pr-0 md:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
+                    {/* <div className="w-[5%] pr-5 mt-1 xs:pr-0 md:pr-5   pt-2   h-full flex flex-col items-center  gap-1">
                       <div className="p-1 bg-gray-100 border-2 border-gray-500 rounded-full "></div>
                       {resume?.workExperienceArray.length - 1 !== i && (
                         <span className="h-full w-[2px] bg-gray-500 border-b border-gray-500"></span>
                       )}
-                    </div>
+                    </div> */}
                     <Toolbar
                       key={i}
                       addAchivement={() => setNewWorkExperience(i)}

@@ -163,7 +163,7 @@ const ResumeTemplate10 = () => {
           </div> */}
           {/* contacts */}
           <div
-            className="rounded-3xl border-2  bg-[#043382] xs:py-2 py-[6px] flex justify-center "
+            className="rounded-3xl border-2  border-[#043382] xs:py-2 py-[6px] flex justify-center "
             // style={{ borderColor: color }}
           >
             <h3 className="uppercase text-base text-center mb-0 font-semibold flex flex-row gap-2 items-center border-2 border-transparent hover:border-dashed hover:border-gray-500  ">
@@ -186,7 +186,7 @@ const ResumeTemplate10 = () => {
           </div>
 
           <ul className="flex flex-col gap-2 pl-0 mt-4 text-xs break-all ">
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex flex-row gap-1  items-start justify-start">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex flex-row gap-1 items-start justify-start">
               <div
                 className="bg-[#043382] rounded-full p-2 mr-3"
                 // style={{ backgroundColor: color }}
@@ -350,7 +350,7 @@ const ResumeTemplate10 = () => {
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <div
-                className="rounded-3xl border-2 bg-[#043382] xs:py-2 py-[6px] my-3  flex justify-center"
+                className="rounded-3xl border-2 border-[#043382] xs:py-2 py-[6px] my-3  flex justify-center"
                 // style={{ borderColor: color }}
               >
                 <h3 className="uppercase text-base mb-0 font-semibold flex flex-row gap-2 items-center border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
@@ -378,10 +378,10 @@ const ResumeTemplate10 = () => {
                   addSkill={handleAddSkills}
                   regenerateSkills={getPrimarySkills}
                 >
-                  <ul className="flex flex-col gap-3 pl-4 mb-4 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500">
+                  <ul className="flex flex-col gap-3 mb-4 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500">
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move parent border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex gap-2 items-center   "
+                        className="hover:shadow-md hover:cursor-move parent border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex gap-2  items-center "
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -391,20 +391,22 @@ const ResumeTemplate10 = () => {
                         draggable
                       >
                         <span
-                          className="bg-gray-100 w-[6px]
-                     h-[6px] rounded-full"
+                          className="bg-gray-100 w-1
+                     h-1 rounded-full"
                         ></span>
-                        <EditableField
-                          value={skill}
-                          onSave={(value: string) => {
-                            handlers.handleUpdateSkill(value, i);
-                          }}
-                        />
-                        <div
-                          onClick={() => handlers.handleDeleteSkill(i)}
-                          className="w-4 h-4 cursor-pointer child"
-                        >
-                          {crossIcon1}
+                        <div className="flex justify-between w-full">
+                          <EditableField
+                            value={skill}
+                            onSave={(value: string) => {
+                              handlers.handleUpdateSkill(value, i);
+                            }}
+                          />
+                          <div
+                            onClick={() => handlers.handleDeleteSkill(i)}
+                            className="w-4 h-4 cursor-pointer child"
+                          >
+                            {crossIcon1}
+                          </div>
                         </div>
                       </li>
                     ))}
@@ -702,9 +704,9 @@ const ResumeTemplate10 = () => {
 
                           {newWorkExperience === i ? (
                             <>
-                              <div className="w-full gap-1  flex flex-wrap mt-4">
+                              <div className="w-full gap-1 flex flex-wrap mt-4">
                                 <input
-                                  className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
+                                  className="w-full py-[4px] border-2 rounded-md text bg-transparent" // Apply Tailwind CSS classes
                                   onChange={(e) =>
                                     setNewAchievement(e.target.value)
                                   }
@@ -726,7 +728,7 @@ const ResumeTemplate10 = () => {
                                 />
                                 <div className="my-2 w-full flex gap-2">
                                   <button
-                                    className="bg-green-500  w-2/12 xs:w-full md:w-2/12 lg:w-2/12 rounded-md  h-9 text-white "
+                                    className="bg-green-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 rounded-md  h-9 text-white "
                                     onClick={() => {
                                       // Save the new achievement to the state and possibly the database
                                       handlers.handleAddAchivement(
@@ -743,7 +745,7 @@ const ResumeTemplate10 = () => {
                                       setNewAchievement("");
                                       setNewWorkExperience(-1);
                                     }}
-                                    className="bg-red-500  w-2/12 xs:w-full md:w-2/12 lg:w-2/12 rounded-md py-1 text-white"
+                                    className="bg-red-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 rounded-md py-1 text-white"
                                   >
                                     Cancel
                                   </button>
@@ -773,7 +775,7 @@ const ResumeTemplate10 = () => {
           {resume?.education.length > 0 && (
             <div className="">
               <div
-                className="rounded-3xl bg-[#043382] py-2 px-4 my-6  w-fit"
+                className="rounded-3xl bg-[#043382] py-2 px-4 my-6 w-fit"
                 // style={{ backgroundColor: color }}
               >
                 <h3 className="uppercase text-base mb-0 font-semibold text-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500">

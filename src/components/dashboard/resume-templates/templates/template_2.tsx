@@ -87,12 +87,10 @@ const ResumeTemplate2 = () => {
 
     // You can do whatever you need with the selected color here
   };
-  console.log(resume);
-
   return (
     <div className="flex flex-col items-start justify-start w-full px-6 space-y-4 text-gray-900 first-page">
       {/* Name and Title */}
-      <div className="flex flex-col w-full px-8 py-4 mt-1 text-center bg-[#e9e8e8] rounded-xl">
+      <div className="flex flex-col items-center w-full px-8 py-4 mt-1 text-center bg-gray-300  rounded-xl">
         <h2 className="text-4xl font-bold xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500  ">
           <EditableField
             value={resume?.name ? resume?.name : "FULL NAME"}
@@ -130,8 +128,8 @@ const ResumeTemplate2 = () => {
       {/* contacts */}
       <div className="relative w-full py-1">
         <ul
-          className="flex flex-row items-center justify-around px-4 py-2 md:flex-row rounded-xl "
-          style={{ backgroundColor: color_second }}
+          className="flex flex-row items-center justify-around bg-gray-300  px-4 py-2 md:flex-row rounded-xl "
+          // style={{ backgroundColor: color_second }}
         >
           <li className="flex flex-row items-center gap-1 text-xs hover:shadow-md text-gray-950 hover:bg-gray-100 w-25% ">
             {phoneIcon}
@@ -313,7 +311,7 @@ const ResumeTemplate2 = () => {
         </Toolbar>
       </div>
       {/* Skills  */}
-      <div className="w-full space-y-3  ">
+      <div className="w-full space-y-3">
         {resume?.primarySkills && resume?.primarySkills.length > 0 && (
           <h2 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500   ">
             <EditableField
@@ -344,7 +342,7 @@ const ResumeTemplate2 = () => {
               <ul className="flex flex-row flex-wrap gap-1 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
                 {resume?.primarySkills.map((skill: string, i: number) => (
                   <li
-                    className=" px-4 py-2 bg-[#e9e8e8] border-transparent border-[1px] rounded-full hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
+                    className=" px-4 py-2 bg-gray-300 border-transparent border-[1px] rounded-full hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
                     key={i}
                     onDragStart={(e) =>
                       e.dataTransfer.setData("text/plain", i.toString())

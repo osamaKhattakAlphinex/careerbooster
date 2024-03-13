@@ -89,7 +89,7 @@ const ResumeTemplate15 = () => {
     <div className="relative w-full text-gray-900 first-page">
       <div className="flex">
         <div
-          className=" w-5/12 xs:w-5/12  flex flex-col  bg-[#F4F4F4]    px-4  md:px-9    pt-[2rem]  "
+          className=" w-5/12 xs:w-5/12  flex flex-col  bg-[#e2e2e2]    px-4  md:px-9    pt-[2rem]  "
           // style={{ backgroundColor: color }}
         >
           {/* <div className="absolute top-0 left-0 xs:w-4/12">
@@ -316,7 +316,7 @@ const ResumeTemplate15 = () => {
                   <ul className="flex flex-col w-full gap-1 pl-0 mb-4 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
-                        className="hover:shadow-md hover:cursor-move px-0 xs:px-2 md:px-0 parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex justify-between "
+                        className="hover:shadow-md hover:cursor-move px-0 xs:px-2 md:px-0 parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center gap-2 "
                         key={i}
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
@@ -325,17 +325,20 @@ const ResumeTemplate15 = () => {
                         onDrop={(e) => handleDropPrimary(e, i)}
                         draggable
                       >
-                        <EditableField
-                          value={skill}
-                          onSave={(value: string) => {
-                            handlers.handleUpdateSkill(value, i);
-                          }}
-                        />
-                        <div
-                          onClick={() => handlers.handleDeleteSkill(i)}
-                          className="w-4 h-4 cursor-pointer child"
-                        >
-                          {crossIcon1}
+                        <span className="w-1 h-1 bg-gray-900 rounded-full "></span>
+                        <div className="flex  w-full justify-between">
+                          <EditableField
+                            value={skill}
+                            onSave={(value: string) => {
+                              handlers.handleUpdateSkill(value, i);
+                            }}
+                          />
+                          <div
+                            onClick={() => handlers.handleDeleteSkill(i)}
+                            className="w-4 h-4 cursor-pointer child"
+                          >
+                            {crossIcon1}
+                          </div>
                         </div>
                       </li>
                     ))}
@@ -387,7 +390,7 @@ const ResumeTemplate15 = () => {
           )}
         </div>
         <div className="w-full flex flex-col  px-8 xs:mt-[25px]  xs:px-8 lg:px-8 pt-[1rem] xs:pt-[1rem] ">
-          <div className="flex flex-col justify-center py-4 xs:px-0">
+          <div className="flex flex-col items-center justify-center py-4 xs:px-0">
             <h2 className="text-4xl font-bold text-center xs:text-4xl hover:shadow-md hover:bg-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500">
               <EditableField
                 value={resume?.name ? resume?.name : "FULL NAME"}
