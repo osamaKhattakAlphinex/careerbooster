@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate6 from "@/components/dashboard/resume-templates/templates/template_6";
 import { useDispatch, useSelector } from "react-redux";
-import { WorkExperience, setUserData } from "@/store/userDataSlice";
+import { WorkExperience } from "@/store/userDataSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import {
