@@ -80,7 +80,7 @@ const Template = () => {
           </h2>
           <Link
             href="/resume-builder/templates"
-            className="overflow-hidden text-white no-underline rounded-lg"
+            className="overflow-hidden xs:mt-3 md:mt-0 text-white no-underline rounded-lg"
           >
             <div
               className={` font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center py-1 px-2`}
