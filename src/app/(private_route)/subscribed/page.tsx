@@ -1,8 +1,6 @@
-"use client"
 import UpdateCreditPackage from "@/components/dashboard/checkout/UpdateCreditPackage";
 import { stripe } from "@/lib/stripe";
 import { redirect } from "next/navigation";
-import { useSelector } from "react-redux";
 import Stripe from "stripe";
 
 type Props = {

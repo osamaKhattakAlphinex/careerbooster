@@ -556,7 +556,7 @@ const ResumeTemplate16 = () => {
                                   }}
                                 />
                               </span>{" "}
-                              ,
+                              {rec?.cityState?.length > 0 && ","}
                               <span className="hover:shadow-md hover:bg-gray-100">
                                 <EditableField
                                   value={rec?.country}

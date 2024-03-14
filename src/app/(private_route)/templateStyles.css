@@ -27,7 +27,6 @@ h2:empty {
   display: none;
 }
 
-
 h2[data-name="phone"][data-icon-color="black"][data-type-heading="true"]::before {
   content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJtMy44NTUgNy4yODYgMS4wNjctLjUzNGExIDEgMCAwIDAgLjU0Mi0xLjA0NmwtLjQ0LTIuODU4QTEgMSAwIDAgMCA0LjAzNiAySDNhMSAxIDAgMCAwLTEgMXYyYzAgLjcwOS4wODIgMS40LjIzOCAyLjA2MmE5LjAxMiA5LjAxMiAwIDAgMCA2LjcgNi43QTkuMDI0IDkuMDI0IDAgMCAwIDExIDE0aDJhMSAxIDAgMCAwIDEtMXYtMS4wMzZhMSAxIDAgMCAwLS44NDgtLjk4OGwtMi44NTgtLjQ0YTEgMSAwIDAgMC0xLjA0Ni41NDJsLS41MzQgMS4wNjdhNy41MiA3LjUyIDAgMCAxLTQuODYtNC44NTlaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIC8+Cjwvc3ZnPgo=");
 }
@@ -76,15 +75,19 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
 [data-template-no="5"] [data-name="phone"]::before,
 [data-template-no="5"] [data-name="email"]::before,
 [data-template-no="5"] [data-name="linkedIn"]::before,
+[data-template-no="5"] [data-name="address"]::before,
 [data-template-no="4"] [data-name="phone"]::before,
 [data-template-no="4"] [data-name="email"]::before,
 [data-template-no="4"] [data-name="linkedIn"]::before,
+[data-template-no="4"] [data-name="address"]::before,
 [data-template-no="3"] [data-name="phone"]::before,
 [data-template-no="3"] [data-name="email"]::before,
 [data-template-no="3"] [data-name="linkedIn"]::before,
+[data-template-no="3"] [data-name="address"]::before,
 [data-template-no="1"] [data-name="phone"]::before,
 [data-template-no="1"] [data-name="email"]::before,
-[data-template-no="1"] [data-name="linkedIn"]::before {
+[data-template-no="1"] [data-name="linkedIn"]::before,
+[data-template-no="1"] [data-name="address"]::before {
   content: "\2022";
   margin-right: 10px;
   font-size: 1rem;

@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface IJobDescription {
   id: string;
-  jobDescriptionText: string;
+  jobDescriptionText: [];
   generatedOnDate: any;
   userEmail: string;
 }
 
 const initialState: IJobDescription = {
   id: "",
-  jobDescriptionText: "",
+  jobDescriptionText: [],
   generatedOnDate: "",
   userEmail: "",
 };

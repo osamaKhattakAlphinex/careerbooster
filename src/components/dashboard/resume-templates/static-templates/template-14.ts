@@ -82,6 +82,12 @@ const components: any = {
           "text-xs flex break-all before:break-normal mt-2 text-gray-950/80",
         tag: "span",
       },
+      {
+        id: "address",
+        styles:
+          "text-xs flex break-all before:break-normal mt-2 text-gray-950/80",
+        tag: "span",
+      },
     ],
   },
   primarySkills: {
@@ -211,6 +217,9 @@ const templateLayout: any = {
         },
         {
           id: "linkedIn",
+        },
+        {
+          id: "address",
         },
         {
           id: "primarySkills",
