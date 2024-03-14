@@ -166,7 +166,6 @@ const ResumeTemplate18 = () => {
                             }}
                           />
                         )}
-                        {rec.fromMonth && <span>&nbsp;</span>}
                         {rec.fromYear && (
                           <EditableField
                             rows={2}
@@ -179,7 +178,7 @@ const ResumeTemplate18 = () => {
                             }}
                           />
                         )}
-                        {rec.fromYear && <span>&nbsp; - &nbsp;</span>}
+                        {rec.fromYear && <span>-</span>}
                         {rec.toMonth && !rec.isContinue && (
                           <EditableField
                             rows={2}
@@ -192,7 +191,6 @@ const ResumeTemplate18 = () => {
                             }}
                           />
                         )}
-                        {rec.toMonth && <span>&nbsp;</span>}
                         {rec.toYear && !rec.isContinue && (
                           <EditableField
                             rows={2}
@@ -285,7 +283,7 @@ const ResumeTemplate18 = () => {
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[30%] xs:w-[50%] md:w-[30%] lg:w-[30%] md:m-2  relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
-                      <li className="flex items-center font-semibold uppercase  hover:shadow-md hover:cursor-move parent hover:bg-gray-100 hover:text-black text-md">
+                      <li className="flex items-center font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:bg-gray-100 hover:text-black text-md">
                         <div className="flex flex-row items-center justify-between w-full">
                           <EditableField
                             type="textarea"
@@ -453,7 +451,7 @@ const ResumeTemplate18 = () => {
             Contact
           </h3>
           <span className="w-full h-0 my-3 border-stylee"></span>
-          <ul className="flex flex-col w-full gap-3 pl-0 mb-4 text-sm text-gray-300 break-all  xs:px-2">
+          <ul className="flex flex-col w-full gap-3 pl-0 mb-4 text-sm text-gray-300 break-all xs:px-2">
             <li className="flex flex-row items-start justify-start gap-3 text-sm hover:shadow-md hover:bg-gray-100 hover:text-black ">
               <div>{phoneIcon}</div>
               <EditableField

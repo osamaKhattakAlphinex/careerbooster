@@ -404,7 +404,6 @@ const ResumeTemplate12 = () => {
                               }}
                             />
                           )}
-                          {rec.fromMonth && <span>&nbsp;</span>}
                           {rec.fromYear && (
                             <EditableField
                               rows={2}
@@ -417,7 +416,7 @@ const ResumeTemplate12 = () => {
                               }}
                             />
                           )}
-                          {rec.fromYear && <span>&nbsp; - &nbsp;</span>}
+                          {rec.fromYear && <span>-</span>}
                           {rec.toMonth && !rec.isContinue && (
                             <EditableField
                               rows={2}
@@ -430,7 +429,6 @@ const ResumeTemplate12 = () => {
                               }}
                             />
                           )}
-                          {rec.toMonth && <span>&nbsp;</span>}
                           {rec.toYear && !rec.isContinue && (
                             <EditableField
                               rows={2}

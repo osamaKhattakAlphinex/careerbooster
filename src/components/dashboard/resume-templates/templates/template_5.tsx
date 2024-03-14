@@ -199,7 +199,6 @@ const ResumeTemplate5 = () => {
                               }}
                             />
                           )}
-                          {rec.fromMonth && <span>&nbsp;</span>}
                           {rec.fromYear && (
                             <EditableField
                               rows={2}
@@ -212,7 +211,7 @@ const ResumeTemplate5 = () => {
                               }}
                             />
                           )}
-                          {rec.fromYear && <span>&nbsp; - &nbsp;</span>}
+                          {rec.fromYear && <span>-</span>}
                           {rec.toMonth && !rec.isContinue && (
                             <EditableField
                               rows={2}
@@ -460,7 +459,7 @@ const ResumeTemplate5 = () => {
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[30%]  md:w-[30%] xs:w-[48%] md:m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
-                      <li className="flex items-center justify-between font-semibold uppercase  hover:shadow-md hover:cursor-move parent hover:bg-gray-100 text-md">
+                      <li className="flex items-center justify-between font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:bg-gray-100 text-md">
                         <EditableField
                           type="textarea"
                           rows={2}

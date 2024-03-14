@@ -474,7 +474,7 @@ const ResumeTemplate9 = () => {
                           }}
                         />
                       </h2>
-                      <h2 className="flex gap-2 text-xs font-semibold hover:cursor-default">
+                      <h2 className="flex gap-1 text-xs font-semibold hover:cursor-default">
                         {/* {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue
                           ? "Present"
@@ -492,7 +492,6 @@ const ResumeTemplate9 = () => {
                             }}
                           />
                         )}
-                        {rec.fromMonth && <span>&nbsp;</span>}
                         {rec.fromYear && (
                           <EditableField
                             rows={2}
@@ -505,7 +504,7 @@ const ResumeTemplate9 = () => {
                             }}
                           />
                         )}
-                        {rec.fromYear && <span>&nbsp; - &nbsp;</span>}
+                        {rec.fromYear && <span>-</span>}
                         {rec.toMonth && !rec.isContinue && (
                           <EditableField
                             rows={2}
@@ -518,7 +517,6 @@ const ResumeTemplate9 = () => {
                             }}
                           />
                         )}
-                        {rec.toMonth && <span>&nbsp;</span>}
                         {rec.toYear && !rec.isContinue && (
                           <EditableField
                             rows={2}
