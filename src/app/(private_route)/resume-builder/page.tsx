@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate6 from "@/components/dashboard/resume-templates/templates/template_6";
 import { useDispatch, useSelector } from "react-redux";
-import { WorkExperience, setUserData } from "@/store/userDataSlice";
+import { WorkExperience } from "@/store/userDataSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import {
@@ -15,7 +15,6 @@ import {
   setWorkExperienceArray,
   resetResume,
   setQuantifyingExperience,
-  // setLoadingState,
 } from "@/store/resumeSlice";
 
 import {
@@ -99,7 +98,6 @@ const ResumeBuilder = () => {
       await getCreditLimitsIfNotExists();
 
       // reset resume
-
       dispatch(resetResume(resumeData.state));
 
       if (resumeData.state.jobPosition !== "" && session?.user?.email) {
@@ -147,7 +145,6 @@ const ResumeBuilder = () => {
   // };
 
   const getBasicInfo = async () => {
-    // dispatch(setLoadingState("basicInfo"));
     // return makeAPICallWithRetry(async () => {
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
@@ -161,7 +158,6 @@ const ResumeBuilder = () => {
         jobPosition: resumeData.state.jobPosition,
         trainBotData: {
           userEmail: userData.email,
-          // fileAddress: userData.files[0].fileName,
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
@@ -200,7 +196,6 @@ const ResumeBuilder = () => {
 
   const getWorkExperienceNew = async (quantifyingExperience: boolean) => {
     // return makeAPICallWithRetry(async () => {
-    // dispatch(setLoadingState("workExperience"));
     await getCreditLimitsIfNotExists();
     await getUserDataIfNotExists();
 
@@ -218,7 +213,6 @@ const ResumeBuilder = () => {
         let workExpArrObj: any = {};
         let html = "";
         html += `<h2 style="font-size: 1.3rem; font-weight: bold; line-height: 2rem; ">${experience?.jobTitle}</h2>`;
-        // workExpArrObj.experienceId = experience?.experienceId
         workExpArrObj.title = experience?.jobTitle;
 
         html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
@@ -271,7 +265,6 @@ const ResumeBuilder = () => {
             }
 
             const text = new TextDecoder().decode(value);
-            // const text = response.result;
             setStreamedJDData((prev: any) => prev + text);
             temp += text;
             achievementTemp += text;
@@ -297,7 +290,6 @@ const ResumeBuilder = () => {
 
   const getPrimarySkills = async () => {
     // return makeAPICallWithRetry(async () => {
-    // dispatch(setLoadingState("primarySkills"));
     await getUserDataIfNotExists();
     await getCreditLimitsIfNotExists();
     return fetch("/api/resumeBots/getBasicInfo", {
@@ -329,13 +321,15 @@ const ResumeBuilder = () => {
   };
 
   useEffect(() => {
+    if (!resumeData.state.resumeLoading && resumeData?.name) {
+      setFinished(true);
+    }
     if (
       resumeGenerated &&
       !resumeData.state.resumeLoading &&
       resumeData?.name
     ) {
       saveResumeToDB();
-      setFinished(true);
     }
   }, [resumeData?.state?.resumeLoading]);
 
@@ -385,13 +379,6 @@ const ResumeBuilder = () => {
 
       <div className="w-full sm:w-full z-1000 ">
         <div className="ml-0 lg:ml-[234px] px-[15px] lg:mb-[72px]">
-          {/* <Link
-            href="/resume-builder/test-preview"
-            className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center hover:opacity-80 transition-all"
-          >
-            {leftArrowIcon}
-            Back
-          </Link> */}
           <RecentResumeCard
             source="dashboard"
             componentRef={componentRef}

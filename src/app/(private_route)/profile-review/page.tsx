@@ -8,7 +8,15 @@ import StepFour from "@/components/dashboard/profileReview/StepFour";
 import StepFive from "@/components/dashboard/profileReview/StepFive";
 import ProfilePreview from "@/components/dashboard/profileReview/ProfilePreview";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveStep, setField } from "@/store/registerSlice";
+import {
+  setActiveStep,
+  setField,
+  setStepFive,
+  setStepFour,
+  setStepOne,
+  setStepThree,
+  setStepTwo,
+} from "@/store/registerSlice";
 import StepEight from "@/components/dashboard/profileReview/StepEight";
 import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
@@ -24,11 +32,78 @@ const ProfileReview = () => {
   // Redux
   const dispatch = useDispatch();
   const register = useSelector((state: any) => state.register);
+  console.log(register);
   const resume = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
 
   const reduxStep = register.activeStep;
-  console.log(reduxStep);
+
+  const singleHandleSaveDetails = async () => {
+   let obj={}
+    if(register.activeStep === 1){
+      obj = {
+       firstName: register.stepOne.firstName,
+       lastName: register.stepOne.lastName,
+       email: userData.email,
+       linkedin: userData.linkedin,
+       file: resume.uploadedFileName,
+       phone: register.stepTwo.phoneNumber,
+ 
+       contact: {
+         country: register.stepThree.country,
+         street: register.stepThree.street,
+         cityState: register.stepThree.cityState,
+         postalCode: register.stepThree.postalCode,
+       },
+     };
+    } else if(register.activeStep ===2){
+      obj={
+        firstName: register.stepOne.firstName,
+       lastName: register.stepOne.lastName,
+       email: userData.email,
+       linkedin: userData.linkedin,
+       file: resume.uploadedFileName,
+       phone: register.stepTwo.phoneNumber,
+ 
+       contact: {
+         country: register.stepThree.country,
+         street: register.stepThree.street,
+         cityState: register.stepThree.cityState,
+         postalCode: register.stepThree.postalCode,
+       },
+        education: register.stepFour.list,
+      }
+
+    }else if( register.activeStep === 3){
+      obj={ 
+        firstName: register.stepOne.firstName,
+       lastName: register.stepOne.lastName,
+       email: userData.email,
+       linkedin: userData.linkedin,
+       file: resume.uploadedFileName,
+       phone: register.stepTwo.phoneNumber,
+ 
+       contact: {
+         country: register.stepThree.country,
+         street: register.stepThree.street,
+         cityState: register.stepThree.cityState,
+         postalCode: register.stepThree.postalCode,
+       },
+        education: register.stepFour.list,
+        experience: register.stepFive.list,
+      }
+    }
+
+    return axios
+      .post("/api/users/updateUserData", {
+        data: obj,
+      })
+      .then(async (resp: any) => {
+        if (resp?.data?.success) {
+          dispatch(setUserData(obj));
+        }
+      });
+  };
   const handleSaveDetails = async () => {
     dispatch(setField({ name: "isSubmitting", value: true }));
     // make an object
@@ -197,9 +272,10 @@ const ProfileReview = () => {
                           className="py-3 md:mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
                           onClick={(e) => {
                             dispatch(setActiveStep(register.activeStep + 1));
+                            singleHandleSaveDetails();
                           }}
                         >
-                          Next
+                          Save & Next
                         </button>
                       )}
 

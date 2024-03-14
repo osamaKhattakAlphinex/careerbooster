@@ -174,7 +174,7 @@ const SubHeadlineGenerator = () => {
             src={Svg1}
             width={32}
             height={32}
-            className="z-[10000px] "
+            // className="z-[10000px] "
           />
         </div>
         <div className="linkedintooltext flex  flex-col lg:w-[24.0625rem] gap-2 ml-2">
