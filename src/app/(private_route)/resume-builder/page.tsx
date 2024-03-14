@@ -99,7 +99,6 @@ const ResumeBuilder = () => {
       await getCreditLimitsIfNotExists();
 
       // reset resume
-
       dispatch(resetResume(resumeData.state));
 
       if (resumeData.state.jobPosition !== "" && session?.user?.email) {
