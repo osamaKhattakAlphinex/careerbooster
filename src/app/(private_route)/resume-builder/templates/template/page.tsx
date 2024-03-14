@@ -74,13 +74,13 @@ const Template = () => {
     <div className="lg:ml-[234px] ml-0 px-[15px]">
       <RecentResumeCard componentRef={componentRef} templateId={templateId} />
       <div>
-        <div className="flex items-center justify-between pt-4 pb-6">
-          <h2 className="text-xs font-bold text-gray-900 uppercase md:text-sm dark:text-white">
+        <div className="flex items-center xs:flex-col md:flex-row justify-between pt-4 pb-6">
+          <h2 className="text-sm font-bold text-gray-900 uppercase dark:text-white">
             Templates Designs
           </h2>
           <Link
             href="/resume-builder/templates"
-            className="overflow-hidden text-white no-underline rounded-lg"
+            className="overflow-hidden xs:mt-3 md:mt-0 text-white no-underline rounded-lg"
           >
             <div
               className={`text-xs font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center p-2`}

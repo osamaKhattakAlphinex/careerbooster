@@ -129,7 +129,7 @@ const ResumeTemplate6 = ({
               }}
             />
           </h3>
-          <ul className="flex flex-row justify-between gap-3 pl-0 my-2 text-xs break-all md:flex-row">
+          <ul className="flex  flex-col xs:flex-col justify-between gap-3 pl-0 my-2 text-xs break-all md:flex-row">
             <li className="hover:shadow-md hover:bg-gray-100 text-xs   flex flex-row gap-1  items-center justify-start w-[20%]">
               <div className="p-1">{phoneIcon}</div>
               <EditableField
