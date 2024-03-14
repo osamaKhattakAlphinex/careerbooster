@@ -22,7 +22,7 @@ const tabs: Tabs[] = [
   {
     tab: "all-templates",
 
-    title: "All Templates",
+    title: "All",
   },
   {
     tab: "classic-executive",
@@ -72,7 +72,7 @@ const Templates = () => {
         {tabs.map((tab, index) => (
           <button
             key={index}
-            className={`px-4 py-2 text-sm rounded-full border-[1px] border-gray-600 ${
+            className={`px-2 md:px-4 py-2  text-xs md:text-sm rounded-full border-[2px] border-gray-600 ${
               activeTab.tab === tab.tab ? "dark:bg-black text-white" : ""
             }`}
             onClick={() => setActiveTab(tab)}

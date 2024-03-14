@@ -47,13 +47,13 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
       ${pathname === "/subscribed" && "hidden"} 
       `}
     >
-      <div className="w-full rounded-lg flex justify-between sm:justify-between items-center">
+      <div className="flex items-center justify-between w-full rounded-lg sm:justify-between">
         <h1
           className={` mb-0   ${
             pathname === "/subscribe"
               ? " w-full flex  justify-center "
               : "headText"
-          }  justify-center rounded-[14px] text-[14px] dark:text-white text-gray-950 font-bold uppercase`}
+          }  justify-center rounded-[14px] text-xs md:text-sm dark:text-white text-gray-950 font-bold uppercase`}
         >
           {currentRouteDisplayName}
         </h1>

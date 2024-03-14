@@ -103,7 +103,7 @@ const ResumeBuilder = () => {
       dispatch(resetResume(resumeData.state));
 
       if (resumeData.state.jobPosition !== "" && session?.user?.email) {
-        setResumeGenerated(false)
+        setResumeGenerated(false);
         dispatch(setState({ name: "resumeLoading", value: true }));
         dispatch(setQuantifyingExperience(quantifyingExperience));
         dispatch(setId(""));
@@ -175,7 +175,7 @@ const ResumeBuilder = () => {
         } else {
           myJSON = await JSON.parse(res.result);
         }
-        
+
         const basicObj = {
           ...myJSON,
           name: userData?.firstName + " " + userData?.lastName,
@@ -288,7 +288,7 @@ const ResumeBuilder = () => {
       }
       setFinished(true);
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
-      setResumeGenerated(true)
+      setResumeGenerated(true);
       dispatch(setState({ name: "resumeLoading", value: false }));
       dispatch(setWorkExperience(temp));
     }
@@ -329,7 +329,11 @@ const ResumeBuilder = () => {
   };
 
   useEffect(() => {
-    if (resumeGenerated && !resumeData.state.resumeLoading && resumeData?.name) {
+    if (
+      resumeGenerated &&
+      !resumeData.state.resumeLoading &&
+      resumeData?.name
+    ) {
       saveResumeToDB();
       setFinished(true);
     }
@@ -355,9 +359,9 @@ const ResumeBuilder = () => {
       <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} />
       {showTemplatePopup && (
         <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black/90">
-          <div className="flex flex-col gap-4 py-4 bg-gray-800 rounded-lg">
-            <div className="flex items-center justify-between w-full px-4">
-              <h1 className="font-semibold xs:text-xl md:text-2xl ">
+          <div className="flex flex-col gap-4 p-4 bg-gray-800 rounded-lg">
+            <div className="flex flex-row items-center justify-between w-full">
+              <h1 className="font-semibold xs:text-base md:text-2xl ">
                 Select a Design for your Resume
               </h1>
               <h1
@@ -367,7 +371,7 @@ const ResumeBuilder = () => {
                 {crossIcon}
               </h1>
             </div>
-            <div className="px-4">
+            <div className="text-xs">
               <p>Pick a template that aligns with your professional image.</p>
             </div>
             <div className=" xs:w-[300px] md:w-[44rem] lg:w-[55rem] xl:w-[55rem] rounded-xl z-50">
@@ -402,9 +406,7 @@ const ResumeBuilder = () => {
               Auto saved
             </div>
           )}
-          <GenerateResume
-            getConsent={getConsent}
-          />
+          <GenerateResume getConsent={getConsent} />
           <div className="fixed bottom-0 flex items-center justify-center">
             <Confetti active={confettingRunning} config={confettiConfig} />
           </div>
@@ -414,12 +416,12 @@ const ResumeBuilder = () => {
                 We have generated free text basic resume for you for further
                 design templates click here
               </p> */}
-              <div className="flex items-center gap-3 justify-between">
+              <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gaap-3">
-                  <h2 className="my-3 flex items-center text-base font-bold dark:text-gray-100 text-gray-950">
+                  <h2 className="flex items-center my-3 text-base font-bold dark:text-gray-100 text-gray-950">
                     Template Selection{" "}
                   </h2>
-                  <div className="group md:ml-1 cursor-pointer relative inset-0">
+                  <div className="relative inset-0 cursor-pointer group md:ml-1">
                     {infoSmallIcon}
                     <div className="w-40 md:w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:left-1 md:left-4 xs:-top-[92px]  md:-top-[5.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-bl-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                       Select any template below to instantly update your resume
@@ -430,7 +432,7 @@ const ResumeBuilder = () => {
 
                 <Link
                   href="/resume-builder/templates"
-                  className="overflow-hidden text-white mt-3 no-underline rounded-lg"
+                  className="mt-3 overflow-hidden text-white no-underline rounded-lg"
                 >
                   <div
                     className={` font-bold bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 text-[15px]  from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center py-2 px-3`}
