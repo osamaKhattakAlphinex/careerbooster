@@ -74,7 +74,7 @@ const Template = () => {
     <div className="lg:ml-[234px] ml-0 px-[15px]">
       <RecentResumeCard componentRef={componentRef} templateId={templateId} />
       <div>
-        <div className="flex items-center justify-between pt-4 pb-6">
+        <div className="flex items-center xs:flex-col md:flex-row justify-between pt-4 pb-6">
           <h2 className="text-sm font-bold text-gray-900 uppercase dark:text-white">
             Templates Designs
           </h2>
@@ -180,7 +180,6 @@ const Template = () => {
         {resume &&
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
-
               <div className="xl:w-[82%] lg:w-[75%] md:w-[80%] xs:w-full xs:flex xs:justify-center md:inline-block xs:pb-0 md:pb-4 ">
                 <Link
                   href="/resume-builder"

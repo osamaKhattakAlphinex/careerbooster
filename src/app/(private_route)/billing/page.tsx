@@ -27,7 +27,7 @@ const Page = () => {
     getCredits();
   }, [userData]);
   return (
-    <div className=" ml-[234px] p-10 ">
+    <div className=" md:ml-[234px] p-10 ">
       <div className=" flex flex-col gap-4">
         <h2 className=" text-xl font-bold dark:text-gray-100 text-gray-950">
           Billing Details
@@ -53,7 +53,7 @@ const Page = () => {
             <div className="flex-1 dark:text-gray-100 text-gray-950">
               <strong>Email</strong>
             </div>
-            <div className="flex-1 dark:text-gray-100 text-gray-950">
+            <div className="flex-1  dark:text-gray-100 text-gray-950">
               <span>{userData?.email}</span>
             </div>
           </div>

@@ -12,12 +12,9 @@ import { infoSmallIcon } from "@/helpers/iconsProvider";
 interface Props {
   getConsent: () => void;
 }
-const GenerateResume = ({
-  getConsent,
-}:
-Props) => {
+const GenerateResume = ({ getConsent }: Props) => {
   const [showInstruction, setShowInstruction] = useState<boolean>(false);
-  
+
   // const [quantifyingExperience, setQuantifyingExperience] =
   //   useState<boolean>(true);
   // Redux
