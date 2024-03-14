@@ -825,4 +825,5 @@ const PersonalizedEmailBot = () => {
     </div>
   );
 };
+
 export default PersonalizedEmailBot;
