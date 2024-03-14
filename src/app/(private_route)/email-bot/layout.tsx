@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const metadata: Metadata = {
-  title: "Email Assistant - CareerBooster.AI",
+  title: "Email Assistant - CareerBooster.ai",
   description: "Email Assistant - CareerBooster.ai | Developed by NausalTech",
 };
 

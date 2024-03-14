@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const metadata: Metadata = {
-  title: "Profile Review - CareerBooster.AI",
+  title: "Profile Review - CareerBooster.ai",
   description: "Profile Review - CareerBooster.ai | Developed by NausalTech",
 };
 

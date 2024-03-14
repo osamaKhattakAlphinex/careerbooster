@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const metadata: Metadata = {
-  title: "Linkedin Optimizer - CareerBooster.AI",
+  title: "Linkedin Optimizer - CareerBooster.ai",
   description:
     "Linkedin Optimizer - CareerBooster.ai | Developed by NausalTech",
 };
