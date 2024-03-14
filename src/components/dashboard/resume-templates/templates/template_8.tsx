@@ -168,7 +168,7 @@ const ResumeTemplate8 = () => {
                   {/* </a> */}
                 </li>
                 <li className="flex flex-row items-start justify-start gap-1  hover:shadow-md hover:bg-gray-100 ">
-                  <div className="">
+                  <div className="p-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -186,27 +186,22 @@ const ResumeTemplate8 = () => {
                   </div>
                   <EditableField
                     value={
-                      resume?.contact?.country
-                        ? resume?.contact?.country
-                        : "abc"
+                      resume?.contact?.street ? resume?.contact?.street : ""
                     }
-                    // overrideValue={resume?.name ? resume?.name : "Full Name"}
                     onSave={(value: string) => {
-                      if (value !== resume.contact.country) {
+                      if (value !== resume.contact.street) {
                         updateSaveHook.updateAndSaveBasicInfo({
-                          country: value,
+                          street: value,
                         });
                       }
                     }}
                   />
-                  {resume?.contact?.country ? "," : ""}
                   <EditableField
                     value={
                       resume?.contact?.cityState
                         ? resume?.contact?.cityState
                         : "https://www.linkedin.com/"
                     }
-                    // overrideValue={resume?.name ? resume?.name : "Full Name"}
                     onSave={(value: string) => {
                       if (value !== resume.contact.cityState) {
                         updateSaveHook.updateAndSaveBasicInfo({
@@ -215,14 +210,27 @@ const ResumeTemplate8 = () => {
                       }
                     }}
                   />
-                  {resume.contact.postalCode ? "," : ""}
+
+                  {resume?.contact?.country ? "," : ""}
+
+                  <EditableField
+                    value={
+                      resume?.contact?.country ? resume?.contact?.country : ""
+                    }
+                    onSave={(value: string) => {
+                      if (value !== resume.contact.country) {
+                        updateSaveHook.updateAndSaveBasicInfo({
+                          country: value,
+                        });
+                      }
+                    }}
+                  />
                   <EditableField
                     value={
                       resume?.contact?.postalCode
                         ? resume?.contact?.postalCode
-                        : "1122"
+                        : ""
                     }
-                    // overrideValue={resume?.name ? resume?.name : "Full Name"}
                     onSave={(value: string) => {
                       if (value !== resume.contact.postalCode) {
                         updateSaveHook.updateAndSaveBasicInfo({
