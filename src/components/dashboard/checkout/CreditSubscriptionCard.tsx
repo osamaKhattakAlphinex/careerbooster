@@ -22,7 +22,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
   viewOnly,
 }) => {
   const [subscribing, setSubscribing] = useState(false);
-  const [showPaymentDialog, setShowPaymentDialog] = useState(true);
+  const [showPaymentDialog, setShowPaymentDialog] = useState(false);
   const [coupon, setCoupon] = useState("");
   const [couponError, setCouponError] = useState("");
   const [msgLoading, setMsgLoading] = useState<boolean>(false);
@@ -290,7 +290,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
       )}
       {showPaymentDialog && (
         <div className="fixed inset-0 z-40 flex flex-col items-center justify-center w-screen h-screen p-3 bg-black/50">
-          <div className="z-50 flex flex-col justify-between w-full gap-4 p-6 bg-gray-800 rounded-lg md:w-1/3">
+          <div className="z-50 flex flex-col justify-between w-full gap-4 p-6 bg-gray-800 rounded-lg md:w-1/2 lg:w-1/3">
             <h3 className="mb-4 text-base font-semibold text-center md:text-xl">
               Choose Payment Method
             </h3>
@@ -425,7 +425,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
             </div>
           </div>
           {showPaypalPopup && (
-            <div className="absolute z-[100] bg-gray-900 p-10 w-1/2 rounded-lg">
+            <div className="absolute z-[100] bg-gray-900 px-1 py-10 md:px-10 w-full md:w-1/2 lg:w-1/3 rounded-lg">
               <span
                 className="absolute cursor-pointer right-2 top-2"
                 onClick={() => setShowPaypalPopup(false)}
