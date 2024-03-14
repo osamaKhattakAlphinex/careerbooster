@@ -4,6 +4,7 @@ import RecentDocumentsCard from "@/components/dashboard/RecentDocumentsCard";
 import DashboardBot from "@/components/dashboard/DashboardBot";
 
 // new version (dashboard design)
+
 const Dashboard = () => {
   return (
     <div className="w-full sm:w-full z-1000 ">
