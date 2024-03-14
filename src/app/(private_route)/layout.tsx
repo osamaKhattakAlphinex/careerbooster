@@ -19,16 +19,12 @@ interface Props {
   children: ReactNode;
 }
 
-
-
 export const metadata: Metadata = {
   title: "CareerBooster.AI",
   description: "Dashboard - CareerBooster.ai | Developed by NausalTech",
 };
 
-
 export default async function Privatelayout({ children }: Props) {
-  
   const session = await getServerSession(authOptions);
 
   const user = session?.user as { role: string } | undefined;
@@ -45,7 +41,6 @@ export default async function Privatelayout({ children }: Props) {
           <ProfileCreationLayer>
             <Header />
             <SideBar />
-
             <div className="max-w-7xl mx-auto ">{children}</div>
             <Footer />
             <ToastContainer />

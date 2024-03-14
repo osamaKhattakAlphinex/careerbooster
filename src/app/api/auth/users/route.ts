@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import User from "@/db/schemas/User";
-import { Education, WorkExperience } from "@/store/userDataSlice";
-
-
 
 export const POST = async (req: any) => {
   const body = await req.json();

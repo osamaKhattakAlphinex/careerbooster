@@ -298,7 +298,6 @@ const ConsultingBidsGenerator = () => {
               </div>
 
               {/* option */}
-
               <div className="text-sm text-[#615DFF] self-start">
                 {/* <button
               className="flex flex-row justify-start items-center gap-[10px]"
@@ -309,7 +308,6 @@ const ConsultingBidsGenerator = () => {
                   select options
                 </span>
               </div>
-
               <div className="flex flex-col gap-5 lg:px-0">
                 <label
                   htmlFor="default-radio-1"
@@ -372,7 +370,6 @@ const ConsultingBidsGenerator = () => {
                   ""
                 )}
               </div>
-
               {/* form */}
               <div className="flex flex-col items-start justify-between gap-5">
                 <div className="flex flex-col w-full">
@@ -402,7 +399,6 @@ const ConsultingBidsGenerator = () => {
                     className="w-full px-3 lg:px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px] pt-3"
                   />
                 </div>
-
                 <button
                   type="button"
                   disabled={
@@ -467,7 +463,6 @@ const ConsultingBidsGenerator = () => {
                             d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
                           />
                         </svg>
-
                         <span
                           className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
                         >
@@ -478,7 +473,6 @@ const ConsultingBidsGenerator = () => {
                   </span>
                 </button>
               </div>
-
               {show && (
                 <div className="mt-[40px] ">
                   <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-5">
