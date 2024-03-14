@@ -6,7 +6,6 @@ import StepTwo from "@/components/dashboard/profileReview/StepTwo";
 import StepThree from "@/components/dashboard/profileReview/StepThree";
 import StepFour from "@/components/dashboard/profileReview/StepFour";
 import StepFive from "@/components/dashboard/profileReview/StepFive";
-import StepSix from "@/components/dashboard/profileReview/StepSix";
 import ProfilePreview from "@/components/dashboard/profileReview/ProfilePreview";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveStep, setField } from "@/store/registerSlice";
@@ -14,13 +13,10 @@ import StepEight from "@/components/dashboard/profileReview/StepEight";
 import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
-
-import Link from "next/link";
 import { showSuccessToast } from "@/helpers/toast";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.Ai-Welcome",
 // };
-
 const ProfileReview = () => {
   const router = useRouter();
   const params = useSearchParams();
@@ -32,7 +28,7 @@ const ProfileReview = () => {
   const userData = useSelector((state: any) => state.userData);
 
   const reduxStep = register.activeStep;
-  console.log(reduxStep)
+  console.log(reduxStep);
   const handleSaveDetails = async () => {
     dispatch(setField({ name: "isSubmitting", value: true }));
     // make an object
@@ -79,7 +75,7 @@ const ProfileReview = () => {
 
   // function to return true, false based for next button
   const isNextDisabled = () => {
-    console.log(register.activeStep, register.stepTwo.isValid)
+    console.log(register.activeStep, register.stepTwo.isValid);
     if (register.activeStep === 1 && register.stepOne.isValid === false) {
       return true;
     } else if (
@@ -145,9 +141,7 @@ const ProfileReview = () => {
                           ? "xs:justify-between"
                           : "xs:justify-end "
                       } items-center`}
-                    >
-                      
-                    </div>
+                    ></div>
                     {register.activeStep === 1 && (
                       <>
                         {register.activeStep === 1 && (

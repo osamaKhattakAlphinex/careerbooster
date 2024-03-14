@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
-import { TwitterPicker, ColorResult } from "react-color";
+import { ColorResult } from "react-color";
 import useGetSummary from "@/hooks/useGetSummary";
 import Toolbar from "@/components/dashboard/Toolbar";
 import EditableField from "@/components/dashboard/EditableField";

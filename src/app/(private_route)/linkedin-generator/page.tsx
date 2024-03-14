@@ -28,7 +28,6 @@ export default function LinkedInPage() {
           </div>
           <div className="mt-5">
             <HeadlineGenerator creditLimits={creditLimits} />
-
             <AboutGenerator creditLimits={creditLimits} />
             <JDGenerator creditLimits={creditLimits} />
             <KeywordsGenerator creditLimits={creditLimits} />
