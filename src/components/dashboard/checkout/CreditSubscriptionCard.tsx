@@ -48,8 +48,6 @@ const CreditSubscriptionCard: React.FC<Props> = ({
       script.type = "text/javascript";
       script.src = "https://www.paypal.com/sdk/js?client-id=AV4R8goafRZiY27ePTNRqCINe0C12EtQBk9bKeNuF7go3KYTv9NJqlkbjmqf4lAajJ0AfCEsdQ3ntWgt";
       script.async = true;
-
-
       document.body.appendChild(script);
     };
     addPaypalScript();
