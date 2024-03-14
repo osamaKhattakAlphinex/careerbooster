@@ -4,10 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   EditIcon,
   addressIcon,
-  deleteIcon,
-  linkdinIcon,
-  newLinkedInIcon,
-  plusSimpleIcon,
+ 
 } from "@/helpers/iconsProvider";
 import { setActiveStep, setStepFive } from "@/store/registerSlice";
 import { Education, WorkExperience } from "@/store/userDataSlice";

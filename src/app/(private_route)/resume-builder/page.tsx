@@ -321,9 +321,11 @@ const ResumeBuilder = () => {
   };
 
   useEffect(() => {
+    if(!resumeData.state.resumeLoading && resumeData?.name){
+      setFinished(true);
+    }
     if (resumeGenerated && !resumeData.state.resumeLoading && resumeData?.name) {
       saveResumeToDB();
-      setFinished(true);
     }
   }, [resumeData?.state?.resumeLoading]);
 
