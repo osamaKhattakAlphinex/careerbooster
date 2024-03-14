@@ -1,5 +1,3 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
 import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import TrainBot from "@/db/schemas/TrainBot";

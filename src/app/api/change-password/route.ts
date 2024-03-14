@@ -10,7 +10,7 @@ export async function POST(req: any) {
     const { email, password } = body;
 
     const user = await User.findOne({ email });
-
+    
     if (!user) {
       return NextResponse.json(
         { message: "User not found", success: false },
