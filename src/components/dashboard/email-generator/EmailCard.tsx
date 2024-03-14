@@ -22,7 +22,7 @@ export const EmailCard = (props: EmailCardProps) => {
   return (
     <div className="py-4 min-h-[308px] bg-white shadow-md card_1 text-gray-950 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
       <div className="flex">
-        <h2 className="mb-2 text-xl">
+        <h2 className="mb-2 text-base md:text-lg">
           <strong>{props.cardHeading}</strong>
         </h2>
         <div className="text-[#000]  group relative rounded-full h-8  flex  items-center px-[16px] py-[6px]  ml-auto xs:text-[10px] md:text-[12px]  font-bold ">
@@ -55,13 +55,13 @@ export const EmailCard = (props: EmailCardProps) => {
           {props.isEditing ? (
             <div
               onBlur={props.removeEdit}
-              className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-[10px]"
+              className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-2.5"
               id={props.editorId}
               contentEditable="true"
             ></div>
           ) : (
             <div
-              className=" text-gray-950"
+              className="text-xs text-justify break-words text-gray-950 md:text-sm"
               dangerouslySetInnerHTML={{
                 __html: props.streamedData,
               }}

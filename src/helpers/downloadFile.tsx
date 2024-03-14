@@ -218,7 +218,7 @@ h2:empty {
           onClick={templateCall}
           type="button"
           disabled={loading}
-          className={`w-full sm:max-w-max sm:w-48 lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300  group${
+          className={`w-full sm:max-w-max sm:w-48 lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300  group ${
             loading ? "cursor-not-allowed opacity-50" : ""
           }`}
         >
