@@ -416,18 +416,13 @@ export default function CoverLetterPage() {
                 <button
                   type="button"
                   disabled={
-                    msgLoading ||
-                    !session?.user?.email ||
-                    !aiInputUserData ||
                     selectedOption === "" ||
                     (selectedOption === "file" && selectedFile === "") ||
                     jobDescription === ""
                   }
                   onClick={handleGenerate}
-                  className={`dark:bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
-                    (msgLoading ||
-                      !session?.user?.email ||
-                      !aiInputUserData ||
+                  className={`cursor-pointer dark:bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                    (
                       selectedOption === "" ||
                       (selectedOption === "file" && selectedFile === "") ||
                       jobDescription === "") &&
@@ -473,7 +468,7 @@ export default function CoverLetterPage() {
                         </svg>
 
                         <span
-                          className={`dark:text-gray-100  text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+                          className={`dark:text-gray-100  text-gray-950 ml-3 text-[15px] font-semibold `}
                         >
                           Generate Cover Letter
                         </span>

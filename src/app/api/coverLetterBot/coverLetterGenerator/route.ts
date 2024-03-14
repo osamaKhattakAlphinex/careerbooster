@@ -54,11 +54,8 @@ export async function POST(req: any) {
         );
       }
     }
-
-    // const dataset = "linkedin.genearteConsultingBid";
     const dataset = "coverLetter.write";
     const model = await getTrainedModel(dataset);
-    //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
     // fetch prompt from db
     await startDB();
@@ -93,7 +90,6 @@ export async function POST(req: any) {
             Email : ${userData.email}
             Phone : ${userData.phone}
             `;
-console.log(model)
     const response: any = await openai.chat.completions.create({
       model:model? model: "gpt-3.5-turbo",
       stream: true,

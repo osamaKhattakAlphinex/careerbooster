@@ -13,7 +13,8 @@ export async function postHeadlines(payload: any) {
   } else if (!user.linkedInHeadlines || user.linkedInHeadlines.length === 0) {
     user.linkedInHeadlines = [payload];
   } else {
-    user.linkedInHeadlines.push(payload);
+    user.linkedInHeadlines.unshift(payload)
+    // user.linkedInHeadlines.push(payload);
   }
   const response = await user.save();
   return response;

@@ -14,7 +14,8 @@ export async function postCoverLetter(payload: any) {
   } else if (!user.coverLetters || user.coverLetters.length === 0) {
     user.coverLetters = [payload];
   } else {
-    user.coverLetters.push(payload);
+    user.coverLetters.unshift(payload)
+    // user.coverLetters.push(payload);
   }
   await user.save();
 }

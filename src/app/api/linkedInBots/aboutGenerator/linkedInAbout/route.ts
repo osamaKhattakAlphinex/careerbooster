@@ -13,7 +13,8 @@ export async function postAbouts(payload: any) {
   } else if (!user.linkedInAbouts || user.linkedInAbouts.length === 0) {
     user.linkedInAbouts = [payload];
   } else {
-    user.linkedInAbouts.push(payload);
+    user.linkedInAbouts.unshift(payload)
+    // user.linkedInAbouts.push(payload);
   }
   const response = await user.save();
   return response;

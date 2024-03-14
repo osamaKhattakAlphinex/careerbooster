@@ -16,7 +16,8 @@ export async function postJobDescriptions(payload: any) {
   ) {
     user.linkedInJobDescriptions = [payload];
   } else {
-    user.linkedInJobDescriptions.push(payload);
+    user.linkedInJobDescriptions.unshift(payload)
+    // user.linkedInJobDescriptions.push(payload);
   }
   const response = await user.save();
   return response;
