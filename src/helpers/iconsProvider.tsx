@@ -5,7 +5,7 @@ export const EditIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-4 h-4"
+    className="w-3 h-3 md:w-4 md:h-4"
   >
     <path
       strokeLinecap="round"
@@ -491,7 +491,7 @@ export const starsIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-8 h-8 float-left mr-2"
+    className="float-left w-8 h-8 mr-2"
   >
     <path
       strokeLinecap="round"
@@ -973,7 +973,7 @@ export const facebookIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-5 text-white h-6"
+    className="w-5 h-6 text-white"
   >
     <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z" />
   </svg>
@@ -990,7 +990,7 @@ export const bellIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-5   h-5"
+    className="w-5 h-5"
   >
     <path
       strokeLinecap="round"
@@ -1004,14 +1004,14 @@ export const appleIcon = (
     xmlns="http://www.w3.org/2000/svg"
     height="1em"
     viewBox="0 0 384 512"
-    className="w-5 text-white  h-5"
+    className="w-5 h-5 text-white"
   >
     <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
   </svg>
 );
 export const searchIcon = (
   <svg
-    className="w-5 h-4 text-gray-300 font-thin dark:text-gray-400"
+    className="w-5 h-4 font-thin text-gray-300 dark:text-gray-400"
     aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -1163,7 +1163,7 @@ export const sunIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-5 text-white  h-5"
+    className="w-5 h-5 text-white"
   >
     <path
       strokeLinecap="round"
@@ -1292,7 +1292,7 @@ export const eyeIcon = (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="currentColor"
-    className="w-4 h-4  "
+    className="w-4 h-4 "
   >
     <path
       strokeLinecap="round"

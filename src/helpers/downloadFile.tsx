@@ -185,7 +185,6 @@ h2:empty {
        
         </style>
         ${html}`;
-
     }
     setLoading(true);
     await fetch(`/api/template`, {
@@ -219,14 +218,11 @@ h2:empty {
           onClick={templateCall}
           type="button"
           disabled={loading}
-          className={`flex flex-row gap-2 group-hover:opacity-80 items-center xs:flex-1 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full  bg-[#e4e9f7]  dark:bg-[#18181b] text-gray-900  dark:text-gray-300 border-[1px] border-[#f0f0f0]  ${
+          className={`w-full sm:max-w-max sm:w-48 lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300  group${
             loading ? "cursor-not-allowed opacity-50" : ""
           }`}
-          style={{
-            borderColor: "white",
-          }}
         >
-          <div>
+          <div className="flex flex-row items-center justify-center gap-2">
             {preview ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -234,7 +230,7 @@ h2:empty {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-4 h-4"
+                className="w-3 h-3 md:w-4 md:h-4 dark:text-gray-100 text-gray-950"
               >
                 <path
                   strokeLinecap="round"
@@ -254,7 +250,7 @@ h2:empty {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-4 h-4"
+                className="w-3 h-3 md:w-4 md:h-4 dark:text-gray-100 text-gray-950"
               >
                 <path
                   strokeLinecap="round"
@@ -263,8 +259,14 @@ h2:empty {
                 />
               </svg>
             )}
+            <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
+              {preview
+                ? "Print Preview "
+                : loading
+                ? "Downloading..."
+                : "Download"}
+            </span>
           </div>
-          {preview ? "Print Preview " : loading ? "Downloading..." : "Download"}
         </button>
       </div>
     </>
