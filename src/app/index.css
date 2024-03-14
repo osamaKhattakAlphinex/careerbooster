@@ -10,6 +10,5 @@
     }
         .h3-t {
             @apply font-semibold text-[#000] dark:text-[#fff]  text-center leading-5 text-3xl ;
-        }
-        
+        }   
 }
