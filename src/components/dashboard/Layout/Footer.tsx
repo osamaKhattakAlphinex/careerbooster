@@ -53,7 +53,7 @@ const Footer = () => {
           2024 © CareerBooster.Ai
         </div>
         <div className="flex xs:flex-wrap xs:w-full md:w-fit md:flex-nowrap md:gap-[22px]  items-center">
-          <div className="flex gap-4">
+          <div className="flex self-center justify-between w-full gap-4 my-2">
             <Link
               href={"/terms-and-conditions"}
               className="dark:text-gray-100 whitespace-nowrap text-gray-950 no-underline md:text-[14px] text-[10px]"
@@ -90,7 +90,7 @@ const Footer = () => {
               </a>
             ))}
           </div>
-          <div className="flex w-full justify-between md:hidden">
+          <div className="flex justify-between w-full md:hidden">
             <div className="dark:text-gray-100 whitespace-nowrap text-gray-950 h-7 flex flex-row items-center flex-wrap gap-[10px] lg:gap-[22px]  md:text-[14px] text-[10px]">
               2024 © CareerBooster.Ai
             </div>

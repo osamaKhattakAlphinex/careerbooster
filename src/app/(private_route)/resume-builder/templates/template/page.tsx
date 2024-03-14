@@ -75,7 +75,7 @@ const Template = () => {
       <RecentResumeCard componentRef={componentRef} templateId={templateId} />
       <div>
         <div className="flex items-center justify-between pt-4 pb-6">
-          <h2 className="text-sm font-bold text-gray-900 uppercase dark:text-white">
+          <h2 className="text-xs font-bold text-gray-900 uppercase md:text-sm dark:text-white">
             Templates Designs
           </h2>
           <Link
@@ -83,7 +83,7 @@ const Template = () => {
             className="overflow-hidden text-white no-underline rounded-lg"
           >
             <div
-              className={` font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center py-1 px-2`}
+              className={`text-xs font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center p-2`}
             >
               View All Templates<i className="">{chevronRight}</i>
             </div>
@@ -180,11 +180,10 @@ const Template = () => {
         {resume &&
           (resume?.name || resume?.contact?.email || resume?.summary) && (
             <>
-
               <div className="xl:w-[82%] lg:w-[75%] md:w-[80%] xs:w-full xs:flex xs:justify-center md:inline-block xs:pb-0 md:pb-4 ">
                 <Link
                   href="/resume-builder"
-                  // className="overflow-hidden w-2 text-white no-underline rounded-lg"
+                  // className="w-2 overflow-hidden text-white no-underline rounded-lg"
                   className={` dark:bg-gradient-to-r no-underline w-fit hover:from-purple-800 hover:to-pink-600 from-[#b324d7]  to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-2 px-[26px]  rounded-full`}
                 >
                   <svg
