@@ -36,7 +36,6 @@ const LinkedInAboutCardSingle = ({
     if (source != "") {
       router.replace("/linkedin-generator/about");
     }
-    console.log("card", card);
     return dispatch(setLinkedInAbout(card));
   };
   const [confirmationModal, setConfirmationModal] = useState(false);

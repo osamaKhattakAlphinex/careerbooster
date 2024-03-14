@@ -34,7 +34,6 @@ const LinkedInHeadlineCardSingle = ({
   const pathname: any = usePathname();
   const [confirmationModal, setConfirmationModal] = useState(false);
   const handleOnView = async (card: any) => {
-    console.log("source", source);
     if (source != "") {
       router.replace("/linkedin-generator/headline");
     }
