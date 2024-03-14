@@ -128,7 +128,7 @@ const ResumeTemplate2 = () => {
       {/* contacts */}
       <div className="relative w-full py-1">
         <ul
-          className="flex flex-row items-center justify-around bg-gray-300  px-4 py-2 md:flex-row rounded-xl "
+          className="flex flex-row xs:flex-col xs:gap-2 items-center justify-around bg-gray-300  px-4 py-2 md:flex-row rounded-xl "
           // style={{ backgroundColor: color_second }}
         >
           <li className="flex flex-row items-center gap-1 text-xs hover:shadow-md text-gray-950 hover:bg-gray-100 w-25% ">

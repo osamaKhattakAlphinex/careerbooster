@@ -129,8 +129,8 @@ const ResumeTemplate6 = ({
               }}
             />
           </h3>
-          <ul className="flex  flex-col xs:flex-col justify-between gap-3 pl-0 my-2 text-xs break-all md:flex-row">
-            <li className="hover:shadow-md hover:bg-gray-100 text-xs   flex flex-row gap-1  items-center justify-start w-[20%]">
+          <ul className="flex  flex-col xs:flex-col justify-between  pl-0 my-2 text-xs break-all md:flex-row">
+            <li className="hover:shadow-md hover:bg-gray-100 text-xs   flex flex-row gap-1  items-center justify-start md:w-[20%] xs:w-full ">
               <div className="p-1">{phoneIcon}</div>
               <EditableField
                 value={
@@ -145,7 +145,7 @@ const ResumeTemplate6 = ({
                 }}
               />
             </li>
-            <li className="w-[25%] hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-xs ">
+            <li className="md:w-[25%] xs:w-full hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-xs ">
               <div className="p-1">{emailIcon}</div>
               <EditableField
                 value={
@@ -160,7 +160,7 @@ const ResumeTemplate6 = ({
                 }}
               />
             </li>
-            <li className="w-[25%] flex flex-row items-center justify-start gap-1 text-xs hover:shadow-md hover:bg-gray-100">
+            <li className=" md:w-[25%] xs:w-full flex flex-row items-center justify-start gap-1 text-xs hover:shadow-md hover:bg-gray-100">
               <div className="p-1">
                 <svg
                   width="16"
@@ -197,8 +197,8 @@ const ResumeTemplate6 = ({
               />
               {/* </a> */}
             </li>
-            <li className="w-[25%] flex flex-row items-center justify-center gap-1 text-xs text-gray-950  hover:shadow-md hover:bg-gray-100 w-25%">
-              <div className="">
+            <li className="  md:w-[25%] xs:w-full flex flex-row items-center justify-start gap-1 text-xs hover:shadow-md hover:bg-gray-100">
+              <div className="p-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -262,7 +262,7 @@ const ResumeTemplate6 = ({
           {/* EXECUTIVE SUMMARY */}
           <div className="flex flex-col flex-wrap w-full ">
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-            <h3 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+            <h3 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
               <EditableField
                 value={
                   resume?.headings?.summary
@@ -280,7 +280,10 @@ const ResumeTemplate6 = ({
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
 
             <Toolbar regenrateSummary={getSummary}>
-              <div className="my-2 text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed ">
+              <div
+                className="text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed  "
+                // style={{ width: "60%" }}
+              >
                 <EditableField
                   type="textarea"
                   value={
@@ -307,7 +310,7 @@ const ResumeTemplate6 = ({
             {resume?.primarySkills && resume?.primarySkills.length > 0 && (
               <>
                 <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-                <h3 className="flex flex-row items-center gap-2 my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+                <h3 className="flex flex-row flex-wrap items-center gap-2 my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
                   <EditableField
                     value={
                       resume?.headings?.primarySkills

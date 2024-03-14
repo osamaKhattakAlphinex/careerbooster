@@ -110,7 +110,7 @@ const ResumeTemplate9 = () => {
           </h3>
         </div>
         <div
-          className="relative flex items-center bg-[#1a202c] hover:text-black justify-center mx-4 my-2 text-center text-white rounded-full w-28 h-28 xs:w-20n xs:h-20 md:w-32 md:h-32 md:my-0"
+          className="relative flex items-center bg-[#1a202c] hover:text-black justify-center mx-4 my-2 text-center text-white rounded-full w-28 h-28 xs:w-32 xs:h-32 md:w-32 md:h-32 md:my-0"
           // style={{ backgroundColor: color }}
         >
           <span className="text-4xl font-semibold text-gray-100 hover:shadow-md hover:text-black hover:bg-gray-100">
@@ -137,8 +137,8 @@ const ResumeTemplate9 = () => {
         <div className="flex flex-col w-full px-8 md:pl-8 xs:mt-4">
           {/* contacts */}
 
-          <ul className="flex flex-row justify-between w-full gap-3 pl-0 text-xs break-all md:flex-row">
-            <li className="w-[20%] border-2 border-transparent hover:border-dashed hover:border-gray-500   hover:shadow-md hover:bg-gray-100 text-xs flex flex-row gap-1  items-center justify-start">
+          <ul className="flex flex-row xs:flex-col justify-between w-full gap-3 pl-0 text-xs break-all md:flex-row">
+            <li className="md:w-[20%] xs:w-full border-2 border-transparent hover:border-dashed hover:border-gray-500   hover:shadow-md hover:bg-gray-100 text-xs flex flex-row gap-1  items-center justify-start">
               <div className="p-1">{phoneIcon}</div>
               <EditableField
                 value={
@@ -153,7 +153,7 @@ const ResumeTemplate9 = () => {
                 }}
               />
             </li>
-            <li className="w-[25%] border-2 border-transparent hover:border-dashed hover:border-gray-500   hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-xs">
+            <li className="md:w-[25%] xs:w-full border-2 border-transparent hover:border-dashed hover:border-gray-500   hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-xs">
               <div className="p-1">{emailIcon}</div>
               <EditableField
                 value={
@@ -168,7 +168,7 @@ const ResumeTemplate9 = () => {
                 }}
               />
             </li>
-            <li className="w-[25%] border-2 border-transparent hover:border-dashed hover:border-gray-500   hover:shadow-md hover:bg-gray-100  flex flex-row gap-1  items-center justify-start text-xs">
+            <li className="md:w-[25%] xs:w-full border-2 border-transparent hover:border-dashed hover:border-gray-500   hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-xs">
               <div className="p-1">
                 <svg
                   width="16"
@@ -202,8 +202,8 @@ const ResumeTemplate9 = () => {
               />
               {/* </a> */}
             </li>
-            <li className="w-[25%] flex flex-row items-center justify-center gap-1 text-xs text-gray-950  hover:shadow-md hover:bg-gray-100 ">
-              <div className="">
+            <li className="md:w-[25%] xs:w-full border-2 border-transparent hover:border-dashed hover:border-gray-500   hover:shadow-md hover:bg-gray-100 flex flex-row gap-1  items-center justify-start text-xs ">
+              <div className="p-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

@@ -105,7 +105,7 @@ const ResumeTemplate1 = ({
         /> */}
       </div>
 
-      <div className="w-full">
+      <div className="w-full ">
         <div className="flex flex-col py-8 pl-6 pr-8 w-12/12">
           <h2 className="text-4xl font-bold border-2 border-transparent xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500 ">
             <EditableField
@@ -261,7 +261,7 @@ const ResumeTemplate1 = ({
           {/* EXECUTIVE SUMMARY */}
           <div className="flex flex-col flex-wrap w-full ">
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-            <h3 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+            <h3 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex flex-wrap p-r-[100px]">
               <EditableField
                 value={
                   resume?.headings?.summary
@@ -279,7 +279,7 @@ const ResumeTemplate1 = ({
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
 
             <Toolbar regenrateSummary={getSummary}>
-              <div className="my-2 text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed ">
+              <div className="my-2 text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed">
                 <EditableField
                   type="textarea"
                   value={

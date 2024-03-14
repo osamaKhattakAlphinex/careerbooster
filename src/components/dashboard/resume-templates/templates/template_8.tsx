@@ -74,7 +74,7 @@ const ResumeTemplate8 = () => {
       <div className="flex">
         <div className="flex flex-col items-center w-full px-8 pt-4">
           <div className="flex w-[100%] justify-between items-center">
-            <div className="flex flex-col w-[55%] ">
+            <div className="flex flex-col md:w-[55%] xs:w-auto ">
               <h2 className="text-4xl font-bold border-2 border-transparent xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500 ">
                 <EditableField
                   value={resume?.name ? resume?.name : "FULL NAME"}
