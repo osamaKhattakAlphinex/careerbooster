@@ -552,11 +552,78 @@ const ResumeTemplate1 = ({
                           }}
                         />
                       </h2>
-                      <h2 className="flex gap-2 text-sm font-semibold hover:cursor-default">
-                        {rec?.fromMonth + " " + rec?.fromYear} -{" "}
+                      <h2 className="flex gap-1 text-sm font-semibold hover:cursor-default">
+                        {/* {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue
                           ? "Present"
                           : `${rec?.toMonth} ${rec?.toYear}`}{" "}
+                        |{" "} */}
+                        {rec.fromMonth && (
+                          <EditableField
+                            rows={2}
+                            value={`${rec?.fromMonth}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { fromMonth: value },
+                                i
+                              );
+                            }}
+                          />
+                        )}
+                        {rec.fromYear && (
+                          <EditableField
+                            rows={2}
+                            value={`${rec?.fromYear}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { fromYear: value },
+                                i
+                              );
+                            }}
+                          />
+                        )}
+                        {rec.fromYear && <span>-</span>}
+                        {rec.toMonth && !rec.isContinue && (
+                          <EditableField
+                            rows={2}
+                            value={`${rec?.toMonth}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { toMonth: value },
+                                i
+                              );
+                            }}
+                          />
+                        )}
+                        {rec.toMonth && <span>&nbsp;</span>}
+                        {rec.toYear && !rec.isContinue && (
+                          <EditableField
+                            rows={2}
+                            value={`${rec?.toYear}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { toYear: value },
+                                i
+                              );
+                            }}
+                          />
+                        )}
+                        {rec.isContinue && (
+                          <EditableField
+                            rows={2}
+                            value={`${rec?.isContinue && "Present"}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { toYear: value },
+                                i
+                              );
+                              handlers.handleSaveExperienceDetail(
+                                { isContinue: false },
+                                i
+                              );
+                            }}
+                          />
+                        )}
                         |{" "}
                         <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
                           <EditableField

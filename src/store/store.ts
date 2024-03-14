@@ -9,7 +9,6 @@ import linkedInHeadLineSlice from "./linkedInHeadLineSlice";
 import linkedInJobDescriptionSlice from "./linkedInJobDescriptionSlice";
 import linkedInKeywordsSlice from "./linkedInKeywordsSlice";
 import linkedInAboutSlice from "./linkedInAboutSlice";
-import appSlice from "./appSlice";
 import creditLimitsSlice from "./creditLimitsSlice";
 
 const store = configureStore({
@@ -25,8 +24,7 @@ const store = configureStore({
     linkedinJobDesc: linkedInJobDescriptionSlice,
     linkedinKeywords: linkedInKeywordsSlice,
     creditLimits: creditLimitsSlice,
-    app: appSlice,
-  },
+    },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

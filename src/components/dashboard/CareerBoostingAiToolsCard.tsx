@@ -11,7 +11,7 @@ const tabOptions = [
   { name: "Resumes", value: "resumemaker" },
   { name: "Cover Letters", value: "cover-letter" },
   { name: "Emails", value: "email-bot" },
-  { name: "Consulting Bids", value: "consulting-bids" },
+  // { name: "Consulting Bids", value: "consulting-bids" },
 ];
 
 const CareerBoostingAiToolsCard = () => {

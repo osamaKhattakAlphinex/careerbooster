@@ -11,16 +11,13 @@ import { infoSmallIcon } from "@/helpers/iconsProvider";
 
 interface Props {
   getConsent: () => void;
-  availablePercentage: number;
 }
 const GenerateResume = ({
   getConsent,
-}: // availablePercentage,
+}:
 Props) => {
   const [showInstruction, setShowInstruction] = useState<boolean>(false);
-  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
-  const [percentageCalculated, setPercentageCalculated] =
-    useState<boolean>(false);
+  
   // const [quantifyingExperience, setQuantifyingExperience] =
   //   useState<boolean>(true);
   // Redux

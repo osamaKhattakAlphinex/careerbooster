@@ -138,7 +138,7 @@ const ResumeTemplate16 = () => {
           </div> */}
           {/* contacts */}
           <span className="w-full h-0 my-3 border-stylee"></span>
-          <h3 className="flex flex-row items-center w-full gap-2 my-1 text-base font-semibold text-white uppercase  rounded-sm border-2 border-transparent hover:border-dashed hover:border-gray-500">
+          <h3 className="flex flex-row items-center w-full gap-2 my-1 text-base font-semibold text-white uppercase border-2 border-transparent rounded-sm hover:border-dashed hover:border-gray-500">
             <EditableField
               value={
                 resume?.headings?.contact ? resume.headings.contact : "contact"
@@ -153,7 +153,7 @@ const ResumeTemplate16 = () => {
               }}
             />
           </h3>
-          <span className="w-full border-b-2 border-white mb-4"></span>
+          <span className="w-full mb-4 border-b-2 border-white"></span>
           <ul className="flex flex-col w-full gap-3 pl-0 mb-4 text-xs text-gray-300 break-all ">
             <li className="flex flex-row items-start justify-start gap-3 hover:shadow-md hover:text-black hover:bg-gray-100 ">
               <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
@@ -288,7 +288,7 @@ const ResumeTemplate16 = () => {
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
               <span className="w-full h-0 my-1 border-stylee"></span>
-              <h3 className="flex flex-row items-center w-full gap-2 my-1 text-base font-semibold text-white uppercase rounded-sm border-2 border-transparent hover:border-dashed hover:border-gray-500">
+              <h3 className="flex flex-row items-center w-full gap-2 my-1 text-base font-semibold text-white uppercase border-2 border-transparent rounded-sm hover:border-dashed hover:border-gray-500">
                 <EditableField
                   value={
                     resume?.headings?.primarySkills
@@ -305,7 +305,7 @@ const ResumeTemplate16 = () => {
                   }}
                 />
               </h3>
-              <span className="w-full border-b-2 border-white mb-4"></span>
+              <span className="w-full mb-4 border-b-2 border-white"></span>
               {resume?.primarySkills &&
               resume?.primarySkills.length > 0 &&
               !regenerating ? (
@@ -391,7 +391,7 @@ const ResumeTemplate16 = () => {
         </div>
         <div className="xs:w-full w-9/12 flex flex-col xs:bg-[#F1F1F1] md:bg-[#F1F1F1] px-4 md:px-8 pt-[1rem] md:pt-[1rem]">
           <div className="flex flex-col justify-start pb-6 ">
-            <h2 className="text-4xl font-bold text-center xs:text-2xl md:text-4xl hover:shadow-md hover:bg-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500">
+            <h2 className="text-4xl font-bold text-center border-2 border-transparent xs:text-2xl md:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500">
               <EditableField
                 value={resume?.name ? resume?.name : "FULL NAME"}
                 style={{ width: "fit-content" }}
@@ -525,11 +525,77 @@ const ResumeTemplate16 = () => {
                                 }}
                               />
                             </h2>
-                            <h2 className="hover:cursor-default text-xs font-semibold flex gap-2">
-                              {rec?.fromMonth + " " + rec?.fromYear} -{" "}
+                            <h2 className="flex gap-1 text-xs font-semibold hover:cursor-default">
+                              {/* {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                               {rec?.isContinue
                                 ? "Present"
                                 : `${rec?.toMonth} ${rec?.toYear}`}{" "}
+                              |{" "} */}
+                              {rec.fromMonth && (
+                                <EditableField
+                                  rows={2}
+                                  value={`${rec?.fromMonth}`}
+                                  onSave={(value: string) => {
+                                    handlers.handleSaveExperienceDetail(
+                                      { fromMonth: value },
+                                      i
+                                    );
+                                  }}
+                                />
+                              )}
+                              {rec.fromYear && (
+                                <EditableField
+                                  rows={2}
+                                  value={`${rec?.fromYear}`}
+                                  onSave={(value: string) => {
+                                    handlers.handleSaveExperienceDetail(
+                                      { fromYear: value },
+                                      i
+                                    );
+                                  }}
+                                />
+                              )}
+                              {rec.fromYear && <span>-</span>}
+                              {rec.toMonth && !rec.isContinue && (
+                                <EditableField
+                                  rows={2}
+                                  value={`${rec?.toMonth}`}
+                                  onSave={(value: string) => {
+                                    handlers.handleSaveExperienceDetail(
+                                      { toMonth: value },
+                                      i
+                                    );
+                                  }}
+                                />
+                              )}
+                              {rec.toYear && !rec.isContinue && (
+                                <EditableField
+                                  rows={2}
+                                  value={`${rec?.toYear}`}
+                                  onSave={(value: string) => {
+                                    handlers.handleSaveExperienceDetail(
+                                      { toYear: value },
+                                      i
+                                    );
+                                  }}
+                                />
+                              )}
+                              {rec.isContinue && (
+                                <EditableField
+                                  rows={2}
+                                  value={`${rec?.isContinue && "Present"}`}
+                                  onSave={(value: string) => {
+                                    handlers.handleSaveExperienceDetail(
+                                      { toYear: value },
+                                      i
+                                    );
+                                    handlers.handleSaveExperienceDetail(
+                                      { isContinue: false },
+                                      i
+                                    );
+                                  }}
+                                />
+                              )}
                               |{" "}
                               <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
                                 <EditableField
@@ -685,7 +751,7 @@ const ResumeTemplate16 = () => {
                                     }
                                   }}
                                 />
-                                <div className="my-2 w-full flex gap-2">
+                                <div className="flex w-full gap-2 my-2">
                                   <button
                                     className="bg-green-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 rounded-md h-9 text-white "
                                     onClick={() => {
@@ -781,7 +847,7 @@ const ResumeTemplate16 = () => {
                       >
                         {crossIcon1}
                       </div>
-                      <li className="hover:shadow-md text-xs font-medium hover:text-black text-gray-800 hover:tet-black hover:bg-gray-100 ">
+                      <li className="text-xs font-medium text-gray-800 hover:shadow-md hover:text-black hover:tet-black hover:bg-gray-100 ">
                         <EditableField
                           value={`${education?.fieldOfStudy}`}
                           style={{ width: "100%" }}
@@ -808,7 +874,7 @@ const ResumeTemplate16 = () => {
                       </li>
                       {(education.fromYear !== "" ||
                         education.toYear !== "") && (
-                        <li className="mb-4 text-xs flex italic text-gray-800">
+                        <li className="flex mb-4 text-xs italic text-gray-800">
                           {education.fromMonth && (
                             <EditableField
                               rows={2}

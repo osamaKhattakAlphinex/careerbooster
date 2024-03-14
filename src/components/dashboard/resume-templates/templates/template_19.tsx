@@ -57,10 +57,10 @@ const ResumeTemplate19 = ({
     }
   };
   return (
-    <div className="w-full first-page relative text-gray-900">
-      <div className="flex w-full justify-center items-center py-7 xs:py-2 md:py-7">
+    <div className="relative w-full text-gray-900 first-page">
+      <div className="flex items-center justify-center w-full py-7 xs:py-2 md:py-7">
         <div className="flex flex-col py-3">
-          <h2 className="text-2xl md:text-4xl font-serif text-center  font-bold hover:shadow-md hover:bg-gray-100">
+          <h2 className="font-serif text-2xl font-bold text-center md:text-4xl hover:shadow-md hover:bg-gray-100">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -86,14 +86,14 @@ const ResumeTemplate19 = ({
       <div className="flex border-t-2 border-gray-900">
         <div className=" w-4/12 xs:w-4/12 md:w-1/3 flex flex-col relative pt-3 inset-0  px-6 xs:px-0 md:px-6  bg-[#f8f8f8] ">
           {/* contacts */}
-          <span className="border-stylee w-full h-0 my-1"></span>
+          <span className="w-full h-0 my-1 border-stylee"></span>
           <h3 className="uppercase text-lg xs:text-[14px] xs:px-3 px-0 md:px-0  md:text-lg font-semibold w-full   pb-2 text-gray-800 py-1 rounded-sm flex items-center  flex-row gap-2 ">
             {/* {contactIcon} */}
             Contact
           </h3>
-          <span className="border-stylee w-full h-0 my-2"></span>
-          <ul className=" flex flex-col px-0 xs:px-3 md:px-0 gap-3 w-full mb-4 text-sm text-gray-800 break-all pl-0">
-            <li className="hover:shadow-md hover:bg-gray-100 hover:text-black text-sm  text-gray-800  flex flex-row justify-start items-start gap-3 ">
+          <span className="w-full h-0 my-2 border-stylee"></span>
+          <ul className="flex flex-col w-full gap-3 px-0 pl-0 mb-4 text-sm text-gray-800 break-all xs:px-3 md:px-0">
+            <li className="flex flex-row items-start justify-start gap-3 text-sm text-gray-800 hover:shadow-md hover:bg-gray-100 hover:text-black ">
               <div>{phoneIcon}</div>
               <EditableField
                 value={
@@ -108,7 +108,7 @@ const ResumeTemplate19 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md hover:text-black hover:bg-gray-100 flex text-gray-800  flex-row gap-3  justify-start items-start text-sm">
+            <li className="flex flex-row items-start justify-start gap-3 text-sm text-gray-800 hover:shadow-md hover:text-black hover:bg-gray-100">
               <div>{emailIcon}</div>
 
               <EditableField
@@ -124,7 +124,7 @@ const ResumeTemplate19 = ({
                 }}
               />
             </li>
-            <li className="hover:shadow-md text-sm hover:text-black hover:bg-gray-100 text-gray-800 flex flex-row gap-2  justify-start items-start">
+            <li className="flex flex-row items-start justify-start gap-2 text-sm text-gray-800 hover:shadow-md hover:text-black hover:bg-gray-100">
               <div>
                 <svg
                   fill="none"
@@ -160,11 +160,11 @@ const ResumeTemplate19 = ({
           {/* Skills */}
           {resume?.primarySkills && resume?.primarySkills.length > 0 && (
             <>
-              <span className="border-stylee w-full h-0  my-1"></span>
+              <span className="w-full h-0 my-1 border-stylee"></span>
               <h3 className="uppercase px-0 xs:px-3 md:px-0 text-lg xs:text-[14px] md:text-lg font-semibold w-full  pb-2 text-gray-900  py-1 rounded-sm flex items-center  flex-row gap-2 ">
                 Skills
               </h3>
-              <span className="border-stylee w-full h-0  my-1"></span>
+              <span className="w-full h-0 my-1 border-stylee"></span>
               {resume?.primarySkills &&
               resume?.primarySkills.length > 0 &&
               !regenerating ? (
@@ -172,7 +172,7 @@ const ResumeTemplate19 = ({
                   addSkill={handleAddSkills}
                   regenerateSkills={getPrimarySkills}
                 >
-                  <ul className="border-2 border-transparent  hover:border-dashed hover:border-gray-500   flex  xs:px-3 md:px-0   flex-col gap-1 mb-4 text-gray-800 w-full text-sm">
+                  <ul className="flex flex-col w-full gap-1 mb-4 text-sm text-gray-800 border-2 border-transparent hover:border-dashed hover:border-gray-500 xs:px-3 md:px-0">
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
                         className="hover:shadow-md hover:cursor-move parent xs:w-12/12 hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center  "
@@ -185,7 +185,7 @@ const ResumeTemplate19 = ({
                         draggable
                       >
                         <span className="w-1.5 h-1.5 xs:hidden md:block   xs bg-gray-800 rounded-full mr-3 xs:mr-0 md:mr-3"></span>
-                        <div className="flex flex-row w-full items-center justify-between text-sm ">
+                        <div className="flex flex-row items-center justify-between w-full text-sm ">
                           <EditableField
                             value={skill}
                             onSave={(value: string) => {
@@ -194,7 +194,7 @@ const ResumeTemplate19 = ({
                           />
                           <div
                             onClick={() => handlers.handleDeleteSkill(i)}
-                            className="w-4 h-4  cursor-pointer child"
+                            className="w-4 h-4 cursor-pointer child"
                           >
                             {crossIcon1}
                           </div>
@@ -208,7 +208,7 @@ const ResumeTemplate19 = ({
                             type="text"
                             value={primarySkill}
                             placeholder="Please add Skill"
-                            className="bg-white outline-none rounded-2xl px-2 w-full"
+                            className="w-full px-2 bg-white outline-none rounded-2xl"
                             autoFocus
                             onChange={(e) => setPrimarySkill(e.target.value)}
                             onKeyPress={(e) => {
@@ -218,7 +218,7 @@ const ResumeTemplate19 = ({
                             }}
                           />
                           <button
-                            className="bg-green-500 uppercase h-9 px-2 text-white rounded-r-2xl"
+                            className="px-2 text-white uppercase bg-green-500 h-9 rounded-r-2xl"
                             onClick={handleSaveSkills}
                           >
                             save
@@ -228,7 +228,7 @@ const ResumeTemplate19 = ({
                           onClick={() => {
                             setNewPrimarySkill(false);
                           }}
-                          className="bg-red-500 py-1 px-2 text-white rounded-full"
+                          className="px-2 py-1 text-white bg-red-500 rounded-full"
                         >
                           Cancel
                         </button>
@@ -249,14 +249,14 @@ const ResumeTemplate19 = ({
           )}
         </div>
 
-        <div className="w-full flex flex-col px-4 md:px-8 pt-6 xs:pt-6 md:pt-6 ">
-          <h2 className="uppercase text-xl xs:text-lg md:text-xl font-bold  rounded-sm text-gray-900 w-full py-1">
+        <div className="flex flex-col w-full px-4 pt-6 md:px-8 xs:pt-6 md:pt-6 ">
+          <h2 className="w-full py-1 text-xl font-bold text-gray-900 uppercase rounded-sm xs:text-lg md:text-xl">
             EXECUTIVE SUMMARY
           </h2>
-          <span className="border-stylee w-full h-0  my-2"></span>
+          <span className="w-full h-0 my-2 border-stylee"></span>
 
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-sm hover:shadow-md text-justify border-2 border-transparent hover:border-gray-500 hover:border-dashed ">
+            <div className="text-sm text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed ">
               <EditableField
                 type="textarea"
                 value={
@@ -280,8 +280,8 @@ const ResumeTemplate19 = ({
           </Toolbar>
 
           {/* Work Experience */}
-          <span className="border-stylee w-full h-0 my-3"></span>
-          <h2 className="uppercase text-xl font-bold   rounded-sm text-gray-900 w-full py-1">
+          <span className="w-full h-0 my-3 border-stylee"></span>
+          <h2 className="w-full py-1 text-xl font-bold text-gray-900 uppercase rounded-sm">
             WORK EXPERIENCE
           </h2>
 
@@ -292,7 +292,7 @@ const ResumeTemplate19 = ({
                 return (
                   <div
                     key={i}
-                    className="hover:border-dashed hover:border-gray-500 my-2  border-transparent border-2 hover:cursor-move hover:border-2"
+                    className="my-2 border-2 border-transparent hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
                     onDragStart={(e) =>
                       e.dataTransfer.setData("text/plain", i.toString())
                     }
@@ -301,7 +301,7 @@ const ResumeTemplate19 = ({
                     draggable
                   >
                     <div className="flex flex-col">
-                      <span className="hover:shadow-md text-lg hover:cursor-text hover:bg-gray-100">
+                      <span className="text-lg hover:shadow-md hover:cursor-text hover:bg-gray-100">
                         <EditableField
                           value={rec?.title}
                           style={{ width: "100%" }}
@@ -313,11 +313,77 @@ const ResumeTemplate19 = ({
                           }}
                         />
                       </span>
-                      <span className="hover:cursor-default text-sm">
-                        {rec?.fromMonth + " " + rec?.fromYear} -{" "}
+                      <span className="text-sm hover:cursor-default">
+                        {/* {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                         {rec?.isContinue
                           ? "Present"
                           : `${rec?.toMonth} ${rec?.toYear}`}{" "}
+                        |{" "} */}
+                        {rec.fromMonth && (
+                          <EditableField
+                            rows={2}
+                            value={`${rec?.fromMonth}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { fromMonth: value },
+                                i
+                              );
+                            }}
+                          />
+                        )}
+                        {rec.fromYear && (
+                          <EditableField
+                            rows={2}
+                            value={`${rec?.fromYear}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { fromYear: value },
+                                i
+                              );
+                            }}
+                          />
+                        )}
+                        {rec.fromYear && <span>-</span>}
+                        {rec.toMonth && !rec.isContinue && (
+                          <EditableField
+                            rows={2}
+                            value={`${rec?.toMonth}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { toMonth: value },
+                                i
+                              );
+                            }}
+                          />
+                        )}
+                        {rec.toYear && !rec.isContinue && (
+                          <EditableField
+                            rows={2}
+                            value={`${rec?.toYear}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { toYear: value },
+                                i
+                              );
+                            }}
+                          />
+                        )}
+                        {rec.isContinue && (
+                          <EditableField
+                            rows={2}
+                            value={`${rec?.isContinue && "Present"}`}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { toYear: value },
+                                i
+                              );
+                              handlers.handleSaveExperienceDetail(
+                                { isContinue: false },
+                                i
+                              );
+                            }}
+                          />
+                        )}
                         |{" "}
                         <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
                           <EditableField
@@ -378,18 +444,14 @@ const ResumeTemplate19 = ({
                 {/* {educationIcon} */}
                 Education
               </h3>
-              <span className="border-stylee w-full h-0  my-1"></span>
-              <ul className="pl-0  flex  flex-wrap px-0 xs:px-3 md:px-0 text-gray-800  w-full">
+              <span className="w-full h-0 my-1 border-stylee"></span>
+              <ul className="flex flex-wrap w-full px-0 pl-0 text-gray-800 xs:px-3 md:px-0">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[30%] xs:w-[50%] md:w-[30%] lg:w-[30%] md:m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
-                      <li
-                        className=" hover:shadow-md hover:cursor-move 
-                  parent  
-                   hover:bg-gray-100 font-semibold  hover:text-black flex uppercase text-md   items-center "
-                      >
+                      <li className="flex items-center font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:bg-gray-100 hover:text-black text-md">
                         {/* <span className="w-1.5 h-1.5 bg-gray-800 rounded-full mr-3"></span> */}
-                        <div className="flex flex-row w-full items-center justify-between">
+                        <div className="flex flex-row items-center justify-between w-full">
                           <EditableField
                             type="textarea"
                             rows={2}
@@ -405,11 +467,11 @@ const ResumeTemplate19 = ({
                       </li>
                       <div
                         onClick={() => setConfirmationModal(true)}
-                        className="w-4 hidden h-4 group-hover:block absolute right-2 top-2 z-10  cursor-pointer child"
+                        className="absolute z-10 hidden w-4 h-4 cursor-pointer group-hover:block right-2 top-2 child"
                       >
                         {crossIcon1}
                       </div>
-                      <li className="hover:shadow-md font-semibold capitalize hover:text-black text-gray-800 hover:tet-black hover:bg-gray-100 text-base">
+                      <li className="text-base font-semibold text-gray-800 capitalize hover:shadow-md hover:text-black hover:tet-black hover:bg-gray-100">
                         <EditableField
                           value={`${education?.fieldOfStudy}`}
                           style={{ width: "100%" }}
@@ -421,7 +483,7 @@ const ResumeTemplate19 = ({
                           }}
                         />{" "}
                       </li>
-                      <li className="hover:shadow-md italic text-gray-800 hover:text-black hover:bg-gray-100 text-sm ">
+                      <li className="text-sm italic text-gray-800 hover:shadow-md hover:text-black hover:bg-gray-100 ">
                         <EditableField
                           type="textarea"
                           rows={2}
@@ -436,7 +498,7 @@ const ResumeTemplate19 = ({
                       </li>
                       {(education.fromYear !== "" ||
                         education.toYear !== "") && (
-                        <li className="mb-4 italic text-xs text-gray-800">
+                        <li className="mb-4 text-xs italic text-gray-800">
                           {education.fromMonth && (
                             <EditableField
                               rows={2}

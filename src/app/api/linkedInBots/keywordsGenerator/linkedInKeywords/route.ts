@@ -13,7 +13,8 @@ export async function postKeywords(payload: any) {
   } else if (!user.linkedInKeywords || user.linkedInKeywords.length === 0) {
     user.linkedInKeywords = [payload];
   } else {
-    user.linkedInKeywords.push(payload);
+    user.linkedInKeywords.unshift(payload)
+    // user.linkedInKeywords.push(payload);
   }
 
   const response = await user.save();

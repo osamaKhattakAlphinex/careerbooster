@@ -76,8 +76,7 @@ const ResumeBuilder = () => {
   const [streamedJDData, setStreamedJDData] = useState<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
-  const [firstLoad, setFirstLoad] = useState<boolean>(false);
-  const [availablePercentage, setAvailablePercentage] = useState<number>(0);
+  const [resumeGenerated, setResumeGenerated] = useState<boolean>(false);
   const { saveResumeToDB } = useSaveResumeToDB();
   // Redux
   const dispatch = useDispatch();
@@ -104,6 +103,7 @@ const ResumeBuilder = () => {
       dispatch(resetResume(resumeData.state));
 
       if (resumeData.state.jobPosition !== "" && session?.user?.email) {
+        setResumeGenerated(false)
         dispatch(setState({ name: "resumeLoading", value: true }));
         dispatch(setQuantifyingExperience(quantifyingExperience));
         dispatch(setId(""));
@@ -288,7 +288,7 @@ const ResumeBuilder = () => {
       }
       setFinished(true);
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
-
+      setResumeGenerated(true)
       dispatch(setState({ name: "resumeLoading", value: false }));
       dispatch(setWorkExperience(temp));
     }
@@ -329,12 +329,9 @@ const ResumeBuilder = () => {
   };
 
   useEffect(() => {
-    if (!resumeData.state.resumeLoading && resumeData?.name) {
-      // if (firstLoad) {
+    if (resumeGenerated && !resumeData.state.resumeLoading && resumeData?.name) {
       saveResumeToDB();
-      // }
       setFinished(true);
-      // setFirstLoad(true);
     }
   }, [resumeData?.state?.resumeLoading]);
 
@@ -407,7 +404,6 @@ const ResumeBuilder = () => {
           )}
           <GenerateResume
             getConsent={getConsent}
-            availablePercentage={availablePercentage}
           />
           <div className="fixed bottom-0 flex items-center justify-center">
             <Confetti active={confettingRunning} config={confettiConfig} />

@@ -15,7 +15,9 @@ export async function postEmail(payload: any) {
   } else if (!user.emails || user.emails.length === 0) {
     user.emails = [payload];
   } else {
-    user.emails.push(payload);
+    // to append at start of array
+    user.emails.unshift(payload)
+    // user.emails.push(payload);
   }
 
   const response = await user.save();

@@ -402,7 +402,7 @@ const ResumeTemplate15 = () => {
                 }}
               />
             </h2>
-            <h3 className="my-2 text-xl leading-none text-center hover:shadow-md hover:bg-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500">
+            <h3 className="my-2 text-xl leading-none text-center border-2 border-transparent hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500">
               <EditableField
                 value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
                 onSave={(value: string) => {
@@ -523,11 +523,77 @@ const ResumeTemplate15 = () => {
                               }}
                             />
                           </h2>
-                          <h2 className="hover:cursor-default text-xs font-semibold w-full flex gap-2">
-                            {rec?.fromMonth + " " + rec?.fromYear} -{" "}
+                          <h2 className="flex w-full gap-1 text-xs font-semibold hover:cursor-default">
+                            {/* {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                             {rec?.isContinue
                               ? "Present"
                               : `${rec?.toMonth} ${rec?.toYear}`}{" "}
+                            |{" "} */}
+                            {rec.fromMonth && (
+                              <EditableField
+                                rows={2}
+                                value={`${rec?.fromMonth}`}
+                                onSave={(value: string) => {
+                                  handlers.handleSaveExperienceDetail(
+                                    { fromMonth: value },
+                                    i
+                                  );
+                                }}
+                              />
+                            )}
+                            {rec.fromYear && (
+                              <EditableField
+                                rows={2}
+                                value={`${rec?.fromYear}`}
+                                onSave={(value: string) => {
+                                  handlers.handleSaveExperienceDetail(
+                                    { fromYear: value },
+                                    i
+                                  );
+                                }}
+                              />
+                            )}
+                            {rec.fromYear && <span>-</span>}
+                            {rec.toMonth && !rec.isContinue && (
+                              <EditableField
+                                rows={2}
+                                value={`${rec?.toMonth}`}
+                                onSave={(value: string) => {
+                                  handlers.handleSaveExperienceDetail(
+                                    { toMonth: value },
+                                    i
+                                  );
+                                }}
+                              />
+                            )}
+                            {rec.toYear && !rec.isContinue && (
+                              <EditableField
+                                rows={2}
+                                value={`${rec?.toYear}`}
+                                onSave={(value: string) => {
+                                  handlers.handleSaveExperienceDetail(
+                                    { toYear: value },
+                                    i
+                                  );
+                                }}
+                              />
+                            )}
+                            {rec.isContinue && (
+                              <EditableField
+                                rows={2}
+                                value={`${rec?.isContinue && "Present"}`}
+                                onSave={(value: string) => {
+                                  handlers.handleSaveExperienceDetail(
+                                    { toYear: value },
+                                    i
+                                  );
+                                  handlers.handleSaveExperienceDetail(
+                                    { isContinue: false },
+                                    i
+                                  );
+                                }}
+                              />
+                            )}
                             |{" "}
                             <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
                               <EditableField
@@ -660,7 +726,7 @@ const ResumeTemplate15 = () => {
 
                           {newWorkExperience === i ? (
                             <>
-                              <div className="w-full gap-1  flex flex-wrap mt-4">
+                              <div className="flex flex-wrap w-full gap-1 mt-4">
                                 <input
                                   className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
                                   onChange={(e) =>
@@ -682,9 +748,9 @@ const ResumeTemplate15 = () => {
                                     }
                                   }}
                                 />
-                                <div className="my-2 w-full flex gap-2">
+                                <div className="flex w-full gap-2 my-2">
                                   <button
-                                    className="bg-green-500  w-2/12 xs:w-full md:w-2/12 lg:w-2/12 rounded-md  h-9 text-white "
+                                    className="w-2/12 text-white bg-green-500 rounded-md xs:w-full md:w-2/12 lg:w-2/12 h-9 "
                                     onClick={() => {
                                       // Save the new achievement to the state and possibly the database
                                       handlers.handleAddAchivement(
@@ -701,7 +767,7 @@ const ResumeTemplate15 = () => {
                                       setNewAchievement("");
                                       setNewWorkExperience(-1);
                                     }}
-                                    className="bg-red-500  w-2/12 xs:w-full md:w-2/12 lg:w-2/12 rounded-md py-1 text-white"
+                                    className="w-2/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-2/12 lg:w-2/12"
                                   >
                                     Cancel
                                   </button>
@@ -752,7 +818,7 @@ const ResumeTemplate15 = () => {
                 />
               </h3>
               <span className="w-full h-0 my-1 border-stylee"></span>
-              <ul className="flex  flex-wrap w-full pl-0 md:flex-row justify-between">
+              <ul className="flex flex-wrap justify-between w-full pl-0 md:flex-row">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[45%] xs:w-[45%]  bg-gray-200 p-2 rounded-md  md:m-2">
@@ -776,7 +842,7 @@ const ResumeTemplate15 = () => {
                       >
                         {crossIcon1}
                       </div>
-                      <li className="hover:shadow-md uppercase hover:bg-gray-100 px-0 xs:px-2 md:px-0  text-xs font-semibold">
+                      <li className="px-0 text-xs font-semibold uppercase hover:shadow-md hover:bg-gray-100 xs:px-2 md:px-0">
                         <EditableField
                           value={`${education?.fieldOfStudy}`}
                           style={{ width: "100%" }}
@@ -803,7 +869,7 @@ const ResumeTemplate15 = () => {
                       </li>
                       {(education.fromYear !== "" ||
                         education.toYear !== "") && (
-                        <li className="px-0 mb-4 text-xs flex italic text-gray-700 xs:px-2 md:px-0 ">
+                        <li className="flex px-0 mb-4 text-xs italic text-gray-700 xs:px-2 md:px-0 ">
                           {education.fromMonth && (
                             <EditableField
                               rows={2}
