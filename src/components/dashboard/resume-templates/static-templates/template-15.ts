@@ -119,7 +119,7 @@ const components: any = {
           {
             id: "company",
             styles:
-              "before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 text-gray-950/80 before:mr-2  ",
+              "before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 text-gray-950/80 before:mr-2",
             tag: "span",
           },
           {

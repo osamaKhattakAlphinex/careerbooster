@@ -280,7 +280,11 @@ const Page = () => {
 
   const setStylesToElement = (elem: any, styles: any) => {
     if (styles) {
-      styles.split(/\s+/).map((cls: any) => elem.classList.add(cls));
+      styles.split(/\s+/).map((cls: any) => {
+        if (cls !== "") {
+          elem.classList.add(cls);
+        }
+      });
     }
   };
   const newPage = () => {
