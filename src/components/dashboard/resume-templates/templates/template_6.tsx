@@ -775,7 +775,7 @@ const ResumeTemplate6 = ({
                         <div className="w-[28%]  xs:w-[45%] m-2  xs:m-0 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                           <li className="flex items-center justify-between text-base font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:bg-gray-100">
                             <EditableField
-                              type="textarea"
+                           
                               value={education?.educationLevel}
                               onSave={(value: string) => {
                                 handlers.handleSaveEductionDetail(
@@ -805,7 +805,7 @@ const ResumeTemplate6 = ({
                           </li>
                           <li className="text-xs italic text-gray-800 hover:shadow-md hover:bg-gray-100">
                             <EditableField
-                              type="textarea"
+                          
                               value={`${education?.schoolName}`}
                               onSave={(value: string) => {
                                 handlers.handleSaveEductionDetail(

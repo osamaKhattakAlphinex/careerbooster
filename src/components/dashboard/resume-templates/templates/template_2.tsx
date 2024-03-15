@@ -487,7 +487,7 @@ const ResumeTemplate2 = () => {
                         |{" "} */}
                       {rec.fromMonth && (
                         <EditableField
-                          rows={2}
+                         
                           value={`${rec?.fromMonth}`}
                           onSave={(value: string) => {
                             handlers.handleSaveExperienceDetail(
@@ -499,7 +499,7 @@ const ResumeTemplate2 = () => {
                       )}
                       {rec.fromYear && (
                         <EditableField
-                          rows={2}
+                         
                           value={`${rec?.fromYear}`}
                           onSave={(value: string) => {
                             handlers.handleSaveExperienceDetail(
@@ -512,7 +512,7 @@ const ResumeTemplate2 = () => {
                       {rec.fromYear && <span>-</span>}
                       {rec.toMonth && !rec.isContinue && (
                         <EditableField
-                          rows={2}
+                         
                           value={`${rec?.toMonth}`}
                           onSave={(value: string) => {
                             handlers.handleSaveExperienceDetail(
@@ -525,7 +525,7 @@ const ResumeTemplate2 = () => {
                       {rec.toMonth && <span>&nbsp;</span>}
                       {rec.toYear && !rec.isContinue && (
                         <EditableField
-                          rows={2}
+                         
                           value={`${rec?.toYear}`}
                           onSave={(value: string) => {
                             handlers.handleSaveExperienceDetail(
@@ -537,7 +537,7 @@ const ResumeTemplate2 = () => {
                       )}
                       {rec.isContinue && (
                         <EditableField
-                          rows={2}
+                         
                           value={`${rec?.isContinue && "Present"}`}
                           onSave={(value: string) => {
                             handlers.handleSaveExperienceDetail(
@@ -630,7 +630,7 @@ const ResumeTemplate2 = () => {
                                 >
                                   <EditableField
                                     type="textarea"
-                                    rows={2}
+                                   
                                     value={achievement}
                                     onSave={(value: string) => {
                                       handlers.handleUpdateAchivement(
