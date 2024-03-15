@@ -4,7 +4,15 @@ import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { TwitterPicker, ColorResult } from "react-color";
 import { useDispatch, useSelector } from "react-redux";
-import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
+import {
+  crossIcon1,
+  emailIcon,
+  phoneIcon,
+  resumeEductionIcon,
+  resumeSkillsIcon,
+  resumeSummaryIcon,
+  resumeWorkExpIcon,
+} from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
 import useGetSummary from "@/hooks/useGetSummary";
 import Toolbar from "@/components/dashboard/Toolbar";
@@ -262,7 +270,8 @@ const ResumeTemplate6 = ({
           {/* EXECUTIVE SUMMARY */}
           <div className="flex flex-col flex-wrap w-full ">
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-            <h3 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+            <h3 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2 ">
+              {resumeSummaryIcon}
               <EditableField
                 value={
                   resume?.headings?.summary
@@ -281,7 +290,7 @@ const ResumeTemplate6 = ({
 
             <Toolbar regenrateSummary={getSummary}>
               <div
-                className="text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed  "
+                className="text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed mt-2 "
                 // style={{ width: "60%" }}
               >
                 <EditableField
@@ -311,6 +320,7 @@ const ResumeTemplate6 = ({
               <>
                 <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
                 <h3 className="flex flex-row flex-wrap items-center gap-2 my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+                  {resumeSkillsIcon}
                   <EditableField
                     value={
                       resume?.headings?.primarySkills
@@ -414,7 +424,8 @@ const ResumeTemplate6 = ({
             )}
             {/* Work Experience */}
             <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-            <h3 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+            <h3 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+              {resumeWorkExpIcon}
               <EditableField
                 value={
                   resume?.headings?.workExperienceArray
@@ -745,6 +756,7 @@ const ResumeTemplate6 = ({
               <>
                 <span className="w-full h-0 border-[1px] border-gray-500 my-t page-break"></span>
                 <h3 className="flex flex-row items-center gap-2 my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+                  {resumeEductionIcon}
                   <EditableField
                     value={
                       resume?.headings?.education

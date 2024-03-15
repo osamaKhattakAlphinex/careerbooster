@@ -55,7 +55,7 @@ const Toolbar = ({
 
           {copyToClipBoard && (
             <button
-              title="Add New Achivement"
+              title="Copy To Clipboard"
               onClick={copyToClipBoard}
               className="p-2 overflow-hidden text-white bg-gray-600 hover:bg-gray-500"
             >

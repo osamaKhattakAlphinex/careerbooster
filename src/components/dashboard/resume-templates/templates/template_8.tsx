@@ -4,7 +4,15 @@ import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
+import {
+  crossIcon1,
+  emailIcon,
+  phoneIcon,
+  resumeEductionIcon,
+  resumeSkillsIcon,
+  resumeSummaryIcon,
+  resumeWorkExpIcon,
+} from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
 
 import useGetSummary from "@/hooks/useGetSummary";
@@ -249,7 +257,8 @@ const ResumeTemplate8 = () => {
         <div className="flex flex-col w-full px-8 xs:px-4 md:px-8 lg:px-8">
           {/* Executive Summary */}
           <span className="!block border-stylee w-full mt-3 h-0 border-[1px] !border-gray-900"></span>
-          <h3 className=" text-base font-semibold my-1 flex justify-center text-center uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+          <h3 className=" text-base font-semibold my-1 flex justify-center text-center uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 items-center gap-2">
+            {resumeSummaryIcon}
             <EditableField
               value={
                 resume?.headings?.summary
@@ -297,6 +306,7 @@ const ResumeTemplate8 = () => {
             <>
               <span className="!block border-stylee w-full h-0 border-[1px] mt-6 !border-gray-900"></span>
               <h3 className="flex items-center my-1 justify-center gap-2  text-base font-semibold uppercase wl-full border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+                {resumeSkillsIcon}
                 <EditableField
                   value={
                     resume?.headings?.primarySkills
@@ -399,7 +409,8 @@ const ResumeTemplate8 = () => {
           )}
           {/* Work Experience */}
           <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-900  xs:mt-6"></span>
-          <h3 className="text-base font-semibold my-1 flex justify-center text-center uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+          <h3 className="text-base font-semibold my-1 flex justify-center text-center uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 items-center gap-2">
+            {resumeWorkExpIcon}
             <EditableField
               value={
                 resume?.headings?.workExperienceArray
@@ -721,6 +732,7 @@ const ResumeTemplate8 = () => {
             <>
               <span className="!block w-full h-0 border-[1px] border-gray-900 mt-6 page-break"></span>
               <h3 className="flex items-center justify-center gap-2 my-1  text-base font-semibold text-center uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+                {resumeEductionIcon}
                 <EditableField
                   value={
                     resume?.headings?.education

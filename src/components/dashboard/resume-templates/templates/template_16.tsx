@@ -5,7 +5,16 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setField } from "@/store/resumeSlice";
-import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
+import {
+  crossIcon1,
+  emailIcon,
+  phoneIcon,
+  resumeContactIcon,
+  resumeEductionIcon,
+  resumeSkillsIcon,
+  resumeSummaryIcon,
+  resumeWorkExpIcon,
+} from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
 
 import useGetSummary from "@/hooks/useGetSummary";
@@ -93,10 +102,10 @@ const ResumeTemplate16 = () => {
           className=" w-3/12 xs:w-4/12 md:w-4/12 flex flex-col  bg-[#1F1E1E]  px-4  xs:px-1 md:px-9 pt-[2rem] "
           // style={{ backgroundColor: color }}
         >
-          <div className="flex justify-center">
-            <div className=" w-32 h-32 xs:w-24 xs:h-24 md:w-40 md:h-40 border-[2px] xs:border-[2px] md:border-[.5rem] border-[##F1F1F1]   text-gray-800 bg-[#FFFFFF]  text-center flex justify-center items-center  rounded-full ">
+          <div className="flex justify-center xs:mb-6">
+            <div className=" w-32 h-32 xs:w-24 xs:h-24 md:w-32 md:h-32 border-[2px] xs:border-[2px] md:border-[.5rem] border-[##F1F1F1]   text-gray-800 bg-[#FFFFFF]  text-center flex justify-center items-center  rounded-full ">
               <div
-                className=" w-28 relative h-28 xs:h-[88px] xs:w-[] bg-[#383636] md:w-36 md:h-36 text-[#F1F1F1] flex justify-center items-center    rounded-full "
+                className=" w-28 relative h-28 xs:h-[88px] xs:w-[] bg-[#383636] md:w-28 md:h-28 text-[#F1F1F1] flex justify-center items-center    rounded-full "
                 // style={{ backgroundColor: color_second }}
               >
                 <span className="text-4xl font-semibold xs:text-lg md:text-4xl text-bold hover:shadow-md hover:text-black hover:bg-gray-100">
@@ -139,6 +148,7 @@ const ResumeTemplate16 = () => {
           {/* contacts */}
           <span className="w-full h-0 my-3 border-stylee"></span>
           <h3 className="flex flex-row items-center w-full gap-2 my-1 text-base font-semibold text-white uppercase border-2 border-transparent rounded-sm hover:border-dashed hover:border-gray-500">
+            {resumeContactIcon}
             <EditableField
               value={
                 resume?.headings?.contact ? resume.headings.contact : "contact"
@@ -153,7 +163,7 @@ const ResumeTemplate16 = () => {
               }}
             />
           </h3>
-          <span className="w-full mb-4 border-b-2 border-white"></span>
+          <span className="w-full mb-4 border-b-2 border-white !block"></span>
           <ul className="flex flex-col w-full gap-3 pl-0 mb-4 text-xs text-gray-300 break-all ">
             <li className="flex flex-row items-start justify-start gap-3 hover:shadow-md hover:text-black hover:bg-gray-100 ">
               <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
@@ -224,7 +234,7 @@ const ResumeTemplate16 = () => {
               {/* </a> */}
             </li>
             <li className="flex flex-row items-start justify-start gap-2 text-gray-300 hover:shadow-md hover:text-black group hover:bg-gray-100">
-              <div className="">
+              <div className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -291,6 +301,7 @@ const ResumeTemplate16 = () => {
             <>
               <span className="w-full h-0 my-1 border-stylee"></span>
               <h3 className="flex flex-row items-center w-full gap-2 my-1 text-base font-semibold text-white uppercase border-2 border-transparent rounded-sm hover:border-dashed hover:border-gray-500">
+                {resumeSkillsIcon}
                 <EditableField
                   value={
                     resume?.headings?.primarySkills
@@ -307,7 +318,7 @@ const ResumeTemplate16 = () => {
                   }}
                 />
               </h3>
-              <span className="w-full mb-4 border-b-2 border-white"></span>
+              <span className="w-full mb-4 border-b-2 border-white !block"></span>
               {resume?.primarySkills &&
               resume?.primarySkills.length > 0 &&
               !regenerating ? (
@@ -419,7 +430,8 @@ const ResumeTemplate16 = () => {
           {/* Executive Summary */}
 
           <span className="w-full h-0 border-stylee xs:my-0 md:my-1"></span>
-          <h3 className="uppercase w-fit text-base font-semibold rounded-sm text-gray-900 my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500">
+          <h3 className="uppercase w-fit text-base font-semibold rounded-sm text-gray-900 my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+            {resumeSummaryIcon}
             <EditableField
               value={
                 resume?.headings?.summary
@@ -436,9 +448,10 @@ const ResumeTemplate16 = () => {
               }}
             />
           </h3>
-          <span className="border-[#444440] border-b-2 w-full"></span>
+          {/* <span className="w-full mb-4 border-b-2 border-white !block"></span> */}
+          <span className="border-[#444440] border-b-2 w-full !block"></span>
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed ">
+            <div className="text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed my-4">
               <EditableField
                 type="textarea"
                 value={
@@ -463,7 +476,8 @@ const ResumeTemplate16 = () => {
 
           {/* Work Experience */}
 
-          <h3 className="uppercase text-base font-semibold rounded-sm text-gray-900 w-full my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500">
+          <h3 className="uppercase text-base font-semibold rounded-sm text-gray-900 w-full my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+            {resumeWorkExpIcon}
             <EditableField
               value={
                 resume?.headings?.workExperienceArray
@@ -480,7 +494,7 @@ const ResumeTemplate16 = () => {
               }}
             />
           </h3>
-          <span className="w-full border-[#444440] border-b-2"></span>
+          <span className="w-full border-[#444440] border-b-2 !block"></span>
           {/* <span className="border-stylee w-full h-0 border-[1px] border-[#444440] relative -left-7 my-2"></span> */}
 
           {resume?.workExperienceArray &&
@@ -501,7 +515,7 @@ const ResumeTemplate16 = () => {
                     <div
                       key={i}
                       className={`flex justify-start items-start 
-                        `}
+                        mt-4`}
                     >
                       <div
                         key={i}
@@ -802,6 +816,7 @@ const ResumeTemplate16 = () => {
           {resume?.education.length > 0 && (
             <>
               <h3 className="uppercase w-fit text-base font-semibold flex items-center gap-2 border-[#444440] border-b-2 rounded-sm text-gray-900 w-full my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500">
+                {resumeEductionIcon}
                 <EditableField
                   value={
                     resume?.headings?.education
@@ -818,8 +833,8 @@ const ResumeTemplate16 = () => {
                   }}
                 />
               </h3>
-              <span className="w-full border-[#444440] border-b-2"></span>
-              <ul className="pl-0 flex justify-between flex-wrap  text-gray-800 w-[100%]">
+              <span className="w-full border-[#444440] border-b-2 !block"></span>
+              <ul className="pl-0 flex justify-between flex-wrap  text-gray-800 w-[100%] mt-4">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
                     <div className="w-[45%] xs:w-[45%] bg-gray-200 p-2 rounded-md md:m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">

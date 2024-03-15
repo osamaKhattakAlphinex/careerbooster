@@ -5,7 +5,16 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setField } from "@/store/resumeSlice";
-import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
+import {
+  crossIcon1,
+  emailIcon,
+  phoneIcon,
+  resumeContactIcon,
+  resumeEductionIcon,
+  resumeSkillsIcon,
+  resumeSummaryIcon,
+  resumeWorkExpIcon,
+} from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
 
 import useGetSummary from "@/hooks/useGetSummary";
@@ -167,6 +176,7 @@ const ResumeTemplate10 = () => {
             // style={{ borderColor: color }}
           >
             <h3 className="flex flex-row items-center gap-2 mb-0 text-base font-semibold text-center uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+              {resumeContactIcon}
               <EditableField
                 value={
                   resume?.headings?.contact
@@ -356,6 +366,7 @@ const ResumeTemplate10 = () => {
                 // style={{ borderColor: color }}
               >
                 <h3 className="flex flex-row items-center gap-2 mb-0 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+                  {resumeSkillsIcon}
                   <EditableField
                     value={
                       resume?.headings?.primarySkills
@@ -465,7 +476,8 @@ const ResumeTemplate10 = () => {
             className="rounded-3xl xs:-mx-1 md:mx-0 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
             // style={{ backgroundColor: color }}
           >
-            <h3 className="mb-0 text-base font-semibold text-gray-100 uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+            <h3 className="mb-0 text-base font-semibold text-gray-100 uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+              {resumeSummaryIcon}
               <EditableField
                 value={
                   resume?.headings?.summary
@@ -513,7 +525,8 @@ const ResumeTemplate10 = () => {
             className="rounded-3xl xs:-mx-1 bg-[#043382] md:mx-0 py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
             // style={{ backgroundColor: color }}
           >
-            <h3 className="mb-0 text-base font-semibold text-gray-100 uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+            <h3 className="mb-0 text-base font-semibold text-gray-100 uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+              {resumeWorkExpIcon}
               <EditableField
                 value={
                   resume?.headings?.workExperienceArray
@@ -846,7 +859,8 @@ const ResumeTemplate10 = () => {
                 className="rounded-3xl bg-[#043382] py-2 px-4 my-6 w-fit"
                 // style={{ backgroundColor: color }}
               >
-                <h3 className="mb-0 text-base font-semibold text-gray-100 uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+                <h3 className="mb-0 text-base font-semibold text-gray-100 uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+                  {resumeEductionIcon}
                   <EditableField
                     value={
                       resume?.headings?.education
