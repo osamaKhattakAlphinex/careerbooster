@@ -14,7 +14,6 @@ const EditableField = ({
   overrideValue,
   value,
   type,
-  rows,
   className,
   onSave,
   style,
@@ -22,7 +21,6 @@ const EditableField = ({
   value: string;
   overrideValue?: string;
   type?: string;
-  rows?: number;
   style?: any;
   className?: any;
   onSave: (value: string) => void;

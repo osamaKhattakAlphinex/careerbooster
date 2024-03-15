@@ -14,17 +14,15 @@ import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedL
 import { setCoverLetter } from "@/store/coverLetterSlice";
 
 import CoverLetterCardSingle from "@/components/dashboard/cover-letter-generator/CoverLetterCardSingle";
-import Link from "next/link";
-import { EditIcon, leftArrowIcon } from "@/helpers/iconsProvider";
+import { EditIcon } from "@/helpers/iconsProvider";
 import { makeid } from "@/helpers/makeid";
 import DownloadService from "@/helpers/downloadFile";
-import useGetCreditLimits from "@/hooks/useGetCreditLimits";
-import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { useRouter } from "next/navigation";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
+import EditableField from "@/components/dashboard/EditableField";
 
 export default function CoverLetterPage() {
   const componentRef = useRef<any>(null);
@@ -86,6 +84,11 @@ export default function CoverLetterPage() {
       coverLetterText: _coverLetterText, //editedContent,
       generatedOnDate: coverLetter.generatedOnDate,
       generatedViaOption: coverLetter.generatedViaOption,
+      name: coverLetter.name,
+      phone: coverLetter.phone,
+      email: coverLetter.email,
+      address: coverLetter.address,
+      date: coverLetter.date,
       id: coverLetter.id,
       jobDescription: coverLetter.jobDescription,
       userEmail: coverLetter.userEmail,
@@ -105,17 +108,32 @@ export default function CoverLetterPage() {
     dispatch(setCoverLetter(payLoad));
   };
 
-  // limit bars
-  const [availablePercentageCoverLetter, setAvailablePercentageCoverLetter] =
-    useState<number>(0);
-
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const coverLetter = useSelector((state: any) => state.coverLetter);
 
-  // console.clear();
   const { resumes } = userData;
+const handleSingleSave=async (obj:{})=>{
+  const [[key, value]] = Object.entries(obj);
+  const payload = {
+    ...coverLetter,
+    [key]: value,
+  }
+  const updatedCoverLetters = await axios.put(
+    `/api/coverLetterBot/${coverLetter.id}`,
+    payload,
+    { headers: { "Content-Type": "application/json" } }
+  );
+
+  const updatedObject = {
+    ...userData,
+    coverLetters: updatedCoverLetters.data.results,
+  };
+  dispatch(setUserData({ ...updatedObject }));
+  dispatch(setCoverLetter(payload));
+}
+
 
   const handleGenerate = async () => {
     if (session?.user?.email && aiInputUserData) {
@@ -126,8 +144,18 @@ export default function CoverLetterPage() {
       const obj: any = {
         coverletterId: coverletterId,
         type: selectedOption,
-        email: session?.user?.email,
-
+        name: userData.firstName + " " + userData.lastName,
+        phone: userData.phone,
+        email: userData.email,
+        address:
+          userData.contact.street +
+          " " +
+          userData.contact.cityState +
+          " " +
+          userData.contact.country +
+          " " +
+          userData.contact.postalCode,
+        date: getFormattedDate(date, "MM DD, YYYY"),
         creditsUsed: creditLimits.cover_letter_generation,
         jobDescription,
         trainBotData: {
@@ -178,7 +206,8 @@ export default function CoverLetterPage() {
               setStreamedData((prev) => prev + text);
               tempText += text;
             }
-
+            setStreamedData((prev) => prev.replace("```html", ""));
+            setStreamedData((prev) => prev.replace("```", ""));
             const coverLetterResponse = await axios.get(
               "/api/coverLetterBot/getAllCoverLetters"
             );
@@ -191,18 +220,14 @@ export default function CoverLetterPage() {
               };
               dispatch(setUserData({ ...userData, ...updatedObject }));
               dispatch(
-                setCoverLetter(
-                  coverLetterResponse.data.result.coverLetters[
-                    coverLetterResponse.data.result.coverLetters.length - 1
-                  ]
-                )
+                setCoverLetter(coverLetterResponse.data.result.coverLetters[0])
               );
             }
           } else {
             const res = await resp.json();
             setStreamedData(res.result + "! You ran out of Credits");
             setConfirmationModal(true);
-            // showErrorToast("Failed to generate cover letter");
+            showErrorToast("Failed to generate cover letter");
           }
         })
         .finally(() => {
@@ -219,12 +244,11 @@ export default function CoverLetterPage() {
   };
 
   const onConfirm = () => {
-    console.log("console");
     router.push("/subscribe");
   };
   const copyCoverLetter = async (text: string) => {
     try {
-      const coverLetterData = await htmlToPlainText(text);
+      const coverLetterData = htmlToPlainText(text);
       await copy(coverLetterData);
       setIsCoverLetterCopied(true);
       // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
@@ -249,22 +273,6 @@ export default function CoverLetterPage() {
         skills: userData?.skills,
       });
     }
-    // if (
-    //   userData.results &&
-    //   userData.results.coverLetter &&
-    //   userData.results.coverLetter !== ""
-    // )
-    // {
-    //   setShow(true);
-    //   console.log("userData CoverLetter: ", userData.results.coverLetter);
-    //   setStreamedData(userData.results.coverLetter);
-    // }
-
-    if (streamedData !== "") {
-      setStreamedData(coverLetter.coverLetterText);
-    }
-
-    // dispatch(setCoverLetter(coverLetters[0]));
   }, [userData]);
 
   useEffect(() => {
@@ -294,15 +302,6 @@ export default function CoverLetterPage() {
     <>
       <div className="w-full sm:w-full z-1000">
         <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]">
-          {/* <AiGeneratedCoverLetters /> */}
-          {/* <Link
-            href="/dashboard"
-            className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center hover:opacity-80 transition-all"
-          >
-            {leftArrowIcon}
-            Back
-          </Link> */}
-
           <PreviouslyGeneratedList {...historyProps} />
 
           {/* <MainCoverLetterTool /> */}
@@ -422,8 +421,7 @@ export default function CoverLetterPage() {
                   }
                   onClick={handleGenerate}
                   className={`cursor-pointer dark:bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
-                    (
-                      selectedOption === "" ||
+                    (selectedOption === "" ||
                       (selectedOption === "file" && selectedFile === "") ||
                       jobDescription === "") &&
                     "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
@@ -478,50 +476,88 @@ export default function CoverLetterPage() {
                 </button>
               </div>
 
-              {/* <h1 className="uppercase dark:text-gray-100 text-gray-950 font-bold text-[18px] pb-2">
-                your ai generated cover letter
-              </h1> */}
               {show && (
                 <div
                   ref={componentRef}
                   className="w-full px-8 py-6 bg-white rounded-2xl"
-                  // onBlur={() => setIsEditing(false)}
                 >
                   <div className="pb-2 text-center border-b border-gray-950">
-                    <h1 className="uppercase text-[24px] text-gray-950 font-bold">
-                      {userData.firstName + " " + userData.lastName}
+                    <h1 className="uppercase flex justify-center text-[24px] text-gray-950 font-bold">
+                      <EditableField
+                        value={
+                          coverLetter?.name
+                            ? coverLetter.name
+                            : userData.firstName + " " + userData.lastName
+                        }
+                        onSave={(value: string) => {
+                          dispatch(
+                            setCoverLetter({ ...coverLetter, name: value })
+                          );
+                          handleSingleSave({name: value});
+
+                        }}
+                      />
                     </h1>
                     <div className="flex flex-col text-sm text-gray-950">
                       <ul className="flex flex-col gap-2">
                         <li className="flex flex-row justify-center gap-2">
                           <h2 className="text-sm font-semibold before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMi4yNSA2Ljc1YzAgOC4yODQgNi43MTYgMTUgMTUgMTVoMi4yNWEyLjI1IDIuMjUgMCAwIDAgMi4yNS0yLjI1di0xLjM3MmMwLS41MTYtLjM1MS0uOTY2LS44NTItMS4wOTFsLTQuNDIzLTEuMTA2Yy0uNDQtLjExLS45MDIuMDU1LTEuMTczLjQxN2wtLjk3IDEuMjkzYy0uMjgyLjM3Ni0uNzY5LjU0Mi0xLjIxLjM4YTEyLjAzNSAxMi4wMzUgMCAwIDEtNy4xNDMtNy4xNDNjLS4xNjItLjQ0MS4wMDQtLjkyOC4zOC0xLjIxbDEuMjkzLS45N2MuMzYzLS4yNzEuNTI3LS43MzQuNDE3LTEuMTczTDYuOTYzIDMuMTAyYTEuMTI1IDEuMTI1IDAgMCAwLTEuMDkxLS44NTJINC41QTIuMjUgMi4yNSAwIDAgMCAyLjI1IDQuNXYyLjI1WiIgLz4KPC9zdmc+Cg==')] before:w-3 before:h-3 flex before:mr-2">
-                            {userData.phone}
+                            <EditableField
+                              value={
+                                coverLetter?.phone
+                                  ? coverLetter.phone
+                                  : userData.phone
+                              }
+                              onSave={(value: string) => {
+                                dispatch(
+                                  setCoverLetter({ ...coverLetter, phone: value })
+                                );
+                                handleSingleSave({phone: value});
+
+                              }}
+                            />
                           </h2>
                           <h2 className="text-sm font-semibold before:w-3 before:h-3 before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMjEuNzUgNi43NXYxMC41YTIuMjUgMi4yNSAwIDAgMS0yLjI1IDIuMjVoLTE1YTIuMjUgMi4yNSAwIDAgMS0yLjI1LTIuMjVWNi43NW0xOS41IDBBMi4yNSAyLjI1IDAgMCAwIDE5LjUgNC41aC0xNWEyLjI1IDIuMjUgMCAwIDAtMi4yNSAyLjI1bTE5LjUgMHYuMjQzYTIuMjUgMi4yNSAwIDAgMS0xLjA3IDEuOTE2bC03LjUgNC42MTVhMi4yNSAyLjI1IDAgMCAxLTIuMzYgMEwzLjMyIDguOTFhMi4yNSAyLjI1IDAgMCAxLTEuMDctMS45MTZWNi43NSIgLz4KPC9zdmc+Cg==')] flex before:mr-2">
-                            {userData.email}
+                            <EditableField
+                              value={
+                                coverLetter?.email
+                                  ? coverLetter.email
+                                  : userData.email
+                              }
+                              onSave={(value: string) => {
+                                dispatch(
+                                  setCoverLetter({ ...coverLetter, email: value })
+                                );
+                                handleSingleSave({email: value});
+                              }}
+                            />
                           </h2>
                         </li>
+
                         <li>
-                          {userData.contact.street && (
-                            <span className="text-sm font-semibold after:content-[','] after:mr-1">
-                              {userData.contact.street}
-                            </span>
-                          )}
-                          {userData.contact.cityState && (
-                            <span className="text-sm font-semibold after:content-[','] after:mr-1">
-                              {userData.contact.cityState}
-                            </span>
-                          )}
-                          {userData.contact.country && (
-                            <span className="text-sm font-semibold">
-                              {userData.contact.country}
-                            </span>
-                          )}
-                          {userData.contact.postalCode && (
-                            <span className="text-sm font-semibold before:content-[','] before:mr-1">
-                              {userData.contact.postalCode}
-                            </span>
-                          )}
+                          <span className="text-sm flex justify-center font-semibold ">
+                            <EditableField
+                              value={
+                                coverLetter?.address
+                                  ? coverLetter.address
+                                  : userData.contact.street +
+                                    " " +
+                                    userData.contact.cityState +
+                                    " " +
+                                    userData.contact.country +
+                                    " " +
+                                    userData.contact.postalCode
+                              }
+                              onSave={(value: string) => {
+                                dispatch(
+                                  setCoverLetter({ ...coverLetter, address: value })
+                                );
+                                handleSingleSave({address: value});
+
+                              }}
+                            />
+                            {}
+                          </span>
                         </li>
                       </ul>
                     </div>
@@ -530,7 +566,20 @@ export default function CoverLetterPage() {
                   <br />
                   <div className="mt-4">
                     <span className="text-sm font-semibold text-gray-950">
-                      {getFormattedDate(date, "MM DD, YYYY")}
+                      <EditableField
+                        value={
+                          coverLetter?.date
+                            ? coverLetter.date
+                            : getFormattedDate(date, "MM DD, YYYY")
+                        }
+                        onSave={(value: string) => {
+                          dispatch(
+                            setCoverLetter({ ...coverLetter, date: value })
+                          );
+                          handleSingleSave({date: value});
+
+                        }}
+                      />
                     </span>
                   </div>
                   <br />
@@ -547,11 +596,10 @@ export default function CoverLetterPage() {
                           id="editor"
                           contentEditable={isEditing}
                           className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-[10px] "
-                          // dangerouslySetInnerHTML={{ __html: editedContent }}
-                          // onInput={(e: React.ChangeEvent<HTMLDivElement>) => {
-                          //   setEditedContent(e.target.innerHTML);
-                          // }}
-                          onBlur={() => setIsEditing(false)}
+                          onBlur={() => {
+                            setIsEditing(false);
+                            handleSave();
+                          }}
                         ></div>
                       ) : (
                         <div
@@ -562,79 +610,6 @@ export default function CoverLetterPage() {
                     </div>
                   </div>
                   <div className="flex flex-col flex-wrap gap-3 mt-5 buttons md:flex-row">
-                    {!isNaN(availablePercentageCoverLetter) &&
-                      availablePercentageCoverLetter !== 0 && (
-                        <button
-                          type="button"
-                          disabled={
-                            msgLoading ||
-                            !session?.user?.email ||
-                            !aiInputUserData ||
-                            selectedOption === "" ||
-                            (selectedOption === "file" &&
-                              selectedFile === "") ||
-                            jobDescription === ""
-                          }
-                          onClick={handleGenerate}
-                          className={` border-[1px] border-[#b324d7]  flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
-                            (msgLoading ||
-                              !session?.user?.email ||
-                              !aiInputUserData ||
-                              selectedOption === "" ||
-                              (selectedOption === "file" &&
-                                selectedFile === "") ||
-                              jobDescription === "") &&
-                            "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                          }`}
-                        >
-                          <span className=" text-gray-950 text-[15px] font-semibold">
-                            {msgLoading ? (
-                              <div className="flex">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="currentColor"
-                                  className={`w-4 h-4 mr-3 ${
-                                    msgLoading ? "animate-spin" : ""
-                                  }`}
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                                  />
-                                </svg>
-                                Please wait...
-                              </div>
-                            ) : (
-                              <div className="flex">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth={1.5}
-                                  stroke="currentColor"
-                                  className="w-4 h-4 text-gray-950"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-                                  />
-                                </svg>
-                                <span
-                                  className={` text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
-                                >
-                                  Re-generate Cover Letter
-                                </span>
-                              </div>
-                            )}
-                          </span>
-                        </button>
-                      )}
-
                     <DownloadService
                       componentRef={componentRef}
                       type="onPage"
@@ -728,7 +703,7 @@ export default function CoverLetterPage() {
 
                     {isEditing && (
                       <button
-                        type="submit"
+                        type="button"
                         onClick={handleSave}
                         className="flex flex-row hover:opacity-80 justify-center ml-auto items-center gap-2 py-[4] text-sm px-3 border-[#312E37] border-[1px] rounded-full text-gray-100 !bg-gray-950"
                       >
@@ -744,22 +719,22 @@ export default function CoverLetterPage() {
                             d="M15.7895 21H4.15512C3.71432 21 3.29157 20.7893 2.97988 20.4142C2.66818 20.0391 2.49307 19.5304 2.49307 19V5C2.49307 4.46957 2.66818 3.96086 2.97988 3.58579C3.29157 3.21071 3.71432 3 4.15512 3H13.2964L17.4515 8V19C17.4515 19.5304 17.2764 20.0391 16.9647 20.4142C16.653 20.7893 16.2303 21 15.7895 21Z"
                             stroke="white"
                             strokeWidth="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                           <path
                             d="M14.1274 21V13H5.81717V21"
                             stroke="white"
                             strokeWidth="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                           <path
                             d="M5.81717 3V8H12.4654"
                             stroke="white"
                             strokeWidth="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                         </svg>
                         Save

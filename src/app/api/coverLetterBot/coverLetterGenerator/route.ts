@@ -40,6 +40,10 @@ export async function POST(req: any) {
     const type = reqBody?.type;
     const userData = reqBody?.userData;
     const email = reqBody?.email;
+    const name = reqBody?.name;
+    const phone = reqBody?.phone;
+    const address = reqBody?.address;
+    const date = reqBody?.date;
     const file = reqBody?.file;
     const jobDescription = reqBody?.jobDescription;
     const creditsUsed = reqBody?.creditsUsed;
@@ -82,7 +86,9 @@ export async function POST(req: any) {
       }
     }
     const inputPrompt = `Following are the content of the resume (in JSON format): 
-            JSON user/resume data: ${type === "file" ? fileContent : JSON.stringify(userData)}
+            JSON user/resume data: ${
+              type === "file" ? fileContent : JSON.stringify(userData)
+            }
   
             this is the prompt:
             ${prompt}
@@ -91,7 +97,7 @@ export async function POST(req: any) {
             Phone : ${userData.phone}
             `;
     const response: any = await openai.chat.completions.create({
-      model:model? model: "gpt-3.5-turbo",
+      model: model ? model : "gpt-3.5-turbo",
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
@@ -111,12 +117,19 @@ export async function POST(req: any) {
           if (completionTokens > 0) {
             await updateUserTokens(email, completionTokens);
           }
+          completions = completions.replace("```html", "");
+          completions = completions.replace("```", "");
           if (trainBotData) {
             const coverletterId = makeid();
 
             const payload = {
               id: coverletterId,
               jobDescription: jobDescription,
+              name: name,
+              phone: phone,
+              email: email,
+              address: address,
+              date: date,
               coverLetterText: completions,
               generatedOnDate: new Date().toISOString(),
               generatedViaOption: type,
