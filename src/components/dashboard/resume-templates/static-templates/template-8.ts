@@ -3,7 +3,6 @@ const cvHeadings: any = [
     text: "",
     section: "phone",
     headingKey: "contact",
-
     styles: "",
     attributes: [],
   },
@@ -11,37 +10,33 @@ const cvHeadings: any = [
     text: "executive summary",
     section: "summary",
     headingKey: "summary",
-
     styles:
-      "font-semibold border-t-2 border-b-2 border-gray-950/80 mt-2 uppercase text-base text-gray-950/80 py-0.5",
-    attributes: [],
+      "font-semibold border-t-2 border-b-2 border-gray-950/80 mt-2 flex flex-row items-center uppercase text-base text-gray-950/80 py-0.5",
+    attributes: [{ "icon-color": "black" }],
   },
   {
     text: "work experience",
     section: "workExperienceArray",
     headingKey: "workExperienceArray",
-
+    attributes: [{ "icon-color": "black" }],
     styles:
-      "font-semibold uppercase border-t-2 border-b-2 border-gray-950/80 text-md text-gray-950/80 py-0.5",
-    attributes: [],
+      "font-semibold uppercase border-t-2 border-b-2 border-gray-950/80 text-base flex flex-row items-center text-gray-950/80 py-0.5",
   },
   {
     text: "education",
     section: "education",
     headingKey: "education",
-
+    attributes: [{ "icon-color": "black" }],
     styles:
-      "font-semibold border-t-2 border-b-2 border-gray-950/80 mt-2 w-full uppercase text-md text-gray-950/80 py-0.5",
-    attributes: [],
+      "font-semibold border-t-2 border-b-2 border-gray-950/80 mt-2 w-full uppercase text-base flex flex-row items-center text-gray-950/80 py-0.5",
   },
   {
     text: "skills",
     section: "primarySkills",
     headingKey: "primarySkills",
-
     styles:
-      "font-semibold uppercase border-t-2 border-b-2 border-gray-950/80 text-base py-0.5 w-full text-gray-950/80 before:block",
-    attributes: [],
+      "font-semibold uppercase border-t-2 border-b-2 border-gray-950/80 text-base flex flex-row items-center py-0.5 w-full text-gray-950/80 before:block",
+    attributes: [{ "icon-color": "black" }],
   },
 ];
 

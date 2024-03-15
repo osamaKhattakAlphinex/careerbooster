@@ -3,7 +3,6 @@ const cvHeadings = [
     text: "",
     section: "phone",
     headingKey: "contact",
-
     styles: "",
     attributes: [],
   },
@@ -11,37 +10,36 @@ const cvHeadings = [
     text: "executive summary",
     section: "summary",
     headingKey: "summary",
-
-    attributes: [],
+    attributes: [{ "icon-color": "black" }],
     styles:
-      "font-bold mt-4 uppercase text-base text-center text-gray-950/80 border-y-2 border-gray-950/80 py-0.5",
+      "font-bold mt-4 uppercase text-base flex flex-row items-center justify-center text-center text-gray-950/80 border-y-2 border-gray-950/80 py-0.5",
   },
   {
-    attributes: [],
+    attributes: [{ "icon-color": "black" }],
     text: "work experience",
     headingKey: "workExperienceArray",
 
     section: "workExperienceArray",
     styles:
-      "font-bold uppercase text-center text-md text-gray-950/80 border-y-2 border-gray-950/80 py-0.5",
+      "font-bold uppercase text-center text-base flex flex-row items-center justify-center text-gray-950/80 border-y-2 border-gray-950/80 py-0.5",
   },
   {
-    attributes: [],
+    attributes: [{ "icon-color": "black" }],
     text: "education",
     headingKey: "education",
 
     section: "education",
     styles:
-      "font-bold text-center mt-2 w-full uppercase text-md text-gray-950/80 border-y-2 border-gray-950/80 py-0.5",
+      "font-bold text-center mt-2 w-full uppercase text-base flex flex-row items-center justify-center text-gray-950/80 border-y-2 border-gray-950/80 py-0.5",
   },
   {
-    attributes: [],
+    attributes: [{ "icon-color": "black" }],
     text: "skills",
     headingKey: "primarySkills",
 
     section: "primarySkills",
     styles:
-      "font-bold uppercase text-center text-base py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
+      "font-bold uppercase text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
   },
 ];
 const templateLayout = {
