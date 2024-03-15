@@ -76,10 +76,10 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
 [data-template-no="5"] [data-name="email"]::before,
 [data-template-no="5"] [data-name="linkedIn"]::before,
 [data-template-no="5"] [data-name="address"]::before, */
-[data-template-no="4"] [data-name="phone"]::before,
+/* [data-template-no="4"] [data-name="phone"]::before,
 [data-template-no="4"] [data-name="email"]::before,
 [data-template-no="4"] [data-name="linkedIn"]::before,
-[data-template-no="4"] [data-name="address"]::before
+[data-template-no="4"] [data-name="address"]::before */
 /* [data-template-no="3"] [data-name="phone"]::before,
 [data-template-no="3"] [data-name="email"]::before,
 [data-template-no="3"] [data-name="linkedIn"]::before,
@@ -87,11 +87,12 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
 /* [data-template-no="1"] [data-name="phone"]::before,
 [data-template-no="1"] [data-name="email"]::before,
 [data-template-no="1"] [data-name="linkedIn"]::before,
-[data-template-no="1"] [data-name="address"]::before */ {
+[data-template-no="1"] [data-name="address"]::before */
+/* {
   content: "\2022";
   margin-right: 10px;
   font-size: 1rem;
-}
+} */
 
 [data-template-no="2"] [data-primarySkills-index]::before {
   content: none;
