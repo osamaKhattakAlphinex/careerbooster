@@ -128,10 +128,10 @@ const ResumeTemplate2 = () => {
       {/* contacts */}
       <div className="relative w-full py-1">
         <ul
-          className="flex flex-row items-center justify-around bg-gray-300  px-4 py-2 md:flex-row rounded-xl "
+          className="flex xs:flex-wrap gap-2 lg:flex-nowrap items-center justify-around bg-gray-300  px-4 py-2 md:flex-row rounded-xl "
           // style={{ backgroundColor: color_second }}
         >
-          <li className="flex flex-row items-center gap-1 text-xs hover:shadow-md text-gray-950 hover:bg-gray-100 w-25% ">
+          <li className="flex flex-row items-center gap-1 text-xs hover:shadow-md text-gray-950 hover:bg-gray-100 xs:w-[45%] lg:w-[25%]    ">
             {phoneIcon}
             <EditableField
               value={
@@ -146,7 +146,7 @@ const ResumeTemplate2 = () => {
               }}
             />
           </li>
-          <li className="flex flex-row items-center gap-1 text-xs  text-gray-950 hover:shadow-md hover:bg-gray-100 w-25%">
+          <li className="flex flex-row items-center justify-start gap-1 text-xs  text-gray-950 hover:shadow-md hover:bg-gray-100 xs:w-[45%] lg:w-[25%]  ">
             {emailIcon}
             <EditableField
               value={
@@ -162,7 +162,7 @@ const ResumeTemplate2 = () => {
             />
           </li>
 
-          <li className="flex flex-row items-center justify-center gap-1 text-xs text-gray-950  hover:shadow-md hover:bg-gray-100 w-25%">
+          <li className="flex flex-row items-center justify-start gap-1 text-xs text-gray-950  hover:shadow-md hover:bg-gray-100 xs:w-[45%] lg:w-[25%]  ">
             <div className="">
               <svg
                 width="16"
@@ -196,7 +196,7 @@ const ResumeTemplate2 = () => {
               }}
             />
           </li>
-          <li className="flex flex-row items-center justify-center gap-1 text-xs text-gray-950  hover:shadow-md hover:bg-gray-100 w-25%">
+          <li className="flex flex-row items-center justify-start gap-1 text-xs text-gray-950  hover:shadow-md hover:bg-gray-100 xs:w-[45%] lg:w-[25%] ">
             <div className="">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
-import ResumeTemplate6 from "@/components/dashboard/resume-templates/templates/template_6";
+import ResumeTemplate6 from "@/components/dashboard/resume-templates/templates/template_1";
 import { useDispatch, useSelector } from "react-redux";
 import { WorkExperience } from "@/store/userDataSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
