@@ -90,7 +90,7 @@ const ResumeTemplate16 = () => {
     <div className="relative w-full text-gray-900 first-page">
       <div className="flex">
         <div
-          className=" w-3/12 xs:w-4/12 md:w-4/12 flex flex-col  bg-[#fff]  px-4  xs:px-1 md:px-9 pt-[2rem] "
+          className=" w-3/12 xs:w-4/12 md:w-4/12 flex flex-col  bg-[#1F1E1E]  px-4  xs:px-1 md:px-9 pt-[2rem] "
           // style={{ backgroundColor: color }}
         >
           <div className="flex justify-center">
@@ -391,7 +391,7 @@ const ResumeTemplate16 = () => {
             </>
           )}
         </div>
-        <div className="xs:w-full w-9/12 flex flex-col xs:bg-[#F1F1F1] md:bg-[#F1F1F1] px-4 md:px-8 pt-[1rem] md:pt-[1rem]">
+        <div className="xs:w-full w-9/12 flex flex-col xs:bg-[#fff] md:bg-[#fff] px-4 md:px-8 pt-[1rem] md:pt-[1rem]">
           <div className="flex flex-col justify-start pb-6 ">
             <h2 className="text-4xl w-fit font-bold text-center border-2 border-transparent xs:text-2xl md:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500">
               <EditableField
