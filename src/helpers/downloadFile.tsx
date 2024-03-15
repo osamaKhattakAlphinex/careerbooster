@@ -131,10 +131,10 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
   content: none;
 }
 
-[data-template-no="5"] [data-name="phone"]::before,
+/* [data-template-no="5"] [data-name="phone"]::before,
 [data-template-no="5"] [data-name="email"]::before,
 [data-template-no="5"] [data-name="linkedIn"]::before,
-[data-template-no="5"] [data-name="address"]::before,
+[data-template-no="5"] [data-name="address"]::before, */
 [data-template-no="4"] [data-name="phone"]::before,
 [data-template-no="4"] [data-name="email"]::before,
 [data-template-no="4"] [data-name="linkedIn"]::before,
