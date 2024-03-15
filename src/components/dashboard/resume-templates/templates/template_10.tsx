@@ -125,7 +125,7 @@ const ResumeTemplate10 = () => {
             />
           </span>
         </div> */}
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
           <h2 className="text-4xl font-bold text-gray-100 border-2 border-transparent hover:shadow-md hover:bg-gray-500 hover:border-dashed hover:border-gray-500 ">
             <EditableField
               className={`md:w-auto xs:w-fit`}
@@ -138,7 +138,7 @@ const ResumeTemplate10 = () => {
               }}
             />
           </h2>
-          <h3 className="text-lg text-gray-100 border-2 border-transparent xs:text-xs md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-500 hover:border-dashed hover:border-gray-500 ">
+          <h3 className="text-lg text-gray-100 border-2 border-transparent xs:text-xs md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-500 hover:border-dashed hover:border-gray-500 flex items-center justify-center">
             <EditableField
               className={` xs:w-fit md:w-[600px] lg:w-[600px]`}
               // style={{ width: "600px" }}
@@ -155,7 +155,7 @@ const ResumeTemplate10 = () => {
       <div className="flex ">
         {/* sidebar */}
         <div
-          className="z-5 xs:w-4/12 w-3.5/12 bg-[#1a202c] flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6  text-gray-100  pr-6  pb-8  pt-[160px] h-auto"
+          className="z-5 xs:w-4/12 w-3.5/12 bg-[#030712] flex flex-col pl-3 xs:pl-0 sm:pl-0 md:pl-0 lg:pl-3 xs:pr-4 sm:pr-4 md:pr-4 lg:pr-6  text-gray-100  pr-6  pb-8  pt-[160px] h-auto"
           // style={{ backgroundColor: color_second }}
         >
           {/* <div className="absolute top-0 left-0 z-20 xs:w-3/12 ">
