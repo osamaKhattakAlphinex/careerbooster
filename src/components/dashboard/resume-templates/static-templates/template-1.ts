@@ -111,25 +111,36 @@ const components: any = {
           { id: "fromYear", styles: "text-gray-950/80", tag: "span" },
           {
             id: "toMonth",
-            styles: "before:content-['\\268A'] before:mr-1 text-gray-950/80",
+            styles:
+              "before:content-['-'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-1 text-gray-950/80",
             tag: "span",
           },
           { id: "toYear", styles: "text-gray-950/80", tag: "span" },
           {
             id: "company",
             styles:
-              "before:content-['\\2758'] before:mr-2 after:content-['\\2758'] after:ml-2 text-gray-950/80",
+              "before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2  text-gray-950/80",
             tag: "span",
           },
-          { id: "cityState", styles: "text-gray-950/80", tag: "span" },
-          { id: "country", styles: "text-gray-950/80", tag: "span" },
+          {
+            id: "cityState",
+            styles:
+              "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+            tag: "span",
+          },
+          {
+            id: "country",
+            styles:
+              "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+            tag: "span",
+          },
           // { id: "isContinue", styles: "", tag: "span" },
         ],
       },
       {
         id: "achievements",
         styles:
-          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:mr-2 text-gray-950/80",
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
         tag: "span",
       },
     ],
@@ -180,7 +191,7 @@ const components: any = {
               {
                 id: "toMonth",
                 styles:
-                  "text-xs before:content-['\\268A'] before:mr-2 text-gray-950/80",
+                  "text-xs before:content-['-'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 text-gray-950/80",
                 tag: "span",
               },
               { id: "toYear", styles: "text-xs text-gray-950/80", tag: "span" },

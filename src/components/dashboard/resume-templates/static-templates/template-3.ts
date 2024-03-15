@@ -4,7 +4,7 @@ const cvHeadings: any = [
     section: "phone",
     headingKey: "contact",
     styles:
-      "font-semibold uppercase text-gray-100 flex items-center text-base py-0.5 w-full border-b-2 border-white my-2",
+      "font-semibold uppercase text-gray-100 flex items-center text-base py-1 w-full border-b-2 border-white my-2",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -13,7 +13,7 @@ const cvHeadings: any = [
     headingKey: "summary",
 
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full",
+      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-1 w-full border-b-2 border-gray-950/80",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -22,7 +22,7 @@ const cvHeadings: any = [
     headingKey: "workExperienceArray",
 
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full",
+      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-1 w-full border-b-2 border-gray-950/80",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -32,7 +32,7 @@ const cvHeadings: any = [
 
     attributes: [{ "icon-color": "black" }],
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full",
+      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-1 w-full border-b-2 border-gray-950/80",
   },
   {
     text: "skills",
@@ -41,7 +41,7 @@ const cvHeadings: any = [
 
     attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-gray-100 flex items-center text-md border-b-2 border-white py-0.5 w-full my-2",
+      "font-semibold uppercase text-gray-100 flex items-center text-md border-b-2 border-white py-1 w-full my-2",
   },
 ];
 
@@ -96,7 +96,7 @@ const components: any = {
     tag: "span",
   },
   summary: {
-    styles: "text-justify mb-4 text-xs text-gray-950/80",
+    styles: "text-justify my-y text-xs text-gray-950/80",
     tag: "span",
   },
   workExperienceArray: {
@@ -115,18 +115,29 @@ const components: any = {
           { id: "fromYear", styles: "text-gray-950/80", tag: "span" },
           {
             id: "toMonth",
-            styles: "before:content-['\\268A'] text-gray-950/80 before:mr-1",
+            styles:
+              "before:content-['-'] before:w-4 before:h-4 before:text-gray-950/80 text-gray-950/80 before:mr-1",
             tag: "span",
           },
           { id: "toYear", styles: "text-gray-950/80", tag: "span" },
           {
             id: "company",
             styles:
-              "before:content-['\\2758'] before:mr-2 text-gray-950/80 after:content-['\\2758'] after:ml-2",
+              "before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 text-gray-950/80",
             tag: "span",
           },
-          { id: "cityState", styles: "text-gray-950/80", tag: "span" },
-          { id: "country", styles: "text-gray-950/80", tag: "span" },
+          {
+            id: "cityState",
+            styles:
+              "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+            tag: "span",
+          },
+          {
+            id: "country",
+            styles:
+              "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+            tag: "span",
+          },
           // { id: "isContinue", styles: "", tag: "span" },
         ],
       },
@@ -183,7 +194,7 @@ const components: any = {
               {
                 id: "toMonth",
                 styles:
-                  "text-xs before:content-['\\268A'] text-gray-950/80 before:mr-2",
+                  "text-xs before:content-['-'] before:w-4 before:h-4 before:text-gray-950/80 text-gray-950/80 before:mr-2",
                 tag: "span",
               },
               { id: "toYear", styles: "text-xs text-gray-950/80", tag: "span" },

@@ -106,7 +106,7 @@ export default function CoverLetterPage() {
     };
     dispatch(setUserData({ ...updatedObject }));
     dispatch(setCoverLetter(payLoad));
-    showSuccessToast("Cover Letter Saved")
+    showSuccessToast("Cover Letter Saved");
   };
 
   // Redux
@@ -115,27 +115,26 @@ export default function CoverLetterPage() {
   const coverLetter = useSelector((state: any) => state.coverLetter);
 
   const { resumes } = userData;
-const handleSingleSave=async (obj:{})=>{
-  const [[key, value]] = Object.entries(obj);
-  const payload = {
-    ...coverLetter,
-    [key]: value,
-  }
-  const updatedCoverLetters = await axios.put(
-    `/api/coverLetterBot/${coverLetter.id}`,
-    payload,
-    { headers: { "Content-Type": "application/json" } }
-  );
+  const handleSingleSave = async (obj: {}) => {
+    const [[key, value]] = Object.entries(obj);
+    const payload = {
+      ...coverLetter,
+      [key]: value,
+    };
+    const updatedCoverLetters = await axios.put(
+      `/api/coverLetterBot/${coverLetter.id}`,
+      payload,
+      { headers: { "Content-Type": "application/json" } }
+    );
 
-  const updatedObject = {
-    ...userData,
-    coverLetters: updatedCoverLetters.data.results,
+    const updatedObject = {
+      ...userData,
+      coverLetters: updatedCoverLetters.data.results,
+    };
+    dispatch(setUserData({ ...updatedObject }));
+    dispatch(setCoverLetter(payload));
+    showSuccessToast("Cover Letter Saved");
   };
-  dispatch(setUserData({ ...updatedObject }));
-  dispatch(setCoverLetter(payload));
-  showSuccessToast("Cover Letter Saved")
-}
-
 
   const handleGenerate = async () => {
     if (session?.user?.email && aiInputUserData) {
@@ -422,69 +421,67 @@ const handleSingleSave=async (obj:{})=>{
                     jobDescription === ""
                   }
                   onClick={handleGenerate}
-                  className={`cursor-pointer dark:bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+                  className={`w-max flex flex-row transition-all duration-300  group justify-center sm:justify-start lg:px-6 px-4 py-2 rounded-full dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1.5px] border-gray-950 bg-transparent ${
                     (selectedOption === "" ||
                       (selectedOption === "file" && selectedFile === "") ||
                       jobDescription === "") &&
                     "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
                   }`}
                 >
-                  <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
-                    {msgLoading ? (
-                      <div className="flex items-center justify-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className={`w-4 h-4 mr-3 ${
-                            msgLoading ? "animate-spin" : ""
-                          }`}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                          />
-                        </svg>
+                  {msgLoading ? (
+                    <div className="flex flex-row items-center justify-center gap-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className={`w-3 h-3 md:w-4 md:h-4 dark:text-gray-100 text-gray-950 ${
+                          msgLoading ? "animate-spin" : ""
+                        }`}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                        />
+                      </svg>
+                      <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
                         Please wait...
-                      </div>
-                    ) : (
-                      <div className="flex items-center justify-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-4 h-4 dark:text-gray-100 text-gray-950"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-                          />
-                        </svg>
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="flex flex-row items-center justify-center gap-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-3 h-3 md:w-4 md:h-4 dark:text-gray-100 text-gray-950"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                        />
+                      </svg>
 
-                        <span
-                          className={`dark:text-gray-100  text-gray-950 ml-3 text-[15px] font-semibold `}
-                        >
-                          Generate Cover Letter
-                        </span>
-                      </div>
-                    )}
-                  </span>
+                      <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
+                        Generate Cover Letter
+                      </span>
+                    </div>
+                  )}
                 </button>
               </div>
 
               {show && (
                 <div
                   ref={componentRef}
-                  className="w-full px-8 py-6 bg-white rounded-2xl"
+                  className="w-full px-4 py-6 text-justify whitespace-normal bg-white sm:px-8 rounded-2xl"
                 >
                   <div className="pb-2 text-center border-b border-gray-950">
-                    <h1 className="uppercase flex justify-center text-[24px] text-gray-950 font-bold">
+                    <h1 className="flex justify-center text-base font-bold uppercase sm:text-xl md:text-2xl text-gray-950">
                       <EditableField
                         value={
                           coverLetter?.name
@@ -495,15 +492,14 @@ const handleSingleSave=async (obj:{})=>{
                           dispatch(
                             setCoverLetter({ ...coverLetter, name: value })
                           );
-                          handleSingleSave({name: value});
-
+                          handleSingleSave({ name: value });
                         }}
                       />
                     </h1>
                     <div className="flex flex-col text-sm text-gray-950">
                       <ul className="flex flex-col gap-2">
-                        <li className="flex flex-row justify-center gap-2">
-                          <h2 className="text-sm font-semibold before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMi4yNSA2Ljc1YzAgOC4yODQgNi43MTYgMTUgMTUgMTVoMi4yNWEyLjI1IDIuMjUgMCAwIDAgMi4yNS0yLjI1di0xLjM3MmMwLS41MTYtLjM1MS0uOTY2LS44NTItMS4wOTFsLTQuNDIzLTEuMTA2Yy0uNDQtLjExLS45MDIuMDU1LTEuMTczLjQxN2wtLjk3IDEuMjkzYy0uMjgyLjM3Ni0uNzY5LjU0Mi0xLjIxLjM4YTEyLjAzNSAxMi4wMzUgMCAwIDEtNy4xNDMtNy4xNDNjLS4xNjItLjQ0MS4wMDQtLjkyOC4zOC0xLjIxbDEuMjkzLS45N2MuMzYzLS4yNzEuNTI3LS43MzQuNDE3LTEuMTczTDYuOTYzIDMuMTAyYTEuMTI1IDEuMTI1IDAgMCAwLTEuMDkxLS44NTJINC41QTIuMjUgMi4yNSAwIDAgMCAyLjI1IDQuNXYyLjI1WiIgLz4KPC9zdmc+Cg==')] before:w-3 before:h-3 flex before:mr-2">
+                        <li className="flex flex-row flex-wrap justify-center gap-2 mt-2">
+                          <h2 className=" text-xs sm:text-sm font-semibold before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMi4yNSA2Ljc1YzAgOC4yODQgNi43MTYgMTUgMTUgMTVoMi4yNWEyLjI1IDIuMjUgMCAwIDAgMi4yNS0yLjI1di0xLjM3MmMwLS41MTYtLjM1MS0uOTY2LS44NTItMS4wOTFsLTQuNDIzLTEuMTA2Yy0uNDQtLjExLS45MDIuMDU1LTEuMTczLjQxN2wtLjk3IDEuMjkzYy0uMjgyLjM3Ni0uNzY5LjU0Mi0xLjIxLjM4YTEyLjAzNSAxMi4wMzUgMCAwIDEtNy4xNDMtNy4xNDNjLS4xNjItLjQ0MS4wMDQtLjkyOC4zOC0xLjIxbDEuMjkzLS45N2MuMzYzLS4yNzEuNTI3LS43MzQuNDE3LTEuMTczTDYuOTYzIDMuMTAyYTEuMTI1IDEuMTI1IDAgMCAwLTEuMDkxLS44NTJINC41QTIuMjUgMi4yNSAwIDAgMCAyLjI1IDQuNXYyLjI1WiIgLz4KPC9zdmc+Cg==')] before:w-3 before:h-3 flex before:mr-2">
                             <EditableField
                               value={
                                 coverLetter?.phone
@@ -512,14 +508,16 @@ const handleSingleSave=async (obj:{})=>{
                               }
                               onSave={(value: string) => {
                                 dispatch(
-                                  setCoverLetter({ ...coverLetter, phone: value })
+                                  setCoverLetter({
+                                    ...coverLetter,
+                                    phone: value,
+                                  })
                                 );
-                                handleSingleSave({phone: value});
-
+                                handleSingleSave({ phone: value });
                               }}
                             />
                           </h2>
-                          <h2 className="text-sm font-semibold before:w-3 before:h-3 before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMjEuNzUgNi43NXYxMC41YTIuMjUgMi4yNSAwIDAgMS0yLjI1IDIuMjVoLTE1YTIuMjUgMi4yNSAwIDAgMS0yLjI1LTIuMjVWNi43NW0xOS41IDBBMi4yNSAyLjI1IDAgMCAwIDE5LjUgNC41aC0xNWEyLjI1IDIuMjUgMCAwIDAtMi4yNSAyLjI1bTE5LjUgMHYuMjQzYTIuMjUgMi4yNSAwIDAgMS0xLjA3IDEuOTE2bC03LjUgNC42MTVhMi4yNSAyLjI1IDAgMCAxLTIuMzYgMEwzLjMyIDguOTFhMi4yNSAyLjI1IDAgMCAxLTEuMDctMS45MTZWNi43NSIgLz4KPC9zdmc+Cg==')] flex before:mr-2">
+                          <h2 className="font-semibold text-xs sm:text-sm before:w-3 before:h-3 before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMjEuNzUgNi43NXYxMC41YTIuMjUgMi4yNSAwIDAgMS0yLjI1IDIuMjVoLTE1YTIuMjUgMi4yNSAwIDAgMS0yLjI1LTIuMjVWNi43NW0xOS41IDBBMi4yNSAyLjI1IDAgMCAwIDE5LjUgNC41aC0xNWEyLjI1IDIuMjUgMCAwIDAtMi4yNSAyLjI1bTE5LjUgMHYuMjQzYTIuMjUgMi4yNSAwIDAgMS0xLjA3IDEuOTE2bC03LjUgNC42MTVhMi4yNSAyLjI1IDAgMCAxLTIuMzYgMEwzLjMyIDguOTFhMi4yNSAyLjI1IDAgMCAxLTEuMDctMS45MTZWNi43NSIgLz4KPC9zdmc+Cg==')] flex before:mr-2">
                             <EditableField
                               value={
                                 coverLetter?.email
@@ -528,16 +526,19 @@ const handleSingleSave=async (obj:{})=>{
                               }
                               onSave={(value: string) => {
                                 dispatch(
-                                  setCoverLetter({ ...coverLetter, email: value })
+                                  setCoverLetter({
+                                    ...coverLetter,
+                                    email: value,
+                                  })
                                 );
-                                handleSingleSave({email: value});
+                                handleSingleSave({ email: value });
                               }}
                             />
                           </h2>
                         </li>
 
                         <li>
-                          <span className="text-sm flex justify-center font-semibold ">
+                          <span className="flex justify-center text-xs font-semibold sm:text-sm ">
                             <EditableField
                               value={
                                 coverLetter?.address
@@ -552,10 +553,12 @@ const handleSingleSave=async (obj:{})=>{
                               }
                               onSave={(value: string) => {
                                 dispatch(
-                                  setCoverLetter({ ...coverLetter, address: value })
+                                  setCoverLetter({
+                                    ...coverLetter,
+                                    address: value,
+                                  })
                                 );
-                                handleSingleSave({address: value});
-
+                                handleSingleSave({ address: value });
                               }}
                             />
                             {}
@@ -567,7 +570,7 @@ const handleSingleSave=async (obj:{})=>{
 
                   <br />
                   <div className="mt-4">
-                    <span className="text-sm font-semibold text-gray-950">
+                    <span className="text-xs font-semibold sm:text-sm text-gray-950">
                       <EditableField
                         value={
                           coverLetter?.date
@@ -578,8 +581,7 @@ const handleSingleSave=async (obj:{})=>{
                           dispatch(
                             setCoverLetter({ ...coverLetter, date: value })
                           );
-                          handleSingleSave({date: value});
-
+                          handleSingleSave({ date: value });
                         }}
                       />
                     </span>
@@ -592,12 +594,12 @@ const handleSingleSave=async (obj:{})=>{
                       msgLoading ? "animate-pulse" : ""
                     }`}
                   >
-                    <div>
+                    <div className="text-xs sm:text-sm ">
                       {isEditing ? (
                         <div
                           id="editor"
                           contentEditable={isEditing}
-                          className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-[10px] "
+                          className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-1 sm:p-[10px] "
                           onBlur={() => {
                             setIsEditing(false);
                             handleSave();
@@ -618,43 +620,41 @@ const handleSingleSave=async (obj:{})=>{
                       fileName="ai-cover-letter"
                     />
                     {show && (
-                      <div className="hidden xs:block group md:block">
-                        <button
-                          disabled={
-                            msgLoading ||
-                            !session?.user?.email ||
-                            !aiInputUserData ||
-                            selectedOption === "" ||
-                            (selectedOption === "file" &&
-                              selectedFile === "") ||
-                            (selectedOption === "aiResume" &&
-                              setSelectedResumeId === "") ||
-                            !show ||
-                            isCoverLetterCopied
-                          }
-                          onClick={() => copyCoverLetter(streamedData)}
-                          className={`xs:flex-1 flex gap-2 items-center  lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b] group-hover:opacity-80 text-gray-300 border-[1px] ${
-                            msgLoading ||
-                            !session?.user?.email ||
-                            !aiInputUserData ||
-                            selectedOption === "" ||
-                            (selectedOption === "file" &&
-                              selectedFile === "") ||
-                            (selectedOption === "aiResume" &&
-                              setSelectedResumeId === "") ||
-                            !show ||
-                            isCoverLetterCopied
-                              ? " cursor-not-allowed"
-                              : ""
-                          }`}
-                        >
+                      <button
+                        disabled={
+                          msgLoading ||
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          (selectedOption === "aiResume" &&
+                            setSelectedResumeId === "") ||
+                          !show ||
+                          isCoverLetterCopied
+                        }
+                        onClick={() => copyCoverLetter(streamedData)}
+                        className={`w-full sm:max-w-max sm:w-48  lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300 group ${
+                          msgLoading ||
+                          !session?.user?.email ||
+                          !aiInputUserData ||
+                          selectedOption === "" ||
+                          (selectedOption === "file" && selectedFile === "") ||
+                          (selectedOption === "aiResume" &&
+                            setSelectedResumeId === "") ||
+                          !show ||
+                          isCoverLetterCopied
+                            ? " cursor-not-allowed"
+                            : ""
+                        }`}
+                      >
+                        <div className="flex flex-row items-center justify-center gap-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
                             strokeWidth="1.5"
                             stroke="currentColor"
-                            className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                            className="w-3 h-3 text-sm md:w-4 md:h-4 dark:text-gray-300 text-gray-950"
                           >
                             <path
                               strokeLinecap="round"
@@ -663,83 +663,83 @@ const handleSingleSave=async (obj:{})=>{
                             />
                           </svg>
 
-                          <span className="text-sm dark:text-gray-100 text-gray-950">
+                          <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
                             {msgLoading
                               ? "Please wait..."
                               : isCoverLetterCopied
                               ? "Copied"
                               : "Copy to clipboard"}
                           </span>
-                        </button>
-                      </div>
+                        </div>
+                      </button>
                     )}
                     {show && (
-                      <div className="hidden xs:block md:block group">
-                        <button
-                          type="button"
-                          disabled={
-                            !show || msgLoading || !session?.user?.email
-                          }
-                          onClick={handleClick}
-                          className={` xs:flex-1 lg:text-sm text-xs lg:px-6 group-hover:opacity-80 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
-                            !show || msgLoading || !session?.user?.email
-                              ? "opacity-50 cursor-not-allowed"
-                              : ""
-                          } `}
-                        >
-                          <div className="flex flex-row gap-2">
-                            {EditIcon}
-                            <span
-                              className={`dark:text-gray-100 text-gray-950 text-sm ${
-                                !show || msgLoading || !session?.user?.email
-                                  ? "opacity-50 cursor-not-allowed"
-                                  : ""
-                              } `}
-                            >
-                              Edit
-                            </span>
-                          </div>
-                        </button>
-                      </div>
+                      <button
+                        type="button"
+                        disabled={!show || msgLoading || !session?.user?.email}
+                        onClick={handleClick}
+                        className={`w-full sm:max-w-max sm:w-48  lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300 group ${
+                          !show || msgLoading || !session?.user?.email
+                            ? "opacity-50 cursor-not-allowed"
+                            : ""
+                        } `}
+                      >
+                        <div className="flex flex-row items-center justify-center gap-2">
+                          {EditIcon}
+                          <span
+                            className={`text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm ${
+                              !show || msgLoading || !session?.user?.email
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            } `}
+                          >
+                            Edit
+                          </span>
+                        </div>
+                      </button>
                     )}
-
                     {isEditing && (
                       <button
                         type="button"
                         onClick={handleSave}
-                        className="flex flex-row hover:opacity-80 justify-center ml-auto items-center gap-2 py-[4] text-sm px-3 border-[#312E37] border-[1px] rounded-full text-gray-100 !bg-gray-950"
+                        className="w-full sm:max-w-max sm:w-48  lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300 group"
                       >
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 20 24"
-                          fill="none"
-                          className=""
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M15.7895 21H4.15512C3.71432 21 3.29157 20.7893 2.97988 20.4142C2.66818 20.0391 2.49307 19.5304 2.49307 19V5C2.49307 4.46957 2.66818 3.96086 2.97988 3.58579C3.29157 3.21071 3.71432 3 4.15512 3H13.2964L17.4515 8V19C17.4515 19.5304 17.2764 20.0391 16.9647 20.4142C16.653 20.7893 16.2303 21 15.7895 21Z"
-                            stroke="white"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M14.1274 21V13H5.81717V21"
-                            stroke="white"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M5.81717 3V8H12.4654"
-                            stroke="white"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                        Save
+                        <div className="flex flex-row items-center justify-center gap-2">
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 20 24"
+                            stroke="currentColor"
+                            fill="none"
+                            className="w-3 h-3 text-sm md:w-4 md:h-4 dark:text-gray-300 text-gray-950"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M15.7895 21H4.15512C3.71432 21 3.29157 20.7893 2.97988 20.4142C2.66818 20.0391 2.49307 19.5304 2.49307 19V5C2.49307 4.46957 2.66818 3.96086 2.97988 3.58579C3.29157 3.21071 3.71432 3 4.15512 3H13.2964L17.4515 8V19C17.4515 19.5304 17.2764 20.0391 16.9647 20.4142C16.653 20.7893 16.2303 21 15.7895 21Z"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                            <path
+                              d="M14.1274 21V13H5.81717V21"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                            <path
+                              d="M5.81717 3V8H12.4654"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                          <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
+                            Save
+                          </span>
+                        </div>
                       </button>
                     )}
                   </div>
