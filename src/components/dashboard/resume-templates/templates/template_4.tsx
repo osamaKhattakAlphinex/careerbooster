@@ -231,7 +231,7 @@ const ResumeTemplate4 = () => {
               {/* </a> */}
             </li>
             <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row gap-2  justify-start items-start  ">
-              <div className="">
+              <div className="p-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
