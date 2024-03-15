@@ -5,6 +5,11 @@ import { createSlice } from "@reduxjs/toolkit";
 interface ICoverLetter {
   id: string;
   jobDescription: string;
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  date: string;
   coverLetterText: string;
   generatedOnDate: any;
   generatedViaOption: string;
@@ -14,6 +19,11 @@ interface ICoverLetter {
 const initialState: ICoverLetter = {
   id: "",
   jobDescription: "",
+  name: "",
+  phone: "",
+  email: "",
+  address: "",
+  date: "",
   coverLetterText: "",
   generatedOnDate: "",
   generatedViaOption: "",

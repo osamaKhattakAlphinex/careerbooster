@@ -371,13 +371,7 @@ const PersonalizedEmailBot = () => {
                 };
 
                 dispatch(setUserData({ ...userData, ...updatedObject }));
-                dispatch(
-                  setEmail(
-                    emailsResponse.data.result.emails[
-                      emailsResponse.data.result.emails.length - 1
-                    ]
-                  )
-                );
+                dispatch(setEmail(emailsResponse.data.result.emails[0]));
               }
             } else {
               const res = await resp.json();

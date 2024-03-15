@@ -808,7 +808,6 @@ const ResumeTemplate2 = () => {
                         {education.fromMonth && <span>&nbsp;</span>}
                         {education.fromYear && (
                           <EditableField
-                            
                             value={`${education?.fromYear}`}
                             onSave={(value: string) => {
                               handlers.handleSaveEductionDetail(
