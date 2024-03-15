@@ -809,7 +809,7 @@ const ResumeTemplate16 = () => {
           {/* education */}
           {resume?.education.length > 0 && (
             <>
-              <h3 className="uppercase w-fit text-base font-semibold flex items-center gap-2 border-[#444440] border-b-2 rounded-sm text-gray-900 w-full my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500">
+              <h3 className="uppercase text-base font-semibold flex items-center gap-2 border-[#444440] border-b-2 rounded-sm text-gray-900 w-full my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500">
                 {resumeEductionIcon}
                 <EditableField
                   value={
