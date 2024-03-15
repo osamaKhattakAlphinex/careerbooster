@@ -25,7 +25,7 @@ const GenerateEmailsButton = ({
         (generateButtonText === "Generate Email" && jobDescription === "")
       }
       onClick={handleGenerate}
-      className={`dark:bg-gradient-to-r absolute z-10 hover:from-purple-800 hover:to-pink-600 top-[45%] left-1/2  -translate-x-1/2 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-3 px-[28px] rounded-full ${
+      className={`absolute z-10 top-[45%] left-1/2 py-3 px-4 md:px-7  -translate-x-1/2  dark:border-none  dark:border-0 border-[1.5px] border-gray-950/80 bg-transparent flex flex-row justify-center items-center gap-1 md:gap-2 rounded-full dark:bg-gradient-to-r  hover:from-purple-800 hover:to-pink-600 from-[#b324d7] to-[#615dff] ${
         (msgLoading ||
           selectedOption === "" ||
           (selectedOption === "file" && selectedFile === "") ||
@@ -33,7 +33,7 @@ const GenerateEmailsButton = ({
         "cursor-not-allowed" // Apply these styles when the button is disabled
       }`}
     >
-      <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
+      <span className="text-xs dark:text-gray-100 text-gray-950 md:text-sm">
         {msgLoading ? (
           <div className="flex items-center">
             <svg
@@ -69,7 +69,7 @@ const GenerateEmailsButton = ({
               />
             </svg>
             <span
-              className={`dark:text-gray-100 text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
+              className={`dark:text-gray-100 text-gray-950  ml-1  md:ml-3 text-xs w-max md:text-sm font-semibold cursor-pointer`}
             >
               {generateButtonText}
             </span>
