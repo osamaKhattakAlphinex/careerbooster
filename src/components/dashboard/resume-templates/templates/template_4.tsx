@@ -339,7 +339,7 @@ const ResumeTemplate4 = () => {
                         onDrop={(e) => handleDropPrimary(e, i)}
                         draggable
                       >
-                        <div className="border border-gray-100 w-1.5 h-1.5 rounded-full bg-gray-100"></div>
+                        <div className=" w-1 h-1 rounded-full bg-gray-100"></div>
                         <div className="w-full flex justify-between">
                           <EditableField
                             value={skill}

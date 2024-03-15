@@ -92,7 +92,7 @@ const ResumeTemplate2 = () => {
     // You can do whatever you need with the selected color here
   };
   return (
-    <div className="flex flex-col items-start justify-start w-full px-6 space-y-4 text-gray-900 first-page">
+    <div className="flex flex-col py-2 items-start justify-start w-full px-6 space-y-4 text-gray-900 first-page">
       {/* Name and Title */}
       <div className="flex flex-col items-center w-full px-8 py-4 mt-1 text-center bg-gray-300  rounded-xl">
         <h2 className="text-4xl font-bold xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500  ">
@@ -745,7 +745,7 @@ const ResumeTemplate2 = () => {
                 value={
                   resume?.headings?.education
                     ? resume.headings.education
-                    : "Education"
+                    : "education"
                 }
                 style={{ width: "fit-content" }}
                 onSave={(value: string) => {
@@ -760,7 +760,7 @@ const ResumeTemplate2 = () => {
             <ul className="grid grid-cols-3 gap-2 xs:grid-cols-3 md:grid-cols-3 ">
               {resume?.education.map((education: Education, ind: number) => (
                 <React.Fragment key={education?.id || ind}>
-                  <div className=" bg-gray-300 px-4 py-2 relative  group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                  <div className=" bg-gray-300 px-4 py-2 relative  group border-transparent border-2 hover:border-dashed  rounded-md hover:border-gray-500">
                     <li className="flex items-center justify-between text-base font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:border-2 hover:bg-gray-100  ">
                       <EditableField
                         value={education?.educationLevel}
@@ -792,7 +792,6 @@ const ResumeTemplate2 = () => {
                     </li>
                     <li className="text-xs italic text-gray-800 hover:shadow-md hover:bg-gray-100">
                       <EditableField
-                        
                         value={`${education?.schoolName}`}
                         onSave={(value: string) => {
                           handlers.handleSaveEductionDetail(
@@ -830,7 +829,6 @@ const ResumeTemplate2 = () => {
                         {education.fromYear && <span>&nbsp; - &nbsp;</span>}
                         {education.toMonth && !education.isContinue && (
                           <EditableField
-                            
                             value={`${education?.toMonth}`}
                             onSave={(value: string) => {
                               handlers.handleSaveEductionDetail(
@@ -843,7 +841,6 @@ const ResumeTemplate2 = () => {
                         {education.toMonth && <span>&nbsp;</span>}
                         {education.toYear && !education.isContinue && (
                           <EditableField
-                            
                             value={`${education?.toYear}`}
                             onSave={(value: string) => {
                               handlers.handleSaveEductionDetail(
