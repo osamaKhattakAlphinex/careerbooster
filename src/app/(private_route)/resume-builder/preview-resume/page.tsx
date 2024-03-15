@@ -250,7 +250,7 @@ const Page = () => {
     let height = 0;
     let margins = 0;
     if (checking === "before") {
-      height = 30;
+      height = 45;
     }
     let getBody = page.querySelector('div[data-container-name="body"]');
     if (getBody) {

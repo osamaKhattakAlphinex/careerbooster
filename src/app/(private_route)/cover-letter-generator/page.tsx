@@ -106,6 +106,7 @@ export default function CoverLetterPage() {
     };
     dispatch(setUserData({ ...updatedObject }));
     dispatch(setCoverLetter(payLoad));
+    showSuccessToast("Cover Letter Saved")
   };
 
   // Redux
@@ -132,6 +133,7 @@ const handleSingleSave=async (obj:{})=>{
   };
   dispatch(setUserData({ ...updatedObject }));
   dispatch(setCoverLetter(payload));
+  showSuccessToast("Cover Letter Saved")
 }
 
 

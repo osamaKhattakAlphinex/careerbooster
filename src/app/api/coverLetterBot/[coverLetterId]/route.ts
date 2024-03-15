@@ -26,6 +26,11 @@ export async function PUT(
         {
           $set: {
             "coverLetters.$.coverLetterText": requestBody.coverLetterText,
+            "coverLetters.$.name": requestBody.name,
+            "coverLetters.$.phone": requestBody.phone,
+            "coverLetters.$.email": requestBody.email,
+            "coverLetters.$.address": requestBody.address,
+            "coverLetters.$.date": requestBody.date,
           },
         },
         { new: true }
