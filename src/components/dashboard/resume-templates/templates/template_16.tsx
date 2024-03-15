@@ -99,7 +99,7 @@ const ResumeTemplate16 = () => {
     <div className="relative w-full text-gray-900 first-page">
       <div className="flex">
         <div
-          className=" w-3/12 xs:w-4/12 md:w-4/12 flex flex-col  bg-[#1F1E1E]  px-4  xs:px-1 md:px-9 pt-[2rem] "
+          className=" w-3/12 xs:w-4/12 md:w-4/12 flex flex-col  bg-[#fff]  px-4  xs:px-1 md:px-9 pt-[2rem] "
           // style={{ backgroundColor: color }}
         >
           <div className="flex justify-center xs:mb-6">
