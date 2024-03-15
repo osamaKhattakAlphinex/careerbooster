@@ -38,7 +38,6 @@ const ResumeTemplate4 = () => {
 
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
-  const userData = useSelector((state: any) => state.userData);
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
