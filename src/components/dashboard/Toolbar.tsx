@@ -100,7 +100,7 @@ const Toolbar = ({
           )}
           {regenrateAchivements && (
             <button
-              title="Regenerate Achivemenet"
+              title="Regenerate Job Description"
               onClick={regenrateAchivements}
               className="p-2 overflow-hidden text-white bg-gray-600 hover:bg-gray-500"
             >
