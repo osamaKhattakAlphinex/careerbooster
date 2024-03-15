@@ -28,10 +28,10 @@ h2:empty {
 }
 
 h2[data-name="phone"][data-icon-color="black"][data-type-heading="true"]::before {
-  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iIzMzMzMzMyIgY2xhc3M9InctNiBoLTYiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTE1IDloMy43NU0xNSAxMmgzLjc1TTE1IDE1aDMuNzVNNC41IDE5LjVoMTVhMi4yNSAyLjI1IDAgMCAwIDIuMjUtMi4yNVY2Ljc1QTIuMjUgMi4yNSAwIDAgMCAxOS41IDQuNWgtMTVhMi4yNSAyLjI1IDAgMCAwLTIuMjUgMi4yNXYxMC41QTIuMjUgMi4yNSAwIDAgMCA0LjUgMTkuNVptNi0xMC4xMjVhMS44NzUgMS44NzUgMCAxIDEtMy43NSAwIDEuODc1IDEuODc1IDAgMCAxIDMuNzUgMFptMS4yOTQgNi4zMzZhNi43MjEgNi43MjEgMCAwIDEtMy4xNy43ODkgNi43MjEgNi43MjEgMCAwIDEtMy4xNjgtLjc4OSAzLjM3NiAzLjM3NiAwIDAgMSA2LjMzOCAwWiIgLz4KPC9zdmc+Cg==");
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzMzMzMzMyIgY2xhc3M9InctNiBoLTYiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTQuNSAzLjc1YTMgMyAwIDAgMC0zIDN2MTAuNWEzIDMgMCAwIDAgMyAzaDE1YTMgMyAwIDAgMCAzLTNWNi43NWEzIDMgMCAwIDAtMy0zaC0xNVptNC4xMjUgM2EyLjI1IDIuMjUgMCAxIDAgMCA0LjUgMi4yNSAyLjI1IDAgMCAwIDAtNC41Wm0tMy44NzMgOC43MDNhNC4xMjYgNC4xMjYgMCAwIDEgNy43NDYgMCAuNzUuNzUgMCAwIDEtLjM1MS45MiA3LjQ3IDcuNDcgMCAwIDEtMy41MjIuODc3IDcuNDcgNy40NyAwIDAgMS0zLjUyMi0uODc3Ljc1Ljc1IDAgMCAxLS4zNTEtLjkyWk0xNSA4LjI1YS43NS43NSAwIDAgMCAwIDEuNWgzLjc1YS43NS43NSAwIDAgMCAwLTEuNUgxNVpNMTQuMjUgMTJhLjc1Ljc1IDAgMCAxIC43NS0uNzVoMy43NWEuNzUuNzUgMCAwIDEgMCAxLjVIMTVhLjc1Ljc1IDAgMCAxLS43NS0uNzVabS43NSAyLjI1YS43NS43NSAwIDAgMCAwIDEuNWgzLjc1YS43NS43NSAwIDAgMCAwLTEuNUgxNVoiIGNsaXAtcnVsZT0iZXZlbm9kZCIgLz4KPC9zdmc+Cgo=");
 }
 h2[data-name="phone"][data-icon-color="white"][data-type-heading="true"]::before {
-  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iI2ZmZmZmZiIgY2xhc3M9InctNiBoLTYiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTE1IDloMy43NU0xNSAxMmgzLjc1TTE1IDE1aDMuNzVNNC41IDE5LjVoMTVhMi4yNSAyLjI1IDAgMCAwIDIuMjUtMi4yNVY2Ljc1QTIuMjUgMi4yNSAwIDAgMCAxOS41IDQuNWgtMTVhMi4yNSAyLjI1IDAgMCAwLTIuMjUgMi4yNXYxMC41QTIuMjUgMi4yNSAwIDAgMCA0LjUgMTkuNVptNi0xMC4xMjVhMS44NzUgMS44NzUgMCAxIDEtMy43NSAwIDEuODc1IDEuODc1IDAgMCAxIDMuNzUgMFptMS4yOTQgNi4zMzZhNi43MjEgNi43MjEgMCAwIDEtMy4xNy43ODkgNi43MjEgNi43MjEgMCAwIDEtMy4xNjgtLjc4OSAzLjM3NiAzLjM3NiAwIDAgMSA2LjMzOCAwWiIgLz4KPC9zdmc+Cg==");
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9InctNiBoLTYiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTQuNSAzLjc1YTMgMyAwIDAgMC0zIDN2MTAuNWEzIDMgMCAwIDAgMyAzaDE1YTMgMyAwIDAgMCAzLTNWNi43NWEzIDMgMCAwIDAtMy0zaC0xNVptNC4xMjUgM2EyLjI1IDIuMjUgMCAxIDAgMCA0LjUgMi4yNSAyLjI1IDAgMCAwIDAtNC41Wm0tMy44NzMgOC43MDNhNC4xMjYgNC4xMjYgMCAwIDEgNy43NDYgMCAuNzUuNzUgMCAwIDEtLjM1MS45MiA3LjQ3IDcuNDcgMCAwIDEtMy41MjIuODc3IDcuNDcgNy40NyAwIDAgMS0zLjUyMi0uODc3Ljc1Ljc1IDAgMCAxLS4zNTEtLjkyWk0xNSA4LjI1YS43NS43NSAwIDAgMCAwIDEuNWgzLjc1YS43NS43NSAwIDAgMCAwLTEuNUgxNVpNMTQuMjUgMTJhLjc1Ljc1IDAgMCAxIC43NS0uNzVoMy43NWEuNzUuNzUgMCAwIDEgMCAxLjVIMTVhLjc1Ljc1IDAgMCAxLS43NS0uNzVabS43NSAyLjI1YS43NS43NSAwIDAgMCAwIDEuNWgzLjc1YS43NS43NSAwIDAgMCAwLTEuNUgxNVoiIGNsaXAtcnVsZT0iZXZlbm9kZCIgLz4KPC9zdmc+Cgo=");
 }
 h2[data-name="summary"][data-icon-color="black"][data-type-heading="true"]::before {
   content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZD0iTTggOGEzIDMgMCAxIDAgMC02IDMgMyAwIDAgMCAwIDZaTTEyLjczNSAxNGMuNjE4IDAgMS4wOTMtLjU2MS44NzItMS4xMzlhNi4wMDIgNi4wMDIgMCAwIDAtMTEuMjE1IDBjLS4yMi41NzguMjU0IDEuMTM5Ljg3MiAxLjEzOWg5LjQ3WiIgLz4KPC9zdmc+Cg==");
@@ -79,11 +79,11 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
 [data-template-no="4"] [data-name="phone"]::before,
 [data-template-no="4"] [data-name="email"]::before,
 [data-template-no="4"] [data-name="linkedIn"]::before,
-[data-template-no="4"] [data-name="address"]::before,
-[data-template-no="3"] [data-name="phone"]::before,
+[data-template-no="4"] [data-name="address"]::before
+/* [data-template-no="3"] [data-name="phone"]::before,
 [data-template-no="3"] [data-name="email"]::before,
 [data-template-no="3"] [data-name="linkedIn"]::before,
-[data-template-no="3"] [data-name="address"]::before
+[data-template-no="3"] [data-name="address"]::before */
 /* [data-template-no="1"] [data-name="phone"]::before,
 [data-template-no="1"] [data-name="email"]::before,
 [data-template-no="1"] [data-name="linkedIn"]::before,

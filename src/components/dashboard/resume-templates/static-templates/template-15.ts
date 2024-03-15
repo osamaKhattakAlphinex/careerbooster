@@ -44,7 +44,7 @@ const cvHeadings: any = [
 const components: any = {
   shortName: {
     styles:
-      "h-8 w-8 my-8 border-8 text-xl p-10 -ml-5 translate-x-1/2 font-semibold flex justify-center items-center rounded-full bg-gray-[#1F1E1E] text-white text-center",
+      "h-8 w-8 my-8 border-8 text-xl p-10 ml-2 translate-x-1/2 font-semibold flex justify-center items-center rounded-full bg-gray-[#1F1E1E] text-white text-center",
     tag: "span",
   },
   name: {

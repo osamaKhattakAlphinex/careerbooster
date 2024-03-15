@@ -10,33 +10,33 @@ const cvHeadings: any = [
     text: "executive summary",
     section: "summary",
     headingKey: "summary",
-
-    attributes: [],
-    styles: "font-bold uppercase w-full text-base text-gray-950/80 mt-4 mb-2",
+    attributes: [{ "icon-color": "black" }],
+    styles:
+      "font-semibold uppercase w-full text-base text-gray-950/80 mt-4 mb-2 border-y-2 border-gray-950/80",
   },
   {
-    attributes: [],
     text: "work experience",
     headingKey: "workExperienceArray",
-
+    attributes: [{ "icon-color": "black" }],
     section: "workExperienceArray",
-    styles: "font-bold uppercase w-full text-base text-gray-950/80 my-2",
+    styles:
+      "font-semibold uppercase w-full text-base text-gray-950/80 my-2 border-y-2 border-gray-950/80",
   },
   {
-    attributes: [],
+    attributes: [{ "icon-color": "black" }],
     text: "education",
     headingKey: "education",
-
     section: "education",
-    styles: "font-bold w-full uppercase text-base text-gray-950/80 my-2",
+    styles:
+      "font-semibold w-full uppercase text-base text-gray-950/80 my-2 border-y-2 border-gray-950/80",
   },
   {
-    attributes: [],
+    attributes: [{ "icon-color": "black" }],
     text: "skills",
     headingKey: "primarySkills",
-
     section: "primarySkills",
-    styles: "font-bold uppercase text-base my-2 w-full text-gray-950/80",
+    styles:
+      "font-semibold uppercase text-base my-2 w-full text-gray-950/80 border-y-2 border-gray-950/80",
   },
 ];
 

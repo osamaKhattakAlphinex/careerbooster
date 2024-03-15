@@ -5,7 +5,7 @@ const cvHeadings: any = [
     headingKey: "contact",
 
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-gray-950/80 flex items-center text-sm w-full my-2",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm w-full my-2",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -14,7 +14,7 @@ const cvHeadings: any = [
     headingKey: "summary",
 
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-gray-950/80 flex items-center text-sm w-full",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm w-full",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -23,7 +23,7 @@ const cvHeadings: any = [
     headingKey: "workExperienceArray",
 
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-gray-950/80 flex items-center  text-sm w-full",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center  text-sm w-full",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -33,7 +33,7 @@ const cvHeadings: any = [
 
     attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-gray-950/80 flex items-center text-sm border-t-2 border-b-2 w-full",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
   },
   {
     text: "skills",
@@ -42,13 +42,13 @@ const cvHeadings: any = [
 
     attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-gray-950/80 flex items-center  text-sm border-t-2 border-b-2  w-full my-2",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center  text-sm border-t-2 border-b-2  w-full my-2",
   },
 ];
 const components: any = {
   shortName: {
     styles:
-      "h-8 w-8 my-8 border text-xl p-10 ml-4 translate-x-2/4 font-semibold flex justify-center items-center rounded-full bg-gray-950/80 text-white text-center",
+      "h-10 w-10 my-8 border text-xl p-10 ml-3 translate-x-2/4 font-semibold flex justify-center items-center rounded-full bg-[#444440] text-white text-center border-4 border-gray-100 shadow",
     tag: "span",
   },
   name: {
@@ -67,25 +67,25 @@ const components: any = {
       {
         id: "phone",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal items-center before:mr-2 text-gray-950/80 before:w-6 before:h-6 before:p-1 before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMi4yNSA2Ljc1YzAgOC4yODQgNi43MTYgMTUgMTUgMTVoMi4yNWEyLjI1IDIuMjUgMCAwIDAgMi4yNS0yLjI1di0xLjM3MmMwLS41MTYtLjM1MS0uOTY2LS44NTItMS4wOTFsLTQuNDIzLTEuMTA2Yy0uNDQtLjExLS45MDIuMDU1LTEuMTczLjQxN2wtLjk3IDEuMjkzYy0uMjgyLjM3Ni0uNzY5LjU0Mi0xLjIxLjM4YTEyLjAzNSAxMi4wMzUgMCAwIDEtNy4xNDMtNy4xNDNjLS4xNjItLjQ0MS4wMDQtLjkyOC4zOC0xLjIxbDEuMjkzLS45N2MuMzYzLS4yNzEuNTI3LS43MzQuNDE3LTEuMTczTDYuOTYzIDMuMTAyYTEuMTI1IDEuMTI1IDAgMCAwLTEuMDkxLS44NTJINC41QTIuMjUgMi4yNSAwIDAgMCAyLjI1IDQuNXYyLjI1WiIgLz4KPC9zdmc+Cg==')]",
+          "text-xs mt-2 flex break-all before:break-normal items-center before:mr-2 text-gray-950/80 before:w-6 before:h-6 before:p-1 before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iIzMzMzMzMyIgY2xhc3M9InctNiBoLTYiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTIuMjUgNi43NWMwIDguMjg0IDYuNzE2IDE1IDE1IDE1aDIuMjVhMi4yNSAyLjI1IDAgMCAwIDIuMjUtMi4yNXYtMS4zNzJjMC0uNTE2LS4zNTEtLjk2Ni0uODUyLTEuMDkxbC00LjQyMy0xLjEwNmMtLjQ0LS4xMS0uOTAyLjA1NS0xLjE3My40MTdsLS45NyAxLjI5M2MtLjI4Mi4zNzYtLjc2OS41NDItMS4yMS4zOGExMi4wMzUgMTIuMDM1IDAgMCAxLTcuMTQzLTcuMTQzYy0uMTYyLS40NDEuMDA0LS45MjguMzgtMS4yMWwxLjI5My0uOTdjLjM2My0uMjcxLjUyNy0uNzM0LjQxNy0xLjE3M0w2Ljk2MyAzLjEwMmExLjEyNSAxLjEyNSAwIDAgMC0xLjA5MS0uODUySDQuNUEyLjI1IDIuMjUgMCAwIDAgMi4yNSA0LjV2Mi4yNVoiIC8+Cjwvc3ZnPgo=')]",
         tag: "span",
       },
       {
         id: "email",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal text-gray-950/80  before:w-6 before:h-6 flex items-center before:p-1 before:mr-2 before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMjEuNzUgNi43NXYxMC41YTIuMjUgMi4yNSAwIDAgMS0yLjI1IDIuMjVoLTE1YTIuMjUgMi4yNSAwIDAgMS0yLjI1LTIuMjVWNi43NW0xOS41IDBBMi4yNSAyLjI1IDAgMCAwIDE5LjUgNC41aC0xNWEyLjI1IDIuMjUgMCAwIDAtMi4yNSAyLjI1bTE5LjUgMHYuMjQzYTIuMjUgMi4yNSAwIDAgMS0xLjA3IDEuOTE2bC03LjUgNC42MTVhMi4yNSAyLjI1IDAgMCAxLTIuMzYgMEwzLjMyIDguOTFhMi4yNSAyLjI1IDAgMCAxLTEuMDctMS45MTZWNi43NSIgLz4KPC9zdmc+Cg==')]",
+          "text-xs mt-2 flex break-all before:break-normal items-center before:mr-2 text-gray-950/80 before:w-6 before:h-6 before:p-1 before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMjEuNzUgNi43NXYxMC41YTIuMjUgMi4yNSAwIDAgMS0yLjI1IDIuMjVoLTE1YTIuMjUgMi4yNSAwIDAgMS0yLjI1LTIuMjVWNi43NW0xOS41IDBBMi4yNSAyLjI1IDAgMCAwIDE5LjUgNC41aC0xNWEyLjI1IDIuMjUgMCAwIDAtMi4yNSAyLjI1bTE5LjUgMHYuMjQzYTIuMjUgMi4yNSAwIDAgMS0xLjA3IDEuOTE2bC03LjUgNC42MTVhMi4yNSAyLjI1IDAgMCAxLTIuMzYgMEwzLjMyIDguOTFhMi4yNSAyLjI1IDAgMCAxLTEuMDctMS45MTZWNi43NSIgLz4KPC9zdmc+Cg==')]",
         tag: "span",
       },
       {
         id: "linkedIn",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal text-gray-950/80 before:w-4 before:h-4 before:border-gray-950/80 flex before:text-xs before:content-['in'] before:border before:p-2  before:flex before:justify-center before:rounded-full before:items-center flex before:mr-4",
+          "text-xs mt-2 flex break-all before:break-normal text-gray-950/80 before:w-4 before:h-4 items-center before:border-[#333333] flex before:text-[10px] before:font-semibold  before:border-[1.5px] before:p-1.5  before:flex before:justify-center before:rounded-sm before:items-center flex before:mr-3 flex before:ml-1  before:content-['in']",
         tag: "span",
       },
       {
         id: "address",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal text-gray-950/80  before:w-6 before:h-6 flex items-center before:p-1 before:mr-2 before:border  before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJtMi4yNSAxMiA4Ljk1NC04Ljk1NWMuNDQtLjQzOSAxLjE1Mi0uNDM5IDEuNTkxIDBMMjEuNzUgMTJNNC41IDkuNzV2MTAuMTI1YzAgLjYyMS41MDQgMS4xMjUgMS4xMjUgMS4xMjVIOS43NXYtNC44NzVjMC0uNjIxLjUwNC0xLjEyNSAxLjEyNS0xLjEyNWgyLjI1Yy42MjEgMCAxLjEyNS41MDQgMS4xMjUgMS4xMjVWMjFoNC4xMjVjLjYyMSAwIDEuMTI1LS41MDQgMS4xMjUtMS4xMjVWOS43NU04LjI1IDIxaDguMjUiIC8+Cjwvc3ZnPgo=')]",
+          "text-xs mt-2 flex break-all before:break-normal items-center before:mr-2 text-gray-950/80 before:w-6 before:h-6 before:p-1 before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iIzMzMzMzMyIgY2xhc3M9InctNiBoLTYiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0ibTIuMjUgMTIgOC45NTQtOC45NTVjLjQ0LS40MzkgMS4xNTItLjQzOSAxLjU5MSAwTDIxLjc1IDEyTTQuNSA5Ljc1djEwLjEyNWMwIC42MjEuNTA0IDEuMTI1IDEuMTI1IDEuMTI1SDkuNzV2LTQuODc1YzAtLjYyMS41MDQtMS4xMjUgMS4xMjUtMS4xMjVoMi4yNWMuNjIxIDAgMS4xMjUuNTA0IDEuMTI1IDEuMTI1VjIxaDQuMTI1Yy42MjEgMCAxLjEyNS0uNTA0IDEuMTI1LTEuMTI1VjkuNzVNOC4yNSAyMWg4LjI1IiAvPgo8L3N2Zz4KCg==')]",
         tag: "span",
       },
     ],
@@ -204,7 +204,7 @@ const templateLayout: any = {
   fragment: {
     styles: "flex flex-row bg-white fragment",
     sideBar: {
-      styles: "bg-[#e2e2e2] w-[30%] flex flex-col justify-start px-6",
+      styles: "bg-[#E2E2E2] w-[30%] flex flex-col justify-start px-6",
       elements: [
         {
           id: "shortName",
