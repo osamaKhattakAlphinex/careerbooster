@@ -5,7 +5,15 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setField } from "@/store/resumeSlice";
-import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
+import {
+  crossIcon1,
+  emailIcon,
+  phoneIcon,
+  resumeEductionIcon,
+  resumeSkillsIcon,
+  resumeSummaryIcon,
+  resumeWorkExpIcon,
+} from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
 
 import useGetSummary from "@/hooks/useGetSummary";
@@ -270,7 +278,8 @@ const ResumeTemplate9 = () => {
         <div className="flex flex-col w-full px-8 xs:px-4 md:px-8 lg:px-8">
           {/* Executive Summary */}
           <span className="border-stylee w-full h-0 border !border-gray-500 mt-4"></span>
-          <h3 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+          <h3 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+            {resumeSummaryIcon}
             <EditableField
               value={
                 resume?.headings?.summary
@@ -317,6 +326,7 @@ const ResumeTemplate9 = () => {
             <>
               <span className="border-stylee w-full h-0 border !border-gray-500 mt-4"></span>
               <h3 className="flex items-center gap-2 my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+                {resumeSkillsIcon}
                 <EditableField
                   value={
                     resume?.headings?.primarySkills
@@ -421,6 +431,7 @@ const ResumeTemplate9 = () => {
           {/* Work Experience */}
           <span className="border-stylee w-full h-0 border !border-gray-500 mt-4"></span>
           <h3 className="flex items-center gap-2 my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+            {resumeWorkExpIcon}
             <EditableField
               value={
                 resume?.headings?.workExperienceArray
@@ -743,6 +754,7 @@ const ResumeTemplate9 = () => {
             <>
               <span className="border-stylee w-full h-0 border !border-gray-500 mt-4"></span>
               <h3 className="flex items-center gap-2 my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+                {resumeEductionIcon}
                 <EditableField
                   value={
                     resume?.headings?.education

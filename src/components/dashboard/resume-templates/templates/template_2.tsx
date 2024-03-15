@@ -10,6 +10,10 @@ import {
   emailIcon,
   linkedInIcon,
   phoneIcon,
+  resumeEductionIcon,
+  resumeSkillsIcon,
+  resumeSummaryIcon,
+  resumeWorkExpIcon,
 } from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
 import useGetSummary from "@/hooks/useGetSummary";
@@ -271,7 +275,9 @@ const ResumeTemplate2 = () => {
       </div>
       {/* summary objective */}
       <div className="w-full space-y-3 ">
-        <h2 className="text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+        <h2 className="text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2 ">
+          {resumeSummaryIcon}
+
           <EditableField
             value={
               resume?.headings?.summary
@@ -315,12 +321,13 @@ const ResumeTemplate2 = () => {
       {/* Skills  */}
       <div className="w-full space-y-3">
         {resume?.primarySkills && resume?.primarySkills.length > 0 && (
-          <h2 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+          <h2 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+            {resumeSkillsIcon}
             <EditableField
               value={
                 resume?.headings?.primarySkills
                   ? resume.headings.primarySkills
-                  : "work experience"
+                  : "Skills"
               }
               style={{ width: "fit-content" }}
               onSave={(value: string) => {
@@ -416,7 +423,9 @@ const ResumeTemplate2 = () => {
 
       {/* Work Experience */}
       <div className="flex flex-col w-full space-y-3">
-        <h2 className="text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+        <h2 className="text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2 ">
+          {resumeWorkExpIcon}
+
           <EditableField
             value={
               resume?.headings?.workExperienceArray
@@ -730,12 +739,13 @@ const ResumeTemplate2 = () => {
         {resume?.education.length > 0 && (
           <>
             <h3 className="flex flex-row items-center gap-2 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
-              {educationIcon}
+              {resumeEductionIcon}
+
               <EditableField
                 value={
                   resume?.headings?.education
                     ? resume.headings.education
-                    : "work experience"
+                    : "Education"
                 }
                 style={{ width: "fit-content" }}
                 onSave={(value: string) => {

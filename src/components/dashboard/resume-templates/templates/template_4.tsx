@@ -5,7 +5,16 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TwitterPicker, ColorResult } from "react-color";
 import { setField } from "@/store/resumeSlice";
-import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
+import {
+  crossIcon1,
+  emailIcon,
+  phoneIcon,
+  resumeContactIcon,
+  resumeEductionIcon,
+  resumeSkillsIcon,
+  resumeSummaryIcon,
+  resumeWorkExpIcon,
+} from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
 
 import Toolbar from "@/components/dashboard/Toolbar";
@@ -135,6 +144,8 @@ const ResumeTemplate4 = () => {
           {/* contacts */}
 
           <h3 className="flex flex-row items-center gap-2 mb-2 -mr-6 text-base font-semibold uppercase border-2 border-transparent md:-mr-6 md:mt-4 hover:border-dashed hover:border-gray-500 hover:w-full">
+            {resumeContactIcon}
+
             <EditableField
               value={
                 resume?.headings?.contact ? resume.headings.contact : "contact"
@@ -288,6 +299,8 @@ const ResumeTemplate4 = () => {
               {resume?.primarySkills && resume?.primarySkills.length > 0 && (
                 <>
                   <h3 className="flex flex-row items-center gap-2 mb-2 -mr-6 text-base font-semibold uppercase border-2 border-transparent md:-mr-6 md:text-md hover:border-dashed hover:border-gray-500 hover:w-full ">
+                    {resumeSkillsIcon}
+
                     <EditableField
                       value={
                         resume?.headings?.primarySkills
@@ -417,7 +430,9 @@ const ResumeTemplate4 = () => {
           </div>
           {/* Executive Summary */}
 
-          <h3 className="mt-4 text-base font-semibold uppercase border-2 border-transparent md:mt-5 hover:border-dashed hover:border-gray-500 ">
+          <h3 className="mt-4 text-base font-semibold uppercase border-2 border-transparent md:mt-5 hover:border-dashed hover:border-gray-500  flex items-center gap-2">
+            {resumeSummaryIcon}
+
             <EditableField
               value={
                 resume?.headings?.summary
@@ -462,7 +477,9 @@ const ResumeTemplate4 = () => {
 
           {/* work experience */}
 
-          <h3 className="text-base font-semibold uppercase border-2 border-transparent lg:mt-4 hover:border-dashed hover:border-gray-500 ">
+          <h3 className="text-base font-semibold uppercase border-2 border-transparent lg:mt-4 hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+            {resumeWorkExpIcon}
+
             <EditableField
               value={
                 resume?.headings?.workExperienceArray
@@ -800,6 +817,8 @@ const ResumeTemplate4 = () => {
           {resume?.education.length > 0 && (
             <>
               <h3 className="flex flex-row items-center gap-2 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+                {resumeEductionIcon}
+
                 <EditableField
                   value={
                     resume?.headings?.education
