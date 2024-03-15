@@ -11,7 +11,7 @@ const cvHeadings: any = [
     section: "summary",
     headingKey: "summary",
     styles:
-      "text-gray-950/80 text-base font-bold w-full uppercase flex flex-row items-center my-2",
+      "text-gray-950/80 text-base font-semibold w-full uppercase flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -19,7 +19,7 @@ const cvHeadings: any = [
     section: "workExperienceArray",
     headingKey: "workExperienceArray",
     styles:
-      "text-gray-950/80 text-base font-bold w-full uppercase flex flex-row items-center my-2",
+      "text-gray-950/80 text-base font-semibold w-full uppercase flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -28,7 +28,7 @@ const cvHeadings: any = [
     headingKey: "education",
 
     styles:
-      "text-gray-950/80 text-base font-bold w-full uppercase flex flex-row items-center my-2",
+      "text-gray-950/80 text-base font-semibold w-full uppercase flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -37,7 +37,7 @@ const cvHeadings: any = [
     headingKey: "primarySkills",
 
     styles:
-      "font-bold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
 ];
@@ -213,7 +213,7 @@ const templateLayout: any = {
 
     contact: {
       styles:
-        "flex flex-row flex-wrap text-base w-[94%] justify-center items-center my-2 mx-auto p-3 rounded-md gap-4 bg-gray-300 text-gray-950/80",
+        "flex flex-row flex-wrap text-base w-[94%] justify-between items-center my-2 mx-auto p-3 rounded-md gap-4 bg-gray-300 text-gray-950/80",
       elements: [
         {
           id: "phone",
