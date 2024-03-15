@@ -46,6 +46,19 @@ const Template = () => {
     }
   }, []);
 
+  const [activeTemplate, setActiveTemplate] = useState<number>(0);
+
+  useEffect(() => {
+    if (templateId) {
+      const activeIndex = ALL_TEMPLATES.filter((template) => template.active).findIndex(
+        (template) => template.id == templateId
+      );
+      if (activeIndex !== -1) {
+        setActiveTemplate(activeIndex);
+      }
+    }
+  }, [templateId]);
+
   useLayoutEffect(() => {
     if (componentRef.current && isMobile) {
       const height = Math.floor(componentRef.current.offsetHeight * 0.5 + 90);
@@ -131,7 +144,11 @@ const Template = () => {
                   <SwiperSlide key={`template-${index}`}>
                     <div
                       key={`template-${index}`}
-                      className="box-border relative flex items-center overflow-hidden rounded-lg group"
+                      className={`${
+                        index === activeTemplate
+                          ? " border-2 rounded-md p-2 border-indigo-600"
+                          : " "
+                      }box-border relative flex items-center overflow-hidden rounded-lg group`}
                     >
                       <Link
                         className="no-underline"
@@ -160,6 +177,47 @@ const Template = () => {
                           width={150}
                           className="rounded-lg "
                         />
+                        {templateId === index + 1 ? (
+                ""
+              ) : (
+                <div className="absolute top-0 left-0 hidden w-full h-full overflow-hidden text-white group-hover:grid bg-slate-600/60 place-content-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-8 h-8"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
+                    />
+                  </svg>
+                </div>
+              )}
+
+              <div className="text-center h-full  absolute inset-0 flex justify-center items-center text-[#000] text-sm font-medium">
+                {index === activeTemplate && (
+                  <span className="flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="3.5"
+                      stroke="currentColor"
+                      className="w-8 h-8 text-[#fff]"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m4.5 12.75 6 6 9-13.5"
+                      />
+                    </svg>
+                  </span>
+                )}
+              </div>
                       </Link>
                     </div>
                   </SwiperSlide>

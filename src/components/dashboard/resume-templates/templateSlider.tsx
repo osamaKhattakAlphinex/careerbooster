@@ -66,11 +66,12 @@ const TemplateSlider = ({ templates }: Props) => {
         {templates.map((template, index) => (
           <SwiperSlide
             key={`template-${index}`}
-            className={`${
-              index === activeTemplate
-                ? " border-2 rounded-md p-2 border-indigo-600"
-                : " "
-            } px-[40px] bg-transparent relative py-[20px] overflow-hidden `}
+            // className={`${
+            //   index === activeTemplate
+            //     ? " border-2 rounded-md p-2 border-indigo-600"
+            //     : " "
+            // } px-[40px] bg-transparent relative py-[20px] overflow-hidden `}
+          className="px-[40px] bg-transparent relative py-[20px] overflow-hidden"
           >
             <Link
               href={`/resume-builder/templates/template?templateId=${template.id}`}
@@ -106,7 +107,7 @@ const TemplateSlider = ({ templates }: Props) => {
               )}
 
               <div className="text-center h-full  absolute inset-0 flex justify-center items-center text-[#000] text-sm font-medium">
-                {index === activeTemplate && (
+                {/* {index === activeTemplate && (
                   <span className="flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +124,7 @@ const TemplateSlider = ({ templates }: Props) => {
                       />
                     </svg>
                   </span>
-                )}
+                )} */}
               </div>
             </Link>
           </SwiperSlide>
