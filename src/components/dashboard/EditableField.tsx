@@ -30,9 +30,10 @@ const EditableField = ({
   const [isEditing, setIsEditing] = useState(false);
   let new_value: any = normalizeValue(value);
   const [editedValue, setEditedValue] = useState<any>(new_value);
-
+  const [inputWidth,setInputWidth] = useState<any>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const spanRef = useRef<HTMLInputElement>(null);
   const userData = useSelector((state: any) => state.userData);
   const handleBlur = () => {
     setIsEditing(false);
@@ -50,10 +51,15 @@ const EditableField = ({
         textareaRef.current.scrollHeight + "px";
     }
     if (inputRef.current) {
-      inputRef.current.style.width = "auto"; // Reset width to auto
-      inputRef.current.style.width = `${inputRef.current.scrollWidth - 30}px`; // Set width to scrollWidth
+      inputRef.current.style.width = `${inputWidth}px`; // Set width to scrollWidth
     }
+    
   }, [value, isEditing]);
+  useEffect(() => {
+    if(spanRef.current?.scrollWidth){
+      setInputWidth(spanRef.current?.scrollWidth+10)
+    }
+  },[spanRef.current?.scrollWidth]);
 
   return (
     <>
@@ -90,15 +96,16 @@ const EditableField = ({
           </>
         ) : (
           <>
-            <a
+            {/* <a
               href={value}
               className=" xs:hidden md:hidden hover:cursor-text text-justify"
               title="Click to Edit"
             >
               {value}
-            </a>
+            </a> */}
             <span
-              className="hidden xs:block md:block hover:cursor-text text-justify"
+              ref={spanRef}
+              className="hidden w-fit xs:block md:block hover:cursor-text text-justify"
               title="Click to Edit"
             >
               {value}

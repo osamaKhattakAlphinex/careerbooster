@@ -393,10 +393,10 @@ const ResumeTemplate4 = () => {
         </div>
         <div className="flex flex-col flex-wrap w-9/12 px-4 pt-10 pb-10 md:px-8 text-gray-950 xs:pt-16">
           <div className="flex flex-col ">
-            <h2 className="text-4xl font-bold border-2 border-transparent hover:border-dashed hover:border-gray-500 xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100">
+            <h2 className="text-4xl w-fit font-bold border-2 border-transparent hover:border-dashed hover:border-gray-500 xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100">
               <EditableField
                 value={resume?.name ? resume?.name : "FULL NAME"}
-                style={{ width: "full" }}
+                // style={{ width: "inherit" }}
                 onSave={(value: string) => {
                   if (value !== resume?.name) {
                     updateSaveHook.updateAndSaveName(value);
@@ -404,7 +404,7 @@ const ResumeTemplate4 = () => {
                 }}
               />
             </h2>
-            <h3 className="text-lg border-2 border-transparent xs:text-xs md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500 ">
+            <h3 className="text-lg w-fit border-2 border-transparent xs:text-xs md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500 ">
               <EditableField
                 value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
                 onSave={(value: string) => {

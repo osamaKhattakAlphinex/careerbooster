@@ -295,7 +295,7 @@ const ResumeTemplate16 = () => {
                   value={
                     resume?.headings?.primarySkills
                       ? resume.headings.primarySkills
-                      : "work experience"
+                      : "skills"
                   }
                   style={{ width: "fit-content" }}
                   onSave={(value: string) => {
@@ -393,7 +393,7 @@ const ResumeTemplate16 = () => {
         </div>
         <div className="xs:w-full w-9/12 flex flex-col xs:bg-[#F1F1F1] md:bg-[#F1F1F1] px-4 md:px-8 pt-[1rem] md:pt-[1rem]">
           <div className="flex flex-col justify-start pb-6 ">
-            <h2 className="text-4xl font-bold text-center border-2 border-transparent xs:text-2xl md:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500">
+            <h2 className="text-4xl w-fit font-bold text-center border-2 border-transparent xs:text-2xl md:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500">
               <EditableField
                 value={resume?.name ? resume?.name : "FULL NAME"}
                 style={{ width: "fit-content" }}
@@ -404,7 +404,7 @@ const ResumeTemplate16 = () => {
                 }}
               />
             </h2>
-            <h3 className="text-xl xs:text-[16px] md:text-xl text-center hover:shadow-md mt-2 hover:bg-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500">
+            <h3 className="text-xl w-fit xs:text-[16px] md:text-xl text-center hover:shadow-md mt-2 hover:bg-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500">
               <EditableField
                 value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
                 onSave={(value: string) => {
@@ -419,7 +419,7 @@ const ResumeTemplate16 = () => {
           {/* Executive Summary */}
 
           <span className="w-full h-0 border-stylee xs:my-0 md:my-1"></span>
-          <h3 className="uppercase text-base font-semibold rounded-sm text-gray-900 w-full my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500">
+          <h3 className="uppercase w-fit text-base font-semibold rounded-sm text-gray-900 my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500">
             <EditableField
               value={
                 resume?.headings?.summary
@@ -801,7 +801,7 @@ const ResumeTemplate16 = () => {
           {/* education */}
           {resume?.education.length > 0 && (
             <>
-              <h3 className="uppercase text-base font-semibold flex items-center gap-2 border-[#444440] border-b-2 rounded-sm text-gray-900 w-full my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500">
+              <h3 className="uppercase w-fit text-base font-semibold flex items-center gap-2 border-[#444440] border-b-2 rounded-sm text-gray-900 w-full my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500">
                 <EditableField
                   value={
                     resume?.headings?.education
