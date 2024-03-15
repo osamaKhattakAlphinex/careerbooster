@@ -873,7 +873,7 @@ const ResumeTemplate10 = () => {
               <ul className="flex flex-row justify-between w-full pl-0 md:flex-row lg:flex-row xs:flex-wrap xs:gap-2">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
-                    <div className="flex flex-col mr-4 w-[45%] bg-gray-200 p-2 md:m-2 xs:m-0 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
+                    <div className="flex flex-col mr-4 w-[45%] bg-gray-200 rounded-md p-2 md:m-2 xs:m-0 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
                       <li className="flex items-center justify-between text-base font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:bg-gray-100 ">
                         <EditableField
                           value={education?.educationLevel}
