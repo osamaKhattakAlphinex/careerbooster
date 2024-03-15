@@ -118,7 +118,7 @@ const ResumeTemplate4 = () => {
           </div> */}
           <div
             // style={{ backgroundColor: color_second }}
-            className=" w-28 h-28 xs:w-[72px] bg-[#1b1f27] relative xs:h-[72px] sm:w-24 sm:h-24 md:w-28 md:h-28 text-white  text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-4  md:mt-5 mb-4 justify-center md:mb-2"
+            className=" w-28 h-28 xs:w-[72px] bg-[#111827] relative xs:h-[72px] sm:w-24 sm:h-24 md:w-28 md:h-28 text-white  text-center flex  items-center  rounded-full mx-auto xs:mx-0 md:mx-auto mt-4  md:mt-5 mb-4 justify-center md:mb-2"
           >
             <span className="text-3xl font-semibold border-2 border-transparent xs:text-2xl md:text-3xl hover:shadow-md hover:bg-gray-500 hover:border-dashed hover:border-gray-500 ">
               <EditableField
@@ -160,7 +160,7 @@ const ResumeTemplate4 = () => {
               }}
             />
           </h3>
-          <span className="w-full mb-2 border-b-2 border-white"></span>
+          <span className="w-full mb-2 border-b-2 border-gray-100 !block"></span>
           <ul className="flex flex-col gap-2 pl-0 mb-4 text-xs break-all ">
             <li className="hover:shadow-md mb-[8px] hover:bg-gray-500  flex flex-row gap-2  justify-start items-start">
               <div className="p-1">{phoneIcon}</div>
@@ -317,7 +317,7 @@ const ResumeTemplate4 = () => {
                       }}
                     />
                   </h3>
-                  <span className="border-b-2 border-white w-full h-2 mb-2"></span>
+                  <span className="border-b-2 border-white w-full h-2 mb-2 !block"></span>
                 </>
               )}
               {resume?.primarySkills &&
@@ -449,7 +449,7 @@ const ResumeTemplate4 = () => {
               }}
             />
           </h3>
-          <span className="w-full h-0 border-[1px] !border-gray-500 mt-2 mb-4"></span>
+          <span className="w-full h-0 border-[1px] !border-gray-500 mt-2 mb-4 !block"></span>
 
           <Toolbar regenrateSummary={getSummary}>
             <div className="pr-4 text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed ">
@@ -496,7 +496,7 @@ const ResumeTemplate4 = () => {
               }}
             />
           </h3>
-          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3 !block"></span>
 
           {resume?.workExperienceArray &&
           resume?.workExperienceArray.length > 0 ? (
@@ -835,7 +835,7 @@ const ResumeTemplate4 = () => {
                   }}
                 />
               </h3>
-              <span className="border-stylee block h-0 border-[1px] !border-gray-500 my-3"></span>
+              <span className="border-stylee  h-0 border-[1px] !border-gray-500 my-3 !block"></span>
               <ul className="flex flex-wrap justify-between w-full pl-0 md:flex-row lg:flex-row ">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>
