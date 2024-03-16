@@ -88,10 +88,10 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
 }
 
 h2[data-name="phone"][data-icon-color="black"][data-type-heading="true"]::before {
-  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJtMy44NTUgNy4yODYgMS4wNjctLjUzNGExIDEgMCAwIDAgLjU0Mi0xLjA0NmwtLjQ0LTIuODU4QTEgMSAwIDAgMCA0LjAzNiAySDNhMSAxIDAgMCAwLTEgMXYyYzAgLjcwOS4wODIgMS40LjIzOCAyLjA2MmE5LjAxMiA5LjAxMiAwIDAgMCA2LjcgNi43QTkuMDI0IDkuMDI0IDAgMCAwIDExIDE0aDJhMSAxIDAgMCAwIDEtMXYtMS4wMzZhMSAxIDAgMCAwLS44NDgtLjk4OGwtMi44NTgtLjQ0YTEgMSAwIDAgMC0xLjA0Ni41NDJsLS41MzQgMS4wNjdhNy41MiA3LjUyIDAgMCAxLTQuODYtNC44NTlaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIC8+Cjwvc3ZnPgo=");
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzMzMzMzMyIgY2xhc3M9InctNiBoLTYiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTQuNSAzLjc1YTMgMyAwIDAgMC0zIDN2MTAuNWEzIDMgMCAwIDAgMyAzaDE1YTMgMyAwIDAgMCAzLTNWNi43NWEzIDMgMCAwIDAtMy0zaC0xNVptNC4xMjUgM2EyLjI1IDIuMjUgMCAxIDAgMCA0LjUgMi4yNSAyLjI1IDAgMCAwIDAtNC41Wm0tMy44NzMgOC43MDNhNC4xMjYgNC4xMjYgMCAwIDEgNy43NDYgMCAuNzUuNzUgMCAwIDEtLjM1MS45MiA3LjQ3IDcuNDcgMCAwIDEtMy41MjIuODc3IDcuNDcgNy40NyAwIDAgMS0zLjUyMi0uODc3Ljc1Ljc1IDAgMCAxLS4zNTEtLjkyWk0xNSA4LjI1YS43NS43NSAwIDAgMCAwIDEuNWgzLjc1YS43NS43NSAwIDAgMCAwLTEuNUgxNVpNMTQuMjUgMTJhLjc1Ljc1IDAgMCAxIC43NS0uNzVoMy43NWEuNzUuNzUgMCAwIDEgMCAxLjVIMTVhLjc1Ljc1IDAgMCAxLS43NS0uNzVabS43NSAyLjI1YS43NS43NSAwIDAgMCAwIDEuNWgzLjc1YS43NS43NSAwIDAgMCAwLTEuNUgxNVoiIGNsaXAtcnVsZT0iZXZlbm9kZCIgLz4KPC9zdmc+Cgo=");
 }
 h2[data-name="phone"][data-icon-color="white"][data-type-heading="true"]::before {
-  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9InctNCBoLTQiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0ibTMuODU1IDcuMjg2IDEuMDY3LS41MzRhMSAxIDAgMCAwIC41NDItMS4wNDZsLS40NC0yLjg1OEExIDEgMCAwIDAgNC4wMzYgMkgzYTEgMSAwIDAgMC0xIDF2MmMwIC43MDkuMDgyIDEuNC4yMzggMi4wNjJhOS4wMTIgOS4wMTIgMCAwIDAgNi43IDYuN0E5LjAyNCA5LjAyNCAwIDAgMCAxMSAxNGgyYTEgMSAwIDAgMCAxLTF2LTEuMDM2YTEgMSAwIDAgMC0uODQ4LS45ODhsLTIuODU4LS40NGExIDEgMCAwIDAtMS4wNDYuNTQybC0uNTM0IDEuMDY3YTcuNTIgNy41MiAwIDAgMS00Ljg2LTQuODU5WiIgY2xpcC1ydWxlPSJldmVub2RkIiAvPgo8L3N2Zz4=");
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9InctNiBoLTYiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTQuNSAzLjc1YTMgMyAwIDAgMC0zIDN2MTAuNWEzIDMgMCAwIDAgMyAzaDE1YTMgMyAwIDAgMCAzLTNWNi43NWEzIDMgMCAwIDAtMy0zaC0xNVptNC4xMjUgM2EyLjI1IDIuMjUgMCAxIDAgMCA0LjUgMi4yNSAyLjI1IDAgMCAwIDAtNC41Wm0tMy44NzMgOC43MDNhNC4xMjYgNC4xMjYgMCAwIDEgNy43NDYgMCAuNzUuNzUgMCAwIDEtLjM1MS45MiA3LjQ3IDcuNDcgMCAwIDEtMy41MjIuODc3IDcuNDcgNy40NyAwIDAgMS0zLjUyMi0uODc3Ljc1Ljc1IDAgMCAxLS4zNTEtLjkyWk0xNSA4LjI1YS43NS43NSAwIDAgMCAwIDEuNWgzLjc1YS43NS43NSAwIDAgMCAwLTEuNUgxNVpNMTQuMjUgMTJhLjc1Ljc1IDAgMCAxIC43NS0uNzVoMy43NWEuNzUuNzUgMCAwIDEgMCAxLjVIMTVhLjc1Ljc1IDAgMCAxLS43NS0uNzVabS43NSAyLjI1YS43NS43NSAwIDAgMCAwIDEuNWgzLjc1YS43NS43NSAwIDAgMCAwLTEuNUgxNVoiIGNsaXAtcnVsZT0iZXZlbm9kZCIgLz4KPC9zdmc+Cgo=");
 }
 h2[data-name="summary"][data-icon-color="black"][data-type-heading="true"]::before {
   content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0idy00IGgtNCI+CiAgPHBhdGggZD0iTTggOGEzIDMgMCAxIDAgMC02IDMgMyAwIDAgMCAwIDZaTTEyLjczNSAxNGMuNjE4IDAgMS4wOTMtLjU2MS44NzItMS4xMzlhNi4wMDIgNi4wMDIgMCAwIDAtMTEuMjE1IDBjLS4yMi41NzguMjU0IDEuMTM5Ljg3MiAxLjEzOWg5LjQ3WiIgLz4KPC9zdmc+Cg==");
@@ -131,26 +131,6 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
   content: none;
 }
 
-/* [data-template-no="5"] [data-name="phone"]::before,
-[data-template-no="5"] [data-name="email"]::before,
-[data-template-no="5"] [data-name="linkedIn"]::before,
-[data-template-no="5"] [data-name="address"]::before, */
-[data-template-no="4"] [data-name="phone"]::before,
-[data-template-no="4"] [data-name="email"]::before,
-[data-template-no="4"] [data-name="linkedIn"]::before,
-[data-template-no="4"] [data-name="address"]::before,
-[data-template-no="3"] [data-name="phone"]::before,
-[data-template-no="3"] [data-name="email"]::before,
-[data-template-no="3"] [data-name="linkedIn"]::before,
-[data-template-no="3"] [data-name="address"]::before,
-[data-template-no="1"] [data-name="phone"]::before,
-[data-template-no="1"] [data-name="email"]::before,
-[data-template-no="1"] [data-name="linkedIn"]::before,
-[data-template-no="1"] [data-name="address"]::before {
-  content: "\\2022";
-  margin-right: 10px;
-  font-size: 1rem;
-}
 
 span:empty {
   display: none;
