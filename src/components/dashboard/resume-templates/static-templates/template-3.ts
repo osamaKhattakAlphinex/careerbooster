@@ -73,13 +73,13 @@ const components: any = {
       {
         id: "email",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal items-center before:mr-2 text-gray-100 before:w-5 before:h-5 before:bg-no-repeat before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0id2hpdGUiIGNsYXNzPSJ3LTYgaC02Ij4KICA8cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGQ9Ik0yMS43NSA2Ljc1djEwLjVhMi4yNSAyLjI1IDAgMCAxLTIuMjUgMi4yNWgtMTVhMi4yNSAyLjI1IDAgMCAxLTIuMjUtMi4yNVY2Ljc1bTE5LjUgMEEyLjI1IDIuMjUgMCAwIDAgMTkuNSA0LjVoLTE1YTIuMjUgMi4yNSAwIDAgMC0yLjI1IDIuMjVtMTkuNSAwdi4yNDNhMi4yNSAyLjI1IDAgMCAxLTEuMDcgMS45MTZsLTcuNSA0LjYxNWEyLjI1IDIuMjUgMCAwIDEtMi4zNiAwTDMuMzIgOC45MWEyLjI1IDIuMjUgMCAwIDEtMS4wNy0xLjkxNlY2Ljc1IiAvPgo8L3N2Zz4=')]",
+          "text-xs mt-2 flex break-all before:break-normal items-center before:mr-2 text-gray-100 before:w-4 before:h-4 before:bg-no-repeat before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0id2hpdGUiIGNsYXNzPSJ3LTYgaC02Ij4KICA8cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGQ9Ik0yMS43NSA2Ljc1djEwLjVhMi4yNSAyLjI1IDAgMCAxLTIuMjUgMi4yNWgtMTVhMi4yNSAyLjI1IDAgMCAxLTIuMjUtMi4yNVY2Ljc1bTE5LjUgMEEyLjI1IDIuMjUgMCAwIDAgMTkuNSA0LjVoLTE1YTIuMjUgMi4yNSAwIDAgMC0yLjI1IDIuMjVtMTkuNSAwdi4yNDNhMi4yNSAyLjI1IDAgMCAxLTEuMDcgMS45MTZsLTcuNSA0LjYxNWEyLjI1IDIuMjUgMCAwIDEtMi4zNiAwTDMuMzIgOC45MWEyLjI1IDIuMjUgMCAwIDEtMS4wNy0xLjkxNlY2Ljc1IiAvPgo8L3N2Zz4=')]",
         tag: "span",
       },
       {
         id: "linkedIn",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal text-gray-100  before:w-3 before:h-3 items-center before:border-gray-300 flex before:text-[10px] before:font-semibold  before:border-[1.5px] before:p-1.5  before:flex before:justify-center before:rounded-sm before:items-center flex before:mr-2 before:content-['in']",
+          "text-xs mt-2 flex break-all before:break-normal text-gray-100  before:w-3.5 before:h-3 items-center before:border-gray-300 flex before:text-[10px] before:font-semibold  before:border-[1.5px] before:p-1.5  before:flex before:justify-center before:rounded-sm before:items-center flex before:mr-2 before:content-['in']",
         tag: "span",
       },
       {

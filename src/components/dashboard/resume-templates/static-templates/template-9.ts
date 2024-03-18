@@ -64,7 +64,7 @@ const templateLayout: any = {
       ],
     },
     sideBar: {
-      styles: "bg-gray-950 text-white w-3/12 flex flex-col justify-start px-4",
+      styles: "bg-gray-950 text-white w-[30%] flex flex-col justify-start px-4",
       elements: [
         {
           id: "phone",
@@ -86,7 +86,7 @@ const templateLayout: any = {
 
     body: {
       styles:
-        "text-black w-9/12 flex-1 flex flex-col justify-start items-start px-6 my-4",
+        "text-black w-[70%] flex-1 flex flex-col justify-start items-start px-6 my-4",
       elements: [
         {
           heading: true,

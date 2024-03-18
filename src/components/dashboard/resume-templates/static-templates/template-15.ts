@@ -69,19 +69,19 @@ const components: any = {
       {
         id: "email",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal text-gray-100 before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0id2hpdGUiIGNsYXNzPSJ3LTYgaC02Ij4KICA8cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGQ9Ik0yMS43NSA2Ljc1djEwLjVhMi4yNSAyLjI1IDAgMCAxLTIuMjUgMi4yNWgtMTVhMi4yNSAyLjI1IDAgMCAxLTIuMjUtMi4yNVY2Ljc1bTE5LjUgMEEyLjI1IDIuMjUgMCAwIDAgMTkuNSA0LjVoLTE1YTIuMjUgMi4yNSAwIDAgMC0yLjI1IDIuMjVtMTkuNSAwdi4yNDNhMi4yNSAyLjI1IDAgMCAxLTEuMDcgMS45MTZsLTcuNSA0LjYxNWEyLjI1IDIuMjUgMCAwIDEtMi4zNiAwTDMuMzIgOC45MWEyLjI1IDIuMjUgMCAwIDEtMS4wNy0xLjkxNlY2Ljc1IiAvPgo8L3N2Zz4=')] before:border before:rounded-full before:w-5 before:h-5 before:bg-no-repeat flex items-center before:p-1 before:mr-2",
+          "text-xs mt-2 flex break-all before:break-normal text-gray-100 before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0id2hpdGUiIGNsYXNzPSJ3LTYgaC02Ij4KICA8cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGQ9Ik0yMS43NSA2Ljc1djEwLjVhMi4yNSAyLjI1IDAgMCAxLTIuMjUgMi4yNWgtMTVhMi4yNSAyLjI1IDAgMCAxLTIuMjUtMi4yNVY2Ljc1bTE5LjUgMEEyLjI1IDIuMjUgMCAwIDAgMTkuNSA0LjVoLTE1YTIuMjUgMi4yNSAwIDAgMC0yLjI1IDIuMjVtMTkuNSAwdi4yNDNhMi4yNSAyLjI1IDAgMCAxLTEuMDcgMS45MTZsLTcuNSA0LjYxNWEyLjI1IDIuMjUgMCAwIDEtMi4zNiAwTDMuMzIgOC45MWEyLjI1IDIuMjUgMCAwIDEtMS4wNy0xLjkxNlY2Ljc1IiAvPgo8L3N2Zz4=')] before:rounded-full before:w-4 before:h-4 before:bg-no-repeat flex items-center before:p-1 before:mr-2",
         tag: "span",
       },
       {
         id: "linkedIn",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal text-gray-100 before:w-6 before:h-6 flex before:text-xs before:content-['in'] before:border before:flex before:justify-center before:rounded-full before:items-center flex before:mr-2",
+          "text-xs mt-2 flex items-center break-all before:break-normal before:border text-gray-100 before:w-6 before:h-4 flex before:text-xs before:content-['in'] before:flex before:justify-center before:rounded-full before:items-center flex before:mr-2",
         tag: "span",
       },
       {
         id: "address",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal text-gray-100 before:rounded-full before:w-6 before:h-6 flex items-center before:p-1 before:mr-2 before:border  before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0id2hpdGUiIGNsYXNzPSJ3LTYgaC02Ij4KICA8cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGQ9Im0yLjI1IDEyIDguOTU0LTguOTU1Yy40NC0uNDM5IDEuMTUyLS40MzkgMS41OTEgMEwyMS43NSAxMk00LjUgOS43NXYxMC4xMjVjMCAuNjIxLjUwNCAxLjEyNSAxLjEyNSAxLjEyNUg5Ljc1di00Ljg3NWMwLS42MjEuNTA0LTEuMTI1IDEuMTI1LTEuMTI1aDIuMjVjLjYyMSAwIDEuMTI1LjUwNCAxLjEyNSAxLjEyNVYyMWg0LjEyNWMuNjIxIDAgMS4xMjUtLjUwNCAxLjEyNS0xLjEyNVY5Ljc1TTguMjUgMjFoOC4yNSIgLz4KPC9zdmc+')]",
+          "text-xs mt-2 flex break-all before:break-normal text-gray-100 before:rounded-full before:w-4 before:h-4 flex items-center before:p-1 before:mr-2  before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0id2hpdGUiIGNsYXNzPSJ3LTYgaC02Ij4KICA8cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGQ9Im0yLjI1IDEyIDguOTU0LTguOTU1Yy40NC0uNDM5IDEuMTUyLS40MzkgMS41OTEgMEwyMS43NSAxMk00LjUgOS43NXYxMC4xMjVjMCAuNjIxLjUwNCAxLjEyNSAxLjEyNSAxLjEyNUg5Ljc1di00Ljg3NWMwLS42MjEuNTA0LTEuMTI1IDEuMTI1LTEuMTI1aDIuMjVjLjYyMSAwIDEuMTI1LjUwNCAxLjEyNSAxLjEyNVYyMWg0LjEyNWMuNjIxIDAgMS4xMjUtLjUwNCAxLjEyNS0xLjEyNVY5Ljc1TTguMjUgMjFoOC4yNSIgLz4KPC9zdmc+')]",
         tag: "span",
       },
     ],
