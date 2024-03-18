@@ -74,6 +74,10 @@
   color: #fff !important;
   background: #8620a0 !important;
 }
+.rc-anchor-normal {
+  width: 305px !important;
+  height: 77px !important;
+}
 
 .swiper,
 .swiper-slide,

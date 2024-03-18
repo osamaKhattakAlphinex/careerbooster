@@ -23,9 +23,9 @@ const RecentResumeCard = ({
   const { resumes } = userData;
   return (
     <>
-      <div className="dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px]  mb-4 px-4 md:px-[24px] pt-[20px] pb-[20px] ">
+      <div className="dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px]  mb-4 md:px-[24px] md:pt-[20px] md:pb-[20px] xs:px-[16px] xs:py-[12px] ">
         <div className="flex items-center gap-3">
-          <h1 className=" flex gap-2 font-semibold text-[16px] md:text-sm">
+          <h1 className=" flex gap-2 font-semibold md:text-[16px] xs:text-xs ">
             YOUR RESUMES
           </h1>
           <div className="group cursor-pointer  relative inset-0">
