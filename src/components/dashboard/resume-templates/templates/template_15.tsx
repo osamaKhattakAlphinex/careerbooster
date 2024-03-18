@@ -248,45 +248,10 @@ const ResumeTemplate15 = () => {
                 </svg>
               </div>
               <EditableField
-                value={resume?.contact?.street ? resume?.contact?.street : ""}
+                value={resume?.contact?.address ? resume.contact.address : ""}
                 onSave={(value: string) => {
-                  if (value !== resume.contact.street) {
-                    updateSaveHook.updateAndSaveBasicInfo({ street: value });
-                  }
-                }}
-              />
-              <EditableField
-                value={
-                  resume?.contact?.cityState
-                    ? resume?.contact?.cityState
-                    : "https://www.linkedin.com/"
-                }
-                onSave={(value: string) => {
-                  if (value !== resume.contact.cityState) {
-                    updateSaveHook.updateAndSaveBasicInfo({ cityState: value });
-                  }
-                }}
-              />
-
-              {resume?.contact?.country ? "," : ""}
-
-              <EditableField
-                value={resume?.contact?.country ? resume?.contact?.country : ""}
-                onSave={(value: string) => {
-                  if (value !== resume.contact.country) {
-                    updateSaveHook.updateAndSaveBasicInfo({ country: value });
-                  }
-                }}
-              />
-              <EditableField
-                value={
-                  resume?.contact?.postalCode ? resume?.contact?.postalCode : ""
-                }
-                onSave={(value: string) => {
-                  if (value !== resume.contact.postalCode) {
-                    updateSaveHook.updateAndSaveBasicInfo({
-                      postalCode: value,
-                    });
+                  if (value !== resume.contact.address) {
+                    updateSaveHook.updateAndSaveBasicInfo({ address: value });
                   }
                 }}
               />

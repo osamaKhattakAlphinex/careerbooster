@@ -179,10 +179,7 @@ const ResumeBuilder = () => {
             ...myJSON?.contact,
             email: userData?.email,
             phone: userData?.phone,
-            country: userData?.contact?.country,
-            street: userData?.contact?.street,
-            cityState: userData?.contact?.cityState,
-            postalCode: userData?.contact?.postalCode,
+            address:  userData?.contact?.street+ " " + userData?.contact?.cityState+ " "  + userData?.contact?.country+ " " + userData?.contact?.postalCode
           },
           education: userData?.education,
         };

@@ -34,10 +34,11 @@ export interface Resume {
     email: string;
     phone: string;
     linkedIn: string;
-    country: string;
-    street: string;
-    cityState: string;
-    postalCode: string;
+    address:string;
+    // country: string;
+    // street: string;
+    // cityState: string;
+    // postalCode: string;
   };
   education: [
     {
@@ -79,10 +80,11 @@ const initialState: Resume = {
     email: "",
     phone: "",
     linkedIn: "",
-    country: "",
-    street: "",
-    cityState: "",
-    postalCode: "",
+    address:""
+    // country: "",
+    // street: "",
+    // cityState: "",
+    // postalCode: "",
   },
   education: [
     {

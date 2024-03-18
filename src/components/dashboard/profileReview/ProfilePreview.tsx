@@ -125,7 +125,7 @@ const ProfilePreview = () => {
           <div className="text-sm flex flex-col gap-1 ">
             <p className="flex flex-row gap-2 items-center dark:text-gray-100 text-gray-950">
               {addressIcon}
-              {data.stepThree?.country === "" &&
+              {data.stepThree?.country &&
               data.stepThree?.street &&
               data.stepThree?.cityState &&
               data.stepThree?.postalCode ? (

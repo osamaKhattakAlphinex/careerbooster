@@ -161,7 +161,7 @@ const ResumeTemplate4 = () => {
           </h3>
           <span className="w-full mb-2 border-b-2 border-gray-100 !block"></span>
           <ul className="flex flex-col gap-2 pl-0 mb-4 text-xs break-all ">
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500  flex flex-row gap-2  justify-start items-start">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500  flex flex-row gap-2  justify-start items-center">
               <div className="p-1">{phoneIcon}</div>
 
               <EditableField
@@ -178,7 +178,7 @@ const ResumeTemplate4 = () => {
               />
             </li>
 
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 flex flex-row gap-2  justify-start items-start">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 flex flex-row gap-2  justify-start items-center">
               <div className="p-1">{emailIcon}</div>
 
               <EditableField
@@ -195,7 +195,7 @@ const ResumeTemplate4 = () => {
               />
             </li>
 
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row gap-2  justify-start items-start ">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row gap-2  justify-start items-center ">
               <div className="p-1">
                 <svg
                   width="16"
@@ -229,7 +229,7 @@ const ResumeTemplate4 = () => {
               />
               {/* </a> */}
             </li>
-            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row gap-2  justify-start items-start  ">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row gap-2  justify-start items-center  ">
               <div className="p-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -247,45 +247,10 @@ const ResumeTemplate4 = () => {
                 </svg>
               </div>
               <EditableField
-                value={resume?.contact?.street ? resume?.contact?.street : ""}
+                value={resume?.contact?.address ? resume.contact.address : ""}
                 onSave={(value: string) => {
-                  if (value !== resume.contact.street) {
-                    updateSaveHook.updateAndSaveBasicInfo({ street: value });
-                  }
-                }}
-              />
-              <EditableField
-                value={
-                  resume?.contact?.cityState
-                    ? resume?.contact?.cityState
-                    : "https://www.linkedin.com/"
-                }
-                onSave={(value: string) => {
-                  if (value !== resume.contact.cityState) {
-                    updateSaveHook.updateAndSaveBasicInfo({ cityState: value });
-                  }
-                }}
-              />
-
-              {resume?.contact?.country ? "," : ""}
-
-              <EditableField
-                value={resume?.contact?.country ? resume?.contact?.country : ""}
-                onSave={(value: string) => {
-                  if (value !== resume.contact.country) {
-                    updateSaveHook.updateAndSaveBasicInfo({ country: value });
-                  }
-                }}
-              />
-              <EditableField
-                value={
-                  resume?.contact?.postalCode ? resume?.contact?.postalCode : ""
-                }
-                onSave={(value: string) => {
-                  if (value !== resume.contact.postalCode) {
-                    updateSaveHook.updateAndSaveBasicInfo({
-                      postalCode: value,
-                    });
+                  if (value !== resume.contact.address) {
+                    updateSaveHook.updateAndSaveBasicInfo({ address: value });
                   }
                 }}
               />

@@ -30,11 +30,8 @@ const UserSchema = new Schema(
       unique: true,
       required: true,
     },
-    contact: {
-      country: String,
-      street: String,
-      cityState: String,
-      postalCode: String,
+    address: {
+      type: String,
     },
     headings :{
       education: String,

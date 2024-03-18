@@ -212,7 +212,7 @@ const ResumeTemplate1 = ({
               <EditableField
                 value={
                   resume?.contact?.linkedIn !== ""
-                    ? resume?.contact?.linkedIn
+                    ? resume.contact.linkedIn
                     : userData?.linkedin
                     ? userData?.linkedin
                     : "https://www.linkedin.com/"
@@ -243,53 +243,19 @@ const ResumeTemplate1 = ({
                 </svg>
               </div>
               <EditableField
-                value={resume?.contact?.street ? resume?.contact?.street : ""}
+                value={resume?.contact?.address ? resume.contact.address : ""}
                 onSave={(value: string) => {
-                  if (value !== resume.contact.street) {
-                    updateSaveHook.updateAndSaveBasicInfo({ street: value });
+                  if (value !== resume.contact.address) {
+                    updateSaveHook.updateAndSaveBasicInfo({ address: value });
                   }
                 }}
               />
-              <EditableField
-                value={
-                  resume?.contact?.cityState
-                    ? resume?.contact?.cityState
-                    : "https://www.linkedin.com/"
-                }
-                onSave={(value: string) => {
-                  if (value !== resume.contact.cityState) {
-                    updateSaveHook.updateAndSaveBasicInfo({ cityState: value });
-                  }
-                }}
-              />
-
-              {resume?.contact?.country ? "," : ""}
-
-              <EditableField
-                value={resume?.contact?.country ? resume?.contact?.country : ""}
-                onSave={(value: string) => {
-                  if (value !== resume.contact.country) {
-                    updateSaveHook.updateAndSaveBasicInfo({ country: value });
-                  }
-                }}
-              />
-              <EditableField
-                value={
-                  resume?.contact?.postalCode ? resume?.contact?.postalCode : ""
-                }
-                onSave={(value: string) => {
-                  if (value !== resume.contact.postalCode) {
-                    updateSaveHook.updateAndSaveBasicInfo({
-                      postalCode: value,
-                    });
-                  }
-                }}
-              />
+              
             </li>
           </ul>
           {/* EXECUTIVE SUMMARY */}
           <div className="flex flex-col flex-wrap w-full ">
-            <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 md:mt-3"></span>
+            <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 md:mt-3"></span>
             <h3 className="md:my-1 xs:text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex gap-2 items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -318,7 +284,7 @@ const ResumeTemplate1 = ({
                 }}
               />
             </h3>
-            <span className="border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
+            <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
 
             <Toolbar regenrateSummary={getSummary}>
               <div className="my-2 h-fit text-xs  text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed ">
@@ -347,7 +313,7 @@ const ResumeTemplate1 = ({
 
             {resume?.primarySkills && resume?.primarySkills.length > 0 && (
               <>
-                <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 md:mt-3"></span>
+                <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 md:mt-3"></span>
                 <h3 className="flex flex-row items-center gap-2 md:my-1 xs:text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500  ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -384,7 +350,7 @@ const ResumeTemplate1 = ({
                     }}
                   />
                 </h3>
-                <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mb-2"></span>
+                <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mb-2"></span>
                 {resume?.primarySkills &&
                 resume?.primarySkills.length > 0 &&
                 !regenerating ? (
@@ -406,7 +372,7 @@ const ResumeTemplate1 = ({
                           onDrop={(e) => handleDropPrimary(e, i)}
                           draggable
                         >
-                          <span className="!w-1 !h-1 mr-3 !bg-black !rounded-full"></span>
+                          <span className="!block  !w-1 !h-1 mr-3 !bg-black !rounded-full"></span>
                           <div className="flex items-center justify-between w-full">
                             <EditableField
                               value={skill}
@@ -470,7 +436,7 @@ const ResumeTemplate1 = ({
               </>
             )}
             {/* Work Experience */}
-            <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
+            <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
             <h3 className="md:my-1 text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -502,7 +468,7 @@ const ResumeTemplate1 = ({
                 }}
               />
             </h3>
-            <span className="border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
+            <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
 
             {resume?.workExperienceArray &&
             resume?.workExperienceArray.length > 0 ? (
@@ -813,7 +779,7 @@ const ResumeTemplate1 = ({
             {/* Education */}
             {resume?.education.length > 0 && (
               <>
-                <span className="w-full h-0 border-[1px] border-gray-500 my-t page-break"></span>
+                <span className="!block w-full h-0 border-[1px] border-gray-500 my-t page-break"></span>
                 <h3 className="flex flex-row items-center gap-2 md:my-1 text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -842,7 +808,7 @@ const ResumeTemplate1 = ({
                     }}
                   />
                 </h3>
-                <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-b"></span>
+                <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 my-b"></span>
                 <ul className="flex flex-wrap w-full pl-0 md:flex-row lg:flex-row ">
                   {resume?.education.map(
                     (education: Education, ind: number) => (

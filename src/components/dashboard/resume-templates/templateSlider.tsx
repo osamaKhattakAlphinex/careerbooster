@@ -50,16 +50,16 @@ const TemplateSlider = ({ templates }: Props) => {
             slidesPerView: 1,
           },
           640: {
-            slidesPerView: 1,
+            slidesPerView: 2,
           },
           768: {
-            slidesPerView: 1,
+            slidesPerView: 2,
           },
           1080: {
-            slidesPerView: 2,
+            slidesPerView: 3,
           },
           1280: {
-            slidesPerView: 2,
+            slidesPerView: 3,
           },
         }}
       >

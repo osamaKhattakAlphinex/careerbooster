@@ -165,7 +165,7 @@ const ResumeTemplate16 = () => {
           </h3>
           <span className="w-full mb-4 border-b-2 border-white !block"></span>
           <ul className="flex flex-col w-full gap-3 pl-0 mb-4 text-xs text-gray-300 break-all ">
-            <li className="flex flex-row items-start justify-start gap-3 hover:shadow-md hover:text-black hover:bg-gray-100 ">
+            <li className="flex flex-row items-center justify-start gap-3 hover:shadow-md hover:text-black hover:bg-gray-100 ">
               <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
                 {phoneIcon}
               </span>
@@ -182,7 +182,7 @@ const ResumeTemplate16 = () => {
                 }}
               />
             </li>
-            <li className="flex flex-row items-start justify-start gap-3 hover:shadow-md hover:text-black hover:bg-gray-100 ">
+            <li className="flex flex-row items-center justify-start gap-3 hover:shadow-md hover:text-black hover:bg-gray-100 ">
               <span className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7  md:h-7  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
                 {emailIcon}
               </span>
@@ -199,7 +199,7 @@ const ResumeTemplate16 = () => {
                 }}
               />
             </li>
-            <li className="flex flex-row items-start justify-start gap-2 text-gray-300 hover:shadow-md hover:text-black group hover:bg-gray-100 ">
+            <li className="flex flex-row items-center justify-start gap-2 text-gray-300 hover:shadow-md hover:text-black group hover:bg-gray-100 ">
               <div>
                 <svg
                   fill="none"
@@ -233,7 +233,7 @@ const ResumeTemplate16 = () => {
               />
               {/* </a> */}
             </li>
-            <li className="flex flex-row items-start justify-start gap-2 text-gray-300 hover:shadow-md hover:text-black group hover:bg-gray-100">
+            <li className="flex flex-row items-center justify-start gap-2 text-gray-300 hover:shadow-md hover:text-black group hover:bg-gray-100">
               <div className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -251,45 +251,10 @@ const ResumeTemplate16 = () => {
                 </svg>
               </div>
               <EditableField
-                value={resume?.contact?.street ? resume?.contact?.street : ""}
+                value={resume?.contact?.address ? resume.contact.address : ""}
                 onSave={(value: string) => {
-                  if (value !== resume.contact.street) {
-                    updateSaveHook.updateAndSaveBasicInfo({ street: value });
-                  }
-                }}
-              />
-              <EditableField
-                value={
-                  resume?.contact?.cityState
-                    ? resume?.contact?.cityState
-                    : "https://www.linkedin.com/"
-                }
-                onSave={(value: string) => {
-                  if (value !== resume.contact.cityState) {
-                    updateSaveHook.updateAndSaveBasicInfo({ cityState: value });
-                  }
-                }}
-              />
-
-              {resume?.contact?.country ? "," : ""}
-
-              <EditableField
-                value={resume?.contact?.country ? resume?.contact?.country : ""}
-                onSave={(value: string) => {
-                  if (value !== resume.contact.country) {
-                    updateSaveHook.updateAndSaveBasicInfo({ country: value });
-                  }
-                }}
-              />
-              <EditableField
-                value={
-                  resume?.contact?.postalCode ? resume?.contact?.postalCode : ""
-                }
-                onSave={(value: string) => {
-                  if (value !== resume.contact.postalCode) {
-                    updateSaveHook.updateAndSaveBasicInfo({
-                      postalCode: value,
-                    });
+                  if (value !== resume.contact.address) {
+                    updateSaveHook.updateAndSaveBasicInfo({ address: value });
                   }
                 }}
               />
