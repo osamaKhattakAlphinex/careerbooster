@@ -129,7 +129,7 @@ const ChangePasswordPage = () => {
         <div className="flex mt-4">
           <button
             type="submit"
-            className="py-3 px-6 font-medium text-xs md:text-sm rounded-lg  text-gray-900 !cursor-pointer  hover:opacity-70 !bg-[#e6f85e]"
+            className="py-3 px-6 font-medium text-xs md:text-smnpm  rounded-lg  text-gray-900 !cursor-pointer  hover:opacity-70 !bg-[#e6f85e]"
             disabled={password !== confirmPassword || !password || loading}
           >
             {loading ? (
