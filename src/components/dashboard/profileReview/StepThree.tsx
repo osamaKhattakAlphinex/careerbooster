@@ -34,11 +34,11 @@ const StepThree = () => {
 
   return (
     <>
-      <div className="w-full grid  grid-cols-2 xs:grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="grid w-full grid-cols-2 gap-3 xs:grid-cols-1 sm:grid-cols-2">
         <div>
           <label
             htmlFor="name"
-            className="dark:text-gray-100  text-gray-950 md:text-lg xs:text-sm "
+            className="dark:text-gray-100 text-gray-950 md:text-lg xs:text-sm "
           >
             {" "}
             Country{" "}
@@ -68,7 +68,7 @@ const StepThree = () => {
               onChange={(e) => {
                 dispatch(setStepThree({ country: e.target.value }));
               }}
-              className="rounded-md md:text-lg xs:text-sm text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              className="w-full text-gray-900 bg-transparent rounded-md outline-none md:text-lg xs:text-sm dark:text-gray-100"
               placeholder=""
             />
           </div>
@@ -77,7 +77,7 @@ const StepThree = () => {
         <div className="">
           <label
             htmlFor="name"
-            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
+            className="dark:text-gray-100 text-gray-950 xs:text-sm md:text-lg"
           >
             {" "}
             Street{" "}
@@ -107,7 +107,7 @@ const StepThree = () => {
               onChange={(e) => {
                 dispatch(setStepThree({ street: e.target.value }));
               }}
-              className="rounded-md md:text-lg xs:text-sm text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              className="w-full text-gray-900 bg-transparent rounded-md outline-none md:text-lg xs:text-sm dark:text-gray-100"
               placeholder=""
             />
           </div>
@@ -116,7 +116,7 @@ const StepThree = () => {
         <div className="">
           <label
             htmlFor="name"
-            className="dark:text-gray-100   text-gray-950 xs:text-sm md:text-lg"
+            className="dark:text-gray-100 text-gray-950 xs:text-sm md:text-lg"
           >
             {" "}
             City State{" "}
@@ -146,7 +146,7 @@ const StepThree = () => {
               onChange={(e) => {
                 dispatch(setStepThree({ cityState: e.target.value }));
               }}
-              className="rounded-md md:text-lg xs:text-sm text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              className="w-full text-gray-900 bg-transparent rounded-md outline-none md:text-lg xs:text-sm dark:text-gray-100"
               placeholder=""
             />
           </div>
@@ -155,7 +155,7 @@ const StepThree = () => {
         <div className="">
           <label
             htmlFor="name"
-            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
+            className="dark:text-gray-100 text-gray-950 xs:text-sm md:text-lg"
           >
             {" "}
             Postal Code{" "}
@@ -190,14 +190,14 @@ const StepThree = () => {
               onChange={(e) => {
                 dispatch(setStepThree({ postalCode: e.target.value }));
               }}
-              className="rounded-md md:text-lg xs:text-sm text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              className="w-full text-gray-900 bg-transparent rounded-md outline-none md:text-lg xs:text-sm dark:text-gray-100"
               placeholder=""
             />
           </div>
         </div>
       </div>
 
-      <p className="text-gray-500 mt-8">
+      <p className="mt-8 text-xs text-gray-500 md:text-sm">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

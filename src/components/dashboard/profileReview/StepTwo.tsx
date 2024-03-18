@@ -46,11 +46,11 @@ const StepTwo = () => {
 
   return (
     <>
-      <div className="w-full grid mt-2 grid-cols-2 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-3">
+      <div className="grid w-full grid-cols-2 gap-3 mt-2 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2">
         <div>
           <label
             htmlFor="phone"
-            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
+            className="dark:text-gray-100 text-gray-950 xs:text-sm md:text-lg"
           >
             {" "}
             Phone Number *{" "}
@@ -81,7 +81,7 @@ const StepTwo = () => {
                 dispatch(setStepTwo({ phoneNumber: e.target.value }));
                 dispatch(setUserData({ phone: e.target.value }));
               }}
-              className="rounded-md xs:text-sm md:text-lg  text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              className="w-full text-gray-900 bg-transparent rounded-md outline-none xs:text-sm md:text-lg dark:text-gray-100"
               placeholder=""
             />
           </div>
@@ -90,7 +90,7 @@ const StepTwo = () => {
         <div className="">
           <label
             htmlFor="name"
-            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
+            className="dark:text-gray-100 text-gray-950 xs:text-sm md:text-lg"
           >
             {" "}
             Email *{" "}
@@ -122,13 +122,13 @@ const StepTwo = () => {
                 dispatch(setStepTwo({ Email: e.target.value }));
                 dispatch(setUserData({ email: e.target.value }));
               }}
-              className="rounded-md xs:text-sm md:text-lg  text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              className="w-full text-gray-900 bg-transparent rounded-md outline-none xs:text-sm md:text-lg dark:text-gray-100"
               placeholder=""
               title="Email can't be changed"
             />
           </div>
           {stepTwo.emailInvalid && (
-            <p className="text-red-500 text-sm">
+            <p className="text-sm text-red-500">
               Please enter a valid email address
             </p>
           )}
@@ -136,7 +136,7 @@ const StepTwo = () => {
         <div>
           <label
             htmlFor="linkedin"
-            className="dark:text-gray-100  text-gray-950 xs:text-sm md:text-lg"
+            className="dark:text-gray-100 text-gray-950 xs:text-sm md:text-lg"
           >
             {" "}
             Linkedin{" "}
@@ -170,13 +170,13 @@ const StepTwo = () => {
                 dispatch(setStepTwo({ linkedin: e.target.value }));
                 dispatch(setUserData({ linkedin: e.target.value }));
               }}
-              className="rounded-md xs:text-sm md:text-lg  text-gray-900 dark:text-gray-100 bg-transparent outline-none w-full"
+              className="w-full text-gray-900 bg-transparent rounded-md outline-none xs:text-sm md:text-lg dark:text-gray-100"
               placeholder=""
             />
           </div>
         </div>
       </div>
-      <p className="text-gray-500 xs:mt-3 md:mt-2">
+      <p className="text-xs text-gray-500  md:text-sm xs:mt-3 md:mt-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
