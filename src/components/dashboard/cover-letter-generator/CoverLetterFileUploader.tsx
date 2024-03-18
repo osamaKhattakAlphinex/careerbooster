@@ -134,9 +134,9 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
 
   return (
     <>
-      <div className="py-4 lg:p-4 mb-4 rounded-lg">
-        <div className="md:py-3">
-          <div className="py-[20px] lg:w-[480px] px-[30px] flex flex-col lg:flex-row  gap-4 border-2 rounded-[10px] mt-4 border-[#312E37] border-dashed	">
+      <div className="rounded-lg">
+        <div className="">
+          <div className="py-[12px] lg:w-[480px] px-[10px] flex  lg:flex-row flex-wrap gap-4 border-2 rounded-[10px]  border-[#312E37] border-dashed	">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -156,14 +156,16 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
               <h2 className="dark:text-gray-100 text-gray-950d text-[16px] font-semibold">
                 Drag and drop file here
               </h2>
-              <p className="text-[#312E37] text-[14px]">Limit 20mb per file</p>
+              <p className="dark:text-[#7a7681] text-[14px]">
+                Limit 20mb per file
+              </p>
             </div>
             <label
-              className={` cursor-pointer flex flex-row justify-center items-center gap-2 py-3 px-[28px] border-[1px]  border-[#312E37] rounded-full ml-auto ${
+              className={` cursor-pointer flex flex-row justify-center items-center h-fit py-1.5  px-[20px] border-[1px]  border-[#312E37] rounded-full ml-auto ${
                 fileUploading && "!bg-black"
               }`}
             >
-              <span className=" dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
+              <span className=" dark:text-gray-100 text-gray-950 text-[12px] font-semibold">
                 {fileUploading ? "Uploading..." : "Browse Files"}
               </span>
               <input
@@ -200,7 +202,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
         {loadingFiles ? (
           <p className="dark:text-gray-100 text-gray-950">Loading Files...</p>
         ) : (
-          <div className="flex flex-col gap-4 mt-[30px]">
+          <div className="flex flex-col gap-4 mt-[10px]">
             <span className="text-sm text-[#615DFF]  uppercase font-bold">
               or Choose File to use
             </span>
