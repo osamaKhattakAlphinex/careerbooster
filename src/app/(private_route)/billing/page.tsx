@@ -27,53 +27,65 @@ const Page = () => {
     getCredits();
   }, [userData]);
   return (
-    <div className=" md:ml-[234px] p-10 ">
-      <div className=" flex flex-col gap-4">
-        <h2 className=" text-xl font-bold dark:text-gray-100 text-gray-950">
+    <div className=" md:ml-[234px] md:p-10 p-3 ml-0">
+      <div className="flex flex-col gap-2 ">
+        <h2 className="text-lg font-bold md:text-xl dark:text-gray-100 text-gray-950 ">
           Billing Details
         </h2>
-        <div className="flex flex-col gap-2">
-          <div className=" flex flex-row justify-between items-center">
-            <div className="flex-1 dark:text-gray-100 text-gray-950">
-              <strong>FirstName</strong>
+        <div className="flex flex-col gap-1">
+          <div className="flex flex-row items-center justify-between ">
+            <div className="flex-1 dark:text-gray-100 text-gray-950 ">
+              <strong className="text-sm font-semibold md:text-lg">
+                FirstName
+              </strong>
             </div>
             <div className="flex-1 dark:text-gray-100 text-gray-950">
-              <span>{userData.firstName}</span>
-            </div>
-          </div>
-          <div className=" flex flex-row  justify-between items-center">
-            <div className="flex-1 dark:text-gray-100 text-gray-950">
-              <strong>LastName</strong>
-            </div>
-            <div className="flex-1 dark:text-gray-100 text-gray-950">
-              <span>{userData?.lastName}</span>
+              <span className="text-sm md:text-base">{userData.firstName}</span>
             </div>
           </div>
-          <div className=" flex flex-row  justify-between items-center">
-            <div className="flex-1 dark:text-gray-100 text-gray-950">
-              <strong>Email</strong>
+          <div className="flex flex-row items-center justify-between ">
+            <div className="flex-1 dark:text-gray-100 text-gray-950 ">
+              <strong className="text-sm font-semibold md:text-lg">
+                LastName
+              </strong>
             </div>
-            <div className="flex-1  dark:text-gray-100 text-gray-950">
-              <span>{userData?.email}</span>
+            <div className="flex-1 dark:text-gray-100 text-gray-950">
+              <span className="text-sm md:text-base">{userData?.lastName}</span>
+            </div>
+          </div>
+          <div className="flex flex-row items-center justify-between ">
+            <div className="flex-1 dark:text-gray-100 text-gray-950">
+              <strong className="text-sm font-semibold md:text-lg">
+                Email
+              </strong>
+            </div>
+            <div className="flex-1 dark:text-gray-100 text-gray-950">
+              <span className="text-sm md:text-base">{userData?.email}</span>
             </div>
           </div>
           {creditsData && (
             <>
-              <div className=" flex flex-row  justify-between items-center">
+              <div className="flex flex-row items-center justify-between ">
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <strong>Amount</strong>
+                  <strong className="text-sm font-semibold md:text-lg">
+                    Amount
+                  </strong>
                 </div>
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <span>$ {creditsData?.amount} </span>
+                  <span className="text-sm md:text-base">
+                    $ {creditsData?.amount}{" "}
+                  </span>
                 </div>
               </div>
-              <div className=" flex flex-row  justify-between items-center">
+              <div className="flex flex-row items-center justify-between ">
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <strong>Status</strong>
+                  <strong className="text-sm font-semibold md:text-lg">
+                    Status
+                  </strong>
                 </div>
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
                   <span
-                    className={`${
+                    className={` className="text-sm md:text-base" ${
                       creditsData?.status ? "text-green-500" : "text-red-500"
                     }`}
                   >
@@ -82,36 +94,38 @@ const Page = () => {
                 </div>
               </div>
 
-              <div className=" flex flex-row  justify-between items-center">
+              <div className="flex flex-row items-center justify-between ">
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <strong>Package Category</strong>
+                  <strong className="text-sm font-semibold md:text-lg">
+                    Package Category
+                  </strong>
                 </div>
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <span>{creditsData?.category}</span>
-                </div>
-              </div>
-              {/* <div className=" flex flex-row  justify-between items-center">
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <strong>Total Credits</strong>
-                </div>
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <span>{creditsData?.totalCredits}</span>
-                </div>
-              </div> */}
-              <div className=" flex flex-row  justify-between items-center">
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <strong>Total Credits</strong>
-                </div>
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <span>{totalCredits}</span>
+                  <span className="text-sm md:text-base">
+                    {creditsData?.category}
+                  </span>
                 </div>
               </div>
-              <div className=" flex flex-row  justify-between items-center">
+              <div className="flex flex-row items-center justify-between ">
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <strong>Remaining Credits</strong>
+                  <strong className="text-sm font-semibold md:text-lg">
+                    Total Credits
+                  </strong>
                 </div>
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <span>{remainingCredits}</span>
+                  <span className="text-sm md:text-base">{totalCredits}</span>
+                </div>
+              </div>
+              <div className="flex flex-row items-center justify-between ">
+                <div className="flex-1 dark:text-gray-100 text-gray-950">
+                  <strong className="text-sm font-semibold md:text-lg">
+                    Remaining Credits
+                  </strong>
+                </div>
+                <div className="flex-1 dark:text-gray-100 text-gray-950">
+                  <span className="text-sm md:text-base">
+                    {remainingCredits}
+                  </span>
                 </div>
               </div>
             </>

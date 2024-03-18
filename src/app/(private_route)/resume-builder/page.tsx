@@ -179,7 +179,14 @@ const ResumeBuilder = () => {
             ...myJSON?.contact,
             email: userData?.email,
             phone: userData?.phone,
-            address:  userData?.contact?.street+ " " + userData?.contact?.cityState+ " "  + userData?.contact?.country+ " " + userData?.contact?.postalCode
+            address:
+              userData?.contact?.street +
+              " " +
+              userData?.contact?.cityState +
+              " " +
+              userData?.contact?.country +
+              " " +
+              userData?.contact?.postalCode,
           },
           education: userData?.education,
         };
@@ -362,7 +369,7 @@ const ResumeBuilder = () => {
                 {crossIcon}
               </h1>
             </div>
-            <div className="px-4 flex justify-start w-full">
+            <div className="flex justify-start w-full px-4">
               <p>Pick a template that aligns with your professional image.</p>
             </div>
             <div className=" xs:w-[300px] md:w-[44rem] lg:w-[55rem] xl:w-[55rem] rounded-xl z-50">
@@ -400,12 +407,12 @@ const ResumeBuilder = () => {
                 We have generated free text basic resume for you for further
                 design templates click here
               </p> */}
-              <div className="flex xs:flex-col md:flex-row  items-center gap-3 justify-between">
+              <div className="flex items-center justify-between gap-3 xs:flex-col md:flex-row">
                 <div className="flex items-center gaap-3">
-                  <h2 className="my-3 flex items-center text-base font-bold dark:text-gray-100 text-gray-950">
+                  <h2 className="flex items-center my-3 text-base font-bold dark:text-gray-100 text-gray-950">
                     Template Selection{" "}
                   </h2>
-                  <div className="group ml-1 cursor-pointer relative inset-0">
+                  <div className="relative inset-0 ml-1 cursor-pointer group">
                     {infoSmallIcon}
                     <div className="w-40 md:w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:left-1 md:left-4 xs:-top-[92px]  md:-top-[5.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-bl-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                       Select any template below to instantly update your resume
@@ -416,7 +423,7 @@ const ResumeBuilder = () => {
 
                 <Link
                   href="/resume-builder/templates"
-                  className="overflow-hidden text-white md:mt-3 no-underline rounded-lg"
+                  className="overflow-hidden text-white no-underline rounded-lg md:mt-3"
                 >
                   <div
                     className={` font-bold bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 text-[15px]  from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center py-2 px-3`}

@@ -570,7 +570,6 @@ const Page = () => {
       }
     });
 
-
     for (const item of Object.entries(newJsonObject)) {
       createElements(item);
     }
