@@ -313,7 +313,7 @@ export default function CoverLetterPage() {
                 <h3 className=" text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
                   Generate Cover Letter
                 </h3>
-                <div className="text-sm font-bold uppercase dark:text-gray-100 text-gray-950"></div>
+                {/* <div className="text-sm font-bold uppercase dark:text-gray-100 text-gray-950"></div> */}
               </div>
 
               {/* option */}
@@ -324,13 +324,13 @@ export default function CoverLetterPage() {
                 </span>
               </div>
 
-              <div className="flex flex-col gap-5 lg:px-0 ">
+              <div className="flex flex-col gap-3 lg:px-0 ">
                 <label
                   htmlFor="default-radio-1"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-[#959595] text-gray-950 w-fit ${
+                  className={`flex gap-3 items-center rounded-full   cursor-pointer lg:text-[15px] text-[11px]  w-fit ${
                     selectedOption === "profile"
-                      ? "border-[1px] border-[#615DFF]"
-                      : ""
+                      ? "dark:text-[#f0f0f0] text-gray-950"
+                      : "dark:text-[#959595] text-[#acabab]"
                   }`}
                 >
                   <input
@@ -354,10 +354,10 @@ export default function CoverLetterPage() {
                 </label>
                 <label
                   htmlFor="default-radio-2"
-                  className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-[#959595] text-gray-950 w-fit ${
+                  className={`flex gap-3 items-center rounded-full    cursor-pointer lg:text-[15px] text-[11px]  w-fit ${
                     selectedOption === "file"
-                      ? "border-[1px] border-[#615DFF]"
-                      : ""
+                      ? "dark:text-[#f0f0f0] text-gray-950"
+                      : "dark:text-[#959595] text-[#acabab]"
                   } `}
                 >
                   <input
@@ -369,7 +369,7 @@ export default function CoverLetterPage() {
                       setSelectedOption(e.target.value);
                     }}
                     name="default-radio"
-                    className="w-fit h-4 border-[1px]"
+                    className="w-fit h-4 border-[1px] "
                     checked={selectedOption === "file"}
                   />
                   Upload a new resume
@@ -387,10 +387,10 @@ export default function CoverLetterPage() {
               {/* form */}
               <div className="flex flex-col items-start justify-between gap-5">
                 <div className="flex flex-col w-full">
-                  <label className=" font-bold justify-between  items-center text-md md:text-[24px] dark:text-gray-100 text-gray-950 flex lg:pb-[16px] gap-[3px]">
+                  <label className="mb-1 font-bold flex justify-between  items-center text-[14px] md:text-[24px] dark:text-gray-100 text-gray-950  lg:pb-[16px] gap-[3px]">
                     <div>
                       Paste Job Description
-                      <span className="text-[#F04248] text-[24px]">*</span>
+                      <span className="text-[#F04248] text-[14px]"> *</span>
                     </div>
                     <div
                       className={`text-[#000]  group relative rounded-full xs:h-7 md:h-8 md:ml-3 flex  items-center xs:px-[12px] md:px-[16px] py-[6px]  bg-[#FEB602] text-[12px]  font-bold `}
