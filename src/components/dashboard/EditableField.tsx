@@ -29,6 +29,7 @@ const EditableField = ({
   let new_value: any = normalizeValue(value);
   const [editedValue, setEditedValue] = useState<any>(new_value);
   const [inputWidth,setInputWidth] = useState<any>(null);
+  const [textAreaHeight,setTextAreaHeight] = useState<any>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const spanRef = useRef<HTMLInputElement>(null);
@@ -43,10 +44,7 @@ const EditableField = ({
       setEditedValue(normalizeValue(value));
     }
     if (textareaRef.current) {
-      textareaRef.current.style.height = "auto";
-
-      textareaRef.current.style.height =
-        textareaRef.current.scrollHeight + "px";
+      textareaRef.current.style.height = `${textAreaHeight}px`;
     }
     if (inputRef.current) {
       inputRef.current.style.width = `${inputWidth}px`; // Set width to scrollWidth
@@ -56,6 +54,7 @@ const EditableField = ({
   useEffect(() => {
     if(spanRef.current?.scrollWidth){
       setInputWidth(spanRef.current?.scrollWidth+10)
+      setTextAreaHeight(spanRef.current?.scrollHeight+1)
     }
   },[spanRef.current?.scrollWidth]);
 

@@ -162,6 +162,12 @@ h2:empty {
 .page div:empty {
   display: none;
 }
+
+.page:not(:first-child):last-child {
+  padding-top: 5px !important;
+}
+
+
        
         </style>
         ${html}`;

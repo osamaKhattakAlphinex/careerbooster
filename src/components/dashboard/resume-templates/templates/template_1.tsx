@@ -704,7 +704,6 @@ const ResumeTemplate1 = ({
                                     >
                                       <EditableField
                                         type="textarea"
-                                        
                                         value={achievement}
                                         onSave={(value: string) => {
                                           handlers.handleUpdateAchivement(

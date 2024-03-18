@@ -35,7 +35,7 @@ export async function POST(req: any) {
     const pdf = await page.pdf({
       printBackground: true,
       width: "8.27in",
-      height: "11.67in",
+      height: "11.68in",
       margin: {
         top: "0",
         right: "0",
