@@ -564,22 +564,12 @@ const Page = () => {
   const generate = (jsonData: any) => {
     const newJsonObject: any = {};
 
-    let address = `${
-      jsonData.contact["street"] ? jsonData.contact["street"] : ""
-    } ${jsonData.contact["cityState"] ? jsonData.contact["cityState"] : ""} ${
-      jsonData.contact["country"] ? jsonData.contact["country"] : ""
-    } ${jsonData.contact["postalCode"] ? jsonData.contact["postalCode"] : ""}`;
-
     GenerationOrder.forEach((key) => {
       if (jsonData.hasOwnProperty(key)) {
         newJsonObject[key] = jsonData[key];
       }
     });
 
-    newJsonObject.contact = {
-      ...newJsonObject.contact,
-      address,
-    };
 
     for (const item of Object.entries(newJsonObject)) {
       createElements(item);

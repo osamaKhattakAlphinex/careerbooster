@@ -42,7 +42,7 @@ import TemplateSlider from "@/components/dashboard/resume-templates/templateSlid
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [showTemplatePopup, setShowTemplatePopup] = useState(true);
+  const [showTemplatePopup, setShowTemplatePopup] = useState(false);
   const confettiConfig = {
     angle: 90,
     spread: 360,
@@ -350,7 +350,7 @@ const ResumeBuilder = () => {
       <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} />
       {showTemplatePopup && (
         <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black/90">
-          <div className="flex flex-col items-center gap-4 py-4 h-3/4 bg-gray-800 rounded-lg">
+          <div className="flex flex-col items-center gap-4 py-4 bg-gray-800 rounded-lg">
             <div className="flex items-center justify-between w-full px-4">
               <h1 className="font-semibold xs:text-xl md:text-2xl ">
                 Select a Design for your Resume
