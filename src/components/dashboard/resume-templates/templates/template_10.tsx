@@ -126,7 +126,7 @@ const ResumeTemplate10 = () => {
           </span>
         </div> */}
         <div className="flex flex-col ">
-          <h2 className="text-4xl font-bold text-gray-100 border-2 border-transparent hover:shadow-md hover:bg-gray-500 hover:border-dashed hover:border-gray-500 ">
+          <h2 className="text-4xl font-bold text-gray-100 border-2 border-transparent hover:shadow-md hover:bg-gray-500 hover:border-dashed hover:border-gray-500 flex justify-center">
             <EditableField
               className={`md:w-auto xs:w-fit`}
               value={resume?.name ? resume?.name : "FULL NAME"}
