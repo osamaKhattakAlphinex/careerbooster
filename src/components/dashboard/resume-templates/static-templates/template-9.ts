@@ -64,7 +64,7 @@ const templateLayout: any = {
       ],
     },
     sideBar: {
-      styles: "bg-gray-950 text-white w-3/12 flex flex-col justify-start px-4",
+      styles: "bg-gray-950 text-white w-[30%] flex flex-col justify-start px-4",
       elements: [
         {
           id: "phone",
@@ -86,7 +86,7 @@ const templateLayout: any = {
 
     body: {
       styles:
-        "text-black w-9/12 flex-1 flex flex-col justify-start items-start px-6 my-4",
+        "text-black w-[70%] flex-1 flex flex-col justify-start items-start px-6 my-4",
       elements: [
         {
           heading: true,
@@ -129,7 +129,7 @@ const components: any = {
       {
         id: "phone",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal text-gray-100 before:bg-[#043382]  before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0id2hpdGUiIGNsYXNzPSJ3LTYgaC02Ij4KICA8cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGQ9Ik0yLjI1IDYuNzVjMCA4LjI4NCA2LjcxNiAxNSAxNSAxNWgyLjI1YTIuMjUgMi4yNSAwIDAgMCAyLjI1LTIuMjV2LTEuMzcyYzAtLjUxNi0uMzUxLS45NjYtLjg1Mi0xLjA5MWwtNC40MjMtMS4xMDZjLS40NC0uMTEtLjkwMi4wNTUtMS4xNzMuNDE3bC0uOTcgMS4yOTNjLS4yODIuMzc2LS43NjkuNTQyLTEuMjEuMzhhMTIuMDM1IDEyLjAzNSAwIDAgMS03LjE0My03LjE0M2MtLjE2Mi0uNDQxLjAwNC0uOTI4LjM4LTEuMjFsMS4yOTMtLjk3Yy4zNjMtLjI3MS41MjctLjczNC40MTctMS4xNzNMNi45NjMgMy4xMDJhMS4xMjUgMS4xMjUgMCAwIDAtMS4wOTEtLjg1Mkg0LjVBMi4yNSAyLjI1IDAgMCAwIDIuMjUgNC41djIuMjVaIiAvPgo8L3N2Zz4K')]  before:rounded-full before:w-6 before:h-6 items-center before:p-1 before:mr-2",
+          "text-xs mt-2 flex break-all before:break-normal text-gray-100 before:bg-[#043382] before:content-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0id2hpdGUiIGNsYXNzPSJ3LTYgaC02Ij4KICA8cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGQ9Ik0yLjI1IDYuNzVjMCA4LjI4NCA2LjcxNiAxNSAxNSAxNWgyLjI1YTIuMjUgMi4yNSAwIDAgMCAyLjI1LTIuMjV2LTEuMzcyYzAtLjUxNi0uMzUxLS45NjYtLjg1Mi0xLjA5MWwtNC40MjMtMS4xMDZjLS40NC0uMTEtLjkwMi4wNTUtMS4xNzMuNDE3bC0uOTcgMS4yOTNjLS4yODIuMzc2LS43NjkuNTQyLTEuMjEuMzhhMTIuMDM1IDEyLjAzNSAwIDAgMS03LjE0My03LjE0M2MtLjE2Mi0uNDQxLjAwNC0uOTI4LjM4LTEuMjFsMS4yOTMtLjk3Yy4zNjMtLjI3MS41MjctLjczNC40MTctMS4xNzNMNi45NjMgMy4xMDJhMS4xMjUgMS4xMjUgMCAwIDAtMS4wOTEtLjg1Mkg0LjVBMi4yNSAyLjI1IDAgMCAwIDIuMjUgNC41djIuMjVaIiAvPgo8L3N2Zz4K')]  before:rounded-full before:w-6 before:h-6 items-center before:p-1 before:mr-2",
         tag: "span",
       },
       {
@@ -141,7 +141,7 @@ const components: any = {
       {
         id: "linkedIn",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal text-gray-100 before:bg-[#043382] before:w-6 before:h-6 flex before:text-xs before:content-['in']  before:flex before:justify-center before:rounded-full before:items-center flex before:mr-2",
+          "text-xs mt-2 flex break-all before:break-normal text-gray-100 before:bg-[#043382] before:w-6 before:h-6 flex before:text-xs before:content-['in'] before:flex before:justify-center before:rounded-full before:items-center flex before:mr-2",
         tag: "span",
       },
       {
