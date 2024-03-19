@@ -42,7 +42,7 @@ const cvHeadings: any = [
 
 const templateLayout: any = {
   styles: "w-full",
-  attributes: [{ "template-no": "6" }],
+  attributes: [{ "template-no": "8" }],
 
   fragment: {
     styles: "flex flex-col bg-white fragment py-5",
@@ -248,11 +248,15 @@ const components: any = {
             tag: "div",
             container: [
               { id: "fromMonth", styles: "text-xs", tag: "span" },
-              { id: "fromYear", styles: "text-xs", tag: "span" },
+              {
+                id: "fromYear",
+                styles:
+                  "text-xs after:content-['-'] after:w-4 after:h-4 after:text-gray-950/80 after:mr-2",
+                tag: "span",
+              },
               {
                 id: "toMonth",
-                styles:
-                  "text-xs before:content-['-'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+                styles: "text-xs",
                 tag: "span",
               },
               { id: "toYear", styles: "text-xs", tag: "span" },

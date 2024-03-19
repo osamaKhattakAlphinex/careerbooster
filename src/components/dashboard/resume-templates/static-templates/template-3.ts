@@ -96,7 +96,7 @@ const components: any = {
     tag: "span",
   },
   summary: {
-    styles: "text-justify my-y text-xs text-gray-950/80",
+    styles: "text-justify my-2 text-xs text-gray-950/80",
     tag: "span",
   },
   workExperienceArray: {
@@ -188,13 +188,13 @@ const components: any = {
               },
               {
                 id: "fromYear",
-                styles: "text-xs text-gray-950/80",
+                styles:
+                  "text-xs after:content-['-'] after:text-gray-950/80 after:mr-2 text-gray-950/80",
                 tag: "span",
               },
               {
                 id: "toMonth",
-                styles:
-                  "text-xs before:content-['-'] before:text-gray-950/80 text-gray-950/80 before:mr-2",
+                styles: "text-xs text-gray-950/80 ",
                 tag: "span",
               },
               { id: "toYear", styles: "text-xs text-gray-950/80", tag: "span" },

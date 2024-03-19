@@ -225,12 +225,12 @@ const Page = () => {
             rowItemCount++;
           } else {
             if (nextPage) {
-              let eduDiv=nextPage.querySelector(
+              let eduDiv = nextPage.querySelector(
                 '[data-container-name="education"]'
               );
-              if(eduDiv){
+              if (eduDiv) {
                 eduDiv.appendChild(singleEducation);
-              }else{
+              } else {
                 newNextDiv.appendChild(singleEducation);
                 nextPage.append(newNextDiv);
               }

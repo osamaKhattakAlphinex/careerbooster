@@ -241,11 +241,15 @@ const components: any = {
             tag: "div",
             container: [
               { id: "fromMonth", styles: "text-xs text-gray-950", tag: "span" },
-              { id: "fromYear", styles: "text-xs text-gray-950", tag: "span" },
+              {
+                id: "fromYear",
+                styles:
+                  "text-xs text-gray-950 after:content-['-'] after:w-4 after:h-4 after:text-gray-950/80 after:mr-2",
+                tag: "span",
+              },
               {
                 id: "toMonth",
-                styles:
-                  "text-xs before:content-['-'] before:w-4 before:h-4 before:text-gray-950/80 text-gray-950 before:mr-2",
+                styles: "text-xs text-gray-950",
                 tag: "span",
               },
               { id: "toYear", styles: "text-xs text-gray-950", tag: "span" },
