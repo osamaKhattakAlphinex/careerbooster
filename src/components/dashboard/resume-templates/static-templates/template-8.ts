@@ -42,7 +42,7 @@ const cvHeadings: any = [
 
 const templateLayout: any = {
   styles: "w-full",
-  attributes: [{ "template-no": "6" }],
+  attributes: [{ "template-no": "8" }],
 
   fragment: {
     styles: "flex flex-col bg-white fragment py-5",
