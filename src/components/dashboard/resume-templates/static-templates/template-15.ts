@@ -220,7 +220,7 @@ const components: any = {
 
 const templateLayout: any = {
   styles: "w-full",
-  attributes: [{ "template-no": "5" }],
+  attributes: [{ "template-no": "15" }],
   fragment: {
     styles: "flex flex-row bg-white fragment",
     sideBar: {

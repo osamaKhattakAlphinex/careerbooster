@@ -211,7 +211,7 @@ const components: any = {
 
 const templateLayout: any = {
   styles: "w-full",
-  attributes: [{ "template-no": "1" }],
+  attributes: [{ "template-no": "14" }],
   fragment: {
     styles: "flex flex-row bg-white fragment",
     sideBar: {
