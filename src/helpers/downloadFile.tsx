@@ -51,7 +51,7 @@ any) => {
       <script src="https://cdn.tailwindcss.com"></script>
        <style>
         body {
-           padding: 0px;
+           padding: 24px;
         }</style>      
       ${html}`;
     } else {

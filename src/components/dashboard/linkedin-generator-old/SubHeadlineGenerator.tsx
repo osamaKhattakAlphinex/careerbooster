@@ -15,6 +15,9 @@ import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
+import DownloadService from "@/helpers/downloadFile";
+import { EditIcon } from "@/helpers/iconsProvider";
+import { setLinkedInHeadline } from "@/store/linkedInHeadLineSlice";
 
 const SubHeadlineGenerator = () => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
@@ -24,6 +27,7 @@ const SubHeadlineGenerator = () => {
   const [showPopup, setShowPopup] = useState(false);
   const componentRef = useRef<any>();
   const { setAvailableCredits } = useAppContext();
+  const [isEditing, setIsEditing] = useState(false);
 
   const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
   const copyHeadline = async (text: string) => {
@@ -61,15 +65,11 @@ const SubHeadlineGenerator = () => {
         skills: userData?.skills,
       });
     }
-
-    if (streamedData === "") {
-      setStreamedData(linkedinHeadline.headlineText);
-    }
   }, [userData]);
 
   const handleGenerate = async () => {
     setStreamedData("");
-    await getUserDataIfNotExists();
+    // await getUserDataIfNotExists();
     //change condition
     if (session?.user?.email && aiInputUserData) {
       setMsgLoading(true);
@@ -113,7 +113,9 @@ const SubHeadlineGenerator = () => {
               linkedInHeadlines: HeadlineResponse.data.result.linkedInHeadlines,
             };
             dispatch(setUserData({ ...userData, ...updatedObject }));
-            // dispatch()
+            dispatch(
+              setLinkedInHeadline(HeadlineResponse.data.result.linkedInHeadlines[0])
+            );
           } else {
             const res = await resp.json();
             setStreamedData(res.result + "! You ran out of Credits");
@@ -136,7 +138,45 @@ const SubHeadlineGenerator = () => {
       }, 3000);
     }
   };
+  const handleClick = () => {
+    setIsEditing((prevState) => !prevState);
+  };
 
+  const handleSave = async () => {
+    let _linkedinHeadlineText = "";
+
+    if (componentRef.current) {
+      const editorElement = componentRef.current.querySelector("#editor");
+      if (editorElement) {
+        _linkedinHeadlineText = editorElement.innerHTML;
+        editorElement.innerHTML = "";
+      }
+    }
+
+    // setStreamedData(editedContent);
+    setIsEditing(false);
+    const payLoad = {
+      id: linkedinHeadline.id,
+      text: _linkedinHeadlineText, //editedContent,
+      email: linkedinHeadline.userEmail,
+    };
+
+    await axios.post(
+      `/api/linkedInBots/headlineGenerator/linkedInHeadline`,
+      payLoad,
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    const HeadlineResponse = await axios.get(
+      "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines"
+    );
+    const updatedObject = {
+      ...userData,
+      linkedInHeadlines: HeadlineResponse.data.result.linkedInHeadlines,
+    };
+    dispatch(setUserData({ ...userData, ...updatedObject }));
+    dispatch(setLinkedInHeadline({...linkedinHeadline, headlineText: _linkedinHeadlineText}));
+  };
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
       try {
@@ -146,6 +186,18 @@ const SubHeadlineGenerator = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (isEditing) {
+      if (componentRef.current) {
+        const editorElement = componentRef.current.querySelector("#editor");
+        if (editorElement) {
+          editorElement.innerHTML = linkedinHeadline.headlineText;
+          editorElement.focus(); // Focus on the editable area
+        }
+      }
+    }
+  }, [isEditing]);
 
   // when page (session) loads, fetch user data if not exists
   useEffect(() => {
@@ -174,7 +226,6 @@ const SubHeadlineGenerator = () => {
             src={Svg1}
             width={32}
             height={32}
-            // className="z-[10000px] "
           />
         </div>
         <div className="linkedintooltext flex  flex-col lg:w-[24.0625rem] gap-2 ml-2">
@@ -192,14 +243,7 @@ const SubHeadlineGenerator = () => {
               </div>
             </div> */}
           </div>
-          {/* <LimitCard
-            title="Available"
-            limit={userData?.userPackageData?.limit?.headline_generation}
-            used={userData?.userPackageUsed?.headline_generation}
-            setPercentageCalculated={setPercentageCalculated}
-            availablePercentage={availablePercentage}
-            setAvailablePercentage={setAvailablePercentage}
-          /> */}
+         
           <p className="text-[14px] text-[#959595] pr-5">
             Generate keyword-rich headline for your LinkedIn to elevate your
             ranking in recruiter searches.
@@ -267,7 +311,24 @@ const SubHeadlineGenerator = () => {
             ref={componentRef}
             // style={{ textW: "auto" }}
           >
-            {streamedData}
+            {isEditing ? (
+              <div
+                id="editor"
+                contentEditable={isEditing}
+                className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-1 sm:p-[10px] "
+                onBlur={() => {
+                  setIsEditing(false);
+                  handleSave();
+                }}
+              ></div>
+            ) : (
+              <div
+                className=" text-gray-950"
+                dangerouslySetInnerHTML={{ __html: streamedData }}
+              ></div>
+            )}
+          </div>
+          <div className="flex flex-col flex-wrap gap-3 mt-5 buttons md:flex-row">
             <button
               disabled={msgLoading}
               onClick={() => copyHeadline(streamedData)}
@@ -298,6 +359,78 @@ const SubHeadlineGenerator = () => {
                   : "Copy to clipboard"}
               </span>
             </button>
+            <DownloadService
+              componentRef={componentRef}
+              type="onPage"
+              fileName="Linkedin-Headline"
+            />
+            <button
+              type="button"
+              disabled={msgLoading || !session?.user?.email}
+              onClick={handleClick}
+              className={`w-full sm:max-w-max sm:w-48  lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300 group ${
+                msgLoading || !session?.user?.email
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+              } `}
+            >
+              <div className="flex flex-row items-center justify-center gap-2">
+                {EditIcon}
+                <span
+                  className={`text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm ${
+                    msgLoading || !session?.user?.email
+                      ? "opacity-50 cursor-not-allowed"
+                      : ""
+                  } `}
+                >
+                  Edit
+                </span>
+              </div>
+            </button>
+            {isEditing && (
+              <button
+                type="button"
+                onClick={handleSave}
+                className="w-full sm:max-w-max sm:w-48  lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300 group"
+              >
+                <div className="flex flex-row items-center justify-center gap-2">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 20 24"
+                    stroke="currentColor"
+                    fill="none"
+                    className="w-3 h-3 text-sm md:w-4 md:h-4 dark:text-gray-300 text-gray-950"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15.7895 21H4.15512C3.71432 21 3.29157 20.7893 2.97988 20.4142C2.66818 20.0391 2.49307 19.5304 2.49307 19V5C2.49307 4.46957 2.66818 3.96086 2.97988 3.58579C3.29157 3.21071 3.71432 3 4.15512 3H13.2964L17.4515 8V19C17.4515 19.5304 17.2764 20.0391 16.9647 20.4142C16.653 20.7893 16.2303 21 15.7895 21Z"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M14.1274 21V13H5.81717V21"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M5.81717 3V8H12.4654"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
+                    Save
+                  </span>
+                </div>
+              </button>
+            )}
           </div>
         </div>
       )}

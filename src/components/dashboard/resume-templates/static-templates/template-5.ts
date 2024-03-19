@@ -221,7 +221,7 @@ const components: any = {
     elements: [
       {
         tag: "div",
-        styles: "flex flex-col w-[30%] -m-2",
+        styles: "flex flex-col w-[31%]",
         container: [
           {
             id: "educationLevel",
