@@ -18,6 +18,7 @@ import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import Toolbar from "../Toolbar";
 import Loader from "@/components/common/Loader";
 import { setLinkedInJobDescription } from "@/store/linkedInJobDescriptionSlice";
+import DownloadService from "@/helpers/downloadFile";
 
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -28,13 +29,91 @@ const SubJDGenerator = () => {
   const [showPopup, setShowPopup] = useState(false);
   const { setAvailableCredits } = useAppContext();
   const [existingJDId, setExistingJDId] = useState("");
+  const [isEditing, setIsEditing] = useState({ isEdit: false, editIndex: -1 });
+
   const [generatedWorkExperience, setGeneratedWorkExperience] = useState<
     string[]
   >([]);
 
+  const handleClick = (experienceIndex: any) => {
+    setIsEditing({ isEdit: true, editIndex: experienceIndex });
+  };
+
+  const deleteExperience = async (experienceIndex: any) => {
+    let tempText = [...generatedWorkExperience];
+    
+    tempText.splice(experienceIndex, 1);;
+
+    const jdObj = {
+      jobDescriptionId: existingJDId,
+      email: userData?.email,
+    };
+
+    await saveToDB(jdObj, tempText);
+
+    const JDResponse = await axios.get(
+      "/api/linkedInBots/jdGeneratorSingle/getAllJD"
+    );
+    const updatedObject = {
+      ...userData,
+      linkedInJobDescriptions: JDResponse.data.result.linkedInJobDescriptions,
+    };
+    dispatch(setUserData({ ...userData, ...updatedObject }));
+    dispatch(
+      setLinkedInJobDescription({ ...linkedinJD, jobDescriptionText: tempText })
+    );
+    setIsEditing({ editIndex: -1, isEdit: false });
+    showSuccessToast("Deleted Successfully")
+  };
+  const handleSave = async (experienceIndex: any) => {
+    let tempText = [...generatedWorkExperience];
+    let _linkedinJDText = "";
+    if (componentRef.current) {
+      const editorElement = componentRef.current.querySelector("#editor");
+      if (editorElement) {
+        _linkedinJDText = editorElement.innerHTML;
+        editorElement.innerHTML = "";
+      }
+    }
+    tempText[experienceIndex] = _linkedinJDText;
+
+    const jdObj = {
+      jobDescriptionId: existingJDId,
+      email: userData?.email,
+    };
+
+    await saveToDB(jdObj, tempText);
+
+    const JDResponse = await axios.get(
+      "/api/linkedInBots/jdGeneratorSingle/getAllJD"
+    );
+    const updatedObject = {
+      ...userData,
+      linkedInJobDescriptions: JDResponse.data.result.linkedInJobDescriptions,
+    };
+    dispatch(setUserData({ ...userData, ...updatedObject }));
+    dispatch(
+      setLinkedInJobDescription({ ...linkedinJD, jobDescriptionText: tempText })
+    );
+    setIsEditing({ editIndex: -1, isEdit: false });
+    showSuccessToast("Saved Successfully");
+  };
+
+  useEffect(() => {
+    if (isEditing.isEdit) {
+      if (componentRef.current) {
+        const editorElement = componentRef.current.querySelector("#editor");
+        if (editorElement) {
+          editorElement.innerHTML =
+            linkedinJD.jobDescriptionText[isEditing.editIndex];
+          editorElement.focus(); // Focus on the editable area
+        }
+      }
+    }
+  }, [isEditing]);
   const copyJD = async (text: string) => {
     try {
-      const jD_Data = await htmlToPlainText(text);
+      const jD_Data = htmlToPlainText(text);
       await copy(jD_Data);
     } catch (error) {
       console.error("Failed to copy text: ", error);
@@ -46,7 +125,6 @@ const SubJDGenerator = () => {
   const linkedinJD = useSelector((state: any) => state.linkedinJobDesc);
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
 
-
   useEffect(() => {
     setExistingJDId(linkedinJD.id);
     setGeneratedWorkExperience(linkedinJD.jobDescriptionText);
@@ -57,7 +135,7 @@ const SubJDGenerator = () => {
     let tempText = [...generatedWorkExperience];
     let singleGenerated = "";
     tempText[experienceIndex] = singleGenerated;
-    setGeneratedWorkExperience(tempText)
+    setGeneratedWorkExperience(tempText);
     let html = "";
     html += `<h2 class="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">${experience?.jobTitle}</h2>`;
     html += `<h3 class="text-base font-semibold">${experience?.company} | ${experience?.cityState} ${experience?.country}</h3>`;
@@ -132,7 +210,11 @@ const SubJDGenerator = () => {
       linkedInJobDescriptions: JDResponse.data.result.linkedInJobDescriptions,
     };
     dispatch(setUserData({ ...userData, ...updatedObject }));
-    dispatch(setLinkedInJobDescription({...linkedinJD,jobDescriptionText: tempText}));
+    dispatch(
+      setLinkedInJobDescription({ ...linkedinJD, jobDescriptionText: tempText })
+    );
+    showSuccessToast("Job Description Generated Successfully");
+
   };
 
   const handleGenerate = async () => {
@@ -258,6 +340,11 @@ const SubJDGenerator = () => {
         linkedInJobDescriptions: JDResponse.data.result.linkedInJobDescriptions,
       };
       dispatch(setUserData({ ...userData, ...updatedObject }));
+      dispatch(
+        setLinkedInJobDescription(
+          JDResponse.data.result.linkedInJobDescriptions[0]
+        )
+      );
     } else {
       setShowPopup(true);
 
@@ -280,7 +367,7 @@ const SubJDGenerator = () => {
     await fetch("/api/linkedInBots/jdGeneratorSingle/linkedInJobDescription", {
       method: "POST",
       body: JSON.stringify(payload),
-    });
+    })
   };
 
   const getUserDataIfNotExists = async () => {
@@ -315,12 +402,7 @@ const SubJDGenerator = () => {
           <div
             className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16`}
           >
-            <Image
-              alt="Svg1"
-              src={Svg1}
-              width={32}
-              height={32}
-            />
+            <Image alt="Svg1" src={Svg1} width={32} height={32} />
           </div>
           <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
             <div className="flex flex-row items-center gap-4 xs:justify-between sm:justify-between md:justify-start">
@@ -393,43 +475,65 @@ const SubJDGenerator = () => {
               </span>
             </h1>
             <div className="ml-2 font-sansbreak-words">
-              {generatedWorkExperience.map((workExperience, index) => {
-                return (
-                  <>
-                    {workExperience === "" ? (
-                      <div className="text-center">
-                        <div role="status">
-                          <Loader />
+              <div className="font-sans text-gray-950" ref={componentRef}>
+                {generatedWorkExperience.map((workExperience, index) => {
+                  return (
+                    <>
+                      {workExperience === "" ? (
+                        <div className="text-center">
+                          <div role="status">
+                            <Loader />
+                          </div>
                         </div>
-                      </div>
-                    ) : (
-                      <Toolbar
-                        key={index}
-                        regenrateAchivements={() =>
-                          workExperienceGenerator(index)
-                        }
-                        copyToClipBoard={() => copyJD(workExperience)}
-                      >
-                        <div
-                          className="list-disc border-2 border-transparent hover:border-dashed hover:border-gray-500"
-                          dangerouslySetInnerHTML={{ __html: workExperience }}
-                        ></div>
-                      </Toolbar>
-                    )}
-                  </>
-                );
-              })}
+                      ) : (
+                        <Toolbar
+                          key={index}
+                          regenrateAchivements={() =>
+                            workExperienceGenerator(index)
+                          }
+                          deleteExperience={()=> deleteExperience(index) }
+                          editWorkExperience={() => handleClick(index)}
+                          copyToClipBoard={() => copyJD(workExperience)}
+                        >
+                          {isEditing.isEdit && isEditing.editIndex === index ? (
+                            <div
+                              id="editor"
+                              contentEditable={isEditing.isEdit}
+                              className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-1 sm:p-[10px] "
+                              onBlur={() => {
+                                setIsEditing({ ...isEditing, isEdit: false });
+                                handleSave(index);
+                              }}
+                            ></div>
+                          ) : (
+                            <div
+                              className="list-disc border-2 border-transparent hover:border-dashed hover:border-gray-500 text-gray-950"
+                              dangerouslySetInnerHTML={{
+                                __html: workExperience,
+                              }}
+                            ></div>
+                          )}
+                        </Toolbar>
+                      )}
+                    </>
+                  );
+                })}
+              </div>
               {streamedData !== "" && (
-                <div
-                  className="ml-2 font-sansbreak-words"
-                  // style={{ textW: "auto" }}
-                >
+                <div className="ml-2 font-sansbreak-words">
                   <div
                     className="list-disc"
                     dangerouslySetInnerHTML={{ __html: streamedData }}
                   ></div>
                 </div>
               )}
+            </div>
+            <div className="mt-4">
+              <DownloadService
+                componentRef={componentRef}
+                type="onPage"
+                fileName="Linkedin-Job-Descriptions"
+              />
             </div>
           </div>
         )}
