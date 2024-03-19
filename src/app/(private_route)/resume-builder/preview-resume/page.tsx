@@ -651,7 +651,7 @@ const Page = () => {
         <DownloadService
           componentRef={cvRef}
           fileName={fileName}
-          preview={false}
+          preview={true}
         />
       </div>
       <div

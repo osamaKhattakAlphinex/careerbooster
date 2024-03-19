@@ -20,6 +20,7 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
   display: inline-block;
   height: 16px !important;
   width: 16px !important;
+  aspect-ratio: 1/1;
   margin-right: 4px;
 }
 

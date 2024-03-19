@@ -85,6 +85,7 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
   height: 16px !important;
   width: 16px !important;
   margin-right: 6px;
+  aspect-ratio: 1/1;
 }
 
 h2[data-name="phone"][data-icon-color="black"][data-type-heading="true"]::before {
