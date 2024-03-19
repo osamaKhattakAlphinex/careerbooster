@@ -114,7 +114,9 @@ const SubHeadlineGenerator = () => {
             };
             dispatch(setUserData({ ...userData, ...updatedObject }));
             dispatch(
-              setLinkedInHeadline(HeadlineResponse.data.result.linkedInHeadlines[0])
+              setLinkedInHeadline(
+                HeadlineResponse.data.result.linkedInHeadlines[0]
+              )
             );
           } else {
             const res = await resp.json();
@@ -175,7 +177,12 @@ const SubHeadlineGenerator = () => {
       linkedInHeadlines: HeadlineResponse.data.result.linkedInHeadlines,
     };
     dispatch(setUserData({ ...userData, ...updatedObject }));
-    dispatch(setLinkedInHeadline({...linkedinHeadline, headlineText: _linkedinHeadlineText}));
+    dispatch(
+      setLinkedInHeadline({
+        ...linkedinHeadline,
+        headlineText: _linkedinHeadlineText,
+      })
+    );
   };
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
@@ -221,12 +228,7 @@ const SubHeadlineGenerator = () => {
         <div
           className={`icon  hidden rounded-full  bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] md:flex justify-center items-center w-16 h-16`}
         >
-          <Image
-            alt="Svg1"
-            src={Svg1}
-            width={32}
-            height={32}
-          />
+          <Image alt="Svg1" src={Svg1} width={32} height={32} />
         </div>
         <div className="linkedintooltext flex  flex-col lg:w-[24.0625rem] gap-2 ml-2">
           <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
@@ -243,7 +245,7 @@ const SubHeadlineGenerator = () => {
               </div>
             </div> */}
           </div>
-         
+
           <p className="text-[14px] text-[#959595] pr-5">
             Generate keyword-rich headline for your LinkedIn to elevate your
             ranking in recruiter searches.
@@ -323,16 +325,21 @@ const SubHeadlineGenerator = () => {
               ></div>
             ) : (
               <div
-                className=" text-gray-950"
+                className=" text-gray-950 text-justify "
                 dangerouslySetInnerHTML={{ __html: streamedData }}
               ></div>
             )}
           </div>
           <div className="flex flex-col flex-wrap gap-3 mt-5 buttons md:flex-row">
+            <DownloadService
+              componentRef={componentRef}
+              type="onPage"
+              fileName="Linkedin-Headline"
+            />
             <button
               disabled={msgLoading}
               onClick={() => copyHeadline(streamedData)}
-              className={`xs:flex-1 mt-4 flex gap-2 items-center hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+              className={` flex gap-2 w-full md:w-fit items-center justify-center  hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                 msgLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
@@ -351,7 +358,7 @@ const SubHeadlineGenerator = () => {
                 />
               </svg>
 
-              <span className="dark:text-gray-100  text-gray-950 text-[15px] font-semibold">
+              <span className="dark:text-gray-100 px-2 text-gray-950 text-xs md:text-sm ">
                 {msgLoading
                   ? "Please wait..."
                   : isHeadlineCopied
@@ -359,11 +366,6 @@ const SubHeadlineGenerator = () => {
                   : "Copy to clipboard"}
               </span>
             </button>
-            <DownloadService
-              componentRef={componentRef}
-              type="onPage"
-              fileName="Linkedin-Headline"
-            />
             <button
               type="button"
               disabled={msgLoading || !session?.user?.email}
@@ -374,7 +376,7 @@ const SubHeadlineGenerator = () => {
                   : ""
               } `}
             >
-              <div className="flex flex-row items-center justify-center gap-2">
+              <div className="flex flex-row items-center text-white justify-center gap-2">
                 {EditIcon}
                 <span
                   className={`text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm ${

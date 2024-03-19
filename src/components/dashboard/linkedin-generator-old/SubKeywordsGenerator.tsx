@@ -333,7 +333,7 @@ const SubKeywordsGenerator = () => {
               <div
                 id="editor"
                 contentEditable={isEditing}
-                className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-1 sm:p-[10px] "
+                className=" text-gray-950 border-[#312E37] border-[1px]  rounded-[8px] p-1 sm:p-[10px] "
                 onBlur={() => {
                   setIsEditing(false);
                   handleSave();
@@ -341,17 +341,22 @@ const SubKeywordsGenerator = () => {
               ></div>
             ) : (
               <div
-                className=" text-gray-950"
+                className=" text-gray-950 text-justify"
                 dangerouslySetInnerHTML={{ __html: streamedData }}
               ></div>
             )}
           </div>
 
           <div className="flex flex-col flex-wrap gap-3 mt-5 buttons md:flex-row">
+            <DownloadService
+              componentRef={componentRef}
+              type="onPage"
+              fileName="Linkedin-Keywords"
+            />
             <button
               disabled={msgLoading}
               onClick={() => copyKeyword(streamedData)}
-              className={`xs:flex-1 mt-4 flex gap-2 items-center hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+              className={` flex gap-2 w-full md:w-fit items-center justify-center  hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                 msgLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
@@ -370,7 +375,7 @@ const SubKeywordsGenerator = () => {
                 />
               </svg>
 
-              <span className="dark:text-gray-100  text-gray-950 text-[15px] font-semibold">
+              <span className="dark:text-gray-100 px-2 text-gray-950 text-xs md:text-sm ">
                 {msgLoading
                   ? "Please wait..."
                   : isKeywordsCopied
@@ -378,11 +383,7 @@ const SubKeywordsGenerator = () => {
                   : "Copy to clipboard"}
               </span>
             </button>
-            <DownloadService
-              componentRef={componentRef}
-              type="onPage"
-              fileName="Linkedin-Keywords"
-            />
+
             <button
               type="button"
               disabled={msgLoading || !session?.user?.email}
@@ -393,7 +394,7 @@ const SubKeywordsGenerator = () => {
                   : ""
               } `}
             >
-              <div className="flex flex-row items-center justify-center gap-2">
+              <div className="flex flex-row text-gray-100 items-center justify-center gap-2">
                 {EditIcon}
                 <span
                   className={`text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm ${

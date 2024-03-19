@@ -245,7 +245,7 @@ h2:empty {
                 />
               </svg>
             )}
-            <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
+            <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950  md:text-sm">
               {preview
                 ? "Print Preview "
                 : loading
