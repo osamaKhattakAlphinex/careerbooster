@@ -12,7 +12,7 @@ type Props = {
 
 const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
   const userData = useSelector((state: any) => state.userData);
-  const [showDrop, setShowDrop] = useState(false);
+  const [showDrop, setShowDrop] = useState(true);
   if (!userData) return;
   const pagination = {
     clickable: true,

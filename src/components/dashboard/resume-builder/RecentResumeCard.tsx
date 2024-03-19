@@ -21,7 +21,7 @@ const RecentResumeCard = ({
 }) => {
   // redux
   const userData = useSelector((state: any) => state.userData);
-  const [showDrop, setShowDrop] = useState(false);
+  const [showDrop, setShowDrop] = useState(true);
   const { resumes } = userData;
   return (
     <>

@@ -51,7 +51,7 @@ const templateLayout = {
 
     header: {
       styles:
-        "text-black relative m-2 flex flex-col w-3/5 justify-start items-start",
+        "text-black relative m-2 break-normal flex flex-col w-1/2 justify-start items-start",
       elements: [
         {
           id: "name",
@@ -81,7 +81,7 @@ const templateLayout = {
       ],
     },
     summary: {
-      styles: "bg-red text-black text-junstify px-8 pt-12",
+      styles: "bg-red text-black text-junstify px-8 pt-4",
       elements: [
         {
           id: "summary",
