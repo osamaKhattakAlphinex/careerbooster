@@ -14,6 +14,9 @@ import LinkedInAboutCardSingle from "./LinkedInAboutCardSingle";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
+import { setLinkedInAbout } from "@/store/linkedInAboutSlice";
+import DownloadService from "@/helpers/downloadFile";
+import { EditIcon } from "@/helpers/iconsProvider";
 const SubAboutGenerator = () => {
   const componentRef = useRef<any>(null);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
@@ -44,6 +47,7 @@ const SubAboutGenerator = () => {
   const linkedinAbout = useSelector((state: any) => state.linkedinAbout);
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
   const creditLimits = useSelector((state: any) => state.creditLimits);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -58,17 +62,49 @@ const SubAboutGenerator = () => {
         skills: userData?.skills,
       });
     }
-    // if (
-    //   userData.results &&
-    //   userData.results.about &&
-    //   userData.results.about !== ""
-    // ) {
-    //   setStreamedData(userData.results.about);
-    // }
-    if (streamedData === "") {
-      setStreamedData(linkedinAbout.aboutText);
-    }
+   
   }, [userData]);
+
+  const handleClick = () => {
+    setIsEditing((prevState) => !prevState);
+  };
+
+
+  const handleSave = async () => {
+    let _linkedinAboutText = "";
+
+    if (componentRef.current) {
+      const editorElement = componentRef.current.querySelector("#editor");
+      if (editorElement) {
+        _linkedinAboutText = editorElement.innerHTML;
+        editorElement.innerHTML = "";
+      }
+    }
+
+    // setStreamedData(editedContent);
+    setIsEditing(false);
+    const payLoad = {
+      id: linkedinAbout.id,
+      text: _linkedinAboutText, //editedContent,
+      email: linkedinAbout.userEmail,
+    };
+
+    await axios.post(
+      `/api/linkedInBots/aboutGenerator/linkedInAbout`,
+      payLoad,
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    const AboutResponse = await axios.get(
+      "/api/linkedInBots/linkedinAboutGenerator/getAllAbout"
+    );
+    const updatedObject = {
+      ...userData,
+      linkedInAbouts: AboutResponse.data.result.linkedInAbouts,
+    };
+    dispatch(setUserData({ ...userData, ...updatedObject }));
+    dispatch(setLinkedInAbout({...linkedinAbout, aboutText: _linkedinAboutText}));
+  };
 
   useEffect(() => {
     setStreamedData(linkedinAbout.aboutText);
@@ -122,6 +158,9 @@ const SubAboutGenerator = () => {
               linkedInAbouts: AboutResponse.data.result.linkedInAbouts,
             };
             dispatch(setUserData({ ...userData, ...updatedObject }));
+            dispatch(
+              setLinkedInAbout(AboutResponse.data.result.linkedInAbouts[0])
+            );
           } else {
             const res = await resp.json();
             setStreamedData(res.result + "! You ran out of Credits");
@@ -154,7 +193,17 @@ const SubAboutGenerator = () => {
       }
     }
   };
-
+  useEffect(() => {
+    if (isEditing) {
+      if (componentRef.current) {
+        const editorElement = componentRef.current.querySelector("#editor");
+        if (editorElement) {
+          editorElement.innerHTML = linkedinAbout.aboutText;
+          editorElement.focus(); // Focus on the editable area
+        }
+      }
+    }
+  }, [isEditing]);
   // when page (session) loads, fetch user data if not exists
   useEffect(() => {
     if (session?.user?.email) {
@@ -197,15 +246,6 @@ const SubAboutGenerator = () => {
               </div>
             </div> */}
           </div>
-          {/* <LimitCard
-            title="Available"
-            limit={userData?.userPackageData?.limit?.about_generation}
-            used={userData?.userPackageUsed?.about_generation}
-            setPercentageCalculated={setPercentageCalculated}
-            availablePercentage={availablePercentage}
-            setAvailablePercentage={setAvailablePercentage}
-          /> */}
-
           <p className="text-[14px] text-[#959595] pr-5">
             Transform your career journey into a compelling story that captures
             recruiters{"'"} attention and enhances your LinkedIn profile{"'"}s
@@ -269,15 +309,35 @@ const SubAboutGenerator = () => {
             </span>
           </h1>
           <div
-            className="font-sans text-gray-950 whitespace-pre-wrap break-words"
+            className="font-sans whitespace-pre-wrap text-gray-950 break-words"
+            ref={componentRef}
             // style={{ textW: "auto" }}
           >
-            {streamedData}
-
+          {isEditing ? (
+              <div
+                id="editor"
+                contentEditable={isEditing}
+                className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-1 sm:p-[10px] "
+                onBlur={() => {
+                  setIsEditing(false);
+                  handleSave();
+                }}
+              ></div>
+            ) : (
+              <div
+                className=" text-gray-950"
+                dangerouslySetInnerHTML={{ __html: streamedData }}
+              ></div>
+            )}
+            </div>
+           
+           
+           
+            <div className="flex flex-col flex-wrap gap-3 mt-5 buttons md:flex-row">
             <button
               disabled={msgLoading}
               onClick={() => copyAbout(streamedData)}
-              className={`xs:flex-1 flex gap-2 items-center mt-4 hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+              className={`xs:flex-1 mt-4 flex gap-2 items-center hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                 msgLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
@@ -296,7 +356,7 @@ const SubAboutGenerator = () => {
                 />
               </svg>
 
-              <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
+              <span className="dark:text-gray-100  text-gray-950 text-[15px] font-semibold">
                 {msgLoading
                   ? "Please wait..."
                   : isAboutCopied
@@ -304,59 +364,81 @@ const SubAboutGenerator = () => {
                   : "Copy to clipboard"}
               </span>
             </button>
-
-            <div className="flex flex-row xs:flex-col md:flex-row">
-              {option !== "about" && (
-                <button
-                  type="button"
-                  disabled={msgLoading || !session?.user?.email}
-                  onClick={() => handleGenerate()}
-                  className={` bg-gradient-to-r from-[#B324D7] hover:from-purple-800 hover:to-pink-600 h-11 xs:py-2  mx-2 mt-4 to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[22px]`}
+            <DownloadService
+              componentRef={componentRef}
+              type="onPage"
+              fileName="Linkedin-About"
+            />
+            <button
+              type="button"
+              disabled={msgLoading || !session?.user?.email}
+              onClick={handleClick}
+              className={`w-full sm:max-w-max sm:w-48  lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300 group ${
+                msgLoading || !session?.user?.email
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+              } `}
+            >
+              <div className="flex flex-row items-center justify-center gap-2">
+                {EditIcon}
+                <span
+                  className={`text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm ${
+                    msgLoading || !session?.user?.email
+                      ? "opacity-50 cursor-not-allowed"
+                      : ""
+                  } `}
                 >
-                  <span
-                    className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}
+                  Edit
+                </span>
+              </div>
+            </button>
+            {isEditing && (
+              <button
+                type="button"
+                onClick={handleSave}
+                className="w-full sm:max-w-max sm:w-48  lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300 group"
+              >
+                <div className="flex flex-row items-center justify-center gap-2">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 20 24"
+                    stroke="currentColor"
+                    fill="none"
+                    className="w-3 h-3 text-sm md:w-4 md:h-4 dark:text-gray-300 text-gray-950"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    {msgLoading ? (
-                      <div className="flex">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className={`w-4 h-4 mr-3 ${
-                            msgLoading ? "animate-spin" : ""
-                          }`}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                          />
-                        </svg>
-                        Please wait...
-                      </div>
-                    ) : (
-                      <div className="flex">
-                        <Image
-                          src={buttonIconSrc}
-                          alt="bold icon"
-                          height={18}
-                          width={18}
-                        />
-                        <span
-                          className={`text-white ml-3 text-[15px] font-semibold`}
-                        >
-                          Re-Generate About
-                        </span>
-                      </div>
-                    )}
+                    <path
+                      d="M15.7895 21H4.15512C3.71432 21 3.29157 20.7893 2.97988 20.4142C2.66818 20.0391 2.49307 19.5304 2.49307 19V5C2.49307 4.46957 2.66818 3.96086 2.97988 3.58579C3.29157 3.21071 3.71432 3 4.15512 3H13.2964L17.4515 8V19C17.4515 19.5304 17.2764 20.0391 16.9647 20.4142C16.653 20.7893 16.2303 21 15.7895 21Z"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M14.1274 21V13H5.81717V21"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M5.81717 3V8H12.4654"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
+                    Save
                   </span>
-                </button>
-              )}
-            </div>
+                </div>
+              </button>
+            )}
           </div>
-        </div>
+          </div>
+        
       )}
       {streamedData && (
         <div className="lg:content-1 md:mt-[36px] mt-[20px] flex flex-col justify-center items-center gap-2 ">
@@ -398,33 +480,7 @@ const SubAboutGenerator = () => {
             </label>
           </div>
 
-          {/* <Button
-            type="button"
-            className="flex gap-2 justify-center items-center text-lg text-white mt-6 bg-gradient-to-r from-purple-700 hover:translate-y-[-4px] transition-all duration-200 to-blue-400 px-6 py-3 rounded-full border-[1px] shadow-md hover:shadow-lg"
-            onClick={() => {
-              linkedinAbout(linkedinContent);
-              setInstruction("");
-              window.scrollTo({ top: 50, behavior: "smooth" });
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className={`w-4 h-4 ${headlineMsgLoading ? "animate-spin" : ""}`}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-              />
-            </svg>
-            <span className="lg:text-[20px] text-[16px] font-semibold">
-              Re-generate
-            </span>
-          </Button> */}
+        
           <button
             type="button"
             disabled={msgLoading || !session?.user?.email}

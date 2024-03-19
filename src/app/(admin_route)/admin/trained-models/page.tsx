@@ -46,9 +46,9 @@ const TrainedModel = () => {
     if (!loading) {
       axios
         .get("/api/trainBot/trainedModel", {})
-        .then((res: any) => {
+        .then(async (res: any) => {
           if (res.data.success) {
-            const result = res.data;
+            const result =await res.data;
             setModels(result.data);
           }
         })
