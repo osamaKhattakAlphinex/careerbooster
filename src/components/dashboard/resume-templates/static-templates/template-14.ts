@@ -79,7 +79,7 @@ const components: any = {
       {
         id: "linkedIn",
         styles:
-          "text-xs mt-2 flex break-all before:aspect-square before:break-normal text-gray-950/80 before:w-3.5 before:h-3 items-center before:border-[#333333] flex before:text-[10px] before:font-semibold  before:border-[1.5px] before:p-1.5  before:flex before:justify-center before:rounded-sm before:items-center flex before:mr-2 before:content-['in']",
+          "text-xs mt-2 flex break-all before:aspect-square before:break-normal text-gray-950/80 before:w-4 before:h-4 items-center before:border-[#333333] flex before:text-[10px] before:font-semibold  before:border-[1.5px] before:p-1.5  before:flex before:justify-center before:rounded-full before:items-center flex before:mr-2 before:content-['in']",
         tag: "span",
       },
       {

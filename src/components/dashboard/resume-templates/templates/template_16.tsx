@@ -234,14 +234,14 @@ const ResumeTemplate16 = () => {
               {/* </a> */}
             </li>
             <li className="flex flex-row items-center justify-start gap-2 text-gray-300 hover:shadow-md hover:text-black group hover:bg-gray-100">
-              <div className="w-7 h-7 xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
+              <div className="w-7 h-7 aspect-square xs:w-5 xs:p-[2px] md:px-0 xs:h-5 md:w-7 md:h-7  flex items-center justify-center border-[1px] border-gray-300 rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-4 h-4"
+                  className="w-4 h-4 "
                 >
                   <path
                     strokeLinecap="round"
@@ -369,7 +369,7 @@ const ResumeTemplate16 = () => {
         </div>
         <div className="xs:w-full w-9/12 flex flex-col xs:bg-[#fff] md:bg-[#fff] px-4 md:px-8 pt-[1rem] md:pt-[1rem]">
           <div className="flex flex-col justify-start pb-6 ">
-            <h2 className="text-4xl w-fit font-bold text-center border-2 border-transparent xs:text-2xl md:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500">
+            <h2 className="text-4xl font-bold text-center border-2 border-transparent w-fit xs:text-2xl md:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500">
               <EditableField
                 value={resume?.name ? resume?.name : "FULL NAME"}
                 style={{ width: "fit-content" }}
@@ -395,7 +395,7 @@ const ResumeTemplate16 = () => {
           {/* Executive Summary */}
 
           <span className="w-full h-0 border-stylee xs:my-0 md:my-1"></span>
-          <h3 className="uppercase w-fit text-base font-semibold rounded-sm text-gray-900 my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+          <h3 className="flex items-center gap-2 my-1 text-base font-semibold text-gray-900 uppercase border-2 border-transparent rounded-sm w-fit hover:border-dashed hover:border-gray-500">
             {resumeSummaryIcon}
             <EditableField
               value={
@@ -416,7 +416,7 @@ const ResumeTemplate16 = () => {
           {/* <span className="w-full mb-4 border-b-2 border-white !block"></span> */}
           <span className="border-[#444440] border-b-2 w-full !block"></span>
           <Toolbar regenrateSummary={getSummary}>
-            <div className="text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed my-4">
+            <div className="my-4 text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed">
               <EditableField
                 type="textarea"
                 value={
@@ -441,7 +441,7 @@ const ResumeTemplate16 = () => {
 
           {/* Work Experience */}
 
-          <h3 className="uppercase text-base font-semibold rounded-sm text-gray-900 w-full my-1 border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+          <h3 className="flex items-center w-full gap-2 my-1 text-base font-semibold text-gray-900 uppercase border-2 border-transparent rounded-sm hover:border-dashed hover:border-gray-500">
             {resumeWorkExpIcon}
             <EditableField
               value={
@@ -704,7 +704,7 @@ const ResumeTemplate16 = () => {
 
                           {newWorkExperience === i ? (
                             <>
-                              <div className="w-full gap-1 flex flex-wrap mt-4">
+                              <div className="flex flex-wrap w-full gap-1 mt-4">
                                 <input
                                   className="w-full py-[4px] border-2 rounded-md text bg-transparent" // Apply Tailwind CSS classes
                                   onChange={(e) =>
@@ -728,7 +728,7 @@ const ResumeTemplate16 = () => {
                                 />
                                 <div className="flex w-full gap-2 my-2">
                                   <button
-                                    className="bg-green-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 rounded-md h-9 text-white "
+                                    className="w-2/12 text-white bg-green-500 rounded-md xs:w-full md:w-2/12 lg:w-2/12 h-9 "
                                     onClick={() => {
                                       // Save the new achievement to the state and possibly the database
                                       handlers.handleAddAchivement(
@@ -745,7 +745,7 @@ const ResumeTemplate16 = () => {
                                       setNewAchievement("");
                                       setNewWorkExperience(-1);
                                     }}
-                                    className="bg-red-500 w-2/12 xs:w-full md:w-2/12 lg:w-2/12 rounded-md py-1 text-white"
+                                    className="w-2/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-2/12 lg:w-2/12"
                                   >
                                     Cancel
                                   </button>
