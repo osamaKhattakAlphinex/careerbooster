@@ -6,11 +6,13 @@ import * as Yup from "yup";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import axios from "axios";
 
 const LoginForm = () => {
   const router = useRouter();
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [submittingError, setSubmittingError] = useState<string>("");
+  const [successAlert, setSuccessAlert] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -26,6 +28,12 @@ const LoginForm = () => {
     onSubmit: async (values) => {
       setSubmittingError("");
       setSubmitting(true);
+
+      axios.post("/api/sendOTP", values).then((resp) => {
+        setSubmitting(false);
+        formik.resetForm();
+        setSuccessAlert("Email has been sent!");
+      });
     console.log(values.email)
     
     //   const res = await signIn("credentials", {
@@ -34,7 +42,7 @@ const LoginForm = () => {
     //   });
 
     //   if (res?.error) {
-        setSubmitting(false);
+        // setSubmitting(false);
     //     return setSubmittingError(res.error);
     //   }
     //   router.replace("/dashboard");
