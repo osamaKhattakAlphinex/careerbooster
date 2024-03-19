@@ -84,49 +84,7 @@ const LoginForm = () => {
           </p>
         )}
       </div>
-      {/* <div className="text-start">
-        <div className="flex flex-wrap relative items-stretch  w-full">
-          <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              viewBox="0 0 24 24"
-              className="w-[16px]"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <path d="M12 3a12 12 0 0 0 8.5 3A12 12 0 0 1 12 21 12 12 0 0 1 3.5 6 12 12 0 0 0 12 3" />
-              <circle cx="12" cy="11" r="1" />
-              <path d="M12 12v2.5" />
-            </svg>
-          </span>
-          <input
-            type="password"
-            name="password"
-            className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-[#E8F0FE] bg-clip"
-            placeholder="Password"
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            value={formik.values.password}
-          />
-        </div>
-        {formik.touched.password && formik.errors.password && (
-          <p className="form-text !text-red-600 my-4">
-            {formik.touched.password && formik.errors.password}
-          </p>
-        )}
-        <div className="form-text mt-2">
-          <Link
-            href="/reset-password"
-            className="no-underline text-[#6a4dff] dark:text-[#e6f85e] "
-          >
-            Forgot Password?
-          </Link>
-        </div>
-      </div> */}
+     
       {submittingError !== "" && (
         <div
           className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 !text-left"
