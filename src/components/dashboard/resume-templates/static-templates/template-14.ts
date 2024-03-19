@@ -67,25 +67,25 @@ const components: any = {
       {
         id: "phone",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal items-center before:mr-2 text-gray-950/80 before:w-4 before:h-4 before:bg-no-repeat before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iIzMzMzMzMyIgY2xhc3M9InctNiBoLTYiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTIuMjUgNi43NWMwIDguMjg0IDYuNzE2IDE1IDE1IDE1aDIuMjVhMi4yNSAyLjI1IDAgMCAwIDIuMjUtMi4yNXYtMS4zNzJjMC0uNTE2LS4zNTEtLjk2Ni0uODUyLTEuMDkxbC00LjQyMy0xLjEwNmMtLjQ0LS4xMS0uOTAyLjA1NS0xLjE3My40MTdsLS45NyAxLjI5M2MtLjI4Mi4zNzYtLjc2OS41NDItMS4yMS4zOGExMi4wMzUgMTIuMDM1IDAgMCAxLTcuMTQzLTcuMTQzYy0uMTYyLS40NDEuMDA0LS45MjguMzgtMS4yMWwxLjI5My0uOTdjLjM2My0uMjcxLjUyNy0uNzM0LjQxNy0xLjE3M0w2Ljk2MyAzLjEwMmExLjEyNSAxLjEyNSAwIDAgMC0xLjA5MS0uODUySDQuNUEyLjI1IDIuMjUgMCAwIDAgMi4yNSA0LjV2Mi4yNVoiIC8+Cjwvc3ZnPgo=')]",
+          "text-xs mt-2 flex break-all before:aspect-square before:break-normal items-center before:mr-2 text-gray-950/80 before:w-4 before:h-4 before:bg-no-repeat before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iIzMzMzMzMyIgY2xhc3M9InctNiBoLTYiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTIuMjUgNi43NWMwIDguMjg0IDYuNzE2IDE1IDE1IDE1aDIuMjVhMi4yNSAyLjI1IDAgMCAwIDIuMjUtMi4yNXYtMS4zNzJjMC0uNTE2LS4zNTEtLjk2Ni0uODUyLTEuMDkxbC00LjQyMy0xLjEwNmMtLjQ0LS4xMS0uOTAyLjA1NS0xLjE3My40MTdsLS45NyAxLjI5M2MtLjI4Mi4zNzYtLjc2OS41NDItMS4yMS4zOGExMi4wMzUgMTIuMDM1IDAgMCAxLTcuMTQzLTcuMTQzYy0uMTYyLS40NDEuMDA0LS45MjguMzgtMS4yMWwxLjI5My0uOTdjLjM2My0uMjcxLjUyNy0uNzM0LjQxNy0xLjE3M0w2Ljk2MyAzLjEwMmExLjEyNSAxLjEyNSAwIDAgMC0xLjA5MS0uODUySDQuNUEyLjI1IDIuMjUgMCAwIDAgMi4yNSA0LjV2Mi4yNVoiIC8+Cjwvc3ZnPgo=')]",
         tag: "span",
       },
       {
         id: "email",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal items-center before:mr-2 text-gray-950/80 before:w-4 before:h-4 before:bg-no-repeat before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMjEuNzUgNi43NXYxMC41YTIuMjUgMi4yNSAwIDAgMS0yLjI1IDIuMjVoLTE1YTIuMjUgMi4yNSAwIDAgMS0yLjI1LTIuMjVWNi43NW0xOS41IDBBMi4yNSAyLjI1IDAgMCAwIDE5LjUgNC41aC0xNWEyLjI1IDIuMjUgMCAwIDAtMi4yNSAyLjI1bTE5LjUgMHYuMjQzYTIuMjUgMi4yNSAwIDAgMS0xLjA3IDEuOTE2bC03LjUgNC42MTVhMi4yNSAyLjI1IDAgMCAxLTIuMzYgMEwzLjMyIDguOTFhMi4yNSAyLjI1IDAgMCAxLTEuMDctMS45MTZWNi43NSIgLz4KPC9zdmc+Cg==')]",
+          "text-xs mt-2 flex break-all before:aspect-square before:break-normal items-center before:mr-2 text-gray-950/80 before:w-4 before:h-4 before:bg-no-repeat before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBjbGFzcz0idy02IGgtNiI+CiAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMjEuNzUgNi43NXYxMC41YTIuMjUgMi4yNSAwIDAgMS0yLjI1IDIuMjVoLTE1YTIuMjUgMi4yNSAwIDAgMS0yLjI1LTIuMjVWNi43NW0xOS41IDBBMi4yNSAyLjI1IDAgMCAwIDE5LjUgNC41aC0xNWEyLjI1IDIuMjUgMCAwIDAtMi4yNSAyLjI1bTE5LjUgMHYuMjQzYTIuMjUgMi4yNSAwIDAgMS0xLjA3IDEuOTE2bC03LjUgNC42MTVhMi4yNSAyLjI1IDAgMCAxLTIuMzYgMEwzLjMyIDguOTFhMi4yNSAyLjI1IDAgMCAxLTEuMDctMS45MTZWNi43NSIgLz4KPC9zdmc+Cg==')]",
         tag: "span",
       },
       {
         id: "linkedIn",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal text-gray-950/80 before:w-3.5 before:h-3 items-center before:border-[#333333] flex before:text-[10px] before:font-semibold  before:border-[1.5px] before:p-1.5  before:flex before:justify-center before:rounded-sm before:items-center flex before:mr-2 before:content-['in']",
+          "text-xs mt-2 flex break-all before:aspect-square before:break-normal text-gray-950/80 before:w-3.5 before:h-3 items-center before:border-[#333333] flex before:text-[10px] before:font-semibold  before:border-[1.5px] before:p-1.5  before:flex before:justify-center before:rounded-sm before:items-center flex before:mr-2 before:content-['in']",
         tag: "span",
       },
       {
         id: "address",
         styles:
-          "text-xs mt-2 flex break-all before:break-normal items-center before:mr-2 text-gray-950/80 before:w-4 before:h-4 before:bg-no-repeat before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iIzMzMzMzMyIgY2xhc3M9InctNiBoLTYiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0ibTIuMjUgMTIgOC45NTQtOC45NTVjLjQ0LS40MzkgMS4xNTItLjQzOSAxLjU5MSAwTDIxLjc1IDEyTTQuNSA5Ljc1djEwLjEyNWMwIC42MjEuNTA0IDEuMTI1IDEuMTI1IDEuMTI1SDkuNzV2LTQuODc1YzAtLjYyMS41MDQtMS4xMjUgMS4xMjUtMS4xMjVoMi4yNWMuNjIxIDAgMS4xMjUuNTA0IDEuMTI1IDEuMTI1VjIxaDQuMTI1Yy42MjEgMCAxLjEyNS0uNTA0IDEuMTI1LTEuMTI1VjkuNzVNOC4yNSAyMWg4LjI1IiAvPgo8L3N2Zz4KCg==')]",
+          "text-xs mt-2 flex break-all before:aspect-square before:break-normal items-center before:mr-2 text-gray-950/80 before:w-4 before:h-4 before:bg-no-repeat before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iIzMzMzMzMyIgY2xhc3M9InctNiBoLTYiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0ibTIuMjUgMTIgOC45NTQtOC45NTVjLjQ0LS40MzkgMS4xNTItLjQzOSAxLjU5MSAwTDIxLjc1IDEyTTQuNSA5Ljc1djEwLjEyNWMwIC42MjEuNTA0IDEuMTI1IDEuMTI1IDEuMTI1SDkuNzV2LTQuODc1YzAtLjYyMS41MDQtMS4xMjUgMS4xMjUtMS4xMjVoMi4yNWMuNjIxIDAgMS4xMjUuNTA0IDEuMTI1IDEuMTI1VjIxaDQuMTI1Yy42MjEgMCAxLjEyNS0uNTA0IDEuMTI1LTEuMTI1VjkuNzVNOC4yNSAyMWg4LjI1IiAvPgo8L3N2Zz4KCg==')]",
         tag: "span",
       },
     ],
@@ -157,7 +157,7 @@ const components: any = {
       {
         tag: "div",
         styles:
-          "bg-gray-200 flex flex-col w-[30%] p-4 rounded-md text-gray-950/80",
+          "bg-gray-200 flex flex-col w-[30%] p-4  rounded-md text-gray-950/80",
         container: [
           {
             id: "educationLevel",

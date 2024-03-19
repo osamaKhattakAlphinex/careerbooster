@@ -145,7 +145,7 @@ span:empty {
   top: 0;
   bottom: -20;
   height: 1119px;
-  width: 20px;
+  width: 40px;
   background-color: #e04127;
 }
 
