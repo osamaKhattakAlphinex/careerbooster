@@ -152,7 +152,7 @@ const components: any = {
       {
         tag: "div",
         styles:
-          "bg-gray-300 flex flex-col w-[30%] p-4 rounded-md text-gray-950/80",
+          "bg-gray-300 flex flex-col w-[31%] p-4 rounded-md text-gray-950/80",
         container: [
           {
             id: "educationLevel",
@@ -267,7 +267,7 @@ const templateLayout: any = {
     },
     education: {
       styles:
-        "text-black flex flex-col justify-start items-start px-6 text-gray-950/80",
+        "text-black flex flex-wrap justify-start items-start gap-3 px-6 text-gray-950/80",
       elements: [
         {
           id: "education",

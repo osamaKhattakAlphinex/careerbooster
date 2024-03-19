@@ -225,8 +225,15 @@ const Page = () => {
             rowItemCount++;
           } else {
             if (nextPage) {
-              newNextDiv.appendChild(singleEducation);
-              nextPage.append(newNextDiv);
+              let eduDiv=nextPage.querySelector(
+                '[data-container-name="education"]'
+              );
+              if(eduDiv){
+                eduDiv.appendChild(singleEducation);
+              }else{
+                newNextDiv.appendChild(singleEducation);
+                nextPage.append(newNextDiv);
+              }
             }
           }
         }
