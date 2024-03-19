@@ -31,10 +31,10 @@ export async function POST(req: Request) {
       from: senderEmail, // sender address
       to: email, // list of receivers
       subject: `Your verification code for Login at CareerBooster.AI`, // Subject line
-      html: ` <h3>Verification Code </h3>;
+      html: ` <h3>Verification Code </h3>
                <p>${otp}</p>
-                 <p>Regards,</p>
-                 <p>CareerBooster.AI</p>
+                 <h4>Regards,</h4>
+                 <h4>CareerBooster.AI</h4>
                `,
     }); 
     return NextResponse.json(
