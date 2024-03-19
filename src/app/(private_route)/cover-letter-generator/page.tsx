@@ -387,7 +387,7 @@ export default function CoverLetterPage() {
               {/* form */}
               <div className="flex flex-col items-start justify-between gap-5">
                 <div className="flex flex-col w-full">
-                  <label className="mb-1 font-bold flex justify-between  items-center text-[14px] md:text-[24px] dark:text-gray-100 text-gray-950  lg:pb-[16px] gap-[3px]">
+                  <label className="mb-1 xs:font-semibold md:font-bold flex justify-between  items-center text-[14px] md:text-[24px] dark:text-gray-100 text-gray-950  lg:pb-[16px] gap-[3px]">
                     <div>
                       Paste Job Description
                       <span className="text-[#F04248] text-[14px]"> *</span>

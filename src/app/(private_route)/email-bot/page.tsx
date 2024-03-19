@@ -615,10 +615,10 @@ const PersonalizedEmailBot = () => {
           <div className="flex flex-col gap-5 lg:px-0 ">
             <label
               htmlFor="default-radio-1"
-              className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-fit ${
+              className={`flex gap-3 items-center rounded-full   cursor-pointer lg:text-[15px] text-[11px]  w-fit ${
                 selectedOption === "profile"
-                  ? "border-[1px] border-[#615DFF]"
-                  : ""
+                  ? "dark:text-[#f0f0f0] text-gray-950"
+                  : "dark:text-[#959595] text-[#acabab]"
               }`}
             >
               <input
@@ -639,8 +639,10 @@ const PersonalizedEmailBot = () => {
             </label>
             <label
               htmlFor="default-radio-2"
-              className={`flex gap-3 items-center rounded-full border-[1px] border-[#353672] px-4 lg:px-6 lg:py-3 py-3 cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950 w-fit ${
-                selectedOption === "file" ? "border-[1px] border-[#615DFF]" : ""
+              className={`flex gap-3 items-center rounded-full    cursor-pointer lg:text-[15px] text-[11px]  w-fit ${
+                selectedOption === "file"
+                  ? "dark:text-[#f0f0f0] text-gray-950"
+                  : "dark:text-[#959595] text-[#acabab]"
               } `}
             >
               <input
@@ -670,12 +672,10 @@ const PersonalizedEmailBot = () => {
           {/* form */}
           <div className="flex flex-col items-start justify-between gap-5 ">
             <div className="flex flex-col w-full">
-              <label className=" font-bold text-md justify-between items-center md:text-[24px] dark:text-gray-100 text-gray-950 flex pb-[20px] gap-[3px]">
+              <label className="mb-1 xs:font-semibold md:font-bold flex justify-between  items-center text-[14px] md:text-[24px] dark:text-gray-100 text-gray-950  lg:pb-[16px] gap-[3px]">
                 <div>
                   Paste Job Description
-                  <span className="text-[#F04248] text-md md:text-[24px]">
-                    *
-                  </span>
+                  <span className="text-[#F04248] text-[14px]"> *</span>
                 </div>
                 <div
                   className={`text-[#000]  group relative rounded-full h-8 md:ml-3 flex  items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}

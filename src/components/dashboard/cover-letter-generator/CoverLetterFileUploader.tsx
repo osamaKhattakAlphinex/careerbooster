@@ -143,7 +143,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="w-[40px] h-[40px] text-[#B324D7] font-normal"
+              className="xs:w-[20] md:w-[40px] xs:h-[20px] md:h-[40px] text-[#B324D7] font-normal"
             >
               <path
                 strokeLinecap="round"
@@ -153,10 +153,10 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
             </svg>
 
             <div className="flex flex-col gap-[3px]">
-              <h2 className="dark:text-gray-100 text-gray-950d text-[16px] font-semibold">
+              <h2 className="dark:text-gray-100 text-gray-950 xs:text-[10px] md:text-[12px] font-semibold">
                 Drag and drop file here
               </h2>
-              <p className="dark:text-[#7a7681] text-[14px]">
+              <p className="dark:text-[#7a7681] xs:text-[9px] md:text-[14px]">
                 Limit 20mb per file
               </p>
             </div>
@@ -165,7 +165,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                 fileUploading && "!bg-black"
               }`}
             >
-              <span className=" dark:text-gray-100 text-gray-950 text-[12px] font-semibold">
+              <span className=" dark:text-gray-100 text-gray-950 xs:text-[10px] md:text-[12px] font-semibold">
                 {fileUploading ? "Uploading..." : "Browse Files"}
               </span>
               <input
@@ -202,8 +202,8 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
         {loadingFiles ? (
           <p className="dark:text-gray-100 text-gray-950">Loading Files...</p>
         ) : (
-          <div className="flex flex-col gap-4 mt-[10px]">
-            <span className="text-sm text-[#615DFF]  uppercase font-bold">
+          <div className="flex flex-col xs:gap-2 md:gap-4 mt-[10px]">
+            <span className=" xs:text-[10px] md:text-sm text-[#615DFF]  uppercase font-bold">
               or Choose File to use
             </span>
             <ul>
@@ -238,7 +238,9 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                     </label>
                   </li>
                 ))}
-              {fileList.length === 0 && <p>No Files found</p>}
+              {fileList.length === 0 && (
+                <p className="xs:text-[10px] md:text-[14px]">No Files found</p>
+              )}
             </ul>
           </div>
         )}
