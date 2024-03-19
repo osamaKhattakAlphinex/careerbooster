@@ -150,7 +150,7 @@ const components: any = {
       {
         id: "linkedIn",
         styles:
-          "text-xs break-all before:break-normal before:aspect-square before:p-1 text-gray-950/80 mt-2 before:w-4 before:h-4 before:font-semibold flex before:text-xs before:content-['in'] before:border-[1.5px] before:border-[#333333] before:flex before:justify-center before:rounded-sm before:items-center flex before:mr-2",
+          "text-xs break-all before:break-normal before:aspect-square before:p-1 text-gray-950/80 mt-2 before:w-4 before:h-4 before:font-semibold flex before:text-[10px] before:content-['in'] before:border-[1.5px] before:border-[#333333] before:flex before:justify-center before:rounded-full before:items-center flex before:mr-2",
         tag: "span",
       },
       {
