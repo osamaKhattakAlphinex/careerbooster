@@ -74,19 +74,19 @@ export async function POST(req: any) {
         let prompt = promptRec.value;
         prompt = await prompt.replaceAll("{{PersonName}}", personName);
 
-        // ${prompt}
         const inputPrompt = `This is the Resume data: ${JSON.stringify(
           userData
-        )}
-      
-      Please find the following details in above provided userdata:
-      shortName, jobTitle, linkedIn URL
-     the  shortName means two letters from Name of the person.
+          )}
+          
+          Please find the following details in above provided userdata:
+          shortName, jobTitle, linkedIn URL
+          the  shortName means two letters from Name of the person.
+          ${prompt}
 
       The output must be in this format. (following is an example)
       {
         "shortName": "AB",
-        "jobTitle": "Software Engineer",
+        "jobTitle": "Your One line Slogan",
         "contact": {
           "linkedIn": "https://www.linkedin.com/in/abc/"
         }

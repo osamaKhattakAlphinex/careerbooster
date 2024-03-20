@@ -166,7 +166,6 @@ const ResumeBuilder = () => {
 
       if (res.success && res?.result) {
         let myJSON;
-        console.log(res.result, typeof res.result);
         if (typeof res.result === "object") {
           myJSON = res.result;
         } else {
