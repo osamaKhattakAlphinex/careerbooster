@@ -74,16 +74,14 @@ export async function POST(req: any) {
         let prompt = promptRec.value;
         prompt = await prompt.replaceAll("{{PersonName}}", personName);
 
+        // ${prompt}
         const inputPrompt = `This is the Resume data: ${JSON.stringify(
           userData
         )}
       
       Please find the following details in above provided userdata:
       shortName, jobTitle, linkedIn URL
-      the shortName means two letters from Name of the person.
-      ${prompt}
-
-      the linkedIn means the LinkedInUrl of the person.
+     the  shortName means two letters from Name of the person.
 
       The output must be in this format. (following is an example)
       {
@@ -96,7 +94,7 @@ export async function POST(req: any) {
 
 
       The output must be a valid JSON
-      Do not add anything if there is no value for a field. if there is no value leave that field blank donot add any extra labesls.
+      Do not add anything if there is no value for a field. if there is no value leave that field blank donot add any extra labels.
 
       `;
         const response: any = await openai.chat.completions.create({

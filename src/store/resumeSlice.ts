@@ -35,10 +35,6 @@ export interface Resume {
     phone: string;
     linkedIn: string;
     address:string;
-    // country: string;
-    // street: string;
-    // cityState: string;
-    // postalCode: string;
   };
   education: [
     {
@@ -81,10 +77,7 @@ const initialState: Resume = {
     phone: "",
     linkedIn: "",
     address:""
-    // country: "",
-    // street: "",
-    // cityState: "",
-    // postalCode: "",
+    
   },
   education: [
     {
