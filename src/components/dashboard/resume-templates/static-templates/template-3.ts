@@ -189,7 +189,7 @@ const components: any = {
               {
                 id: "fromYear",
                 styles:
-                  "text-xs after:content-['-'] after:text-gray-950/80 after:mr-2 text-gray-950/80",
+                  "text-xs after:content-['-'] after:text-gray-950/80 after:ml-2 text-gray-950/80",
                 tag: "span",
               },
               {
