@@ -248,7 +248,7 @@ const components = {
               {
                 id: "fromYear",
                 styles:
-                  "text-xs after:content-['-'] after:w-4 after:h-4 after:text-gray-950/80 after:mr-2",
+                  "text-xs after:content-['-'] after:w-4 after:h-4 after:text-gray-950/80 after:ml-2",
                 tag: "span",
               },
               {

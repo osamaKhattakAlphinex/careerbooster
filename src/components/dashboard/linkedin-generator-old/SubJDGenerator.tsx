@@ -41,8 +41,8 @@ const SubJDGenerator = () => {
 
   const deleteExperience = async (experienceIndex: any) => {
     let tempText = [...generatedWorkExperience];
-    
-    tempText.splice(experienceIndex, 1);;
+
+    tempText.splice(experienceIndex, 1);
 
     const jdObj = {
       jobDescriptionId: existingJDId,
@@ -63,7 +63,7 @@ const SubJDGenerator = () => {
       setLinkedInJobDescription({ ...linkedinJD, jobDescriptionText: tempText })
     );
     setIsEditing({ editIndex: -1, isEdit: false });
-    showSuccessToast("Deleted Successfully")
+    showSuccessToast("Deleted Successfully");
   };
   const handleSave = async (experienceIndex: any) => {
     let tempText = [...generatedWorkExperience];
@@ -214,7 +214,6 @@ const SubJDGenerator = () => {
       setLinkedInJobDescription({ ...linkedinJD, jobDescriptionText: tempText })
     );
     showSuccessToast("Job Description Generated Successfully");
-
   };
 
   const handleGenerate = async () => {
@@ -367,7 +366,7 @@ const SubJDGenerator = () => {
     await fetch("/api/linkedInBots/jdGeneratorSingle/linkedInJobDescription", {
       method: "POST",
       body: JSON.stringify(payload),
-    })
+    });
   };
 
   const getUserDataIfNotExists = async () => {
@@ -468,7 +467,7 @@ const SubJDGenerator = () => {
           </button>
         </div>
         {(generatedWorkExperience?.length > 0 || streamedData !== "") && (
-          <div className=" bg-white text-gray-900 mb-4 border-gray-500  rounded border-[1px] p-8">
+          <div className=" bg-white text-gray-900 mb-4 border-gray-500  rounded border-[1px] md:p-8">
             <h1 className="mb-4 text-4xl font-bold text-gray-900">
               <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
                 AI Response{" "}
@@ -491,7 +490,7 @@ const SubJDGenerator = () => {
                           regenrateAchivements={() =>
                             workExperienceGenerator(index)
                           }
-                          deleteExperience={()=> deleteExperience(index) }
+                          deleteExperience={() => deleteExperience(index)}
                           editWorkExperience={() => handleClick(index)}
                           copyToClipBoard={() => copyJD(workExperience)}
                         >
@@ -499,7 +498,7 @@ const SubJDGenerator = () => {
                             <div
                               id="editor"
                               contentEditable={isEditing.isEdit}
-                              className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-1 sm:p-[10px] "
+                              className=" text-gray-950 border-[#312E37] text-justify border-[1px] rounded-[8px]  sm:p-[10px] "
                               onBlur={() => {
                                 setIsEditing({ ...isEditing, isEdit: false });
                                 handleSave(index);
@@ -520,7 +519,7 @@ const SubJDGenerator = () => {
                 })}
               </div>
               {streamedData !== "" && (
-                <div className="ml-2 font-sansbreak-words">
+                <div className="ml-2 font-sansbreak-words text-justify">
                   <div
                     className="list-disc"
                     dangerouslySetInnerHTML={{ __html: streamedData }}
@@ -528,7 +527,7 @@ const SubJDGenerator = () => {
                 </div>
               )}
             </div>
-            <div className="mt-4">
+            <div className="mt-4 px-2 xs:mb-1 md:mb-0">
               <DownloadService
                 componentRef={componentRef}
                 type="onPage"

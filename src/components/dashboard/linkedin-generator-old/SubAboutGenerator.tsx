@@ -62,13 +62,11 @@ const SubAboutGenerator = () => {
         skills: userData?.skills,
       });
     }
-   
   }, [userData]);
 
   const handleClick = () => {
     setIsEditing((prevState) => !prevState);
   };
-
 
   const handleSave = async () => {
     let _linkedinAboutText = "";
@@ -103,7 +101,9 @@ const SubAboutGenerator = () => {
       linkedInAbouts: AboutResponse.data.result.linkedInAbouts,
     };
     dispatch(setUserData({ ...userData, ...updatedObject }));
-    dispatch(setLinkedInAbout({...linkedinAbout, aboutText: _linkedinAboutText}));
+    dispatch(
+      setLinkedInAbout({ ...linkedinAbout, aboutText: _linkedinAboutText })
+    );
   };
 
   useEffect(() => {
@@ -313,7 +313,7 @@ const SubAboutGenerator = () => {
             ref={componentRef}
             // style={{ textW: "auto" }}
           >
-          {isEditing ? (
+            {isEditing ? (
               <div
                 id="editor"
                 contentEditable={isEditing}
@@ -325,19 +325,22 @@ const SubAboutGenerator = () => {
               ></div>
             ) : (
               <div
-                className=" text-gray-950"
+                className=" text-gray-950 text-justify "
                 dangerouslySetInnerHTML={{ __html: streamedData }}
               ></div>
             )}
-            </div>
-           
-           
-           
-            <div className="flex flex-col flex-wrap gap-3 mt-5 buttons md:flex-row">
+          </div>
+
+          <div className="flex flex-col flex-wrap gap-3 mt-5 buttons md:flex-row">
+            <DownloadService
+              componentRef={componentRef}
+              type="onPage"
+              fileName="Linkedin-About"
+            />
             <button
               disabled={msgLoading}
               onClick={() => copyAbout(streamedData)}
-              className={`xs:flex-1 mt-4 flex gap-2 items-center hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
+              className={` flex gap-2 w-full md:w-fit items-center justify-center  hover:opacity-80 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full dark:bg-[#18181b]  text-gray-300 border-[1px] ${
                 msgLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
@@ -356,7 +359,7 @@ const SubAboutGenerator = () => {
                 />
               </svg>
 
-              <span className="dark:text-gray-100  text-gray-950 text-[15px] font-semibold">
+              <span className="dark:text-gray-100 px-2 text-gray-950 text-xs md:text-sm ">
                 {msgLoading
                   ? "Please wait..."
                   : isAboutCopied
@@ -364,11 +367,7 @@ const SubAboutGenerator = () => {
                   : "Copy to clipboard"}
               </span>
             </button>
-            <DownloadService
-              componentRef={componentRef}
-              type="onPage"
-              fileName="Linkedin-About"
-            />
+
             <button
               type="button"
               disabled={msgLoading || !session?.user?.email}
@@ -379,7 +378,7 @@ const SubAboutGenerator = () => {
                   : ""
               } `}
             >
-              <div className="flex flex-row items-center justify-center gap-2">
+              <div className="flex flex-row items-center text-gray-100 justify-center gap-2">
                 {EditIcon}
                 <span
                   className={`text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm ${
@@ -437,8 +436,7 @@ const SubAboutGenerator = () => {
               </button>
             )}
           </div>
-          </div>
-        
+        </div>
       )}
       {streamedData && (
         <div className="lg:content-1 md:mt-[36px] mt-[20px] flex flex-col justify-center items-center gap-2 ">
@@ -448,7 +446,7 @@ const SubAboutGenerator = () => {
           <p className="text-[16px]  lg:text-[24px] lg:text-left text-center">
             Change your preference and regenerate your summary
           </p>
-          <div className="flex flex-col gap-4 lg:px-0 px-8">
+          <div className="flex flex-col gap-4 lg:px-0  px-8">
             <label
               htmlFor="default-radio-3"
               className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 md:py-4 xs:py-3 py-3 cursor-pointer md:text-[16px] xs:text-[11px]"
@@ -480,7 +478,6 @@ const SubAboutGenerator = () => {
             </label>
           </div>
 
-        
           <button
             type="button"
             disabled={msgLoading || !session?.user?.email}
