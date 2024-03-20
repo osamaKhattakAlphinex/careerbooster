@@ -40,4 +40,4 @@ OtpSchema.methods.compareOtp = async function (otp: any) {
   }
 };
 
-export default mongoose.models.Optp || mongoose.model("Otp", OtpSchema);
+export default mongoose.models.Otp || mongoose.model("Otp", OtpSchema);
