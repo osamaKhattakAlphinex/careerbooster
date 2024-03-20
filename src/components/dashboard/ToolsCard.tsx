@@ -79,10 +79,10 @@ const ToolsCard = ({
       className="dark:bg-transparent dark:border-none dark:rounded-none rounded-md bg-[#ffffff94] border-[#b6b8b6]"
     >
       {action === "coming soon" ? (
-        <div className="flex flex-row items-start justify-between gap-2 p-3 text-white no-underline">
+        <div className="flex flex-row items-start justify-between gap-2 md:p-3 xs:px-0 py-1 text-white no-underline">
           <div className="">
             <div
-              className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-12 h-12 `}
+              className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} md:w-12 md:h-12 xs:w-8 xs:h-8 `}
             >
               <Image
                 width={
@@ -106,15 +106,15 @@ const ToolsCard = ({
             </div>
           </div>
           <div className="flex flex-col items-start justify-start">
-            <h2 className="text-base font-semibold dark:text-white text-gray-950">
+            <h2 className="md:text-base xs:text-sm font-semibold dark:text-white text-gray-950">
               {title}
             </h2>
-            <p className=" flex-1 dark:text-[#959595]  text-gray-950 mt-[6px] font-normal text-sm ">
+            <p className=" flex-1 dark:text-[#959595]  text-gray-950 mt-[6px] font-normal md:text-sm xs:text-xs ">
               {description}
             </p>
             <div className="align-bottom ">
               <button
-                className={`no-underline text-sm mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-300 hover:text-gray-950 font-semibold`}
+                className={`no-underline md:text-sm xs:text-xs mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-300 hover:text-gray-950 font-semibold`}
                 onClick={handleOpenConfirmationModal}
               >
                 {action} <i className="ml-2">{chevronRight}</i>
@@ -183,11 +183,11 @@ const ToolsCard = ({
       ) : (
         <Link
           href={link}
-          className="flex flex-row items-start justify-between gap-2 p-3 text-white no-underline"
+          className="flex flex-row items-start justify-between gap-2 md:p-3 xs:px-0 xs:py-1 text-white no-underline"
         >
           <div className="">
             <div
-              className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} w-12 h-12 `}
+              className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} md:w-12 md:h-12 xs:w-8 xs:h-8 `}
             >
               <Image
                 width={
@@ -211,16 +211,16 @@ const ToolsCard = ({
             </div>
           </div>
           <div className="flex flex-col items-start justify-start">
-            <h2 className="text-base font-semibold dark:text-white text-gray-950">
+            <h2 className="md:text-base xs:text-sm font-semibold dark:text-white text-gray-950">
               {title}
             </h2>
-            <p className=" flex-1 dark:text-[#959595]  text-gray-950 mt-[6px] font-normal text-sm ">
+            <p className=" flex-1 dark:text-[#959595]  text-gray-950 mt-[6px] font-normal md:text-sm xs:text-xs ">
               {description}
             </p>
             <div className="align-bottom ">
               <Link
                 href={link}
-                className={`no-underline text-sm mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-300 hover:text-gray-950 font-semibold`}
+                className={`no-underline md:text-sm xs:text-xs mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-300 hover:text-gray-950 font-semibold`}
               >
                 {action} <i className="ml-2">{chevronRight}</i>
               </Link>

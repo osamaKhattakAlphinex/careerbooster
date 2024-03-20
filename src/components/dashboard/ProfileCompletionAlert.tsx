@@ -30,7 +30,7 @@ const ProfileCompletionAlert = () => {
   }
   if (!userData?.wizardReviewed) {
     return (
-      <div className="flex lg:flex-row flex-col mt-2 justify-center mb-7 items-center  bg-gradient-to-r from-fuchsia-600 to-indigo-500 !text-gray-100  w-full lg:h-[56px]  rounded-xl px-2 lg:py-[4px] py-[6px] pcursor-pointer">
+      <div className="flex lg:flex-row flex-col mt-2 justify-center md:mb-7 xs:mb-4 items-center  bg-gradient-to-r from-fuchsia-600 to-indigo-500 !text-gray-100  w-full lg:h-[56px]  rounded-xl px-2 lg:py-[4px] py-[6px] pcursor-pointer">
         <div className="flex justify-center items-center">
           <div className=" w-5 h-5 p-2 mr-3 text-stone-950 rounded-full bg-yellow-400 flex justify-center items-center font-extrabold lg:text-[14px] text-[12px]">
             !
