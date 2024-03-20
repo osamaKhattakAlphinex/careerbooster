@@ -16,10 +16,10 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    password: {
-      type: String,
-      required: true,
-    },
+    // password: {
+    //   type: String,
+    //   required: true,
+    // },
     email: {
       type: String,
       unique: true,
@@ -107,22 +107,22 @@ const UserSchema = new Schema(
 
   { timestamps: true }
 );
-UserSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  try {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-  } catch (error) {
-    throw error;
-  }
-});
-UserSchema.methods.comparePassword = async function (password: any) {
-  try {
-    return await bcrypt.compare(password, this.password);
-  } catch (error) {
-    throw error;
-  }
-};
+// UserSchema.pre("save", async function (next) {
+//   if (!this.isModified("password")) return next();
+//   try {
+//     const salt = await bcrypt.genSalt(10);
+//     this.password = await bcrypt.hash(this.password, salt);
+//     next();
+//   } catch (error) {
+//     throw error;
+//   }
+// });
+// UserSchema.methods.comparePassword = async function (password: any) {
+//   try {
+//     return await bcrypt.compare(password, this.password);
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
 export default mongoose.models.User || mongoose.model("User", UserSchema);

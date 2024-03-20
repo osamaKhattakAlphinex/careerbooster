@@ -56,8 +56,8 @@ const RegistrationForm = () => {
       firstName: "",
       lastName: "",
       email: "",
-      password: "",
-      confirmpassword: "",
+      // password: "",
+      // confirmpassword: "",
       // status: "pending",
       terms: true,
       alertConsent: true,
@@ -70,10 +70,10 @@ const RegistrationForm = () => {
       email: Yup.string()
         .email("Invalid Email Address")
         .required("Email is Required"),
-      password: Yup.string().required("Password is Required"),
-      confirmpassword: Yup.string()
-        .required("Enter Password again")
-        .oneOf([Yup.ref("password"), "null"], "Passwords must match"),
+      // password: Yup.string().required("Password is Required"),
+      // confirmpassword: Yup.string()
+      //   .required("Enter Password again")
+      //   .oneOf([Yup.ref("password"), "null"], "Passwords must match"),
       // file: Yup.string().required("PDF Resume/CV is Required"),
     }),
 
@@ -89,7 +89,7 @@ const RegistrationForm = () => {
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
-          password: values.password,
+          // password: values.password,
 
           uploadedResume: {
             id: makeid(),
@@ -115,7 +115,7 @@ const RegistrationForm = () => {
 
             const res = await signIn("credentials", {
               email: values.email,
-              password: values.password,
+              otp: 0o000000,
               redirect: false, // prevent default redirect
             });
 
@@ -491,7 +491,7 @@ const RegistrationForm = () => {
                 </p>
               )}
             </div>
-            <div className="text-start my-2">
+            {/* <div className="text-start my-2">
               <div className="flex flex-wrap relative items-stretch  w-full">
                 <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
                   <svg
@@ -515,7 +515,7 @@ const RegistrationForm = () => {
                           >
                             Enter Your Email
                           </label> */}
-                <input
+                {/* <input
                   type="password"
                   name="password"
                   className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
@@ -530,8 +530,8 @@ const RegistrationForm = () => {
                   {formik.touched.password && formik.errors.password}
                 </p>
               )}
-            </div>
-            <div className="text-start my-2">
+            </div> */}
+            {/* <div className="text-start my-2">
               <div className="flex flex-wrap relative items-stretch  w-full">
                 <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
                   <svg
@@ -555,7 +555,7 @@ const RegistrationForm = () => {
                           >
                             Enter Your Email
                           </label> */}
-                <input
+                {/* <input
                   type="password"
                   name="confirmpassword"
                   className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
@@ -571,8 +571,8 @@ const RegistrationForm = () => {
                     {formik.touched.confirmpassword &&
                       formik.errors.confirmpassword}
                   </p>
-                )}
-            </div>
+                )} 
+            </div> */}
             <div className="text-start my-4">
               <div className="ml-3 text-sm">
                 <input
