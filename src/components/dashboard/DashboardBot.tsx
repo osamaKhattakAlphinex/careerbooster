@@ -20,7 +20,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
     <div onClick={toggleTooltip} className="relative inline-block">
       {children}
       {showTooltip && !audioPlayed && (
-        <div className="absolute px-2 py-1 text-white transform -translate-x-1/2 bg-black rounded bottom-full left-1/2 w-max bg-opacity-80">
+        <div className="absolute px-2 py-1 text-white transform -translate-x-1/2 bg-black rounded bottom-full left-1/2 w-max bg-opacity-80 md:text-base xs:text-xs">
           {text}
         </div>
       )}
@@ -231,7 +231,6 @@ const DashboardBot = () => {
     const audio = componentRef.current;
 
     const handleAudioEnded = () => {
-
       setAudioCounter((prev) => prev + 1);
     };
 

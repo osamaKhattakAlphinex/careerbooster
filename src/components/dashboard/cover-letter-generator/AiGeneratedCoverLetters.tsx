@@ -1,8 +1,5 @@
 import { searchIcon } from "@/helpers/iconsProvider";
-import Image from "next/image";
-import { rocketLaunch, trashIcon } from "@/helpers/iconsProvider";
-import PencilLine from "@/../public/icon/PencilLine.png";
-import CoverLetterCardSingle from "./CoverLetterCardSingle";
+
 // import { useState } from "react";
 
 export default function AiGeneratedCoverLetters() {

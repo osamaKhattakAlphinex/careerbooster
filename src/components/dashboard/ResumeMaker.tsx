@@ -110,7 +110,7 @@ const cardDetail = [
 const ResumeMaker = () => {
   const [activeTab, setActiveTab] = useState("Career Coach");
   return (
-    <div className="pt-2 lg:mt-2">
+    <div className="md:pt-2 xs:pt-0 lg:mt-2">
       <div className="grid grid-cols-1 gap-2 md:grid-cols-3 sm:grid-cols-2">
         {cardDetail.map((item, index) => (
           <ToolsCard

@@ -1,14 +1,14 @@
- 
-
 export default function TermsAndConditionPage() {
   return (
     <>
       <div className="container">
         <div className="terms-and-conditions my-20 ">
-          <h1 className="py-5 uppercase">Terms and Condtions</h1>
+          <h1 className="py-5 text-[18px] font-bold uppercase">
+            Terms and Condtions
+          </h1>
 
-          <h3 className="py-5">1. YOUR ACCOUNT</h3>
-          <p className="text-[20px]">
+          <h3 className="py-5 text-[18px] font-bold">1. YOUR ACCOUNT</h3>
+          <p className="text-[16px]">
             To access certain services offered by the platform, we may require
             that you create an account with us or provide personal information
             to complete the creation of an account. We may at any time in our
@@ -19,7 +19,7 @@ export default function TermsAndConditionPage() {
             invalidation.
           </p>
 
-          <p className="text-[20px]">
+          <p className="text-[16px]">
             You are responsible for maintaining the confidentiality of your user
             identification, password, account details, and related private
             information. You agree to accept this responsibility and ensure your
@@ -43,8 +43,8 @@ export default function TermsAndConditionPage() {
             through your account.
           </p>
 
-          <h3 className="py-5">2. PRIVACY</h3>
-          <p className="text-[20px]">
+          <h3 className="py-5 text-[18px] font-bold">2. PRIVACY</h3>
+          <p className="text-[16px]">
             Please review our Privacy Agreement, which also governs your visit
             to the Site. The personal information / data provided to us by you
             or your use of the Site will be treated as strictly confidential, in
@@ -54,8 +54,10 @@ export default function TermsAndConditionPage() {
             use the Site.
           </p>
 
-          <h3 className="py-5">3. PLATFORM FOR COMMUNICATION</h3>
-          <p className="text-[20px]">
+          <h3 className="py-5 text-[18px] font-bold">
+            3. PLATFORM FOR COMMUNICATION
+          </h3>
+          <p className="text-[16px]">
             You agree, understand and acknowledge that the Site is an online
             platform that enables you to purchase products listed at the price
             indicated therein at any time from any location using a payment
@@ -72,8 +74,10 @@ export default function TermsAndConditionPage() {
             our Site.
           </p>
 
-          <h3 className="py-5">4. CONTINUED AVAILABILITY OF THE SITE</h3>
-          <p className="text-[20px]">
+          <h3 className="py-5 text-[18px] font-bold">
+            4. CONTINUED AVAILABILITY OF THE SITE
+          </h3>
+          <p className="text-[16px]">
             We will do our utmost to ensure that access to the Site is
             consistently available and is uninterrupted and error-free. However,
             due to the nature of the Internet and the nature of the Site, this
@@ -84,8 +88,10 @@ export default function TermsAndConditionPage() {
             frequency and duration of any such suspension or restriction.
           </p>
 
-          <h3 className="py-5">5. CLAIMS AGAINST INFRINGING CONTENT</h3>
-          <p className="text-[20px]">
+          <h3 className="py-5 text-[18px] font-bold">
+            5. CLAIMS AGAINST INFRINGING CONTENT
+          </h3>
+          <p className="text-[16px]">
             We respect the intellectual property of others. If you believe that
             your intellectual property rights have been used in a way that gives
             rise to concerns of infringement, please write to us at
@@ -100,11 +106,13 @@ export default function TermsAndConditionPage() {
             offense and may be followed by legal proceedings.
           </p>
 
-          <h3 className="py-5">6. COMMUNICATION PREFERENCES</h3>
-          <p className="text-[24px]">
+          <h3 className="py-5 text-[18px] font-bold">
+            6. COMMUNICATION PREFERENCES
+          </h3>
+          <p className="text-[18px] font-bold">
             <strong>6.1 Consent to Communications</strong>
           </p>
-          <p className="text-[20px]">
+          <p className="text-[16px]">
             By using the CareerBooster.AI platform, you consent to receiving
             communications from us, including but not limited to SMS messages,
             phone calls, and emails. These communications are aimed at enhancing
@@ -113,49 +121,49 @@ export default function TermsAndConditionPage() {
             following:
           </p>
 
-          <p className="text-[24px]">
+          <p className="text-[18px] font-bold">
             <strong>6.1.1 Email Communications</strong>
           </p>
-          <p className="text-[20px]">
+          <p className="text-[16px]">
             By using our platform, you grant us permission to send you essential
             updates, notifications, newsletters, and other communication via
             email. You have the option to unsubscribe from these email
             communications at any time.
           </p>
 
-          <p className="text-[24px]">
+          <p className="text-[18px] font-bold">
             <strong>6.1.2 SMS Messages</strong>
           </p>
-          <p className="text-[20px]">
+          <p className="text-[16px]">
             You consent to receiving SMS messages, including important alerts
             and notifications, from CareerBooster.AI. You retain the right to
             opt-out of SMS messages at any time.
           </p>
 
-          <p className="text-[24px]">
+          <p className="text-[18px] font-bold">
             <strong>6.1.3 Phone Calls</strong>
           </p>
-          <p className="text-[20px]">
+          <p className="text-[16px]">
             You allow us to contact you via phone calls for vital announcements
             and discussions related to your account or opportunities available
             on our platform. We respect your preferred call schedule and will
             not engage in unsolicited calls.
           </p>
 
-          <p className="text-[24px]">
+          <p className="text-[18px] font-bold">
             <strong>6.2 Managing Your Preferences</strong>
           </p>
-          <p className="text-[20px]">
+          <p className="text-[16px]">
             Your communication preferences are important to us. You can manage
             these preferences, including opting in or out of specific
             communication channels, by accessing your account settings on our
             platform.
           </p>
 
-          <p className="text-[24px]">
+          <p className="text-[18px] font-bold">
             <strong>6.3 Critical Account Messages</strong>
           </p>
-          <p className="text-[20px]">
+          <p className="text-[16px]">
             Please note that even if you choose not to consent to all
             communication channels, you will still receive critical
             account-related messages, such as password resets and transaction
@@ -163,13 +171,13 @@ export default function TermsAndConditionPage() {
             functioning of our service.
           </p>
 
-          <p className="text-[24px]">
+          <p className="text-[18px] font-bold">
             Thank you for choosing CareerBooster.AI. Your trust and satisfaction
             are paramount to us.
           </p>
 
-          <h3 className="py-5">7. DISCLAIMER</h3>
-          <p className="text-[20px]">
+          <h3 className="py-5 text-[18px] font-bold">7. DISCLAIMER</h3>
+          <p className="text-[16px]">
             You acknowledge and undertake that you are accessing the services on
             the Site and transacting at your own risk and are using your best
             and prudent judgment before entering into any transactions through
@@ -186,7 +194,7 @@ export default function TermsAndConditionPage() {
             others.
           </p>
 
-          <p className="text-[20px]">Thank you for using CareerBooster.AI.</p>
+          <p className="text-[16px]">Thank you for using CareerBooster.AI.</p>
         </div>
       </div>
     </>

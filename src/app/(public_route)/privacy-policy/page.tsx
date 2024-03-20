@@ -1,12 +1,10 @@
- 
-
 export default function PrivacyPloicyPage() {
   return (
     <>
       <main className="flex-grow-1 my-20 py-10">
         <div className="container">
           <div className="privacy-policy py-5">
-            <h2>Privacy Policy</h2>
+            <h2 className="text-[18px] font-bold">Privacy Policy</h2>
             <p>
               This privacy policy (&quot;Policy&quot;) describes how
               &quot;CareerBooster.AI&quot; (&quot;CareerBooster.AI,&quot;
@@ -26,8 +24,10 @@ export default function PrivacyPloicyPage() {
               manage.
             </p>
 
-            <h3 className="py-5">Collection of Personal Information</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">
+              Collection of Personal Information
+            </h3>
+            <p className="text-[16px]">
               We receive and store any information you knowingly provide to us
               when you create an account, publish content, make a purchase, fill
               any online forms on the Website. When required this information
@@ -38,8 +38,10 @@ export default function PrivacyPloicyPage() {
               Website&apos;s features.
             </p>
 
-            <h3 className="py-5">Collection of Non-Personal Information</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">
+              Collection of Non-Personal Information
+            </h3>
+            <p className="text-[16px]">
               When you visit the Website, our servers automatically record
               information that your browser sends. This data may include
               information such as your device&apos;s IP address, browser type
@@ -50,8 +52,10 @@ export default function PrivacyPloicyPage() {
               times and dates, and other statistics.
             </p>
 
-            <h3 className="py-5">Managing Personal Information</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">
+              Managing Personal Information
+            </h3>
+            <p className="text-[16px]">
               You are able to access, add to, update, and delete certain
               Personal Information about you. The information you can view,
               update, and delete may change as the Website or Services change.
@@ -67,8 +71,10 @@ export default function PrivacyPloicyPage() {
               it, but not in a manner that would identify you personally.
             </p>
 
-            <h3 className="py-5">Use of Collected Information</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">
+              Use of Collected Information
+            </h3>
+            <p className="text-[16px]">
               Any of the information we collect from you may be used to
               personalize your experience; improve our Website; improve customer
               service and respond to queries and emails of our customers;
@@ -80,8 +86,8 @@ export default function PrivacyPloicyPage() {
               otherwise aggregated in such a way that would identify any
               particular user of the system.
             </p>
-            <h3 className="py-5">Billing and Payments</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">Billing and Payments</h3>
+            <p className="text-[16px]">
               In case of services requiring payment, we request credit card or
               other payment account information, which will be used solely for
               processing payments. Your purchase transaction data is stored only
@@ -100,8 +106,8 @@ export default function PrivacyPloicyPage() {
               digital signatures.
             </p>
 
-            <h3 className="py-5">Refund Policy</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">Refund Policy</h3>
+            <p className="text-[16px]">
               All sales are final, and refunds are solely at the discretion of
               CareerBooster.AI. In the event that the Client makes an error in
               any payments to CareerBooster.AI or any payment is provided to
@@ -109,15 +115,15 @@ export default function PrivacyPloicyPage() {
               Client, CareerBooster.AI may at its sole discretion:
             </p>
             <ul className="list-disc pl-8">
-              <li className="text-[20px]">
+              <li className="text-[16px]">
                 Adjust the amount against future payments payable by the Client
                 to CareerBooster.AI; or
               </li>
-              <li className="text-[20px]">Provide a refund to the Client.</li>
+              <li className="text-[16px]">Provide a refund to the Client.</li>
             </ul>
 
-            <h3 className="py-5">Cookies</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">Cookies</h3>
+            <p className="text-[16px]">
               The Website uses &quot;cookies&quot; to help personalize your
               online experience. A cookie is a text file that is placed on your
               hard disk by a web page server. Cookies cannot be used to run
@@ -131,8 +137,10 @@ export default function PrivacyPloicyPage() {
               if you prefer. If you choose to decline cookies, you may not be
               able to fully experience the features of the Website and Services.
             </p>
-            <h3 className="py-5">Links to Other Websites</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">
+              Links to Other Websites
+            </h3>
+            <p className="text-[16px]">
               Our Website contains links to other websites that are not owned or
               controlled by us. Please be aware that we are not responsible for
               the privacy practices of such other websites or third parties. We
@@ -141,8 +149,8 @@ export default function PrivacyPloicyPage() {
               personal information.
             </p>
 
-            <h3 className="py-5">Information Security</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">Information Security</h3>
+            <p className="text-[16px]">
               We secure information you provide on computer servers in a
               controlled, secure environment, protected from unauthorized
               access, use, or disclosure. We maintain reasonable administrative,
@@ -160,8 +168,8 @@ export default function PrivacyPloicyPage() {
               efforts.
             </p>
 
-            <h3 className="py-5">Data Breach</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">Data Breach</h3>
+            <p className="text-[16px]">
               In the event we become aware that the security of the Website has
               been compromised or users Personal Information has been disclosed
               to unrelated third parties as a result of external activity,
@@ -176,8 +184,8 @@ export default function PrivacyPloicyPage() {
               we will post a notice on the Website.
             </p>
 
-            <h3 className="py-5">Legal Disclosure</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">Legal Disclosure</h3>
+            <p className="text-[16px]">
               We will disclose any information we collect, use, or receive if
               required or permitted by law, such as to comply with a subpoena,
               or similar legal process, and when we believe in good faith that
@@ -189,8 +197,10 @@ export default function PrivacyPloicyPage() {
               personal data will likely be among the assets transferred.
             </p>
 
-            <h3 className="py-5">Changes and Amendments</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">
+              Changes and Amendments
+            </h3>
+            <p className="text-[16px]">
               We reserve the right to modify this privacy policy relating to the
               Website or Services at any time, effective upon posting an updated
               version of this Policy on the Website. When we do we will post a
@@ -199,8 +209,10 @@ export default function PrivacyPloicyPage() {
               such changes.
             </p>
 
-            <h3 className="py-5">Acceptance of This Policy</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">
+              Acceptance of This Policy
+            </h3>
+            <p className="text-[16px]">
               You acknowledge that you have read this Policy and agree to all
               its terms and conditions. By using the Website or its Services,
               you agree to be bound by this Policy. If you do not agree to abide
@@ -208,13 +220,13 @@ export default function PrivacyPloicyPage() {
               access the Website and its Services.
             </p>
 
-            <h3 className="py-5">Contact Us</h3>
-            <p className="text-[20px]">
+            <h3 className="py-5 text-[18px] font-bold">Contact Us</h3>
+            <p className="text-[16px]">
               If you have any questions about this Policy, please contact us at
               contact@CareerBooster.AI.
             </p>
 
-            <p className="text-[20px]">Thank you for using CareerBooster.AI.</p>
+            <p className="text-[16px]">Thank you for using CareerBooster.AI.</p>
           </div>
         </div>
       </main>

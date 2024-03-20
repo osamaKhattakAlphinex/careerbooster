@@ -108,7 +108,7 @@ const ContactForm = () => {
                 </svg>
               </span>
               <input
-                type="number"
+                type="tel"
                 id="phone"
                 name="phone"
                 className="text-gray-900 dark:text-gray-100 w-full text-base bg-transparent outline-none"
@@ -189,6 +189,7 @@ const ContactForm = () => {
               ref={recaptchaRef}
               onChange={handleCaptchaSubmission}
               theme={theme}
+              className="w-auto h-auto"
             />
             <div className="flex  md:justify-end">
               <button
