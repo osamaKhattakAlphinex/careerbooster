@@ -13,7 +13,7 @@ const KeywordsGenerator = ({ creditLimits }: { creditLimits: any }) => {
   return (
     <>
       <Link href="/linkedin-generator/keywords" className="no-underline">
-        <div className="headline-generator dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
+        <div className="headline-generator dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-2 md:py-8 px-1 lg:px-6 flex flex-col md:flex-row md:align-center xs:gap-2 md:gap-5 justify-center items-center rounded-[10px] xs:mb-[8px] md:mb-[20px]">
           <div
             className={`icon hidden rounded-full  bg-gradient-to-b from-[#20AA89] to-[#65D4AC]  md:flex justify-center items-center w-16 h-16`}
           >
@@ -25,13 +25,13 @@ const KeywordsGenerator = ({ creditLimits }: { creditLimits: any }) => {
               className="z-[10000px]"
             />
           </div>
-          <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
+          <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 p-4">
             <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
               <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
                 Keywords Generator
               </h1>
               <div
-                className={`text-gray-900 group  relative rounded-full h-8 md:ml-3 flex justify-center items-center px-[16px] py-[6px]  bg-[#FEB602]  bg-opacity-50 xs:text-[10px] md:text-[12px]  font-bold `}
+                className={`text-gray-900 group relative rounded-full xs:h-5 md:h-8 md:ml-3 flex justify-center items-center xs:px-[6px] md:px-[16px] py-[6px]  bg-[#FEB602] bg-opacity-50 xs:text-[10px] md:text-[12px]  font-bold `}
               >
                 {creditLimits?.linkedin_keywords_generation}
                 <div className="pl-1"> Credits</div>
@@ -50,7 +50,7 @@ const KeywordsGenerator = ({ creditLimits }: { creditLimits: any }) => {
           </div>
           <div
             // onClick={() => handleGenerate()}
-            className={`flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
+            className={`flex flex-row justify-center items-center gap-2 rounded-full px-[32px] md:py-[12px] md:ml-auto`}
           >
             <span className={`text-white text-[15px] font-semibold`}>
               {/* <div className="flex"> */}
@@ -61,7 +61,7 @@ const KeywordsGenerator = ({ creditLimits }: { creditLimits: any }) => {
                   width={18}
                 /> */}
               <span
-                className={`no-underline text-sm mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-300 hover:text-gray-950 font-semibold`}
+                className={`no-underline text-sm md:mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-300 hover:text-gray-950 font-semibold`}
               >
                 Launch <i className="ml-2">{chevronRight}</i>
               </span>
