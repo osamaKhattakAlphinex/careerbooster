@@ -38,6 +38,7 @@ const CreditsUpdationModal = forwardRef((props: any, ref: any) => {
       } catch (error) {
         console.log(error);
       } finally {
+        formik.setFieldValue("credits", 0);
         props.callback();
       }
     },
