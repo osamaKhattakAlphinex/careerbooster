@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       from: email, // sender address
       to: receiverEmail, // list of receivers
       subject: `${name} via Contact us form | CareerBooster.AI`, // Subject line
-      html: ` <h3>${name} contacted via Contact us Form </h3>;
+      html: ` <h3>${name} contacted via Contact us Form </h3>
                <p>${message}</p>
                  <br />
                  <p>Phone: ${phone}</p>

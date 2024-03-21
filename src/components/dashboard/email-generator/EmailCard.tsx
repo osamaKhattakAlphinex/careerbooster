@@ -15,7 +15,6 @@ type EmailCardProps = {
   editorId: string;
   cardHeading: string;
   cardInstructions: string;
-  removeEdit: any;
 };
 
 export const EmailCard = (props: EmailCardProps) => {
@@ -54,7 +53,7 @@ export const EmailCard = (props: EmailCardProps) => {
         <div ref={props.componentRef}>
           {props.isEditing ? (
             <div
-              onBlur={props.removeEdit}
+              onBlur={props.handleSave}
               className=" text-gray-950 border-[#312E37] border-[1px] rounded-[8px] p-2.5"
               id={props.editorId}
               contentEditable="true"
