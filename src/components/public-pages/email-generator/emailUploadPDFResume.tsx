@@ -227,16 +227,6 @@ const EmailUploadPDFResume = () => {
     }
   };
 
-  const removeEdit = (type: string) => {
-    if (type === "email") {
-      //   setIsEditing(false);
-    } else if (type === "firstFollowUp") {
-      //   setIsFirstEditing(false);
-    } else if (type === "secondFollowUp") {
-      //   setIsSecondEditing(false);
-    }
-  };
-
   const handleSave = (type: string) => {
     if (type === "email") {
       if (componentRef.current) {

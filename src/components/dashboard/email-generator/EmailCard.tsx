@@ -19,7 +19,7 @@ type EmailCardProps = {
 
 export const EmailCard = (props: EmailCardProps) => {
   return (
-    <div className="py-4 min-h-[308px] bg-white shadow-md card_1 text-gray-950 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
+    <div className="py-4 min-h-[308px] w-full bg-white shadow-md card_1 text-gray-950 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
       <div className="flex">
         <h2 className="mb-2 text-base md:text-lg">
           <strong>{props.cardHeading}</strong>
