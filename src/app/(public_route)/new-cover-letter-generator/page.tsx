@@ -4,7 +4,7 @@ import { Metadata } from "next";
 
 //latest code
 export const metadata: Metadata = {
-  title: "CareerBooster.ai-linkedin",
+  title: "CareerBooster.ai - Cover Letters",
   description:
     "Free AI LinkedIn Summary Generator To Achieve Top Rankings In Recruiter Searches And Secure More Interviews!",
   keywords: [
