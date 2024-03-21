@@ -8,35 +8,37 @@ import { OtpEntryType, makeOTPEntry } from "@/helpers/makeOTPEntry";
 
 export async function POST(req: Request) {
   try {
-    const otp = Math.floor(Math.random() * 900000) + 100000;
-    const { email } = await req.json();
-    const senderEmail = process.env.SENDER_EMAIL;
-    let transporter = nodemailer.createTransport({
-      host: "smtp-relay.brevo.com",
-      port: 587,
-      secure: false,
-      auth: {
-        user: senderEmail, // generated brevo user
-        pass: process.env.SMTP_API_KEY, // generated brevo password
-      },
-    });
-    let otpEntry: OtpEntryType = {
-      email: email,
-      otp: otp,
-      expiry: Date.now() + 10 * 60 * 1000,
-    };
-    await makeOTPEntry(otpEntry);
-
-    await transporter.sendMail({
-      from: senderEmail, // sender address
-      to: email, // list of receivers
-      subject: `Your verification code for Login at CareerBooster.AI`, // Subject line
-      html: ` <h3>Verification Code </h3>
-               <p>${otp}</p>
-                 <h4>Regards,</h4>
-                 <h4>CareerBooster.AI</h4>
-               `,
-    }); 
+    if(process.env.NEXT_APP_STATE === 'Production'){
+      const otp = Math.floor(Math.random() * 900000) + 100000;
+      const { email } = await req.json();
+      const senderEmail = process.env.SENDER_EMAIL;
+      let transporter = nodemailer.createTransport({
+        host: "smtp-relay.brevo.com",
+        port: 587,
+        secure: false,
+        auth: {
+          user: senderEmail, // generated brevo user
+          pass: process.env.SMTP_API_KEY, // generated brevo password
+        },
+      });
+      let otpEntry: OtpEntryType = {
+        email: email,
+        otp: otp,
+        expiry: Date.now() + 10 * 60 * 1000,
+      };
+      await makeOTPEntry(otpEntry);
+  
+      await transporter.sendMail({
+        from: senderEmail, // sender address
+        to: email, // list of receivers
+        subject: `Your verification code for Login at CareerBooster.AI`, // Subject line
+        html: ` <h3>Verification Code </h3>
+                 <p>${otp}</p>
+                   <h4>Regards,</h4>
+                   <h4>CareerBooster.AI</h4>
+                 `,
+      }); 
+    }
     return NextResponse.json(
       { result: "Email sent successfully", success: true },
       { status: 200 }
