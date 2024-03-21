@@ -199,6 +199,8 @@ const PersonalizedEmailBot = () => {
                 setStreamedData((prev: any) => prev + text);
                 tempText += text;
               }
+              setStreamedData((prev) => prev.replace("```html", ""));
+              setStreamedData((prev) => prev.replace("```", ""));
 
               const emailsResponse = await axios.get(
                 "/api/emailBot/getAllEmails"
@@ -277,6 +279,8 @@ const PersonalizedEmailBot = () => {
                 setStreamedFirstFollowUpEmailText((prev: any) => prev + text);
                 tempText += text;
               }
+              setStreamedFirstFollowUpEmailText((prev) => prev.replace("```html", ""));
+            setStreamedFirstFollowUpEmailText((prev) => prev.replace("```", ""));
 
               const emailsResponse = await axios.get(
                 "/api/emailBot/getAllEmails"
@@ -358,6 +362,9 @@ const PersonalizedEmailBot = () => {
                 setStreamedSecondFollowUpEmailText((prev: any) => prev + text);
                 tempText += text;
               }
+
+              setStreamedSecondFollowUpEmailText((prev) => prev.replace("```html", ""));
+            setStreamedSecondFollowUpEmailText((prev) => prev.replace("```", ""));
 
               const emailsResponse = await axios.get(
                 "/api/emailBot/getAllEmails"
@@ -504,15 +511,7 @@ const PersonalizedEmailBot = () => {
     }
   };
 
-  const removeEdit = (type: string) => {
-    if (type === "email") {
-      setIsEditing(false);
-    } else if (type === "firstFollowUp") {
-      setIsFirstEditing(false);
-    } else if (type === "secondFollowUp") {
-      setIsSecondEditing(false);
-    }
-  };
+
 
   const resetStatesAndRedux = () => {
     dispatch(resetEmail());
@@ -741,7 +740,6 @@ const PersonalizedEmailBot = () => {
               editorId="editor"
               cardHeading="Your AI Generated Email"
               cardInstructions="This Email will follow your application directly"
-              removeEdit={() => removeEdit("email")}
             />
           ) : (
             <EmailPlaceHolderCard
@@ -767,7 +765,6 @@ const PersonalizedEmailBot = () => {
               editorId="first_editor"
               cardHeading="First Follow Up Email"
               cardInstructions="You can send the second email after a week. You can schedule this email in advance"
-              removeEdit={() => removeEdit("firstFollowUp")}
             />
           ) : (
             <EmailPlaceHolderCard
@@ -793,7 +790,6 @@ const PersonalizedEmailBot = () => {
               editorId="second_editor"
               cardHeading="Second Follow Up Email"
               cardInstructions="You can send another email if second email is not responded. You can schedule this email in advance"
-              removeEdit={() => removeEdit("secondFollowUp")}
             />
           ) : (
             <EmailPlaceHolderCard
