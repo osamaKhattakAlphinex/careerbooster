@@ -7,7 +7,7 @@ import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Metadata } from "next";
 import { signIn, useSession } from "next-auth/react";
-import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
+import { infoSmallIcon, refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
 import { useDispatch } from "react-redux";
 import { setUploadedFileName } from "@/store/resumeSlice";
 import Image from "next/image";
@@ -115,7 +115,7 @@ const RegistrationForm = () => {
 
             const res = await signIn("credentials", {
               email: values.email,
-              otp: 0o000000,
+              otp: 100000,
               redirect: false, // prevent default redirect
             });
 
@@ -316,7 +316,7 @@ const RegistrationForm = () => {
             <div className={`mb-5`}>
               {!params?.get("file") && (
                 <>
-                  {!isAuth && data === null && !content && (
+                  {!isAuth && data === null && !content ? (
                     <label className="flex justify-center md:my-6 ">
                       <input
                         className="hidden"
@@ -336,7 +336,15 @@ const RegistrationForm = () => {
                         </div>
                       )}
                     </label>
-                  )}
+                  ): <div className="flex items-center text-gray-400 justify-center whitespace-nowrap">
+                     <div className=" w-3 h-3 p-2 mr-2 text-stone-950 !bg-[#6a4dff]  dark:!bg-[#e6f85e] rounded-full flex justify-center items-center font-extrabold lg:text-[14px] text-[12px]">
+            !
+          </div>
+          <span>
+            
+            Important! Please verify your details before sign up
+            </span>
+                    </div>}
                   {file !== null && file.type === "application/pdf" ? (
                     <FileUploadHandler
                       file={file}

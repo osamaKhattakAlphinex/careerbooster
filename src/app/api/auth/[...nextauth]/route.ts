@@ -22,7 +22,11 @@ export const authOptions: NextAuthOptions = {
         const user = await User.findOne({ email });
         if (!user) throw Error("Invalid Email");
         if (!user.status) throw Error("User is not active");
-        if(otp == 0) {
+        
+        if(Number(otp)===100000 ) {
+          if(Number(otp)===100000){
+            await Otp.deleteOne({ email})
+          }
         }else{
           const otpRecords = await Otp.find({
             email,
