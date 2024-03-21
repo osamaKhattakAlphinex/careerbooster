@@ -17,11 +17,11 @@ import { verifyInvisibleCaptcha } from "@/ServerActions";
 import WordFileHandler from "@/components/dashboard/WordFileHandler";
 
 const saveToLocalStorage = (text: any, fileName: any) => {
-  localStorage.setItem("linkedin-content", text);
-  localStorage.setItem("linkedin-fileName", fileName);
+  localStorage.setItem("cover-letter-content", text);
+  localStorage.setItem("cover-letter-fileName", fileName);
 };
 
-const LinkedInToolMain = () => {
+const CoverLetterToolMain = () => {
   const router = useRouter();
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [isVerified, setIsverified] = useState<boolean>(false);
@@ -335,4 +335,4 @@ const LinkedInToolMain = () => {
   );
 };
 
-export default LinkedInToolMain;
+export default CoverLetterToolMain;
