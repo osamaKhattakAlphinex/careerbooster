@@ -334,10 +334,10 @@ const EmailUploadPDFResume = () => {
   }, []);
 
   return (
-    <div className="container flex flex-col items-start justify-center gap-10 mx-auto my-16">
+    <div className="flex flex-col items-start justify-center gap-5 p-5 my-8 sm:my-16 sm:gap-10 sm:container sm:mx-auto ">
       {/* form */}
       <div className="flex flex-col items-start justify-between w-full gap-5 ">
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full ">
           <label className="mb-1 xs:font-semibold md:font-bold flex justify-between  items-center text-[14px] md:text-[24px] dark:text-gray-100 text-gray-950  lg:pb-[16px] gap-[3px]">
             <div>
               Paste Job Description
@@ -350,7 +350,7 @@ const EmailUploadPDFResume = () => {
             rows={6}
             onChange={(e) => setJobDescription(e.target.value)}
             placeholder="Copy the job description for the position you are applying and paste it here to generate post application follow up emails to the hiring managers."
-            className="w-full px-3 lg:px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px] pt-3"
+            className="w-full px-3 lg:px-[26px] bg-gray-950/80 rounded-[8px] text-sm text-[#959595] border-[#312E37] border-[1px] pt-3"
           />
         </div>
         {show && (
@@ -458,6 +458,20 @@ const EmailUploadPDFResume = () => {
           generateButtonText="Generate Second Follow Up Email"
         />
       )}
+
+      <div className="w-full p-10 mb-6 border-gray-800 rounded lg:items-center bg-gradient-to-r to-fuchsia-600 from-indigo-600">
+        <div className="flex flex-col items-center w-full gap-4">
+          <h3 className="text-sm font-semibold text-center text-white lg:text-2xl text-normal lg:leading-normal lg:font-bold">
+            Yes, I Want to Explore More Career Boosting Tools!
+          </h3>
+          <button
+            className="px-4 py-3 text-xs font-bold text-center text-gray-800 capitalize bg-yellow-500 rounded-full sm:text-base bg-opacity-80 hover:bg-yellow-600 sm:px-7"
+            onClick={moveToRegister}
+          >
+            Click here to experience the magic
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
