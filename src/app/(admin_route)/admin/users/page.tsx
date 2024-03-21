@@ -1,15 +1,21 @@
 "use client";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
-import { deleteIcon, refreshIconRotating } from "@/helpers/iconsProvider";
+import {
+  EditIcon,
+  deleteIcon,
+  refreshIconRotating,
+} from "@/helpers/iconsProvider";
 import axios from "axios";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
 import DataTable, {
   BulkDataOperation,
   TableAction,
 } from "@/components/admin/DataTable";
+import { debug } from "console";
+import CreditsUpdationModal from "@/components/creditsUpdationModal";
 
 type User = {
   alertConsent: any;
@@ -27,6 +33,7 @@ type User = {
   userPackageExpirationDate: any;
   userPackageUsed: any;
   usedPackage: any;
+  totalCredits: any;
   _id: any;
   OpenAiTokensUsed: any;
 };
@@ -49,8 +56,9 @@ const UsersPage = () => {
   const [pkg, setPkg] = useState<any>([]);
   const [counts, setCounts] = useState<any>(null);
   const [userStats, setUserStats] = useState<any>("total");
-
   const columnHelper = createColumnHelper<User>();
+
+  const creditsUpdationModelRef: React.MutableRefObject<any> = useRef(null);
 
   const columns = [
     columnHelper.accessor((row) => row, {
@@ -115,57 +123,85 @@ const UsersPage = () => {
         );
       },
     }),
+    // columnHelper.accessor((row) => row, {
+    //   id: "subscription",
+    //   header: () => "Subscription",
+    //   cell: (info) => {
+    //     const { _id, userPackage, userPackageExpirationDate } = info.getValue();
+    //     return subscriptionId === _id ? (
+    //       refreshIconRotating
+    //     ) : (
+    //       <div className="flex items-center justify-center gap-2">
+    //         <select
+    //           className="rounded"
+    //           value={userPackage}
+    //           onChange={(e) => {
+    //             onSubscriptionChange(_id, e.target.value);
+    //           }}
+    //         >
+    //           {pkg.map((p: any, i: any) => {
+    //             return (
+    //               <option
+    //                 key={i}
+    //                 value={p._id}
+    //                 selected={userPackage === p._id}
+    //               >
+    //                 {p.title}
+    //               </option>
+    //             );
+    //           })}
+    //         </select>
+    //         <div className="flex items-center justify-center">
+    //           <input
+    //             type="checkbox"
+    //             checked={checkingSubscription(userPackageExpirationDate)}
+    //             onChange={(e) => {
+    //               onSubscriptionChange(_id, userPackage);
+    //               if (subscriptionId === "") {
+    //                 e.target.checked = false;
+    //               }
+    //             }}
+    //           />
+    //           <span className="text-sm font-medium text-gray-900 dark:text-gray-300">
+    //             {new Date(userPackageExpirationDate).getTime() < Date.now() ||
+    //             userPackageExpirationDate === undefined
+    //               ? "Off"
+    //               : "On"}
+    //           </span>
+    //         </div>
+    //       </div>
+    //     );
+    //   },
+    // }),
     columnHelper.accessor((row) => row, {
-      id: "subscription",
-      header: () => "Subscription",
+      id: "totalCredits",
+      header: () => "Total Credits",
       cell: (info) => {
-        const { _id, userPackage, userPackageExpirationDate } = info.getValue();
-        return subscriptionId === _id ? (
-          refreshIconRotating
-        ) : (
-          <div className="flex justify-center items-center gap-2">
-            <select
-              className="rounded"
-              value={userPackage}
-              onChange={(e) => {
-                onSubscriptionChange(_id, e.target.value);
-              }}
-            >
-              {pkg.map((p: any, i: any) => {
-                return (
-                  <option
-                    key={i}
-                    value={p._id}
-                    selected={userPackage === p._id}
-                  >
-                    {p.title}
-                  </option>
-                );
-              })}
-            </select>
-            <div className="flex justify-center items-center">
-              <input
-                type="checkbox"
-                checked={checkingSubscription(userPackageExpirationDate)}
-                onChange={(e) => {
-                  onSubscriptionChange(_id, userPackage);
-                  if (subscriptionId === "") {
-                    e.target.checked = false;
-                  }
-                }}
-              />
-              <span className=" text-sm font-medium text-gray-900 dark:text-gray-300">
-                {new Date(userPackageExpirationDate).getTime() < Date.now() ||
-                userPackageExpirationDate === undefined
-                  ? "Off"
-                  : "On"}
-              </span>
+        const { totalCredits } = info.getValue();
+        return (
+          <div className="flex items-center justify-between gap-2">
+            <span>{totalCredits}</span>
+            <div className="flex items-center justify-center bg-orange-600 rounded-sm">
+              <button
+                type="button"
+                className="p-1 text-white"
+                onClick={() => handleCreditChange(info.row.original)}
+              >
+                {EditIcon}
+              </button>
             </div>
           </div>
         );
       },
     }),
   ];
+
+  const handleCreditChange = (user: any) => {
+    if (creditsUpdationModelRef.current) {
+      creditsUpdationModelRef.current.openModal(true);
+      creditsUpdationModelRef.current.setUser(user);
+    }
+  };
 
   const actions: TableAction[] = [
     {
@@ -339,7 +375,6 @@ const UsersPage = () => {
         .then(async (resp) => {
           const res = await resp.json();
           setLoadingId("");
-
           if (res.success) {
             setRecords(res.result);
             setTotalPages(Math.ceil(res.total / limitOfUser));
@@ -402,14 +437,19 @@ const UsersPage = () => {
   }, [searchParams?.get("r"), searchParams?.get("p")]);
 
   return (
-    <div className="flex flex-col justify-start items-start">
-      <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+    <div className="flex flex-col items-start justify-start">
+      <CreditsUpdationModal
+        ref={creditsUpdationModelRef}
+        callback={getUserDeatils}
+      />
+
+      <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
         Users
       </h2>
-      <span className="dark:text-white/70 text-black/70 text-base">
+      <span className="text-base dark:text-white/70 text-black/70">
         List of all the users
       </span>
-      <div className="w-full overflow-x-auto mt-4">
+      <div className="w-full mt-4 overflow-x-auto">
         <DataTable
           loading={loading}
           data={records}
@@ -420,8 +460,8 @@ const UsersPage = () => {
           bulkDataOperations={bulkDataOperations}
         />
       </div>
-      <div className=" flex flex-row justify-between items-center w-full ">
-        <div className="flex flex-row gap-2 items-center">
+      <div className="flex flex-row items-center justify-between w-full ">
+        <div className="flex flex-row items-center gap-2">
           <label htmlFor="userPerPage" className="text-sm font-medium">
             Number of records per page:
           </label>
@@ -442,7 +482,7 @@ const UsersPage = () => {
             </>
           </select>
         </div>
-        <div className=" flex justify-end mt-4">
+        <div className="flex justify-end mt-4 ">
           <nav aria-label="Page navigation example">
             <ul className="inline-flex -space-x-px">
               <li>
@@ -480,7 +520,7 @@ const UsersPage = () => {
 
               <li>
                 <button
-                  className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  className="px-3 py-2 leading-tight text-gray-500 border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   onClick={() => {
                     setRecords([]);
                     setCurrentPage(currentPage + 1);
