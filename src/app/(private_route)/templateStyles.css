@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --decor-color: #e04127; /* Define a CSS variable to hold the color */
+}
+
 h2[data-name="phone"][data-icon-color="black"][data-type-heading="true"]::before,
 h2[data-name="phone"][data-icon-color="white"][data-type-heading="true"]::before,
 h2[data-name="summary"][data-icon-color="black"][data-type-heading="true"]::before,
@@ -68,7 +72,7 @@ h2[data-name="workExperienceArray"][data-icon-color="white"][data-type-heading="
   bottom: -20;
   height: 100%;
   width: 40px;
-  background-color: #e04127;
+  background-color: var(--decor-color);;
 }
 
 [data-primarySkills-index]::before,
@@ -99,3 +103,4 @@ body {
   background-color: #fff;
   margin: 10px;
 }
+

@@ -32,7 +32,6 @@ const ProfileReview = () => {
   // Redux
   const dispatch = useDispatch();
   const register = useSelector((state: any) => state.register);
-  console.log(register);
   const resume = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
 

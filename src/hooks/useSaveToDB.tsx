@@ -21,7 +21,7 @@ const useSaveResumeToDB = () => {
     let obj = source;
 
     if (!source.id || source.id === "") {
-      obj = { ...source, id: makeid(), dateTime: new Date() };
+      obj = { ...source, id: makeid(), dateTime: new Date().toISOString() };
     }
     dispatch(setResume(obj));
 

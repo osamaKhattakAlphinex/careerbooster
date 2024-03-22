@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import { TourContextProvider } from "@/context/TourContext";
 import { AppContextsProvider } from "@/context/AppContext";
 import { Metadata } from "next";
+import { ColorContextProvider } from "@/context/ResumeColorContext";
 interface Props {
   children: ReactNode;
 }
@@ -38,6 +39,8 @@ export default async function Privatelayout({ children }: Props) {
     <div className="dark:bg-gradient-to-bl from-[#340e53] via-[#000533] to-[#010111] bg-[#e4e9f7] w-screen h-screen overflow-y-scroll">
       <TourContextProvider>
         <AppContextsProvider>
+          <ColorContextProvider>
+          
           <ProfileCreationLayer>
             <Header />
             <SideBar />
@@ -45,6 +48,7 @@ export default async function Privatelayout({ children }: Props) {
             <Footer />
             <ToastContainer />
           </ProfileCreationLayer>
+          </ColorContextProvider>
         </AppContextsProvider>
       </TourContextProvider>
     </div>

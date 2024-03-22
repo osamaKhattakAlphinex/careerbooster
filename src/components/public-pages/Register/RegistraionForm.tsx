@@ -5,15 +5,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Metadata } from "next";
 import { signIn, useSession } from "next-auth/react";
 import { infoSmallIcon, refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
 import { useDispatch } from "react-redux";
-import { setUploadedFileName } from "@/store/resumeSlice";
-import Image from "next/image";
 import FileUploadHandler from "@/components/dashboard/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import WordFileHandler from "@/components/dashboard/WordFileHandler";
 
 // export const metadata: Metadata = {
@@ -81,7 +77,7 @@ const RegistrationForm = () => {
       setSubmittingError("");
 
       if (text === "") {
-        setSubmittingError("Error Reading Resume");
+        setSubmittingError("Please Upload Your Resume to Continue");
       } else if (values.terms) {
         setSubmitting(true);
 

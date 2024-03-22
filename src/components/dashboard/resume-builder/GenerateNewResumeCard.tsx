@@ -54,13 +54,18 @@ const GenerateResume = ({ getConsent }: Props) => {
           <span className="uppercase text-[11px] md:text-sm font-bold block gro">
             instructions
           </span>
-          {showInstruction ? (
+        
             <svg
               width="16"
               height="16"
               viewBox="0 0 16 16"
               fill="none"
-              className="rotate-180"
+              // className="rotate-180"
+              className={`${
+                showInstruction
+                  ? "w-5 h-5 transform rotate-180 transition-transform duration-300 ease-in-out"
+                  : "w-5 h-5 transform transition-transform duration-300 ease-in-out "
+              }`}
               xmlns="http://www.w3.org/2000/svg"
             >
               <g id="fi:chevron-down">
@@ -74,26 +79,7 @@ const GenerateResume = ({ getConsent }: Props) => {
                 />
               </g>
             </svg>
-          ) : (
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="fi:chevron-down">
-                <path
-                  id="Vector"
-                  d="M4 6L8 10L12 6"
-                  stroke="#615DFF"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </g>
-            </svg>
-          )}
+          
         </button>
       </div>
 

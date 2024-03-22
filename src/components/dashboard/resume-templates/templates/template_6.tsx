@@ -26,6 +26,7 @@ import useHandler from "@/hooks/useHandler";
 import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import Link from "next/link";
+import { useColorContext } from "@/context/ResumeColorContext";
 const ResumeTemplate6 = ({
   streamedSummaryData,
   setStreamedSummaryData,
@@ -42,6 +43,7 @@ const ResumeTemplate6 = ({
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
+  const {color, setColor} =useColorContext();
   // const [color, setColor] = useState("#e04127");
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [confirmationModal, setConfirmationModal] = useState(false);
@@ -92,26 +94,27 @@ const ResumeTemplate6 = ({
     }
   };
 
-  // const saveColor = (color: ColorResult) => {
+  const saveColor = (color: ColorResult) => {
   // Access the selected color value from the 'color' parameter
-  // setColor(color.hex);
+  setColor(color.hex);
+  document.documentElement.style.setProperty('--decor-color', color.hex);
   // You can do whatever you need with the selected color here
-  // };
+  };
 
   return (
     <div className="flex flex-row text-gray-900 ">
       <div
         className={`relative flex bg-[#e04127]  w-[5%]`}
-        // style={{ backgroundColor: color }}
+        style={{ backgroundColor: color }}
       >
-        {/* <ColorPicker
+        <ColorPicker
           defaultColor="#e04127"
           resetColor="#e04127"
           setColor={setColor}
           styles_pin="absolute text-white top-0 right-0 "
           styles_div="absolute top-3 -left-1"
           saveColor={saveColor}
-        /> */}
+        />
       </div>
 
       <div className="w-full">

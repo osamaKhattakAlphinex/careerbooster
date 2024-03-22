@@ -255,7 +255,11 @@ const SideBar = () => {
                       className="px-7 text-base flex capitalize items-center dark:group-hover:text-[#b324d7] group-hover:text-[#b324d7]"
                       onMouseOver={() => handleMouseOver(index)}
                       onMouseOut={handleMouseOut}
-                      onClick={() => signOut()}
+                      onClick={() =>{
+                        localStorage.clear();
+                        signOut()
+                      } 
+                    }
                       // style={{
                       //   opacity: hoveredItem === index ? 1 : 0.7,
                       //   color:

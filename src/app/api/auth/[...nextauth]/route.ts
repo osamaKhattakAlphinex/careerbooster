@@ -22,12 +22,10 @@ export const authOptions: NextAuthOptions = {
         const user = await User.findOne({ email });
         if (!user) throw Error("Invalid Email");
         if (!user.status) throw Error("User is not active");
-        
-        if(Number(otp)===100000 ) {
-          if(Number(otp)===100000){
-            await Otp.deleteOne({ email})
-          }
-        }else{
+
+        if (Number(otp) === 100000) {
+          await Otp.deleteOne({ email });
+        } else {
           const otpRecords = await Otp.find({
             email,
             expiry: { $gt: Date.now() },
@@ -38,7 +36,7 @@ export const authOptions: NextAuthOptions = {
               const otpMatch = await otpRecord.compareOtp(otp);
               if (otpMatch) {
                 if (Date.now() > otpRecord.expiry) {
-                  await Otp.deleteOne({ email, expiry: otpRecord.expiry});
+                  await Otp.deleteOne({ email, expiry: otpRecord.expiry });
                   throw Error("Otp is expired");
                 }
                 otpMatched = true;
@@ -46,17 +44,16 @@ export const authOptions: NextAuthOptions = {
               }
             }
             if (!otpMatched) {
-              
-              throw Error("Invalid Otp")
+              throw Error("Invalid Otp");
             }
-            await Otp.deleteMany({ email});
+            await Otp.deleteMany({ email });
           } else {
             if (Date.now() > otpRecords[0].expiry) {
               await Otp.deleteOne({ email });
               throw Error("Otp is expired");
             }
             const otpMatch = await otpRecords[0].compareOtp(otp);
-  
+
             if (!otpMatch) {
               throw Error("Invalid Otp");
             } else {

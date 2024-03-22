@@ -1,4 +1,5 @@
 "use client";
+import { useColorContext } from "@/context/ResumeColorContext";
 import { useRef, useState } from "react";
 
 const DownloadService = ({
@@ -11,6 +12,7 @@ const DownloadService = ({
 }: // setOpenUpgradModal,
 any) => {
   const docRef = useRef<any>(null);
+  const {color} = useColorContext()
   let htmlToDoc: string;
   const [loading, setLoading] = useState(false);
 
@@ -147,7 +149,7 @@ span:empty {
   bottom: -20;
   height: 1119px;
   width: 40px;
-  background-color: #e04127;
+  background-color: ${color};
 }
 
 h2:empty {
