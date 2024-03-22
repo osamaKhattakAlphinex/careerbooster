@@ -149,7 +149,7 @@ span:empty {
   bottom: -20;
   height: 1119px;
   width: 40px;
-  background-color: ${color};
+  background-color: #e04127;
 }
 
 h2:empty {
