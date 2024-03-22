@@ -23,6 +23,8 @@ let emailTemplate = `<!DOCTYPE html>
         background-color: #f4f5f6;
       }
       table {
+        margin-left: auto;
+        margin-right: auto;
         border-collapse: collapse;
         border-spacing: 0;
       }
