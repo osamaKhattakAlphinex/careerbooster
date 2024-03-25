@@ -4,9 +4,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import ProfileCreationLayer from "@/components/dashboard/ProfileCreationLayer";
 import Footer from "@/components/dashboard/Layout/Footer";
-import PublicFooter from "@/components/public-pages/layout/Footer";
 import Header from "@/components/dashboard/Layout/Header";
-import PublicHeader from "@/components/public-pages/layout/Header";
 import SideBar from "@/components/dashboard/Layout/SideBar";
 import "./dashboard.css";
 import "./plugins.css";
@@ -18,7 +16,6 @@ import { TourContextProvider } from "@/context/TourContext";
 import { AppContextsProvider } from "@/context/AppContext";
 import { Metadata } from "next";
 import { ColorContextProvider } from "@/context/ResumeColorContext";
-import Link from "next/link";
 import Onboard from "@/components/public-pages/layout/Onboard";
 interface Props {
   children: ReactNode;
@@ -38,11 +35,7 @@ export default async function Privatelayout({ children }: Props) {
   if (isAdmin) redirect("/admin");
   if (!session?.user) {
     return (
-      <>
-        <PublicHeader />
         <Onboard/>
-        <PublicFooter />
-      </>
     );
   } else {
     return (
