@@ -5,6 +5,8 @@ import React, { createContext, useContext,  ReactNode, useState } from "react";
 interface ColorContexts {
   color: string;
   setColor:any
+  color_second:string;
+  setColor_second:any
   // Add more references as needed
 }
 
@@ -21,11 +23,14 @@ const ColorContextProvider: React.FC<ColorContextProvider> = ({
 }) => {
   // Create refs for each reference
   const [color,setColor] = useState<string>("")
- 
+  const [color_second, setColor_second] = useState<string>("");
+  
   // Define the context value
   const contextValue: ColorContexts = {
     color,
-    setColor
+    setColor,
+    color_second,
+    setColor_second
   };
 
   return (

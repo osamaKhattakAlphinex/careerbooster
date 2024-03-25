@@ -88,7 +88,7 @@ const LinkedInToolMain = () => {
   }, [fileUploading, uploadComplete, text]);
   useEffect(() => {
     if (isVerified) {
-      router.push("/linkedin/result");
+      router.push("/linkedin-optimizer/result");
     } else {
       console.log("Captha failed");
     }

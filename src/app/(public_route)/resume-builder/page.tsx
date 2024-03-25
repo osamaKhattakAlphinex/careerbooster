@@ -1,9 +1,11 @@
-import LinkedInToolMain from "@/components/public-pages/linkedin/LinkedInToolMain";
+import HeroArea from "@/components/public-pages/linkedin/HeroArea";
+import ResumeToolMain from "@/components/public-pages/resume-builder/ResumeToolMain";
 import { Metadata } from "next";
+import Link from "next/link";
 
 //latest code
 export const metadata: Metadata = {
-  title: "CareerBooster.ai-linkedin",
+  title: "CareerBooster.ai - Resumes",
   description:
     "Free AI LinkedIn Summary Generator To Achieve Top Rankings In Recruiter Searches And Secure More Interviews!",
   keywords: [
@@ -30,13 +32,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LinkedInNewPage() {
+export default function ResumeLetterPage() {
   return (
     <div className="flex-grow-1  w-full">
       {/* LinkedIn Tool Card */}
       <section className="">
         <div className="flex flex-col text-white">
-          <LinkedInToolMain />
+          {/* <HeroArea />
+          <ResumeToolMain /> */}
+          <Link href="/register" className="mt-96">Register</Link>
         </div>
         {/* <Avatar1 firstName="one" lastName="any" /> */}
       </section>
