@@ -105,16 +105,16 @@ const ResumeTemplate6 = ({
     <div className="flex flex-row text-gray-900 ">
       <div
         className={`relative flex bg-[#e04127]  w-[5%]`}
-        style={{ backgroundColor: color }}
+        // style={{ backgroundColor: color }}
       >
-        <ColorPicker
+        {/* <ColorPicker
           defaultColor="#e04127"
           resetColor="#e04127"
           setColor={setColor}
           styles_pin="absolute text-white top-0 right-0 "
           styles_div="absolute top-3 -left-1"
           saveColor={saveColor}
-        />
+        /> */}
       </div>
 
       <div className="w-full">
