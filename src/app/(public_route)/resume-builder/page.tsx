@@ -1,7 +1,5 @@
-import HeroArea from "@/components/public-pages/linkedin/HeroArea";
-import ResumeToolMain from "@/components/public-pages/resume-builder/ResumeToolMain";
+import HeroArea from "@/components/public-pages/resume-builder/HeroArea";
 import { Metadata } from "next";
-import Link from "next/link";
 
 //latest code
 export const metadata: Metadata = {
@@ -40,7 +38,8 @@ export default function ResumeLetterPage() {
         <div className="flex flex-col text-white">
           {/* <HeroArea />
           <ResumeToolMain /> */}
-          <Link href="/register" className="mt-96">Register</Link>
+          {/* <Link href="/register" className="mt-96">Register</Link> */}
+          <HeroArea />
         </div>
         {/* <Avatar1 firstName="one" lastName="any" /> */}
       </section>

@@ -8,6 +8,7 @@ import UserDataProvider from "@/components/data-providers/UserDataProvider";
 import MainLoaderLayer from "@/components/MainLoaderLayer";
 import CreditLimitsProvider from "@/components/data-providers/CreditLimitsProvider";
 import "./index.css";
+import { ToastContainer } from "react-toastify";
 export const metadata: Metadata = {
   title: "Dashboard - CareerBooster.ai",
   description: "Dashboard - CareerBooster.ai | Developed by NausalTech",
@@ -29,6 +30,7 @@ export default function RootLayout({
           <MainLoaderLayer />
           <CreditLimitsProvider />
           {children}
+          <ToastContainer />
         </ReduxProvider>
       </AuthProvider>
     </NextThemeProvider>

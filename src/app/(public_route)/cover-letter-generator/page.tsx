@@ -1,5 +1,4 @@
-import CoverLetterToolMain from "@/components/public-pages/cover-letter-generator/CoverLetterToolMain";
-import HeroArea from "@/components/public-pages/linkedin/HeroArea";
+import HeroArea from "@/components/public-pages/cover-letter-generator/HeroArea";
 import { Metadata } from "next";
 
 //latest code
@@ -30,7 +29,6 @@ export const metadata: Metadata = {
     maximumScale: 1,
   },
 };
-
 export default function CoverLetterPage() {
   return (
     <div className="flex-grow-1  w-full">
@@ -38,7 +36,6 @@ export default function CoverLetterPage() {
       <section className="">
         <div className="flex flex-col text-white">
           <HeroArea />
-          <CoverLetterToolMain />
         </div>
         {/* <Avatar1 firstName="one" lastName="any" /> */}
       </section>
