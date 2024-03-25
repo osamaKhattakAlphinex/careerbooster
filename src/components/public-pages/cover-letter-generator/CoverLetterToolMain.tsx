@@ -88,7 +88,7 @@ const CoverLetterToolMain = () => {
   }, [fileUploading, uploadComplete, text]);
   useEffect(() => {
     if (isVerified) {
-      router.push("/linkedin/result");
+      router.push("/new-cover-letter-generator/result");
     } else {
       console.log("Captha failed");
     }
@@ -98,7 +98,7 @@ const CoverLetterToolMain = () => {
       {/* Hero Section */}
       <section className="hero bg-gradient-to-r from-[#01010D80] via-[#000A6380] to-purple-900 overflow-x-hidden lg:px-0 pt-7  lg:pt-[30px]	px-5 lg:npt-10">
         <div className="lg:px-[120px] text-center lg:pt-12 lg:pb-8 pt-15 ">
-          <p className="lg:text-[20px] text-base lg:px-0 	">
+          <p className="lg:text-[20px] text-base lg:px-0">
             Keyword-Optimized, Captivating & Under 30 Seconds!
           </p>
           <h3 className="py-2 lg:text-[40px] text-[27px] text-center font-semibold mt-3 lg:leading-[66px]  lg:mx-17">
@@ -114,7 +114,6 @@ const CoverLetterToolMain = () => {
             results perfectly tailored for you — or we{"'"}ll compensate you
             $1000 if we waste your time with irrelevant outcomes.
           </h5>
-
           <div className="flex justify-center mt-11 md:mt-11">
             <label className=" py-[12px] lg:py-[20px]  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
               <input
