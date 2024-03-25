@@ -30,12 +30,14 @@ import useHandler from "@/hooks/useHandler";
 import { ColorResult } from "react-color";
 import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { useColorContext } from "@/context/ResumeColorContext";
 const ResumeTemplate10 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
+  const {color,setColor,color_second,setColor_second} = useColorContext()
   // const [color, setColor] = useState("#043382");
   // const [color_second, setColor_second] = useState("#1a202c");
   const [primarySkill, setPrimarySkill] = useState<string>("");
@@ -86,16 +88,16 @@ const ResumeTemplate10 = () => {
     }
   };
   // const saveColor = (color: ColorResult) => {
-  // Access the selected color value from the 'color' parameter
+  // // Access the selected color value from the 'color' parameter
   // setColor(color.hex);
 
-  // You can do whatever you need with the selected color here
+  // // You can do whatever you need with the selected color here
   // };
   // const saveColor_second = (color: ColorResult) => {
-  // Access the selected color value from the 'color' parameter
+  // // Access the selected color value from the 'color' parameter
   // setColor_second(color.hex);
 
-  // You can do whatever you need with the selected color here
+  // // You can do whatever you need with the selected color here
   // };
   return (
     <div className="relative first-page">
@@ -112,7 +114,7 @@ const ResumeTemplate10 = () => {
           secondDefaultColor="#1a202c"
           setColor_second={setColor_second}
           saveColor={saveColor}
-        /> */}
+        />  */}
         {/* <div className="  z-50 w-40 h-40 xs:w-[120px] xs:h-[80px] sm:w-[120px] sm:h-[80px] border-2 border-[#042B6B] md:w-48 md:h-48 lg:w-48 lg:h-48  text-white bg-gray-800 text-center flex justify-center   rounded-full mx-4  md:mt-0 md:mr-8 items-center ">
           <span className="text-4xl md:text-3xl hover:shadow-md hover:bg-gray-500">
             <EditableField
@@ -169,7 +171,7 @@ const ResumeTemplate10 = () => {
               setColor_second={setColor_second}
               saveColor={saveColor_second}
             />
-          </div> */}
+          </div>  */}
           {/* contacts */}
           <div
             className="rounded-3xl border-2  border-[#043382] xs:py-2 py-[6px] flex justify-center "
@@ -263,7 +265,9 @@ const ResumeTemplate10 = () => {
               {/* </a> */}
             </li>
             <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row justify-start gap-1  items-center text-xs ">
-              <div className="p-2 mr-3 text-white bg-[#043382] rounded-full">
+              <div className="p-2 mr-3 text-white bg-[#043382] rounded-full" 
+                // style={{ backgroundColor: color }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

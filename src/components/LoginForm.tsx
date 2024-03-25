@@ -45,7 +45,7 @@ const LoginForm = () => {
       setSubmittingError("");
       setSubmitting(true);
       axios.post("/api/sendOTP", formik.values).then((resp) => {
-        showSuccessToast("Logged in successfully");
+        // showSuccessToast("Logged in successfully");
         setSubmitting(false);
         setSuccessAlert("OTP sent to your email!");
         setOtpSend(true);
