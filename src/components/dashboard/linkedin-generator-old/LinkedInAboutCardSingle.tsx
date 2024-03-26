@@ -34,7 +34,7 @@ const LinkedInAboutCardSingle = ({
   const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
     if (source != "") {
-      router.replace("/linkedin-generator/about");
+      router.replace("/linkedin-optimizer/about");
     }
     return dispatch(setLinkedInAbout(card));
   };

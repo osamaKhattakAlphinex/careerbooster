@@ -10,7 +10,7 @@ import { chevronRight } from "@/helpers/iconsProvider";
 const HeadlineGenerator = ({ creditLimits }: { creditLimits: any }) => {
   return (
     <>
-      <Link className="no-underline" href="/linkedin-generator/headline">
+      <Link className="no-underline" href="/linkedin-optimizer/headline">
         <div className="headline-generator dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-2 md:py-8 px-1 lg:px-6 flex flex-col md:flex-row md:align-center xs:gap-2 md:gap-5 justify-center items-center rounded-[10px] xs:mb-[8px] md:mb-[20px]">
           <div
             className={`icon  hidden rounded-full  bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] md:flex justify-center items-center w-16 h-16`}

@@ -36,7 +36,7 @@ const cardDetail = [
     title: "LinkedIn Optimizer",
     description:
       "Boost LinkedIn visibility by optimizing your linkedin for recruiters.",
-    link: "/linkedin-generator",
+    link: "/linkedin-optimizer",
     icon: profile,
     bgColor1: "from-cyan-400",
     bgColor2: "to-blue-600",

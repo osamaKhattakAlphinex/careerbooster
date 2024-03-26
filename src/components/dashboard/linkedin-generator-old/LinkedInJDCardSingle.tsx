@@ -36,7 +36,7 @@ const LinkedInJDCardSingle = ({
   const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
     if (source != "") {
-      router.replace("/linkedin-generator/job-description");
+      router.replace("/linkedin-optimizer/job-description");
     }
     return dispatch(setLinkedInJobDescription(card));
   };

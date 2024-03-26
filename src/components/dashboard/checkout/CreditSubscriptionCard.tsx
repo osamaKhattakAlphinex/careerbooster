@@ -177,7 +177,6 @@ const CreditSubscriptionCard: React.FC<Props> = ({
                   // userPackageUsed: obj.userPackageUsed,
                 })
               );
-
               router.push("/dashboard");
             }
             // dispatch(setField({ name: "userPackageData", value: userPackage }));

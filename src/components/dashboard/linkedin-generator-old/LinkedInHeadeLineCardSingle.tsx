@@ -35,7 +35,7 @@ const LinkedInHeadlineCardSingle = ({
   const [confirmationModal, setConfirmationModal] = useState(false);
   const handleOnView = async (card: any) => {
     if (source != "") {
-      router.replace("/linkedin-generator/headline");
+      router.replace("/linkedin-optimizer/headline");
     }
     return dispatch(setLinkedInHeadline(card));
   };

@@ -34,7 +34,7 @@ const LinkedInHKeywordsCardSingle = ({
   const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
     if (source != "") {
-      router.replace("/linkedin-generator/keywords");
+      router.replace("/linkedin-optimizer/keywords");
     }
     return dispatch(setLinkedKeywords(card));
   };

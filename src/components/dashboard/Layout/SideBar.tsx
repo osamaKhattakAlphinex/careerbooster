@@ -22,7 +22,7 @@ import "@/app/(private_route)/dashboard.css";
 
 import { useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import Button from "../Button";
 import ProfileImageModal from "../ProfileImageModal";
@@ -72,7 +72,6 @@ const SideBar = () => {
 
   const handleImageChange = (e: any) => {
     const selectedFile = e.target.files[0];
-    console.log(selectedFile);
     if (selectedFile) {
       if (selectedFile.size > 1048576) {
         // Check if file size is more than 1MB
@@ -257,6 +256,7 @@ const SideBar = () => {
                       onMouseOut={handleMouseOut}
                       onClick={() =>{
                         localStorage.clear();
+                        // router.replace("/login")
                         signOut()
                       } 
                     }
