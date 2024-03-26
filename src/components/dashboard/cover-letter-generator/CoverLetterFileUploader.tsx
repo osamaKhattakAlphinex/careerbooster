@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import FileUploadHandler from "@/components/dashboard/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
 import WordFileHandler from "../WordFileHandler";
+import FileUploader, { UploaderConfig } from "@/components/fileUploaderZone";
 
 interface Props {
   selectedFile: string;
@@ -132,10 +133,21 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
     fetchFiles();
   }, []);
 
+  console.log(fileList);
+
+  const uploaderConfig: UploaderConfig = {
+    file: file,
+    setFile: setFile,
+    fileName: fileName,
+    setFileName: setFileName,
+  };
+
   return (
     <>
       <div className="rounded-lg">
-        <div className="">
+        <FileUploader {...uploaderConfig} />
+
+        {/* <div className="">
           <div className="py-[12px] lg:w-[480px] px-[10px] flex  lg:flex-row flex-wrap gap-4 border-2 rounded-[10px]  border-[#312E37] border-dashed	">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -181,7 +193,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
               />
             </label>
           </div>
-        </div>
+        </div> */}
 
         {file !== null && file.type === "application/pdf" ? (
           <FileUploadHandler
@@ -204,14 +216,14 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
         ) : (
           <div className="flex flex-col xs:gap-2 md:gap-4 mt-[10px]">
             <span className=" xs:text-[10px] md:text-sm text-[#615DFF]  uppercase font-bold">
-              or Choose File to use
+              Uploaded Files
             </span>
             <ul>
               {fileList &&
                 fileList.map((file: string, i: number) => (
                   <li key={i} className="flex">
                     <label
-                      className="flex gap-3 mt-2   items-center rounded-full border-[1px] border-[#353672] px-3 lg:px-6 lg:py-3  cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100 text-gray-950"
+                      className="flex gap-3 mt-2   items-center rounded-full border-[1px] border-[#353672] px-3 lg:px-6 lg:py-3  cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100  text-gray-950"
                       htmlFor={`file_${i}`}
                     >
                       <input
@@ -230,7 +242,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                       {file}
                       <button
                         type="button"
-                        className="mx-2  p-1"
+                        className="p-1 mx-2"
                         onClick={(e) => handleDelete(file)}
                       >
                         {deleteIcon}
@@ -248,7 +260,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
 
       {fileError && (
         <div
-          className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2"
+          className="p-4 my-2 text-orange-700 bg-orange-100 border-l-4 border-orange-500"
           role="alert"
         >
           <p className="font-bold">Error</p>
@@ -257,7 +269,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
       )}
       {successMsg && (
         <div
-          className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 my-2"
+          className="p-4 my-2 text-green-700 bg-green-100 border-l-4 border-green-500"
           role="alert"
         >
           <p className="font-bold">Success</p>

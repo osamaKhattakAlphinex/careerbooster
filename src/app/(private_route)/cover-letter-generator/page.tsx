@@ -372,7 +372,7 @@ export default function CoverLetterPage() {
                     className="w-fit h-4 border-[1px] "
                     checked={selectedOption === "file"}
                   />
-                  Upload a new resume
+                  Upload a new resume or choose from the uploaded list of files
                 </label>
                 {selectedOption == "file" ? (
                   <CoverLetterFileUploader
