@@ -1,7 +1,11 @@
+"use client";
 import { Education } from "@/store/userDataSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setStepFour } from "@/store/registerSlice";
 import { EditIcon, deleteIcon, plusSimpleIcon } from "@/helpers/iconsProvider";
+import { useState } from "react";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { showSuccessToast } from "@/helpers/toast";
 
 const EducationCard = ({
   rec,
@@ -12,6 +16,7 @@ const EducationCard = ({
 }) => {
   const dispatch = useDispatch();
   const stepFour = useSelector((state: any) => state.register.stepFour);
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const { list, state } = stepFour;
   const handleEdit = (id: any) => {
     dispatch(setStepFour({ state: "edit", editId: id }));
@@ -19,6 +24,11 @@ const EducationCard = ({
   const handleDelete = (id: any) => {
     const newList = list.filter((rec: Education) => rec?.id !== id);
     dispatch(setStepFour({ list: newList }));
+    setConfirmationModal(false);
+    showSuccessToast("Education has been deleted");
+  };
+  const handleOpenConfirmationModal = () => {
+    setConfirmationModal(true);
   };
   return (
     <div
@@ -61,7 +71,7 @@ const EducationCard = ({
             </button>
             <button
               className="text-red-500 hover:text-red-700"
-              onClick={(e) => handleDelete(rec?.id)}
+              onClick={handleOpenConfirmationModal}
             >
               {deleteIcon}
             </button>
@@ -148,6 +158,13 @@ const EducationCard = ({
           </>
         )}
       </p>
+      {confirmationModal && (
+        <DeleteConfirmationModal
+          message="Are you sure you want to delete ?"
+          onConfirm={() => handleDelete(rec?.id)}
+          onCancel={() => setConfirmationModal(false)}
+        />
+      )}
     </div>
   );
 };
