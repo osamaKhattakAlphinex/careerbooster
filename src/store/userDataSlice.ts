@@ -13,6 +13,18 @@ export interface Education {
   toYear?: string;
 }
 
+export interface CustomEntry {
+  id?: string;
+  title: string;
+  country?: string;
+  cityState?: string;
+  fromMonth?: string;
+  fromYear?: string;
+  toMonth?: string;
+  toYear?: string;
+  description?: string;
+}
+
 export interface WorkExperience {
   id?: string;
   jobTitle: string;

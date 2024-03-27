@@ -22,6 +22,7 @@ import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import { showSuccessToast } from "@/helpers/toast";
+import StepCustom from "@/components/dashboard/profileReview/StepCustom";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.Ai-Welcome",
 // };
@@ -231,11 +232,12 @@ const ProfileReview = () => {
                     )}
                     {register.activeStep === 2 && <StepFour />}
                     {register.activeStep === 3 && <StepFive />}
+                    {register.activeStep === 4 && <StepCustom />}
 
                     {/* {register.activeStep === 4 && <StepSix />} */}
 
-                    {register.activeStep === 4 && <ProfilePreview />}
-                    {register.activeStep === 5 && <StepEight />}
+                    {register.activeStep === 5 && <ProfilePreview />}
+                    {register.activeStep === 6 && <StepEight />}
 
                     <div
                       className={`my-6 flex ${
