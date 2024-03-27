@@ -279,8 +279,12 @@ const PersonalizedEmailBot = () => {
                 setStreamedFirstFollowUpEmailText((prev: any) => prev + text);
                 tempText += text;
               }
-              setStreamedFirstFollowUpEmailText((prev) => prev.replace("```html", ""));
-            setStreamedFirstFollowUpEmailText((prev) => prev.replace("```", ""));
+              setStreamedFirstFollowUpEmailText((prev) =>
+                prev.replace("```html", "")
+              );
+              setStreamedFirstFollowUpEmailText((prev) =>
+                prev.replace("```", "")
+              );
 
               const emailsResponse = await axios.get(
                 "/api/emailBot/getAllEmails"
@@ -363,8 +367,12 @@ const PersonalizedEmailBot = () => {
                 tempText += text;
               }
 
-              setStreamedSecondFollowUpEmailText((prev) => prev.replace("```html", ""));
-            setStreamedSecondFollowUpEmailText((prev) => prev.replace("```", ""));
+              setStreamedSecondFollowUpEmailText((prev) =>
+                prev.replace("```html", "")
+              );
+              setStreamedSecondFollowUpEmailText((prev) =>
+                prev.replace("```", "")
+              );
 
               const emailsResponse = await axios.get(
                 "/api/emailBot/getAllEmails"
@@ -511,8 +519,6 @@ const PersonalizedEmailBot = () => {
     }
   };
 
-
-
   const resetStatesAndRedux = () => {
     dispatch(resetEmail());
     setStreamedData("");
@@ -597,7 +603,7 @@ const PersonalizedEmailBot = () => {
         <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 ">
           {/* header */}
           <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
-            <h3 className="text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
+            <h3 className="text-sm font-bold uppercase md:text-base dark:text-gray-100 text-gray-950">
               Generate Emails
             </h3>
             <div className="text-sm font-bold uppercase dark:text-gray-100 text-gray-950"></div>
@@ -621,18 +627,18 @@ const PersonalizedEmailBot = () => {
               }`}
             >
               <input
-                style={{
-                  color: "#B324D7",
-                  background: "#B324D7",
-                  border: "1px solid #B324D7",
-                }}
+                // style={{
+                //   color: "#B324D7",
+                //   background: "#B324D7",
+                //   border: "1px solid #B324D7",
+                // }}
                 id="default-radio-1"
                 type="radio"
                 value="profile"
                 name="default-radio"
                 onChange={(e) => setSelectedOption(e.target.value)}
                 checked={selectedOption === "profile"}
-                className="w-5 h-4"
+                className="w-5 h-4 accent-[#B324D7]"
               />
               Use my existing resume/data
             </label>
@@ -653,7 +659,7 @@ const PersonalizedEmailBot = () => {
                   setSelectedOption(e.target.value);
                 }}
                 name="default-radio"
-                className="w-4 h-4 border-[1px]"
+                className="w-4 h-4 accent-[#B324D7]"
                 checked={selectedOption === "file"}
               />
               Upload a new resume
@@ -671,14 +677,11 @@ const PersonalizedEmailBot = () => {
           {/* form */}
           <div className="flex flex-col items-start justify-between gap-5 ">
             <div className="flex flex-col w-full">
-              <label className="mb-1 xs:font-semibold md:font-bold flex justify-between  items-center text-[14px] md:text-[24px] dark:text-gray-100 text-gray-950  lg:pb-[16px] gap-[3px]">
-                <div>
+              <label className="flex items-center justify-between gap-1 mb-1 text-sm xs:font-semibold md:font-bold md:text-lg dark:text-gray-100 text-gray-950/80 lg:pb-4">
+                <span className="text-[10px] md:text-sm dark:text-gray-100 text-gray-950 uppercase font-bold after:content-['*'] after:text-[#F04248] after:ml-1 py-4">
                   Paste Job Description
-                  <span className="text-[#F04248] text-[14px]"> *</span>
-                </div>
-                <div
-                  className={`text-[#000]  group relative rounded-full h-8 md:ml-3 flex  items-center px-[16px] py-[6px]  bg-[#FEB602] xs:text-[10px] md:text-[12px]  font-bold `}
-                >
+                </span>
+                <div className="text-gray-950/80 group relative rounded-full md:ml-3 flex items-center px-2 md:px-4 md:py-2  bg-[#FEB602] text-[10px] sm:text-sm font-semibold">
                   {creditLimits?.email_generation}
                   <div className="pl-1"> Credits</div>
                   <div className="w-44 bg-gradient-to-r  hover:from-purple-800 hover:to-pink-600  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32  xs:-top-12 md:-top-14  hidden group-hover:block  xs:rounded-br-none  text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
@@ -693,7 +696,7 @@ const PersonalizedEmailBot = () => {
                 rows={6}
                 onChange={(e) => setJobDescription(e.target.value)}
                 placeholder="Copy the job description for the position you are applying and paste it here to generate post application follow up emails to the hiring managers."
-                className="w-full px-3 lg:px-[26px] rounded-[8px] text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px] pt-3"
+                className="w-full px-3 lg:px-8 rounded-lg text-xs md:text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px] pt-3"
               />
             </div>
             {show && (

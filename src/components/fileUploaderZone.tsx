@@ -43,7 +43,7 @@ const FileUploader = ({
         return;
       } else {
         setFile(file);
-        setFileName(file);
+        setFileName(file.name);
         showSuccessToast("File is loaded Successfully");
       }
     }

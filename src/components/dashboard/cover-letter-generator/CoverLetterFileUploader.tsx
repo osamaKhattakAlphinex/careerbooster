@@ -212,18 +212,23 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
         )}
 
         {loadingFiles ? (
-          <p className="dark:text-gray-100 text-gray-950">Loading Files...</p>
+          <p className="dark:text-gray-100 xs:text-[10px] mt-[10px] md:text-sm text-gray-950/80">
+            Loading Files...
+          </p>
         ) : (
           <div className="flex flex-col xs:gap-2 md:gap-4 mt-[10px]">
-            <span className=" xs:text-[10px] md:text-sm text-[#615DFF]  uppercase font-bold">
+            <span className="xs:text-[10px] md:text-sm text-[#615DFF] uppercase font-bold">
               Uploaded Files
             </span>
-            <ul>
+            <ul className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2">
               {fileList &&
                 fileList.map((file: string, i: number) => (
-                  <li key={i} className="flex">
+                  <li
+                    key={i}
+                    className="flex gap-0 md:gap-3 justify-between mt-2 items-center border-[1.2px] border-[#312E37] rounded-md sm:px-4 sm:py-3 p-2"
+                  >
                     <label
-                      className="flex gap-3 mt-2   items-center rounded-full border-[1px] border-[#353672] px-3 lg:px-6 lg:py-3  cursor-pointer lg:text-[15px] text-[11px] dark:text-gray-100  text-gray-950"
+                      className="flex flex-row items-center w-11/12 gap-2 text-xs cursor-pointer md:text-sm dark:text-gray-100 text-gray-950"
                       htmlFor={`file_${i}`}
                     >
                       <input
@@ -237,17 +242,17 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
                         onChange={(e) => {
                           setSelectedFile(e.target.value);
                         }}
-                        className="h-4 bg-transparent border-[1px]"
-                      />{" "}
-                      {file}
-                      <button
-                        type="button"
-                        className="p-1 mx-2"
-                        onClick={(e) => handleDelete(file)}
-                      >
-                        {deleteIcon}
-                      </button>
+                        className="h-4 bg-transparent accent-[#B324D7] border-[1px]"
+                      />
+                      <span className="w-full truncate">{file}</span>
                     </label>
+                    <button
+                      type="button"
+                      className="flex flex-row items-center justify-center w-1/12"
+                      onClick={(e) => handleDelete(file)}
+                    >
+                      {deleteIcon}
+                    </button>
                   </li>
                 ))}
               {fileList.length === 0 && (

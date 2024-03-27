@@ -59,7 +59,7 @@ const FileUploadHandler = ({
 
   return (
     <div
-      className="card-body scrapped-content hidden"
+      className="hidden card-body scrapped-content"
       style={{ overflow: "auto" }}
     >
       {file && (
