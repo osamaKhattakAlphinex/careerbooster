@@ -46,7 +46,7 @@ const cardDetail = [
     title: "Email Assistant",
     description:
       "Secure more interviews with AI-powered follow-up emails to recruiters.",
-    link: "/email-bot",
+    link: "/email-assistant",
     icon: email,
     bgColor1: "from-pink-600",
     bgColor2: "to-orange-700",
