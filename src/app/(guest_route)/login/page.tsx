@@ -11,8 +11,8 @@ const Login = () => {
   return (
     <>
       <main className="flex-grow-1">
-        <section className=" pb-10 pt-[140px] h-full dark:bg-gray-950 bg-gray-100 ">
-          <div className=" lg:container h-full">
+        <section className="h-full dark:bg-gray-950 bg-gray-100 ">
+          <div className="md:mx-auto md:container h-full">
             <div className="flex h-full">
               <div className="flex w-full md:w-5/12 mx-auto">
                 <div className=" hidden">
@@ -36,7 +36,7 @@ const Login = () => {
                     </svg>
                   </Link>
                 </div>
-                <div className="flex flex-col justify-center mx-auto">
+                <div className="flex flex-col justify-center items-center mx-auto">
                   <div className="text-center">
                     <LoginForm />
                   </div>

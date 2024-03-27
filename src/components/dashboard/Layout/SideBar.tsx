@@ -37,7 +37,11 @@ const items = [
     url: "/cover-letter-generator",
   },
   { icon: userGroup, text: "LinkedIn Optimizer", url: "/linkedin-optimizer" },
-  { icon: emailBotSidebarIcon, text: "Email Assistant", url: "/email-assistant" },
+  {
+    icon: emailBotSidebarIcon,
+    text: "Email Assistant",
+    url: "/email-assistant",
+  },
   { icon: dollarIcon, text: "Billing Details", url: "/billing" },
   // { icon: bid, text: "Consulting Bot", url: "/consulting-bids-bot" },
   { icon: userCircle, text: "Profile Settings ", url: "/profile-review" },
@@ -243,7 +247,7 @@ const SideBar = () => {
                         className={`text-base ml-3 mb-0 font-normal ${
                           pathname === item.url
                             ? "dark:text-[#b324d7] text-[#b324d7] font-bold group-hover:text-[#b324d7] dark:hover:text-[#b324d7] no-underline	"
-                            : "dark:text-[#959595] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline	"
+                            : "dark:text-[#959595] text-gray-950 group-hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline	"
                         }`}
                       >
                         {item.text}
@@ -254,12 +258,11 @@ const SideBar = () => {
                       className="px-7 text-base flex capitalize items-center dark:group-hover:text-[#b324d7] group-hover:text-[#b324d7]"
                       onMouseOver={() => handleMouseOver(index)}
                       onMouseOut={handleMouseOut}
-                      onClick={() =>{
+                      onClick={() => {
                         localStorage.clear();
                         // router.replace("/login")
-                        signOut()
-                      } 
-                    }
+                        signOut();
+                      }}
                       // style={{
                       //   opacity: hoveredItem === index ? 1 : 0.7,
                       //   color:
@@ -269,10 +272,10 @@ const SideBar = () => {
                       //   textDecoration: "none",
                       // }}
                     >
-                      <div className="w-6 h-6  pr-2 dark:text-[#959595] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline		">
+                      <div className="w-6 h-6  pr-2 dark:text-[#959595] text-gray-950 group-hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline		">
                         {item.icon}
                       </div>
-                      <h2 className="text-base ml-3 mb-0 dark:text-[#959595] text-gray-950 hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline	 font-normal	">
+                      <h2 className="text-base ml-3 mb-0 dark:text-[#959595] text-gray-950 group-hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline	 font-normal	">
                         {item.text}
                       </h2>
                     </button>

@@ -6,7 +6,11 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import { infoSmallIcon, refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
+import {
+  infoSmallIcon,
+  refreshIconRotating,
+  uploadIcon,
+} from "@/helpers/iconsProvider";
 import { useDispatch } from "react-redux";
 import FileUploadHandler from "@/components/dashboard/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
@@ -327,20 +331,21 @@ const RegistrationForm = () => {
                           {refreshIconRotating}
                         </div>
                       ) : (
-                        <div className="flex items-center w-fit cursor-pointer xs:scale-75 md:scale-100 gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg text-[1.125rem] font-medium hover:bg-pink-600 hover:from-purple-800 hover:to-pink-600">
+                        <div className="flex items-center whitespace-nowrap w-fit cursor-pointer xs:scale-75 md:scale-100 gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg text-[1.125rem] font-medium hover:bg-pink-600 hover:from-purple-800 hover:to-pink-600">
                           {uploadIcon} Upload Your Existing Resume
                         </div>
                       )}
                     </label>
-                  ): <div className="flex items-center text-gray-400 justify-center whitespace-nowrap">
-                     <div className=" w-3 h-3 p-2 mr-2 text-stone-950 !bg-[#6a4dff]  dark:!bg-[#e6f85e] rounded-full flex justify-center items-center font-extrabold lg:text-[14px] text-[12px]">
-            !
-          </div>
-          <span>
-            
-            Important! Please verify your details before sign up
-            </span>
-                    </div>}
+                  ) : (
+                    <div className="flex items-center text-gray-400 justify-center whitespace-nowrap">
+                      <div className=" w-3 h-3 p-2 mr-2 text-stone-950 !bg-[#6a4dff]  dark:!bg-[#e6f85e] rounded-full flex justify-center items-center font-extrabold lg:text-[14px] text-[12px]">
+                        !
+                      </div>
+                      <span>
+                        Important! Please verify your details before sign up
+                      </span>
+                    </div>
+                  )}
                   {file !== null && file.type === "application/pdf" ? (
                     <FileUploadHandler
                       file={file}
@@ -519,7 +524,7 @@ const RegistrationForm = () => {
                           >
                             Enter Your Email
                           </label> */}
-                {/* <input
+            {/* <input
                   type="password"
                   name="password"
                   className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
@@ -559,7 +564,7 @@ const RegistrationForm = () => {
                           >
                             Enter Your Email
                           </label> */}
-                {/* <input
+            {/* <input
                   type="password"
                   name="confirmpassword"
                   className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"

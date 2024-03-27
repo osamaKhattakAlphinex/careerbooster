@@ -41,7 +41,7 @@ const LoginForm = () => {
     }
   };
   const sendOTP = () => {
-    if(!formik.errors.email) {
+    if (!formik.errors.email) {
       setSubmittingError("");
       setSubmitting(true);
       axios.post("/api/sendOTP", formik.values).then((resp) => {
@@ -50,8 +50,8 @@ const LoginForm = () => {
         setSuccessAlert("OTP sent to your email!");
         setOtpSend(true);
       });
-    }else {
-      setEmailEntered(false)
+    } else {
+      setEmailEntered(false);
     }
   };
 
@@ -119,10 +119,10 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="flex flex-col justify-center gap-4"
+      className="flex flex-col h-screen justify-center gap-4"
     >
       <div className="text-start">
-        <h2 className="pb-5 mb-5 whitespace-nowrap font-semibold text-lg md:text-2xl lg:text-[2.5rem]">
+        <h2 className="pb-5 mb-8 text-center whitespace-nowrap font-semibold text-2xl md:text-2xl lg:text-[2.5rem]">
           Login to your Account
         </h2>
         {!otpSend ? (
@@ -161,7 +161,7 @@ const LoginForm = () => {
               <input
                 key={index}
                 type="text"
-                className="block outline-none text-center focus:border-blue-400 rounded-lg py-4 text-base w-12 border-[1px] border-[#bdbfd4] bg-[#E8F0FE] dark:bg-transparent bg-clip"
+                className="block outline-none text-center focus:border-blue-400 focus:border-[2px]  rounded-lg py-2 md:py-4 text-base w-10 md:w-12 border-[1px] border-[#bdbfd4] bg-[#E8F0FE] dark:bg-transparent bg-clip"
                 placeholder=""
                 maxLength={1}
                 onBlur={formik.handleBlur}
@@ -175,7 +175,7 @@ const LoginForm = () => {
           </div>
         )}
         {formik.touched.email && formik.errors.email && (
-          <p className="form-text mb-0 !text-red-600  my-4">
+          <p className="form-text  mb-0 !text-red-600  my-4">
             {formik.touched.email && formik.errors.email}
           </p>
         )}

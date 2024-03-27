@@ -9,8 +9,8 @@ const RegisterNew = () => {
     <>
       <div className=" flex flex-col justify-between ">
         <main className="flex-grow-1">
-          <section className=" pb-10 pt-16 md:pt-32 dark:bg-gray-950 bg-gray-100">
-            <div className=" px-3 lg:container ">
+          <section className=" pb-10 pt-16 md:pt-28 dark:bg-gray-950 bg-gray-100">
+            <div className=" px-3 md:mx-auto md:container ">
               <div className="flex ">
                 <RegistrationForm />
               </div>
