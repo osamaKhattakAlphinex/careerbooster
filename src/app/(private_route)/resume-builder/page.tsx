@@ -111,8 +111,8 @@ const ResumeBuilder = () => {
         await getBasicInfo();
         await getSummary();
         await getPrimarySkills();
-        await addCustomSection();
         await getWorkExperienceNew(quantifyingExperience);
+        await addCustomSection();
         // adding custom sections
         runConfetti();
       } else {
@@ -182,7 +182,6 @@ const ResumeBuilder = () => {
         html += `<div>`;
         workArrObj.cityState = customSection?.cityState;
         workArrObj.country = customSection?.country;
-        workArrObj.company = customSection?.company;
         workArrObj.fromMonth = customSection?.fromMonth;
         workArrObj.fromYear = customSection?.fromYear;
         workArrObj.isContinue = customSection?.isContinue;
@@ -228,6 +227,7 @@ const ResumeBuilder = () => {
       resumeCustomExpArrObj.entries = workArr;
       resumeCustomExpArr.push(resumeCustomExpArrObj);
     }
+    setFinished(true);
     dispatch(setCustomExperienceArray (resumeCustomExpArr));
 
   };
@@ -371,7 +371,6 @@ const ResumeBuilder = () => {
           setStreamedJDData("You ran out of credits!");
         }
       }
-      setFinished(true);
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
       setResumeGenerated(true);
       dispatch(setState({ name: "resumeLoading", value: false }));
@@ -618,6 +617,7 @@ const ResumeBuilder = () => {
                   <ResumeTemplate1
                     streamedSummaryData={streamedSummaryData}
                     streamedCustomData={streamedCustomData}
+                    setStreamedCustomData={setStreamedCustomData}
                     streamedJDData={streamedJDData}
                     setStreamedJDData={setStreamedJDData}
                     setStreamedSummaryData={setStreamedSummaryData}

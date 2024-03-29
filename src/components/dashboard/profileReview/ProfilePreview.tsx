@@ -215,7 +215,7 @@ const ProfilePreview = () => {
           {data.stepFour.list.length === 0 && <p>No Education Found</p>}
         </div>
       </section>
-      {/* <section className="mb-8 ">
+      <section className="mb-8 ">
         <h2 className="text-xl font-semibold  dark:text-gray-100 text-gray-950">
           Custom Sections
           <button
@@ -240,7 +240,7 @@ const ProfilePreview = () => {
             );
           })}
         </div>
-      </section> */}
+      </section>
 
       {/* Skills */}
       {/* <section className="mb-8">

@@ -23,18 +23,22 @@ const ResumeTemplate1 = ({
   streamedJDData,
   setStreamedJDData,
   streamedCustomData,
+  setStreamedCustomData,
 }: {
   streamedSummaryData: string;
   streamedJDData: string;
   streamedCustomData: string;
   setStreamedJDData: any;
   setStreamedSummaryData: any;
+  setStreamedCustomData:any;
 }) => {
   const resume = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
+  const [newCustomWorkExperience, setNewCustomWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
+  const [newCustomAchievement, setNewCustomAchievement] = useState("");
   // const [color, setColor] = useState("#e04127");
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [confirmationModal, setConfirmationModal] = useState(false);
@@ -43,10 +47,13 @@ const ResumeTemplate1 = ({
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
+  const [customRegeneratedRecordIndex, setCustomRegeneratedRecordIndex] = useState<
+    number | null
+  >(null);
   // const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
   // const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
+  const { getOneWorkExperienceNew,getOneCustomWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData,setStreamedCustomData);
 
   const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
     useDragAndDrop();
@@ -65,11 +72,21 @@ const ResumeTemplate1 = ({
       setRegeneratedRecordIndex(null);
     }
   }, [streamedJDData]);
+  useEffect(() => {
+    if (streamedCustomData === "") {
+      setStreamedCustomData(null);
+      setCustomRegeneratedRecordIndex(null);
+    }
+  }, [streamedCustomData]);
 
   // handle regenrate
   const handleRegenrate = (rec: any, i: number) => {
     getOneWorkExperienceNew(rec);
     setRegeneratedRecordIndex(i);
+  };
+  const handleCustomRegenrate = (rec: any, i: number, index:number) => {
+    getOneCustomWorkExperienceNew(rec,index);
+    setCustomRegeneratedRecordIndex(i);
   };
 
   //add Skills
@@ -804,7 +821,7 @@ const ResumeTemplate1 = ({
                               return (
                                 <Toolbar
                                   key={i}
-                                  addAchivement={() => setNewWorkExperience(i)}
+                                  addAchivement={() => setNewCustomWorkExperience(i)}
                                   deleteExperience={() =>
                                     handlers.handleDeleteCustomExperience(
                                       i,
@@ -812,11 +829,11 @@ const ResumeTemplate1 = ({
                                     )
                                   }
                                   regenrateAchivements={() =>
-                                    handleRegenrate(entry, i)
+                                    handleCustomRegenrate(entry, i, index)
                                   }
                                   addNewLine={() => {
-                                    handlers.handleAddCustomSpace(i, newAchievement, index);
-                                    setNewAchievement("");
+                                    handlers.handleAddCustomSpace(i, newCustomAchievement, index);
+                                    setNewCustomAchievement("");
                                   }}
                                 >
                                   <div
@@ -837,9 +854,10 @@ const ResumeTemplate1 = ({
                                         value={entry?.title}
                                         style={{ width: "100%" }}
                                         onSave={(value: string) => {
-                                          handlers.handleSaveExperienceDetail(
+                                          handlers.handleSaveExperienceCustomDetail(
                                             { title: value },
-                                            i
+                                            i,
+                                            index
                                           );
                                         }}
                                       />
@@ -849,9 +867,10 @@ const ResumeTemplate1 = ({
                                         <EditableField
                                           value={`${entry?.fromMonth}`}
                                           onSave={(value: string) => {
-                                            handlers.handleSaveExperienceDetail(
+                                            handlers.handleSaveExperienceCustomDetail(
                                               { fromMonth: value },
-                                              i
+                                              i,
+                                              index
                                             );
                                           }}
                                         />
@@ -860,9 +879,10 @@ const ResumeTemplate1 = ({
                                         <EditableField
                                           value={`${entry?.fromYear}`}
                                           onSave={(value: string) => {
-                                            handlers.handleSaveExperienceDetail(
+                                            handlers.handleSaveExperienceCustomDetail(
                                               { fromYear: value },
-                                              i
+                                              i,
+                                              index
                                             );
                                           }}
                                         />
@@ -872,9 +892,10 @@ const ResumeTemplate1 = ({
                                         <EditableField
                                           value={`${entry?.toMonth}`}
                                           onSave={(value: string) => {
-                                            handlers.handleSaveExperienceDetail(
+                                            handlers.handleSaveExperienceCustomDetail(
                                               { toMonth: value },
-                                              i
+                                              i,
+                                              index
                                             );
                                           }}
                                         />
@@ -883,9 +904,10 @@ const ResumeTemplate1 = ({
                                         <EditableField
                                           value={`${entry?.toYear}`}
                                           onSave={(value: string) => {
-                                            handlers.handleSaveExperienceDetail(
+                                            handlers.handleSaveExperienceCustomDetail(
                                               { toYear: value },
-                                              i
+                                              i,
+                                              index
                                             );
                                           }}
                                         />
@@ -896,13 +918,15 @@ const ResumeTemplate1 = ({
                                             entry?.isContinue && "Present"
                                           }`}
                                           onSave={(value: string) => {
-                                            handlers.handleSaveExperienceDetail(
+                                            handlers.handleSaveExperienceCustomDetail(
                                               { toYear: value },
-                                              i
+                                              i,
+                                              index
                                             );
-                                            handlers.handleSaveExperienceDetail(
+                                            handlers.handleSaveExperienceCustomDetail(
                                               { isContinue: false },
-                                              i
+                                              i,
+                                              index
                                             );
                                           }}
                                         />
@@ -912,9 +936,10 @@ const ResumeTemplate1 = ({
                                         <EditableField
                                           value={rec?.cityState}
                                           onSave={(value: string) => {
-                                            handlers.handleSaveExperienceDetail(
+                                            handlers.handleSaveExperienceCustomDetail(
                                               { cityState: value },
-                                              i
+                                              i,
+                                              index
                                             );
                                           }}
                                         />
@@ -924,9 +949,10 @@ const ResumeTemplate1 = ({
                                         <EditableField
                                           value={entry?.country}
                                           onSave={(value: string) => {
-                                            handlers.handleSaveExperienceDetail(
+                                            handlers.handleSaveExperienceCustomDetail(
                                               { country: value },
-                                              i
+                                              i,
+                                              index
                                             );
                                           }}
                                         />
@@ -934,7 +960,7 @@ const ResumeTemplate1 = ({
                                     </h2>
                                     <div className="px-4 py-1">
                                       {entry?.achievements &&
-                                      i !== regeneratedRecordIndex ? (
+                                      i !== customRegeneratedRecordIndex ? (
                                         <ul className="flex flex-col gap-1 pl-0 text-xs">
                                           {entry?.achievements.map(
                                             (achievement: any, ind: number) =>
@@ -960,9 +986,10 @@ const ResumeTemplate1 = ({
                                                   <div
                                                     className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
                                                     onClick={() => {
-                                                      handlers.handleRemoveExtraSpace(
+                                                      handlers.handleRemoveExtraSpaceCustom(
                                                         i,
-                                                        ind
+                                                        ind,
+                                                        index
                                                       );
                                                     }}
                                                   >
@@ -1014,10 +1041,10 @@ const ResumeTemplate1 = ({
                                               )
                                           )}
                                         </ul>
-                                      ) : streamedJDData ? (
+                                      ) : streamedCustomData ? (
                                         <div
                                           dangerouslySetInnerHTML={{
-                                            __html: streamedJDData,
+                                            __html: streamedCustomData,
                                           }}
                                         ></div>
                                       ) : (
@@ -1028,29 +1055,30 @@ const ResumeTemplate1 = ({
                                         </div>
                                       )}
 
-                                      {newWorkExperience === i ? (
+                                      {newCustomWorkExperience === i ? (
                                         <>
                                           <div className="flex flex-wrap w-full gap-1 mt-4">
                                             <input
                                               className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
                                               onChange={(e) =>
-                                                setNewAchievement(
+                                                setNewCustomAchievement(
                                                   e.target.value
                                                 )
                                               }
-                                              value={newAchievement}
-                                              name="newAchievement"
-                                              id="newAchievement"
+                                              value={newCustomAchievement}
+                                              name="newCustomAchievement"
+                                              id="newCustomAchievement"
                                               autoComplete="off"
                                               onKeyDown={(e) => {
                                                 if (e.key === "Enter") {
                                                   e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
                                                   // Save the new achievement to the state and possibly the database
-                                                  handlers.handleAddAchivement(
+                                                  handlers.handleAddCustomAchivement(
                                                     i,
-                                                    newAchievement
+                                                    newCustomAchievement,
+                                                    index
                                                   );
-                                                  setNewAchievement("");
+                                                  setNewCustomAchievement("");
                                                 }
                                               }}
                                             />
@@ -1059,19 +1087,20 @@ const ResumeTemplate1 = ({
                                                 className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
                                                 onClick={() => {
                                                   // Save the new achievement to the state and possibly the database
-                                                  handlers.handleAddAchivement(
+                                                  handlers.handleAddCustomAchivement(
                                                     i,
-                                                    newAchievement
+                                                    newCustomAchievement,
+                                                    index
                                                   );
-                                                  setNewAchievement("");
+                                                  setNewCustomAchievement("");
                                                 }}
                                               >
                                                 Save
                                               </button>
                                               <button
                                                 onClick={() => {
-                                                  setNewAchievement("");
-                                                  setNewWorkExperience(-1);
+                                                  setNewCustomAchievement("");
+                                                  setNewCustomWorkExperience(-1);
                                                 }}
                                                 className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
                                               >

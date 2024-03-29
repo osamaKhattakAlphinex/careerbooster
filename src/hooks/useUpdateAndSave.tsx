@@ -48,7 +48,6 @@ const useUpdateAndSave = () => {
     });
   };
   const updateAndSaveCustomExperienceArray = (updatedCustomExp: any) => {
-  console.log(updatedCustomExp);
     dispatch(
       setCustomExperienceArray(updatedCustomExp)
     );

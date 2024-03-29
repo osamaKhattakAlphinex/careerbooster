@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setActiveStep,
   setField,
+
 } from "@/store/registerSlice";
 import StepEight from "@/components/dashboard/profileReview/StepEight";
 import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
@@ -247,12 +248,12 @@ const ProfileReview = () => {
                     )}
                     {register.activeStep === 2 && <StepFour />}
                     {register.activeStep === 3 && <StepFive />}
-                    {/* {register.activeStep === 4 && <StepCustom />} */}
+                    {register.activeStep === 4 && <StepCustom />}
 
                     {/* {register.activeStep === 4 && <StepSix />} */}
 
-                    {register.activeStep === 4 && <ProfilePreview />}
-                    {register.activeStep === 5 && <StepEight />}
+                    {register.activeStep === 5 && <ProfilePreview />}
+                    {register.activeStep === 6 && <StepEight />}
 
                     <div
                       className={`my-6 flex ${
@@ -281,7 +282,7 @@ const ProfileReview = () => {
                         </button>
                       )}
 
-                      {register.activeStep < 4 && (
+                      {register.activeStep < 5 && (
                         <button
                           type="submit"
                           // disabled={isNextDisabled()}
@@ -295,7 +296,7 @@ const ProfileReview = () => {
                         </button>
                       )}
 
-                      {register.activeStep === 4 && (
+                      {register.activeStep === 5 && (
                         <button
                           type="submit"
                           className="py-3 mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
