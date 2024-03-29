@@ -82,6 +82,23 @@ const useHandler = () => {
     };
     updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
   };
+  const handleDeleteAchivementCustom = (
+    expInd: number,
+    achiveInd: number,
+    customInd: number
+  ) => {
+    let updatedCustomExp: any = [...resume.customExperienceArray];
+    let newUpdatedCustomExp: any = { ...updatedCustomExp[customInd] };
+    let newUpdatedCustomExpEntries: any = [...newUpdatedCustomExp.entries];
+    let newUpdatedEntries: any = { ...newUpdatedCustomExp.entries[expInd] };
+    let newUpdatedCustomAchievements: any = [...newUpdatedEntries.achievements];
+    newUpdatedCustomAchievements.splice(achiveInd, 1);
+    newUpdatedEntries.achievements = newUpdatedCustomAchievements;
+    newUpdatedCustomExpEntries[expInd] = newUpdatedEntries;
+    newUpdatedCustomExp.entries = newUpdatedCustomExpEntries;
+    updatedCustomExp[customInd] = newUpdatedCustomExp;
+    updateSaveHook.updateAndSaveCustomExperienceArray(updatedCustomExp);
+  };
 
   const handleDeleteExperience = (expInd: number) => {
     let updatedExp: any = [...resume.workExperienceArray];
@@ -115,6 +132,33 @@ const useHandler = () => {
         achievements: updatedAchievements,
       };
       updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
+    }
+  };
+  const handleUpdateAchivementCustom = (
+    expInd: number,
+    achiveInd: number,
+    value: string,
+    customInd: number
+  ) => {
+    if (
+      value !==
+      resume?.customExperienceArray[customInd]?.entries[expInd]?.achievements[
+        achiveInd
+      ]
+    ) {
+      let updatedCustomExp: any = [...resume.customExperienceArray];
+      let newUpdatedCustomExp: any = { ...updatedCustomExp[customInd] };
+      let newUpdatedCustomExpEntries: any = [...newUpdatedCustomExp.entries];
+      let newUpdatedEntries: any = { ...newUpdatedCustomExp.entries[expInd] };
+      let newUpdatedCustomAchievements: any = [
+        ...newUpdatedEntries.achievements,
+      ];
+      newUpdatedCustomAchievements.splice(achiveInd, 1, value);
+      newUpdatedEntries.achievements = newUpdatedCustomAchievements;
+      newUpdatedCustomExpEntries[expInd] = newUpdatedEntries;
+      newUpdatedCustomExp.entries = newUpdatedCustomExpEntries;
+      updatedCustomExp[customInd] = newUpdatedCustomExp;
+      updateSaveHook.updateAndSaveCustomExperienceArray(updatedCustomExp);
     }
   };
 
@@ -229,6 +273,8 @@ const useHandler = () => {
       handleAddCustomAchivement,
       handleRemoveExtraSpaceCustom,
       handleSaveExperienceCustomDetail,
+      handleDeleteAchivementCustom,
+      handleUpdateAchivementCustom,
     },
   };
 };

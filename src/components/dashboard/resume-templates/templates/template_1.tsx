@@ -847,7 +847,7 @@ const ResumeTemplate1 = ({
                                     }
                                     onDragOver={(e) => e.preventDefault()}
                                     onDrop={(e) => handleDropExperience(e, i)}
-                                    draggable
+                                    // draggable
                                   >
                                     <h2 className="text-base font-bold  leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
                                       <EditableField
@@ -934,7 +934,7 @@ const ResumeTemplate1 = ({
                                       |{" "}
                                       <span className="hover:shadow-md hover:bg-gray-100">
                                         <EditableField
-                                          value={rec?.cityState}
+                                          value={entry?.cityState}
                                           onSave={(value: string) => {
                                             handlers.handleSaveExperienceCustomDetail(
                                               { cityState: value },
@@ -980,7 +980,7 @@ const ResumeTemplate1 = ({
                                                       insideIndex
                                                     );
                                                   }}
-                                                  draggable
+                                                  // draggable
                                                   className="flex flex-row items-center justify-center h-8 hover:bg-slate-200 group"
                                                 >
                                                   <div
@@ -1011,7 +1011,7 @@ const ResumeTemplate1 = ({
                                                       insideIndex
                                                     );
                                                   }}
-                                                  draggable
+                                                  // draggable
                                                   className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
                                                   key={ind}
                                                 >
@@ -1019,18 +1019,20 @@ const ResumeTemplate1 = ({
                                                     type="textarea"
                                                     value={achievement}
                                                     onSave={(value: string) => {
-                                                      handlers.handleUpdateAchivement(
+                                                      handlers.handleUpdateAchivementCustom(
                                                         i,
                                                         ind,
-                                                        value
+                                                        value,
+                                                        index
                                                       );
                                                     }}
                                                   />
                                                   <div
                                                     onClick={() =>
-                                                      handlers.handleDeleteAchivement(
+                                                      handlers.handleDeleteAchivementCustom(
                                                         i,
-                                                        ind
+                                                        ind,
+                                                        index
                                                       )
                                                     }
                                                     className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
