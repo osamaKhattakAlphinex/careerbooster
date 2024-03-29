@@ -6,23 +6,6 @@ const Footer = () => {
   return (
     <>
       <footer className="bg-[url('/assets/images/shapes/stripe-light.svg')] bg-[#fff] dark:bg-[#171825] bg-no-repeat dark:bg-[url('/assets/images/shapes/stripe-dark.svg')] bg-cover bg-center ">
-        <Head>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-             (function(c,l,a,r,i,t,y){
-                 c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
-                 t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-             })(window, document, "clarity", "script", "jum6bniqm4");
-            `,
-            }}
-          />
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
-          ></script>
-        </Head>
         <div className="container mx-auto ">
           <div className="justify-between gap-4 md:py-2 md:px-4 xs:px-2 xs:text-center sm:text-start md:gap-8 md:text-left">
             <div className="grid items-start w-full grid-cols-1 gap-8 lg:grid-cols-3 sm:justify-between xs:justify-center lg:py-6">
