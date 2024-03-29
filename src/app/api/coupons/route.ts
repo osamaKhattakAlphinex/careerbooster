@@ -39,7 +39,7 @@ export async function POST(request: any) {
       // generate  a a coupan code for the reward
 
       // check if the code generated is valid
-      payload.coupon_code = makeCoupanCode();
+      payload.coupon_code = payload.name;
 
       response = await saveCouponToDb(payload);
     }

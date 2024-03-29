@@ -24,9 +24,21 @@ export async function POST(request: any) {
 
     // get the coupan details from the db
     if (fetchedCoupon) {
-      if (session.user?.email) {
-        updateUserCreditsByAdmin(session.user?.email, fetchedCoupon.credits);
+      if(fetchedCoupon.valid){
+        if (session.user?.email) {
+          updateUserCreditsByAdmin(session.user?.email, fetchedCoupon.credits);
+        }
+      }else{
+        return NextResponse.json(
+          { result: "Coupon Not Valid", success: false },
+          { status: 404 }
+        );
       }
+    } else {
+      return NextResponse.json(
+        { result: "Coupon Not Found", success: false },
+        { status: 404 }
+      );
     }
 
     // const response = await Coupon.create({ ...payload });

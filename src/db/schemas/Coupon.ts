@@ -17,7 +17,6 @@ const CouponSchema = new Schema(
     amount_off: {
       type: Number,
       min: 0,
-      max: 100,
     },
     currency: String,
     duration: {
@@ -47,10 +46,6 @@ const CouponSchema = new Schema(
     status: {
       type: String,
       enum: ["active", "inactive"],
-    },
-    forUserPackageCategory: {
-      type: String,
-      enum: ["basic", "standard", "premium"],
     },
     expiresAt: {
       type: Date,

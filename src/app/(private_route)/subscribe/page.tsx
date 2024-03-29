@@ -17,7 +17,7 @@ type CoupanState = {
 const COUPON_MESSAGE: any = {
   initialized: "Please wait while we apply your coupon",
   success: "Your coupon has been applied successfully",
-  error: "Something went wrong while applying your coupon",
+  error: "Invalid Coupon Code",
 };
 
 export default function SubscribePage() {
@@ -40,7 +40,6 @@ export default function SubscribePage() {
           body: JSON.stringify({ coupon: values.coupan }),
         });
         response = await response.json();
-
         if (response.success) {
           setCoupanState("success");
           formik.setFieldValue("coupon", "");
@@ -50,8 +49,9 @@ export default function SubscribePage() {
           setCoupanState("error");
         }
       } catch (error) {
-        setCoupanState("error");
         setShowCoupanForm(true);
+        setCoupanState("error");
+
         console.log(error);
       } finally {
         setTimeout(() => {
@@ -116,7 +116,7 @@ export default function SubscribePage() {
               <div className="flex flex-col items-center justify-center">
                 <div className="flex flex-col items-center justify-center w-full gap-2 text-center">
                   <span className="">
-                    Have a coupan ?click{" "}
+                    Have a credit coupan ? Click{" "}
                     <button
                       className="italic underline text-[#db2777]"
                       onClick={() => setShowCoupanForm(!showCoupanForm)}
@@ -134,6 +134,7 @@ export default function SubscribePage() {
                       >
                         <input
                           id="coupan"
+                          placeholder="Enter Coupon"
                           className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-2 pl-[2rem] text-base  border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
                           type="text"
                           value={formik.values.coupan}
