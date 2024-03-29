@@ -48,7 +48,7 @@ const UserSchema = new Schema(
     education: [],
     experience: [],
     skills: [],
-
+    customDetails:[],
     role: {
       type: String,
       default: "user",

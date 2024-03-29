@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { CustomSection } from "./registerSlice";
 
 export interface Education {
   id?: string;
@@ -20,6 +21,7 @@ export interface CustomEntry {
   cityState?: string;
   fromMonth?: string;
   fromYear?: string;
+  isContinue?: boolean;
   toMonth?: string;
   toYear?: string;
   description?: string;
@@ -73,6 +75,7 @@ interface UserDataSlice {
 
   linkedin?: string;
   education?: Education[];
+  customDetails?: CustomSection[];
   experience?: WorkExperience[];
   files?: string[];
   uploadedResume: { fileName: string; fileContent: string } | {};
@@ -84,9 +87,6 @@ interface UserDataSlice {
   creditPackage?: "";
   profileImage?: string;
 
-  // userPackage: "";
-  // userPackageData: {};
-  // userPackageUsed: limitObject | {};
 }
 
 const initialState: UserDataSlice = {
@@ -105,6 +105,7 @@ const initialState: UserDataSlice = {
     cityState: "",
     postalCode: "",
   },
+  customDetails: [],
   education: [],
   experience: [],
   files: [],

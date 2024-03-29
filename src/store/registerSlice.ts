@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Education, WorkExperience,CustomEntry } from "./userDataSlice";
 
-interface CustomSection {
-  editId?: string;
+export interface CustomSection {
   name?: string;
   entries?: CustomEntry[];
 }

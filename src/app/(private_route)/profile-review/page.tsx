@@ -93,6 +93,26 @@ const ProfileReview = () => {
         experience: register.stepFive.list,
       }
     }
+    else if( register.activeStep === 4){
+      obj={ 
+        firstName: register.stepOne.firstName,
+       lastName: register.stepOne.lastName,
+       email: userData.email,
+       linkedin: userData.linkedin,
+       file: resume.uploadedFileName,
+       phone: register.stepTwo.phoneNumber,
+ 
+       contact: {
+         country: register.stepThree.country,
+         street: register.stepThree.street,
+         cityState: register.stepThree.cityState,
+         postalCode: register.stepThree.postalCode,
+       },
+        education: register.stepFour.list,
+        experience: register.stepFive.list,
+        customDetails:register.stepCustom,
+      }
+    }
 
     return axios
       .post("/api/users/updateUserData", {
@@ -266,7 +286,7 @@ const ProfileReview = () => {
                         </button>
                       )}
 
-                      {register.activeStep < 4 && (
+                      {register.activeStep < 5 && (
                         <button
                           type="submit"
                           // disabled={isNextDisabled()}
@@ -280,7 +300,7 @@ const ProfileReview = () => {
                         </button>
                       )}
 
-                      {register.activeStep === 4 && (
+                      {register.activeStep === 5 && (
                         <button
                           type="submit"
                           className="py-3 mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"

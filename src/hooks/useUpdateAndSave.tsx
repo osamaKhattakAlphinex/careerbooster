@@ -1,5 +1,6 @@
 import {
   setBasicInfo,
+  setCustomExperienceArray,
   setHeadings,
   setPrimarySkills,
   setSummary,
@@ -45,6 +46,30 @@ const useUpdateAndSave = () => {
       ...resume,
       workExperienceArray: updatedExp,
     });
+  };
+  const updateAndSaveCustomExperienceArray = (updatedCustomExp: any) => {
+  console.log(updatedCustomExp);
+    dispatch(
+      setCustomExperienceArray(updatedCustomExp)
+    );
+    saveResumeToDB({
+      ...resume,
+      customExperienceArray: updatedCustomExp,
+    });
+  };
+  
+  const updateAndSaveCustomHeadings = (obj: any) => {
+    const newCustomDetails = [...resume.customExperienceArray]
+    newCustomDetails[obj.index]= obj.updatedDetail
+
+    dispatch(
+      setCustomExperienceArray(newCustomDetails)
+    );
+    saveResumeToDB({
+      ...resume,
+      customExperienceArray: newCustomDetails,
+    });
+    
   };
 
   //   update and save the Basic Info
@@ -113,7 +138,9 @@ const useUpdateAndSave = () => {
       updateAndSaveWorkExperienceArray,
       updateAndSaveBasicInfo,
       updateAndSaveEducation,
-      updateAndSaveHeadings
+      updateAndSaveHeadings,
+      updateAndSaveCustomHeadings,
+      updateAndSaveCustomExperienceArray
     }
   };
 };

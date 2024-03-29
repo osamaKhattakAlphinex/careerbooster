@@ -35,24 +35,9 @@ const CreditPackages = ({ viewOnly }: Props) => {
 
   return (
     <>
-      {userData.creditPackage && packages
-        ? packages?.slice(1).map((pkg: CreditsPackageData) => (
-            <CreditSubscriptionCard
-              key={pkg._id}
-              creditPackage={pkg}
-              viewOnly={viewOnly ?? false}
-              customer={{
-                metadata: {
-                  packageId: pkg._id,
-                  email: userData?.email,
-                  phone: userData?.phone,
-                  name: userData?.firstName + " " + userData?.lastName,
-                },
-              }}
-            />
-          ))
-        : packages &&
-          packages?.map((pkg: CreditsPackageData) => (
+      {userData.creditPackage && packages ? (
+        <>
+          {packages?.slice(1).map((pkg: CreditsPackageData) => (
             <CreditSubscriptionCard
               key={pkg._id}
               creditPackage={pkg}
@@ -67,6 +52,26 @@ const CreditPackages = ({ viewOnly }: Props) => {
               }}
             />
           ))}
+          <p>Neew</p>
+        </>
+      ) : (
+        packages &&
+        packages?.map((pkg: CreditsPackageData) => (
+          <CreditSubscriptionCard
+            key={pkg._id}
+            creditPackage={pkg}
+            viewOnly={viewOnly ?? false}
+            customer={{
+              metadata: {
+                packageId: pkg._id,
+                email: userData?.email,
+                phone: userData?.phone,
+                name: userData?.firstName + " " + userData?.lastName,
+              },
+            }}
+          />
+        ))
+      )}
     </>
   );
 };
