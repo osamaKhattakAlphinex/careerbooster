@@ -54,17 +54,33 @@ export async function DELETE(
     );
   }
 
+  // delet the coupan from the db also
+
   const couponId = params.couponId;
 
   try {
-    const response = await stripe.coupons.del(couponId);
-    if (response.deleted) {
-      return NextResponse.json({ result: response.deleted, success: true });
+    const db_response = await Coupon.findOne({
+      coupon_code: couponId,
+    });
+
+    if (db_response.coupon_type === "stripe") {
+      const response = await stripe.coupons.del(couponId);
+      if (response.deleted) {
+        const deleted = Coupon.findOneAndDelete({
+          coupon_code: couponId,
+        });
+        return NextResponse.json({ result: deleted, success: true });
+      } else {
+        return NextResponse.json(
+          { result: "something went wrong", success: false },
+          { status: 500 }
+        );
+      }
     } else {
-      return NextResponse.json(
-        { result: "something went wrong", success: false },
-        { status: 500 }
-      );
+      const deleted = Coupon.findOneAndDelete({
+        coupon_code: couponId,
+      });
+      return NextResponse.json({ result: deleted, success: true });
     }
   } catch (error) {
     console.log(error);

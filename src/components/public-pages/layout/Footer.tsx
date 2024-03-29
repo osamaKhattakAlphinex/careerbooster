@@ -33,14 +33,14 @@ const Footer = () => {
                     height={200}
                     src="/dark_logo.png"
                     alt="icon"
-                    className="sm:m-0  dark:block hidden"
+                    className="hidden sm:m-0 dark:block"
                   />
                   <Image
                     width={200}
                     height={200}
                     src="/white_logo.png"
                     alt="icon"
-                    className="sm:m-0  dark:hidden block"
+                    className="block sm:m-0 dark:hidden"
                   />
                 </div>
                 <p className="mb-0 text-sm text-gray-950 lg:pr-4 dark:text-gray-300">
@@ -110,16 +110,16 @@ const Footer = () => {
                   </h6>
                   <ul className="flex flex-col pl-0 mb-0 list-none link-list-t ">
                     <li className=" hover:text-[#6a4dff]  dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] pl-0 no-underline">
-                      <Link href="">
+                      <Link href="#">
                         23 The Atria 219 Bath Road Slough SL1 4BF, United
                         Kingdom
                       </Link>
                     </li>
                     <li className=" hover:text-[#6a4dff] dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem]  no-underline">
-                      <Link href="">+44 7933 951034</Link>
+                      <Link href="#">+44 7933 951034</Link>
                     </li>
                     <li className=" hover:text-[#6a4dff] dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem]  no-underline">
-                      <Link href="">support@careerbooster.ai</Link>
+                      <Link href="#">support@careerbooster.ai</Link>
                     </li>
                   </ul>
                   <ul className="flex flex-wrap items-center gap-3 mb-0 xs:justify-center sm:justify-start align-center justify-md-start">

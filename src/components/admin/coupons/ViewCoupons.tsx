@@ -15,7 +15,9 @@ import { createColumnHelper } from "@tanstack/react-table";
 import DataTable, { TableAction } from "@/components/admin/DataTable";
 
 type Coupon = {
-  id: string;
+  // id: string;
+  coupon_code: string;
+  coupon_type: string;
   name?: string;
   amount_off?: number;
   currency?: string;
@@ -30,6 +32,7 @@ type Coupon = {
   object?: string;
   created: number;
   metadata: {};
+  credits?: number;
 };
 
 const ViewCoupons = ({}) => {
@@ -38,16 +41,22 @@ const ViewCoupons = ({}) => {
   const confirmationModalRef: React.MutableRefObject<any> = useRef(null);
   const handleOpenConfirmationModal = (record: Coupon) => {
     if (confirmationModalRef.current) {
-      confirmationModalRef.current.openModal(true, record.id);
+      confirmationModalRef.current.openModal(true, record.coupon_code);
     }
   };
 
   const columnHelper = createColumnHelper<Coupon>();
 
   const columns = [
-    columnHelper.accessor("id", {
-      id: "id",
-      header: () => "coupon code / id",
+    columnHelper.accessor("coupon_code", {
+      id: "coupon_code",
+      header: () => "Coupon Code / Id",
+      cell: (info) => info.renderValue(),
+      // footer: (info) => info.column.id,
+    }),
+    columnHelper.accessor("coupon_type", {
+      id: "coupon_type",
+      header: () => "Coupon Type",
       cell: (info) => info.renderValue(),
       // footer: (info) => info.column.id,
     }),
@@ -100,13 +109,19 @@ const ViewCoupons = ({}) => {
       cell: (info) => info.renderValue(),
       // footer: (info) => info.column.id,
     }),
+    columnHelper.accessor("credits", {
+      id: "credits",
+      header: () => " Free Credits",
+      cell: (info) => info.renderValue(),
+      // footer: (info) => info.column.id,
+    }),
   ];
 
   const actions: TableAction[] = [
     {
       name: "delete",
       type: "handler",
-      element: (coupon: any) => handleDelete(coupon.id),
+      element: (coupon: any) => handleDelete(coupon.coupon_code),
       styles:
         "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-rose-700 rounded-lg hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800 no-underline",
       icon: deleteIcon,
@@ -162,17 +177,17 @@ const ViewCoupons = ({}) => {
         refresh={getCoupons}
       />
 
-      <div className="flex flex-col justify-start items-start">
-        <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+      <div className="flex flex-col items-start justify-start">
+        <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
           Packages
         </h2>
-        <span className="dark:text-white/70 text-black/70 text-base">
+        <span className="text-base dark:text-white/70 text-black/70">
           List of all the packages a user can choose from.
         </span>
-        <div className="mt-4 flex flex-row justify-end items-center w-full">
+        <div className="flex flex-row items-center justify-end w-full mt-4">
           <AddCoupon getCoupons={getCoupons} />
         </div>
-        <div className="w-full overflow-x-auto mt-4">
+        <div className="w-full mt-4 overflow-x-auto">
           <DataTable
             loading={loading}
             columns={columns}
@@ -186,15 +201,15 @@ const ViewCoupons = ({}) => {
         <div className="my-5 ml-10">
           <Link
             href="/admin"
-            className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+            className="flex flex-row items-center gap-2 transition-all hover:font-semibold"
           >
             {leftArrowIcon}
             Dashboard
           </Link>
         </div>
-        <div className="flex flex-col gap-2 items-center justify-center">
+        <div className="flex flex-col items-center justify-center gap-2">
           <div className=" p-8 flex flex-col gap-2 border-[1px] w-11/12">
-            <div className="w-100 flex flex-row justify-between">
+            <div className="flex flex-row justify-between w-100">
               <h2 className="text-xl ">Coupons Management</h2>
               <AddCoupon getCoupons={getCoupons} />
             </div>
@@ -218,7 +233,7 @@ export default ViewCoupons;
 {
   /* <div className="">
               <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="pt-10 border-collapse w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <table className="w-full pt-10 text-sm text-left text-gray-500 border-collapse dark:text-gray-400">
                   <thead className="text-[16px] text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                       <th scope="col" className="px-4 py-4">
@@ -258,7 +273,7 @@ export default ViewCoupons;
                       return (
                         <tr
                           key={index}
-                          className=" bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                          className="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                         >
                           <th
                             scope="row"
@@ -291,7 +306,7 @@ export default ViewCoupons;
                           <td className="px-4 py-3">
                             {coupon?.times_redeemed}
                           </td>
-                          <td className="px-4 py-3 flex items-center justify-end">
+                          <td className="flex items-center justify-end px-4 py-3">
                             <button
                               onClick={() => handleDelete(coupon.id)}
                               type="button"
