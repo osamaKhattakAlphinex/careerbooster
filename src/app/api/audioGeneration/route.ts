@@ -9,13 +9,13 @@ export async function POST(req: any) {
     apiKey: process.env.OPENAI_API_KEY,
   });
 
-  // const speechFile = path.resolve("./public/speech_scan_resume.mp3");
+  // const speechFile = path.resolve("./public/speech.mp3");
   try {
     const mp3: any = await openai.audio.speech.create({
       model: "tts-1",
       voice: "nova",
       input: input,
-      // input:", We are scanning your resume please wait a little so that we can scan all of your data, if something is missed than y0u can add that manually to get better results  "
+      // input:" . "
     });
 
     //  const buffer = Buffer.from(await mp3.arrayBuffer());

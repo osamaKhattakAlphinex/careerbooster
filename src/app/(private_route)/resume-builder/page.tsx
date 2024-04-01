@@ -442,13 +442,18 @@ const ResumeBuilder = () => {
         skills: userData?.skills,
       });
 
-      if (userData && userData?.tours) {
-        if (!userData.tours.resume) {
-          tourBotRef?.current?.click();
-        }
-      }
     }
   }, [userData]);
+
+  useEffect(() => {
+    if (userData && userData?.tours) {
+      if (!userData.tours.resume) {
+       setTimeout(()=>{
+         tourBotRef?.current?.click();
+       },500) 
+      }
+    }
+  },[tourBotRef]);
 
   const tourBotConfig = {
     audios: [

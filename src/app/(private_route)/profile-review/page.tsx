@@ -99,6 +99,7 @@ const ProfileReview = () => {
       education: register.stepFour.list,
       experience: register.stepFive.list,
       skills: register.stepSix.list,
+      customDetails: register.stepCustom,
       wizardCompleted: true,
       wizardReviewed: true,
     };

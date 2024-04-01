@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { use, useEffect, useRef, useState } from "react";
 import "@/app/(private_route)/dashboard.css";
 import { useTourContext } from "@/context/TourContext";
+import axios from "axios";
 interface TooltipProps {
   text: string;
   children: React.ReactNode;
@@ -49,8 +50,11 @@ const TourBot = ({ config }: any) => {
     }
   }, [config]);
 
-  useEffect(() => {}, [audios, toolRefs]);
+  useEffect(() => {
 
+  }, [audios, toolRefs]);
+
+  
   const removeStyles = () => {
     toolRefs.map((toolRef: any) => {
       // toolRef.ref.current?.classList.remove("un-focused-tool");
@@ -116,7 +120,7 @@ const TourBot = ({ config }: any) => {
         setIsAudioPlaying(true);
         setAudioPlayed(true);
 
-        const promises = audios.map((audio: any) =>
+        const promises = audios?.map((audio: any) =>
           fetchAudio(audio.url, audio.for)
         );
 

@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setStepCustom } from "@/store/registerSlice";
 import SectionCard from "./SectionCard";
-import EditCustomCard from "./EditCustomCard";
 
 const StepCustom = () => {
   const dispatch = useDispatch();
