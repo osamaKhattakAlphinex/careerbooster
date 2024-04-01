@@ -6,23 +6,6 @@ const Footer = () => {
   return (
     <>
       <footer className="bg-[url('/assets/images/shapes/stripe-light.svg')] bg-[#fff] dark:bg-[#171825] bg-no-repeat dark:bg-[url('/assets/images/shapes/stripe-dark.svg')] bg-cover bg-center ">
-        <Head>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-             (function(c,l,a,r,i,t,y){
-                 c[a]=c[a]function(){(c[a].q=c[a].q[]).push(arguments)};
-                 t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-             })(window, document, "clarity", "script", "jum6bniqm4");
-            `,
-            }}
-          />
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-NDN7TY5F2W"
-          ></script>
-        </Head>
         <div className="container mx-auto ">
           <div className="justify-between gap-4 md:py-2 md:px-4 xs:px-2 xs:text-center sm:text-start md:gap-8 md:text-left">
             <div className="grid items-start w-full grid-cols-1 gap-8 lg:grid-cols-3 sm:justify-between xs:justify-center lg:py-6">
@@ -33,14 +16,14 @@ const Footer = () => {
                     height={200}
                     src="/dark_logo.png"
                     alt="icon"
-                    className="sm:m-0  dark:block hidden"
+                    className="hidden sm:m-0 dark:block"
                   />
                   <Image
                     width={200}
                     height={200}
                     src="/white_logo.png"
                     alt="icon"
-                    className="sm:m-0  dark:hidden block"
+                    className="block sm:m-0 dark:hidden"
                   />
                 </div>
                 <p className="mb-0 text-sm text-gray-950 lg:pr-4 dark:text-gray-300">
@@ -110,16 +93,16 @@ const Footer = () => {
                   </h6>
                   <ul className="flex flex-col pl-0 mb-0 list-none link-list-t ">
                     <li className=" hover:text-[#6a4dff]  dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] pl-0 no-underline">
-                      <Link href="">
+                      <Link href="#">
                         23 The Atria 219 Bath Road Slough SL1 4BF, United
                         Kingdom
                       </Link>
                     </li>
                     <li className=" hover:text-[#6a4dff] dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem]  no-underline">
-                      <Link href="">+44 7933 951034</Link>
+                      <Link href="#">+44 7933 951034</Link>
                     </li>
                     <li className=" hover:text-[#6a4dff] dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem]  no-underline">
-                      <Link href="">support@careerbooster.ai</Link>
+                      <Link href="#">support@careerbooster.ai</Link>
                     </li>
                   </ul>
                   <ul className="flex flex-wrap items-center gap-3 mb-0 xs:justify-center sm:justify-start align-center justify-md-start">

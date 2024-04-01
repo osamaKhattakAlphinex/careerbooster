@@ -6,7 +6,6 @@ import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import { setField as setFieldRegister } from "@/store/registerSlice";
 import { useEffect } from "react";
 
-import Image from "next/image";
 import "@/app/(private_route)/dashboard.css";
 
 const UserDataProvider = () => {
@@ -31,7 +30,7 @@ const UserDataProvider = () => {
         dispatch(setUserData(user));
         dispatch(setIsLoading(false));
         dispatch(setField({ name: "isFetched", value: true }));
-
+        
         // if there is a file in files array of a user then set it as defaultResumeFile
         // if (user?.files && user?.files?.length > 0) {
         dispatch(

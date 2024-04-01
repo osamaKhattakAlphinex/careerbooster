@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/dashboard/resume-templates/templates/template_1";
 import { useDispatch, useSelector } from "react-redux";
-import { WorkExperience } from "@/store/userDataSlice";
+import { CustomEntry, WorkExperience } from "@/store/userDataSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import {
@@ -15,6 +15,7 @@ import {
   setWorkExperienceArray,
   resetResume,
   setQuantifyingExperience,
+  setCustomExperienceArray,
 } from "@/store/resumeSlice";
 
 import {
@@ -38,6 +39,9 @@ import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import CreditInfoModal from "@/components/dashboard/resume-builder/CreditsInfoModal";
 import TemplateSlider from "@/components/dashboard/resume-templates/templateSlider";
+import { CustomSection } from "@/store/registerSlice";
+import TourBot from "@/components/dashboard/TourBot";
+import { useTourContext } from "@/context/TourContext";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -56,6 +60,8 @@ const ResumeBuilder = () => {
 
   const creditsInfoRef: React.MutableRefObject<any> = useRef(null);
 
+  const { resumeElementRef, tourBotRef } = useTourContext();
+
   const runConfetti = () => {
     showSuccessToast("Generated Successfully");
     setConfettiRunning(true);
@@ -72,7 +78,8 @@ const ResumeBuilder = () => {
   // Local States
   const [finished, setFinished] = useState<boolean>(false);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
-  const [streamedJDData, setStreamedJDData] = useState<any>(null);
+  const [streamedJDData, setStreamedJDData] = useState<any>("");
+  const [streamedCustomData, setStreamedCustomData] = useState<any>("");
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [resumeGenerated, setResumeGenerated] = useState<boolean>(false);
@@ -109,6 +116,8 @@ const ResumeBuilder = () => {
         await getSummary();
         await getPrimarySkills();
         await getWorkExperienceNew(quantifyingExperience);
+        await addCustomSection();
+        // adding custom sections
         runConfetti();
       } else {
         setShowPopup(true);
@@ -143,6 +152,90 @@ const ResumeBuilder = () => {
   //     }
   //   }
   // };
+
+  const addCustomSection = async () => {
+    await getCreditLimitsIfNotExists();
+    await getUserDataIfNotExists();
+    let resumeCustomExpArr: any = [];
+    for (const [index, customDetails] of userData?.customDetails.entries()) {
+      const { name: sectionName, entries } = customDetails;
+      let resumeCustomExpArrObj = {
+        name: sectionName,
+        entries: [],
+      };
+      const customSections = entries.map((item: CustomEntry) => {
+        const { id, ...rest } = item;
+        return rest;
+      });
+      const workArr: any = [];
+      for (const [index, customSection] of customSections.entries()) {
+        let workArrObj: any = {};
+        let html = "";
+        html += `<h2 style="font-size: 1.3rem; font-weight: bold; line-height: 2rem; ">${customSection?.title}</h2>`;
+        workArrObj.title = customSection?.title;
+
+        html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
+            
+            ${customSection?.fromMonth} ${customSection?.fromYear} - ${
+          customSection?.isContinue
+            ? "Present"
+            : customSection?.toMonth + " " + customSection?.toYear
+        }  
+            ${customSection?.cityState} ${customSection?.country}
+                      </h2>`;
+        html += `<div>`;
+        workArrObj.cityState = customSection?.cityState;
+        workArrObj.country = customSection?.country;
+        workArrObj.fromMonth = customSection?.fromMonth;
+        workArrObj.fromYear = customSection?.fromYear;
+        workArrObj.isContinue = customSection?.isContinue;
+        workArrObj.toMonth = customSection?.toMonth;
+        workArrObj.toYear = customSection?.toYear;
+        let achievementTemp = "";
+        setStreamedCustomData((prev: any) => prev + html);
+
+        const res: any = await fetch("/api/resumeBots/getCustomDetails", {
+          method: "POST",
+          body: JSON.stringify({
+            personName: userData.firstName + " " + userData.lastName,
+            creditsUsed: creditLimits.resume_basicInfo,
+            userData: aiInputUserData,
+            jobPosition: resumeData.state.jobPosition,
+            section: sectionName,
+            data: customSection,
+          }),
+        });
+
+        if (res.ok) {
+          const reader = res.body.getReader();
+          while (true) {
+            const { done, value } = await reader.read();
+
+            if (done) {
+              break;
+            }
+
+            const text = new TextDecoder().decode(value);
+            setStreamedCustomData((prev: any) => prev + text);
+            achievementTemp += text;
+          }
+
+          setStreamedCustomData((prev: any) => prev + `</div> <br /> `);
+          const achivementsArray = fetchLIstOfStrings(achievementTemp);
+          workArrObj.achievements = achivementsArray;
+          workArr.push(workArrObj);
+        } else {
+          setStreamedCustomData("You ran out of credits!");
+        }
+      }
+      resumeCustomExpArrObj.entries = workArr;
+      resumeCustomExpArr.push(resumeCustomExpArrObj);
+    }
+    dispatch(setCustomExperienceArray(resumeCustomExpArr));
+    dispatch(setState({ name: "resumeLoading", value: false }));
+    setFinished(true);
+
+  };
 
   const getBasicInfo = async () => {
     // return makeAPICallWithRetry(async () => {
@@ -283,10 +376,8 @@ const ResumeBuilder = () => {
           setStreamedJDData("You ran out of credits!");
         }
       }
-      setFinished(true);
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
       setResumeGenerated(true);
-      dispatch(setState({ name: "resumeLoading", value: false }));
       dispatch(setWorkExperience(temp));
     }
     // });
@@ -350,8 +441,30 @@ const ResumeBuilder = () => {
         phone: userData?.phone,
         skills: userData?.skills,
       });
+
+      if (userData && userData?.tours) {
+        if (!userData.tours.resume) {
+          tourBotRef?.current?.click();
+        }
+      }
     }
   }, [userData]);
+
+  const tourBotConfig = {
+    audios: [
+      {
+        url: "/speech_resume_card.mp3",
+        for: "resume",
+      },
+    ],
+    toolRefs: [
+      {
+        ref: resumeElementRef,
+        for: "resume",
+      },
+    ],
+  };
+
   return (
     <>
       <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} />
@@ -397,7 +510,9 @@ const ResumeBuilder = () => {
               Auto saved
             </div>
           )}
-          <GenerateResume getConsent={getConsent} />
+          <div ref={(ref: any) => (resumeElementRef.current = ref)}>
+            <GenerateResume getConsent={getConsent} />
+          </div>
           <div className="fixed bottom-0 flex items-center justify-center">
             <Confetti active={confettingRunning} config={confettiConfig} />
           </div>
@@ -529,6 +644,8 @@ const ResumeBuilder = () => {
                 >
                   <ResumeTemplate1
                     streamedSummaryData={streamedSummaryData}
+                    streamedCustomData={streamedCustomData}
+                    setStreamedCustomData={setStreamedCustomData}
                     streamedJDData={streamedJDData}
                     setStreamedJDData={setStreamedJDData}
                     setStreamedSummaryData={setStreamedSummaryData}
@@ -544,6 +661,7 @@ const ResumeBuilder = () => {
           )}
         </div>
       </div>
+      <TourBot config={tourBotConfig} />
     </>
   );
 };

@@ -23,6 +23,8 @@ import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { useRouter } from "next/navigation";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import EditableField from "@/components/dashboard/EditableField";
+import { useTourContext } from "@/context/TourContext";
+import TourBot from "@/components/dashboard/TourBot";
 
 export default function CoverLetterPage() {
   const componentRef = useRef<any>(null);
@@ -298,6 +300,24 @@ export default function CoverLetterPage() {
   useEffect(() => {
     setStreamedData(coverLetter.coverLetterText);
   }, [coverLetter.coverLetterText]);
+
+  const { coverLetterElementRef } = useTourContext();
+
+  const tourBotConfig = {
+    audios: [
+      {
+        url: "/speech_cover_letter_card.mp3",
+        for: "coverLetter",
+      },
+    ],
+    toolRefs: [
+      {
+        ref: coverLetterElementRef,
+        for: "coverLetter",
+      },
+    ],
+  };
+
   const [uploadPdfFile, setUploadPdfFile] = useState<string>("useYourPersona");
   return (
     <>
@@ -307,7 +327,10 @@ export default function CoverLetterPage() {
 
           {/* <MainCoverLetterTool /> */}
           <>
-            <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] px-4 lg:px-[30px] py-6  flex flex-col gap-3 ">
+            <div
+              ref={(ref: any) => (coverLetterElementRef.current = ref)}
+              className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] px-4 lg:px-[30px] py-6  flex flex-col gap-3 "
+            >
               {/* header */}
               <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
                 <h3 className="text-sm font-bold uppercase md:text-base dark:text-gray-100 text-gray-950">
@@ -761,6 +784,7 @@ export default function CoverLetterPage() {
           onConfirm={() => onConfirm()}
         />
       )}
+      <TourBot config={tourBotConfig} />
     </>
   );
 }

@@ -46,25 +46,43 @@ export async function DELETE(
   { params }: { params: { couponId: string } }
 ) {
   const session = await getServerSession(authOptions);
-
+  
   if (!session) {
     return NextResponse.json(
       { result: "Not Authorised", success: false },
       { status: 401 }
-    );
-  }
-
-  const couponId = params.couponId;
-
-  try {
-    const response = await stripe.coupons.del(couponId);
-    if (response.deleted) {
-      return NextResponse.json({ result: response.deleted, success: true });
-    } else {
-      return NextResponse.json(
-        { result: "something went wrong", success: false },
-        { status: 500 }
       );
+    }
+    
+    // delet the coupan from the db also
+    
+    const couponId = params.couponId;
+    
+  try {
+    await startDB();
+
+    const db_response = await Coupon.findOne({
+      coupon_code: couponId,
+    });
+
+    if (db_response.coupon_type === "stripe") {
+      const response = await stripe.coupons.del(couponId);
+      if (response.deleted) {
+        const deleted = await Coupon.findOneAndDelete({
+          coupon_code: couponId,
+        });
+        return NextResponse.json({ result: deleted, success: true });
+      } else {
+        return NextResponse.json(
+          { result: "something went wrong", success: false },
+          { status: 500 }
+        );
+      }
+    } else {
+      const deleted =await Coupon.findOneAndDelete({
+        coupon_code: couponId,
+      });
+      return NextResponse.json({ result: deleted, success: true });
     }
   } catch (error) {
     console.log(error);

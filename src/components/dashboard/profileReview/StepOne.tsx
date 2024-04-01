@@ -7,7 +7,6 @@ const StepOne = () => {
   const dispatch = useDispatch();
   const stepOne = useSelector((state: any) => state.register.stepOne);
   const { firstName, lastName } = stepOne;
-  const userData = useSelector((state: any) => state.userData);
 
   useEffect(() => {
     if (firstName && lastName) {
@@ -17,17 +16,7 @@ const StepOne = () => {
     }
   }, [firstName, lastName]);
 
-  useEffect(() => {
-    if (userData && userData.experience) {
-      dispatch(
-        setStepOne({
-          ...stepOne,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-        })
-      );
-    }
-  }, [userData]);
+ 
 
   return (
     <>

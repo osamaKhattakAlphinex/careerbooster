@@ -9,6 +9,7 @@ import MainLoaderLayer from "@/components/MainLoaderLayer";
 import CreditLimitsProvider from "@/components/data-providers/CreditLimitsProvider";
 import "./index.css";
 import { ToastContainer } from "react-toastify";
+import MicrosoftClarity from "./metrics/MicrosoftClarity";
 export const metadata: Metadata = {
   title: "Dashboard - CareerBooster.ai",
   description: "Dashboard - CareerBooster.ai | Developed by NausalTech",
@@ -31,6 +32,7 @@ export default function RootLayout({
           <CreditLimitsProvider />
           {children}
           <ToastContainer />
+          {/* <MicrosoftClarity /> */}
         </ReduxProvider>
       </AuthProvider>
     </NextThemeProvider>

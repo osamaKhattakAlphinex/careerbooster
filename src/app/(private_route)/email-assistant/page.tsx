@@ -14,6 +14,8 @@ import { useAppContext } from "@/context/AppContext";
 import { EmailPlaceHolderCard } from "@/components/dashboard/email-generator/EmailPlaceHolderCard";
 import { EmailCard } from "@/components/dashboard/email-generator/EmailCard";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
+import { useTourContext } from "@/context/TourContext";
+import TourBot from "@/components/dashboard/TourBot";
 
 const PersonalizedEmailBot = () => {
   const componentRef = useRef<any>(null);
@@ -91,6 +93,24 @@ const PersonalizedEmailBot = () => {
       console.error("Failed to copy text: ", error);
     }
   };
+
+  const { emailElementRef } = useTourContext();
+
+  const tourBotConfig = {
+    audios: [
+      {
+        url: "/speech_other_cards.mp3",
+        for: "email",
+      },
+    ],
+    toolRefs: [
+      {
+        ref: emailElementRef,
+        for: "email",
+      },
+    ],
+  };
+
   const handleClick = (type: string) => {
     // setEditedContent(streamedData);
     if (type === "email") {
@@ -597,221 +617,228 @@ const PersonalizedEmailBot = () => {
   };
 
   return (
-    <div className="w-full sm:w-full ">
-      <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]  ">
-        <PreviouslyGeneratedList {...historyProps} />
-        <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 ">
-          {/* header */}
-          <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
-            <h3 className="text-sm font-bold uppercase md:text-base dark:text-gray-100 text-gray-950">
-              Generate Emails
-            </h3>
-            <div className="text-sm font-bold uppercase dark:text-gray-100 text-gray-950"></div>
-          </div>
+    <>
+      <div className="w-full sm:w-full ">
+        <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]  ">
+          <PreviouslyGeneratedList {...historyProps} />
+          <div
+            ref={(ref: any) => (emailElementRef.current = ref)}
+            className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
+          >
+            {/* header */}
+            <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
+              <h3 className="text-sm font-bold uppercase md:text-base dark:text-gray-100 text-gray-950">
+                Generate Emails
+              </h3>
+              <div className="text-sm font-bold uppercase dark:text-gray-100 text-gray-950"></div>
+            </div>
 
-          {/* option */}
+            {/* option */}
 
-          <div className="text-sm text-[#615DFF] self-start">
-            <span className="uppercase text-[11px] md:text-sm font-bold block gro">
-              select options
-            </span>
-          </div>
+            <div className="text-sm text-[#615DFF] self-start">
+              <span className="uppercase text-[11px] md:text-sm font-bold block gro">
+                select options
+              </span>
+            </div>
 
-          <div className="flex flex-col gap-5 lg:px-0 ">
-            <label
-              htmlFor="default-radio-1"
-              className={`flex gap-3 items-center rounded-full   cursor-pointer lg:text-[15px] text-[11px]  w-fit ${
-                selectedOption === "profile"
-                  ? "dark:text-[#f0f0f0] text-gray-950"
-                  : "dark:text-[#959595] text-[#acabab]"
-              }`}
-            >
-              <input
-                // style={{
-                //   color: "#B324D7",
-                //   background: "#B324D7",
-                //   border: "1px solid #B324D7",
-                // }}
-                id="default-radio-1"
-                type="radio"
-                value="profile"
-                name="default-radio"
-                onChange={(e) => setSelectedOption(e.target.value)}
-                checked={selectedOption === "profile"}
-                className="w-5 h-4 accent-[#B324D7]"
-              />
-              Use my existing resume/data
-            </label>
-            <label
-              htmlFor="default-radio-2"
-              className={`flex gap-3 items-center rounded-full    cursor-pointer lg:text-[15px] text-[11px]  w-fit ${
-                selectedOption === "file"
-                  ? "dark:text-[#f0f0f0] text-gray-950"
-                  : "dark:text-[#959595] text-[#acabab]"
-              } `}
-            >
-              <input
-                id="default-radio-2"
-                type="radio"
-                value="file"
-                onChange={(e) => {
-                  setSelectedFile("");
-                  setSelectedOption(e.target.value);
-                }}
-                name="default-radio"
-                className="w-4 h-4 accent-[#B324D7]"
-                checked={selectedOption === "file"}
-              />
-              Upload a new resume
-            </label>
-            {selectedOption == "file" ? (
-              <CoverLetterFileUploader
-                selectedFile={selectedFile}
-                setSelectedFile={setSelectedFile}
+            <div className="flex flex-col gap-5 lg:px-0 ">
+              <label
+                htmlFor="default-radio-1"
+                className={`flex gap-3 items-center rounded-full   cursor-pointer lg:text-[15px] text-[11px]  w-fit ${
+                  selectedOption === "profile"
+                    ? "dark:text-[#f0f0f0] text-gray-950"
+                    : "dark:text-[#959595] text-[#acabab]"
+                }`}
+              >
+                <input
+                  // style={{
+                  //   color: "#B324D7",
+                  //   background: "#B324D7",
+                  //   border: "1px solid #B324D7",
+                  // }}
+                  id="default-radio-1"
+                  type="radio"
+                  value="profile"
+                  name="default-radio"
+                  onChange={(e) => setSelectedOption(e.target.value)}
+                  checked={selectedOption === "profile"}
+                  className="w-5 h-4 accent-[#B324D7]"
+                />
+                Use my existing resume/data
+              </label>
+              <label
+                htmlFor="default-radio-2"
+                className={`flex gap-3 items-center rounded-full    cursor-pointer lg:text-[15px] text-[11px]  w-fit ${
+                  selectedOption === "file"
+                    ? "dark:text-[#f0f0f0] text-gray-950"
+                    : "dark:text-[#959595] text-[#acabab]"
+                } `}
+              >
+                <input
+                  id="default-radio-2"
+                  type="radio"
+                  value="file"
+                  onChange={(e) => {
+                    setSelectedFile("");
+                    setSelectedOption(e.target.value);
+                  }}
+                  name="default-radio"
+                  className="w-4 h-4 accent-[#B324D7]"
+                  checked={selectedOption === "file"}
+                />
+                Upload a new resume
+              </label>
+              {selectedOption == "file" ? (
+                <CoverLetterFileUploader
+                  selectedFile={selectedFile}
+                  setSelectedFile={setSelectedFile}
+                />
+              ) : (
+                ""
+              )}
+            </div>
+
+            {/* form */}
+            <div className="flex flex-col items-start justify-between gap-5 ">
+              <div className="flex flex-col w-full">
+                <label className="flex items-center justify-between gap-1 mb-1 text-sm xs:font-semibold md:font-bold md:text-lg dark:text-gray-100 text-gray-950/80 lg:pb-4">
+                  <span className="text-[10px] md:text-sm dark:text-gray-100 text-gray-950 uppercase font-bold after:content-['*'] after:text-[#F04248] after:ml-1 py-4">
+                    Paste Job Description
+                  </span>
+                  <div className="text-gray-950/80 group relative rounded-full md:ml-3 flex items-center px-2 md:px-4 md:py-2  bg-[#FEB602] text-[10px] sm:text-sm font-semibold">
+                    {creditLimits?.email_generation}
+                    <div className="pl-1"> Credits</div>
+                    <div className="w-44 bg-gradient-to-r  hover:from-purple-800 hover:to-pink-600  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32  xs:-top-12 md:-top-14  hidden group-hover:block  xs:rounded-br-none  text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+                      {creditLimits?.email_generation} credits will be used for
+                      Email Generation
+                    </div>
+                  </div>
+                </label>
+                <textarea
+                  id="job-title"
+                  name="jobTitle"
+                  rows={6}
+                  onChange={(e) => setJobDescription(e.target.value)}
+                  placeholder="Copy the job description for the position you are applying and paste it here to generate post application follow up emails to the hiring managers."
+                  className="w-full px-3 lg:px-8 rounded-lg text-xs md:text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px] pt-3"
+                />
+              </div>
+              {show && (
+                <button
+                  type="button"
+                  onClick={resetStatesAndRedux}
+                  className="w-max flex flex-row transition-all duration-300  group justify-center sm:justify-start lg:px-6 px-4 py-2 rounded-full dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1.5px] border-gray-950 bg-transparent "
+                >
+                  <div className="flex flex-row items-center justify-center gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-3 h-3 md:w-4 md:h-4 dark:text-gray-100 text-gray-950"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                      />
+                    </svg>
+                    <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
+                      Generate New Email
+                    </span>
+                  </div>
+                </button>
+              )}
+            </div>
+
+            {show ? (
+              <EmailCard
+                isEmailCopied={isEmailCopied.emailCopied}
+                copyEmail={(text: string) => copyEmail(text, "email")}
+                msgLoading={emailLoading}
+                handleGenerate={() => handleGenerate()}
+                handleClick={() => handleClick("email")}
+                handleSave={() => handleSave("email")}
+                isEditing={isEditing}
+                componentRef={componentRef}
+                streamedData={streamedData}
+                show={show}
+                editorId="editor"
+                cardHeading="Your AI Generated Email"
+                cardInstructions="This Email will follow your application directly"
               />
             ) : (
-              ""
-            )}
-          </div>
-
-          {/* form */}
-          <div className="flex flex-col items-start justify-between gap-5 ">
-            <div className="flex flex-col w-full">
-              <label className="flex items-center justify-between gap-1 mb-1 text-sm xs:font-semibold md:font-bold md:text-lg dark:text-gray-100 text-gray-950/80 lg:pb-4">
-                <span className="text-[10px] md:text-sm dark:text-gray-100 text-gray-950 uppercase font-bold after:content-['*'] after:text-[#F04248] after:ml-1 py-4">
-                  Paste Job Description
-                </span>
-                <div className="text-gray-950/80 group relative rounded-full md:ml-3 flex items-center px-2 md:px-4 md:py-2  bg-[#FEB602] text-[10px] sm:text-sm font-semibold">
-                  {creditLimits?.email_generation}
-                  <div className="pl-1"> Credits</div>
-                  <div className="w-44 bg-gradient-to-r  hover:from-purple-800 hover:to-pink-600  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-32  xs:-top-12 md:-top-14  hidden group-hover:block  xs:rounded-br-none  text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
-                    {creditLimits?.email_generation} credits will be used for
-                    Email Generation
-                  </div>
-                </div>
-              </label>
-              <textarea
-                id="job-title"
-                name="jobTitle"
-                rows={6}
-                onChange={(e) => setJobDescription(e.target.value)}
-                placeholder="Copy the job description for the position you are applying and paste it here to generate post application follow up emails to the hiring managers."
-                className="w-full px-3 lg:px-8 rounded-lg text-xs md:text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px] pt-3"
+              <EmailPlaceHolderCard
+                {...EmailPlaceholderCardProps}
+                msgLoading={emailLoading}
+                handleGenerate={() => handleGenerate()}
+                generateButtonText="Generate Email"
               />
-            </div>
-            {show && (
-              <button
-                type="button"
-                onClick={resetStatesAndRedux}
-                className="w-max flex flex-row transition-all duration-300  group justify-center sm:justify-start lg:px-6 px-4 py-2 rounded-full dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1.5px] border-gray-950 bg-transparent "
-              >
-                <div className="flex flex-row items-center justify-center gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-3 h-3 md:w-4 md:h-4 dark:text-gray-100 text-gray-950"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-                    />
-                  </svg>
-                  <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
-                    Generate New Email
-                  </span>
-                </div>
-              </button>
+            )}
+
+            {firstShow ? (
+              <EmailCard
+                isEmailCopied={isEmailCopied.firstFollowUpCopied}
+                copyEmail={(text: string) => copyEmail(text, "firstFollowUp")}
+                msgLoading={firstFollowUpLoading}
+                handleGenerate={() => handleGenerate("firstFollowUp")}
+                handleClick={() => handleClick("firstFollowUp")}
+                handleSave={() => handleSave("firstFollowUp")}
+                isEditing={isFirstEditing}
+                componentRef={componentFirstRef}
+                streamedData={streamedFirstFollowUpEmailText}
+                show={firstShow}
+                editorId="first_editor"
+                cardHeading="First Follow Up Email"
+                cardInstructions="You can send the second email after a week. You can schedule this email in advance"
+              />
+            ) : (
+              <EmailPlaceHolderCard
+                {...EmailPlaceholderCardProps}
+                msgLoading={firstFollowUpLoading}
+                handleGenerate={() => handleGenerate("firstFollowUp")}
+                generateButtonText="Generate First Follow Up Email"
+              />
+            )}
+
+            {secondShow ? (
+              <EmailCard
+                isEmailCopied={isEmailCopied.secondFollowUpCopied}
+                copyEmail={(text: string) => copyEmail(text, "secondFollowUp")}
+                msgLoading={secondFollowUpLoading}
+                handleGenerate={() => handleGenerate("secondFollowUp")}
+                handleClick={() => handleClick("secondFollowUp")}
+                handleSave={() => handleSave("secondFollowUp")}
+                isEditing={isSecondEditing}
+                componentRef={componentSecondRef}
+                streamedData={streamedSecondFollowUpEmailText}
+                show={secondShow}
+                editorId="second_editor"
+                cardHeading="Second Follow Up Email"
+                cardInstructions="You can send another email if second email is not responded. You can schedule this email in advance"
+              />
+            ) : (
+              <EmailPlaceHolderCard
+                {...EmailPlaceholderCardProps}
+                msgLoading={secondFollowUpLoading}
+                handleGenerate={() => handleGenerate("secondFollowUp")}
+                generateButtonText="Generate Second Follow Up Email"
+              />
+            )}
+
+            {showPopup && (
+              <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
+                {/* Popup content here */}
+                Credit Limit Reached !
+              </div>
             )}
           </div>
-
-          {show ? (
-            <EmailCard
-              isEmailCopied={isEmailCopied.emailCopied}
-              copyEmail={(text: string) => copyEmail(text, "email")}
-              msgLoading={emailLoading}
-              handleGenerate={() => handleGenerate()}
-              handleClick={() => handleClick("email")}
-              handleSave={() => handleSave("email")}
-              isEditing={isEditing}
-              componentRef={componentRef}
-              streamedData={streamedData}
-              show={show}
-              editorId="editor"
-              cardHeading="Your AI Generated Email"
-              cardInstructions="This Email will follow your application directly"
-            />
-          ) : (
-            <EmailPlaceHolderCard
-              {...EmailPlaceholderCardProps}
-              msgLoading={emailLoading}
-              handleGenerate={() => handleGenerate()}
-              generateButtonText="Generate Email"
-            />
-          )}
-
-          {firstShow ? (
-            <EmailCard
-              isEmailCopied={isEmailCopied.firstFollowUpCopied}
-              copyEmail={(text: string) => copyEmail(text, "firstFollowUp")}
-              msgLoading={firstFollowUpLoading}
-              handleGenerate={() => handleGenerate("firstFollowUp")}
-              handleClick={() => handleClick("firstFollowUp")}
-              handleSave={() => handleSave("firstFollowUp")}
-              isEditing={isFirstEditing}
-              componentRef={componentFirstRef}
-              streamedData={streamedFirstFollowUpEmailText}
-              show={firstShow}
-              editorId="first_editor"
-              cardHeading="First Follow Up Email"
-              cardInstructions="You can send the second email after a week. You can schedule this email in advance"
-            />
-          ) : (
-            <EmailPlaceHolderCard
-              {...EmailPlaceholderCardProps}
-              msgLoading={firstFollowUpLoading}
-              handleGenerate={() => handleGenerate("firstFollowUp")}
-              generateButtonText="Generate First Follow Up Email"
-            />
-          )}
-
-          {secondShow ? (
-            <EmailCard
-              isEmailCopied={isEmailCopied.secondFollowUpCopied}
-              copyEmail={(text: string) => copyEmail(text, "secondFollowUp")}
-              msgLoading={secondFollowUpLoading}
-              handleGenerate={() => handleGenerate("secondFollowUp")}
-              handleClick={() => handleClick("secondFollowUp")}
-              handleSave={() => handleSave("secondFollowUp")}
-              isEditing={isSecondEditing}
-              componentRef={componentSecondRef}
-              streamedData={streamedSecondFollowUpEmailText}
-              show={secondShow}
-              editorId="second_editor"
-              cardHeading="Second Follow Up Email"
-              cardInstructions="You can send another email if second email is not responded. You can schedule this email in advance"
-            />
-          ) : (
-            <EmailPlaceHolderCard
-              {...EmailPlaceholderCardProps}
-              msgLoading={secondFollowUpLoading}
-              handleGenerate={() => handleGenerate("secondFollowUp")}
-              generateButtonText="Generate Second Follow Up Email"
-            />
-          )}
-
-          {showPopup && (
-            <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
-              {/* Popup content here */}
-              Credit Limit Reached !
-            </div>
-          )}
         </div>
       </div>
-    </div>
+
+      <TourBot config={tourBotConfig} />
+    </>
   );
 };
 

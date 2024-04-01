@@ -48,7 +48,7 @@ const UserSchema = new Schema(
     education: [],
     experience: [],
     skills: [],
-
+    customDetails:[],
     role: {
       type: String,
       default: "user",
@@ -102,6 +102,12 @@ const UserSchema = new Schema(
     creditPackage: {
       type: Schema.Types.ObjectId,
       ref: "CreditPackage",
+    },
+    tours: {
+      resumeBuilder: Boolean,
+      coverLetter: Boolean,
+      emailAssistant: Boolean,
+      linkedinOptimizer: Boolean,
     },
   },
 

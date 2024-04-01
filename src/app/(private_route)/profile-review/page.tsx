@@ -11,17 +11,20 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setActiveStep,
   setField,
+  setStepCustom,
   setStepFive,
   setStepFour,
   setStepOne,
   setStepThree,
   setStepTwo,
+
 } from "@/store/registerSlice";
 import StepEight from "@/components/dashboard/profileReview/StepEight";
 import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import { showSuccessToast } from "@/helpers/toast";
+import StepCustom from "@/components/dashboard/profileReview/StepCustom";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.Ai-Welcome",
 // };
@@ -34,47 +37,18 @@ const ProfileReview = () => {
   const register = useSelector((state: any) => state.register);
   const resume = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
+  const stepOne = useSelector((state: any) => state.register.stepOne);
+  const stepTwo = useSelector((state: any) => state.register.stepTwo);
+  const stepThree = useSelector((state: any) => state.register.stepThree);
+  const stepFour = useSelector((state: any) => state.register.stepFour);
+  const stepFive = useSelector((state: any) => state.register.stepFive);
+  const stepCustom = useSelector((state: any) => state.register.stepCustom);
 
   const reduxStep = register.activeStep;
 
   const singleHandleSaveDetails = async () => {
-   let obj={}
-    if(register.activeStep === 1){
-      obj = {
-       firstName: register.stepOne.firstName,
-       lastName: register.stepOne.lastName,
-       email: userData.email,
-       linkedin: userData.linkedin,
-       file: resume.uploadedFileName,
-       phone: register.stepTwo.phoneNumber,
  
-       contact: {
-         country: register.stepThree.country,
-         street: register.stepThree.street,
-         cityState: register.stepThree.cityState,
-         postalCode: register.stepThree.postalCode,
-       },
-     };
-    } else if(register.activeStep ===2){
-      obj={
-        firstName: register.stepOne.firstName,
-       lastName: register.stepOne.lastName,
-       email: userData.email,
-       linkedin: userData.linkedin,
-       file: resume.uploadedFileName,
-       phone: register.stepTwo.phoneNumber,
- 
-       contact: {
-         country: register.stepThree.country,
-         street: register.stepThree.street,
-         cityState: register.stepThree.cityState,
-         postalCode: register.stepThree.postalCode,
-       },
-        education: register.stepFour.list,
-      }
-
-    }else if( register.activeStep === 3){
-      obj={ 
+  let obj={ 
         firstName: register.stepOne.firstName,
        lastName: register.stepOne.lastName,
        email: userData.email,
@@ -90,8 +64,9 @@ const ProfileReview = () => {
        },
         education: register.stepFour.list,
         experience: register.stepFive.list,
+        customDetails:register.stepCustom,
       }
-    }
+
 
     return axios
       .post("/api/users/updateUserData", {
@@ -100,6 +75,7 @@ const ProfileReview = () => {
       .then(async (resp: any) => {
         if (resp?.data?.success) {
           dispatch(setUserData(obj));
+          // showSuccessToast("Updated Successfully")
         }
       });
   };
@@ -192,6 +168,46 @@ const ProfileReview = () => {
     }
   }, [reduxStep, urlStep]);
 
+ 
+  useEffect(() => {
+    if (userData ) {
+      if( userData.experience){
+        dispatch(
+          setStepOne({
+            ...stepOne,
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+          })
+          
+        );
+        dispatch(
+          setStepTwo({
+            ...stepTwo,
+            Email: userData.email,
+            phoneNumber: userData.phone,
+            linkedin: userData.linkedin,
+          })
+        );
+        dispatch(
+          setStepThree({
+            ...stepThree,
+            country: userData.contact.country,
+            street: userData.contact.street,
+            cityState: userData.contact.cityState,
+            postalCode: userData.contact.postalCode,
+          })
+        );
+        dispatch(setStepFive({ ...stepFive, list: userData.experience }));
+      }
+      if(userData.customDetails){
+        dispatch(setStepCustom(userData.customDetails));
+      }
+      if(userData.education){
+        dispatch(setStepFour({ ...stepFour, list: userData.education }));
+      }
+
+    }
+  }, [userData]);
   return (
     <>
       <div className="ml-0 lg:ml-[284px] lg:mb-[72px]">
@@ -231,11 +247,12 @@ const ProfileReview = () => {
                     )}
                     {register.activeStep === 2 && <StepFour />}
                     {register.activeStep === 3 && <StepFive />}
+                    {register.activeStep === 4 && <StepCustom />}
 
                     {/* {register.activeStep === 4 && <StepSix />} */}
 
-                    {register.activeStep === 4 && <ProfilePreview />}
-                    {register.activeStep === 5 && <StepEight />}
+                    {register.activeStep === 5 && <ProfilePreview />}
+                    {/* {register.activeStep === 6 && <StepEight />} */}
 
                     <div
                       className={`my-6 flex ${
@@ -264,7 +281,7 @@ const ProfileReview = () => {
                         </button>
                       )}
 
-                      {register.activeStep < 4 && (
+                      {register.activeStep < 5 && (
                         <button
                           type="submit"
                           // disabled={isNextDisabled()}
@@ -278,7 +295,7 @@ const ProfileReview = () => {
                         </button>
                       )}
 
-                      {register.activeStep === 4 && (
+                      {register.activeStep === 5 && (
                         <button
                           type="submit"
                           className="py-3 mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"

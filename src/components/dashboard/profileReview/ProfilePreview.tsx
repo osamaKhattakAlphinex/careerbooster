@@ -1,14 +1,11 @@
 import React from "react";
 import EducationCard from "./EducationCard";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  EditIcon,
-  addressIcon,
- 
-} from "@/helpers/iconsProvider";
+import { EditIcon, addressIcon } from "@/helpers/iconsProvider";
 import { setActiveStep, setStepFive } from "@/store/registerSlice";
 import { Education, WorkExperience } from "@/store/userDataSlice";
 import ExperienceCard from "./ExperienceCard";
+import SectionCard from "./SectionCard";
 
 const ProfilePreview = () => {
   const dispatch = useDispatch();
@@ -125,10 +122,10 @@ const ProfilePreview = () => {
           <div className="text-sm flex flex-col gap-1 ">
             <p className="flex flex-row gap-2 items-center dark:text-gray-100 text-gray-950">
               {addressIcon}
-              {data.stepThree?.country==="" &&
-              data.stepThree?.street==="" &&
-              data.stepThree?.cityState==="" &&
-              data.stepThree?.postalCode==="" ? (
+              {data.stepThree?.country === "" &&
+              data.stepThree?.street === "" &&
+              data.stepThree?.cityState === "" &&
+              data.stepThree?.postalCode === "" ? (
                 <span>[Address Missing]</span>
               ) : (
                 <span>
@@ -216,6 +213,32 @@ const ProfilePreview = () => {
             <EducationCard key={index} rec={education} isShowing={true} />
           ))}
           {data.stepFour.list.length === 0 && <p>No Education Found</p>}
+        </div>
+      </section>
+      <section className="mb-8 ">
+        <h2 className="text-xl font-semibold  dark:text-gray-100 text-gray-950">
+          Custom Sections
+          <button
+            type="button"
+            onClick={(e) => {
+              dispatch(setActiveStep(4));
+            }}
+            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+          >
+            {EditIcon}
+          </button>
+        </h2>
+        <div className="">
+          {data.stepCustom?.map((singleStep: any, index: number) => {
+            return (
+              <SectionCard
+                key={index}
+                index={index}
+                singleStep={singleStep}
+                showButtons={false}
+              />
+            );
+          })}
         </div>
       </section>
 

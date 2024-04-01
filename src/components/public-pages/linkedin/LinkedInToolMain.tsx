@@ -115,7 +115,7 @@ const LinkedInToolMain = () => {
             $1000 if we waste your time with irrelevant outcomes.
           </h5>
 
-          <div className="flex justify-center mt-11 md:mt-11">
+          <div className="linkedinPdfButton flex justify-center mt-11 md:mt-11">
             <label className=" py-[12px] lg:py-[20px]  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
               <input
                 type="file"
@@ -323,7 +323,21 @@ const LinkedInToolMain = () => {
               </p>
               <button
                 className="bg-yellow-400 bg-opacity-80 mt-4 h-14 w-56 text-center rounded-full font-bold text-xl hover:bg-yellow-600 text-gray-800 py-3 px-9"
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                onClick={() => {
+                  const targetElement =
+                    document.querySelector(".linkedinPdfButton");
+                  const topOffset = 300; // Adjust this value as needed
+                  if (targetElement) {
+                    const targetTop =
+                      targetElement.getBoundingClientRect().top +
+                      window.scrollY -
+                      topOffset;
+                    window.scrollTo({
+                      top: targetTop,
+                      behavior: "smooth",
+                    });
+                  }
+                }}
               >
                 Get Started
               </button>

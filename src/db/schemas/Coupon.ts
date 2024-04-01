@@ -3,17 +3,25 @@ const { Schema } = mongoose;
 
 const CouponSchema = new Schema(
   {
+    coupon_type: {
+      type: String,
+      required: true,
+      enum: ["reward", "stripe", "paypal"],
+    },
+
+    coupon_code: {
+      type: String,
+      required: true,
+    },
+
     amount_off: {
       type: Number,
-      required: true,
       min: 0,
-      max: 100,
     },
     currency: String,
     duration: {
       type: String,
       enum: ["once", "repeating", "forever"],
-      required: true,
     },
     duration_in_months: {
       type: Number,
@@ -31,15 +39,13 @@ const CouponSchema = new Schema(
       min: 0,
       max: 100,
     },
+    credits: {
+      type: Number,
+      min: 1,
+    },
     status: {
       type: String,
       enum: ["active", "inactive"],
-      required: true,
-    },
-    forUserPackageCategory: {
-      type: String,
-      enum: ["basic", "standard", "premium"],
-      required: true,
     },
     expiresAt: {
       type: Date,

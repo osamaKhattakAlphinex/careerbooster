@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { CustomSection } from "./registerSlice";
 
 export interface Education {
   id?: string;
@@ -11,6 +12,26 @@ export interface Education {
   isContinue?: boolean;
   toMonth?: string;
   toYear?: string;
+}
+
+export interface CustomEntry {
+  id?: string;
+  title: string;
+  country?: string;
+  cityState?: string;
+  fromMonth?: string;
+  fromYear?: string;
+  isContinue?: boolean;
+  toMonth?: string;
+  toYear?: string;
+  description?: string;
+}
+
+export interface Tours {
+  resumeBuilder: boolean;
+  coverLetter: boolean;
+  emailAssistant: boolean;
+  linkedinOptimizer: boolean;
 }
 
 export interface WorkExperience {
@@ -57,10 +78,13 @@ interface UserDataSlice {
     postalCode?: string;
   };
 
+  tours: Tours;
+
   trialResume?: boolean;
 
   linkedin?: string;
   education?: Education[];
+  customDetails?: CustomSection[];
   experience?: WorkExperience[];
   files?: string[];
   uploadedResume: { fileName: string; fileContent: string } | {};
@@ -72,9 +96,6 @@ interface UserDataSlice {
   creditPackage?: "";
   profileImage?: string;
 
-  // userPackage: "";
-  // userPackageData: {};
-  // userPackageUsed: limitObject | {};
 }
 
 const initialState: UserDataSlice = {
@@ -93,6 +114,7 @@ const initialState: UserDataSlice = {
     cityState: "",
     postalCode: "",
   },
+  customDetails: [],
   education: [],
   experience: [],
   files: [],
@@ -106,7 +128,12 @@ const initialState: UserDataSlice = {
   creditPackage: "",
   trialResume: false,
   profileImage: "",
-
+  tours: {
+    resumeBuilder: false,
+    coverLetter: false,
+    emailAssistant: false,
+    linkedinOptimizer: false,
+  },
   // userPackage: "",
   // userPackageData: {},
   // userPackageUsed: {},

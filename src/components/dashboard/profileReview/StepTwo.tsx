@@ -8,7 +8,6 @@ const StepTwo = () => {
   // Redux
   const dispatch = useDispatch();
   const stepTwo = useSelector((state: any) => state.register.stepTwo);
-  const userData = useSelector((state: any) => state.userData);
 
   useEffect(() => {
     if (stepTwo.Email) {
@@ -31,18 +30,6 @@ const StepTwo = () => {
     }
   }, [stepTwo.phoneNumber, stepTwo.Email]);
 
-  useEffect(() => {
-    if (userData && userData.experience) {
-      dispatch(
-        setStepTwo({
-          ...stepTwo,
-          Email: userData.email,
-          phoneNumber: userData.phone,
-          linkedin: userData.linkedin,
-        })
-      );
-    }
-  }, [userData]);
 
   return (
     <>
