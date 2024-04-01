@@ -40,6 +40,8 @@ import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import CreditInfoModal from "@/components/dashboard/resume-builder/CreditsInfoModal";
 import TemplateSlider from "@/components/dashboard/resume-templates/templateSlider";
 import { CustomSection } from "@/store/registerSlice";
+import TourBot from "@/components/dashboard/TourBot";
+import { useTourContext } from "@/context/TourContext";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -57,6 +59,8 @@ const ResumeBuilder = () => {
   };
 
   const creditsInfoRef: React.MutableRefObject<any> = useRef(null);
+
+  const { resumeElementRef, tourBotRef } = useTourContext();
 
   const runConfetti = () => {
     showSuccessToast("Generated Successfully");
@@ -437,8 +441,30 @@ const ResumeBuilder = () => {
         phone: userData?.phone,
         skills: userData?.skills,
       });
+
+      if (userData && userData?.tours) {
+        if (!userData.tours.resume) {
+          tourBotRef?.current?.click();
+        }
+      }
     }
   }, [userData]);
+
+  const tourBotConfig = {
+    audios: [
+      {
+        url: "/speech_resume_card.mp3",
+        for: "resume",
+      },
+    ],
+    toolRefs: [
+      {
+        ref: resumeElementRef,
+        for: "resume",
+      },
+    ],
+  };
+
   return (
     <>
       <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} />
@@ -484,7 +510,9 @@ const ResumeBuilder = () => {
               Auto saved
             </div>
           )}
-          <GenerateResume getConsent={getConsent} />
+          <div ref={(ref: any) => (resumeElementRef.current = ref)}>
+            <GenerateResume getConsent={getConsent} />
+          </div>
           <div className="fixed bottom-0 flex items-center justify-center">
             <Confetti active={confettingRunning} config={confettiConfig} />
           </div>
@@ -633,6 +661,7 @@ const ResumeBuilder = () => {
           )}
         </div>
       </div>
+      <TourBot config={tourBotConfig} />
     </>
   );
 };

@@ -15,7 +15,7 @@ interface TourRefs {
   reviewElementRef: React.MutableRefObject<HTMLInputElement | null>;
   finderElementRef: React.MutableRefObject<HTMLInputElement | null>;
   atsElementRef: React.MutableRefObject<HTMLInputElement | null>;
-
+  tourBotRef: React.MutableRefObject<HTMLInputElement | null>;
   // Add more references as needed
 }
 
@@ -31,7 +31,7 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
   children,
 }) => {
   // Create refs for each reference
-const contentScrollRef = useRef<HTMLInputElement | null>(null)
+  const contentScrollRef = useRef<HTMLInputElement | null>(null);
   const dashboardRef = useRef<HTMLInputElement | null>(null);
   const innerToolsRef = useRef<HTMLInputElement | null>(null);
   const resumeElementRef = useRef<HTMLInputElement | null>(null);
@@ -43,6 +43,7 @@ const contentScrollRef = useRef<HTMLInputElement | null>(null)
   const reviewElementRef = useRef<HTMLInputElement | null>(null);
   const finderElementRef = useRef<HTMLInputElement | null>(null);
   const atsElementRef = useRef<HTMLInputElement | null>(null);
+  const tourBotRef = useRef<HTMLInputElement | null>(null);
   // Define the context value
   const contextValue: TourRefs = {
     contentScrollRef,
@@ -57,6 +58,7 @@ const contentScrollRef = useRef<HTMLInputElement | null>(null)
     reviewElementRef,
     finderElementRef,
     atsElementRef,
+    tourBotRef,
   };
 
   return (

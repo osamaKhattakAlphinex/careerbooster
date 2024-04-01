@@ -103,6 +103,12 @@ const UserSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "CreditPackage",
     },
+    tours: {
+      resumeBuilder: Boolean,
+      coverLetter: Boolean,
+      emailAssistant: Boolean,
+      linkedinOptimizer: Boolean,
+    },
   },
 
   { timestamps: true }
