@@ -58,7 +58,7 @@ const ResumeBuilder = () => {
 
   const creditsInfoRef: React.MutableRefObject<any> = useRef(null);
 
-  const { resumeElementRef } = useTourContext();
+  const { resumeElementRef, tourBotRef } = useTourContext();
 
   const runConfetti = () => {
     showSuccessToast("Generated Successfully");
@@ -354,6 +354,12 @@ const ResumeBuilder = () => {
         phone: userData?.phone,
         skills: userData?.skills,
       });
+
+      if (userData && userData?.tours) {
+        if (!userData.tours.resume) {
+          tourBotRef?.current?.click();
+        }
+      }
     }
   }, [userData]);
 

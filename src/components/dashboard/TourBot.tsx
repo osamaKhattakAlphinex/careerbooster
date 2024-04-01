@@ -40,6 +40,8 @@ const TourBot = ({ config }: any) => {
   const [audioCounter, setAudioCounter] = useState<number>(0);
   const audioPlayerRef: any = useRef(null);
 
+  const { tourBotRef } = useTourContext();
+
   useEffect(() => {
     if (config) {
       setToolRefs(config.toolRefs);
@@ -47,9 +49,7 @@ const TourBot = ({ config }: any) => {
     }
   }, [config]);
 
-  useEffect(() => {
-    console.log(toolRefs, audios);
-  }, [audios, toolRefs]);
+  useEffect(() => {}, [audios, toolRefs]);
 
   const removeStyles = () => {
     toolRefs.map((toolRef: any) => {
@@ -169,6 +169,7 @@ const TourBot = ({ config }: any) => {
 
   return (
     <div
+      ref={(ref: any) => (tourBotRef.current = ref)}
       className={`fixed bottom-4 right-4 mr-4 mb-4 cursor-pointer z-10 avatar-animate`}
       onClick={handleClick}
     >
