@@ -53,13 +53,19 @@ const TourBot = ({ config }: any) => {
 
   const removeStyles = () => {
     toolRefs.map((toolRef: any) => {
-      toolRef.ref.current?.classList.remove("un-focused-tool");
+      // toolRef.ref.current?.classList.remove("un-focused-tool");
+      toolRef.ref.current.classList.remove("dashboard-focused");
+      toolRef.ref.current.classList.remove("dark:bg-[#11121c]");
+      toolRef.ref.current.classList.remove("bg-[#F3F4F6]");
     });
   };
 
   const applyStyles = () => {
     toolRefs.map((toolRef: any) => {
-      toolRef.ref.current?.classList.add("un-focused-tool");
+      toolRef.ref.current.classList.add("dashboard-focused");
+      toolRef.ref.current.classList.add("dark:bg-[#11121c]");
+      toolRef.ref.current.classList.add("bg-[#F3F4F6]");
+      // toolRef.ref.current?.classList.add("un-focused-tool");
     });
   };
 

@@ -327,7 +327,10 @@ export default function CoverLetterPage() {
 
           {/* <MainCoverLetterTool /> */}
           <>
-            <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] px-4 lg:px-[30px] py-6  flex flex-col gap-3 ">
+            <div
+              ref={(ref: any) => (coverLetterElementRef.current = ref)}
+              className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] px-4 lg:px-[30px] py-6  flex flex-col gap-3 "
+            >
               {/* header */}
               <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
                 <h3 className="text-sm font-bold uppercase md:text-base dark:text-gray-100 text-gray-950">
@@ -406,10 +409,7 @@ export default function CoverLetterPage() {
               </div>
 
               {/* form */}
-              <div
-                className="flex flex-col items-start justify-between gap-5 "
-                ref={(ref: any) => (coverLetterElementRef.current = ref)}
-              >
+              <div className="flex flex-col items-start justify-between gap-5 ">
                 <div className="flex flex-col w-full">
                   <label className="flex items-center justify-between gap-1 mb-1 text-sm xs:font-semibold md:font-bold md:text-lg dark:text-gray-100 text-gray-950/80 lg:pb-4">
                     <span className="text-[10px] md:text-sm dark:text-gray-100 text-gray-950 uppercase font-bold after:content-['*'] after:text-[#F04248] after:ml-1 py-4">
