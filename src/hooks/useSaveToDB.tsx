@@ -15,6 +15,7 @@ const useSaveResumeToDB = () => {
   const dispatch = useDispatch();
 
   const saveResumeToDB = async (data: any = "") => {
+
     // return makeAPICallWithRetry(async () => {
     showSuccessToast("Resume Updated Successfully");
     const source = data === "" ? resumeData : data;

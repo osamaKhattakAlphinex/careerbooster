@@ -48,7 +48,7 @@ export default async function Privatelayout({ children }: Props) {
                 <SideBar />
                 <div className="max-w-7xl mx-auto ">{children}</div>
                 <Footer />
-                <ToastContainer />
+                {/* <ToastContainer /> */}
               </ProfileCreationLayer>
             </ColorContextProvider>
           </AppContextsProvider>

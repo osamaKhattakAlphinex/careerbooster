@@ -39,7 +39,6 @@ const UserDataProvider = () => {
             value: user?.uploadedResume?.fileContent,
           })
         );
-        dispatch(setFieldRegister({ name: "stepCustom", value:user?.customDetails}))
         // dispatch(
         //   setField({ name: "defaultResumeFile", value: user?.files[0] })
         // );

@@ -30,13 +30,14 @@ const ResumeTemplate1 = ({
   streamedCustomData: string;
   setStreamedJDData: any;
   setStreamedSummaryData: any;
-  setStreamedCustomData:any;
+  setStreamedCustomData: any;
 }) => {
   const resume = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
-  const [newCustomWorkExperience, setNewCustomWorkExperience] = useState<number>();
+  const [newCustomWorkExperience, setNewCustomWorkExperience] =
+    useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
   const [newCustomAchievement, setNewCustomAchievement] = useState("");
   // const [color, setColor] = useState("#e04127");
@@ -47,22 +48,27 @@ const ResumeTemplate1 = ({
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
-  const [customRegeneratedRecordIndex, setCustomRegeneratedRecordIndex] = useState<
-    number | null
-  >(null);
+  const [customRegeneratedRecordIndex, setCustomRegeneratedRecordIndex] =
+    useState<number | null>(null);
   // const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
   // const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const { getOneWorkExperienceNew,getOneCustomWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData,setStreamedCustomData);
+  const { getOneWorkExperienceNew, getOneCustomWorkExperienceNew } =
+    useSingleJDGenerate(setStreamedJDData, setStreamedCustomData);
 
-  const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
-    useDragAndDrop();
+  const {
+    handleDropPrimary,
+    handleDropAchievement,
+    handleDropExperience,
+    handleDropCustomAchievement,
+    handleDropCustomExperience,
+    handleDropSingleCustomSection
+  } = useDragAndDrop();
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
-
   // useEffect(() => {
   //   console.log(streamedSummaryData);
   // });
@@ -84,8 +90,8 @@ const ResumeTemplate1 = ({
     getOneWorkExperienceNew(rec);
     setRegeneratedRecordIndex(i);
   };
-  const handleCustomRegenrate = (rec: any, i: number, index:number) => {
-    getOneCustomWorkExperienceNew(rec,index);
+  const handleCustomRegenrate = (rec: any, i: number, index: number) => {
+    getOneCustomWorkExperienceNew(rec, index);
     setCustomRegeneratedRecordIndex(i);
   };
 
@@ -801,7 +807,20 @@ const ResumeTemplate1 = ({
                         {entries.length > 0 && (
                           <>
                             <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-                            <h3 className="md:my-1 text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+                            <h3 className="md:my-1 relative hover:cursor-move group text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2"
+                            
+                            onDragStart={(e) =>
+                              e.dataTransfer.setData(
+                                "text/plain",
+                                index.toString()
+                              )
+                            }
+                            onDragOver={(e) => e.preventDefault()}
+                            onDrop={(e) =>
+                              handleDropSingleCustomSection(e, index)
+                            }
+                            draggable
+                            >
                               <EditableField
                                 value={sectionName}
                                 style={{ width: "fit-content" }}
@@ -814,14 +833,28 @@ const ResumeTemplate1 = ({
                                   }
                                 }}
                               />
+                              
+                              <div
+                                onClick={() =>
+                                  handlers.handleDeleteSingleCustomSection(
+                                    index
+                                  )
+                                }
+                                className="hidden w-4 h-4 group-hover:block absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
+                              >
+                                {crossIcon1}
+                              </div>
                             </h3>
+
                             <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
 
                             {entries.map((entry: any, i: number) => {
                               return (
                                 <Toolbar
                                   key={i}
-                                  addAchivement={() => setNewCustomWorkExperience(i)}
+                                  addAchivement={() =>
+                                    setNewCustomWorkExperience(i)
+                                  }
                                   deleteExperience={() =>
                                     handlers.handleDeleteCustomExperience(
                                       i,
@@ -832,7 +865,11 @@ const ResumeTemplate1 = ({
                                     handleCustomRegenrate(entry, i, index)
                                   }
                                   addNewLine={() => {
-                                    handlers.handleAddCustomSpace(i, newCustomAchievement, index);
+                                    handlers.handleAddCustomSpace(
+                                      i,
+                                      newCustomAchievement,
+                                      index
+                                    );
                                     setNewCustomAchievement("");
                                   }}
                                 >
@@ -846,8 +883,10 @@ const ResumeTemplate1 = ({
                                       )
                                     }
                                     onDragOver={(e) => e.preventDefault()}
-                                    onDrop={(e) => handleDropExperience(e, i)}
-                                    // draggable
+                                    onDrop={(e) =>
+                                      handleDropCustomExperience(e, i, index)
+                                    }
+                                    draggable
                                   >
                                     <h2 className="text-base font-bold  leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
                                       <EditableField
@@ -974,13 +1013,14 @@ const ResumeTemplate1 = ({
                                                     e.preventDefault()
                                                   }
                                                   onDrop={(e) => {
-                                                    handleDropAchievement(
+                                                    handleDropCustomAchievement(
                                                       i,
                                                       ind,
-                                                      insideIndex
+                                                      insideIndex,
+                                                      index
                                                     );
                                                   }}
-                                                  // draggable
+                                                  draggable
                                                   className="flex flex-row items-center justify-center h-8 hover:bg-slate-200 group"
                                                 >
                                                   <div
@@ -1005,13 +1045,14 @@ const ResumeTemplate1 = ({
                                                     e.preventDefault()
                                                   }
                                                   onDrop={(e) => {
-                                                    handleDropAchievement(
+                                                    handleDropCustomAchievement(
                                                       i,
                                                       ind,
-                                                      insideIndex
+                                                      insideIndex,
+                                                      index
                                                     );
                                                   }}
-                                                  // draggable
+                                                  draggable
                                                   className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
                                                   key={ind}
                                                 >
@@ -1050,11 +1091,16 @@ const ResumeTemplate1 = ({
                                           }}
                                         ></div>
                                       ) : (
-                                        <div className="text-center">
-                                          <div role="status">
-                                            <Loader />
-                                          </div>
-                                        </div>
+                                        <>
+                                          {customRegeneratedRecordIndex !==
+                                            null && (
+                                            <div className="text-center">
+                                              <div role="status">
+                                                <Loader />
+                                              </div>
+                                            </div>
+                                          )}
+                                        </>
                                       )}
 
                                       {newCustomWorkExperience === i ? (
@@ -1102,7 +1148,9 @@ const ResumeTemplate1 = ({
                                               <button
                                                 onClick={() => {
                                                   setNewCustomAchievement("");
-                                                  setNewCustomWorkExperience(-1);
+                                                  setNewCustomWorkExperience(
+                                                    -1
+                                                  );
                                                 }}
                                                 className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
                                               >
@@ -1128,7 +1176,7 @@ const ResumeTemplate1 = ({
               <div
                 className="list-disc "
                 dangerouslySetInnerHTML={{
-                  __html: streamedCustomData
+                  __html: streamedCustomData,
                 }}
               ></div>
             )}

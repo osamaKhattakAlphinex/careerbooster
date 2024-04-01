@@ -227,8 +227,9 @@ const ResumeBuilder = () => {
       resumeCustomExpArrObj.entries = workArr;
       resumeCustomExpArr.push(resumeCustomExpArrObj);
     }
+    dispatch(setCustomExperienceArray(resumeCustomExpArr));
+    dispatch(setState({ name: "resumeLoading", value: false }));
     setFinished(true);
-    dispatch(setCustomExperienceArray (resumeCustomExpArr));
 
   };
 
@@ -373,7 +374,6 @@ const ResumeBuilder = () => {
       }
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
       setResumeGenerated(true);
-      dispatch(setState({ name: "resumeLoading", value: false }));
       dispatch(setWorkExperience(temp));
     }
     // });

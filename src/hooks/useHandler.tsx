@@ -36,6 +36,12 @@ const useHandler = () => {
     updateSaveHook.updateAndSaveCustomExperienceArray(updatedCustomExp);
   };
 
+  const handleDeleteSingleCustomSection = (customInd:number) => {
+    let updatedCustomExp: any = [...resume.customExperienceArray];
+    updatedCustomExp.splice(customInd, 1);
+    updateSaveHook.updateAndSaveCustomExperienceArray(updatedCustomExp);
+  }
+
   // handle Add achivements
   const handleAddAchivement = (i: number, newAchievement: string) => {
     if (newAchievement !== "") {
@@ -275,6 +281,7 @@ const useHandler = () => {
       handleSaveExperienceCustomDetail,
       handleDeleteAchivementCustom,
       handleUpdateAchivementCustom,
+      handleDeleteSingleCustomSection
     },
   };
 };

@@ -10,6 +10,9 @@ const StepCustom = () => {
   const stepCustom = useSelector((state: any) => state.register.stepCustom);
   return (
     <div>
+      <h1 className="text-lg xs:my-5 justify-between items-center flex md:mt-2  font-bold leading-tight tracking-tight  md:text-2xl dark:text-gray-100 text-gray-950 ">
+        Custom Sections
+      </h1>
       <button
         type="button"
         onClick={(e) => {

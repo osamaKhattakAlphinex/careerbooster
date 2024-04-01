@@ -14,12 +14,7 @@ const StepFour = () => {
   const dispatch = useDispatch();
   const stepFour = useSelector((state: any) => state.register.stepFour);
   const { list, state } = stepFour;
-  const userData = useSelector((state: any) => state.userData);
-  useEffect(() => {
-    if (userData && userData.education) {
-      dispatch(setStepFour({ ...stepFour, list: userData.education }));
-    }
-  }, [userData]);
+ 
   return (
     <>
             
