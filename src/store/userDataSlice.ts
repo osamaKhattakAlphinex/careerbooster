@@ -13,6 +13,13 @@ export interface Education {
   toYear?: string;
 }
 
+export interface Tours {
+  resumeBuilder: boolean;
+  coverLetter: boolean;
+  emailAssistant: boolean;
+  linkedinOptimizer: boolean;
+}
+
 export interface WorkExperience {
   id?: string;
   jobTitle: string;
@@ -56,6 +63,8 @@ interface UserDataSlice {
     cityState?: string;
     postalCode?: string;
   };
+
+  tours: Tours;
 
   trialResume?: boolean;
 
@@ -106,7 +115,12 @@ const initialState: UserDataSlice = {
   creditPackage: "",
   trialResume: false,
   profileImage: "",
-
+  tours: {
+    resumeBuilder: false,
+    coverLetter: false,
+    emailAssistant: false,
+    linkedinOptimizer: false,
+  },
   // userPackage: "",
   // userPackageData: {},
   // userPackageUsed: {},

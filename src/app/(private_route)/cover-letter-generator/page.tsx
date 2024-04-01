@@ -23,6 +23,8 @@ import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { useRouter } from "next/navigation";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import EditableField from "@/components/dashboard/EditableField";
+import { useTourContext } from "@/context/TourContext";
+import TourBot from "@/components/dashboard/TourBot";
 
 export default function CoverLetterPage() {
   const componentRef = useRef<any>(null);
@@ -298,6 +300,24 @@ export default function CoverLetterPage() {
   useEffect(() => {
     setStreamedData(coverLetter.coverLetterText);
   }, [coverLetter.coverLetterText]);
+
+  const { coverLetterElementRef } = useTourContext();
+
+  const tourBotConfig = {
+    audios: [
+      {
+        url: "/speech_cover_letter_card.mp3",
+        for: "coverLetter",
+      },
+    ],
+    toolRefs: [
+      {
+        ref: coverLetterElementRef,
+        for: "coverLetter",
+      },
+    ],
+  };
+
   const [uploadPdfFile, setUploadPdfFile] = useState<string>("useYourPersona");
   return (
     <>
@@ -386,7 +406,10 @@ export default function CoverLetterPage() {
               </div>
 
               {/* form */}
-              <div className="flex flex-col items-start justify-between gap-5 ">
+              <div
+                className="flex flex-col items-start justify-between gap-5 "
+                ref={(ref: any) => (coverLetterElementRef.current = ref)}
+              >
                 <div className="flex flex-col w-full">
                   <label className="flex items-center justify-between gap-1 mb-1 text-sm xs:font-semibold md:font-bold md:text-lg dark:text-gray-100 text-gray-950/80 lg:pb-4">
                     <span className="text-[10px] md:text-sm dark:text-gray-100 text-gray-950 uppercase font-bold after:content-['*'] after:text-[#F04248] after:ml-1 py-4">
@@ -761,6 +784,7 @@ export default function CoverLetterPage() {
           onConfirm={() => onConfirm()}
         />
       )}
+      <TourBot config={tourBotConfig} />
     </>
   );
 }

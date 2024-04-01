@@ -31,7 +31,7 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
   children,
 }) => {
   // Create refs for each reference
-const contentScrollRef = useRef<HTMLInputElement | null>(null)
+  const contentScrollRef = useRef<HTMLInputElement | null>(null);
   const dashboardRef = useRef<HTMLInputElement | null>(null);
   const innerToolsRef = useRef<HTMLInputElement | null>(null);
   const resumeElementRef = useRef<HTMLInputElement | null>(null);
