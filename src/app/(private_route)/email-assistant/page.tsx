@@ -94,9 +94,10 @@ const PersonalizedEmailBot = () => {
     }
   };
 
-  const { emailElementRef } = useTourContext();
+  const { emailElementRef, tourBotRef } = useTourContext();
 
   const tourBotConfig = {
+    name: "emailAssistant",
     audios: [
       {
         url: "/speech_other_cards.mp3",
@@ -110,6 +111,16 @@ const PersonalizedEmailBot = () => {
       },
     ],
   };
+
+  useEffect(() => {
+    if (userData && userData?.tours) {
+      if (!userData.tours.resumeBuilder) {
+        setTimeout(() => {
+          tourBotRef?.current?.click();
+        }, 500);
+      }
+    }
+  }, [tourBotRef]);
 
   const handleClick = (type: string) => {
     // setEditedContent(streamedData);

@@ -8,10 +8,12 @@ import {
 } from "@/store/resumeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import useSaveResumeToDB from "./useSaveToDB";
-import { setField } from "@/store/userDataSlice";
+import { setField, setTours } from "@/store/userDataSlice";
+import axios from "axios";
 
 const useUpdateAndSave = () => {
-  const resume = useSelector((state: any) => state.resume);
+  const { resume, userData } = useSelector((state: any) => state);
+
   const dispatch = useDispatch();
   const { saveResumeToDB } = useSaveResumeToDB();
 
@@ -48,27 +50,22 @@ const useUpdateAndSave = () => {
     });
   };
   const updateAndSaveCustomExperienceArray = (updatedCustomExp: any) => {
-    dispatch(
-      setCustomExperienceArray(updatedCustomExp)
-    );
+    dispatch(setCustomExperienceArray(updatedCustomExp));
     saveResumeToDB({
       ...resume,
       customExperienceArray: updatedCustomExp,
     });
   };
-  
-  const updateAndSaveCustomHeadings = (obj: any) => {
-    const newCustomDetails = [...resume.customExperienceArray]
-    newCustomDetails[obj.index]= obj.updatedDetail
 
-    dispatch(
-      setCustomExperienceArray(newCustomDetails)
-    );
+  const updateAndSaveCustomHeadings = (obj: any) => {
+    const newCustomDetails = [...resume.customExperienceArray];
+    newCustomDetails[obj.index] = obj.updatedDetail;
+
+    dispatch(setCustomExperienceArray(newCustomDetails));
     saveResumeToDB({
       ...resume,
       customExperienceArray: newCustomDetails,
     });
-    
   };
 
   //   update and save the Basic Info
@@ -118,10 +115,21 @@ const useUpdateAndSave = () => {
       ...resume,
       headings: { ...resume.headings, [key]: value },
     });
-    
   };
 
-
+  const updateAndSaveTourStatus = (tour: any) => {
+    dispatch(setTours({ tour }));
+    try {
+      axios.post("/api/users/updateUserData", {
+        data: {
+          email: userData.email,
+          tours: userData.tours,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const updateAndSaveName = (value: any) => {
     dispatch(setField({ name: "name", value: value }));
@@ -139,8 +147,9 @@ const useUpdateAndSave = () => {
       updateAndSaveEducation,
       updateAndSaveHeadings,
       updateAndSaveCustomHeadings,
-      updateAndSaveCustomExperienceArray
-    }
+      updateAndSaveCustomExperienceArray,
+      updateAndSaveTourStatus,
+    },
   };
 };
 

@@ -95,7 +95,6 @@ interface UserDataSlice {
   wizardReviewed: boolean;
   creditPackage?: "";
   profileImage?: string;
-
 }
 
 const initialState: UserDataSlice = {
@@ -161,6 +160,17 @@ const userDataSlice = createSlice({
         [action.payload.name]: action.payload.value,
       };
     },
+
+    setTours(state, action) {
+      return {
+        ...state,
+        tours: {
+          ...state.tours,
+          ...action.payload.tour,
+        },
+      };
+    },
+
     setUserData(state, action) {
       return {
         // isLoading: state.isLoading,
@@ -185,6 +195,7 @@ export const {
   setField,
   setUserData,
   setUserProfileImage,
+  setTours,
 } = userDataSlice.actions;
 
 export default userDataSlice.reducer;

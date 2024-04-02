@@ -234,7 +234,6 @@ const ResumeBuilder = () => {
     dispatch(setCustomExperienceArray(resumeCustomExpArr));
     dispatch(setState({ name: "resumeLoading", value: false }));
     setFinished(true);
-
   };
 
   const getBasicInfo = async () => {
@@ -441,21 +440,21 @@ const ResumeBuilder = () => {
         phone: userData?.phone,
         skills: userData?.skills,
       });
-
     }
   }, [userData]);
 
   useEffect(() => {
     if (userData && userData?.tours) {
-      if (!userData.tours.resume) {
-       setTimeout(()=>{
-         tourBotRef?.current?.click();
-       },500) 
+      if (!userData.tours.resumeBuilder) {
+        setTimeout(() => {
+          tourBotRef?.current?.click();
+        }, 500);
       }
     }
-  },[tourBotRef]);
+  }, [tourBotRef]);
 
   const tourBotConfig = {
+    name: "resumeBuilder",
     audios: [
       {
         url: "/speech_resume_card.mp3",

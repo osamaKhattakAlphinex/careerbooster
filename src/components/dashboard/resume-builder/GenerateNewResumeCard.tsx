@@ -126,10 +126,10 @@ const GenerateResume = ({ getConsent }: Props) => {
 
       {/* form */}
       <div className="flex flex-col items-start justify-between gap-5">
-        <div className="w-full flex flex-col gap-4">
+        <div className="flex flex-col w-full gap-4">
           <label
             htmlFor="targetedJobPosition"
-            className=" font-bold items-center dark:text-gray-100 text-gray-950 text-md md:text-[24px] flex flex-row gap-[10px]"
+            className=" font-semibold items-center dark:text-gray-100 text-gray-950 text-sm md:text-base flex flex-row gap-[10px]"
           >
             <Image
               src="/icon/rocket.svg"
@@ -138,7 +138,7 @@ const GenerateResume = ({ getConsent }: Props) => {
               width={16}
             />
             Enter Your Targeted Job Position{" "}
-            <div className="group cursor-pointer relative inset-0">
+            <div className="relative inset-0 cursor-pointer group">
               {infoSmallIcon}
               <div className="w-48 bg-gradient-to-r z-50 from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[14px] px-2 absolute xs:-left-48 md:left-4 xs:-top-28  md:-top-[11.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                 Customize your resume for the specific roles you{"'"}re applying
@@ -158,7 +158,7 @@ const GenerateResume = ({ getConsent }: Props) => {
               dispatch(setState({ name: "jobPosition", value: e.target.value }))
             }
             placeholder="e.g. Vice President of Sales"
-            className="w-full py-4 px-[26px] rounded-full text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px]"
+            className="w-full py-2 px-4 rounded-full text-xs md:text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px]"
           />
         </div>
 
@@ -193,7 +193,7 @@ const GenerateResume = ({ getConsent }: Props) => {
             !session?.user?.email
           }
           onClick={() => getConsent()}
-          className={` dark:bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7]  to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-4 px-[26px]  rounded-full ${
+          className={` dark:bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7]  to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2  px-4 py-2  rounded-full ${
             memoizedState.jobPosition === "" ||
             memoizedState.resumeLoading ||
             !session?.user?.email
@@ -201,7 +201,7 @@ const GenerateResume = ({ getConsent }: Props) => {
               : ""
           }`}
         >
-          <span className="text-sm dark:text-gray-100 text-gray-950">
+          <span className="text-xs md:text-sm dark:text-gray-100 text-gray-950">
             {memoizedState.resumeLoading ? (
               <div className="flex">
                 <svg
@@ -239,9 +239,7 @@ const GenerateResume = ({ getConsent }: Props) => {
                   />
                 </svg>
 
-                <span
-                  className={`dark:text-gray-100  text-gray-950 ml-3 text-[15px] font-semibold cursor-pointer`}
-                >
+                <span className="ml-1 mb-0.5 text-xs font-semibold cursor-pointer md:text-sm dark:text-gray-100 text-gray-950">
                   Generate Resume
                 </span>
               </div>

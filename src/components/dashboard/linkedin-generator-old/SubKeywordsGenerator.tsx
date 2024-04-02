@@ -228,7 +228,7 @@ const SubKeywordsGenerator = () => {
   return (
     <>
       <PreviouslyGeneratedList {...historyProps} />
-      <div className="headline-generator dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
+      <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
         <div
           className={`icon hidden rounded-full  bg-gradient-to-b from-[#20AA89] to-[#65D4AC]  md:flex justify-center items-center w-16 h-16`}
         >
@@ -240,8 +240,8 @@ const SubKeywordsGenerator = () => {
             className="z-[10000px]"
           />
         </div>
-        <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
-          <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
+        <div className=" flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
+          <div className="flex flex-row items-center gap-4 xs:justify-between sm:justify-between md:justify-start">
             <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
               Keywords Generator
             </h1>
@@ -270,11 +270,40 @@ const SubKeywordsGenerator = () => {
           type="button"
           disabled={msgLoading || !session?.user?.email}
           onClick={() => handleGenerate()}
-          className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
-
-          // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] lg:ml-auto`}
+          className="rounded-full"
         >
-          <span className={`text-white text-[15px] font-semibold`}>
+          <div className="bg-gradient-to-r px-6 py-2 from-[#B324D7] to-[#615DFF] flex  flex-row justify-center items-center gap-2 rounded-full">
+            <span className="bg-transparent ">
+              {msgLoading ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""}`}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                  />
+                </svg>
+              ) : (
+                <Image
+                  src={buttonIconSrc}
+                  alt="bold icon"
+                  height={18}
+                  width={18}
+                />
+              )}
+            </span>
+            <span className="text-xs font-semibold md:text-sm ">
+              {msgLoading ? "Generating..." : "Generate"}
+            </span>
+          </div>
+
+          {/* <span className={`text-white text-[15px] font-semibold`}>
             {msgLoading ? (
               <div
                 className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-44 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[20px] py-[12px] md:ml-auto`}
@@ -310,22 +339,22 @@ const SubKeywordsGenerator = () => {
                   // className={`text-black text-[15px] font-semibold`}
                 >
                   {/* Upgrade Plan */}
-                  Generate Keywords
-                </span>
-              </div>
-            )}
-          </span>
+          {/* Generate Keywords */}
+          {/* </span> */}
+          {/* </div> */}
+          {/* )} */}
+          {/* </span> */}
         </button>
       </div>
       {streamedData && (
         <div className="mb-4 bg-white text-gray-900 rounded border-gray-500 border-[1px] p-4">
-          <h1 className="text-4xl font-bold text-gray-900  mb-4">
+          <h1 className="mb-4 text-4xl font-bold text-gray-900">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
               AI Response{" "}
             </span>
           </h1>
           <div
-            className="font-sans whitespace-pre-wrap text-gray-950 break-words"
+            className="font-sans break-words whitespace-pre-wrap text-gray-950"
             ref={componentRef}
             // style={{ textW: "auto" }}
           >
@@ -341,7 +370,7 @@ const SubKeywordsGenerator = () => {
               ></div>
             ) : (
               <div
-                className=" text-gray-950 text-justify"
+                className="text-justify text-gray-950"
                 dangerouslySetInnerHTML={{ __html: streamedData }}
               ></div>
             )}
@@ -375,7 +404,7 @@ const SubKeywordsGenerator = () => {
                 />
               </svg>
 
-              <span className="dark:text-gray-100 px-2 text-gray-950 text-xs md:text-sm ">
+              <span className="px-2 text-xs dark:text-gray-100 text-gray-950 md:text-sm ">
                 {msgLoading
                   ? "Please wait..."
                   : isKeywordsCopied
@@ -394,7 +423,7 @@ const SubKeywordsGenerator = () => {
                   : ""
               } `}
             >
-              <div className="flex flex-row text-gray-100 items-center justify-center gap-2">
+              <div className="flex flex-row items-center justify-center gap-2 text-gray-100">
                 {EditIcon}
                 <span
                   className={`text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm ${
