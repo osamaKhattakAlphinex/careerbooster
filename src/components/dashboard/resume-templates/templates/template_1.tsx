@@ -17,6 +17,10 @@ import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
 import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { getYearsList, months } from "@/helpers/listsProvider";
+const years = getYearsList();
 const ResumeTemplate1 = ({
   streamedSummaryData,
   setStreamedSummaryData,
@@ -75,16 +79,38 @@ const ResumeTemplate1 = ({
     state: "",
     description: "",
   });
+
+  const formik = useFormik({
+    initialValues: {
+      jobTitle: "",
+      country: "",
+      city: "",
+      state: "",
+      fromMonth: "",
+      fromYear: "",
+      isContinue: false,
+      toMonth: "",
+      toYear: "",
+      description: "",
+    },
+    validationSchema: Yup.object({
+      jobTitle: Yup.string().required("Job Title is required"),
+    }),
+    onSubmit: async (values) => {
+      // Handle form submission here
+      console.log(values);
+    },
+  });
+
   const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    formik.setFieldValue(e.target.name, e.target.value);
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+    formik.handleSubmit();
   };
+
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
@@ -1203,7 +1229,7 @@ const ResumeTemplate1 = ({
             <div>
               <button
                 onClick={() => {}}
-                className="text-sm text-gray-100 cursor-pointer hover:opacity-80 font-semibold bg-gray-600 py-2 rounded-lg px-3 m-2   "
+                className="text-sm text-gray-900 cursor-pointer hover:opacity-80 font-semibold bg-gray-200 py-2 rounded-lg px-3 m-2   "
               >
                 Add Custom Section
               </button>
@@ -1220,85 +1246,200 @@ const ResumeTemplate1 = ({
               <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 my-b"></span>
               <button
                 onClick={() => {}}
-                className="text-sm text-gray-100 cursor-pointer hover:opacity-80 font-semibold bg-gray-600 py-2 rounded-lg px-3 m-2   "
+                className="text-sm text-gray-900 cursor-pointer hover:opacity-80 font-semibold bg-gray-200 py-2 rounded-lg px-3 m-2   "
               >
-                Add Custom Section
+                Add Items
               </button>
             </div>
             {/* Add Custom */}
-            <div>
-              <form onSubmit={handleSubmit} className="border flex flex-wrap">
-                <label className="border w-[50%] flex flex-col gap-1">
-                  Name:
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="bg-gray-100 border py-1 border-gray-300 rounded-lg w-full"
-                  />
-                </label>
-                <br />
-                <label className="border w-[50%]">
-                  Email:
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                </label>
-                <br />
-                <label>
-                  Job Title:
-                  <input
-                    type="text"
-                    name="jobTitle"
-                    value={formData.jobTitle}
-                    onChange={handleChange}
-                  />
-                </label>
-                <br />
-                <label>
-                  Country:
-                  <input
-                    type="text"
-                    name="country"
-                    value={formData.country}
-                    onChange={handleChange}
-                  />
-                </label>
-                <br />
-                <label>
-                  City:
-                  <input
-                    type="text"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleChange}
-                  />
-                </label>
-                <br />
-                <label>
-                  State:
-                  <input
-                    type="text"
-                    name="state"
-                    value={formData.state}
-                    onChange={handleChange}
-                  />
-                </label>
-                <br />
-                <label>
-                  Description:
+            <div className="my-2">
+              <form
+                onSubmit={handleSubmit}
+                className="border rounded-lg shadow-md p-6 space-y-4"
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <label className="flex flex-col">
+                    <span className="text-sm">Job Title:</span>
+                    <input
+                      type="text"
+                      name="jobTitle"
+                      value={formik.values.jobTitle}
+                      onChange={handleChange}
+                      className="py-2 px-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
+                    />
+                  </label>
+                  <label className="flex flex-col">
+                    <span className="text-sm">Country:</span>
+                    <input
+                      type="text"
+                      name="country"
+                      value={formik.values.country}
+                      onChange={handleChange}
+                      className="py-2 px-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
+                    />
+                  </label>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <label className="flex flex-col">
+                    <span className="text-sm">City:</span>
+                    <input
+                      type="text"
+                      name="city"
+                      value={formik.values.city}
+                      onChange={handleChange}
+                      className="py-2 px-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
+                    />
+                  </label>
+                  <label className="flex flex-col">
+                    <span className="text-sm">State:</span>
+                    <input
+                      type="text"
+                      name="state"
+                      value={formik.values.state}
+                      onChange={handleChange}
+                      className="py-2 px-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
+                    />
+                  </label>
+                </div>
+                <div className="">
+                  <label className="block text-sm font-medium">
+                    Time Period
+                  </label>
+                  <div className="flex space-x-4 mt-4">
+                    <div className="w-1/2">
+                      <label className="block text-xs text-gray-950">
+                        From Month
+                      </label>
+                      <select
+                        className="py-2 px-3 mt-1 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
+                        name="fromMonth"
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.fromMonth}
+                      >
+                        <option value="" className="text-gray-950">
+                          -- select --
+                        </option>
+                        {months.map((month) => (
+                          <option
+                            className="text-gray-950"
+                            key={month}
+                            value={month}
+                          >
+                            {month}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="w-1/2">
+                      <label className="block text-xs text-gray-500">
+                        From Year
+                      </label>
+
+                      <select
+                        className="py-2 px-3 mt-1 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
+                        name="fromYear"
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.fromYear}
+                      >
+                        <option value="" className="text-gray-950">
+                          -- select --
+                        </option>
+                        {years.map((year) => (
+                          <option
+                            className="text-gray-950"
+                            key={year}
+                            value={year}
+                          >
+                            {year}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  {!formik.values.isContinue && (
+                    <div className="flex space-x-4 mt-4">
+                      <div className="w-1/2">
+                        <label className="block text-xs text-gray-500">
+                          To Month
+                        </label>
+                        <select
+                          className="py-2 px-3 mt-1 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
+                          name="toMonth"
+                          onBlur={formik.handleBlur}
+                          onChange={formik.handleChange}
+                          value={formik.values.toMonth}
+                        >
+                          <option value="" className="text-gray-950">
+                            -- select --
+                          </option>
+                          {months.map((month) => (
+                            <option
+                              className="text-gray-950"
+                              key={month}
+                              value={month}
+                            >
+                              {month}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="w-1/2">
+                        <label className="block text-xs text-gray-500">
+                          To Year
+                        </label>
+                        <select
+                          className="py-2 px-3 mt-1 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
+                          name="toYear"
+                          onBlur={formik.handleBlur}
+                          onChange={formik.handleChange}
+                          value={formik.values.toYear}
+                        >
+                          <option value="" className="text-gray-950">
+                            -- select --
+                          </option>
+                          {years.map((year) => (
+                            <option
+                              className="text-gray-950"
+                              key={year}
+                              value={year}
+                            >
+                              {year}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <label className="flex flex-col">
+                  <span className="text-sm">Description:</span>
                   <textarea
                     name="description"
-                    value={formData.description}
+                    value={formik.values.description}
                     onChange={handleChange}
+                    className="py-2 px-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
                   />
                 </label>
-                <br />
-                <button type="submit">Submit</button>
+
+                <div className="w-full">
+                  <button
+                    type="submit"
+                    // disabled={String(formik.errors.title) !== "undefined"}
+                    className=" px-4 !bg-blue-500 text-white xs:my-3 md:my-0  rounded-md py-2 hover:!bg-blue-600 mr-4 disabled:bg-blue-300"
+                  >
+                    Save
+                  </button>
+                  <button
+                    type="button"
+                    // onClick={() => setAddNew(false)}
+                    className=" px-4 !bg-gray-500 text-white rounded-md py-2 hover:!bg-gray-600"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </form>
             </div>
 
