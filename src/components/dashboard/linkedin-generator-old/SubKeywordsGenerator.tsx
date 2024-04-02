@@ -232,15 +232,9 @@ const SubKeywordsGenerator = () => {
         <div
           className={`icon hidden rounded-full  bg-gradient-to-b from-[#20AA89] to-[#65D4AC]  md:flex justify-center items-center w-16 h-16`}
         >
-          <Image
-            alt="Svg1"
-            src={Svg1}
-            width={32}
-            height={32}
-            className="z-[10000px]"
-          />
+          <Image alt="Svg1" src={Svg1} width={24} height={24} />
         </div>
-        <div className=" flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
+        <div className="flex flex-col w-full gap-2 ml-2 md:w-10/12">
           <div className="flex flex-row items-center gap-4 xs:justify-between sm:justify-between md:justify-start">
             <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
               Keywords Generator
