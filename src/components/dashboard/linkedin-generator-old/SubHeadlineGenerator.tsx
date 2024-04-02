@@ -224,14 +224,12 @@ const SubHeadlineGenerator = () => {
   return (
     <>
       <PreviouslyGeneratedList {...historyProps} />
-      <div className="headline-generator dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 lg:px-6 flex flex-col md:flex-row md:align-center gap-5 justify-center items-center rounded-[10px] mb-[20px]">
-        <div
-          className={`icon  hidden rounded-full  bg-gradient-to-b from-[#5D26C1] to-[#A17FE0] md:flex justify-center items-center w-16 h-16`}
-        >
-          <Image alt="Svg1" src={Svg1} width={32} height={32} />
+      <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] md:justify-between text-gray-950 p-5 sm:p-8 flex flex-col md:flex-row md:align-center xs:gap-3 justify-center items-center rounded-xl">
+        <div className="hidden aspect-square rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16">
+          <Image alt="Svg1" src={Svg1} width={24} height={24} />
         </div>
-        <div className="linkedintooltext flex  flex-col lg:w-[24.0625rem] gap-2 ml-2">
-          <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
+        <div className="flex flex-col w-full gap-2 ml-2 md:w-10/12">
+          <div className="flex flex-row items-center gap-4 xs:justify-between sm:justify-between md:justify-start">
             <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
               Headline Generator
             </h1>
@@ -246,7 +244,7 @@ const SubHeadlineGenerator = () => {
             </div> */}
           </div>
 
-          <p className="text-[14px] text-[#959595] pr-5">
+          <p className="text-xs md:text-sm text-[#959595]">
             Generate keyword-rich headline for your LinkedIn to elevate your
             ranking in recruiter searches.
           </p>
@@ -255,9 +253,40 @@ const SubHeadlineGenerator = () => {
           type="button"
           disabled={msgLoading || !session?.user?.email}
           onClick={() => handleGenerate()}
-          className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
+          className="rounded-full"
         >
-          <span
+          <div className="bg-gradient-to-r px-6 py-2 from-[#B324D7] to-[#615DFF] flex  flex-row justify-center items-center gap-2 rounded-full">
+            <span className="bg-transparent ">
+              {msgLoading ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""}`}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                  />
+                </svg>
+              ) : (
+                <Image
+                  src={buttonIconSrc}
+                  alt="bold icon"
+                  height={18}
+                  width={18}
+                />
+              )}
+            </span>
+            <span className="text-xs font-semibold md:text-sm ">
+              {msgLoading ? "Generating..." : "Generate"}
+            </span>
+          </div>
+
+          {/* <span
             className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}
           >
             {msgLoading ? (
@@ -297,19 +326,19 @@ const SubHeadlineGenerator = () => {
                 </span>
               </div>
             )}
-          </span>
+          </span> */}
         </button>
       </div>
 
       {streamedData !== "" && (
         <div className="bg-white text-gray-900 rounded border-[1px] border-gray-500 p-4 mb-4">
-          <h1 className="text-4xl font-bold text-gray-900  mb-4">
+          <h1 className="mb-4 text-4xl font-bold text-gray-900">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
               AI Response{" "}
             </span>
           </h1>
           <div
-            className="font-sans whitespace-pre-wrap text-gray-950 break-words"
+            className="font-sans break-words whitespace-pre-wrap text-gray-950"
             ref={componentRef}
             // style={{ textW: "auto" }}
           >
@@ -325,7 +354,7 @@ const SubHeadlineGenerator = () => {
               ></div>
             ) : (
               <div
-                className=" text-gray-950 text-justify "
+                className="text-justify text-gray-950"
                 dangerouslySetInnerHTML={{ __html: streamedData }}
               ></div>
             )}
@@ -358,7 +387,7 @@ const SubHeadlineGenerator = () => {
                 />
               </svg>
 
-              <span className="dark:text-gray-100 px-2 text-gray-950 text-xs md:text-sm ">
+              <span className="px-2 text-xs dark:text-gray-100 text-gray-950 md:text-sm ">
                 {msgLoading
                   ? "Please wait..."
                   : isHeadlineCopied
@@ -376,7 +405,7 @@ const SubHeadlineGenerator = () => {
                   : ""
               } `}
             >
-              <div className="flex flex-row items-center text-white justify-center gap-2">
+              <div className="flex flex-row items-center justify-center gap-2 text-white">
                 {EditIcon}
                 <span
                   className={`text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm ${

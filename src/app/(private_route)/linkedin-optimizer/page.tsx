@@ -9,11 +9,14 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useTourContext } from "@/context/TourContext";
 import TourBot from "@/components/dashboard/TourBot";
+import { useEffect } from "react";
 
 export default function LinkedInPage() {
-  const { linkedinElementRef } = useTourContext();
+  const { linkedinElementRef, tourBotRef } = useTourContext();
+  const userData = useSelector((state: any) => state.userData);
 
   const tourBotConfig = {
+    name: "linkedinOptimizer",
     audios: [
       {
         url: "/speech_linkedin_card.mp3",
@@ -27,6 +30,16 @@ export default function LinkedInPage() {
       },
     ],
   };
+
+  useEffect(() => {
+    if (userData && userData?.tours) {
+      if (!userData.tours.linkedinOptimizer) {
+        setTimeout(() => {
+          tourBotRef?.current?.click();
+        }, 500);
+      }
+    }
+  }, [tourBotRef]);
 
   const creditLimits = useSelector((state: any) => state.creditLimits);
   return (

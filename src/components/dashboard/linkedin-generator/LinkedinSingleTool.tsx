@@ -39,7 +39,7 @@ const LinkedinSingleTool: React.FC<LinkedinSingleToolProps> = ({
           className="z-[10000px]"
         />
       </div>
-      <div className="linkedintooltext border-2 flex flex-col w-[24.0625rem] gap-2 ml-2">
+      <div className=" border-2 flex flex-col w-[24.0625rem] gap-2 ml-2">
         <div className="flex flex-row gap-3">
           <h1 className="text-[16px] text-white font-bold">{headline}</h1>
           <span

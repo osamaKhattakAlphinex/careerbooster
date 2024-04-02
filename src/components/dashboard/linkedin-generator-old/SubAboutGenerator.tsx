@@ -219,7 +219,7 @@ const SubAboutGenerator = () => {
   return (
     <>
       <PreviouslyGeneratedList {...historyProps} />
-      <div className="headline-generator dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
+      <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
         <div
           className={`icon hidden rounded-full bg-gradient-to-b from-[#26A5C1] to-[#84E1E7] md:flex justify-center items-center w-16 h-16`}
         >
@@ -231,8 +231,8 @@ const SubAboutGenerator = () => {
             className="z-[10000px]"
           />
         </div>
-        <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
-          <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
+        <div className=" flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
+          <div className="flex flex-row items-center gap-4 xs:justify-between sm:justify-between md:justify-start">
             <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
               About Generator
             </h1>
@@ -256,9 +256,40 @@ const SubAboutGenerator = () => {
           type="button"
           disabled={msgLoading || !session?.user?.email}
           onClick={() => handleGenerate()}
-          className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
+          className="rounded-full"
         >
-          <span
+          <div className="bg-gradient-to-r px-6 py-2 from-[#B324D7] to-[#615DFF] flex  flex-row justify-center items-center gap-2 rounded-full">
+            <span className="bg-transparent ">
+              {msgLoading ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className={`w-4 h-4 mr-3 ${msgLoading ? "animate-spin" : ""}`}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                  />
+                </svg>
+              ) : (
+                <Image
+                  src={buttonIconSrc}
+                  alt="bold icon"
+                  height={18}
+                  width={18}
+                  className=""
+                />
+              )}
+            </span>
+            <span className="text-xs font-semibold md:text-sm ">
+              {msgLoading ? "Generating..." : "Generate"}
+            </span>
+          </div>
+          {/* <span
             className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}
           >
             {msgLoading ? (
@@ -298,18 +329,18 @@ const SubAboutGenerator = () => {
                 </span>
               </div>
             )}
-          </span>
+          </span> */}
         </button>
       </div>
       {streamedData && (
         <div className="bg-white text-gray-900 rounded border-[1px] border-gray-500 mb-4 p-4">
-          <h1 className="text-4xl font-bold text-gray-900  mb-4">
+          <h1 className="mb-4 text-4xl font-bold text-gray-900">
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
               AI Response{" "}
             </span>
           </h1>
           <div
-            className="font-sans whitespace-pre-wrap text-gray-950 break-words"
+            className="font-sans break-words whitespace-pre-wrap text-gray-950"
             ref={componentRef}
             // style={{ textW: "auto" }}
           >
@@ -325,7 +356,7 @@ const SubAboutGenerator = () => {
               ></div>
             ) : (
               <div
-                className=" text-gray-950 text-justify "
+                className="text-justify text-gray-950"
                 dangerouslySetInnerHTML={{ __html: streamedData }}
               ></div>
             )}
@@ -359,7 +390,7 @@ const SubAboutGenerator = () => {
                 />
               </svg>
 
-              <span className="dark:text-gray-100 px-2 text-gray-950 text-xs md:text-sm ">
+              <span className="px-2 text-xs dark:text-gray-100 text-gray-950 md:text-sm ">
                 {msgLoading
                   ? "Please wait..."
                   : isAboutCopied
@@ -378,7 +409,7 @@ const SubAboutGenerator = () => {
                   : ""
               } `}
             >
-              <div className="flex flex-row items-center text-gray-100 justify-center gap-2">
+              <div className="flex flex-row items-center justify-center gap-2 text-gray-100">
                 {EditIcon}
                 <span
                   className={`text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm ${
@@ -446,7 +477,7 @@ const SubAboutGenerator = () => {
           <p className="text-[16px]  lg:text-[24px] lg:text-left text-center">
             Change your preference and regenerate your summary
           </p>
-          <div className="flex flex-col gap-4 lg:px-0  px-8">
+          <div className="flex flex-col gap-4 px-8 lg:px-0">
             <label
               htmlFor="default-radio-3"
               className="flex gap-3 redio-btn  items-center rounded-full border-2 border-indigo-600 lg:px-8 md:py-4 xs:py-3 py-3 cursor-pointer md:text-[16px] xs:text-[11px]"
@@ -457,7 +488,7 @@ const SubAboutGenerator = () => {
                 value="about"
                 name="default-radio"
                 onChange={(e) => setOption(e.target.value)}
-                className="lg:w-5 lg:h-5 w-3 h-3 "
+                className="w-3 h-3 lg:w-5 lg:h-5 "
                 checked={option === "about"}
               />
               Regenerate about again to get more results
@@ -472,7 +503,7 @@ const SubAboutGenerator = () => {
                 value="aboutShort"
                 name="default-radio"
                 onChange={(e) => setOption(e.target.value)}
-                className="lg:w-5 lg:h-5 w-3 h-3 "
+                className="w-3 h-3 lg:w-5 lg:h-5 "
               />
               I need a shorter summary (Not Recommended)
             </label>

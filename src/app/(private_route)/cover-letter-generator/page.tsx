@@ -301,9 +301,10 @@ export default function CoverLetterPage() {
     setStreamedData(coverLetter.coverLetterText);
   }, [coverLetter.coverLetterText]);
 
-  const { coverLetterElementRef } = useTourContext();
+  const { coverLetterElementRef, tourBotRef } = useTourContext();
 
   const tourBotConfig = {
+    name: "coverLetter",
     audios: [
       {
         url: "/speech_cover_letter_card.mp3",
@@ -317,6 +318,16 @@ export default function CoverLetterPage() {
       },
     ],
   };
+
+  useEffect(() => {
+    if (userData && userData?.tours) {
+      if (!userData.tours.coverLetter) {
+        setTimeout(() => {
+          tourBotRef?.current?.click();
+        }, 500);
+      }
+    }
+  }, [tourBotRef]);
 
   const [uploadPdfFile, setUploadPdfFile] = useState<string>("useYourPersona");
   return (

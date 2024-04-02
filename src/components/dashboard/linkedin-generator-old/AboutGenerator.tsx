@@ -8,22 +8,18 @@ import { chevronRight } from "@/helpers/iconsProvider";
 const AboutGenerator = ({ creditLimits }: { creditLimits: any }) => {
   return (
     <>
-      <Link href="/linkedin-optimizer/about" className="no-underline">
-        <div className="headline-generator dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-2 md:py-8 px-1 lg:px-6 flex flex-col md:flex-row md:align-center xs:gap-2 md:gap-5 justify-center items-center rounded-[10px] xs:mb-[8px] md:mb-[20px]">
-          <div
-            className={`icon hidden rounded-full bg-gradient-to-b from-[#26A5C1] to-[#84E1E7] md:flex justify-center items-center w-16 h-16`}
-          >
-            <Image
-              alt="Svg1"
-              src={Svg1}
-              width={32}
-              height={32}
-              className="z-[10000px]"
-            />
+      <Link
+        href="/linkedin-optimizer/about"
+        className="block my-4 no-underline"
+      >
+        <div className=" dark:bg-[#222027] md:justify-between dark:text-gray-50 bg-[#ffffff94] text-gray-950 p-5 sm:p-8 flex flex-col md:flex-row md:align-center xs:gap-3 justify-center items-center rounded-xl">
+          <div className="hidden aspect-square rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-14 h-14">
+            <Image alt="Svg1" src={Svg1} width={24} height={24} />
           </div>
-          <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 p-4">
-            <div className=" flex items-center xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">
-              <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
+          <div className="flex flex-col w-full gap-2 p-2 md:w-10/12">
+            <div className="flex flex-row items-center gap-4 xs:justify-between sm:justify-between md:justify-start">
+              <h1 className="text-sm font-semibold md:text-base dark:text-gray-100 text-gray-950">
+                {" "}
                 About Generator
               </h1>
               <div
@@ -37,25 +33,16 @@ const AboutGenerator = ({ creditLimits }: { creditLimits: any }) => {
               </div>
             </div>
 
-            <p className="text-[14px] text-[#959595] pr-5">
+            <p className="text-xs md:text-sm text-[#959595]">
               Transform your career journey into a compelling story that
               captures recruiters{"'"} attention and enhances your LinkedIn
               profile{"'"}s visibility.
             </p>
           </div>
 
-          <div
-            // onClick={() => handleGenerate()}
-            className={`flex flex-row justify-center items-center gap-2 rounded-full px-[32px] md:py-[12px] md:ml-auto`}
-          >
-            <span className={`text-white text-[15px] font-semibold`}>
-              <span
-                className={`no-underline text-sm md:mt-[11px] flex items-center uppercase text-[#959595] dark:hover:text-gray-300 hover:text-gray-950 font-semibold`}
-              >
-                Launch <i className="ml-2">{chevronRight}</i>
-              </span>
-            </span>
-          </div>
+          <span className="no-underline text-xs md:text-sm  flex items-center uppercase text-[#959595] dark:hover:text-gray-300 hover:text-gray-950 font-semibold">
+            Launch <i className="ml-2">{chevronRight}</i>
+          </span>
         </div>
       </Link>
     </>

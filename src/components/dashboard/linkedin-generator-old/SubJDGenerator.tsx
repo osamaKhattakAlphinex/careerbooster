@@ -397,20 +397,18 @@ const SubJDGenerator = () => {
     <>
       <PreviouslyGeneratedList {...historyProps} />
       <>
-        <div className="headline-generator dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
-          <div
-            className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16`}
-          >
-            <Image alt="Svg1" src={Svg1} width={32} height={32} />
+        <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] md:justify-between text-gray-950 p-5 sm:p-8 flex flex-col md:flex-row md:align-center xs:gap-3 justify-center items-center rounded-xl">
+          <div className="hidden aspect-square rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16">
+            <Image alt="Svg1" src={Svg1} width={24} height={24} />
           </div>
-          <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 ml-2">
+          <div className="flex flex-col w-full gap-2 p-2 ml-2 md:w-10/12">
             <div className="flex flex-row items-center gap-4 xs:justify-between sm:justify-between md:justify-start">
-              <h1 className="text-[16px] dark:text-gray-100 text-gray-950 font-bold">
+              <h1 className="text-sm font-semibold md:text-base dark:text-gray-100 text-gray-950">
                 Job Description Generator
               </h1>
             </div>
 
-            <p className="text-[14px] text-[#959595] pr-5">
+            <p className="text-xs md:text-sm text-[#959595]">
               Transform your existing work experience into an impactful
               narrative that highlights your key achievements.
             </p>
@@ -419,16 +417,44 @@ const SubJDGenerator = () => {
             type="button"
             disabled={msgLoading || !session?.user?.email}
             onClick={() => handleGenerate()}
-            className={` bg-gradient-to-r from-[#B324D7] to-[#615DFF] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] md:ml-auto`}
-
-            // className={` bg-[#FEB602] flex flex-row justify-center items-center gap-2 rounded-full px-[32px] py-[12px] mx-2 lg:ml-auto`}
+            className="rounded-full"
           >
-            <span
-              className={`dark:text-gray-100 text-gray-950 text-[15px] font-semibold`}
-            >
+            <div className="bg-gradient-to-r px-6 py-2 from-[#B324D7] to-[#615DFF] flex  flex-row justify-center items-center gap-2 rounded-full">
+              <span className="bg-transparent ">
+                {msgLoading ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className={`w-4 h-4 mr-3 ${
+                      msgLoading ? "animate-spin" : ""
+                    }`}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                    />
+                  </svg>
+                ) : (
+                  <Image
+                    src={buttonIconSrc}
+                    alt="bold icon"
+                    height={18}
+                    width={18}
+                  />
+                )}
+              </span>
+              <span className="text-xs font-semibold md:text-sm ">
+                {msgLoading ? "Generating..." : "Generate"}
+              </span>
+            </div>
+            {/* <span className="dark:text-gray-100 text-gray-950 text-[15px] font-semibold">
               {msgLoading ? (
                 <div
-                  className={` bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-44 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[20px] py-[12px] md:ml-auto`}
+                // className="bg-gradient-to-r  from-[#B324D7] to-[#615DFF] flex md:w-44 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[20px] py-[12px] md:ml-auto"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -450,20 +476,14 @@ const SubJDGenerator = () => {
                 </div>
               ) : (
                 <div
-                  className={` bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto`}
+                // className="bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#B324D7] to-[#615DFF] flex md:w-52 flex-row justify-center items-center gap-2 rounded-full md:px-[5px] px-[32px] py-[12px] md:ml-auto"
                 >
-                  <Image
-                    src={buttonIconSrc}
-                    alt="bold icon"
-                    height={18}
-                    width={18}
-                  />
                   <span className="text-white ml-3 text-[15px] font-semibold whitespace-nowrap">
                     Generate Description
                   </span>
                 </div>
               )}
-            </span>
+            </span> */}
           </button>
         </div>
         {(generatedWorkExperience?.length > 0 || streamedData !== "") && (
@@ -519,7 +539,7 @@ const SubJDGenerator = () => {
                 })}
               </div>
               {streamedData !== "" && (
-                <div className="ml-2 font-sansbreak-words text-justify">
+                <div className="ml-2 text-justify font-sansbreak-words">
                   <div
                     className="list-disc"
                     dangerouslySetInnerHTML={{ __html: streamedData }}
@@ -527,7 +547,7 @@ const SubJDGenerator = () => {
                 </div>
               )}
             </div>
-            <div className="mt-4 px-2 xs:mb-1 md:mb-0">
+            <div className="px-2 mt-4 xs:mb-1 md:mb-0">
               <DownloadService
                 componentRef={componentRef}
                 type="onPage"
