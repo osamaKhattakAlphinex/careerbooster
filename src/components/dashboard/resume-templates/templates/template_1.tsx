@@ -824,7 +824,7 @@ const ResumeTemplate1 = ({
                     const { name: sectionName, entries } = rec;
                     return (
                       <>
-                        {entries.length > 0 && (
+                        {entries?.length > 0 && (
                           <>
                             <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
                             <h3

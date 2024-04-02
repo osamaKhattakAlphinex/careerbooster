@@ -32,7 +32,7 @@ const Toolbar = ({
   return (
     <>
       <div className="relative group">
-        <div className="absolute right-0 z-10 flex-row items-center justify-center hidden transition-opacity duration-300 ease-in rounded-md -bottom-4 group-hover:flex">
+        <div className="absolute right-0 z-10 flex-row items-center justify-center hidden transition-opacity duration-300 ease-in rounded-md -bottom-7 group-hover:flex">
           {deleteExperience && (
             <button
               title="Delete Experience"

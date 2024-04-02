@@ -37,6 +37,7 @@ const SectionCard = ({ singleStep, index, showButtons = true }: any) => {
       .then(async (resp: any) => {
         if (resp?.data?.success) {
           showSuccessToast("Profile updated successfully");
+          setConfirmationModal(false);
         }
       });
   };

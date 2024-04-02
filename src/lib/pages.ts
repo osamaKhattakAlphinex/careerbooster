@@ -25,8 +25,8 @@ export const getPages = () => {
       route: "/contact",
     },
     {
-      name: "Linkedin",
-      route: "/linkedin",
+      name: "Linkedin Optimizer",
+      route: "/linkedin-optimizer",
     },
     {
       name: "Use Cases ",
@@ -47,13 +47,7 @@ export const getPages = () => {
     {
       name: "Terms and Conditions",
       route: "/terms-and-conditions",
-    },
-    {
-      name: "Billing",
-      route: "/billing",
-    },
-
-    {
+    },{
       name: "Resume Builder ",
       route: "/resume-builder",
     },
@@ -62,17 +56,13 @@ export const getPages = () => {
       route: "/cover-letter-generator",
     },
     {
-      name: "Email Bot ",
-      route: "/email-bot",
+      name: "Email Assistant",
+      route: "/email-assistant",
     },
     {
-      name: "Consulting Bids Bot ",
-      route: "/consulting-bids-bot",
-    },
-    {
-      name: "Linkedin Generator ",
-      route: "/linkedin-generator",
-    },
+      name: "Billing",
+      route: "/billing",
+    },    
     {
       name: "Reset Password",
       route: "/reset-password",
