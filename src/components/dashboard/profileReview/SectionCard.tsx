@@ -9,6 +9,7 @@ import EditCustomCard from "./EditCustomCard";
 import { setCustomExperienceArray } from "@/store/resumeSlice";
 import axios from "axios";
 import { showSuccessToast } from "@/helpers/toast";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 export interface singleStepProps {
   name: string;
   entries: [];
@@ -18,16 +19,17 @@ const SectionCard = ({ singleStep, index, showButtons = true }: any) => {
   const [isEditable, setIsEditable] = useState<boolean>(false);
   const stepCustom = useSelector((state: any) => state.register.stepCustom);
   const userData = useSelector((state: any) => state.userData);
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const dispatch = useDispatch();
   const { name, entries } = singleStep;
   const handleDelete = async () => {
     let updatedStepCustom = [...stepCustom];
-    console.log(index)
+    console.log(index);
     updatedStepCustom.splice(index, 1);
     dispatch(setStepCustom(updatedStepCustom));
     dispatch(setCustomExperienceArray(updatedStepCustom));
     const newUserData = { ...userData, customDetails: updatedStepCustom };
-    dispatch(setUserData({...newUserData}));
+    dispatch(setUserData({ ...newUserData }));
     return axios
       .post("/api/users/updateUserData", {
         data: newUserData,
@@ -38,32 +40,35 @@ const SectionCard = ({ singleStep, index, showButtons = true }: any) => {
         }
       });
   };
+  const handleOpenConfirmationModal = () => {
+    setConfirmationModal(true);
+  };
   return (
     <>
       <div className="flex w-full justify-between items-center">
-      <h1
-        contentEditable={isEditable}
-        title="Click to Edit"
-        onClick={() => setIsEditable(true)}
-        onBlur={(e) => {
-          const updatedStepCustom = [...stepCustom];
-          updatedStepCustom[index] = {
-            ...updatedStepCustom[index],
-            name: e.target.innerText,
-            entries: entries ? [...entries] : [],
-          };
-          dispatch(setStepCustom(updatedStepCustom));
-          dispatch(setCustomExperienceArray(updatedStepCustom));
-          setIsEditable(false);
-          setIsEditable(false);
-        }}
-        className="hover:border-dashed hover:border-gray-300 border-2 w-full border-transparent text-lg xs:my-5 justify-between items-center flex md:mt-2 font-bold leading-tight tracking-tight dark:text-gray-100 text-gray-950  md:text-2xl "
-      >
-        {name}
-      </h1>
-      <button
+        <h1
+          contentEditable={isEditable}
+          title="Click to Edit"
+          onClick={() => setIsEditable(true)}
+          onBlur={(e) => {
+            const updatedStepCustom = [...stepCustom];
+            updatedStepCustom[index] = {
+              ...updatedStepCustom[index],
+              name: e.target.innerText,
+              entries: entries ? [...entries] : [],
+            };
+            dispatch(setStepCustom(updatedStepCustom));
+            dispatch(setCustomExperienceArray(updatedStepCustom));
+            setIsEditable(false);
+            setIsEditable(false);
+          }}
+          className="hover:border-dashed hover:border-gray-300 border-2 w-full border-transparent text-lg xs:my-5 justify-between items-center flex md:mt-2 font-bold leading-tight tracking-tight dark:text-gray-100 text-gray-950  md:text-2xl "
+        >
+          {name}
+        </h1>
+        <button
           className="text-red-500 hover:text-red-700"
-          onClick={() => handleDelete()}
+          onClick={handleOpenConfirmationModal}
         >
           {deleteIcon}
         </button>
@@ -85,6 +90,13 @@ const SectionCard = ({ singleStep, index, showButtons = true }: any) => {
           {plusSimpleIcon}
           Add Item
         </button>
+      )}
+      {confirmationModal && (
+        <DeleteConfirmationModal
+          message="Are you sure you want to delete ?"
+          onConfirm={() => handleDelete()}
+          onCancel={() => setConfirmationModal(false)}
+        />
       )}
     </>
   );
