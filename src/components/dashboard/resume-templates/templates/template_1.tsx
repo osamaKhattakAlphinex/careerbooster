@@ -36,6 +36,7 @@ const ResumeTemplate1 = ({
   const userData = useSelector((state: any) => state.userData);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
+  const [addNew, setAddNew] = useState<boolean>(false);
   const [newCustomWorkExperience, setNewCustomWorkExperience] =
     useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
@@ -62,9 +63,28 @@ const ResumeTemplate1 = ({
     handleDropExperience,
     handleDropCustomAchievement,
     handleDropCustomExperience,
-    handleDropSingleCustomSection
+    handleDropSingleCustomSection,
   } = useDragAndDrop();
+  //form handling
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    jobTitle: "",
+    country: "",
+    city: "",
+    state: "",
+    description: "",
+  });
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    // Handle form submission
+    console.log(formData);
+  };
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
@@ -807,19 +827,19 @@ const ResumeTemplate1 = ({
                         {entries.length > 0 && (
                           <>
                             <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-                            <h3 className="md:my-1 relative hover:cursor-move group text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2"
-                            
-                            onDragStart={(e) =>
-                              e.dataTransfer.setData(
-                                "text/plain",
-                                index.toString()
-                              )
-                            }
-                            onDragOver={(e) => e.preventDefault()}
-                            onDrop={(e) =>
-                              handleDropSingleCustomSection(e, index)
-                            }
-                            draggable
+                            <h3
+                              className="md:my-1 relative hover:cursor-move group text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2"
+                              onDragStart={(e) =>
+                                e.dataTransfer.setData(
+                                  "text/plain",
+                                  index.toString()
+                                )
+                              }
+                              onDragOver={(e) => e.preventDefault()}
+                              onDrop={(e) =>
+                                handleDropSingleCustomSection(e, index)
+                              }
+                              draggable
                             >
                               <EditableField
                                 value={sectionName}
@@ -833,7 +853,7 @@ const ResumeTemplate1 = ({
                                   }
                                 }}
                               />
-                              
+
                               <div
                                 onClick={() =>
                                   handlers.handleDeleteSingleCustomSection(
@@ -1180,10 +1200,112 @@ const ResumeTemplate1 = ({
                 }}
               ></div>
             )}
+            <div>
+              <button
+                onClick={() => {}}
+                className="text-sm text-gray-100 cursor-pointer hover:opacity-80 font-semibold bg-gray-600 py-2 rounded-lg px-3 m-2   "
+              >
+                Add Custom Section
+              </button>
+              <span className="!block w-full h-0 border-[1px] border-gray-500 my-t page-break"></span>
+              <h3 className="flex flex-row items-center gap-2 md:my-1 text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+                <EditableField
+                  value={" Untitled"}
+                  style={{ width: "fit-content" }}
+                  onSave={(value: string) => {
+                    console.log("Add custom section");
+                  }}
+                />
+              </h3>
+              <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 my-b"></span>
+              <button
+                onClick={() => {}}
+                className="text-sm text-gray-100 cursor-pointer hover:opacity-80 font-semibold bg-gray-600 py-2 rounded-lg px-3 m-2   "
+              >
+                Add Custom Section
+              </button>
+            </div>
+            {/* Add Custom */}
+            <div>
+              <form onSubmit={handleSubmit} className="border flex flex-wrap">
+                <label className="border w-[50%] flex flex-col gap-1">
+                  Name:
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="bg-gray-100 border py-1 border-gray-300 rounded-lg w-full"
+                  />
+                </label>
+                <br />
+                <label className="border w-[50%]">
+                  Email:
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                </label>
+                <br />
+                <label>
+                  Job Title:
+                  <input
+                    type="text"
+                    name="jobTitle"
+                    value={formData.jobTitle}
+                    onChange={handleChange}
+                  />
+                </label>
+                <br />
+                <label>
+                  Country:
+                  <input
+                    type="text"
+                    name="country"
+                    value={formData.country}
+                    onChange={handleChange}
+                  />
+                </label>
+                <br />
+                <label>
+                  City:
+                  <input
+                    type="text"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}
+                  />
+                </label>
+                <br />
+                <label>
+                  State:
+                  <input
+                    type="text"
+                    name="state"
+                    value={formData.state}
+                    onChange={handleChange}
+                  />
+                </label>
+                <br />
+                <label>
+                  Description:
+                  <textarea
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                  />
+                </label>
+                <br />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+
             {/* Education */}
             {resume?.education.length > 0 && (
               <>
-                <span className="!block w-full h-0 border-[1px] border-gray-500 my-t page-break"></span>
+                <span className="!block w-full h-0 border-[1px] border-gray-500 my-t mt-1 page-break"></span>
                 <h3 className="flex flex-row items-center gap-2 md:my-1 text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

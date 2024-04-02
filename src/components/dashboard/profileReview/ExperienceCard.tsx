@@ -4,6 +4,8 @@ import { setStepFive } from "@/store/registerSlice";
 import { EditIcon, deleteIcon, plusSimpleIcon } from "@/helpers/iconsProvider";
 
 import { useState } from "react";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { showSuccessToast } from "@/helpers/toast";
 
 const ExperienceCard = ({
   rec,
@@ -15,6 +17,7 @@ const ExperienceCard = ({
   const [showMore, setShowMore] = useState(false);
   const dispatch = useDispatch();
   const stepFive = useSelector((state: any) => state.register.stepFive);
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const { list, state } = stepFive;
   const handleEdit = (id: any) => {
     dispatch(setStepFive({ state: "edit", editId: id }));
@@ -22,8 +25,12 @@ const ExperienceCard = ({
   const handleDelete = (id: any) => {
     const newList = list.filter((rec: WorkExperience) => rec.id !== id);
     dispatch(setStepFive({ list: newList }));
+    setConfirmationModal(false);
+    showSuccessToast("Experience has been deleted");
   };
-
+  const handleOpenConfirmationModal = () => {
+    setConfirmationModal(true);
+  };
   return (
     <div
       className="w-full  rounded-lg shadow-md p-6 dark:border dark:border-[#2e2f45]"
@@ -65,7 +72,7 @@ const ExperienceCard = ({
             </button>
             <button
               className="text-red-500 hover:text-red-700"
-              onClick={(e) => handleDelete(rec.id)}
+              onClick={handleOpenConfirmationModal}
             >
               {deleteIcon}
             </button>
@@ -175,6 +182,13 @@ const ExperienceCard = ({
           </button>
         )}
       </p>
+      {confirmationModal && (
+        <DeleteConfirmationModal
+          message="Are you sure you want to delete ?"
+          onConfirm={() => handleDelete(rec.id)}
+          onCancel={() => setConfirmationModal(false)}
+        />
+      )}
     </div>
   );
 };

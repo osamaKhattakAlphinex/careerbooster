@@ -8,6 +8,7 @@ import EditCustomCard from "./EditCustomCard";
 import axios from "axios";
 import { showSuccessToast } from "@/helpers/toast";
 import { setCustomExperienceArray } from "@/store/resumeSlice";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 
 const CustomCard = ({
   rec,
@@ -25,11 +26,12 @@ const CustomCard = ({
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const stepCustom = useSelector((state: any) => state.register.stepCustom);
+  const [confirmationModal, setConfirmationModal] = useState(false);
   const { entries } = stepCustom[index];
   const handleEdit = () => {
     setEditCustom(true);
   };
-  const handleDelete =async () => {
+  const handleDelete = async () => {
     let updatedStepCustom = [...stepCustom];
     updatedStepCustom[index] = {
       ...updatedStepCustom[index],
@@ -39,7 +41,7 @@ const CustomCard = ({
     dispatch(setCustomExperienceArray(updatedStepCustom));
     setEditCustom(false);
     const newUserData = { ...userData, customDetails: updatedStepCustom };
-    dispatch(setUserData({...newUserData}));
+    dispatch(setUserData({ ...newUserData }));
     return axios
       .post("/api/users/updateUserData", {
         data: newUserData,
@@ -50,7 +52,9 @@ const CustomCard = ({
         }
       });
   };
-
+  const handleOpenConfirmationModal = () => {
+    setConfirmationModal(true);
+  };
   return (
     <>
       <div
@@ -82,7 +86,7 @@ const CustomCard = ({
               </button>
               <button
                 className="text-red-500 hover:text-red-700"
-                onClick={() => handleDelete()}
+                onClick={handleOpenConfirmationModal}
               >
                 {deleteIcon}
               </button>
@@ -195,6 +199,13 @@ const CustomCard = ({
       </div>
       {editCustom && (
         <EditCustomCard setEditCustom={setEditCustom} rec={rec} index={index} />
+      )}
+      {confirmationModal && (
+        <DeleteConfirmationModal
+          message="Are you sure you want to delete ?"
+          onConfirm={() => handleDelete()}
+          onCancel={() => setConfirmationModal(false)}
+        />
       )}
     </>
   );

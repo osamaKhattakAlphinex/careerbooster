@@ -10,16 +10,18 @@ const JDGenerator = ({ creditLimits }: { creditLimits: any }) => {
     <>
       <Link href="/linkedin-optimizer/job-description" className="no-underline">
         <div className="headline-generator dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-2 md:py-8 px-1 lg:px-6 flex flex-col md:flex-row md:align-center xs:gap-2 md:gap-5 justify-center items-center rounded-[10px] xs:mb-[8px] md:mb-[20px]">
-          <div
-            className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16`}
-          >
-            <Image
-              alt="Svg1"
-              src={Svg1}
-              width={32}
-              height={32}
-              // className="z-[10000px]"
-            />
+          <div className="w-16">
+            <div
+              className={`icon hidden rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16`}
+            >
+              <Image
+                alt="Svg1"
+                src={Svg1}
+                width={32}
+                height={32}
+                // className="z-[10000px]"
+              />
+            </div>
           </div>
           <div className="linkedintooltext flex flex-col lg:w-[24.0625rem] gap-2 p-4">
             <div className=" flex items-center  xs:justify-between sm:justify-between gap-4 md:justify-start flex-row">

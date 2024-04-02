@@ -9,7 +9,7 @@ const montserrat_heading_n = Montserrat({
   weight: "700",
   subsets: ["latin"],
 });
-const montserrat_thin = Montserrat({
+const montserrat_thin_c = Montserrat({
   weight: "500",
   subsets: ["latin"],
 });
@@ -78,7 +78,7 @@ const HeroArea = () => {
             <ul>
               <li>
                 <h3
-                  className={`xs:text-[14px] md:text-[22px] lg:text-[32px] text-gray-800 dark:text-gray-300 font-semibold  ${montserrat_thin.className}`}
+                  className={`xs:text-[14px] md:text-[22px] lg:text-[32px] text-gray-800 dark:text-gray-300 font-semibold  ${montserrat_thin_c.className}`}
                 >
                   Here{"'"}s how it works:{" "}
                 </h3>
@@ -112,7 +112,7 @@ const HeroArea = () => {
               </li>
               <li>
                 <h3
-                  className={`xs:text-[14px] md:text-[22px] lg:text-[28px] mt-4 md:mt-10 text-gray-800 dark:text-gray-300 font-semibold  ${montserrat_thin.className}`}
+                  className={`xs:text-[14px] md:text-[22px] lg:text-[28px] mt-4 md:mt-10 text-gray-800 dark:text-gray-300 font-semibold  ${montserrat_thin_c.className}`}
                 >
                   Additionally, our AI technology helps refine your cover letter
                   for clarity, conciseness, and professionalism, ensuring it
@@ -121,7 +121,7 @@ const HeroArea = () => {
               </li>
               <li>
                 <h3
-                  className={`xs:text-[14px] md:text-[22px] lg:text-[28px] my-4 md:mt-10 text-gray-800 dark:text-gray-300 font-semibold  ${montserrat_thin.className}`}
+                  className={`xs:text-[14px] md:text-[22px] lg:text-[28px] my-4 md:mt-10 text-gray-800 dark:text-gray-300 font-semibold  ${montserrat_thin_c.className}`}
                 >
                   Land your dream job with a cover letter that gets noticed!
                 </h3>
