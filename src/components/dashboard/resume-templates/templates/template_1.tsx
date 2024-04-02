@@ -3,7 +3,7 @@ import { memo, useEffect, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { TwitterPicker, ColorResult } from "react-color";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
 import useGetSummary from "@/hooks/useGetSummary";
@@ -17,10 +17,9 @@ import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
 import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { getYearsList, months } from "@/helpers/listsProvider";
-const years = getYearsList();
+import CustomResumeSection from "../../resume-builder/CustomResumeSection";
+import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
+
 const ResumeTemplate1 = ({
   streamedSummaryData,
   setStreamedSummaryData,
@@ -69,47 +68,6 @@ const ResumeTemplate1 = ({
     handleDropCustomExperience,
     handleDropSingleCustomSection,
   } = useDragAndDrop();
-  //form handling
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    jobTitle: "",
-    country: "",
-    city: "",
-    state: "",
-    description: "",
-  });
-
-  const formik = useFormik({
-    initialValues: {
-      jobTitle: "",
-      country: "",
-      city: "",
-      state: "",
-      fromMonth: "",
-      fromYear: "",
-      isContinue: false,
-      toMonth: "",
-      toYear: "",
-      description: "",
-    },
-    validationSchema: Yup.object({
-      jobTitle: Yup.string().required("Job Title is required"),
-    }),
-    onSubmit: async (values) => {
-      // Handle form submission here
-      console.log(values);
-    },
-  });
-
-  const handleChange = (e: any) => {
-    formik.setFieldValue(e.target.name, e.target.value);
-  };
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    formik.handleSubmit();
-  };
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
@@ -850,369 +808,357 @@ const ResumeTemplate1 = ({
                     const { name: sectionName, entries } = rec;
                     return (
                       <>
-                        {entries?.length > 0 && (
-                          <>
-                            <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-                            <h3
-                              className="md:my-1 relative hover:cursor-move group text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2"
-                              onDragStart={(e) =>
-                                e.dataTransfer.setData(
-                                  "text/plain",
-                                  index.toString()
-                                )
+                        <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
+                        <h3
+                          className="md:my-1 relative hover:cursor-move group text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2"
+                          onDragStart={(e) =>
+                            e.dataTransfer.setData(
+                              "text/plain",
+                              index.toString()
+                            )
+                          }
+                          onDragOver={(e) => e.preventDefault()}
+                          onDrop={(e) =>
+                            handleDropSingleCustomSection(e, index)
+                          }
+                          draggable
+                        >
+                          <EditableField
+                            value={sectionName}
+                            style={{ width: "fit-content" }}
+                            onSave={(value: string) => {
+                              if (value !== sectionName) {
+                                updateSaveHook.updateAndSaveCustomHeadings({
+                                  updatedDetail: { ...rec, name: value },
+                                  index: index,
+                                });
                               }
-                              onDragOver={(e) => e.preventDefault()}
-                              onDrop={(e) =>
-                                handleDropSingleCustomSection(e, index)
-                              }
-                              draggable
-                            >
-                              <EditableField
-                                value={sectionName}
-                                style={{ width: "fit-content" }}
-                                onSave={(value: string) => {
-                                  if (value !== sectionName) {
-                                    updateSaveHook.updateAndSaveCustomHeadings({
-                                      updatedDetail: { ...rec, name: value },
-                                      index: index,
-                                    });
-                                  }
-                                }}
-                              />
+                            }}
+                          />
 
+                          <div
+                            onClick={() =>
+                              handlers.handleDeleteSingleCustomSection(index)
+                            }
+                            className="hidden w-4 h-4 group-hover:block absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
+                          >
+                            {crossIcon1}
+                          </div>
+                        </h3>
+                        <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
+                        {entries?.map((entry: any, i: number) => {
+                          return (
+                            <Toolbar
+                              key={i}
+                              addAchivement={() =>
+                                setNewCustomWorkExperience(i)
+                              }
+                              deleteExperience={() =>
+                                handlers.handleDeleteCustomExperience(i, index)
+                              }
+                              regenrateAchivements={() =>
+                                handleCustomRegenrate(entry, i, index)
+                              }
+                              addNewLine={() => {
+                                handlers.handleAddCustomSpace(
+                                  i,
+                                  newCustomAchievement,
+                                  index
+                                );
+                                setNewCustomAchievement("");
+                              }}
+                            >
                               <div
-                                onClick={() =>
-                                  handlers.handleDeleteSingleCustomSection(
-                                    index
+                                key={i}
+                                className="border-2  md:w-full border-transparent hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
+                                onDragStart={(e) =>
+                                  e.dataTransfer.setData(
+                                    "text/plain",
+                                    i.toString()
                                   )
                                 }
-                                className="hidden w-4 h-4 group-hover:block absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
+                                onDragOver={(e) => e.preventDefault()}
+                                onDrop={(e) =>
+                                  handleDropCustomExperience(e, i, index)
+                                }
+                                draggable
                               >
-                                {crossIcon1}
-                              </div>
-                            </h3>
-
-                            <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
-
-                            {entries.map((entry: any, i: number) => {
-                              return (
-                                <Toolbar
-                                  key={i}
-                                  addAchivement={() =>
-                                    setNewCustomWorkExperience(i)
-                                  }
-                                  deleteExperience={() =>
-                                    handlers.handleDeleteCustomExperience(
-                                      i,
-                                      index
-                                    )
-                                  }
-                                  regenrateAchivements={() =>
-                                    handleCustomRegenrate(entry, i, index)
-                                  }
-                                  addNewLine={() => {
-                                    handlers.handleAddCustomSpace(
-                                      i,
-                                      newCustomAchievement,
-                                      index
-                                    );
-                                    setNewCustomAchievement("");
-                                  }}
-                                >
-                                  <div
-                                    key={i}
-                                    className="border-2  md:w-full border-transparent hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
-                                    onDragStart={(e) =>
-                                      e.dataTransfer.setData(
-                                        "text/plain",
-                                        i.toString()
-                                      )
-                                    }
-                                    onDragOver={(e) => e.preventDefault()}
-                                    onDrop={(e) =>
-                                      handleDropCustomExperience(e, i, index)
-                                    }
-                                    draggable
-                                  >
-                                    <h2 className="text-base font-bold  leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
-                                      <EditableField
-                                        value={entry?.title}
-                                        style={{ width: "100%" }}
-                                        onSave={(value: string) => {
-                                          handlers.handleSaveExperienceCustomDetail(
-                                            { title: value },
-                                            i,
-                                            index
-                                          );
-                                        }}
-                                      />
-                                    </h2>
-                                    <h2 className="flex gap-1 text-xs flex-wrap font-semibold leading-relaxed hover:cursor-default ">
-                                      {entry.fromMonth && (
-                                        <EditableField
-                                          value={`${entry?.fromMonth}`}
-                                          onSave={(value: string) => {
-                                            handlers.handleSaveExperienceCustomDetail(
-                                              { fromMonth: value },
-                                              i,
-                                              index
-                                            );
-                                          }}
-                                        />
-                                      )}
-                                      {entry.fromYear && (
-                                        <EditableField
-                                          value={`${entry?.fromYear}`}
-                                          onSave={(value: string) => {
-                                            handlers.handleSaveExperienceCustomDetail(
-                                              { fromYear: value },
-                                              i,
-                                              index
-                                            );
-                                          }}
-                                        />
-                                      )}
-                                      {entry.fromYear && <span>-</span>}
-                                      {entry.toMonth && !entry.isContinue && (
-                                        <EditableField
-                                          value={`${entry?.toMonth}`}
-                                          onSave={(value: string) => {
-                                            handlers.handleSaveExperienceCustomDetail(
-                                              { toMonth: value },
-                                              i,
-                                              index
-                                            );
-                                          }}
-                                        />
-                                      )}
-                                      {entry.toYear && !entry.isContinue && (
-                                        <EditableField
-                                          value={`${entry?.toYear}`}
-                                          onSave={(value: string) => {
-                                            handlers.handleSaveExperienceCustomDetail(
-                                              { toYear: value },
-                                              i,
-                                              index
-                                            );
-                                          }}
-                                        />
-                                      )}
-                                      {entry.isContinue && (
-                                        <EditableField
-                                          value={`${
-                                            entry?.isContinue && "Present"
-                                          }`}
-                                          onSave={(value: string) => {
-                                            handlers.handleSaveExperienceCustomDetail(
-                                              { toYear: value },
-                                              i,
-                                              index
-                                            );
-                                            handlers.handleSaveExperienceCustomDetail(
-                                              { isContinue: false },
-                                              i,
-                                              index
-                                            );
-                                          }}
-                                        />
-                                      )}
-                                      |{" "}
-                                      <span className="hover:shadow-md hover:bg-gray-100">
-                                        <EditableField
-                                          value={entry?.cityState}
-                                          onSave={(value: string) => {
-                                            handlers.handleSaveExperienceCustomDetail(
-                                              { cityState: value },
-                                              i,
-                                              index
-                                            );
-                                          }}
-                                        />
-                                      </span>{" "}
-                                      {entry?.cityState?.length > 0 && ","}
-                                      <span className="hover:shadow-md hover:bg-gray-100">
-                                        <EditableField
-                                          value={entry?.country}
-                                          onSave={(value: string) => {
-                                            handlers.handleSaveExperienceCustomDetail(
-                                              { country: value },
-                                              i,
-                                              index
-                                            );
-                                          }}
-                                        />
-                                      </span>
-                                    </h2>
-                                    <div className="px-4 py-1">
-                                      {entry?.achievements &&
-                                      i !== customRegeneratedRecordIndex ? (
-                                        <ul className="flex flex-col gap-1 pl-0 text-xs">
-                                          {entry?.achievements.map(
-                                            (achievement: any, ind: number) =>
-                                              achievement === "" ? (
-                                                <li
-                                                  key={ind}
-                                                  onDragStart={(e) => {
-                                                    setInsideIndex(ind);
-                                                  }}
-                                                  onDragOver={(e) =>
-                                                    e.preventDefault()
-                                                  }
-                                                  onDrop={(e) => {
-                                                    handleDropCustomAchievement(
-                                                      i,
-                                                      ind,
-                                                      insideIndex,
-                                                      index
-                                                    );
-                                                  }}
-                                                  draggable
-                                                  className="flex flex-row items-center justify-center h-8 hover:bg-slate-200 group"
-                                                >
-                                                  <div
-                                                    className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
-                                                    onClick={() => {
-                                                      handlers.handleRemoveExtraSpaceCustom(
-                                                        i,
-                                                        ind,
-                                                        index
-                                                      );
-                                                    }}
-                                                  >
-                                                    Remove This Extra Space
-                                                  </div>
-                                                </li>
-                                              ) : (
-                                                <li
-                                                  onDragStart={(e) => {
-                                                    setInsideIndex(ind);
-                                                  }}
-                                                  onDragOver={(e) =>
-                                                    e.preventDefault()
-                                                  }
-                                                  onDrop={(e) => {
-                                                    handleDropCustomAchievement(
-                                                      i,
-                                                      ind,
-                                                      insideIndex,
-                                                      index
-                                                    );
-                                                  }}
-                                                  draggable
-                                                  className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
-                                                  key={ind}
-                                                >
-                                                  <EditableField
-                                                    type="textarea"
-                                                    value={achievement}
-                                                    onSave={(value: string) => {
-                                                      handlers.handleUpdateAchivementCustom(
-                                                        i,
-                                                        ind,
-                                                        value,
-                                                        index
-                                                      );
-                                                    }}
-                                                  />
-                                                  <div
-                                                    onClick={() =>
-                                                      handlers.handleDeleteAchivementCustom(
-                                                        i,
-                                                        ind,
-                                                        index
-                                                      )
-                                                    }
-                                                    className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
-                                                  >
-                                                    {crossIcon1}
-                                                  </div>
-                                                </li>
-                                              )
-                                          )}
-                                        </ul>
-                                      ) : streamedCustomData ? (
-                                        <div
-                                          dangerouslySetInnerHTML={{
-                                            __html: streamedCustomData,
-                                          }}
-                                        ></div>
-                                      ) : (
-                                        <>
-                                          {customRegeneratedRecordIndex !==
-                                            null && (
-                                            <div className="text-center">
-                                              <div role="status">
-                                                <Loader />
-                                              </div>
-                                            </div>
-                                          )}
-                                        </>
-                                      )}
-
-                                      {newCustomWorkExperience === i ? (
-                                        <>
-                                          <div className="flex flex-wrap w-full gap-1 mt-4">
-                                            <input
-                                              className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
-                                              onChange={(e) =>
-                                                setNewCustomAchievement(
-                                                  e.target.value
-                                                )
-                                              }
-                                              value={newCustomAchievement}
-                                              name="newCustomAchievement"
-                                              id="newCustomAchievement"
-                                              autoComplete="off"
-                                              onKeyDown={(e) => {
-                                                if (e.key === "Enter") {
-                                                  e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
-                                                  // Save the new achievement to the state and possibly the database
-                                                  handlers.handleAddCustomAchivement(
-                                                    i,
-                                                    newCustomAchievement,
-                                                    index
-                                                  );
-                                                  setNewCustomAchievement("");
-                                                }
+                                <h2 className="text-base font-bold  leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
+                                  <EditableField
+                                    value={entry?.title}
+                                    style={{ width: "100%" }}
+                                    onSave={(value: string) => {
+                                      handlers.handleSaveExperienceCustomDetail(
+                                        { title: value },
+                                        i,
+                                        index
+                                      );
+                                    }}
+                                  />
+                                </h2>
+                                <h2 className="flex gap-1 text-xs flex-wrap font-semibold leading-relaxed hover:cursor-default ">
+                                  {entry.fromMonth && (
+                                    <EditableField
+                                      value={`${entry?.fromMonth}`}
+                                      onSave={(value: string) => {
+                                        handlers.handleSaveExperienceCustomDetail(
+                                          { fromMonth: value },
+                                          i,
+                                          index
+                                        );
+                                      }}
+                                    />
+                                  )}
+                                  {entry.fromYear && (
+                                    <EditableField
+                                      value={`${entry?.fromYear}`}
+                                      onSave={(value: string) => {
+                                        handlers.handleSaveExperienceCustomDetail(
+                                          { fromYear: value },
+                                          i,
+                                          index
+                                        );
+                                      }}
+                                    />
+                                  )}
+                                  {entry.fromYear && <span>-</span>}
+                                  {entry.toMonth && !entry.isContinue && (
+                                    <EditableField
+                                      value={`${entry?.toMonth}`}
+                                      onSave={(value: string) => {
+                                        handlers.handleSaveExperienceCustomDetail(
+                                          { toMonth: value },
+                                          i,
+                                          index
+                                        );
+                                      }}
+                                    />
+                                  )}
+                                  {entry.toYear && !entry.isContinue && (
+                                    <EditableField
+                                      value={`${entry?.toYear}`}
+                                      onSave={(value: string) => {
+                                        handlers.handleSaveExperienceCustomDetail(
+                                          { toYear: value },
+                                          i,
+                                          index
+                                        );
+                                      }}
+                                    />
+                                  )}
+                                  {entry.isContinue && (
+                                    <EditableField
+                                      value={`${
+                                        entry?.isContinue && "Present"
+                                      }`}
+                                      onSave={(value: string) => {
+                                        handlers.handleSaveExperienceCustomDetail(
+                                          { toYear: value },
+                                          i,
+                                          index
+                                        );
+                                        handlers.handleSaveExperienceCustomDetail(
+                                          { isContinue: false },
+                                          i,
+                                          index
+                                        );
+                                      }}
+                                    />
+                                  )}
+                                  |{" "}
+                                  <span className="hover:shadow-md hover:bg-gray-100">
+                                    <EditableField
+                                      value={entry?.cityState}
+                                      onSave={(value: string) => {
+                                        handlers.handleSaveExperienceCustomDetail(
+                                          { cityState: value },
+                                          i,
+                                          index
+                                        );
+                                      }}
+                                    />
+                                  </span>{" "}
+                                  {entry?.cityState?.length > 0 && ","}
+                                  <span className="hover:shadow-md hover:bg-gray-100">
+                                    <EditableField
+                                      value={entry?.country}
+                                      onSave={(value: string) => {
+                                        handlers.handleSaveExperienceCustomDetail(
+                                          { country: value },
+                                          i,
+                                          index
+                                        );
+                                      }}
+                                    />
+                                  </span>
+                                </h2>
+                                <div className="px-4 py-1">
+                                  {entry?.achievements &&
+                                  i !== customRegeneratedRecordIndex ? (
+                                    <ul className="flex flex-col gap-1 pl-0 text-xs">
+                                      {entry?.achievements.map(
+                                        (achievement: any, ind: number) =>
+                                          achievement === "" ? (
+                                            <li
+                                              key={ind}
+                                              onDragStart={(e) => {
+                                                setInsideIndex(ind);
                                               }}
-                                            />
-                                            <div className="flex w-full gap-2 my-2">
-                                              <button
-                                                className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
+                                              onDragOver={(e) =>
+                                                e.preventDefault()
+                                              }
+                                              onDrop={(e) => {
+                                                handleDropCustomAchievement(
+                                                  i,
+                                                  ind,
+                                                  insideIndex,
+                                                  index
+                                                );
+                                              }}
+                                              draggable
+                                              className="flex flex-row items-center justify-center h-8 hover:bg-slate-200 group"
+                                            >
+                                              <div
+                                                className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
                                                 onClick={() => {
-                                                  // Save the new achievement to the state and possibly the database
-                                                  handlers.handleAddCustomAchivement(
+                                                  handlers.handleRemoveExtraSpaceCustom(
                                                     i,
-                                                    newCustomAchievement,
+                                                    ind,
                                                     index
                                                   );
-                                                  setNewCustomAchievement("");
                                                 }}
                                               >
-                                                Save
-                                              </button>
-                                              <button
-                                                onClick={() => {
-                                                  setNewCustomAchievement("");
-                                                  setNewCustomWorkExperience(
-                                                    -1
+                                                Remove This Extra Space
+                                              </div>
+                                            </li>
+                                          ) : (
+                                            <li
+                                              onDragStart={(e) => {
+                                                setInsideIndex(ind);
+                                              }}
+                                              onDragOver={(e) =>
+                                                e.preventDefault()
+                                              }
+                                              onDrop={(e) => {
+                                                handleDropCustomAchievement(
+                                                  i,
+                                                  ind,
+                                                  insideIndex,
+                                                  index
+                                                );
+                                              }}
+                                              draggable
+                                              className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
+                                              key={ind}
+                                            >
+                                              <EditableField
+                                                type="textarea"
+                                                value={achievement}
+                                                onSave={(value: string) => {
+                                                  handlers.handleUpdateAchivementCustom(
+                                                    i,
+                                                    ind,
+                                                    value,
+                                                    index
                                                   );
                                                 }}
-                                                className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
+                                              />
+                                              <div
+                                                onClick={() =>
+                                                  handlers.handleDeleteAchivementCustom(
+                                                    i,
+                                                    ind,
+                                                    index
+                                                  )
+                                                }
+                                                className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
                                               >
-                                                Cancel
-                                              </button>
-                                            </div>
+                                                {crossIcon1}
+                                              </div>
+                                            </li>
+                                          )
+                                      )}
+                                    </ul>
+                                  ) : streamedCustomData ? (
+                                    <div
+                                      dangerouslySetInnerHTML={{
+                                        __html: streamedCustomData,
+                                      }}
+                                    ></div>
+                                  ) : (
+                                    <>
+                                      {customRegeneratedRecordIndex !==
+                                        null && (
+                                        <div className="text-center">
+                                          <div role="status">
+                                            <Loader />
                                           </div>
-                                        </>
-                                      ) : null}
-                                    </div>
-                                  </div>
-                                </Toolbar>
-                              );
-                            })}
-                          </>
-                        )}
+                                        </div>
+                                      )}
+                                    </>
+                                  )}
+
+                                  {newCustomWorkExperience === i ? (
+                                    <>
+                                      <div className="flex flex-wrap w-full gap-1 mt-4">
+                                        <input
+                                          className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
+                                          onChange={(e) =>
+                                            setNewCustomAchievement(
+                                              e.target.value
+                                            )
+                                          }
+                                          value={newCustomAchievement}
+                                          name="newCustomAchievement"
+                                          id="newCustomAchievement"
+                                          autoComplete="off"
+                                          onKeyDown={(e) => {
+                                            if (e.key === "Enter") {
+                                              e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
+                                              // Save the new achievement to the state and possibly the database
+                                              handlers.handleAddCustomAchivement(
+                                                i,
+                                                newCustomAchievement,
+                                                index
+                                              );
+                                              setNewCustomAchievement("");
+                                            }
+                                          }}
+                                        />
+                                        <div className="flex w-full gap-2 my-2">
+                                          <button
+                                            className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
+                                            onClick={() => {
+                                              // Save the new achievement to the state and possibly the database
+                                              handlers.handleAddCustomAchivement(
+                                                i,
+                                                newCustomAchievement,
+                                                index
+                                              );
+                                              setNewCustomAchievement("");
+                                            }}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            onClick={() => {
+                                              setNewCustomAchievement("");
+                                              setNewCustomWorkExperience(-1);
+                                            }}
+                                            className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
+                                          >
+                                            Cancel
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </>
+                                  ) : null}
+                                </div>
+                              </div>
+                            </Toolbar>
+                          );
+                        })}
+                        <AddItemToCustomSection index={index}/>
                       </>
                     );
                   }
@@ -1226,222 +1172,8 @@ const ResumeTemplate1 = ({
                 }}
               ></div>
             )}
-            <div>
-              <button
-                onClick={() => {}}
-                className="text-sm text-gray-900 cursor-pointer hover:opacity-80 font-semibold bg-gray-200 py-2 rounded-lg px-3 m-2   "
-              >
-                Add Custom Section
-              </button>
-              <span className="!block w-full h-0 border-[1px] border-gray-500 my-t page-break"></span>
-              <h3 className="flex flex-row items-center gap-2 md:my-1 text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
-                <EditableField
-                  value={" Untitled"}
-                  style={{ width: "fit-content" }}
-                  onSave={(value: string) => {
-                    console.log("Add custom section");
-                  }}
-                />
-              </h3>
-              <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 my-b"></span>
-              <button
-                onClick={() => {}}
-                className="text-sm text-gray-900 cursor-pointer hover:opacity-80 font-semibold bg-gray-200 py-2 rounded-lg px-3 m-2   "
-              >
-                Add Items
-              </button>
-            </div>
             {/* Add Custom */}
-            <div className="my-2">
-              <form
-                onSubmit={handleSubmit}
-                className="border rounded-lg shadow-md p-6 space-y-4"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <label className="flex flex-col">
-                    <span className="text-sm">Job Title:</span>
-                    <input
-                      type="text"
-                      name="jobTitle"
-                      value={formik.values.jobTitle}
-                      onChange={handleChange}
-                      className="py-2 px-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
-                    />
-                  </label>
-                  <label className="flex flex-col">
-                    <span className="text-sm">Country:</span>
-                    <input
-                      type="text"
-                      name="country"
-                      value={formik.values.country}
-                      onChange={handleChange}
-                      className="py-2 px-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
-                    />
-                  </label>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <label className="flex flex-col">
-                    <span className="text-sm">City:</span>
-                    <input
-                      type="text"
-                      name="city"
-                      value={formik.values.city}
-                      onChange={handleChange}
-                      className="py-2 px-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
-                    />
-                  </label>
-                  <label className="flex flex-col">
-                    <span className="text-sm">State:</span>
-                    <input
-                      type="text"
-                      name="state"
-                      value={formik.values.state}
-                      onChange={handleChange}
-                      className="py-2 px-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
-                    />
-                  </label>
-                </div>
-                <div className="">
-                  <label className="block text-sm font-medium">
-                    Time Period
-                  </label>
-                  <div className="flex space-x-4 mt-4">
-                    <div className="w-1/2">
-                      <label className="block text-xs text-gray-950">
-                        From Month
-                      </label>
-                      <select
-                        className="py-2 px-3 mt-1 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
-                        name="fromMonth"
-                        onBlur={formik.handleBlur}
-                        onChange={formik.handleChange}
-                        value={formik.values.fromMonth}
-                      >
-                        <option value="" className="text-gray-950">
-                          -- select --
-                        </option>
-                        {months.map((month) => (
-                          <option
-                            className="text-gray-950"
-                            key={month}
-                            value={month}
-                          >
-                            {month}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className="w-1/2">
-                      <label className="block text-xs text-gray-500">
-                        From Year
-                      </label>
-
-                      <select
-                        className="py-2 px-3 mt-1 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
-                        name="fromYear"
-                        onBlur={formik.handleBlur}
-                        onChange={formik.handleChange}
-                        value={formik.values.fromYear}
-                      >
-                        <option value="" className="text-gray-950">
-                          -- select --
-                        </option>
-                        {years.map((year) => (
-                          <option
-                            className="text-gray-950"
-                            key={year}
-                            value={year}
-                          >
-                            {year}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                  {!formik.values.isContinue && (
-                    <div className="flex space-x-4 mt-4">
-                      <div className="w-1/2">
-                        <label className="block text-xs text-gray-500">
-                          To Month
-                        </label>
-                        <select
-                          className="py-2 px-3 mt-1 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
-                          name="toMonth"
-                          onBlur={formik.handleBlur}
-                          onChange={formik.handleChange}
-                          value={formik.values.toMonth}
-                        >
-                          <option value="" className="text-gray-950">
-                            -- select --
-                          </option>
-                          {months.map((month) => (
-                            <option
-                              className="text-gray-950"
-                              key={month}
-                              value={month}
-                            >
-                              {month}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                      <div className="w-1/2">
-                        <label className="block text-xs text-gray-500">
-                          To Year
-                        </label>
-                        <select
-                          className="py-2 px-3 mt-1 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
-                          name="toYear"
-                          onBlur={formik.handleBlur}
-                          onChange={formik.handleChange}
-                          value={formik.values.toYear}
-                        >
-                          <option value="" className="text-gray-950">
-                            -- select --
-                          </option>
-                          {years.map((year) => (
-                            <option
-                              className="text-gray-950"
-                              key={year}
-                              value={year}
-                            >
-                              {year}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <label className="flex flex-col">
-                  <span className="text-sm">Description:</span>
-                  <textarea
-                    name="description"
-                    value={formik.values.description}
-                    onChange={handleChange}
-                    className="py-2 px-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
-                  />
-                </label>
-
-                <div className="w-full">
-                  <button
-                    type="submit"
-                    // disabled={String(formik.errors.title) !== "undefined"}
-                    className=" px-4 !bg-blue-500 text-white xs:my-3 md:my-0  rounded-md py-2 hover:!bg-blue-600 mr-4 disabled:bg-blue-300"
-                  >
-                    Save
-                  </button>
-                  <button
-                    type="button"
-                    // onClick={() => setAddNew(false)}
-                    className=" px-4 !bg-gray-500 text-white rounded-md py-2 hover:!bg-gray-600"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            </div>
+            <CustomResumeSection />
 
             {/* Education */}
             {resume?.education.length > 0 && (

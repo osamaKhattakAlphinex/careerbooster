@@ -14,7 +14,7 @@ import useSaveResumeToDB from "./useSaveToDB";
 import useGetCreditLimits from "./useGetCreditLimits";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
-const useSingleJDGenerate = (setStreamedJDData: any,setStreamedCustomData:any) => {
+const useSingleJDGenerate = (setStreamedJDData: any,setStreamedCustomData:any="") => {
   const { getUserDataIfNotExists } = useGetUserData();
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
