@@ -1,7 +1,5 @@
 import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
-import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
-
 import Link from "next/link";
 import { chevronRight } from "@/helpers/iconsProvider";
 

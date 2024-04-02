@@ -4,7 +4,6 @@ import Link from "next/link";
 import { chevronRight } from "@/helpers/iconsProvider";
 
 const JDGenerator = ({ creditLimits }: { creditLimits: any }) => {
-  // local States
 
   return (
     <Link
