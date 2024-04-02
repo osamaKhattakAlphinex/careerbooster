@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import {
   infoSmallIcon,
+  phoneIcon,
   refreshIconRotating,
   uploadIcon,
 } from "@/helpers/iconsProvider";
@@ -56,11 +57,12 @@ const RegistrationForm = () => {
       firstName: "",
       lastName: "",
       email: "",
+      phone: "",
       // password: "",
       // confirmpassword: "",
       // status: "pending",
-      terms: true,
-      alertConsent: true,
+      terms: false,
+      alertConsent: false,
       file: "",
     },
 
@@ -70,6 +72,9 @@ const RegistrationForm = () => {
       email: Yup.string()
         .email("Invalid Email Address")
         .required("Email is Required"),
+      phone: Yup.string()
+        .matches(/^[0-9]+$/, "Phone number must contain only digits")
+        .required("Phone number is Required"),
       // password: Yup.string().required("Password is Required"),
       // confirmpassword: Yup.string()
       //   .required("Enter Password again")
@@ -108,7 +113,7 @@ const RegistrationForm = () => {
             if (values.file !== "") {
               await UpdateGohighlevel(obj);
               // await moveResumeToUserFolder(values.file, values.email);
-              await updateUser(values.file, values.email);
+              await updateUser(values.file, values.email, values.phone);
             }
 
             // TODO REMOVE CONTENT FROM LOCAL STOARGE
@@ -165,11 +170,14 @@ const RegistrationForm = () => {
       });
   };
 
-  const updateUser = (file: string, email: string) => {
+  const updateUser = (file: string, email: string, phone:string) => {
     if (file && email) {
+      console.log(phone)
+      // debugger
       return axios.post("/api/users/updateUser", {
         newFile: file,
         email: email,
+        registeredPhone: phone,
       });
     }
   };
@@ -497,6 +505,35 @@ const RegistrationForm = () => {
               {formik.touched.email && formik.errors.email && (
                 <p className="text-red-600 pt-3">
                   {formik.touched.email && formik.errors.email}
+                </p>
+              )}
+            </div>
+            <div className="text-start my-2">
+              <div className="flex flex-wrap relative items-stretch  w-full">
+                <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
+                  
+                  {phoneIcon}
+                </span>
+
+                {/* <label
+                            htmlFor="Emil"
+                            className={`block mb-2 text-sm font-medium text-gray-900  `}
+                          >
+                            Enter Your Email
+                          </label> */}
+                <input
+                  type="tel"
+                  name="phone"
+                  className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
+                  placeholder="Enter Your Phone Number"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.phone}
+                />
+              </div>
+              {formik.touched.phone && formik.errors.phone && (
+                <p className="text-red-600 pt-3">
+                  {formik.touched.phone && formik.errors.phone}
                 </p>
               )}
             </div>

@@ -25,6 +25,11 @@ const UserSchema = new Schema(
       unique: true,
       required: true,
     },
+    registeredPhone: {
+      type: String,
+      // required: true,
+
+    },
 
     linkedin: {
       type: String,
