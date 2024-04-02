@@ -47,6 +47,9 @@ const ResumeTemplate1 = ({
   // const [color, setColor] = useState("#e04127");
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [confirmationModal, setConfirmationModal] = useState(false);
+
+  const [confirmationModalAchivement, setConfirmationModalAchivement] =
+    useState(false);
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
@@ -837,14 +840,24 @@ const ResumeTemplate1 = ({
                           />
 
                           <div
-                            onClick={() =>
-                              handlers.handleDeleteSingleCustomSection(index)
-                            }
+                            onClick={() => setConfirmationModalAchivement(true)}
                             className="hidden w-4 h-4 group-hover:block absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
                           >
                             {crossIcon1}
                           </div>
                         </h3>
+                        {confirmationModalAchivement && (
+                          <DeleteConfirmationModal
+                            message="Are you sure you want to delete ?"
+                            onCancel={() =>
+                              setConfirmationModalAchivement(false)
+                            }
+                            onConfirm={() => {
+                              setConfirmationModalAchivement(false);
+                              handlers.handleDeleteSingleCustomSection(index);
+                            }}
+                          />
+                        )}
                         <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
                         {entries?.map((entry: any, i: number) => {
                           return (
@@ -1158,7 +1171,7 @@ const ResumeTemplate1 = ({
                             </Toolbar>
                           );
                         })}
-                        <AddItemToCustomSection index={index}/>
+                        <AddItemToCustomSection index={index} />
                       </>
                     );
                   }
