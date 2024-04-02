@@ -102,11 +102,11 @@ const ResumeTemplate1 = ({
     },
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     formik.setFieldValue(e.target.name, e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     formik.handleSubmit();
   };
@@ -1423,12 +1423,23 @@ const ResumeTemplate1 = ({
                     className="py-2 px-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 bg-gray-200 focus:border-[1px]"
                   />
                 </label>
-                <button
-                  type="submit"
-                  className="py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-                >
-                  Submit
-                </button>
+
+                <div className="w-full">
+                  <button
+                    type="submit"
+                    // disabled={String(formik.errors.title) !== "undefined"}
+                    className=" px-4 !bg-blue-500 text-white xs:my-3 md:my-0  rounded-md py-2 hover:!bg-blue-600 mr-4 disabled:bg-blue-300"
+                  >
+                    Save
+                  </button>
+                  <button
+                    type="button"
+                    // onClick={() => setAddNew(false)}
+                    className=" px-4 !bg-gray-500 text-white rounded-md py-2 hover:!bg-gray-600"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </form>
             </div>
 
