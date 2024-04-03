@@ -2,9 +2,8 @@
 import { memo, useEffect, useState } from "react";
 import { Education } from "@/store/userDataSlice";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { setField } from "@/store/resumeSlice";
 import {
   crossIcon1,
   emailIcon,
@@ -21,7 +20,6 @@ import useGetSummary from "@/hooks/useGetSummary";
 import Toolbar from "@/components/dashboard/Toolbar";
 import EditableField from "@/components/dashboard/EditableField";
 import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
-import useSaveResumeToDB from "@/hooks/useSaveToDB";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
 import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
@@ -34,16 +32,22 @@ import { useColorContext } from "@/context/ResumeColorContext";
 import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
 import CustomResumeSection from "../../resume-builder/CustomResumeSection";
 const ResumeTemplate10 = () => {
-  const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
+  const [
+    newCustomWorkExperienceAchievemnt,
+    setNewCustomWorkExperienceAchievemnt,
+  ] = useState<number>();
+  const [
+    customRegeneratedRecordWorkIndex,
+    setCustomRegeneratedRecordWorkIndex,
+  ] = useState<number | null>(null);
   const { color, setColor, color_second, setColor_second } = useColorContext();
   // const [color, setColor] = useState("#043382");
   // const [color_second, setColor_second] = useState("#1a202c");
   const [primarySkill, setPrimarySkill] = useState<string>("");
-  const userData = useSelector((state: any) => state.userData);
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
   const [confirmationModal, setConfirmationModal] = useState(false);
@@ -54,8 +58,6 @@ const ResumeTemplate10 = () => {
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
   const [streamedJDData, setStreamedJDData] = useState<any>("");
-
-  const { saveResumeToDB } = useSaveResumeToDB();
 
   //add new code
   const [customRegeneratedRecordIndex, setCustomRegeneratedRecordIndex] =
@@ -78,12 +80,14 @@ const ResumeTemplate10 = () => {
   const handleCustomRegenrate = (rec: any, i: number, index: number) => {
     getOneCustomWorkExperienceNew(rec, index);
     setCustomRegeneratedRecordIndex(i);
+    setCustomRegeneratedRecordWorkIndex(index);
   };
   const [newCustomAchievement, setNewCustomAchievement] = useState("");
   useEffect(() => {
     if (streamedCustomData === "") {
       setStreamedCustomData(null);
       setCustomRegeneratedRecordIndex(null);
+      setCustomRegeneratedRecordWorkIndex(null);
     }
   }, [streamedCustomData]);
   //New code end
@@ -865,7 +869,10 @@ const ResumeTemplate10 = () => {
                       return (
                         <Toolbar
                           key={i}
-                          addAchivement={() => setNewCustomWorkExperience(i)}
+                          addAchivement={() => {
+                            setNewCustomWorkExperience(index);
+                            setNewCustomWorkExperienceAchievemnt(i);
+                          }}
                           deleteExperience={() =>
                             handlers.handleDeleteCustomExperience(i, index)
                           }
@@ -1002,7 +1009,8 @@ const ResumeTemplate10 = () => {
                             </h2>
                             <div className="px-4 py-1">
                               {entry?.achievements &&
-                              i !== customRegeneratedRecordIndex ? (
+                              (i !== customRegeneratedRecordIndex ||
+                                index !== customRegeneratedRecordWorkIndex) ? (
                                 <ul className="flex flex-col gap-1 pl-0 text-xs">
                                   {entry?.achievements.map(
                                     (achievement: any, ind: number) =>
@@ -1091,17 +1099,20 @@ const ResumeTemplate10 = () => {
                                 ></div>
                               ) : (
                                 <>
-                                  {customRegeneratedRecordIndex !== null && (
-                                    <div className="text-center">
-                                      <div role="status">
-                                        <Loader />
+                                  {customRegeneratedRecordIndex === i &&
+                                    customRegeneratedRecordWorkIndex ===
+                                      index && (
+                                      <div className="text-center">
+                                        <div role="status">
+                                          <Loader />
+                                        </div>
                                       </div>
-                                    </div>
-                                  )}
+                                    )}
                                 </>
                               )}
 
-                              {newCustomWorkExperience === i ? (
+                              {newCustomWorkExperience === index &&
+                              newCustomWorkExperienceAchievemnt === i ? (
                                 <>
                                   <div className="flex flex-wrap w-full gap-1 mt-4">
                                     <input
@@ -1145,6 +1156,9 @@ const ResumeTemplate10 = () => {
                                         onClick={() => {
                                           setNewCustomAchievement("");
                                           setNewCustomWorkExperience(-1);
+                                          setNewCustomWorkExperienceAchievemnt(
+                                            -1
+                                          );
                                         }}
                                         className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
                                       >

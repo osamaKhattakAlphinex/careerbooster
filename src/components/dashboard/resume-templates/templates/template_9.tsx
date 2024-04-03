@@ -37,14 +37,20 @@ const ResumeTemplate9 = () => {
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
-
+  const [
+    newCustomWorkExperienceAchievemnt,
+    setNewCustomWorkExperienceAchievemnt,
+  ] = useState<number>();
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const [streamedCustomData, setStreamedCustomData] = useState<any>("");
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
-
+  const [
+    customRegeneratedRecordWorkIndex,
+    setCustomRegeneratedRecordWorkIndex,
+  ] = useState<number | null>(null);
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
@@ -75,12 +81,14 @@ const ResumeTemplate9 = () => {
   const handleCustomRegenrate = (rec: any, i: number, index: number) => {
     getOneCustomWorkExperienceNew(rec, index);
     setCustomRegeneratedRecordIndex(i);
+    setCustomRegeneratedRecordWorkIndex(index);
   };
   const [newCustomAchievement, setNewCustomAchievement] = useState("");
   useEffect(() => {
     if (streamedCustomData === "") {
       setStreamedCustomData(null);
       setCustomRegeneratedRecordIndex(null);
+      setCustomRegeneratedRecordWorkIndex(null);
     }
   }, [streamedCustomData]);
   //New code end
@@ -792,7 +800,10 @@ const ResumeTemplate9 = () => {
                       return (
                         <Toolbar
                           key={i}
-                          addAchivement={() => setNewCustomWorkExperience(i)}
+                          addAchivement={() => {
+                            setNewCustomWorkExperience(index);
+                            setNewCustomWorkExperienceAchievemnt(i);
+                          }}
                           deleteExperience={() =>
                             handlers.handleDeleteCustomExperience(i, index)
                           }
@@ -929,7 +940,8 @@ const ResumeTemplate9 = () => {
                             </h2>
                             <div className="px-4 py-1">
                               {entry?.achievements &&
-                              i !== customRegeneratedRecordIndex ? (
+                              (i !== customRegeneratedRecordIndex ||
+                                index !== customRegeneratedRecordWorkIndex) ? (
                                 <ul className="flex flex-col gap-1 pl-0 text-xs">
                                   {entry?.achievements.map(
                                     (achievement: any, ind: number) =>
@@ -1018,17 +1030,20 @@ const ResumeTemplate9 = () => {
                                 ></div>
                               ) : (
                                 <>
-                                  {customRegeneratedRecordIndex !== null && (
-                                    <div className="text-center">
-                                      <div role="status">
-                                        <Loader />
+                                  {customRegeneratedRecordIndex === i &&
+                                    customRegeneratedRecordWorkIndex ===
+                                      index && (
+                                      <div className="text-center">
+                                        <div role="status">
+                                          <Loader />
+                                        </div>
                                       </div>
-                                    </div>
-                                  )}
+                                    )}
                                 </>
                               )}
 
-                              {newCustomWorkExperience === i ? (
+                              {newCustomWorkExperience === index &&
+                              newCustomWorkExperienceAchievemnt === i ? (
                                 <>
                                   <div className="flex flex-wrap w-full gap-1 mt-4">
                                     <input
@@ -1072,6 +1087,9 @@ const ResumeTemplate9 = () => {
                                         onClick={() => {
                                           setNewCustomAchievement("");
                                           setNewCustomWorkExperience(-1);
+                                          setNewCustomWorkExperienceAchievemnt(
+                                            -1
+                                          );
                                         }}
                                         className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
                                       >
