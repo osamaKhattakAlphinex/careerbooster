@@ -8,10 +8,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import {
   infoSmallIcon,
+  phoneIcon,
   refreshIconRotating,
   uploadIcon,
 } from "@/helpers/iconsProvider";
-import { useDispatch } from "react-redux";
 import FileUploadHandler from "@/components/dashboard/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
 import WordFileHandler from "@/components/dashboard/WordFileHandler";
@@ -20,18 +20,6 @@ import WordFileHandler from "@/components/dashboard/WordFileHandler";
 //   title: "CareerBooster.AI-Register",
 // };
 
-function removeSpecialChars(str: string) {
-  // Remove new lines
-  str = str.replace(/[\r\n]+/gm, "");
-
-  // Remove Unicode characters
-  str = str.replace(/[^\x00-\x7F]/g, "");
-
-  // Remove icons
-  str = str.replace(/[^\w\s]/gi, "");
-
-  return str;
-}
 const RegistrationForm = () => {
   const router = useRouter();
   const params = useSearchParams();
@@ -49,18 +37,18 @@ const RegistrationForm = () => {
   const content = params?.get("content");
 
   // Redux
-  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
       email: "",
+      phone: "",
       // password: "",
       // confirmpassword: "",
       // status: "pending",
-      terms: true,
-      alertConsent: true,
+      terms: false,
+      alertConsent: false,
       file: "",
     },
 
@@ -70,6 +58,7 @@ const RegistrationForm = () => {
       email: Yup.string()
         .email("Invalid Email Address")
         .required("Email is Required"),
+      phone: Yup.string().required("Phone number is Required"),
       // password: Yup.string().required("Password is Required"),
       // confirmpassword: Yup.string()
       //   .required("Enter Password again")
@@ -89,6 +78,7 @@ const RegistrationForm = () => {
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
+          registeredPhone: values.phone,
           // password: values.password,
 
           uploadedResume: {
@@ -167,6 +157,7 @@ const RegistrationForm = () => {
 
   const updateUser = (file: string, email: string) => {
     if (file && email) {
+      // debugger
       return axios.post("/api/users/updateUser", {
         newFile: file,
         email: email,
@@ -199,10 +190,10 @@ const RegistrationForm = () => {
               userData = await JSON.parse(res.result);
             }
             router.replace(
-              `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&content=true`
+              `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&phone=${userData.registeredPhone}&content=true`
             );
 
-            if (userData.firstName || userData.lastName || userData.email) {
+            if (userData.firstName || userData.lastName || userData.email || userData.registeredPhone) {
               formik.setFieldValue(
                 "firstName",
                 removeDashesFromString(userData.firstName)
@@ -214,6 +205,10 @@ const RegistrationForm = () => {
               formik.setFieldValue(
                 "email",
                 removeDashesFromString(userData.email)
+              );
+              formik.setFieldValue(
+                "phone",
+                removeDashesFromString(userData.registeredPhone)
               );
             }
             // dispatch(setUploadedFileName(userData.files));
@@ -252,6 +247,7 @@ const RegistrationForm = () => {
     const firstName = params?.get("firstName");
     const lastName = params?.get("lastName");
     const email = params?.get("email");
+    const registeredPhone = params?.get("phone");
     const file = params?.get("file");
 
     if (firstName && lastName && email) {
@@ -262,6 +258,9 @@ const RegistrationForm = () => {
     }
     if (email) {
       formik.setFieldValue("email", removeDashesFromString(email));
+    }
+    if (registeredPhone) {
+      formik.setFieldValue("phone", removeDashesFromString(registeredPhone));
     }
     if (file) {
       formik.setFieldValue("file", file);
@@ -497,6 +496,35 @@ const RegistrationForm = () => {
               {formik.touched.email && formik.errors.email && (
                 <p className="text-red-600 pt-3">
                   {formik.touched.email && formik.errors.email}
+                </p>
+              )}
+            </div>
+            <div className="text-start my-2">
+              <div className="flex flex-wrap relative items-stretch  w-full">
+                <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
+                  
+                  {phoneIcon}
+                </span>
+
+                {/* <label
+                            htmlFor="Emil"
+                            className={`block mb-2 text-sm font-medium text-gray-900  `}
+                          >
+                            Enter Your Email
+                          </label> */}
+                <input
+                  type="tel"
+                  name="phone"
+                  className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
+                  placeholder="Enter Your Phone Number"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.phone}
+                />
+              </div>
+              {formik.touched.phone && formik.errors.phone && (
+                <p className="text-red-600 pt-3">
+                  {formik.touched.phone && formik.errors.phone}
                 </p>
               )}
             </div>
