@@ -301,20 +301,29 @@ export default function CoverLetterPage() {
     setStreamedData(coverLetter.coverLetterText);
   }, [coverLetter.coverLetterText]);
 
-  const { coverLetterElementRef, tourBotRef } = useTourContext();
+  const { coverLetterElementRef, tourBotRef, historyCardRef } =
+    useTourContext();
 
   const tourBotConfig = {
     name: "coverLetter",
     audios: [
       {
-        url: "/speech_cover_letter_card.mp3",
-        for: "coverLetter",
+        url: "/cover-letter-history-card.mp3",
+        for: "history",
+      },
+      {
+        url: "/cover-letter-main.mp3",
+        for: "tool",
       },
     ],
     toolRefs: [
       {
+        ref: historyCardRef,
+        for: "history",
+      },
+      {
         ref: coverLetterElementRef,
-        for: "coverLetter",
+        for: "tool",
       },
     ],
   };
@@ -334,7 +343,9 @@ export default function CoverLetterPage() {
     <>
       <div className="w-full sm:w-full z-1000">
         <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]">
-          <PreviouslyGeneratedList {...historyProps} />
+          <div ref={(ref: any) => (historyCardRef.current = ref)}>
+            <PreviouslyGeneratedList {...historyProps} />
+          </div>
 
           {/* <MainCoverLetterTool /> */}
           <>
