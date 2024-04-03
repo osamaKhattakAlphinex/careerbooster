@@ -343,9 +343,7 @@ export default function CoverLetterPage() {
     <>
       <div className="w-full sm:w-full z-1000">
         <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]">
-          <div ref={(ref: any) => (historyCardRef.current = ref)}>
-            <PreviouslyGeneratedList {...historyProps} />
-          </div>
+          <PreviouslyGeneratedList {...historyProps} />
 
           {/* <MainCoverLetterTool /> */}
           <>

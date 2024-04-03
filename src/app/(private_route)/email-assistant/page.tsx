@@ -94,20 +94,37 @@ const PersonalizedEmailBot = () => {
     }
   };
 
-  const { emailElementRef, tourBotRef } = useTourContext();
+  const { emailElementRef, tourBotRef, emailCardsElementRef, historyCardRef } =
+    useTourContext();
 
   const tourBotConfig = {
-    name: "emailAssistant",
+    name: "resumeBuilder",
     audios: [
       {
-        url: "/speech_other_cards.mp3",
-        for: "email",
+        url: "/email-history-card.mp3",
+        for: "history",
+      },
+      {
+        url: "/emails-main-1.mp3",
+        for: "tool",
+      },
+      {
+        url: "/emails-main-2.mp3",
+        for: "cards",
       },
     ],
     toolRefs: [
       {
+        ref: historyCardRef,
+        for: "history",
+      },
+      {
         ref: emailElementRef,
-        for: "email",
+        for: "tool",
+      },
+      {
+        ref: emailCardsElementRef,
+        for: "cards",
       },
     ],
   };
@@ -630,11 +647,11 @@ const PersonalizedEmailBot = () => {
   return (
     <>
       <div className="w-full sm:w-full ">
-        <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]  ">
+        <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]">
           <PreviouslyGeneratedList {...historyProps} />
           <div
             ref={(ref: any) => (emailElementRef.current = ref)}
-            className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
+            className=" my-4 dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
           >
             {/* header */}
             <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
@@ -762,7 +779,11 @@ const PersonalizedEmailBot = () => {
                 </button>
               )}
             </div>
-
+          </div>
+          <div
+            className="my-4   dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
+            ref={(ref: any) => (emailCardsElementRef.current = ref)}
+          >
             {show ? (
               <EmailCard
                 isEmailCopied={isEmailCopied.emailCopied}

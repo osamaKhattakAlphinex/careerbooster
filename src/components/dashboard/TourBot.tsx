@@ -53,7 +53,9 @@ const TourBot = ({ config }: any) => {
     }
   }, [config]);
 
-  useEffect(() => {}, [audios, toolRefs]);
+  useEffect(() => {
+    console.log("config setted", toolRefs, audios);
+  }, [audios, toolRefs]);
 
   const removeStyles = () => {
     toolRefs.map((toolRef: any) => {
@@ -64,13 +66,11 @@ const TourBot = ({ config }: any) => {
     });
   };
 
-  const applyStyles = () => {
-    toolRefs.map((toolRef: any) => {
-      toolRef.ref.current.classList.add("dashboard-focused");
-      toolRef.ref.current.classList.add("dark:bg-[#11121c]");
-      toolRef.ref.current.classList.add("bg-[#F3F4F6]");
-      // toolRef.ref.current?.classList.add("un-focused-tool");
-    });
+  const applyStyles = (toolRef: any) => {
+    toolRef.ref.current.classList.add("dashboard-focused");
+    toolRef.ref.current.classList.add("dark:bg-[#11121c]");
+    toolRef.ref.current.classList.add("bg-[#F3F4F6]");
+    // toolRef.ref.current?.classList.add("un-focused-tool");
   };
 
   const fetchAudio = async (audioFileUrl: any, explanationFor: string) => {
@@ -93,10 +93,13 @@ const TourBot = ({ config }: any) => {
       type: "audio/mpeg",
     });
 
-    if (toolRefs[0].ref.current) {
-      applyStyles();
-      toolRefs[0].ref.current.classList.remove("un-focused-tool");
-    }
+    toolRefs.forEach((element: any) => {
+      if (element.for === focusedElement) {
+        removeStyles();
+        applyStyles(element);
+      }
+    });
+
     const url = URL.createObjectURL(audioBlob);
     return url;
   };

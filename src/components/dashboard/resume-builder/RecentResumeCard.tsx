@@ -6,6 +6,7 @@ import { Pagination, Navigation } from "swiper/modules";
 import SwiperCore from "swiper/core";
 import { infoSmallIcon } from "@/helpers/iconsProvider";
 import { useState } from "react";
+import { useTourContext } from "@/context/TourContext";
 SwiperCore.use([Pagination]);
 
 const RecentResumeCard = ({
@@ -23,15 +24,20 @@ const RecentResumeCard = ({
   const userData = useSelector((state: any) => state.userData);
   const [showDrop, setShowDrop] = useState(true);
   const { resumes } = userData;
+  const { historyCardRef } = useTourContext();
+
   return (
     <>
-      <div className="dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px]  mb-4 px-4 md:px-[24px] pt-[20px] pb-[20px] ">
+      <div
+        ref={(ref: any) => (historyCardRef.current = ref)}
+        className="dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px]  mb-4 px-4 md:px-[24px] pt-[20px] pb-[20px] "
+      >
         <div className="flex items-center justify-between gap-3">
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <h1 className=" flex gap-2 font-semibold text-[16px] md:text-sm">
               YOUR RESUMES{" "}
             </h1>
-            <div className="group cursor-pointer  relative inset-0">
+            <div className="relative inset-0 cursor-pointer group">
               {infoSmallIcon}
               <div className="w-36 md:w-40 z-50 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:left-1 md:left-[0.895rem] xs:-top-12  md:-top-[54px]  hidden group-hover:block md:rounded-bl-none xs:rounded-bl-none  text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                 The different resumes you create will be saved here.
@@ -45,7 +51,7 @@ const RecentResumeCard = ({
               type="text"
               placeholder="Search here"
             />
-            <div className="absolute inset-y-0 right-3   items-center lg:flex hidden">
+            <div className="absolute inset-y-0 items-center hidden right-3 lg:flex">
               {searchIcon}
             </div>
           </div> */}
@@ -74,7 +80,7 @@ const RecentResumeCard = ({
           </span>
         </div>
         {!resumes && <p>Loading Resumes...</p>}
-        {/* <div className="flex flex-wrap lg:flex-row flex-col  gap-4"> */}
+        {/* <div className="flex flex-col flex-wrap gap-4 lg:flex-row"> */}
         <div
           className={`flex gap-2 flex-row ${
             showDrop ? "block" : "hidden"

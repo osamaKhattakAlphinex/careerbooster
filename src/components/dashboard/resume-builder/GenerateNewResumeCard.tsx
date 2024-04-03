@@ -8,6 +8,7 @@ import { setState } from "@/store/resumeSlice";
 
 import Link from "next/link";
 import { infoSmallIcon } from "@/helpers/iconsProvider";
+import { useTourContext } from "@/context/TourContext";
 
 interface Props {
   getConsent: () => void;
@@ -24,8 +25,13 @@ const GenerateResume = ({ getConsent }: Props) => {
   const userData = useSelector((state: any) => state.userData);
   const memoizedState = useMemo(() => state, [state]);
 
+  const { resumeElementRef } = useTourContext();
+
   return (
-    <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] py-6 px-4 md:px-[30px] flex flex-col gap-4 ">
+    <div
+      ref={(ref: any) => (resumeElementRef.current = ref)}
+      className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] py-6 px-4 md:px-[30px] flex flex-col gap-4 "
+    >
       {/* header */}
       <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
         <h3 className=" text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">

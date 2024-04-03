@@ -17,6 +17,7 @@ interface TourRefs {
   atsElementRef: React.MutableRefObject<HTMLInputElement | null>;
   tourBotRef: React.MutableRefObject<HTMLInputElement | null>;
   historyCardRef: React.MutableRefObject<HTMLInputElement | null>;
+  emailCardsElementRef: React.MutableRefObject<HTMLInputElement | null>;
   // Add more references as needed
 }
 
@@ -46,6 +47,7 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
   const atsElementRef = useRef<HTMLInputElement | null>(null);
   const tourBotRef = useRef<HTMLInputElement | null>(null);
   const historyCardRef = useRef<HTMLInputElement | null>(null);
+  const emailCardsElementRef = useRef<HTMLInputElement | null>(null);
   // Define the context value
   const contextValue: TourRefs = {
     contentScrollRef,
@@ -62,6 +64,8 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
     atsElementRef,
     tourBotRef,
     historyCardRef,
+    emailCardsElementRef,
+    // Add more references as needed
   };
 
   return (

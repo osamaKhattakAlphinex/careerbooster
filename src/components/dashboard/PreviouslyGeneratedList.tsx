@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { useTourContext } from "@/context/TourContext";
 
 type Props = {
   dataSource: string;
@@ -12,6 +13,8 @@ type Props = {
 
 const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
   const userData = useSelector((state: any) => state.userData);
+  const { historyCardRef } = useTourContext();
+
   const [showDrop, setShowDrop] = useState(true);
   if (!userData) return;
   const pagination = {
@@ -22,9 +25,12 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
   };
 
   return (
-    <div className="dark:bg-[#17151b] dark:text-white  bg-[#00000015] text-gray-950  rounded-[20px]  mb-7 px-4 lg:px-[24px] pt-[20px] pb-[20px] z-0">
-      <div className="flex gap-3 items-center justify-between">
-        <div className="flex gap-2 items-center">
+    <div
+      ref={(ref: any) => (historyCardRef.current = ref)}
+      className="dark:bg-[#17151b] dark:text-white  bg-[#00000015] text-gray-950  rounded-[20px]  mb-7 px-4 lg:px-[24px] pt-[20px] pb-[20px] z-0"
+    >
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
           <h1 className=" flex justify-center text-[14px] md:text-sm font-semibold lg:pr-0 pr-4">
             {dataSource === "coverLetters" && "RECENT COVER LETTERS"}
             {dataSource === "emails" && "RECENT EMAILS"}
@@ -36,7 +42,7 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
             {dataSource === "linkedInKeywords" && "RECENT KEYWORDS"}
           </h1>
           {dataSource === "coverLetters" && (
-            <div className="group flex md:ml-1 cursor-pointer relative inset-0">
+            <div className="relative inset-0 flex cursor-pointer group md:ml-1">
               {infoSmallIcon}
               <div className="w-40 md:w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-[9.75rem] md:left-[14px] xs:-top-[64px]  z-[2000]  md:-top-[4.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                 Every cover letter you generate is stored here for easy future
@@ -45,7 +51,7 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
             </div>
           )}
           {dataSource === "emails" && (
-            <div className="group flex md:ml-1 cursor-pointer relative inset-0">
+            <div className="relative inset-0 flex cursor-pointer group md:ml-1">
               {infoSmallIcon}
               <div className="w-40 md:w-44 bg-gradient-to-r  from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[12px] px-2 absolute xs:-left-[9.75rem] md:left-[14px] xs:-top-[64px]  z-[2000]  md:-top-[4.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
                 Every Email you generate is stored here for easy future access.
@@ -61,7 +67,7 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
             type="text"
             placeholder="Search here"
           />
-          <div className="absolute inset-y-0 right-3   items-center lg:flex hidden">
+          <div className="absolute inset-y-0 items-center hidden right-3 lg:flex">
             {searchIcon}
           </div>
         </div> */}

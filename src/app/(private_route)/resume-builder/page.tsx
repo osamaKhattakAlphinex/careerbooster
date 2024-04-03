@@ -60,7 +60,7 @@ const ResumeBuilder = () => {
 
   const creditsInfoRef: React.MutableRefObject<any> = useRef(null);
 
-  const { resumeElementRef, tourBotRef } = useTourContext();
+  const { resumeElementRef, tourBotRef, historyCardRef } = useTourContext();
 
   const runConfetti = () => {
     showSuccessToast("Generated Successfully");
@@ -457,14 +457,22 @@ const ResumeBuilder = () => {
     name: "resumeBuilder",
     audios: [
       {
-        url: "/speech_resume_card.mp3",
-        for: "resume",
+        url: "/resume-history-card.mp3",
+        for: "history",
+      },
+      {
+        url: "/resume-builder-main.mp3",
+        for: "tool",
       },
     ],
     toolRefs: [
       {
+        ref: historyCardRef,
+        for: "history",
+      },
+      {
         ref: resumeElementRef,
-        for: "resume",
+        for: "tool",
       },
     ],
   };
@@ -514,7 +522,7 @@ const ResumeBuilder = () => {
               Auto saved
             </div>
           )}
-          <div ref={(ref: any) => (resumeElementRef.current = ref)}>
+          <div>
             <GenerateResume getConsent={getConsent} />
           </div>
           <div className="fixed bottom-0 flex items-center justify-center">
