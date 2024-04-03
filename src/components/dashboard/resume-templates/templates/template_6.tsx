@@ -29,26 +29,16 @@ import Link from "next/link";
 import { useColorContext } from "@/context/ResumeColorContext";
 import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
 import CustomResumeSection from "../../resume-builder/CustomResumeSection";
-const ResumeTemplate6 = ({
-  streamedSummaryData,
-  setStreamedSummaryData,
-  streamedJDData,
-  setStreamedJDData,
-  streamedCustomData,
-  setStreamedCustomData,
-}: {
-  streamedSummaryData: string;
-  streamedJDData: string;
-  setStreamedJDData: any;
-  setStreamedSummaryData: any;
-  streamedCustomData: string;
-  setStreamedCustomData: any;
-}) => {
+const ResumeTemplate6 = () => {
   const resume = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
+  const [streamedSummaryData, setStreamedSummaryData] = useState("");
+  const [streamedJDData, setStreamedJDData] = useState<any>("");
+  const [streamedCustomData, setStreamedCustomData] = useState<any>("");
+
   const { color, setColor } = useColorContext();
   // const [color, setColor] = useState("#e04127");
   const [primarySkill, setPrimarySkill] = useState<string>("");
@@ -96,9 +86,7 @@ const ResumeTemplate6 = ({
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
 
-  // useEffect(() => {
-  //   console.log(streamedSummaryData);
-  // });
+
   useEffect(() => {
     if (streamedJDData === "") {
       setStreamedJDData(null);
