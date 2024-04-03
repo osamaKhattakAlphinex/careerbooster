@@ -28,7 +28,6 @@ const UserSchema = new Schema(
     registeredPhone: {
       type: String,
       // required: true,
-
     },
 
     linkedin: {
@@ -53,7 +52,7 @@ const UserSchema = new Schema(
     education: [],
     experience: [],
     skills: [],
-    customDetails:[],
+    customDetails: [],
     role: {
       type: String,
       default: "user",
@@ -113,6 +112,7 @@ const UserSchema = new Schema(
       coverLetter: Boolean,
       emailAssistant: Boolean,
       linkedinOptimizer: Boolean,
+      dashboard: Boolean,
     },
   },
 

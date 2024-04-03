@@ -2,15 +2,21 @@ import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
 import Link from "next/link";
 import { chevronRight } from "@/helpers/iconsProvider";
+import { useTourContext } from "@/context/TourContext";
 
 const AboutGenerator = ({ creditLimits }: { creditLimits: any }) => {
+  const { linkedinAboutElementRef } = useTourContext();
+
   return (
     <>
       <Link
         href="/linkedin-optimizer/about"
         className="block my-4 no-underline"
       >
-        <div className=" dark:bg-[#222027] md:justify-between dark:text-gray-50 bg-[#ffffff94] text-gray-950 p-5 sm:p-8 flex flex-col md:flex-row md:align-center xs:gap-3 justify-center items-center rounded-xl">
+        <div
+          ref={(ref: any) => (linkedinAboutElementRef.current = ref)}
+          className=" dark:bg-[#222027] md:justify-between dark:text-gray-50 bg-[#ffffff94] text-gray-950 p-5 sm:p-8 flex flex-col md:flex-row md:align-center xs:gap-3 justify-center items-center rounded-xl"
+        >
           <div className="hidden aspect-square rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-14 h-14">
             <Image alt="Svg1" src={Svg1} width={24} height={24} />
           </div>
