@@ -1187,7 +1187,7 @@ const ResumeTemplate10 = () => {
             ></div>
           )}
           {/* Add Custom */}
-          <CustomResumeSection />
+          {/* <CustomResumeSection /> */}
 
           {/* Education */}
           {resume?.education.length > 0 && (

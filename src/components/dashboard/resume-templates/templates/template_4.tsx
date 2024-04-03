@@ -857,8 +857,8 @@ const ResumeTemplate4 = () => {
                         message="Are you sure you want to delete ?"
                         onCancel={() => setConfirmationModalAchivement(false)}
                         onConfirm={() => {
-                          setConfirmationModalAchivement(false);
                           handlers.handleDeleteSingleCustomSection(index);
+                          setConfirmationModalAchivement(false);
                         }}
                       />
                     )}
@@ -1185,7 +1185,7 @@ const ResumeTemplate4 = () => {
             ></div>
           )}
           {/* Add Custom */}
-          <CustomResumeSection />
+          {/* <CustomResumeSection /> */}
           {/* Education */}
 
           {resume?.education.length > 0 && (

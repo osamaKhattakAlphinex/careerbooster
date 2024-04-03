@@ -131,7 +131,7 @@ const PersonalizedEmailBot = () => {
 
   useEffect(() => {
     if (userData && userData?.tours) {
-      if (!userData.tours.resumeBuilder) {
+      if (!userData.tours.emailAssistant) {
         setTimeout(() => {
           tourBotRef?.current?.click();
         }, 500);

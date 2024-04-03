@@ -81,7 +81,7 @@ const templateLayout = {
       ],
     },
     summary: {
-      styles: "bg-red text-black text-junstify px-8 pt-4",
+      styles: "bg-red text-black text-junstify px-8 pt-4 mt-4",
       elements: [
         {
           id: "summary",

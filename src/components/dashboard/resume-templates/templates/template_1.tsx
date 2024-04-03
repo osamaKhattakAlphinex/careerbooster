@@ -1195,7 +1195,7 @@ const ResumeTemplate1 = ({
               ></div>
             )}
             {/* Add Custom */}
-            <CustomResumeSection />
+            {/* <CustomResumeSection /> */}
             {/* Education */}
             {resume?.education.length > 0 && (
               <>
@@ -1368,7 +1368,7 @@ const ResumeTemplate1 = ({
                 </ul>
               </>
             )}
-            <AddSection />
+            {/* <AddSection /> */}
           </div>
         </div>
       </div>

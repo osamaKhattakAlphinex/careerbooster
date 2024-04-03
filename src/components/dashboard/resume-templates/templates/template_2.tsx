@@ -1119,7 +1119,7 @@ const {
               ></div>
             )}
           {/* Add Custom */}
-          <CustomResumeSection />
+          {/* <CustomResumeSection /> */}
       {/* Education */}
       <div className="w-full space-y-3 ">
         {resume?.education.length > 0 && (
