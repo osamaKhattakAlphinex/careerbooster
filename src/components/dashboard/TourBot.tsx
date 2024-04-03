@@ -3,7 +3,6 @@ import Image from "next/image";
 import React, { use, useEffect, useRef, useState } from "react";
 import "@/app/(private_route)/dashboard.css";
 import { useTourContext } from "@/context/TourContext";
-import axios from "axios";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 interface TooltipProps {
   text: string;
@@ -53,7 +52,6 @@ const TourBot = ({ config }: any) => {
     }
   }, [config]);
 
-  useEffect(() => {}, [audios, toolRefs]);
 
   const removeStyles = () => {
     toolRefs.map((toolRef: any) => {

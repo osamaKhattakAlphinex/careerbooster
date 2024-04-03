@@ -33,6 +33,7 @@ const Page = () => {
   const { components, templateLayout, cvHeadings } = template;
 
   let newCvHeadings: any = [];
+  
 
   for (const singleHeading of Object.entries(resumeData.headings)) {
     const [key, value] = singleHeading;
@@ -45,6 +46,7 @@ const Page = () => {
       newCvHeadings.push(singleValue);
     }
   }
+  
   const GenerationOrder = [
     "shortName",
     "name",
@@ -582,6 +584,7 @@ const Page = () => {
   }
 
   const generate = (jsonData: any) => {
+    console.log(jsonData)
     const newJsonObject: any = {};
 
     GenerationOrder.forEach((key) => {

@@ -6,8 +6,8 @@ import React from "react";
 
 const NextThemeProvider = ({ children }: any) => {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true}>
         <Script
           id="hotjar-script"
           dangerouslySetInnerHTML={{
