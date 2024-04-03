@@ -86,9 +86,7 @@ const ResumeTemplate6 = () => {
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
 
-  // useEffect(() => {
-  //   console.log(streamedSummaryData);
-  // });
+
   useEffect(() => {
     if (streamedJDData === "") {
       setStreamedJDData(null);
