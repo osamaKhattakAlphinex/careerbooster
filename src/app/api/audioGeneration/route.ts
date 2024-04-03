@@ -15,7 +15,7 @@ export async function POST(req: any) {
       model: "tts-1",
       voice: "nova",
       input: input,
-      // input:" . "
+      // input:"And lastly we have keywords generator where you can generate top keywords  of recent work experiences for your linkedin. "
     });
 
     //  const buffer = Buffer.from(await mp3.arrayBuffer());
