@@ -183,13 +183,13 @@ const CustomForm = ({ setShowCustomForm, index }: any) => {
             <input
               type="checkbox"
               id="currentlyWorking"
-              className="mr-2"
+              className="mr-2 bg-gray-200 dark:bg-gray-200"
               name="isContinue"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               checked={formik.values.isContinue}
             />
-            <label htmlFor="currentlyWorking" className="text-sm ">
+            <label htmlFor="currentlyWorking" className="text-sm">
               Present
             </label>
           </div>
