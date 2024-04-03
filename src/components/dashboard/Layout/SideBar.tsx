@@ -4,17 +4,17 @@ import Link from "next/link";
 import logo from "@/../public/logo.svg";
 import {
   userCircle,
-  menuIcon,
+  
   dollarIcon,
   homeIcon,
   powerIcon,
-  inboxArrowDown,
+  
   userGroup,
-  deviceTablet,
+  
   clipboard,
   xMark,
   keyIcon,
-  bid,
+  
   emailBotSidebarIcon,
   coverLetterSidebarIcon,
 } from "@/helpers/iconsProvider";
@@ -54,16 +54,11 @@ const SideBar = () => {
   const userData = useSelector((state: any) => state.userData);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState(null);
   const router = useRouter();
   const imageRef = useRef<any>();
   const [image, setImage] = useState<any>(null);
 
   const imageCroperRef = useRef<any>();
-
-  useEffect(() => {
-    console.log(image);
-  }, [image]);
 
   if (pagesArray?.includes(pathname)) return <></>;
   const handleMouseOver = (index: any) => {
