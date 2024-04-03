@@ -22,6 +22,7 @@ export async function POST(req: any) {
               First Name:
               Last Name:
               Email Address:
+              Phone Number:
     
     
               The answer MUST be a valid JSON and formatting should be like the following 
@@ -30,6 +31,7 @@ export async function POST(req: any) {
                 firstName: VALUE_HERE,
                 lastName: VALUE_HERE,
                 email: VALUE_HERE,
+                registeredPhone: VALUE_HERE,
               }
     
               If there is no value Leave that field blank

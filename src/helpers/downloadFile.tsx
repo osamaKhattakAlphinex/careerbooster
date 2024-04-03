@@ -175,6 +175,7 @@ h2:empty {
         </style>
         ${html}`;
     }
+
     setLoading(true);
     await fetch(`/api/template`, {
       method: "POST",
