@@ -25,6 +25,11 @@ const Page = () => {
       );
     }
   }, [templateId, resumeId]);
+
+  useEffect(() => {
+    console.log("resume", resumeData);
+  }, [resumeData]);
+
   const { components, templateLayout, cvHeadings } = template;
 
   let newCvHeadings: any = [];
@@ -71,6 +76,7 @@ const Page = () => {
       setCvMaxHeight(unscaledHeight + 100); // Set the scaled down height plus 100 (adjust as needed)
     }
   };
+
   const cleanUpHTML = (page: any) => {
     const cleanUpIds = [
       "shortName",
@@ -184,7 +190,7 @@ const Page = () => {
     const educationDivs = document.querySelectorAll(
       "[data-education-container-index]"
     );
-    const pageId = page.getAttribute('id');
+    const pageId = page.getAttribute("id");
     let newDiv;
     newDiv = document.createElement("div");
     newDiv.setAttribute("data-container-name", "education");
@@ -207,8 +213,11 @@ const Page = () => {
       let rowItemCount = 1;
       for (const singleEducation of Array.from(educationDivs)) {
         if (isSpaceAvailable && rowItemCount <= 3) {
-          if(pageId === "page-0"){
-            singleEducation.className = singleEducation.className.replace('w-[30%]', 'w-[45%]');
+          if (pageId === "page-0") {
+            singleEducation.className = singleEducation.className.replace(
+              "w-[30%]",
+              "w-[45%]"
+            );
           }
           newDiv.appendChild(singleEducation);
           getEducationHeading.parentNode.insertBefore(
@@ -646,10 +655,10 @@ const Page = () => {
     setFileName(
       `${resumeData?.name
         ?.replaceAll(" ", "-")
-        ?.replaceAll(".","")
+        ?.replaceAll(".", "")
         .replaceAll("/", "")}-${resumeData?.jobTitle
         ?.replaceAll(" ", "-")
-        ?.replaceAll(".","")
+        ?.replaceAll(".", "")
         .replaceAll("/", "")}`
     );
     generate(resumeData);

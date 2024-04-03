@@ -9,6 +9,43 @@ interface WorkExperience {
   endDate: string;
   description: string;
 }
+interface Publication {
+  title: string;
+  publisher: string;
+  date: string;
+  description: string;
+}
+
+interface Award {
+  title: string;
+  awardingOrganization: string;
+  date: string;
+  description: string;
+}
+
+interface Reference {
+  name: string;
+  position: string;
+  company: string;
+  contactInformation: string; // This could include email, phone number, etc.
+}
+
+interface Certification {
+  title: string;
+  issuingOrganization: string;
+  date: string;
+  description: string;
+}
+
+interface Interest {
+  name: string;
+  description: string;
+}
+
+interface Language {
+  language: string;
+  proficiency: string; // This could be levels like beginner, intermediate, advanced, or specific proficiency scores
+}
 
 export interface Resume {
   state: {
@@ -16,7 +53,7 @@ export interface Resume {
     resumeLoading: boolean;
     componentRef: any;
   };
-  headings :{
+  headings: {
     education: string;
     primarySkills: string;
     workExperienceArray: string;
@@ -34,7 +71,7 @@ export interface Resume {
     email: string;
     phone: string;
     linkedIn: string;
-    address:string;
+    address: string;
   };
   education: [
     {
@@ -43,14 +80,36 @@ export interface Resume {
       year: string;
     }
   ];
+  sections: {
+    contact: boolean;
+    summary: boolean;
+    shortName: boolean;
+    name: boolean;
+    jobTitle: boolean;
+    workExperience: boolean;
+    primarySkills: boolean;
+    languages: boolean;
+    certifications: boolean;
+    awards: boolean;
+    publications: boolean;
+    references: boolean;
+    interests: boolean;
+  };
+
   summary: string;
   workExperienceArray: WorkExperience[];
   quantifyingExperience: boolean;
   workExperience: "";
-  customExperienceArray:[];
+  customExperienceArray: [];
   primarySkills: [];
   professionalSkills: [];
   secondarySkills: [];
+  languages: Language[];
+  certifications: Certification[];
+  awards: Award[];
+  publications: Publication[];
+  references: Reference[];
+  interests: Interest[];
 }
 
 const initialState: Resume = {
@@ -59,7 +118,7 @@ const initialState: Resume = {
     resumeLoading: false,
     componentRef: null,
   },
-  headings :{
+  headings: {
     education: "education",
     primarySkills: "skills",
     workExperienceArray: "work experience",
@@ -77,8 +136,7 @@ const initialState: Resume = {
     email: "",
     phone: "",
     linkedIn: "",
-    address:""
-    
+    address: "",
   },
   education: [
     {
@@ -87,6 +145,21 @@ const initialState: Resume = {
       year: "",
     },
   ],
+  sections: {
+    contact: true,
+    summary: true,
+    shortName: true,
+    name: true,
+    jobTitle: true,
+    workExperience: true,
+    primarySkills: true,
+    languages: false,
+    certifications: false,
+    awards: false,
+    publications: false,
+    references: false,
+    interests: false,
+  },
   summary: "",
   workExperienceArray: [],
   customExperienceArray: [],
@@ -95,6 +168,12 @@ const initialState: Resume = {
   primarySkills: [],
   professionalSkills: [],
   secondarySkills: [],
+  interests: [],
+  awards: [],
+  publications: [],
+  references: [],
+  languages: [],
+  certifications: [],
 };
 
 const resumeSlice = createSlice({
@@ -171,7 +250,7 @@ const resumeSlice = createSlice({
         primarySkills: action.payload.primarySkills,
         workExperienceArray: action.payload.workExperienceArray,
         summary: action.payload.summary,
-        contact:  action.payload.contact,
+        contact: action.payload.contact,
       };
     },
     setSummary(state, action) {
@@ -216,7 +295,6 @@ const resumeSlice = createSlice({
         professionalSkills: action.payload.professionalSkills,
       };
     },
-
   },
 });
 
@@ -237,7 +315,7 @@ export const {
   resetResume,
   emptyResume,
   setQuantifyingExperience,
-  setCustomExperienceArray
+  setCustomExperienceArray,
   // setLoadingState,
 } = resumeSlice.actions;
 

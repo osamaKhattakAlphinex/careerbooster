@@ -26,7 +26,6 @@ const cvHeadings: any = [
     text: "education",
     section: "education",
     headingKey: "education",
-
     styles:
       "text-gray-950/80 text-base font-semibold w-full uppercase flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
@@ -35,7 +34,54 @@ const cvHeadings: any = [
     text: "skills",
     section: "primarySkills",
     headingKey: "primarySkills",
-
+    styles:
+      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+    attributes: [{ "icon-color": "black" }],
+  },
+  {
+    text: "certificates",
+    section: "certifications",
+    headingKey: "certifications",
+    styles:
+      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+    attributes: [{ "icon-color": "black" }],
+  },
+  {
+    text: "awards",
+    section: "awards",
+    headingKey: "awards",
+    styles:
+      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+    attributes: [{ "icon-color": "black" }],
+  },
+  {
+    text: "publications",
+    section: "publications",
+    headingKey: "publications",
+    styles:
+      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+    attributes: [{ "icon-color": "black" }],
+  },
+  {
+    text: "languages",
+    section: "languages",
+    headingKey: "languages",
+    styles:
+      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+    attributes: [{ "icon-color": "black" }],
+  },
+  {
+    text: "references",
+    section: "references",
+    headingKey: "references",
+    styles:
+      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+    attributes: [{ "icon-color": "black" }],
+  },
+  {
+    text: "interests",
+    section: "interests",
+    headingKey: "interests",
     styles:
       "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],

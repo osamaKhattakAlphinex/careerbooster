@@ -53,9 +53,7 @@ const TourBot = ({ config }: any) => {
     }
   }, [config]);
 
-  useEffect(() => {
-    console.log("config setted", toolRefs, audios);
-  }, [audios, toolRefs]);
+  useEffect(() => {}, [audios, toolRefs]);
 
   const removeStyles = () => {
     toolRefs.map((toolRef: any) => {

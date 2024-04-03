@@ -19,6 +19,7 @@ import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import CustomResumeSection from "../../resume-builder/CustomResumeSection";
 import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
+import AddSection from "../../AddSection";
 
 const ResumeTemplate1 = ({
   streamedSummaryData,
@@ -139,7 +140,7 @@ const ResumeTemplate1 = ({
 
       <div className="w-full">
         <div className="flex flex-col xs:py-3 md:py-8 xs:pl-2 md:pl-6 xs:pr-3 md:pr-8 w-12/12">
-          <h2 className=" xs:text-xl md:text-4xl font-bold border-2 border-transparent md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500 ">
+          <h2 className="font-bold border-2 border-transparent  xs:text-xl md:text-4xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500">
             <EditableField
               value={resume?.name ? resume?.name : "FULL NAME"}
               style={{ width: "fit-content" }}
@@ -160,7 +161,7 @@ const ResumeTemplate1 = ({
               }}
             />
           </h3>
-          <ul className="flex flex-row xs:flex-wrap md:flex-nowrap justify-between md:gap-3 pl-0 my-2 text-xs break-all md:flex-row">
+          <ul className="flex flex-row justify-between pl-0 my-2 text-xs break-all xs:flex-wrap md:flex-nowrap md:gap-3 md:flex-row">
             <li className="xs:w-full md:w-[25%] hover:shadow-md hover:bg-gray-100 xs:text-[8px] md:text-xs flex flex-row gap-1  items-center justify-start ">
               <div className="p-1">
                 <svg
@@ -265,7 +266,7 @@ const ResumeTemplate1 = ({
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="xs:h-2 xs:w-2 md:w-4  md:h-4"
+                  className="xs:h-2 xs:w-2 md:w-4 md:h-4"
                 >
                   <path
                     strokeLinecap="round"
@@ -287,7 +288,7 @@ const ResumeTemplate1 = ({
           {/* EXECUTIVE SUMMARY */}
           <div className="flex flex-col flex-wrap w-full ">
             <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 md:mt-3"></span>
-            <h3 className="md:my-1 xs:text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex gap-2 items-center">
+            <h3 className="flex items-center gap-2 font-semibold uppercase border-2 border-transparent md:my-1 xs:text-xs md:text-base hover:border-dashed hover:border-gray-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -318,7 +319,7 @@ const ResumeTemplate1 = ({
             <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
 
             <Toolbar regenrateSummary={getSummary}>
-              <div className="my-2 h-fit text-xs  text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed ">
+              <div className="my-2 text-xs text-justify border-2 border-transparent h-fit hover:shadow-md hover:border-gray-500 hover:border-dashed ">
                 <EditableField
                   type="textarea"
                   value={
@@ -345,7 +346,7 @@ const ResumeTemplate1 = ({
             {resume?.primarySkills && resume?.primarySkills.length > 0 && (
               <>
                 <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 md:mt-3"></span>
-                <h3 className="flex flex-row items-center gap-2 md:my-1 xs:text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500  ">
+                <h3 className="flex flex-row items-center gap-2 font-semibold uppercase border-2 border-transparent md:my-1 xs:text-xs md:text-base hover:border-dashed hover:border-gray-500 ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -468,7 +469,7 @@ const ResumeTemplate1 = ({
             )}
             {/* Work Experience */}
             <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-            <h3 className="md:my-1 text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+            <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -520,7 +521,7 @@ const ResumeTemplate1 = ({
                     >
                       <div
                         key={i}
-                        className="border-2  md:w-full border-transparent hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
+                        className="border-2 border-transparent md:w-full hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
                         }
@@ -528,7 +529,7 @@ const ResumeTemplate1 = ({
                         onDrop={(e) => handleDropExperience(e, i)}
                         draggable
                       >
-                        <h2 className="text-base font-bold  leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
+                        <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
                           <EditableField
                             value={rec?.title}
                             style={{ width: "100%" }}
@@ -540,7 +541,7 @@ const ResumeTemplate1 = ({
                             }}
                           />
                         </h2>
-                        <h2 className="flex gap-1 text-xs flex-wrap font-semibold leading-relaxed hover:cursor-default ">
+                        <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
                           {/* {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                           {rec?.isContinue
                             ? "Present"
@@ -813,7 +814,7 @@ const ResumeTemplate1 = ({
                       <>
                         <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
                         <h3
-                          className="md:my-1 relative hover:cursor-move group text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2"
+                          className="relative flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 hover:cursor-move group md:text-base hover:border-dashed hover:border-gray-500"
                           onDragStart={(e) =>
                             e.dataTransfer.setData(
                               "text/plain",
@@ -883,7 +884,7 @@ const ResumeTemplate1 = ({
                             >
                               <div
                                 key={i}
-                                className="border-2  md:w-full border-transparent hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
+                                className="border-2 border-transparent md:w-full hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
                                 onDragStart={(e) =>
                                   e.dataTransfer.setData(
                                     "text/plain",
@@ -896,7 +897,7 @@ const ResumeTemplate1 = ({
                                 }
                                 draggable
                               >
-                                <h2 className="text-base font-bold  leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
+                                <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
                                   <EditableField
                                     value={entry?.title}
                                     style={{ width: "100%" }}
@@ -909,7 +910,7 @@ const ResumeTemplate1 = ({
                                     }}
                                   />
                                 </h2>
-                                <h2 className="flex gap-1 text-xs flex-wrap font-semibold leading-relaxed hover:cursor-default ">
+                                <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
                                   {entry.fromMonth && (
                                     <EditableField
                                       value={`${entry?.fromMonth}`}
@@ -1187,12 +1188,11 @@ const ResumeTemplate1 = ({
             )}
             {/* Add Custom */}
             <CustomResumeSection />
-
             {/* Education */}
             {resume?.education.length > 0 && (
               <>
                 <span className="!block w-full h-0 border-[1px] border-gray-500 my-t mt-1 page-break"></span>
-                <h3 className="flex flex-row items-center gap-2 md:my-1 text-xs md:text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
+                <h3 className="flex flex-row items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -1360,6 +1360,7 @@ const ResumeTemplate1 = ({
                 </ul>
               </>
             )}
+            <AddSection />
           </div>
         </div>
       </div>
