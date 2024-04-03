@@ -631,7 +631,7 @@ export default function CoverLetterPage() {
                           isCoverLetterCopied
                         }
                         onClick={() => copyCoverLetter(streamedData)}
-                        className={`w-full sm:max-w-max sm:w-48  lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300 group ${
+                        className={`hidden xs:block w-full sm:max-w-max sm:w-48  lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300 group ${
                           msgLoading ||
                           !session?.user?.email ||
                           !aiInputUserData ||
@@ -676,7 +676,7 @@ export default function CoverLetterPage() {
                         type="button"
                         disabled={!show || msgLoading || !session?.user?.email}
                         onClick={handleClick}
-                        className={`w-full sm:max-w-max sm:w-48  lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300 group ${
+                        className={`hidden xs:block w-full sm:max-w-max sm:w-48  lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300 group ${
                           !show || msgLoading || !session?.user?.email
                             ? "opacity-50 cursor-not-allowed"
                             : ""
@@ -700,7 +700,7 @@ export default function CoverLetterPage() {
                       <button
                         type="button"
                         onClick={handleSave}
-                        className="w-full sm:max-w-max sm:w-48  lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300 group"
+                        className="hidden xs:block w-full sm:max-w-max sm:w-48  lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35] transition-all duration-300 group"
                       >
                         <div className="flex flex-row items-center justify-center gap-2">
                           <svg

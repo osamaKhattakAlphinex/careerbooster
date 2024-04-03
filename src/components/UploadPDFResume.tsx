@@ -45,7 +45,7 @@ const UploadPDFResume = () => {
               userData = await JSON.parse(res.result);
             }
             router.replace(
-              `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&content=true`
+              `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&phone=${userData.registeredPhone}&content=true`
             );
           } else {
             setFileError("Something went wrong");

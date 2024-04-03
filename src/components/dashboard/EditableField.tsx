@@ -102,7 +102,7 @@ const EditableField = ({
             </a> */}
             <span
               ref={spanRef}
-              className="hidden w-fit xs:block md:block hover:cursor-text text-justify"
+              className=" w-fit xs:block md:block hover:cursor-text text-justify"
               title="Click to Edit"
             >
               {value}

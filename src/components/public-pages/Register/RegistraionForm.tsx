@@ -12,7 +12,6 @@ import {
   refreshIconRotating,
   uploadIcon,
 } from "@/helpers/iconsProvider";
-import { useDispatch } from "react-redux";
 import FileUploadHandler from "@/components/dashboard/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
 import WordFileHandler from "@/components/dashboard/WordFileHandler";
@@ -21,18 +20,6 @@ import WordFileHandler from "@/components/dashboard/WordFileHandler";
 //   title: "CareerBooster.AI-Register",
 // };
 
-function removeSpecialChars(str: string) {
-  // Remove new lines
-  str = str.replace(/[\r\n]+/gm, "");
-
-  // Remove Unicode characters
-  str = str.replace(/[^\x00-\x7F]/g, "");
-
-  // Remove icons
-  str = str.replace(/[^\w\s]/gi, "");
-
-  return str;
-}
 const RegistrationForm = () => {
   const router = useRouter();
   const params = useSearchParams();
@@ -50,7 +37,6 @@ const RegistrationForm = () => {
   const content = params?.get("content");
 
   // Redux
-  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -72,9 +58,7 @@ const RegistrationForm = () => {
       email: Yup.string()
         .email("Invalid Email Address")
         .required("Email is Required"),
-      phone: Yup.string()
-        .matches(/^[0-9]+$/, "Phone number must contain only digits")
-        .required("Phone number is Required"),
+      phone: Yup.string().required("Phone number is Required"),
       // password: Yup.string().required("Password is Required"),
       // confirmpassword: Yup.string()
       //   .required("Enter Password again")
@@ -94,6 +78,7 @@ const RegistrationForm = () => {
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
+          registeredPhone: values.phone,
           // password: values.password,
 
           uploadedResume: {
@@ -113,7 +98,7 @@ const RegistrationForm = () => {
             if (values.file !== "") {
               await UpdateGohighlevel(obj);
               // await moveResumeToUserFolder(values.file, values.email);
-              await updateUser(values.file, values.email, values.phone);
+              await updateUser(values.file, values.email);
             }
 
             // TODO REMOVE CONTENT FROM LOCAL STOARGE
@@ -170,14 +155,12 @@ const RegistrationForm = () => {
       });
   };
 
-  const updateUser = (file: string, email: string, phone:string) => {
+  const updateUser = (file: string, email: string) => {
     if (file && email) {
-      console.log(phone)
       // debugger
       return axios.post("/api/users/updateUser", {
         newFile: file,
         email: email,
-        registeredPhone: phone,
       });
     }
   };
@@ -207,10 +190,10 @@ const RegistrationForm = () => {
               userData = await JSON.parse(res.result);
             }
             router.replace(
-              `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&content=true`
+              `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&phone=${userData.registeredPhone}&content=true`
             );
 
-            if (userData.firstName || userData.lastName || userData.email) {
+            if (userData.firstName || userData.lastName || userData.email || userData.registeredPhone) {
               formik.setFieldValue(
                 "firstName",
                 removeDashesFromString(userData.firstName)
@@ -222,6 +205,10 @@ const RegistrationForm = () => {
               formik.setFieldValue(
                 "email",
                 removeDashesFromString(userData.email)
+              );
+              formik.setFieldValue(
+                "phone",
+                removeDashesFromString(userData.registeredPhone)
               );
             }
             // dispatch(setUploadedFileName(userData.files));
@@ -260,6 +247,7 @@ const RegistrationForm = () => {
     const firstName = params?.get("firstName");
     const lastName = params?.get("lastName");
     const email = params?.get("email");
+    const registeredPhone = params?.get("phone");
     const file = params?.get("file");
 
     if (firstName && lastName && email) {
@@ -270,6 +258,9 @@ const RegistrationForm = () => {
     }
     if (email) {
       formik.setFieldValue("email", removeDashesFromString(email));
+    }
+    if (registeredPhone) {
+      formik.setFieldValue("phone", removeDashesFromString(registeredPhone));
     }
     if (file) {
       formik.setFieldValue("file", file);
