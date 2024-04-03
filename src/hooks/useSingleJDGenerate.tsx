@@ -1,5 +1,4 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import useGetUserData from "./useGetUserData";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,13 +7,12 @@ import {
   setWorkExperience,
   setWorkExperienceArray,
 } from "@/store/resumeSlice";
-import { WorkExperience, setUserData } from "@/store/userDataSlice";
 import { fetchLIstOfStrings } from "@/helpers/fetchLIstOfStrings";
 import useSaveResumeToDB from "./useSaveToDB";
 import useGetCreditLimits from "./useGetCreditLimits";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
-const useSingleJDGenerate = (setStreamedJDData: any,setStreamedCustomData:any) => {
+const useSingleJDGenerate = (setStreamedJDData: any,setStreamedCustomData:any="") => {
   const { getUserDataIfNotExists } = useGetUserData();
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);

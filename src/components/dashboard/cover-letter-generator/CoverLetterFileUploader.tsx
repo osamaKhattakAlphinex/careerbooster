@@ -8,6 +8,8 @@ import FileUploadHandler from "@/components/dashboard/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
 import WordFileHandler from "../WordFileHandler";
 import FileUploader, { UploaderConfig } from "@/components/fileUploaderZone";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { showSuccessToast } from "@/helpers/toast";
 
 interface Props {
   selectedFile: string;
@@ -24,7 +26,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   const [loadingFiles, setLoadingFiles] = useState<boolean>(false);
   const [newFileText, setNewFileText] = useState<string>("");
   const [fileList, setFileList] = useState([]);
-
+  const [confirmationModal, setConfirmationModal] = useState(false);
   // session
   const { data }: { data: any } = useSession();
 
@@ -79,30 +81,32 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   };
 
   const handleDelete = async (file: string) => {
-    const c = confirm("Are you sure you want to delete this File?");
-    if (c) {
-      try {
-        const response: any = await fetch(
-          `/api/coverLetterBot/deleteFile?email=${data.user.email}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ fileName: file }),
-          }
-        );
-        const responseData = await response.json();
-        if (responseData.success) {
-          alert("File has been deleted");
-          fetchFiles();
-        } else {
-          alert("Error deleting file: " + responseData.error);
+    // const c = confirm("Are you sure you want to delete this File?");
+    // if (c) {
+    try {
+      const response: any = await fetch(
+        `/api/coverLetterBot/deleteFile?email=${data.user.email}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ fileName: file }),
         }
-      } catch (error) {
-        alert("Error deleting file: " + error);
+      );
+      const responseData = await response.json();
+      if (responseData.success) {
+        showSuccessToast("File has been deleted");
+
+        setConfirmationModal(false);
+        fetchFiles();
+      } else {
+        alert("Error deleting file: " + responseData.error);
       }
+    } catch (error) {
+      alert("Error deleting file: " + error);
     }
+    // }
   };
 
   // check file is correct
@@ -141,7 +145,9 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
     fileName: fileName,
     setFileName: setFileName,
   };
-
+  const handleOpenConfirmationModal = () => {
+    setConfirmationModal(true);
+  };
   return (
     <>
       <div className="rounded-lg">
@@ -223,37 +229,46 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
             <ul className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2">
               {fileList &&
                 fileList.map((file: string, i: number) => (
-                  <li
-                    key={i}
-                    className="flex gap-0 md:gap-3 justify-between mt-2 items-center border-[1.2px] border-[#312E37] rounded-md sm:px-4 sm:py-3 p-2"
-                  >
-                    <label
-                      className="flex flex-row items-center w-11/12 gap-2 text-xs cursor-pointer md:text-sm dark:text-gray-100 text-gray-950"
-                      htmlFor={`file_${i}`}
+                  <>
+                    <li
+                      key={i}
+                      className="flex gap-0 md:gap-3 justify-between mt-2 items-center border-[1.2px] border-[#312E37] rounded-md sm:px-4 sm:py-3 p-2"
                     >
-                      <input
-                        id={`file_${i}`}
-                        type="radio"
-                        value={file}
-                        checked={
-                          selectedFile && selectedFile === file ? true : false
-                        }
-                        name="selectedFile"
-                        onChange={(e) => {
-                          setSelectedFile(e.target.value);
-                        }}
-                        className="h-4 bg-transparent accent-[#B324D7] border-[1px]"
+                      <label
+                        className="flex flex-row items-center w-11/12 gap-2 text-xs cursor-pointer md:text-sm dark:text-gray-100 text-gray-950"
+                        htmlFor={`file_${i}`}
+                      >
+                        <input
+                          id={`file_${i}`}
+                          type="radio"
+                          value={file}
+                          checked={
+                            selectedFile && selectedFile === file ? true : false
+                          }
+                          name="selectedFile"
+                          onChange={(e) => {
+                            setSelectedFile(e.target.value);
+                          }}
+                          className="h-4 bg-transparent accent-[#B324D7] border-[1px]"
+                        />
+                        <span className="w-full truncate">{file}</span>
+                      </label>
+                      <button
+                        type="button"
+                        className="flex flex-row items-center justify-center w-1/12"
+                        onClick={handleOpenConfirmationModal}
+                      >
+                        {deleteIcon}
+                      </button>
+                    </li>
+                    {confirmationModal && (
+                      <DeleteConfirmationModal
+                        message="Are you sure you want to delete ?"
+                        onConfirm={() => handleDelete(file)}
+                        onCancel={() => setConfirmationModal(false)}
                       />
-                      <span className="w-full truncate">{file}</span>
-                    </label>
-                    <button
-                      type="button"
-                      className="flex flex-row items-center justify-center w-1/12"
-                      onClick={(e) => handleDelete(file)}
-                    >
-                      {deleteIcon}
-                    </button>
-                  </li>
+                    )}
+                  </>
                 ))}
               {fileList.length === 0 && (
                 <p className="xs:text-[10px] md:text-[14px]">No Files found</p>

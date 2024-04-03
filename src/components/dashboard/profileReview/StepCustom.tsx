@@ -1,12 +1,25 @@
+"use client";
 import { plusSimpleIcon } from "@/helpers/iconsProvider";
-import React, { useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { setStepCustom } from "@/store/registerSlice";
 import SectionCard from "./SectionCard";
+import { useEffect, useRef } from "react";
 
 const StepCustom = () => {
   const dispatch = useDispatch();
+  const stepCustomRef = useRef<any>(null);
   const stepCustom = useSelector((state: any) => state.register.stepCustom);
+  const scrollToNewSection = () => {
+    if (stepCustomRef.current) {
+      stepCustomRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Call scrollToNewSection after adding a new section
+  useEffect(() => {
+    scrollToNewSection();
+  }, [stepCustom]); // Trigger when stepCustom changes
   return (
     <div>
       <h1 className="text-lg xs:my-5 justify-between items-center flex md:mt-2  font-bold leading-tight tracking-tight  md:text-2xl dark:text-gray-100 text-gray-950 ">
@@ -24,7 +37,12 @@ const StepCustom = () => {
       </button>
       {stepCustom?.map((singleStep: any, index: number) => {
         return (
-          <SectionCard key={index} index={index} singleStep={singleStep} />
+          <div
+            key={index}
+            ref={index === stepCustom.length - 1 ? stepCustomRef : null}
+          >
+            <SectionCard index={index} singleStep={singleStep} />
+          </div>
         );
       })}
     </div>

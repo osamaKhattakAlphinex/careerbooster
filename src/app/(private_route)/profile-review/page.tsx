@@ -75,7 +75,7 @@ const ProfileReview = () => {
       .then(async (resp: any) => {
         if (resp?.data?.success) {
           dispatch(setUserData(obj));
-          showSuccessToast("Updated Successfully")
+          // showSuccessToast("Updated Successfully")
         }
       });
   };

@@ -4,8 +4,6 @@ import HeadlineGenerator from "@/components/dashboard/linkedin-generator-old/Hea
 import AboutGenerator from "@/components/dashboard/linkedin-generator-old/AboutGenerator";
 import JDGenerator from "@/components/dashboard/linkedin-generator-old/JDGenerator";
 import KeywordsGenerator from "@/components/dashboard/linkedin-generator-old/KeywordsGenerator";
-import { leftArrowIcon } from "@/helpers/iconsProvider";
-import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useTourContext } from "@/context/TourContext";
 import TourBot from "@/components/dashboard/TourBot";

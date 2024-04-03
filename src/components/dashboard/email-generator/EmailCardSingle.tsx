@@ -26,7 +26,7 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
   const [confirmationModal, setConfirmationModal] = useState(false);
   const handleOnView = async (card: any) => {
     if (source !== "") {
-      router.replace("/email-bot");
+      router.replace("/email-assistant");
     }
     return dispatch(setEmail(card));
   };
