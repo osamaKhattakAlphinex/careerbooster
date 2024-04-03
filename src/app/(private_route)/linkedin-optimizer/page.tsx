@@ -10,21 +10,52 @@ import TourBot from "@/components/dashboard/TourBot";
 import { useEffect } from "react";
 
 export default function LinkedInPage() {
-  const { linkedinElementRef, tourBotRef } = useTourContext();
+  const {
+    linkedinElementRef,
+    linkedinAboutElementRef,
+    linkedinHeadlineElementRef,
+    linkedinJDElementRef,
+    linkedinKeywordsElementRef,
+    tourBotRef,
+  } = useTourContext();
   const userData = useSelector((state: any) => state.userData);
 
   const tourBotConfig = {
     name: "linkedinOptimizer",
     audios: [
       {
-        url: "/speech_linkedin_card.mp3",
-        for: "linkedin",
+        url: "/linkedin-headline-card-main.mp3",
+        for: "headline",
+      },
+      {
+        url: "/linkedin-about-card-main.mp3",
+        for: "about",
+      },
+      {
+        url: "/linkedin-jd-card-main.mp3",
+        for: "job-description",
+      },
+      {
+        url: "/linkedin-keywords-card-main.mp3",
+        for: "keywords",
       },
     ],
     toolRefs: [
       {
-        ref: linkedinElementRef,
-        for: "linkedin",
+        ref: linkedinHeadlineElementRef,
+        for: "headline",
+      },
+      {
+        ref: linkedinAboutElementRef,
+        for: "about",
+      },
+      {
+        ref: linkedinJDElementRef,
+        for: "job-description",
+      },
+      {
+        ref: linkedinKeywordsElementRef,
+        for: "keywords",
       },
     ],
   };
@@ -38,7 +69,7 @@ export default function LinkedInPage() {
       }
     }
   }, [tourBotRef]);
- 
+
   const creditLimits = useSelector((state: any) => state.creditLimits);
   return (
     <>

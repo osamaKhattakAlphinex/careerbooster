@@ -32,6 +32,7 @@ export interface Tours {
   coverLetter: boolean;
   emailAssistant: boolean;
   linkedinOptimizer: boolean;
+  dashboard: boolean;
 }
 
 export interface WorkExperience {
@@ -128,6 +129,7 @@ const initialState: UserDataSlice = {
   trialResume: false,
   profileImage: "",
   tours: {
+    dashboard: false,
     resumeBuilder: false,
     coverLetter: false,
     emailAssistant: false,

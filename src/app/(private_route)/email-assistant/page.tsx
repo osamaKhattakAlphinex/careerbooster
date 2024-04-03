@@ -98,7 +98,7 @@ const PersonalizedEmailBot = () => {
     useTourContext();
 
   const tourBotConfig = {
-    name: "resumeBuilder",
+    name: "emailAssistant",
     audios: [
       {
         url: "/email-history-card.mp3",

@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import "@/app/(private_route)/dashboard.css";
 import { useTourContext } from "@/context/TourContext";
+import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 interface TooltipProps {
   text: string;
   children: React.ReactNode;
@@ -41,8 +42,11 @@ const DashboardBot = () => {
   const audioFileUrl3 = "/speech_cover_letter_card.mp3";
   const audioFileUrl4 = "/speech_linkedin_card.mp3";
   const audioFileUrl5 = "/speech_other_cards.mp3";
+  const { updateSaveHook } = useUpdateAndSave();
+  const { updateAndSaveTourStatus } = updateSaveHook;
 
   const {
+    tourBotRef,
     dashboardRef,
     innerToolsRef,
     resumeElementRef,
@@ -204,6 +208,8 @@ const DashboardBot = () => {
       }
     } catch (error) {
       console.log("Error: ", error);
+    } finally {
+      updateAndSaveTourStatus({ dashboard: true });
     }
   };
 
@@ -243,6 +249,7 @@ const DashboardBot = () => {
 
   return (
     <div
+      ref={(ref: any) => (tourBotRef.current = ref)}
       className={`fixed bottom-4 right-4 mr-4 mb-4 cursor-pointer z-10 avatar-animate`}
       onClick={handleClick}
     >

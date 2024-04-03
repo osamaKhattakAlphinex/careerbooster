@@ -18,7 +18,15 @@ interface TourRefs {
   tourBotRef: React.MutableRefObject<HTMLInputElement | null>;
   historyCardRef: React.MutableRefObject<HTMLInputElement | null>;
   emailCardsElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  // Add more references as needed
+
+  linkedinAboutElementRef: React.MutableRefObject<HTMLInputElement | null>;
+  linkedinAboutHistoryElementRef: React.MutableRefObject<HTMLInputElement | null>;
+  linkedinHeadlineElementRef: React.MutableRefObject<HTMLInputElement | null>;
+  linkedinHeadlineHistoryElementRef: React.MutableRefObject<HTMLInputElement | null>;
+  linkedinJDElementRef: React.MutableRefObject<HTMLInputElement | null>;
+  linkedinJDHistoryElementRef: React.MutableRefObject<HTMLInputElement | null>;
+  linkedinKeywordsElementRef: React.MutableRefObject<HTMLInputElement | null>;
+  linkedinKeywordsHistoryElementRef: React.MutableRefObject<HTMLInputElement | null>;
 }
 
 // Create a context with an initial value
@@ -48,6 +56,23 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
   const tourBotRef = useRef<HTMLInputElement | null>(null);
   const historyCardRef = useRef<HTMLInputElement | null>(null);
   const emailCardsElementRef = useRef<HTMLInputElement | null>(null);
+
+  const linkedinAboutElementRef = useRef<HTMLInputElement | null>(null);
+  const linkedinAboutHistoryElementRef = useRef<HTMLInputElement | null>(null);
+
+  const linkedinHeadlineElementRef = useRef<HTMLInputElement | null>(null);
+  const linkedinHeadlineHistoryElementRef = useRef<HTMLInputElement | null>(
+    null
+  );
+
+  const linkedinJDElementRef = useRef<HTMLInputElement | null>(null);
+  const linkedinJDHistoryElementRef = useRef<HTMLInputElement | null>(null);
+
+  const linkedinKeywordsElementRef = useRef<HTMLInputElement | null>(null);
+  const linkedinKeywordsHistoryElementRef = useRef<HTMLInputElement | null>(
+    null
+  );
+
   // Define the context value
   const contextValue: TourRefs = {
     contentScrollRef,
@@ -65,6 +90,19 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
     tourBotRef,
     historyCardRef,
     emailCardsElementRef,
+
+    linkedinAboutElementRef,
+    linkedinAboutHistoryElementRef,
+
+    linkedinHeadlineElementRef,
+    linkedinHeadlineHistoryElementRef,
+
+    linkedinJDElementRef,
+    linkedinJDHistoryElementRef,
+
+    linkedinKeywordsElementRef,
+    linkedinKeywordsHistoryElementRef,
+
     // Add more references as needed
   };
 
