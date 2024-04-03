@@ -95,7 +95,6 @@ const TourBot = ({ config }: any) => {
 
     if (toolRefs[0].ref.current) {
       applyStyles();
-
       toolRefs[0].ref.current.classList.remove("un-focused-tool");
     }
     const url = URL.createObjectURL(audioBlob);
