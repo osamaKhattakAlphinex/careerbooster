@@ -32,20 +32,14 @@ import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
 import CustomResumeSection from "../../resume-builder/CustomResumeSection";
-const ResumeTemplate16 = ({
-  streamedCustomData,
-  setStreamedCustomData,
-}: {
-  streamedCustomData: string;
-  setStreamedCustomData: any;
-}) => {
+const ResumeTemplate16 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
-
+  const [streamedCustomData, setStreamedCustomData] = useState<any>("");
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
 
   const [regenerating, setRegenerating] = useState(false);

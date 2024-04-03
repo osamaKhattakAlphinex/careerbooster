@@ -33,13 +33,7 @@ import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { useColorContext } from "@/context/ResumeColorContext";
 import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
 import CustomResumeSection from "../../resume-builder/CustomResumeSection";
-const ResumeTemplate10 = ({
-  streamedCustomData,
-  setStreamedCustomData,
-}: {
-  streamedCustomData: string;
-  setStreamedCustomData: any;
-}) => {
+const ResumeTemplate10 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
@@ -56,6 +50,7 @@ const ResumeTemplate10 = ({
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
+  const [streamedCustomData, setStreamedCustomData] = useState<any>("");
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
   const [streamedJDData, setStreamedJDData] = useState<any>("");

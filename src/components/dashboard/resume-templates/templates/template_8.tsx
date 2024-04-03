@@ -27,20 +27,14 @@ import useHandler from "@/hooks/useHandler";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
 import CustomResumeSection from "../../resume-builder/CustomResumeSection";
-const ResumeTemplate8 = ({
-  streamedCustomData,
-  setStreamedCustomData,
-}: {
-  streamedCustomData: string;
-  setStreamedCustomData: any;
-}) => {
+const ResumeTemplate8 = () => {
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [newAchievement, setNewAchievement] = useState("");
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [primarySkill, setPrimarySkill] = useState<string>("");
-
+  const [streamedCustomData, setStreamedCustomData] = useState<any>("");
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
   const userData = useSelector((state: any) => state.userData);
@@ -81,6 +75,7 @@ const ResumeTemplate8 = ({
     }
   }, [streamedCustomData]);
   //New code end
+
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
@@ -1076,6 +1071,7 @@ const ResumeTemplate8 = ({
           )}
           {/* Add Custom */}
           <CustomResumeSection />
+
           {/* Education */}
           {resume?.education.length > 0 && (
             <>
