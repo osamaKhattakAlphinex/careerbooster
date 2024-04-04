@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Education, WorkExperience,CustomEntry } from "./userDataSlice";
+import { Education, WorkExperience,CustomEntry, Certification, Training, Publication, Award, Interest, Language, Reference } from "./userDataSlice";
 
 export interface CustomSection {
   name?: string;
@@ -54,16 +54,65 @@ interface RegisterSlice {
     state: string;
     isValid: boolean;
   };
-  stepCustom: CustomSection[]; //
   stepSix: {
-    list: string[];
+    list?: Certification[];
+    editId?: string;
+    state?: string;
     isValid: boolean;
+
+  };
+  stepSeven: {
+    list?: Training[];
+    editId?: string;
+    state?: string;
+    isValid: boolean;
+
   };
   stepEight: {
-    password: string;
-    cPassword: string;
-    isValid: boolean;
+    list?: Publication[];
+    editId?: string;
+    state?: string;   
+     isValid: boolean;
+
   };
+  stepNine: {
+    list?: Award[];
+    editId?: string;
+    state?: string;
+    isValid: boolean;
+
+  };
+  stepTen: {
+    list?: Interest[];
+    editId?: string;
+    state?: string;
+    isValid: boolean;
+
+  };
+  stepEleven: {
+    list?: Language[];
+    editId?: string;
+    state?: string;
+    isValid: boolean;
+
+  };
+  stepTwelve: {
+    list?: Reference[];
+    editId?: string;
+    state?: string;
+    isValid: boolean;
+
+  };
+  // stepCustom: CustomSection[]; //
+  // stepSix: {
+  //   list: string[];
+  //   isValid: boolean;
+  // };
+  // stepEight: {
+  //   password: string;
+  //   cPassword: string;
+  //   isValid: boolean;
+  // };
 }
 
 const initialState: RegisterSlice = {
@@ -114,16 +163,59 @@ const initialState: RegisterSlice = {
     editId: "",
     isValid: true,
   },
-  stepCustom: [],
   stepSix: {
     list: [],
+    state: "show",
+    editId: "",
+    isValid: true,
+  },
+  stepSeven: {
+    list: [],
+    state: "show",
+    editId: "",
     isValid: true,
   },
   stepEight: {
-    password: "",
-    cPassword: "",
-    isValid: false,
+    list: [],
+    state: "show",
+    editId: "",
+    isValid: true,
   },
+  stepNine: {
+    list: [],
+    state: "show",
+    editId: "",
+    isValid: true,
+  },
+  stepTen: {
+    list: [],
+    state: "show",
+    editId: "",
+    isValid: true,
+  },
+  stepEleven: {
+    list: [],
+    state: "show",
+    editId: "",
+    isValid: true,
+  },
+  stepTwelve: {
+    list: [],
+    state: "show",
+    editId: "",
+    isValid: true,
+  },
+  
+  // stepCustom: [],
+  // stepSix: {
+  //   list: [],
+  //   isValid: true,
+  // },
+  // stepEight: {
+  //   password: "",
+  //   cPassword: "",
+  //   isValid: false,
+  // },
 };
 
 const registerSlice = createSlice({

@@ -90,6 +90,7 @@ const DashboardBot = () => {
   };
 
   const fetchAudio = async (audioFileUrl: any, explanationFor: string) => {
+    
     try {
       const response = await fetch(audioFileUrl);
       const audioBlob = await response.blob();
@@ -246,6 +247,21 @@ const DashboardBot = () => {
       audio.removeEventListener("ended", handleAudioEnded);
     };
   }, []);
+
+  useEffect(() => {
+    console.log("in")
+  //   navigator.mediaDevices
+  // .getUserMedia({
+  //     audio: true,
+  //     video: true,
+  //   }).then((mediaStream) => {
+  //     console.log(mediaStream)
+  //   })
+  //   .catch((err) => {
+  //     // always check for errors at the end.
+  //     console.error(`${err.name}: ${err.message}`);
+  //   });
+  },[])
 
   return (
     <div

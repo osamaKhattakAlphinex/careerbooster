@@ -290,8 +290,11 @@ const ResumeTemplate1 = ({
               />
             </li>
           </ul>
-          {/* EXECUTIVE SUMMARY */}
+
+
           <div className="flex flex-col flex-wrap w-full ">
+
+          {/* EXECUTIVE SUMMARY */}
             <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 md:mt-3"></span>
             <h3 className="flex items-center gap-2 font-semibold uppercase border-2 border-transparent md:my-1 xs:text-xs md:text-base hover:border-dashed hover:border-gray-500">
               <svg
@@ -346,6 +349,9 @@ const ResumeTemplate1 = ({
                 />
               </div>
             </Toolbar>
+
+
+
             {/* Skills */}
 
             {resume?.primarySkills && resume?.primarySkills.length > 0 && (
@@ -472,6 +478,7 @@ const ResumeTemplate1 = ({
                 )}
               </>
             )}
+
             {/* Work Experience */}
             <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
             <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
@@ -1194,6 +1201,7 @@ const ResumeTemplate1 = ({
                 }}
               ></div>
             )}
+            
             {/* Add Custom */}
             {/* <CustomResumeSection /> */}
             {/* Education */}
@@ -1368,6 +1376,9 @@ const ResumeTemplate1 = ({
                 </ul>
               </>
             )}
+
+
+
             {/* <AddSection /> */}
           </div>
         </div>

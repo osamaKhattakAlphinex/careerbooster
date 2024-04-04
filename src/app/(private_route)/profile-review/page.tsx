@@ -17,7 +17,6 @@ import {
   setStepOne,
   setStepThree,
   setStepTwo,
-
 } from "@/store/registerSlice";
 import StepEight from "@/components/dashboard/profileReview/StepEight";
 import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
@@ -47,26 +46,24 @@ const ProfileReview = () => {
   const reduxStep = register.activeStep;
 
   const singleHandleSaveDetails = async () => {
- 
-  let obj={ 
-        firstName: register.stepOne.firstName,
-       lastName: register.stepOne.lastName,
-       email: userData.email,
-       linkedin: userData.linkedin,
-       file: resume.uploadedFileName,
-       phone: register.stepTwo.phoneNumber,
- 
-       contact: {
-         country: register.stepThree.country,
-         street: register.stepThree.street,
-         cityState: register.stepThree.cityState,
-         postalCode: register.stepThree.postalCode,
-       },
-        education: register.stepFour.list,
-        experience: register.stepFive.list,
-        customDetails:register.stepCustom,
-      }
+    let obj = {
+      firstName: register.stepOne.firstName,
+      lastName: register.stepOne.lastName,
+      email: userData.email,
+      linkedin: userData.linkedin,
+      file: resume.uploadedFileName,
+      phone: register.stepTwo.phoneNumber,
 
+      contact: {
+        country: register.stepThree.country,
+        street: register.stepThree.street,
+        cityState: register.stepThree.cityState,
+        postalCode: register.stepThree.postalCode,
+      },
+      education: register.stepFour.list,
+      experience: register.stepFive.list,
+      customDetails: register.stepCustom,
+    };
 
     return axios
       .post("/api/users/updateUserData", {
@@ -169,17 +166,15 @@ const ProfileReview = () => {
     }
   }, [reduxStep, urlStep]);
 
- 
   useEffect(() => {
-    if (userData ) {
-      if( userData.experience){
+    if (userData) {
+      if (userData.experience) {
         dispatch(
           setStepOne({
             ...stepOne,
             firstName: userData.firstName,
             lastName: userData.lastName,
           })
-          
         );
         dispatch(
           setStepTwo({
@@ -200,13 +195,12 @@ const ProfileReview = () => {
         );
         dispatch(setStepFive({ ...stepFive, list: userData.experience }));
       }
-      if(userData.customDetails){
+      if (userData.customDetails) {
         dispatch(setStepCustom(userData.customDetails));
       }
-      if(userData.education){
+      if (userData.education) {
         dispatch(setStepFour({ ...stepFour, list: userData.education }));
       }
-
     }
   }, [userData]);
   return (
@@ -233,26 +227,24 @@ const ProfileReview = () => {
                           : "xs:justify-end "
                       } items-center`}
                     ></div>
+
                     {register.activeStep === 1 && (
                       <>
-                        {register.activeStep === 1 && (
-                          <>
-                            <StepOne />
-                            <StepTwo />
-                            <StepThree />
-                          </>
-                        )}
-                        {/* {register.activeStep === 2 && <StepTwo />}
-                    {register.activeStep === 3 && <StepThree />} */}
+                        <StepOne />
+                        <StepTwo />
+                        <StepThree />
                       </>
                     )}
+                    {/* {register.activeStep === 2 && <StepTwo />}
+                    {register.activeStep === 3 && <StepThree />} */}
+
                     {register.activeStep === 2 && <StepFour />}
                     {register.activeStep === 3 && <StepFive />}
-                    {/* {register.activeStep === 4 && <StepCustom />} */}
+                    {register.activeStep === 4 && <StepCustom />}
 
                     {/* {register.activeStep === 4 && <StepSix />} */}
 
-                    {register.activeStep === 4 && <ProfilePreview />}
+                    {register.activeStep === 5 && <ProfilePreview />}
                     {/* {register.activeStep === 6 && <StepEight />} */}
 
                     <div
@@ -282,7 +274,7 @@ const ProfileReview = () => {
                         </button>
                       )}
 
-                      {register.activeStep < 4 && (
+                      {register.activeStep < 5 && (
                         <button
                           type="submit"
                           // disabled={isNextDisabled()}
@@ -296,7 +288,7 @@ const ProfileReview = () => {
                         </button>
                       )}
 
-                      {register.activeStep === 4 && (
+                      {register.activeStep === 5 && (
                         <button
                           type="submit"
                           className="py-3 mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"

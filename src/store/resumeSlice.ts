@@ -3,6 +3,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface WorkExperience {
+  title: string;
+  company?: string;
+  country?: string;
+  cityState?: string;
+  fromMonth?: string;
+  fromYear?: string;
+  isContinue?: boolean;
+  toMonth?: string;
+  toYear?: string;
+  achievements?: string[];
+}
+interface Training {
   company: string;
   position: string;
   startDate: string;
@@ -108,6 +120,7 @@ export interface Resume {
   certifications: Certification[];
   awards: Award[];
   publications: Publication[];
+  trainings: Training[];
   references: Reference[];
   interests: Interest[];
 }
@@ -171,6 +184,7 @@ const initialState: Resume = {
   interests: [],
   awards: [],
   publications: [],
+  trainings:[],
   references: [],
   languages: [],
   certifications: [],

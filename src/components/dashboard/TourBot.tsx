@@ -100,8 +100,11 @@ const TourBot = ({ config }: any) => {
     return url;
   };
 
+
   const handleClick = async () => {
+   
     try {
+     
       if (isGif) {
         setIsGif(false);
         if (isAudioPlaying) {
