@@ -1,27 +1,900 @@
 "use client";
-import { plusSimpleIcon } from "@/helpers/iconsProvider";
+import { useFormik } from "formik";
+import { useState } from "react";
+import * as Yup from "yup";
 
-import AddCustomizeSection from "./AddCustomizeSection";
+// Add item Buttons
 
+const AddItemBtn = ({ onClick, btnText = "Add Item" }: any) => {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+    >
+      {btnText}
+    </button>
+  );
+};
 
-const StepCustom = () => {
+// forms
+const PublicationsForm = ({ children }: any) => {
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      publisher: "",
+      date: "",
+      description: "",
+    },
 
+    onSubmit: async (values) => {
+      console.log(values);
+
+      try {
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    },
+
+    // validationSchema: Yup.object().shape({
+    //   company: Yup.string().required("company is required"),
+    // }),
+  });
   return (
     <div>
-      <h1 className="text-lg xs:my-5 justify-between items-center flex md:mt-2  font-bold leading-tight tracking-tight  md:text-2xl dark:text-gray-100 text-gray-950 ">
-        Custom Sections
-      </h1>
-      <button
-        type="button"
-        onClick={(e) => {}}
-        className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
-      >
-        {plusSimpleIcon}
-        Add Section
-      </button>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="mb-4">
+          <label
+            htmlFor="title"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Title
+          </label>
+          <input
+            id="title"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Title"
+            value={formik.values.title}
+            onChange={formik.handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="publisher"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Publisher
+          </label>
+          <input
+            id="publisher"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Publisher"
+            onChange={formik.handleChange}
+            value={formik.values.publisher}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="date"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Date
+          </label>
+          <input
+            id="date"
+            type="date"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Date"
+            onChange={formik.handleChange}
+            value={formik.values.date}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="description"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Description
+          </label>
+          <textarea
+            id="description"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            onChange={formik.handleChange}
+            placeholder="Description"
+            value={formik.values.description}
+          ></textarea>
+        </div>
+        <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
+          <input
+            type="submit"
+            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value="Add Publication"
+          />
+          {children}
+        </div>
+      </form>
+    </div>
+  );
+};
+const CertificationsForm = ({ children }: any) => {
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      issuingOrganization: "",
+      date: "",
+      description: "",
+    },
 
-      <div>
-        <AddCustomizeSection />
+    onSubmit: async (values) => {
+      console.log(values);
+
+      try {
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    },
+
+    // validationSchema: Yup.object().shape({
+    //   company: Yup.string().required("company is required"),
+    // }),
+  });
+  return (
+    <div>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="mb-4">
+          <label
+            htmlFor="title"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Title
+          </label>
+          <input
+            id="title"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Title"
+            value={formik.values.title}
+            onChange={formik.handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="issuingOrganization"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Issuing Organization
+          </label>
+          <input
+            id="issuingOrganization"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Issuing Organization"
+            onChange={formik.handleChange}
+            value={formik.values.issuingOrganization}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="date"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Date
+          </label>
+          <input
+            id="date"
+            type="date"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Date"
+            onChange={formik.handleChange}
+            value={formik.values.date}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="description"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Description
+          </label>
+          <textarea
+            id="description"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            onChange={formik.handleChange}
+            placeholder="Description"
+            value={formik.values.description}
+          ></textarea>
+        </div>
+        <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
+          <input
+            type="submit"
+            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value="Add Certification"
+          />
+          {children}
+        </div>
+      </form>
+    </div>
+  );
+};
+const AwardsForm = ({ children }: any) => {
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      awardingOrganization: "",
+      date: "",
+      description: "",
+    },
+
+    onSubmit: async (values) => {
+      console.log(values);
+
+      try {
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    },
+
+    // validationSchema: Yup.object().shape({
+    //   company: Yup.string().required("company is required"),
+    // }),
+  });
+  return (
+    <div>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="mb-4">
+          <label
+            htmlFor="title"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Title
+          </label>
+          <input
+            id="title"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Title"
+            value={formik.values.title}
+            onChange={formik.handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="awardingOrganization"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Awarding Organization
+          </label>
+          <input
+            id="awardingOrganization"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Awarding Organization"
+            onChange={formik.handleChange}
+            value={formik.values.awardingOrganization}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="date"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Date
+          </label>
+          <input
+            id="date"
+            type="date"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Date"
+            onChange={formik.handleChange}
+            value={formik.values.date}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="description"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Description
+          </label>
+          <textarea
+            id="description"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            onChange={formik.handleChange}
+            placeholder="Description"
+            value={formik.values.description}
+          ></textarea>
+        </div>
+        <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
+          <input
+            type="submit"
+            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value="Add Awards"
+          />
+          {children}
+        </div>
+      </form>
+    </div>
+  );
+};
+const InterestsForm = ({ children }: any) => {
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      description: "",
+    },
+
+    onSubmit: async (values) => {
+      console.log(values);
+
+      try {
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    },
+
+    // validationSchema: Yup.object().shape({
+    //   company: Yup.string().required("company is required"),
+    // }),
+  });
+  return (
+    <div>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="mb-4">
+          <label
+            htmlFor="name"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Name
+          </label>
+          <input
+            id="name"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Name"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="description"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Description
+          </label>
+          <textarea
+            id="description"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            onChange={formik.handleChange}
+            placeholder="Description"
+            value={formik.values.description}
+          ></textarea>
+        </div>
+        <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
+          <input
+            type="submit"
+            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value="Add Interest"
+          />
+          {children}
+        </div>
+      </form>
+    </div>
+  );
+};
+const ReferencesForm = ({ children }: any) => {
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      position: "",
+      company: "",
+      contactInformation: "",
+    },
+    onSubmit: async (values) => {
+      console.log(values);
+
+      try {
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    },
+
+    validationSchema: Yup.object().shape({
+      company: Yup.string().required("company is required"),
+    }),
+  });
+  return (
+    <div>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="mb-4">
+          <label
+            htmlFor="name"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Name
+          </label>
+          <input
+            id="name"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Name"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="position"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Position
+          </label>
+          <input
+            id="position"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Position"
+            onChange={formik.handleChange}
+            value={formik.values.position}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="company"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Company
+          </label>
+          <input
+            id="company"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Company"
+            onChange={formik.handleChange}
+            value={formik.values.company}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="contactInformation"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Contact Information
+          </label>
+          <input
+            id="contactInformation"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            onChange={formik.handleChange}
+            placeholder="Contact Information"
+            value={formik.values.contactInformation}
+          />
+        </div>
+
+        <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
+          <input
+            type="submit"
+            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value="Add Reference"
+          />
+          {children}
+        </div>
+      </form>
+    </div>
+  );
+};
+const TrainingForm = ({ children }: any) => {
+  const formik = useFormik({
+    initialValues: {
+      company: "",
+      position: "",
+      startDate: "",
+      endDate: "",
+      description: "",
+    },
+
+    onSubmit: async (values) => {
+      console.log(values);
+
+      try {
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    },
+
+    validationSchema: Yup.object().shape({
+      company: Yup.string().required("company is required"),
+    }),
+  });
+  return (
+    <div>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="mb-4">
+          <label
+            htmlFor="company"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Company
+          </label>
+          <input
+            id="company"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Company"
+            value={formik.values.company}
+            onChange={formik.handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="position"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Position
+          </label>
+          <input
+            id="position"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Position"
+            onChange={formik.handleChange}
+            value={formik.values.position}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="startDate"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Start Date
+          </label>
+          <input
+            id="startDate"
+            type="date"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Start Date"
+            onChange={formik.handleChange}
+            value={formik.values.startDate}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="endDate"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            End Date
+          </label>
+          <input
+            id="endDate"
+            type="date"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            onChange={formik.handleChange}
+            placeholder="End Date"
+            value={formik.values.endDate}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="description"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Description
+          </label>
+          <textarea
+            id="description"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            onChange={formik.handleChange}
+            placeholder="Description"
+            value={formik.values.description}
+          ></textarea>
+        </div>
+        <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
+          <input
+            type="submit"
+            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value="Add Training"
+          />
+          {children}
+        </div>
+      </form>
+    </div>
+  );
+};
+const LangaugesForm = ({ children }: any) => {
+  const formik = useFormik({
+    initialValues: {
+      language: "",
+      proficiency: "",
+    },
+
+    onSubmit: async (values) => {
+      console.log(values);
+
+      try {
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    },
+
+    // validationSchema: Yup.object().shape({
+    //   company: Yup.string().required("company is required"),
+    // }),
+  });
+  return (
+    <div>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="mb-4">
+          <label
+            htmlFor="language"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Language
+          </label>
+          <input
+            id="language"
+            type="text"
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Language"
+            value={formik.values.language}
+            onChange={formik.handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="proficiency"
+            className="block mb-2 text-sm font-bold text-gray-200"
+          >
+            Proficiency
+          </label>
+          <select
+            id="proficiency"
+            value={formik.values.proficiency}
+            onChange={formik.handleChange}
+            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+          >
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+        </div>
+        <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
+          <input
+            type="submit"
+            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value="Add Language"
+          />
+          {children}
+        </div>
+      </form>
+    </div>
+  );
+};
+
+const StepCustom = () => {
+  const [expanded, setExpanded] = useState<{
+    languages: boolean;
+    references: boolean;
+    publications: boolean;
+    certifications: boolean;
+    awards: boolean;
+    interests: boolean;
+    trainings: boolean;
+  }>({
+    languages: false,
+    references: false,
+    publications: false,
+    awards: false,
+    interests: false,
+    certifications: false,
+    trainings: false,
+  });
+
+  return (
+    <div className="flex flex-col items-start justify-start gap-4 ">
+      {/* publications */}
+      <div className="w-full">
+        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
+          Publications
+        </h1>
+        {expanded.publications ? (
+          <PublicationsForm>
+            <AddItemBtn
+              btnText="Cancel"
+              onClick={() =>
+                setExpanded((prev) => ({
+                  ...prev,
+                  publications: !prev.publications,
+                }))
+              }
+            />
+          </PublicationsForm>
+        ) : (
+          <AddItemBtn
+            onClick={() =>
+              setExpanded((prev) => ({
+                ...prev,
+                publications: !prev.publications,
+              }))
+            }
+          />
+        )}
+      </div>
+      {/* certifications */}
+      <div className="w-full">
+        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
+          Certifications
+        </h1>
+        {expanded.certifications ? (
+          <CertificationsForm>
+            <AddItemBtn
+              btnText="Cancel"
+              onClick={() =>
+                setExpanded((prev) => ({
+                  ...prev,
+                  certifications: !prev.certifications,
+                }))
+              }
+            />
+          </CertificationsForm>
+        ) : (
+          <AddItemBtn
+            onClick={() =>
+              setExpanded((prev) => ({
+                ...prev,
+                certifications: !prev.certifications,
+              }))
+            }
+          />
+        )}
+      </div>
+      {/* awards */}
+      <div className="w-full">
+        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
+          Awards
+        </h1>
+        {expanded.awards ? (
+          <AwardsForm>
+            <AddItemBtn
+              btnText="Cancel"
+              onClick={() =>
+                setExpanded((prev) => ({
+                  ...prev,
+                  awards: !prev.awards,
+                }))
+              }
+            />
+          </AwardsForm>
+        ) : (
+          <AddItemBtn
+            onClick={() =>
+              setExpanded((prev) => ({
+                ...prev,
+                awards: !prev.awards,
+              }))
+            }
+          />
+        )}
+      </div>
+      {/* references */}
+      <div className="w-full">
+        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
+          References
+        </h1>
+        {expanded.references ? (
+          <ReferencesForm>
+            <AddItemBtn
+              btnText="Cancel"
+              onClick={() =>
+                setExpanded((prev) => ({
+                  ...prev,
+                  references: !prev.references,
+                }))
+              }
+            />
+          </ReferencesForm>
+        ) : (
+          <AddItemBtn
+            onClick={() =>
+              setExpanded((prev) => ({
+                ...prev,
+                references: !prev.references,
+              }))
+            }
+          />
+        )}
+      </div>
+      {/* trainings */}
+      <div className="w-full">
+        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
+          Trainings
+        </h1>
+        {expanded.trainings ? (
+          <TrainingForm>
+            <AddItemBtn
+              btnText="Cancel"
+              onClick={() =>
+                setExpanded((prev) => ({
+                  ...prev,
+                  trainings: !prev.trainings,
+                }))
+              }
+            />
+          </TrainingForm>
+        ) : (
+          <AddItemBtn
+            onClick={() =>
+              setExpanded((prev) => ({
+                ...prev,
+                trainings: !prev.trainings,
+              }))
+            }
+          />
+        )}
+      </div>
+      {/* interests */}
+      <div className="w-full">
+        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
+          Interests
+        </h1>
+        {expanded.interests ? (
+          <InterestsForm>
+            <AddItemBtn
+              btnText="Cancel"
+              onClick={() =>
+                setExpanded((prev) => ({
+                  ...prev,
+                  interests: !prev.interests,
+                }))
+              }
+            />
+          </InterestsForm>
+        ) : (
+          <AddItemBtn
+            onClick={() =>
+              setExpanded((prev) => ({
+                ...prev,
+                interests: !prev.interests,
+              }))
+            }
+          />
+        )}
+      </div>
+      {/* languages */}
+      <div className="w-full">
+        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
+          Languages
+        </h1>
+        {expanded.languages ? (
+          <LangaugesForm>
+            <AddItemBtn
+              btnText="Cancel"
+              onClick={() =>
+                setExpanded((prev) => ({
+                  ...prev,
+                  languages: !prev.languages,
+                }))
+              }
+            />
+          </LangaugesForm>
+        ) : (
+          <AddItemBtn
+            onClick={() =>
+              setExpanded((prev) => ({
+                ...prev,
+                languages: !prev.languages,
+              }))
+            }
+          />
+        )}
       </div>
     </div>
   );
