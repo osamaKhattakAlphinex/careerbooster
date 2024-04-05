@@ -1,24 +1,33 @@
 "use client";
+import { makeid } from "@/helpers/makeid";
+import { setStepEight, setStepNine, setStepSix, setStepTwelve } from "@/store/registerSlice";
+import { Award, Certification, Publication, Reference } from "@/store/userDataSlice";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
+import CustomItemCard from "./CustomItemCard";
 
 // Add item Buttons
 
 const AddItemBtn = ({ onClick, btnText = "Add Item" }: any) => {
   return (
     <button
-      type="button"
-      onClick={onClick}
-      className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+    type="button"
+    onClick={onClick}
+    className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
     >
       {btnText}
     </button>
   );
 };
-
 // forms
 const PublicationsForm = ({ children }: any) => {
+  const dispatch = useDispatch();
+  
+  const stepEight = useSelector((state: any) => state.register.stepEight);
+  const { list, state } = stepEight;
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -28,13 +37,11 @@ const PublicationsForm = ({ children }: any) => {
     },
 
     onSubmit: async (values) => {
-      console.log(values);
-
-      try {
-      } catch (error) {
-        console.log(error);
-      } finally {
-      }
+      const obj = { id: makeid(), ...values };
+      const newList = [obj,...list];
+      dispatch(setStepEight({ list: newList }));
+      dispatch(setStepEight({ state: "show" }));
+      
     },
 
     // validationSchema: Yup.object().shape({
@@ -120,6 +127,11 @@ const PublicationsForm = ({ children }: any) => {
   );
 };
 const CertificationsForm = ({ children }: any) => {
+  const dispatch = useDispatch();
+
+  const stepSix = useSelector((state: any) => state.register.stepSix);
+  const { list, state } = stepSix;
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -129,13 +141,12 @@ const CertificationsForm = ({ children }: any) => {
     },
 
     onSubmit: async (values) => {
-      console.log(values);
 
-      try {
-      } catch (error) {
-        console.log(error);
-      } finally {
-      }
+      const obj = { id: makeid(), ...values };
+      const newList = [obj,...list];
+      dispatch(setStepSix({ list: newList }));
+      dispatch(setStepSix({ state: "show" }));
+      
     },
 
     // validationSchema: Yup.object().shape({
@@ -221,6 +232,9 @@ const CertificationsForm = ({ children }: any) => {
   );
 };
 const AwardsForm = ({ children }: any) => {
+  const dispatch = useDispatch();
+  const stepNine = useSelector((state: any) => state.register.stepNine);
+  const { list, state } = stepNine;
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -230,13 +244,11 @@ const AwardsForm = ({ children }: any) => {
     },
 
     onSubmit: async (values) => {
-      console.log(values);
 
-      try {
-      } catch (error) {
-        console.log(error);
-      } finally {
-      }
+      const obj = { id: makeid(), ...values };
+      const newList = [obj,...list];
+      dispatch(setStepNine({ list: newList }));
+      dispatch(setStepNine({ state: "show" }));
     },
 
     // validationSchema: Yup.object().shape({
@@ -389,6 +401,9 @@ const InterestsForm = ({ children }: any) => {
   );
 };
 const ReferencesForm = ({ children }: any) => {
+  const dispatch = useDispatch();
+  const stepTwelve = useSelector((state: any) => state.register.stepTwelve);
+  const { list, state } = stepTwelve;
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -397,13 +412,10 @@ const ReferencesForm = ({ children }: any) => {
       contactInformation: "",
     },
     onSubmit: async (values) => {
-      console.log(values);
-
-      try {
-      } catch (error) {
-        console.log(error);
-      } finally {
-      }
+      const obj = { id: makeid(), ...values };
+      const newList = [obj,...list];
+      dispatch(setStepTwelve({ list: newList }));
+      dispatch(setStepTwelve({ state: "show" }));
     },
 
     validationSchema: Yup.object().shape({
@@ -698,6 +710,15 @@ const StepCustom = () => {
     trainings: false,
   });
 
+  const stepEight = useSelector((state: any) => state.register.stepEight);
+  const { list: publicationsList } = stepEight;
+  const stepSix = useSelector((state: any) => state.register.stepSix);
+  const { list: certificationsList } = stepSix;
+  const stepNine = useSelector((state: any) => state.register.stepNine);
+  const { list: awardsList } = stepNine;
+  const stepTwelve = useSelector((state: any) => state.register.stepTwelve);
+  const { list: referencesList } = stepTwelve;
+
   return (
     <div className="flex flex-col items-start justify-start gap-4 ">
       {/* publications */}
@@ -705,6 +726,16 @@ const StepCustom = () => {
         <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
           Publications
         </h1>
+        {publicationsList.length === 0 && <p>No Publications Added</p>}
+          <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+            {publicationsList.map((rec: Publication) => (
+              <div key={rec.id}>
+                                <CustomItemCard/>
+
+              </div>
+            ))}
+            </div>
+
         {expanded.publications ? (
           <PublicationsForm>
             <AddItemBtn
@@ -733,6 +764,14 @@ const StepCustom = () => {
         <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
           Certifications
         </h1>
+        {certificationsList.length === 0 && <p>No Certifications Added</p>}
+          <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+            {certificationsList.map((rec: Certification) => (
+              <div key={rec.id}>
+                <CustomItemCard/>
+              </div>
+            ))}
+            </div>
         {expanded.certifications ? (
           <CertificationsForm>
             <AddItemBtn
@@ -761,6 +800,15 @@ const StepCustom = () => {
         <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
           Awards
         </h1>
+        {awardsList.length === 0 && <p>No Awards Added</p>}
+          <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+            {awardsList.map((rec: Award) => (
+              <div key={rec.id}>
+                                <CustomItemCard/>
+
+              </div>
+            ))}
+            </div>
         {expanded.awards ? (
           <AwardsForm>
             <AddItemBtn
@@ -789,6 +837,15 @@ const StepCustom = () => {
         <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
           References
         </h1>
+        {referencesList.length === 0 && <p>No References Added</p>}
+          <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+            {referencesList.map((rec: Reference) => (
+              <div key={rec.id}>
+                                <CustomItemCard/>
+
+              </div>
+            ))}
+            </div>
         {expanded.references ? (
           <ReferencesForm>
             <AddItemBtn

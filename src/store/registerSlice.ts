@@ -333,6 +333,42 @@ const registerSlice = createSlice({
         },
       };
     },
+    setStepNine(state, action) {
+      return {
+        ...state,
+        stepNine: {
+          ...state.stepEight,
+          ...action.payload,
+        },
+      };
+    },
+    setStepTen(state, action) {
+      return {
+        ...state,
+        stepTen: {
+          ...state.stepEight,
+          ...action.payload,
+        },
+      };
+    },
+    setStepEleven(state, action) {
+      return {
+        ...state,
+        stepEleven: {
+          ...state.stepEight,
+          ...action.payload,
+        },
+      };
+    },
+    setStepTwelve(state, action) {
+      return {
+        ...state,
+        stepTwelve: {
+          ...state.stepEight,
+          ...action.payload,
+        },
+      };
+    },
     setField(state, action) {
       return {
         ...state,
@@ -357,6 +393,10 @@ export const {
   setStepCustom,
   setStepSix,
   setStepEight,
+  setStepNine,
+  setStepTen,
+  setStepEleven,
+  setStepTwelve,
   setField,
 } = registerSlice.actions;
 
