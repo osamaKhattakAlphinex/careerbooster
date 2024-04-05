@@ -246,7 +246,7 @@ const resumeSlice = createSlice({
         uploadedFileName: action.payload,
       };
     },
-
+  
     setBasicInfo(state, action) {
       return {
         ...state,

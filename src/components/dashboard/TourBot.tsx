@@ -33,7 +33,6 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
 const TourBot = ({ config }: any) => {
   const [toolRefs, setToolRefs] = useState<any>(null);
   const [audios, setAudios] = useState<any>(null);
-
   const [isGif, setIsGif] = useState(false);
   const [audioPlayed, setAudioPlayed] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);

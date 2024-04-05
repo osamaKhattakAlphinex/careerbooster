@@ -1,7 +1,20 @@
 "use client";
 import { makeid } from "@/helpers/makeid";
-import { setStepEight, setStepNine, setStepSix, setStepTwelve } from "@/store/registerSlice";
-import { Award, Certification, Publication, Reference } from "@/store/userDataSlice";
+import {
+  setStepEight,
+  setStepEleven,
+  setStepNine,
+  setStepSeven,
+  setStepSix,
+  setStepTen,
+  setStepTwelve,
+} from "@/store/registerSlice";
+import {
+  Award,
+  Certification,
+  Publication,
+  Reference,
+} from "@/store/userDataSlice";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,9 +26,9 @@ import CustomItemCard from "./CustomItemCard";
 const AddItemBtn = ({ onClick, btnText = "Add Item" }: any) => {
   return (
     <button
-    type="button"
-    onClick={onClick}
-    className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+      type="button"
+      onClick={onClick}
+      className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
     >
       {btnText}
     </button>
@@ -24,7 +37,7 @@ const AddItemBtn = ({ onClick, btnText = "Add Item" }: any) => {
 // forms
 const PublicationsForm = ({ children }: any) => {
   const dispatch = useDispatch();
-  
+
   const stepEight = useSelector((state: any) => state.register.stepEight);
   const { list, state } = stepEight;
 
@@ -38,10 +51,9 @@ const PublicationsForm = ({ children }: any) => {
 
     onSubmit: async (values) => {
       const obj = { id: makeid(), ...values };
-      const newList = [obj,...list];
+      const newList = [obj, ...list];
       dispatch(setStepEight({ list: newList }));
       dispatch(setStepEight({ state: "show" }));
-      
     },
 
     // validationSchema: Yup.object().shape({
@@ -141,12 +153,10 @@ const CertificationsForm = ({ children }: any) => {
     },
 
     onSubmit: async (values) => {
-
       const obj = { id: makeid(), ...values };
-      const newList = [obj,...list];
+      const newList = [obj, ...list];
       dispatch(setStepSix({ list: newList }));
       dispatch(setStepSix({ state: "show" }));
-      
     },
 
     // validationSchema: Yup.object().shape({
@@ -244,9 +254,8 @@ const AwardsForm = ({ children }: any) => {
     },
 
     onSubmit: async (values) => {
-
       const obj = { id: makeid(), ...values };
-      const newList = [obj,...list];
+      const newList = [obj, ...list];
       dispatch(setStepNine({ list: newList }));
       dispatch(setStepNine({ state: "show" }));
     },
@@ -334,6 +343,9 @@ const AwardsForm = ({ children }: any) => {
   );
 };
 const InterestsForm = ({ children }: any) => {
+  const dispatch = useDispatch();
+  const stepTen = useSelector((state: any) => state.register.stepTen);
+  const { list, state } = stepTen;
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -341,13 +353,10 @@ const InterestsForm = ({ children }: any) => {
     },
 
     onSubmit: async (values) => {
-      console.log(values);
-
-      try {
-      } catch (error) {
-        console.log(error);
-      } finally {
-      }
+      const obj = { id: makeid(), ...values };
+      const newList = [obj, ...list];
+      dispatch(setStepTen({ list: newList }));
+      dispatch(setStepTen({ state: "show" }));
     },
 
     // validationSchema: Yup.object().shape({
@@ -413,7 +422,7 @@ const ReferencesForm = ({ children }: any) => {
     },
     onSubmit: async (values) => {
       const obj = { id: makeid(), ...values };
-      const newList = [obj,...list];
+      const newList = [obj, ...list];
       dispatch(setStepTwelve({ list: newList }));
       dispatch(setStepTwelve({ state: "show" }));
     },
@@ -503,6 +512,9 @@ const ReferencesForm = ({ children }: any) => {
   );
 };
 const TrainingForm = ({ children }: any) => {
+  const dispatch = useDispatch();
+  const stepSeven = useSelector((state: any) => state.register.stepSeven);
+  const { list, state } = stepSeven;
   const formik = useFormik({
     initialValues: {
       company: "",
@@ -513,13 +525,10 @@ const TrainingForm = ({ children }: any) => {
     },
 
     onSubmit: async (values) => {
-      console.log(values);
-
-      try {
-      } catch (error) {
-        console.log(error);
-      } finally {
-      }
+      const obj = { id: makeid(), ...values };
+      const newList = [obj, ...list];
+      dispatch(setStepSeven({ list: newList }));
+      dispatch(setStepSeven({ state: "show" }));
     },
 
     validationSchema: Yup.object().shape({
@@ -621,6 +630,9 @@ const TrainingForm = ({ children }: any) => {
   );
 };
 const LangaugesForm = ({ children }: any) => {
+  const dispatch = useDispatch();
+  const stepEleven = useSelector((state: any) => state.register.stepEleven);
+  const { list, state } = stepEleven;
   const formik = useFormik({
     initialValues: {
       language: "",
@@ -628,13 +640,10 @@ const LangaugesForm = ({ children }: any) => {
     },
 
     onSubmit: async (values) => {
-      console.log(values);
-
-      try {
-      } catch (error) {
-        console.log(error);
-      } finally {
-      }
+      const obj = { id: makeid(), ...values };
+      const newList = [obj, ...list];
+      dispatch(setStepEleven({ list: newList }));
+      dispatch(setStepEleven({ state: "show" }));
     },
 
     // validationSchema: Yup.object().shape({
@@ -714,8 +723,14 @@ const StepCustom = () => {
   const { list: publicationsList } = stepEight;
   const stepSix = useSelector((state: any) => state.register.stepSix);
   const { list: certificationsList } = stepSix;
+  const stepSeven = useSelector((state: any) => state.register.stepSeven);
+  const { list: trainingsList } = stepSeven;
   const stepNine = useSelector((state: any) => state.register.stepNine);
   const { list: awardsList } = stepNine;
+  const stepTen = useSelector((state: any) => state.register.stepTen);
+  const { list: interestsList} = stepTen;
+  const stepEleven = useSelector((state: any) => state.register.stepEleven);
+  const { list: languagesList} = stepEleven;
   const stepTwelve = useSelector((state: any) => state.register.stepTwelve);
   const { list: referencesList } = stepTwelve;
 
@@ -727,14 +742,13 @@ const StepCustom = () => {
           Publications
         </h1>
         {publicationsList.length === 0 && <p>No Publications Added</p>}
-          <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
-            {publicationsList.map((rec: Publication) => (
-              <div key={rec.id}>
-                                <CustomItemCard/>
-
-              </div>
-            ))}
+        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+          {publicationsList.map((rec: Publication) => (
+            <div key={rec.id}>
+              <CustomItemCard rec={rec}/>
             </div>
+          ))}
+        </div>
 
         {expanded.publications ? (
           <PublicationsForm>
@@ -765,13 +779,13 @@ const StepCustom = () => {
           Certifications
         </h1>
         {certificationsList.length === 0 && <p>No Certifications Added</p>}
-          <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
-            {certificationsList.map((rec: Certification) => (
-              <div key={rec.id}>
-                <CustomItemCard/>
-              </div>
-            ))}
+        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+          {certificationsList.map((rec: Certification) => (
+            <div key={rec.id}>
+              <CustomItemCard  rec={rec}/>
             </div>
+          ))}
+        </div>
         {expanded.certifications ? (
           <CertificationsForm>
             <AddItemBtn
@@ -801,14 +815,13 @@ const StepCustom = () => {
           Awards
         </h1>
         {awardsList.length === 0 && <p>No Awards Added</p>}
-          <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
-            {awardsList.map((rec: Award) => (
-              <div key={rec.id}>
-                                <CustomItemCard/>
-
-              </div>
-            ))}
+        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+          {awardsList.map((rec: Award) => (
+            <div key={rec.id}>
+              <CustomItemCard  rec={rec}/>
             </div>
+          ))}
+        </div>
         {expanded.awards ? (
           <AwardsForm>
             <AddItemBtn
@@ -838,14 +851,13 @@ const StepCustom = () => {
           References
         </h1>
         {referencesList.length === 0 && <p>No References Added</p>}
-          <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
-            {referencesList.map((rec: Reference) => (
-              <div key={rec.id}>
-                                <CustomItemCard/>
-
-              </div>
-            ))}
+        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+          {referencesList.map((rec: Reference) => (
+            <div key={rec.id}>
+              <CustomItemCard  rec={rec} isShowing={true}/>
             </div>
+          ))}
+        </div>
         {expanded.references ? (
           <ReferencesForm>
             <AddItemBtn
@@ -874,6 +886,15 @@ const StepCustom = () => {
         <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
           Trainings
         </h1>
+        {trainingsList.length === 0 && <p>No Trainings Added</p>}
+        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+          {trainingsList.map((rec: Reference) => (
+            <div key={rec.id}>
+              <CustomItemCard  rec={rec}/>
+            </div>
+          ))}
+        </div>
+
         {expanded.trainings ? (
           <TrainingForm>
             <AddItemBtn
@@ -900,8 +921,16 @@ const StepCustom = () => {
       {/* interests */}
       <div className="w-full">
         <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
-          Interests
+          Interests & Hobbies
         </h1>
+        {interestsList.length === 0 && <p>No Interests Added</p>}
+        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+          {interestsList.map((rec: Reference) => (
+            <div key={rec.id}>
+              <CustomItemCard  rec={rec}/>
+            </div>
+          ))}
+        </div>
         {expanded.interests ? (
           <InterestsForm>
             <AddItemBtn
@@ -930,6 +959,14 @@ const StepCustom = () => {
         <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
           Languages
         </h1>
+        {languagesList.length === 0 && <p>No Languages Added</p>}
+        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+          {languagesList.map((rec: Reference) => (
+            <div key={rec.id}>
+              <CustomItemCard  rec={rec} isShowing={true}/>
+            </div>
+          ))}
+        </div>
         {expanded.languages ? (
           <LangaugesForm>
             <AddItemBtn

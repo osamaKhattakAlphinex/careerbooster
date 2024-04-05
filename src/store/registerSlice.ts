@@ -104,10 +104,10 @@ interface RegisterSlice {
 
   };
   // stepCustom: CustomSection[]; //
-  // stepSix: {
-  //   list: string[];
-  //   isValid: boolean;
-  // };
+  stepThirteen: {
+    list: string[];
+    isValid: boolean;
+  };
   // stepEight: {
   //   password: string;
   //   cPassword: string;
@@ -207,10 +207,10 @@ const initialState: RegisterSlice = {
   },
   
   // stepCustom: [],
-  // stepSix: {
-  //   list: [],
-  //   isValid: true,
-  // },
+  stepThirteen: {
+    list: [],
+    isValid: true,
+  },
   // stepEight: {
   //   password: "",
   //   cPassword: "",
@@ -324,6 +324,15 @@ const registerSlice = createSlice({
         },
       };
     },
+    setStepSeven(state, action) {
+      return {
+        ...state,
+        stepSeven: {
+          ...state.stepSix,
+          ...action.payload,
+        },
+      };
+    },
     setStepEight(state, action) {
       return {
         ...state,
@@ -369,6 +378,15 @@ const registerSlice = createSlice({
         },
       };
     },
+    setStepThirteen(state, action) {
+      return {
+        ...state,
+        stepThirteen: {
+          ...state.stepEight,
+          ...action.payload,
+        },
+      };
+    },
     setField(state, action) {
       return {
         ...state,
@@ -392,11 +410,13 @@ export const {
   setStepFive,
   setStepCustom,
   setStepSix,
+  setStepSeven,
   setStepEight,
   setStepNine,
   setStepTen,
   setStepEleven,
   setStepTwelve,
+  setStepThirteen,
   setField,
 } = registerSlice.actions;
 
