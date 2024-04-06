@@ -328,7 +328,7 @@ const registerSlice = createSlice({
       return {
         ...state,
         stepSeven: {
-          ...state.stepSix,
+          ...state.stepSeven,
           ...action.payload,
         },
       };
@@ -346,7 +346,7 @@ const registerSlice = createSlice({
       return {
         ...state,
         stepNine: {
-          ...state.stepEight,
+          ...state.stepNine,
           ...action.payload,
         },
       };
@@ -355,7 +355,7 @@ const registerSlice = createSlice({
       return {
         ...state,
         stepTen: {
-          ...state.stepEight,
+          ...state.stepTen,
           ...action.payload,
         },
       };
@@ -364,7 +364,7 @@ const registerSlice = createSlice({
       return {
         ...state,
         stepEleven: {
-          ...state.stepEight,
+          ...state.stepEleven,
           ...action.payload,
         },
       };
@@ -373,7 +373,7 @@ const registerSlice = createSlice({
       return {
         ...state,
         stepTwelve: {
-          ...state.stepEight,
+          ...state.stepTwelve,
           ...action.payload,
         },
       };
@@ -382,7 +382,7 @@ const registerSlice = createSlice({
       return {
         ...state,
         stepThirteen: {
-          ...state.stepEight,
+          ...state.stepThirteen,
           ...action.payload,
         },
       };

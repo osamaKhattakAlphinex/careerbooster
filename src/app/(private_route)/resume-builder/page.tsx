@@ -15,7 +15,13 @@ import {
   setWorkExperienceArray,
   resetResume,
   setQuantifyingExperience,
-  
+  setTrainings,
+  setAwards,
+  setPublications,
+  setReferences,
+  setInterests,
+  setCertifications,
+  setLanguages,
 } from "@/store/resumeSlice";
 
 import {
@@ -88,7 +94,6 @@ const ResumeBuilder = () => {
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
-  console.log(userData)
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
 
@@ -112,6 +117,14 @@ const ResumeBuilder = () => {
         setResumeGenerated(false);
         dispatch(setState({ name: "resumeLoading", value: true }));
         dispatch(setQuantifyingExperience(quantifyingExperience));
+        dispatch(setTrainings({trainings: userData.trainings}))
+        dispatch(setAwards({awards: userData.awards}))
+        dispatch(setPublications({publications: userData.publications}))
+        dispatch(setReferences({references: userData.references}))
+        dispatch(setInterests({interests: userData.interests}))
+        dispatch(setCertifications({certifications: userData.certifications}))
+        dispatch(setLanguages({languages: userData.languages}))
+        
         dispatch(setId(""));
         await getBasicInfo();
         await getSummary();

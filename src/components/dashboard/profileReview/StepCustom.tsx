@@ -136,7 +136,16 @@ const PublicationsForm = ({ rec = null, formCloseHandler }: any) => {
     },
 
     onSubmit: async (values) => {
-      const obj = { id: makeid(), ...values };
+      const { description } = values;
+      const descriptionArray = description.split('\n').filter(Boolean); // Split description by '\n' and remove empty strings
+      
+      // Update the values with the description as an array
+      const updatedValues = {
+        ...values,
+        description: descriptionArray
+      };
+    
+      const obj = { id: makeid(), ...updatedValues };
       const newList = [obj, ...list];
       dispatch(setStepEight({ list: newList }));
       dispatch(setStepEight({ state: "show" }));
@@ -245,7 +254,16 @@ const CertificationsForm = ({ rec = null, formCloseHandler }: any) => {
     },
 
     onSubmit: async (values) => {
-      const obj = { id: makeid(), ...values };
+      const { description } = values;
+      const descriptionArray = description.split('\n').filter(Boolean); // Split description by '\n' and remove empty strings
+      
+      // Update the values with the description as an array
+      const updatedValues = {
+        ...values,
+        description: descriptionArray
+      };
+    
+      const obj = { id: makeid(), ...updatedValues };
       const newList = [obj, ...list];
       dispatch(setStepSix({ list: newList }));
       dispatch(setStepSix({ state: "show" }));
@@ -352,7 +370,16 @@ const AwardsForm = ({ rec = null, formCloseHandler }: any) => {
     },
 
     onSubmit: async (values) => {
-      const obj = { id: makeid(), ...values };
+      const { description } = values;
+      const descriptionArray = description.split('\n').filter(Boolean); // Split description by '\n' and remove empty strings
+      
+      // Update the values with the description as an array
+      const updatedValues = {
+        ...values,
+        description: descriptionArray
+      };
+    
+      const obj = { id: makeid(), ...updatedValues };
       const newList = [obj, ...list];
       dispatch(setStepNine({ list: newList }));
       dispatch(setStepNine({ state: "show" }));
@@ -461,7 +488,16 @@ const InterestsForm = ({ rec = null, formCloseHandler }: any) => {
     },
 
     onSubmit: async (values) => {
-      const obj = { id: makeid(), ...values };
+      const { description } = values;
+      const descriptionArray = description.split('\n').filter(Boolean); // Split description by '\n' and remove empty strings
+      
+      // Update the values with the description as an array
+      const updatedValues = {
+        ...values,
+        description: descriptionArray
+      };
+    
+      const obj = { id: makeid(), ...updatedValues };
       const newList = [obj, ...list];
       dispatch(setStepTen({ list: newList }));
       dispatch(setStepTen({ state: "show" }));
@@ -650,7 +686,16 @@ const TrainingForm = ({ rec = null, formCloseHandler }: any) => {
     },
 
     onSubmit: async (values) => {
-      const obj = { id: makeid(), ...values };
+      const { description } = values;
+      const descriptionArray = description.split('\n').filter(Boolean); // Split description by '\n' and remove empty strings
+      
+      // Update the values with the description as an array
+      const updatedValues = {
+        ...values,
+        description: descriptionArray
+      };
+    
+      const obj = { id: makeid(), ...updatedValues };
       const newList = [obj, ...list];
       dispatch(setStepSeven({ list: newList }));
       dispatch(setStepSeven({ state: "show" }));
