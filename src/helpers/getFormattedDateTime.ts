@@ -45,3 +45,17 @@ export const getFormattedDate = (date: any, format: string = "") => {
     return formatted;
   }
 };
+
+export const formatDate=(dateStr:any)=> {
+  // Split the date string into year, month, and day
+  const [year, month, day] = dateStr.split('-');
+  
+  // Create a Date object with the provided year, month, and day
+  const dateObj = new Date(year, month - 1, day);
+  
+  // Get the month name and year
+  const monthName = dateObj.toLocaleString('en-us', { month: 'long' });
+  const formattedDate = `${monthName} ${year}`;
+  
+  return formattedDate;
+}
