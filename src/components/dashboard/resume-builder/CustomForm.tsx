@@ -28,20 +28,7 @@ const CustomForm = ({ setShowCustomForm, index }: any) => {
     }),
     onSubmit: async (values) => {
       // Splitting the description by newline character and trimming each line
-      const descriptionArray = values.achievements
-        .split("\n")
-        .map((line) => line.trim());
-
-      // Updating the form values with the array of descriptions
-      const updatedValues = { ...values, achievements: descriptionArray };
-      // Handle form submission here
-      let updatedCustomExp: any = [...resume.customExperienceArray];
-      let newUpdatedCustomExp: any = { ...updatedCustomExp[index] };
-      let newUpdatedCustomExpEntries: any = [...newUpdatedCustomExp.entries];
-      newUpdatedCustomExpEntries.push(updatedValues);
-      newUpdatedCustomExp.entries = newUpdatedCustomExpEntries;
-      updatedCustomExp[index] = newUpdatedCustomExp;
-      updateSaveHook.updateAndSaveCustomExperienceArray(updatedCustomExp);
+     
       setShowCustomForm(false);
     },
   });

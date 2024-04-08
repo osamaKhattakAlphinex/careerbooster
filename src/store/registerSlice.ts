@@ -1,10 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Education, WorkExperience,CustomEntry, Certification, Training, Publication, Award, Interest, Language, Reference } from "./userDataSlice";
+import { Education, WorkExperience, Certification, Training, Publication, Award, Interest, Language, Reference } from "./userDataSlice";
 
-export interface CustomSection {
-  name?: string;
-  entries?: CustomEntry[];
-}
 interface RegisterSlice {
   scrappedContent: string;
   activeStep: number;
@@ -103,7 +99,6 @@ interface RegisterSlice {
     isValid: boolean;
 
   };
-  // stepCustom: CustomSection[]; //
   stepThirteen: {
     list: string[];
     isValid: boolean;
@@ -206,7 +201,6 @@ const initialState: RegisterSlice = {
     isValid: true,
   },
   
-  // stepCustom: [],
   stepThirteen: {
     list: [],
     isValid: true,
@@ -309,12 +303,6 @@ const registerSlice = createSlice({
         },
       };
     },
-    setStepCustom(state, action) {
-      return {
-        ...state,
-        stepCustom: action.payload,
-      };
-    },
     setStepSix(state, action) {
       return {
         ...state,
@@ -408,7 +396,6 @@ export const {
   setStepThree,
   setStepFour,
   setStepFive,
-  setStepCustom,
   setStepSix,
   setStepSeven,
   setStepEight,

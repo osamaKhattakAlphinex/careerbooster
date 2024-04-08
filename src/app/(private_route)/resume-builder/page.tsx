@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/dashboard/resume-templates/templates/template_1";
 import { useDispatch, useSelector } from "react-redux";
-import { CustomEntry, WorkExperience } from "@/store/userDataSlice";
+import { WorkExperience } from "@/store/userDataSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import {
@@ -45,7 +45,6 @@ import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import CreditInfoModal from "@/components/dashboard/resume-builder/CreditsInfoModal";
 import TemplateSlider from "@/components/dashboard/resume-templates/templateSlider";
-import { CustomSection } from "@/store/registerSlice";
 import TourBot from "@/components/dashboard/TourBot";
 import { useTourContext } from "@/context/TourContext";
 
@@ -66,7 +65,8 @@ const ResumeBuilder = () => {
 
   const creditsInfoRef: React.MutableRefObject<any> = useRef(null);
 
-  const { resumeElementRef, tourBotRef, historyCardRef } = useTourContext();
+  const { resumeElementRef, tourBotRef, historyCardRef, availableCreditsRef } =
+    useTourContext();
 
   const runConfetti = () => {
     showSuccessToast("Generated Successfully");
@@ -85,7 +85,7 @@ const ResumeBuilder = () => {
   const [finished, setFinished] = useState<boolean>(false);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const [streamedCustomData, setStreamedCustomData] = useState<any>("");
+  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [resumeGenerated, setResumeGenerated] = useState<boolean>(false);
@@ -117,14 +117,16 @@ const ResumeBuilder = () => {
         setResumeGenerated(false);
         dispatch(setState({ name: "resumeLoading", value: true }));
         dispatch(setQuantifyingExperience(quantifyingExperience));
-        dispatch(setTrainings({trainings: userData.trainings}))
-        dispatch(setAwards({awards: userData.awards}))
-        dispatch(setPublications({publications: userData.publications}))
-        dispatch(setReferences({references: userData.references}))
-        dispatch(setInterests({interests: userData.interests}))
-        dispatch(setCertifications({certifications: userData.certifications}))
-        dispatch(setLanguages({languages: userData.languages}))
-        
+        dispatch(setTrainings({ trainings: userData.trainings }));
+        dispatch(setAwards({ awards: userData.awards }));
+        dispatch(setPublications({ publications: userData.publications }));
+        dispatch(setReferences({ references: userData.references }));
+        dispatch(setInterests({ interests: userData.interests }));
+        dispatch(
+          setCertifications({ certifications: userData.certifications })
+        );
+        dispatch(setLanguages({ languages: userData.languages }));
+
         dispatch(setId(""));
         await getBasicInfo();
         await getSummary();
@@ -166,8 +168,6 @@ const ResumeBuilder = () => {
   //     }
   //   }
   // };
-
-
 
   const getBasicInfo = async () => {
     // return makeAPICallWithRetry(async () => {
@@ -313,7 +313,6 @@ const ResumeBuilder = () => {
       setResumeGenerated(true);
       dispatch(setState({ name: "resumeLoading", value: false }));
       dispatch(setWorkExperience(temp));
-
     }
     // });
   };
@@ -389,6 +388,14 @@ const ResumeBuilder = () => {
     }
   }, [tourBotRef]);
 
+  useEffect(() => {
+    if (outOfCredits) {
+      setTimeout(() => {
+        tourBotRef?.current?.click();
+      }, 500);
+    }
+  }, [outOfCredits]);
+
   const tourBotConfig = {
     name: "resumeBuilder",
     audios: [
@@ -409,6 +416,21 @@ const ResumeBuilder = () => {
       {
         ref: resumeElementRef,
         for: "tool",
+      },
+    ],
+  };
+  const tourBotConfig2 = {
+    name: "resumeBuilder",
+    audios: [
+      {
+        url: "/OutOfCredits.mp3",
+        for: "history",
+      },
+    ],
+    toolRefs: [
+      {
+        ref: availableCreditsRef,
+        for: "history",
       },
     ],
   };
@@ -592,11 +614,10 @@ const ResumeBuilder = () => {
                 >
                   <ResumeTemplate1
                     streamedSummaryData={streamedSummaryData}
-                    streamedCustomData={streamedCustomData}
-                    setStreamedCustomData={setStreamedCustomData}
                     streamedJDData={streamedJDData}
                     setStreamedJDData={setStreamedJDData}
                     setStreamedSummaryData={setStreamedSummaryData}
+                    setOutOfCredits={setOutOfCredits}
                   />
                 </div>
               </div>
@@ -609,7 +630,7 @@ const ResumeBuilder = () => {
           )}
         </div>
       </div>
-      <TourBot config={tourBotConfig} />
+      <TourBot config={outOfCredits ? tourBotConfig2 : tourBotConfig} setOutOfCredits={setOutOfCredits}/>
     </>
   );
 };

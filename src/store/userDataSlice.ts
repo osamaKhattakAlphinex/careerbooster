@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CustomSection } from "./registerSlice";
 
 export interface Education {
   id?: string;
@@ -14,18 +13,6 @@ export interface Education {
   toYear?: string;
 }
 
-export interface CustomEntry {
-  id?: string;
-  title: string;
-  country?: string;
-  cityState?: string;
-  fromMonth?: string;
-  fromYear?: string;
-  isContinue?: boolean;
-  toMonth?: string;
-  toYear?: string;
-  description?: string;
-}
 
 export interface Tours {
   resumeBuilder: boolean;

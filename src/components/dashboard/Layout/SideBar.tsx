@@ -27,6 +27,7 @@ import { signOut } from "next-auth/react";
 import Button from "../Button";
 import ProfileImageModal from "../ProfileImageModal";
 import AvailableCredits from "../AvailableCredits";
+import { useTourContext } from "@/context/TourContext";
 
 const items = [
   { icon: homeIcon, text: "My Dashboard", url: "/dashboard" },
@@ -68,7 +69,8 @@ const SideBar = () => {
   const handleMouseOut = () => {
     setHoveredItem(null);
   };
-
+  const { availableCreditsRef } =
+  useTourContext();
   const handleImageChange = (e: any) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -279,7 +281,9 @@ const SideBar = () => {
               ))}
             </ul>
 
-            <div className="flex  flex-col justify-center mx-auto mt-6">
+            <div 
+            ref={(ref: any) => (availableCreditsRef.current = ref)}
+            className="flex  flex-col justify-center mx-auto mt-6 p-2 rounded-md">
               <AvailableCredits />
 
               <div className="flex items-center justify-center">

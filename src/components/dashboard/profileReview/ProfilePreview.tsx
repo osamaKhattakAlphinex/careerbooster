@@ -5,7 +5,6 @@ import { EditIcon, addressIcon } from "@/helpers/iconsProvider";
 import { setActiveStep, setStepFive } from "@/store/registerSlice";
 import { Education, WorkExperience } from "@/store/userDataSlice";
 import ExperienceCard from "./ExperienceCard";
-import SectionCard from "./SectionCard";
 
 const ProfilePreview = () => {
   const dispatch = useDispatch();
@@ -232,16 +231,7 @@ const ProfilePreview = () => {
           </button>
         </h2>
         <div className="">
-          {data.stepCustom?.map((singleStep: any, index: number) => {
-            return (
-              <SectionCard
-                key={index}
-                index={index}
-                singleStep={singleStep}
-                showButtons={false}
-              />
-            );
-          })}
+          
         </div>
       </section> */}
 

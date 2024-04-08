@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "@/app/(private_route)/dashboard.css";
 import { useTourContext } from "@/context/TourContext";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
@@ -30,7 +30,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
 };
 
 // const DashboardBot: React.FC<DashboardBotProps> = ({ firstName, lastName }) => {
-const TourBot = ({ config }: any) => {
+const TourBot = ({ config,setOutOfCredits }: any) => {
   const [toolRefs, setToolRefs] = useState<any>(null);
   const [audios, setAudios] = useState<any>(null);
   const [isGif, setIsGif] = useState(false);
@@ -50,6 +50,7 @@ const TourBot = ({ config }: any) => {
       setAudios(config.audios);
     }
   }, [config]);
+
 
 
   const removeStyles = () => {
@@ -163,6 +164,9 @@ const TourBot = ({ config }: any) => {
     const handleAudioEnded = () => {
       setAudioCounter((prev) => prev + 1);
       updateAndSaveTourStatus({ [config.name]: true });
+      if(setOutOfCredits){
+        setOutOfCredits(false)
+      }
     };
 
     audio.addEventListener("ended", handleAudioEnded);

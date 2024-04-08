@@ -27,92 +27,66 @@ const ResumeTemplate1 = ({
   setStreamedSummaryData,
   streamedJDData,
   setStreamedJDData,
-  streamedCustomData,
-  setStreamedCustomData,
+  setOutOfCredits,
 }: {
   streamedSummaryData: string;
   streamedJDData: string;
-  streamedCustomData: string;
   setStreamedJDData: any;
   setStreamedSummaryData: any;
-  setStreamedCustomData: any;
+  setOutOfCredits:any
 }) => {
   const resume = useSelector((state: any) => state.resume);
 
   const userData = useSelector((state: any) => state.userData);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
-  const [newCustomWorkExperience, setNewCustomWorkExperience] =
-    useState<number>();
-  const [
-    newCustomWorkExperienceAchievemnt,
-    setNewCustomWorkExperienceAchievemnt,
-  ] = useState<number>();
+  const [newBulletSection, setNewBulletSection] = useState<string | null>(null);
   const [newAchievement, setNewAchievement] = useState("");
-  const [newCustomAchievement, setNewCustomAchievement] = useState("");
+
   // const [color, setColor] = useState("#e04127");
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [confirmationModal, setConfirmationModal] = useState(false);
 
-  const [confirmationModalAchivement, setConfirmationModalAchivement] =
-    useState(false);
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
-  const [
-    customRegeneratedRecordWorkIndex,
-    setCustomRegeneratedRecordWorkIndex,
-  ] = useState<number | null>(null);
-  const [customRegeneratedRecordIndex, setCustomRegeneratedRecordIndex] =
-    useState<number | null>(null);
+
+
   // const [streamedSummaryData, setStreamedSummaryData] = useState("");
-  const { getSummary } = useGetSummary(setStreamedSummaryData);
+  const { getSummary } = useGetSummary(setStreamedSummaryData, setOutOfCredits);
   // const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const { getOneWorkExperienceNew, getOneCustomWorkExperienceNew } =
-    useSingleJDGenerate(setStreamedJDData, setStreamedCustomData);
+  const { getOneWorkExperienceNew } =
+    useSingleJDGenerate(setStreamedJDData);
 
   const {
     handleDropPrimary,
     handleDropAchievement,
     handleDropExperience,
-    handleDropCustomAchievement,
-    handleDropCustomExperience,
-    handleDropSingleCustomSection,
+    handleDropOthersAchievement,
+    handleDropOthers,
   } = useDragAndDrop();
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
-  // useEffect(() => {
-  //   console.log(streamedSummaryData);
-  // });
+
   useEffect(() => {
     if (streamedJDData === "") {
       setStreamedJDData(null);
       setRegeneratedRecordIndex(null);
     }
   }, [streamedJDData]);
-  useEffect(() => {
-    if (streamedCustomData === "") {
-      setStreamedCustomData(null);
-      setCustomRegeneratedRecordIndex(null);
-      setCustomRegeneratedRecordWorkIndex(null);
-    }
-  }, [streamedCustomData]);
+ 
 
   // handle regenrate
   const handleRegenrate = (rec: any, i: number) => {
     getOneWorkExperienceNew(rec);
     setRegeneratedRecordIndex(i);
   };
-  const handleCustomRegenrate = (rec: any, i: number, index: number) => {
-    getOneCustomWorkExperienceNew(rec, index);
-    setCustomRegeneratedRecordIndex(i);
-    setCustomRegeneratedRecordWorkIndex(index);
-  };
+
 
   //add Skills
   const handleAddSkills = () => {
@@ -523,7 +497,10 @@ const ResumeTemplate1 = ({
                   return (
                     <Toolbar
                       key={i}
-                      addAchivement={() => setNewWorkExperience(i)}
+                      addAchivement={() => {
+                        setNewWorkExperience(i);
+                        setNewBulletSection("WorkExperience");
+                      }}
                       deleteExperience={() =>
                         handlers.handleDeleteExperience(i)
                       }
@@ -562,64 +539,74 @@ const ResumeTemplate1 = ({
                             : `${rec?.toMonth} ${rec?.toYear}`}{" "}
                           |{" "} */}
                           {rec.fromMonth && (
-                            <EditableField
-                              value={`${rec?.fromMonth}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
-                                  { fromMonth: value },
-                                  i
-                                );
-                              }}
-                            />
+                             <span className="hover:shadow-md hover:bg-gray-100">
+                               <EditableField
+                                 value={`${rec?.fromMonth}`}
+                                 onSave={(value: string) => {
+                                   handlers.handleSaveExperienceDetail(
+                                     { fromMonth: value },
+                                     i
+                                   );
+                                 }}
+                               />
+                             </span>
                           )}
                           {rec.fromYear && (
-                            <EditableField
-                              value={`${rec?.fromYear}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
-                                  { fromYear: value },
-                                  i
-                                );
-                              }}
-                            />
+                             <span className="hover:shadow-md hover:bg-gray-100">
+                               <EditableField
+                                 value={`${rec?.fromYear}`}
+                                 onSave={(value: string) => {
+                                   handlers.handleSaveExperienceDetail(
+                                     { fromYear: value },
+                                     i
+                                   );
+                                 }}
+                               />
+                             </span>
                           )}
                           {rec.fromYear && <span>-</span>}
                           {rec.toMonth && !rec.isContinue && (
-                            <EditableField
-                              value={`${rec?.toMonth}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
-                                  { toMonth: value },
-                                  i
-                                );
-                              }}
-                            />
+                             <span className="hover:shadow-md hover:bg-gray-100">
+                               <EditableField
+                                 value={`${rec?.toMonth}`}
+                                 onSave={(value: string) => {
+                                   handlers.handleSaveExperienceDetail(
+                                     { toMonth: value },
+                                     i
+                                   );
+                                 }}
+                               />
+                             </span>
                           )}
                           {rec.toYear && !rec.isContinue && (
-                            <EditableField
-                              value={`${rec?.toYear}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
-                                  { toYear: value },
-                                  i
-                                );
-                              }}
-                            />
+                             <span className="hover:shadow-md hover:bg-gray-100">
+                               <EditableField
+                                 value={`${rec?.toYear}`}
+                                 onSave={(value: string) => {
+                                   handlers.handleSaveExperienceDetail(
+                                     { toYear: value },
+                                     i
+                                   );
+                                 }}
+                               />
+                             </span>
                           )}
                           {rec.isContinue && (
-                            <EditableField
-                              value={`${rec?.isContinue && "Present"}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
-                                  { toYear: value },
-                                  i
-                                );
-                                handlers.handleSaveExperienceDetail(
-                                  { isContinue: false },
-                                  i
-                                );
-                              }}
-                            />
+                             <span className="hover:shadow-md hover:bg-gray-100">
+                               <EditableField
+                                 value={`${rec?.isContinue && "Present"}`}
+                                 onSave={(value: string) => {
+                                   handlers.handleSaveExperienceDetail(
+                                     { toYear: value },
+                                     i
+                                   );
+                                   handlers.handleSaveExperienceDetail(
+                                     { isContinue: false },
+                                     i
+                                   );
+                                 }}
+                               />
+                             </span>
                           )}
                           |{" "}
                           <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
@@ -749,7 +736,8 @@ const ResumeTemplate1 = ({
                             </div>
                           )}
 
-                          {newWorkExperience === i ? (
+                          {newWorkExperience === i &&
+                          newBulletSection === "WorkExperience" ? (
                             <>
                               <div className="flex flex-wrap w-full gap-1 mt-4">
                                 <input
@@ -791,6 +779,7 @@ const ResumeTemplate1 = ({
                                     onClick={() => {
                                       setNewAchievement("");
                                       setNewWorkExperience(-1);
+                                      setNewBulletSection(null);
                                     }}
                                     className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
                                   >
@@ -819,7 +808,7 @@ const ResumeTemplate1 = ({
             )}
 
             {/* Publications */}
-            {resume?.publications && resume?.publications.length > 0 ? (
+            {resume?.publications && resume?.publications.length > 0 && (
               <>
                 <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
                 <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
@@ -853,13 +842,20 @@ const ResumeTemplate1 = ({
                   return (
                     <Toolbar
                       key={i}
-                      addAchivement={() => setNewWorkExperience(i)}
+                      addAchivement={() => {
+                        setNewWorkExperience(i);
+                        setNewBulletSection("Publications");
+                      }}
                       deleteExperience={() =>
-                        handlers.handleDeleteExperience(i)
+                        handlers.handleDeleteOthers(i, "publications")
                       }
-                      regenrateAchivements={() => handleRegenrate(rec, i)}
+                      // regenrateAchivements={() => handleRegenrate(rec, i)}
                       addNewLine={() => {
-                        handlers.handleAddSpace(i, newAchievement);
+                        handlers.handleAddOthersSpace(
+                          i,
+                          newAchievement,
+                          "publications"
+                        );
                         setNewAchievement("");
                       }}
                     >
@@ -870,7 +866,7 @@ const ResumeTemplate1 = ({
                           e.dataTransfer.setData("text/plain", i.toString())
                         }
                         onDragOver={(e) => e.preventDefault()}
-                        onDrop={(e) => handleDropExperience(e, i)}
+                        onDrop={(e) => handleDropOthers(e, i,"publications")}
                         draggable
                       >
                         <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
@@ -878,33 +874,38 @@ const ResumeTemplate1 = ({
                             value={rec?.title}
                             style={{ width: "100%" }}
                             onSave={(value: string) => {
-                              handlers.handleSaveExperienceDetail(
+                              handlers.handleSaveOthersDetail(
                                 { title: value },
-                                i
+                                i,
+                                "publications"
                               );
                             }}
                           />
                         </h2>
                         <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
                           {rec.date && (
-                            <EditableField
-                              value={`${formatDate(rec?.date)}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
-                                  { date: value },
-                                  i
-                                );
-                              }}
-                            />
+                             <span className="hover:shadow-md hover:bg-gray-100">
+                               <EditableField
+                                 value={`${formatDate(rec?.date)}`}
+                                 onSave={(value: string) => {
+                                   handlers.handleSaveOthersDetail(
+                                     { date: value },
+                                     i,
+                                     "publications"
+                                   );
+                                 }}
+                               />
+                             </span>
                           )}
                           |
                           <span className="hover:shadow-md hover:bg-gray-100">
                             <EditableField
                               value={rec?.publisher}
                               onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
+                                handlers.handleSaveOthersDetail(
                                   { publisher: value },
-                                  i
+                                  i,
+                                  "publications"
                                 );
                               }}
                             />
@@ -923,10 +924,11 @@ const ResumeTemplate1 = ({
                                       }}
                                       onDragOver={(e) => e.preventDefault()}
                                       onDrop={(e) => {
-                                        handleDropAchievement(
+                                        handleDropOthersAchievement(
                                           i,
                                           ind,
-                                          insideIndex
+                                          insideIndex,
+                                          "publications"
                                         );
                                       }}
                                       draggable
@@ -935,9 +937,10 @@ const ResumeTemplate1 = ({
                                       <div
                                         className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
                                         onClick={() => {
-                                          handlers.handleRemoveExtraSpace(
+                                          handlers.handleRemoveExtraOthersSpace(
                                             i,
-                                            ind
+                                            ind,
+                                            "publications"
                                           );
                                         }}
                                       >
@@ -951,10 +954,11 @@ const ResumeTemplate1 = ({
                                       }}
                                       onDragOver={(e) => e.preventDefault()}
                                       onDrop={(e) => {
-                                        handleDropAchievement(
+                                        handleDropOthersAchievement(
                                           i,
                                           ind,
-                                          insideIndex
+                                          insideIndex,
+                                          "publications"
                                         );
                                       }}
                                       draggable
@@ -965,18 +969,20 @@ const ResumeTemplate1 = ({
                                         type="textarea"
                                         value={achievement}
                                         onSave={(value: string) => {
-                                          handlers.handleUpdateAchivement(
+                                          handlers.handleUpdateOthersAchivement(
                                             i,
                                             ind,
-                                            value
+                                            value,
+                                            "publications"
                                           );
                                         }}
                                       />
                                       <div
                                         onClick={() =>
-                                          handlers.handleDeleteAchivement(
+                                          handlers.handleDeleteOthersAchivement(
                                             i,
-                                            ind
+                                            ind,
+                                            "publications"
                                           )
                                         }
                                         className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
@@ -1001,7 +1007,8 @@ const ResumeTemplate1 = ({
                             </div>
                           )}
 
-                          {newWorkExperience === i ? (
+                          {newWorkExperience === i &&
+                          newBulletSection === "Publications" ? (
                             <>
                               <div className="flex flex-wrap w-full gap-1 mt-4">
                                 <input
@@ -1017,9 +1024,10 @@ const ResumeTemplate1 = ({
                                     if (e.key === "Enter") {
                                       e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
                                       // Save the new achievement to the state and possibly the database
-                                      handlers.handleAddAchivement(
+                                      handlers.handleAddOthersAchivement(
                                         i,
-                                        newAchievement
+                                        newAchievement,
+                                        "publications"
                                       );
                                       setNewAchievement("");
                                     }
@@ -1030,9 +1038,10 @@ const ResumeTemplate1 = ({
                                     className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
                                     onClick={() => {
                                       // Save the new achievement to the state and possibly the database
-                                      handlers.handleAddAchivement(
+                                      handlers.handleAddOthersAchivement(
                                         i,
-                                        newAchievement
+                                        newAchievement,
+                                        "publications"
                                       );
                                       setNewAchievement("");
                                     }}
@@ -1043,6 +1052,7 @@ const ResumeTemplate1 = ({
                                     onClick={() => {
                                       setNewAchievement("");
                                       setNewWorkExperience(-1);
+                                      setNewBulletSection(null);
                                     }}
                                     className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
                                   >
@@ -1058,16 +1068,6 @@ const ResumeTemplate1 = ({
                   );
                 })}
               </>
-            ) : (
-              <div
-                className="list-disc "
-                dangerouslySetInnerHTML={{
-                  __html:
-                    resume?.workExperience !== ""
-                      ? resume?.workExperience
-                      : streamedJDData,
-                }}
-              ></div>
             )}
 
             {/* Certificates */}
@@ -1105,13 +1105,16 @@ const ResumeTemplate1 = ({
                   return (
                     <Toolbar
                       key={i}
-                      addAchivement={() => setNewWorkExperience(i)}
+                      addAchivement={() => {
+                        setNewWorkExperience(i);
+                        setNewBulletSection("Certifications");
+                      }}
                       deleteExperience={() =>
-                        handlers.handleDeleteExperience(i)
+                        handlers.handleDeleteOthers(i,"certifications")
                       }
-                      regenrateAchivements={() => handleRegenrate(rec, i)}
+                      // regenrateAchivements={() => handleRegenrate(rec, i)}
                       addNewLine={() => {
-                        handlers.handleAddSpace(i, newAchievement);
+                        handlers.handleAddOthersSpace(i, newAchievement,"certifications");
                         setNewAchievement("");
                       }}
                     >
@@ -1122,7 +1125,7 @@ const ResumeTemplate1 = ({
                           e.dataTransfer.setData("text/plain", i.toString())
                         }
                         onDragOver={(e) => e.preventDefault()}
-                        onDrop={(e) => handleDropExperience(e, i)}
+                        onDrop={(e) => handleDropOthers(e, i,"certifications")}
                         draggable
                       >
                         <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
@@ -1130,33 +1133,38 @@ const ResumeTemplate1 = ({
                             value={rec?.title}
                             style={{ width: "100%" }}
                             onSave={(value: string) => {
-                              handlers.handleSaveExperienceDetail(
+                              handlers.handleSaveOthersDetail(
                                 { title: value },
-                                i
+                                i,
+                                "certifications"
                               );
                             }}
                           />
                         </h2>
                         <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
                           {rec.date && (
-                            <EditableField
-                              value={`${formatDate(rec?.date)}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
-                                  { date: value },
-                                  i
-                                );
-                              }}
-                            />
+                             <span className="hover:shadow-md hover:bg-gray-100">
+                               <EditableField
+                                 value={`${formatDate(rec?.date)}`}
+                                 onSave={(value: string) => {
+                                   handlers.handleSaveOthersDetail(
+                                     { date: value },
+                                     i,
+                                     "certifications"
+                                   );
+                                 }}
+                               />
+                             </span>
                           )}
                           |
                           <span className="hover:shadow-md hover:bg-gray-100">
                             <EditableField
                               value={rec?.issuingOrganization}
                               onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
+                                handlers.handleSaveOthersDetail(
                                   { issuingOrganization: value },
-                                  i
+                                  i,
+                                  "certifications"
                                 );
                               }}
                             />
@@ -1175,10 +1183,11 @@ const ResumeTemplate1 = ({
                                       }}
                                       onDragOver={(e) => e.preventDefault()}
                                       onDrop={(e) => {
-                                        handleDropAchievement(
+                                        handleDropOthersAchievement(
                                           i,
                                           ind,
-                                          insideIndex
+                                          insideIndex,
+                                          "certifications"
                                         );
                                       }}
                                       draggable
@@ -1187,9 +1196,10 @@ const ResumeTemplate1 = ({
                                       <div
                                         className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
                                         onClick={() => {
-                                          handlers.handleRemoveExtraSpace(
+                                          handlers.handleRemoveExtraOthersSpace(
                                             i,
-                                            ind
+                                            ind,
+                                            "certifications"
                                           );
                                         }}
                                       >
@@ -1203,10 +1213,11 @@ const ResumeTemplate1 = ({
                                       }}
                                       onDragOver={(e) => e.preventDefault()}
                                       onDrop={(e) => {
-                                        handleDropAchievement(
+                                        handleDropOthersAchievement(
                                           i,
                                           ind,
-                                          insideIndex
+                                          insideIndex,
+                                          "certifications"
                                         );
                                       }}
                                       draggable
@@ -1217,18 +1228,20 @@ const ResumeTemplate1 = ({
                                         type="textarea"
                                         value={achievement}
                                         onSave={(value: string) => {
-                                          handlers.handleUpdateAchivement(
+                                          handlers.handleUpdateOthersAchivement(
                                             i,
                                             ind,
-                                            value
+                                            value,
+                                            "certifications"
                                           );
                                         }}
                                       />
                                       <div
                                         onClick={() =>
-                                          handlers.handleDeleteAchivement(
+                                          handlers.handleDeleteOthersAchivement(
                                             i,
-                                            ind
+                                            ind,
+                                            "certifications"
                                           )
                                         }
                                         className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
@@ -1253,7 +1266,7 @@ const ResumeTemplate1 = ({
                             </div>
                           )}
 
-                          {newWorkExperience === i ? (
+                          {newWorkExperience === i && newBulletSection === "Certifications" ? (
                             <>
                               <div className="flex flex-wrap w-full gap-1 mt-4">
                                 <input
@@ -1269,9 +1282,10 @@ const ResumeTemplate1 = ({
                                     if (e.key === "Enter") {
                                       e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
                                       // Save the new achievement to the state and possibly the database
-                                      handlers.handleAddAchivement(
+                                      handlers.handleAddOthersAchivement(
                                         i,
-                                        newAchievement
+                                        newAchievement,
+                                        "certifications"
                                       );
                                       setNewAchievement("");
                                     }
@@ -1282,9 +1296,10 @@ const ResumeTemplate1 = ({
                                     className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
                                     onClick={() => {
                                       // Save the new achievement to the state and possibly the database
-                                      handlers.handleAddAchivement(
+                                      handlers.handleAddOthersAchivement(
                                         i,
-                                        newAchievement
+                                        newAchievement,
+                                        "certifications"
                                       );
                                       setNewAchievement("");
                                     }}
@@ -1295,6 +1310,7 @@ const ResumeTemplate1 = ({
                                     onClick={() => {
                                       setNewAchievement("");
                                       setNewWorkExperience(-1);
+                                      setNewBulletSection(null)
                                     }}
                                     className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
                                   >
@@ -1347,13 +1363,16 @@ const ResumeTemplate1 = ({
                   return (
                     <Toolbar
                       key={i}
-                      addAchivement={() => setNewWorkExperience(i)}
+                      addAchivement={() => {
+                        setNewWorkExperience(i)
+                        setNewBulletSection("Trainings")
+                      }}
                       deleteExperience={() =>
-                        handlers.handleDeleteExperience(i)
+                        handlers.handleDeleteOthers(i,"trainings")
                       }
-                      regenrateAchivements={() => handleRegenrate(rec, i)}
+                      // regenrateAchivements={() => handleRegenrate(rec, i)}
                       addNewLine={() => {
-                        handlers.handleAddSpace(i, newAchievement);
+                        handlers.handleAddOthersSpace(i, newAchievement,"trainings");
                         setNewAchievement("");
                       }}
                     >
@@ -1364,7 +1383,7 @@ const ResumeTemplate1 = ({
                           e.dataTransfer.setData("text/plain", i.toString())
                         }
                         onDragOver={(e) => e.preventDefault()}
-                        onDrop={(e) => handleDropExperience(e, i)}
+                        onDrop={(e) => handleDropOthers(e, i,"trainings")}
                         draggable
                       >
                         <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
@@ -1372,45 +1391,53 @@ const ResumeTemplate1 = ({
                             value={rec?.position}
                             style={{ width: "100%" }}
                             onSave={(value: string) => {
-                              handlers.handleSaveExperienceDetail(
+                              handlers.handleSaveOthersDetail(
                                 { position: value },
-                                i
+                                i,
+                                "trainings"
                               );
                             }}
                           />
                         </h2>
                         <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
                           {rec.startDate && (
-                            <EditableField
-                              value={`${formatDate(rec?.startDate)}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
-                                  { startDate: value },
-                                  i
-                                );
-                              }}
-                            />
+                             <span className="hover:shadow-md hover:bg-gray-100">
+                               <EditableField
+                                 value={`${formatDate(rec?.startDate)}`}
+                                 onSave={(value: string) => {
+                                   handlers.handleSaveOthersDetail(
+                                     { startDate: value },
+                                     i,
+                                     "trainings"
+                                   );
+                                 }}
+                               />
+                             </span>
                           )}
                           -
                           {rec.endDate && (
-                            <EditableField
-                              value={`${formatDate(rec?.endDate)}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
-                                  { endDate: value },
-                                  i
-                                );
-                              }}
-                            />
+                             <span className="hover:shadow-md hover:bg-gray-100">
+                               <EditableField
+                                 value={`${formatDate(rec?.endDate)}`}
+                                 onSave={(value: string) => {
+                                   handlers.handleSaveOthersDetail(
+                                     { endDate: value },
+                                     i,
+                                     "trainings"
+                                   );
+                                 }}
+                               />
+                             </span>
                           )}
                           |
                           <span className="hover:shadow-md hover:bg-gray-100">
                             <EditableField
                               value={rec?.company}
                               onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
+                                handlers.handleSaveOthersDetail(
                                   { company: value },
-                                  i
+                                  i,
+                                  "trainings"
                                 );
                               }}
                             />
@@ -1429,10 +1456,11 @@ const ResumeTemplate1 = ({
                                       }}
                                       onDragOver={(e) => e.preventDefault()}
                                       onDrop={(e) => {
-                                        handleDropAchievement(
+                                        handleDropOthersAchievement(
                                           i,
                                           ind,
-                                          insideIndex
+                                          insideIndex,
+                                          "trainings"
                                         );
                                       }}
                                       draggable
@@ -1441,9 +1469,10 @@ const ResumeTemplate1 = ({
                                       <div
                                         className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
                                         onClick={() => {
-                                          handlers.handleRemoveExtraSpace(
+                                          handlers.handleRemoveExtraOthersSpace(
                                             i,
-                                            ind
+                                            ind,
+                                            "trainings"
                                           );
                                         }}
                                       >
@@ -1457,10 +1486,11 @@ const ResumeTemplate1 = ({
                                       }}
                                       onDragOver={(e) => e.preventDefault()}
                                       onDrop={(e) => {
-                                        handleDropAchievement(
+                                        handleDropOthersAchievement(
                                           i,
                                           ind,
-                                          insideIndex
+                                          insideIndex,
+                                          "trainings"
                                         );
                                       }}
                                       draggable
@@ -1471,18 +1501,20 @@ const ResumeTemplate1 = ({
                                         type="textarea"
                                         value={achievement}
                                         onSave={(value: string) => {
-                                          handlers.handleUpdateAchivement(
+                                          handlers.handleUpdateOthersAchivement(
                                             i,
                                             ind,
-                                            value
+                                            value,
+                                            "trainings"
                                           );
                                         }}
                                       />
                                       <div
                                         onClick={() =>
-                                          handlers.handleDeleteAchivement(
+                                          handlers.handleDeleteOthersAchivement(
                                             i,
-                                            ind
+                                            ind,
+                                            "trainings"
                                           )
                                         }
                                         className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
@@ -1507,7 +1539,7 @@ const ResumeTemplate1 = ({
                             </div>
                           )}
 
-                          {newWorkExperience === i ? (
+                          {newWorkExperience === i && newBulletSection === "Trainings" ? (
                             <>
                               <div className="flex flex-wrap w-full gap-1 mt-4">
                                 <input
@@ -1523,9 +1555,10 @@ const ResumeTemplate1 = ({
                                     if (e.key === "Enter") {
                                       e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
                                       // Save the new achievement to the state and possibly the database
-                                      handlers.handleAddAchivement(
+                                      handlers.handleAddOthersAchivement(
                                         i,
-                                        newAchievement
+                                        newAchievement,
+                                        "trainings"
                                       );
                                       setNewAchievement("");
                                     }
@@ -1536,9 +1569,10 @@ const ResumeTemplate1 = ({
                                     className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
                                     onClick={() => {
                                       // Save the new achievement to the state and possibly the database
-                                      handlers.handleAddAchivement(
+                                      handlers.handleAddOthersAchivement(
                                         i,
-                                        newAchievement
+                                        newAchievement,
+                                        "trainings"
                                       );
                                       setNewAchievement("");
                                     }}
@@ -1549,6 +1583,7 @@ const ResumeTemplate1 = ({
                                     onClick={() => {
                                       setNewAchievement("");
                                       setNewWorkExperience(-1);
+                                      setNewBulletSection(null)
                                     }}
                                     className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
                                   >
@@ -1601,13 +1636,16 @@ const ResumeTemplate1 = ({
                   return (
                     <Toolbar
                       key={i}
-                      addAchivement={() => setNewWorkExperience(i)}
+                      addAchivement={() => {
+                        setNewWorkExperience(i)
+                        setNewBulletSection("Awards")
+                      }}
                       deleteExperience={() =>
-                        handlers.handleDeleteExperience(i)
+                        handlers.handleDeleteOthers(i,"awards")
                       }
-                      regenrateAchivements={() => handleRegenrate(rec, i)}
+                      // regenrateAchivements={() => handleRegenrate(rec, i)}
                       addNewLine={() => {
-                        handlers.handleAddSpace(i, newAchievement);
+                        handlers.handleAddOthersSpace(i, newAchievement,"awards");
                         setNewAchievement("");
                       }}
                     >
@@ -1618,7 +1656,7 @@ const ResumeTemplate1 = ({
                           e.dataTransfer.setData("text/plain", i.toString())
                         }
                         onDragOver={(e) => e.preventDefault()}
-                        onDrop={(e) => handleDropExperience(e, i)}
+                        onDrop={(e) => handleDropOthers(e, i,"awards")}
                         draggable
                       >
                         <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
@@ -1626,33 +1664,38 @@ const ResumeTemplate1 = ({
                             value={rec?.title}
                             style={{ width: "100%" }}
                             onSave={(value: string) => {
-                              handlers.handleSaveExperienceDetail(
+                              handlers.handleSaveOthersDetail(
                                 { title: value },
-                                i
+                                i,
+                                "awards"
                               );
                             }}
                           />
                         </h2>
                         <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
                           {rec.date && (
-                            <EditableField
-                              value={`${formatDate(rec?.date)}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
-                                  { date: value },
-                                  i
-                                );
-                              }}
-                            />
+                             <span className="hover:shadow-md hover:bg-gray-100">
+                               <EditableField
+                                 value={`${formatDate(rec?.date)}`}
+                                 onSave={(value: string) => {
+                                   handlers.handleSaveOthersDetail(
+                                     { date: value },
+                                     i,
+                                     "awards"
+                                   );
+                                 }}
+                               />
+                             </span>
                           )}
                           |
                           <span className="hover:shadow-md hover:bg-gray-100">
                             <EditableField
                               value={rec?.awardingOrganization}
                               onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
+                                handlers.handleSaveOthersDetail(
                                   { awardingOrganization: value },
-                                  i
+                                  i,
+                                  "awards"
                                 );
                               }}
                             />
@@ -1671,10 +1714,11 @@ const ResumeTemplate1 = ({
                                       }}
                                       onDragOver={(e) => e.preventDefault()}
                                       onDrop={(e) => {
-                                        handleDropAchievement(
+                                        handleDropOthersAchievement(
                                           i,
                                           ind,
-                                          insideIndex
+                                          insideIndex,
+                                          "awards"
                                         );
                                       }}
                                       draggable
@@ -1683,9 +1727,10 @@ const ResumeTemplate1 = ({
                                       <div
                                         className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
                                         onClick={() => {
-                                          handlers.handleRemoveExtraSpace(
+                                          handlers.handleRemoveExtraOthersSpace(
                                             i,
-                                            ind
+                                            ind,
+                                            "awards"
                                           );
                                         }}
                                       >
@@ -1699,10 +1744,11 @@ const ResumeTemplate1 = ({
                                       }}
                                       onDragOver={(e) => e.preventDefault()}
                                       onDrop={(e) => {
-                                        handleDropAchievement(
+                                        handleDropOthersAchievement(
                                           i,
                                           ind,
-                                          insideIndex
+                                          insideIndex,
+                                          "awards"
                                         );
                                       }}
                                       draggable
@@ -1713,18 +1759,20 @@ const ResumeTemplate1 = ({
                                         type="textarea"
                                         value={achievement}
                                         onSave={(value: string) => {
-                                          handlers.handleUpdateAchivement(
+                                          handlers.handleUpdateOthersAchivement(
                                             i,
                                             ind,
-                                            value
+                                            value,
+                                            "awards"
                                           );
                                         }}
                                       />
                                       <div
                                         onClick={() =>
-                                          handlers.handleDeleteAchivement(
+                                          handlers.handleDeleteOthersAchivement(
                                             i,
-                                            ind
+                                            ind,
+                                            "awards"
                                           )
                                         }
                                         className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
@@ -1749,7 +1797,7 @@ const ResumeTemplate1 = ({
                             </div>
                           )}
 
-                          {newWorkExperience === i ? (
+                          {newWorkExperience === i && newBulletSection === "Awards" ? (
                             <>
                               <div className="flex flex-wrap w-full gap-1 mt-4">
                                 <input
@@ -1765,9 +1813,10 @@ const ResumeTemplate1 = ({
                                     if (e.key === "Enter") {
                                       e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
                                       // Save the new achievement to the state and possibly the database
-                                      handlers.handleAddAchivement(
+                                      handlers.handleAddOthersAchivement(
                                         i,
-                                        newAchievement
+                                        newAchievement,
+                                        "awards"
                                       );
                                       setNewAchievement("");
                                     }
@@ -1778,9 +1827,10 @@ const ResumeTemplate1 = ({
                                     className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
                                     onClick={() => {
                                       // Save the new achievement to the state and possibly the database
-                                      handlers.handleAddAchivement(
+                                      handlers.handleAddOthersAchivement(
                                         i,
-                                        newAchievement
+                                        newAchievement,
+                                        "awards"
                                       );
                                       setNewAchievement("");
                                     }}
@@ -1791,6 +1841,7 @@ const ResumeTemplate1 = ({
                                     onClick={() => {
                                       setNewAchievement("");
                                       setNewWorkExperience(-1);
+                                      setNewBulletSection(null)
                                     }}
                                     className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
                                   >
@@ -1843,13 +1894,16 @@ const ResumeTemplate1 = ({
                   return (
                     <Toolbar
                       key={i}
-                      addAchivement={() => setNewWorkExperience(i)}
+                      addAchivement={() => {
+                        setNewWorkExperience(i)
+                        setNewBulletSection("Interests")
+                      }}
                       deleteExperience={() =>
-                        handlers.handleDeleteExperience(i)
+                        handlers.handleDeleteOthers(i,"interests")
                       }
-                      regenrateAchivements={() => handleRegenrate(rec, i)}
+                      // regenrateAchivements={() => handleRegenrate(rec, i)}
                       addNewLine={() => {
-                        handlers.handleAddSpace(i, newAchievement);
+                        handlers.handleAddOthersSpace(i, newAchievement,"interests");
                         setNewAchievement("");
                       }}
                     >
@@ -1860,7 +1914,7 @@ const ResumeTemplate1 = ({
                           e.dataTransfer.setData("text/plain", i.toString())
                         }
                         onDragOver={(e) => e.preventDefault()}
-                        onDrop={(e) => handleDropExperience(e, i)}
+                        onDrop={(e) => handleDropOthers(e, i,"interests")}
                         draggable
                       >
                         <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
@@ -1868,9 +1922,10 @@ const ResumeTemplate1 = ({
                             value={rec?.name}
                             style={{ width: "100%" }}
                             onSave={(value: string) => {
-                              handlers.handleSaveExperienceDetail(
+                              handlers.handleSaveOthersDetail(
                                 { name: value },
-                                i
+                                i,
+                                "interests"
                               );
                             }}
                           />
@@ -1889,10 +1944,11 @@ const ResumeTemplate1 = ({
                                       }}
                                       onDragOver={(e) => e.preventDefault()}
                                       onDrop={(e) => {
-                                        handleDropAchievement(
+                                        handleDropOthersAchievement(
                                           i,
                                           ind,
-                                          insideIndex
+                                          insideIndex,
+                                          "interests"
                                         );
                                       }}
                                       draggable
@@ -1901,9 +1957,10 @@ const ResumeTemplate1 = ({
                                       <div
                                         className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
                                         onClick={() => {
-                                          handlers.handleRemoveExtraSpace(
+                                          handlers.handleRemoveExtraOthersSpace(
                                             i,
-                                            ind
+                                            ind,
+                                            "interests"
                                           );
                                         }}
                                       >
@@ -1917,10 +1974,11 @@ const ResumeTemplate1 = ({
                                       }}
                                       onDragOver={(e) => e.preventDefault()}
                                       onDrop={(e) => {
-                                        handleDropAchievement(
+                                        handleDropOthersAchievement(
                                           i,
                                           ind,
-                                          insideIndex
+                                          insideIndex,
+                                          "interests"
                                         );
                                       }}
                                       draggable
@@ -1931,18 +1989,20 @@ const ResumeTemplate1 = ({
                                         type="textarea"
                                         value={achievement}
                                         onSave={(value: string) => {
-                                          handlers.handleUpdateAchivement(
+                                          handlers.handleUpdateOthersAchivement(
                                             i,
                                             ind,
-                                            value
+                                            value,
+                                            "interests"
                                           );
                                         }}
                                       />
                                       <div
                                         onClick={() =>
-                                          handlers.handleDeleteAchivement(
+                                          handlers.handleDeleteOthersAchivement(
                                             i,
-                                            ind
+                                            ind,
+                                            "interests"
                                           )
                                         }
                                         className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
@@ -1967,7 +2027,7 @@ const ResumeTemplate1 = ({
                             </div>
                           )}
 
-                          {newWorkExperience === i ? (
+                          {newWorkExperience === i && newBulletSection === "Interests" ? (
                             <>
                               <div className="flex flex-wrap w-full gap-1 mt-4">
                                 <input
@@ -1983,9 +2043,10 @@ const ResumeTemplate1 = ({
                                     if (e.key === "Enter") {
                                       e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
                                       // Save the new achievement to the state and possibly the database
-                                      handlers.handleAddAchivement(
+                                      handlers.handleAddOthersAchivement(
                                         i,
-                                        newAchievement
+                                        newAchievement,
+                                        "interests"
                                       );
                                       setNewAchievement("");
                                     }
@@ -1996,9 +2057,10 @@ const ResumeTemplate1 = ({
                                     className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
                                     onClick={() => {
                                       // Save the new achievement to the state and possibly the database
-                                      handlers.handleAddAchivement(
+                                      handlers.handleAddOthersAchivement(
                                         i,
-                                        newAchievement
+                                        newAchievement,
+                                        "interests"
                                       );
                                       setNewAchievement("");
                                     }}
@@ -2009,6 +2071,7 @@ const ResumeTemplate1 = ({
                                     onClick={() => {
                                       setNewAchievement("");
                                       setNewWorkExperience(-1);
+                                      setNewBulletSection(null)
                                     }}
                                     className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
                                   >
@@ -2061,15 +2124,18 @@ const ResumeTemplate1 = ({
                   return (
                     <Toolbar
                       key={i}
-                      addAchivement={() => setNewWorkExperience(i)}
+                      // addAchivement={() => {
+                      //   setNewWorkExperience(i)
+                      //   setNewBulletSection("References")
+                      // }}
                       deleteExperience={() =>
-                        handlers.handleDeleteExperience(i)
+                        handlers.handleDeleteOthers(i, "references")
                       }
-                      regenrateAchivements={() => handleRegenrate(rec, i)}
-                      addNewLine={() => {
-                        handlers.handleAddSpace(i, newAchievement);
-                        setNewAchievement("");
-                      }}
+                      // regenrateAchivements={() => handleRegenrate(rec, i)}
+                      // addNewLine={() => {
+                      //   handlers.handleAddOthersSpace(i, newAchievement, "references");
+                      //   setNewAchievement("");
+                      // }}
                     >
                       <div
                         key={i}
@@ -2078,7 +2144,7 @@ const ResumeTemplate1 = ({
                           e.dataTransfer.setData("text/plain", i.toString())
                         }
                         onDragOver={(e) => e.preventDefault()}
-                        onDrop={(e) => handleDropExperience(e, i)}
+                        onDrop={(e) => handleDropOthers(e, i, "references")}
                         draggable
                       >
                         <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
@@ -2086,33 +2152,38 @@ const ResumeTemplate1 = ({
                             value={rec?.name}
                             style={{ width: "100%" }}
                             onSave={(value: string) => {
-                              handlers.handleSaveExperienceDetail(
+                              handlers.handleSaveOthersDetail(
                                 { name: value },
-                                i
+                                i,
+                                "references"
                               );
                             }}
                           />
                         </h2>
                         <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
                           {rec?.position && (
-                            <EditableField
-                              value={rec?.position}
-                              onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
-                                  { position: value },
-                                  i
-                                );
-                              }}
-                            />
+                             <span className="hover:shadow-md hover:bg-gray-100">
+                               <EditableField
+                                 value={rec?.position}
+                                 onSave={(value: string) => {
+                                   handlers.handleSaveOthersDetail(
+                                     { position: value },
+                                     i,
+                                     "references"
+                                   );
+                                 }}
+                               />
+                             </span>
                           )}
                           |
                           <span className="hover:shadow-md hover:bg-gray-100">
                             <EditableField
                               value={rec?.company}
                               onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
+                                handlers.handleSaveOthersDetail(
                                   { company: value },
-                                  i
+                                  i,
+                                  "references"
                                 );
                               }}
                             />
@@ -2121,15 +2192,18 @@ const ResumeTemplate1 = ({
                         <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
                           Contact Info:
                           {rec?.contactInformation && (
-                            <EditableField
-                              value={rec.contactInformation}
-                              onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
-                                  { contactInformation: value },
-                                  i
-                                );
-                              }}
-                            />
+                             <span className="hover:shadow-md hover:bg-gray-100">
+                               <EditableField
+                                 value={rec.contactInformation}
+                                 onSave={(value: string) => {
+                                   handlers.handleSaveOthersDetail(
+                                     { contactInformation: value },
+                                     i,
+                                     "references"
+                                   );
+                                 }}
+                               />
+                             </span>
                           )}
                         </h2>
                       </div>
@@ -2174,15 +2248,15 @@ const ResumeTemplate1 = ({
                   return (
                     <Toolbar
                       key={i}
-                      addAchivement={() => setNewWorkExperience(i)}
+                      // addAchivement={() => setNewWorkExperience(i)}
                       deleteExperience={() =>
-                        handlers.handleDeleteExperience(i)
+                        handlers.handleDeleteOthers(i,"languages")
                       }
-                      regenrateAchivements={() => handleRegenrate(rec, i)}
-                      addNewLine={() => {
-                        handlers.handleAddSpace(i, newAchievement);
-                        setNewAchievement("");
-                      }}
+                      // regenrateAchivements={() => handleRegenrate(rec, i)}
+                      // addNewLine={() => {
+                      //   handlers.handleAddSpace(i, newAchievement);
+                      //   setNewAchievement("");
+                      // }}
                     >
                       <div
                         key={i}
@@ -2191,7 +2265,7 @@ const ResumeTemplate1 = ({
                           e.dataTransfer.setData("text/plain", i.toString())
                         }
                         onDragOver={(e) => e.preventDefault()}
-                        onDrop={(e) => handleDropExperience(e, i)}
+                        onDrop={(e) => handleDropOthers(e, i,"languages")}
                         draggable
                       >
                         <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
@@ -2199,9 +2273,10 @@ const ResumeTemplate1 = ({
                             value={rec?.language}
                             style={{ width: "100%" }}
                             onSave={(value: string) => {
-                              handlers.handleSaveExperienceDetail(
+                              handlers.handleSaveOthersDetail(
                                 { language: value },
-                                i
+                                i,
+                                "languages"
                               );
                             }}
                           />
@@ -2209,15 +2284,18 @@ const ResumeTemplate1 = ({
                         <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
                           Proficiency:
                           {rec?.proficiency && (
-                            <EditableField
-                              value={rec.proficiency}
-                              onSave={(value: string) => {
-                                handlers.handleSaveExperienceDetail(
-                                  { proficiency: value },
-                                  i
-                                );
-                              }}
-                            />
+                             <span className="hover:shadow-md hover:bg-gray-100">
+                               <EditableField
+                                 value={rec.proficiency}
+                                 onSave={(value: string) => {
+                                   handlers.handleSaveOthersDetail(
+                                     { proficiency: value },
+                                     i,
+                                     "languages"
+                                   );
+                                 }}
+                               />
+                             </span>
                           )}
                         </h2>
                       </div>
