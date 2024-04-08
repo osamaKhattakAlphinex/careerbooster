@@ -45,8 +45,6 @@ const ResumeTemplate1 = ({
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [confirmationModal, setConfirmationModal] = useState(false);
 
-  const [confirmationModalAchivement, setConfirmationModalAchivement] =
-    useState(false);
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
@@ -72,9 +70,7 @@ const ResumeTemplate1 = ({
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
-  // useEffect(() => {
-  //   console.log(streamedSummaryData);
-  // });
+
   useEffect(() => {
     if (streamedJDData === "") {
       setStreamedJDData(null);

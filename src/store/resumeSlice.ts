@@ -120,7 +120,6 @@ export interface Resume {
   workExperienceArray: WorkExperience[];
   quantifyingExperience: boolean;
   workExperience: "";
-  customExperienceArray: [];
   primarySkills: [];
   professionalSkills: [];
   secondarySkills: [];
@@ -190,7 +189,6 @@ const initialState: Resume = {
   },
   summary: "",
   workExperienceArray: [],
-  customExperienceArray: [],
   quantifyingExperience: true,
   workExperience: "",
   primarySkills: [],
@@ -401,7 +399,6 @@ export const {
   setInterests,
   setCertifications,
   setLanguages,
-  setCustomExperienceArray,
   // setLoadingState,
 } = resumeSlice.actions;
 

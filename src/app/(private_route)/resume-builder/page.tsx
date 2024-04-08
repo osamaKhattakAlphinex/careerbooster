@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/dashboard/resume-templates/templates/template_1";
 import { useDispatch, useSelector } from "react-redux";
-import { CustomEntry, WorkExperience } from "@/store/userDataSlice";
+import {  WorkExperience } from "@/store/userDataSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import {
@@ -45,7 +45,6 @@ import useGetCreditLimits from "@/hooks/useGetCreditLimits";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import CreditInfoModal from "@/components/dashboard/resume-builder/CreditsInfoModal";
 import TemplateSlider from "@/components/dashboard/resume-templates/templateSlider";
-import { CustomSection } from "@/store/registerSlice";
 import TourBot from "@/components/dashboard/TourBot";
 import { useTourContext } from "@/context/TourContext";
 
