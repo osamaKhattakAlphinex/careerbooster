@@ -24,24 +24,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 
-// type ItemCardType = {
-//   id: string;
-//   title?: string;
-//   name?: string;
-//   publisher?: string;
-//   date?: string;
-//   description?: string;
-//   issuingOrganization?: string;
-//   awardingOrganization?: string;
-//   position?: string;
-//   company?: string;
-//   contactInformation?: string;
-//   startDate?: string;
-//   endDate?: string;
-//   language?: string;
-//   proficiency?: string;
-// };
-
 const RecordCard = ({ rec, recName, formCloseHandler }: any) => {
   const [edit, setEdit] = useState(false);
 

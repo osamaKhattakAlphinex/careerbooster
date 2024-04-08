@@ -155,6 +155,9 @@ const TourBot = ({ config,setOutOfCredits }: any) => {
       setAudioBuffers([]);
       setIsGif(false);
       setIsAudioPlaying(false);
+      if(setOutOfCredits){
+        setOutOfCredits(false)
+      }
     }
   }, [audioBuffers, audioCounter]);
 
@@ -164,9 +167,7 @@ const TourBot = ({ config,setOutOfCredits }: any) => {
     const handleAudioEnded = () => {
       setAudioCounter((prev) => prev + 1);
       updateAndSaveTourStatus({ [config.name]: true });
-      if(setOutOfCredits){
-        setOutOfCredits(false)
-      }
+     
     };
 
     audio.addEventListener("ended", handleAudioEnded);

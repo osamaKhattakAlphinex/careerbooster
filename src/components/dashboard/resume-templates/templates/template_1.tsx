@@ -1917,7 +1917,7 @@ const ResumeTemplate1 = ({
                         onDrop={(e) => handleDropOthers(e, i,"interests")}
                         draggable
                       >
-                        <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
+                        {/* <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
                           <EditableField
                             value={rec?.name}
                             style={{ width: "100%" }}
@@ -1929,7 +1929,7 @@ const ResumeTemplate1 = ({
                               );
                             }}
                           />
-                        </h2>
+                        </h2> */}
 
                         <div className="px-4 py-1">
                           {rec?.description && i !== regeneratedRecordIndex ? (
