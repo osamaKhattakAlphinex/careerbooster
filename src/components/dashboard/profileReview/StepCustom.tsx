@@ -13,8 +13,11 @@ import {
 import {
   Award,
   Certification,
+  Interest,
+  Language,
   Publication,
   Reference,
+  Training,
 } from "@/store/userDataSlice";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
@@ -39,16 +42,65 @@ import * as Yup from "yup";
 //   proficiency?: string;
 // };
 
-const RecordCard = ({ rec, recName }: any) => {
-  const [edit, setEdit] = useState(true);
+const RecordCard = ({ rec, recName, formCloseHandler }: any) => {
+  const [edit, setEdit] = useState(false);
 
   return (
     <>
-      {edit && forms[recName]}
+      {edit && recName === "publications" && (
+        <PublicationsForm
+          rec={rec}
+          formCloseHandler={() => setEdit(false)}
+          isEditing={edit}
+        />
+      )}
+      {edit && recName === "certifications" && (
+        <CertificationsForm
+          rec={rec}
+          formCloseHandler={() => setEdit(false)}
+          isEditing={edit}
+        />
+      )}
+      {edit && recName === "awards" && (
+        <AwardsForm
+          rec={rec}
+          formCloseHandler={() => setEdit(false)}
+          isEditing={edit}
+        />
+      )}
+      {edit && recName === "languages" && (
+        <LangaugesForm
+          rec={rec}
+          formCloseHandler={() => setEdit(false)}
+          isEditing={edit}
+        />
+      )}
+      {edit && recName === "interests" && (
+        <InterestsForm
+          rec={rec}
+          formCloseHandler={() => setEdit(false)}
+          isEditing={edit}
+        />
+      )}
+      {edit && recName === "trainings" && (
+        <TrainingForm
+          rec={rec}
+          formCloseHandler={() => setEdit(false)}
+          isEditing={edit}
+        />
+      )}
+      {edit && recName === "references" && (
+        <ReferencesForm
+          rec={rec}
+          formCloseHandler={() => setEdit(false)}
+          isEditing={edit}
+        />
+      )}
+
       <div className="relative flex flex-col items-start justify-start py-4 pl-4 pr-12 border border-gray-100 rounded-md">
         <div className="absolute right-2 top-4">
           <div className="flex flex-row justify-end gap-2">
-            <button>{EditIcon}</button>
+            <button onClick={() => setEdit(true)}>{EditIcon}</button>
             <button>{deleteIcon}</button>
           </div>
         </div>
@@ -107,14 +159,18 @@ const AddItemBtn = ({ onClick, btnText = "Add Item" }: any) => {
     <button
       type="button"
       onClick={onClick}
-      className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+      className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
     >
       {btnText}
     </button>
   );
 };
 // forms
-const PublicationsForm = ({ rec = null, formCloseHandler }: any) => {
+const PublicationsForm = ({
+  rec = null,
+  formCloseHandler,
+  isEditing = false,
+}: any) => {
   const dispatch = useDispatch();
 
   const stepEight = useSelector((state: any) => state.register.stepEight);
@@ -137,14 +193,14 @@ const PublicationsForm = ({ rec = null, formCloseHandler }: any) => {
 
     onSubmit: async (values) => {
       const { description } = values;
-      const descriptionArray = description.split('\n').filter(Boolean); // Split description by '\n' and remove empty strings
-      
+      const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+
       // Update the values with the description as an array
       const updatedValues = {
         ...values,
-        description: descriptionArray
+        description: descriptionArray,
       };
-    
+
       const obj = { id: makeid(), ...updatedValues };
       const newList = [obj, ...list];
       dispatch(setStepEight({ list: newList }));
@@ -225,13 +281,13 @@ const PublicationsForm = ({ rec = null, formCloseHandler }: any) => {
         <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
           <input
             type="submit"
-            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
-            value="Add Publication"
+            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value={isEditing ? "Update Publication" : "Add Publication"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
             value="Cancel"
           />
         </div>
@@ -239,11 +295,21 @@ const PublicationsForm = ({ rec = null, formCloseHandler }: any) => {
     </div>
   );
 };
-const CertificationsForm = ({ rec = null, formCloseHandler }: any) => {
+const CertificationsForm = ({
+  rec = null,
+  formCloseHandler,
+  isEditing = false,
+}: any) => {
   const dispatch = useDispatch();
 
   const stepSix = useSelector((state: any) => state.register.stepSix);
   const { list, state } = stepSix;
+
+  useEffect(() => {
+    if (rec) {
+      formik.setValues(rec);
+    }
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -255,14 +321,14 @@ const CertificationsForm = ({ rec = null, formCloseHandler }: any) => {
 
     onSubmit: async (values) => {
       const { description } = values;
-      const descriptionArray = description.split('\n').filter(Boolean); // Split description by '\n' and remove empty strings
-      
+      const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+
       // Update the values with the description as an array
       const updatedValues = {
         ...values,
-        description: descriptionArray
+        description: descriptionArray,
       };
-    
+
       const obj = { id: makeid(), ...updatedValues };
       const newList = [obj, ...list];
       dispatch(setStepSix({ list: newList }));
@@ -343,8 +409,8 @@ const CertificationsForm = ({ rec = null, formCloseHandler }: any) => {
         <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
           <input
             type="submit"
-            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
-            value="Add Certification"
+            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value={isEditing ? "Update Certification" : "Add Certification"}
           />
           <input
             type="button"
@@ -357,9 +423,20 @@ const CertificationsForm = ({ rec = null, formCloseHandler }: any) => {
     </div>
   );
 };
-const AwardsForm = ({ rec = null, formCloseHandler }: any) => {
+const AwardsForm = ({
+  rec = null,
+  formCloseHandler,
+  isEditing = false,
+}: any) => {
   const dispatch = useDispatch();
   const stepNine = useSelector((state: any) => state.register.stepNine);
+
+  useEffect(() => {
+    if (rec) {
+      formik.setValues(rec);
+    }
+  }, []);
+
   const { list, state } = stepNine;
   const formik = useFormik({
     initialValues: {
@@ -371,14 +448,14 @@ const AwardsForm = ({ rec = null, formCloseHandler }: any) => {
 
     onSubmit: async (values) => {
       const { description } = values;
-      const descriptionArray = description.split('\n').filter(Boolean); // Split description by '\n' and remove empty strings
-      
+      const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+
       // Update the values with the description as an array
       const updatedValues = {
         ...values,
-        description: descriptionArray
+        description: descriptionArray,
       };
-    
+
       const obj = { id: makeid(), ...updatedValues };
       const newList = [obj, ...list];
       dispatch(setStepNine({ list: newList }));
@@ -463,13 +540,13 @@ const AwardsForm = ({ rec = null, formCloseHandler }: any) => {
         <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
           <input
             type="submit"
-            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
-            value="Add Awards"
+            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value={isEditing ? "Update Awards" : "Add Awards"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
             value="Cancel"
           />
         </div>
@@ -477,10 +554,21 @@ const AwardsForm = ({ rec = null, formCloseHandler }: any) => {
     </div>
   );
 };
-const InterestsForm = ({ rec = null, formCloseHandler }: any) => {
+const InterestsForm = ({
+  rec = null,
+  formCloseHandler,
+  isEditing = false,
+}: any) => {
   const dispatch = useDispatch();
   const stepTen = useSelector((state: any) => state.register.stepTen);
   const { list, state } = stepTen;
+
+  useEffect(() => {
+    if (rec) {
+      formik.setValues(rec);
+    }
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -489,14 +577,14 @@ const InterestsForm = ({ rec = null, formCloseHandler }: any) => {
 
     onSubmit: async (values) => {
       const { description } = values;
-      const descriptionArray = description.split('\n').filter(Boolean); // Split description by '\n' and remove empty strings
-      
+      const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+
       // Update the values with the description as an array
       const updatedValues = {
         ...values,
-        description: descriptionArray
+        description: descriptionArray,
       };
-    
+
       const obj = { id: makeid(), ...updatedValues };
       const newList = [obj, ...list];
       dispatch(setStepTen({ list: newList }));
@@ -545,13 +633,13 @@ const InterestsForm = ({ rec = null, formCloseHandler }: any) => {
         <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
           <input
             type="submit"
-            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
-            value="Add Interest"
+            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value={isEditing ? "Update Interest" : "Add Interest"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
             value="Cancel"
           />
         </div>
@@ -559,10 +647,21 @@ const InterestsForm = ({ rec = null, formCloseHandler }: any) => {
     </div>
   );
 };
-const ReferencesForm = ({ rec = null, formCloseHandler }: any) => {
+const ReferencesForm = ({
+  rec = null,
+  formCloseHandler,
+  isEditing = false,
+}: any) => {
   const dispatch = useDispatch();
   const stepTwelve = useSelector((state: any) => state.register.stepTwelve);
   const { list, state } = stepTwelve;
+
+  useEffect(() => {
+    if (rec) {
+      formik.setValues(rec);
+    }
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -658,13 +757,13 @@ const ReferencesForm = ({ rec = null, formCloseHandler }: any) => {
         <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
           <input
             type="submit"
-            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
-            value="Add Reference"
+            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value={isEditing ? "Update Preference" : "Add Reference"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
             value="Cancel"
           />{" "}
         </div>
@@ -672,10 +771,21 @@ const ReferencesForm = ({ rec = null, formCloseHandler }: any) => {
     </div>
   );
 };
-const TrainingForm = ({ rec = null, formCloseHandler }: any) => {
+const TrainingForm = ({
+  rec = null,
+  formCloseHandler,
+  isEditing = false,
+}: any) => {
   const dispatch = useDispatch();
   const stepSeven = useSelector((state: any) => state.register.stepSeven);
   const { list, state } = stepSeven;
+
+  useEffect(() => {
+    if (rec) {
+      formik.setValues(rec);
+    }
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       company: "",
@@ -687,14 +797,14 @@ const TrainingForm = ({ rec = null, formCloseHandler }: any) => {
 
     onSubmit: async (values) => {
       const { description } = values;
-      const descriptionArray = description.split('\n').filter(Boolean); // Split description by '\n' and remove empty strings
-      
+      const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+
       // Update the values with the description as an array
       const updatedValues = {
         ...values,
-        description: descriptionArray
+        description: descriptionArray,
       };
-    
+
       const obj = { id: makeid(), ...updatedValues };
       const newList = [obj, ...list];
       dispatch(setStepSeven({ list: newList }));
@@ -794,13 +904,13 @@ const TrainingForm = ({ rec = null, formCloseHandler }: any) => {
         <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
           <input
             type="submit"
-            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
-            value="Add Training"
+            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value={isEditing ? "Update Training" : "Add Training"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
             value="Cancel"
           />
         </div>
@@ -808,10 +918,21 @@ const TrainingForm = ({ rec = null, formCloseHandler }: any) => {
     </div>
   );
 };
-const LangaugesForm = ({ rec = null, formCloseHandler }: any) => {
+const LangaugesForm = ({
+  rec = null,
+  formCloseHandler,
+  isEditing = false,
+}: any) => {
   const dispatch = useDispatch();
   const stepEleven = useSelector((state: any) => state.register.stepEleven);
   const { list, state } = stepEleven;
+
+  useEffect(() => {
+    if (rec) {
+      formik.setValues(rec);
+    }
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       language: "",
@@ -870,29 +991,19 @@ const LangaugesForm = ({ rec = null, formCloseHandler }: any) => {
         <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
           <input
             type="submit"
-            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
-            value="Add Language"
+            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            value={isEditing ? "Update Language" : "Add Language"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="xs:w-full md:w-3/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
             value="Cancel"
           />
         </div>
       </form>
     </div>
   );
-};
-
-const forms: any = {
-  publications: PublicationsForm,
-  languages: LangaugesForm,
-  training: TrainingForm,
-  references: ReferencesForm,
-  interests: InterestsForm,
-  certifications: CertificationsForm,
-  awards: AwardsForm,
 };
 
 const StepCustom = () => {
@@ -947,7 +1058,11 @@ const StepCustom = () => {
         <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
           {publicationsList.map((rec: Publication) => (
             <div key={rec.id}>
-              <RecordCard rec={rec} recName={"publications"} />
+              <RecordCard
+                rec={rec}
+                recName={"publications"}
+                formCloseHandler={() => setExpandedHelper("publications")}
+              />
             </div>
           ))}
         </div>
@@ -969,7 +1084,11 @@ const StepCustom = () => {
         <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
           {certificationsList.map((rec: Certification) => (
             <div key={rec.id}>
-              <RecordCard rec={rec} recName={"certifications"} />
+              <RecordCard
+                rec={rec}
+                recName={"certifications"}
+                formCloseHandler={() => setExpandedHelper("certifications")}
+              />
             </div>
           ))}
         </div>
@@ -990,7 +1109,11 @@ const StepCustom = () => {
         <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
           {awardsList.map((rec: Award) => (
             <div key={rec.id}>
-              <RecordCard rec={rec} recName={"awards"} />
+              <RecordCard
+                rec={rec}
+                recName={"awards"}
+                formCloseHandler={() => setExpandedHelper("awards")}
+              />
             </div>
           ))}
         </div>
@@ -1009,7 +1132,11 @@ const StepCustom = () => {
         <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
           {referencesList.map((rec: Reference) => (
             <div key={rec.id}>
-              <RecordCard rec={rec} recName={"references"} />
+              <RecordCard
+                rec={rec}
+                recName={"references"}
+                formCloseHandler={() => setExpandedHelper("references")}
+              />
             </div>
           ))}
         </div>
@@ -1028,9 +1155,13 @@ const StepCustom = () => {
         </h1>
         {trainingsList.length === 0 && <p>No Trainings Added</p>}
         <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
-          {trainingsList.map((rec: Reference) => (
+          {trainingsList.map((rec: Training) => (
             <div key={rec.id}>
-              <RecordCard rec={rec} recName={"trainings"} />
+              <RecordCard
+                rec={rec}
+                recName={"trainings"}
+                formCloseHandler={() => setExpandedHelper("trainings")}
+              />
             </div>
           ))}
         </div>
@@ -1050,9 +1181,13 @@ const StepCustom = () => {
         </h1>
         {interestsList.length === 0 && <p>No Interests Added</p>}
         <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
-          {interestsList.map((rec: Reference) => (
+          {interestsList.map((rec: Interest) => (
             <div key={rec.id}>
-              <RecordCard rec={rec} recName={"interests"} />
+              <RecordCard
+                rec={rec}
+                recName={"interests"}
+                formCloseHandler={() => setExpandedHelper("interests")}
+              />
             </div>
           ))}
         </div>
@@ -1071,18 +1206,22 @@ const StepCustom = () => {
         </h1>
         {languagesList.length === 0 && <p>No Languages Added</p>}
         <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
-          {languagesList.map((rec: Reference) => (
+          {languagesList.map((rec: Language) => (
             <div key={rec.id}>
-              <RecordCard rec={rec} recName={"langauges"} />
+              <RecordCard
+                rec={rec}
+                recName={"languages"}
+                formCloseHandler={() => setExpandedHelper("languages")}
+              />
             </div>
           ))}
         </div>
         {expanded.languages ? (
           <LangaugesForm
-            formCloseHandler={() => setExpandedHelper("langauges")}
+            formCloseHandler={() => setExpandedHelper("languages")}
           />
         ) : (
-          <AddItemBtn onClick={() => setExpandedHelper("langauges")} />
+          <AddItemBtn onClick={() => setExpandedHelper("languages")} />
         )}
       </div>
     </div>
