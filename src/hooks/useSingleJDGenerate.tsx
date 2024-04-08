@@ -11,7 +11,7 @@ import useSaveResumeToDB from "./useSaveToDB";
 import useGetCreditLimits from "./useGetCreditLimits";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
-const useSingleJDGenerate = (setStreamedJDData: any,setStreamedCustomData:any="") => {
+const useSingleJDGenerate = (setStreamedJDData: any,setOutOfCredits:any ="") => {
   const { getUserDataIfNotExists } = useGetUserData();
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
@@ -85,8 +85,13 @@ const useSingleJDGenerate = (setStreamedJDData: any,setStreamedCustomData:any=""
           achievementTemp += text;
         }
       } else {
+        if (res.status === 429) {
+          showErrorToast("You ran out of credits!");
+          setOutOfCredits(true);
+        }else{
+          showErrorToast("Error in generating work experience");
+        }
         setStreamedJDData("");
-        showErrorToast("You ran out of credits!");
         dispatch(setWorkExperienceArray({ workExperienceArray: workExpArray }));
         dispatch(setState({ name: "resumeLoading", value: false }));
       }

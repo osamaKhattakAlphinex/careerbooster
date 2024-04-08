@@ -48,7 +48,7 @@ const ResumeTemplate1 = ({
   const [confirmationModal, setConfirmationModal] = useState(false);
 
   const [regenerating, setRegenerating] = useState(false);
-  const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
+  const { getPrimarySkills } = useGetPrimarySkills(setRegenerating,setOutOfCredits);
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
@@ -58,7 +58,7 @@ const ResumeTemplate1 = ({
   const { getSummary } = useGetSummary(setStreamedSummaryData, setOutOfCredits);
   // const [streamedJDData, setStreamedJDData] = useState<any>("");
   const { getOneWorkExperienceNew } =
-    useSingleJDGenerate(setStreamedJDData);
+    useSingleJDGenerate(setStreamedJDData,setOutOfCredits);
 
   const {
     handleDropPrimary,

@@ -19,6 +19,8 @@ import Toolbar from "../Toolbar";
 import Loader from "@/components/common/Loader";
 import { setLinkedInJobDescription } from "@/store/linkedInJobDescriptionSlice";
 import DownloadService from "@/helpers/downloadFile";
+import { useTourContext } from "@/context/TourContext";
+import TourBot from "../TourBot";
 
 const SubJDGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -30,6 +32,8 @@ const SubJDGenerator = () => {
   const { setAvailableCredits } = useAppContext();
   const [existingJDId, setExistingJDId] = useState("");
   const [isEditing, setIsEditing] = useState({ isEdit: false, editIndex: -1 });
+  const { tourBotRef,availableCreditsRef } = useTourContext();
+  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
 
   const [generatedWorkExperience, setGeneratedWorkExperience] = useState<
     string[]
@@ -37,6 +41,22 @@ const SubJDGenerator = () => {
 
   const handleClick = (experienceIndex: any) => {
     setIsEditing({ isEdit: true, editIndex: experienceIndex });
+  };
+
+  const tourBotConfig2 = {
+    name: "resumeBuilder",
+    audios: [
+      {
+        url: "/OutOfCredits.mp3",
+        for: "history",
+      },
+    ],
+    toolRefs: [
+      {
+        ref: availableCreditsRef,
+        for: "history",
+      },
+    ],
   };
 
   const deleteExperience = async (experienceIndex: any) => {
@@ -111,6 +131,14 @@ const SubJDGenerator = () => {
       }
     }
   }, [isEditing]);
+
+  useEffect(() => {
+    if (outOfCredits) {
+      setTimeout(() => {
+        tourBotRef?.current?.click();
+      }, 500);
+    }
+  }, [outOfCredits]);
   const copyJD = async (text: string) => {
     try {
       const jD_Data = htmlToPlainText(text);
@@ -285,7 +313,13 @@ const SubJDGenerator = () => {
             showSuccessToast("Job Description generated successfully");
           }
         } else {
-          showErrorToast("You ran out of credits!");
+          if(res.status === 429){
+            setStreamedData(" You ran out of Credits");
+            showErrorToast("You ran out of Credits!")
+            setOutOfCredits(true);
+          }else{
+            showErrorToast("Failed to generate linkedin Headline");
+          }
           setMsgLoading(false);
           break;
         }
@@ -495,7 +529,7 @@ const SubJDGenerator = () => {
             </h1>
             <div className="ml-2 font-sansbreak-words">
               <div className="font-sans text-gray-950" ref={componentRef}>
-                {generatedWorkExperience.map((workExperience, index) => {
+                {generatedWorkExperience?.map((workExperience, index) => {
                   return (
                     <>
                       {workExperience === "" ? (
@@ -563,6 +597,8 @@ const SubJDGenerator = () => {
             Credit Limit Reached !
           </div>
         )}
+      {outOfCredits &&  <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits}/>}
+
       </>
     </>
   );
