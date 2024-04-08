@@ -23,6 +23,8 @@ const PersonalizedEmailBot = () => {
   const componentSecondRef = useRef<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const { data: session } = useSession();
+  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
+
   const [show, setShow] = useState<boolean>(false);
   const [firstShow, setFirstShow] = useState<boolean>(false);
   const [secondShow, setSecondShow] = useState<boolean>(false);
@@ -94,7 +96,7 @@ const PersonalizedEmailBot = () => {
     }
   };
 
-  const { emailElementRef, tourBotRef, emailCardsElementRef, historyCardRef } =
+  const { emailElementRef, tourBotRef, emailCardsElementRef, historyCardRef,availableCreditsRef } =
     useTourContext();
 
   const tourBotConfig = {
@@ -129,6 +131,23 @@ const PersonalizedEmailBot = () => {
     ],
   };
 
+  const tourBotConfig2 = {
+    name: "resumeBuilder",
+    audios: [
+      {
+        url: "/OutOfCredits.mp3",
+        for: "history",
+      },
+    ],
+    toolRefs: [
+      {
+        ref: availableCreditsRef,
+        for: "history",
+      },
+    ],
+  };
+
+
   useEffect(() => {
     if (userData && userData?.tours) {
       if (!userData.tours.emailAssistant) {
@@ -139,6 +158,13 @@ const PersonalizedEmailBot = () => {
     }
   }, [tourBotRef]);
 
+  useEffect(() => {
+    if (outOfCredits) {
+      setTimeout(() => {
+        tourBotRef?.current?.click();
+      }, 500);
+    }
+  }, [outOfCredits]);
   const handleClick = (type: string) => {
     // setEditedContent(streamedData);
     if (type === "email") {
@@ -271,8 +297,13 @@ const PersonalizedEmailBot = () => {
               }
             } else {
               const res = await resp.json();
-              setStreamedData(res.result + "! You ran out of Credits");
-              showErrorToast("Failed to generate Email");
+              if (resp.status === 429){
+                setStreamedData(res.result + "! You ran out of Credits");
+                showErrorToast("You ran out of Credits!");
+                setOutOfCredits(true)
+              } else{
+                showErrorToast("Failed to generate Email");
+              }
             }
           })
           .finally(() => {
@@ -356,9 +387,15 @@ const PersonalizedEmailBot = () => {
               }
             } else {
               const res = await resp.json();
-              setStreamedFirstFollowUpEmailText(
-                res.result + "! You ran out of Credits"
-              );
+              if (resp.status === 429){
+                setStreamedFirstFollowUpEmailText(
+                  res.result + "! You ran out of Credits"
+                );
+                showErrorToast("You ran out of Credits!");
+                setOutOfCredits(true)
+              }else{
+                showErrorToast("Failed to generate Email");
+              }
             }
           })
           .finally(() => {
@@ -438,9 +475,16 @@ const PersonalizedEmailBot = () => {
               }
             } else {
               const res = await resp.json();
-              setStreamedSecondFollowUpEmailText(
+              if (resp.status === 429){
+
+                setStreamedSecondFollowUpEmailText(
                 res.result + "! You ran out of Credits"
-              );
+                );
+                showErrorToast("You ran out of Credits!");
+                setOutOfCredits(true)
+              } else{
+                showErrorToast("Failed to generate Email");
+              }
             }
           })
           .finally(() => {
@@ -868,8 +912,7 @@ const PersonalizedEmailBot = () => {
           </div>
         </div>
       </div>
-
-      <TourBot config={tourBotConfig} />
+      <TourBot config={outOfCredits ? tourBotConfig2 : tourBotConfig} setOutOfCredits={setOutOfCredits}/>
     </>
   );
 };

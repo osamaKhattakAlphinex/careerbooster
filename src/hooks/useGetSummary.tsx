@@ -9,14 +9,15 @@ import useGetCreditLimits from "./useGetCreditLimits";
 import { usePathname } from "next/navigation";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
-const useGetSummary = (setStreamedSummaryData: any) => {
+const useGetSummary = (
+  setStreamedSummaryData: any,
+  setOutOfCredits: any = ""
+) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const resumeData = useSelector((state: any) => state.resume);
-  const { getUserDataIfNotExists } = useGetUserData();
   const { saveResumeToDB } = useSaveResumeToDB();
   const creditLimits = useSelector((state: any) => state.creditLimits);
-  const { getCreditLimitsIfNotExists } = useGetCreditLimits();
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const path = usePathname();
 
@@ -83,10 +84,12 @@ const useGetSummary = (setStreamedSummaryData: any) => {
       } else {
         setStreamedSummaryData(resumeData?.summary);
         dispatch(setSummary(resumeData?.summary));
-        showErrorToast("You ran out of credits!");
+        if (resp.status === 429) {
+          showErrorToast("You ran out of credits!");
+          setOutOfCredits(true);
+        }
       }
     });
-    
   };
 
   return { getSummary };

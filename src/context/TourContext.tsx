@@ -18,7 +18,7 @@ interface TourRefs {
   tourBotRef: React.MutableRefObject<HTMLInputElement | null>;
   historyCardRef: React.MutableRefObject<HTMLInputElement | null>;
   emailCardsElementRef: React.MutableRefObject<HTMLInputElement | null>;
-
+  availableCreditsRef: React.MutableRefObject<HTMLInputElement | null>;
   linkedinAboutElementRef: React.MutableRefObject<HTMLInputElement | null>;
   linkedinAboutHistoryElementRef: React.MutableRefObject<HTMLInputElement | null>;
   linkedinHeadlineElementRef: React.MutableRefObject<HTMLInputElement | null>;
@@ -56,7 +56,7 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
   const tourBotRef = useRef<HTMLInputElement | null>(null);
   const historyCardRef = useRef<HTMLInputElement | null>(null);
   const emailCardsElementRef = useRef<HTMLInputElement | null>(null);
-
+  const availableCreditsRef = useRef<HTMLInputElement | null>(null);
   const linkedinAboutElementRef = useRef<HTMLInputElement | null>(null);
   const linkedinAboutHistoryElementRef = useRef<HTMLInputElement | null>(null);
 
@@ -90,7 +90,7 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
     tourBotRef,
     historyCardRef,
     emailCardsElementRef,
-
+    availableCreditsRef,
     linkedinAboutElementRef,
     linkedinAboutHistoryElementRef,
 
