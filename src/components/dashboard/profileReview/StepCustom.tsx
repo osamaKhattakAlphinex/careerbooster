@@ -79,11 +79,20 @@ const RecordCard = ({ rec, recName, formCloseHandler }: any) => {
         />
       )}
 
-      <div className="relative flex flex-col items-start justify-start py-4 pl-4 pr-12 border border-gray-100 rounded-md">
+      <div className="relative flex flex-col items-start justify-start py-4 pl-4 pr-12 border border-[#2e2f45] rounded-md">
         <div className="absolute right-2 top-4">
           <div className="flex flex-row justify-end gap-2">
-            <button onClick={() => setEdit(true)}>{EditIcon}</button>
-            <button>{deleteIcon}</button>
+            <button
+              onClick={() => {
+                setEdit(true);
+              }}
+              className="text-blue-500 hover:text-blue-700"
+            >
+              {EditIcon}
+            </button>
+            <button className="text-red-500 hover:text-red-700">
+              {deleteIcon}
+            </button>
           </div>
         </div>
 
@@ -196,8 +205,8 @@ const PublicationsForm = ({
   });
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
-        <div className="mb-4">
+      <form onSubmit={formik.handleSubmit} className="form">
+        <div className="mb-4 ">
           <label
             htmlFor="title"
             className="block mb-2 text-sm font-bold text-gray-200"
@@ -207,7 +216,7 @@ const PublicationsForm = ({
           <input
             id="title"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Title"
             value={formik.values.title}
             onChange={formik.handleChange}
@@ -223,7 +232,7 @@ const PublicationsForm = ({
           <input
             id="publisher"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Publisher"
             onChange={formik.handleChange}
             value={formik.values.publisher}
@@ -239,7 +248,7 @@ const PublicationsForm = ({
           <input
             id="date"
             type="date"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Date"
             onChange={formik.handleChange}
             value={formik.values.date}
@@ -254,22 +263,22 @@ const PublicationsForm = ({
           </label>
           <textarea
             id="description"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             onChange={formik.handleChange}
             placeholder="Description"
             value={formik.values.description}
           ></textarea>
         </div>
-        <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
+        <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="form-btn"
             value={isEditing ? "Update Publication" : "Add Publication"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="form-btn "
             value="Cancel"
           />
         </div>
@@ -324,7 +333,7 @@ const CertificationsForm = ({
   });
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4">
           <label
             htmlFor="title"
@@ -335,7 +344,7 @@ const CertificationsForm = ({
           <input
             id="title"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Title"
             value={formik.values.title}
             onChange={formik.handleChange}
@@ -351,7 +360,7 @@ const CertificationsForm = ({
           <input
             id="issuingOrganization"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Issuing Organization"
             onChange={formik.handleChange}
             value={formik.values.issuingOrganization}
@@ -367,7 +376,7 @@ const CertificationsForm = ({
           <input
             id="date"
             type="date"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Date"
             onChange={formik.handleChange}
             value={formik.values.date}
@@ -382,7 +391,7 @@ const CertificationsForm = ({
           </label>
           <textarea
             id="description"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             onChange={formik.handleChange}
             placeholder="Description"
             value={formik.values.description}
@@ -391,12 +400,12 @@ const CertificationsForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
           <input
             type="submit"
-            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="form-btn "
             value={isEditing ? "Update Certification" : "Add Certification"}
           />
           <input
             type="button"
-            className="xs:w-full "
+            className="form-btn"
             value="Cancel"
             onClick={formCloseHandler}
           />
@@ -455,7 +464,7 @@ const AwardsForm = ({
   });
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4">
           <label
             htmlFor="title"
@@ -466,7 +475,7 @@ const AwardsForm = ({
           <input
             id="title"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Title"
             value={formik.values.title}
             onChange={formik.handleChange}
@@ -482,7 +491,7 @@ const AwardsForm = ({
           <input
             id="awardingOrganization"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Awarding Organization"
             onChange={formik.handleChange}
             value={formik.values.awardingOrganization}
@@ -498,7 +507,7 @@ const AwardsForm = ({
           <input
             id="date"
             type="date"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Date"
             onChange={formik.handleChange}
             value={formik.values.date}
@@ -513,22 +522,22 @@ const AwardsForm = ({
           </label>
           <textarea
             id="description"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             onChange={formik.handleChange}
             placeholder="Description"
             value={formik.values.description}
           ></textarea>
         </div>
-        <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
+        <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="form-btn"
             value={isEditing ? "Update Awards" : "Add Awards"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="form-btn"
             value="Cancel"
           />
         </div>
@@ -580,7 +589,7 @@ const InterestsForm = ({
   });
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4">
           <label
             htmlFor="name"
@@ -591,7 +600,7 @@ const InterestsForm = ({
           <input
             id="name"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Name"
             value={formik.values.name}
             onChange={formik.handleChange}
@@ -606,22 +615,22 @@ const InterestsForm = ({
           </label>
           <textarea
             id="description"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             onChange={formik.handleChange}
             placeholder="Description"
             value={formik.values.description}
           ></textarea>
         </div>
-        <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
+        <div className="flex flex-row-reverse items-center justify-end gap-2">
           <input
             type="submit"
-            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="form-btn"
             value={isEditing ? "Update Interest" : "Add Interest"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="form-btn"
             value="Cancel"
           />
         </div>
@@ -670,7 +679,7 @@ const ReferencesForm = ({
   });
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4">
           <label
             htmlFor="name"
@@ -681,7 +690,7 @@ const ReferencesForm = ({
           <input
             id="name"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Name"
             value={formik.values.name}
             onChange={formik.handleChange}
@@ -697,7 +706,7 @@ const ReferencesForm = ({
           <input
             id="position"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Position"
             onChange={formik.handleChange}
             value={formik.values.position}
@@ -713,7 +722,7 @@ const ReferencesForm = ({
           <input
             id="company"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Company"
             onChange={formik.handleChange}
             value={formik.values.company}
@@ -729,23 +738,23 @@ const ReferencesForm = ({
           <input
             id="contactInformation"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             onChange={formik.handleChange}
             placeholder="Contact Information"
             value={formik.values.contactInformation}
           />
         </div>
 
-        <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
+        <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="form-btn"
             value={isEditing ? "Update Preference" : "Add Reference"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="form-btn"
             value="Cancel"
           />{" "}
         </div>
@@ -803,7 +812,7 @@ const TrainingForm = ({
   });
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4">
           <label
             htmlFor="company"
@@ -814,7 +823,7 @@ const TrainingForm = ({
           <input
             id="company"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Company"
             value={formik.values.company}
             onChange={formik.handleChange}
@@ -830,7 +839,7 @@ const TrainingForm = ({
           <input
             id="position"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Position"
             onChange={formik.handleChange}
             value={formik.values.position}
@@ -846,7 +855,7 @@ const TrainingForm = ({
           <input
             id="startDate"
             type="date"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Start Date"
             onChange={formik.handleChange}
             value={formik.values.startDate}
@@ -862,7 +871,7 @@ const TrainingForm = ({
           <input
             id="endDate"
             type="date"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             onChange={formik.handleChange}
             placeholder="End Date"
             value={formik.values.endDate}
@@ -877,22 +886,22 @@ const TrainingForm = ({
           </label>
           <textarea
             id="description"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             onChange={formik.handleChange}
             placeholder="Description"
             value={formik.values.description}
           ></textarea>
         </div>
-        <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
+        <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="form-btn"
             value={isEditing ? "Update Training" : "Add Training"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="form-btn"
             value="Cancel"
           />
         </div>
@@ -935,7 +944,7 @@ const LangaugesForm = ({
   });
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4">
           <label
             htmlFor="language"
@@ -946,7 +955,7 @@ const LangaugesForm = ({
           <input
             id="language"
             type="text"
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
             placeholder="Language"
             value={formik.values.language}
             onChange={formik.handleChange}
@@ -963,23 +972,23 @@ const LangaugesForm = ({
             id="proficiency"
             value={formik.values.proficiency}
             onChange={formik.handleChange}
-            className="w-full px-3 py-2 leading-tight text-gray-200 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="form-control"
           >
             <option value="Beginner">Beginner</option>
             <option value="Intermediate">Intermediate</option>
             <option value="Advanced">Advanced</option>
           </select>
         </div>
-        <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
+        <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="form-btn"
             value={isEditing ? "Update Language" : "Add Language"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+            className="form-btn"
             value="Cancel"
           />
         </div>
@@ -1033,11 +1042,9 @@ const StepCustom = () => {
     <div className="flex flex-col items-start justify-start gap-4 ">
       {/* publications */}
       <div className="w-full">
-        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
-          Publications
-        </h1>
+        <h1 className="form-heading">Publications</h1>
         {publicationsList.length === 0 && <p>No Publications Added</p>}
-        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+        <div className="custom-card">
           {publicationsList.map((rec: Publication) => (
             <div key={rec.id}>
               <RecordCard
@@ -1059,11 +1066,9 @@ const StepCustom = () => {
       </div>
       {/* certifications */}
       <div className="w-full">
-        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
-          Certifications
-        </h1>
+        <h1 className="form-heading">Certifications</h1>
         {certificationsList.length === 0 && <p>No Certifications Added</p>}
-        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+        <div className="custom-card">
           {certificationsList.map((rec: Certification) => (
             <div key={rec.id}>
               <RecordCard
@@ -1084,11 +1089,9 @@ const StepCustom = () => {
       </div>
       {/* awards */}
       <div className="w-full">
-        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
-          Awards
-        </h1>
+        <h1 className="form-heading">Awards</h1>
         {awardsList.length === 0 && <p>No Awards Added</p>}
-        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+        <div className="custom-card">
           {awardsList.map((rec: Award) => (
             <div key={rec.id}>
               <RecordCard
@@ -1107,11 +1110,9 @@ const StepCustom = () => {
       </div>
       {/* references */}
       <div className="w-full">
-        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
-          References
-        </h1>
+        <h1 className="form-heading">References</h1>
         {referencesList.length === 0 && <p>No References Added</p>}
-        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+        <div className="custom-card">
           {referencesList.map((rec: Reference) => (
             <div key={rec.id}>
               <RecordCard
@@ -1132,11 +1133,9 @@ const StepCustom = () => {
       </div>
       {/* trainings */}
       <div className="w-full">
-        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
-          Trainings
-        </h1>
+        <h1 className="form-heading">Trainings</h1>
         {trainingsList.length === 0 && <p>No Trainings Added</p>}
-        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+        <div className="custom-card">
           {trainingsList.map((rec: Training) => (
             <div key={rec.id}>
               <RecordCard
@@ -1158,11 +1157,9 @@ const StepCustom = () => {
       </div>
       {/* interests */}
       <div className="w-full">
-        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
-          Interests & Hobbies
-        </h1>
+        <h1 className="form-heading">Interests & Hobbies</h1>
         {interestsList.length === 0 && <p>No Interests Added</p>}
-        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+        <div className="custom-card">
           {interestsList.map((rec: Interest) => (
             <div key={rec.id}>
               <RecordCard
@@ -1183,11 +1180,9 @@ const StepCustom = () => {
       </div>
       {/* languages */}
       <div className="w-full">
-        <h1 className="flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950 ">
-          Languages
-        </h1>
+        <h1 className="form-heading">Languages</h1>
         {languagesList.length === 0 && <p>No Languages Added</p>}
-        <div className="w-[100%] grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6  ">
+        <div className="custom-card">
           {languagesList.map((rec: Language) => (
             <div key={rec.id}>
               <RecordCard
