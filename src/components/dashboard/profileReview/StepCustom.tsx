@@ -24,9 +24,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 
-const RecordCard = ({ rec, recName, formCloseHandler }: any) => {
+const RecordCard = ({ rec, recName, formCloseHandler, deleteHandler }: any) => {
   const [edit, setEdit] = useState(false);
-
   return (
     <>
       {edit && recName === "publications" && (
@@ -90,7 +89,9 @@ const RecordCard = ({ rec, recName, formCloseHandler }: any) => {
             >
               {EditIcon}
             </button>
-            <button className="text-red-500 hover:text-red-700">
+            <button className="text-red-500 hover:text-red-700"
+            onClick={deleteHandler}
+            >
               {deleteIcon}
             </button>
           </div>
@@ -163,7 +164,6 @@ const PublicationsForm = ({
   isEditing = false,
 }: any) => {
   const dispatch = useDispatch();
-
   const stepEight = useSelector((state: any) => state.register.stepEight);
 
   const { list, state } = stepEight;
@@ -185,17 +185,27 @@ const PublicationsForm = ({
     onSubmit: async (values) => {
       const { description } = values;
       const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
-
       // Update the values with the description as an array
       const updatedValues = {
         ...values,
         description: descriptionArray,
       };
-
-      const obj = { id: makeid(), ...updatedValues };
-      const newList = [obj, ...list];
-      dispatch(setStepEight({ list: newList }));
-      dispatch(setStepEight({ state: "show" }));
+      if (isEditing) {
+        const updatedList = list.map((singleRec: Publication) => {
+          if (singleRec.id === rec.id) {
+            return updatedValues;
+          } else {
+            return singleRec;
+          }
+        });
+        dispatch(setStepEight({ list: updatedList }));
+        dispatch(setStepEight({ state: "show" }));
+      } else {
+        const obj = { id: makeid(), ...updatedValues };
+        const newList = [obj, ...list];
+        dispatch(setStepEight({ list: newList }));
+        dispatch(setStepEight({ state: "show" }));
+      }
       formCloseHandler();
     },
 
@@ -319,11 +329,23 @@ const CertificationsForm = ({
         ...values,
         description: descriptionArray,
       };
+      if (isEditing) {
+        const updatedList = list.map((singleRec: Certification) => {
+          if (singleRec.id === rec.id) {
+            return updatedValues;
+          } else {
+            return singleRec;
+          }
+        });
+        dispatch(setStepSix({ list: updatedList }));
+        dispatch(setStepSix({ state: "show" }));
+      } else {
+        const obj = { id: makeid(), ...updatedValues };
+        const newList = [obj, ...list];
+        dispatch(setStepSix({ list: newList }));
+        dispatch(setStepSix({ state: "show" }));
+      }
 
-      const obj = { id: makeid(), ...updatedValues };
-      const newList = [obj, ...list];
-      dispatch(setStepSix({ list: newList }));
-      dispatch(setStepSix({ state: "show" }));
       formCloseHandler();
     },
 
@@ -446,11 +468,23 @@ const AwardsForm = ({
         ...values,
         description: descriptionArray,
       };
+      if (isEditing) {
+        const updatedList = list.map((singleRec: Award) => {
+          if (singleRec.id === rec.id) {
+            return updatedValues;
+          } else {
+            return singleRec;
+          }
+        });
+        dispatch(setStepNine({ list: updatedList }));
+        dispatch(setStepNine({ state: "show" }));
+      } else {
+        const obj = { id: makeid(), ...updatedValues };
+        const newList = [obj, ...list];
+        dispatch(setStepNine({ list: newList }));
+        dispatch(setStepNine({ state: "show" }));
+      }
 
-      const obj = { id: makeid(), ...updatedValues };
-      const newList = [obj, ...list];
-      dispatch(setStepNine({ list: newList }));
-      dispatch(setStepNine({ state: "show" }));
       formCloseHandler();
     },
 
@@ -575,11 +609,23 @@ const InterestsForm = ({
         ...values,
         description: descriptionArray,
       };
+      if (isEditing) {
+        const updatedList = list.map((singleRec: Interest) => {
+          if (singleRec.id === rec.id) {
+            return updatedValues;
+          } else {
+            return singleRec;
+          }
+        });
+        dispatch(setStepTen({ list: updatedList }));
+        dispatch(setStepTen({ state: "show" }));
+      } else {
+        const obj = { id: makeid(), ...updatedValues };
+        const newList = [obj, ...list];
+        dispatch(setStepTen({ list: newList }));
+        dispatch(setStepTen({ state: "show" }));
+      }
 
-      const obj = { id: makeid(), ...updatedValues };
-      const newList = [obj, ...list];
-      dispatch(setStepTen({ list: newList }));
-      dispatch(setStepTen({ state: "show" }));
       formCloseHandler();
     },
 
@@ -661,10 +707,22 @@ const ReferencesForm = ({
       contactInformation: "",
     },
     onSubmit: async (values) => {
-      const obj = { id: makeid(), ...values };
-      const newList = [obj, ...list];
-      dispatch(setStepTwelve({ list: newList }));
-      dispatch(setStepTwelve({ state: "show" }));
+      if (isEditing) {
+        const updatedList = list.map((singleRec: Reference) => {
+          if (singleRec.id === rec.id) {
+            return values;
+          } else {
+            return singleRec;
+          }
+        });
+        dispatch(setStepTwelve({ list: updatedList }));
+        dispatch(setStepTwelve({ state: "show" }));
+      } else {
+        const obj = { id: makeid(), ...values };
+        const newList = [obj, ...list];
+        dispatch(setStepTwelve({ list: newList }));
+        dispatch(setStepTwelve({ state: "show" }));
+      }
       formCloseHandler();
     },
 
@@ -796,10 +854,22 @@ const TrainingForm = ({
         description: descriptionArray,
       };
 
-      const obj = { id: makeid(), ...updatedValues };
-      const newList = [obj, ...list];
-      dispatch(setStepSeven({ list: newList }));
-      dispatch(setStepSeven({ state: "show" }));
+      if (isEditing) {
+        const updatedList = list.map((singleRec: Training) => {
+          if (singleRec.id === rec.id) {
+            return updatedValues;
+          } else {
+            return singleRec;
+          }
+        });
+        dispatch(setStepSeven({ list: updatedList }));
+        dispatch(setStepSeven({ state: "show" }));
+      } else {
+        const obj = { id: makeid(), ...updatedValues };
+        const newList = [obj, ...list];
+        dispatch(setStepSeven({ list: newList }));
+        dispatch(setStepSeven({ state: "show" }));
+      }
       formCloseHandler();
     },
 
@@ -931,10 +1001,22 @@ const LangaugesForm = ({
     },
 
     onSubmit: async (values) => {
-      const obj = { id: makeid(), ...values };
-      const newList = [obj, ...list];
-      dispatch(setStepEleven({ list: newList }));
-      dispatch(setStepEleven({ state: "show" }));
+      if (isEditing) {
+        const updatedList = list.map((singleRec: Language) => {
+          if (singleRec.id === rec.id) {
+            return values;
+          } else {
+            return singleRec;
+          }
+        });
+        dispatch(setStepEleven({ list: updatedList }));
+        dispatch(setStepEleven({ state: "show" }));
+      } else {
+        const obj = { id: makeid(), ...values };
+        const newList = [obj, ...list];
+        dispatch(setStepEleven({ list: newList }));
+        dispatch(setStepEleven({ state: "show" }));
+      }
       formCloseHandler();
     },
 
@@ -1037,6 +1119,25 @@ const StepCustom = () => {
       [key]: !prev[key],
     }));
   };
+  const deleteSingleRecord = (section: string,recordId:string | undefined) => {
+    console.log(section,recordId)
+    switch (section) {
+      case "publications":
+        break;
+      case "awards":
+        break;
+      case "certification":
+        break;
+      case "interests":
+        break;
+      case "references":
+        break;
+      case "trainings":
+        break;
+      case "languages":
+        break;
+    }
+  }
 
   return (
     <div className="flex flex-col items-start justify-start gap-4 ">
@@ -1050,6 +1151,7 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"publications"}
+                deleteHandler={()=>deleteSingleRecord("publications",rec.id)}
                 formCloseHandler={() => setExpandedHelper("publications")}
               />
             </div>
@@ -1074,6 +1176,7 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"certifications"}
+                deleteHandler={()=>deleteSingleRecord("certifications",rec.id)}
                 formCloseHandler={() => setExpandedHelper("certifications")}
               />
             </div>
@@ -1097,6 +1200,7 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"awards"}
+                deleteHandler={()=>deleteSingleRecord("awards",rec.id)}
                 formCloseHandler={() => setExpandedHelper("awards")}
               />
             </div>
@@ -1118,6 +1222,7 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"references"}
+                deleteHandler={()=>deleteSingleRecord("references",rec.id)}
                 formCloseHandler={() => setExpandedHelper("references")}
               />
             </div>
@@ -1141,6 +1246,7 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"trainings"}
+                deleteHandler={()=>deleteSingleRecord("trainings",rec.id)}
                 formCloseHandler={() => setExpandedHelper("trainings")}
               />
             </div>
@@ -1165,6 +1271,7 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"interests"}
+                deleteHandler={()=>deleteSingleRecord("interests",rec.id)}
                 formCloseHandler={() => setExpandedHelper("interests")}
               />
             </div>
@@ -1188,6 +1295,7 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"languages"}
+                deleteHandler={()=>deleteSingleRecord("languages",rec.id)}
                 formCloseHandler={() => setExpandedHelper("languages")}
               />
             </div>

@@ -44,11 +44,13 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   // Function to split subtitle text into chunks
   const getSubtitleChunk = () => {
-    const words = subtitleText.split(' ');
-    const chunkSize = 4; // Adjust this to change the chunk size
-    const startIndex = chunkIndex * chunkSize;
-    const endIndex = Math.min(startIndex + chunkSize, words.length);
-    return words.slice(startIndex, endIndex).join(' ');
+    const words = subtitleText?.split(' ');
+    if(words?.length){
+      const chunkSize = 4; // Adjust this to change the chunk size
+      const startIndex = chunkIndex * chunkSize;
+      const endIndex = Math.min(startIndex + chunkSize, words.length);
+      return words.slice(startIndex, endIndex).join(' ');
+    }
   };
 
   return (
