@@ -33,7 +33,6 @@ const Page = () => {
   const { components, templateLayout, cvHeadings } = template;
 
   let newCvHeadings: any = [];
-  
 
   for (const singleHeading of Object.entries(resumeData.headings)) {
     const [key, value] = singleHeading;
@@ -46,7 +45,7 @@ const Page = () => {
       newCvHeadings.push(singleValue);
     }
   }
-  
+
   const GenerationOrder = [
     "shortName",
     "name",
@@ -55,6 +54,13 @@ const Page = () => {
     "primarySkills",
     "summary",
     "workExperienceArray",
+    "publications",
+    "references",
+    "certifications",
+    "awards",
+    "trainings",
+    "languages",
+    "interests",
     "education",
   ];
 
@@ -80,6 +86,7 @@ const Page = () => {
   };
 
   const cleanUpHTML = (page: any) => {
+    // return;
     const cleanUpIds = [
       "shortName",
       "email",
@@ -99,7 +106,9 @@ const Page = () => {
       "contact",
       "workExperienceArray",
       "education",
+      "publications",
       "sideBar",
+      "langauges",
       "body",
     ];
 
@@ -584,7 +593,7 @@ const Page = () => {
   }
 
   const generate = (jsonData: any) => {
-    console.log(jsonData)
+    console.log(jsonData);
     const newJsonObject: any = {};
 
     GenerationOrder.forEach((key) => {
@@ -622,6 +631,7 @@ const Page = () => {
         }
       });
     });
+    console.log(spans);
     spans.forEach((span: any) => {
       setTimeout(() => {
         const gen = FinalizeGeneration(span, pages[currentPageIndex]);
