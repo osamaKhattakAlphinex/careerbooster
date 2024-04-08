@@ -8,22 +8,64 @@ interface TooltipProps {
   text: string;
   children: React.ReactNode;
   audioPlayed: boolean;
+  isAudioPlaying: boolean;
+  subtitleText: string;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
+const Tooltip: React.FC<TooltipProps> = ({
+  text,
+  children,
+  audioPlayed,
+  isAudioPlaying,
+  subtitleText,
+}) => {
   const [showTooltip, setShowTooltip] = useState(true);
-
+  const [chunkIndex, setChunkIndex] = useState<number>(0);
   const toggleTooltip = () => {
     setShowTooltip(!showTooltip);
+  };
+  useEffect(() => {
+    // Reset chunk index when audio is not playing
+    if (!isAudioPlaying) {
+      setChunkIndex(0);
+    }
+  }, [isAudioPlaying]);
+
+  useEffect(() => {
+    // Change chunk of subtitle text after a short duration
+    if (isAudioPlaying) {
+      const timer = setTimeout(() => {
+        setChunkIndex((prevIndex) => prevIndex + 1);
+      }, 1200); // Change chunk every 1 second (adjust as needed)
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isAudioPlaying, chunkIndex]);
+
+  // Function to split subtitle text into chunks
+  const getSubtitleChunk = () => {
+    const words = subtitleText.split(' ');
+    const chunkSize = 4; // Adjust this to change the chunk size
+    const startIndex = chunkIndex * chunkSize;
+    const endIndex = Math.min(startIndex + chunkSize, words.length);
+    return words.slice(startIndex, endIndex).join(' ');
   };
 
   return (
     <div onClick={toggleTooltip} className="relative inline-block">
       {children}
-      {showTooltip && !audioPlayed && (
+      {showTooltip && !audioPlayed ? (
         <div className="absolute px-2 py-1 text-white transform -translate-x-1/2 bg-black rounded bottom-full left-1/2 w-max bg-opacity-80 md:text-base xs:text-xs">
           {text}
         </div>
+      ) : (
+        <>
+          {isAudioPlaying && (
+            <div className="absolute px-2 py-1 text-white transform -translate-x-1/2 bg-black rounded bottom-full left-1/2 w-max bg-opacity-80 md:text-base xs:text-xs">
+               {getSubtitleChunk()}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
@@ -36,12 +78,20 @@ const DashboardBot = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [audioBuffers, setAudioBuffers] = useState<any>([]);
   const [audioCounter, setAudioCounter] = useState<number>(0);
+  const [subTitleCounter, setSubtitleCounter] = useState<number>(0);
   const componentRef: any = useRef(null);
   const audioFileUrl1 = "/speech_dashboard.mp3";
   const audioFileUrl2 = "/speech_resume_card.mp3";
   const audioFileUrl3 = "/speech_cover_letter_card.mp3";
   const audioFileUrl4 = "/speech_linkedin_card.mp3";
   const audioFileUrl5 = "/speech_other_cards.mp3";
+  const subtitles = [
+    "Hey! This page is our main dashboard where you can access all the features we provide",
+    "This card will lead you to resume section where you can create AI powered resumes for your targeted job position",
+    "Next, we have cover letters section where you can create professional cover letters for any job position",
+    "And this one is our linkedin optimization tool which helps in boosting your linkedin profile to increase visibility for recruiters",
+    "Other than these we have email generation, bid generation and other features which you can explore in our dashboard",
+  ];
   const { updateSaveHook } = useUpdateAndSave();
   const { updateAndSaveTourStatus } = updateSaveHook;
 
@@ -90,7 +140,6 @@ const DashboardBot = () => {
   };
 
   const fetchAudio = async (audioFileUrl: any, explanationFor: string) => {
-    
     try {
       const response = await fetch(audioFileUrl);
       const audioBlob = await response.blob();
@@ -174,7 +223,6 @@ const DashboardBot = () => {
         setIsGif(false);
         if (isAudioPlaying) {
           componentRef.current.pause();
-          // setAudioCounter(0);
           removeStyles();
           setIsAudioPlaying(false);
         }
@@ -228,6 +276,7 @@ const DashboardBot = () => {
       componentRef.current.pause();
       removeStyles();
       setAudioCounter(0);
+      setSubtitleCounter(0);
       setAudioBuffers([]);
       setIsGif(false);
       setIsAudioPlaying(false);
@@ -239,6 +288,7 @@ const DashboardBot = () => {
 
     const handleAudioEnded = () => {
       setAudioCounter((prev) => prev + 1);
+      setSubtitleCounter((prev) => prev + 1);
     };
 
     audio.addEventListener("ended", handleAudioEnded);
@@ -248,28 +298,18 @@ const DashboardBot = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log("in")
-  //   navigator.mediaDevices
-  // .getUserMedia({
-  //     audio: true,
-  //     video: true,
-  //   }).then((mediaStream) => {
-  //     console.log(mediaStream)
-  //   })
-  //   .catch((err) => {
-  //     // always check for errors at the end.
-  //     console.error(`${err.name}: ${err.message}`);
-  //   });
-  },[])
-
   return (
     <div
       ref={(ref: any) => (tourBotRef.current = ref)}
       className={`fixed bottom-4 right-4 mr-4 mb-4 cursor-pointer z-10 avatar-animate`}
       onClick={handleClick}
     >
-      <Tooltip text="Need Help? Click me" audioPlayed={audioPlayed}>
+      <Tooltip
+        text="Need Help? Click me"
+        audioPlayed={audioPlayed}
+        isAudioPlaying={isAudioPlaying}
+        subtitleText={subtitles[subTitleCounter]}
+      >
         <Image
           src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
           alt="GIF"
