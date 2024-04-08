@@ -592,8 +592,6 @@ const ResumeBuilder = () => {
                 >
                   <ResumeTemplate1
                     streamedSummaryData={streamedSummaryData}
-                    streamedCustomData={streamedCustomData}
-                    setStreamedCustomData={setStreamedCustomData}
                     streamedJDData={streamedJDData}
                     setStreamedJDData={setStreamedJDData}
                     setStreamedSummaryData={setStreamedSummaryData}

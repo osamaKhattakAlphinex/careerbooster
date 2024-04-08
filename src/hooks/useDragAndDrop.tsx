@@ -1,8 +1,8 @@
 "use client";
-import { setCustomExperienceArray, setPrimarySkills, setWorkExperienceArray } from "@/store/resumeSlice";
-import React from "react";
+import {  setPrimarySkills, setPublications, setWorkExperienceArray } from "@/store/resumeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import useSaveResumeToDB from "./useSaveToDB";
+import { setField } from "@/store/creditLimitsSlice";
 
 const useDragAndDrop = () => {
   const dispatch = useDispatch();
@@ -30,31 +30,27 @@ const useDragAndDrop = () => {
       });
     }
   };
-  const handleDropCustomExperience = (e: any, i: number,customInd:number) => {
+  const handleDropOthers = (e: any, i: number,section:string) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    let updatedCustomExp: any = [...resume.customExperienceArray];
-    let newUpdatedCustomExp: any = { ...updatedCustomExp[customInd] };
-    let newUpdatedCustomExpEntries: any = [...newUpdatedCustomExp.entries];
-
+    const updatedItems = [...resume[section]];
     // Swap the positions of the dragged item and the target item.
-    [newUpdatedCustomExpEntries[draggedIndex], newUpdatedCustomExpEntries[i]] = [
-      newUpdatedCustomExpEntries[i],
-      newUpdatedCustomExpEntries[draggedIndex],
+    [updatedItems[draggedIndex], updatedItems[i]] = [
+      updatedItems[i],
+      updatedItems[draggedIndex],
     ];
-
-    newUpdatedCustomExp.entries = newUpdatedCustomExpEntries;
-    updatedCustomExp[customInd] = newUpdatedCustomExp;
-
     if (draggedIndex !== i) {
       dispatch(
-        setCustomExperienceArray(updatedCustomExp)
+        setField({
+         name:section, value: updatedItems,
+        })
       );
       saveResumeToDB({
         ...resume,
-        customExperienceArray: updatedCustomExp,
+        [section]: updatedItems,
       });
     }
   };
+ 
 
   const handleDropAchievement = (
     i: number,
@@ -88,37 +84,40 @@ const useDragAndDrop = () => {
       });
     }
   };
-  const handleDropCustomAchievement = (
+
+  const handleDropOthersAchievement = (
     i: number,
     ind: number,
     insideIndex: number,
-    customInd:number,
+    section:string
   ) => {
     let draggedIndex: number;
+    let updatedItems = [];
     draggedIndex = insideIndex;
-    let updatedCustomExp: any = [...resume.customExperienceArray];
-    let newUpdatedCustomExp: any = { ...updatedCustomExp[customInd] };
-    let newUpdatedCustomExpEntries: any = [...newUpdatedCustomExp.entries];
-    let newUpdatedEntries: any = { ...newUpdatedCustomExp.entries[i] };
-    let newUpdatedCustomAchievements: any = [...newUpdatedEntries.achievements];
-    const temp = newUpdatedCustomAchievements[draggedIndex];
-    newUpdatedCustomAchievements[draggedIndex] = newUpdatedCustomAchievements[ind];
-    newUpdatedCustomAchievements[ind] = temp;
-    newUpdatedEntries.achievements = newUpdatedCustomAchievements;
-    newUpdatedCustomExpEntries[i] = newUpdatedEntries;
-    newUpdatedCustomExp.entries = newUpdatedCustomExpEntries;
-    updatedCustomExp[customInd] = newUpdatedCustomExp;
-
+    updatedItems = [...resume[section]];
+    let description = [...updatedItems[i].description];
+    const temp = description[draggedIndex];
+    description[draggedIndex] = description[ind];
+    description[ind] = temp;
+    let updatedWorkExperience = {
+      ...updatedItems[i],
+    };
+    updatedWorkExperience.description = description;
+    // Update the copy of the workExperience in the updatedItems array
+    updatedItems[i] = updatedWorkExperience;
     if (draggedIndex !== ind) {
       dispatch(
-        setCustomExperienceArray(updatedCustomExp)
+        setField({
+         name:section, value: updatedItems,
+        })
       );
       saveResumeToDB({
         ...resume,
-        customExperienceArray: updatedCustomExp,
+        [section]: updatedItems,
       });
     }
   };
+ 
 
   const handleDropPrimary = (e: any, i: number) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
@@ -139,32 +138,15 @@ const useDragAndDrop = () => {
       primarySkills: updatedItems,
     });
   };
-  const handleDropSingleCustomSection = (e: any, i: number) => {
-    const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    let updatedCustomExp: any = [...resume.customExperienceArray];
-    // Swap the positions of the dragged item and the target item.
-    [updatedCustomExp[draggedIndex], updatedCustomExp[i]] = [
-      updatedCustomExp[i],
-      updatedCustomExp[draggedIndex],
-    ];
 
-    dispatch(
-      setCustomExperienceArray(updatedCustomExp)
-    );
-    saveResumeToDB({
-      ...resume,
-      customExperienceArray: updatedCustomExp,
-    });
-   
-  };
 
   return {
     handleDropAchievement,
     handleDropExperience,
     handleDropPrimary,
-    handleDropCustomAchievement,
-    handleDropCustomExperience,
-    handleDropSingleCustomSection
+    handleDropOthersAchievement,
+    handleDropOthers
+   
   };
 };
 

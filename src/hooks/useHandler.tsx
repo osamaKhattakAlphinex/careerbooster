@@ -18,29 +18,20 @@ const useHandler = () => {
     };
     updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
   };
-  const handleAddCustomSpace = (
-    i: number,
-    newAchievement: string,
-    customInd: number
-  ) => {
-    let updatedCustomExp: any = [...resume.customExperienceArray];
-    let newUpdatedCustomExp: any = { ...updatedCustomExp[customInd] };
-    let newUpdatedCustomExpEntries: any = [...newUpdatedCustomExp.entries];
-    let newUpdatedEntries: any = { ...newUpdatedCustomExp.entries[i] };
-    let newUpdatedCustomAchievements: any = [...newUpdatedEntries.achievements];
-    newUpdatedCustomAchievements.push(newAchievement);
-    newUpdatedEntries.achievements = newUpdatedCustomAchievements;
-    newUpdatedCustomExpEntries[i] = newUpdatedEntries;
-    newUpdatedCustomExp.entries = newUpdatedCustomExpEntries;
-    updatedCustomExp[customInd] = newUpdatedCustomExp;
-    updateSaveHook.updateAndSaveCustomExperienceArray(updatedCustomExp);
+
+  const handleAddOthersSpace = (i: number, newAchievement: string,section:string) => {
+    let updatedExp: any = [...resume[section]];
+    let updatedAchievements = [...updatedExp[i].description];
+    updatedAchievements.push(newAchievement);
+    updatedExp[i] = {
+      ...updatedExp[i],
+      description: updatedAchievements,
+    };
+    updateSaveHook.updateAndSaveOthers(updatedExp,section);
   };
 
-  const handleDeleteSingleCustomSection = (customInd:number) => {
-    let updatedCustomExp: any = [...resume.customExperienceArray];
-    updatedCustomExp.splice(customInd, 1);
-    updateSaveHook.updateAndSaveCustomExperienceArray(updatedCustomExp);
-  }
+  
+
 
   // handle Add achivements
   const handleAddAchivement = (i: number, newAchievement: string) => {
@@ -55,28 +46,19 @@ const useHandler = () => {
       updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
     }
   };
-  const handleAddCustomAchivement = (
-    i: number,
-    newAchievement: string,
-    customInd: number
-  ) => {
-    console.log(i, newAchievement, customInd);
+  const handleAddOthersAchivement = (i: number, newAchievement: string, section:string)=> {
     if (newAchievement !== "") {
-      let updatedCustomExp: any = [...resume.customExperienceArray];
-      let newUpdatedCustomExp: any = { ...updatedCustomExp[customInd] };
-      let newUpdatedCustomExpEntries: any = [...newUpdatedCustomExp.entries];
-      let newUpdatedEntries: any = { ...newUpdatedCustomExp.entries[i] };
-      let newUpdatedCustomAchievements: any = [
-        ...newUpdatedEntries.achievements,
-      ];
-      newUpdatedCustomAchievements.push(newAchievement);
-      newUpdatedEntries.achievements = newUpdatedCustomAchievements;
-      newUpdatedCustomExpEntries[i] = newUpdatedEntries;
-      newUpdatedCustomExp.entries = newUpdatedCustomExpEntries;
-      updatedCustomExp[customInd] = newUpdatedCustomExp;
-      updateSaveHook.updateAndSaveCustomExperienceArray(updatedCustomExp);
+      let updatedExp: any = [...resume[section]];
+      let updatedAchievements = [...updatedExp[i].description];
+      updatedAchievements.push(newAchievement);
+      updatedExp[i] = {
+        ...updatedExp[i],
+        description: updatedAchievements,
+      };
+      updateSaveHook.updateAndSaveOthers(updatedExp,section);
     }
   };
+ 
 
   const handleDeleteAchivement = (expInd: number, achiveInd: number) => {
     let updatedExp: any = [...resume.workExperienceArray];
@@ -88,39 +70,30 @@ const useHandler = () => {
     };
     updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
   };
-  const handleDeleteAchivementCustom = (
-    expInd: number,
-    achiveInd: number,
-    customInd: number
-  ) => {
-    let updatedCustomExp: any = [...resume.customExperienceArray];
-    let newUpdatedCustomExp: any = { ...updatedCustomExp[customInd] };
-    let newUpdatedCustomExpEntries: any = [...newUpdatedCustomExp.entries];
-    let newUpdatedEntries: any = { ...newUpdatedCustomExp.entries[expInd] };
-    let newUpdatedCustomAchievements: any = [...newUpdatedEntries.achievements];
-    newUpdatedCustomAchievements.splice(achiveInd, 1);
-    newUpdatedEntries.achievements = newUpdatedCustomAchievements;
-    newUpdatedCustomExpEntries[expInd] = newUpdatedEntries;
-    newUpdatedCustomExp.entries = newUpdatedCustomExpEntries;
-    updatedCustomExp[customInd] = newUpdatedCustomExp;
-    updateSaveHook.updateAndSaveCustomExperienceArray(updatedCustomExp);
+  const handleDeleteOthersAchivement = (expInd: number, achiveInd: number,section:string) => {
+    let updatedExp: any = [...resume[section]];
+    let updatedAchievements = [...updatedExp[expInd].description];
+    updatedAchievements.splice(achiveInd, 1);
+    updatedExp[expInd] = {
+      ...updatedExp[expInd],
+      description: updatedAchievements,
+    };
+    updateSaveHook.updateAndSaveOthers(updatedExp,section);
   };
+
 
   const handleDeleteExperience = (expInd: number) => {
     let updatedExp: any = [...resume.workExperienceArray];
     updatedExp.splice(expInd, 1);
     updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
   };
-
-  const handleDeleteCustomExperience = (expInd: number, customInd: number) => {
-    let updatedCustomExp: any = [...resume.customExperienceArray];
-    let newUpdatedCustomExp: any = { ...updatedCustomExp[customInd] };
-    let entries = [...newUpdatedCustomExp.entries];
-    entries.splice(expInd, 1);
-    newUpdatedCustomExp.entries = entries;
-    updatedCustomExp[customInd] = newUpdatedCustomExp;
-    updateSaveHook.updateAndSaveCustomExperienceArray(updatedCustomExp);
+  const handleDeleteOthers = (expInd: number,section:string) => {
+    let updatedExp: any = [...resume[section]];
+    updatedExp.splice(expInd, 1);
+    updateSaveHook.updateAndSaveOthers(updatedExp,section);
   };
+
+
 
   const handleUpdateAchivement = (
     expInd: number,
@@ -140,33 +113,27 @@ const useHandler = () => {
       updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
     }
   };
-  const handleUpdateAchivementCustom = (
+  const handleUpdateOthersAchivement = (
     expInd: number,
     achiveInd: number,
     value: string,
-    customInd: number
+    section:string
   ) => {
+    let sectionName = resume[section]
     if (
-      value !==
-      resume?.customExperienceArray[customInd]?.entries[expInd]?.achievements[
-        achiveInd
-      ]
+      value !== sectionName[expInd]?.description[achiveInd]
     ) {
-      let updatedCustomExp: any = [...resume.customExperienceArray];
-      let newUpdatedCustomExp: any = { ...updatedCustomExp[customInd] };
-      let newUpdatedCustomExpEntries: any = [...newUpdatedCustomExp.entries];
-      let newUpdatedEntries: any = { ...newUpdatedCustomExp.entries[expInd] };
-      let newUpdatedCustomAchievements: any = [
-        ...newUpdatedEntries.achievements,
-      ];
-      newUpdatedCustomAchievements.splice(achiveInd, 1, value);
-      newUpdatedEntries.achievements = newUpdatedCustomAchievements;
-      newUpdatedCustomExpEntries[expInd] = newUpdatedEntries;
-      newUpdatedCustomExp.entries = newUpdatedCustomExpEntries;
-      updatedCustomExp[customInd] = newUpdatedCustomExp;
-      updateSaveHook.updateAndSaveCustomExperienceArray(updatedCustomExp);
+      let updatedExp: any = [...resume[section]];
+      let updatedAchievements = [...updatedExp[expInd].description];
+      updatedAchievements.splice(achiveInd, 1, value);
+      updatedExp[expInd] = {
+        ...updatedExp[expInd],
+        description: updatedAchievements,
+      };
+      updateSaveHook.updateAndSaveOthers(updatedExp,section);
     }
   };
+
 
   const handleRemoveExtraSpace = (expInd: number, achiveInd: number) => {
     let updatedExp: any = [...resume.workExperienceArray];
@@ -178,23 +145,17 @@ const useHandler = () => {
     };
     updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
   };
-  const handleRemoveExtraSpaceCustom = (
-    expInd: number,
-    achiveInd: number,
-    customInd: number
-  ) => {
-    let updatedCustomExp: any = [...resume.customExperienceArray];
-    let newUpdatedCustomExp: any = { ...updatedCustomExp[customInd] };
-    let newUpdatedCustomExpEntries: any = [...newUpdatedCustomExp.entries];
-    let newUpdatedEntries: any = { ...newUpdatedCustomExp.entries[expInd] };
-    let newUpdatedCustomAchievements: any = [...newUpdatedEntries.achievements];
-    newUpdatedCustomAchievements.splice(achiveInd, 1);
-    newUpdatedEntries.achievements = newUpdatedCustomAchievements;
-    newUpdatedCustomExpEntries[expInd] = newUpdatedEntries;
-    newUpdatedCustomExp.entries = newUpdatedCustomExpEntries;
-    updatedCustomExp[customInd] = newUpdatedCustomExp;
-    updateSaveHook.updateAndSaveCustomExperienceArray(updatedCustomExp);
+  const handleRemoveExtraOthersSpace = (expInd: number, achiveInd: number,section:string) => {
+    let updatedExp: any = [...resume[section]];
+    let updatedAchievements = [...updatedExp[expInd].description];
+    updatedAchievements.splice(achiveInd, 1);
+    updatedExp[expInd] = {
+      ...updatedExp[expInd],
+      description: updatedAchievements,
+    };
+    updateSaveHook.updateAndSaveOthers(updatedExp, section);
   };
+
 
   const handleSaveExperienceDetail = (obj: {}, expInd: number) => {
     const [[key, value]] = Object.entries(obj);
@@ -207,30 +168,20 @@ const useHandler = () => {
       updateSaveHook.updateAndSaveWorkExperienceArray(updatedExp);
     }
   };
-
-  const handleSaveExperienceCustomDetail = (
-    obj: {},
-    expInd: number,
-    customInd: number
-  ) => {
+  const handleSaveOthersDetail = (obj: {}, expInd: number, section:string) => {
     const [[key, value]] = Object.entries(obj);
-    if (
-      value !== resume?.customExperienceArray[customInd].entries[expInd][key]
-    ) {
-      let updatedCustomExp: any = [...resume.customExperienceArray];
-      let newUpdatedCustomExp: any = { ...updatedCustomExp[customInd] };
-      let newUpdatedCustomExpEntries: any = [...newUpdatedCustomExp.entries];
-      newUpdatedCustomExpEntries[expInd] = {
-        ...newUpdatedCustomExpEntries[expInd],
+    let sectionName = resume[section]
+    if (value !== sectionName[expInd][key]) {
+      let updatedExp = [...resume[section]];
+      updatedExp[expInd] = {
+        ...updatedExp[expInd],
         [key]: value,
       };
-      newUpdatedCustomExp.entries = newUpdatedCustomExpEntries;
-      updatedCustomExp[customInd] = newUpdatedCustomExp;
-      updateSaveHook.updateAndSaveCustomExperienceArray(updatedCustomExp);
+      updateSaveHook.updateAndSaveOthers(updatedExp,section);
     }
   };
 
-  const handleSaveEductionDetail = (obj: {}, ind: number) => {
+   const handleSaveEductionDetail = (obj: {}, ind: number) => {
     const [[key, value]] = Object.entries(obj);
     if (value !== resume?.education[ind][key]) {
       let updatedEducations = [...resume.education];
@@ -271,17 +222,16 @@ const useHandler = () => {
       handleUpdateAchivement,
       handleDeleteAchivement,
       handleSaveExperienceDetail,
+      handleSaveOthersDetail,
       handleSaveEductionDetail,
       handleDeleteEductionDetail,
       handleDeleteExperience,
-      handleDeleteCustomExperience,
-      handleAddCustomSpace,
-      handleAddCustomAchivement,
-      handleRemoveExtraSpaceCustom,
-      handleSaveExperienceCustomDetail,
-      handleDeleteAchivementCustom,
-      handleUpdateAchivementCustom,
-      handleDeleteSingleCustomSection
+      handleDeleteOthers,
+      handleAddOthersSpace,
+      handleRemoveExtraOthersSpace,
+      handleAddOthersAchivement,
+      handleUpdateOthersAchivement,
+      handleDeleteOthersAchivement
     },
   };
 };

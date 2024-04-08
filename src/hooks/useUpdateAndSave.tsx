@@ -1,8 +1,8 @@
 import {
   setBasicInfo,
-  setCustomExperienceArray,
   setHeadings,
   setPrimarySkills,
+  setField as setResumeField,
   setSummary,
   setWorkExperienceArray,
 } from "@/store/resumeSlice";
@@ -49,24 +49,18 @@ const useUpdateAndSave = () => {
       workExperienceArray: updatedExp,
     });
   };
-  const updateAndSaveCustomExperienceArray = (updatedCustomExp: any) => {
-    dispatch(setCustomExperienceArray(updatedCustomExp));
+  const updateAndSaveOthers = (updatedExp: any,section:string) => {
+    dispatch(
+      setResumeField({
+        name: section, value: updatedExp,
+      })
+    );
     saveResumeToDB({
       ...resume,
-      customExperienceArray: updatedCustomExp,
+      [section]: updatedExp,
     });
   };
 
-  const updateAndSaveCustomHeadings = (obj: any) => {
-    const newCustomDetails = [...resume.customExperienceArray];
-    newCustomDetails[obj.index] = obj.updatedDetail;
-
-    dispatch(setCustomExperienceArray(newCustomDetails));
-    saveResumeToDB({
-      ...resume,
-      customExperienceArray: newCustomDetails,
-    });
-  };
 
   //   update and save the Basic Info
   const updateAndSaveBasicInfo = (obj: any) => {
@@ -143,11 +137,10 @@ const useUpdateAndSave = () => {
       updateAndSaveName,
       updateAndSaveSummary,
       updateAndSaveWorkExperienceArray,
+      updateAndSaveOthers,
       updateAndSaveBasicInfo,
       updateAndSaveEducation,
       updateAndSaveHeadings,
-      updateAndSaveCustomHeadings,
-      updateAndSaveCustomExperienceArray,
       updateAndSaveTourStatus,
     },
   };
