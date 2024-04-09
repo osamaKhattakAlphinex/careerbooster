@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "@/app/(private_route)/dashboard.css";
 import { useTourContext } from "@/context/TourContext";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
+import { useSelector } from "react-redux";
 interface TooltipProps {
   text: string;
   children: React.ReactNode;
@@ -37,19 +38,19 @@ const Tooltip: React.FC<TooltipProps> = ({
       const timer = setTimeout(() => {
         setChunkIndex((prevIndex) => prevIndex + 1);
       }, 1200); // Change chunk every 1 second (adjust as needed)
-      
+
       return () => clearTimeout(timer);
     }
   }, [isAudioPlaying, chunkIndex]);
 
   // Function to split subtitle text into chunks
   const getSubtitleChunk = () => {
-    const words = subtitleText?.split(' ');
-    if(words?.length){
+    const words = subtitleText?.split(" ");
+    if (words?.length) {
       const chunkSize = 4; // Adjust this to change the chunk size
       const startIndex = chunkIndex * chunkSize;
       const endIndex = Math.min(startIndex + chunkSize, words.length);
-      return words.slice(startIndex, endIndex).join(' ');
+      return words.slice(startIndex, endIndex).join(" ");
     }
   };
 
@@ -64,7 +65,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         <>
           {isAudioPlaying && (
             <div className="absolute px-2 py-1 text-white transform -translate-x-1/2 bg-black rounded bottom-full left-1/2 w-max bg-opacity-80 md:text-base xs:text-xs">
-               {getSubtitleChunk()}
+              {getSubtitleChunk()}
             </div>
           )}
         </>
@@ -75,6 +76,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 
 // const DashboardBot: React.FC<DashboardBotProps> = ({ firstName, lastName }) => {
 const DashboardBot = () => {
+  const userData = useSelector((state: any) => state.userData);
   const [isGif, setIsGif] = useState(false);
   const [audioPlayed, setAudioPlayed] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -259,12 +261,13 @@ const DashboardBot = () => {
       }
     } catch (error) {
       console.log("Error: ", error);
-    } finally {
-      updateAndSaveTourStatus({ dashboard: true });
     }
   };
 
   useEffect(() => {
+    if(audioCounter === 1 && !userData.tours?.dashboard ){
+      updateAndSaveTourStatus({ dashboard: true });
+    }
     if (audioBuffers.length > 0 && audioCounter < audioBuffers.length) {
       const audioUrl = focusTool(
         audioBuffers[audioCounter].arrayBufferView,

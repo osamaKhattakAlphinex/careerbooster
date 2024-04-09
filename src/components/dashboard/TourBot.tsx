@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "@/app/(private_route)/dashboard.css";
 import { useTourContext } from "@/context/TourContext";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
+import { useSelector } from "react-redux";
 interface TooltipProps {
   text: string;
   children: React.ReactNode;
@@ -31,6 +32,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
 
 // const DashboardBot: React.FC<DashboardBotProps> = ({ firstName, lastName }) => {
 const TourBot = ({ config,setOutOfCredits }: any) => {
+  const userData = useSelector((state: any) => state.userData);
   const [toolRefs, setToolRefs] = useState<any>(null);
   const [audios, setAudios] = useState<any>(null);
   const [isGif, setIsGif] = useState(false);
@@ -139,6 +141,9 @@ const TourBot = ({ config,setOutOfCredits }: any) => {
   };
 
   useEffect(() => {
+    if(audioCounter === 1 && !userData?.tours[config.name]){
+      updateAndSaveTourStatus({ [config.name]: true });
+    }    
     if (audioBuffers.length > 0 && audioCounter < audioBuffers.length) {
       const audioUrl = focusTool(
         audioBuffers[audioCounter].arrayBufferView,
@@ -166,8 +171,7 @@ const TourBot = ({ config,setOutOfCredits }: any) => {
 
     const handleAudioEnded = () => {
       setAudioCounter((prev) => prev + 1);
-      updateAndSaveTourStatus({ [config.name]: true });
-     
+      
     };
 
     audio.addEventListener("ended", handleAudioEnded);

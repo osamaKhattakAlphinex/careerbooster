@@ -114,10 +114,10 @@ const useUpdateAndSave = () => {
   const updateAndSaveTourStatus = (tour: any) => {
     dispatch(setTours({ tour }));
     try {
-      axios.post("/api/users/updateUserData", {
+        axios.post("/api/users/updateUserData", {
         data: {
           email: userData.email,
-          tours: userData.tours,
+          tours: {...userData.tours,...tour},
         },
       });
     } catch (error) {

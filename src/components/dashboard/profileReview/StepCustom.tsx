@@ -1,6 +1,8 @@
 "use client";
+import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { EditIcon, deleteIcon } from "@/helpers/iconsProvider";
 import { makeid } from "@/helpers/makeid";
+import { showSuccessToast, showWarningToast } from "@/helpers/toast";
 import {
   setStepEight,
   setStepEleven,
@@ -89,8 +91,9 @@ const RecordCard = ({ rec, recName, formCloseHandler, deleteHandler }: any) => {
             >
               {EditIcon}
             </button>
-            <button className="text-red-500 hover:text-red-700"
-            onClick={deleteHandler}
+            <button
+              className="text-red-500 hover:text-red-700"
+              onClick={deleteHandler}
             >
               {deleteIcon}
             </button>
@@ -132,7 +135,7 @@ const RecordCard = ({ rec, recName, formCloseHandler, deleteHandler }: any) => {
           {rec.position}
         </span>
 
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-col justify-between">
           <span className="text-base dark:text-white/70 text-black/70">
             {rec.language}
           </span>
@@ -1097,7 +1100,7 @@ const StepCustom = () => {
     certifications: false,
     trainings: false,
   });
-
+  const dispatch = useDispatch();
   const stepEight = useSelector((state: any) => state.register.stepEight);
   const { list: publicationsList } = stepEight;
   const stepSix = useSelector((state: any) => state.register.stepSix);
@@ -1119,28 +1122,116 @@ const StepCustom = () => {
       [key]: !prev[key],
     }));
   };
-  const deleteSingleRecord = (section: string,recordId:string | undefined) => {
-    console.log(section,recordId)
+  const [confirmationModal, setConfirmationModal] = useState(false);
+  const [recordName, setRecordName] = useState<string>("");
+  const [recordID, setRecordID] = useState<string | undefined>("");
+  const handleOpenConfirmationModal = (
+    name: string,
+    rec_id: string | undefined
+  ) => {
+    setConfirmationModal(true);
+    setRecordName(name);
+    setRecordID(rec_id);
+  };
+  const deleteSingleRecord = (
+    section: string,
+    recordId: string | undefined
+  ) => {
     switch (section) {
       case "publications":
+        const newList = publicationsList.filter(
+          (rec: Publication) => rec.id !== recordId
+        );
+        dispatch(setStepEight({ list: newList }));
+        setConfirmationModal(false);
+        setRecordID("");
+        setRecordName("");
+        showSuccessToast("Publication has been deleted");
         break;
       case "awards":
+        const newAwardsList = awardsList.filter(
+          (rec: Award) => rec.id !== recordId
+        );
+        dispatch(setStepNine({ list: newAwardsList }));
+        setConfirmationModal(false);
+        setRecordID("");
+        setRecordName("");
+        showSuccessToast("Award has been deleted");
         break;
-      case "certification":
+      case "certifications":
+        const newCertificationsList = certificationsList.filter(
+          (rec: Certification) => rec.id !== recordId
+        );
+        dispatch(setStepSix({ list: newCertificationsList }));
+        setConfirmationModal(false);
+        setRecordID("");
+        setRecordName("");
+        showSuccessToast("Certification has been deleted");
         break;
       case "interests":
+        const newInterestsList = interestsList.filter(
+          (rec: Interest) => rec.id !== recordId
+        );
+        dispatch(setStepTen({ list: newInterestsList }));
+        setConfirmationModal(false);
+        setRecordID("");
+        setRecordName("");
+        showSuccessToast("Interest has been deleted");
         break;
       case "references":
+        const newReferencesList = referencesList.filter(
+          (rec: Reference) => rec.id !== recordId
+        );
+        dispatch(setStepTwelve({ list: newReferencesList }));
+        setConfirmationModal(false);
+        setRecordID("");
+        setRecordName("");
+        showSuccessToast("Reference has been deleted");
         break;
       case "trainings":
+        const newTrainingsList = trainingsList.filter(
+          (rec: Training) => rec.id !== recordId
+        );
+        dispatch(setStepSeven({ list: newTrainingsList }));
+        setConfirmationModal(false);
+        setRecordID("");
+        setRecordName("");
+        showSuccessToast("Training has been deleted");
         break;
       case "languages":
+        const newLanguagesList = languagesList.filter(
+          (rec: Language) => rec.id !== recordId
+        );
+        dispatch(setStepEleven({ list: newLanguagesList }));
+        setConfirmationModal(false);
+        setRecordID("");
+        setRecordName("");
+        showSuccessToast("Language has been deleted");
         break;
-    }
-  }
+      default:
+        setConfirmationModal(false);
+        setRecordID("");
+        setRecordName("");
+        showWarningToast("Item not deleted");
+      }
 
+  };
+
+ 
   return (
     <div className="flex flex-col items-start justify-start gap-4 ">
+      {confirmationModal && (
+        <DeleteConfirmationModal
+          message="Are you sure you want to delete ?"
+          onConfirm={() => deleteSingleRecord(recordName, recordID)}
+          onCancel={() => {
+            setConfirmationModal(false);
+            setRecordID("");
+            setRecordName("");
+          }}
+        />
+      )}
+
       {/* publications */}
       <div className="w-full">
         <h1 className="form-heading">Publications</h1>
@@ -1151,7 +1242,9 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"publications"}
-                deleteHandler={()=>deleteSingleRecord("publications",rec.id)}
+                deleteHandler={() =>
+                  handleOpenConfirmationModal("publications", rec.id)
+                }
                 formCloseHandler={() => setExpandedHelper("publications")}
               />
             </div>
@@ -1176,7 +1269,9 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"certifications"}
-                deleteHandler={()=>deleteSingleRecord("certifications",rec.id)}
+                deleteHandler={() =>
+                  handleOpenConfirmationModal("certifications", rec.id)
+                }
                 formCloseHandler={() => setExpandedHelper("certifications")}
               />
             </div>
@@ -1200,7 +1295,9 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"awards"}
-                deleteHandler={()=>deleteSingleRecord("awards",rec.id)}
+                deleteHandler={() =>
+                  handleOpenConfirmationModal("awards", rec.id)
+                }
                 formCloseHandler={() => setExpandedHelper("awards")}
               />
             </div>
@@ -1222,7 +1319,9 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"references"}
-                deleteHandler={()=>deleteSingleRecord("references",rec.id)}
+                deleteHandler={() =>
+                  handleOpenConfirmationModal("references", rec.id)
+                }
                 formCloseHandler={() => setExpandedHelper("references")}
               />
             </div>
@@ -1246,7 +1345,9 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"trainings"}
-                deleteHandler={()=>deleteSingleRecord("trainings",rec.id)}
+                deleteHandler={() =>
+                  handleOpenConfirmationModal("trainings", rec.id)
+                }
                 formCloseHandler={() => setExpandedHelper("trainings")}
               />
             </div>
@@ -1271,7 +1372,9 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"interests"}
-                deleteHandler={()=>deleteSingleRecord("interests",rec.id)}
+                deleteHandler={() =>
+                  handleOpenConfirmationModal("interests", rec.id)
+                }
                 formCloseHandler={() => setExpandedHelper("interests")}
               />
             </div>
@@ -1295,7 +1398,9 @@ const StepCustom = () => {
               <RecordCard
                 rec={rec}
                 recName={"languages"}
-                deleteHandler={()=>deleteSingleRecord("languages",rec.id)}
+                deleteHandler={() =>
+                  handleOpenConfirmationModal("languages", rec.id)
+                }
                 formCloseHandler={() => setExpandedHelper("languages")}
               />
             </div>

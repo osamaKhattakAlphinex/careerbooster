@@ -3,7 +3,7 @@ import EducationCard from "./EducationCard";
 import { useDispatch, useSelector } from "react-redux";
 import { EditIcon, addressIcon } from "@/helpers/iconsProvider";
 import { setActiveStep, setStepFive } from "@/store/registerSlice";
-import { Education, WorkExperience } from "@/store/userDataSlice";
+import { Education, Publication, WorkExperience } from "@/store/userDataSlice";
 import ExperienceCard from "./ExperienceCard";
 
 const ProfilePreview = () => {
@@ -190,6 +190,32 @@ const ProfilePreview = () => {
             )
           )}
           {data.stepFive.list.length === 0 && <p>No Experiences Found</p>}
+        </div>
+      </section>
+
+      {/* Publications */}
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+         Publications
+          <button
+            type="button"
+            onClick={(e) => {
+              dispatch(setActiveStep(4));
+            }}
+            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+          >
+            {EditIcon}
+          </button>
+        </h2>
+        <div className="w-[100%] grid md:grid-cols-2 gap-4">
+          {data.stepEight.list.map(
+            (publication: Publication, index: number) => (
+             <>
+             {/* Add New Card Here  */}
+             </>
+            )
+          )}
+          {data.stepEight.list.length === 0 && <p>No Publications Found</p>}
         </div>
       </section>
 
