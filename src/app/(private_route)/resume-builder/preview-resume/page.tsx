@@ -5,6 +5,7 @@ import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
 import { useSearchParams } from "next/navigation";
 import { getTemplates } from "@/components/dashboard/resume-templates/static-templates";
+import { formatDate, getFormattedDate } from "@/helpers/getFormattedDateTime";
 const Page = () => {
   const params = useSearchParams();
   const [scale, setScale] = useState<number>(1);
@@ -45,6 +46,8 @@ const Page = () => {
       newCvHeadings.push(singleValue);
     }
   }
+
+  const dates = ["date", "startDate", "endDate"];
 
   const GenerationOrder = [
     "shortName",
@@ -87,6 +90,7 @@ const Page = () => {
 
   const cleanUpHTML = (page: any) => {
     // return;
+
     const cleanUpIds = [
       "shortName",
       "email",
@@ -97,6 +101,8 @@ const Page = () => {
       "name",
       "jobTitle",
       "summary",
+      "education",
+      "workExperienceArray",
     ];
 
     const containerNames = [
@@ -328,7 +334,9 @@ const Page = () => {
   };
 
   const createElements = (obj: any) => {
-    const [key, value] = obj;
+    let [key, value] = obj;
+
+    console.log(key);
 
     //   append the attribute to the elements
 
@@ -369,11 +377,15 @@ const Page = () => {
                   for (const singleAchievement of singleItem[element.id]) {
                     newAttr.push({ [`${key}-${element.id}-${i}-index`]: k });
                     const _element = document.createElement(element.tag);
+
                     setAttributesToElem(attr, _element);
                     setAttributesToElem(
                       [{ [`${key}-index`]: i }, { [`${element.id}-index`]: k }],
                       _element
                     );
+
+                    // console.log("singleAchivemnt", singleAchievement);
+
                     _element.textContent = singleAchievement;
                     const styles = element.styles;
                     setStylesToElement(_element, styles);
@@ -409,8 +421,19 @@ const Page = () => {
                       setAttributesToElem(attr, singlespan);
                       const styles = item.styles;
                       //
+
+                      console.log("singlespan", item.id);
+
                       setStylesToElement(singlespan, styles);
-                      singlespan.textContent = singleItem[item.id];
+
+                      if (dates.includes(item.id)) {
+                        singlespan.textContent = formatDate(
+                          singleItem[item.id]
+                        );
+                      } else {
+                        singlespan.textContent = singleItem[item.id];
+                      }
+
                       container_element.append(singlespan);
                     }
                     if (item.container) {
@@ -553,7 +576,7 @@ const Page = () => {
 
   const getToNode = (span: any, attribute: any, page: any) => {
     const currentPage = page.getAttribute("id").split("-").pop();
-   
+
     for (const p of parts[currentPage]) {
       const [[key, value]]: any = Object.entries(p);
 
@@ -585,7 +608,7 @@ const Page = () => {
   function FinalizeGeneration(span: any, page: any) {
     const attribute = span.getAttribute("data-name");
     const isItBefore = isContentBleeding(page, "before");
-    
+
     if (attribute && !isItBefore) {
       getToNode(span, attribute, page);
     }
@@ -655,7 +678,7 @@ const Page = () => {
             leftSpan.pop();
           }
         }
-      },100);
+      }, 100);
     });
 
     setTimeout(() => {
