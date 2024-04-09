@@ -31,13 +31,15 @@ const Tooltip: React.FC<TooltipProps> = ({
       setChunkIndex(0);
     }
   }, [isAudioPlaying]);
-
+  useEffect(()=>{
+    setChunkIndex(0)
+  },[subtitleText])
   useEffect(() => {
     // Change chunk of subtitle text after a short duration
     if (isAudioPlaying) {
       const timer = setTimeout(() => {
         setChunkIndex((prevIndex) => prevIndex + 1);
-      }, 1200); // Change chunk every 1 second (adjust as needed)
+      }, 1100);
 
       return () => clearTimeout(timer);
     }
@@ -47,7 +49,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   const getSubtitleChunk = () => {
     const words = subtitleText?.split(" ");
     if (words?.length) {
-      const chunkSize = 4; // Adjust this to change the chunk size
+      const chunkSize = 3; // Adjust this to change the chunk size
       const startIndex = chunkIndex * chunkSize;
       const endIndex = Math.min(startIndex + chunkSize, words.length);
       return words.slice(startIndex, endIndex).join(" ");
@@ -90,11 +92,11 @@ const DashboardBot = () => {
   const audioFileUrl4 = "/speech_linkedin_card.mp3";
   const audioFileUrl5 = "/speech_other_cards.mp3";
   const subtitles = [
-    "Hey! This page is our main dashboard where you can access all the features we provide",
-    "This card will lead you to resume section where you can create AI powered resumes for your targeted job position",
-    "Next, we have cover letters section where you can create professional cover letters for any job position",
-    "And this one is our linkedin optimization tool which helps in boosting your linkedin profile to increase visibility for recruiters",
-    "Other than these we have email generation, bid generation and other features which you can explore in our dashboard",
+    "Hey! This page is our main dashboard where you can access all the features we provide.",
+    "This card will lead you to resume section where you can create AI powered resumes for your targeted job position.",
+    "Next, we have cover letters section where you can create professional cover letters for any job position.",
+    "And this one is our linkedin optimization tool which helps in boosting your linkedin profile to increase visibility for recruiters.",
+    "Other than these we have email generation, bid generation and other features which you can explore in our dashboard.",
   ];
   const { updateSaveHook } = useUpdateAndSave();
   const { updateAndSaveTourStatus } = updateSaveHook;

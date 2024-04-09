@@ -553,6 +553,7 @@ const Page = () => {
 
   const getToNode = (span: any, attribute: any, page: any) => {
     const currentPage = page.getAttribute("id").split("-").pop();
+   
     for (const p of parts[currentPage]) {
       const [[key, value]]: any = Object.entries(p);
 
@@ -562,7 +563,11 @@ const Page = () => {
         if (
           attribute === "primarySkills" ||
           attribute === "education" ||
-          attribute === "workExperienceArray"
+          attribute === "workExperienceArray" ||
+          attribute === "publications" ||
+          attribute === "certifications" ||
+          attribute === "awards" ||
+          attribute === "trainings"
         ) {
           value.appendChild(span);
           findChild.textContent = "";
@@ -580,6 +585,7 @@ const Page = () => {
   function FinalizeGeneration(span: any, page: any) {
     const attribute = span.getAttribute("data-name");
     const isItBefore = isContentBleeding(page, "before");
+    
     if (attribute && !isItBefore) {
       getToNode(span, attribute, page);
     }
@@ -631,7 +637,7 @@ const Page = () => {
         }
       });
     });
-    console.log(spans);
+
     spans.forEach((span: any) => {
       setTimeout(() => {
         const gen = FinalizeGeneration(span, pages[currentPageIndex]);
@@ -649,8 +655,9 @@ const Page = () => {
             leftSpan.pop();
           }
         }
-      });
-    }, 1000);
+      },100);
+    });
+
     setTimeout(() => {
       pages.map((page: any, index: any) => {
         educationDivs(pages[index], pages[index + 1]);
