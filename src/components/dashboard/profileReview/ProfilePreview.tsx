@@ -3,12 +3,24 @@ import EducationCard from "./EducationCard";
 import { useDispatch, useSelector } from "react-redux";
 import { EditIcon, addressIcon } from "@/helpers/iconsProvider";
 import { setActiveStep, setStepFive } from "@/store/registerSlice";
-import { Education, Publication, WorkExperience } from "@/store/userDataSlice";
+import {
+  Education,
+  Publication,
+  Certification,
+  WorkExperience,
+  Award,
+  Reference,
+  Training,
+  Interest,
+  Language,
+} from "@/store/userDataSlice";
 import ExperienceCard from "./ExperienceCard";
+import RecordCard from "./RecordCard";
 
 const ProfilePreview = () => {
   const dispatch = useDispatch();
   const data = useSelector((state: any) => state.register);
+  console.log("Data", data);
 
   return (
     <div className="">
@@ -196,7 +208,7 @@ const ProfilePreview = () => {
       {/* Publications */}
       <section className="mb-8">
         <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
-         Publications
+          Publications
           <button
             type="button"
             onClick={(e) => {
@@ -210,12 +222,141 @@ const ProfilePreview = () => {
         <div className="w-[100%] grid md:grid-cols-2 gap-4">
           {data.stepEight.list.map(
             (publication: Publication, index: number) => (
-             <>
-             {/* Add New Card Here  */}
-             </>
+              <RecordCard rec={publication} />
             )
           )}
           {data.stepEight.list.length === 0 && <p>No Publications Found</p>}
+        </div>
+      </section>
+      {/* Certifications */}
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+          Certifications
+          <button
+            type="button"
+            onClick={(e) => {
+              dispatch(setActiveStep(4));
+            }}
+            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+          >
+            {EditIcon}
+          </button>
+        </h2>
+        <div className="w-[100%] grid md:grid-cols-2 gap-4">
+          {data.stepSix.list.map(
+            (certification: Certification, index: number) => (
+              <RecordCard rec={certification} />
+            )
+          )}
+          {data.stepEight.list.length === 0 && <p>No Certifications Found</p>}
+        </div>
+      </section>
+      {/* Awards */}
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+          Awards
+          <button
+            type="button"
+            onClick={(e) => {
+              dispatch(setActiveStep(4));
+            }}
+            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+          >
+            {EditIcon}
+          </button>
+        </h2>
+        <div className="w-[100%] grid md:grid-cols-2 gap-4">
+          {data.stepNine.list.map((award: Award, index: number) => (
+            <RecordCard rec={award} />
+          ))}
+          {data.stepEight.list.length === 0 && <p>No Award Found</p>}
+        </div>
+      </section>
+
+      {/* References */}
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+          References
+          <button
+            type="button"
+            onClick={(e) => {
+              dispatch(setActiveStep(4));
+            }}
+            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+          >
+            {EditIcon}
+          </button>
+        </h2>
+        <div className="w-[100%] grid md:grid-cols-2 gap-4">
+          {data.stepTwelve.list.map((reference: Reference, index: number) => (
+            <RecordCard rec={reference} />
+          ))}
+          {data.stepEight.list.length === 0 && <p>No References Found</p>}
+        </div>
+      </section>
+      {/* Trainings */}
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+          Trainings
+          <button
+            type="button"
+            onClick={(e) => {
+              dispatch(setActiveStep(4));
+            }}
+            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+          >
+            {EditIcon}
+          </button>
+        </h2>
+        <div className="w-[100%] grid md:grid-cols-2 gap-4">
+          {data.stepSeven.list.map((training: Training, index: number) => (
+            <RecordCard rec={training} />
+          ))}
+          {data.stepEight.list.length === 0 && <p>No Trainings Found</p>}
+        </div>
+      </section>
+      {/* Interests & Hobbies */}
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+          Interests & Hobbies
+          <button
+            type="button"
+            onClick={(e) => {
+              dispatch(setActiveStep(4));
+            }}
+            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+          >
+            {EditIcon}
+          </button>
+        </h2>
+        <div className="w-[100%] grid md:grid-cols-2 gap-4">
+          {data.stepTen.list.map((interest: Interest, index: number) => (
+            <RecordCard rec={interest} />
+          ))}
+          {data.stepEight.list.length === 0 && (
+            <p>No Interests & Hobbies Found</p>
+          )}
+        </div>
+      </section>
+      {/* Languages */}
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+          Languages
+          <button
+            type="button"
+            onClick={(e) => {
+              dispatch(setActiveStep(4));
+            }}
+            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+          >
+            {EditIcon}
+          </button>
+        </h2>
+        <div className="w-[100%] grid md:grid-cols-2 gap-4">
+          {data.stepEleven.list.map((language: Language, index: number) => (
+            <RecordCard rec={language} />
+          ))}
+          {data.stepEight.list.length === 0 && <p>No Languages Found</p>}
         </div>
       </section>
 
@@ -240,7 +381,6 @@ const ProfilePreview = () => {
           {data.stepFour.list.length === 0 && <p>No Education Found</p>}
         </div>
       </section>
-
 
       {/* Custom Section  */}
       {/* <section className="mb-8 ">
