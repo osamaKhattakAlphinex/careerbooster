@@ -229,8 +229,6 @@ h2:empty {
   padding-top: 5px !important;
 }
 
-
-       
         </style>
         ${html}`;
     }
