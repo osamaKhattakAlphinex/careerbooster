@@ -6,6 +6,10 @@ const RecordCard = ({ rec }: any) => {
         {rec.title}
       </h2>
 
+      <span className="text-base  dark:text-gray-300 text-gray-950 font-semibold">
+        {rec.position}
+      </span>
+
       <span className="text-base dark:text-gray-300 text-gray-950">
         {rec.awardingOrganization}
         {rec.issuingOrganization}
@@ -32,12 +36,9 @@ const RecordCard = ({ rec }: any) => {
         {rec.publisher}
       </span>
 
-      <span className="text-base uppercase  dark:text-gray-300 text-gray-950">
-        {rec.position}
-      </span>
 
       <div className="flex flex-col justify-between">
-        <span className="text-base dark:text-gray-300 text-gray-950">
+        <span className="text-base dark:text-gray-300 text-gray-950 font-semibold">
           {rec.language}
         </span>
         <span className="text-sm dark:text-gray-300 text-gray-950">
