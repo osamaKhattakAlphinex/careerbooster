@@ -486,6 +486,12 @@ const templateLayout: any = {
         {
           id: "primarySkills",
         },
+        {
+          id: "languages",
+        },
+        {
+          id: "interests",
+        },
       ],
     },
 
@@ -508,9 +514,7 @@ const templateLayout: any = {
         {
           id: "education",
         },
-        {
-          id: "interests",
-        },
+       
         {
           id: "awards",
         },
@@ -520,9 +524,7 @@ const templateLayout: any = {
         {
           id: "references",
         },
-        {
-          id: "languages",
-        },
+       
         {
           id: "publications",
         },
@@ -534,8 +536,26 @@ const templateLayout: any = {
   },
 };
 
+const GenerationOrder = [
+  "shortName",
+  "name",
+  "jobTitle",
+  "contact",
+  "primarySkills",
+  "languages",
+  "interests",
+  "summary",
+  "workExperienceArray",
+  "publications",
+  "certifications",
+  "awards",
+  "trainings",
+  "references",
+  "education",
+];
 export const template = {
   components,
   templateLayout,
   cvHeadings,
+  GenerationOrder
 };

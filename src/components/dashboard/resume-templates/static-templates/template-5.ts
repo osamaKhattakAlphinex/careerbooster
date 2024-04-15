@@ -159,15 +159,6 @@ const templateLayout: any = {
         },
       ],
     },
-    education: {
-      styles:
-        "text-gray-950/80 flex flex-row flex-wrap justify-start items-start px-8 ml-8",
-      elements: [
-        {
-          id: "education",
-        },
-      ],
-    },
     publications: {
       styles: "flex flex-col px-8  ml-8",
       elements: [
@@ -227,6 +218,16 @@ const templateLayout: any = {
         },
       ],
     },
+    education: {
+      styles:
+        "text-gray-950/80 flex flex-row flex-wrap justify-start items-start px-8 ml-8",
+      elements: [
+        {
+          id: "education",
+        },
+      ],
+    },
+   
   },
 };
 const components: any = {
@@ -574,4 +575,26 @@ const components: any = {
   },
 };
 
-export const template = { components, cvHeadings, templateLayout };
+const GenerationOrder = [
+  "shortName",
+  "name",
+  "jobTitle",
+  "contact",
+  "primarySkills",
+  "summary",
+  "workExperienceArray",
+  "publications",
+  "certifications",
+  "awards",
+  "trainings",
+  "languages",
+  "interests",
+  "references",
+  "education",
+];
+export const template = {
+  components,
+  templateLayout,
+  cvHeadings,
+  GenerationOrder
+};

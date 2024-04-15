@@ -27,11 +27,7 @@ const Page = () => {
     }
   }, [templateId, resumeId]);
 
-  useEffect(() => {
-    console.log("resume", resumeData);
-  }, [resumeData]);
-
-  const { components, templateLayout, cvHeadings } = template;
+  const { components, templateLayout, cvHeadings, GenerationOrder } = template;
 
   let newCvHeadings: any = [];
 
@@ -48,24 +44,6 @@ const Page = () => {
   }
 
   const dates = ["date", "startDate", "endDate"];
-
-  const GenerationOrder = [
-    "shortName",
-    "name",
-    "jobTitle",
-    "contact",
-    "primarySkills",
-    "summary",
-    "workExperienceArray",
-    "publications",
-    "references",
-    "certifications",
-    "awards",
-    "trainings",
-    "languages",
-    "interests",
-    "education",
-  ];
 
   let spans: any = [];
   let currentPageIndex = 0;
@@ -87,23 +65,46 @@ const Page = () => {
       setCvMaxHeight(unscaledHeight + 100); // Set the scaled down height plus 100 (adjust as needed)
     }
   };
-
   const cleanUpHTML = (page: any) => {
-    // return;
-
-    const cleanUpIds = [
-      "shortName",
-      "email",
-      "linkedIn",
-      "phone",
-      "address",
-      "primarySkills",
-      "name",
-      "jobTitle",
-      "summary",
-      "education",
-      "workExperienceArray",
-    ];
+    let cleanUpIds:any = []
+    const templateNo = page.getAttribute("data-template-no");
+    if(templateNo === "4" || templateNo === "9" || templateNo === "14" || templateNo === "15"){
+      cleanUpIds = [
+       "shortName",
+       "email",
+       "linkedIn",
+       "phone",
+       "address",
+       "primarySkills",
+       "name",
+       "jobTitle",
+       "summary",
+       "languages",
+       "interests",
+       "trainings",
+       "publications",
+       "certifications",
+       "awards",
+       "workExperienceArray",
+     ];
+    } else {
+      cleanUpIds = [
+        "shortName",
+        "email",
+        "linkedIn",
+        "phone",
+        "address",
+        "primarySkills",
+        "name",
+        "jobTitle",
+        "summary",
+        "trainings",
+        "publications",
+        "certifications",
+        "awards",
+        "workExperienceArray",
+      ];
+    }
 
     const containerNames = [
       "header",
@@ -114,7 +115,12 @@ const Page = () => {
       "education",
       "publications",
       "sideBar",
-      "langauges",
+      "languages",
+      "interests",
+      "trainings",
+      "awards",
+      "references",
+      "certifications",
       "body",
     ];
 
@@ -203,6 +209,88 @@ const Page = () => {
   const canFitEducation = (page: any, educationHeading: any) => {
     return educationHeading.offsetTop + 140 < page.clientHeight;
   };
+
+  const referencesDivs = (page: any, nextPage?: any) => {
+    const referencesDivs = document.querySelectorAll(
+      "[data-references-container-index]"
+    );
+    const pageId = page.getAttribute("id");
+    let newDiv;
+    newDiv = document.createElement("div");
+    newDiv.setAttribute("data-container-name", "references");
+    setStylesToElement(newDiv, "m-2 flex gap-4 flex-wrap w-full");
+    let newNextDiv;
+    newNextDiv = document.createElement("div");
+    newNextDiv.setAttribute("data-container-name", "references");
+    setStylesToElement(newNextDiv, "px-6 m-2 flex flex-wrap gap-4 w-full");
+    const getReferencesHeading = page.querySelector(
+      "h2[data-name='references']"
+    );
+    if (getReferencesHeading) {
+      let indicatorDiv = document.createElement("span");
+      indicatorDiv.setAttribute("data-container-name", "references-indicator");
+      indicatorDiv.textContent = "indicator";
+      setStylesToElement(indicatorDiv, "w-full h-2 bg-red-600");
+      getReferencesHeading.parentNode.insertBefore(
+        indicatorDiv,
+        getReferencesHeading.nextSibling
+      );
+      let isSpaceAvailable = canFitEducation(page, indicatorDiv);
+      let rowItemCount = 1;
+      for (const singleReferences of Array.from(referencesDivs)) {
+        if (isSpaceAvailable && rowItemCount <= 3) {
+          if (pageId === "page-0") {
+            singleReferences.className = singleReferences.className.replace(
+              "w-[30%]",
+              "w-[45%]"
+            );
+          }
+          newDiv.appendChild(singleReferences);
+          getReferencesHeading.parentNode.insertBefore(
+            newDiv,
+            getReferencesHeading.nextSibling
+          );
+          rowItemCount++;
+        } else {
+          isSpaceAvailable = canFitEducation(page, indicatorDiv);
+          if (isSpaceAvailable) {
+            rowItemCount = 1;
+            newDiv.appendChild(singleReferences);
+            getReferencesHeading.parentNode.insertBefore(
+              newDiv,
+              getReferencesHeading.nextSibling
+            );
+
+            rowItemCount++;
+          } else {
+            if (nextPage) {
+              let referenceDiv = nextPage.querySelector(
+                '[data-container-name="references"]'
+              );
+              if (referenceDiv) {               
+                referenceDiv.appendChild(singleReferences);
+              } else {
+                newNextDiv.appendChild(singleReferences);
+                nextPage.append(newNextDiv);
+              }
+            }
+          }
+        }
+      }
+
+      let elementsToRemove = document.querySelectorAll(
+        '[data-container-name="references-indicator"]'
+      );
+
+      if (nextPage) {
+        cleanUpLastPageHTML(nextPage);
+      }
+      // Loop through each matching element and remove it from the DOM
+      elementsToRemove.forEach((element: any) => {
+        element.parentNode.removeChild(element);
+      });
+    }
+  };
   const educationDivs = (page: any, nextPage?: any) => {
     const educationDivs = document.querySelectorAll(
       "[data-education-container-index]"
@@ -254,12 +342,15 @@ const Page = () => {
 
             rowItemCount++;
           } else {
+            
             if (nextPage) {
+           
               let eduDiv = nextPage.querySelector(
                 '[data-container-name="education"]'
               );
               if (eduDiv) {
                 eduDiv.appendChild(singleEducation);
+              
               } else {
                 newNextDiv.appendChild(singleEducation);
                 nextPage.append(newNextDiv);
@@ -335,8 +426,6 @@ const Page = () => {
 
   const createElements = (obj: any) => {
     let [key, value] = obj;
-
-    console.log(key);
 
     //   append the attribute to the elements
 
@@ -420,9 +509,6 @@ const Page = () => {
                       const singlespan = document.createElement(item.tag);
                       setAttributesToElem(attr, singlespan);
                       const styles = item.styles;
-                      //
-
-                      console.log("singlespan", item.id);
 
                       setStylesToElement(singlespan, styles);
 
@@ -506,7 +592,6 @@ const Page = () => {
 
   const generateLayout = (page: any) => {
     const currentPage = page.getAttribute("id").split("-").pop();
-
     for (let templatepart in templateLayout) {
       if (templatepart === "styles") {
         setStylesToElement(page, templateLayout[templatepart]);
@@ -590,7 +675,10 @@ const Page = () => {
           attribute === "publications" ||
           attribute === "certifications" ||
           attribute === "awards" ||
-          attribute === "trainings"
+          attribute === "trainings" ||
+          attribute === "interests" ||
+          attribute === "references" ||
+          attribute === "languages"
         ) {
           value.appendChild(span);
           findChild.textContent = "";
@@ -622,10 +710,8 @@ const Page = () => {
   }
 
   const generate = (jsonData: any) => {
-    console.log(jsonData);
     const newJsonObject: any = {};
-
-    GenerationOrder.forEach((key) => {
+    GenerationOrder.forEach((key: any) => {
       if (jsonData.hasOwnProperty(key)) {
         newJsonObject[key] = jsonData[key];
       }
@@ -660,14 +746,12 @@ const Page = () => {
         }
       });
     });
-
     spans.forEach((span: any) => {
       setTimeout(() => {
         const gen = FinalizeGeneration(span, pages[currentPageIndex]);
 
         if (gen) {
           const latestPage = newPage();
-
           generateLayout(latestPage);
           currentPageIndex = pages.length - 1;
           if (leftSpan.length > 0) {
@@ -680,10 +764,11 @@ const Page = () => {
         }
       }, 100);
     });
-
+    
     setTimeout(() => {
       pages.map((page: any, index: any) => {
         educationDivs(pages[index], pages[index + 1]);
+        referencesDivs(pages[index], pages[index + 1]);
         setSidebarHeight(pages[index]);
         checkOverflow(index);
         cleanUpHTML(page);

@@ -68,9 +68,9 @@ const cvHeadings: any = [
     text: "languages",
     section: "languages",
     headingKey: "languages",
+    attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
-    attributes: [{ "icon-color": "black" }],
+      "font-semibold uppercase text-gray-100 flex items-center text-md border-b-2 border-white py-0.5 w-full my-2",
   },
   {
     text: "references",
@@ -84,9 +84,9 @@ const cvHeadings: any = [
     text: "interests",
     section: "interests",
     headingKey: "interests",
+    attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
-    attributes: [{ "icon-color": "black" }],
+      "font-semibold uppercase text-gray-100 flex items-center text-md border-b-2 border-white py-0.5 w-full my-2",
   },
   {
     text: "Trainings",
@@ -317,7 +317,7 @@ const components: any = {
       {
         id: "description",
         styles:
-          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-100 before:mr-2 before:mr-2 text-gray-100",
         tag: "span",
       },
     ],
@@ -429,17 +429,17 @@ const components: any = {
       {
         tag: "div",
         styles:
-          "bg-gray-200 my-2 flex flex-col w-[31%] p-4 rounded-md text-gray-950/80",
+          "my-2 flex flex-col p-4 rounded-md text-gray-100",
         container: [
           {
             id: "language",
-            styles: "font-semibold text-base text-gray-950/80",
+            styles: "font-semibold text-base text-gray-100",
             tag: "span",
           },
           {
             id: "proficiency",
             styles:
-              "text-xs font-normal text-gray-950/80 before:w-max before:content-['Proficiency:'] before:mr-1 before:font-semibold",
+              "text-xs font-normal text-gray-100 before:w-max before:content-['Proficiency:'] before:mr-1 before:font-semibold",
             tag: "span",
           },
         ],
@@ -474,6 +474,12 @@ const templateLayout: any = {
         {
           id: "primarySkills",
         },
+        {
+          id: "languages",
+        },
+        {
+          id: "interests",
+        },
       ],
     },
 
@@ -494,10 +500,11 @@ const templateLayout: any = {
           id: "workExperienceArray",
         },
         {
-          id: "education",
+          id: "publications",
         },
+        
         {
-          id: "interests",
+          id: "certifications",
         },
         {
           id: "awards",
@@ -505,21 +512,38 @@ const templateLayout: any = {
         {
           id: "trainings",
         },
+        
+       
         {
           id: "references",
         },
         {
-          id: "languages",
-        },
-        {
-          id: "certifications",
-        },
-        {
-          id: "publications",
+          id: "education",
         },
       ],
     },
   },
 };
-
-export const template = { templateLayout, components, cvHeadings };
+const GenerationOrder = [
+  "shortName",
+  "name",
+  "jobTitle",
+  "contact",
+  "primarySkills",
+  "languages",
+  "interests",
+  "summary",
+  "workExperienceArray",
+  "publications",
+  "certifications",
+  "awards",
+  "trainings",
+  "references",
+  "education",
+];
+export const template = {
+  components,
+  templateLayout,
+  cvHeadings,
+  GenerationOrder
+};

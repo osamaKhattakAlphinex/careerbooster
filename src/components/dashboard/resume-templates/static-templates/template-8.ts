@@ -22,14 +22,7 @@ const cvHeadings: any = [
     styles:
       "font-semibold uppercase border-t-2 border-b-2 border-gray-950/80 text-base flex flex-row items-center text-gray-950/80 py-0.5",
   },
-  {
-    text: "education",
-    section: "education",
-    headingKey: "education",
-    attributes: [{ "icon-color": "black" }],
-    styles:
-      "font-semibold border-t-2 border-b-2 border-gray-950/80 mt-2 w-full uppercase text-base flex flex-row items-center text-gray-950/80 py-0.5",
-  },
+  
   {
     text: "skills",
     section: "primarySkills",
@@ -37,6 +30,14 @@ const cvHeadings: any = [
     styles:
       "font-semibold uppercase border-t-2 border-b-2 border-gray-950/80 text-base flex flex-row items-center py-0.5 w-full text-gray-950/80 before:block",
     attributes: [{ "icon-color": "black" }],
+  },
+  {
+    text: "education",
+    section: "education",
+    headingKey: "education",
+    attributes: [{ "icon-color": "black" }],
+    styles:
+      "font-semibold border-t-2 border-b-2 border-gray-950/80 mt-2 w-full uppercase text-base flex flex-row items-center text-gray-950/80 py-0.5",
   },
   {
     text: "certificates",
@@ -163,15 +164,7 @@ const templateLayout: any = {
         },
       ],
     },
-    education: {
-      styles:
-        "text-gray-950/80 flex flex-row flex-wrap justify-start items-start px-6 w-full",
-      elements: [
-        {
-          id: "education",
-        },
-      ],
-    },
+   
     publications: {
       styles: "flex flex-col px-8 w-full text-gray-950/80",
       elements: [
@@ -228,6 +221,15 @@ const templateLayout: any = {
       elements: [
         {
           id: "references",
+        },
+      ],
+    },
+    education: {
+      styles:
+        "text-gray-950/80 flex flex-row flex-wrap justify-start items-start px-6 w-full",
+      elements: [
+        {
+          id: "education",
         },
       ],
     },
@@ -579,4 +581,26 @@ const components: any = {
   },
 };
 
-export const template = { components, cvHeadings, templateLayout };
+const GenerationOrder = [
+  "shortName",
+  "name",
+  "jobTitle",
+  "contact",
+  "primarySkills",
+  "summary",
+  "workExperienceArray",
+  "publications",
+  "certifications",
+  "awards",
+  "trainings",
+  "languages",
+  "interests",
+  "references",
+  "education",
+];
+export const template = {
+  components,
+  templateLayout,
+  cvHeadings,
+  GenerationOrder
+};

@@ -73,7 +73,7 @@ const cvHeadings: any = [
     section: "languages",
     headingKey: "languages",
     styles:
-      "font-semibold uppercase text-sm py-2 text-white bg-[#043382] border-2 px-6 flex items-center justify-center rounded-full my-4",
+    "font-semibold uppercase text-sm py-2 text-white text-center border-2 flex flex-row justify-center items-center rounded-full border-[#043382] my-3",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -89,7 +89,7 @@ const cvHeadings: any = [
     section: "interests",
     headingKey: "interests",
     styles:
-      "font-semibold uppercase text-sm py-2 text-white bg-[#043382] border-2 px-6 flex items-center justify-center rounded-full my-4",
+    "font-semibold uppercase text-sm py-2 text-white text-center border-2 flex flex-row justify-center items-center rounded-full border-[#043382] my-3",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -137,6 +137,12 @@ const templateLayout: any = {
         {
           id: "primarySkills",
         },
+        {
+          id: "languages",
+        },
+        {
+          id: "interests",
+        },
       ],
     },
     body: {
@@ -150,28 +156,25 @@ const templateLayout: any = {
           id: "workExperienceArray",
         },
         {
-          id: "education",
-        },
-        {
           id: "publications",
-        },
-        {
-          id: "languages",
-        },
-        {
-          id: "references",
-        },
-        {
-          id: "interests",
-        },
-        {
-          id: "awards",
         },
         {
           id: "certifications",
         },
         {
+          id: "awards",
+        },
+        {
           id: "trainings",
+        },
+       
+        
+        {
+          id: "references",
+        },
+       
+        {
+          id: "education",
         },
       ],
     },
@@ -277,59 +280,7 @@ const components: any = {
       },
     ],
   },
-  education: {
-    tag: "div",
-    styles: "",
-    elements: [
-      {
-        tag: "div",
-        styles:
-          "bg-gray-200 flex flex-col w-[30%] text-gray-950 p-4 rounded-md",
-        container: [
-          {
-            id: "educationLevel",
-            styles: "font-semibold text-base text-gray-950",
-            tag: "span",
-          },
-          {
-            id: "fieldOfStudy",
-            styles: "text-xs font-semibold text-gray-950",
-            tag: "span",
-          },
-          {
-            id: "schoolName",
-            styles: "italic text-xs font-normal text-gray-950",
-            tag: "span",
-          },
-          {
-            id: "schoolLocation",
-            styles: "text-xs italic font-normal text-gray-950",
-            tag: "span",
-          },
-          {
-            styles: "flex flex-row gap-2 italic text-gray-950",
-            tag: "div",
-            container: [
-              { id: "fromMonth", styles: "text-xs text-gray-950", tag: "span" },
-              {
-                id: "fromYear",
-                styles:
-                  "text-xs text-gray-950 after:content-['-'] after:w-4 after:h-4 after:text-gray-950/80 after:ml-2",
-                tag: "span",
-              },
-              {
-                id: "toMonth",
-                styles: "text-xs text-gray-950",
-                tag: "span",
-              },
-              { id: "toYear", styles: "text-xs text-gray-950", tag: "span" },
-              // { id: "isContinue", styles: "", tag: "span" },
-            ],
-          },
-        ],
-      },
-    ],
-  },
+
   publications: {
     styles: "my-1",
     elements: [
@@ -396,7 +347,7 @@ const components: any = {
       {
         id: "description",
         styles:
-          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-100 before:mr-2 before:mr-2 text-gray-100",
         tag: "span",
       },
     ],
@@ -468,6 +419,31 @@ const components: any = {
       },
     ],
   },
+  
+  languages: {
+    tag: "div",
+    styles: "",
+    elements: [
+      {
+        tag: "div",
+        styles:
+          "flex flex-col p-4 rounded-md text-gray-100",
+        container: [
+          {
+            id: "language",
+            styles: "font-semibold text-base text-gray-100",
+            tag: "span",
+          },
+          {
+            id: "proficiency",
+            styles:
+              "text-xs font-normal text-gray-100 before:w-max before:content-['Proficiency:'] before:mr-1 before:font-semibold",
+            tag: "span",
+          },
+        ],
+      },
+    ],
+  },
   references: {
     tag: "div",
     styles: "",
@@ -501,34 +477,80 @@ const components: any = {
       },
     ],
   },
-  languages: {
+  education: {
     tag: "div",
     styles: "",
     elements: [
       {
         tag: "div",
         styles:
-          "bg-gray-300 flex flex-col w-[31%] p-4 rounded-md text-gray-950/80",
+          "bg-gray-200 flex flex-col w-[30%] text-gray-950 p-4 rounded-md",
         container: [
           {
-            id: "language",
-            styles: "font-semibold text-base text-gray-950/80",
+            id: "educationLevel",
+            styles: "font-semibold text-base text-gray-950",
             tag: "span",
           },
           {
-            id: "proficiency",
-            styles:
-              "text-xs font-normal text-gray-950/80 before:w-max before:content-['Proficiency:'] before:mr-1 before:font-semibold",
+            id: "fieldOfStudy",
+            styles: "text-xs font-semibold text-gray-950",
             tag: "span",
+          },
+          {
+            id: "schoolName",
+            styles: "italic text-xs font-normal text-gray-950",
+            tag: "span",
+          },
+          {
+            id: "schoolLocation",
+            styles: "text-xs italic font-normal text-gray-950",
+            tag: "span",
+          },
+          {
+            styles: "flex flex-row gap-2 italic text-gray-950",
+            tag: "div",
+            container: [
+              { id: "fromMonth", styles: "text-xs text-gray-950", tag: "span" },
+              {
+                id: "fromYear",
+                styles:
+                  "text-xs text-gray-950 after:content-['-'] after:w-4 after:h-4 after:text-gray-950/80 after:ml-2",
+                tag: "span",
+              },
+              {
+                id: "toMonth",
+                styles: "text-xs text-gray-950",
+                tag: "span",
+              },
+              { id: "toYear", styles: "text-xs text-gray-950", tag: "span" },
+              // { id: "isContinue", styles: "", tag: "span" },
+            ],
           },
         ],
       },
     ],
   },
 };
-
+const GenerationOrder = [
+  "shortName",
+  "name",
+  "jobTitle",
+  "contact",
+  "primarySkills",
+  "languages",
+  "interests",
+  "summary",
+  "workExperienceArray",
+  "publications",
+  "certifications",
+  "awards",
+  "trainings",
+  "references",
+  "education",
+];
 export const template = {
   components,
   templateLayout,
   cvHeadings,
+  GenerationOrder
 };
