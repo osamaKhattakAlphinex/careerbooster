@@ -148,7 +148,6 @@ const components: any = {
     styles: "text-justify my-2 text-xs text-gray-950/80",
     tag: "span",
   },
-
   workExperienceArray: {
     styles: "my-2",
     elements: [
@@ -200,22 +199,27 @@ const components: any = {
       },
     ],
   },
-
   publications: {
-    styles: "my-2",
+    styles: "my-1",
     elements: [
       {
         id: "title",
-        styles: "text-base mt-2 font-bold text-gray-950/80",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
         tag: "span",
       },
-
-      { id: "date", styles: "text-gray-950/80", tag: "span" },
       {
-        id: "publisher",
         styles:
-          "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
-        tag: "span",
+          "flex gap-1 font-semibold pb-2 text-xs flex-wrap text-gray-950/80",
+        tag: "div",
+        container: [
+          { id: "date", styles: "text-gray-950/80", tag: "span" },
+          {
+            id: "publisher",
+            styles:
+              "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+            tag: "span",
+          },
+        ],
       },
       {
         id: "description",
@@ -225,13 +229,12 @@ const components: any = {
       },
     ],
   },
-
   certifications: {
-    styles: "my-2",
+    styles: "my-1",
     elements: [
       {
         id: "title",
-        styles: "text-base mt-2 font-bold text-gray-950/80",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
         tag: "span",
       },
       {
@@ -256,7 +259,6 @@ const components: any = {
       },
     ],
   },
-
   interests: {
     styles: "my-2",
     elements: [
@@ -268,16 +270,14 @@ const components: any = {
       },
     ],
   },
-
   awards: {
-    styles: "my-2",
+    styles: "my-1",
     elements: [
       {
         id: "title",
-        styles: "text-base mt-2 font-bold text-gray-950/80",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
         tag: "span",
       },
-
       {
         styles:
           "flex gap-1 font-semibold pb-2 text-xs flex-wrap text-gray-950/80",
@@ -300,13 +300,12 @@ const components: any = {
       },
     ],
   },
-
   trainings: {
-    styles: "my-2",
+    styles: "my-1",
     elements: [
       {
         id: "position",
-        styles: "text-base mt-2 font-bold text-gray-950/80",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
         tag: "span",
       },
 
@@ -338,7 +337,6 @@ const components: any = {
       },
     ],
   },
-
   references: {
     tag: "div",
     styles: "",
@@ -372,7 +370,6 @@ const components: any = {
       },
     ],
   },
-
   education: {
     tag: "div",
     styles: "",
@@ -430,7 +427,6 @@ const components: any = {
       },
     ],
   },
-
   languages: {
     tag: "div",
     styles: "",
@@ -447,7 +443,8 @@ const components: any = {
           },
           {
             id: "proficiency",
-            styles: "text-xs font-semibold text-gray-950/80",
+            styles:
+              "text-xs font-normal text-gray-950/80 before:w-max before:content-['Proficiency:'] before:mr-1 before:font-semibold",
             tag: "span",
           },
         ],
@@ -473,7 +470,6 @@ const templateLayout: any = {
         },
       ],
     },
-
     contact: {
       styles:
         "flex flex-row flex-wrap text-base w-[94%] justify-between items-center my-2 mx-auto p-3 rounded-md gap-4 bg-gray-300 text-gray-950/80",
@@ -502,7 +498,7 @@ const templateLayout: any = {
     },
     skills: {
       styles:
-        "bg-red text-black w-full flex-1 gap-2 flex flex-row flex-wrap justify-start items-start px-6 my-6 text-gray-950/80",
+        "bg-red text-black w-full flex-1 gap-2 flex flex-row flex-wrap justify-start items-start px-8 my-6 text-gray-950/80",
       elements: [
         {
           id: "primarySkills",
@@ -534,8 +530,7 @@ const templateLayout: any = {
       ],
     },
     awards: {
-      styles:
-        "text-black flex flex-wrap justify-start items-start gap-3 px-6 text-gray-950/80",
+      styles: "flex flex-col px-8 w-full text-gray-950/80",
       elements: [
         {
           id: "awards",
@@ -543,8 +538,7 @@ const templateLayout: any = {
       ],
     },
     trainings: {
-      styles:
-        "text-black flex flex-wrap justify-start items-start gap-3 px-6 text-gray-950/80",
+      styles: "flex flex-col px-8 w-full text-gray-950/80",
       elements: [
         {
           id: "trainings",
@@ -553,7 +547,7 @@ const templateLayout: any = {
     },
     education: {
       styles:
-        "text-black flex flex-wrap justify-start items-start gap-3 px-6 text-gray-950/80",
+        "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
       elements: [
         {
           id: "education",
@@ -562,7 +556,7 @@ const templateLayout: any = {
     },
     languages: {
       styles:
-        "text-black flex flex-wrap justify-start items-start gap-3 px-6 text-gray-950/80",
+        "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
       elements: [
         {
           id: "languages",
@@ -571,7 +565,7 @@ const templateLayout: any = {
     },
     interests: {
       styles:
-        "text-black flex flex-wrap justify-start items-start gap-3 px-6 text-gray-950/80",
+        "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
       elements: [
         {
           id: "interests",
@@ -580,7 +574,7 @@ const templateLayout: any = {
     },
     references: {
       styles:
-        "text-black flex flex-wrap justify-start items-start gap-3 px-6 text-gray-950/80",
+        "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
       elements: [
         {
           id: "references",
