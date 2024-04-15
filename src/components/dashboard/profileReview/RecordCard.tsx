@@ -6,7 +6,7 @@ const RecordCard = ({ rec }: any) => {
         {rec.title}
       </h2>
 
-      <span className="text-base  dark:text-gray-300 text-gray-950 font-semibold">
+      <span className="text-base dark:text-gray-300 text-gray-950 font-semibold">
         {rec.position}
       </span>
 
