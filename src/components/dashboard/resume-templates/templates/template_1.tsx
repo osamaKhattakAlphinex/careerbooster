@@ -2297,7 +2297,7 @@ const ResumeTemplate1 = ({
                     return (
                       <li
                         key={i}
-                        className="w-[45%] md:w-[30%] md m-2  xs:m-0 relative group border-transparen"
+                        className="w-[45%] md:w-[30%] m-2  xs:m-0 relative group border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed "
                       >
                         <Toolbar
                           // addAchivement={() => setNewWorkExperience(i)}
