@@ -111,7 +111,12 @@ const ResumeTemplate2 = () => {
     <div className="flex flex-col py-2 items-start justify-start w-full px-6 space-y-4 text-gray-900 first-page">
       {/* Name and Title */}
       <div className="flex flex-col items-center w-full px-8 py-4 mt-1 text-center bg-gray-300  rounded-xl">
-      <Header name={resume.name} jobTitle={resume.jobTitle} />
+        <Header
+          name={resume.name}
+          jobTitle={resume.jobTitle}
+          fullNameStyle="fullName-temp-2"
+          jobTitleStyle="jobTitle-temp-2"
+        />
         {/* <div className="absolute top-0 left-12">
           <ColorPicker
             defaultColor="#e9e8e8"
@@ -143,7 +148,7 @@ const ResumeTemplate2 = () => {
       </div>
       {/* summary objective */}
       <div className="w-full space-y-3 ">
-        <Summary heading={resume.headings.summary} summary={resume.summary}/>
+        <Summary heading={resume.headings.summary} summary={resume.summary} />
       </div>
       {/* Skills  */}
       <div className="w-full space-y-3">
@@ -170,7 +175,10 @@ const ResumeTemplate2 = () => {
         {resume?.primarySkills &&
         resume?.primarySkills.length > 0 &&
         !regenerating ? (
-         <Skill skills={resume.primarySkills} setRegenerating={setRegenerating}/>
+          <Skill
+            skills={resume.primarySkills}
+            setRegenerating={setRegenerating}
+          />
         ) : (
           <div className="text-center">
             <div role="status">
@@ -265,32 +273,47 @@ const ResumeTemplate2 = () => {
 
       {/* Certificates */}
       {resume?.certifications && resume?.certifications.length > 0 && (
-        <Certification heading={resume.headings.certifications} certificates={resume.certifications}/>
+        <Certification
+          heading={resume.headings.certifications}
+          certificates={resume.certifications}
+        />
       )}
 
       {/* Trainings */}
       {resume?.trainings && resume?.trainings.length > 0 && (
-        <Training heading={resume.headings.trainings} trainings={resume.trainings}/>
+        <Training
+          heading={resume.headings.trainings}
+          trainings={resume.trainings}
+        />
       )}
 
       {/* Awards */}
       {resume?.awards && resume?.awards.length > 0 && (
-       <Award heading={resume.headings.awards} awards={resume.awards}/>
+        <Award heading={resume.headings.awards} awards={resume.awards} />
       )}
 
       {/* Interests & Hobbies */}
       {resume?.interests && resume?.interests.length > 0 && (
-        <Interest heading={resume.headings.interests} interests={resume.interests}/>
+        <Interest
+          heading={resume.headings.interests}
+          interests={resume.interests}
+        />
       )}
 
       {/* References */}
       {resume?.references && resume?.references.length > 0 && (
-        <Reference heading={resume.headings.references} references={resume.references} />
+        <Reference
+          heading={resume.headings.references}
+          references={resume.references}
+        />
       )}
 
       {/* Languages */}
       {resume?.languages && resume?.languages.length > 0 && (
-       <Language heading={resume.headings.languages} languages={resume.languages}/>
+        <Language
+          heading={resume.headings.languages}
+          languages={resume.languages}
+        />
       )}
 
       {/* Add Custom */}
@@ -299,7 +322,10 @@ const ResumeTemplate2 = () => {
       {/* Education */}
       <div className="w-full space-y-3 ">
         {resume?.education.length > 0 && (
-          <Education heading={resume.headings.education} educations={resume.education}/>         
+          <Education
+            heading={resume.headings.education}
+            educations={resume.education}
+          />
         )}
       </div>
     </div>
