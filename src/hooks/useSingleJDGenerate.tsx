@@ -87,7 +87,9 @@ const useSingleJDGenerate = (setStreamedJDData: any,setOutOfCredits:any ="") => 
       } else {
         if (res.status === 429) {
           showErrorToast("You ran out of credits!");
-          setOutOfCredits(true);
+          if(setOutOfCredits !== ""){
+            setOutOfCredits(true);
+          }
         }else{
           showErrorToast("Error in generating work experience");
         }

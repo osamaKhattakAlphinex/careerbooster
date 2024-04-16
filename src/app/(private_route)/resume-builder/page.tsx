@@ -50,6 +50,7 @@ import { useTourContext } from "@/context/TourContext";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
+  const [showConfettiRunning, setShowConfettiRunning] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
   const [showTemplatePopup, setShowTemplatePopup] = useState(false);
   const confettiConfig = {
@@ -69,12 +70,14 @@ const ResumeBuilder = () => {
     useTourContext();
 
   const runConfetti = () => {
-    showSuccessToast("Generated Successfully");
-    setConfettiRunning(true);
-    setTimeout(() => {
-      setConfettiRunning(false);
-      setShowTemplatePopup(true);
-    }, 3000); // Adjust the duration as needed
+    if(showConfettiRunning){
+      showSuccessToast("Generated Successfully");
+      setConfettiRunning(true);
+      setTimeout(() => {
+        setConfettiRunning(false);
+        setShowTemplatePopup(true);
+      }, 3000); // Adjust the duration as needed
+    }
   };
 
   const { getUserDataIfNotExists } = useGetUserData();
@@ -97,7 +100,7 @@ const ResumeBuilder = () => {
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
 
-  const { getSummary } = useGetSummary(setStreamedSummaryData);
+  const { getSummary } = useGetSummary(setStreamedSummaryData,setOutOfCredits);
 
   const getConsent = () => {
     if (creditsInfoRef.current) {
@@ -134,7 +137,7 @@ const ResumeBuilder = () => {
         await getWorkExperienceNew(quantifyingExperience);
         // await addCustomSection();
         // adding custom sections
-        runConfetti();
+         runConfetti();
       } else {
         setShowPopup(true);
 
@@ -217,6 +220,8 @@ const ResumeBuilder = () => {
         };
         dispatch(setBasicInfo(basicObj));
       } else {
+      setShowConfettiRunning(false)
+
         showErrorToast("Something Went Wrong");
       }
     });
@@ -305,6 +310,7 @@ const ResumeBuilder = () => {
           workExpArrObj.achievements = achivementsArray;
           workExpArr.push(workExpArrObj);
         } else {
+      setShowConfettiRunning(false)
           setStreamedJDData("You ran out of credits!");
         }
       }
@@ -344,6 +350,8 @@ const ResumeBuilder = () => {
           myJSON = JSON.parse(myJSON);
           dispatch(setPrimarySkills({ primarySkills: myJSON }));
         }
+      } else {
+      setShowConfettiRunning(false)
       }
     });
     // });
@@ -356,7 +364,7 @@ const ResumeBuilder = () => {
     if (
       resumeGenerated &&
       !resumeData.state.resumeLoading &&
-      resumeData?.name
+      resumeData?.name && !outOfCredits
     ) {
       saveResumeToDB();
     }
@@ -390,6 +398,7 @@ const ResumeBuilder = () => {
 
   useEffect(() => {
     if (outOfCredits) {
+      setShowConfettiRunning(false)
       setTimeout(() => {
         tourBotRef?.current?.click();
       }, 500);

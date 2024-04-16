@@ -86,7 +86,9 @@ const useGetSummary = (
         dispatch(setSummary(resumeData?.summary));
         if (resp.status === 429) {
           showErrorToast("You ran out of credits!");
-          setOutOfCredits(true);
+           if(setOutOfCredits !== ""){
+            setOutOfCredits(true);
+          }
         }
       }
     });

@@ -72,7 +72,9 @@ const useGetPrimarySkills = (setRegenerating: any,setOutOfCredits:any="") => {
       } else {
         if (resp.status === 429) {
           showErrorToast("You ran out of credits!");
-          setOutOfCredits(true);
+          if(setOutOfCredits !== ""){
+            setOutOfCredits(true);
+          }
         } else {
           showErrorToast("Error in generating skills!");
         }
