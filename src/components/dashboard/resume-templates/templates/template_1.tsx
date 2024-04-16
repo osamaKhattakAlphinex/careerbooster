@@ -1923,10 +1923,10 @@ const ResumeTemplate1 = ({
                   return (
                     <Toolbar
                       key={i}
-                      addAchivement={() => {
-                        setNewWorkExperience(i);
-                        setNewBulletSection("Interests");
-                      }}
+                      // addAchivement={() => {
+                      //   setNewWorkExperience(i);
+                      //   setNewBulletSection("Interests");
+                      // }}
                       deleteExperience={() =>
                         handlers.handleDeleteOthers(i, "interests")
                       }
