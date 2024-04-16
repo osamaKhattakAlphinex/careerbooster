@@ -13,8 +13,7 @@ type Props = {
   heading: any;
   trainings: any;
 };
-const Training = ({ heading, trainings }: Props
-) => {
+const Training = ({ heading, trainings }: Props) => {
   const [trainingIndex, setTrainingIndex] = useState<number>();
   const { handlers } = useHandler();
   const [newTraining, setNewTraining] = useState("");
@@ -30,40 +29,37 @@ const Training = ({ heading, trainings }: Props
 
   return (
     <>
-          <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-          <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="w-5 h-5"
-            >
-              <path
-                fillRule="evenodd"
-                d="M16.403 12.652a3 3 0 0 0 0-5.304 3 3 0 0 0-3.75-3.751 3 3 0 0 0-5.305 0 3 3 0 0 0-3.751 3.75 3 3 0 0 0 0 5.305 3 3 0 0 0 3.75 3.751 3 3 0 0 0 5.305 0 3 3 0 0 0 3.751-3.75Zm-2.546-4.46a.75.75 0 0 0-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z"
-                clipRule="evenodd"
-              />
-            </svg>
+      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
+      <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          className="w-5 h-5"
+        >
+          <path
+            fillRule="evenodd"
+            d="M16.403 12.652a3 3 0 0 0 0-5.304 3 3 0 0 0-3.75-3.751 3 3 0 0 0-5.305 0 3 3 0 0 0-3.751 3.75 3 3 0 0 0 0 5.305 3 3 0 0 0 3.75 3.751 3 3 0 0 0 5.305 0 3 3 0 0 0 3.751-3.75Zm-2.546-4.46a.75.75 0 0 0-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z"
+            clipRule="evenodd"
+          />
+        </svg>
 
-            <EditableField
-              value={
-                heading
-                  ? heading
-                  : "trainings"
-              }
-              style={{ width: "fit-content" }}
-              onSave={(value: string) => {
-                if (value !== heading) {
-                  updateSaveHook.updateAndSaveHeadings({
-                    trainings: value,
-                  });
-                }
-              }}
-            />
-          </h3>
-          <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
-          {trainings.map((rec: any, i: number) => {
-            <Toolbar
+        <EditableField
+          value={heading ? heading : "trainings"}
+          style={{ width: "fit-content" }}
+          onSave={(value: string) => {
+            if (value !== heading) {
+              updateSaveHook.updateAndSaveHeadings({
+                trainings: value,
+              });
+            }
+          }}
+        />
+      </h3>
+      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
+      {trainings.map((rec: any, i: number) => {
+        return (
+          <Toolbar
             key={i}
             addAchivement={() => {
               setTrainingIndex(i);
@@ -79,7 +75,9 @@ const Training = ({ heading, trainings }: Props
             <div
               key={i}
               className="border-2 border-transparent md:w-full hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
-              onDragStart={(e) => e.dataTransfer.setData("text/plain", i.toString())}
+              onDragStart={(e) =>
+                e.dataTransfer.setData("text/plain", i.toString())
+              }
               onDragOver={(e) => e.preventDefault()}
               onDrop={(e) => handleDropOthers(e, i, "trainings")}
               draggable
@@ -235,7 +233,7 @@ const Training = ({ heading, trainings }: Props
                     </div>
                   </div>
                 )}
-      
+
                 {trainingIndex === i && newBulletSection === "Trainings" ? (
                   <>
                     <div className="flex flex-wrap w-full gap-1 mt-4">
@@ -291,9 +289,9 @@ const Training = ({ heading, trainings }: Props
               </div>
             </div>
           </Toolbar>
-          })}
-        </>
-   
+        );
+      })}
+    </>
   );
 };
 

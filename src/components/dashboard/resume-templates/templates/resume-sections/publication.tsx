@@ -6,16 +6,18 @@ import { formatDate } from "@/helpers/getFormattedDateTime";
 import { crossIcon1 } from "@/helpers/iconsProvider";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useHandler from "@/hooks/useHandler";
+import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import React, { useState } from "react";
 
 type Props = {
-  i: number;
-  rec: any;
+  heading: any;
+  publications: any;
 };
 
-const Publication = ({ i, rec }: Props) => {
+const Publication = ({ heading, publications }: Props) => {
   const [pulicationIndex, setPulicationIndex] = useState<number>();
   const { handlers } = useHandler();
+  const { updateSaveHook } = useUpdateAndSave();
   const [newPublication, setNewPublication] = useState("");
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const [newBulletSection, setNewBulletSection] = useState<string | null>(null);
@@ -27,7 +29,42 @@ const Publication = ({ i, rec }: Props) => {
   const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
 
   return (
-    <Toolbar
+    <>
+    <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
+    <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        className="w-5 h-5"
+      >
+        <path
+          fillRule="evenodd"
+          d="M2 3.5A1.5 1.5 0 0 1 3.5 2h9A1.5 1.5 0 0 1 14 3.5v11.75A2.75 2.75 0 0 0 16.75 18h-12A2.75 2.75 0 0 1 2 15.25V3.5Zm3.75 7a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5Zm0 3a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5ZM5 5.75A.75.75 0 0 1 5.75 5h4.5a.75.75 0 0 1 .75.75v2.5a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 8.25v-2.5Z"
+          clipRule="evenodd"
+        />
+        <path d="M16.5 6.5h-1v8.75a1.25 1.25 0 1 0 2.5 0V8a1.5 1.5 0 0 0-1.5-1.5Z" />
+      </svg>
+
+      <EditableField
+        value={
+          heading
+            ? heading
+            : "publications"
+        }
+        style={{ width: "fit-content" }}
+        onSave={(value: string) => {
+          if (value !== heading) {
+            updateSaveHook.updateAndSaveHeadings({
+              publications: value,
+            });
+          }
+        }}
+      />
+    </h3>
+    <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
+    {publications.map((rec: any, i: number) => {
+      return  <Toolbar
       key={i}
       addAchivement={() => {
         setPulicationIndex(i);
@@ -239,7 +276,10 @@ const Publication = ({ i, rec }: Props) => {
           ) : null}
         </div>
       </div>
-    </Toolbar>
+    </Toolbar>;
+    })}
+  </>
+   
   );
 };
 
