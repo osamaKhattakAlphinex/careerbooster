@@ -46,7 +46,12 @@ const ResumeTemplate2 = () => {
     <div className="flex flex-col py-2 items-start justify-start w-full px-6 space-y-4 text-gray-900 first-page">
       {/* Name and Title */}
       <div className="flex flex-col items-center w-full px-8 py-4 mt-1 text-center bg-gray-300  rounded-xl">
-        <Header name={resume.name} jobTitle={resume.jobTitle} />
+        <Header
+          name={resume.name}
+          jobTitle={resume.jobTitle}
+          fullNameStyle="fullName-temp-2"
+          jobTitleStyle="jobTitle-temp-2"
+        />
         {/* <div className="absolute top-0 left-12">
           <ColorPicker
             defaultColor="#e9e8e8"
