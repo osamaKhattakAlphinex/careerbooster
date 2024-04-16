@@ -3,23 +3,49 @@ import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import Loader from "@/components/common/Loader";
 import EditableField from "@/components/dashboard/EditableField";
 import Toolbar from "@/components/dashboard/Toolbar";
-import { crossIcon1 } from "@/helpers/iconsProvider";
+import { crossIcon1, resumeEductionIcon } from "@/helpers/iconsProvider";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useHandler from "@/hooks/useHandler";
-import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
+
 import React, { useState } from "react";
+import { Education as EducationType } from "@/store/userDataSlice";
+import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 
 type Props = {
-  i: number;
-  education: any;
+  heading: any;
+  educations: any;
 };
 
-const Education = ({ i, education }: Props) => {
+const Education = ({ heading, educations }: Props) => {
   const [confirmationModal, setConfirmationModal] = useState(false);
   const { handlers } = useHandler();
+  const { updateSaveHook } = useUpdateAndSave();
 
   return (
-    <React.Fragment key={education?.id || i}>
+    <>
+    <h3 className="flex flex-row items-center gap-2 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+      {resumeEductionIcon}
+
+      <EditableField
+        value={
+         heading
+            ? heading
+            : "education"
+        }
+        style={{ width: "fit-content" }}
+        onSave={(value: string) => {
+          if (value !== heading) {
+            updateSaveHook.updateAndSaveHeadings({
+              education: value,
+            });
+          }
+        }}
+      />
+    </h3>
+    <ul className="grid grid-cols-3 gap-2 xs:grid-cols-3 md:grid-cols-3 ">
+      {educations.map(
+        (education: EducationType, i: number) => (
+          <React.Fragment key={education?.id || i}>
       <div className="relative px-4 py-2 bg-gray-300 border-2 border-transparent rounded-md group hover:border-dashed hover:border-gray-500">
         <li className="flex items-center justify-between text-base font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:border-2 hover:bg-gray-100 ">
           <EditableField
@@ -111,6 +137,11 @@ const Education = ({ i, education }: Props) => {
         />
       )}
     </React.Fragment>
+        )
+      )}
+    </ul>
+  </>
+   
   );
 };
 
