@@ -32,4 +32,38 @@
   .jobTitle-temp-2 {
     @apply text-lg border-2 border-transparent xs:text-xs md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500 
   }
+  .contact-temp-2 {
+    @apply flex flex-row items-center justify-around px-4 py-2 bg-gray-300 xs:flex-col xs:gap-2 md:flex-row rounded-xl
+  }
+  .contact-temp-2-li {
+    @apply flex flex-row items-center justify-start gap-1 text-xs hover:shadow-md text-gray-950 hover:bg-gray-100 xs:w-[45%] lg:w-[25%]   
+  }
+  .summaryHeading-temp-2 {
+    @apply flex items-center gap-2 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 
+  }
+  .summaryText-temp-2 {
+    @apply text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed 
+  }
+  .skillHeading-temp-2 {
+    @apply my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2
+  }
+  .skill-ul-temp-2 {
+    @apply flex flex-row flex-wrap gap-1 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500 
+  }
+  .skill-li-temp-2 {
+    @apply px-4 py-2 bg-gray-300 border-transparent border-[1px] rounded-full hover:shadow-md hover:cursor-move  hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center 
+  }
+  .skill-New-temp-2 {
+    @apply w-full rounded-2xl  border-[1px] border-black flex h-[38px]
+  }
+  .skill-input-temp-2 {
+    @apply w-full px-2 bg-white outline-none rounded-2xl
+  }
+  .skill-Save {
+    @apply px-2 text-white uppercase bg-green-500 h-9 rounded-r-2xl
+  }
+  .skill-cancel {
+    @apply px-2 py-1 text-white bg-red-500 rounded-full
+  }
+  
 }
