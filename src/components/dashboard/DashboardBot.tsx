@@ -226,12 +226,12 @@ const DashboardBot = () => {
   };
 
   const handleClick = async () => {
-    setShowBot(true);
     try {
       if (isGif) {
         setIsGif(false);
         if (isAudioPlaying) {
           componentRef.current.pause();
+          setShowBot(false);
           removeStyles();
           setIsAudioPlaying(false);
         }
@@ -247,6 +247,7 @@ const DashboardBot = () => {
 
       if (!isAudioPlaying) {
         // If audio is not playing, load and play it
+        setShowBot(true);
         setIsGif(true);
         setIsAudioPlaying(true);
         setAudioPlayed(true);
@@ -283,6 +284,8 @@ const DashboardBot = () => {
     }
 
     if (audioCounter !== 0 && audioCounter === audioBuffers.length) {
+      setShowBot(false)
+      localStorage.setItem("botHidden", "true");
       componentRef.current.pause();
       removeStyles();
       setAudioCounter(0);
@@ -322,7 +325,7 @@ const DashboardBot = () => {
       onClick={handleClick}
     >
       <Tooltip
-        text="Need Help? Click me"
+        text="!"
         audioPlayed={audioPlayed}
         isAudioPlaying={isAudioPlaying}
         subtitleText={subtitles[subTitleCounter]}

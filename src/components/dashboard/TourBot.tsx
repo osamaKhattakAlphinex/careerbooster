@@ -103,20 +103,21 @@ const TourBot = ({ config, setOutOfCredits }: any) => {
   };
 
   const handleClick = async () => {
-    setShowBot(true);
     try {
       if (isGif) {
         setIsGif(false);
         if (isAudioPlaying) {
           audioPlayerRef.current.pause();
+          setShowBot(false);
           removeStyles();
           setIsAudioPlaying(false);
         }
         return;
       }
-
+      
       if (!isAudioPlaying) {
         // If audio is not playing, load and play it
+        setShowBot(true);
         setIsGif(true);
         setIsAudioPlaying(true);
         setAudioPlayed(true);
@@ -158,6 +159,8 @@ const TourBot = ({ config, setOutOfCredits }: any) => {
     }
 
     if (audioCounter !== 0 && audioCounter === audioBuffers.length) {
+      setShowBot(false);
+      localStorage.setItem("botHidden", "true");
       audioPlayerRef.current.pause();
       removeStyles();
       setAudioCounter(0);
@@ -194,7 +197,7 @@ const TourBot = ({ config, setOutOfCredits }: any) => {
       } mr-4 mb-4 cursor-pointer z-10 avatar-animate`}
       onClick={handleClick}
     >
-      <Tooltip text="Need Help? Click me" audioPlayed={audioPlayed}>
+      <Tooltip text="!" audioPlayed={audioPlayed}>
         <Image
           src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
           alt="GIF"
