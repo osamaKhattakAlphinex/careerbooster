@@ -31,6 +31,7 @@ export default function CoverLetterPage() {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
+  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
 
   const [show, setShow] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("profile"); // type
@@ -228,9 +229,14 @@ export default function CoverLetterPage() {
             }
           } else {
             const res = await resp.json();
-            setStreamedData(res.result + "! You ran out of Credits");
-            setConfirmationModal(true);
-            showErrorToast("Failed to generate cover letter");
+            if(resp.status === 429){
+              showErrorToast("You ran out of credits!");
+              setOutOfCredits(true)
+              setStreamedData(res.result + "! You ran out of Credits");
+              // setConfirmationModal(true);
+            } else {
+              showErrorToast("Failed to generate cover letter");
+            }
           }
         })
         .finally(() => {
@@ -301,7 +307,7 @@ export default function CoverLetterPage() {
     setStreamedData(coverLetter.coverLetterText);
   }, [coverLetter.coverLetterText]);
 
-  const { coverLetterElementRef, tourBotRef, historyCardRef } =
+  const { coverLetterElementRef, tourBotRef, historyCardRef,availableCreditsRef } =
     useTourContext();
 
   const tourBotConfig = {
@@ -328,6 +334,22 @@ export default function CoverLetterPage() {
     ],
   };
 
+  const tourBotConfig2 = {
+    name: "resumeBuilder",
+    audios: [
+      {
+        url: "/OutOfCredits.mp3",
+        for: "history",
+      },
+    ],
+    toolRefs: [
+      {
+        ref: availableCreditsRef,
+        for: "history",
+      },
+    ],
+  };
+
   useEffect(() => {
     if (userData && userData?.tours) {
       if (!userData.tours.coverLetter) {
@@ -338,6 +360,13 @@ export default function CoverLetterPage() {
     }
   }, [tourBotRef]);
 
+  useEffect(() => {
+    if (outOfCredits) {
+      setTimeout(() => {
+        tourBotRef?.current?.click();
+      }, 500);
+    }
+  }, [outOfCredits]);
   const [uploadPdfFile, setUploadPdfFile] = useState<string>("useYourPersona");
   return (
     <>
@@ -804,7 +833,7 @@ export default function CoverLetterPage() {
           onConfirm={() => onConfirm()}
         />
       )}
-      <TourBot config={tourBotConfig} />
+      <TourBot config={outOfCredits ? tourBotConfig2 : tourBotConfig} setOutOfCredits={setOutOfCredits}/>
     </>
   );
 }

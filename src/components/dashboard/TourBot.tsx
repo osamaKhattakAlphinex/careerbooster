@@ -1,9 +1,11 @@
 "use client";
 import Image from "next/image";
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "@/app/(private_route)/dashboard.css";
 import { useTourContext } from "@/context/TourContext";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
+import { useSelector } from "react-redux";
+import { crossIconSmall } from "@/helpers/iconsProvider";
 interface TooltipProps {
   text: string;
   children: React.ReactNode;
@@ -22,7 +24,22 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
       {children}
       {showTooltip && !audioPlayed && (
         <div className="absolute px-2 py-1 text-white transform -translate-x-1/2 bg-black rounded bottom-full left-1/2 w-max bg-opacity-80 md:text-base xs:text-xs">
-          {text}
+          {/* {text}
+           */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+            />
+          </svg>
         </div>
       )}
     </div>
@@ -30,10 +47,11 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
 };
 
 // const DashboardBot: React.FC<DashboardBotProps> = ({ firstName, lastName }) => {
-const TourBot = ({ config }: any) => {
+const TourBot = ({ config, setOutOfCredits }: any) => {
+  const userData = useSelector((state: any) => state.userData);
   const [toolRefs, setToolRefs] = useState<any>(null);
+  const [showBot, setShowBot] = useState(true);
   const [audios, setAudios] = useState<any>(null);
-
   const [isGif, setIsGif] = useState(false);
   const [audioPlayed, setAudioPlayed] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -51,7 +69,6 @@ const TourBot = ({ config }: any) => {
       setAudios(config.audios);
     }
   }, [config]);
-
 
   const removeStyles = () => {
     toolRefs.map((toolRef: any) => {
@@ -106,6 +123,7 @@ const TourBot = ({ config }: any) => {
         setIsGif(false);
         if (isAudioPlaying) {
           audioPlayerRef.current.pause();
+          setShowBot(false);
           removeStyles();
           setIsAudioPlaying(false);
         }
@@ -114,6 +132,7 @@ const TourBot = ({ config }: any) => {
 
       if (!isAudioPlaying) {
         // If audio is not playing, load and play it
+        setShowBot(true);
         setIsGif(true);
         setIsAudioPlaying(true);
         setAudioPlayed(true);
@@ -136,6 +155,15 @@ const TourBot = ({ config }: any) => {
   };
 
   useEffect(() => {
+    if (localStorage.getItem("botHidden") === "true") {
+      setShowBot(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (audioCounter === 1 && !userData?.tours[config.name]) {
+      updateAndSaveTourStatus({ [config.name]: true });
+    }
     if (audioBuffers.length > 0 && audioCounter < audioBuffers.length) {
       const audioUrl = focusTool(
         audioBuffers[audioCounter].arrayBufferView,
@@ -146,12 +174,17 @@ const TourBot = ({ config }: any) => {
     }
 
     if (audioCounter !== 0 && audioCounter === audioBuffers.length) {
+      setShowBot(false);
+      localStorage.setItem("botHidden", "true");
       audioPlayerRef.current.pause();
       removeStyles();
       setAudioCounter(0);
       setAudioBuffers([]);
       setIsGif(false);
       setIsAudioPlaying(false);
+      if (setOutOfCredits) {
+        setOutOfCredits(false);
+      }
     }
   }, [audioBuffers, audioCounter]);
 
@@ -160,7 +193,6 @@ const TourBot = ({ config }: any) => {
 
     const handleAudioEnded = () => {
       setAudioCounter((prev) => prev + 1);
-      updateAndSaveTourStatus({ [config.name]: true });
     };
 
     audio.addEventListener("ended", handleAudioEnded);
@@ -173,24 +205,53 @@ const TourBot = ({ config }: any) => {
   return (
     <div
       ref={(ref: any) => (tourBotRef.current = ref)}
-      className={`fixed bottom-4 right-4 mr-4 mb-4 cursor-pointer z-10 avatar-animate`}
+      className={`fixed bottom-4 ${
+        showBot
+          ? "right-4 transition-all ease-in-out duration-500"
+          : "xs:-right-20 lg:-right-40 transition-all ease-in-out duration-500"
+      } mr-4 mb-4 cursor-pointer z-10 avatar-animate`}
       onClick={handleClick}
     >
-      <Tooltip text="Need Help? Click me" audioPlayed={audioPlayed}>
+      <Tooltip text="!" audioPlayed={audioPlayed}>
         <Image
           src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
           alt="GIF"
           width={200}
           height={200}
-          className="botImage xs:hidden md:hidden lg:block"
+          className={`botImage  ${
+            showBot
+              ? ""
+              : "transform -rotate-90 transition-transform duration-300 ease-in-out "
+          }  xs:hidden md:hidden lg:block`}
         />
         <Image
           src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
           alt="GIF"
           width={100}
           height={100}
-          className="botImage xs:block md:block lg:hidden"
+          className={`botImage  ${
+            showBot
+              ? ""
+              : "transform -rotate-90 transition-transform duration-300 ease-in-out "
+          }  xs:block md:block lg:hidden`}
         />
+        <button
+          className="absolute right-0 top-0 bg-black rounded-full p-0.5"
+          title="Hide"
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowBot(false);
+            localStorage.setItem("botHidden", "true");
+            setIsGif(false);
+            if (isAudioPlaying) {
+              audioPlayerRef.current.pause();
+              removeStyles();
+              setIsAudioPlaying(false);
+            }
+          }}
+        >
+          {crossIconSmall}
+        </button>
       </Tooltip>
       <audio className="hidden" ref={audioPlayerRef} controls />
     </div>

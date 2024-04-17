@@ -3,6 +3,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface WorkExperience {
+  title: string;
+  company?: string;
+  country?: string;
+  cityState?: string;
+  fromMonth?: string;
+  fromYear?: string;
+  isContinue?: boolean;
+  toMonth?: string;
+  toYear?: string;
+  achievements?: string[];
+}
+interface Training {
   company: string;
   position: string;
   startDate: string;
@@ -13,7 +25,7 @@ interface Publication {
   title: string;
   publisher: string;
   date: string;
-  description: string;
+  description: string[];
 }
 
 interface Award {
@@ -59,6 +71,14 @@ export interface Resume {
     workExperienceArray: string;
     summary: string;
     contact: string;
+    publications:string; 
+    trainings:string;
+    awards:string;
+    interests:string;
+    certifications:string;
+    references:string;
+    languages:string;
+
   };
   dateTime?: string;
   id?: string;
@@ -100,7 +120,6 @@ export interface Resume {
   workExperienceArray: WorkExperience[];
   quantifyingExperience: boolean;
   workExperience: "";
-  customExperienceArray: [];
   primarySkills: [];
   professionalSkills: [];
   secondarySkills: [];
@@ -108,6 +127,7 @@ export interface Resume {
   certifications: Certification[];
   awards: Award[];
   publications: Publication[];
+  trainings: Training[];
   references: Reference[];
   interests: Interest[];
 }
@@ -124,6 +144,13 @@ const initialState: Resume = {
     workExperienceArray: "work experience",
     summary: "executive summary",
     contact: "contact",
+    publications: "publications",
+    references: "references",
+    interests: "interests & hobbies",
+    certifications: "certifications",
+    awards: "awards",
+    trainings: "trainings",
+    languages: "languages",
   },
 
   dateTime: "",
@@ -162,7 +189,6 @@ const initialState: Resume = {
   },
   summary: "",
   workExperienceArray: [],
-  customExperienceArray: [],
   quantifyingExperience: true,
   workExperience: "",
   primarySkills: [],
@@ -171,6 +197,7 @@ const initialState: Resume = {
   interests: [],
   awards: [],
   publications: [],
+  trainings:[],
   references: [],
   languages: [],
   certifications: [],
@@ -232,7 +259,7 @@ const resumeSlice = createSlice({
         uploadedFileName: action.payload,
       };
     },
-
+  
     setBasicInfo(state, action) {
       return {
         ...state,
@@ -251,6 +278,13 @@ const resumeSlice = createSlice({
         workExperienceArray: action.payload.workExperienceArray,
         summary: action.payload.summary,
         contact: action.payload.contact,
+        publications: action.payload.publications,
+        references: action.payload.references,
+        interests: action.payload.interests,
+        certifications: action.payload.certifications,
+        trainings: action.payload.trainings,
+        awards: action.payload.awards,
+        languages: action.payload.languages,
       };
     },
     setSummary(state, action) {
@@ -271,6 +305,49 @@ const resumeSlice = createSlice({
         workExperienceArray: action.payload.workExperienceArray,
       };
     },
+    setTrainings(state, action) {
+      return {
+        ...state,
+        trainings: action.payload.trainings,
+      };
+    },
+    setAwards(state, action) {
+      return {
+        ...state,
+        awards: action.payload.awards,
+      };
+    },
+    setPublications(state, action) {
+      return {
+        ...state,
+        publications: action.payload.publications,
+      };
+    },
+    setReferences(state, action) {
+      return {
+        ...state,
+        references: action.payload.references,
+      };
+    },
+    setInterests(state, action) {
+      return {
+        ...state,
+        interests: action.payload.interests,
+      };
+    },
+    setCertifications(state, action) {
+      return {
+        ...state,
+        certifications: action.payload.certifications,
+      };
+    },
+    setLanguages(state, action) {
+      return {
+        ...state,
+        languages: action.payload.languages,
+      };
+    },
+   
     setCustomExperienceArray(state, action) {
       return {
         ...state,
@@ -315,7 +392,13 @@ export const {
   resetResume,
   emptyResume,
   setQuantifyingExperience,
-  setCustomExperienceArray,
+  setTrainings,
+  setAwards,
+  setPublications,
+  setReferences,
+  setInterests,
+  setCertifications,
+  setLanguages,
   // setLoadingState,
 } = resumeSlice.actions;
 

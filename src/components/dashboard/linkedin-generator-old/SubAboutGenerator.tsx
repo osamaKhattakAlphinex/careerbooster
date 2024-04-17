@@ -17,6 +17,8 @@ import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import { setLinkedInAbout } from "@/store/linkedInAboutSlice";
 import DownloadService from "@/helpers/downloadFile";
 import { EditIcon } from "@/helpers/iconsProvider";
+import { useTourContext } from "@/context/TourContext";
+import TourBot from "../TourBot";
 const SubAboutGenerator = () => {
   const componentRef = useRef<any>(null);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
@@ -48,6 +50,8 @@ const SubAboutGenerator = () => {
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const [isEditing, setIsEditing] = useState(false);
+  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
+  const { tourBotRef,availableCreditsRef } = useTourContext();
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -110,6 +114,14 @@ const SubAboutGenerator = () => {
     setStreamedData(linkedinAbout.aboutText);
   }, [linkedinAbout.aboutText]);
 
+  useEffect(() => {
+    if (outOfCredits) {
+      setTimeout(() => {
+        tourBotRef?.current?.click();
+      }, 500);
+    }
+  }, [outOfCredits]);
+
   const handleGenerate = async () => {
     setStreamedData("");
     await getUserDataIfNotExists();
@@ -163,8 +175,13 @@ const SubAboutGenerator = () => {
             );
           } else {
             const res = await resp.json();
-            setStreamedData(res.result + "! You ran out of Credits");
-            showErrorToast("Failed to generate linkedin About");
+            if(resp.status === 429){
+              setStreamedData(res.result + "! You ran out of Credits");
+              showErrorToast("You ran out of Credits!")
+              setOutOfCredits(true);
+            }else{
+              showErrorToast("Failed to generate linkedin Headline");
+            }
           }
           setMsgLoading(false);
         })
@@ -184,6 +201,21 @@ const SubAboutGenerator = () => {
     }
   };
 
+  const tourBotConfig2 = {
+    name: "resumeBuilder",
+    audios: [
+      {
+        url: "/OutOfCredits.mp3",
+        for: "history",
+      },
+    ],
+    toolRefs: [
+      {
+        ref: availableCreditsRef,
+        for: "history",
+      },
+    ],
+  };
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
       try {
@@ -561,6 +593,8 @@ const SubAboutGenerator = () => {
           Credit Limit Reached !
         </div>
       )}
+      {outOfCredits &&  <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits}/>}
+
     </>
   );
 };

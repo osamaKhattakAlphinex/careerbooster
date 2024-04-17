@@ -43,12 +43,71 @@ const cvHeadings: any = [
     styles:
       "font-semibold uppercase text-gray-100 flex items-center text-md border-b-2 border-white py-1 w-full my-2",
   },
+  {
+    text: "certificates",
+    section: "certifications",
+    headingKey: "certifications",
+    styles:
+      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-1 w-full border-b-2 border-gray-950/80",
+
+    attributes: [{ "icon-color": "black" }],
+  },
+  {
+    text: "awards",
+    section: "awards",
+    headingKey: "awards",
+    styles:
+      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-1 w-full border-b-2 border-gray-950/80",
+
+    attributes: [{ "icon-color": "black" }],
+  },
+  {
+    text: "publications",
+    section: "publications",
+    headingKey: "publications",
+    styles:
+      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-1 w-full border-b-2 border-gray-950/80",
+
+    attributes: [{ "icon-color": "black" }],
+  },
+  {
+    text: "languages",
+    section: "languages",
+    headingKey: "languages",
+    styles:
+      "font-semibold uppercase text-gray-100 flex items-center text-base py-1 w-full border-b-2 border-white my-2",
+    attributes: [{ "icon-color": "white" }],
+  },
+  {
+    text: "references",
+    section: "references",
+    headingKey: "references",
+    styles:
+      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-1 w-full border-b-2 border-gray-950/80",
+    attributes: [{ "icon-color": "black" }],
+  },
+  {
+    text: "interests",
+    section: "interests",
+    headingKey: "interests",
+    styles:
+    "font-semibold uppercase text-gray-100 flex items-center text-base py-1 w-full border-b-2 border-white my-2",
+    attributes: [{ "icon-color": "white" }],
+  },
+  {
+    text: "Trainings",
+    section: "trainings",
+    headingKey: "trainings",
+    styles:
+      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-1 w-full border-b-2 border-gray-950/80",
+    attributes: [{ "icon-color": "black" }],
+  },
 ];
 
 const components: any = {
   shortName: {
     styles:
-      "h-8 w-8 my-8 border text-xl p-10 -ml-2 translate-x-2/4 font-semibold flex justify-center items-center rounded-full bg-gray-900 text-white text-center",
+      "h-8 w-8 my-8 border text-xl p-10 ml-2 translate-x-2/4 font-semibold flex justify-center items-center rounded-full bg-gray-900 text-white text-center",
     tag: "span",
   },
   name: {
@@ -86,6 +145,23 @@ const components: any = {
         id: "address",
         styles:
           "text-xs mt-2 flex break-all before:aspect-square before:break-normal items-center before:mr-2 text-gray-100 before:w-4 before:h-4 before:bg-no-repeat before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0id2hpdGUiIGNsYXNzPSJ3LTYgaC02Ij4KICA8cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGQ9Im0yLjI1IDEyIDguOTU0LTguOTU1Yy40NC0uNDM5IDEuMTUyLS40MzkgMS41OTEgMEwyMS43NSAxMk00LjUgOS43NXYxMC4xMjVjMCAuNjIxLjUwNCAxLjEyNSAxLjEyNSAxLjEyNUg5Ljc1di00Ljg3NWMwLS42MjEuNTA0LTEuMTI1IDEuMTI1LTEuMTI1aDIuMjVjLjYyMSAwIDEuMTI1LjUwNCAxLjEyNSAxLjEyNVYyMWg0LjEyNWMuNjIxIDAgMS4xMjUtLjUwNCAxLjEyNS0xLjEyNVY5Ljc1TTguMjUgMjFoOC4yNSIgLz4KPC9zdmc+')]",
+        tag: "span",
+      },
+    ],
+  },
+
+  languages: {
+    styles: "",
+    elements: [
+      {
+        id: "language",
+        styles: "font-semibold list-disc text-base text-gray-100",
+        tag: "span",
+      },
+      {
+        id: "proficiency",
+        styles:
+          "text-xs font-normal text-gray-100 before:w-max before:content-['Proficiency:'] before:mr-1 before:font-semibold",
         tag: "span",
       },
     ],
@@ -205,6 +281,177 @@ const components: any = {
       },
     ],
   },
+  publications: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "title",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
+      },
+      {
+        styles:
+          "flex gap-1 font-semibold pb-2 text-xs flex-wrap text-gray-950/80",
+        tag: "div",
+        container: [
+          { id: "date", styles: "text-gray-950/80", tag: "span" },
+          {
+            id: "publisher",
+            styles:
+              "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+            tag: "span",
+          },
+        ],
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
+  certifications: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "title",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
+      },
+      {
+        styles:
+          "flex gap-1 font-semibold pb-2 text-xs flex-wrap text-gray-950/80",
+        tag: "div",
+        container: [
+          { id: "date", styles: "text-gray-950/80", tag: "span" },
+          {
+            id: "issuingOrganization",
+            styles:
+              "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+            tag: "span",
+          },
+        ],
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
+  interests: {
+    styles: "my-2",
+    elements: [
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-100 before:mr-2 before:mr-2 text-gray-100",
+        tag: "span",
+      },
+    ],
+  },
+  awards: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "title",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
+      },
+      {
+        styles:
+          "flex gap-1 font-semibold pb-2 text-xs flex-wrap text-gray-950/80",
+        tag: "div",
+        container: [
+          { id: "date", styles: "text-gray-950/80", tag: "span" },
+          {
+            id: "awardingOrganization",
+            styles:
+              "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+            tag: "span",
+          },
+        ],
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
+  trainings: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "position",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
+      },
+
+      {
+        styles:
+          "flex gap-1 font-semibold pb-2 text-xs flex-wrap text-gray-950/80",
+        tag: "div",
+        container: [
+          { id: "startDate", styles: "text-gray-950/80", tag: "span" },
+          {
+            id: "endDate",
+            styles:
+              "before:content-['-'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-1 text-gray-950/80",
+            tag: "span",
+          },
+          {
+            id: "company",
+            styles:
+              "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+            tag: "span",
+          },
+        ],
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
+  references: {
+    tag: "div",
+    styles: "",
+    elements: [
+      {
+        tag: "div",
+        styles:
+          "bg-gray-300 flex flex-col w-[31%] p-4 rounded-md text-gray-950/80",
+        container: [
+          {
+            id: "name",
+            styles: "font-semibold text-base text-gray-950/80",
+            tag: "span",
+          },
+          {
+            id: "position",
+            styles: "text-xs font-semibold text-gray-950/80",
+            tag: "span",
+          },
+          {
+            id: "company",
+            styles: "italic text-xs font-normal text-gray-950/80",
+            tag: "span",
+          },
+          {
+            id: "contactInformation",
+            styles: "text-xs italic font-normal text-gray-950/80",
+            tag: "span",
+          },
+        ],
+      },
+    ],
+  },
 };
 
 const templateLayout: any = {
@@ -213,7 +460,7 @@ const templateLayout: any = {
   fragment: {
     styles: "flex flex-row bg-white fragment",
     sideBar: {
-      styles: "bg-[#323B4C] w-3/12 flex flex-col justify-start px-4",
+      styles: "bg-[#323B4C] w-[28%] flex flex-col justify-start px-4",
       elements: [
         {
           id: "shortName",
@@ -233,12 +480,18 @@ const templateLayout: any = {
         {
           id: "primarySkills",
         },
+        {
+          id: "languages",
+        },
+        {
+          id: "interests",
+        },
       ],
     },
 
     body: {
       styles:
-        "text-black w-9/12 flex-1 flex flex-col justify-start items-start px-6 my-6",
+        "text-black w-[72%] flex-1 flex flex-col justify-start items-start px-6 my-6",
       elements: [
         {
           id: "name",
@@ -255,9 +508,41 @@ const templateLayout: any = {
         {
           id: "education",
         },
+        {
+          id: "publications",
+        },
+        {
+          id: "certifications",
+        },
+        {
+          id: "awards",
+        },
+        {
+          id: "trainings",
+        },
+        {
+          id: "references",
+        },
       ],
     },
   },
 };
 
-export const template = { templateLayout, components, cvHeadings };
+const GenerationOrder = [
+  "shortName",
+  "name",
+  "jobTitle",
+  "contact",
+  "primarySkills",
+  "languages",
+  "interests",
+  "summary",
+  "workExperienceArray",
+  "publications",
+  "certifications",
+  "awards",
+  "trainings",
+  "references",
+  "education",
+];
+export const template = { templateLayout, components, cvHeadings,GenerationOrder };

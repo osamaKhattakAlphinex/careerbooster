@@ -44,6 +44,62 @@ const cvHeadings: any = [
     styles:
       "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center  text-sm border-t-2 border-b-2  w-full my-2",
   },
+  {
+    text: "certificates",
+    section: "certifications",
+    headingKey: "certifications",
+    styles:
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+    attributes: [{ "icon-color": "white" }],
+  },
+  {
+    text: "awards",
+    section: "awards",
+    headingKey: "awards",
+    styles:
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+    attributes: [{ "icon-color": "white" }],
+  },
+  {
+    text: "publications",
+    section: "publications",
+    headingKey: "publications",
+    styles:
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+    attributes: [{ "icon-color": "white" }],
+  },
+  {
+    text: "languages",
+    section: "languages",
+    headingKey: "languages",
+    styles:
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+    attributes: [{ "icon-color": "white" }],
+  },
+  {
+    text: "references",
+    section: "references",
+    headingKey: "references",
+    styles:
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+    attributes: [{ "icon-color": "white" }],
+  },
+  {
+    text: "interests",
+    section: "interests",
+    headingKey: "interests",
+    styles:
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+    attributes: [{ "icon-color": "white" }],
+  },
+  {
+    text: "Trainings",
+    section: "trainings",
+    headingKey: "trainings",
+    styles:
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+    attributes: [{ "icon-color": "white" }],
+  },
 ];
 const components: any = {
   shortName: {
@@ -207,6 +263,201 @@ const components: any = {
       },
     ],
   },
+  publications: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "title",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
+      },
+      {
+        styles:
+          "flex gap-1 font-semibold pb-2 text-xs flex-wrap text-gray-950/80",
+        tag: "div",
+        container: [
+          { id: "date", styles: "text-gray-950/80", tag: "span" },
+          {
+            id: "publisher",
+            styles:
+              "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+            tag: "span",
+          },
+        ],
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
+  certifications: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "title",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
+      },
+      {
+        styles:
+          "flex gap-1 font-semibold pb-2 text-xs flex-wrap text-gray-950/80",
+        tag: "div",
+        container: [
+          { id: "date", styles: "text-gray-950/80", tag: "span" },
+          {
+            id: "issuingOrganization",
+            styles:
+              "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+            tag: "span",
+          },
+        ],
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
+  interests: {
+    styles: "my-2",
+    elements: [
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
+  awards: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "title",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
+      },
+      {
+        styles:
+          "flex gap-1 font-semibold pb-2 text-xs flex-wrap text-gray-950/80",
+        tag: "div",
+        container: [
+          { id: "date", styles: "text-gray-950/80", tag: "span" },
+          {
+            id: "awardingOrganization",
+            styles:
+              "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+            tag: "span",
+          },
+        ],
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
+  trainings: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "position",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
+      },
+
+      {
+        styles:
+          "flex gap-1 font-semibold pb-2 text-xs flex-wrap text-gray-950/80",
+        tag: "div",
+        container: [
+          { id: "startDate", styles: "text-gray-950/80", tag: "span" },
+          {
+            id: "endDate",
+            styles:
+              "before:content-['-'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-1 text-gray-950/80",
+            tag: "span",
+          },
+          {
+            id: "company",
+            styles:
+              "text-gray-950/80 before:content-['|'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2",
+            tag: "span",
+          },
+        ],
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
+  references: {
+    tag: "div",
+    styles: "",
+    elements: [
+      {
+        tag: "div",
+        styles:
+          "bg-gray-200 flex flex-col w-[31%] p-4 rounded-md text-gray-950/80",
+        container: [
+          {
+            id: "name",
+            styles: "font-semibold text-base text-gray-950/80",
+            tag: "span",
+          },
+          {
+            id: "position",
+            styles: "text-xs font-semibold text-gray-950/80",
+            tag: "span",
+          },
+          {
+            id: "company",
+            styles: "italic text-xs font-normal text-gray-950/80",
+            tag: "span",
+          },
+          {
+            id: "contactInformation",
+            styles: "text-xs italic font-normal text-gray-950/80",
+            tag: "span",
+          },
+        ],
+      },
+    ],
+  },
+  languages: {
+    tag: "div",
+    styles: "",
+    elements: [
+      {
+        tag: "div",
+        styles:
+          "bg-gray-200 flex flex-col w-[31%] p-4 rounded-md text-gray-950/80",
+        container: [
+          {
+            id: "language",
+            styles: "font-semibold text-base text-gray-950/80",
+            tag: "span",
+          },
+          {
+            id: "proficiency",
+            styles:
+              "text-xs font-normal text-gray-950/80 before:w-max before:content-['Proficiency:'] before:mr-1 before:font-semibold",
+            tag: "span",
+          },
+        ],
+      },
+    ],
+  },
 };
 
 const templateLayout: any = {
@@ -235,6 +486,12 @@ const templateLayout: any = {
         {
           id: "primarySkills",
         },
+        {
+          id: "languages",
+        },
+        {
+          id: "interests",
+        },
       ],
     },
 
@@ -257,13 +514,48 @@ const templateLayout: any = {
         {
           id: "education",
         },
+       
+        {
+          id: "awards",
+        },
+        {
+          id: "trainings",
+        },
+        {
+          id: "references",
+        },
+       
+        {
+          id: "publications",
+        },
+        {
+          id: "certifications",
+        },
       ],
     },
   },
 };
 
+const GenerationOrder = [
+  "shortName",
+  "name",
+  "jobTitle",
+  "contact",
+  "primarySkills",
+  "languages",
+  "interests",
+  "summary",
+  "workExperienceArray",
+  "publications",
+  "certifications",
+  "awards",
+  "trainings",
+  "references",
+  "education",
+];
 export const template = {
   components,
   templateLayout,
   cvHeadings,
+  GenerationOrder
 };

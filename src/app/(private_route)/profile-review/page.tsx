@@ -11,15 +11,20 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setActiveStep,
   setField,
-  setStepCustom,
+  setStepEight,
+  setStepEleven,
   setStepFive,
   setStepFour,
+  setStepNine,
   setStepOne,
+  setStepSeven,
+  setStepSix,
+  setStepTen,
+  setStepThirteen,
   setStepThree,
+  setStepTwelve,
   setStepTwo,
-
 } from "@/store/registerSlice";
-import StepEight from "@/components/dashboard/profileReview/StepEight";
 import { leftArrowIcon, refreshIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
@@ -42,31 +47,43 @@ const ProfileReview = () => {
   const stepThree = useSelector((state: any) => state.register.stepThree);
   const stepFour = useSelector((state: any) => state.register.stepFour);
   const stepFive = useSelector((state: any) => state.register.stepFive);
-  const stepCustom = useSelector((state: any) => state.register.stepCustom);
+  const stepThirteen = useSelector((state: any) => state.register.stepThirteen);
+  const stepSix = useSelector((state: any) => state.register.stepSix);
+  const stepSeven = useSelector((state: any) => state.register.stepSeven);
+  const stepEight = useSelector((state: any) => state.register.stepEight);
+  const stepNine = useSelector((state: any) => state.register.stepNine);
+  const stepTen = useSelector((state: any) => state.register.stepTen);
+  const stepEleven = useSelector((state: any) => state.register.stepEleven);
+  const stepTwelve = useSelector((state: any) => state.register.stepTwelve);
 
   const reduxStep = register.activeStep;
 
   const singleHandleSaveDetails = async () => {
- 
-  let obj={ 
-        firstName: register.stepOne.firstName,
-       lastName: register.stepOne.lastName,
-       email: userData.email,
-       linkedin: userData.linkedin,
-       file: resume.uploadedFileName,
-       phone: register.stepTwo.phoneNumber,
- 
-       contact: {
-         country: register.stepThree.country,
-         street: register.stepThree.street,
-         cityState: register.stepThree.cityState,
-         postalCode: register.stepThree.postalCode,
-       },
-        education: register.stepFour.list,
-        experience: register.stepFive.list,
-        customDetails:register.stepCustom,
-      }
+    let obj = {
+      firstName: register.stepOne.firstName,
+      lastName: register.stepOne.lastName,
+      email: userData.email,
+      linkedin: userData.linkedin,
+      file: resume.uploadedFileName,
+      phone: register.stepTwo.phoneNumber,
 
+      contact: {
+        country: register.stepThree.country,
+        street: register.stepThree.street,
+        cityState: register.stepThree.cityState,
+        postalCode: register.stepThree.postalCode,
+      },
+      education: register.stepFour.list,
+      skills: register.stepThirteen.list,
+      experience: register.stepFive.list,
+      references: register.stepTwelve.list,
+      trainings: register.stepSeven.list,
+      languages: register.stepEleven.list,
+      interests:register.stepTen.list ,
+      certifications: register.stepSix.list,
+      awards: register.stepNine.list,
+      publications: register.stepEight.list,
+    };
 
     return axios
       .post("/api/users/updateUserData", {
@@ -98,8 +115,14 @@ const ProfileReview = () => {
       },
       education: register.stepFour.list,
       experience: register.stepFive.list,
-      skills: register.stepSix.list,
-      customDetails: register.stepCustom,
+      skills: register.stepThirteen.list,
+      references: register.stepTwelve.list,
+      trainings: register.stepSeven.list,
+      languages: register.stepEleven.list,
+      interests:register.stepTen.list ,
+      certifications: register.stepSix.list,
+      awards: register.stepNine.list,
+      publications: register.stepEight.list,
       wizardCompleted: true,
       wizardReviewed: true,
     };
@@ -169,17 +192,15 @@ const ProfileReview = () => {
     }
   }, [reduxStep, urlStep]);
 
- 
   useEffect(() => {
-    if (userData ) {
-      if( userData.experience){
+    if (userData) {
+      if (userData.experience) {
         dispatch(
           setStepOne({
             ...stepOne,
             firstName: userData.firstName,
             lastName: userData.lastName,
           })
-          
         );
         dispatch(
           setStepTwo({
@@ -200,13 +221,33 @@ const ProfileReview = () => {
         );
         dispatch(setStepFive({ ...stepFive, list: userData.experience }));
       }
-      if(userData.customDetails){
-        dispatch(setStepCustom(userData.customDetails));
-      }
-      if(userData.education){
+      if (userData.education) {
         dispatch(setStepFour({ ...stepFour, list: userData.education }));
       }
-
+      if (userData.skills) {
+        dispatch(setStepThirteen({ ...stepThirteen, list: userData.skills }));
+      }
+      if (userData.trainings) {
+        dispatch(setStepSeven({ ...stepSeven, list: userData.trainings }));
+      }
+      if (userData.publications) {
+        dispatch(setStepEight({ ...stepEight, list: userData.publications }));
+      }
+      if (userData.awards) {
+        dispatch(setStepNine({ ...stepNine, list: userData.awards }));
+      }
+      if (userData.certifications) {
+        dispatch(setStepSix({ ...stepSix, list: userData.certifications }));
+      }
+      if (userData.interests) {
+        dispatch(setStepTen({ ...stepTen, list: userData.interests }));
+      }
+      if (userData.languages) {
+        dispatch(setStepEleven({ ...stepEleven, list: userData.languages }));
+      }
+      if (userData.references) {
+        dispatch(setStepTwelve({ ...stepTwelve, list: userData.references }));
+      }
     }
   }, [userData]);
   return (
@@ -233,19 +274,17 @@ const ProfileReview = () => {
                           : "xs:justify-end "
                       } items-center`}
                     ></div>
+
                     {register.activeStep === 1 && (
                       <>
-                        {register.activeStep === 1 && (
-                          <>
-                            <StepOne />
-                            <StepTwo />
-                            <StepThree />
-                          </>
-                        )}
-                        {/* {register.activeStep === 2 && <StepTwo />}
-                    {register.activeStep === 3 && <StepThree />} */}
+                        <StepOne />
+                        <StepTwo />
+                        <StepThree />
                       </>
                     )}
+                    {/* {register.activeStep === 2 && <StepTwo />}
+                    {register.activeStep === 3 && <StepThree />} */}
+
                     {register.activeStep === 2 && <StepFour />}
                     {register.activeStep === 3 && <StepFive />}
                     {/* {register.activeStep === 4 && <StepCustom />} */}

@@ -7,7 +7,7 @@ import useSaveResumeToDB from "./useSaveToDB";
 import useGetCreditLimits from "./useGetCreditLimits";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
-const useGetPrimarySkills = (setRegenerating: any) => {
+const useGetPrimarySkills = (setRegenerating: any,setOutOfCredits:any="") => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const resumeData = useSelector((state: any) => state.resume);
@@ -70,7 +70,14 @@ const useGetPrimarySkills = (setRegenerating: any) => {
         }
         showSuccessToast("Generated Successfully");
       } else {
-        showErrorToast("You ran out of credits!");
+        if (resp.status === 429) {
+          showErrorToast("You ran out of credits!");
+          if(setOutOfCredits !== ""){
+            setOutOfCredits(true);
+          }
+        } else {
+          showErrorToast("Error in generating skills!");
+        }
         setRegenerating(false);
       }
     });

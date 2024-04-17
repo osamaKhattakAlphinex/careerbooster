@@ -18,6 +18,8 @@ import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import DownloadService from "@/helpers/downloadFile";
 import { EditIcon } from "@/helpers/iconsProvider";
 import { setLinkedInHeadline } from "@/store/linkedInHeadLineSlice";
+import TourBot from "../TourBot";
+import { useTourContext } from "@/context/TourContext";
 
 const SubHeadlineGenerator = () => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
@@ -28,6 +30,7 @@ const SubHeadlineGenerator = () => {
   const componentRef = useRef<any>();
   const { setAvailableCredits } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
+  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
 
   const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
   const copyHeadline = async (text: string) => {
@@ -47,10 +50,35 @@ const SubHeadlineGenerator = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const linkedinHeadline = useSelector((state: any) => state.linkedinHeadline);
+  const { tourBotRef,availableCreditsRef } = useTourContext();
 
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
+
+  const tourBotConfig2 = {
+    name: "resumeBuilder",
+    audios: [
+      {
+        url: "/OutOfCredits.mp3",
+        for: "history",
+      },
+    ],
+    toolRefs: [
+      {
+        ref: availableCreditsRef,
+        for: "history",
+      },
+    ],
+  };
+
+  useEffect(() => {
+    if (outOfCredits) {
+      setTimeout(() => {
+        tourBotRef?.current?.click();
+      }, 500);
+    }
+  }, [outOfCredits]);
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -120,8 +148,13 @@ const SubHeadlineGenerator = () => {
             );
           } else {
             const res = await resp.json();
-            setStreamedData(res.result + "! You ran out of Credits");
-            showErrorToast("Failed to generate linkedin Headline");
+            if(resp.status === 429){
+              setStreamedData(res.result + "! You ran out of Credits");
+              showErrorToast("You ran out of Credits!")
+              setOutOfCredits(true);
+            }else{
+              showErrorToast("Failed to generate linkedin Headline");
+            }
           }
           setMsgLoading(false);
         })
@@ -205,6 +238,8 @@ const SubHeadlineGenerator = () => {
       }
     }
   }, [isEditing]);
+
+  
 
   // when page (session) loads, fetch user data if not exists
   useEffect(() => {
@@ -471,6 +506,7 @@ const SubHeadlineGenerator = () => {
           Credit Limit Reached !
         </div>
       )}
+      {outOfCredits &&  <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits}/>}
     </>
   );
 };

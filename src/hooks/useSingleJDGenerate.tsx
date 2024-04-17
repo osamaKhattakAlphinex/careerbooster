@@ -2,7 +2,6 @@
 import useGetUserData from "./useGetUserData";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setCustomExperienceArray,
   setState,
   setWorkExperience,
   setWorkExperienceArray,
@@ -12,7 +11,7 @@ import useSaveResumeToDB from "./useSaveToDB";
 import useGetCreditLimits from "./useGetCreditLimits";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
-const useSingleJDGenerate = (setStreamedJDData: any,setStreamedCustomData:any="") => {
+const useSingleJDGenerate = (setStreamedJDData: any,setOutOfCredits:any ="") => {
   const { getUserDataIfNotExists } = useGetUserData();
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
@@ -86,8 +85,15 @@ const useSingleJDGenerate = (setStreamedJDData: any,setStreamedCustomData:any=""
           achievementTemp += text;
         }
       } else {
+        if (res.status === 429) {
+          showErrorToast("You ran out of credits!");
+          if(setOutOfCredits !== ""){
+            setOutOfCredits(true);
+          }
+        }else{
+          showErrorToast("Error in generating work experience");
+        }
         setStreamedJDData("");
-        showErrorToast("You ran out of credits!");
         dispatch(setWorkExperienceArray({ workExperienceArray: workExpArray }));
         dispatch(setState({ name: "resumeLoading", value: false }));
       }
@@ -111,87 +117,87 @@ const useSingleJDGenerate = (setStreamedJDData: any,setStreamedCustomData:any=""
       }
     }
   };
-  const getOneCustomWorkExperienceNew = async (customSection: any, customInd:number) => {
+  // const getOneCustomWorkExperienceNew = async (customSection: any, customInd:number) => {
 
-    let updatedCustomExp: any = [...resumeData.customExperienceArray];
-    let newUpdatedCustomExp: any ={...updatedCustomExp[customInd]}
-    let newUpdatedCustomExpEntries: any = [...newUpdatedCustomExp.entries];
+  //   let updatedCustomExp: any = [...resumeData.customExperienceArray];
+  //   let newUpdatedCustomExp: any ={...updatedCustomExp[customInd]}
+  //   let newUpdatedCustomExpEntries: any = [...newUpdatedCustomExp.entries];
 
-    if (customSection && newUpdatedCustomExpEntries.length) {
-      oneWorkExpIndex = newUpdatedCustomExpEntries.findIndex(
-        (workExp: any) => JSON.stringify(workExp) === JSON.stringify(customSection)
-      );
-    }
+  //   if (customSection && newUpdatedCustomExpEntries.length) {
+  //     oneWorkExpIndex = newUpdatedCustomExpEntries.findIndex(
+  //       (workExp: any) => JSON.stringify(workExp) === JSON.stringify(customSection)
+  //     );
+  //   }
 
-    await getUserDataIfNotExists();
-    await getCreditLimitsIfNotExists();
-    if (userData.isFetched) {
-      let workExpArrObj: any = {};
+  //   await getUserDataIfNotExists();
+  //   await getCreditLimitsIfNotExists();
+  //   if (userData.isFetched) {
+  //     let workExpArrObj: any = {};
 
-      workExpArrObj.title = customSection?.title;
+  //     workExpArrObj.title = customSection?.title;
 
-      workExpArrObj.cityState = customSection?.cityState;
-      workExpArrObj.country = customSection?.country;
-      workExpArrObj.fromMonth = customSection?.fromMonth;
-      workExpArrObj.fromYear = customSection?.fromYear;
-      workExpArrObj.isContinue = customSection?.isContinue;
-      workExpArrObj.toMonth = customSection?.toMonth;
-      workExpArrObj.toYear = customSection?.toYear;
+  //     workExpArrObj.cityState = customSection?.cityState;
+  //     workExpArrObj.country = customSection?.country;
+  //     workExpArrObj.fromMonth = customSection?.fromMonth;
+  //     workExpArrObj.fromYear = customSection?.fromYear;
+  //     workExpArrObj.isContinue = customSection?.isContinue;
+  //     workExpArrObj.toMonth = customSection?.toMonth;
+  //     workExpArrObj.toYear = customSection?.toYear;
 
-      let achievementTemp = "";
-      const res: any = await fetch("/api/resumeBots/getCustomSingleDetails", {
-        method: "POST",
-        body: JSON.stringify({
-          personName: userData.firstName + " " + userData.lastName,
-          creditsUsed: creditLimits.resume_basicInfo,
-          jobPosition: resumeData.state.jobPosition,
-          data: customSection,
-        }),
-      });
+  //     let achievementTemp = "";
+  //     const res: any = await fetch("/api/resumeBots/getCustomSingleDetails", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         personName: userData.firstName + " " + userData.lastName,
+  //         creditsUsed: creditLimits.resume_basicInfo,
+  //         jobPosition: resumeData.state.jobPosition,
+  //         data: customSection,
+  //       }),
+  //     });
 
-      if (res.ok) {
-        const reader = res.body.getReader();
-        setStreamedCustomData(" ");
+  //     if (res.ok) {
+  //       const reader = res.body.getReader();
+  //       setStreamedCustomData(" ");
 
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) {
-            break;
-          }
+  //       while (true) {
+  //         const { done, value } = await reader.read();
+  //         if (done) {
+  //           break;
+  //         }
 
-          const text = new TextDecoder().decode(value);
+  //         const text = new TextDecoder().decode(value);
 
-          setStreamedCustomData((prev: any) => prev + text);
-          achievementTemp += text;
-        }
-      } else {
-        setStreamedCustomData("");
-        showErrorToast("You ran out of credits!");
-        dispatch(setCustomExperienceArray(updatedCustomExp));
-        dispatch(setState({ name: "resumeLoading", value: false }));
-      }
+  //         setStreamedCustomData((prev: any) => prev + text);
+  //         achievementTemp += text;
+  //       }
+  //     } else {
+  //       setStreamedCustomData("");
+  //       showErrorToast("You ran out of credits!");
+  //       dispatch(setCustomExperienceArray(updatedCustomExp));
+  //       dispatch(setState({ name: "resumeLoading", value: false }));
+  //     }
 
-      if (achievementTemp.length > 0) {
-        setStreamedCustomData((prev: any) => prev + `</div> <br /> `);
-        const achivementsArray = fetchLIstOfStrings(achievementTemp);
-        workExpArrObj.achievements = achivementsArray;
+  //     if (achievementTemp.length > 0) {
+  //       setStreamedCustomData((prev: any) => prev + `</div> <br /> `);
+  //       const achivementsArray = fetchLIstOfStrings(achievementTemp);
+  //       workExpArrObj.achievements = achivementsArray;
 
-        newUpdatedCustomExpEntries.splice(oneWorkExpIndex, 1, workExpArrObj);
-        newUpdatedCustomExp.entries = newUpdatedCustomExpEntries;
-        updatedCustomExp[customInd]= newUpdatedCustomExp
-        saveResumeToDB({
-          ...resumeData,
-          customExperienceArray: updatedCustomExp,
-        });
-        dispatch(setCustomExperienceArray(updatedCustomExp));
-        dispatch(setState({ name: "resumeLoading", value: false }));
-        showSuccessToast("Generated Successfully");
-        setStreamedCustomData("");
-      }
-    }
-  };
+  //       newUpdatedCustomExpEntries.splice(oneWorkExpIndex, 1, workExpArrObj);
+  //       newUpdatedCustomExp.entries = newUpdatedCustomExpEntries;
+  //       updatedCustomExp[customInd]= newUpdatedCustomExp
+  //       saveResumeToDB({
+  //         ...resumeData,
+  //         customExperienceArray: updatedCustomExp,
+  //       });
+  //       dispatch(setCustomExperienceArray(updatedCustomExp));
+  //       dispatch(setState({ name: "resumeLoading", value: false }));
+  //       showSuccessToast("Generated Successfully");
+  //       setStreamedCustomData("");
+  //     }
+  //   }
+  // };
 
-  return { getOneWorkExperienceNew ,getOneCustomWorkExperienceNew};
+  return { getOneWorkExperienceNew };
 };
 
 export default useSingleJDGenerate;

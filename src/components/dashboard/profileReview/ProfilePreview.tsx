@@ -3,13 +3,24 @@ import EducationCard from "./EducationCard";
 import { useDispatch, useSelector } from "react-redux";
 import { EditIcon, addressIcon } from "@/helpers/iconsProvider";
 import { setActiveStep, setStepFive } from "@/store/registerSlice";
-import { Education, WorkExperience } from "@/store/userDataSlice";
+import {
+  Education,
+  Publication,
+  Certification,
+  WorkExperience,
+  Award,
+  Reference,
+  Training,
+  Interest,
+  Language,
+} from "@/store/userDataSlice";
 import ExperienceCard from "./ExperienceCard";
-import SectionCard from "./SectionCard";
+import RecordCard from "./RecordCard";
 
 const ProfilePreview = () => {
   const dispatch = useDispatch();
   const data = useSelector((state: any) => state.register);
+  console.log("Data", data);
 
   return (
     <div className="">
@@ -194,7 +205,167 @@ const ProfilePreview = () => {
         </div>
       </section>
 
+      {/* Publications */}
+      {data.stepEight.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            Publications
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepEight.list.map(
+              (publication: Publication, index: number) => (
+                <RecordCard rec={publication} />
+              )
+            )}
+          </div>
+        </section>
+      )}
+      {/* Certifications */}
+      {data.stepEight.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            Certifications
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepSix.list.map(
+              (certification: Certification, index: number) => (
+                <RecordCard rec={certification} />
+              )
+            )}
+          </div>
+        </section>
+      )}
+      {/* Awards */}
+      {data.stepNine.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            Awards
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepNine.list.map((award: Award, index: number) => (
+              <RecordCard rec={award} />
+            ))}
+          </div>
+        </section>
+      )}
+      {/* References */}
+      {data.stepTwelve.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            References
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepTwelve.list.map((reference: Reference, index: number) => (
+              <RecordCard rec={reference} />
+            ))}
+          </div>
+        </section>
+      )}
+      {/* Trainings */}
+      {data.stepSeven.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            Trainings
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepSeven.list.map((training: Training, index: number) => (
+              <RecordCard rec={training} />
+            ))}
+            {data.stepEight.list.length === 0 && <p>No Trainings Found</p>}
+          </div>
+        </section>
+      )}
+      {/* Interests & Hobbies */}
+      {data.stepTen.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            Interests & Hobbies
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepTen.list.map((interest: Interest, index: number) => (
+              <RecordCard rec={interest} />
+            ))}
+          </div>
+        </section>
+      )}
+      {/* Languages */}
+      {data.stepEleven.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            Languages
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepEleven.list.map((language: Language, index: number) => (
+              <RecordCard rec={language} />
+            ))}
+          </div>
+        </section>
+      )}
       {/* Education */}
+
       <section className="mb-8 ">
         <h2 className="text-xl font-semibold  dark:text-gray-100 text-gray-950">
           Education
@@ -216,7 +387,6 @@ const ProfilePreview = () => {
         </div>
       </section>
 
-
       {/* Custom Section  */}
       {/* <section className="mb-8 ">
         <h2 className="text-xl font-semibold  dark:text-gray-100 text-gray-950">
@@ -232,16 +402,7 @@ const ProfilePreview = () => {
           </button>
         </h2>
         <div className="">
-          {data.stepCustom?.map((singleStep: any, index: number) => {
-            return (
-              <SectionCard
-                key={index}
-                index={index}
-                singleStep={singleStep}
-                showButtons={false}
-              />
-            );
-          })}
+          
         </div>
       </section> */}
 

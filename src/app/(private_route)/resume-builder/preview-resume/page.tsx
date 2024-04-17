@@ -5,6 +5,9 @@ import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
 import { useSearchParams } from "next/navigation";
 import { getTemplates } from "@/components/dashboard/resume-templates/static-templates";
+import { formatDate, getFormattedDate } from "@/helpers/getFormattedDateTime";
+import Link from "next/link";
+import { leftArrowIcon } from "@/helpers/iconsProvider";
 const Page = () => {
   const params = useSearchParams();
   const [scale, setScale] = useState<number>(1);
@@ -26,14 +29,9 @@ const Page = () => {
     }
   }, [templateId, resumeId]);
 
-  useEffect(() => {
-    console.log("resume", resumeData);
-  }, [resumeData]);
-
-  const { components, templateLayout, cvHeadings } = template;
+  const { components, templateLayout, cvHeadings, GenerationOrder } = template;
 
   let newCvHeadings: any = [];
-  
 
   for (const singleHeading of Object.entries(resumeData.headings)) {
     const [key, value] = singleHeading;
@@ -46,17 +44,8 @@ const Page = () => {
       newCvHeadings.push(singleValue);
     }
   }
-  
-  const GenerationOrder = [
-    "shortName",
-    "name",
-    "jobTitle",
-    "contact",
-    "primarySkills",
-    "summary",
-    "workExperienceArray",
-    "education",
-  ];
+
+  const dates = ["date", "startDate", "endDate"];
 
   let spans: any = [];
   let currentPageIndex = 0;
@@ -78,19 +67,51 @@ const Page = () => {
       setCvMaxHeight(unscaledHeight + 100); // Set the scaled down height plus 100 (adjust as needed)
     }
   };
-
   const cleanUpHTML = (page: any) => {
-    const cleanUpIds = [
-      "shortName",
-      "email",
-      "linkedIn",
-      "phone",
-      "address",
-      "primarySkills",
-      "name",
-      "jobTitle",
-      "summary",
-    ];
+    let cleanUpIds: any = [];
+    const templateNo = page.getAttribute("data-template-no");
+    if (
+      templateNo === "4" ||
+      templateNo === "9" ||
+      templateNo === "14" ||
+      templateNo === "15"
+    ) {
+      cleanUpIds = [
+        "shortName",
+        "email",
+        "linkedIn",
+        "phone",
+        "address",
+        "primarySkills",
+        "name",
+        "jobTitle",
+        "summary",
+        "languages",
+        "interests",
+        "trainings",
+        "publications",
+        "certifications",
+        "awards",
+        "workExperienceArray",
+      ];
+    } else {
+      cleanUpIds = [
+        "shortName",
+        "email",
+        "linkedIn",
+        "phone",
+        "address",
+        "primarySkills",
+        "name",
+        "jobTitle",
+        "summary",
+        "trainings",
+        "publications",
+        "certifications",
+        "awards",
+        "workExperienceArray",
+      ];
+    }
 
     const containerNames = [
       "header",
@@ -99,7 +120,14 @@ const Page = () => {
       "contact",
       "workExperienceArray",
       "education",
+      "publications",
       "sideBar",
+      "languages",
+      "interests",
+      "trainings",
+      "awards",
+      "references",
+      "certifications",
       "body",
     ];
 
@@ -187,6 +215,88 @@ const Page = () => {
 
   const canFitEducation = (page: any, educationHeading: any) => {
     return educationHeading.offsetTop + 140 < page.clientHeight;
+  };
+
+  const referencesDivs = (page: any, nextPage?: any) => {
+    const referencesDivs = document.querySelectorAll(
+      "[data-references-container-index]"
+    );
+    const pageId = page.getAttribute("id");
+    let newDiv;
+    newDiv = document.createElement("div");
+    newDiv.setAttribute("data-container-name", "references");
+    setStylesToElement(newDiv, "m-2 flex gap-4 flex-wrap w-full");
+    let newNextDiv;
+    newNextDiv = document.createElement("div");
+    newNextDiv.setAttribute("data-container-name", "references");
+    setStylesToElement(newNextDiv, "px-6 m-2 flex flex-wrap gap-4 w-full");
+    const getReferencesHeading = page.querySelector(
+      "h2[data-name='references']"
+    );
+    if (getReferencesHeading) {
+      let indicatorDiv = document.createElement("span");
+      indicatorDiv.setAttribute("data-container-name", "references-indicator");
+      indicatorDiv.textContent = "indicator";
+      setStylesToElement(indicatorDiv, "w-full h-2 bg-red-600");
+      getReferencesHeading.parentNode.insertBefore(
+        indicatorDiv,
+        getReferencesHeading.nextSibling
+      );
+      let isSpaceAvailable = canFitEducation(page, indicatorDiv);
+      let rowItemCount = 1;
+      for (const singleReferences of Array.from(referencesDivs)) {
+        if (isSpaceAvailable && rowItemCount <= 3) {
+          if (pageId === "page-0") {
+            singleReferences.className = singleReferences.className.replace(
+              "w-[30%]",
+              "w-[45%]"
+            );
+          }
+          newDiv.appendChild(singleReferences);
+          getReferencesHeading.parentNode.insertBefore(
+            newDiv,
+            getReferencesHeading.nextSibling
+          );
+          rowItemCount++;
+        } else {
+          isSpaceAvailable = canFitEducation(page, indicatorDiv);
+          if (isSpaceAvailable) {
+            rowItemCount = 1;
+            newDiv.appendChild(singleReferences);
+            getReferencesHeading.parentNode.insertBefore(
+              newDiv,
+              getReferencesHeading.nextSibling
+            );
+
+            rowItemCount++;
+          } else {
+            if (nextPage) {
+              let referenceDiv = nextPage.querySelector(
+                '[data-container-name="references"]'
+              );
+              if (referenceDiv) {
+                referenceDiv.appendChild(singleReferences);
+              } else {
+                newNextDiv.appendChild(singleReferences);
+                nextPage.append(newNextDiv);
+              }
+            }
+          }
+        }
+      }
+
+      let elementsToRemove = document.querySelectorAll(
+        '[data-container-name="references-indicator"]'
+      );
+
+      if (nextPage) {
+        cleanUpLastPageHTML(nextPage);
+      }
+      // Loop through each matching element and remove it from the DOM
+      elementsToRemove.forEach((element: any) => {
+        element.parentNode.removeChild(element);
+      });
+    }
   };
   const educationDivs = (page: any, nextPage?: any) => {
     const educationDivs = document.querySelectorAll(
@@ -319,7 +429,7 @@ const Page = () => {
   };
 
   const createElements = (obj: any) => {
-    const [key, value] = obj;
+    let [key, value] = obj;
 
     //   append the attribute to the elements
 
@@ -360,11 +470,15 @@ const Page = () => {
                   for (const singleAchievement of singleItem[element.id]) {
                     newAttr.push({ [`${key}-${element.id}-${i}-index`]: k });
                     const _element = document.createElement(element.tag);
+
                     setAttributesToElem(attr, _element);
                     setAttributesToElem(
                       [{ [`${key}-index`]: i }, { [`${element.id}-index`]: k }],
                       _element
                     );
+
+                    // console.log("singleAchivemnt", singleAchievement);
+
                     _element.textContent = singleAchievement;
                     const styles = element.styles;
                     setStylesToElement(_element, styles);
@@ -399,9 +513,17 @@ const Page = () => {
                       const singlespan = document.createElement(item.tag);
                       setAttributesToElem(attr, singlespan);
                       const styles = item.styles;
-                      //
+
                       setStylesToElement(singlespan, styles);
-                      singlespan.textContent = singleItem[item.id];
+
+                      if (dates.includes(item.id)) {
+                        singlespan.textContent = formatDate(
+                          singleItem[item.id]
+                        );
+                      } else {
+                        singlespan.textContent = singleItem[item.id];
+                      }
+
                       container_element.append(singlespan);
                     }
                     if (item.container) {
@@ -474,7 +596,6 @@ const Page = () => {
 
   const generateLayout = (page: any) => {
     const currentPage = page.getAttribute("id").split("-").pop();
-
     for (let templatepart in templateLayout) {
       if (templatepart === "styles") {
         setStylesToElement(page, templateLayout[templatepart]);
@@ -544,6 +665,7 @@ const Page = () => {
 
   const getToNode = (span: any, attribute: any, page: any) => {
     const currentPage = page.getAttribute("id").split("-").pop();
+
     for (const p of parts[currentPage]) {
       const [[key, value]]: any = Object.entries(p);
 
@@ -553,7 +675,14 @@ const Page = () => {
         if (
           attribute === "primarySkills" ||
           attribute === "education" ||
-          attribute === "workExperienceArray"
+          attribute === "workExperienceArray" ||
+          attribute === "publications" ||
+          attribute === "certifications" ||
+          attribute === "awards" ||
+          attribute === "trainings" ||
+          attribute === "interests" ||
+          attribute === "references" ||
+          attribute === "languages"
         ) {
           value.appendChild(span);
           findChild.textContent = "";
@@ -571,6 +700,7 @@ const Page = () => {
   function FinalizeGeneration(span: any, page: any) {
     const attribute = span.getAttribute("data-name");
     const isItBefore = isContentBleeding(page, "before");
+
     if (attribute && !isItBefore) {
       getToNode(span, attribute, page);
     }
@@ -584,10 +714,8 @@ const Page = () => {
   }
 
   const generate = (jsonData: any) => {
-    console.log(jsonData)
     const newJsonObject: any = {};
-
-    GenerationOrder.forEach((key) => {
+    GenerationOrder.forEach((key: any) => {
       if (jsonData.hasOwnProperty(key)) {
         newJsonObject[key] = jsonData[key];
       }
@@ -628,7 +756,6 @@ const Page = () => {
 
         if (gen) {
           const latestPage = newPage();
-
           generateLayout(latestPage);
           currentPageIndex = pages.length - 1;
           if (leftSpan.length > 0) {
@@ -639,11 +766,13 @@ const Page = () => {
             leftSpan.pop();
           }
         }
-      });
-    }, 1000);
+      }, 100);
+    });
+
     setTimeout(() => {
       pages.map((page: any, index: any) => {
         educationDivs(pages[index], pages[index + 1]);
+        referencesDivs(pages[index], pages[index + 1]);
         setSidebarHeight(pages[index]);
         checkOverflow(index);
         cleanUpHTML(page);
@@ -672,7 +801,14 @@ const Page = () => {
       className="lg:ml-[234px] ml-0"
       style={{ maxHeight: `${cvMaxHeight}px` }}
     >
-      <div className="flex items-center justify-center gap-3 xs:pb-0 md:pb-4">
+      <div className="container flex items-center justify-between gap-3 xs:pb-0 md:pb-4">
+      <Link
+        href={`/resume-builder/templates/template?templateId=${templateId}`}
+        className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center hover:opacity-80 transition-all"
+      >
+        {leftArrowIcon}
+        Back
+      </Link>
         <DownloadService
           componentRef={cvRef}
           fileName={fileName}

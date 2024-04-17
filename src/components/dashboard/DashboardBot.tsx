@@ -4,26 +4,87 @@ import React, { useEffect, useRef, useState } from "react";
 import "@/app/(private_route)/dashboard.css";
 import { useTourContext } from "@/context/TourContext";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
+import { useSelector } from "react-redux";
+import { crossIcon, crossIconSmall } from "@/helpers/iconsProvider";
 interface TooltipProps {
   text: string;
   children: React.ReactNode;
   audioPlayed: boolean;
+  isAudioPlaying: boolean;
+  subtitleText: string;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
+const Tooltip: React.FC<TooltipProps> = ({
+  text,
+  children,
+  audioPlayed,
+  isAudioPlaying,
+  subtitleText,
+}) => {
   const [showTooltip, setShowTooltip] = useState(true);
-
+  const [chunkIndex, setChunkIndex] = useState<number>(0);
   const toggleTooltip = () => {
     setShowTooltip(!showTooltip);
+  };
+  useEffect(() => {
+    // Reset chunk index when audio is not playing
+    if (!isAudioPlaying) {
+      setChunkIndex(0);
+    }
+  }, [isAudioPlaying]);
+  useEffect(() => {
+    setChunkIndex(0);
+  }, [subtitleText]);
+  useEffect(() => {
+    // Change chunk of subtitle text after a short duration
+    if (isAudioPlaying) {
+      const timer = setTimeout(() => {
+        setChunkIndex((prevIndex) => prevIndex + 1);
+      }, 1100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isAudioPlaying, chunkIndex]);
+
+  // Function to split subtitle text into chunks
+  const getSubtitleChunk = () => {
+    const words = subtitleText?.split(" ");
+    if (words?.length) {
+      const chunkSize = 3; // Adjust this to change the chunk size
+      const startIndex = chunkIndex * chunkSize;
+      const endIndex = Math.min(startIndex + chunkSize, words.length);
+      return words.slice(startIndex, endIndex).join(" ");
+    }
   };
 
   return (
     <div onClick={toggleTooltip} className="relative inline-block">
       {children}
-      {showTooltip && !audioPlayed && (
+      {showTooltip && !audioPlayed ? (
         <div className="absolute px-2 py-1 text-white transform -translate-x-1/2 bg-black rounded bottom-full left-1/2 w-max bg-opacity-80 md:text-base xs:text-xs">
-          {text}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+            />
+          </svg>
         </div>
+      ) : (
+        <>
+          {isAudioPlaying && (
+            <div className="absolute px-2 py-1 text-white transform -translate-x-1/2 bg-black rounded bottom-full left-1/2 w-max bg-opacity-80 md:text-base xs:text-xs">
+              {getSubtitleChunk()}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
@@ -31,17 +92,27 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
 
 // const DashboardBot: React.FC<DashboardBotProps> = ({ firstName, lastName }) => {
 const DashboardBot = () => {
+  const userData = useSelector((state: any) => state.userData);
   const [isGif, setIsGif] = useState(false);
   const [audioPlayed, setAudioPlayed] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [audioBuffers, setAudioBuffers] = useState<any>([]);
   const [audioCounter, setAudioCounter] = useState<number>(0);
+  const [showBot, setShowBot] = useState(true);
+  const [subTitleCounter, setSubtitleCounter] = useState<number>(0);
   const componentRef: any = useRef(null);
   const audioFileUrl1 = "/speech_dashboard.mp3";
   const audioFileUrl2 = "/speech_resume_card.mp3";
   const audioFileUrl3 = "/speech_cover_letter_card.mp3";
   const audioFileUrl4 = "/speech_linkedin_card.mp3";
   const audioFileUrl5 = "/speech_other_cards.mp3";
+  const subtitles = [
+    "Hey! This page is our main dashboard where you can access all the features we provide.",
+    "This card will lead you to resume section where you can create AI powered resumes for your targeted job position.",
+    "Next, we have cover letters section where you can create professional cover letters for any job position.",
+    "And this one is our linkedin optimization tool which helps in boosting your linkedin profile to increase visibility for recruiters.",
+    "Other than these we have email generation, bid generation and other features which you can explore in our dashboard.",
+  ];
   const { updateSaveHook } = useUpdateAndSave();
   const { updateAndSaveTourStatus } = updateSaveHook;
 
@@ -173,7 +244,7 @@ const DashboardBot = () => {
         setIsGif(false);
         if (isAudioPlaying) {
           componentRef.current.pause();
-          // setAudioCounter(0);
+          setShowBot(false);
           removeStyles();
           setIsAudioPlaying(false);
         }
@@ -189,6 +260,7 @@ const DashboardBot = () => {
 
       if (!isAudioPlaying) {
         // If audio is not playing, load and play it
+        setShowBot(true);
         setIsGif(true);
         setIsAudioPlaying(true);
         setAudioPlayed(true);
@@ -208,12 +280,13 @@ const DashboardBot = () => {
       }
     } catch (error) {
       console.log("Error: ", error);
-    } finally {
-      updateAndSaveTourStatus({ dashboard: true });
     }
   };
 
   useEffect(() => {
+    if (audioCounter === 1 && !userData.tours?.dashboard) {
+      updateAndSaveTourStatus({ dashboard: true });
+    }
     if (audioBuffers.length > 0 && audioCounter < audioBuffers.length) {
       const audioUrl = focusTool(
         audioBuffers[audioCounter].arrayBufferView,
@@ -224,9 +297,12 @@ const DashboardBot = () => {
     }
 
     if (audioCounter !== 0 && audioCounter === audioBuffers.length) {
+      setShowBot(false);
+      localStorage.setItem("botHidden", "true");
       componentRef.current.pause();
       removeStyles();
       setAudioCounter(0);
+      setSubtitleCounter(0);
       setAudioBuffers([]);
       setIsGif(false);
       setIsAudioPlaying(false);
@@ -234,10 +310,17 @@ const DashboardBot = () => {
   }, [audioBuffers, audioCounter]);
 
   useEffect(() => {
+    if (localStorage.getItem("botHidden") === "true") {
+      setShowBot(false);
+    }
+  }, []);
+
+  useEffect(() => {
     const audio = componentRef.current;
 
     const handleAudioEnded = () => {
       setAudioCounter((prev) => prev + 1);
+      setSubtitleCounter((prev) => prev + 1);
     };
 
     audio.addEventListener("ended", handleAudioEnded);
@@ -246,29 +329,63 @@ const DashboardBot = () => {
       audio.removeEventListener("ended", handleAudioEnded);
     };
   }, []);
-
   return (
     <div
       ref={(ref: any) => (tourBotRef.current = ref)}
-      className={`fixed bottom-4 right-4 mr-4 mb-4 cursor-pointer z-10 avatar-animate`}
+      className={`fixed bottom-4 ${
+        showBot
+          ? "right-4 transition-all ease-in-out duration-500"
+          : "xs:-right-20 lg:-right-40 transition-all ease-in-out duration-500"
+      }  mr-4 mb-4 cursor-pointer z-10 avatar-animate`}
       onClick={handleClick}
     >
-      <Tooltip text="Need Help? Click me" audioPlayed={audioPlayed}>
+      <Tooltip
+        text="!"
+        audioPlayed={audioPlayed}
+        isAudioPlaying={isAudioPlaying}
+        subtitleText={subtitles[subTitleCounter]}
+      >
         <Image
           src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
           alt="GIF"
           width={200}
           height={200}
-          className="botImage xs:hidden md:hidden lg:block"
+          className={`botImage ${
+            showBot
+              ? "transition-all ease-in-out duration-500"
+              : "transform -rotate-90 transition-transform duration-300 ease-in-out "
+          } xs:hidden md:hidden lg:block`}
         />
         <Image
           src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
           alt="GIF"
           width={100}
           height={100}
-          className="botImage xs:block md:block lg:hidden"
+          className={`botImage ${
+            showBot
+              ? ""
+              : "transform -rotate-90 transition-transform duration-300 ease-in-out "
+          } xs:block md:block lg:hidden`}
         />
+        <button
+          className="absolute right-0 top-0 bg-black rounded-full p-0.5"
+          title="Hide"
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowBot(false);
+            localStorage.setItem("botHidden", "true");
+            setIsGif(false);
+            if (isAudioPlaying) {
+              componentRef.current.pause();
+              removeStyles();
+              setIsAudioPlaying(false);
+            }
+          }}
+        >
+          {crossIconSmall}
+        </button>
       </Tooltip>
+
       <audio className="hidden" ref={componentRef} controls />
     </div>
   );

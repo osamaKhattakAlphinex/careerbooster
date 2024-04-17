@@ -21,6 +21,8 @@ import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import { setLinkedKeywords } from "@/store/linkedInKeywordsSlice";
 import DownloadService from "@/helpers/downloadFile";
 import { EditIcon } from "@/helpers/iconsProvider";
+import { useTourContext } from "@/context/TourContext";
+import TourBot from "../TourBot";
 
 const SubKeywordsGenerator = () => {
   const componentRef = useRef<any>(null);
@@ -54,11 +56,37 @@ const SubKeywordsGenerator = () => {
   const userData = useSelector((state: any) => state.userData);
   const linkedinKeywords = useSelector((state: any) => state.linkedinKeywords);
   const creditLimits = useSelector((state: any) => state.creditLimits);
+  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
+  const { tourBotRef,availableCreditsRef } = useTourContext();
+
 
   const handleClick = () => {
     setIsEditing((prevState) => !prevState);
   };
 
+  const tourBotConfig2 = {
+    name: "resumeBuilder",
+    audios: [
+      {
+        url: "/OutOfCredits.mp3",
+        for: "history",
+      },
+    ],
+    toolRefs: [
+      {
+        ref: availableCreditsRef,
+        for: "history",
+      },
+    ],
+  };
+
+  useEffect(() => {
+    if (outOfCredits) {
+      setTimeout(() => {
+        tourBotRef?.current?.click();
+      }, 500);
+    }
+  }, [outOfCredits]);
   const handleSave = async () => {
     let _linkedinKeywordsText = "";
 
@@ -171,8 +199,13 @@ const SubKeywordsGenerator = () => {
             );
           } else {
             const res = await resp.json();
-            setStreamedData(res.result + "! You ran out of Credits");
-            showErrorToast("Failed to generate Linkedin Keywords");
+            if(resp.status === 429){
+              setStreamedData(res.result + "! You ran out of Credits");
+              showErrorToast("You ran out of Credits!")
+              setOutOfCredits(true);
+            }else{
+              showErrorToast("Failed to generate linkedin Headline");
+            }
           }
           setMsgLoading(false);
         })
@@ -483,6 +516,8 @@ const SubKeywordsGenerator = () => {
           Credit Limit Reached !
         </div>
       )}
+      {outOfCredits &&  <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits}/>}
+
     </>
   );
 };
