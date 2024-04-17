@@ -223,7 +223,7 @@ const ProfilePreview = () => {
           <div className="w-[100%] grid md:grid-cols-2 gap-4">
             {data.stepEight.list.map(
               (publication: Publication, index: number) => (
-                <RecordCard rec={publication} />
+                <RecordCard rec={publication} key={index} />
               )
             )}
           </div>
@@ -247,7 +247,7 @@ const ProfilePreview = () => {
           <div className="w-[100%] grid md:grid-cols-2 gap-4">
             {data.stepSix.list.map(
               (certification: Certification, index: number) => (
-                <RecordCard rec={certification} />
+                <RecordCard rec={certification} key={index}/>
               )
             )}
           </div>
@@ -270,7 +270,7 @@ const ProfilePreview = () => {
           </h2>
           <div className="w-[100%] grid md:grid-cols-2 gap-4">
             {data.stepNine.list.map((award: Award, index: number) => (
-              <RecordCard rec={award} />
+              <RecordCard rec={award} key={index}/>
             ))}
           </div>
         </section>
@@ -292,7 +292,7 @@ const ProfilePreview = () => {
           </h2>
           <div className="w-[100%] grid md:grid-cols-2 gap-4">
             {data.stepTwelve.list.map((reference: Reference, index: number) => (
-              <RecordCard rec={reference} />
+              <RecordCard rec={reference} key={index}/>
             ))}
           </div>
         </section>
@@ -314,7 +314,7 @@ const ProfilePreview = () => {
           </h2>
           <div className="w-[100%] grid md:grid-cols-2 gap-4">
             {data.stepSeven.list.map((training: Training, index: number) => (
-              <RecordCard rec={training} />
+              <RecordCard rec={training} key={index}/>
             ))}
             {data.stepEight.list.length === 0 && <p>No Trainings Found</p>}
           </div>
@@ -337,7 +337,7 @@ const ProfilePreview = () => {
           </h2>
           <div className="w-[100%] grid md:grid-cols-2 gap-4">
             {data.stepTen.list.map((interest: Interest, index: number) => (
-              <RecordCard rec={interest} />
+              <RecordCard rec={interest} key={index}/>
             ))}
           </div>
         </section>
@@ -359,7 +359,7 @@ const ProfilePreview = () => {
           </h2>
           <div className="w-[100%] grid md:grid-cols-2 gap-4">
             {data.stepEleven.list.map((language: Language, index: number) => (
-              <RecordCard rec={language} />
+              <RecordCard rec={language} key={index} />
             ))}
           </div>
         </section>

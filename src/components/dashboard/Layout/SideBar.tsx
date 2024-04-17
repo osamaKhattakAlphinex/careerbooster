@@ -58,6 +58,7 @@ const SideBar = () => {
   const router = useRouter();
   const imageRef = useRef<any>();
   const [image, setImage] = useState<any>(null);
+  const { availableCreditsRef } =   useTourContext();
 
   const imageCroperRef = useRef<any>();
 
@@ -69,8 +70,6 @@ const SideBar = () => {
   const handleMouseOut = () => {
     setHoveredItem(null);
   };
-  const { availableCreditsRef } =
-  useTourContext();
   const handleImageChange = (e: any) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
