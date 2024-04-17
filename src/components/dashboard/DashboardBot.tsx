@@ -62,7 +62,20 @@ const Tooltip: React.FC<TooltipProps> = ({
       {children}
       {showTooltip && !audioPlayed ? (
         <div className="absolute px-2 py-1 text-white transform -translate-x-1/2 bg-black rounded bottom-full left-1/2 w-max bg-opacity-80 md:text-base xs:text-xs">
-          {text}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+            />
+          </svg>
         </div>
       ) : (
         <>
@@ -284,7 +297,7 @@ const DashboardBot = () => {
     }
 
     if (audioCounter !== 0 && audioCounter === audioBuffers.length) {
-      setShowBot(false)
+      setShowBot(false);
       localStorage.setItem("botHidden", "true");
       componentRef.current.pause();
       removeStyles();
@@ -320,7 +333,9 @@ const DashboardBot = () => {
     <div
       ref={(ref: any) => (tourBotRef.current = ref)}
       className={`fixed bottom-4 ${
-        showBot ? "right-4 transition-all ease-in-out duration-500" : "xs:-right-20 lg:-right-40 transition-all ease-in-out duration-500"
+        showBot
+          ? "right-4 transition-all ease-in-out duration-500"
+          : "xs:-right-20 lg:-right-40 transition-all ease-in-out duration-500"
       }  mr-4 mb-4 cursor-pointer z-10 avatar-animate`}
       onClick={handleClick}
     >

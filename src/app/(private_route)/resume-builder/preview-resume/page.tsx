@@ -6,6 +6,8 @@ import DownloadService from "@/helpers/downloadFile";
 import { useSearchParams } from "next/navigation";
 import { getTemplates } from "@/components/dashboard/resume-templates/static-templates";
 import { formatDate, getFormattedDate } from "@/helpers/getFormattedDateTime";
+import Link from "next/link";
+import { leftArrowIcon } from "@/helpers/iconsProvider";
 const Page = () => {
   const params = useSearchParams();
   const [scale, setScale] = useState<number>(1);
@@ -66,27 +68,32 @@ const Page = () => {
     }
   };
   const cleanUpHTML = (page: any) => {
-    let cleanUpIds:any = []
+    let cleanUpIds: any = [];
     const templateNo = page.getAttribute("data-template-no");
-    if(templateNo === "4" || templateNo === "9" || templateNo === "14" || templateNo === "15"){
+    if (
+      templateNo === "4" ||
+      templateNo === "9" ||
+      templateNo === "14" ||
+      templateNo === "15"
+    ) {
       cleanUpIds = [
-       "shortName",
-       "email",
-       "linkedIn",
-       "phone",
-       "address",
-       "primarySkills",
-       "name",
-       "jobTitle",
-       "summary",
-       "languages",
-       "interests",
-       "trainings",
-       "publications",
-       "certifications",
-       "awards",
-       "workExperienceArray",
-     ];
+        "shortName",
+        "email",
+        "linkedIn",
+        "phone",
+        "address",
+        "primarySkills",
+        "name",
+        "jobTitle",
+        "summary",
+        "languages",
+        "interests",
+        "trainings",
+        "publications",
+        "certifications",
+        "awards",
+        "workExperienceArray",
+      ];
     } else {
       cleanUpIds = [
         "shortName",
@@ -267,7 +274,7 @@ const Page = () => {
               let referenceDiv = nextPage.querySelector(
                 '[data-container-name="references"]'
               );
-              if (referenceDiv) {               
+              if (referenceDiv) {
                 referenceDiv.appendChild(singleReferences);
               } else {
                 newNextDiv.appendChild(singleReferences);
@@ -342,15 +349,12 @@ const Page = () => {
 
             rowItemCount++;
           } else {
-            
             if (nextPage) {
-           
               let eduDiv = nextPage.querySelector(
                 '[data-container-name="education"]'
               );
               if (eduDiv) {
                 eduDiv.appendChild(singleEducation);
-              
               } else {
                 newNextDiv.appendChild(singleEducation);
                 nextPage.append(newNextDiv);
@@ -764,7 +768,7 @@ const Page = () => {
         }
       }, 100);
     });
-    
+
     setTimeout(() => {
       pages.map((page: any, index: any) => {
         educationDivs(pages[index], pages[index + 1]);
@@ -797,7 +801,14 @@ const Page = () => {
       className="lg:ml-[234px] ml-0"
       style={{ maxHeight: `${cvMaxHeight}px` }}
     >
-      <div className="flex items-center justify-center gap-3 xs:pb-0 md:pb-4">
+      <div className="container flex items-center justify-between gap-3 xs:pb-0 md:pb-4">
+      <Link
+        href={`/resume-builder/templates/template?templateId=${templateId}`}
+        className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center hover:opacity-80 transition-all"
+      >
+        {leftArrowIcon}
+        Back
+      </Link>
         <DownloadService
           componentRef={cvRef}
           fileName={fileName}

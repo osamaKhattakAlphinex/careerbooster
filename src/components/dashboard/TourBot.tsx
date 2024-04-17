@@ -24,7 +24,22 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
       {children}
       {showTooltip && !audioPlayed && (
         <div className="absolute px-2 py-1 text-white transform -translate-x-1/2 bg-black rounded bottom-full left-1/2 w-max bg-opacity-80 md:text-base xs:text-xs">
-          {text}
+          {/* {text}
+           */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+            />
+          </svg>
         </div>
       )}
     </div>
@@ -114,7 +129,7 @@ const TourBot = ({ config, setOutOfCredits }: any) => {
         }
         return;
       }
-      
+
       if (!isAudioPlaying) {
         // If audio is not playing, load and play it
         setShowBot(true);

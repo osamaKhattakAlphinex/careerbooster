@@ -206,161 +206,166 @@ const ProfilePreview = () => {
       </section>
 
       {/* Publications */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
-          Publications
-          <button
-            type="button"
-            onClick={(e) => {
-              dispatch(setActiveStep(4));
-            }}
-            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
-          >
-            {EditIcon}
-          </button>
-        </h2>
-        <div className="w-[100%] grid md:grid-cols-2 gap-4">
-          {data.stepEight.list.map(
-            (publication: Publication, index: number) => (
-              <RecordCard rec={publication} />
-            )
-          )}
-          {data.stepEight.list.length === 0 && <p>No Publications Found</p>}
-        </div>
-      </section>
+      {data.stepEight.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            Publications
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepEight.list.map(
+              (publication: Publication, index: number) => (
+                <RecordCard rec={publication} />
+              )
+            )}
+          </div>
+        </section>
+      )}
       {/* Certifications */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
-          Certifications
-          <button
-            type="button"
-            onClick={(e) => {
-              dispatch(setActiveStep(4));
-            }}
-            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
-          >
-            {EditIcon}
-          </button>
-        </h2>
-        <div className="w-[100%] grid md:grid-cols-2 gap-4">
-          {data.stepSix.list.map(
-            (certification: Certification, index: number) => (
-              <RecordCard rec={certification} />
-            )
-          )}
-          {data.stepEight.list.length === 0 && <p>No Certifications Found</p>}
-        </div>
-      </section>
+      {data.stepEight.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            Certifications
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepSix.list.map(
+              (certification: Certification, index: number) => (
+                <RecordCard rec={certification} />
+              )
+            )}
+          </div>
+        </section>
+      )}
       {/* Awards */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
-          Awards
-          <button
-            type="button"
-            onClick={(e) => {
-              dispatch(setActiveStep(4));
-            }}
-            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
-          >
-            {EditIcon}
-          </button>
-        </h2>
-        <div className="w-[100%] grid md:grid-cols-2 gap-4">
-          {data.stepNine.list.map((award: Award, index: number) => (
-            <RecordCard rec={award} />
-          ))}
-          {data.stepEight.list.length === 0 && <p>No Award Found</p>}
-        </div>
-      </section>
-
+      {data.stepNine.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            Awards
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepNine.list.map((award: Award, index: number) => (
+              <RecordCard rec={award} />
+            ))}
+          </div>
+        </section>
+      )}
       {/* References */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
-          References
-          <button
-            type="button"
-            onClick={(e) => {
-              dispatch(setActiveStep(4));
-            }}
-            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
-          >
-            {EditIcon}
-          </button>
-        </h2>
-        <div className="w-[100%] grid md:grid-cols-2 gap-4">
-          {data.stepTwelve.list.map((reference: Reference, index: number) => (
-            <RecordCard rec={reference} />
-          ))}
-          {data.stepEight.list.length === 0 && <p>No References Found</p>}
-        </div>
-      </section>
+      {data.stepTwelve.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            References
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepTwelve.list.map((reference: Reference, index: number) => (
+              <RecordCard rec={reference} />
+            ))}
+          </div>
+        </section>
+      )}
       {/* Trainings */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
-          Trainings
-          <button
-            type="button"
-            onClick={(e) => {
-              dispatch(setActiveStep(4));
-            }}
-            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
-          >
-            {EditIcon}
-          </button>
-        </h2>
-        <div className="w-[100%] grid md:grid-cols-2 gap-4">
-          {data.stepSeven.list.map((training: Training, index: number) => (
-            <RecordCard rec={training} />
-          ))}
-          {data.stepEight.list.length === 0 && <p>No Trainings Found</p>}
-        </div>
-      </section>
+      {data.stepSeven.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            Trainings
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepSeven.list.map((training: Training, index: number) => (
+              <RecordCard rec={training} />
+            ))}
+            {data.stepEight.list.length === 0 && <p>No Trainings Found</p>}
+          </div>
+        </section>
+      )}
       {/* Interests & Hobbies */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
-          Interests & Hobbies
-          <button
-            type="button"
-            onClick={(e) => {
-              dispatch(setActiveStep(4));
-            }}
-            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
-          >
-            {EditIcon}
-          </button>
-        </h2>
-        <div className="w-[100%] grid md:grid-cols-2 gap-4">
-          {data.stepTen.list.map((interest: Interest, index: number) => (
-            <RecordCard rec={interest} />
-          ))}
-          {data.stepEight.list.length === 0 && (
-            <p>No Interests & Hobbies Found</p>
-          )}
-        </div>
-      </section>
+      {data.stepTen.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            Interests & Hobbies
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepTen.list.map((interest: Interest, index: number) => (
+              <RecordCard rec={interest} />
+            ))}
+          </div>
+        </section>
+      )}
       {/* Languages */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
-          Languages
-          <button
-            type="button"
-            onClick={(e) => {
-              dispatch(setActiveStep(4));
-            }}
-            className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
-          >
-            {EditIcon}
-          </button>
-        </h2>
-        <div className="w-[100%] grid md:grid-cols-2 gap-4">
-          {data.stepEleven.list.map((language: Language, index: number) => (
-            <RecordCard rec={language} />
-          ))}
-          {data.stepEight.list.length === 0 && <p>No Languages Found</p>}
-        </div>
-      </section>
-
+      {data.stepEleven.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            Languages
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepEleven.list.map((language: Language, index: number) => (
+              <RecordCard rec={language} />
+            ))}
+          </div>
+        </section>
+      )}
       {/* Education */}
+
       <section className="mb-8 ">
         <h2 className="text-xl font-semibold  dark:text-gray-100 text-gray-950">
           Education
