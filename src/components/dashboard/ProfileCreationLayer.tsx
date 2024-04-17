@@ -67,6 +67,13 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       fetchEducationDataFromResume();
       fetchExperienceDataFromResume();
       fetchSkillsDataFromResume();
+      // fetchAwardsDataFromResume();
+      // fetchCertificatesDataFromResume();
+      // fetchInterestsDataFromResume();
+      // fetchLanguagesDataFromResume();
+      // fetchTrainingsDataFromResume();
+      // fetchPublicationsDataFromResume();
+      // fetchReferencesDataFromResume();
     }
   };
 
