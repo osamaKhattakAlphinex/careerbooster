@@ -5,6 +5,7 @@ import "@/app/(private_route)/dashboard.css";
 import { useTourContext } from "@/context/TourContext";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import { useSelector } from "react-redux";
+import { crossIcon, crossIconSmall } from "@/helpers/iconsProvider";
 interface TooltipProps {
   text: string;
   children: React.ReactNode;
@@ -31,9 +32,9 @@ const Tooltip: React.FC<TooltipProps> = ({
       setChunkIndex(0);
     }
   }, [isAudioPlaying]);
-  useEffect(()=>{
-    setChunkIndex(0)
-  },[subtitleText])
+  useEffect(() => {
+    setChunkIndex(0);
+  }, [subtitleText]);
   useEffect(() => {
     // Change chunk of subtitle text after a short duration
     if (isAudioPlaying) {
@@ -84,6 +85,7 @@ const DashboardBot = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [audioBuffers, setAudioBuffers] = useState<any>([]);
   const [audioCounter, setAudioCounter] = useState<number>(0);
+  const [showBot, setShowBot] = useState(true);
   const [subTitleCounter, setSubtitleCounter] = useState<number>(0);
   const componentRef: any = useRef(null);
   const audioFileUrl1 = "/speech_dashboard.mp3";
@@ -224,6 +226,7 @@ const DashboardBot = () => {
   };
 
   const handleClick = async () => {
+    setShowBot(true);
     try {
       if (isGif) {
         setIsGif(false);
@@ -267,7 +270,7 @@ const DashboardBot = () => {
   };
 
   useEffect(() => {
-    if(audioCounter === 1 && !userData.tours?.dashboard ){
+    if (audioCounter === 1 && !userData.tours?.dashboard) {
       updateAndSaveTourStatus({ dashboard: true });
     }
     if (audioBuffers.length > 0 && audioCounter < audioBuffers.length) {
@@ -291,6 +294,12 @@ const DashboardBot = () => {
   }, [audioBuffers, audioCounter]);
 
   useEffect(() => {
+    if (localStorage.getItem("botHidden") === "true") {
+      setShowBot(false);
+    }
+  }, []);
+
+  useEffect(() => {
     const audio = componentRef.current;
 
     const handleAudioEnded = () => {
@@ -304,11 +313,12 @@ const DashboardBot = () => {
       audio.removeEventListener("ended", handleAudioEnded);
     };
   }, []);
-
   return (
     <div
       ref={(ref: any) => (tourBotRef.current = ref)}
-      className={`fixed bottom-4 right-4 mr-4 mb-4 cursor-pointer z-10 avatar-animate`}
+      className={`fixed bottom-4 ${
+        showBot ? "right-4 transition-all ease-in-out duration-500" : "xs:-right-20 lg:-right-40 transition-all ease-in-out duration-500"
+      }  mr-4 mb-4 cursor-pointer z-10 avatar-animate`}
       onClick={handleClick}
     >
       <Tooltip
@@ -322,16 +332,42 @@ const DashboardBot = () => {
           alt="GIF"
           width={200}
           height={200}
-          className="botImage xs:hidden md:hidden lg:block"
+          className={`botImage ${
+            showBot
+              ? "transition-all ease-in-out duration-500"
+              : "transform -rotate-90 transition-transform duration-300 ease-in-out "
+          } xs:hidden md:hidden lg:block`}
         />
         <Image
           src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
           alt="GIF"
           width={100}
           height={100}
-          className="botImage xs:block md:block lg:hidden"
+          className={`botImage ${
+            showBot
+              ? ""
+              : "transform -rotate-90 transition-transform duration-300 ease-in-out "
+          } xs:block md:block lg:hidden`}
         />
+        <button
+          className="absolute right-0 top-0 bg-black rounded-full p-0.5"
+          title="Hide"
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowBot(false);
+            localStorage.setItem("botHidden", "true");
+            setIsGif(false);
+            if (isAudioPlaying) {
+              componentRef.current.pause();
+              removeStyles();
+              setIsAudioPlaying(false);
+            }
+          }}
+        >
+          {crossIconSmall}
+        </button>
       </Tooltip>
+
       <audio className="hidden" ref={componentRef} controls />
     </div>
   );

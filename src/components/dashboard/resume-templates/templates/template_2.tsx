@@ -2,12 +2,6 @@
 import { memo, useEffect, useState } from "react";
 import React from "react";
 import { useSelector } from "react-redux";
-
-import useGetSummary from "@/hooks/useGetSummary";
-import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
-import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
-import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
-import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import ColorPicker from "../colorPicker";
 import { ColorResult } from "react-color";
 import Publication from "./resume-sections/publication";
