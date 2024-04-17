@@ -6,17 +6,19 @@ import React from "react";
 
 type Props = {
   contact: any;
+  contactStyle: string;
+  contactStyle_li: string;
 };
 
-const Contact = ({ contact }: Props) => {
+const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
 
   return (
     <ul
-      className="flex flex-row items-center justify-around px-4 py-2 bg-gray-300 xs:flex-col xs:gap-2 md:flex-row rounded-xl "
+      className={`${contactStyle}`}
       // style={{ backgroundColor: color_second }}
     >
-      <li className="flex flex-row items-center gap-1 text-xs hover:shadow-md text-gray-950 hover:bg-gray-100 xs:w-[45%] lg:w-[25%]    ">
+      <li className={`${contactStyle_li}`}>
         {phoneIcon}
         <EditableField
           value={contact?.phone ? contact?.phone : "(555) 555-1234"}
@@ -27,7 +29,7 @@ const Contact = ({ contact }: Props) => {
           }}
         />
       </li>
-      <li className="flex flex-row items-center justify-start gap-1 text-xs  text-gray-950 hover:shadow-md hover:bg-gray-100 xs:w-[45%] lg:w-[25%]  ">
+      <li className={`${contactStyle_li}`}>
         {emailIcon}
         <EditableField
           value={contact?.email ? contact?.email : "your@email.com"}
@@ -39,7 +41,7 @@ const Contact = ({ contact }: Props) => {
         />
       </li>
 
-      <li className="flex flex-row items-center justify-start gap-1 text-xs text-gray-950  hover:shadow-md hover:bg-gray-100 xs:w-[45%] lg:w-[25%]  ">
+      <li className={`${contactStyle_li}`}>
         <div className="">
           <svg
             width="16"
@@ -71,7 +73,7 @@ const Contact = ({ contact }: Props) => {
           }}
         />
       </li>
-      <li className="flex flex-row items-center justify-start gap-1 text-xs text-gray-950  hover:shadow-md hover:bg-gray-100 xs:w-[45%] lg:w-[25%] ">
+      <li className={`${contactStyle_li}`}>
         <div className="">
           <svg
             xmlns="http://www.w3.org/2000/svg"

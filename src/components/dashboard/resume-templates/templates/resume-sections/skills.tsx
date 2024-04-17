@@ -13,8 +13,19 @@ import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 type Props = {
   heading: any;
   skills: any;
+  skillHeading: string;
+  skill_ul: string;
+  skill_li: string;
+  skill_newStyle: string;
 };
-const Skill = ({ heading, skills }: Props) => {
+const Skill = ({
+  heading,
+  skills,
+  skillHeading,
+  skill_ul,
+  skill_li,
+  skill_newStyle,
+}: Props) => {
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [regenerating, setRegenerating] = useState(false);
   const { updateSaveHook } = useUpdateAndSave();
@@ -38,14 +49,10 @@ const Skill = ({ heading, skills }: Props) => {
   return (
     <>
       {skills && skills.length > 0 && (
-        <h2 className="my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+        <h2 className={`${skillHeading}`}>
           {resumeSkillsIcon}
           <EditableField
-            value={
-              heading
-                ? heading
-                : "Skills"
-            }
+            value={heading ? heading : "Skills"}
             style={{ width: "fit-content" }}
             onSave={(value: string) => {
               if (value !== heading) {
@@ -59,10 +66,10 @@ const Skill = ({ heading, skills }: Props) => {
       )}
       {skills && skills.length > 0 && !regenerating ? (
         <Toolbar addSkill={handleAddSkills} regenerateSkills={getPrimarySkills}>
-          <ul className="flex flex-row flex-wrap gap-1 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+          <ul className={`${skill_ul}`}>
             {skills.map((skill: string, i: number) => (
               <li
-                className=" px-4 py-2 bg-gray-300 border-transparent border-[1px] rounded-full hover:shadow-md hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center"
+                className={`${skill_li} parent`}
                 key={i}
                 onDragStart={(e) =>
                   e.dataTransfer.setData("text/plain", i.toString())
@@ -87,12 +94,12 @@ const Skill = ({ heading, skills }: Props) => {
             ))}
             {newPrimarySkill ? (
               <>
-                <div className="w-full rounded-2xl  border-[1px] border-black flex h-9.5">
+                <div className={`${skill_newStyle}`}>
                   <input
                     type="text"
                     value={primarySkill}
                     placeholder="Please add Skill"
-                    className="w-full px-2 bg-white outline-none rounded-2xl"
+                    className="skill-input-temp-2"
                     autoFocus
                     onChange={(e) => setPrimarySkill(e.target.value)}
                     onKeyPress={(e) => {
@@ -101,10 +108,7 @@ const Skill = ({ heading, skills }: Props) => {
                       }
                     }}
                   />
-                  <button
-                    className="px-2 text-white uppercase bg-green-500 h-9 rounded-r-2xl"
-                    onClick={handleSaveSkills}
-                  >
+                  <button className={`skill-Save`} onClick={handleSaveSkills}>
                     save
                   </button>
                 </div>
@@ -112,7 +116,7 @@ const Skill = ({ heading, skills }: Props) => {
                   onClick={() => {
                     setNewPrimarySkill(false);
                   }}
-                  className="px-2 py-1 text-white bg-red-500 rounded-full"
+                  className="skill-cancel"
                 >
                   Cancel
                 </button>

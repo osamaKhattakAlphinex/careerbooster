@@ -61,7 +61,11 @@ const ResumeTemplate2 = () => {
       </div>
       {/* contacts */}
       <div className="relative w-full py-1">
-        <Contact contact={resume.contact} />
+        <Contact
+          contact={resume.contact}
+          contactStyle="contact-temp-2"
+          contactStyle_li="contact-temp-2-li"
+        />
         {/* <div className="absolute top-0 left-12">
           <ColorPicker
             defaultColor="#e9e8e8"
@@ -77,13 +81,22 @@ const ResumeTemplate2 = () => {
       </div>
       {/* summary objective */}
       <div className="w-full space-y-3 ">
-        <Summary heading={resume.headings.summary} summary={resume.summary} />
+        <Summary
+          heading={resume.headings.summary}
+          summary={resume.summary}
+          headingStyle="summaryHeading-temp-2"
+          textStyle="summaryText-temp-2"
+        />
       </div>
       {/* Skills  */}
       <div className="w-full space-y-3">
         <Skill
           heading={resume.headings.primarySkills}
           skills={resume.primarySkills}
+          skillHeading="skillHeading-temp-2"
+          skill_ul="skill-ul-temp-2"
+          skill_li="skill-li-temp-2"
+          skill_newStyle="skill-New-temp-2"
         />
       </div>
 
