@@ -13,13 +13,13 @@ import {
   setStepFour,
   setStepOne,
   setStepSix,
+  setStepThirteen,
   setStepThree,
   setStepTwo,
 } from "@/store/registerSlice";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { delay } from "@reduxjs/toolkit/dist/utils";
 import VirtualBot from "./VirtualBot";
 import { getPackageID } from "@/ServerActions";
 import { setUserData } from "@/store/userDataSlice";
@@ -68,7 +68,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       fetchExperienceDataFromResume();
       fetchSkillsDataFromResume();
       // fetchAwardsDataFromResume();
-      // fetchCertificatesDataFromResume();
+      fetchCertificatesDataFromResume();
       // fetchInterestsDataFromResume();
       // fetchLanguagesDataFromResume();
       // fetchTrainingsDataFromResume();
@@ -286,6 +286,74 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         .catch((error) => {
           dispatch(setScrapped({ education: true }));
           dispatch(setScrapping({ education: false }));
+        });
+    }
+  };
+
+  const fetchCertificatesDataFromResume = (refetch = false) => {
+    if (
+      (refetch || register.scrapped.certifications === false) &&
+      // userData.defaultResumeFile &&
+      register.scrappedContent !== "" &&
+      register.scrapping.certifications === false
+    ) {
+      // set scrapping to true so that we Don't send multiple requests
+      dispatch(setScrapping({ certifications: true }));
+
+      const formData = {
+        // file: userData.defaultResumeFile,
+        content: register.scrappedContent,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
+      };
+
+      fetch("/api/homepage/fetchCertificationsData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
+            if (res?.result) {
+              try {
+                let data;
+                if (typeof res.result === "object") {
+                  data = res.result;
+                } else {
+                  data = await JSON.parse(res.result);
+                }
+
+                const formattedArr = data?.certifications.map((item: any) => {
+                  return {
+                    id: makeid(),
+                    title: item?.title,
+                    issuingOrganization: item?.issuingOrganization,
+                    date: item?.date,
+                  };
+                });
+
+                dispatch(setStepSix({ list: formattedArr }));
+                dispatch(setScrapped({ certifications: true }));
+                dispatch(setScrapping({ certifications: false }));
+              } catch (error) {
+                // console.log("Error in sorting certifications array: ", error);
+                dispatch(setScrapped({ certifications: true }));
+                dispatch(setScrapping({ certifications: false }));
+              }
+            } else {
+              dispatch(setScrapped({ certifications: true }));
+              dispatch(setScrapping({ certifications: false }));
+            }
+          } else {
+            dispatch(setScrapped({ certifications: true }));
+            dispatch(setScrapping({ certifications: false }));
+          }
+        })
+        .catch((error) => {
+          dispatch(setScrapped({ certifications: true }));
+          dispatch(setScrapping({ certifications: false }));
         });
     }
   };
@@ -509,7 +577,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
             try {
               dispatch(setScrapped({ skills: true }));
               dispatch(setScrapping({ skills: false }));
-              dispatch(setStepSix({ list: result }));
+              dispatch(setStepThirteen({ list: result }));
             } catch (error) {
               dispatch(setScrapped({ skills: true }));
               dispatch(setScrapping({ skills: false }));
@@ -542,8 +610,9 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         postalCode: register.stepThree.postalCode,
       },
       education: register.stepFour.list,
+      certifications: register.stepSix.list,
       experience: register.stepFive.list,
-      skills: register.stepSix.list,
+      skills: register.stepThirteen.list,
       wizardCompleted: true,
     };
 
@@ -564,7 +633,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       register.scrapped.basic &&
       register.scrapped.education &&
       register.scrapped.workExperience &&
-      register.scrapped.skills
+      register.scrapped.skills &&
+      register.scrapped.certifications
     ) {
       updateUser();
     }
@@ -590,12 +660,9 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     // };
   }, [userData.email]);
 
-
-  const updateUserWithFreePackage = async (
-   
-  ) => {
+  const updateUserWithFreePackage = async () => {
     console.log("Updating user with free package...");
-    const  creditPackageId: string | undefined =await getPackageID()
+    const creditPackageId: string | undefined = await getPackageID();
     if (!subscribing && creditPackageId) {
       const creditPackage = await getCreditPackageDetails(creditPackageId);
 
@@ -677,9 +744,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       pathname !== "/subscribed" &&
       (userData.creditPackage === "" || userData.userCredits === 0)
     ) {
-
       // redirect("/subscribe");
-      updateUserWithFreePackage()
+      updateUserWithFreePackage();
     } else {
       // return <div className="pt-30">{children}</div>;
       return <>{children}</>;
