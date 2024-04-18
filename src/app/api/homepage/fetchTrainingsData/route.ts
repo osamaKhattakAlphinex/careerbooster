@@ -49,7 +49,6 @@ export async function POST(req: any) {
                     title: VALUE_HERE,
                     issuingOrganization: VALUE_HERE,
                     date: VALUE_HERE,
-                    description: description of the certificate
                   },
                   .
                   .

@@ -12,6 +12,7 @@ interface RegisterSlice {
     education: boolean;
     workExperience: boolean;
     certifications: boolean;
+    awards: boolean;
     skills: boolean;
   };
   scrapping: {
@@ -19,6 +20,7 @@ interface RegisterSlice {
     education: boolean;
     workExperience: boolean;
     certifications: boolean;
+    awards: boolean;
     skills: boolean;
   };
   stepOne: {
@@ -123,6 +125,7 @@ const initialState: RegisterSlice = {
     education: false,
     workExperience: false,
     certifications: false,
+    awards: false,
     skills: false,
   },
   scrapping: {
@@ -130,6 +133,7 @@ const initialState: RegisterSlice = {
     education: false,
     workExperience: false,
     certifications: false,
+    awards: false,
     skills: false,
   },
   stepOne: {
