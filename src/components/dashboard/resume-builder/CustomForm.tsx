@@ -11,36 +11,6 @@ const years = getYearsList();
 
 
 const CustomForm = ({ setShowCustomForm, recName }: any) => {
-  //form handling
-  const resume = useSelector((state: any) => state.resume);
-  const { updateSaveHook } = useUpdateAndSave();
-
-  const formik = useFormik({
-    initialValues: {
-      title: "",
-      country: "",
-      cityState: "",
-      fromMonth: "",
-      fromYear: "",
-      isContinue: false,
-      toMonth: "",
-      toYear: "",
-      achievements: "",
-    },
-    validationSchema: Yup.object({
-      title: Yup.string().required("Job Title is required"),
-    }),
-    onSubmit: async (values) => {
-      // Splitting the description by newline character and trimming each line
-     
-      setShowCustomForm(false);
-    },
-  });
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    formik.handleSubmit();
-  };
   return (
     <>
     {recName === "publications" && 

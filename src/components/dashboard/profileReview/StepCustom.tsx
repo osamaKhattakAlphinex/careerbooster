@@ -26,7 +26,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 
-const RecordCard = ({ rec, recName, formCloseHandler, deleteHandler }: any) => {
+const RecordCard = ({ rec, recName, deleteHandler }: any) => {
   const [edit, setEdit] = useState(false);
   return (
     <>
@@ -118,6 +118,9 @@ const RecordCard = ({ rec, recName, formCloseHandler, deleteHandler }: any) => {
           <span className="text-sm italic dark:text-gray-300 text-gray-950">
             {rec.startDate}
           </span>
+          &nbsp;
+          {rec.endDate && "-"}
+          &nbsp;
           <span className="text-sm italic dark:text-gray-300 text-gray-950">
             {rec.endDate}
           </span>
