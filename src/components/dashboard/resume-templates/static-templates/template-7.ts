@@ -161,7 +161,7 @@ const templateLayout = {
         },
       ],
     },
-   
+
     publications: {
       styles: "flex flex-col px-8 w-full",
       elements: [
@@ -558,7 +558,7 @@ const components = {
         container: [
           {
             id: "language",
-            styles: "font-semibold text-base text-gray-950/80",
+            styles: "font-semibold text-sm text-gray-950/80",
             tag: "span",
           },
           {
@@ -594,5 +594,5 @@ export const template = {
   components,
   templateLayout,
   cvHeadings,
-  GenerationOrder
+  GenerationOrder,
 };

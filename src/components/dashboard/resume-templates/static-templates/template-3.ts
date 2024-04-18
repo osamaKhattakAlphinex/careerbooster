@@ -91,7 +91,7 @@ const cvHeadings: any = [
     section: "interests",
     headingKey: "interests",
     styles:
-    "font-semibold uppercase text-gray-100 flex items-center text-base py-1 w-full border-b-2 border-white my-2",
+      "font-semibold uppercase text-gray-100 flex items-center text-base py-1 w-full border-b-2 border-white my-2",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -155,7 +155,7 @@ const components: any = {
     elements: [
       {
         id: "language",
-        styles: "font-semibold list-disc text-base text-gray-100",
+        styles: "font-semibold text-sm text-gray-100",
         tag: "span",
       },
       {
@@ -426,7 +426,7 @@ const components: any = {
       {
         tag: "div",
         styles:
-          "bg-gray-300 flex flex-col w-[31%] p-4 rounded-md text-gray-950/80",
+          "bg-gray-200 flex flex-col w-[31%] p-4 rounded-md text-gray-950/80",
         container: [
           {
             id: "name",
@@ -534,8 +534,8 @@ const GenerationOrder = [
   "jobTitle",
   "contact",
   "primarySkills",
-  "languages",
   "interests",
+  "languages",
   "summary",
   "workExperienceArray",
   "publications",
@@ -545,4 +545,9 @@ const GenerationOrder = [
   "references",
   "education",
 ];
-export const template = { templateLayout, components, cvHeadings,GenerationOrder };
+export const template = {
+  templateLayout,
+  components,
+  cvHeadings,
+  GenerationOrder,
+};

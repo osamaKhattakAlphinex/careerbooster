@@ -452,7 +452,6 @@ const components: any = {
     ],
   },
 };
-
 const templateLayout: any = {
   styles: "w-full",
   attributes: [{ "template-no": "2" }],
@@ -545,7 +544,6 @@ const templateLayout: any = {
         },
       ],
     },
-
     languages: {
       styles:
         "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
@@ -557,7 +555,7 @@ const templateLayout: any = {
     },
     interests: {
       styles:
-        "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
+        "text-black flex flex-col justify-start items-start gap-3 px-8 text-gray-950/80",
       elements: [
         {
           id: "interests",
