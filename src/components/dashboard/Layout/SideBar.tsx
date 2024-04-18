@@ -4,17 +4,13 @@ import Link from "next/link";
 import logo from "@/../public/logo.svg";
 import {
   userCircle,
-  
   dollarIcon,
   homeIcon,
   powerIcon,
-  
   userGroup,
-  
   clipboard,
   xMark,
   keyIcon,
-  
   emailBotSidebarIcon,
   coverLetterSidebarIcon,
 } from "@/helpers/iconsProvider";
