@@ -245,6 +245,10 @@ const DashboardBot = () => {
         if (isAudioPlaying) {
           componentRef.current.pause();
           setShowBot(false);
+          if(!userData.tours?.dashboard) {
+            updateAndSaveTourStatus({ dashboard: true });
+          }
+          localStorage.setItem("botHidden", "true");
           removeStyles();
           setIsAudioPlaying(false);
         }
@@ -374,6 +378,9 @@ const DashboardBot = () => {
             e.stopPropagation();
             setShowBot(false);
             localStorage.setItem("botHidden", "true");
+            if(!userData.tours?.dashboard) {
+              updateAndSaveTourStatus({ dashboard: true });
+            }
             setIsGif(false);
             if (isAudioPlaying) {
               componentRef.current.pause();

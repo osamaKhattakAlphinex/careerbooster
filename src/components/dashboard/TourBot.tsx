@@ -124,6 +124,10 @@ const TourBot = ({ config, setOutOfCredits }: any) => {
         if (isAudioPlaying) {
           audioPlayerRef.current.pause();
           setShowBot(false);
+          if(!userData?.tours[config.name]) {
+            updateAndSaveTourStatus({ [config.name]: true });
+          }
+          localStorage.setItem("botHidden", "true");
           removeStyles();
           setIsAudioPlaying(false);
         }
@@ -241,6 +245,9 @@ const TourBot = ({ config, setOutOfCredits }: any) => {
           onClick={(e) => {
             e.stopPropagation();
             setShowBot(false);
+            if(!userData?.tours[config.name]) {
+              updateAndSaveTourStatus({ [config.name]: true });
+            }
             localStorage.setItem("botHidden", "true");
             setIsGif(false);
             if (isAudioPlaying) {

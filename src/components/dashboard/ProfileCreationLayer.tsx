@@ -11,6 +11,7 @@ import {
   setScrapping,
   setStepFive,
   setStepFour,
+  setStepNine,
   setStepOne,
   setStepSix,
   setStepThirteen,
@@ -67,8 +68,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       fetchEducationDataFromResume();
       fetchExperienceDataFromResume();
       fetchSkillsDataFromResume();
-      // fetchAwardsDataFromResume();
       fetchCertificatesDataFromResume();
+      fetchAwardsDataFromResume();
       // fetchInterestsDataFromResume();
       // fetchLanguagesDataFromResume();
       // fetchTrainingsDataFromResume();
@@ -317,6 +318,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           const res = await resp.json();
           if (res.success) {
             if (res?.result) {
+              
               try {
                 let data;
                 if (typeof res.result === "object") {
@@ -324,13 +326,13 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                 } else {
                   data = await JSON.parse(res.result);
                 }
-
                 const formattedArr = data?.certifications.map((item: any) => {
                   return {
                     id: makeid(),
                     title: item?.title,
                     issuingOrganization: item?.issuingOrganization,
                     date: item?.date,
+                    description: item?.description,
                   };
                 });
 
@@ -354,6 +356,75 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         .catch((error) => {
           dispatch(setScrapped({ certifications: true }));
           dispatch(setScrapping({ certifications: false }));
+        });
+    }
+  };
+
+  const fetchAwardsDataFromResume = (refetch = false) => {
+    if (
+      (refetch || register.scrapped.awards === false) &&
+      // userData.defaultResumeFile &&
+      register.scrappedContent !== "" &&
+      register.scrapping.awards === false
+    ) {
+      // set scrapping to true so that we Don't send multiple requests
+      dispatch(setScrapping({ awards: true }));
+
+      const formData = {
+        // file: userData.defaultResumeFile,
+        content: register.scrappedContent,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
+      };
+
+      fetch("/api/homepage/fetchAwardsData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
+            if (res?.result) {
+              
+              try {
+                let data;
+                if (typeof res.result === "object") {
+                  data = res.result;
+                } else {
+                  data = await JSON.parse(res.result);
+                }
+                const formattedArr = data?.awards.map((item: any) => {
+                  return {
+                    id: makeid(),
+                    title: item?.title,
+                    awardingOrganization: item?.awardingOrganization,
+                    date: item?.date,
+                    description: item?.description,
+                  };
+                });
+
+                dispatch(setStepNine({ list: formattedArr }));
+                dispatch(setScrapped({ awards: true }));
+                dispatch(setScrapping({ awards: false }));
+              } catch (error) {
+                // console.log("Error in sorting awards array: ", error);
+                dispatch(setScrapped({ awards: true }));
+                dispatch(setScrapping({ awards: false }));
+              }
+            } else {
+              dispatch(setScrapped({ awards: true }));
+              dispatch(setScrapping({ awards: false }));
+            }
+          } else {
+            dispatch(setScrapped({ awards: true }));
+            dispatch(setScrapping({ awards: false }));
+          }
+        })
+        .catch((error) => {
+          dispatch(setScrapped({ awards: true }));
+          dispatch(setScrapping({ awards: false }));
         });
     }
   };
@@ -622,6 +693,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       })
       .then(async (resp: any) => {
         if (window) {
+          
           window.location.reload();
         }
       });

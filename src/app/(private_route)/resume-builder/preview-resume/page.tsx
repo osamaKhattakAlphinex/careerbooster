@@ -68,34 +68,8 @@ const Page = () => {
     }
   };
   const cleanUpHTML = (page: any) => {
-    let cleanUpIds: any = [];
-    const templateNo = page.getAttribute("data-template-no");
-    if (
-      templateNo === "4" ||
-      templateNo === "9" ||
-      templateNo === "14" ||
-      templateNo === "15"
-    ) {
-      cleanUpIds = [
-        "shortName",
-        "email",
-        "linkedIn",
-        "phone",
-        "address",
-        "primarySkills",
-        "name",
-        "jobTitle",
-        "summary",
-        "languages",
-        "interests",
-        "trainings",
-        "publications",
-        "certifications",
-        "awards",
-        "workExperienceArray",
-      ];
-    } else {
-      cleanUpIds = [
+ 
+     const cleanUpIds = [
         "shortName",
         "email",
         "linkedIn",
@@ -111,7 +85,7 @@ const Page = () => {
         "awards",
         "workExperienceArray",
       ];
-    }
+    
 
     const containerNames = [
       "header",
@@ -456,7 +430,7 @@ const Page = () => {
     //   if the value is an array
     if (Array.isArray(value)) {
       let i = 1;
-      for (const singleItem of value) {
+      for (const singleItem of value) {       
         let newAttr = [];
         if (typeof singleItem === "object" && !Array.isArray(singleItem)) {
           if (template.elements) {

@@ -135,6 +135,7 @@ const ResumeBuilder = () => {
         await getSummary();
         await getPrimarySkills();
         await getWorkExperienceNew(quantifyingExperience);
+        
         // await addCustomSection();
         // adding custom sections
          runConfetti();
