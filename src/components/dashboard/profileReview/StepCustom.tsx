@@ -161,7 +161,7 @@ const AddItemBtn = ({ onClick, btnText = "Add Item" }: any) => {
   );
 };
 // forms
-const PublicationsForm = ({
+export const PublicationsForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
