@@ -17,6 +17,7 @@ import Experience from "./resume-sections/experience";
 import Skill from "./resume-sections/skills";
 import Summary from "./resume-sections/summary";
 import Header from "./resume-sections/header";
+import { template_2 } from "@/helpers/templateStylesObj";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
@@ -96,7 +97,7 @@ const ResumeTemplate2 = () => {
           skillHeading="skillHeading-temp-2"
           skill_ul="skill-ul-temp-2"
           skill_li="skill-li-temp-2"
-          skill_newStyle="skill-New-temp-2"
+          skillNewStyle="skill-New-temp-2"
         />
       </div>
 
@@ -106,6 +107,7 @@ const ResumeTemplate2 = () => {
           heading={resume.headings.workExperienceArray}
           workExperienceArray={resume.workExperienceArray}
           workExperience={resume.workExperience}
+          styles={template_2}
         />
       </div>
 

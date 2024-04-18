@@ -16,7 +16,7 @@ type Props = {
   skillHeading: string;
   skill_ul: string;
   skill_li: string;
-  skill_newStyle: string;
+  skillNewStyle: string;
 };
 const Skill = ({
   heading,
@@ -24,7 +24,7 @@ const Skill = ({
   skillHeading,
   skill_ul,
   skill_li,
-  skill_newStyle,
+  skillNewStyle,
 }: Props) => {
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [regenerating, setRegenerating] = useState(false);
@@ -94,7 +94,7 @@ const Skill = ({
             ))}
             {newPrimarySkill ? (
               <>
-                <div className={`${skill_newStyle}`}>
+                <div className={`${skillNewStyle}`}>
                   <input
                     type="text"
                     value={primarySkill}

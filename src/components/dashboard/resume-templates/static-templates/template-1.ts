@@ -11,7 +11,7 @@ const cvHeadings: any = [
     section: "summary",
     headingKey: "summary",
     styles:
-      "text-gray-950/80 text-base font-semibold w-full uppercase flex flex-row items-center my-2",
+      "text-gray-950/80 underline text-base font-semibold w-full uppercase flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -19,7 +19,7 @@ const cvHeadings: any = [
     section: "workExperienceArray",
     headingKey: "workExperienceArray",
     styles:
-      "text-gray-950/80 text-base font-semibold w-full uppercase flex flex-row items-center my-2",
+      "text-gray-950/80 text-base underline font-semibold w-full uppercase flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -27,7 +27,7 @@ const cvHeadings: any = [
     section: "education",
     headingKey: "education",
     styles:
-      "text-gray-950/80 text-base font-semibold w-full uppercase flex flex-row items-center my-2",
+      "text-gray-950/80 text-base underline font-semibold w-full uppercase flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -35,7 +35,7 @@ const cvHeadings: any = [
     section: "primarySkills",
     headingKey: "primarySkills",
     styles:
-      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+      "font-semibold uppercase underline text-base w-full text-gray-950/80 flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -43,7 +43,7 @@ const cvHeadings: any = [
     section: "certifications",
     headingKey: "certifications",
     styles:
-      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+      "font-semibold uppercase underline text-base w-full text-gray-950/80 flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -51,7 +51,7 @@ const cvHeadings: any = [
     section: "awards",
     headingKey: "awards",
     styles:
-      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+      "font-semibold uppercase underline text-base w-full text-gray-950/80 flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -59,7 +59,7 @@ const cvHeadings: any = [
     section: "publications",
     headingKey: "publications",
     styles:
-      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+      "font-semibold uppercase underline text-base w-full text-gray-950/80 flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -67,7 +67,7 @@ const cvHeadings: any = [
     section: "languages",
     headingKey: "languages",
     styles:
-      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+      "font-semibold uppercase underline text-base w-full text-gray-950/80 flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -75,7 +75,7 @@ const cvHeadings: any = [
     section: "references",
     headingKey: "references",
     styles:
-      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+      "font-semibold uppercase underline text-base w-full text-gray-950/80 flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -83,7 +83,7 @@ const cvHeadings: any = [
     section: "interests",
     headingKey: "interests",
     styles:
-      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+      "font-semibold uppercase underline text-base w-full text-gray-950/80 flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -91,7 +91,7 @@ const cvHeadings: any = [
     section: "trainings",
     headingKey: "trainings",
     styles:
-      "font-semibold uppercase text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+      "font-semibold uppercase underline text-base w-full text-gray-950/80 flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
 ];
@@ -348,7 +348,7 @@ const components: any = {
         container: [
           {
             id: "name",
-            styles: "font-semibold text-base text-gray-950/80",
+            styles: "font-semibold text-sm text-gray-950/80",
             tag: "span",
           },
           {
@@ -381,7 +381,7 @@ const components: any = {
         container: [
           {
             id: "educationLevel",
-            styles: "font-semibold text-base text-gray-950/80",
+            styles: "font-semibold text-sm text-gray-950/80",
             tag: "span",
           },
           {
@@ -438,7 +438,7 @@ const components: any = {
         container: [
           {
             id: "language",
-            styles: "font-semibold text-base text-gray-950/80",
+            styles: "font-semibold text-sm text-gray-950/80",
             tag: "span",
           },
           {
@@ -452,7 +452,6 @@ const components: any = {
     ],
   },
 };
-
 const templateLayout: any = {
   styles: "w-full",
   attributes: [{ "template-no": "2" }],
@@ -545,7 +544,6 @@ const templateLayout: any = {
         },
       ],
     },
-
     languages: {
       styles:
         "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
@@ -557,7 +555,7 @@ const templateLayout: any = {
     },
     interests: {
       styles:
-        "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
+        "text-black flex flex-col justify-start items-start gap-3 px-8 text-gray-950/80",
       elements: [
         {
           id: "interests",

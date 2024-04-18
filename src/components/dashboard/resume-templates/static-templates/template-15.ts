@@ -12,7 +12,7 @@ const cvHeadings: any = [
     section: "summary",
     headingKey: "summary",
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
+      "font-semibold uppercase my-2 text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -20,7 +20,7 @@ const cvHeadings: any = [
     section: "workExperienceArray",
     headingKey: "workExperienceArray",
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
+      "font-semibold uppercase my-2 text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -29,7 +29,7 @@ const cvHeadings: any = [
     headingKey: "education",
     attributes: [{ "icon-color": "black" }],
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
+      "font-semibold uppercase my-2 text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
   },
   {
     text: "skills",
@@ -37,14 +37,14 @@ const cvHeadings: any = [
     headingKey: "primarySkills",
     attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-gray-100 flex items-center text-md border-b-2 border-white py-0.5 w-full my-2",
+      "font-semibold uppercase my-2 text-gray-100 flex items-center text-md border-b-2 border-white py-0.5 w-full my-2",
   },
   {
     text: "certificates",
     section: "certifications",
     headingKey: "certifications",
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
+      "font-semibold uppercase my-2 text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
 
     attributes: [{ "icon-color": "black" }],
   },
@@ -53,7 +53,7 @@ const cvHeadings: any = [
     section: "awards",
     headingKey: "awards",
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
+      "font-semibold uppercase my-2 text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -61,7 +61,7 @@ const cvHeadings: any = [
     section: "publications",
     headingKey: "publications",
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
+      "font-semibold uppercase my-2 text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -70,14 +70,14 @@ const cvHeadings: any = [
     headingKey: "languages",
     attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-gray-100 flex items-center text-md border-b-2 border-white py-0.5 w-full my-2",
+      "font-semibold uppercase my-2 text-gray-100 flex items-center text-md border-b-2 border-white py-0.5 w-full my-2",
   },
   {
     text: "references",
     section: "references",
     headingKey: "references",
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
+      "font-semibold uppercase my-2 text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -86,14 +86,14 @@ const cvHeadings: any = [
     headingKey: "interests",
     attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-gray-100 flex items-center text-md border-b-2 border-white py-0.5 w-full my-2",
+      "font-semibold uppercase my-2 text-gray-100 flex items-center text-md border-b-2 border-white py-0.5 w-full",
   },
   {
     text: "Trainings",
     section: "trainings",
     headingKey: "trainings",
     styles:
-      "font-semibold uppercase text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
+      "font-semibold uppercase my-2 text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
     attributes: [{ "icon-color": "black" }],
   },
 ];
@@ -312,7 +312,7 @@ const components: any = {
     ],
   },
   interests: {
-    styles: "my-1",
+    styles: "my-2",
     elements: [
       {
         id: "description",
@@ -428,12 +428,11 @@ const components: any = {
     elements: [
       {
         tag: "div",
-        styles:
-          "my-2 flex flex-col p-4 rounded-md text-gray-100",
+        styles: "my-2 flex flex-col text-gray-100",
         container: [
           {
             id: "language",
-            styles: "font-semibold text-base text-gray-100",
+            styles: "font-semibold text-sm text-gray-100",
             tag: "span",
           },
           {
@@ -502,7 +501,7 @@ const templateLayout: any = {
         {
           id: "publications",
         },
-        
+
         {
           id: "certifications",
         },
@@ -512,8 +511,7 @@ const templateLayout: any = {
         {
           id: "trainings",
         },
-        
-       
+
         {
           id: "references",
         },
@@ -545,5 +543,5 @@ export const template = {
   components,
   templateLayout,
   cvHeadings,
-  GenerationOrder
+  GenerationOrder,
 };

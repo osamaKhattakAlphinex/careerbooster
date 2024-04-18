@@ -73,7 +73,7 @@ const cvHeadings: any = [
     section: "languages",
     headingKey: "languages",
     styles:
-    "font-semibold uppercase text-sm py-2 text-white text-center border-2 flex flex-row justify-center items-center rounded-full border-[#043382] my-3",
+      "font-semibold uppercase text-sm py-2 text-white text-center border-2 flex flex-row justify-center items-center rounded-full border-[#043382] my-3",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -89,7 +89,7 @@ const cvHeadings: any = [
     section: "interests",
     headingKey: "interests",
     styles:
-    "font-semibold uppercase text-sm py-2 text-white text-center border-2 flex flex-row justify-center items-center rounded-full border-[#043382] my-3",
+      "font-semibold uppercase text-sm py-2 text-white text-center border-2 flex flex-row justify-center items-center rounded-full border-[#043382] my-3",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -167,12 +167,11 @@ const templateLayout: any = {
         {
           id: "trainings",
         },
-       
-        
+
         {
           id: "references",
         },
-       
+
         {
           id: "education",
         },
@@ -419,19 +418,18 @@ const components: any = {
       },
     ],
   },
-  
+
   languages: {
     tag: "div",
     styles: "",
     elements: [
       {
         tag: "div",
-        styles:
-          "flex flex-col p-4 rounded-md text-gray-100",
+        styles: "flex flex-col border-b pb-2 text-gray-100",
         container: [
           {
             id: "language",
-            styles: "font-semibold text-base text-gray-100",
+            styles: "font-semibold text-sm text-gray-100",
             tag: "span",
           },
           {
@@ -451,7 +449,7 @@ const components: any = {
       {
         tag: "div",
         styles:
-          "bg-gray-300 flex flex-col w-[31%] p-4 rounded-md text-gray-950/80",
+          "bg-gray-200 flex flex-col w-[31%] p-4 rounded-md text-gray-950/80",
         container: [
           {
             id: "name",
@@ -552,5 +550,5 @@ export const template = {
   components,
   templateLayout,
   cvHeadings,
-  GenerationOrder
+  GenerationOrder,
 };

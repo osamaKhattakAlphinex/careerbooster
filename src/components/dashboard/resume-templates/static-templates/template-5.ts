@@ -202,7 +202,7 @@ const templateLayout: any = {
     },
     interests: {
       styles:
-        "ml-8 text-black gap-2 flex flex-row flex-wrap justify-start items-start px-8",
+        "ml-8 text-black gap-2 flex flex-col flex-wrap justify-start items-start px-8",
       elements: [
         {
           id: "interests",
@@ -227,7 +227,6 @@ const templateLayout: any = {
         },
       ],
     },
-   
   },
 };
 const components: any = {
@@ -596,5 +595,5 @@ export const template = {
   components,
   templateLayout,
   cvHeadings,
-  GenerationOrder
+  GenerationOrder,
 };

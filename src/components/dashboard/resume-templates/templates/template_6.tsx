@@ -29,12 +29,19 @@ import Link from "next/link";
 import { useColorContext } from "@/context/ResumeColorContext";
 import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
 import CustomResumeSection from "../../resume-builder/CustomResumeSection";
+import Publication from "./resume-sections/publication";
+import Certification from "./resume-sections/certification";
+import Training from "./resume-sections/trainings";
+import Award from "./resume-sections/award";
+import Interest from "./resume-sections/interest";
+import Reference from "./resume-sections/reference";
+import Language from "./resume-sections/language";
 const ResumeTemplate6 = () => {
   const resume = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
- 
+
   const [newAchievement, setNewAchievement] = useState("");
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [streamedJDData, setStreamedJDData] = useState<any>("");
@@ -52,14 +59,9 @@ const ResumeTemplate6 = () => {
   const { getSummary } = useGetSummary(setStreamedSummaryData);
   // const [streamedJDData, setStreamedJDData] = useState<any>("");
   //add new code
-  const { getOneWorkExperienceNew } =
-    useSingleJDGenerate(setStreamedJDData);
-  const {
-    handleDropPrimary,
-    handleDropAchievement,
-    handleDropExperience,
-  } = useDragAndDrop();
-
+  const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
+  const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
+    useDragAndDrop();
 
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const { addPrimarySkill } = useAddPrimarySkill();
@@ -711,9 +713,59 @@ const ResumeTemplate6 = () => {
                 }}
               ></div>
             )}
-           
+
             {/* Add Custom */}
             {/* <CustomResumeSection /> */}
+            {/* Publication */}
+            {resume?.publications && resume?.publications.length > 0 && (
+              <Publication
+                heading={resume.headings.publications}
+                publications={resume.publications}
+              />
+            )}
+            {/* Certification */}
+            {resume?.certifications && resume?.certifications.length > 0 && (
+              <Certification
+                heading={resume.headings.certifications}
+                certificates={resume.certifications}
+              />
+            )}
+            {/* Trainings */}
+            {resume?.trainings && resume?.trainings.length > 0 && (
+              <Training
+                heading={resume.headings.trainings}
+                trainings={resume.trainings}
+              />
+            )}
+
+            {/* Awards */}
+            {resume?.awards && resume?.awards.length > 0 && (
+              <Award heading={resume.headings.awards} awards={resume.awards} />
+            )}
+
+            {/* Interests & Hobbies */}
+            {resume?.interests && resume?.interests.length > 0 && (
+              <Interest
+                heading={resume.headings.interests}
+                interests={resume.interests}
+              />
+            )}
+
+            {/* References */}
+            {resume?.references && resume?.references.length > 0 && (
+              <Reference
+                heading={resume.headings.references}
+                references={resume.references}
+              />
+            )}
+
+            {/* Languages */}
+            {resume?.languages && resume?.languages.length > 0 && (
+              <Language
+                heading={resume.headings.languages}
+                languages={resume.languages}
+              />
+            )}
 
             {/* Education */}
             {resume?.education.length > 0 && (

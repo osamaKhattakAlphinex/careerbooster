@@ -161,7 +161,7 @@ const AddItemBtn = ({ onClick, btnText = "Add Item" }: any) => {
   );
 };
 // forms
-const PublicationsForm = ({
+export const PublicationsForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
@@ -798,7 +798,7 @@ const ReferencesForm = ({
           </label>
           <input
             id="contactInformation"
-            type="text"
+            type="email"
             className="form-control"
             onChange={formik.handleChange}
             placeholder="Contact Information"
