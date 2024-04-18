@@ -2,6 +2,7 @@
 import Loader from "@/components/common/Loader";
 import EditableField from "@/components/dashboard/EditableField";
 import Toolbar from "@/components/dashboard/Toolbar";
+import AddItemToCustomSection from "@/components/dashboard/resume-builder/AddItemToCustomSection";
 import { formatDate } from "@/helpers/getFormattedDateTime";
 import { crossIcon1 } from "@/helpers/iconsProvider";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
@@ -277,6 +278,7 @@ const Award = ({ heading, awards }: Props) => {
           </Toolbar>
         );
       })}
+      <AddItemToCustomSection recName="awards" />
     </>
   );
 };

@@ -1,9 +1,10 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "./styles/buttons.css";
+@import "./styles/template_4.css";
+
 @import "./styles/template_2.css";
 @layer components {
-
   .form-control {
     @apply w-full border  border-[#2e2f45] dark:focus-within:border-[#e6f85e] outline-none rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500  bg-transparent;
   }
@@ -27,7 +28,7 @@
   .link-list-t a {
     @apply text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] py-1 px-0 no-underline;
   }
-  
+
   .link-list-t a:hover {
     @apply text-[#6a4dff] dark:text-[#e6f85e];
   }
@@ -35,6 +36,4 @@
   .h3-t {
     @apply font-semibold text-[#000] dark:text-[#fff]  text-center leading-5 text-3xl;
   }
-
-  
 }
