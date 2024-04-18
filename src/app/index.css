@@ -1,14 +1,10 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "./styles/buttons.css";
-<<<<<<< HEAD
 @import "./styles/template_4.css";
 
-=======
 @import "./styles/template_2.css";
->>>>>>> 85053ac34aa3a5eca03c1b9b4f0beb2c90d3d70b
 @layer components {
-
   .form-control {
     @apply w-full border  border-[#2e2f45] dark:focus-within:border-[#e6f85e] outline-none rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500  bg-transparent;
   }
@@ -32,7 +28,7 @@
   .link-list-t a {
     @apply text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] py-1 px-0 no-underline;
   }
-  
+
   .link-list-t a:hover {
     @apply text-[#6a4dff] dark:text-[#e6f85e];
   }
@@ -40,48 +36,4 @@
   .h3-t {
     @apply font-semibold text-[#000] dark:text-[#fff]  text-center leading-5 text-3xl;
   }
-<<<<<<< HEAD
-  .fullName-temp-2 {
-    @apply text-4xl font-bold border-2 border-transparent xs:text-2xl md:text-4xl lg:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500;
-  }
-  .jobTitle-temp-2 {
-    @apply text-lg border-2 border-transparent xs:text-xs md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500;
-  }
-  .contact-temp-2 {
-    @apply flex flex-row items-center justify-around px-4 py-2 bg-gray-300 xs:flex-col xs:gap-2 md:flex-row rounded-xl;
-  }
-  .contact-temp-2-li {
-    @apply flex flex-row items-center justify-start gap-1 text-xs hover:shadow-md text-gray-950 hover:bg-gray-100 xs:w-[45%] lg:w-[25%];
-  }
-  .summaryHeading-temp-2 {
-    @apply flex items-center gap-2 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500;
-  }
-  .summaryText-temp-2 {
-    @apply text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed;
-  }
-  .skillHeading-temp-2 {
-    @apply my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2;
-  }
-  .skill-ul-temp-2 {
-    @apply flex flex-row flex-wrap gap-1 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500;
-  }
-  .skill-li-temp-2 {
-    @apply px-4 py-2 bg-gray-300 border-transparent border-[1px] rounded-full hover:shadow-md hover:cursor-move  hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 flex justify-between items-center;
-  }
-  .skill-New-temp-2 {
-    @apply w-full rounded-2xl  border-[1px] border-black flex h-[38px];
-  }
-  .skill-input-temp-2 {
-    @apply w-full px-2 bg-white outline-none rounded-2xl;
-  }
-  .skill-Save {
-    @apply px-2 text-white uppercase bg-green-500 h-9 rounded-r-2xl;
-  }
-  .skill-cancel {
-    @apply px-2 py-1 text-white bg-red-500 rounded-full;
-  }
-=======
-
-  
->>>>>>> 85053ac34aa3a5eca03c1b9b4f0beb2c90d3d70b
 }

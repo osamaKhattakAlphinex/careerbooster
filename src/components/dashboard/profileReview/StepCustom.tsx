@@ -299,7 +299,7 @@ export const PublicationsForm = ({
     </div>
   );
 };
-const CertificationsForm = ({
+export const CertificationsForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
@@ -439,7 +439,7 @@ const CertificationsForm = ({
     </div>
   );
 };
-const AwardsForm = ({
+export const AwardsForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
@@ -582,7 +582,7 @@ const AwardsForm = ({
     </div>
   );
 };
-const InterestsForm = ({
+export const InterestsForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
@@ -687,7 +687,7 @@ const InterestsForm = ({
     </div>
   );
 };
-const ReferencesForm = ({
+export const ReferencesForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
@@ -823,7 +823,7 @@ const ReferencesForm = ({
     </div>
   );
 };
-const TrainingForm = ({
+export const TrainingForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
@@ -982,7 +982,7 @@ const TrainingForm = ({
     </div>
   );
 };
-const LangaugesForm = ({
+export const LangaugesForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
