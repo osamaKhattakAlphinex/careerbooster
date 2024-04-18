@@ -798,7 +798,7 @@ const ReferencesForm = ({
           </label>
           <input
             id="contactInformation"
-            type="text"
+            type="email"
             className="form-control"
             onChange={formik.handleChange}
             placeholder="Contact Information"
@@ -1213,11 +1213,9 @@ const StepCustom = () => {
         setRecordID("");
         setRecordName("");
         showWarningToast("Item not deleted");
-      }
-
+    }
   };
 
- 
   return (
     <div className="flex flex-col items-start justify-start gap-4 ">
       {confirmationModal && (

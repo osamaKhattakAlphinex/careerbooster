@@ -428,12 +428,11 @@ const components: any = {
     elements: [
       {
         tag: "div",
-        styles:
-          "my-2 flex flex-col p-4 rounded-md text-gray-100",
+        styles: "my-2 flex flex-col text-gray-100",
         container: [
           {
             id: "language",
-            styles: "font-semibold text-base text-gray-100",
+            styles: "font-semibold text-sm text-gray-100",
             tag: "span",
           },
           {
@@ -502,7 +501,7 @@ const templateLayout: any = {
         {
           id: "publications",
         },
-        
+
         {
           id: "certifications",
         },
@@ -512,8 +511,7 @@ const templateLayout: any = {
         {
           id: "trainings",
         },
-        
-       
+
         {
           id: "references",
         },
@@ -545,5 +543,5 @@ export const template = {
   components,
   templateLayout,
   cvHeadings,
-  GenerationOrder
+  GenerationOrder,
 };

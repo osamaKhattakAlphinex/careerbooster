@@ -440,12 +440,11 @@ const components: any = {
     elements: [
       {
         tag: "div",
-        styles:
-          "bg-gray-200 flex flex-col w-[31%] p-4 rounded-md text-gray-950/80",
+        styles: "flex flex-col w-[31%] p-1 rounded-md text-gray-950/80",
         container: [
           {
             id: "language",
-            styles: "font-semibold text-base text-gray-950/80",
+            styles: "font-semibold text-sm text-gray-950/80",
             tag: "span",
           },
           {
@@ -514,7 +513,7 @@ const templateLayout: any = {
         {
           id: "education",
         },
-       
+
         {
           id: "awards",
         },
@@ -524,7 +523,7 @@ const templateLayout: any = {
         {
           id: "references",
         },
-       
+
         {
           id: "publications",
         },
@@ -557,5 +556,5 @@ export const template = {
   components,
   templateLayout,
   cvHeadings,
-  GenerationOrder
+  GenerationOrder,
 };
