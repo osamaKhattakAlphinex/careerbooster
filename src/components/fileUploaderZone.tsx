@@ -75,7 +75,7 @@ const FileUploader = ({
     <div className="flex items-center justify-center w-full ">
       <label
         htmlFor="dropzone-file"
-        className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-[#222027] hover:bg-gray-950/60 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+        className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg hover:bg-gray-200 cursor-pointer bg-gray-50  dark:bg-[#222027] dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
         onDragOver={handleDragOver}
         onDrop={handleDrop}
       >

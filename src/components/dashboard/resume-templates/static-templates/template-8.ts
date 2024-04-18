@@ -37,7 +37,7 @@ const cvHeadings: any = [
     headingKey: "education",
     attributes: [{ "icon-color": "black" }],
     styles:
-      "font-semibold border-t-2 border-b-2 border-gray-950/80 mt-2 w-full mt-2 uppercase text-base flex flex-row items-center text-gray-950/80 py-0.5",
+      "font-semibold border-t-2 border-b-2 border-gray-950/80 mt-2 w-full uppercase text-base flex flex-row items-center text-gray-950/80 py-0.5",
   },
   {
     text: "certificates",

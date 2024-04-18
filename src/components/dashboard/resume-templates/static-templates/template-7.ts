@@ -30,7 +30,7 @@ const cvHeadings = [
 
     section: "education",
     styles:
-      "font-bold text-center mt-2 w-full uppercase text-base flex flex-row items-center justify-center text-gray-950/80 border-y-2 border-gray-950/80 py-0.5",
+      "font-bold text-center mt-4 w-full uppercase text-base flex flex-row items-center justify-center text-gray-950/80 border-y-2 border-gray-950/80 py-0.5",
   },
   {
     attributes: [{ "icon-color": "black" }],
@@ -46,7 +46,7 @@ const cvHeadings = [
     section: "certifications",
     headingKey: "certifications",
     styles:
-      "font-bold uppercase text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
+      "font-bold uppercase mt-4 text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -54,7 +54,7 @@ const cvHeadings = [
     section: "awards",
     headingKey: "awards",
     styles:
-      "font-bold uppercase text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
+      "font-bold uppercase mt-4 text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -62,7 +62,7 @@ const cvHeadings = [
     section: "publications",
     headingKey: "publications",
     styles:
-      "font-bold uppercase text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
+      "font-bold uppercase mt-4 text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -70,7 +70,7 @@ const cvHeadings = [
     section: "languages",
     headingKey: "languages",
     styles:
-      "font-bold uppercase text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
+      "font-bold uppercase mt-4 text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -78,7 +78,7 @@ const cvHeadings = [
     section: "references",
     headingKey: "references",
     styles:
-      "font-bold uppercase text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
+      "font-bold uppercase mt-4 text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -86,7 +86,7 @@ const cvHeadings = [
     section: "interests",
     headingKey: "interests",
     styles:
-      "font-bold uppercase text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
+      "font-bold uppercase mt-4 mb-2 text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
     attributes: [{ "icon-color": "black" }],
   },
   {
@@ -94,7 +94,7 @@ const cvHeadings = [
     section: "trainings",
     headingKey: "trainings",
     styles:
-      "font-bold uppercase text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
+      "font-bold uppercase mt-4 text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
     attributes: [{ "icon-color": "black" }],
   },
 ];
@@ -161,7 +161,6 @@ const templateLayout = {
         },
       ],
     },
-
     publications: {
       styles: "flex flex-col px-8 w-full",
       elements: [
@@ -222,7 +221,7 @@ const templateLayout = {
     },
     education: {
       styles:
-        "text-gray-950/80 flex flex-row flex-wrap justify-start items-start px-6 w-full",
+        "text-gray-950/80 flex flex-row flex-wrap justify-start items-start px-8 w-full",
       elements: [
         {
           id: "education",
@@ -444,7 +443,7 @@ const components = {
       {
         id: "description",
         styles:
-          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+          "text-xs flex text-justify py-0.5 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
         tag: "span",
       },
     ],

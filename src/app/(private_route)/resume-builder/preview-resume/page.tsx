@@ -8,6 +8,7 @@ import { getTemplates } from "@/components/dashboard/resume-templates/static-tem
 import { formatDate, getFormattedDate } from "@/helpers/getFormattedDateTime";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
+import { useReactToPrint } from "react-to-print";
 const Page = () => {
   const params = useSearchParams();
   const [scale, setScale] = useState<number>(1);
@@ -54,6 +55,9 @@ const Page = () => {
   let fragment: any = [];
   let leftSpan: any = [];
 
+  const handlePrintClick = useReactToPrint({
+    content: () => cvRef.current,
+  });
   const getAllSettings = () => {
     if (cvRef.current) {
       const scaling =
@@ -67,23 +71,22 @@ const Page = () => {
       setCvMaxHeight(unscaledHeight + 100); // Set the scaled down height plus 100 (adjust as needed)
     }
   };
+
   const cleanUpHTML = (page: any) => {
- 
-     const cleanUpIds = [
-        "shortName",
-        "email",
-        "linkedIn",
-        "phone",
-        "address",
-        "primarySkills",
-        "name",
-        "jobTitle",
-        "summary",
-        "interests",
-        "languages",
-        "workExperienceArray",
-      ];
-    
+    const cleanUpIds = [
+      "shortName",
+      "email",
+      "linkedIn",
+      "phone",
+      "address",
+      "primarySkills",
+      "name",
+      "jobTitle",
+      "summary",
+      "interests",
+      "languages",
+      "workExperienceArray",
+    ];
 
     const containerNames = [
       "header",
@@ -270,6 +273,7 @@ const Page = () => {
       });
     }
   };
+
   const educationDivs = (page: any, nextPage?: any) => {
     const educationDivs = document.querySelectorAll(
       "[data-education-container-index]"
@@ -391,6 +395,7 @@ const Page = () => {
       });
     }
   };
+
   const newPage = () => {
     const div = document.createElement("div");
     div.classList.add("page");
@@ -428,7 +433,7 @@ const Page = () => {
     //   if the value is an array
     if (Array.isArray(value)) {
       let i = 1;
-      for (const singleItem of value) {       
+      for (const singleItem of value) {
         let newAttr = [];
         if (typeof singleItem === "object" && !Array.isArray(singleItem)) {
           if (template.elements) {
@@ -774,18 +779,45 @@ const Page = () => {
       style={{ maxHeight: `${cvMaxHeight}px` }}
     >
       <div className="container flex items-center justify-between gap-3 xs:pb-0 md:pb-4">
-      <Link
-        href={`/resume-builder/templates/template?templateId=${templateId}`}
-        className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center hover:opacity-80 transition-all"
-      >
-        {leftArrowIcon}
-        Back
-      </Link>
-        <DownloadService
-          componentRef={cvRef}
-          fileName={fileName}
-          preview={false}
-        />
+        <Link
+          href={`/resume-builder/templates/template?templateId=${templateId}`}
+          className="ml-2 my-4 no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center hover:opacity-80 transition-all"
+        >
+          {leftArrowIcon}
+          Back
+        </Link>
+        <div className="flex flex-row items-center justify-between gap-3 ">
+          <button
+            onClick={handlePrintClick}
+            className="w-full sm:max-w-max sm:w-48 lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35]"
+          >
+            <div className="flex flex-row items-center justify-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-3 h-3 md:w-4 md:h-4 dark:text-gray-100 text-gray-950"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z"
+                />
+              </svg>
+
+              <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
+                Print
+              </span>
+            </div>
+          </button>
+          <DownloadService
+            componentRef={cvRef}
+            fileName={fileName}
+            preview={false}
+          />
+        </div>
       </div>
       <div
         ref={cvRef}
