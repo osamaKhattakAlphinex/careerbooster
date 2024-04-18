@@ -79,10 +79,8 @@ const Page = () => {
         "name",
         "jobTitle",
         "summary",
-        "trainings",
-        "publications",
-        "certifications",
-        "awards",
+        "interests",
+        "languages",
         "workExperienceArray",
       ];
     
