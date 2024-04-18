@@ -282,7 +282,7 @@ const Publication = ({ heading, publications }: Props) => {
           </Toolbar>
         );
       })}
-      <AddItemToCustomSection/>
+      <AddItemToCustomSection recName="publications"/>
     </>
   );
 };

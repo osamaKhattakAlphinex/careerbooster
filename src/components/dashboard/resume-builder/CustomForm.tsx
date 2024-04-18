@@ -6,7 +6,10 @@ import { getYearsList, months } from "@/helpers/listsProvider";
 import { useSelector } from "react-redux";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 const years = getYearsList();
-const CustomForm = ({ setShowCustomForm, index }: any) => {
+
+
+
+const CustomForm = ({ setShowCustomForm, recName }: any) => {
   //form handling
   const resume = useSelector((state: any) => state.resume);
   const { updateSaveHook } = useUpdateAndSave();
