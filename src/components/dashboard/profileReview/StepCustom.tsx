@@ -100,46 +100,46 @@ const RecordCard = ({ rec, recName, formCloseHandler, deleteHandler }: any) => {
           </div>
         </div>
 
-        <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
+        <h2 className="text-base font-semibold dark:text-gray-100 text-gray-950">
           {rec.name}
           {rec.title}
         </h2>
 
-        <span className="text-base dark:text-white/70 text-black/70">
+        <span className="text-sm dark:text-gray-100 text-gray-950">
           {rec.awardingOrganization}
           {rec.issuingOrganization}
           {rec.company}
         </span>
 
         <div className="flex flex-row items-center justify-between ">
-          <span className="text-sm dark:text-white/70 text-black/70">
+          <span className="text-sm italic dark:text-gray-300 text-gray-950">
             {rec.date}
           </span>
-          <span className="text-sm dark:text-white/70 text-black/70">
+          <span className="text-sm italic dark:text-gray-300 text-gray-950">
             {rec.startDate}
           </span>
-          <span className="text-sm dark:text-white/70 text-black/70">
+          <span className="text-sm italic dark:text-gray-300 text-gray-950">
             {rec.endDate}
           </span>
         </div>
-        <span className="text-sm uppercase dark:text-white/70 text-black/70">
+        <span className="text-sm capitalize dark:text-gray-100 text-gray-950">
           {rec.description}
         </span>
 
-        <span className="text-sm uppercase dark:text-white/70 text-black/70">
+        <span className="text-sm  dark:text-gray-100 text-gray-950">
           {rec.contactInformation}
           {rec.publisher}
         </span>
 
-        <span className="text-base uppercase dark:text-white/70 text-black/70">
+        <span className="text-sm italic capitalize dark:text-gray-300 text-gray-950">
           {rec.position}
         </span>
 
         <div className="flex flex-col justify-between">
-          <span className="text-base dark:text-white/70 text-black/70">
+          <span className="text-base font-semibold dark:text-gray-100 text-gray-950">
             {rec.language}
           </span>
-          <span className="text-sm dark:text-white/70 text-black/70">
+          <span className="text-sm dark:text-gray-100 text-gray-950">
             {rec.proficiency}
           </span>
         </div>

@@ -31,7 +31,7 @@ export async function POST(req: any) {
           apiKey: process.env.OPENAI_API_KEY,
         });
 
-        const dataset = "register.wizard.listCertifications";
+        const dataset = "register.wizard.listLanguages";
         const model = await getTrainedModel(dataset);
         //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
@@ -39,25 +39,25 @@ export async function POST(req: any) {
               This is the User Data:
               ${content}
     
-              Now please give me a List of All Certifications found from the above user data provided.
+              Now please give me a List of All Languages found from the above user data provided.
     
               The answer MUST be a valid JSON and formatting should be like this 
               replace the VALUE_HERE with the actual values
               {
-                certifications: [
+                L
+                languages: [
                   {
-                    title: VALUE_HERE,
-                    issuingOrganization: VALUE_HERE,
-                    date: VALUE_HERE,
+                    language: VALUE_HERE,
+                    proficiency:VALUE_HERE
                   },
                   .
                   .
                   .
                 ]
               }
-              If you don't see any certifications just resturn empty like
+              If you don't see any Languages just resturn empty like
               {
-                certifications: []
+                languages: []
               }
               If there is no value Leave that field blank
           `;
@@ -78,19 +78,19 @@ export async function POST(req: any) {
           if (trainBotData) {
             await startDB();
             const obj = {
-              type: "register.wizard.listCertifications",
+              type: "register.wizard.listLanguages",
               input: input,
               output: response?.choices[0]?.message?.content,
               idealOutput: "",
               status: "pending",
               userEmail: trainBotData?.userEmail,
               fileAddress: trainBotData?.fileAddress,
-              Instructions: `Get List of all Certifications`,
+              Instructions: `Get List of all Languages`,
             };
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) { }
+        } catch (error) {}
 
         return NextResponse.json(
           { success: true, result: response.choices[0].message.content },

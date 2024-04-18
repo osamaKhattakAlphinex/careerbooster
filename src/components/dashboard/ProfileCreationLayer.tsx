@@ -9,17 +9,21 @@ import { makeid } from "@/helpers/makeid";
 import {
   setScrapped,
   setScrapping,
+  setStepEight,
+  setStepEleven,
   setStepFive,
   setStepFour,
   setStepNine,
   setStepOne,
   setStepSix,
+  setStepTen,
   setStepThirteen,
   setStepThree,
+  setStepTwelve,
   setStepTwo,
 } from "@/store/registerSlice";
 import Link from "next/link";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import VirtualBot from "./VirtualBot";
 import { getPackageID } from "@/ServerActions";
@@ -70,11 +74,11 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       fetchSkillsDataFromResume();
       fetchCertificatesDataFromResume();
       fetchAwardsDataFromResume();
-      // fetchInterestsDataFromResume();
-      // fetchLanguagesDataFromResume();
-      // fetchTrainingsDataFromResume();
-      // fetchPublicationsDataFromResume();
-      // fetchReferencesDataFromResume();
+      fetchInterestsDataFromResume();
+      fetchLanguagesDataFromResume();
+      fetchTrainingsDataFromResume();
+      fetchPublicationsDataFromResume();
+      fetchReferencesDataFromResume();
     }
   };
 
@@ -318,7 +322,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           const res = await resp.json();
           if (res.success) {
             if (res?.result) {
-              
               try {
                 let data;
                 if (typeof res.result === "object") {
@@ -387,7 +390,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           const res = await resp.json();
           if (res.success) {
             if (res?.result) {
-              
               try {
                 let data;
                 if (typeof res.result === "object") {
@@ -425,6 +427,271 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         .catch((error) => {
           dispatch(setScrapped({ awards: true }));
           dispatch(setScrapping({ awards: false }));
+        });
+    }
+  };
+  const fetchInterestsDataFromResume = (refetch = false) => {
+    if (
+      (refetch || register.scrapped.interests === false) &&
+      // userData.defaultResumeFile &&
+      register.scrappedContent !== "" &&
+      register.scrapping.interests === false
+    ) {
+      // set scrapping to true so that we Don't send multiple requests
+      dispatch(setScrapping({ languages: true }));
+
+      const formData = {
+        // file: userData.defaultResumeFile,
+        content: register.scrappedContent,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
+      };
+
+      fetch("/api/homepage/fetchHobbiesData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
+            if (res?.result) {
+              try {
+                let data;
+                if (typeof res.result === "object") {
+                  data = res.result;
+                } else {
+                  data = await JSON.parse(res.result);
+                }
+                const formattedArr = data?.interests.map((item: any) => {
+                  return {
+                    id: makeid(),
+                    name: item?.name,
+                    description: item?.description,
+                  };
+                });
+
+                dispatch(setStepTen({ list: formattedArr }));
+                dispatch(setScrapped({ interests: true }));
+                dispatch(setScrapping({ interests: false }));
+              } catch (error) {
+                // console.log("Error in sorting interests array: ", error);
+                dispatch(setScrapped({ interests: true }));
+                dispatch(setScrapping({ interests: false }));
+              }
+            } else {
+              dispatch(setScrapped({ interests: true }));
+              dispatch(setScrapping({ interests: false }));
+            }
+          } else {
+            dispatch(setScrapped({ interests: true }));
+            dispatch(setScrapping({ interests: false }));
+          }
+        })
+        .catch((error) => {
+          dispatch(setScrapped({ interests: true }));
+          dispatch(setScrapping({ interests: false }));
+        });
+    }
+  };
+  const fetchLanguagesDataFromResume = (refetch = false) => {
+    if (
+      (refetch || register.scrapped.languages === false) &&
+      // userData.defaultResumeFile &&
+      register.scrappedContent !== "" &&
+      register.scrapping.languages === false
+    ) {
+      // set scrapping to true so that we Don't send multiple requests
+      dispatch(setScrapping({ languages: true }));
+
+      const formData = {
+        // file: userData.defaultResumeFile,
+        content: register.scrappedContent,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
+      };
+
+      fetch("/api/homepage/fetchLanguagesData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
+            if (res?.result) {
+              try {
+                let data;
+                if (typeof res.result === "object") {
+                  data = res.result;
+                } else {
+                  data = await JSON.parse(res.result);
+                }
+                const formattedArr = data?.languages.map((item: any) => {
+                  return {
+                    id: makeid(),
+                    language: item?.language,
+                    proficiency: item?.proficiency,
+                  };
+                });
+
+                dispatch(setStepEleven({ list: formattedArr }));
+                dispatch(setScrapped({ languages: true }));
+                dispatch(setScrapping({ languages: false }));
+              } catch (error) {
+                // console.log("Error in sorting interests array: ", error);
+                dispatch(setScrapped({ languages: true }));
+                dispatch(setScrapping({ languages: false }));
+              }
+            } else {
+              dispatch(setScrapped({ languages: true }));
+              dispatch(setScrapping({ languages: false }));
+            }
+          } else {
+            dispatch(setScrapped({ languages: true }));
+            dispatch(setScrapping({ languages: false }));
+          }
+        })
+        .catch((error) => {
+          dispatch(setScrapped({ languages: true }));
+          dispatch(setScrapping({ languages: false }));
+        });
+    }
+  };
+  const fetchReferencesDataFromResume = (refetch = false) => {
+    if (
+      (refetch || register.scrapped.trainings === false) &&
+      // userData.defaultResumeFile &&
+      register.scrappedContent !== "" &&
+      register.scrapping.trainings === false
+    ) {
+      // set scrapping to true so that we Don't send multiple requests
+      dispatch(setScrapping({ trainings: true }));
+
+      const formData = {
+        // file: userData.defaultResumeFile,
+        content: register.scrappedContent,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
+      };
+
+      fetch("/api/homepage/fetchTrainingsData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
+            if (res?.result) {
+              try {
+                let data;
+                if (typeof res.result === "object") {
+                  data = res.result;
+                } else {
+                  data = await JSON.parse(res.result);
+                }
+                const formattedArr = data?.trainings.map((item: any) => {
+                  return {
+                    id: makeid(),
+                    company: item?.company,
+                    position: item?.position,
+                    startDate: item?.startDate,
+                    endDate: item?.endDate,
+                    description: item?.description,
+                  };
+                });
+
+                dispatch(setStepTwelve({ list: formattedArr }));
+                dispatch(setScrapped({ references: true }));
+                dispatch(setScrapping({ references: false }));
+              } catch (error) {
+                // console.log("Error in sorting interests array: ", error);
+                dispatch(setScrapped({ references: true }));
+                dispatch(setScrapping({ references: false }));
+              }
+            } else {
+              dispatch(setScrapped({ references: true }));
+              dispatch(setScrapping({ references: false }));
+            }
+          } else {
+            dispatch(setScrapped({ references: true }));
+            dispatch(setScrapping({ references: false }));
+          }
+        })
+        .catch((error) => {
+          dispatch(setScrapped({ references: true }));
+          dispatch(setScrapping({ references: false }));
+        });
+    }
+  };
+  const fetchPublicationsDataFromResume = (refetch = false) => {
+    if (
+      (refetch || register.scrapped.publications === false) &&
+      // userData.defaultResumeFile &&
+      register.scrappedContent !== "" &&
+      register.scrapping.publications === false
+    ) {
+      // set scrapping to true so that we Don't send multiple requests
+      dispatch(setScrapping({ publications: true }));
+
+      const formData = {
+        // file: userData.defaultResumeFile,
+        content: register.scrappedContent,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
+      };
+
+      fetch("/api/homepage/fetchPublicationsData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
+            if (res?.result) {
+              try {
+                let data;
+                if (typeof res.result === "object") {
+                  data = res.result;
+                } else {
+                  data = await JSON.parse(res.result);
+                }
+                const formattedArr = data?.publications.map((item: any) => {
+                  return {
+                    id: makeid(),
+                    title: item?.title,
+                    publisher: item?.publisher,
+                    date: item?.date,
+                    description: item?.description,
+                  };
+                });
+
+                dispatch(setStepEight({ list: formattedArr }));
+                dispatch(setScrapped({ publications: true }));
+                dispatch(setScrapping({ publications: false }));
+              } catch (error) {
+                // console.log("Error in sorting interests array: ", error);
+                dispatch(setScrapped({ publications: true }));
+                dispatch(setScrapping({ publications: false }));
+              }
+            } else {
+              dispatch(setScrapped({ publications: true }));
+              dispatch(setScrapping({ publications: false }));
+            }
+          } else {
+            dispatch(setScrapped({ publications: true }));
+            dispatch(setScrapping({ publications: false }));
+          }
+        })
+        .catch((error) => {
+          dispatch(setScrapped({ publications: true }));
+          dispatch(setScrapping({ publications: false }));
         });
     }
   };
@@ -664,7 +931,73 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         });
     }
   };
+  const fetchTrainingsDataFromResume = (refetch = false) => {
+    if (
+      (refetch || register.scrapped.trainings === false) &&
+      // userData.defaultResumeFile &&
+      register.scrappedContent !== "" &&
+      register.scrapping.trainings === false
+    ) {
+      // set scrapping to true so that we Don't send multiple requests
+      dispatch(setScrapping({ trainings: true }));
 
+      const formData = {
+        // file: userData.defaultResumeFile,
+        content: register.scrappedContent,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
+      };
+
+      fetch("/api/homepage/fetchRefrencesData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
+            if (res?.result) {
+              try {
+                let data;
+                if (typeof res.result === "object") {
+                  data = res.result;
+                } else {
+                  data = await JSON.parse(res.result);
+                }
+                const formattedArr = data?.trainings.map((item: any) => {
+                  return {
+                    id: makeid(),
+                    name: item?.language,
+                    position: item?.proficiency,
+                    company: item?.company,
+                    contactInformation: item?.contactInformation,
+                  };
+                });
+
+                dispatch(setStepTwelve({ list: formattedArr }));
+                dispatch(setScrapped({ trainings: true }));
+                dispatch(setScrapping({ trainings: false }));
+              } catch (error) {
+                // console.log("Error in sorting interests array: ", error);
+                dispatch(setScrapped({ trainings: true }));
+                dispatch(setScrapping({ trainings: false }));
+              }
+            } else {
+              dispatch(setScrapped({ trainings: true }));
+              dispatch(setScrapping({ trainings: false }));
+            }
+          } else {
+            dispatch(setScrapped({ trainings: true }));
+            dispatch(setScrapping({ trainings: false }));
+          }
+        })
+        .catch((error) => {
+          dispatch(setScrapped({ trainings: true }));
+          dispatch(setScrapping({ trainings: false }));
+        });
+    }
+  };
   const updateUser = async () => {
     // Make an object
     const obj = {
@@ -693,7 +1026,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       })
       .then(async (resp: any) => {
         if (window) {
-          
           window.location.reload();
         }
       });

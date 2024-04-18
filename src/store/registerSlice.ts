@@ -1,5 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Education, WorkExperience, Certification, Training, Publication, Award, Interest, Language, Reference } from "./userDataSlice";
+import {
+  Education,
+  WorkExperience,
+  Certification,
+  Training,
+  Publication,
+  Award,
+  Interest,
+  Language,
+  Reference,
+} from "./userDataSlice";
 
 interface RegisterSlice {
   scrappedContent: string;
@@ -13,7 +23,10 @@ interface RegisterSlice {
     workExperience: boolean;
     certifications: boolean;
     awards: boolean;
+    interests: boolean;
     skills: boolean;
+    publications: boolean;
+    references: boolean;
   };
   scrapping: {
     basic: boolean;
@@ -21,7 +34,10 @@ interface RegisterSlice {
     workExperience: boolean;
     certifications: boolean;
     awards: boolean;
+    interests: boolean;
     skills: boolean;
+    publications: boolean;
+    references: boolean;
   };
   stepOne: {
     firstName?: string;
@@ -59,49 +75,42 @@ interface RegisterSlice {
     editId?: string;
     state?: string;
     isValid: boolean;
-
   };
   stepSeven: {
     list?: Training[];
     editId?: string;
     state?: string;
     isValid: boolean;
-
   };
   stepEight: {
     list?: Publication[];
     editId?: string;
-    state?: string;   
-     isValid: boolean;
-
+    state?: string;
+    isValid: boolean;
   };
   stepNine: {
     list?: Award[];
     editId?: string;
     state?: string;
     isValid: boolean;
-
   };
   stepTen: {
     list?: Interest[];
     editId?: string;
     state?: string;
     isValid: boolean;
-
   };
   stepEleven: {
     list?: Language[];
     editId?: string;
     state?: string;
     isValid: boolean;
-
   };
   stepTwelve: {
     list?: Reference[];
     editId?: string;
     state?: string;
     isValid: boolean;
-
   };
   stepThirteen: {
     list: string[];
@@ -126,7 +135,10 @@ const initialState: RegisterSlice = {
     workExperience: false,
     certifications: false,
     awards: false,
+    interests: false,
+    publications: false,
     skills: false,
+    references: false,
   },
   scrapping: {
     basic: false,
@@ -134,7 +146,10 @@ const initialState: RegisterSlice = {
     workExperience: false,
     certifications: false,
     awards: false,
+    interests: false,
     skills: false,
+    publications: false,
+    references: false,
   },
   stepOne: {
     firstName: "",
@@ -208,7 +223,7 @@ const initialState: RegisterSlice = {
     editId: "",
     isValid: true,
   },
-  
+
   stepThirteen: {
     list: [],
     isValid: true,
