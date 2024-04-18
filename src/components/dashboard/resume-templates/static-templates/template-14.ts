@@ -14,7 +14,7 @@ const cvHeadings: any = [
     headingKey: "summary",
 
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm w-full",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm w-full my-2",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -23,7 +23,7 @@ const cvHeadings: any = [
     headingKey: "workExperienceArray",
 
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center  text-sm w-full",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center  text-sm w-full my-2",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -33,7 +33,7 @@ const cvHeadings: any = [
 
     attributes: [{ "icon-color": "white" }],
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 my-2 w-full",
   },
   {
     text: "skills",
@@ -49,7 +49,7 @@ const cvHeadings: any = [
     section: "certifications",
     headingKey: "certifications",
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 my-2 w-full",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -57,7 +57,7 @@ const cvHeadings: any = [
     section: "awards",
     headingKey: "awards",
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 my-2 w-full",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -65,7 +65,7 @@ const cvHeadings: any = [
     section: "publications",
     headingKey: "publications",
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 my-2 w-full",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -73,7 +73,7 @@ const cvHeadings: any = [
     section: "languages",
     headingKey: "languages",
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 my-2 w-full",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -81,7 +81,7 @@ const cvHeadings: any = [
     section: "references",
     headingKey: "references",
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 my-2 w-full",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -89,7 +89,7 @@ const cvHeadings: any = [
     section: "interests",
     headingKey: "interests",
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 my-2 w-full",
     attributes: [{ "icon-color": "white" }],
   },
   {
@@ -97,7 +97,7 @@ const cvHeadings: any = [
     section: "trainings",
     headingKey: "trainings",
     styles:
-      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 w-full",
+      "font-semibold uppercase text-gray-100 px-3 py-1 bg-[#444440] flex items-center text-sm border-t-2 border-b-2 my-2 w-full",
     attributes: [{ "icon-color": "white" }],
   },
 ];
@@ -329,7 +329,7 @@ const components: any = {
       {
         id: "description",
         styles:
-          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+          "text-xs my-1 flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
         tag: "span",
       },
     ],
