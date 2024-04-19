@@ -123,15 +123,15 @@ const ResumeBuilder = () => {
         setResumeGenerated(false);
         dispatch(setState({ name: "resumeLoading", value: true }));
         dispatch(setQuantifyingExperience(quantifyingExperience));
-        dispatch(setTrainings({ trainings: userData.trainings }));
-        dispatch(setAwards({ awards: userData.awards }));
+        // dispatch(setTrainings({ trainings: userData.trainings }));
+        // dispatch(setAwards({ awards: userData.awards }));
         // dispatch(setPublications({ publications: userData.publications }));
-        dispatch(setReferences({ references: userData.references }));
-        dispatch(setInterests({ interests: userData.interests }));
-        dispatch(
-          setCertifications({ certifications: userData.certifications })
-        );
-        dispatch(setLanguages({ languages: userData.languages }));
+        // dispatch(setReferences({ references: userData.references }));
+        // dispatch(setInterests({ interests: userData.interests }));
+        // dispatch(
+        //   setCertifications({ certifications: userData.certifications })
+        // );
+        // dispatch(setLanguages({ languages: userData.languages }));
 
         dispatch(setId(""));
         await getBasicInfo();
@@ -321,7 +321,6 @@ const ResumeBuilder = () => {
       }
       setFinished(true);
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
-      setResumeGenerated(true);
       dispatch(setState({ name: "resumeLoading", value: false }));
       dispatch(setWorkExperience(temp));
     }
@@ -405,7 +404,7 @@ const ResumeBuilder = () => {
       }
       setFinished(true);
       dispatch(setPublications({ publications: publicationArr }));
-      // setResumeGenerated(true);
+      setResumeGenerated(true);
       dispatch(setState({ name: "resumeLoading", value: false }));
     }
     // });

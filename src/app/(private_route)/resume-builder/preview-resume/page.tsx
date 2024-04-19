@@ -28,6 +28,8 @@ const Page = () => {
         (resume: any) => resume.id === resumeId
       );
     }
+
+    console.log(resumeData);
   }, [templateId, resumeId]);
 
   const { components, templateLayout, cvHeadings, GenerationOrder } = template;
@@ -57,12 +59,12 @@ const Page = () => {
 
   const handlePrintClick = useReactToPrint({
     content: () => cvRef.current,
-    pageStyle:`
+    pageStyle: `
     @page {
       size: A4;
       margin:0;
     }
-  `
+  `,
   });
   const getAllSettings = () => {
     if (cvRef.current) {
@@ -91,7 +93,7 @@ const Page = () => {
       "summary",
       "interests",
       "languages",
-      "workExperienceArray",
+      // "workExperienceArray",
     ];
 
     const containerNames = [
@@ -99,9 +101,9 @@ const Page = () => {
       "skills",
       "summary",
       "contact",
-      "workExperienceArray",
+      // "workExperienceArray",
       "education",
-      "publications",
+      // "publications",
       "sideBar",
       "languages",
       "interests",
