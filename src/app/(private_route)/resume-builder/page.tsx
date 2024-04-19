@@ -319,9 +319,9 @@ const ResumeBuilder = () => {
           setStreamedJDData("You ran out of credits!");
         }
       }
-      setFinished(true);
+      // setFinished(true);
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
-      dispatch(setState({ name: "resumeLoading", value: false }));
+      // dispatch(setState({ name: "resumeLoading", value: false }));
       dispatch(setWorkExperience(temp));
     }
     // });
