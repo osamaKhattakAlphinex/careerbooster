@@ -74,7 +74,7 @@ const ResumePromptsConfiguration = () => {
         <h1 className="text-center text-2xl ">Loading...</h1>
       ) : (
         <>
-          <div className="flex gap-4">
+          <div className="flex gap-4 my-4">
             {/* Summary Generator */}
             <PromptEditor
               name="summary"
@@ -97,20 +97,7 @@ const ResumePromptsConfiguration = () => {
               updating={updating}
             />
           </div>
-          <div className="flex gap-4"></div>
-          <div className="flex gap-4">
-            {/* Professional Skills Generator */}
-            {/* <PromptEditor
-              name="professionalSkills"
-              title="Professional skills"
-              type="resume"
-              prompts={prompts}
-              promptsLoading={promptsLoading}
-              handleSave={handleSave}
-              updating={updating}
-            /> */}
-
-            {/* Secondary Skills Generator */}
+          <div className="flex gap-4 my-4">
             <PromptEditor
               name="oneLineSlogan"
               title="One Line Slogan"
@@ -120,8 +107,7 @@ const ResumePromptsConfiguration = () => {
               handleSave={handleSave}
               updating={updating}
             />
-          </div>
-          <div className="flex gap-4">
+
             {/* Job Description Simple Generator */}
             <PromptEditor
               name="jdSingle"
@@ -133,11 +119,21 @@ const ResumePromptsConfiguration = () => {
               updating={updating}
             />
           </div>
-          <div className="flex gap-4">
+
+          <div className="flex gap-4 my-4">
             {/* Job Description Quantifying Generator */}
             <PromptEditor
               name="QuantifyingjdSingle"
               title="Job Description Generator (for quantifying work experience)"
+              type="resume"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+            <PromptEditor
+              name="writePublicationSingle"
+              title="Publication Generator"
               type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}

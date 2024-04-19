@@ -57,12 +57,11 @@ const Page = () => {
 
   const handlePrintClick = useReactToPrint({
     content: () => cvRef.current,
-    pageStyle: () => `
+    pageStyle:`
     @page {
-      size: 8.27in 11.68in;
+      size: A4;
       margin:0;
     }
-    /* Add more styles as needed */
   `
   });
   const getAllSettings = () => {

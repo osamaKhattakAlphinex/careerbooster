@@ -15,6 +15,7 @@ import {
   setStepFour,
   setStepNine,
   setStepOne,
+  setStepSeven,
   setStepSix,
   setStepTen,
   setStepThirteen,
@@ -562,13 +563,13 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   };
   const fetchReferencesDataFromResume = (refetch = false) => {
     if (
-      (refetch || register.scrapped.trainings === false) &&
+      (refetch || register.scrapped.references === false) &&
       // userData.defaultResumeFile &&
       register.scrappedContent !== "" &&
-      register.scrapping.trainings === false
+      register.scrapping.references === false
     ) {
       // set scrapping to true so that we Don't send multiple requests
-      dispatch(setScrapping({ trainings: true }));
+      dispatch(setScrapping({ references: true }));
 
       const formData = {
         // file: userData.defaultResumeFile,
@@ -579,7 +580,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         },
       };
 
-      fetch("/api/homepage/fetchTrainingsData", {
+      fetch("/api/homepage/fetchReferencesData", {
         method: "POST",
         body: JSON.stringify(formData),
       })
@@ -594,14 +595,14 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                 } else {
                   data = await JSON.parse(res.result);
                 }
-                const formattedArr = data?.trainings.map((item: any) => {
+                const formattedArr = data?.references.map((item: any) => {
                   return {
                     id: makeid(),
-                    company: item?.company,
+                    name: item?.name,
                     position: item?.position,
-                    startDate: item?.startDate,
-                    endDate: item?.endDate,
-                    description: item?.description,
+                    company: item?.company,
+                    contactInformation: item?.contactInformation,
+                  
                   };
                 });
 
@@ -950,7 +951,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         },
       };
 
-      fetch("/api/homepage/fetchRefrencesData", {
+      fetch("/api/homepage/fetchTrainingsData", {
         method: "POST",
         body: JSON.stringify(formData),
       })
@@ -975,7 +976,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                   };
                 });
 
-                dispatch(setStepTwelve({ list: formattedArr }));
+                dispatch(setStepSeven({ list: formattedArr }));
                 dispatch(setScrapped({ trainings: true }));
                 dispatch(setScrapping({ trainings: false }));
               } catch (error) {
@@ -1015,6 +1016,12 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       },
       education: register.stepFour.list,
       certifications: register.stepSix.list,
+      publications: register.stepEight.list,
+      references: register.stepTwelve.list,
+      trainings: register.stepSeven.list,
+      languages: register.stepEleven.list,
+      interests: register.stepTen.list,
+      awards: register.stepNine.list,
       experience: register.stepFive.list,
       skills: register.stepThirteen.list,
       wizardCompleted: true,

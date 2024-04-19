@@ -44,7 +44,7 @@ export async function POST(req: any) {
               The answer MUST be a valid JSON and formatting should be like this 
               replace the VALUE_HERE with the actual values
               {
-                L
+              
                 languages: [
                   {
                     language: VALUE_HERE,
