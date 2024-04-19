@@ -14,32 +14,49 @@ import {
   ReferencesForm,
   TrainingForm,
 } from "../profileReview/StepCustom";
-import { debug } from "console";
+import useHandler from "@/hooks/useHandler";
+import { makeid } from "@/helpers/makeid";
 
 const years = getYearsList();
 
 const CustomForm = ({ setShowCustomForm, recName }: any) => {
+  const {handlers} = useHandler()
   const formHandlers: any = {
     publications: async (values: any) => {
       console.log("publications is submitted", values);
+      
+      handlers.handleAddNewDetails(recName, values)
+
     },
     certifications: async (values: any) => {
       console.log("certification is submitted", values);
+      handlers.handleAddNewDetails(recName, values)
+
     },
     trainings: async (values: any) => {
       console.log("trainings is submitted", values);
+      handlers.handleAddNewDetails(recName, values)
+
     },
     awards: async (values: any) => {
       console.log("awards is submitted", values);
+      handlers.handleAddNewDetails(recName, values)
+
     },
-    interest: async (values: any) => {
+    interests: async (values: any) => {
       console.log("interests is submitted", values);
+      handlers.handleAddNewDetails(recName, values)
+
     },
-    refrence: async (values: any) => {
+    references: async (values: any) => {
       console.log("references is submitted", values);
+      handlers.handleAddNewDetails(recName, values)
+
     },
     languages: async (values: any) => {
       console.log("languages is submitted", values);
+      handlers.handleAddNewDetails(recName, values)
+
     },
   };
 
@@ -69,13 +86,13 @@ const CustomForm = ({ setShowCustomForm, recName }: any) => {
           formSubmitHandler={formHandlers.awards}
         />
       )}
-      {recName === "interest" && (
+      {recName === "interests" && (
         <InterestsForm
           formCloseHandler={() => setShowCustomForm(false)}
           formSubmitHandler={formHandlers.interest}
         />
       )}
-      {recName === "refrence" && (
+      {recName === "references" && (
         <ReferencesForm
           formCloseHandler={() => setShowCustomForm(false)}
           formSubmitHandler={formHandlers.refrence}

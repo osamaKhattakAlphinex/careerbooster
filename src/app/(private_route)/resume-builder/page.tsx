@@ -89,7 +89,8 @@ const ResumeBuilder = () => {
   const [finished, setFinished] = useState<boolean>(false);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const [publicationData, setStreamedPublicationData] = useState<any>("");
+  const [streamedPublicationData, setStreamedPublicationData] =
+    useState<any>("");
   const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -318,9 +319,9 @@ const ResumeBuilder = () => {
           setStreamedJDData("You ran out of credits!");
         }
       }
-      setFinished(true);
+      // setFinished(true);
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
-      dispatch(setState({ name: "resumeLoading", value: false }));
+      // dispatch(setState({ name: "resumeLoading", value: false }));
       dispatch(setWorkExperience(temp));
     }
     // });
@@ -398,7 +399,7 @@ const ResumeBuilder = () => {
           publicationArr.push(publicationArrObj);
         } else {
           setShowConfettiRunning(false);
-          setStreamedJDData("You ran out of credits!");
+          setStreamedPublicationData("You ran out of credits!");
         }
       }
       setFinished(true);
