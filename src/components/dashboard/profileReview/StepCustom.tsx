@@ -129,7 +129,7 @@ const RecordCard = ({ rec, recName, deleteHandler }: any) => {
           {rec.description}
         </span>
 
-        <span className="text-sm  dark:text-gray-100 text-gray-950">
+        <span className="text-sm dark:text-gray-100 text-gray-950">
           {rec.contactInformation}
           {rec.publisher}
         </span>
@@ -168,6 +168,7 @@ export const PublicationsForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
+  formSubmitHandler = null,
 }: any) => {
   const dispatch = useDispatch();
   const stepEight = useSelector((state: any) => state.register.stepEight);
@@ -189,30 +190,35 @@ export const PublicationsForm = ({
     },
 
     onSubmit: async (values) => {
-      const { description } = values;
-      const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
-      // Update the values with the description as an array
-      const updatedValues = {
-        ...values,
-        description: descriptionArray,
-      };
-      if (isEditing) {
-        const updatedList = list.map((singleRec: Publication) => {
-          if (singleRec.id === rec.id) {
-            return updatedValues;
-          } else {
-            return singleRec;
-          }
-        });
-        dispatch(setStepEight({ list: updatedList }));
-        dispatch(setStepEight({ state: "show" }));
+      if (formSubmitHandler !== null) {
+        formSubmitHandler(values);
+        formCloseHandler();
       } else {
-        const obj = { id: makeid(), ...updatedValues };
-        const newList = [obj, ...list];
-        dispatch(setStepEight({ list: newList }));
-        dispatch(setStepEight({ state: "show" }));
+        const { description } = values;
+        const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+        // Update the values with the description as an array
+        const updatedValues = {
+          ...values,
+          description: descriptionArray,
+        };
+        if (isEditing) {
+          const updatedList = list.map((singleRec: Publication) => {
+            if (singleRec.id === rec.id) {
+              return updatedValues;
+            } else {
+              return singleRec;
+            }
+          });
+          dispatch(setStepEight({ list: updatedList }));
+          dispatch(setStepEight({ state: "show" }));
+        } else {
+          const obj = { id: makeid(), ...updatedValues };
+          const newList = [obj, ...list];
+          dispatch(setStepEight({ list: newList }));
+          dispatch(setStepEight({ state: "show" }));
+        }
+        formCloseHandler();
       }
-      formCloseHandler();
     },
 
     // validationSchema: Yup.object().shape({
@@ -306,6 +312,7 @@ export const CertificationsForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
+  formSubmitHandler = null,
 }: any) => {
   const dispatch = useDispatch();
 
@@ -327,32 +334,37 @@ export const CertificationsForm = ({
     },
 
     onSubmit: async (values) => {
-      const { description } = values;
-      const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
-
-      // Update the values with the description as an array
-      const updatedValues = {
-        ...values,
-        description: descriptionArray,
-      };
-      if (isEditing) {
-        const updatedList = list.map((singleRec: Certification) => {
-          if (singleRec.id === rec.id) {
-            return updatedValues;
-          } else {
-            return singleRec;
-          }
-        });
-        dispatch(setStepSix({ list: updatedList }));
-        dispatch(setStepSix({ state: "show" }));
+      if (formSubmitHandler !== null) {
+        formSubmitHandler(values);
+        formCloseHandler();
       } else {
-        const obj = { id: makeid(), ...updatedValues };
-        const newList = [obj, ...list];
-        dispatch(setStepSix({ list: newList }));
-        dispatch(setStepSix({ state: "show" }));
-      }
+        const { description } = values;
+        const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
 
-      formCloseHandler();
+        // Update the values with the description as an array
+        const updatedValues = {
+          ...values,
+          description: descriptionArray,
+        };
+        if (isEditing) {
+          const updatedList = list.map((singleRec: Certification) => {
+            if (singleRec.id === rec.id) {
+              return updatedValues;
+            } else {
+              return singleRec;
+            }
+          });
+          dispatch(setStepSix({ list: updatedList }));
+          dispatch(setStepSix({ state: "show" }));
+        } else {
+          const obj = { id: makeid(), ...updatedValues };
+          const newList = [obj, ...list];
+          dispatch(setStepSix({ list: newList }));
+          dispatch(setStepSix({ state: "show" }));
+        }
+
+        formCloseHandler();
+      }
     },
 
     // validationSchema: Yup.object().shape({
@@ -446,6 +458,7 @@ export const AwardsForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
+  formSubmitHandler = null,
 }: any) => {
   const dispatch = useDispatch();
   const stepNine = useSelector((state: any) => state.register.stepNine);
@@ -466,32 +479,37 @@ export const AwardsForm = ({
     },
 
     onSubmit: async (values) => {
-      const { description } = values;
-      const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
-
-      // Update the values with the description as an array
-      const updatedValues = {
-        ...values,
-        description: descriptionArray,
-      };
-      if (isEditing) {
-        const updatedList = list.map((singleRec: Award) => {
-          if (singleRec.id === rec.id) {
-            return updatedValues;
-          } else {
-            return singleRec;
-          }
-        });
-        dispatch(setStepNine({ list: updatedList }));
-        dispatch(setStepNine({ state: "show" }));
+      if (formSubmitHandler !== null) {
+        formSubmitHandler(values);
+        formCloseHandler();
       } else {
-        const obj = { id: makeid(), ...updatedValues };
-        const newList = [obj, ...list];
-        dispatch(setStepNine({ list: newList }));
-        dispatch(setStepNine({ state: "show" }));
-      }
+        const { description } = values;
+        const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
 
-      formCloseHandler();
+        // Update the values with the description as an array
+        const updatedValues = {
+          ...values,
+          description: descriptionArray,
+        };
+        if (isEditing) {
+          const updatedList = list.map((singleRec: Award) => {
+            if (singleRec.id === rec.id) {
+              return updatedValues;
+            } else {
+              return singleRec;
+            }
+          });
+          dispatch(setStepNine({ list: updatedList }));
+          dispatch(setStepNine({ state: "show" }));
+        } else {
+          const obj = { id: makeid(), ...updatedValues };
+          const newList = [obj, ...list];
+          dispatch(setStepNine({ list: newList }));
+          dispatch(setStepNine({ state: "show" }));
+        }
+
+        formCloseHandler();
+      }
     },
 
     validationSchema: Yup.object().shape({
@@ -589,6 +607,7 @@ export const InterestsForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
+  formSubmitHandler = null,
 }: any) => {
   const dispatch = useDispatch();
   const stepTen = useSelector((state: any) => state.register.stepTen);
@@ -607,32 +626,37 @@ export const InterestsForm = ({
     },
 
     onSubmit: async (values) => {
-      const { description } = values;
-      const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
-
-      // Update the values with the description as an array
-      const updatedValues = {
-        ...values,
-        description: descriptionArray,
-      };
-      if (isEditing) {
-        const updatedList = list.map((singleRec: Interest) => {
-          if (singleRec.id === rec.id) {
-            return updatedValues;
-          } else {
-            return singleRec;
-          }
-        });
-        dispatch(setStepTen({ list: updatedList }));
-        dispatch(setStepTen({ state: "show" }));
+      if (formSubmitHandler !== null) {
+        formSubmitHandler(values);
+        formCloseHandler();
       } else {
-        const obj = { id: makeid(), ...updatedValues };
-        const newList = [obj, ...list];
-        dispatch(setStepTen({ list: newList }));
-        dispatch(setStepTen({ state: "show" }));
-      }
+        const { description } = values;
+        const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
 
-      formCloseHandler();
+        // Update the values with the description as an array
+        const updatedValues = {
+          ...values,
+          description: descriptionArray,
+        };
+        if (isEditing) {
+          const updatedList = list.map((singleRec: Interest) => {
+            if (singleRec.id === rec.id) {
+              return updatedValues;
+            } else {
+              return singleRec;
+            }
+          });
+          dispatch(setStepTen({ list: updatedList }));
+          dispatch(setStepTen({ state: "show" }));
+        } else {
+          const obj = { id: makeid(), ...updatedValues };
+          const newList = [obj, ...list];
+          dispatch(setStepTen({ list: newList }));
+          dispatch(setStepTen({ state: "show" }));
+        }
+
+        formCloseHandler();
+      }
     },
 
     validationSchema: Yup.object().shape({
@@ -694,6 +718,7 @@ export const ReferencesForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
+  formSubmitHandler = null,
 }: any) => {
   const dispatch = useDispatch();
   const stepTwelve = useSelector((state: any) => state.register.stepTwelve);
@@ -713,23 +738,28 @@ export const ReferencesForm = ({
       contactInformation: "",
     },
     onSubmit: async (values) => {
-      if (isEditing) {
-        const updatedList = list.map((singleRec: Reference) => {
-          if (singleRec.id === rec.id) {
-            return values;
-          } else {
-            return singleRec;
-          }
-        });
-        dispatch(setStepTwelve({ list: updatedList }));
-        dispatch(setStepTwelve({ state: "show" }));
+      if (formSubmitHandler !== null) {
+        formSubmitHandler(values);
+        formCloseHandler();
       } else {
-        const obj = { id: makeid(), ...values };
-        const newList = [obj, ...list];
-        dispatch(setStepTwelve({ list: newList }));
-        dispatch(setStepTwelve({ state: "show" }));
+        if (isEditing) {
+          const updatedList = list.map((singleRec: Reference) => {
+            if (singleRec.id === rec.id) {
+              return values;
+            } else {
+              return singleRec;
+            }
+          });
+          dispatch(setStepTwelve({ list: updatedList }));
+          dispatch(setStepTwelve({ state: "show" }));
+        } else {
+          const obj = { id: makeid(), ...values };
+          const newList = [obj, ...list];
+          dispatch(setStepTwelve({ list: newList }));
+          dispatch(setStepTwelve({ state: "show" }));
+        }
+        formCloseHandler();
       }
-      formCloseHandler();
     },
 
     validationSchema: Yup.object().shape({
@@ -830,6 +860,7 @@ export const TrainingForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
+  formSubmitHandler = null,
 }: any) => {
   const dispatch = useDispatch();
   const stepSeven = useSelector((state: any) => state.register.stepSeven);
@@ -851,32 +882,37 @@ export const TrainingForm = ({
     },
 
     onSubmit: async (values) => {
-      const { description } = values;
-      const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
-
-      // Update the values with the description as an array
-      const updatedValues = {
-        ...values,
-        description: descriptionArray,
-      };
-
-      if (isEditing) {
-        const updatedList = list.map((singleRec: Training) => {
-          if (singleRec.id === rec.id) {
-            return updatedValues;
-          } else {
-            return singleRec;
-          }
-        });
-        dispatch(setStepSeven({ list: updatedList }));
-        dispatch(setStepSeven({ state: "show" }));
+      if (formSubmitHandler !== null) {
+        formSubmitHandler(values);
+        formCloseHandler();
       } else {
-        const obj = { id: makeid(), ...updatedValues };
-        const newList = [obj, ...list];
-        dispatch(setStepSeven({ list: newList }));
-        dispatch(setStepSeven({ state: "show" }));
+        const { description } = values;
+        const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+
+        // Update the values with the description as an array
+        const updatedValues = {
+          ...values,
+          description: descriptionArray,
+        };
+
+        if (isEditing) {
+          const updatedList = list.map((singleRec: Training) => {
+            if (singleRec.id === rec.id) {
+              return updatedValues;
+            } else {
+              return singleRec;
+            }
+          });
+          dispatch(setStepSeven({ list: updatedList }));
+          dispatch(setStepSeven({ state: "show" }));
+        } else {
+          const obj = { id: makeid(), ...updatedValues };
+          const newList = [obj, ...list];
+          dispatch(setStepSeven({ list: newList }));
+          dispatch(setStepSeven({ state: "show" }));
+        }
+        formCloseHandler();
       }
-      formCloseHandler();
     },
 
     validationSchema: Yup.object().shape({
@@ -989,6 +1025,7 @@ export const LangaugesForm = ({
   rec = null,
   formCloseHandler,
   isEditing = false,
+  formSubmitHandler = null,
 }: any) => {
   const dispatch = useDispatch();
   const stepEleven = useSelector((state: any) => state.register.stepEleven);
@@ -1007,23 +1044,28 @@ export const LangaugesForm = ({
     },
 
     onSubmit: async (values) => {
-      if (isEditing) {
-        const updatedList = list.map((singleRec: Language) => {
-          if (singleRec.id === rec.id) {
-            return values;
-          } else {
-            return singleRec;
-          }
-        });
-        dispatch(setStepEleven({ list: updatedList }));
-        dispatch(setStepEleven({ state: "show" }));
+      if (formSubmitHandler !== null) {
+        formSubmitHandler(values);
+        formCloseHandler();
       } else {
-        const obj = { id: makeid(), ...values };
-        const newList = [obj, ...list];
-        dispatch(setStepEleven({ list: newList }));
-        dispatch(setStepEleven({ state: "show" }));
+        if (isEditing) {
+          const updatedList = list.map((singleRec: Language) => {
+            if (singleRec.id === rec.id) {
+              return values;
+            } else {
+              return singleRec;
+            }
+          });
+          dispatch(setStepEleven({ list: updatedList }));
+          dispatch(setStepEleven({ state: "show" }));
+        } else {
+          const obj = { id: makeid(), ...values };
+          const newList = [obj, ...list];
+          dispatch(setStepEleven({ list: newList }));
+          dispatch(setStepEleven({ state: "show" }));
+        }
+        formCloseHandler();
       }
-      formCloseHandler();
     },
 
     // validationSchema: Yup.object().shape({
