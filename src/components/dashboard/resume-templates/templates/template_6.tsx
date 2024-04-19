@@ -28,7 +28,7 @@ import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import Link from "next/link";
 import { useColorContext } from "@/context/ResumeColorContext";
 import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
-import CustomResumeSection from "../../resume-builder/CustomResumeSection";
+
 import Publication from "./resume-sections/publication";
 import Certification from "./resume-sections/certification";
 import Training from "./resume-sections/trainings";
@@ -36,6 +36,7 @@ import Award from "./resume-sections/award";
 import Interest from "./resume-sections/interest";
 import Reference from "./resume-sections/reference";
 import Language from "./resume-sections/language";
+import { certification, publicationStyles } from "@/helpers/templateStylesObj";
 const ResumeTemplate6 = () => {
   const resume = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
@@ -721,6 +722,7 @@ const ResumeTemplate6 = () => {
               <Publication
                 heading={resume.headings.publications}
                 publications={resume.publications}
+                styles={publicationStyles}
               />
             )}
             {/* Certification */}
@@ -728,6 +730,7 @@ const ResumeTemplate6 = () => {
               <Certification
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
+                styles={certification}
               />
             )}
             {/* Trainings */}
