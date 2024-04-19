@@ -54,7 +54,7 @@
   @apply border-2 border-transparent hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2;
 }
 
-.achievement-h1 {
+.achievement_h1 {
   @apply text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100;
 }
 
