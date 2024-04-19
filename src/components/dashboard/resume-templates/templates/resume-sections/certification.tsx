@@ -33,16 +33,23 @@ const Certification = ({ heading, certificates }: Props) => {
       <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
       <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
         <svg
+          width="20px"
+          height="20px"
+          viewBox="0 0 48 48"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          className="w-5 h-5"
         >
-          <path
-            fillRule="evenodd"
-            d="M1 4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4Zm12 4a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM4 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm13-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM1.75 14.5a.75.75 0 0 0 0 1.5c4.417 0 8.693.603 12.749 1.73 1.111.309 2.251-.512 2.251-1.696v-.784a.75.75 0 0 0-1.5 0v.784a.272.272 0 0 1-.35.25A49.043 49.043 0 0 0 1.75 14.5Z"
-            clipRule="evenodd"
-          />
+          <title>certificate-ribbon-solid</title>
+          <g id="Layer_2" data-name="Layer 2">
+            <g id="invisible_box" data-name="invisible box">
+              <rect width="48" height="48" fill="none" />
+            </g>
+            <g id="icons_Q2" data-name="icons Q2">
+              <g>
+                <circle cx="24" cy="18" r="7" />
+                <path d="M40,18A16,16,0,1,0,15,31.2V43.9a2,2,0,0,0,3.1,1.7L24,41l5.9,4.6A2,2,0,0,0,33,43.9V31.2A16,16,0,0,0,40,18ZM12,18A12,12,0,1,1,24,30,12,12,0,0,1,12,18Z" />
+              </g>
+            </g>
+          </g>
         </svg>
 
         <EditableField
