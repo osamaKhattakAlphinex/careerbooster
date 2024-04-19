@@ -17,9 +17,6 @@ import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
 import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
-import CustomResumeSection from "../../resume-builder/CustomResumeSection";
-import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
-import AddSection from "../../AddSection";
 import { formatDate } from "@/helpers/getFormattedDateTime";
 
 const ResumeTemplate1 = ({

@@ -71,7 +71,7 @@ const ResumeBuilder = () => {
     useTourContext();
 
   const runConfetti = () => {
-    if(showConfettiRunning){
+    if (showConfettiRunning) {
       showSuccessToast("Generated Successfully");
       setConfettiRunning(true);
       setTimeout(() => {
@@ -89,7 +89,8 @@ const ResumeBuilder = () => {
   const [finished, setFinished] = useState<boolean>(false);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const [publicationData,setStreamedPublicationData] = useState<any>("");
+  const [streamedPublicationData, setStreamedPublicationData] =
+    useState<any>("");
   const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -102,7 +103,7 @@ const ResumeBuilder = () => {
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
 
-  const { getSummary } = useGetSummary(setStreamedSummaryData,setOutOfCredits);
+  const { getSummary } = useGetSummary(setStreamedSummaryData, setOutOfCredits);
 
   const getConsent = () => {
     if (creditsInfoRef.current) {
@@ -124,7 +125,7 @@ const ResumeBuilder = () => {
         dispatch(setQuantifyingExperience(quantifyingExperience));
         dispatch(setTrainings({ trainings: userData.trainings }));
         dispatch(setAwards({ awards: userData.awards }));
-        dispatch(setPublications({ publications: userData.publications }));
+        // dispatch(setPublications({ publications: userData.publications }));
         dispatch(setReferences({ references: userData.references }));
         dispatch(setInterests({ interests: userData.interests }));
         dispatch(
@@ -137,11 +138,11 @@ const ResumeBuilder = () => {
         await getSummary();
         await getPrimarySkills();
         await getWorkExperienceNew(quantifyingExperience);
-        
-        await getPublications()
+
+        await getPublications();
         // await addCustomSection();
         // adding custom sections
-         runConfetti();
+        runConfetti();
       } else {
         setShowPopup(true);
 
@@ -224,7 +225,7 @@ const ResumeBuilder = () => {
         };
         dispatch(setBasicInfo(basicObj));
       } else {
-      setShowConfettiRunning(false)
+        setShowConfettiRunning(false);
 
         showErrorToast("Something Went Wrong");
       }
@@ -314,7 +315,7 @@ const ResumeBuilder = () => {
           workExpArrObj.achievements = achivementsArray;
           workExpArr.push(workExpArrObj);
         } else {
-      setShowConfettiRunning(false)
+          setShowConfettiRunning(false);
           setStreamedJDData("You ran out of credits!");
         }
       }
@@ -352,28 +353,30 @@ const ResumeBuilder = () => {
         ${formatDate(publication?.date)}
                   </h2>`;
         html += `<div>`;
-        publicationArrObj.date =formatDate(publication?.date);
-
+        publicationArrObj.date = formatDate(publication?.date);
 
         temp += html;
         let achievementTemp = "";
         setStreamedPublicationData((prev: any) => prev + html);
 
-        const res: any = await fetch("/api/resumeBots/publicationsGeneratorSingle", {
-          method: "POST",
-          body: JSON.stringify({
-            publication: publication,
+        const res: any = await fetch(
+          "/api/resumeBots/publicationsGeneratorSingle",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              publication: publication,
 
-            creditsUsed: creditLimits.resume_individualPublication,
-            trainBotData: {
-              userEmail: userData.email,
-              // fileAddress: userData.files[0].fileName,
-              fileAddress: userData.uploadedResume.fileName,
-            },
-            personName: userData.firstName + " " + userData.lastName,
-            jobTitle: resumeData.state.jobPosition,
-          }),
-        });
+              creditsUsed: creditLimits.resume_individualPublication,
+              trainBotData: {
+                userEmail: userData.email,
+                // fileAddress: userData.files[0].fileName,
+                fileAddress: userData.uploadedResume.fileName,
+              },
+              personName: userData.firstName + " " + userData.lastName,
+              jobTitle: resumeData.state.jobPosition,
+            }),
+          }
+        );
 
         if (res.ok) {
           const reader = res.body.getReader();
@@ -393,11 +396,11 @@ const ResumeBuilder = () => {
           setStreamedJDData((prev: any) => prev + `</div> <br /> `);
           temp += `</div> <br /> `;
           const achivementsArray = fetchLIstOfStrings(achievementTemp);
-          publicationArrObj.achievements = achivementsArray;
+          publicationArrObj.description = achivementsArray;
           publicationArr.push(publicationArrObj);
         } else {
-      setShowConfettiRunning(false)
-          setStreamedJDData("You ran out of credits!");
+          setShowConfettiRunning(false);
+          setStreamedPublicationData("You ran out of credits!");
         }
       }
       setFinished(true);
@@ -436,7 +439,7 @@ const ResumeBuilder = () => {
           dispatch(setPrimarySkills({ primarySkills: myJSON }));
         }
       } else {
-      setShowConfettiRunning(false)
+        setShowConfettiRunning(false);
       }
     });
     // });
@@ -449,7 +452,8 @@ const ResumeBuilder = () => {
     if (
       resumeGenerated &&
       !resumeData.state.resumeLoading &&
-      resumeData?.name && !outOfCredits
+      resumeData?.name &&
+      !outOfCredits
     ) {
       saveResumeToDB();
     }
@@ -483,7 +487,7 @@ const ResumeBuilder = () => {
 
   useEffect(() => {
     if (outOfCredits) {
-      setShowConfettiRunning(false)
+      setShowConfettiRunning(false);
       setTimeout(() => {
         tourBotRef?.current?.click();
       }, 500);
@@ -724,7 +728,10 @@ const ResumeBuilder = () => {
           )}
         </div>
       </div>
-      <TourBot config={outOfCredits ? tourBotConfig2 : tourBotConfig} setOutOfCredits={setOutOfCredits}/>
+      <TourBot
+        config={outOfCredits ? tourBotConfig2 : tourBotConfig}
+        setOutOfCredits={setOutOfCredits}
+      />
     </>
   );
 };

@@ -154,6 +154,7 @@ const VirtualBot: React.FC<VirtualBotProps> = ({ firstName, lastName }) => {
 
     const handleAudioEnded = () => {
       setIsGif(false); // Set isGif to false when the audio ends
+      setAudioPrepared(false);
     };
 
     audio.addEventListener("ended", handleAudioEnded);
