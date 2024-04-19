@@ -2,13 +2,6 @@
 import { memo, useEffect, useState } from "react";
 import React from "react";
 import { useSelector } from "react-redux";
-
-import useGetSummary from "@/hooks/useGetSummary";
-import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
-import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
-import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
-import useUpdateAndSave from "@/hooks/useUpdateAndSave";
-import ColorPicker from "../colorPicker";
 import { ColorResult } from "react-color";
 import Publication from "./resume-sections/publication";
 import Certification from "./resume-sections/certification";
@@ -23,7 +16,11 @@ import Experience from "./resume-sections/experience";
 import Skill from "./resume-sections/skills";
 import Summary from "./resume-sections/summary";
 import Header from "./resume-sections/header";
-import { template_2 } from "@/helpers/templateStylesObj";
+import {
+  certification,
+  publicationStyles,
+  template_2,
+} from "@/helpers/templateStylesObj";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
@@ -74,7 +71,9 @@ const ResumeTemplate2 = () => {
           contactStyle_li="contact-temp-2-li"
         />
         {/* <div className="absolute top-0 left-12">
-          <ColorPicker
+          <ColorPicker\
+
+
             defaultColor="#e9e8e8"
             resetColor="#e9e8e8"
             setColor={setColor}
@@ -118,57 +117,73 @@ const ResumeTemplate2 = () => {
       </div>
 
       {/* Publications */}
-      {resume?.publications && resume?.publications.length > 0 && (
-        <Publication
-          heading={resume.headings.publications}
-          publications={resume.publications}
-        />
-      )}
+      <div className="w-full">
+        {resume?.publications && resume?.publications.length > 0 && (
+          <Publication
+            heading={resume.headings.publications}
+            publications={resume.publications}
+            styles={publicationStyles}
+          />
+        )}
+      </div>
 
       {/* Certificates */}
-      {resume?.certifications && resume?.certifications.length > 0 && (
-        <Certification
-          heading={resume.headings.certifications}
-          certificates={resume.certifications}
-        />
-      )}
+      <div className="w-full">
+        {resume?.certifications && resume?.certifications.length > 0 && (
+          <Certification
+            heading={resume.headings.certifications}
+            certificates={resume.certifications}
+            styles={certification}
+          />
+        )}
+      </div>
 
       {/* Trainings */}
-      {resume?.trainings && resume?.trainings.length > 0 && (
-        <Training
-          heading={resume.headings.trainings}
-          trainings={resume.trainings}
-        />
-      )}
+      <div className="w-full">
+        {resume?.trainings && resume?.trainings.length > 0 && (
+          <Training
+            heading={resume.headings.trainings}
+            trainings={resume.trainings}
+          />
+        )}
+      </div>
 
       {/* Awards */}
-      {resume?.awards && resume?.awards.length > 0 && (
-        <Award heading={resume.headings.awards} awards={resume.awards} />
-      )}
+      <div className="w-full">
+        {resume?.awards && resume?.awards.length > 0 && (
+          <Award heading={resume.headings.awards} awards={resume.awards} />
+        )}
+      </div>
 
       {/* Interests & Hobbies */}
-      {resume?.interests && resume?.interests.length > 0 && (
-        <Interest
-          heading={resume.headings.interests}
-          interests={resume.interests}
-        />
-      )}
+      <div className="w-full">
+        {resume?.interests && resume?.interests.length > 0 && (
+          <Interest
+            heading={resume.headings.interests}
+            interests={resume.interests}
+          />
+        )}
+      </div>
 
       {/* References */}
-      {resume?.references && resume?.references.length > 0 && (
-        <Reference
-          heading={resume.headings.references}
-          references={resume.references}
-        />
-      )}
+      <div className="w-full">
+        {resume?.references && resume?.references.length > 0 && (
+          <Reference
+            heading={resume.headings.references}
+            references={resume.references}
+          />
+        )}
+      </div>
 
       {/* Languages */}
-      {resume?.languages && resume?.languages.length > 0 && (
-        <Language
-          heading={resume.headings.languages}
-          languages={resume.languages}
-        />
-      )}
+      <div className="w-full">
+        {resume?.languages && resume?.languages.length > 0 && (
+          <Language
+            heading={resume.headings.languages}
+            languages={resume.languages}
+          />
+        )}
+      </div>
 
       {/* Add Custom */}
       {/* <CustomResumeSection /> */}

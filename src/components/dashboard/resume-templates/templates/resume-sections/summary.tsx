@@ -25,7 +25,7 @@ const Summary = ({ summary, heading, headingStyle, textStyle }: Props) => {
         {resumeSummaryIcon}
         <EditableField
           value={heading?.summary ? heading.summary : "Execuitve summary"}
-          style={{ width: "fit-content" }}
+          style={{ width: "fit-content " }}
           onSave={(value: string) => {
             if (value !== heading?.summary) {
               updateSaveHook.updateAndSaveHeadings({
