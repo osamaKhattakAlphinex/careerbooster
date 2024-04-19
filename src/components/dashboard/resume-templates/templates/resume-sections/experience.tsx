@@ -71,6 +71,7 @@ const Experience = ({
           {workExperienceArray.map((rec: any, i: number) => {
             return (
               <Toolbar
+                key={i}
                 addAchivement={() => setNewWorkExperience(i)}
                 deleteExperience={() => handlers.handleDeleteExperience(i)}
                 regenrateAchivements={() => handleRegenrate(rec, i)}
@@ -80,7 +81,6 @@ const Experience = ({
                 }}
               >
                 <div
-                  key={i}
                   className={styles?.achievement_div}
                   onDragStart={(e) =>
                     e.dataTransfer.setData("text/plain", i.toString())
