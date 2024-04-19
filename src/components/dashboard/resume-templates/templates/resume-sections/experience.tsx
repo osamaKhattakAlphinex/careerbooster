@@ -24,8 +24,6 @@ const Experience = ({
 
   styles,
 }: Props) => {
-  console.log("Styles", styles);
-
   const [newAchievement, setNewAchievement] = useState("");
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
   const [streamedJDData, setStreamedJDData] = useState<any>("");
@@ -53,7 +51,7 @@ const Experience = ({
   }, [streamedJDData]);
   return (
     <>
-      <h2 className={styles?.workExperienceHeadingStyle}>
+      <h2 className="experienceHeading-temp-2">
         {resumeWorkExpIcon}
 
         <EditableField

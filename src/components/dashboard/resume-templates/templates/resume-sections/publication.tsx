@@ -13,9 +13,11 @@ import React, { useState } from "react";
 type Props = {
   heading: any;
   publications: any;
+  styles: any;
 };
 
-const Publication = ({ heading, publications }: Props) => {
+const Publication = ({ heading, publications, styles }: Props) => {
+  console.log("Styles", styles);
   const [pulicationIndex, setPulicationIndex] = useState<number>();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
@@ -31,8 +33,8 @@ const Publication = ({ heading, publications }: Props) => {
 
   return (
     <>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-      <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
+      <span className={styles?.span1}></span>
+      <h3 className={styles?.publication_h3}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -59,7 +61,7 @@ const Publication = ({ heading, publications }: Props) => {
           }}
         />
       </h3>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
+      <span className={styles?.span2}></span>
       {publications.map((rec: any, i: number) => {
         return (
           <Toolbar
@@ -79,7 +81,7 @@ const Publication = ({ heading, publications }: Props) => {
           >
             <div
               key={i}
-              className="border-2 border-transparent md:w-full hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
+              className={styles?.publication_div}
               onDragStart={(e) =>
                 e.dataTransfer.setData("text/plain", i.toString())
               }
@@ -87,7 +89,7 @@ const Publication = ({ heading, publications }: Props) => {
               onDrop={(e) => handleDropOthers(e, i, "publications")}
               draggable
             >
-              <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
+              <h2 className={styles?.publication_h2}>
                 <EditableField
                   value={rec?.title}
                   style={{ width: "100%" }}
@@ -100,9 +102,9 @@ const Publication = ({ heading, publications }: Props) => {
                   }}
                 />
               </h2>
-              <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
+              <h2 className={styles?.publication_h2_1}>
                 {rec.date && (
-                  <span className="hover:shadow-md hover:bg-gray-100">
+                  <span className={styles?.publication_date}>
                     <EditableField
                       value={`${formatDate(rec?.date)}`}
                       onSave={(value: string) => {
@@ -116,7 +118,7 @@ const Publication = ({ heading, publications }: Props) => {
                   </span>
                 )}
                 |
-                <span className="hover:shadow-md hover:bg-gray-100">
+                <span className={styles?.publication_date}>
                   <EditableField
                     value={rec?.publisher}
                     onSave={(value: string) => {
@@ -131,7 +133,7 @@ const Publication = ({ heading, publications }: Props) => {
               </h2>
               <div className="px-4 py-1">
                 {rec?.description && i !== regeneratedRecordIndex ? (
-                  <ul className="flex flex-col gap-1 pl-0 text-xs">
+                  <ul className={styles?.publication_ul}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
                         <li
@@ -149,10 +151,10 @@ const Publication = ({ heading, publications }: Props) => {
                             );
                           }}
                           draggable
-                          className="flex flex-row items-center justify-center h-8 hover:bg-slate-200 group"
+                          className={`group ${styles?.publication_li}`}
                         >
                           <div
-                            className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
+                            className={styles?.publication_line}
                             onClick={() => {
                               handlers.handleRemoveExtraOthersSpace(
                                 i,
@@ -179,7 +181,7 @@ const Publication = ({ heading, publications }: Props) => {
                             );
                           }}
                           draggable
-                          className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
+                          className={`parent ${styles?.publication_delete1}`}
                           key={ind}
                         >
                           <EditableField
@@ -202,7 +204,7 @@ const Publication = ({ heading, publications }: Props) => {
                                 "publications"
                               )
                             }
-                            className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
+                            className={`${styles?.publication_delete} child`}
                           >
                             {crossIcon1}
                           </div>
@@ -227,9 +229,9 @@ const Publication = ({ heading, publications }: Props) => {
                 {pulicationIndex === i &&
                 newBulletSection === "Publications" ? (
                   <>
-                    <div className="flex flex-wrap w-full gap-1 mt-4">
+                    <div className={styles?.publication_div_input}>
                       <input
-                        className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
+                        className={styles?.publication_new_input} // Apply Tailwind CSS classes
                         onChange={(e) => setNewPublication(e.target.value)}
                         value={newPublication}
                         name="newPublication"
