@@ -209,7 +209,14 @@ export const PublicationsForm = ({
 
     onSubmit: async (values) => {
       if (formSubmitHandler !== null) {
-        formSubmitHandler(values);
+        const { description } = values;
+        const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+        // Update the values with the description as an array
+        const updatedValues = {
+          ...values,
+          description: descriptionArray,
+        };
+        formSubmitHandler(updatedValues);
         formCloseHandler();
       } else {
         const { description } = values;
@@ -362,7 +369,15 @@ export const CertificationsForm = ({
 
     onSubmit: async (values) => {
       if (formSubmitHandler !== null) {
-        formSubmitHandler(values);
+        const { description } = values;
+        const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+
+        // Update the values with the description as an array
+        const updatedValues = {
+          ...values,
+          description: descriptionArray,
+        };
+        formSubmitHandler(updatedValues);
         formCloseHandler();
       } else {
         const { description } = values;
@@ -516,7 +531,15 @@ export const AwardsForm = ({
 
     onSubmit: async (values) => {
       if (formSubmitHandler !== null) {
-        formSubmitHandler(values);
+        const { description } = values;
+        const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+
+        // Update the values with the description as an array
+        const updatedValues = {
+          ...values,
+          description: descriptionArray,
+        };
+        formSubmitHandler(updatedValues);
         formCloseHandler();
       } else {
         const { description } = values;
@@ -672,7 +695,15 @@ export const InterestsForm = ({
 
     onSubmit: async (values) => {
       if (formSubmitHandler !== null) {
-        formSubmitHandler(values);
+        const { description } = values;
+        const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+
+        // Update the values with the description as an array
+        const updatedValues = {
+          ...values,
+          description: descriptionArray,
+        };
+        formSubmitHandler(updatedValues);
         formCloseHandler();
       } else {
         const { description } = values;
@@ -942,7 +973,15 @@ export const TrainingForm = ({
 
     onSubmit: async (values) => {
       if (formSubmitHandler !== null) {
-        formSubmitHandler(values);
+        const { description } = values;
+        const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+
+        // Update the values with the description as an array
+        const updatedValues = {
+          ...values,
+          description: descriptionArray,
+        };
+        formSubmitHandler(updatedValues);
         formCloseHandler();
       } else {
         const { description } = values;
