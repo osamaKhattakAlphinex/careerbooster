@@ -10,7 +10,7 @@
   }
 
   .form {
-    @apply !border-[1px] dark:!border-[#2e2f45] border-gray-700 rounded-lg p-3 mb-2;
+    @apply !border-[1px] dark:!border-[#2e2f45] border-gray-700 rounded-lg p-3 mb-2 md:w-[800px] xs:w-auto;
   }
 
   .form-btn {

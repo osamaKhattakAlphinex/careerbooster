@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CustomForm from "./CustomForm";
 
-const AddItemToCustomSection = ({recName}:any) => {
+const AddItemToCustomSection = ({ recName }: any) => {
   const [showCustomForm, setShowCustomForm] = useState<boolean>(false);
 
   return (
@@ -14,7 +14,9 @@ const AddItemToCustomSection = ({recName}:any) => {
       >
         Add Item
       </button>
-      {showCustomForm && <CustomForm setShowCustomForm={setShowCustomForm} recName={recName} />}
+      {showCustomForm && (
+        <CustomForm setShowCustomForm={setShowCustomForm} recName={recName} />
+      )}
     </>
   );
 };

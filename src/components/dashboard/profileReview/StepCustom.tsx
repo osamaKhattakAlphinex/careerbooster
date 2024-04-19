@@ -22,12 +22,14 @@ import {
   Training,
 } from "@/store/userDataSlice";
 import { useFormik } from "formik";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 
 const RecordCard = ({ rec, recName, formCloseHandler, deleteHandler }: any) => {
   const [edit, setEdit] = useState(false);
+
   return (
     <>
       {edit && recName === "publications" && (
@@ -167,6 +169,7 @@ export const PublicationsForm = ({
   isEditing = false,
 }: any) => {
   const dispatch = useDispatch();
+  const pathname = usePathname();
   const stepEight = useSelector((state: any) => state.register.stepEight);
 
   const { list, state } = stepEight;
@@ -216,13 +219,16 @@ export const PublicationsForm = ({
     //   company: Yup.string().required("company is required"),
     // }),
   });
+
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4 ">
           <label
             htmlFor="title"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Title
           </label>
@@ -238,7 +244,9 @@ export const PublicationsForm = ({
         <div className="mb-4">
           <label
             htmlFor="publisher"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Publisher
           </label>
@@ -254,7 +262,9 @@ export const PublicationsForm = ({
         <div className="mb-4">
           <label
             htmlFor="date"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Date
           </label>
@@ -270,7 +280,9 @@ export const PublicationsForm = ({
         <div className="mb-4">
           <label
             htmlFor="description"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Description
           </label>
@@ -356,13 +368,16 @@ export const CertificationsForm = ({
     //   company: Yup.string().required("company is required"),
     // }),
   });
+  const pathname = usePathname();
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4">
           <label
             htmlFor="title"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Title
           </label>
@@ -378,7 +393,9 @@ export const CertificationsForm = ({
         <div className="mb-4">
           <label
             htmlFor="issuingOrganization"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Issuing Organization
           </label>
@@ -394,7 +411,9 @@ export const CertificationsForm = ({
         <div className="mb-4">
           <label
             htmlFor="date"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Date
           </label>
@@ -410,7 +429,9 @@ export const CertificationsForm = ({
         <div className="mb-4">
           <label
             htmlFor="description"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Description
           </label>
@@ -499,13 +520,16 @@ export const AwardsForm = ({
       date: Yup.string().required("date is required"),
     }),
   });
+  const pathname = usePathname();
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4">
           <label
             htmlFor="title"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Title
           </label>
@@ -521,7 +545,9 @@ export const AwardsForm = ({
         <div className="mb-4">
           <label
             htmlFor="awardingOrganization"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Awarding Organization
           </label>
@@ -537,7 +563,9 @@ export const AwardsForm = ({
         <div className="mb-4">
           <label
             htmlFor="date"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Date
           </label>
@@ -553,7 +581,9 @@ export const AwardsForm = ({
         <div className="mb-4">
           <label
             htmlFor="description"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Description
           </label>
@@ -636,13 +666,16 @@ export const InterestsForm = ({
       name: Yup.string().required("name is required"),
     }),
   });
+  const pathname = usePathname();
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4">
           <label
             htmlFor="name"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Name
           </label>
@@ -658,7 +691,9 @@ export const InterestsForm = ({
         <div className="mb-4">
           <label
             htmlFor="description"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Description
           </label>
@@ -738,13 +773,16 @@ export const ReferencesForm = ({
       ),
     }),
   });
+  const pathname = usePathname();
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4">
           <label
             htmlFor="name"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Name
           </label>
@@ -760,7 +798,9 @@ export const ReferencesForm = ({
         <div className="mb-4">
           <label
             htmlFor="position"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Position
           </label>
@@ -776,7 +816,9 @@ export const ReferencesForm = ({
         <div className="mb-4">
           <label
             htmlFor="company"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Company
           </label>
@@ -792,7 +834,9 @@ export const ReferencesForm = ({
         <div className="mb-4">
           <label
             htmlFor="contactInformation"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Contact Information
           </label>
@@ -883,13 +927,16 @@ export const TrainingForm = ({
       endDate: Yup.string().required("endDate is required"),
     }),
   });
+  const pathname = usePathname();
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4">
           <label
             htmlFor="company"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Company
           </label>
@@ -905,7 +952,9 @@ export const TrainingForm = ({
         <div className="mb-4">
           <label
             htmlFor="position"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Position
           </label>
@@ -921,7 +970,9 @@ export const TrainingForm = ({
         <div className="mb-4">
           <label
             htmlFor="startDate"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Start Date
           </label>
@@ -937,7 +988,9 @@ export const TrainingForm = ({
         <div className="mb-4">
           <label
             htmlFor="endDate"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             End Date
           </label>
@@ -953,7 +1006,9 @@ export const TrainingForm = ({
         <div className="mb-4">
           <label
             htmlFor="description"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Description
           </label>
@@ -1027,13 +1082,16 @@ export const LangaugesForm = ({
     //   company: Yup.string().required("company is required"),
     // }),
   });
+  const pathname = usePathname();
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4">
           <label
             htmlFor="language"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Language
           </label>
@@ -1049,7 +1107,9 @@ export const LangaugesForm = ({
         <div className="mb-4">
           <label
             htmlFor="proficiency"
-            className="block mb-2 text-sm font-bold text-gray-200"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
           >
             Proficiency
           </label>
