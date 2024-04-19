@@ -28,6 +28,9 @@ import * as Yup from "yup";
 
 const RecordCard = ({ rec, recName, deleteHandler }: any) => {
   const [edit, setEdit] = useState(false);
+
+  const [seeMore, setSeeMore] = useState(false);
+
   return (
     <>
       {edit && recName === "publications" && (
@@ -125,9 +128,22 @@ const RecordCard = ({ rec, recName, deleteHandler }: any) => {
             {rec.endDate}
           </span>
         </div>
-        <span className="text-sm capitalize dark:text-gray-100 text-gray-950">
+        <span
+          className={`text-sm capitalize dark:text-gray-100 text-gray-950  ${
+            seeMore ? "" : "line-clamp-1"
+          }`}
+        >
           {rec.description}
         </span>
+
+        {
+          <span
+            className="text-xs lowercase text-white/40"
+            onClick={() => setSeeMore(!seeMore)}
+          >
+            {seeMore ? "see less <<" : "see more >>"}
+          </span>
+        }
 
         <span className="text-sm dark:text-gray-100 text-gray-950">
           {rec.contactInformation}
