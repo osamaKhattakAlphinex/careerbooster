@@ -35,7 +35,7 @@ interface VirtualBotProps {
 }
 
 const VirtualBot: React.FC<VirtualBotProps> = ({ firstName, lastName }) => {
-  // const [isGif, setIsGif] = useState(false);
+  const [isGif, setIsGif] = useState(false);
   // const [audioPlayed, setAudioPlayed] = useState(false);
   const [audioPrepared, setAudioPrepared] = useState(false);
   const [response, setResponse] = useState<any>({});
@@ -104,12 +104,12 @@ const VirtualBot: React.FC<VirtualBotProps> = ({ firstName, lastName }) => {
         firstName === prevUserData.firstName &&
         lastName === prevUserData.lastName
       ) {
-        // setIsGif(!isGif);
+        setIsGif(true);
         componentRef.current.play();
         return; // If firstName and lastName haven't changed, don't make the request again
       }
       if (response) {
-        // setIsGif(!isGif);
+        setIsGif(true);
         // setAudioPlayed(true);
         const audioData = response.data.data;
         const arrayBufferView = new Uint8Array(audioData);
@@ -149,19 +149,20 @@ const VirtualBot: React.FC<VirtualBotProps> = ({ firstName, lastName }) => {
     }
   };
 
-  // useEffect(() => {
-  //   const audio = componentRef.current;
+  useEffect(() => {
+    const audio = componentRef.current;
 
-  //   const handleAudioEnded = () => {
-  //     setIsGif(false); // Set isGif to false when the audio ends
-  //   };
+    const handleAudioEnded = () => {
+      setIsGif(false); // Set isGif to false when the audio ends
+      setAudioPrepared(false);
+    };
 
-  //   audio.addEventListener("ended", handleAudioEnded);
+    audio.addEventListener("ended", handleAudioEnded);
 
-  //   return () => {
-  //     audio.removeEventListener("ended", handleAudioEnded);
-  //   };
-  // }, []);
+    return () => {
+      audio.removeEventListener("ended", handleAudioEnded);
+    };
+  }, []);
 
   return (
     <>
@@ -172,8 +173,7 @@ const VirtualBot: React.FC<VirtualBotProps> = ({ firstName, lastName }) => {
         >
           {/* <Tooltip text="Hey! Click me" audioPlayed={audioPlayed}> */}
           <Image
-            // src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
-            src="/serviceBot.gif"
+            src={isGif ? "/serviceBot.gif" : "/serviceBot.png"}
             alt="GIF"
             width={200}
             height={200}

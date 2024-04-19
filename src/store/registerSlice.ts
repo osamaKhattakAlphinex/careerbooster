@@ -24,9 +24,11 @@ interface RegisterSlice {
     certifications: boolean;
     awards: boolean;
     interests: boolean;
+    languages: boolean;
     skills: boolean;
     publications: boolean;
     references: boolean;
+    trainings: boolean;
   };
   scrapping: {
     basic: boolean;
@@ -35,9 +37,11 @@ interface RegisterSlice {
     certifications: boolean;
     awards: boolean;
     interests: boolean;
+    languages: boolean;
     skills: boolean;
     publications: boolean;
     references: boolean;
+    trainings: boolean;
   };
   stepOne: {
     firstName?: string;
@@ -136,9 +140,11 @@ const initialState: RegisterSlice = {
     certifications: false,
     awards: false,
     interests: false,
+    languages: false,
     publications: false,
     skills: false,
     references: false,
+    trainings: false,
   },
   scrapping: {
     basic: false,
@@ -147,9 +153,11 @@ const initialState: RegisterSlice = {
     certifications: false,
     awards: false,
     interests: false,
+    languages: false,
     skills: false,
     publications: false,
     references: false,
+    trainings: false,
   },
   stepOne: {
     firstName: "",

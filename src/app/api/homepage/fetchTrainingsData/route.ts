@@ -51,7 +51,6 @@ export async function POST(req: any) {
                     startDate: VALUE_HERE,
                     endDate: VALUE_HERE,
                     description: description of all trainings,
-
                   },
                   .
                   .

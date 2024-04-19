@@ -142,7 +142,7 @@ const Reference = ({ heading, references }: Props) => {
           );
         })}
       </ul>
-      <AddItemToCustomSection recName="refrence" />
+      <AddItemToCustomSection recName="references" />
     </>
   );
 };

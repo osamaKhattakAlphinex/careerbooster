@@ -47,7 +47,7 @@ export async function POST(req: any) {
                 interests: [
                   {
                     name: VALUE_HERE, 
-                    description: description of the interests
+                    description: description of the interest
                   },
                   .
                   .

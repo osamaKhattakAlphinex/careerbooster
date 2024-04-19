@@ -244,7 +244,7 @@ const Interest = ({ heading, interests }: Props) => {
         );
       })}
 
-      <AddItemToCustomSection recName="interest" />
+      <AddItemToCustomSection recName="interests" />
     </>
   );
 };

@@ -212,6 +212,12 @@ const useHandler = () => {
       updateSaveHook.updateAndSaveSkill(updatedSkills);
     }
   };
+
+  const handleAddNewDetails =(recName:string, obj:{})=>{
+    let updatedSection = [...resume[recName], obj];
+    updateSaveHook.updateAndSaveOthers(updatedSection,recName);
+  }
+
   return {
     handlers: {
       handleDeleteSkill,
@@ -231,7 +237,8 @@ const useHandler = () => {
       handleRemoveExtraOthersSpace,
       handleAddOthersAchivement,
       handleUpdateOthersAchivement,
-      handleDeleteOthersAchivement
+      handleDeleteOthersAchivement,
+      handleAddNewDetails
     },
   };
 };
