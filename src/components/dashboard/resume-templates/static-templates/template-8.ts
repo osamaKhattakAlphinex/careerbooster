@@ -616,6 +616,7 @@ const GenerationOrder = [
   "trainings",
   "languages",
   "interests",
+  "projects",
   "references",
   "education",
 ];

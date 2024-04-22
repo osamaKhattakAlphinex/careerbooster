@@ -17,7 +17,6 @@ type Props = {
 };
 
 const Publication = ({ heading, publications, styles }: Props) => {
-  console.log("Styles", styles);
   const [pulicationIndex, setPulicationIndex] = useState<number>();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
@@ -284,7 +283,7 @@ const Publication = ({ heading, publications, styles }: Props) => {
           </Toolbar>
         );
       })}
-      <AddItemToCustomSection recName="publications"/>
+      <AddItemToCustomSection recName="publications" />
     </>
   );
 };

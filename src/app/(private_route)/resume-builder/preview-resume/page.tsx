@@ -28,9 +28,9 @@ const Page = () => {
         (resume: any) => resume.id === resumeId
       );
     }
-
-    console.log(resumeData);
   }, [templateId, resumeId]);
+
+  console.log(resumeData);
 
   const { components, templateLayout, cvHeadings, GenerationOrder } = template;
 
@@ -93,6 +93,7 @@ const Page = () => {
       "summary",
       "interests",
       "languages",
+      "projects",
       // "workExperienceArray",
     ];
 

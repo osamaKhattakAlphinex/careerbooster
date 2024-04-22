@@ -571,6 +571,7 @@ const GenerationOrder = [
   "certifications",
   "awards",
   "trainings",
+  "projects",
   "references",
   "education",
 ];
