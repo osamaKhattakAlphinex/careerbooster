@@ -369,7 +369,7 @@ const ProfilePreview = () => {
       {data.stepFourteen.list.length > 0 && (
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
-            Languages
+            Projects
             <button
               type="button"
               onClick={(e) => {

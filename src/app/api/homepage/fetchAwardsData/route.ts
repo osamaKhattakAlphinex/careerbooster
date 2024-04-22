@@ -39,7 +39,7 @@ export async function POST(req: any) {
               This is the User Data:
               ${content}
     
-              Now please give me a List of All Awards found from the above user data provided.
+              Now please give me a List of All Scholarships and Awards found from the above user data provided.
     
               The answer MUST be a valid JSON and formatting should be like this 
               replace the VALUE_HERE with the actual values

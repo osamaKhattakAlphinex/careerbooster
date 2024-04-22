@@ -1092,6 +1092,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       awards: register.stepNine.list,
       experience: register.stepFive.list,
       skills: register.stepThirteen.list,
+      projects: register.stepFourteen.list,
       wizardCompleted: true,
     };
 
