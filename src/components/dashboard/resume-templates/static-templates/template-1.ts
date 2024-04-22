@@ -94,6 +94,14 @@ const cvHeadings: any = [
       "font-semibold uppercase underline text-base w-full text-gray-950/80 flex flex-row items-center my-2",
     attributes: [{ "icon-color": "black" }],
   },
+  {
+    text: "Projects",
+    section: "projects",
+    headingKey: "projects",
+    styles:
+      "font-semibold uppercase underline text-base w-full text-gray-950/80 flex flex-row items-center my-2",
+    attributes: [{ "icon-color": "black" }],
+  },
 ];
 const components: any = {
   shortName: {
@@ -451,6 +459,22 @@ const components: any = {
       },
     ],
   },
+  projects: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "title",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
 };
 const templateLayout: any = {
   styles: "w-full",
@@ -562,6 +586,15 @@ const templateLayout: any = {
         },
       ],
     },
+    projects: {
+      styles:
+        "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
+      elements: [
+        {
+          id: "projects",
+        },
+      ],
+    },
     references: {
       styles:
         "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
@@ -597,6 +630,7 @@ const GenerationOrder = [
   "trainings",
   "languages",
   "interests",
+  "projects",
   "references",
   "education",
 ];

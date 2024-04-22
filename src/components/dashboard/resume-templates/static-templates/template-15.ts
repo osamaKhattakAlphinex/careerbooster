@@ -96,6 +96,14 @@ const cvHeadings: any = [
       "font-semibold uppercase my-2 text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
     attributes: [{ "icon-color": "black" }],
   },
+  {
+    text: "Projects",
+    section: "projects",
+    headingKey: "projects",
+    styles:
+      "font-semibold uppercase my-2 text-gray-950/80 flex items-center text-base py-0.5 w-full border-b-2 border-[#1F1E1E]",
+    attributes: [{ "icon-color": "black" }],
+  },
 ];
 
 const components: any = {
@@ -311,6 +319,22 @@ const components: any = {
       },
     ],
   },
+  projects: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "title",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
   interests: {
     styles: "my-2",
     elements: [
@@ -514,6 +538,9 @@ const templateLayout: any = {
 
         {
           id: "references",
+        },
+        {
+          id: "projects",
         },
         {
           id: "education",

@@ -100,6 +100,14 @@ const cvHeadings: any = [
       "font-semibold uppercase text-sm py-2 text-white bg-[#043382] border-2 px-6 flex items-center justify-center rounded-full my-4",
     attributes: [{ "icon-color": "white" }],
   },
+  {
+    text: "Projects",
+    section: "projects",
+    headingKey: "projects",
+    styles:
+      "font-semibold uppercase text-sm py-2 text-white bg-[#043382] border-2 px-6 flex items-center justify-center rounded-full my-4",
+    attributes: [{ "icon-color": "white" }],
+  },
 ];
 
 const templateLayout: any = {
@@ -166,6 +174,10 @@ const templateLayout: any = {
         },
         {
           id: "trainings",
+        },
+
+        {
+          id: "projects",
         },
 
         {
@@ -331,6 +343,22 @@ const components: any = {
             tag: "span",
           },
         ],
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
+  projects: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "title",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
       },
       {
         id: "description",

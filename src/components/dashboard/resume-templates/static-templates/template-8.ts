@@ -212,6 +212,14 @@ const templateLayout: any = {
         },
       ],
     },
+    projects: {
+      styles: "flex flex-col px-6 w-full text-gray-950/80",
+      elements: [
+        {
+          id: "projects",
+        },
+      ],
+    },
     references: {
       styles:
         "text-black flex flex-wrap justify-start items-start gap-3 px-6 text-gray-950/80",
@@ -432,6 +440,22 @@ const components: any = {
             tag: "span",
           },
         ],
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
+  projects: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "title",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
       },
       {
         id: "description",

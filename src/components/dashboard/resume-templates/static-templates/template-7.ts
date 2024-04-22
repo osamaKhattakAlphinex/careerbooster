@@ -97,6 +97,14 @@ const cvHeadings = [
       "font-bold uppercase mt-4 text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
     attributes: [{ "icon-color": "black" }],
   },
+  {
+    text: "Projects",
+    section: "projects",
+    headingKey: "projects",
+    styles:
+      "font-bold uppercase mt-4 text-center text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 border-y-2 border-gray-950/80",
+    attributes: [{ "icon-color": "black" }],
+  },
 ];
 const templateLayout = {
   styles: "w-full",
@@ -216,6 +224,15 @@ const templateLayout = {
       elements: [
         {
           id: "references",
+        },
+      ],
+    },
+    projects: {
+      styles:
+        "text-gray-950/80 flex flex-row flex-wrap justify-start items-start px-8 w-full",
+      elements: [
+        {
+          id: "projects",
         },
       ],
     },
@@ -428,6 +445,22 @@ const components = {
             tag: "span",
           },
         ],
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
+  projects: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "title",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
       },
       {
         id: "description",
