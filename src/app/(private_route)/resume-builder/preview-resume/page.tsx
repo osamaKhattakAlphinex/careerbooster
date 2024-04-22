@@ -93,7 +93,7 @@ const Page = () => {
       "summary",
       "interests",
       "languages",
-      "projects",
+      // "projects",
       // "workExperienceArray",
     ];
 
@@ -668,7 +668,8 @@ const Page = () => {
           attribute === "trainings" ||
           attribute === "interests" ||
           attribute === "references" ||
-          attribute === "languages"
+          attribute === "languages" ||
+          attribute === "projects"
         ) {
           value.appendChild(span);
           findChild.textContent = "";
@@ -770,6 +771,7 @@ const Page = () => {
   };
 
   useEffect(() => {
+    console.log(resumeData)
     setFileName(
       `${resumeData?.name
         ?.replaceAll(" ", "-")

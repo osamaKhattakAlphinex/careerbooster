@@ -345,6 +345,22 @@ const components: any = {
       },
     ],
   },
+  projects: {
+    styles: "my-1",
+    elements: [
+      {
+        id: "title",
+        styles: "text-sm mt-1 font-semibold text-gray-950/80",
+        tag: "span",
+      },
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
   references: {
     tag: "div",
     styles: "",
@@ -459,22 +475,7 @@ const components: any = {
       },
     ],
   },
-  projects: {
-    styles: "my-1",
-    elements: [
-      {
-        id: "title",
-        styles: "text-sm mt-1 font-semibold text-gray-950/80",
-        tag: "span",
-      },
-      {
-        id: "description",
-        styles:
-          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
-        tag: "span",
-      },
-    ],
-  },
+ 
 };
 const templateLayout: any = {
   styles: "w-full",
@@ -552,14 +553,6 @@ const templateLayout: any = {
         },
       ],
     },
-    awards: {
-      styles: "flex flex-col px-8 w-full text-gray-950/80",
-      elements: [
-        {
-          id: "awards",
-        },
-      ],
-    },
     trainings: {
       styles: "flex flex-col px-8 w-full text-gray-950/80",
       elements: [
@@ -568,12 +561,20 @@ const templateLayout: any = {
         },
       ],
     },
-    languages: {
+    projects: {
       styles:
-        "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
+        "flex flex-col px-8 w-full text-gray-950/80",
       elements: [
         {
-          id: "languages",
+          id: "projects",
+        },
+      ],
+    },
+    awards: {
+      styles: "flex flex-col px-8 w-full text-gray-950/80",
+      elements: [
+        {
+          id: "awards",
         },
       ],
     },
@@ -586,15 +587,7 @@ const templateLayout: any = {
         },
       ],
     },
-    projects: {
-      styles:
-        "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
-      elements: [
-        {
-          id: "projects",
-        },
-      ],
-    },
+
     references: {
       styles:
         "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
@@ -604,6 +597,16 @@ const templateLayout: any = {
         },
       ],
     },
+    languages: {
+      styles:
+        "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
+      elements: [
+        {
+          id: "languages",
+        },
+      ],
+    },
+
     education: {
       styles:
         "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
@@ -626,11 +629,11 @@ const GenerationOrder = [
   "workExperienceArray",
   "publications",
   "certifications",
-  "awards",
   "trainings",
+  "projects",
+  "awards",
   "languages",
   "interests",
-  "projects",
   "references",
   "education",
 ];
