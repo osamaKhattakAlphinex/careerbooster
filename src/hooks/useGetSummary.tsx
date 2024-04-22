@@ -38,7 +38,6 @@ const useGetSummary = (
     }
     return () => {
       abortController?.abort();
-      setAbortController(null);
     };
   }, []);
 
