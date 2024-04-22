@@ -20,7 +20,7 @@ const useGetSummary = (
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const path = usePathname();
   // const { createAbortController, abort } = useAbortController();
-  const { abortController } = useAppContext();
+  const { abortController, setAbortController } = useAppContext();
   useEffect(() => {
     if (userData && userData?.email) {
       setAiInputUserData({
@@ -35,13 +35,14 @@ const useGetSummary = (
       });
     }
     return () => {
-      abortController.abort();
+      abortController?.abort();
+      setAbortController(null);
     };
   }, []);
 
   const getSummary = async () => {
     // return aiInputUserData
-    const signal = abortController.signal;
+    const signal = abortController?.signal;
     // dispatch(setLoadingState("summary"));
     setStreamedSummaryData("");
     dispatch(setSummary(""));
@@ -60,42 +61,47 @@ const useGetSummary = (
         },
       }),
       signal: signal,
-    }).then(async (resp: any) => {
-      if (resp.ok) {
-        const reader = resp.body.getReader();
-        let summaryTemp = "";
-        while (true) {
-          const { done, value } = await reader.read();
+    })
+      .then(async (resp: any) => {
+        if (resp.ok) {
+          const reader = resp.body.getReader();
+          let summaryTemp = "";
+          while (true) {
+            const { done, value } = await reader.read();
 
-          if (done) {
-            break;
+            if (done) {
+              break;
+            }
+
+            const text = new TextDecoder().decode(value);
+            setStreamedSummaryData((prev: any) => prev + text);
+            summaryTemp += text;
           }
 
-          const text = new TextDecoder().decode(value);
-          setStreamedSummaryData((prev: any) => prev + text);
-          summaryTemp += text;
-        }
+          dispatch(setSummary(summaryTemp));
 
-        dispatch(setSummary(summaryTemp));
-
-        if (path !== "/resume-builder") {
-          showSuccessToast("Generated Successfully");
-          saveResumeToDB({
-            ...resumeData,
-            summary: summaryTemp,
-          });
+          if (path !== "/resume-builder") {
+            showSuccessToast("Generated Successfully");
+            saveResumeToDB({
+              ...resumeData,
+              summary: summaryTemp,
+            });
+          }
+        } else {
+          setStreamedSummaryData(resumeData?.summary);
+          dispatch(setSummary(resumeData?.summary));
+          if (resp.status === 429) {
+            showErrorToast("You ran out of credits!");
+            if (setOutOfCredits !== "") {
+              setOutOfCredits(true);
+            }
+          }
         }
-      } else {
+      })
+      .catch((err) => {
         setStreamedSummaryData(resumeData?.summary);
         dispatch(setSummary(resumeData?.summary));
-        if (resp.status === 429) {
-          showErrorToast("You ran out of credits!");
-          if (setOutOfCredits !== "") {
-            setOutOfCredits(true);
-          }
-        }
-      }
-    });
+      });
   };
 
   return { getSummary };
