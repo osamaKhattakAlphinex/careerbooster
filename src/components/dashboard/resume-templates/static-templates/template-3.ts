@@ -567,10 +567,10 @@ const GenerationOrder = [
   "workExperienceArray",
   "publications",
   "certifications",
-  "awards",
   "trainings",
-  "references",
   "projects",
+  "awards",
+  "references",
   "education",
 ];
 export const template = {

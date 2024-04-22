@@ -32,13 +32,11 @@ const ResumeTemplate2 = () => {
   const saveColor = (color: ColorResult) => {
     // Access the selected color value from the 'color' parameter
     setColor(color.hex);
-
     // You can do whatever you need with the selected color here
   };
   const saveColor_second = (color: ColorResult) => {
     // Access the selected color value from the 'color' parameter
     setColor_second(color.hex);
-
     // You can do whatever you need with the selected color here
   };
   return (
@@ -193,9 +191,6 @@ const ResumeTemplate2 = () => {
           />
         )}
       </div>
-
-      {/* Add Custom */}
-      {/* <CustomResumeSection /> */}
 
       {/* Education */}
       <div className="w-full space-y-3 ">

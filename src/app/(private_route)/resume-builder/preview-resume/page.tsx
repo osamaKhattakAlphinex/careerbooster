@@ -30,8 +30,6 @@ const Page = () => {
     }
   }, [templateId, resumeId]);
 
-  console.log(resumeData);
-
   const { components, templateLayout, cvHeadings, GenerationOrder } = template;
 
   let newCvHeadings: any = [];
@@ -93,8 +91,6 @@ const Page = () => {
       "summary",
       "interests",
       "languages",
-      // "projects",
-      // "workExperienceArray",
     ];
 
     const containerNames = [
@@ -102,9 +98,7 @@ const Page = () => {
       "skills",
       "summary",
       "contact",
-      // "workExperienceArray",
       "education",
-      // "publications",
       "sideBar",
       "languages",
       "interests",
@@ -771,7 +765,6 @@ const Page = () => {
   };
 
   useEffect(() => {
-    console.log(resumeData)
     setFileName(
       `${resumeData?.name
         ?.replaceAll(" ", "-")

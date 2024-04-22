@@ -1,13 +1,12 @@
 "use client";
 
 import { setSummary } from "@/store/resumeSlice";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useGetUserData from "./useGetUserData";
 import useSaveResumeToDB from "./useSaveToDB";
-import useGetCreditLimits from "./useGetCreditLimits";
 import { usePathname } from "next/navigation";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
+import { useAppContext } from "@/context/AppContext";
 
 const useGetSummary = (
   setStreamedSummaryData: any,
@@ -20,7 +19,8 @@ const useGetSummary = (
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const path = usePathname();
-
+  // const { createAbortController, abort } = useAbortController();
+  const { abortController } = useAppContext();
   useEffect(() => {
     if (userData && userData?.email) {
       setAiInputUserData({
@@ -34,11 +34,14 @@ const useGetSummary = (
         skills: userData?.skills,
       });
     }
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
   const getSummary = async () => {
     // return aiInputUserData
-
+    const signal = abortController.signal;
     // dispatch(setLoadingState("summary"));
     setStreamedSummaryData("");
     dispatch(setSummary(""));
@@ -56,6 +59,7 @@ const useGetSummary = (
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
+      signal: signal,
     }).then(async (resp: any) => {
       if (resp.ok) {
         const reader = resp.body.getReader();
@@ -86,7 +90,7 @@ const useGetSummary = (
         dispatch(setSummary(resumeData?.summary));
         if (resp.status === 429) {
           showErrorToast("You ran out of credits!");
-           if(setOutOfCredits !== ""){
+          if (setOutOfCredits !== "") {
             setOutOfCredits(true);
           }
         }

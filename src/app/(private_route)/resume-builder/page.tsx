@@ -97,6 +97,7 @@ const ResumeBuilder = () => {
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [resumeGenerated, setResumeGenerated] = useState<boolean>(false);
   const { saveResumeToDB } = useSaveResumeToDB();
+  // const { createAbortController, abort } = useAbortController();
   // Redux
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
@@ -111,6 +112,7 @@ const ResumeBuilder = () => {
       creditsInfoRef.current.openModal(true);
     }
   };
+
 
   const handleGenerate = useCallback(
     async (quantifyingExperience: boolean) => {
@@ -130,7 +132,9 @@ const ResumeBuilder = () => {
         dispatch(setPublications({ publications: userData.publications }));
         dispatch(setReferences({ references: userData.references }));
         dispatch(setInterests({ interests: userData.interests }));
-        dispatch(setCertifications({ certifications: userData.certifications }));
+        dispatch(
+          setCertifications({ certifications: userData.certifications })
+        );
         dispatch(setLanguages({ languages: userData.languages }));
 
         dispatch(setId(""));
