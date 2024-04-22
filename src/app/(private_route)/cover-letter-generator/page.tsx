@@ -43,7 +43,7 @@ export default function CoverLetterPage() {
   const [jobDescription, setJobDescription] = useState<string>("");
   const [isEditing, setIsEditing] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits } = useAppContext();
+  const { setAvailableCredits, abortController } = useAppContext();
   const [confirmationModal, setConfirmationModal] = useState(false);
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const router = useRouter();
@@ -67,6 +67,10 @@ export default function CoverLetterPage() {
     // else {
     //   dispatch(resetCoverLetter());
     // }
+
+    return () => {
+      abortController.abort();
+    };
   }, [isEditing]);
 
   // Function to save the edited content and exit editing mode
@@ -140,6 +144,8 @@ export default function CoverLetterPage() {
   };
 
   const handleGenerate = async () => {
+    const signal = abortController.signal;
+
     if (session?.user?.email && aiInputUserData) {
       setMsgLoading(true);
       setShow(true);
@@ -229,9 +235,9 @@ export default function CoverLetterPage() {
             }
           } else {
             const res = await resp.json();
-            if(resp.status === 429){
+            if (resp.status === 429) {
               showErrorToast("You ran out of credits!");
-              setOutOfCredits(true)
+              setOutOfCredits(true);
               setStreamedData(res.result + "! You ran out of Credits");
               // setConfirmationModal(true);
             } else {
@@ -307,8 +313,12 @@ export default function CoverLetterPage() {
     setStreamedData(coverLetter.coverLetterText);
   }, [coverLetter.coverLetterText]);
 
-  const { coverLetterElementRef, tourBotRef, historyCardRef,availableCreditsRef } =
-    useTourContext();
+  const {
+    coverLetterElementRef,
+    tourBotRef,
+    historyCardRef,
+    availableCreditsRef,
+  } = useTourContext();
 
   const tourBotConfig = {
     name: "coverLetter",
@@ -833,7 +843,10 @@ export default function CoverLetterPage() {
           onConfirm={() => onConfirm()}
         />
       )}
-      <TourBot config={outOfCredits ? tourBotConfig2 : tourBotConfig} setOutOfCredits={setOutOfCredits}/>
+      <TourBot
+        config={outOfCredits ? tourBotConfig2 : tourBotConfig}
+        setOutOfCredits={setOutOfCredits}
+      />
     </>
   );
 }
