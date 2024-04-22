@@ -19,7 +19,6 @@ const useGetSummary = (
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const path = usePathname();
-  // const { createAbortController, abort } = useAbortController();
   const { abortController, setAbortController } = useAppContext();
   useEffect(() => {
     if(abortController === null){
