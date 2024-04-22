@@ -21,7 +21,6 @@ import {
   publicationStyles,
   template_2,
 } from "@/helpers/templateStylesObj";
-import Project from "./resume-sections/project";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
@@ -42,9 +41,9 @@ const ResumeTemplate2 = () => {
     // You can do whatever you need with the selected color here
   };
   return (
-    <div className="flex flex-col py-2 items-start justify-start w-full px-6 space-y-4 text-gray-900 first-page">
+    <div className="flex flex-col items-start justify-start w-full px-6 py-2 space-y-4 text-gray-900 first-page">
       {/* Name and Title */}
-      <div className="flex flex-col items-center w-full px-8 py-4 mt-1 text-center bg-gray-300  rounded-xl">
+      <div className="flex flex-col items-center w-full px-8 py-4 mt-1 text-center bg-gray-300 rounded-xl">
         <Header
           name={resume.name}
           jobTitle={resume.jobTitle}
@@ -73,8 +72,6 @@ const ResumeTemplate2 = () => {
         />
         {/* <div className="absolute top-0 left-12">
           <ColorPicker\
-
-
             defaultColor="#e9e8e8"
             resetColor="#e9e8e8"
             setColor={setColor}
@@ -145,16 +142,6 @@ const ResumeTemplate2 = () => {
           <Training
             heading={resume.headings.trainings}
             trainings={resume.trainings}
-          />
-        )}
-      </div>
-
-      {/* Projects */}
-      <div className="w-full">
-        {resume?.projects && resume?.projects.length > 0 && (
-          <Project
-            heading={resume.headings.projects}
-            projects={resume.projects}
           />
         )}
       </div>

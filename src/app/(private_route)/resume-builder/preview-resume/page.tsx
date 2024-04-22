@@ -28,8 +28,6 @@ const Page = () => {
         (resume: any) => resume.id === resumeId
       );
     }
-
-    console.log(resumeData);
   }, [templateId, resumeId]);
 
   const { components, templateLayout, cvHeadings, GenerationOrder } = template;

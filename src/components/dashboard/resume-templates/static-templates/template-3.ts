@@ -570,6 +570,7 @@ const GenerationOrder = [
   "awards",
   "trainings",
   "references",
+  "projects",
   "education",
 ];
 export const template = {

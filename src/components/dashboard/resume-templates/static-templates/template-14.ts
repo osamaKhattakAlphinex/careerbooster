@@ -576,6 +576,7 @@ const GenerationOrder = [
   "publications",
   "certifications",
   "awards",
+  "projects",
   "trainings",
   "references",
   "education",
