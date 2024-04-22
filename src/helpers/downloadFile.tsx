@@ -92,6 +92,8 @@ h2[data-name="languages"][data-icon-color="black"][data-type-heading="true"]::be
 h2[data-name="languages"][data-icon-color="white"][data-type-heading="true"]::before,
 h2[data-name="interests"][data-icon-color="black"][data-type-heading="true"]::before,
 h2[data-name="interests"][data-icon-color="white"][data-type-heading="true"]::before,
+h2[data-name="projects"][data-icon-color="black"][data-type-heading="true"]::before,
+h2[data-name="projects"][data-icon-color="white"][data-type-heading="true"]::before,
 [data-primarySkills-index]::before,
 [data-achievements-index]::before, [data-description-index]::before {
   font-family: sans-serif;
@@ -178,6 +180,13 @@ h2[data-name="references"][data-icon-color="black"][data-type-heading="true"]::b
 h2[data-name="references"][data-icon-color="white"][data-type-heading="true"]::before {
   content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9InctNSBoLTUiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEwLjg2OCAyLjg4NGMtLjMyMS0uNzcyLTEuNDE1LS43NzItMS43MzYgMGwtMS44MyA0LjQwMS00Ljc1My4zODFjLS44MzMuMDY3LTEuMTcxIDEuMTA3LS41MzYgMS42NTFsMy42MiAzLjEwMi0xLjEwNiA0LjYzN2MtLjE5NC44MTMuNjkxIDEuNDU2IDEuNDA1IDEuMDJMMTAgMTUuNTkxbDQuMDY5IDIuNDg1Yy43MTMuNDM2IDEuNTk4LS4yMDcgMS40MDQtMS4wMmwtMS4xMDYtNC42MzcgMy42Mi0zLjEwMmMuNjM1LS41NDQuMjk3LTEuNTg0LS41MzYtMS42NWwtNC43NTItLjM4Mi0xLjgzMS00LjQwMVoiIGNsaXAtcnVsZT0iZXZlbm9kZCIgLz4KPC9zdmc+CgoK");
 } 
+
+h2[data-name="projects"][data-icon-color="black"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzc05hbWU9InctNiBoLTYiPgogIDxwYXRoIGZpbGxSdWxlPSJldmVub2RkIiBkPSJNOS4zMTUgNy41ODRDMTIuMTk1IDMuODgzIDE2LjY5NSAxLjUgMjEuNzUgMS41YS43NS43NSAwIDAgMSAuNzUuNzVjMCA1LjA1Ni0yLjM4MyA5LjU1NS02LjA4NCAxMi40MzZBNi43NSA2Ljc1IDAgMCAxIDkuNzUgMjIuNWEuNzUuNzUgMCAwIDEtLjc1LS43NXYtNC4xMzFBMTUuODM4IDE1LjgzOCAwIDAgMSA2LjM4MiAxNUgyLjI1YS43NS43NSAwIDAgMS0uNzUtLjc1IDYuNzUgNi43NSAwIDAgMSA3LjgxNS02LjY2NlpNMTUgNi43NWEyLjI1IDIuMjUgMCAxIDAgMCA0LjUgMi4yNSAyLjI1IDAgMCAwIDAtNC41WiIgY2xpcFJ1bGU9ImV2ZW5vZGQiIC8+CiAgPHBhdGggZD0iTTUuMjYgMTcuMjQyYS43NS43NSAwIDEgMC0uODk3LTEuMjAzIDUuMjQzIDUuMjQzIDAgMCAwLTIuMDUgNS4wMjIuNzUuNzUgMCAwIDAgLjYyNS42MjcgNS4yNDMgNS4yNDMgMCAwIDAgNS4wMjItMi4wNTEuNzUuNzUgMCAxIDAtMS4yMDItLjg5NyAzLjc0NCAzLjc0NCAwIDAgMS0zLjAwOCAxLjUxYzAtMS4yMy41OTItMi4zMjMgMS41MS0zLjAwOFoiIC8+Cjwvc3ZnPgo=");
+}
+h2[data-name="projects"][data-icon-color="white"][data-type-heading="true"]::before {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmZmZmZiIgY2xhc3NOYW1lPSJ3LTYgaC02Ij4KICA8cGF0aCBmaWxsUnVsZT0iZXZlbm9kZCIgZD0iTTkuMzE1IDcuNTg0QzEyLjE5NSAzLjg4MyAxNi42OTUgMS41IDIxLjc1IDEuNWEuNzUuNzUgMCAwIDEgLjc1Ljc1YzAgNS4wNTYtMi4zODMgOS41NTUtNi4wODQgMTIuNDM2QTYuNzUgNi43NSAwIDAgMSA5Ljc1IDIyLjVhLjc1Ljc1IDAgMCAxLS43NS0uNzV2LTQuMTMxQTE1LjgzOCAxNS44MzggMCAwIDEgNi4zODIgMTVIMi4yNWEuNzUuNzUgMCAwIDEtLjc1LS43NSA2Ljc1IDYuNzUgMCAwIDEgNy44MTUtNi42NjZaTTE1IDYuNzVhMi4yNSAyLjI1IDAgMSAwIDAgNC41IDIuMjUgMi4yNSAwIDAgMCAwLTQuNVoiIGNsaXBSdWxlPSJldmVub2RkIiAvPgogIDxwYXRoIGQ9Ik01LjI2IDE3LjI0MmEuNzUuNzUgMCAxIDAtLjg5Ny0xLjIwMyA1LjI0MyA1LjI0MyAwIDAgMC0yLjA1IDUuMDIyLjc1Ljc1IDAgMCAwIC42MjUuNjI3IDUuMjQzIDUuMjQzIDAgMCAwIDUuMDIyLTIuMDUxLjc1Ljc1IDAgMSAwLTEuMjAyLS44OTcgMy43NDQgMy43NDQgMCAwIDEtMy4wMDggMS41MWMwLTEuMjMuNTkyLTIuMzIzIDEuNTEtMy4wMDhaIiAvPgo8L3N2Zz4K");
+}
 
 [data-primarySkills-index]::before,
 [data-achievements-index]::before,

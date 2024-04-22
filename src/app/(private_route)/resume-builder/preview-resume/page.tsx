@@ -30,6 +30,8 @@ const Page = () => {
     }
   }, [templateId, resumeId]);
 
+  console.log(resumeData);
+
   const { components, templateLayout, cvHeadings, GenerationOrder } = template;
 
   let newCvHeadings: any = [];
@@ -91,6 +93,7 @@ const Page = () => {
       "summary",
       "interests",
       "languages",
+      "projects",
       // "workExperienceArray",
     ];
 
