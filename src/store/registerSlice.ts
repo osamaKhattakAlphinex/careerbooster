@@ -425,8 +425,8 @@ const registerSlice = createSlice({
     setStepFourteen(state, action) {
       return {
         ...state,
-        stepThirteen: {
-          ...state.stepThirteen,
+        stepFourteen: {
+          ...state.stepFourteen,
           ...action.payload,
         },
       };

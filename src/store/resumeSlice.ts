@@ -292,6 +292,7 @@ const resumeSlice = createSlice({
         trainings: action.payload.trainings,
         awards: action.payload.awards,
         languages: action.payload.languages,
+        projects: action.payload.projects,
       };
     },
     setSummary(state, action) {
@@ -328,6 +329,12 @@ const resumeSlice = createSlice({
       return {
         ...state,
         publications: action.payload.publications,
+      };
+    },
+    setProjects(state, action) {
+      return {
+        ...state,
+        projects: action.payload.projects,
       };
     },
     setReferences(state, action) {
@@ -406,6 +413,7 @@ export const {
   setInterests,
   setCertifications,
   setLanguages,
+  setProjects
   // setLoadingState,
 } = resumeSlice.actions;
 

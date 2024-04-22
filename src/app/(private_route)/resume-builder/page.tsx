@@ -22,6 +22,7 @@ import {
   setInterests,
   setCertifications,
   setLanguages,
+  setProjects,
 } from "@/store/resumeSlice";
 
 import {
@@ -124,6 +125,7 @@ const ResumeBuilder = () => {
         dispatch(setState({ name: "resumeLoading", value: true }));
         dispatch(setQuantifyingExperience(quantifyingExperience));
         dispatch(setTrainings({ trainings: userData.trainings }));
+        dispatch(setProjects({ projects: userData.projects }));
         dispatch(setAwards({ awards: userData.awards }));
         dispatch(setPublications({ publications: userData.publications }));
         dispatch(setReferences({ references: userData.references }));
@@ -320,6 +322,7 @@ const ResumeBuilder = () => {
       setFinished(true);
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
       dispatch(setState({ name: "resumeLoading", value: false }));
+      setResumeGenerated(true);
       dispatch(setWorkExperience(temp));
     }
     // });
