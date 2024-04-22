@@ -83,6 +83,13 @@ const RecordCard = ({ rec, recName, deleteHandler }: any) => {
           isEditing={edit}
         />
       )}
+      {edit && recName === "projects" && (
+        <ProjectsForm
+          rec={rec}
+          formCloseHandler={() => setEdit(false)}
+          isEditing={edit}
+        />
+      )}
 
       <div className="relative flex flex-col items-start justify-start py-4 pl-4 pr-12 border border-[#2e2f45] rounded-md">
         <div className="absolute right-2 top-4">
@@ -1240,6 +1247,132 @@ export const LangaugesForm = ({
     </div>
   );
 };
+export const ProjectsForm = ({
+  rec = null,
+  formCloseHandler,
+  isEditing = false,
+  formSubmitHandler = null,
+}: any) => {
+  const dispatch = useDispatch();
+  const stepTen = useSelector((state: any) => state.register.stepTen);
+  const { list, state } = stepTen;
+
+  useEffect(() => {
+    if (rec) {
+      formik.setValues(rec);
+    }
+  }, []);
+
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      description: "",
+    },
+
+    onSubmit: async (values) => {
+      console.log("Projects Values", values);
+
+      // if (formSubmitHandler !== null) {
+      //   const { description } = values;
+      //   const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+
+      //   // Update the values with the description as an array
+      //   const updatedValues = {
+      //     ...values,
+      //     description: descriptionArray,
+      //   };
+      //   formSubmitHandler(updatedValues);
+      //   formCloseHandler();
+      // } else {
+      //   const { description } = values;
+      //   const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+
+      //   // Update the values with the description as an array
+      //   const updatedValues = {
+      //     ...values,
+      //     description: descriptionArray,
+      //   };
+      //   if (isEditing) {
+      //     const updatedList = list.map((singleRec: Interest) => {
+      //       if (singleRec.id === rec.id) {
+      //         return updatedValues;
+      //       } else {
+      //         return singleRec;
+      //       }
+      //     });
+      //     dispatch(setStepTen({ list: updatedList }));
+      //     dispatch(setStepTen({ state: "show" }));
+      //   } else {
+      //     const obj = { id: makeid(), ...updatedValues };
+      //     const newList = [obj, ...list];
+      //     dispatch(setStepTen({ list: newList }));
+      //     dispatch(setStepTen({ state: "show" }));
+      //   }
+
+      //   formCloseHandler();
+      // }
+    },
+
+    validationSchema: Yup.object().shape({
+      title: Yup.string().required("title is required"),
+    }),
+  });
+  const pathname = usePathname();
+  return (
+    <div>
+      <form onSubmit={formik.handleSubmit} className="form">
+        <div className="mb-4">
+          <label
+            htmlFor="title"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
+          >
+            Name
+          </label>
+          <input
+            id="title"
+            type="text"
+            className="form-control"
+            placeholder="Title"
+            value={formik.values.title}
+            onChange={formik.handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="description"
+            className={`block mb-2 text-sm font-bold  ${
+              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+            }`}
+          >
+            Description
+          </label>
+          <textarea
+            id="description"
+            className="form-control"
+            onChange={formik.handleChange}
+            placeholder="Description"
+            value={formik.values.description}
+          ></textarea>
+        </div>
+        <div className="flex flex-row-reverse items-center justify-end gap-2">
+          <input
+            type="submit"
+            className="form-btn"
+            value={isEditing ? "Update Project" : "Add Project"}
+          />
+          <input
+            type="button"
+            onClick={formCloseHandler}
+            className="form-btn"
+            value="Cancel"
+          />
+        </div>
+      </form>
+    </div>
+  );
+};
 
 const StepCustom = () => {
   const [expanded, setExpanded] = useState<{
@@ -1250,6 +1383,7 @@ const StepCustom = () => {
     awards: boolean;
     interests: boolean;
     trainings: boolean;
+    projects: boolean;
   }>({
     languages: false,
     references: false,
@@ -1258,6 +1392,7 @@ const StepCustom = () => {
     interests: false,
     certifications: false,
     trainings: false,
+    projects: false,
   });
   const dispatch = useDispatch();
   const stepEight = useSelector((state: any) => state.register.stepEight);
@@ -1569,6 +1704,33 @@ const StepCustom = () => {
           />
         ) : (
           <AddItemBtn onClick={() => setExpandedHelper("languages")} />
+        )}
+      </div>
+      {/* projects */}
+
+      <div className="w-full">
+        <h1 className="form-heading">Projects</h1>
+        {languagesList.length === 0 && <p>No Projects Added</p>}
+        <div className="custom-card">
+          {languagesList.map((rec: Language) => (
+            <div key={rec.id}>
+              <RecordCard
+                rec={rec}
+                recName={"projects"}
+                deleteHandler={() =>
+                  handleOpenConfirmationModal("projects", rec.id)
+                }
+                formCloseHandler={() => setExpandedHelper("projects")}
+              />
+            </div>
+          ))}
+        </div>
+        {expanded.projects ? (
+          <ProjectsForm
+            formCloseHandler={() => setExpandedHelper("projects")}
+          />
+        ) : (
+          <AddItemBtn onClick={() => setExpandedHelper("projects")} />
         )}
       </div>
     </div>
