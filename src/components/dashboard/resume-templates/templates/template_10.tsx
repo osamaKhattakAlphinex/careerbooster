@@ -29,8 +29,7 @@ import { ColorResult } from "react-color";
 import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { useColorContext } from "@/context/ResumeColorContext";
-import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
-import CustomResumeSection from "../../resume-builder/CustomResumeSection";
+
 const ResumeTemplate10 = () => {
   const resume = useSelector((state: any) => state.resume);
   const [newPrimarySkill, setNewPrimarySkill] = useState(false);

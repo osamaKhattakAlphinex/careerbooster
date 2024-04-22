@@ -18,6 +18,7 @@ import useHandler from "@/hooks/useHandler";
 import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { formatDate } from "@/helpers/getFormattedDateTime";
+import Project from "./resume-sections/project";
 
 const ResumeTemplate1 = ({
   streamedSummaryData,
@@ -1908,6 +1909,13 @@ const ResumeTemplate1 = ({
                   );
                 })}
               </>
+            )}
+
+            {resume?.projects && resume?.projects.length > 0 && (
+              <Project
+                heading={resume.headings.projects}
+                projects={resume.projects}
+              />
             )}
 
             {/* Interests & Hobbies */}

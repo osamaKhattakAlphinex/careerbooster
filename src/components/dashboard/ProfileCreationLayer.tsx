@@ -13,6 +13,7 @@ import {
   setStepEleven,
   setStepFive,
   setStepFour,
+  setStepFourteen,
   setStepNine,
   setStepOne,
   setStepSeven,
@@ -80,6 +81,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       fetchTrainingsDataFromResume();
       fetchPublicationsDataFromResume();
       fetchReferencesDataFromResume();
+      fetchProjectsDataFromResume();
     }
   };
 
@@ -626,6 +628,72 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
         .catch((error) => {
           dispatch(setScrapped({ references: true }));
           dispatch(setScrapping({ references: false }));
+        });
+    }
+  };
+  const fetchProjectsDataFromResume = (refetch = false) => {
+    if (
+      (refetch || register.scrapped.projects === false) &&
+      // userData.defaultResumeFile &&
+      register.scrappedContent !== "" &&
+      register.scrapping.projects === false
+    ) {
+      // set scrapping to true so that we Don't send multiple requests
+      dispatch(setScrapping({ projects: true }));
+
+      const formData = {
+        // file: userData.defaultResumeFile,
+        content: register.scrappedContent,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.defaultResumeFile,
+        },
+      };
+
+      fetch("/api/homepage/fetchProjectsData", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      })
+        .then(async (resp: any) => {
+          const res = await resp.json();
+          if (res.success) {
+            if (res?.result) {
+              try {
+                let data;
+                if (typeof res.result === "object") {
+                  data = res.result;
+                } else {
+                  data = await JSON.parse(res.result);
+                }
+                const formattedArr = data?.projects.map((item: any) => {
+                  return {
+                    id: makeid(),
+                    title: item?.title,
+                    description: item?.description,
+                                     
+                  };
+                });
+
+                dispatch(setStepFourteen({ list: formattedArr }));
+                dispatch(setScrapped({ projects: true }));
+                dispatch(setScrapping({ projects: false }));
+              } catch (error) {
+                // console.log("Error in sorting interests array: ", error);
+                dispatch(setScrapped({ projects: true }));
+                dispatch(setScrapping({ projects: false }));
+              }
+            } else {
+              dispatch(setScrapped({ projects: true }));
+              dispatch(setScrapping({ projects: false }));
+            }
+          } else {
+            dispatch(setScrapped({ projects: true }));
+            dispatch(setScrapping({ projects: false }));
+          }
+        })
+        .catch((error) => {
+          dispatch(setScrapped({ projects: true }));
+          dispatch(setScrapping({ projects: false }));
         });
     }
   };

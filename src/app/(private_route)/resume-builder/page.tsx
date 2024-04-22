@@ -22,6 +22,7 @@ import {
   setInterests,
   setCertifications,
   setLanguages,
+  setProjects,
 } from "@/store/resumeSlice";
 
 import {
@@ -123,15 +124,14 @@ const ResumeBuilder = () => {
         setResumeGenerated(false);
         dispatch(setState({ name: "resumeLoading", value: true }));
         dispatch(setQuantifyingExperience(quantifyingExperience));
-        // dispatch(setTrainings({ trainings: userData.trainings }));
-        // dispatch(setAwards({ awards: userData.awards }));
-        // dispatch(setPublications({ publications: userData.publications }));
-        // dispatch(setReferences({ references: userData.references }));
-        // dispatch(setInterests({ interests: userData.interests }));
-        // dispatch(
-        //   setCertifications({ certifications: userData.certifications })
-        // );
-        // dispatch(setLanguages({ languages: userData.languages }));
+        dispatch(setTrainings({ trainings: userData.trainings }));
+        dispatch(setProjects({ projects: userData.projects }));
+        dispatch(setAwards({ awards: userData.awards }));
+        dispatch(setPublications({ publications: userData.publications }));
+        dispatch(setReferences({ references: userData.references }));
+        dispatch(setInterests({ interests: userData.interests }));
+        dispatch(setCertifications({ certifications: userData.certifications }));
+        dispatch(setLanguages({ languages: userData.languages }));
 
         dispatch(setId(""));
         await getBasicInfo();
@@ -139,7 +139,7 @@ const ResumeBuilder = () => {
         await getPrimarySkills();
         await getWorkExperienceNew(quantifyingExperience);
 
-        await getPublications();
+        // await getPublications();
         // await addCustomSection();
         // adding custom sections
         runConfetti();
@@ -319,9 +319,10 @@ const ResumeBuilder = () => {
           setStreamedJDData("You ran out of credits!");
         }
       }
-      // setFinished(true);
+      setFinished(true);
       dispatch(setWorkExperienceArray({ workExperienceArray: workExpArr }));
-      // dispatch(setState({ name: "resumeLoading", value: false }));
+      dispatch(setState({ name: "resumeLoading", value: false }));
+      setResumeGenerated(true);
       dispatch(setWorkExperience(temp));
     }
     // });

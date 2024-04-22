@@ -59,6 +59,7 @@ const UserSchema = new Schema(
     references: [],
     languages: [],
     certifications: [],
+    projects:[],
     role: {
       type: String,
       default: "user",

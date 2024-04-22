@@ -13,6 +13,7 @@ import {
   Training,
   Interest,
   Language,
+  Project,
 } from "@/store/userDataSlice";
 import ExperienceCard from "./ExperienceCard";
 import RecordCard from "./RecordCard";
@@ -20,7 +21,6 @@ import RecordCard from "./RecordCard";
 const ProfilePreview = () => {
   const dispatch = useDispatch();
   const data = useSelector((state: any) => state.register);
-  console.log("Data", data);
 
   return (
     <div className="">
@@ -360,6 +360,29 @@ const ProfilePreview = () => {
           <div className="w-[100%] grid md:grid-cols-2 gap-4">
             {data.stepEleven.list.map((language: Language, index: number) => (
               <RecordCard rec={language} key={index} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Projects */}
+      {data.stepFourteen.list.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2  dark:text-gray-100 text-gray-950">
+            Languages
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(setActiveStep(4));
+              }}
+              className="text-sm float-right flex flex-row gap-1 items-center hover:bg-gray-50 text-blue-500"
+            >
+              {EditIcon}
+            </button>
+          </h2>
+          <div className="w-[100%] grid md:grid-cols-2 gap-4">
+            {data.stepFourteen.list.map((project: Project, index: number) => (
+              <RecordCard rec={project} key={index} />
             ))}
           </div>
         </section>

@@ -27,8 +27,6 @@ import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import Link from "next/link";
 import { useColorContext } from "@/context/ResumeColorContext";
-import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
-
 import Publication from "./resume-sections/publication";
 import Certification from "./resume-sections/certification";
 import Training from "./resume-sections/trainings";

@@ -6,6 +6,7 @@ import { showSuccessToast, showWarningToast } from "@/helpers/toast";
 import {
   setStepEight,
   setStepEleven,
+  setStepFourteen,
   setStepNine,
   setStepSeven,
   setStepSix,
@@ -17,6 +18,7 @@ import {
   Certification,
   Interest,
   Language,
+  Project,
   Publication,
   Reference,
   Training,
@@ -1254,8 +1256,8 @@ export const ProjectsForm = ({
   formSubmitHandler = null,
 }: any) => {
   const dispatch = useDispatch();
-  const stepTen = useSelector((state: any) => state.register.stepTen);
-  const { list, state } = stepTen;
+  const stepFourteen= useSelector((state: any) => state.register.stepFourteen);
+  const { list, state } = stepFourteen;
 
   useEffect(() => {
     if (rec) {
@@ -1270,47 +1272,46 @@ export const ProjectsForm = ({
     },
 
     onSubmit: async (values) => {
-      console.log("Projects Values", values);
 
-      // if (formSubmitHandler !== null) {
-      //   const { description } = values;
-      //   const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+      if (formSubmitHandler !== null) {
+        const { description } = values;
+        const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
 
-      //   // Update the values with the description as an array
-      //   const updatedValues = {
-      //     ...values,
-      //     description: descriptionArray,
-      //   };
-      //   formSubmitHandler(updatedValues);
-      //   formCloseHandler();
-      // } else {
-      //   const { description } = values;
-      //   const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
+        // Update the values with the description as an array
+        const updatedValues = {
+          ...values,
+          description: descriptionArray,
+        };
+        formSubmitHandler(updatedValues);
+        formCloseHandler();
+      } else {
+        const { description } = values;
+        const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
 
-      //   // Update the values with the description as an array
-      //   const updatedValues = {
-      //     ...values,
-      //     description: descriptionArray,
-      //   };
-      //   if (isEditing) {
-      //     const updatedList = list.map((singleRec: Interest) => {
-      //       if (singleRec.id === rec.id) {
-      //         return updatedValues;
-      //       } else {
-      //         return singleRec;
-      //       }
-      //     });
-      //     dispatch(setStepTen({ list: updatedList }));
-      //     dispatch(setStepTen({ state: "show" }));
-      //   } else {
-      //     const obj = { id: makeid(), ...updatedValues };
-      //     const newList = [obj, ...list];
-      //     dispatch(setStepTen({ list: newList }));
-      //     dispatch(setStepTen({ state: "show" }));
-      //   }
+        // Update the values with the description as an array
+        const updatedValues = {
+          ...values,
+          description: descriptionArray,
+        };
+        if (isEditing) {
+          const updatedList = list.map((singleRec: Interest) => {
+            if (singleRec.id === rec.id) {
+              return updatedValues;
+            } else {
+              return singleRec;
+            }
+          });
+          dispatch(setStepFourteen({ list: updatedList }));
+          dispatch(setStepFourteen({ state: "show" }));
+        } else {
+          const obj = { id: makeid(), ...updatedValues };
+          const newList = [obj, ...list];
+          dispatch(setStepFourteen({ list: newList }));
+          dispatch(setStepFourteen({ state: "show" }));
+        }
 
-      //   formCloseHandler();
-      // }
+        formCloseHandler();
+      }
     },
 
     validationSchema: Yup.object().shape({
@@ -1328,7 +1329,7 @@ export const ProjectsForm = ({
               pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
             }`}
           >
-            Name
+            Title
           </label>
           <input
             id="title"
@@ -1409,6 +1410,8 @@ const StepCustom = () => {
   const { list: languagesList } = stepEleven;
   const stepTwelve = useSelector((state: any) => state.register.stepTwelve);
   const { list: referencesList } = stepTwelve;
+  const stepFourteen = useSelector((state: any) => state.register.stepFourteen);
+  const { list: projectsList } = stepFourteen;
 
   const setExpandedHelper = (key: string) => {
     setExpanded((prev: any) => ({
@@ -1710,9 +1713,9 @@ const StepCustom = () => {
 
       <div className="w-full">
         <h1 className="form-heading">Projects</h1>
-        {languagesList.length === 0 && <p>No Projects Added</p>}
+        {projectsList.length === 0 && <p>No Projects Added</p>}
         <div className="custom-card">
-          {languagesList.map((rec: Language) => (
+          {projectsList.map((rec: Project) => (
             <div key={rec.id}>
               <RecordCard
                 rec={rec}

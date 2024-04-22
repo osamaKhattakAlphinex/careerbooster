@@ -25,7 +25,7 @@ interface Publication {
   title: string;
   publisher: string;
   date: string;
-  description: string[];
+  description: string;
 }
 
 interface Award {
@@ -58,6 +58,10 @@ interface Language {
   language: string;
   proficiency: string; // This could be levels like beginner, intermediate, advanced, or specific proficiency scores
 }
+interface Project {
+  title: string;
+  description: string; // This could be levels like beginner, intermediate, advanced, or specific proficiency scores
+}
 
 export interface Resume {
   state: {
@@ -78,7 +82,7 @@ export interface Resume {
     certifications:string;
     references:string;
     languages:string;
-
+    projects: string;
   };
   dateTime?: string;
   id?: string;
@@ -130,6 +134,7 @@ export interface Resume {
   trainings: Training[];
   references: Reference[];
   interests: Interest[];
+  projects: Project[];
 }
 
 const initialState: Resume = {
@@ -151,6 +156,7 @@ const initialState: Resume = {
     awards: "awards",
     trainings: "trainings",
     languages: "languages",
+    projects: "projects",
   },
 
   dateTime: "",
@@ -201,6 +207,7 @@ const initialState: Resume = {
   references: [],
   languages: [],
   certifications: [],
+  projects: [],
 };
 
 const resumeSlice = createSlice({
@@ -285,6 +292,7 @@ const resumeSlice = createSlice({
         trainings: action.payload.trainings,
         awards: action.payload.awards,
         languages: action.payload.languages,
+        projects: action.payload.projects,
       };
     },
     setSummary(state, action) {
@@ -321,6 +329,12 @@ const resumeSlice = createSlice({
       return {
         ...state,
         publications: action.payload.publications,
+      };
+    },
+    setProjects(state, action) {
+      return {
+        ...state,
+        projects: action.payload.projects,
       };
     },
     setReferences(state, action) {
@@ -399,6 +413,7 @@ export const {
   setInterests,
   setCertifications,
   setLanguages,
+  setProjects
   // setLoadingState,
 } = resumeSlice.actions;
 

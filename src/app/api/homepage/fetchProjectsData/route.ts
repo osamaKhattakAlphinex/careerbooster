@@ -31,7 +31,7 @@ export async function POST(req: any) {
           apiKey: process.env.OPENAI_API_KEY,
         });
 
-        const dataset = "register.wizard.listAwards";
+        const dataset = "register.wizard.listProjects";
         const model = await getTrainedModel(dataset);
         //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
@@ -39,24 +39,25 @@ export async function POST(req: any) {
               This is the User Data:
               ${content}
     
-              Now please give me a List of All Interests and Hobbies like reading, playing, music etc. found from the above user data provided.
+              Now please give me a List of All Projects found from the above user data provided.
     
               The answer MUST be a valid JSON and formatting should be like this 
               replace the VALUE_HERE with the actual values
               {
-                interests: [
+              
+                projects: [
                   {
-                    name: VALUE_HERE, 
-                    description: description of the interest
+                    title: VALUE_HERE,
+                    description:VALUE_HERE
                   },
                   .
                   .
                   .
                 ]
               }
-              If you don't see any Interests just resturn empty like
+              If you don't see any Projects just resturn empty like
               {
-                interests: []
+                projects: []
               }
               If there is no value Leave that field blank
           `;
@@ -77,14 +78,14 @@ export async function POST(req: any) {
           if (trainBotData) {
             await startDB();
             const obj = {
-              type: "register.wizard.listInterests",
+              type: "register.wizard.listProjects",
               input: input,
               output: response?.choices[0]?.message?.content,
               idealOutput: "",
               status: "pending",
               userEmail: trainBotData?.userEmail,
               fileAddress: trainBotData?.fileAddress,
-              Instructions: `Get List of all Interests`,
+              Instructions: `Get List of all Projects`,
             };
 
             await TrainBot.create({ ...obj });
