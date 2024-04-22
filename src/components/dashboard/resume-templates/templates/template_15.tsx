@@ -30,8 +30,7 @@ import useHandler from "@/hooks/useHandler";
 import ColorPicker from "../colorPicker";
 import { ColorResult } from "react-color";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
-import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
-import CustomResumeSection from "../../resume-builder/CustomResumeSection";
+
 const ResumeTemplate15 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
