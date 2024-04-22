@@ -22,7 +22,6 @@ const cvHeadings: any = [
     styles:
       "font-semibold uppercase border-t-2 border-b-2 border-gray-950/80 mt-2 text-base flex flex-row items-center text-gray-950/80 py-0.5",
   },
-
   {
     text: "skills",
     section: "primarySkills",
@@ -91,6 +90,14 @@ const cvHeadings: any = [
     text: "Trainings",
     section: "trainings",
     headingKey: "trainings",
+    styles:
+      "font-semibold uppercase border-t-2 border-b-2 border-gray-950/80 mt-2 text-base flex flex-row items-center py-0.5 w-full text-gray-950/80 before:block",
+    attributes: [{ "icon-color": "black" }],
+  },
+  {
+    text: "Projects",
+    section: "projects",
+    headingKey: "projects",
     styles:
       "font-semibold uppercase border-t-2 border-b-2 border-gray-950/80 mt-2 text-base flex flex-row items-center py-0.5 w-full text-gray-950/80 before:block",
     attributes: [{ "icon-color": "black" }],
