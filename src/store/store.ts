@@ -24,7 +24,7 @@ const store = configureStore({
     linkedinJobDesc: linkedInJobDescriptionSlice,
     linkedinKeywords: linkedInKeywordsSlice,
     creditLimits: creditLimitsSlice,
-    },
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
