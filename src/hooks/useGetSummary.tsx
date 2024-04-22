@@ -19,11 +19,8 @@ const useGetSummary = (
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const path = usePathname();
-  const { abortController, setAbortController } = useAppContext();
+  const { abortController } = useAppContext();
   useEffect(() => {
-    if(abortController === null){
-      setAbortController(new AbortController());
-    }
     if (userData && userData?.email) {
       setAiInputUserData({
         contact: userData?.contact,
@@ -37,13 +34,13 @@ const useGetSummary = (
       });
     }
     return () => {
-      abortController?.abort();
+      abortController.abort();
     };
   }, []);
 
   const getSummary = async () => {
     // return aiInputUserData
-    const signal = abortController?.signal;
+    const signal = abortController.signal;
     // dispatch(setLoadingState("summary"));
     setStreamedSummaryData("");
     dispatch(setSummary(""));
