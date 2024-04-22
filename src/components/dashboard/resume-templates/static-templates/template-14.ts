@@ -331,7 +331,6 @@ const components: any = {
       },
     ],
   },
-
   projects: {
     styles: "my-1",
     elements: [
@@ -483,7 +482,6 @@ const components: any = {
     ],
   },
 };
-
 const templateLayout: any = {
   styles: "w-full",
   attributes: [{ "template-no": "14" }],
@@ -562,7 +560,6 @@ const templateLayout: any = {
     },
   },
 };
-
 const GenerationOrder = [
   "shortName",
   "name",

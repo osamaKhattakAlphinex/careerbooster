@@ -229,7 +229,7 @@ const templateLayout = {
     },
     projects: {
       styles:
-        "text-gray-950/80 flex flex-row flex-wrap justify-start items-start px-8 w-full",
+        "text-gray-950/80 flex flex-col flex-wrap justify-start items-start px-8 w-full",
       elements: [
         {
           id: "projects",

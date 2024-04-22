@@ -109,7 +109,6 @@ const cvHeadings: any = [
     attributes: [{ "icon-color": "white" }],
   },
 ];
-
 const templateLayout: any = {
   styles: "w-full",
   attributes: [{ "template-no": "9" }],

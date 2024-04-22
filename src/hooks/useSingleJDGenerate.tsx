@@ -11,7 +11,10 @@ import useSaveResumeToDB from "./useSaveToDB";
 import useGetCreditLimits from "./useGetCreditLimits";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
-const useSingleJDGenerate = (setStreamedJDData: any,setOutOfCredits:any ="") => {
+const useSingleJDGenerate = (
+  setStreamedJDData: any,
+  setOutOfCredits: any = ""
+) => {
   const { getUserDataIfNotExists } = useGetUserData();
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
@@ -65,7 +68,7 @@ const useSingleJDGenerate = (setStreamedJDData: any,setOutOfCredits:any ="") => 
           personName: userData.firstName + " " + userData.lastName,
           jobTitle: resumeData.state.jobPosition,
         }),
-      });
+      }).catch((err) => console.log(err));
 
       if (res.ok) {
         const reader = res.body.getReader();
@@ -87,10 +90,10 @@ const useSingleJDGenerate = (setStreamedJDData: any,setOutOfCredits:any ="") => 
       } else {
         if (res.status === 429) {
           showErrorToast("You ran out of credits!");
-          if(setOutOfCredits !== ""){
+          if (setOutOfCredits !== "") {
             setOutOfCredits(true);
           }
-        }else{
+        } else {
           showErrorToast("Error in generating work experience");
         }
         setStreamedJDData("");

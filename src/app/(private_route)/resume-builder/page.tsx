@@ -113,7 +113,6 @@ const ResumeBuilder = () => {
     }
   };
 
-
   const handleGenerate = useCallback(
     async (quantifyingExperience: boolean) => {
       await getUserDataIfNotExists();
