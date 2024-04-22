@@ -22,6 +22,9 @@ const useGetSummary = (
   // const { createAbortController, abort } = useAbortController();
   const { abortController, setAbortController } = useAppContext();
   useEffect(() => {
+    if(abortController === null){
+      setAbortController(new AbortController());
+    }
     if (userData && userData?.email) {
       setAiInputUserData({
         contact: userData?.contact,
