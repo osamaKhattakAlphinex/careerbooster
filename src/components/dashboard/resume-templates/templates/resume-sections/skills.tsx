@@ -13,23 +13,9 @@ import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 type Props = {
   heading: any;
   skills: any;
-  skillHeading: string;
-  skill_ul: string;
-  skill_li: string;
-  skillNewStyle: string;
-
-  customStyle?: any;
+  styles: any;
 };
-const Skill = ({
-  heading,
-  skills,
-  skillHeading,
-  skill_ul,
-  skill_li,
-  skillNewStyle,
-
-  customStyle,
-}: Props) => {
+const Skill = ({ heading, skills, styles }: Props) => {
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [regenerating, setRegenerating] = useState(false);
   const { updateSaveHook } = useUpdateAndSave();
@@ -53,47 +39,27 @@ const Skill = ({
   return (
     <>
       {skills && skills.length > 0 && (
-        <>
-          <span
-            className={` ${
-              customStyle.borderTopBottom ? "!block" : "hidden"
-            }  border-stylee w-full h-0 border-[1px] mt-6 !border-gray-900`}
-          ></span>
-          <h2
-            className={`${skillHeading} ${
-              customStyle.centerHeading ? "justify-center" : "justify-left"
-            }`}
-          >
-            {resumeSkillsIcon}
-            <EditableField
-              value={heading ? heading : "Skills"}
-              style={{ width: "fit-content" }}
-              onSave={(value: string) => {
-                if (value !== heading) {
-                  updateSaveHook.updateAndSaveHeadings({
-                    primarySkills: value,
-                  });
-                }
-              }}
-            />
-          </h2>
-          <span
-            className={` ${
-              customStyle.borderTopBottom ? "!block" : "hidden"
-            }  border-stylee w-full h-0 border-[1px] !border-gray-900 mb-3`}
-          ></span>
-        </>
+        <h2 className={`${styles?.skill_heading}`}>
+          {resumeSkillsIcon}
+          <EditableField
+            value={heading ? heading : "Skills"}
+            style={{ width: "fit-content" }}
+            onSave={(value: string) => {
+              if (value !== heading) {
+                updateSaveHook.updateAndSaveHeadings({
+                  primarySkills: value,
+                });
+              }
+            }}
+          />
+        </h2>
       )}
       {skills && skills.length > 0 && !regenerating ? (
         <Toolbar addSkill={handleAddSkills} regenerateSkills={getPrimarySkills}>
-          <ul
-            className={`${skill_ul} ${
-              customStyle.borderTopBottom ? "!list-disc" : ""
-            }`}
-          >
+          <ul className={`${styles?.skill_ul}`}>
             {skills.map((skill: string, i: number) => (
               <li
-                className={`${skill_li} parent`}
+                className={`${styles?.skill_li} parent`}
                 key={i}
                 onDragStart={(e) =>
                   e.dataTransfer.setData("text/plain", i.toString())
@@ -118,7 +84,7 @@ const Skill = ({
             ))}
             {newPrimarySkill ? (
               <>
-                <div className={`${skillNewStyle}`}>
+                <div className={`${styles?.skill_New}`}>
                   <input
                     type="text"
                     value={primarySkill}

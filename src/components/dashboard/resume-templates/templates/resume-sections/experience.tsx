@@ -15,16 +15,14 @@ type Props = {
   workExperience: any;
 
   styles: any;
-
-  customStyle?: any;
 };
 
 const Experience = ({
   heading,
   workExperienceArray,
   workExperience,
+
   styles,
-  customStyle,
 }: Props) => {
   const [newAchievement, setNewAchievement] = useState("");
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
@@ -51,19 +49,9 @@ const Experience = ({
       setRegeneratedRecordIndex(null);
     }
   }, [streamedJDData]);
-  console.log(styles);
   return (
     <>
-      <span
-        className={` ${
-          customStyle.borderTopBottom ? "!block" : "hidden"
-        }  border-stylee w-full h-0 border-[1px] mt-6 !border-gray-900`}
-      ></span>
-      <h2
-        className={`text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2 ${
-          customStyle.centerHeading ? "justify-center" : "justify-normal"
-        }`}
-      >
+      <h2 className={`${styles?.experienceHeading_temp_2}`}>
         {resumeWorkExpIcon}
 
         <EditableField
@@ -78,11 +66,6 @@ const Experience = ({
           }}
         />
       </h2>
-      <span
-        className={` ${
-          customStyle.borderTopBottom ? "!block" : "hidden"
-        }  border-stylee w-full h-0 border-[1px] !border-gray-900 mb-3`}
-      ></span>
       {workExperienceArray && workExperienceArray.length > 0 ? (
         <>
           {workExperienceArray.map((rec: any, i: number) => {

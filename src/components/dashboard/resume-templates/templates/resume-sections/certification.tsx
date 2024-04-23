@@ -14,15 +14,9 @@ type Props = {
   heading: any;
   certificates: any;
   styles: any;
-  customStyle?: any;
 };
 
-const Certification = ({
-  heading,
-  certificates,
-  styles,
-  customStyle,
-}: Props) => {
+const Certification = ({ heading, certificates, styles }: Props) => {
   const [certificationIndex, setCertificationIndex] = useState<number>();
   const { handlers } = useHandler();
   const [newCertification, setNewCertification] = useState("");
@@ -38,11 +32,7 @@ const Certification = ({
   return (
     <>
       <span className={styles?.span1}></span>
-      <h3
-        className={`${styles?.certification_h3} ${
-          customStyle.centeredHeading ? "justify-center" : ""
-        }`}
-      >
+      <h3 className={styles?.certification_h3}>
         <svg
           width="20px"
           height="20px"

@@ -10,18 +10,15 @@ import { resumeSummaryIcon } from "@/helpers/iconsProvider";
 type Props = {
   heading: any;
   summary: any;
-  headingStyle: string;
-  textStyle: string;
-  customStyle?: any;
+
+  styles: any;
 };
 
 const Summary = ({
   summary,
   heading,
-  headingStyle,
-  textStyle,
 
-  customStyle,
+  styles,
 }: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
@@ -29,16 +26,7 @@ const Summary = ({
 
   return (
     <>
-      <span
-        className={` ${
-          customStyle.borderTopBottom ? "!block" : "hidden"
-        }  border-stylee w-full h-0 border-[1px] mt-6 !border-gray-900`}
-      ></span>
-      <h2
-        className={`${headingStyle} ${
-          customStyle.centerHeading ? "justify-center" : "justify-left"
-        } `}
-      >
+      <h2 className={`${styles?.summary_heading}`}>
         {resumeSummaryIcon}
         <EditableField
           value={heading?.summary ? heading.summary : "Execuitve summary"}
@@ -52,13 +40,9 @@ const Summary = ({
           }}
         />
       </h2>
-      <span
-        className={` ${
-          customStyle.borderTopBottom ? "!block" : "hidden"
-        }  border-stylee w-full h-0 border-[1px] !border-gray-900 mb-3`}
-      ></span>
+
       <Toolbar regenrateSummary={getSummary}>
-        <div className={`${textStyle}`}>
+        <div className={`${styles?.summary_text}`}>
           <EditableField
             type="textarea"
             value={

@@ -6,19 +6,18 @@ import React from "react";
 
 type Props = {
   contact: any;
-  contactStyle: string;
-  contactStyle_li: string;
+  styles: any;
 };
 
-const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
+const Contact = ({ contact, styles }: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
 
   return (
     <ul
-      className={`${contactStyle}`}
+      className={`${styles?.contact_ul}`}
       // style={{ backgroundColor: color_second }}
     >
-      <li className={`${contactStyle_li}`}>
+      <li className={`${styles?.contact_li}`}>
         {phoneIcon}
         <EditableField
           value={contact?.phone ? contact?.phone : "(555) 555-1234"}
@@ -29,7 +28,7 @@ const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
           }}
         />
       </li>
-      <li className={`${contactStyle_li}`}>
+      <li className={`${styles?.contact_li}`}>
         {emailIcon}
         <EditableField
           value={contact?.email ? contact?.email : "your@email.com"}
@@ -41,7 +40,7 @@ const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
         />
       </li>
 
-      <li className={`${contactStyle_li}`}>
+      <li className={`${styles?.contact_li}`}>
         <div className="">
           <svg
             width="16"
@@ -73,7 +72,7 @@ const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
           }}
         />
       </li>
-      <li className={`${contactStyle_li}`}>
+      <li className={`${styles?.contact_li}`}>
         <div className="">
           <svg
             xmlns="http://www.w3.org/2000/svg"

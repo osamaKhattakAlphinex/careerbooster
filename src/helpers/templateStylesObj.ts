@@ -1,3 +1,5 @@
+import { sparkleIcon } from "./iconsProvider";
+
   const template_2 =  {
     experienceHeading_temp_2 : "experienceHeading_temp_2",
     achievement_div: "achievement_div",
@@ -6,6 +8,49 @@
     achievement_save_btn: "achievement-save-btn",
     achievement_delete_btn: "achievement-delete-btn",
 }
+
+// Header Styles
+
+const header = {
+  full_Name_Style:"fullName_temp_2",
+  jobTitle_temp_2:"jobTitle_temp_2"
+}
+
+const conditionStyleHeader = {
+  line : false
+}
+
+//contact styles
+
+const contact = {
+  contact_ul: "contact_ul",
+  contact_li : "contact_li",
+}
+
+//summary styles
+
+const summary = {
+  summary_heading: "summary_heading",
+  summary_text :"summary_text",
+  span1 : "span1",
+  span2: "span2",
+  
+}
+
+//skills styles
+
+const skill = {
+  skill_heading :"skill_heading",
+  skill_ul:"skill_ul",
+  skill_li : "skill_li",
+  skill_New: "skill_New",
+  span1: "span1",
+  span2: "span2", 
+  skill_input: "skill_input"
+}
+
+//publication styles
+
 const publicationStyles = {
     publication_h3: "publication_h3",
     publication_div: "publication_div",
@@ -22,6 +67,9 @@ const publicationStyles = {
     publication_li: "publication_li",
     publication_div_input : "publication_div_input",	
 }
+
+//certification styles
+
 const certification = {
   certification_h3: "publication_h3",
   certification_div: "publication_div",
@@ -39,6 +87,7 @@ const certification = {
   span2: "span2",
 };
 
+//training styles
 
 const training = {
   training_h3: "publication_h3",
@@ -57,6 +106,9 @@ const training = {
   span1: "span1",
   span2 : "span2"
 }
+
+//interest styles
+
 const interest = { 
   interest_h3: "publication_h3",
   interest_div: "publication_div",
@@ -74,6 +126,9 @@ const interest = {
   span1: "span1",
   span2: "span2",
 }
+
+//award styles
+
 const award = {
   award_h3: "publication_h3",
   award_div: "publication_div",
@@ -91,6 +146,9 @@ const award = {
   span1: "span1",
    span2 : "span2"	
 }
+
+// reference styles
+
 const reference = {
   reference_h3: "publication_h3",
   reference_ul: "reference_ul",
@@ -107,7 +165,10 @@ const reference = {
   reference_new_input: "publication_new_input",
   span1: "span1",
    span2 : "span2"
-}
+} 
+
+//language styles
+
 const language = {
   language_h3: "publication_h3",
   language_ul: "reference_ul",
@@ -119,12 +180,15 @@ const language = {
   span1: "span1",
   span2: "span2",
 }
+
+// education style
+
 const education = {
-  language_h3: "publication_h3",
+  education_h3: "publication_h3",
   span1: "span1",
    span2 : "span2"
 
 }
 
 
-export {template_2,publicationStyles,certification,training,interest,award,reference,language,education}
+export {template_2,publicationStyles,certification,training,interest,award,reference,language,education,summary,skill,conditionStyleHeader,header,contact}

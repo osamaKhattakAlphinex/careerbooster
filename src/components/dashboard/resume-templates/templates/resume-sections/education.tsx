@@ -14,26 +14,17 @@ import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 type Props = {
   heading: any;
   educations: any;
-  customStyle?: any;
+  styles: any;
 };
-
-const Education = ({ heading, educations, customStyle }: Props) => {
+const Education = ({ heading, educations, styles }: Props) => {
   const [confirmationModal, setConfirmationModal] = useState(false);
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
 
   return (
     <>
-      <span
-        className={` ${
-          customStyle.borderTopBottom ? "!block" : "hidden"
-        }  border-stylee w-full h-0 border-[1px] mt-6 !border-gray-900`}
-      ></span>
-      <h3
-        className={`flex flex-row items-center gap-2 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500  ${
-          customStyle.centeredHeading ? "justify-center" : "justify-normal"
-        }`}
-      >
+      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
+      <h3 className="flex flex-row items-center gap-2 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
         {resumeEductionIcon}
 
         <EditableField
@@ -48,11 +39,7 @@ const Education = ({ heading, educations, customStyle }: Props) => {
           }}
         />
       </h3>
-      <span
-        className={` ${
-          customStyle.borderTopBottom ? "!block" : "hidden"
-        }  border-stylee w-full h-0 border-[1px] !border-gray-900 mb-3`}
-      ></span>
+      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
       <ul className="grid grid-cols-3 gap-2 xs:grid-cols-3 md:grid-cols-3 ">
         {educations.map((education: EducationType, i: number) => (
           <React.Fragment key={education?.id || i}>
