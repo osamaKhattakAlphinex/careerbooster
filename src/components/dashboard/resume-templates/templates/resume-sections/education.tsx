@@ -14,9 +14,9 @@ import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 type Props = {
   heading: any;
   educations: any;
+  styles: any;
 };
-
-const Education = ({ heading, educations }: Props) => {
+const Education = ({ heading, educations, styles }: Props) => {
   const [confirmationModal, setConfirmationModal] = useState(false);
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();

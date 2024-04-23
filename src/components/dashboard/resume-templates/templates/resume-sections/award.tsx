@@ -13,9 +13,10 @@ import React, { useState } from "react";
 type Props = {
   heading: any;
   awards: any;
+  styles: any;
 };
 
-const Award = ({ heading, awards }: Props) => {
+const Award = ({ heading, awards, styles }: Props) => {
   const [rewardIndex, setRewardIndex] = useState<number>();
   const { handlers } = useHandler();
   const [newReward, setNewReward] = useState("");
@@ -31,8 +32,8 @@ const Award = ({ heading, awards }: Props) => {
 
   return (
     <>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-      <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
+      <span className={`${styles?.span1}`}></span>
+      <h3 className={`${styles?.award_h3}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -58,7 +59,7 @@ const Award = ({ heading, awards }: Props) => {
           }}
         />
       </h3>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
+      <span className={`${styles?.span2}`}></span>
       {awards.map((rec: any, i: number) => {
         return (
           <Toolbar
@@ -76,7 +77,7 @@ const Award = ({ heading, awards }: Props) => {
           >
             <div
               key={i}
-              className="border-2 border-transparent md:w-full hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
+              className={`${styles?.award_div}`}
               onDragStart={(e) =>
                 e.dataTransfer.setData("text/plain", i.toString())
               }
@@ -84,7 +85,7 @@ const Award = ({ heading, awards }: Props) => {
               onDrop={(e) => handleDropOthers(e, i, "awards")}
               draggable
             >
-              <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
+              <h2 className={`${styles?.award_h2}`}>
                 <EditableField
                   value={rec?.title}
                   style={{ width: "100%" }}
@@ -97,9 +98,9 @@ const Award = ({ heading, awards }: Props) => {
                   }}
                 />
               </h2>
-              <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
+              <h2 className={`${styles?.award_h2_1}`}>
                 {rec.date && (
-                  <span className="hover:shadow-md hover:bg-gray-100">
+                  <span className={`${styles?.award_date}`}>
                     <EditableField
                       value={`${formatDate(rec?.date)}`}
                       onSave={(value: string) => {
@@ -113,7 +114,7 @@ const Award = ({ heading, awards }: Props) => {
                   </span>
                 )}
                 |
-                <span className="hover:shadow-md hover:bg-gray-100">
+                <span className={`${styles?.award_date}`}>
                   <EditableField
                     value={rec?.awardingOrganization}
                     onSave={(value: string) => {
@@ -128,7 +129,7 @@ const Award = ({ heading, awards }: Props) => {
               </h2>
               <div className="px-4 py-1">
                 {rec?.description && i !== regeneratedRecordIndex ? (
-                  <ul className="flex flex-col gap-1 pl-0 text-xs">
+                  <ul className={`${styles?.award_ul}`}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
                         <li
@@ -146,10 +147,10 @@ const Award = ({ heading, awards }: Props) => {
                             );
                           }}
                           draggable
-                          className="flex flex-row items-center justify-center h-8 hover:bg-slate-200 group"
+                          className={`${styles?.award_li}`}
                         >
                           <div
-                            className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
+                            className={`${styles?.award_line}`}
                             onClick={() => {
                               handlers.handleRemoveExtraOthersSpace(
                                 i,
@@ -176,7 +177,7 @@ const Award = ({ heading, awards }: Props) => {
                             );
                           }}
                           draggable
-                          className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
+                          className={`${styles?.award_delete1} parent`}
                           key={ind}
                         >
                           <EditableField
@@ -199,7 +200,7 @@ const Award = ({ heading, awards }: Props) => {
                                 "awards"
                               )
                             }
-                            className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
+                            className={`${styles?.award_delete} child`}
                           >
                             {crossIcon1}
                           </div>
@@ -223,9 +224,9 @@ const Award = ({ heading, awards }: Props) => {
 
                 {rewardIndex === i && newBulletSection === "Awards" ? (
                   <>
-                    <div className="flex flex-wrap w-full gap-1 mt-4">
+                    <div className={`${styles?.award_div_input}`}>
                       <input
-                        className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
+                        className={`${styles?.award_new_input}`} // Apply Tailwind CSS classes
                         onChange={(e) => setNewReward(e.target.value)}
                         value={newReward}
                         name="newReward"
@@ -246,7 +247,7 @@ const Award = ({ heading, awards }: Props) => {
                       />
                       <div className="flex w-full gap-2 my-2">
                         <button
-                          className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
+                          className="save_btn"
                           onClick={() => {
                             // Save the new achievement to the state and possibly the database
                             handlers.handleAddOthersAchivement(
@@ -265,7 +266,7 @@ const Award = ({ heading, awards }: Props) => {
                             setRewardIndex(-1);
                             setNewBulletSection(null);
                           }}
-                          className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
+                          className="delete_btn"
                         >
                           Cancel
                         </button>

@@ -252,7 +252,7 @@ const Publication = ({ heading, publications, styles }: Props) => {
                       />
                       <div className="flex w-full gap-2 my-2">
                         <button
-                          className="achievement-save-btn"
+                          className="save_btn"
                           onClick={() => {
                             // Save the new achievement to the state and possibly the database
                             handlers.handleAddOthersAchivement(
@@ -271,7 +271,7 @@ const Publication = ({ heading, publications, styles }: Props) => {
                             setPulicationIndex(-1);
                             setNewBulletSection(null);
                           }}
-                          className="achievement-delete-btn"
+                          className="delete_btn"
                         >
                           Cancel
                         </button>
@@ -284,7 +284,7 @@ const Publication = ({ heading, publications, styles }: Props) => {
           </Toolbar>
         );
       })}
-      <AddItemToCustomSection recName="publications"/>
+      <AddItemToCustomSection recName="publications" />
     </>
   );
 };

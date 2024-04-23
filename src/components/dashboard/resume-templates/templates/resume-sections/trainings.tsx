@@ -13,8 +13,9 @@ import React, { useState } from "react";
 type Props = {
   heading: any;
   trainings: any;
+  styles: any;
 };
-const Training = ({ heading, trainings }: Props) => {
+const Training = ({ heading, trainings, styles }: Props) => {
   const [trainingIndex, setTrainingIndex] = useState<number>();
   const { handlers } = useHandler();
   const [newTraining, setNewTraining] = useState("");
@@ -30,8 +31,9 @@ const Training = ({ heading, trainings }: Props) => {
 
   return (
     <>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-      <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
+      <span className={`${styles?.span1}`}></span>
+
+      <h3 className={`${styles?.training_h3}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -57,7 +59,7 @@ const Training = ({ heading, trainings }: Props) => {
           }}
         />
       </h3>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
+      <span className={`${styles?.span2}`}></span>
       {trainings.map((rec: any, i: number) => {
         return (
           <Toolbar
@@ -75,7 +77,7 @@ const Training = ({ heading, trainings }: Props) => {
           >
             <div
               key={i}
-              className="border-2 border-transparent md:w-full hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
+              className={`${styles?.training_div}`}
               onDragStart={(e) =>
                 e.dataTransfer.setData("text/plain", i.toString())
               }
@@ -83,7 +85,7 @@ const Training = ({ heading, trainings }: Props) => {
               onDrop={(e) => handleDropOthers(e, i, "trainings")}
               draggable
             >
-              <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
+              <h2 className={`${styles?.training_h1}`}>
                 <EditableField
                   value={rec?.position}
                   style={{ width: "100%" }}
@@ -96,9 +98,9 @@ const Training = ({ heading, trainings }: Props) => {
                   }}
                 />
               </h2>
-              <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
+              <h2 className={`${styles?.training_h2_1}`}>
                 {rec.startDate && (
-                  <span className="hover:shadow-md hover:bg-gray-100">
+                  <span className={`${styles?.training_date}`}>
                     <EditableField
                       value={`${formatDate(rec?.startDate)}`}
                       onSave={(value: string) => {
@@ -113,7 +115,7 @@ const Training = ({ heading, trainings }: Props) => {
                 )}
                 -
                 {rec.endDate && (
-                  <span className="hover:shadow-md hover:bg-gray-100">
+                  <span className={`${styles?.training_date}`}>
                     <EditableField
                       value={`${formatDate(rec?.endDate)}`}
                       onSave={(value: string) => {
@@ -127,7 +129,7 @@ const Training = ({ heading, trainings }: Props) => {
                   </span>
                 )}
                 |
-                <span className="hover:shadow-md hover:bg-gray-100">
+                <span className={`${styles?.training_date}`}>
                   <EditableField
                     value={rec?.company}
                     onSave={(value: string) => {
@@ -142,7 +144,7 @@ const Training = ({ heading, trainings }: Props) => {
               </h2>
               <div className="px-4 py-1">
                 {rec?.description && i !== regeneratedRecordIndex ? (
-                  <ul className="flex flex-col gap-1 pl-0 text-xs">
+                  <ul className={`${styles?.training_ul}`}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
                         <li
@@ -160,10 +162,10 @@ const Training = ({ heading, trainings }: Props) => {
                             );
                           }}
                           draggable
-                          className="flex flex-row items-center justify-center h-8 hover:bg-slate-200 group"
+                          className={`${styles?.training_li} group`}
                         >
                           <div
-                            className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
+                            className={`${styles?.training_line}`}
                             onClick={() => {
                               handlers.handleRemoveExtraOthersSpace(
                                 i,
@@ -190,7 +192,7 @@ const Training = ({ heading, trainings }: Props) => {
                             );
                           }}
                           draggable
-                          className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
+                          className={`parent ${styles?.training_delete1}`}
                           key={ind}
                         >
                           <EditableField
@@ -213,7 +215,7 @@ const Training = ({ heading, trainings }: Props) => {
                                 "trainings"
                               )
                             }
-                            className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
+                            className={`${styles?.training_delete} child`}
                           >
                             {crossIcon1}
                           </div>
@@ -237,9 +239,9 @@ const Training = ({ heading, trainings }: Props) => {
 
                 {trainingIndex === i && newBulletSection === "Trainings" ? (
                   <>
-                    <div className="flex flex-wrap w-full gap-1 mt-4">
+                    <div className={`${styles?.training_div_input}`}>
                       <input
-                        className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
+                        className={`${styles?.training_new_input}`} // Apply Tailwind CSS classes
                         onChange={(e) => setNewTraining(e.target.value)}
                         value={newTraining}
                         name="newTraining"
@@ -260,7 +262,7 @@ const Training = ({ heading, trainings }: Props) => {
                       />
                       <div className="flex w-full gap-2 my-2">
                         <button
-                          className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
+                          className="save_btn"
                           onClick={() => {
                             // Save the new achievement to the state and possibly the database
                             handlers.handleAddOthersAchivement(
@@ -279,7 +281,7 @@ const Training = ({ heading, trainings }: Props) => {
                             setTrainingIndex(-1);
                             setNewBulletSection(null);
                           }}
-                          className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
+                          className="delete_btn"
                         >
                           Cancel
                         </button>
