@@ -12,16 +12,33 @@ type Props = {
   summary: any;
   headingStyle: string;
   textStyle: string;
+  customStyle?: any;
 };
 
-const Summary = ({ summary, heading, headingStyle, textStyle }: Props) => {
+const Summary = ({
+  summary,
+  heading,
+  headingStyle,
+  textStyle,
+
+  customStyle,
+}: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
 
   return (
     <>
-      <h2 className={`${headingStyle}`}>
+      <span
+        className={` ${
+          customStyle.borderTopBottom ? "!block" : "hidden"
+        }  border-stylee w-full h-0 border-[1px] mt-6 !border-gray-900`}
+      ></span>
+      <h2
+        className={`${headingStyle} ${
+          customStyle.centerHeading ? "justify-center" : "justify-left"
+        } `}
+      >
         {resumeSummaryIcon}
         <EditableField
           value={heading?.summary ? heading.summary : "Execuitve summary"}
@@ -35,7 +52,11 @@ const Summary = ({ summary, heading, headingStyle, textStyle }: Props) => {
           }}
         />
       </h2>
-
+      <span
+        className={` ${
+          customStyle.borderTopBottom ? "!block" : "hidden"
+        }  border-stylee w-full h-0 border-[1px] !border-gray-900 mb-3`}
+      ></span>
       <Toolbar regenrateSummary={getSummary}>
         <div className={`${textStyle}`}>
           <EditableField

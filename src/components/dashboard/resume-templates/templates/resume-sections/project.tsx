@@ -13,9 +13,10 @@ import React, { useState } from "react";
 type Props = {
   heading: any;
   projects: any;
+  customStyle?: any;
 };
 
-const Project = ({ heading, projects }: Props) => {
+const Project = ({ heading, projects, customStyle }: Props) => {
   const [rewardIndex, setRewardIndex] = useState<number>();
   const { handlers } = useHandler();
   const [newReward, setNewReward] = useState("");
@@ -32,7 +33,11 @@ const Project = ({ heading, projects }: Props) => {
   return (
     <>
       <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-      <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
+      <h3
+        className={`flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500 ${
+          customStyle.centeredHeading ? "justify-center" : ""
+        }`}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -97,7 +102,7 @@ const Project = ({ heading, projects }: Props) => {
                   }}
                 />
               </h2>
-              
+
               <div className="px-4 py-1">
                 {rec?.description && i !== regeneratedRecordIndex ? (
                   <ul className="flex flex-col gap-1 pl-0 text-xs">

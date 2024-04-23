@@ -17,6 +17,8 @@ type Props = {
   skill_ul: string;
   skill_li: string;
   skillNewStyle: string;
+
+  customStyle?: any;
 };
 const Skill = ({
   heading,
@@ -25,6 +27,8 @@ const Skill = ({
   skill_ul,
   skill_li,
   skillNewStyle,
+
+  customStyle,
 }: Props) => {
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [regenerating, setRegenerating] = useState(false);
@@ -49,24 +53,44 @@ const Skill = ({
   return (
     <>
       {skills && skills.length > 0 && (
-        <h2 className={`${skillHeading}`}>
-          {resumeSkillsIcon}
-          <EditableField
-            value={heading ? heading : "Skills"}
-            style={{ width: "fit-content" }}
-            onSave={(value: string) => {
-              if (value !== heading) {
-                updateSaveHook.updateAndSaveHeadings({
-                  primarySkills: value,
-                });
-              }
-            }}
-          />
-        </h2>
+        <>
+          <span
+            className={` ${
+              customStyle.borderTopBottom ? "!block" : "hidden"
+            }  border-stylee w-full h-0 border-[1px] mt-6 !border-gray-900`}
+          ></span>
+          <h2
+            className={`${skillHeading} ${
+              customStyle.centerHeading ? "justify-center" : "justify-left"
+            }`}
+          >
+            {resumeSkillsIcon}
+            <EditableField
+              value={heading ? heading : "Skills"}
+              style={{ width: "fit-content" }}
+              onSave={(value: string) => {
+                if (value !== heading) {
+                  updateSaveHook.updateAndSaveHeadings({
+                    primarySkills: value,
+                  });
+                }
+              }}
+            />
+          </h2>
+          <span
+            className={` ${
+              customStyle.borderTopBottom ? "!block" : "hidden"
+            }  border-stylee w-full h-0 border-[1px] !border-gray-900 mb-3`}
+          ></span>
+        </>
       )}
       {skills && skills.length > 0 && !regenerating ? (
         <Toolbar addSkill={handleAddSkills} regenerateSkills={getPrimarySkills}>
-          <ul className={`${skill_ul}`}>
+          <ul
+            className={`${skill_ul} ${
+              customStyle.borderTopBottom ? "!list-disc" : ""
+            }`}
+          >
             {skills.map((skill: string, i: number) => (
               <li
                 className={`${skill_li} parent`}

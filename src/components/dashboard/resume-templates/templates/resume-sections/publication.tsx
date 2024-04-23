@@ -14,9 +14,10 @@ type Props = {
   heading: any;
   publications: any;
   styles: any;
+  customStyle?: any;
 };
 
-const Publication = ({ heading, publications, styles }: Props) => {
+const Publication = ({ heading, publications, styles, customStyle }: Props) => {
   const [pulicationIndex, setPulicationIndex] = useState<number>();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
@@ -33,7 +34,11 @@ const Publication = ({ heading, publications, styles }: Props) => {
   return (
     <>
       <span className={styles?.span1}></span>
-      <h3 className={styles?.publication_h3}>
+      <h3
+        className={`${styles?.publication_h3} ${
+          customStyle.centeredHeading ? "justify-center" : ""
+        }`}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
