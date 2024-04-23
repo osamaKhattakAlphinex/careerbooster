@@ -90,6 +90,12 @@ export interface Language {
   proficiency?: string; // This could be levels like beginner, intermediate, advanced, or specific proficiency scores
 }
 
+export interface Project{
+  id?: string;
+  title?: string;
+  description?: string;
+}
+
 interface UserDataSlice {
   isFetched: boolean;
   isLoading: boolean;
@@ -122,6 +128,7 @@ interface UserDataSlice {
   publications?: Publication[];
   references?: Reference[];
   experience?: WorkExperience[];
+  projects?: Project[];
   files?: string[];
   uploadedResume: { fileName: string; fileContent: string } | {};
   chatThreads?: { assistant_id: string; threads: string[] } | {};
@@ -158,6 +165,7 @@ const initialState: UserDataSlice = {
   certifications: [],
   awards: [],
   publications: [],
+  projects: [],
   files: [],
   uploadedResume: {},
   chatThreads: {},

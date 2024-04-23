@@ -27,6 +27,7 @@ import {
   template_2,
   training,
 } from "@/helpers/templateStylesObj";
+import Project from "./resume-sections/project";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
@@ -151,6 +152,16 @@ const ResumeTemplate2 = () => {
             heading={resume.headings.trainings}
             trainings={resume.trainings}
             styles={training}
+          />
+        )}
+      </div>
+
+      {/* Projects */}
+      <div className="w-full">
+        {resume?.projects && resume?.projects.length > 0 && (
+          <Project
+            heading={resume.headings.projects}
+            projects={resume.projects}
           />
         )}
       </div>

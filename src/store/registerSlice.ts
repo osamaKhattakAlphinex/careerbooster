@@ -29,6 +29,7 @@ interface RegisterSlice {
     publications: boolean;
     references: boolean;
     trainings: boolean;
+    projects: boolean;
   };
   scrapping: {
     basic: boolean;
@@ -42,6 +43,7 @@ interface RegisterSlice {
     publications: boolean;
     references: boolean;
     trainings: boolean;
+    projects: boolean;
   };
   stepOne: {
     firstName?: string;
@@ -120,6 +122,12 @@ interface RegisterSlice {
     list: string[];
     isValid: boolean;
   };
+  stepFourteen: {
+    list?: Interest[];
+    editId?: string;
+    state?: string;
+    isValid: boolean;
+  };
   // stepEight: {
   //   password: string;
   //   cPassword: string;
@@ -145,6 +153,7 @@ const initialState: RegisterSlice = {
     skills: false,
     references: false,
     trainings: false,
+    projects: false,
   },
   scrapping: {
     basic: false,
@@ -158,6 +167,7 @@ const initialState: RegisterSlice = {
     publications: false,
     references: false,
     trainings: false,
+    projects: false,
   },
   stepOne: {
     firstName: "",
@@ -231,9 +241,15 @@ const initialState: RegisterSlice = {
     editId: "",
     isValid: true,
   },
-
+  
   stepThirteen: {
     list: [],
+    isValid: true,
+  },
+  stepFourteen: {
+    list: [],
+    state: "show",
+    editId: "",
     isValid: true,
   },
   // stepEight: {
@@ -406,6 +422,15 @@ const registerSlice = createSlice({
         },
       };
     },
+    setStepFourteen(state, action) {
+      return {
+        ...state,
+        stepFourteen: {
+          ...state.stepFourteen,
+          ...action.payload,
+        },
+      };
+    },
     setField(state, action) {
       return {
         ...state,
@@ -435,6 +460,7 @@ export const {
   setStepEleven,
   setStepTwelve,
   setStepThirteen,
+  setStepFourteen,
   setField,
 } = registerSlice.actions;
 

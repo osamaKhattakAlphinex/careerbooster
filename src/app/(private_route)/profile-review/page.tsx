@@ -15,6 +15,7 @@ import {
   setStepEleven,
   setStepFive,
   setStepFour,
+  setStepFourteen,
   setStepNine,
   setStepOne,
   setStepSeven,
@@ -55,6 +56,7 @@ const ProfileReview = () => {
   const stepTen = useSelector((state: any) => state.register.stepTen);
   const stepEleven = useSelector((state: any) => state.register.stepEleven);
   const stepTwelve = useSelector((state: any) => state.register.stepTwelve);
+  const stepFourteen = useSelector((state: any) => state.register.stepFourteen);
 
   const reduxStep = register.activeStep;
 
@@ -83,6 +85,7 @@ const ProfileReview = () => {
       certifications: register.stepSix.list,
       awards: register.stepNine.list,
       publications: register.stepEight.list,
+      projects: register.stepFourteen.list,
     };
 
     return axios
@@ -123,6 +126,7 @@ const ProfileReview = () => {
       certifications: register.stepSix.list,
       awards: register.stepNine.list,
       publications: register.stepEight.list,
+      projects: register.stepFourteen.list,
       wizardCompleted: true,
       wizardReviewed: true,
     };
@@ -247,6 +251,9 @@ const ProfileReview = () => {
       }
       if (userData.references) {
         dispatch(setStepTwelve({ ...stepTwelve, list: userData.references }));
+      }
+      if (userData.ptojects) {
+        dispatch(setStepFourteen({ ...stepFourteen, list: userData.projects }));
       }
     }
   }, [userData]);
