@@ -1,6 +1,7 @@
 "use client";
 import DataTable, { TableAction } from "@/components/admin/DataTable";
 import { Card, CardContent, CardHeader } from "@/components/admin/card";
+import { useAppContext } from "@/context/AppContext";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import {
   downloadIcon,
@@ -38,6 +39,7 @@ const LeadsAdminPage = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  // const { abortController } = useAppContext();
 
   const columnHelper = createColumnHelper<Lead>();
 
@@ -47,7 +49,7 @@ const LeadsAdminPage = () => {
         href={`/files/linkedin-temp/${rec?.file}`}
         target="_blank"
         // href={`/admin/train-bot/${rec._id}`}
-        className="flex flex-row gap-1 px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
+        className="flex flex-row gap-1 px-3 py-2 text-xs font-medium text-center text-white no-underline bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         Preview {exterLinkIconSmall}
       </Link>
@@ -99,19 +101,19 @@ const LeadsAdminPage = () => {
 
         if (status === "pending") {
           return (
-            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+            <span className="inline-flex px-2 text-xs font-semibold leading-5 text-yellow-800 bg-yellow-100 rounded-full">
               Pending
             </span>
           );
         } else if (status === "reviewed") {
           return (
-            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+            <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
               Reviewed
             </span>
           );
         } else if (status === "trained") {
           return (
-            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+            <span className="inline-flex px-2 text-xs font-semibold leading-5 text-blue-800 bg-blue-100 rounded-full">
               Trained
             </span>
           );
@@ -130,6 +132,8 @@ const LeadsAdminPage = () => {
 
   const fetchRecords = async (startIndex: number, endIndex: number) => {
     setLoading(true);
+
+    // const signal = abortController.signal;
     if (!loading) {
       axios
         .get("/api/leads", {
@@ -137,6 +141,7 @@ const LeadsAdminPage = () => {
             startIndex: startIndex,
             endIndex: endIndex,
           },
+          // signal: signal,
         })
         .then(async (res: any) => {
           if (res.data.success) {
@@ -155,15 +160,26 @@ const LeadsAdminPage = () => {
   };
 
   const getlinkedInToolUsersCount = async () => {
-    axios.get("/api/leads/getLinkedInToolUserCount").then((res) => {
-      if (res.data.success) {
-        setCounts(res.data);
-      }
-    });
+    // const signal = abortController.signal;
+
+    axios
+      .get(
+        "/api/leads/getLinkedInToolUserCount"
+        // { signal }
+      )
+      .then((res) => {
+        if (res.data.success) {
+          setCounts(res.data);
+        }
+      });
   };
 
   useEffect(() => {
     getlinkedInToolUsersCount();
+
+    return () => {
+      // abortController.abort();
+    };
   }, []);
 
   useEffect(() => {
@@ -187,17 +203,21 @@ const LeadsAdminPage = () => {
     fetchRecords(startIndex, endIndex);
 
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
+
+    return () => {
+      // abortController.abort();
+    };
   }, [currentPage, limitOfRecords]);
 
   return (
-    <div className="flex flex-col justify-start items-start">
-      <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+    <div className="flex flex-col items-start justify-start">
+      <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
         Leads
       </h2>
-      <span className="dark:text-white/70 text-black/70 text-base">
+      <span className="text-base dark:text-white/70 text-black/70">
         All the leads from linkedin
       </span>
-      <div className="w-full overflow-x-auto mt-4">
+      <div className="w-full mt-4 overflow-x-auto">
         <DataTable
           loading={loading}
           columns={columns}
@@ -206,8 +226,8 @@ const LeadsAdminPage = () => {
           source="leads"
         />
       </div>
-      <div className=" flex flex-row justify-between items-center w-full ">
-        <div className="flex flex-row gap-2 items-center">
+      <div className="flex flex-row items-center justify-between w-full ">
+        <div className="flex flex-row items-center gap-2">
           <label htmlFor="userPerPage" className="text-sm font-medium">
             Number of records per page:
           </label>
@@ -228,12 +248,12 @@ const LeadsAdminPage = () => {
             </>
           </select>
         </div>
-        <div className=" flex justify-end mt-4">
+        <div className="flex justify-end mt-4 ">
           <nav aria-label="Page navigation example">
             <ul className="inline-flex -space-x-px">
               <li>
                 <button
-                  className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  className="px-3 py-2 ml-0 leading-tight text-gray-500 border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   onClick={(e) => {
                     e.preventDefault();
                     if (currentPage && currentPage > 1) {
@@ -276,7 +296,7 @@ const LeadsAdminPage = () => {
 
               <li>
                 <button
-                  className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  className="px-3 py-2 leading-tight text-gray-500 border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   onClick={(e) => {
                     if (currentPage) {
                       e.preventDefault();

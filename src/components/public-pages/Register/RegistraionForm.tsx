@@ -157,7 +157,6 @@ const RegistrationForm = () => {
 
   const updateUser = (file: string, email: string) => {
     if (file && email) {
-      // debugger
       return axios.post("/api/users/updateUser", {
         newFile: file,
         email: email,
@@ -193,7 +192,12 @@ const RegistrationForm = () => {
               `/register?firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&phone=${userData.registeredPhone}&content=true`
             );
 
-            if (userData.firstName || userData.lastName || userData.email || userData.registeredPhone) {
+            if (
+              userData.firstName ||
+              userData.lastName ||
+              userData.email ||
+              userData.registeredPhone
+            ) {
               formik.setFieldValue(
                 "firstName",
                 removeDashesFromString(userData.firstName)
@@ -295,7 +299,7 @@ const RegistrationForm = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-full md:w-5/12 mx-auto">
+    <div className="flex flex-col w-full mx-auto md:w-5/12">
       <div className="flex flex-col justify-center">
         <div className="text-center">
           <a>
@@ -326,7 +330,7 @@ const RegistrationForm = () => {
                         }}
                       />
                       {fileUploading ? (
-                        <div className="flex w-fit  justify-center items-center cursor-pointer gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-3 rounded-lg  mx-auto">
+                        <div className="flex items-center justify-center gap-2 p-3 mx-auto text-white rounded-lg cursor-pointer w-fit bg-gradient-to-r from-purple-700 to-pink-500">
                           {refreshIconRotating}
                         </div>
                       ) : (
@@ -336,7 +340,7 @@ const RegistrationForm = () => {
                       )}
                     </label>
                   ) : (
-                    <div className="flex items-center text-gray-400 justify-center whitespace-nowrap">
+                    <div className="flex items-center justify-center text-gray-400 whitespace-nowrap">
                       <div className=" w-3 h-3 p-2 mr-2 text-stone-950 !bg-[#6a4dff]  dark:!bg-[#e6f85e] rounded-full flex justify-center items-center font-extrabold lg:text-[14px] text-[12px]">
                         !
                       </div>
@@ -366,21 +370,21 @@ const RegistrationForm = () => {
                       />
                     )
                   )}
-                  <p className="dark:text-gray-100 text-gray-950 mt-2 text-sm">
+                  <p className="mt-2 text-sm dark:text-gray-100 text-gray-950">
                     Your existing resume forms the basis for your new one,
                     eliminating manual data entry.
                   </p>
                   {formik.touched.file && formik.errors.file && (
-                    <p className="text-red-600 pt-3">
+                    <p className="pt-3 text-red-600">
                       {formik.touched.file && formik.errors.file}
                     </p>
                   )}
                 </>
               )}
             </div>
-            <div className="text-start mb-2">
-              <div className="flex flex-wrap relative items-stretch  w-full">
-                <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
+            <div className="mb-2 text-start">
+              <div className="relative flex flex-wrap items-stretch w-full">
+                <span className="absolute flex items-center justify-center w-12 h-12 transform -translate-y-1/2 z-1000 top-1/2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -413,14 +417,14 @@ const RegistrationForm = () => {
                 />
               </div>
               {formik.touched.firstName && formik.errors.firstName && (
-                <p className="text-red-600 pt-3">
+                <p className="pt-3 text-red-600">
                   {formik.touched.firstName && formik.errors.firstName}
                 </p>
               )}
             </div>
-            <div className="text-start my-2">
-              <div className="flex flex-wrap relative items-stretch  w-full ">
-                <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
+            <div className="my-2 text-start">
+              <div className="relative flex flex-wrap items-stretch w-full ">
+                <span className="absolute flex items-center justify-center w-12 h-12 transform -translate-y-1/2 z-1000 top-1/2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -453,14 +457,14 @@ const RegistrationForm = () => {
                 />
               </div>
               {formik.touched.firstName && formik.errors.firstName && (
-                <p className="text-red-600 pt-3">
+                <p className="pt-3 text-red-600">
                   {formik.touched.lastName && formik.errors.lastName}
                 </p>
               )}
             </div>
-            <div className="text-start my-2">
-              <div className="flex flex-wrap relative items-stretch  w-full">
-                <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
+            <div className="my-2 text-start">
+              <div className="relative flex flex-wrap items-stretch w-full">
+                <span className="absolute flex items-center justify-center w-12 h-12 transform -translate-y-1/2 z-1000 top-1/2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -494,15 +498,14 @@ const RegistrationForm = () => {
                 />
               </div>
               {formik.touched.email && formik.errors.email && (
-                <p className="text-red-600 pt-3">
+                <p className="pt-3 text-red-600">
                   {formik.touched.email && formik.errors.email}
                 </p>
               )}
             </div>
-            <div className="text-start my-2">
-              <div className="flex flex-wrap relative items-stretch  w-full">
-                <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
-                  
+            <div className="my-2 text-start">
+              <div className="relative flex flex-wrap items-stretch w-full">
+                <span className="absolute flex items-center justify-center w-12 h-12 transform -translate-y-1/2 z-1000 top-1/2">
                   {phoneIcon}
                 </span>
 
@@ -523,14 +526,14 @@ const RegistrationForm = () => {
                 />
               </div>
               {formik.touched.phone && formik.errors.phone && (
-                <p className="text-red-600 pt-3">
+                <p className="pt-3 text-red-600">
                   {formik.touched.phone && formik.errors.phone}
                 </p>
               )}
             </div>
-            {/* <div className="text-start my-2">
-              <div className="flex flex-wrap relative items-stretch  w-full">
-                <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
+            {/* <div className="my-2 text-start">
+              <div className="relative flex flex-wrap items-stretch w-full">
+                <span className="absolute flex items-center justify-center w-12 h-12 transform -translate-y-1/2 z-1000 top-1/2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -563,14 +566,14 @@ const RegistrationForm = () => {
                 />
               </div>
               {formik.touched.password && formik.errors.password && (
-                <p className="text-red-600 pt-3">
+                <p className="pt-3 text-red-600">
                   {formik.touched.password && formik.errors.password}
                 </p>
               )}
             </div> */}
-            {/* <div className="text-start my-2">
-              <div className="flex flex-wrap relative items-stretch  w-full">
-                <span className="absolute w-12 h-12 z-1000 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
+            {/* <div className="my-2 text-start">
+              <div className="relative flex flex-wrap items-stretch w-full">
+                <span className="absolute flex items-center justify-center w-12 h-12 transform -translate-y-1/2 z-1000 top-1/2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -604,13 +607,13 @@ const RegistrationForm = () => {
               </div>
               {formik.touched.confirmpassword &&
                 formik.errors.confirmpassword && (
-                  <p className="text-red-600 pt-3">
+                  <p className="pt-3 text-red-600">
                     {formik.touched.confirmpassword &&
                       formik.errors.confirmpassword}
                   </p>
                 )} 
             </div> */}
-            <div className="text-start my-4">
+            <div className="my-4 text-start">
               <div className="ml-3 text-sm">
                 <input
                   id="terms"
@@ -621,7 +624,7 @@ const RegistrationForm = () => {
                   className="w-4 mr-4 h-4 border-[1px] border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
                 />
 
-                <label htmlFor="terms" className="font-light mr-1">
+                <label htmlFor="terms" className="mr-1 font-light">
                   I accept the{" "}
                   <Link
                     className="font-medium text-primary-600 hover:underline "
@@ -634,7 +637,7 @@ const RegistrationForm = () => {
                 <label htmlFor="terms" className="font-light">
                   &
                   <Link
-                    className="font-medium text-primary-600 ml-1 hover:underline "
+                    className="ml-1 font-medium text-primary-600 hover:underline "
                     href="/privacy-policy"
                   >
                     Privacy Policy
@@ -642,7 +645,7 @@ const RegistrationForm = () => {
                 </label>
               </div>
             </div>
-            <div className="text-start my-4">
+            <div className="my-4 text-start">
               <label className="ml-3 text-sm" htmlFor="alertConsent">
                 <input
                   id="alertConsent"
@@ -659,13 +662,13 @@ const RegistrationForm = () => {
             </div>
             {submittingError !== "" && (
               <div
-                className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-2"
+                className="p-4 my-2 text-orange-700 bg-orange-100 border-l-4 border-orange-500"
                 role="alert"
               >
                 <p>{submittingError}</p>
               </div>
             )}
-            <div className="text-center mt-4">
+            <div className="mt-4 text-center">
               <button
                 type="submit"
                 disabled={!formik.values.terms || submitting}
@@ -680,7 +683,7 @@ const RegistrationForm = () => {
                 )}
               </button>
             </div>
-            <div className="text-center mt-2">
+            <div className="mt-2 text-center">
               <p>
                 Already have an account?
                 <Link

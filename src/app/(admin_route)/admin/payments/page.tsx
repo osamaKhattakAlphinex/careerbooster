@@ -2,6 +2,7 @@
 import DataTable from "@/components/admin/DataTable";
 import FineTuningSettingModel from "@/components/admin/fineTuning/fineTuningSettingModels";
 import PaymentsDecryptionModal from "@/components/admin/payments/paymentsDecryptionModal";
+import { useAppContext } from "@/context/AppContext";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -20,6 +21,8 @@ const Payments = () => {
   const showTransactionModelRef: React.MutableRefObject<any> = useRef(null);
   const [isDecrypted, setIsDecrypted] = useState<boolean>(false);
 
+  // const { abortController } = useAppContext();
+
   const columnHelper = createColumnHelper<Payment>();
 
   const columns = [
@@ -27,7 +30,7 @@ const Payments = () => {
       id: "userEmail",
       header: () => "Email",
       cell: (info) => (
-        <div className="truncate max-w-sm">{info.renderValue()}</div>
+        <div className="max-w-sm truncate">{info.renderValue()}</div>
       ),
     }),
     columnHelper.accessor("amountPaid", {
@@ -39,9 +42,14 @@ const Payments = () => {
 
   const fetchPayments = async () => {
     setLoading(true);
+
+    // const signal = abortController.signal;
     if (!loading) {
       axios
-        .get("/api/payment", {})
+        .get(
+          "/api/payment"
+          // { signal }
+        )
         .then((res: any) => {
           if (res.data.success) {
             const payments = res.data.payments;
@@ -74,6 +82,9 @@ const Payments = () => {
 
   useEffect(() => {
     fetchPayments();
+    return () => {
+      // abortController.abort();
+    };
   }, []);
 
   return (
@@ -83,22 +94,22 @@ const Payments = () => {
         formHandler={handleDecryption}
       />
 
-      <div className="flex flex-col justify-end items-start">
-        <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+      <div className="flex flex-col items-start justify-end">
+        <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
           Payments
         </h2>
-        <span className="dark:text-white/70 text-black/70 text-base">
+        <span className="text-base dark:text-white/70 text-black/70">
           List of encrypted payments details you can decrypt them.
         </span>
 
-        <div className="mt-4 flex flex-row justify-end items-center w-full">
+        <div className="flex flex-row items-center justify-end w-full mt-4">
           {isDecrypted ? (
             <button
               onClick={() => {
                 fetchPayments();
                 setIsDecrypted(false);
               }}
-              className="bg-gray-900 text-white rounded-lg p-2 hover:bg-gray-800"
+              className="p-2 text-white bg-gray-900 rounded-lg hover:bg-gray-800"
             >
               <div className="flex flex-row gap-2">
                 <svg
@@ -126,7 +137,7 @@ const Payments = () => {
                   showTransactionModelRef.current.openModal(true);
                 }
               }}
-              className="bg-gray-900 text-white rounded-lg p-2 hover:bg-gray-800"
+              className="p-2 text-white bg-gray-900 rounded-lg hover:bg-gray-800"
             >
               <div className="flex flex-row gap-2">
                 <svg
@@ -154,7 +165,7 @@ const Payments = () => {
             </button>
           )}
         </div>
-        <div className="w-full overflow-x-auto mt-4">
+        <div className="w-full mt-4 overflow-x-auto">
           <DataTable
             loading={loading}
             columns={columns}

@@ -5,6 +5,7 @@ import DataTable, {
 } from "@/components/admin/DataTable";
 import FineTuningSettingModel from "@/components/admin/fineTuning/fineTuningSettingModels";
 import StatusIndicator from "@/components/admin/fineTuning/statusIndicator";
+import { useAppContext } from "@/context/AppContext";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 
 import {
@@ -184,7 +185,6 @@ const FineTuningModels = () => {
       })
       .then((res: any) => {
         if (res.data.success) {
-       
         }
       })
       .catch((err) => {
@@ -203,7 +203,6 @@ const FineTuningModels = () => {
       .get(`/api/trainBot/tuneModel/tuningJobsStatus/${jobId}`)
       .then((res: any) => {
         if (res.data.success) {
-          
         }
       })
       .catch((err) => {
@@ -223,7 +222,6 @@ const FineTuningModels = () => {
       })
       .then((res: any) => {
         if (res.data.success) {
-      
         }
       })
       .catch((err) => {
@@ -256,13 +254,13 @@ const FineTuningModels = () => {
   return (
     <>
       <FineTuningSettingModel ref={settingModelRef} />
-      <div className="flex flex-col justify-start items-start">
-        <div className="flex w-full flex-row justify-between items-start">
+      <div className="flex flex-col items-start justify-start">
+        <div className="flex flex-row items-start justify-between w-full">
           <div>
-            <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+            <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
               Fine Tuning
             </h2>
-            <span className="dark:text-white/70 text-black/70 text-base">
+            <span className="text-base dark:text-white/70 text-black/70">
               List of all the modle that are tuning.
             </span>
           </div>
@@ -272,13 +270,13 @@ const FineTuningModels = () => {
                 settingModelRef.current.openModal(true);
               }
             }}
-            className=" text-xs font-semibold uppercase flex flex-row justify-between items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-lg shadow-lg"
+            className="flex flex-row items-center justify-between gap-2 px-4 py-2 text-xs font-semibold text-white uppercase bg-orange-500 rounded-lg shadow-lg "
           >
             {settingIcon} Default Model For Tunning
           </button>
         </div>
 
-        <div className="w-full overflow-x-auto mt-4">
+        <div className="w-full mt-4 overflow-x-auto">
           <DataTable
             loading={loading}
             columns={columns}

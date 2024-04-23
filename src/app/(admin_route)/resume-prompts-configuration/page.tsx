@@ -38,14 +38,14 @@ const ResumePromptsConfiguration = () => {
       {/* <div className="my-5 ml-10">
         <Link
           href="/admin"
-          className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+          className="flex flex-row items-center gap-2 transition-all hover:font-semibold"
         >
           {leftArrowIcon}
           Dashboard
         </Link>
       </div> */}
       <div className="flex gap-4 mb-3">
-        <div className="w-full flex">
+        <div className="flex w-full">
           <h2 className="text-lg">
             <div className="flex flex-row gap-2">
               {/* <svg
@@ -71,7 +71,7 @@ const ResumePromptsConfiguration = () => {
         </div>
       </div>
       {promptsLoading ? (
-        <h1 className="text-center text-2xl ">Loading...</h1>
+        <h1 className="text-2xl text-center ">Loading...</h1>
       ) : (
         <>
           <div className="flex gap-4 my-4">
@@ -86,17 +86,18 @@ const ResumePromptsConfiguration = () => {
               updating={updating}
             />
 
-            {/* Primary Skills Generator */}
             <PromptEditor
-              name="primarySkills"
-              title="Primary skills"
+              name="summary-for-specific-jd"
+              title="Summary (Job Description)"
               type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}
               handleSave={handleSave}
               updating={updating}
             />
+            {/* Primary Skills Generator */}
           </div>
+
           <div className="flex gap-4 my-4">
             <PromptEditor
               name="oneLineSlogan"
@@ -134,6 +135,27 @@ const ResumePromptsConfiguration = () => {
             <PromptEditor
               name="writePublicationSingle"
               title="Publication Generator"
+              type="resume"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+          </div>
+          <div className="flex gap-4 my-4">
+            <PromptEditor
+              name="primarySkills"
+              title="Primary skills"
+              type="resume"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+
+            <PromptEditor
+              name="primarySkills-for-specific-jd"
+              title="Primary skills for job description"
               type="resume"
               prompts={prompts}
               promptsLoading={promptsLoading}

@@ -65,6 +65,8 @@ interface Project {
 
 export interface Resume {
   state: {
+    resumeType: "resume-basic" | "resume-job-title" | "resume-job-description";
+    jobDescription: string;
     jobPosition: string;
     resumeLoading: boolean;
     componentRef: any;
@@ -75,13 +77,13 @@ export interface Resume {
     workExperienceArray: string;
     summary: string;
     contact: string;
-    publications:string; 
-    trainings:string;
-    awards:string;
-    interests:string;
-    certifications:string;
-    references:string;
-    languages:string;
+    publications: string;
+    trainings: string;
+    awards: string;
+    interests: string;
+    certifications: string;
+    references: string;
+    languages: string;
     projects: string;
   };
   dateTime?: string;
@@ -139,6 +141,8 @@ export interface Resume {
 
 const initialState: Resume = {
   state: {
+    resumeType: "resume-basic",
+    jobDescription: "",
     jobPosition: "",
     resumeLoading: false,
     componentRef: null,
@@ -203,7 +207,7 @@ const initialState: Resume = {
   interests: [],
   awards: [],
   publications: [],
-  trainings:[],
+  trainings: [],
   references: [],
   languages: [],
   certifications: [],
@@ -266,7 +270,7 @@ const resumeSlice = createSlice({
         uploadedFileName: action.payload,
       };
     },
-  
+
     setBasicInfo(state, action) {
       return {
         ...state,
@@ -361,7 +365,7 @@ const resumeSlice = createSlice({
         languages: action.payload.languages,
       };
     },
-   
+
     setCustomExperienceArray(state, action) {
       return {
         ...state,
@@ -413,7 +417,7 @@ export const {
   setInterests,
   setCertifications,
   setLanguages,
-  setProjects
+  setProjects,
   // setLoadingState,
 } = resumeSlice.actions;
 

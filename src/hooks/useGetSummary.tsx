@@ -49,7 +49,10 @@ const useGetSummary = (
       body: JSON.stringify({
         type: "summary",
         personName: userData?.firstName + " " + userData?.lastName,
+
+        resumeType: resumeData.state.resumeType,
         jobPosition: resumeData.state.jobPosition,
+        jobDescription: resumeData.state.jobDescription,
 
         creditsUsed: creditLimits.resume_summary_generation,
         userData: aiInputUserData,

@@ -7,6 +7,7 @@ import axios from "axios";
 import { createColumnHelper } from "@tanstack/react-table";
 import DataTable, { TableAction } from "@/components/admin/DataTable";
 import CreditsModal from "@/components/admin/creditsModal";
+import { useAppContext } from "@/context/AppContext";
 
 export type Credit = {
   _id?: string;
@@ -23,6 +24,7 @@ const ViewPackage = ({}) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [credits, setCredits] = useState<Credit[]>([]);
   const creditModalRef: React.MutableRefObject<any> = useRef(null);
+  // const { abortController } = useAppContext();
 
   const handleOpenConfirmationModal = (credit: Credit) => {
     if (creditModalRef.current) {
@@ -93,10 +95,13 @@ const ViewPackage = ({}) => {
 
   const getCredits = async () => {
     setLoading(true);
+    // const signal = abortController.signal;
+
     if (!loading) {
       try {
         let response: any = await axios.get(
           "/api/checkout/getActiveCreditPackages"
+          // { signal: signal }
         );
         if (response?.data.success) {
           setCredits(response.data.result);
@@ -110,28 +115,31 @@ const ViewPackage = ({}) => {
 
   useEffect(() => {
     getCredits();
+    return () => {
+      // abortController.abort();
+    };
   }, []);
 
   return (
     <>
       <CreditsModal ref={creditModalRef} refresh={getCredits} />
 
-      <div className="flex flex-col justify-start items-start">
-        <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+      <div className="flex flex-col items-start justify-start">
+        <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
           Credits
         </h2>
-        <span className="dark:text-white/70 text-black/70 text-base">
+        <span className="text-base dark:text-white/70 text-black/70">
           Credits
         </span>
 
         <button
           onClick={handleCreditAdd}
-          className="whitespace-nowrap self-end px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline"
+          className="self-end px-3 py-2 text-xs font-medium text-center text-white no-underline bg-green-700 rounded-lg whitespace-nowrap hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
         >
           Add New Credits
         </button>
 
-        <div className="w-full overflow-x-auto mt-4">
+        <div className="w-full mt-4 overflow-x-auto">
           <DataTable
             loading={loading}
             columns={columns}

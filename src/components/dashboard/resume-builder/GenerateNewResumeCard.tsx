@@ -14,8 +14,25 @@ interface Props {
   getConsent: () => void;
 }
 const GenerateResume = ({ getConsent }: Props) => {
-  const [showInstruction, setShowInstruction] = useState<boolean>(false);
+  const radiosResumeType: { labelText: string; value: string }[] = [
+    {
+      labelText: "Generate Basic Resume",
+      value: "resume-basic",
+    },
+    {
+      labelText: "Generate For Job Title",
+      value: "resume-job-title",
+    },
+    {
+      labelText: "Generate For Job Description",
+      value: "resume-job-description",
+    },
+  ];
 
+  const [showInstruction, setShowInstruction] = useState<boolean>(false);
+  const [resumeType, setResumeType] = useState<
+    "resume-basic" | "resume-job-title" | "resume-job-description"
+  >("resume-basic");
   // const [quantifyingExperience, setQuantifyingExperience] =
   //   useState<boolean>(true);
   // Redux
@@ -133,43 +150,129 @@ const GenerateResume = ({ getConsent }: Props) => {
       {/* form */}
       <div className="flex flex-col items-start justify-between gap-5">
         <div className="flex flex-col w-full gap-4">
-          <label
-            htmlFor="targetedJobPosition"
-            className=" font-semibold items-center dark:text-gray-100 text-gray-950 text-sm md:text-base flex flex-row gap-[10px]"
-          >
-            <Image
-              src="/icon/rocket.svg"
-              alt="bold icon"
-              height={16}
-              width={16}
-            />
-            Enter Your Targeted Job Position{" "}
-            <div className="relative inset-0 cursor-pointer group">
-              {infoSmallIcon}
-              <div className="w-48 bg-gradient-to-r z-50 from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[14px] px-2 absolute xs:-left-48 md:left-4 xs:-top-28  md:-top-[11.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
-                Customize your resume for the specific roles you{"'"}re applying
-                for. A tailored resume significantly boosts your chances of
-                securing more interviews by highlighting your suitability for
-                the position.
-              </div>
-            </div>
-          </label>
+          <div className="flex flex-col items-start justify-center gap-2">
+            {radiosResumeType.map(
+              ({ labelText, value }: { labelText: string; value: string }) => (
+                <label className="text-sm" key={value}>
+                  <input
+                    type="radio"
+                    name="resume-type"
+                    value={value}
+                    className="mr-1"
+                    checked={resumeType === value}
+                    onChange={(e) => {
+                      if (e.target.value === "resume-job-description") {
+                        dispatch(setState({ name: "jobPosition", value: "" }));
+                      } else if (e.target.value === "resume-job-title") {
+                        dispatch(
+                          setState({ name: "jobDescription", value: "" })
+                        );
+                      } else {
+                        dispatch(setState({ name: "jobPosition", value: "" })),
+                          dispatch(
+                            setState({ name: "jobDescription", value: "" })
+                          );
+                      }
 
-          <input
-            type="targetedJobPosition"
-            name="targetedJobPosition"
-            id="targetedJobPosition"
-            value={memoizedState?.jobPosition}
-            onChange={(e) =>
-              dispatch(setState({ name: "jobPosition", value: e.target.value }))
-            }
-            placeholder="e.g. Vice President of Sales"
-            className="w-full py-2 px-4 rounded-full text-xs md:text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px]"
-          />
+                      dispatch(
+                        setState({ name: "resumeType", value: e.target.value })
+                      ),
+                        setResumeType(
+                          e.target.value as
+                            | "resume-basic"
+                            | "resume-job-title"
+                            | "resume-job-description"
+                        );
+                    }}
+                  />
+                  {labelText}
+                </label>
+              )
+            )}
+          </div>
+
+          {resumeType === "resume-job-title" ? (
+            <>
+              <label
+                htmlFor="targetedJobPosition"
+                className=" font-semibold items-center dark:text-gray-100 text-gray-950 text-sm md:text-base flex flex-row gap-[10px]"
+              >
+                <Image
+                  src="/icon/rocket.svg"
+                  alt="bold icon"
+                  height={16}
+                  width={16}
+                />
+                Enter Your Targeted Job Position{" "}
+                <div className="relative inset-0 cursor-pointer group">
+                  {infoSmallIcon}
+                  <div className="w-48 bg-gradient-to-r z-50 from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[14px] px-2 absolute xs:-left-48 md:left-4 xs:-top-28  md:-top-[11.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+                    Customize your resume for the specific roles you{"'"}re
+                    applying for. A tailored resume significantly boosts your
+                    chances of securing more interviews by highlighting your
+                    suitability for the position.
+                  </div>
+                </div>
+              </label>
+
+              <input
+                type="targetedJobPosition"
+                name="targetedJobPosition"
+                id="targetedJobPosition"
+                value={memoizedState?.jobPosition}
+                onChange={(e) =>
+                  dispatch(
+                    setState({ name: "jobPosition", value: e.target.value })
+                  )
+                }
+                placeholder="e.g. Vice President of Sales"
+                className="w-full py-2 px-4 rounded-full text-xs md:text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px]"
+              />
+            </>
+          ) : resumeType === "resume-job-description" ? (
+            <>
+              <label
+                htmlFor="targetedJobPosition"
+                className=" font-semibold items-center dark:text-gray-100 text-gray-950 text-sm md:text-base flex flex-row gap-[10px]"
+              >
+                <Image
+                  src="/icon/rocket.svg"
+                  alt="bold icon"
+                  height={16}
+                  width={16}
+                />
+                Enter Your Targeted Job Description
+                <div className="relative inset-0 cursor-pointer group">
+                  {infoSmallIcon}
+                  <div className="w-48 bg-gradient-to-r z-50 from-[#B324D7] to-[#615DFF] font-medium xs:text-[10px] md:text-[14px] px-2 absolute xs:-left-48 md:left-4 xs:-top-28  md:-top-[11.5rem]  hidden group-hover:block md:rounded-bl-none xs:rounded-br-none md:rounded-br-xl text-gray-100  mb-6 shadow-xl rounded-xl py-2  transition-all">
+                    Customize your resume for the specific roles you{"'"}re
+                    applying for. A tailored resume significantly boosts your
+                    chances of securing more interviews by highlighting your
+                    suitability for the position.
+                  </div>
+                </div>
+              </label>
+
+              <textarea
+                name="targetedJobPosition"
+                id="targetedJobPosition"
+                value={memoizedState?.jobDescription}
+                onChange={(e) =>
+                  dispatch(
+                    setState({ name: "jobDescription", value: e.target.value })
+                  )
+                }
+                placeholder="Enter job description"
+                rows={10}
+                className="w-full py-2 px-4 rounded-md text-xs md:text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px]"
+              />
+            </>
+          ) : (
+            ""
+          )}
         </div>
-
         {/* <label className="relative inline-flex items-center cursor-pointer">
-          <input
+        <input
             type="checkbox"
             checked={quantifyingExperience}
             onChange={(e) => setQuantifyingExperience(e.target.checked)}
@@ -194,15 +297,13 @@ const GenerateResume = ({ getConsent }: Props) => {
         </label> */}
         <button
           disabled={
-            memoizedState.jobPosition === "" ||
-            memoizedState.resumeLoading ||
-            !session?.user?.email
+            //memoizedState.jobPosition === "" ||
+            memoizedState.resumeLoading || !session?.user?.email
           }
           onClick={() => getConsent()}
           className={` dark:bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7]  to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2  px-4 py-2  rounded-full ${
-            memoizedState.jobPosition === "" ||
-            memoizedState.resumeLoading ||
-            !session?.user?.email
+            // memoizedState.jobPosition === "" ||
+            memoizedState.resumeLoading || !session?.user?.email
               ? "opacity-50 cursor-not-allowed"
               : ""
           }`}

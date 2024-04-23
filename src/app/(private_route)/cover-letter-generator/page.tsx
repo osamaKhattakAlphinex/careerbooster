@@ -198,6 +198,7 @@ export default function CoverLetterPage() {
       fetch("/api/coverLetterBot/coverLetterGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
+        signal: signal,
       })
         .then(async (resp: any) => {
           // const response = await resp.json();
@@ -244,6 +245,9 @@ export default function CoverLetterPage() {
               showErrorToast("Failed to generate cover letter");
             }
           }
+        })
+        .catch((err) => {
+          console.log(err);
         })
         .finally(() => {
           setMsgLoading(false);
