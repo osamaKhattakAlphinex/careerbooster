@@ -212,7 +212,7 @@ const ResumeTemplate2 = () => {
           <Education
             heading={resume.headings.education}
             educations={resume.education}
-            styles={education}
+            customStyle={education}
           />
         )}
       </div>
