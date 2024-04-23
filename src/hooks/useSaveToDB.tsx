@@ -15,8 +15,8 @@ const useSaveResumeToDB = () => {
   const dispatch = useDispatch();
 
   const saveResumeToDB = async (data: any = "") => {
-
     // return makeAPICallWithRetry(async () => {
+
     showSuccessToast("Resume Updated Successfully");
     const source = data === "" ? resumeData : data;
     let obj = source;
@@ -67,6 +67,9 @@ const useSaveResumeToDB = () => {
           // set user package details to redux
           dispatch(setField({ name: "userPackageData", value: userPackage }));
         }
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 

@@ -16,6 +16,7 @@ import DataTable, {
 } from "@/components/admin/DataTable";
 import { debug } from "console";
 import CreditsUpdationModal from "@/components/creditsUpdationModal";
+import { useAppContext } from "@/context/AppContext";
 
 type User = {
   alertConsent: any;
@@ -57,6 +58,8 @@ const UsersPage = () => {
   const [counts, setCounts] = useState<any>(null);
   const [userStats, setUserStats] = useState<any>("total");
   const columnHelper = createColumnHelper<User>();
+
+  // const { abortController } = useAppContext();
 
   const creditsUpdationModelRef: React.MutableRefObject<any> = useRef(null);
 
@@ -309,7 +312,6 @@ const UsersPage = () => {
         });
     }
   };
-
   const isChecked = (id: string) => {
     if (selectAll) {
       if (dataSelection.length === records.length) return true;
@@ -366,7 +368,6 @@ const UsersPage = () => {
     setCurrentPage(1);
     setLimitOfUser(e.target.value);
   };
-
   const getUserDeatils = () => {
     setshowTableLoader(true);
     setLoading(true);

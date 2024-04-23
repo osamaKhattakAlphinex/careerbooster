@@ -113,7 +113,6 @@ const ResumeBuilder = () => {
     }
   };
 
-
   const handleGenerate = useCallback(
     async (quantifyingExperience: boolean) => {
       await getUserDataIfNotExists();
@@ -122,7 +121,7 @@ const ResumeBuilder = () => {
       // reset resume
       dispatch(resetResume(resumeData.state));
 
-      if (resumeData.state.jobPosition !== "" && session?.user?.email) {
+      if (session?.user?.email) {
         setResumeGenerated(false);
         dispatch(setState({ name: "resumeLoading", value: true }));
         dispatch(setQuantifyingExperience(quantifyingExperience));
@@ -139,6 +138,7 @@ const ResumeBuilder = () => {
 
         dispatch(setId(""));
         await getBasicInfo();
+
         await getSummary();
         await getPrimarySkills();
         await getWorkExperienceNew(quantifyingExperience);
@@ -192,7 +192,11 @@ const ResumeBuilder = () => {
 
         creditsUsed: creditLimits.resume_basicInfo,
         userData: aiInputUserData,
+
+        resumeType: resumeData.state.resumeType,
         jobPosition: resumeData.state.jobPosition,
+        jobDescription: resumeData.state.jobDescription,
+
         trainBotData: {
           userEmail: userData.email,
           fileAddress: userData.uploadedResume.fileName,
@@ -425,9 +429,13 @@ const ResumeBuilder = () => {
         type: "primarySkills",
         personName: userData?.firstName + " " + userData?.lastName,
 
+        resumeType: resumeData.state.resumeType,
+        jobPosition: resumeData.state.jobPosition,
+        jobDescription: resumeData.state.jobDescription,
+
         creditsUsed: creditLimits.resume_skills,
         userData: aiInputUserData,
-        jobPosition: resumeData.state.jobPosition,
+
         trainBotData: {
           userEmail: userData.email,
           // fileAddress: userData.files[0].fileName,

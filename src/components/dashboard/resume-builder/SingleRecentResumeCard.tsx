@@ -75,10 +75,22 @@ const SingleRecentResumeCard = ({
       /> */}
       <div className="flex flex-col lg:w-[100%]   dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 rounded-xl md:mt-[20px] xs:mt-[10px] py-[20px] px-[10px] ">
         <div className="">
-          <div className="mx-3 border-gray-600 leading-6">
+          <div className="mx-3 leading-6 border-gray-600">
             <h2 className="lg:text-[15px] text-[13px]  capitalize dark:text-gray-100 text-gray-950 font-medium   w-full truncate">
-              {resume?.state?.jobPosition}
+              {resume?.state?.resumeType === "resume-basic"
+                ? resume?.name
+                : resume?.state?.resumeType === "resume-job-title"
+                ? resume?.state?.jobPosition
+                : resume?.state?.jobDescription}
             </h2>
+            <span className="text-xs text-[#959595] font-semibold">
+              Generated option:
+              {resume?.state?.resumeType === "resume-basic"
+                ? "Basic"
+                : resume?.state?.resumeType === "resume-job-title"
+                ? "Job Title"
+                : "Job Description"}
+            </span>
             <h4 className="uppercase text-[#959595] font-medium  lg:text-[12px] text-[10px] pt-[8px] pb-[12px]">
               Created on: {getFormattedDate(resume?.dateTime)}
             </h4>

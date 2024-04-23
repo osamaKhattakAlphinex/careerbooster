@@ -8,6 +8,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import DataTable, { TableAction } from "@/components/admin/DataTable";
 import CreditsModal from "@/components/admin/creditsModal";
 import CreditsPerUsageModal from "@/components/admin/creditsPerUsageModal";
+import { useAppContext } from "@/context/AppContext";
 
 const nameFormatter = (key: string) => {
   return key.replaceAll("_", " ");
@@ -36,6 +37,8 @@ const CreditPerUsagePage = () => {
   const [credits, setCredits] = useState<CreditPerUsage | null>(null);
   const creditModalRef: React.MutableRefObject<any> = useRef(null);
 
+  //  const { abortController } = useAppContext();
+
   const handleUpdate = () => {
     if (creditModalRef.current) {
       creditModalRef.current.openModal(true, credits);
@@ -44,6 +47,8 @@ const CreditPerUsagePage = () => {
 
   const getCredits = async () => {
     setLoading(true);
+
+    //  const signal = abortController.signal;
     if (!loading) {
       try {
         let response: any = await axios.get("/api/users/CreditLimits");
@@ -59,28 +64,31 @@ const CreditPerUsagePage = () => {
 
   useEffect(() => {
     getCredits();
+    return () => {
+      //  abortController.abort();
+    };
   }, []);
 
   return (
     <>
       <CreditsPerUsageModal ref={creditModalRef} refresh={getCredits} />
 
-      <div className="flex flex-col justify-start items-start">
-        <h2 className="text-xl dark:text-white/70 text-black/70 uppercase">
+      <div className="flex flex-col items-start justify-start">
+        <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
           Credits per usage
         </h2>
-        <span className="dark:text-white/70 text-black/70 text-base">
+        <span className="text-base dark:text-white/70 text-black/70">
           Credits
         </span>
 
         <button
           onClick={handleUpdate}
-          className="whitespace-nowrap self-end px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline"
+          className="self-end px-3 py-2 text-xs font-medium text-center text-white no-underline bg-green-700 rounded-lg whitespace-nowrap hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
         >
           Update
         </button>
 
-        <div className="grid grid-cols-2 gap-4 w-full overflow-x-auto mt-4">
+        <div className="grid w-full grid-cols-2 gap-4 mt-4 overflow-x-auto">
           {credits &&
             Object.entries(credits).map(([key, value]: any, index) =>
               index === 0 ? (
@@ -90,7 +98,7 @@ const CreditPerUsagePage = () => {
                   key={index}
                   className="flex items-center justify-between p-3 rounded-sm border-[1px] dark:border-gray-600"
                 >
-                  <span className=" capitalize font-semibold">
+                  <span className="font-semibold capitalize ">
                     {nameFormatter(key)}
                   </span>
                   <span>{value}</span>

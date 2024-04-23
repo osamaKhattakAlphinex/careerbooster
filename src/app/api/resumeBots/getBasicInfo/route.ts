@@ -42,12 +42,18 @@ export async function POST(req: any) {
     // const email = reqBody.email;
     const type = reqBody?.type; // request type
     const inputType = reqBody?.inputType; // input type
-    const jobPosition = reqBody?.jobPosition;
+    // const jobPosition = reqBody?.jobPosition;
     const userData = reqBody?.userData;
     const personName = reqBody?.personName;
 
+    const resumeType = reqBody?.resumeType;
+    const jobPosition = reqBody?.jobPosition;
+    const jobDescription = reqBody?.jobDescription;
+
     const userCredits = await getUserCreditsByEmail(session?.user?.email);
     const creditsUsed = reqBody?.creditsUsed;
+
+    let inputPrompt = "";
     // const email = reqBody?.email;
     const trainBotData = reqBody?.trainBotData;
     if (userCredits) {
@@ -76,7 +82,7 @@ export async function POST(req: any) {
 
         const inputPrompt = `This is the Resume data: ${JSON.stringify(
           userData
-          )}
+        )}
           
           Please find the following details in above provided userdata:
           shortName, jobTitle, linkedIn URL
@@ -104,7 +110,11 @@ export async function POST(req: any) {
         });
 
         //update total user credits
-        await updateUserTotalCredits(session?.user?.email, creditsUsed,"resume");
+        await updateUserTotalCredits(
+          session?.user?.email,
+          creditsUsed,
+          "resume"
+        );
         await updateToolUsage("Resume Builder", creditsUsed);
         // make a trainBot entry
         try {
@@ -164,31 +174,61 @@ export async function POST(req: any) {
       //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
       try {
-        await startDB();
-        const promptRec = await Prompt.findOne({
-          type: "resume",
-          name: "summary",
-          active: true,
-        });
-        const prompt = promptRec.value;
+        if (resumeType === "resume-job-title") {
+          await startDB();
+          const promptRec = await Prompt.findOne({
+            type: "resume",
+            name: "summary",
+            active: true,
+          });
+          const prompt = promptRec.value;
 
-        let promptSummary = await prompt.replaceAll(
-          "{{jobPosition}}",
-          jobPosition
-        );
-        promptSummary = await promptSummary.replaceAll(
-          "{{PersonName}}",
-          personName
-        );
-        const inputPrompt = `Read ${personName}'s Resume data: ${JSON.stringify(
-          userData
-        )}
+          let promptSummary = await prompt.replaceAll(
+            "{{jobPosition}}",
+            jobPosition
+          );
+          promptSummary = await promptSummary.replaceAll(
+            "{{PersonName}}",
+            personName
+          );
+          inputPrompt = `Read ${personName}'s Resume data: ${JSON.stringify(
+            userData
+          )}
       
       and then:
               ${promptSummary}`;
+        } else if (resumeType === "resume-job-description") {
+          await startDB();
+          const promptRec = await Prompt.findOne({
+            type: "resume",
+            name: "summary-for-specific-jd",
+            active: true,
+          });
+          const prompt = promptRec.value;
+
+          let promptSummary = await prompt.replaceAll(
+            "{{jobDescription}}",
+            jobDescription
+          );
+          promptSummary = await promptSummary.replaceAll(
+            "{{PersonName}}",
+            personName
+          );
+
+          inputPrompt = `Read ${personName}'s Resume data: ${JSON.stringify(
+            userData
+          )}
+      
+      and then:
+              ${promptSummary}`;
+        } else {
+          inputPrompt = `Read ${personName}'s Resume data: ${JSON.stringify(
+            userData
+          )} and write exective summary`;
+        }
 
         const response: any = await openai.chat.completions.create({
-          model: model? model:"gpt-3.5-turbo",
+          model: model ? model : "gpt-3.5-turbo",
           stream: true,
           messages: [{ role: "user", content: inputPrompt }],
         });
@@ -197,7 +237,11 @@ export async function POST(req: any) {
 
         const stream = OpenAIStream(response, {
           onStart: async () => {
-            await updateUserTotalCredits(session?.user?.email, creditsUsed,"resume");
+            await updateUserTotalCredits(
+              session?.user?.email,
+              creditsUsed,
+              "resume"
+            );
             await updateToolUsage("Resume Builder", creditsUsed);
           },
           onToken: async (content) => {
@@ -256,23 +300,24 @@ export async function POST(req: any) {
       //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
       try {
-        await startDB();
+        if (resumeType === "resume-job-title") {
+          await startDB();
 
-        const promptRec = await Prompt.findOne({
-          type: "resume",
-          name: "primarySkills",
-          active: true,
-        });
-        const promptDB = promptRec.value;
+          const promptRec = await Prompt.findOne({
+            type: "resume",
+            name: "primarySkills",
+            active: true,
+          });
+          const promptDB = promptRec.value;
 
-        const promptRefined = await promptDB.replaceAll(
-          "{{jobPosition}}",
-          jobPosition
-        );
+          const promptRefined = await promptDB.replaceAll(
+            "{{jobPosition}}",
+            jobPosition
+          );
 
-        const inputPrompt = `Read ${personName}'s Resume data:: ${JSON.stringify(
-          userData
-        )}
+          inputPrompt = `Read ${personName}'s Resume data:: ${JSON.stringify(
+            userData
+          )}
       
     
       and then:
@@ -280,6 +325,33 @@ export async function POST(req: any) {
       
       the answer must be in a valid JSON array
       `;
+        } else if (resumeType === "resume-job-description") {
+          await startDB();
+
+          const promptRec = await Prompt.findOne({
+            type: "resume",
+            name: "primarySkills-for-specific-jd",
+            active: true,
+          });
+          const promptDB = promptRec.value;
+
+          const promptRefined = await promptDB.replaceAll(
+            "{{jobDescription}}",
+            jobDescription
+          );
+
+          inputPrompt = `Read ${personName}'s Resume data:: ${JSON.stringify(
+            userData
+          )}
+          and then:
+          ${promptRefined}
+          the answer must be in a valid JSON array
+          `;
+        } else {
+          inputPrompt = `Read ${personName}'s Resume data:: ${JSON.stringify(
+            userData
+          )} and give me 10 primary skills and the answer must be in a valid JSON array`;
+        }
 
         const response: any = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
@@ -288,7 +360,11 @@ export async function POST(req: any) {
         });
 
         //update total records of user
-        await updateUserTotalCredits(session?.user?.email, creditsUsed,"resume");
+        await updateUserTotalCredits(
+          session?.user?.email,
+          creditsUsed,
+          "resume"
+        );
         await updateToolUsage("Resume Builder", creditsUsed);
 
         // make a trainBot entry

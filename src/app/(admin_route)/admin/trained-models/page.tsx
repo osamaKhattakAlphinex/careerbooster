@@ -1,6 +1,7 @@
 "use client";
 import DataTable from "@/components/admin/DataTable";
 import StatusIndicator from "@/components/admin/fineTuning/statusIndicator";
+import { useAppContext } from "@/context/AppContext";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -20,6 +21,7 @@ const TrainedModel = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const columnHelper = createColumnHelper<TrainedModelType>();
+  // const { abortController } = useAppContext();
 
   const columns = [
     columnHelper.accessor("dataset", {
@@ -43,12 +45,17 @@ const TrainedModel = () => {
 
   const fetchmodels = async () => {
     setLoading(true);
+
+    // const signal = abortController.signal;
     if (!loading) {
       axios
-        .get("/api/trainBot/trainedModel", {})
+        .get(
+          "/api/trainBot/trainedModel"
+          // { signal }
+        )
         .then(async (res: any) => {
           if (res.data.success) {
-            const result =await res.data;
+            const result = await res.data;
             setModels(result.data);
           }
         })
@@ -63,17 +70,20 @@ const TrainedModel = () => {
 
   useEffect(() => {
     fetchmodels();
+    return () => {
+      // abortController.abort();
+    };
   }, []);
 
   return (
-    <div className="flex flex-col justify-start items-start">
-      <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+    <div className="flex flex-col items-start justify-start">
+      <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
         Trained Models
       </h2>
-      <span className="dark:text-white/70 text-black/70 text-base">
+      <span className="text-base dark:text-white/70 text-black/70">
         List of all the models you have trained.
       </span>
-      <div className="w-full overflow-x-auto mt-4">
+      <div className="w-full mt-4 overflow-x-auto">
         <DataTable
           loading={loading}
           columns={columns}

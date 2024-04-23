@@ -6,14 +6,19 @@ import { setPrimarySkills } from "@/store/resumeSlice";
 import useSaveResumeToDB from "./useSaveToDB";
 import useGetCreditLimits from "./useGetCreditLimits";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
+import { useAppContext } from "@/context/AppContext";
 
-const useGetPrimarySkills = (setRegenerating: any,setOutOfCredits:any="") => {
+const useGetPrimarySkills = (
+  setRegenerating: any,
+  setOutOfCredits: any = ""
+) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const resumeData = useSelector((state: any) => state.resume);
   const { getUserDataIfNotExists } = useGetUserData();
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const { saveResumeToDB } = useSaveResumeToDB();
+  const { abortController } = useAppContext();
 
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
@@ -30,10 +35,16 @@ const useGetPrimarySkills = (setRegenerating: any,setOutOfCredits:any="") => {
         skills: userData?.skills,
       });
     }
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
   const getPrimarySkills = async () => {
     setRegenerating(true);
+
+    const signal = abortController.signal;
+
     // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("primarySkills"));
     await getUserDataIfNotExists();
@@ -54,33 +65,38 @@ const useGetPrimarySkills = (setRegenerating: any,setOutOfCredits:any="") => {
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
-    }).then(async (resp: any) => {
-      const res = await resp.json();
-      if (res.success) {
-        if (res?.result) {
-          let myJSON = JSON.parse(JSON.stringify(res.result));
+      signal,
+    })
+      .then(async (resp: any) => {
+        const res = await resp.json();
+        if (res.success) {
+          if (res?.result) {
+            let myJSON = JSON.parse(JSON.stringify(res.result));
 
-          myJSON = JSON.parse(myJSON);
-          dispatch(setPrimarySkills({ primarySkills: myJSON }));
-          setRegenerating(false);
-          saveResumeToDB({
-            ...resumeData,
-            primarySkills: myJSON,
-          });
-        }
-        showSuccessToast("Generated Successfully");
-      } else {
-        if (resp.status === 429) {
-          showErrorToast("You ran out of credits!");
-          if(setOutOfCredits !== ""){
-            setOutOfCredits(true);
+            myJSON = JSON.parse(myJSON);
+            dispatch(setPrimarySkills({ primarySkills: myJSON }));
+            setRegenerating(false);
+            saveResumeToDB({
+              ...resumeData,
+              primarySkills: myJSON,
+            });
           }
+          showSuccessToast("Generated Successfully");
         } else {
-          showErrorToast("Error in generating skills!");
+          if (resp.status === 429) {
+            showErrorToast("You ran out of credits!");
+            if (setOutOfCredits !== "") {
+              setOutOfCredits(true);
+            }
+          } else {
+            showErrorToast("Error in generating skills!");
+          }
+          setRegenerating(false);
         }
-        setRegenerating(false);
-      }
-    });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return { getPrimarySkills };

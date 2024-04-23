@@ -1,5 +1,6 @@
 "use client";
 import DataTable from "@/components/admin/DataTable";
+import { useAppContext } from "@/context/AppContext";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -13,6 +14,8 @@ const Page = () => {
   const [usages, setUsages] = useState<[] | any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const columnHelper = createColumnHelper<ToolUsage>();
+
+  // const { abortController } = useAppContext();
 
   const columns = [
     columnHelper.accessor("toolName", {
@@ -29,9 +32,14 @@ const Page = () => {
 
   const fetchUsages = async () => {
     setLoading(true);
+
+    // const signal = abortController.signal;
     if (!loading) {
       axios
-        .get("/api/usages", {})
+        .get(
+          "/api/usages"
+          // { signal }
+        )
         .then((res: any) => {
           if (res.data.success) {
             const usages = res.data.usages;
@@ -49,18 +57,21 @@ const Page = () => {
 
   useEffect(() => {
     fetchUsages();
+    return () => {
+      // abortController.abort();
+    };
   }, []);
 
   return (
-    <div className="flex flex-col justify-end items-start">
-      <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+    <div className="flex flex-col items-start justify-end">
+      <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
         Tools Usage
       </h2>
-      <span className="dark:text-white/70 text-black/70 text-base">
+      <span className="text-base dark:text-white/70 text-black/70">
         Tools Usage Details
       </span>
 
-      <div className="w-full overflow-x-auto mt-4">
+      <div className="w-full mt-4 overflow-x-auto">
         <DataTable
           loading={loading}
           columns={columns}

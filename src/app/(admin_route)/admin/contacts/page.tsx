@@ -2,6 +2,7 @@
 
 import DataTable, { TableAction } from "@/components/admin/DataTable";
 import MessageViewer from "@/components/admin/messageViewer";
+import { useAppContext } from "@/context/AppContext";
 import { eyeIcon, leftArrowIcon } from "@/helpers/iconsProvider";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
@@ -21,12 +22,18 @@ const Contacts = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const messageViewerRef: React.MutableRefObject<any> = useRef(null);
   const [message, setMessage] = useState<string>("");
+  //  const { abortController } = useAppContext();
 
   const fetchRecords = async () => {
     setLoading(true);
+
+    //  const signal = abortController.signal;
     if (!loading) {
       axios
-        .get("/api/contacts")
+        .get(
+          "/api/contacts"
+          //  { signal: signal }
+        )
         .then((res: any) => {
           if (res.data.success) {
             setRecords(res.data.emails);
@@ -70,7 +77,7 @@ const Contacts = () => {
       id: "message",
       header: () => "Message",
       cell: (info) => (
-        <span className="max-w-sm truncate inline-block">
+        <span className="inline-block max-w-sm truncate">
           {info.renderValue()}
         </span>
       ),
@@ -90,19 +97,22 @@ const Contacts = () => {
 
   useEffect(() => {
     fetchRecords();
+    return () => {
+      //  abortController.abort();
+    };
   }, []);
 
   return (
     <>
       <MessageViewer ref={messageViewerRef} message={message} />
-      <div className="flex flex-col justify-start items-start">
-        <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+      <div className="flex flex-col items-start justify-start">
+        <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
           Emails
         </h2>
-        <span className="dark:text-white/70 text-black/70 text-base">
+        <span className="text-base dark:text-white/70 text-black/70">
           List of emails you recieved in in your email.
         </span>
-        <div className="w-full overflow-x-auto mt-4">
+        <div className="w-full mt-4 overflow-x-auto">
           <DataTable
             columns={columns}
             data={records}
