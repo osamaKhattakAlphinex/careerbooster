@@ -22,7 +22,7 @@
 }
 
 .skillHeading-temp-2,
-.experienceHeading-temp-2 {
+.experienceHeading_temp_2 {
   @apply text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2;
 }
 
@@ -50,7 +50,7 @@
   @apply px-2 py-1 text-white bg-red-500 rounded-full;
 }
 
-.achievement-div {
+.achievement_div {
   @apply border-2 border-transparent hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2;
 }
 
@@ -58,15 +58,15 @@
   @apply text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100;
 }
 
-.achievement-h2 {
+.achievement_h2 {
   @apply flex gap-1 text-xs font-semibold leading-relaxed hover:cursor-default;
 }
 
-.achievement-save-btn {
+.save_btn {
   @apply text-white bg-green-500 rounded-md   h-9 px-[14px];
 }
 
-.achievement-delete-btn {
+.delete_btn {
   @apply py-1 text-white bg-red-500 rounded-md  px-[14px];
 }
 
@@ -92,7 +92,8 @@
   @apply  w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer
 }
 .publication_delete1 {
-  @apply hover:border-dashed list-disc  hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative  hover:bg-gray-100
+  @apply hover:border-dashed list-disc hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-100
+  
 }
 .publication_line {
   @apply hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block
@@ -104,11 +105,20 @@
   @apply !block w-full h-0 border-[1px] !border-gray-500 mt-3
 }
 .span2 {
-  @apply !block  w-full h-0 border-[1px] !border-gray-500 mt-0
+  @apply !block w-full h-0 border-[1px] !border-gray-500 mt-0
 }
 .publication_ul {
   @apply flex flex-col gap-1 pl-0 text-xs
 }
 .publication_li {
   @apply  flex flex-row items-center justify-center h-8 hover:bg-slate-200 
+}
+.reference_ul {
+  @apply flex flex-wrap w-full pl-0 md:flex-row lg:flex-row
+}
+.reference_li {
+  @apply w-[45%] md:w-[30%] m-2 xs:m-0 relative border-transparent border-2 hover:border-dashed hover:border-gray-500;
+}
+.language_div  {
+  @apply border-2 border-transparent md:w-full hover:cursor-move ;
 }

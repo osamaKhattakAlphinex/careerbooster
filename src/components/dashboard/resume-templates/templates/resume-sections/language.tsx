@@ -10,22 +10,18 @@ import AddItemToCustomSection from "@/components/dashboard/resume-builder/AddIte
 type Props = {
   heading: any;
   languages: any;
-  customStyle?: any;
+  styles: any;
 };
 
-const Language = ({ heading, languages, customStyle }: Props) => {
+const Language = ({ heading, languages, styles }: Props) => {
   const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
 
   return (
     <>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-      <h3
-        className={`flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500 ${
-          customStyle.centeredHeading ? "justify-center" : ""
-        }`}
-      >
+      <span className={`${styles?.span1}`}></span>
+      <h3 className={`${styles?.language_h3}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -52,14 +48,11 @@ const Language = ({ heading, languages, customStyle }: Props) => {
           }}
         />
       </h3>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
-      <ul className="flex flex-wrap w-full pl-0 md:flex-row lg:flex-row ">
+      <span className={`${styles?.span2}`}></span>
+      <ul className={`${styles?.language_ul}`}>
         {languages.map((rec: any, i: number) => {
           return (
-            <li
-              key={i}
-              className="w-[45%] md:w-[30%] m-2  xs:m-0 relative group border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed "
-            >
+            <li key={i} className={`${styles?.language_li}`}>
               <Toolbar
                 // addAchivement={() => setNewWorkExperience(i)}
                 deleteExperience={() =>
@@ -72,7 +65,7 @@ const Language = ({ heading, languages, customStyle }: Props) => {
                 // }}
               >
                 <div
-                  className="border-2 border-transparent md:w-full hover:cursor-move"
+                  className={`${styles?.language_div}`}
                   onDragStart={(e) =>
                     e.dataTransfer.setData("text/plain", i.toString())
                   }
@@ -80,7 +73,7 @@ const Language = ({ heading, languages, customStyle }: Props) => {
                   onDrop={(e) => handleDropOthers(e, i, "languages")}
                   draggable
                 >
-                  <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
+                  <h2 className={`${styles?.language_h1}`}>
                     <EditableField
                       value={rec?.language}
                       style={{ width: "100%" }}
@@ -93,10 +86,10 @@ const Language = ({ heading, languages, customStyle }: Props) => {
                       }}
                     />
                   </h2>
-                  <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
+                  <h2 className={`${styles?.language_h2_1}`}>
                     Proficiency:
                     {rec?.proficiency && (
-                      <span className="hover:shadow-md hover:bg-gray-100">
+                      <span className={`${styles?.language_date}`}>
                         <EditableField
                           value={rec.proficiency}
                           onSave={(value: string) => {

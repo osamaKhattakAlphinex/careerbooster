@@ -17,9 +17,15 @@ import Skill from "./resume-sections/skills";
 import Summary from "./resume-sections/summary";
 import Header from "./resume-sections/header";
 import {
+  award,
   certification,
+  education,
+  interest,
+  language,
   publicationStyles,
+  reference,
   template_2,
+  training,
 } from "@/helpers/templateStylesObj";
 import Project from "./resume-sections/project";
 
@@ -141,6 +147,7 @@ const ResumeTemplate2 = () => {
           <Training
             heading={resume.headings.trainings}
             trainings={resume.trainings}
+            styles={training}
           />
         )}
       </div>
@@ -158,7 +165,11 @@ const ResumeTemplate2 = () => {
       {/* Awards */}
       <div className="w-full">
         {resume?.awards && resume?.awards.length > 0 && (
-          <Award heading={resume.headings.awards} awards={resume.awards} />
+          <Award
+            heading={resume.headings.awards}
+            awards={resume.awards}
+            styles={award}
+          />
         )}
       </div>
 
@@ -168,6 +179,7 @@ const ResumeTemplate2 = () => {
           <Interest
             heading={resume.headings.interests}
             interests={resume.interests}
+            styles={interest}
           />
         )}
       </div>
@@ -178,6 +190,7 @@ const ResumeTemplate2 = () => {
           <Reference
             heading={resume.headings.references}
             references={resume.references}
+            styles={reference}
           />
         )}
       </div>
@@ -188,6 +201,7 @@ const ResumeTemplate2 = () => {
           <Language
             heading={resume.headings.languages}
             languages={resume.languages}
+            styles={language}
           />
         )}
       </div>
@@ -198,6 +212,7 @@ const ResumeTemplate2 = () => {
           <Education
             heading={resume.headings.education}
             educations={resume.education}
+            styles={education}
           />
         )}
       </div>
