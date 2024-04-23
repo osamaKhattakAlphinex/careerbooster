@@ -10,9 +10,10 @@ import React from "react";
 type Props = {
   heading: any;
   references: any;
+  customStyle?: any;
 };
 
-const Reference = ({ heading, references }: Props) => {
+const Reference = ({ heading, references, customStyle }: Props) => {
   const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
@@ -20,7 +21,11 @@ const Reference = ({ heading, references }: Props) => {
   return (
     <>
       <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-      <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
+      <h3
+        className={`flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500 ${
+          customStyle.centeredHeading ? "justify-center" : ""
+        }`}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"

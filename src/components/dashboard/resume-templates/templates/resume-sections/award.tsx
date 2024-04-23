@@ -13,9 +13,10 @@ import React, { useState } from "react";
 type Props = {
   heading: any;
   awards: any;
+  customStyle?: any;
 };
 
-const Award = ({ heading, awards }: Props) => {
+const Award = ({ heading, awards, customStyle }: Props) => {
   const [rewardIndex, setRewardIndex] = useState<number>();
   const { handlers } = useHandler();
   const [newReward, setNewReward] = useState("");
@@ -32,7 +33,11 @@ const Award = ({ heading, awards }: Props) => {
   return (
     <>
       <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-      <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
+      <h3
+        className={`flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500 ${
+          customStyle.centeredHeading ? "justify-center" : ""
+        }`}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"

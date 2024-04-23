@@ -12,8 +12,9 @@ import React, { useState } from "react";
 type Props = {
   heading: any;
   interests: any;
+  customStyle?: any;
 };
-const Interest = ({ heading, interests }: Props) => {
+const Interest = ({ heading, interests, customStyle }: Props) => {
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
@@ -29,7 +30,11 @@ const Interest = ({ heading, interests }: Props) => {
   return (
     <>
       <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-      <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
+      <h3
+        className={`flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500 ${
+          customStyle.centeredHeading ? "justify-center" : ""
+        }`}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
