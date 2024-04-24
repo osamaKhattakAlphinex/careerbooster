@@ -14,9 +14,15 @@ type Props = {
   heading: any;
   certificates: any;
   styles: any;
+  customStyle?: any;
 };
 
-const Certification = ({ heading, certificates, styles }: Props) => {
+const Certification = ({
+  heading,
+  certificates,
+  styles,
+  customStyle,
+}: Props) => {
   const [certificationIndex, setCertificationIndex] = useState<number>();
   const { handlers } = useHandler();
   const [newCertification, setNewCertification] = useState("");
@@ -31,8 +37,16 @@ const Certification = ({ heading, certificates, styles }: Props) => {
 
   return (
     <>
-      <span className={styles?.span1}></span>
-      <h3 className={styles?.certification_h3}>
+      <span
+        className={`${styles?.span1} ${
+          customStyle.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
+      <h3
+        className={`${styles?.certification_h3} ${
+          customStyle.centeredHeading ? "justify-center" : ""
+        }`}
+      >
         <svg
           width="20px"
           height="20px"
@@ -65,7 +79,11 @@ const Certification = ({ heading, certificates, styles }: Props) => {
           }}
         />
       </h3>
-      <span className={styles?.span2}></span>
+      <span
+        className={`${styles?.span2} ${
+          customStyle.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
       {certificates.map((rec: any, i: number) => {
         return (
           <Toolbar

@@ -11,17 +11,26 @@ type Props = {
   heading: any;
   references: any;
   styles: any;
+  customStyle?: any;
 };
 
-const Reference = ({ heading, references, styles }: Props) => {
+const Reference = ({ heading, references, styles, customStyle }: Props) => {
   const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
 
   return (
     <>
-      <span className={`${styles?.span1}`}></span>
-      <h3 className={`${styles?.reference_h3}`}>
+      <span
+        className={`${styles?.span1} ${
+          customStyle.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
+      <h3
+        className={`${styles?.reference_h3} ${
+          customStyle.centeredHeading ? "justify-center" : ""
+        }`}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -47,7 +56,11 @@ const Reference = ({ heading, references, styles }: Props) => {
           }}
         />
       </h3>
-      <span className={`${styles?.span2}`}></span>
+      <span
+        className={`${styles?.span2}${
+          customStyle.borderTopBottom ? "!block" : "hidden"
+        }`}
+      ></span>
       <ul className={`${styles?.reference_ul}`}>
         {references.map((rec: any, i: number) => {
           return (
