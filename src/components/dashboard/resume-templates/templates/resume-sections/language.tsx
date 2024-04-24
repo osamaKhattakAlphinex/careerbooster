@@ -11,17 +11,26 @@ type Props = {
   heading: any;
   languages: any;
   styles: any;
+  customStyle?: any;
 };
 
-const Language = ({ heading, languages, styles }: Props) => {
+const Language = ({ heading, languages, styles, customStyle }: Props) => {
   const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
 
   return (
     <>
-      <span className={`${styles?.span1}`}></span>
-      <h3 className={`${styles?.language_h3}`}>
+      <span
+        className={`${styles?.span1}${
+          customStyle.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
+      <h3
+        className={`${styles?.language_h3}${
+          customStyle.centeredHeading ? "justify-center" : ""
+        }`}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -48,7 +57,11 @@ const Language = ({ heading, languages, styles }: Props) => {
           }}
         />
       </h3>
-      <span className={`${styles?.span2}`}></span>
+      <span
+        className={`${styles?.span2} ${
+          customStyle.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
       <ul className={`${styles?.language_ul}`}>
         {languages.map((rec: any, i: number) => {
           return (

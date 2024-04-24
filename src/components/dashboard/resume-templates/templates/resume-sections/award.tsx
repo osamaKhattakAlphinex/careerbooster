@@ -14,9 +14,10 @@ type Props = {
   heading: any;
   awards: any;
   styles: any;
+  customStyle?: any;
 };
 
-const Award = ({ heading, awards, styles }: Props) => {
+const Award = ({ heading, awards, styles, customStyle }: Props) => {
   const [rewardIndex, setRewardIndex] = useState<number>();
   const { handlers } = useHandler();
   const [newReward, setNewReward] = useState("");
@@ -32,8 +33,16 @@ const Award = ({ heading, awards, styles }: Props) => {
 
   return (
     <>
-      <span className={`${styles?.span1}`}></span>
-      <h3 className={`${styles?.award_h3}`}>
+      <span
+        className={`${styles?.span1} ${
+          customStyle.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
+      <h3
+        className={`${styles?.award_h3} ${
+          customStyle.centeredHeading ? "justify-center" : ""
+        }`}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -59,7 +68,11 @@ const Award = ({ heading, awards, styles }: Props) => {
           }}
         />
       </h3>
-      <span className={`${styles?.span2}`}></span>
+      <span
+        className={`${styles?.span2} ${
+          customStyle.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
       {awards.map((rec: any, i: number) => {
         return (
           <Toolbar

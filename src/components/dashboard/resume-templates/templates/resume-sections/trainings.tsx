@@ -14,8 +14,9 @@ type Props = {
   heading: any;
   trainings: any;
   styles: any;
+  customStyle?: any;
 };
-const Training = ({ heading, trainings, styles }: Props) => {
+const Training = ({ heading, trainings, styles, customStyle }: Props) => {
   const [trainingIndex, setTrainingIndex] = useState<number>();
   const { handlers } = useHandler();
   const [newTraining, setNewTraining] = useState("");
@@ -31,9 +32,17 @@ const Training = ({ heading, trainings, styles }: Props) => {
 
   return (
     <>
-      <span className={`${styles?.span1}`}></span>
+      <span
+        className={`${styles?.span1} ${
+          customStyle.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
 
-      <h3 className={`${styles?.training_h3}`}>
+      <h3
+        className={`${styles?.training_h3} ${
+          customStyle.centeredHeading ? "justify-center" : ""
+        }`}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -59,7 +68,11 @@ const Training = ({ heading, trainings, styles }: Props) => {
           }}
         />
       </h3>
-      <span className={`${styles?.span2}`}></span>
+      <span
+        className={`${styles?.span2} ${
+          customStyle.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
       {trainings.map((rec: any, i: number) => {
         return (
           <Toolbar

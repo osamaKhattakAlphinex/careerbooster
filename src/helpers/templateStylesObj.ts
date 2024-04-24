@@ -1,72 +1,87 @@
 import { sparkleIcon } from "./iconsProvider";
 
-  const template_2 =  {
-    experienceHeading_temp_2 : "experienceHeading_temp_2",
-    achievement_div: "achievement_div",
-    achievement_h2: "achievement_h2",
-    achievement_h1: "achievement_h1",
-    achievement_save_btn: "achievement-save-btn",
-    achievement_delete_btn: "achievement-delete-btn",
-}
+const template_2 = {
+  experienceHeading_temp_2: "experienceHeading_temp_2",
+  achievement_div: "achievement_div",
+  achievement_h2: "achievement_h2",
+  achievement_h1: "achievement_h1",
+  achievement_save_btn: "achievement-save-btn",
+  achievement_delete_btn: "achievement-delete-btn",
+};
 
 // Header Styles
 
 const header = {
-  full_Name_Style:"fullName_temp_2",
-  jobTitle_temp_2:"jobTitle_temp_2"
-}
+  full_Name_Style: "fullName_temp_2",
+  jobTitle_temp_2: "jobTitle_temp_2",
+};
 
 const conditionStyleHeader = {
-  line : false
-}
+  line: false,
+};
 
 //contact styles
 
 const contact = {
   contact_ul: "contact_ul",
-  contact_li : "contact_li",
-}
+  contact_li: "contact_li",
+};
+export const contact_temp_8 = {
+  contact_8_ul: "contact_8_ul",
+  contact_8_li: "contact_8_li",
+};
+export const skill_temp_8 = {
+  skill_8_ul: "skill_8_ul",
+  skill_8_li: "skill_8_li",
+  skill_8_heading: "skill_8_heading",
+  skill_8_New: "skill_New",
+};
+export const templates = {
+  template_2: "template_2",
+  template_3: "template_3",
+  template_8: "template_8",
+  template_9: "template_9",
+};
 
 //summary styles
 
 const summary = {
   summary_heading: "summary_heading",
-  summary_text :"summary_text",
-  span1 : "span1",
+  summary_text: "summary_text",
+  span1: "span1",
   span2: "span2",
-  
-}
+};
 
 //skills styles
 
 const skill = {
-  skill_heading :"skill_heading",
-  skill_ul:"skill_ul",
-  skill_li : "skill_li",
+  skill_heading: "skill_heading",
+  skill_ul: "skill_ul",
+  skill_li: "skill_li",
   skill_New: "skill_New",
   span1: "span1",
-  span2: "span2", 
-  skill_input: "skill_input"
-}
+  span2: "span2",
+  skill_input: "skill_input",
+};
 
 //publication styles
 
 const publicationStyles = {
-    publication_h3: "publication_h3",
-    publication_div: "publication_div",
-    publication_h2: "publication_h2",
-    publication_h2_1 : "publication_h2_1",	
-    publication_new_input: "publication_new_input",
-    publication_delete: "publication_delete",
-    publication_delete1: "publication_delete1 ",
-    publication_line: "publication_line",
-    publication_date: "publication_date",
-    span1 : "span1",
-    span2: "span2",
-    publication_ul: "publication_ul",
-    publication_li: "publication_li",
-    publication_div_input : "publication_div_input",	
-}
+  publication_h3: "publication_h3",
+  publication_div: "publication_div",
+  publication_h2: "publication_h2",
+  publication_h2_1: "publication_h2_1",
+  publication_new_input: "publication_new_input",
+  publication_delete: "publication_delete",
+  publication_delete1: "publication_delete1 ",
+  publication_line: "publication_line",
+  publication_date: "publication_date",
+  span1: "span1",
+  span2: "span2",
+  publication_ul: "publication_ul",
+  publication_li: "publication_li",
+  publication_div_input: "publication_div_input",
+};
 
 //certification styles
 
@@ -104,15 +119,15 @@ const training = {
   training_div_input: "publication_div_input",
   training_new_input: "publication_new_input",
   span1: "span1",
-  span2 : "span2"
-}
+  span2: "span2",
+};
 
 //interest styles
 
-const interest = { 
+const interest = {
   interest_h3: "publication_h3",
   interest_div: "publication_div",
-  interest_h1: "achievement_h1", 
+  interest_h1: "achievement_h1",
   interest_h2: "publication_h2",
   interest_h2_1: "publication_h2_1",
   interest_date: "publication_date",
@@ -125,7 +140,7 @@ const interest = {
   interest_new_input: "publication_new_input",
   span1: "span1",
   span2: "span2",
-}
+};
 
 //award styles
 
@@ -133,26 +148,26 @@ const award = {
   award_h3: "publication_h3",
   award_div: "publication_div",
   award_h1: "achievement_h1",
-  award_h2: "publication_h2", 
+  award_h2: "publication_h2",
   award_h2_1: "publication_h2_1",
   award_date: "publication_date",
-  award_ul: "publication_ul", 
-  award_li: "publication_li", 
-  award_line: "publication_line", 
+  award_ul: "publication_ul",
+  award_li: "publication_li",
+  award_line: "publication_line",
   award_delete1: "publication_delete1",
   award_delete: "publication_delete",
   award_div_input: "publication_div_input",
   award_new_input: "publication_new_input",
   span1: "span1",
-   span2 : "span2"	
-}
+  span2: "span2",
+};
 
 // reference styles
 
 const reference = {
   reference_h3: "publication_h3",
   reference_ul: "reference_ul",
-  reference_li : "reference_li",
+  reference_li: "reference_li",
   reference_div: "publication_div",
   reference_h1: "achievement_h1",
   reference_h2: "publication_h2",
@@ -164,8 +179,8 @@ const reference = {
   reference_div_input: "publication_div_input",
   reference_new_input: "publication_new_input",
   span1: "span1",
-   span2 : "span2"
-} 
+  span2: "span2",
+};
 
 //language styles
 
@@ -179,16 +194,29 @@ const language = {
   language_date: "publication_date",
   span1: "span1",
   span2: "span2",
-}
+};
 
 // education style
 
 const education = {
   education_h3: "publication_h3",
   span1: "span1",
-   span2 : "span2"
+  span2: "span2",
+};
 
-}
-
-
-export {template_2,publicationStyles,certification,training,interest,award,reference,language,education,summary,skill,conditionStyleHeader,header,contact}
+export {
+  template_2,
+  publicationStyles,
+  certification,
+  training,
+  interest,
+  award,
+  reference,
+  language,
+  education,
+  summary,
+  skill,
+  conditionStyleHeader,
+  header,
+  contact,
+};

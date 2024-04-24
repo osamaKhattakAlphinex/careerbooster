@@ -13,8 +13,9 @@ type Props = {
   heading: any;
   interests: any;
   styles: any;
+  customStyle?: any;
 };
-const Interest = ({ heading, interests, styles }: Props) => {
+const Interest = ({ heading, interests, styles, customStyle }: Props) => {
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
@@ -29,8 +30,16 @@ const Interest = ({ heading, interests, styles }: Props) => {
 
   return (
     <>
-      <span className={`${styles?.span1}`}></span>
-      <h3 className={`${styles?.interest_h3}`}>
+      <span
+        className={`${styles?.span1} ${
+          customStyle.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
+      <h3
+        className={`${styles?.interest_h3}${
+          customStyle.centeredHeading ? "justify-center" : ""
+        }`}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -52,7 +61,11 @@ const Interest = ({ heading, interests, styles }: Props) => {
           }}
         />
       </h3>
-      <span className={`${styles?.span2}`}></span>
+      <span
+        className={`${styles?.span2} ${
+          customStyle.borderTopBottom ? "!block" : "hidden"
+        }`}
+      ></span>
       {interests.map((rec: any, i: number) => {
         return (
           <Toolbar
