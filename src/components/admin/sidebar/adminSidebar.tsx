@@ -20,10 +20,10 @@ const AdminSidebar = () => {
   });
 
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <div className="p-4 text-center">
         <h1 className="text-2xl text-white">CareerBooster.AI</h1>
-        <div className="flex flex-row items-center justify-center gap-2">
+        <div className="flex flex-row items-center justify-center gap-2 mt-3">
           <Link href="/">
             <div className="grid w-8 h-8 bg-indigo-700 rounded-md shadow-md place-content-center">
               <span className="text-white">
@@ -71,7 +71,7 @@ const AdminSidebar = () => {
         </div>
       </div>
       {/* Sidebar */}
-      <ul className="flex flex-col p-0">
+      <ul className="flex flex-col h-full p-0 pb-4 overflow-y-scroll">
         <li className="p-4 mb-1">
           <Link
             href="/admin"

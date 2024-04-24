@@ -122,7 +122,9 @@ export async function POST(req: any) {
             };
             await makeTrainedBotEntry(entry);
           }
-        } catch (err) {}
+        } catch (err) {
+          console.log(err);
+        }
       },
     });
     // Respond with the stream
