@@ -18,7 +18,9 @@ const header = {
 
 const conditionStyleHeader = {
   line: false,
-};
+  span1: false,
+  
+}
 
 //contact styles
 
@@ -83,6 +85,9 @@ const publicationStyles = {
   publication_div_input: "publication_div_input",
 };
 
+const conditionStylePublication = {
+  span1_2 : false
+}
 //certification styles
 
 const certification = {
@@ -204,19 +209,7 @@ const education = {
   span2: "span2",
 };
 
-export {
-  template_2,
-  publicationStyles,
-  certification,
-  training,
-  interest,
-  award,
-  reference,
-  language,
-  education,
-  summary,
-  skill,
-  conditionStyleHeader,
-  header,
-  contact,
-};
+
+
+
+export {template_2,publicationStyles,conditionStylePublication,certification,training,interest,award,reference,language,education,summary,skill,header,conditionStyleHeader,contact}
