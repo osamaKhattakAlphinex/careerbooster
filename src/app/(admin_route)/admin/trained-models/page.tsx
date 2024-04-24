@@ -1,12 +1,9 @@
 "use client";
 import DataTable from "@/components/admin/DataTable";
-import StatusIndicator from "@/components/admin/fineTuning/statusIndicator";
 import { useAppContext } from "@/context/AppContext";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
-import { leftArrowIcon } from "@/helpers/iconsProvider";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type TrainedModelType = {
@@ -21,7 +18,7 @@ const TrainedModel = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const columnHelper = createColumnHelper<TrainedModelType>();
-  // const { abortController } = useAppContext();
+  const { abortController } = useAppContext();
 
   const columns = [
     columnHelper.accessor("dataset", {
@@ -46,13 +43,10 @@ const TrainedModel = () => {
   const fetchmodels = async () => {
     setLoading(true);
 
-    // const signal = abortController.signal;
+    const signal = abortController.signal;
     if (!loading) {
       axios
-        .get(
-          "/api/trainBot/trainedModel"
-          // { signal }
-        )
+        .get("/api/trainBot/trainedModel", { signal: signal })
         .then(async (res: any) => {
           if (res.data.success) {
             const result = await res.data;
@@ -71,7 +65,7 @@ const TrainedModel = () => {
   useEffect(() => {
     fetchmodels();
     return () => {
-      // abortController.abort();
+      abortController.abort();
     };
   }, []);
 

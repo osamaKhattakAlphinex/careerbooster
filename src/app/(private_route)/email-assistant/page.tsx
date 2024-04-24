@@ -52,6 +52,9 @@ const PersonalizedEmailBot = () => {
     useState<boolean>(false);
   const [secondFollowUpLoading, setSecondFollowUpLoading] =
     useState<boolean>(false);
+
+  const { abortController } = useAppContext();
+
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
@@ -163,6 +166,12 @@ const PersonalizedEmailBot = () => {
   }, [tourBotRef]);
 
   useEffect(() => {
+    return () => {
+      abortController.abort();
+    };
+  }, []);
+
+  useEffect(() => {
     if (outOfCredits) {
       setTimeout(() => {
         tourBotRef?.current?.click();
@@ -222,6 +231,8 @@ const PersonalizedEmailBot = () => {
   const handleGenerate = async (emailType: string = "email") => {
     // await getUserDataIfNotExists();
 
+    const signal = abortController.signal;
+
     if (emailType === "email") {
       if (session?.user?.email && aiInputUserData) {
         setEmailLoading(true);
@@ -260,6 +271,7 @@ const PersonalizedEmailBot = () => {
         fetch("/api/emailBot/emailGenerator", {
           method: "POST",
           body: JSON.stringify(obj),
+          signal: signal,
         })
           .then(async (resp: any) => {
             if (resp.ok) {
@@ -323,6 +335,8 @@ const PersonalizedEmailBot = () => {
         }, 3000);
       }
     } else if (emailType === "firstFollowUp") {
+      const signal = abortController.signal;
+
       if (session?.user?.email && aiInputUserData) {
         setFirstFollowUpLoading(true);
         setFirstShow(true);
@@ -345,6 +359,7 @@ const PersonalizedEmailBot = () => {
         fetch("/api/emailBot/emailGenerator", {
           method: "POST",
           body: JSON.stringify(obj),
+          signal: signal,
         })
           .then(async (resp: any) => {
             if (resp.ok) {
@@ -415,6 +430,8 @@ const PersonalizedEmailBot = () => {
         }, 3000);
       }
     } else if (emailType === "secondFollowUp") {
+      const signal = abortController.signal;
+
       if (session?.user?.email && aiInputUserData) {
         setSecondFollowUpLoading(true);
         setSecondShow(true);
@@ -438,6 +455,7 @@ const PersonalizedEmailBot = () => {
         fetch("/api/emailBot/emailGenerator", {
           method: "POST",
           body: JSON.stringify(obj),
+          signal: signal,
         })
           .then(async (resp: any) => {
             if (resp.ok) {

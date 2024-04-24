@@ -31,6 +31,7 @@ const SubHeadlineGenerator = () => {
   const { setAvailableCredits } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
   const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
+  const { abortController } = useAppContext();
 
   const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
   const copyHeadline = async (text: string) => {
@@ -50,7 +51,7 @@ const SubHeadlineGenerator = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const linkedinHeadline = useSelector((state: any) => state.linkedinHeadline);
-  const { tourBotRef,availableCreditsRef } = useTourContext();
+  const { tourBotRef, availableCreditsRef } = useTourContext();
 
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
@@ -97,6 +98,8 @@ const SubHeadlineGenerator = () => {
 
   const handleGenerate = async () => {
     setStreamedData("");
+    const signal = abortController.signal;
+
     // await getUserDataIfNotExists();
     //change condition
     if (session?.user?.email && aiInputUserData) {
@@ -115,6 +118,7 @@ const SubHeadlineGenerator = () => {
       fetch("/api/linkedInBots/headlineGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
+        signal: signal,
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -148,11 +152,11 @@ const SubHeadlineGenerator = () => {
             );
           } else {
             const res = await resp.json();
-            if(resp.status === 429){
+            if (resp.status === 429) {
               setStreamedData(res.result + "! You ran out of Credits");
-              showErrorToast("You ran out of Credits!")
+              showErrorToast("You ran out of Credits!");
               setOutOfCredits(true);
-            }else{
+            } else {
               showErrorToast("Failed to generate linkedin Headline");
             }
           }
@@ -176,6 +180,12 @@ const SubHeadlineGenerator = () => {
   const handleClick = () => {
     setIsEditing((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    return () => {
+      abortController.abort();
+    };
+  }, []);
 
   const handleSave = async () => {
     let _linkedinHeadlineText = "";
@@ -238,8 +248,6 @@ const SubHeadlineGenerator = () => {
       }
     }
   }, [isEditing]);
-
-  
 
   // when page (session) loads, fetch user data if not exists
   useEffect(() => {
@@ -506,7 +514,9 @@ const SubHeadlineGenerator = () => {
           Credit Limit Reached !
         </div>
       )}
-      {outOfCredits &&  <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits}/>}
+      {outOfCredits && (
+        <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits} />
+      )}
     </>
   );
 };

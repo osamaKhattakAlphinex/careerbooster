@@ -292,6 +292,9 @@ export default function CoverLetterPage() {
         skills: userData?.skills,
       });
     }
+    return () => {
+      abortController.abort();
+    };
   }, [userData]);
 
   useEffect(() => {

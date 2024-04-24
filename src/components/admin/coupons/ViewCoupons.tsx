@@ -13,6 +13,7 @@ import UpdateCoupon from "./UpdateCoupon";
 import ConfirmationModal from "@/components/admin/ConfirmationModal";
 import { createColumnHelper } from "@tanstack/react-table";
 import DataTable, { TableAction } from "@/components/admin/DataTable";
+import { useAppContext } from "@/context/AppContext";
 
 type Coupon = {
   // id: string;
@@ -36,6 +37,7 @@ type Coupon = {
 };
 
 const ViewCoupons = ({}) => {
+  const { abortController } = useAppContext();
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const confirmationModalRef: React.MutableRefObject<any> = useRef(null);
@@ -151,9 +153,11 @@ const ViewCoupons = ({}) => {
 
   const getCoupons = async () => {
     setLoading(true);
+    const signal = abortController.signal;
+
     if (!loading) {
       try {
-        let response: any = await axios.get("/api/coupons");
+        let response: any = await axios.get("/api/coupons", { signal: signal });
         if (response?.data.success) {
           setCoupons(response.data.result);
         }
@@ -165,6 +169,10 @@ const ViewCoupons = ({}) => {
   };
   useEffect(() => {
     getCoupons();
+
+    return () => {
+      abortController.abort();
+    };
   }, []);
   return (
     <>
@@ -202,4 +210,3 @@ const ViewCoupons = ({}) => {
 };
 
 export default ViewCoupons;
-

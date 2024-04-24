@@ -32,8 +32,10 @@ const SubJDGenerator = () => {
   const { setAvailableCredits } = useAppContext();
   const [existingJDId, setExistingJDId] = useState("");
   const [isEditing, setIsEditing] = useState({ isEdit: false, editIndex: -1 });
-  const { tourBotRef,availableCreditsRef } = useTourContext();
+  const { tourBotRef, availableCreditsRef } = useTourContext();
   const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
+
+  const { abortController } = useAppContext();
 
   const [generatedWorkExperience, setGeneratedWorkExperience] = useState<
     string[]
@@ -246,6 +248,8 @@ const SubJDGenerator = () => {
 
   const handleGenerate = async () => {
     setGeneratedWorkExperience([]);
+    const signal = abortController.signal;
+
     await getUserDataIfNotExists();
     //change condition
     if (session?.user?.email && userData.isFetched) {
@@ -291,6 +295,7 @@ const SubJDGenerator = () => {
         const res: any = await fetch("/api/linkedInBots/jdGeneratorSingle", {
           method: "POST",
           body: JSON.stringify(obj),
+          signal: signal,
         });
 
         if (res.ok) {
@@ -313,11 +318,11 @@ const SubJDGenerator = () => {
             showSuccessToast("Job Description generated successfully");
           }
         } else {
-          if(res.status === 429){
+          if (res.status === 429) {
             setStreamedData(" You ran out of Credits");
-            showErrorToast("You ran out of Credits!")
+            showErrorToast("You ran out of Credits!");
             setOutOfCredits(true);
-          }else{
+          } else {
             showErrorToast("Failed to generate linkedin Headline");
           }
           setMsgLoading(false);
@@ -387,6 +392,12 @@ const SubJDGenerator = () => {
       }, 3000);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      abortController.abort();
+    };
+  }, []);
 
   const saveToDB = async (obj: any, text: any) => {
     const id = obj?.jobDescriptionId;
@@ -597,8 +608,9 @@ const SubJDGenerator = () => {
             Credit Limit Reached !
           </div>
         )}
-      {outOfCredits &&  <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits}/>}
-
+        {outOfCredits && (
+          <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits} />
+        )}
       </>
     </>
   );

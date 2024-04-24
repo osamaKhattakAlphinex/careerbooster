@@ -22,10 +22,10 @@ const AdminSidebar = () => {
   return (
     <div className="w-full">
       <div className="p-4 text-center">
-        <h1 className="text-2xl  text-white">CareerBooster.AI</h1>
-        <div className="flex flex-row justify-center items-center gap-2">
+        <h1 className="text-2xl text-white">CareerBooster.AI</h1>
+        <div className="flex flex-row items-center justify-center gap-2">
           <Link href="/">
-            <div className="h-8 w-8 bg-indigo-700 rounded-md shadow-md grid place-content-center">
+            <div className="grid w-8 h-8 bg-indigo-700 rounded-md shadow-md place-content-center">
               <span className="text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -44,11 +44,11 @@ const AdminSidebar = () => {
               </span>
             </div>
           </Link>
-          <div className="h-8 w-8 bg-green-700 rounded-md shadow-md grid place-content-center">
+          <div className="grid w-8 h-8 bg-green-700 rounded-md shadow-md place-content-center">
             {/* <ThemeToggler /> */}
             <ThemeChanger />
           </div>
-          <div className="h-8 w-8 bg-rose-700 rounded-md shadow-md grid place-content-center">
+          <div className="grid w-8 h-8 rounded-md shadow-md bg-rose-700 place-content-center">
             <button onClick={() => signOut()}>
               <span className="text-white">
                 <svg
@@ -71,13 +71,13 @@ const AdminSidebar = () => {
         </div>
       </div>
       {/* Sidebar */}
-      <ul className="flex-col flex p-0">
-        <li className="mb-1 p-4">
+      <ul className="flex flex-col p-0">
+        <li className="p-4 mb-1">
           <Link
             href="/admin"
-            className="text-white no-underline hover:no-underline  hover:text-white/80"
+            className="text-white no-underline hover:no-underline hover:text-white/80"
           >
-            <span className="cursor-pointer text-white flex flex-row gap-2 justify-start items-center">
+            <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -104,7 +104,7 @@ const AdminSidebar = () => {
 
         {/* Training Model */}
 
-        <li className="mb-1 p-4 ">
+        <li className="p-4 mb-1 ">
           <span
             onClick={() =>
               setSideBarToggler({
@@ -134,7 +134,7 @@ const AdminSidebar = () => {
                 />
               </svg>
             ) : (
-              <span className=" self-end">
+              <span className="self-end ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -160,7 +160,7 @@ const AdminSidebar = () => {
             <li className="px-5 py-2">
               <Link
                 href="/admin/trained-models"
-                className=" text-white no-underline hover:no-underline  hover:text-white/80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 Trained Models
               </Link>
@@ -168,7 +168,7 @@ const AdminSidebar = () => {
             <li className="px-5 py-2">
               <Link
                 href="/admin/train-bot"
-                className=" text-white no-underline hover:no-underline  hover:text-white/80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 Start Training Model (new)
               </Link>
@@ -176,7 +176,7 @@ const AdminSidebar = () => {
             <li className="px-5 py-2">
               <Link
                 href="/admin/fine-tuning"
-                className=" text-white no-underline hover:no-underline  hover:text-white/80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 Fine-Tuning Models
               </Link>
@@ -185,7 +185,7 @@ const AdminSidebar = () => {
         </li>
 
         {/* Prompts */}
-        <li className="mb-1 p-4">
+        <li className="p-4 mb-1">
           <span
             className="flex flex-row items-center justify-between cursor-pointer text-white/80"
             onClick={() =>
@@ -230,7 +230,7 @@ const AdminSidebar = () => {
                 />
               </svg>
             ) : (
-              <span className=" self-end">
+              <span className="self-end ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -256,7 +256,7 @@ const AdminSidebar = () => {
             <li className="px-5 py-2">
               <Link
                 href="/linkedin-prompts-configuration"
-                className=" text-white no-underline hover:no-underline  hover:text-white/80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 linkedIn
               </Link>
@@ -264,7 +264,7 @@ const AdminSidebar = () => {
             {/* <li className="px-5 py-2">
               <Link
                 href="/linkedin-tools-prompts-configuration"
-                className=" text-white no-underline hover:no-underline  hover:text-white/80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 linkedIn Tools
               </Link>
@@ -272,7 +272,7 @@ const AdminSidebar = () => {
             <li className="px-5 py-2">
               <Link
                 href="/resume-prompts-configuration"
-                className=" text-white no-underline hover:no-underline  hover:text-white/80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 Resume
               </Link>
@@ -280,7 +280,7 @@ const AdminSidebar = () => {
             <li className="px-5 py-2">
               <Link
                 href="/review-resume-configuration"
-                className=" text-white no-underline hover:no-underline  hover:text-white/80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 Review Resume
               </Link>
@@ -288,7 +288,7 @@ const AdminSidebar = () => {
             <li className="px-5 py-2">
               <Link
                 href="/cover-letter-prompt-configuration"
-                className=" text-white no-underline hover:no-underline  hover:text-white/80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 Cover Letter
               </Link>
@@ -296,7 +296,7 @@ const AdminSidebar = () => {
             <li className="px-5 py-2">
               <Link
                 href="/biography-prompts-configuration"
-                className=" text-white no-underline hover:no-underline  hover:text-white/80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 Biography
               </Link>
@@ -304,7 +304,7 @@ const AdminSidebar = () => {
             <li className="px-5 py-2">
               <Link
                 href="/consulting-bid-prompt-configuration"
-                className=" text-white no-underline hover:no-underline  hover:text-white/80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 Consulting Bids
               </Link>
@@ -312,7 +312,7 @@ const AdminSidebar = () => {
             <li className="px-5 py-2">
               <Link
                 href="/email-prompt-configuration"
-                className=" text-white no-underline hover:no-underline  hover:text-white/80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 Personalized Emails
               </Link>
@@ -321,7 +321,7 @@ const AdminSidebar = () => {
         </li>
 
         {/* Users */}
-        <li className="mb-1 p-4">
+        <li className="p-4 mb-1">
           <span
             className="flex flex-row items-center justify-between cursor-pointer text-white/80"
             onClick={() =>
@@ -366,7 +366,7 @@ const AdminSidebar = () => {
                 />
               </svg>
             ) : (
-              <span className=" self-end">
+              <span className="self-end ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -392,7 +392,7 @@ const AdminSidebar = () => {
             <li className="px-5 py-2">
               <Link
                 href="/admin/users"
-                className=" text-white no-underline hover:no-underline  hover:text-white/80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 Users
               </Link>
@@ -400,7 +400,7 @@ const AdminSidebar = () => {
             <li className="px-5 py-2">
               <Link
                 href="/admin/leads"
-                className=" text-white no-underline hover:no-underline  hover:text-white/80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 LinkedIn Users (leads)
               </Link>
@@ -409,12 +409,12 @@ const AdminSidebar = () => {
         </li>
 
         {/* Other Menu Items */}
-        <li className="mb-1 p-4">
+        <li className="p-4 mb-1">
           <Link
             href="/admin/user-packages"
-            className="text-white no-underline hover:no-underline  hover:text-white/80"
+            className="text-white no-underline hover:no-underline hover:text-white/80"
           >
-            <span className="cursor-pointer text-white flex flex-row gap-2 justify-start items-center">
+            <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -433,12 +433,12 @@ const AdminSidebar = () => {
             </span>
           </Link>
         </li>
-        <li className="mb-1 p-4">
+        <li className="p-4 mb-1">
           <Link
             href="/admin/credits"
-            className="text-white no-underline hover:no-underline  hover:text-white/80"
+            className="text-white no-underline hover:no-underline hover:text-white/80"
           >
-            <span className="cursor-pointer text-white flex flex-row gap-2 justify-start items-center">
+            <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -458,12 +458,12 @@ const AdminSidebar = () => {
           </Link>
         </li>
 
-        <li className="mb-1 p-4">
+        <li className="p-4 mb-1">
           <Link
             href="/admin/creditPerUsage"
-            className="text-white no-underline hover:no-underline  hover:text-white/80"
+            className="text-white no-underline hover:no-underline hover:text-white/80"
           >
-            <span className="cursor-pointer text-white flex flex-row gap-2 justify-start items-center">
+            <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -482,12 +482,12 @@ const AdminSidebar = () => {
             </span>
           </Link>
         </li>
-        <li className="mb-1 p-4">
+        <li className="p-4 mb-1">
           <Link
             href="/admin/coupons"
-            className="text-white no-underline hover:no-underline  hover:text-white/80"
+            className="text-white no-underline hover:no-underline hover:text-white/80"
           >
-            <span className="cursor-pointer text-white flex flex-row gap-2 justify-start items-center">
+            <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -506,12 +506,12 @@ const AdminSidebar = () => {
             </span>
           </Link>
         </li>
-        <li className="mb-1 p-4">
+        <li className="p-4 mb-1">
           <Link
             href="/admin/notifications"
-            className="text-white no-underline hover:no-underline  hover:text-white/80"
+            className="text-white no-underline hover:no-underline hover:text-white/80"
           >
-            <span className="cursor-pointer text-white flex flex-row gap-2 justify-start items-center">
+            <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -530,12 +530,12 @@ const AdminSidebar = () => {
             </span>
           </Link>
         </li>
-        <li className="mb-1 p-4">
+        <li className="p-4 mb-1">
           <Link
             href="/admin/payments"
-            className="text-white no-underline hover:no-underline  hover:text-white/80"
+            className="text-white no-underline hover:no-underline hover:text-white/80"
           >
-            <span className="cursor-pointer text-white flex flex-row gap-2 justify-start items-center">
+            <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -554,12 +554,12 @@ const AdminSidebar = () => {
             </span>
           </Link>
         </li>
-        <li className="mb-1 p-4">
+        <li className="p-4 mb-1">
           <Link
             href="/admin/contacts"
-            className="text-white no-underline hover:no-underline  hover:text-white/80"
+            className="text-white no-underline hover:no-underline hover:text-white/80"
           >
-            <span className="cursor-pointer text-white flex flex-row gap-2 justify-start items-center">
+            <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -578,12 +578,12 @@ const AdminSidebar = () => {
             </span>
           </Link>
         </li>
-        <li className="mb-1 p-4">
+        <li className="p-4 mb-1">
           <Link
             href="/admin/toolsUsage"
-            className="text-white no-underline hover:no-underline  hover:text-white/80"
+            className="text-white no-underline hover:no-underline hover:text-white/80"
           >
-            <span className="cursor-pointer text-white flex flex-row gap-2 justify-start items-center">
+            <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

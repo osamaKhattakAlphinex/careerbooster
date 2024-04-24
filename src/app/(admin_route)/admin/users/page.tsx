@@ -59,7 +59,7 @@ const UsersPage = () => {
   const [userStats, setUserStats] = useState<any>("total");
   const columnHelper = createColumnHelper<User>();
 
-  // const { abortController } = useAppContext();
+  const { abortController } = useAppContext();
 
   const creditsUpdationModelRef: React.MutableRefObject<any> = useRef(null);
 
@@ -370,9 +370,13 @@ const UsersPage = () => {
   };
   const getUserDeatils = () => {
     setshowTableLoader(true);
+    const signal = abortController.signal;
+
     setLoading(true);
     if (!loading) {
-      fetch(`/api/users?limit=${limitOfUser}&page=${currentPage}`)
+      fetch(`/api/users?limit=${limitOfUser}&page=${currentPage}`, {
+        signal: signal,
+      })
         .then(async (resp) => {
           const res = await resp.json();
           setLoadingId("");
@@ -416,6 +420,9 @@ const UsersPage = () => {
     getAllPackages();
     getUserDeatils();
     getUsersCount();
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
   useEffect(() => {
