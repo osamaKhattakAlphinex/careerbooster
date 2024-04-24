@@ -20,11 +20,11 @@ const GenerateResume = ({ getConsent }: Props) => {
       value: "resume-basic",
     },
     {
-      labelText: "Generate For Job Title",
+      labelText: "Generate for Job Title",
       value: "resume-job-title",
     },
     {
-      labelText: "Generate For Job Description",
+      labelText: "Generate for a Specific Job",
       value: "resume-job-description",
     },
   ];
@@ -153,7 +153,7 @@ const GenerateResume = ({ getConsent }: Props) => {
           <div className="flex flex-col items-start justify-center gap-2">
             {radiosResumeType.map(
               ({ labelText, value }: { labelText: string; value: string }) => (
-                <label className="text-sm" key={value}>
+                <label className="text-sm cursor-pointer" key={value}>
                   <input
                     type="radio"
                     name="resume-type"
