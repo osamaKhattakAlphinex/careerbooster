@@ -22,6 +22,7 @@ import DataTable, {
 import SlidingPanel from "@/components/admin/slidingPanel";
 import useSWR from "swr";
 import { url } from "inspector";
+import { useAppContext } from "@/context/AppContext";
 
 const activeCSS =
   "p-2 text-blue-600 bg-gray-100  active dark:bg-gray-800 dark:text-blue-500";
@@ -32,7 +33,7 @@ const Review = ({ rec }: any) => {
   return (
     <Link
       href={`/admin/train-bot/${rec._id}`}
-      className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
+      className="px-3 py-2 text-xs font-medium text-center text-white no-underline bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     >
       {eyeIcon}
     </Link>
@@ -45,6 +46,7 @@ const TrainRegistrationBotAdminPage = () => {
   const searchParams = useSearchParams();
   const [totalPages, setTotalPages] = useState(0);
   const [startingPage, setStartingPage] = useState(1);
+  const { abortController } = useAppContext();
 
   const [limitOfRecords, setLimitOfRecords] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
@@ -66,6 +68,8 @@ const TrainRegistrationBotAdminPage = () => {
   const fetchRecords = async () => {
     setLoading(true);
 
+    const signal = abortController.signal;
+
     if (!loading) {
       axios
         .get(`/api/trainBot?limit=${limitOfRecords}&page=${currentPage}`, {
@@ -74,6 +78,7 @@ const TrainRegistrationBotAdminPage = () => {
             type: showRecordsType,
             dataType: dataType,
           },
+          signal: signal,
         })
         .then((res: any) => {
           if (res.data.success) {
@@ -109,19 +114,19 @@ const TrainRegistrationBotAdminPage = () => {
 
         if (status === "pending") {
           return (
-            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+            <span className="inline-flex px-2 text-xs font-semibold leading-5 text-yellow-800 bg-yellow-100 rounded-full">
               Pending
             </span>
           );
         } else if (status === "reviewed") {
           return (
-            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+            <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
               Reviewed
             </span>
           );
         } else if (status === "trained") {
           return (
-            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+            <span className="inline-flex px-2 text-xs font-semibold leading-5 text-blue-800 bg-blue-100 rounded-full">
               Trained
             </span>
           );
@@ -328,7 +333,6 @@ const TrainRegistrationBotAdminPage = () => {
       setLoading(true);
 
       try {
-
         axios
           .post("/api/trainBot/bulkDelete", { dataSelection: ids })
           .then((res: any) => {
@@ -468,20 +472,20 @@ const TrainRegistrationBotAdminPage = () => {
     <>
       <SlidingPanel ref={slidingPanelRef} refresh={fetchRecords} />
 
-      <div className="flex flex-col justify-start items-start">
-        <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+      <div className="flex flex-col items-start justify-start">
+        <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
           Train Bots
         </h2>
-        <span className="dark:text-white/70 text-black/70 text-base ">
+        <span className="text-base dark:text-white/70 text-black/70 ">
           List of all the models you have trained.
         </span>
 
         <div className="flex flex-col gap-2">
           {/* Show Recrod */}
-          <div className=" self-end flex flex-row gap-2 items-center float-right">
+          <div className="flex flex-row items-center self-end float-right gap-2 ">
             <label
               htmlFor="status"
-              className="text-base dark:text-white/70 text-black/70 font-medium"
+              className="text-base font-medium dark:text-white/70 text-black/70"
             >
               Show records:
             </label>
@@ -661,7 +665,7 @@ const TrainRegistrationBotAdminPage = () => {
           </div>
           {/* Tabs */}
           <div>
-            <ul className="gap-2 m-0  flex justify-start items-start flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 p-0">
+            <ul className="flex flex-wrap items-start justify-start gap-2 p-0 m-0 text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
               <li className="">
                 <button
                   disabled={loading}
@@ -705,7 +709,7 @@ const TrainRegistrationBotAdminPage = () => {
           </div>
         </div>
 
-        <div className="w-full overflow-x-auto mt-4">
+        <div className="w-full mt-4 overflow-x-auto">
           <DataTable
             loading={loading}
             data={records}
@@ -722,8 +726,8 @@ const TrainRegistrationBotAdminPage = () => {
             }
           />
         </div>
-        <div className=" flex flex-row justify-between items-center w-full ">
-          <div className="flex flex-row gap-2 items-center">
+        <div className="flex flex-row items-center justify-between w-full ">
+          <div className="flex flex-row items-center gap-2">
             <label htmlFor="userPerPage" className="text-sm font-medium">
               Number of records per page:
             </label>
@@ -744,7 +748,7 @@ const TrainRegistrationBotAdminPage = () => {
               </>
             </select>
           </div>
-          <div className=" flex justify-end mt-4">
+          <div className="flex justify-end mt-4 ">
             <nav aria-label="Page navigation example">
               <ul className="inline-flex -space-x-px">
                 <li>
@@ -784,7 +788,7 @@ const TrainRegistrationBotAdminPage = () => {
 
                 <li>
                   <button
-                    className="border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="px-3 py-2 leading-tight text-gray-500 border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     onClick={() => {
                       setRecords([]);
                       setCurrentPage(currentPage + 1);

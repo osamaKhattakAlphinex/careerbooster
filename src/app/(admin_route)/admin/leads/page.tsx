@@ -39,7 +39,7 @@ const LeadsAdminPage = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  // const { abortController } = useAppContext();
+  const { abortController } = useAppContext();
 
   const columnHelper = createColumnHelper<Lead>();
 
@@ -133,7 +133,7 @@ const LeadsAdminPage = () => {
   const fetchRecords = async (startIndex: number, endIndex: number) => {
     setLoading(true);
 
-    // const signal = abortController.signal;
+    const signal = abortController.signal;
     if (!loading) {
       axios
         .get("/api/leads", {
@@ -141,7 +141,7 @@ const LeadsAdminPage = () => {
             startIndex: startIndex,
             endIndex: endIndex,
           },
-          // signal: signal,
+          signal: signal,
         })
         .then(async (res: any) => {
           if (res.data.success) {
@@ -160,13 +160,10 @@ const LeadsAdminPage = () => {
   };
 
   const getlinkedInToolUsersCount = async () => {
-    // const signal = abortController.signal;
+    const signal = abortController.signal;
 
     axios
-      .get(
-        "/api/leads/getLinkedInToolUserCount"
-        // { signal }
-      )
+      .get("/api/leads/getLinkedInToolUserCount", { signal: signal })
       .then((res) => {
         if (res.data.success) {
           setCounts(res.data);
@@ -178,7 +175,7 @@ const LeadsAdminPage = () => {
     getlinkedInToolUsersCount();
 
     return () => {
-      // abortController.abort();
+      abortController.abort();
     };
   }, []);
 
@@ -205,7 +202,7 @@ const LeadsAdminPage = () => {
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
 
     return () => {
-      // abortController.abort();
+      abortController.abort();
     };
   }, [currentPage, limitOfRecords]);
 

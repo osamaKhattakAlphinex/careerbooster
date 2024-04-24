@@ -32,7 +32,7 @@ const SubKeywordsGenerator = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   const [aiInputUserData, setAiInputUserData] = useState<any>();
-  const { setAvailableCredits } = useAppContext();
+  const { setAvailableCredits, abortController } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
 
   const [isKeywordsCopied, setIsKeywordsCopied] = useState<boolean>(false);
@@ -57,8 +57,7 @@ const SubKeywordsGenerator = () => {
   const linkedinKeywords = useSelector((state: any) => state.linkedinKeywords);
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
-  const { tourBotRef,availableCreditsRef } = useTourContext();
-
+  const { tourBotRef, availableCreditsRef } = useTourContext();
 
   const handleClick = () => {
     setIsEditing((prevState) => !prevState);
@@ -148,6 +147,8 @@ const SubKeywordsGenerator = () => {
 
   const handleGenerate: any = async () => {
     setStreamedData("");
+    const signal = abortController.signal;
+
     await getUserDataIfNotExists();
     //change condition
     if (session?.user?.email && userData.isFetched) {
@@ -166,6 +167,7 @@ const SubKeywordsGenerator = () => {
       fetch("/api/linkedInBots/keywordsGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
+        signal: signal,
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -199,11 +201,11 @@ const SubKeywordsGenerator = () => {
             );
           } else {
             const res = await resp.json();
-            if(resp.status === 429){
+            if (resp.status === 429) {
               setStreamedData(res.result + "! You ran out of Credits");
-              showErrorToast("You ran out of Credits!")
+              showErrorToast("You ran out of Credits!");
               setOutOfCredits(true);
-            }else{
+            } else {
               showErrorToast("Failed to generate linkedin Headline");
             }
           }
@@ -224,6 +226,12 @@ const SubKeywordsGenerator = () => {
       }, 3000);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      abortController.abort();
+    };
+  }, []);
 
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
@@ -516,8 +524,9 @@ const SubKeywordsGenerator = () => {
           Credit Limit Reached !
         </div>
       )}
-      {outOfCredits &&  <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits}/>}
-
+      {outOfCredits && (
+        <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits} />
+      )}
     </>
   );
 };
