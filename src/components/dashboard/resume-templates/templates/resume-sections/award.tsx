@@ -70,7 +70,9 @@ const Award = ({ heading, awards, styles, customStyle }: Props) => {
       </h3>
       <span
         className={`${styles?.span2} ${
-          customStyle.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom || customStyle?.borderBottom
+            ? "block"
+            : "hidden"
         }`}
       ></span>
       {awards.map((rec: any, i: number) => {

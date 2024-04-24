@@ -34,7 +34,15 @@ import Award from "./resume-sections/award";
 import Interest from "./resume-sections/interest";
 import Reference from "./resume-sections/reference";
 import Language from "./resume-sections/language";
-import { certification, publicationStyles } from "@/helpers/templateStylesObj";
+import {
+  award,
+  certification,
+  interest,
+  language,
+  publicationStyles,
+  reference,
+  training,
+} from "@/helpers/templateStylesObj";
 const ResumeTemplate6 = () => {
   const resume = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
@@ -721,11 +729,13 @@ const ResumeTemplate6 = () => {
                 heading={resume.headings.publications}
                 publications={resume.publications}
                 styles={publicationStyles}
+                customStyle={{ borderTopBottom: true, centeredHeading: false }}
               />
             )}
             {/* Certification */}
             {resume?.certifications && resume?.certifications.length > 0 && (
               <Certification
+                customStyle={{ borderTopBottom: true, centeredHeading: false }}
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
                 styles={certification}
@@ -736,12 +746,19 @@ const ResumeTemplate6 = () => {
               <Training
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
+                styles={training}
+                customStyle={{ borderTopBottom: true, centeredHeading: false }}
               />
             )}
 
             {/* Awards */}
             {resume?.awards && resume?.awards.length > 0 && (
-              <Award heading={resume.headings.awards} awards={resume.awards} />
+              <Award
+                heading={resume.headings.awards}
+                awards={resume.awards}
+                styles={award}
+                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+              />
             )}
 
             {/* Interests & Hobbies */}
@@ -749,6 +766,8 @@ const ResumeTemplate6 = () => {
               <Interest
                 heading={resume.headings.interests}
                 interests={resume.interests}
+                styles={interest}
+                customStyle={{ borderTopBottom: true, centeredHeading: false }}
               />
             )}
 
@@ -757,6 +776,8 @@ const ResumeTemplate6 = () => {
               <Reference
                 heading={resume.headings.references}
                 references={resume.references}
+                styles={reference}
+                customStyle={{ borderTopBottom: true, centeredHeading: false }}
               />
             )}
 
@@ -765,6 +786,8 @@ const ResumeTemplate6 = () => {
               <Language
                 heading={resume.headings.languages}
                 languages={resume.languages}
+                styles={language}
+                customStyle={{ borderTopBottom: true, centeredHeading: false }}
               />
             )}
 
