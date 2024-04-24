@@ -7,9 +7,10 @@ import React from "react";
 type Props = {
   contact: any;
   styles: any;
+  conditionStyleContact: any;
 };
 
-const Contact = ({ contact, styles }: Props) => {
+const Contact = ({ contact, styles, conditionStyleContact }: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
 
   return (

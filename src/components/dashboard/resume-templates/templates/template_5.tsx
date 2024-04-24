@@ -189,7 +189,6 @@ const ResumeTemplate5 = () => {
                           |{" "} */}
                           {rec.fromMonth && (
                             <EditableField
-                               
                               value={`${rec?.fromMonth}`}
                               onSave={(value: string) => {
                                 handlers.handleSaveExperienceDetail(
@@ -201,7 +200,6 @@ const ResumeTemplate5 = () => {
                           )}
                           {rec.fromYear && (
                             <EditableField
-                               
                               value={`${rec?.fromYear}`}
                               onSave={(value: string) => {
                                 handlers.handleSaveExperienceDetail(
@@ -214,7 +212,6 @@ const ResumeTemplate5 = () => {
                           {rec.fromYear && <span>-</span>}
                           {rec.toMonth && !rec.isContinue && (
                             <EditableField
-                               
                               value={`${rec?.toMonth}`}
                               onSave={(value: string) => {
                                 handlers.handleSaveExperienceDetail(
@@ -227,7 +224,6 @@ const ResumeTemplate5 = () => {
                           {rec.toMonth && <span>&nbsp;</span>}
                           {rec.toYear && !rec.isContinue && (
                             <EditableField
-                               
                               value={`${rec?.toYear}`}
                               onSave={(value: string) => {
                                 handlers.handleSaveExperienceDetail(
@@ -239,7 +235,6 @@ const ResumeTemplate5 = () => {
                           )}
                           {rec.isContinue && (
                             <EditableField
-                               
                               value={`${rec?.isContinue && "Present"}`}
                               onSave={(value: string) => {
                                 handlers.handleSaveExperienceDetail(
@@ -341,7 +336,6 @@ const ResumeTemplate5 = () => {
                                     >
                                       <EditableField
                                         type="textarea"
-                                         
                                         value={achievement}
                                         onSave={(value: string) => {
                                           handlers.handleUpdateAchivement(
@@ -462,7 +456,6 @@ const ResumeTemplate5 = () => {
                       <li className="flex items-center justify-between font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:bg-gray-100 text-md">
                         <EditableField
                           type="textarea"
-                           
                           value={education?.educationLevel}
                           onSave={(value: string) => {
                             handlers.handleSaveEductionDetail(
@@ -493,7 +486,6 @@ const ResumeTemplate5 = () => {
                       <li className="text-sm italic hover:shadow-md hover:bg-gray-100 text-gray-950">
                         <EditableField
                           type="textarea"
-                           
                           value={`${education?.schoolName}`}
                           onSave={(value: string) => {
                             handlers.handleSaveEductionDetail(
@@ -508,7 +500,6 @@ const ResumeTemplate5 = () => {
                         <li className="mb-4 text-xs italic text-gray-950 ">
                           {education.fromMonth && (
                             <EditableField
-                               
                               value={`${education?.fromMonth}`}
                               onSave={(value: string) => {
                                 handlers.handleSaveEductionDetail(
@@ -521,7 +512,6 @@ const ResumeTemplate5 = () => {
                           {education.fromMonth && <span>&nbsp;</span>}
                           {education.fromYear && (
                             <EditableField
-                               
                               value={`${education?.fromYear}`}
                               onSave={(value: string) => {
                                 handlers.handleSaveEductionDetail(
@@ -534,7 +524,6 @@ const ResumeTemplate5 = () => {
                           {education.fromYear && <span>&nbsp; - &nbsp;</span>}
                           {education.toMonth && !education.isContinue && (
                             <EditableField
-                               
                               value={`${education?.toMonth}`}
                               onSave={(value: string) => {
                                 handlers.handleSaveEductionDetail(
@@ -547,7 +536,6 @@ const ResumeTemplate5 = () => {
                           {education.toMonth && <span>&nbsp;</span>}
                           {education.toYear && !education.isContinue && (
                             <EditableField
-                               
                               value={`${education?.toYear}`}
                               onSave={(value: string) => {
                                 handlers.handleSaveEductionDetail(
@@ -559,7 +547,6 @@ const ResumeTemplate5 = () => {
                           )}
                           {education.isContinue && (
                             <EditableField
-                               
                               value={`${education?.isContinue && "Present"}`}
                               onSave={(value: string) => {
                                 handlers.handleSaveEductionDetail(

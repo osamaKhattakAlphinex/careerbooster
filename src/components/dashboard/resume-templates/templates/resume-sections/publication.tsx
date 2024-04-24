@@ -14,10 +14,17 @@ type Props = {
   heading: any;
   publications: any;
   styles: any;
+  conditionStylePublication: any;
 };
 
-const Publication = ({ heading, publications, styles }: Props) => {
-  console.log("Styles", styles);
+const Publication = ({
+  heading,
+  publications,
+  styles,
+  conditionStylePublication,
+}: Props) => {
+  console.log("conditionStylePublication", conditionStylePublication);
+
   const [pulicationIndex, setPulicationIndex] = useState<number>();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
@@ -33,7 +40,7 @@ const Publication = ({ heading, publications, styles }: Props) => {
 
   return (
     <>
-      <span className={styles?.span1}></span>
+      <span className={`${styles?.span1}`}></span>
       <h3 className={styles?.publication_h3}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

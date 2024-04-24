@@ -19,7 +19,9 @@ import Header from "./resume-sections/header";
 import {
   award,
   certification,
+  conditionStyleContact,
   conditionStyleHeader,
+  conditionStylePublication,
   contact,
   education,
   header,
@@ -76,7 +78,11 @@ const ResumeTemplate2 = () => {
       </div>
       {/* contacts */}
       <div className="relative w-full py-1">
-        <Contact contact={resume.contact} styles={contact} />
+        <Contact
+          contact={resume.contact}
+          styles={contact}
+          conditionStyleContact={conditionStyleContact}
+        />
         {/* <div className="absolute top-0 left-12">
           <ColorPicker\
 
@@ -126,6 +132,7 @@ const ResumeTemplate2 = () => {
             heading={resume.headings.publications}
             publications={resume.publications}
             styles={publicationStyles}
+            conditionStylePublication={conditionStylePublication}
           />
         )}
       </div>
