@@ -36,12 +36,12 @@ const Publication = ({ heading, publications, styles, customStyle }: Props) => {
     <>
       <span
         className={`${styles?.span1} ${
-          customStyle.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom ? "block" : "hidden"
         }`}
       ></span>
       <h3
         className={`${styles?.publication_h3} ${
-          customStyle.centeredHeading ? "justify-center" : ""
+          customStyle?.centeredHeading ? "justify-center" : ""
         }`}
       >
         <svg
@@ -72,7 +72,9 @@ const Publication = ({ heading, publications, styles, customStyle }: Props) => {
       </h3>
       <span
         className={`${styles?.span2} ${
-          customStyle.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom || customStyle?.borderBottom
+            ? "block"
+            : "hidden"
         }`}
       ></span>
       {publications.map((rec: any, i: number) => {

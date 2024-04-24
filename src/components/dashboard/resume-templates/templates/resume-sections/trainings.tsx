@@ -70,7 +70,9 @@ const Training = ({ heading, trainings, styles, customStyle }: Props) => {
       </h3>
       <span
         className={`${styles?.span2} ${
-          customStyle.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom || customStyle?.borderBottom
+            ? "block"
+            : "hidden"
         }`}
       ></span>
       {trainings.map((rec: any, i: number) => {

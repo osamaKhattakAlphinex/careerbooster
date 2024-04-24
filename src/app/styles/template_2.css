@@ -70,55 +70,54 @@
   @apply py-1 text-white bg-red-500 rounded-md  px-[14px];
 }
 
-.publication_h3  {
-  @apply flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500
+.publication_h3 {
+  @apply flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500;
 }
 .publication_div {
-  @apply border-2 border-transparent md:w-full hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2
+  @apply border-2 border-transparent md:w-full hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2;
 }
 .publication_h2 {
-  @apply text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100
+  @apply text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100;
 }
 .publication_h2_1 {
-  @apply flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default
+  @apply flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default;
 }
 .publication_div_input {
-  @apply flex flex-wrap w-full gap-1 mt-4
+  @apply flex flex-wrap w-full gap-1 mt-4;
 }
 .publication_new_input {
-  @apply w-full py-[4px] border-2 rounded-md   bg-transparent
+  @apply w-full py-[4px] border-2 rounded-md   bg-transparent;
 }
 .publication_delete {
-  @apply  w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer
+  @apply w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer;
 }
 .publication_delete1 {
-  @apply hover:border-dashed list-disc hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-100
-  
+  @apply hover:border-dashed list-disc hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-100;
 }
 .publication_line {
-  @apply hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block
+  @apply hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block;
 }
-.publication_date  { 
-  @apply hover:shadow-md hover:bg-gray-100
+.publication_date {
+  @apply hover:shadow-md hover:bg-gray-100;
 }
 .span1 {
-  @apply !block w-full h-0 border-[1px] !border-gray-500 mt-3
+  @apply w-full h-0 border-[1px] !border-gray-500 mt-3;
 }
 .span2 {
-  @apply !block w-full h-0 border-[1px] !border-gray-500 mt-0
+  @apply w-full h-0 border-[1px] !border-gray-500 mt-0;
 }
 .publication_ul {
-  @apply flex flex-col gap-1 pl-0 text-xs
+  @apply flex flex-col gap-1 pl-0 text-xs;
 }
 .publication_li {
-  @apply  flex flex-row items-center justify-center h-8 hover:bg-slate-200 
+  @apply flex flex-row items-center justify-center h-8 hover:bg-slate-200;
 }
 .reference_ul {
-  @apply flex flex-wrap w-full pl-0 md:flex-row lg:flex-row
+  @apply flex flex-wrap w-full pl-0 md:flex-row lg:flex-row;
 }
 .reference_li {
   @apply w-[45%] md:w-[30%] m-2 xs:m-0 relative border-transparent border-2 hover:border-dashed hover:border-gray-500;
 }
-.language_div  {
-  @apply border-2 border-transparent md:w-full hover:cursor-move ;
+.language_div {
+  @apply border-2 border-transparent md:w-full hover:cursor-move;
 }

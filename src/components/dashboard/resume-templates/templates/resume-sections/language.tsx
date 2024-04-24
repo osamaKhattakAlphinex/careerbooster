@@ -22,13 +22,13 @@ const Language = ({ heading, languages, styles, customStyle }: Props) => {
   return (
     <>
       <span
-        className={`${styles?.span1}${
-          customStyle.borderTopBottom ? "block" : "hidden"
+        className={`${styles?.span1} ${
+          customStyle?.borderTopBottom ? "block" : "hidden"
         }`}
       ></span>
       <h3
-        className={`${styles?.language_h3}${
-          customStyle.centeredHeading ? "justify-center" : ""
+        className={`${styles?.language_h3} ${
+          customStyle?.centeredHeading ? "justify-center" : ""
         }`}
       >
         <svg
@@ -59,7 +59,9 @@ const Language = ({ heading, languages, styles, customStyle }: Props) => {
       </h3>
       <span
         className={`${styles?.span2} ${
-          customStyle.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom || customStyle?.borderBottom
+            ? "block"
+            : "hidden"
         }`}
       ></span>
       <ul className={`${styles?.language_ul}`}>
