@@ -28,108 +28,68 @@ const Page = () => {
   }, [userData]);
   return (
     <div className=" md:ml-[234px] md:p-10 p-3 ml-0">
-      <div className="flex flex-col gap-2 ">
-        <h2 className="text-lg font-bold md:text-xl dark:text-gray-100 text-gray-950 ">
-          Billing Details
-        </h2>
-        <div className="flex flex-col gap-1">
-          <div className="flex flex-row items-center justify-between ">
-            <div className="flex-1 dark:text-gray-100 text-gray-950 ">
-              <strong className="text-sm font-semibold md:text-lg">
-                FirstName
-              </strong>
-            </div>
-            <div className="flex-1 dark:text-gray-100 text-gray-950">
-              <span className="text-sm md:text-base">{userData.firstName}</span>
-            </div>
+      <div className="p-4 bg-gray-100 dark:bg-[#18181B] rounded-md">
+        <div className="flex flex-col divide-y-[1px] gap-3 divide-gray-400">
+          {/* Heading */}
+          <div>
+            <h1 className="text-lg font-bold text-center text-gray-600 dark:text-gray-400 md:text-xl">
+              Billing Detail
+            </h1>
           </div>
-          <div className="flex flex-row items-center justify-between ">
-            <div className="flex-1 dark:text-gray-100 text-gray-950 ">
-              <strong className="text-sm font-semibold md:text-lg">
-                LastName
-              </strong>
+          {/* user data */}
+          <div className="p-3 space-y-2">
+            <div className="flex flex-col items-start justify-start">
+              <h3 className="text-sm font-bold text-gray-500 uppercase dark:text-gray-300 md:text-base">
+                Name
+              </h3>
+              <span className="text-xs text-gray-500 dark:text-gray-400 md:text-sm ">{`${userData.firstName} ${userData?.lastName}`}</span>
             </div>
-            <div className="flex-1 dark:text-gray-100 text-gray-950">
-              <span className="text-sm md:text-base">{userData?.lastName}</span>
-            </div>
-          </div>
-          <div className="flex flex-row items-center justify-between ">
-            <div className="flex-1 dark:text-gray-100 text-gray-950">
-              <strong className="text-sm font-semibold md:text-lg">
+            <div>
+              <h3 className="text-sm font-bold text-gray-500 uppercase dark:text-gray-300 md:text-base">
                 Email
-              </strong>
-            </div>
-            <div className="flex-1 dark:text-gray-100 text-gray-950">
-              <span className="text-sm md:text-base">{userData?.email}</span>
+              </h3>
+              <span className="text-xs text-gray-500 dark:text-gray-400 md:text-sm">
+                {userData?.email}
+              </span>
             </div>
           </div>
-          {creditsData && (
-            <>
-              {/* <div className="flex flex-row items-center justify-between ">
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <strong className="text-sm font-semibold md:text-lg">
-                    Amount
-                  </strong>
-                </div>
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <span className="text-sm md:text-base">
-                    $ {creditsData?.amount}{" "}
-                  </span>
-                </div>
-              </div> */}
-              <div className="flex flex-row items-center justify-between ">
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <strong className="text-sm font-semibold md:text-lg">
-                    Status
-                  </strong>
-                </div>
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <span
-                    className={` className="text-sm md:text-base" ${
-                      creditsData?.status ? "text-green-500" : "text-red-500"
-                    }`}
-                  >
-                    {creditsData?.status ? "Active" : "In-Active"}
-                  </span>
-                </div>
+          {/* package data */}
+          <div className="p-3 bg-slate-300 dark:bg-gray-800">
+            <div className="flex flex-col items-center justify-center divide-y-[1px] divide-gray-400">
+              <div className="flex flex-row items-center justify-between w-full py-1">
+                <h3 className="text-xs text-gray-600 dark:text-gray-400 md:text-sm">
+                  Package Category
+                </h3>
+                <span className="text-xs font-semibold text-gray-600 capitalize dark:text-gray-400 md:text-sm">
+                  {creditsData?.category}
+                </span>
               </div>
-
-              <div className="flex flex-row items-center justify-between ">
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <strong className="text-sm font-semibold md:text-lg">
-                    Package Category
-                  </strong>
-                </div>
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <span className="text-sm md:text-base capitalize">
-                    {creditsData?.category}
-                  </span>
-                </div>
+              <div className="flex flex-row items-center justify-between w-full py-1">
+                <h3 className="text-xs text-gray-600 dark:text-gray-400 md:text-sm">
+                  Status
+                </h3>
+                <span className="text-xs font-semibold text-gray-600 capitalize dark:text-gray-400 md:text-sm">
+                  {creditsData?.status}
+                </span>
               </div>
-              <div className="flex flex-row items-center justify-between ">
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <strong className="text-sm font-semibold md:text-lg">
-                    Total Credits
-                  </strong>
-                </div>
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <span className="text-sm md:text-base">{totalCredits}</span>
-                </div>
+              <div className="flex flex-row items-center justify-between w-full py-1">
+                <h3 className="text-xs text-gray-600 dark:text-gray-400 md:text-sm">
+                  Total Credit
+                </h3>
+                <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 md:text-sm">
+                  {totalCredits}
+                </span>
               </div>
-              <div className="flex flex-row items-center justify-between ">
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <strong className="text-sm font-semibold md:text-lg">
-                    Remaining Credits
-                  </strong>
-                </div>
-                <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <span className="text-sm md:text-base">
-                    {remainingCredits}
-                  </span>
-                </div>
+              <div className="flex flex-row items-center justify-between w-full py-1">
+                <h3 className="text-xs text-gray-600 dark:text-gray-400 md:text-sm">
+                  Remaining Credit
+                </h3>
+                <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 md:text-sm">
+                  {remainingCredits}
+                </span>
               </div>
-            </>
-          )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
